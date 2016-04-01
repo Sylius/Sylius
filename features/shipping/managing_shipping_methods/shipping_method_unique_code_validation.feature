@@ -1,4 +1,4 @@
-@managing_shipping_method
+@managing_shipping_methods
 Feature: Shipping method unique code validation
     In order to uniquely identify shipping methods
     As an Administrator

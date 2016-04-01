@@ -1,4 +1,4 @@
-@shipping
+@managing_shipping_methods
 Feature: Deleting a shipping method
     In order to remove test, obsolete or incorrect shipping methods
     As an Administrator

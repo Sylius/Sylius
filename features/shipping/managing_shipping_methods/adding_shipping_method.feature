@@ -1,4 +1,4 @@
-@managing_shipping_method
+@managing_shipping_methods
 Feature: Adding a new shipping method
     In order to deliver goods in different ways
     As an Administrator

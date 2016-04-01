@@ -1,4 +1,4 @@
-@managing_shipping_method
+@managing_shipping_methods
 Feature: Editing shipping method
     In order to change shipping method details
     As an Administrator

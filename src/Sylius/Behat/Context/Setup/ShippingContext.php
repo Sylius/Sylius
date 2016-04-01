@@ -94,11 +94,21 @@ final class ShippingContext implements Context
     }
 
     /**
-     * @Given /^the store allows shipping with "([^"]*)"$/
+     * @Given the store allows shipping with :name
+     * @Given the store allows shipping with :name identified by :code
      */
-    public function theStoreAllowsShippingMethod($shippingMethodName)
+    public function theStoreAllowsShippingMethod($name, $code = null)
     {
-        $this->createShippingMethod($shippingMethodName);
+        $this->createShippingMethod($name, $code);
+    }
+
+    /**
+     * @Given the store allows shipping with :firstName and :secondName
+     */
+    public function theStoreAllowsShippingWithAnd($firstName, $secondName)
+    {
+        $this->createShippingMethod($firstName);
+        $this->createShippingMethod($secondName);
     }
 
     /**
@@ -108,7 +118,7 @@ final class ShippingContext implements Context
      */
     public function storeHasShippingMethodWithFee($shippingMethodName, $fee, ZoneInterface $zone = null)
     {
-        $this->createShippingMethod($shippingMethodName, $zone, 'en', ['amount' => $fee]);
+        $this->createShippingMethod($shippingMethodName, null, $zone, 'en', ['amount' => $fee]);
     }
 
     /**
@@ -121,7 +131,26 @@ final class ShippingContext implements Context
     }
 
     /**
+     * @Given the shipping method :shippingMethod is enabled
+     */
+    public function theShippingMethodIsEnabled(ShippingMethodInterface $shippingMethod)
+    {
+        $shippingMethod->enable();
+        $this->shippingMethodManager->flush();
+    }
+
+    /**
+     * @Given the shipping method :shippingMethod is disabled
+     */
+    public function theShippingMethodIsDisabled(ShippingMethodInterface $shippingMethod)
+    {
+        $shippingMethod->disable();
+        $this->shippingMethodManager->flush();
+    }
+
+    /**
      * @param string $name
+     * @param string|null $code
      * @param ZoneInterface|null $zone
      * @param string $locale
      * @param array $configuration
@@ -129,6 +158,7 @@ final class ShippingContext implements Context
      */
     private function createShippingMethod(
         $name,
+        $code = null,
         ZoneInterface $zone = null,
         $locale = 'en',
         $configuration = ['amount' => 0],
@@ -137,10 +167,14 @@ final class ShippingContext implements Context
         if (null === $zone) {
             $zone = $this->sharedStorage->get('zone');
         }
+        
+        if (null === $code) {
+            $code = $this->generateCodeFromNameAndZone($name, $zone->getCode());
+        }
 
         /** @var ShippingMethodInterface $shippingMethod */
         $shippingMethod = $this->shippingMethodFactory->createNew();
-        $shippingMethod->setCode($this->generateCodeFromNameAndZone($name, $zone->getCode()));
+        $shippingMethod->setCode($code);
         $shippingMethod->setName($name);
         $shippingMethod->setCurrentLocale($locale);
         $shippingMethod->setConfiguration($configuration);
@@ -148,6 +182,7 @@ final class ShippingContext implements Context
         $shippingMethod->setZone($zone);
 
         $this->shippingMethodRepository->add($shippingMethod);
+        $this->sharedStorage->set('shipping_method', $shippingMethod);
     }
 
     /**

@@ -49,8 +49,9 @@
         <parameter key="sylius.behat.page.admin.promotion.create.class">Sylius\Behat\Page\Admin\Promotion\CreatePage</parameter>
         <parameter key="sylius.behat.page.admin.promotion.update.class">Sylius\Behat\Page\Admin\Promotion\UpdatePage</parameter>
         <parameter key="sylius.behat.page.admin.promotion.index.class">%sylius.behat.page.admin.crud.index.class%</parameter>
-        <parameter key="sylius.behat.page.admin.shipping_method.show.class">Sylius\Behat\Page\Admin\ShippingMethod\ShowPage</parameter>
-        <parameter key="sylius.behat.page.admin.shipping_method.index.class">Sylius\Behat\Page\Admin\ShippingMethod\IndexPage</parameter>
+        <parameter key="sylius.behat.page.admin.shipping_method.create.class">Sylius\Behat\Page\Admin\ShippingMethod\CreatePage</parameter>
+        <parameter key="sylius.behat.page.admin.shipping_method.index.class">%sylius.behat.page.admin.crud.index.class%</parameter>
+        <parameter key="sylius.behat.page.admin.shipping_method.update.class">Sylius\Behat\Page\Admin\ShippingMethod\UpdatePage</parameter>
         <parameter key="sylius.behat.page.admin.tax_category.create.class">Sylius\Behat\Page\Admin\TaxCategory\CreatePage</parameter>
         <parameter key="sylius.behat.page.admin.tax_category.index.class">%sylius.behat.page.admin.crud.index.class%</parameter>
         <parameter key="sylius.behat.page.admin.tax_category.update.class">Sylius\Behat\Page\Admin\TaxCategory\UpdatePage</parameter>
@@ -101,9 +102,14 @@
         <service id="sylius.behat.page.admin.locale.update" class="%sylius.behat.page.admin.locale.update.class%" parent="sylius.behat.page.admin.crud.update" scope="scenario" public="false">
             <argument type="string">locale</argument>
         </service>
-        <service id="sylius.behat.page.admin.shipping_method.show" class="%sylius.behat.page.admin.shipping_method.show.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
-        <service id="sylius.behat.page.admin.shipping_method.index" class="%sylius.behat.page.admin.shipping_method.index.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false">
-            <argument type="service" id="sylius.behat.table_accessor" />
+        <service id="sylius.behat.page.admin.shipping_method.create" class="%sylius.behat.page.admin.shipping_method.create.class%" parent="sylius.behat.page.admin.crud.create" scope="scenario" public="false">
+            <argument type="string">shipping_method</argument>
+        </service>
+        <service id="sylius.behat.page.admin.shipping_method.index" class="%sylius.behat.page.admin.shipping_method.index.class%" parent="sylius.behat.page.admin.crud.index" scope="scenario" public="false">
+            <argument type="string">shipping_method</argument>
+        </service>
+        <service id="sylius.behat.page.admin.shipping_method.update" class="%sylius.behat.page.admin.shipping_method.update.class%" parent="sylius.behat.page.admin.crud.update" scope="scenario" public="false">
+            <argument type="string">shipping_method</argument>
         </service>
         <service id="sylius.behat.page.admin.tax_category.create" class="%sylius.behat.page.admin.tax_category.create.class%" parent="sylius.behat.page.admin.crud.create" scope="scenario" public="false">
             <argument type="string">tax_category</argument>
