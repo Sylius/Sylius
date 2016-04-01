@@ -61,7 +61,7 @@
         "symfony-cmf/create-bundle": "~1.2",
         "symfony-cmf/media-bundle": "~1.2",
         "symfony-cmf/menu-bundle": "~1.2",
-        "symfony-cmf/routing-bundle": "^1.4.0-RC1",
+        "symfony-cmf/routing-bundle": "^1.4",
         "symfony/assetic-bundle": "^2.6",
         "symfony/monolog-bundle": "^2.7",
         "symfony/polyfill-iconv": "~1.0",
