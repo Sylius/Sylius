@@ -12,13 +12,12 @@
 namespace Sylius\Bundle\MetadataBundle\Model;
 
 use Sylius\Component\Metadata\Model\MetadataContainer as BaseMetadataContainer;
-use Sylius\Component\Metadata\Model\MetadataContainerInterface;
 use Sylius\Component\Metadata\Model\MetadataInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class MetadataContainer extends BaseMetadataContainer implements MetadataContainerInterface
+class MetadataContainer extends BaseMetadataContainer
 {
     /**
      * @var MetadataInterface
@@ -43,10 +42,6 @@ class MetadataContainer extends BaseMetadataContainer implements MetadataContain
     public function setMetadata(MetadataInterface $metadata)
     {
         $this->metadataAsObject = $metadata;
-    }
-
-    public function serializeMetadata()
-    {
-        $this->metadata = serialize($this->metadataAsObject);
+        $this->metadata = serialize($metadata);
     }
 }
