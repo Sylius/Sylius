@@ -25,18 +25,4 @@ trait ChoosesName
     {
         $this->getDocument()->selectFieldOption('Name', $name);
     }
-
-    /**
-     * If the scenario is using "@javascript" tag
-     *
-     * @param string $name
-     */
-    public function selectName($name)
-    {
-        $selectElements = $this->getDocument()->find('css', '.selection');
-        $selectElements->click();
-
-        $selectElement = $selectElements->find('css', '.item:contains("'.$name.'")');
-        $selectElement->click();
-    }
 }

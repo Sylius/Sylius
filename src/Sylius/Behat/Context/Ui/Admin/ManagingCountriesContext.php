@@ -18,7 +18,6 @@ use Sylius\Behat\Page\Admin\Country\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Country\UpdatePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
-use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -27,11 +26,6 @@ use Webmozart\Assert\Assert;
 final class ManagingCountriesContext implements Context
 {
     const RESOURCE_NAME = 'country';
-
-    /**
-     * @var SharedStorageInterface
-     */
-    private $sharedStorage;
 
     /**
      * @var IndexPageInterface
@@ -54,20 +48,17 @@ final class ManagingCountriesContext implements Context
     private $notificationChecker;
 
     /**
-     * @param SharedStorageInterface $sharedStorage
      * @param IndexPageInterface $countryIndexPage
      * @param CreatePageInterface $countryCreatePage
      * @param UpdatePageInterface $countryUpdatePage
      * @param NotificationCheckerInterface $notificationChecker
      */
     public function __construct(
-        SharedStorageInterface $sharedStorage,
         IndexPageInterface $countryIndexPage,
         CreatePageInterface $countryCreatePage,
         UpdatePageInterface $countryUpdatePage,
         NotificationCheckerInterface $notificationChecker
     ) {
-        $this->sharedStorage = $sharedStorage;
         $this->countryIndexPage = $countryIndexPage;
         $this->countryCreatePage = $countryCreatePage;
         $this->countryUpdatePage = $countryUpdatePage;
@@ -92,19 +83,11 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @When /^I choose "([^"]*)"$/
+     * @When I choose :countryName
      */
-    public function iChoose($name)
+    public function iChoose($countryName)
     {
-        $this->countryCreatePage->chooseName($name);
-    }
-
-    /**
-     * @When /^I select "([^"]*)"$/
-     */
-    public function iSelect($name)
-    {
-        $this->countryCreatePage->selectName($name);
+        $this->countryCreatePage->chooseName($countryName);
     }
 
     /**
@@ -113,7 +96,7 @@ final class ManagingCountriesContext implements Context
      */
     public function iAddProvinceWithCode($provinceName, $provinceCode, $provinceAbbreviation = null)
     {
-        $this->countryCreatePage->fillProvinceData($provinceName, $provinceCode, $provinceAbbreviation);
+        $this->countryCreatePage->addProvince($provinceName, $provinceCode, $provinceAbbreviation);
     }
 
     /**
@@ -170,9 +153,10 @@ final class ManagingCountriesContext implements Context
      */
     public function countryShouldAppearInTheStore(CountryInterface $country)
     {
-        expect($this->countryUpdatePage->isOpen(['id' => $country->getId()]))->toBe(true);
-
-        $this->sharedStorage->set('country', $country);
+        Assert::true(
+            $this->countryUpdatePage->isOpen(['id' => $country->getId()]),
+            sprintf('Country %s does not appear in the store.', $country->getCode())
+        );
     }
 
     /**
@@ -221,15 +205,10 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @Then /^(this country) should have the "([^"]+)" province$/
+     * @Then this country should have the :provinceName province
      */
-    public function countryShouldHaveProvince(CountryInterface $country, $provinceName)
+    public function countryShouldHaveProvince($provinceName)
     {
-        Assert::true(
-            $this->countryUpdatePage->isOpen(['id' => $country->getId()]),
-            'Country does not exist.'
-        );
-
         Assert::true(
             $this->countryUpdatePage->isThereProvince($provinceName),
             sprintf('%s is not a province of this country.', $provinceName)
