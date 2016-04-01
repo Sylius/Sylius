@@ -10,6 +10,8 @@ sylius:
         an_error_occurred: An error occurred
         are_your_sure_you_want_to_perform_this_action: Are you sure you want to perform this action?
         cancel: Cancel
+        category_requirements: Category requirements
+        charges_and_taxes: Charges and taxes
         clear_filters: Clear filters
         confirm_your_action: Confirm your action
         contains: Contains
@@ -35,6 +37,7 @@ sylius:
         manage_shipping_destinations: Manage shipping destinations
         manage_languages_available_in_the_store: Manage languages available in the store
         manage_taxation_of_your_products: Manage taxation of your products
+        manage_shipping_methods_for_your_store: Manage shipping methods for your store
         new: New
         new_country: New country
         new_locale: New locale
@@ -48,6 +51,7 @@ sylius:
         powered_by: Powered by
         promotion_information: Promotion information
         save_changes: Save changes
+        shipping_methods: Shipping methods
         show: Show
         sign_in: Sign in
         sign_out: Sign out

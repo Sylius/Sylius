@@ -6,6 +6,7 @@ sylius:
                     countries: Countries
                     header: Configuration
                     locales: Locales
+                    shipping_methods: Shipping methods
                     tax_categories: Tax categories
                     tax_rates: Tax rates
                 marketing:

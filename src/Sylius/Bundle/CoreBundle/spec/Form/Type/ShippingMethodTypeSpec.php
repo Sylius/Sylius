@@ -90,6 +90,12 @@ class ShippingMethodTypeSpec extends ObjectBehavior
         ;
 
         $builder
+            ->add('enabled', 'checkbox', Argument::any())
+            ->shouldBeCalled()
+            ->willReturn($builder)
+        ;
+
+        $builder
             ->add('zone', 'sylius_zone_choice', Argument::type('array'))
             ->shouldBeCalled()
             ->willReturn($builder)

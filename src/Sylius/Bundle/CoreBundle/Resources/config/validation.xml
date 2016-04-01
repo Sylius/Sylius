@@ -65,7 +65,7 @@
     <class name="Sylius\Component\Core\Model\ShippingMethod">
         <property name="zone">
             <constraint name="NotBlank">
-                <option name="message">sylius_shipping.method.zone.not_blank</option>
+                <option name="message">sylius.shipping_method.zone.not_blank</option>
                 <option name="groups">sylius</option>
             </constraint>
         </property>
