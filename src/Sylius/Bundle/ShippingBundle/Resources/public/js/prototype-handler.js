@@ -5,7 +5,6 @@
         init: function(options) {
             var settings = $.extend({
               'prototypePrefix': false,
-              'prototypeElementPrefix': '<hr />',
               'containerSelector': false
             }, options);
 
@@ -16,9 +15,8 @@
                 });
 
                 function show(element, replace) {
-                    var id = element.attr('id');
                     var selectedValue = element.val();
-                    var prototypePrefix = id;
+                    var prototypePrefix = element.attr('id');
                     if (false != settings.prototypePrefix) {
                         prototypePrefix = settings.prototypePrefix;
                     }
@@ -42,7 +40,7 @@
                     }
 
                     if (replace || !container.html().trim()) {
-                        container.html(settings.prototypeElementPrefix + prototypeElement.data('prototype'));
+                        container.html(prototypeElement.data('prototype'));
                     }
                 }
             });

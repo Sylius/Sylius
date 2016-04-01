@@ -21,6 +21,7 @@ var paths = {
             'node_modules/jquery/dist/jquery.min.js',
             'node_modules/semantic-ui-css/semantic.min.js',
             'src/Sylius/Bundle/UiBundle/Resources/private/js/**',
+            'src/Sylius/Bundle/ShippingBundle/Resources/public/js/**',
         ],
         sass: [
             'src/Sylius/Bundle/UiBundle/Resources/private/sass/**',
