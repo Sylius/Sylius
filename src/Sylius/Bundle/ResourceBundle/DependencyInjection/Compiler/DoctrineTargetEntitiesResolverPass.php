@@ -9,9 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ResourceBundle\DependencyInjection;
+namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler;
 
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 
 /**
  * Resolves given target entities with container parameters.
@@ -19,27 +21,27 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  *
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
  */
-class DoctrineTargetEntitiesResolver
+final class DoctrineTargetEntitiesResolverPass implements CompilerPassInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function resolve(ContainerBuilder $container, array $interfaces)
+    public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('doctrine.orm.listeners.resolve_target_entity')) {
-            throw new \RuntimeException('Cannot find Doctrine Target Entity Resolver Listener.');
+        try {
+            $resources = $container->getParameter('sylius.resources');
+            $resolveTargetEntityListener = $container->findDefinition('doctrine.orm.listeners.resolve_target_entity');
+        } catch (InvalidArgumentException $exception) {
+            return;
         }
 
-        $resolveTargetEntityListener = $container->findDefinition('doctrine.orm.listeners.resolve_target_entity');
-
+        $interfaces = $this->getInterfacesMapping($resources);
         foreach ($interfaces as $interface => $model) {
-            $resolveTargetEntityListener
-                ->addMethodCall('addResolveTargetEntity', [
-                    $this->getInterface($container, $interface),
-                    $this->getClass($container, $model),
-                    [],
-                ])
-            ;
+            $resolveTargetEntityListener->addMethodCall('addResolveTargetEntity', [
+                $this->getInterface($container, $interface),
+                $this->getClass($container, $model),
+                [],
+            ]);
         }
 
         if (!$resolveTargetEntityListener->hasTag('doctrine.event_listener')) {
@@ -48,8 +50,31 @@ class DoctrineTargetEntitiesResolver
     }
 
     /**
+     * @param array $resources
+     *
+     * @return array
+     */
+    private function getInterfacesMapping($resources)
+    {
+        $interfaces = [];
+        foreach ($resources as $alias => $configuration) {
+            if (isset($configuration['classes']['interface'])) {
+                $alias = explode('.', $alias);
+
+                if (!isset($alias[0], $alias[1])) {
+                    throw new \RuntimeException(sprintf('Error configuring "%s" resource. The resource alias should follow the "prefix.name" format.', $alias[0]));
+                }
+
+                $interfaces[$configuration['classes']['interface']] = sprintf('%s.model.%s.class', $alias[0], $alias[1]);
+            }
+        }
+
+        return $interfaces;
+    }
+
+    /**
      * @param ContainerBuilder $container
-     * @param string           $key
+     * @param string $key
      *
      * @return string
      *
@@ -72,7 +97,7 @@ class DoctrineTargetEntitiesResolver
 
     /**
      * @param ContainerBuilder $container
-     * @param string           $key
+     * @param string $key
      *
      * @return string
      *

@@ -104,6 +104,7 @@ sylius_association:
             association:
                 classes:
                     model: Sylius\Component\Product\Model\ProductAssociation
+                    interface: Sylius\Component\Product\Model\ProductAssociationInterface
 
 sylius_archetype:
     resources:
@@ -111,9 +112,11 @@ sylius_archetype:
             archetype:
                 classes:
                     model: Sylius\Component\Core\Model\Archetype
+                    interface: Sylius\Component\Product\Model\ArchetypeInterface
                 translation:
                     classes:
                         model: Sylius\Component\Product\Model\ArchetypeTranslation
+                        interface: Sylius\Component\Product\Model\ArchetypeTranslationInterface
             subject: Sylius\Component\Core\Model\Product
             attribute: Sylius\Component\Product\Model\Attribute
             option: Sylius\Component\Product\Model\Option

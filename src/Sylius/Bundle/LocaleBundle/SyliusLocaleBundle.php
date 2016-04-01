@@ -13,7 +13,6 @@ namespace Sylius\Bundle\LocaleBundle;
 
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Component\Locale\Model\LocaleInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
@@ -28,16 +27,6 @@ class SyliusLocaleBundle extends AbstractResourceBundle
         return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
             SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM,
-        ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getModelInterfaces()
-    {
-        return [
-            LocaleInterface::class => 'sylius.model.locale.class',
         ];
     }
 
