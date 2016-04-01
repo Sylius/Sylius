@@ -24,6 +24,16 @@ Feature: Metadata customization
             | Description | <empty>           |
             | Twitter     | <empty>           |
 
+    Scenario: Modifying existing page metadata
+        Given there is the following metadata "ZBIGNIEW-WODECKI":
+            | Title | Regular musician |
+        And I am customizing metadata with identifier "ZBIGNIEW-WODECKI"
+        When I fill in "Title" with "Expressive virtuoso"
+        And I press "Save changes"
+        Then I should be on the page of metadata container with id "ZBIGNIEW-WODECKI"
+        And I should see the following metadata:
+            | Title | Expressive virtuoso |
+
     @javascript
     Scenario: Managing dynamic Twitter form
         Given I am customizing metadata
