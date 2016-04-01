@@ -127,7 +127,7 @@ final class PromotionContext implements Context
     }
 
     /**
-     * @Given /^([^"]+) gives ("[^"]+") fixed discount to every order$/
+     * @Given /^([^"]+) gives ("(?:€|£|\$)[^"]+") discount to every order$/
      */
     public function itGivesFixedDiscountToEveryOrder(PromotionInterface $promotion, $amount)
     {
@@ -138,7 +138,7 @@ final class PromotionContext implements Context
     }
 
     /**
-     * @Given /^([^"]+) gives ("[^"]+") percentage discount to every order$/
+     * @Given /^([^"]+) gives ("[^"]+%") discount to every order$/
      */
     public function itGivesPercentageDiscountToEveryOrder(PromotionInterface $promotion, $discount)
     {
@@ -149,7 +149,7 @@ final class PromotionContext implements Context
     }
 
     /**
-     * @Given /^([^"]+) gives ("[^"]+") fixed discount to every order with quantity at least ([^"]+)$/
+     * @Given /^([^"]+) gives ("(?:€|£|\$)[^"]+") discount to every order with quantity at least ([^"]+)$/
      */
     public function itGivesFixedDiscountToEveryOrderWithQuantityAtLeast(PromotionInterface $promotion, $amount, $quantity)
     {
@@ -163,7 +163,7 @@ final class PromotionContext implements Context
     }
 
     /**
-     * @Given /^([^"]+) gives ("[^"]+") fixed discount to every order with items total at least ("[^"]+")$/
+     * @Given /^([^"]+) gives ("(?:€|£|\$)[^"]+") discount to every order with items total at least ("[^"]+")$/
      */
     public function itGivesFixedDiscountToEveryOrderWithItemsTotalAtLeast(
         PromotionInterface $promotion,
@@ -180,7 +180,7 @@ final class PromotionContext implements Context
     }
 
     /**
-     * @Given /^([^"]+) gives ("[^"]+") percentage discount on shipping to every order$/
+     * @Given /^([^"]+) gives ("[^"]+%") discount on shipping to every order$/
      */
     public function itGivesPercentageDiscountOnShippingToEveryOrder(PromotionInterface $promotion, $discount)
     {
