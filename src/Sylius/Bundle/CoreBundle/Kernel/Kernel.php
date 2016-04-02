@@ -117,8 +117,6 @@ abstract class Kernel extends BaseKernel
             new \Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new \WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
 
-            new \A2lix\TranslationFormBundle\A2lixTranslationFormBundle(),
-
             new \Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new \Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new \Sylius\Bundle\FixturesBundle\SyliusFixturesBundle(),

@@ -30,13 +30,13 @@ class SettingsHelper extends Helper
     }
 
     /**
-     * @param string $namespace
+     * @param string $schemaAlias
      *
      * @return array
      */
-    public function getSettings($namespace)
+    public function getSettings($schemaAlias)
     {
-        return $this->settingsManager->loadSettings($namespace);
+        return $this->settingsManager->load($schemaAlias);
     }
 
     /**
@@ -49,18 +49,18 @@ class SettingsHelper extends Helper
     public function getSettingsParameter($name)
     {
         if (false === strpos($name, '.')) {
-            throw new \InvalidArgumentException(sprintf('Parameter must be in format "namespace.name", "%s" given.', $name));
+            throw new \InvalidArgumentException(sprintf('Parameter must be in format "schemaAlias.name", "%s" given.', $name));
         }
 
-        list($namespace, $name) = explode('.', $name);
+        list($schemaAlias, $name) = explode('.', $name);
 
-        $settings = $this->settingsManager->loadSettings($namespace);
+        $settings = $this->settingsManager->load($schemaAlias);
 
         return $settings->get($name);
     }
 
     /**
-     * Checks if settings parameter for given namespace and name exists.
+     * Checks if settings parameter for given schema alias and name exists.
      *
      * @param string $name
      *
@@ -69,14 +69,14 @@ class SettingsHelper extends Helper
     public function hasSettingsParameter($name)
     {
         if (false === strpos($name, '.')) {
-            throw new \InvalidArgumentException(sprintf('Parameter must be in format "namespace.name", "%s" given.', $name));
+            throw new \InvalidArgumentException(sprintf('Parameter must be in format "schemaAlias.name", "%s" given.', $name));
         }
 
-        list($namespace, $name) = explode('.', $name);
+        list($schemaAlias, $name) = explode('.', $name);
 
-        $settings = $this->settingsManager->loadSettings($namespace);
+        $settings = $this->settingsManager->load($schemaAlias);
 
-        return $settings->has($name);
+        return (bool)$settings->get($name);
     }
 
     /**

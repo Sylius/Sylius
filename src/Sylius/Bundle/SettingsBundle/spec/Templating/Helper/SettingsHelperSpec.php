@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\SettingsBundle\Templating\Helper;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
-use Sylius\Bundle\SettingsBundle\Model\Settings;
+use Sylius\Bundle\SettingsBundle\Model\SettingsInterface;
 use Symfony\Component\Templating\Helper\Helper;
 
 class SettingsHelperSpec extends ObjectBehavior
@@ -33,18 +33,18 @@ class SettingsHelperSpec extends ObjectBehavior
         $this->shouldHaveType(Helper::class);
     }
 
-    function it_should_return_settings_by_namespace($settingsManager, Settings $settings)
+    function it_should_return_settings_by_namespace($settingsManager, SettingsInterface $settings)
     {
-        $settingsManager->loadSettings('sylius_taxation')->shouldBeCalled()->willReturn($settings);
+        $settingsManager->load('sylius_taxation')->shouldBeCalled()->willReturn($settings);
 
         $this->getSettings('sylius_taxation')->shouldReturn($settings);
     }
 
     function it_should_return_settings_parameter_by_namespace_and_name(
         SettingsManagerInterface $settingsManager,
-        Settings $settings
+        SettingsInterface $settings
     ) {
-        $settingsManager->loadSettings('sylius_shipping')->shouldBeCalled()->willReturn($settings);
+        $settingsManager->load('sylius_shipping')->shouldBeCalled()->willReturn($settings);
         $settings->get('price')->shouldBeCalled()->willReturn(19.99);
 
         $this->getSettingsParameter('sylius_shipping.price')->shouldReturn(19.99);

@@ -4,75 +4,9 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a5dd53bc4788d3166c22ff3409736a0d",
-    "content-hash": "f8978e54ee3050686f1b19d9d7d2cac3",
+    "hash": "28929d5e95ec4655c2aed245b38c9bc1",
+    "content-hash": "6fb8a984c1118fb0ac05a278d3aa6e25",
     "packages": [
-        {
-            "name": "a2lix/translation-form-bundle",
-            "version": "2.0.4",
-            "target-dir": "A2lix/TranslationFormBundle",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/a2lix/TranslationFormBundle.git",
-                "reference": "390e32745ddcce5308e672e8d188b6963c41de21"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/a2lix/TranslationFormBundle/zipball/390e32745ddcce5308e672e8d188b6963c41de21",
-                "reference": "390e32745ddcce5308e672e8d188b6963c41de21",
-                "shasum": ""
-            },
-            "require": {
-                "symfony/symfony": ">=2.3"
-            },
-            "require-dev": {
-                "doctrine/common": "~2.3",
-                "gedmo/doctrine-extensions": "dev-wip-v2.4.0",
-                "knplabs/doctrine-behaviors": "1.0.x-dev",
-                "phpunit/phpunit": "~4.1"
-            },
-            "suggest": {
-                "a2lix/i18n-doctrine-bundle": "For A2lix strategy",
-                "gedmo/doctrine-extensions": "For Gedmo strategy",
-                "knplabs/doctrine-behaviors": "For Knp strategy",
-                "prezent/doctrine-translatable-bundle": "For Prezent strategy"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "2.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-0": {
-                    "A2lix\\TranslationFormBundle": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "David ALLIX",
-                    "homepage": "http://a2lix.fr"
-                }
-            ],
-            "description": "Translate your doctrine objects easily with some helps",
-            "homepage": "https://github.com/a2lix/TranslationFormBundle",
-            "keywords": [
-                "Symfony2",
-                "doctrine2",
-                "form",
-                "gedmo",
-                "i18n",
-                "internationalization",
-                "knplabs",
-                "translatable",
-                "translation"
-            ],
-            "time": "2014-12-02 12:51:30"
-        },
         {
             "name": "behat/transliterator",
             "version": "v1.1.0",

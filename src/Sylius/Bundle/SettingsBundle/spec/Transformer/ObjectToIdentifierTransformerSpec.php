@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\SettingsBundle\Transformer;
 
 use Doctrine\Common\Persistence\ObjectRepository;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\SettingsBundle\Model\ParameterInterface;
+use Sylius\Bundle\SettingsBundle\spec\Fixture\ParameterFixture;
 use Sylius\Bundle\SettingsBundle\Transformer\ParameterTransformerInterface;
 
 /**
@@ -41,7 +41,7 @@ class ObjectToIdentifierTransformerSpec extends ObjectBehavior
         $this->transform(null)->shouldReturn(null);
     }
 
-    function it_should_transform_object_into_its_identifier(ParameterInterface $object)
+    function it_should_transform_object_into_its_identifier(ParameterFixture $object)
     {
         $object->getName()->willReturn('name');
 
@@ -55,7 +55,7 @@ class ObjectToIdentifierTransformerSpec extends ObjectBehavior
 
     function it_should_find_object_when_identifier_reverse_transformed(
         $repository,
-        ParameterInterface $object
+        ParameterFixture $object
     ) {
         $repository->findOneBy(['name' => 'foo'])->shouldBeCalled()->willReturn($object);
 

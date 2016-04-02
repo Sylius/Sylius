@@ -14,7 +14,6 @@ namespace Sylius\Bundle\SettingsBundle\Controller;
 use FOS\RestBundle\Controller\FOSRestController;
 use Sylius\Bundle\SettingsBundle\Form\Factory\SettingsFormFactoryInterface;
 use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
-use Sylius\Bundle\SettingsBundle\Model\Settings;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
@@ -37,17 +36,11 @@ class SettingsController extends FOSRestController
      */
     public function showAction(Request $request)
     {
-        $namespace = $request->get('namespace');
+        $schemaAlias = $request->attributes->get('schema');
 
-        $this->isGrantedOr403($namespace);
+        $this->isGrantedOr403($schemaAlias);
 
-        try {
-            $settings = $this->getSettingsManager()->loadSettings($namespace);
-        } catch (MissingOptionsException $e) {
-            // When a Settings is not persisted yet, it won't have any initial value in database,
-            // so we create a new empty instance.
-            $settings = new Settings([]);
-        }
+        $settings = $this->getSettingsManager()->load($schemaAlias);
 
         $view = $this
             ->view()
@@ -59,35 +52,29 @@ class SettingsController extends FOSRestController
 
     /**
      * @param Request $request
-     * @param string  $namespace
      *
      * @return Response
      */
-    public function updateAction(Request $request, $namespace)
+    public function updateAction(Request $request)
     {
-        $this->isGrantedOr403($namespace);
+        $schemaAlias = $request->attributes->get('schema');
 
-        $manager = $this->getSettingsManager();
+        $this->isGrantedOr403($schemaAlias);
 
-        try {
-            $settings = $manager->loadSettings($namespace);
-        } catch (MissingOptionsException $e) {
-            // When it is the first time that a Settings is being persisted,
-            // it won't have any initial value in database, so we should create a new instance.
-            $settings = new Settings([]);
-        }
+        $settingsManager = $this->getSettingsManager();
+        $settings = $settingsManager->load($schemaAlias);
 
         $isApiRequest = $this->isApiRequest($request);
 
         $form = $this
             ->getSettingsFormFactory()
-            ->create($namespace, $settings, $isApiRequest ? ['csrf_protection' => false] : [])
+            ->create($schemaAlias, $settings, $isApiRequest ? ['csrf_protection' => false] : [])
         ;
 
         if ($form->handleRequest($request)->isValid()) {
             $messageType = 'success';
             try {
-                $manager->saveSettings($namespace, $form->getData());
+                $settingsManager->save($settings);
                 $message = $this->getTranslator()->trans('sylius.settings.update', [], 'flashes');
             } catch (ValidatorException $exception) {
                 $message = $this->getTranslator()->trans($exception->getMessage(), [], 'validators');
@@ -136,19 +123,19 @@ class SettingsController extends FOSRestController
     }
 
     /**
-     * Check that user can change given namespace.
+     * Check that user can change given schema.
      *
-     * @param string $namespace
+     * @param string $schemaAlias
      *
      * @return bool
      */
-    protected function isGrantedOr403($namespace)
+    protected function isGrantedOr403($schemaAlias)
     {
         if (!$this->container->has('sylius.authorization_checker')) {
             return true;
         }
 
-        if (!$this->get('sylius.authorization_checker')->isGranted(sprintf('sylius.settings.%s', $namespace))) {
+        if (!$this->get('sylius.authorization_checker')->isGranted(sprintf('sylius.settings.%s', $schemaAlias))) {
             throw new AccessDeniedException();
         }
     }

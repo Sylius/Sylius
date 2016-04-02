@@ -12,95 +12,112 @@
 namespace spec\Sylius\Bundle\SettingsBundle\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\SettingsBundle\Exception\ParameterNotFoundException;
+use Sylius\Bundle\SettingsBundle\Model\SettingsInterface;
 
 /**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Steffen Brem <steffenbrem@gmail.com>
  */
 class SettingsSpec extends ObjectBehavior
 {
-    function let()
-    {
-        $parameters = [
-            'title' => 'Sylius, Symfony2 ecommerce',
-            'percentage' => 12,
-            'page' => 1,
-            'zone' => new \stdClass(),
-        ];
-
-        $this->beConstructedWith($parameters);
-    }
-
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\SettingsBundle\Model\Settings');
     }
 
-    function it_should_check_for_parameter_existence_by_name()
+    function it_implements_settings_interface()
     {
-        $this->has('zone')->shouldReturn(true);
-        $this->has('cache')->shouldReturn(false);
+        $this->shouldImplement(SettingsInterface::class);
     }
 
-    function it_should_retrieve_parameter_by_name()
+    function it_implements_array_access_interface()
     {
-        $this->get('page')->shouldReturn(1);
+        $this->shouldImplement(\ArrayAccess::class);
     }
 
-    function it_should_complain_when_trying_to_retrieve_non_existing_parameter()
+    function it_implements_countable_interface()
     {
+        $this->shouldImplement(\Countable::class);
+    }
+
+    function its_schema_alias_is_null_by_default()
+    {
+        $this->getSchemaAlias()->shouldReturn(null);
+    }
+
+    function its_schema_should_be_immutable_after_it_is_set()
+    {
+        $this->setSchemaAlias('theme');
+        $this->getSchemaAlias()->shouldReturn('theme');
         $this
-            ->shouldThrow(\InvalidArgumentException::class)
-            ->duringGet('test')
+            ->shouldThrow(new \LogicException('The schema alias of the settings model is immutable, instantiate a new object in order to use another schema.'))
+            ->during('setSchemaAlias', ['i_dont_like_to_be_changed'])
         ;
     }
 
-    function it_should_set_parameter_by_name()
+    function its_namespace_is_null_by_default()
     {
-        $this->set('limit', 50);
-        $this->geT('limit')->shouldReturn(50);
+        $this->getNamespace()->shouldReturn(null);
     }
 
-    function it_should_overwrite_parameter()
+    function its_namespace_should_be_immutable_after_it_is_set()
     {
-        $this->set('page', 12);
-        $this->get('page')->shouldReturn(12);
-    }
-
-    function it_should_complain_when_trying_to_remove_non_existing_parameter()
-    {
+        $this->setNamespace('banana');
+        $this->getNamespace()->shouldReturn('banana');
         $this
-            ->shouldThrow(\InvalidArgumentException::class)
-            ->duringRemove('test')
+            ->shouldThrow(new \LogicException('The namespace of the settings model is immutable, instantiate a new object in order to use another namespace.'))
+            ->during('setNamespace', ['i_dont_like_to_be_changed'])
         ;
     }
 
-    function it_should_remove_parameter_by_name()
+    function its_parameters_has_empty_array_by_default()
     {
-        $this->remove('page');
-        $this->has('page')->shouldReturn(false);
+        $this->getParameters()->shouldReturn([]);
     }
 
-    function it_should_implement_array_access_interface()
+    function it_can_set_a_parameter()
     {
-        $this->shouldImplement('ArrayAccess');
+        $this->set('key', 'value');
+        $this->getParameters()->shouldReturn([
+            'key' => 'value',
+        ])
+        ;
     }
 
-    function it_should_allow_to_get_parameters_via_array_access()
+    function it_throws_parameter_not_found_exception_when_getting_non_existing_parameter()
     {
-        $this['page']->shouldReturn(1);
+        $this->shouldThrow(ParameterNotFoundException::class)->during('get', ['non_existing']);
     }
 
-    function it_should_allow_to_set_parameters_via_array_access()
+    function it_can_get_a_parameter()
     {
-        $this['page'] = 10;
-
-        $this['page']->shouldReturn(10);
-        $this->get('page')->shouldReturn(10);
+        $this->set('key', 'value');
+        $this->get('key')->shouldReturn('value');
     }
 
-    function it_should_allow_to_unset_parameters_via_array_access()
+    function it_can_check_if_it_has_parameter()
     {
-        unset($this['title']);
-        $this->has('title')->shouldReturn(false);
+        $this->has('key')->shouldReturn(false);
+        $this->set('key', 'value');
+        $this->has('key')->shouldReturn(true);
+    }
+
+    function it_throws_parameter_not_found_exception_when_removing_non_existing_parameter()
+    {
+        $this->shouldThrow(ParameterNotFoundException::class)->during('remove', ['non_existing']);
+    }
+
+    function it_can_remove_a_parameter()
+    {
+        $this->set('key', 'value');
+        $this->remove('key');
+        $this->has('key')->shouldReturn(false);
+    }
+
+    function it_can_count_its_parameters()
+    {
+        $this->count()->shouldReturn(0);
+        $this->set('key', 'value');
+        $this->count()->shouldReturn(1);
     }
 }

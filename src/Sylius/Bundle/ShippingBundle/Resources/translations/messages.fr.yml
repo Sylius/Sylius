@@ -6,6 +6,7 @@ sylius:
         rule:
             unit_count_configuration:
                 count: Nombre
+                equal: Est égal à
             type: Type de règle
         shipment:
             state: État
@@ -23,6 +24,8 @@ sylius:
                 amount: Montant
             flexible_rate_configuration:
                 label: Taux variable
+                additional_unit_cost: Surcoût unitaire
+                first_unit_cost: Premier coût unitaire
             per_unit_rate_configuration:
                 label: Montant forfaitaire par unité
                 amount: Montant
