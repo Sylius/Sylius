@@ -111,6 +111,7 @@ class LoadMetadataSubscriber implements EventSubscriber
         $attributeMapping = [
             'fieldName' => 'attribute',
             'targetEntity' => $attributeClass,
+            'inversedBy' => 'values',
             'joinColumns' => [[
                 'name' => 'attribute_id',
                 'referencedColumnName' => $attributeMetadata->fieldMappings['id']['columnName'],
@@ -133,7 +134,7 @@ class LoadMetadataSubscriber implements EventSubscriber
         $valuesMapping = [
             'fieldName' => 'values',
             'targetEntity' => $attributeValueClass,
-            'mappedBy' => 'subject',
+            'mappedBy' => 'attribute',
         ];
 
         $metadata->mapOneToMany($valuesMapping);

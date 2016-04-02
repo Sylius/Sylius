@@ -110,6 +110,7 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
 
         $attributeMapping = [
             'fieldName' => 'attribute',
+            'inversedBy' => 'values',
             'targetEntity' => 'Some\App\Product\Entity\Attribute',
             'joinColumns' => [[
                 'name' => 'attribute_id',
@@ -157,7 +158,7 @@ class LoadMetadataSubscriberSpec extends ObjectBehavior
         $valuesMapping = [
             'fieldName' => 'values',
             'targetEntity' => 'Some\App\Product\Entity\AttributeValue',
-            'mappedBy' => 'subject',
+            'mappedBy' => 'attribute',
         ];
 
         $metadata->mapOneToMany($valuesMapping)->shouldBeCalled();
