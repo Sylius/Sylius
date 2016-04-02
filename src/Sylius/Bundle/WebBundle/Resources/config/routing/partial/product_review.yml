@@ -9,7 +9,7 @@ sylius_product_reviews:
             template: 'SyliusWebBundle:Frontend/Review:_list.html.twig'
             repository:
                 method: findAcceptedBySubjectId
-                arguments: [$productId]
+                arguments: [$productId, $limit]
             permission: false
 
 sylius_product_review_create:
