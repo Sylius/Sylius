@@ -31,7 +31,8 @@
     ;
 
     $('.ui.checkbox').checkbox();
-
+    $('.link.ui.dropdown').dropdown({ action: 'hide' });
+    
     $('.form button').on('click', function() {
       return $(this).closest('form').addClass('loading');
     });

@@ -1,0 +1,24 @@
+sylius_grid:
+    grids:
+        sylius_admin_zone:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: %sylius.model.zone.class%
+            fields:
+                code:
+                    type: string
+                    label: sylius.ui.code
+                name:
+                    type: string
+                    label: sylius.ui.name
+                type:
+                    type: string
+                    label: sylius.ui.type
+                scope:
+                    type: string
+                    label: sylius.ui.scope
+            actions:
+                main:
+                    create:
+                        type: create_zone
