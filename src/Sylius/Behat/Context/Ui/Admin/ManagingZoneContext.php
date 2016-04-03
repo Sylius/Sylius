@@ -13,9 +13,11 @@ namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
-use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface;
+use Sylius\Behat\Page\Admin\Zone\UpdatePageInterface;
 use Sylius\Behat\Page\Admin\Zone\CreatePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
+use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -115,13 +117,30 @@ class ManagingZoneContext implements Context
     }
 
     /**
-     * @Then the zone :zoneCode with the country :countryName should appear in the registry
+     * @Then /^the (zone named "[^"]+") with (the "[^"]+" country member) should appear in the registry$/
+     * @Then /^the (zone named "[^"]+") with (the "[^"]+" province member) should appear in the registry$/
+     * @Then /^the (zone named "[^"]+") with (the "[^"]+" zone member) should appear in the registry$/
      */
-    public function theZoneWithTheCountryShouldAppearInTheRegistry($zoneCode, $countryName)
+    public function theZoneWithTheCountryShouldAppearInTheRegistry(ZoneInterface $zone, ZoneMemberInterface $zoneMember)
     {
+        $expectedZoneValues = [
+            'code' => $zone->getCode(),
+            'name' => $zone->getName(),
+        ];
+
         Assert::true(
-            $this->indexPage->isResourceOnPage(['code' => $zoneCode]),
-            sprintf('Zone %s should exist but it does not', $zoneCode)
+            $this->updatePage->isOpen(['id' => $zone->getId()]),
+            sprintf('After successful creation we should be redirect to update page, but we are not!')
+        );
+
+        Assert::true(
+            $this->updatePage->hasResourceValues($expectedZoneValues),
+            sprintf('Zone %s is not valid', $zone->getName())
+        );
+
+        Assert::true(
+            $this->updatePage->hasMember($zoneMember),
+            sprintf('Zone %s has not %s zone member', $zone->getName(), $zoneMember->getCode())
         );
     }
 }
