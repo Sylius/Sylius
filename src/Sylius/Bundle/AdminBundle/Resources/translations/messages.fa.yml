@@ -7,6 +7,7 @@ sylius:
             main:
                 configuration:
                     header: تنظیمات
+                    tax_categories: رده های مالیات
                     countries: كشور‌ها
                     locales: زبان ها
                     tax_rates: نرخ های مالیات
