@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="ui labeled icon top right floating dropdown button primary link">
     <i class="plus icon"></i>
     <span class="text">{{ 'sylius.ui.create'|trans }}</span>
@@ -12,3 +13,13 @@
         <a class="item" href="{{ path(grid.requestConfiguration.getRouteName('create'), { 'type': 'zone' }) }}"><i class="icon location arrow"></i>{{ 'sylius.form.zone.types.zone'|trans }}</a>
     </div>
 </div>
+=======
+<form method="get" action="{{ path(grid.requestConfiguration.getRouteName('create')) }}" class="ui form">
+    <select id="type" name="type" class="ui dropdown">
+        <option value="country">{{ 'sylius.form.zone.types.country'|trans }}</option>
+        <option value="province">{{ 'sylius.form.zone.types.province'|trans }}</option>
+        <option value="zone">{{ 'sylius.form.zone.types.zone'|trans }}</option>
+    </select>
+    <button type="submit" class="ui labeled icon button primary plus"><i class="icon plus"></i>create</button>
+</form>
+>>>>>>> 34e0225... [Core] Add custom create action for zones
