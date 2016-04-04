@@ -26,7 +26,7 @@ Feature: Receiving a discount based on a configured promotion
         Then my cart total should be "€40.00"
         And my discount should be "-€10.00"
 
-    @todo
+    @ui
     Scenario: Receiving a discount on products from a specific taxon if an order contains products from an another taxon
         Given there is a promotion "Jacket-trousers pack"
         And it gives "10%" off on every product classified as "Jackets" if an order contains any product classified as "Trousers"

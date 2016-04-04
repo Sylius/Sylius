@@ -347,6 +347,24 @@ final class PromotionContext implements Context
     }
 
     /**
+     * @Given /^([^"]+) gives ("[^"]+%") off on every product (classified as "[^"]+") if an order contains any product (classified as "[^"]+")$/
+     */
+    public function itGivesPercentageOffOnEveryProductClassifiedAsIfAnOrderContainsAnyProductClassifiedAs(
+        PromotionInterface $promotion,
+        $discount,
+        TaxonInterface $discountTaxon,
+        TaxonInterface $targetTaxon
+    ) {
+        $action = $this->actionFactory->createItemPercentageDiscount($discount);
+        $rule = $this->ruleFactory->createContainsTaxon($targetTaxon->getCode(), 1);
+
+        $promotion->addAction($this->configureActionTaxonFilter($action, [$discountTaxon->getCode()]));
+        $promotion->addRule($rule);
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @param ActionInterface $action
      * @param array $taxonCodes
      *
