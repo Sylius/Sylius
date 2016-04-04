@@ -1,14 +1,5 @@
 <?php
 
-/*
- * This file is part of the Sylius package.
- *
- * (c) Paweł Jędrzejewski
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace Sylius\Migrations;
 
 use Doctrine\DBAL\Migrations\AbstractMigration;
@@ -28,8 +19,16 @@ class Version20151203134947 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE sylius_shipping_category ADD code VARCHAR(255) NOT NULL');
+        $this->addSql('UPDATE sylius_shipping_category s,
+                           (SELECT @n := 0) m
+                           SET s.`code` = CONCAT("SC", @n := @n + 1)         
+                      ');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_B1D6465277153098 ON sylius_shipping_category (code)');
         $this->addSql('ALTER TABLE sylius_shipping_method ADD code VARCHAR(255) NOT NULL');
+        $this->addSql('UPDATE sylius_shipping_method s,
+                           (SELECT @n := 0) m
+                           SET s.`code` = CONCAT("SM", @n := @n + 1)         
+                      ');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_5FB0EE1177153098 ON sylius_shipping_method (code)');
     }
 

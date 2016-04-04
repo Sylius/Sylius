@@ -1,14 +1,5 @@
 <?php
 
-/*
- * This file is part of the Sylius package.
- *
- * (c) Paweł Jędrzejewski
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- */
-
 namespace Sylius\Migrations;
 
 use Doctrine\DBAL\Migrations\AbstractMigration;
@@ -29,6 +20,10 @@ class Version20151210134607 extends AbstractMigration
 
         $this->addSql('CREATE UNIQUE INDEX UNIQ_B04EBA8577153098 ON sylius_promotion_coupon (code)');
         $this->addSql('ALTER TABLE sylius_promotion ADD code VARCHAR(255) NOT NULL');
+        $this->addSql('UPDATE sylius_promotion s,
+                           (SELECT @n := 0) m
+                           SET s.`code` = CONCAT("P", @n := @n + 1)         
+                      ');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_F157396377153098 ON sylius_promotion (code)');
     }
 
