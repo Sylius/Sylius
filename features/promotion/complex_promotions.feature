@@ -17,10 +17,11 @@ Feature: Receiving a discount based on a configured promotion
         And this product belongs to "Formal attire"
         And the store has "DHL" shipping method with "€10.00" fee
 
-    @todo
+    @ui
     Scenario: Receiving a discount on the first order
         Given there is a promotion "First order promotion"
         And it gives "20%" off on the customer's 1st order
+        And I am logged in customer
         When I add product "Metallica Dress" to the cart
         Then my cart total should be "€40.00"
         And my discount should be "-€10.00"
@@ -28,7 +29,7 @@ Feature: Receiving a discount based on a configured promotion
     @todo
     Scenario: Receiving a discount on products from a specific taxon if an order contains products from an another taxon
         Given there is a promotion "Jacket-trousers pack"
-        And it gives "10%" off on every product classified as "Jackets" if order an contains any product classified as "Trousers"
+        And it gives "10%" off on every product classified as "Jackets" if an order contains any product classified as "Trousers"
         When I add product "Iron Maiden trousers" to the cart
         And I add product "Black Sabbath jacket" to the cart
         Then product "Black Sabbath jacket" price should be decreased by "€10.00"

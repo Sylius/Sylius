@@ -329,11 +329,21 @@ final class PromotionContext implements Context
     /**
      * @Given /^([^"]+) gives ("(?:€|£|\$)[^"]+") off customer's (\d)(?:st|nd|rd|th) order$/
      */
-    public function itGivesOffCustomersNthOrder(PromotionInterface $promotion, $discount, $nth)
+    public function itGivesFixedOffCustomersNthOrder(PromotionInterface $promotion, $discount, $nth)
     {
         $rule = $this->ruleFactory->createNthOrder((int) $nth);
 
         $this->createFixedPromotion($promotion, $discount, [], $rule);
+    }
+
+    /**
+     * @Given /^([^"]+) gives ("[^"]+%") off on the customer's (\d)(?:st|nd|rd|th) order$/
+     */
+    public function itGivesPercentageOffCustomersNthOrder(PromotionInterface $promotion, $discount, $nth)
+    {
+        $rule = $this->ruleFactory->createNthOrder((int) $nth);
+
+        $this->createPercentagePromotion($promotion, $discount, [], $rule);
     }
 
     /**
@@ -379,6 +389,17 @@ final class PromotionContext implements Context
     private function createFixedPromotion(PromotionInterface $promotion, $discount, array $configuration, RuleInterface $rule = null)
     {
         $this->persistPromotion($promotion, $this->actionFactory->createFixedDiscount($discount), $configuration, $rule);
+    }
+
+    /**
+     * @param PromotionInterface $promotion
+     * @param float $discount
+     * @param array $configuration
+     * @param RuleInterface $rule
+     */
+    private function createPercentagePromotion(PromotionInterface $promotion, $discount, array $configuration, RuleInterface $rule = null)
+    {
+        $this->persistPromotion($promotion, $this->actionFactory->createPercentageDiscount($discount), $configuration, $rule);
     }
 
     /**
