@@ -116,6 +116,7 @@ final class ManagingCurrenciesContext implements Context
 
     /**
      * @Then the currency :currency should appear in the store
+     * @Then I should see the currency :currency in the list
      */
     public function currencyShouldAppearInTheStore(CurrencyInterface $currency)
     {
@@ -302,6 +303,30 @@ final class ManagingCurrenciesContext implements Context
                 'Currency exchange rate should be equal %s, but was %s.',
                 $exchangeRate,
                 $this->updatePage->getExchangeRateValue()
+            )
+        );
+    }
+
+    /**
+     * @Given I browse currencies of the store
+     */
+    public function iWantToSeeAllCurrenciesInStore()
+    {
+        $this->indexPage->open();
+    }
+
+    /**
+     * @Then /^I should see (\d+) currencies in the list$/
+     */
+    public function iShouldSeeCurrenciesInTheList($amountOfCurrencies)
+    {
+        Assert::eq(
+            $amountOfCurrencies,
+            $this->indexPage->countItems(),
+            sprintf(
+                'Amount of currencies should be equal %d, but was %d.',
+                $amountOfCurrencies,
+                $this->indexPage->countItems()
             )
         );
     }
