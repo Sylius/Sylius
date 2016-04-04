@@ -27,3 +27,10 @@
         </div>
     </div>
 {%- endblock checkbox_row %}
+
+{% block money_widget -%}
+    <div class="ui labeled input">
+        <div class="ui label">$</div>
+        {{- form_widget(form) -}}
+    </div>
+{%- endblock money_widget %}
