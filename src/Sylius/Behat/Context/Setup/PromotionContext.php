@@ -394,6 +394,28 @@ final class PromotionContext implements Context
     }
 
     /**
+     * @Given /^([^"]+) gives ("[^"]+%") off on every product (classified as "[^"]+") and a ("(?:€|£|\$)[^"]+") fixed discount to every order with items total equal at least ("(?:€|£|\$)[^"]+")$/
+     */
+    public function itGivesOffOnEveryProductClassifiedAsAndAFixedDiscountToEveryOrderWithItemsTotalEqualAtLeast(
+        PromotionInterface $promotion,
+        $taxonDiscount,
+        TaxonInterface $taxon,
+        $orderDiscount,
+        $targetAmount
+    ) {
+        $itemsDiscountAction = $this->actionFactory->createItemPercentageDiscount($taxonDiscount);
+        $orderDiscountAction = $this->actionFactory->createFixedDiscount($orderDiscount);
+
+        $rule = $this->ruleFactory->createItemTotal($targetAmount);
+
+        $promotion->addAction($this->configureActionTaxonFilter($itemsDiscountAction, [$taxon->getCode()]));
+        $promotion->addAction($orderDiscountAction);
+        $promotion->addRule($rule);
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @param ActionInterface $action
      * @param array $taxonCodes
      *

@@ -48,7 +48,7 @@ Feature: Receiving a discount based on a configured promotion
         And my discount should be "-€80.00"
         And my cart shipping fee should be "€10.00"
 
-    @todo
+    @ui
     Scenario: Receiving a discount on items and the whole order from one promotion based on items total
         Given there is a promotion "Greatest promotion"
         And it gives "20%" off on every product classified as "Jackets" and a "€50.00" fixed discount to every order with items total equal at least "€500.00"
