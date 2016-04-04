@@ -51,7 +51,7 @@ Feature: Receiving a discount based on a configured promotion
     @ui
     Scenario: Receiving a discount on items and the whole order from one promotion based on items total
         Given there is a promotion "Greatest promotion"
-        And it gives "20%" off on every product classified as "Jackets" and a "€50.00" fixed discount to every order with items total equal at least "€500.00"
+        And it gives "20%" off on every product classified as "Jackets" and a "€50.00" discount to every order with items total equal at least "€500.00"
         When I add 7 products "Black Sabbath jacket" to the cart
         Then theirs price should be decreased by "€140.00"
         And my cart total should be "€510.00"
