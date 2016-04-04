@@ -42,3 +42,10 @@
         {{- form_errors(form) -}}
     </div>
 {%- endblock choice_row %}
+
+{% block percent_widget -%}
+    <div class="ui right labeled input">
+        {{- form_widget(form) -}}
+        <div class="ui basic label">%</div>
+    </div>
+{%- endblock percent_widget %}
