@@ -191,6 +191,14 @@ final class PromotionContext implements Context
     }
 
     /**
+     * @Given /^([^"]+) gives free shipping to every order$/
+     */
+    public function thePromotionGivesFreeShippingToEveryOrder(PromotionInterface $promotion)
+    {
+        $this->itGivesPercentageDiscountOnShippingToEveryOrder($promotion, 1);
+    }
+
+    /**
      * @Given /^([^"]+) gives ("[^"]+%") off every product (classified as "[^"]+")$/
      */
     public function itGivesPercentageOffEveryProductClassifiedAs(
@@ -359,6 +367,27 @@ final class PromotionContext implements Context
         $rule = $this->ruleFactory->createContainsTaxon($targetTaxon->getCode(), 1);
 
         $promotion->addAction($this->configureActionTaxonFilter($action, [$discountTaxon->getCode()]));
+        $promotion->addRule($rule);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^([^"]+) gives ("(?:€|£|\$)[^"]+") off on every product (classified as "[^"]+") and a free shipping to every order with items total equal at least ("[^"]+")$/
+     */
+    public function itGivesOffOnEveryProductClassifiedAsAndAFreeShippingToEveryOrderWithItemsTotalEqualAtLeast(
+        PromotionInterface $promotion,
+        $discount,
+        TaxonInterface $taxon,
+        $targetAmount
+    ) {
+        $itemsDiscountAction = $this->actionFactory->createItemFixedDiscount($discount);
+        $freeShippingAction = $this->actionFactory->createPercentageShippingDiscount(1);
+
+        $rule = $this->ruleFactory->createItemTotal($targetAmount);
+
+        $promotion->addAction($this->configureActionTaxonFilter($itemsDiscountAction, [$taxon->getCode()]));
+        $promotion->addAction($freeShippingAction);
         $promotion->addRule($rule);
 
         $this->objectManager->flush();

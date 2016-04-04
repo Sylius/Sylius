@@ -36,16 +36,17 @@ Feature: Receiving a discount based on a configured promotion
         And my cart total should be "€170.00"
         And my discount should be "-€10.00"
 
-    @todo
+    @ui
     Scenario: Receiving a discount on items and shipping from one promotion based on items total
         Given there is a promotion "Jackets and shipping discount"
         And it gives "€10.00" off on every product classified as "Jackets" and a free shipping to every order with items total equal at least "€500.00"
+        And I am logged in customer
         When I add 7 products "Black Sabbath jacket" to the cart
         And I proceed selecting "DHL" shipping method
         Then theirs price should be decreased by "€70.00"
         And my cart total should be "€630.00"
-        And my discount should be "-€70.00"
-        And there should be no shipping fee
+        And my discount should be "-€80.00"
+        And my cart shipping fee should be "€10.00"
 
     @todo
     Scenario: Receiving a discount on items and the whole order from one promotion based on items total
