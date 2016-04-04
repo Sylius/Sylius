@@ -23,6 +23,7 @@ final class ProductContext implements Context
      * @var ProductRepositoryInterface
      */
     private $productRepository;
+
     /**
      * @param ProductRepositoryInterface $productRepository
      */
@@ -44,5 +45,23 @@ final class ProductContext implements Context
         }
 
         return $product;
+    }
+
+    /**
+     * @Transform /^products "([^"]+)" and "([^"]+)"$/
+     * @Transform /^products "([^"]+)", "([^"]+)" and "([^"]+)"$/
+     */
+    public function getProductsByNames($firstProductName, $secondProductName, $thirdProductName = null)
+    {
+        $products = [
+            $this->getProductByName($firstProductName),
+            $this->getProductByName($secondProductName),
+        ];
+
+        if (null !== $thirdProductName) {
+            $products[] = $this->getProductByName($thirdProductName);
+        }
+
+        return $products;
     }
 }

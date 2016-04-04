@@ -57,10 +57,10 @@ Feature: Receiving a discount based on a configured promotion
         And my cart total should be "€510.00"
         And my discount should be "-€190.00"
 
-    @todo
+    @ui
     Scenario: Receiving a discount on products from multiple taxons based on products from different taxons
         Given there is a promotion "Formal attire pack"
-        And it gives "10%" off on every product classified as "Formal attire" or "Dress" if order contains any product classified as "Trousers" or "Jackets"
+        And it gives "10%" off on every product classified as "Formal attire" or "Dresses" if order contains any product classified as "Trousers" or "Jackets"
         When I add products "Rammstein bow tie", "Metallica dress" and "Iron Maiden trousers" to the cart
         Then product "Metallica dress" price should be decreased by "€5.00"
         And product "Rammstein bow tie" price should be decreased by "€1.00"

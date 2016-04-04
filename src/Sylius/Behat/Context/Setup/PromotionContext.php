@@ -12,7 +12,6 @@
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Core\Factory\ActionFactoryInterface;
 use Sylius\Component\Core\Factory\RuleFactoryInterface;
@@ -411,6 +410,26 @@ final class PromotionContext implements Context
         $promotion->addAction($this->configureActionTaxonFilter($itemsDiscountAction, [$taxon->getCode()]));
         $promotion->addAction($orderDiscountAction);
         $promotion->addRule($rule);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^([^"]+) gives ("[^"]+%") off on every product (classified as "[^"]+" or "[^"]+") if order contains any product (classified as "[^"]+" or "[^"]+")$/
+     */
+    public function itGivesOffOnEveryProductClassifiedAsOrIfOrderContainsAnyProductClassifiedAsOr(
+        PromotionInterface $promotion,
+        $discount,
+        array $discountTaxons,
+        array $targetTaxons
+    ) {
+        $itemsDiscountAction = $this->actionFactory->createItemPercentageDiscount($discount);
+
+        $discountTaxonsCodes = [$discountTaxons[0]->getCode(), $discountTaxons[1]->getCode()];
+        $targetTaxonsCodes = [$targetTaxons[0]->getCode(), $targetTaxons[1]->getCode()];
+
+        $promotion->addAction($this->configureActionTaxonFilter($itemsDiscountAction, $discountTaxonsCodes));
+        $promotion->addRule($this->ruleFactory->createTaxon($targetTaxonsCodes));
 
         $this->objectManager->flush();
     }

@@ -47,7 +47,7 @@ final class TaxonContext implements Context
     }
 
     /**
-     * @Transform classified as :firstTaxon or :secondTaxon
+     * @Transform /^classified as "([^"]+)" or "([^"]+)"$/
      */
     public function getTaxonsByNames($firstTaxon, $secondTaxon)
     {
