@@ -12,16 +12,16 @@
 namespace spec\Sylius\Bundle\LocaleBundle\Twig;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\LocaleBundle\Templating\Helper\LocaleHelper;
+use Sylius\Bundle\LocaleBundle\Templating\Helper\LocaleHelperInterface;
 
 /**
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class LocaleExtensionSpec extends ObjectBehavior
 {
-    function let(LocaleHelper $helper)
+    function let(LocaleHelperInterface $localeHelper)
     {
-        $this->beConstructedWith($helper);
+        $this->beConstructedWith($localeHelper);
     }
 
     function it_is_initializable()
