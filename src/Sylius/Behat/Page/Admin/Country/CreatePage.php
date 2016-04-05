@@ -12,6 +12,7 @@
 namespace Sylius\Behat\Page\Admin\Country;
 
 use Behat\Mink\Driver\Selenium2Driver;
+use Behat\Mink\Element\Element;
 use Sylius\Behat\Behaviour\ChoosesName;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 
@@ -30,11 +31,6 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     protected $elements = [
         'provinces' => '#sylius_country_provinces',
     ];
-
-    /**
-     * @var int
-     */
-    private $provincesCount = 0;
 
     /**
      * If the scenario is using a "@javascript" tag we are selecting Country name differently
@@ -61,14 +57,15 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 
         $provinces = $this->getElement('provinces');
 
-        $provinces->fillField('sylius_country_provinces_'.$this->provincesCount.'_name', $name);
-        $provinces->fillField('sylius_country_provinces_'.$this->provincesCount.'_code', $code);
+        $provinceForm = $this->getLastProvinceElement();
+        $provincesCount = $provinceForm->getAttribute('data-form-collection-index');
+
+        $provinces->fillField('sylius_country_provinces_'.$provincesCount.'_name', $name);
+        $provinces->fillField('sylius_country_provinces_'.$provincesCount.'_code', $code);
 
         if (null !== $abbreviation) {
-            $provinces->fillField('sylius_country_provinces_'.$this->provincesCount.'_abbreviation', $abbreviation);
+            $provinces->fillField('sylius_country_provinces_'.$provincesCount.'_abbreviation', $abbreviation);
         }
-
-        $this->provincesCount++;
     }
 
     /**
@@ -81,5 +78,16 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
 
         $selectElement = $selectElements->find('css', '.item:contains("'.$name.'")');
         $selectElement->click();
+    }
+
+    /**
+     * @return Element
+     */
+    private function getLastProvinceElement()
+    {
+        $provinces = $this->getElement('provinces');
+        $items = $provinces->findAll('css', 'div[data-form-collection="item"]');
+
+        return end($items);
     }
 }

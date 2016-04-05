@@ -12,19 +12,21 @@
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\Admin\Country\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Country\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Country\UpdatePageInterface;
+use Sylius\Behat\Service\CurrentPageResolverInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
-use Sylius\Component\Core\Test\Services\SharedStorageInterface;
+use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Webmozart\Assert\Assert;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-final class ManagingCountriesContext implements Context
+final class ManagingCountriesContext implements Context, SnippetAcceptingContext
 {
     const RESOURCE_NAME = 'country';
 
@@ -44,6 +46,11 @@ final class ManagingCountriesContext implements Context
     private $countryUpdatePage;
 
     /**
+     * @var CurrentPageResolverInterface
+     */
+    private $currentPageResolver;
+
+    /**
      * @var NotificationCheckerInterface
      */
     private $notificationChecker;
@@ -52,17 +59,20 @@ final class ManagingCountriesContext implements Context
      * @param IndexPageInterface $countryIndexPage
      * @param CreatePageInterface $countryCreatePage
      * @param UpdatePageInterface $countryUpdatePage
+     * @param CurrentPageResolverInterface $currentPageResolver
      * @param NotificationCheckerInterface $notificationChecker
      */
     public function __construct(
         IndexPageInterface $countryIndexPage,
         CreatePageInterface $countryCreatePage,
         UpdatePageInterface $countryUpdatePage,
+        CurrentPageResolverInterface $currentPageResolver,
         NotificationCheckerInterface $notificationChecker
     ) {
         $this->countryIndexPage = $countryIndexPage;
         $this->countryCreatePage = $countryCreatePage;
         $this->countryUpdatePage = $countryUpdatePage;
+        $this->currentPageResolver = $currentPageResolver;
         $this->notificationChecker = $notificationChecker;
     }
 
@@ -97,7 +107,9 @@ final class ManagingCountriesContext implements Context
      */
     public function iAddProvinceWithCode($provinceName, $provinceCode, $provinceAbbreviation = null)
     {
-        $this->countryCreatePage->fillProvinceData($provinceName, $provinceCode, $provinceAbbreviation);
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm($this->countryCreatePage, $this->countryUpdatePage);
+
+        $currentPage->fillProvinceData($provinceName, $provinceCode, $provinceAbbreviation);
     }
 
     /**
@@ -106,7 +118,9 @@ final class ManagingCountriesContext implements Context
      */
     public function iAddIt()
     {
-        $this->countryCreatePage->create();
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm($this->countryCreatePage, $this->countryUpdatePage);
+
+        $currentPage->create();
     }
 
     /**
@@ -210,9 +224,32 @@ final class ManagingCountriesContext implements Context
      */
     public function countryShouldHaveProvince($provinceName)
     {
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm($this->countryCreatePage, $this->countryUpdatePage);
+
         Assert::true(
-            $this->countryUpdatePage->isThereProvince($provinceName),
+            $currentPage->isThereProvince($provinceName),
             sprintf('%s is not a province of this country.', $provinceName)
         );
+    }
+
+    /**
+     * @Then this country should not have the :provinceName province
+     */
+    public function thisCountryShouldNotHaveTheProvince($provinceName)
+    {
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm($this->countryCreatePage, $this->countryUpdatePage);
+
+        Assert::false(
+            $currentPage->isThereProvince($provinceName),
+            sprintf('%s is a province of this country.', $provinceName)
+        );
+    }
+
+    /**
+     * @When /^I delete the "([^"]*)" province of (this country)$/
+     */
+    public function iDeleteTheProvinceOfCountry($provinceName, CountryInterface $country)
+    {
+        $this->countryUpdatePage->removeProvince($provinceName);
     }
 }
