@@ -89,18 +89,18 @@ class ItemPercentageDiscountActionSpec extends ObjectBehavior
         $orderItem1->getTotal()->willReturn(1000);
         $distributor->distribute(200, 2)->willReturn([100, 100]);
 
-        $promotion->getDescription()->willReturn('Test description');
+        $promotion->getName()->willReturn('Test promotion');
 
         $adjustmentFactory->createNew()->willReturn($promotionAdjustment1, $promotionAdjustment2);
 
         $promotionAdjustment1->setType(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)->shouldBeCalled();
-        $promotionAdjustment1->setLabel('Test description')->shouldBeCalled();
+        $promotionAdjustment1->setLabel('Test promotion')->shouldBeCalled();
         $promotionAdjustment1->setAmount(-100)->shouldBeCalled();
 
         $originator->setOrigin($promotionAdjustment1, $promotion)->shouldBeCalled();
 
         $promotionAdjustment2->setType(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)->shouldBeCalled();
-        $promotionAdjustment2->setLabel('Test description')->shouldBeCalled();
+        $promotionAdjustment2->setLabel('Test promotion')->shouldBeCalled();
         $promotionAdjustment2->setAmount(-100)->shouldBeCalled();
 
         $originator->setOrigin($promotionAdjustment2, $promotion)->shouldBeCalled();
@@ -147,12 +147,12 @@ class ItemPercentageDiscountActionSpec extends ObjectBehavior
         $orderItem1->getTotal()->willReturn(5);
         $distributor->distribute(1, 2)->willReturn([1, 0]);
 
-        $promotion->getDescription()->willReturn('Test description');
+        $promotion->getName()->willReturn('Test promotion');
 
         $adjustmentFactory->createNew()->willReturn($promotionAdjustment1);
 
         $promotionAdjustment1->setType(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)->shouldBeCalled();
-        $promotionAdjustment1->setLabel('Test description')->shouldBeCalled();
+        $promotionAdjustment1->setLabel('Test promotion')->shouldBeCalled();
         $promotionAdjustment1->setAmount(-1)->shouldBeCalled();
 
         $originator->setOrigin($promotionAdjustment1, $promotion)->shouldBeCalled();

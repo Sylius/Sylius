@@ -31,6 +31,7 @@ class PromotionType extends AbstractResourceType
             ])
             ->add('description', 'text', [
                 'label' => 'sylius.form.promotion.description',
+                'required' => false,
             ])
             ->add('exclusive', 'checkbox', [
                 'label' => 'sylius.form.promotion.exclusive',
