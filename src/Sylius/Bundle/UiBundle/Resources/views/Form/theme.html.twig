@@ -30,7 +30,7 @@
 
 {% block money_widget -%}
     <div class="ui labeled input">
-        <div class="ui label">$</div>
+        <div class="ui label">{{ sylius_currency_symbol() }}</div>
         {{- form_widget(form) -}}
     </div>
 {%- endblock money_widget %}

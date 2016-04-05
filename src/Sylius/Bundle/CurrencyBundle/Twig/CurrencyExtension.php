@@ -36,38 +36,22 @@ class CurrencyExtension extends \Twig_Extension
     /**
      * {@inheritdoc}
      */
-    public function getFilters()
+    public function getFunctions()
     {
         return [
-            new \Twig_SimpleFilter('sylius_currency', [$this, 'convertAmount']),
-            new \Twig_SimpleFilter('sylius_price', [$this, 'convertAndFormatAmount']),
+            new \Twig_SimpleFunction('sylius_currency_symbol', [$this->helper, 'getCurrentCurrencySymbol']),
         ];
     }
 
     /**
-     * Convert amount to target currency.
-     *
-     * @param int     $amount
-     * @param string|null $currency
-     *
-     * @return string
+     * {@inheritdoc}
      */
-    public function convertAmount($amount, $currency = null)
+    public function getFilters()
     {
-        return $this->helper->convertAmount($amount, $currency);
-    }
-
-    /**
-     * Convert and format amount.
-     *
-     * @param int     $amount
-     * @param string|null $currency
-     *
-     * @return string
-     */
-    public function convertAndFormatAmount($amount, $currency = null)
-    {
-        return $this->helper->convertAndFormatAmount($amount, $currency);
+        return [
+            new \Twig_SimpleFilter('sylius_currency', [$this->helper, 'convertAmount']),
+            new \Twig_SimpleFilter('sylius_price', [$this->helper, 'convertAndFormatAmount']),
+        ];
     }
 
     /**
