@@ -47,6 +47,7 @@ class CartType extends BaseCartType
             ->add('promotionCoupon', 'sylius_promotion_coupon_to_code', [
                 'by_reference' => false,
                 'label' => 'sylius.form.cart.coupon',
+                'required' => false,
             ])
             ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
                 $data = $event->getData();
