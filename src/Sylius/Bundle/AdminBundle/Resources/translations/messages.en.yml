@@ -12,3 +12,6 @@ sylius:
                 marketing:
                     header: Marketing
                     promotions: Promotions
+                customer:
+                    header: Customer
+                    customers: Customers

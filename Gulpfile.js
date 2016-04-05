@@ -23,6 +23,7 @@ var paths = {
             'src/Sylius/Bundle/UiBundle/Resources/private/js/**',
             'src/Sylius/Bundle/ShippingBundle/Resources/public/js/**',
             'src/Sylius/Bundle/PromotionBundle/Resources/public/js/sylius-promotion.js'
+            'src/Sylius/Bundle/UserBundle/Resources/public/js/sylius-user.js'
         ],
         sass: [
             'src/Sylius/Bundle/UiBundle/Resources/private/sass/**',

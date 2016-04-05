@@ -1,0 +1,3 @@
+{% if data.user is not null %}
+{{ data.user.createdAt|date("d-m-Y H:i") }}
+{%  endif %}

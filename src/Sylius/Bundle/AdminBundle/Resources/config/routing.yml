@@ -13,6 +13,9 @@ sylius_admin_dashboard:
 sylius_admin_country:
     resource: "@SyliusAdminBundle/Resources/config/routing/country.yml"
 
+sylius_admin_customer:
+    resource: "@SyliusAdminBundle/Resources/config/routing/customer.yml"
+    
 sylius_admin_locale:
     resource: "@SyliusAdminBundle/Resources/config/routing/locale.yml"
 
