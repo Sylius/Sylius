@@ -137,16 +137,13 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @param string $element
-     * @param string $expectedMessage
+     * @Then I should be notified that promotion with this code already exists
      */
-    private function assertFieldValidationMessage($element, $expectedMessage)
+    public function iShouldBeNotifiedThatPromotionWithThisCodeAlreadyExists()
     {
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm($this->createPage, $this->updatePage);
-
         Assert::true(
-            $currentPage->checkValidationMessageFor($element, $expectedMessage),
-            sprintf('Promotion %s should be required.', $element)
+            $this->createPage->checkValidationMessageFor('code', 'The promotion with given code already exists.'),
+            'Unique code violation message should appear on page, but it does not.'
         );
     }
 
@@ -160,6 +157,33 @@ final class ManagingPromotionsContext implements Context
         Assert::false(
             $this->indexPage->isResourceOnPage([$element => $name]),
             sprintf('Promotion with %s %s has been created, but it should not.', $element, $name)
+        );
+    }
+
+    /**
+     * @Then there should still be only one promotion with :element :code
+     */
+    public function thereShouldStillBeOnlyOnePromotionWith($element, $code)
+    {
+        $this->indexPage->open();
+
+        Assert::true(
+            $this->indexPage->isResourceOnPage([$element => $code]),
+            sprintf('Promotion with %s %s cannot be founded.', $element, $code)
+        );
+    }
+
+    /**
+     * @param string $element
+     * @param string $expectedMessage
+     */
+    private function assertFieldValidationMessage($element, $expectedMessage)
+    {
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm($this->createPage, $this->updatePage);
+
+        Assert::true(
+            $currentPage->checkValidationMessageFor($element, $expectedMessage),
+            sprintf('Promotion %s should be required.', $element)
         );
     }
 }
