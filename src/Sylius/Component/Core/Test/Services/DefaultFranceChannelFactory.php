@@ -49,6 +49,11 @@ class DefaultFranceChannelFactory implements DefaultChannelFactoryInterface
     /**
      * @var RepositoryInterface
      */
+    private $localeRepository;
+
+    /**
+     * @var RepositoryInterface
+     */
     private $zoneMemberRepository;
 
     /**
@@ -74,6 +79,11 @@ class DefaultFranceChannelFactory implements DefaultChannelFactoryInterface
     /**
      * @var FactoryInterface
      */
+    private $localeFactory;
+
+    /**
+     * @var FactoryInterface
+     */
     private $zoneMemberFactory;
 
     /**
@@ -85,11 +95,13 @@ class DefaultFranceChannelFactory implements DefaultChannelFactoryInterface
      * @param RepositoryInterface $channelRepository
      * @param RepositoryInterface $countryRepository
      * @param RepositoryInterface $currencyRepository
+     * @param RepositoryInterface $localeRepository
      * @param RepositoryInterface $zoneMemberRepository
      * @param RepositoryInterface $zoneRepository
      * @param ChannelFactoryInterface $channelFactory
      * @param FactoryInterface $countryFactory
      * @param FactoryInterface $currencyFactory
+     * @param FactoryInterface $localeFactory
      * @param FactoryInterface $zoneFactory
      * @param FactoryInterface $zoneMemberFactory
      */
@@ -97,22 +109,26 @@ class DefaultFranceChannelFactory implements DefaultChannelFactoryInterface
         RepositoryInterface $channelRepository,
         RepositoryInterface $countryRepository,
         RepositoryInterface $currencyRepository,
+        RepositoryInterface $localeRepository,
         RepositoryInterface $zoneMemberRepository,
         RepositoryInterface $zoneRepository,
         ChannelFactoryInterface $channelFactory,
         FactoryInterface $countryFactory,
         FactoryInterface $currencyFactory,
+        FactoryInterface $localeFactory,
         FactoryInterface $zoneFactory,
         FactoryInterface $zoneMemberFactory
     ) {
         $this->channelRepository = $channelRepository;
         $this->countryRepository = $countryRepository;
         $this->currencyRepository = $currencyRepository;
+        $this->localeRepository = $localeRepository;
         $this->zoneMemberRepository = $zoneMemberRepository;
         $this->zoneRepository = $zoneRepository;
         $this->channelFactory = $channelFactory;
         $this->countryFactory = $countryFactory;
         $this->currencyFactory = $currencyFactory;
+        $this->localeFactory = $localeFactory;
         $this->zoneMemberFactory = $zoneMemberFactory;
         $this->zoneFactory = $zoneFactory;
     }
@@ -123,17 +139,24 @@ class DefaultFranceChannelFactory implements DefaultChannelFactoryInterface
     public function create()
     {
         $currency = $this->createCurrency();
+        $locale = $this->localeFactory->createNew();
+
+        $locale->setCode('en_US');
 
         $channel = $this->createChannel();
         $channel->setDefaultCurrency($currency);
+        $channel->addLocale($locale);
+        $channel->setDefaultLocale($locale);
 
         $defaultData['channel'] = $channel;
         $defaultData['country'] = $this->createCountry();
         $defaultData['currency'] = $currency;
+        $defaultData['locale'] = $locale;
         $defaultData['zone_member'] = $this->createZoneMember();
         $defaultData['zone'] = $this->createZone($defaultData['zone_member']);
 
         $this->currencyRepository->add($currency);
+        $this->localeRepository->add($locale);
         $this->channelRepository->add($channel);
         $this->countryRepository->add($defaultData['country']);
         $this->zoneRepository->add($defaultData['zone']);

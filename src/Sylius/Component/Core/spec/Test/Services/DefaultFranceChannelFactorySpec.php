@@ -19,6 +19,7 @@ use Sylius\Component\Channel\Factory\ChannelFactoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Test\Services\DefaultChannelFactoryInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
+use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -31,11 +32,13 @@ class DefaultFranceChannelFactorySpec extends ObjectBehavior
         RepositoryInterface $channelRepository,
         RepositoryInterface $countryRepository,
         RepositoryInterface $currencyRepository,
+        RepositoryInterface $localeRepository,
         RepositoryInterface $zoneMemberRepository,
         RepositoryInterface $zoneRepository,
         ChannelFactoryInterface $channelFactory,
         FactoryInterface $countryFactory,
         FactoryInterface $currencyFactory,
+        FactoryInterface $localeFactory,
         FactoryInterface $zoneFactory,
         FactoryInterface $zoneMemberFactory
     ) {
@@ -43,11 +46,13 @@ class DefaultFranceChannelFactorySpec extends ObjectBehavior
             $channelRepository,
             $countryRepository,
             $currencyRepository,
+            $localeRepository,
             $zoneMemberRepository,
             $zoneRepository,
             $channelFactory,
             $countryFactory,
             $currencyFactory,
+            $localeFactory,
             $zoneFactory,
             $zoneMemberFactory
         );
@@ -67,10 +72,12 @@ class DefaultFranceChannelFactorySpec extends ObjectBehavior
         $channelRepository,
         $countryRepository,
         $currencyRepository,
+        $localeRepository,
         $zoneMemberRepository,
         $zoneRepository,
         $channelFactory,
         $countryFactory,
+        $localeFactory,
         $currencyFactory,
         $zoneMemberFactory,
         $zoneFactory,
@@ -78,10 +85,13 @@ class DefaultFranceChannelFactorySpec extends ObjectBehavior
         ZoneInterface $zone,
         ChannelInterface $channel,
         CountryInterface $france,
-        CurrencyInterface $euro
+        CurrencyInterface $euro,
+        LocaleInterface $locale
     ) {
         $channel->getName()->willReturn('France');
         $channelFactory->createNamed('France')->willReturn($channel);
+
+        $localeFactory->createNew()->willReturn($locale);
 
         $zoneMemberFactory->createNew()->willReturn($zoneMember);
         $zoneFactory->createNew()->willReturn($zone);
@@ -103,6 +113,8 @@ class DefaultFranceChannelFactorySpec extends ObjectBehavior
         $euro->setBase(true)->shouldBeCalled();
 
         $channel->setDefaultCurrency($euro)->shouldBeCalled();
+        $channel->setDefaultLocale($locale)->shouldBeCalled();
+        $channel->addLocale($locale)->shouldBeCalled();
 
         $currencyRepository->add($euro)->shouldBeCalled();
         $countryRepository->add($france)->shouldBeCalled();
@@ -110,6 +122,7 @@ class DefaultFranceChannelFactorySpec extends ObjectBehavior
         $channelRepository->add($channel)->shouldBeCalled();
         $zoneRepository->add($zone)->shouldBeCalled();
         $zoneMemberRepository->add($zoneMember)->shouldBeCalled();
+        $localeRepository->add($locale)->shouldBeCalled();
 
         $this->create();
     }
