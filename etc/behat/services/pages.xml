@@ -47,6 +47,7 @@
         <parameter key="sylius.behat.page.admin.product.show.class">Sylius\Behat\Page\Admin\Product\ShowPage</parameter>
         <parameter key="sylius.behat.page.admin.product.index.class">Sylius\Behat\Page\Admin\Product\IndexPage</parameter>
         <parameter key="sylius.behat.page.admin.promotion.create.class">Sylius\Behat\Page\Admin\Promotion\CreatePage</parameter>
+        <parameter key="sylius.behat.page.admin.promotion.update.class">Sylius\Behat\Page\Admin\Promotion\UpdatePage</parameter>
         <parameter key="sylius.behat.page.admin.promotion.index.class">Sylius\Behat\Page\Admin\Promotion\IndexPage</parameter>
         <parameter key="sylius.behat.page.admin.shipping_method.show.class">Sylius\Behat\Page\Admin\ShippingMethod\ShowPage</parameter>
         <parameter key="sylius.behat.page.admin.shipping_method.index.class">Sylius\Behat\Page\Admin\ShippingMethod\IndexPage</parameter>
@@ -123,6 +124,9 @@
             <argument type="string">tax_rate</argument>
         </service>
         <service id="sylius.behat.page.admin.promotion.create" class="%sylius.behat.page.admin.promotion.create.class%" parent="sylius.behat.page.admin.crud.create" scope="scenario" public="false">
+            <argument type="string">promotion</argument>
+        </service>
+        <service id="sylius.behat.page.admin.promotion.update" class="%sylius.behat.page.admin.promotion.update.class%" parent="sylius.behat.page.admin.crud.update" scope="scenario" public="false">
             <argument type="string">promotion</argument>
         </service>
         <service id="sylius.behat.page.admin.promotion.index" class="%sylius.behat.page.admin.promotion.index.class%" parent="sylius.behat.page.admin.crud.index" scope="scenario" public="false">

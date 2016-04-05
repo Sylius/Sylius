@@ -14,6 +14,9 @@ namespace Sylius\Behat\Context\Ui\Admin;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Promotion\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Promotion\IndexPageInterface;
+use Sylius\Behat\Page\Admin\Promotion\UpdatePageInterface;
+use Sylius\Behat\Service\CurrentPageResolverInterface;
+use Sylius\Behat\Service\NotificationCheckerInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -21,10 +24,7 @@ use Webmozart\Assert\Assert;
  */
 final class ManagingPromotionsContext implements Context
 {
-    /**
-     * @var CreatePageInterface
-     */
-    private $createPage;
+    const RESOURCE_NAME = 'promotion';
 
     /**
      * @var IndexPageInterface
@@ -32,13 +32,44 @@ final class ManagingPromotionsContext implements Context
     private $indexPage;
 
     /**
-     * @param CreatePageInterface $createPage
-     * @param IndexPageInterface $indexPage
+     * @var CreatePageInterface
      */
-    public function __construct(CreatePageInterface $createPage, IndexPageInterface $indexPage)
-    {
-        $this->createPage = $createPage;
+    private $createPage;
+
+    /**
+     * @var UpdatePageInterface
+     */
+    private $updatePage;
+
+    /**
+     * @var CurrentPageResolverInterface
+     */
+    private $currentPageResolver;
+
+    /**
+     * @var NotificationCheckerInterface
+     */
+    private $notificationChecker;
+
+    /**
+     * @param IndexPageInterface $indexPage
+     * @param CreatePageInterface $createPage
+     * @param UpdatePageInterface $updatePage
+     * @param CurrentPageResolverInterface $currentPageResolver
+     * @param NotificationCheckerInterface $notificationChecker
+     */
+    public function __construct(
+        IndexPageInterface $indexPage,
+        CreatePageInterface $createPage,
+        UpdatePageInterface $updatePage,
+        CurrentPageResolverInterface $currentPageResolver,
+        NotificationCheckerInterface $notificationChecker
+    ) {
         $this->indexPage = $indexPage;
+        $this->createPage = $createPage;
+        $this->updatePage = $updatePage;
+        $this->currentPageResolver = $currentPageResolver;
+        $this->notificationChecker = $notificationChecker;
     }
 
     /**
@@ -51,16 +82,18 @@ final class ManagingPromotionsContext implements Context
 
     /**
      * @When I specify its code as :code
+     * @When I do not specify its code
      */
-    public function iSpecifyItsCodeAs($code)
+    public function iSpecifyItsCodeAs($code = null)
     {
         $this->createPage->specifyCode($code);
     }
 
     /**
      * @When I name it :name
+     * @When I do not name it
      */
-    public function iNameIt($name)
+    public function iNameIt($name = null)
     {
         $this->createPage->nameIt($name);
     }
@@ -75,6 +108,58 @@ final class ManagingPromotionsContext implements Context
         Assert::true(
             $this->indexPage->isResourceOnPage(['name' => $promotionName]),
             sprintf('Promotion with name %s has not been found.', $promotionName)
+        );
+    }
+
+    /**
+     * @When I add it
+     * @When I try to add it
+     */
+    public function iAddIt()
+    {
+        $this->createPage->create();
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully created
+     */
+    public function iShouldBeNotifiedItHasBeenSuccessfulCreation()
+    {
+        $this->notificationChecker->checkCreationNotification(self::RESOURCE_NAME);
+    }
+
+    /**
+     * @Then I should be notified that :element is required
+     */
+    public function iShouldBeNotifiedThatIsRequired($element)
+    {
+        $this->assertFieldValidationMessage($element, sprintf('Please enter promotion %s.', $element));
+    }
+
+    /**
+     * @param string $element
+     * @param string $expectedMessage
+     */
+    private function assertFieldValidationMessage($element, $expectedMessage)
+    {
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm($this->createPage, $this->updatePage);
+
+        Assert::true(
+            $currentPage->checkValidationMessageFor($element, $expectedMessage),
+            sprintf('Promotion %s should be required.', $element)
+        );
+    }
+
+    /**
+     * @Then promotion with :element :name should not be added
+     */
+    public function promotionWithElementValueShouldNotBeAdded($element, $name)
+    {
+        $this->indexPage->open();
+
+        Assert::false(
+            $this->indexPage->isResourceOnPage([$element => $name]),
+            sprintf('Promotion with %s %s has been created, but it should not.', $element, $name)
         );
     }
 }

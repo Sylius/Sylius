@@ -69,6 +69,12 @@ final class MainMenuBuilder extends AbstractAdminMenuBuilder
             ->setLabelAttribute('icon', 'dollar')
         ;
 
+        $child
+            ->addChild('promotions', ['route' => 'sylius_admin_promotion_index'])
+            ->setLabel('sylius.menu.admin.main.configuration.promotions')
+            ->setLabelAttribute('icon', 'in cart')
+        ;
+
         if (!$child->hasChildren()) {
             $menu->removeChild('configuration');
         }

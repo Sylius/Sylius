@@ -3,8 +3,9 @@ sylius:
     admin:
       main:
         configuration:
-          header: Configuration
-          tax_categories: Tax categories
           countries: Countries
+          header: Configuration
           locales: Locales
+          promotions: Promotions
+          tax_categories: Tax categories
           tax_rates: Tax rates

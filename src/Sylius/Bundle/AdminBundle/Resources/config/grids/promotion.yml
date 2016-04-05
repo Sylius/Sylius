@@ -1,0 +1,24 @@
+sylius_grid:
+    grids:
+        sylius_admin_promotion:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: %sylius.model.promotion.class%
+            fields:
+                code:
+                    type: string
+                    label: sylius.ui.code
+                name:
+                    type: string
+                    label: sylius.ui.name
+                usage_limit:
+                    type: string
+                    label: sylius.ui.usage_limit
+                used:
+                    type: string
+                    label: sylius.ui.used
+            actions:
+                main:
+                    create:
+                        type: create
