@@ -11,6 +11,7 @@
 
 namespace Sylius\Behat\Page\Admin\Country;
 
+use Behat\Mink\Element\Element;
 use Sylius\Behat\Behaviour\Toggles;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 
@@ -59,5 +60,49 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'code' => '#sylius_country_code',
             'provinces' => '#sylius_country_provinces',
         ]);
+    }
+
+    /**
+     * @param string $provinceName
+     */
+    public function removeProvince($provinceName)
+    {
+        if ($this->isThereProvince($provinceName)) {
+            $provinces = $this->getElement('provinces');
+
+            $item = $provinces->find('css', 'div[data-form-collection="item"] input[value="'.$provinceName.'"]')->getParent()->getParent();
+            $item->clickLink('Delete');
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function fillProvinceData($name, $code, $abbreviation = null)
+    {
+        $this->getDocument()->clickLink('Add province');
+
+        $provinces = $this->getElement('provinces');
+
+        $provinceForm = $this->getLastProvinceElement();
+        $provincesCount = $provinceForm->getAttribute('data-form-collection-index');
+
+        $provinces->fillField('sylius_country_provinces_'.$provincesCount.'_name', $name);
+        $provinces->fillField('sylius_country_provinces_'.$provincesCount.'_code', $code);
+
+        if (null !== $abbreviation) {
+            $provinces->fillField('sylius_country_provinces_'.$provincesCount.'_abbreviation', $abbreviation);
+        }
+    }
+
+    /**
+     * @return Element
+     */
+    private function getLastProvinceElement()
+    {
+        $provinces = $this->getElement('provinces');
+        $items = $provinces->findAll('css', 'div[data-form-collection="item"]');
+
+        return end($items);
     }
 }

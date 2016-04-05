@@ -8,7 +8,7 @@ Feature: Managing provinces of a country
         Given the store has country "United Kingdom"
         And I am logged in as an administrator
 
-    @todo
+    @ui @javascript
     Scenario: Adding a province to an existing country
         Given I want to edit this country
         When I add the "Scotland" province with "GB-SCT" code
@@ -16,7 +16,7 @@ Feature: Managing provinces of a country
         Then I should be notified about successful edition
         And this country should have the "Scotland" province
 
-    @todo
+    @ui @javascript
     Scenario: Removing a province from an existing country
         Given this country has the "Northern Ireland" province with "GB-NIR" code
         And I want to edit this country
@@ -25,7 +25,7 @@ Feature: Managing provinces of a country
         Then I should be notified about successful edition
         And this country should not have the "Northern Ireland" province
 
-    @todo
+    @ui @javascript
     Scenario: Removing and adding a new province to an existing country
         Given this country has the "Northern Ireland" province with "GB-NIR" code
         And I want to edit this country

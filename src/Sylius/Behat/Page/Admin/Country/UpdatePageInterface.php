@@ -32,4 +32,9 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
      * @return bool
      */
     public function isThereProvince($provinceName);
+
+    /**
+     * @param string $provinceName
+     */
+    public function removeProvince($provinceName);
 }
