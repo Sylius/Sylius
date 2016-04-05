@@ -53,7 +53,8 @@
     <services>
         <!-- checkout forms -->
         <service id="sylius.checkout_form.addressing" class="%sylius.checkout_form.addressing.class%">
-            <argument>%sylius.model.cart.class%</argument>
+            <argument>%sylius.model.order.class%</argument>
+            <argument>%sylius.validation_groups.order%</argument>
             <tag name="form.type" alias="sylius_checkout_addressing" />
         </service>
         <service id="sylius.checkout_form.shipping" class="%sylius.checkout_form.shipping.class%">
