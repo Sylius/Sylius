@@ -12,7 +12,6 @@
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
-use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\Admin\Country\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Country\IndexPageInterface;
@@ -25,7 +24,7 @@ use Webmozart\Assert\Assert;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-final class ManagingCountriesContext implements Context, SnippetAcceptingContext
+final class ManagingCountriesContext implements Context
 {
     const RESOURCE_NAME = 'country';
 

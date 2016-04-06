@@ -37,6 +37,11 @@ final class GeographicalContext implements Context
     private $countryFactory;
 
     /**
+     * @var FactoryInterface
+     */
+    private $provinceFactory;
+
+    /**
      * @var RepositoryInterface
      */
     private $countryRepository;
@@ -47,37 +52,32 @@ final class GeographicalContext implements Context
     private $countryNameConverter;
 
     /**
-     * @var FactoryInterface
-     */
-    private $provinceFactory;
-
-    /**
      * @var ObjectManager
      */
-    private $objectManager;
+    private $countryManager;
 
     /**
      * @param SharedStorageInterface $sharedStorage
      * @param FactoryInterface $countryFactory
+     * @param FactoryInterface $provinceFactory
      * @param RepositoryInterface $countryRepository
      * @param CountryNameConverterInterface $countryNameConverter
-     * @param FactoryInterface $provinceFactory
-     * @param ObjectManager $objectManager
+     * @param ObjectManager $countryManager
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         FactoryInterface $countryFactory,
+        FactoryInterface $provinceFactory,
         RepositoryInterface $countryRepository,
         CountryNameConverterInterface $countryNameConverter,
-        FactoryInterface $provinceFactory,
-        ObjectManager $objectManager
+        ObjectManager $countryManager
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->countryFactory = $countryFactory;
+        $this->provinceFactory = $provinceFactory;
         $this->countryRepository = $countryRepository;
         $this->countryNameConverter = $countryNameConverter;
-        $this->provinceFactory = $provinceFactory;
-        $this->objectManager = $objectManager;
+        $this->countryManager = $countryManager;
     }
 
     /**
@@ -146,6 +146,6 @@ final class GeographicalContext implements Context
         $province->setCode($code);
         $country->addProvince($province);
 
-        $this->objectManager->flush();
+        $this->countryManager->flush();
     }
 }
