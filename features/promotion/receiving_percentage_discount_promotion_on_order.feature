@@ -8,7 +8,7 @@ Feature: Receiving percentage discount promotion on order
         Given the store operates on a single channel in "France"
         And the store has a product "PHP T-Shirt" priced at "€100.00"
         And there is a promotion "Holiday promotion"
-        And it gives "20%" percentage discount to every order
+        And it gives "20%" discount to every order
 
     @ui
     Scenario: Receiving percentage discount for my cart
