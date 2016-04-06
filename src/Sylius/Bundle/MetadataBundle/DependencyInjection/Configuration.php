@@ -12,8 +12,8 @@
 namespace Sylius\Bundle\MetadataBundle\DependencyInjection;
 
 use Sylius\Bundle\MetadataBundle\Controller\MetadataController;
-use Sylius\Bundle\MetadataBundle\Form\Type\MetadataContainerType;
 use Sylius\Bundle\MetadataBundle\Model\MetadataContainer;
+use Sylius\Bundle\MetadataBundle\Form\Type\MetadataContainerType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Metadata\Factory\MetadataContainerFactory;
 use Sylius\Component\Metadata\Model\MetadataContainerInterface;
