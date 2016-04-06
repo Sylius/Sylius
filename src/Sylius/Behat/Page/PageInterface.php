@@ -33,7 +33,7 @@ interface PageInterface
      *
      * @throws UnexpectedPageException
      */
-    public function verify(array $urlParameters);
+    public function verify(array $urlParameters = []);
 
     /**
      * @param array $urlParameters

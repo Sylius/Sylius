@@ -74,11 +74,10 @@ abstract class Page implements PageInterface
     /**
      * {@inheritdoc}
      */
-    public function verify(array $urlParameters)
+    public function verify(array $urlParameters = [])
     {
-        $this->verifyResponse();
+        $this->verifyStatusCode();
         $this->verifyUrl($urlParameters);
-        $this->verifyPage();
     }
 
     /**
@@ -96,45 +95,31 @@ abstract class Page implements PageInterface
     }
 
     /**
-     * @return string
-     */
-    abstract protected function getPath();
-
-    /**
-     * @return string
-     */
-    protected function getName()
-    {
-        return preg_replace('/^.*\\\(.*?)$/', '$1', get_called_class());
-    }
-
-    /**
      * @param array $urlParameters
      *
      * @return string
      */
-    protected function getUrl(array $urlParameters = [])
-    {
-        return $this->unmaskUrl($urlParameters);
-    }
+    abstract protected function getUrl(array $urlParameters = []);
 
     /**
      * @throws UnexpectedPageException
      */
-    protected function verifyResponse()
+    protected function verifyStatusCode()
     {
         try {
             $statusCode = $this->getDriver()->getStatusCode();
-
-            if ($this->isErrorResponse($statusCode)) {
-                $currentUrl = $this->getDriver()->getCurrentUrl();
-                $message = sprintf('Could not open the page: "%s". Received an error status code: %s', $currentUrl, $statusCode);
-
-                throw new UnexpectedPageException($message);
-            }
         } catch (DriverException $exception) {
-            // ignore drivers which cannot check the response status code
+            return; // Ignore drivers which cannot check the response status code
         }
+
+        if ($statusCode >= 200 && $statusCode <= 299) {
+            return;
+        }
+
+        $currentUrl = $this->getDriver()->getCurrentUrl();
+        $message = sprintf('Could not open the page: "%s". Received an error status code: %s', $currentUrl, $statusCode);
+
+        throw new UnexpectedPageException($message);
     }
 
     /**
@@ -149,25 +134,6 @@ abstract class Page implements PageInterface
         if ($this->getDriver()->getCurrentUrl() !== $this->getUrl($urlParameters)) {
             throw new UnexpectedPageException(sprintf('Expected to be on "%s" but found "%s" instead', $this->getUrl($urlParameters), $this->getDriver()->getCurrentUrl()));
         }
-    }
-
-    /**
-     * Overload to verify if we're on an expected page. Throw an exception otherwise.
-     *
-     * @throws UnexpectedPageException
-     */
-    protected function verifyPage()
-    {
-    }
-
-    /**
-     * @param int $statusCode
-     *
-     * @return bool
-     */
-    protected function isErrorResponse($statusCode)
-    {
-        return 400 <= $statusCode && $statusCode < 600;
     }
 
     /**
@@ -239,22 +205,6 @@ abstract class Page implements PageInterface
         }
 
         return $this->document;
-    }
-
-    /**
-     * @param array $urlParameters
-     *
-     * @return string
-     */
-    private function unmaskUrl(array $urlParameters)
-    {
-        $url = $this->getPath();
-
-        foreach ($urlParameters as $parameter => $value) {
-            $url = str_replace(sprintf('{%s}', $parameter), $value, $url);
-        }
-
-        return $url;
     }
 
     /**
