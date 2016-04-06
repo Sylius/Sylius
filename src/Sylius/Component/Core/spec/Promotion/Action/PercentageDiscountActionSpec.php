@@ -49,11 +49,11 @@ class PercentageDiscountActionSpec extends ObjectBehavior
     ) {
         $order->getPromotionSubjectTotal()->willReturn(10000);
         $adjustmentFactory->createNew()->willReturn($adjustment);
-        $promotion->getDescription()->willReturn('promotion description');
+        $promotion->getName()->willReturn('Test promotion');
 
         $adjustment->setAmount(-2500)->shouldBeCalled();
         $adjustment->setType(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)->shouldBeCalled();
-        $adjustment->setLabel('promotion description')->shouldBeCalled();
+        $adjustment->setLabel('Test promotion')->shouldBeCalled();
 
         $originator->setOrigin($adjustment, $promotion)->shouldBeCalled();
 
