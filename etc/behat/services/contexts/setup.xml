@@ -31,6 +31,7 @@
         <parameter key="sylius.behat.context.setup.theme.class">Sylius\Behat\Context\Setup\ThemeContext</parameter>
         <parameter key="sylius.behat.context.setup.user.class">Sylius\Behat\Context\Setup\UserContext</parameter>
         <parameter key="sylius.behat.context.setup.zone.class">Sylius\Behat\Context\Setup\ZoneContext</parameter>
+        <parameter key="sylius.behat.context.setup.zone_member.class">Sylius\Behat\Context\Setup\ZoneMemberContext</parameter>
     </parameters>
 
     <services>
@@ -125,6 +126,7 @@
         </service>
 
         <service id="sylius.behat.context.setup.province" class="%sylius.behat.context.setup.province.class%" scope="scenario">
+            <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
             <argument type="service" id="sylius.factory.province" container="symfony" />
             <argument type="service" id="sylius.repository.province" container="symfony" />
             <tag name="sylius.behat.context" />
@@ -184,9 +186,16 @@
         </service>
 
         <service id="sylius.behat.context.setup.zone" class="%sylius.behat.context.setup.zone.class%" scope="scenario">
+            <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
             <argument type="service" id="sylius.repository.zone" container="symfony" />
             <argument type="service" id="sylius.settings.manager" container="symfony" />
             <argument type="service" id="sylius.factory.zone" container="symfony" />
+            <tag name="sylius.behat.context" />
+        </service>
+
+        <service id="sylius.behat.context.setup.zone_member" class="%sylius.behat.context.setup.zone_member.class%" scope="scenario">
+            <argument type="service" id="doctrine.orm.entity_manager" container="symfony" />
+            <argument type="service" id="sylius.factory.zone_member" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>
     </services>

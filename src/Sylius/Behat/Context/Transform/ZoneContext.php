@@ -44,7 +44,7 @@ final class ZoneContext implements Context
     }
 
     /**
-     * @Transform /^zone named "([^"]+)"$/
+     * @Transform zone named :zoneName
      */
     public function getZoneByName($name)
     {

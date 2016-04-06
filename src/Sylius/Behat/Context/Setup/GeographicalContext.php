@@ -99,6 +99,7 @@ final class GeographicalContext implements Context
     /**
      * @Given /^the store operates in "([^"]*)"$/
      * @Given /^the store has country "([^"]*)"$/
+     * @Given /^the store also has country "([^"]*)"$/
      */
     public function theStoreOperatesIn($countryName)
     {

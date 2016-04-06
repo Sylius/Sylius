@@ -26,6 +26,18 @@ interface CreatePageInterface extends BaseCreatePageInterface
     public function chooseMember($name);
 
     /**
+     * @param string $type
+     *
+     * @return bool
+     */
+    public function hasType($type);
+
+    /**
+     * @return bool
+     */
+    public function isTypeFieldDisabled();
+
+    /**
      * @param string $name
      */
     public function nameIt($name);

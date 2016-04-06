@@ -20,9 +20,29 @@ use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 interface UpdatePageInterface extends BaseUpdatePageInterface
 {
     /**
+     * @param string $name
+     */
+    public function nameIt($name);
+
+    /**
+     * @return int
+     */
+    public function countMembers();
+
+    /**
      * @param ZoneMemberInterface $zoneMember
      *
      * @return bool
      */
     public function hasMember(ZoneMemberInterface $zoneMember);
+
+    /**
+     * @return bool
+     */
+    public function isCodeDisabled();
+
+    /**
+     * @param ZoneMemberInterface $zoneMember
+     */
+    public function removeMember(ZoneMemberInterface $zoneMember);
 }

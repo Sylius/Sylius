@@ -13,6 +13,8 @@ namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
 use Sylius\Component\Addressing\Converter\CountryNameConverterInterface;
+use Sylius\Component\Addressing\Model\ProvinceInterface;
+use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -29,87 +31,38 @@ final class ZoneMemberContext implements Context
     /**
      * @var RepositoryInterface
      */
+    private $provinceRepository;
+
+    /**
+     * @var RepositoryInterface
+     */
+    private $zoneRepository;
+
+    /**
+     * @var RepositoryInterface
+     */
     private $zoneMemberRepository;
 
     /**
-     * @var array
-     */
-    private $provinces = [
-        'AL' => 'Alabama',
-        'AK' => 'Alaska',
-        'AZ' => 'Arizona',
-        'AR' => 'Arkansas',
-        'CA' => 'California',
-        'CO' => 'Colorado',
-        'CT' => 'Connecticut',
-        'DE' => 'Delaware',
-        'DC' => 'District Of Columbia',
-        'FL' => 'Florida',
-        'GA' => 'Georgia',
-        'HI' => 'Hawaii',
-        'ID' => 'Idaho',
-        'IL' => 'Illinois',
-        'IN' => 'Indiana',
-        'IA' => 'Iowa',
-        'KS' => 'Kansas',
-        'KY' => 'Kentucky',
-        'LA' => 'Louisiana',
-        'ME' => 'Maine',
-        'MD' => 'Maryland',
-        'MA' => 'Massachusetts',
-        'MI' => 'Michigan',
-        'MN' => 'Minnesota',
-        'MS' => 'Mississippi',
-        'MO' => 'Missouri',
-        'MT' => 'Montana',
-        'NE' => 'Nebraska',
-        'NV' => 'Nevada',
-        'NH' => 'New Hampshire',
-        'NJ' => 'New Jersey',
-        'NM' => 'New Mexico',
-        'NY' => 'New York',
-        'NC' => 'North Carolina',
-        'ND' => 'North Dakota',
-        'OH' => 'Ohio',
-        'OK' => 'Oklahoma',
-        'OR' => 'Oregon',
-        'PA' => 'Pennsylvania',
-        'RI' => 'Rhode Island',
-        'SC' => 'South Carolina',
-        'SD' => 'South Dakota',
-        'TN' => 'Tennessee',
-        'TX' => 'Texas',
-        'UT' => 'Utah',
-        'VT' => 'Vermont',
-        'VA' => 'Virginia',
-        'WA' => 'Washington',
-        'WV' => 'West Virginia',
-        'WI' => 'Wisconsin',
-        'WY' => 'Wyoming',
-    ];
-
-    /**
-     * @var array
-     */
-    private $zones = [
-        'NA' => 'North America',
-        'SA' => 'South America',
-    ];
-
-    /**
      * @param CountryNameConverterInterface $countryNameConverter
+     * @param RepositoryInterface $provinceRepository
+     * @param RepositoryInterface $zoneRepository
      * @param RepositoryInterface $zoneMemberRepository
      */
     public function __construct(
         CountryNameConverterInterface $countryNameConverter,
+        RepositoryInterface $provinceRepository,
+        RepositoryInterface $zoneRepository,
         RepositoryInterface $zoneMemberRepository
     ) {
         $this->countryNameConverter = $countryNameConverter;
+        $this->provinceRepository = $provinceRepository;
+        $this->zoneRepository = $zoneRepository;
         $this->zoneMemberRepository = $zoneMemberRepository;
     }
 
     /**
-     * @Transform the :name country member
+     * @Transform the :countryName country member
      */
     public function getCountryTypeZoneMemberByName($name)
     {
@@ -124,7 +77,7 @@ final class ZoneMemberContext implements Context
      */
     public function getProvinceTypeZoneMemberByName($name)
     {
-        $provinceCode = $this->convertNameToCode($name, $this->provinces);
+        $provinceCode = $this->getProvinceByName($name)->getCode();
         $provinceTypeZoneMember = $this->getZoneMemberByCode($provinceCode);
 
         return $provinceTypeZoneMember;
@@ -135,7 +88,7 @@ final class ZoneMemberContext implements Context
      */
     public function getZoneTypeZoneMemberByName($name)
     {
-        $zoneCode = $this->convertNameToCode($name, $this->zones);
+        $zoneCode = $this->getZoneByName($name)->getCode();
         $zoneTypeZoneMember = $this->getZoneMemberByCode($zoneCode);
 
         return $zoneTypeZoneMember;
@@ -159,18 +112,33 @@ final class ZoneMemberContext implements Context
 
     /**
      * @param string $name
-     * @param array $codes
      *
-     * @return string
+     * @return ProvinceInterface
      */
-    private function convertNameToCode($name, array $codes)
+    private function getProvinceByName($name)
     {
-        $code = array_search($name, $codes, true);
+        $province = $this->provinceRepository->findOneBy(['name' => $name]);
 
-        if (false === $code) {
-            throw new \RuntimeException(sprintf('Cannot convert name %s to code', $name));
+        if (null === $province) {
+            throw new \InvalidArgumentException(sprintf('Province with name %s does not exist.', $name));
         }
 
-        return $code;
+        return $province;
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return ZoneInterface
+     */
+    private function getZoneByName($name)
+    {
+        $zone = $this->zoneRepository->findOneBy(['name' => $name]);
+
+        if (null === $zone) {
+            throw new \InvalidArgumentException(sprintf('Zone with name %s does not exist.', $name));
+        }
+
+        return $zone;
     }
 }

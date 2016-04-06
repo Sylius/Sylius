@@ -16,6 +16,7 @@ use Sylius\Bundle\AddressingBundle\Factory\ZoneFactoryInterface;
 use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Repository\ZoneRepositoryInterface;
+use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Symfony\Component\Intl\Intl;
 
 /**
@@ -23,6 +24,11 @@ use Symfony\Component\Intl\Intl;
  */
 final class ZoneContext implements Context
 {
+    /**
+     * @var SharedStorageInterface
+     */
+    private $sharedStorage;
+
     /**
      * @var array
      */
@@ -48,15 +54,18 @@ final class ZoneContext implements Context
     private $zoneFactory;
 
     /**
+     * @param SharedStorageInterface $sharedStorage
      * @param ZoneRepositoryInterface $zoneRepository
      * @param SettingsManagerInterface $settingsManager
      * @param ZoneFactoryInterface $zoneFactory
      */
     public function __construct(
+        SharedStorageInterface $sharedStorage,
         ZoneRepositoryInterface $zoneRepository,
         SettingsManagerInterface $settingsManager,
         ZoneFactoryInterface $zoneFactory
     ) {
+        $this->sharedStorage = $sharedStorage;
         $this->zoneRepository = $zoneRepository;
         $this->settingsManager = $settingsManager;
         $this->zoneFactory = $zoneFactory;
@@ -117,6 +126,7 @@ final class ZoneContext implements Context
 
     /**
      * @Given the store has a zone :zoneName with code :code
+     * @Given the store also has a zone :zoneName with code :code
      */
     public function theStoreHasAZoneWithCode($zoneName, $code)
     {
@@ -124,6 +134,7 @@ final class ZoneContext implements Context
         $zone->setCode($code);
         $zone->setName($zoneName);
 
+        $this->sharedStorage->set('zone', $zone);
         $this->zoneRepository->add($zone);
     }
 }

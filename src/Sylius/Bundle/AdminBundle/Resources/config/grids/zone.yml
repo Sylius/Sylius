@@ -22,3 +22,6 @@ sylius_grid:
                 main:
                     create:
                         type: create_zone
+                item:
+                    delete:
+                        type: delete

@@ -19,6 +19,11 @@ use Sylius\Behat\Page\PageInterface;
 interface IndexPageInterface extends PageInterface
 {
     /**
+     * @return int
+     */
+    public function countAllResourcesOnPage();
+
+    /**
      * @param array $parameters
      *
      * @return bool

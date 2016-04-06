@@ -24,6 +24,7 @@
         <parameter key="sylius.behat.context.transform.product.class">Sylius\Behat\Context\Transform\ProductContext</parameter>
         <parameter key="sylius.behat.context.transform.product_variant.class">Sylius\Behat\Context\Transform\ProductVariantContext</parameter>
         <parameter key="sylius.behat.context.transform.promotion.class">Sylius\Behat\Context\Transform\PromotionContext</parameter>
+        <parameter key="sylius.behat.context.transform.province.class">Sylius\Behat\Context\Transform\ProvinceContext</parameter>
         <parameter key="sylius.behat.context.transform.shared_storage.class">Sylius\Behat\Context\Transform\SharedStorageContext</parameter>
         <parameter key="sylius.behat.context.transform.shipping_method.class">Sylius\Behat\Context\Transform\ShippingMethodContext</parameter>
         <parameter key="sylius.behat.context.transform.tax_category.class">Sylius\Behat\Context\Transform\TaxCategoryContext</parameter>
@@ -93,6 +94,11 @@
             <tag name="sylius.behat.context" />
         </service>
 
+        <service id="sylius.behat.context.transform.province" class="%sylius.behat.context.transform.province.class%" scope="scenario">
+            <argument type="service" id="sylius.repository.province" container="symfony" />
+            <tag name="sylius.behat.context" />
+        </service>
+
         <service id="sylius.behat.context.transform.shared_storage" class="%sylius.behat.context.transform.shared_storage.class%" scope="scenario">
             <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
             <tag name="sylius.behat.context" />
@@ -135,6 +141,8 @@
 
         <service id="sylius.behat.context.transform.zone_member" class="%sylius.behat.context.transform.zone_member.class%" scope="scenario">
             <argument type="service" id="sylius.converter.country_name" container="symfony" />
+            <argument type="service" id="sylius.repository.province" container="symfony" />
+            <argument type="service" id="sylius.repository.zone" container="symfony" />
             <argument type="service" id="sylius.repository.zone_member" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>

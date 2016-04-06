@@ -12,14 +12,20 @@
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class ProvinceContext implements Context
+final class ProvinceContext implements Context
 {
+    /**
+     * @var SharedStorageInterface
+     */
+    private $sharedStorage;
+
     /**
      * @var FactoryInterface
      */
@@ -31,11 +37,13 @@ class ProvinceContext implements Context
     private $provinceRepository;
 
     /**
+     * @param SharedStorageInterface $sharedStorage
      * @param FactoryInterface $provinceFactory
      * @param RepositoryInterface $provinceRepository
      */
-    public function __construct(FactoryInterface $provinceFactory, RepositoryInterface $provinceRepository)
+    public function __construct(SharedStorageInterface $sharedStorage, FactoryInterface $provinceFactory, RepositoryInterface $provinceRepository)
     {
+        $this->sharedStorage = $sharedStorage;
         $this->provinceFactory = $provinceFactory;
         $this->provinceRepository = $provinceRepository;
     }
@@ -49,6 +57,7 @@ class ProvinceContext implements Context
         $province->setName($provinceName);
         $province->setCode($code);
 
+        $this->sharedStorage->set('province', $province);
         $this->provinceRepository->add($province);
     }
 }
