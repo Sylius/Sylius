@@ -11,6 +11,7 @@
 
 namespace Sylius\Behat\Page\Admin\Customer;
 
+use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\PageInterface;
 
 /**
@@ -28,6 +29,8 @@ interface ShowPageInterface extends PageInterface
 
     /**
      * Deletes the user on whose show page we are currently on.
+     *
+     * @throws ElementNotFoundException If there is no delete account button on the page
      */
     public function deleteAccount();
 }

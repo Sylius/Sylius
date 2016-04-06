@@ -40,11 +40,15 @@ interface CartSummaryPageInterface extends PageInterface
 
     /**
      * @param string $productName
+     *
+     * @return string
      */
     public function getItemRegularPrice($productName);
 
     /**
      * @param string $productName
+     *
+     * @return string
      */
     public function getItemDiscountPrice($productName);
 

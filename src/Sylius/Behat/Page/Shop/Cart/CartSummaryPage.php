@@ -63,8 +63,7 @@ class CartSummaryPage extends SymfonyPage implements CartSummaryPageInterface
      */
     public function getItemRegularPrice($productName)
     {
-        $this->elements['regular price'] = '#cart-summary tr:contains("'.$productName.'") .regular-price';
-        $regularPriceElement = $this->getElement('regular price');
+        $regularPriceElement = $this->getElement('product regular price', ['%name%' => $productName]);
 
         return trim($regularPriceElement->getText());
     }
@@ -74,8 +73,7 @@ class CartSummaryPage extends SymfonyPage implements CartSummaryPageInterface
      */
     public function getItemDiscountPrice($productName)
     {
-        $this->elements['discount price'] = '#cart-summary tr:contains("'.$productName.'") .discount-price';
-        $discountPriceElement = $this->getElement('discount price');
+        $discountPriceElement = $this->getElement('product discount price', ['%name%' => $productName]);
 
         return trim($discountPriceElement->getText());
     }
@@ -85,9 +83,7 @@ class CartSummaryPage extends SymfonyPage implements CartSummaryPageInterface
      */
     public function isItemDiscounted($productName)
     {
-        $this->elements['discount price'] = '#cart-summary tr:contains("'.$productName.'") .discount-price';
-
-        return $this->hasElement('discount price');
+        return $this->hasElement('product discount price', ['%name%' => $productName]);
     }
 
     /**
@@ -95,8 +91,8 @@ class CartSummaryPage extends SymfonyPage implements CartSummaryPageInterface
      */
     public function removeProduct($productName)
     {
-        $item = $this->getDocument()->find('css', sprintf('#cart-summary tbody tr:contains("%s")', $productName));
-        $item->find('css', 'a.btn-danger')->click();
+        $itemElement = $this->getElement('product row', ['%name%' => $productName]);
+        $itemElement->find('css', 'a.btn-danger')->click();
     }
 
     /**
@@ -104,9 +100,8 @@ class CartSummaryPage extends SymfonyPage implements CartSummaryPageInterface
      */
     public function changeQuantity($productName, $quantity)
     {
-        $item = $this->getDocument()->find('css', sprintf('#cart-summary tbody tr:contains("%s")', $productName));
-        $field = $item->find('css', 'input[type=number]');
-        $field->setValue($quantity);
+        $itemElement = $this->getElement('product row', ['%name%' => $productName]);
+        $itemElement->find('css', 'input[type=number]')->setValue($quantity);
 
         $this->getDocument()->pressButton('Save');
     }
@@ -129,6 +124,9 @@ class CartSummaryPage extends SymfonyPage implements CartSummaryPageInterface
             'promotion total' => '#cart-summary td:contains("Promotion total")',
             'shipping total' => '#cart-summary td:contains("Shipping total")',
             'tax total' => '#cart-summary td:contains("Tax total")',
+            'product row' => '#cart-summary tbody tr:contains("%name%")',
+            'product regular price' => '#cart-summary tr:contains("%name%") .regular-price',
+            'product discount price' => '#cart-summary tr:contains("%name%") .discount-price',
         ]);
     }
 }
