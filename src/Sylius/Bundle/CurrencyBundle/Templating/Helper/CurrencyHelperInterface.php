@@ -37,4 +37,9 @@ interface CurrencyHelperInterface
      * @return string
      */
     public function convertAndFormatAmount($amount, $currency = null, $decimal = false);
+
+    /**
+     * @return string
+     */
+    public function getCurrentCurrencySymbol();
 }

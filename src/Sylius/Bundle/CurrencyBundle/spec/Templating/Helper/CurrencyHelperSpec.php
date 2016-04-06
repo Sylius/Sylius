@@ -12,12 +12,15 @@
 namespace spec\Sylius\Bundle\CurrencyBundle\Templating\Helper;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelper;
 use Sylius\Bundle\MoneyBundle\Templating\Helper\MoneyHelperInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
 use Symfony\Component\Templating\Helper\Helper;
 
 /**
+ * @mixin CurrencyHelper
+ * 
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  */
 class CurrencyHelperSpec extends ObjectBehavior
@@ -55,5 +58,12 @@ class CurrencyHelperSpec extends ObjectBehavior
         $this->convertAmount(2500, 'USD')->shouldReturn(1913);
         $this->convertAmount(312, 'PLN')->shouldReturn(407);
         $this->convertAmount(500)->shouldReturn(653);
+    }
+
+    function it_provides_current_currency(CurrencyContextInterface $currencyContext)
+    {
+        $currencyContext->getCurrency()->willReturn('PLN');
+
+        $this->getCurrentCurrencySymbol()->shouldReturn('PLN');
     }
 }
