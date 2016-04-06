@@ -72,10 +72,10 @@ final class TableAccessor implements TableAccessorInterface
         $rows = $table->findAll('css', 'tr');
         foreach ($rows as $row) {
             /** @var NodeElement[] $columns */
-            $columns = $row->findAll('css', 'th,td');
+            $columns = $row->findAll('css', 'td');
             foreach ($fields as $index => $searchedValue) {
                 if (!isset($columns[$index])) {
-                    throw new \InvalidArgumentException(sprintf('There is no column with index %d', $index));
+                    continue 2;
                 }
 
                 $containing = false;
