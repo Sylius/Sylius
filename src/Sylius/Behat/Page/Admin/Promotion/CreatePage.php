@@ -39,7 +39,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      */
     public function selectRuleOption($option, $value, $multiple = false)
     {
-        $this->getLastAddedRule()->find('named', array('select', $option))->selectOption($value, $multiple);
+        $this->getLastAddedCollectionItem('rules')->find('named', array('select', $option))->selectOption($value, $multiple);
     }
 
     /**
@@ -47,7 +47,33 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      */
     public function fillRuleOption($option, $value)
     {
-        $this->getLastAddedRule()->fillField($option, $value);
+        $this->getLastAddedCollectionItem('rules')->fillField($option, $value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addAction($actionName)
+    {
+        $this->getDocument()->clickLink('Add action');
+
+        $this->selectActionOption('Type', $actionName);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function selectActionOption($option, $value, $multiple = false)
+    {
+        $this->getLastAddedCollectionItem('actions')->find('named', array('select', $option))->selectOption($value, $multiple);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function fillActionOption($option, $value)
+    {
+        $this->getLastAddedCollectionItem('actions')->fillField($option, $value);
     }
 
     /**
@@ -56,6 +82,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     protected function getDefinedElements()
     {
         return [
+            'actions' => '#sylius_promotion_actions',
             'code' => '#sylius_promotion_code',
             'name' => '#sylius_promotion_name',
             'rules' => '#sylius_promotion_rules',
@@ -63,11 +90,13 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     }
 
     /**
-     * @return mixed
+     * @param string $collection
+     *
+     * @return NodeElement
      */
-    private function getLastAddedRule()
+    private function getLastAddedCollectionItem($collection)
     {
-        $rules = $this->getElement('rules')->findAll('css', 'div[data-form-collection="item"]');
+        $rules = $this->getElement($collection)->findAll('css', 'div[data-form-collection="item"]');
 
         return end($rules);
     }
