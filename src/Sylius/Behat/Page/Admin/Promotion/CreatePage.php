@@ -26,5 +26,40 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     protected $elements = [
         'code' => '#sylius_promotion_code',
         'name' => '#sylius_promotion_name',
+        'rules' => '#sylius_promotion_rules',
     ];
+
+    private $rulesCount = 0;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addRule($ruleName)
+    {
+        $this->getDocument()->clickLink('Add rule');
+
+        $rules = $this->getElement('rules');
+
+        $rules->selectFieldOption('sylius_promotion_rules_'.$this->rulesCount.'_type', $ruleName);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function selectRuleOption($option, $value)
+    {
+        $rules = $this->getElement('rules');
+
+        $rules->selectFieldOption('sylius_promotion_rules_'.$this->rulesCount.'_configuration_'.$option, $value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function fillRuleOption($option, $value)
+    {
+        $rules = $this->getElement('rules');
+
+        $rules->fillField('sylius_promotion_rules_'.$this->rulesCount.'_configuration_'.$option, $value);
+    }
 }

@@ -128,6 +128,10 @@ sylius:
             type: Association type
         product_association_type:
             name: Name
+        rule:
+            contains_taxon_configuration:
+                taxon: Taxon
+                count: Count
 
     email:
         order_confirmation:

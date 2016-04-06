@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\TaxonomyBundle\Doctrine\ORM;
 
-use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 
 /**
@@ -78,5 +78,13 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
         ;
 
         return $queryBuilder->getQuery()->getResult();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFormQueryBuilder()
+    {
+        return $this->createQueryBuilder('o');
     }
 }

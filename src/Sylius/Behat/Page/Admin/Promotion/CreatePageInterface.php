@@ -27,4 +27,21 @@ interface CreatePageInterface extends BaseCreatePageInterface
      * @param string $name
      */
     public function nameIt($name);
+
+    /**
+     * @param string $ruleName
+     */
+    public function addRule($ruleName);
+
+    /**
+     * @param string $option
+     * @param string $value
+     */
+    public function selectRuleOption($option, $value);
+
+    /**
+     * @param string $option
+     * @param string $value
+     */
+    public function fillRuleOption($option, $value);
 }

@@ -72,7 +72,6 @@ class ContainsTaxonRuleChecker implements RuleCheckerInterface
      */
     public function getConfigurationFormType()
     {
-        // it will be implemented after moving promotions to new backend UI
-        return null;
+        return 'sylius_promotion_rule_contains_taxon_configuration';
     }
 }

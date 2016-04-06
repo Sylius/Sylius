@@ -121,6 +121,16 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
+     * @Given I add the "Contains taxon" rule configured with :count :taxonName
+     */
+    public function iAddTheContainsTaxonRuleConfiguredWith($count, $taxonName)
+    {
+        $this->createPage->addRule('Contains taxon');
+        $this->createPage->selectRuleOption('taxon', $taxonName);
+        $this->createPage->fillRuleOption('count', $count);
+    }
+
+    /**
      * @Then I should be notified that it has been successfully created
      */
     public function iShouldBeNotifiedItHasBeenSuccessfulCreation()
