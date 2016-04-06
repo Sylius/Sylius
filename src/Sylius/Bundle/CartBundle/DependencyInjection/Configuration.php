@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CartBundle\DependencyInjection;
 
 use Sylius\Bundle\CartBundle\Controller\CartController;
 use Sylius\Bundle\CartBundle\Controller\CartItemController;
+use Sylius\Bundle\CartBundle\Doctrine\ORM\CartRepository;
 use Sylius\Bundle\CartBundle\Form\Type\CartItemType;
 use Sylius\Bundle\CartBundle\Form\Type\CartType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
@@ -78,6 +79,7 @@ class Configuration implements ConfigurationInterface
                                     ->addDefaultsIfNotSet()
                                     ->children()
                                         ->scalarNode('model')->defaultValue(Cart::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->defaultValue(CartRepository::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(CartInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(CartController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->cannotBeEmpty()->end()
