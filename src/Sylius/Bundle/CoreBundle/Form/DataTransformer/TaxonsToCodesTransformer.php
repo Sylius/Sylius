@@ -61,20 +61,23 @@ class TaxonsToCodesTransformer implements DataTransformerInterface
             throw new UnexpectedTypeException($value, Collection::class);
         }
 
-        if ($value->isEmpty() || null === $value->get('taxons')) {
+        $taxons = $value->get('taxons');
+
+        if (null === $taxons) {
             return [];
         }
 
-        if (!is_array($value->get('taxons'))) {
-            throw new \InvalidArgumentException('"taxons" element of collection should be an array.');
+        if (!(is_array($taxons) || $taxons instanceof \Traversable)) {
+            throw new \InvalidArgumentException('"taxons" element of collection should be Traversable');
         }
 
-        $taxons = [];
+        $taxonCodes = [];
+
         /** @var TaxonInterface $taxon */
-        foreach ($value->get('taxons') as $taxon) {
-            $taxons[] = $taxon->getCode();
+        foreach ($taxons as $taxon) {
+            $taxonCodes[] = $taxon->getCode();
         }
 
-        return ['taxons' => $taxons];
+        return ['taxons' => $taxonCodes];
     }
 }
