@@ -45,15 +45,11 @@ class ShippingMethodChoiceTypeSpec extends ObjectBehavior
         $this->shouldHaveType(AbstractType::class);
     }
 
-    function it_builds_a_form(FormBuilderInterface $builder)
+    function it_adds_transformer_if_options_multiple_is_set(FormBuilderInterface $builder)
     {
-        $builder->addModelTransformer(
-            Argument::type(CollectionToArrayTransformer::class)
-        )->shouldBeCalled();
+        $builder->addModelTransformer(Argument::type(CollectionToArrayTransformer::class))->shouldBeCalled();
 
-        $this->buildForm($builder, [
-            'multiple' => true,
-        ]);
+        $this->buildForm($builder, ['multiple' => true]);
     }
 
     function it_has_options(OptionsResolver $resolver)
