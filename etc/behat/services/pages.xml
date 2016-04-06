@@ -40,6 +40,9 @@
         <parameter key="sylius.behat.page.admin.country.create.class">Sylius\Behat\Page\Admin\Country\CreatePage</parameter>
         <parameter key="sylius.behat.page.admin.country.index.class">Sylius\Behat\Page\Admin\Country\IndexPage</parameter>
         <parameter key="sylius.behat.page.admin.country.update.class">Sylius\Behat\Page\Admin\Country\UpdatePage</parameter>
+        <parameter key="sylius.behat.page.admin.customer.create.class">Sylius\Behat\Page\Admin\Customer\CreatePage</parameter>
+        <parameter key="sylius.behat.page.admin.customer.index.class">Sylius\Behat\Page\Admin\Crud\IndexPage</parameter>
+        <parameter key="sylius.behat.page.admin.customer.update.class">Sylius\Behat\Page\Admin\Customer\UpdatePage</parameter>
         <parameter key="sylius.behat.page.admin.customer.show.class">Sylius\Behat\Page\Admin\Customer\ShowPage</parameter>
         <parameter key="sylius.behat.page.admin.locale.create.class">Sylius\Behat\Page\Admin\Locale\CreatePage</parameter>
         <parameter key="sylius.behat.page.admin.locale.index.class">Sylius\Behat\Page\Admin\Locale\IndexPage</parameter>
@@ -74,7 +77,6 @@
         <service id="sylius.behat.page.admin.crud.create" class="%sylius.behat.page.admin.crud.create.class%" parent="sylius.behat.symfony_page" abstract="true" scope="scenario" public="false" />
         <service id="sylius.behat.page.admin.crud.update" class="%sylius.behat.page.admin.crud.update.class%" parent="sylius.behat.symfony_page" abstract="true" scope="scenario" public="false" />
 
-        <service id="sylius.behat.page.admin.customer.show" class="%sylius.behat.page.admin.customer.show.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
         <service id="sylius.behat.page.admin.channel.create" class="%sylius.behat.page.admin.channel.create.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
         <service id="sylius.behat.page.admin.channel.update" class="%sylius.behat.page.admin.channel.update.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
         <service id="sylius.behat.page.admin.channel.index" class="%sylius.behat.page.admin.channel.index.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false">
@@ -93,6 +95,16 @@
         <service id="sylius.behat.page.admin.country.update" class="%sylius.behat.page.admin.country.update.class%" parent="sylius.behat.page.admin.crud.update" scope="scenario" public="false">
             <argument type="string">country</argument>
         </service>
+        <service id="sylius.behat.page.admin.customer.create" class="%sylius.behat.page.admin.customer.create.class%" parent="sylius.behat.page.admin.crud.create" scope="scenario" public="false">
+            <argument type="string">customer</argument>
+        </service>
+        <service id="sylius.behat.page.admin.customer.index" class="%sylius.behat.page.admin.customer.index.class%" parent="sylius.behat.page.admin.crud.index" scope="scenario" public="false">
+            <argument type="string">customer</argument>
+        </service>
+        <service id="sylius.behat.page.admin.customer.update" class="%sylius.behat.page.admin.customer.update.class%" parent="sylius.behat.page.admin.crud.update" scope="scenario" public="false">
+            <argument type="string">customer</argument>
+        </service>
+        <service id="sylius.behat.page.admin.customer.show" class="%sylius.behat.page.admin.customer.show.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
         <service id="sylius.behat.page.admin.locale.create" class="%sylius.behat.page.admin.locale.create.class%" parent="sylius.behat.page.admin.crud.create" scope="scenario" public="false">
             <argument type="string">locale</argument>
         </service>
