@@ -75,7 +75,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function fillProvinceData($name, $code, $abbreviation = null)
+    public function addProvince($name, $code, $abbreviation = null)
     {
         $this->getDocument()->clickLink('Add province');
 
@@ -84,7 +84,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         $provinceForm = $this->getLastProvinceElement();
         $provincesCount = $provinceForm->getAttribute('data-form-collection-index');
 
-        $provinces->fillField('sylius_country_provinces_'.$provincesCount.'_name', $name);
+        $provinceForm->fillField('sylius_country_provinces_'.$provincesCount.'_name', $name);
         $provinces->fillField('sylius_country_provinces_'.$provincesCount.'_code', $code);
 
         if (null !== $abbreviation) {

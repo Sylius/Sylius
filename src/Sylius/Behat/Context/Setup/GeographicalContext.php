@@ -54,7 +54,7 @@ final class GeographicalContext implements Context
     /**
      * @var ObjectManager
      */
-    private $objectManager;
+    private $countryManager;
 
     /**
      * @param SharedStorageInterface $sharedStorage
@@ -62,7 +62,7 @@ final class GeographicalContext implements Context
      * @param RepositoryInterface $countryRepository
      * @param CountryNameConverterInterface $countryNameConverter
      * @param FactoryInterface $provinceFactory
-     * @param ObjectManager $objectManager
+     * @param ObjectManager $countryManager
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -70,14 +70,14 @@ final class GeographicalContext implements Context
         RepositoryInterface $countryRepository,
         CountryNameConverterInterface $countryNameConverter,
         FactoryInterface $provinceFactory,
-        ObjectManager $objectManager
+        ObjectManager $countryManager
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->countryFactory = $countryFactory;
         $this->countryRepository = $countryRepository;
         $this->countryNameConverter = $countryNameConverter;
         $this->provinceFactory = $provinceFactory;
-        $this->objectManager = $objectManager;
+        $this->countryManager = $countryManager;
     }
 
     /**
@@ -146,6 +146,6 @@ final class GeographicalContext implements Context
         $province->setCode($code);
         $country->addProvince($province);
 
-        $this->objectManager->flush();
+        $this->countryManager->flush();
     }
 }

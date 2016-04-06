@@ -12,7 +12,6 @@
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
-use Behat\Behat\Context\SnippetAcceptingContext;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\Admin\Country\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Country\IndexPageInterface;
@@ -20,13 +19,12 @@ use Sylius\Behat\Page\Admin\Country\UpdatePageInterface;
 use Sylius\Behat\Service\CurrentPageResolverInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
-use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Webmozart\Assert\Assert;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-final class ManagingCountriesContext implements Context, SnippetAcceptingContext
+final class ManagingCountriesContext implements Context
 {
     const RESOURCE_NAME = 'country';
 
@@ -109,7 +107,7 @@ final class ManagingCountriesContext implements Context, SnippetAcceptingContext
     {
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm($this->countryCreatePage, $this->countryUpdatePage);
 
-        $currentPage->fillProvinceData($provinceName, $provinceCode, $provinceAbbreviation);
+        $currentPage->addProvince($provinceName, $provinceCode, $provinceAbbreviation);
     }
 
     /**
