@@ -22,17 +22,20 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     use Toggles;
 
     /**
-     * @var array
-     */
-    protected $elements = [
-        'enabled' => '#sylius_locale_enabled',
-    ];
-
-    /**
      * {@inheritdoc}
      */
     protected function getToggleableElement()
     {
         return $this->getElement('enabled');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getDefinedElements()
+    {
+        return array_merge(parent::getDefinedElements(), [
+            'enabled' => '#sylius_locale_enabled',
+        ]);
     }
 }

@@ -23,13 +23,6 @@ use Symfony\Component\Routing\RouterInterface;
 class IndexPage extends SymfonyPage implements IndexPageInterface
 {
     /**
-     * @var array
-     */
-    protected $elements = [
-        'table' => '.table',
-    ];
-
-    /**
      * @var TableAccessorInterface
      */
     private $tableAccessor;
@@ -111,5 +104,15 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     protected function getTableAccessor()
     {
         return $this->tableAccessor;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getDefinedElements()
+    {
+        return array_merge(parent::getDefinedElements(), [
+            'table' => '.table',
+        ]);
     }
 }

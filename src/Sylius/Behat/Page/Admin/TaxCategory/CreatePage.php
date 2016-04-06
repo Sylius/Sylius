@@ -26,10 +26,13 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     use DescribesIt;
 
     /**
-     * @var array
+     * {@inheritdoc}
      */
-    protected $elements = [
-        'code' => '#sylius_tax_category_code',
-        'name' => '#sylius_tax_category_name',
-    ];
+    protected function getDefinedElements()
+    {
+        return array_merge(parent::getDefinedElements(), [
+            'code' => '#sylius_tax_category_code',
+            'name' => '#sylius_tax_category_name',
+        ]);
+    }
 }

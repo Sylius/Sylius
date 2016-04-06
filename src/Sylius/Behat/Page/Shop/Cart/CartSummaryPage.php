@@ -19,16 +19,6 @@ use Sylius\Behat\Page\SymfonyPage;
 class CartSummaryPage extends SymfonyPage implements CartSummaryPageInterface
 {
     /**
-     * @var array
-     */
-    protected $elements = [
-        'grand total' => '#cart-summary td:contains("Grand total")',
-        'promotion total' => '#cart-summary td:contains("Promotion total")',
-        'shipping total' => '#cart-summary td:contains("Shipping total")',
-        'tax total' => '#cart-summary td:contains("Tax total")',
-    ];
-
-    /**
      * {@inheritdoc}
      */
     public function getGrandTotal()
@@ -127,5 +117,18 @@ class CartSummaryPage extends SymfonyPage implements CartSummaryPageInterface
     protected function getRouteName()
     {
         return 'sylius_cart_summary';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getDefinedElements()
+    {
+        return array_merge(parent::getDefinedElements(), [
+            'grand total' => '#cart-summary td:contains("Grand total")',
+            'promotion total' => '#cart-summary td:contains("Promotion total")',
+            'shipping total' => '#cart-summary td:contains("Shipping total")',
+            'tax total' => '#cart-summary td:contains("Tax total")',
+        ]);
     }
 }

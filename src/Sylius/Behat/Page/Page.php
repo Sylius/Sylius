@@ -25,11 +25,6 @@ use Behat\Mink\Session;
 abstract class Page implements PageInterface
 {
     /**
-     * @var array
-     */
-    protected $elements = [];
-
-    /**
      * @var Session
      */
     private $session;
@@ -147,6 +142,18 @@ abstract class Page implements PageInterface
     }
 
     /**
+     * Defines elements by returning an array with items being:
+     *  - :elementName => :cssLocator
+     *  - :elementName => [:selectorType => :locator]
+     *
+     * @return array
+     */
+    protected function getDefinedElements()
+    {
+        return [];
+    }
+
+    /**
      * @param string $name
      *
      * @return NodeElement
@@ -214,14 +221,20 @@ abstract class Page implements PageInterface
      */
     private function createElement($name)
     {
-        if (isset($this->elements[$name])) {
-            return new NodeElement(
-                $this->getSelectorAsXpath($this->elements[$name], $this->session->getSelectorsHandler()),
-                $this->session
-            );
+        $definedElements = $this->getDefinedElements();
+
+        if (!isset($definedElements[$name])) {
+            throw new \InvalidArgumentException(sprintf(
+                'Could not find a defined element with name "%s". The defined ones are: %s.',
+                $name,
+                implode(', ', array_keys($definedElements))
+            ));
         }
 
-        throw new \InvalidArgumentException();
+        return new NodeElement(
+            $this->getSelectorAsXpath($definedElements[$name], $this->session->getSelectorsHandler()),
+            $this->session
+        );
     }
 
     /**

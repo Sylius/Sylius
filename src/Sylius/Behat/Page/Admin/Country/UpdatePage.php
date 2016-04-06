@@ -22,14 +22,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     use Toggles;
 
     /**
-     * @var array
-     */
-    protected $elements = [
-        'enabled' => '#sylius_country_enabled',
-        'code' => '#sylius_country_code',
-    ];
-
-    /**
      * {@inheritdoc}
      */
     public function isCodeFieldDisabled()
@@ -45,5 +37,16 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     protected function getToggleableElement()
     {
         return $this->getElement('enabled');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getDefinedElements()
+    {
+        return array_merge(parent::getDefinedElements(), [
+            'enabled' => '#sylius_country_enabled',
+            'code' => '#sylius_country_code',
+        ]);
     }
 }
