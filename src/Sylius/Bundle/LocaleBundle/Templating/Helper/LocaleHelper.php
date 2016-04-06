@@ -12,12 +12,13 @@
 namespace Sylius\Bundle\LocaleBundle\Templating\Helper;
 
 use Sylius\Component\Locale\Context\LocaleContextInterface;
+use Symfony\Component\Intl\Intl;
 use Symfony\Component\Templating\Helper\Helper;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class LocaleHelper extends Helper
+final class LocaleHelper extends Helper implements LocaleHelperInterface
 {
     /**
      * @var LocaleContextInterface
@@ -33,11 +34,21 @@ class LocaleHelper extends Helper
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getCurrentLocale()
     {
         return $this->localeContext->getCurrentLocale();
+    }
+
+    /**
+     * @param string $localeCode
+     *
+     * @return string|null
+     */
+    public function convertToName($localeCode)
+    {
+        return Intl::getLocaleBundle()->getLocaleName($localeCode, $this->getCurrentLocale());
     }
 
     /**
