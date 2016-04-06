@@ -56,7 +56,7 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
     {
         $foundedElement = $this->getElement($element)->getParent()->find('css', '.pointing');
         if (null === $foundedElement) {
-            throw new ElementNotFoundException($this->getSession(), 'Tag', 'css', '.pointing');
+            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.pointing');
         }
 
         return $message === $foundedElement->getText();

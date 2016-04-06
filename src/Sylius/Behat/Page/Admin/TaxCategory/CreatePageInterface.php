@@ -12,7 +12,6 @@
 namespace Sylius\Behat\Page\Admin\TaxCategory;
 
 use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
-use Sylius\Behat\Page\ElementNotFoundException;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>

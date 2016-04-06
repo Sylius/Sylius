@@ -11,8 +11,8 @@
 
 namespace Sylius\Behat\Page\Admin\Customer;
 
-use Sylius\Behat\Page\ElementNotFoundException;
 use Sylius\Behat\Page\SymfonyPage;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
@@ -36,9 +36,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     {
         $deleteButton = $this->getDocument()->find('css', '.delete-action-form');
 
-        if (null === $deleteButton) {
-            throw new ElementNotFoundException('Element not found.');
-        }
+        Assert::notNull($deleteButton, 'Delete button not found');
 
         $deleteButton->press();
 

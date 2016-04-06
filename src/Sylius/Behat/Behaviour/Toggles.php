@@ -12,7 +12,6 @@
 namespace Sylius\Behat\Behaviour;
 
 use Behat\Mink\Element\NodeElement;
-use Sylius\Behat\Page\ElementNotFoundException;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -21,14 +20,11 @@ trait Toggles
 {
     /**
      * @return NodeElement
-     *
-     * @throws ElementNotFoundException
      */
     abstract protected function getToggleableElement();
 
     /**
-     * @throws ElementNotFoundException
-     * @throws \RuntimeException
+     * @throws \RuntimeException If already enabled
      */
     public function enable()
     {
@@ -39,8 +35,7 @@ trait Toggles
     }
 
     /**
-     * @throws ElementNotFoundException
-     * @throws \RuntimeException
+     * @throws \RuntimeException If already disabled
      */
     public function disable()
     {

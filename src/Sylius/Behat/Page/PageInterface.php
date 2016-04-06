@@ -11,8 +11,6 @@
 
 namespace Sylius\Behat\Page;
 
-use Behat\Mink\Element\NodeElement;
-
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
@@ -43,11 +41,4 @@ interface PageInterface
      * @return bool
      */
     public function isOpen(array $urlParameters = []);
-
-    /**
-     * @param string $name
-     *
-     * @return NodeElement
-     */
-    public function getElement($name);
 }

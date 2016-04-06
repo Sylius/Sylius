@@ -12,7 +12,7 @@
 namespace Sylius\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\Page\ElementNotFoundException;
+use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\Shop\Cart\CartSummaryPageInterface;
 use Sylius\Behat\Page\Shop\Product\ShowPageInterface;
 use Sylius\Component\Core\Model\ProductInterface;

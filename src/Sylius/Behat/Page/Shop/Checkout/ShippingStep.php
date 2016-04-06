@@ -11,8 +11,8 @@
 
 namespace Sylius\Behat\Page\Shop\Checkout;
 
-use Sylius\Behat\Page\ElementNotFoundException;
 use Sylius\Behat\Page\SymfonyPage;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -26,9 +26,7 @@ class ShippingStep extends SymfonyPage implements ShippingStepInterface
     {
         $radio = $this->getDocument()->findField($shippingMethod);
 
-        if (null === $radio) {
-            throw new ElementNotFoundException('Shipping method not found or it is not visible');
-        }
+        Assert::notNull($radio, sprintf('Could not find "%s" shipping method', $shippingMethod));
 
         $this->getDocument()->fillField($radio->getAttribute('name'), $radio->getAttribute('value'));
     }

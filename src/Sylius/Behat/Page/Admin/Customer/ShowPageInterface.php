@@ -11,7 +11,6 @@
 
 namespace Sylius\Behat\Page\Admin\Customer;
 
-use Sylius\Behat\Page\ElementNotFoundException;
 use Sylius\Behat\Page\PageInterface;
 
 /**
@@ -24,15 +23,11 @@ interface ShowPageInterface extends PageInterface
      * if not throws an exception.
      *
      * @return bool
-     *
-     * @throws ElementNotFoundException
      */
     public function isRegistered();
 
     /**
      * Deletes the user on whose show page we are currently on.
-     *
-     * @throws ElementNotFoundException
      */
     public function deleteAccount();
 }

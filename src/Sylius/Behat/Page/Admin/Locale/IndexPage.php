@@ -12,7 +12,6 @@
 namespace Sylius\Behat\Page\Admin\Locale;
 
 use Sylius\Behat\Page\Admin\Crud\IndexPage as BaseIndexPage;
-use Sylius\Behat\Page\ElementNotFoundException;
 use Sylius\Component\Locale\Model\LocaleInterface;
 
 /**
@@ -41,8 +40,6 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
      * @param string $status
      *
      * @return bool
-     *
-     * @throws ElementNotFoundException
      */
     private function checkLocaleStatus(LocaleInterface $locale, $status)
     {

@@ -11,7 +11,6 @@
 
 namespace Sylius\Behat\Page\Shop\Order;
 
-use Sylius\Behat\Page\ElementNotFoundException;
 use Sylius\Component\Core\Model\PaymentInterface;
 
 /**
@@ -21,8 +20,6 @@ interface OrderPaymentsPageInterface
 {
     /**
      * @param PaymentInterface $payment
-     *
-     * @throws ElementNotFoundException
      */
     public function clickPayButtonForGivenPayment(PaymentInterface $payment);
 
@@ -31,15 +28,11 @@ interface OrderPaymentsPageInterface
      * @param array $parameters
      *
      * @throws \InvalidArgumentException
-     *
-     * @return bool
      */
     public function waitForResponse($timeout, array $parameters);
 
     /**
      * @param string $state
-     *
-     * @throws ElementNotFoundException
      *
      * @return int
      */

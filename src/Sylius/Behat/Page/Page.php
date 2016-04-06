@@ -15,6 +15,7 @@ use Behat\Mink\Driver\DriverInterface;
 use Behat\Mink\Element\DocumentElement;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\DriverException;
+use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Selector\SelectorsHandler;
 use Behat\Mink\Session;
 
@@ -140,6 +141,8 @@ abstract class Page implements PageInterface
      * Overload to verify if the current url matches the expected one. Throw an exception otherwise.
      *
      * @param array $urlParameters
+     *
+     * @throws UnexpectedPageException
      */
     protected function verifyUrl(array $urlParameters = [])
     {
@@ -181,13 +184,20 @@ abstract class Page implements PageInterface
      * @param string $name
      *
      * @return NodeElement
+     *
+     * @throws ElementNotFoundException
      */
-    public function getElement($name)
+    protected function getElement($name)
     {
         $element = $this->createElement($name);
 
         if (!$this->getDocument()->has('xpath', $element->getXpath())) {
-            throw new ElementNotFoundException(sprintf('"%s" element is not present on the page', $name));
+            throw new ElementNotFoundException(
+                $this->getSession(),
+                sprintf('Element named "%s"', $name),
+                'xpath',
+                $element->getXpath()
+            );
         }
 
         return $element;
@@ -201,23 +211,6 @@ abstract class Page implements PageInterface
     protected function hasElement($name)
     {
         return $this->getDocument()->has('xpath', $this->createElement($name)->getXpath());
-    }
-
-    /**
-     * @param string $name
-     *
-     * @return NodeElement
-     */
-    protected function createElement($name)
-    {
-        if (isset($this->elements[$name])) {
-            return new NodeElement(
-                $this->getSelectorAsXpath($this->elements[$name], $this->session->getSelectorsHandler()),
-                $this->session
-            );
-        }
-
-        throw new \InvalidArgumentException();
     }
 
     /**
@@ -262,6 +255,23 @@ abstract class Page implements PageInterface
         }
 
         return $url;
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return NodeElement
+     */
+    private function createElement($name)
+    {
+        if (isset($this->elements[$name])) {
+            return new NodeElement(
+                $this->getSelectorAsXpath($this->elements[$name], $this->session->getSelectorsHandler()),
+                $this->session
+            );
+        }
+
+        throw new \InvalidArgumentException();
     }
 
     /**

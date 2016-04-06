@@ -11,8 +11,6 @@
 
 namespace Sylius\Behat\Page\Shop\Cart;
 
-use Behat\Mink\Exception\ElementNotFoundException as BehatElementNotFoundException;
-use Sylius\Behat\Page\ElementNotFoundException;
 use Sylius\Behat\Page\PageInterface;
 
 /**
@@ -22,43 +20,31 @@ interface CartSummaryPageInterface extends PageInterface
 {
     /**
      * @return string
-     *
-     * @throws ElementNotFoundException
      */
     public function getGrandTotal();
 
     /**
      * @return string
-     *
-     * @throws ElementNotFoundException
      */
     public function getTaxTotal();
 
     /**
      * @return string
-     *
-     * @throws ElementNotFoundException
      */
     public function getShippingTotal();
 
     /**
      * @return string
-     *
-     * @throws ElementNotFoundException
      */
     public function getPromotionTotal();
 
     /**
      * @param string $productName
-     *
-     * @throws ElementNotFoundException
      */
     public function getItemRegularPrice($productName);
 
     /**
      * @param string $productName
-     *
-     * @throws ElementNotFoundException
      */
     public function getItemDiscountPrice($productName);
 
@@ -77,8 +63,6 @@ interface CartSummaryPageInterface extends PageInterface
     /**
      * @param string $productName
      * @param int $quantity
-     *
-     * @throws BehatElementNotFoundException
      */
     public function changeQuantity($productName, $quantity);
 }
