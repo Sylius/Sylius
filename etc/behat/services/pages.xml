@@ -63,7 +63,7 @@
         <parameter key="sylius.behat.page.admin.tax_rate.update.class">Sylius\Behat\Page\Admin\TaxRate\UpdatePage</parameter>
         <parameter key="sylius.behat.page.admin.zone.create.class">Sylius\Behat\Page\Admin\Zone\CreatePage</parameter>
         <parameter key="sylius.behat.page.admin.zone.index.class">%sylius.behat.page.admin.crud.index.class%</parameter>
-        <parameter key="sylius.behat.page.admin.zone.update.class">%sylius.behat.page.admin.crud.update.class%</parameter>
+        <parameter key="sylius.behat.page.admin.zone.update.class">Sylius\Behat\Page\Admin\Zone\UpdatePage</parameter>
 
         <parameter key="sylius.behat.symfony_page.class">Sylius\Behat\Page\SymfonyPage</parameter>
     </parameters>
