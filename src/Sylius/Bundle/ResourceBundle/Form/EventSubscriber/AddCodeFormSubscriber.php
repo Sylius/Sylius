@@ -11,11 +11,11 @@
 
 namespace Sylius\Bundle\ResourceBundle\Form\EventSubscriber;
 
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
-use Symfony\Component\Intl\Exception\UnexpectedTypeException;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>

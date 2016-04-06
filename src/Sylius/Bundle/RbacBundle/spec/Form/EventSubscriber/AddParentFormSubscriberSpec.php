@@ -107,6 +107,7 @@ class AddParentFormSubscriberSpec extends ObjectBehavior
     function it_throws_exception_when_resource_does_not_implement_role_interface_or_permission_interface(FormEvent $event, \stdClass $resource)
     {
         $event->getData()->willReturn($resource);
-        $this->shouldThrow(UnexpectedTypeException::class);
+        $this->shouldThrow(UnexpectedTypeException::class)
+            ->during('preSetData', [$event]);
     }
 }

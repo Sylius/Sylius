@@ -56,5 +56,7 @@ class RegisterAttributeFactoryPassSpec extends ObjectBehavior
     {
         $container->hasDefinition('sylius.registry.attribute_type')->willReturn(false);
         $container->getDefinition('sylius.registry.attribute_type')->shouldNotBeCalled();
+
+        $this->process($container);
     }
 }
