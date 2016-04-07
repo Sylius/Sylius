@@ -16,12 +16,13 @@ use Sylius\Bundle\UserBundle\Event\UserEvent;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
+use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class CartBlamerListener
+final class CartBlamerListener
 {
     /**
      * @var ObjectManager
@@ -46,32 +47,51 @@ class CartBlamerListener
     /**
      * @param UserEvent $userEvent
      */
-    public function blame(UserEvent $userEvent)
+    public function onImplicitLogin(UserEvent $userEvent)
     {
-        if (!$this->cartProvider->hasCart()) {
+        $this->blame($userEvent->getUser());
+    }
+
+    /**
+     * @param InteractiveLoginEvent $interactiveLoginEvent
+     */
+    public function onInteractiveLogin(InteractiveLoginEvent $interactiveLoginEvent)
+    {
+        $user = $interactiveLoginEvent->getAuthenticationToken()->getUser();
+
+        if (!$user instanceof UserInterface) {
             return;
         }
 
-        $cart = $this->cartProvider->getCart();
+        $this->blame($user);
+    }
 
-        if (!$cart instanceof OrderInterface) {
-            throw new UnexpectedTypeException($cart, OrderInterface::class);
+    /**
+     * @param UserInterface $user
+     */
+    private function blame(UserInterface $user)
+    {
+        $cart = $this->getCart();
+
+        if (null === $cart) {
+            return;
         }
 
-        $customer = $userEvent->getUser()->getCustomer();
-        $cart->setCustomer($customer);
+        $cart->setCustomer($user->getCustomer());
 
         $this->cartManager->persist($cart);
         $this->cartManager->flush();
     }
 
     /**
-     * @param InteractiveLoginEvent $interactiveLoginEvent
+     * @return OrderInterface
+     *
+     * @throws UnexpectedTypeException
      */
-    public function interactiveBlame(InteractiveLoginEvent $interactiveLoginEvent)
+    private function getCart()
     {
         if (!$this->cartProvider->hasCart()) {
-            return;
+            return null;
         }
 
         $cart = $this->cartProvider->getCart();
@@ -80,14 +100,6 @@ class CartBlamerListener
             throw new UnexpectedTypeException($cart, OrderInterface::class);
         }
 
-        $user = $interactiveLoginEvent->getAuthenticationToken()->getUser();
-
-        if (null === $user) {
-            return;
-        }
-        $cart->setCustomer($user->getCustomer());
-
-        $this->cartManager->persist($cart);
-        $this->cartManager->flush();
+        return $cart;
     }
 }
