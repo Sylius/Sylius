@@ -155,19 +155,20 @@ abstract class Page implements PageInterface
 
     /**
      * @param string $name
+     * @param array $parameters
      *
      * @return NodeElement
      *
      * @throws ElementNotFoundException
      */
-    protected function getElement($name)
+    protected function getElement($name, array $parameters = [])
     {
-        $element = $this->createElement($name);
+        $element = $this->createElement($name, $parameters);
 
         if (!$this->getDocument()->has('xpath', $element->getXpath())) {
             throw new ElementNotFoundException(
                 $this->getSession(),
-                sprintf('Element named "%s"', $name),
+                sprintf('Element named "%s" with parameters %s', $name, implode(', ', $parameters)),
                 'xpath',
                 $element->getXpath()
             );
@@ -178,12 +179,13 @@ abstract class Page implements PageInterface
 
     /**
      * @param string $name
+     * @param array $parameters
      *
      * @return bool
      */
-    protected function hasElement($name)
+    protected function hasElement($name, array $parameters = [])
     {
-        return $this->getDocument()->has('xpath', $this->createElement($name)->getXpath());
+        return $this->getDocument()->has('xpath', $this->createElement($name, $parameters)->getXpath());
     }
 
     /**
@@ -216,10 +218,11 @@ abstract class Page implements PageInterface
 
     /**
      * @param string $name
+     * @param array $parameters
      *
      * @return NodeElement
      */
-    private function createElement($name)
+    private function createElement($name, array $parameters = [])
     {
         $definedElements = $this->getDefinedElements();
 
@@ -231,8 +234,10 @@ abstract class Page implements PageInterface
             ));
         }
 
+        $elementSelector = strtr($definedElements[$name], $parameters);
+
         return new NodeElement(
-            $this->getSelectorAsXpath($definedElements[$name], $this->session->getSelectorsHandler()),
+            $this->getSelectorAsXpath($elementSelector, $this->session->getSelectorsHandler()),
             $this->session
         );
     }
