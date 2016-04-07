@@ -124,4 +124,20 @@ final class ManagingCustomersContext implements Context
             sprintf('Customer with email %s should exist but it does not.', $customer->getEmail())
         );
     }
+
+    /**
+     * @When I select :gender as its gender
+     */
+    public function iSelectGender($gender)
+    {
+        $this->createPage->chooseGender($gender);
+    }
+
+    /**
+     * @When I specify its birthday as :birthday
+     */
+    public function iSpecifyItsBirthdayAs($birthday)
+    {
+        $this->createPage->specifyBirthday($birthday);
+    }
 }

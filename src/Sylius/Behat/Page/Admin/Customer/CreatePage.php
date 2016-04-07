@@ -41,4 +41,20 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     {
         $this->getDocument()->fillField('Email', $email);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function specifyBirthday($birthday)
+    {
+        $this->getDocument()->fillField('Birthday', $birthday);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function chooseGender($gender)
+    {
+        $this->getDocument()->selectFieldOption('Gender', $gender);
+    }
 }

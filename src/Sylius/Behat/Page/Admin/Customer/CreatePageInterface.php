@@ -32,4 +32,14 @@ interface CreatePageInterface extends BaseCreatePageInterface
      * @param string $email
      */
     public function specifyEmail($email);
+
+    /**
+     * @param string $birthday
+     */
+    public function specifyBirthday($birthday);
+
+    /**
+     * @param string $gender
+     */
+    public function chooseGender($gender);
 }
