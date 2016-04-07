@@ -132,6 +132,8 @@ sylius:
             contains_taxon_configuration:
                 taxon: Taxon
                 count: Count
+            taxon_configuration:
+                taxons: Taxons
 
     email:
         order_confirmation:

@@ -36,8 +36,9 @@ interface CreatePageInterface extends BaseCreatePageInterface
     /**
      * @param string $option
      * @param string $value
+     * @param bool $multiple
      */
-    public function selectRuleOption($option, $value);
+    public function selectRuleOption($option, $value, $multiple = false);
 
     /**
      * @param string $option

@@ -46,11 +46,17 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function selectRuleOption($option, $value)
+    public function selectRuleOption($option, $value, $multiple = false)
     {
         $rules = $this->getElement('rules');
 
-        $rules->selectFieldOption('sylius_promotion_rules_'.$this->rulesCount.'_configuration_'.$option, $value);
+        $rules
+            ->selectFieldOption(
+                'sylius_promotion_rules_'.$this->rulesCount.'_configuration_'.$option,
+                $value,
+                $multiple
+            )
+        ;
     }
 
     /**
