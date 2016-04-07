@@ -14,8 +14,8 @@ namespace spec\Sylius\Bundle\AttributeBundle\Form\EventSubscriber;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\AttributeBundle\Form\EventSubscriber\BuildAttributeValueFormSubscriber;
-use Sylius\Component\Attribute\AttributeType\CheckboxAttributeType;
-use Sylius\Component\Attribute\AttributeType\DateAttributeType;
+use Sylius\Bundle\AttributeBundle\Form\Type\AttributeValueType\Configuration\AttributeValueTypeConfigurationInterface;
+use Sylius\Bundle\AttributeBundle\Factory\AttributeValueTypeConfigurationFactoryInterface;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -32,9 +32,11 @@ use Symfony\Component\Form\FormEvents;
  */
 class BuildAttributeValueFormSubscriberSpec extends ObjectBehavior
 {
-    function let(RepositoryInterface $attributeRepository)
-    {
-        $this->beConstructedWith($attributeRepository);
+    function let(
+        RepositoryInterface $attributeRepository,
+        AttributeValueTypeConfigurationFactoryInterface $attributeValueTypeConfigurationFactory
+    ) {
+        $this->beConstructedWith($attributeRepository, 'server', $attributeValueTypeConfigurationFactory);
     }
 
     function it_is_initialized()
@@ -56,18 +58,23 @@ class BuildAttributeValueFormSubscriberSpec extends ObjectBehavior
     }
 
     function it_adds_a_value_form_field_with_correct_type_based_on_the_attribute(
+        $attributeValueTypeConfigurationFactory,
         AttributeInterface $attribute,
         AttributeValueInterface $attributeValue,
         Form $form,
-        FormEvent $event
+        FormEvent $event,
+        AttributeValueTypeConfigurationInterface $configuration
     ) {
         $event->getData()->willReturn($attributeValue);
         $event->getForm()->willReturn($form);
 
         $attributeValue->getAttribute()->willReturn($attribute);
-        $attributeValue->getValue()->willReturn(true);
-        $attribute->getType()->willReturn(CheckboxAttributeType::TYPE);
         $attribute->getName()->willReturn('Is promoted?');
+
+        $attributeValueTypeConfigurationFactory->create($attribute, 'server', null)->willReturn($configuration);
+        $configuration->getName()->willReturn('value');
+        $configuration->getType()->willReturn('sylius_attribute_type_checkbox');
+        $configuration->getFormOptions()->willReturn(['label' => $attribute->getName()]);
 
         $form->add('value', 'sylius_attribute_type_checkbox', Argument::type('array'))->shouldBeCalled();
 
@@ -85,10 +92,12 @@ class BuildAttributeValueFormSubscriberSpec extends ObjectBehavior
     }
 
     function it_adds_a_value_form_field_with_correct_type_based_on_the_attribute_id(
+        $attributeValueTypeConfigurationFactory,
         $attributeRepository,
         AttributeInterface $attribute,
         Form $form,
-        FormEvent $event
+        FormEvent $event,
+        AttributeValueTypeConfigurationInterface $configuration
     ) {
         $event->getData()->willReturn([
             'attribute' => 6,
@@ -102,11 +111,47 @@ class BuildAttributeValueFormSubscriberSpec extends ObjectBehavior
 
         $attributeRepository->find(6)->willReturn($attribute);
         $attribute->getName()->willReturn('Release Date');
-        $attribute->getType()->willReturn(DateAttributeType::TYPE);
-        $attribute->getStorageType()->willReturn(AttributeValueInterface::STORAGE_DATE);
+
+        $attributeValueTypeConfigurationFactory->create($attribute, 'server', null)->willReturn($configuration);
+        $configuration->getName()->willReturn('value');
+        $configuration->getType()->willReturn('sylius_attribute_type_date');
+        $configuration->getFormOptions()->willReturn(['label' => $attribute->getName()]);
 
         $form->add('value', 'sylius_attribute_type_date', Argument::type('array'))->shouldBeCalled();
 
         $this->preSubmit($event);
+    }
+
+    function it_adds_a_value_translation_form_field(
+        $attributeValueTypeConfigurationFactory,
+        AttributeInterface $attribute,
+        AttributeValueInterface $attributeValue,
+        Form $form,
+        FormEvent $event,
+        AttributeValueTypeConfigurationInterface $configuration
+    ) {
+        $event->getData()->willReturn($attributeValue);
+        $event->getForm()->willReturn($form);
+
+        $attributeValue->getAttribute()->willReturn($attribute);
+        $attribute->getName()->willReturn('Material');
+
+        $attributeValueTypeConfigurationFactory->create($attribute, 'server', null)->willReturn($configuration);
+        $configuration->getName()->willReturn('translations');
+        $configuration->getType()->willReturn('a2lix_translationsForms');
+        $configuration->getFormOptions()->willReturn([
+            'form_type' => 'sylius_server_attribute_value_translation',
+            'label' => $attribute->getName(),
+            'form_options' => [
+                'attr' => [
+                    'data-name' => 'sylius_server[attributes][0][translations]',
+                ],
+                'value_translation_type' => 'sylius_attribute_type_text',
+            ],
+        ]);
+
+        $form->add('translations', 'a2lix_translationsForms', Argument::type('array'))->shouldBeCalled();
+
+        $this->preSetData($event);
     }
 }

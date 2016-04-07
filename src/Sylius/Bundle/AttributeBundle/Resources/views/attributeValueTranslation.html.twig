@@ -1,0 +1,65 @@
+{% extends 'SyliusWebBundle:Common:forms.html.twig' %}
+
+{% block form_widget_simple %}
+    {% set customData = "" %}
+    {% for key,value in form.parent.vars.attr %}
+        {% if key == 'data-name' %}
+            {% set customData = value %}
+        {% endif %}
+    {% endfor %}
+    {% set fullName = form.vars.full_name|replace({'translations': ''}) %}
+
+    {% set attr = attr|merge({'data-name': customData~fullName }) %}
+
+    {{ parent() }}
+{% endblock form_widget_simple %}
+
+{% block textarea_widget %}
+    {% set customData = "" %}
+    {% for key,value in form.parent.vars.attr %}
+        {% if key == 'data-name' %}
+            {% set customData = value %}
+        {% endif %}
+    {% endfor %}
+    {% set fullName = form.vars.full_name|replace({'translations': ''}) %}
+
+    {% set attr = attr|merge({'data-name': customData~fullName }) %}
+
+    {{ parent() }}
+{% endblock textarea_widget %}
+
+{% block a2lix_translations_widget %}
+    {{ form_errors(form) }}
+    <div class="a2lix_translations tabbable">
+        <ul class="a2lix_translationsLocales nav nav-tabs">
+            {% for translationsFields in form %}
+                {% set locale = translationsFields.vars.name %}
+
+                {% if locale != '_token' %}
+                    <li {% if app.request.locale == locale %}class="active"{% endif %}>
+                        <a href="#" data-toggle="tab" data-target=".{{ translationsFields.vars.id }}_a2lix_translationsFields-{{ locale }}">
+                            {{ locale|capitalize }}
+                            {% if form.vars.default_locale == locale %}[Default]{% endif %}
+                            {% if translationsFields.vars.required %}*{% endif %}
+                        </a>
+                    </li>
+                {% endif %}
+
+            {% endfor %}
+        </ul>
+
+        <div class="a2lix_translationsFields tab-content">
+            {% for translationsFields in form %}
+                {% set locale = translationsFields.vars.name %}
+
+                {% if locale != '_token' %}
+                    <div class="{{ translationsFields.vars.id }}_a2lix_translationsFields-{{ locale }} tab-pane {% if app.request.locale == locale %}active{% endif %} {% if not form.vars.valid %}sonata-ba-field-error{% endif %}">
+                        {{ form_errors(translationsFields) }}
+                        {{ form_widget(translationsFields) }}
+                    </div>
+                {% endif %}
+
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -26,7 +26,12 @@
                         </a>
                     </p>
                 {% endif %}
-                {% set errors = form.children.value.vars.errors %}
+                {% if form.children.translations is defined %}
+                    {% set value = form.children.translations %}
+                {% else %}
+                    {% set value = form.children.value %}
+                {% endif %}
+                {% set errors = value.vars.errors %}
                 <div class="form-group{% if errors|length > 0 %} has-error{% endif %}">
                     {% set labelId = form.vars.data.attribute.name|replace(' ', '_')|lower %}
                     <label class="col-lg-2 control-label" for="{{ labelId }}">{{ form.vars.data.attribute.name }}</label>

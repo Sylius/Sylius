@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\AttributeBundle\Form\Type;
 
+use Sylius\Bundle\AttributeBundle\Factory\AttributeValueTypeConfigurationFactoryInterface;
 use Sylius\Bundle\AttributeBundle\Form\EventSubscriber\BuildAttributeValueFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
@@ -33,17 +34,29 @@ class AttributeValueType extends AbstractResourceType
     protected $attributeRepository;
 
     /**
+     * @var AttributeValueTypeConfigurationFactoryInterface
+     */
+    protected $attributeValueTypeConfigurationFactory;
+
+    /**
      * @param string $dataClass
      * @param array $validationGroups
      * @param string $subjectName
      * @param EntityRepository $attributeRepository
+     * @param AttributeValueTypeConfigurationFactoryInterface $attributeValueTypeConfigurationFactory
      */
-    public function __construct($dataClass, array $validationGroups, $subjectName, EntityRepository $attributeRepository)
-    {
+    public function __construct(
+        $dataClass,
+        array $validationGroups,
+        $subjectName,
+        EntityRepository $attributeRepository,
+        AttributeValueTypeConfigurationFactoryInterface $attributeValueTypeConfigurationFactory
+    ) {
         parent::__construct($dataClass, $validationGroups);
 
         $this->subjectName = $subjectName;
         $this->attributeRepository = $attributeRepository;
+        $this->attributeValueTypeConfigurationFactory = $attributeValueTypeConfigurationFactory;
     }
 
     /**
@@ -55,7 +68,11 @@ class AttributeValueType extends AbstractResourceType
             ->add('attribute', sprintf('sylius_%s_attribute_choice', $this->subjectName), [
                 'label' => sprintf('sylius.form.attribute.%s_attribute_value.attribute', $this->subjectName),
             ])
-            ->addEventSubscriber(new BuildAttributeValueFormSubscriber($this->attributeRepository))
+            ->addEventSubscriber(new BuildAttributeValueFormSubscriber(
+                $this->attributeRepository,
+                $this->subjectName,
+                $this->attributeValueTypeConfigurationFactory
+            ))
         ;
     }
 
