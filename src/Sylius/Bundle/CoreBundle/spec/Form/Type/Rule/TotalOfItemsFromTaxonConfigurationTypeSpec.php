@@ -20,7 +20,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ContainsTaxonConfigurationTypeSpec extends ObjectBehavior
+class TotalOfItemsFromTaxonConfigurationTypeSpec extends ObjectBehavior
 {
     function let(TaxonRepositoryInterface $taxonRepository)
     {
@@ -29,7 +29,7 @@ class ContainsTaxonConfigurationTypeSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Form\Type\Rule\ContainsTaxonConfigurationType');
+        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Form\Type\Rule\TotalOfItemsFromTaxonConfigurationType');
     }
 
     function it_is_abstract_type()
@@ -48,7 +48,7 @@ class ContainsTaxonConfigurationTypeSpec extends ObjectBehavior
         ;
 
         $builder
-            ->add('count', 'integer', Argument::type('array'))
+            ->add('amount', 'sylius_money', Argument::type('array'))
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
@@ -58,6 +58,6 @@ class ContainsTaxonConfigurationTypeSpec extends ObjectBehavior
 
     function it_has_name()
     {
-        $this->getName()->shouldReturn('sylius_promotion_rule_contains_taxon_configuration');
+        $this->getName()->shouldReturn('sylius_promotion_rule_total_of_items_from_taxon_configuration');
     }
 }

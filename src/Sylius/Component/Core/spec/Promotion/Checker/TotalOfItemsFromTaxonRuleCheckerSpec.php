@@ -153,6 +153,6 @@ class TotalOfItemsFromTaxonRuleCheckerSpec extends ObjectBehavior
 
     function it_has_configuration_form_type()
     {
-        $this->getConfigurationFormType()->shouldReturn(null);
+        $this->getConfigurationFormType()->shouldReturn('sylius_promotion_rule_total_of_items_from_taxon_configuration');
     }
 }

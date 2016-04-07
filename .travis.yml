@@ -49,6 +49,8 @@ install:
 
     - composer run-script travis-build --no-interaction
 
+    - npm install
+
 before_script:
     - app/console doctrine:database:create --env=test_cached # Have to be run with debug = true, to omit generating proxies before setting up the database
 
@@ -59,6 +61,8 @@ before_script:
 
     - app/console assets:install --env=test_cached --no-debug
     - app/console assetic:dump --env=test_cached --no-debug
+
+    - gulp
 
     # Debug informations, PHP version & PHP configuration
     # Its needed to remove the line with secret variables, as it is listed in _SERVER variables

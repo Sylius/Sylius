@@ -145,6 +145,16 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
+     * @Given I add the "Total of items from taxon" rule configured with :count :taxonName
+     */
+    public function iAddTheRuleConfiguredWith($count, $taxonName)
+    {
+        $this->createPage->addRule('Total of items from taxon');
+        $this->createPage->selectRuleOption('taxon', $taxonName);
+        $this->createPage->fillRuleOption('amount', $count);
+    }
+
+    /**
      * @Then I should be notified that it has been successfully created
      */
     public function iShouldBeNotifiedItHasBeenSuccessfulCreation()

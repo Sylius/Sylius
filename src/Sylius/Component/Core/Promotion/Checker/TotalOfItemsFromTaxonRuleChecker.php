@@ -73,7 +73,6 @@ class TotalOfItemsFromTaxonRuleChecker implements RuleCheckerInterface
      */
     public function getConfigurationFormType()
     {
-        // it will be implemented after moving promotions to new backend UI
-        return null;
+        return 'sylius_promotion_rule_total_of_items_from_taxon_configuration';
     }
 }

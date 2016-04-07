@@ -5,7 +5,8 @@ Feature: Promotion validation
     I want to be prevented from adding it without specifying required fields
 
     Background:
-        Given I am logged in as an administrator
+        Given the store operates on a single channel in "France"
+        And I am logged in as an administrator
 
     @ui
     Scenario: Trying to add a new promotion without specifying its code

@@ -134,6 +134,9 @@ sylius:
                 count: Count
             taxon_configuration:
                 taxons: Taxons
+            total_of_items_from_taxon_configuration:
+                taxon: Taxon
+                amount: Amount
 
     email:
         order_confirmation:

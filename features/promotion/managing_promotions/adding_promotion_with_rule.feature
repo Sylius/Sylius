@@ -28,3 +28,14 @@ Feature: Adding a new promotion with rule
         And I add it
         Then I should be notified that it has been successfully created
         And the promotion "Holiday sale" should appear in the registry
+
+    @ui @javascript
+    Scenario: Adding a new promotion with total of items from taxon rule
+        Given I want to create a new promotion
+        When I specify its code as "100_MUGS_PROMOTION"
+        And I name it "100 Mugs promotion"
+        And I add the "Total of items from taxon" rule configured with 100 "Mugs"
+        And I add it
+        Then I should be notified that it has been successfully created
+        And the promotion "100 Mugs promotion" should appear in the registry
+
