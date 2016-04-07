@@ -34,6 +34,13 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function isThereProvince($provinceName);
 
     /**
+     * @param string $provinceCode
+     *
+     * @return bool
+     */
+    public function isThereProvinceWithCode($provinceCode);
+
+    /**
      * @param string $name
      * @param string $code
      * @param string|null $abbreviation
@@ -44,4 +51,21 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
      * @param string $provinceName
      */
     public function removeProvince($provinceName);
+
+    public function clickAddProvinceButton();
+
+    /**
+     * @param string $provinceName
+     */
+    public function nameProvince($provinceName);
+
+    /**
+     * @param string $provinceName
+     */
+    public function removeProvinceName($provinceName);
+
+    /**
+     * @param string $provinceCode
+     */
+    public function specifyProvinceCode($provinceCode);
 }

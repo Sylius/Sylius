@@ -14,6 +14,7 @@ namespace Sylius\Behat\Page\Admin\Country;
 use Behat\Mink\Element\Element;
 use Sylius\Behat\Behaviour\Toggles;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
+use Sylius\Behat\Page\ElementNotFoundException;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -40,6 +41,16 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         $provinces = $this->getElement('provinces');
 
         return $provinces->has('css', '[value = "'.$provinceName.'"]');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isThereProvinceWithCode($provinceCode)
+    {
+        $provinces = $this->getElement('provinces');
+
+        return $provinces->has('css', '[value = "'.$provinceCode.'"]');
     }
 
     /**
@@ -80,7 +91,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
      */
     public function addProvince($name, $code, $abbreviation = null)
     {
-        $this->getDocument()->clickLink('Add province');
+        $this->clickAddProvinceButton();
 
         $provinceForm = $this->getLastProvinceElement();
 
@@ -90,6 +101,62 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         if (null !== $abbreviation) {
             $provinceForm->fillField('Abbreviation', $abbreviation);
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function clickAddProvinceButton()
+    {
+        $this->getDocument()->clickLink('Add province');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function nameProvince($name)
+    {
+        $provinceForm = $this->getLastProvinceElement();
+
+        $provinceForm->fillField('Name', $name);
+    }
+
+    /**
+     * @param string $provinceName
+     */
+    public function removeProvinceName($provinceName)
+    {
+        if ($this->isThereProvince($provinceName)) {
+            $provinces = $this->getElement('provinces');
+
+            $item = $provinces->find('css', 'div[data-form-collection="item"] input[value="'.$provinceName.'"]')->getParent();
+            $item->fillField('Name', '');
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function specifyProvinceCode($code)
+    {
+        $provinceForm = $this->getLastProvinceElement();
+
+        $provinceForm->fillField('Code', $code);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function checkValidationMessageFor($element, $message)
+    {
+        $provinceForm = $this->getLastProvinceElement();
+
+        $foundedElement = $provinceForm->find('css', '.pointing');
+        if (null === $foundedElement) {
+            throw new ElementNotFoundException($this->getSession(), 'Tag', 'css', '.pointing');
+        }
+
+        return $message === $foundedElement->getText();
     }
 
     /**

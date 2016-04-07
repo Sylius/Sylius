@@ -139,6 +139,7 @@ final class ManagingCountriesContext implements Context
 
     /**
      * @When I save my changes
+     * @When I try to save changes
      */
     public function iSaveMyChanges()
     {
@@ -242,10 +243,105 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
+     * @Then /^the province should still be named "([^"]*)" in (this country)$/
+     */
+    public function thisProvinceShouldStillBeNamed($provinceName, CountryInterface $country)
+    {
+        $this->countryUpdatePage->open(['id' => $country->getId()]);
+
+        Assert::true(
+            $this->countryUpdatePage->isThereProvince($provinceName),
+            sprintf('%s is not a province of this country.', $provinceName)
+        );
+    }
+
+    /**
+     * @Then /^province with name "([^"]*)" should not be added in (this country)$/
+     */
+    public function provinceWithNameShouldNotBeAdded($provinceName, CountryInterface $country)
+    {
+        $this->countryUpdatePage->open(['id' => $country->getId()]);
+
+        Assert::false(
+            $this->countryUpdatePage->isThereProvince($provinceName),
+            sprintf('%s is a province of this country.', $provinceName)
+        );
+    }
+
+    /**
+     * @Then /^province with code "([^"]*)" should not be added in (this country)$/
+     */
+    public function provinceWithCodeShouldNotBeAdded($provinceCode, CountryInterface $country)
+    {
+        $this->countryUpdatePage->open(['id' => $country->getId()]);
+
+        Assert::false(
+            $this->countryUpdatePage->isThereProvinceWithCode($provinceCode),
+            sprintf('%s is a province of this country.', $provinceCode)
+        );
+    }
+
+    /**
      * @When /^I delete the "([^"]*)" province of (this country)$/
      */
     public function iDeleteTheProvinceOfCountry($provinceName, CountryInterface $country)
     {
         $this->countryUpdatePage->removeProvince($provinceName);
+    }
+
+    /**
+     * @Given /^I want to create a new province in (country "([^"]*)")$/
+     */
+    public function iWantToCreateANewProvinceInCountry(CountryInterface $country)
+    {
+        $this->countryUpdatePage->open(['id' => $country->getId()]);
+
+        $this->countryUpdatePage->clickAddProvinceButton();
+    }
+
+    /**
+     * @When /^I name the province "([^"]*)"$/
+     * @When /^I do not name the province$/
+     */
+    public function iNameTheProvince($provinceName = null)
+    {
+        $this->countryUpdatePage->nameProvince($provinceName);
+    }
+
+    /**
+     * @When I do not specify the province code
+     * @When I specify the province code as :provinceCode
+     */
+    public function iSpecifyTheProvinceCode($provinceCode = null)
+    {
+        $this->countryUpdatePage->specifyProvinceCode($provinceCode);
+    }
+
+    /**
+     * @Then I should be notified that :element is required
+     */
+    public function iShouldBeNotifiedThatElementIsRequired($element)
+    {
+        $this->assertFieldValidationMessage($element, sprintf('Please enter province %s.', $element));
+    }
+
+    /**
+     * @When /^I remove "([^"]*)" province name$/
+     */
+    public function iRemoveProvinceName($provinceName)
+    {
+        $this->countryUpdatePage->removeProvinceName($provinceName);
+    }
+
+    /**
+     * @param string $element
+     * @param string $expectedMessage
+     */
+    private function assertFieldValidationMessage($element, $expectedMessage)
+    {
+        Assert::true(
+            $this->countryUpdatePage->checkValidationMessageFor($element, $expectedMessage),
+            sprintf('Province %s should be required.', $element)
+        );
     }
 }
