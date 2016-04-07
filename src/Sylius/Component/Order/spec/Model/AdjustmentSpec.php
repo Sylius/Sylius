@@ -44,6 +44,11 @@ class AdjustmentSpec extends ObjectBehavior
         $this->getAdjustable()->shouldReturn(null);
     }
 
+    function it_is_not_a_refund_by_default()
+    {
+        $this->isRefund()->shouldReturn(false);
+    }
+
     function it_allows_assigning_itself_to_an_adjustable(OrderInterface $order, OrderItemInterface $orderItem)
     {
         $order->addAdjustment($this->getWrappedObject())->shouldBeCalled();
@@ -132,6 +137,12 @@ class AdjustmentSpec extends ObjectBehavior
     {
         $this->setAmount(399);
         $this->getAmount()->shouldReturn(399);
+    }
+
+    function its_refund_is_mutable()
+    {
+        $this->setRefund(true);
+        $this->isRefund()->shouldReturn(true);
     }
 
     function it_recalculates_adjustments_on_adjustable_entity_on_amount_change(

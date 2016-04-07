@@ -37,11 +37,33 @@ interface OrderItemInterface extends AdjustableInterface, OrderAwareInterface, R
     public function setUnitPrice($unitPrice);
 
     /**
-     * Get item total.
+     * The net total inclusive of refunds
      *
      * @return int
      */
     public function getTotal();
+
+    /**
+     * @return int
+     */
+    public function getRefundTotal();
+
+    /**
+     * The total excluding refunds
+     *
+     * @return int
+     */
+    public function getGrossTotal();
+
+    /**
+     * @return int
+     */
+    public function getUnitsTotal();
+
+    /**
+     * @return int
+     */
+    public function getUnitsRefundTotal();
 
     /**
      * Recalculate totals. Should be used after every unit change.

@@ -89,6 +89,16 @@ interface AdjustmentInterface extends ResourceInterface, TimestampableInterface,
     public function isCredit();
 
     /**
+     * @return boolean
+     */
+    public function isRefund();
+
+    /**
+     * @param boolean $refund
+     */
+    public function setRefund($refund);
+
+    /**
      * @return bool
      */
     public function isLocked();

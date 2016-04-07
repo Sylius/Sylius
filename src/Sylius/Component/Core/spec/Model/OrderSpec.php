@@ -269,6 +269,7 @@ class OrderSpec extends ObjectBehavior
 
         $item->getUnits()->willReturn([$unit1, $unit2]);
         $item->getTotal()->willReturn(4000);
+        $item->getRefundTotal()->willReturn(0);
 
         $item->setOrder($this)->shouldBeCalled();
         $this->addItem($item);
@@ -286,6 +287,7 @@ class OrderSpec extends ObjectBehavior
 
         $item->getUnits()->willReturn([$unit1, $unit2]);
         $item->getTotal()->willReturn(4000);
+        $item->getRefundTotal()->willReturn(0);
 
         $item->setOrder($this)->shouldBeCalled();
         $this->addItem($item);

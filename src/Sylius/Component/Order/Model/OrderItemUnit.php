@@ -41,6 +41,11 @@ class OrderItemUnit implements OrderItemUnitInterface
     protected $adjustmentsTotal = 0;
 
     /**
+     * @var int
+     */
+    protected $refundAdjustmentsTotal = 0;
+
+    /**
      * @param OrderItemInterface $orderItem
      */
     public function __construct(OrderItemInterface $orderItem)
@@ -70,6 +75,14 @@ class OrderItemUnit implements OrderItemUnitInterface
         }
 
         return $total;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRefundTotal()
+    {
+        return $this->getRefundAdjustmentsTotal();
     }
 
     /**
@@ -154,6 +167,25 @@ class OrderItemUnit implements OrderItemUnitInterface
     /**
      * {@inheritdoc}
      */
+    public function getRefundAdjustmentsTotal($type = null)
+    {
+        if (null === $type) {
+            return $this->refundAdjustmentsTotal;
+        }
+
+        $refundTotal = 0;
+        foreach ($this->getRefundAdjustments($type) as $refundAdjustment) {
+            if (!$refundAdjustment->isNeutral()) {
+                $refundTotal += $refundAdjustment->getAmount();
+            }
+        }
+
+        return $refundTotal;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function removeAdjustments($type)
     {
         foreach ($this->getAdjustments($type) as $adjustment) {
@@ -181,11 +213,36 @@ class OrderItemUnit implements OrderItemUnitInterface
     public function recalculateAdjustmentsTotal()
     {
         $this->adjustmentsTotal = 0;
+        $this->refundAdjustmentsTotal = 0;
 
         foreach ($this->adjustments as $adjustment) {
             if (!$adjustment->isNeutral()) {
                 $this->adjustmentsTotal += $adjustment->getAmount();
+
+                if ($adjustment->isRefund()) {
+                    $this->refundAdjustmentsTotal += $adjustment->getAmount();
+                }
             }
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRefundAdjustments($type = null)
+    {
+        return $this->adjustments->filter(function (AdjustmentInterface $adjustment) use ($type) {
+            if (null !== $type) {
+                return true === $adjustment->isRefund() && $type === $adjustment->getType();
+            }
+            return true === $adjustment->isRefund();
+        });
+    }
+
+    public function removeRefundAdjustments()
+    {
+        foreach ($this->getRefundAdjustments() as $adjustment) {
+            $this->removeAdjustment($adjustment);
         }
     }
 
@@ -196,6 +253,10 @@ class OrderItemUnit implements OrderItemUnitInterface
     {
         if (!$adjustment->isNeutral()) {
             $this->adjustmentsTotal += $adjustment->getAmount();
+
+            if ($adjustment->isRefund()) {
+                $this->refundAdjustmentsTotal += $adjustment->getAmount();
+            }
         }
     }
 
@@ -206,6 +267,10 @@ class OrderItemUnit implements OrderItemUnitInterface
     {
         if (!$adjustment->isNeutral()) {
             $this->adjustmentsTotal -= $adjustment->getAmount();
+
+            if ($adjustment->isRefund()) {
+                $this->refundAdjustmentsTotal -= $adjustment->getAmount();
+            }
         }
     }
 }

@@ -69,6 +69,11 @@ class Adjustment implements AdjustmentInterface
     protected $locked = false;
 
     /**
+     * @var boolean
+     */
+    protected $refund = false;
+
+    /**
      * @var int
      */
     protected $originId;
@@ -282,6 +287,22 @@ class Adjustment implements AdjustmentInterface
     public function setOriginType($originType)
     {
         $this->originType = $originType;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isRefund()
+    {
+        return $this->refund;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setRefund($refund)
+    {
+        $this->refund = (bool)$refund;
     }
 
     private function recalculateAdjustable()

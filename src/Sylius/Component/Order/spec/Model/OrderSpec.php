@@ -145,6 +145,21 @@ class OrderSpec extends ObjectBehavior
         $this->getItemsTotal()->shouldReturn(0);
     }
 
+    function it_has_items_refund_total_equal_to_0_by_default()
+    {
+        $this->getItemsRefundTotal()->shouldReturn(0);
+    }
+
+    function it_has_refund_adjustments_total_equal_to_0_by_default()
+    {
+        $this->getRefundAdjustmentsTotal()->shouldReturn(0);
+    }
+
+    function it_has_refund_total_equal_to_0_by_default()
+    {
+        $this->getRefundTotal()->shouldReturn(0);
+    }
+
     function it_calculates_correct_items_total(
         OrderItemInterface $item1,
         OrderItemInterface $item2,
@@ -153,6 +168,10 @@ class OrderSpec extends ObjectBehavior
         $item1->getTotal()->willReturn(29999);
         $item2->getTotal()->willReturn(45000);
         $item3->getTotal()->willReturn(250);
+
+        $item1->getRefundTotal()->willReturn(0);
+        $item2->getRefundTotal()->willReturn(0);
+        $item3->getRefundTotal()->willReturn(0);
 
         $item1->setOrder($this)->shouldBeCalled();
         $item2->setOrder($this)->shouldBeCalled();
@@ -167,6 +186,34 @@ class OrderSpec extends ObjectBehavior
         $this->addItem($item3);
 
         $this->getItemsTotal()->shouldReturn(75249);
+    }
+
+    function it_calculates_items_total_and_refund_total_correctly(
+        OrderItemInterface $item1,
+        OrderItemInterface $item2,
+        OrderItemInterface $item3
+    ) {
+        $item1->getTotal()->willReturn(14999);
+        $item2->getTotal()->willReturn(45000);
+        $item3->getTotal()->willReturn(0);
+
+        $item1->getRefundTotal()->willReturn(15000);
+        $item2->getRefundTotal()->willReturn(0);
+        $item3->getRefundTotal()->willReturn(250);
+
+        $item1->setOrder($this)->shouldBeCalled();
+        $item2->setOrder($this)->shouldBeCalled();
+        $item3->setOrder($this)->shouldBeCalled();
+
+        $item1->equals(Argument::any())->willReturn(false);
+        $item2->equals(Argument::any())->willReturn(false);
+        $item3->equals(Argument::any())->willReturn(false);
+
+        $this->addItem($item1);
+        $this->addItem($item2);
+        $this->addItem($item3);
+
+        $this->getItemsRefundTotal()->shouldReturn(15250);
     }
 
     function it_creates_adjustments_collection_by_default()
@@ -210,10 +257,12 @@ class OrderSpec extends ObjectBehavior
     ) {
         $item1->setOrder($this)->shouldBeCalled();
         $item1->getTotal()->willReturn(100);
+        $item1->getRefundTotal()->willReturn(0);
         $item1->getAdjustmentsRecursively(null)->willReturn([$itemAdjustment1]);
 
         $item2->setOrder($this)->shouldBeCalled();
         $item2->getTotal()->willReturn(100);
+        $item2->getRefundTotal()->willReturn(0);
         $item2->getAdjustmentsRecursively(null)->willReturn([$itemAdjustment2]);
 
         $this->addItem($item1);
@@ -227,13 +276,72 @@ class OrderSpec extends ObjectBehavior
         $this->getAdjustmentsRecursively()->shouldReturn([$orderAdjustment, $itemAdjustment1, $itemAdjustment2]);
     }
 
+    function it_returns_refund_adjustments(
+        AdjustmentInterface $orderAdjustment1,
+        AdjustmentInterface $orderAdjustment2,
+        AdjustmentInterface $orderAdjustment3
+    ) {
+        $orderAdjustment1->setAdjustable($this)->shouldBeCalled();
+        $orderAdjustment1->isNeutral()->willReturn(true);
+        $orderAdjustment1->isRefund()->willReturn(true);
+
+        $orderAdjustment2->setAdjustable($this)->shouldBeCalled();
+        $orderAdjustment2->isNeutral()->willReturn(true);
+        $orderAdjustment2->isRefund()->willReturn(false);
+
+        $orderAdjustment3->setAdjustable($this)->shouldBeCalled();
+        $orderAdjustment3->isNeutral()->willReturn(true);
+        $orderAdjustment3->isRefund()->willReturn(true);
+
+        $this->addAdjustment($orderAdjustment1);
+        $this->addAdjustment($orderAdjustment2);
+        $this->addAdjustment($orderAdjustment3);
+
+        $collection = $this->getRefundAdjustments();
+        $collection->count()->shouldReturn(2);
+        $collection->first()->shouldReturn($orderAdjustment1);
+        $collection->last()->shouldReturn($orderAdjustment3);
+    }
+
+    function it_returns_refund_adjustments_by_type(
+        AdjustmentInterface $orderAdjustment1,
+        AdjustmentInterface $orderAdjustment2,
+        AdjustmentInterface $orderAdjustment3
+    ) {
+        $orderAdjustment1->setAdjustable($this)->shouldBeCalled();
+        $orderAdjustment1->isNeutral()->willReturn(true);
+        $orderAdjustment1->isRefund()->willReturn(false);
+        $orderAdjustment1->getType()->willReturn('tax');
+
+        $orderAdjustment2->setAdjustable($this)->shouldBeCalled();
+        $orderAdjustment2->isNeutral()->willReturn(true);
+        $orderAdjustment2->isRefund()->willReturn(true);
+        $orderAdjustment2->getType()->willReturn('tax');
+
+        $orderAdjustment3->setAdjustable($this)->shouldBeCalled();
+        $orderAdjustment3->isNeutral()->willReturn(true);
+        $orderAdjustment3->isRefund()->willReturn(true);
+        $orderAdjustment3->getType()->willReturn('promotion');
+
+        $this->addAdjustment($orderAdjustment1);
+        $this->addAdjustment($orderAdjustment2);
+        $this->addAdjustment($orderAdjustment3);
+
+        $collection = $this->getRefundAdjustments('tax');
+        $collection->count()->shouldReturn(1);
+        $collection->first()->shouldReturn($orderAdjustment2);
+    }
+
     function it_has_adjustments_total_equal_to_0_by_default()
     {
         $this->getAdjustmentsTotal()->shouldReturn(0);
     }
 
-    function it_calculates_correct_adjustments_total(AdjustmentInterface $adjustment1, AdjustmentInterface $adjustment2, AdjustmentInterface $adjustment3)
-    {
+    function it_calculates_correct_adjustments_total(
+        AdjustmentInterface $adjustment1,
+        AdjustmentInterface $adjustment2,
+        AdjustmentInterface $adjustment3
+    ) {
         $adjustment1->getAmount()->willReturn(10000);
         $adjustment2->getAmount()->willReturn(-4999);
         $adjustment3->getAmount()->willReturn(1929);
@@ -241,6 +349,10 @@ class OrderSpec extends ObjectBehavior
         $adjustment1->isNeutral()->willReturn(false);
         $adjustment2->isNeutral()->willReturn(false);
         $adjustment3->isNeutral()->willReturn(false);
+
+        $adjustment1->isRefund()->willReturn(false);
+        $adjustment2->isRefund()->willReturn(false);
+        $adjustment3->isRefund()->willReturn(false);
 
         $adjustment1->setAdjustable($this)->shouldBeCalled();
         $adjustment2->setAdjustable($this)->shouldBeCalled();
@@ -251,6 +363,78 @@ class OrderSpec extends ObjectBehavior
         $this->addAdjustment($adjustment3);
 
         $this->getAdjustmentsTotal()->shouldReturn(6930);
+    }
+
+    function it_calculates_correct_adjustments_refund_total(
+        AdjustmentInterface $adjustment1,
+        AdjustmentInterface $adjustment2,
+        AdjustmentInterface $adjustment3,
+        AdjustmentInterface $adjustment4
+    ) {
+        $adjustment1->getAmount()->willReturn(25000);
+        $adjustment2->getAmount()->willReturn(-4999);
+        $adjustment3->getAmount()->willReturn(-2500);
+        $adjustment4->getAmount()->willReturn(-10001);
+
+        $adjustment1->isNeutral()->willReturn(false);
+        $adjustment2->isNeutral()->willReturn(true);
+        $adjustment3->isNeutral()->willReturn(false);
+        $adjustment4->isNeutral()->willReturn(false);
+
+        $adjustment1->isRefund()->willReturn(false);
+        $adjustment2->isRefund()->willReturn(true);
+        $adjustment3->isRefund()->willReturn(true);
+        $adjustment4->isRefund()->willReturn(true);
+
+        $adjustment1->setAdjustable($this)->shouldBeCalled();
+        $adjustment2->setAdjustable($this)->shouldBeCalled();
+        $adjustment3->setAdjustable($this)->shouldBeCalled();
+        $adjustment4->setAdjustable($this)->shouldBeCalled();
+
+        $this->addAdjustment($adjustment1);
+        $this->addAdjustment($adjustment2);
+        $this->addAdjustment($adjustment3);
+        $this->addAdjustment($adjustment4);
+
+        $this->getRefundAdjustmentsTotal()->shouldReturn(-12501);
+    }
+
+    function it_calculates_correct_adjustments_refund_total_by_type(
+        AdjustmentInterface $adjustment1,
+        AdjustmentInterface $adjustment2,
+        AdjustmentInterface $adjustment3,
+        AdjustmentInterface $adjustment4
+    ) {
+        $adjustment1->getAmount()->willReturn(25000);
+        $adjustment2->getAmount()->willReturn(-1999);
+        $adjustment3->getAmount()->willReturn(-2500);
+        $adjustment4->getAmount()->willReturn(-9999);
+
+        $adjustment1->isNeutral()->willReturn(false);
+        $adjustment2->isNeutral()->willReturn(true);
+        $adjustment3->isNeutral()->willReturn(false);
+        $adjustment4->isNeutral()->willReturn(false);
+
+        $adjustment1->isRefund()->willReturn(false);
+        $adjustment2->isRefund()->willReturn(true);
+        $adjustment3->isRefund()->willReturn(true);
+        $adjustment4->isRefund()->willReturn(true);
+
+        $adjustment1->setAdjustable($this)->shouldBeCalled();
+        $adjustment2->setAdjustable($this)->shouldBeCalled();
+        $adjustment3->setAdjustable($this)->shouldBeCalled();
+        $adjustment4->setAdjustable($this)->shouldBeCalled();
+
+        $adjustment2->getType()->willReturn('tax');
+        $adjustment3->getType()->willReturn('tax');
+        $adjustment4->getType()->willReturn('promotion');
+
+        $this->addAdjustment($adjustment1);
+        $this->addAdjustment($adjustment2);
+        $this->addAdjustment($adjustment3);
+        $this->addAdjustment($adjustment4);
+
+        $this->getRefundAdjustmentsTotal('tax')->shouldReturn(-2500);
     }
 
     function it_returns_adjustments_total_recursively(
@@ -264,11 +448,15 @@ class OrderSpec extends ObjectBehavior
         $itemAdjustment->isNeutral()->willReturn(false);
         $orderAdjustment->isNeutral()->willReturn(false);
 
+        $itemAdjustment->isRefund()->willReturn(false);
+        $orderAdjustment->isRefund()->willReturn(false);
+
         $orderAdjustment->setAdjustable($this)->shouldBeCalled();
 
         $orderItem->getAdjustmentsRecursively(null)->willReturn([$itemAdjustment]);
         $orderItem->setOrder($this)->shouldBeCalled();
         $orderItem->getTotal()->willReturn(15000);
+        $orderItem->getRefundTotal()->willReturn(0);
 
         $this->addItem($orderItem);
         $this->addAdjustment($orderAdjustment);
@@ -286,11 +474,13 @@ class OrderSpec extends ObjectBehavior
         $orderItem1->getQuantity()->willReturn(10);
         $orderItem1->setOrder($this)->shouldBeCalled();
         $orderItem1->getTotal()->willReturn(500);
+        $orderItem1->getRefundTotal()->willReturn(0);
 
         $orderItem2->getQuantity()->willReturn(30);
         $orderItem2->setOrder($this)->shouldBeCalled();
         $orderItem2->equals($orderItem1)->willReturn(false);
         $orderItem2->getTotal()->willReturn(1000);
+        $orderItem2->getRefundTotal()->willReturn(0);
 
         $this->addItem($orderItem1);
         $this->addItem($orderItem2);
@@ -298,10 +488,17 @@ class OrderSpec extends ObjectBehavior
         $this->getTotalQuantity()->shouldReturn(40);
     }
 
-    function it_calculates_correct_total(OrderItemInterface $item1, OrderItemInterface $item2, AdjustmentInterface $adjustment1, AdjustmentInterface $adjustment2)
-    {
+    function it_calculates_correct_total(
+        OrderItemInterface $item1,
+        OrderItemInterface $item2,
+        AdjustmentInterface $adjustment1,
+        AdjustmentInterface $adjustment2
+    ) {
         $item1->getTotal()->willReturn(29999);
         $item2->getTotal()->willReturn(45000);
+
+        $item1->getRefundTotal()->willReturn(0);
+        $item2->getRefundTotal()->willReturn(0);
 
         $item1->equals(Argument::any())->willReturn(false);
         $item2->equals(Argument::any())->willReturn(false);
@@ -310,8 +507,10 @@ class OrderSpec extends ObjectBehavior
         $item2->setOrder($this)->shouldBeCalled();
 
         $adjustment1->isNeutral()->willReturn(false);
+        $adjustment1->isRefund()->willReturn(false);
         $adjustment1->getAmount()->willReturn(10000);
         $adjustment2->isNeutral()->willReturn(false);
+        $adjustment2->isRefund()->willReturn(false);
         $adjustment2->getAmount()->willReturn(-4999);
 
         $adjustment1->setAdjustable($this)->shouldBeCalled();
@@ -325,6 +524,44 @@ class OrderSpec extends ObjectBehavior
         $this->getTotal()->shouldReturn(80000);
     }
 
+    function it_calculates_correct_gross_total(
+        OrderItemInterface $item1,
+        OrderItemInterface $item2,
+        AdjustmentInterface $adjustment1,
+        AdjustmentInterface $adjustment2
+    ) {
+        $item1->getTotal()->willReturn(0);
+        $item2->getTotal()->willReturn(35000);
+
+        $item1->getRefundTotal()->willReturn(-45000);
+        $item2->getRefundTotal()->willReturn(-10000);
+
+        $item1->equals(Argument::any())->willReturn(false);
+        $item2->equals(Argument::any())->willReturn(false);
+
+        $item1->setOrder($this)->shouldBeCalled();
+        $item2->setOrder($this)->shouldBeCalled();
+
+        $adjustment1->isNeutral()->willReturn(false);
+        $adjustment1->isRefund()->willReturn(false);
+        $adjustment1->getAmount()->willReturn(10000);
+        $adjustment2->isNeutral()->willReturn(false);
+        $adjustment2->isRefund()->willReturn(true);
+        $adjustment2->getAmount()->willReturn(-10000);
+
+        $adjustment1->setAdjustable($this)->shouldBeCalled();
+        $adjustment2->setAdjustable($this)->shouldBeCalled();
+
+        $this->addItem($item1);
+        $this->addItem($item2);
+        $this->addAdjustment($adjustment1);
+        $this->addAdjustment($adjustment2);
+
+        $this->getTotal()->shouldReturn(35000);
+        $this->getRefundTotal()->shouldReturn(-65000);
+        $this->getGrossTotal()->shouldReturn(100000);
+    }
+
     function it_calculates_correct_total_after_items_and_adjustments_changes(
         AdjustmentInterface $adjustment1,
         AdjustmentInterface $adjustment2,
@@ -335,6 +572,9 @@ class OrderSpec extends ObjectBehavior
         $item1->getTotal()->willReturn(29999);
         $item2->getTotal()->willReturn(45000);
 
+        $item1->getRefundTotal()->willReturn(0);
+        $item2->getRefundTotal()->willReturn(0);
+
         $item1->equals(Argument::any())->willReturn(false);
         $item2->equals(Argument::any())->willReturn(false);
 
@@ -342,6 +582,7 @@ class OrderSpec extends ObjectBehavior
         $item2->setOrder($this)->shouldBeCalled();
 
         $adjustment1->isNeutral()->willReturn(false);
+        $adjustment1->isRefund()->willReturn(false);
         $adjustment1->getAmount()->willReturn(10000);
         $adjustment1->setAdjustable($this)->shouldBeCalled();
 
@@ -359,6 +600,7 @@ class OrderSpec extends ObjectBehavior
         $adjustment1->isLocked()->willReturn(false);
 
         $adjustment2->isNeutral()->willReturn(false);
+        $adjustment2->isRefund()->willReturn(false);
         $adjustment2->getAmount()->willReturn(-4999);
         $adjustment2->setAdjustable($this)->shouldBeCalled();
 
@@ -366,6 +608,7 @@ class OrderSpec extends ObjectBehavior
         $this->addAdjustment($adjustment2);
 
         $item3->getTotal()->willReturn(55000);
+        $item3->getRefundTotal()->willReturn(0);
         $item3->equals(Argument::any())->willReturn(false);
         $item3->setOrder($this)->shouldBeCalled();
 
@@ -374,10 +617,68 @@ class OrderSpec extends ObjectBehavior
         $this->getTotal()->shouldReturn(80000);
     }
 
+    function it_calculates_correct_refund_total_after_items_and_adjustments_changes(
+        AdjustmentInterface $adjustment1,
+        AdjustmentInterface $adjustment2,
+        OrderItemInterface $item1,
+        OrderItemInterface $item2,
+        OrderItemInterface $item3
+    ) {
+        $item1->getTotal()->willReturn(10000);
+        $item2->getTotal()->willReturn(0);
+
+        $item1->getRefundTotal()->willReturn(-25000);
+        $item2->getRefundTotal()->willReturn(-35000);
+
+        $item1->equals(Argument::any())->willReturn(false);
+        $item2->equals(Argument::any())->willReturn(false);
+
+        $item1->setOrder($this)->shouldBeCalled();
+        $item2->setOrder($this)->shouldBeCalled();
+
+        $adjustment1->isNeutral()->willReturn(false);
+        $adjustment1->isRefund()->willReturn(true);
+        $adjustment1->getAmount()->willReturn(-10000);
+        $adjustment1->setAdjustable($this)->shouldBeCalled();
+
+        $this->addItem($item1);
+        $this->addItem($item2);
+        $this->addAdjustment($adjustment1);
+
+        $this->getRefundTotal()->shouldReturn(-70000);
+
+        $item2->setOrder(null)->shouldBeCalled();
+
+        $this->removeItem($item2);
+
+        $adjustment1->setAdjustable(null)->shouldBeCalled();
+        $adjustment1->isLocked()->willReturn(false);
+
+        $adjustment2->isNeutral()->willReturn(false);
+        $adjustment2->isRefund()->willReturn(true);
+        $adjustment2->getAmount()->willReturn(-5000);
+        $adjustment2->setAdjustable($this)->shouldBeCalled();
+
+        $this->removeAdjustment($adjustment1);
+        $this->addAdjustment($adjustment2);
+
+        $item3->getTotal()->willReturn(15000);
+        $item3->getRefundTotal()->willReturn(-20000);
+        $item3->equals(Argument::any())->willReturn(false);
+        $item3->setOrder($this)->shouldBeCalled();
+
+        $this->addItem($item3);
+
+        $this->getRefundTotal()->shouldReturn(-50000);
+    }
+
     function it_ignores_neutral_adjustments_when_calculating_total(OrderItemInterface $item1, OrderItemInterface $item2, AdjustmentInterface $adjustment1, AdjustmentInterface $adjustment2)
     {
         $item1->getTotal()->willReturn(29999);
         $item2->getTotal()->willReturn(45000);
+
+        $item1->getRefundTotal()->willReturn(0);
+        $item2->getRefundTotal()->willReturn(0);
 
         $item1->equals(Argument::any())->willReturn(false);
         $item2->equals(Argument::any())->willReturn(false);
@@ -386,8 +687,10 @@ class OrderSpec extends ObjectBehavior
         $item2->setOrder($this)->shouldBeCalled();
 
         $adjustment1->isNeutral()->willReturn(true);
+        $adjustment1->isRefund()->willReturn(true);
         $adjustment1->getAmount()->willReturn(10000);
         $adjustment2->isNeutral()->willReturn(false);
+        $adjustment2->isRefund()->willReturn(false);
         $adjustment2->getAmount()->willReturn(-4999);
 
         $adjustment1->setAdjustable($this)->shouldBeCalled();
@@ -404,12 +707,14 @@ class OrderSpec extends ObjectBehavior
     function it_calculates_correct_total_when_adjustment_is_bigger_than_cost(OrderItemInterface $item, AdjustmentInterface $adjustment)
     {
         $item->getTotal()->willReturn(45000);
+        $item->getRefundTotal()->willReturn(0);
 
         $item->equals(Argument::any())->willReturn(false);
 
         $item->setOrder($this)->shouldBeCalled();
 
         $adjustment->isNeutral()->willReturn(false);
+        $adjustment->isRefund()->willReturn(false);
         $adjustment->getAmount()->willReturn(-100000);
 
         $adjustment->setAdjustable($this)->shouldBeCalled();

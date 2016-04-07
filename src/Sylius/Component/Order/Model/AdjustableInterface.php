@@ -26,6 +26,13 @@ interface AdjustableInterface
     public function getAdjustments($type = null);
 
     /**
+     * @param null|string $type
+     *
+     * @return Collection|AdjustmentInterface[]
+     */
+    public function getRefundAdjustments($type = null);
+
+    /**
      * @param AdjustmentInterface $adjustment
      */
     public function addAdjustment(AdjustmentInterface $adjustment);
@@ -41,6 +48,13 @@ interface AdjustableInterface
      * @return int
      */
     public function getAdjustmentsTotal($type = null);
+
+    /**
+     * @param null|string $type
+     *
+     * @return int
+     */
+    public function getRefundAdjustmentsTotal($type = null);
 
     /**
      * @param string $type
