@@ -23,7 +23,20 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
      */
     protected $elements = [
         'email' => '#sylius_customer_email',
+        'first name' => '#sylius_customer_firstName',
+        'last name' => '#sylius_customer_lastName',
     ];
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFullName()
+    {
+        $firstNameElement = $this->getElement('first name')->getValue();
+        $lastNameElement = $this->getElement('last name')->getValue();
+
+        return sprintf('%s %s', $firstNameElement, $lastNameElement);
+    }
 
     /**
      * {@inheritdoc}

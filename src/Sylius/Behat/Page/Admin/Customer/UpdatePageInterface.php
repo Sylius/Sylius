@@ -24,4 +24,9 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
      * @return bool
      */
     public function isEmailHasValue($elementValue);
+
+    /**
+     * @return string
+     */
+    public function getFullName();
 }

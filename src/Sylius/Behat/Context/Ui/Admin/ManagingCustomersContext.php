@@ -73,7 +73,7 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @When I specify its first name as :name
+     * @When /^I specify (?:its|his) first name as "([^"]*)"$/
      */
     public function iSpecifyItsFirstNameAs($name)
     {
@@ -81,7 +81,7 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @When I specify its last name as :name
+     * @When /^I specify (?:its|his) last name as "([^"]*)"$/
      */
     public function iSpecifyItsLastNameAs($name)
     {
@@ -139,5 +139,43 @@ final class ManagingCustomersContext implements Context
     public function iSpecifyItsBirthdayAs($birthday)
     {
         $this->createPage->specifyBirthday($birthday);
+    }
+
+    /**
+     * @Given I want to edit the customer :customer
+     */
+    public function iWantToEditThisCustomer(CustomerInterface $customer)
+    {
+        $this->updatePage->open(['id' => $customer->getId()]);
+    }
+
+    /**
+     * @When I save my changes
+     */
+    public function iSaveMyChanges()
+    {
+        $this->updatePage->saveChanges();
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully edited
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited()
+    {
+        $this->notificationChecker->checkEditionNotification(self::RESOURCE_NAME);
+    }
+
+    /**
+     * @Then the customer :customer with name :name should appear in the registry
+     */
+    public function theCustomerWithNameShouldAppearInTheRegistry(CustomerInterface $customer, $name)
+    {
+        $this->updatePage->open(['id' => $customer->getId()]);
+
+        Assert::eq(
+            $name,
+            $this->updatePage->getFullName(),
+            sprintf('Customer with name %s should exist but it does not.', $name)
+        );
     }
 }
