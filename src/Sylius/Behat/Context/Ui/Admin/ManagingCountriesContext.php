@@ -112,7 +112,6 @@ final class ManagingCountriesContext implements Context
 
     /**
      * @When I add it
-     * @When I add this country
      */
     public function iAddIt()
     {
@@ -200,7 +199,7 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @Then /^I should not be able to choose "([^"]*)"$/
+     * @Then I should not be able to choose :name
      */
     public function iShouldNotBeAbleToChoose($name)
     {
@@ -219,10 +218,13 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @Then this country should have the :provinceName province
+     * @Then /^(this country) should have the "([^"]*)" province$/
+     * @Then /^the (country "[^"]*") should have the "([^"]*)" province$/
      */
-    public function countryShouldHaveProvince($provinceName)
+    public function countryShouldHaveProvince(CountryInterface $country, $provinceName)
     {
+        $this->iWantToEditThisCountry($country);
+
         Assert::true(
             $this->updatePage->isThereProvince($provinceName),
             sprintf('%s is not a province of this country.', $provinceName)
@@ -230,10 +232,12 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @Then this country should not have the :provinceName province
+     * @Then /^(this country) should not have the "([^"]*)" province$/
      */
-    public function thisCountryShouldNotHaveTheProvince($provinceName)
+    public function thisCountryShouldNotHaveTheProvince(CountryInterface $country, $provinceName)
     {
+        $this->iWantToEditThisCountry($country);
+
         Assert::false(
             $this->updatePage->isThereProvince($provinceName),
             sprintf('%s is a province of this country.', $provinceName)
@@ -298,8 +302,8 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @When /^I name the province "([^"]*)"$/
-     * @When /^I do not name the province$/
+     * @When I name the province :provinceName
+     * @When I do not name the province
      */
     public function iNameTheProvince($provinceName = null)
     {
@@ -324,7 +328,7 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @When /^I remove "([^"]*)" province name$/
+     * @When I remove :provinceName province name
      */
     public function iRemoveProvinceName($provinceName)
     {

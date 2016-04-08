@@ -15,7 +15,7 @@ Feature: Adding countries with provinces
         And I add it
         Then I should be notified about successful creation
         And the country "United Kingdom" should appear in the store
-        And this country should have the "Scotland" province
+        And the country "United Kingdom" should have the "Scotland" province
 
     @ui @javascript
     Scenario: Adding a country with two provinces
@@ -23,8 +23,8 @@ Feature: Adding countries with provinces
         When I choose "United Kingdom"
         And I add the "Scotland" province with "GB-SCT" code
         And I add the "Northern Ireland" province with "GB-NIR" code and "N.Ireland" abbreviation
-        And I add this country
+        And I add it
         Then I should be notified about successful creation
         And the country "United Kingdom" should appear in the store
-        And this country should have the "Scotland" province
-        And this country should have the "Northern Ireland" province
+        And the country "United Kingdom" should have the "Scotland" province
+        And the country "United Kingdom" should have the "Northern Ireland" province
