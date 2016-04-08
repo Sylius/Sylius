@@ -178,4 +178,35 @@ final class ManagingCustomersContext implements Context
             sprintf('Customer with name %s should exist but it does not.', $name)
         );
     }
+
+    /**
+     * @When I want to see all customers in store
+     */
+    public function iWantToSeeAllCustomersInStore()
+    {
+        $this->indexPage->open();
+    }
+
+    /**
+     * @Then /^I should see (\d+) customers in the list$/
+     */
+    public function iShouldSeeCustomersInTheList($amountOfCustomers)
+    {
+        Assert::eq(
+            (int) $amountOfCustomers,
+            $this->indexPage->countItems(),
+            sprintf('Amount of customers should be equal %s, but is not.', $amountOfCustomers)
+        );
+    }
+
+    /**
+     * @Then I should see the customer :email in the list
+     */
+    public function iShouldSeeTheCustomerInTheList($email)
+    {
+        Assert::true(
+            $this->indexPage->isResourceOnPage(['Email' => $email]),
+            sprintf('Customer with email %s should exist but it does not.', $email)
+        );
+    }
 }

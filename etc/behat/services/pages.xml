@@ -41,7 +41,7 @@
         <parameter key="sylius.behat.page.admin.country.index.class">Sylius\Behat\Page\Admin\Country\IndexPage</parameter>
         <parameter key="sylius.behat.page.admin.country.update.class">Sylius\Behat\Page\Admin\Country\UpdatePage</parameter>
         <parameter key="sylius.behat.page.admin.customer.create.class">Sylius\Behat\Page\Admin\Customer\CreatePage</parameter>
-        <parameter key="sylius.behat.page.admin.customer.index.class">Sylius\Behat\Page\Admin\Crud\IndexPage</parameter>
+        <parameter key="sylius.behat.page.admin.customer.index.class">Sylius\Behat\Page\Admin\Customer\IndexPage</parameter>
         <parameter key="sylius.behat.page.admin.customer.update.class">Sylius\Behat\Page\Admin\Customer\UpdatePage</parameter>
         <parameter key="sylius.behat.page.admin.customer.show.class">Sylius\Behat\Page\Admin\Customer\ShowPage</parameter>
         <parameter key="sylius.behat.page.admin.locale.create.class">Sylius\Behat\Page\Admin\Locale\CreatePage</parameter>

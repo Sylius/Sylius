@@ -21,6 +21,9 @@ use Sylius\Component\User\Repository\CustomerRepositoryInterface;
  */
 final class CustomerContext implements Context
 {
+    const DEFAULT_CUSTOMER_FIRST_NAME = 'John';
+    const DEFAULT_CUSTOMER_LAST_NAME = 'Doe';
+
     /**
      * @var SharedStorageInterface
      */
@@ -58,6 +61,14 @@ final class CustomerContext implements Context
     {
         $partsOfName = explode(' ', $name);
         $this->createCustomer($email, $partsOfName[0], $partsOfName[1]);
+    }
+
+    /**
+     * @Given the store has customer :email
+     */
+    public function theStoreHasCustomer($email)
+    {
+        $this->createCustomer($email, self::DEFAULT_CUSTOMER_FIRST_NAME, self::DEFAULT_CUSTOMER_LAST_NAME);
     }
 
     /**
