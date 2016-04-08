@@ -22,6 +22,7 @@ sylius:
         description: Description
         disabled: Disabled
         edit: Edit
+        edit_country: Edit country
         edit_promotion: Edit promotion
         edit_tax_category: Edit tax category
         edit_tax_rate: Edit tax rate
