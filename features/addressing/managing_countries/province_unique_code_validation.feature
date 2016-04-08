@@ -9,7 +9,7 @@ Feature: Province unique code validation
         And this country has the "Northern Ireland" province with "GB-NIR" code
         And I am logged in as an administrator
 
-    @todo
+    @ui @javascript
     Scenario: Trying to add a new province with taken code
         Given I want to edit this country
         And I add the "Scotland" province with "GB-NIR" code

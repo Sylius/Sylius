@@ -344,4 +344,15 @@ final class ManagingCountriesContext implements Context
             sprintf('Province %s should be required.', $element)
         );
     }
+
+    /**
+     * @Then /^I should be notified that province code must be unique$/
+     */
+    public function iShouldBeNotifiedThatProvinceCodeMustBeUnique()
+    {
+        Assert::true(
+            $this->countryUpdatePage->checkValidationMessageFor('code', 'Province code must be unique.'),
+            'Unique code violation message should appear on page, but it does not.'
+        );
+    }
 }
