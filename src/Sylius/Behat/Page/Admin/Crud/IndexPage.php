@@ -69,6 +69,14 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     }
 
     /**
+     * @return int
+     */
+    public function countItems()
+    {
+        return $this->getTableAccessor()->countTableBodyRows($this->getElement('table'));
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function deleteResourceOnPage(array $parameters)

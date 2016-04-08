@@ -31,4 +31,9 @@ interface IndexPageInterface extends PageInterface
      * @return bool
      */
     public function deleteResourceOnPage(array $parameters);
+
+    /**
+     * @return int
+     */
+    public function countItems();
 }

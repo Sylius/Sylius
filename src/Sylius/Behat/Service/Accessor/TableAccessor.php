@@ -50,6 +50,16 @@ final class TableAccessor implements TableAccessorInterface
 
     /**
      * @param NodeElement $table
+     *
+     * @return int
+     */
+    public function countTableBodyRows(NodeElement $table)
+    {
+        return count($table->findAll('css', 'tbody > tr'));
+    }
+
+    /**
+     * @param NodeElement $table
      * @param array $fields
      *
      * @return NodeElement[]
