@@ -21,9 +21,13 @@ interface ResourceBundleInterface
     const MAPPING_ANNOTATION = 'annotation';
 
     /**
-     * Return an array which contains the supported drivers.
+     * Returns a vector of supported drivers.
+     *
+     * @see SyliusResourceBundle::DRIVER_DOCTRINE_ORM
+     * @see SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM
+     * @see SyliusResourceBundle::DRIVER_DOCTRINE_PHPCR_ODM
      *
      * @return array
      */
-    public static function getSupportedDrivers();
+    public function getSupportedDrivers();
 }

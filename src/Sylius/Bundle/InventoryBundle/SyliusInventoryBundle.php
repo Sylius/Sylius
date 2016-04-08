@@ -25,7 +25,7 @@ class SyliusInventoryBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    public static function getSupportedDrivers()
+    public function getSupportedDrivers()
     {
         return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
