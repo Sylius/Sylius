@@ -19,12 +19,6 @@
 <div class="page-header">
     <div class="actions-menu">
         {{ buttons.manage(path('sylius_backend_order_index'), 'sylius.ui.manage_orders'|trans) }}
-        {% if not order.deleted %}
-            {% if not disabled %}
-                {{ buttons.edit(path('sylius_backend_order_update', {'id': order.id})) }}
-            {% endif %}
-            {{ buttons.delete(path('sylius_backend_order_delete', {'id': order.id})) }}
-        {% endif %}
     </div>
     <h1><span class="glyphicon glyphicon-calendar"></span> {{ 'sylius.ui.order'|trans({'%number%': order.number}) }}</h1>
 </div>
