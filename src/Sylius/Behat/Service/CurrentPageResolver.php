@@ -48,7 +48,7 @@ final class CurrentPageResolver implements CurrentPageResolverInterface
      */
     public function getCurrentPageWithForm(CreatePageInterface $createPage, UpdatePageInterface $updatePage)
     {
-        $routeParameters = $this->urlMatcher->match($this->session->getCurrentUrl());
+        $routeParameters = $this->urlMatcher->match(parse_url($this->session->getCurrentUrl(), PHP_URL_PATH));
 
         if (false !== strpos($routeParameters['_route'], 'create')) {
             return $createPage;
