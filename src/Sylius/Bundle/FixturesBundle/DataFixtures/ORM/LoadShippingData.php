@@ -91,10 +91,11 @@ class LoadShippingData extends DataFixture
      * @param string                    $calculator
      * @param array                     $configuration
      * @param ShippingCategoryInterface $category
+     * @param bool $enabled
      *
      * @return ShippingMethodInterface
      */
-    protected function createShippingMethod(array $translatedNames, $code, $zoneCode, $calculator = DefaultCalculators::PER_UNIT_RATE, array $configuration = [], ShippingCategoryInterface $category = null)
+    protected function createShippingMethod(array $translatedNames, $code, $zoneCode, $calculator = DefaultCalculators::PER_UNIT_RATE, array $configuration = [], ShippingCategoryInterface $category = null, $enabled = true)
     {
         /* @var $method ShippingMethodInterface */
         $method = $this->getShippingMethodFactory()->createNew();
@@ -114,6 +115,7 @@ class LoadShippingData extends DataFixture
         $method->setCalculator($calculator);
         $method->setConfiguration($configuration);
         $method->setCategory($category);
+        $method->setEnabled($enabled);
 
         return $method;
     }
