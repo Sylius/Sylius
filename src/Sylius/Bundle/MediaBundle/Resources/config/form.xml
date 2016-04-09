@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+
+        <!-- Form Types -->
+        <parameter key="sylius.form.type.image.class">Sylius\Bundle\MediaBundle\Form\Type\ImageType</parameter>
+
+    </parameters>
+
+    <services>
+
+        <!-- Form Types -->
+        <service id="sylius.form.type.image" class="%sylius.form.type.image.class%">
+            <argument>%sylius.model.image.class%</argument>
+            <argument>%sylius.validation_groups.image%</argument>
+            <argument type="service" id="doctrine_phpcr.odm.document_manager" />
+            <tag name="form.type" alias="sylius_image" />
+        </service>
+
+    </services>
+
+</container>

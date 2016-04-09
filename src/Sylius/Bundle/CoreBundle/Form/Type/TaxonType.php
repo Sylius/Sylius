@@ -26,12 +26,10 @@ class TaxonType extends BaseTaxonType
     {
         parent::buildForm($builder, $options);
 
-        $builder->add(
-            'file',
-            'file',
-            [
-                'label' => 'sylius.form.taxon.file',
-            ]
-        );
+        $builder
+            ->add('image', 'sylius_image', [
+                'label' => 'sylius.form.taxon.image',
+            ])
+        ;
     }
 }

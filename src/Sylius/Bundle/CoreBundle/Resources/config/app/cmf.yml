@@ -27,10 +27,17 @@ cmf_menu:
             node_document_class: %sylius.model.menu_node.class%
 
 cmf_media:
+    upload_file_role: ROLE_SYLIUS_ADMIN
     persistence:
         phpcr:
             media_basepath: /cms/medias
-            
+            enabled: true
+    extra_filters:
+        - slideshow_default
+        - slideshow_small
+        - slideshow_medium
+        - slideshow_large
+
 cmf_routing:
     chain:
         routers_by_id:

@@ -15,31 +15,30 @@ doctrine_cache:
     providers:
         sylius_rbac: %sylius.cache%
 
-knp_gaufrette:
-    adapters:
-        sylius_image:
-            local:
-                directory:  %kernel.root_dir%/../web/media/image
-                create:     true
-    filesystems:
-        sylius_image:
-            adapter: %sylius.uploader.filesystem%
-
 liip_imagine:
-    loaders:
-        default:
-            filesystem:
-                data_root: %kernel.root_dir%/../web/media/image
     filter_sets:
+        sylius_default:
+            data_loader: cmf_media_doctrine_phpcr
         sylius_small:
+            data_loader: cmf_media_doctrine_phpcr
             filters:
                 thumbnail: { size: [120, 90], mode: outbound }
         sylius_medium:
+            data_loader: cmf_media_doctrine_phpcr
             filters:
                 thumbnail: { size: [240, 180], mode: outbound }
         sylius_large:
+            data_loader: cmf_media_doctrine_phpcr
             filters:
                 thumbnail: { size: [640, 480], mode: outbound }
+
+cmf_media:
+    # LiipImagine will re-create the caches when images using filters below have changed.
+    extra_filters:
+        - sylius_default
+        - sylius_small
+        - sylius_medium
+        - sylius_large
 
 knp_snappy:
     pdf:

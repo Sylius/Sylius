@@ -87,7 +87,6 @@
 
         <parameter key="sylius.order.purger.class">Sylius\Bundle\CoreBundle\Purger\ExpiredOrdersPurger</parameter>
         <parameter key="sylius.order.releaser.class">Sylius\Bundle\CoreBundle\Releaser\ExpiredOrdersReleaser</parameter>
-        <parameter key="sylius.image_uploader.class">Sylius\Component\Core\Uploader\ImageUploader</parameter>
         <parameter key="sylius.currency_context.class">Sylius\Bundle\CoreBundle\Context\CurrencyContext</parameter>
         <parameter key="sylius.currency_provider.class">Sylius\Component\Core\Currency\ChannelAwareCurrencyProvider</parameter>
         <parameter key="sylius.channel_aware_locale_provider.class">Sylius\Bundle\CoreBundle\Locale\ChannelAwareLocaleProvider</parameter>
@@ -369,16 +368,6 @@
             <argument type="service" id="sylius.repository.channel" />
             <tag name="kernel.event_listener" event="sylius.channel.pre_delete" method="onChannelPreDelete" />
         </service>
-        <service id="sylius.listener.image_upload" class="%sylius.listener.image_upload.class%">
-            <argument type="service" id="sylius.image_uploader" />
-            <tag name="kernel.event_listener" event="sylius.product.pre_create" method="uploadProductImage" />
-            <tag name="kernel.event_listener" event="sylius.product.pre_update" method="uploadProductImage" />
-            <tag name="kernel.event_listener" event="sylius.product_variant.pre_create" method="uploadProductImage" />
-            <tag name="kernel.event_listener" event="sylius.product_variant.pre_update" method="uploadProductImage" />
-            <tag name="kernel.event_listener" event="sylius.taxon.pre_create" method="uploadTaxonImage" />
-            <tag name="kernel.event_listener" event="sylius.taxon.pre_update" method="uploadTaxonImage" />
-        </service>
-
         <service id="sylius.listener.order_recalculation" class="%sylius.listener.order_recalculation.class%">
             <argument type="service" id="sylius.order_processing.order_recalculator" />
             <tag name="kernel.event_listener" event="sylius.cart_change" method="recalculateOrder"/>
@@ -398,15 +387,6 @@
             <argument type="service" id="sylius.promotion_eligibility_checker" />
             <argument type="service" id="sylius.promotion_applicator" />
         </service>
-
-        <service id="sylius.image_uploader" class="%sylius.image_uploader.class%">
-            <argument type="service">
-                <service class="Gaufrette\Filesystem" factory-service="knp_gaufrette.filesystem_map" factory-method="get">
-                    <argument>%sylius.uploader.filesystem%</argument>
-                </service>
-            </argument>
-        </service>
-
         <service id="sylius.promotion_rule_checker.nth_order" class="%sylius.promotion_rule_checker.nth_order.class%">
             <argument type="service" id="sylius.repository.order" />
             <tag name="sylius.promotion_rule_checker" type="nth_order" label="Nth order" />

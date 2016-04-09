@@ -65,6 +65,8 @@ sylius_cart:
 
 sylius_settings: ~
 
+sylius_media: ~
+
 sylius_content:
     driver: doctrine/phpcr-odm
     resources:

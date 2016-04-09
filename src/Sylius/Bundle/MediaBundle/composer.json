@@ -1,0 +1,49 @@
+{
+    "name": "sylius/media-bundle",
+    "type": "symfony-bundle",
+    "description": "Sylius media bundle.",
+    "keywords": ["shop", "ecommerce", "store", "webshop", "sylius", "phpcr", "cmf", "media"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name":     "Paweł Jędrzejewski",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name":     "Aram Alipoor",
+            "email":    "aram.alipoor@gmail.com"
+        },
+        {
+            "name":     "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name":     "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php":                               ">=5.3.3",
+
+        "jackalope/jackalope-doctrine-dbal": "1.1.*",
+        "sylius/resource-bundle":            "0.15.*@dev",
+        "symfony/framework-bundle":          "~2.3",
+        "symfony-cmf/media-bundle":          "~1.2"
+    },
+    "require-dev": {
+        "phpspec/phpspec":  "~2.1",
+        "symfony/form":     "~2.3"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": { "Sylius\\Bundle\\MediaBundle\\": "" }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.15-dev"
+        }
+    }
+}

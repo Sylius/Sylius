@@ -31,8 +31,6 @@ parameters:
     sylius.phpcr.user: EDITME
     sylius.phpcr.pass: EDITME
 
-    sylius.uploader.filesystem: sylius_image
-
     sylius.currency_importer.open_exchange_rates: EDITME
     sylius.currency_importer.ecb.base_currency: EUR
 

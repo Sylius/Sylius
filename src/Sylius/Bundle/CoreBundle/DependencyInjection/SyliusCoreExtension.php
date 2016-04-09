@@ -41,6 +41,7 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
         'sylius_currency',
         'sylius_inventory',
         'sylius_locale',
+        'sylius_media',
         'sylius_order',
         'sylius_payment',
         'sylius_payum',
@@ -68,7 +69,7 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
         $config = $this->processConfiguration(new Configuration(), $config);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
+        $this->registerResources('sylius', $config['driver'], [], $container);
 
         $configFiles = [
             'services.xml',

@@ -9,34 +9,33 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Core\Model;
+namespace Sylius\Component\Media\Model;
 
+use Sylius\Component\Resource\Model\TimestampableInterface;
 use Sylius\Component\Resource\Model\TimestampableTrait;
+use Symfony\Cmf\Bundle\MediaBundle\ImageInterface as CmfImageInterface;
 
-class Image implements ImageInterface
+/**
+ * @author Aram Alipoor <aram.alipoor@gmail.com>
+ */
+class Image implements ImageInterface, TimestampableInterface
 {
     use TimestampableTrait;
 
     /**
-     * Id
-     *
      * @var int
      */
     protected $id;
 
     /**
-     * File
-     *
-     * @var \SplFileInfo
-     */
-    protected $file;
-
-    /**
-     * Path to file
-     *
      * @var string
      */
-    protected $path;
+    protected $mediaId;
+
+    /**
+     * @var CmfImageInterface
+     */
+    protected $media;
 
     public function __construct()
     {
@@ -44,8 +43,6 @@ class Image implements ImageInterface
     }
 
     /**
-     * Get id
-     *
      * @return int
      */
     public function getId()
@@ -56,48 +53,32 @@ class Image implements ImageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasFile()
+    public function getMediaId()
     {
-        return null !== $this->file;
+        return $this->mediaId;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getFile()
+    public function setMediaId($mediaId)
     {
-        return $this->file;
+        $this->mediaId = $mediaId;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setFile(\SplFileInfo $file)
+    public function getMedia()
     {
-        $this->file = $file;
+        return $this->media;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function hasPath()
+    public function setMedia($media)
     {
-        return null !== $this->path;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPath()
-    {
-        return $this->path;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setPath($path)
-    {
-        $this->path = $path;
+        $this->media = $media;
     }
 }

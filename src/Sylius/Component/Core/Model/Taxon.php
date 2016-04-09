@@ -12,23 +12,20 @@
 namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Sylius\Component\Media\Model\ImageInterface;
+use Sylius\Component\Resource\Model\TimestampableInterface;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Taxonomy\Model\Taxon as BaseTaxon;
 use Sylius\Component\Taxonomy\Model\TaxonTranslation;
 
-class Taxon extends BaseTaxon implements ImageInterface, TaxonInterface
+class Taxon extends BaseTaxon implements TaxonInterface, TimestampableInterface
 {
     use TimestampableTrait;
 
     /**
-     * @var \SplFileInfo
+     * @var ImageInterface
      */
-    protected $file;
-
-    /**
-     * @var string
-     */
-    protected $path;
+    protected $image;
 
     /**
      * @var ArrayCollection
@@ -46,49 +43,25 @@ class Taxon extends BaseTaxon implements ImageInterface, TaxonInterface
     /**
      * {@inheritdoc}
      */
-    public function hasFile()
+    public function getImage()
     {
-        return null !== $this->file;
+        return $this->image;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getFile()
+    public function setImage(ImageInterface $image)
     {
-        return $this->file;
+        $this->image = $image;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setFile(\SplFileInfo $file)
+    public function hasImage()
     {
-        $this->file = $file;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasPath()
-    {
-        return null !== $this->path;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPath()
-    {
-        return $this->path;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setPath($path)
-    {
-        $this->path = $path;
+        return null !== $this->image;
     }
 
     /**

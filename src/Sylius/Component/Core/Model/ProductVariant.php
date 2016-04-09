@@ -14,6 +14,7 @@ namespace Sylius\Component\Core\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Core\Pricing\Calculators;
+use Sylius\Component\Media\Model\ImageInterface;
 use Sylius\Component\Product\Model\Variant as BaseVariant;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Component\Variation\Model\VariantInterface as BaseVariantInterface;
@@ -69,7 +70,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     protected $availableOnDemand = true;
 
     /**
-     * @var Collection|ProductVariantImageInterface[]
+     * @var Collection|ImageInterface[]
      */
     protected $images;
 
@@ -348,7 +349,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function hasImage(ProductVariantImageInterface $image)
+    public function hasImage(ImageInterface $image)
     {
         return $this->images->contains($image);
     }
@@ -376,25 +377,19 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function addImage(ProductVariantImageInterface $image)
+    public function addImage(ImageInterface $image)
     {
         if (!$this->hasImage($image)) {
-            $image->setVariant($this);
             $this->images->add($image);
         }
-
-        return $this;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function removeImage(ProductVariantImageInterface $image)
+    public function removeImage(ImageInterface $image)
     {
-        $image->setVariant(null);
         $this->images->removeElement($image);
-
-        return $this;
     }
 
     /**
@@ -411,8 +406,6 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     public function setWeight($weight)
     {
         $this->weight = $weight;
-
-        return $this;
     }
 
     /**
@@ -429,8 +422,6 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     public function setWidth($width)
     {
         $this->width = $width;
-
-        return $this;
     }
 
     /**
@@ -447,8 +438,6 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     public function setHeight($height)
     {
         $this->height = $height;
-
-        return $this;
     }
 
     /**
@@ -465,8 +454,6 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     public function setDepth($depth)
     {
         $this->depth = $depth;
-
-        return $this;
     }
 
     /**

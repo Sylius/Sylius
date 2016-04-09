@@ -30,9 +30,9 @@
             </td>
             <td>
                 <span style="border-left: {{ taxon.level * 20}}px solid #f1f1f1; padding-left: 10px;">
-                    {% if taxon.path|length > 0 %}
-                        <a href="{{ taxon.path|imagine_filter('sylius_large') }}" title="{{ taxon.name }}">
-                            <img src="{{ taxon.path|imagine_filter('sylius_small') }}" alt="" class="img-rounded" />
+                    {% if taxon.image is not null %}
+                        <a href="{{ sylius_image_url(taxon.image, 'sylius_large') }}" title="{{ taxon.name }}">
+                            <img src="{{ sylius_image_url(taxon.image, 'sylius_small') }}" alt="" class="img-rounded" />
                         </a>
                     {% endif %}
                     <a href="{{ path('sylius_backend_taxon_show', {'id': taxon.id}) }}">{{ taxon.name }}</a>

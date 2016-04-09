@@ -56,12 +56,19 @@
         <field name="weight" column="weight" type="float" nullable="true">
             <gedmo:versioned/>
         </field>
-
-        <one-to-many field="images" target-entity="Sylius\Component\Core\Model\ProductVariantImageInterface" mapped-by="variant">
+        <many-to-many field="images" target-entity="Sylius\Component\Media\Model\ImageInterface">
             <cascade>
                 <cascade-all />
             </cascade>
-        </one-to-many>
+            <join-table name="sylius_products_images">
+                <join-columns>
+                    <join-column name="product_id" referenced-column-name="id" on-delete="CASCADE" />
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="image_id" referenced-column-name="id" on-delete="CASCADE" />
+                </inverse-join-columns>
+            </join-table>
+        </many-to-many>
 
         <many-to-one field="taxCategory" target-entity="Sylius\Component\Taxation\Model\TaxCategoryInterface">
             <join-column name="tax_category_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
