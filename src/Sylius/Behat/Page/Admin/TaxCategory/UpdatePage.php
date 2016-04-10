@@ -33,20 +33,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     ];
 
     /**
-     * {@inheritdoc}
-     */
-    public function hasResourceValues(array $parameters)
-    {
-        foreach ($parameters as $element => $value) {
-            if ($this->getElement($element)->getValue() !== (string) $value) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    /**
      * {@inheritDoc}
      */
     protected function getCodeElement()
