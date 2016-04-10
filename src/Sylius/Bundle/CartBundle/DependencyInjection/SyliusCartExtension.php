@@ -47,6 +47,8 @@ class SyliusCartExtension extends AbstractResourceExtension implements PrependEx
             $loader->load($configFile);
         }
 
+        $loader->load(sprintf('driver/%s.xml', $config['driver']));
+
         $container->setAlias('sylius.cart_provider', $config['provider']);
         $container->setAlias('sylius.cart_resolver', $config['resolver']);
 
