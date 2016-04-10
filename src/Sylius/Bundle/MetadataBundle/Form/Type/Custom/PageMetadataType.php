@@ -87,13 +87,7 @@ class PageMetadataType extends AbstractResourceType
                 return implode(', ', $originalKeywords);
             },
             function ($submittedKeywords) {
-                $keywords = explode(',', $submittedKeywords);
-
-                array_walk($keywords, function ($keyword) {
-                    return trim($keyword);
-                });
-
-                return $keywords;
+                return array_map('trim', explode(',', $submittedKeywords));
             }
         ));
     }
