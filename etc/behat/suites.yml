@@ -43,6 +43,7 @@ imports:
     - suites/ui/checkout.yml
     - suites/ui/customer/managing_customers.yml
     - suites/ui/locale.yml
+    - suites/ui/payment/managing_payment_methods.yml
     - suites/ui/product.yml
     - suites/ui/promotion.yml
     - suites/ui/promotion/managing_promotions.yml

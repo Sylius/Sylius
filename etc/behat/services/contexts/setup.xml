@@ -20,6 +20,7 @@
         <parameter key="sylius.behat.context.setup.locale.class">Sylius\Behat\Context\Setup\LocaleContext</parameter>
         <parameter key="sylius.behat.context.setup.order.class">Sylius\Behat\Context\Setup\OrderContext</parameter>
         <parameter key="sylius.behat.context.setup.payment.class">Sylius\Behat\Context\Setup\PaymentContext</parameter>
+        <parameter key="sylius.behat.context.setup.payment_method.class">Sylius\Behat\Context\Setup\PaymentMethodContext</parameter>
         <parameter key="sylius.behat.context.setup.product.class">Sylius\Behat\Context\Setup\ProductContext</parameter>
         <parameter key="sylius.behat.context.setup.product_review.class">Sylius\Behat\Context\Setup\ProductReviewContext</parameter>
         <parameter key="sylius.behat.context.setup.promotion.class">Sylius\Behat\Context\Setup\PromotionContext</parameter>
@@ -93,6 +94,14 @@
             <argument type="service" id="sylius.repository.payment_method" container="symfony" />
             <argument type="service" id="sylius.factory.payment_method" container="symfony" />
             <argument type="service" id="sylius.payment_method_name_to_gateway_converter" container="symfony" />
+            <tag name="sylius.behat.context" />
+        </service>
+
+        <service id="sylius.behat.context.setup.payment_method" class="%sylius.behat.context.setup.payment_method.class%" scope="scenario">
+            <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
+            <argument type="service" id="sylius.factory.payment_method" container="symfony" />
+            <argument type="service" id="sylius.payment_method_name_to_gateway_converter" container="symfony" />
+            <argument type="service" id="sylius.repository.payment_method" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>
 
