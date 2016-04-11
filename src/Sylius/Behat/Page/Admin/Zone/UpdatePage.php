@@ -58,12 +58,9 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         try {
             $selectedZoneMembers = $this->getSelectedZoneMembers();
 
-            /** @var NodeElement $selectedZoneMember */
             foreach ($selectedZoneMembers as $selectedZoneMember) {
-                $isMatched = $selectedZoneMember->getAttribute('data-value') === $zoneMember->getCode();
-
-                if (true === $isMatched) {
-                    return $isMatched;
+                if ($selectedZoneMember->getValue() === $zoneMember->getCode()) {
+                    return true;
                 }
             }
 
@@ -79,19 +76,27 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     public function removeMember(ZoneMemberInterface $zoneMember)
     {
         $zoneMembers = $this->getElement('zone_members');
-        $deleteButtons = $zoneMembers->findAll('css', 'a[data-form-collection="delete"]');
+        $items = $zoneMembers->findAll('css', 'div[data-form-collection="item"]');
 
-        /** @var NodeElement $deleteButton */
-        foreach ($deleteButtons as $deleteButton) {
-            $parent = $deleteButton->getParent()->getParent();
-            $active = $parent->find('css', '.item.active.selected');
+        /** @var NodeElement $item */
+        foreach ($items as $item) {
+            $selectedItem = $item->find('css', 'option[selected="selected"]');
 
-            if ($active->getAttribute('data-value') === $zoneMember->getCode()) {
+            if (null === $selectedItem) {
+                throw new \RuntimeException('Cannot find selected option');
+            }
+
+            if ($selectedItem->getValue() === $zoneMember->getCode()) {
+                $deleteButton = $item->find('css', 'a[data-form-collection="delete"]');
+
+                if (null === $deleteButton) {
+                    throw new \RuntimeException('Cannot find delete button');
+                }
+                $deleteButton->click();
+
                 break;
             }
         }
-
-        $deleteButton->press();
     }
 
     /**
@@ -112,7 +117,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     private function getSelectedZoneMembers()
     {
         $zoneMembers = $this->getElement('zone_members');
-        $selectedZoneMembers = $zoneMembers->findAll('css', '.item.active.selected');
+        $selectedZoneMembers = $zoneMembers->findAll('css', 'option[selected="selected"]');
 
         return $selectedZoneMembers;
     }

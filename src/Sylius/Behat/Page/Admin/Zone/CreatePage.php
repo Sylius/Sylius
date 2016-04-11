@@ -27,20 +27,11 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         'code' => '#sylius_zone_code',
         'name' => '#sylius_zone_name',
         'type' => '#sylius_zone_type',
-        'member' => '.one.field',
-        'lastAddedMemberList' => null,
     ];
-
-    /**
-     * @var int
-     */
-    private $memberCounter = 0;
 
     public function addMember()
     {
         $this->getDocument()->clickLink('Add member');
-        $this->elements['lastAddedMemberList'] = sprintf('#sylius_zone_members_%s_code', $this->memberCounter);
-        $this->memberCounter++;
     }
 
     /**
@@ -48,11 +39,16 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      */
     public function chooseMember($name)
     {
-        if (null === $this->elements['lastAddedMemberList']) {
-            throw new \RuntimeException('You need to add new member!');
+        $selectItems = $this->getDocument()->waitFor(2*1000*1000, function () {
+            return $this->getDocument()->findAll('css', 'div[data-form-type="collection"] select');
+        });
+        $lastSelectItem = end($selectItems);
+
+        if (false === $lastSelectItem) {
+            throw new \RuntimeException('There is no select items.');
         }
 
-        $this->getElement('lastAddedMemberList')->selectOption($name);
+        $lastSelectItem->selectOption($name);
     }
 
     /**
