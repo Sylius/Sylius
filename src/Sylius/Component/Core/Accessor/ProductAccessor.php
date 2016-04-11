@@ -49,7 +49,7 @@ class ProductAccessor extends PropertyAccessor
             }
 
             foreach ($product->getAttributes() as $attribute) {
-                if ($propertyPath === strtolower($attribute->getName())) {
+                if ($propertyPath === strtolower($attribute->getCode())) {
                     $tags[] = $attribute->getValue();
                 }
             }
