@@ -110,7 +110,7 @@ sylius:
         adjustments: Корректировки
         administration: Администрирование
         administration_dashboard: Административная панель
-        all_your_addresses: sylius.account.address.list
+        all_your_addresses: Список адресов
         amount: Сумма
         archetypes: Прототипы
         association: Взаимосвязи
@@ -141,7 +141,7 @@ sylius:
         change_your_password: Change my password
         channel: Канал
         channels: Каналы
-        checkout: Сверка
+        checkout: Оформить заказ
         choose_file: Выбрать файл
         city: Город
         code: Код
@@ -150,6 +150,7 @@ sylius:
         configuration: Конфигурация
         confirmation: Подтверждение
         confirmation_title: Подтверждение
+        confirmed: Подтвержден
         contact_request_details: Детали контактного запроса
         contact_request_show: Запрос контактов
         contact_requests: Запросы контактов
@@ -163,7 +164,7 @@ sylius:
         coupon_based: Основана на купонах
         coupons: sylius.breadcrumb.promotion_coupon.index
         create: Добавить
-        create_a_new_address: sylius.account.address.create
+        create_a_new_address: Добавить новый адрес
         create_archetype: Создать архетип
         create_association_type: Создать тип взаимосвязи
         create_contact_request: Создать контактный запрос
@@ -205,6 +206,7 @@ sylius:
         current_promotions: Список рекламных акций
         current_stock: На складе
         customer: Клиент
+        customer_id: ID клиента
         customer_details: Информация о клиенте
         customers: Клиенты
         customers_list_of_all_customers_in_store: 'Клиенты <small>список всех клиентов магазина</small>'
@@ -223,7 +225,7 @@ sylius:
         edit_group: Редактировать группу
         edit_locale: Редактировать язык
         edit_my_address: sylius.account.address.update
-        edit_your_personal_information: Edit my personal information
+        edit_your_personal_information: Редактировать персональную информацию
         editing_archetype: Редактировать прототип
         editing_channel: Редактировать каналы
         editing_contact_request: Редактировать контактный запрос
@@ -264,6 +266,7 @@ sylius:
         filter: Фильтр
         first_name: Имя
         firstname: Имя
+        forgot_password: 'Забыли пароль'
         fulfill: Завершён
         gateway: Терминал
         general_info: Общая информация
@@ -351,8 +354,8 @@ sylius:
         new_zone: Новая зона
         newest_products: Новейшие продукты
         next: Следующее
-        no_default_billing_address: sylius.account.address.default.no_billing
-        no_default_shipping_address: sylius.account.address.default.no_shipping
+        no_default_billing_address: Расчетный адрес по умолчанию
+        no_default_shipping_address: Адрес доставки по умолчанию
         no_description: Нет описания
         no_shipping_category: Нет категории доставки
         no_short_description: '<i>Нет краткого описания</i>'
@@ -399,6 +402,8 @@ sylius:
         product_association_type_index: Типы взаимосвязи
         product_association_types: Типы взаимосвязей продуктов
         product_details_viewing_product_product: 'Детали товара <small>Просмотр товара "<strong>%product%</strong>"</small>'
+        product_review: Отзыв о продукте
+        product_reviews: Отзывы о продукте
         products: Список товаров
         products_categorized_as_name: 'Товары категории «%name%»'
         products_categorized_under_taxon_taxon: 'Товары <small>категории "%taxon%"</small>'
@@ -416,10 +421,12 @@ sylius:
         refunded: Возвращено
         register: Зарегистрироваться
         register_button: Регистрация
+        registration_create_an_account_in_store: 'Регистрация <small>создание нового пользователя</small>'
         registration_date: Дата регистрации
         release_inventory: Инвентаризация выпуска
         remember_me: Запомнить меня
         reports: Отчеты
+        reset_password: Сбросить пароль
         restricted_zone: Зона ограничений
         retail_price: Розничная цена
         return: Возврат
