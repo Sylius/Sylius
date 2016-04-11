@@ -29,6 +29,10 @@ class Version20151210134607 extends AbstractMigration
 
         $this->addSql('CREATE UNIQUE INDEX UNIQ_B04EBA8577153098 ON sylius_promotion_coupon (code)');
         $this->addSql('ALTER TABLE sylius_promotion ADD code VARCHAR(255) NOT NULL');
+        $this->addSql('UPDATE sylius_promotion s,
+                           (SELECT @n := 0) m
+                           SET s.`code` = CONCAT("P", @n := @n + 1)         
+                      ');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_F157396377153098 ON sylius_promotion (code)');
     }
 

@@ -29,13 +29,17 @@ class Version20160112154949 extends AbstractMigration
 
         $this->addSql('DROP INDEX UNIQ_E74256BF4B80EAC0 ON sylius_country');
         $this->addSql('DROP INDEX IDX_E74256BF4B80EAC0 ON sylius_country');
-        $this->addSql('ALTER TABLE sylius_country ADD code VARCHAR(2) NOT NULL, DROP iso_name');
+        $this->addSql('ALTER TABLE `sylius_country` CHANGE `iso_name` `code` VARCHAR(2) NOT NULL');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_E74256BF77153098 ON sylius_country (code)');
         $this->addSql('CREATE INDEX IDX_E74256BF77153098 ON sylius_country (code)');
-        $this->addSql('ALTER TABLE sylius_province ADD code VARCHAR(255) NOT NULL, DROP iso_name');
+        $this->addSql('ALTER TABLE `sylius_province` CHANGE `iso_name` `code` VARCHAR(255) NOT NULL');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_B5618FE477153098 ON sylius_province (code)');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_B5618FE4F92F3E705E237E06 ON sylius_province (country_id, name)');
         $this->addSql('ALTER TABLE sylius_zone ADD code VARCHAR(255) NOT NULL');
+        $this->addSql('UPDATE sylius_zone s,
+                           (SELECT @n := 0) m
+                           SET s.`code` = CONCAT("Z", @n := @n + 1)         
+                      ');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_7BE2258E77153098 ON sylius_zone (code)');
         $this->addSql('ALTER TABLE sylius_zone_member DROP FOREIGN KEY FK_E8B5ABF39F2C3FAB');
         $this->addSql('ALTER TABLE sylius_zone_member DROP FOREIGN KEY FK_E8B5ABF3E946114A');
@@ -44,6 +48,10 @@ class Version20160112154949 extends AbstractMigration
         $this->addSql('DROP INDEX IDX_E8B5ABF3E946114A ON sylius_zone_member');
         $this->addSql('DROP INDEX IDX_E8B5ABF39F2C3FAB ON sylius_zone_member');
         $this->addSql('ALTER TABLE sylius_zone_member ADD code VARCHAR(255) NOT NULL, DROP zone_id, DROP province_id, DROP country_id, DROP type');
+        $this->addSql('UPDATE sylius_zone_member s,
+                           (SELECT @n := 0) m
+                           SET s.`code` = CONCAT("ZM", @n := @n + 1)         
+                      ');
         $this->addSql('CREATE UNIQUE INDEX UNIQ_E8B5ABF34B0E929B77153098 ON sylius_zone_member (belongs_to, code)');
         $this->addSql('ALTER TABLE sylius_address DROP FOREIGN KEY FK_B97FF058E946114A');
         $this->addSql('ALTER TABLE sylius_address DROP FOREIGN KEY FK_B97FF058F92F3E70');
