@@ -15,8 +15,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Promotion rule choice type.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class RuleChoiceType extends AbstractType
@@ -33,6 +31,7 @@ class RuleChoiceType extends AbstractType
         $resolver
             ->setDefaults([
                 'choices' => $this->rules,
+                'choices_as_values' => true,
             ])
         ;
     }

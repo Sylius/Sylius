@@ -13,9 +13,7 @@ namespace Sylius\Bundle\PromotionBundle\Form\Type;
 
 use Sylius\Bundle\PromotionBundle\Form\EventListener\BuildActionFormSubscriber;
 use Sylius\Bundle\PromotionBundle\Form\Type\Core\AbstractConfigurationType;
-use Sylius\Component\Promotion\Model\ActionInterface;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -29,7 +27,7 @@ class ActionType extends AbstractConfigurationType
     public function buildForm(FormBuilderInterface $builder, array $options = [])
     {
         $builder
-            ->add('type', 'sylius_promotion_action_choice', [
+            ->add('type', ActionChoiceType::class, [
                 'label' => 'sylius.form.action.type',
                 'attr' => [
                     'data-form-collection' => 'update',
@@ -39,7 +37,7 @@ class ActionType extends AbstractConfigurationType
                 new BuildActionFormSubscriber(
                     $this->registry,
                     $builder->getFormFactory(),
-                    (isset($options['configuration_type'])) ? $options['configuration_type'] : null
+                    isset($options['configuration_type']) ? $options['configuration_type'] : null
                 )
             )
         ;

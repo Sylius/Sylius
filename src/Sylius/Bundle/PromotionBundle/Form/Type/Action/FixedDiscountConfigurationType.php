@@ -11,14 +11,13 @@
 
 namespace Sylius\Bundle\PromotionBundle\Form\Type\Action;
 
+use Sylius\Bundle\MoneyBundle\Form\Type\MoneyType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Type;
 
 /**
- * Fixed discount action configuration form type.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class FixedDiscountConfigurationType extends AbstractType
@@ -29,7 +28,7 @@ class FixedDiscountConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('amount', 'sylius_money', [
+            ->add('amount', MoneyType::class, [
                 'label' => 'sylius.form.action.fixed_discount_configuration.amount',
                 'constraints' => [
                     new NotBlank(),

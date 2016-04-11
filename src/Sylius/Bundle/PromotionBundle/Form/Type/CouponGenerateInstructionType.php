@@ -12,11 +12,11 @@
 namespace Sylius\Bundle\PromotionBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Coupon generate instruction type.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class CouponGenerateInstructionType extends AbstractResourceType
@@ -27,13 +27,13 @@ class CouponGenerateInstructionType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('amount', 'integer', [
+            ->add('amount', IntegerType::class, [
                 'label' => 'sylius.form.coupon_generate_instruction.amount',
             ])
-            ->add('usageLimit', 'integer', [
+            ->add('usageLimit', IntegerType::class, [
                 'label' => 'sylius.form.coupon_generate_instruction.usage_limit',
             ])
-            ->add('expiresAt', 'date', [
+            ->add('expiresAt', DateType::class, [
                 'label' => 'sylius.form.coupon_generate_instruction.expires_at',
                 'empty_value' => /* @Ignore */ ['year' => '-', 'month' => '-', 'day' => '-'],
             ])

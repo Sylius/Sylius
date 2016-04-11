@@ -15,6 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\PromotionBundle\Form\EventListener\BuildRuleFormSubscriber;
 use Sylius\Bundle\PromotionBundle\Form\Type\Core\AbstractConfigurationType;
+use Sylius\Bundle\PromotionBundle\Form\Type\RuleChoiceType;
 use Sylius\Bundle\PromotionBundle\Form\Type\RuleType;
 use Sylius\Component\Promotion\Model\RuleInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
@@ -48,7 +49,7 @@ class RuleTypeSpec extends ObjectBehavior
         FormFactoryInterface $factory
     ) {
         $builder
-            ->add('type', 'sylius_promotion_rule_choice', Argument::type('array'))
+            ->add('type', RuleChoiceType::class, Argument::type('array'))
             ->willReturn($builder)
         ;
 

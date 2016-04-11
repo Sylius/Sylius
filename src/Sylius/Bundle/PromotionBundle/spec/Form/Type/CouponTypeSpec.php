@@ -15,6 +15,8 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -46,12 +48,12 @@ class CouponTypeSpec extends ObjectBehavior
         ;
 
         $builder
-            ->add('usageLimit', 'integer', Argument::any())
+            ->add('usageLimit', IntegerType::class, Argument::any())
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('expiresAt', 'date', Argument::any())
+            ->add('expiresAt', DateType::class, Argument::any())
             ->willReturn($builder)
         ;
 

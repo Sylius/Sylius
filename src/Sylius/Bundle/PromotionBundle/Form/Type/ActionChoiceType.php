@@ -15,8 +15,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Promotion action choice type.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class ActionChoiceType extends AbstractType
@@ -32,6 +30,7 @@ class ActionChoiceType extends AbstractType
     {
         $resolver->setDefaults([
             'choices' => $this->actions,
+            'choices_as_values' => true,
         ]);
     }
 

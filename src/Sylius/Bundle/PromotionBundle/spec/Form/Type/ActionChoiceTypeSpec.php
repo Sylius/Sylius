@@ -37,7 +37,10 @@ class ActionChoiceTypeSpec extends ObjectBehavior
 
     function it_should_set_action_types_to_choose_from(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(['choices' => []])->shouldBeCalled();
+        $resolver->setDefaults([
+            'choices' => [],
+            'choices_as_values' => true,
+        ])->shouldBeCalled();
 
         $this->configureOptions($resolver);
     }

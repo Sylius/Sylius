@@ -13,9 +13,15 @@ namespace spec\Sylius\Bundle\PromotionBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\PromotionBundle\Form\Type\ActionCollectionType;
+use Sylius\Bundle\PromotionBundle\Form\Type\RuleCollectionType;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -45,47 +51,47 @@ class PromotionTypeSpec extends ObjectBehavior
     function it_should_build_form_with_proper_fields(FormBuilder $builder)
     {
         $builder
-            ->add('name', 'text', Argument::type('array'))
+            ->add('name', TextType::class, Argument::type('array'))
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('description', 'text', Argument::type('array'))
+            ->add('description', TextType::class, Argument::type('array'))
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('exclusive', 'checkbox', Argument::type('array'))
+            ->add('exclusive', CheckboxType::class, Argument::type('array'))
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('usageLimit', 'integer', Argument::type('array'))
+            ->add('usageLimit', IntegerType::class, Argument::type('array'))
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('startsAt', 'datetime', Argument::type('array'))
+            ->add('startsAt', DateTimeType::class, Argument::type('array'))
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('endsAt', 'datetime', Argument::type('array'))
+            ->add('endsAt', DateTimeType::class, Argument::type('array'))
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('couponBased', 'checkbox', Argument::type('array'))
+            ->add('couponBased', CheckboxType::class, Argument::type('array'))
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('rules', 'sylius_promotion_rule_collection', Argument::type('array'))
+            ->add('rules', RuleCollectionType::class, Argument::type('array'))
             ->willReturn($builder)
         ;
 
         $builder
-            ->add('actions', 'sylius_promotion_action_collection', Argument::type('array'))
+            ->add('actions', ActionCollectionType::class, Argument::type('array'))
             ->willReturn($builder)
         ;
 
