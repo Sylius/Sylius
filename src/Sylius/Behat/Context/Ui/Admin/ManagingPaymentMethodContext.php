@@ -115,6 +115,15 @@ final class ManagingPaymentMethodContext implements Context
     }
 
     /**
+     * @When /^I delete (payment method "([^"]*)")$/
+     */
+    public function iDeletePaymentMethod(PaymentMethodInterface $paymentMethod)
+    {
+        $this->indexPage->open();
+        $this->indexPage->deleteResourceOnPage(['code' => $paymentMethod->getCode(), 'name' => $paymentMethod->getName()]);
+    }
+
+    /**
      * @When I choose gateway :gatewayName
      */
     public function iChooseGateway($gatewayName)
@@ -182,6 +191,25 @@ final class ManagingPaymentMethodContext implements Context
         Assert::false(
             $this->updatePage->isPaymentMethodEnabled(),
             'Payment method should be disabled'
+        );
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully deleted
+     */
+    public function iShouldBeNotifiedAboutSuccessfulDeletion()
+    {
+        $this->notificationChecker->checkDeletionNotification(self::RESOURCE_NAME);
+    }
+
+    /**
+     * @Then /^(this payment method) should no longer exist in the registry$/
+     */
+    public function thisPaymentMethodShouldNoLongerExistInTheRegistry(PaymentMethodInterface $paymentMethod)
+    {
+        Assert::false(
+            $this->indexPage->isResourceOnPage(['code' => $paymentMethod->getCode(), 'name' => $paymentMethod->getName()]),
+            sprintf('Payment method %s should no longer exist in the registry', $paymentMethod->getName())
         );
     }
 }
