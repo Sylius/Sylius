@@ -36,6 +36,18 @@ default:
                 firefox:
                     selenium2:
                         browser: firefox
+                semantic_ui:
+                    semantic_ui:
+                        browser: chrome
+                        capabilities:
+                            browserName: chrome
+                            browser: chrome
+                            version: ""
+                            chrome:
+                                switches:
+                                    - "start-fullscreen"
+                                    - "start-maximized"
+                                    - "no-sandbox"
             show_auto: false
 
         Behat\Symfony2Extension:
@@ -48,6 +60,7 @@ default:
                 - "etc/behat/services.xml"
 
         Sylius\Behat\Extension\SymfonyExtension: ~
+        Sylius\Behat\Extension\SemanticUiExtension: ~
 
     gherkin:
         filters:
