@@ -41,7 +41,7 @@ class CouponsEligibilityChecker implements PromotionSubjectEligibilityCheckerInt
      */
     public function isEligible(PromotionSubjectInterface $subject, PromotionInterface $promotion)
     {
-        if (!$subject instanceof PromotionCouponAwareSubjectInterface) {
+        if (!$subject instanceof PromotionCouponAwareSubjectInterface || null === $subject->getPromotionCoupon()) {
             return false;
         }
 
@@ -64,8 +64,6 @@ class CouponsEligibilityChecker implements PromotionSubjectEligibilityCheckerInt
      */
     protected function isCouponEligible(PromotionInterface $promotion, PromotionCouponAwareSubjectInterface $subject)
     {
-        $coupon = $subject->getPromotionCoupon();
-
-        return null !== $coupon && $promotion === $coupon->getPromotion();
+        return $promotion === $subject->getPromotionCoupon()->getPromotion();
     }
 }
