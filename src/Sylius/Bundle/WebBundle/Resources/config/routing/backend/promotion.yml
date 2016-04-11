@@ -66,5 +66,5 @@ sylius_backend_promotion_show:
             template: SyliusWebBundle:Backend/Promotion:show.html.twig
 
 sylius_backend_promotion_coupon:
-    resource: @SyliusWebBundle/Resources/config/routing/backend/promotion_coupon.yml
+    resource: '@SyliusWebBundle/Resources/config/routing/backend/promotion_coupon.yml'
     prefix: /{promotionId}/coupons
