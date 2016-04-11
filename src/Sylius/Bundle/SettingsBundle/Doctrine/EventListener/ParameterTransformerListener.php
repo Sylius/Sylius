@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\SettingsBundle\Doctrine\EventListener;
 
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\OnFlushEventArgs;
 use Sylius\Bundle\SettingsBundle\Model\SettingsInterface;
@@ -55,18 +56,18 @@ class ParameterTransformerListener
      */
     public function onFlush(OnFlushEventArgs $event)
     {
-        $em = $event->getEntityManager();
-        $uow = $em->getUnitOfWork();
+        $entityManager = $event->getEntityManager();
+        $unitOfWork = $entityManager->getUnitOfWork();
 
-        foreach ($uow->getScheduledEntityInsertions() as $entity) {
+        foreach ($unitOfWork->getScheduledEntityInsertions() as $entity) {
             if ($entity instanceof SettingsInterface) {
-                $this->transform($entity);
+                $this->transform($entity, $entityManager);
             }
         }
 
-        foreach ($uow->getScheduledEntityUpdates() as $entity) {
+        foreach ($unitOfWork->getScheduledEntityUpdates() as $entity) {
             if ($entity instanceof SettingsInterface) {
-                $this->transform($entity);
+                $this->transform($entity, $entityManager);
             }
         }
     }
@@ -84,8 +85,9 @@ class ParameterTransformerListener
 
     /**
      * @param SettingsInterface $settings
+     * @param EntityManager $entityManager
      */
-    protected function transform(SettingsInterface $settings)
+    protected function transform(SettingsInterface $settings, EntityManager $entityManager)
     {
         // store old parameters, so we can revert to it after flush
         $this->parametersMap[] = [
@@ -99,6 +101,9 @@ class ParameterTransformerListener
                 $settings->set($name, $transformers[$name]->transform($value));
             }
         }
+
+        $classMetadata = $entityManager->getClassMetadata(get_class($settings));
+        $entityManager->getUnitOfWork()->recomputeSingleEntityChangeSet($classMetadata, $settings);
     }
 
     /**
