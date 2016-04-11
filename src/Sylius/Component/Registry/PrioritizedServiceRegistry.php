@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Registry;
 
+use Webmozart\Assert\Assert;
 use Zend\Stdlib\PriorityQueue;
 
 /**
@@ -83,14 +84,10 @@ class PrioritizedServiceRegistry implements PrioritizedServiceRegistryInterface
      */
     private function assertServiceHaveType($service)
     {
-        if (!is_object($service)) {
-            throw new \InvalidArgumentException(sprintf('Service needs to be an object, %s given.', gettype($service)));
-        }
-
-        if (!in_array($this->interface, class_implements($service))) {
-            throw new \InvalidArgumentException(
-                sprintf('Service for this registry needs to implement "%s", "%s" given.', $this->interface, get_class($service))
-            );
-        }
+        Assert::isInstanceOf(
+            $service,
+            $this->interface,
+            'Service for this registry needs to implement "%2$s", "%s" given.'
+        );
     }
 }

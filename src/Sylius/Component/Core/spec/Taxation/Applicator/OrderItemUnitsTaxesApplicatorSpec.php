@@ -11,6 +11,7 @@
 
 namespace spec\Sylius\Component\Core\Taxation\Applicator;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -73,8 +74,6 @@ class OrderItemUnitsTaxesApplicatorSpec extends ObjectBehavior
         $items->count()->willReturn(1);
         $items->getIterator()->willReturn(new \ArrayIterator([$orderItem->getWrappedObject()]));
 
-        $orderItem->getQuantity()->willReturn(2);
-
         $orderItem->getVariant()->willReturn($productVariant);
         $taxRateResolver->resolve($productVariant, ['zone' => $zone])->willReturn($taxRate);
 
@@ -106,24 +105,24 @@ class OrderItemUnitsTaxesApplicatorSpec extends ObjectBehavior
     }
 
     function it_does_nothing_if_order_item_has_no_units(
-        $taxRateResolver,
-        Collection $items,
-        \Iterator $iterator,
+        CalculatorInterface $calculator,
+        AdjustmentFactoryInterface $adjustmentsFactory,
+        TaxRateResolverInterface $taxRateResolver,
         OrderInterface $order,
         OrderItemInterface $orderItem,
+        ProductVariantInterface $productVariant,
+        TaxRateInterface $taxRate,
         ZoneInterface $zone
     ) {
-        $order->getItems()->willReturn($items);
+        $orderItems = new ArrayCollection([$orderItem->getWrappedObject()]);
+        $order->getItems()->willReturn($orderItems);
 
-        $items->count()->willReturn(1);
-        $items->getIterator()->willReturn($iterator);
-        $iterator->rewind()->shouldBeCalled();
-        $iterator->valid()->willReturn(true, false)->shouldBeCalled();
-        $iterator->current()->willReturn($orderItem);
-        $iterator->next()->shouldBeCalled();
+        $orderItem->getVariant()->willReturn($productVariant);
+        $orderItem->getUnits()->willReturn(new ArrayCollection());
+        $taxRateResolver->resolve(Argument::cetera())->willReturn($taxRate);
 
-        $orderItem->getQuantity()->willReturn(0);
-        $taxRateResolver->resolve(Argument::any())->shouldNotBeCalled();
+        $calculator->calculate(Argument::cetera())->shouldNotBeCalled();
+        $adjustmentsFactory->createWithData(Argument::cetera())->shouldNotBeCalled();
 
         $this->apply($order, $zone);
     }
