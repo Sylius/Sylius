@@ -16,6 +16,7 @@ use Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelper;
 use Sylius\Bundle\MoneyBundle\Templating\Helper\MoneyHelperInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
+use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
 use Symfony\Component\Templating\Helper\Helper;
 
@@ -62,9 +63,10 @@ class CurrencyHelperSpec extends ObjectBehavior
         $this->convertAmount(500)->shouldReturn(653);
     }
 
-    function it_provides_current_currency(CurrencyProviderInterface $currencyProvider)
+    function it_provides_current_currency(CurrencyProviderInterface $currencyProvider, CurrencyInterface $currency)
     {
-        $currencyProvider->getBaseCurrency()->willReturn('PLN');
+        $currencyProvider->getBaseCurrency()->willReturn($currency);
+        $currency->getCode()->willReturn('PLN');
 
         $this->getBaseCurrencySymbol()->shouldReturn('PLN');
     }
