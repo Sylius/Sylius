@@ -103,7 +103,16 @@ final class ManagingPaymentMethodsContext implements Context
     }
 
     /**
-     * @When I choose gateway :gatewayName
+     * @When /^I delete (payment method "([^"]*)")$/
+     */
+    public function iDeletePaymentMethod(PaymentMethodInterface $paymentMethod)
+    {
+        $this->indexPage->open();
+        $this->indexPage->deleteResourceOnPage(['code' => $paymentMethod->getCode(), 'name' => $paymentMethod->getName()]);
+    }
+
+    /**
+     * @When I choose :gatewayName gateway
      */
     public function iChooseGateway($gatewayName)
     {
@@ -214,6 +223,78 @@ final class ManagingPaymentMethodsContext implements Context
         Assert::true(
             ((int) $amount) === $foundRows,
             sprintf('%s rows with payment methods should appear on page, %s rows has been found', $amount, $foundRows)
+        );
+    }
+
+    /**
+     * @Then I should be notified that :element is required
+     */
+    public function iShouldBeNotifiedThatIsRequired($element)
+    {
+        $this->assertFieldValidationMessage($element, sprintf('Please enter payment method %s.', $element));
+    }
+
+    /**
+     * @Then the payment method with :element :value should not be added
+     */
+    public function thePaymentMethodWithElementValueShouldNotBeAdded($element, $value)
+    {
+        $this->iWantToBrowsePaymentMethods();
+
+        Assert::false(
+            $this->indexPage->isResourceOnPage([$element => $value]),
+            sprintf('Payment method with %s %s was created, but it should not.', $element, $value)
+        );
+    }
+
+    /**
+     * @Then /^(this payment method) should still be named "([^"]+)"$/
+     */
+    public function thisShippingMethodNameShouldBe(PaymentMethodInterface $paymentMethod, $paymentMethodName)
+    {
+        $this->iWantToBrowsePaymentMethods();
+
+        Assert::true(
+            $this->indexPage->isResourceOnPage(
+                [
+                    'code' => $paymentMethod->getCode(),
+                    'name' => $paymentMethodName,
+                ]
+            ),
+            sprintf('Payment method name %s has not been assigned properly.', $paymentMethodName)
+        );
+    }
+
+    /**
+     * @param string $element
+     * @param string $expectedMessage
+     */
+    private function assertFieldValidationMessage($element, $expectedMessage)
+    {
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm($this->createPage, $this->updatePage);
+
+        Assert::true(
+            $currentPage->checkValidationMessageFor($element, $expectedMessage),
+            sprintf('Payment method %s should be required.', $element)
+        );
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully deleted
+     */
+    public function iShouldBeNotifiedAboutSuccessfulDeletion()
+    {
+        $this->notificationChecker->checkDeletionNotification(self::RESOURCE_NAME);
+    }
+
+    /**
+     * @Then /^(this payment method) should no longer exist in the registry$/
+     */
+    public function thisPaymentMethodShouldNoLongerExistInTheRegistry(PaymentMethodInterface $paymentMethod)
+    {
+        Assert::false(
+            $this->indexPage->isResourceOnPage(['code' => $paymentMethod->getCode(), 'name' => $paymentMethod->getName()]),
+            sprintf('Payment method %s should no longer exist in the registry', $paymentMethod->getName())
         );
     }
 }
