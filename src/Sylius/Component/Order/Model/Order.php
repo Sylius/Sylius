@@ -206,11 +206,10 @@ class Order implements OrderInterface
     public function removeItem(OrderItemInterface $item)
     {
         if ($this->hasItem($item)) {
-            $item->setOrder(null);
             $this->items->removeElement($item);
             $this->itemsTotal -= $item->getTotal();
-
             $this->recalculateTotal();
+            $item->setOrder(null);
         }
     }
 
