@@ -85,4 +85,4 @@ gulp.task('admin-watch', function() {
 });
 
 gulp.task('default', ['admin-js', 'admin-css', 'admin-img']);
-
+gulp.task('watch', ['admin-watch', 'admin-js', 'admin-css', 'admin-img']);
