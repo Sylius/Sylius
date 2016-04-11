@@ -31,7 +31,6 @@
     ;
 
     $('.ui.checkbox').checkbox();
-    $('select').dropdown();
 
     $('.form button').on('click', function() {
       return $(this).closest('form').addClass('loading');
