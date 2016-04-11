@@ -7,7 +7,7 @@
  * file that was distributed with this source code.
  */
 
-function initializeAjaxForm(successMessage) {
+function initializeAjaxForm(successMessage, messageHolderSelector) {
     $("#reviewForm").submit(function(e) {
         e.preventDefault();
         var form = $(this);
@@ -20,7 +20,7 @@ function initializeAjaxForm(successMessage) {
             accept: "application/json",
             success: function(data, textStatus, xhr) {
                 completeRequest(form);
-                appendFlash(successMessage);
+                appendFlash(successMessage, messageHolderSelector);
             },
             error: function(xhr, textStatus, errorThrown) {
                 renderErrors(xhr, form);
@@ -52,8 +52,10 @@ function parseFormToJson(form) {
     return formJson;
 }
 
-function appendFlash(successMessage) {
-    $('<div class="alert alert-success"><a class="close" data-dismiss="alert" href="#">×</a>' + successMessage + '</div>').insertAfter('h1.logo');
+function appendFlash(successMessage, messageHolderSelector) {
+    messageHolderSelector = messageHolderSelector ? messageHolderSelector : '#flashes-container';
+
+    $(messageHolderSelector).html('<div class="alert alert-success"><a class="close" data-dismiss="alert" href="#">×</a>' + successMessage + '</div>');
 }
 
 function completeRequest(form) {
