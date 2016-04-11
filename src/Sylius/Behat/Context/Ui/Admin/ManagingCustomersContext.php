@@ -98,6 +98,7 @@ final class ManagingCustomersContext implements Context
 
     /**
      * @When I add it
+     * @When I try to add it
      */
     public function iAddIt()
     {
@@ -114,13 +115,14 @@ final class ManagingCustomersContext implements Context
 
     /**
      * @Then the customer :customer should appear in the registry
+     * @Then the customer :customer should still have this email
      */
     public function thisCustomerShouldAppearInTheRegistry(CustomerInterface $customer)
     {
-        $this->updatePage->open(['id' => $customer->getId()]);
+        $this->indexPage->open();
 
         Assert::true(
-            $this->updatePage->isEmailHasValue($customer->getEmail()),
+            $this->indexPage->isResourceOnPage(['Email' => $customer->getEmail()]),
             sprintf('Customer with email %s should exist but it does not.', $customer->getEmail())
         );
     }
@@ -151,6 +153,7 @@ final class ManagingCustomersContext implements Context
 
     /**
      * @When I save my changes
+     * @When I try to save my changes
      */
     public function iSaveMyChanges()
     {
@@ -207,6 +210,93 @@ final class ManagingCustomersContext implements Context
         Assert::true(
             $this->indexPage->isResourceOnPage(['Email' => $email]),
             sprintf('Customer with email %s should exist but it does not.', $email)
+        );
+    }
+
+    /**
+     * @Then /^I should be notified that ([^"]+) is required$/
+     */
+    public function iShouldBeNotifiedThatFirstNameIsRequired($elementName)
+    {
+        Assert::true(
+            $this->createPage->checkValidationMessageFor($elementName, sprintf('Please enter your %s.', $elementName)),
+            sprintf('Customer % should be required.', $elementName)
+        );
+    }
+
+    /**
+     * @Then the customer with email :email should not appear in the registry
+     */
+    public function theCustomerShouldNotAppearInTheRegistry($email)
+    {
+        $this->indexPage->open();
+
+        Assert::false(
+            $this->indexPage->isResourceOnPage(['email' => $email]),
+            sprintf('Customer with email %s was created, but it should not.', $email)
+        );
+    }
+
+    /**
+     * @When I remove its first name
+     */
+    public function iRemoveItsFirstName()
+    {
+        $this->updatePage->changeFirstName('');
+    }
+
+    /**
+     * @Then the customer :customer should still have first name :firstName
+     */
+    public function theCustomerShouldStillHaveFirstName(CustomerInterface $customer, $firstName)
+    {
+        $this->updatePage->open(['id' => $customer->getId()]);
+
+        Assert::eq(
+            $firstName,
+            $this->updatePage->getFirstName(),
+            sprintf('Customer should have first name %s, but it does not.', $firstName)
+        );
+    }
+
+    /**
+     * @When I remove its last name
+     */
+    public function iRemoveItsLastName()
+    {
+        $this->updatePage->changeLastName('');
+    }
+
+    /**
+     * @Then the customer :customer should still have last name :lastName
+     */
+    public function theCustomerShouldStillHaveLastName(CustomerInterface $customer, $lastName)
+    {
+        $this->updatePage->open(['id' => $customer->getId()]);
+
+        Assert::eq(
+            $lastName,
+            $this->updatePage->getLastName(),
+            sprintf('Customer should have last name %s, but it does not.', $lastName)
+        );
+    }
+
+    /**
+     * @When I remove its email
+     */
+    public function iRemoveItsEmail()
+    {
+        $this->updatePage->changeEmail('');
+    }
+
+    /**
+     * @Then I should be notified that email is not valid
+     */
+    public function iShouldBeNotifiedThatEmailIsNotValid()
+    {
+        Assert::true(
+            $this->createPage->checkValidationMessageFor('email', 'This email is invalid.'),
+            sprintf('Customer should have required form of email .')
         );
     }
 }

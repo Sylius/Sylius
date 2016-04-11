@@ -72,6 +72,22 @@ final class CustomerContext implements Context
     }
 
     /**
+     * @Given the store has customer :email with first name :firstName
+     */
+    public function theStoreHasCustomerWithFirstName($email, $firstName)
+    {
+        $this->createCustomer($email, $firstName, self::DEFAULT_CUSTOMER_LAST_NAME);
+    }
+
+    /**
+     * @Given the store has customer :email with last name :lastName
+     */
+    public function theStoreHasCustomerWithLastName($email, $lastName)
+    {
+        $this->createCustomer($email, self::DEFAULT_CUSTOMER_FIRST_NAME, $lastName);
+    }
+
+    /**
      * @param string $email
      * @param string $firstName
      * @param string $lastName

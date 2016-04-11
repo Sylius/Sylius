@@ -18,15 +18,38 @@ use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
  */
 interface UpdatePageInterface extends BaseUpdatePageInterface
 {
-    /**
-     * @param string $elementValue
-     *
-     * @return bool
-     */
-    public function isEmailHasValue($elementValue);
 
     /**
      * @return string
      */
     public function getFullName();
+    
+    /**
+     * @param string $firstName
+     */
+    public function changeFirstName($firstName);
+
+    /**
+     * @return string
+     */
+    public function getFirstName();
+
+    /**
+     * @param string $lastName
+     *
+     * @return bool
+     */
+    public function changeLastName($lastName);
+
+    /**
+     * @return string
+     */
+    public function getLastName();
+
+    /**
+     * @param string $email
+     *
+     * @return bool
+     */
+    public function changeEmail($email);
 }

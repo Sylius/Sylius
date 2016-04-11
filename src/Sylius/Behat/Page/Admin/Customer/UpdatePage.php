@@ -41,10 +41,40 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function isEmailHasValue($elementValue)
+    public function changeFirstName($firstName)
     {
-        $element = $this->getElement('email');
+        $this->getDocument()->fillField('First name', $firstName);
+    }
 
-        return $elementValue === $element->getValue();
+    /**
+     * {@inheritdoc}
+     */
+    public function getFirstName()
+    {
+        return $this->getElement('first name')->getValue();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function changeLastName($lastName)
+    {
+        $this->getDocument()->fillField('Last name', $lastName);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLastName()
+    {
+        return $this->getElement('last name')->getValue();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function changeEmail($email)
+    {
+        $this->getDocument()->fillField('Email', $email);
     }
 }
