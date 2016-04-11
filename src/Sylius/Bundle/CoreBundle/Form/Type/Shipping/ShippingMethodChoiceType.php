@@ -50,7 +50,7 @@ class ShippingMethodChoiceType extends BaseShippingMethodType
                 $methods = $filteredMethods;
             }
 
-            return new ObjectChoiceList($methods, null, [], null, 'id');
+            return new ObjectChoiceList($methods, null, [], null, $options['identifier']);
         };
 
         $resolver
@@ -58,6 +58,7 @@ class ShippingMethodChoiceType extends BaseShippingMethodType
                 'choice_list' => $choiceList,
                 'criteria' => [],
                 'channel' => null,
+                'identifier' => 'id'
             ])
             ->setAllowedTypes('channel', [ChannelInterface::class, 'null'])
         ;
