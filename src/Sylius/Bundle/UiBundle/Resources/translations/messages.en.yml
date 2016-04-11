@@ -9,6 +9,7 @@ sylius:
         administration_panel_login: Administration panel login
         an_error_occurred: An error occurred
         are_your_sure_you_want_to_perform_this_action: Are you sure you want to perform this action?
+        cancel: Cancel
         clear_filters: Clear filters
         confirm_your_action: Confirm your action
         contains: Contains
@@ -42,6 +43,7 @@ sylius:
         not_contains: Not contains
         not_empty: Not empty
         not_in: Not in
+        or: or
         powered_by: Powered by
         save_changes: Save changes
         show: Show
