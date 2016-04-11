@@ -296,7 +296,31 @@ final class ManagingCustomersContext implements Context
     {
         Assert::true(
             $this->createPage->checkValidationMessageFor('email', 'This email is invalid.'),
-            sprintf('Customer should have required form of email .')
+            sprintf('Customer should have required form of email.')
+        );
+    }
+
+    /**
+     * @Then I should be notified that email must be unique
+     */
+    public function iShouldBeNotifiedThatEmailMustBeUnique()
+    {
+        Assert::true(
+            $this->createPage->checkValidationMessageFor('email', 'This email is already used.'),
+            sprintf('Unique email violation message should appear on page, but it does not.')
+        );
+    }
+
+    /**
+     * @Then there should still be only one customer with email :email
+     */
+    public function thereShouldStillBeOnlyOneCustomerWithEmail($email)
+    {
+        $this->indexPage->open();
+
+        Assert::true(
+            $this->indexPage->isResourceOnPage(['email' => $email]),
+            sprintf('Customer with email %s cannot be founded.', $email)
         );
     }
 }
