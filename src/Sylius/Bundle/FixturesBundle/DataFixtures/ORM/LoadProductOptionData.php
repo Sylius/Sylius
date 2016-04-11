@@ -109,6 +109,7 @@ class LoadProductOptionData extends DataFixture
         $option->setCode($optionCode);
 
         foreach ($nameTranslation as $locale => $name) {
+            $option->setFallbackLocale($locale);
             $option->setCurrentLocale($locale);
             $option->setName($name);
         }
