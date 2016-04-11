@@ -45,8 +45,9 @@ class PaymentProcessorSpec extends ObjectBehavior
     ) {
         $order->getTotal()->willReturn(1234);
         $order->getCurrency()->willReturn('EUR');
-        $order->getLastPayment(PaymentInterface::STATE_CANCELLED)->willReturn(false);
-        $order->getLastPayment(PaymentInterface::STATE_NEW)->willReturn(false);
+        $order->getLastPayment(PaymentInterface::STATE_CANCELLED)->willReturn(null);
+        $order->getLastPayment(PaymentInterface::STATE_FAILED)->willReturn(null);
+        $order->getLastPayment(PaymentInterface::STATE_NEW)->willReturn(null);
 
         $paymentFactory->createWithAmountAndCurrency(1234, 'EUR')->willReturn($payment);
 
@@ -65,7 +66,7 @@ class PaymentProcessorSpec extends ObjectBehavior
         $order->getTotal()->willReturn(1234);
         $order->getCurrency()->willReturn('EUR');
         $order->getLastPayment(PaymentInterface::STATE_CANCELLED)->willReturn($cancelledPayment);
-        $order->getLastPayment(PaymentInterface::STATE_NEW)->willReturn(false);
+        $order->getLastPayment(PaymentInterface::STATE_NEW)->willReturn(null);
         $cancelledPayment->getMethod()->willReturn($paymentMethodFromLastCancelledPayment);
 
         $paymentFactory->createWithAmountAndCurrency(1234, 'EUR')->willReturn($payment);
@@ -84,15 +85,55 @@ class PaymentProcessorSpec extends ObjectBehavior
         $order->getTotal()->willReturn(1234);
         $order->getCurrency()->willReturn('EUR');
         $paymentFactory->createWithAmountAndCurrency(1234, 'EUR')->willReturn($payment);
-        $order->getLastPayment(PaymentInterface::STATE_CANCELLED)->willReturn(false);
-        $order->getLastPayment(PaymentInterface::STATE_NEW)->willReturn(false);
+        $order->getLastPayment(PaymentInterface::STATE_CANCELLED)->willReturn(null);
+        $order->getLastPayment(PaymentInterface::STATE_FAILED)->willReturn(null);
+        $order->getLastPayment(PaymentInterface::STATE_NEW)->willReturn(null);
         $payment->setMethod()->shouldNotBeCalled();
         $order->addPayment($payment)->shouldBeCalled();
 
         $this->processOrderPayments($order);
     }
 
-    function it_does_not_set_payment_method_from_last_cancelled_payment_during_processing_if_new_payment_exists(
+    function it_sets_payment_method_from_last_failed_payment_during_processing(
+        $paymentFactory,
+        PaymentInterface $payment,
+        PaymentInterface $failedPayment,
+        OrderInterface $order,
+        PaymentMethodInterface $paymentMethodFromLastFailedPayment
+    ) {
+        $order->getTotal()->willReturn(1234);
+        $order->getCurrency()->willReturn('EUR');
+        $order->getLastPayment(PaymentInterface::STATE_CANCELLED)->willReturn(null);
+        $order->getLastPayment(PaymentInterface::STATE_FAILED)->willReturn($failedPayment);
+        $order->getLastPayment(PaymentInterface::STATE_NEW)->willReturn(null);
+        $failedPayment->getMethod()->willReturn($paymentMethodFromLastFailedPayment);
+
+        $paymentFactory->createWithAmountAndCurrency(1234, 'EUR')->willReturn($payment);
+        $payment->setMethod($paymentMethodFromLastFailedPayment)->shouldBeCalled();
+
+        $order->addPayment($payment)->shouldBeCalled();
+
+        $this->processOrderPayments($order);
+    }
+
+    function it_does_not_set_payment_method_from_last_failed_payment_during_processing(
+        $paymentFactory,
+        PaymentInterface $payment,
+        OrderInterface $order
+    ) {
+        $order->getTotal()->willReturn(1234);
+        $order->getCurrency()->willReturn('EUR');
+        $paymentFactory->createWithAmountAndCurrency(1234, 'EUR')->willReturn($payment);
+        $order->getLastPayment(PaymentInterface::STATE_CANCELLED)->willReturn(null);
+        $order->getLastPayment(PaymentInterface::STATE_FAILED)->willReturn(null);
+        $order->getLastPayment(PaymentInterface::STATE_NEW)->willReturn(null);
+        $payment->setMethod()->shouldNotBeCalled();
+        $order->addPayment($payment)->shouldBeCalled();
+
+        $this->processOrderPayments($order);
+    }
+
+    function it_does_not_add_payment_during_processing_if_new_payment_already_exists(
         PaymentFactoryInterface $paymentFactory,
         PaymentInterface $newPaymentReadyToPay,
         PaymentInterface $cancelledPayment,
@@ -102,11 +143,12 @@ class PaymentProcessorSpec extends ObjectBehavior
         $order->getTotal()->willReturn(1234);
         $order->getCurrency()->willReturn('EUR');
         $order->getLastPayment(PaymentInterface::STATE_CANCELLED)->willReturn($cancelledPayment);
+        $order->getLastPayment(PaymentInterface::STATE_FAILED)->willReturn(null);
         $order->getLastPayment(PaymentInterface::STATE_NEW)->willReturn($newPaymentReadyToPay);
 
         $paymentFactory->createWithAmountAndCurrency(1234, 'EUR')->willReturn($payment);
         $payment->setMethod($cancelledPayment)->shouldNotBeCalled();
-        $order->addPayment($payment)->shouldBeCalled();
+        $order->addPayment($payment)->shouldNotBeCalled();
 
         $this->processOrderPayments($order);
     }

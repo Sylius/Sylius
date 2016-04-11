@@ -170,7 +170,7 @@ interface OrderInterface extends
     /**
      * @param $state
      *
-     * @return PaymentInterface|false
+     * @return null|PaymentInterface
      */
     public function getLastPayment($state = PaymentInterface::STATE_NEW);
 

@@ -297,12 +297,14 @@ class Order extends Cart implements OrderInterface
     public function getLastPayment($state = BasePaymentInterface::STATE_NEW)
     {
         if ($this->payments->isEmpty()) {
-            return false;
+            return null;
         }
 
-        return $this->payments->filter(function (BasePaymentInterface $payment) use ($state) {
+        $payment = $this->payments->filter(function (BasePaymentInterface $payment) use ($state) {
             return $payment->getState() === $state;
         })->last();
+
+        return $payment !== false ? $payment : null;
     }
 
     /**
