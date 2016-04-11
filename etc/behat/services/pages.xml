@@ -49,7 +49,7 @@
         <parameter key="sylius.behat.page.admin.locale.update.class">Sylius\Behat\Page\Admin\Locale\UpdatePage</parameter>
         <parameter key="sylius.behat.page.admin.payment_method.create.class">Sylius\Behat\Page\Admin\PaymentMethod\CreatePage</parameter>
         <parameter key="sylius.behat.page.admin.payment_method.index.class">%sylius.behat.page.admin.crud.index.class%</parameter>
-        <parameter key="sylius.behat.page.admin.payment_method.update.class">%sylius.behat.page.admin.crud.update.class%</parameter>
+        <parameter key="sylius.behat.page.admin.payment_method.update.class">Sylius\Behat\Page\Admin\PaymentMethod\UpdatePage</parameter>
         <parameter key="sylius.behat.page.admin.product.show.class">Sylius\Behat\Page\Admin\Product\ShowPage</parameter>
         <parameter key="sylius.behat.page.admin.product.index.class">Sylius\Behat\Page\Admin\Product\IndexPage</parameter>
         <parameter key="sylius.behat.page.admin.promotion.create.class">Sylius\Behat\Page\Admin\Promotion\CreatePage</parameter>
