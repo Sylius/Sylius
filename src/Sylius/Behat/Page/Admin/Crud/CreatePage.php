@@ -56,7 +56,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     {
         $foundedElement = $this->getElement($element)->getParent()->find('css', '.pointing');
         if (null === $foundedElement) {
-            throw new ElementNotFoundException($this->getSession(), 'tag', 'css', '.pointing');
+            throw new ElementNotFoundException(sprintf('Element %s with message %s cannot be found on page', $element, $message));
         }
 
         return $message === $foundedElement->getText();

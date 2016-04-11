@@ -49,6 +49,8 @@ class RegisterDataFetcherPassSpec extends ObjectBehavior
     {
         $container->hasDefinition('sylius.registry.report.data_fetcher')->willReturn(false);
         $container->getDefinition('sylius.registry.report.data_fetcher')->shouldNotBeCalled();
+
+        $this->process($container);
     }
 
     function it_throws_exception_if_any_data_fetcher_has_improper_attributes(ContainerBuilder $container, Definition $dataFetcherDefinition)
@@ -62,7 +64,9 @@ class RegisterDataFetcherPassSpec extends ObjectBehavior
             ],
         ];
         $container->findTaggedServiceIds('sylius.report.data_fetcher')->willReturn($dataFetcherServices);
-        $this->shouldThrow(new \InvalidArgumentException('Tagged report data fetchers needs to have `fetcher` and `label` attributes.'));
         $dataFetcherDefinition->addMethodCall('register', ['test', new Reference('sylius.form.type.data_fetcher.test')])->shouldNotBeCalled();
+
+        $this->shouldThrow(new \InvalidArgumentException('Tagged report data fetchers needs to have `fetcher` and `label` attributes.'))
+            ->during('process', [$container]);
     }
 }

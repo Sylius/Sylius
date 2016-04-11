@@ -42,10 +42,6 @@
             </constraint>
         </property>
         <property name="description">
-            <constraint name="NotBlank">
-                <option name="message">sylius.promotion.description.not_blank</option>
-                <option name="groups">sylius</option>
-            </constraint>
             <constraint name="Length">
                 <option name="min">2</option>
                 <option name="max">255</option>

@@ -13,7 +13,6 @@ namespace Sylius\Bundle\MailerBundle;
 
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Component\Mailer\Model\EmailInterface;
 
 /**
  * Mailer and e-mails management.
@@ -25,20 +24,10 @@ class SyliusMailerBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    public static function getSupportedDrivers()
+    public function getSupportedDrivers()
     {
         return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
-        ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getModelInterfaces()
-    {
-        return [
-            EmailInterface::class => 'sylius.model.email.class',
         ];
     }
 

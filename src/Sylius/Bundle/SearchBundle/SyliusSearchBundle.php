@@ -13,8 +13,6 @@ namespace Sylius\Bundle\SearchBundle;
 
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Bundle\SearchBundle\Model\SearchIndexInterface;
-use Sylius\Bundle\SearchBundle\Model\SearchLogInterface;
 
 /**
  * Search bundle.
@@ -26,21 +24,10 @@ class SyliusSearchBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    public static function getSupportedDrivers()
+    public function getSupportedDrivers()
     {
         return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
-        ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getModelInterfaces()
-    {
-        return [
-            SearchIndexInterface::class => 'sylius.model.search.class',
-            SearchLogInterface::class => 'sylius.model.log.class',
         ];
     }
 

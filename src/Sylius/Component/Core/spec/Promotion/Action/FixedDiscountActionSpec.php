@@ -50,13 +50,13 @@ class FixedDiscountActionSpec extends ObjectBehavior
         PromotionInterface $promotion
     ) {
         $adjustmentFactory->createNew()->willReturn($adjustment);
-        $promotion->getDescription()->willReturn('promotion description');
+        $promotion->getName()->willReturn('Test promotion');
 
         $order->getPromotionSubjectTotal()->willReturn(1000);
 
         $adjustment->setAmount(-500)->shouldBeCalled();
         $adjustment->setType(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)->shouldBeCalled();
-        $adjustment->setLabel('promotion description')->shouldBeCalled();
+        $adjustment->setLabel('Test promotion')->shouldBeCalled();
 
         $originator->setOrigin($adjustment, $promotion)->shouldBeCalled();
 
@@ -74,13 +74,13 @@ class FixedDiscountActionSpec extends ObjectBehavior
         PromotionInterface $promotion
     ) {
         $adjustmentFactory->createNew()->willReturn($adjustment);
-        $promotion->getDescription()->willReturn('promotion description');
+        $promotion->getName()->willReturn('Test promotion');
 
         $order->getPromotionSubjectTotal()->willReturn(1000);
 
         $adjustment->setAmount(-1000)->shouldBeCalled();
         $adjustment->setType(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)->shouldBeCalled();
-        $adjustment->setLabel('promotion description')->shouldBeCalled();
+        $adjustment->setLabel('Test promotion')->shouldBeCalled();
 
         $originator->setOrigin($adjustment, $promotion)->shouldBeCalled();
 

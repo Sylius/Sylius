@@ -15,11 +15,6 @@ use Sylius\Bundle\PromotionBundle\DependencyInjection\Compiler\RegisterPromotion
 use Sylius\Bundle\PromotionBundle\DependencyInjection\Compiler\RegisterRuleCheckersPass;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Component\Promotion\Model\ActionInterface;
-use Sylius\Component\Promotion\Model\CouponInterface;
-use Sylius\Component\Promotion\Model\PromotionInterface;
-use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
-use Sylius\Component\Promotion\Model\RuleInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
@@ -32,7 +27,7 @@ class SyliusPromotionBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    public static function getSupportedDrivers()
+    public function getSupportedDrivers()
     {
         return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
@@ -48,20 +43,6 @@ class SyliusPromotionBundle extends AbstractResourceBundle
 
         $container->addCompilerPass(new RegisterRuleCheckersPass());
         $container->addCompilerPass(new RegisterPromotionActionsPass());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getModelInterfaces()
-    {
-        return [
-            PromotionInterface::class => 'sylius.model.promotion.class',
-            CouponInterface::class => 'sylius.model.promotion_coupon.class',
-            RuleInterface::class => 'sylius.model.promotion_rule.class',
-            ActionInterface::class => 'sylius.model.promotion_action.class',
-            PromotionSubjectInterface::class => 'sylius.model.promotion_subject.class',
-        ];
     }
 
     /**

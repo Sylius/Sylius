@@ -6,5 +6,5 @@ sylius_product:
     prefix: /product
 
 sylius_review:
-    resource: @SyliusWebBundle/Resources/config/routing/partial/product-review.yml
+    resource: @SyliusWebBundle/Resources/config/routing/partial/product_review.yml
     prefix: /product-reviews

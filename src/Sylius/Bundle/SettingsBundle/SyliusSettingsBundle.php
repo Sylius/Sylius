@@ -16,7 +16,6 @@ use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\SettingsBundle\DependencyInjection\Compiler\RegisterResolversPass;
 use Sylius\Bundle\SettingsBundle\DependencyInjection\Compiler\RegisterSchemasPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Sylius\Bundle\SettingsBundle\Model\SettingsInterface;
 
 /**
  * Settings system for ecommerce Symfony2 applications.
@@ -28,7 +27,7 @@ class SyliusSettingsBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    public static function getSupportedDrivers()
+    public function getSupportedDrivers()
     {
         return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
@@ -44,16 +43,6 @@ class SyliusSettingsBundle extends AbstractResourceBundle
 
         $container->addCompilerPass(new RegisterSchemasPass());
         $container->addCompilerPass(new RegisterResolversPass());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getModelInterfaces()
-    {
-        return [
-            SettingsInterface::class => 'sylius.model.settings.class',
-        ];
     }
 
     /**

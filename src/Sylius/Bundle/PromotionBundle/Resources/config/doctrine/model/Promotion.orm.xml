@@ -21,7 +21,7 @@
 
         <field name="code" type="string" unique="true" />
         <field name="name" type="string" />
-        <field name="description" type="string" />
+        <field name="description" type="string" nullable="true" />
         <field name="priority" type="integer">
             <gedmo:sortable-position/>
         </field>

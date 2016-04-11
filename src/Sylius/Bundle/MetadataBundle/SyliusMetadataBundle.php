@@ -16,7 +16,6 @@ use Sylius\Bundle\MetadataBundle\DependencyInjection\Compiler\MetadataHierarchyP
 use Sylius\Bundle\MetadataBundle\DependencyInjection\Compiler\MetadataRendererCompilerPass;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Component\Metadata\Model\MetadataContainerInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
@@ -39,20 +38,10 @@ class SyliusMetadataBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    public static function getSupportedDrivers()
+    public function getSupportedDrivers()
     {
         return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
-        ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getModelInterfaces()
-    {
-        return [
-            MetadataContainerInterface::class => 'sylius.model.metadata_container.class',
         ];
     }
 

@@ -14,8 +14,6 @@ namespace Sylius\Bundle\TaxationBundle;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\TaxationBundle\DependencyInjection\Compiler\RegisterCalculatorsPass;
-use Sylius\Component\Taxation\Model\TaxCategoryInterface;
-use Sylius\Component\Taxation\Model\TaxRateInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
@@ -28,7 +26,7 @@ class SyliusTaxationBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    public static function getSupportedDrivers()
+    public function getSupportedDrivers()
     {
         return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
@@ -43,17 +41,6 @@ class SyliusTaxationBundle extends AbstractResourceBundle
         parent::build($container);
 
         $container->addCompilerPass(new RegisterCalculatorsPass());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getModelInterfaces()
-    {
-        return [
-            TaxCategoryInterface::class => 'sylius.model.tax_category.class',
-            TaxRateInterface::class => 'sylius.model.tax_rate.class',
-        ];
     }
 
     /**

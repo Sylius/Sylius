@@ -83,20 +83,20 @@ class ItemFixedDiscountActionSpec extends ObjectBehavior
         $orderItem1->getUnits()->willReturn($units);
         $units->getIterator()->willReturn(new \ArrayIterator([$unit1->getWrappedObject(), $unit2->getWrappedObject()]));
 
-        $promotion->getDescription()->willReturn('Test description');
+        $promotion->getName()->willReturn('Test promotion');
 
         $adjustmentFactory->createNew()->willReturn($promotionAdjustment1, $promotionAdjustment2);
 
         $unit1->getTotal()->willReturn(1000);
         $promotionAdjustment1->setType(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)->shouldBeCalled();
-        $promotionAdjustment1->setLabel('Test description')->shouldBeCalled();
+        $promotionAdjustment1->setLabel('Test promotion')->shouldBeCalled();
         $promotionAdjustment1->setAmount(-500)->shouldBeCalled();
 
         $originator->setOrigin($promotionAdjustment1, $promotion)->shouldBeCalled();
 
         $unit2->getTotal()->willReturn(1000);
         $promotionAdjustment2->setType(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)->shouldBeCalled();
-        $promotionAdjustment2->setLabel('Test description')->shouldBeCalled();
+        $promotionAdjustment2->setLabel('Test promotion')->shouldBeCalled();
         $promotionAdjustment2->setAmount(-500)->shouldBeCalled();
 
         $originator->setOrigin($promotionAdjustment2, $promotion)->shouldBeCalled();
@@ -155,20 +155,20 @@ class ItemFixedDiscountActionSpec extends ObjectBehavior
         $orderItem1->getUnits()->willReturn($units);
         $units->getIterator()->willReturn(new \ArrayIterator([$unit1->getWrappedObject(), $unit2->getWrappedObject()]));
 
-        $promotion->getDescription()->willReturn('Test description');
+        $promotion->getName()->willReturn('Test promotion');
 
         $adjustmentFactory->createNew()->willReturn($promotionAdjustment1, $promotionAdjustment2);
 
         $unit1->getTotal()->willReturn(300);
         $promotionAdjustment1->setType(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)->shouldBeCalled();
-        $promotionAdjustment1->setLabel('Test description')->shouldBeCalled();
+        $promotionAdjustment1->setLabel('Test promotion')->shouldBeCalled();
         $promotionAdjustment1->setAmount(-300)->shouldBeCalled();
 
         $originator->setOrigin($promotionAdjustment1, $promotion)->shouldBeCalled();
 
         $unit2->getTotal()->willReturn(200);
         $promotionAdjustment2->setType(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)->shouldBeCalled();
-        $promotionAdjustment2->setLabel('Test description')->shouldBeCalled();
+        $promotionAdjustment2->setLabel('Test promotion')->shouldBeCalled();
         $promotionAdjustment2->setAmount(-200)->shouldBeCalled();
 
         $originator->setOrigin($promotionAdjustment2, $promotion)->shouldBeCalled();

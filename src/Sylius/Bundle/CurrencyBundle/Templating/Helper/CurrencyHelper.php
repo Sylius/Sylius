@@ -14,6 +14,7 @@ namespace Sylius\Bundle\CurrencyBundle\Templating\Helper;
 use Sylius\Bundle\MoneyBundle\Templating\Helper\MoneyHelperInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
+use Symfony\Component\Intl\Intl;
 use Symfony\Component\Templating\Helper\Helper;
 
 /**
@@ -70,6 +71,14 @@ class CurrencyHelper extends Helper implements CurrencyHelperInterface
         $amount = $this->converter->convertFromBase($amount, $currency);
 
         return $this->moneyHelper->formatAmount($amount, $currency, $decimal);
+    }
+
+    /**
+     * @return string
+     */
+    public function getCurrentCurrencySymbol()
+    {
+        return Intl::getCurrencyBundle()->getCurrencySymbol($this->currencyContext->getCurrency());
     }
 
     /**

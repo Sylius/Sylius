@@ -12,16 +12,9 @@
 -->
 
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
-
     <mapped-superclass name="Sylius\Bundle\MetadataBundle\Model\MetadataContainer" table="sylius_metadata">
         <id name="id" column="id" type="string" />
 
         <field name="metadata" column="metadata" type="text" />
-
-        <lifecycle-callbacks>
-            <lifecycle-callback type="prePersist" method="serializeMetadata" />
-            <lifecycle-callback type="preUpdate" method="serializeMetadata" />
-        </lifecycle-callbacks>
     </mapped-superclass>
-
 </doctrine-mapping>

@@ -49,6 +49,8 @@ class RegisterRenderersPassSpec extends ObjectBehavior
     {
         $container->hasDefinition('sylius.registry.report.renderer')->willReturn(false);
         $container->getDefinition('sylius.registry.report.renderer')->shouldNotBeCalled();
+
+        $this->process($container);
     }
 
     function it_throws_exception_if_any_renderer_has_improper_attributes(ContainerBuilder $container, Definition $rendererDefinition)
@@ -62,7 +64,9 @@ class RegisterRenderersPassSpec extends ObjectBehavior
             ],
         ];
         $container->findTaggedServiceIds('sylius.report.renderer')->willReturn($rendererServices);
-        $this->shouldThrow(new \InvalidArgumentException('Tagged renderers needs to have `renderer` and `label` attributes.'));
         $rendererDefinition->addMethodCall('register', ['test', new Reference('sylius.form.type.renderer.test')])->shouldNotBeCalled();
+
+        $this->shouldThrow(new \InvalidArgumentException('Tagged renderers needs to have `renderer` and `label` attributes.'))
+            ->during('process', [$container]);
     }
 }

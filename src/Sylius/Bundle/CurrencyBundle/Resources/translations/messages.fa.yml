@@ -6,3 +6,4 @@ sylius:
         currency:
             exchange_rate: نرخ تبدیل ارز
             enabled: فعال
+            base: ارز پایه

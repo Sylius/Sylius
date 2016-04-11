@@ -13,7 +13,6 @@ namespace Sylius\Bundle\ThemeBundle;
 
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Translation\DependencyInjection\Compiler\TranslatorAliasingPass;
 use Sylius\Bundle\ThemeBundle\Translation\DependencyInjection\Compiler\TranslatorFallbackLocalesPass;
 use Sylius\Bundle\ThemeBundle\Translation\DependencyInjection\Compiler\TranslatorLoaderProviderPass;
@@ -28,7 +27,7 @@ class SyliusThemeBundle extends AbstractResourceBundle
     /**
      * {@inheritdoc}
      */
-    public static function getSupportedDrivers()
+    public function getSupportedDrivers()
     {
         return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
@@ -46,16 +45,6 @@ class SyliusThemeBundle extends AbstractResourceBundle
         $container->addCompilerPass(new TranslatorFallbackLocalesPass());
         $container->addCompilerPass(new TranslatorLoaderProviderPass());
         $container->addCompilerPass(new TranslatorResourceProviderPass());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getModelInterfaces()
-    {
-        return [
-            ThemeInterface::class => 'sylius.model.theme.class',
-        ];
     }
 
     /**

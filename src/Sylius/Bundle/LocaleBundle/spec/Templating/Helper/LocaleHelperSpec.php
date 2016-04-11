@@ -12,10 +12,14 @@
 namespace spec\Sylius\Bundle\LocaleBundle\Templating\Helper;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\LocaleBundle\Templating\Helper\LocaleHelper;
+use Sylius\Bundle\LocaleBundle\Templating\Helper\LocaleHelperInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Symfony\Component\Templating\Helper\Helper;
 
 /**
+ * @mixin LocaleHelper
+ * 
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
 class LocaleHelperSpec extends ObjectBehavior
@@ -35,11 +39,23 @@ class LocaleHelperSpec extends ObjectBehavior
         $this->shouldHaveType(Helper::class);
     }
 
-    function it_has_locale($localeContext)
+    function it_implements_current_locale_helper_interface()
+    {
+        $this->shouldImplement(LocaleHelperInterface::class);
+    }
+
+    function it_has_locale(LocaleContextInterface $localeContext)
     {
         $localeContext->getCurrentLocale()->shouldBeCalled()->willReturn('fr_FR');
 
         $this->getCurrentLocale()->shouldReturn('fr_FR');
+    }
+
+    function it_converts_locales_code_to_name(LocaleContextInterface $localeContext)
+    {
+        $localeContext->getCurrentLocale()->shouldBeCalled()->willReturn('en_US');
+
+        $this->convertToName('fr_FR')->shouldReturn('French (France)');
     }
 
     function it_has_name()

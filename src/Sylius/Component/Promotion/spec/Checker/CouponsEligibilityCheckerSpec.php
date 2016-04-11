@@ -86,7 +86,7 @@ class CouponsEligibilityCheckerSpec extends ObjectBehavior
 
         $eventDispatcher
             ->dispatch(SyliusPromotionEvents::COUPON_NOT_ELIGIBLE, Argument::type(GenericEvent::class))
-            ->shouldBeCalled()
+            ->shouldNotBeCalled()
         ;
 
         $this->isEligible($subject, $promotion)->shouldReturn(false);

@@ -13,7 +13,7 @@ Feature: Receiving percentage discount on shipping
 
     @ui
     Scenario: Receiving percentage discount on shipping
-        Given the promotion gives "20%" percentage discount on shipping to every order
+        Given the promotion gives "20%" discount on shipping to every order
         When I add product "PHP T-Shirt" to the cart
         And I proceed selecting "DHL" shipping method
         Then my cart total should be "€108.00"
@@ -22,7 +22,7 @@ Feature: Receiving percentage discount on shipping
 
     @ui
     Scenario: Receiving free shipping
-        Given the promotion gives "100%" percentage discount on shipping to every order
+        Given the promotion gives "100%" discount on shipping to every order
         When I add product "PHP T-Shirt" to the cart
         And I proceed selecting "DHL" shipping method
         Then my cart total should be "€100.00"
@@ -31,7 +31,7 @@ Feature: Receiving percentage discount on shipping
 
     @ui
     Scenario: Not receiving percentage discount on shipping before selecting shipping method
-        Given the promotion gives "100%" percentage discount on shipping to every order
+        Given the promotion gives "100%" discount on shipping to every order
         When I add product "PHP T-Shirt" to the cart
         Then my cart total should be "€100.00"
         And my cart shipping fee should be "€0.00"
