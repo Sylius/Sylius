@@ -31,7 +31,9 @@
     ;
 
     $('.ui.checkbox').checkbox();
-    $('select').dropdown();
+    if ($('body').attr('data-env') != 'test') {
+      $('select').dropdown();
+    }
 
     $('.form button').on('click', function() {
       return $(this).closest('form').addClass('loading');
