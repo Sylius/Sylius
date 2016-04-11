@@ -20,10 +20,13 @@
         }
     ],
     "require": {
-        "php": "^5.5.9|^7.0"
+        "php": "^5.5.9|^7.0",
+
+        "zendframework/zend-stdlib": "^2.0|^3.0"
     },
     "require-dev": {
-        "phpspec/phpspec": "^2.4"
+        "phpspec/phpspec": "^2.4",
+        "phpunit/phpunit": "^4.1"
     },
     "config": {
         "bin-dir": "bin"

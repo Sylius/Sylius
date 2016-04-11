@@ -50,7 +50,8 @@
         "sylius/variation": "^0.18",
         "sylius/association": "^0.18",
         "sylius/review": "^0.18",
-        "sylius/metadata": "^0.18"
+        "sylius/metadata": "^0.18",
+        "zendframework/zend-stdlib": "^2.0|^3.0"
     },
     "require-dev": {
         "phpspec/phpspec": "^2.4",

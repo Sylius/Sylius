@@ -9,21 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Core\Taxation;
+namespace Sylius\Component\Core\Taxation\Processor;
 
-use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface OrderShipmentTaxesByZoneApplicatorInterface
+interface OrderTaxesProcessorInterface
 {
     /**
      * @param OrderInterface $order
-     * @param ZoneInterface $zone
-     *
-     * @return
      */
-    public function apply(OrderInterface $order, ZoneInterface $zone);
+    public function process(OrderInterface $order);
 }

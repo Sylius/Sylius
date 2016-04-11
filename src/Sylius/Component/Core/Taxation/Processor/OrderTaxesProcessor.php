@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Core\Taxation;
+namespace Sylius\Component\Core\Taxation\Processor;
 
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
@@ -17,12 +17,16 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Provider\ZoneProviderInterface;
+use Sylius\Component\Core\Taxation\Exception\UnsupportedTaxCalculationStrategyException;
+use Sylius\Component\Core\Taxation\Strategy\TaxCalculationStrategyInterface;
+use Sylius\Component\Registry\PrioritizedServiceRegistryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mark McKelvie <mark.mckelvie@reiss.com>
  */
-class OrderTaxesApplicator implements OrderTaxesApplicatorInterface
+class OrderTaxesProcessor implements OrderTaxesProcessorInterface
 {
     /**
      * @var ZoneProviderInterface
@@ -30,42 +34,34 @@ class OrderTaxesApplicator implements OrderTaxesApplicatorInterface
     protected $defaultTaxZoneProvider;
 
     /**
-     * @var OrderShipmentTaxesByZoneApplicatorInterface
-     */
-    protected $orderShipmentTaxesApplicator;
-
-    /**
-     * @var OrderItemsTaxesByZoneApplicatorInterface
-     */
-    protected $orderItemsTaxesApplicator;
-
-    /**
      * @var ZoneMatcherInterface
      */
     protected $zoneMatcher;
 
     /**
+     * @var PrioritizedServiceRegistryInterface
+     */
+    protected $strategyRegistry;
+
+    /**
      * @param ZoneProviderInterface $defaultTaxZoneProvider
-     * @param OrderShipmentTaxesByZoneApplicatorInterface $orderShipmentTaxesApplicator
-     * @param OrderItemsTaxesByZoneApplicatorInterface $orderItemsTaxesApplicator
      * @param ZoneMatcherInterface $zoneMatcher
+     * @param PrioritizedServiceRegistryInterface $strategyRegistry
      */
     public function __construct(
         ZoneProviderInterface $defaultTaxZoneProvider,
-        OrderShipmentTaxesByZoneApplicatorInterface $orderShipmentTaxesApplicator,
-        OrderItemsTaxesByZoneApplicatorInterface $orderItemsTaxesApplicator,
-        ZoneMatcherInterface $zoneMatcher
+        ZoneMatcherInterface $zoneMatcher,
+        PrioritizedServiceRegistryInterface $strategyRegistry
     ) {
         $this->defaultTaxZoneProvider = $defaultTaxZoneProvider;
-        $this->orderShipmentTaxesApplicator = $orderShipmentTaxesApplicator;
-        $this->orderItemsTaxesApplicator = $orderItemsTaxesApplicator;
         $this->zoneMatcher = $zoneMatcher;
+        $this->strategyRegistry = $strategyRegistry;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function apply(OrderInterface $order)
+    public function process(OrderInterface $order)
     {
         $this->clearTaxes($order);
         if ($order->isEmpty()) {
@@ -78,8 +74,15 @@ class OrderTaxesApplicator implements OrderTaxesApplicatorInterface
             return;
         }
 
-        $this->orderItemsTaxesApplicator->apply($order, $zone);
-        $this->orderShipmentTaxesApplicator->apply($order, $zone);
+        /** @var TaxCalculationStrategyInterface $strategy */
+        foreach ($this->strategyRegistry->all() as $strategy) {
+            if ($strategy->supports($order, $zone)) {
+                $strategy->applyTaxes($order, $zone);
+                return;
+            }
+        }
+
+        throw new UnsupportedTaxCalculationStrategyException();
     }
 
     /**

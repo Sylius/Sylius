@@ -9,9 +9,8 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Core\Taxation;
+namespace Sylius\Component\Core\Taxation\Applicator;
 
-use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Core\Distributor\IntegerDistributorInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
@@ -23,8 +22,9 @@ use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Mark McKelvie <mark.mckelvie@reiss.com>
  */
-class OrderItemsTaxesByZoneApplicator implements OrderItemsTaxesByZoneApplicatorInterface
+class OrderItemsTaxesApplicator implements OrderTaxesApplicatorInterface
 {
     /**
      * @var CalculatorInterface

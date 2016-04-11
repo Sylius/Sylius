@@ -73,6 +73,7 @@ sylius:
                 tracking_code: Tracking code (for example: Google Analytics code)
             taxation:
                 default_tax_zone: Default tax zone
+                default_tax_calculation_strategy: Default tax calculation strategy
             security:
                 enabled: Enable?
         shipment_filter:
