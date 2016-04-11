@@ -26,6 +26,7 @@
             <argument type="service" id="sylius.context.currency" />
             <argument type="service" id="sylius.currency_converter" />
             <argument type="service" id="sylius.templating.helper.money" />
+            <argument type="service" id="sylius.currency_provider" />
             <tag name="templating.helper" alias="sylius_currency" />
         </service>
         <service id="sylius.templating.helper.money" class="%sylius.templating.helper.money.class%" lazy="true">

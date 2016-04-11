@@ -14,6 +14,7 @@ namespace Sylius\Bundle\CurrencyBundle\Templating\Helper;
 use Sylius\Bundle\MoneyBundle\Templating\Helper\MoneyHelperInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
+use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\Templating\Helper\Helper;
 
@@ -38,18 +39,26 @@ class CurrencyHelper extends Helper implements CurrencyHelperInterface
     private $moneyHelper;
 
     /**
+     * @var CurrencyProviderInterface
+     */
+    private $currencyProvider;
+
+    /**
      * @param CurrencyContextInterface $currencyContext
      * @param CurrencyConverterInterface $converter
      * @param MoneyHelperInterface $moneyHelper
+     * @param CurrencyProviderInterface $currencyProvider
      */
     public function __construct(
         CurrencyContextInterface $currencyContext,
         CurrencyConverterInterface $converter,
-        MoneyHelperInterface $moneyHelper
+        MoneyHelperInterface $moneyHelper,
+        CurrencyProviderInterface $currencyProvider
     ) {
         $this->currencyContext = $currencyContext;
         $this->converter = $converter;
         $this->moneyHelper = $moneyHelper;
+        $this->currencyProvider = $currencyProvider;
     }
 
     /**
@@ -76,9 +85,9 @@ class CurrencyHelper extends Helper implements CurrencyHelperInterface
     /**
      * @return string
      */
-    public function getCurrentCurrencySymbol()
+    public function getBaseCurrencySymbol()
     {
-        return Intl::getCurrencyBundle()->getCurrencySymbol($this->currencyContext->getCurrency());
+        return Intl::getCurrencyBundle()->getCurrencySymbol($this->currencyProvider->getBaseCurrency());
     }
 
     /**
