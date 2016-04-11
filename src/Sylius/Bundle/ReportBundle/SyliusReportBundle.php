@@ -15,7 +15,6 @@ use Sylius\Bundle\ReportBundle\DependencyInjection\Compiler\RegisterDataFetcherP
 use Sylius\Bundle\ReportBundle\DependencyInjection\Compiler\RegisterRenderersPass;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Component\Report\Model\ReportInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
@@ -47,16 +46,6 @@ class SyliusReportBundle extends AbstractResourceBundle
 
         $container->addCompilerPass(new RegisterDataFetcherPass());
         $container->addCompilerPass(new RegisterRenderersPass());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getModelInterfaces()
-    {
-        return [
-            ReportInterface::class => 'sylius.model.report.class',
-        ];
     }
 
     /**

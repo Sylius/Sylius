@@ -13,6 +13,7 @@ namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 
 /**
  * Adds all resources to the registry.
@@ -26,12 +27,12 @@ class RegisterResourcesPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasParameter('sylius.resources')) {
+        try {
+            $resources = $container->getParameter('sylius.resources');
+            $registry = $container->findDefinition('sylius.resource_registry');
+        } catch (InvalidArgumentException $exception) {
             return;
         }
-
-        $resources = $container->getParameter('sylius.resources');
-        $registry = $container->getDefinition('sylius.resource_registry');
 
         foreach ($resources as $alias => $configuration) {
             $registry->addMethodCall('addFromAliasAndConfiguration', [$alias, $configuration]);

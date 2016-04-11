@@ -17,7 +17,6 @@ use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\RoutingRepositoryPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\SitemapProviderPass;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Component\Core\Model\ProductVariantImageInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
@@ -49,16 +48,6 @@ class SyliusCoreBundle extends AbstractResourceBundle
         $container->addCompilerPass(new RoutingRepositoryPass());
         $container->addCompilerPass(new LazyCacheWarmupPass());
         $container->addCompilerPass(new SitemapProviderPass());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getModelInterfaces()
-    {
-        return [
-            ProductVariantImageInterface::class => 'sylius.model.product_variant_image.class',
-        ];
     }
 
     /**

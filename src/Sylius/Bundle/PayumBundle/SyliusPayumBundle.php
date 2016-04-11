@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\PayumBundle;
 
-use Payum\Core\Security\TokenInterface;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 
@@ -24,16 +23,6 @@ class SyliusPayumBundle extends AbstractResourceBundle
     {
         return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
-        ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getModelInterfaces()
-    {
-        return [
-            TokenInterface::class => 'sylius.model.payment_security_token.class',
         ];
     }
 

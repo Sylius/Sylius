@@ -14,7 +14,6 @@ namespace Sylius\Bundle\SequenceBundle;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\SequenceBundle\DependencyInjection\Compiler\RegisterGeneratorsPass;
-use Sylius\Component\Sequence\Model\SequenceInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
@@ -42,16 +41,6 @@ class SyliusSequenceBundle extends AbstractResourceBundle
         parent::build($container);
 
         $container->addCompilerPass(new RegisterGeneratorsPass());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getModelInterfaces()
-    {
-        return [
-            SequenceInterface::class => 'sylius.model.sequence.class',
-        ];
     }
 
     /**

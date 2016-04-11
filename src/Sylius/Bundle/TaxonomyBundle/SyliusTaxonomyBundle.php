@@ -13,7 +13,6 @@ namespace Sylius\Bundle\TaxonomyBundle;
 
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 /**
  * Flexible categorization system.
@@ -31,16 +30,6 @@ class SyliusTaxonomyBundle extends AbstractResourceBundle
         return [
             SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
             SyliusResourceBundle::DRIVER_DOCTRINE_MONGODB_ODM,
-        ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getModelInterfaces()
-    {
-        return [
-            TaxonInterface::class => 'sylius.model.taxon.class',
         ];
     }
 

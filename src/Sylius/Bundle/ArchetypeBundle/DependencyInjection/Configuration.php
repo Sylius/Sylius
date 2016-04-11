@@ -19,6 +19,7 @@ use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Archetype\Model\Archetype;
 use Sylius\Component\Archetype\Model\ArchetypeInterface;
 use Sylius\Component\Archetype\Model\ArchetypeTranslation;
+use Sylius\Component\Archetype\Model\ArchetypeTranslationInterface;
 use Sylius\Component\Attribute\Model\Attribute;
 use Sylius\Component\Resource\Factory\Factory;
 use Sylius\Component\Resource\Factory\TranslatableFactory;
@@ -109,6 +110,7 @@ class Configuration implements ConfigurationInterface
                                                 ->addDefaultsIfNotSet()
                                                 ->children()
                                                     ->scalarNode('model')->defaultValue(ArchetypeTranslation::class)->cannotBeEmpty()->end()
+                                                    ->scalarNode('interface')->defaultValue(ArchetypeTranslationInterface::class)->cannotBeEmpty()->end()
                                                     ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                                     ->scalarNode('repository')->cannotBeEmpty()->end()
                                                     ->scalarNode('factory')->defaultValue(Factory::class)->end()
