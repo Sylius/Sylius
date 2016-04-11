@@ -40,7 +40,7 @@ class ProportionalIntegerDistributor implements ProportionalIntegerDistributorIn
 
         if (abs($distributedSum) < $amount) {
             for ($i = 0; $i < ($amount - abs($distributedSum)); $i++) {
-                (1 === $sign) ? $distributedAmounts[$i]++ : $distributedAmounts[$i]++;
+                (1 === $sign) ? $distributedAmounts[$i]++ : $distributedAmounts[$i]--;
             }
         }
 

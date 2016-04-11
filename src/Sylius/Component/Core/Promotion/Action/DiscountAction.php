@@ -13,36 +13,28 @@ namespace Sylius\Component\Core\Promotion\Action;
 
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Originator\Originator\OriginatorInterface;
 use Sylius\Component\Promotion\Action\PromotionActionInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
-use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 abstract class DiscountAction implements PromotionActionInterface
 {
-    /**
-     * @var FactoryInterface
-     */
-    protected $adjustmentFactory;
-
     /**
      * @var OriginatorInterface
      */
     protected $originator;
 
     /**
-     * @param FactoryInterface $adjustmentFactory
      * @param OriginatorInterface $originator
      */
-    public function __construct(FactoryInterface $adjustmentFactory, OriginatorInterface $originator)
+    public function __construct(OriginatorInterface $originator)
     {
-        $this->adjustmentFactory = $adjustmentFactory;
         $this->originator = $originator;
     }
 
@@ -51,34 +43,41 @@ abstract class DiscountAction implements PromotionActionInterface
      */
     public function revert(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
     {
-        if (!$subject instanceof OrderInterface && !$subject instanceof OrderItemInterface) {
-            throw new UnexpectedTypeException(
-                $subject,
-                'Sylius\Component\Core\Model\OrderInterface or Sylius\Component\Core\Model\OrderItemInterface'
-            );
+        if (!$this->isSubjectValid($subject)) {
+            return;
         }
 
-        foreach ($subject->getAdjustments(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT) as $adjustment) {
-            if ($promotion === $this->originator->getOrigin($adjustment)) {
-                $subject->removeAdjustment($adjustment);
+        foreach ($subject->getItems() as $item) {
+            foreach ($item->getUnits() as $unit) {
+                foreach ($unit->getAdjustments(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT) as $adjustment) {
+                    if ($promotion === $this->originator->getOrigin($adjustment)) {
+                        $unit->removeAdjustment($adjustment);
+                    }
+                }
             }
         }
     }
 
     /**
-     * @param PromotionInterface $promotion
-     * @param string $type
+     * @param PromotionSubjectInterface $subject
      *
-     * @return AdjustmentInterface
+     * @return bool
      */
-    protected function createAdjustment(PromotionInterface $promotion, $type = AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)
+    protected function isSubjectValid(PromotionSubjectInterface $subject)
     {
-        $adjustment = $this->adjustmentFactory->createNew();
-        $adjustment->setType($type);
-        $adjustment->setLabel($promotion->getName());
+        if (!$subject instanceof OrderInterface) {
+            throw new UnexpectedTypeException($subject, OrderInterface::class);
+        }
 
-        $this->originator->setOrigin($adjustment, $promotion);
+        if (0 === $subject->countItems()) {
+            return false;
+        }
 
-        return $adjustment;
+        return true;
     }
+
+    /**
+     * @param array $configuration
+     */
+    protected abstract function isConfigurationValid(array $configuration);
 }

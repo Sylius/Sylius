@@ -8,12 +8,12 @@ Feature: Checkout percentage discount promotions
         Given store has default configuration
         And the following promotions exist:
             | code | name    | description                                   |
-            | PR1  | 5 items | 25% Discount for orders with at least 5 items |
+            | PR1  | 5 units | 25% Discount for orders with at least 5 units |
             | PR2  | 300 EUR | 10% Discount for orders over 300 EUR          |
-        And promotion "5 items" has following rules defined:
+        And promotion "5 units" has following rules defined:
             | type          | configuration |
             | Cart quantity | Count: 5      |
-        And promotion "5 items" has following actions defined:
+        And promotion "5 units" has following actions defined:
             | type                      | configuration  |
             | Order percentage discount | percentage: 25 |
         And promotion "300 EUR" has following rules defined:
@@ -69,5 +69,5 @@ Feature: Checkout percentage discount promotions
         And I added product "Buzz" to cart, with quantity "1"
         When I add product "Woody" to cart, with quantity "3"
         Then I should still be on the cart summary page
-        And "Promotion total: -€586.25" should appear on the page
-        And "Grand total: €1,088.75" should appear on the page
+        And "Promotion total: -€544.38" should appear on the page
+        And "Grand total: €1,130.62" should appear on the page

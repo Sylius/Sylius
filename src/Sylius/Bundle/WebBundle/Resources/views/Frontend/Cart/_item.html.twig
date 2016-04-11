@@ -18,11 +18,11 @@
     </td>
     <td class="col-md-1" style="text-align: right">
         {% set regularPrice = item.vars.value|sylius_regular_price %}
-        {% if regularPrice != item.vars.value.total %}
+        {% if 0 != item.vars.value.getAdjustmentsTotalRecursively('order_item_promotion') %}
             <span class="regular-price" style="text-decoration: line-through">{{ regularPrice|sylius_price }}</span>
             <span class="discount-price">{{ item.vars.value.total|sylius_price }}</span>
         {% else %}
-            <span>{{ item.vars.value.total|sylius_price }}</span>
+            <span>{{ regularPrice|sylius_price }}</span>
         {% endif %}
     </td>
 </tr>

@@ -12,22 +12,39 @@
 namespace spec\Sylius\Component\Core\Promotion\Action;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
+use Sylius\Component\Core\Distributor\IntegerDistributorInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\Model\OrderItemUnitInterface;
+use Sylius\Component\Core\Promotion\Action\PercentageDiscountAction;
+use Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicatorInterface;
 use Sylius\Component\Originator\Originator\OriginatorInterface;
 use Sylius\Component\Promotion\Action\PromotionActionInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
 /**
+ * @mixin PercentageDiscountAction
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class PercentageDiscountActionSpec extends ObjectBehavior
 {
-    function let(FactoryInterface $adjustmentFactory, OriginatorInterface $originator)
-    {
-        $this->beConstructedWith($adjustmentFactory, $originator);
+    function let(
+        OriginatorInterface $originator,
+        IntegerDistributorInterface $integerDistributor,
+        UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
+    ) {
+        $this->beConstructedWith(
+            $originator,
+            $integerDistributor,
+            $unitsPromotionAdjustmentsApplicator
+        );
     }
 
     function it_is_initializable()
@@ -35,32 +52,126 @@ class PercentageDiscountActionSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Component\Core\Promotion\Action\PercentageDiscountAction');
     }
 
-    function it_implements_Sylius_promotion_action_interface()
+    function it_implements_promotion_action_interface()
     {
         $this->shouldImplement(PromotionActionInterface::class);
     }
 
-    function it_applies_percentage_discount_as_promotion_adjustment(
-        FactoryInterface $adjustmentFactory,
-        $originator,
+    function it_uses_distributor_and_applicator_to_execute_promotion_action(
         OrderInterface $order,
-        AdjustmentInterface $adjustment,
+        OrderItemInterface $firstItem,
+        OrderItemInterface $secondItem,
+        PromotionInterface $promotion,
+        IntegerDistributorInterface $integerDistributor,
+        UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
+    ) {
+        $order->countItems()->willReturn(2);
+
+        $order
+            ->getItems()
+            ->willReturn(new \ArrayIterator([$firstItem->getWrappedObject(), $secondItem->getWrappedObject()]))
+        ;
+
+        $order->getPromotionSubjectTotal()->willReturn(10000);
+
+        $integerDistributor->distribute(-1000, 2)->willReturn([-500, -500]);
+        $unitsPromotionAdjustmentsApplicator->apply($order, $promotion, [-500, -500])->shouldBeCalled();
+
+        $this->execute($order, ['percentage' => 0.1], $promotion);
+    }
+
+    function it_does_nothing_if_order_has_no_items(OrderInterface $order, PromotionInterface $promotion)
+    {
+        $order->countItems()->willReturn(0);
+        $order->getPromotionSubjectTotal()->shouldNotBeCalled();
+
+        $this->execute($order, ['percentage' => 0.1], $promotion);
+    }
+
+    function it_does_nothing_if_adjustment_amount_would_be_0(
+        IntegerDistributorInterface $integerDistributor,
+        OrderInterface $order,
         PromotionInterface $promotion
     ) {
-        $order->getPromotionSubjectTotal()->willReturn(10000);
-        $adjustmentFactory->createNew()->willReturn($adjustment);
-        $promotion->getName()->willReturn('Test promotion');
+        $order->countItems()->willReturn(0);
+        $order->getPromotionSubjectTotal()->willReturn(0);
+        $integerDistributor->distribute(Argument::any())->shouldNotBeCalled();
 
-        $adjustment->setAmount(-2500)->shouldBeCalled();
-        $adjustment->setType(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)->shouldBeCalled();
-        $adjustment->setLabel('Test promotion')->shouldBeCalled();
+        $this->execute($order, ['percentage' => 0.1], $promotion);
+    }
 
-        $originator->setOrigin($adjustment, $promotion)->shouldBeCalled();
+    function it_throws_exception_if_configuration_is_invalid(OrderInterface $order, PromotionInterface $promotion)
+    {
+        $this
+            ->shouldThrow(new \InvalidArgumentException('"percentage" must be set and must be a float.'))
+            ->during('execute', [$order, [], $promotion])
+        ;
 
-        $order->addAdjustment($adjustment)->shouldBeCalled();
+        $this
+            ->shouldThrow(new \InvalidArgumentException('"percentage" must be set and must be a float.'))
+            ->during('execute', [$order, ['percentage' => 'string'], $promotion])
+        ;
+    }
 
-        $configuration = ['percentage' => 0.25];
+    function it_throws_exception_if_subject_is_not_an_order(
+        PromotionInterface $promotion,
+        PromotionSubjectInterface $subject
+    ) {
+        $this
+            ->shouldThrow(new UnexpectedTypeException($subject->getWrappedObject(), OrderInterface::class))
+            ->during('execute', [$subject, [], $promotion])
+        ;
+    }
 
-        $this->execute($order, $configuration, $promotion);
+    function it_reverts_order_units_order_promotion_adjustments(
+        AdjustmentInterface $firstAdjustment,
+        AdjustmentInterface $secondAdjustment,
+        OrderInterface $order,
+        OrderItemInterface $item,
+        OrderItemUnitInterface $unit,
+        OriginatorInterface $originator,
+        PromotionInterface $otherPromotion,
+        PromotionInterface $promotion
+    ) {
+        $order->countItems()->willReturn(1);
+        $order->getItems()->willReturn(new \ArrayIterator([$item->getWrappedObject()]));
+
+        $item->getUnits()->willReturn(new \ArrayIterator([$unit->getWrappedObject()]));
+
+        $unit
+            ->getAdjustments(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)
+            ->willReturn(new \ArrayIterator([$firstAdjustment->getWrappedObject(), $secondAdjustment->getWrappedObject()]))
+        ;
+
+        $originator->getOrigin($firstAdjustment)->willReturn($promotion);
+        $originator->getOrigin($secondAdjustment)->willReturn($otherPromotion);
+
+        $unit->removeAdjustment($firstAdjustment)->shouldBeCalled();
+        $unit->removeAdjustment($secondAdjustment)->shouldNotBeCalled();
+
+        $this->revert($order, [], $promotion);
+    }
+
+    function it_does_not_revert_if_order_has_no_items(OrderInterface $order, PromotionInterface $promotion)
+    {
+        $order->countItems()->willReturn(0);
+        $order->getItems()->shouldNotBeCalled();
+
+        $this->revert($order, [], $promotion);
+    }
+
+    function it_throws_exception_while_reverting_subject_which_is_not_order(
+        PromotionInterface $promotion,
+        PromotionSubjectInterface $subject
+    ) {
+        $this
+            ->shouldThrow(new UnexpectedTypeException($subject->getWrappedObject(), OrderInterface::class))
+            ->during('revert', [$subject, [], $promotion])
+        ;
+    }
+
+    function it_has_configuration_form_type()
+    {
+        $this->getConfigurationFormType()->shouldReturn('sylius_promotion_action_percentage_discount_configuration');
     }
 }

@@ -12,18 +12,15 @@
 namespace Sylius\Component\Core\Promotion\Action;
 
 use Sylius\Component\Core\Distributor\ProportionalIntegerDistributorInterface;
-use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicatorInterface;
 use Sylius\Component\Originator\Originator\OriginatorInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
-use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class FixedDiscountAction extends DiscountAction
 {
@@ -43,14 +40,14 @@ class FixedDiscountAction extends DiscountAction
      * {@inheritdoc}
      *
      * @param ProportionalIntegerDistributorInterface $proportionalIntegerDistributor
+     * @param UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
      */
     public function __construct(
-        FactoryInterface $adjustmentFactory,
         OriginatorInterface $originator,
         ProportionalIntegerDistributorInterface $proportionalIntegerDistributor,
         UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
     ) {
-        parent::__construct($adjustmentFactory, $originator);
+        parent::__construct($originator);
 
         $this->distributor = $proportionalIntegerDistributor;
         $this->unitsPromotionAdjustmentsApplicator = $unitsPromotionAdjustmentsApplicator;
@@ -61,11 +58,16 @@ class FixedDiscountAction extends DiscountAction
      */
     public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
     {
-        if (!$subject instanceof OrderInterface) {
-            throw new UnexpectedTypeException($subject, OrderInterface::class);
+        if (!$this->isSubjectValid($subject)) {
+            return;
         }
 
+        $this->isConfigurationValid($configuration);
+
         $promotionAmount = $this->calculateAdjustmentAmount($subject->getPromotionSubjectTotal(), $configuration['amount']);
+        if (0 === $promotionAmount) {
+            return;
+        }
 
         $itemsTotals = [];
         foreach ($subject->getItems() as $item) {
@@ -85,6 +87,16 @@ class FixedDiscountAction extends DiscountAction
     }
 
     /**
+     * {@inheritdoc}
+     */
+    protected function isConfigurationValid(array $configuration)
+    {
+        if (!isset($configuration['amount']) || !is_int($configuration['amount'])) {
+            throw new \InvalidArgumentException('"amount" must be set and must be an integer.');
+        }
+    }
+
+    /**
      * @param int $promotionSubjectTotal
      * @param int $targetPromotionAmount
      *
@@ -92,6 +104,6 @@ class FixedDiscountAction extends DiscountAction
      */
     private function calculateAdjustmentAmount($promotionSubjectTotal, $targetPromotionAmount)
     {
-        return -1 * min($promotionSubjectTotal, $targetPromotionAmount);
+        return -1 * min(abs($promotionSubjectTotal), abs($targetPromotionAmount));
     }
 }
