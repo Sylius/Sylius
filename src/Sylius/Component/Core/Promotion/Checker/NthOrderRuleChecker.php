@@ -19,13 +19,13 @@ use Sylius\Component\Promotion\Exception\UnsupportedTypeException;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 /**
- * Checks if customers order is the nth one.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class NthOrderRuleChecker implements RuleCheckerInterface
 {
+    const TYPE = 'nth_order';
+
     /**
      * @var OrderRepositoryInterface
      */
@@ -46,6 +46,10 @@ class NthOrderRuleChecker implements RuleCheckerInterface
     {
         if (!$subject instanceof OrderInterface) {
             throw new UnsupportedTypeException($subject, OrderInterface::class);
+        }
+
+        if (!isset($configuration['nth']) || !is_int($configuration['nth'])) {
+            return false;
         }
 
         if (null === $customer = $subject->getCustomer()) {

@@ -13,8 +13,10 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CouponInterface;
 use Sylius\Component\Core\OrderProcessing\OrderRecalculatorInterface;
+use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -26,9 +28,11 @@ use Sylius\Component\Core\OrderProcessing\OrderShipmentProcessorInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Payment\Factory\PaymentFactoryInterface;
+use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\User\Model\CustomerInterface;
+use Sylius\Component\User\Model\UserInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -119,13 +123,7 @@ final class OrderContext implements Context
      */
     public function theCustomerPlacedAnOrder(CustomerInterface $customer, $orderNumber)
     {
-        /** @var OrderInterface $order */
-        $order = $this->orderFactory->createNew();
-
-        $order->setCustomer($customer);
-        $order->setNumber($orderNumber);
-        $order->setChannel($this->sharedStorage->get('channel'));
-        $order->setCurrency($this->sharedStorage->get('currency'));
+        $order = $this->createOrder($customer, $orderNumber);
 
         $this->sharedStorage->set('order', $order);
 
@@ -193,6 +191,21 @@ final class OrderContext implements Context
     }
 
     /**
+     * @Given /^(I) have already placed an order (\d+) times$/
+     */
+    public function iHaveAlreadyPlacedOrderNthTimes(UserInterface $user, $numberOfOrders)
+    {
+        $customer = $user->getCustomer();
+        for ($i = 0; $i < $numberOfOrders; $i++) {
+            $order = $this->createOrder($customer, '#00000'.$i);
+            $order->setPaymentState(PaymentInterface::STATE_COMPLETED);
+            $order->setCompletedAt(new \DateTime());
+
+            $this->orderRepository->add($order);
+        }
+    }
+
+    /**
      * @param ProductVariantInterface $productVariant
      * @param int $price
      *
@@ -212,6 +225,30 @@ final class OrderContext implements Context
         $order->addItem($item);
 
         $this->orderRecalculator->recalculate($order);
+
+        return $order;
+    }
+
+    /**
+     * @param CustomerInterface $customer
+     * @param string $number
+     * @param ChannelInterface|null $channel
+     * @param CurrencyInterface|null $currency
+     *
+     * @return OrderInterface
+     */
+    private function createOrder(
+        CustomerInterface $customer,
+        $number,
+        ChannelInterface $channel = null,
+        CurrencyInterface $currency = null
+    ) {
+        $order = $this->orderFactory->createNew();
+
+        $order->setCustomer($customer);
+        $order->setNumber($number);
+        $order->setChannel((null !== $channel) ? $channel : $this->sharedStorage->get('channel'));
+        $order->setCurrency((null !== $currency) ? $currency : $this->sharedStorage->get('currency'));
 
         return $order;
     }

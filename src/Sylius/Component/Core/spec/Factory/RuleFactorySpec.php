@@ -13,6 +13,7 @@ namespace spec\Sylius\Component\Core\Factory;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Factory\RuleFactoryInterface;
+use Sylius\Component\Core\Promotion\Checker\NthOrderRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\TotalOfItemsFromTaxonRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\ContainsTaxonRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\TaxonRuleChecker;
@@ -89,5 +90,14 @@ class RuleFactorySpec extends ObjectBehavior
         $rule->setConfiguration(['taxon' => 'bows', 'count' => 10])->shouldBeCalled();
 
         $this->createContainsTaxon('bows', 10)->shouldReturn($rule);
+    }
+
+    function it_creates_a_nth_order_rule($decoratedFactory, RuleInterface $rule)
+    {
+        $decoratedFactory->createNew()->willReturn($rule);
+        $rule->setType(NthOrderRuleChecker::TYPE)->shouldBeCalled();
+        $rule->setConfiguration(['nth' => 10])->shouldBeCalled();
+
+        $this->createNthOrder(10)->shouldReturn($rule);
     }
 }

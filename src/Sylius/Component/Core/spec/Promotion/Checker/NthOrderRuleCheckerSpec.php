@@ -15,10 +15,16 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Core\Promotion\Checker\NthOrderRuleChecker;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Promotion\Checker\RuleCheckerInterface;
+use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
+use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
 /**
+ * @mixin NthOrderRuleChecker
+ *
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class NthOrderRuleCheckerSpec extends ObjectBehavior
@@ -33,22 +39,22 @@ class NthOrderRuleCheckerSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Component\Core\Promotion\Checker\NthOrderRuleChecker');
     }
 
-    function it_should_be_Sylius_rule_checker()
+    function it_implements_rule_checker_interface()
     {
         $this->shouldImplement(RuleCheckerInterface::class);
     }
 
-    function it_should_recognize_no_customer_as_not_eligible(OrderInterface $subject)
+    function it_recognizes_subject_without_customer_as_not_eligible(OrderInterface $subject)
     {
         $subject->getCustomer()->willReturn(null);
 
         $this->isEligible($subject, ['nth' => 10])->shouldReturn(false);
     }
 
-    function it_should_recognize_subject_as_not_eligible_if_nth_order_is_zero(
-        OrderInterface $subject,
+    function it_recognizes_subject_as_not_eligible_if_nth_order_is_zero(
         CustomerInterface $customer,
-        $ordersRepository
+        OrderInterface $subject,
+        OrderRepositoryInterface $ordersRepository
     ) {
         $subject->getCustomer()->willReturn($customer);
 
@@ -57,10 +63,10 @@ class NthOrderRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, ['nth' => 10])->shouldReturn(false);
     }
 
-    function it_should_recognize_subject_as_not_eligible_if_nth_order_is_less_then_configured(
-        OrderInterface $subject,
+    function it_recognizes_subject_as_not_eligible_if_nth_order_is_less_then_configured(
         CustomerInterface $customer,
-        $ordersRepository
+        OrderInterface $subject,
+        OrderRepositoryInterface $ordersRepository
     ) {
         $subject->getCustomer()->willReturn($customer);
 
@@ -69,10 +75,10 @@ class NthOrderRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, ['nth' => 10])->shouldReturn(false);
     }
 
-    function it_should_recognize_subject_as_not_eligible_if_nth_order_is_greater_then_configured(
-        OrderInterface $subject,
+    function it_recognizes_subject_as_eligible_if_nth_order_is_greater_then_configured(
         CustomerInterface $customer,
-        $ordersRepository
+        OrderInterface $subject,
+        OrderRepositoryInterface $ordersRepository
     ) {
         $subject->getCustomer()->willReturn($customer);
 
@@ -81,15 +87,29 @@ class NthOrderRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, ['nth' => 10])->shouldReturn(false);
     }
 
-    function it_should_recognize_subject_as_not_eligible_if_nth_order_is_equal_with_configured(
-        OrderInterface $subject,
+    function it_recognizes_subject_as_eligible_if_nth_order_is_equal_with_configured(
         CustomerInterface $customer,
-        $ordersRepository
+        OrderInterface $subject,
+        OrderRepositoryInterface $ordersRepository
     ) {
         $subject->getCustomer()->willReturn($customer);
 
         $ordersRepository->countByCustomerAndPaymentState($customer, PaymentInterface::STATE_COMPLETED)->willReturn(9);
 
         $this->isEligible($subject, ['nth' => 10])->shouldReturn(true);
+    }
+
+    function it_recognizes_subject_as_not_eligible_if_configuration_is_invalid(OrderInterface $subject)
+    {
+        $this->isEligible($subject, [])->shouldReturn(false);
+        $this->isEligible($subject, ['nth' => 'string'])->shouldReturn(false);
+    }
+
+    function it_throws_exception_if_subject_is_not_order(PromotionSubjectInterface $subject)
+    {
+        $this
+            ->shouldThrow(new UnexpectedTypeException($subject->getWrappedObject(), OrderInterface::class))
+            ->during('isEligible', [$subject, ['nth' => 10]])
+        ;
     }
 }

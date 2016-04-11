@@ -11,11 +11,14 @@ default:
                 - sylius.behat.context.transform.shared_storage
                 - sylius.behat.context.transform.product
                 - sylius.behat.context.transform.taxon
+                - sylius.behat.context.transform.user
 
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.currency
                 - sylius.behat.context.setup.security
                 - sylius.behat.context.setup.user
+                - sylius.behat.context.setup.order
+                - sylius.behat.context.setup.payment
                 - sylius.behat.context.setup.product
                 - sylius.behat.context.setup.promotion
                 - sylius.behat.context.setup.shipping

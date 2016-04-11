@@ -211,6 +211,10 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
                     $configuration[$key] = (int) $value;
                     break;
 
+                case 'nth':
+                    $configuration[$key] = (int) $value;
+                    break;
+
                 default:
                     $configuration[$key] = trim($value);
                     break;

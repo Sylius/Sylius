@@ -327,6 +327,16 @@ final class PromotionContext implements Context
     }
 
     /**
+     * @Given /^([^"]+) gives ("(?:€|£|\$)[^"]+") off customer's (\d)(?:st|nd|rd|th) order$/
+     */
+    public function itGivesOffCustomersNthOrder(PromotionInterface $promotion, $discount, $nth)
+    {
+        $rule = $this->ruleFactory->createNthOrder((int) $nth);
+
+        $this->createFixedPromotion($promotion, $discount, [], $rule);
+    }
+
+    /**
      * @param ActionInterface $action
      * @param array $taxonCodes
      *

@@ -29,6 +29,7 @@
         <parameter key="sylius.behat.context.transform.tax_rate.class">Sylius\Behat\Context\Transform\TaxRateContext</parameter>
         <parameter key="sylius.behat.context.transform.taxon.class">Sylius\Behat\Context\Transform\TaxonContext</parameter>
         <parameter key="sylius.behat.context.transform.theme.class">Sylius\Behat\Context\Transform\ThemeContext</parameter>
+        <parameter key="sylius.behat.context.transform.user.class">Sylius\Behat\Context\Transform\UserContext</parameter>
         <parameter key="sylius.behat.context.transform.zone.class">Sylius\Behat\Context\Transform\ZoneContext</parameter>
     </parameters>
     <services>
@@ -112,6 +113,11 @@
 
         <service id="sylius.behat.context.transform.theme" class="%sylius.behat.context.transform.theme.class%" scope="scenario">
             <argument type="service" id="sylius.repository.theme" container="symfony" />
+            <tag name="sylius.behat.context" />
+        </service>
+
+        <service id="sylius.behat.context.transform.user" class="%sylius.behat.context.transform.user.class%" scope="scenario">
+            <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>
 
