@@ -110,7 +110,7 @@ class TaxonsToCodesTransformerSpec extends ObjectBehavior
     function it_throws_exception_while_reverse_transform_if_taxons_element_is_not_an_array(TaxonInterface $axes)
     {
         $this
-            ->shouldThrow(new \InvalidArgumentException('"taxons" element of collection should be an array.'))
+            ->shouldThrow(new \InvalidArgumentException('"taxons" element of collection should be Traversable'))
             ->during('reverseTransform', [new ArrayCollection(['taxons' => $axes->getWrappedObject()])])
         ;
     }
