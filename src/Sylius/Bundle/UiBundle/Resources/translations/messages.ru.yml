@@ -10,7 +10,7 @@ sylius:
     ui:
         create: Добавить
         dashboard: Приборная панель
-        delete: sylius.account.address.action.delete
+        delete: Удалить
         edit: Редактировать
         actions: Действия
         enabled: Активен
@@ -28,3 +28,6 @@ sylius:
         countries: Страны
         new_country: Добавить страну
         locales: Языки
+        details: Подробно
+        taxons: Категории
+        delete: Удалить
