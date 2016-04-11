@@ -7,6 +7,7 @@ sylius:
             main:
                 api_clients: API-Clients
                 archetypes: Produkt-Vorlagen
+                association_types: Produkt-Beziehungsvorlagen
                 assortment: Kollektionen
                 attributes: Attribute konfigurieren
                 blocks: Blöcke
@@ -56,6 +57,7 @@ sylius:
             sidebar:
                 api_clients: API-Clients
                 archetypes: Produkt-Vorlagen
+                association_types: Produkt-Beziehungsvorlagen
                 assortment: Kollektionen
                 attributes: Attribute konfigurieren
                 blocks: Blöcke

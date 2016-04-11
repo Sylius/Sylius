@@ -1,0 +1,17 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    user:
+        email:
+            not_exist: ไม่มีผู้ใช้อีเมลนี้
+        password:
+            invalid: รหัสผ่านปัจจุบันไม่ถูกต้อง
+            request:
+                success: เราจะส่งอีเมลเกี่ยวกับวิธีการรีเซ็ตรหัสผ่าน
+            reset:
+                success: รหัสผ่านของคุณได้ถูกตั้งค่าเรียบร้อยแล้ว
+            change:
+                success: เปลี่ยนรหัสผ่านของคุณเรียบร้อยแล้ว
+        reset_password:
+            requested: ถ้าคุณระบุอีเมลที่อยู่ในระบบของเรา เราจะส่งอีเมลเกี่ยวกับวิธีการรีเซ็ตรหัสผ่าน

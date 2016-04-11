@@ -6,6 +6,8 @@ sylius:
         rule:
             unit_count_configuration:
                 count: จำนวน
+                equal: เท่ากับ
+            type: ชนิดของกฎ
         shipment:
             state: สถานะ
             states:
@@ -18,12 +20,23 @@ sylius:
             tracking_code: รหัสการติดตาม
         shipping_calculator:
             flat_rate_configuration:
+                label: อัตราต่อการจัดส่ง
                 amount: ยอดเงิน
+            flexible_rate_configuration:
+                label: อัตรายืดหยุ่ย
+                additional_unit_cost: ต้นทุนอื่นๆ
+                additional_unit_limit: ขีดจำกัดรายการเพิ่มเติม
+                first_unit_cost: ต้นทุนต่อหน่วยแรก
             per_unit_rate_configuration:
+                label: อัตราต่อหน่วย
                 amount: ยอดรวม
             weight_rate_configuration:
+                label: ราคาตามน้ำหนัก
+                fixed: ยอดเงินคงที่
+                variable: จำนวนตัวแปร
                 division: สัดส่วน
             volume_rate_configuration:
+                label: อัตราตามปริมาณ
                 amount: ยอดรวม
                 division: สัดส่วน
         shipping_category:

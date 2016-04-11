@@ -5,4 +5,9 @@ sylius:
     form:
         email:
             enabled: เปิดใช้งานแล้ว
+            subject: ชื่อเรื่อง
+            sender_name: ชื่อผู้ส่ง
+            sender_address: ที่อยู่ผู้ส่ง
             content: เนื้อหา
+            template: แม่แบบ
+            no_template: ใช้แม่แบบกำหนดเอง

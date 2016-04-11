@@ -1,0 +1,84 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    imagine_block:
+        name:
+            not_blank: กรุณาระบุชื่อบล็อกภาพ
+        label:
+            not_blank: กรุณาระบุป้ายชื่อบล็อกภาพ
+        filter:
+            not_blank: กรุณาระบุตัวกรองบล็อกภาพ
+        image:
+            not_blank: โปรดเลือกจินตนาการภาพบล็อก
+        start_date:
+            invalid_date: วันเริ่มเผยแพร่ไม่ถูกต้อง
+        end_date:
+            invalid_date: วันสิ้นสุดการเผยแพร่ไม่ถูกต้อง
+    menu:
+        name:
+            not_blank: กรุณาระบุชื่อเมนู
+        label:
+            not_blank: กรุณาระบุชื่อป้ายชื่อเมนู
+        start_date:
+            invalid_date: วันเริ่มเผยแพร่ไม่ถูกต้อง
+        end_date:
+            invalid_date: วันวันสิ้นสุดการเผยแพร่ไม่ถูกต้อง
+    menu_node:
+        name:
+            not_blank: กรุณาระบุชื่อเมนู
+        label:
+            not_blank: กรุณาระบุป้ายชื่อเมนู
+        start_date:
+            invalid_date: วันเริ่มเผยแพร่ไม่ถูกต้อง
+        end_date:
+            invalid_date: วันสิ้นสุดการเผยแพร่ไม่ถูกต้อง
+    route:
+        name:
+            not_blank: กรุณาระบุชื่อเส้นทาง
+        content:
+            not_blank: กรุณาระบุเส้นทางเข้าถึงเนื้อหา
+        start_date:
+            invalid_date: วันเริ่มต้นเผยแพร่ไม่ถูกต้อง
+        end_date:
+            invalid_date: วันสิ้นสุดการเผยแพร่ไม่ถูกต้อง
+    slideshow_block:
+        name:
+            not_blank: กรุณาระบุชื่อสไลด์โชว์
+        title:
+            not_blank: โปรดระบุหัวข้อสไลด์โชว์
+        start_date:
+            invalid_date: วันเริ่มต้นเผยแพร่ไม่ถูกต้อง
+        end_date:
+            invalid_date: วันสิ้นสุดการเผยแพร่ไม่ถูกต้อง
+    simple_block:
+        name:
+            not_blank: กรุณาระบุชื่อบล็อกแบบง่าย
+        title:
+            not_blank: กรุณาระบุหัวข้อบล็อกแบบง่าย
+        body:
+            not_blank: กรุณาเนื้อหาบล็อกแบบง่าย
+        start_date:
+            invalid_date: วันเริ่มต้นเผยแพร่ไม่ถูกต้อง
+        end_date:
+            invalid_date: วันสิ้นสุดการเผยแพร่ไม่ถูกต้อง
+    string_block:
+        name:
+            not_blank: กรุณาระบุชื่อบล็อกแบบง่าย
+        body:
+            not_blank: กรุณาระบุเนื้อหาบล็อกแบบง่าย
+        start_date:
+            invalid_date: วันเริ่มต้นเผยแพร่ไม่ถูกต้อง
+        end_date:
+            invalid_date: วันสิ้นสุดการเผยแพร่ไม่ถูกต้อง
+    static_content:
+        name:
+            not_blank: กรุณาระบุชื่อสำหรับเนื้อหาแบบคงที่
+        title:
+            not_blank: กรุณาระบุหัวข้อสำหรับเนื้อหาแบบคงที่
+        body:
+            not_blank: กรุณาระบุเนื้อหาแบบคงที่
+        start_date:
+            invalid_date: วันเริ่มต้นเผยแพร่ไม่ถูกต้อง
+        end_date:
+            invalid_date: วันสิ้นสุดการเผยแพร่ไม่ถูกต้อง

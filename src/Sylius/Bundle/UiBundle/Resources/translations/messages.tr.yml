@@ -8,21 +8,21 @@ sylius:
             password: Şifre
             remember_me: Beni hatırla
     ui:
+        actions: Eylemler
+        countries: Ülkeler
         create: Oluştur
         dashboard: Kontrol Paneli
         delete: Sil
-        edit: Düzenle
-        actions: Eylemler
-        enabled: Etkin
         description: Açıklama
+        edit: Düzenle
+        empty: Boş
+        enabled: Etkin
+        filter: Filtrele
+        locales: Diller
+        new: Yeni
+        new_country: Yeni ülke
+        new_tax_category: Yeni vergi kategorisi
         "no": false
+        save_changes: Değişiklikleri kaydet
         success: Başarılı
         "yes": true
-        new: Yeni
-        save_changes: Değişiklikleri kaydet
-        new_tax_category: Yeni vergi kategorisi
-        filter: Filtrele
-        empty: Boş
-        countries: Ülkeler
-        new_country: Yeni ülke
-        locales: Diller

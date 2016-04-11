@@ -8,23 +8,23 @@ sylius:
             password: Пароль
             remember_me: Запомнить меня
     ui:
+        actions: Действия
+        countries: Страны
         create: Добавить
         dashboard: Приборная панель
         delete: sylius.account.address.action.delete
-        edit: Редактировать
-        actions: Действия
-        enabled: Активен
         description: Описание
+        edit: Редактировать
+        enabled: Активен
+        filter: Фильтр
+        locales: Языки
+        new: Новый
+        new_country: Добавить страну
+        new_tax_category: Создать налоговую категорию
         "no": false
+        save_changes: Сохранить изменения
         sign_in: Войти
         sign_out: Выйти
         status: Статус
         success: Успешно
         "yes": true
-        new: Новый
-        save_changes: Сохранить изменения
-        new_tax_category: Создать налоговую категорию
-        filter: Фильтр
-        countries: Страны
-        new_country: Добавить страну
-        locales: Языки

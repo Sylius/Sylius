@@ -7,5 +7,7 @@ sylius:
             first_name: ชื่อ
             last_name: นามสกุล
             email: อีเมล
+            message: ข้อความ
+            topic: หัวข้อ
         contact_topic:
             title: หัวข้อ

@@ -1,0 +1,15 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    report:
+        name:
+            not_blank: ชื่อรายงานไม่สามารถว่างเปล่า
+            min_length: ชื่อรายงานต้องมีอย่างน้อย 2 อักขระ
+            max_length: ชื่อรายงานต้องมีสูงสุด 255 อักขระ
+        description:
+            not_blank: คำอธิบายรายงานไม่สามารถว่างเปล่า
+        code:
+            not_blank: รหัสรายงานต้องไม่ว่างเปล่า
+            unique: รหัสนี้ถูกใช้งานแล้ว
+            single_word: รหัสรายงานควรเป็นคำเดียว

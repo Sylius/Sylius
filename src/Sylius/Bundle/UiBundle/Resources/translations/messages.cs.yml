@@ -8,21 +8,21 @@ sylius:
             password: Heslo
             remember_me: Pamatuj si mě
     ui:
+        actions: Akce
+        countries: Země
         create: Vytvořit
         dashboard: Nástěnka
         delete: Odstranit
-        edit: Úpravy
-        actions: Akce
-        enabled: Povoleno
         description: Popis
+        edit: Úpravy
+        empty: Prázdné
+        enabled: Povoleno
+        filter: Filtr
+        locales: Lokalizace
+        new: Nový
+        new_country: Nové země
+        new_tax_category: Nová kategorie daně
         "no": false
+        save_changes: Uložit změny
         success: Úspěch
         "yes": true
-        new: Nový
-        save_changes: Uložit změny
-        new_tax_category: Nová kategorie daně
-        filter: Filtr
-        empty: Prázdné
-        countries: Země
-        new_country: Nové země
-        locales: Lokalizace

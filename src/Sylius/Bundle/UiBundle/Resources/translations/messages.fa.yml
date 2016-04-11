@@ -8,25 +8,25 @@ sylius:
             password: کلمه عبور
             remember_me: مرا به خاطر بسپار
     ui:
+        actions: طریقه اعمال
+        countries: كشور‌ها
         create: ایجاد
         dashboard: داشبورد
         delete: حذف
-        edit: ويرايش
-        actions: طریقه اعمال
-        enabled: فعال
         description: شرح
+        edit: ويرايش
+        empty: خالی
+        enabled: فعال
+        filter: فیلتر
+        locales: زبان ها
+        new: پرداخت ثبت شده
+        new_country: کشور جدید
+        new_tax_category: نوع مالیاتی جدید
         "no": false
         powered_by: قدرت گرفته از
+        save_changes: ذخیره تغییرات
         sign_in: ورود
         sign_out: خروج
         status: وضعیت
         success: موفق
         "yes": true
-        new: پرداخت ثبت شده
-        save_changes: ذخیره تغییرات
-        new_tax_category: نوع مالیاتی جدید
-        filter: فیلتر
-        empty: خالی
-        countries: كشور‌ها
-        new_country: کشور جدید
-        locales: زبان ها

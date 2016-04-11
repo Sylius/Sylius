@@ -12,3 +12,6 @@ sylius:
         password:
             change_success: Ihr Passwort wurde erfolgreich geändert
             invalid: Ihr aktuelles Passwort ist nicht korrekt
+    channel:
+        error:
+            at_least_one: Der Kanal kann nicht gelöscht werden, mindestens ein aktivierter Kanal ist erforderlich

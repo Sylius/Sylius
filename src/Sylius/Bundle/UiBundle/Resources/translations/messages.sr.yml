@@ -6,15 +6,15 @@ sylius:
         login:
             username: Кросницко име
     ui:
+        countries: Земље
         create: Креирај
         dashboard: Командна Табла
         delete: Обриши
         edit: Измени
+        filter: Филтер
+        new_country: Нова земља
+        new_tax_category: Нова категорија пореза
         "no": false
+        save_changes: Сачувај измене
         success: Успех
         "yes": true
-        save_changes: Сачувај измене
-        new_tax_category: Нова категорија пореза
-        filter: Филтер
-        countries: Земље
-        new_country: Нова земља

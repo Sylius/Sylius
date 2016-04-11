@@ -1,0 +1,7 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    resource:
+        not_enabled: แหล่งข้อมูลถูกปิดการใช้งาน
+        not_disabled: แหล่งข้อมูลถูกเปิดการใช้งาน

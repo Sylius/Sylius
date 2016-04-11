@@ -17,6 +17,7 @@ sylius:
                 header: สถานะการชำระเงิน
                 checkout: ชำระเงิน
                 completed: เสร็จสมบูรณ์
+                authorized: อำนาจ
                 failed: ล้มเหลว
                 new: รายการใหม่
                 pending: อยู่ระหว่างดำเนินการ

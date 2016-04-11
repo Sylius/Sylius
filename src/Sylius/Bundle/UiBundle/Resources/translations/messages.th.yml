@@ -6,21 +6,54 @@ sylius:
         login:
             username: ชื่อผู้ใช้
             password: รหัสผ่าน
+            remember_me: จำฉันไว้
     ui:
+        actions: ดำเนินการ
+        administration_panel_login: เข้าสู่ระบบแผงบริหาร
+        an_error_occurred: เกิดข้อผิดพลาด
+        are_your_sure_you_want_to_perform_this_action: คุณแน่ใจหรือคุณต้องการดำเนินการนี้หรือไม่
+        clear_filters: ล้างตัวกรอง
+        confirm_your_action: ยืนยันการกระทำของคุณ
+        contains: ประกอบด้วย
+        countries: ประเทศ
         create: สร้าง
         dashboard: แดชบอร์ด
         delete: ลบ
-        edit: แก้ไข
-        actions: ดำเนินการ
-        enabled: เปิดใช้งานแล้ว
         description: คำอธิบาย
-        "no": false
-        success: สำเร็จ
-        "yes": true
-        new: รายการใหม่
-        save_changes: บันทึกการเปลี่ยนแปลง
-        new_tax_category: ประเภทภาษีใหม่
+        disabled: ปิดการใช้งาน
+        edit: แก้ไข
+        edit_tax_category: แก้ไขประเภทภาษี
+        edit_tax_rate: แก้ไขอัตราภาษี
+        empty: ว่างเปล่า
+        enabled: เปิดใช้งานแล้ว
+        ends_with: ลงท้ายด้วย
+        equal: เท่ากับ
         filter: ตัวกรอง
-        countries: ประเทศ
-        new_country: ประเทศใหม่
+        in: ใน
+        info: ข้อมูล
+        last_updated: ปรับปรุงครั้งล่าสุด
         locales: ภาษาที่ใช้
+        manage_country: จัดการประเทศ
+        manage_locale: จัดการตำแหน่งที่ตั้ง
+        manage_taxation_of_your_products: จัดการภาษีผลิตภัณฑ์ของคุณ
+        new: รายการใหม่
+        new_country: ประเทศใหม่
+        new_locale: ตำแหน่งที่ตั้งใหม่
+        new_tax_category: ประเภทภาษีใหม่
+        "no": false
+        no_results_to_display: ไม่มีผลลัพธ์จะแสดง
+        not_contains: ไม่ประกอบด้วย
+        not_empty: ไม่ว่างเปล่า
+        not_in: ไม่ได้อยู่ใน
+        powered_by: |
+            ขับเคลื่อน
+            โดย
+        save_changes: บันทึกการเปลี่ยนแปลง
+        show: แสดง
+        sign_in: ลงชื่อเข้าใช้
+        sign_out: ออกจากระบบ
+        starts_with: เริ่มต้นด้วย
+        status: สถานะ
+        success: สำเร็จ
+        tax_categories: ประเภทภาษี
+        "yes": true

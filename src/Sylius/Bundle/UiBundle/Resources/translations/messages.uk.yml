@@ -7,20 +7,20 @@ sylius:
             username: "Ім'я користувача"
             password: Пароль
     ui:
+        actions: Дії
+        countries: Країни
         create: Створити
         dashboard: Панель керування
         delete: Видалити
-        edit: Редагувати
-        actions: Дії
-        enabled: Увімкнено
         description: Опис
+        edit: Редагувати
+        enabled: Увімкнено
+        filter: Фільтр
+        locales: Локалі
+        new: Новий
+        new_country: Нова країна
+        new_tax_category: Нова категорія оподаткування
         "no": false
+        save_changes: Зберегти зміни
         success: Успішно
         "yes": true
-        new: Новий
-        save_changes: Зберегти зміни
-        new_tax_category: Нова категорія оподаткування
-        filter: Фільтр
-        countries: Країни
-        new_country: Нова країна
-        locales: Локалі

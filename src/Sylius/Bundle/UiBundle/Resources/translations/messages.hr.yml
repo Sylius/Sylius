@@ -8,20 +8,20 @@ sylius:
             password: Lozinka
             remember_me: Zapamti me
     ui:
+        actions: Akcije
+        countries: Države
         create: Kreiraj
         dashboard: Kontrolna ploča
         delete: sylius.account.address.action.delete
-        edit: Uredi
-        actions: Akcije
-        enabled: Omogući
         description: Opis
+        edit: Uredi
+        enabled: Omogući
+        filter: Filter
+        locales: Lokaliteti
+        new: Novo
+        new_country: Nova država
+        new_tax_category: Nova kategorija poreza
         "no": false
+        save_changes: Sačuvaj izmjene
         success: Uspješno
         "yes": true
-        new: Novo
-        save_changes: Sačuvaj izmjene
-        new_tax_category: Nova kategorija poreza
-        filter: Filter
-        countries: Države
-        new_country: Nova država
-        locales: Lokaliteti

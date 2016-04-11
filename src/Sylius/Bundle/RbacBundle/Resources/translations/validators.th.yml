@@ -1,0 +1,16 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    role:
+        code:
+            unique: รหัสต้องไม่ซ้ำกัน
+            not_blank: กรุณาใส่รหัส
+        name:
+            not_blank: กรุณาระบุชื่อบทบาท
+    permission:
+        code:
+            unique: รหัสต้องไม่ซ้ำกัน
+            not_blank: กรุณาใส่รหัส
+        description:
+            not_blank: โปรดอธิบายสิทธิ์การเข้าถึง

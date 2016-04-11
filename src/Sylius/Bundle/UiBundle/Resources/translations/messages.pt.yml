@@ -6,17 +6,17 @@ sylius:
         login:
             username: Login
     ui:
+        countries: Países
         create: Criar
         dashboard: Painel de Instrumentos
         delete: Apagar
-        edit: Editar
         description: Descrição
+        edit: Editar
+        filter: Filtrar
+        new: Novo
+        new_country: Novo país
+        new_tax_category: Nova categoria de imposto
         "no": false
+        save_changes: Salvar modificações
         success: Sucesso
         "yes": true
-        new: Novo
-        save_changes: Salvar modificações
-        new_tax_category: Nova categoria de imposto
-        filter: Filtrar
-        countries: Países
-        new_country: Novo país

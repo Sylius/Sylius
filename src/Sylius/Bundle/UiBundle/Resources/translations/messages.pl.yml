@@ -8,25 +8,25 @@ sylius:
             password: Hasło
             remember_me: Zapamiętaj mnie
     ui:
+        actions: Akcje
+        countries: Kraje
         create: Utwórz
         dashboard: Panel
         delete: Usuń
-        edit: Edytuj
-        actions: Akcje
-        enabled: Włączone
         description: Opis
+        edit: Edytuj
+        empty: Brak
+        enabled: Włączone
+        filter: Filtruj
         last_updated: Ostatnia aktualizacja
+        locales: Ustawienia regionalne
+        new: Nowy
+        new_country: Nowy kraj
+        new_tax_category: Nowa kategoria podatkowa
         "no": false
         no_results_to_display: Brak wyników do wyświetlenia
+        save_changes: Zapisz zmiany
         show: Pokaż
         status: Status
         success: Sukces
         "yes": true
-        new: Nowy
-        save_changes: Zapisz zmiany
-        new_tax_category: Nowa kategoria podatkowa
-        filter: Filtruj
-        empty: Brak
-        countries: Kraje
-        new_country: Nowy kraj
-        locales: Ustawienia regionalne

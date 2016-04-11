@@ -6,16 +6,16 @@ sylius:
         login:
             username: Потребителско име
     ui:
+        countries: Страни
         create: Създай
         dashboard: Табло
         delete: Изтрий
         edit: Редактирай
+        filter: Филтър
+        locales: Езикови променливи
+        new_country: Новата страна
+        new_tax_category: Нова данъчна категория
         "no": false
+        save_changes: Запиши промените
         success: Успешно
         "yes": true
-        save_changes: Запиши промените
-        new_tax_category: Нова данъчна категория
-        filter: Филтър
-        countries: Страни
-        new_country: Новата страна
-        locales: Езикови променливи
