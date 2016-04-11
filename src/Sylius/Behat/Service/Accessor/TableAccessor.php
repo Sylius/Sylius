@@ -27,9 +27,7 @@ final class TableAccessor implements TableAccessorInterface
     public function getRowsWithFields(NodeElement $table, array $fields)
     {
         try {
-            $foundRows = $this->findRowsWithFields($table, $fields);
-
-            return iterator_to_array($foundRows);
+            return $this->findRowsWithFields($table, $fields);
         } catch (\InvalidArgumentException $exception) {
             throw new \InvalidArgumentException('Could not find any row with given fields', 0, $exception);
         }
@@ -54,13 +52,14 @@ final class TableAccessor implements TableAccessorInterface
      * @param NodeElement $table
      * @param array $fields
      *
-     * @return \Generator|NodeElement[]
+     * @return NodeElement[]
      *
-     * @throws \InvalidArgumentException If columns or rows were not found
+     * @throws \InvalidArgumentException If rows were not found
      */
     private function findRowsWithFields(NodeElement $table, array $fields)
     {
         $rows = $table->findAll('css', 'tr');
+        $matchedRows = [];
 
         if (!isset($rows[0])) {
             throw new \InvalidArgumentException('There are no rows!');
@@ -72,27 +71,38 @@ final class TableAccessor implements TableAccessorInterface
         $rows = $table->findAll('css', 'tr');
         foreach ($rows as $row) {
             /** @var NodeElement[] $columns */
-            $columns = $row->findAll('css', 'th,td');
-            foreach ($fields as $index => $searchedValue) {
-                if (!isset($columns[$index])) {
-                    throw new \InvalidArgumentException(sprintf('There is no column with index %d', $index));
-                }
+            $columns = $row->findAll('css', 'td, th');
+            if ($this->hasRowFields($columns, $fields)) {
+                $matchedRows[] = $row;
+            }
+        }
 
-                $containing = false;
-                $searchedValue = trim($searchedValue);
-                if (0 === strpos($searchedValue, '%') && (strlen($searchedValue) - 1) === strrpos($searchedValue, '%')) {
-                    $searchedValue = substr($searchedValue, 1, -2);
-                    $containing = true;
-                }
+        return $matchedRows;
+    }
 
-                $position = stripos(trim($columns[$index]->getText()), $searchedValue);
-                if (($containing && false === $position) || (!$containing && 0 !== $position)) {
-                    continue 2;
-                }
+    /**
+     * @param array $columns
+     * @param array $fields
+     *
+     * @return bool
+     */
+    private function hasRowFields(array $columns, array $fields)
+    {
+        foreach ($fields as $index => $searchedValue) {
+            if (!isset($columns[$index])) {
+                return false;
             }
 
-            yield $row;
+            $searchedValue = trim($searchedValue);
+
+            if (0 === strpos($searchedValue, '%') && (strlen($searchedValue) - 1) === strrpos($searchedValue, '%')) {
+                $searchedValue = substr($searchedValue, 1, -2);
+            }
+
+            return $this->containsSearchedValue($columns[$index]->getText(), $searchedValue);
         }
+
+        return false;
     }
 
     /**
@@ -142,5 +152,16 @@ final class TableAccessor implements TableAccessorInterface
         }
 
         throw new \InvalidArgumentException(sprintf('Column with name "%s" not found!', $columnName));
+    }
+
+    /**
+     * @param string $sourceText
+     * @param string $searchedValue
+     *
+     * @return bool
+     */
+    private function containsSearchedValue($sourceText, $searchedValue)
+    {
+        return false !== stripos(trim($sourceText), $searchedValue);
     }
 }
