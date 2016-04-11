@@ -41,5 +41,5 @@ interface CurrencyHelperInterface
     /**
      * @return string
      */
-    public function getCurrentCurrencySymbol();
+    public function getBaseCurrencySymbol();
 }

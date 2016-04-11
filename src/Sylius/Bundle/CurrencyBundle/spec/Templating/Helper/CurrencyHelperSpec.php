@@ -16,6 +16,7 @@ use Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelper;
 use Sylius\Bundle\MoneyBundle\Templating\Helper\MoneyHelperInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
+use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
 use Symfony\Component\Templating\Helper\Helper;
 
 /**
@@ -28,9 +29,10 @@ class CurrencyHelperSpec extends ObjectBehavior
     function let(
         CurrencyContextInterface $currencyContext,
         CurrencyConverterInterface $converter,
-        MoneyHelperInterface $moneyHelper
+        MoneyHelperInterface $moneyHelper,
+        CurrencyProviderInterface $currencyProvider
     ) {
-        $this->beConstructedWith($currencyContext, $converter, $moneyHelper);
+        $this->beConstructedWith($currencyContext, $converter, $moneyHelper, $currencyProvider);
     }
 
     function it_is_initializable()
@@ -60,10 +62,10 @@ class CurrencyHelperSpec extends ObjectBehavior
         $this->convertAmount(500)->shouldReturn(653);
     }
 
-    function it_provides_current_currency(CurrencyContextInterface $currencyContext)
+    function it_provides_current_currency(CurrencyProviderInterface $currencyProvider)
     {
-        $currencyContext->getCurrency()->willReturn('PLN');
+        $currencyProvider->getBaseCurrency()->willReturn('PLN');
 
-        $this->getCurrentCurrencySymbol()->shouldReturn('PLN');
+        $this->getBaseCurrencySymbol()->shouldReturn('PLN');
     }
 }
