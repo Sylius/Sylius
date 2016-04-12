@@ -5,6 +5,9 @@ sylius:
     tax_category:
         name:
             not_blank: กรุณาใส่ชื่อหมวดหมู่ภาษี
+        code:
+            not_blank: กรุณาใส่รหัสประเภทภาษี
+            unique: ประเภทของภาษีมีกำหนดรหัสอยู่แล้ว
     tax_rate:
         category:
             not_blank: กรุณาเลือกหมวดหมู่ภาษี
@@ -14,3 +17,8 @@ sylius:
             not_blank: กรุณาระบุอัตราภาษี
         calculator:
             not_blank: กรุณาเลือกวิธีคำนวณภาษี
+        zone:
+            not_blank: กรุณาเลือกเขตภาษี
+        code:
+            not_blank: กรุณาใส่รหัสอัตราภาษี
+            unique: อัตราภาษีมีกำหนดรหัสอยู่แล้ว

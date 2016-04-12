@@ -8,10 +8,10 @@ sylius:
             password: Contrasenya
     ui:
         delete: Suprimir
+        description: Descripció
         edit: Editar
         enabled: Activat
-        description: Descripció
+        new: Nou
         "no": false
         success: Realitzat amb èxit
         "yes": true
-        new: Nou

@@ -5,16 +5,29 @@ sylius:
     backend:
         menu:
             main:
+                api_clients: ลูกค้า API
+                archetypes: ต้นแบบสินค้า
+                association_types: ชนิดความสัมพันธ์ของสินค้า
                 assortment: จัดประเภท
+                attributes: กำหนดค่าคุณลักษณะ
                 blocks: บล็อก
+                channels: ช่องทาง
                 configuration: ตั้งค่าคอนฟิก
+                contact_requests: ร้องขอการติดต่อ
+                contact_topics: กำหนดหัวข้อ
                 content: เนื้อหา
                 countries: ประเทศ
+                currencies: สกุลเงิน
+                customer: ลูกค้า
+                customers: ลูกค้า
                 dashboard: แดชบอร์ด
+                emails: อีเมล
                 general_settings: ตั้งค่าทั่วไป
                 groups: กลุ่ม
                 homepage: ร้านค้าของคุณ
                 locales: ภาษาที่ใช้
+                marketing: การตลาด
+                menus: เมนู
                 new_order: เพิ่มใบสั่งซื้อใหม่
                 new_promotion: เพิ่มโปรโมชั่นใหม่
                 options: จัดการตัวเลือกสินค้า
@@ -22,31 +35,50 @@ sylius:
                 pages: หน้า
                 payment_methods: วิธีการชำระเงิน
                 payments: การชำระเงิน
+                permissions: สิทธิ์การเข้าถึง
                 products: สินค้า
                 promotions: ส่งเสริมการขาย
+                report: รายงาน
                 roles: Roles
+                routes: เส้นทาง
                 sales: ใบสั่งซื้อ
+                security_settings: ตั้งค่าความปลอดภัย
                 shipments: การจัดส่งสินค้า
                 shipping_categories: ประเภทการจัดส่ง
                 shipping_methods: วิธีการจัดส่ง
                 slideshow: ภาพสไลด์
                 stockables: สินค้าคงคลัง
+                support: สนับสนุน
                 tax_categories: ประเภทภาษี
                 tax_rates: อัตราภาษี
                 taxation_settings: การตั้งค่าภาษี
                 taxons: การจัดประเภท
                 zones: โซน
             sidebar:
+                api_clients: ลูกค้า API
+                archetypes: ต้นแบบสินค้า
+                association_types: ชนิดความสัมพันธ์ของสินค้า
                 assortment: จัดประเภท
+                attributes: กำหนดค่าคุณลักษณะ
                 blocks: บล็อก
+                channels: ช่องทาง
                 configuration: ตั้งค่าคอนฟิก
+                contact_requests: การร้องขอ
+                contact_topics: กำหนดหัวข้อ
                 content: เนื้อหา
                 countries: ประเทศ
+                currencies: สกุลเงิน
+                customer: ลูกค้า
+                customers: ลูกค้า
                 dashboard: แดชบอร์ด
+                emails: อีเมล
                 general_settings: ตั้งค่าทั่วไป
                 groups: กลุ่ม
                 homepage: กลับไปหน้าเว็บ
                 locales: ภาษาที่ใช้
+                marketing: การตลาด
+                menus: เมนู
+                metadata: ข้อมูลเมตา
                 new_order: เพิ่มใบสั่งซื้อใหม่
                 new_promotion: เพิ่มโปรโมชั่นใหม่
                 options: จัดการตัวเลือก
@@ -54,15 +86,23 @@ sylius:
                 pages: หน้า
                 payment_methods: วิธีการชำระเงิน
                 payments: การชำระเงิน
+                permissions: สิทธิ์การเข้าถึง
+                product_review: รีวิวสินค้า
                 products: สินค้า
                 promotions: ส่งเสริมการขาย
+                redirects: เปลี่ยนเส้นทาง
+                report: รายงาน
                 roles: Roles
+                routes: เส้นทาง
+                review: รีวิว
                 sales: ใบสั่งซื้อ
+                security_settings: ตั้งค่าความปลอดภัย
                 shipments: การจัดส่งสินค้า
                 shipping_categories: ประเภทการจัดส่ง
                 shipping_methods: วิธีการจัดส่ง
                 slideshow: ภาพสไลด์
                 stockables: สินค้าคงคลัง
+                support: สนับสนุน
                 tax_categories: ประเภทภาษี
                 tax_rates: อัตราภาษี
                 taxation_settings: การตั้งค่าภาษี
@@ -85,6 +125,8 @@ sylius:
                 login: เข้าสู่ระบบ
                 logout: ออกจากระบบ
                 register: ลงทะเบียน
+            sidebar:
+                links: ลิงก์
             social:
                 facebook: Facebook
                 github: GitHub

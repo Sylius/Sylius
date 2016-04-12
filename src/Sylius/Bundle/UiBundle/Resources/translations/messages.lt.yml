@@ -8,24 +8,24 @@ sylius:
             password: Slaptažodis
             remember_me: Prisiminti mane
     ui:
+        actions: Veiksmai
+        countries: Šalys
         create: Sukurti
         dashboard: Skydelis
         delete: Šalinti
-        edit: Redaguoti
-        actions: Veiksmai
-        enabled: Įjungta
         description: Aprašymas
+        edit: Redaguoti
+        empty: Išvalyti
+        enabled: Įjungta
+        filter: Filtruoti
+        locales: Lokalės
+        new: Naujas
+        new_country: Naujas šalis
+        new_tax_category: Nauja mokesčių kategorija
         "no": false
         powered_by: Sukurta
+        save_changes: Išsaugoti pakeitimus
         sign_in: Prisijungti
         sign_out: Atsijungti
         success: Pavyko
         "yes": true
-        new: Naujas
-        save_changes: Išsaugoti pakeitimus
-        new_tax_category: Nauja mokesčių kategorija
-        filter: Filtruoti
-        empty: Išvalyti
-        countries: Šalys
-        new_country: Naujas šalis
-        locales: Lokalės

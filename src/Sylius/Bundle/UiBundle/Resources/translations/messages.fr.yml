@@ -8,48 +8,50 @@ sylius:
             password: Mot de passe
             remember_me: Rester connecté
     ui:
+        actions: Actions
+        administration_panel_login: "Connexion à l'espace d'administration"
+        an_error_occurred: "Une erreur s'est produite"
         are_your_sure_you_want_to_perform_this_action: Êtes-vous sûr de vouloir effectuer cette action ?
+        clear_filters: Réinitialiser les filtres
         confirm_your_action: Confirmez votre action
+        contains: Contient
+        countries: Pays
         create: Créer
         dashboard: Tableau de bord
         delete: Supprimer
+        description: Description
         disabled: Désactivés
         edit: Modifier
-        actions: Actions
+        edit_tax_category: Éditer la catégorie de taxe
+        edit_tax_rate: Modifier le taux de taxe
+        empty: Vide
         enabled: Activé
-        description: Description
-        an_error_occurred: "Une erreur s'est produite"
+        ends_with: Se termine par
+        equal: Egal
+        filter: Filtrer
+        in: Dans
+        info: Info
         last_updated: Dernière mise à jour
+        locales: Locales
+        manage_country: Gérer le pays
+        manage_locale: Gérer les paramètres régionaux
         manage_taxation_of_your_products: Gérer la fiscalité de vos produits
+        new: Nouveau
+        new_country: Nouveau pays
+        new_locale: Nouveaux paramètres régionaux
+        new_tax_category: Nouvelle catégorie de taxe
         "no": false
         no_results_to_display: "Il n'y a aucun résultat à afficher"
+        not_contains: Ne contient pas
+        not_empty: Non vide
+        not_in: Pas dans
         powered_by: Propulsé par
-        tax_categories: Catégories de taxes
+        save_changes: Enregistrer les modifications
         show: Lister
-        info: Info
         sign_in: Connection
         sign_out: Déconnection
+        starts_with: Commence par
         status: Statut
         success: Succès
+        tax_categories: Catégories de taxes
         "yes": true
-        new: Nouveau
-        save_changes: Enregistrer les modifications
-        new_tax_category: Nouvelle catégorie de taxe
-        filter: Filtrer
-        clear_filters: Réinitialiser les filtres
-        contains: Contient
-        not_contains: Ne contient pas
-        equal: Egal
-        empty: Vide
-        not_empty: Non vide
-        starts_with: Commence par
-        ends_with: Se termine par
-        in: Dans
-        not_in: Pas dans
-        countries: Pays
-        manage_country: Gérer le pays
-        new_country: Nouveau pays
-        locales: Locales
-        new_locale: Nouveaux paramètres régionaux
-        manage_locale: Gérer les paramètres régionaux
-        edit_tax_rate: Modifier le taux de taxe

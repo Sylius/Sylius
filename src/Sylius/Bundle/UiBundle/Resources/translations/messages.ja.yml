@@ -7,14 +7,14 @@ sylius:
             username: ユーザー名
             password: パスワード
     ui:
+        countries: 国の設定
         create: 作成
         dashboard: ダッシュボード
         delete: sylius.account.address.action.delete
+        filter: F絞り込む
+        new_country: 国を登録
+        new_tax_category: 税区分を登録
         "no": false
+        save_changes: 保存
         success: 成功
         "yes": true
-        save_changes: 保存
-        new_tax_category: 税区分を登録
-        filter: F絞り込む
-        countries: 国の設定
-        new_country: 国を登録

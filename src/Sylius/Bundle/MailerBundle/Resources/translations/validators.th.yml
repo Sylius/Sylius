@@ -1,0 +1,10 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    email:
+        code:
+            not_blank: กรุณาใส่รหัสอีเมล์
+            unique: อีเมลรหัสต้องไม่ซ้ำกัน
+        subject:
+            not_blank: กรุณาใส่หัวเรื่องอีเมล

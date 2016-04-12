@@ -17,6 +17,9 @@ sylius:
         values:
             min_count: 'Bitte geben Sie mindestens {{ limit }} Wert für diese Option ein.|Bitte geben Sie mindestens {{ limit }} Werte für diese Option ein.'
     option_value:
+        code:
+            not_blank: Bitte geben Sie ein Kürzel für den Wert der Option ein.
+            unique: Das Kürzel für den Wert der Option existiert bereits.
         value:
             not_blank: Bitte geben Sie einen Wert für diese Option ein.
     variant:

@@ -8,49 +8,50 @@ sylius:
             password: Passwort
             remember_me: Eingeloggt bleiben
     ui:
+        actions: Aktionen
+        administration_panel_login: Administrations-Bereich Anmeldung
+        an_error_occurred: Es ist ein Fehler aufgetreten
         are_your_sure_you_want_to_perform_this_action: Möchten Sie diese Aktion sicher durchführen?
+        clear_filters: Filter löschen
         confirm_your_action: Aktion bestätigen
+        contains: Enthält
+        countries: Länder
         create: Erstellen
         dashboard: Dashboard
         delete: Löschen
+        description: Beschreibung
         disabled: Deaktiviert
         edit: Bearbeiten
-        actions: Aktionen
+        edit_tax_category: Steuerkategorien bearbeiten
+        edit_tax_rate: Steuersatz bearbeiten
+        empty: Leeren
         enabled: Aktiviert
-        description: Beschreibung
-        an_error_occurred: Es ist ein Fehler aufgetreten
+        ends_with: Endet mit
+        equal: Gleich
+        filter: Filtern
+        in: In
+        info: Info
         last_updated: Letzte Aktualisierung
+        locales: Gebietsschemata
+        manage_country: Land verwalten
+        manage_locale: Lokalisierungen verwalten
         manage_taxation_of_your_products: Besteuerung der Produkte verwalten
+        new: Neu
+        new_country: Neues Land
+        new_locale: Neue Lokalisierung
+        new_tax_category: Neue Steuerkategorie
         "no": false
         no_results_to_display: Es gibt keine Ergebnisse zum Anzeigen
+        not_contains: Enthält nicht
+        not_empty: Nicht leer
+        not_in: Nicht in
         powered_by: Powered by
-        tax_categories: Steuerkategorien
+        save_changes: Änderungen speichern
         show: Anzeigen
-        info: Info
         sign_in: Anmelden
         sign_out: Abmelden
+        starts_with: Beginnt mit
         status: Status
         success: Erfolgreich
+        tax_categories: Steuerkategorien
         "yes": true
-        new: Neu
-        save_changes: Änderungen speichern
-        administration_panel_login: Administrations-Bereich Anmeldung
-        new_tax_category: Neue Steuerkategorie
-        edit_tax_category: Steuerkategorien bearbeiten
-        filter: Filtern
-        clear_filters: Filter löschen
-        contains: Enthält
-        not_contains: Enthält nicht
-        equal: Gleich
-        empty: Leeren
-        not_empty: Nicht leer
-        starts_with: Beginnt mit
-        ends_with: Endet mit
-        in: In
-        not_in: Nicht in
-        countries: Länder
-        manage_country: Land verwalten
-        new_country: Neues Land
-        locales: Gebietsschemata
-        new_locale: Neue Lokalisierung
-        manage_locale: Lokalisierungen verwalten

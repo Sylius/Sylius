@@ -17,6 +17,8 @@ sylius:
             not_blank: Bitte geben Sie den Wert des Kurses der Steuerkategorie an.
         calculator:
             not_blank: Bitte wählen Sie den Kursrechner aus.
+        zone:
+            not_blank: Bitte wählen Sie eine Zone.
         code:
             not_blank: Bitte geben Sie ein Kürzel für die Besteuerung an.
             unique: Eine Besteuerung mit diesem Kürzel existiert bereits.

@@ -76,6 +76,7 @@ sylius:
                     Tracking code (for example: Clé Google Analytics
             taxation:
                 default_tax_zone: Zone de taxe par défaut
+                default_tax_calculation_strategy: Stratégie de calcul de la taxe par défaut
             security:
                 enabled: Activer ?
         shipment_filter:

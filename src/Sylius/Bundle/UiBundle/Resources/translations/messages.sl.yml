@@ -8,24 +8,24 @@ sylius:
             password: Geslo
             remember_me: Zapomni si me
     ui:
+        actions: Dejanja
+        countries: Države
         create: Ustvarite
         dashboard: Nadzorna plošča
         delete: Zbriši
-        edit: Urejanje
-        actions: Dejanja
-        enabled: Omogočeno
         description: Opis
+        edit: Urejanje
+        empty: Prazno
+        enabled: Omogočeno
+        filter: Filter
+        locales: Področne nastavitve
+        new: Novo
+        new_country: Nova država
+        new_tax_category: Nova davčna kategorija
         "no": false
         powered_by: Poganja
+        save_changes: Shrani spremembe
         sign_in: Prijava
         sign_out: Odjava
         success: Uspešno
         "yes": true
-        new: Novo
-        save_changes: Shrani spremembe
-        new_tax_category: Nova davčna kategorija
-        filter: Filter
-        empty: Prazno
-        countries: Države
-        new_country: Nova država
-        locales: Področne nastavitve

@@ -3,13 +3,17 @@
 
 sylius:
     extensions:
+        header: ส่วนขยาย
         accelerator:
+            header: ตัวเร่ง
             help: ติดตั้ง และเปิดใช้งาน PHP Accelerator เช่น APC (แนะนำ)
         apc: APC
         ctype: Ctype
         gd: GD
         help: 'ติดตั้ง และเปิดใช้งาน extension %extension%'
         iconv: Iconv
+        exif: ทางออก
+        fileinfo: แฟ้มข้อมูล
         icu: ICU
         intl: Intl
         json_encode: JSON
@@ -23,21 +27,26 @@ sylius:
         simplexml_import_dom: SimpleXML
         token_get_all: Tokenizer
     filesystem:
+        header: ระบบแฟ้ม
         cache:
+            header: แคช
             help:
                 To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
         exists: exists
         logs:
+            header: บันทึก
             help:
                 To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
         not_exists: not exists
         not_writable: not writable
         parameters:
+            header: parameters.yml
             help:
                 To set permissions run: 'sudo chmod a+w %path%'
         vendors: vendors
         writable: writable
     settings:
+        header: รุ่นของ PHP และการตั้งค่า
         any: any
         detect_unicode: detect_unicode
         magic_quotes_gpc: magic_quotes_gpc
@@ -50,6 +59,7 @@ sylius:
         short_open_tag: short_open_tag
         timezone: timezone
         timezone_deprecated:
+            header: เขตเวลาที่เลิกใช้งาน
             help: 'Timezone %timezone% is deprecated. Fix your php.ini file (list of deprecated timezones http://php.net/manual/en/timezones.others.php).'
         version: PHP เวอร์ชัน
         version_recommanded: PHP เวอร์ชันที่แนะนำ

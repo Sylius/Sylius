@@ -8,22 +8,22 @@ sylius:
             password: Wachtwoord
             remember_me: Onthoud mijn gegevens
     ui:
+        actions: Acties
+        countries: Landen
         create: Creëer
         dashboard: Dashboard
         delete: Verwijderen
-        edit: Bewerken
-        actions: Acties
-        enabled: Toegestaan
         description: Omschrijving
+        edit: Bewerken
+        empty: Leeg
+        enabled: Toegestaan
+        filter: Filter
+        locales: "Talen/Regio's"
+        new: Nieuw
+        new_country: NIeuw land toevoegen
+        new_tax_category: Nieuwe belastingcategorie toevoegen
         "no": false
+        save_changes: Aanpassingen opslaan
         status: Status
         success: Succes
         "yes": true
-        new: Nieuw
-        save_changes: Aanpassingen opslaan
-        new_tax_category: Nieuwe belastingcategorie toevoegen
-        filter: Filter
-        empty: Leeg
-        countries: Landen
-        new_country: NIeuw land toevoegen
-        locales: "Talen/Regio's"

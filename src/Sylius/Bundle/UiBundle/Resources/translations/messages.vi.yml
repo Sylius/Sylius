@@ -6,11 +6,11 @@ sylius:
         login:
             password: Mật khẩu
     ui:
+        countries: Quốc gia
         create: Tạo
         dashboard: Bảng tin
+        locales: Miền địa phương
+        new_country: Tạo quốc gia mới
         "no": false
         success: Thành công
         "yes": true
-        countries: Quốc gia
-        new_country: Tạo quốc gia mới
-        locales: Miền địa phương

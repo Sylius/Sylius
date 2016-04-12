@@ -2,14 +2,22 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    checkout:
+        shipping_method:
+            not_blank: กรุณาเลือกวิธีการจัดส่ง
     locale:
         code:
-            not_blank: ระบุรหัสภาษา
+            not_blank: กรุณาระบุรหัสภาษา
             unique: มีภาษานี้อยู่แล้ว
     product_variant:
         onHand:
             min: 'On hand ต้องมากกว่า {{ limit }}.'
-            not_blank: กรุณาระบุ on hand
+            not_blank: กรุณาระบุสินค้า on hand
         price:
             min: ราคาต้องไม่เป็นค่าลบ
             not_blank: กรุณาระบุราคา
+        original_price:
+            min: ราคาเริ่มต้นต้องไม่เป็นค่าลบ
+    product_translation:
+        short_description:
+            max: 'คำอธิบายสั้น ต้องมีความยาวไม่เกิน {{ limit }} ตัวอักษร'

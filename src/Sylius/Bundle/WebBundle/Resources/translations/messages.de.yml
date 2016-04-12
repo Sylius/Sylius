@@ -6,6 +6,7 @@ sylius:
         order:
             details: Bestelldetails
             download_invoice: Rechnung herunterladen
+            empty: Sie haben noch keine Bestellungen aufgegeben
             list: Alle Bestellungen
             placed_at: 'Bestellt am %at%'
             shipment:
@@ -14,7 +15,7 @@ sylius:
                 shipped: 'Geliefert am %at%'
         title: Mein Account
     archetype:
-        build: Archetype erstellen
+        build: Vorlage erstellen
     block:
         imagine:
             index: Imagine Blöcke
@@ -47,12 +48,17 @@ sylius:
         forward: Weiter
         security:
             proceed_order: Mit der Bestellung fortfahren
+        shipping:
+            error: Leider ist die Lieferung in das von Ihnen gewählte Land nicht möglich
+    confirmation:
+        message: Möchten Sie diesen Eintrag löschen
     customer:
         filter:
             all: Alle Kunden anzeigen
             registered: Registrierte Kunden anzeigen
             unconfirmed: Unbestätigte Kunden anzeigen
         general_info: 'Allgemeine Kundeninformation : "%fullName%"'
+        no_groups: Für diesen Kunden gibt es keine Gruppen anzuzeigen
     history:
         logged_at: geloggt am (version)
     homepage:
@@ -63,6 +69,8 @@ sylius:
         publishable: Veröffentlicht
     meta:
         backend_title: Sylius Dashboard
+        frontend_description: Sylius ist eine moderne Ecommerce-Lösung für PHP, basierend auf dem Framework Symfony2
+        frontend_keywords: Sylius, E-Commerce, Symfony2, Shop, Warenkorb, Webshop
         frontend_title: Titel
     order:
         adjustments:
@@ -71,10 +79,14 @@ sylius:
         comment:
             notify: Benachrichtigung
         guest: Gast Kunde
+        immutable_warning: Bereits ausgelieferte Bestellungen sind unveränderlich
         no_items: Diese Bestellung hat keine Artikel
+        no_promotion: Es wurden keine Gutscheine verwendet
         no_shipments: Kein Versand für diese Bestellung
         no_shipping_charges: Keine Versandkosten
         no_taxes: Keine Steuern
+        state:
+            order_confimed: Bestellung bestätigt
     order_item:
         quantity: Artikelmenge
         sellable: Verkäuflich
@@ -105,19 +117,31 @@ sylius:
     security:
         login:
             info: 'Bitte logge Dich mit folgen Daten ein. E-Mail: <b>"sylius@example.com"</b> und Passwort: <b>"sylius"</b>'
+            no_account: Noch keinen Account
     shipment:
+        no_items: Es gibt keine Elemente anzuzeigen
         transition:
+            backorder: Rückstand
             cancel: Abbrechen
+            prepare: vorbereiten
+            release: freigeben
+            return: zurückgeben
+            ship: ausliefern
         update: Bearbeiten
+    stockable:
+        on_hand: Lagerbestand
     taxon:
         image: Bild auswählen
         no_image: Kein Bild für dieses Schlagwort vorhanden
     ui:
+        abandoned: Abgebrochen
         access_token: Zugangs-Schlüssel
+        account_panel_outline: Dies ist dein persönlicher Bereich. Hier kannst du alle deine Bestellungen verfolgen, deine persönlichen Daten bearbeiten, sowie neue Adressen hinzufügen
         action: Aktion
         actions: Aktionen
         add: Hinzufügen
         add_action: Aktion hinzufügen
+        add_association: Beziehung hinzufügen
         add_attribute: Attribut hinzufügen
         add_channel: Kanal hinzufügen
         add_choice: Auswahl hinzufügen
@@ -135,13 +159,18 @@ sylius:
         adding_new_customer_groups: Neue Kundengruppe hinzufügen
         adding_new_email: Neue E-Mail hinzufügen
         adding_new_locale: Neue Gebietsschemata anlegen
+        additional_information: Zusätzliche Informationen
         addressing_step: Lieferadresse
         adjustments: Änderungen
         administration: Login
         administration_dashboard: Administration Dashboard
         all_your_addresses: Alle Adressen
         amount: Steuersatz
-        archetype: Archetypen
+        archetype: Vorlage
+        archetypes: Vorlagen
+        association: Verbindung
+        association_types: Verbindungstypen
+        associations: Verbindungen
         assortment: Sortiment
         attributes: Attribute
         author: Autor
@@ -158,7 +187,7 @@ sylius:
         body: Inhalt
         browse_products: Produkte durchsuchen
         build: Erstellen
-        building_product_from_archetype: Produkt aus Archetype erstellen
+        building_product_from_archetype: Produkt aus Vorlage erstellen
         calculator: Steuersatzrechner
         cancel: Abbrechen
         cancelled: Abgebrochen
@@ -181,6 +210,7 @@ sylius:
         confirmation: Bestätigung
         confirmation_title: Bestätigung
         confirmed: Bestätigt
+        contact_request_details: Details zur Kontaktanfrage
         contact_request_show: Kontaktanfrage
         contact_requests: Kontaktanfragen
         contact_topics: Supportthemen
@@ -194,7 +224,10 @@ sylius:
         coupons: Gutscheine
         create: Erstellen
         create_a_new_address: Neue Adresse hinzufügen
-        create_archetype: Archetype hinzufügen
+        create_archetype: Vorlage hinzufügen
+        create_association_type: Verbindungstyp anlegen
+        create_contact_request: Kontaktanfrage erstellen
+        create_contact_topic: Betreff
         create_country: Land erstellen
         create_currency: Währung erstellen
         create_customer: Kunde erstellen
@@ -211,6 +244,8 @@ sylius:
         create_payment: Erstellen
         create_payment_method: Erstellen
         create_product: Produkt erstellen
+        create_product_association: Produktverbindung erstellen
+        create_product_association_type: Produktverbindungstyp erstellen
         create_product_attribute: Produkt Attribute hinzufügen
         create_promotion: Aktion erstellen
         create_redirect_route: Umleitung anlegen
@@ -256,6 +291,8 @@ sylius:
         customers_list_of_all_customers_in_store: 'Kunden<small>Liste aller Kunden</small>'
         customize_default_metadata: Standard-Metadaten anpassen
         customize_metadata: Metadaten anpassen
+        customize_products_metadata: Produkt-Metadaten anpassen
+        customizing_metadata: Metadaten anpassen
         dashboard: Dashboard
         data: Daten
         default_billing_address: Standard-Rechnungsadresse
@@ -269,14 +306,17 @@ sylius:
         details: Details
         disable: Deaktivieren
         edit: Bearbeiten
+        edit_association_type: Verbindungstyp bearbeiten
         edit_group: Gruppe bearbeiten
         edit_locale: Gebietsschema bearbeiten
         edit_my_address: Adresse bearbeiten
         edit_report: Bericht editieren
         edit_your_personal_information: Persönliche Informationen bearbeiten
-        editing_archetype: Archetype editieren
+        editing_archetype: Vorlage bearbeiten
         editing_attribute: Attribute editieren
         editing_channel: Channel editieren
+        editing_contact_request: Kontaktanfrage bearbeiten
+        editing_contact_topic: Thema bearbeiten
         editing_country: Land editieren
         editing_coupon: Gutschein editieren
         editing_currency: Währung editieren
@@ -285,6 +325,7 @@ sylius:
         editing_imagine_block: Bild-Element editieren
         editing_menu: Menü editieren
         editing_menu_node: Menüpunkt editieren
+        editing_option: Option editieren
         editing_order: Bestellung editieren
         editing_page: Seite editieren
         editing_payment: Zahlart editieren
@@ -315,6 +356,7 @@ sylius:
         enabled: Aktiviert
         end_date: End–Datum
         ends_at: Endet
+        enjoy_all_the_features_that_are_available_on_your_personal_space_to_view_track_and_manage_all_your_data: Dies ist dein persönlicher Bereich. Hier kannst du alle deine Bestellungen verfolgen, deine persönlichen Daten bearbeiten, sowie neue Adressen hinzufügen
         error: Fehler
         exchange_rate: Wechselkurs
         exclusive: Exklusiv
@@ -373,7 +415,7 @@ sylius:
         login_button: Anmelden
         login_sylius_store: 'Login <small>Sylius Webshop</small>'
         logout: Abmelden
-        main_taxon: Haupt-Taxonomie
+        main_taxon: Haupt-Taxon
         male: Mann
         manage: Verwaltung
         manage_adjustments: Verwalten von Anpassungen
@@ -409,8 +451,10 @@ sylius:
         n_a: Nicht verfügbar
         name: Name
         new: Neu
-        new_archetype: Neuer Archetype
+        new_archetype: Neue Vorlage
         new_comment_posted_on_order: Neuer Kommentar zu einer Bestellung
+        new_contact_request: Neue Kontaktanfrage
+        new_contact_topic: Neues Thema
         new_country: Neues Land
         new_currency: Neue Währung
         new_customer: Neuer Benutzer
@@ -436,10 +480,13 @@ sylius:
         newest_products: Neueste Produkte
         next: Nächstes Bild
         "no": Nein
+        no_account: Noch keinen Account
+        no_association_types_to_display: Es sind keine Verbindungen definiert
         no_comment: Kein Kommentar
         no_default_billing_address: Keine Standard-Rechnungsadresse
         no_default_shipping_address: Keine Standard-Lieferadresse
         no_description: Keine Beschreibung
+        no_pricing_configuration: Keine Preiskonfiguration vorhanden
         no_results: Keine Ergebnisse für diese Anfrage gefunden
         no_shipping_category: Keine Versandkategorie
         no_short_description: '<i>Keine Kurzbeschreibung</i>'
@@ -450,6 +497,7 @@ sylius:
         number: Nummer
         number_of_orders: Anzahl der Bestellungen
         oauth_provider: OAuth Provider
+        on_hold: Angehalten
         options: Optionen
         order: Reihenfolge
         order_comment_name: Kommentar
@@ -490,7 +538,10 @@ sylius:
         processing: Wird verarbeitet
         product: Artikel
         product_archetypes: Produkt-Vorlagen
+        product_association_index: Verbindung
         product_association_type_index: Assoziationstyp
+        product_association_types: Produkt-Beziehungsvorlagen
+        product_associations: Produktzuordnungen
         product_attributes: Produkt Attribute
         product_details_viewing_product_product: 'Produktdetails <small> Anzeige von Produkt "<strong>%product%</strong>"</small>'
         product_options: Produktoptionen
@@ -533,6 +584,7 @@ sylius:
         return: Zurückschicken
         returned: Zurückgesandt
         revert: Wiederherstellen
+        review_details: Bewertungsdetails
         reviews: Rezensionen
         roles: Rollen
         routes: Pfade
@@ -593,6 +645,12 @@ sylius:
         taxons: Gruppen
         thank_you_for_your_order: Danke für Ihre Bestellung
         theme: Template
+        there_are_no_archetypes_defined: Es wurden noch keine Vorlagen definiert
+        there_are_no_attributes_configured: Es wurden noch keine Attribute konfiguriert
+        there_are_no_blocks_to_display: Keine Blocks zum anzeigen vorhanden
+        there_are_no_channels_configured: Es wurden noch keine Channels konfiguriert
+        there_are_no_contact_requests_to_display: Es gibt keine Kontakt Anfragen anzuzeigen
+        there_are_no_contact_topics_to_display: Es gibt keine Themen anzuzeigen
         there_are_no_countries_configured: Es wurden noch keine Länder angelegt
         there_are_no_coupon_to_display: Es wurden noch keine Gutscheine erstellt
         there_are_no_currencies_to_display: Es wurden noch keine Gutscheine angelegt
@@ -600,8 +658,36 @@ sylius:
         there_are_no_emails_configured: Es wurden noch keine Emails konfiguriert
         there_are_no_groups_to_display: Es wurden noch keine Gruppen angelegt
         there_are_no_images_for_this_product: Keine Bilder für dieses Produkt vorhanden
+        there_are_no_inventory_items_to_display: Keine Lagerbestand anzeigbar
+        there_are_no_inventory_units_to_display: Es gibt keine Lagereinheiten anzuzeigen
+        there_are_no_locales_configured: Keine konfigurierten Gebietsschemen
+        there_are_no_logged_events_to_display: Es wurden noch keine Ereignisse geloggt
+        there_are_no_menu_nodes_to_display: Es wurden noch keine Menüpunkte hinzugefügt
+        there_are_no_menus_to_display: Es wurden noch keine Menüs hinzugefügt
+        there_are_no_options_configured: Es sind keine Optionen konfiguriert
         there_are_no_options_for_this_product: Es gibt keine Optionen für dieses Produkt
+        there_are_no_orders_for_this_customer_to_display: Für diesen Kunden gibt es keine Bestellungen anzuzeigen
+        there_are_no_pages_to_display: Es wurden noch keine Seiten erstellt
+        there_are_no_payment_methods_configured: Es wurden noch keine Zahlungsmethoden erstellt
+        there_are_no_payments_configured: Es wurden noch keine Zahlungen getätigt
+        there_are_no_permissions_defined: Es wurden noch keine Berechtigungen erstellt
+        there_are_no_products_to_display: Es gibt noch keine Produkte anzuzeigen
+        there_are_no_promotions_configured: Es gibt noch keine Aktionen anzuzeigen
+        there_are_no_redirect_routes_to_display: Es gibt noch keine Umleitungen
+        there_are_no_reports_created: Es wurden noch keine Berichte erstellt
+        there_are_no_roles_defined: Es wurden noch keine Rollen definiert
+        there_are_no_routes_to_display: Es gibt keine Routen
+        there_are_no_shipments_to_display: Es gibt keine Sendungen anzuzeigen
+        there_are_no_shipping_categories_configured: Es sind keine Versandkategorieren konfiguriert
+        there_are_no_shipping_methods_configured: Es sind keine Versandarten konfiguriert
+        there_are_no_tax_categories_configured: Es sind keine Steuerkategorien konfiguriert
+        there_are_no_tax_rates_configured: Es sind keine Steuerklassen konfiguriert
         there_are_no_taxons_for_this_product: Keine Klassifizierungen
+        there_are_no_taxons_to_display: Es gibt noch keine Produktgruppen anzuzeigen
+        there_are_no_users_to_display: Es gibt noch keine Benutzer anzuzeigen
+        there_are_no_variants_to_display: Es gibt noch keine Varianten anzuzeigen
+        there_are_no_zones_configured: Es sind keine Gebiete konfiguriert
+        there_is_no_main_taxon_for_this_product: Es gibt keine Gruppe für dieses Produkt
         this_months_statistics: Statistiken dieses Monats
         this_product_has_no_attributes_defined: Für dieses Produkt wurden keine Attribute definiert
         title: Titel
@@ -618,6 +704,7 @@ sylius:
         unknown: Unbekannt
         unlock: Entsperren
         update: Aktualisieren
+        update_product_association_type: Produktverbindungstyp aktualisieren
         updating_tax_rate: Steuersätze editieren
         usage_limit: Aktionslimit
         used: Aktion wird verwendet
@@ -625,10 +712,12 @@ sylius:
         user_details: Benutzer
         username: Benutzername
         users_list_of_all_users_registered_in_store: Benutzer
+        values: Werte
         variant_selection_method: Variantenauswahlmethode
         variants: Varianten
         view: Anzeigen
         view_more: Mehr anzeigen
+        view_product_details: '%product% Details ansehen'
         void: Leer
         volume_based_pricing: Mengenbasierte Preise (Volume based)
         warning: Warnung

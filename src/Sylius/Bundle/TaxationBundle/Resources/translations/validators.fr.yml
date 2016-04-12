@@ -6,7 +6,7 @@ sylius:
         name:
             not_blank: Veuillez entrez le nom de la catégorie de la taxe.
         code:
-            not_blank: Veuillez entrez le code de catégorie de la taxe.
+            not_blank: Veuillez saisir le code de catégorie de la taxe.
             unique: Ce code de catégorie de de taxe existe déjà.
     tax_rate:
         category:
@@ -17,6 +17,8 @@ sylius:
             not_blank: Veuillez entrer le taux de la taxe.
         calculator:
             not_blank: Veuillez sélectionner le calculateur de la taxe.
+        zone:
+            not_blank: Veuillez choisir la zone de la taxe.
         code:
             not_blank: Veuillez saisir le taux de taxe.
             unique: Ce taux de taxe avec ce code existe déjà.

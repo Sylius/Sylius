@@ -6,14 +6,14 @@ sylius:
         login:
             username: Krosnicko ime
     ui:
+        countries: Zemlje
         create: Kreiraj
         dashboard: Komandna Tabla
         delete: Obrisati
         edit: Izmeniti
+        new_country: Nova zemlja
+        new_tax_category: Nova kategorija poreza
         "no": false
+        save_changes: Sačuvaj izmene
         success: Uspeh
         "yes": true
-        save_changes: Sačuvaj izmene
-        new_tax_category: Nova kategorija poreza
-        countries: Zemlje
-        new_country: Nova zemlja

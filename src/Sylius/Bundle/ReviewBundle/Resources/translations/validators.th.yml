@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    review:
+        title:
+            not_blank: ชื่อรีวิวไม่ควรว่างเปล่า
+            min_length: ชื่อเรื่องรีวิวต้องมีอย่างน้อย 2 อักขระ
+            max_length: เรื่องรีวิวต้องมีมากที่สุด 255 อักขระ
+        rating:
+            not_blank: คุณต้องตรวจสอบการให้คะแนนรีวิว
+        author:
+            already_exists: อีเมล์นี้มีการลงทะเบียนแล้ว กรุณาเข้าสู่ระบบ หรือ ลืมรหัสผ่าน

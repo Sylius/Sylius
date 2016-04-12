@@ -6,7 +6,9 @@ sylius:
         report:
             name: Name
             description: Beschreibung
+            data_fetcher: Datensammler
             renderer:
+                label: Daten-Renderer
                 template: Vorlage
             chart:
                 type: Typ

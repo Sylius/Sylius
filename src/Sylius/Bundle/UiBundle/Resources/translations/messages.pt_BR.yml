@@ -8,20 +8,20 @@ sylius:
             password: Senha
             remember_me: Lembrar
     ui:
+        actions: Ações
+        countries: Países
         create: Criar
         dashboard: Painel
         delete: Excluir
-        edit: Editar
-        actions: Ações
-        enabled: Ativado
         description: Descrição
+        edit: Editar
+        enabled: Ativado
+        filter: Filtrar
+        locales: Localidades
+        new: Novo
+        new_country: Novo país
+        new_tax_category: Nova categoria de imposto
         "no": false
+        save_changes: Salvar alterações
         success: Sucesso
         "yes": true
-        new: Novo
-        save_changes: Salvar alterações
-        new_tax_category: Nova categoria de imposto
-        filter: Filtrar
-        countries: Países
-        new_country: Novo país
-        locales: Localidades

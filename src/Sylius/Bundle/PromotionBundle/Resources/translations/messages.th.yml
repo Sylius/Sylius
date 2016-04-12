@@ -24,19 +24,31 @@ sylius:
                 amount: ยอดรวม
             nth_order_configuration:
                 nth: Nth
+            customer_loyalty_configuration:
+                time: เวลา
+                unit:
+                    days: วัน
+                    weeks: สัปดาห์
+                    months: เดือน
+                    years: ปี
+                    header: หน่วย
+                after: ผู้ใช้ที่สร้างขึ้นหลังจากรอบเวลานี้
             shipping_country_configuration:
                 country: ประเทศ
             type: ชนิด
         coupon:
             usage_limit: ขีดจำกัดการใช้งาน
+            expires_at: หมดอายุวันที่
         coupon_generate_instruction:
             amount: ยอดรวม
             usage_limit: ขีดจำกัดการใช้งาน
+            expires_at: หมดอายุวันที่
         promotion:
             actions: ดำเนินการ
             add_action: เพิ่มการดำเนินการ
             add_rule: เพิ่มกติกา
             coupon_based: ขึ้นกับคูปอง
+            exclusive: พิเศษ
             description: คำอธิบาย
             ends_at: สิ้นสุด
             name: ชื่อ

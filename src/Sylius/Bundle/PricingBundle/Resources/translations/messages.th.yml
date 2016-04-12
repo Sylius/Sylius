@@ -9,4 +9,7 @@ sylius:
             configuration: ตั้งค่า
         pricing:
             volume_based:
+                label: การกำหนดค่าราคา
+                min: ระดับต่ำสุด
+                max: ระดับสูงสุด
                 price: ราคา

@@ -7,20 +7,20 @@ sylius:
             username: Brukernavn
             password: Passord
     ui:
+        actions: Handlinger
+        countries: Land
         create: Opprett
         dashboard: Panel
         delete: Slett
-        edit: Rediger
-        actions: Handlinger
-        enabled: Aktivert
         description: Beskrivelse
+        edit: Rediger
+        enabled: Aktivert
+        filter: Filtrer
+        locales: Nasjonale innstillinger
+        new: Ny
+        new_country: Nytt land
+        new_tax_category: Ny momskategori
         "no": false
+        save_changes: Lagre endringer
         success: Suksess
         "yes": true
-        new: Ny
-        save_changes: Lagre endringer
-        new_tax_category: Ny momskategori
-        filter: Filtrer
-        countries: Land
-        new_country: Nytt land
-        locales: Nasjonale innstillinger

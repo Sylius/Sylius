@@ -3,10 +3,36 @@
 
 sylius:
     metadata:
+        type:
+            none: ' -ไม่มี- '
+            twitter_summary_card: สรุป
+            twitter_summary_large_image_card: สรุป ด้วยภาพขนาดใหญ่
+            twitter_player_card: ผู้เล่น
+            twitter_app_card: แอพลิเคชัน
         page:
             title: หัวข้อ
             description: คำอธิบาย
+            keywords: คีย์เวิร์ด
+            twitter: บัตรทวิตเตอร์
         twitter:
             title: หัวข้อ
             description: คำอธิบาย
+            site: ไซต์
+            site_id: ID ของไซต์
+            creator: ผู้สร้าง
+            creator_id: ID ผู้สร้าง
             image: รูปภาพ
+            player: ผู้เล่น
+            player_width: ความกว้างของเครื่องเล่น
+            player_height: ความสูงเครื่องเล่น
+            player_stream: เล่นสตรีม
+            player_stream_content_type: เล่นสตรีมชนิดที่เป็นเนื้อหา
+            app_name_iphone: ชื่อแอพลิเคชันของ Iphone
+            app_id_iphone: ID แอพลิเคชันของ Iphone
+            app_url_iphone: URL แอพลิเคชันของ Iphone
+            app_name_ipad: ชื่อแอพลิเคชัน Ipad
+            app_id_ipad: ID แอพลิเคชันของ Ipad
+            app_url_ipad: URL แอพลิเคชันของ Ipad
+            app_name_googleplay: ชื่อแอพลิเคชันของ Google Play
+            app_id_googleplay: ID แอพลิเคชันของ Google Play
+            app_url_googleplay: URL แอพลิเคชันของ Google Play

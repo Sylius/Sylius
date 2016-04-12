@@ -7,4 +7,5 @@ sylius:
             code: รหัส
             name: ชื่อ
             parent: หมวดแม่
+            attributes: คุณลักษณะ
             options: ตัวเลือก
