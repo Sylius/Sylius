@@ -3,23 +3,28 @@
 
 default:
     suites:
-        ui_product:
+        domain_managing_products:
             contexts_as_services:
                 - sylius.behat.context.hook.doctrine_orm
 
-                - sylius.behat.context.transform.zone
                 - sylius.behat.context.transform.lexical
                 - sylius.behat.context.transform.shared_storage
+                - sylius.behat.context.transform.addressing
                 - sylius.behat.context.transform.product
+                - sylius.behat.context.transform.product_variant
+                - sylius.behat.context.transform.customer
+                - sylius.behat.context.transform.payment
+                - sylius.behat.context.transform.shipping_method
 
                 - sylius.behat.context.setup.channel
-                - sylius.behat.context.setup.geographical
                 - sylius.behat.context.setup.product
-                - sylius.behat.context.setup.zone
+                - sylius.behat.context.setup.payment
+                - sylius.behat.context.setup.shipping
+                - sylius.behat.context.setup.order
                 - sylius.behat.context.setup.product_review
                 - sylius.behat.context.setup.security
 
-                - sylius.behat.context.ui.product
+                - sylius.behat.context.domain.product
 
             filters:
-                tags: "@product && @ui"
+                tags: "@managing_products && @domain"

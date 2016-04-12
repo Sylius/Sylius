@@ -1,4 +1,4 @@
-@product
+@managing_products
 Feature: Deleting a product
     In order to remove test, obsolete or incorrect products
     As an Administrator

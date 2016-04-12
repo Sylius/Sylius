@@ -1,4 +1,4 @@
-@product
+@managing_products
 Feature: Deleting a product variant
     In order to remove test, obsolete or incorrect product variants
     As an Administrator
