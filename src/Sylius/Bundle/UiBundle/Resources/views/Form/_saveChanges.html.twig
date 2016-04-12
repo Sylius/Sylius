@@ -1,3 +1,7 @@
 <div class="ui basic segment">
-    <button class="ui labeled icon primary button" type="submit"><i class="save icon"></i> {{ 'sylius.ui.save_changes'|trans }}</button>
+    <div class="ui buttons ">
+        <button class="ui labeled icon primary button" type="submit"><i class="save icon"></i> {{ 'sylius.ui.save_changes'|trans }}</button>
+        <div class="or" data-text="{{ 'sylius.ui.or'|trans }}"></div>
+        <a href="{{ app.request.headers.get('referer') }}" class="ui button" type="reset">{{ 'sylius.ui.cancel'|trans }}</a>
+    </div>
 </div>
