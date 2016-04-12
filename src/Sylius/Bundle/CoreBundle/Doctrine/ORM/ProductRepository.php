@@ -84,7 +84,7 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
     /**
      * {@inheritdoc}
      */
-    public function createFilterPaginator(array $criteria = null, array $sorting = null, $deleted = false)
+    public function createFilterPaginator(array $criteria = null, array $sorting = null)
     {
         $queryBuilder = $this->createQueryBuilder('o')
             ->addSelect('translation')

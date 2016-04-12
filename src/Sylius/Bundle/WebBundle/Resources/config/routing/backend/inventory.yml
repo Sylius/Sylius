@@ -10,7 +10,7 @@ sylius_backend_inventory_index:
             template: SyliusWebBundle:Backend/Inventory:index.html.twig
             repository:
                 method: createFilterPaginator
-                arguments: [$criteria, $sorting, false]
+                arguments: [$criteria, $sorting]
             sortable: true
             sorting:
                 updatedAt: asc

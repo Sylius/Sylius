@@ -10,7 +10,7 @@ sylius_backend_shipment_index:
             template: SyliusWebBundle:Backend/Shipment:index.html.twig
             repository:
                 method: createFilterPaginator
-                arguments: [$criteria, $sorting, $deleted]
+                arguments: [$criteria, $sorting]
             paginate: 20
             sortable: true
             sorting:

@@ -11,7 +11,7 @@ sylius_backend_product_index:
             sortable: true
             repository:
                 method: createFilterPaginator
-                arguments: [$criteria, $sorting, $deleted]
+                arguments: [$criteria, $sorting]
 
 # @todo refactor this when PRs about API & search get merged
 sylius_backend_product_find:

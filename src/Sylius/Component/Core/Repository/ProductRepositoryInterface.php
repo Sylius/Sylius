@@ -42,11 +42,10 @@ interface ProductRepositoryInterface extends BaseProductRepositoryInterface
     /**
      * @param array $criteria
      * @param array $sorting
-     * @param bool $deleted
      *
      * @return PagerfantaInterface
      */
-    public function createFilterPaginator(array $criteria = null, array $sorting = null, $deleted = false);
+    public function createFilterPaginator(array $criteria = null, array $sorting = null);
 
     /**
      * Get the product data for the details page.

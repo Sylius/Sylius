@@ -15,11 +15,6 @@
 <div class="page-header">
     <div class="actions-menu">
         {{ buttons.create(path('sylius_backend_order_create'), 'sylius.ui.create_order'|trans) }}
-        {% if app.request.query.get('deleted') %}
-            <a href="{{ path('sylius_backend_order_index', {'deleted': false}) }}" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> {{ 'sylius.ui.hide_deleted'|trans }}</a>
-        {% else %}
-            <a href="{{ path('sylius_backend_order_index', {'deleted': true}) }}" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i> {{ 'sylius.ui.show_deleted'|trans }}</a>
-        {% endif %}
     </div>
     <h1><span class="glyphicon glyphicon-shopping-cart"></span> {{ 'sylius.ui.current_orders'|trans|raw }}</h1>
 </div>
