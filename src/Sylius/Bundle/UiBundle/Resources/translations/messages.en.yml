@@ -36,11 +36,14 @@ sylius:
         info: Info
         last_updated: Last updated
         locales: Locales
+        manage_country: Manage country
         manage_customer: Manage customers
-        manage_shipping_destinations: Manage shipping destinations
         manage_languages_available_in_the_store: Manage languages available in the store
-        manage_taxation_of_your_products: Manage taxation of your products
+        manage_locale: Manage locale
+        manage_payment_method: Manage payment method
+        manage_shipping_destinations: Manage shipping destinations
         manage_shipping_methods_for_your_store: Manage shipping methods for your store
+        manage_taxation_of_your_products: Manage taxation of your products
         new: New
         new_country: New country
         new_locale: New locale

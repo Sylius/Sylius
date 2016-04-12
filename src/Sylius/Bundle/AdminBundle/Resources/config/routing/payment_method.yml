@@ -12,5 +12,5 @@ sylius_admin_payment_method:
               templates:
                   form: SyliusAdminBundle:PaymentMethod:_form.html.twig
           index:
-              icon: tags
+              icon: payment
     type: sylius.resource
