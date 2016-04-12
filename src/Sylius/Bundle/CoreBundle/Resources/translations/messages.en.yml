@@ -128,3 +128,15 @@ sylius:
             type: Association type
         product_association_type:
             name: Name
+
+    email:
+        order_confirmation:
+            name: Order confirmation
+        order_comment:
+            name: Order comment
+        shipment_confirmation:
+            name: Shipment confirmation
+        user_confirmation:
+            name: User confirmation
+        password_reset:
+            name: Password reset
