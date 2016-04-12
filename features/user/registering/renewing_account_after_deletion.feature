@@ -1,5 +1,5 @@
-@user
-Feature: Registering account again after it has been deleted
+@registering
+Feature: Registering an account again after it has been deleted
     In order to set up a new account after I deleted it from the system
     As a Visitor
     I want to be able to register again with the same e-mail

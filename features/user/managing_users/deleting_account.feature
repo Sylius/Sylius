@@ -1,4 +1,4 @@
-@user
+@managing_users
 Feature: Deleting the user account
     In order to delete customer account on demand
     As an Administrator
