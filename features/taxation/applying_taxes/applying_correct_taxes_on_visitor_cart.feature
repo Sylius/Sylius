@@ -1,4 +1,4 @@
-@cart
+@applying_taxes
 Feature: Apply correct taxes on visitor cart
     In order to buy goods with correct taxes applied
     As a Visitor

@@ -1,4 +1,4 @@
-@taxation
+@managing_tax_categories
 Feature: Editing tax category
     In order to change tax classification of my products
     As an Administrator

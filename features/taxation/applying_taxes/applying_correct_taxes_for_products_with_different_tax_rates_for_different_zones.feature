@@ -1,4 +1,4 @@
-@cart
+@applying_taxes
 Feature: Apply correct taxes for products with different tax rates for different zones
     In order to pay proper amount when buying goods having different tax rates for different zones
     As a Customer

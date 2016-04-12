@@ -1,4 +1,4 @@
-@taxation
+@managing_tax_categories
 Feature: Adding a new tax category
     In order to apply different taxes to various products
     As an Administrator

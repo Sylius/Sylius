@@ -1,4 +1,4 @@
-@cart
+@applying_taxes
 Feature: Apply correct taxes based on customer data
     In order to pay proper amount when buying goods
     As a Customer

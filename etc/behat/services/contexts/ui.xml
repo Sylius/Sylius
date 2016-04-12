@@ -21,7 +21,7 @@
         <parameter key="sylius.behat.context.ui.admin.managing_payment_methods.class">Sylius\Behat\Context\Ui\Admin\ManagingPaymentMethodsContext</parameter>
         <parameter key="sylius.behat.context.ui.admin.managing_promotions.class">Sylius\Behat\Context\Ui\Admin\ManagingPromotionsContext</parameter>
         <parameter key="sylius.behat.context.ui.admin.managing_shipping_methods.class">Sylius\Behat\Context\Ui\Admin\ManagingShippingMethodsContext</parameter>
-        <parameter key="sylius.behat.context.ui.admin.managing_tax_category.class">Sylius\Behat\Context\Ui\Admin\ManagingTaxCategoryContext</parameter>
+        <parameter key="sylius.behat.context.ui.admin.managing_tax_categories.class">Sylius\Behat\Context\Ui\Admin\ManagingTaxCategoriesContext</parameter>
         <parameter key="sylius.behat.context.ui.admin.managing_tax_rate.class">Sylius\Behat\Context\Ui\Admin\ManagingTaxRateContext</parameter>
         <parameter key="sylius.behat.context.ui.admin.managing_zones.class">Sylius\Behat\Context\Ui\Admin\ManagingZonesContext</parameter>
 
@@ -107,7 +107,7 @@
             <tag name="sylius.behat.context" />
         </service>
 
-        <service id="sylius.behat.context.ui.admin.managing_tax_category" class="%sylius.behat.context.ui.admin.managing_tax_category.class%" scope="scenario">
+        <service id="sylius.behat.context.ui.admin.managing_tax_categories" class="%sylius.behat.context.ui.admin.managing_tax_categories.class%" scope="scenario">
             <argument type="service" id="sylius.behat.page.admin.tax_category.index" />
             <argument type="service" id="sylius.behat.page.admin.tax_category.create" />
             <argument type="service" id="sylius.behat.page.admin.tax_category.update" />

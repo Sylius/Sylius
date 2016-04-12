@@ -1,4 +1,4 @@
-@cart
+@applying_taxes
 Feature: Apply different taxes for variants with different tax category
     In order to pay proper amount when buying goods with variants from different tax categories
     As a Visitor

@@ -1,4 +1,4 @@
-@cart
+@applying_taxes
 Feature: Apply correct taxes for items with the same tax rate
     In order to pay proper amount when buying goods from the same tax category
     As a Visitor

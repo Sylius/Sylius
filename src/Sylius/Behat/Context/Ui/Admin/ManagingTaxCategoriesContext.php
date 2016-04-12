@@ -23,7 +23,7 @@ use Webmozart\Assert\Assert;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-final class ManagingTaxCategoryContext implements Context
+final class ManagingTaxCategoriesContext implements Context
 {
     const RESOURCE_NAME = 'tax_category';
 

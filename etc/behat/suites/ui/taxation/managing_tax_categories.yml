@@ -3,7 +3,7 @@
 
 default:
     suites:
-        ui_taxation:
+        ui_managing_tax_categories:
             contexts_as_services:
                 - sylius.behat.context.hook.doctrine_orm
 
@@ -13,6 +13,6 @@ default:
                 - sylius.behat.context.setup.security
                 - sylius.behat.context.setup.taxation
 
-                - sylius.behat.context.ui.admin.managing_tax_category
+                - sylius.behat.context.ui.admin.managing_tax_categories
             filters:
-                tags: "@taxation && @ui"
+                tags: "@managing_tax_categories && @ui"

@@ -1,4 +1,4 @@
-@cart
+@applying_taxes
 Feature: Not applying taxes for products without tax category
     In order to pay proper amount when buying goods without tax category
     As a Visitor

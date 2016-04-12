@@ -1,4 +1,4 @@
-@taxation
+@managing_tax_categories
 Feature: Deleting a tax category
     In order to remove test, obsolete or incorrect tax categories
     As an Administrator

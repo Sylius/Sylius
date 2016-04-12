@@ -1,4 +1,4 @@
-@cart
+@applying_taxes
 Feature: Round taxes on order item level
     In order to avoid taxes amount inaccuracy
     As a Visitor
