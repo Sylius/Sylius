@@ -8,7 +8,7 @@ sylius_admin_country:
         grid: sylius_admin_country
         vars:
             all:
-                subheader: sylius.ui.manage_country
+                subheader: sylius.ui.manage_shipping_destinations
                 templates:
                     form: SyliusAdminBundle:Country:_form.html.twig
             index:

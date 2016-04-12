@@ -8,7 +8,7 @@ sylius_admin_locale:
         grid: sylius_admin_locale
         vars:
             all:
-                subheader: sylius.ui.manage_locale
+                subheader: sylius.ui.manage_languages_available_in_the_store
                 templates:
                     form: SyliusAdminBundle:Locale:_form.html.twig
             index:
