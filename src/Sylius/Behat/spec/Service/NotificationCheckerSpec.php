@@ -13,6 +13,7 @@ namespace spec\Sylius\Behat\Service;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Behat\Exception\NotificationExpectationMismatchException;
+use Sylius\Behat\NotificationType;
 use Sylius\Behat\Service\Accessor\NotificationAccessorInterface;
 use Sylius\Behat\Service\NotificationChecker;
 use Sylius\Behat\Service\NotificationCheckerInterface;
@@ -42,112 +43,105 @@ class NotificationCheckerSpec extends ObjectBehavior
 
     function it_checks_if_successful_creation_notification_has_appeared(NotificationAccessorInterface $notificationAccessor)
     {
-        $notificationAccessor->hasSuccessMessage()->willReturn(true);
-        $notificationAccessor->hasMessage('Some resource has been successfully created.')->willReturn(true);
+        $notificationAccessor->getType()->willReturn(NotificationType::success());
+        $notificationAccessor->getMessage()->willReturn('Some resource has been successfully created.');
 
         $this->checkCreationNotification('some_resource');
     }
 
     function it_checks_if_successful_edition_notification_has_appeared(NotificationAccessorInterface $notificationAccessor)
     {
-        $notificationAccessor->hasSuccessMessage()->willReturn(true);
-        $notificationAccessor->hasMessage('Some resource has been successfully updated.')->willReturn(true);
+        $notificationAccessor->getType()->willReturn(NotificationType::success());
+        $notificationAccessor->getMessage()->willReturn('Some resource has been successfully updated.');
 
         $this->checkEditionNotification('some_resource');
     }
 
     function it_checks_if_successful_deletion_notification_has_appeared(NotificationAccessorInterface $notificationAccessor)
     {
-        $notificationAccessor->hasSuccessMessage()->willReturn(true);
-        $notificationAccessor->hasMessage('Some resource has been successfully deleted.')->willReturn(true);
+        $notificationAccessor->getType()->willReturn(NotificationType::success());
+        $notificationAccessor->getMessage()->willReturn('Some resource has been successfully deleted.');
 
         $this->checkDeletionNotification('some_resource');
     }
 
     function it_checks_if_successful_notification_has_appeared(NotificationAccessorInterface $notificationAccessor)
     {
-        $notificationAccessor->hasSuccessMessage()->willReturn(true);
-        $notificationAccessor->hasMessage('Some resource has been successfully deleted.')->willReturn(true);
+        $notificationAccessor->getType()->willReturn(NotificationType::success());
+        $notificationAccessor->getMessage()->willReturn('Some resource has been successfully deleted.');
 
-        $this->checkSuccessNotificationMessage('Some resource has been successfully deleted.');
+        $this->checkNotification('Some resource has been successfully deleted.', NotificationType::success());
     }
 
     function it_checks_if_failure_notification_has_appeared(NotificationAccessorInterface $notificationAccessor)
     {
-        $notificationAccessor->hasFailureMessage()->willReturn(true);
-        $notificationAccessor->hasMessage('Something went wrong.')->willReturn(true);
+        $notificationAccessor->getType()->willReturn(NotificationType::failure());
+        $notificationAccessor->getMessage()->willReturn('Something went wrong.');
 
-        $this->checkFailureNotificationMessage('Something went wrong.');
+        $this->checkNotification('Something went wrong.', NotificationType::failure());
     }
 
     function it_throws_notification_mismatch_exception_if_different_or_no_success_notification_has_been_found(
         NotificationAccessorInterface $notificationAccessor
     ) {
-        $notificationAccessor->hasSuccessMessage()->willReturn(true);
-        $notificationAccessor->hasMessage('Some resource has been successfully created.')->willReturn(false);
-        $notificationAccessor->getMessageType()->willReturn('success');
+        $notificationAccessor->getType()->willReturn(NotificationType::success());
         $notificationAccessor->getMessage()->willReturn('Some resource has been successfully updated.');
 
         $this->shouldThrow(
             new NotificationExpectationMismatchException(
-                'success', 
+                NotificationType::success(),
                 'Some resource has been successfully created.',
-                'success', 
+                NotificationType::success(),
                 'Some resource has been successfully updated.'
             )
-        )->during('checkSuccessNotificationMessage', ['Some resource has been successfully created.']);
+        )->during('checkNotification', ['Some resource has been successfully created.', NotificationType::success()]);
     }
 
     function it_throws_notification_mismatch_exception_if_failure_message_type_has_been_found_but_expect_success(
         NotificationAccessorInterface $notificationAccessor
     ) {
-        $notificationAccessor->hasSuccessMessage()->willReturn(false);
-        $notificationAccessor->hasMessage('Some resource has been successfully created.')->willReturn(false);
-        $notificationAccessor->getMessageType()->willReturn('failure');
+        $notificationAccessor->getType()->willReturn(NotificationType::failure());
         $notificationAccessor->getMessage()->willReturn('Some resource has been successfully created.');
 
         $this->shouldThrow(
             new NotificationExpectationMismatchException(
-                'success',
+                NotificationType::success(),
                 'Some resource has been successfully created.',
-                'failure',
+                NotificationType::failure(),
                 'Some resource has been successfully created.'
             )
-        )->during('checkSuccessNotificationMessage', ['Some resource has been successfully created.']);
+        )->during('checkNotification', ['Some resource has been successfully created.', NotificationType::success()]);
     }
 
     function it_throws_notification_mismatch_exception_if_different_or_no_failure_notification_has_been_found(
         NotificationAccessorInterface $notificationAccessor
     ) {
-        $notificationAccessor->hasFailureMessage()->willReturn(true);
-        $notificationAccessor->hasMessage('Something went wrong.')->willReturn(false);
-        $notificationAccessor->getMessageType()->willReturn('failure');
+        $notificationAccessor->getType()->willReturn(NotificationType::failure());
         $notificationAccessor->getMessage()->willReturn('Something different went wrong.');
 
         $this->shouldThrow(
             new NotificationExpectationMismatchException(
-                'failure',
+                NotificationType::failure(),
                 'Something went wrong.',
-                'failure',
+                NotificationType::failure(),
                 'Something different went wrong.'
             )
-        )->during('checkFailureNotificationMessage', ['Something went wrong.']);
+        )->during('checkNotification', ['Something went wrong.', NotificationType::failure()]);
     }
 
     function it_throws_notification_mismatch_exception_if_success_message_type_has_been_found_but_expect_failure(
         NotificationAccessorInterface $notificationAccessor
     ) {
-        $notificationAccessor->hasFailureMessage()->willReturn(false);
-        $notificationAccessor->getMessageType()->willReturn('success');
+        $notificationAccessor->getType()->willReturn(NotificationType::success());
         $notificationAccessor->getMessage()->willReturn('Something went wrong.');
 
         $this->shouldThrow(
             new NotificationExpectationMismatchException(
-                'failure',
+                NotificationType::failure(),
                 'Something went wrong.',
-                'success',
+                NotificationType::success(),
                 'Something went wrong.'
             )
-        )->during('checkFailureNotificationMessage', ['Something went wrong.']);
+        )->during('checkNotification', ['Something went wrong.', NotificationType::failure()]);
     }
 }

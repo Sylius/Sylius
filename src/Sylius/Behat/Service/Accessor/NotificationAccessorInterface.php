@@ -11,35 +11,20 @@
 
 namespace Sylius\Behat\Service\Accessor;
 
+use Sylius\Behat\NotificationType;
+
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 interface NotificationAccessorInterface
 {
     /**
-     * @return bool
-     */
-    public function hasSuccessMessage();
-
-    /**
-     * @return bool
-     */
-    public function hasFailureMessage();
-
-    /**
-     * @param string $message
-     *
-     * @return bool
-     */
-    public function hasMessage($message);
-
-    /**
      * @return string
      */
     public function getMessage();
 
     /**
-     * @return string
+     * @return NotificationType
      */
-    public function getMessageType();
+    public function getType();
 }

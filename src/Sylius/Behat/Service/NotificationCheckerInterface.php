@@ -11,6 +11,9 @@
 
 namespace Sylius\Behat\Service;
 
+use Sylius\Behat\Exception\NotificationExpectationMismatchException;
+use Sylius\Behat\NotificationType;
+
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
@@ -33,11 +36,9 @@ interface NotificationCheckerInterface
 
     /**
      * @param string $message
+     * @param NotificationType $type
+     *
+     * @throws NotificationExpectationMismatchException
      */
-    public function checkSuccessNotificationMessage($message);
-
-    /**
-     * @param string $message
-     */
-    public function checkFailureNotificationMessage($message);
+    public function checkNotification($message, NotificationType $type);
 }

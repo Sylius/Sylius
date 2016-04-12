@@ -12,7 +12,9 @@
 namespace Sylius\Behat\Service\Accessor;
 
 use Behat\Mink\Element\NodeElement;
+use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
+use Sylius\Behat\NotificationType;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -37,81 +39,40 @@ final class NotificationAccessor implements NotificationAccessorInterface
     /**
      * {@inheritdoc}
      */
-    public function hasSuccessMessage()
-    {
-        $messageType = $this->getMessageType();
-        if ('' === $messageType) {
-            return false;
-        }
-
-        return 'success' === $messageType;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasFailureMessage()
-    {
-        $messageType = $this->getMessageType();
-        if ('' === $messageType) {
-            return false;
-        }
-
-        return 'failure' === $messageType;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasMessage($message)
-    {
-        $messageElement = $this->getMessageElement();
-        if (null === $messageElement) {
-            return false;
-        }
-
-        return false !== strpos($messageElement->getText(), $message);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getMessage()
     {
-        $messageElement = $this->getMessageElement();
-        if (null === $messageElement) {
-            return '';
-        }
-
-        return $messageElement->getText();
+        return $this->getMessageElement()->getText();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getMessageType()
+    public function getType()
     {
-        $messageElement = $this->getMessageElement();
-        if (null === $messageElement) {
-            return '';
-        }
-        
         if ($this->getMessageElement()->hasClass('positive')) {
-            return 'success';
-        }
-        
-        if ($this->getMessageElement()->hasClass('negative')) {
-            return 'failure';
+            return NotificationType::success();
         }
 
-        return '';
+        if ($this->getMessageElement()->hasClass('negative')) {
+            return NotificationType::failure();
+        }
+
+        throw new \RuntimeException('Cannot resolve notification type');
     }
 
     /**
      * @return NodeElement
+     *
+     * @throws ElementNotFoundException
      */
     private function getMessageElement()
     {
-        return $this->session->getPage()->find('css', self::NOTIFICATION_ELEMENT_CSS);
+        $messageElement = $this->session->getPage()->find('css', self::NOTIFICATION_ELEMENT_CSS);
+
+        if (null === $messageElement) {
+            throw new ElementNotFoundException($this->session->getDriver(), 'message element', 'css', self::NOTIFICATION_ELEMENT_CSS);
+        }
+
+        return $messageElement;
     }
 }
