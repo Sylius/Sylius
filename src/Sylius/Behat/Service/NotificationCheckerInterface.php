@@ -35,4 +35,9 @@ interface NotificationCheckerInterface
      * @param string $message
      */
     public function checkSuccessNotificationMessage($message);
+
+    /**
+     * @param string $message
+     */
+    public function checkFailureNotificationMessage($message);
 }

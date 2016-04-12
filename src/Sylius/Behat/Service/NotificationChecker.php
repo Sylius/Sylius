@@ -17,6 +17,7 @@ use Webmozart\Assert\Assert;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 final class NotificationChecker implements NotificationCheckerInterface
 {
@@ -82,6 +83,25 @@ final class NotificationChecker implements NotificationCheckerInterface
 
         throw new NotificationExpectationMismatchException(
             'success',
+            $message,
+            $this->notificationAccessor->getMessageType(),
+            $this->notificationAccessor->getMessage()
+        );
+    }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @throws NotificationExpectationMismatchException
+     */
+    public function checkFailureNotificationMessage($message)
+    {
+        if ($this->notificationAccessor->hasFailureMessage() && $this->notificationAccessor->hasMessage($message)) {
+            return;
+        }
+
+        throw new NotificationExpectationMismatchException(
+            'failure',
             $message,
             $this->notificationAccessor->getMessageType(),
             $this->notificationAccessor->getMessage()
