@@ -4,7 +4,7 @@ sylius_grid:
             driver:
                 name: doctrine/orm
                 options:
-                    class: %sylius.model.locale.class%
+                    class: "%sylius.model.locale.class%"
             sorting:
                 code: asc
             fields:

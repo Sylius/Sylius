@@ -4,7 +4,7 @@ sylius_grid:
             driver:
                 name: doctrine/orm
                 options:
-                    class: %sylius.model.tax_category.class%
+                    class: "%sylius.model.tax_category.class%"
             sorting:
                 name: asc
             fields:

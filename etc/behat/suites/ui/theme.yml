@@ -19,4 +19,4 @@ default:
                 - sylius.behat.context.ui.theme
 
             filters:
-                tags: @theme && @ui
+                tags: "@theme && @ui"

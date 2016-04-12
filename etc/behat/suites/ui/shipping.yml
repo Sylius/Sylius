@@ -26,4 +26,4 @@ default:
                 - sylius.behat.context.ui.admin.managing_shipping_methods
 
             filters:
-                tags: @shipping && @ui
+                tags: "@shipping && @ui"

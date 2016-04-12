@@ -14,4 +14,4 @@ default:
 
                 - sylius.behat.context.ui.admin.managing_locale
             filters:
-                tags: @locale && @ui
+                tags: "@locale && @ui"

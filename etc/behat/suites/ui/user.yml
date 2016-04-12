@@ -14,4 +14,4 @@ default:
                 - sylius.behat.context.ui.user
                 - sylius.behat.context.ui.customer
             filters:
-                tags: @user && @ui
+                tags: "@user && @ui"

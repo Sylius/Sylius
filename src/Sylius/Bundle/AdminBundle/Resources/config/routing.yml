@@ -11,16 +11,16 @@ sylius_admin_dashboard:
         _controller: sylius.controller.admin.dashboard:indexAction
 
 sylius_admin_security:
-    resource: @SyliusAdminBundle/Resources/config/routing/security.yml
+    resource: "@SyliusAdminBundle/Resources/config/routing/security.yml"
 
 sylius_admin_tax_category:
-    resource: @SyliusAdminBundle/Resources/config/routing/tax_category.yml
+    resource: "@SyliusAdminBundle/Resources/config/routing/tax_category.yml"
 
 sylius_admin_country:
-    resource: @SyliusAdminBundle/Resources/config/routing/country.yml
+    resource: "@SyliusAdminBundle/Resources/config/routing/country.yml"
 
 sylius_admin_locale:
-    resource: @SyliusAdminBundle/Resources/config/routing/locale.yml
+    resource: "@SyliusAdminBundle/Resources/config/routing/locale.yml"
 
 sylius_admin_tax_rate:
-    resource: @SyliusAdminBundle/Resources/config/routing/tax_rate.yml
+    resource: "@SyliusAdminBundle/Resources/config/routing/tax_rate.yml"

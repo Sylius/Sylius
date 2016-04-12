@@ -25,4 +25,4 @@ default:
                 - sylius.behat.context.domain.shipment
 
             filters:
-                tags: @order && @domain
+                tags: "@order && @domain"
