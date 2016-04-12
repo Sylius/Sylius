@@ -1,0 +1,16 @@
+sylius_admin_payment_method:
+    resource: |
+        alias: sylius.payment_method
+        section: admin
+        templates: SyliusAdminBundle:Crud
+        except: ['show']
+        redirect: update
+        grid: sylius_admin_payment_method
+        vars:
+          all:
+              subheader: sylius.ui.manage_payment_method
+              templates:
+                  form: SyliusAdminBundle:PaymentMethod:_form.html.twig
+          index:
+              icon: tags
+    type: sylius.resource

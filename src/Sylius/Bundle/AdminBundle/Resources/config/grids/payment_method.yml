@@ -1,0 +1,31 @@
+sylius_grid:
+    grids:
+        sylius_admin_payment_method:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: %sylius.model.payment_method.class%
+            fields:
+                code:
+                    type: string
+                    label: sylius.ui.code
+                name:
+                    type: string
+                    label: sylius.ui.name
+                gateway:
+                    type: string
+                    label: sylius.ui.gateway
+                enabled:
+                    type: twig
+                    label: sylius.ui.enabled
+                    options:
+                        template: SyliusAdminBundle:Grid/Field:enabled.html.twig
+            actions:
+                main:
+                    create:
+                        type: create
+                item:
+                    update:
+                        type: update
+                    delete:
+                        type: delete

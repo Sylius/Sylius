@@ -31,6 +31,7 @@ sylius_payment:
         cc:     Credit Card
         test:   Test
         stripe: Stripe
+        paypal_express_checkout: Paypal Express Checkout
 
 sylius_rbac:
     authorization_checker: sylius.authorization_checker.toggleable

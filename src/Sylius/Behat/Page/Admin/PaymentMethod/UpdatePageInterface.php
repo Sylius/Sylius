@@ -9,22 +9,36 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Behat\Page\Admin\TaxCategory;
+namespace Sylius\Behat\Page\Admin\PaymentMethod;
 
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
 
 /**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 interface UpdatePageInterface extends BaseUpdatePageInterface
 {
+    public function enable();
+    public function disable();
+
+    /**
+     * @param string $gateway
+     */
+    public function chooseGateway($gateway);
+
     /**
      * @return bool
      */
     public function isCodeDisabled();
 
     /**
-     * @param string $name
+     * @return bool
      */
-    public function nameIt($name);
+    public function isPaymentMethodEnabled();
+
+    /**
+     * @param string $name
+     * @param string $language
+     */
+    public function nameIt($name, $language);
 }
