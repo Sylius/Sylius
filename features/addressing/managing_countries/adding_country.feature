@@ -1,4 +1,4 @@
-@addressing
+@managing_countries
 Feature: Adding a new country
     In order to sell my goods to different countries
     As an Administrator

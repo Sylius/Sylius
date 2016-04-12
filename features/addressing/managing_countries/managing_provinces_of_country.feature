@@ -1,4 +1,4 @@
-@addressing
+@managing_countries
 Feature: Managing provinces of a country
     In order to add or remove provinces in existing countries
     As an Administrator

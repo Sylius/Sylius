@@ -1,4 +1,4 @@
-@addressing
+@managing_countries
 Feature: Country unique code validation
     In order to avoid making mistakes when managing countries
     As an Administrator

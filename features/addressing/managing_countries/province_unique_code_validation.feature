@@ -1,4 +1,4 @@
-@addressing
+@managing_countries
 Feature: Province unique code validation
     In order to uniquely identify provinces
     As an Administrator

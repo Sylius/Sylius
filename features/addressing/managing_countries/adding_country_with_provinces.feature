@@ -1,4 +1,4 @@
-@addressing
+@managing_countries
 Feature: Adding countries with provinces
     In order to sell my goods to different countries and provinces
     As an Administrator
