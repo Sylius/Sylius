@@ -17,6 +17,7 @@ use Sylius\Behat\Page\Admin\Zone\UpdatePageInterface;
 use Sylius\Behat\Page\Admin\Zone\CreatePageInterface;
 use Sylius\Behat\Service\CurrentPageResolverInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
+use Sylius\Behat\Service\NotificationType;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Webmozart\Assert\Assert;
@@ -379,6 +380,7 @@ final class ManagingZoneContext implements Context
 
     /**
      * @Then /^I should see the (zone named "([^"]*)") in the list$/
+     * @Then /^I should still see the (zone named "([^"]*)") in the list$/
      */
     public function iShouldSeeTheZoneNamedInTheList(ZoneInterface $zone)
     {
@@ -386,6 +388,14 @@ final class ManagingZoneContext implements Context
             $this->indexPage->isResourceOnPage(['code' => $zone->getCode(), 'name' => $zone->getName()]),
             sprintf('Zone named %s should exist in the registry', $zone->getName())
         );
+    }
+
+    /**
+     * @Then I should be notified that this zone cannot be deleted
+     */
+    public function iShouldBeNotifiedThatThisZoneCannotBeDeleted()
+    {
+        $this->notificationChecker->checkNotification('Error Cannot delete, the zone is in use.', NotificationType::failure());
     }
 
     /**

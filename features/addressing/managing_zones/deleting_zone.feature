@@ -7,6 +7,8 @@ Feature: Deleting a zone
     Background:
         Given the store has a zone "North America" with code "NA"
         And the store also has a zone "South America" with code "SA"
+        And the store has a tax category "Sports gear"
+        And the store has "European Union Sales Tax" tax rate of 20% for "Sports gear" within "SA" zone
         And I am logged in as an administrator
 
     @ui
@@ -14,3 +16,9 @@ Feature: Deleting a zone
         When I delete zone named "North America"
         Then I should be notified that it has been successfully deleted
         And the zone named "North America" should no longer exist in the registry
+
+    @ui
+    Scenario: Delete zone with associated tax rates should not be possible
+        When I delete zone named "South America"
+        Then I should be notified that this zone cannot be deleted
+        And I should still see the zone named "South America" in the list
