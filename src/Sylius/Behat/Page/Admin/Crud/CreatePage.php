@@ -54,12 +54,12 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
      */
     public function checkValidationMessageFor($element, $message)
     {
-        $foundedElement = $this->getElement($element)->getParent()->find('css', '.pointing');
+        $foundedElement = $this->getFieldElement($element);
         if (null === $foundedElement) {
             throw new ElementNotFoundException(sprintf('Element %s with message %s cannot be found on page', $element, $message));
         }
 
-        return $message === $foundedElement->getText();
+        return $message === $foundedElement->find('css', '.pointing')->getText();
     }
 
     /**
@@ -76,5 +76,22 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     protected function getResourceName()
     {
         return $this->resourceName;
+    }
+
+    /**
+     * @param string $element
+     *
+     * @return \Behat\Mink\Element\NodeElement|null
+     *
+     * @throws ElementNotFoundException
+     */
+    private function getFieldElement($element)
+    {
+        $element = $this->getElement($element);
+        while (null !== $element && !($element->hasClass('field'))) {
+            $element = $element->getParent();
+        }
+
+        return $element;
     }
 }

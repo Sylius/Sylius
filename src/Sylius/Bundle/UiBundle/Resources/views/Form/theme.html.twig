@@ -36,7 +36,16 @@
 {%- endblock money_widget %}
 
 {% block choice_row -%}
-    {{- form_label(form) -}}
-    {{- form_widget(form, {'attr': {'class': 'ui dropdown'}}) -}}
-    {{- form_errors(form) -}}
+    <div class="{% if required %}required {% endif %}field{% if (not compound or force_error|default(false)) and not valid %} error{% endif %}">
+        {{- form_label(form) -}}
+        {{- form_widget(form, {'attr': {'class': 'ui dropdown'}}) -}}
+        {{- form_errors(form) -}}
+    </div>
 {%- endblock choice_row %}
+
+{% block percent_widget -%}
+    <div class="ui right labeled input">
+        {{- form_widget(form) -}}
+        <div class="ui basic label">%</div>
+    </div>
+{%- endblock percent_widget %}
