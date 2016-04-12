@@ -25,8 +25,6 @@ class PaymentRepository extends EntityRepository implements PaymentRepositoryInt
      */
     public function createFilterPaginator(array $criteria = [], array $sorting = [])
     {
-        $this->_em->getFilters()->disable('softdeleteable');
-
         $queryBuilder = $this->getCollectionQueryBuilder();
         $queryBuilder
             ->leftJoin($this->getPropertyName('order'), 'paymentOrder')

@@ -46,10 +46,8 @@ class OrderController extends ResourceController
 
         // Fetch and cache deleted orders
         $entityManager = $this->container->get('doctrine.orm.entity_manager');
-        $entityManager->getFilters()->disable('softdeleteable');
         $paginator->getCurrentPageResults();
         $paginator->getNbResults();
-        $entityManager->getFilters()->enable('softdeleteable');
 
         return $this->container->get('templating')->renderResponse('SyliusWebBundle:Backend/Order:indexByCustomer.html.twig', [
             'customer' => $customer,

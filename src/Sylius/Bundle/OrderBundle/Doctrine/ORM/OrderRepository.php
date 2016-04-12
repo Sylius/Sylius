@@ -26,8 +26,6 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
     {
         $queryBuilder = $this->createQueryBuilder('o');
 
-        $this->_em->getFilters()->disable('softdeleteable');
-
         return $queryBuilder
             ->leftJoin('o.items', 'item')
             ->addSelect('item')

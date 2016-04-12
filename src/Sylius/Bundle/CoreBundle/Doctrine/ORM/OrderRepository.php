@@ -48,8 +48,6 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
      */
     public function findForDetailsPage($id)
     {
-        $this->_em->getFilters()->disable('softdeleteable');
-
         $queryBuilder = $this->createQueryBuilder('o');
         $queryBuilder
             ->leftJoin('o.adjustments', 'adjustment')
@@ -165,8 +163,6 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
      */
     public function countByCustomerAndCoupon(CustomerInterface $customer, CouponInterface $coupon)
     {
-        $this->_em->getFilters()->disable('softdeleteable');
-
         $queryBuilder = $this->createQueryBuilder('o')
             ->select('count(o.id)')
             ->leftJoin('o.items', 'item')
@@ -182,8 +178,6 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
             ->getQuery()
             ->getSingleScalarResult()
         ;
-
-        $this->_em->getFilters()->enable('softdeleteable');
 
         return $count;
     }

@@ -59,13 +59,9 @@ class TokenProvider implements TokenProviderInterface
      */
     public function generateUniqueToken()
     {
-        $this->manager->getFilters()->disable('softdeleteable');
-
         do {
             $token = $this->generator->generate($this->tokenLength);
         } while ($this->isUsedCode($token));
-
-        $this->manager->getFilters()->enable('softdeleteable');
 
         return $token;
     }

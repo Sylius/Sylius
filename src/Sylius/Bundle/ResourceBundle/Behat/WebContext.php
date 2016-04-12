@@ -51,10 +51,7 @@ class WebContext extends DefaultContext
     {
         $type = str_replace(' ', '_', $type);
 
-        $entityManager = $this->getEntityManager();
-        $entityManager->getFilters()->disable('softdeleteable');
         $resource = $this->findOneBy($type, [$property => $value]);
-        $entityManager->getFilters()->enable('softdeleteable');
 
         $this->getSession()->visit($this->generatePageUrl(
             sprintf('%s_show', $type), ['id' => $resource->getId()]
@@ -75,10 +72,7 @@ class WebContext extends DefaultContext
 
         $type = str_replace(' ', '_', $type);
 
-        $entityManager = $this->getEntityManager();
-        $entityManager->getFilters()->disable('softdeleteable');
         $resource = $this->findOneByName($type, $name);
-        $entityManager->getFilters()->enable('softdeleteable');
 
         $this->getSession()->visit($this->generatePageUrl(
             sprintf('%s_show', $type), ['id' => $resource->getId()]
@@ -93,14 +87,9 @@ class WebContext extends DefaultContext
     {
         $type = str_replace(' ', '_', $type);
 
-        $entityManager = $this->getEntityManager();
-        $entityManager->getFilters()->disable('softdeleteable');
-
         $resource = $this->waitFor(function () use ($type, $property, $value) {
             return $this->getRepository($type)->findOneBy([$property => $value]);
         });
-
-        $entityManager->getFilters()->enable('softdeleteable');
 
         $this->assertSession()->addressEquals($this->generatePageUrl(
             sprintf('%s_show', $type), ['id' => $resource->getId()]
@@ -123,14 +112,9 @@ class WebContext extends DefaultContext
 
         $type = str_replace(' ', '_', $type);
 
-        $entityManager = $this->getEntityManager();
-        $entityManager->getFilters()->disable('softdeleteable');
-
         $resource = $this->waitFor(function () use ($type, $name) {
             return $this->getRepository($type)->findOneByName($name);
         });
-
-        $entityManager->getFilters()->enable('softdeleteable');
 
         $this->assertSession()->addressEquals($this->generatePageUrl(
             sprintf('%s_show', $type), ['id' => $resource->getId()]

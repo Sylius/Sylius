@@ -46,7 +46,6 @@ class CouponGeneratorSpec extends ObjectBehavior
         FactoryInterface $couponFactory,
         $repository,
         $manager,
-        FilterCollection $filters,
         PromotionInterface $promotion,
         CouponInterface $coupon,
         Instruction $instruction
@@ -62,10 +61,6 @@ class CouponGeneratorSpec extends ObjectBehavior
         $coupon->setCode(Argument::any())->shouldBeCalled();
         $coupon->setUsageLimit(null)->shouldBeCalled();
         $coupon->setExpiresAt(null)->shouldBeCalled();
-
-        $manager->getFilters()->shouldBeCalled()->willReturn($filters);
-        $filters->disable('softdeleteable')->shouldBeCalled();
-        $filters->enable('softdeleteable')->shouldBeCalled();
 
         $manager->persist($coupon)->shouldBeCalled();
         $manager->flush()->shouldBeCalled();

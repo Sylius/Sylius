@@ -76,14 +76,10 @@ class CouponGenerator implements CouponGeneratorInterface
      */
     public function generateUniqueCode()
     {
-        $this->manager->getFilters()->disable('softdeleteable');
-
         do {
             $hash = sha1(microtime(true));
             $code = strtoupper(substr($hash, mt_rand(0, 33), 6));
         } while ($this->isUsedCode($code));
-
-        $this->manager->getFilters()->enable('softdeleteable');
 
         return $code;
     }
