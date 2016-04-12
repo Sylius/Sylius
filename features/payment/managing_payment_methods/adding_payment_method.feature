@@ -8,7 +8,7 @@ Feature: Adding a new payment method
         Given the store operates on a single channel in "France"
         And I am logged in as an administrator
 
-    @todo
+    @ui
     Scenario: Adding a new payment method
         Given I want to create a new payment method
         When I name it "Paypal Express Checkout" in "English (United States)"
@@ -18,7 +18,7 @@ Feature: Adding a new payment method
         Then I should be notified that it has been successfully created
         And the payment method "Paypal Express Checkout" should appear in the registry
 
-    @todo
+    @ui
     Scenario: Adding a new payment method with description
         Given I want to create a new payment method
         When I name it "Paypal Express Checkout" in "English (United States)"

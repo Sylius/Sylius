@@ -9,7 +9,7 @@ Feature: Browsing payment methods
         And the store has a payment method "PayPal Express Checkout" with a code "PEC"
         And I am logged in as an administrator
 
-    @todo
+    @ui
     Scenario: Browsing defined payment methods
         When I want to browse payment methods
         Then I should see 2 payment methods in the list

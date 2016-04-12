@@ -12,9 +12,9 @@
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\Page\Admin\Crud\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface;
+use Sylius\Behat\Page\Admin\PaymentMethod\CreatePageInterface;
 use Sylius\Behat\Service\CurrentPageResolverInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
@@ -22,8 +22,9 @@ use Webmozart\Assert\Assert;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-final class ManagingPaymentMethodContext implements Context
+final class ManagingPaymentMethodsContext implements Context
 {
     const RESOURCE_NAME = 'payment_method';
 
@@ -82,11 +83,14 @@ final class ManagingPaymentMethodContext implements Context
     }
 
     /**
-     * @When I rename it to :name
+     * @When I name it :name in :language
+     * @When I rename it to :name in :language
      */
-    public function iNameItTo($name)
+    public function iNameItIn($name, $language)
     {
-        $this->updatePage->nameIt($name);
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm($this->createPage, $this->updatePage);
+
+        $currentPage->nameIt($name, $language);
     }
 
     /**
@@ -103,7 +107,9 @@ final class ManagingPaymentMethodContext implements Context
      */
     public function iChooseGateway($gatewayName)
     {
-        $this->updatePage->chooseGateway($gatewayName);
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm($this->createPage, $this->updatePage);
+
+        $currentPage->chooseGateway($gatewayName);
     }
 
     /**
@@ -133,6 +139,81 @@ final class ManagingPaymentMethodContext implements Context
         Assert::true(
             $this->updatePage->hasGateway($gatewayName),
             sprintf('Payment method should have %s gateway', $gatewayName)
+        );
+    }
+
+    /**
+     * @Given /^I want to create a new payment method$/
+     */
+    public function iWantToCreateANewPaymentMethod()
+    {
+        $this->createPage->open();
+    }
+
+    /**
+     * @When I specify its code as :code
+     */
+    public function iSpecifyItsCodeAs($code)
+    {
+        $this->createPage->specifyCode($code);
+    }
+
+    /**
+     * @When I describe it as :description in :language
+     */
+    public function iDescribeItAsIn($description, $language)
+    {
+        $this->createPage->describeIt($description, $language);
+    }
+
+    /**
+     * @When I add it
+     */
+    public function iAddIt()
+    {
+        $this->createPage->create();
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully created
+     */
+    public function iShouldBeNotifiedItHasBeenSuccessfulCreation()
+    {
+        $this->notificationChecker->checkCreationNotification(self::RESOURCE_NAME);
+    }
+
+    /**
+     * @Then the payment method :paymentMethodName should appear in the registry
+     * @Then the payment method :paymentMethodName should be in the registry
+     */
+    public function thePaymentMethodShouldAppearInTheRegistry($paymentMethodName)
+    {
+        $this->indexPage->open();
+
+        Assert::true(
+            $this->indexPage->isResourceOnPage(['name' => $paymentMethodName]),
+            sprintf('Payment method with name %s has not been found.', $paymentMethodName)
+        );
+    }
+
+    /**
+     * @When /^I want to browse payment methods$/
+     */
+    public function iWantToBrowsePaymentMethods()
+    {
+        $this->indexPage->open();
+    }
+
+    /**
+     * @Then I should see :amount payment methods in the list
+     */
+    public function iShouldSeePaymentMethodsInTheList($amount)
+    {
+        $foundRows = $this->indexPage->countItems();
+
+        Assert::true(
+            ((int) $amount) === $foundRows,
+            sprintf('%s rows with payment methods should appear on page, %s rows has been found', $amount, $foundRows)
         );
     }
 }
