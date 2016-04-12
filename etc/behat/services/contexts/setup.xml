@@ -53,6 +53,7 @@
             <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
             <argument type="service" id="sylius.repository.customer" container="symfony" />
             <argument type="service" id="sylius.factory.customer" container="symfony" />
+            <argument type="service" id="sylius.factory.user" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>
 

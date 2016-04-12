@@ -323,4 +323,57 @@ final class ManagingCustomersContext implements Context
             sprintf('Customer with email %s cannot be founded.', $email)
         );
     }
+
+    /**
+     * @Given I want to enable :customer
+     * @Given I want to disable :customer
+     */
+    public function iWantToChangeStatusOf(CustomerInterface $customer)
+    {
+        $this->updatePage->open(['id' => $customer->getId()]);
+    }
+
+    /**
+     * @When I enable it
+     */
+    public function iEnableIt()
+    {
+        $this->updatePage->enable();
+    }
+
+    /**
+     * @When I disable it
+     */
+    public function iDisableIt()
+    {
+        $this->updatePage->disable();
+    }
+
+    /**
+     * @Then the customer :customer should be enabled
+     */
+    public function thisCustomerShouldBeEnabled(CustomerInterface $customer)
+    {
+        $this->indexPage->open();
+
+        Assert::eq(
+            'Yes',
+            $this->indexPage->getCustomerAccountStatus($customer),
+            'Customer account should be enabled, but it does not.'
+        );
+    }
+
+    /**
+     * @Then the customer :customer should be disabled
+     */
+    public function thisCustomerShouldBeDisabled(CustomerInterface $customer)
+    {
+        $this->indexPage->open();
+
+        Assert::eq(
+            'No',
+            $this->indexPage->getCustomerAccountStatus($customer),
+            'Customer account should be disabled, but it does not.'
+        );
+    }
 }

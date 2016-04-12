@@ -46,6 +46,7 @@ class AddUserFormSubscriber implements EventSubscriberInterface
     public function preSubmit(FormEvent $event)
     {
         $data = $event->getData();
+        $normData = $event->getForm()->getNormData();
 
         if (!isset($data['user'])) {
             $this->removeUserField($event);
@@ -53,7 +54,7 @@ class AddUserFormSubscriber implements EventSubscriberInterface
             return;
         }
 
-        if ($this->isUserDataEmpty($data)) {
+        if ($this->isUserDataEmpty($data) && null === $normData->getUser()) {
             unset($data['user']);
             $event->setData($data);
             $this->removeUserField($event);

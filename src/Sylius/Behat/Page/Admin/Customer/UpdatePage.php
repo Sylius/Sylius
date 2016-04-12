@@ -11,6 +11,7 @@
 
 namespace Sylius\Behat\Page\Admin\Customer;
 
+use Sylius\Behat\Behaviour\Toggles;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 
 /**
@@ -18,14 +19,7 @@ use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
  */
 class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 {
-    /**
-     * @var array
-     */
-    protected $elements = [
-        'email' => '#sylius_customer_email',
-        'first name' => '#sylius_customer_firstName',
-        'last name' => '#sylius_customer_lastName',
-    ];
+    use Toggles;
 
     /**
      * {@inheritdoc}
@@ -76,5 +70,26 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     public function changeEmail($email)
     {
         $this->getDocument()->fillField('Email', $email);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getToggleableElement()
+    {
+        return $this->getElement('enabled');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getDefinedElements()
+    {
+        return array_merge(parent::getDefinedElements(), [
+            'email' => '#sylius_customer_email',
+            'first name' => '#sylius_customer_firstName',
+            'last name' => '#sylius_customer_lastName',
+            'enabled' => '#sylius_customer_user_enabled'
+        ]);
     }
 }

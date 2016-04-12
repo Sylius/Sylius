@@ -11,6 +11,7 @@ default:
 
                 - sylius.behat.context.setup.security
                 - sylius.behat.context.setup.customer
+                - sylius.behat.context.setup.user
 
                 - sylius.behat.context.ui.admin.managing_customers
             filters:

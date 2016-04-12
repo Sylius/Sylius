@@ -18,4 +18,16 @@ use Sylius\Behat\Page\Admin\Crud\IndexPage as BaseIndexPage;
  */
 class IndexPage extends BaseIndexPage implements IndexPageInterface
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function getCustomerAccountStatus($customer)
+    {
+        $tableAccessor = $this->getTableAccessor();
+        $table = $this->getElement('table');
+
+        $row = $tableAccessor->getRowWithFields($table, ['email' => $customer->getEmail()]);
+
+        return $tableAccessor->getFieldFromRow($table, $row, 'Confirmed')->getText();
+    }
 }

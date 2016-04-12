@@ -14,7 +14,10 @@ namespace Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\User\Repository\CustomerRepositoryInterface;
+use Sylius\Component\User\Repository\UserRepositoryInterface;
+use Sylius\Component\User\Security\PasswordUpdaterInterface;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
@@ -40,6 +43,11 @@ final class CustomerContext implements Context
     private $customerFactory;
 
     /**
+     * @var FactoryInterface
+     */
+    private $userFactory;
+
+    /**
      * @param SharedStorageInterface $sharedStorage
      * @param CustomerRepositoryInterface $customerRepository
      * @param FactoryInterface $customerFactory
@@ -47,11 +55,13 @@ final class CustomerContext implements Context
     public function __construct(
         SharedStorageInterface $sharedStorage,
         CustomerRepositoryInterface $customerRepository,
-        FactoryInterface $customerFactory
+        FactoryInterface $customerFactory,
+        FactoryInterface $userFactory
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->customerRepository = $customerRepository;
         $this->customerFactory = $customerFactory;
+        $this->userFactory = $userFactory;
     }
 
     /**
@@ -88,6 +98,22 @@ final class CustomerContext implements Context
     }
 
     /**
+     * @Given there is disabled customer account :email with password :password
+     */
+    public function thereIsDisabledCustomerAccountWithPassword($email, $password)
+    {
+        $this->createCustomerAccount($email, $password, false);
+    }
+
+    /**
+     * @Given there is enabled customer account :email with password :password
+     */
+    public function theStoreHasEnabledCustomerAccountWithPassword($email, $password)
+    {
+        $this->createCustomerAccount($email, $password, true);
+    }
+
+    /**
      * @param string $email
      * @param string $firstName
      * @param string $lastName
@@ -99,6 +125,31 @@ final class CustomerContext implements Context
         $customer->setFirstName($firstName);
         $customer->setLastName($lastName);
         $customer->setEmail($email);
+
+        $this->sharedStorage->set('customer', $customer);
+        $this->customerRepository->add($customer);
+    }
+
+    /**
+     * @param string $email
+     * @param string $password
+     * @param bool $enabled
+     */
+    private function createCustomerAccount($email, $password, $enabled = true)
+    {
+        $user = $this->userFactory->createNew();
+        $customer = $this->customerFactory->createNew();
+
+        $customer->setFirstname(self::DEFAULT_CUSTOMER_FIRST_NAME);
+        $customer->setLastname(self::DEFAULT_CUSTOMER_LAST_NAME);
+        $customer->setEmail($email);
+
+        $user->setUsername($email);
+        $user->setPlainPassword($password);
+        $user->setEnabled($enabled);
+        $user->setCustomer($customer);
+
+        $customer->setUser($user);
 
         $this->sharedStorage->set('customer', $customer);
         $this->customerRepository->add($customer);

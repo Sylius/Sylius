@@ -12,10 +12,17 @@
 namespace Sylius\Behat\Page\Admin\Customer;
 
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface as BaseIndexPageInterface;
+use Sylius\Component\User\Model\CustomerInterface;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
 interface IndexPageInterface extends BaseIndexPageInterface
 {
+    /**
+     * @param CustomerInterface $customer
+     *
+     * @return string
+     */
+    public function getCustomerAccountStatus($customer);
 }
