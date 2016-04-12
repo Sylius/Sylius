@@ -14,6 +14,7 @@ namespace Sylius\Bundle\ShippingBundle\Form\Type;
 use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ObjectToIdentifierTransformer;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Shipping\Model\ShippingMethod;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 use Sylius\Component\Shipping\Resolver\MethodsResolverInterface;
@@ -72,7 +73,9 @@ class ShippingMethodChoiceType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->addModelTransformer($this->getProperTransformer($options));
+        if ($options['multiple']) {
+            $builder->addModelTransformer(new CollectionToArrayTransformer());
+        }
     }
 
     /**
@@ -90,10 +93,19 @@ class ShippingMethodChoiceType extends AbstractType
             return new ObjectChoiceList($methods, null, [], null, 'id');
         };
 
+        $dataClass = function (Options $options) {
+            if ($options['multiple']) {
+                return null;
+            }
+
+            return ShippingMethodInterface::class;
+        };
+
         $resolver
             ->setDefaults([
                 'choice_list' => $choiceList,
                 'criteria' => [],
+                'data_class' => $dataClass,
             ])
             ->setDefined([
                 'subject',
