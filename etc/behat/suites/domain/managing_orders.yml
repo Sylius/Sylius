@@ -3,7 +3,7 @@
 
 default:
     suites:
-        domain_order:
+        domain_managing_orders:
             contexts_as_services:
                 - sylius.behat.context.hook.doctrine_orm
 
@@ -25,4 +25,4 @@ default:
                 - sylius.behat.context.domain.shipment
 
             filters:
-                tags: "@order && @domain"
+                tags: "@managing_orders && @domain"
