@@ -39,12 +39,25 @@ final class NotificationAccessor implements NotificationAccessorInterface
      */
     public function hasSuccessMessage()
     {
-        $messageElement = $this->getMessageElement();
-        if (null === $messageElement) {
+        $messageType = $this->getMessageType();
+        if ('' === $messageType) {
             return false;
         }
 
-        return $this->getMessageElement()->hasClass('positive');
+        return 'success' === $messageType;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasFailureMessage()
+    {
+        $messageType = $this->getMessageType();
+        if ('' === $messageType) {
+            return false;
+        }
+
+        return 'failure' === $messageType;
     }
 
     /**

@@ -22,6 +22,11 @@ interface NotificationAccessorInterface
     public function hasSuccessMessage();
 
     /**
+     * @return bool
+     */
+    public function hasFailureMessage();
+
+    /**
      * @param string $message
      *
      * @return bool
