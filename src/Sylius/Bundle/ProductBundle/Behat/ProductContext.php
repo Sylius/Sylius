@@ -85,10 +85,6 @@ class ProductContext extends DefaultContext
                 $product->setTaxons($taxons);
             }
 
-            if (isset($data['deleted']) && 'yes' === $data['deleted']) {
-                $product->setDeletedAt(new \DateTime());
-            }
-
             if (isset($data['pricing calculator']) && '' !== $data['pricing calculator']) {
                 $this->configureProductPricingCalculator($product, $data);
             }

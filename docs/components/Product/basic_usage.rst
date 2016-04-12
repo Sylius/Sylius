@@ -95,16 +95,13 @@ Product variants management
 
    $variant = new Variant();
    $masterVariant = new Variant();
-   $deletedVariant = new Variant();
    $availableVariant = new Variant();
 
    $variants = new ArrayCollection();
 
-   $deletedVariant->setDeletedAt(new \DateTime());
    $availableVariant->setAvailableOn(new \DateTime());
 
    $product->setMasterVariant($masterVariant);
-   $product->addVariant($deletedVariant);
    $product->hasVariants(); // return true
 
    $product->addVariant($variant);
@@ -118,13 +115,13 @@ Product variants management
 
    $product->getVariants(); // Returns an array containing $variant and $availableVariant.
 
-The ``getVariants`` method returns only variants which are not deleted nor set as master.
+The ``getVariants`` method returns only variants which are not set as master.
 
 .. code-block:: php
 
    $product->getAvailableVariants(); // Returns an array containing only $availableVariant.
 
-``getAvailableVariants`` ignores the master variant, deleted variants and
+``getAvailableVariants`` ignores the master variant and
 returns only variants which ``availableOn`` property is set to a past time.
 
 .. note::

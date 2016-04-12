@@ -464,20 +464,6 @@ class Product implements ProductInterface
     /**
      * {@inheritdoc}
      */
-    public function setDeletedAt(\DateTime $deletedAt = null)
-    {
-        if (null === $deletedAt) {
-            foreach ($this->variants as $variant) {
-                $variant->setDeletedAt(null);
-            }
-        }
-
-        $this->deletedAt = $deletedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getAssociations()
     {
         return $this->associations;

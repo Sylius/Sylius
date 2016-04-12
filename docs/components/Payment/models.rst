@@ -29,8 +29,6 @@ Every payment is represented by a **Payment** instance and has the following pro
 +------------+---------------------------------------------+
 | updatedAt  | Date of the last update                     |
 +------------+---------------------------------------------+
-| deletedAt  | Date of deletion                            |
-+------------+---------------------------------------------+
 
 .. note::
    This model implements the :ref:`component_payment_model_payment-interface`

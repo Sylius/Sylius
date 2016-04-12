@@ -38,8 +38,6 @@ By default it contains the following properties:
 +-----------------+-----------------------------------------------------------------------------+
 | updatedAt       | Product's date of update                                                    |
 +-----------------+-----------------------------------------------------------------------------+
-| deletedAt       | Product's date of deletion                                                  |
-+-----------------+-----------------------------------------------------------------------------+
 
 .. note::
    This model extends the :ref:`component_translation_model_abstract-translatable`

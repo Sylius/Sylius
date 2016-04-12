@@ -43,8 +43,6 @@ The promotion is represented by a **Promotion** instance. It has the following p
 +----------------+-------------------------------------------------------------+
 | updatedAt      | Date of update                                              |
 +----------------+-------------------------------------------------------------+
-| deletedAt      | Date of deletion                                            |
-+----------------+-------------------------------------------------------------+
 
 .. note::
 
@@ -76,8 +74,6 @@ The coupon is represented by a **Coupon** instance. It has the following propert
 | createdAt      | Date of creation                                  |
 +----------------+---------------------------------------------------+
 | updatedAt      | Date of update                                    |
-+----------------+---------------------------------------------------+
-| deletedAt      | Date of deletion                                  |
 +----------------+---------------------------------------------------+
 
 .. note::

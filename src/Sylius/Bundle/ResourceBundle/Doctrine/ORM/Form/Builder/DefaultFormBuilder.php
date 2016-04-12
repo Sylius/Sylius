@@ -56,7 +56,7 @@ class DefaultFormBuilder implements DefaultFormBuilderInterface
         foreach ($fields as $fieldName) {
             $options = [];
 
-            if (in_array($fieldName, ['createdAt', 'updatedAt', 'deletedAt'])) {
+            if (in_array($fieldName, ['createdAt', 'updatedAt'])) {
                 continue;
             }
 

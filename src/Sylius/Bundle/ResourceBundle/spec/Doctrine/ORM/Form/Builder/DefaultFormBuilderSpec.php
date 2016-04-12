@@ -188,7 +188,7 @@ class DefaultFormBuilderSpec extends ObjectBehavior
         $this->build($metadata, $formBuilder, []);
     }
 
-    function it_excludes_common_fields_like_createdAt_updatedAt_and_deletedAt(
+    function it_excludes_common_fields_like_createdAt_and_updatedAt(
         MetadataInterface $metadata,
         FormBuilderInterface $formBuilder,
         EntityManagerInterface $entityManager,
@@ -196,7 +196,7 @@ class DefaultFormBuilderSpec extends ObjectBehavior
     ) {
         $metadata->getClass('model')->willReturn('AppBundle\Entity\Book');
         $entityManager->getClassMetadata('AppBundle\Entity\Book')->willReturn($classMetadataInfo);
-        $classMetadataInfo->fieldNames = ['name', 'description', 'enabled', 'createdAt', 'updatedAt', 'deletedAt'];
+        $classMetadataInfo->fieldNames = ['name', 'description', 'enabled', 'createdAt', 'updatedAt'];
         $classMetadataInfo->isIdentifierNatural()->willReturn(true);
         $classMetadataInfo->getAssociationMappings()->willReturn([]);
 
@@ -205,14 +205,12 @@ class DefaultFormBuilderSpec extends ObjectBehavior
         $classMetadataInfo->getTypeOfField('enabled')->willReturn(Type::BOOLEAN);
         $classMetadataInfo->getTypeOfField('createdAt')->willReturn(Type::DATETIME);
         $classMetadataInfo->getTypeOfField('updatedAt')->willReturn(Type::DATETIME);
-        $classMetadataInfo->getTypeOfField('deletedAt')->willReturn(Type::DATETIME);
 
         $formBuilder->add('name', null, [])->shouldBeCalled();
         $formBuilder->add('description', null, [])->shouldBeCalled();
         $formBuilder->add('enabled', null, [])->shouldBeCalled();
         $formBuilder->add('createdAt', Argument::cetera())->shouldNotBeCalled();
         $formBuilder->add('updatedAt', Argument::cetera())->shouldNotBeCalled();
-        $formBuilder->add('deletedAt', Argument::cetera())->shouldNotBeCalled();
 
         $this->build($metadata, $formBuilder, []);
     }
