@@ -12,8 +12,8 @@ sylius:
         gd: GD
         help: 'ติดตั้ง และเปิดใช้งาน extension %extension%'
         iconv: Iconv
-        exif: ทางออก
-        fileinfo: แฟ้มข้อมูล
+        exif: Exif
+        fileinfo: Fileinfo
         icu: ICU
         intl: Intl
         json_encode: JSON

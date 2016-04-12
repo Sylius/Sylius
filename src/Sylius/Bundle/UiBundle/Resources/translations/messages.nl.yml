@@ -9,6 +9,7 @@ sylius:
             remember_me: Onthoud mijn gegevens
     ui:
         actions: Acties
+        cancel: Annuleren
         countries: Landen
         create: Creëer
         dashboard: Dashboard

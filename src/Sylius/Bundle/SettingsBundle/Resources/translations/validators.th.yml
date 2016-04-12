@@ -4,10 +4,10 @@
 sylius:
     parameter:
         namespace:
-            max_length: Namespace พารามิเตอร์ต้องไม่ยาวเกิน 255 อักขระ
-            min_length: Namespace พารามิเตอร์ต้องมีความยาวอย่างน้อย 2 อักขระ
+            max_length: Namespace พารามิเตอร์ต้องมีความยาวไม่เกิน 255 ตัวอักษร
+            min_length: Namespace พารามิเตอร์ต้องมีความยาวไม่น้อยกว่า 2 ตัวอักษร
             not_blank: กรุณาเลือก namespace สำหรับพารามิเตอร์นี้
         name:
-            max_length: Namespace พารามิเตอร์ต้องไม่ยาวเกิน 255 อักขระ.
-            min_length: Namespace พารามิเตอร์ต้องมีความยาวอย่างน้อย 2 อักขระ.
+            max_length: Namespace พารามิเตอร์ต้องมีความยาวไม่เกิน 255 ตัวอักษร
+            min_length: Namespace พารามิเตอร์ต้องมีความยาวไม่น้อยกว่า 2 ตัวอักษร
             not_blank: กรุณาใส่ชื่อสำหรับพารามิเตอร์นี้

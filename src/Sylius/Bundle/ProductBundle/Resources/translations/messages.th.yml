@@ -6,18 +6,18 @@ sylius:
         product:
             name: ชื่อ
             description: คำอธิบาย
-            attributes: คุณลักษณะ
+            attributes: คุณลักษณะ (Attribute)
             options: ตัวเลือก
             meta_keywords: Meta Keywords
             meta_description: Meta Description
             taxons: หมวดหมู่
         product_variant:
             available_on: พร้อมจำหน่ายเมื่อ
-            available_until: มีไปจนถึง
+            available_until: สิ้นสุดการจำหน่าย
         product_archetype:
             name: ชื่อ
             parent: หมวดแม่
-            attributes: คุณลักษณะ
+            attributes: คุณลักษณะ (Attribute)
             options: ตัวเลือก
         association_type:
             name: ชื่อ

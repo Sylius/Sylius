@@ -7,7 +7,7 @@ sylius:
             add_product_configuration:
                 price: ราคาต่อหน่วย
                 quantity: จำนวน
-                variant: ตัวแปร
+                variant: Variant
             customer_group: กลุ่มลูกค้า
         block:
             body: Body
@@ -36,7 +36,7 @@ sylius:
             shipping_methods: วิธีการจัดส่ง
             payment_methods: วิธีการชำระเงิน
             theme: ธีม
-            hostname: ชื่อโฮสต์
+            hostname: Hostname
         image:
             file: รูปภาพ
         locale:
@@ -76,6 +76,7 @@ sylius:
                     Tracking code (for example: รหัส Google Analytics
             taxation:
                 default_tax_zone: เขตภาษีเริ่มต้น
+                default_tax_calculation_strategy: กลยุทธ์การคำนวณภาษีเริ่มต้น
             security:
                 enabled: เปิดใช้งานแล้ว?
         shipment_filter:
@@ -115,7 +116,7 @@ sylius:
             images: ภาพ
             on_hand: จำนวนสินค้าปัจจุบัน
             price: ราคา
-            original_price: ราคาเริ่มต้น
+            original_price: ราคาทุน
             sku: SKU
             weight: น้ำหนัก
             width: ความกว้าง

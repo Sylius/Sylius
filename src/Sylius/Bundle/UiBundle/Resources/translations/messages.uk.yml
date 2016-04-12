@@ -8,6 +8,7 @@ sylius:
             password: Пароль
     ui:
         actions: Дії
+        cancel: Відмінити
         countries: Країни
         create: Створити
         dashboard: Панель керування

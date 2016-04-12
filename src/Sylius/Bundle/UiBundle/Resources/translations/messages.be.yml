@@ -8,6 +8,7 @@ sylius:
             password: Пароль
     ui:
         actions: Дзеянні
+        cancel: Адмяніць
         countries: Краіны
         create: Стварыць
         dashboard: Прыборная панэль

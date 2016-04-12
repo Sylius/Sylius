@@ -9,7 +9,7 @@ sylius:
             not_blank: Bitte geben Sie Ihre Stadt an.
         country:
             not_blank: Bitte wählen Sie Ihr Land aus.
-            disabled: Gewählten Landes ist deaktiviert. Bitte wählen Sie ein anderes.
+            disabled: Das gewählte Land ist deaktiviert. Bitte wählen Sie ein anderes.
         first_name:
             max_length: Der Vorname darf nicht länger als 255 Zeichen sein|Der Vorname darf nicht länger als 255 Zeichen sein.
             min_length: Der Vorname muss mindestens 2 Zeichen lang sein|Der Vorname muss mindestens 2 Zeichen lang sein.
@@ -57,4 +57,4 @@ sylius:
     zone_member:
         code:
             not_blank: Bitte wählen Sie ein Versandgebiet aus.
-        unique: Das gewählte Versandgebiet is bereits in diesem Versandgebiet.
+        unique: Der gewählte Bereich ist bereits in diesem Versandgebiet.

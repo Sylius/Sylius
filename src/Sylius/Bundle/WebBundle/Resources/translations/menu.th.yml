@@ -5,15 +5,15 @@ sylius:
     backend:
         menu:
             main:
-                api_clients: ลูกค้า API
+                api_clients: API clients
                 archetypes: ต้นแบบสินค้า
                 association_types: ชนิดความสัมพันธ์ของสินค้า
                 assortment: จัดประเภท
-                attributes: กำหนดค่าคุณลักษณะ
+                attributes: กำหนดค่าคุณลักษณะ (Attribute)
                 blocks: บล็อก
-                channels: ช่องทาง
-                configuration: ตั้งค่าคอนฟิก
-                contact_requests: ร้องขอการติดต่อ
+                channels: ช่องทางการจัดจำหน่าย
+                configuration: การกำหนดค่า (Configuration)
+                contact_requests: Contact Requests
                 contact_topics: กำหนดหัวข้อ
                 content: เนื้อหา
                 countries: ประเทศ
@@ -48,20 +48,20 @@ sylius:
                 shipping_methods: วิธีการจัดส่ง
                 slideshow: ภาพสไลด์
                 stockables: สินค้าคงคลัง
-                support: สนับสนุน
+                support: Support
                 tax_categories: ประเภทภาษี
                 tax_rates: อัตราภาษี
                 taxation_settings: การตั้งค่าภาษี
                 taxons: การจัดประเภท
                 zones: โซน
             sidebar:
-                api_clients: ลูกค้า API
+                api_clients: API clients
                 archetypes: ต้นแบบสินค้า
                 association_types: ชนิดความสัมพันธ์ของสินค้า
                 assortment: จัดประเภท
-                attributes: กำหนดค่าคุณลักษณะ
+                attributes: กำหนดค่าคุณลักษณะ (Attribute)
                 blocks: บล็อก
-                channels: ช่องทาง
+                channels: ช่องทางการจัดจำหน่าย
                 configuration: ตั้งค่าคอนฟิก
                 contact_requests: การร้องขอ
                 contact_topics: กำหนดหัวข้อ

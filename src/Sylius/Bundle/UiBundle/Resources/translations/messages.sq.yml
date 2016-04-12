@@ -12,6 +12,7 @@ sylius:
         administration_panel_login: Login i panelit te administrimit
         an_error_occurred: Ndodhi një gabim
         are_your_sure_you_want_to_perform_this_action: Jeni i sigurte se deshironi te egzekutoni kete veprim?
+        cancel: Fshi
         clear_filters: Hiq filtrin
         confirm_your_action: Konfirmoni veprimin tuaj
         contains: Përmban

@@ -8,6 +8,7 @@ sylius:
             password: 密码
     ui:
         are_your_sure_you_want_to_perform_this_action: 是否确实执行此操作？
+        cancel: '取消 '
         confirm_your_action: 请确认你的行为
         countries: 国家
         create: 创建

@@ -14,14 +14,17 @@ sylius:
             street: Strasse / Nr.
             province: Kanton
         country:
+            add_province: Bundesland/Kanton hinzufügen
             name: Name
             provinces: Kantone
             select: Auswählen
             enabled: Aktiviert
         province:
             name: Name
+            abbreviation: Abkürzung
             select: Auswählen
         zone:
+            add_member: Mitglied hinzufügen
             members: Mitglieder
             name: Name
             type: Typ

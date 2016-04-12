@@ -9,9 +9,10 @@ sylius:
             remember_me: จำฉันไว้
     ui:
         actions: ดำเนินการ
-        administration_panel_login: เข้าสู่ระบบแผงบริหาร
+        administration_panel_login: เข้าสู่ระบบ Admin
         an_error_occurred: เกิดข้อผิดพลาด
         are_your_sure_you_want_to_perform_this_action: คุณแน่ใจหรือคุณต้องการดำเนินการนี้หรือไม่
+        cancel: ยกเลิก
         clear_filters: ล้างตัวกรอง
         confirm_your_action: ยืนยันการกระทำของคุณ
         contains: ประกอบด้วย
@@ -45,6 +46,7 @@ sylius:
         not_contains: ไม่ประกอบด้วย
         not_empty: ไม่ว่างเปล่า
         not_in: ไม่ได้อยู่ใน
+        or: หรือ
         powered_by: |
             ขับเคลื่อน
             โดย

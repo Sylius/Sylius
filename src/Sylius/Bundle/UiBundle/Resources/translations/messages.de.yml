@@ -12,6 +12,7 @@ sylius:
         administration_panel_login: Administrations-Bereich Anmeldung
         an_error_occurred: Es ist ein Fehler aufgetreten
         are_your_sure_you_want_to_perform_this_action: Möchten Sie diese Aktion sicher durchführen?
+        cancel: Abbrechen
         clear_filters: Filter löschen
         confirm_your_action: Aktion bestätigen
         contains: Enthält
@@ -45,6 +46,7 @@ sylius:
         not_contains: Enthält nicht
         not_empty: Nicht leer
         not_in: Nicht in
+        or: oder
         powered_by: Powered by
         save_changes: Änderungen speichern
         show: Anzeigen

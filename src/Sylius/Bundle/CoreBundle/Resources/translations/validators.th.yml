@@ -17,7 +17,7 @@ sylius:
             min: ราคาต้องไม่เป็นค่าลบ
             not_blank: กรุณาระบุราคา
         original_price:
-            min: ราคาเริ่มต้นต้องไม่เป็นค่าลบ
+            min: ราคาทุนต้องไม่เป็นค่าลบ
     product_translation:
         short_description:
             max: 'คำอธิบายสั้น ต้องมีความยาวไม่เกิน {{ limit }} ตัวอักษร'

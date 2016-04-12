@@ -9,6 +9,7 @@ sylius:
             remember_me: Recordarme
     ui:
         actions: Acciones
+        cancel: Cancelar
         countries: Países
         create: Crear
         dashboard: Panel general

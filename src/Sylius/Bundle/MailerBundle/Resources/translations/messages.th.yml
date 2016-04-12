@@ -10,4 +10,4 @@ sylius:
             sender_address: ที่อยู่ผู้ส่ง
             content: เนื้อหา
             template: แม่แบบ
-            no_template: ใช้แม่แบบกำหนดเอง
+            no_template: ใช้ Template แบบกำหนดเอง

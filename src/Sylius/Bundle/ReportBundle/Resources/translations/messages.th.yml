@@ -8,8 +8,8 @@ sylius:
             description: คำอธิบาย
             data_fetcher: ข้อมูล Fetcher
             renderer:
-                label: การทำให้
-                template: แม่แบบ
+                label: การแสดงผล
+                template: แม่แบบ (Template)
             chart:
                 type: ชนิด
             user_registration:

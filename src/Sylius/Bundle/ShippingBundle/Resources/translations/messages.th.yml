@@ -46,6 +46,6 @@ sylius:
             calculator: การคำนวณราคา
             category: หมวดหมู่
             category_requirement: ความต้องการสำหรับหมวดหมู่
-            configuration: ตั้งค่าคอนฟิก
+            configuration: การกำหนดค่า (Configuration)
             enabled: เปิดใช้งานแล้ว
             name: ชื่อ

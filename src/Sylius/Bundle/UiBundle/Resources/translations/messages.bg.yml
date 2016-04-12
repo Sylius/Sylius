@@ -6,6 +6,7 @@ sylius:
         login:
             username: Потребителско име
     ui:
+        cancel: Откажи
         countries: Страни
         create: Създай
         dashboard: Табло

@@ -9,6 +9,7 @@ sylius:
             remember_me: Pamatuj si mě
     ui:
         actions: Akce
+        cancel: Zrušit
         countries: Země
         create: Vytvořit
         dashboard: Nástěnka
