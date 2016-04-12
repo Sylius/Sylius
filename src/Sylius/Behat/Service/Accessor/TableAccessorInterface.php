@@ -37,4 +37,11 @@ interface TableAccessorInterface
      * @return NodeElement
      */
     public function getFieldFromRow(NodeElement $table, NodeElement $row, $field);
+
+    /**
+     * @param NodeElement $table
+     *
+     * @return int
+     */
+    public function countTableBodyRows(NodeElement $table);
 }
