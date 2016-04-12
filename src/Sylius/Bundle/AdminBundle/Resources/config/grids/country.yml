@@ -4,7 +4,7 @@ sylius_grid:
             driver:
                 name: doctrine/orm
                 options:
-                    class: %sylius.model.country.class%
+                    class: "%sylius.model.country.class%"
             sorting:
                 code: asc
             fields:
