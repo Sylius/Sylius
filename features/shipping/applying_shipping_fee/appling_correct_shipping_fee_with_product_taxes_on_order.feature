@@ -1,4 +1,4 @@
-@cart
+@applying_shipping_fee
 Feature: Apply correct shipping fee with product taxes on order
     In order to pay proper amount for shipping and product taxes
     As a Customer

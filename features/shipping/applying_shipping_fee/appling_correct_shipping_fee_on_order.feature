@@ -1,4 +1,4 @@
-@cart
+@applying_shipping_fee
 Feature: Apply correct shipping fee on order
     In order to decide on amount paid for shipment
     As a Customer
