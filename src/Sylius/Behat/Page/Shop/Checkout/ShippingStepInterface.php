@@ -11,8 +11,6 @@
 
 namespace Sylius\Behat\Page\Shop\Checkout;
 
-use Behat\Mink\Exception\ElementNotFoundException as BehatElementNotFoundException;
-use Sylius\Behat\Page\ElementNotFoundException;
 use Sylius\Behat\Page\PageInterface;
 
 /**
@@ -22,14 +20,8 @@ interface ShippingStepInterface extends PageInterface
 {
     /**
      * @param string $shippingMethod
-     *
-     * @throws ElementNotFoundException
-     * @throws BehatElementNotFoundException
      */
     public function selectShippingMethod($shippingMethod);
 
-    /**
-     * @throws BehatElementNotFoundException
-     */
     public function continueCheckout();
 }

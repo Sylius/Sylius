@@ -11,7 +11,6 @@
 
 namespace Sylius\Behat\Page\Admin\Product;
 
-use Sylius\Behat\Page\ElementNotFoundException;
 use Sylius\Behat\Page\PageInterface;
 
 /**
@@ -19,8 +18,5 @@ use Sylius\Behat\Page\PageInterface;
  */
 interface ShowPageInterface extends PageInterface
 {
-    /**
-     * @throws ElementNotFoundException
-     */
     public function deleteProduct();
 }

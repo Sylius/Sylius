@@ -11,7 +11,6 @@
 
 namespace Sylius\Behat\Page\Shop\User;
 
-use Sylius\Behat\Page\ElementNotFoundException;
 use Sylius\Behat\Page\PageInterface;
 
 /**
@@ -21,8 +20,6 @@ interface RegisterPageInterface extends PageInterface
 {
     /**
      * @param string $email
-     *
-     * @throws ElementNotFoundException
      */
     public function register($email);
 

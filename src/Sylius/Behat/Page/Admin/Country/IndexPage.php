@@ -12,7 +12,6 @@
 namespace Sylius\Behat\Page\Admin\Country;
 
 use Sylius\Behat\Page\Admin\Crud\IndexPage as BaseIndexPage;
-use Sylius\Behat\Page\ElementNotFoundException;
 use Sylius\Component\Addressing\Model\CountryInterface;
 
 /**
@@ -41,8 +40,6 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
      * @param string $status
      *
      * @return bool
-     *
-     * @throws ElementNotFoundException
      */
     private function checkCountryStatus(CountryInterface $country, $status)
     {

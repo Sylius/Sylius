@@ -11,8 +11,8 @@
 
 namespace Sylius\Behat\Page\Admin\Crud;
 
+use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Session;
-use Sylius\Behat\Page\ElementNotFoundException;
 use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Symfony\Component\Routing\RouterInterface;
@@ -22,13 +22,6 @@ use Symfony\Component\Routing\RouterInterface;
  */
 class IndexPage extends SymfonyPage implements IndexPageInterface
 {
-    /**
-     * @var array
-     */
-    protected $elements = [
-        'table' => '.table',
-    ];
-
     /**
      * @var TableAccessorInterface
      */
@@ -111,5 +104,15 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     protected function getTableAccessor()
     {
         return $this->tableAccessor;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getDefinedElements()
+    {
+        return array_merge(parent::getDefinedElements(), [
+            'table' => '.table',
+        ]);
     }
 }

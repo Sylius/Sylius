@@ -56,9 +56,9 @@ class PaypalExpressCheckoutPage extends Page implements PaypalExpressCheckoutPag
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
-    protected function getPath()
+    protected function getUrl(array $urlParameters = [])
     {
         return 'https://www.sandbox.paypal.com';
     }

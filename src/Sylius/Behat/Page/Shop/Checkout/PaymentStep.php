@@ -11,8 +11,8 @@
 
 namespace Sylius\Behat\Page\Shop\Checkout;
 
-use Sylius\Behat\Page\ElementNotFoundException;
 use Sylius\Behat\Page\SymfonyPage;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -26,9 +26,7 @@ class PaymentStep extends SymfonyPage implements PaymentStepInterface
     {
         $radio = $this->getDocument()->findField($paymentMethod);
 
-        if (null === $radio) {
-            throw new ElementNotFoundException('Payment method not found or it is not visible');
-        }
+        Assert::notNull($radio, sprintf('Could not find "%s" payment method', $paymentMethod));
 
         $this->getDocument()->fillField($radio->getAttribute('name'), $radio->getAttribute('value'));
     }

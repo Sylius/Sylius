@@ -19,13 +19,6 @@ use Sylius\Behat\Page\SymfonyPage;
 class ThankYouPage extends SymfonyPage implements ThankYouPageInterface
 {
     /**
-     * @var array
-     */
-    protected $elements = [
-        'thank you message' => '#thanks',
-    ];
-
-    /**
      * {@inheritdoc}
      */
     public function hasThankYouMessageFor($name)
@@ -51,5 +44,15 @@ class ThankYouPage extends SymfonyPage implements ThankYouPageInterface
     protected function getRouteName()
     {
         return 'sylius_checkout_thank_you';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getDefinedElements()
+    {
+        return array_merge(parent::getDefinedElements(), [
+            'thank you message' => '#thanks',
+        ]);
     }
 }

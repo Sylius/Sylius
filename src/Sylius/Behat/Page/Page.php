@@ -15,6 +15,7 @@ use Behat\Mink\Driver\DriverInterface;
 use Behat\Mink\Element\DocumentElement;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\DriverException;
+use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Selector\SelectorsHandler;
 use Behat\Mink\Session;
 
@@ -23,11 +24,6 @@ use Behat\Mink\Session;
  */
 abstract class Page implements PageInterface
 {
-    /**
-     * @var array
-     */
-    protected $elements = [];
-
     /**
      * @var Session
      */
@@ -73,11 +69,10 @@ abstract class Page implements PageInterface
     /**
      * {@inheritdoc}
      */
-    public function verify(array $urlParameters)
+    public function verify(array $urlParameters = [])
     {
-        $this->verifyResponse();
+        $this->verifyStatusCode();
         $this->verifyUrl($urlParameters);
-        $this->verifyPage();
     }
 
     /**
@@ -95,76 +90,45 @@ abstract class Page implements PageInterface
     }
 
     /**
-     * @return string
-     */
-    abstract protected function getPath();
-
-    /**
-     * @return string
-     */
-    protected function getName()
-    {
-        return preg_replace('/^.*\\\(.*?)$/', '$1', get_called_class());
-    }
-
-    /**
      * @param array $urlParameters
      *
      * @return string
      */
-    protected function getUrl(array $urlParameters = [])
-    {
-        return $this->unmaskUrl($urlParameters);
-    }
+    abstract protected function getUrl(array $urlParameters = []);
 
     /**
      * @throws UnexpectedPageException
      */
-    protected function verifyResponse()
+    protected function verifyStatusCode()
     {
         try {
             $statusCode = $this->getDriver()->getStatusCode();
-
-            if ($this->isErrorResponse($statusCode)) {
-                $currentUrl = $this->getDriver()->getCurrentUrl();
-                $message = sprintf('Could not open the page: "%s". Received an error status code: %s', $currentUrl, $statusCode);
-
-                throw new UnexpectedPageException($message);
-            }
         } catch (DriverException $exception) {
-            // ignore drivers which cannot check the response status code
+            return; // Ignore drivers which cannot check the response status code
         }
+
+        if ($statusCode >= 200 && $statusCode <= 299) {
+            return;
+        }
+
+        $currentUrl = $this->getDriver()->getCurrentUrl();
+        $message = sprintf('Could not open the page: "%s". Received an error status code: %s', $currentUrl, $statusCode);
+
+        throw new UnexpectedPageException($message);
     }
 
     /**
      * Overload to verify if the current url matches the expected one. Throw an exception otherwise.
      *
      * @param array $urlParameters
+     *
+     * @throws UnexpectedPageException
      */
     protected function verifyUrl(array $urlParameters = [])
     {
         if ($this->getDriver()->getCurrentUrl() !== $this->getUrl($urlParameters)) {
             throw new UnexpectedPageException(sprintf('Expected to be on "%s" but found "%s" instead', $this->getUrl($urlParameters), $this->getDriver()->getCurrentUrl()));
         }
-    }
-
-    /**
-     * Overload to verify if we're on an expected page. Throw an exception otherwise.
-     *
-     * @throws UnexpectedPageException
-     */
-    protected function verifyPage()
-    {
-    }
-
-    /**
-     * @param int $statusCode
-     *
-     * @return bool
-     */
-    protected function isErrorResponse($statusCode)
-    {
-        return 400 <= $statusCode && $statusCode < 600;
     }
 
     /**
@@ -178,16 +142,36 @@ abstract class Page implements PageInterface
     }
 
     /**
+     * Defines elements by returning an array with items being:
+     *  - :elementName => :cssLocator
+     *  - :elementName => [:selectorType => :locator]
+     *
+     * @return array
+     */
+    protected function getDefinedElements()
+    {
+        return [];
+    }
+
+    /**
      * @param string $name
+     * @param array $parameters
      *
      * @return NodeElement
+     *
+     * @throws ElementNotFoundException
      */
-    public function getElement($name)
+    protected function getElement($name, array $parameters = [])
     {
-        $element = $this->createElement($name);
+        $element = $this->createElement($name, $parameters);
 
         if (!$this->getDocument()->has('xpath', $element->getXpath())) {
-            throw new ElementNotFoundException(sprintf('"%s" element is not present on the page', $name));
+            throw new ElementNotFoundException(
+                $this->getSession(),
+                sprintf('Element named "%s" with parameters %s', $name, implode(', ', $parameters)),
+                'xpath',
+                $element->getXpath()
+            );
         }
 
         return $element;
@@ -195,29 +179,13 @@ abstract class Page implements PageInterface
 
     /**
      * @param string $name
+     * @param array $parameters
      *
      * @return bool
      */
-    protected function hasElement($name)
+    protected function hasElement($name, array $parameters = [])
     {
-        return $this->getDocument()->has('xpath', $this->createElement($name)->getXpath());
-    }
-
-    /**
-     * @param string $name
-     *
-     * @return NodeElement
-     */
-    protected function createElement($name)
-    {
-        if (isset($this->elements[$name])) {
-            return new NodeElement(
-                $this->getSelectorAsXpath($this->elements[$name], $this->session->getSelectorsHandler()),
-                $this->session
-            );
-        }
-
-        throw new \InvalidArgumentException();
+        return $this->getDocument()->has('xpath', $this->createElement($name, $parameters)->getXpath());
     }
 
     /**
@@ -249,19 +217,29 @@ abstract class Page implements PageInterface
     }
 
     /**
-     * @param array $urlParameters
+     * @param string $name
+     * @param array $parameters
      *
-     * @return string
+     * @return NodeElement
      */
-    private function unmaskUrl(array $urlParameters)
+    private function createElement($name, array $parameters = [])
     {
-        $url = $this->getPath();
+        $definedElements = $this->getDefinedElements();
 
-        foreach ($urlParameters as $parameter => $value) {
-            $url = str_replace(sprintf('{%s}', $parameter), $value, $url);
+        if (!isset($definedElements[$name])) {
+            throw new \InvalidArgumentException(sprintf(
+                'Could not find a defined element with name "%s". The defined ones are: %s.',
+                $name,
+                implode(', ', array_keys($definedElements))
+            ));
         }
 
-        return $url;
+        $elementSelector = strtr($definedElements[$name], $parameters);
+
+        return new NodeElement(
+            $this->getSelectorAsXpath($elementSelector, $this->session->getSelectorsHandler()),
+            $this->session
+        );
     }
 
     /**

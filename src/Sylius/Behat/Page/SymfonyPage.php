@@ -13,6 +13,9 @@ namespace Sylius\Behat\Page;
 
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
@@ -38,36 +41,26 @@ abstract class SymfonyPage extends Page
     }
 
     /**
+     * @return string
+     */
+    abstract protected function getRouteName();
+
+    /**
      * @param array $urlParameters
      *
      * @return string
      */
     protected function getUrl(array $urlParameters = [])
     {
-        if (null === $this->getRouteName()) {
-            throw new \RuntimeException('You need to provide route name, null given');
-        }
+        $path = $this->router->generate($this->getRouteName(), $urlParameters);
 
-        $url = $this->router->generate($this->getRouteName(), $urlParameters);
-        $url = $this->makePathAbsoluteWithBehatParameter($url);
-
-        return $url;
-    }
-
-    /**
-     * @param string $path
-     *
-     * @return string
-     */
-    protected function makePathAbsoluteWithBehatParameter($path)
-    {
-        $baseUrl = rtrim($this->getParameter('base_url'), '/').'/';
-
-        return 0 !== strpos($path, 'http') ? $baseUrl.ltrim($path, '/') : $path;
+        return $this->makePathAbsolute($path);
     }
 
     /**
      * @param NodeElement $modalContainer
+     *
+     * @todo it really shouldn't be here :)
      */
     protected function waitForModalToAppear(NodeElement $modalContainer)
     {
@@ -77,16 +70,14 @@ abstract class SymfonyPage extends Page
     }
 
     /**
-     * {@inheritdoc}
+     * @param string $path
      *
-     * Not used by Symfony page.
-     */
-    protected function getPath()
-    {
-    }
-
-    /**
      * @return string
      */
-    abstract protected function getRouteName();
+    final protected function makePathAbsolute($path)
+    {
+        $baseUrl = rtrim($this->getParameter('base_url'), '/').'/';
+
+        return 0 !== strpos($path, 'http') ? $baseUrl.ltrim($path, '/') : $path;
+    }
 }

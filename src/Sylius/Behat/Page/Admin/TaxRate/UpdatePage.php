@@ -22,22 +22,25 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     use ChecksCodeImmutability;
 
     /**
-     * @var array
-     */
-    protected $elements = [
-        'code' => '#sylius_tax_rate_code',
-        'name' => '#sylius_tax_rate_name',
-        'category' => '#sylius_tax_rate_category',
-        'zone' => '#sylius_tax_rate_zone',
-        'amount' => '#sylius_tax_rate_amount',
-        'calculator' => '#sylius_tax_rate_calculator',
-    ];
-
-    /**
      * {@inheritDoc}
      */
     protected function getCodeElement()
     {
         return $this->getElement('code');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getDefinedElements()
+    {
+        return array_merge(parent::getDefinedElements(), [
+            'code' => '#sylius_tax_rate_code',
+            'name' => '#sylius_tax_rate_name',
+            'category' => '#sylius_tax_rate_category',
+            'zone' => '#sylius_tax_rate_zone',
+            'amount' => '#sylius_tax_rate_amount',
+            'calculator' => '#sylius_tax_rate_calculator',
+        ]);
     }
 }

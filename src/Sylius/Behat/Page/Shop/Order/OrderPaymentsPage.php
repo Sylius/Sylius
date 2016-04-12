@@ -23,13 +23,6 @@ use Symfony\Component\Routing\RouterInterface;
 class OrderPaymentsPage extends SymfonyPage implements OrderPaymentsPageInterface
 {
     /**
-     * @var array
-     */
-    protected $elements = [
-        'table' => '.table'
-    ];
-
-    /**
      * @var TableAccessorInterface
      */
     private $tableAccessor;
@@ -101,5 +94,15 @@ class OrderPaymentsPage extends SymfonyPage implements OrderPaymentsPageInterfac
     protected function getRouteName()
     {
         return 'sylius_order_payment_index';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getDefinedElements()
+    {
+        return array_merge(parent::getDefinedElements(), [
+            'table' => '.table',
+        ]);
     }
 }

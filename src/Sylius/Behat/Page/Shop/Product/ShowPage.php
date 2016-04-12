@@ -13,6 +13,7 @@ namespace Sylius\Behat\Page\Shop\Product;
 
 use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Component\Core\Model\ProductInterface;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -54,6 +55,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
      */
     protected function getRouteName()
     {
+        // Intentionally left blank, overriding getUrl method not to use it
     }
 
     /**
@@ -68,8 +70,8 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             );
         }
 
-        $url = $this->router->generate($urlParameters['product'], []);
+        $path = $this->router->generate($urlParameters['product']);
 
-        return $this->makePathAbsoluteWithBehatParameter($url);
+        return $this->makePathAbsolute($path);
     }
 }
