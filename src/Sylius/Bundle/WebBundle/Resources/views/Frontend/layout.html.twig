@@ -66,6 +66,7 @@
         {% endblock %}
 
         {% block flashes %}
+            <div id="flashes-container">
             {% for type in ['success', 'error', 'notice'] %}
                 {% for flash in app.session.flashbag.get(type) %}
                     <div class="alert alert-{{ type == 'error' ? 'danger' : type == 'notice' ? 'warning' : type }}">
@@ -74,6 +75,7 @@
                     </div>
                 {% endfor %}
             {% endfor %}
+            </div>
         {% endblock %}
 
         {% block main %}
