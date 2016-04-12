@@ -30,4 +30,4 @@ default:
                 - sylius.behat.context.ui.user
 
             filters:
-                tags: @promotion && @ui
+                tags: "@promotion && @ui"

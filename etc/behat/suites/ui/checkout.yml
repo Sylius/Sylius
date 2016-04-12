@@ -24,4 +24,4 @@ default:
                 - sylius.behat.context.ui.paypal
 
             filters:
-                tags: @checkout && @ui
+                tags: "@checkout && @ui"

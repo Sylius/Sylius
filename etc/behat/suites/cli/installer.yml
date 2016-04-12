@@ -10,4 +10,4 @@ default:
                 - sylius.behat.context.cli.installer
 
             filters:
-                tags: @installer && @cli
+                tags: "@installer && @cli"
