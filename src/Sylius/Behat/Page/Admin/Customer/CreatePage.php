@@ -53,9 +53,22 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function specifyPassword($password)
+    {
+        $this->getDocument()->fillField('Password', $password);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function chooseGender($gender)
     {
         $this->getDocument()->selectFieldOption('Gender', $gender);
+    }
+
+    public function selectCreateAccount()
+    {
+        $this->getDocument()->checkField('Create account?');
     }
 
     /**

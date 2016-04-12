@@ -39,7 +39,14 @@ interface CreatePageInterface extends BaseCreatePageInterface
     public function specifyBirthday($birthday);
 
     /**
+     * @param string $password
+     */
+    public function specifyPassword($password);
+
+    /**
      * @param string $gender
      */
     public function chooseGender($gender);
+
+    public function selectCreateAccount();
 }

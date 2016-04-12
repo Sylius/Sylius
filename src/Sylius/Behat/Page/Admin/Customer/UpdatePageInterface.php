@@ -54,4 +54,9 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
      * @return bool
      */
     public function changeEmail($email);
+
+    /**
+     * @return string
+     */
+    public function getPassword();
 }

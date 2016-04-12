@@ -75,6 +75,14 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function getPassword()
+    {
+        return $this->getElement('password');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getToggleableElement()
     {
         return $this->getElement('enabled');
@@ -89,7 +97,8 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'email' => '#sylius_customer_email',
             'first name' => '#sylius_customer_firstName',
             'last name' => '#sylius_customer_lastName',
-            'enabled' => '#sylius_customer_user_enabled'
+            'enabled' => '#sylius_customer_user_enabled',
+            'password' => '#sylius_customer_user_password',
         ]);
     }
 }

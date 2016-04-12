@@ -66,6 +66,7 @@ final class ManagingCustomersContext implements Context
 
     /**
      * @Given I want to create a new customer
+     * @Given I want to create a new customer account
      */
     public function iWantToCreateANewCustomer()
     {
@@ -375,5 +376,32 @@ final class ManagingCustomersContext implements Context
             $this->indexPage->getCustomerAccountStatus($customer),
             'Customer account should be disabled, but it does not.'
         );
+    }
+
+    /**
+     * @When I specify its password as :password
+     */
+    public function iSpecifyItsPasswordAs($password)
+    {
+        $this->createPage->specifyPassword($password);
+    }
+
+    /**
+     * @Then the customer account :customer with password should appear in the registry
+     */
+    public function theCustomerAccountWithPasswordShouldAppearInTheRegistry(CustomerInterface $customer)
+    {
+        Assert::notNull(
+            $customer->getUser()->getPassword(),
+            sprintf('Customer should have password, but it does not.')
+        );
+    }
+
+    /**
+     * @When I choose create account option
+     */
+    public function iChooseCreateAccountOption()
+    {
+        $this->createPage->selectCreateAccount();
     }
 }
