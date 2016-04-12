@@ -136,6 +136,7 @@ class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
                 ->arrayNode('templates')
+                    ->useAttributeAsKey('name')
                     ->prototype('scalar')->end()
                 ->end()
             ->end()
