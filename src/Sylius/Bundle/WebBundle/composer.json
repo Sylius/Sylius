@@ -22,7 +22,7 @@
     "require": {
         "php": "^5.5.9|^7.0",
 
-        "jms/translation-bundle": "1.1.*",
+        "jms/translation-bundle": "^1.1",
         "knplabs/knp-menu-bundle": "1.1.*",
         "knplabs/knp-snappy-bundle": "^1.0",
         "liip/imagine-bundle": "~1.0",

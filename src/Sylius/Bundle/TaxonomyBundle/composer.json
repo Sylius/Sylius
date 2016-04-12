@@ -22,7 +22,7 @@
     "require": {
         "php": "^5.5.9|^7.0",
 
-        "jms/translation-bundle": "1.1.*",
+        "jms/translation-bundle": "^1.1",
         "stof/doctrine-extensions-bundle": "~1.1",
         "sylius/taxonomy": "^0.18",
         "sylius/resource-bundle": "^0.18",
