@@ -40,7 +40,7 @@ class TotalOfItemsFromTaxonConfigurationType extends AbstractType
     {
         $builder
             ->add('taxon', 'sylius_entity_to_identifier', [
-                'label' => 'sylius.form.rule.total_of_items_from_taxon_configuration.taxon',
+                'label' => 'sylius.form.promotion_rule.total_of_items_from_taxon.taxon',
                 'class' => $this->taxonRepository->getClassName(),
                 'query_builder' => function () {
                     return $this->taxonRepository->getFormQueryBuilder();
@@ -48,7 +48,7 @@ class TotalOfItemsFromTaxonConfigurationType extends AbstractType
                 'identifier' => 'code',
             ])
             ->add('amount', 'sylius_money', [
-                'label' => 'sylius.form.rule.total_of_items_from_taxon_configuration.amount',
+                'label' => 'sylius.form.promotion_rule.total_of_items_from_taxon.amount',
             ])
         ;
     }

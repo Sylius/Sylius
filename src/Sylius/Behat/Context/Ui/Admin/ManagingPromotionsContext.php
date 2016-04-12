@@ -12,8 +12,8 @@
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Promotion\CreatePageInterface;
-use Sylius\Behat\Page\Admin\Promotion\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Promotion\UpdatePageInterface;
 use Sylius\Behat\Service\CurrentPageResolverInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
@@ -126,8 +126,8 @@ final class ManagingPromotionsContext implements Context
     public function iAddTheContainsTaxonRuleConfiguredWith($count, $taxonName)
     {
         $this->createPage->addRule('Contains taxon');
-        $this->createPage->selectRuleOption('taxon', $taxonName);
-        $this->createPage->fillRuleOption('count', $count);
+        $this->createPage->selectRuleOption('Taxon', $taxonName);
+        $this->createPage->fillRuleOption('Count', $count);
     }
 
     /**
@@ -137,10 +137,10 @@ final class ManagingPromotionsContext implements Context
     public function iAddTheTaxonRuleConfiguredWith($firstTaxon, $secondTaxon = null)
     {
         $this->createPage->addRule('Taxon');
-        $this->createPage->selectRuleOption('taxons', $firstTaxon, true);
+        $this->createPage->selectRuleOption('Taxons', $firstTaxon, true);
 
         if (null !== $secondTaxon) {
-            $this->createPage->selectRuleOption('taxons', $secondTaxon, true);
+            $this->createPage->selectRuleOption('Taxons', $secondTaxon, true);
         }
     }
 
@@ -150,8 +150,8 @@ final class ManagingPromotionsContext implements Context
     public function iAddTheRuleConfiguredWith($count, $taxonName)
     {
         $this->createPage->addRule('Total of items from taxon');
-        $this->createPage->selectRuleOption('taxon', $taxonName);
-        $this->createPage->fillRuleOption('amount', $count);
+        $this->createPage->selectRuleOption('Taxon', $taxonName);
+        $this->createPage->fillRuleOption('Amount', $count);
     }
 
     /**
@@ -195,15 +195,15 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @Then there should still be only one promotion with :element :code
+     * @Then there should still be only one promotion with :element :value
      */
-    public function thereShouldStillBeOnlyOnePromotionWith($element, $code)
+    public function thereShouldStillBeOnlyOnePromotionWith($element, $value)
     {
         $this->indexPage->open();
 
         Assert::true(
-            $this->indexPage->isResourceOnPage([$element => $code]),
-            sprintf('Promotion with %s %s cannot be founded.', $element, $code)
+            $this->indexPage->isResourceOnPage([$element => $value]),
+            sprintf('Promotion with %s %s cannot be found.', $element, $value)
         );
     }
 

@@ -26,4 +26,4 @@ sylius_admin_tax_rate:
     resource: "@SyliusAdminBundle/Resources/config/routing/tax_rate.yml"
 
 sylius_admin_promotion:
-    resource: @SyliusAdminBundle/Resources/config/routing/promotion.yml
+    resource: "@SyliusAdminBundle/Resources/config/routing/promotion.yml"

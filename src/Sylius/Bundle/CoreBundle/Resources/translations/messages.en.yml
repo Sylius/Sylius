@@ -128,13 +128,13 @@ sylius:
             type: Association type
         product_association_type:
             name: Name
-        rule:
-            contains_taxon_configuration:
+        promotion_rule:
+            contains_taxon:
                 taxon: Taxon
                 count: Count
-            taxon_configuration:
+            taxon:
                 taxons: Taxons
-            total_of_items_from_taxon_configuration:
+            total_of_items_from_taxon:
                 taxon: Taxon
                 amount: Amount
 

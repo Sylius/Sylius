@@ -11,6 +11,7 @@
 
 namespace Sylius\Behat\Page\Admin\Promotion;
 
+use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Behaviour\NamesIt;
 use Sylius\Behat\Behaviour\SpecifiesItsCode;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
@@ -23,14 +24,6 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     use NamesIt;
     use SpecifiesItsCode;
 
-    protected $elements = [
-        'code' => '#sylius_promotion_code',
-        'name' => '#sylius_promotion_name',
-        'rules' => '#sylius_promotion_rules',
-    ];
-
-    private $rulesCount = 0;
-
     /**
      * {@inheritdoc}
      */
@@ -38,9 +31,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     {
         $this->getDocument()->clickLink('Add rule');
 
-        $rules = $this->getElement('rules');
-
-        $rules->selectFieldOption('sylius_promotion_rules_'.$this->rulesCount.'_type', $ruleName);
+        $this->selectRuleOption('Type', $ruleName);
     }
 
     /**
@@ -48,15 +39,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      */
     public function selectRuleOption($option, $value, $multiple = false)
     {
-        $rules = $this->getElement('rules');
-
-        $rules
-            ->selectFieldOption(
-                'sylius_promotion_rules_'.$this->rulesCount.'_configuration_'.$option,
-                $value,
-                $multiple
-            )
-        ;
+        $this->getLastAddedRule()->find('named', array('select', $option))->selectOption($value, $multiple);
     }
 
     /**
@@ -64,8 +47,28 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      */
     public function fillRuleOption($option, $value)
     {
-        $rules = $this->getElement('rules');
+        $this->getLastAddedRule()->fillField($option, $value);
+    }
 
-        $rules->fillField('sylius_promotion_rules_'.$this->rulesCount.'_configuration_'.$option, $value);
+    /**
+     * {@inheritdoc}
+     */
+    protected function getDefinedElements()
+    {
+        return [
+            'code' => '#sylius_promotion_code',
+            'name' => '#sylius_promotion_name',
+            'rules' => '#sylius_promotion_rules',
+        ];
+    }
+
+    /**
+     * @return mixed
+     */
+    private function getLastAddedRule()
+    {
+        $rules = $this->getElement('rules')->findAll('css', 'div[data-form-collection="item"]');
+
+        return end($rules);
     }
 }

@@ -40,7 +40,7 @@ class TaxonConfigurationType extends AbstractType
     {
         $builder
             ->add('taxons', 'sylius_taxon_choice', [
-                'label' => 'sylius.form.rule.taxon_configuration.taxons',
+                'label' => 'sylius.form.promotion_rule.taxon.taxons',
                 'multiple' => true,
             ])
             ->addModelTransformer($this->taxonsToCodesTransformer)

@@ -1,8 +1,8 @@
 @managing_promotions
 Feature: Adding a new promotion
-    In order to give possibility to pay less for some goods
+    In order to sell more by creating discount incentives for customers
     As an Administrator
-    I want to add a new promotion to the registry
+    I want to add a new promotion
 
     Background:
         Given the store operates on a single channel in "France"

@@ -40,7 +40,7 @@ class ContainsTaxonConfigurationType extends AbstractType
     {
         $builder
             ->add('taxon', 'sylius_entity_to_identifier', [
-                'label' => 'sylius.form.rule.contains_taxon_configuration.taxon',
+                'label' => 'sylius.form.promotion_rule.contains_taxon.taxon',
                 'class' => $this->taxonRepository->getClassName(),
                 'query_builder' => function () {
                     return $this->taxonRepository->getFormQueryBuilder();
@@ -48,7 +48,7 @@ class ContainsTaxonConfigurationType extends AbstractType
                 'identifier' => 'code',
             ])
             ->add('count', 'integer', [
-                'label' => 'sylius.form.rule.contains_taxon_configuration.count',
+                'label' => 'sylius.form.promotion_rule.contains_taxon.count',
             ])
         ;
     }

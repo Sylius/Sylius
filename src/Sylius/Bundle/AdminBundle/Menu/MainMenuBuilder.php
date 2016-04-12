@@ -40,43 +40,59 @@ final class MainMenuBuilder extends AbstractAdminMenuBuilder
      */
     private function addConfigurationMenu(ItemInterface $menu)
     {
-        $child = $menu
+        $this->configureConfigurationSubMenu($menu);
+        $this->configureMarketingSubMenu($menu);
+    }
+
+    /**
+     * @param ItemInterface $menu
+     */
+    private function configureConfigurationSubMenu(ItemInterface $menu)
+    {
+        $configurationSubMenu = $menu
             ->addChild('configuration')
             ->setLabel('sylius.menu.admin.main.configuration.header')
         ;
 
-        $child
+        $configurationSubMenu
             ->addChild('tax_categories', ['route' => 'sylius_admin_tax_category_index'])
             ->setLabel('sylius.menu.admin.main.configuration.tax_categories')
             ->setLabelAttribute('icon', 'tags')
         ;
 
-        $child
+        $configurationSubMenu
             ->addChild('countries', ['route' => 'sylius_admin_country_index'])
             ->setLabel('sylius.menu.admin.main.configuration.countries')
             ->setLabelAttribute('icon', 'flag')
         ;
 
-        $child
+        $configurationSubMenu
             ->addChild('locale', ['route' => 'sylius_admin_locale_index'])
             ->setLabel('sylius.menu.admin.main.configuration.locales')
             ->setLabelAttribute('icon', 'translate')
         ;
 
-        $child
+        $configurationSubMenu
             ->addChild('tax_rates', ['route' => 'sylius_admin_tax_rate_index'])
             ->setLabel('sylius.menu.admin.main.configuration.tax_rates')
             ->setLabelAttribute('icon', 'dollar')
         ;
+    }
 
-        $child
-            ->addChild('promotions', ['route' => 'sylius_admin_promotion_index'])
-            ->setLabel('sylius.menu.admin.main.configuration.promotions')
-            ->setLabelAttribute('icon', 'in cart')
+    /**
+     * @param ItemInterface $menu
+     */
+    private function configureMarketingSubMenu(ItemInterface $menu)
+    {
+        $marketingSubMenu = $menu
+            ->addChild('marketing')
+            ->setLabel('sylius.menu.admin.main.marketing.header')
         ;
 
-        if (!$child->hasChildren()) {
-            $menu->removeChild('configuration');
-        }
+        $marketingSubMenu
+            ->addChild('promotions', ['route' => 'sylius_admin_promotion_index'])
+            ->setLabel('sylius.menu.admin.main.marketing.promotions')
+            ->setLabelAttribute('icon', 'in cart')
+        ;
     }
 }

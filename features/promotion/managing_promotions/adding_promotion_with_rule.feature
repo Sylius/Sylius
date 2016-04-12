@@ -38,4 +38,3 @@ Feature: Adding a new promotion with rule
         And I add it
         Then I should be notified that it has been successfully created
         And the promotion "100 Mugs promotion" should appear in the registry
-
