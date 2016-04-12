@@ -40,7 +40,8 @@ class EmailTemplateChoiceType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'choices' => array_flip($this->templates),
+            'choices' => $this->templates,
+            'choices_as_values' => true,
         ]);
     }
 
