@@ -74,7 +74,7 @@ class CheckoutProcessScenario implements ProcessScenarioInterface
     {
         $lastNewPayment = $this->getCurrentCart()->getLastPayment();
 
-        if (false !== $lastNewPayment) {
+        if (null !== $lastNewPayment) {
             return $lastNewPayment->getId();
         }
 
