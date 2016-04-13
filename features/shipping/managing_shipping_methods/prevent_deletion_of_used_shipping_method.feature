@@ -1,4 +1,4 @@
-@shipping
+@managing_shipping_methods
 Feature: Prevent deletion of used shipping method
     In order to maintain proper order history
     As an Administrator
@@ -14,8 +14,8 @@ Feature: Prevent deletion of used shipping method
         And the customer bought single "PHP T-Shirt"
         And I am logged in as an administrator
 
-    @ui @javascript
+    @ui
     Scenario: Being unable to delete a shipping method which is in use
-        When I try to delete "DHL Express" shipping method
+        When I try to delete shipping method "DHL Express"
         Then I should be notified that it is in use
-        And it should not be removed
+        And this shipping method should still be in the registry

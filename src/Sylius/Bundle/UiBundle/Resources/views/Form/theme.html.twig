@@ -113,3 +113,18 @@
         </div>
     {% endspaceless %}
 {% endmacro %}
+
+{% block sylius_translations_row -%}
+    <h4 class="ui dividing header">{{ form_label(form) }}</h4>
+    <div class="ui grid">
+        {% for translation in form %}
+            <div class="four wide column">
+                {{ form_label(translation, translation.vars.name|sylius_locale_name) }}
+            </div>
+            <div class="twelve wide column">
+                {{ form_widget(translation) }}
+            </div>
+            {{- form_errors(form) -}}
+        {% endfor %}
+    </div>
+{%- endblock sylius_translations_row %}

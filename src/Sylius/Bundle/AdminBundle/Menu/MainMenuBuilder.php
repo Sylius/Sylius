@@ -73,6 +73,12 @@ final class MainMenuBuilder extends AbstractAdminMenuBuilder
         ;
 
         $configurationSubMenu
+            ->addChild('shipping_methods', ['route' => 'sylius_admin_shipping_method_index'])
+            ->setLabel('sylius.menu.admin.main.configuration.shipping_methods')
+            ->setLabelAttribute('icon', 'shipping')
+        ;
+
+        $configurationSubMenu
             ->addChild('tax_rates', ['route' => 'sylius_admin_tax_rate_index'])
             ->setLabel('sylius.menu.admin.main.configuration.tax_rates')
             ->setLabelAttribute('icon', 'dollar')

@@ -58,4 +58,6 @@ sylius:
             configuration: Configuration
             enabled: Enabled
             name: Name
+            tax_category: Tax category
+            translations: Translations
 

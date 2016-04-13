@@ -23,3 +23,5 @@ sylius:
         code:
             not_blank: 'Please enter shipping method code.'
             unique: 'The shipping method with given code already exists.'
+        zone:
+            not_blank: 'Please select shipping method zone.'

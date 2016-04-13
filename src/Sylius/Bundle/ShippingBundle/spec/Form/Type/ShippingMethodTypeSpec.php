@@ -84,6 +84,11 @@ class ShippingMethodTypeSpec extends ObjectBehavior
             ->willReturn($builder)
         ;
 
+        $builder
+            ->add('enabled', 'checkbox', Argument::any())
+            ->willReturn($builder)
+        ;
+
         $builder->setAttribute(Argument::any(), Argument::any())->shouldBeCalled();
 
         $this->buildForm($builder, []);

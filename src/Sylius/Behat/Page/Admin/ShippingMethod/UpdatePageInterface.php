@@ -11,17 +11,19 @@
 
 namespace Sylius\Behat\Page\Admin\ShippingMethod;
 
-use Sylius\Behat\Page\PageInterface;
+use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
 
 /**
- * @author Jan Góralski <jan.goralski@lakion.com>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-interface IndexPageInterface extends PageInterface
+interface UpdatePageInterface extends BaseUpdatePageInterface
 {
     /**
-     * @param string $name
-     *
      * @return bool
      */
-    public function isThereShippingMethodNamed($name);
+    public function isCodeDisabled();
+
+    public function enable();
+
+    public function disable();
 }
