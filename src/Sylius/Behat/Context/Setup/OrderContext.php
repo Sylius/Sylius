@@ -249,6 +249,7 @@ final class OrderContext implements Context
         $order->setNumber($number);
         $order->setChannel((null !== $channel) ? $channel : $this->sharedStorage->get('channel'));
         $order->setCurrency((null !== $currency) ? $currency : $this->sharedStorage->get('currency'));
+        $order->complete();
 
         return $order;
     }

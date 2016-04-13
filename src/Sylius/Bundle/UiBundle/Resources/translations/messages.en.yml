@@ -90,6 +90,7 @@ sylius:
         promotion_configuration: Promotion configuration
         promotion_information: Promotion information
         per_customer_usage_limit: Per customer usage limit
+        purchased_from: Purchased from
         save_changes: Save changes
         shipping_methods: Shipping methods
         show: Show

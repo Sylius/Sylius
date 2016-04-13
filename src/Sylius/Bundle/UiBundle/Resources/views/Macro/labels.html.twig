@@ -1,3 +1,7 @@
+{% macro default(text) %}
+    <span class="ui label">{{ text }}</span>
+{% endmacro %}
+
 {% macro status(status) %}
     {% import _self as labels %}
 

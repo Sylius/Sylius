@@ -7,6 +7,9 @@ sylius:
                     taxons: Taxons
                     options: Options
                     attributes: Attributes
+                sales:
+                    header: Sales
+                    orders: Orders
                 configuration:
                     channels: Channels
                     countries: Countries

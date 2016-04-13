@@ -282,7 +282,7 @@ sylius:
         customer_not_notified: 'Customer not notified'
         customer_notified: 'Customer notified'
         customer_orders: 'Customer orders'
-        customer_since: 'You are a customer since'
+        customer_since: 'Customer since'
         customers: Customers
         customers_list_of_all_customers_in_store: 'Customers <small>List of all customers in store</small>'
         customize_default_metadata: 'Customize default metadata'

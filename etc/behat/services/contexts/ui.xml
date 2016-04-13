@@ -29,6 +29,7 @@
         <parameter key="sylius.behat.context.ui.admin.managing_tax_rate.class">Sylius\Behat\Context\Ui\Admin\ManagingTaxRateContext</parameter>
         <parameter key="sylius.behat.context.ui.admin.managing_zones.class">Sylius\Behat\Context\Ui\Admin\ManagingZonesContext</parameter>
         <parameter key="sylius.behat.context.ui.admin.notification.class">Sylius\Behat\Context\Ui\Admin\NotificationContext</parameter>
+        <parameter key="sylius.behat.context.ui.admin.managing_orders.class">Sylius\Behat\Context\Ui\Admin\ManagingOrdersContext</parameter>
 
         <parameter key="sylius.behat.context.ui.cart.class">Sylius\Behat\Context\Ui\CartContext</parameter>
         <parameter key="sylius.behat.context.ui.channel.class">Sylius\Behat\Context\Ui\ChannelContext</parameter>
@@ -167,6 +168,13 @@
 
         <service id="sylius.behat.context.ui.admin.notification" class="%sylius.behat.context.ui.admin.notification.class%" scope="scenario">
             <argument type="service" id="sylius.behat.notification_checker" />
+            <tag name="sylius.behat.context" />
+        </service>
+
+        <service id="sylius.behat.context.ui.admin.managing_orders" class="%sylius.behat.context.ui.admin.managing_orders.class%" scope="scenario">
+            <argument type="service" id="sylius.behat.page.admin.order.index" />
+            <argument type="service" id="sylius.behat.page.admin.order.show" />
+            >>>>>>> a046337... [Admin] Add initial Orders section
             <tag name="sylius.behat.context" />
         </service>
 
