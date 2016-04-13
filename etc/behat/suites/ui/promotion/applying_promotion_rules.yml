@@ -1,0 +1,28 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+default:
+    suites:
+        ui_applying_promotion_rules:
+            contexts_as_services:
+                - sylius.behat.context.hook.doctrine_orm
+
+                - sylius.behat.context.transform.lexical
+                - sylius.behat.context.transform.product
+                - sylius.behat.context.transform.shared_storage
+                - sylius.behat.context.transform.taxon
+                - sylius.behat.context.transform.user
+
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.order
+                - sylius.behat.context.setup.payment
+                - sylius.behat.context.setup.product
+                - sylius.behat.context.setup.promotion
+                - sylius.behat.context.setup.security
+                - sylius.behat.context.setup.shipping
+                - sylius.behat.context.setup.taxonomy
+
+                - sylius.behat.context.ui.cart
+                - sylius.behat.context.ui.checkout
+            filters:
+                tags: "@applying_promotion_rules && @ui"

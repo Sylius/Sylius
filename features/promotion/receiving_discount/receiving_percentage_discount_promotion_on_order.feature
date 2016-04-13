@@ -1,4 +1,4 @@
-@promotion
+@receiving_discount
 Feature: Receiving percentage discount promotion on order
     In order to pay proper amount while buying promoted goods
     As a Customer

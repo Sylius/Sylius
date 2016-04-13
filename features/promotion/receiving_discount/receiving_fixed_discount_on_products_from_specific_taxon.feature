@@ -1,4 +1,4 @@
-@promotion
+@receiving_discount
 Feature: Receiving fixed discount on products from specific taxon
     In order to pay less while buying goods from promoted taxons
     As a Customer

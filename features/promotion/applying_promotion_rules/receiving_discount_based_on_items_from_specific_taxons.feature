@@ -1,4 +1,4 @@
-@promotion
+@applying_promotion_rules
 Feature: Receiving discount based on products from specific taxon
     In order to pay less while buying goods from promoted taxons
     As a Customer

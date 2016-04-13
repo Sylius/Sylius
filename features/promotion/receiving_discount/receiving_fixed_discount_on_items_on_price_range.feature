@@ -1,4 +1,4 @@
-@promotion
+@receiving_discount
 Feature: Receiving fixed discount on products from specific price range
     In order to pay less while buying goods from specific price range
     As a Customer

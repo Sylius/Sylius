@@ -1,4 +1,4 @@
-@promotion
+@applying_promotion_rules
 Feature: Receiving discount based on items total
     In order to pay decreased amount for my order during promotion
     As a Visitor

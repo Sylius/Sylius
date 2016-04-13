@@ -1,4 +1,4 @@
-@promotion
+@managing_promotions
 Feature: Deleting a coupon
     In order to remove test, obsolete or incorrect coupons
     As an Administrator

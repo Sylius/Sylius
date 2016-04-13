@@ -1,4 +1,4 @@
-@promotion
+@managing_promotions
 Feature: Prevent deletion of promotions applied to order
     In order to maintain proper order history
     As an Administrator

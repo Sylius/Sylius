@@ -1,4 +1,4 @@
-@promotion
+@receiving_discount
 Feature: Receiving fixed discount on cart
     In order to pay proper amount while buying promoted goods
     As a Visitor

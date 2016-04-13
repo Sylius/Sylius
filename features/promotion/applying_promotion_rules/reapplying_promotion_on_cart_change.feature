@@ -1,4 +1,4 @@
-@promotion
+@applying_promotion_rules
 Feature: Reapplying promotion on cart change
     In order to receive proper discount for my order
     As a Customer

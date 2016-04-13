@@ -1,4 +1,4 @@
-@promotion
+@receiving_discount
 Feature: Receiving percentage discount on shipping
     In order to pay decreased amount for shipping
     As a Customer

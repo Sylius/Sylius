@@ -1,4 +1,4 @@
-@promotion
+@applying_promotion_rules
 Feature: Receiving discount based on nth order
     In order to pay less while an placing order
     As a Customer
