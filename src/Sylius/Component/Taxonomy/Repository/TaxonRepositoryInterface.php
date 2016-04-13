@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Taxonomy\Repository;
 
+use Doctrine\ORM\QueryBuilder;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
@@ -47,4 +48,9 @@ interface TaxonRepositoryInterface extends RepositoryInterface
      * @return TaxonInterface|null
      */
     public function findOneByName($name);
+
+    /**
+     * @return QueryBuilder
+     */
+    public function getFormQueryBuilder();
 }

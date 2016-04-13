@@ -44,6 +44,7 @@ imports:
     - suites/ui/locale.yml
     - suites/ui/product.yml
     - suites/ui/promotion.yml
+    - suites/ui/promotion/managing_promotions.yml
     - suites/ui/shipping.yml
     - suites/ui/taxation.yml
     - suites/ui/taxation/managing_tax_rates.yml

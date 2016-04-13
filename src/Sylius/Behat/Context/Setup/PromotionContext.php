@@ -94,12 +94,17 @@ final class PromotionContext implements Context
 
     /**
      * @Given there is a promotion :promotionName
+     * @Given there is a promotion :promotionName identified by :promotionCode code
      */
-    public function thereIsPromotion($promotionName)
+    public function thereIsPromotion($promotionName, $promotionCode = null)
     {
         $promotion = $this->testPromotionFactory
             ->createForChannel($promotionName, $this->sharedStorage->get('channel'))
         ;
+
+        if (null !== $promotionCode) {
+            $promotion->setCode($promotionCode);
+        }
 
         $this->promotionRepository->add($promotion);
         $this->sharedStorage->set('promotion', $promotion);

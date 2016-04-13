@@ -149,8 +149,8 @@ class ContainsTaxonRuleCheckerSpec extends ObjectBehavior
         ;
     }
 
-    function it_has_no_configuration_type_configured_yet()
+    function it_has_configuration_type()
     {
-        $this->getConfigurationFormType()->shouldReturn(null);
+        $this->getConfigurationFormType()->shouldReturn('sylius_promotion_rule_contains_taxon_configuration');
     }
 }

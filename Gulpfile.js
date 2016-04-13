@@ -81,5 +81,5 @@ gulp.task('admin-watch', function() {
     gulp.watch(paths.admin.img, ['admin-img']);
 });
 
-gulp.task('default', ['admin-watch', 'admin-js', 'admin-css', 'admin-img']);
+gulp.task('default', ['admin-js', 'admin-css', 'admin-img']);
 

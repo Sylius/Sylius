@@ -20,6 +20,7 @@ sylius:
         description: Description
         disabled: Disabled
         edit: Edit
+        edit_promotion: Edit promotion
         edit_tax_category: Edit tax category
         edit_tax_rate: Edit tax rate
         empty: Empty
@@ -45,6 +46,7 @@ sylius:
         not_in: Not in
         or: or
         powered_by: Powered by
+        promotion_information: Promotion information
         save_changes: Save changes
         show: Show
         sign_in: Sign in

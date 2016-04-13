@@ -1,0 +1,15 @@
+sylius_admin_promotion:
+    resource: |
+        alias: sylius.promotion
+        section: admin
+        templates: SyliusAdminBundle:Crud
+        except: ['show', 'delete']
+        redirect: update
+        grid: sylius_admin_promotion
+        vars:
+            all:
+                templates:
+                    form: SyliusAdminBundle:Promotion:_form.html.twig
+            index:
+                icon: in cart
+    type: sylius.resource

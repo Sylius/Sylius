@@ -1,10 +1,13 @@
 sylius:
-  menu:
-    admin:
-      main:
-        configuration:
-          header: Configuration
-          tax_categories: Tax categories
-          countries: Countries
-          locales: Locales
-          tax_rates: Tax rates
+    menu:
+        admin:
+            main:
+                configuration:
+                    countries: Countries
+                    header: Configuration
+                    locales: Locales
+                    tax_categories: Tax categories
+                    tax_rates: Tax rates
+                marketing:
+                    header: Marketing
+                    promotions: Promotions

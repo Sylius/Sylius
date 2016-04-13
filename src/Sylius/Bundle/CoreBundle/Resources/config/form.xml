@@ -47,6 +47,8 @@
         <parameter key="sylius.form.type.promotion_rule.shipping_country_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\ShippingCountryConfigurationType</parameter>
         <parameter key="sylius.form.type.promotion_rule.taxon_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\TaxonConfigurationType</parameter>
         <parameter key="sylius.form.type.promotion_rule.contains_product_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\ContainsProductConfigurationType</parameter>
+        <parameter key="sylius.form.type.promotion_rule.contains_taxon_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\ContainsTaxonConfigurationType</parameter>
+        <parameter key="sylius.form.type.promotion_rule.total_of_items_from_taxon_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\TotalOfItemsFromTaxonConfigurationType</parameter>
         <parameter key="sylius.form.type.promotion_rule.customer_group_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Rule\CustomerGroupType</parameter>
         <parameter key="sylius.form.type.promotion_action.shipping_discount_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Action\ShippingDiscountConfigurationType</parameter>
         <parameter key="sylius.form.type.promotion_action.add_product_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Action\AddProductConfigurationType</parameter>
@@ -155,6 +157,14 @@
         <service id="sylius.form.type.promotion_rule.contains_product_configuration" class="%sylius.form.type.promotion_rule.contains_product_configuration.class%">
             <argument type="service" id="sylius.repository.product_variant" />
             <tag name="form.type" alias="sylius_promotion_rule_contains_product_configuration" />
+        </service>
+        <service id="sylius.form.type.promotion_rule.contains_taxon_configuration" class="%sylius.form.type.promotion_rule.contains_taxon_configuration.class%">
+            <argument type="service" id="sylius.repository.taxon" />
+            <tag name="form.type" alias="sylius_promotion_rule_contains_taxon_configuration" />
+        </service>
+        <service id="sylius.form.type.promotion_rule.total_of_items_from_taxon_configuration" class="%sylius.form.type.promotion_rule.total_of_items_from_taxon_configuration.class%">
+            <argument type="service" id="sylius.repository.taxon" />
+            <tag name="form.type" alias="sylius_promotion_rule_total_of_items_from_taxon_configuration" />
         </service>
         <service id="sylius.form.type.promotion_rule.customer_group_configuration" class="%sylius.form.type.promotion_rule.customer_group_configuration.class%">
             <argument type="service" id="sylius.repository.group" />
