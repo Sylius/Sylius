@@ -51,6 +51,7 @@
         "sylius/association": "^0.18",
         "sylius/review": "^0.18",
         "sylius/metadata": "^0.18",
+        "webmozart/assert": "^1.0",
         "zendframework/zend-stdlib": "^2.0|^3.0"
     },
     "require-dev": {

@@ -14,6 +14,7 @@ namespace Sylius\Component\Core\Taxation\Strategy;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Taxation\Applicator\OrderTaxesApplicatorInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Mark McKelvie <mark.mckelvie@reiss.com>
@@ -70,15 +71,10 @@ abstract class AbstractTaxCalculationStrategy implements TaxCalculationStrategyI
      */
     private function assertApplicatorsHaveCorrectType(array $applicators)
     {
-        foreach ($applicators as $applicator) {
-            if ($applicator instanceof OrderTaxesApplicatorInterface) {
-                continue;
-            }
-
-            throw new \InvalidArgumentException(sprintf(
-                'Order taxes applicator should have type "%s"',
-                OrderTaxesApplicatorInterface::class
-            ));
-        }
+        Assert::allIsInstanceOf(
+            $applicators,
+            OrderTaxesApplicatorInterface::class,
+            'Order taxes applicator should have type "%2$s". Got: %s'
+        );
     }
 }

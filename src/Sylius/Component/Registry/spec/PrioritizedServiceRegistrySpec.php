@@ -45,11 +45,9 @@ class PrioritizedServiceRegistrySpec extends ObjectBehavior
 
     function it_initializes_services_priority_queue_by_default()
     {
-        $this->all()->shouldReturnAnInstanceOf('Zend\Stdlib\PriorityQueue');
+        $this->all()->shouldReturnAnInstanceOf(PriorityQueue::class);
 
-        /** @var PriorityQueue $services */
-        $services = $this->all()->getWrappedObject();
-        \PHPUnit_Framework_Assert::assertTrue($services->isEmpty());
+        $this->all()->shouldBeEmpty();
     }
 
     function it_registers_services_in_the_correct_prioritized_order(
@@ -69,12 +67,10 @@ class PrioritizedServiceRegistrySpec extends ObjectBehavior
         $this->has($serviceTwo)->shouldReturn(true);
         $this->has($serviceThree)->shouldReturn(true);
 
-        /** @var PriorityQueue $services */
-        $services = $this->all()->getWrappedObject();
-        \PHPUnit_Framework_Assert::assertEquals(3, $services->count());
-        \PHPUnit_Framework_Assert::assertTrue($services->hasPriority(1));
-        \PHPUnit_Framework_Assert::assertTrue($services->hasPriority(0));
-        \PHPUnit_Framework_Assert::assertTrue($services->hasPriority(-1));
+        $this->all()->shouldHaveCount(3);
+        $this->all()->shouldHavePriority(1);
+        $this->all()->shouldHavePriority(0);
+        $this->all()->shouldHavePriority(-1);
     }
 
     function it_throws_exception_when_trying_to_register_service_without_required_interface(\stdClass $service)

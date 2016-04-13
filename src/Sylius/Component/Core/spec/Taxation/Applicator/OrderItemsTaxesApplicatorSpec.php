@@ -11,6 +11,7 @@
 
 namespace spec\Sylius\Component\Core\Taxation\Applicator;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -104,27 +105,17 @@ class OrderItemsTaxesApplicatorSpec extends ObjectBehavior
         $this->apply($order, $zone);
     }
 
-    function it_does_nothing_if_order_item_has_no_units(
-        $taxRateResolver,
-        Collection $items,
-        \Iterator $iterator,
+    function it_throws_invalid_argument_exception_if_order_item_has_0_quantity(
         OrderInterface $order,
         OrderItemInterface $orderItem,
         ZoneInterface $zone
     ) {
+        $items = new ArrayCollection([$orderItem->getWrappedObject()]);
         $order->getItems()->willReturn($items);
 
-        $items->count()->willReturn(1);
-        $items->getIterator()->willReturn($iterator);
-        $iterator->rewind()->shouldBeCalled();
-        $iterator->valid()->willReturn(true, false)->shouldBeCalled();
-        $iterator->current()->willReturn($orderItem);
-        $iterator->next()->shouldBeCalled();
-
         $orderItem->getQuantity()->willReturn(0);
-        $taxRateResolver->resolve(Argument::any())->shouldNotBeCalled();
 
-        $this->apply($order, $zone);
+        $this->shouldThrow(\InvalidArgumentException::class)->during('apply', [$order, $zone]);
     }
 
     function it_does_nothing_if_tax_rate_cannot_be_resolved(

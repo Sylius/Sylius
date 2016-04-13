@@ -52,8 +52,12 @@ class OrderItemsTaxesApplicator implements OrderTaxesApplicatorInterface
      * @param IntegerDistributorInterface $distributor
      * @param TaxRateResolverInterface $taxRateResolver
      */
-    public function __construct(CalculatorInterface $calculator, AdjustmentFactoryInterface $adjustmentFactory, IntegerDistributorInterface $distributor, TaxRateResolverInterface $taxRateResolver)
-    {
+    public function __construct(
+        CalculatorInterface $calculator,
+        AdjustmentFactoryInterface $adjustmentFactory,
+        IntegerDistributorInterface $distributor,
+        TaxRateResolverInterface $taxRateResolver
+    ) {
         $this->calculator = $calculator;
         $this->adjustmentFactory = $adjustmentFactory;
         $this->distributor = $distributor;
@@ -68,7 +72,7 @@ class OrderItemsTaxesApplicator implements OrderTaxesApplicatorInterface
         foreach ($order->getItems() as $item) {
             $quantity = $item->getQuantity();
             if (0 === $quantity) {
-                continue;
+                throw new \InvalidArgumentException('Cannot apply tax to order item with 0 quantity.');
             }
 
             $taxRate = $this->taxRateResolver->resolve($item->getVariant(), ['zone' => $zone]);
