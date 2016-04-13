@@ -6,8 +6,11 @@ sylius:
         admin:
             main:
                 configuration:
-                    header: Configuración
-                    tax_categories: Categorías de Impuestos
                     countries: Países
+                    header: Configuración
                     locales: Idiomas
+                    tax_categories: Categorías de Impuestos
                     tax_rates: Tasas de impuestos
+                marketing:
+                    header: Márketing
+                    promotions: Promociones

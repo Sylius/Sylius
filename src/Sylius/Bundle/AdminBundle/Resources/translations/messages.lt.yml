@@ -6,7 +6,9 @@ sylius:
         admin:
             main:
                 configuration:
-                    header: Konfigūracija
                     countries: Šalys
+                    header: Konfigūracija
                     locales: Lokalės
                     tax_rates: Mokesčių tarifai
+                marketing:
+                    promotions: Akcijos

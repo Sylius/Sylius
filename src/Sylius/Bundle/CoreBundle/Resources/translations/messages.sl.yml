@@ -113,3 +113,19 @@ sylius:
             type: Vrsta združenja
         product_association_type:
             name: Ime
+        promotion_rule:
+            contains_taxon:
+                count: Število
+            taxon:
+                taxons: Taksoni
+            total_of_items_from_taxon:
+                amount: Znesek
+    email:
+        order_confirmation:
+            name: Potrditev naročila
+        order_comment:
+            name: Opombe pri naročilu
+        shipment_confirmation:
+            name: Potrditev pošiljke
+        user_confirmation:
+            name: Potrditev uporabnika

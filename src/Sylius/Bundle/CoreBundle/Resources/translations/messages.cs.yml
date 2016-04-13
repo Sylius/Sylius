@@ -122,3 +122,19 @@ sylius:
             email: Email
         product_association_type:
             name: Jméno
+        promotion_rule:
+            contains_taxon:
+                count: Počet
+            taxon:
+                taxons: Taxony
+            total_of_items_from_taxon:
+                amount: Částka
+    email:
+        order_confirmation:
+            name: Potvrzení objednávky
+        order_comment:
+            name: Poznámka k objednávce
+        shipment_confirmation:
+            name: Potvrzení odeslání
+        user_confirmation:
+            name: Potvrzení uživatele

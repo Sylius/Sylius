@@ -129,3 +129,19 @@ sylius:
             type: Rodzaj powiązania
         product_association_type:
             name: Nazwa
+        promotion_rule:
+            contains_taxon:
+                count: Ilość
+            taxon:
+                taxons: Taksony
+            total_of_items_from_taxon:
+                amount: Kwota
+    email:
+        order_confirmation:
+            name: Potwierdzenie zamówienia
+        order_comment:
+            name: Uwagi dotyczące zamówienia
+        shipment_confirmation:
+            name: Potwierdzenie dostawy
+        user_confirmation:
+            name: Potwierdzenia przez użytkownika

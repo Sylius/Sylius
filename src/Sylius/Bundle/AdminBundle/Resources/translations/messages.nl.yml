@@ -6,7 +6,10 @@ sylius:
         admin:
             main:
                 configuration:
-                    header: Configuratie
                     countries: Landen
+                    header: Configuratie
                     locales: "Talen/Regio's"
                     tax_rates: BTW-tarieven
+                marketing:
+                    header: Marketing
+                    promotions: Promoties

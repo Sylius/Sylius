@@ -6,7 +6,9 @@ sylius:
         admin:
             main:
                 configuration:
-                    header: Postavke
                     countries: Države
+                    header: Postavke
                     locales: Lokaliteti
                     tax_rates: Stope poreza
+                marketing:
+                    promotions: Promocije

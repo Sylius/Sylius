@@ -8,3 +8,5 @@ sylius:
                 configuration:
                     countries: Zemlje
                     tax_rates: Poreske stope
+                marketing:
+                    promotions: Promocije

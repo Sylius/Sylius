@@ -6,7 +6,9 @@ sylius:
         admin:
             main:
                 configuration:
-                    header: Configuração
                     countries: Países
+                    header: Configuração
                     locales: Localidades
                     tax_rates: Impostos
+                marketing:
+                    promotions: Promoções
