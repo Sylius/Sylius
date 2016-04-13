@@ -1,5 +1,5 @@
-@checkout
-Feature: Checkout with PayPal Express Checkout
+@paying_for_order
+Feature: Paying with paypal during checkout
     In order to buy products
     As a Customer
     I want to be able to pay with PayPal Express Checkout

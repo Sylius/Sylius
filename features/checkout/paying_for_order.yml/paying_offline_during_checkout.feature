@@ -1,5 +1,5 @@
-@checkout
-Feature: Checkout with offline payment
+@paying_for_order
+Feature: Paying offline during checkout
     In order to pay with cash or by external means
     As a Customer
     I want to be able to complete checkout process without paying

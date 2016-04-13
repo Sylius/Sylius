@@ -1,4 +1,4 @@
-@checkout
+@paying_for_order
 Feature: Retrying to pay the order from my account panel
     In order to complete my unpaid orders
     As a Customer

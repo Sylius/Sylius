@@ -1,4 +1,4 @@
-@checkout
+@paying_for_order
 Feature: Changing the method on the order payment page
     In order to try different payment methods
     As a Customer
