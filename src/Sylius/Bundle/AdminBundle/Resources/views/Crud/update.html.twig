@@ -19,7 +19,7 @@
         {% else %}
             {{ form_widget(form) }}
         {% endif %}
-        {% include 'SyliusUiBundle:Form:_saveChanges.html.twig' %}
+        {% include 'SyliusUiBundle:Form:_saveChanges.html.twig' with {'cancel_path': path(configuration.getRouteName('index'))} %}
     </div>
 {{ form_row(form._token) }}
 {{ form_end(form, {'render_rest': false}) }}
