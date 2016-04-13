@@ -9,6 +9,7 @@ sylius:
             remember_me: Emlékezzen rám
     ui:
         actions: Műveletek
+        cancel: Mégse
         countries: Országok
         create: Létrehozás
         dashboard: Vezérlőpult

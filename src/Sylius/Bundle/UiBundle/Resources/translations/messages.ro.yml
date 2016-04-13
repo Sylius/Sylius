@@ -8,6 +8,7 @@ sylius:
             password: Parolă
     ui:
         actions: Acțiuni
+        cancel: Anulează
         countries: Țări
         create: Creează
         dashboard: Panou de administrare

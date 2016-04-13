@@ -12,6 +12,7 @@ sylius:
         administration_panel_login: Prihásenie do administračného rozhrania
         an_error_occurred: Vyskytla sa chyba
         are_your_sure_you_want_to_perform_this_action: Ste si istý, že chcete vykonať túto akciu?
+        cancel: Zrušiť
         clear_filters: Vymazať filter
         confirm_your_action: Potvrďte vašu akciu
         contains: Obsahuje

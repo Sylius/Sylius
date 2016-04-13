@@ -1,0 +1,7 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    credit_card:
+        cardholder_name:
+            min_length: 'Der Name des Kartenbesitzers muss mindestens {{ limit }} Zeichen lang sein.'

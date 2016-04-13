@@ -7,6 +7,7 @@ sylius:
             username: ユーザー名
             password: パスワード
     ui:
+        cancel: キャンセル
         countries: 国の設定
         create: 作成
         dashboard: ダッシュボード

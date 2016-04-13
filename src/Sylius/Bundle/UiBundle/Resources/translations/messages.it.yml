@@ -12,6 +12,7 @@ sylius:
         administration_panel_login: Login del pannello di amministrazione
         an_error_occurred: Si è verificato un errore
         are_your_sure_you_want_to_perform_this_action: Sei sicuro di voler eseguire questa azione?
+        cancel: Annulla
         clear_filters: Cancella filtri
         confirm_your_action: "Confermare l'azione"
         contains: Contiene

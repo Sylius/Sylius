@@ -8,6 +8,7 @@ sylius:
             password: Adgangskode
     ui:
         actions: Handlinger
+        cancel: Anuller
         countries: Lande
         create: Opret
         dashboard: Kontrolpanel

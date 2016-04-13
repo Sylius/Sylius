@@ -9,7 +9,7 @@ sylius:
         move: '%resource% ถูกลบทิ้งแล้ว'
         generate: '%resource% ถูกสร้างเรียบร้อยแล้ว'
         revert: '%resource% ถูกเรียกกลับมาเรียบร้อยแล้ว'
-        restore_deleted: '%resource% ถูกการบูรณะเรียบร้อยแล้ว'
+        restore_deleted: '%resource% ถูกกู้คืนเรียบร้อยแล้ว'
         enable: '%resource% มีการเปิดใช้เรียบร้อยแล้ว'
         disable: '%resource% ได้ถูกปิดใช้งานเรียบร้อยแล้ว'
         delete_error: 'ไม่สามารถลบ %resource% ขณะใช้งาน'

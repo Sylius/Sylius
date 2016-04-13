@@ -3,6 +3,8 @@
 
 sylius:
     form:
+        credit_card:
+            cardholder_name: Name des Karteninhabers
         payment:
             state:
                 header: Zahlungsstatus

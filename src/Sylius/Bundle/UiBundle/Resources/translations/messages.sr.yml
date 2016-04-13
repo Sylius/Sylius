@@ -6,6 +6,7 @@ sylius:
         login:
             username: Кросницко име
     ui:
+        cancel: Откажи
         countries: Земље
         create: Креирај
         dashboard: Командна Табла

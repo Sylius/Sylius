@@ -9,6 +9,7 @@ sylius:
             remember_me: Prisiminti mane
     ui:
         actions: Veiksmai
+        cancel: Atšaukti
         countries: Šalys
         create: Sukurti
         dashboard: Skydelis

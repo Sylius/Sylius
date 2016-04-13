@@ -12,6 +12,7 @@ sylius:
         administration_panel_login: "Connexion à l'espace d'administration"
         an_error_occurred: "Une erreur s'est produite"
         are_your_sure_you_want_to_perform_this_action: Êtes-vous sûr de vouloir effectuer cette action ?
+        cancel: Annuler
         clear_filters: Réinitialiser les filtres
         confirm_your_action: Confirmez votre action
         contains: Contient

@@ -9,6 +9,7 @@ sylius:
             remember_me: مرا به خاطر بسپار
     ui:
         actions: طریقه اعمال
+        cancel: لغو
         countries: كشور‌ها
         create: ایجاد
         dashboard: داشبورد

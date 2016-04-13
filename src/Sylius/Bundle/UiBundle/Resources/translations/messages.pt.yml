@@ -6,6 +6,7 @@ sylius:
         login:
             username: Login
     ui:
+        cancel: Cancelar
         countries: Países
         create: Criar
         dashboard: Painel de Instrumentos

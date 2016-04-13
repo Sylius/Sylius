@@ -8,6 +8,7 @@ sylius:
             password: Κωδικός πρόσβασης
     ui:
         actions: Ενέργειες
+        cancel: Άκυρο
         countries: Χώρες
         create: Δημιουργία
         description: Περιγραφή

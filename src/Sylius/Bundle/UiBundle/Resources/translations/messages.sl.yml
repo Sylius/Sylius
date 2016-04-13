@@ -9,6 +9,7 @@ sylius:
             remember_me: Zapomni si me
     ui:
         actions: Dejanja
+        cancel: Prekliči
         countries: Države
         create: Ustvarite
         dashboard: Nadzorna plošča
