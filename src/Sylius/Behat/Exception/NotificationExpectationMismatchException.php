@@ -11,33 +11,28 @@
 
 namespace Sylius\Behat\Exception;
 
+use Sylius\Behat\NotificationType;
+
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 final class NotificationExpectationMismatchException extends \RuntimeException
 {
-    /**
-     * @param string $missingNotificationType
-     * @param string $missingNotification
-     * @param string $foundedNotificationType
-     * @param string $foundedNotification
-     * @param int $code
-     * @param \Exception|null $previous
-     */
+
     public function __construct(
-        $missingNotificationType,
-        $missingNotification,
-        $foundedNotificationType,
-        $foundedNotification,
-        $code = 0, 
+        NotificationType $expectedType,
+        $expectedMessage,
+        NotificationType $actualType,
+        $actualMessage,
+        $code = 0,
         \Exception $previous = null
     ) {
         $message = sprintf(
             "Expected *%s* notification with a \"%s\" message was not found.\n *%s* notification with a \"%s\" message has been found.",
-            $missingNotificationType,
-            $missingNotification,
-            $foundedNotificationType,
-            $foundedNotification
+            $expectedType,
+            $expectedMessage,
+            $actualType,
+            $actualMessage
         );
 
         parent::__construct($message, $code, $previous);

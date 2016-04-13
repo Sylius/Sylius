@@ -12,11 +12,12 @@
 namespace Sylius\Behat\Service;
 
 use Sylius\Behat\Exception\NotificationExpectationMismatchException;
+use Sylius\Behat\NotificationType;
 use Sylius\Behat\Service\Accessor\NotificationAccessorInterface;
-use Webmozart\Assert\Assert;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 final class NotificationChecker implements NotificationCheckerInterface
 {
@@ -42,7 +43,7 @@ final class NotificationChecker implements NotificationCheckerInterface
     {
         $message = sprintf('%s has been successfully created.', $this->humanizeResourceName($resource));
 
-        $this->checkSuccessNotificationMessage($message);
+        $this->checkNotification($message, NotificationType::success());
     }
 
     /**
@@ -54,7 +55,7 @@ final class NotificationChecker implements NotificationCheckerInterface
     {
         $message = sprintf('%s has been successfully deleted.', $this->humanizeResourceName($resource));
 
-        $this->checkSuccessNotificationMessage($message);
+        $this->checkNotification($message, NotificationType::success());
     }
 
     /**
@@ -66,26 +67,44 @@ final class NotificationChecker implements NotificationCheckerInterface
     {
         $message = sprintf('%s has been successfully updated.', $this->humanizeResourceName($resource));
 
-        $this->checkSuccessNotificationMessage($message);
+        $this->checkNotification($message, NotificationType::success());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function checkNotification($message, NotificationType $type)
+    {
+        if ($this->hasType($type) && $this->hasMessage($message)) {
+            return;
+        }
+
+        throw new NotificationExpectationMismatchException(
+            $type,
+            $message,
+            $this->notificationAccessor->getType(),
+            $this->notificationAccessor->getMessage()
+        );
+    }
+
+    /**
+     * @param NotificationType $type
+     *
+     * @return bool
+     */
+    private function hasType(NotificationType $type)
+    {
+        return (string) $type === (string) $this->notificationAccessor->getType();
     }
 
     /**
      * @param string $message
      *
-     * @throws NotificationExpectationMismatchException
+     * @return bool
      */
-    public function checkSuccessNotificationMessage($message)
+    private function hasMessage($message)
     {
-        if ($this->notificationAccessor->hasSuccessMessage() && $this->notificationAccessor->hasMessage($message)) {
-            return;
-        }
-
-        throw new NotificationExpectationMismatchException(
-            'success',
-            $message,
-            $this->notificationAccessor->getMessageType(),
-            $this->notificationAccessor->getMessage()
-        );
+        return false !== strpos($this->notificationAccessor->getMessage(), $message);
     }
 
     /**
