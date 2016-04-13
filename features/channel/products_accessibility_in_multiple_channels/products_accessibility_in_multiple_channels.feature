@@ -1,5 +1,5 @@
-@channel
-Feature: Fake multi-channel support
+@products_accessibility_in_multiple_channels
+Feature: Multi-channel support
     In order to see how my store looks on a different channels
     As a Developer
     I want to change between channels with ease

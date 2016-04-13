@@ -1,4 +1,4 @@
-@theme
+@theming
 Feature: Managing themes per channel
     In order to allow customizing channels' appearance
     As a store owner

@@ -1,0 +1,22 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+default:
+    suites:
+        ui_products_accessibility_in_multiple_channels:
+            contexts_as_services:
+                - sylius.behat.context.hook.doctrine_orm
+
+                - sylius.behat.context.transform.shared_storage
+                - sylius.behat.context.transform.channel
+                - sylius.behat.context.transform.product
+
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.product
+                - sylius.behat.context.setup.currency
+
+                - sylius.behat.context.ui.channel
+                - sylius.behat.context.ui.product
+
+            filters:
+                tags: "@products_accessibility_in_multiple_channels && @ui"

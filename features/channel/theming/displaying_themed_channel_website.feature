@@ -1,4 +1,4 @@
-@theme @ui
+@theming
 Feature: Displaying themed channel website
     In order to easily distinguish stores
     As an Visitor
@@ -9,11 +9,13 @@ Feature: Displaying themed channel website
         And the store has "Maverick Meerkat" theme
         And this theme changes homepage template contents to "Onions and bananas"
 
+    @ui
     Scenario: Displaying default shop homepage
         Given channel "France" does not use any theme
         When I visit this channel's homepage
         Then I should not see a homepage from "Maverick Meerkat" theme
 
+    @ui
     Scenario: Displaying themed shop homepage
         Given channel "France" uses "Maverick Meerkat" theme
         When I visit this channel's homepage
