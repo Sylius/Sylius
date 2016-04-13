@@ -67,8 +67,9 @@ final class ManagingCountriesContext implements Context
 
     /**
      * @Given I want to add a new country
+     * @Given I want to add a new country with a province
      */
-    public function iWantToCreateNewCountry()
+    public function iWantToAddNewCountry()
     {
         $this->countryCreatePage->open();
     }
@@ -82,15 +83,25 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @When /^I choose "([^"]*)"$/
+     * @When I choose :countryName
      */
-    public function iChoose($name)
+    public function iChoose($countryName)
     {
-        $this->countryCreatePage->chooseName($name);
+        $this->countryCreatePage->chooseName($countryName);
+    }
+
+    /**
+     * @When I add the :provinceName province with :provinceCode code
+     * @When I add the :provinceName province with :provinceCode code and :provinceAbbreviation abbreviation
+     */
+    public function iAddProvinceWithCode($provinceName, $provinceCode, $provinceAbbreviation = null)
+    {
+        $this->countryCreatePage->addProvince($provinceName, $provinceCode, $provinceAbbreviation);
     }
 
     /**
      * @When I add it
+     * @When I add this country
      */
     public function iAddIt()
     {
@@ -138,13 +149,13 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @Then /^(country "[^"]+") should appear in the store$/
+     * @Then /^the (country "([^"]+)") should appear in the store$/
      */
     public function countryShouldAppearInTheStore(CountryInterface $country)
     {
         Assert::true(
-            $this->countryIndexPage->isResourceOnPage(['code' => $country->getCode()]),
-            sprintf('Country %s should exist but it does not', $country->getCode())
+            $this->countryUpdatePage->isOpen(['id' => $country->getId()]),
+            sprintf('Country %s does not appear in the store.', $country->getCode())
         );
     }
 
@@ -153,6 +164,8 @@ final class ManagingCountriesContext implements Context
      */
     public function thisCountryShouldBeEnabled(CountryInterface $country)
     {
+        $this->countryIndexPage->open();
+
         Assert::true(
             $this->countryIndexPage->isCountryEnabled($country),
             sprintf('Country %s should be enabled but it is not', $country->getCode())
@@ -164,9 +177,10 @@ final class ManagingCountriesContext implements Context
      */
     public function thisCountryShouldBeDisabled(CountryInterface $country)
     {
-        $isCountryDisabled = $this->countryIndexPage->isCountryDisabled($country);
+        $this->countryIndexPage->open();
+
         Assert::true(
-            $isCountryDisabled,
+            $this->countryIndexPage->isCountryDisabled($country),
             sprintf('Country %s should be disabled but it is not', $country->getCode())
         );
     }
@@ -187,6 +201,17 @@ final class ManagingCountriesContext implements Context
         Assert::true(
             $this->countryUpdatePage->isCodeFieldDisabled(),
             'Code field should be disabled but is not'
+        );
+    }
+
+    /**
+     * @Then this country should have the :provinceName province
+     */
+    public function countryShouldHaveProvince($provinceName)
+    {
+        Assert::true(
+            $this->countryUpdatePage->isThereProvince($provinceName),
+            sprintf('%s is not a province of this country.', $provinceName)
         );
     }
 }

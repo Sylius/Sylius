@@ -34,6 +34,16 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function isThereProvince($provinceName)
+    {
+        $provinces = $this->getElement('provinces');
+
+        return $provinces->has('css', '[value = "'.$provinceName.'"]');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getToggleableElement()
     {
         return $this->getElement('enabled');
@@ -47,6 +57,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return array_merge(parent::getDefinedElements(), [
             'enabled' => '#sylius_country_enabled',
             'code' => '#sylius_country_code',
+            'provinces' => '#sylius_country_provinces',
         ]);
     }
 }
