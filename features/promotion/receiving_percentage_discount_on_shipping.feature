@@ -22,7 +22,7 @@ Feature: Receiving percentage discount on shipping
 
     @ui
     Scenario: Receiving free shipping
-        Given the promotion gives "100%" discount on shipping to every order
+        Given the promotion gives free shipping to every order
         When I add product "PHP T-Shirt" to the cart
         And I proceed selecting "DHL" shipping method
         Then my cart total should be "€100.00"
