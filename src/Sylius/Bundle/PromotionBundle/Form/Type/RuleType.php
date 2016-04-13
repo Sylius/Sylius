@@ -13,13 +13,11 @@ namespace Sylius\Bundle\PromotionBundle\Form\Type;
 
 use Sylius\Bundle\PromotionBundle\Form\EventListener\BuildRuleFormSubscriber;
 use Sylius\Bundle\PromotionBundle\Form\Type\Core\AbstractConfigurationType;
-use Sylius\Component\Promotion\Model\RuleInterface;
+use Sylius\Component\Promotion\Checker\ItemTotalRuleChecker;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Promotion rule form type.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
@@ -51,7 +49,7 @@ class RuleType extends AbstractConfigurationType
         parent::configureOptions($resolver);
 
         $resolver->setDefaults([
-            'configuration_type' => RuleInterface::TYPE_ITEM_TOTAL,
+            'configuration_type' => ItemTotalRuleChecker::TYPE,
         ]);
     }
 

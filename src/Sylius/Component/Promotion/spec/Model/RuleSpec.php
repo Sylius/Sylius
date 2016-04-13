@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Promotion\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Promotion\Checker\ItemTotalRuleChecker;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\RuleInterface;
 
@@ -42,8 +43,8 @@ class RuleSpec extends ObjectBehavior
 
     function its_type_should_be_mutable()
     {
-        $this->setType(RuleInterface::TYPE_ITEM_TOTAL);
-        $this->getType()->shouldReturn(RuleInterface::TYPE_ITEM_TOTAL);
+        $this->setType(ItemTotalRuleChecker::TYPE);
+        $this->getType()->shouldReturn(ItemTotalRuleChecker::TYPE);
     }
 
     function it_should_initialize_array_for_configuration_by_default()

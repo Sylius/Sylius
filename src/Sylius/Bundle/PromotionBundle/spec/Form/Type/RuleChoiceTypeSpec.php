@@ -12,7 +12,8 @@
 namespace spec\Sylius\Bundle\PromotionBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Promotion\Model\RuleInterface;
+use Sylius\Component\Promotion\Checker\CartQuantityRuleChecker;
+use Sylius\Component\Promotion\Checker\ItemTotalRuleChecker;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -21,14 +22,12 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class RuleChoiceTypeSpec extends ObjectBehavior
 {
-    private $choices = [
-        RuleInterface::TYPE_ITEM_TOTAL => 'Order total',
-        RuleInterface::TYPE_CART_QUANTITY => 'Order quantity',
-    ];
-
     function let()
     {
-        $this->beConstructedWith($this->choices);
+        $this->beConstructedWith([
+            ItemTotalRuleChecker::TYPE => 'Order total',
+            CartQuantityRuleChecker::TYPE => 'Order quantity',
+        ]);
     }
 
     function it_is_initializable()
@@ -43,7 +42,10 @@ class RuleChoiceTypeSpec extends ObjectBehavior
 
     function it_should_set_rule_types_to_choose_from(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(['choices' => $this->choices])->shouldBeCalled();
+        $resolver->setDefaults(['choices' => [
+            ItemTotalRuleChecker::TYPE => 'Order total',
+            CartQuantityRuleChecker::TYPE => 'Order quantity',
+        ]])->shouldBeCalled();
 
         $this->configureOptions($resolver);
     }

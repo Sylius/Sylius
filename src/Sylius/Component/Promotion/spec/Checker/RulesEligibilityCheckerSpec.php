@@ -12,13 +12,14 @@
 namespace spec\Sylius\Component\Promotion\Checker;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Promotion\Checker\CartQuantityRuleChecker;
+use Sylius\Component\Promotion\Checker\ItemTotalRuleChecker;
 use Sylius\Component\Promotion\Checker\PromotionSubjectEligibilityCheckerInterface;
 use Sylius\Component\Promotion\Checker\RuleCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Promotion\Model\RuleInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -61,14 +62,14 @@ class RulesEligibilityCheckerSpec extends ObjectBehavior
         $promotion->hasRules()->willReturn(true);
         $promotion->getRules()->willReturn([$cartQuantityRule, $itemTotalRule]);
 
-        $cartQuantityRule->getType()->willReturn(RuleInterface::TYPE_CART_QUANTITY);
+        $cartQuantityRule->getType()->willReturn(ItemTotalRuleChecker::TYPE);
         $cartQuantityRule->getConfiguration()->willReturn([]);
 
-        $itemTotalRule->getType()->willReturn(RuleInterface::TYPE_ITEM_TOTAL);
+        $itemTotalRule->getType()->willReturn(ItemTotalRuleChecker::TYPE);
         $itemTotalRule->getConfiguration()->willReturn([]);
 
-        $rulesRegistry->get(RuleInterface::TYPE_CART_QUANTITY)->willReturn($cartQuantityRuleChecker);
-        $rulesRegistry->get(RuleInterface::TYPE_ITEM_TOTAL)->willReturn($itemTotalRuleChecker);
+        $rulesRegistry->get(ItemTotalRuleChecker::TYPE)->willReturn($cartQuantityRuleChecker);
+        $rulesRegistry->get(ItemTotalRuleChecker::TYPE)->willReturn($itemTotalRuleChecker);
 
         $cartQuantityRuleChecker->isEligible($subject, [])->willReturn(true);
         $itemTotalRuleChecker->isEligible($subject, [])->willReturn(true);
@@ -88,14 +89,14 @@ class RulesEligibilityCheckerSpec extends ObjectBehavior
         $promotion->hasRules()->willReturn(true);
         $promotion->getRules()->willReturn([$cartQuantityRule, $itemTotalRule]);
 
-        $cartQuantityRule->getType()->willReturn(RuleInterface::TYPE_CART_QUANTITY);
+        $cartQuantityRule->getType()->willReturn(ItemTotalRuleChecker::TYPE);
         $cartQuantityRule->getConfiguration()->willReturn([]);
 
-        $itemTotalRule->getType()->willReturn(RuleInterface::TYPE_ITEM_TOTAL);
+        $itemTotalRule->getType()->willReturn(ItemTotalRuleChecker::TYPE);
         $itemTotalRule->getConfiguration()->willReturn([]);
 
-        $rulesRegistry->get(RuleInterface::TYPE_CART_QUANTITY)->willReturn($cartQuantityRuleChecker);
-        $rulesRegistry->get(RuleInterface::TYPE_ITEM_TOTAL)->willReturn($itemTotalRuleChecker);
+        $rulesRegistry->get(ItemTotalRuleChecker::TYPE)->willReturn($cartQuantityRuleChecker);
+        $rulesRegistry->get(ItemTotalRuleChecker::TYPE)->willReturn($itemTotalRuleChecker);
 
         $cartQuantityRuleChecker->isEligible($subject, [])->willReturn(true);
         $itemTotalRuleChecker->isEligible($subject, [])->willReturn(false);
@@ -115,14 +116,14 @@ class RulesEligibilityCheckerSpec extends ObjectBehavior
         $promotion->hasRules()->willReturn(true);
         $promotion->getRules()->willReturn([$cartQuantityRule, $itemTotalRule]);
 
-        $cartQuantityRule->getType()->willReturn(RuleInterface::TYPE_CART_QUANTITY);
+        $cartQuantityRule->getType()->willReturn(CartQuantityRuleChecker::TYPE);
         $cartQuantityRule->getConfiguration()->willReturn([]);
 
-        $itemTotalRule->getType()->willReturn(RuleInterface::TYPE_ITEM_TOTAL);
+        $itemTotalRule->getType()->willReturn(ItemTotalRuleChecker::TYPE);
         $itemTotalRule->getConfiguration()->willReturn([]);
 
-        $rulesRegistry->get(RuleInterface::TYPE_CART_QUANTITY)->willReturn($cartQuantityRuleChecker);
-        $rulesRegistry->get(RuleInterface::TYPE_ITEM_TOTAL)->willReturn($itemTotalRuleChecker);
+        $rulesRegistry->get(CartQuantityRuleChecker::TYPE)->willReturn($cartQuantityRuleChecker);
+        $rulesRegistry->get(ItemTotalRuleChecker::TYPE)->willReturn($itemTotalRuleChecker);
 
         $cartQuantityRuleChecker->isEligible($subject, [])->willReturn(false);
         $itemTotalRuleChecker->isEligible($subject, [])->shouldNotBeCalled();

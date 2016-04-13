@@ -14,13 +14,15 @@ namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
 use Sylius\Component\Core\Model\PromotionInterface;
-use Sylius\Component\Core\Model\PromotionRuleInterface;
 use Sylius\Component\Core\Promotion\Action\FixedDiscountAction;
+use Sylius\Component\Core\Promotion\Checker\NthOrderRuleChecker;
+use Sylius\Component\Core\Promotion\Checker\ShippingCountryRuleChecker;
+use Sylius\Component\Promotion\Checker\CartQuantityRuleChecker;
+use Sylius\Component\Promotion\Checker\ItemTotalRuleChecker;
 use Sylius\Component\Promotion\Model\ActionInterface;
+use Sylius\Component\Promotion\Model\RuleInterface;
 
 /**
- * Default promotion fixtures.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class LoadPromotionsData extends DataFixture
@@ -38,7 +40,7 @@ class LoadPromotionsData extends DataFixture
             'New Year Sale for 3 and more items.',
             3,
             $channel,
-            [$this->createRule(PromotionRuleInterface::TYPE_CART_QUANTITY, ['count' => 3, 'equal' => true])],
+            [$this->createRule(CartQuantityRuleChecker::TYPE, ['count' => 3, 'equal' => true])],
             [$this->createAction(FixedDiscountAction::TYPE, ['amount' => 500])]
         );
 
@@ -50,7 +52,7 @@ class LoadPromotionsData extends DataFixture
             'Christmas Sale for orders over 100 EUR.',
             2,
             $channel,
-            [$this->createRule(PromotionRuleInterface::TYPE_ITEM_TOTAL, ['amount' => 10000, 'equal' => true])],
+            [$this->createRule(ItemTotalRuleChecker::TYPE, ['amount' => 10000, 'equal' => true])],
             [$this->createAction(FixedDiscountAction::TYPE, ['amount' => 250])]
         );
 
@@ -62,7 +64,7 @@ class LoadPromotionsData extends DataFixture
             'Discount for 3rd order',
             1,
             $channel,
-            [$this->createRule(PromotionRuleInterface::TYPE_NTH_ORDER, ['nth' => 3])],
+            [$this->createRule(NthOrderRuleChecker::TYPE, ['nth' => 3])],
             [$this->createAction(FixedDiscountAction::TYPE, ['amount' => 500])]
         );
 
@@ -74,7 +76,7 @@ class LoadPromotionsData extends DataFixture
             'Discount for orders with shipping country Germany',
             0,
             $channel,
-            [$this->createRule(PromotionRuleInterface::TYPE_SHIPPING_COUNTRY, ['country' => $this->getReference('Sylius.Country.DE')->getId()])],
+            [$this->createRule(ShippingCountryRuleChecker::TYPE, ['country' => $this->getReference('Sylius.Country.DE')->getId()])],
             [$this->createAction(FixedDiscountAction::TYPE, ['amount' => 500])]
         );
 
@@ -97,11 +99,11 @@ class LoadPromotionsData extends DataFixture
      * @param string $type
      * @param array  $configuration
      *
-     * @return PromotionRuleInterface
+     * @return RuleInterface
      */
     protected function createRule($type, array $configuration)
     {
-        /** @var $rule PromotionRuleInterface */
+        /** @var $rule RuleInterface */
         $rule = $this->getPromotionRuleFactory()->createNew();
         $rule->setType($type);
         $rule->setConfiguration($configuration);

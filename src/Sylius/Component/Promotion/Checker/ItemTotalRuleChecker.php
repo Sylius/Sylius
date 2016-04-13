@@ -18,6 +18,8 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
  */
 class ItemTotalRuleChecker implements RuleCheckerInterface
 {
+    const TYPE = 'item_total';
+
     /**
      * {@inheritdoc}
      */

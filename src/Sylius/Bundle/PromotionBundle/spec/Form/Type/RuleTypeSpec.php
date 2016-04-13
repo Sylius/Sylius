@@ -16,7 +16,7 @@ use Prophecy\Argument;
 use Sylius\Bundle\PromotionBundle\Form\EventListener\BuildRuleFormSubscriber;
 use Sylius\Bundle\PromotionBundle\Form\Type\Core\AbstractConfigurationType;
 use Sylius\Bundle\PromotionBundle\Form\Type\RuleType;
-use Sylius\Component\Promotion\Model\RuleInterface;
+use Sylius\Component\Promotion\Checker\ItemTotalRuleChecker;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -73,7 +73,7 @@ class RuleTypeSpec extends ObjectBehavior
         ;
 
         $resolver->setDefined(['configuration_type'])->shouldBeCalled();
-        $resolver->setDefaults(['configuration_type' => RuleInterface::TYPE_ITEM_TOTAL])->shouldBeCalled();
+        $resolver->setDefaults(['configuration_type' => ItemTotalRuleChecker::TYPE])->shouldBeCalled();
 
         $this->configureOptions($resolver);
     }

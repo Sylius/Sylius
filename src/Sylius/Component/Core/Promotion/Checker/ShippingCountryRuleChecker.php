@@ -19,12 +19,12 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
- * Checks if shipping country match.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class ShippingCountryRuleChecker implements RuleCheckerInterface
 {
+    const TYPE = 'shipping_country';
+
     /**
      * @var RepositoryInterface
      */
