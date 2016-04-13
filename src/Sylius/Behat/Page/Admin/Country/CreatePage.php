@@ -11,7 +11,6 @@
 
 namespace Sylius\Behat\Page\Admin\Country;
 
-use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\Element;
 use Sylius\Behat\Behaviour\ChoosesName;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
@@ -24,7 +23,7 @@ use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
     use ChoosesName;
-    
+
     /**
      * {@inheritdoc}
      */

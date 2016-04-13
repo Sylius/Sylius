@@ -12,9 +12,9 @@
 namespace Sylius\Behat\Page\Admin\Country;
 
 use Behat\Mink\Element\Element;
+use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Behaviour\Toggles;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
-use Sylius\Behat\Page\ElementNotFoundException;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
