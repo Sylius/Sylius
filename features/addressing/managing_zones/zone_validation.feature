@@ -10,7 +10,7 @@ Feature: Zone validation
 
     @ui
     Scenario: Trying to add a zone without specifying its code
-        Given I want to create a new zone with country members
+        Given I want to create a new zone consisting of country
         When I name it "European Union"
         But I do not specify its code
         And I try to add it
@@ -19,7 +19,7 @@ Feature: Zone validation
 
     @ui
     Scenario: Trying to add a zone without specifying its name
-        Given I want to create a new zone with country members
+        Given I want to create a new zone consisting of country
         When I specify its code as "EU"
         But I do not specify its name
         And I try to add it
@@ -27,8 +27,8 @@ Feature: Zone validation
         And zone with code "EU" should not be added
 
     @ui
-    Scenario: Trying to add a zone without adding country member
-        Given I want to create a new zone with country members
+    Scenario: Trying to add a zone without any countries
+        Given I want to create a new zone consisting of country
         When I name it "European Union"
         And I specify its code as "EU"
         But I do not add a country member
@@ -38,12 +38,12 @@ Feature: Zone validation
 
     @ui
     Scenario: Seeing a disabled type field when adding country type zone
-        Given I want to create a new zone with country members
+        Given I want to create a new zone consisting of country
         Then the type field should be disabled
         And it should be country type
 
     @ui
     Scenario: Seeing a disabled type field when adding province type zone
-        Given I want to create a new zone with province members
+        Given I want to create a new zone consisting of province
         Then the type field should be disabled
         And it should be province type

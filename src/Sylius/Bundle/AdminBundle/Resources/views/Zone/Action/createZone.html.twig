@@ -7,8 +7,8 @@
             {{ 'sylius.ui.type'|trans }}
         </div>
         <div class="divider"></div>
-        <a class="item" href="{{ path(grid.requestConfiguration.getRouteName('create'), { 'type': 'country' }) }}"><i class="icon flag"></i>{{ 'sylius.form.zone.types.country'|trans }}</a>
-        <a class="item" href="{{ path(grid.requestConfiguration.getRouteName('create'), { 'type': 'province' }) }}"><i class="icon marker"></i>{{ 'sylius.form.zone.types.province'|trans }}</a>
-        <a class="item" href="{{ path(grid.requestConfiguration.getRouteName('create'), { 'type': 'zone' }) }}"><i class="icon location arrow"></i>{{ 'sylius.form.zone.types.zone'|trans }}</a>
+        <a class="item" href="{{ path(grid.requestConfiguration.getRouteName('create'), { 'type': 'country' }) }}">{{ 'sylius.form.zone.types.country'|trans }}</a>
+        <a class="item" href="{{ path(grid.requestConfiguration.getRouteName('create'), { 'type': 'province' }) }}">{{ 'sylius.form.zone.types.province'|trans }}</a>
+        <a class="item" href="{{ path(grid.requestConfiguration.getRouteName('create'), { 'type': 'zone' }) }}">{{ 'sylius.form.zone.types.zone'|trans }}</a>
     </div>
 </div>

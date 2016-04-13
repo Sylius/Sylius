@@ -14,6 +14,7 @@ namespace Sylius\Behat\Context\Transform;
 use Behat\Behat\Context\Context;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Repository\ZoneRepositoryInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -44,7 +45,7 @@ final class ZoneContext implements Context
     }
 
     /**
-     * @Transform zone named :zoneName
+     * @Transform /^zone named "([^"]+)"$/
      */
     public function getZoneByName($name)
     {
@@ -73,9 +74,10 @@ final class ZoneContext implements Context
     private function getZoneBy(array $parameters)
     {
         $existingZone = $this->zoneRepository->findOneBy($parameters);
-        if (null === $existingZone) {
-            throw new \InvalidArgumentException(sprintf('Zone does not exist.'));
-        }
+        Assert::notNull(
+            $existingZone,
+            'Zone does not exist.'
+        );
 
         return $existingZone;
     }

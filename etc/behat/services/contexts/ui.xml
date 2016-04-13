@@ -20,7 +20,7 @@
         <parameter key="sylius.behat.context.ui.admin.managing_shipping_methods.class">Sylius\Behat\Context\Ui\Admin\ManagingShippingMethodsContext</parameter>
         <parameter key="sylius.behat.context.ui.admin.managing_tax_category.class">Sylius\Behat\Context\Ui\Admin\ManagingTaxCategoryContext</parameter>
         <parameter key="sylius.behat.context.ui.admin.managing_tax_rate.class">Sylius\Behat\Context\Ui\Admin\ManagingTaxRateContext</parameter>
-        <parameter key="sylius.behat.context.ui.admin.managing_zone.class">Sylius\Behat\Context\Ui\Admin\ManagingZoneContext</parameter>
+        <parameter key="sylius.behat.context.ui.admin.managing_zones.class">Sylius\Behat\Context\Ui\Admin\ManagingZonesContext</parameter>
 
         <parameter key="sylius.behat.context.ui.cart.class">Sylius\Behat\Context\Ui\CartContext</parameter>
         <parameter key="sylius.behat.context.ui.channel.class">Sylius\Behat\Context\Ui\ChannelContext</parameter>
@@ -95,7 +95,7 @@
             <tag name="sylius.behat.context" />
         </service>
 
-        <service id="sylius.behat.context.ui.admin.managing_zone" class="%sylius.behat.context.ui.admin.managing_zone.class%" scope="scenario">
+        <service id="sylius.behat.context.ui.admin.managing_zones" class="%sylius.behat.context.ui.admin.managing_zones.class%" scope="scenario">
             <argument type="service" id="sylius.behat.page.admin.zone.create" />
             <argument type="service" id="sylius.behat.page.admin.zone.index" />
             <argument type="service" id="sylius.behat.page.admin.zone.update" />

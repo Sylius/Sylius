@@ -17,7 +17,7 @@ use Sylius\Behat\Page\Admin\Zone\UpdatePageInterface;
 use Sylius\Behat\Page\Admin\Zone\CreatePageInterface;
 use Sylius\Behat\Service\CurrentPageResolverInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
-use Sylius\Behat\Service\NotificationType;
+use Sylius\Behat\NotificationType;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Webmozart\Assert\Assert;
@@ -25,7 +25,7 @@ use Webmozart\Assert\Assert;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-final class ManagingZoneContext implements Context
+final class ManagingZonesContext implements Context
 {
     const RESOURCE_NAME = 'zone';
 
@@ -76,7 +76,7 @@ final class ManagingZoneContext implements Context
     }
 
     /**
-     * @Given I want to create a new zone with :memberType members
+     * @Given I want to create a new zone consisting of :memberType
      */
     public function iWantToCreateANewZoneWithMembers($memberType)
     {
@@ -109,9 +109,7 @@ final class ManagingZoneContext implements Context
     }
 
     /**
-     * @When /^I remove (the "([^"]*)" province member)$/
-     * @When /^I remove (the "([^"]*)" country member)$/
-     * @When /^I remove (the "([^"]*)" zone member)$/
+     * @When /^I remove (the "([^"]*)" (?:country|province|zone) member)$/
      */
     public function iRemoveTheMember(ZoneMemberInterface $zoneMember)
     {
@@ -167,11 +165,9 @@ final class ManagingZoneContext implements Context
     }
 
     /**
-     * @When I add a country :name
-     * @When I add a province :name
-     * @When I add a zone :name
+     * @When /^I add a(?: country| province| zone) "([^"]+)"$/
      */
-    public function iAddACountry($name)
+    public function iAddAZoneMember($name)
     {
         $this->createPage->addMember();
         $this->createPage->chooseMember($name);
@@ -195,7 +191,7 @@ final class ManagingZoneContext implements Context
     }
 
     /**
-     * @Then I should be notified about successful creation
+     * @Then I should be notified that it has been successfully created
      */
     public function iShouldBeNotifiedAboutSuccessfulCreation()
     {
@@ -203,7 +199,7 @@ final class ManagingZoneContext implements Context
     }
 
     /**
-     * @Then I should be notified about successful edition
+     * @Then I should be notified that it has been successfully edited
      */
     public function iShouldBeNotifiedAboutSuccessfulEdition()
     {
@@ -219,9 +215,7 @@ final class ManagingZoneContext implements Context
     }
 
     /**
-     * @Then /^the (zone named "[^"]+") with (the "[^"]+" country member) should appear in the registry$/
-     * @Then /^the (zone named "[^"]+") with (the "[^"]+" province member) should appear in the registry$/
-     * @Then /^the (zone named "[^"]+") with (the "[^"]+" zone member) should appear in the registry$/
+     * @Then /^the (zone named "[^"]+") with (the "[^"]+" (?:country|province|zone) member) should appear in the registry$/
      */
     public function theZoneWithTheCountryShouldAppearInTheRegistry(ZoneInterface $zone, ZoneMemberInterface $zoneMember)
     {
@@ -229,9 +223,7 @@ final class ManagingZoneContext implements Context
     }
 
     /**
-     * @Then /^(this zone) should have only (the "([^"]*)" country member)$/
-     * @Then /^(this zone) should have only (the "([^"]*)" province member)$/
-     * @Then /^(this zone) should have only (the "([^"]*)" zone member)$/
+     * @Then /^(this zone) should have only (the "([^"]*)" (?:country|province|zone) member)$/
      */
     public function thisZoneShouldHaveOnlyTheProvinceMember(ZoneInterface $zone, ZoneMemberInterface $zoneMember)
     {
@@ -251,7 +243,7 @@ final class ManagingZoneContext implements Context
     {
         Assert::true(
             $this->updatePage->hasResourceValues(['code' => $zone->getCode(), 'name' => $name]),
-            'Zone name should be modified but it is not'
+            sprintf('Zone should be named %s, but is %s', $name, $zone->getName())
         );
     }
 
@@ -288,7 +280,7 @@ final class ManagingZoneContext implements Context
 
         Assert::true(
             $this->indexPage->isResourceOnPage(['code' => $code]),
-            sprintf('Zone with code %s cannot be founded.', $code)
+            sprintf('Zone with code %s cannot be found.', $code)
         );
     }
 
@@ -314,7 +306,7 @@ final class ManagingZoneContext implements Context
 
         Assert::false(
             $this->indexPage->isResourceOnPage([$element => $value]),
-            sprintf('Zone with %s %s was created, but it should not.', $element, $value)
+            sprintf('Zone with %s %s was added, but it should not.', $element, $value)
         );
     }
 
@@ -323,11 +315,9 @@ final class ManagingZoneContext implements Context
      */
     public function iShouldBeNotifiedThatAtLeastOneZoneMemberIsRequired()
     {
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm($this->createPage, $this->updatePage);
-
         Assert::true(
-            $currentPage->checkValidationMessageFor('member', 'Please add at least 1 zone member.'),
-            sprintf('I should be notified that zone needs at least one zone member.')
+            $this->createPage->checkValidationMessageForMembers('Please add at least 1 zone member.'),
+            'I should be notified that zone needs at least one zone member.'
         );
     }
 
@@ -369,7 +359,7 @@ final class ManagingZoneContext implements Context
      */
     public function iShouldSeeZonesInTheList($number)
     {
-        $resourcesOnPage = $this->indexPage->countAllResourcesOnPage();
+        $resourcesOnPage = $this->indexPage->countItems();
 
         Assert::eq(
             $number,
@@ -379,8 +369,7 @@ final class ManagingZoneContext implements Context
     }
 
     /**
-     * @Then /^I should see the (zone named "([^"]*)") in the list$/
-     * @Then /^I should still see the (zone named "([^"]*)") in the list$/
+     * @Then /^I should(?:| still) see the (zone named "([^"]+)") in the list$/
      */
     public function iShouldSeeTheZoneNamedInTheList(ZoneInterface $zone)
     {
@@ -406,13 +395,11 @@ final class ManagingZoneContext implements Context
      */
     private function assertZoneAndItsMember(ZoneInterface $zone, ZoneMemberInterface $zoneMember)
     {
-        $expectedZoneValues = [
-            'code' => $zone->getCode(),
-            'name' => $zone->getName(),
-        ];
-
         Assert::true(
-            $this->updatePage->hasResourceValues($expectedZoneValues),
+            $this->updatePage->hasResourceValues([
+                'code' => $zone->getCode(),
+                'name' => $zone->getName(),
+            ]),
             sprintf('Zone %s is not valid', $zone->getName())
         );
 

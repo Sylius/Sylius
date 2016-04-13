@@ -17,6 +17,7 @@ use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -62,7 +63,7 @@ final class ZoneMemberContext implements Context
     }
 
     /**
-     * @Transform the :countryName country member
+     * @Transform the :name country member
      */
     public function getCountryTypeZoneMemberByName($name)
     {
@@ -98,14 +99,16 @@ final class ZoneMemberContext implements Context
      * @param string $code
      *
      * @return ZoneMemberInterface
+     *
+     * @throws \InvalidArgumentException
      */
     private function getZoneMemberByCode($code)
     {
         $zoneMember = $this->zoneMemberRepository->findOneBy(['code' => $code]);
-
-        if (null === $zoneMember) {
-            throw new \InvalidArgumentException(sprintf('Zone member with code %s does not exist.', $code));
-        }
+        Assert::notNull(
+            $zoneMember,
+            sprintf('Zone member with code %s does not exist.', $code)
+        );
 
         return $zoneMember;
     }
@@ -114,14 +117,16 @@ final class ZoneMemberContext implements Context
      * @param string $name
      *
      * @return ProvinceInterface
+     *
+     * @throws \InvalidArgumentException
      */
     private function getProvinceByName($name)
     {
         $province = $this->provinceRepository->findOneBy(['name' => $name]);
-
-        if (null === $province) {
-            throw new \InvalidArgumentException(sprintf('Province with name %s does not exist.', $name));
-        }
+        Assert::notNull(
+            $province,
+            sprintf('Province with name %s does not exist.', $name)
+        );
 
         return $province;
     }
@@ -130,14 +135,16 @@ final class ZoneMemberContext implements Context
      * @param string $name
      *
      * @return ZoneInterface
+     *
+     * @throws \InvalidArgumentException
      */
     private function getZoneByName($name)
     {
         $zone = $this->zoneRepository->findOneBy(['name' => $name]);
-
-        if (null === $zone) {
-            throw new \InvalidArgumentException(sprintf('Zone with name %s does not exist.', $name));
-        }
+        Assert::notNull(
+            $zone,
+            sprintf('Zone with name %s does not exist.', $name)
+        );
 
         return $zone;
     }

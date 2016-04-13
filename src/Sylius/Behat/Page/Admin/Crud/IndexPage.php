@@ -55,20 +55,6 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function countAllResourcesOnPage()
-    {
-        try {
-            $rows = $this->getElement('table')->findAll('css', 'tbody > tr');
-
-            return count($rows);
-        } catch (ElementNotFoundException $exception) {
-            return 0;
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function isResourceOnPage(array $parameters)
     {
         try {

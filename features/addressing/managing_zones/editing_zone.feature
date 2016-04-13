@@ -1,14 +1,14 @@
 @managing_zones
 Feature: Editing a zone
-    In order to change the membership of areas
+    In order to change my my tax and shipping configuration
     As an Administrator
     I want to be able to edit a zone
 
     Background:
-        Given the store has country "France"
-        And the store also has country "Germany"
-        And the store has a province "Alabama" with code "AL"
-        And the store has a province "Arizona" with code "AZ"
+        Given the store operates in "France" and "Germany"
+        And the store also has country "United States"
+        And this country has the "Alabama" province with "AL" code
+        And this country has the "Arizona" province with "AZ" code
         And the store has a zone "North America" with code "NA"
         And the store has a zone "South America" with code "SA"
         And I am logged in as an administrator
@@ -21,7 +21,7 @@ Feature: Editing a zone
         And I want to modify the zone named "European Union"
         When I remove the "Germany" country member
         And I save my changes
-        Then I should be notified about successful edition
+        Then I should be notified that it has been successfully edited
         And this zone should have only the "France" country member
 
     @ui @javascript
@@ -32,7 +32,7 @@ Feature: Editing a zone
         And I want to modify the zone named "United States of America"
         When I remove the "Arizona" province member
         And I save my changes
-        Then I should be notified about successful edition
+        Then I should be notified that it has been successfully edited
         And this zone should have only the "Alabama" province member
 
     @ui @javascript
@@ -43,7 +43,7 @@ Feature: Editing a zone
         And I want to modify the zone named "America"
         When I remove the "North America" zone member
         And I save my changes
-        Then I should be notified about successful edition
+        Then I should be notified that it has been successfully edited
         And this zone should have only the "South America" zone member
 
     @ui
@@ -53,7 +53,7 @@ Feature: Editing a zone
         And I want to modify the zone named "European Union"
         When I rename it to "EU"
         And I save my changes
-        Then I should be notified about successful edition
+        Then I should be notified that it has been successfully edited
         And this zone name should be "EU"
 
     @ui

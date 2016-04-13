@@ -13,11 +13,12 @@ namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class ProvinceContext implements Context
+final class ProvinceContext implements Context
 {
     /**
      * @var RepositoryInterface
@@ -39,10 +40,10 @@ class ProvinceContext implements Context
     public function getProvinceByName($name)
     {
         $province = $this->provinceRepository->findOneBy(['name' => $name]);
-
-        if (null === $province) {
-            throw new \InvalidArgumentException(sprintf('Cannot find province %s', $name));
-        }
+        Assert::notNull(
+            $province,
+            sprintf('Cannot find province %s', $name)
+        );
 
         return $province;
     }

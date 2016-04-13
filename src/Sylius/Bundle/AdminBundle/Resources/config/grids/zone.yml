@@ -15,9 +15,6 @@ sylius_grid:
                 type:
                     type: string
                     label: sylius.ui.type
-                scope:
-                    type: string
-                    label: sylius.ui.scope
             actions:
                 main:
                     create:
@@ -25,3 +22,5 @@ sylius_grid:
                 item:
                     delete:
                         type: delete
+                    update:
+                        type: update

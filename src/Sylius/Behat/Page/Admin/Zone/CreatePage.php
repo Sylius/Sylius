@@ -11,23 +11,19 @@
 
 namespace Sylius\Behat\Page\Admin\Zone;
 
+use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Behaviour\NamesIt;
 use Sylius\Behat\Behaviour\SpecifiesItsCode;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
-use Sylius\Behat\Page\ElementNotFoundException;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
-    use NamesIt, SpecifiesItsCode;
-
-    protected $elements = [
-        'code' => '#sylius_zone_code',
-        'name' => '#sylius_zone_name',
-        'type' => '#sylius_zone_type',
-    ];
+    use NamesIt;
+    use SpecifiesItsCode;
 
     public function addMember()
     {
@@ -37,15 +33,28 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function checkValidationMessageForMembers($message)
+    {
+        $membersValidationElement = $this->getElement('ui_segment')->find('css', '.ui.pointing');
+        if (null === $membersValidationElement) {
+            throw new ElementNotFoundException($this->getDriver(), 'members validation box', 'css', '.ui.pointing');
+        }
+
+        return $membersValidationElement->getText() === $message;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function chooseMember($name)
     {
-        $selectItems = $this->getDocument()->waitFor(2*1000*1000, function () {
+        $selectItems = $this->getDocument()->waitFor(2, function () {
             return $this->getDocument()->findAll('css', 'div[data-form-type="collection"] select');
         });
         $lastSelectItem = end($selectItems);
 
         if (false === $lastSelectItem) {
-            throw new \RuntimeException('There is no select items.');
+            throw new ElementNotFoundException($this->getSession(), 'select', 'css', 'div[data-form-type="collection"] select');
         }
 
         $lastSelectItem->selectOption($name);
@@ -56,14 +65,10 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      */
     public function hasType($type)
     {
-        try {
-            $typeField = $this->getElement('type');
-            $selectedOption = $typeField->find('css', 'option[selected]');
+        $typeField = $this->getElement('type');
+        $selectedOption = $typeField->find('css', 'option[selected]');
 
-            return lcfirst($selectedOption->getText()) === $type;
-        } catch (ElementNotFoundException $exception) {
-            return false;
-        }
+        return lcfirst($selectedOption->getText()) === $type;
     }
 
     /**
@@ -71,12 +76,19 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      */
     public function isTypeFieldDisabled()
     {
-        try {
-            $typeField = $this->getElement('type');
+        return $this->getElement('type')->hasAttribute('disabled');
+    }
 
-            return $typeField->getAttribute('disabled') === 'disabled';
-        } catch (ElementNotFoundException $exception) {
-            return false;
-        }
+    /**
+     * {@inheritdoc}
+     */
+    protected function getDefinedElements()
+    {
+        return array_merge(parent::getDefinedElements(), [
+            'code' => '#sylius_zone_code',
+            'name' => '#sylius_zone_name',
+            'type' => '#sylius_zone_type',
+            'ui_segment' => '.ui.segment',
+        ]);
     }
 }

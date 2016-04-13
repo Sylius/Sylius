@@ -74,8 +74,6 @@ install:
 before_script:
     - etc/travis/run-suite ${SYLIUS_SUITE} before_script
 
-    gulp
-
 script:
     - etc/travis/run-suite ${SYLIUS_SUITE} script
 

@@ -12,7 +12,7 @@ Feature: Zone unique code validation
 
     @ui
     Scenario: Trying to add zone with taken code
-        Given I want to create a new zone with country members
+        Given I want to create a new zone consisting of country
         When I specify its code as "EU"
         And I name it "European Union"
         And I try to add it

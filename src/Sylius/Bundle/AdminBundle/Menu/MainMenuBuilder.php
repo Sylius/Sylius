@@ -84,6 +84,12 @@ final class MainMenuBuilder extends AbstractAdminMenuBuilder
             ->setLabel('sylius.menu.admin.main.configuration.tax_rates')
             ->setLabelAttribute('icon', 'dollar')
         ;
+
+        $configurationSubMenu
+            ->addChild('zones', ['route' => 'sylius_admin_zone_index'])
+            ->setLabel('sylius.menu.admin.main.configuration.zones')
+            ->setLabelAttribute('icon', 'world')
+        ;
     }
 
     /**

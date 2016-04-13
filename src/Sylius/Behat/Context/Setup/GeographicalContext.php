@@ -98,15 +98,21 @@ final class GeographicalContext implements Context
 
     /**
      * @Given /^the store operates in "([^"]*)"$/
-     * @Given /^the store has country "([^"]*)"$/
-     * @Given /^the store also has country "([^"]*)"$/
+     * @Given /^the store operates in "([^"]*)" and "([^"]*)"$/
+     * @Given /^the store(?:| also) has country "([^"]*)"$/
      */
-    public function theStoreOperatesIn($countryName)
+    public function theStoreOperatesIn($firstCountryName, $secondCountryName = null)
     {
-        $country = $this->createCountryNamed(trim($countryName));
-        $this->sharedStorage->set('country', $country);
+        foreach ([$firstCountryName, $secondCountryName] as $countryName) {
+            if (null === $countryName) {
+                break;
+            }
 
-        $this->countryRepository->add($country);
+            $country = $this->createCountryNamed(trim($countryName));
+            $this->sharedStorage->set('country', $country);
+
+            $this->countryRepository->add($country);
+        }
     }
 
     /**
@@ -122,6 +128,23 @@ final class GeographicalContext implements Context
     }
 
     /**
+     * @Given /^(this country) has the "([^"]+)" province with "([^"]+)" code$/
+     * @Given /^(country "[^"]+") has the "([^"]+)" province with "([^"]+)" code$/
+     */
+    public function theCountryHasProvinceWithCode(CountryInterface $country, $name, $code)
+    {
+        /** @var ProvinceInterface $province */
+        $province = $this->provinceFactory->createNew();
+
+        $province->setName($name);
+        $province->setCode($code);
+        $country->addProvince($province);
+
+        $this->sharedStorage->set('province', $province);
+        $this->countryManager->flush();
+    }
+
+    /**
      * @param string $name
      *
      * @return CountryInterface
@@ -133,20 +156,5 @@ final class GeographicalContext implements Context
         $country->setCode($this->countryNameConverter->convertToCode($name));
 
         return $country;
-    }
-
-    /**
-     * @Given /^(this country) has the "([^"]+)" province with "([^"]+)" code$/
-     */
-    public function theCountryHasProvinceWithCode(CountryInterface $country, $name, $code)
-    {
-        /** @var ProvinceInterface $province */
-        $province = $this->provinceFactory->createNew();
-
-        $province->setName($name);
-        $province->setCode($code);
-        $country->addProvince($province);
-
-        $this->countryManager->flush();
     }
 }

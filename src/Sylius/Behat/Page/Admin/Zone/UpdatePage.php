@@ -12,10 +12,10 @@
 namespace Sylius\Behat\Page\Admin\Zone;
 
 use Behat\Mink\Element\NodeElement;
+use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Behaviour\NamesIt;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
-use Sylius\Behat\Page\ElementNotFoundException;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 
 /**
@@ -23,31 +23,17 @@ use Sylius\Component\Addressing\Model\ZoneMemberInterface;
  */
 class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 {
-    use NamesIt, ChecksCodeImmutability;
-
-    /**
-     * @var array
-     */
-    protected $elements = [
-        'code' => '#sylius_zone_code',
-        'name' => '#sylius_zone_name',
-        'type' => '#sylius_zone_type',
-        'member' => '.one.field',
-        'zone_members' => '#sylius_zone_members',
-    ];
+    use NamesIt;
+    use ChecksCodeImmutability;
 
     /**
      * {@inheritdoc}
      */
     public function countMembers()
     {
-        try {
-            $selectedZoneMembers = $this->getSelectedZoneMembers();
+        $selectedZoneMembers = $this->getSelectedZoneMembers();
 
-            return count($selectedZoneMembers);
-        } catch (ElementNotFoundException $exception) {
-            return 0;
-        }
+        return count($selectedZoneMembers);
     }
 
     /**
@@ -55,19 +41,15 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
      */
     public function hasMember(ZoneMemberInterface $zoneMember)
     {
-        try {
-            $selectedZoneMembers = $this->getSelectedZoneMembers();
+        $selectedZoneMembers = $this->getSelectedZoneMembers();
 
-            foreach ($selectedZoneMembers as $selectedZoneMember) {
-                if ($selectedZoneMember->getValue() === $zoneMember->getCode()) {
-                    return true;
-                }
+        foreach ($selectedZoneMembers as $selectedZoneMember) {
+            if ($selectedZoneMember->getValue() === $zoneMember->getCode()) {
+                return true;
             }
-
-            return false;
-        } catch (ElementNotFoundException $exception) {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -83,16 +65,11 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             $selectedItem = $item->find('css', 'option[selected="selected"]');
 
             if (null === $selectedItem) {
-                throw new \RuntimeException('Cannot find selected option');
+                throw new ElementNotFoundException($this->getDriver(), 'selected option', 'css', 'option[selected="selected"]');
             }
 
             if ($selectedItem->getValue() === $zoneMember->getCode()) {
-                $deleteButton = $item->find('css', 'a[data-form-collection="delete"]');
-
-                if (null === $deleteButton) {
-                    throw new \RuntimeException('Cannot find delete button');
-                }
-                $deleteButton->click();
+                $this->getDeleteButtonForCollectionItem($item)->click();
 
                 break;
             }
@@ -107,6 +84,37 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     protected function getCodeElement()
     {
         return $this->getElement('code');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getDefinedElements()
+    {
+        return array_merge(parent::getDefinedElements(), [
+            'code' => '#sylius_zone_code',
+            'name' => '#sylius_zone_name',
+            'type' => '#sylius_zone_type',
+            'member' => '.one.field',
+            'zone_members' => '#sylius_zone_members',
+        ]);
+    }
+
+    /**
+     * @param NodeElement $item
+     *
+     * @return NodeElement
+     *
+     * @throws ElementNotFoundException
+     */
+    private function getDeleteButtonForCollectionItem(NodeElement $item)
+    {
+        $deleteButton = $item->find('css', 'a[data-form-collection="delete"]');
+        if (null === $deleteButton) {
+            throw new ElementNotFoundException($this->getDriver(), 'link', 'css', 'a[data-form-collection="delete"]');
+        }
+
+        return $deleteButton;
     }
 
     /**

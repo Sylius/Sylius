@@ -9,6 +9,7 @@ sylius:
                     shipping_methods: Shipping methods
                     tax_categories: Tax categories
                     tax_rates: Tax rates
+                    zones: Zones
                 marketing:
                     header: Marketing
                     promotions: Promotions
