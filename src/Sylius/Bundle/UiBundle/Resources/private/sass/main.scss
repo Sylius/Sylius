@@ -31,3 +31,14 @@ body.centered {
   }
 }
 
+select.ui.dropdown[multiple="multiple"] {
+  height: 100px;
+}
+
+.ui.segments {
+  border: 0;
+
+  .ui.segment {
+    border: 1px solid rgba(34,36,38,.15) !important;
+  }
+}
