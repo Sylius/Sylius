@@ -45,7 +45,6 @@ class OrderController extends ResourceController
         $paginator->setMaxPerPage($configuration->getPaginationMaxPerPage());
 
         // Fetch and cache deleted orders
-        $entityManager = $this->container->get('doctrine.orm.entity_manager');
         $paginator->getCurrentPageResults();
         $paginator->getNbResults();
 
