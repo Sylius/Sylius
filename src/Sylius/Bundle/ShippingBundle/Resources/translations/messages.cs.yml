@@ -44,3 +44,5 @@ sylius:
             configuration: Konfigurace
             enabled: Povoleno
             name: Jméno
+            tax_category: Typ daně
+            translations: Překlady

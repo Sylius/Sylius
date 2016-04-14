@@ -7,4 +7,7 @@ sylius:
             main:
                 configuration:
                     countries: Zemlje
+                    shipping_methods: Načini dostave
                     tax_rates: Poreske stope
+                marketing:
+                    promotions: Promocije

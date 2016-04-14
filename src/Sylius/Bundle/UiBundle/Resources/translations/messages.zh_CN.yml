@@ -22,5 +22,6 @@ sylius:
         new: 新增
         new_country: 新建国家
         "no": false
+        shipping_methods: 发货方式
         success: 成功
         "yes": true

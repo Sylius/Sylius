@@ -6,8 +6,12 @@ sylius:
         admin:
             main:
                 configuration:
-                    header: Konfigurácia
-                    tax_categories: Daňové kategórie
                     countries: Krajiny
+                    header: Konfigurácia
                     locales: Jazyky
+                    shipping_methods: Spôsoby doručenia
+                    tax_categories: Daňové kategórie
                     tax_rates: Daňové sadzby
+                marketing:
+                    header: Marketing
+                    promotions: Akcie

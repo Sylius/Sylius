@@ -125,3 +125,19 @@ sylius:
             type: Associatietype
         product_association_type:
             name: Naam
+        promotion_rule:
+            contains_taxon:
+                count: Aantal
+            taxon:
+                taxons: Taxons
+            total_of_items_from_taxon:
+                amount: Hoeveelheid
+    email:
+        order_confirmation:
+            name: Order bevestiging
+        order_comment:
+            name: Order Opmerkingen
+        shipment_confirmation:
+            name: Bevestiging van de verzending
+        user_confirmation:
+            name: Bevestiging van de gebruiker

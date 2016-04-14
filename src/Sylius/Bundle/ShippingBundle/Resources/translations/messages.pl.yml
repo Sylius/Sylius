@@ -44,3 +44,5 @@ sylius:
             configuration: Konfiguracja
             enabled: Włączone
             name: Nazwa
+            tax_category: Kategoria podatkowa
+            translations: Tłumaczenia

@@ -37,3 +37,4 @@ sylius:
             configuration: Konfigūracija
             enabled: Įjungta
             name: Pavadinimas
+            tax_category: Mokesčių kategorija

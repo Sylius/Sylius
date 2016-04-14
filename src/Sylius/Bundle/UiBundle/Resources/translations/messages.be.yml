@@ -23,5 +23,6 @@ sylius:
         new_tax_category: Новая катэгорыя падатка
         "no": false
         save_changes: Захаваць змены
+        shipping_methods: Метады дастаўкі
         success: Поспех
         "yes": true

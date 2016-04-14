@@ -49,3 +49,5 @@ sylius:
             configuration: Konfigurácia
             enabled: Zapnuté
             name: Názov
+            tax_category: Daňová kategória
+            translations: Preklady

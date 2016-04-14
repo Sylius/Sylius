@@ -128,3 +128,19 @@ sylius:
             type: نوع ارتباط
         product_association_type:
             name: نام
+        promotion_rule:
+            contains_taxon:
+                count: تعداد
+            taxon:
+                taxons: رده ها
+            total_of_items_from_taxon:
+                amount: مبلغ
+    email:
+        order_confirmation:
+            name: تایید سفارش
+        order_comment:
+            name: یادداشت سفارش
+        shipment_confirmation:
+            name: تایید ارسال
+        user_confirmation:
+            name: تایید کاربر

@@ -47,3 +47,5 @@ sylius:
             configuration: تنظیمات
             enabled: فعال
             name: نام
+            tax_category: نوع مالیات
+            translations: زبان های

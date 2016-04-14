@@ -26,6 +26,7 @@ sylius:
         "no": false
         powered_by: Sukurta
         save_changes: Išsaugoti pakeitimus
+        shipping_methods: Pristatymo būdai
         sign_in: Prisijungti
         sign_out: Atsijungti
         success: Pavyko

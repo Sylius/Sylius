@@ -26,6 +26,7 @@ sylius:
         "no": false
         powered_by: قدرت گرفته از
         save_changes: ذخیره تغییرات
+        shipping_methods: شیوه های ارسال
         sign_in: ورود
         sign_out: خروج
         status: وضعیت

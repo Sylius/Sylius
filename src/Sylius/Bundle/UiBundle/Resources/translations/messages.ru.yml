@@ -24,6 +24,7 @@ sylius:
         new_tax_category: Создать налоговую категорию
         "no": false
         save_changes: Сохранить изменения
+        shipping_methods: Методы доставки
         sign_in: Войти
         sign_out: Выйти
         status: Статус
