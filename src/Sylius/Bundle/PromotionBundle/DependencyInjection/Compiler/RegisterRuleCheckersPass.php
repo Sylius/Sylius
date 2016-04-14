@@ -31,7 +31,10 @@ class RegisterRuleCheckersPass implements CompilerPassInterface
         $registry = $container->getDefinition('sylius.registry.promotion_rule_checker');
         $checkers = [];
 
-        foreach ($container->findTaggedServiceIds('sylius.promotion_rule_checker') as $id => $attributes) {
+        $checkersServices = $container->findTaggedServiceIds('sylius.promotion_rule_checker');
+        ksort($checkersServices);
+
+        foreach ($checkersServices as $id => $attributes) {
             if (!isset($attributes[0]['type']) || !isset($attributes[0]['label'])) {
                 throw new \InvalidArgumentException('Tagged rule checker needs to have `type` and `label` attributes.');
             }
