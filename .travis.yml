@@ -10,7 +10,9 @@ cache:
         - ~/.composer/cache/files
         - $SYLIUS_CACHE_DIR
 
-sudo: false
+sudo: required
+
+dist: trusty
 
 addons:
     apt:
@@ -19,9 +21,11 @@ addons:
         packages:
             - google-chrome-stable
             - parallel
+            - mysql-server
 
 services:
     - memcached
+    - mysql
 
 php:
     - 7.0
