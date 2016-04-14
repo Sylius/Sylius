@@ -35,6 +35,8 @@ class SyliusCartExtension extends AbstractResourceExtension implements PrependEx
         $config = $this->processConfiguration(new Configuration(), $config);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
+        $loader->load(sprintf('driver/%s.xml', $config['driver']));
+
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
         $configFiles = [
@@ -46,8 +48,6 @@ class SyliusCartExtension extends AbstractResourceExtension implements PrependEx
         foreach ($configFiles as $configFile) {
             $loader->load($configFile);
         }
-
-        $loader->load(sprintf('driver/%s.xml', $config['driver']));
 
         $container->setAlias('sylius.cart_provider', $config['provider']);
         $container->setAlias('sylius.cart_resolver', $config['resolver']);
