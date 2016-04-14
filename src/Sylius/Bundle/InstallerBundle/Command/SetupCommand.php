@@ -140,6 +140,9 @@ EOT
 
         if (null !== $existingCurrency = $currencyRepository->findOneBy(['code' => $code])) {
             $this->currency = $existingCurrency;
+            $existingCurrency->setBase(true);
+
+            $currencyManager->flush();
 
             return;
         }
