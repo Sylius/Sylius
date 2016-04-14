@@ -18,11 +18,16 @@
 >
 
     <parameters>
+        <parameter key="sylius.grid_field.datetime.class">Sylius\Component\Grid\FieldTypes\DatetimeFieldType</parameter>
         <parameter key="sylius.grid_field.string.class">Sylius\Component\Grid\FieldTypes\StringFieldType</parameter>
         <parameter key="sylius.grid_field.twig.class">Sylius\Bundle\GridBundle\FieldTypes\TwigFieldType</parameter>
     </parameters>
 
     <services>
+        <service id="sylius.grid_field.datetime" class="%sylius.grid_field.datetime.class%">
+            <argument type="service" id="sylius.grid.data_extractor" />
+            <tag name="sylius.grid_field" type="datetime" />
+        </service>
         <service id="sylius.grid_field.string" class="%sylius.grid_field.string.class%">
             <argument type="service" id="sylius.grid.data_extractor" />
             <tag name="sylius.grid_field" type="string" />

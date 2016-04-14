@@ -13,11 +13,12 @@ namespace Sylius\Component\Grid\FieldTypes;
 
 use Sylius\Component\Grid\DataExtractor\DataExtractorInterface;
 use Sylius\Component\Grid\Definition\Field;
+use Webmozart\Assert\Assert;
 
 /**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class StringFieldType implements FieldTypeInterface
+class DatetimeFieldType implements FieldTypeInterface
 {
     /**
      * @var DataExtractorInterface
@@ -37,7 +38,16 @@ class StringFieldType implements FieldTypeInterface
      */
     public function render(Field $field, $data)
     {
-        return $this->dataExtractor->get($field, $data);
+        Assert::keyExists($field->getOptions(), 'format');
+
+        $value = $this->dataExtractor->get($field, $data);
+        if (null === $value) {
+            return null;
+        }
+
+        Assert::isInstanceOf($value, \DateTime::class);
+
+        return $value->format($field->getOptions()['format']);
     }
 
     /**
@@ -45,6 +55,6 @@ class StringFieldType implements FieldTypeInterface
      */
     public function getName()
     {
-        return 'string';
+        return 'datetime';
     }
 }
