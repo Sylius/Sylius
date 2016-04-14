@@ -11,6 +11,8 @@
 
 namespace Sylius\Behat\Page\Admin\Country;
 
+use Behat\Mink\Element\Element;
+use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Behaviour\Toggles;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 
@@ -34,6 +36,26 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function isThereProvince($provinceName)
+    {
+        $provinces = $this->getElement('provinces');
+
+        return $provinces->has('css', '[value = "'.$provinceName.'"]');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isThereProvinceWithCode($provinceCode)
+    {
+        $provinces = $this->getElement('provinces');
+
+        return $provinces->has('css', '[value = "'.$provinceCode.'"]');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getToggleableElement()
     {
         return $this->getElement('enabled');
@@ -47,6 +69,108 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return array_merge(parent::getDefinedElements(), [
             'enabled' => '#sylius_country_enabled',
             'code' => '#sylius_country_code',
+            'provinces' => '#sylius_country_provinces',
         ]);
+    }
+
+    /**
+     * @param string $provinceName
+     */
+    public function removeProvince($provinceName)
+    {
+        if ($this->isThereProvince($provinceName)) {
+            $provinces = $this->getElement('provinces');
+
+            $item = $provinces
+                ->find('css', 'div[data-form-collection="item"] input[value="'.$provinceName.'"]')
+                ->getParent()
+                ->getParent()
+            ;
+            $item->clickLink('Delete');
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addProvince($name, $code, $abbreviation = null)
+    {
+        $this->clickAddProvinceButton();
+
+        $provinceForm = $this->getLastProvinceElement();
+
+        $provinceForm->fillField('Name', $name);
+        $provinceForm->fillField('Code', $code);
+
+        if (null !== $abbreviation) {
+            $provinceForm->fillField('Abbreviation', $abbreviation);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function clickAddProvinceButton()
+    {
+        $this->getDocument()->clickLink('Add province');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function nameProvince($name)
+    {
+        $provinceForm = $this->getLastProvinceElement();
+
+        $provinceForm->fillField('Name', $name);
+    }
+
+    /**
+     * @param string $provinceName
+     */
+    public function removeProvinceName($provinceName)
+    {
+        if ($this->isThereProvince($provinceName)) {
+            $provinces = $this->getElement('provinces');
+
+            $item = $provinces->find('css', 'div[data-form-collection="item"] input[value="'.$provinceName.'"]')->getParent();
+            $item->fillField('Name', '');
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function specifyProvinceCode($code)
+    {
+        $provinceForm = $this->getLastProvinceElement();
+
+        $provinceForm->fillField('Code', $code);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function checkValidationMessageFor($element, $message)
+    {
+        $provinceForm = $this->getLastProvinceElement();
+
+        $foundedElement = $provinceForm->find('css', '.pointing');
+        if (null === $foundedElement) {
+            throw new ElementNotFoundException($this->getSession(), 'Tag', 'css', '.pointing');
+        }
+
+        return $message === $foundedElement->getText();
+    }
+
+    /**
+     * @return Element
+     */
+    private function getLastProvinceElement()
+    {
+        $provinces = $this->getElement('provinces');
+        $items = $provinces->findAll('css', 'div[data-form-collection="item"]');
+
+        return end($items);
     }
 }

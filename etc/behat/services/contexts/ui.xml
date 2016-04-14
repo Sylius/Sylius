@@ -35,6 +35,7 @@
             <argument type="service" id="sylius.behat.page.admin.country.index" />
             <argument type="service" id="sylius.behat.page.admin.country.create" />
             <argument type="service" id="sylius.behat.page.admin.country.update" />
+            <argument type="service" id="sylius.behat.current_page_resolver" />
             <argument type="service" id="sylius.behat.notification_checker" />
             <tag name="sylius.behat.context" />
         </service>

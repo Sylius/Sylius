@@ -12,21 +12,34 @@
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Addressing\Converter\CountryNameConverterInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
+use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 final class GeographicalContext implements Context
 {
     /**
+     * @var SharedStorageInterface
+     */
+    private $sharedStorage;
+
+    /**
      * @var FactoryInterface
      */
     private $countryFactory;
+
+    /**
+     * @var FactoryInterface
+     */
+    private $provinceFactory;
 
     /**
      * @var RepositoryInterface
@@ -39,26 +52,32 @@ final class GeographicalContext implements Context
     private $countryNameConverter;
 
     /**
-     * @var SharedStorageInterface
+     * @var ObjectManager
      */
-    private $sharedStorage;
+    private $countryManager;
 
     /**
+     * @param SharedStorageInterface $sharedStorage
      * @param FactoryInterface $countryFactory
+     * @param FactoryInterface $provinceFactory
      * @param RepositoryInterface $countryRepository
      * @param CountryNameConverterInterface $countryNameConverter
-     * @param SharedStorageInterface $sharedStorage
+     * @param ObjectManager $countryManager
      */
     public function __construct(
+        SharedStorageInterface $sharedStorage,
         FactoryInterface $countryFactory,
+        FactoryInterface $provinceFactory,
         RepositoryInterface $countryRepository,
         CountryNameConverterInterface $countryNameConverter,
-        SharedStorageInterface $sharedStorage
+        ObjectManager $countryManager
     ) {
+        $this->sharedStorage = $sharedStorage;
         $this->countryFactory = $countryFactory;
+        $this->provinceFactory = $provinceFactory;
         $this->countryRepository = $countryRepository;
         $this->countryNameConverter = $countryNameConverter;
-        $this->sharedStorage = $sharedStorage;
+        $this->countryManager = $countryManager;
     }
 
     /**
@@ -113,5 +132,20 @@ final class GeographicalContext implements Context
         $country->setCode($this->countryNameConverter->convertToCode($name));
 
         return $country;
+    }
+
+    /**
+     * @Given /^(this country) has the "([^"]+)" province with "([^"]+)" code$/
+     */
+    public function theCountryHasProvinceWithCode(CountryInterface $country, $name, $code)
+    {
+        /** @var ProvinceInterface $province */
+        $province = $this->provinceFactory->createNew();
+
+        $province->setName($name);
+        $province->setCode($code);
+        $country->addProvince($province);
+
+        $this->countryManager->flush();
     }
 }
