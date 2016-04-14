@@ -21,3 +21,27 @@
         {{ 'sylius.ui.disabled'|trans }}
     </span>
 {% endmacro %}
+
+{% macro yesNo(value) %}
+    {% import _self as labels %}
+
+    {% if value %}
+        {{ labels.yes() }}
+    {% else %}
+        {{ labels.no() }}
+    {% endif %}
+{% endmacro %}
+
+{% macro yes() %}
+    <span class="ui basic label">
+        <i class="checkmark icon"></i>
+        {{ 'sylius.ui.yes'|trans }}
+    </span>
+{% endmacro %}
+
+{% macro no() %}
+    <span class="ui basic label">
+        <i class="remove icon"></i>
+        {{ 'sylius.ui.no'|trans }}
+    </span>
+{% endmacro %}

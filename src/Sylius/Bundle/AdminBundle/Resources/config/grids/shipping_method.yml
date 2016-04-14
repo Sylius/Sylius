@@ -12,19 +12,14 @@ sylius_grid:
                 name:
                     type: string
                     label: sylius.ui.name
+                zone:
+                    type: string
+                    label: sylius.ui.zone
                 enabled:
                     type: twig
                     label: sylius.ui.enabled
                     options:
                         template: SyliusAdminBundle:Grid/Field:enabled.html.twig
-                calculator:
-                    type: twig
-                    label: sylius.ui.calculator
-                    options:
-                        template: SyliusAdminBundle:Grid/Field:humanized.html.twig
-                zone:
-                    type: string
-                    label: sylius.ui.zone
             actions:
                 main:
                     create:

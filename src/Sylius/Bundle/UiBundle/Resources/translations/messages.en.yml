@@ -88,3 +88,7 @@ sylius:
         tax_categories: Tax categories
         values: Values
         yes: Yes
+        total_records: Total records
+        jump_to_page: Jump to page
+        go: Go
+        unlimited: Unlimited
