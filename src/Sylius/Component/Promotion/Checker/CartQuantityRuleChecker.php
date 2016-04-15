@@ -19,6 +19,8 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
  */
 class CartQuantityRuleChecker implements RuleCheckerInterface
 {
+    const TYPE = 'cart_quantity';
+
     /**
      * {@inheritdoc}
      */

@@ -11,15 +11,10 @@
 
 namespace Sylius\Component\Promotion\Checker;
 
-use Sylius\Component\Promotion\Exception\UnsupportedTypeException;
-use Sylius\Component\Promotion\Model\PromotionCouponAwareSubjectInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Promotion\Model\RuleInterface;
-use Sylius\Component\Promotion\SyliusPromotionEvents;
 use Sylius\Component\Registry\ServiceRegistryInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>

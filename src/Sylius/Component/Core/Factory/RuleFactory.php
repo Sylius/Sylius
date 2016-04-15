@@ -11,10 +11,12 @@
 
 namespace Sylius\Component\Core\Factory;
 
-use Sylius\Component\Core\Promotion\Checker\NthOrderRuleChecker;
-use Sylius\Component\Core\Promotion\Checker\TotalOfItemsFromTaxonRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\ContainsTaxonRuleChecker;
+use Sylius\Component\Core\Promotion\Checker\NthOrderRuleChecker;
 use Sylius\Component\Core\Promotion\Checker\TaxonRuleChecker;
+use Sylius\Component\Core\Promotion\Checker\TotalOfItemsFromTaxonRuleChecker;
+use Sylius\Component\Promotion\Checker\CartQuantityRuleChecker;
+use Sylius\Component\Promotion\Checker\ItemTotalRuleChecker;
 use Sylius\Component\Promotion\Model\RuleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
@@ -51,7 +53,7 @@ class RuleFactory implements RuleFactoryInterface
     {
         /** @var RuleInterface $rule */
         $rule = $this->createNew();
-        $rule->setType(RuleInterface::TYPE_CART_QUANTITY);
+        $rule->setType(CartQuantityRuleChecker::TYPE);
         $rule->setConfiguration(['count' => $count]);
 
         return $rule;
@@ -64,7 +66,7 @@ class RuleFactory implements RuleFactoryInterface
     {
         /** @var RuleInterface $rule */
         $rule = $this->createNew();
-        $rule->setType(RuleInterface::TYPE_ITEM_TOTAL);
+        $rule->setType(ItemTotalRuleChecker::TYPE);
         $rule->setConfiguration(['amount' => $amount]);
 
         return $rule;
