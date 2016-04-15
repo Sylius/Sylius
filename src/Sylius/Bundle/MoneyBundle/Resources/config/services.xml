@@ -18,6 +18,7 @@
 
     <parameters>
         <parameter key="sylius.form.type.money.class">Sylius\Bundle\MoneyBundle\Form\Type\MoneyType</parameter>
+        <parameter key="sylius.formatter.money.class">Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatter</parameter>
     </parameters>
 
     <services>
@@ -25,6 +26,7 @@
             <argument>%sylius.money.currency%</argument>
             <tag name="form.type" alias="sylius_money" />
         </service>
+        <service id="sylius.formatter.money" class="%sylius.formatter.money.class%" />
     </services>
 
 </container>
