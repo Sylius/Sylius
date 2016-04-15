@@ -11,16 +11,16 @@ Feature: Editing payment methods
     @ui
     Scenario: Renaming the payment method
         Given I want to modify a payment method "Offline"
-        When I rename it to "Cash on delivery" in "English"
+        When I rename it to "Cash on delivery" in "English (United States)"
         And I save my changes
         Then I should be notified about successful edition
-        And this payment method name should be "Cash on delivery" in "English"
+        And this payment method name should be "Cash on delivery"
 
     @ui
     Scenario: Changing gateway
         Given I want to modify a payment method "Offline"
-        When I rename it to "Paypal Express Checkout" in "English"
-        And I choose gateway "Paypal Express Checkout"
+        When I rename it to "Paypal Express Checkout" in "English (United States)"
+        And I choose "Paypal Express Checkout" gateway
         And I save my changes
         Then I should be notified about successful edition
         And this payment method gateway should be "paypal_express_checkout"
@@ -35,8 +35,8 @@ Feature: Editing payment methods
 
     @ui
     Scenario: Enabling payment method
-        Given the store has a payment method "Paypal Express Checkout" disabled
-        And I want to modify a payment method "Paypal Express Checkout"
+        Given the store has a payment method "Offline" disabled
+        And I want to modify a payment method "Offline"
         When I enable it
         And I save my changes
         Then I should be notified about successful edition

@@ -13,8 +13,8 @@ namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
-use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface;
 use Sylius\Behat\Page\Admin\PaymentMethod\CreatePageInterface;
+use Sylius\Behat\Page\Admin\PaymentMethod\UpdatePageInterface;
 use Sylius\Behat\Service\CurrentPageResolverInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
@@ -85,20 +85,13 @@ final class ManagingPaymentMethodsContext implements Context
     /**
      * @When I name it :name in :language
      * @When I rename it to :name in :language
+     * @When I remove its name from :language translation
      */
-    public function iNameItIn($name, $language)
+    public function iNameItIn($name = null, $language)
     {
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm($this->createPage, $this->updatePage);
 
         $currentPage->nameIt($name, $language);
-    }
-
-    /**
-     * @When I remove its name from :language translation
-     */
-    public function iRemoveItsNameFromTranslation($language)
-    {
-        $this->updatePage->nameIt(null, $language);
     }
 
     /**
@@ -107,6 +100,22 @@ final class ManagingPaymentMethodsContext implements Context
     public function iDoNotNameIt()
     {
         // Intentionally left blank to fulfill context expectation
+    }
+
+    /**
+     * @When I enable it
+     */
+    public function iEnableIt()
+    {
+        $this->updatePage->enable();
+    }
+
+    /**
+     * @When I disable it
+     */
+    public function iDisableIt()
+    {
+        $this->updatePage->disable();
     }
 
     /**
@@ -146,24 +155,13 @@ final class ManagingPaymentMethodsContext implements Context
     }
 
     /**
-     * @Then this payment method name should be :paymentMethodName
+     * @Then this payment method :element should be :paymentMethodName
      */
-    public function thisPaymentMethodNameShouldBe($paymentMethodName)
+    public function thisPaymentMethodNameShouldBe($element, $value)
     {
         Assert::true(
-            $this->updatePage->hasResourceValues(['name' => $paymentMethodName]),
-            sprintf('Payment method %s should be renamed', $paymentMethodName)
-        );
-    }
-
-    /**
-     * @Then this payment method gateway should be :gatewayName
-     */
-    public function thisPaymentMethodGatewayShouldBe($gatewayName)
-    {
-        Assert::true(
-            $this->updatePage->hasGateway($gatewayName),
-            sprintf('Payment method should have %s gateway', $gatewayName)
+            $this->updatePage->hasResourceValues([$element => $value]),
+            sprintf('Payment method should have %s %s', $value, $element)
         );
     }
 
@@ -293,6 +291,39 @@ final class ManagingPaymentMethodsContext implements Context
         Assert::true(
             $currentPage->checkValidationMessageFor($element, $expectedMessage),
             sprintf('Payment method %s should be required.', $element)
+        );
+    }
+
+    /**
+     * @Then /^the code field should be disabled$/
+     */
+    public function theCodeFieldShouldBeDisabled()
+    {
+        Assert::true(
+            $this->updatePage->isCodeDisabled(),
+            'Code field should be disabled'
+        );
+    }
+
+    /**
+     * @Then this payment method should be enabled
+     */
+    public function thisCountryShouldBeEnabled()
+    {
+        Assert::true(
+            $this->updatePage->isPaymentMethodEnabled(),
+            'Payment method should be enabled'
+        );
+    }
+
+    /**
+     * @Then this payment method should be disabled
+     */
+    public function thisCountryShouldBeDisabled()
+    {
+        Assert::false(
+            $this->updatePage->isPaymentMethodEnabled(),
+            'Payment method should be disabled'
         );
     }
 
