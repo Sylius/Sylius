@@ -75,7 +75,7 @@ class NthOrderRuleCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, ['nth' => 10])->shouldReturn(false);
     }
 
-    function it_recognizes_subject_as_eligible_if_nth_order_is_greater_then_configured(
+    function it_recognizes_subject_as_not_eligible_if_nth_order_is_greater_than_configured(
         CustomerInterface $customer,
         OrderInterface $subject,
         OrderRepositoryInterface $ordersRepository
