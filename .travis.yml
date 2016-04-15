@@ -7,7 +7,8 @@ env:
 
 cache:
     directories:
-        - ~/.composer/cache/files
+        - bin
+        - vendor
         - $SYLIUS_CACHE_DIR
 
 sudo: required
