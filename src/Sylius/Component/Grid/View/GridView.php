@@ -77,8 +77,6 @@ class GridView
      */
     public function isSortedBy($fieldName)
     {
-        $this->assertFieldExists($fieldName);
-
         return array_key_exists($fieldName, $this->getCurrentSorting());
     }
 
@@ -89,8 +87,6 @@ class GridView
      */
     public function getSortingOrder($fieldName)
     {
-        $this->assertFieldExists($fieldName);
-
         return $this->getCurrentSorting()[$fieldName];
     }
 
@@ -100,17 +96,5 @@ class GridView
     private function getCurrentSorting()
     {
         return $this->parameters->has('sorting') ? $this->parameters->get('sorting') : $this->definition->getSorting();
-    }
-
-    /**
-     * @param string $fieldName
-     *
-     * @throws \InvalidArgumentException
-     */
-    private function assertFieldExists($fieldName)
-    {
-        if (!$this->definition->hasField($fieldName)) {
-            throw new \InvalidArgumentException(sprintf('Field "%s" does not exist.', $fieldName));
-        }
     }
 }

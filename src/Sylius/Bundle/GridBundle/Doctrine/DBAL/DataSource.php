@@ -77,6 +77,7 @@ class DataSource implements DataSourceInterface
         };
 
         $paginator = new Pagerfanta(new DoctrineDbalAdapter($this->queryBuilder, $countQueryBuilderModifier));
+        $paginator->setNormalizeOutOfRangePages(true);
         $paginator->setCurrentPage($parameters->get('page', 1));
 
         return $paginator;

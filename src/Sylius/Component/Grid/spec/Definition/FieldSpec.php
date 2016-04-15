@@ -57,6 +57,24 @@ class FieldSpec extends ObjectBehavior
         $this->setLabel('Is enabled?');
         $this->getLabel()->shouldReturn('Is enabled?');
     }
+
+    function it_is_sortable_by_default()
+    {
+        $this->shouldBeSortable();
+        $this->getSortingPath()->shouldReturn('enabled');
+    }
+
+    function it_can_be_not_sortable()
+    {
+        $this->setSortable(false);
+        $this->shouldNotBeSortable();
+    }
+    
+    function its_sorting_path_is_mutable()
+    {
+        $this->setSortingPath('method.enabled');
+        $this->getSortingPath()->shouldReturn('method.enabled');
+    }
     
     function it_has_no_options_by_default()
     {

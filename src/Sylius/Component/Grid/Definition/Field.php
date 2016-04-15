@@ -37,6 +37,16 @@ class Field
     private $label;
 
     /**
+     * @var bool
+     */
+    private $sortable = true;
+
+    /**
+     * @var string
+     */
+    private $sortingPath;
+
+    /**
      * @var array
      */
     private $options = [];
@@ -52,6 +62,8 @@ class Field
 
         $this->path = $name;
         $this->label = $name;
+        $this->sortable = $name;
+        $this->sortingPath = $name;
     }
 
     /**
@@ -111,6 +123,38 @@ class Field
     public function setLabel($label)
     {
         $this->label = $label;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSortable()
+    {
+        return false !== $this->sortable;
+    }
+
+    /**
+     * @param bool $sortable
+     */
+    public function setSortable($sortable)
+    {
+        $this->sortable = (bool) $sortable;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSortingPath()
+    {
+        return $this->sortingPath;
+    }
+
+    /**
+     * @param string $sortingPath
+     */
+    public function setSortingPath($sortingPath)
+    {
+        $this->sortingPath = $sortingPath;
     }
 
     /**

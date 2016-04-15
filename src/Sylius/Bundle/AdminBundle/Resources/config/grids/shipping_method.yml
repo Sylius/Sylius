@@ -5,6 +5,8 @@ sylius_grid:
                 name: doctrine/orm
                 options:
                     class: %sylius.model.shipping_method.class%
+            sorting:
+                code: asc
             fields:
                 code:
                     type: string
@@ -20,6 +22,10 @@ sylius_grid:
                     label: sylius.ui.enabled
                     options:
                         template: SyliusAdminBundle:Grid/Field:enabled.html.twig
+            filters:
+                code:
+                    type: string
+                    label: sylius.ui.code
             actions:
                 main:
                     create:

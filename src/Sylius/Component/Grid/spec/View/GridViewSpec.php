@@ -81,18 +81,4 @@ class GridViewSpec extends ObjectBehavior
 
         $this->getSortingOrder('name')->shouldReturn('desc');
     }
-
-    function it_throws_exception_when_checking_sorting_of_non_existent_field(Grid $gridDefinition)
-    {
-        $gridDefinition->hasField('code')->willReturn(false);
-
-        $this
-            ->shouldThrow(new \InvalidArgumentException('Field "code" does not exist.'))
-            ->during('isSortedby', ['code'])
-        ;
-        $this
-            ->shouldThrow(new \InvalidArgumentException('Field "code" does not exist.'))
-            ->during('getSortingOrder', ['code'])
-        ;
-    }
 }

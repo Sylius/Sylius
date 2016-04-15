@@ -39,6 +39,18 @@ select.ui.dropdown[multiple="multiple"] {
   border: 0;
 
   .ui.segment {
-    border: 1px solid rgba(34,36,38,.15) !important;
+    border: 1px solid rgba(34, 36, 38, .15) !important;
+  }
+}
+
+th {
+  a {
+    color: $color-link;
+  }
+  a:hover {
+    color: $color-link;
+  }
+  a:visited {
+    color: $color-link;
   }
 }
