@@ -31,6 +31,11 @@ class ElasticaProductListener implements EventSubscriber
     protected $objectPersister;
 
     /**
+     * @var boolean
+     */
+    protected $productUpdated = false;
+
+    /**
      * @var array
      */
     protected $scheduledForUpdate = [];
@@ -108,6 +113,10 @@ class ElasticaProductListener implements EventSubscriber
         if ($entity instanceof ProductTranslation) {
             $this->addScheduledForUpdate($entity->getTranslatable());
         }
+
+        if ($entity instanceof ProductInterface) {
+            $this->productUpdated = true;
+        }
     }
 
     /**
@@ -115,7 +124,7 @@ class ElasticaProductListener implements EventSubscriber
      */
     private function addScheduledForUpdate(ProductInterface $product)
     {
-        if ($this->objectPersister->handlesObject($product)) {
+        if (!$this->productUpdated && $this->objectPersister->handlesObject($product)) {
             $this->scheduledForUpdate[] = $product;
         }
     }
