@@ -44,6 +44,7 @@ before_install:
     - etc/travis/prepare-memcached-extension
 
     - composer self-update
+    - composer config -g github-oauth.github.com f89d08114c80d1a1b019b09ce60a38f75a5c9480 # please don't use in your own projects :)
 
 install:
     - phpenv config-add etc/travis/install-php.ini
