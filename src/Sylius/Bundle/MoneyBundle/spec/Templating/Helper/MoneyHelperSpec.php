@@ -12,8 +12,9 @@
 namespace spec\Sylius\Bundle\MoneyBundle\Templating\Helper;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\MoneyBundle\Formatter\AmountFormatterInterface;
+use Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatterInterface;
 use Sylius\Bundle\MoneyBundle\Templating\Helper\MoneyHelper;
+use Sylius\Bundle\MoneyBundle\Templating\Helper\MoneyHelperInterface;
 use Symfony\Component\Templating\Helper\Helper;
 
 /**
@@ -24,9 +25,9 @@ use Symfony\Component\Templating\Helper\Helper;
  */
 class MoneyHelperSpec extends ObjectBehavior
 {
-    function let(AmountFormatterInterface $amountFormatter)
+    function let(MoneyFormatterInterface $moneyFormatter)
     {
-        $this->beConstructedWith('en', 'EUR', $amountFormatter);
+        $this->beConstructedWith('EUR', 'en_US', $moneyFormatter);
     }
 
     function it_is_initializable()
@@ -39,16 +40,29 @@ class MoneyHelperSpec extends ObjectBehavior
         $this->shouldHaveType(Helper::class);
     }
 
-    function it_allows_to_format_money_in_different_currencies(AmountFormatterInterface $amountFormatter)
+    function it_implements_money_helper_interface()
     {
-        $amountFormatter->format(15, 'en', 'USD')->willReturn('$0.15');
-        $amountFormatter->format(2500, 'en', 'USD')->willReturn('$25.00');
-        $amountFormatter->format(312, 'en', 'EUR')->willReturn('€3.12');
-        $amountFormatter->format(500, 'en', 'EUR')->willReturn('€5.00');
+        $this->shouldImplement(MoneyHelperInterface::class);
+    }
 
-        $this->formatAmount(15, 'USD')->shouldReturn('$0.15');
-        $this->formatAmount(2500, 'USD')->shouldReturn('$25.00');
-        $this->formatAmount(312, 'EUR')->shouldReturn('€3.12');
+    function it_formats_money_using_default_currency_and_locale_if_only_amount_is_given(MoneyFormatterInterface $moneyFormatter)
+    {
+        $moneyFormatter->format(500, 'EUR', 'en_US')->willReturn('€5.00');
+
         $this->formatAmount(500)->shouldReturn('€5.00');
+    }
+
+    function it_formats_money_using_default_locale_if_not_given(MoneyFormatterInterface $moneyFormatter)
+    {
+        $moneyFormatter->format(312, 'EUR', 'en_US')->willReturn('€3.12');
+
+        $this->formatAmount(312, 'EUR')->shouldReturn('€3.12');
+    }
+
+    function it_formats_money_using_given_currency_and_locale(MoneyFormatterInterface $moneyFormatter)
+    {
+        $moneyFormatter->format(2500, 'USD', 'fr_FR')->willReturn('$25.00');
+
+        $this->formatAmount(2500, 'USD', 'fr_FR')->shouldReturn('$25.00');
     }
 }
