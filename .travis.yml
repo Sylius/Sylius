@@ -9,6 +9,7 @@ cache:
     directories:
         - ~/.composer/cache/files
         - $SYLIUS_CACHE_DIR
+        - node_modules
 
 sudo: required
 
