@@ -94,6 +94,22 @@ final class ManagingPaymentMethodsContext implements Context
     }
 
     /**
+     * @When I remove its name from :language translation
+     */
+    public function iRemoveItsNameFromTranslation($language)
+    {
+        $this->updatePage->nameIt(null, $language);
+    }
+
+    /**
+     * @When I do not name it
+     */
+    public function iDoNotNameIt()
+    {
+        // Intentionally left blank to fulfill context expectation
+    }
+
+    /**
      * @When I save my changes
      * @When I try to save my changes
      */
@@ -161,8 +177,9 @@ final class ManagingPaymentMethodsContext implements Context
 
     /**
      * @When I specify its code as :code
+     * @When I do not specify its code
      */
-    public function iSpecifyItsCodeAs($code)
+    public function iSpecifyItsCodeAs($code = null)
     {
         $this->createPage->specifyCode($code);
     }

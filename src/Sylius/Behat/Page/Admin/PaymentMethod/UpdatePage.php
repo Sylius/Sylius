@@ -12,10 +12,10 @@
 namespace Sylius\Behat\Page\Admin\PaymentMethod;
 
 use Behat\Mink\Element\NodeElement;
+use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Behaviour\Toggles;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
-use Sylius\Behat\Page\ElementNotFoundException;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -28,10 +28,6 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
      * @var array
      */
     protected $elements = [
-        'code' => '#sylius_payment_method_code',
-        'name' => '#sylius_payment_method_translations_en_name',
-        'gateway' => '#sylius_payment_method_gateway',
-        'enabled' => '#sylius_payment_method_enabled',
     ];
 
     /**
@@ -76,5 +72,18 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     protected function getToggleableElement()
     {
         return $this->getElement('enabled');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getDefinedElements()
+    {
+        return array_merge(parent::getDefinedElements(), [
+            'code' => '#sylius_payment_method_code',
+            'name' => '#sylius_payment_method_translations_en_US_name',
+            'gateway' => '#sylius_payment_method_gateway',
+            'enabled' => '#sylius_payment_method_enabled',
+        ]);
     }
 }

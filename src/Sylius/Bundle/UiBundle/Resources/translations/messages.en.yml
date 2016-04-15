@@ -24,6 +24,7 @@ sylius:
         edit: Edit
         edit_country: Edit country
         edit_customer: Edit customer
+        edit_payment_method: Edit payment method
         edit_promotion: Edit promotion
         edit_tax_category: Edit tax category
         edit_tax_rate: Edit tax rate

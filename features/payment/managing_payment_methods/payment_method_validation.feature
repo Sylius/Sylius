@@ -9,7 +9,7 @@ Feature: Payment method validation
         And the store has a payment method "Offline" with a code "offline"
         And I am logged in as an administrator
 
-    @todo
+    @ui
     Scenario: Trying to add a new payment method without specifying its code
         Given I want to create a new payment method
         When I name it "Paypal Express Checkout" in "English (United States)"
@@ -19,7 +19,7 @@ Feature: Payment method validation
         Then I should be notified that code is required
         And the payment method with name "Paypal Express Checkout" should not be added
 
-    @todo
+    @ui
     Scenario: Trying to add a new payment method without specifying its name
         Given I want to create a new payment method
         When I specify its code as "PEC"
@@ -29,10 +29,10 @@ Feature: Payment method validation
         Then I should be notified that name is required
         And the payment method with code "PEC" should not be added
 
-    @todo
+    @ui
     Scenario: Trying to remove name from an existing payment method
         Given I want to modify a payment method "Offline"
         When I remove its name from "English (United States)" translation
-        And I try to save changes
+        And I try to save my changes
         Then I should be notified that name is required
         And this payment method should still be named "Offline"
