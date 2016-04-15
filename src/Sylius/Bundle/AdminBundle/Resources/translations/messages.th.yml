@@ -6,8 +6,11 @@ sylius:
         admin:
             main:
                 configuration:
-                    header: การกำหนดค่า (Configuration)
-                    tax_categories: ประเภทภาษี
                     countries: ประเทศ
+                    header: การกำหนดค่า (Configuration)
                     locales: ภาษาที่ใช้
+                    tax_categories: ประเภทภาษี
                     tax_rates: อัตราภาษี
+                marketing:
+                    header: การตลาด
+                    promotions: ส่งเสริมการขาย

@@ -9,3 +9,5 @@ sylius:
                     countries: Страни
                     locales: Езикови променливи
                     tax_rates: Данъчни ставки
+                marketing:
+                    promotions: Промоции

@@ -6,7 +6,9 @@ sylius:
         admin:
             main:
                 configuration:
-                    header: Konfigurasjon
                     countries: Land
+                    header: Konfigurasjon
                     locales: Nasjonale innstillinger
                     tax_rates: Skattesatser
+                marketing:
+                    promotions: Kampanjer

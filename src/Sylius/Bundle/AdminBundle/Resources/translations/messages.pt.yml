@@ -8,3 +8,5 @@ sylius:
                 configuration:
                     countries: Países
                     tax_rates: Impostos
+                marketing:
+                    promotions: Promoções

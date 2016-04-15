@@ -8,3 +8,5 @@ sylius:
                 configuration:
                     countries: 国の設定
                     tax_rates: 税管理
+                marketing:
+                    promotions: プロモーション管理

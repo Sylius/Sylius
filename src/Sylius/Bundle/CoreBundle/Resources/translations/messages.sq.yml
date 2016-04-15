@@ -130,3 +130,19 @@ sylius:
             type: Tipi i lidhjes
         product_association_type:
             name: Emri
+        promotion_rule:
+            contains_taxon:
+                count: Numëro
+            taxon:
+                taxons: Kategoritë
+            total_of_items_from_taxon:
+                amount: Shuma
+    email:
+        order_confirmation:
+            name: Konfirmimi i porosisë
+        order_comment:
+            name: Komenti i porosisë
+        shipment_confirmation:
+            name: Konfirmimi i dërgesës
+        user_confirmation:
+            name: Konfirmimi i përdoruesit

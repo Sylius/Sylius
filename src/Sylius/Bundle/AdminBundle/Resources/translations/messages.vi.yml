@@ -8,3 +8,6 @@ sylius:
                 configuration:
                     countries: Quốc gia
                     locales: Miền địa phương
+                marketing:
+                    header: Tiếp thị
+                    promotions: Chương trình khuyến mãi

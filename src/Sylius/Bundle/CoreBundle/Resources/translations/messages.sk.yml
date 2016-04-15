@@ -130,3 +130,19 @@ sylius:
             type: Typ priradenia
         product_association_type:
             name: Názov
+        promotion_rule:
+            contains_taxon:
+                count: Počet
+            taxon:
+                taxons: Kategórie
+            total_of_items_from_taxon:
+                amount: Suma
+    email:
+        order_confirmation:
+            name: Potvrdenie objednávky
+        order_comment:
+            name: Poznámka k objednávke
+        shipment_confirmation:
+            name: Potvrdenie odoslania tovaru
+        user_confirmation:
+            name: Potvrdenie registrácie použivateľa

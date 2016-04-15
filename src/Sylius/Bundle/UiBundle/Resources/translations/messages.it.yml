@@ -33,8 +33,6 @@ sylius:
         info: Info
         last_updated: Ultimo aggiornamento
         locales: Localizzazioni
-        manage_country: Gestisci paese
-        manage_locale: Gestisci locale
         manage_taxation_of_your_products: Gestire la tassazione dei vostri prodotti
         new: Nuovo
         new_country: Nuovo paese
