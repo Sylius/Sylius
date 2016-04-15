@@ -10,22 +10,15 @@ cache:
         - ~/.composer/cache/files
         - $SYLIUS_CACHE_DIR
 
-sudo: required
-
-dist: trusty
+sudo: false
 
 addons:
     apt:
-        sources:
-            - google-chrome
         packages:
-            - google-chrome-stable
             - parallel
-            - mysql-server
 
 services:
     - memcached
-    - mysql
 
 php:
     - 7.0
@@ -40,6 +33,8 @@ before_install:
     - echo "memory_limit=4096M" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
 
     - mkdir -p $SYLIUS_CACHE_DIR
+
+    - cp -R ./etc/travis/configuration/* ./
 
     - etc/travis/prepare-memcached-extension
 

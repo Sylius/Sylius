@@ -5,7 +5,8 @@ export DISPLAY=:99
 
 # Downloading and configurin ChromeDriver
 if [ ! -f $SYLIUS_CACHE_DIR/chromedriver ]; then
-    curl http://chromedriver.storage.googleapis.com/2.19/chromedriver_linux64.zip > chromedriver.zip
+    # Using ChromeDriver 2.12 which supports Chrome 36-40, we're using Chromium 37
+    curl http://chromedriver.storage.googleapis.com/2.12/chromedriver_linux64.zip > chromedriver.zip
     unzip chromedriver.zip
     mv chromedriver $SYLIUS_CACHE_DIR
 fi

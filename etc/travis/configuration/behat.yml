@@ -1,0 +1,20 @@
+imports: ["behat.yml.dist"]
+
+default:
+    extensions:
+        Behat\MinkExtension:
+            javascript_session: chromium
+            sessions:
+                chromium:
+                    selenium2:
+                        browser: chrome
+                        capabilities:
+                            browserName: chrome
+                            browser: chrome
+                            version: ""
+                            chrome:
+                                binary: "/usr/bin/chromium-browser"
+                                switches:
+                                    - "start-fullscreen"
+                                    - "start-maximized"
+                                    - "no-sandbox"
