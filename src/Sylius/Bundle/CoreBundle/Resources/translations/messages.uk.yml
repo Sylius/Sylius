@@ -107,3 +107,19 @@ sylius:
             email: Email
         product_association_type:
             name: Ім’я
+        promotion_rule:
+            contains_taxon:
+                count: Кількість
+            taxon:
+                taxons: Таксони
+            total_of_items_from_taxon:
+                amount: Кількість
+    email:
+        order_confirmation:
+            name: Підтвердження замовлення
+        order_comment:
+            name: Коментар до замовлення
+        shipment_confirmation:
+            name: Підтвердження відвантаження
+        user_confirmation:
+            name: Підтвердження користувача

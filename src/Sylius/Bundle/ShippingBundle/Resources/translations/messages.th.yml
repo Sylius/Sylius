@@ -49,3 +49,5 @@ sylius:
             configuration: การกำหนดค่า (Configuration)
             enabled: เปิดใช้งานแล้ว
             name: ชื่อ
+            tax_category: ประเภทภาษี
+            translations: การแปลภาษา

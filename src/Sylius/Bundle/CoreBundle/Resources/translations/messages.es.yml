@@ -128,3 +128,19 @@ sylius:
             type: Tipos de asociación
         product_association_type:
             name: Nombre
+        promotion_rule:
+            contains_taxon:
+                count: Contador
+            taxon:
+                taxons: Taxonomías
+            total_of_items_from_taxon:
+                amount: Cantidad
+    email:
+        order_confirmation:
+            name: Confirmación de pedido
+        order_comment:
+            name: Comentario del pedido
+        shipment_confirmation:
+            name: Confirmación del envío
+        user_confirmation:
+            name: Confirmación de usuario

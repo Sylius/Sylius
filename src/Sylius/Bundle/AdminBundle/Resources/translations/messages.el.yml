@@ -6,6 +6,8 @@ sylius:
         admin:
             main:
                 configuration:
-                    header: Παραμετροποίηση
                     countries: Χώρες
+                    header: Παραμετροποίηση
                     tax_rates: Φορολογικοί συντελεστές
+                marketing:
+                    promotions: Προσφορές

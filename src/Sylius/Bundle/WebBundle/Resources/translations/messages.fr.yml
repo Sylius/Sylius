@@ -96,6 +96,7 @@ sylius:
     payment:
         transition:
             cancel: annuler
+            complete: terminé
             refund: remboursement
     pricing:
         volume_based:

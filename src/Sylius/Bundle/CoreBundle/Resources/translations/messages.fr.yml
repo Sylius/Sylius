@@ -131,3 +131,19 @@ sylius:
             type: "Type d'association"
         product_association_type:
             name: Nom
+        promotion_rule:
+            contains_taxon:
+                count: Nombre
+            taxon:
+                taxons: Famille de tags
+            total_of_items_from_taxon:
+                amount: Montant
+    email:
+        order_confirmation:
+            name: Confirmation de commande
+        order_comment:
+            name: Commentaire sur la commande
+        shipment_confirmation:
+            name: "Confirmation d'expédition"
+        user_confirmation:
+            name: Utilisateur confirmé

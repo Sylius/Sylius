@@ -36,3 +36,4 @@ sylius:
             configuration: Konfigurasjon
             enabled: Aktivert
             name: Navn
+            tax_category: Skattekategori

@@ -44,3 +44,5 @@ sylius:
             configuration: Konfiguracija
             enabled: Omogočeno
             name: Ime
+            tax_category: Kategorija davka
+            translations: Prevodi

@@ -18,5 +18,6 @@ sylius:
         new_tax_category: Нова данъчна категория
         "no": false
         save_changes: Запиши промените
+        shipping_methods: Начин на доставка
         success: Успешно
         "yes": true

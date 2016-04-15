@@ -36,3 +36,4 @@ sylius:
             configuration: Configurare
             enabled: Activat
             name: Nume
+            tax_category: Categoria de taxă

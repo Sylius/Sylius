@@ -7,4 +7,7 @@ sylius:
             main:
                 configuration:
                     countries: 国の設定
+                    shipping_methods: 配送方法管理
                     tax_rates: 税管理
+                marketing:
+                    promotions: プロモーション管理

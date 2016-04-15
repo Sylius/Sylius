@@ -6,7 +6,11 @@ sylius:
         admin:
             main:
                 configuration:
-                    header: Konfiguracja
                     countries: Kraje
+                    header: Konfiguracja
                     locales: Ustawienia regionalne
+                    shipping_methods: Sposób wysyłki
                     tax_rates: Stawki podatkowe
+                marketing:
+                    header: Marketing
+                    promotions: Promocje
