@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ $TRAVIS_PHP_VERSION != "7.0" ]; then
+if [ "${TRAVIS_PHP_VERSION}" != "7.0" ]; then
     exit 0
 fi
 
@@ -9,10 +9,12 @@ if [ ! -f $SYLIUS_CACHE_DIR/memcached.so ]; then
     cd php-memcached
 
     phpize
-    ./configure
+    ./configure --disable-memcached-sasl
     make
 
-    cp modules/memcached.so $SYLIUS_CACHE_DIR
+    cp modules/memcached.so "${SYLIUS_CACHE_DIR}"
 fi
 
-cp $SYLIUS_CACHE_DIR/memcached.so `php -i | grep extensions | awk '{ print $5 }'`
+EXTENSIONS_DIR="$(php -i | grep extension_dir | head -n 1 | awk '{ print $5 }')"
+
+cp "${SYLIUS_CACHE_DIR}/memcached.so" "${EXTENSIONS_DIR}"

@@ -20,6 +20,7 @@
         <parameter key="sylius.theme.translation.resource_provider.default.class">Sylius\Bundle\ThemeBundle\Translation\Provider\TranslatorResourceProvider</parameter>
         <parameter key="sylius.theme.translation.resource_provider.theme_aware.class">Sylius\Bundle\ThemeBundle\Translation\Provider\ThemeTranslatorResourceProvider</parameter>
         <parameter key="sylius.theme.translation.files_finder.class">Sylius\Bundle\ThemeBundle\Translation\Finder\TranslationFilesFinder</parameter>
+        <parameter key="sylius.theme.translation.ordering_files_finder.class">Sylius\Bundle\ThemeBundle\Translation\Finder\OrderingTranslationFilesFinder</parameter>
     </parameters>
 
     <services>
@@ -62,6 +63,10 @@
 
         <service id="sylius.theme.translation.files_finder" class="%sylius.theme.translation.files_finder.class%" public="false">
             <argument type="service" id="sylius.theme.finder_factory" />
+        </service>
+
+        <service id="sylius.theme.translation.ordering_files_finder" class="%sylius.theme.translation.ordering_files_finder.class%" decorates="sylius.theme.translation.files_finder" public="false">
+            <argument type="service" id="sylius.theme.translation.ordering_files_finder.inner" />
         </service>
     </services>
 </container>
