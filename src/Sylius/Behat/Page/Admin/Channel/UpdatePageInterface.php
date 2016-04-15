@@ -12,13 +12,17 @@
 namespace Sylius\Behat\Page\Admin\Channel;
 
 use Behat\Mink\Exception\ElementNotFoundException;
-use Sylius\Behat\Page\PageInterface;
+use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-interface UpdatePageInterface extends PageInterface
+interface UpdatePageInterface extends BaseUpdatePageInterface
 {
+    public function enable();
+
+    public function disable();
+
     /**
      * @param string $themeName
      */
@@ -30,7 +34,55 @@ interface UpdatePageInterface extends PageInterface
     public function unsetTheme();
 
     /**
-     * @throws ElementNotFoundException
+     * @return bool
      */
-    public function update();
+    public function isCodeDisabled();
+
+    /**
+     * @param string $language
+     */
+    public function chooseLocale($language);
+
+    /**
+     * @param string $language
+     *
+     * @return bool
+     */
+    public function isLocaleChosen($language);
+
+    /**
+     * @param string $currency
+     */
+    public function chooseCurrency($currency);
+
+    /**
+     * @param string $currency
+     *
+     * @return bool
+     */
+    public function isCurrencyChosen($currency);
+
+    /**
+     * @param string $shippingMethod
+     */
+    public function chooseShippingMethod($shippingMethod);
+
+    /**
+     * @param string $shippingMethod
+     *
+     * @return bool
+     */
+    public function isShippingMethodChosen($shippingMethod);
+
+    /**
+     * @param string $paymentMethod
+     */
+    public function choosePaymentMethod($paymentMethod);
+
+    /**
+     * @param string $paymentMethod
+     *
+     * @return bool
+     */
+    public function isPaymentMethodChosen($paymentMethod);
 }

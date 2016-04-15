@@ -69,7 +69,7 @@ final class ThemeContext implements Context
     {
         $this->channelUpdatePage->open(['id' => $channel->getId()]);
         $this->channelUpdatePage->setTheme($theme);
-        $this->channelUpdatePage->update();
+        $this->channelUpdatePage->saveChanges();
 
         $this->sharedStorage->set('channel', $channel);
         $this->sharedStorage->set('theme', $theme);
@@ -82,7 +82,7 @@ final class ThemeContext implements Context
     {
         $this->channelUpdatePage->open(['id' => $channel->getId()]);
         $this->channelUpdatePage->unsetTheme();
-        $this->channelUpdatePage->update();
+        $this->channelUpdatePage->saveChanges();
     }
 
     /**

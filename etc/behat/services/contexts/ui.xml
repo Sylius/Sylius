@@ -13,6 +13,7 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <parameters>
+        <parameter key="sylius.behat.context.ui.admin.managing_channels.class">Sylius\Behat\Context\Ui\Admin\ManagingChannelsContext</parameter>
         <parameter key="sylius.behat.context.ui.admin.managing_countries.class">Sylius\Behat\Context\Ui\Admin\ManagingCountriesContext</parameter>
         <parameter key="sylius.behat.context.ui.admin.managing_currency.class">Sylius\Behat\Context\Ui\Admin\ManagingCurrenciesContext</parameter>
         <parameter key="sylius.behat.context.ui.admin.managing_customers.class">Sylius\Behat\Context\Ui\Admin\ManagingCustomersContext</parameter>
@@ -35,6 +36,15 @@
     </parameters>
 
     <services>
+        <service id="sylius.behat.context.ui.admin.managing_channels" class="%sylius.behat.context.ui.admin.managing_channels.class%" scope="scenario">
+            <argument type="service" id="sylius.behat.page.admin.channel.index" />
+            <argument type="service" id="sylius.behat.page.admin.channel.create" />
+            <argument type="service" id="sylius.behat.page.admin.channel.update" />
+            <argument type="service" id="sylius.behat.current_page_resolver" />
+            <argument type="service" id="sylius.behat.notification_checker" />
+            <tag name="sylius.behat.context" />
+        </service>
+
         <service id="sylius.behat.context.ui.admin.managing_countries" class="%sylius.behat.context.ui.admin.managing_countries.class%" scope="scenario">
             <argument type="service" id="sylius.behat.page.admin.country.index" />
             <argument type="service" id="sylius.behat.page.admin.country.create" />

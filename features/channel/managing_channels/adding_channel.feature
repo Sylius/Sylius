@@ -7,7 +7,7 @@ Feature: Adding a new channel
     Background:
         Given I am logged in as an administrator
 
-    @todo
+    @ui
     Scenario: Adding a new channel
         Given I want to create a new channel
         When I specify its code as "MOBILE"

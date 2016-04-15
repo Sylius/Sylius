@@ -12,8 +12,10 @@
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Channel\Factory\ChannelFactoryInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Test\Services\DefaultChannelFactoryInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 
@@ -49,24 +51,32 @@ final class ChannelContext implements Context
     private $channelRepository;
 
     /**
+     * @var ObjectManager
+     */
+    private $channelManager;
+
+    /**
      * @param SharedStorageInterface $sharedStorage
      * @param DefaultChannelFactoryInterface $franceChannelFactory
      * @param DefaultChannelFactoryInterface $defaultChannelFactory
      * @param ChannelFactoryInterface $channelFactory
      * @param ChannelRepositoryInterface $channelRepository
+     * @param ObjectManager $channelManager
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         DefaultChannelFactoryInterface $franceChannelFactory,
         DefaultChannelFactoryInterface $defaultChannelFactory,
         ChannelFactoryInterface $channelFactory,
-        ChannelRepositoryInterface $channelRepository
+        ChannelRepositoryInterface $channelRepository,
+        ObjectManager $channelManager
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->franceChannelFactory = $franceChannelFactory;
         $this->defaultChannelFactory = $defaultChannelFactory;
         $this->channelFactory = $channelFactory;
         $this->channelRepository = $channelRepository;
+        $this->channelManager = $channelManager;
     }
 
     /**
@@ -89,13 +99,41 @@ final class ChannelContext implements Context
 
     /**
      * @Given /^the store operates on (?:a|another) channel named "([^"]+)"$/
+     * @Given the store operates on a channel identified by :code code
      */
-    public function theStoreOperatesOnAChannelNamed($channelName)
+    public function theStoreOperatesOnAChannelNamed($channelIdentifier)
     {
-        $channel = $this->channelFactory->createNamed($channelName);
-        $channel->setCode($channelName);
+        $channel = $this->channelFactory->createNamed($channelIdentifier);
+        $channel->setCode($channelIdentifier);
 
         $this->channelRepository->add($channel);
+        $this->sharedStorage->set('channel', $channel);
+    }
+
+    /**
+     * @Given the channel :channel is enabled
+     */
+    public function theChannelIsEnabled(ChannelInterface $channel)
+    {
+        $this->changeChannelState($channel, true);
+    }
+
+    /**
+     * @Given the channel :channel is disabled
+     */
+    public function theChannelIsDisabled(ChannelInterface $channel)
+    {
+        $this->changeChannelState($channel, false);
+    }
+
+    /**
+     * @param ChannelInterface $channel
+     * @param bool $state
+     */
+    private function changeChannelState(ChannelInterface $channel, $state)
+    {
+        $channel->setEnabled($state);
+        $this->channelManager->flush();
         $this->sharedStorage->set('channel', $channel);
     }
 }
