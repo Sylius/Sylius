@@ -11,36 +11,54 @@
 
 namespace Sylius\Bundle\CurrencyBundle\Templating\Helper;
 
-use Sylius\Bundle\MoneyBundle\Templating\Helper\MoneyHelper as BaseMoneyHelper;
+use Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatterInterface;
+use Sylius\Bundle\MoneyBundle\Templating\Helper\MoneyHelperInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 
 /**
- * Overrided templating helper to display amounts in currently used currency
- * by default.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class MoneyHelper extends BaseMoneyHelper
+class MoneyHelper implements MoneyHelperInterface
 {
     /**
-     * Currency context.
-     *
+     * @var string
+     */
+    private $defaultLocale;
+
+    /**
      * @var CurrencyContextInterface
      */
-    protected $currencyContext;
+    private $currencyContext;
 
-    public function __construct($locale, CurrencyContextInterface $currencyContext)
-    {
+    /**
+     * @var MoneyFormatterInterface
+     */
+    private $moneyFormatter;
+
+    /**
+     * @param string $defaultLocale
+     * @param CurrencyContextInterface $currencyContext
+     * @param MoneyFormatterInterface $moneyFormatter
+     */
+    public function __construct(
+        $defaultLocale,
+        CurrencyContextInterface $currencyContext,
+        MoneyFormatterInterface $moneyFormatter
+    ) {
+        $this->defaultLocale = $defaultLocale;
         $this->currencyContext = $currencyContext;
-
-        parent::__construct($locale);
+        $this->moneyFormatter = $moneyFormatter;
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function getDefaultCurrency()
+    public function formatAmount($amount, $currency = null, $locale = null)
     {
-        return $this->currencyContext->getCurrency();
+        $locale = $locale ?: $this->defaultLocale;
+        $currency = $currency ?: $this->currencyContext->getCurrency();
+
+        return $this->moneyFormatter->format($amount, $currency, $locale);
     }
 }
