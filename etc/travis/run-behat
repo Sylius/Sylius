@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-
-bin/behat --strict -f progress -p cached
-
-if [[ $EXIT_CODE -eq 1 ]]; then
-    bin/behat --strict -f progress -p cached --rerun
-fi;

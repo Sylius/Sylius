@@ -5,92 +5,86 @@ env:
         - SYLIUS_CACHE_DIR=$HOME/.sylius-cache
         - SYLIUS_BUILD_DIR=etc/build
 
-cache:
-    directories:
-        - ~/.composer/cache/files
-        - $SYLIUS_CACHE_DIR
-
 sudo: false
 
-addons:
-    apt:
-        packages:
-            - parallel
-
-services:
-    - memcached
-
-php:
-    - 7.0
-    - 5.6
-    - 5.5
+matrix:
+    include:
+        -
+            php: 7.0
+            env: SYLIUS_SUITE="application"
+            cache:
+                directories:
+                    - vendor
+                    - bin
+                    - node_modules
+                    - $SYLIUS_CACHE_DIR
+            services:
+                - memcached
+        -
+            php: 5.6
+            env: SYLIUS_SUITE="application"
+            cache:
+                directories:
+                    - vendor
+                    - bin
+                    - node_modules
+                    - $SYLIUS_CACHE_DIR
+            services:
+                - memcached
+        -
+            php: 5.5
+            env: SYLIUS_SUITE="application"
+            cache:
+                directories:
+                    - vendor
+                    - bin
+                    - node_modules
+                    - $SYLIUS_CACHE_DIR
+            services:
+                - memcached
+        -
+            php: 7.0
+            env: SYLIUS_SUITE="packages"
+            cache:
+                directories:
+                    - ~/.composer/cache/files
+                    - $SYLIUS_CACHE_DIR
+            addons:
+                apt:
+                    packages:
+                       - parallel
+        -
+           php: 5.5
+           env: SYLIUS_SUITE="packages"
+           cache:
+               directories:
+                   - ~/.composer/cache/files
+                   - $SYLIUS_CACHE_DIR
+           addons:
+               apt:
+                   packages:
+                      - parallel
 
 before_install:
-    # For packages testing
-    - git branch master 2>/dev/null || true
-
-    - phpenv config-rm xdebug.ini || true
-    - echo "memory_limit=4096M" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
-
-    - mkdir -p $SYLIUS_CACHE_DIR
-
-    - cp -R ./etc/travis/configuration/* ./
-
-    - etc/travis/prepare-memcached-extension
-
-    - composer self-update
-    - composer config -g github-oauth.github.com f89d08114c80d1a1b019b09ce60a38f75a5c9480 # please don't use in your own projects :)
+    - etc/travis/run-suite ${SYLIUS_SUITE} before_install
 
 install:
-    - phpenv config-add etc/travis/install-php.ini
-
-    - composer install --no-interaction --no-scripts --prefer-dist
-    - etc/bin/install-packages
-
-    - composer run-script travis-build --no-interaction
-
-    - npm install
+    - etc/travis/run-suite ${SYLIUS_SUITE} install
 
 before_script:
-    - app/console doctrine:database:create --env=test_cached # Have to be run with debug = true, to omit generating proxies before setting up the database
-
-    - app/console cache:warmup --env=test_cached --no-debug
-
-    - app/console doctrine:schema:create --env=test_cached --no-debug
-    - app/console doctrine:phpcr:repository:init --env=test_cached --no-debug
-
-    - app/console assets:install --env=test_cached --no-debug
-    - app/console assetic:dump --env=test_cached --no-debug
-
-    - gulp
-
-    # Debug informations, PHP version & PHP configuration
-    # Its needed to remove the line with secret variables, as it is listed in _SERVER variables
-    - php -v
-    - php -i | grep -v 'SYMFONY__'
+    - etc/travis/run-suite ${SYLIUS_SUITE} before_script
 
 script:
-    - composer validate --strict
-    - etc/bin/validate-packages
-
-    - if [[ $TRAVIS_PHP_VERSION = 7.* ]]; then bin/kawaii gherkin:check --align=left features/; fi;
-
-    - php -d opcache.enable_cli=0 bin/phpspec run --no-interaction -f dot
-    - bin/phpunit
-
-    - etc/bin/test-packages
-
-    - etc/travis/prepare-javascript
-    - etc/travis/run-behat
+    - etc/travis/run-suite ${SYLIUS_SUITE} script
 
 before_cache:
-    - yes 'Y' | rm -fr vendor/symfony-cmf/create-bundle/Resources/public/vendor/*
+    - etc/travis/run-suite ${SYLIUS_SUITE} before_cache
+
+after_success:
+    - etc/travis/run-suite ${SYLIUS_SUITE} after_success
 
 after_failure:
-    - export IMGUR_API_KEY=4907fcd89e761c6b07eeb8292d5a9b2a
+    - etc/travis/run-suite ${SYLIUS_SUITE} after_failure
 
-    - rm -fr "$SYLIUS_BUILD_DIR/*(0).log"
-    - cp app/logs/test_cached.log "$SYLIUS_BUILD_DIR/symfony_app.log"
-
-    - vendor/lakion/mink-debug-extension/travis/tools/upload-textfiles "$SYLIUS_BUILD_DIR/*.log"
-    - vendor/lakion/mink-debug-extension/travis/tools/upload-screenshots "$SYLIUS_BUILD_DIR/*.png"
+after_script:
+    - etc/travis/run-suite ${SYLIUS_SUITE} after_script

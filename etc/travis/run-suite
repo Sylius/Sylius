@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+set -e
+
+if [ -f "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/suites/common/$2.sh" ]; then
+    /usr/bin/env bash "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/suites/common/$2.sh"
+fi
+
+if [ -f "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/suites/$1/$2.sh" ]; then
+    /usr/bin/env bash "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/suites/$1/$2.sh"
+fi
