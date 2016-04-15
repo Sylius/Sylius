@@ -50,7 +50,7 @@ install:
     - phpenv config-add etc/travis/install-php.ini
 
     - composer install --no-interaction --no-scripts --prefer-dist
-    - etc/bin/install-packages
+#    - etc/bin/install-packages
 
     - composer run-script travis-build --no-interaction
 
@@ -76,14 +76,14 @@ before_script:
 
 script:
     - composer validate --strict
-    - etc/bin/validate-packages
+#    - etc/bin/validate-packages
 
     - if [[ $TRAVIS_PHP_VERSION = 7.* ]]; then bin/kawaii gherkin:check --align=left features/; fi;
 
     - php -d opcache.enable_cli=0 bin/phpspec run --no-interaction -f dot
     - bin/phpunit
 
-    - etc/bin/test-packages
+#    - etc/bin/test-packages
 
     - etc/travis/prepare-javascript
     - etc/travis/run-behat
