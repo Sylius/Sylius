@@ -26,6 +26,7 @@ sylius:
         "no": false
         powered_by: Poganja
         save_changes: Shrani spremembe
+        shipping_methods: Načini dostave
         sign_in: Prijava
         sign_out: Odjava
         success: Uspešno

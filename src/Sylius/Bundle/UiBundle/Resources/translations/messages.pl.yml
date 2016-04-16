@@ -27,6 +27,7 @@ sylius:
         "no": false
         no_results_to_display: Brak wyników do wyświetlenia
         save_changes: Zapisz zmiany
+        shipping_methods: Metody wysyłki
         show: Pokaż
         status: Status
         success: Sukces

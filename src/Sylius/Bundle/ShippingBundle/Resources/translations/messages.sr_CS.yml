@@ -7,3 +7,4 @@ sylius:
             name: Ime
         shipping_method:
             name: Ime
+            tax_category: Kategorija proizvoda

@@ -17,5 +17,6 @@ sylius:
         new_tax_category: 税区分を登録
         "no": false
         save_changes: 保存
+        shipping_methods: 配送方法管理
         success: 成功
         "yes": true

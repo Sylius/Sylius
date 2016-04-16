@@ -13,3 +13,4 @@ sylius:
         shipping_method:
             enabled: Activat
             name: Nom
+            tax_category: "Categoria d'impost"

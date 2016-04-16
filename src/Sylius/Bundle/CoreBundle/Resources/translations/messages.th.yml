@@ -131,3 +131,19 @@ sylius:
             type: ชนิดสินค้าที่เกี่ยวข้อง
         product_association_type:
             name: ชื่อ
+        promotion_rule:
+            contains_taxon:
+                count: จำนวน
+            taxon:
+                taxons: หมวดหมู่
+            total_of_items_from_taxon:
+                amount: ยอดรวม
+    email:
+        order_confirmation:
+            name: ยืนยันการสั่งซื้อ
+        order_comment:
+            name: ความเห็นเกี่ยวกับการสั่งซื้อ
+        shipment_confirmation:
+            name: ยืนยันการจัดส่ง
+        user_confirmation:
+            name: ยืนยันการสั่งซื้อ

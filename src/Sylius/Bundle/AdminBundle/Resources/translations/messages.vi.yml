@@ -8,3 +8,7 @@ sylius:
                 configuration:
                     countries: Quốc gia
                     locales: Miền địa phương
+                    shipping_methods: Phương thức vận chuyển
+                marketing:
+                    header: Tiếp thị
+                    promotions: Chương trình khuyến mãi

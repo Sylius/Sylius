@@ -6,8 +6,12 @@ sylius:
         admin:
             main:
                 configuration:
-                    header: تنظیمات
-                    tax_categories: رده های مالیات
                     countries: كشور‌ها
+                    header: تنظیمات
                     locales: زبان ها
+                    shipping_methods: شیوه های ارسال
+                    tax_categories: رده های مالیات
                     tax_rates: نرخ های مالیات
+                marketing:
+                    header: بازاریابی
+                    promotions: فروش ویژه

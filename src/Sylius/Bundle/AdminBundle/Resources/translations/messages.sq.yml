@@ -6,8 +6,12 @@ sylius:
         admin:
             main:
                 configuration:
-                    header: Konfigurimi
-                    tax_categories: Kategoritë e taksimit
                     countries: Vendet
+                    header: Konfigurimi
                     locales: Rajonet
+                    shipping_methods: Mënyrat e dërgesave
+                    tax_categories: Kategoritë e taksimit
                     tax_rates: Normat e taksimit
+                marketing:
+                    header: Marketingu
+                    promotions: Reklamat

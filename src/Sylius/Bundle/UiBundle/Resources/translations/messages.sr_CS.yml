@@ -16,5 +16,6 @@ sylius:
         new_tax_category: Nova kategorija poreza
         "no": false
         save_changes: Sačuvaj izmene
+        shipping_methods: Načini dostave
         success: Uspeh
         "yes": true

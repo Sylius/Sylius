@@ -36,3 +36,4 @@ sylius:
             configuration: Канфігурацыя
             enabled: Уключана
             name: Назва
+            tax_category: Катэгорыя падатку

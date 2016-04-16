@@ -107,3 +107,10 @@ sylius:
             email: E-post
         product_association_type:
             name: Navn
+        promotion_rule:
+            contains_taxon:
+                count: Antall
+            taxon:
+                taxons: Taksonomier
+            total_of_items_from_taxon:
+                amount: Beløp

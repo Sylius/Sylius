@@ -6,7 +6,10 @@ sylius:
         admin:
             main:
                 configuration:
-                    header: Configurare
                     countries: Țări
+                    header: Configurare
                     locales: Setări regionale
+                    shipping_methods: Metode de livrare
                     tax_rates: Taxe
+                marketing:
+                    promotions: Promoţii

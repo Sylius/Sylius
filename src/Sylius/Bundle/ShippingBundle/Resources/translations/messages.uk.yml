@@ -36,3 +36,5 @@ sylius:
             configuration: Конфігурація
             enabled: Увімкнено
             name: Ім’я
+            tax_category: Категорія податку
+            translations: Переклади

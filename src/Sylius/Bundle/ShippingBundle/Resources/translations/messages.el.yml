@@ -30,3 +30,4 @@ sylius:
             configuration: Παραμετροποίηση
             enabled: Ενεργοποιημένο
             name: Ονομασία
+            tax_category: Φορολογική κατηγορία

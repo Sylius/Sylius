@@ -25,6 +25,7 @@ sylius:
         new_tax_category: Nieuwe belastingcategorie toevoegen
         "no": false
         save_changes: Aanpassingen opslaan
+        shipping_methods: Verzendmethoden
         status: Status
         success: Succes
         "yes": true

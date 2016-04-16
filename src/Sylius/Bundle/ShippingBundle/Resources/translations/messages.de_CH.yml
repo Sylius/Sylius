@@ -8,3 +8,4 @@ sylius:
         shipping_method:
             enabled: Aktiviert
             name: Name
+            tax_category: Steuerkategorie

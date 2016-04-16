@@ -23,5 +23,6 @@ sylius:
         new_tax_category: Ny moms kategori
         "no": false
         save_changes: Gem ændringer
+        shipping_methods: Fragtmetoder
         success: Succes
         "yes": true

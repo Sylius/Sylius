@@ -33,8 +33,6 @@ sylius:
         info: Info
         last_updated: Posledná aktualizácia
         locales: Jazyky
-        manage_country: Spravovať krajiny
-        manage_locale: Spravovať jazyky
         manage_taxation_of_your_products: Spravovať zdaňovanie vašich produktov
         new: Nová
         new_country: Nová krajina
@@ -47,6 +45,7 @@ sylius:
         not_in: Nie je v
         powered_by: Vytvorené v systéme
         save_changes: Uložiť zmeny
+        shipping_methods: Spôsoby doručenia
         show: Zobraziť
         sign_in: Prihlásiť
         sign_out: Odhlásiť
