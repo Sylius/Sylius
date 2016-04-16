@@ -47,7 +47,7 @@ class SingleResourceProviderSpec extends ObjectBehavior
         $requestAttributes->has('slug')->willReturn(false);
         $requestAttributes->get('id')->willReturn(5);
 
-        $repository->findOneBy(['id' => 5])->willReturn(null);
+        $repository->find(5)->willReturn(null);
 
         $this->get($requestConfiguration, $repository)->shouldReturn(null);
     }
@@ -66,7 +66,7 @@ class SingleResourceProviderSpec extends ObjectBehavior
         $requestAttributes->has('slug')->willReturn(false);
         $requestAttributes->get('id')->willReturn(3);
 
-        $repository->findOneBy(['id' => 3])->willReturn($resource);
+        $repository->find(3)->willReturn($resource);
 
         $this->get($requestConfiguration, $repository)->shouldReturn($resource);
     }
