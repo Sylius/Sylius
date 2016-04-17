@@ -42,6 +42,10 @@ class ObjectToIdentifierTransformer extends BaseTransformer implements Parameter
             return;
         }
 
+        if ('id' === $this->identifier) {
+            return $this->repository->find($value);
+        }
+
         return $this->repository->findOneBy([$this->identifier => $value]);
     }
 }
