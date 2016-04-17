@@ -10,5 +10,6 @@ sylius:
         description:
             not_blank: Beschrijving van het verslag mag niet leeg zijn
         code:
+            not_blank: Rapport code mag niet leeg zijn.
             unique: Deze code is al in gebruik.
             single_word: Verslagcode moet een enkel woord zijn.

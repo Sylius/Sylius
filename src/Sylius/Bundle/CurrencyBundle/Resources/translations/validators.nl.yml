@@ -6,5 +6,6 @@ sylius:
         code:
             not_blank: Kies valutacode.
             unique: Valutacode moet uniek zijn.
+            exact_length: Valutacode moet precies 3 tekens lang zijn.
         exchange_rate:
             not_blank: Voer de wisselkoers in.

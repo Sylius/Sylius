@@ -29,11 +29,14 @@ sylius:
             roles: Rollen
         channel:
             taxonomies: Taxonomieën
+            locale_default: Standaardlandinstelling
             locales: "Talen/Regio's"
             currency_default: Standaard valuta
             currencies: "Valuta's"
             shipping_methods: Verzendmethodes
             payment_methods: Betaalmethodes
+            theme: Thema
+            hostname: Hostnaam
         image:
             file: Afbeelding
         locale:
@@ -56,6 +59,7 @@ sylius:
             shipping_category: Verzend categorie
             short_description: Korte omschrijving
             variant_selection_method: Variant selectie methode
+            main_taxon: Hoofdcategorie
         product_filter:
             name: Naam
             sku: SKU
@@ -72,6 +76,7 @@ sylius:
                     Tracking code (for example: Tracking Code (bijvoorbeeld Google Analytics)
             taxation:
                 default_tax_zone: Standaard belastingzone
+                default_tax_calculation_strategy: Standaard belasting berekeningsstrategie
             security:
                 enabled: Inschakelen?
         shipment_filter:
@@ -122,15 +127,18 @@ sylius:
         guest:
             email: E-mail
         product_association:
+            product: Gerelateerd product
             type: Associatietype
         product_association_type:
             name: Naam
         promotion_rule:
             contains_taxon:
+                taxon: Categorie
                 count: Aantal
             taxon:
                 taxons: Taxons
             total_of_items_from_taxon:
+                taxon: Categorie
                 amount: Hoeveelheid
     email:
         order_confirmation:
@@ -141,3 +149,5 @@ sylius:
             name: Bevestiging van de verzending
         user_confirmation:
             name: Bevestiging van de gebruiker
+        password_reset:
+            name: Wachtwoord opnieuw instellen

@@ -9,23 +9,51 @@ sylius:
             remember_me: Onthoud mijn gegevens
     ui:
         actions: Acties
+        an_error_occurred: Er deed zich een fout voor
+        are_your_sure_you_want_to_perform_this_action: Weet u zeker dat u deze actie wilt uitvoeren?
         cancel: Annuleren
+        category_requirements: Categorie vereisten
+        charges_and_taxes: Heffingen en belastingen
+        clear_filters: Wis filters
+        confirm_your_action: Bevestigen uw actie
+        contains: Bevat
         countries: Landen
         create: Creëer
         dashboard: Dashboard
         delete: Verwijderen
         description: Omschrijving
+        disabled: Inactief
         edit: Bewerken
+        edit_country: Land bewerken
         empty: Leeg
         enabled: Toegestaan
+        ends_with: Eindigt met
+        equal: Gelijk
         filter: Filter
+        in: In
+        last_updated: Laatst bijgewerkt
         locales: "Talen/Regio's"
+        manage_shipping_destinations: Beheer van bestemmingen voor verzending
+        manage_languages_available_in_the_store: Beheren van beschikbare talen voor de winkel
         new: Nieuw
         new_country: NIeuw land toevoegen
+        new_locale: Nieuwe landinstelling
         new_tax_category: Nieuwe belastingcategorie toevoegen
         "no": false
+        no_results_to_display: Er zijn geen resultaten om weer te geven
+        not_contains: Bevat niet
+        not_empty: Niet leeg
+        not_in: Niet in
+        or: of
+        powered_by: Mogelijk gemaakt door
+        promotion_information: Promotie informatie
         save_changes: Aanpassingen opslaan
         shipping_methods: Verzendmethoden
+        show: Toon
+        sign_in: Aanmelden
+        sign_out: Afmelden
+        starts_with: Begint met
         status: Status
         success: Succes
+        tax_categories: Belastingscategorieën
         "yes": true

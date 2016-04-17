@@ -34,3 +34,6 @@ sylius:
                 max_range: 'Percentage vergoeding kan niet groter zijn dan {{ limit }}.'
                 min_range: 'Percentage vergoeding kan niet lager is dan {{ limit }}.'
                 not_blank: Voer het percentage vergoeding in.
+        code:
+            not_blank: Voer een betaalmethode code in.
+            unique: De betaalmethode met gegeven code bestaat reeds.

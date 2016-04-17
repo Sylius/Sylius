@@ -22,3 +22,5 @@ sylius:
         code:
             not_blank: Veuillez entrer le code du mode de livraison.
             unique: Ce code de mode de livraison existe déjà.
+        zone:
+            not_blank: "S'il vous plaît sélectionnez zone de méthode de livraison."

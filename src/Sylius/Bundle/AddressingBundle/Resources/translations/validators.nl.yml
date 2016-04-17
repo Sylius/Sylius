@@ -52,6 +52,7 @@ sylius:
             min_count: 'Voeg minstens {{ limit }} zone leden toe.'
         name:
             max_length: Zone naam mag niet langer dan 255 tekens zijn|Zone naam mag niet langer dan 255 tekens zijn.
+            min_length: Zone naam moet minstens 2 karakters lang zijn.
             not_blank: Voer een zone naam in.
     zone_member:
         code:
