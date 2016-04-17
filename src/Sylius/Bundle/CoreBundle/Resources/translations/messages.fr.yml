@@ -133,10 +133,12 @@ sylius:
             name: Nom
         promotion_rule:
             contains_taxon:
+                taxon: Taxon
                 count: Nombre
             taxon:
                 taxons: Famille de tags
             total_of_items_from_taxon:
+                taxon: Taxon
                 amount: Montant
     email:
         order_confirmation:
@@ -147,3 +149,5 @@ sylius:
             name: "Confirmation d'expédition"
         user_confirmation:
             name: Utilisateur confirmé
+        password_reset:
+            name: Réinitialiser le mot de passe

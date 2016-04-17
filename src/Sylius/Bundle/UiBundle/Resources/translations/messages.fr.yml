@@ -13,6 +13,8 @@ sylius:
         an_error_occurred: "Une erreur s'est produite"
         are_your_sure_you_want_to_perform_this_action: Êtes-vous sûr de vouloir effectuer cette action ?
         cancel: Annuler
+        category_requirements: Exigences de la catégorie
+        charges_and_taxes: Taxes et frais
         clear_filters: Réinitialiser les filtres
         confirm_your_action: Confirmez votre action
         contains: Contient
@@ -23,6 +25,8 @@ sylius:
         description: Description
         disabled: Désactivés
         edit: Modifier
+        edit_country: Modifier le pays
+        edit_promotion: Modifier la promotion
         edit_tax_category: Éditer la catégorie de taxe
         edit_tax_rate: Modifier le taux de taxe
         empty: Vide
@@ -34,7 +38,10 @@ sylius:
         info: Info
         last_updated: Dernière mise à jour
         locales: Locales
+        manage_shipping_destinations: Gérer les destinations de livraison
+        manage_languages_available_in_the_store: Gérer les langues disponibles dans le magasin
         manage_taxation_of_your_products: Gérer la fiscalité de vos produits
+        manage_shipping_methods_for_your_store: "Gérer les méthodes d'expédition pour votre magasin"
         new: Nouveau
         new_country: Nouveau pays
         new_locale: Nouveaux paramètres régionaux
@@ -44,7 +51,9 @@ sylius:
         not_contains: Ne contient pas
         not_empty: Non vide
         not_in: Pas dans
+        or: ou
         powered_by: Propulsé par
+        promotion_information: Information de la promotion
         save_changes: Enregistrer les modifications
         shipping_methods: Modes de livraison
         show: Lister

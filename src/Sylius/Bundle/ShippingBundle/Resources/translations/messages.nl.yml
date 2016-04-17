@@ -6,6 +6,7 @@ sylius:
         rule:
             unit_count_configuration:
                 count: Aantal
+                equal: Gelijk aan
             type: Regeltype
         shipment:
             state: Status
@@ -23,7 +24,11 @@ sylius:
                 amount: Hoeveelheid
             flexible_rate_configuration:
                 label: Flexibele tarief
+                additional_unit_cost: Extra kost per eenheid
+                additional_unit_limit: Limiet extra eenheden
+                first_unit_cost: Kost voor eerste eenheid
             per_unit_rate_configuration:
+                label: Forfaitair bedrag per eenheid
                 amount: Hoeveelheid
             weight_rate_configuration:
                 label: Gewicht gebasseerd tarief

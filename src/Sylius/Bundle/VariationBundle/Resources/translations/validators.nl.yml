@@ -3,6 +3,9 @@
 
 sylius:
     option:
+        code:
+            not_blank: Voer een optie code in.
+            unique: Er bestaat al een optie met deze code.
         name:
             not_blank: Voer een optie naam in.
             min_length: 'Optie naam moet minstens 1 teken lang zijn.|Optie naam moet minstens {{ limit }} tekens lang zijn.'
@@ -14,6 +17,8 @@ sylius:
         values:
             min_count: 'Voeg minstens {{ limit }} optie waarde toe.|Voeg minstens {{ limit }} optie waardes toe.'
     option_value:
+        code:
+            not_blank: Voer een optie code in.
         value:
             not_blank: Voer een optie waarde in.
     variant:

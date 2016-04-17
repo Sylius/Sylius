@@ -3,10 +3,36 @@
 
 sylius:
     metadata:
+        type:
+            none: ' - GEEN - '
+            twitter_summary_card: Samenvatting
+            twitter_summary_large_image_card: Samenvatting met grote afbeelding
+            twitter_player_card: Afspeler
+            twitter_app_card: Toepassing
         page:
             title: Titel
             description: Omschrijving
+            keywords: Trefwoorden
+            twitter: Twitter kaart
         twitter:
             title: Titel
             description: Omschrijving
+            site: Website
+            site_id: Site ID
+            creator: Auteur
+            creator_id: Auteur ID
             image: Afbeelding
+            player: Speler
+            player_width: Speler breedte
+            player_height: Speler hoogte
+            player_stream: Afspeler stream
+            player_stream_content_type: Afspeler stream inhoudstype
+            app_name_iphone: iPhone toepassing naam
+            app_id_iphone: iPhone toepassing ID
+            app_url_iphone: iPhone toepassing url
+            app_name_ipad: iPad toepassing naam
+            app_id_ipad: iPad toepassing ID
+            app_url_ipad: iPad toepassing url
+            app_name_googleplay: Google Play toepassing naam
+            app_id_googleplay: Google Play toepassing ID
+            app_url_googleplay: Google Play toepassing url

@@ -21,3 +21,6 @@ sylius:
             options: Opties
         association_type:
             name: Naam
+        association:
+            type: Relatietype
+            product: Gerelateerd product

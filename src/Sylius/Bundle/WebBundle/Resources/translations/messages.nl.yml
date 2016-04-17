@@ -45,12 +45,17 @@ sylius:
         forward: Volgende
         security:
             proceed_order: Doorgaan met uw bestelling
+        shipping:
+            error: Het spijt ons, maar onze winkel is niet in staat om product verzending naar het land dat u hebt gekozen
+    confirmation:
+        message: Wilt u dit item verwijderen
     customer:
         filter:
             all: Toon alle klanten
             registered: Geregistreerde klanten laten zien
             unconfirmed: Onbevestigde accounts weergeven
         general_info: "Klant '%fullName%' algemene info"
+        no_groups: Er zijn geen groepen voor deze klant om weer te geven
     history:
         logged_at: Ingelogd (versie)
     homepage:
@@ -69,16 +74,25 @@ sylius:
         comment:
             notify: Notificaties
         guest: Gast klant
+        immutable_warning: Reeds verzonden orders kunnen niet meer worden gewijzigd
         no_items: Deze bestelling heeft geen artikelen
+        no_promotion: Geen coupons werden gebruikt
         no_shipments: Er zijn geen verzendingen voor deze bestelling
         no_shipping_charges: Geen verzendkosten
         no_taxes: Geen belastingen
+        state:
+            order_confimed: Bestelling bevestigd
     order_item:
         quantity: Hoeveelheid
         sellable: Product
     page:
         no_route: Uw inhoud wordt niet weergegeven in frontend als er geen route gedefinieerd is
         publishable: Gepubliceerd
+    payment:
+        transition:
+            cancel: annuleer
+            complete: voltooien
+            refund: terugbetaling
     pricing:
         volume_based:
             max: Maximum Volume
@@ -86,19 +100,41 @@ sylius:
     promotion_coupon:
         generate: Coupons genereren
         index: Lijst van coupons
+        total_results: 'Totaal: %total%'
+    report:
+        no_data: Er zijn geen gegevens om weer te geven
+        no_report: Er is geen rapport om weer te geven
+    review:
+        no_results: Er zijn geen recensies voor dit product.
+        no_reviews: Er zijn geen recensies.
     security:
         login:
             info: 'Gelieve in te loggen met behulp van e-mail <b>"sylius@example.com"</b> en <b>"sylius"</b> als wachtwoord. <small>Mr. Sylius Demo gids</small>'
+            no_account: Nog geen account
     shipment:
+        no_items: Er zijn geen items om weer te geven
+        transition:
+            backorder: nabestelling
+            cancel: annuleer
+            prepare: voorbereiden
+            release: vrijgeven
+            return: terugname
+            ship: verzend
         update: Bewerken
+    stockable:
+        on_hand: Voorraad niveau
     taxon:
         image: Kies afbeelding
         no_image: Er is geen afbeelding voor deze taxon
     ui:
+        abandoned: Verlaten
+        access_token: Toegangstoken
+        account_panel_outline: Geniet van alle functies die beschikbaar zijn in uw persoonlijke ruimte om al uw gegevens te bekijken, bij te houden en te beheren
         action: Actie
         actions: Acties
         add: Toevoegen
         add_action: Actie toevoegen
+        add_association: Relatie toevoegen
         add_attribute: Attribuut toevoegen
         add_channel: Kanaal toevoegen
         add_choice: Keuze toevoegen
@@ -116,12 +152,16 @@ sylius:
         adding_new_customer_groups: Nieuwe klantgroepen toevoegen
         adding_new_email: Toevoegen van nieuwe E-mail
         adding_new_locale: Nieuwe locatie toevoegen
+        additional_information: Aanvullende informatie
         addressing_step: Adresgegevens
         adjustments: Aanpassingen
         administration: Beheer
         administration_dashboard: Beheer Dashboard
         all_your_addresses: Al uw adressen
         amount: Bedrag
+        association: Relatie
+        association_types: Relatietypes
+        associations: Relaties
         assortment: Assortiment
         attributes: Attributen
         author: Auteur
@@ -130,6 +170,7 @@ sylius:
         available_on_demand: Beschikbaar op aanvraag
         available_until: Beschikbaar tot
         back: Terug
+        backorder: Backorder
         balance_due: Nog te betalen
         bill_to: Factureer naar
         billing_address: Factuuradres
@@ -140,6 +181,8 @@ sylius:
         calculator: Calculator
         cancel: Annuleren
         cancelled: Geannuleerd
+        cart_locked: Winkelwagen vergrendeld
+        cart_summary: Winkelwagen overzicht
         categorization: Categorisering
         category: Categorie
         change_password: Verander uw wachtwoord
@@ -156,6 +199,7 @@ sylius:
         configuration: Configuratie
         confirmation: Bevestiging
         confirmation_title: Bevestiging
+        confirmed: Bevestigd
         contact_request_details: Details contact verzoek
         contact_request_show: Contact verzoek
         contact_requests: Contact verzoeken
@@ -167,18 +211,21 @@ sylius:
         country_details: Land details
         coupon: Coupon
         coupon_based: Coupon gebaseerd
+        coupons: Coupons
         create: Creëer
         create_a_new_address: Voeg nieuw adres toe
         create_contact_request: Contact verzoek aanmaken
         create_contact_topic: Contact thema aanmaken
         create_country: Nieuw land
         create_currency: Valuta maken
+        create_customer: Nieuwe klant
         create_group: Nieuwe groep
         create_locale: Nieuwe locatie
         create_menu: Menu aanmaken
         create_menu_node: Menu node aanmaken
         create_new_coupon: Nieuwe coupon toevoegen
         create_new_page: Nieuwe pagina
+        create_new_report: Nieuw rapport maken
         create_option: Optie aanmaken
         create_order: Nieuwe bestelling
         create_payment: Nieuwe betaling
@@ -196,6 +243,7 @@ sylius:
         create_tax_category: Nieuwe belastingcategorie
         create_tax_rate: Nieuw belastingtarief
         create_taxon: Nieuwe taxon
+        create_user: Nieuwe gebruiker
         create_variant: Nieuwe variant
         create_zone: Nieuwe zone
         created_at: Aangemaakt op
@@ -215,20 +263,28 @@ sylius:
         current_stock: Huidige voorraad
         customer: Klant
         customer_details: Klantgegevens
+        customer_id: Klantnummer
         customer_not_notified: Klant is niet geïnformeerd
         customer_notified: Klant op de hoogte gesteld
         customer_orders: Klantorders
+        customer_since: U bent al klant sinds
         customers: Klanten
         customers_list_of_all_customers_in_store: 'Klanten een <small>lijst van alle klanten in de winkel</small>'
+        customize_default_metadata: Aanpassen van de standaard metadata
+        customize_metadata: Aanpassen van metagegevens
+        customize_products_metadata: Aanpassen van producten metagegevens
+        customizing_metadata: Aanpassen van metagegevens
         dashboard: Dashboard
         data: Gegevens
         default_billing_address: Standaard factuuradres
         default_currency: Standaard valuta
+        default_locale: Standaardlandinstelling
         default_shipping_address: Standaard verzendadres
         delete: Verwijderen
         delete_image: Verwijder Afbeelding
         deleted: Verwijderd
         description: Omschrijving
+        details: Details
         disable: Uitschakelen
         edit: Bewerken
         edit_group: Bewerk groep
@@ -273,6 +329,7 @@ sylius:
         enabled: Toegestaan
         end_date: Einddatum
         ends_at: Eindigt op
+        enjoy_all_the_features_that_are_available_on_your_personal_space_to_view_track_and_manage_all_your_data: Geniet van alle functies die beschikbaar zijn in uw persoonlijke ruimte om al uw gegevens te bekijken, bij te houden en te beheren
         error: Fout
         exchange_rate: Wisselkoers
         exclusive: Exclusief
@@ -283,6 +340,7 @@ sylius:
         filter: Filter
         first_name: Voornaam
         firstname: Voornaam
+        forgot_password: Wachtwoord vergeten
         fulfill: Vervullen
         gateway: Gateway
         general_info: Algemene Info
@@ -296,8 +354,10 @@ sylius:
         guest: Gast
         hello_name: 'Hallo <b>%name%</b>'
         hide_deleted: Verberg verwijderd
+        hostname: Hostnaam
         id: ID
         images: Afbeeldingen
+        included_in_price: Inbegrepen in de prijs
         index_of_all_configured_locales: Index van alle ingestelde locaties
         information: Informatie
         inventory_here_you_can_see_current_stock_levels: 'Voorraad<small>Hier kunt u de huidige voorraadniveaus zien</small>'
@@ -305,6 +365,7 @@ sylius:
         inventory_state: Voorraadstatus
         inventory_tracking: Voorraadbeheer
         invoice: Factuur
+        is_enabled: Is ingeschakeld
         items_total: Artikelen Totaal
         label: Label
         last_login: Laatst ingelogd
@@ -317,15 +378,18 @@ sylius:
         links: Links
         locales: Locaties
         lock: Vergrendelen
+        locked: Vergrendeld
         login: Inloggen
         login_button: Inloggen
         logout: Uitloggen
+        main_taxon: Hoofdcategorie
         male: Man
         manage: Beheer
         manage_adjustments: Aanpassingen beheren
         manage_attributes: Beheer attributen
         manage_channels: Kanalen beheren
         manage_countries: Beheer landen
+        manage_customers: Klanten beheren
         manage_emails: E-mails beheren
         manage_options: Productopties
         manage_orders: Bestellingen beheren
@@ -337,14 +401,18 @@ sylius:
         manage_shipping_methods: Beheer verzendmethodes
         manage_tax_categories: Belastingcategorieën beheren
         manage_tax_rates: Belastingtarieven beheren
+        manage_users: Beheer gebruikers
         manage_zones: Zones beheren
         marketing: Marketing
         members: Leden
         menu_nodes: Menu items
         menus: "Menu 's"
         message: Bericht
+        metadata_index: Metagegevens
         method: Methode
         modified: Aangepast
+        move_down: Naar beneden
+        move_up: Naar omhoog
         n_a: N/B
         name: Naam
         new: Nieuw
@@ -364,6 +432,7 @@ sylius:
         new_product_option: Nieuwe product optie
         new_product_variant: Nieuwe productvariant
         new_promotion: Nieuwe promotie toevoegen
+        new_review: Nieuwe recensie
         new_role: Nieuwe rol
         new_shipping_category: Nieuwe verzendcategorie toevoegen
         new_shipping_method: Nieuwe verzendmethode toevoegen
@@ -374,6 +443,9 @@ sylius:
         new_zone: Nieuwe zone toevoegen
         newest_products: Nieuwste producten
         next: Volgende
+        "no": Nee
+        no_account: Nog geen account
+        no_association_types_to_display: Er zijn geen relatie typen gedefinieerd
         no_comment: Geen commentaar
         no_default_billing_address: Geen standaard factuuradres
         no_default_shipping_address: Geen standaard verzendadres
@@ -384,6 +456,7 @@ sylius:
         no_sku: '<i>Geen SKU</i>'
         no_tax_category: Geen belasting categorie
         not_available_in_your_country: Niet beschikbaar in uw land
+        notify_customer: Klant informeren
         number: Nummer
         number_of_orders: Aantal bestellingen
         options: Opties
@@ -396,6 +469,7 @@ sylius:
         order_state: Bestel status
         order_summary: Bestellingsoverzicht
         order_value: Bestellingswaarde
+        ordered: Besteld
         orders: Bestellingen
         original_price: Oorspronkelijke prijs
         out_of_stock: Geen voorraad
@@ -424,6 +498,7 @@ sylius:
         priority: Prioriteit
         processing: In Behandeling
         product: Product
+        product_association_index: Relatie
         product_association_type_index: Associatietype
         product_attributes: Productattributen
         product_details_viewing_product_product: 'Product details <small>"<strong>%product%</strong>"</small>'
@@ -432,6 +507,7 @@ sylius:
         products_categorized_as_name: 'Producten in "%name%"'
         products_categorized_under_taxon_taxon: 'Producten<small>Gecategoriseerd onder "%taxon%" taxon</small>'
         products_index_of_all_products_in_your_store: 'Producten <small>Index van alle producten in uw winkel</small>'
+        promotion_coupons: Coupons
         promotion_details: Promotie details
         promotion_total: Korting totaal
         promotions: Promoties
@@ -510,14 +586,35 @@ sylius:
         taxation_settings: Belasting Instellingen
         taxes: Belastingen
         taxons: Taxons
+        theme: Thema
+        there_are_no_attributes_configured: Er zijn geen attributen geconfigureerd
+        there_are_no_channels_configured: Er zijn geen kanalen geconfigureerd
         there_are_no_contact_requests_to_display: Er zijn geen contact verzoeken om weer te geven
         there_are_no_contact_topics_to_display: Er zijn geen contact onderwerpen weer te geven
         there_are_no_countries_configured: Er zijn geen landen geconfigureerd
+        there_are_no_coupon_to_display: Er zijn geen coupons om weer te geven
         there_are_no_currencies_to_display: "Er zijn geen valuta's om weer te geven"
+        there_are_no_customers_to_display: Zijn er geen klanten om weer te geven
         there_are_no_emails_configured: Er zijn geen e-mails geconfigureerd
+        there_are_no_groups_to_display: Er zijn geen groepen om weer te geven
         there_are_no_images_for_this_product: Er zijn geen afbeeldingen voor dit product
+        there_are_no_inventory_items_to_display: Er zijn geen voorraadgegevens om weer te geven
+        there_are_no_options_configured: Er zijn geen opties geconfigureerd
         there_are_no_options_for_this_product: Er zijn geen opties voor dit product
+        there_are_no_orders_for_this_customer_to_display: Er zijn geen orders voor deze klant om weer te geven
+        there_are_no_pages_to_display: "Er zijn geen pagina's om weer te geven"
+        there_are_no_payment_methods_configured: Er zijn geen betaalmethoden geconfigureerd
+        there_are_no_payments_configured: Er zijn geen betaalmethoden geconfigureerd
+        there_are_no_permissions_defined: Er zijn geen machtigingen gedefinieerd
+        there_are_no_products_to_display: Er zijn geen producten om weer te geven
+        there_are_no_promotions_configured: Er zijn geen promoties geconfigureerd
+        there_are_no_shipments_to_display: Er zijn geen verzendingen om weer te geven
+        there_are_no_shipping_categories_configured: Er zijn geen verzendcategorieën geconfigureerd
+        there_are_no_shipping_methods_configured: Er zijn geen verzendmethodes geconfigureerd
+        there_are_no_tax_categories_configured: Er zijn geen belastingcategorieën geconfigureerd
         there_are_no_taxons_for_this_product: Er zijn geen taxons voor dit product
+        there_are_no_users_to_display: Er zijn geen gebruikers om weer te geven
+        there_are_no_zones_configured: Er zijn geen zones geconfigureerd
         this_months_statistics: Statistieken van deze maand
         title: Titel
         topic: Onderwerp

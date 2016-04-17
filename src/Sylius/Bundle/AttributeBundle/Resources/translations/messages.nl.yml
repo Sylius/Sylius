@@ -12,7 +12,7 @@ sylius:
             translations: Vertalingen
             type: Type
         attribute_type:
-            checkbox: Selectievakje
+            checkbox: Selectievak
             configuration: Configuratie
             date: Datum
             datetime: Datum / tijd

@@ -12,3 +12,4 @@ sylius:
         restore_deleted: '%resource% is succesvol hersteld.'
         enable: '%resource% is ingesteld.'
         disable: '%resource% is uitgeschakeld.'
+        delete_error: 'Verwijderen niet mogelijk, %resource% is nog steeds in gebruik.'
