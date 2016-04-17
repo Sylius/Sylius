@@ -6,8 +6,12 @@ sylius:
         admin:
             main:
                 configuration:
-                    header: Konfiguráció
-                    tax_categories: Adó kategóriák
                     countries: Országok
+                    header: Konfiguráció
                     locales: Területi beállítások
+                    shipping_methods: Szállítási módok
+                    tax_categories: Adó kategóriák
                     tax_rates: Adókulcsok
+                marketing:
+                    header: Marketing
+                    promotions: Promóciók

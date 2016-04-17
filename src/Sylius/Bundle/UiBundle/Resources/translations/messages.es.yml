@@ -26,6 +26,7 @@ sylius:
         "no": false
         powered_by: Funciona con
         save_changes: Guardar cambios
+        shipping_methods: Métodos de envío
         sign_in: Inicia sesión
         sign_out: Cerrar sesión
         status: Estado

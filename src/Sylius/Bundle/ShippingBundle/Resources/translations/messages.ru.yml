@@ -44,3 +44,5 @@ sylius:
             configuration: Конфигурация
             enabled: Активен
             name: Название
+            tax_category: Категория налогов
+            translations: ﻿Переводы

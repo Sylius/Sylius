@@ -12,5 +12,6 @@ sylius:
         locales: Miền địa phương
         new_country: Tạo quốc gia mới
         "no": false
+        shipping_methods: Phương thức vận chuyển
         success: Thành công
         "yes": true

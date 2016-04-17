@@ -6,8 +6,12 @@ sylius:
         admin:
             main:
                 configuration:
-                    header: Configuration
-                    tax_categories: Catégories de taxes
                     countries: Pays
+                    header: Configuration
                     locales: Locales
+                    shipping_methods: Modes de livraison
+                    tax_categories: Catégories de taxes
                     tax_rates: Taux de taxe
+                marketing:
+                    header: Marketing
+                    promotions: Promotions

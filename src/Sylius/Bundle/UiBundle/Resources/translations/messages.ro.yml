@@ -23,5 +23,6 @@ sylius:
         new_tax_category: Categorie de taxă nouă
         "no": false
         save_changes: Salvează modificările
+        shipping_methods: Metode de livrare
         success: Succes
         "yes": true

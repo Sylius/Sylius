@@ -33,8 +33,6 @@ sylius:
         info: Info
         last_updated: Përditësimi i fundit
         locales: Rajonet
-        manage_country: Menaxho vendin
-        manage_locale: Menaxho vendndodhjen
         manage_taxation_of_your_products: Menaxho taksimet e produktit tuaj
         new: E re
         new_country: Vend i ri
@@ -47,6 +45,7 @@ sylius:
         not_in: Jo brenda
         powered_by: Mundësuar nga
         save_changes: Ruaj ndryshimet
+        shipping_methods: Mënyrat e dërgesave
         show: Trego
         sign_in: Hyr
         sign_out: Dil

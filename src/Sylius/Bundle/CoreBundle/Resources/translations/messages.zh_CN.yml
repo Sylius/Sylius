@@ -106,3 +106,10 @@ sylius:
             email: 电子邮件
         product_association_type:
             name: 名称
+        promotion_rule:
+            contains_taxon:
+                count: 计数
+            taxon:
+                taxons: 分类
+            total_of_items_from_taxon:
+                amount: 金额

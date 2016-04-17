@@ -95,3 +95,8 @@ sylius:
             email: Ηλεκτρονικό ταχυδρομείο
         product_association_type:
             name: Ονομασία
+        promotion_rule:
+            contains_taxon:
+                count: Πλήθος
+            total_of_items_from_taxon:
+                amount: Ποσό

@@ -24,5 +24,6 @@ sylius:
         new_tax_category: Új adókategória
         "no": false
         save_changes: Módosítások mentése
+        shipping_methods: Szállítási módok
         success: Siker
         "yes": true

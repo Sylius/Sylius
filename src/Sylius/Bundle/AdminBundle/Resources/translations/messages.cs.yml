@@ -6,7 +6,11 @@ sylius:
         admin:
             main:
                 configuration:
-                    header: Konfigurace
                     countries: Země
+                    header: Konfigurace
                     locales: Lokalizace
+                    shipping_methods: Způsoby dopravy
                     tax_rates: Daňové sazby
+                marketing:
+                    header: Marketing
+                    promotions: Akce

@@ -19,5 +19,6 @@ sylius:
         new_tax_category: Nova categoria de imposto
         "no": false
         save_changes: Salvar modificações
+        shipping_methods: Métodos de envio
         success: Sucesso
         "yes": true

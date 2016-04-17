@@ -17,5 +17,6 @@ sylius:
         new_tax_category: Нова категорија пореза
         "no": false
         save_changes: Сачувај измене
+        shipping_methods: Начини доставе
         success: Успех
         "yes": true

@@ -35,3 +35,4 @@ sylius:
             configuration: Konfiguráció
             enabled: Engedélyezve
             name: Név
+            tax_category: ÁFA-kategória

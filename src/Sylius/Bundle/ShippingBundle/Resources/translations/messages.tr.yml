@@ -44,3 +44,4 @@ sylius:
             configuration: Ayarlar
             enabled: Etkin
             name: Ad
+            tax_category: Vergi kategorisi

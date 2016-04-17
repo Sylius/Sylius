@@ -6,7 +6,10 @@ sylius:
         admin:
             main:
                 configuration:
-                    header: 配置
                     countries: 国家
+                    header: 配置
                     locales: 区域设置
+                    shipping_methods: 发货方式
                     tax_rates: 税率
+                marketing:
+                    promotions: 促销活动

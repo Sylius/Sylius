@@ -8,4 +8,7 @@ sylius:
                 configuration:
                     countries: Страни
                     locales: Езикови променливи
+                    shipping_methods: Начин на доставка
                     tax_rates: Данъчни ставки
+                marketing:
+                    promotions: Промоции

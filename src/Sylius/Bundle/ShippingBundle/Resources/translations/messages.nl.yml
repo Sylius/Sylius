@@ -44,3 +44,5 @@ sylius:
             configuration: Configuratie
             enabled: Toegestaan
             name: Naam
+            tax_category: Belasting categorie
+            translations: Vertalingen

@@ -36,3 +36,4 @@ sylius:
             configuration: Postavke
             enabled: Omogući
             name: Naziv
+            tax_category: Kategorija artikla

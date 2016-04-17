@@ -107,3 +107,10 @@ sylius:
             email: Email
         product_association_type:
             name: Nome
+        promotion_rule:
+            contains_taxon:
+                count: Contagem
+            taxon:
+                taxons: Taxas
+            total_of_items_from_taxon:
+                amount: Quantidade

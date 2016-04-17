@@ -25,5 +25,6 @@ sylius:
         new_tax_category: Nová kategorie daně
         "no": false
         save_changes: Uložit změny
+        shipping_methods: Způsoby dopravy
         success: Úspěch
         "yes": true

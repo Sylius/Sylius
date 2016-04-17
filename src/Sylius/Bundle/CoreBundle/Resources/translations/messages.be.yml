@@ -107,3 +107,10 @@ sylius:
             email: Email
         product_association_type:
             name: Імя
+        promotion_rule:
+            contains_taxon:
+                count: Колькасць
+            taxon:
+                taxons: Катэгорыі
+            total_of_items_from_taxon:
+                amount: Сума

@@ -34,8 +34,6 @@ sylius:
         info: Info
         last_updated: Letzte Aktualisierung
         locales: Gebietsschemata
-        manage_country: Land verwalten
-        manage_locale: Lokalisierungen verwalten
         manage_taxation_of_your_products: Besteuerung der Produkte verwalten
         new: Neu
         new_country: Neues Land
@@ -49,6 +47,7 @@ sylius:
         or: oder
         powered_by: Powered by
         save_changes: Änderungen speichern
+        shipping_methods: Versandmethoden
         show: Anzeigen
         sign_in: Anmelden
         sign_out: Abmelden

@@ -10,3 +10,5 @@ sylius:
                 cancelled: Cancelado
         shipping_category:
             description: Descrição
+        shipping_method:
+            tax_category: Categoria de imposto

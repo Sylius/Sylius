@@ -8,3 +8,4 @@ sylius:
         shipping_method:
             enabled: Aktiverad
             name: Namn
+            tax_category: Momskategori

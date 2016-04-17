@@ -23,5 +23,6 @@ sylius:
         new_tax_category: Нова категорія оподаткування
         "no": false
         save_changes: Зберегти зміни
+        shipping_methods: Методи доставки
         success: Успішно
         "yes": true

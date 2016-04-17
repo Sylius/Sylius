@@ -105,3 +105,10 @@ sylius:
             email: E-mail
         product_association_type:
             name: Név
+        promotion_rule:
+            contains_taxon:
+                count: Mennyiség
+            taxon:
+                taxons: Taxonok
+            total_of_items_from_taxon:
+                amount: Összeg
