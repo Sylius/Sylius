@@ -10,23 +10,24 @@ sylius_admin_dashboard:
     defaults:
         _controller: sylius.controller.admin.dashboard:indexAction
 
-sylius_admin_security:
-    resource: "@SyliusAdminBundle/Resources/config/routing/security.yml"
-
-sylius_admin_tax_category:
-    resource: "@SyliusAdminBundle/Resources/config/routing/tax_category.yml"
-
 sylius_admin_country:
     resource: "@SyliusAdminBundle/Resources/config/routing/country.yml"
 
 sylius_admin_locale:
     resource: "@SyliusAdminBundle/Resources/config/routing/locale.yml"
 
-sylius_admin_tax_rate:
-    resource: "@SyliusAdminBundle/Resources/config/routing/tax_rate.yml"
-
 sylius_admin_promotion:
     resource: "@SyliusAdminBundle/Resources/config/routing/promotion.yml"
 
+sylius_admin_security:
+    resource: "@SyliusAdminBundle/Resources/config/routing/security.yml"
+
 sylius_admin_shipping_method:
     resource: "@SyliusAdminBundle/Resources/config/routing/shipping_method.yml"
+
+sylius_admin_tax_category:
+    resource: "@SyliusAdminBundle/Resources/config/routing/tax_category.yml"
+
+sylius_admin_tax_rate:
+    resource: "@SyliusAdminBundle/Resources/config/routing/tax_rate.yml"
+
