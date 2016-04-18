@@ -57,7 +57,7 @@ final class ResourceTranslationsType extends AbstractType
      * @param string $locale
      * @param array $options
      *
-     * @return boolean
+     * @return bool
      */
     private function isLocaleRequired($locale, array $options = [])
     {
