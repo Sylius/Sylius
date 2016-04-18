@@ -3,7 +3,7 @@
 {% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
 {% import 'SyliusWebBundle:Backend/Macros:misc.html.twig' as misc %}
 
-{% set editable = (not order.deleted) and (not order.shippingState is constant('Sylius\\Component\\Shipping\\Model\\ShipmentInterface::STATE_SHIPPED')) %}
+{% set editable = not order.shippingState is constant('Sylius\\Component\\Shipping\\Model\\ShipmentInterface::STATE_SHIPPED') %}
 
 {% block topbar %}
     <ol class="breadcrumb">
@@ -19,10 +19,8 @@
 <div class="page-header">
     <div class="actions-menu">
         {{ buttons.show(path('sylius_backend_order_show', {'id': order.id})) }}
-        {% if not order.deleted %}
-            {% if not order.shippingState is constant('Sylius\\Component\\Shipping\\Model\\ShipmentInterface::STATE_SHIPPED') %}
-                {{ buttons.edit(path('sylius_backend_order_update', {'id': order.id})) }}
-            {% endif %}
+        {% if not order.shippingState is constant('Sylius\\Component\\Shipping\\Model\\ShipmentInterface::STATE_SHIPPED') %}
+            {{ buttons.edit(path('sylius_backend_order_update', {'id': order.id})) }}
         {% endif %}
         <a href="{{ path('sylius_backend_order_history', {'id': order.id}) }}" class="btn btn-info">
             <i class="glyphicon glyphicon-calendar"></i>
@@ -31,7 +29,6 @@
     </div>
     <h1>
         <span class="glyphicon glyphicon-file"></span> {{ 'sylius.ui.order'|trans({'%number%': order.number}) }}
-        {% if order.deleted %}<span class="label label-danger">{{ 'sylius.ui.deleted'|trans }}</span>{% endif %}
     </h1>
 </div>
 

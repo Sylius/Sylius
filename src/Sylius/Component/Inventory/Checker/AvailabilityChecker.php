@@ -12,7 +12,6 @@
 namespace Sylius\Component\Inventory\Checker;
 
 use Sylius\Component\Inventory\Model\StockableInterface;
-use Sylius\Component\Resource\Model\SoftDeletableInterface;
 
 /**
  * Checks availability for given stockable object.
@@ -43,10 +42,6 @@ class AvailabilityChecker implements AvailabilityCheckerInterface
      */
     public function isStockAvailable(StockableInterface $stockable)
     {
-        if ($stockable instanceof SoftDeletableInterface && $stockable->isDeleted()) {
-            return false;
-        }
-
         if ($this->backorders || $stockable->isAvailableOnDemand()) {
             return true;
         }
@@ -59,10 +54,6 @@ class AvailabilityChecker implements AvailabilityCheckerInterface
      */
     public function isStockSufficient(StockableInterface $stockable, $quantity)
     {
-        if ($stockable instanceof SoftDeletableInterface && $stockable->isDeleted()) {
-            return false;
-        }
-
         if ($this->backorders || $stockable->isAvailableOnDemand()) {
             return true;
         }

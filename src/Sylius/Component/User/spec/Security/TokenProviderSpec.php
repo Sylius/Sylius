@@ -40,13 +40,8 @@ class TokenProviderSpec extends ObjectBehavior
         $this->shouldImplement(TokenProviderInterface::class);
     }
 
-    public function it_generates_random_token($repository, $manager, FilterCollection $filter, $generator)
+    public function it_generates_random_token($repository, $generator)
     {
-        $manager->getFilters()->willReturn($filter);
-
-        $filter->disable('softdeleteable')->shouldBeCalled();
-        $filter->enable('softdeleteable')->shouldBeCalled();
-
         $repository->findOneBy(Argument::any())->willReturn(null);
 
         $generator->generate(12)->shouldBeCalled()->willReturn('tesToken1234');
@@ -54,13 +49,8 @@ class TokenProviderSpec extends ObjectBehavior
         $this->generateUniqueToken()->shouldReturn('tesToken1234');
     }
 
-    public function it_generates_unique_random_token($repository, $manager, $generator, FilterCollection $filter, UserInterface $user)
+    public function it_generates_unique_random_token($repository, $generator, UserInterface $user)
     {
-        $manager->getFilters()->willReturn($filter);
-
-        $filter->disable('softdeleteable')->shouldBeCalled();
-        $filter->enable('softdeleteable')->shouldBeCalled();
-
         $repository->findOneBy(['confirmationToken' => 'tesToken1234'])->willReturn($user);
         $repository->findOneBy(['confirmationToken' => 'tesToken1235'])->willReturn(null);
 

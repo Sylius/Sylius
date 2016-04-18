@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\CoreBundle;
 
-use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\DoctrineSluggablePass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\LazyCacheWarmupPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\RegisterTaxCalculationStrategiesPass;
 use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\RoutingRepositoryPass;
@@ -46,7 +45,6 @@ class SyliusCoreBundle extends AbstractResourceBundle
     {
         parent::build($container);
 
-        $container->addCompilerPass(new DoctrineSluggablePass());
         $container->addCompilerPass(new RoutingRepositoryPass());
         $container->addCompilerPass(new LazyCacheWarmupPass());
         $container->addCompilerPass(new SitemapProviderPass());

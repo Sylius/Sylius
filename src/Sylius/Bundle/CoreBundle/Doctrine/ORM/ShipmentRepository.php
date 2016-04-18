@@ -36,8 +36,6 @@ class ShipmentRepository extends EntityRepository implements ShipmentRepositoryI
      */
     public function createFilterPaginator(array $criteria = null, array $sorting = null)
     {
-        $this->_em->getFilters()->disable('softdeleteable');
-
         $queryBuilder = $this->createQueryBuilder('o');
 
         $queryBuilder

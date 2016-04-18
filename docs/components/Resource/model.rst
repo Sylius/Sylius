@@ -1,24 +1,6 @@
 Model interfaces
 ================
 
-.. _component_resource_model_soft-deletable-interface:
-
-SoftDeletableInterface
-----------------------
-
-This interface will ask you to implement the following methods to your model, they will use by the soft
-`deletable Doctrine2 extension <https://github.com/Atlantic18/DoctrineExtensions/blob/master/doc/softdeleteable.md>`_. :
-
-+------------------------------------+------------------------------------------+-------------------+
-| Method                             | Description                              | Returned value    |
-+====================================+==========================================+===================+
-| isDeleted()                        | Check if the resource has been deleted   | boolean           |
-+------------------------------------+------------------------------------------+-------------------+
-| getDeletedAt()                     | Get the time of deletion                 | \DateTime         |
-+------------------------------------+------------------------------------------+-------------------+
-| setDeletedAt(\DateTime $deletedAt) | Cet deletion time.                       | Void              |
-+------------------------------------+------------------------------------------+-------------------+
-
 .. _component_resource_model_timestampable-interface:
 
 TimestampableInterface

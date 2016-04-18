@@ -26,8 +26,7 @@ When an object class implements the ``VariantInterface`` it has a possibility to
 
 .. note::
 
-    This interface extends the :ref:`component_resource_model_softdeletable-interface`
-    and the :ref:`component_resource_model_timestampable-interface`. |br|
+    This interface extends the :ref:`component_resource_model_timestampable-interface`. |br|
     You will find more information about this interface in `Sylius API VariantInterface`_.
 
 .. _Sylius API VariantInterface: http://api.sylius.org/Sylius/Component/Variation/Model/VariantInterface.htm
