@@ -21,7 +21,7 @@ use Symfony\Component\Routing\Matcher\UrlMatcherInterface;
 
 /**
  * @mixin CurrentPageResolver
- * 
+ *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class CurrentPageResolverSpec extends ObjectBehavior
@@ -48,7 +48,7 @@ class CurrentPageResolverSpec extends ObjectBehavior
         UrlMatcherInterface $urlMatcher
     ) {
         $session->getCurrentUrl()->willReturn('https://sylius.com/resource/new');
-        $urlMatcher->match('https://sylius.com/resource/new')->willReturn(['_route' => 'sylius_resource_create']);
+        $urlMatcher->match('/resource/new')->willReturn(['_route' => 'sylius_resource_create']);
 
         $this->getCurrentPageWithForm($createPage, $updatePage)->shouldReturn($createPage);
     }
@@ -60,7 +60,7 @@ class CurrentPageResolverSpec extends ObjectBehavior
         UrlMatcherInterface $urlMatcher
     ) {
         $session->getCurrentUrl()->willReturn('https://sylius.com/resource/edit');
-        $urlMatcher->match('https://sylius.com/resource/edit')->willReturn(['_route' => 'sylius_resource_update']);
+        $urlMatcher->match('/resource/edit')->willReturn(['_route' => 'sylius_resource_update']);
 
         $this->getCurrentPageWithForm($createPage, $updatePage)->shouldReturn($updatePage);
     }
@@ -72,7 +72,7 @@ class CurrentPageResolverSpec extends ObjectBehavior
         UrlMatcherInterface $urlMatcher
     ) {
         $session->getCurrentUrl()->willReturn('https://sylius.com/resource/show');
-        $urlMatcher->match('https://sylius.com/resource/show')->willReturn(['_route' => 'sylius_resource_show']);
+        $urlMatcher->match('/resource/show')->willReturn(['_route' => 'sylius_resource_show']);
 
         $this->shouldThrow(\LogicException::class)->during('getCurrentPageWithForm', [$createPage, $updatePage]);
     }
