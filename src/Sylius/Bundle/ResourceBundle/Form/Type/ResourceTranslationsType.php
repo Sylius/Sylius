@@ -55,7 +55,7 @@ final class ResourceTranslationsType extends AbstractType
 
     /**
      * @param string $locale
-     * @param array  $options
+     * @param array $options
      *
      * @return boolean
      */
