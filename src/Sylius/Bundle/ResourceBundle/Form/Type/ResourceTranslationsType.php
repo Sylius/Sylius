@@ -44,13 +44,39 @@ final class ResourceTranslationsType extends AbstractType
 
         foreach ($locales as $locale) {
             $localesWithRequirement[$locale] = false;
-            if ($this->localeProvider->getDefaultLocaleCode() === $locale) {
+            if ($this->isLocaleRequired($locale, $options)) {
                 $localesWithRequirement[$locale] = true;
                 $localesWithRequirement = array_reverse($localesWithRequirement, true);
             }
         }
 
         $builder->addEventSubscriber(new ResourceTranslationsSubscriber($localesWithRequirement));
+    }
+
+    /**
+     * @param string $locale
+     * @param array  $options
+     *
+     * @return boolean
+     */
+    private function isLocaleRequired($locale, array $options = [])
+    {
+        if (isset($options['required_locales'])) {
+            return in_array($locale, $options['required_locales']);
+        }
+
+        return $this->localeProvider->getDefaultLocaleCode() === $locale;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver
+            ->setDefined('required_locales')
+            ->setAllowedTypes('required_locales', ['array'])
+        ;
     }
 
     /**
