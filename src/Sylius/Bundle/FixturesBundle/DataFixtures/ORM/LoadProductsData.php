@@ -38,8 +38,7 @@ class LoadProductsData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
-        // T-Shirts...
-        for ($i = 1; $i <= 120; ++$i) {
+        for ($i = 1; $i <= 30; ++$i) {
             switch (rand(0, 3)) {
                 case 0:
                     $manager->persist($this->createTShirt($i));
@@ -58,7 +57,7 @@ class LoadProductsData extends DataFixture
                     break;
             }
 
-            if (0 === $i % 20) {
+            if (0 === $i % 10) {
                 $manager->flush();
             }
         }

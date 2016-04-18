@@ -42,7 +42,7 @@ class LoadUsersData extends DataFixture
 
         $this->setReference('Sylius.User-Administrator', $user);
 
-        for ($i = 1; $i <= 200; ++$i) {
+        for ($i = 1; $i <= 15; ++$i) {
             $username = $this->faker->username;
 
             while (isset($this->usernames[$username])) {
