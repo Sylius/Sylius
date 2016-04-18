@@ -18,6 +18,7 @@ use Sylius\Component\Taxation\Model\TaxRateInterface as BaseTaxRateInterface;
  * Tax rate interface.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Robin Jansen <robinjansen51@gmail.com>
  */
 interface TaxRateInterface extends BaseTaxRateInterface
 {
@@ -34,4 +35,49 @@ interface TaxRateInterface extends BaseTaxRateInterface
      * @param ZoneInterface $zone
      */
     public function setZone(ZoneInterface $zone);
+
+    /**
+     * @return bool
+     */
+    public function isAppliedToIndividuals();
+
+    /**
+     * @return bool
+     */
+    public function getAppliedToIndividuals();
+
+    /**
+     * @param bool $appliedToIndividuals
+     */
+    public function setAppliedToIndividuals($appliedToIndividuals);
+
+    /**
+     * @return bool
+     */
+    public function isAppliedToResellers();
+
+    /**
+     * @return bool
+     */
+    public function getAppliedToResellers();
+
+    /**
+     * @param bool $appliedToResellers
+     */
+    public function setAppliedToResellers($appliedToResellers);
+
+    /**
+     * @return bool
+     */
+    public function isAppliedToEntrepreneurs();
+
+    /**
+     * @return bool
+     */
+    public function getAppliedToEntrepreneurs();
+
+    /**
+     * @param bool $appliedToEntrepreneurs
+     */
+    public function setAppliedToEntrepreneurs($appliedToEntrepreneurs);
 }

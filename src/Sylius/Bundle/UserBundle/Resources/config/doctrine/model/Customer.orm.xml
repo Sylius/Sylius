@@ -33,6 +33,8 @@
                 <option name="default">u</option>
             </options>
         </field>
+        <field name="vatNumber" column="vat_number" type="string" nullable="true"/>
+        <field name="resellerId" column="reseller_id" type="string" nullable="true"/>
 
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>

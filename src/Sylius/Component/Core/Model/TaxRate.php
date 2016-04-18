@@ -18,6 +18,7 @@ use Sylius\Component\Taxation\Model\TaxRate as BaseTaxRate;
  * Tax rate applicable to selected zone.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Robin Jansen <robinjansen51@gmail.com>
  */
 class TaxRate extends BaseTaxRate implements TaxRateInterface
 {
@@ -27,6 +28,25 @@ class TaxRate extends BaseTaxRate implements TaxRateInterface
      * @var ZoneInterface
      */
     protected $zone;
+
+    /**
+     * @var string
+     */
+    protected $appliedToIndividuals = true;
+
+    /**
+     * Used in United States
+     *
+     * @var string
+     */
+    protected $appliedToResellers = true;
+
+    /**
+     * Used in European Union
+     *
+     * @var string
+     */
+    protected $appliedToEntrepreneurs = true;
 
     /**
      * {@inheritdoc}
@@ -44,5 +64,78 @@ class TaxRate extends BaseTaxRate implements TaxRateInterface
         $this->zone = $zone;
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isAppliedToIndividuals()
+    {
+        return $this->appliedToIndividuals;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAppliedToIndividuals()
+    {
+        return $this->appliedToIndividuals;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setAppliedToIndividuals($appliedToIndividuals)
+    {
+        $this->appliedToIndividuals = $appliedToIndividuals;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function IsAppliedToResellers()
+    {
+        return $this->appliedToResellers;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAppliedToResellers()
+    {
+        return $this->appliedToResellers;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setAppliedToResellers($appliedToResellers)
+    {
+        $this->appliedToResellers = $appliedToResellers;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isAppliedToEntrepreneurs()
+    {
+        return $this->appliedToEntrepreneurs;
+    }
+
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAppliedToEntrepreneurs()
+    {
+        return $this->appliedToEntrepreneurs;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setAppliedToEntrepreneurs($appliedToEntrepreneurs)
+    {
+        $this->appliedToEntrepreneurs = $appliedToEntrepreneurs;
     }
 }

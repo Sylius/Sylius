@@ -72,6 +72,26 @@ class Customer implements CustomerInterface, GroupableInterface
      */
     protected $phoneNumber;
 
+    /**
+     * VAT number is used in the European Union
+     * to proof that you are a company. This is
+     * noticed at the invoice so the buyer can
+     * recover the VAT later on.
+     *
+     * @var string
+     */
+    protected $vatNumber;
+
+    /**
+     * Resale Certificate is used in the US
+     * to proof that you are a reseller and
+     * therefore you don't have to pay Sales Tax
+     * at the point of purchase
+     *
+     * @var string
+     */
+    protected $resellerId;
+
     public function __construct()
     {
         $this->groups = new ArrayCollection();
@@ -311,5 +331,37 @@ class Customer implements CustomerInterface, GroupableInterface
         if (null !== $user) {
             $user->setCustomer($this);
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getVatNumber()
+    {
+        return $this->vatNumber;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setVatNumber($vatNumber)
+    {
+        $this->vatNumber = $vatNumber;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getResellerId()
+    {
+        return $this->resellerId;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setResellerId($resellerId)
+    {
+        $this->resellerId = $resellerId;
     }
 }
