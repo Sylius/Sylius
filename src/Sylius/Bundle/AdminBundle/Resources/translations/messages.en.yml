@@ -3,6 +3,7 @@ sylius:
         admin:
             main:
                 configuration:
+                    channels: Channels
                     countries: Countries
                     currencies: Currencies
                     header: Configuration

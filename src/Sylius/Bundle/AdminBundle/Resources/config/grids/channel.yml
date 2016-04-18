@@ -1,0 +1,44 @@
+sylius_grid:
+    grids:
+        sylius_admin_channel:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%sylius.model.channel.class%"
+            sorting:
+                name: asc
+            fields:
+                code:
+                    type: string
+                    label: sylius.ui.code
+                nameAndDescription:
+                    type: twig
+                    label: sylius.ui.name
+                    path: .
+                    options:
+                        template: SyliusAdminBundle:Grid/Field:nameAndDescription.html.twig
+                hostname:
+                    type: string
+                    label: sylius.ui.hostname
+                theme:
+                    type: string
+                    label: sylius.ui.theme
+                color:
+                    type: twig
+                    label: sylius.ui.color
+                    options:
+                        template: SyliusAdminBundle:Channel/Field:color.html.twig
+                enabled:
+                    type: twig
+                    label: sylius.ui.enabled
+                    options:
+                        template: SyliusAdminBundle:Grid/Field:enabled.html.twig
+            actions:
+                main:
+                    create:
+                        type: create
+                item:
+                    update:
+                        type: update
+                    delete:
+                        type: delete

@@ -102,6 +102,12 @@ final class MainMenuBuilder extends AbstractAdminMenuBuilder
             ->setLabel('sylius.menu.admin.main.configuration.currencies')
             ->setLabelAttribute('icon', 'money')
         ;
+
+        $configurationSubMenu
+            ->addChild('channels', ['route' => 'sylius_admin_channel_index'])
+            ->setLabel('sylius.menu.admin.main.configuration.channels')
+            ->setLabelAttribute('icon', 'random')
+        ;
     }
 
     /**
