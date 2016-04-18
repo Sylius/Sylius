@@ -9,26 +9,40 @@ sylius:
             remember_me: Recordarme
     ui:
         actions: Acciones
+        an_error_occurred: Se ha producido un error
+        are_your_sure_you_want_to_perform_this_action: ¿Está seguro que quiere realizar esta acción?
         cancel: Cancelar
+        category_requirements: Requisitos de la categoría
+        contains: Contiene
         countries: Países
         create: Crear
         dashboard: Panel general
         delete: Eliminar
         description: Descripción
+        disabled: Deshabilitado
         edit: Editar
+        edit_country: Editar país
         empty: Vaciar
         enabled: Activado
+        equal: Igual
         filter: Filtrar
+        info: Información
+        last_updated: Última actialización
         locales: Idiomas
         new: Nuevo
         new_country: Nuevo país
         new_tax_category: Nueva categoría de impuesto
         "no": false
+        no_results_to_display: No hay resultados para mostrar
+        or: o
         powered_by: Funciona con
         save_changes: Guardar cambios
         shipping_methods: Métodos de envío
+        show: Mostrar
         sign_in: Inicia sesión
         sign_out: Cerrar sesión
+        starts_with: Comienza con
         status: Estado
         success: Exito
+        tax_categories: Categorías de impuestos
         "yes": true

@@ -35,6 +35,8 @@ sylius:
             currencies: Monedas
             shipping_methods: Métodos de envío
             payment_methods: Métodos de pago
+            theme: Tema
+            hostname: Nombre del host
         image:
             file: Imagen
         locale:
@@ -74,6 +76,7 @@ sylius:
                     Tracking code (for example: Código de Google Analytics
             taxation:
                 default_tax_zone: Zona fiscal por defecto
+                default_tax_calculation_strategy: Estrategia de cálculo de impuesto por defecto
             security:
                 enabled: ¿Activar?
         shipment_filter:

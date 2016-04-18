@@ -4,5 +4,5 @@
 sylius:
     form:
         currency:
-            exchange_rate: Tasa o tipo de cambio
+            exchange_rate: Tasa de cambio
             enabled: Activado

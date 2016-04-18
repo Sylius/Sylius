@@ -366,6 +366,7 @@ sylius:
         guest: Invitado
         hello_name: 'Hola <b>%name%</b>'
         hide_deleted: Ocultar eliminados
+        hostname: Nombre del host
         id: ID
         identifier: Identificador
         images: Imágenes
@@ -625,6 +626,7 @@ sylius:
         taxes: Impuestos
         taxons: Taxonomías
         thank_you_for_your_order: Gracias por su pedido
+        theme: Tema
         there_are_no_archetypes_defined: No hay prototipos definidos
         there_are_no_attributes_configured: No hay atributos configurados
         there_are_no_blocks_to_display: No hay bloques para mostrar
