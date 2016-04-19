@@ -19,3 +19,6 @@ sylius:
                 customers:
                     header: Customer
                     customers: Customers
+                catalog:
+                    header: Catalog
+                    attributes: Attributes

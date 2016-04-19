@@ -1,0 +1,36 @@
+sylius_admin_product_attribute:
+    resource: |
+        alias: sylius.product_attribute
+        section: admin
+        templates: SyliusAdminBundle:Crud
+        except: ['show', 'delete', 'create']
+        redirect: update
+        grid: sylius_admin_product_attribute
+        vars:
+            all:
+                subheader: sylius.ui.manage_attributes_of_your_produts
+                templates:
+                    form: SyliusAdminBundle:ProductAttribute:_form.html.twig
+            index:
+                icon: cubes
+    type: sylius.resource
+
+sylius_admin_product_attribute_create:
+    path: /product-attributes/{type}/new
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.product_attribute:createAction
+        type: text
+        _sylius:
+            section: admin
+            factory:
+                method: createTyped
+                arguments:
+                    type: $type
+            template: SyliusAdminBundle:Crud:create.html.twig
+            redirect: sylius_admin_product_attribute_update
+            vars:
+                templates:
+                    form: SyliusAdminBundle:ProductAttribute:_form.html.twig
+    requirements:
+        type: text|textarea|checkbox|integer|percent|datetime|date

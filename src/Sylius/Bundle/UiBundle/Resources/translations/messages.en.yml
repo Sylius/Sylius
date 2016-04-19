@@ -47,6 +47,7 @@ sylius:
         info: Info
         last_updated: Last updated
         locales: Locales
+        manage_attributes_of_your_produts: Manage attributes of your products
         manage_country: Manage country
         manage_currencies_available_in_the_store: Manage currencies available in the store
         manage_customer: Manage customers

@@ -838,6 +838,7 @@ sylius_grid:
     templates:
         action:
             create_zone: SyliusAdminBundle:Zone/Action:createZone.html.twig
+            create_product_attribute: SyliusAdminBundle:ProductAttribute/Action:createProductAttribute.html.twig
             create: SyliusAdminBundle:Grid/Action:create.html.twig
             update: SyliusAdminBundle:Grid/Action:update.html.twig
             delete: SyliusAdminBundle:Grid/Action:delete.html.twig

@@ -1,0 +1,28 @@
+<div class="ui two column stackable grid">
+    {{ form_errors(form) }}
+    <div class="column">
+        <div class="ui segment">
+            <div class="two fields">
+                {{ form_row(form.code) }}
+                {{ form_row(form.type) }}
+            </div>
+            <h4 class="ui dividing header">{{ 'sylius.ui.configuration'|trans }}</h4>
+            <div class="ui segment configuration">
+                {% if form.configuration is defined %}
+                    {% for field in form.configuration %}
+                        {{ form_row(field) }}
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="column">
+        <div class="ui segment">
+            {% for locale, translationForm in form.translations %}
+                <h4 class="ui dividing header"><i class="{{ locale|slice(3, 2)|lower }} flag"></i> {{ locale|sylius_locale_name }}</h4>
+                {{ form_row(translationForm.name) }}
+            {% endfor %}
+        </div>
+        {{ form_rest(form) }}
+    </div>
+</div>

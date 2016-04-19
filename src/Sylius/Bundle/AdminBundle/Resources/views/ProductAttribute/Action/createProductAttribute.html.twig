@@ -1,0 +1,18 @@
+<div class="ui labeled icon top right floating dropdown button primary link">
+    <i class="plus icon"></i>
+    <span class="text">{{ 'sylius.ui.create'|trans }}</span>
+    <div class="menu">
+        <div class="header">
+            <i class="world icon"></i>
+            {{ 'sylius.ui.type'|trans }}
+        </div>
+        <div class="divider"></div>
+        <a class="item" href="{{ path(grid.requestConfiguration.getRouteName('create'), { 'type': 'text' }) }}">Text</a>
+        <a class="item" href="{{ path(grid.requestConfiguration.getRouteName('create'), { 'type': 'textarea' }) }}">Textarea</a>
+        <a class="item" href="{{ path(grid.requestConfiguration.getRouteName('create'), { 'type': 'checkbox' }) }}">Checkbox</a>
+        <a class="item" href="{{ path(grid.requestConfiguration.getRouteName('create'), { 'type': 'integer' }) }}">Integer</a>
+        <a class="item" href="{{ path(grid.requestConfiguration.getRouteName('create'), { 'type': 'percent' }) }}">Percent</a>
+        <a class="item" href="{{ path(grid.requestConfiguration.getRouteName('create'), { 'type': 'datetime' }) }}">Datetime</a>
+        <a class="item" href="{{ path(grid.requestConfiguration.getRouteName('create'), { 'type': 'date' }) }}">Date</a>
+    </div>
+</div>
