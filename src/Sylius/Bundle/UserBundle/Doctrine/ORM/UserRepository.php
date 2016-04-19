@@ -118,10 +118,11 @@ class UserRepository extends EntityRepository implements UserRepositoryInterface
         $groupBy = str_replace(' ', ', ', $groupBy);
 
         $queryBuilder = $this->getEntityManager()->getConnection()->createQueryBuilder();
+        $tableName = $this->getEntityManager()->getClassMetadata($this->_entityName)->getTableName();
 
         $queryBuilder
             ->select('DATE(u.created_at) as date', ' count(u.id) as user_total')
-            ->from('sylius_user', 'u')
+            ->from($tableName, 'u')
             ->where($queryBuilder->expr()->gte('u.created_at', ':from'))
             ->andWhere($queryBuilder->expr()->lte('u.created_at', ':to'))
             ->setParameter('from', $configuration['start']->format('Y-m-d H:i:s'))
