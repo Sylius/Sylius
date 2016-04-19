@@ -192,6 +192,7 @@ final class ManagingPaymentMethodsContext implements Context
 
     /**
      * @When I add it
+     * @When I try to add it
      */
     public function iAddIt()
     {
@@ -343,6 +344,30 @@ final class ManagingPaymentMethodsContext implements Context
         Assert::false(
             $this->indexPage->isResourceOnPage(['code' => $paymentMethod->getCode(), 'name' => $paymentMethod->getName()]),
             sprintf('Payment method %s should no longer exist in the registry', $paymentMethod->getName())
+        );
+    }
+
+    /**
+     * @Then I should be notified that payment method with this code already exists
+     */
+    public function iShouldBeNotifiedThatPaymentMethodWithThisCodeAlreadyExists()
+    {
+        Assert::true(
+            $this->createPage->checkValidationMessageFor('code', 'The payment method with given code already exists.'),
+            'Unique code violation message should appear on page, but it does not.'
+        );
+    }
+
+    /**
+     * @Then there should still be only one payment method with :element :code
+     */
+    public function thereShouldStillBeOnlyOnePaymentMethodWith($element, $code)
+    {
+        $this->iWantToBrowsePaymentMethods();
+
+        Assert::true(
+            $this->indexPage->isResourceOnPage([$element => $code]),
+            sprintf('Payment method with %s %s cannot be founded.', $element, $code)
         );
     }
 }
