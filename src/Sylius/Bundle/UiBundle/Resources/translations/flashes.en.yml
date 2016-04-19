@@ -1,0 +1,3 @@
+sylius:
+    ui:
+        the_channel_cannot_be_deleted_at_least_one_enabled_channel_is_required: The channel cannot be deleted. At least one enabled channel is required.
