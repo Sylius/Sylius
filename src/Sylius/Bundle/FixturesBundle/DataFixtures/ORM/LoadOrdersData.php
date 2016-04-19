@@ -39,7 +39,7 @@ class LoadOrdersData extends DataFixture
             'EUR' => 1.0,
         ];
 
-        for ($i = 1; $i <= 50; ++$i) {
+        for ($i = 1; $i <= 15; ++$i) {
             /* @var $order OrderInterface */
             $order = $orderFactory->createNew();
             $channel = $this->getReference('Sylius.Channel.DEFAULT');
