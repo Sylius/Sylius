@@ -35,7 +35,7 @@ class LoadPromotionsData extends DataFixture
         $channel = 'DEFAULT';
 
         $promotion = $this->createPromotion(
-            'PR1',
+            'new_year',
             'New Year',
             'New Year Sale for 3 and more items.',
             3,
@@ -47,7 +47,7 @@ class LoadPromotionsData extends DataFixture
         $manager->persist($promotion);
 
         $promotion = $this->createPromotion(
-            'PR2',
+            'christmas',
             'Christmas',
             'Christmas Sale for orders over 100 EUR.',
             2,
@@ -59,7 +59,7 @@ class LoadPromotionsData extends DataFixture
         $manager->persist($promotion);
 
         $promotion = $this->createPromotion(
-            'PR3',
+            '3rd_order',
             '3rd order',
             'Discount for 3rd order',
             1,
@@ -71,7 +71,7 @@ class LoadPromotionsData extends DataFixture
         $manager->persist($promotion);
 
         $promotion = $this->createPromotion(
-            'PR4',
+            'shipping_to_germany',
             'Shipping to Germany',
             'Discount for orders with shipping country Germany',
             0,
@@ -160,7 +160,7 @@ class LoadPromotionsData extends DataFixture
             $promotion->addAction($action);
         }
 
-        $this->setReference('Sylius.Promotion.'.$name, $promotion);
+        $this->setReference('Sylius.Promotion.'.$code, $promotion);
 
         return $promotion;
     }

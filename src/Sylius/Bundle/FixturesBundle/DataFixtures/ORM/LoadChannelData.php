@@ -28,7 +28,7 @@ class LoadChannelData extends DataFixture
     public function load(ObjectManager $manager)
     {
         $url = $this->container->getParameter('router.request_context.host');
-        $manager->persist($this->createChannel('DEFAULT', 'Default', $url, ['en_US'], ['USD'], ['Category', 'Brand'], ['FedEx', 'FedEx World Shipping'], ['Offline']));
+        $manager->persist($this->createChannel('DEFAULT', 'Default', $url, ['en_US'], ['USD'], ['category', 'brand'], ['fedex', 'fedex_world'], ['offline']));
 
         $manager->flush();
     }

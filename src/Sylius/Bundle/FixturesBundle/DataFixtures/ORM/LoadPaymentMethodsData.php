@@ -27,7 +27,7 @@ class LoadPaymentMethodsData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $manager->persist($this->createPaymentMethod('PM1', 'Offline', 'offline'));
+        $manager->persist($this->createPaymentMethod('offline', 'Offline', 'offline'));
 
         $manager->flush();
     }
@@ -63,7 +63,7 @@ class LoadPaymentMethodsData extends DataFixture
         $method->setEnabled($enabled);
         $method->setCode($code);
 
-        $this->setReference('Sylius.PaymentMethod.'.$name, $method);
+        $this->setReference('Sylius.PaymentMethod.'.$code, $method);
 
         return $method;
     }

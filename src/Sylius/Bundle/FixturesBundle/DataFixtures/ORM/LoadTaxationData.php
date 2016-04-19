@@ -28,27 +28,13 @@ class LoadTaxationData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $taxableGoods = $this->createTaxCategory('TC1', 'Taxable goods', 'Default taxation category');
+        $taxableGoods = $this->createTaxCategory('taxable', 'Taxable goods', 'Default taxation category');
+
+        $taxableGoods->addRate($this->createTaxRate('eu_vat', 'EU VAT', 'EU', 0.23));
+        $taxableGoods->addRate($this->createTaxRate('us_sales', 'US Sales Tax', 'USA', 0.08));
+        $taxableGoods->addRate($this->createTaxRate('no_tax', 'No tax', 'RoW', 0.00));
 
         $manager->persist($taxableGoods);
-        $manager->flush();
-
-        $taxRate = $this->createTaxRate('TR1', 'EU VAT', 'EU', 0.23);
-        $taxRate->setCategory($taxableGoods);
-
-        $manager->persist($taxRate);
-        $manager->flush();
-
-        $taxableGoods->addRate($this->createTaxRate('TR2', 'US Sales Tax', 'USA', 0.08));
-        $taxRate->setCategory($taxableGoods);
-
-        $manager->persist($taxRate);
-        $manager->flush();
-
-        $taxableGoods->addRate($this->createTaxRate('TR3', 'No tax', 'RoW', 0.00));
-        $taxRate->setCategory($taxableGoods);
-
-        $manager->persist($taxRate);
         $manager->flush();
     }
 
@@ -71,11 +57,11 @@ class LoadTaxationData extends DataFixture
     {
         /* @var $category TaxCategoryInterface */
         $category = $this->getTaxCategoryFactory()->createNew();
-        $category->setName($name);
         $category->setCode($code);
+        $category->setName($name);
         $category->setDescription($description);
 
-        $this->setReference('Sylius.TaxCategory.'.$name, $category);
+        $this->setReference('Sylius.TaxCategory.'.$code, $category);
 
         return $category;
     }
@@ -96,14 +82,14 @@ class LoadTaxationData extends DataFixture
     {
         /* @var $rate TaxRateInterface */
         $rate = $this->getTaxRateFactory()->createNew();
+        $rate->setCode($code);
         $rate->setName($name);
         $rate->setZone($this->getZoneByCode($zoneCode));
         $rate->setAmount($amount);
         $rate->setIncludedInPrice($includedInPrice);
         $rate->setCalculator($calculator);
-        $rate->setCode($code);
 
-        $this->setReference('Sylius.TaxRate.'.$name, $rate);
+        $this->setReference('Sylius.TaxRate.'.$code, $rate);
 
         return $rate;
     }
