@@ -313,29 +313,6 @@ class Customer implements CustomerInterface, GroupableInterface
     /**
      * {@inheritdoc}
      */
-    public function setPhoneNumber($phoneNumber)
-    {
-        $this->phoneNumber = $phoneNumber;
-    }
-
-    public function __toString()
-    {
-        return (string) $this->getEmail();
-    }
-
-    /**
-     * @param UserInterface $user
-     */
-    protected function assignCustomer(UserInterface $user = null)
-    {
-        if (null !== $user) {
-            $user->setCustomer($this);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getVatNumber()
     {
         return $this->vatNumber;
@@ -363,5 +340,44 @@ class Customer implements CustomerInterface, GroupableInterface
     public function setResellerId($resellerId)
     {
         $this->resellerId = $resellerId;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isEntrepreneurOrReseller()
+    {
+        return !!$this->getResellerId() || !!$this->getVatNumber();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isIndividual()
+    {
+        return !$this->isEntrepreneurOrReseller();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPhoneNumber($phoneNumber)
+    {
+        $this->phoneNumber = $phoneNumber;
+    }
+
+    public function __toString()
+    {
+        return (string) $this->getEmail();
+    }
+
+    /**
+     * @param UserInterface $user
+     */
+    protected function assignCustomer(UserInterface $user = null)
+    {
+        if (null !== $user) {
+            $user->setCustomer($this);
+        }
     }
 }

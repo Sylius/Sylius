@@ -30,23 +30,17 @@ class TaxRate extends BaseTaxRate implements TaxRateInterface
     protected $zone;
 
     /**
-     * @var string
+     * @var bool
      */
     protected $appliedToIndividuals = true;
 
     /**
-     * Used in United States
+     * Resale Certificate is used in United States
+     * VAT (entrepreneur) is used in European Union
      *
-     * @var string
+     * @var bool
      */
-    protected $appliedToResellers = true;
-
-    /**
-     * Used in European Union
-     *
-     * @var string
-     */
-    protected $appliedToEntrepreneurs = true;
+    protected $appliedToEntrepreneursAndResellers = true;
 
     /**
      * {@inheritdoc}
@@ -93,49 +87,24 @@ class TaxRate extends BaseTaxRate implements TaxRateInterface
     /**
      * {@inheritdoc}
      */
-    public function IsAppliedToResellers()
+    public function isAppliedToEntrepreneursAndResellers()
     {
-        return $this->appliedToResellers;
+        return $this->appliedToEntrepreneursAndResellers;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getAppliedToResellers()
+    public function getAppliedToEntrepreneursAndResellers()
     {
-        return $this->appliedToResellers;
+        return $this->appliedToEntrepreneursAndResellers;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setAppliedToResellers($appliedToResellers)
+    public function setAppliedToEntrepreneursAndResellers($appliedToEntrepreneursAndResellers)
     {
-        $this->appliedToResellers = $appliedToResellers;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isAppliedToEntrepreneurs()
-    {
-        return $this->appliedToEntrepreneurs;
-    }
-
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAppliedToEntrepreneurs()
-    {
-        return $this->appliedToEntrepreneurs;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setAppliedToEntrepreneurs($appliedToEntrepreneurs)
-    {
-        $this->appliedToEntrepreneurs = $appliedToEntrepreneurs;
+        $this->appliedToEntrepreneursAndResellers = $appliedToEntrepreneursAndResellers;
     }
 }

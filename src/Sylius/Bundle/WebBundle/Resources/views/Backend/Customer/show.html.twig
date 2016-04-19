@@ -39,6 +39,18 @@
                 <td><strong>{{ 'sylius.ui.id'|trans }}</strong></td>
                 <td>{{ customer.id }}</td>
             </tr>
+            {% if customer.vatNumber %}
+                <tr>
+                    <td><strong>{{ 'sylius.ui.vat_number'|trans }}</strong></td>
+                    <td>{{ customer.vatNumber }}</td>
+                </tr>
+            {% endif %}
+            {% if customer.resellerId %}
+                <tr>
+                    <td><strong>{{ 'sylius.ui.reseller_id'|trans }}</strong></td>
+                    <td>{{ customer.resellerId }}</td>
+                </tr>
+            {% endif %}
             {% if customer.firstName %}
                 <tr>
                     <td><strong>{{ 'sylius.ui.first_name'|trans }}</strong></td>

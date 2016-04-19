@@ -54,30 +54,15 @@ interface TaxRateInterface extends BaseTaxRateInterface
     /**
      * @return bool
      */
-    public function isAppliedToResellers();
+    public function isAppliedToEntrepreneursAndResellers();
 
     /**
      * @return bool
      */
-    public function getAppliedToResellers();
+    public function getAppliedToEntrepreneursAndResellers();
 
     /**
      * @param bool $appliedToResellers
      */
-    public function setAppliedToResellers($appliedToResellers);
-
-    /**
-     * @return bool
-     */
-    public function isAppliedToEntrepreneurs();
-
-    /**
-     * @return bool
-     */
-    public function getAppliedToEntrepreneurs();
-
-    /**
-     * @param bool $appliedToEntrepreneurs
-     */
-    public function setAppliedToEntrepreneurs($appliedToEntrepreneurs);
+    public function setAppliedToEntrepreneursAndResellers($appliedToResellers);
 }

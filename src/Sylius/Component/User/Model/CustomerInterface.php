@@ -141,4 +141,14 @@ interface CustomerInterface extends
      * @param null|string $resellerId
      */
     public function setResellerId($resellerId);
+
+    /**
+     * @return bool
+     */
+    public function isEntrepreneurOrReseller();
+
+    /**
+     * @return bool
+     */
+    public function isIndividual();
 }

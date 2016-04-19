@@ -13,11 +13,14 @@ namespace Sylius\Component\Core\Taxation\Applicator;
 
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
+use Sylius\Component\Core\Model\TaxRateInterface;
 use Sylius\Component\Order\Factory\AdjustmentFactoryInterface;
 use Sylius\Component\Taxation\Calculator\CalculatorInterface;
-use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
+use Sylius\Component\Taxation\Resolver\TaxRatesResolverInterface;
 
 /**
  * @author Mark McKelvie <mark.mckelvie@reiss.com>
@@ -35,20 +38,23 @@ class OrderItemUnitsTaxesApplicator implements OrderTaxesApplicatorInterface
     private $adjustmentFactory;
 
     /**
-     * @var TaxRateResolverInterface
+     * @var TaxRatesResolverInterface
      */
-    private $taxRateResolver;
+    private $taxRatesResolver;
 
     /**
      * @param CalculatorInterface $calculator
      * @param AdjustmentFactoryInterface $adjustmentFactory
-     * @param TaxRateResolverInterface $taxRateResolver
+     * @param TaxRatesResolverInterface $taxRatesResolver
      */
-    public function __construct(CalculatorInterface $calculator, AdjustmentFactoryInterface $adjustmentFactory, TaxRateResolverInterface $taxRateResolver)
-    {
+    public function __construct(
+        CalculatorInterface $calculator,
+        AdjustmentFactoryInterface $adjustmentFactory,
+        TaxRatesResolverInterface $taxRatesResolver
+    ) {
         $this->calculator = $calculator;
         $this->adjustmentFactory = $adjustmentFactory;
-        $this->taxRateResolver = $taxRateResolver;
+        $this->taxRatesResolver = $taxRatesResolver;
     }
 
     /**
@@ -57,18 +63,17 @@ class OrderItemUnitsTaxesApplicator implements OrderTaxesApplicatorInterface
     public function apply(OrderInterface $order, ZoneInterface $zone)
     {
         foreach ($order->getItems() as $item) {
-            $taxRate = $this->taxRateResolver->resolve($item->getVariant(), ['zone' => $zone]);
-            if (null === $taxRate) {
-                continue;
-            }
+            $taxRates = $this->taxRatesResolver->resolve($item->getVariant(), ['zone' => $zone]);
 
-            foreach ($item->getUnits() as $unit) {
-                $taxAmount = $this->calculator->calculate($unit->getTotal(), $taxRate);
-                if (0 === $taxAmount) {
-                    continue;
+            foreach($taxRates as $taxRate) {
+                foreach ($item->getUnits() as $unit) {
+                    $taxAmount = $this->calculator->calculate($unit->getTotal(), $taxRate);
+                    if (0 === $taxAmount) {
+                        continue;
+                    }
+
+                    $this->addTaxAdjustment($unit, $taxAmount, $taxRate->getLabel(), $taxRate->isIncludedInPrice());
                 }
-
-                $this->addTaxAdjustment($unit, $taxAmount, $taxRate->getLabel(), $taxRate->isIncludedInPrice());
             }
         }
     }
