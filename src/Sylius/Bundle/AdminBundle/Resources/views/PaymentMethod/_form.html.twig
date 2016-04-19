@@ -1,7 +1,24 @@
-{{ form_errors(form) }}
-<div class="one fields">
-    {{ form_row(form.code) }}
-    {{ form_row(form.translations) }}
-    {{ form_row(form.gateway) }}
-    {{ form_row(form.enabled) }}
+<div class="ui one column stackable grid">
+    <div class="column">
+        <div class="ui segment">
+            {{ form_errors(form) }}
+            <div class="two fields">
+                {{ form_row(form.code) }}
+                {{ form_row(form.gateway) }}
+            </div>
+            {{ form_row(form.enabled) }}
+        </div>
+    </div>
+    <div class="column">
+        <div class="ui segment">
+            {% for locale, translationForm in form.translations %}
+                <h4 class="ui dividing header"><i class="{{ locale|slice(3, 2)|lower }} flag"></i> {{ locale|sylius_locale_name }}</h4>
+                <div class="two fields">
+                    {{ form_row(translationForm.name) }}
+                    {{ form_row(translationForm.description) }}
+                </div>
+            {% endfor %}
+        </div>
+        {{ form_rest(form) }}
+    </div>
 </div>
