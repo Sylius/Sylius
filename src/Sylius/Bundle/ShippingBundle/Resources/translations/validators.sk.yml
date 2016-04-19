@@ -22,3 +22,5 @@ sylius:
         code:
             not_blank: Zadajte kód spôsobu doručenia.
             unique: Spôsobu doručenia s daným kódom už existuje.
+        zone:
+            not_blank: Zadajte zónu pre spôsob doručenia.

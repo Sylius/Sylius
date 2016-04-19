@@ -13,6 +13,8 @@ sylius:
         an_error_occurred: Vyskytla sa chyba
         are_your_sure_you_want_to_perform_this_action: Ste si istý, že chcete vykonať túto akciu?
         cancel: Zrušiť
+        category_requirements: Požiadavky pre kategóriu
+        charges_and_taxes: Poplatky a dane
         clear_filters: Vymazať filter
         confirm_your_action: Potvrďte vašu akciu
         contains: Obsahuje
@@ -23,7 +25,10 @@ sylius:
         description: Popis
         disabled: Vypnuté
         edit: Upraviť
+        edit_country: Upraviť krajinu
+        edit_promotion: Upraviť propagáciu
         edit_tax_category: Úprava daňovej kategórie
+        edit_tax_rate: Upraviť sadzbu dane
         empty: Prázdne
         enabled: Zapnuté
         ends_with: Končí na
@@ -33,7 +38,10 @@ sylius:
         info: Info
         last_updated: Posledná aktualizácia
         locales: Jazyky
+        manage_shipping_destinations: Spravovať prepravné destinácie
+        manage_languages_available_in_the_store: Spravovať dostupné jazyky v obchode
         manage_taxation_of_your_products: Spravovať zdaňovanie vašich produktov
+        manage_shipping_methods_for_your_store: Spravovať dostupné spôsoby dopravy v obchode
         new: Nová
         new_country: Nová krajina
         new_locale: Nový jazyk
@@ -43,7 +51,9 @@ sylius:
         not_contains: Neobsahuje
         not_empty: Nie je prázdny
         not_in: Nie je v
+        or: alebo
         powered_by: Vytvorené v systéme
+        promotion_information: Informacie o propagácii
         save_changes: Uložiť zmeny
         shipping_methods: Spôsoby doručenia
         show: Zobraziť

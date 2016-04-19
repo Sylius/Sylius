@@ -17,6 +17,8 @@ sylius:
             not_blank: Zadajte čiastku sadzby dane.
         calculator:
             not_blank: Vyberte spôsob výpočtu daňe.
+        zone:
+            not_blank: Prosím vyberte daňovú zónu.
         code:
             not_blank: Zadajte kód daňovej sadzby.
             unique: Sadzba dane s daným kódom už existuje.
