@@ -76,6 +76,7 @@ sylius:
                     Tracking code (for example: Google Analytics kód
             taxation:
                 default_tax_zone: Predvolené daňové pásmo
+                default_tax_calculation_strategy: Predvolený spôsob výpočtu dane
             security:
                 enabled: Zapnuť?
         shipment_filter:
@@ -132,10 +133,12 @@ sylius:
             name: Názov
         promotion_rule:
             contains_taxon:
+                taxon: Kategória
                 count: Počet
             taxon:
                 taxons: Kategórie
             total_of_items_from_taxon:
+                taxon: Kategória
                 amount: Suma
     email:
         order_confirmation:
@@ -146,3 +149,5 @@ sylius:
             name: Potvrdenie odoslania tovaru
         user_confirmation:
             name: Potvrdenie registrácie použivateľa
+        password_reset:
+            name: Obnoviť heslo

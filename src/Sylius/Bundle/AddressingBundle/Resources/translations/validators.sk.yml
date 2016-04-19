@@ -52,6 +52,7 @@ sylius:
             min_count: 'Prosím pridajte zóne aspoň {{ limit }} členov.'
         name:
             max_length: Názov zóny nesmie byť dlhší ako 255 znakov|Názov zóny nesmie byť dlhší ako 255 znakov.
+            min_length: Názov zóny musí mať minimálne 2 znaky|Názov zóny musí mať minimálne 2 znaky.
             not_blank: Prosím zadajte názov zóny.
     zone_member:
         code:
