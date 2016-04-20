@@ -271,6 +271,76 @@ class ThemeConfigurationTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * @test
+     */
+    public function its_screenshots_are_strings()
+    {
+        $this->assertConfigurationIsValid(
+            [
+                ['screenshots' => ['screenshot/krzysztof-krawczyk.jpg', 'screenshot/ryszard-rynkowski.jpg']],
+            ],
+            'screenshots'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function its_screenshots_are_optional()
+    {
+        $this->assertConfigurationIsValid(
+            [
+                [/* no screenshots defined */],
+            ],
+            'screenshots'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function its_screenshots_must_have_at_least_one_element()
+    {
+        $this->assertPartialConfigurationIsInvalid(
+            [
+                ['screenshots' => [/* no elements */]],
+            ],
+            'screenshots'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function its_screenshots_cannot_be_empty()
+    {
+        $this->assertPartialConfigurationIsInvalid(
+            [
+                ['screenshots' => ['']],
+            ],
+            'screenshots'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function its_screenshots_replaces_other_screenshots_defined_elsewhere()
+    {
+        $this->assertProcessedConfigurationEquals(
+            [
+                ['screenshots' => ['screenshot/zbigniew-holdys.jpg']],
+                ['screenshots' => ['screenshot/maryla-rodowicz.jpg']],
+            ],
+            ['screenshots' => ['screenshot/maryla-rodowicz.jpg']],
+            'screenshots'
+        );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getConfiguration()
     {
         return new ThemeConfiguration();

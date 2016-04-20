@@ -35,6 +35,7 @@ final class ThemeConfiguration implements ConfigurationInterface
         $this->addOptionalDescriptionField($rootNodeDefinition);
         $this->addOptionalPathField($rootNodeDefinition);
         $this->addOptionalParentsList($rootNodeDefinition);
+        $this->addOptionalScreenshotsList($rootNodeDefinition);
         $this->addOptionalAuthorsList($rootNodeDefinition);
 
         return $treeBuilder;
@@ -83,6 +84,20 @@ final class ThemeConfiguration implements ConfigurationInterface
             ->performNoDeepMerging()
                 ->prototype('scalar')
                 ->cannotBeEmpty()
+        ;
+    }
+
+    /**
+     * @param ArrayNodeDefinition $rootNodeDefinition
+     */
+    private function addOptionalScreenshotsList(ArrayNodeDefinition $rootNodeDefinition)
+    {
+        $parentsNodeDefinition = $rootNodeDefinition->children()->arrayNode('screenshots');
+        $parentsNodeDefinition
+            ->requiresAtLeastOneElement()
+            ->performNoDeepMerging()
+            ->prototype('scalar')
+            ->cannotBeEmpty()
         ;
     }
 
