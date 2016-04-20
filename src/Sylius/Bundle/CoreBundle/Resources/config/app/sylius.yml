@@ -348,6 +348,7 @@ sylius_rbac:
         sylius.customer.index: List customers
         sylius.customer.create: Create customer
         sylius.customer.update: Edit customer
+        sylius.customer.delete: Delete customer
 
         sylius.user.delete: Delete user
 
@@ -824,7 +825,8 @@ sylius_rbac:
         api_access:
             name: Public API users
             description: Can access REST API
-            permissions: [sylius.access.api]
+            permissions: [sylius.access.api, sylius.customer.delete]
+            child_roles: [administrator]
         administrator:
             name: Administrator
             description: Administrator user
