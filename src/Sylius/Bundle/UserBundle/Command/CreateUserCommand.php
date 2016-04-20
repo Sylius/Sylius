@@ -14,6 +14,7 @@ namespace Sylius\Bundle\UserBundle\Command;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -36,8 +37,7 @@ class CreateUserCommand extends ContainerAwareCommand
             ->setDefinition([
                 new InputArgument('email', InputArgument::REQUIRED, 'Email'),
                 new InputArgument('password', InputArgument::REQUIRED, 'Password'),
-                new InputArgument('roles', InputArgument::IS_ARRAY, 'Security roles'),
-                new InputOption('super-admin', null, InputOption::VALUE_NONE, 'Set the user as a super admin'),
+                new InputArgument('roles', InputArgument::IS_ARRAY, 'RBAC roles'),
                 new InputOption('disabled', null, InputOption::VALUE_NONE, 'Set the user as a disabled user'),
             ])
             ->setHelp(<<<EOT
@@ -55,24 +55,9 @@ EOT
         $email = $input->getArgument('email');
         $password = $input->getArgument('password');
         $roles = $input->getArgument('roles');
-        $superAdmin = $input->getOption('super-admin');
         $disabled = $input->getOption('disabled');
 
-        $securityRoles = ['ROLE_USER'];
-        if ($superAdmin) {
-            $securityRoles[] = 'ROLE_ADMINISTRATION_ACCESS';
-        }
-
-        foreach ($roles as $role) {
-            $securityRoles[] = $role;
-        }
-
-        $user = $this->createUser(
-            $email,
-            $password,
-            !$disabled,
-            $securityRoles
-        );
+        $user = $this->createUser($email, $password, !$disabled, $roles);
 
         $this->getEntityManager()->persist($user);
         $this->getEntityManager()->flush();
@@ -99,6 +84,10 @@ EOT
             );
 
             $input->setArgument('email', $email);
+        }
+
+        if (null !== $this->getUserRepository()->findOneBy(array('username' => $input->getArgument('email')))) {
+            throw new \InvalidArgumentException(sprintf('Username already taken "%s".', $input->getArgument('email')));
         }
 
         if (!$input->getArgument('password')) {
@@ -133,11 +122,11 @@ EOT
      * @param string $email
      * @param string $password
      * @param bool $enabled
-     * @param array $securityRoles
+     * @param array $roles
      *
      * @return UserInterface
      */
-    protected function createUser($email, $password, $enabled, array $securityRoles = ['ROLE_USER'])
+    protected function createUser($email, $password, $enabled, array $roles = array())
     {
         $canonicalizer = $this->getContainer()->get('sylius.user.canonicalizer');
 
@@ -153,9 +142,29 @@ EOT
         $user->setUsernameCanonical($canonicalizer->canonicalize($user->getUsername()));
         $user->setEmailCanonical($canonicalizer->canonicalize($user->getEmail()));
         $user->setPlainPassword($password);
-        $user->setRoles($securityRoles);
         $user->setEnabled($enabled);
+
         $this->getContainer()->get('sylius.user.password_updater')->updatePassword($user);
+
+        if (!$this->isRbacEnabled()) {
+            foreach ($roles as $role) {
+                $user->addRole($role);
+            }
+            return $user;
+        }
+
+        foreach ($roles as $code) {
+            /** @var \Sylius\Component\Rbac\Model\RoleInterface $role */
+            $role = $this->getRoleRepository()->findOneBy(array('code' => $this->getRbacRoleCode($code)));
+
+            if (null === $role) {
+                throw new \InvalidArgumentException(
+                    sprintf('RBAC role with code `%s` does not exist.', $code)
+                );
+            }
+
+            $user->addAuthorizationRole($role);
+        }
 
         return $user;
     }
@@ -177,10 +186,47 @@ EOT
     }
 
     /**
+     * @return RepositoryInterface
+     */
+    protected function getUserRepository()
+    {
+        return $this->getContainer()->get('sylius.repository.user');
+    }
+
+    /**
      * @return FactoryInterface
      */
     protected function getCustomerFactory()
     {
         return $this->getContainer()->get('sylius.factory.customer');
+    }
+
+    /**
+     * @return EntityRepository
+     */
+    protected function getRoleRepository()
+    {
+        return $this->getContainer()->get('sylius.repository.role');
+    }
+
+    /**
+     * @param string $roleName
+     *
+     * @return string
+     */
+    protected function getRbacRoleCode($roleName)
+    {
+        /** @var \Sylius\Bundle\RbacBundle\Security\Role\InflectorInterface $inflector */
+        $inflector = $this->getContainer()->get('sylius.rbac.role_inflector');
+
+        return $inflector->toRbacRole($roleName);
+    }
+
+    /**
+     * @return bool
+     */
+    protected function isRbacEnabled()
+    {
+        return array_key_exists('SyliusRbacBundle', $this->getContainer()->getParameter('kernel.bundles'));
     }
 }

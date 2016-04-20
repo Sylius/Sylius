@@ -29,13 +29,7 @@ class LoadUsersData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $user = $this->createUser(
-            'sylius@example.com',
-            'sylius',
-            true,
-            ['ROLE_USER', 'ROLE_ADMINISTRATION_ACCESS']
-        );
-        $user->addAuthorizationRole($this->get('sylius.repository.role')->findOneBy(['code' => 'administrator']));
+        $user = $this->createUser('sylius@example.com', 'sylius', true, ['administrator']);
 
         $manager->persist($user);
         $manager->flush();
@@ -90,7 +84,7 @@ class LoadUsersData extends DataFixture
      *
      * @return UserInterface
      */
-    protected function createUser($email, $password, $enabled = true, array $roles = ['ROLE_USER'], $currency = 'EUR')
+    protected function createUser($email, $password, $enabled = true, array $roles = [], $currency = 'EUR')
     {
         $canonicalizer = $this->get('sylius.user.canonicalizer');
 
@@ -106,8 +100,11 @@ class LoadUsersData extends DataFixture
         $user->setUsernameCanonical($canonicalizer->canonicalize($user->getUsername()));
         $user->setEmailCanonical($canonicalizer->canonicalize($user->getEmail()));
         $user->setPlainPassword($password);
-        $user->setRoles($roles);
         $user->setEnabled($enabled);
+
+        foreach ($roles as $role) {
+            $user->addAuthorizationRole($this->get('sylius.repository.role')->findOneBy(['code' => $role]));
+        }
 
         $this->get('sylius.user.password_updater')->updatePassword($user);
 

@@ -22,14 +22,16 @@ Feature: Hierarchical Role based access control (HRBAC)
             | sylius.order.update   | sylius.sales   | Edit orders             |
             | sylius.order.delete   | sylius.sales   | Delete orders           |
         And there is following role hierarchy:
-            | code                   | parent               | name            | security roles             |
-            | sylius.administrator   |                      | Administrator   | ROLE_ADMINISTRATION_ACCESS |
-            | sylius.catalog_manager | sylius.administrator | Catalog Manager | ROLE_ADMINISTRATION_ACCESS |
-            | sylius.sales_manager   | sylius.administrator | Sales Manager   | ROLE_ADMINISTRATION_ACCESS |
+            | code            | parent        | name            |
+            | administrator   |               | Administrator   |
+            | catalog_manager | administrator | Catalog Manager |
+            | sales_manager   | administrator | Sales Manager   |
         And role "Catalog Manager" has the following permissions:
-            | sylius.catalog |
+            | sylius.access.administration |
+            | sylius.catalog               |
         And role "Sales Manager" has the following permissions:
-            | sylius.sales |
+            | sylius.access.administration |
+            | sylius.sales                 |
 
     Scenario: Only selected menus are visible for Sales Manager
         Given I am logged in as "Sales Manager"

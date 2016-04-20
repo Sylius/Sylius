@@ -7,34 +7,36 @@ Feature: Permissions management
     Background:
         Given store has default configuration
         And there is following permission hierarchy:
-            | code                     | parent         | description             |
-            | sylius.catalog           |                | Manage products catalog |
-            | sylius.product.show      | sylius.catalog | View single product     |
-            | sylius.product.index     | sylius.catalog | List all products       |
-            | sylius.product.create    | sylius.catalog | Add new products        |
-            | sylius.product.update    | sylius.catalog | Edit products           |
-            | sylius.product.delete    | sylius.catalog | Delete products         |
-            | sylius.permission.show   |                | View single permission  |
-            | sylius.permission.index  |                | List all permissions    |
-            | sylius.permission.create |                | Add new permissions     |
-            | sylius.permission.update |                | Edit permissions        |
-            | sylius.permission.delete |                | Delete permissions      |
+            | code                         | parent         | description             |
+            | sylius.access.administration |                | Access admin area       |
+            | sylius.catalog               |                | Manage products catalog |
+            | sylius.product.show          | sylius.catalog | View single product     |
+            | sylius.product.index         | sylius.catalog | List all products       |
+            | sylius.product.create        | sylius.catalog | Add new products        |
+            | sylius.product.update        | sylius.catalog | Edit products           |
+            | sylius.product.delete        | sylius.catalog | Delete products         |
+            | sylius.permission.show       |                | View single permission  |
+            | sylius.permission.index      |                | List all permissions    |
+            | sylius.permission.create     |                | Add new permissions     |
+            | sylius.permission.update     |                | Edit permissions        |
+            | sylius.permission.delete     |                | Delete permissions      |
         And there is following role hierarchy:
-            | code                 | parent | name          | security roles             |
-            | sylius.administrator |        | Administrator | ROLE_ADMINISTRATION_ACCESS |
+            | code                 | parent | name          |
+            | sylius.administrator |        | Administrator |
         And role "Administrator" has the following permissions:
-            | sylius.permission.show   |
-            | sylius.permission.index  |
-            | sylius.permission.create |
-            | sylius.permission.update |
-            | sylius.permission.delete |
+            | sylius.access.administration |
+            | sylius.permission.show       |
+            | sylius.permission.index      |
+            | sylius.permission.create     |
+            | sylius.permission.update     |
+            | sylius.permission.delete     |
         And I am logged in as administrator
 
     Scenario: Seeing index of all permissions
         Given I am on the dashboard page
         When I follow "Permissions"
         Then I should be on the permission index page
-        And I should see 12 permissions in the list
+        And I should see 13 permissions in the list
 
     Scenario: Permission is validated
         Given I am on the permission creation page
@@ -56,8 +58,8 @@ Feature: Permissions management
         And I select "Manage products catalog" from "Parent"
         And I press "Create"
         Then I should be on the permission index page
-        And I should see "Permission has been successfully created"
-        And I should see 13 permissions in the list
+        And I should see "Permission has been successfully created."
+        And I should see 14 permissions in the list
         And I should see permission with code containing "sylius.product.display_sales_stats" in that list
 
     Scenario: Cannot edit the parent of root node

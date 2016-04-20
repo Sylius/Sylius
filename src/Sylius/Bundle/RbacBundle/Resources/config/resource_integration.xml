@@ -22,7 +22,7 @@
 
     <services>
         <service id="sylius.resource_controller.authorization_checker.rbac" class="%sylius.resource_controller.authorization_checker.rbac.class%" public="false">
-            <argument type="service" id="sylius.authorization_checker" />
+            <argument type="service" id="security.authorization_checker" />
         </service>
     </services>
 </container>

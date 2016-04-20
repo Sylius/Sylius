@@ -76,9 +76,9 @@ class User extends BaseUser implements UserInterface
         $roles = parent::getRoles();
 
         foreach ($this->getAuthorizationRoles() as $role) {
-            $roles = array_merge($roles, $role->getSecurityRoles());
+            $roles[] = $role->getCode();
         }
 
-        return $roles;
+        return array_unique($roles);
     }
 }

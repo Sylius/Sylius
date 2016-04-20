@@ -4,10 +4,6 @@
 {{ form_row(form.name) }}
 {{ form_row(form.description) }}
 
-{% for securityRoleForm in form.securityRoles %}
-{{ form_row(securityRoleForm) }}
-{% endfor %}
-
 {% if form.parent is not null %}
     {{ form_row(form.parent) }}
 {% endif %}

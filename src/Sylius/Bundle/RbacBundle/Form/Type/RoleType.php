@@ -36,9 +36,8 @@ class RoleType extends AbstractResourceType
                 'required' => false,
                 'label' => 'sylius.form.role.description',
             ])
-            ->add('securityRoles', 'sylius_security_role_choice', [
-                'required' => false,
-                'label' => 'sylius.form.role.security_roles',
+            ->add('parent', 'sylius_role_choice', [
+                'label' => 'sylius.form.role.parent',
             ])
             ->add('permissions', 'sylius_permission_choice', [
                 'required' => false,

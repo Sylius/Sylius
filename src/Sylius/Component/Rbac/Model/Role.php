@@ -81,9 +81,9 @@ class Role implements RoleInterface
     protected $permissions;
 
     /**
-     * @var array
+     * @var \DateTime
      */
-    protected $securityRoles = [];
+    protected $createdAt;
 
     public function __construct()
     {
@@ -305,16 +305,32 @@ class Role implements RoleInterface
     /**
      * {@inheritdoc}
      */
-    public function getSecurityRoles()
+    public function getCreatedAt()
     {
-        return $this->securityRoles;
+        return $this->createdAt;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setSecurityRoles(array $securityRoles)
+    public function setCreatedAt(\DateTime $createdAt)
     {
-        $this->securityRoles = $securityRoles;
+        $this->createdAt = $createdAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setUpdatedAt(\DateTime $updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
     }
 }
