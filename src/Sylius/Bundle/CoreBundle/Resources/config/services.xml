@@ -632,18 +632,10 @@
             <tag name="form.type" alias="sylius_data_fetcher_number_of_orders" />
         </service>
 
-<<<<<<< 8d64fe5e4032351e526a4ea67c59d907a2a981d4
-        <service id="sylius.authorization_checker.toggleable" class="%sylius.authorization_checker.toggleable.class%">
-            <argument type="service" id="sylius.authorization_checker.default" />
-            <argument type="service" id="sylius.settings.manager" />
-        </service>
-
         <service id="sylius.translation.locales_provider" class="%sylius.translation.locales_provider.class%">
             <argument type="service" id="sylius.repository.locale" />
         </service>
 
-=======
->>>>>>> Use symfony security by tweaking role hierarchy voter to use sylius rbac
         <service id="sylius.translation.locale_provider.contextual" class="%sylius.translation.locale_provider.contextual.class%">
             <argument type="service" id="sylius.context.locale" />
         </service>

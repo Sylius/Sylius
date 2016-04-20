@@ -305,30 +305,17 @@ class Role implements RoleInterface
     /**
      * {@inheritdoc}
      */
-<<<<<<< 8d64fe5e4032351e526a4ea67c59d907a2a981d4
-    public function getSecurityRoles()
-    {
-        return $this->securityRoles;
-=======
     public function getCreatedAt()
     {
         return $this->createdAt;
->>>>>>> Use symfony security by tweaking role hierarchy voter to use sylius rbac
     }
 
     /**
      * {@inheritdoc}
      */
-<<<<<<< 8d64fe5e4032351e526a4ea67c59d907a2a981d4
-    public function setSecurityRoles(array $securityRoles)
-    {
-        $this->securityRoles = $securityRoles;
-=======
     public function setCreatedAt(\DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
-
-        return $this;
     }
 
     /**
@@ -345,8 +332,5 @@ class Role implements RoleInterface
     public function setUpdatedAt(\DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
->>>>>>> Use symfony security by tweaking role hierarchy voter to use sylius rbac
     }
 }

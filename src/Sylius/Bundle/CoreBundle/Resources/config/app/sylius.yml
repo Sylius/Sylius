@@ -639,19 +639,19 @@ sylius_rbac:
         sylius.product_review.update: Edit product review
         sylius.product_review.delete: Delete product review
 
-        sylius.settings.sylius_general: Manage general settings
-        sylius.settings.sylius_security: Manage security settings
-        sylius.settings.sylius_taxation: Manage taxation settings
+        sylius.settings.general: Manage general settings
+        sylius.settings.security: Manage security settings
+        sylius.settings.taxation: Manage taxation settings
 
         sylius.manage.metadata_container:
             description: Manager metadata
-            child_permissiones: [sylius.metadata_container.show, sylius.metadata_container.index, sylius.metadata_container.create, sylius.metadata_container.update, sylius.metadata_container.delete]
+            child_permissions: [sylius.metadata_container.show, sylius.metadata_container.index, sylius.metadata_container.create, sylius.metadata_container.update, sylius.metadata_container.delete]
         sylius.manage.channel:
             description: Manage channels
             child_permissions: [sylius.channel.show, sylius.channel.index, sylius.channel.create, sylius.channel.update, sylius.channel.delete]
         sylius.manage.customer:
             description: Manage customers
-            child_permissions: [sylius.customer.show, sylius.customer.index, sylius.customer.create, sylius.customer.update, sylius.customer.delete]
+            child_permissions: [sylius.customer.show, sylius.customer.index, sylius.customer.create, sylius.customer.update, sylius.user.delete]
         sylius.manage.group:
             description: Manage groups
             child_permissions: [sylius.group.show, sylius.group.index, sylius.group.create, sylius.group.update, sylius.group.delete]

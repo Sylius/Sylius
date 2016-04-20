@@ -58,13 +58,8 @@ Feature: Permissions management
         And I select "Manage products catalog" from "Parent"
         And I press "Create"
         Then I should be on the permission index page
-<<<<<<< 8d64fe5e4032351e526a4ea67c59d907a2a981d4:features/legacy/security/permission_management.feature
-        And I should see "Permission has been successfully created"
-        And I should see 13 permissions in the list
-=======
         And I should see "Permission has been successfully created."
         And I should see 14 permissions in the list
->>>>>>> Use symfony security by tweaking role hierarchy voter to use sylius rbac:features/security/permission_management.feature
         And I should see permission with code containing "sylius.product.display_sales_stats" in that list
 
     Scenario: Cannot edit the parent of root node
