@@ -52,7 +52,7 @@ class Theme implements ThemeInterface
     /**
      * @var Collection|ThemeAuthor[]
      */
-    protected $authors = [];
+    protected $authors;
 
     /**
      * @var Collection|ThemeInterface[]
