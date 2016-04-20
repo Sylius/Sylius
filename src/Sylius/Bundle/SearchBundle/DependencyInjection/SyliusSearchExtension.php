@@ -85,13 +85,6 @@ class SyliusSearchExtension extends AbstractResourceExtension implements Prepend
         $engine = $syliusSearchConfig['engine'];
 
         if ($engine === 'elasticsearch') {
-            $tags = ['doctrine.event_listener' => [
-                ['name' => 'doctrine.event_listener', 'event' => 'postPersist'],
-                ['name' => 'doctrine.event_listener', 'event' => 'postUpdate'],
-                ['name' => 'doctrine.event_listener', 'event' => 'postRemove'],
-                ['name' => 'doctrine.event_listener', 'event' => 'postFlush'],
-            ]];
-
             $configuration = new FosElasticaConfiguration(false);
             $processor = new Processor();
             $elasticaConfig = $processor->processConfiguration($configuration, $container->getExtensionConfig('fos_elastica'));
@@ -99,7 +92,7 @@ class SyliusSearchExtension extends AbstractResourceExtension implements Prepend
             foreach ($elasticaConfig['indexes'] as $index => $config) {
                 $elasticaProductListenerDefinition = new Definition(ElasticaProductListener::class);
                 $elasticaProductListenerDefinition->addArgument(new Reference('fos_elastica.object_persister.' . $index . '.product'));
-                $elasticaProductListenerDefinition->setTags($tags);
+                $elasticaProductListenerDefinition->addTag('doctrine.event_subscriber');
 
                 $container->setDefinition('sylius_product.listener.index_' . $index . '.product_update', $elasticaProductListenerDefinition);
             }
