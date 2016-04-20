@@ -7,12 +7,11 @@
             {{ 'sylius.ui.type'|trans }}
         </div>
         <div class="divider"></div>
-        <a class="item" href="{{ path(grid.requestConfiguration.getRouteName('create'), { 'type': 'text' }) }}">Text</a>
-        <a class="item" href="{{ path(grid.requestConfiguration.getRouteName('create'), { 'type': 'textarea' }) }}">Textarea</a>
-        <a class="item" href="{{ path(grid.requestConfiguration.getRouteName('create'), { 'type': 'checkbox' }) }}">Checkbox</a>
-        <a class="item" href="{{ path(grid.requestConfiguration.getRouteName('create'), { 'type': 'integer' }) }}">Integer</a>
-        <a class="item" href="{{ path(grid.requestConfiguration.getRouteName('create'), { 'type': 'percent' }) }}">Percent</a>
-        <a class="item" href="{{ path(grid.requestConfiguration.getRouteName('create'), { 'type': 'datetime' }) }}">Datetime</a>
-        <a class="item" href="{{ path(grid.requestConfiguration.getRouteName('create'), { 'type': 'date' }) }}">Date</a>
+        {% set createRouteName = grid.requestConfiguration.getRouteName('create') %}
+        <a class="item" href="{{ path(createRouteName, { 'type': 'text' }) }}">Text</a>
+        <a class="item" href="{{ path(createRouteName, { 'type': 'textarea' }) }}">Textarea</a>
+        <a class="item" href="{{ path(createRouteName, { 'type': 'checkbox' }) }}">Checkbox</a>
+        <a class="item" href="{{ path(createRouteName, { 'type': 'integer' }) }}">Integer</a>
+        <a class="item" href="{{ path(createRouteName, { 'type': 'percent' }) }}">Percent</a>
     </div>
 </div>

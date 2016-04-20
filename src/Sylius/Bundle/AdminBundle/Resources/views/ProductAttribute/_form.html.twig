@@ -6,14 +6,14 @@
                 {{ form_row(form.code) }}
                 {{ form_row(form.type) }}
             </div>
-            <h4 class="ui dividing header">{{ 'sylius.ui.configuration'|trans }}</h4>
-            <div class="ui segment configuration">
-                {% if form.configuration is defined %}
+            {% if form.configuration is defined %}
+                <h4 class="ui dividing header">{{ 'sylius.ui.configuration'|trans }}</h4>
+                <div class="ui segment configuration">
                     {% for field in form.configuration %}
                         {{ form_row(field) }}
                     {% endfor %}
+                </div>
                 {% endif %}
-            </div>
         </div>
     </div>
     <div class="column">

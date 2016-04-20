@@ -1,0 +1,18 @@
+@managing_product_attributes
+Feature: Adding a new text product attribute
+    In order to show specific product's parameters to customer
+    As an Administrator
+    I want to add a new text product attribute
+
+    Background:
+        Given the store has locale "English (United States)"
+        And I am logged in as an administrator
+
+    @ui
+    Scenario: Adding a new text product attribute
+        Given I want to create a new text product attribute
+        When I specify it code as "t_shirt_brand"
+        And I name it "T-shirt brand" in "English (United States)"
+        And I add it
+        Then I should be notified that it has been successfully created
+        And the attribute "T-shirt brand" should appear in the store
