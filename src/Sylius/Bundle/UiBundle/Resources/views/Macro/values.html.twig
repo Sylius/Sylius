@@ -1,0 +1,7 @@
+{% macro values(options) %}
+    {% for option in options %}
+        <span class="ui blue label">
+            {{ option.value }}
+        </span>
+    {% endfor %}
+{% endmacro %}

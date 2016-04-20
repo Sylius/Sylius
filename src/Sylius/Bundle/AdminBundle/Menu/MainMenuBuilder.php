@@ -40,10 +40,10 @@ final class MainMenuBuilder extends AbstractAdminMenuBuilder
      */
     private function addConfigurationMenu(ItemInterface $menu)
     {
-        $this->configureConfigurationSubMenu($menu);
         $this->configureMarketingSubMenu($menu);
         $this->configureCustomersSubMenu($menu);
         $this->configureCatalogSubMenu($menu);
+        $this->configureConfigurationSubMenu($menu);
     }
 
     /**
@@ -150,15 +150,21 @@ final class MainMenuBuilder extends AbstractAdminMenuBuilder
      */
     private function configureCatalogSubMenu(ItemInterface $menu)
     {
-        $assortmentSubMenu = $menu
+        $catalogSubMenu = $menu
             ->addChild('catalog')
             ->setLabel('sylius.menu.admin.main.catalog.header')
         ;
 
-        $assortmentSubMenu
+        $catalogSubMenu
             ->addChild('attributes', ['route' => 'sylius_admin_product_attribute_index'])
             ->setLabel('sylius.menu.admin.main.catalog.attributes')
             ->setLabelAttribute('icon', 'cubes')
+        ;
+
+        $catalogSubMenu
+            ->addChild('product_options', ['route' => 'sylius_admin_product_option_index'])
+            ->setLabel('sylius.menu.admin.main.catalog.manage_product_options')
+            ->setLabelAttribute('icon', 'options')
         ;
     }
 }

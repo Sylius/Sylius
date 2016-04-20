@@ -1,0 +1,28 @@
+sylius_grid:
+    grids:
+        sylius_admin_product_option:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: %sylius.model.product_option.class%
+            fields:
+                code:
+                    type: string
+                    label: sylius.ui.code
+                name:
+                    type: string
+                    label: sylius.ui.name
+                values:
+                    type: twig
+                    label: sylius.ui.values
+                    options:
+                        template: SyliusAdminBundle:ProductOption/Field:values.html.twig
+            actions:
+                main:
+                    create:
+                        type: create
+                item:
+                    update:
+                        type: update
+                    delete:
+                        type: delete
