@@ -1,5 +1,8 @@
 cmf_core:
     publish_workflow: true
+    persistence:
+        phpcr:
+            enabled: true
 
 cmf_block:
     persistence:
