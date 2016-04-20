@@ -1,0 +1,9 @@
+<type
+        xmlns:schema="http://schema.org/"
+        typeof="schema:WebPageElement"
+        >
+    <attribute key="class" value="articleContainer"/>
+    <children>
+        <property property="schema:text" identifier="body" />
+    </children>
+</type>
