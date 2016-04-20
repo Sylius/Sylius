@@ -58,6 +58,8 @@ sylius:
         manage_payment_method: Manage payment methods
         manage_product_option: Manage product option
         manage_shipping_destinations: Manage shipping destinations
+        manage_taxons: Manage taxons of your products
+        manage_taxation_of_your_products: Manage taxation of your products
         manage_shipping_methods_for_your_store: Manage shipping methods for your store
         manage_taxation_of_your_products: Manage taxation of your products
         new: New

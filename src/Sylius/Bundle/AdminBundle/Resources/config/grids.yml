@@ -9,6 +9,7 @@ imports:
     - { resource: "@SyliusAdminBundle/Resources/config/grids/product_option.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/promotion.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/shipping_method.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/taxon.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/tax_category.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/tax_rate.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/zone.yml" }

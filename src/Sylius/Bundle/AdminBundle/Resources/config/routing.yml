@@ -43,6 +43,9 @@ sylius_admin_security:
 sylius_admin_shipping_method:
     resource: "@SyliusAdminBundle/Resources/config/routing/shipping_method.yml"
 
+sylius_admin_taxon:
+    resource: "@SyliusAdminBundle/Resources/config/routing/taxon.yml"
+
 sylius_admin_tax_category:
     resource: "@SyliusAdminBundle/Resources/config/routing/tax_category.yml"
 

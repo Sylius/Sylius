@@ -35,6 +35,9 @@ final class TaxonContext implements Context
     /**
      * @Transform /^classified as "([^"]+)"$/
      * @Transform /^belongs to "([^"]+)"$/
+     * @Transform /^"([^"]+)" taxon$/
+     * @Transform /^"([^"]+)" as a parent taxon$/
+     * @Transform /^"([^"]+)" parent taxon$/
      */
     public function getTaxonByName($taxonName)
     {

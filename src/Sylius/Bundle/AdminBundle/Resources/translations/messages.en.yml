@@ -5,6 +5,7 @@ sylius:
                 catalog:
                     header: Catalog
                     product_options: Product options
+                    taxons: Taxons
                 configuration:
                     channels: Channels
                     countries: Countries
