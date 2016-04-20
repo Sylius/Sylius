@@ -31,7 +31,7 @@ Feature: Payment method validation
 
     @ui
     Scenario: Trying to remove name from an existing payment method
-        Given I want to modify a payment method "Offline"
+        Given I want to modify the "Offline" payment method
         When I remove its name from "English (United States)" translation
         And I try to save my changes
         Then I should be notified that name is required

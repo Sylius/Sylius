@@ -34,7 +34,7 @@ final class PaymentMethodContext implements Context
     }
 
     /**
-     * @Transform payment method :name
+     * @Transform :paymentMethod
      */
     public function getPaymentMethodByName($name)
     {

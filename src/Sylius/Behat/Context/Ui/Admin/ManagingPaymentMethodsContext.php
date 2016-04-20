@@ -75,7 +75,7 @@ final class ManagingPaymentMethodsContext implements Context
     }
 
     /**
-     * @Given /^I want to modify a (payment method "([^"]*)")$/
+     * @Given I want to modify the :paymentMethod payment method
      */
     public function iWantToModifyAPaymentMethod(PaymentMethodInterface $paymentMethod)
     {
@@ -128,7 +128,7 @@ final class ManagingPaymentMethodsContext implements Context
     }
 
     /**
-     * @When /^I delete (payment method "([^"]*)")$/
+     * @When I delete the :paymentMethod payment method
      */
     public function iDeletePaymentMethod(PaymentMethodInterface $paymentMethod)
     {
@@ -147,7 +147,7 @@ final class ManagingPaymentMethodsContext implements Context
     }
 
     /**
-     * @Then I should be notified about successful edition
+     * @Then I should be notified that it has been successfully edited
      */
     public function iShouldBeNotifiedAboutSuccessfulEdition()
     {
@@ -155,18 +155,18 @@ final class ManagingPaymentMethodsContext implements Context
     }
 
     /**
-     * @Then this payment method :element should be :paymentMethodName
+     * @Then this payment method :element should be :value
      */
-    public function thisPaymentMethodNameShouldBe($element, $value)
+    public function thisPaymentMethodElementShouldBe($element, $value)
     {
         Assert::true(
             $this->updatePage->hasResourceValues([$element => $value]),
-            sprintf('Payment method should have %s %s', $value, $element)
+            sprintf('Payment method %s should be %s', $element, $value)
         );
     }
 
     /**
-     * @Given /^I want to create a new payment method$/
+     * @Given I want to create a new payment method
      */
     public function iWantToCreateANewPaymentMethod()
     {
@@ -202,7 +202,7 @@ final class ManagingPaymentMethodsContext implements Context
     /**
      * @Then I should be notified that it has been successfully created
      */
-    public function iShouldBeNotifiedItHasBeenSuccessfulCreation()
+    public function iShouldBeNotifiedItHasBeenSuccessfullyCreated()
     {
         $this->notificationChecker->checkCreationNotification(self::RESOURCE_NAME);
     }
@@ -222,9 +222,9 @@ final class ManagingPaymentMethodsContext implements Context
     }
 
     /**
-     * @When /^I want to browse payment methods$/
+     * @When I browse payment methods
      */
-    public function iWantToBrowsePaymentMethods()
+    public function iBrowsePaymentMethods()
     {
         $this->indexPage->open();
     }
@@ -236,9 +236,10 @@ final class ManagingPaymentMethodsContext implements Context
     {
         $foundRows = $this->indexPage->countItems();
 
-        Assert::true(
-            ((int) $amount) === $foundRows,
-            sprintf('%s rows with payment methods should appear on page, %s rows has been found', $amount, $foundRows)
+        Assert::eq(
+            ((int) $amount),
+            $foundRows,
+            '%2$s rows with payment methods should appear on page, %s rows has been found'
         );
     }
 
@@ -255,7 +256,7 @@ final class ManagingPaymentMethodsContext implements Context
      */
     public function thePaymentMethodWithElementValueShouldNotBeAdded($element, $value)
     {
-        $this->iWantToBrowsePaymentMethods();
+        $this->iBrowsePaymentMethods();
 
         Assert::false(
             $this->indexPage->isResourceOnPage([$element => $value]),
@@ -268,15 +269,13 @@ final class ManagingPaymentMethodsContext implements Context
      */
     public function thisShippingMethodNameShouldBe(PaymentMethodInterface $paymentMethod, $paymentMethodName)
     {
-        $this->iWantToBrowsePaymentMethods();
+        $this->iBrowsePaymentMethods();
 
         Assert::true(
-            $this->indexPage->isResourceOnPage(
-                [
-                    'code' => $paymentMethod->getCode(),
-                    'name' => $paymentMethodName,
-                ]
-            ),
+            $this->indexPage->isResourceOnPage([
+                'code' => $paymentMethod->getCode(),
+                'name' => $paymentMethodName,
+            ]),
             sprintf('Payment method name %s has not been assigned properly.', $paymentMethodName)
         );
     }
@@ -296,7 +295,7 @@ final class ManagingPaymentMethodsContext implements Context
     }
 
     /**
-     * @Then /^the code field should be disabled$/
+     * @Then the code field should be disabled
      */
     public function theCodeFieldShouldBeDisabled()
     {
@@ -309,7 +308,7 @@ final class ManagingPaymentMethodsContext implements Context
     /**
      * @Then this payment method should be enabled
      */
-    public function thisCountryShouldBeEnabled()
+    public function thisPaymentMethodShouldBeEnabled()
     {
         Assert::true(
             $this->updatePage->isPaymentMethodEnabled(),
@@ -320,7 +319,7 @@ final class ManagingPaymentMethodsContext implements Context
     /**
      * @Then this payment method should be disabled
      */
-    public function thisCountryShouldBeDisabled()
+    public function thisPaymentMethodShouldBeDisabled()
     {
         Assert::false(
             $this->updatePage->isPaymentMethodEnabled(),
@@ -331,7 +330,7 @@ final class ManagingPaymentMethodsContext implements Context
     /**
      * @Then I should be notified that it has been successfully deleted
      */
-    public function iShouldBeNotifiedAboutSuccessfulDeletion()
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted()
     {
         $this->notificationChecker->checkDeletionNotification(self::RESOURCE_NAME);
     }
@@ -363,11 +362,11 @@ final class ManagingPaymentMethodsContext implements Context
      */
     public function thereShouldStillBeOnlyOnePaymentMethodWith($element, $code)
     {
-        $this->iWantToBrowsePaymentMethods();
+        $this->iBrowsePaymentMethods();
 
         Assert::true(
             $this->indexPage->isResourceOnPage([$element => $code]),
-            sprintf('Payment method with %s %s cannot be founded.', $element, $code)
+            sprintf('Payment method with %s %s cannot be found.', $element, $code)
         );
     }
 }

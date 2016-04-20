@@ -22,13 +22,8 @@ use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
  */
 class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 {
-    use ChecksCodeImmutability, Toggles;
-
-    /**
-     * @var array
-     */
-    protected $elements = [
-    ];
+    use ChecksCodeImmutability;
+    use Toggles;
 
     /**
      * {@inheritdoc}
@@ -41,9 +36,9 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function nameIt($name, $language)
+    public function nameIt($name, $languageCode)
     {
-        $this->getDocument()->fillField(sprintf('sylius_payment_method_translations_%s_name', $language), $name);
+        $this->getDocument()->fillField(sprintf('sylius_payment_method_translations_%s_name', $languageCode), $name);
     }
 
     /**
@@ -55,9 +50,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     }
 
     /**
-     * @return NodeElement
-     *
-     * @throws ElementNotFoundException
+     * {@inheritdoc}
      */
     protected function getCodeElement()
     {
@@ -65,9 +58,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     }
 
     /**
-     * @return NodeElement
-     *
-     * @throws ElementNotFoundException
+     * {@inheritdoc}
      */
     protected function getToggleableElement()
     {

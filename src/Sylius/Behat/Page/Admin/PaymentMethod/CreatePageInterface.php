@@ -23,9 +23,9 @@ interface CreatePageInterface extends BaseCreatePageInterface
 
     /**
      * @param string $name
-     * @param string $language
+     * @param string $languageCode
      */
-    public function nameIt($name, $language);
+    public function nameIt($name, $languageCode);
 
     /**
      * @param string $code
@@ -39,9 +39,9 @@ interface CreatePageInterface extends BaseCreatePageInterface
 
     /**
      * @param string $description
-     * @param string $language
+     * @param string $languageCode
      */
-    public function describeIt($description, $language);
+    public function describeIt($description, $languageCode);
 
     /**
      * @return bool

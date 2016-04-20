@@ -23,14 +23,18 @@ use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
  */
 class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
-    use ChecksCodeImmutability, Toggles, SpecifiesItsCode;
+    use ChecksCodeImmutability;
+    use Toggles;
+    use SpecifiesItsCode;
 
     /**
      * {@inheritdoc}
      */
-    public function nameIt($name, $language)
+    public function nameIt($name, $languageCode)
     {
-        $this->getDocument()->fillField(sprintf('sylius_payment_method_translations_%s_name', $language), $name);
+        $this->getDocument()->fillField(
+            sprintf('sylius_payment_method_translations_%s_name', $languageCode), $name
+        );
     }
 
     /**
@@ -44,9 +48,11 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function describeIt($description, $language)
+    public function describeIt($description, $languageCode)
     {
-        $this->getDocument()->fillField(sprintf('sylius_payment_method_translations_%s_description', $language), $description);
+        $this->getDocument()->fillField(
+            sprintf('sylius_payment_method_translations_%s_description', $languageCode), $description
+        );
     }
 
     /**
@@ -58,9 +64,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     }
 
     /**
-     * @return NodeElement
-     *
-     * @throws ElementNotFoundException
+     * {@inheritdoc}
      */
     protected function getCodeElement()
     {
@@ -68,9 +72,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     }
 
     /**
-     * @return NodeElement
-     *
-     * @throws ElementNotFoundException
+     * {@inheritdoc}
      */
     protected function getToggleableElement()
     {
