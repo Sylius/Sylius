@@ -50,7 +50,7 @@ class Theme implements ThemeInterface
     protected $description;
 
     /**
-     * @var ThemeAuthor[]
+     * @var Collection|ThemeAuthor[]
      */
     protected $authors = [];
 
@@ -59,9 +59,16 @@ class Theme implements ThemeInterface
      */
     protected $parents;
 
+    /**
+     * @var Collection|string[]
+     */
+    protected $screenshots;
+
     public function __construct()
     {
+        $this->authors = new ArrayCollection();
         $this->parents = new ArrayCollection();
+        $this->screenshots = new ArrayCollection();
     }
 
     /**
@@ -158,7 +165,7 @@ class Theme implements ThemeInterface
      */
     public function getAuthors()
     {
-        return $this->authors;
+        return $this->authors->toArray();
     }
 
     /**
@@ -166,7 +173,7 @@ class Theme implements ThemeInterface
      */
     public function addAuthor(ThemeAuthor $author)
     {
-        $this->authors[] = $author;
+        $this->authors->add($author);
     }
 
     /**
@@ -174,9 +181,7 @@ class Theme implements ThemeInterface
      */
     public function removeAuthor(ThemeAuthor $author)
     {
-        $this->authors = array_values(array_filter($this->authors, function (ThemeAuthor $existingAuthor) use ($author) {
-            return $existingAuthor !== $author;
-        }));
+        $this->authors->removeElement($author);
     }
 
     /**
@@ -184,7 +189,7 @@ class Theme implements ThemeInterface
      */
     public function getParents()
     {
-        return $this->parents;
+        return $this->parents->toArray();
     }
 
     /**
@@ -192,7 +197,7 @@ class Theme implements ThemeInterface
      */
     public function addParent(ThemeInterface $theme)
     {
-        $this->parents[] = $theme;
+        $this->parents->add($theme);
     }
 
     /**
@@ -201,5 +206,29 @@ class Theme implements ThemeInterface
     public function removeParent(ThemeInterface $theme)
     {
         $this->parents->removeElement($theme);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getScreenshots()
+    {
+        return $this->screenshots->toArray();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addScreenshot($path)
+    {
+        $this->screenshots->add($path);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeScreenshot($path)
+    {
+        $this->screenshots->removeElement($path);
     }
 }

@@ -106,4 +106,15 @@ class ThemeSpec extends ObjectBehavior
         $this->removeParent($theme);
         $this->getParents()->shouldHaveCount(0);
     }
+
+    function it_has_screenshots()
+    {
+        $this->getScreenshots()->shouldHaveCount(0);
+
+        $this->addScreenshot('screenshot/amazing-feature.jpg');
+        $this->getScreenshots()->shouldHaveCount(1);
+
+        $this->removeScreenshot('screenshot/amazing-feature.jpg');
+        $this->getScreenshots()->shouldHaveCount(0);
+    }
 }

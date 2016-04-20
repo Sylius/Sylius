@@ -66,7 +66,7 @@ class ThemeLoaderSpec extends ObjectBehavior
         ThemeInterface $theme
     ) {
         $configurationProvider->getConfigurations()->willReturn([
-            ['name' => 'first/theme', 'parents' => [], 'authors' => []]
+            ['name' => 'first/theme', 'parents' => [], 'authors' => []],
         ]);
 
         $themeFactory->createNamed('first/theme')->willReturn($theme);
@@ -92,7 +92,7 @@ class ThemeLoaderSpec extends ObjectBehavior
             [
                 'name' => 'first/theme',
                 'parents' => [],
-                'authors' => [['name' => 'Richard Rynkowsky']]
+                'authors' => [['name' => 'Richard Rynkowsky']],
             ]
         ]);
 
@@ -100,6 +100,38 @@ class ThemeLoaderSpec extends ObjectBehavior
         $themeAuthorFactory->createFromArray(['name' => 'Richard Rynkowsky'])->willReturn($themeAuthor);
 
         $themeHydrator->hydrate(['name' => 'first/theme', 'parents' => [], 'authors' => [$themeAuthor]], $theme)->willReturn($theme);
+
+        $circularDependencyChecker->check($theme)->shouldBeCalled();
+
+        $this->load()->shouldReturn([$theme]);
+    }
+
+    function it_loads_a_theme_with_screenshots(
+        ConfigurationProviderInterface $configurationProvider,
+        ThemeFactoryInterface $themeFactory,
+        HydrationInterface $themeHydrator,
+        CircularDependencyCheckerInterface $circularDependencyChecker,
+        ThemeInterface $theme
+    ) {
+        $configurationProvider->getConfigurations()->willReturn([
+            [
+                'name' => 'first/theme',
+                'parents' => [],
+                'authors' => [],
+                'screenshots' => [
+                    'screenshot/itsamazing.jpg',
+                    'screenshot/omg.jpg',
+                ],
+            ]
+        ]);
+
+        $themeFactory->createNamed('first/theme')->willReturn($theme);
+        $themeHydrator->hydrate([
+            'name' => 'first/theme',
+            'parents' => [],
+            'authors' => [],
+            'screenshots' => ['screenshot/itsamazing.jpg', 'screenshot/omg.jpg']
+        ], $theme)->willReturn($theme);
 
         $circularDependencyChecker->check($theme)->shouldBeCalled();
 
