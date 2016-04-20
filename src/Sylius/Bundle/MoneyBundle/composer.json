@@ -24,7 +24,8 @@
 
         "sylius/resource-bundle": "^0.18",
         "symfony/framework-bundle": "^2.7.7",
-        "symfony/intl": "^2.7"
+        "symfony/intl": "^2.7",
+        "webmozart/assert": "^1.0"
     },
     "require-dev": {
         "phpspec/phpspec": "^2.4",

@@ -31,6 +31,7 @@
         <service id="sylius.templating.helper.money" class="%sylius.templating.helper.money.class%" lazy="true">
             <argument type="service" id="sylius.context.locale" />
             <argument type="service" id="sylius.context.currency" />
+            <argument type="service" id="sylius.formatter.money" />
             <tag name="templating.helper" alias="sylius_money" />
         </service>
 

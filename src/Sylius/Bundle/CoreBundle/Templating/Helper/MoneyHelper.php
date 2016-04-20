@@ -11,11 +11,15 @@
 
 namespace Sylius\Bundle\CoreBundle\Templating\Helper;
 
-use Sylius\Bundle\CurrencyBundle\Templating\Helper\MoneyHelper as BaseMoneyHelper;
+use Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatterInterface;
+use Sylius\Bundle\MoneyBundle\Templating\Helper\MoneyHelperInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 
-class MoneyHelper extends BaseMoneyHelper
+/**
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ */
+class MoneyHelper implements MoneyHelperInterface
 {
     /**
      * @var LocaleContextInterface
@@ -23,21 +27,38 @@ class MoneyHelper extends BaseMoneyHelper
     protected $localeContext;
 
     /**
-     * @param LocaleContextInterface   $localeContext
-     * @param CurrencyContextInterface $currencyContext
+     * @var CurrencyContextInterface
      */
-    public function __construct(LocaleContextInterface $localeContext, CurrencyContextInterface $currencyContext)
-    {
-        $this->localeContext = $localeContext;
+    private $currencyContext;
 
-        parent::__construct($this->getDefaultLocale(), $currencyContext);
+    /**
+     * @var MoneyFormatterInterface
+     */
+    private $moneyFormatter;
+
+    /**
+     * @param LocaleContextInterface $localeContext
+     * @param CurrencyContextInterface $currencyContext
+     * @param MoneyFormatterInterface $moneyFormatter
+     */
+    public function __construct(
+        LocaleContextInterface $localeContext,
+        CurrencyContextInterface $currencyContext,
+        MoneyFormatterInterface $moneyFormatter
+    ) {
+        $this->localeContext = $localeContext;
+        $this->currencyContext = $currencyContext;
+        $this->moneyFormatter = $moneyFormatter;
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function getDefaultLocale()
+    public function formatAmount($amount, $currency = null, $locale = null)
     {
-        return $this->localeContext->getDefaultLocale();
+        $locale = $locale ?: $this->localeContext->getDefaultLocale();
+        $currency = $currency ?: $this->currencyContext->getCurrency();
+
+        return $this->moneyFormatter->format($amount, $currency, $locale);
     }
 }

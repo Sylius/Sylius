@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CurrencyBundle\Templating\Helper;
 
-use Sylius\Bundle\MoneyBundle\Templating\Helper\MoneyHelperInterface;
+use Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatterInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
 use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
@@ -31,12 +31,12 @@ class CurrencyHelper extends Helper implements CurrencyHelperInterface
     /**
      * @var CurrencyConverterInterface
      */
-    private $converter;
+    private $currencyConverter;
 
     /**
-     * @var MoneyHelperInterface
+     * @var MoneyFormatterInterface
      */
-    private $moneyHelper;
+    private $moneyFormatter;
 
     /**
      * @var CurrencyProviderInterface
@@ -46,18 +46,18 @@ class CurrencyHelper extends Helper implements CurrencyHelperInterface
     /**
      * @param CurrencyContextInterface $currencyContext
      * @param CurrencyConverterInterface $converter
-     * @param MoneyHelperInterface $moneyHelper
+     * @param MoneyFormatterInterface $moneyFormatter
      * @param CurrencyProviderInterface $currencyProvider
      */
     public function __construct(
         CurrencyContextInterface $currencyContext,
         CurrencyConverterInterface $converter,
-        MoneyHelperInterface $moneyHelper,
+        MoneyFormatterInterface $moneyFormatter,
         CurrencyProviderInterface $currencyProvider
     ) {
         $this->currencyContext = $currencyContext;
-        $this->converter = $converter;
-        $this->moneyHelper = $moneyHelper;
+        $this->currencyConverter = $converter;
+        $this->moneyFormatter = $moneyFormatter;
         $this->currencyProvider = $currencyProvider;
     }
 
@@ -68,7 +68,7 @@ class CurrencyHelper extends Helper implements CurrencyHelperInterface
     {
         $currency = $currency ?: $this->currencyContext->getCurrency();
 
-        return $this->converter->convertFromBase($amount, $currency);
+        return $this->currencyConverter->convertFromBase($amount, $currency);
     }
 
     /**
@@ -77,9 +77,9 @@ class CurrencyHelper extends Helper implements CurrencyHelperInterface
     public function convertAndFormatAmount($amount, $currency = null, $decimal = false)
     {
         $currency = $currency ?: $this->currencyContext->getCurrency();
-        $amount = $this->converter->convertFromBase($amount, $currency);
+        $amount = $this->currencyConverter->convertFromBase($amount, $currency);
 
-        return $this->moneyHelper->formatAmount($amount, $currency, $decimal);
+        return $this->moneyFormatter->format($amount, $currency, $decimal);
     }
 
     /**

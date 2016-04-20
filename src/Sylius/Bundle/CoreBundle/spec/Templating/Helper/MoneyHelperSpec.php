@@ -9,30 +9,33 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CurrencyBundle\Templating\Helper;
+namespace spec\Sylius\Bundle\CoreBundle\Templating\Helper;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CurrencyBundle\Templating\Helper\MoneyHelper;
 use Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatterInterface;
 use Sylius\Bundle\MoneyBundle\Templating\Helper\MoneyHelperInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
+use Sylius\Component\Locale\Context\LocaleContextInterface;
 
 /**
  * @mixin MoneyHelper
  *
- * @author Arnaud Langlade <arn0d.dev@gmail.com>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class MoneyHelperSpec extends ObjectBehavior
 {
-    function let(CurrencyContextInterface $currencyContext, MoneyFormatterInterface $moneyFormatter)
-    {
-        $this->beConstructedWith('fr_FR', $currencyContext, $moneyFormatter);
+    function let(
+        LocaleContextInterface $localeContext,
+        CurrencyContextInterface $currencyContext,
+        MoneyFormatterInterface $moneyFormatter
+    ) {
+        $this->beConstructedWith($localeContext, $currencyContext, $moneyFormatter);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CurrencyBundle\Templating\Helper\MoneyHelper');
+        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Templating\Helper\MoneyHelper');
     }
 
     function it_implements_money_helper_interface()
@@ -41,17 +44,22 @@ class MoneyHelperSpec extends ObjectBehavior
     }
 
     function it_formats_money_using_default_currency_and_locale_if_only_amount_is_given(
-        CurrencyContextInterface $currencyContext, 
+        LocaleContextInterface $localeContext,
+        CurrencyContextInterface $currencyContext,
         MoneyFormatterInterface $moneyFormatter
     ) {
+        $localeContext->getDefaultLocale()->willReturn('fr_FR');
         $currencyContext->getCurrency()->willReturn('EUR');
         $moneyFormatter->format(500, 'EUR', 'fr_FR')->willReturn('€5.00');
 
         $this->formatAmount(500)->shouldReturn('€5.00');
     }
 
-    function it_formats_money_using_default_locale_if_not_given(MoneyFormatterInterface $moneyFormatter)
-    {
+    function it_formats_money_using_default_locale_if_not_given(
+        LocaleContextInterface $localeContext,
+        MoneyFormatterInterface $moneyFormatter
+    ) {
+        $localeContext->getDefaultLocale()->willReturn('fr_FR');
         $moneyFormatter->format(312, 'EUR', 'fr_FR')->willReturn('€3.12');
 
         $this->formatAmount(312, 'EUR')->shouldReturn('€3.12');

@@ -19,12 +19,11 @@ interface MoneyHelperInterface
     /**
      * @param int $amount
      * @param string|null $currency
-     * @param bool $decimal
      * @param string|null $locale
      *
      * @return string
      *
      * @throws \InvalidArgumentException
      */
-    public function formatAmount($amount, $currency = null, $decimal = false, $locale = null);
+    public function formatAmount($amount, $currency = null, $locale = null);
 }
