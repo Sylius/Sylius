@@ -31,11 +31,6 @@ use Symfony\Component\Intl\Intl;
 final class ZoneContext implements Context
 {
     /**
-     * @var SharedStorageInterface
-     */
-    private $sharedStorage;
-
-    /**
      * @var array
      */
     private $euMembers = [
@@ -43,6 +38,11 @@ final class ZoneContext implements Context
         'FR', 'IT', 'CY', 'LV', 'LT', 'LU', 'HU', 'MT', 'NL',
         'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE', 'GB',
     ];
+
+    /**
+     * @var SharedStorageInterface
+     */
+    private $sharedStorage;
 
     /**
      * @var ZoneRepositoryInterface
@@ -104,6 +104,7 @@ final class ZoneContext implements Context
         $zone->setName('European Union');
 
         $this->zoneRepository->add($zone);
+        $this->sharedStorage->set('zone', $zone);
     }
 
     /**
