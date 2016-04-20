@@ -45,4 +45,23 @@ interface CreatePageInterface extends BaseCreatePageInterface
      * @param string $value
      */
     public function fillRuleOption($option, $value);
+
+    /**
+     * @param string $actionName
+     */
+    public function addAction($actionName);
+
+    /**
+     * @param string $option
+     * @param string $value
+     * @param bool $multiple
+     */
+    public function selectActionOption($option, $value, $multiple = false);
+
+    /**
+     * @param string $option
+     * @param string $value
+     */
+    public function fillActionOption($option, $value);
+
 }

@@ -13,9 +13,7 @@ namespace Sylius\Bundle\PromotionBundle\Form\Type;
 
 use Sylius\Bundle\PromotionBundle\Form\EventListener\BuildActionFormSubscriber;
 use Sylius\Bundle\PromotionBundle\Form\Type\Core\AbstractConfigurationType;
-use Sylius\Component\Promotion\Model\ActionInterface;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>

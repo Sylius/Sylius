@@ -155,6 +155,15 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
+     * @Given I add the "Order fixed discount" action configured with €:amount
+     */
+    public function stepDefinition($amount)
+    {
+        $this->createPage->addAction('Order fixed discount');
+        $this->createPage->fillActionOption('Amount', $amount);
+    }
+
+    /**
      * @Then I should be notified that it has been successfully created
      */
     public function iShouldBeNotifiedItHasBeenSuccessfulCreation()
