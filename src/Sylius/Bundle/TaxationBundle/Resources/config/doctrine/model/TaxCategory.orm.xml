@@ -23,7 +23,8 @@
         <field name="name" column="name" type="string" />
         <field name="description" column="description" type="text" nullable="true" />
 
-        <one-to-many field="rates" target-entity="Sylius\Component\Taxation\Model\TaxRateInterface" mapped-by="category">
+        <one-to-many field="rates" target-entity="Sylius\Component\Taxation\Model\TaxRateInterface" mapped-by="category"
+            orphan-removal="true">
             <cascade>
                 <cascade-all/>
             </cascade>
