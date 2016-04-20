@@ -24,6 +24,7 @@
         <parameter key="sylius.behat.context.transform.payment.class">Sylius\Behat\Context\Transform\PaymentContext</parameter>
         <parameter key="sylius.behat.context.transform.payment_method.class">Sylius\Behat\Context\Transform\PaymentMethodContext</parameter>
         <parameter key="sylius.behat.context.transform.product.class">Sylius\Behat\Context\Transform\ProductContext</parameter>
+        <parameter key="sylius.behat.context.transform.product_option.class">Sylius\Behat\Context\Transform\ProductOptionContext</parameter>
         <parameter key="sylius.behat.context.transform.product_variant.class">Sylius\Behat\Context\Transform\ProductVariantContext</parameter>
         <parameter key="sylius.behat.context.transform.promotion.class">Sylius\Behat\Context\Transform\PromotionContext</parameter>
         <parameter key="sylius.behat.context.transform.province.class">Sylius\Behat\Context\Transform\ProvinceContext</parameter>

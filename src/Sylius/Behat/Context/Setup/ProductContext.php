@@ -20,6 +20,7 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
 /**
@@ -50,6 +51,16 @@ final class ProductContext implements Context
     private $productVariantFactory;
 
     /**
+     * @var FactoryInterface
+     */
+    private $productOptionFactory;
+
+    /**
+     * @var RepositoryInterface
+     */
+    private $productOptionRepository;
+
+    /**
      * @var ObjectManager
      */
     private $objectManager;
@@ -59,6 +70,8 @@ final class ProductContext implements Context
      * @param ProductRepositoryInterface $productRepository
      * @param FactoryInterface $productFactory
      * @param FactoryInterface $productVariantFactory
+     * @param FactoryInterface $productOptionFactory
+     * @param RepositoryInterface $productOptionRepository
      * @param ObjectManager $objectManager
      */
     public function __construct(
@@ -66,12 +79,16 @@ final class ProductContext implements Context
         ProductRepositoryInterface $productRepository,
         FactoryInterface $productFactory,
         FactoryInterface $productVariantFactory,
+        FactoryInterface $productOptionFactory,
+        RepositoryInterface $productOptionRepository,
         ObjectManager $objectManager
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->productRepository = $productRepository;
         $this->productFactory = $productFactory;
         $this->productVariantFactory = $productVariantFactory;
+        $this->productOptionFactory = $productOptionFactory;
+        $this->productOptionRepository = $productOptionRepository;
         $this->objectManager = $objectManager;
     }
 

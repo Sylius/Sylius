@@ -48,6 +48,7 @@ imports:
     - suites/ui/payment/managing_payment_methods.yml
     - suites/ui/product/managing_products.yml
     - suites/ui/product/managing_product_attributes.yml
+    - suites/ui/product/managing_product_options.yml
     - suites/ui/promotion/applying_promotion_rules.yml
     - suites/ui/promotion/managing_promotions.yml
     - suites/ui/promotion/receiving_discount.yml

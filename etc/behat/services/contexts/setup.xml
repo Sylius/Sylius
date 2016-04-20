@@ -106,6 +106,8 @@
             <argument type="service" id="sylius.repository.product" container="symfony" />
             <argument type="service" id="sylius.factory.product" container="symfony" />
             <argument type="service" id="sylius.factory.product_variant" container="symfony" />
+            <argument type="service" id="sylius.repository.product_option" container="symfony" />
+            <argument type="service" id="sylius.factory.product_option" container="symfony" />
             <argument type="service" id="doctrine.orm.entity_manager" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>
