@@ -94,7 +94,7 @@ final class NotificationChecker implements NotificationCheckerInterface
      */
     private function hasType(NotificationType $type)
     {
-        return (string) $type === (string) $this->notificationAccessor->getType();
+        return $type === $this->notificationAccessor->getType();
     }
 
     /**

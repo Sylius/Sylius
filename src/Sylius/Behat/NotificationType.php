@@ -22,6 +22,11 @@ final class NotificationType
     private $value;
 
     /**
+     * @var array
+     */
+    private static $types = [];
+
+    /**
      * @param string $value
      */
     private function __construct($value)
@@ -42,7 +47,7 @@ final class NotificationType
      */
     public static function failure()
     {
-        return new self('failure');
+        return static::getTyped('failure');
     }
 
     /**
@@ -50,6 +55,20 @@ final class NotificationType
      */
     public static function success()
     {
-        return new self('success');
+        return static::getTyped('success');
+    }
+
+    /**
+     * @param string $type
+     *
+     * @return NotificationType
+     */
+    private static function getTyped($type)
+    {
+        if (!isset(static::$types[$type])) {
+            static::$types[$type] = new self($type);
+        }
+
+        return static::$types[$type];
     }
 }
