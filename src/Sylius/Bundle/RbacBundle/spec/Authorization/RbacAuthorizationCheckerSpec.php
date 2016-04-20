@@ -14,16 +14,16 @@ namespace spec\Sylius\Bundle\RbacBundle\Authorization;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ResourceBundle\Controller\AuthorizationCheckerInterface as ResourceBundleAuthorizationCheckerInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
-use Sylius\Component\Rbac\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class RbacAuthorizationCheckerSpec extends ObjectBehavior
 {
-    function let(AuthorizationCheckerInterface $rbacAuthorizationChecker)
+    function let(AuthorizationCheckerInterface $authorizationChecker)
     {
-        $this->beConstructedWith($rbacAuthorizationChecker);
+        $this->beConstructedWith($authorizationChecker);
     }
 
     function it_is_initializable()
@@ -44,14 +44,14 @@ class RbacAuthorizationCheckerSpec extends ObjectBehavior
 
     function it_uses_rbac_authorization_checker(
         RequestConfiguration $requestConfiguration,
-        AuthorizationCheckerInterface $rbacAuthorizationChecker
+        AuthorizationCheckerInterface $authorizationChecker
     ) {
         $requestConfiguration->hasPermission()->willReturn(true);
         $requestConfiguration->getPermission('sylius.product.foo')->willReturn('sylius.product.foo');
-        $rbacAuthorizationChecker->isGranted('sylius.product.foo')->willReturn(false);
+        $authorizationChecker->isGranted('sylius.product.foo')->willReturn(false);
         $this->isGranted($requestConfiguration, 'sylius.product.foo')->shouldReturn(false);
 
-        $rbacAuthorizationChecker->isGranted('sylius.product.foo')->willReturn(true);
+        $authorizationChecker->isGranted('sylius.product.foo')->willReturn(true);
         $this->isGranted($requestConfiguration, 'sylius.product.foo')->shouldReturn(true);
     }
 }
