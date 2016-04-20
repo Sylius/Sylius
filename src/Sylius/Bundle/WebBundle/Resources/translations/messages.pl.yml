@@ -92,6 +92,7 @@ sylius:
         actions: Akcje
         add: Dodaj
         add_action: Dodaj akcje
+        add_association: Dodaj powiązanie
         add_attribute: Dodaj cechę
         add_channel: Dodaj kanał
         add_choice: Dodaj wybór
@@ -116,6 +117,7 @@ sylius:
         archetype: Szablon
         association: Powiązanie
         association_types: Typy powiązań
+        associations: Powiązania
         assortment: Asortyment
         attributes: Cechy
         author: Autor
@@ -430,6 +432,7 @@ sylius:
         product_association_index: Powiązanie
         product_association_type_index: Rodzaj powiązania
         product_association_types: Rodzaje produktów towarzyszących
+        product_associations: Powiązania produktów
         product_details_viewing_product_product: 'Szczegóły produktu <small>Oglądasz produkt "<strong>%product%</strong>"</small>'
         products: Produkty
         products_categorized_as_name: 'Produkty sklasyfikowane jako "%name%"'
@@ -538,6 +541,7 @@ sylius:
         unit_price: Cena za sztukę
         unknown: Nieznany
         unlock: Odblokuj
+        update_product_association_type: Zaktualizuj typ powiązania produktu
         updating_tax_rate: Edycja stawki podatkowej
         usage_limit: Limit użycia
         used: Użyto
