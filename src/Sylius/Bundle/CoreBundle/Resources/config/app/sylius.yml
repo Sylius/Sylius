@@ -259,7 +259,7 @@ sylius_search:
     filters:
         pre_search_filter:
             enabled: true
-            taxon: CATEGORY
+            taxon: category
         facet_groups:
             search_set:
                 values: [taxons, price, made_of, color]

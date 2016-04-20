@@ -28,16 +28,16 @@ class LoadProductArchetypeData extends DataFixture
      */
     public function load(ObjectManager $manager)
     {
-        $archetype = $this->createArchetype('t_shirt', [$this->defaultLocale => 'T-Shirt', 'es' => 'Camiseta'], ['t_shirt_size', 't_shirt_color'], ['T-Shirt brand', 'T-Shirt collection', 'T-Shirt material']);
+        $archetype = $this->createArchetype('t_shirt', [$this->defaultLocale => 'T-Shirt', 'es' => 'Camiseta'], ['t_shirt_size', 't_shirt_color'], ['t_shirt_brand', 't_shirt_collection', 't_shirt_material']);
         $manager->persist($archetype);
 
-        $archetype = $this->createArchetype('sticker', [$this->defaultLocale => 'Sticker', 'es' => 'Pegatina'], ['sticker_size'], ['Sticker resolution', 'Sticker paper']);
+        $archetype = $this->createArchetype('sticker', [$this->defaultLocale => 'Sticker', 'es' => 'Pegatina'], ['sticker_size'], ['sticker_resolution', 'sticker_paper']);
         $manager->persist($archetype);
 
-        $archetype = $this->createArchetype('mug', [$this->defaultLocale => 'Mug', 'es' => 'Taza'], ['mug_type'], ['Mug material']);
+        $archetype = $this->createArchetype('mug', [$this->defaultLocale => 'Mug', 'es' => 'Taza'], ['mug_type'], ['mug_material']);
         $manager->persist($archetype);
 
-        $archetype = $this->createArchetype('book', [$this->defaultLocale => 'Book', 'es' => 'Libro'], [], ['Book author', 'Book ISBN', 'Book pages']);
+        $archetype = $this->createArchetype('book', [$this->defaultLocale => 'Book', 'es' => 'Libro'], [], ['book_author', 'book_isbn', 'book_pages']);
         $manager->persist($archetype);
 
         $manager->flush();

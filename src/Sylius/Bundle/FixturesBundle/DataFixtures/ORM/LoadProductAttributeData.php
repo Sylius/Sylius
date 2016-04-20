@@ -88,7 +88,7 @@ class LoadProductAttributeData extends DataFixture
             $attribute->setName($name);
         }
 
-        $this->setReference('Sylius.Attribute.'.$name, $attribute);
+        $this->setReference('Sylius.Attribute.'.$code, $attribute);
 
         return $attribute;
     }

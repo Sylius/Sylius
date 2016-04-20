@@ -27,21 +27,21 @@ class LoadTaxonsData extends DataFixture
     public function load(ObjectManager $manager)
     {
         $manager->persist($this->createTaxons(
-            'CATEGORY', [$this->defaultLocale => 'Category', 'es_ES' => 'Categoria'],
+            'category', [$this->defaultLocale => 'Category', 'es_ES' => 'Categoria'],
             [
-                ['code' => 'TX1', 'locales' => [$this->defaultLocale => 'T-Shirts', 'es_ES' => 'Camisetas']],
-                ['code' => 'TX2', 'locales' => [$this->defaultLocale => 'Stickers', 'es_ES' => 'Pegatinas']],
-                ['code' => 'TX3', 'locales' => [$this->defaultLocale => 'Mugs', 'es_ES' => 'Tazas']],
-                ['code' => 'TX4', 'locales' => [$this->defaultLocale => 'Books', 'es_ES' => 'Libros']],
+                ['code' => 't-shirts', 'locales' => [$this->defaultLocale => 'T-Shirts', 'es_ES' => 'Camisetas']],
+                ['code' => 'stickers', 'locales' => [$this->defaultLocale => 'Stickers', 'es_ES' => 'Pegatinas']],
+                ['code' => 'mugs', 'locales' => [$this->defaultLocale => 'Mugs', 'es_ES' => 'Tazas']],
+                ['code' => 'books', 'locales' => [$this->defaultLocale => 'Books', 'es_ES' => 'Libros']],
             ]));
 
         $manager->persist($this->createTaxons(
-            'BRAND', [$this->defaultLocale => 'Brand', 'es_ES' => 'Marca'],
+            'brand', [$this->defaultLocale => 'Brand', 'es_ES' => 'Marca'],
             [
-                ['code' => 'TX5', 'locales' => [$this->defaultLocale => 'SuperTees', 'es_ES' => 'SuperCamisetas']],
-                ['code' => 'TX6', 'locales' => [$this->defaultLocale => 'Stickypicky', 'es_ES' => 'Pegapicky']],
-                ['code' => 'TX7', 'locales' => [$this->defaultLocale => 'Mugland', 'es_ES' => 'Mundotaza']],
-                ['code' => 'TX8', 'locales' => [$this->defaultLocale => 'Bookmania', 'es_ES' => 'Libromania']],
+                ['code' => 'super_tees', 'locales' => [$this->defaultLocale => 'SuperTees', 'es_ES' => 'SuperCamisetas']],
+                ['code' => 'stickypicky', 'locales' => [$this->defaultLocale => 'Stickypicky', 'es_ES' => 'Pegapicky']],
+                ['code' => 'mugland', 'locales' => [$this->defaultLocale => 'Mugland', 'es_ES' => 'Mundotaza']],
+                ['code' => 'bookmania', 'locales' => [$this->defaultLocale => 'Bookmania', 'es_ES' => 'Libromania']],
             ]));
 
         $manager->flush();
@@ -74,11 +74,8 @@ class LoadTaxonsData extends DataFixture
             $rootTaxon->setCurrentLocale($locale);
             $rootTaxon->setFallbackLocale($locale);
             $rootTaxon->setName($name);
-
-            if ($this->defaultLocale === $locale) {
-                $this->setReference('Sylius.Taxon.'.$name, $rootTaxon);
-            }
         }
+        $this->setReference('Sylius.Taxon.'.$code, $rootTaxon);
 
         foreach ($childrenArray as $taxonArray) {
             /* @var $taxon TaxonInterface */
@@ -90,11 +87,8 @@ class LoadTaxonsData extends DataFixture
                 $taxon->setFallbackLocale($locale);
                 $taxon->setName($taxonName);
                 $taxon->setDescription($this->fakers[$locale]->paragraph);
-
-                if ($this->defaultLocale === $locale) {
-                    $this->setReference('Sylius.Taxon.'.$taxonName, $taxon);
-                }
             }
+            $this->setReference('Sylius.Taxon.'.$taxonArray['code'], $taxon);
 
             $rootTaxon->addChild($taxon);
         }
