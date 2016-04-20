@@ -86,9 +86,11 @@
 
         <service id="sylius.registry.promotion_rule_checker" class="%sylius.registry.promotion_rule_checker.class%">
             <argument>Sylius\Component\Promotion\Checker\RuleCheckerInterface</argument>
+            <argument>rule checker</argument>
         </service>
         <service id="sylius.registry.promotion_action" class="%sylius.registry.promotion_action.class%">
             <argument>Sylius\Component\Promotion\Action\PromotionActionInterface</argument>
+            <argument>promotion action</argument>
         </service>
 
         <service id="sylius.active_promotions_provider" class="%sylius.active_promotions_provider.class%">

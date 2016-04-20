@@ -90,7 +90,7 @@ class ServiceRegistrySpec extends ObjectBehavior
     function it_throws_exception_if_trying_to_get_service_of_non_existing_type()
     {
         $this
-            ->shouldThrow(NonExistingServiceException::class)
+            ->shouldThrow(new NonExistingServiceException('service', 'foo', []))
             ->duringGet('foo')
         ;
     }

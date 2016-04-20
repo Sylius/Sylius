@@ -19,8 +19,8 @@ namespace Sylius\Component\Registry;
  */
 class ExistingServiceException extends \InvalidArgumentException
 {
-    public function __construct($type)
+    public function __construct($context, $type)
     {
-        parent::__construct(sprintf('Service of type "%s" already exist.', $type));
+        parent::__construct(sprintf('%s of type "%s" already exists.', $context, $type));
     }
 }

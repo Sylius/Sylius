@@ -20,7 +20,7 @@ class ExistingServiceExceptionSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('foo');
+        $this->beConstructedWith('Service', 'foo');
     }
 
     function it_is_initializable()

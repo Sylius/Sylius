@@ -35,10 +35,12 @@
 
         <service id="sylius.registry.report.data_fetcher" class="%sylius.registry.report.class%">
             <argument>Sylius\Component\Report\DataFetcher\DataFetcherInterface</argument>
+            <argument>data fetcher</argument>
         </service>
 
         <service id="sylius.registry.report.renderer" class="%sylius.registry.report.class%">
             <argument>Sylius\Component\Report\Renderer\RendererInterface</argument>
+            <argument>report renderer</argument>
         </service>
 
         <!-- Report -->

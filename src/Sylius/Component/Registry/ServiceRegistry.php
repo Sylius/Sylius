@@ -33,13 +33,22 @@ class ServiceRegistry implements ServiceRegistryInterface
     protected $interface;
 
     /**
+     * Human readable context for these services, e.g. "grid field"
+     *
+     * @var string
+     */
+    protected $context;
+
+    /**
      * Constructor.
      *
      * @param string $interface
+     * @param string $context
      */
-    public function __construct($interface)
+    public function __construct($interface, $context = 'service')
     {
         $this->interface = $interface;
+        $this->context = $context;
     }
 
     /**
@@ -56,16 +65,16 @@ class ServiceRegistry implements ServiceRegistryInterface
     public function register($type, $service)
     {
         if ($this->has($type)) {
-            throw new ExistingServiceException($type);
+            throw new ExistingServiceException($this->context, $type);
         }
 
         if (!is_object($service)) {
-            throw new \InvalidArgumentException(sprintf('Service needs to be an object, %s given.', gettype($service)));
+            throw new \InvalidArgumentException(sprintf('%s needs to be an object, %s given.', $this->context, gettype($service)));
         }
 
         if (!in_array($this->interface, class_implements($service))) {
             throw new \InvalidArgumentException(
-                sprintf('Service for this registry needs to implement "%s", "%s" given.', $this->interface, get_class($service))
+                sprintf('%s needs to implement "%s", "%s" given.', $this->context, $this->interface, get_class($service))
             );
         }
 
@@ -78,7 +87,7 @@ class ServiceRegistry implements ServiceRegistryInterface
     public function unregister($type)
     {
         if (!$this->has($type)) {
-            throw new NonExistingServiceException($type);
+            throw new NonExistingServiceException($this->context, $type, array_keys($this->services));
         }
 
         unset($this->services[$type]);
@@ -98,7 +107,7 @@ class ServiceRegistry implements ServiceRegistryInterface
     public function get($type)
     {
         if (!$this->has($type)) {
-            throw new NonExistingServiceException($type);
+            throw new NonExistingServiceException($this->context, $type, array_keys($this->services));
         }
 
         return $this->services[$type];

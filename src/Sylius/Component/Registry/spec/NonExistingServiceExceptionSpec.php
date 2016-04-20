@@ -20,7 +20,7 @@ class NonExistingServiceExceptionSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('foo');
+        $this->beConstructedWith('renderer', 'foo', ['service1', 'service2']);
     }
 
     function it_is_initializable()
@@ -36,5 +36,10 @@ class NonExistingServiceExceptionSpec extends ObjectBehavior
     function it_is_an_invalid_argument_exception()
     {
         $this->shouldHaveType('InvalidArgumentException');
+    }
+
+    function it_should_show_the_context_and_available_services_in_the_message()
+    {
+        $this->getMessage()->shouldReturn('Renderer service "foo" does not exist, available renderer services: "service1", "service2"');
     }
 }

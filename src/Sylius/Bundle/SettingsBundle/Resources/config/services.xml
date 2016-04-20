@@ -50,11 +50,13 @@
 
         <service id="sylius.registry.settings_schema" class="%sylius.registry.settings_schema.class%">
             <argument>%sylius.settings.schema_interface%</argument>
+            <argument>Settings schema</argument>
         </service>
 
         <service id="sylius.registry.settings_resolver" class="%sylius.registry.settings_resolver.class%">
             <argument>%sylius.settings.resolver_interface%</argument>
             <argument type="service" id="sylius.settings.default_resolver"/>
+            <argument>settings resolver</argument>
         </service>
 
         <service id="sylius.settings.default_resolver" class="%sylius.settings.default_resolver.class%">

@@ -33,6 +33,7 @@
     <services>
         <service id="sylius.registry.price_calculator" class="%sylius.registry.price_calculator.class%">
             <argument>Sylius\Component\Pricing\Calculator\CalculatorInterface</argument>
+            <argument>price calculator</argument>
         </service>
 
         <service id="sylius.form.subscriber.priceable" class="%sylius.form.subscriber.priceable.class%">
