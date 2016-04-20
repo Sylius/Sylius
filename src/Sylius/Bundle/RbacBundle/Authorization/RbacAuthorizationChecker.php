@@ -13,7 +13,7 @@ namespace Sylius\Bundle\RbacBundle\Authorization;
 
 use Sylius\Bundle\ResourceBundle\Controller\AuthorizationCheckerInterface as ResourceBundleAuthorizationCheckerInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
-use Sylius\Component\Rbac\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -23,14 +23,14 @@ class RbacAuthorizationChecker implements ResourceBundleAuthorizationCheckerInte
     /**
      * @var AuthorizationCheckerInterface
      */
-    private $rbacAuthorizationChecker;
+    private $authorizationChecker;
 
     /**
-     * @param AuthorizationCheckerInterface $rbacAuhtorizationChecker
+     * @param AuthorizationCheckerInterface $auhtorizationChecker
      */
-    public function __construct(AuthorizationCheckerInterface $rbacAuhtorizationChecker)
+    public function __construct(AuthorizationCheckerInterface $auhtorizationChecker)
     {
-        $this->rbacAuthorizationChecker = $rbacAuhtorizationChecker;
+        $this->authorizationChecker = $auhtorizationChecker;
     }
 
     /**
@@ -45,6 +45,6 @@ class RbacAuthorizationChecker implements ResourceBundleAuthorizationCheckerInte
             return true;
         }
 
-        return $this->rbacAuthorizationChecker->isGranted($permission);
+        return $this->authorizationChecker->isGranted($permission);
     }
 }
