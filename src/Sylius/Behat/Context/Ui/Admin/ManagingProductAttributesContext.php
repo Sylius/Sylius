@@ -12,10 +12,11 @@
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\Page\Admin\Product\Attribute\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
-use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface;
+use Sylius\Behat\Page\Admin\Product\Attribute\CreatePageInterface;
+use Sylius\Behat\Page\Admin\Product\Attribute\UpdatePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
+use Sylius\Component\Product\Model\AttributeInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -113,6 +114,49 @@ final class ManagingProductAttributesContext implements Context
         Assert::true(
             $this->indexPage->isResourceOnPage(['name' => $name]),
             sprintf('The product attribute with name %s should appear on page, but it does not.', $name)
+        );
+    }
+
+    /**
+     * @When /^I want to edit (this product attribute)$/
+     */
+    public function iWantToEditThisAttribute(AttributeInterface $productAttribute)
+    {
+        $this->updatePage->open(['id' => $productAttribute->getId()]);
+    }
+
+    /**
+     * @When I change it name to :name in :language
+     */
+    public function iChangeItNameToIn($name, $language)
+    {
+        $this->updatePage->changeName($name, $language);
+    }
+
+    /**
+     * @When I save my changes
+     */
+    public function iSaveMyChanges()
+    {
+        $this->updatePage->saveChanges();
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully edited
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited()
+    {
+        $this->notificationChecker->checkEditionNotification(self::RESOURCE_NAME);
+    }
+
+    /**
+     * @Then the code field should be disabled
+     */
+    public function theCodeFieldShouldBeDisabled()
+    {
+        Assert::true(
+            $this->updatePage->isCodeDisabled(),
+            'Code should be immutable, but it does not.'
         );
     }
 }

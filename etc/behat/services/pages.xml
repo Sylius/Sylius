@@ -57,7 +57,7 @@
         <parameter key="sylius.behat.page.admin.product.index.class">Sylius\Behat\Page\Admin\Product\IndexPage</parameter>
         <parameter key="sylius.behat.page.admin.product_attribute.create.class">Sylius\Behat\Page\Admin\Product\Attribute\CreatePage</parameter>
         <parameter key="sylius.behat.page.admin.product_attribute.index.class">%sylius.behat.page.admin.crud.index.class%</parameter>
-        <parameter key="sylius.behat.page.admin.product_attribute.update.class">%sylius.behat.page.admin.crud.update.class%</parameter>
+        <parameter key="sylius.behat.page.admin.product_attribute.update.class">Sylius\Behat\Page\Admin\Product\Attribute\UpdatePage</parameter>
         <parameter key="sylius.behat.page.admin.promotion.create.class">Sylius\Behat\Page\Admin\Promotion\CreatePage</parameter>
         <parameter key="sylius.behat.page.admin.promotion.update.class">Sylius\Behat\Page\Admin\Promotion\UpdatePage</parameter>
         <parameter key="sylius.behat.page.admin.promotion.index.class">%sylius.behat.page.admin.crud.index.class%</parameter>
