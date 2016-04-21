@@ -74,7 +74,7 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @When /^I specify (?:its|his) first name as "([^"]*)"$/
+     * @When /^I specify (?:their|his) first name as "([^"]*)"$/
      */
     public function iSpecifyItsFirstNameAs($name)
     {
@@ -82,7 +82,7 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @When /^I specify (?:its|his) last name as "([^"]*)"$/
+     * @When /^I specify (?:their|his) last name as "([^"]*)"$/
      */
     public function iSpecifyItsLastNameAs($name)
     {
@@ -90,7 +90,7 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @When I specify its email as :name
+     * @When I specify their email as :name
      */
     public function iSpecifyItsEmailAs($email)
     {
@@ -98,7 +98,7 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @When I add it
+     * @When I add them
      * @When I try to add it
      */
     public function iAddIt()
@@ -115,7 +115,7 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Then the customer :customer should appear in the registry
+     * @Then the customer :customer should appear in the store
      * @Then the customer :customer should still have this email
      */
     public function thisCustomerShouldAppearInTheRegistry(CustomerInterface $customer)

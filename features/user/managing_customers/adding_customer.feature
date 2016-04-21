@@ -1,8 +1,8 @@
 @managing_customers
 Feature: Adding a new customer
-    In order to connects orders with client
+    In order to track information about my customers
     As an Administrator
-    I want to add a customer to the registry
+    I want to add a customer to the store
 
     Background:
         Given I am logged in as an administrator
@@ -10,12 +10,12 @@ Feature: Adding a new customer
     @ui
     Scenario: Adding a new customer
         Given I want to create a new customer
-        When I specify its first name as "Luke"
-        And I specify its last name as "Skywalker"
-        And I specify its email as "l.skywalker@gmail.com"
-        And I add it
+        When I specify their first name as "Luke"
+        And I specify their last name as "Skywalker"
+        And I specify their email as "l.skywalker@gmail.com"
+        And I add them
         Then I should be notified that it has been successfully created
-        And the customer "l.skywalker@gmail.com" should appear in the registry
+        And the customer "l.skywalker@gmail.com" should appear in the store
         
     @ui
     Scenario: Adding a new customer with gender and birthday
