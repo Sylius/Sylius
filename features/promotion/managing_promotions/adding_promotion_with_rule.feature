@@ -17,7 +17,7 @@ Feature: Adding a new promotion with rule
         And I add the "Contains taxon" rule configured with 4 "T-Shirts"
         And I add it
         Then I should be notified that it has been successfully created
-        And the promotion "T-Shirts promotion" should appear in the registry
+        And the "T-Shirts promotion" promotion should appear in the registry
 
     @ui @javascript
     Scenario: Adding a new promotion with taxon rule
@@ -27,7 +27,7 @@ Feature: Adding a new promotion with rule
         And I add the "Taxon" rule configured with "T-Shirts" and "Mugs"
         And I add it
         Then I should be notified that it has been successfully created
-        And the promotion "Holiday sale" should appear in the registry
+        And the "Holiday sale" promotion should appear in the registry
 
     @ui @javascript
     Scenario: Adding a new promotion with total of items from taxon rule
@@ -37,4 +37,4 @@ Feature: Adding a new promotion with rule
         And I add the "Total of items from taxon" rule configured with 100 "Mugs"
         And I add it
         Then I should be notified that it has been successfully created
-        And the promotion "100 Mugs promotion" should appear in the registry
+        And the "100 Mugs promotion" promotion should appear in the registry
