@@ -38,8 +38,6 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
 
     /**
      * @param string $lastName
-     *
-     * @return bool
      */
     public function changeLastName($lastName);
 
@@ -50,8 +48,6 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
 
     /**
      * @param string $email
-     *
-     * @return bool
      */
     public function changeEmail($email);
 

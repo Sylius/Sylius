@@ -102,7 +102,7 @@ final class CustomerContext implements Context
      */
     public function thereIsDisabledCustomerAccountWithPassword($email, $password)
     {
-        $this->createCustomerAccount($email, $password, false);
+        $this->createCustomerWithUserAccount($email, $password, false);
     }
 
     /**
@@ -110,7 +110,7 @@ final class CustomerContext implements Context
      */
     public function theStoreHasEnabledCustomerAccountWithPassword($email, $password)
     {
-        $this->createCustomerAccount($email, $password, true);
+        $this->createCustomerWithUserAccount($email, $password, true);
     }
 
     /**
@@ -135,7 +135,7 @@ final class CustomerContext implements Context
      * @param string $password
      * @param bool $enabled
      */
-    private function createCustomerAccount($email, $password, $enabled = true)
+    private function createCustomerWithUserAccount($email, $password, $enabled = true)
     {
         $user = $this->userFactory->createNew();
         $customer = $this->customerFactory->createNew();
@@ -147,7 +147,6 @@ final class CustomerContext implements Context
         $user->setUsername($email);
         $user->setPlainPassword($password);
         $user->setEnabled($enabled);
-        $user->setCustomer($customer);
 
         $customer->setUser($user);
 

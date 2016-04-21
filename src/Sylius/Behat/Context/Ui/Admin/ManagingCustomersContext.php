@@ -118,7 +118,7 @@ final class ManagingCustomersContext implements Context
      * @Then the customer :customer should appear in the store
      * @Then the customer :customer should still have this email
      */
-    public function thisCustomerShouldAppearInTheRegistry(CustomerInterface $customer)
+    public function theCustomerShould(CustomerInterface $customer)
     {
         $this->indexPage->open();
 
@@ -170,7 +170,7 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Then the customer :customer with name :name should appear in the registry
+     * @Then /^(this customer) with name "([^"]*)" should appear in the store$/
      */
     public function theCustomerWithNameShouldAppearInTheRegistry(CustomerInterface $customer, $name)
     {
@@ -179,7 +179,7 @@ final class ManagingCustomersContext implements Context
         Assert::eq(
             $name,
             $this->updatePage->getFullName(),
-            sprintf('Customer with name %s should exist but it does not.', $name)
+            sprintf('Customer should have name %s, but they have %s.', $name, $this->updatePage->getFullName())
         );
     }
 
@@ -226,9 +226,9 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Then the customer with email :email should not appear in the registry
+     * @Then the customer with email :email should not appear in the store
      */
-    public function theCustomerShouldNotAppearInTheRegistry($email)
+    public function theCustomerShouldNotAppearInTheStore($email)
     {
         $this->indexPage->open();
 
@@ -321,7 +321,7 @@ final class ManagingCustomersContext implements Context
 
         Assert::true(
             $this->indexPage->isResourceOnPage(['email' => $email]),
-            sprintf('Customer with email %s cannot be founded.', $email)
+            sprintf('Customer with email %s cannot be found.', $email)
         );
     }
 
@@ -335,7 +335,7 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @When I enable it
+     * @When I enable their account
      */
     public function iEnableIt()
     {
@@ -343,7 +343,7 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @When I disable it
+     * @When I disable their account
      */
     public function iDisableIt()
     {
@@ -351,7 +351,7 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Then the customer :customer should be enabled
+     * @Then /^(this customer) should be enabled$/
      */
     public function thisCustomerShouldBeEnabled(CustomerInterface $customer)
     {
@@ -365,7 +365,7 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Then the customer :customer should be disabled
+     * @Then /^(this customer) should be disabled$/
      */
     public function thisCustomerShouldBeDisabled(CustomerInterface $customer)
     {
@@ -387,21 +387,22 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Then the customer account :customer with password should appear in the registry
-     */
-    public function theCustomerAccountWithPasswordShouldAppearInTheRegistry(CustomerInterface $customer)
-    {
-        Assert::notNull(
-            $customer->getUser()->getPassword(),
-            sprintf('Customer should have password, but it does not.')
-        );
-    }
-
-    /**
      * @When I choose create account option
      */
     public function iChooseCreateAccountOption()
     {
         $this->createPage->selectCreateAccount();
+    }
+
+    /**
+     * @Then the customer :customer should have an account created
+     * @Then /^(this customer) should have an account created$/
+     */
+    public function theyShouldHaveAnAccountCreated(CustomerInterface $customer)
+    {
+        Assert::notNull(
+            $customer->getUser()->getPassword(),
+            'Customer should have an account, but they do not.'
+        );
     }
 }

@@ -15,4 +15,4 @@ Feature: Editing a customer
         And I specify his last name as "Snow"
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And the customer "f.baggins@example.com" with name "Jon Snow" should appear in the registry
+        And this customer with name "Jon Snow" should appear in the store

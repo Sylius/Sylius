@@ -10,29 +10,29 @@ Feature: Customer validation
     @ui
     Scenario: Trying to add a new customer without a first name
         Given I want to create a new customer
-        When I specify its last name as "Skywalker"
-        And I specify its email as "l.skywalker@gmail.com"
+        When I specify their last name as "Skywalker"
+        And I specify their email as "l.skywalker@gmail.com"
         And I try to add it
         Then I should be notified that first name is required
-        And the customer with email "l.skywalker@gmail.com" should not appear in the registry
+        And the customer with email "l.skywalker@gmail.com" should not appear in the store
 
     @ui
     Scenario: Trying to add a new customer without a last name
         Given I want to create a new customer
-        When I specify its first name as "Luke"
-        And I specify its email as "l.skywalker@gmail.com"
+        When I specify their first name as "Luke"
+        And I specify their email as "l.skywalker@gmail.com"
         And I try to add it
         Then I should be notified that last name is required
-        And the customer with email "l.skywalker@gmail.com" should not appear in the registry
+        And the customer with email "l.skywalker@gmail.com" should not appear in the store
 
     @ui
     Scenario: Trying to add a new customer without an email
         Given I want to create a new customer
-        When I specify its first name as "Luke"
-        And I specify its last name as "Skywalker"
+        When I specify their first name as "Luke"
+        And I specify their last name as "Skywalker"
         And I try to add it
         Then I should be notified that email is required
-        And the customer with email "l.skywalker@gmail.com" should not appear in the registry
+        And the customer with email "l.skywalker@gmail.com" should not appear in the store
 
     @ui
     Scenario: Trying to remove first name from existing customer
@@ -64,9 +64,9 @@ Feature: Customer validation
     @ui
     Scenario: Trying to create customer with wrong email format
         Given I want to create a new customer
-        When I specify its first name as "Luke"
-        And I specify its last name as "Skywalker"
-        And I specify its email as "wrongemail"
+        When I specify their first name as "Luke"
+        And I specify their last name as "Skywalker"
+        And I specify their email as "wrongemail"
         And I try to add it
         Then I should be notified that email is not valid
-        And the customer with email "wrongemail" should not appear in the registry
+        And the customer with email "wrongemail" should not appear in the store

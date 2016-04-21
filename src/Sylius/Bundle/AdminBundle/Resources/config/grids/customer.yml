@@ -18,11 +18,10 @@ sylius_grid:
                     type: string
                     label: sylius.ui.email
                 created_at:
-                    type: twig
+                    type: datetime
                     label: sylius.ui.registration_date
-                    path: .
                     options:
-                        template: SyliusAdminBundle:Customer/Field:createdAt.html.twig
+                        format: d-m-Y H:i
                 confirmed:
                     type: twig
                     label: sylius.ui.confirmed

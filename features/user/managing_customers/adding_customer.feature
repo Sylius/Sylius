@@ -20,11 +20,11 @@ Feature: Adding a new customer
     @ui
     Scenario: Adding a new customer with gender and birthday
         Given I want to create a new customer
-        When I specify its first name as "Luke"
-        And I specify its last name as "Skywalker"
-        And I specify its email as "l.skywalker@gmail.com"
+        When I specify their first name as "Luke"
+        And I specify their last name as "Skywalker"
+        And I specify their email as "l.skywalker@gmail.com"
         And I specify its birthday as "1892-01-03"
         And I select "Male" as its gender
-        And I add it
+        And I add them
         Then I should be notified that it has been successfully created
-        And the customer "l.skywalker@gmail.com" should appear in the registry
+        And the customer "l.skywalker@gmail.com" should appear in the store
