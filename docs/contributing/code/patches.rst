@@ -13,10 +13,9 @@ Install the Software Stack
 Before working on Sylius, setup a Symfony2 friendly environment with the following
 software:
 
-* Git;
-* PHP version 5.3.3 or above;
-* PHPUnit 3.6.4 or above;
-* MySQL.
+* Git
+* PHP version 5.5.9 or above
+* MySQL
 
 Configure Git
 ~~~~~~~~~~~~~
