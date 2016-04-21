@@ -39,10 +39,12 @@
 
         <service id="sylius.registry.tax_calculation_strategy" class="%sylius.registry.tax_calculation_strategy.class%">
             <argument>%sylius.tax_calculation_strategy.interface%</argument>
+            <argument>Tax calculation strategy</argument>
         </service>
 
         <service id="sylius.registry.tax_calculator" class="%sylius.registry.tax_calculator.class%">
             <argument>%sylius.tax_calculator.interface%</argument>
+            <argument>Tax calculator</argument>
         </service>
 
         <service id="sylius.tax_calculator" class="%sylius.tax_calculator.class%">

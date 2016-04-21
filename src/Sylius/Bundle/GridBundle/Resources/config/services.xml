@@ -62,12 +62,15 @@
 
         <service id="sylius.registry.grid_driver" class="%sylius.registry.grid_driver.class%">
             <argument>Sylius\Component\Grid\Data\DriverInterface</argument>
+            <argument>grid driver</argument>
         </service>
         <service id="sylius.registry.grid_filter" class="%sylius.registry.grid_filter.class%">
             <argument>Sylius\Component\Grid\Filtering\FilterInterface</argument>
+            <argument>grid filter</argument>
         </service>
         <service id="sylius.registry.grid_field" class="%sylius.registry.grid_field.class%">
             <argument>Sylius\Component\Grid\FieldTypes\FieldTypeInterface</argument>
+            <argument>grid field</argument>
         </service>
     </services>
 

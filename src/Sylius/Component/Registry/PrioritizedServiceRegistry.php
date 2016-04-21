@@ -32,12 +32,21 @@ class PrioritizedServiceRegistry implements PrioritizedServiceRegistryInterface
     protected $interface;
 
     /**
-     * @param $interface
+     * Human readable context for these services, e.g. "tax calculation"
+     *
+     * @var string
      */
-    public function __construct($interface)
+    protected $context;
+
+    /**
+     * @param string $interface
+     * @param string $context
+     */
+    public function __construct($interface, $context = 'service')
     {
         $this->interface = $interface;
         $this->services = new PriorityQueue();
+        $this->context = $context;
     }
 
     /**
@@ -63,7 +72,7 @@ class PrioritizedServiceRegistry implements PrioritizedServiceRegistryInterface
     public function unregister($service)
     {
         if (!$this->has($service)) {
-            throw new NonExistingServiceException(gettype($service));
+            throw new NonExistingServiceException($this->context, gettype($service), array_keys($this->services->toArray()));
         }
 
         $this->services->remove($service);
@@ -87,7 +96,7 @@ class PrioritizedServiceRegistry implements PrioritizedServiceRegistryInterface
         Assert::isInstanceOf(
             $service,
             $this->interface,
-            'Service for this registry needs to implement "%2$s", "%s" given.'
+            $this->context . ' needs to implement "%2$s", "%s" given.'
         );
     }
 }

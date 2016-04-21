@@ -63,7 +63,8 @@
         </service>
 
         <service id="sylius.registry.shipping_rule_checker" class="%sylius.registry.shipping_rule_checker.class%" >
-                <argument>Sylius\Component\Shipping\Checker\RuleCheckerInterface</argument>
+            <argument>Sylius\Component\Shipping\Checker\RuleCheckerInterface</argument>
+            <argument>shipping rule checker</argument>
         </service>
 
         <service id="sylius.shipping_methods_resolver" class="%sylius.shipping_methods_resolver.class%">
@@ -84,6 +85,7 @@
 
         <service id="sylius.registry.shipping_calculator" class="%sylius.registry.shipping_calculator.class%" >
             <argument>Sylius\Component\Shipping\Calculator\CalculatorInterface</argument>
+            <argument>shipping calculator</argument>
         </service>
         <service id="sylius.shipping_calculator" class="%sylius.shipping_calculator.class%">
             <argument type="service" id="sylius.registry.shipping_calculator" />

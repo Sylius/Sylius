@@ -35,6 +35,7 @@
 
         <service id="sylius.registry.attribute_type" class="%sylius.registry.attribute_type.class%">
             <argument>%sylius.model.attribute.interface%</argument>
+            <argument>attribute type</argument>
         </service>
         <service id="sylius.form.type.attribute_type_choice" class="%sylius.form.type.attribute_type_choice.class%">
             <argument>%sylius.attribute.attribute_types%</argument>
