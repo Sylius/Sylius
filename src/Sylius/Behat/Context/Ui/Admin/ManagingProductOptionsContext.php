@@ -13,13 +13,10 @@ namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
-use Sylius\Behat\Page\Admin\Crud\CreatePageInterface;
+use Sylius\Behat\Page\Admin\ProductOption\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface;
 use Sylius\Behat\Service\CurrentPageResolverInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
-use Sylius\Behat\NotificationType;
-use Sylius\Component\Core\Model\ShippingMethodInterface;
-use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -28,11 +25,6 @@ use Webmozart\Assert\Assert;
 final class ManagingProductOptionsContext implements Context
 {
     const RESOURCE_NAME = 'product_option';
-
-    /**
-     * @var SharedStorageInterface
-     */
-    private $sharedStorage;
 
     /**
      * @var IndexPageInterface
@@ -60,7 +52,6 @@ final class ManagingProductOptionsContext implements Context
     private $notificationChecker;
 
     /**
-     * @param SharedStorageInterface $sharedStorage
      * @param IndexPageInterface $indexPage
      * @param CreatePageInterface $createPage
      * @param UpdatePageInterface $updatePage
@@ -68,14 +59,12 @@ final class ManagingProductOptionsContext implements Context
      * @param NotificationCheckerInterface $notificationChecker
      */
     public function __construct(
-        SharedStorageInterface $sharedStorage,
         IndexPageInterface $indexPage,
         CreatePageInterface $createPage,
         UpdatePageInterface $updatePage,
         CurrentPageResolverInterface $currentPageResolver,
         NotificationCheckerInterface $notificationChecker
     ) {
-        $this->sharedStorage = $sharedStorage;
         $this->indexPage = $indexPage;
         $this->createPage = $createPage;
         $this->updatePage = $updatePage;
@@ -92,9 +81,9 @@ final class ManagingProductOptionsContext implements Context
     }
 
     /**
-     * @When I want to browse product options
+     * @When I browse product options
      */
-    public function iWantToBrowseProductOptions()
+    public function iBrowseProductOptions()
     {
         $this->indexPage->open();
     }
@@ -115,5 +104,50 @@ final class ManagingProductOptionsContext implements Context
     public function iSaveMyChanges()
     {
         $this->updatePage->saveChanges();
+    }
+
+    /**
+     * @When I name it :name in :language
+     */
+    public function iNameItInLanguage($name, $language)
+    {
+        $this->createPage->nameItIn($name, $language);
+    }
+
+    /**
+     * @When I specify its code as :code
+     */
+    public function iSpecifyItsCodeAs($code)
+    {
+        $this->createPage->specifyCode($code);
+    }
+
+    /**
+     * @When I add the option value with code :code and value :value
+     */
+    public function iAddTheOptionValueWithCodeAndValue($code, $value)
+    {
+        $this->createPage->addOptionValue($code, $value);
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully created
+     */
+    public function iShouldBeNotifiedItHasBeenSuccessfullyCreated()
+    {
+        $this->notificationChecker->checkCreationNotification(self::RESOURCE_NAME);
+    }
+
+    /**
+     * @Then the product option :productOptionName should appear in the registry
+     */
+    public function theProductOptionShouldAppearInTheRegistry($productOptionName)
+    {
+        $this->iBrowseProductOptions();
+
+        Assert::true(
+            $this->indexPage->isResourceOnPage(['name' => $productOptionName]),
+            sprintf('The shipping method with name %s has not been found.', $productOptionName)
+        );
     }
 }
