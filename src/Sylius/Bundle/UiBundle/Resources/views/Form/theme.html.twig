@@ -94,7 +94,7 @@
     {% spaceless %}
         <div data-form-collection="item"
              data-form-collection-index="{{ index }}"
-             class="ui basic segment">
+             class="ui segment">
             <div class="collection-box{% if form|length == 1 %} unique-field{% endif %}">
                 {% if not form.children|length %}
                     {{ form_widget(form) }}
