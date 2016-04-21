@@ -271,6 +271,119 @@ class ThemeConfigurationTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * @test
+     */
+    public function its_screenshots_are_strings()
+    {
+        $this->assertConfigurationIsValid(
+            [
+                ['screenshots' => ['screenshot/krzysztof-krawczyk.jpg', 'screenshot/ryszard-rynkowski.jpg']],
+            ],
+            'screenshots'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function its_screenshots_are_optional()
+    {
+        $this->assertConfigurationIsValid(
+            [
+                [/* no screenshots defined */],
+            ],
+            'screenshots'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function its_screenshots_must_have_at_least_one_element()
+    {
+        $this->assertPartialConfigurationIsInvalid(
+            [
+                ['screenshots' => [/* no elements */]],
+            ],
+            'screenshots'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function its_screenshots_cannot_be_empty()
+    {
+        $this->assertPartialConfigurationIsInvalid(
+            [
+                ['screenshots' => ['']],
+            ],
+            'screenshots'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function its_screenshots_replaces_other_screenshots_defined_elsewhere()
+    {
+        $this->assertProcessedConfigurationEquals(
+            [
+                ['screenshots' => ['screenshot/zbigniew-holdys.jpg']],
+                ['screenshots' => ['screenshot/maryla-rodowicz.jpg']],
+            ],
+            ['screenshots' => [['path' => 'screenshot/maryla-rodowicz.jpg']]],
+            'screenshots'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function its_screenshots_are_an_array()
+    {
+        $this->assertConfigurationIsValid(
+            [
+                ['screenshots' => [['path' => 'screenshot/rick-astley.jpg']]],
+            ],
+            'screenshots'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function its_screenshots_must_have_a_path()
+    {
+        $this->assertPartialConfigurationIsInvalid(
+            [
+                ['screenshots' => [['title' => 'Candy shop']]],
+            ],
+            'screenshots'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function its_screenshots_have_optional_title_and_description()
+    {
+        $this->assertConfigurationIsValid(
+            [
+                ['screenshots' => [[
+                    'path' => 'screenshot/rick-astley.jpg',
+                    'title' => 'Rick Astley',
+                    'description' => 'He\'ll never gonna give you up or let you down',
+                ]]],
+            ],
+            'screenshots'
+        );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getConfiguration()
     {
         return new ThemeConfiguration();

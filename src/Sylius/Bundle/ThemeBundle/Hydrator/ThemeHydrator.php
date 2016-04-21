@@ -40,11 +40,13 @@ final class ThemeHydrator implements HydratorInterface
     {
         $data = $this->decoratedHydrator->extract($object);
 
-        if (isset($data['parents']) && $data['parents'] instanceof Collection) {
-            $data['parents'] = $data['parents']->toArray();
-        }
+        return array_map(function ($value) {
+            if ($value instanceof Collection) {
+                return $value->toArray();
+            }
 
-        return $data;
+            return $value;
+        }, $data);
     }
 
     /**
@@ -52,9 +54,13 @@ final class ThemeHydrator implements HydratorInterface
      */
     public function hydrate(array $data, $object)
     {
-        if (isset($data['parents']) && is_array($data['parents'])) {
-            $data['parents'] = new ArrayCollection($data['parents']);
-        }
+        $data = array_map(function ($value) {
+            if (is_array($value)) {
+                return new ArrayCollection($value);
+            }
+
+            return $value;
+        }, $data);
 
         return $this->decoratedHydrator->hydrate($data, $object);
     }

@@ -89,6 +89,21 @@ interface ThemeInterface extends ResourceInterface
     public function removeParent(ThemeInterface $theme);
 
     /**
+     * @return ThemeScreenshot[]
+     */
+    public function getScreenshots();
+
+    /**
+     * @param ThemeScreenshot $themeScreenshot
+     */
+    public function addScreenshot(ThemeScreenshot $themeScreenshot);
+
+    /**
+     * @param ThemeScreenshot $themeScreenshot
+     */
+    public function removeScreenshot(ThemeScreenshot $themeScreenshot);
+
+    /**
      * Should match /^[a-zA-Z0-9]{6,32}$/
      *
      * @return string

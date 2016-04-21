@@ -15,6 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ThemeBundle\Model\Theme;
 use Sylius\Bundle\ThemeBundle\Model\ThemeAuthor;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
+use Sylius\Bundle\ThemeBundle\Model\ThemeScreenshot;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
@@ -105,5 +106,18 @@ class ThemeSpec extends ObjectBehavior
 
         $this->removeParent($theme);
         $this->getParents()->shouldHaveCount(0);
+    }
+
+    function it_has_screenshots()
+    {
+        $themeScreenshot = new ThemeScreenshot('some path');
+
+        $this->getScreenshots()->shouldHaveCount(0);
+
+        $this->addScreenshot($themeScreenshot);
+        $this->getScreenshots()->shouldHaveCount(1);
+
+        $this->removeScreenshot($themeScreenshot);
+        $this->getScreenshots()->shouldHaveCount(0);
     }
 }

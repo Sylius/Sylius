@@ -35,6 +35,7 @@ final class ThemeConfiguration implements ConfigurationInterface
         $this->addOptionalDescriptionField($rootNodeDefinition);
         $this->addOptionalPathField($rootNodeDefinition);
         $this->addOptionalParentsList($rootNodeDefinition);
+        $this->addOptionalScreenshotsList($rootNodeDefinition);
         $this->addOptionalAuthorsList($rootNodeDefinition);
 
         return $treeBuilder;
@@ -84,6 +85,41 @@ final class ThemeConfiguration implements ConfigurationInterface
                 ->prototype('scalar')
                 ->cannotBeEmpty()
         ;
+    }
+
+    /**
+     * @param ArrayNodeDefinition $rootNodeDefinition
+     */
+    private function addOptionalScreenshotsList(ArrayNodeDefinition $rootNodeDefinition)
+    {
+        $screenshotsNodeDefinition = $rootNodeDefinition->children()->arrayNode('screenshots');
+        $screenshotsNodeDefinition
+            ->requiresAtLeastOneElement()
+            ->performNoDeepMerging()
+        ;
+
+        /** @var ArrayNodeDefinition $screenshotNodeDefinition */
+        $screenshotNodeDefinition = $screenshotsNodeDefinition->prototype('array');
+
+        $screenshotNodeDefinition
+            ->validate()
+                ->ifTrue(function ($screenshot) {
+                    return [] === $screenshot || ['path' => ''] === $screenshot;
+                })
+                ->thenInvalid('Screenshot cannot be empty!')
+        ;
+        $screenshotNodeDefinition
+            ->beforeNormalization()
+                ->ifString()
+                ->then(function ($value) {
+                    return ['path' => $value];
+                })
+        ;
+
+        $screenshotNodeBuilder = $screenshotNodeDefinition->children();
+        $screenshotNodeBuilder->scalarNode('path')->isRequired();
+        $screenshotNodeBuilder->scalarNode('title')->cannotBeEmpty();
+        $screenshotNodeBuilder->scalarNode('description')->cannotBeEmpty();
     }
 
     /**
