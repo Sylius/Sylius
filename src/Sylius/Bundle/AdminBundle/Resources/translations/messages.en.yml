@@ -4,7 +4,7 @@ sylius:
             main:
                 catalog:
                     header: Catalog
-                    manage_product_options: Manage options
+                    product_options: Product options
                 configuration:
                     channels: Channels
                     countries: Countries

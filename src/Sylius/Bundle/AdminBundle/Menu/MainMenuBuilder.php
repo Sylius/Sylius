@@ -163,7 +163,7 @@ final class MainMenuBuilder extends AbstractAdminMenuBuilder
 
         $catalogSubMenu
             ->addChild('product_options', ['route' => 'sylius_admin_product_option_index'])
-            ->setLabel('sylius.menu.admin.main.catalog.manage_product_options')
+            ->setLabel('sylius.menu.admin.main.catalog.product_options')
             ->setLabelAttribute('icon', 'options')
         ;
     }

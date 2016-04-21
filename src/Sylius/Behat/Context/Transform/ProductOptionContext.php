@@ -15,6 +15,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
@@ -41,11 +42,10 @@ final class ProductOptionContext implements Context
     public function getProductOptionByName($productOptionName)
     {
         $productOption = $this->productOptionRepository->findOneBy(['name' => $productOptionName]);
-        if (null === $productOption) {
-            throw new \InvalidArgumentException(
-                sprintf('Product option with name "%s" does not exist in the product option repository.', $productOptionName)
-            );
-        }
+        Assert::notNull(
+            $productOption,
+            sprintf('Product option with name "%s" does not exist in the product option repository.', $productOptionName)
+        );
 
         return $productOption;
     }
