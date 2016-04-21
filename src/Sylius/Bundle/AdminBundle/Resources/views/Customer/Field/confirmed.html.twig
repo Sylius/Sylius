@@ -1,0 +1,15 @@
+{% if data.user is not null %}
+    {% if data.user.enabled %}
+        <span class="ui teal label">
+            {{ 'sylius.ui.yes'|trans }}
+        </span>
+    {% else %}
+        <span class="ui red label">
+            {{ 'sylius.ui.no'|trans }}
+        </span>
+    {%  endif %}
+{% else %}
+    <span class="ui teal label">
+        {{ 'sylius.ui.no_account'|trans }}
+    </span>
+{% endif %}

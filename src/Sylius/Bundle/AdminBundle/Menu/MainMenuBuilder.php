@@ -42,6 +42,7 @@ final class MainMenuBuilder extends AbstractAdminMenuBuilder
     {
         $this->configureConfigurationSubMenu($menu);
         $this->configureMarketingSubMenu($menu);
+        $this->configureCustomersSubMenu($menu);
     }
 
     /**
@@ -99,6 +100,23 @@ final class MainMenuBuilder extends AbstractAdminMenuBuilder
             ->addChild('promotions', ['route' => 'sylius_admin_promotion_index'])
             ->setLabel('sylius.menu.admin.main.marketing.promotions')
             ->setLabelAttribute('icon', 'in cart')
+        ;
+    }
+
+    /**
+     * @param ItemInterface $menu
+     */
+    private function configureCustomersSubMenu(ItemInterface $menu)
+    {
+        $customerSubMenu = $menu
+            ->addChild('customers')
+            ->setLabel('sylius.menu.admin.main.customers.header')
+        ;
+
+        $customerSubMenu
+            ->addChild('customers', ['route' => 'sylius_admin_customer_index'])
+            ->setLabel('sylius.menu.admin.main.customers.customers')
+            ->setLabelAttribute('icon', 'users')
         ;
     }
 }

@@ -23,6 +23,7 @@ sylius:
         disabled: Disabled
         edit: Edit
         edit_country: Edit country
+        edit_customer: Edit customer
         edit_promotion: Edit promotion
         edit_tax_category: Edit tax category
         edit_tax_rate: Edit tax rate
@@ -35,6 +36,7 @@ sylius:
         info: Info
         last_updated: Last updated
         locales: Locales
+        manage_customer: Manage customers
         manage_shipping_destinations: Manage shipping destinations
         manage_languages_available_in_the_store: Manage languages available in the store
         manage_taxation_of_your_products: Manage taxation of your products
@@ -48,6 +50,7 @@ sylius:
         not_contains: Not contains
         not_empty: Not empty
         not_in: Not in
+        no_account: no account
         or: or
         powered_by: Powered by
         promotion_information: Promotion information

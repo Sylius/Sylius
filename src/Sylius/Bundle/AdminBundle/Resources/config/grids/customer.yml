@@ -1,0 +1,37 @@
+sylius_grid:
+    grids:
+        sylius_admin_customer:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: %sylius.model.customer.class%
+            sorting:
+                firstName: asc
+            fields:
+                first_name:
+                    type: string
+                    label: sylius.ui.first_name
+                last_name:
+                    type: string
+                    label: sylius.ui.last_name
+                email:
+                    type: string
+                    label: sylius.ui.email
+                created_at:
+                    type: datetime
+                    label: sylius.ui.registration_date
+                    options:
+                        format: d-m-Y H:i
+                confirmed:
+                    type: twig
+                    label: sylius.ui.confirmed
+                    path: .
+                    options:
+                        template: SyliusAdminBundle:Customer/Field:confirmed.html.twig
+            actions:
+                main:
+                    create:
+                        type: create
+                item:
+                    update:
+                        type: update

@@ -41,6 +41,7 @@ imports:
     - suites/ui/cart.yml
     - suites/ui/channel.yml
     - suites/ui/checkout.yml
+    - suites/ui/customer/managing_customers.yml
     - suites/ui/locale.yml
     - suites/ui/product.yml
     - suites/ui/promotion.yml

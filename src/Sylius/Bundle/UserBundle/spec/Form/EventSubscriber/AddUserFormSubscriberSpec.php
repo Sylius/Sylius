@@ -12,6 +12,8 @@
 namespace spec\Sylius\Bundle\UserBundle\Form\EventSubscriber;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\User\Model\CustomerInterface;
+use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormEvent;
@@ -44,10 +46,13 @@ class AddUserFormSubscriberSpec extends ObjectBehavior
 
     function it_removes_user_form_type_by_default(
         FormEvent $event,
-        Form $form
+        Form $form,
+        CustomerInterface $customer
     ) {
         $event->getData()->willReturn([], ['user' => ['plainPassword' => '']]);
         $event->getForm()->willReturn($form);
+        $form->getNormData()->willReturn($customer);
+        $customer->getUser()->willReturn(null);
 
         $event->setData([])->shouldBeCalledTimes(1);
         $form->remove('user')->shouldBeCalledTimes(2);
@@ -56,13 +61,64 @@ class AddUserFormSubscriberSpec extends ObjectBehavior
         $this->preSubmit($event);
     }
 
-    function it_does_not_remove_user_form_type_if_users_data_is_submitted(
+    function it_does_not_remove_user_form_type_if_users_data_is_submitted_and_user_data_is_created(
         FormEvent $event,
-        Form $form
+        Form $form,
+        CustomerInterface $customer,
+        UserInterface $user
     ) {
         $event->getData()->willReturn(['user' => ['plainPassword' => 'test']]);
+        $event->getForm()->willReturn($form);
+        $form->getNormData()->willReturn($customer);
+        $customer->getUser()->willReturn($user);
 
-        $event->getForm()->shouldNotBeCalled();
+        $form->remove('user')->shouldNotBeCalled();
+
+        $this->preSubmit($event);
+    }
+
+    function it_remove_user_form_type_if_users_data_is_not_submitted_and_user_is_not_created(
+        FormEvent $event,
+        Form $form,
+        CustomerInterface $customer
+    ) {
+        $event->getData()->willReturn(['user' => ['plainPassword' => '']]);
+        $event->getForm()->willReturn($form);
+        $form->getNormData()->willReturn($customer);
+        $customer->getUser()->willReturn(null);
+
+        $event->setData([])->shouldBeCalled();
+        $form->remove('user')->shouldBeCalled();
+
+        $this->preSubmit($event);
+    }
+
+    function it_does_not_remove_user_form_type_if_users_data_is_submitted_and_user_is_not_created(
+        FormEvent $event,
+        Form $form,
+        CustomerInterface $customer
+    ) {
+        $event->getData()->willReturn(['user' => ['plainPassword' => 'test']]);
+        $event->getForm()->willReturn($form);
+        $form->getNormData()->willReturn($customer);
+        $customer->getUser()->willReturn(null);
+
+        $form->remove('user')->shouldNotBeCalled();
+
+        $this->preSubmit($event);
+    }
+
+    function it_does_not_remove_user_form_type_if_users_data_is_not_submitted_and_user_is_created(
+        FormEvent $event,
+        Form $form,
+        CustomerInterface $customer,
+        UserInterface $user
+    ) {
+        $event->getData()->willReturn(['user' => ['plainPassword' => '']]);
+        $event->getForm()->willReturn($form);
+        $form->getNormData()->willReturn($customer);
+        $customer->getUser()->willReturn($user);
+
         $form->remove('user')->shouldNotBeCalled();
 
         $this->preSubmit($event);
