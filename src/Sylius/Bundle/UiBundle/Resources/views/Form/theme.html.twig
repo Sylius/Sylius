@@ -72,7 +72,7 @@
                 {% endfor %}
             {% endif %}
 
-            <div data-form-collection="list">
+            <div data-form-collection="list" >
                 {% for child in form %}
                     {{ _self.collectionItem(child, allow_delete, button_delete_label, loop.index0) }}
                 {% endfor %}

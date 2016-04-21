@@ -4,21 +4,33 @@ sylius_grid:
             driver:
                 name: doctrine/orm
                 options:
-                    class: %sylius.model.promotion.class%
+                    class: "%sylius.model.promotion.class%"
             fields:
-                code:
-                    type: string
+                codeExclusiveAndCouponBased:
+                    type: twig
                     label: sylius.ui.code
-                name:
-                    type: string
+                    path: .
+                    options:
+                        template: SyliusAdminBundle:Promotion/Field:codeExclusiveAndCouponBased.html.twig
+                nameAndDescription:
+                    type: twig
                     label: sylius.ui.name
-                usage_limit:
-                    type: string
-                    label: sylius.ui.usage_limit
-                used:
-                    type: string
+                    path: .
+                    options:
+                        template: SyliusAdminBundle:Grid/Field:nameAndDescription.html.twig
+                usedWithUsageLimit:
+                    type: twig
                     label: sylius.ui.used
+                    path: .
+                    options:
+                        template: SyliusAdminBundle:Promotion/Field:usedWithUsageLimit.html.twig
             actions:
                 main:
                     create:
                         type: create
+                item:
+                    update:
+                        type: update
+                    delete:
+                        type: delete
+

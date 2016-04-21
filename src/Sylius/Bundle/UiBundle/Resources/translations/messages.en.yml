@@ -9,6 +9,7 @@ sylius:
         administration_panel_login: Administration panel login
         an_error_occurred: An error occurred
         are_your_sure_you_want_to_perform_this_action: Are you sure you want to perform this action?
+        available_for_channels: Available for channels
         cancel: Cancel
         category_requirements: Category requirements
         charges_and_taxes: Charges and taxes
@@ -18,8 +19,9 @@ sylius:
         confirm_your_action: Confirm your action
         contains: Contains
         countries: Countries
-        currencies: Currencies
+        coupon_based: Coupon based
         create: Create
+        currencies: Currencies
         dashboard: Dashboard
         default_currency: Default currency
         default_locale: Default locale
@@ -39,6 +41,7 @@ sylius:
         enabled: Enabled
         ends_with: Ends with
         equal: Equal
+        exclusive: Exclusive
         filter: Filter
         in: In
         info: Info
@@ -66,6 +69,7 @@ sylius:
         not_in: Not in
         or: or
         powered_by: Powered by
+        promotion_configuration: Promotion configuration
         promotion_information: Promotion information
         save_changes: Save changes
         shipping_methods: Shipping methods
