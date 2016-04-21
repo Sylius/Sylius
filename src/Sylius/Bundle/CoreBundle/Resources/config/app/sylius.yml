@@ -198,6 +198,7 @@ sylius_payment:
                     choice: Sylius\Bundle\CoreBundle\Form\Type\Payment\PaymentMethodChoiceType
     gateways:
         offline: Offline
+        paypal_express_checkout: Paypal Express Checkout
 
 sylius_payum: ~
 
