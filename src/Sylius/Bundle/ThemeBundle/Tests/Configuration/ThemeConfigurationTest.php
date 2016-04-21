@@ -333,7 +333,50 @@ class ThemeConfigurationTest extends \PHPUnit_Framework_TestCase
                 ['screenshots' => ['screenshot/zbigniew-holdys.jpg']],
                 ['screenshots' => ['screenshot/maryla-rodowicz.jpg']],
             ],
-            ['screenshots' => ['screenshot/maryla-rodowicz.jpg']],
+            ['screenshots' => [['path' => 'screenshot/maryla-rodowicz.jpg']]],
+            'screenshots'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function its_screenshots_are_an_array()
+    {
+        $this->assertConfigurationIsValid(
+            [
+                ['screenshots' => [['path' => 'screenshot/rick-astley.jpg']]],
+            ],
+            'screenshots'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function its_screenshots_must_have_a_path()
+    {
+        $this->assertPartialConfigurationIsInvalid(
+            [
+                ['screenshots' => [['title' => 'Candy shop']]],
+            ],
+            'screenshots'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function its_screenshots_have_optional_title_and_description()
+    {
+        $this->assertConfigurationIsValid(
+            [
+                ['screenshots' => [[
+                    'path' => 'screenshot/rick-astley.jpg',
+                    'title' => 'Rick Astley',
+                    'description' => 'He\'ll never gonna give you up or let you down',
+                ]]],
+            ],
             'screenshots'
         );
     }

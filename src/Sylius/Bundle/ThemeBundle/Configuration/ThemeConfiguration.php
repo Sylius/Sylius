@@ -92,13 +92,34 @@ final class ThemeConfiguration implements ConfigurationInterface
      */
     private function addOptionalScreenshotsList(ArrayNodeDefinition $rootNodeDefinition)
     {
-        $parentsNodeDefinition = $rootNodeDefinition->children()->arrayNode('screenshots');
-        $parentsNodeDefinition
+        $screenshotsNodeDefinition = $rootNodeDefinition->children()->arrayNode('screenshots');
+        $screenshotsNodeDefinition
             ->requiresAtLeastOneElement()
             ->performNoDeepMerging()
-            ->prototype('scalar')
-            ->cannotBeEmpty()
         ;
+
+        /** @var ArrayNodeDefinition $screenshotNodeDefinition */
+        $screenshotNodeDefinition = $screenshotsNodeDefinition->prototype('array');
+
+        $screenshotNodeDefinition
+            ->validate()
+                ->ifTrue(function ($screenshot) {
+                    return [] === $screenshot || ['path' => ''] === $screenshot;
+                })
+                ->thenInvalid('Screenshot cannot be empty!')
+        ;
+        $screenshotNodeDefinition
+            ->beforeNormalization()
+                ->ifString()
+                ->then(function ($value) {
+                    return ['path' => $value];
+                })
+        ;
+
+        $screenshotNodeBuilder = $screenshotNodeDefinition->children();
+        $screenshotNodeBuilder->scalarNode('path')->isRequired();
+        $screenshotNodeBuilder->scalarNode('title')->cannotBeEmpty();
+        $screenshotNodeBuilder->scalarNode('description')->cannotBeEmpty();
     }
 
     /**
