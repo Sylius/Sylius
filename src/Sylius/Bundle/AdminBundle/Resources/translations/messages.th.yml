@@ -15,3 +15,6 @@ sylius:
                 marketing:
                     header: การตลาด
                     promotions: ส่งเสริมการขาย
+                customers:
+                    header: ลูกค้า
+                    customers: ลูกค้า

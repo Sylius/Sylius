@@ -15,3 +15,6 @@ sylius:
                 marketing:
                     header: Marketingu
                     promotions: Reklamat
+                customers:
+                    header: Blerësi
+                    customers: Blerësit

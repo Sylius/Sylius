@@ -13,3 +13,6 @@ sylius:
                     tax_rates: Mokesčių tarifai
                 marketing:
                     promotions: Akcijos
+                customers:
+                    header: Klienta
+                    customers: Klientai

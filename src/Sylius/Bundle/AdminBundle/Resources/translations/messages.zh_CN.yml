@@ -13,3 +13,5 @@ sylius:
                     tax_rates: 税率
                 marketing:
                     promotions: 促销活动
+                customers:
+                    header: 客户

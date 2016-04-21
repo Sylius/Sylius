@@ -34,3 +34,6 @@ sylius:
         user_reset_password:
             confirmation: การยืนยัน
             new: รหัสผ่านใหม่
+    gender:
+        male: ผู้ชาย
+        female: ผู้หญิง

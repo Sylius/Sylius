@@ -34,6 +34,7 @@ sylius:
         info: ข้อมูล
         last_updated: ปรับปรุงครั้งล่าสุด
         locales: ภาษาที่ใช้
+        manage_customer: จัดการลูกค้า
         manage_taxation_of_your_products: จัดการภาษีผลิตภัณฑ์ของคุณ
         new: รายการใหม่
         new_country: ประเทศใหม่

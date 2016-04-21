@@ -15,3 +15,6 @@ sylius:
                 marketing:
                     header: Marketing
                     promotions: Promoties
+                customers:
+                    header: Klant
+                    customers: Klanten

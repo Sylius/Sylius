@@ -9,10 +9,14 @@ sylius:
             remember_me: Recordarme
     ui:
         actions: Acciones
+        administration_panel_login: Panel de administración
         an_error_occurred: Se ha producido un error
         are_your_sure_you_want_to_perform_this_action: ¿Está seguro que quiere realizar esta acción?
         cancel: Cancelar
         category_requirements: Requisitos de la categoría
+        charges_and_taxes: Tasas e impuestos
+        clear_filters: Borrar filtros
+        confirm_your_action: Confirmar esta acción
         contains: Contiene
         countries: Países
         create: Crear
@@ -22,20 +26,34 @@ sylius:
         disabled: Deshabilitado
         edit: Editar
         edit_country: Editar país
+        edit_promotion: Editar promoción
+        edit_tax_category: Editar categoría de impuesto
+        edit_tax_rate: Editar tasa impositiva
         empty: Vaciar
         enabled: Activado
+        ends_with: Termina en
         equal: Igual
         filter: Filtrar
         info: Información
         last_updated: Última actialización
         locales: Idiomas
+        manage_customer: Gestionar clientes
+        manage_shipping_destinations: Gestionar destinos de envío
+        manage_languages_available_in_the_store: Administrar idiomas disponibles en la tienda
+        manage_taxation_of_your_products: Administrar impuestos de sus productos
+        manage_shipping_methods_for_your_store: Manejar métodos de envío para su tienda
         new: Nuevo
         new_country: Nuevo país
+        new_locale: Nueva traducción
         new_tax_category: Nueva categoría de impuesto
         "no": false
         no_results_to_display: No hay resultados para mostrar
+        not_contains: No contiene
+        not_empty: No está vacío
+        not_in: No en
         or: o
         powered_by: Funciona con
+        promotion_information: Información de la promoción
         save_changes: Guardar cambios
         shipping_methods: Métodos de envío
         show: Mostrar
