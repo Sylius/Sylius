@@ -64,4 +64,17 @@ interface CreatePageInterface extends BaseCreatePageInterface
      */
     public function fillActionOption($option, $value);
 
+    /**
+     * @param string $limit
+     */
+    public function fillUsageLimit($limit);
+
+    public function makeExclusive();
+
+    public function checkCouponBased();
+
+    /**
+     * @param string $name
+     */
+    public function checkChannel($name);
 }

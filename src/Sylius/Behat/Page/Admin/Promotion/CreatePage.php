@@ -79,6 +79,29 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function fillUsageLimit($limit)
+    {
+        $this->getDocument()->fillField('Usage limit', $limit);
+    }
+
+    public function makeExclusive()
+    {
+        $this->getDocument()->checkField('Exclusive');
+    }
+
+    public function checkCouponBased()
+    {
+        $this->getDocument()->checkField('Coupon based');
+    }
+
+    public function checkChannel($name)
+    {
+        $this->getDocument()->checkField($name);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return [

@@ -104,7 +104,7 @@ final class PromotionContext implements Context
     }
 
     /**
-     * @When /^I try to delete (promotion "([^"]+)")$/
+     * @When /^I try to delete a ("([^"]+)" promotion)$/
      */
     public function iTryToDeletePromotion(PromotionInterface $promotion)
     {
@@ -118,7 +118,7 @@ final class PromotionContext implements Context
     }
 
     /**
-     * @When /^I delete (promotion "([^"]+)")$/
+     * @When /^I delete a ("([^"]+)" promotion)$/
      */
     public function iDeletePromotion(PromotionInterface $promotion)
     {
@@ -146,6 +146,14 @@ final class PromotionContext implements Context
      * @Then I should be notified that it has been successfully deleted
      */
     public function iShouldBeNotifiedOfSuccess()
+    {
+        // Not applicable in the domain scope
+    }
+
+    /**
+     * @Given I am logged in as an administrator
+     */
+    public function iAmLoggedInAsAnAdministrator()
     {
         // Not applicable in the domain scope
     }
