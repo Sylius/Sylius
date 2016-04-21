@@ -64,6 +64,9 @@
         <parameter key="sylius.behat.page.admin.tax_rate.create.class">Sylius\Behat\Page\Admin\TaxRate\CreatePage</parameter>
         <parameter key="sylius.behat.page.admin.tax_rate.index.class">%sylius.behat.page.admin.crud.index.class%</parameter>
         <parameter key="sylius.behat.page.admin.tax_rate.update.class">Sylius\Behat\Page\Admin\TaxRate\UpdatePage</parameter>
+        <parameter key="sylius.behat.page.admin.zone.create.class">Sylius\Behat\Page\Admin\Zone\CreatePage</parameter>
+        <parameter key="sylius.behat.page.admin.zone.index.class">%sylius.behat.page.admin.crud.index.class%</parameter>
+        <parameter key="sylius.behat.page.admin.zone.update.class">Sylius\Behat\Page\Admin\Zone\UpdatePage</parameter>
 
         <parameter key="sylius.behat.symfony_page.class">Sylius\Behat\Page\SymfonyPage</parameter>
     </parameters>
@@ -161,6 +164,15 @@
         </service>
         <service id="sylius.behat.page.admin.promotion.index" class="%sylius.behat.page.admin.promotion.index.class%" parent="sylius.behat.page.admin.crud.index" scope="scenario" public="false">
             <argument type="string">promotion</argument>
+        </service>
+        <service id="sylius.behat.page.admin.zone.create" class="%sylius.behat.page.admin.zone.create.class%" parent="sylius.behat.page.admin.crud.create" scope="scenario" public="false">
+            <argument type="string">zone</argument>
+        </service>
+        <service id="sylius.behat.page.admin.zone.index" class="%sylius.behat.page.admin.zone.index.class%" parent="sylius.behat.page.admin.crud.index" scope="scenario" public="false">
+            <argument type="string">zone</argument>
+        </service>
+        <service id="sylius.behat.page.admin.zone.update" class="%sylius.behat.page.admin.zone.update.class%" parent="sylius.behat.page.admin.crud.update" scope="scenario" public="false">
+            <argument type="string">zone</argument>
         </service>
 
         <service id="sylius.behat.page.shop.home" class="%sylius.behat.page.shop.home.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />

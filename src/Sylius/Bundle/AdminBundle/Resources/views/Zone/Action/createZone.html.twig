@@ -1,0 +1,14 @@
+<div class="ui labeled icon top right floating dropdown button primary link">
+    <i class="plus icon"></i>
+    <span class="text">{{ 'sylius.ui.create'|trans }}</span>
+    <div class="menu">
+        <div class="header">
+            <i class="world icon"></i>
+            {{ 'sylius.ui.type'|trans }}
+        </div>
+        <div class="divider"></div>
+        <a class="item" href="{{ path(grid.requestConfiguration.getRouteName('create'), { 'type': 'country' }) }}">{{ 'sylius.form.zone.types.country'|trans }}</a>
+        <a class="item" href="{{ path(grid.requestConfiguration.getRouteName('create'), { 'type': 'province' }) }}">{{ 'sylius.form.zone.types.province'|trans }}</a>
+        <a class="item" href="{{ path(grid.requestConfiguration.getRouteName('create'), { 'type': 'zone' }) }}">{{ 'sylius.form.zone.types.zone'|trans }}</a>
+    </div>
+</div>

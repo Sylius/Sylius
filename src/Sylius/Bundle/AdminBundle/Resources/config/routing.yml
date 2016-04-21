@@ -37,3 +37,5 @@ sylius_admin_tax_category:
 sylius_admin_tax_rate:
     resource: "@SyliusAdminBundle/Resources/config/routing/tax_rate.yml"
 
+sylius_admin_zone:
+    resource: "@SyliusAdminBundle/Resources/config/routing/zone.yml"

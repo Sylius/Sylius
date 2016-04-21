@@ -11,7 +11,7 @@
 {% block content %}
 {{ headers.default(header|trans, configuration.vars.icon|default('plus'), configuration.vars.subheader|default(null)|trans) }}
 
-{{ form_start(form, {'action': path(configuration.getRouteName('create')), 'attr': {'class': 'ui form', 'novalidate': 'novalidate'}}) }}
+{{ form_start(form, {'action': path(configuration.getRouteName('create'), configuration.getFactoryArguments), 'attr': {'class': 'ui form', 'novalidate': 'novalidate'}}) }}
     <div class="ui segment">
         {% if configuration.vars.templates.form is defined %}
             {% include configuration.vars.templates.form %}

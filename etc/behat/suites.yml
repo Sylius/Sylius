@@ -38,6 +38,7 @@ imports:
     - suites/legacy/user.yml
 
     - suites/ui/addressing.yml
+    - suites/ui/addressing/managing_zones.yml
     - suites/ui/cart.yml
     - suites/ui/channel.yml
     - suites/ui/checkout.yml

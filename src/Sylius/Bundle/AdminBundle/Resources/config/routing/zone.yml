@@ -1,0 +1,35 @@
+sylius_admin_zone:
+    resource: |
+        alias: sylius.zone
+        section: admin
+        templates: SyliusAdminBundle:Crud
+        except: ['show', 'create']
+        redirect: update
+        grid: sylius_admin_zone
+        vars:
+            all:
+                subheader: sylius.ui.manage_zone
+                templates:
+                    form: SyliusAdminBundle:Zone:_form.html.twig
+            index:
+                icon: location arrow
+    type: sylius.resource
+
+sylius_admin_zone_create:
+    path: /zones/{type}/new
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.zone:createAction
+        _sylius:
+            section: admin
+            factory:
+                method: createTyped
+                arguments:
+                    type: $type
+            template: SyliusAdminBundle:Crud:create.html.twig
+            redirect: sylius_admin_zone_update
+            vars:
+                templates:
+                    form: SyliusAdminBundle:Zone:_form.html.twig
+    requirements:
+        type: country|province|zone
