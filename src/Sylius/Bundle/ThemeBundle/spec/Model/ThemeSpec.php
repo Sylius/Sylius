@@ -15,6 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ThemeBundle\Model\Theme;
 use Sylius\Bundle\ThemeBundle\Model\ThemeAuthor;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
+use Sylius\Bundle\ThemeBundle\Model\ThemeScreenshot;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
@@ -109,12 +110,14 @@ class ThemeSpec extends ObjectBehavior
 
     function it_has_screenshots()
     {
+        $themeScreenshot = new ThemeScreenshot('some path');
+
         $this->getScreenshots()->shouldHaveCount(0);
 
-        $this->addScreenshot('screenshot/amazing-feature.jpg');
+        $this->addScreenshot($themeScreenshot);
         $this->getScreenshots()->shouldHaveCount(1);
 
-        $this->removeScreenshot('screenshot/amazing-feature.jpg');
+        $this->removeScreenshot($themeScreenshot);
         $this->getScreenshots()->shouldHaveCount(0);
     }
 }

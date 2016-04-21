@@ -16,6 +16,7 @@ use Prophecy\Argument;
 use Sylius\Bundle\ThemeBundle\Configuration\Provider\ConfigurationProviderInterface;
 use Sylius\Bundle\ThemeBundle\Factory\ThemeAuthorFactoryInterface;
 use Sylius\Bundle\ThemeBundle\Factory\ThemeFactoryInterface;
+use Sylius\Bundle\ThemeBundle\Factory\ThemeScreenshotFactoryInterface;
 use Sylius\Bundle\ThemeBundle\Loader\CircularDependencyCheckerInterface;
 use Sylius\Bundle\ThemeBundle\Loader\CircularDependencyFoundException;
 use Sylius\Bundle\ThemeBundle\Loader\ThemeLoader;
@@ -23,6 +24,7 @@ use Sylius\Bundle\ThemeBundle\Loader\ThemeLoaderInterface;
 use Sylius\Bundle\ThemeBundle\Loader\ThemeLoadingFailedException;
 use Sylius\Bundle\ThemeBundle\Model\ThemeAuthor;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
+use Sylius\Bundle\ThemeBundle\Model\ThemeScreenshot;
 use Zend\Hydrator\HydrationInterface;
 
 /**
@@ -36,6 +38,7 @@ class ThemeLoaderSpec extends ObjectBehavior
         ConfigurationProviderInterface $configurationProvider,
         ThemeFactoryInterface $themeFactory,
         ThemeAuthorFactoryInterface $themeAuthorFactory,
+        ThemeScreenshotFactoryInterface $themeScreenshotFactory,
         HydrationInterface $themeHydrator,
         CircularDependencyCheckerInterface $circularDependencyChecker
     ) {
@@ -43,6 +46,7 @@ class ThemeLoaderSpec extends ObjectBehavior
             $configurationProvider,
             $themeFactory,
             $themeAuthorFactory,
+            $themeScreenshotFactory,
             $themeHydrator,
             $circularDependencyChecker
         );
@@ -66,12 +70,12 @@ class ThemeLoaderSpec extends ObjectBehavior
         ThemeInterface $theme
     ) {
         $configurationProvider->getConfigurations()->willReturn([
-            ['name' => 'first/theme', 'parents' => [], 'authors' => []],
+            ['name' => 'first/theme', 'parents' => [], 'authors' => [], 'screenshots' => []],
         ]);
 
         $themeFactory->createNamed('first/theme')->willReturn($theme);
 
-        $themeHydrator->hydrate(['name' => 'first/theme', 'parents' => [], 'authors' => []], $theme)->willReturn($theme);
+        $themeHydrator->hydrate(['name' => 'first/theme', 'parents' => [], 'authors' => [], 'screenshots' => []], $theme)->willReturn($theme);
 
         $circularDependencyChecker->check($theme)->shouldBeCalled();
 
@@ -93,44 +97,49 @@ class ThemeLoaderSpec extends ObjectBehavior
                 'name' => 'first/theme',
                 'parents' => [],
                 'authors' => [['name' => 'Richard Rynkowsky']],
+                'screenshots' => [],
             ]
         ]);
 
         $themeFactory->createNamed('first/theme')->willReturn($theme);
         $themeAuthorFactory->createFromArray(['name' => 'Richard Rynkowsky'])->willReturn($themeAuthor);
 
-        $themeHydrator->hydrate(['name' => 'first/theme', 'parents' => [], 'authors' => [$themeAuthor]], $theme)->willReturn($theme);
+        $themeHydrator->hydrate(['name' => 'first/theme', 'parents' => [], 'authors' => [$themeAuthor], 'screenshots' => []], $theme)->willReturn($theme);
 
         $circularDependencyChecker->check($theme)->shouldBeCalled();
 
         $this->load()->shouldReturn([$theme]);
     }
 
-    function it_loads_a_theme_with_screenshots(
+    function it_loads_a_theme_with_screenshot(
         ConfigurationProviderInterface $configurationProvider,
         ThemeFactoryInterface $themeFactory,
+        ThemeScreenshotFactoryInterface $themeScreenshotFactory,
         HydrationInterface $themeHydrator,
         CircularDependencyCheckerInterface $circularDependencyChecker,
         ThemeInterface $theme
     ) {
+        $themeScreenshot = new ThemeScreenshot('screenshot/omg.jpg');
+
         $configurationProvider->getConfigurations()->willReturn([
             [
                 'name' => 'first/theme',
                 'parents' => [],
                 'authors' => [],
                 'screenshots' => [
-                    'screenshot/itsamazing.jpg',
-                    'screenshot/omg.jpg',
+                    ['path' => 'screenshot/omg.jpg', 'title' => 'Title'],
                 ],
-            ]
+            ],
         ]);
 
         $themeFactory->createNamed('first/theme')->willReturn($theme);
+        $themeScreenshotFactory->createFromArray(['path' => 'screenshot/omg.jpg', 'title' => 'Title'])->willReturn($themeScreenshot);
+
         $themeHydrator->hydrate([
             'name' => 'first/theme',
             'parents' => [],
             'authors' => [],
-            'screenshots' => ['screenshot/itsamazing.jpg', 'screenshot/omg.jpg']
+            'screenshots' => [$themeScreenshot],
         ], $theme)->willReturn($theme);
 
         $circularDependencyChecker->check($theme)->shouldBeCalled();
@@ -147,15 +156,15 @@ class ThemeLoaderSpec extends ObjectBehavior
         ThemeInterface $secondTheme
     ) {
         $configurationProvider->getConfigurations()->willReturn([
-            ['name' => 'first/theme', 'parents' => ['second/theme'], 'authors' => []],
-            ['name' => 'second/theme', 'parents' => [], 'authors' => []],
+            ['name' => 'first/theme', 'parents' => ['second/theme'], 'authors' => [], 'screenshots' => []],
+            ['name' => 'second/theme', 'parents' => [], 'authors' => [], 'screenshots' => []],
         ]);
 
         $themeFactory->createNamed('first/theme')->willReturn($firstTheme);
         $themeFactory->createNamed('second/theme')->willReturn($secondTheme);
 
-        $themeHydrator->hydrate(['name' => 'first/theme', 'parents' => [$secondTheme], 'authors' => []], $firstTheme)->willReturn($firstTheme);
-        $themeHydrator->hydrate(['name' => 'second/theme', 'parents' => [], 'authors' => []], $secondTheme)->willReturn($secondTheme);
+        $themeHydrator->hydrate(['name' => 'first/theme', 'parents' => [$secondTheme], 'authors' => [], 'screenshots' => []], $firstTheme)->willReturn($firstTheme);
+        $themeHydrator->hydrate(['name' => 'second/theme', 'parents' => [], 'authors' => [], 'screenshots' => []], $secondTheme)->willReturn($secondTheme);
 
         $circularDependencyChecker->check($firstTheme)->shouldBeCalled();
         $circularDependencyChecker->check($secondTheme)->shouldBeCalled();
@@ -169,7 +178,7 @@ class ThemeLoaderSpec extends ObjectBehavior
         ThemeInterface $firstTheme
     ) {
         $configurationProvider->getConfigurations()->willReturn([
-            ['name' => 'first/theme', 'parents' => ['second/theme'], 'authors' => []],
+            ['name' => 'first/theme', 'parents' => ['second/theme'], 'authors' => [], 'screenshots' => []],
         ]);
 
         $themeFactory->createNamed('first/theme')->willReturn($firstTheme);
@@ -189,15 +198,15 @@ class ThemeLoaderSpec extends ObjectBehavior
         ThemeInterface $secondTheme
     ) {
         $configurationProvider->getConfigurations()->willReturn([
-            ['name' => 'first/theme', 'parents' => ['second/theme'], 'authors' => []],
-            ['name' => 'second/theme', 'parents' => ['first/theme'], 'authors' => []],
+            ['name' => 'first/theme', 'parents' => ['second/theme'], 'authors' => [], 'screenshots' => []],
+            ['name' => 'second/theme', 'parents' => ['first/theme'], 'authors' => [], 'screenshots' => []],
         ]);
 
         $themeFactory->createNamed('first/theme')->willReturn($firstTheme);
         $themeFactory->createNamed('second/theme')->willReturn($secondTheme);
 
-        $themeHydrator->hydrate(['name' => 'first/theme', 'parents' => [$secondTheme], 'authors' => []], $firstTheme)->willReturn($firstTheme);
-        $themeHydrator->hydrate(['name' => 'second/theme', 'parents' => [$firstTheme], 'authors' => []], $secondTheme)->willReturn($secondTheme);
+        $themeHydrator->hydrate(['name' => 'first/theme', 'parents' => [$secondTheme], 'authors' => [], 'screenshots' => []], $firstTheme)->willReturn($firstTheme);
+        $themeHydrator->hydrate(['name' => 'second/theme', 'parents' => [$firstTheme], 'authors' => [], 'screenshots' => []], $secondTheme)->willReturn($secondTheme);
 
         $circularDependencyChecker->check(Argument::cetera())->willThrow(CircularDependencyFoundException::class);
 

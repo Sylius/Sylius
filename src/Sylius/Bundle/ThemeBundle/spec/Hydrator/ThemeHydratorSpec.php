@@ -30,25 +30,25 @@ class ThemeHydratorSpec extends ObjectBehavior
         $this->shouldImplement(HydratorInterface::class);
     }
 
-    function it_just_proxies_extracting_if_there_is_no_parents_key_in_extracted_data(HydratorInterface $decoratedHydrator)
+    function it_just_proxies_extracting_if_there_are_no_collections_key_in_extracted_data(HydratorInterface $decoratedHydrator)
     {
         $decoratedHydrator->extract('object')->willReturn(['data' => 'data']);
 
         $this->extract('object')->shouldReturn(['data' => 'data']);
     }
 
-    function it_proxies_extracting_and_converts_parents_to_array_if_needed(
+    function it_proxies_extracting_and_converts_collections_to_arrays(
         HydratorInterface $decoratedHydrator,
         Collection $collection
     ) {
-        $decoratedHydrator->extract('object')->willReturn(['data' => 'data', 'parents' => $collection]);
+        $decoratedHydrator->extract('object')->willReturn(['data' => 'data', 'collection' => $collection]);
 
-        $collection->toArray()->willReturn(['parent object']);
+        $collection->toArray()->willReturn(['element 1', 'element 2']);
 
-        $this->extract('object')->shouldReturn(['data' => 'data', 'parents' => ['parent object']]);
+        $this->extract('object')->shouldReturn(['data' => 'data', 'collection' => ['element 1', 'element 2']]);
     }
 
-    function it_just_proxies_hydrating_if_there_is_no_parents_key_in_hydrated_data(HydratorInterface $decoratedHydrator)
+    function it_just_proxies_hydrating_if_there_are_no_arrays_in_hydrated_data(HydratorInterface $decoratedHydrator)
     {
         $decoratedHydrator->hydrate(['data' => 'data'], 'object')->willReturn('hydrated object');
 
@@ -62,12 +62,12 @@ class ThemeHydratorSpec extends ObjectBehavior
                 return false;
             }
 
-            return isset($data['parents'])
-                && $data['parents'] instanceof Collection
-                && $data['parents']->toArray() === ['parent object']
+            return isset($data['collection'])
+                && $data['collection'] instanceof Collection
+                && $data['collection']->toArray() === ['element 1', 'element 2']
             ;
         }), 'object')->willReturn('hydrated object');
 
-        $this->hydrate(['data' => 'data', 'parents' => ['parent object']], 'object')->shouldReturn('hydrated object');
+        $this->hydrate(['data' => 'data', 'collection' => ['element 1', 'element 2']], 'object')->shouldReturn('hydrated object');
     }
 }

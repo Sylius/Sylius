@@ -14,8 +14,10 @@ namespace Sylius\Bundle\ThemeBundle\Loader;
 use Sylius\Bundle\ThemeBundle\Configuration\Provider\ConfigurationProviderInterface;
 use Sylius\Bundle\ThemeBundle\Factory\ThemeAuthorFactoryInterface;
 use Sylius\Bundle\ThemeBundle\Factory\ThemeFactoryInterface;
+use Sylius\Bundle\ThemeBundle\Factory\ThemeScreenshotFactoryInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeAuthor;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
+use Sylius\Bundle\ThemeBundle\Model\ThemeScreenshot;
 use Zend\Hydrator\HydrationInterface;
 
 /**
@@ -39,6 +41,11 @@ final class ThemeLoader implements ThemeLoaderInterface
     private $themeAuthorFactory;
 
     /**
+     * @var ThemeScreenshotFactoryInterface
+     */
+    private $themeScreenshotFactory;
+
+    /**
      * @var HydrationInterface
      */
     private $themeHydrator;
@@ -52,6 +59,7 @@ final class ThemeLoader implements ThemeLoaderInterface
      * @param ConfigurationProviderInterface $configurationProvider
      * @param ThemeFactoryInterface $themeFactory
      * @param ThemeAuthorFactoryInterface $themeAuthorFactory
+     * @param ThemeScreenshotFactoryInterface $themeScreenshotFactory
      * @param HydrationInterface $themeHydrator
      * @param CircularDependencyCheckerInterface $circularDependencyChecker
      */
@@ -59,12 +67,14 @@ final class ThemeLoader implements ThemeLoaderInterface
         ConfigurationProviderInterface $configurationProvider,
         ThemeFactoryInterface $themeFactory,
         ThemeAuthorFactoryInterface $themeAuthorFactory,
+        ThemeScreenshotFactoryInterface $themeScreenshotFactory,
         HydrationInterface $themeHydrator,
         CircularDependencyCheckerInterface $circularDependencyChecker
     ) {
         $this->configurationProvider = $configurationProvider;
         $this->themeFactory = $themeFactory;
         $this->themeAuthorFactory = $themeAuthorFactory;
+        $this->themeScreenshotFactory = $themeScreenshotFactory;
         $this->themeHydrator = $themeHydrator;
         $this->circularDependencyChecker = $circularDependencyChecker;
     }
@@ -113,6 +123,7 @@ final class ThemeLoader implements ThemeLoaderInterface
 
             $configuration['parents'] = $this->convertParentsNamesToParentsObjects($themeName, $configuration['parents'], $themes);
             $configuration['authors'] = $this->convertAuthorsArraysToAuthorsObjects($configuration['authors']);
+            $configuration['screenshots'] = $this->convertScreenshotsArraysToScreenshotsObjects($configuration['screenshots']);
 
             $themes[$themeName] = $this->themeHydrator->hydrate($configuration, $themes[$themeName]);
         }
@@ -166,5 +177,17 @@ final class ThemeLoader implements ThemeLoaderInterface
         return array_map(function (array $authorArray) {
             return $this->themeAuthorFactory->createFromArray($authorArray);
         }, $authorsArrays);
+    }
+
+    /**
+     * @param array $screenshotsArrays
+     *
+     * @return ThemeScreenshot[]
+     */
+    private function convertScreenshotsArraysToScreenshotsObjects(array $screenshotsArrays)
+    {
+        return array_map(function (array $screenshotArray) {
+            return $this->themeScreenshotFactory->createFromArray($screenshotArray);
+        }, $screenshotsArrays);
     }
 }

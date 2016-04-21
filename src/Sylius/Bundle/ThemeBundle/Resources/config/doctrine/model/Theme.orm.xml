@@ -28,7 +28,7 @@
 
         <field name="description" type="string" nullable="true" />
         <field name="authors" type="object" nullable="true" />
-        <field name="screenshots" type="array" nullable="true" />
+        <field name="screenshots" type="object" nullable="true" />
 
         <many-to-many field="parents" target-entity="Sylius\Bundle\ThemeBundle\Model\ThemeInterface">
             <cascade>

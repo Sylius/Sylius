@@ -60,7 +60,7 @@ class Theme implements ThemeInterface
     protected $parents;
 
     /**
-     * @var Collection|string[]
+     * @var Collection|ThemeScreenshot[]
      */
     protected $screenshots;
 
@@ -219,16 +219,16 @@ class Theme implements ThemeInterface
     /**
      * {@inheritdoc}
      */
-    public function addScreenshot($path)
+    public function addScreenshot(ThemeScreenshot $themeScreenshot)
     {
-        $this->screenshots->add($path);
+        $this->screenshots->add($themeScreenshot);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function removeScreenshot($path)
+    public function removeScreenshot(ThemeScreenshot $themeScreenshot)
     {
-        $this->screenshots->removeElement($path);
+        $this->screenshots->removeElement($themeScreenshot);
     }
 }
