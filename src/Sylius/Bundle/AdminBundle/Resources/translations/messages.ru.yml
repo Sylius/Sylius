@@ -15,3 +15,6 @@ sylius:
                 marketing:
                     header: Маркетинг
                     promotions: Рекламные акции
+                customers:
+                    header: Клиент
+                    customers: Клиенты

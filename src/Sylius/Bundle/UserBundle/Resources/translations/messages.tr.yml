@@ -32,3 +32,6 @@ sylius:
         user_reset_password:
             confirmation: Doğrulama
             new: Yeni parola
+    gender:
+        male: Bay
+        female: Bayan

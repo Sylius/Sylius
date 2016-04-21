@@ -15,3 +15,6 @@ sylius:
                 marketing:
                     header: Marketing
                     promotions: Promóciók
+                customers:
+                    header: Ügyfél
+                    customers: Ügyfelek

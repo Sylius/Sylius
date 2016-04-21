@@ -12,3 +12,6 @@ sylius:
                 marketing:
                     header: Tiếp thị
                     promotions: Chương trình khuyến mãi
+                customers:
+                    header: Khách hàng
+                    customers: Khách hàng

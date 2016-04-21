@@ -133,10 +133,12 @@ sylius:
             name: Nombre
         promotion_rule:
             contains_taxon:
+                taxon: Taxón
                 count: Contador
             taxon:
                 taxons: Taxonomías
             total_of_items_from_taxon:
+                taxon: Taxón
                 amount: Cantidad
     email:
         order_confirmation:
@@ -147,3 +149,5 @@ sylius:
             name: Confirmación del envío
         user_confirmation:
             name: Confirmación de usuario
+        password_reset:
+            name: Restablecer contraseña

@@ -33,6 +33,7 @@ sylius:
         in: In
         last_updated: Laatst bijgewerkt
         locales: "Talen/Regio's"
+        manage_customer: Klanten beheren
         manage_shipping_destinations: Beheer van bestemmingen voor verzending
         manage_languages_available_in_the_store: Beheren van beschikbare talen voor de winkel
         new: Nieuw

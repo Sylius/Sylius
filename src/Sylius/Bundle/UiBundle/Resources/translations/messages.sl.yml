@@ -20,6 +20,7 @@ sylius:
         enabled: Omogočeno
         filter: Filter
         locales: Področne nastavitve
+        manage_customer: Upravljanje strank
         new: Novo
         new_country: Nova država
         new_tax_category: Nova davčna kategorija

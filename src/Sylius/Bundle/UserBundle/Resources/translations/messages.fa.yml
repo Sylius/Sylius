@@ -34,3 +34,6 @@ sylius:
         user_reset_password:
             confirmation: تایید
             new: کلمه عبور جدید
+    gender:
+        male: آقا
+        female: خانم

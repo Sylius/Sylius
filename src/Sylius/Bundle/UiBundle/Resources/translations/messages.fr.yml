@@ -38,6 +38,7 @@ sylius:
         info: Info
         last_updated: Dernière mise à jour
         locales: Locales
+        manage_customer: Gérer des clients
         manage_shipping_destinations: Gérer les destinations de livraison
         manage_languages_available_in_the_store: Gérer les langues disponibles dans le magasin
         manage_taxation_of_your_products: Gérer la fiscalité de vos produits

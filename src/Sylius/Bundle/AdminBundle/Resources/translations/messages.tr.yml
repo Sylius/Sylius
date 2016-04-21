@@ -14,3 +14,6 @@ sylius:
                 marketing:
                     header: Pazarlama
                     promotions: Promosyonlar
+                customers:
+                    header: Müşteri
+                    customers: Müşteriler

@@ -30,3 +30,6 @@ sylius:
         user_reset_password:
             confirmation: Potrditev
             new: Novo geslo
+    gender:
+        male: Moški
+        female: Ženska

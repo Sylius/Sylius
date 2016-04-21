@@ -19,6 +19,7 @@ sylius:
         enabled: Активен
         filter: Фильтр
         locales: Языки
+        manage_customer: Управление клиентами
         new: Новый
         new_country: Добавить страну
         new_tax_category: Создать налоговую категорию

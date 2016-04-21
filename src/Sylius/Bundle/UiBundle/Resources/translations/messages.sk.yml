@@ -38,6 +38,7 @@ sylius:
         info: Info
         last_updated: Posledná aktualizácia
         locales: Jazyky
+        manage_customer: Správa zákazníkov
         manage_shipping_destinations: Spravovať prepravné destinácie
         manage_languages_available_in_the_store: Spravovať dostupné jazyky v obchode
         manage_taxation_of_your_products: Spravovať zdaňovanie vašich produktov

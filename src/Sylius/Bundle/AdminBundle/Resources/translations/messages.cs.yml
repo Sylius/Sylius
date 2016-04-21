@@ -14,3 +14,6 @@ sylius:
                 marketing:
                     header: Marketing
                     promotions: Akce
+                customers:
+                    header: Zákazník
+                    customers: Zákazníci

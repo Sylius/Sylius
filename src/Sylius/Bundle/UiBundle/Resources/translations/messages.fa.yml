@@ -20,6 +20,7 @@ sylius:
         enabled: فعال
         filter: فیلتر
         locales: زبان ها
+        manage_customer: مدیریت مشتریان
         new: پرداخت ثبت شده
         new_country: کشور جدید
         new_tax_category: نوع مالیاتی جدید
