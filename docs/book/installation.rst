@@ -74,9 +74,8 @@ browser.
 
 .. tip::
 
-    If you use PHP 5.4 or higher, you can also use the build-in webserver for
-    Symfony. Run the ``php app/console server:run`` command and then access
-    ``http://localhost:8000``.
+    You can also use the Symfony built-in webserver by running the ``php app/console server:run --env dev``
+    command and then accessing ``http://localhost:8000``.
 
 .. _Composer: http://packagist.org
 .. _`Composer installed globally`: http://getcomposer.org/doc/00-intro.md#globally
