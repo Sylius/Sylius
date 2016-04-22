@@ -1,0 +1,31 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+default:
+    suites:
+        ui_applying_taxes:
+            contexts_as_services:
+                - sylius.behat.context.hook.doctrine_orm
+
+                - sylius.behat.context.transform.zone
+
+                - sylius.behat.context.transform.lexical
+                - sylius.behat.context.transform.product
+                - sylius.behat.context.transform.product_variant
+                - sylius.behat.context.transform.shared_storage
+                - sylius.behat.context.transform.tax_category
+
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.currency
+                - sylius.behat.context.setup.geographical
+                - sylius.behat.context.setup.product
+                - sylius.behat.context.setup.taxation
+                - sylius.behat.context.setup.user
+                - sylius.behat.context.setup.zone
+                - sylius.behat.context.setup.security
+
+                - sylius.behat.context.ui.cart
+                - sylius.behat.context.ui.checkout
+                - sylius.behat.context.ui.user
+            filters:
+                tags: "@applying_taxes && @ui"

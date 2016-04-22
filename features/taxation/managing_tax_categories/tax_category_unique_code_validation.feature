@@ -1,4 +1,4 @@
-@taxation
+@managing_tax_categories
 Feature: Tax category unique code validation
     In order to uniquely identify tax categories
     As an Administrator

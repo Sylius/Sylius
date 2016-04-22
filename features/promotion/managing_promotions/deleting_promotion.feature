@@ -1,4 +1,4 @@
-@promotion
+@managing_promotions
 Feature: Deleting a promotion
     In order to remove test, obsolete or incorrect promotions
     As an Administrator

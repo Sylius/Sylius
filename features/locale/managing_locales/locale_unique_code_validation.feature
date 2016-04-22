@@ -1,4 +1,4 @@
-@locale
+@managing_locales
 Feature: Locale unique code validation
     In order to avoid making mistakes when managing locales
     As an Administrator

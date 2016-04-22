@@ -14,6 +14,7 @@ namespace Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Currency\Converter\CurrencyNameConverterInterface;
+use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -83,6 +84,16 @@ final class CurrencyContext implements Context
     }
 
     /**
+     * @Given the store has currency :firstCurrencyName, :secondCurrencyName and :thirdCurrencyName
+     */
+    public function theStoreHasCurrencyAnd($firstCurrencyName, $secondCurrencyName, $thirdCurrencyName)
+    {
+        $this->createCurrency($firstCurrencyName);
+        $this->createCurrency($secondCurrencyName);
+        $this->createCurrency($thirdCurrencyName);
+    }
+
+    /**
      * @Given the store has disabled currency :currencyName
      */
     public function theStoreHasDisabledCurrency($currencyName)
@@ -105,11 +116,12 @@ final class CurrencyContext implements Context
      */
     private function createCurrency($currencyName, $enabled = true, $exchangeRate = 1.0)
     {
+        /** @var CurrencyInterface $currency */
         $currency = $this->currencyFactory->createNew();
         $currency->setCode($this->currencyNameConverter->convertToCode($currencyName));
         $currency->setExchangeRate($exchangeRate);
-        if (!$enabled) {
-            $currency->disable();
+        if (is_bool($enabled)) {
+            $currency->setEnabled($enabled);
         }
 
         $this->sharedStorage->set('currency', $currency);

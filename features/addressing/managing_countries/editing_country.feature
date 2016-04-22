@@ -1,4 +1,4 @@
-@addressing
+@managing_countries
 Feature: Editing country
     In order to enable or disable countries
     As an Administrator

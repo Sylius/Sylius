@@ -1,4 +1,4 @@
-@locale
+@managing_locales
 Feature: Editing a locale
     In order to enable or disable locales
     As an Administrator

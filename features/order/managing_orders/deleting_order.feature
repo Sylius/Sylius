@@ -1,4 +1,4 @@
-@order
+@managing_orders
 Feature: Deleting an order
     In order to to remove test, obsolete or incorrect orders
     As an Administrator

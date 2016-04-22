@@ -4,9 +4,9 @@
 imports:
     - suites/cli/installer.yml
 
-    - suites/domain/order.yml
-    - suites/domain/product.yml
-    - suites/domain/promotion.yml
+    - suites/domain/managing_orders.yml
+    - suites/domain/managing_products.yml
+    - suites/domain/managing_promotions.yml
 
     - suites/legacy/account.yml
     - suites/legacy/addressing.yml
@@ -37,21 +37,24 @@ imports:
     - suites/legacy/taxonomy.yml
     - suites/legacy/user.yml
 
-    - suites/ui/addressing.yml
+    - suites/ui/addressing/managing_countries.yml
     - suites/ui/addressing/managing_zones.yml
-    - suites/ui/cart.yml
-    - suites/ui/channel.yml
     - suites/ui/channel/managing_channels.yml
-    - suites/ui/checkout.yml
+    - suites/ui/channel/products_accessibility_in_multiple_channels.yml
+    - suites/ui/channel/theming.yml
+    - suites/ui/checkout/paying_for_order.yml
     - suites/ui/currency/managing_currencies.yml
-    - suites/ui/customer/managing_customers.yml
-    - suites/ui/locale.yml
+    - suites/ui/locale/managing_locales.yml
     - suites/ui/payment/managing_payment_methods.yml
-    - suites/ui/product.yml
-    - suites/ui/promotion.yml
+    - suites/ui/product/managing_products.yml
+    - suites/ui/promotion/applying_promotion_rules.yml
     - suites/ui/promotion/managing_promotions.yml
+    - suites/ui/promotion/receiving_discount.yml
+    - suites/ui/shipping/applying_shipping_fee.yml
     - suites/ui/shipping/managing_shipping_methods.yml
-    - suites/ui/taxation.yml
+    - suites/ui/taxation/applying_taxes.yml
+    - suites/ui/taxation/managing_tax_categories.yml
     - suites/ui/taxation/managing_tax_rates.yml
-    - suites/ui/theme.yml
-    - suites/ui/user.yml
+    - suites/ui/user/managing_customers.yml
+    - suites/ui/user/managing_users.yml
+    - suites/ui/user/registering.yml

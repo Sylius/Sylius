@@ -1,4 +1,4 @@
-@taxation
+@managing_tax_categories
 Feature: Tax category validation
     In order to avoid making mistakes when managing a tax category
     As an Administrator

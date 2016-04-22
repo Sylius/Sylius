@@ -1,4 +1,4 @@
-@product
+@managing_products
 Feature: Prevent deletion of purchased product
     In order to maintain proper order history
     As an Administrator

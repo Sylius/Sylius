@@ -1,0 +1,28 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+default:
+    suites:
+        domain_managing_orders:
+            contexts_as_services:
+                - sylius.behat.context.hook.doctrine_orm
+
+                - sylius.behat.context.transform.product
+                - sylius.behat.context.transform.shared_storage
+                - sylius.behat.context.transform.addressing
+                - sylius.behat.context.transform.customer
+                - sylius.behat.context.transform.payment
+                - sylius.behat.context.transform.shipping_method
+
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.product
+                - sylius.behat.context.setup.payment
+                - sylius.behat.context.setup.shipping
+                - sylius.behat.context.setup.order
+
+                - sylius.behat.context.domain.order
+                - sylius.behat.context.domain.payment
+                - sylius.behat.context.domain.shipment
+
+            filters:
+                tags: "@managing_orders && @domain"

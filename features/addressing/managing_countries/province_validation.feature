@@ -1,4 +1,4 @@
-@addressing
+@managing_countries
 Feature: Province validation
     In order to avoid making mistakes when managing a province
     As an Administrator

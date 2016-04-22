@@ -5,9 +5,7 @@ Feature: Browsing currencies
     I want to browse currencies
 
     Background:
-        Given the store has currency "Euro"
-        And the store has currency "British Pound Sterling"
-        And the store has currency "US Dollar"
+        Given the store has currency "Euro", "British Pound Sterling" and "US Dollar"
         And I am logged in as an administrator
 
     @ui

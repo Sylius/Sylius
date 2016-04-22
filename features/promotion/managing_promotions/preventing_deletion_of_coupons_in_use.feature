@@ -1,4 +1,4 @@
-@promotion
+@managing_promotions
 Feature: Not being able to delete a coupon which is in use
     In order to maintain proper payment history
     As an Administrator
