@@ -9,7 +9,9 @@ sylius:
                     countries: Lande
                     header: Konfiguration
                     locales: Landekoder
+                    payment_methods: Betalingsmetoder
                     shipping_methods: Fragtmetoder
                     tax_rates: Momssatser
+                    zones: Zoner
                 marketing:
                     promotions: Kampagner

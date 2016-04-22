@@ -6,11 +6,15 @@ sylius:
         admin:
             main:
                 configuration:
+                    channels: Kanallar
                     countries: Ülkeler
+                    currencies: Para birimi
                     header: Ayarlar
                     locales: Diller
+                    payment_methods: Ödeme Yöntemleri
                     shipping_methods: Gönderim metodları
                     tax_rates: Vergi oranları
+                    zones: Bölgeler
                 marketing:
                     header: Pazarlama
                     promotions: Promosyonlar

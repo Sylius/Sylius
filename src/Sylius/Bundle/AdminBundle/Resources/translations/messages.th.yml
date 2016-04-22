@@ -6,12 +6,16 @@ sylius:
         admin:
             main:
                 configuration:
+                    channels: ช่องทางการจัดจำหน่าย
                     countries: ประเทศ
+                    currencies: สกุลเงิน
                     header: การกำหนดค่า (Configuration)
                     locales: ภาษาที่ใช้
+                    payment_methods: วิธีการชำระเงิน
                     shipping_methods: วิธีการจัดส่ง
                     tax_categories: ประเภทภาษี
                     tax_rates: อัตราภาษี
+                    zones: โซน
                 marketing:
                     header: การตลาด
                     promotions: ส่งเสริมการขาย

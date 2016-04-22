@@ -6,11 +6,15 @@ sylius:
         admin:
             main:
                 configuration:
+                    channels: Kanali
                     countries: Države
+                    currencies: Valute
                     header: Konfiguracija
                     locales: Področne nastavitve
+                    payment_methods: Načini plačila
                     shipping_methods: Načini dostave
                     tax_rates: Davčne stopnje
+                    zones: Cone
                 marketing:
                     header: Oglaševanje
                     promotions: Promocije

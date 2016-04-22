@@ -7,3 +7,4 @@ sylius:
             exchange_rate: Wechselkurs
             enabled: Aktiviert
             base: Basis-Währung
+            code: Name

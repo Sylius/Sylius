@@ -14,11 +14,15 @@ sylius:
         are_your_sure_you_want_to_perform_this_action: Möchten Sie diese Aktion sicher durchführen?
         cancel: Abbrechen
         clear_filters: Filter löschen
+        color: Farbe
         confirm_your_action: Aktion bestätigen
         contains: Enthält
         countries: Länder
+        currencies: Währungen
         create: Erstellen
         dashboard: Dashboard
+        default_currency: Standardwährung
+        default_locale: Standard Lokalisierung
         delete: Löschen
         description: Beschreibung
         disabled: Deaktiviert
@@ -38,6 +42,7 @@ sylius:
         manage_taxation_of_your_products: Besteuerung der Produkte verwalten
         new: Neu
         new_country: Neues Land
+        new_currency: Neue Währung
         new_locale: Neue Lokalisierung
         new_tax_category: Neue Steuerkategorie
         "no": false

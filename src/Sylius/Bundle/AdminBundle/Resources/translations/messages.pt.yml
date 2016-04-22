@@ -7,7 +7,9 @@ sylius:
             main:
                 configuration:
                     countries: Países
+                    payment_methods: Métodos de pagamento
                     shipping_methods: Métodos de envio
                     tax_rates: Impostos
+                    zones: Zonas
                 marketing:
                     promotions: Promoções

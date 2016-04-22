@@ -3,6 +3,8 @@
 
 sylius:
     ui:
+        color: Färg
+        default_currency: Standardvaluta
         enabled: Aktiverad
         "no": false
         "yes": true

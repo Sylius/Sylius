@@ -6,3 +6,4 @@ sylius:
         currency:
             exchange_rate: Norma e shkëmbimit
             enabled: E aktivizuar
+            code: Emri

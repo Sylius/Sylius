@@ -9,7 +9,9 @@ sylius:
                     countries: Države
                     header: Postavke
                     locales: Lokaliteti
+                    payment_methods: Načini plaćanja
                     shipping_methods: Načini slanja
                     tax_rates: Stope poreza
+                    zones: Regije
                 marketing:
                     promotions: Promocije

@@ -13,6 +13,7 @@ sylius:
         countries: Országok
         create: Létrehozás
         dashboard: Vezérlőpult
+        default_currency: Alapértelmezett pénznem
         delete: Törlés
         description: Leírás
         edit: Szerkesztés

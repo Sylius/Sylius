@@ -6,3 +6,4 @@ sylius:
         currency:
             exchange_rate: 汇率
             enabled: 已启用
+            code: 名称

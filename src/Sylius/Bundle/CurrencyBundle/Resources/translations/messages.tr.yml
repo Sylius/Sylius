@@ -6,3 +6,4 @@ sylius:
         currency:
             exchange_rate: Döviz Kuru
             enabled: Etkin
+            code: Ad

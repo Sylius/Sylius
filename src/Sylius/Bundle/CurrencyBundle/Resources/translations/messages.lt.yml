@@ -6,3 +6,4 @@ sylius:
         currency:
             exchange_rate: Valiutų kursas
             enabled: Įjungta
+            code: Pavadinimas

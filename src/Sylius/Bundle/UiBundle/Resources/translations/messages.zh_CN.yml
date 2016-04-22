@@ -9,10 +9,12 @@ sylius:
     ui:
         are_your_sure_you_want_to_perform_this_action: 是否确实执行此操作？
         cancel: '取消 '
+        color: 颜色
         confirm_your_action: 请确认你的行为
         countries: 国家
         create: 创建
         dashboard: 仪表板
+        default_currency: 默认货币：
         delete: 删除
         description: 描述
         edit: 编辑

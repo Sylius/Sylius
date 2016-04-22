@@ -9,7 +9,9 @@ sylius:
                     countries: Краіны
                     header: Канфігурацыя
                     locales: Месцы размяшчэння
+                    payment_methods: Метады аплаты
                     shipping_methods: Метады дастаўкі
                     tax_rates: Стаўка падатку
+                    zones: Зоны
                 marketing:
                     promotions: Прамоцыі

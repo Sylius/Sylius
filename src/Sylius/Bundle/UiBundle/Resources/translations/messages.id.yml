@@ -6,6 +6,7 @@ sylius:
         login:
             password: Kata sandi
     ui:
+        default_currency: Mata uang default
         enabled: Diaktifkan
         "no": false
         "yes": true

@@ -6,12 +6,15 @@ sylius:
         admin:
             main:
                 configuration:
+                    channels: Csatornák
                     countries: Országok
                     header: Konfiguráció
                     locales: Területi beállítások
+                    payment_methods: Fizetési módok
                     shipping_methods: Szállítási módok
                     tax_categories: Adó kategóriák
                     tax_rates: Adókulcsok
+                    zones: Zónák
                 marketing:
                     header: Marketing
                     promotions: Promóciók

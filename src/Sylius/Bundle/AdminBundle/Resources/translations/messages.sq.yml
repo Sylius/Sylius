@@ -6,12 +6,16 @@ sylius:
         admin:
             main:
                 configuration:
+                    channels: Kanalet
                     countries: Vendet
+                    currencies: Monedhat
                     header: Konfigurimi
                     locales: Rajonet
+                    payment_methods: Mënyrat e pagesës
                     shipping_methods: Mënyrat e dërgesave
                     tax_categories: Kategoritë e taksimit
                     tax_rates: Normat e taksimit
+                    zones: Zonat
                 marketing:
                     header: Marketingu
                     promotions: Reklamat

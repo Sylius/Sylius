@@ -9,7 +9,9 @@ sylius:
                     countries: Țări
                     header: Configurare
                     locales: Setări regionale
+                    payment_methods: Metode de plată
                     shipping_methods: Metode de livrare
                     tax_rates: Taxe
+                    zones: Zone
                 marketing:
                     promotions: Promoţii

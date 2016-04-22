@@ -6,3 +6,4 @@ sylius:
         currency:
             exchange_rate: Árfolyam
             enabled: Engedélyezve
+            code: Név

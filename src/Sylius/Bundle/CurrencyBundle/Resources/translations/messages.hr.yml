@@ -6,3 +6,4 @@ sylius:
         currency:
             exchange_rate: Tečaj
             enabled: Omogući
+            code: Naziv grupe

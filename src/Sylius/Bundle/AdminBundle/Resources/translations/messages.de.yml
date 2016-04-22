@@ -6,12 +6,16 @@ sylius:
         admin:
             main:
                 configuration:
+                    channels: Ausgabekanäle
                     countries: Länder
+                    currencies: Währungen
                     header: Einstellung
                     locales: Gebietsschemata
+                    payment_methods: Bezahlmethoden
                     shipping_methods: Versandmethoden
                     tax_categories: Steuerkategorien
                     tax_rates: Steuersätze
+                    zones: Versandgebiete
                 marketing:
                     header: Marketing
                     promotions: Aktionen

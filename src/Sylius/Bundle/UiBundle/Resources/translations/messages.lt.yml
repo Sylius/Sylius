@@ -10,9 +10,12 @@ sylius:
     ui:
         actions: Veiksmai
         cancel: Atšaukti
+        color: Spalva
         countries: Šalys
+        currencies: Valiutos
         create: Sukurti
         dashboard: Skydelis
+        default_currency: Numatytoji valiuta
         delete: Šalinti
         description: Aprašymas
         edit: Redaguoti
@@ -22,6 +25,7 @@ sylius:
         locales: Lokalės
         new: Naujas
         new_country: Naujas šalis
+        new_currency: Nauja valiuta
         new_tax_category: Nauja mokesčių kategorija
         "no": false
         powered_by: Sukurta

@@ -10,9 +10,13 @@ sylius:
     ui:
         actions: Dejanja
         cancel: Prekliči
+        color: Barva
         countries: Države
+        currencies: Valute
         create: Ustvarite
         dashboard: Nadzorna plošča
+        default_currency: Privzeta valuta
+        default_locale: Privzeto območje
         delete: Zbriši
         description: Opis
         edit: Urejanje
@@ -23,6 +27,7 @@ sylius:
         manage_customer: Upravljanje strank
         new: Novo
         new_country: Nova država
+        new_currency: Nova valuta
         new_tax_category: Nova davčna kategorija
         "no": false
         powered_by: Poganja

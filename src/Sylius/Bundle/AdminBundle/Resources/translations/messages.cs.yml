@@ -6,11 +6,15 @@ sylius:
         admin:
             main:
                 configuration:
+                    channels: Kanály
                     countries: Země
+                    currencies: Měny
                     header: Konfigurace
                     locales: Lokalizace
+                    payment_methods: Způsoby plateb
                     shipping_methods: Způsoby dopravy
                     tax_rates: Daňové sazby
+                    zones: Oblasti
                 marketing:
                     header: Marketing
                     promotions: Akce

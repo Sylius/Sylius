@@ -6,6 +6,7 @@ sylius:
         login:
             password: كلمة السر
     ui:
+        color: اللون
         countries: البلدان
         new: جديد
         "no": false

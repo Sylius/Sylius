@@ -9,9 +9,11 @@ sylius:
     ui:
         actions: Дії
         cancel: Відмінити
+        color: Колір
         countries: Країни
         create: Створити
         dashboard: Панель керування
+        default_currency: Валюта за замовчуванням
         delete: Видалити
         description: Опис
         edit: Редагувати

@@ -11,6 +11,7 @@ sylius:
         cancel: Άκυρο
         countries: Χώρες
         create: Δημιουργία
+        default_currency: Προεπιλεγμένο νόμισμα
         description: Περιγραφή
         enabled: Ενεργοποιημένο
         filter: Φίλτρο
