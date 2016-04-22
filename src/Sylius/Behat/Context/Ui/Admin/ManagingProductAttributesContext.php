@@ -74,8 +74,9 @@ final class ManagingProductAttributesContext implements Context
 
     /**
      * @When I specify it code as :code
+     * @When I do not specify its code
      */
-    public function iSpecifyItCodeAs($code)
+    public function iSpecifyItCodeAs($code = null)
     {
         $this->createPage->specifyCode($code);
     }
@@ -90,6 +91,7 @@ final class ManagingProductAttributesContext implements Context
 
     /**
      * @When I add it
+     * @When I try to add it
      */
     public function iAddIt()
     {
@@ -135,6 +137,7 @@ final class ManagingProductAttributesContext implements Context
 
     /**
      * @When I save my changes
+     * @When I try to save my changes
      */
     public function iSaveMyChanges()
     {
@@ -157,6 +160,79 @@ final class ManagingProductAttributesContext implements Context
         Assert::true(
             $this->updatePage->isCodeDisabled(),
             'Code should be immutable, but it does not.'
+        );
+    }
+
+    /**
+     * @Then I should be notified that product attribute with this code already exists
+     */
+    public function iShouldBeNotifiedThatProductAttributeWithThisCodeAlreadyExists()
+    {
+        Assert::true(
+            $this->updatePage->checkValidationMessageFor('code', 'This code is already in use.'),
+            'Unique code violation message should appear on page, but it does not.'
+        );
+    }
+
+    /**
+     * @Given there should still be only one product attribute with code :code
+     */
+    public function thereShouldStillBeOnlyOneProductAttributeWithCode($code)
+    {
+        $this->indexPage->open();
+
+        Assert::true(
+            $this->indexPage->isResourceOnPage(['code' => $code]),
+            sprintf('There should be only one product attribute with code %s, but it does not.', $code)
+        );
+    }
+
+    /**
+     * @When I do not name it
+     */
+    public function iDoNotNameIt()
+    {
+        // Intentionally left blank to fulfill context expectation
+    }
+
+    /**
+     * @Then I should be notified that :element is required
+     */
+    public function iShouldBeNotifiedThatIsRequired($element)
+    {
+        $this->assertFieldValidationMessage($element, sprintf('Please enter attribute %s.', $element));
+    }
+
+    /**
+     * @Given the attribute with :elementName :elementValue should not appear in the store
+     */
+    public function theAttributeWithCodeShouldNotAppearInTheStore($elementName, $elementValue)
+    {
+        $this->indexPage->open();
+
+        Assert::false(
+            $this->indexPage->isResourceOnPage([$elementName => $elementValue]),
+            sprintf('There should not be product attribute with %s %s, but it is.', $elementName, $elementValue)
+        );
+    }
+
+    /**
+     * @When I remove its name from :language translation
+     */
+    public function iRemoveItsNameFromTranslation($language)
+    {
+        $this->updatePage->changeName('', $language);
+    }
+
+    /**
+     * @param string $element
+     * @param string $expectedMessage
+     */
+    private function assertFieldValidationMessage($element, $expectedMessage)
+    {
+        Assert::true(
+            $this->createPage->checkValidationMessageFor($element, $expectedMessage),
+            sprintf('Product attribute %s should be required.', $element)
         );
     }
 }

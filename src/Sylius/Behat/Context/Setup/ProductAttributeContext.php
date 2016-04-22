@@ -56,6 +56,24 @@ final class ProductAttributeContext implements Context
      */
     public function theStoreHasAProductAttributeWithCode($type, $name, $code)
     {
+        $this->createProductAttribute($type, $name, $code);
+    }
+
+    /**
+     * @Given the store has a :type product attribute :name
+     */
+    public function theStoreHasATextProductAttribute($type, $name)
+    {
+        $this->createProductAttribute($type, $name);
+    }
+
+    /**
+     * @param string $type
+     * @param string $name
+     * @param string $code
+     */
+    private function createProductAttribute($type, $name, $code = 'PA112')
+    {
         $productAttribute = $this->productAttributeFactory->createTyped($type);
         $productAttribute->setCode($code);
         $productAttribute->setName($name);

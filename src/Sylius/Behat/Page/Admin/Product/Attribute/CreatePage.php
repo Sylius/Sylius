@@ -28,4 +28,15 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     {
         $this->getDocument()->fillField(sprintf('sylius_product_attribute_translations_%s_name', $language), $name);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getDefinedElements()
+    {
+        return array_merge(parent::getDefinedElements(), [
+            'code' => '#sylius_product_attribute_code',
+            'name' => '#sylius_product_attribute_translations_en_US_name',
+        ]);
+    }
 }

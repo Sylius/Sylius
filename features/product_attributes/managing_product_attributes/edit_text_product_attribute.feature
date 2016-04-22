@@ -10,7 +10,7 @@ Feature: Text product attribute edition
 
     @ui
     Scenario: Edit product attribute name
-        Given the store has a text product attribute "T-shirt cotton brand" with code "t_shirt_brand"
+        Given the store has a text product attribute "T-shirt cotton brand"
         When I want to edit this product attribute
         And I change it name to "T-shirt material" in "English (United States)"
         And I save my changes
