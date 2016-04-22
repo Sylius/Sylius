@@ -13,16 +13,21 @@ sylius:
         category_requirements: Category requirements
         charges_and_taxes: Charges and taxes
         clear_filters: Clear filters
+        color: Color
+        configure_channels_available_in_your_store: Configure channels available in your store
         confirm_your_action: Confirm your action
         contains: Contains
         countries: Countries
         currencies: Currencies
         create: Create
         dashboard: Dashboard
+        default_currency: Default currency
+        default_locale: Default locale
         delete: Delete
         description: Description
         disabled: Disabled
         edit: Edit
+        edit_channel: Edit channel
         edit_country: Edit country
         edit_currency: Edit currency
         edit_customer: Edit customer
@@ -48,16 +53,17 @@ sylius:
         manage_shipping_methods_for_your_store: Manage shipping methods for your store
         manage_taxation_of_your_products: Manage taxation of your products
         new: New
+        new_channel: New channel
         new_country: New country
         new_currency: New currency
         new_locale: New locale
         new_tax_category: New tax category
         no: No
+        no_account: no account
         no_results_to_display: There are no results to display
         not_contains: Not contains
         not_empty: Not empty
         not_in: Not in
-        no_account: no account
         or: or
         powered_by: Powered by
         promotion_information: Promotion information

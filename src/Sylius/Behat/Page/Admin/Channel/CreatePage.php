@@ -11,42 +11,87 @@
 
 namespace Sylius\Behat\Page\Admin\Channel;
 
-use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Behat\Behaviour\DescribesIt;
+use Sylius\Behat\Behaviour\NamesIt;
+use Sylius\Behat\Behaviour\SpecifiesItsCode;
+use Sylius\Behat\Behaviour\Toggles;
+use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class CreatePage extends SymfonyPage implements CreatePageInterface
+class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
+    use NamesIt;
+    use SpecifiesItsCode;
+    use DescribesIt;
+    use Toggles;
+
     /**
      * {@inheritdoc}
      */
-    public function fillName($name)
+    public function setHostname($hostname)
     {
-        $this->getDocument()->fillField('Name', $name);
+        $this->getDocument()->fillField('Hostname', $hostname);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function fillCode($code)
+    public function defineColor($color)
     {
-        $this->getDocument()->fillField('Code', $code);
+        $this->getDocument()->fillField('Color', $color);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function create()
+    public function chooseCurrency($currency)
     {
-        $this->getDocument()->pressButton('Create');
+        $this->getDocument()->selectFieldOption('Currencies', $currency);
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function getRouteName()
+    public function chooseLocale($language)
     {
-        return 'sylius_backend_channel_create';
+        $this->getDocument()->selectFieldOption('Locales', $language);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function chooseShippingMethod($shippingMethod)
+    {
+        $this->getDocument()->selectFieldOption('Shipping Methods', $shippingMethod);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function choosePaymentMethod($paymentMethod)
+    {
+        $this->getDocument()->selectFieldOption('Payment Methods', $paymentMethod);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getToggleableElement()
+    {
+        return $this->getElement('enabled');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getDefinedElements()
+    {
+        return array_merge(parent::getDefinedElements(), [
+            'code' => '#sylius_channel_code',
+            'enabled' => '#sylius_channel_enabled',
+            'name' => '#sylius_channel_name',
+        ]);
     }
 }

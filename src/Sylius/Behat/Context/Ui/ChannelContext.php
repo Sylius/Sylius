@@ -84,8 +84,8 @@ final class ChannelContext implements Context
     public function iCreateNewChannel($channelName)
     {
         $this->channelCreatePage->open();
-        $this->channelCreatePage->fillName($channelName);
-        $this->channelCreatePage->fillCode($channelName);
+        $this->channelCreatePage->nameIt($channelName);
+        $this->channelCreatePage->specifyCode($channelName);
         $this->channelCreatePage->create();
 
         $channel = $this->channelRepository->findOneBy(['name' => $channelName]);

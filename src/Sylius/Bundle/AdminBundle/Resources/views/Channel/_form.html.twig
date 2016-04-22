@@ -1,0 +1,34 @@
+{{ form_errors(form) }}
+<div class="ui two column stackable grid">
+    <div class="column">
+        <div class="ui segment">
+            {{ form_errors(form) }}
+            <div class="two fields">
+                {{ form_row(form.code) }}
+                {{ form_row(form.name) }}
+            </div>
+            {{ form_row(form.description) }}
+            {{ form_row(form.enabled) }}
+            <div class="two fields">
+                <div class="field">
+                    {{ form_label(form.hostname) }}
+                    <div class="ui labeled input">
+                        <div class="ui label">http://</div>
+                        {{ form_widget(form.hostname) }}
+                    </div>
+                    {{ form_errors(form.hostname) }}
+                </div>
+                {{ form_row(form.color) }}
+            </div>
+        </div>
+    </div>
+    <div class="column">
+        <div class="ui segment">
+            {{ form_row(form.theme) }}
+            {{ form_row(form.locales) }}
+            {{ form_row(form.currencies) }}
+            {{ form_row(form.shippingMethods) }}
+            {{ form_row(form.paymentMethods) }}
+        </div>
+    </div>
+</div>

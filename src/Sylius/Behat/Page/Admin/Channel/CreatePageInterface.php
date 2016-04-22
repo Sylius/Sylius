@@ -11,30 +11,59 @@
 
 namespace Sylius\Behat\Page\Admin\Channel;
 
-use Behat\Mink\Exception\ElementNotFoundException;
-use Sylius\Behat\Page\PageInterface;
+use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-interface CreatePageInterface extends PageInterface
+interface CreatePageInterface extends BaseCreatePageInterface
 {
+    public function enable();
+
+    public function disable();
+
     /**
      * @param string $name
-     *
-     * @throws ElementNotFoundException
      */
-    public function fillName($name);
+    public function nameIt($name);
 
     /**
      * @param string $code
-     *
-     * @throws ElementNotFoundException
      */
-    public function fillCode($code);
+    public function specifyCode($code);
 
     /**
-     * @throws ElementNotFoundException
+     * @param string $description
      */
-    public function create();
+    public function describeItAs($description);
+
+    /**
+     * @param string $hostname
+     */
+    public function setHostname($hostname);
+
+    /**
+     * @param string $color
+     */
+    public function defineColor($color);
+
+    /**
+     * @param string $language
+     */
+    public function chooseLocale($language);
+
+    /**
+     * @param string $currency
+     */
+    public function chooseCurrency($currency);
+
+    /**
+     * @param string $shippingMethod
+     */
+    public function chooseShippingMethod($shippingMethod);
+
+    /**
+     * @param string $paymentMethod
+     */
+    public function choosePaymentMethod($paymentMethod);
 }

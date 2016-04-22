@@ -39,6 +39,7 @@
             <argument type="service" id="sylius.behat.factory.default_channel" container="symfony" />
             <argument type="service" id="sylius.factory.channel" container="symfony" />
             <argument type="service" id="sylius.repository.channel" container="symfony" />
+            <argument type="service" id="sylius.manager.channel" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>
 

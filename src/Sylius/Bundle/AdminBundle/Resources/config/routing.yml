@@ -10,6 +10,9 @@ sylius_admin_dashboard:
     defaults:
         _controller: sylius.controller.admin.dashboard:indexAction
 
+sylius_admin_channel:
+    resource: "@SyliusAdminBundle/Resources/config/routing/channel.yml"
+
 sylius_admin_country:
     resource: "@SyliusAdminBundle/Resources/config/routing/country.yml"
 

@@ -55,7 +55,7 @@ class ChannelDeletionListener
         $results = $this->channelRepository->findBy(['enabled' => true]);
 
         if (!$results || (count($results) === 1 && current($results) === $channel)) {
-            $event->stop('error.at_least_one');
+            $event->stop('sylius.ui.the_channel_cannot_be_deleted_at_least_one_enabled_channel_is_required');
         }
     }
 }
