@@ -35,6 +35,9 @@ class TaxRateType extends AbstractResourceType
             ->add('category', 'sylius_tax_category_choice', [
                 'label' => 'sylius.form.tax_rate.category',
             ])
+            ->add('calculator', 'sylius_tax_calculator_choice', [
+                'label' => 'sylius.form.tax_rate.calculator',
+            ])
             ->add('amount', 'percent', [
                 'label' => 'sylius.form.tax_rate.amount',
                 'precision' => 3,

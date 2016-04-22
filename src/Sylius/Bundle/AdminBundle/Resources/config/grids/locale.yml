@@ -26,6 +26,9 @@ sylius_grid:
                 code:
                     type: string
                     label: sylius.ui.code
+                enabled:
+                    type: boolean
+                    label: sylius.ui.enabled
             actions:
                 main:
                     create:

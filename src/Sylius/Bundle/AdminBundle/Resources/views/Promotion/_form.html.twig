@@ -1,6 +1,5 @@
 {{ form_errors(form) }}
 <div class="ui segment">
-    <h4 class="ui dividing header">{{ 'sylius.ui.promotion_information'|trans }}</h4>
     <div class="two fields">
         {{ form_row(form.code) }}
         {{ form_row(form.name) }}
@@ -8,15 +7,11 @@
     <div class="two field">
         <div class="column">
             {{ form_row(form.usageLimit) }}
-            {{ form_row(form.exclusive) }}
             {{ form_row(form.couponBased) }}
+            {{ form_row(form.exclusive) }}
         </div>
         <div class="column">
-            {{ form_label(form.channels) }}
-            {% for channels in form.channels %}
-                <p></p>
-                {{ form_row(channels) }}
-            {% endfor %}
+            {{ form_row(form.channels) }}
         </div>
     </div>
     <div class="two fields">
@@ -25,7 +20,7 @@
     </div>
 </div>
 <div class="ui segment">
-    <h4 class="ui dividing header">{{ 'sylius.ui.promotion_configuration'|trans }}</h4>
+    <h4 class="ui dividing header">{{ 'sylius.ui.configuration'|trans }}</h4>
 
     <div class="ui two column stackable grid">
         <div class="column">

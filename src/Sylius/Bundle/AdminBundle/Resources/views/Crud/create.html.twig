@@ -11,6 +11,14 @@
 {% block content %}
 {{ headers.default(header|trans, configuration.vars.icon|default('plus'), configuration.vars.subheader|default(null)|trans) }}
 
+<div class="ui breadcrumb">
+    <a href="{{ path('sylius_admin_dashboard') }}" class="section">{{ 'sylius.ui.administration'|trans }}</a>
+    <i class="right chevron icon divider"></i>
+    <a href="{{ path(configuration.getRouteName('index')) }}" class="section">{{ (metadata.applicationName~'.ui.'~metadata.pluralName)|trans }}</a>
+    <i class="right chevron icon divider"></i>
+    <div class="active section">{{ 'sylius.ui.new'|trans }}</div>
+</div>
+
 {{ form_start(form, {'action': path(configuration.getRouteName('create'), configuration.getFactoryArguments), 'attr': {'class': 'ui form', 'novalidate': 'novalidate'}}) }}
     <div class="ui segment">
         {% if configuration.vars.templates.form is defined %}

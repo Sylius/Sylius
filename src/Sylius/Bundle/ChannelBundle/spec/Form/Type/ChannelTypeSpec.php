@@ -53,7 +53,7 @@ class ChannelTypeSpec extends ObjectBehavior
         ;
 
         $builder
-            ->add('description', 'text', Argument::any())
+            ->add('description', 'textarea', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;

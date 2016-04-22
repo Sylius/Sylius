@@ -11,7 +11,7 @@
 {%- block form_errors -%}
     {%- if errors|length > 0 -%}
         {%- for error in errors -%}
-            <div class="ui pointing red label">
+            <div class="ui red pointing label">
             {{ error.message }}
             </div>
         {%- endfor -%}
@@ -43,6 +43,21 @@
     </div>
 {%- endblock choice_row %}
 
+{%- block choice_widget_expanded -%}
+    <div {{ block('widget_container_attributes') }}>
+        <div class="grouped fields">
+            {%- for child in form %}
+                <div class="field">
+                    <div class="ui toggle checkbox">
+                        {{- form_label(child, null, {translation_domain: choice_translation_domain}) -}}
+                        {{- form_widget(child) -}}
+                    </div>
+                </div>
+            {% endfor -%}
+        </div>
+    </div>
+{%- endblock choice_widget_expanded -%}
+
 {% block percent_widget -%}
     <div class="ui right labeled input">
         {{- form_widget(form) -}}
@@ -55,34 +70,28 @@
     {% set attr = attr|merge({'class': attr.class|default ~ ' controls collection-widget'}) %}
 
     {% spaceless %}
-        <div class="ui basic segment"
-             data-form-type="collection"
-                {{ block('widget_container_attributes') }}
-                {% if prototype is defined and allow_add %}
-                    data-prototype='{{ _self.collectionItem(prototype, allow_delete, button_delete_label, '__name__')|e }}'
-                {%- endif -%}>
-
+        <div data-form-type="collection" {{ block('widget_container_attributes') }}
+            {% if prototype is defined and allow_add %}
+                data-prototype='{{ _self.collection_item(prototype, allow_delete, button_delete_label, '__name__')|e }}'
+            {%- endif -%}
+        >
             {{ error(form.vars.errors) }}
 
             {% if prototypes|default is iterable %}
                 {% for key, subPrototype in prototypes %}
-                    <input type="hidden"
-                           data-form-prototype="{{ key }}"
-                           value="{{ _self.collectionItem(subPrototype, allow_delete, button_delete_label, '__name__')|e }}" />
+                    <input type="hidden" data-form-prototype="{{ key }}" value="{{ _self.collection_item(subPrototype, allow_delete, button_delete_label, '__name__')|e }}" />
                 {% endfor %}
             {% endif %}
 
-            <div data-form-collection="list" >
+            <div data-form-collection="list">
                 {% for child in form %}
-                    {{ _self.collectionItem(child, allow_delete, button_delete_label, loop.index0) }}
+                    {{ _self.collection_item(child, allow_delete, button_delete_label, loop.index0) }}
                 {% endfor %}
             </div>
 
             {% if prototype is defined and allow_add %}
-                <br/>
-                <a href="#" class="ui green labeled icon button"
-                   data-form-collection="add">
-                    <i class="tag icon"></i>
+                <a href="#" class="ui labeled icon button" data-form-collection="add">
+                    <i class="plus square outline icon"></i>
                     {{ button_add_label|trans }}
                 </a>
             {% endif %}
@@ -90,29 +99,49 @@
     {% endspaceless %}
 {%- endblock collection_widget %}
 
-{% macro collectionItem(form, allow_delete, button_delete_label, index) %}
+{% macro collection_item(form, allow_delete, button_delete_label, index) %}
     {% spaceless %}
-        <div data-form-collection="item"
-             data-form-collection-index="{{ index }}"
-             class="ui segment">
-            <div class="collection-box{% if form|length == 1 %} unique-field{% endif %}">
-                {% if not form.children|length %}
-                    {{ form_widget(form) }}
-                {% else %}
-                    {{ form_rest(form) }}
-                {% endif %}
-                {% if allow_delete %}
-                    <p class="text-right">
-                        <a href="#" data-form-collection="delete" class="ui red labeled icon button">
-                            <i class="trash icon"></i>
-                            {{ button_delete_label|trans }}
-                        </a>
-                    </p>
-                {% endif %}
-            </div>
+        <div data-form-collection="item" data-form-collection-index="{{ index }}">
+            {{ form_widget(form) }}
+            {% if allow_delete %}
+                <a href="#" data-form-collection="delete" class="ui red labeled icon button" style="margin-bottom: 1em;">
+                    <i class="trash icon"></i>
+                    {{ button_delete_label|trans }}
+                </a>
+            {% endif %}
         </div>
     {% endspaceless %}
 {% endmacro %}
+
+{% block sylius_province_widget %}
+<div class="ui compact segment">
+    <div class="inline fields">
+        {{ form_row(form.code) }}
+        {{ form_row(form.name) }}
+        {{ form_row(form.abbreviation) }}
+    </div>
+</div>
+{% endblock %}
+
+{% block sylius_zone_member_widget %}
+    <div class="ui compact segment">
+        <div class="inline fields">
+            {{ form_row(form.code) }}
+        </div>
+    </div>
+{% endblock %}
+
+{% block sylius_promotion_rule_widget %}
+    <div class="ui segment">
+        {{ form_widget(form) }}
+    </div>
+{% endblock %}
+
+{% block sylius_promotion_action_widget %}
+    <div class="ui segment">
+        {{ form_widget(form) }}
+    </div>
+{% endblock %}
 
 {% block sylius_translations_row -%}
     <h4 class="ui dividing header">{{ form_label(form) }}</h4>

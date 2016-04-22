@@ -12,5 +12,5 @@ sylius_admin_tax_rate:
               templates:
                   form: SyliusAdminBundle:TaxRate:_form.html.twig
           index:
-              icon: dollar
+              icon: money
     type: sylius.resource

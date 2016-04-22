@@ -8,6 +8,12 @@
     {% endif %}
 {% endmacro %}
 
+{% macro default(text) %}
+    <span class="ui label">
+        {{ text|trans }}
+    </span>
+{% endmacro %}
+
 {% macro enabled() %}
     <span class="ui teal label">
         <i class="checkmark icon"></i>

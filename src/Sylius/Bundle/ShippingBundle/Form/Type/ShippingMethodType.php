@@ -73,6 +73,7 @@ class ShippingMethodType extends AbstractResourceType
             ])
             ->add('category', 'sylius_shipping_category_choice', [
                 'required' => false,
+                'empty_value' => 'sylius.ui.no_requirement',
                 'label' => 'sylius.form.shipping_method.category',
             ])
             ->add('categoryRequirement', 'choice', [

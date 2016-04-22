@@ -6,7 +6,7 @@ sylius_grid:
                 options:
                     class: %sylius.model.customer.class%
             sorting:
-                firstName: asc
+                createdAt: desc
             fields:
                 first_name:
                     type: string
@@ -28,6 +28,15 @@ sylius_grid:
                     path: .
                     options:
                         template: SyliusAdminBundle:Customer/Field:confirmed.html.twig
+            filters:
+                email:
+                    type: string
+                    label: sylius.ui.email
+                name:
+                    type: string
+                    label: sylius.ui.name
+                    options:
+                        fields: [firstName, lastName]
             actions:
                 main:
                     create:
@@ -35,3 +44,5 @@ sylius_grid:
                 item:
                     update:
                         type: update
+                    delete:
+                        type: delete

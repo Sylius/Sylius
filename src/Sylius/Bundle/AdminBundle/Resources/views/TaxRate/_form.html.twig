@@ -1,7 +1,22 @@
-{{ form_errors(form) }}
+<div class="ui two column stackable grid">
+    {{ form_errors(form) }}
+    <div class="column">
+        <div class="ui segment">
+            <div class="two fields">
+                {{ form_row(form.code) }}
+                {{ form_row(form.name) }}
+            </div>
+            <div class="two fields">
+            {{ form_row(form.category) }}
+            {{ form_row(form.zone) }}
+            </div>
+        </div>
+    </div>
+    <div class="column">
+        <div class="ui segment">
+            {{ form_row(form.calculator) }}
+            {{ form_row(form.amount) }}
+        </div>
+    </div>
+</div>
 
-{{ form_row(form.code) }}
-{{ form_row(form.name) }}
-{{ form_row(form.amount) }}
-{{ form_row(form.category) }}
-{{ form_row(form.zone) }}

@@ -1,4 +1,5 @@
-<div class="ui one column stackable grid">
+<div class="ui two column stackable grid">
+    {{ form_errors(form) }}
     <div class="column">
         <div class="ui segment">
             {{ form_errors(form) }}
@@ -10,15 +11,17 @@
         </div>
     </div>
     <div class="column">
-        <div class="ui segment">
+        <div class="ui styled fluid accordion">
             {% for locale, translationForm in form.translations %}
-                <h4 class="ui dividing header"><i class="{{ locale|slice(3, 2)|lower }} flag"></i> {{ locale|sylius_locale_name }}</h4>
-                <div class="two fields">
+                <div class="title{% if 0 == loop.index0 %} active{% endif %}">
+                    <i class="dropdown icon"></i>
+                    <i class="{{ locale|slice(3, 2)|lower }} flag"></i> {{ locale|sylius_locale_name }}
+                </div>
+                <div class="content{% if 0 == loop.index0 %} active{% endif %}">
                     {{ form_row(translationForm.name) }}
                     {{ form_row(translationForm.description) }}
                 </div>
             {% endfor %}
         </div>
-        {{ form_rest(form) }}
     </div>
 </div>

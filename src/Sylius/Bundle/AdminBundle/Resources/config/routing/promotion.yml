@@ -8,6 +8,7 @@ sylius_admin_promotion:
         grid: sylius_admin_promotion
         vars:
             all:
+                subheader: sylius.ui.manage_discounts_and_promotional_campaigns
                 templates:
                     form: SyliusAdminBundle:Promotion:_form.html.twig
             index:

@@ -8,6 +8,10 @@
   padding: 1em;
 }
 
+#sidebar {
+  font-size: 1.1em;
+}
+
 #logo {
   margin-bottom: 1em;
 }
@@ -43,6 +47,11 @@ select.ui.dropdown[multiple="multiple"] {
   }
 }
 
+.ui.breadcrumb {
+  margin-left: 1em;
+  margin-bottom: 1em;
+}
+
 th {
   a {
     color: $color-link;
@@ -53,4 +62,8 @@ th {
   a:visited {
     color: $color-link;
   }
+}
+
+.ui.compact.segment .inline.fields {
+  margin: 0;
 }

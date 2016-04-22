@@ -844,3 +844,4 @@ sylius_grid:
             delete: SyliusAdminBundle:Grid/Action:delete.html.twig
         filter:
             string: SyliusAdminBundle:Grid/Filter:string.html.twig
+            boolean: SyliusAdminBundle:Grid/Filter:boolean.html.twig

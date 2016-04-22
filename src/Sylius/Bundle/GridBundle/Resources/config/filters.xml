@@ -20,6 +20,8 @@
     <parameters>
         <parameter key="sylius.grid_filter.string.class">Sylius\Component\Grid\Filter\StringFilter</parameter>
         <parameter key="sylius.form.type.grid_filter.string.class">Sylius\Bundle\GridBundle\Form\Type\Filter\StringFilterType</parameter>
+        <parameter key="sylius.grid_filter.boolean.class">Sylius\Component\Grid\Filter\BooleanFilter</parameter>
+        <parameter key="sylius.form.type.grid_filter.boolean.class">Sylius\Bundle\GridBundle\Form\Type\Filter\BooleanFilterType</parameter>
     </parameters>
 
     <services>
@@ -28,6 +30,12 @@
         </service>
         <service id="sylius.form.type.grid_filter.string" class="%sylius.form.type.grid_filter.string.class%">
             <tag name="form.type" alias="sylius_grid_filter_string" />
+        </service>
+        <service id="sylius.grid_filter.boolean" class="%sylius.grid_filter.boolean.class%">
+            <tag name="sylius.grid_filter" type="boolean" />
+        </service>
+        <service id="sylius.form.type.grid_filter.boolean" class="%sylius.form.type.grid_filter.boolean.class%">
+            <tag name="form.type" alias="sylius_grid_filter_boolean" />
         </service>
     </services>
 

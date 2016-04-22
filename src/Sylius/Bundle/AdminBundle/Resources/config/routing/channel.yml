@@ -12,5 +12,5 @@ sylius_admin_channel:
               templates:
                   form: SyliusAdminBundle:Channel:_form.html.twig
           index:
-              icon: random
+              icon: share alternate
     type: sylius.resource
