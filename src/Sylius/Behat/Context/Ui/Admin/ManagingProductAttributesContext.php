@@ -108,6 +108,7 @@ final class ManagingProductAttributesContext implements Context
 
     /**
      * @Then the attribute :name should appear in the store
+     * @Then I should see the product attribute :name in the list
      */
     public function theAttributeShouldAppearInTheStore($name)
     {
@@ -233,6 +234,26 @@ final class ManagingProductAttributesContext implements Context
         Assert::true(
             $this->createPage->checkValidationMessageFor($element, $expectedMessage),
             sprintf('Product attribute %s should be required.', $element)
+        );
+    }
+
+    /**
+     * @When I want to see all product attributes in store
+     */
+    public function iWantToSeeAllProductAttributesInStore()
+    {
+        $this->indexPage->open();
+    }
+
+    /**
+     * @Then /^I should see (\d+) product attributes in the list$/
+     */
+    public function iShouldSeeCustomersInTheList($amountOfProductAttributes)
+    {
+        Assert::same(
+            $amountOfProductAttributes,
+            $this->indexPage->countItems(),
+            sprintf('Amount of product attributes should be equal %s, but is not.', $amountOfProductAttributes)
         );
     }
 }
