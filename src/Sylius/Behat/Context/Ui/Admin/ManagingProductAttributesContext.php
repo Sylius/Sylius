@@ -256,4 +256,32 @@ final class ManagingProductAttributesContext implements Context
             sprintf('Amount of product attributes should be equal %s, but is not.', $amountOfProductAttributes)
         );
     }
+
+    /**
+     * @When /^I delete (this product attribute)$/
+     */
+    public function iDeleteThisProductAttribute(AttributeInterface $productAttribute)
+    {
+        $this->indexPage->open();
+        $this->indexPage->deleteResourceOnPage(['code' => $productAttribute->getCode(), 'name' => $productAttribute->getName()]);
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully deleted
+     */
+    public function iShouldBeNotifiedAboutSuccessfulDeletion()
+    {
+        $this->notificationChecker->checkDeletionNotification(self::RESOURCE_NAME);
+    }
+
+    /**
+     * @Then /^(this product attribute) should no longer exist in the registry$/
+     */
+    public function thisProductAttributeShouldNoLongerExistInTheRegistry(AttributeInterface $productAttribute)
+    {
+        Assert::false(
+            $this->indexPage->isResourceOnPage(['code' => $productAttribute->getCode()]),
+            sprintf('Product attribute %s should no exist in the registry, but it does.', $productAttribute->getName())
+        );
+    }
 }
