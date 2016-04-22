@@ -3,7 +3,7 @@
 
 default:
     suites:
-        ui_managing_currency:
+        ui_managing_currencies:
             contexts_as_services:
                 - sylius.behat.context.hook.doctrine_orm
 
@@ -14,6 +14,6 @@ default:
                 - sylius.behat.context.setup.security
                 - sylius.behat.context.setup.currency
 
-                - sylius.behat.context.ui.admin.managing_currency
+                - sylius.behat.context.ui.admin.managing_currencies
             filters:
-                tags: @managing_currencies && @ui
+                tags: "@managing_currencies && @ui"
