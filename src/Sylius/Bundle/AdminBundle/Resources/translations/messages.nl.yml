@@ -6,12 +6,16 @@ sylius:
         admin:
             main:
                 configuration:
+                    channels: Kanalen
                     countries: Landen
+                    currencies: "Valuta's"
                     header: Configuratie
                     locales: "Talen/Regio's"
+                    payment_methods: Betaalmethoden
                     shipping_methods: Verzendmethoden
                     tax_categories: Belastingscategorieën
                     tax_rates: BTW-tarieven
+                    zones: Zones
                 marketing:
                     header: Marketing
                     promotions: Promoties

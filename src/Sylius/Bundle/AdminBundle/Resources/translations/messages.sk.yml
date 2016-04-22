@@ -6,12 +6,16 @@ sylius:
         admin:
             main:
                 configuration:
+                    channels: Kanály
                     countries: Krajiny
+                    currencies: Meny
                     header: Konfigurácia
                     locales: Jazyky
+                    payment_methods: Spôsoby platby
                     shipping_methods: Spôsoby doručenia
                     tax_categories: Daňové kategórie
                     tax_rates: Daňové sadzby
+                    zones: Zóny
                 marketing:
                     header: Marketing
                     promotions: Akcie

@@ -6,3 +6,4 @@ sylius:
         currency:
             exchange_rate: Valutakurs
             enabled: Aktivert
+            code: Navn

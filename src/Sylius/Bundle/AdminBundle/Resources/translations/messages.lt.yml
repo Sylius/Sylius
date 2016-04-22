@@ -6,11 +6,15 @@ sylius:
         admin:
             main:
                 configuration:
+                    channels: Kanalai
                     countries: Šalys
+                    currencies: Valiutos
                     header: Konfigūracija
                     locales: Lokalės
+                    payment_methods: Apmokėjimo būdai
                     shipping_methods: Pristatymo būdai
                     tax_rates: Mokesčių tarifai
+                    zones: Zonos
                 marketing:
                     promotions: Akcijos
                 customers:

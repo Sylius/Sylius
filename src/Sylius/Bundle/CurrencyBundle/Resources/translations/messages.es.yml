@@ -7,3 +7,4 @@ sylius:
             exchange_rate: Tasa de cambio
             enabled: Activado
             base: Divisa base
+            code: Nombre

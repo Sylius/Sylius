@@ -10,9 +10,12 @@ sylius:
     ui:
         actions: Eylemler
         cancel: İptal
+        color: Renk
         countries: Ülkeler
+        currencies: Para birimi
         create: Oluştur
         dashboard: Kontrol Paneli
+        default_currency: Varsayılan para birimi
         delete: Sil
         description: Açıklama
         edit: Düzenle
@@ -22,6 +25,7 @@ sylius:
         locales: Diller
         new: Yeni
         new_country: Yeni ülke
+        new_currency: Yeni para birimi
         new_tax_category: Yeni vergi kategorisi
         "no": false
         save_changes: Değişiklikleri kaydet

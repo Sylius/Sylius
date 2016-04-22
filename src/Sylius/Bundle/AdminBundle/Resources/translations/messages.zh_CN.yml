@@ -6,11 +6,14 @@ sylius:
         admin:
             main:
                 configuration:
+                    channels: 频道
                     countries: 国家
                     header: 配置
                     locales: 区域设置
+                    payment_methods: 付款方法
                     shipping_methods: 发货方式
                     tax_rates: 税率
+                    zones: 区域
                 marketing:
                     promotions: 促销活动
                 customers:

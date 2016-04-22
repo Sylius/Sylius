@@ -6,8 +6,10 @@ sylius:
         admin:
             main:
                 configuration:
+                    channels: Kênh
                     countries: Quốc gia
                     locales: Miền địa phương
+                    payment_methods: Phương thức thanh toán
                     shipping_methods: Phương thức vận chuyển
                 marketing:
                     header: Tiếp thị

@@ -9,7 +9,9 @@ sylius:
                     countries: Países
                     header: Configuração
                     locales: Localidades
+                    payment_methods: Meios de pagamentos
                     shipping_methods: Métodos de envio
                     tax_rates: Impostos
+                    zones: Regiões
                 marketing:
                     promotions: Promoções

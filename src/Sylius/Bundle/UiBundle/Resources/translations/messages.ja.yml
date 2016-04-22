@@ -11,6 +11,7 @@ sylius:
         countries: 国の設定
         create: 作成
         dashboard: ダッシュボード
+        default_currency: デフォルトの通貨
         delete: sylius.account.address.action.delete
         filter: F絞り込む
         new_country: 国を登録

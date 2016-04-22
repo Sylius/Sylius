@@ -12,6 +12,7 @@ sylius:
         countries: Краіны
         create: Стварыць
         dashboard: Прыборная панэль
+        default_currency: Галоўная валюта
         delete: Выдаліць
         description: Апісанне
         edit: Рэдагаваць

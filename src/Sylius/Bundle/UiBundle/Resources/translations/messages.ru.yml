@@ -10,9 +10,13 @@ sylius:
     ui:
         actions: Действия
         cancel: Отмена
+        color: Цвет
         countries: Страны
+        currencies: Валюты
         create: Добавить
         dashboard: Приборная панель
+        default_currency: Валюта по умолчанию
+        default_locale: Локаль по умолчанию
         delete: sylius.account.address.action.delete
         description: Описание
         edit: Редактировать
@@ -22,6 +26,7 @@ sylius:
         manage_customer: Управление клиентами
         new: Новый
         new_country: Добавить страну
+        new_currency: Новая валюта
         new_tax_category: Создать налоговую категорию
         "no": false
         save_changes: Сохранить изменения

@@ -12,6 +12,7 @@ sylius:
         countries: Lande
         create: Opret
         dashboard: Kontrolpanel
+        default_currency: Standard valuta
         delete: Slet
         description: Beskrivelse
         edit: Rediger

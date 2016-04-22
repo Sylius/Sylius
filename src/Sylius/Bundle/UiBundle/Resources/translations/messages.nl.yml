@@ -15,11 +15,15 @@ sylius:
         category_requirements: Categorie vereisten
         charges_and_taxes: Heffingen en belastingen
         clear_filters: Wis filters
+        color: Kleur
         confirm_your_action: Bevestigen uw actie
         contains: Bevat
         countries: Landen
+        currencies: "Valuta's"
         create: Creëer
         dashboard: Dashboard
+        default_currency: Standaard valuta
+        default_locale: Standaardlandinstelling
         delete: Verwijderen
         description: Omschrijving
         disabled: Inactief
@@ -34,10 +38,11 @@ sylius:
         last_updated: Laatst bijgewerkt
         locales: "Talen/Regio's"
         manage_customer: Klanten beheren
-        manage_shipping_destinations: Beheer van bestemmingen voor verzending
         manage_languages_available_in_the_store: Beheren van beschikbare talen voor de winkel
+        manage_shipping_destinations: Beheer van bestemmingen voor verzending
         new: Nieuw
         new_country: NIeuw land toevoegen
+        new_currency: Nieuwe valuta
         new_locale: Nieuwe landinstelling
         new_tax_category: Nieuwe belastingcategorie toevoegen
         "no": false

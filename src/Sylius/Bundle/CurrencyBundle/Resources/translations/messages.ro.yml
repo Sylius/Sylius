@@ -6,3 +6,4 @@ sylius:
         currency:
             exchange_rate: Cursul de schimb
             enabled: Activat
+            code: Nume

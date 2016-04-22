@@ -7,6 +7,7 @@ sylius:
             username: "Nom d'usuari"
             password: Contrasenya
     ui:
+        default_currency: Moneda predeterminada
         delete: Suprimir
         description: Descripció
         edit: Editar

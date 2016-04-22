@@ -6,12 +6,16 @@ sylius:
         admin:
             main:
                 configuration:
+                    channels: کانال های فروش
                     countries: كشور‌ها
+                    currencies: واحدهای پول
                     header: تنظیمات
                     locales: زبان ها
+                    payment_methods: شیوه های پرداخت
                     shipping_methods: شیوه های ارسال
                     tax_categories: رده های مالیات
                     tax_rates: نرخ های مالیات
+                    zones: مناطق
                 marketing:
                     header: بازاریابی
                     promotions: فروش ویژه

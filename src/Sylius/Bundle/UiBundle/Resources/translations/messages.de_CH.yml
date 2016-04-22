@@ -3,6 +3,7 @@
 
 sylius:
     ui:
+        default_currency: Standardwährung
         enabled: Aktiviert
         "no": false
         "yes": true

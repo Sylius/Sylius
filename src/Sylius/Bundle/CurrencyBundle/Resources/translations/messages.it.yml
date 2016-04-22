@@ -6,3 +6,4 @@ sylius:
         currency:
             exchange_rate: Tasso di cambio
             enabled: Abilitato
+            code: Nome

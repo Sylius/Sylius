@@ -8,6 +8,8 @@ sylius:
                 configuration:
                     countries: Χώρες
                     header: Παραμετροποίηση
+                    payment_methods: Τρόποι πληρωμής
                     tax_rates: Φορολογικοί συντελεστές
+                    zones: Ζώνες
                 marketing:
                     promotions: Προσφορές

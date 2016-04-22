@@ -16,11 +16,15 @@ sylius:
         category_requirements: Requisitos de la categoría
         charges_and_taxes: Tasas e impuestos
         clear_filters: Borrar filtros
+        color: Color
         confirm_your_action: Confirmar esta acción
         contains: Contiene
         countries: Países
+        currencies: Monedas
         create: Crear
         dashboard: Panel general
+        default_currency: Moneda por defecto
+        default_locale: Configuración regional predeterminada
         delete: Eliminar
         description: Descripción
         disabled: Deshabilitado
@@ -38,12 +42,13 @@ sylius:
         last_updated: Última actialización
         locales: Idiomas
         manage_customer: Gestionar clientes
-        manage_shipping_destinations: Gestionar destinos de envío
         manage_languages_available_in_the_store: Administrar idiomas disponibles en la tienda
-        manage_taxation_of_your_products: Administrar impuestos de sus productos
+        manage_shipping_destinations: Gestionar destinos de envío
         manage_shipping_methods_for_your_store: Manejar métodos de envío para su tienda
+        manage_taxation_of_your_products: Administrar impuestos de sus productos
         new: Nuevo
         new_country: Nuevo país
+        new_currency: Nueva moneda
         new_locale: Nueva traducción
         new_tax_category: Nueva categoría de impuesto
         "no": false

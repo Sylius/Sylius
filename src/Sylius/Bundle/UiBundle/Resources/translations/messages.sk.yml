@@ -16,11 +16,15 @@ sylius:
         category_requirements: Požiadavky pre kategóriu
         charges_and_taxes: Poplatky a dane
         clear_filters: Vymazať filter
+        color: Farba
         confirm_your_action: Potvrďte vašu akciu
         contains: Obsahuje
         countries: Krajiny
+        currencies: Meny
         create: Vytvoriť
         dashboard: Administračný panel
+        default_currency: Predvolená mena
+        default_locale: Predvolený jazyk
         delete: Odstrániť
         description: Popis
         disabled: Vypnuté
@@ -39,12 +43,13 @@ sylius:
         last_updated: Posledná aktualizácia
         locales: Jazyky
         manage_customer: Správa zákazníkov
-        manage_shipping_destinations: Spravovať prepravné destinácie
         manage_languages_available_in_the_store: Spravovať dostupné jazyky v obchode
-        manage_taxation_of_your_products: Spravovať zdaňovanie vašich produktov
+        manage_shipping_destinations: Spravovať prepravné destinácie
         manage_shipping_methods_for_your_store: Spravovať dostupné spôsoby dopravy v obchode
+        manage_taxation_of_your_products: Spravovať zdaňovanie vašich produktov
         new: Nová
         new_country: Nová krajina
+        new_currency: Nová mena
         new_locale: Nový jazyk
         new_tax_category: Nová daňová kategoria
         "no": false

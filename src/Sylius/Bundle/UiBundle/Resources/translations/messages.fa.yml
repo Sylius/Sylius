@@ -10,9 +10,13 @@ sylius:
     ui:
         actions: طریقه اعمال
         cancel: لغو
+        color: رنگ
         countries: كشور‌ها
+        currencies: واحدهای پول
         create: ایجاد
         dashboard: داشبورد
+        default_currency: واحد پولی پیش‌فرض
+        default_locale: زبان پیش فرض
         delete: حذف
         description: شرح
         edit: ويرايش
@@ -23,6 +27,7 @@ sylius:
         manage_customer: مدیریت مشتریان
         new: پرداخت ثبت شده
         new_country: کشور جدید
+        new_currency: ارز جدید
         new_tax_category: نوع مالیاتی جدید
         "no": false
         powered_by: قدرت گرفته از

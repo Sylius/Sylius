@@ -14,11 +14,15 @@ sylius:
         are_your_sure_you_want_to_perform_this_action: Jeni i sigurte se deshironi te egzekutoni kete veprim?
         cancel: Fshi
         clear_filters: Hiq filtrin
+        color: Ngjyra
         confirm_your_action: Konfirmoni veprimin tuaj
         contains: Përmban
         countries: Vendet
+        currencies: Monedhat
         create: Krijo
         dashboard: Paneli
+        default_currency: Monedha e paracaktuar
+        default_locale: Lokalizimi i parazgjedhur
         delete: Fshi
         description: Përshkrimi
         disabled: I çaktivizuar
@@ -37,6 +41,7 @@ sylius:
         manage_taxation_of_your_products: Menaxho taksimet e produktit tuaj
         new: E re
         new_country: Vend i ri
+        new_currency: Lloj i ri monedhe
         new_locale: Vendndodhje e re
         new_tax_category: Kategori e re taksimi
         "no": false

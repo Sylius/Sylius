@@ -13,6 +13,7 @@ sylius:
         countries: Države
         create: Kreiraj
         dashboard: Kontrolna ploča
+        default_currency: Zadana valuta
         delete: sylius.account.address.action.delete
         description: Opis
         edit: Uredi

@@ -6,3 +6,4 @@ sylius:
         currency:
             exchange_rate: Taxa de câmbio
             enabled: Ativado
+            code: Nome
