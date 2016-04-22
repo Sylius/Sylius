@@ -4,3 +4,4 @@ sylius:
             exchange_rate: Exchange rate
             enabled: Enabled
             base: Base currency
+            code: Name

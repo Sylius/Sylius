@@ -40,7 +40,7 @@ Feature: Currency management
 
     Scenario: Creating new currency
         Given I am on the currency creation page
-        When I select "Polish Zloty" from "Code"
+        When I select "Polish Zloty" from "Name"
         And I fill in "Exchange rate" with "0.235654"
         And I press "Create"
         Then I should be on the currency index page
@@ -78,7 +78,7 @@ Feature: Currency management
 
     Scenario: Trying to create a currency with existing code
         Given I am on the currency creation page
-        When I select "British Pound Sterling" from "Code"
+        When I select "British Pound Sterling" from "Name"
         And I fill in "Exchange rate" with "0.235654"
         And I press "Create"
         Then I should still be on the currency creation page

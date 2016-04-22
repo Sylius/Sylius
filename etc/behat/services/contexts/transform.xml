@@ -17,6 +17,7 @@
         <parameter key="sylius.behat.context.transform.channel.class">Sylius\Behat\Context\Transform\ChannelContext</parameter>
         <parameter key="sylius.behat.context.transform.country.class">Sylius\Behat\Context\Transform\CountryContext</parameter>
         <parameter key="sylius.behat.context.transform.coupon.class">Sylius\Behat\Context\Transform\CouponContext</parameter>
+        <parameter key="sylius.behat.context.transform.currency.class">Sylius\Behat\Context\Transform\CurrencyContext</parameter>
         <parameter key="sylius.behat.context.transform.customer.class">Sylius\Behat\Context\Transform\CustomerContext</parameter>
         <parameter key="sylius.behat.context.transform.lexical.class">Sylius\Behat\Context\Transform\LexicalContext</parameter>
         <parameter key="sylius.behat.context.transform.locale.class">Sylius\Behat\Context\Transform\LocaleContext</parameter>
@@ -56,6 +57,12 @@
 
         <service id="sylius.behat.context.transform.coupon" class="%sylius.behat.context.transform.coupon.class%" scope="scenario">
             <argument type="service" id="sylius.repository.promotion_coupon" container="symfony" />
+            <tag name="sylius.behat.context" />
+        </service>
+
+        <service id="sylius.behat.context.transform.currency" class="%sylius.behat.context.transform.currency.class%" scope="scenario">
+            <argument type="service" id="sylius.converter.currency_name" container="symfony" />
+            <argument type="service" id="sylius.repository.currency" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>
 
