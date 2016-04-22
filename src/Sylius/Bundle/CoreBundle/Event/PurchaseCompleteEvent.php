@@ -16,18 +16,30 @@ use Symfony\Component\HttpFoundation\Response;
 
 class PurchaseCompleteEvent extends GenericEvent
 {
+    /**
+     * @var Response
+     */
     private $response;
 
+    /**
+     * @return Response
+     */
     public function getResponse()
     {
         return $this->response;
     }
 
+    /**
+     * @param Response $response
+     */
     public function setResponse(Response $response)
     {
         $this->response = $response;
     }
 
+    /**
+     * @return bool
+     */
     public function hasResponse()
     {
         return null !== $this->response;

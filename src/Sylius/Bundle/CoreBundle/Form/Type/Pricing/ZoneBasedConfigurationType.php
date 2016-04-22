@@ -17,12 +17,13 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Group based pricing configuration form type.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ZoneBasedConfigurationType extends AbstractType
 {
+    /**
+     * @var RepositoryInterface
+     */
     protected $zoneRepository;
 
     /**
@@ -38,13 +39,7 @@ class ZoneBasedConfigurationType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        if (null !== $options['scope']) {
-            $zones = $this->zoneRepository->findBy(['scope' => $options['scope']]);
-        } else {
-            $zones = $this->zoneRepository->findAll();
-        }
-
-        foreach ($zones as $zone) {
+        foreach ($this->getZones($options) as $zone) {
             $builder
                 ->add($zone->getId(), 'sylius_money', [
                     'label' => $zone->getName(),
@@ -73,5 +68,19 @@ class ZoneBasedConfigurationType extends AbstractType
     public function getName()
     {
         return 'sylius_price_calculator_zone_based';
+    }
+
+    /**
+     * @param array $options
+     *
+     * @return array
+     */
+    private function getZones(array $options)
+    {
+        if (isset($options['scope'])) {
+            return $this->zoneRepository->findBy(['scope' => $options['scope']]);
+        }
+
+        return $this->zoneRepository->findAll();
     }
 }

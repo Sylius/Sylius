@@ -17,8 +17,6 @@ use Symfony\Cmf\Component\Routing\ContentAwareGenerator as BaseContentAwareGener
 class SyliusAwareGenerator extends BaseContentAwareGenerator
 {
     /**
-     * Route configuration for the object classes to search in
-     *
      * @var array
      */
     protected $routeConfig = [];

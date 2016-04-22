@@ -21,15 +21,24 @@ use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
- * Order shipments type.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ShipmentType extends AbstractType
 {
+    /**
+     * @var string
+     */
     protected $dataClass;
+
+    /**
+     * @var TranslatorInterface
+     */
     protected $translator;
 
+    /**
+     * @param string $dataClass
+     * @param TranslatorInterface $translator
+     */
     public function __construct($dataClass, TranslatorInterface $translator)
     {
         $this->dataClass = $dataClass;

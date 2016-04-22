@@ -19,8 +19,6 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Taxation settings schema.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class TaxationSettingsSchema implements SchemaInterface

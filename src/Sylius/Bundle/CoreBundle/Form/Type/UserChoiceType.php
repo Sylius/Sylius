@@ -15,22 +15,16 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * User choice type.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 abstract class UserChoiceType extends AbstractType
 {
     /**
-     * User class name.
-     *
      * @var string
      */
     protected $className;
 
     /**
-     * Constructor.
-     *
      * @param string $className
      */
     public function __construct($className)

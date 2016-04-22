@@ -16,8 +16,6 @@ use Sylius\Component\Shipping\Processor\ShipmentProcessorInterface;
 use Sylius\Component\Shipping\ShipmentTransitions;
 
 /**
- * Shipment states listener.
- *
  * @author Liverbool <nukboon@gmail.com>
  */
 class ShipmentStatesCallback
@@ -28,8 +26,6 @@ class ShipmentStatesCallback
     protected $processor;
 
     /**
-     * Constructor.
-     *
      * @param ShipmentProcessorInterface $processor
      */
     public function __construct(ShipmentProcessorInterface $processor)
@@ -38,10 +34,8 @@ class ShipmentStatesCallback
     }
 
     /**
-     * Update order's shipping state.
-     *
      * @param OrderInterface $order
-     * @param string         $transition
+     * @param string $transition
      */
     public function updateOrderShipmentStates(OrderInterface $order, $transition = ShipmentTransitions::SYLIUS_PREPARE)
     {

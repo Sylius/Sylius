@@ -15,8 +15,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Shipment filter type.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ShipmentFilterType extends AbstractType

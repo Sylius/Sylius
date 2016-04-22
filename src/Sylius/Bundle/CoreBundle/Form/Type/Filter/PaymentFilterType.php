@@ -15,8 +15,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Payment filter type.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class PaymentFilterType extends AbstractType

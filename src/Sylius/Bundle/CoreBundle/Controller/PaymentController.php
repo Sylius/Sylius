@@ -20,8 +20,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * Payment controller.
- *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
 class PaymentController extends BasePaymentController

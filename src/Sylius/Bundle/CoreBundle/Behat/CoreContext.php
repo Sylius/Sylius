@@ -43,8 +43,6 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 class CoreContext extends DefaultContext
 {
     /**
-     * Created orders.
-     *
      * @var OrderInterface[]
      */
     protected $orders = [];

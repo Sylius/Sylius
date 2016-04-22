@@ -30,9 +30,8 @@ class OrderPaymentListener
     /**
      * @param PaymentProcessorInterface $paymentProcessor
      */
-    public function __construct(
-        PaymentProcessorInterface $paymentProcessor
-    ) {
+    public function __construct(PaymentProcessorInterface $paymentProcessor)
+    {
         $this->paymentProcessor = $paymentProcessor;
     }
 

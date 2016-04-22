@@ -16,8 +16,6 @@ use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 
 /**
- * Locale provider, which returns locales enabled for this channel.
- *
  * @author Kristian Løvstrøm <kristian@loevstroem.dk>
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */

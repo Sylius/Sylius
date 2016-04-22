@@ -14,12 +14,13 @@ namespace Sylius\Bundle\CoreBundle\StateMachineCallback;
 use Sylius\Component\Core\Model\OrderInterface;
 
 /**
- * Increments coupon usage when a coupon is used by an order
- *
  * @author Daniel Richter <nexyz9@gmail.com>
  */
 class CouponUsageCallback
 {
+    /**
+     * @param OrderInterface $order
+     */
     public function incrementCouponUsage(OrderInterface $order)
     {
         $coupon = $order->getPromotionCoupon();

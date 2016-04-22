@@ -19,8 +19,6 @@ use Symfony\Cmf\Component\Routing\RouteProviderInterface as BaseRouteProviderInt
 interface RouteProviderInterface extends BaseRouteProviderInterface
 {
     /**
-     * This method is called from a compiler pass
-     *
      * @param string $class
      * @param string $id
      */

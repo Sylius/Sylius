@@ -35,18 +35,13 @@ class OrderPromotionListener
      * @param SessionInterface $session
      * @param TranslatorInterface $translator
      */
-    public function __construct(
-        SessionInterface $session,
-        TranslatorInterface $translator
-    ) {
+    public function __construct(SessionInterface $session, TranslatorInterface $translator)
+    {
         $this->session = $session;
         $this->translator = $translator;
     }
 
     /**
-     * Handle coupons added by the user in his cart.
-     * TODO: maybe replace this with a unified FlashSubscriber.
-     *
      * @param GenericEvent $event
      */
     public function handleCouponPromotion(GenericEvent $event)

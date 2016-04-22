@@ -72,7 +72,7 @@ abstract class CheckoutStep extends AbstractControllerStep
 
     /**
      * @param string $name
-     * @param Event  $event
+     * @param Event $event
      */
     protected function dispatchEvent($name, Event $event)
     {
@@ -80,7 +80,7 @@ abstract class CheckoutStep extends AbstractControllerStep
     }
 
     /**
-     * @param string         $name
+     * @param string $name
      * @param OrderInterface $order
      */
     protected function dispatchCheckoutEvent($name, OrderInterface $order)

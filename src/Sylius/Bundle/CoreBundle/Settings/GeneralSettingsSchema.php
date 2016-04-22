@@ -19,8 +19,6 @@ use Symfony\Component\Validator\Constraints\Locale;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
- * General settings schema.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class GeneralSettingsSchema implements SchemaInterface

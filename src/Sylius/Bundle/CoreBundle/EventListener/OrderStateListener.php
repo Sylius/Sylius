@@ -18,22 +18,16 @@ use Sylius\Component\Order\Model\OrderAwareInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
- * Order inventory processing listener.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class OrderStateListener
 {
     /**
-     * States resolver.
-     *
      * @var StateResolverInterface
      */
     protected $stateResolver;
 
     /**
-     * Constructor.
-     *
      * @param StateResolverInterface $stateResolver
      */
     public function __construct(StateResolverInterface $stateResolver)
@@ -42,8 +36,6 @@ class OrderStateListener
     }
 
     /**
-     * Get the order from event and run the state resolver on it.
-     *
      * @param GenericEvent $event
      */
     public function resolveOrderStates(GenericEvent $event)
@@ -51,6 +43,9 @@ class OrderStateListener
         $this->resolve($event->getSubject());
     }
 
+    /**
+     * @param TransitionEvent $event
+     */
     public function resolveOrderStatesOnTransition(TransitionEvent $event)
     {
         $resource = $event->getStateMachine()->getObject();
@@ -62,6 +57,9 @@ class OrderStateListener
         }
     }
 
+    /**
+     * @param OrderInterface $order
+     */
     protected function resolve(OrderInterface $order)
     {
         $this->stateResolver->resolvePaymentState($order);

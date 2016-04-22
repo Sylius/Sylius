@@ -15,17 +15,16 @@ use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
 /**
- * Array to string transformer.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ArrayToStringTransformer implements DataTransformerInterface
 {
+    /**
+     * @var string
+     */
     private $delimiter;
 
     /**
-     * Constructor.
-     *
      * @param string $delimiter
      */
     public function __construct($delimiter)

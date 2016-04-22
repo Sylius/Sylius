@@ -17,22 +17,16 @@ use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Order\OrderTransitions;
 
 /**
- * Release expired orders.
- *
  * @author Foo Pang <foo.pang@gmail.com>
  */
 class ExpiredOrdersReleaser implements ReleaserInterface
 {
     /**
-     * Order manager.
-     *
      * @var ObjectManager
      */
     protected $manager;
 
     /**
-     * Order repository.
-     *
      * @var OrderRepositoryInterface
      */
     protected $repository;
@@ -42,6 +36,11 @@ class ExpiredOrdersReleaser implements ReleaserInterface
      */
     protected $factory;
 
+    /**
+     * @param ObjectManager $manager
+     * @param OrderRepositoryInterface $repository
+     * @param FactoryInterface $factory
+     */
     public function __construct(ObjectManager $manager, OrderRepositoryInterface $repository, FactoryInterface $factory)
     {
         $this->manager = $manager;

@@ -15,9 +15,6 @@ use Sylius\Bundle\CoreBundle\Form\Type\ProductType as BaseProductType;
 use Sylius\Component\Core\Model\Taxon;
 use Symfony\Component\Form\FormBuilderInterface;
 
-/**
- * Taxon form type.
- */
 class ProductType extends BaseProductType
 {
     /**

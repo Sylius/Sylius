@@ -15,22 +15,16 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Data fetcher choice type
- *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class DataFetcherChoiceType extends AbstractType
 {
     /**
-     * DataFetchers
-     *
      * @var array
      */
     protected $dataFetchers;
 
     /**
-     * Constructor.
-     *
      * @param array $dataFetchers
      */
     public function __construct($dataFetchers)

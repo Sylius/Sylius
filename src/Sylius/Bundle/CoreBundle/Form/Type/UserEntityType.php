@@ -12,8 +12,6 @@
 namespace Sylius\Bundle\CoreBundle\Form\Type;
 
 /**
- * User choice type for "doctrine/orm" driver.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class UserEntityType extends UserChoiceType

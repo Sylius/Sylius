@@ -16,8 +16,6 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * User based raport configuration form type.
- *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class UserRegistrationType extends AbstractType

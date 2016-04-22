@@ -16,8 +16,6 @@ use Sylius\Bundle\UserBundle\Doctrine\ORM\UserRepository;
 use Sylius\Component\Report\DataFetcher\DefaultDataFetchers;
 
 /**
- * User registration data fetcher
- *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class UserRegistrationDataFetcher extends TimePeriod

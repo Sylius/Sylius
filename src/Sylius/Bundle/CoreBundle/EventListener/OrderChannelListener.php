@@ -17,8 +17,6 @@ use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
- * Sets currently selected channel on order object.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class OrderChannelListener

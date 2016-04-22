@@ -21,14 +21,45 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class PurchaseListener
 {
+    /**
+     * @var CartProviderInterface
+     */
     protected $cartProvider;
+
+    /**
+     * @var UrlGeneratorInterface
+     */
     protected $router;
+
+    /**
+     * @var SessionInterface
+     */
     protected $session;
+
+    /**
+     * @var TranslatorInterface
+     */
     protected $translator;
+
+    /**
+     * @var string
+     */
     protected $redirectTo;
 
-    public function __construct(CartProviderInterface $cartProvider, UrlGeneratorInterface $router, SessionInterface $session, TranslatorInterface $translator, $redirectTo)
-    {
+    /**
+     * @param CartProviderInterface $cartProvider
+     * @param UrlGeneratorInterface $router
+     * @param SessionInterface $session
+     * @param TranslatorInterface $translator
+     * @param string $redirectTo
+     */
+    public function __construct(
+        CartProviderInterface $cartProvider,
+        UrlGeneratorInterface $router,
+        SessionInterface $session,
+        TranslatorInterface $translator,
+        $redirectTo
+    ) {
         $this->cartProvider = $cartProvider;
         $this->router = $router;
         $this->session = $session;
@@ -36,6 +67,9 @@ class PurchaseListener
         $this->redirectTo = $redirectTo;
     }
 
+    /**
+     * @param PurchaseCompleteEvent $event
+     */
     public function abandonCart(PurchaseCompleteEvent $event)
     {
         if (in_array($event->getSubject()->getState(), [PaymentInterface::STATE_PENDING, PaymentInterface::STATE_PROCESSING, PaymentInterface::STATE_COMPLETED])) {
@@ -49,6 +83,9 @@ class PurchaseListener
         ));
     }
 
+    /**
+     * @param PurchaseCompleteEvent $event
+     */
     public function addFlash(PurchaseCompleteEvent $event)
     {
         switch ($event->getSubject()->getState()) {

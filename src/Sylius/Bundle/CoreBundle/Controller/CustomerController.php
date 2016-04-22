@@ -13,11 +13,14 @@ namespace Sylius\Bundle\CoreBundle\Controller;
 
 use Sylius\Bundle\UserBundle\Controller\CustomerController as BaseCustomerController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class CustomerController extends BaseCustomerController
 {
     /**
-     * Render user filter form.
+     * @param Request $request
+     *
+     * @return Response
      */
     public function filterFormAction(Request $request)
     {

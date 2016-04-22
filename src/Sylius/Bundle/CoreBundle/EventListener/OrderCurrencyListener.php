@@ -17,8 +17,6 @@ use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
- * Sets currently selected currency on order object.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class OrderCurrencyListener
@@ -37,11 +35,9 @@ class OrderCurrencyListener
     }
 
     /**
-     * Sets currency on the order
+     * @param GenericEvent $event
      *
      * @throws UnexpectedTypeException when event's subject is not an order
-     *
-     * @param GenericEvent $event
      */
     public function processOrderCurrency(GenericEvent $event)
     {

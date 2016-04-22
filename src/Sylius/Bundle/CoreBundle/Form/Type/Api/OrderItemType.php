@@ -16,8 +16,6 @@ use Sylius\Component\Core\Model\ProductVariant;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Order item form type for api creation.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class OrderItemType extends BaseOrderItemType

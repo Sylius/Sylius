@@ -86,8 +86,8 @@ class AddressingStep extends CheckoutStep
     }
 
     /**
-     * @param  OrderInterface    $order
-     * @param  CustomerInterface $customer
+     * @param OrderInterface $order
+     * @param CustomerInterface $customer
      *
      * @return FormInterface
      */
@@ -97,7 +97,7 @@ class AddressingStep extends CheckoutStep
     }
 
     /**
-     * @return null|CustomerInterface
+     * @return CustomerInterface|null
      */
     protected function getCustomer()
     {
