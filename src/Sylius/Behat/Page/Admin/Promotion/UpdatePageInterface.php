@@ -19,11 +19,16 @@ use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
 interface UpdatePageInterface extends BaseUpdatePageInterface
 {
     /**
-     * @param array $parameters where keys are some of arbitrary elements defined by user and values are expected values
+     * @param string $name
+     */
+    public function nameIt($name);
+
+    /**
+     * @param string $channelName
      *
      * @return bool
      */
-    public function hasResourceValues(array $parameters);
+    public function checkChannelsState($channelName);
 
     /**
      * @return bool
@@ -31,7 +36,16 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function isCodeDisabled();
 
     /**
+     * @param string $limit
+     */
+    public function fillUsageLimit($limit);
+
+    public function makeExclusive();
+
+    public function checkCouponBased();
+
+    /**
      * @param string $name
      */
-    public function nameIt($name);
+    public function checkChannel($name);
 }

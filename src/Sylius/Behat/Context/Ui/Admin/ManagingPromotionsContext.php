@@ -12,11 +12,14 @@
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Promotion\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Promotion\UpdatePageInterface;
 use Sylius\Behat\Service\CurrentPageResolverInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
+use Sylius\Component\Core\Model\PromotionInterface;
+use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -25,6 +28,11 @@ use Webmozart\Assert\Assert;
 final class ManagingPromotionsContext implements Context
 {
     const RESOURCE_NAME = 'promotion';
+
+    /**
+     * @var SharedStorageInterface
+     */
+    private $sharedStorage;
 
     /**
      * @var IndexPageInterface
@@ -52,6 +60,7 @@ final class ManagingPromotionsContext implements Context
     private $notificationChecker;
 
     /**
+     * @param SharedStorageInterface $sharedStorage
      * @param IndexPageInterface $indexPage
      * @param CreatePageInterface $createPage
      * @param UpdatePageInterface $updatePage
@@ -59,12 +68,14 @@ final class ManagingPromotionsContext implements Context
      * @param NotificationCheckerInterface $notificationChecker
      */
     public function __construct(
+        SharedStorageInterface $sharedStorage,
         IndexPageInterface $indexPage,
         CreatePageInterface $createPage,
         UpdatePageInterface $updatePage,
-        CurrentPageResolverInterface $currentPageResolver,
+        CurrentPageResolverInterface $currentPageResolver, 
         NotificationCheckerInterface $notificationChecker
     ) {
+        $this->sharedStorage = $sharedStorage;
         $this->indexPage = $indexPage;
         $this->createPage = $createPage;
         $this->updatePage = $updatePage;
@@ -92,6 +103,7 @@ final class ManagingPromotionsContext implements Context
     /**
      * @When I name it :name
      * @When I do not name it
+     * @When I remove its name
      */
     public function iNameIt($name = null)
     {
@@ -99,7 +111,9 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @Then the promotion :promotionName should appear in the registry
+     * @Then the :promotionName promotion should appear in the registry
+     * @Then this promotion should still be named :promotionName
+     * @Then promotion :promotionName should still exist in the registry
      */
     public function thePromotionShouldAppearInTheRegistry($promotionName)
     {
@@ -199,7 +213,7 @@ final class ManagingPromotionsContext implements Context
 
         Assert::false(
             $this->indexPage->isResourceOnPage([$element => $name]),
-            sprintf('Promotion with %s %s has been created, but it should not.', $element, $name)
+            sprintf('Promotion with %s "%s" has been created, but it should not.', $element, $name)
         );
     }
 
@@ -212,7 +226,170 @@ final class ManagingPromotionsContext implements Context
 
         Assert::true(
             $this->indexPage->isResourceOnPage([$element => $value]),
-            sprintf('Promotion with %s %s cannot be found.', $element, $value)
+            sprintf('Promotion with %s "%s" cannot be found.', $element, $value)
+        );
+    }
+
+    /**
+     * @When I set its usage limit to :usageLimit
+     */
+    public function iSetItsUsageLimitTo($usageLimit)
+    {
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm($this->createPage, $this->updatePage);
+
+        $currentPage->fillUsageLimit($usageLimit);
+    }
+
+    /**
+     * @Then the :promotion promotion should be available to be used only :usageLimit times
+     */
+    public function thePromotionShouldBeAvailableToUseOnlyTimes(PromotionInterface $promotion, $usageLimit)
+    {
+        $this->iWantToModifyAPromotion($promotion);
+
+        Assert::true(
+            $this->updatePage->hasResourceValues(['usage_limit' => $usageLimit]),
+            sprintf('Promotion %s does not have usage limit set to %s.', $promotion->getName(), $usageLimit)
+        );
+    }
+
+    /**
+     * @When I make it exclusive
+     */
+    public function iMakeItExclusive()
+    {
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm($this->createPage, $this->updatePage);
+
+        $currentPage->makeExclusive();
+    }
+
+    /**
+     * @Then the :promotion promotion should be exclusive
+     */
+    public function thePromotionShouldBeExclusive(PromotionInterface $promotion)
+    {
+        $this->assertIfFieldIsTrue($promotion, 'exclusive');
+    }
+
+    /**
+     * @When I make it coupon based
+     */
+    public function iMakeItCouponBased()
+    {
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm($this->createPage, $this->updatePage);
+
+        $currentPage->checkCouponBased();
+    }
+
+    /**
+     * @Then the :promotion promotion should be coupon based
+     */
+    public function thePromotionShouldBeCouponBased(PromotionInterface $promotion)
+    {
+        $this->assertIfFieldIsTrue($promotion, 'coupon_based');
+    }
+
+    /**
+     * @When I make it applicable for the :channelName channel
+     */
+    public function iMakeItApplicableForTheChannel($channelName)
+    {
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm($this->createPage, $this->updatePage);
+
+        $currentPage->checkChannel($channelName);
+    }
+
+    /**
+     * @Then the :promotion promotion should be applicable for the :channelName channel
+     */
+    public function thePromotionShouldBeApplicatableForTheChannel(PromotionInterface $promotion, $channelName)
+    {
+        $this->iWantToModifyAPromotion($promotion);
+
+        Assert::true(
+            $this->updatePage->checkChannelsState($channelName),
+            sprintf('Promotion %s is not %s, but it should be.', $promotion->getName(), $channelName)
+        );
+    }
+
+    /**
+     * @Given I want to modify a :promotion promotion
+     * @Given /^I want to modify (this promotion)$/
+     */
+    public function iWantToModifyAPromotion(PromotionInterface $promotion)
+    {
+        $this->updatePage->open(['id' => $promotion->getId()]);
+    }
+
+    /**
+     * @Then the code field should be disabled
+     */
+    public function theCodeFieldShouldBeDisabled()
+    {
+        Assert::true(
+            $this->updatePage->isCodeDisabled(),
+            'Code should be immutable, but it does not.'
+        );
+    }
+
+    /**
+     * @When I save my changes
+     * @When I try to save my changes
+     */
+    public function iSaveMyChanges()
+    {
+        $this->updatePage->saveChanges();
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully edited
+     */
+    public function iShouldBeNotifiedAboutSuccessfulEdition()
+    {
+        $this->notificationChecker->checkEditionNotification(self::RESOURCE_NAME);
+    }
+
+    /**
+     * @When /^I delete a ("([^"]+)" promotion)$/
+     * @When /^I try to delete a ("([^"]+)" promotion)$/
+     */
+    public function iDeletePromotion(PromotionInterface $promotion)
+    {
+        $this->sharedStorage->set('promotion', $promotion);
+
+        $this->indexPage->open();
+        $this->indexPage->deleteResourceOnPage(['name' => $promotion->getName()]);
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully deleted
+     */
+    public function iShouldBeNotifiedAboutSuccessfulDeletion()
+    {
+        $this->notificationChecker->checkDeletionNotification(self::RESOURCE_NAME);
+    }
+
+    /**
+     * @Then /^(this promotion) should no longer exist in the promotion registry$/
+     */
+    public function promotionShouldNotExistInTheRegistry(PromotionInterface $promotion)
+    {
+        $this->indexPage->open();
+
+        Assert::false(
+            $this->indexPage->isResourceOnPage(['code' => $promotion->getCode()]),
+            sprintf('Promotion with code %s exists but should not.', $promotion->getCode())
+        );
+    }
+
+    /**
+     * @Then I should be notified that it is in use and cannot be deleted
+     */
+    public function iShouldBeNotifiedOfFailure()
+    {
+        $this->notificationChecker->checkNotification(
+            "Cannot delete, the promotion is in use.",
+            NotificationType::failure()
         );
     }
 
@@ -227,6 +404,20 @@ final class ManagingPromotionsContext implements Context
         Assert::true(
             $currentPage->checkValidationMessageFor($element, $expectedMessage),
             sprintf('Promotion %s should be required.', $element)
+        );
+    }
+
+    /**
+     * @param PromotionInterface $promotion
+     * @param string $field
+     */
+    private function assertIfFieldIsTrue(PromotionInterface $promotion, $field)
+    {
+        $this->iWantToModifyAPromotion($promotion);
+
+        Assert::true(
+            $this->updatePage->hasResourceValues([$field => 1]),
+            sprintf('Promotion %s is not %s, but it should be.', $promotion->getName(), str_replace('_', ' ', $field))
         );
     }
 }

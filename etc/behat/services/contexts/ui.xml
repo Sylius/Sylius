@@ -89,6 +89,7 @@
         </service>
 
         <service id="sylius.behat.context.ui.admin.managing_promotions" class="%sylius.behat.context.ui.admin.managing_promotions.class%" scope="scenario">
+            <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
             <argument type="service" id="sylius.behat.page.admin.promotion.index" />
             <argument type="service" id="sylius.behat.page.admin.promotion.create" />
             <argument type="service" id="sylius.behat.page.admin.promotion.update" />

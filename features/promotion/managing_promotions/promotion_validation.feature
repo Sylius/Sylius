@@ -25,3 +25,12 @@ Feature: Promotion validation
         And I try to add it
         Then I should be notified that name is required
         And promotion with code "no_vat_promotion" should not be added
+
+    @ui
+    Scenario: Trying to remove name from existing promotion
+        Given there is a promotion "Christmas sale"
+        And I want to modify this promotion
+        When I remove its name
+        And I try to save my changes
+        Then I should be notified that name is required
+        And this promotion should still be named "Christmas sale"
