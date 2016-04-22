@@ -36,6 +36,7 @@ sylius:
         edit_currency: Edit currency
         edit_customer: Edit customer
         edit_payment_method: Edit payment method
+        edit_product_option: Edit product option
         edit_promotion: Edit promotion
         edit_tax_category: Edit tax category
         edit_tax_rate: Edit tax rate

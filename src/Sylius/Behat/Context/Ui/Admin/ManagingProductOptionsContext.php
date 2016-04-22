@@ -14,9 +14,10 @@ namespace Sylius\Behat\Context\Ui\Admin;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\ProductOption\CreatePageInterface;
-use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface;
+use Sylius\Behat\Page\Admin\ProductOption\UpdatePageInterface;
 use Sylius\Behat\Service\CurrentPageResolverInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
+use Sylius\Component\Product\Model\OptionInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -81,6 +82,14 @@ final class ManagingProductOptionsContext implements Context
     }
 
     /**
+     * @Given I want to modify the :productOption product option
+     */
+    public function iWantToModifyAPaymentMethod(OptionInterface $productOption)
+    {
+        $this->updatePage->open(['id' => $productOption->getId()]);
+    }
+
+    /**
      * @When I browse product options
      */
     public function iBrowseProductOptions()
@@ -108,16 +117,26 @@ final class ManagingProductOptionsContext implements Context
 
     /**
      * @When I name it :name in :language
+     * @When I remove its name from :language translation
      */
-    public function iNameItInLanguage($name, $language)
+    public function iNameItInLanguage($name = null, $language)
     {
         $this->createPage->nameItIn($name, $language);
     }
 
     /**
-     * @When I specify its code as :code
+     * @When I do not name it
      */
-    public function iSpecifyItsCodeAs($code)
+    public function iDoNotNameIt()
+    {
+        // Intentionally left blank to fulfill context expectation
+    }
+
+    /**
+     * @When I specify its code as :code
+     * @When I do not specify its code
+     */
+    public function iSpecifyItsCodeAs($code = null)
     {
         $this->createPage->specifyCode($code);
     }
@@ -148,6 +167,109 @@ final class ManagingProductOptionsContext implements Context
         Assert::true(
             $this->indexPage->isResourceOnPage(['name' => $productOptionName]),
             sprintf('The shipping method with name %s has not been found.', $productOptionName)
+        );
+    }
+
+    /**
+     * @Then I should be notified that product option with this code already exists
+     */
+    public function iShouldBeNotifiedThatProductOptionWithThisCodeAlreadyExists()
+    {
+        Assert::true(
+            $this->createPage->checkValidationMessageFor('code', 'The option with given code already exists.'),
+            'Unique code violation message should appear on page, but it does not.'
+        );
+    }
+
+    /**
+     * @Then there should still be only one product option with :element :value
+     */
+    public function thereShouldStillBeOnlyOneProductOptionWith($element, $value)
+    {
+        $this->iBrowseProductOptions();
+
+        Assert::true(
+            $this->indexPage->isResourceOnPage([$element => $value]),
+            sprintf('Product option with %s %s cannot be found.', $element, $value)
+        );
+    }
+
+    /**
+     * @Then I should be notified that :element is required
+     */
+    public function iShouldBeNotifiedThatElementIsRequired($element)
+    {
+        $this->assertFieldValidationMessage($element, sprintf('Please enter option %s.', $element));
+    }
+
+    /**
+     * @Then the product option with :element :value should not be added
+     */
+    public function theProductoptionWithElementValueShouldNotBeAdded($element, $value)
+    {
+        $this->iBrowseProductOptions();
+
+        Assert::false(
+            $this->indexPage->isResourceOnPage([$element => $value]),
+            sprintf('Product option with %s %s was created, but it should not.', $element, $value)
+        );
+    }
+
+    /**
+     * @param string $element
+     * @param string $expectedMessage
+     */
+    private function assertFieldValidationMessage($element, $expectedMessage)
+    {
+        Assert::true(
+            $this->createPage->checkValidationMessageFor($element, $expectedMessage),
+            sprintf('Product option %s should be required.', $element)
+        );
+    }
+
+    /**
+     * @Then /^(this product option) should still be named "([^"]+)"$/
+     */
+    public function thisProductOptionNameShouldStillBe(OptionInterface $productOption, $productOptionName)
+    {
+        $this->iBrowseProductOptions();
+
+        Assert::true(
+            $this->indexPage->isResourceOnPage([
+                'code' => $productOption->getCode(),
+                'name' => $productOptionName,
+            ]),
+            sprintf('Product option name %s has not been assigned properly.', $productOptionName)
+        );
+    }
+
+    /**
+     * @Then the code field should be disabled
+     */
+    public function theCodeFieldShouldBeDisabled()
+    {
+        Assert::true(
+            $this->updatePage->isCodeDisabled(),
+            'Code field should be disabled but it is not'
+        );
+    }
+
+    /**
+     * @When I do not add an option value
+     */
+    public function iDoNotAddAnOptionValue()
+    {
+        // Intentionally left blank to fulfill context expectation
+    }
+
+    /**
+     * @Then I should be notified that at least two option values are required
+     */
+    public function iShouldBeNotifiedThatAtLeastTwoOptionValuesAreRequired()
+    {
+        Assert::true(
+            $this->createPage->checkValidationMessageForOptionValues('Please add at least 2 option values.'),
+            'I should be notified that product option needs at least two option values.'
         );
     }
 }

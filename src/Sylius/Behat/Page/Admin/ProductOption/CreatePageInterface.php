@@ -34,4 +34,9 @@ interface CreatePageInterface extends BaseCreatePageInterface
      * @param string $value
      */
     public function addOptionValue($code, $value);
+
+    /**
+     * @param string $message
+     */
+    public function checkValidationMessageForOptionValues($message);
 }

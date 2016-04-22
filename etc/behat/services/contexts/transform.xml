@@ -97,6 +97,11 @@
             <tag name="sylius.behat.context" />
         </service>
 
+        <service id="sylius.behat.context.transform.product_option" class="%sylius.behat.context.transform.product_option.class%" scope="scenario">
+            <argument type="service" id="sylius.repository.product_option" container="symfony" />
+            <tag name="sylius.behat.context" />
+        </service>
+
         <service id="sylius.behat.context.transform.product_variant" class="%sylius.behat.context.transform.product_variant.class%" scope="scenario">
             <argument type="service" id="sylius.repository.product" container="symfony" />
             <argument type="service" id="sylius.repository.product_variant" container="symfony" />

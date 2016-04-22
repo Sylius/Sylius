@@ -20,13 +20,14 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
+use Sylius\Component\Variation\Repository\OptionRepositoryInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 final class ProductContext implements Context
 {
@@ -56,7 +57,7 @@ final class ProductContext implements Context
     private $productOptionFactory;
 
     /**
-     * @var RepositoryInterface
+     * @var OptionRepositoryInterface
      */
     private $productOptionRepository;
 
@@ -71,7 +72,7 @@ final class ProductContext implements Context
      * @param FactoryInterface $productFactory
      * @param FactoryInterface $productVariantFactory
      * @param FactoryInterface $productOptionFactory
-     * @param RepositoryInterface $productOptionRepository
+     * @param OptionRepositoryInterface $productOptionRepository
      * @param ObjectManager $objectManager
      */
     public function __construct(
@@ -80,7 +81,7 @@ final class ProductContext implements Context
         FactoryInterface $productFactory,
         FactoryInterface $productVariantFactory,
         FactoryInterface $productOptionFactory,
-        RepositoryInterface $productOptionRepository,
+        OptionRepositoryInterface $productOptionRepository,
         ObjectManager $objectManager
     ) {
         $this->sharedStorage = $sharedStorage;
@@ -184,6 +185,19 @@ final class ProductContext implements Context
     ) {
         $productVariant->setTaxCategory($taxCategory);
         $this->objectManager->flush($productVariant);
+    }
+
+    /**
+     * @Given the store has a product option :productOptionName with a code :productOptionCode
+     */
+    public function theStoreHasAProductOptionWithACode($productOptionName, $productOptionCode)
+    {
+        $productOption = $this->productOptionFactory->createNew();
+        $productOption->setCode($productOptionCode);
+        $productOption->setName($productOptionName);
+
+        $this->sharedStorage->set('product_option', $productOption);
+        $this->productOptionRepository->add($productOption);
     }
 
     /**

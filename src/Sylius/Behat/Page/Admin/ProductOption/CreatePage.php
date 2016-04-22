@@ -12,6 +12,7 @@
 namespace Sylius\Behat\Page\Admin\ProductOption;
 
 use Behat\Mink\Element\Element;
+use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Behaviour\SpecifiesItsCode;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 
@@ -48,12 +49,26 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function checkValidationMessageForOptionValues($message)
+    {
+        $optionValuesValidationElement = $this->getElement('ui_segment')->find('css', '.ui.pointing');
+        if (null === $optionValuesValidationElement) {
+            throw new ElementNotFoundException($this->getDriver(), 'product option validation box', 'css', '.ui.pointing');
+        }
+
+        return $optionValuesValidationElement->getText() === $message;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_product_option_code',
             'name' => '#sylius_product_option_translations_en_US_name',
             'values' => '#sylius_product_option_values',
+            'ui_segment' => '.ui.segment',
         ]);
     }
 
