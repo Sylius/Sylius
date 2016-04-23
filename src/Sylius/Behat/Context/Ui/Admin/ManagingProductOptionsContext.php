@@ -159,6 +159,7 @@ final class ManagingProductOptionsContext implements Context
 
     /**
      * @Then the product option :productOptionName should appear in the registry
+     * @Then the product option :productOptionName should be in the registry
      */
     public function theProductOptionShouldAppearInTheRegistry($productOptionName)
     {
@@ -270,6 +271,20 @@ final class ManagingProductOptionsContext implements Context
         Assert::true(
             $this->createPage->checkValidationMessageForOptionValues('Please add at least 2 option values.'),
             'I should be notified that product option needs at least two option values.'
+        );
+    }
+
+    /**
+     * @Then I should see :amount product options in the list
+     */
+    public function iShouldSeeProductOptionsInTheList($amount)
+    {
+        $foundRows = $this->indexPage->countItems();
+
+        Assert::eq(
+            ((int) $amount),
+            $foundRows,
+            '%2$s rows with product options should appear on page, %s rows has been found'
         );
     }
 }
