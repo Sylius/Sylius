@@ -5,7 +5,7 @@
         {{ form_row(form.code) }}
         {{ form_row(form.name) }}
     </div>
-    <div class="ui two column grid">
+    <div class="two field">
         <div class="column">
             {{ form_row(form.usageLimit) }}
             {{ form_row(form.exclusive) }}
@@ -18,6 +18,10 @@
                 {{ form_row(channels) }}
             {% endfor %}
         </div>
+    </div>
+    <div class="two fields">
+        {{ form_row(form.startsAt) }}
+        {{ form_row(form.endsAt) }}
     </div>
 </div>
 <div class="ui segment">
