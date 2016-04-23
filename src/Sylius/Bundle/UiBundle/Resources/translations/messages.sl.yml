@@ -12,8 +12,9 @@ sylius:
         cancel: Prekliči
         color: Barva
         countries: Države
-        currencies: Valute
+        coupon_based: Kupon, ki temelji
         create: Ustvarite
+        currencies: Valute
         dashboard: Nadzorna plošča
         default_currency: Privzeta valuta
         default_locale: Privzeto območje
@@ -22,6 +23,7 @@ sylius:
         edit: Urejanje
         empty: Prazno
         enabled: Omogočeno
+        exclusive: Izključno
         filter: Filter
         locales: Področne nastavitve
         manage_customer: Upravljanje strank

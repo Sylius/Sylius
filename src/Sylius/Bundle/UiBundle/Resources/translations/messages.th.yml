@@ -18,8 +18,9 @@ sylius:
         confirm_your_action: ยืนยันการกระทำของคุณ
         contains: ประกอบด้วย
         countries: ประเทศ
-        currencies: สกุลเงิน
+        coupon_based: ขึ้นกับคูปอง
         create: สร้าง
+        currencies: สกุลเงิน
         dashboard: แดชบอร์ด
         default_currency: สกุลเงินหลัก
         default_locale: ตำแหน่งที่ตั้งเริ่มต้น
@@ -33,6 +34,7 @@ sylius:
         enabled: เปิดใช้งานแล้ว
         ends_with: ลงท้ายด้วย
         equal: เท่ากับ
+        exclusive: พิเศษ
         filter: ตัวกรอง
         in: ใน
         info: ข้อมูล

@@ -105,7 +105,6 @@ sylius:
         country: Država
         country_details: Detalji države
         coupon: Kupon
-        coupon_based: Promocija bazirana na kuponima za popust
         coupons: Kuponi
         create: Kreiraj
         create_a_new_address: sylius.account.address.create

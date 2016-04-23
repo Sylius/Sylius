@@ -9,8 +9,10 @@ sylius:
             remember_me: Onthoud mijn gegevens
     ui:
         actions: Acties
+        administration_panel_login: Beheer
         an_error_occurred: Er deed zich een fout voor
         are_your_sure_you_want_to_perform_this_action: Weet u zeker dat u deze actie wilt uitvoeren?
+        available_for_channels: Beschikbaar voor kanalen
         cancel: Annuleren
         category_requirements: Categorie vereisten
         charges_and_taxes: Heffingen en belastingen
@@ -19,8 +21,9 @@ sylius:
         confirm_your_action: Bevestigen uw actie
         contains: Bevat
         countries: Landen
-        currencies: "Valuta's"
+        coupon_based: Coupon gebaseerd
         create: Creëer
+        currencies: "Valuta's"
         dashboard: Dashboard
         default_currency: Standaard valuta
         default_locale: Standaardlandinstelling
@@ -33,6 +36,7 @@ sylius:
         enabled: Toegestaan
         ends_with: Eindigt met
         equal: Gelijk
+        exclusive: Exclusief
         filter: Filter
         in: In
         last_updated: Laatst bijgewerkt

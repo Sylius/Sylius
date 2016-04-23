@@ -160,7 +160,6 @@ sylius:
         country: Страна
         country_details: Информация о стране
         coupon: Купон
-        coupon_based: Основана на купонах
         coupons: sylius.breadcrumb.promotion_coupon.index
         create: Добавить
         create_a_new_address: sylius.account.address.create
@@ -257,7 +256,6 @@ sylius:
         enjoy_all_the_features_that_are_available_on_your_personal_space_to_view_track_and_manage_all_your_data: Воспользуйтесь всеми возможными преимуществами для просмотра, отслеживания и управления своих данных
         error: Ошибка
         exchange_rate: Обменный курс
-        exclusive: Эксклюзив
         existing_customer: Существующий клиент
         expires_at: Истекает
         failed: Провален

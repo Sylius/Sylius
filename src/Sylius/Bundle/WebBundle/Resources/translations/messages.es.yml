@@ -206,7 +206,6 @@ sylius:
         country: País
         country_details: Detalles del país
         coupon: Cupón
-        coupon_based: Basado en cupones
         coupons: sylius.breadcrumb.promotion_coupon.index
         create: Crear
         create_a_new_address: sylius.account.address.create
@@ -344,7 +343,6 @@ sylius:
         ends_at: Fecha de fin
         enjoy_all_the_features_that_are_available_on_your_personal_space_to_view_track_and_manage_all_your_data: Disfrute de todas las características disponibles en su espacio personal para examinar, controlar y gestionar todos sus datos
         exchange_rate: Tasa o tipo de cambio
-        exclusive: Exclusivo
         existing_customer: Cliente existente
         expires_at: Caduca en
         failed: Fallido

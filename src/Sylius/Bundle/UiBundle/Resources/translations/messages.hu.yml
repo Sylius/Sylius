@@ -11,6 +11,7 @@ sylius:
         actions: Műveletek
         cancel: Mégse
         countries: Országok
+        coupon_based: Kupon alapján
         create: Létrehozás
         dashboard: Vezérlőpult
         default_currency: Alapértelmezett pénznem

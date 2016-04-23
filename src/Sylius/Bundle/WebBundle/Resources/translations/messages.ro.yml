@@ -118,7 +118,6 @@ sylius:
         country: Țară
         country_details: Detalii țară
         coupon: Cod promoțional
-        coupon_based: Bazat pe cod promoțional
         coupons: Coduri promoționale
         create: Creează
         create_a_new_address: Creeare adresă nouă

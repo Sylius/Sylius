@@ -105,7 +105,6 @@ sylius:
         country: Land
         country_details: Detaljer for land
         coupon: Kupong
-        coupon_based: Kupongbasert
         coupons: Kuponger
         create: Opprett
         create_a_new_address: Lag en ny adresse

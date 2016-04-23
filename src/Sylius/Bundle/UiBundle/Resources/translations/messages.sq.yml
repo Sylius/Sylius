@@ -18,8 +18,9 @@ sylius:
         confirm_your_action: Konfirmoni veprimin tuaj
         contains: Përmban
         countries: Vendet
-        currencies: Monedhat
+        coupon_based: Bazuar në kupon
         create: Krijo
+        currencies: Monedhat
         dashboard: Paneli
         default_currency: Monedha e paracaktuar
         default_locale: Lokalizimi i parazgjedhur
@@ -32,6 +33,7 @@ sylius:
         enabled: E aktivizuar
         ends_with: Mbaron me
         equal: E njëjtë
+        exclusive: Ekskluziv
         filter: Filtri
         in: Brenda
         info: Info

@@ -161,7 +161,6 @@ sylius:
         country: Země
         country_details: Podrobnosti země
         coupon: Kupón
-        coupon_based: Kupón na bázi
         coupons: Kupóny
         create: Vytvořit
         create_a_new_address: Vytvořit novou adresu
@@ -274,7 +273,6 @@ sylius:
         ends_at: Končí
         error: Chyba
         exchange_rate: Směnný kurz
-        exclusive: Exkluzivní
         existing_customer: Stávající zákazník
         expires_at: Končí v
         failed: Neúspěšné

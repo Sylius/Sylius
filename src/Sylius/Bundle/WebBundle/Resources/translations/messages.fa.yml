@@ -205,7 +205,6 @@ sylius:
         country: كشور
         country_details: جزئیات کشور
         coupon: کد تخفیف
-        coupon_based: مبتنی بر کوپن
         coupons: کدهای تخفیف
         create: ایجاد
         create_a_new_address: افزودن آدرس جدید
@@ -344,7 +343,6 @@ sylius:
         enjoy_all_the_features_that_are_available_on_your_personal_space_to_view_track_and_manage_all_your_data: از این صفحه می توانید برای مشاهده, دنبال کردن و مدیریت اطلاعاتتان استفاده کنید.
         error: خطا
         exchange_rate: نرخ تبدیل ارز
-        exclusive: یکبار مصرف
         existing_customer: از قبل عضو هستم
         expires_at: انقضا در تاریخ
         failed: پرداخت ناموفق

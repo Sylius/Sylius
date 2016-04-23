@@ -12,6 +12,7 @@ sylius:
         cancel: Cancelar
         color: Cor
         countries: Países
+        coupon_based: Cupom com base
         create: Criar
         dashboard: Painel
         default_currency: Moeda padrão

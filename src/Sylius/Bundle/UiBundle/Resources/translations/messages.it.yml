@@ -18,8 +18,9 @@ sylius:
         confirm_your_action: "Confermare l'azione"
         contains: Contiene
         countries: Paesi
-        currencies: Monete
+        coupon_based: Basata su coupon
         create: Crea
+        currencies: Monete
         dashboard: Pannello amministrazione
         default_currency: Valuta predefinita
         default_locale: Locale predefinita
@@ -32,6 +33,7 @@ sylius:
         enabled: Abilitato
         ends_with: Finisce con
         equal: Uguale
+        exclusive: Esclusivo
         filter: Filtri
         in: In
         info: Info
