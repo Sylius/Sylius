@@ -1,0 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    ui:
+        the_channel_cannot_be_deleted_at_least_one_enabled_channel_is_required: Le canal de distribution ne peut pas être supprimé, il faut au moins un canal de distribution activé.
