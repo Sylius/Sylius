@@ -164,13 +164,36 @@
     {% endspaceless %}
 {% endblock %}
 
+{% block sylius_translations_row %}
+    {{ form_widget(form) }}
+{% endblock %}
+
 {% block sylius_translations_widget %}
-    {% for translation in form %}
-        <div class="form-group">
-            {{ form_label(translation, translation.vars.name) }}
-            <div class="col-lg-10">
-                {{ form_widget(translation) }}
-            </div>
+    {{ form_errors(form) }}
+    <div class="tab-container">
+        <ul class="nav nav-tabs">
+            <li><span>{{ 'sylius.ui.translations'|trans }}</span></li>
+            {% for translationsFields in form %}
+                {% set locale = translationsFields.vars.name %}
+
+                <li {% if app.request.locale == locale %}class="active"{% endif %}>
+                    <a href="#" data-toggle="tab" data-target=".{{ translationsFields.vars.id }}_translation_fields-{{ locale }}">
+                        {{ locale|capitalize }}
+                        {% if translationsFields.vars.required %}*{% endif %}
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <div class="tab-content">
+            {% for translationsFields in form %}
+                {% set locale = translationsFields.vars.name %}
+
+                <div class="{{ translationsFields.vars.id }}_translation_fields-{{ locale }} tab-pane {% if app.request.locale == locale %}active{% endif %} {% if not form.vars.valid %}error{% endif %}">
+                    {{ form_errors(translationsFields) }}
+                    {{ form_widget(translationsFields) }}
+                </div>
+            {% endfor %}
         </div>
-    {% endfor %}
-{%  endblock %}
+    </div>
+{% endblock %}

@@ -422,6 +422,23 @@ form.form-signin .btn-success:hover {
     border: 0;
 }
 
+/* Tabs */
+.tab-container {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 20px;
+}
+
+.tab-content {
+    margin-top: 20px;
+}
+
+.nav-tabs > li > span {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    font-weight: bold;
+}
+
 /* Hide button text on small devices, as well remove some other margin/padding */
 @media (max-width: 992px) {
     .row {
