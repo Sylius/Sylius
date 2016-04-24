@@ -12,8 +12,9 @@ sylius:
         cancel: Zrušit
         color: Barva
         countries: Země
-        currencies: Měny
+        coupon_based: Kupón na bázi
         create: Vytvořit
+        currencies: Měny
         dashboard: Nástěnka
         default_currency: Výchozí měna
         delete: Odstranit
@@ -21,6 +22,7 @@ sylius:
         edit: Úpravy
         empty: Prázdné
         enabled: Povoleno
+        exclusive: Exkluzivní
         filter: Filtr
         locales: Lokalizace
         new: Nový

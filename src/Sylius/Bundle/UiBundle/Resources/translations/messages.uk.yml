@@ -11,6 +11,7 @@ sylius:
         cancel: Відмінити
         color: Колір
         countries: Країни
+        coupon_based: На основі купону
         create: Створити
         dashboard: Панель керування
         default_currency: Валюта за замовчуванням

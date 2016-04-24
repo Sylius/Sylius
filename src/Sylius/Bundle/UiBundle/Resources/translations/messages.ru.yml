@@ -12,8 +12,9 @@ sylius:
         cancel: Отмена
         color: Цвет
         countries: Страны
-        currencies: Валюты
+        coupon_based: Основана на купонах
         create: Добавить
+        currencies: Валюты
         dashboard: Приборная панель
         default_currency: Валюта по умолчанию
         default_locale: Локаль по умолчанию
@@ -21,6 +22,7 @@ sylius:
         description: Описание
         edit: Редактировать
         enabled: Активен
+        exclusive: Эксклюзив
         filter: Фильтр
         locales: Языки
         manage_customer: Управление клиентами

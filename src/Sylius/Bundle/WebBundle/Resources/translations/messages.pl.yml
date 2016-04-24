@@ -162,7 +162,6 @@ sylius:
         country: Kraj
         country_details: Szczegóły kraju
         coupon: Kupon
-        coupon_based: Z wykorzystaniem kuponów
         coupons: Kupony
         create: Utwórz
         create_a_new_address: Dodaj nowy adres
@@ -277,7 +276,6 @@ sylius:
         ends_at: Data zakończenia
         error: Błąd
         exchange_rate: Kurs wymiany
-        exclusive: Ekskluzywny
         existing_customer: Istniejący Klient
         expires_at: Wygasa dnia
         failed: Nieudane

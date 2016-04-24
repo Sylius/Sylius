@@ -221,7 +221,6 @@ sylius:
         country: Paese
         country_details: Dettagli paese
         coupon: Promozione
-        coupon_based: Basata su coupon
         coupons: Codici promozionali
         create: Crea
         create_a_new_address: Crea un nuovo indirizzo
@@ -360,7 +359,6 @@ sylius:
         enjoy_all_the_features_that_are_available_on_your_personal_space_to_view_track_and_manage_all_your_data: Godetevi tutte le funzionalità che sono disponibili sul tuo spazio personale per visualizzare, tenere traccia e gestire tutti i dati
         error: Errore
         exchange_rate: Tasso di cambio
-        exclusive: Esclusivo
         existing_customer: Cliente esistente
         expires_at: Scadenza il
         failed: Fallimento

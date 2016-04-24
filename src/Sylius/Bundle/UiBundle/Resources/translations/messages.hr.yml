@@ -11,6 +11,7 @@ sylius:
         actions: Akcije
         cancel: Prekini
         countries: Države
+        coupon_based: Promocija bazirana na kuponima za popust
         create: Kreiraj
         dashboard: Kontrolna ploča
         default_currency: Zadana valuta

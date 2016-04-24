@@ -118,7 +118,6 @@ sylius:
         country: Ország
         country_details: Ország részletek
         coupon: Kupon
-        coupon_based: Kupon alapján
         coupons: Kuponok
         create: Létrehozás
         create_a_new_address: Új cím létrehozása

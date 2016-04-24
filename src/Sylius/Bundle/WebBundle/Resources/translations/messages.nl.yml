@@ -210,7 +210,6 @@ sylius:
         country: Land
         country_details: Land details
         coupon: Coupon
-        coupon_based: Coupon gebaseerd
         coupons: Coupons
         create: Creëer
         create_a_new_address: Voeg nieuw adres toe
@@ -332,7 +331,6 @@ sylius:
         enjoy_all_the_features_that_are_available_on_your_personal_space_to_view_track_and_manage_all_your_data: Geniet van alle functies die beschikbaar zijn in uw persoonlijke ruimte om al uw gegevens te bekijken, bij te houden en te beheren
         error: Fout
         exchange_rate: Wisselkoers
-        exclusive: Exclusief
         existing_customer: Bestaande klant
         expires_at: Verloopt op
         failed: Mislukt

@@ -12,16 +12,19 @@ sylius:
         administration_panel_login: Prihásenie do administračného rozhrania
         an_error_occurred: Vyskytla sa chyba
         are_your_sure_you_want_to_perform_this_action: Ste si istý, že chcete vykonať túto akciu?
+        available_for_channels: Dostupné pre kanály
         cancel: Zrušiť
         category_requirements: Požiadavky pre kategóriu
         charges_and_taxes: Poplatky a dane
         clear_filters: Vymazať filter
         color: Farba
+        configure_channels_available_in_your_store: Nastavte dostupné kanály vo vašom obchode
         confirm_your_action: Potvrďte vašu akciu
         contains: Obsahuje
         countries: Krajiny
-        currencies: Meny
+        coupon_based: Používať kupóny
         create: Vytvoriť
+        currencies: Meny
         dashboard: Administračný panel
         default_currency: Predvolená mena
         default_locale: Predvolený jazyk
@@ -29,7 +32,11 @@ sylius:
         description: Popis
         disabled: Vypnuté
         edit: Upraviť
+        edit_channel: Úprava kanálu
         edit_country: Upraviť krajinu
+        edit_currency: Úprava meny
+        edit_customer: Úprava zákazníka
+        edit_payment_method: Úprava spôsobu platby
         edit_promotion: Upraviť propagáciu
         edit_tax_category: Úprava daňovej kategórie
         edit_tax_rate: Upraviť sadzbu dane
@@ -37,28 +44,35 @@ sylius:
         enabled: Zapnuté
         ends_with: Končí na
         equal: Rovná sa
+        exclusive: Exkluzívne
         filter: Filter
         in: V
         info: Info
         last_updated: Posledná aktualizácia
         locales: Jazyky
+        manage_country: Spravovať krajiny
+        manage_currencies_available_in_the_store: Spravovať dostupné meny v obchode
         manage_customer: Správa zákazníkov
         manage_languages_available_in_the_store: Spravovať dostupné jazyky v obchode
+        manage_payment_method: Spravovať spôsoby platby
         manage_shipping_destinations: Spravovať prepravné destinácie
         manage_shipping_methods_for_your_store: Spravovať dostupné spôsoby dopravy v obchode
         manage_taxation_of_your_products: Spravovať zdaňovanie vašich produktov
         new: Nová
+        new_channel: Nový kanál
         new_country: Nová krajina
         new_currency: Nová mena
         new_locale: Nový jazyk
         new_tax_category: Nová daňová kategoria
         "no": false
+        no_account: Žiadny účet
         no_results_to_display: Neexistujú žiadne vysledky na zobrazenie
         not_contains: Neobsahuje
         not_empty: Nie je prázdny
         not_in: Nie je v
         or: alebo
         powered_by: Vytvorené v systéme
+        promotion_configuration: Nastavenie propagácii
         promotion_information: Informacie o propagácii
         save_changes: Uložiť zmeny
         shipping_methods: Spôsoby doručenia

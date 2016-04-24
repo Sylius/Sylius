@@ -10,6 +10,7 @@ sylius:
         actions: Handlinger
         cancel: Anuller
         countries: Lande
+        coupon_based: Kupon baseret
         create: Opret
         dashboard: Kontrolpanel
         default_currency: Standard valuta

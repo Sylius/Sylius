@@ -20,8 +20,9 @@ sylius:
         confirm_your_action: Confirmez votre action
         contains: Contient
         countries: Pays
-        currencies: Devises
+        coupon_based: Comprend des coupons
         create: Créer
+        currencies: Devises
         dashboard: Tableau de bord
         default_currency: Devise par défaut
         default_locale: Paramètres régionaux par défaut
@@ -37,6 +38,7 @@ sylius:
         enabled: Activé
         ends_with: Se termine par
         equal: Egal
+        exclusive: Exclusif
         filter: Filtrer
         in: Dans
         info: Info

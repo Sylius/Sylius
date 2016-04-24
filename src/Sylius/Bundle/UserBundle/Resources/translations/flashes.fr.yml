@@ -12,6 +12,6 @@ sylius:
             reset:
                 success: Votre mot de passe a été réinitialisé avec succès !
             change:
-                success: Votre mot de passe a été mise à jour avec succès !
+                success: Votre mot de passe a été mis à jour avec succès !
         reset_password:
             requested: "Si l'email que vous avez spécifié existe dans notre système, vous recevrez un message avec les instructions pour réinitialiser votre mot de passe."

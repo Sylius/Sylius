@@ -12,8 +12,9 @@ sylius:
         cancel: Atšaukti
         color: Spalva
         countries: Šalys
-        currencies: Valiutos
+        coupon_based: Pagal kuponą
         create: Sukurti
+        currencies: Valiutos
         dashboard: Skydelis
         default_currency: Numatytoji valiuta
         delete: Šalinti
@@ -21,6 +22,7 @@ sylius:
         edit: Redaguoti
         empty: Išvalyti
         enabled: Įjungta
+        exclusive: Išskirtinis
         filter: Filtruoti
         locales: Lokalės
         new: Naujas

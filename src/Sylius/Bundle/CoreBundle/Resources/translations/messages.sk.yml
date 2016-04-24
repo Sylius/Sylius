@@ -146,7 +146,7 @@ sylius:
         order_comment:
             name: Poznámka k objednávke
         shipment_confirmation:
-            name: Potvrdenie odoslania tovaru
+            name: Potvrdenie odoslania zásielky
         user_confirmation:
             name: Potvrdenie registrácie použivateľa
         password_reset:

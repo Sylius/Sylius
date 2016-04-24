@@ -220,7 +220,6 @@ sylius:
         country: Vendi
         country_details: Hollësi për vendin
         coupon: Kuponi
-        coupon_based: Bazuar në kupon
         coupons: Kuponat
         create: Krijo
         create_a_new_address: Krijo një adresë të re
@@ -359,7 +358,6 @@ sylius:
         enjoy_all_the_features_that_are_available_on_your_personal_space_to_view_track_and_manage_all_your_data: Shijo të gjitha vetitë që shfaqen në hapësirën tënde personale, gjurmo dhe kontrollo të gjitha të dhënat
         error: Gabim
         exchange_rate: Norma e shkëmbimit
-        exclusive: Ekskluziv
         existing_customer: Blerës ekzistues
         expires_at: Skadon më
         failed: Nuk u krye

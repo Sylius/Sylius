@@ -119,7 +119,6 @@ sylius:
         country: Країна
         country_details: Подробиці про країну
         coupon: Купон
-        coupon_based: На основі купону
         coupons: Купони
         create: Створити
         create_a_new_address: Створити нову адресу

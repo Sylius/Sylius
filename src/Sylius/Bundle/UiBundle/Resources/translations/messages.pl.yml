@@ -12,8 +12,9 @@ sylius:
         cancel: Anuluj
         color: Kolor
         countries: Kraje
-        currencies: Waluty
+        coupon_based: Z wykorzystaniem kuponów
         create: Utwórz
+        currencies: Waluty
         dashboard: Panel
         default_currency: Domyślna waluta
         default_locale: Domyślne ustawienia regionalne
@@ -22,6 +23,7 @@ sylius:
         edit: Edytuj
         empty: Brak
         enabled: Włączone
+        exclusive: Ekskluzywny
         filter: Filtruj
         last_updated: Ostatnia aktualizacja
         locales: Ustawienia regionalne

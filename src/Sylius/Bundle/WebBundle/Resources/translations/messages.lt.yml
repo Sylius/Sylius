@@ -159,7 +159,6 @@ sylius:
         country: Šalis
         country_details: Šalies detalės
         coupon: Kuponas
-        coupon_based: Pagal kuponą
         coupons: Kuponai
         create: Sukurti
         create_a_new_address: Pridėti naują adresą
@@ -270,7 +269,6 @@ sylius:
         ends_at: Baigiasi
         error: Klaida
         exchange_rate: Valiutų kursas
-        exclusive: Išskirtinis
         existing_customer: Esamas klientas
         expires_at: Nustoja galioti
         failed: Nepavyko

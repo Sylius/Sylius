@@ -12,8 +12,9 @@ sylius:
         cancel: لغو
         color: رنگ
         countries: كشور‌ها
-        currencies: واحدهای پول
+        coupon_based: مبتنی بر کوپن
         create: ایجاد
+        currencies: واحدهای پول
         dashboard: داشبورد
         default_currency: واحد پولی پیش‌فرض
         default_locale: زبان پیش فرض
@@ -22,6 +23,7 @@ sylius:
         edit: ويرايش
         empty: خالی
         enabled: فعال
+        exclusive: یکبار مصرف
         filter: فیلتر
         locales: زبان ها
         manage_customer: مدیریت مشتریان

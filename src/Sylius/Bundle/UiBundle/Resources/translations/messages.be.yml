@@ -10,6 +10,7 @@ sylius:
         actions: Дзеянні
         cancel: Адмяніць
         countries: Краіны
+        coupon_based: Заснавана на купонах
         create: Стварыць
         dashboard: Прыборная панэль
         default_currency: Галоўная валюта

@@ -12,8 +12,9 @@ sylius:
         cancel: İptal
         color: Renk
         countries: Ülkeler
-        currencies: Para birimi
+        coupon_based: Kupona dayalı
         create: Oluştur
+        currencies: Para birimi
         dashboard: Kontrol Paneli
         default_currency: Varsayılan para birimi
         delete: Sil
@@ -21,6 +22,7 @@ sylius:
         edit: Düzenle
         empty: Boş
         enabled: Etkin
+        exclusive: Özel
         filter: Filtrele
         locales: Diller
         new: Yeni

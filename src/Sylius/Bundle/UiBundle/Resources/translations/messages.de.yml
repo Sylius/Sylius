@@ -18,8 +18,9 @@ sylius:
         confirm_your_action: Aktion bestätigen
         contains: Enthält
         countries: Länder
-        currencies: Währungen
+        coupon_based: Gutschein basierend
         create: Erstellen
+        currencies: Währungen
         dashboard: Dashboard
         default_currency: Standardwährung
         default_locale: Standard Lokalisierung
@@ -33,6 +34,7 @@ sylius:
         enabled: Aktiviert
         ends_with: Endet mit
         equal: Gleich
+        exclusive: Exklusiv
         filter: Filtern
         in: In
         info: Info

@@ -82,7 +82,7 @@ sylius:
         immutable_warning: Objednávky, ktoré boli odoslané sú nemenné
         no_items: Táto objednávka neobsahuje žiadne položky
         no_promotion: Neboli použité žiadne kupóny
-        no_shipments: Pre túto objednávku neexistujú žiadne doručenia
+        no_shipments: Pre túto objednávku neexistujú žiadne zásielky
         no_shipping_charges: Nie sú uplatnené žiadne poplatky za dopravu
         no_taxes: Nie sú uplatnené žiadne dane
         state:
@@ -121,12 +121,12 @@ sylius:
     shipment:
         no_items: Neexistujú žiadne položky na zobrazenie
         transition:
-            backorder: predobjednané
+            backorder: predobjednaná
             cancel: zrušiť
-            prepare: pripravené
-            release: vydané
+            prepare: pripravená
+            release: vydaná
             return: vrátené
-            ship: odoslané
+            ship: odoslaná
         update: Upraviť
     stockable:
         on_hand: Položiek na sklade
@@ -220,7 +220,6 @@ sylius:
         country: Krajina
         country_details: Podrobnosti o krajine
         coupon: Kupón
-        coupon_based: Používať kupóny
         coupons: Kupóny
         create: Vytvoriť
         create_a_new_address: Vytvoriť novú adresu
@@ -359,7 +358,6 @@ sylius:
         enjoy_all_the_features_that_are_available_on_your_personal_space_to_view_track_and_manage_all_your_data: Užite si všetky funkcie, ktoré sú k dispozícií k zobrazeniu, sledovaniu a spravovaniu vašich dát na vašom osobnom priestore
         error: Chyba
         exchange_rate: Výmenný kurz
-        exclusive: Exkluzívne
         existing_customer: Existujúci zákazník
         expires_at: Platnosť do
         failed: Neúspešné
@@ -431,7 +429,7 @@ sylius:
         manage_products: Spravovať produkty
         manage_promotions: Spravovať propagácie
         manage_reviews: Spravovať recenzie
-        manage_shipments: Spravovať dodania
+        manage_shipments: Spravovať zásielky
         manage_shipping_categories: Spravovať kategórie doručenia
         manage_shipping_methods: Správa spôsoby dopravy
         manage_tax_categories: Správovať daňové kategorie
@@ -599,10 +597,10 @@ sylius:
         set_as_default_billing_address: Nastaviť ako predvolenú fakturačnú adresu
         set_as_default_shipping_address: Nastaviť ako predvolenú dodaciu adresu
         ship: Dodanie
-        shipment_confirmation_name: Potvrdenie odoslania tovaru
+        shipment_confirmation_name: Potvrdenie odoslania zásielky
         shipment_details: Detaily zásielky
         shipment_mode: Spôsob doručenia
-        shipment_state: Stav dodania
+        shipment_state: Stav zásielky
         shipments: Zásielky
         shipped: Odoslané
         shipping_address: Adresa doručenia
@@ -612,7 +610,7 @@ sylius:
         shipping_method: Spôsob doručenia
         shipping_method_details: Podrobnosti spôsobu dopravy
         shipping_methods: Spôsoby doručenia
-        shipping_state: Stav dodania
+        shipping_state: Stav dodávky
         shipping_total: Doprava celkom
         shop_by: Nakupovať podľa
         show_all: Zobraziť všetky

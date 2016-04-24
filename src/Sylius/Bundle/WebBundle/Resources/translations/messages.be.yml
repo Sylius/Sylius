@@ -104,7 +104,6 @@ sylius:
         country: Краіна
         country_details: Дэталі краіны
         coupon: Купон
-        coupon_based: Заснавана на купонах
         coupons: Купоны
         create: Стварыць
         create_a_new_address: Стварыць новы адрас

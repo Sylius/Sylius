@@ -11,6 +11,7 @@ sylius:
         cancel: Anulează
         color: Culoare
         countries: Țări
+        coupon_based: Bazat pe cod promoțional
         create: Creează
         dashboard: Panou de administrare
         default_currency: Moneda implicită

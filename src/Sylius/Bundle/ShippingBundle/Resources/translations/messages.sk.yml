@@ -15,8 +15,8 @@ sylius:
                 pending: Čakajúca
                 ready: Pripravená
                 shipped: Odoslané
-                returned: Vrátené
-                cancelled: Zrušené
+                returned: Vrátená
+                cancelled: Zrušená
             tracking_code: Sledovací kód
         shipping_calculator:
             flat_rate_configuration:
