@@ -19,6 +19,8 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
+use Sylius\Component\Product\Model\OptionInterface;
+use Sylius\Component\Product\Model\OptionValueInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Component\Variation\Repository\OptionRepositoryInterface;
@@ -42,6 +44,11 @@ final class ProductContext implements Context
     private $productRepository;
 
     /**
+     * @var OptionRepositoryInterface
+     */
+    private $productOptionRepository;
+
+    /**
      * @var FactoryInterface
      */
     private $productFactory;
@@ -49,17 +56,17 @@ final class ProductContext implements Context
     /**
      * @var FactoryInterface
      */
-    private $productVariantFactory;
+    private $productOptionFactory;
 
     /**
      * @var FactoryInterface
      */
-    private $productOptionFactory;
+    private $productOptionValueFactory;
 
     /**
-     * @var OptionRepositoryInterface
+     * @var FactoryInterface
      */
-    private $productOptionRepository;
+    private $productVariantFactory;
 
     /**
      * @var ObjectManager
@@ -69,27 +76,30 @@ final class ProductContext implements Context
     /**
      * @param SharedStorageInterface $sharedStorage
      * @param ProductRepositoryInterface $productRepository
-     * @param FactoryInterface $productFactory
-     * @param FactoryInterface $productVariantFactory
-     * @param FactoryInterface $productOptionFactory
      * @param OptionRepositoryInterface $productOptionRepository
+     * @param FactoryInterface $productFactory
+     * @param FactoryInterface $productOptionFactory
+     * @param FactoryInterface $productOptionValueFactory
+     * @param FactoryInterface $productVariantFactory
      * @param ObjectManager $objectManager
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         ProductRepositoryInterface $productRepository,
-        FactoryInterface $productFactory,
-        FactoryInterface $productVariantFactory,
-        FactoryInterface $productOptionFactory,
         OptionRepositoryInterface $productOptionRepository,
+        FactoryInterface $productFactory,
+        FactoryInterface $productOptionFactory,
+        FactoryInterface $productOptionValueFactory,
+        FactoryInterface $productVariantFactory,
         ObjectManager $objectManager
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->productRepository = $productRepository;
-        $this->productFactory = $productFactory;
-        $this->productVariantFactory = $productVariantFactory;
-        $this->productOptionFactory = $productOptionFactory;
         $this->productOptionRepository = $productOptionRepository;
+        $this->productFactory = $productFactory;
+        $this->productOptionFactory = $productOptionFactory;
+        $this->productOptionValueFactory = $productOptionValueFactory;
+        $this->productVariantFactory = $productVariantFactory;
         $this->objectManager = $objectManager;
     }
 
@@ -198,6 +208,35 @@ final class ProductContext implements Context
 
         $this->sharedStorage->set('product_option', $productOption);
         $this->productOptionRepository->add($productOption);
+    }
+
+    /**
+     * @Given /^(this product option) has(?:| also) the "([^"]+)" option value with code "([^"]+)"$/
+     */
+    public function thisProductOptionHasTheOptionValueWithCode(
+        OptionInterface $productOption,
+        $productOptionValueName,
+        $productOptionValueCode
+    ) {
+        $productOptionValue = $this->createProductOptionValue($productOptionValueName, $productOptionValueCode);
+        $productOption->addValue($productOptionValue);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @param string $value
+     * @param string $code
+     *
+     * @return OptionValueInterface
+     */
+    private function createProductOptionValue($value, $code)
+    {
+        $productOptionValue = $this->productOptionValueFactory->createNew();
+        $productOptionValue->setValue($value);
+        $productOptionValue->setCode($code);
+
+        return $productOptionValue;
     }
 
     /**

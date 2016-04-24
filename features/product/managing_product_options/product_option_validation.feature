@@ -40,11 +40,6 @@ Feature: Product option validation
         And this product option should still be named "T-Shirt color"
 
     @ui
-    Scenario: Seeing disabled code field when editing product option
-        Given I want to modify the "T-Shirt color" product option
-        Then the code field should be disabled
-
-    @ui
     Scenario: Trying to add a new product option without any option values
         Given I want to create a new product option
         When I name it "T-Shirt size" in "English (United States)"

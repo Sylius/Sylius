@@ -117,6 +117,7 @@ final class ManagingProductOptionsContext implements Context
 
     /**
      * @When I name it :name in :language
+     * @When I rename it to :name in :language
      * @When I remove its name from :language translation
      */
     public function iNameItInLanguage($name = null, $language)
@@ -155,6 +156,14 @@ final class ManagingProductOptionsContext implements Context
     public function iShouldBeNotifiedItHasBeenSuccessfullyCreated()
     {
         $this->notificationChecker->checkCreationNotification(self::RESOURCE_NAME);
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully edited
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited()
+    {
+        $this->notificationChecker->checkEditionNotification(self::RESOURCE_NAME);
     }
 
     /**
@@ -217,19 +226,8 @@ final class ManagingProductOptionsContext implements Context
     }
 
     /**
-     * @param string $element
-     * @param string $expectedMessage
-     */
-    private function assertFieldValidationMessage($element, $expectedMessage)
-    {
-        Assert::true(
-            $this->createPage->checkValidationMessageFor($element, $expectedMessage),
-            sprintf('Product option %s should be required.', $element)
-        );
-    }
-
-    /**
      * @Then /^(this product option) should still be named "([^"]+)"$/
+     * @Then /^(this product option) name should be "([^"]+)"$/
      */
     public function thisProductOptionNameShouldStillBe(OptionInterface $productOption, $productOptionName)
     {
@@ -285,6 +283,18 @@ final class ManagingProductOptionsContext implements Context
             ((int) $amount),
             $foundRows,
             '%2$s rows with product options should appear on page, %s rows has been found'
+        );
+    }
+
+    /**
+     * @param string $element
+     * @param string $expectedMessage
+     */
+    private function assertFieldValidationMessage($element, $expectedMessage)
+    {
+        Assert::true(
+            $this->createPage->checkValidationMessageFor($element, $expectedMessage),
+            sprintf('Product option %s should be required.', $element)
         );
     }
 }
