@@ -35,8 +35,10 @@ class MetadataProvider implements MetadataProviderInterface
      * @param MetadataProviderInterface $metadataProvider
      * @param MetadataHierarchyProviderInterface $metadataHierarchyProvider
      */
-    public function __construct(MetadataProviderInterface $metadataProvider, MetadataHierarchyProviderInterface $metadataHierarchyProvider)
-    {
+    public function __construct(
+        MetadataProviderInterface $metadataProvider,
+        MetadataHierarchyProviderInterface $metadataHierarchyProvider
+    ) {
         $this->metadataProvider = $metadataProvider;
         $this->metadataHierarchyProvider = $metadataHierarchyProvider;
     }

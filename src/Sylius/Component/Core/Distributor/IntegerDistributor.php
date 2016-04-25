@@ -11,8 +11,6 @@
 
 namespace Sylius\Component\Core\Distributor;
 
-use Sylius\Component\Core\Distributor\IntegerDistributorInterface;
-
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */

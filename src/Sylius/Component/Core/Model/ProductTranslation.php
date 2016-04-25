@@ -19,9 +19,6 @@ use Sylius\Component\Product\Model\ProductTranslation as BaseProductTranslation;
 class ProductTranslation extends BaseProductTranslation implements ProductTranslationInterface
 {
     /**
-     * Short product description.
-     * For lists displaying.
-     *
      * @var string
      */
     protected $shortDescription;

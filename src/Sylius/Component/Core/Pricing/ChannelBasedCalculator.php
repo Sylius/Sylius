@@ -35,11 +35,7 @@ class ChannelBasedCalculator implements CalculatorInterface
     }
 
     /**
-     * @param PriceableInterface $subject
-     * @param array              $configuration
-     * @param array              $context
-     *
-     * @return int
+     * {@inheritdoc}
      */
     public function calculate(PriceableInterface $subject, array $configuration, array $context = [])
     {

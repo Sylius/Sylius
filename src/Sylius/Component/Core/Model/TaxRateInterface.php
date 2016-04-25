@@ -15,22 +15,16 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Taxation\Model\TaxRateInterface as BaseTaxRateInterface;
 
 /**
- * Tax rate interface.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface TaxRateInterface extends BaseTaxRateInterface
 {
     /**
-     * Get zone.
-     *
      * @return ZoneInterface
      */
     public function getZone();
 
     /**
-     * Set zone.
-     *
      * @param ZoneInterface $zone
      */
     public function setZone(ZoneInterface $zone);

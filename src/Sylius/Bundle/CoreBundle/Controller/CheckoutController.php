@@ -18,6 +18,7 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\OrderCheckoutTransitions;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\SyliusCheckoutEvents;
 use Sylius\Component\Core\SyliusOrderEvents;
 use Sylius\Component\Order\OrderTransitions;
@@ -285,7 +286,7 @@ class CheckoutController extends FOSRestController
     }
 
     /**
-     * @return \Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderRepository
+     * @return OrderRepositoryInterface
      */
     private function getOrderRepository()
     {
@@ -349,7 +350,7 @@ class CheckoutController extends FOSRestController
 
     /**
      * @param string $type
-     * @param mixed|null $value
+     * @param mixed $value
      * @param array $options
      *
      * @return FormInterface

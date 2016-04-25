@@ -15,15 +15,11 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Taxation\Model\TaxRate as BaseTaxRate;
 
 /**
- * Tax rate applicable to selected zone.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class TaxRate extends BaseTaxRate implements TaxRateInterface
 {
     /**
-     * Tax zone.
-     *
      * @var ZoneInterface
      */
     protected $zone;
@@ -42,7 +38,5 @@ class TaxRate extends BaseTaxRate implements TaxRateInterface
     public function setZone(ZoneInterface $zone)
     {
         $this->zone = $zone;
-
-        return $this;
     }
 }

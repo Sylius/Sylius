@@ -44,8 +44,11 @@ class OrderItemUnitsTaxesApplicator implements OrderTaxesApplicatorInterface
      * @param AdjustmentFactoryInterface $adjustmentFactory
      * @param TaxRateResolverInterface $taxRateResolver
      */
-    public function __construct(CalculatorInterface $calculator, AdjustmentFactoryInterface $adjustmentFactory, TaxRateResolverInterface $taxRateResolver)
-    {
+    public function __construct(
+        CalculatorInterface $calculator,
+        AdjustmentFactoryInterface $adjustmentFactory,
+        TaxRateResolverInterface $taxRateResolver
+    ) {
         $this->calculator = $calculator;
         $this->adjustmentFactory = $adjustmentFactory;
         $this->taxRateResolver = $taxRateResolver;

@@ -17,8 +17,6 @@ use Sylius\Component\Currency\Provider\CurrencyProvider;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
- * Currency provider, which returns currencies enabled for this channel.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Fernando Caraballo Ortiz <caraballo.ortiz@gmail.com>
  */

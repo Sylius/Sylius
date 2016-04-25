@@ -18,8 +18,6 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
 /**
- * Shipping discount action.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class ShippingDiscountAction extends DiscountAction

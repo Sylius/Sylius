@@ -17,15 +17,11 @@ namespace Sylius\Component\Core\Model;
 interface ProductTranslationInterface
 {
     /**
-     * Get product short description.
-     *
      * @return string
      */
     public function getShortDescription();
 
     /**
-     * Set product short description.
-     *
      * @param string $shortDescription
      */
     public function setShortDescription($shortDescription);

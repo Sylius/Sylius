@@ -14,8 +14,6 @@ namespace Sylius\Component\Core\Model;
 class ProductVariantImage extends Image implements ProductVariantImageInterface
 {
     /**
-     * The associated product variant.
-     *
      * @var ProductVariantInterface
      */
     protected $variant;
@@ -34,7 +32,5 @@ class ProductVariantImage extends Image implements ProductVariantImageInterface
     public function setVariant(ProductVariantInterface $variant = null)
     {
         $this->variant = $variant;
-
-        return $this;
     }
 }

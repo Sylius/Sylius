@@ -14,15 +14,11 @@ namespace Sylius\Component\Core\OrderProcessing;
 use Sylius\Component\Core\Model\OrderInterface;
 
 /**
- * Order shipping charges applicator.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface ShippingChargesProcessorInterface
 {
     /**
-     * Apply shipping charges to order.
-     *
      * @param OrderInterface $order
      */
     public function applyShippingCharges(OrderInterface $order);

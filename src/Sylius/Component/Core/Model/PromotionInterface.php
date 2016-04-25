@@ -17,8 +17,6 @@ use Sylius\Component\Promotion\Model\PromotionInterface as BasePromotionInterfac
 /**
  * @author Kristian Loevstroem <kristian@loevstroem.dk>
  */
-interface PromotionInterface extends
-    BasePromotionInterface,
-    ChannelsAwareInterface
+interface PromotionInterface extends BasePromotionInterface, ChannelsAwareInterface
 {
 }

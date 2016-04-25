@@ -29,10 +29,7 @@ class ReleaseOrdersCommand extends ContainerAwareCommand
     }
 
     /**
-     * @param InputInterface $input
-     * @param OutputInterface $output
-     *
-     * @return int|void
+     * {@inheritdoc}
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {

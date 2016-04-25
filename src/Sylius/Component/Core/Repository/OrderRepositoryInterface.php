@@ -28,9 +28,6 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
     public function findExpired(\DateTime $expiresAt, $state = OrderInterface::STATE_PENDING);
 
     /**
-     * Gets the number of orders placed by the customer
-     * for a particular coupon.
-     *
      * @param CustomerInterface $customer
      * @param CouponInterface $coupon
      *
@@ -39,9 +36,6 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
     public function countByCustomerAndCoupon(CustomerInterface $customer, CouponInterface $coupon);
 
     /**
-     * Gets the number of orders placed by the customer
-     * with particular state.
-     *
      * @param CustomerInterface $customer
      * @param string $state
      *
@@ -50,9 +44,6 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
     public function countByCustomerAndPaymentState(CustomerInterface $customer, $state);
 
     /**
-     * Gets revenue group by date
-     * between particular dates
-     *
      * @param array $configuration
      *
      * @return OrderInterface[]
@@ -60,9 +51,6 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
     public function revenueBetweenDatesGroupByDate(array $configuration = []);
 
     /**
-     * Gets number of orders group by date
-     * between particular dates
-     *
      * @param array $configuration
      *
      * @return OrderInterface[]
@@ -111,7 +99,7 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
     /**
      * @param \DateTime $from
      * @param \DateTime $to
-     * @param null|string $state
+     * @param string|null $state
      *
      * @return OrderInterface[]
      */
@@ -120,7 +108,7 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
     /**
      * @param \DateTime $from
      * @param \DateTime $to
-     * @param null|string $state
+     * @param string|null $state
      *
      * @return int
      */
@@ -129,7 +117,7 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
     /**
      * @param \DateTime $from
      * @param \DateTime $to
-     * @param null|string $state
+     * @param string|null $state
      *
      * @return int
      */

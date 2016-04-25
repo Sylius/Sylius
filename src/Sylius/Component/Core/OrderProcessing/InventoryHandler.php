@@ -103,10 +103,8 @@ class InventoryHandler implements InventoryHandlerInterface
     }
 
     /**
-     * Apply and count a transition on all given units
-     *
      * @param Collection $units
-     * @param string     $transition
+     * @param string $transition
      *
      * @return int
      */

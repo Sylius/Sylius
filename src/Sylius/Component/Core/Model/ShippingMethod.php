@@ -17,8 +17,6 @@ use Sylius\Component\Shipping\Model\ShippingMethodTranslation;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
 /**
- * Shipping method available for selected zone.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
@@ -48,8 +46,6 @@ class ShippingMethod extends BaseShippingMethod implements ShippingMethodInterfa
     public function setZone(ZoneInterface $zone)
     {
         $this->zone = $zone;
-
-        return $this;
     }
 
     /**

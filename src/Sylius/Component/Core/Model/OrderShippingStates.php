@@ -12,18 +12,16 @@
 namespace Sylius\Component\Core\Model;
 
 /**
- * Default order shipping states.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class OrderShippingStates
 {
+    const BACKORDER = 'backorder';
+    const CANCELLED = 'cancelled';
     const CHECKOUT = 'checkout';
     const ONHOLD = 'onhold';
-    const READY = 'ready';
-    const BACKORDER = 'backorder';
     const PARTIALLY_SHIPPED = 'partially_shipped';
-    const SHIPPED = 'shipped';
+    const READY = 'ready';
     const RETURNED = 'returned';
-    const CANCELLED = 'cancelled';
+    const SHIPPED = 'shipped';
 }
