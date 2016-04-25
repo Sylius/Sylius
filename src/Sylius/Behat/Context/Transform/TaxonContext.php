@@ -13,6 +13,7 @@ namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -39,15 +40,19 @@ final class TaxonContext implements Context
      * @Transform /^"([^"]+)" as a parent taxon$/
      * @Transform /^"([^"]+)" parent taxon$/
      * @Transform /^parent taxon to "([^"]+)"$/
+     * @Transform /^taxon with "([^"]+)" name/
      */
     public function getTaxonByName($taxonName)
     {
-        $taxon = $this->taxonRepository->findOneByName($taxonName);
-        if (null === $taxon) {
-            throw new \InvalidArgumentException(sprintf('Taxon with name "%s" does not exist.', $taxonName));
-        }
+        return $this->getTaxonBy(['name' => $taxonName]);
+    }
 
-        return $taxon;
+    /**
+     * @Transform /^taxon with "([^"]+)" code$/
+     */
+    public function getTaxonByCode($code)
+    {
+        return $this->getTaxonBy(['code' => $code]);
     }
 
     /**
@@ -59,5 +64,18 @@ final class TaxonContext implements Context
             $this->getTaxonByName($firstTaxon),
             $this->getTaxonByName($secondTaxon)
         ];
+    }
+
+    /**
+     * @param array $parameters
+     *
+     * @return object
+     */
+    private function getTaxonBy(array $parameters)
+    {
+        $taxon = $this->taxonRepository->findOneBy($parameters);
+        Assert::notNull($taxon, 'Taxon does not exist.');
+
+        return $taxon;
     }
 }

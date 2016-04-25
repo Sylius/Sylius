@@ -26,7 +26,7 @@ Feature: Adding a new taxon
         And I describe it as "Main taxonomy for products." in "English (United States)"
         And I add it
         Then I should be notified that it has been successfully created
-        And the "Category" taxon with "category" permalink and "Main taxonomy for products." description should appear in the registry
+        And the "Category" taxon should appear in the registry
 
     @ui
     Scenario: Adding a new taxon with parent taxon
@@ -37,4 +37,4 @@ Feature: Adding a new taxon
         And I choose "Category" as a parent taxon
         And I add it
         Then I should be notified that it has been successfully created
-        And the "Stickers" taxon with "Category" parent taxon should appear in the registry
+        And the "Stickers" taxon should appear in the registry

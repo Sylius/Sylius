@@ -14,6 +14,7 @@ namespace Sylius\Behat\Context\Ui\Admin;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Taxon\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Taxon\UpdatePageInterface;
+use Sylius\Behat\Service\CurrentPageResolverInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
@@ -36,6 +37,11 @@ final class ManagingTaxonsContext implements Context
     private $updatePage;
 
     /**
+     * @var CurrentPageResolverInterface
+     */
+    private $currentPageResolver;
+
+    /**
      * @var NotificationCheckerInterface
      */
     private $notificationChecker;
@@ -43,15 +49,18 @@ final class ManagingTaxonsContext implements Context
     /**
      * @param CreatePageInterface $createPage
      * @param UpdatePageInterface $updatePage
+     * @param CurrentPageResolverInterface $currentPageResolver
      * @param NotificationCheckerInterface $notificationChecker
      */
     public function __construct(
         CreatePageInterface $createPage,
         UpdatePageInterface $updatePage,
+        CurrentPageResolverInterface $currentPageResolver,
         NotificationCheckerInterface $notificationChecker
     ) {
         $this->createPage = $createPage;
         $this->updatePage = $updatePage;
+        $this->currentPageResolver = $currentPageResolver;
         $this->notificationChecker = $notificationChecker;
     }
 
@@ -144,6 +153,22 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
+     * @When I do not specify its code
+     */
+    public function iDoNotSpecifyItsCode()
+    {
+        // Intentionally left blank to fulfill context expectation
+    }
+
+    /**
+     * @When I do not specify its name
+     */
+    public function iDoNotSpecifyItsName()
+    {
+        // Intentionally left blank to fulfill context expectation
+    }
+
+    /**
      * @When I add it
      * @When I try to add it
      */
@@ -190,30 +215,6 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
-     * @Then /^the ("[^"]+" taxon) with "([^"]*)" permalink and "([^"]*)" description should appear in the registry$/
-     */
-    public function theTaxonWithPermalinkAndDescriptionShouldAppearInTheRegistry(TaxonInterface $taxon, $permalink, $description)
-    {
-        $this->updatePage->open(['id' => $taxon->getId()]);
-        Assert::true(
-            $this->updatePage->hasResourceValues(['code' => $taxon->getCode(), 'permalink' => $permalink, 'description' => $description]),
-            sprintf('Taxon %s should have %s permalink and %s description.', $taxon->getName(), $permalink, $description)
-        );
-    }
-
-    /**
-     * @Then /^the ("[^"]+" taxon) with ("[^"]+" parent taxon) should appear in the registry$/
-     */
-    public function theTaxonWithParentTaxonShouldAppearInTheRegistry(TaxonInterface $taxon, TaxonInterface $parentTaxon)
-    {
-        $this->updatePage->open(['id' => $taxon->getId()]);
-        Assert::true(
-            $this->updatePage->hasResourceValues(['parent' => $parentTaxon->getId()]),
-            sprintf('Taxon %s should have %s parent taxon', $taxon->getName(), $parentTaxon->getName())
-        );
-    }
-
-    /**
      * @Then this taxon :element should be :value
      */
     public function thisTaxonElementShouldBe($element, $value)
@@ -243,6 +244,43 @@ final class ManagingTaxonsContext implements Context
         Assert::true(
             $this->updatePage->hasResourceValues(['parent' => $taxon->getId()]),
             sprintf('Current taxon should have %s parent taxon', $taxon->getName())
+        );
+    }
+
+    /**
+     * @Then I should be notified that taxon with this code already exists
+     */
+    public function iShouldBeNotifiedThatTaxonWithThisCodeAlreadyExists()
+    {
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm($this->createPage, $this->updatePage);
+
+        Assert::true(
+            $currentPage->checkValidationMessageFor('code', 'Taxon with given code already exists.'),
+            'Unique code violation message should appear on page, but it does not.'
+        );
+    }
+
+    /**
+     * @Then I should be notified that :element is required
+     */
+    public function iShouldBeNotifiedThatIsRequired($element)
+    {
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm($this->createPage, $this->updatePage);
+
+        Assert::true(
+            $currentPage->checkValidationMessageFor($element, sprintf('Please enter taxon %s.', $element)),
+            sprintf('I should be notified that taxon %s should be required.', $element)
+        );
+    }
+
+    /**
+     * @Then /^there should still be only one taxon with code "([^"]*)"$/
+     */
+    public function thereShouldStillBeOnlyOneTaxonWithCode($code)
+    {
+        Assert::true(
+            $this->updatePage->hasResourceValues(['code' => $code]),
+            sprintf('Taxon with code %s cannot be found.', $code)
         );
     }
 }
