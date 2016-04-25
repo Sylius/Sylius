@@ -11,6 +11,7 @@
 
 namespace Sylius\Behat\Page\Admin\ProductOption;
 
+use Behat\Mink\Element\Element;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 
@@ -34,6 +35,49 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function isThereOptionValue($optionValue)
+    {
+        $optionValues = $this->getElement('values');
+
+        return $optionValues->has('css', '[value = "'.$optionValue.'"]');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addOptionValue($code, $value)
+    {
+        $this->getDocument()->clickLink('Add value');
+
+        $optionValueForm = $this->getLastOptionValueElement();
+
+        $optionValueForm->fillField('Code', $code);
+        $optionValueForm->fillField('Value', $value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeOptionValue($optionValue)
+    {
+        if ($this->isThereOptionValue($optionValue)) {
+            $optionValues = $this->getElement('values');
+
+            $item = $optionValues
+                ->find('css', 'div[data-form-collection="item"] input[value="'.$optionValue.'"]')
+                ->getParent()
+                ->getParent()
+                ->getParent()
+                ->getParent()
+                ->getParent()
+            ;
+            $item->clickLink('Delete');
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getCodeElement()
     {
         return $this->getElement('code');
@@ -49,5 +93,16 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'name' => '#sylius_product_option_translations_en_US_name',
             'values' => '#sylius_product_option_values',
         ]);
+    }
+
+    /**
+     * @return Element
+     */
+    private function getLastOptionValueElement()
+    {
+        $optionValues = $this->getElement('values');
+        $items = $optionValues->findAll('css', 'div[data-form-collection="item"]');
+
+        return end($items);
     }
 }

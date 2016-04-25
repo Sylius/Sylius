@@ -43,7 +43,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         $optionValueForm = $this->getLastOptionValueElement();
 
         $optionValueForm->fillField('Code', $code);
-        $optionValueForm->fillField('Value', $code);
+        $optionValueForm->fillField('Value', $value);
     }
 
     /**

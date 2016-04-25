@@ -84,7 +84,7 @@ final class ManagingProductOptionsContext implements Context
     /**
      * @Given I want to modify the :productOption product option
      */
-    public function iWantToModifyAPaymentMethod(OptionInterface $productOption)
+    public function iWantToModifyAProductOption(OptionInterface $productOption)
     {
         $this->updatePage->open(['id' => $productOption->getId()]);
     }
@@ -117,12 +117,19 @@ final class ManagingProductOptionsContext implements Context
 
     /**
      * @When I name it :name in :language
+     */
+    public function iNameItInLanguage($name, $language)
+    {
+        $this->createPage->nameItIn($name, $language);
+    }
+
+    /**
      * @When I rename it to :name in :language
      * @When I remove its name from :language translation
      */
-    public function iNameItInLanguage($name = null, $language)
+    public function iRenameItToInLanguage($name = null, $language)
     {
-        $this->createPage->nameItIn($name, $language);
+        $this->updatePage->nameItIn($name, $language);
     }
 
     /**
@@ -147,7 +154,9 @@ final class ManagingProductOptionsContext implements Context
      */
     public function iAddTheOptionValueWithCodeAndValue($code, $value)
     {
-        $this->createPage->addOptionValue($code, $value);
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm($this->createPage, $this->updatePage);
+
+        $currentPage->addOptionValue($code, $value);
     }
 
     /**
@@ -287,6 +296,32 @@ final class ManagingProductOptionsContext implements Context
     }
 
     /**
+     * @Then /^(this product option) should have the "([^"]*)" option value$/
+     */
+    public function thisProductOptionShouldHaveTheOptionValue(OptionInterface $productOption, $optionValue)
+    {
+        $this->iWantToModifyAProductOption($productOption);
+
+        Assert::true(
+            $this->updatePage->isThereOptionValue($optionValue),
+            sprintf('%s is not an option value of this product option.', $optionValue)
+        );
+    }
+
+    /**
+     * @Then /^(this product option) should not have the "([^"]*)" option value$/
+     */
+    public function thisProductOptionShouldNotHaveTheOptionValue(OptionInterface $productOption, $optionValue)
+    {
+        $this->iWantToModifyAProductOption($productOption);
+
+        Assert::false(
+            $this->updatePage->isThereOptionValue($optionValue),
+            sprintf('%s is not an option value of this product option.', $optionValue)
+        );
+    }
+
+    /**
      * @param string $element
      * @param string $expectedMessage
      */
@@ -296,5 +331,13 @@ final class ManagingProductOptionsContext implements Context
             $this->createPage->checkValidationMessageFor($element, $expectedMessage),
             sprintf('Product option %s should be required.', $element)
         );
+    }
+
+    /**
+     * @When /^I delete the "([^"]*)" option value of (this product option)$/
+     */
+    public function iDeleteTheOptionValueOfThisProductOption($optionValue, OptionInterface $productOption)
+    {
+        $this->updatePage->removeOptionValue($optionValue);
     }
 }

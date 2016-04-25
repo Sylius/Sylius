@@ -28,4 +28,20 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
      * @param string $languageCode
      */
     public function nameItIn($name, $languageCode);
+
+    /**
+     * @param string $optionValue
+     */
+    public function isThereOptionValue($optionValue);
+
+    /**
+     * @param string $code
+     * @param string $value
+     */
+    public function addOptionValue($code, $value);
+
+    /**
+     * @param string $optionValue
+     */
+    public function removeOptionValue($optionValue);
 }
