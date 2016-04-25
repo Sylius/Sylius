@@ -1,0 +1,22 @@
+{% macro render(taxons) %}
+    <div class="ui list">
+        {{ _self.renderChildren(taxons) }}
+    </div>
+{% endmacro %}
+
+{% macro renderChildren(taxons) %}
+    {% for taxon in taxons %}
+        <div class="item">
+            <i class="folder icon"></i>
+            <div class="content">
+                <div class="header">{{ taxon.name }}</div>
+                {% if not taxon.description %}
+                    <div class="description">{{ taxon.description }}</div>
+                {% endif %}
+                <div class="list">
+                    {{ _self.renderChildren(taxon.children) }}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endmacro %}

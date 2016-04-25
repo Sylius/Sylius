@@ -3,14 +3,35 @@ sylius_admin_taxon:
         alias: sylius.taxon
         section: admin
         templates: SyliusAdminBundle:Crud
-        except: ['show', 'delete']
+        except: ['index', 'show', 'delete']
         redirect: update
-        grid: sylius_admin_taxon
         vars:
             all:
-                subheader: sylius.ui.manage_taxons
                 templates:
                     form: SyliusAdminBundle:Taxon:_form.html.twig
-            index:
-                icon: folder
     type: sylius.resource
+
+sylius_admin_taxon_index:
+    path: /taxons/
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.taxon:indexAction
+        _sylius:
+            template: SyliusAdminBundle:Taxon:index.html.twig
+            section: admin
+            repository:
+                method: findRootNodes
+            vars:
+                subheader: sylius.ui.manage_taxons
+                icon: folder
+
+sylius_admin_taxon_tree:
+    path: /taxons/tree/
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.taxon:indexAction
+        _sylius:
+            template: SyliusAdminBundle:Taxon:showTree.html.twig
+            section: admin
+            repository:
+                method: findRootNodes

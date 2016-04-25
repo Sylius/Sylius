@@ -135,9 +135,9 @@ final class ManagingTaxonsContext implements Context
      */
     public function theTaxonShouldAppearInTheRegistry(TaxonInterface $taxon)
     {
-        $this->indexPage->open();
+        $this->updatePage->open(['id' => $taxon->getId()]);
         Assert::true(
-            $this->indexPage->isResourceOnPage(['code' => $taxon->getCode()]),
+            $this->updatePage->hasResourceValues(['code' => $taxon->getCode()]),
             sprintf('Taxon %s should be in the registry', $taxon->getName())
         );
     }
