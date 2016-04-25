@@ -12,15 +12,11 @@
 namespace Sylius\Component\Registry;
 
 /**
- * Service registry.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ServiceRegistry implements ServiceRegistryInterface
 {
     /**
-     * Services.
-     *
      * @var array
      */
     protected $services = [];
@@ -40,8 +36,6 @@ class ServiceRegistry implements ServiceRegistryInterface
     protected $context;
 
     /**
-     * Constructor.
-     *
      * @param string $interface
      * @param string $context
      */
@@ -62,54 +56,54 @@ class ServiceRegistry implements ServiceRegistryInterface
     /**
      * {@inheritdoc}
      */
-    public function register($type, $service)
+    public function register($identifier, $service)
     {
-        if ($this->has($type)) {
-            throw new ExistingServiceException($this->context, $type);
+        if ($this->has($identifier)) {
+            throw new ExistingServiceException($this->context, $identifier);
         }
 
         if (!is_object($service)) {
-            throw new \InvalidArgumentException(sprintf('%s needs to be an object, %s given.', $this->context, gettype($service)));
+            throw new \InvalidArgumentException(sprintf('%s needs to be an object, %s given.', ucfirst($this->context), gettype($service)));
         }
 
-        if (!in_array($this->interface, class_implements($service))) {
+        if (!in_array($this->interface, class_implements($service), true)) {
             throw new \InvalidArgumentException(
-                sprintf('%s needs to implement "%s", "%s" given.', $this->context, $this->interface, get_class($service))
+                sprintf('%s needs to implement "%s", "%s" given.', ucfirst($this->context), $this->interface, get_class($service))
             );
         }
 
-        $this->services[$type] = $service;
+        $this->services[$identifier] = $service;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function unregister($type)
+    public function unregister($identifier)
     {
-        if (!$this->has($type)) {
-            throw new NonExistingServiceException($this->context, $type, array_keys($this->services));
+        if (!$this->has($identifier)) {
+            throw new NonExistingServiceException($this->context, $identifier, array_keys($this->services));
         }
 
-        unset($this->services[$type]);
+        unset($this->services[$identifier]);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function has($type)
+    public function has($identifier)
     {
-        return isset($this->services[$type]);
+        return isset($this->services[$identifier]);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function get($type)
+    public function get($identifier)
     {
-        if (!$this->has($type)) {
-            throw new NonExistingServiceException($this->context, $type, array_keys($this->services));
+        if (!$this->has($identifier)) {
+            throw new NonExistingServiceException($this->context, $identifier, array_keys($this->services));
         }
 
-        return $this->services[$type];
+        return $this->services[$identifier];
     }
 }
