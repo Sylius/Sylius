@@ -28,4 +28,9 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
      * @return bool
      */
     public function isCodeDisabled();
+
+    /**
+     * @return bool
+     */
+    public function isTypeDisabled();
 }

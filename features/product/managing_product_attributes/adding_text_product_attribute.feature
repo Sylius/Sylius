@@ -16,3 +16,8 @@ Feature: Adding a new text product attribute
         And I add it
         Then I should be notified that it has been successfully created
         And the attribute "T-shirt brand" should appear in the store
+
+    @ui
+    Scenario: Seeing disabled type field while adding text a product attribute
+        When I want to create a new text product attribute
+        Then the type field should be disabled

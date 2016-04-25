@@ -16,3 +16,8 @@ Feature: Adding a new percent product attribute
         And I add it
         Then I should be notified that it has been successfully created
         And the attribute "T-shirt cotton content" should appear in the store
+
+    @ui
+    Scenario: Seeing disabled type field while adding a percent product attribute
+        When I want to create a new percent product attribute
+        Then the type field should be disabled

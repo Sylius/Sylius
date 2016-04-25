@@ -32,6 +32,14 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function isTypeDisabled()
+    {
+        return 'disabled' === $this->getElement('type')->getAttribute('disabled');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getCodeElement()
     {
        return $this->getElement('code');
@@ -44,6 +52,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_product_attribute_code',
+            'type' => '#sylius_product_attribute_type',
         ]);
     }
 }

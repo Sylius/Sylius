@@ -32,11 +32,20 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function isTypeDisabled()
+    {
+        return 'disabled' === $this->getElement('type')->getAttribute('disabled');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_product_attribute_code',
             'name' => '#sylius_product_attribute_translations_en_US_name',
+            'type' => '#sylius_product_attribute_type',
         ]);
     }
 }

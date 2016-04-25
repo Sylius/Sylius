@@ -28,4 +28,9 @@ interface CreatePageInterface extends BaseCreatePageInterface
      * @param string $language
      */
     public function nameIt($name, $language);
+
+    /**
+     * @return bool
+     */
+    public function isTypeDisabled();
 }

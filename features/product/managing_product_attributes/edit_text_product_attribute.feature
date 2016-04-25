@@ -22,3 +22,9 @@ Feature: Text product attribute edition
         Given the store has a text product attribute "T-shirt cotton brand" with code "t_shirt_brand"
         When I want to edit this product attribute
         Then the code field should be disabled
+
+    @ui
+    Scenario: Seeing disabled type field while editing a product attribute
+        Given the store has a text product attribute "T-shirt cotton brand" with code "t_shirt_brand"
+        When I want to edit this product attribute
+        Then the type field should be disabled

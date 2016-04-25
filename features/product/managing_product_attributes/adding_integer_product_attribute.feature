@@ -16,3 +16,8 @@ Feature: Adding a new integer product attribute
         And I add it
         Then I should be notified that it has been successfully created
         And the attribute "Book pages" should appear in the store
+
+    @ui
+    Scenario: Seeing disabled type field while adding a integer product attribute
+        When I want to create a new integer product attribute
+        Then the type field should be disabled

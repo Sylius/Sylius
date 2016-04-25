@@ -15,6 +15,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Product\Attribute\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Product\Attribute\UpdatePageInterface;
+use Sylius\Behat\Service\CurrentPageResolverInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Product\Model\AttributeInterface;
 use Webmozart\Assert\Assert;
@@ -47,20 +48,28 @@ final class ManagingProductAttributesContext implements Context
     private $notificationChecker;
 
     /**
+     * @var CurrentPageResolverInterface
+     */
+    private $currentPageResolver;
+
+    /**
      * @param CreatePageInterface $createPage
      * @param IndexPageInterface $indexPage
      * @param UpdatePageInterface $updatePage
+     * @param CurrentPageResolverInterface $currentPageResolver
      * @param NotificationCheckerInterface $notificationChecker
      */
     public function __construct(
         CreatePageInterface $createPage,
         IndexPageInterface $indexPage,
         UpdatePageInterface $updatePage,
+        CurrentPageResolverInterface $currentPageResolver,
         NotificationCheckerInterface $notificationChecker
     ) {
         $this->createPage = $createPage;
         $this->indexPage = $indexPage;
         $this->updatePage = $updatePage;
+        $this->currentPageResolver = $currentPageResolver;
         $this->notificationChecker = $notificationChecker;
     }
 
@@ -160,7 +169,20 @@ final class ManagingProductAttributesContext implements Context
     {
         Assert::true(
             $this->updatePage->isCodeDisabled(),
-            'Code should be immutable, but it does not.'
+            'Code field should be disabled, but it does not.'
+        );
+    }
+
+    /**
+     * @Then the type field should be disabled
+     */
+    public function theTypeFieldShouldBeDisabled()
+    {
+       $currentPage = $this->currentPageResolver->getCurrentPageWithForm($this->createPage, $this->updatePage);
+
+        Assert::true(
+            $currentPage->isTypeDisabled(),
+            'Type field should be disabled, but it does not.'
         );
     }
 
