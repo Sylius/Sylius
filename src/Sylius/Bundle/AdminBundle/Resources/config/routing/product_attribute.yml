@@ -32,5 +32,10 @@ sylius_admin_product_attribute_create:
             vars:
                 templates:
                     form: SyliusAdminBundle:ProductAttribute:_form.html.twig
-    requirements:
-        type: text|textarea|checkbox|integer|percent|datetime|date
+
+sylius_admin_get_attribute_types:
+    path: /attribute-types
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product_attribute:getAttributeTypesAction
+        template: SyliusAdminBundle:ProductAttribute/Types:attributeTypes.html.twig

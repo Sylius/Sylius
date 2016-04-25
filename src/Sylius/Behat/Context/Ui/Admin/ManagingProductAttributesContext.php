@@ -248,18 +248,6 @@ final class ManagingProductAttributesContext implements Context
     }
 
     /**
-     * @param string $element
-     * @param string $expectedMessage
-     */
-    private function assertFieldValidationMessage($element, $expectedMessage)
-    {
-        Assert::true(
-            $this->createPage->checkValidationMessageFor($element, $expectedMessage),
-            sprintf('Product attribute %s should be required.', $element)
-        );
-    }
-
-    /**
      * @When I want to see all product attributes in store
      */
     public function iWantToSeeAllProductAttributesInStore()
@@ -304,6 +292,20 @@ final class ManagingProductAttributesContext implements Context
         Assert::false(
             $this->indexPage->isResourceOnPage(['code' => $productAttribute->getCode()]),
             sprintf('Product attribute %s should no exist in the registry, but it does.', $productAttribute->getName())
+        );
+    }
+
+    /**
+     * @param string $element
+     * @param string $expectedMessage
+     */
+    private function assertFieldValidationMessage($element, $expectedMessage)
+    {
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm($this->createPage, $this->updatePage);
+
+        Assert::true(
+            $currentPage->checkValidationMessageFor($element, $expectedMessage),
+            sprintf('Product attribute %s should be required.', $element)
         );
     }
 }
