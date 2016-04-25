@@ -11,49 +11,60 @@
 
 namespace Sylius\Component\Core\Pricing;
 
+use Sylius\Component\Pricing\Calculator\CalculatorInterface;
 use Sylius\Component\Pricing\Model\PriceableInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
-abstract class AbstractCalculator
+abstract class AbstractCalculator implements CalculatorInterface
 {
-    protected $parameterName;
-    protected $className;
-
-    public function __construct()
-    {
-        if (null === $this->parameterName || null === $this->className) {
-            throw new \RuntimeException();
-        }
-    }
-
     /**
      * {@inheritdoc}
      */
-    public function calculate(PriceableInterface $subject, array $configuration, array $context = [])
+    final public function calculate(PriceableInterface $subject, array $configuration, array $context = [])
     {
-        if (!array_key_exists($this->parameterName, $context)) {
-            return $subject->getPrice();
-        }
-
-        $price = null;
-        foreach ($context[$this->parameterName] as $object) {
-            if (!in_array($this->className, class_implements($object))) {
-                throw new UnexpectedTypeException($object, $this->className);
-            }
-
-            $id = $object->getId();
-
-            if (array_key_exists($id, $configuration) && (null === $price || $configuration[$id] < $price)) {
-                $price = (int) round($configuration[$id]);
-            }
-        }
+        $price = $this->getPriceForConfigurationAndContext($configuration, $context);
 
         if (null === $price) {
             return $subject->getPrice();
+        }
+
+        return $price;
+    }
+
+    /**
+     * @return string
+     */
+    abstract protected function getParameterName();
+
+    /**
+     * @return string
+     */
+    abstract protected function getClassName();
+
+    /**
+     * @param array $configuration
+     * @param array $context
+     *
+     * @return int|null
+     */
+    private function getPriceForConfigurationAndContext(array $configuration, array $context)
+    {
+        if (!array_key_exists($this->getParameterName(), $context)) {
+            return null;
+        }
+
+        $price = null;
+        foreach ($context[$this->getParameterName()] as $object) {
+            Assert::isInstanceOf($object, $this->getClassName());
+
+            $id = $object->getId();
+            if (array_key_exists($id, $configuration) && (null === $price || $configuration[$id] < $price)) {
+                $price = (int) round($configuration[$id]);
+            }
         }
 
         return $price;
