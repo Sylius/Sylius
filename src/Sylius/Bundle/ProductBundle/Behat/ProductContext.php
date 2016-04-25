@@ -34,12 +34,16 @@ class ProductContext extends DefaultContext
 
             $product->setCurrentLocale($this->getContainer()->getParameter('locale'));
             $product->setName(trim($data['name']));
+<<<<<<< daaa73c203015544dad10b35e84adde66d5cc81b
 
             $code = isset($data['sku']) ? $data['sku'] : $this->generateCode($data['name']);
             $product->setCode($code);
 
             $product->getMasterVariant()->setPrice((int) round($data['price'] * 100));
             $product->getMasterVariant()->setCode($code);
+=======
+            $product->getVariants()->first()->setPrice((int) round($data['price'] * 100));
+>>>>>>> [Core][Product][Variation] Remove all masterVariant usages
 
             if (!empty($data['options'])) {
                 foreach (explode(',', $data['options']) as $option) {
@@ -65,7 +69,7 @@ class ProductContext extends DefaultContext
             }
 
             if (isset($data['quantity'])) {
-                $product->getMasterVariant()->setOnHand($data['quantity']);
+                $product->getVariants()->first()->setOnHand($data['quantity']);
             }
 
             if (isset($data['variants selection']) && !empty($data['variants selection'])) {
@@ -73,7 +77,7 @@ class ProductContext extends DefaultContext
             }
 
             if (isset($data['tax category'])) {
-                $product->getMasterVariant()->setTaxCategory($this->findOneByName('tax_category', trim($data['tax category'])));
+                $product->getVariants()->first()->setTaxCategory($this->findOneByName('tax_category', trim($data['tax category'])));
             }
 
             if (isset($data['taxons'])) {
@@ -294,13 +298,13 @@ class ProductContext extends DefaultContext
      */
     private function configureProductPricingCalculator(ProductInterface $product, array $data)
     {
-        $product->getMasterVariant()->setPricingCalculator($data['pricing calculator']);
+        $product->getVariants()->first()->setPricingCalculator($data['pricing calculator']);
 
         if (!isset($data['calculator configuration']) || '' === $data['calculator configuration']) {
             throw new \InvalidArgumentException('You must set chosen calculator configuration');
         }
 
-        $product->getMasterVariant()->setPricingConfiguration($this->getPricingCalculatorConfiguration($data));
+        $product->getVariants()->first()->setPricingConfiguration($this->getPricingCalculatorConfiguration($data));
     }
 
     /**

@@ -273,12 +273,12 @@ class ProductController extends ResourceController
         $helper = $this->container->get('sylius.templating.helper.currency');
         foreach ($products as $product) {
             $results[] = [
-                'id' => $product->getMasterVariant()->getId(),
+                'id' => $product->getFirstVariant()->getId(),
                 'name' => $product->getName(),
                 'image' => $product->getImage() ? $product->getImage()->getPath() : null,
-                'price' => $helper->convertAndFormatAmount($product->getMasterVariant()->getPrice()),
-                'original_price' => $helper->convertAndFormatAmount($product->getMasterVariant()->getOriginalPrice()),
-                'raw_price' => $helper->convertAmount($product->getMasterVariant()->getPrice(), null),
+                'price' => $helper->convertAndFormatAmount($product->getFirstVariant()->getPrice()),
+                'original_price' => $helper->convertAndFormatAmount($product->getFirstVariant()->getOriginalPrice()),
+                'raw_price' => $helper->convertAndFormatAmount($product->getFirstVariant()->getPrice(), null, true),
                 'desc' => $product->getShortDescription(),
             ];
         }

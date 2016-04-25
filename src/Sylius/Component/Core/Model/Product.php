@@ -185,26 +185,6 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function getPrice()
-    {
-        if (null === $this->getMasterVariant()) {
-            return 0;
-        }
-
-        return $this->getMasterVariant()->getPrice();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setPrice($price)
-    {
-        $this->getMasterVariant()->setPrice($price);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getShippingCategory()
     {
         return $this->shippingCategory;
@@ -232,22 +212,6 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     public function setRestrictedZone(ZoneInterface $zone = null)
     {
         $this->restrictedZone = $zone;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getImages()
-    {
-        return $this->getMasterVariant()->getImages();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getImage()
-    {
-        return $this->getMasterVariant()->getImages()->first();
     }
 
     /**

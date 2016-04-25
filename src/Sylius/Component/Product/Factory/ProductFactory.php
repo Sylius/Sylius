@@ -65,10 +65,9 @@ class ProductFactory implements ProductFactoryInterface
     public function createNew()
     {
         $variant = $this->variantFactory->createNew();
-        $variant->setMaster(true);
 
         $product = $this->factory->createNew();
-        $product->setMasterVariant($variant);
+        $product->addVariant($variant);
 
         return $product;
     }

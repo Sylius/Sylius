@@ -52,10 +52,9 @@ class ProductFactorySpec extends ObjectBehavior
         FactoryInterface $variantFactory
     ) {
         $variantFactory->createNew()->willReturn($variant);
-        $variant->setMaster(true)->shouldBeCalled();
 
         $factory->createNew()->willReturn($product);
-        $product->setMasterVariant($variant)->shouldBeCalled();
+        $product->addVariant($variant)->shouldBeCalled();
 
         $this->createNew()->shouldReturn($product);
     }
@@ -70,8 +69,7 @@ class ProductFactorySpec extends ObjectBehavior
         FactoryInterface $variantFactory
     ) {
         $variantFactory->createNew()->willReturn($variant);
-        $variant->setMaster(true)->shouldBeCalled();
-        $product->setMasterVariant($variant)->shouldBeCalled();
+        $product->addVariant($variant)->shouldBeCalled();
 
         $factory->createNew()->willReturn($product);
 

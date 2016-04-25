@@ -73,11 +73,8 @@ class VariantGeneratorSpec extends ObjectBehavior
             ['black1', 'white2', 'red3'],
         ]);
 
-        $productVariable->getMasterVariant()->willReturn($masterVariant);
-
         $variantFactory->createNew()->willReturn($permutationVariant);
         $permutationVariant->setObject($productVariable)->shouldBeCalled();
-        $permutationVariant->setDefaults($masterVariant)->shouldBeCalled();
         $permutationVariant->addOption(Argument::type('Sylius\Component\Variation\Model\OptionValue'))->shouldBeCalled();
         $productVariable->addVariant($permutationVariant)->shouldBeCalled();
 
@@ -122,11 +119,8 @@ class VariantGeneratorSpec extends ObjectBehavior
             ['red3', 'large6'],
         ]);
 
-        $productVariable->getMasterVariant()->willReturn($masterVariant);
-
         $variantFactory->createNew()->willReturn($permutationVariant);
         $permutationVariant->setObject($productVariable)->shouldBeCalled();
-        $permutationVariant->setDefaults($masterVariant)->shouldBeCalled();
         $permutationVariant->addOption(Argument::type('Sylius\Component\Variation\Model\OptionValue'))->shouldBeCalled();
         $productVariable->addVariant($permutationVariant)->shouldBeCalled();
 

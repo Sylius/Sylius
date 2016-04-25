@@ -15,6 +15,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Product\Model\AttributeValueInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
@@ -265,14 +266,13 @@ class LoadProductsData extends DataFixture
     }
 
     /**
-     * Adds master variant to product.
-     *
      * @param ProductInterface $product
      * @param string $code
      */
     protected function addMasterVariant(ProductInterface $product, $code = null)
     {
-        $variant = $product->getMasterVariant();
+        /** @var ProductVariantInterface $variant */
+        $variant = $product->getVariants()->first();
         $variant->setProduct($product);
         $variant->setPrice($this->faker->randomNumber(4));
         $variant->setCode(null === $code ? $this->getUniqueCode() : $code);
@@ -287,8 +287,6 @@ class LoadProductsData extends DataFixture
         $this->setReference('Sylius.Variant-'.$this->totalVariants, $variant);
 
         ++$this->totalVariants;
-
-        $product->setMasterVariant($variant);
     }
 
     /**
@@ -370,8 +368,6 @@ class LoadProductsData extends DataFixture
     }
 
     /**
-     * Create new product instance.
-     *
      * @return ProductInterface
      */
     protected function createProduct()

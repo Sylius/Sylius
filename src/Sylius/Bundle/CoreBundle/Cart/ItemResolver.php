@@ -112,11 +112,6 @@ class ItemResolver implements ItemResolverInterface
         $form = $this->formFactory->create('sylius_cart_item', $item, ['product' => $product]);
         $form->submit($data);
 
-        // If our product has no variants, we simply set the master variant of it.
-        if (null === $item->getVariant() && !$product->hasVariants()) {
-            $item->setVariant($product->getMasterVariant());
-        }
-
         if (null === $item->getVariant() && $product->hasVariants()) {
             throw new ItemResolvingException('Please select variant');
         }

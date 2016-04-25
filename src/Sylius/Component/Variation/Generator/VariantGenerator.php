@@ -75,7 +75,6 @@ class VariantGenerator implements VariantGeneratorInterface
         foreach ($permutations as $permutation) {
             $variant = $this->variantFactory->createNew();
             $variant->setObject($variable);
-            $variant->setDefaults($variable->getMasterVariant());
 
             if (is_array($permutation)) {
                 foreach ($permutation as $id) {

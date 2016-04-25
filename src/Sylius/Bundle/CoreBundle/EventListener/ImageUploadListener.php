@@ -39,20 +39,11 @@ class ImageUploadListener
     public function uploadProductImage(GenericEvent $event)
     {
         $subject = $event->getSubject();
-        if (!$subject instanceof ProductInterface && !$subject instanceof ProductVariantInterface) {
-            throw new UnexpectedTypeException(
-                $subject,
-                'Sylius\Component\Core\Model\ProductInterface or Sylius\Component\Core\Model\ProductVariantInterface'
-            );
+        if (!$subject instanceof ProductVariantInterface) {
+            throw new UnexpectedTypeException($subject, ProductVariantInterface::class);
         }
 
-        $variant = $subject instanceof ProductVariantInterface ? $subject : $subject->getMasterVariant();
-
-        if (null === $variant) {
-            return;
-        }
-
-        $images = $variant->getImages();
+        $images = $subject->getImages();
         foreach ($images as $image) {
             $this->uploader->upload($image);
 

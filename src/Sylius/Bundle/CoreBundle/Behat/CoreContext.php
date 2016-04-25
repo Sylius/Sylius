@@ -186,8 +186,8 @@ class CoreContext extends DefaultContext
 
             /* @var $item OrderItemInterface */
             $item = $orderItemFactory->createNew();
-            $item->setVariant($product->getMasterVariant());
-            $item->setUnitPrice($product->getMasterVariant()->getPrice());
+            $item->setVariant($product->getVariants()->first());
+            $item->setUnitPrice($product->getVariants()->first()->getPrice());
 
             $orderItemQuantityModifier->modify($item, $data['quantity']);
 
@@ -327,7 +327,7 @@ class CoreContext extends DefaultContext
     {
         /* @var $product ProductInterface */
         $product = $this->findOneByName('product', $productName);
-        $masterVariant = $product->getMasterVariant();
+        $masterVariant = $product->getVariants()->first();
 
         /* @var $masterVariant ProductVariantInterface */
         $masterVariant->setPricingCalculator(PriceCalculators::VOLUME_BASED);
@@ -361,7 +361,7 @@ class CoreContext extends DefaultContext
     public function productHasTheFollowingGroupBasedPricing($productName, TableNode $table)
     {
         $product = $this->findOneByName('product', $productName);
-        $masterVariant = $product->getMasterVariant();
+        $masterVariant = $product->getVariants()->first();
 
         /* @var $masterVariant ProductVariantInterface */
         $masterVariant->setPricingCalculator(PriceCalculators::GROUP_BASED);
@@ -800,7 +800,7 @@ class CoreContext extends DefaultContext
         $this->getService('sylius.generator.variant')->generate($product);
 
         foreach ($product->getVariants() as $variant) {
-            $variant->setPrice($product->getMasterVariant()->getPrice());
+            $variant->setPrice($product->getVariants()->first()->getPrice());
             $variant->setCode($this->faker->unique->uuid);
         }
 

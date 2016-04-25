@@ -27,13 +27,11 @@ use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
  */
 class ProductSpec extends ObjectBehavior
 {
-    function let(VariantInterface $masterVariant)
+    function let(VariantInterface $variant)
     {
-        $masterVariant->setMaster(true)->shouldBeCalled();
-        $masterVariant->setProduct($this)->shouldBeCalled();
-        $masterVariant->isMaster()->willReturn(true);
+        $variant->setProduct($this)->shouldBeCalled();
 
-        $this->setMasterVariant($masterVariant);
+        $this->addVariant($variant);
     }
 
     function it_is_initializable()
@@ -65,15 +63,6 @@ class ProductSpec extends ObjectBehavior
     {
         $this->setTaxons($taxons);
         $this->getTaxons()->shouldReturn($taxons);
-    }
-
-    function its_price_is_mutable(VariantInterface $masterVariant)
-    {
-        $masterVariant->setPrice(499)->shouldBeCalled();
-        $masterVariant->getPrice()->willReturn(499);
-
-        $this->setPrice(499);
-        $this->getPrice()->shouldReturn(499);
     }
 
     function its_variant_selection_method_is_choice_by_default()

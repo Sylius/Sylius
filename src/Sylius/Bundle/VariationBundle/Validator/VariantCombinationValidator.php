@@ -18,8 +18,6 @@ use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 /**
- * Unique option values combination for variant.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class VariantCombinationValidator extends ConstraintValidator
@@ -31,10 +29,6 @@ class VariantCombinationValidator extends ConstraintValidator
     {
         if (!$value instanceof VariantInterface) {
             throw new UnexpectedTypeException($value, VariantInterface::class);
-        }
-
-        if ($value->isMaster()) {
-            return;
         }
 
         $variable = $value->getObject();

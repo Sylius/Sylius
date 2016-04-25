@@ -132,4 +132,9 @@ interface ProductVariantInterface extends
      * @param TaxCategoryInterface $category
      */
     public function setTaxCategory(TaxCategoryInterface $category = null);
+
+    /**
+     * @param string $sku
+     */
+    public function setSku($sku);
 }
