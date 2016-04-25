@@ -20,12 +20,12 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  *
  * @author Steffen Brem <steffenbrem@gmail.com>
  */
-class DefaultSettingsResolver implements SettingsResolverInterface
+final class DefaultSettingsResolver implements SettingsResolverInterface
 {
     /**
      * @var RepositoryInterface
      */
-    protected $settingsRepository;
+    private $settingsRepository;
 
     /**
      * @param RepositoryInterface $settingsRepository

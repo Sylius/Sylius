@@ -18,17 +18,17 @@ use Symfony\Component\Form\FormFactoryInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SettingsFormFactory implements SettingsFormFactoryInterface
+final class SettingsFormFactory implements SettingsFormFactoryInterface
 {
     /**
      * @var ServiceRegistryInterface
      */
-    protected $schemaRegistry;
+    private $schemaRegistry;
 
     /**
      * @var FormFactoryInterface
      */
-    protected $formFactory;
+    private $formFactory;
 
     /**
      * @param ServiceRegistryInterface $schemaRegistry
@@ -47,7 +47,7 @@ class SettingsFormFactory implements SettingsFormFactoryInterface
     {
         /** @var SchemaInterface $schema */
         $schema = $this->schemaRegistry->get($schemaAlias);
-        
+
         $builder = $this->formFactory->createBuilder('form', $data, array_merge_recursive(
             ['data_class' => null], $options
         ));

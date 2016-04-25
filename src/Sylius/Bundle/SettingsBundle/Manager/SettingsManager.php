@@ -20,43 +20,37 @@ use Sylius\Bundle\SettingsBundle\Schema\SettingsBuilder;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Steffen Brem <steffenbrem@gmail.com>
  */
-class SettingsManager implements SettingsManagerInterface
+final class SettingsManager implements SettingsManagerInterface
 {
     /**
      * @var ServiceRegistryInterface
      */
-    protected $schemaRegistry;
+    private $schemaRegistry;
 
     /**
      * @var ServiceRegistryInterface
      */
-    protected $resolverRegistry;
+    private $resolverRegistry;
 
     /**
      * @var ObjectManager
      */
-    protected $manager;
+    private $manager;
 
     /**
      * @var FactoryInterface
      */
-    protected $settingsFactory;
-
-    /**
-     * @var ValidatorInterface
-     */
-    protected $validator;
+    private $settingsFactory;
 
     /**
      * @var EventDispatcherInterface
      */
-    protected $eventDispatcher;
+    private $eventDispatcher;
 
     /**
      * @param ServiceRegistryInterface $schemaRegistry

@@ -13,26 +13,63 @@ namespace Sylius\Bundle\SettingsBundle\Resolver;
 
 use Sylius\Component\Registry\NonExistingServiceException;
 use Sylius\Component\Registry\ServiceRegistry;
+use Sylius\Component\Registry\ServiceRegistryInterface;
 
 /**
  * @author Steffen Brem <steffenbrem@gmail.com>
  */
-class ResolverServiceRegistry extends ServiceRegistry
+final class ResolverServiceRegistry implements ServiceRegistryInterface
 {
+    /**
+     * @var ServiceRegistryInterface
+     */
+    private $decoratedRegistry;
+
     /**
      * @var SettingsResolverInterface
      */
-    protected $defaultResolver;
+    private $defaultResolver;
 
     /**
-     * @param string $interface
+     * @param ServiceRegistryInterface $decoratedRegistry
      * @param SettingsResolverInterface $defaultResolver
      */
-    public function __construct($interface, SettingsResolverInterface $defaultResolver)
+    public function __construct(ServiceRegistryInterface $decoratedRegistry, SettingsResolverInterface $defaultResolver)
     {
-        parent::__construct($interface, 'Settings resolver');
-
+        $this->decoratedRegistry = $decoratedRegistry;
         $this->defaultResolver = $defaultResolver;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function all()
+    {
+        return $this->decoratedRegistry->all();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function register($type, $service)
+    {
+        $this->decoratedRegistry->register($type, $service);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function unregister($type)
+    {
+        $this->decoratedRegistry->unregister($type);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function has($type)
+    {
+        return $this->decoratedRegistry->has($type);
     }
 
     /**
@@ -40,10 +77,10 @@ class ResolverServiceRegistry extends ServiceRegistry
      */
     public function get($type)
     {
-        try {
-            return parent::get($type);
-        } catch (NonExistingServiceException $e) {
+        if (!$this->decoratedRegistry->has($type)) {
             return $this->defaultResolver;
         }
+
+        return $this->decoratedRegistry->get($type);
     }
 }

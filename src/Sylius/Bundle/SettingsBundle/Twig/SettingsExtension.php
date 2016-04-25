@@ -16,7 +16,7 @@ use Sylius\Bundle\SettingsBundle\Templating\Helper\SettingsHelper;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SettingsExtension extends \Twig_Extension
+final class SettingsExtension extends \Twig_Extension
 {
     /**
      * @var SettingsHelper
