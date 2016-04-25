@@ -15,6 +15,7 @@ Feature: Taxon validation
         And I name it "T-Shirts" in "English (United States)"
         And I try to add it
         Then I should be notified that code is required
+        And Taxon named "T-Shirts" should not be added
 
     @ui
     Scenario: Trying to add a taxon without specifying its name

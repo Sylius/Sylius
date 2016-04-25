@@ -1,10 +1,10 @@
 {% macro render(taxons) %}
     <div class="ui list">
-        {{ _self.renderChildren(taxons) }}
+        {{ _self.renderLeaf(taxons) }}
     </div>
 {% endmacro %}
 
-{% macro renderChildren(taxons) %}
+{% macro renderLeaf(taxons) %}
     {% import '@SyliusUi/Macro/buttons.html.twig' as buttons %}
     {% for taxon in taxons %}
         <div class="item">
@@ -17,7 +17,7 @@
                     <div class="description">{{ taxon.description }}</div>
                 {% endif %}
                 <div class="list">
-                    {{ _self.renderChildren(taxon.children) }}
+                    {{ _self.renderLeaf(taxon.children) }}
                 </div>
             </div>
         </div>

@@ -66,6 +66,7 @@ final class ManagingTaxonsContext implements Context
 
     /**
      * @Given I want to create a new taxon
+     * @Given I want to see all taxons in store
      */
     public function iWantToCreateANewTaxon()
     {
@@ -169,6 +170,15 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
+     * @When I delete taxon named :name
+     */
+    public function iDeleteTaxonNamed($name)
+    {
+        $this->createPage->open();
+        $this->createPage->deleteTaxonOnPageByName($name);
+    }
+
+    /**
      * @When I add it
      * @When I try to add it
      */
@@ -200,6 +210,14 @@ final class ManagingTaxonsContext implements Context
     public function iShouldBeNotifiedAboutSuccessfulEdition()
     {
         $this->notificationChecker->checkEditionNotification(self::RESOURCE_NAME);
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully deleted
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted()
+    {
+        $this->notificationChecker->checkDeletionNotification(self::RESOURCE_NAME);
     }
 
     /**
@@ -274,13 +292,52 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
-     * @Then /^there should still be only one taxon with code "([^"]*)"$/
+     * @Then /^there should still be only one taxon with code "([^"]+)"$/
      */
     public function thereShouldStillBeOnlyOneTaxonWithCode($code)
     {
         Assert::true(
             $this->updatePage->hasResourceValues(['code' => $code]),
             sprintf('Taxon with code %s cannot be found.', $code)
+        );
+    }
+
+    /**
+     * @Then /^Taxon named "([^"]+)" should not be added$/
+     * @Then the taxon named :name should no longer exist in the registry
+     */
+    public function taxonNamedShouldNotBeAdded($name)
+    {
+        Assert::eq(
+            0,
+            $this->createPage->countTaxonsByName($name),
+            sprintf('Taxon %s should not exist', $name)
+        );
+    }
+
+    /**
+     * @Then /^I should see (\d+) taxons on the list$/
+     */
+    public function iShouldSeeZonesInTheList($number)
+    {
+        $taxonsOnPage = $this->createPage->countTaxons();
+
+        Assert::eq(
+            $number,
+            $taxonsOnPage,
+            sprintf('On list should be %d taxons but get %d', $number, $taxonsOnPage)
+        );
+    }
+
+    /**
+     * @Then I should see the taxon named :name in the list
+     */
+    public function iShouldSeeTheTaxonNamedInTheList($name)
+    {
+        Assert::eq(
+            1,
+            $this->createPage->countTaxonsByName($name),
+            sprintf('Taxon %s does not exist', $name)
         );
     }
 }

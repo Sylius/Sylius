@@ -20,6 +20,23 @@ use Sylius\Component\Core\Model\TaxonInterface;
 interface CreatePageInterface extends BaseCreatePageInterface
 {
     /**
+     * @return int
+     */
+    public function countTaxons();
+
+    /**
+     * @param string $name
+     *
+     * @return int
+     */
+    public function countTaxonsByName($name);
+
+    /**
+     * @param string $name
+     */
+    public function deleteTaxonOnPageByName($name);
+
+    /**
      * @param string $description
      * @param string $languageCode
      */
@@ -29,6 +46,13 @@ interface CreatePageInterface extends BaseCreatePageInterface
      * @param TaxonInterface $taxon
      */
     public function chooseParent(TaxonInterface $taxon);
+
+    /**
+     * @param string $name
+     *
+     * @return bool
+     */
+    public function hasTaxonWithName($name);
 
     /**
      * @param string $name

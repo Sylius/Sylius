@@ -11,9 +11,12 @@
 
 namespace Sylius\Behat\Page\Admin\Taxon;
 
+use Behat\Mink\Element\NodeElement;
+use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Behaviour\SpecifiesItsCode;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 use Sylius\Component\Core\Model\TaxonInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -21,6 +24,30 @@ use Sylius\Component\Core\Model\TaxonInterface;
 class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
     use SpecifiesItsCode;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function countTaxons()
+    {
+        return count($this->getLeafs());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function countTaxonsByName($name)
+    {
+        $matchedLeafsCounter = 0;
+        $leafs = $this->getLeafs();
+        foreach ($leafs as $leaf) {
+            if ($leaf->getText() === $name) {
+                $matchedLeafsCounter++;
+            }
+        }
+
+        return $matchedLeafsCounter;
+    }
 
     /**
      * {@inheritdoc}
@@ -33,9 +60,32 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function deleteTaxonOnPageByName($name)
+    {
+        $leafs = $this->getLeafs();
+        foreach ($leafs as $leaf) {
+            if ($leaf->getText() === $name) {
+                $leaf->pressButton('Delete');
+
+                break;
+            }
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function describeItAs($description, $languageCode)
     {
         $this->getDocument()->fillField(sprintf('sylius_taxon_translations_%s_description', $languageCode), $description);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasTaxonWithName($name)
+    {
+        return 0 !== $this->countTaxonsByName($name);
     }
 
     /**
@@ -65,6 +115,20 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             'parent' => '#sylius_taxon_parent',
             'permalink' => '#sylius_taxon_translations_en_US_permalink',
             'description' => '#sylius_taxon_translations_en_US_description',
+            'tree' => '.ui.list',
         ]);
+    }
+
+    /**
+     * @return NodeElement[]
+     *
+     * @throws ElementNotFoundException
+     */
+    private function getLeafs()
+    {
+        $tree = $this->getElement('tree');
+        Assert::notNull($tree);
+
+        return $tree->findAll('css', '.item > .content > .header');
     }
 }
