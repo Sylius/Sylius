@@ -73,6 +73,14 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
+     * @Given /^I want to modify the ("[^"]+" taxon)$/
+     */
+    public function iWantToModifyATaxon(TaxonInterface $taxon)
+    {
+        $this->updatePage->open(['id' => $taxon->getId()]);
+    }
+
+    /**
      * @When I specify its code as :code
      */
     public function iSpecifyItsCodeAs($code)
@@ -82,11 +90,26 @@ final class ManagingTaxonsContext implements Context
 
     /**
      * @When I name it :name in :language
-     * @When I rename it to :name in :language
      */
     public function iNameItIn($name, $language)
     {
         $this->createPage->nameIt($name, $language);
+    }
+
+    /**
+     * @When I rename it to :name in :language
+     */
+    public function iRenameItIn($name, $language)
+    {
+        $this->updatePage->nameIt($name, $language);
+    }
+
+    /**
+     * @When I change its description to :description in :language
+     */
+    public function iChangeItsDescriptionToIn($description, $language)
+    {
+        $this->updatePage->describeItAs($description, $language);
     }
 
     /**
@@ -95,6 +118,14 @@ final class ManagingTaxonsContext implements Context
     public function iSpecifyItsPermalinkAs($permalink, $language)
     {
         $this->createPage->specifyPermalink($permalink, $language);
+    }
+
+    /**
+     * @When I change its permalink to :permalink in :language
+     */
+    public function iChangeItsPermalinkToIn($permalink, $language)
+    {
+        $this->updatePage->specifyPermalink($permalink, $language);
     }
 
     /**
@@ -114,6 +145,14 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
+     * @Given /^I change its (parent taxon to "[^"]+")$/
+     */
+    public function iChangeItsParentTaxonTo(TaxonInterface $taxon)
+    {
+        $this->updatePage->chooseParent($taxon);
+    }
+
+    /**
      * @When I add it
      * @When I try to add it
      */
@@ -123,11 +162,28 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
+     * @When I save my changes
+     * @When I try to save my changes
+     */
+    public function iSaveMyChanges()
+    {
+        $this->updatePage->saveChanges();
+    }
+
+    /**
      * @Then I should be notified that it has been successfully created
      */
     public function iShouldBeNotifiedItHasBeenSuccessfullyCreated()
     {
         $this->notificationChecker->checkCreationNotification(self::RESOURCE_NAME);
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully edited
+     */
+    public function iShouldBeNotifiedAboutSuccessfulEdition()
+    {
+        $this->notificationChecker->checkEditionNotification(self::RESOURCE_NAME);
     }
 
     /**
@@ -163,6 +219,39 @@ final class ManagingTaxonsContext implements Context
         Assert::true(
             $this->updatePage->hasResourceValues(['parent' => $parentTaxon->getId()]),
             sprintf('Taxon %s should have %s parent taxon', $taxon->getName(), $parentTaxon->getName())
+        );
+    }
+
+    /**
+     * @Then this taxon :element should be :value
+     */
+    public function thisTaxonElementShouldBe($element, $value)
+    {
+        Assert::true(
+            $this->updatePage->hasResourceValues([$element => $value]),
+            sprintf('Taxon with %s should have %s value', $element, $value)
+        );
+    }
+
+    /**
+     * @Then the code field should be disabled
+     */
+    public function theCodeFiledShouldBeDisabled()
+    {
+        Assert::true(
+            $this->updatePage->isCodeDisabled(),
+            'Code field should be disabled but it is not'
+        );
+    }
+
+    /**
+     * @Then /^this taxon should (belongs to "[^"]+")$/
+     */
+    public function thisTaxonShouldBelongsTo(TaxonInterface $taxon)
+    {
+        Assert::true(
+            $this->updatePage->hasResourceValues(['parent' => $taxon->getId()]),
+            sprintf('Current taxon should have %s parent taxon', $taxon->getName())
         );
     }
 }
