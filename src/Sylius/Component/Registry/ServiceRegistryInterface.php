@@ -12,47 +12,44 @@
 namespace Sylius\Component\Registry;
 
 /**
- * Service registry interface.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface ServiceRegistryInterface
 {
     /**
-     * Get all registered services.
-     *
      * @return array
      */
     public function all();
 
     /**
-     * Register service.
-     *
-     * @param string $type
+     * @param string $identifier
      * @param object $service
-     */
-    public function register($type, $service);
-
-    /**
-     * Unregister service with given type.
      *
-     * @param string $type
+     * @throws ExistingServiceException
+     * @throws \InvalidArgumentException
      */
-    public function unregister($type);
+    public function register($identifier, $service);
 
     /**
-     * @param string $type
+     * @param string $identifier
+     *
+     * @throws NonExistingServiceException
+     */
+    public function unregister($identifier);
+
+    /**
+     * @param string $identifier
      *
      * @return bool
      */
-    public function has($type);
+    public function has($identifier);
 
     /**
-     * Get service with given type.
-     *
-     * @param string $type
+     * @param string $identifier
      *
      * @return object
+     *
+     * @throws NonExistingServiceException
      */
-    public function get($type);
+    public function get($identifier);
 }
