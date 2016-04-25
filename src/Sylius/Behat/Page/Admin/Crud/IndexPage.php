@@ -55,7 +55,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function isResourceOnPage(array $parameters)
+    public function isSingleResourceOnPage(array $parameters)
     {
         try {
             $rows = $this->tableAccessor->getRowsWithFields($this->getElement('table'), $parameters);

@@ -88,7 +88,7 @@ final class ManagingTaxCategoriesContext implements Context
     public function thisTaxCategoryShouldNoLongerExistInTheRegistry(TaxCategoryInterface $taxCategory)
     {
         Assert::false(
-            $this->indexPage->isResourceOnPage(['code' => $taxCategory->getCode()]),
+            $this->indexPage->isSingleResourceOnPage(['code' => $taxCategory->getCode()]),
             sprintf('Tax category with code %s exists but should not.', $taxCategory->getCode())
         );
     }
@@ -145,7 +145,7 @@ final class ManagingTaxCategoriesContext implements Context
     {
         $this->indexPage->open();
         Assert::true(
-            $this->indexPage->isResourceOnPage(['name' => $taxCategoryName]),
+            $this->indexPage->isSingleResourceOnPage(['name' => $taxCategoryName]),
             sprintf('Tax category with name %s has not been found.', $taxCategoryName)
         );
     }
@@ -211,7 +211,7 @@ final class ManagingTaxCategoriesContext implements Context
     {
         $this->indexPage->open();
         Assert::true(
-            $this->indexPage->isResourceOnPage(['code' => $taxCategory->getCode(), 'name' => $taxCategoryName]),
+            $this->indexPage->isSingleResourceOnPage(['code' => $taxCategory->getCode(), 'name' => $taxCategoryName]),
             sprintf('Tax category name %s was not assigned properly.', $taxCategoryName)
         );
     }
@@ -234,7 +234,7 @@ final class ManagingTaxCategoriesContext implements Context
     {
         $this->indexPage->open();
         Assert::true(
-            $this->indexPage->isResourceOnPage([$element => $code]),
+            $this->indexPage->isSingleResourceOnPage([$element => $code]),
             sprintf('Tax category with %s %s cannot be founded.', $element, $code)
         );
     }
@@ -259,7 +259,7 @@ final class ManagingTaxCategoriesContext implements Context
     {
         $this->indexPage->open();
         Assert::false(
-            $this->indexPage->isResourceOnPage([$element => $name]),
+            $this->indexPage->isSingleResourceOnPage([$element => $name]),
             sprintf('Tax category with %s %s was created, but it should not.', $element, $name)
         );
     }

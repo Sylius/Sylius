@@ -167,7 +167,7 @@ final class ManagingCountriesContext implements Context
         $this->indexPage->open();
 
         Assert::true(
-            $this->indexPage->isResourceOnPage(['code' => $country->getCode()]),
+            $this->indexPage->isSingleResourceOnPage(['code' => $country->getCode()]),
             sprintf('Country %s should exist but it does not', $country->getCode())
         );
     }
