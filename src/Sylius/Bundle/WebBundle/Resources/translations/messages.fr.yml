@@ -124,6 +124,7 @@ sylius:
         transition:
             cancel: annuler
             prepare: préparer
+            release: libéré
             return: retour
             ship: envoi
         update: Modifier

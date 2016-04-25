@@ -12,11 +12,13 @@ sylius:
         administration_panel_login: "Connexion à l'espace d'administration"
         an_error_occurred: "Une erreur s'est produite"
         are_your_sure_you_want_to_perform_this_action: Êtes-vous sûr de vouloir effectuer cette action ?
+        available_for_channels: Disponible pour le canal
         cancel: Annuler
         category_requirements: Exigences de la catégorie
         charges_and_taxes: Taxes et frais
         clear_filters: Réinitialiser les filtres
         color: Couleur
+        configure_channels_available_in_your_store: Configurer les canaux de distribution disponibles dans votre boutique
         confirm_your_action: Confirmez votre action
         contains: Contient
         countries: Pays
@@ -30,7 +32,11 @@ sylius:
         description: Description
         disabled: Désactivés
         edit: Modifier
+        edit_channel: Modifier le canal de distribution
         edit_country: Modifier le pays
+        edit_currency: Modifier la devise
+        edit_customer: Modifier le client
+        edit_payment_method: Modifier le mode de paiement
         edit_promotion: Modifier la promotion
         edit_tax_category: Éditer la catégorie de taxe
         edit_tax_rate: Modifier le taux de taxe
@@ -44,23 +50,29 @@ sylius:
         info: Info
         last_updated: Dernière mise à jour
         locales: Locales
+        manage_country: Gérer le pays
+        manage_currencies_available_in_the_store: Gérer les devises disponibles pour la boutique
         manage_customer: Gérer des clients
         manage_languages_available_in_the_store: Gérer les langues disponibles dans le magasin
+        manage_payment_method: Gérer les modes de paiement
         manage_shipping_destinations: Gérer les destinations de livraison
         manage_shipping_methods_for_your_store: "Gérer les méthodes d'expédition pour votre magasin"
         manage_taxation_of_your_products: Gérer la fiscalité de vos produits
         new: Nouveau
+        new_channel: Nouveau canal
         new_country: Nouveau pays
         new_currency: Nouvelle devise
         new_locale: Nouveaux paramètres régionaux
         new_tax_category: Nouvelle catégorie de taxe
         "no": false
+        no_account: Aucun compte
         no_results_to_display: "Il n'y a aucun résultat à afficher"
         not_contains: Ne contient pas
         not_empty: Non vide
         not_in: Pas dans
         or: ou
         powered_by: Propulsé par
+        promotion_configuration: Configuration des promotions
         promotion_information: Information de la promotion
         save_changes: Enregistrer les modifications
         shipping_methods: Modes de livraison
