@@ -55,6 +55,9 @@
         <parameter key="sylius.behat.page.admin.payment_method.update.class">Sylius\Behat\Page\Admin\PaymentMethod\UpdatePage</parameter>
         <parameter key="sylius.behat.page.admin.product.show.class">Sylius\Behat\Page\Admin\Product\ShowPage</parameter>
         <parameter key="sylius.behat.page.admin.product.index.class">Sylius\Behat\Page\Admin\Product\IndexPage</parameter>
+        <parameter key="sylius.behat.page.admin.product_attribute.create.class">Sylius\Behat\Page\Admin\Product\Attribute\CreatePage</parameter>
+        <parameter key="sylius.behat.page.admin.product_attribute.index.class">%sylius.behat.page.admin.crud.index.class%</parameter>
+        <parameter key="sylius.behat.page.admin.product_attribute.update.class">Sylius\Behat\Page\Admin\Product\Attribute\UpdatePage</parameter>
         <parameter key="sylius.behat.page.admin.promotion.create.class">Sylius\Behat\Page\Admin\Promotion\CreatePage</parameter>
         <parameter key="sylius.behat.page.admin.promotion.update.class">Sylius\Behat\Page\Admin\Promotion\UpdatePage</parameter>
         <parameter key="sylius.behat.page.admin.promotion.index.class">%sylius.behat.page.admin.crud.index.class%</parameter>
@@ -171,6 +174,15 @@
         </service>
         <service id="sylius.behat.page.admin.tax_rate.update" class="%sylius.behat.page.admin.tax_rate.update.class%" parent="sylius.behat.page.admin.crud.update" scope="scenario" public="false">
             <argument type="string">tax_rate</argument>
+        </service>
+        <service id="sylius.behat.page.admin.product_attribute.create" class="%sylius.behat.page.admin.product_attribute.create.class%" parent="sylius.behat.page.admin.crud.create" scope="scenario" public="false">
+            <argument type="string">product_attribute</argument>
+        </service>
+        <service id="sylius.behat.page.admin.product_attribute.index" class="%sylius.behat.page.admin.product_attribute.index.class%" parent="sylius.behat.page.admin.crud.index" scope="scenario" public="false">
+            <argument type="string">product_attribute</argument>
+        </service>
+        <service id="sylius.behat.page.admin.product_attribute.update" class="%sylius.behat.page.admin.product_attribute.update.class%" parent="sylius.behat.page.admin.crud.update" scope="scenario" public="false">
+            <argument type="string">product_attribute</argument>
         </service>
         <service id="sylius.behat.page.admin.promotion.create" class="%sylius.behat.page.admin.promotion.create.class%" parent="sylius.behat.page.admin.crud.create" scope="scenario" public="false">
             <argument type="string">promotion</argument>

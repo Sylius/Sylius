@@ -60,7 +60,7 @@ class BuildAttributeFormSubscriber implements EventSubscriberInterface
                 null,
                 [
                     'auto_initialize' => false,
-                    'label' => 'sylius.attribute_type.configuration',
+                    'label' => 'sylius.form.attribute_type.configuration',
                 ]
             );
 
