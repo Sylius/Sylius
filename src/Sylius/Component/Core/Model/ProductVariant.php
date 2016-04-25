@@ -291,16 +291,6 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function setDefaults(BaseVariantInterface $masterVariant)
-    {
-        parent::setDefaults($masterVariant);
-
-        $this->setPrice($masterVariant->getPrice());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getShippingCategory()
     {
         return $this->getProduct()->getShippingCategory();

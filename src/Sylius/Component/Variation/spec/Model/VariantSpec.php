@@ -57,20 +57,6 @@ class VariantSpec extends ObjectBehavior
         $this->getObject()->shouldReturn(null);
     }
 
-    function it_should_not_be_master_variant_by_default()
-    {
-        $this->shouldNotBeMaster();
-    }
-
-    function it_is_master_variant_when_marked_so()
-    {
-        $this->shouldNotBeMaster();
-
-        $this->setMaster(true);
-
-        $this->shouldBeMaster();
-    }
-
     function it_should_not_have_presentation_by_default()
     {
         $this->getPresentation()->shouldReturn(null);
@@ -106,26 +92,6 @@ class VariantSpec extends ObjectBehavior
 
         $this->removeOption($option);
         $this->hasOption($option)->shouldReturn(false);
-    }
-
-    function it_throws_exception_if_trying_to_inherit_values_and_being_a_master_variant(VariantInterface $masterVariant)
-    {
-        $this->setMaster(true);
-
-        $this
-            ->shouldThrow('LogicException')
-            ->duringSetDefaults($masterVariant)
-        ;
-    }
-
-    function it_throws_exception_if_trying_to_inherit_values_from_non_master_variant(VariantInterface $variant)
-    {
-        $variant->isMaster()->willReturn(false);
-
-        $this
-            ->shouldThrow('InvalidArgumentException')
-            ->duringSetDefaults($variant)
-        ;
     }
 
     function it_should_initialize_creation_date_by_default()
