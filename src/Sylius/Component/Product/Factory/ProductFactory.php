@@ -37,26 +37,15 @@ class ProductFactory implements ProductFactoryInterface
     private $archetypeBuilder;
 
     /**
-     * @var FactoryInterface
-     */
-    private $variantFactory;
-
-    /**
      * @param FactoryInterface $factory
      * @param RepositoryInterface $archetypeRepository
      * @param ArchetypeBuilderInterface $archetypeBuilder
-     * @param FactoryInterface $variantFactory
      */
-    public function __construct(
-        FactoryInterface $factory,
-        RepositoryInterface $archetypeRepository,
-        ArchetypeBuilderInterface $archetypeBuilder,
-        FactoryInterface $variantFactory
-    ) {
+    public function __construct(FactoryInterface $factory, RepositoryInterface $archetypeRepository, ArchetypeBuilderInterface $archetypeBuilder)
+    {
         $this->factory = $factory;
         $this->archetypeRepository = $archetypeRepository;
         $this->archetypeBuilder = $archetypeBuilder;
-        $this->variantFactory = $variantFactory;
     }
 
     /**
@@ -64,12 +53,7 @@ class ProductFactory implements ProductFactoryInterface
      */
     public function createNew()
     {
-        $variant = $this->variantFactory->createNew();
-
-        $product = $this->factory->createNew();
-        $product->addVariant($variant);
-
-        return $product;
+        return $this->factory->createNew();
     }
 
     /**

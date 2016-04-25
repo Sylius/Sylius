@@ -9,9 +9,8 @@
     {% include 'SyliusWebBundle:Backend/Product/Form:_attributes.html.twig' %}
     {% include 'SyliusWebBundle:Backend/Product/Form:_associations.html.twig' %}
     {% include 'SyliusWebBundle:Backend/Product/Form:_categorization.html.twig' %}
-    {% include 'SyliusWebBundle:Backend/Product/Form:_images.html.twig' %}
     {% if form.channels|length > 0 %}
-    {% include 'SyliusWebBundle:Backend/Product/Form:_channels.html.twig' %}
+        {% include 'SyliusWebBundle:Backend/Product/Form:_channels.html.twig' %}
     {% endif %}
 </div>
 <hr>

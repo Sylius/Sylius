@@ -11,7 +11,7 @@
         <hr>
         {% if not product.hasOptions %}
             <div class="pull-left">
-            {% if not sylius_inventory_is_available(product.masterVariant) %}
+            {% if not sylius_inventory_is_available(product.variants.first()) %}
                 <br />
                 <span class="label label-important">{{ 'sylius.ui.out_of_stock'|trans }}</span>
             {% else %}

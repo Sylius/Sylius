@@ -327,10 +327,10 @@ class CoreContext extends DefaultContext
     {
         /* @var $product ProductInterface */
         $product = $this->findOneByName('product', $productName);
-        $masterVariant = $product->getVariants()->first();
+        $variant = $product->getVariants()->first();
 
-        /* @var $masterVariant ProductVariantInterface */
-        $masterVariant->setPricingCalculator(PriceCalculators::VOLUME_BASED);
+        /* @var $variant ProductVariantInterface */
+        $variant->setPricingCalculator(PriceCalculators::VOLUME_BASED);
         $configuration = [];
 
         foreach ($table->getHash() as $data) {
@@ -348,7 +348,7 @@ class CoreContext extends DefaultContext
             ];
         }
 
-        $masterVariant->setPricingConfiguration($configuration);
+        $variant->setPricingConfiguration($configuration);
 
         $manager = $this->getEntityManager();
         $manager->persist($product);
@@ -361,10 +361,10 @@ class CoreContext extends DefaultContext
     public function productHasTheFollowingGroupBasedPricing($productName, TableNode $table)
     {
         $product = $this->findOneByName('product', $productName);
-        $masterVariant = $product->getVariants()->first();
+        $variant = $product->getVariants()->first();
 
-        /* @var $masterVariant ProductVariantInterface */
-        $masterVariant->setPricingCalculator(PriceCalculators::GROUP_BASED);
+        /* @var $variant ProductVariantInterface */
+        $variant->setPricingCalculator(PriceCalculators::GROUP_BASED);
         $configuration = [];
 
         foreach ($table->getHash() as $data) {
@@ -372,7 +372,7 @@ class CoreContext extends DefaultContext
             $configuration[$group->getId()] = (float) $data['price'] * 100;
         }
 
-        $masterVariant->setPricingConfiguration($configuration);
+        $variant->setPricingConfiguration($configuration);
 
         $manager = $this->getEntityManager();
         $manager->persist($product);

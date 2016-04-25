@@ -134,13 +134,7 @@
                 </tr>
                 <tr>
                     <td>{{ 'sylius.ui.tax_category'|trans }}</td>
-                    <td>{{ product.masterVariant.taxCategory|default('sylius.ui.no_tax_category'|trans) }}</td>
-                </tr>
-                <tr>
-                    <td>{{ 'sylius.ui.available_on_demand'|trans }}</td>
-                    <td>
-                        {{ misc.state_label(product.masterVariant.availableOnDemand) }}
-                    </td>
+                    <td>{{ product.variants.first().taxCategory|default('sylius.ui.no_tax_category'|trans) }}</td>
                 </tr>
                 {% if product.restrictedZone %}
                     <tr>
@@ -151,42 +145,9 @@
                     </tr>
                 {% endif %}
                 <tr>
-                    <td>{{ 'sylius.ui.current_stock'|trans }}</td>
-                    <td><span class="label label-{{ product.masterVariant.inStock ? 'success' : 'important' }}">{{ product.masterVariant.onHand }}</span></td>
-                </tr>
-                <tr>
                     <td></td>
                     <td><span class="label label-{{ product.enabled ? 'success' : 'important'}}">{{ product.enabled ? 'Enabled' : 'Disabled' }}</span></td>
                 </tr>
-                <tr>
-                    <td>{{ 'sylius.ui.retail_price'|trans }}</td>
-                    <td>{{ product.masterVariant.price|sylius_price }}</td>
-                </tr>
-                <tr>
-                    <td>{{ 'sylius.ui.original_price'|trans }}</td>
-                    <td>{{ product.masterVariant.originalPrice|sylius_price }}</td>
-                </tr>
-                {% if product.masterVariant.pricingCalculator == 'volume_based' %}
-                <tr>
-                    <td>{{ 'sylius.ui.volume_based_pricing'|trans }}</td>
-                    <td>
-                        <table class="table table-bordered table-striped table-condensed">
-                            <tr>
-                                <th>{{ 'sylius.ui.price'|trans }}</th>
-                                <th>{{ 'sylius.ui.qty_min'|trans }}</th>
-                                <th>{{ 'sylius.ui.qty_max'|trans }}</th>
-                            </tr>
-                            {% for pricing in product.masterVariant.pricingConfiguration if (pricing.min is not same as(null) and pricing.price is not same as(null)) %}
-                                <tr>
-                                    <td>{{ pricing.price|sylius_price }}</td>
-                                    <td>{{ pricing.min }}</td>
-                                    <td>{{ pricing.max|default('~') }}</td>
-                                </tr>
-                            {% endfor %}
-                        </table>
-                    </td>
-                </tr>
-                {% endif %}
                 {% if 0 != product.averageRating %}
                 <tr>
                     <td>{{ 'sylius.ui.rating'|trans }}</td>
@@ -198,19 +159,6 @@
     </div>
 
     <div class="col-md-6">
-        {% if product.images|length > 0 %}
-            <div id="gallery">
-                {% for image in product.images %}
-                <a href="{{ image.path|imagine_filter('sylius_large') }}" title="{{ product.name }}" class="thumbnail">
-                    <img src="{{ image.path|imagine_filter('sylius_small') }}" alt="{{ product.name }}" />
-                </a>
-                {% endfor %}
-            </div>
-        {% else %}
-            {{ alerts.info('sylius.ui.there_are_no_images_for_this_product'|trans) }}
-        {% endif %}
-
-        <hr>
         <table class="table table-bordered">
             <thead>
                 <tr>

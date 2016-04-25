@@ -31,20 +31,6 @@
                     </a>
                 </td>
                 <td>
-                    {% if not product.hasOptions %}
-                        <span class="label label-{{ product.masterVariant.isInStock ? 'success' : 'danger' }}">{{ product.masterVariant.onHand }}</span>
-                    {% else %}
-                        -
-                    {% endif %}
-                </td>
-                <td>
-                    {% if not product.hasOptions %}
-                        <span class="label label-{{ product.masterVariant.onHold ? 'warning' : 'success' }}">{{ product.masterVariant.onHold }}</span>
-                    {% else %}
-                        -
-                    {% endif %}
-                </td>
-                <td>
                     <div class="pull-right">
                         {{ buttons.edit(path('sylius_backend_product_update', {'id': product.id})) }}
                     </div>

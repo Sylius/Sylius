@@ -42,12 +42,6 @@ class LegacyProductTypeSpec extends ObjectBehavior
     function it_builds_form_with_proper_fields(FormBuilder $builder)
     {
         $builder
-            ->add('masterVariant', 'sylius_product_variant', Argument::any())
-            ->shouldBeCalled()
-            ->willReturn($builder)
-        ;
-
-        $builder
             ->add('attributes', 'collection', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)

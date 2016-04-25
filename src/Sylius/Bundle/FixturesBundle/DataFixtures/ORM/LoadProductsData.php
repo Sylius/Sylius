@@ -98,7 +98,7 @@ class LoadProductsData extends DataFixture
         $product->setMainTaxon($this->getReference('Sylius.Taxon.t-shirts'));
         $product->setArchetype($this->getReference('Sylius.Archetype.t_shirt'));
 
-        $this->addMasterVariant($product);
+        $this->addVariant($product);
         $this->setChannels($product, ['DEFAULT']);
 
         // T-Shirt brand.
@@ -147,7 +147,7 @@ class LoadProductsData extends DataFixture
         $product->setMainTaxon($this->getReference('Sylius.Taxon.stickers'));
         $product->setArchetype($this->getReference('Sylius.Archetype.sticker'));
 
-        $this->addMasterVariant($product);
+        $this->addVariant($product);
         $this->setChannels($product, ['DEFAULT']);
 
         // Sticker resolution.
@@ -189,7 +189,7 @@ class LoadProductsData extends DataFixture
         $product->setMainTaxon($this->getReference('Sylius.Taxon.mugs'));
         $product->setArchetype($this->getReference('Sylius.Archetype.mug'));
 
-        $this->addMasterVariant($product);
+        $this->addVariant($product);
         $this->setChannels($product, ['DEFAULT']);
 
         $randomMugMaterial = $this->faker->randomElement(['Invisible porcelain', 'Banana skin', 'Porcelain', 'Sand']);
@@ -229,7 +229,7 @@ class LoadProductsData extends DataFixture
         $product->setMainTaxon($this->getReference('Sylius.Taxon.books'));
         $product->setArchetype($this->getReference('Sylius.Archetype.book'));
 
-        $this->addMasterVariant($product, $isbn);
+        $this->addVariant($product, $isbn);
         $this->setChannels($product, ['DEFAULT']);
 
         $this->addAttribute($product, 'book_author', $author);
@@ -269,7 +269,7 @@ class LoadProductsData extends DataFixture
      * @param ProductInterface $product
      * @param string $code
      */
-    protected function addMasterVariant(ProductInterface $product, $code = null)
+    protected function addVariant(ProductInterface $product, $code = null)
     {
         /** @var ProductVariantInterface $variant */
         $variant = $product->getVariants()->first();

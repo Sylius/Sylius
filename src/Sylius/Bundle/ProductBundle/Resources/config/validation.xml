@@ -28,9 +28,6 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
-        <getter property="masterVariant">
-            <constraint name="Valid" />
-        </getter>
         <getter property="variants">
             <constraint name="Valid" />
         </getter>

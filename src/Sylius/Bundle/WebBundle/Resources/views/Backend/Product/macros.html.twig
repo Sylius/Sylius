@@ -59,26 +59,16 @@
                 <td class="stock contain-variants text-muted">
                     <em>{{ 'sylius.ui.contain_variants'|trans }}</em>
                 </td>
-            {% else %}
-                {% if product.masterVariant.onHand > 0 and product.masterVariant.isAvailable %}
-                    <td class="stock in-stock">
-                        {{ product.masterVariant.onHand }}
-                    </td>
-                {% else %}
-                    <td class="stock out-of-stock text-muted">
-                        <em>{{ 'sylius.ui.out_of_stock'|trans }}</em>
-                    </td>
-                {% endif %}
             {% endif %}
 
 
             {# Retail Price #}
             {% if not product.hasOptions %}
                 <td class="retail-price">
-                    {{ product.masterVariant.price|sylius_price }}
+                    {{ product.variants.first().price|sylius_price }}
                 </td>
                 <td class="original-price">
-                    {{ product.masterVariant.originalPrice|sylius_price }}
+                    {{ product.variants.first().originalPrice|sylius_price }}
                 </td>
             {% else %}
                 <td class="retail-price text-muted">

@@ -113,14 +113,14 @@
         {% else %}
             <h4>
                 <span class="pull-right">
-                   {{ sylius_display_price(product.masterVariant) }}
+                   {{ sylius_display_price(product.variants.first()) }}
                 </span>
                 {{ 'sylius.ui.price'|trans }}
             </h4>
         {% endif %}
     </div>
     <div class="col-md-6 pull-right">
-        {% if not product.hasVariants and not sylius_inventory_is_available(product.masterVariant) %}
+        {% if not product.hasVariants and not sylius_inventory_is_available(product.variants.first()) %}
             <span class="label label-warning">{{ 'sylius.ui.out_of_stock'|trans }}</span>
         {% else %}
             {{ form_row(form.quantity, {'attr': {'class': 'center-text'}, 'empty_value': '1'}) }}
