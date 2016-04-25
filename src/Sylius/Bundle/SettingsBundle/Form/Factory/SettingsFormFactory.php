@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\SettingsBundle\Form\Factory;
 
+use Sylius\Bundle\SettingsBundle\Schema\SchemaInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 
@@ -44,7 +45,9 @@ class SettingsFormFactory implements SettingsFormFactoryInterface
      */
     public function create($schemaAlias, $data = null, array $options = [])
     {
+        /** @var SchemaInterface $schema */
         $schema = $this->schemaRegistry->get($schemaAlias);
+        
         $builder = $this->formFactory->createBuilder('form', $data, array_merge_recursive(
             ['data_class' => null], $options
         ));

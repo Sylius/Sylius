@@ -14,10 +14,13 @@ namespace Sylius\Bundle\SettingsBundle\Manager;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\SettingsBundle\Event\SettingsEvent;
 use Sylius\Bundle\SettingsBundle\Model\SettingsInterface;
+use Sylius\Bundle\SettingsBundle\Resolver\SettingsResolverInterface;
+use Sylius\Bundle\SettingsBundle\Schema\SchemaInterface;
 use Sylius\Bundle\SettingsBundle\Schema\SettingsBuilder;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -55,6 +58,13 @@ class SettingsManager implements SettingsManagerInterface
      */
     protected $eventDispatcher;
 
+    /**
+     * @param ServiceRegistryInterface $schemaRegistry
+     * @param ServiceRegistryInterface $resolverRegistry
+     * @param ObjectManager $manager
+     * @param FactoryInterface $settingsFactory
+     * @param EventDispatcherInterface $eventDispatcher
+     */
     public function __construct(
         ServiceRegistryInterface $schemaRegistry,
         ServiceRegistryInterface $resolverRegistry,
@@ -74,7 +84,10 @@ class SettingsManager implements SettingsManagerInterface
      */
     public function load($schemaAlias, $namespace = null, $ignoreUnknown = true)
     {
+        /** @var SchemaInterface $schema */
         $schema = $this->schemaRegistry->get($schemaAlias);
+
+        /** @var SettingsResolverInterface $resolver */
         $resolver = $this->resolverRegistry->get($schemaAlias);
 
         // try to resolve settings for schema alias and namespace
@@ -111,6 +124,7 @@ class SettingsManager implements SettingsManagerInterface
      */
     public function save(SettingsInterface $settings)
     {
+        /** @var SchemaInterface $schema */
         $schema = $this->schemaRegistry->get($settings->getSchemaAlias());
 
         $settingsBuilder = new SettingsBuilder();

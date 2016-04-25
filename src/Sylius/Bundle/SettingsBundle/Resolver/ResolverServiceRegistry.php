@@ -27,11 +27,10 @@ class ResolverServiceRegistry extends ServiceRegistry
     /**
      * @param string $interface
      * @param SettingsResolverInterface $defaultResolver
-     * @param string
      */
-    public function __construct($interface, SettingsResolverInterface $defaultResolver, $context = 'resolver service')
+    public function __construct($interface, SettingsResolverInterface $defaultResolver)
     {
-        parent::__construct($interface, $context);
+        parent::__construct($interface, 'Settings resolver');
 
         $this->defaultResolver = $defaultResolver;
     }

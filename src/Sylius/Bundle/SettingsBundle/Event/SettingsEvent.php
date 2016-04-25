@@ -28,6 +28,9 @@ class SettingsEvent extends GenericEvent
      */
     private $settings;
 
+    /**
+     * @param SettingsInterface $settings
+     */
     public function __construct(SettingsInterface $settings)
     {
         $this->settings = $settings;
