@@ -123,7 +123,7 @@ final class ManagingCustomersContext implements Context
         $this->indexPage->open();
 
         Assert::true(
-            $this->indexPage->isResourceOnPage(['Email' => $customer->getEmail()]),
+            $this->indexPage->isSingleResourceOnPage(['Email' => $customer->getEmail()]),
             sprintf('Customer with email %s should exist but it does not.', $customer->getEmail())
         );
     }
@@ -209,7 +209,7 @@ final class ManagingCustomersContext implements Context
     public function iShouldSeeTheCustomerInTheList($email)
     {
         Assert::true(
-            $this->indexPage->isResourceOnPage(['Email' => $email]),
+            $this->indexPage->isSingleResourceOnPage(['Email' => $email]),
             sprintf('Customer with email %s should exist but it does not.', $email)
         );
     }
@@ -233,7 +233,7 @@ final class ManagingCustomersContext implements Context
         $this->indexPage->open();
 
         Assert::false(
-            $this->indexPage->isResourceOnPage(['email' => $email]),
+            $this->indexPage->isSingleResourceOnPage(['email' => $email]),
             sprintf('Customer with email %s was created, but it should not.', $email)
         );
     }
@@ -320,7 +320,7 @@ final class ManagingCustomersContext implements Context
         $this->indexPage->open();
 
         Assert::true(
-            $this->indexPage->isResourceOnPage(['email' => $email]),
+            $this->indexPage->isSingleResourceOnPage(['email' => $email]),
             sprintf('Customer with email %s cannot be found.', $email)
         );
     }

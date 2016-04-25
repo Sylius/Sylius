@@ -155,7 +155,7 @@ final class ManagingTaxRateContext implements Context
         $this->indexPage->open();
 
         Assert::true(
-            $this->indexPage->isResourceOnPage(['name' => $taxRateName]), 
+            $this->indexPage->isSingleResourceOnPage(['name' => $taxRateName]),
             sprintf('Tax rate with name %s has not been found.', $taxRateName)
         );
     }
@@ -183,7 +183,7 @@ final class ManagingTaxRateContext implements Context
     public function thisTaxRateShouldNoLongerExistInTheRegistry(TaxRateInterface $taxRate)
     {
         Assert::false(
-            $this->indexPage->isResourceOnPage(['code' => $taxRate->getCode()]),
+            $this->indexPage->isSingleResourceOnPage(['code' => $taxRate->getCode()]),
             sprintf('Tax rate with code %s exists but should not.', $taxRate->getCode())
         );
     }
@@ -270,7 +270,7 @@ final class ManagingTaxRateContext implements Context
         $this->indexPage->open();
 
         Assert::true(
-            $this->indexPage->isResourceOnPage([$element => $code]),
+            $this->indexPage->isSingleResourceOnPage([$element => $code]),
             sprintf('Tax rate with %s %s cannot be founded.', $element, $code)
         );
     }
@@ -315,7 +315,7 @@ final class ManagingTaxRateContext implements Context
         $this->indexPage->open();
 
         Assert::false(
-            $this->indexPage->isResourceOnPage([$element => $name]),
+            $this->indexPage->isSingleResourceOnPage([$element => $name]),
             sprintf('Tax rate with %s %s was created, but it should not.', $element, $name)
         );
     }
@@ -346,7 +346,7 @@ final class ManagingTaxRateContext implements Context
         $this->indexPage->open();
 
         Assert::true(
-            $this->indexPage->isResourceOnPage(
+            $this->indexPage->isSingleResourceOnPage(
                 [
                     'code' => $taxRate->getCode(),
                     $element => $taxRateElement,

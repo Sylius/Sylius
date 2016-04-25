@@ -123,7 +123,7 @@ final class ManagingCurrenciesContext implements Context
         $this->indexPage->open();
 
         Assert::true(
-            $this->indexPage->isResourceOnPage(['code' => $currency->getCode()]),
+            $this->indexPage->isSingleResourceOnPage(['code' => $currency->getCode()]),
             sprintf('Currency %s should exist but it does not.', $currency->getCode())
         );
     }
@@ -250,7 +250,7 @@ final class ManagingCurrenciesContext implements Context
         $this->indexPage->open();
 
         Assert::true(
-            $this->indexPage->isResourceOnPage([$element => $codeValue]),
+            $this->indexPage->isSingleResourceOnPage([$element => $codeValue]),
             sprintf('Currency with %s %s cannot be found.', $element, $codeValue)
         );
     }
@@ -276,7 +276,7 @@ final class ManagingCurrenciesContext implements Context
         $this->indexPage->open();
 
         Assert::false(
-            $this->indexPage->isResourceOnPage(['name' => $currencyName]),
+            $this->indexPage->isSingleResourceOnPage(['name' => $currencyName]),
             sprintf('Currency with name %s was created, but it should not.', $currencyName)
         );
     }

@@ -120,7 +120,7 @@ final class ManagingPromotionsContext implements Context
         $this->indexPage->open();
 
         Assert::true(
-            $this->indexPage->isResourceOnPage(['name' => $promotionName]),
+            $this->indexPage->isSingleResourceOnPage(['name' => $promotionName]),
             sprintf('Promotion with name %s has not been found.', $promotionName)
         );
     }
@@ -212,7 +212,7 @@ final class ManagingPromotionsContext implements Context
         $this->indexPage->open();
 
         Assert::false(
-            $this->indexPage->isResourceOnPage([$element => $name]),
+            $this->indexPage->isSingleResourceOnPage([$element => $name]),
             sprintf('Promotion with %s "%s" has been created, but it should not.', $element, $name)
         );
     }
@@ -225,7 +225,7 @@ final class ManagingPromotionsContext implements Context
         $this->indexPage->open();
 
         Assert::true(
-            $this->indexPage->isResourceOnPage([$element => $value]),
+            $this->indexPage->isSingleResourceOnPage([$element => $value]),
             sprintf('Promotion with %s "%s" cannot be found.', $element, $value)
         );
     }
@@ -377,7 +377,7 @@ final class ManagingPromotionsContext implements Context
         $this->indexPage->open();
 
         Assert::false(
-            $this->indexPage->isResourceOnPage(['code' => $promotion->getCode()]),
+            $this->indexPage->isSingleResourceOnPage(['code' => $promotion->getCode()]),
             sprintf('Promotion with code %s exists but should not.', $promotion->getCode())
         );
     }

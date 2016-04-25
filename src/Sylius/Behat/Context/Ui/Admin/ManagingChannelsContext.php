@@ -127,7 +127,7 @@ final class ManagingChannelsContext implements Context
     {
         $this->iWantToBrowseChannels();
 
-        Assert::true($this->indexPage->isResourceOnPage(
+        Assert::true($this->indexPage->isSingleResourceOnPage(
             ['name' => $channelName]),
             sprintf('Channel with name %s has not been found.', $channelName)
         );
@@ -204,7 +204,7 @@ final class ManagingChannelsContext implements Context
         $this->iWantToBrowseChannels();
 
         Assert::false(
-            $this->indexPage->isResourceOnPage([$element => $value]),
+            $this->indexPage->isSingleResourceOnPage([$element => $value]),
             sprintf('Channel with %s "%s" was created, but it should not.', $element, $value)
         );
     }
@@ -240,7 +240,7 @@ final class ManagingChannelsContext implements Context
         $this->iWantToBrowseChannels();
 
         Assert::true(
-            $this->indexPage->isResourceOnPage(
+            $this->indexPage->isSingleResourceOnPage(
                 [
                     'code' => $channel->getCode(),
                     'name' => $channelName,
@@ -278,7 +278,7 @@ final class ManagingChannelsContext implements Context
         $this->iWantToBrowseChannels();
 
         Assert::true(
-            $this->indexPage->isResourceOnPage([$element => $value]),
+            $this->indexPage->isSingleResourceOnPage([$element => $value]),
             sprintf('Channel with %s %s cannot be found.', $element, $value)
         );
     }
@@ -356,7 +356,7 @@ final class ManagingChannelsContext implements Context
     public function thisChannelShouldNoLongerExistInTheRegistry($channelName)
     {
         Assert::false(
-            $this->indexPage->isResourceOnPage(['name' => $channelName]),
+            $this->indexPage->isSingleResourceOnPage(['name' => $channelName]),
             sprintf('Channel with name %s exists but should not.', $channelName)
         );
     }
@@ -481,7 +481,7 @@ final class ManagingChannelsContext implements Context
         $this->iWantToBrowseChannels();
 
         Assert::true(
-            $this->indexPage->isResourceOnPage(
+            $this->indexPage->isSingleResourceOnPage(
                 [
                     'name' => $channel->getName(),
                     'enabled' => $state,

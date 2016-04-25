@@ -23,7 +23,7 @@ interface IndexPageInterface extends PageInterface
      *
      * @return bool
      */
-    public function isResourceOnPage(array $parameters);
+    public function isSingleResourceOnPage(array $parameters);
 
     /**
      * @param array $parameters

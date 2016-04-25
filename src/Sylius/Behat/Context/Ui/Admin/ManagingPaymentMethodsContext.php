@@ -216,7 +216,7 @@ final class ManagingPaymentMethodsContext implements Context
         $this->indexPage->open();
 
         Assert::true(
-            $this->indexPage->isResourceOnPage(['name' => $paymentMethodName]),
+            $this->indexPage->isSingleResourceOnPage(['name' => $paymentMethodName]),
             sprintf('Payment method with name %s has not been found.', $paymentMethodName)
         );
     }
@@ -259,7 +259,7 @@ final class ManagingPaymentMethodsContext implements Context
         $this->iBrowsePaymentMethods();
 
         Assert::false(
-            $this->indexPage->isResourceOnPage([$element => $value]),
+            $this->indexPage->isSingleResourceOnPage([$element => $value]),
             sprintf('Payment method with %s %s was created, but it should not.', $element, $value)
         );
     }
@@ -272,7 +272,7 @@ final class ManagingPaymentMethodsContext implements Context
         $this->iBrowsePaymentMethods();
 
         Assert::true(
-            $this->indexPage->isResourceOnPage([
+            $this->indexPage->isSingleResourceOnPage([
                 'code' => $paymentMethod->getCode(),
                 'name' => $paymentMethodName,
             ]),
@@ -341,7 +341,7 @@ final class ManagingPaymentMethodsContext implements Context
     public function thisPaymentMethodShouldNoLongerExistInTheRegistry(PaymentMethodInterface $paymentMethod)
     {
         Assert::false(
-            $this->indexPage->isResourceOnPage(['code' => $paymentMethod->getCode(), 'name' => $paymentMethod->getName()]),
+            $this->indexPage->isSingleResourceOnPage(['code' => $paymentMethod->getCode(), 'name' => $paymentMethod->getName()]),
             sprintf('Payment method %s should no longer exist in the registry', $paymentMethod->getName())
         );
     }
@@ -365,7 +365,7 @@ final class ManagingPaymentMethodsContext implements Context
         $this->iBrowsePaymentMethods();
 
         Assert::true(
-            $this->indexPage->isResourceOnPage([$element => $code]),
+            $this->indexPage->isSingleResourceOnPage([$element => $code]),
             sprintf('Payment method with %s %s cannot be found.', $element, $code)
         );
     }

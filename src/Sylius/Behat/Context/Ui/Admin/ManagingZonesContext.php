@@ -279,7 +279,7 @@ final class ManagingZonesContext implements Context
         $this->indexPage->open();
 
         Assert::true(
-            $this->indexPage->isResourceOnPage(['code' => $code]),
+            $this->indexPage->isSingleResourceOnPage(['code' => $code]),
             sprintf('Zone with code %s cannot be found.', $code)
         );
     }
@@ -305,7 +305,7 @@ final class ManagingZonesContext implements Context
         $this->indexPage->open();
 
         Assert::false(
-            $this->indexPage->isResourceOnPage([$element => $value]),
+            $this->indexPage->isSingleResourceOnPage([$element => $value]),
             sprintf('Zone with %s %s was added, but it should not.', $element, $value)
         );
     }
@@ -349,7 +349,7 @@ final class ManagingZonesContext implements Context
     public function thisZoneShouldNoLongerExistInTheRegistry($zoneName)
     {
         Assert::false(
-            $this->indexPage->isResourceOnPage(['name' => $zoneName]),
+            $this->indexPage->isSingleResourceOnPage(['name' => $zoneName]),
             sprintf('Zone named %s should no longer exist', $zoneName)
         );
     }
@@ -374,7 +374,7 @@ final class ManagingZonesContext implements Context
     public function iShouldSeeTheZoneNamedInTheList(ZoneInterface $zone)
     {
         Assert::true(
-            $this->indexPage->isResourceOnPage(['code' => $zone->getCode(), 'name' => $zone->getName()]),
+            $this->indexPage->isSingleResourceOnPage(['code' => $zone->getCode(), 'name' => $zone->getName()]),
             sprintf('Zone named %s should exist in the registry', $zone->getName())
         );
     }
