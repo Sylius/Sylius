@@ -1,0 +1,74 @@
+<?php
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace spec\Sylius\Bundle\ThemeBundle\Settings;
+
+use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
+use Sylius\Bundle\SettingsBundle\Schema\SchemaInterface;
+use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
+use Sylius\Bundle\ThemeBundle\Settings\ThemeSettingsSchemaProvider;
+use Sylius\Bundle\ThemeBundle\Settings\ThemeSettingsSchemaProviderInterface;
+
+/**
+ * @mixin ThemeSettingsSchemaProvider
+ *
+ * @author Kamil Kokot <kamil.kokot@lakion.com>
+ */
+final class ThemeSettingsSchemaProviderSpec extends ObjectBehavior
+{
+    function it_is_initializable()
+    {
+        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Settings\ThemeSettingsSchemaProvider');
+    }
+
+    function it_implements_theme_settings_schema_provider_interface()
+    {
+        $this->shouldImplement(ThemeSettingsSchemaProviderInterface::class);
+    }
+
+    function it_returns_valid_settings_schema(ThemeInterface $theme)
+    {
+        $theme->getPath()->willReturn(__DIR__ . '/../Fixtures/settings/ValidSettingsTheme');
+
+        $this->getSchema($theme)->shouldHaveType(SchemaInterface::class);
+    }
+
+    function it_throws_an_exception_if_settings_schema_is_of_incorrect_type(ThemeInterface $theme)
+    {
+        $theme->getPath()->willReturn(__DIR__ . '/../Fixtures/settings/InvalidSettingsTheme');
+
+        $this
+            ->shouldThrow(new \InvalidArgumentException(sprintf(
+                'File "%s" must return an instance of "%s"',
+                __DIR__ . '/../Fixtures/settings/InvalidSettingsTheme/Settings.php',
+                SchemaInterface::class
+            )))
+            ->during('getSchema', [$theme])
+        ;
+    }
+
+    function it_throws_an_exception_if_settings_schema_does_not_exist(ThemeInterface $theme)
+    {
+        $theme->getTitle()->willReturn('Candy shop');
+        $theme->getName()->willReturn('candy/shop');
+
+        $theme->getPath()->willReturn(__DIR__ . '/../Fixtures/settings/NoSettingsTheme');
+
+        $this
+            ->shouldThrow(new \InvalidArgumentException(sprintf(
+                'Could not find settings schema of theme "Candy shop" (candy/shop) in file "%s"',
+                __DIR__ . '/../Fixtures/settings/NoSettingsTheme/Settings.php'
+            )))
+            ->during('getSchema', [$theme])
+        ;
+    }
+}

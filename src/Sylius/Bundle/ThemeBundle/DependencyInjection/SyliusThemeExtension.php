@@ -33,6 +33,7 @@ class SyliusThemeExtension extends AbstractResourceExtension
         $loader->load('configuration.xml');
         $loader->load('resource_locators.xml');
         $loader->load('services.xml');
+        $loader->load('settings.xml');
         $loader->load('templating.xml');
         $loader->load('translations.xml');
 
