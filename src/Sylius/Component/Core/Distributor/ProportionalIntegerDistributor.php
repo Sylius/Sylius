@@ -26,22 +26,13 @@ class ProportionalIntegerDistributor implements ProportionalIntegerDistributorIn
         }
 
         $distributedAmounts = [];
-
-        $sign = $amount < 0 ? -1 : 1;
-        $amount = abs($amount);
-
-        $distributedSum = 0;
         foreach ($elements as $element) {
-            $distributedAmount = (int) ($sign * floor(($element * $amount) / $total));
-            $distributedSum += $distributedAmount;
-
-            $distributedAmounts[] = $distributedAmount;
+            $distributedAmounts[] = (int) round(($element * $amount) / $total, 0, PHP_ROUND_HALF_DOWN);
         }
 
-        if (abs($distributedSum) < $amount) {
-            for ($i = 0; $i < ($amount - abs($distributedSum)); $i++) {
-                (1 === $sign) ? $distributedAmounts[$i]++ : $distributedAmounts[$i]--;
-            }
+        $missingAmount = $amount - array_sum($distributedAmounts);
+        for ($i = 0; $i < abs($missingAmount); $i++) {
+            $distributedAmounts[$i] += $missingAmount >= 0 ? 1 : -1;
         }
 
         return $distributedAmounts;
