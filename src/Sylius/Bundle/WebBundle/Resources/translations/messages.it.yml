@@ -697,6 +697,7 @@ sylius:
         total_registrations: Registrazioni totali
         tracking_code: Codice di monitoraggio
         tracking_number: Numero di tracking
+        translations: Traduzioni
         type: Tipo
         unavailable: Non disponibile
         unit_price: Prezzo unitario

@@ -382,6 +382,7 @@ sylius:
         total_registrations: Всього реєстрацій
         tracking_code: Трекінг-код
         tracking_number: Трекінг-номер
+        translations: Переклади
         type: Тип
         unavailable: Недоступно
         unit_price: Ціна одиниці

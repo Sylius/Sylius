@@ -494,6 +494,7 @@ sylius:
         total_registrations: Регистраций в этом месяце
         tracking_code: Код для отслеживания
         tracking_number: Номер для отслеживания
+        translations: ﻿Переводы
         type: Тип
         unavailable: Недоступен
         unit_price: Цена

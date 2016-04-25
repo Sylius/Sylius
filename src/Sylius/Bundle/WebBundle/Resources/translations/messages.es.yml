@@ -677,6 +677,7 @@ sylius:
         total_registrations: Usuarios
         tracking_code: Código de seguimiento
         tracking_number: Número de seguimiento
+        translations: Traducciones
         type: Tipo
         unavailable: No disponible
         unit_price: Precio unitario

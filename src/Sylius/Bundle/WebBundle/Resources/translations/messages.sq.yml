@@ -696,6 +696,7 @@ sylius:
         total_registrations: Regjistrimet totale
         tracking_code: Kodi i gjurmimit
         tracking_number: Numri i gjurmimit
+        translations: Përkthime
         type: Lloji
         unavailable: Nuk gjendet
         unit_price: Çmimi për njësi
