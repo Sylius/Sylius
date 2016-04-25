@@ -169,7 +169,7 @@ final class MainMenuBuilder extends AbstractAdminMenuBuilder
 
         $catalogSubMenu
             ->addChild('taxons', ['route' => 'sylius_admin_taxon_create'])
-            ->setLabel('sylius.menu.admin.main.assortment.taxons')
+            ->setLabel('sylius.menu.admin.main.catalog.taxons')
             ->setLabelAttribute('icon', 'folder')
         ;
     }

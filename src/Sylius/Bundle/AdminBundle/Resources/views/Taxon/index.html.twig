@@ -1,24 +1,3 @@
-{% extends 'SyliusAdminBundle::layout.html.twig' %}
+{% import 'SyliusAdminBundle:Taxon/Macro:tree.html.twig' as tree %}
 
-{% import 'SyliusUiBundle:Macro:buttons.html.twig' as buttons %}
-{% import 'SyliusUiBundle:Macro:headers.html.twig' as headers %}
-{% import 'SyliusUiBundle:Macro:messages.html.twig' as messages %}
-
-{% set header = configuration.vars.header|default(metadata.applicationName~'.ui.'~metadata.pluralName) %}
-
-{% block title %}{{ parent() }} {{ header|trans }}{% endblock %}
-{% block content %}
-<div class="ui stackable two column grid">
-    <div class="column">
-        {{ headers.default(header|trans, configuration.vars.icon|default('list'), configuration.vars.subheader|default(null)|trans) }}
-    </div>
-    <div class="middle aligned column">
-        <div class="ui right floated buttons">
-            {{ buttons.create(path(configuration.getRouteName('create'))) }}
-        </div>
-    </div>
-</div>
-<div class="ui segment">
-    {{ render(path('sylius_admin_taxon_tree')) }}
-</div>
-{% endblock %}
+{{ tree.render(taxons) }}

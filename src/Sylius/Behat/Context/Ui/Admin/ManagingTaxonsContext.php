@@ -12,7 +12,6 @@
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Taxon\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Taxon\UpdatePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
@@ -32,11 +31,6 @@ final class ManagingTaxonsContext implements Context
     private $createPage;
 
     /**
-     * @var IndexPageInterface
-     */
-    private $indexPage;
-
-    /**
      * @var UpdatePageInterface
      */
     private $updatePage;
@@ -48,18 +42,15 @@ final class ManagingTaxonsContext implements Context
 
     /**
      * @param CreatePageInterface $createPage
-     * @param IndexPageInterface $indexPage
      * @param UpdatePageInterface $updatePage
      * @param NotificationCheckerInterface $notificationChecker
      */
     public function __construct(
         CreatePageInterface $createPage,
-        IndexPageInterface $indexPage,
         UpdatePageInterface $updatePage,
         NotificationCheckerInterface $notificationChecker
     ) {
         $this->createPage = $createPage;
-        $this->indexPage = $indexPage;
         $this->updatePage = $updatePage;
         $this->notificationChecker = $notificationChecker;
     }

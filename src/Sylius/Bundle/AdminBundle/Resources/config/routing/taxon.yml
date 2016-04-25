@@ -9,10 +9,12 @@ sylius_admin_taxon:
             all:
                 templates:
                     form: SyliusAdminBundle:Taxon:_form.html.twig
+                    subheader: sylius.ui.manage_taxons
+                    icon: folder
     type: sylius.resource
 
 sylius_admin_taxon_index:
-    path: /taxons/
+    path: /taxons/tree/
     methods: [GET]
     defaults:
         _controller: sylius.controller.taxon:indexAction
@@ -21,17 +23,4 @@ sylius_admin_taxon_index:
             section: admin
             repository:
                 method: findRootNodes
-            vars:
-                subheader: sylius.ui.manage_taxons
-                icon: folder
-
-sylius_admin_taxon_tree:
-    path: /taxons/tree/
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.taxon:indexAction
-        _sylius:
-            template: SyliusAdminBundle:Taxon:showTree.html.twig
-            section: admin
-            repository:
-                method: findRootNodes
+    host: "localhost"
