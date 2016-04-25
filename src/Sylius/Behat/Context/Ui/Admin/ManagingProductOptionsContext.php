@@ -175,7 +175,7 @@ final class ManagingProductOptionsContext implements Context
         $this->iBrowseProductOptions();
 
         Assert::true(
-            $this->indexPage->isResourceOnPage(['name' => $productOptionName]),
+            $this->indexPage->isSingleResourceOnPage(['name' => $productOptionName]),
             sprintf('The shipping method with name %s has not been found.', $productOptionName)
         );
     }
@@ -199,7 +199,7 @@ final class ManagingProductOptionsContext implements Context
         $this->iBrowseProductOptions();
 
         Assert::true(
-            $this->indexPage->isResourceOnPage([$element => $value]),
+            $this->indexPage->isSingleResourceOnPage([$element => $value]),
             sprintf('Product option with %s %s cannot be found.', $element, $value)
         );
     }
@@ -220,7 +220,7 @@ final class ManagingProductOptionsContext implements Context
         $this->iBrowseProductOptions();
 
         Assert::false(
-            $this->indexPage->isResourceOnPage([$element => $value]),
+            $this->indexPage->isSingleResourceOnPage([$element => $value]),
             sprintf('Product option with %s %s was created, but it should not.', $element, $value)
         );
     }
@@ -234,7 +234,7 @@ final class ManagingProductOptionsContext implements Context
         $this->iBrowseProductOptions();
 
         Assert::true(
-            $this->indexPage->isResourceOnPage([
+            $this->indexPage->isSingleResourceOnPage([
                 'code' => $productOption->getCode(),
                 'name' => $productOptionName,
             ]),
