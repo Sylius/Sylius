@@ -82,31 +82,6 @@ class GridHelper extends Helper
     }
 
     /**
-     * @param string $path
-     * @param GridView $gridView
-     * @param Field $field
-     */
-    public function applySorting($path, GridView $gridView, Field $field)
-    {
-        $parameters = $gridView->getParameters();
-        $definition = $gridView->getDefinition();
-        $sortingPath = $field->getSortingPath();
-
-        $criteria = $parameters->get('criteria', []);
-        $sorting = $definition->getSorting();
-
-        if ($parameters->has('sorting') ) {
-            $currentSorting = $parameters->get('sorting');
-
-            if (array_key_exists($sortingPath, $currentSorting)) {
-                $sorting[$sortingPath] = $currentSorting[$sortingPath] === 'asc' ? 'desc' : 'asc';
-            }
-        }
-
-        return $path.'?'.http_build_query(['sorting' => $sorting, 'criteria' => $criteria]);
-    }
-
-    /**
      * @return string
      */
     public function getName()

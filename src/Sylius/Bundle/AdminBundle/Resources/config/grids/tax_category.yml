@@ -15,7 +15,6 @@ sylius_grid:
                     type: twig
                     label: sylius.ui.name
                     path: .
-                    sorting_path: name
                     options:
                         template: SyliusAdminBundle:Grid/Field:nameAndDescription.html.twig
             filters:

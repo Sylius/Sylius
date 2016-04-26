@@ -36,12 +36,6 @@ class ArrayToDefinitionConverter implements ArrayToDefinitionConverterInterface
             if (array_key_exists('label', $fieldConfiguration)) {
                 $field->setLabel($fieldConfiguration['label']);
             }
-            if (array_key_exists('sortable', $fieldConfiguration)) {
-                $field->setSortable($fieldConfiguration['sortable']);
-            }
-            if (array_key_exists('sorting_path', $fieldConfiguration)) {
-                $field->setSortingPath($fieldConfiguration['sorting_path']);
-            }
             if (array_key_exists('options', $fieldConfiguration)) {
                 $field->setOptions($fieldConfiguration['options']);
             }

@@ -31,10 +31,8 @@
             <thead>
             <tr>
                 {% for field in definition.fields %}
-                    <th{% if grid.isSortedBy(field.sortingPath) %} class="sorted {{ 'asc' == grid.getSortingOrder(field.sortingPath) ? 'ascending' : 'descending' }}"{% endif %}>
-                        <a href="{{ sylius_grid_apply_sorting(path(grid.requestConfiguration.getRouteName('index')), grid, field) }}">
-                            {{ field.label|trans }}
-                        </a>
+                    <th{% if grid.isSortedBy(field.name) %} class="sorted {{ 'asc' == grid.getSortingOrder(field.name) ? 'ascending' : 'descending' }}"{% endif %}>
+                        {{ field.label|trans }}
                     </th>
                 {% endfor %}
                 {% if definition.actionGroups.item is defined and definition.getActions('item')|length > 0 %}

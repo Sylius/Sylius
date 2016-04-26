@@ -16,11 +16,8 @@ use Prophecy\Argument;
 use Sylius\Bundle\GridBundle\Templating\Helper\GridHelper;
 use Sylius\Component\Grid\Definition\Action;
 use Sylius\Component\Grid\Definition\Field;
-use Sylius\Component\Grid\Definition\Grid;
-use Sylius\Component\Grid\Parameters;
 use Sylius\Component\Grid\Renderer\GridRendererInterface;
 use Sylius\Component\Grid\View\GridView;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Templating\Helper\Helper;
 use Symfony\Component\Templating\Helper\HelperInterface;
 
@@ -67,26 +64,6 @@ class GridHelperSpec extends ObjectBehavior
     {
         $gridRenderer->renderAction($gridView, $action, null)->willReturn('<a href="#">Go go Gadget arms!</a>');
         $this->renderAction($gridView, $action)->shouldReturn('<a href="#">Go go Gadget arms!</a>');
-    }
-
-    function it_adds_proper_sorting_parameter_to_path(GridView $gridView, Grid $grid, Field $field, Parameters $parameters)
-    {
-        $gridView->getParameters()->willReturn($parameters);
-        $gridView->getDefinition()->willReturn($grid);
-        
-        $grid->getSorting()->willReturn([]);
-
-        $field->getName()->willReturn('nameAndDescription');
-        $field->getSortingPath()->willReturn('name');
-        
-        $parameters->has('sorting')->willReturn(true);
-        $parameters->get('sorting')->willReturn(['name' => 'asc']);
-        $parameters->get('criteria', [])->willReturn(['code' => ['type' => 'contains', 'value' => 'vat']]);
-
-        $this
-            ->applySorting('/tax-rates/', $gridView, $field)
-            ->shouldReturn('/tax-rates/?sorting%5Bname%5D=desc&criteria%5Bcode%5D%5Btype%5D=contains&criteria%5Bcode%5D%5Bvalue%5D=vat')
-        ;
     }
 
     function it_has_name()

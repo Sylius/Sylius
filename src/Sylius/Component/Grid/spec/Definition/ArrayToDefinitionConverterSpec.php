@@ -48,8 +48,6 @@ class ArrayToDefinitionConverterSpec extends ObjectBehavior
         $codeField->setLabel('System Code');
         $codeField->setPath('method.code');
         $codeField->setOptions(['template' => 'bar.html.twig']);
-        $codeField->setSortable(false);
-        $codeField->setSortingPath('shippingMethod.code');
 
         $grid->addField($codeField);
 
@@ -78,8 +76,6 @@ class ArrayToDefinitionConverterSpec extends ObjectBehavior
                     'type' => 'string',
                     'label' => 'System Code',
                     'path' => 'method.code',
-                    'sortable' => false,
-                    'sorting_path' => 'shippingMethod.code',
                     'options' => [
                         'template' => 'bar.html.twig'
                     ],

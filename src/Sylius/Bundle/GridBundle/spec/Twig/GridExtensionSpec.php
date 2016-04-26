@@ -43,7 +43,7 @@ class GridExtensionSpec extends ObjectBehavior
 
     function it_defines_functions()
     {
-        $this->getFunctions()->shouldHaveCount(5);
+        $this->getFunctions()->shouldHaveCount(4);
     }
 
     function it_delegates_grid_rendering_to_the_helper(GridHelper $gridHelper, GridView $gridView)
@@ -65,13 +65,6 @@ class GridExtensionSpec extends ObjectBehavior
         $gridHelper->renderAction($gridView, $action, null)->willReturn('<a href="#">Greet!</a>');
 
         $this->renderAction($gridView, $action)->shouldReturn('<a href="#">Greet!</a>');
-    }
-
-    function it_delegates_sorting_application_to_the_helper(GridHelper $gridHelper, GridView $gridView, Field $field)
-    {
-        $gridHelper->applySorting('/foo/', $gridView, $field)->willReturn('/foo/?sorting[name]=desc');
-
-        $this->applySorting('/foo/', $gridView, $field)->shouldReturn('/foo/?sorting[name]=desc');
     }
 
     function it_has_name()

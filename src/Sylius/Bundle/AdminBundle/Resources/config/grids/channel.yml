@@ -8,7 +8,7 @@ sylius_grid:
             sorting:
                 name: asc
             fields:
-                color:
+                code:
                     type: twig
                     label: sylius.ui.code
                     path: .

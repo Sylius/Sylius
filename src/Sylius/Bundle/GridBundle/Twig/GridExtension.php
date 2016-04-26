@@ -45,7 +45,6 @@ class GridExtension extends \Twig_Extension
             new \Twig_SimpleFunction('sylius_grid_render_field', [$this, 'renderField'], ['is_safe' => ['html']]),
             new \Twig_SimpleFunction('sylius_grid_render_action', [$this, 'renderAction'], ['is_safe' => ['html']]),
             new \Twig_SimpleFunction('sylius_grid_render_filter', [$this, 'renderFilter'], ['is_safe' => ['html']]),
-            new \Twig_SimpleFunction('sylius_grid_apply_sorting', [$this, 'applySorting'], ['is_safe' => ['html']]),
         ];
     }
 
@@ -91,16 +90,6 @@ class GridExtension extends \Twig_Extension
     public function renderFilter(GridView $gridView, Filter $filter)
     {
         return $this->gridHelper->renderFilter($gridView, $filter);
-    }
-
-    /**
-     * @param string $path
-     * @param GridView $gridView
-     * @param Field $field
-     */
-    public function applySorting($path, GridView $gridView, Field $field)
-    {
-        return $this->gridHelper->applySorting($path, $gridView, $field);
     }
 
     /**
