@@ -66,11 +66,16 @@ class ResourceTranslationsSubscriber implements EventSubscriberInterface
     {
         $data = $event->getData();
         $parent = $event->getForm()->getParent();
-        $translatable = $parent->getNormData();
+        $translatable = $parent->getData();
 
         foreach ($data as $locale => $translation) {
+            if(null === $translation) {
+                unset($data[$locale]);
+                continue;
+            }
             $translation->setLocale($locale);
             $translation->setTranslatable($translatable);
         }
+        $event->setData($data);
     }
 }
