@@ -28,8 +28,6 @@
         <parameter key="sylius.form.type.country.class">Sylius\Bundle\CoreBundle\Form\Type\CountryType</parameter>
         <parameter key="sylius.form.type.locale.class">Sylius\Bundle\CoreBundle\Form\Type\LocaleType</parameter>
 
-        <parameter key="sylius.form.type.shipping_method_choice.class">Sylius\Bundle\CoreBundle\Form\Type\Shipping\ShippingMethodChoiceType</parameter>
-
         <parameter key="sylius.form.type.tax_calculation_strategy_choice.class">Sylius\Bundle\CoreBundle\Form\Type\TaxCalculationStrategyChoiceType</parameter>
 
         <parameter key="sylius.form.type.customer_filter.class">Sylius\Bundle\CoreBundle\Form\Type\Filter\CustomerFilterType</parameter>

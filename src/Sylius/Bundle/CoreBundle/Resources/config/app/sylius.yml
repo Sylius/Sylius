@@ -155,6 +155,7 @@ sylius_shipping:
                 model: Sylius\Component\Core\Model\ShippingMethod
                 form:
                     default: Sylius\Bundle\CoreBundle\Form\Type\ShippingMethodType
+                    choice: Sylius\Bundle\CoreBundle\Form\Type\Shipping\ShippingMethodChoiceType
 
 sylius_promotion:
     resources:
