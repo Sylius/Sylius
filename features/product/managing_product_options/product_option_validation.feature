@@ -14,8 +14,8 @@ Feature: Product option validation
         Given I want to create a new product option
         When I name it "T-Shirt size" in "English (United States)"
         But I do not specify its code
-        And I add the option value with code "OV1" and value "S"
-        And I add the option value with code "OV2" and value "M"
+        And I add the "S" option value identified by "OV1"
+        And I add the "M" option value identified by "OV2"
         And I try to add it
         Then I should be notified that code is required
         And the product option with name "T-Shirt size" should not be added
@@ -25,8 +25,8 @@ Feature: Product option validation
         Given I want to create a new product option
         When I specify its code as "t_shirt_size"
         But I do not name it
-        And I add the option value with code "OV1" and value "S"
-        And I add the option value with code "OV2" and value "M"
+        And I add the "S" option value identified by "OV1"
+        And I add the "M" option value identified by "OV2"
         And I try to add it
         Then I should be notified that name is required
         And the product option with code "t_shirt_size" should not be added
@@ -54,7 +54,7 @@ Feature: Product option validation
         Given I want to create a new product option
         When I name it "T-Shirt size" in "English (United States)"
         And I specify its code as "t_shirt_size"
-        And I add the option value with code "OV1" and value "S"
+        And I add the "S" option value identified by "OV1"
         And I try to add it
         Then I should be notified that at least two option values are required
         And the product option with name "T-Shirt size" should not be added

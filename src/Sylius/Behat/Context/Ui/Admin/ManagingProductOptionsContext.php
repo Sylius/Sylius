@@ -150,9 +150,9 @@ final class ManagingProductOptionsContext implements Context
     }
 
     /**
-     * @When I add the option value with code :code and value :value
+     * @When I add the :value option value identified by :code
      */
-    public function iAddTheOptionValueWithCodeAndValue($code, $value)
+    public function iAddTheOptionValueWithCodeAndValue($value, $code)
     {
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm($this->createPage, $this->updatePage);
 
@@ -185,7 +185,7 @@ final class ManagingProductOptionsContext implements Context
 
         Assert::true(
             $this->indexPage->isSingleResourceOnPage(['name' => $productOptionName]),
-            sprintf('The shipping method with name %s has not been found.', $productOptionName)
+            sprintf('The product option with name %s has not been found.', $productOptionName)
         );
     }
 
@@ -282,14 +282,14 @@ final class ManagingProductOptionsContext implements Context
     }
 
     /**
-     * @Then I should see :amount product options in the list
+     * @Then /^I should see (\d+) product options in the list$/
      */
     public function iShouldSeeProductOptionsInTheList($amount)
     {
         $foundRows = $this->indexPage->countItems();
 
         Assert::eq(
-            ((int) $amount),
+            $amount,
             $foundRows,
             '%2$s rows with product options should appear on page, %s rows has been found'
         );
