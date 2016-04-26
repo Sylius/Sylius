@@ -15,15 +15,22 @@
     <parameters>
         <parameter key="sylius.theme.settings_manager.class">Sylius\Bundle\ThemeBundle\Settings\ThemeSettingsManager</parameter>
         <parameter key="sylius.theme.settings_schema_provider.class">Sylius\Bundle\ThemeBundle\Settings\ThemeSettingsSchemaProvider</parameter>
+        <parameter key="sylius.theme.settings_twig_extension.class">Sylius\Bundle\ThemeBundle\Twig\SettingsExtension</parameter>
     </parameters>
 
     <services>
-        <service id="sylius.theme.settings_manager" class="%sylius.theme.settings_manager.class%" public="false">
+        <service id="sylius.theme.settings_manager" class="%sylius.theme.settings_manager.class%">
             <argument type="service" id="sylius.settings.manager" />
             <argument type="service" id="sylius.registry.settings_schema" />
             <argument type="service" id="sylius.theme.settings_schema_provider" />
         </service>
 
         <service id="sylius.theme.settings_schema_provider" class="%sylius.theme.settings_schema_provider.class%" public="false" />
+
+        <service id="sylius.theme.settings_twig_extension" class="%sylius.theme.settings_twig_extension.class%" public="false">
+            <argument type="service" id="sylius.context.theme" />
+            <argument type="service" id="sylius.theme.settings_manager" />
+            <tag name="twig.extension" />
+        </service>
     </services>
 </container>
