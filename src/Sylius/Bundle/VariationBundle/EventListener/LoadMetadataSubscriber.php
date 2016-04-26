@@ -74,6 +74,7 @@ class LoadMetadataSubscriber implements EventSubscriber
                 'fieldName' => 'values',
                 'targetEntity' => $class['option_value']['classes']['model'],
                 'mappedBy' => 'option',
+                'orphanRemoval' => true,
                 'cascade' => ['all'],
             ];
 
