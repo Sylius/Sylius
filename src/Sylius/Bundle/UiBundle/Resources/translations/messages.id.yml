@@ -5,6 +5,8 @@ sylius:
     form:
         login:
             password: Kata sandi
+        option:
+            presentation: Presentasi
     ui:
         default_currency: Mata uang default
         enabled: Diaktifkan

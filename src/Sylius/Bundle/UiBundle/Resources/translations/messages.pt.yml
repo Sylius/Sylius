@@ -5,6 +5,8 @@ sylius:
     form:
         login:
             username: Login
+        option:
+            presentation: Apresentação
     ui:
         cancel: Cancelar
         countries: Países

@@ -6,6 +6,8 @@ sylius:
         login:
             username: Όνομα χρήστη
             password: Κωδικός πρόσβασης
+        option:
+            presentation: Παρουσίαση
     ui:
         actions: Ενέργειες
         cancel: Άκυρο

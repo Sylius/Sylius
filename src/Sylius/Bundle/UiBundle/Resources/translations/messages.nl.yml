@@ -7,6 +7,8 @@ sylius:
             username: Gebruikersnaam
             password: Wachtwoord
             remember_me: Onthoud mijn gegevens
+        option:
+            presentation: Weergave
     ui:
         actions: Acties
         administration_panel_login: Beheer

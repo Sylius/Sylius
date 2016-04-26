@@ -5,6 +5,8 @@ sylius:
     form:
         login:
             remember_me: 아이디/암호 저장
+        option:
+            presentation: 소개
     ui:
         "no": false
         "yes": true

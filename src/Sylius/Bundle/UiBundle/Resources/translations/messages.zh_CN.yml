@@ -6,6 +6,8 @@ sylius:
         login:
             username: 用户名
             password: 密码
+        option:
+            presentation: 演示
     ui:
         are_your_sure_you_want_to_perform_this_action: 是否确实执行此操作？
         cancel: '取消 '

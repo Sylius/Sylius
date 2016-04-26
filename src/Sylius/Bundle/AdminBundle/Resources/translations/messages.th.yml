@@ -5,6 +5,8 @@ sylius:
     menu:
         admin:
             main:
+                catalog:
+                    attributes: คุณลักษณะ (Attribute)
                 configuration:
                     channels: ช่องทางการจัดจำหน่าย
                     countries: ประเทศ

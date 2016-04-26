@@ -696,6 +696,7 @@ sylius:
         total_registrations: Celkový počet registrácií
         tracking_code: Sledovací kód
         tracking_number: Sledovací kód
+        translations: Preklady
         type: Typ
         unavailable: Nedostupný
         unit_price: Jednotková cena

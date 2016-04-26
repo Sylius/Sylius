@@ -696,6 +696,7 @@ sylius:
         total_registrations: การลงทะเบียนทั้งหมด
         tracking_code: รหัสการติดตาม
         tracking_number: หมายเลขการติดตาม
+        translations: การแปลภาษา
         type: ชนิด
         unavailable: ไม่สามารถใช้ได้
         unit_price: ราคาต่อหน่วย

@@ -6,6 +6,8 @@ sylius:
         login:
             username: Nume de utilizator
             password: Parolă
+        option:
+            presentation: Prezentare
     ui:
         actions: Acțiuni
         cancel: Anulează

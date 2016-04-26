@@ -7,6 +7,8 @@ sylius:
             username: Логин
             password: Пароль
             remember_me: Запомнить меня
+        option:
+            presentation: Публичное название
     ui:
         actions: Действия
         cancel: Отмена

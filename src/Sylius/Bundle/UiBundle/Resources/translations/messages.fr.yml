@@ -7,6 +7,8 @@ sylius:
             username: Identifiant
             password: Mot de passe
             remember_me: Rester connecté
+        option:
+            presentation: Présentation
     ui:
         actions: Actions
         administration_panel_login: "Connexion à l'espace d'administration"
@@ -37,6 +39,7 @@ sylius:
         edit_currency: Modifier la devise
         edit_customer: Modifier le client
         edit_payment_method: Modifier le mode de paiement
+        edit_product_option: "Modifier l'option de produit"
         edit_promotion: Modifier la promotion
         edit_tax_category: Éditer la catégorie de taxe
         edit_tax_rate: Modifier le taux de taxe
@@ -50,11 +53,13 @@ sylius:
         info: Info
         last_updated: Dernière mise à jour
         locales: Locales
+        manage_attributes_of_your_produts: Gérer les attributs de vos produits
         manage_country: Gérer le pays
         manage_currencies_available_in_the_store: Gérer les devises disponibles pour la boutique
         manage_customer: Gérer des clients
         manage_languages_available_in_the_store: Gérer les langues disponibles dans le magasin
         manage_payment_method: Gérer les modes de paiement
+        manage_product_option: Gérer les option du produit
         manage_shipping_destinations: Gérer les destinations de livraison
         manage_shipping_methods_for_your_store: "Gérer les méthodes d'expédition pour votre magasin"
         manage_taxation_of_your_products: Gérer la fiscalité de vos produits
@@ -83,4 +88,5 @@ sylius:
         status: Statut
         success: Succès
         tax_categories: Catégories de taxes
+        values: Valeurs
         "yes": true

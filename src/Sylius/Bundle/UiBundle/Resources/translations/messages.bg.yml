@@ -5,6 +5,8 @@ sylius:
     form:
         login:
             username: Потребителско име
+        option:
+            presentation: Презентация
     ui:
         cancel: Откажи
         countries: Страни

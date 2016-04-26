@@ -5,6 +5,9 @@ sylius:
     menu:
         admin:
             main:
+                catalog:
+                    header: Catalogue
+                    attributes: Attributs
                 configuration:
                     channels: Canaux
                     countries: Pays
@@ -13,7 +16,7 @@ sylius:
                     locales: Locales
                     payment_methods: Moyens de paiement
                     shipping_methods: Modes de livraison
-                    tax_categories: Catégories de taxes
+                    tax_categories: Catégories de taxe
                     tax_rates: Taux de taxe
                     zones: Zones
                 marketing:

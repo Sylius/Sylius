@@ -7,6 +7,8 @@ sylius:
             username: Benutzername
             password: Passwort
             remember_me: Eingeloggt bleiben
+        option:
+            presentation: Präsentation
     ui:
         actions: Aktionen
         administration_panel_login: Administrations-Bereich Anmeldung
@@ -63,4 +65,5 @@ sylius:
         status: Status
         success: Erfolgreich
         tax_categories: Steuerkategorien
+        values: Werte
         "yes": true

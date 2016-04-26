@@ -5,6 +5,8 @@ sylius:
     form:
         login:
             username: Кросницко име
+        option:
+            presentation: Приказ
     ui:
         cancel: Откажи
         countries: Земље

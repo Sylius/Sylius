@@ -518,6 +518,7 @@ sylius:
         total_registrations: Celkem registrací
         tracking_code: Sledovací kód
         tracking_number: Číslo zásilky
+        translations: Překlady
         type: Typ
         unavailable: Nedostupné
         unit_price: Jednotná cena

@@ -534,6 +534,7 @@ sylius:
         total_registrations: Rejestracje
         tracking_code: Kod śledzenia
         tracking_number: Numer śledzenia
+        translations: Tłumaczenia
         type: Typ
         unavailable: Niedostępne
         unit_price: Cena za sztukę
