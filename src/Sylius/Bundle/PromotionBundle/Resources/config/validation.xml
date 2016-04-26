@@ -22,6 +22,10 @@
             <option name="message">sylius.promotion.code.unique</option>
             <option name="groups">sylius</option>
         </constraint>
+        <constraint name="Sylius\Bundle\PromotionBundle\Validator\Constraints\PromotionDateRange">
+            <option name="message">sylius.promotion.startsAt.end_date_cannot_be_set_prior_start_date</option>
+            <option name="groups">sylius</option>
+        </constraint>
         <property name="code">
         <constraint name="NotBlank">
             <option name="message">sylius.promotion.code.not_blank</option>
