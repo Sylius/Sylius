@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\SettingsBundle\Twig;
 
-use Sylius\Bundle\SettingsBundle\Templating\Helper\SettingsHelper;
+use Sylius\Bundle\SettingsBundle\Templating\Helper\SettingsHelperInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -19,14 +19,14 @@ use Sylius\Bundle\SettingsBundle\Templating\Helper\SettingsHelper;
 final class SettingsExtension extends \Twig_Extension
 {
     /**
-     * @var SettingsHelper
+     * @var SettingsHelperInterface
      */
     private $helper;
 
     /**
-     * @param SettingsHelper $helper
+     * @param SettingsHelperInterface $helper
      */
-    public function __construct(SettingsHelper $helper)
+    public function __construct(SettingsHelperInterface $helper)
     {
         $this->helper = $helper;
     }
@@ -37,9 +37,7 @@ final class SettingsExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-             new \Twig_SimpleFunction('sylius_settings_all', [$this->helper, 'getSettings']),
-             new \Twig_SimpleFunction('sylius_settings_get', [$this->helper, 'getSettingsParameter']),
-             new \Twig_SimpleFunction('sylius_settings_has', [$this->helper, 'hasSettingsParameter']),
+             new \Twig_SimpleFunction('sylius_settings', [$this->helper, 'getSettings']),
         ];
     }
 
