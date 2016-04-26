@@ -4,8 +4,9 @@ sylius:
             main:
                 catalog:
                     header: Catalog
-                    product_options: Product options
                     taxons: Taxons
+                    options: Options
+                    attributes: Attributes
                 configuration:
                     channels: Channels
                     countries: Countries
@@ -23,6 +24,3 @@ sylius:
                 customers:
                     header: Customer
                     customers: Customers
-                catalog:
-                    header: Catalog
-                    attributes: Attributes

@@ -58,7 +58,7 @@ sylius:
         manage_currencies_available_in_the_store: Manage currencies available in the store
         manage_your_customers: Manage your customers
         manage_languages_available_in_the_store: Manage languages available in the store
-        manage_product_option: Manage product option
+        manage_configuration_options_of_your_products: Manage configuration options of your products
         manage_payment_methods_available_to_your_customers: Manage payment methods available to your customers
         manage_shipping_destinations: Manage shipping destinations
         manage_taxons: Manage taxons of your products

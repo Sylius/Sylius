@@ -143,6 +143,21 @@
     </div>
 {% endblock %}
 
+{% block sylius_product_option_value_widget %}
+    <div class="ui segment">
+        {{ form_row(form.code) }}
+            <div class="five fields">
+            {% for locale, translationForm in form.translations %}
+                {{ form_row(translationForm.value, {'label': locale|sylius_locale_name}) }}
+                {% if 0 == loop.index % 5 %}
+                </div>
+                <div class="five fields">
+                {% endif %}
+            {% endfor %}
+            </div>
+    </div>
+{% endblock %}
+
 {% block sylius_translations_row -%}
     <h4 class="ui dividing header">{{ form_label(form) }}</h4>
     <div class="ui grid">

@@ -12,6 +12,10 @@ sylius_grid:
                 name:
                     type: string
                     label: sylius.ui.name
+            filters:
+                code:
+                    type: string
+                    label: sylius.ui.code
             actions:
                 main:
                     create:
