@@ -43,6 +43,7 @@ sylius:
         edit_shipping_method: Edit shipping method
         edit_tax_category: Edit tax category
         edit_tax_rate: Edit tax rate
+        edit_taxon: Edit taxon
         edit_zone: Edit zone
         empty: Empty
         enabled: Enabled
@@ -61,7 +62,7 @@ sylius:
         manage_configuration_options_of_your_products: Manage configuration options of your products
         manage_payment_methods_available_to_your_customers: Manage payment methods available to your customers
         manage_shipping_destinations: Manage shipping destinations
-        manage_taxons: Manage taxons of your products
+        manage_categorization_of_your_products: Manage categorization of your products
         manage_shipping_methods_for_your_store: Manage shipping methods for your store
         manage_taxation_of_your_products: Manage taxation of your products
         manage_geographical_zones: Manage geographical zones
