@@ -4,6 +4,8 @@ sylius:
             username: Username
             password: Password
             remember_me: Remember me
+        option:
+            presentation: Presentation
     ui:
         actions: Actions
         administration_panel_login: Administration panel login
@@ -34,6 +36,7 @@ sylius:
         edit_currency: Edit currency
         edit_customer: Edit customer
         edit_payment_method: Edit payment method
+        edit_product_option: Edit product option
         edit_promotion: Edit promotion
         edit_tax_category: Edit tax category
         edit_tax_rate: Edit tax rate
@@ -53,6 +56,7 @@ sylius:
         manage_customer: Manage customers
         manage_languages_available_in_the_store: Manage languages available in the store
         manage_payment_method: Manage payment methods
+        manage_product_option: Manage product option
         manage_shipping_destinations: Manage shipping destinations
         manage_shipping_methods_for_your_store: Manage shipping methods for your store
         manage_taxation_of_your_products: Manage taxation of your products
@@ -81,4 +85,5 @@ sylius:
         status: Status
         success: Success
         tax_categories: Tax categories
+        values: Values
         yes: Yes

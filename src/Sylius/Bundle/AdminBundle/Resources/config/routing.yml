@@ -31,6 +31,9 @@ sylius_admin_payment_method:
 sylius_admin_attribute:
     resource: "@SyliusAdminBundle/Resources/config/routing/product_attribute.yml"
 
+sylius_admin_product_option:
+    resource: "@SyliusAdminBundle/Resources/config/routing/product_option.yml"
+
 sylius_admin_promotion:
     resource: "@SyliusAdminBundle/Resources/config/routing/promotion.yml"
 

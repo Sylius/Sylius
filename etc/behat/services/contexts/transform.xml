@@ -24,6 +24,7 @@
         <parameter key="sylius.behat.context.transform.payment.class">Sylius\Behat\Context\Transform\PaymentContext</parameter>
         <parameter key="sylius.behat.context.transform.payment_method.class">Sylius\Behat\Context\Transform\PaymentMethodContext</parameter>
         <parameter key="sylius.behat.context.transform.product.class">Sylius\Behat\Context\Transform\ProductContext</parameter>
+        <parameter key="sylius.behat.context.transform.product_option.class">Sylius\Behat\Context\Transform\ProductOptionContext</parameter>
         <parameter key="sylius.behat.context.transform.product_variant.class">Sylius\Behat\Context\Transform\ProductVariantContext</parameter>
         <parameter key="sylius.behat.context.transform.promotion.class">Sylius\Behat\Context\Transform\PromotionContext</parameter>
         <parameter key="sylius.behat.context.transform.province.class">Sylius\Behat\Context\Transform\ProvinceContext</parameter>
@@ -93,6 +94,11 @@
 
         <service id="sylius.behat.context.transform.product" class="%sylius.behat.context.transform.product.class%" scope="scenario">
             <argument type="service" id="sylius.repository.product" container="symfony" />
+            <tag name="sylius.behat.context" />
+        </service>
+
+        <service id="sylius.behat.context.transform.product_option" class="%sylius.behat.context.transform.product_option.class%" scope="scenario">
+            <argument type="service" id="sylius.repository.product_option" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>
 

@@ -2,6 +2,9 @@ sylius:
     menu:
         admin:
             main:
+                catalog:
+                    header: Catalog
+                    product_options: Product options
                 configuration:
                     channels: Channels
                     countries: Countries
