@@ -51,14 +51,11 @@ class DoctrineORMDriver extends AbstractDoctrineDriver
             $repositoryClass = $metadata->getClass('repository');
         }
 
-        $repositoryReflection = new \ReflectionClass($repositoryClass);
-
         $definition = new Definition($repositoryClass);
         $definition->setArguments([
             new Reference($metadata->getServiceId('manager')),
             $this->getClassMetadataDefinition($metadata),
         ]);
-        $definition->setLazy(!$repositoryReflection->isFinal());
 
         $container->setDefinition($metadata->getServiceId('repository'), $definition);
     }
