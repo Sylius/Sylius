@@ -12,6 +12,14 @@
 -->
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <imports>
+        <import resource="assets.xml" />
+        <import resource="configuration.xml" />
+        <import resource="resource_locators.xml" />
+        <import resource="templating.xml" />
+        <import resource="translations.xml" />
+    </imports>
+
     <parameters>
         <parameter key="sylius.context.theme.class">Sylius\Bundle\ThemeBundle\Context\SettableThemeContext</parameter>
         <parameter key="sylius.factory.theme_author.class">Sylius\Bundle\ThemeBundle\Factory\ThemeAuthorFactory</parameter>
