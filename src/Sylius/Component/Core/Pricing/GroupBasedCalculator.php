@@ -11,28 +11,34 @@
 
 namespace Sylius\Component\Core\Pricing;
 
-use Sylius\Component\Pricing\Calculator\CalculatorInterface;
 use Sylius\Component\User\Model\GroupInterface;
 
 /**
- * Customer group based calculator.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class GroupBasedCalculator extends AbstractCalculator implements CalculatorInterface
+class GroupBasedCalculator extends AbstractCalculator
 {
-    public function __construct()
-    {
-        $this->parameterName = 'groups';
-        $this->className = GroupInterface::class;
-        parent::__construct();
-    }
-
     /**
      * {@inheritdoc}
      */
     public function getType()
     {
         return Calculators::GROUP_BASED;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getParameterName()
+    {
+        return 'groups';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getClassName()
+    {
+        return GroupInterface::class;
     }
 }

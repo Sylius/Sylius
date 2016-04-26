@@ -12,23 +12,33 @@
 namespace Sylius\Component\Core\Pricing;
 
 use Sylius\Component\Addressing\Model\ZoneInterface;
-use Sylius\Component\Pricing\Calculator\CalculatorInterface;
 
 /**
- * Address zone based calculator.
- *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
-class ZoneBasedCalculator extends AbstractCalculator implements CalculatorInterface
+class ZoneBasedCalculator extends AbstractCalculator
 {
-    protected $parameterName = 'zones';
-    protected $className = ZoneInterface::class;
-
     /**
      * {@inheritdoc}
      */
     public function getType()
     {
         return Calculators::ZONE_BASED;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getParameterName()
+    {
+        return 'zones';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getClassName()
+    {
+        return ZoneInterface::class;
     }
 }
