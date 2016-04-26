@@ -17,6 +17,7 @@ use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 {
@@ -57,6 +58,50 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function setStartsAt(\DateTime $dateTime)
+    {
+        $timestamp = $dateTime->getTimestamp();
+
+        $this->getDocument()->fillField('sylius_promotion_startsAt_date', date('Y-m-d', $timestamp));
+        $this->getDocument()->fillField('sylius_promotion_startsAt_time', date('H:i', $timestamp));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setEndsAt(\DateTime $dateTime)
+    {
+        $timestamp = $dateTime->getTimestamp();
+
+        $this->getDocument()->fillField('sylius_promotion_endsAt_date', date('Y-m-d', $timestamp));
+        $this->getDocument()->fillField('sylius_promotion_endsAt_time', date('H:i', $timestamp));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasStartsAt(\DateTime $dateTime)
+    {
+        $timestamp = $dateTime->getTimestamp();
+
+        return $this->getElement('starts_at_date')->getValue() === date('Y-m-d', $timestamp)
+            && $this->getElement('starts_at_time')->getValue() === date('H:i', $timestamp);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasEndsAt(\DateTime $dateTime)
+    {
+        $timestamp = $dateTime->getTimestamp();
+
+        return $this->getElement('ends_at_date')->getValue() === date('Y-m-d', $timestamp)
+            && $this->getElement('ends_at_time')->getValue() === date('H:i', $timestamp);
+    }
+
+    /**
      * {@inheritDoc}
      */
     protected function getCodeElement()
@@ -75,6 +120,11 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'exclusive' => '#sylius_promotion_exclusive',
             'name' => '#sylius_promotion_name',
             'usage_limit' => '#sylius_promotion_usageLimit',
+            'starts_at' => '#sylius_promotion_startsAt',
+            'starts_at_date' => '#sylius_promotion_startsAt_date',
+            'starts_at_time' => '#sylius_promotion_startsAt_time',
+            'ends_at_date' => '#sylius_promotion_endsAt_date',
+            'ends_at_time' => '#sylius_promotion_endsAt_time',
         ];
     }
 }

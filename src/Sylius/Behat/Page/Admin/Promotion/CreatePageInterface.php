@@ -15,6 +15,7 @@ use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 interface CreatePageInterface extends BaseCreatePageInterface
 {
@@ -77,4 +78,14 @@ interface CreatePageInterface extends BaseCreatePageInterface
      * @param string $name
      */
     public function checkChannel($name);
+
+    /**
+     * @param \DateTime $dateTime
+     */
+    public function setStartsAt(\DateTime $dateTime);
+
+    /**
+     * @param \DateTime $dateTime
+     */
+    public function setEndsAt(\DateTime $dateTime);
 }

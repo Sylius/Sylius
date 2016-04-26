@@ -18,6 +18,7 @@ use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Łuksaz Zalewski <mateusz.zalewski@lakion.com>
  */
 class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
@@ -102,9 +103,32 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function setStartsAt(\DateTime $dateTime)
+    {
+        $timestamp = $dateTime->getTimestamp();
+
+        $this->getDocument()->fillField('sylius_promotion_startsAt_date', date('Y-m-d', $timestamp));
+        $this->getDocument()->fillField('sylius_promotion_startsAt_time', date('H:i', $timestamp));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setEndsAt(\DateTime $dateTime)
+    {
+        $timestamp = $dateTime->getTimestamp();
+
+        $this->getDocument()->fillField('sylius_promotion_endsAt_date', date('Y-m-d', $timestamp));
+        $this->getDocument()->fillField('sylius_promotion_endsAt_time', date('H:i', $timestamp));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return [
+            'starts_at' => '#sylius_promotion_startsAt',
             'actions' => '#sylius_promotion_actions',
             'code' => '#sylius_promotion_code',
             'name' => '#sylius_promotion_name',
