@@ -277,7 +277,7 @@ final class ManagingProductOptionsContext implements Context
 
         Assert::true(
             $this->updatePage->isThereOptionValue($optionValue),
-            sprintf('%s is not an option value of this product option.', $optionValue)
+            sprintf('%s is not a value of this product option.', $optionValue)
         );
     }
 
@@ -290,7 +290,7 @@ final class ManagingProductOptionsContext implements Context
 
         Assert::false(
             $this->updatePage->isThereOptionValue($optionValue),
-            sprintf('%s is not an option value of this product option.', $optionValue)
+            sprintf('%s is a value of this product option, but it should not.', $optionValue)
         );
     }
 

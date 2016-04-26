@@ -39,7 +39,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     {
         $optionValues = $this->getElement('values');
 
-        return $optionValues->has('css', '[value = "'.$optionValue.'"]');
+        return $optionValues->has('css', sprintf('input[value="%s"]', $optionValue));
     }
 
     /**
@@ -52,7 +52,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         $optionValueForm = $this->getLastOptionValueElement();
 
         $optionValueForm->fillField('Code', $code);
-        $optionValueForm->fillField('Value', $value);
+        $optionValueForm->fillField('English (United States)', $value);
     }
 
     /**
@@ -64,8 +64,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             $optionValues = $this->getElement('values');
 
             $item = $optionValues
-                ->find('css', 'div[data-form-collection="item"] input[value="'.$optionValue.'"]')
-                ->getParent()
+                ->find('css', sprintf('div[data-form-collection="item"] input[value="%s"]', $optionValue))
                 ->getParent()
                 ->getParent()
                 ->getParent()
