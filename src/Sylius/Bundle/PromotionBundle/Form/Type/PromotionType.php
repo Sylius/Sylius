@@ -44,11 +44,13 @@ class PromotionType extends AbstractResourceType
                 'label' => 'sylius.form.promotion.starts_at',
                 'date_widget' => 'single_text',
                 'time_widget' => 'single_text',
+                'required' => false,
             ])
             ->add('endsAt', 'datetime', [
                 'label' => 'sylius.form.promotion.ends_at',
                 'date_widget' => 'single_text',
                 'time_widget' => 'single_text',
+                'required' => false,
             ])
             ->add('couponBased', 'checkbox', [
                 'label' => 'sylius.form.promotion.coupon_based',
