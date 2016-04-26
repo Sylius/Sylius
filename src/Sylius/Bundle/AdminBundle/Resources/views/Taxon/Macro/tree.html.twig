@@ -13,9 +13,6 @@
                 <div class="header">{{ taxon.name }}</div>
                 {{ buttons.delete(path('sylius_admin_taxon_delete', { 'id': taxon.id }), 'sylius.ui.delete'|trans) }}
                 {{ buttons.edit(path('sylius_admin_taxon_update', { 'id': taxon.id })) }}
-                {% if not taxon.description %}
-                    <div class="description">{{ taxon.description }}</div>
-                {% endif %}
                 <div class="list">
                     {{ _self.renderLeaf(taxon.children) }}
                 </div>

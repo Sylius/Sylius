@@ -70,6 +70,8 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
                 break;
             }
         }
+
+        throw new ElementNotFoundException($this->getDriver(), 'Delete button');
     }
 
     /**

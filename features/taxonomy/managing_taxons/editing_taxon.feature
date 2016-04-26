@@ -5,8 +5,7 @@ Feature: Editing a taxon
     I want to be able to edit a taxon
 
     Background:
-        Given the store operates on a single channel in "France"
-        And the store classifies its products as "T-Shirts" and "Accessories"
+        Given the store classifies its products as "T-Shirts" and "Accessories"
         And I am logged in as an administrator
 
     @ui

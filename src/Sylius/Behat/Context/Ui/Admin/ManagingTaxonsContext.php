@@ -207,7 +207,7 @@ final class ManagingTaxonsContext implements Context
     /**
      * @Then I should be notified that it has been successfully edited
      */
-    public function iShouldBeNotifiedAboutSuccessfulEdition()
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited()
     {
         $this->notificationChecker->checkEditionNotification(self::RESOURCE_NAME);
     }
@@ -228,7 +228,7 @@ final class ManagingTaxonsContext implements Context
         $this->updatePage->open(['id' => $taxon->getId()]);
         Assert::true(
             $this->updatePage->hasResourceValues(['code' => $taxon->getCode()]),
-            sprintf('Taxon %s should be in the registry', $taxon->getName())
+            sprintf('Taxon %s should be in the registry.', $taxon->getName())
         );
     }
 
@@ -239,18 +239,18 @@ final class ManagingTaxonsContext implements Context
     {
         Assert::true(
             $this->updatePage->hasResourceValues([$element => $value]),
-            sprintf('Taxon with %s should have %s value', $element, $value)
+            sprintf('Taxon with %s should have %s value.', $element, $value)
         );
     }
 
     /**
      * @Then the code field should be disabled
      */
-    public function theCodeFiledShouldBeDisabled()
+    public function theCodeFieldShouldBeDisabled()
     {
         Assert::true(
             $this->updatePage->isCodeDisabled(),
-            'Code field should be disabled but it is not'
+            'Code field should be disabled but it is not.'
         );
     }
 
@@ -261,7 +261,7 @@ final class ManagingTaxonsContext implements Context
     {
         Assert::true(
             $this->updatePage->hasResourceValues(['parent' => $taxon->getId()]),
-            sprintf('Current taxon should have %s parent taxon', $taxon->getName())
+            sprintf('Current taxon should have %s parent taxon.', $taxon->getName())
         );
     }
 
@@ -311,21 +311,21 @@ final class ManagingTaxonsContext implements Context
         Assert::eq(
             0,
             $this->createPage->countTaxonsByName($name),
-            sprintf('Taxon %s should not exist', $name)
+            sprintf('Taxon %s should not exist.', $name)
         );
     }
 
     /**
      * @Then /^I should see (\d+) taxons on the list$/
      */
-    public function iShouldSeeZonesInTheList($number)
+    public function iShouldSeeTaxonsInTheList($number)
     {
         $taxonsOnPage = $this->createPage->countTaxons();
 
         Assert::eq(
             $number,
             $taxonsOnPage,
-            sprintf('On list should be %d taxons but get %d', $number, $taxonsOnPage)
+            sprintf('On list should be %d taxons but get %d.', $number, $taxonsOnPage)
         );
     }
 
@@ -337,7 +337,7 @@ final class ManagingTaxonsContext implements Context
         Assert::eq(
             1,
             $this->createPage->countTaxonsByName($name),
-            sprintf('Taxon %s does not exist', $name)
+            sprintf('Taxon %s does not exist or multiple taxons with this name exist.', $name)
         );
     }
 }

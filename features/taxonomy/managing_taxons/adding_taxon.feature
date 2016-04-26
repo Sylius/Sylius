@@ -5,8 +5,7 @@ Feature: Adding a new taxon
     I want to add a new taxon to the registry
 
     Background:
-        Given the store operates on a single channel in "France"
-        And I am logged in as an administrator
+        Given I am logged in as an administrator
 
     @ui
     Scenario: Adding a new taxon
@@ -30,7 +29,7 @@ Feature: Adding a new taxon
 
     @ui
     Scenario: Adding a new taxon with parent taxon
-        Given the store classifies its products as "Category"
+        Given the store has "Category" taxonomy
         And I want to create a new taxon
         When I specify its code as "stickers"
         And I name it "Stickers" in "English (United States)"
