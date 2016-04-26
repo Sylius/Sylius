@@ -1,0 +1,22 @@
+{% macro render(taxons) %}
+    <div class="ui list">
+        {{ _self.renderLeaf(taxons) }}
+    </div>
+{% endmacro %}
+
+{% macro renderLeaf(taxons) %}
+    {% import '@SyliusUi/Macro/buttons.html.twig' as buttons %}
+    {% for taxon in taxons %}
+        <div class="item">
+            <i class="folder icon"></i>
+            <div class="content">
+                <div class="header">{{ taxon.name }}</div>
+                {{ buttons.delete(path('sylius_admin_taxon_delete', { 'id': taxon.id }), 'sylius.ui.delete'|trans) }}
+                {{ buttons.edit(path('sylius_admin_taxon_update', { 'id': taxon.id })) }}
+                <div class="list">
+                    {{ _self.renderLeaf(taxon.children) }}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endmacro %}

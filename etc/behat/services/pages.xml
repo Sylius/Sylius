@@ -67,6 +67,8 @@
         <parameter key="sylius.behat.page.admin.shipping_method.create.class">Sylius\Behat\Page\Admin\ShippingMethod\CreatePage</parameter>
         <parameter key="sylius.behat.page.admin.shipping_method.index.class">%sylius.behat.page.admin.crud.index.class%</parameter>
         <parameter key="sylius.behat.page.admin.shipping_method.update.class">Sylius\Behat\Page\Admin\ShippingMethod\UpdatePage</parameter>
+        <parameter key="sylius.behat.page.admin.taxon.create.class">Sylius\Behat\Page\Admin\Taxon\CreatePage</parameter>
+        <parameter key="sylius.behat.page.admin.taxon.update.class">Sylius\Behat\Page\Admin\Taxon\UpdatePage</parameter>
         <parameter key="sylius.behat.page.admin.tax_category.create.class">Sylius\Behat\Page\Admin\TaxCategory\CreatePage</parameter>
         <parameter key="sylius.behat.page.admin.tax_category.index.class">%sylius.behat.page.admin.crud.index.class%</parameter>
         <parameter key="sylius.behat.page.admin.tax_category.update.class">Sylius\Behat\Page\Admin\TaxCategory\UpdatePage</parameter>
@@ -168,6 +170,12 @@
         </service>
         <service id="sylius.behat.page.admin.shipping_method.update" class="%sylius.behat.page.admin.shipping_method.update.class%" parent="sylius.behat.page.admin.crud.update" scope="scenario" public="false">
             <argument type="string">shipping_method</argument>
+        </service>
+        <service id="sylius.behat.page.admin.taxon.create" class="%sylius.behat.page.admin.taxon.create.class%" parent="sylius.behat.page.admin.crud.create" scope="scenario" public="false">
+            <argument type="string">taxon</argument>
+        </service>
+        <service id="sylius.behat.page.admin.taxon.update" class="%sylius.behat.page.admin.taxon.update.class%" parent="sylius.behat.page.admin.crud.update" scope="scenario" public="false">
+            <argument type="string">taxon</argument>
         </service>
         <service id="sylius.behat.page.admin.tax_category.create" class="%sylius.behat.page.admin.tax_category.create.class%" parent="sylius.behat.page.admin.crud.create" scope="scenario" public="false">
             <argument type="string">tax_category</argument>

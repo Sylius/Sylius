@@ -54,6 +54,7 @@ final class TaxonomyContext implements Context
     }
 
     /**
+     * @Given the store has :firstTaxonName taxonomy
      * @Given the store classifies its products as :firstTaxonName
      * @Given the store classifies its products as :firstTaxonName and :secondTaxonName
      * @Given the store classifies its products as :firstTaxonName, :secondTaxonName and :thirdTaxonName
