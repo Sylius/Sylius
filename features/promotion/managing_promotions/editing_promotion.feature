@@ -49,8 +49,7 @@ Feature: Editing promotion
     @ui
     Scenario: Adding a promotion with start and end date
         Given I want to modify a "Christmas sale" promotion
-        And I specify that it should starts at "12.12.2017"
-        And I specify that it should ends at "24.12.2017"
+        And I make it available from "12.12.2017" to "24.12.2017"
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And the "Christmas sale" promotion should be applicable from "12.12.2017" to "24.12.2017"
+        And the "Christmas sale" promotion should be available from "12.12.2017" to "24.12.2017"

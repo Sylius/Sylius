@@ -27,14 +27,13 @@ Feature: Promotion validation
         And promotion with code "no_vat_promotion" should not be added
 
     @ui
-    Scenario: Adding a promotion with start date set up after ends date
+    Scenario: Adding a promotion with start date set up after end date
         Given I want to create a new promotion
         When I specify its code as "FULL_METAL_PROMOTION"
         And I name it "Full metal promotion"
-        And I specify that it should starts at "24.12.2017"
-        And I specify that it should ends at "12.12.2017"
+        And I make it available from "24.12.2017" to "12.12.2017"
         And I try to add it
-        Then I should be notified that promotion cannot end before it starts
+        Then I should be notified that promotion cannot end before it start
 
     @ui
     Scenario: Trying to remove name from existing promotion
@@ -46,10 +45,9 @@ Feature: Promotion validation
         And this promotion should still be named "Christmas sale"
 
     @ui
-    Scenario: Trying to add start later then ends date for existing promotion
+    Scenario: Trying to add start later then end date for existing promotion
         Given there is a promotion "Christmas sale"
         And I want to modify this promotion
-        And I specify that it should starts at "24.12.2017"
-        And I specify that it should ends at "12.12.2017"
+        And I make it available from "24.12.2017" to "12.12.2017"
         And I try to save my changes
-        Then I should be notified that promotion cannot end before it starts
+        Then I should be notified that promotion cannot end before it start
