@@ -394,6 +394,57 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
+     * @When I specify that it should starts at :date
+     */
+    public function iSpecifyThatItShouldStartAt(\DateTime $date)
+    {
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm($this->createPage, $this->updatePage);
+
+        $currentPage->setStartsAt($date);
+    }
+
+    /**
+     * @When I specify that it should ends at :date
+     */
+    public function iSpecifyThatItShouldEndsAt(\DateTime $date)
+    {
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm($this->createPage, $this->updatePage);
+
+        $currentPage->setEndsAt($date);
+    }
+
+    /**
+     * @Then the :promotion promotion should be applicable from :startsDate to :endsDate
+     */
+    public function thePromotionShouldBeApplicableFromTo(PromotionInterface $promotion, \DateTime $startsDate, \DateTime $endsDate)
+    {
+        $this->iWantToModifyAPromotion($promotion);
+
+        Assert::true(
+            $this->updatePage->hasStartsAt($startsDate),
+            sprintf('Promotion %s should starts at %s, but it isn\'t.', $promotion->getName(), date('D, d M Y H:i:s', $startsDate->getTimestamp()))
+        );
+
+        Assert::true(
+            $this->updatePage->hasEndsAt($endsDate),
+            sprintf('Promotion %s should ends at %s, but it isn\'t.', $promotion->getName(), date('D, d M Y H:i:s', $endsDate->getTimestamp()))
+        );
+    }
+
+    /**
+     * @Then I should be notified that promotion cannot end before it starts
+     */
+    public function iShouldBeNotifiedThatPromotionCannotEndBeforeItsEvenStart()
+    {
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm($this->createPage, $this->updatePage);
+
+        Assert::true(
+            $currentPage->checkValidationMessageFor('ends_at', 'End date cannot be set prior start date.'),
+            'Start date was set after ends date, but it should not be possible.'
+        );
+    }
+
+    /**
      * @param string $element
      * @param string $expectedMessage
      */

@@ -19,6 +19,7 @@
         <parameter key="sylius.behat.context.transform.coupon.class">Sylius\Behat\Context\Transform\CouponContext</parameter>
         <parameter key="sylius.behat.context.transform.currency.class">Sylius\Behat\Context\Transform\CurrencyContext</parameter>
         <parameter key="sylius.behat.context.transform.customer.class">Sylius\Behat\Context\Transform\CustomerContext</parameter>
+        <parameter key="sylius.behat.context.transform.date_time.class">Sylius\Behat\Context\Transform\DateTimeContext</parameter>
         <parameter key="sylius.behat.context.transform.lexical.class">Sylius\Behat\Context\Transform\LexicalContext</parameter>
         <parameter key="sylius.behat.context.transform.locale.class">Sylius\Behat\Context\Transform\LocaleContext</parameter>
         <parameter key="sylius.behat.context.transform.payment.class">Sylius\Behat\Context\Transform\PaymentContext</parameter>
@@ -70,6 +71,10 @@
         <service id="sylius.behat.context.transform.customer" class="%sylius.behat.context.transform.customer.class%" scope="scenario">
             <argument type="service" id="sylius.repository.customer" container="symfony" />
             <argument type="service" id="sylius.factory.customer" container="symfony" />
+            <tag name="sylius.behat.context" />
+        </service>
+
+        <service id="sylius.behat.context.transform.date_time" class="%sylius.behat.context.transform.date_time.class%" scope="scenario">
             <tag name="sylius.behat.context" />
         </service>
 

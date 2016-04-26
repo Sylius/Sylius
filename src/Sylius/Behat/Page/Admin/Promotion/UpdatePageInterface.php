@@ -15,6 +15,7 @@ use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 interface UpdatePageInterface extends BaseUpdatePageInterface
 {
@@ -48,4 +49,24 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
      * @param string $name
      */
     public function checkChannel($name);
+
+    /**
+     * @param \DateTime $dateTime
+     */
+    public function setStartsAt(\DateTime $dateTime);
+
+    /**
+     * @param \DateTime $dateTime
+     */
+    public function setEndsAt(\DateTime $dateTime);
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasStartsAt(\DateTime $dateTime);
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasEndsAt(\DateTime $dateTime);
 }

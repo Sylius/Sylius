@@ -49,6 +49,8 @@
         <parameter key="sylius.form.type.promotion_coupon_to_code.class">Sylius\Bundle\PromotionBundle\Form\Type\CouponToCodeType</parameter>
         <parameter key="sylius.form.type.promotion_coupon_generate_instruction.class">Sylius\Bundle\PromotionBundle\Form\Type\CouponGenerateInstructionType</parameter>
         <parameter key="sylius.form.transformer.promotion_coupon_to_code.class">Sylius\Bundle\PromotionBundle\Form\DataTransformer\CouponToCodeTransformer</parameter>
+
+        <parameter key="sylius.validator.date_range.class">Sylius\Bundle\PromotionBundle\Validator\PromotionDateRangeValidator</parameter>
     </parameters>
 
     <services>
@@ -143,6 +145,10 @@
             <argument type="service" id="sylius.factory.promotion_coupon" />
             <argument type="service" id="sylius.repository.promotion_coupon" />
             <argument type="service" id="sylius.manager.promotion_coupon" />
+        </service>
+
+        <service id="sylius.validator.date_range" class="%sylius.validator.date_range.class%">
+            <tag name="validator.constraint_validator" alias="sylius_promotion_date_range_validator" />
         </service>
     </services>
 

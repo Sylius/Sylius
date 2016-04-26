@@ -56,3 +56,13 @@ Feature: Adding a new promotion
         And I add it
         Then I should be notified that it has been successfully created
         And the "Full metal promotion" promotion should be applicable for the "France" channel
+
+    @ui
+    Scenario: Adding a promotion with start and end date
+        Given I want to create a new promotion
+        When I specify its code as "FULL_METAL_PROMOTION"
+        And I name it "Full metal promotion"
+        And I specify that it should starts at "21.04.2017"
+        And I specify that it should ends at "21.05.2017"
+        And I add it
+        Then I should be notified that it has been successfully created
