@@ -54,7 +54,7 @@ sylius:
         info: Info
         last_updated: Last updated
         locales: Locales
-        manage_attributes_of_your_produts: Manage attributes of your products
+        manage_attributes_of_your_products: Manage attributes of your products
         manage_currencies_available_in_the_store: Manage currencies available in the store
         manage_your_customers: Manage your customers
         manage_languages_available_in_the_store: Manage languages available in the store
