@@ -5,6 +5,8 @@ sylius:
     menu:
         admin:
             main:
+                catalog:
+                    attributes: Atributos
                 configuration:
                     channels: Canales
                     countries: Países

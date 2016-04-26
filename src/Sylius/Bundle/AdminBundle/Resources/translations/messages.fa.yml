@@ -5,6 +5,8 @@ sylius:
     menu:
         admin:
             main:
+                catalog:
+                    attributes: قابلیت ها
                 configuration:
                     channels: کانال های فروش
                     countries: كشور‌ها

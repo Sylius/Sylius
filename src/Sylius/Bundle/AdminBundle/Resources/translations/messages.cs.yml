@@ -5,6 +5,8 @@ sylius:
     menu:
         admin:
             main:
+                catalog:
+                    attributes: Atributy
                 configuration:
                     channels: Kanály
                     countries: Země

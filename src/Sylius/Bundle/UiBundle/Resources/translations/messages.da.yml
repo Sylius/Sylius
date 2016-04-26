@@ -6,6 +6,8 @@ sylius:
         login:
             username: Brugernavn
             password: Adgangskode
+        option:
+            presentation: Præsentation
     ui:
         actions: Handlinger
         cancel: Anuller

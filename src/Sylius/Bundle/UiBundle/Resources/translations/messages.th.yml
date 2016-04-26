@@ -7,6 +7,8 @@ sylius:
             username: ชื่อผู้ใช้
             password: รหัสผ่าน
             remember_me: จำฉันไว้
+        option:
+            presentation: ผู้ใช้มองเห็น
     ui:
         actions: ดำเนินการ
         administration_panel_login: เข้าสู่ระบบ Admin
@@ -65,4 +67,5 @@ sylius:
         status: สถานะ
         success: สำเร็จ
         tax_categories: ประเภทภาษี
+        values: ค่า
         "yes": true

@@ -5,6 +5,8 @@ sylius:
     menu:
         admin:
             main:
+                catalog:
+                    attributes: Atribute
                 configuration:
                     countries: Țări
                     header: Configurare

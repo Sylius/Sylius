@@ -661,6 +661,7 @@ sylius:
         total_registrations: Skupaj registracij
         tracking_code: Koda za sledenje
         tracking_number: Številka sledenja
+        translations: Prevodi
         type: Vrsta
         unavailable: Ni na voljo
         unit_price: Cena za enoto

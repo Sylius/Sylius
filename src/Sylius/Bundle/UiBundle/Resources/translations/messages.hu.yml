@@ -7,6 +7,8 @@ sylius:
             username: Felhasználónév
             password: Jelszó
             remember_me: Emlékezzen rám
+        option:
+            presentation: Bemutató
     ui:
         actions: Műveletek
         cancel: Mégse

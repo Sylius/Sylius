@@ -7,6 +7,8 @@ sylius:
             username: Kullanıcı adı
             password: Şifre
             remember_me: Beni hatırla
+        option:
+            presentation: Sunum
     ui:
         actions: Eylemler
         cancel: İptal

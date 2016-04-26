@@ -5,6 +5,8 @@ sylius:
     menu:
         admin:
             main:
+                catalog:
+                    attributes: Nitelikler
                 configuration:
                     channels: Kanallar
                     countries: Ülkeler

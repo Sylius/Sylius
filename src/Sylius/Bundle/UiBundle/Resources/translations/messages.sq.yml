@@ -7,6 +7,8 @@ sylius:
             username: Username
             password: Fjalëkalimi
             remember_me: Më mbaj mend
+        option:
+            presentation: Prezantimi
     ui:
         actions: Veprimet
         administration_panel_login: Login i panelit te administrimit
@@ -61,4 +63,5 @@ sylius:
         status: Statusi
         success: Sukses
         tax_categories: Kategoritë e taksimit
+        values: Vlerat
         "yes": true

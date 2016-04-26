@@ -7,6 +7,8 @@ sylius:
             username: Používateľské meno
             password: Heslo
             remember_me: Zapamätať si ma
+        option:
+            presentation: Verejný názov
     ui:
         actions: Akcie
         administration_panel_login: Prihásenie do administračného rozhrania
@@ -83,4 +85,5 @@ sylius:
         status: Stav
         success: Úspech
         tax_categories: Daňové kategórie
+        values: Hodnoty
         "yes": true

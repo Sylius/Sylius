@@ -2,6 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    form:
+        option:
+            presentation: Презентација
     ui:
         "no": false
         "yes": true

@@ -122,6 +122,7 @@ sylius:
     shipment:
         no_items: "Il n'y a aucun élément à afficher"
         transition:
+            backorder: rupture de stock
             cancel: annuler
             prepare: préparer
             release: libéré
@@ -696,6 +697,7 @@ sylius:
         total_registrations: "Nombre total d'inscriptions"
         tracking_code: Code de suivi
         tracking_number: Numéro de suivi
+        translations: Traductions
         type: Type
         unavailable: Indisponible
         unit_price: Prix unitaire

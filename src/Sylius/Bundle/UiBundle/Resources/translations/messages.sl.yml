@@ -7,6 +7,8 @@ sylius:
             username: Uporabniško ime
             password: Geslo
             remember_me: Zapomni si me
+        option:
+            presentation: Predstavitev
     ui:
         actions: Dejanja
         cancel: Prekliči
@@ -38,4 +40,5 @@ sylius:
         sign_in: Prijava
         sign_out: Odjava
         success: Uspešno
+        values: Vrednosti
         "yes": true

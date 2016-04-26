@@ -6,6 +6,8 @@ sylius:
         login:
             username: Юзернэйм
             password: Пароль
+        option:
+            presentation: Выгляд
     ui:
         actions: Дзеянні
         cancel: Адмяніць

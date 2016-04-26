@@ -7,6 +7,8 @@ sylius:
             username: Korisničko ime
             password: Lozinka
             remember_me: Zapamti me
+        option:
+            presentation: Prezentacija
     ui:
         actions: Akcije
         cancel: Prekini

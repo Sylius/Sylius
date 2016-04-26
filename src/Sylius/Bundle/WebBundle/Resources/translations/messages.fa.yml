@@ -676,6 +676,7 @@ sylius:
         total_registrations: تعداد مشتری های ثبت شده
         tracking_code: کد پیگیری
         tracking_number: کد پیگیری
+        translations: زبان های
         type: نوع
         unavailable: ناموجود
         unit_price: قیمت واحد
