@@ -11,6 +11,8 @@
 
 namespace spec\Sylius\Bundle\ThemeBundle\Settings;
 
+use org\bovigo\vfs\vfsStream as VfsStream;
+use org\bovigo\vfs\vfsStreamDirectory as VfsStreamDirectory;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\SettingsBundle\Schema\SchemaInterface;
@@ -25,6 +27,16 @@ use Sylius\Bundle\ThemeBundle\Settings\ThemeSettingsSchemaProviderInterface;
  */
 final class ThemeSettingsSchemaProviderSpec extends ObjectBehavior
 {
+    /**
+     * @var VfsStreamDirectory
+     */
+    private $vfsStream;
+
+    function let()
+    {
+        $this->vfsStream = VfsStream::setup();
+    }
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Settings\ThemeSettingsSchemaProvider');
@@ -37,19 +49,46 @@ final class ThemeSettingsSchemaProviderSpec extends ObjectBehavior
 
     function it_returns_valid_settings_schema(ThemeInterface $theme)
     {
-        $theme->getPath()->willReturn(__DIR__ . '/../Fixtures/settings/ValidSettingsTheme');
+        $settingsPath = $this->createSettingsFile(
+<<<'PHP'
+<?php
+
+use Sylius\Bundle\SettingsBundle\Schema\CallbackSchema;
+use Sylius\Bundle\SettingsBundle\Schema\SettingsBuilderInterface;
+use Symfony\Component\Form\FormBuilderInterface;
+
+return new CallbackSchema(
+    function (SettingsBuilderInterface $settingsBuilder) {
+
+    },
+    function (FormBuilderInterface $formBuilder) {
+
+    }
+);
+PHP
+        );
+
+        $theme->getPath()->willReturn(dirname($settingsPath));
 
         $this->getSchema($theme)->shouldHaveType(SchemaInterface::class);
     }
 
     function it_throws_an_exception_if_settings_schema_is_of_incorrect_type(ThemeInterface $theme)
     {
-        $theme->getPath()->willReturn(__DIR__ . '/../Fixtures/settings/InvalidSettingsTheme');
+        $settingsPath = $this->createSettingsFile(
+<<<'PHP'
+<?php
+
+return new \stdClass();
+PHP
+        );
+
+        $theme->getPath()->willReturn(dirname($settingsPath));
 
         $this
             ->shouldThrow(new \InvalidArgumentException(sprintf(
                 'File "%s" must return an instance of "%s"',
-                __DIR__ . '/../Fixtures/settings/InvalidSettingsTheme/Settings.php',
+                $settingsPath,
                 SchemaInterface::class
             )))
             ->during('getSchema', [$theme])
@@ -61,14 +100,29 @@ final class ThemeSettingsSchemaProviderSpec extends ObjectBehavior
         $theme->getTitle()->willReturn('Candy shop');
         $theme->getName()->willReturn('candy/shop');
 
-        $theme->getPath()->willReturn(__DIR__ . '/../Fixtures/settings/NoSettingsTheme');
+        $theme->getPath()->willReturn($this->vfsStream->url());
 
         $this
             ->shouldThrow(new \InvalidArgumentException(sprintf(
                 'Could not find settings schema of theme "Candy shop" (candy/shop) in file "%s"',
-                __DIR__ . '/../Fixtures/settings/NoSettingsTheme/Settings.php'
+                $this->vfsStream->url() . '/Settings.php'
             )))
             ->during('getSchema', [$theme])
         ;
+    }
+
+    /**
+     * @param string $content
+     *
+     * @return string Created file URL
+     */
+    private function createSettingsFile($content)
+    {
+        $settingsFile = VfsStream::newFile('Settings.php');
+        $settingsFile->setContent($content);
+
+        $this->vfsStream->addChild($settingsFile);
+
+        return $settingsFile->url();
     }
 }
