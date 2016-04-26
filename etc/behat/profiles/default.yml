@@ -51,4 +51,4 @@ default:
 
     gherkin:
         filters:
-            tags: "~@todo"
+            tags: "~@todo && ~@cli" # CLI is excluded as it registers an error handler that mutes fatal errors
