@@ -57,6 +57,10 @@ sylius:
         sellable: Produto
     page:
         publishable: Publicado
+    pricing:
+        volume_based:
+            max: Máximo Volume
+            min: Mínimo Volume
     promotion_coupon:
         generate: Gerar cupons
         index: Cupons
@@ -84,10 +88,12 @@ sylius:
         all_your_addresses: Todos os seus endereços
         amount: Quantidade
         assortment: Sortimento
+        attributes: Atributos
         author: Autor
         availability: Disponibilidade
         available_on: Disponível em
         available_on_demand: Disponível por demanda
+        available_until: Disponível até
         back: Voltar
         backorder: Devolução
         balance_due: Saldo devedor
@@ -102,6 +108,7 @@ sylius:
         category: Categoria
         change_password: Alterar sua senha
         change_your_password: Alterar sua senha
+        channel: Canal
         checkout: Finalizar compra
         choose_file: Escolha um arquivo
         city: Cidade
@@ -139,6 +146,7 @@ sylius:
         create_zone: Criar zona
         created_at: Data de criação
         creation_time: Data de criação
+        currencies: Moedas
         currency: Moeda
         current_orders: Pedidos atuais
         current_password: Senha Atual
@@ -148,6 +156,7 @@ sylius:
         data: Dados
         default_billing_address: Endereço de cobrança padrão
         default_currency: Moeda padrão
+        default_locale: Localidade padrão
         default_shipping_address: Endereço de envio padrão
         delete: Excluir
         delete_image: Deletar imagem
@@ -174,6 +183,7 @@ sylius:
         editing_variant: Editando variação
         editing_zone: Editando zona
         email: Email
+        empty: Vazio
         enabled: Ativado
         ends_at: Termina em
         error: Erro
@@ -193,6 +203,7 @@ sylius:
         grand_total: Total
         groups: Grupos
         hide_deleted: Ocultar excluídos
+        hostname: Nome do host
         id: ID
         images: Imagens
         index_of_all_configured_locales: Índice de todas as localidades configuradas
@@ -215,6 +226,7 @@ sylius:
         login: Login
         login_button: Login
         logout: Sair
+        main_taxon: Táxon principal
         manage: Gerenciar
         manage_countries: Gerenciar países
         manage_options: Gerenciar opções
@@ -268,6 +280,7 @@ sylius:
         order_summary: Dados da compra
         order_value: Valor do pedido
         orders: Pedidos
+        original_price: Preço original
         out_of_stock: Fora de estoque
         overview_of_your_store: Visão geral de sua loja
         pages: Páginas
@@ -290,6 +303,7 @@ sylius:
         pricing: Preços
         processing: Processando
         product: Produto
+        product_association_type_index: Tipo de associação
         product_details_viewing_product_product: 'Detalhes de produto <small>Visualizando produto "<strong>%product%</strong>"</small>'
         products: Produtos
         products_categorized_as_name: 'Produtos categorizados como "%name%"'
@@ -348,6 +362,7 @@ sylius:
         starts_at: Começa em
         state: Estado
         street: Rua
+        subject: Assunto
         success: Sucesso
         tax_categories: Categorias de impostos
         tax_category: Categoria de imposto
@@ -358,6 +373,7 @@ sylius:
         taxation_settings: Configurações de taxas
         taxes: Taxas
         taxons: Taxas
+        theme:  Tema
         there_are_no_images_for_this_product: Não há imagens para este produto
         there_are_no_options_for_this_product: Não há opções para este produto
         there_are_no_taxons_for_this_product: Sem táxons

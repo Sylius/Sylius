@@ -1,0 +1,10 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    role:
+        code:
+            unique: Código deve ser único.
+    permission:
+        code:
+            unique: Código deve ser único.

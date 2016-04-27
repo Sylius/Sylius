@@ -11,23 +11,75 @@ sylius:
             presentation: Apresentação
     ui:
         actions: Ações
+        administration_panel_login: Login do painel de administração
+        an_error_occurred: Um erro ocorreu
+        are_your_sure_you_want_to_perform_this_action: Tem certeza de que deseja executar esta ação?
+        available_for_channels: Disponível para os canais
         cancel: Cancelar
+        category_requirements: Requerimentos da categoria
+        charges_and_taxes: Encargos e impostos
+        clear_filters: Limpar os Filtros
         color: Cor
+        configure_channels_available_in_your_store: Configurar os canais disponíveis na sua loja
+        confirm_your_action: Confirme sua ação
+        contains: Contém
         countries: Países
         coupon_based: Cupom com base
         create: Criar
+        currencies: Moedas
         dashboard: Painel
         default_currency: Moeda padrão
+        default_locale: Localidade padrão
         delete: Excluir
         description: Descrição
+        disabled: Desligado
         edit: Editar
+        edit_channel: Editar canal
+        edit_country: Editar o país
+        edit_currency: Editar moeda
+        edit_customer: Editar cliente
+        edit_payment_method: Edite o método de pagamento
+        edit_product_option: Editar a opção de produto
+        edit_promotion: Editar promoção
+        edit_tax_category: Editar categoria de imposto
+        edit_tax_rate: Editar a taxa de imposto
+        empty: Vazio
         enabled: Ativado
+        ends_with: Termina com
+        equal: Igual
+        exclusive: Exclusivo
         filter: Filtrar
+        in: Em
+        info: Informações
+        last_updated: Ultima atualização
         locales: Localidades
+        manage_attributes_of_your_produts: Gerenciar atributos de seus produtos
+        manage_country: Gerenciar o país
+        manage_currencies_available_in_the_store: Gerenciar moedas disponíveis na loja
+        manage_customer: Gerenciar clientes
+        manage_languages_available_in_the_store: Gerenciar idiomas disponíveis na loja
+        manage_payment_method: Gerenciar os métodos de pagamento
+        manage_product_option: Gerenciar opções de produto
+        manage_shipping_destinations: Gerenciar destinos de transporte
+        manage_taxons: Gerenciar táxons de seus produtos
+        manage_shipping_methods_for_your_store: Gerenciar os métodos de transporte para sua loja
+        manage_taxation_of_your_products: Gerenciar a tributação de seus produtos
         new: Novo
+        new_channel: Novo Canal
         new_country: Novo país
+        new_currency: Nova Moeda
+        new_locale: Nova localidade
         new_tax_category: Nova categoria de imposto
         "no": false
+        no_account: Nenhuma conta
+        no_results_to_display: Não há nenhum resultado para exibir
+        not_contains: Não contêm
+        not_empty: Não vazio
+        not_in: Não em
+        or: Ou
+        powered_by: Desenvolvido por
+        promotion_configuration: Configuração de promoção
+        promotion_information: Informações de promoção
         save_changes: Salvar alterações
         shipping_methods: Métodos de envio
         success: Sucesso

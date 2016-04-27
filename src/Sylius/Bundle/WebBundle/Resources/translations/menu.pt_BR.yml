@@ -5,11 +5,13 @@ sylius:
     backend:
         menu:
             main:
+                api_clients: Clientes da API
                 assortment: Sortimento
                 blocks: Blocos
                 configuration: Configuração
                 content: Conteúdo
                 countries: Países
+                currencies: Moedas
                 dashboard: Painel
                 general_settings: Configurações gerais
                 groups: Grupos
@@ -45,6 +47,7 @@ sylius:
                 configuration: Configuração
                 content: Conteúdo
                 countries: Países
+                currencies: Moedas
                 dashboard: Painel
                 general_settings: Configurações gerais
                 groups: Grupos

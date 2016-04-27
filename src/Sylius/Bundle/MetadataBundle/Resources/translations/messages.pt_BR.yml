@@ -3,10 +3,28 @@
 
 sylius:
     metadata:
+        type:
+            none: ' -NENHUM- '
+            twitter_summary_card: Resumo
+            twitter_summary_large_image_card: Resumo com imagem grande
+            twitter_player_card: Reprodutor
+            twitter_app_card: Aplicação
         page:
             title: Título
             description: Descrição
+            keywords: Palavras-Chave
+            twitter: Cartão do Twitter
         twitter:
             title: Título
             description: Descrição
+            site: Site
+            site_id: ID do site
+            creator: Autor
+            creator_id: ID do criador
             image: Imagem
+            player: Reprodutor
+            player_width: Largura do Player
+            player_height: Altura do Player
+            player_stream: Player stream
+            player_stream_content_type: Player stream tipo de conteúdo
+            app_name_iphone: Nome do aplicativo de iPhone
