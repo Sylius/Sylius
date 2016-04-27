@@ -102,7 +102,7 @@ final class ThemeContext implements Context
     {
         $this->channelIndexPage->open();
 
-        expect($this->channelIndexPage->getUsedThemeName($channel->getCode()))->toBe($theme->getName());
+        expect($this->channelIndexPage->getUsedThemeName($channel->getCode()))->toBe($theme->getTitle());
     }
 
     /**

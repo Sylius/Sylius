@@ -36,4 +36,11 @@ interface ThemeRepositoryInterface
      * @return ThemeInterface|null
      */
     public function findOneByName($name);
+
+    /**
+     * @param string $title
+     *
+     * @return ThemeInterface|null
+     */
+    public function findOneByTitle($title);
 }

@@ -39,6 +39,6 @@ final class ThemeContext implements Context
      */
     public function getThemeByThemeTitle($themeTitle)
     {
-        return $this->themeRepository->findOneBy(['title' => $themeTitle]);
+        return $this->themeRepository->findOneByTitle($themeTitle);
     }
 }

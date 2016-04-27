@@ -79,5 +79,10 @@
         <service id="sylius.theme.filesystem" class="%sylius.theme.filesystem.class%" public="false" />
 
         <service id="sylius.theme.finder_factory" class="%sylius.theme.finder_factory.class%" public="false" />
+
+        <service id="sylius.theme.form.type.theme_choice" class="%sylius.theme.form.type.theme_choice.class%">
+            <argument type="service" id="sylius.repository.theme" />
+            <tag name="form.type" alias="sylius_theme_choice" />
+        </service>
     </services>
 </container>

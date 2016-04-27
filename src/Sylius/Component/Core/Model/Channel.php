@@ -62,6 +62,11 @@ class Channel extends BaseChannel implements ChannelInterface
     protected $taxons;
 
     /**
+     * @var string
+     */
+    protected $themeId;
+
+    /**
      * @var ThemeInterface
      */
     protected $theme;
@@ -91,6 +96,7 @@ class Channel extends BaseChannel implements ChannelInterface
     public function setTheme(ThemeInterface $theme = null)
     {
         $this->theme = $theme;
+        $this->themeId = null !== $theme ? $theme->getId() : null;
     }
 
     /**

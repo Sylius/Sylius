@@ -78,6 +78,22 @@ final class InMemoryThemeRepository implements ThemeRepositoryInterface
         return null;
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function findOneByTitle($title)
+    {
+        $this->loadThemesIfNeeded();
+
+        foreach ($this->themes as $theme) {
+            if ($theme->getTitle() === $title) {
+                return $theme;
+            }
+        }
+
+        return null;
+    }
+
     private function loadThemesIfNeeded()
     {
         if ($this->themesLoaded) {

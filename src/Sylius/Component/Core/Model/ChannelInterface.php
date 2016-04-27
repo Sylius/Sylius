@@ -45,9 +45,9 @@ interface ChannelInterface extends
     public function getTheme();
 
     /**
-     * @param ThemeInterface|null $theme
+     * @param ThemeInterface $theme
      */
-    public function setTheme(ThemeInterface $theme = null);
+    public function setTheme(ThemeInterface $theme);
 
     /**
      * @param LocaleInterface $locale

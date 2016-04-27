@@ -183,6 +183,7 @@
             <argument type="service" id="sylius.factory.theme" container="symfony" />
             <argument type="service" id="sylius.repository.channel" container="symfony" />
             <argument type="service" id="sylius.manager.channel" container="symfony" />
+            <argument type="service" id="service_container" container="symfony" /> <!-- have to get Symfony2 parameter -->
             <tag name="sylius.behat.context" />
         </service>
 
