@@ -11,24 +11,22 @@
 
 namespace Sylius\Bundle\SettingsBundle\Twig;
 
-use Sylius\Bundle\SettingsBundle\Templating\Helper\SettingsHelper;
+use Sylius\Bundle\SettingsBundle\Templating\Helper\SettingsHelperInterface;
 
 /**
- * Sylius settings extension for Twig.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SettingsExtension extends \Twig_Extension
+final class SettingsExtension extends \Twig_Extension
 {
     /**
-     * @var SettingsHelper
+     * @var SettingsHelperInterface
      */
     private $helper;
 
     /**
-     * @param SettingsHelper $helper
+     * @param SettingsHelperInterface $helper
      */
-    public function __construct(SettingsHelper $helper)
+    public function __construct(SettingsHelperInterface $helper)
     {
         $this->helper = $helper;
     }
@@ -39,42 +37,8 @@ class SettingsExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-             new \Twig_SimpleFunction('sylius_settings_all', [$this, 'getSettings']),
-             new \Twig_SimpleFunction('sylius_settings_get', [$this, 'getSettingsParameter']),
-             new \Twig_SimpleFunction('sylius_settings_has', [$this, 'hasSettingsParameter']),
+             new \Twig_SimpleFunction('sylius_settings', [$this->helper, 'getSettings']),
         ];
-    }
-
-    /**
-     * @param string $schemaAlias
-     *
-     * @return array
-     */
-    public function getSettings($schemaAlias)
-    {
-        return $this->helper->getSettings($schemaAlias);
-    }
-
-    /**
-     * @param string $name
-     *
-     * @return mixed
-     */
-    public function getSettingsParameter($name)
-    {
-        return $this->helper->getSettingsParameter($name);
-    }
-
-    /**
-     * Checks if settings parameter for given namespace and name exists.
-     *
-     * @param string $name
-     *
-     * @return mixed
-     */
-    public function hasSettingsParameter($name)
-    {
-        return $this->helper->hasSettingsParameter($name);
     }
 
     /**

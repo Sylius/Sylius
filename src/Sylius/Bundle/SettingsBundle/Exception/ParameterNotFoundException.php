@@ -21,7 +21,7 @@ class ParameterNotFoundException extends \InvalidArgumentException
      * @param int $code
      * @param Exception $previous
      */
-    public function __construct($parameter, $code = 0, Exception $previous = null)
+    public function __construct($parameter, $code = 0, \Exception $previous = null)
     {
         $message = sprintf('Parameter with name "%s" does not exist.', $parameter);
 

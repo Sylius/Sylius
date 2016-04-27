@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="sylius.theme.settings_manager.class">Sylius\Bundle\ThemeBundle\Settings\ThemeSettingsManager</parameter>
+        <parameter key="sylius.theme.settings_schema_provider.class">Sylius\Bundle\ThemeBundle\Settings\ThemeSettingsSchemaProvider</parameter>
+        <parameter key="sylius.theme.settings_twig_extension.class">Sylius\Bundle\ThemeBundle\Twig\SettingsExtension</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.theme.settings_manager" class="%sylius.theme.settings_manager.class%">
+            <argument type="service" id="sylius.settings.manager" />
+            <argument type="service" id="sylius.registry.settings_schema" />
+            <argument type="service" id="sylius.theme.settings_schema_provider" />
+        </service>
+
+        <service id="sylius.theme.settings_schema_provider" class="%sylius.theme.settings_schema_provider.class%" public="false" />
+
+        <service id="sylius.theme.settings_twig_extension" class="%sylius.theme.settings_twig_extension.class%" public="false">
+            <argument type="service" id="sylius.context.theme" />
+            <argument type="service" id="sylius.theme.settings_manager" />
+            <tag name="twig.extension" />
+        </service>
+    </services>
+</container>

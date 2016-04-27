@@ -22,18 +22,21 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * @author Steffen Brem <steffenbrem@gmail.com>
  */
-class ParameterTransformerListener
+final class ParameterTransformerListener
 {
     /**
      * @var ContainerInterface
      */
-    protected $container;
+    private $container;
 
     /**
      * @var array
      */
-    protected $parametersMap = [];
+    private $parametersMap = [];
 
+    /**
+     * @param ContainerInterface $container
+     */
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;

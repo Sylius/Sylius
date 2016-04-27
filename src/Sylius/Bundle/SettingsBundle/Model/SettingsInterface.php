@@ -50,19 +50,15 @@ interface SettingsInterface extends ResourceInterface, \ArrayAccess, \Countable
     public function setParameters(array $parameters);
 
     /**
-     * Get parameter by it's name.
-     *
      * @param string $name
      *
-     * @throws ParameterNotFoundException
-     *
      * @return string
+     *
+     * @throws ParameterNotFoundException
      */
     public function get($name);
 
     /**
-     * Checks if it contains the given parameter.
-     *
      * @param string $name
      *
      * @return bool
@@ -70,16 +66,12 @@ interface SettingsInterface extends ResourceInterface, \ArrayAccess, \Countable
     public function has($name);
 
     /**
-     * Set a parameter.
-     *
      * @param string $name
      * @param mixed $value
      */
     public function set($name, $value);
 
     /**
-     * Removes a parameter.
-     *
      * @param string $name
      *
      * @throws ParameterNotFoundException

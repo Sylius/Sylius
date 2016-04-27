@@ -20,12 +20,12 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  *
  * @author Steffen Brem <steffenbrem@gmail.com>
  */
-class DefaultSettingsResolver implements SettingsResolverInterface
+final class DefaultSettingsResolver implements SettingsResolverInterface
 {
     /**
      * @var RepositoryInterface
      */
-    protected $settingsRepository;
+    private $settingsRepository;
 
     /**
      * @param RepositoryInterface $settingsRepository
@@ -41,17 +41,19 @@ class DefaultSettingsResolver implements SettingsResolverInterface
     public function resolve($schemaAlias, $namespace = null)
     {
         try {
-            $criteria = [
-                'schemaAlias' => $schemaAlias,
-            ];
+            $criteria = ['schemaAlias' => $schemaAlias];
 
             if (null !== $namespace) {
                 $criteria['namespace'] = $namespace;
             }
 
             return $this->settingsRepository->findOneBy($criteria);
-        } catch (NonUniqueResultException $e) {
-            throw new \LogicException(sprintf('Multiple schemas found for "%s". You should probably define a custom settings resolver for this schema.', $schemaAlias));
+        } catch (NonUniqueResultException $exception) {
+            throw new \LogicException(
+                sprintf('Multiple schemas found for "%s". You should probably define a custom settings resolver for this schema.', $schemaAlias),
+                0,
+                $exception
+            );
         }
     }
 }

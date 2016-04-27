@@ -25,7 +25,7 @@ interface SettingsBuilderInterface extends OptionsResolverInterface
     public function getTransformers();
 
     /**
-     * @param string                        $parameterName
+     * @param string $parameterName
      * @param ParameterTransformerInterface $transformer
      */
     public function setTransformer($parameterName, ParameterTransformerInterface $transformer);

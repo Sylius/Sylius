@@ -24,7 +24,7 @@ interface SettingsResolverInterface
 {
     /**
      * @param string $schemaAlias
-     * @param string $namespace
+     * @param string|null $namespace
      *
      * @return SettingsInterface
      */

@@ -95,7 +95,8 @@
         "matthiasnoback/symfony-dependency-injection-test": "^0.7.6",
         "phpspec/phpspec": "^2.4",
         "phpunit/phpunit": "~4.1",
-        "se/selenium-server-standalone": "^2.52"
+        "se/selenium-server-standalone": "^2.52",
+        "mikey179/vfsStream": "^1.6"
     },
     "replace": {
         "sylius/addressing": "self.version",
