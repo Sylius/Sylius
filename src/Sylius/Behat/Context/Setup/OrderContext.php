@@ -362,7 +362,7 @@ final class OrderContext implements Context
         /** @var OrderItemInterface $item */
         $item = $this->orderItemFactory->createNew();
         $item->setVariant($productVariant);
-        $item->setUnitPrice($price);
+        $item->setUnitPrice($productVariant->getPrice());
 
         $this->itemQuantityModifier->modify($item, $quantity);
 

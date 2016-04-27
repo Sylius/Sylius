@@ -34,16 +34,12 @@ class ProductContext extends DefaultContext
 
             $product->setCurrentLocale($this->getContainer()->getParameter('locale'));
             $product->setName(trim($data['name']));
-<<<<<<< daaa73c203015544dad10b35e84adde66d5cc81b
 
             $code = isset($data['sku']) ? $data['sku'] : $this->generateCode($data['name']);
             $product->setCode($code);
 
-            $product->getMasterVariant()->setPrice((int) round($data['price'] * 100));
-            $product->getMasterVariant()->setCode($code);
-=======
-            $product->getVariants()->first()->setPrice((int) round($data['price'] * 100));
->>>>>>> [Core][Product][Variation] Remove all masterVariant usages
+            $product->getFirstVariant()->setCode($code);
+            $product->getFirstVariant()->setPrice((int) round($data['price'] * 100));
 
             if (!empty($data['options'])) {
                 foreach (explode(',', $data['options']) as $option) {
@@ -369,7 +365,7 @@ class ProductContext extends DefaultContext
         if (null === $product) {
             $product = $this->getRepository('product')->createNew();
             $product->setName($name);
-            $product->setPrice(0);
+            $product->getVariants()->first()->setPrice(0);
             $product->setDescription('Lorem ipsum');
         }
 

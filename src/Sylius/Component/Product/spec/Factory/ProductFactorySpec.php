@@ -29,9 +29,10 @@ class ProductFactorySpec extends ObjectBehavior
     function let(
         FactoryInterface $factory,
         RepositoryInterface $archetypeRepository,
-        ArchetypeBuilderInterface $archetypeBuilder
+        ArchetypeBuilderInterface $archetypeBuilder,
+        FactoryInterface $variantFactory
     ) {
-        $this->beConstructedWith($factory, $archetypeRepository, $archetypeBuilder);
+        $this->beConstructedWith($factory, $archetypeRepository, $archetypeBuilder, $variantFactory);
     }
 
     function it_is_initializable()
@@ -51,13 +52,32 @@ class ProductFactorySpec extends ObjectBehavior
         $this->createNew()->shouldReturn($product);
     }
 
+    function it_creates_new_product_with_variant(
+        FactoryInterface $factory,
+        ProductInterface $product,
+        VariantInterface $variant,
+        FactoryInterface $variantFactory
+    ) {
+        $variantFactory->createNew()->willReturn($variant);
+
+        $factory->createNew()->willReturn($product);
+        $product->addVariant($variant)->shouldBeCalled();
+
+        $this->createWithVariant()->shouldReturn($product);
+    }
+
     function it_creates_new_product_from_archetype(
         FactoryInterface $factory,
         ProductInterface $product,
         RepositoryInterface $archetypeRepository,
         ArchetypeBuilderInterface $archetypeBuilder,
-        ArchetypeInterface $archetype
+        ArchetypeInterface $archetype,
+        VariantInterface $variant,
+        FactoryInterface $variantFactory
     ) {
+        $variantFactory->createNew()->willReturn($variant);
+        $product->addVariant($variant)->shouldBeCalled();
+
         $factory->createNew()->willReturn($product);
 
         $archetypeRepository->findOneBy(['code' => 'book'])->willReturn($archetype);

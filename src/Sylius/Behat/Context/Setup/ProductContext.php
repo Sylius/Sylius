@@ -402,10 +402,10 @@ final class ProductContext implements Context
     private function createProduct($productName, $price = 0)
     {
         /** @var ProductInterface $product */
-        $product = $this->productFactory->createNew();
+        $product = $this->productFactory->createWithVariant();
 
         $product->setName($productName);
-        $product->setPrice($price);
+        $product->getVariants()->first()->setPrice($price);
         $product->setCode($this->convertToCode($productName));
         $product->getMasterVariant()->setCode($product->getCode());
 
