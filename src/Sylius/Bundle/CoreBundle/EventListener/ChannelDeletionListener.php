@@ -35,6 +35,8 @@ class ChannelDeletionListener
     }
 
     /**
+     * Prevent channel deletion if no more channels enabled.
+     *
      * @param ResourceControllerEvent $event
      */
     public function onChannelPreDelete(ResourceControllerEvent $event)

@@ -17,6 +17,8 @@ use Sylius\Component\Promotion\Exception\UnsupportedTypeException;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 /**
+ * Checks if user is created before/after configured period of time.
+ *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class CustomerLoyaltyRuleChecker implements RuleCheckerInterface

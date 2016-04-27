@@ -17,6 +17,8 @@ use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
+ * Sets currently selected currency on order object.
+ *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class OrderCurrencyListener
