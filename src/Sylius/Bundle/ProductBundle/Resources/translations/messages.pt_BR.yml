@@ -6,15 +6,21 @@ sylius:
         product:
             name: Nome
             description: Descrição
+            attributes: Atributos
             options: Opções
             meta_keywords: Meta palavra-chaves
             meta_description: Meta descrição
             taxons: Taxas
         product_variant:
             available_on: Disponível em
+            available_until: Disponível até
         product_archetype:
             name: Nome
             parent: Pai
+            attributes: Atributos
             options: Opções
         association_type:
             name: Nome
+        association:
+            type: Tipo de associação
+            product: Produto associado

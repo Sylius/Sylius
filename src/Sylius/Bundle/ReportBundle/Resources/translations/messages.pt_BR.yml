@@ -6,5 +6,7 @@ sylius:
         report:
             name: Nome
             description: Descrição
+            renderer:
+                template: Modelo
             chart:
                 type: Tipo

@@ -7,4 +7,5 @@ sylius:
             code: Código
             name: Nome
             parent: Pai
+            attributes: Atributos
             options: Opções

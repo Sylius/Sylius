@@ -20,6 +20,7 @@ sylius:
         charges_and_taxes: Heffingen en belastingen
         clear_filters: Wis filters
         color: Kleur
+        configure_channels_available_in_your_store: Configureer beschikbare kanalen in uw winkel
         confirm_your_action: Bevestigen uw actie
         contains: Bevat
         countries: Landen
@@ -33,7 +34,15 @@ sylius:
         description: Omschrijving
         disabled: Inactief
         edit: Bewerken
+        edit_channel: Bewerk kanaal
         edit_country: Land bewerken
+        edit_currency: Bewerk valuta
+        edit_customer: Bewerk klant
+        edit_payment_method: Bewerk betaalmethode
+        edit_product_option: Bewerk product-optie
+        edit_promotion: Bewerk promotie
+        edit_tax_category: Bewerk belasting categorie
+        edit_tax_rate: Bewerk belastingtarief
         empty: Leeg
         enabled: Toegestaan
         ends_with: Eindigt met

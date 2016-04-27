@@ -8,6 +8,7 @@ sylius:
                 price: Preço unitário
                 quantity: Quantidade
                 variant: Variante
+            customer_group: Grupos de Clientes
         block:
             body: Texto
             id: ID
@@ -19,15 +20,23 @@ sylius:
                 different_billing_address: Utilizar um endereço diferente para cobrança?
             payment_method: Forma de Pagamento
             shipping_method: Forma de envio
+        promotion:
+            channels: Canal
+        coupon:
+            per_customer_usage_limit: Limite de uso por cliente
         group:
             name: Nome
             roles: Papéis
         channel:
             taxonomies: Taxonomias
+            locale_default: Localidade padrão
             locales: Localidades
             currency_default: Moeda padrão
+            currencies: Moedas
             shipping_methods: Métodos de envio
             payment_methods: Meios de pagamentos
+            theme:  Tema
+            hostname: Nome do host
         image:
             file: Imagem
         locale:
@@ -40,6 +49,7 @@ sylius:
             total_from: De
             total_to: Para
             payment_state: Situação do pagamento
+            channel: Todos os canais
         page:
             body: Texto
             id: ID
@@ -49,6 +59,7 @@ sylius:
             shipping_category: Categoria de expedição
             short_description: Breve descrição
             variant_selection_method: Método de seleção da variação
+            main_taxon: Táxon principal
         product_filter:
             name: Nome
             sku: SKU
@@ -61,17 +72,25 @@ sylius:
                 meta_description: Meta descrição
                 meta_keywords: Meta palavra-chaves
                 title: Título da página
+                tracking_code:
+                    Tracking code (for example: Código do Google Analytics
             taxation:
                 default_tax_zone: Zona de imposto do padrão
+                default_tax_calculation_strategy: Estratégia de cálculo do imposto de padrão
+            security:
+                enabled: Ativado?
         shipment_filter:
             created_at_from: De
             created_at_to: Para
             number: Número do pedido
             shipping_address: Nome do meio de expedição
+            channel: Todos os canais
         payment_filter:
             created_at_from: De
             created_at_to: Para
             number: Número do pedido
+            billing_address: Faturar a
+            channel: Todos os canais
         shipping_method:
             zone: Zona
         taxon:
@@ -97,20 +116,38 @@ sylius:
             images: Imagens
             on_hand: Estoque atual
             price: Preço
+            original_price: Preço original
             sku: SKU
             weight: Peso
             width: Largura
         attribute:
             product_attribute_value:
+                attribute: Atributo
                 value: Valor
         guest:
             email: Email
+        product_association:
+            product: Produto associado
+            type: Tipo de associação
         product_association_type:
             name: Nome
         promotion_rule:
             contains_taxon:
+                taxon: Taxon
                 count: Contagem
             taxon:
                 taxons: Taxas
             total_of_items_from_taxon:
+                taxon: Taxon
                 amount: Quantidade
+    email:
+        order_confirmation:
+            name: Confirmação de compra
+        order_comment:
+            name: Comentários do pedido
+        shipment_confirmation:
+            name: Confirmação de postagem
+        user_confirmation:
+            name: Confirmação do usuário
+        password_reset:
+            name: Redefinir a senha
