@@ -56,7 +56,7 @@ class ThemeTranslatorResourceProviderSpec extends ObjectBehavior
         $themeHierarchyProvider->getThemeHierarchy($theme)->willReturn([$theme]);
 
         $theme->getPath()->willReturn('/theme/path');
-        $theme->getCode()->willReturn('themecode');
+        $theme->getId()->willReturn('themeId');
 
         $translationFilesFinder->findTranslationFiles('/theme/path')->willReturn(['/theme/path/messages.en.yml']);
 
@@ -76,10 +76,10 @@ class ThemeTranslatorResourceProviderSpec extends ObjectBehavior
         $themeHierarchyProvider->getThemeHierarchy($mainTheme)->willReturn([$mainTheme, $parentTheme]);
 
         $mainTheme->getPath()->willReturn('/main/theme/path');
-        $mainTheme->getCode()->willReturn('mainthemecode');
+        $mainTheme->getId()->willReturn('mainThemeId');
 
         $parentTheme->getPath()->willReturn('/parent/theme/path');
-        $parentTheme->getCode()->willReturn('parentthemecode');
+        $parentTheme->getId()->willReturn('parentThemeId');
 
         $translationFilesFinder->findTranslationFiles('/main/theme/path')->willReturn(['/main/theme/path/messages.en.yml']);
         $translationFilesFinder->findTranslationFiles('/parent/theme/path')->willReturn(['/parent/theme/path/messages.en.yml']);
@@ -102,10 +102,10 @@ class ThemeTranslatorResourceProviderSpec extends ObjectBehavior
         $themeHierarchyProvider->getThemeHierarchy($parentTheme)->willReturn([$parentTheme]);
 
         $mainTheme->getPath()->willReturn('/main/theme/path');
-        $mainTheme->getCode()->willReturn('mainthemecode');
+        $mainTheme->getId()->willReturn('mainThemeId');
 
         $parentTheme->getPath()->willReturn('/parent/theme/path');
-        $parentTheme->getCode()->willReturn('parentthemecode');
+        $parentTheme->getId()->willReturn('parentThemeId');
 
         $translationFilesFinder->findTranslationFiles('/main/theme/path')->willReturn(['/main/theme/path/messages.en.yml']);
         $translationFilesFinder->findTranslationFiles('/parent/theme/path')->willReturn(['/parent/theme/path/messages.en.yml']);
@@ -127,11 +127,11 @@ class ThemeTranslatorResourceProviderSpec extends ObjectBehavior
         $themeHierarchyProvider->getThemeHierarchy($theme)->willReturn([$theme]);
 
         $theme->getPath()->willReturn('/theme/path');
-        $theme->getCode()->willReturn('themecode');
+        $theme->getId()->willReturn('themeId');
 
         $translationFilesFinder->findTranslationFiles('/theme/path')->willReturn(['/theme/path/messages.en.yml']);
 
-        $this->getResourcesLocales()->shouldReturn(['en_themecode']);
+        $this->getResourcesLocales()->shouldReturn(['en_themeId']);
     }
 
     function it_returns_resources_locales_while_using_one_nested_theme(
@@ -145,15 +145,15 @@ class ThemeTranslatorResourceProviderSpec extends ObjectBehavior
         $themeHierarchyProvider->getThemeHierarchy($mainTheme)->willReturn([$mainTheme, $parentTheme]);
 
         $mainTheme->getPath()->willReturn('/main/theme/path');
-        $mainTheme->getCode()->willReturn('mainthemecode');
+        $mainTheme->getId()->willReturn('mainThemeId');
 
         $parentTheme->getPath()->willReturn('/parent/theme/path');
-        $parentTheme->getCode()->willReturn('parentthemecode');
+        $parentTheme->getId()->willReturn('parentThemeId');
 
         $translationFilesFinder->findTranslationFiles('/main/theme/path')->willReturn(['/main/theme/path/messages.en.yml']);
         $translationFilesFinder->findTranslationFiles('/parent/theme/path')->willReturn(['/parent/theme/path/messages.en.yml']);
 
-        $this->getResourcesLocales()->shouldReturn(['en_mainthemecode']);
+        $this->getResourcesLocales()->shouldReturn(['en_mainThemeId']);
     }
 
     function it_returns_resources_locales_while_using_more_than_one_theme(
@@ -168,14 +168,14 @@ class ThemeTranslatorResourceProviderSpec extends ObjectBehavior
         $themeHierarchyProvider->getThemeHierarchy($parentTheme)->willReturn([$parentTheme]);
 
         $mainTheme->getPath()->willReturn('/main/theme/path');
-        $mainTheme->getCode()->willReturn('mainthemecode');
+        $mainTheme->getId()->willReturn('mainThemeId');
 
         $parentTheme->getPath()->willReturn('/parent/theme/path');
-        $parentTheme->getCode()->willReturn('parentthemecode');
+        $parentTheme->getId()->willReturn('parentThemeId');
 
         $translationFilesFinder->findTranslationFiles('/main/theme/path')->willReturn(['/main/theme/path/messages.en.yml']);
         $translationFilesFinder->findTranslationFiles('/parent/theme/path')->willReturn(['/parent/theme/path/messages.en.yml']);
 
-        $this->getResourcesLocales()->shouldReturn(['en_mainthemecode', 'en_parentthemecode']);
+        $this->getResourcesLocales()->shouldReturn(['en_mainThemeId', 'en_parentThemeId']);
     }
 }

@@ -12,26 +12,54 @@
 namespace Sylius\Bundle\ThemeBundle\Repository;
 
 use Sylius\Bundle\ThemeBundle\Loader\ThemeLoaderInterface;
-use Sylius\Component\Resource\Repository\InMemoryRepository;
+use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class InMemoryThemeRepository extends InMemoryRepository implements ThemeRepositoryInterface
+final class InMemoryThemeRepository implements ThemeRepositoryInterface
 {
     /**
-     * {@inheritdoc}
-     *
+     * @var ThemeInterface[]
+     */
+    private $themes = [];
+
+    /**
+     * @var ThemeLoaderInterface
+     */
+    private $themeLoader;
+
+    /**
+     * @var bool
+     */
+    private $themesLoaded = false;
+
+    /**
      * @param ThemeLoaderInterface $themeLoader
      */
-    public function __construct(ThemeLoaderInterface $themeLoader, $interface)
+    public function __construct(ThemeLoaderInterface $themeLoader)
     {
-        parent::__construct($interface);
+        $this->themeLoader = $themeLoader;
+    }
 
-        $themes = $themeLoader->load();
-        foreach ($themes as $theme) {
-            $this->add($theme);
-        }
+    /**
+     * {@inheritdoc}
+     */
+    public function find($id)
+    {
+        $this->loadThemesIfNeeded();
+
+        return isset($this->themes[$id]) ? $this->themes[$id] : null;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findAll()
+    {
+        $this->loadThemesIfNeeded();
+
+        return $this->themes;
     }
 
     /**
@@ -39,6 +67,28 @@ class InMemoryThemeRepository extends InMemoryRepository implements ThemeReposit
      */
     public function findOneByName($name)
     {
-        return $this->findOneBy(['name' => $name]);
+        $this->loadThemesIfNeeded();
+
+        foreach ($this->themes as $theme) {
+            if ($theme->getName() === $name) {
+                return $theme;
+            }
+        }
+
+        return null;
+    }
+
+    private function loadThemesIfNeeded()
+    {
+        if ($this->themesLoaded) {
+            return;
+        }
+
+        $themes = $this->themeLoader->load();
+        foreach ($themes as $theme) {
+            $this->themes[$theme->getId()] = $theme;
+        }
+
+        $this->themesLoaded = true;
     }
 }

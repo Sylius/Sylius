@@ -101,10 +101,10 @@ class ThemeAwareTranslatorSpec extends ObjectBehavior
         ThemeInterface $theme
     ) {
         $themeContext->getTheme()->willReturn($theme);
-        $theme->getCode()->willReturn('themecode');
+        $theme->getId()->willReturn('themeId');
 
         $translator->getLocale()->willReturn('defaultlocale');
-        $translator->trans('id', ['param'], 'domain', 'defaultlocale_themecode')->willReturn('translated string');
+        $translator->trans('id', ['param'], 'domain', 'defaultlocale_themeId')->willReturn('translated string');
 
         $this->trans('id', ['param'], 'domain')->shouldReturn('translated string');
     }
@@ -115,9 +115,9 @@ class ThemeAwareTranslatorSpec extends ObjectBehavior
         ThemeInterface $theme
     ) {
         $themeContext->getTheme()->willReturn($theme);
-        $theme->getCode()->willReturn('themecode');
+        $theme->getId()->willReturn('themeId');
 
-        $translator->trans('id', ['param'], 'domain', 'customlocale_themecode')->willReturn('translated string');
+        $translator->trans('id', ['param'], 'domain', 'customlocale_themeId')->willReturn('translated string');
 
         $this->trans('id', ['param'], 'domain', 'customlocale')->shouldReturn('translated string');
     }
@@ -146,10 +146,10 @@ class ThemeAwareTranslatorSpec extends ObjectBehavior
         ThemeInterface $theme
     ) {
         $themeContext->getTheme()->willReturn($theme);
-        $theme->getCode()->willReturn('themecode');
+        $theme->getId()->willReturn('themeId');
 
         $translator->getLocale()->willReturn('defaultlocale');
-        $translator->transChoice('id', 2, ['param'], 'domain', 'defaultlocale_themecode')->willReturn('translated string');
+        $translator->transChoice('id', 2, ['param'], 'domain', 'defaultlocale_themeId')->willReturn('translated string');
 
         $this->transChoice('id', 2, ['param'], 'domain')->shouldReturn('translated string');
     }
@@ -160,9 +160,9 @@ class ThemeAwareTranslatorSpec extends ObjectBehavior
         ThemeInterface $theme
     ) {
         $themeContext->getTheme()->willReturn($theme);
-        $theme->getCode()->willReturn('themecode');
+        $theme->getId()->willReturn('themeId');
 
-        $translator->transChoice('id', 2, ['param'], 'domain', 'customlocale_themecode')->willReturn('translated string');
+        $translator->transChoice('id', 2, ['param'], 'domain', 'customlocale_themeId')->willReturn('translated string');
 
         $this->transChoice('id', 2, ['param'], 'domain', 'customlocale')->shouldReturn('translated string');
     }

@@ -11,22 +11,20 @@
 
 namespace Sylius\Bundle\ThemeBundle\Model;
 
-use Sylius\Component\Resource\Model\ResourceInterface;
-
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-interface ThemeInterface extends ResourceInterface
+interface ThemeInterface
 {
     /**
      * @return string
      */
-    public function getName();
+    public function getId();
 
     /**
-     * @param string $name
+     * @return string
      */
-    public function setName($name);
+    public function getName();
 
     /**
      * @return string
@@ -34,9 +32,24 @@ interface ThemeInterface extends ResourceInterface
     public function getPath();
 
     /**
-     * @param string $path
+     * @return string|null
      */
-    public function setPath($path);
+    public function getTitle();
+
+    /**
+     * @param string $title
+     */
+    public function setTitle($title);
+
+    /**
+     * @return string|null
+     */
+    public function getDescription();
+
+    /**
+     * @param string $description
+     */
+    public function setDescription($description);
 
     /**
      * @return ThemeAuthor[]
@@ -52,26 +65,6 @@ interface ThemeInterface extends ResourceInterface
      * @param ThemeAuthor $author
      */
     public function removeAuthor(ThemeAuthor $author);
-
-    /**
-     * @return string
-     */
-    public function getTitle();
-
-    /**
-     * @param string $title
-     */
-    public function setTitle($title);
-
-    /**
-     * @return string
-     */
-    public function getDescription();
-
-    /**
-     * @param string $description
-     */
-    public function setDescription($description);
 
     /**
      * @return ThemeInterface[]
@@ -102,11 +95,4 @@ interface ThemeInterface extends ResourceInterface
      * @param ThemeScreenshot $themeScreenshot
      */
     public function removeScreenshot(ThemeScreenshot $themeScreenshot);
-
-    /**
-     * Should match /^[a-zA-Z0-9]{6,32}$/
-     *
-     * @return string
-     */
-    public function getCode();
 }

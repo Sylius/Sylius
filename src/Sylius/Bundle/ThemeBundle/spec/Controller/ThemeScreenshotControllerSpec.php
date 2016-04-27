@@ -15,7 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ThemeBundle\Controller\ThemeScreenshotController;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -31,7 +31,7 @@ final class ThemeScreenshotControllerSpec extends ObjectBehavior
      */
     private $fixturesPath;
 
-    function let(RepositoryInterface $themeRepository)
+    function let(ThemeRepositoryInterface $themeRepository)
     {
         $this->beConstructedWith($themeRepository);
         $this->fixturesPath = realpath(__DIR__ . '/../Fixtures');
@@ -42,7 +42,7 @@ final class ThemeScreenshotControllerSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Controller\ThemeScreenshotController');
     }
 
-    function it_streams_screenshot_as_a_response(RepositoryInterface $themeRepository, ThemeInterface $theme)
+    function it_streams_screenshot_as_a_response(ThemeRepositoryInterface $themeRepository, ThemeInterface $theme)
     {
         $themeRepository->find(42)->willReturn($theme);
 
@@ -59,7 +59,7 @@ final class ThemeScreenshotControllerSpec extends ObjectBehavior
     }
 
     function it_throws_not_found_http_exception_if_screenshot_cannot_be_found(
-        RepositoryInterface $themeRepository,
+        ThemeRepositoryInterface $themeRepository,
         ThemeInterface $theme
     ) {
         $themeRepository->find(42)->willReturn($theme);
@@ -80,7 +80,7 @@ final class ThemeScreenshotControllerSpec extends ObjectBehavior
     }
 
     function it_throws_not_found_http_exception_if_screenshot_number_exceeds_the_number_of_theme_screenshots(
-        RepositoryInterface $themeRepository,
+        ThemeRepositoryInterface $themeRepository,
         ThemeInterface $theme
     ) {
         $themeRepository->find(42)->willReturn($theme);
@@ -97,7 +97,7 @@ final class ThemeScreenshotControllerSpec extends ObjectBehavior
         ;
     }
 
-    function it_throws_not_found_http_exception_if_theme_with_given_id_cannot_be_found(RepositoryInterface $themeRepository)
+    function it_throws_not_found_http_exception_if_theme_with_given_id_cannot_be_found(ThemeRepositoryInterface $themeRepository)
     {
         $themeRepository->find(42)->willReturn(null);
 

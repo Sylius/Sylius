@@ -11,17 +11,17 @@
 
 namespace Sylius\Bundle\ThemeBundle\DependencyInjection;
 
-use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
+use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class SyliusThemeExtension extends AbstractResourceExtension implements PrependExtensionInterface
+final class SyliusThemeExtension extends Extension implements PrependExtensionInterface
 {
     /**
      * {@inheritdoc}
@@ -32,16 +32,11 @@ final class SyliusThemeExtension extends AbstractResourceExtension implements Pr
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config/services'));
 
         $loader->load('services.xml');
-        $loader->load(sprintf('driver/%s.xml', $config['driver']));
 
         $this->loadFilesystemConfiguration($container, $loader, $config);
 
-        $container->setParameter('sylius.interface.theme.class', $config['resources']['theme']['classes']['interface']);
         $container->setAlias('sylius.context.theme', $config['context']);
-
-        $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
-
-        $container->getDefinition('sylius.repository.theme')->setLazy(true);
+        $container->setAlias('sylius.repository.theme', 'sylius.theme.repository');
     }
 
     /**
@@ -63,7 +58,6 @@ final class SyliusThemeExtension extends AbstractResourceExtension implements Pr
     {
         $loader->load('configuration/filesystem.xml');
 
-        $container->setAlias('sylius.theme.configuration.loader', 'sylius.theme.configuration.loader.json_file');
         $container->setAlias('sylius.theme.configuration.provider', 'sylius.theme.configuration.provider.filesystem');
         $container->setParameter('sylius.theme.configuration.filesystem.locations', $config['sources']['filesystem']['locations']);
     }

@@ -16,7 +16,6 @@ use Sylius\Bundle\ThemeBundle\Model\Theme;
 use Sylius\Bundle\ThemeBundle\Model\ThemeAuthor;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeScreenshot;
-use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * @mixin Theme
@@ -25,6 +24,11 @@ use Sylius\Component\Resource\Model\ResourceInterface;
  */
 class ThemeSpec extends ObjectBehavior
 {
+    function let()
+    {
+        $this->beConstructedWith('theme/name', '/theme/path');
+    }
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Model\Theme');
@@ -35,22 +39,20 @@ class ThemeSpec extends ObjectBehavior
         $this->shouldImplement(ThemeInterface::class);
     }
 
-    function it_implements_resource_interface()
+    function it_has_immutable_id()
     {
-        $this->shouldImplement(ResourceInterface::class);
+        $this->getId()->shouldBeString();
+        $this->getId()->shouldReturn(substr(md5('theme/name'), 0, 8));
     }
 
-    function it_has_id()
+    function it_has_immutable_name()
     {
-        $this->getId()->shouldReturn(null);
+        $this->getName()->shouldReturn('theme/name');
     }
 
-    function it_has_name()
+    function it_has_immutable_path()
     {
-        $this->getName()->shouldReturn(null);
-
-        $this->setName('foo/bar');
-        $this->getName()->shouldReturn('foo/bar');
+        $this->getPath()->shouldReturn('/theme/path');
     }
 
     function it_has_title()
@@ -59,21 +61,6 @@ class ThemeSpec extends ObjectBehavior
 
         $this->setTitle('Foo Bar');
         $this->getTitle()->shouldReturn('Foo Bar');
-    }
-
-    function it_has_path()
-    {
-        $this->getPath()->shouldReturn(null);
-
-        $this->setPath('/foo/bar');
-        $this->getPath()->shouldReturn('/foo/bar');
-    }
-
-    function it_has_code_based_on_md5ed_name()
-    {
-        $this->setName('name');
-
-        $this->getCode()->shouldReturn(substr(md5('name'), 0, 8));
     }
 
     function it_has_description()

@@ -12,17 +12,17 @@
 namespace Sylius\Bundle\ThemeBundle\Factory;
 
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-interface ThemeFactoryInterface extends FactoryInterface
+interface ThemeFactoryInterface
 {
     /**
      * @param string $name
+     * @param string $path
      *
      * @return ThemeInterface
      */
-    public function createNamed($name);
+    public function create($name, $path);
 }

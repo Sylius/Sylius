@@ -22,13 +22,12 @@
 
     <parameters>
         <parameter key="sylius.context.theme.class">Sylius\Bundle\ThemeBundle\Context\SettableThemeContext</parameter>
+        <parameter key="sylius.factory.theme.class">Sylius\Bundle\ThemeBundle\Factory\ThemeFactory</parameter>
         <parameter key="sylius.factory.theme_author.class">Sylius\Bundle\ThemeBundle\Factory\ThemeAuthorFactory</parameter>
         <parameter key="sylius.factory.theme_screenshot.class">Sylius\Bundle\ThemeBundle\Factory\ThemeScreenshotFactory</parameter>
         <parameter key="sylius.theme.hydrator.class">Sylius\Bundle\ThemeBundle\Hydrator\ThemeHydrator</parameter>
-        <parameter key="sylius.theme.merger.class">Sylius\Bundle\ThemeBundle\Synchronizer\ThemeMerger</parameter>
         <parameter key="sylius.theme.loader.class">Sylius\Bundle\ThemeBundle\Loader\ThemeLoader</parameter>
-        <parameter key="sylius.theme.synchronizer.class">Sylius\Bundle\ThemeBundle\Synchronizer\ThemeSynchronizer</parameter>
-        <parameter key="sylius.theme.repository.in_memory.class">Sylius\Bundle\ThemeBundle\Repository\InMemoryThemeRepository</parameter>
+        <parameter key="sylius.theme.repository.class">Sylius\Bundle\ThemeBundle\Repository\InMemoryThemeRepository</parameter>
         <parameter key="sylius.theme.circular_dependency_checker.class">Sylius\Bundle\ThemeBundle\Loader\CircularDependencyChecker</parameter>
         <parameter key="sylius.theme.context.settable.class">Sylius\Bundle\ThemeBundle\Context\SettableThemeContext</parameter>
         <parameter key="sylius.theme.data_collector.class">Sylius\Bundle\ThemeBundle\Collector\ThemeDataCollector</parameter>
@@ -43,6 +42,7 @@
             <argument type="service" id="sylius.theme.hierarchy_provider" />
         </service>
 
+        <service id="sylius.factory.theme" class="%sylius.factory.theme.class%" />
         <service id="sylius.factory.theme_author" class="%sylius.factory.theme_author.class%" public="false" />
         <service id="sylius.factory.theme_screenshot" class="%sylius.factory.theme_screenshot.class%" public="false" />
 
@@ -50,10 +50,6 @@
             <argument type="service">
                 <service class="Zend\Hydrator\Reflection" />
             </argument>
-        </service>
-
-        <service id="sylius.theme.merger" class="%sylius.theme.merger.class%" public="false">
-            <argument type="service" id="sylius.theme.hydrator" />
         </service>
 
         <service id="sylius.theme.circular_dependency_checker" class="%sylius.theme.circular_dependency_checker.class%" public="false" />
@@ -67,15 +63,8 @@
             <argument type="service" id="sylius.theme.circular_dependency_checker" />
         </service>
 
-        <service id="sylius.theme.synchronizer" class="%sylius.theme.synchronizer.class%">
+        <service id="sylius.theme.repository" class="%sylius.theme.repository.class%">
             <argument type="service" id="sylius.theme.loader" />
-            <argument type="service" id="sylius.repository.theme" />
-            <argument type="service" id="sylius.theme.merger" />
-        </service>
-
-        <service id="sylius.theme.repository.in_memory" class="%sylius.theme.repository.in_memory.class%" lazy="true">
-            <argument type="service" id="sylius.theme.loader" />
-            <argument>%sylius.interface.theme.class%</argument>
         </service>
 
         <service id="sylius.theme.data_collector" class="%sylius.theme.data_collector.class%" public="false">

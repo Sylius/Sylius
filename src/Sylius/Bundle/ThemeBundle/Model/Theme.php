@@ -20,7 +20,7 @@ use Doctrine\Common\Collections\Collection;
 class Theme implements ThemeInterface
 {
     /**
-     * @var int
+     * @var string
      */
     protected $id;
 
@@ -32,20 +32,15 @@ class Theme implements ThemeInterface
     /**
      * @var string
      */
-    protected $title;
-
-    /**
-     * @var string
-     */
     protected $path;
 
     /**
-     * @var string
+     * @var string|null
      */
-    protected $code;
+    protected $title;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $description;
 
@@ -64,8 +59,13 @@ class Theme implements ThemeInterface
      */
     protected $screenshots;
 
-    public function __construct()
+    public function __construct($name, $path)
     {
+        $this->id = substr(md5($name), 0, 8);
+
+        $this->name = $name;
+        $this->path = $path;
+
         $this->authors = new ArrayCollection();
         $this->parents = new ArrayCollection();
         $this->screenshots = new ArrayCollection();
@@ -76,7 +76,7 @@ class Theme implements ThemeInterface
      */
     public function __toString()
     {
-        return $this->title;
+        return $this->title ?: $this->name ?: '';
     }
 
     /**
@@ -98,10 +98,9 @@ class Theme implements ThemeInterface
     /**
      * {@inheritdoc}
      */
-    public function setName($name)
+    public function getPath()
     {
-        $this->name = $name;
-        $this->code = substr(md5($name), 0, 8);
+        return $this->path;
     }
 
     /**
@@ -118,30 +117,6 @@ class Theme implements ThemeInterface
     public function setTitle($title)
     {
         $this->title = $title;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPath()
-    {
-        return $this->path;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setPath($path)
-    {
-        $this->path = $path;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCode()
-    {
-        return $this->code;
     }
 
     /**

@@ -53,12 +53,12 @@ final class ThemeSettingsManagerSpec extends ObjectBehavior
         ThemeInterface $theme,
         SettingsInterface $settings
     ) {
-        $theme->getCode()->willReturn('DEADBEEF');
+        $theme->getId()->willReturn('themeId');
 
-        $schemaRegistry->has('theme_DEADBEEF')->willReturn(true);
+        $schemaRegistry->has('theme_themeId')->willReturn(true);
         $schemaRegistry->register(Argument::cetera())->shouldNotBeCalled();
 
-        $decoratedSettingsManager->load('theme_DEADBEEF', null)->willReturn($settings);
+        $decoratedSettingsManager->load('theme_themeId', null)->willReturn($settings);
 
         $this->load($theme)->shouldReturn($settings);
     }
@@ -71,15 +71,15 @@ final class ThemeSettingsManagerSpec extends ObjectBehavior
         SettingsInterface $settings,
         SchemaInterface $schema
     ) {
-        $theme->getCode()->willReturn('DEADBEEF');
+        $theme->getId()->willReturn('themeId');
 
-        $schemaRegistry->has('theme_DEADBEEF')->willReturn(false);
+        $schemaRegistry->has('theme_themeId')->willReturn(false);
 
         $themeSettingsSchemaProvider->getSchema($theme)->willReturn($schema);
 
-        $schemaRegistry->register('theme_DEADBEEF', $schema)->shouldBeCalled();
+        $schemaRegistry->register('theme_themeId', $schema)->shouldBeCalled();
 
-        $decoratedSettingsManager->load('theme_DEADBEEF', null)->willReturn($settings);
+        $decoratedSettingsManager->load('theme_themeId', null)->willReturn($settings);
 
         $this->load($theme)->shouldReturn($settings);
     }

@@ -22,8 +22,6 @@
     "require": {
         "php": "^5.5.9|^7.0",
 
-        "sylius/resource-bundle": "^0.18",
-
         "symfony/symfony": "^2.7.7",
         "webmozart/assert": "^1.0",
         "zendframework/zend-hydrator": "^1.0|^2.0"
@@ -31,8 +29,6 @@
     "require-dev": {
         "sylius/settings-bundle": "^0.18",
 
-        "doctrine/doctrine-bundle": "^1.6",
-        "doctrine/orm": "^2.5",
         "matthiasnoback/symfony-config-test": "^1.4.0",
         "matthiasnoback/symfony-dependency-injection-test": "^0.7.6",
         "mikey179/vfsStream": "^1.6",

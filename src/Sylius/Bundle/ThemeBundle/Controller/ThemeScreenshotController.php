@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\ThemeBundle\Controller;
 
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -23,14 +23,14 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 final class ThemeScreenshotController
 {
     /**
-     * @var RepositoryInterface
+     * @var ThemeRepositoryInterface
      */
     private $themeRepository;
 
     /**
-     * @param RepositoryInterface $themeRepository
+     * @param ThemeRepositoryInterface $themeRepository
      */
-    public function __construct(RepositoryInterface $themeRepository)
+    public function __construct(ThemeRepositoryInterface $themeRepository)
     {
         $this->themeRepository = $themeRepository;
     }

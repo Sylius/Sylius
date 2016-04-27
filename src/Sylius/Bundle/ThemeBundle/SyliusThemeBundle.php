@@ -11,29 +11,18 @@
 
 namespace Sylius\Bundle\ThemeBundle;
 
-use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
-use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\ThemeBundle\Translation\DependencyInjection\Compiler\TranslatorAliasingPass;
 use Sylius\Bundle\ThemeBundle\Translation\DependencyInjection\Compiler\TranslatorFallbackLocalesPass;
 use Sylius\Bundle\ThemeBundle\Translation\DependencyInjection\Compiler\TranslatorLoaderProviderPass;
 use Sylius\Bundle\ThemeBundle\Translation\DependencyInjection\Compiler\TranslatorResourceProviderPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class SyliusThemeBundle extends AbstractResourceBundle
+class SyliusThemeBundle extends Bundle
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function getSupportedDrivers()
-    {
-        return [
-            SyliusResourceBundle::DRIVER_DOCTRINE_ORM,
-        ];
-    }
-
     /**
      * @param ContainerBuilder $container
      */
@@ -45,13 +34,5 @@ class SyliusThemeBundle extends AbstractResourceBundle
         $container->addCompilerPass(new TranslatorFallbackLocalesPass());
         $container->addCompilerPass(new TranslatorLoaderProviderPass());
         $container->addCompilerPass(new TranslatorResourceProviderPass());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getModelNamespace()
-    {
-        return 'Sylius\Bundle\ThemeBundle\Model';
     }
 }

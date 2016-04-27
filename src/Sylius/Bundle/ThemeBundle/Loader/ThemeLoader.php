@@ -104,7 +104,7 @@ final class ThemeLoader implements ThemeLoaderInterface
         $themes = [];
         foreach ($configurations as $configuration) {
             /** @var ThemeInterface $theme */
-            $themes[$configuration['name']] = $this->themeFactory->createNamed($configuration['name']);
+            $themes[$configuration['name']] = $this->themeFactory->create($configuration['name'], $configuration['path']);
         }
 
         return $themes;

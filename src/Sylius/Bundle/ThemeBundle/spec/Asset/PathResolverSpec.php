@@ -35,9 +35,9 @@ class PathResolverSpec extends ObjectBehavior
 
     function it_returns_modified_path_if_its_referencing_bundle_asset(ThemeInterface $theme)
     {
-        $theme->getCode()->willReturn('dead42beef');
+        $theme->getId()->willReturn('themeId');
 
-        $this->resolve('bundles/asset.min.js', $theme)->shouldReturn('bundles/_dead42beef/asset.min.js');
+        $this->resolve('bundles/asset.min.js', $theme)->shouldReturn('bundles/_themeId/asset.min.js');
     }
 
     function it_does_not_change_path_if_its_not_referencing_bundle_asset(ThemeInterface $theme)

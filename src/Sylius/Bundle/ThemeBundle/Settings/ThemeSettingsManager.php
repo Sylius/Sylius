@@ -56,7 +56,7 @@ final class ThemeSettingsManager implements ThemeSettingsManagerInterface
      */
     public function load(ThemeInterface $theme, $namespace = null)
     {
-        $schemaAlias = sprintf('theme_%s', $theme->getCode());
+        $schemaAlias = sprintf('theme_%s', $theme->getId());
 
         if (!$this->schemaRegistry->has($schemaAlias)) {
             $schema = $this->themeSettingsSchemaProvider->getSchema($theme);

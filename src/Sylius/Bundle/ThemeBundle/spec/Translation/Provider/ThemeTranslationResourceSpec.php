@@ -26,7 +26,7 @@ class ThemeTranslationResourceSpec extends ObjectBehavior
 {
     function let(ThemeInterface $theme)
     {
-        $theme->getCode()->willReturn('themecode');
+        $theme->getId()->willReturn('themeId');
 
         $this->beConstructedWith($theme, 'my-domain.my-locale.my-format');
     }
@@ -45,13 +45,13 @@ class ThemeTranslationResourceSpec extends ObjectBehavior
     {
         $this->getName()->shouldReturn('my-domain.my-locale.my-format');
         $this->getDomain()->shouldReturn('my-domain');
-        $this->getLocale()->shouldReturn('my-locale_themecode');
+        $this->getLocale()->shouldReturn('my-locale_themeId');
         $this->getFormat()->shouldReturn('my-format');
     }
 
     function it_throws_an_invalid_argument_exception_if_failed_to_instantiate_with_given_filepath(ThemeInterface $theme)
     {
-        $theme->getCode()->willReturn('themecode');
+        $theme->getId()->willReturn('themeId');
 
         $this->beConstructedWith($theme, 'one.dot');
 

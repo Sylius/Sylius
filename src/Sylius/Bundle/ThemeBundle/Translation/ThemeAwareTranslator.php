@@ -127,7 +127,7 @@ final class ThemeAwareTranslator implements TranslatorInterface, TranslatorBagIn
             $locale = $this->getLocale();
         }
 
-        $locale = $locale . '_' . $theme->getCode();;
+        $locale = $locale . '_' . $theme->getId();;
 
         return $locale;
     }
