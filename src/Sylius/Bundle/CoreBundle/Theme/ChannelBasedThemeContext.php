@@ -18,6 +18,7 @@ use Sylius\Component\Core\Model\ChannelInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Rafał Muszyński <rafal.muszynski@sourcefabric.org>
  */
 final class ChannelBasedThemeContext implements ThemeContextInterface
 {
@@ -49,5 +50,13 @@ final class ChannelBasedThemeContext implements ThemeContextInterface
         } catch (\Exception $exception) {
             return null;
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return;
     }
 }

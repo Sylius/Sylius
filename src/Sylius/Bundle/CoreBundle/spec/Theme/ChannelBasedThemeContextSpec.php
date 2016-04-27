@@ -24,6 +24,7 @@ use Sylius\Component\Core\Model\ChannelInterface;
  * @mixin ChannelBasedThemeContext
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Rafał Muszyński <rafal.muszynski@sourcefabric.org>
  */
 class ChannelBasedThemeContextSpec extends ObjectBehavior
 {
@@ -77,5 +78,9 @@ class ChannelBasedThemeContextSpec extends ObjectBehavior
         $channelContext->getChannel()->willThrow(\Exception::class);
 
         $this->getTheme()->shouldReturn(null);
+    }
+
+    function its_name_is_null() {
+        $this->getName()->shouldReturn(null);
     }
 }

@@ -35,14 +35,16 @@ class SyliusThemeExtension extends AbstractResourceExtension
         $loader->load('services.xml');
         $loader->load('templating.xml');
         $loader->load('translations.xml');
+        $loader->load('listeners.xml');
 
-        $container->setAlias('sylius.context.theme', $config['context']);
+        $container->setAlias('sylius.context.theme', $config['context']['service_id']);
 
         // TODO: Interfaces ready for filesystem decoupling, configuration not ready yet
         $loader->load('filesystem_configuration.xml');
         $container->setAlias('sylius.theme.configuration.loader', 'sylius.theme.configuration.loader.json_file');
         $container->setAlias('sylius.theme.configuration.provider', 'sylius.theme.configuration.provider.filesystem');
         $container->setParameter('sylius.theme.configuration.filesystem.locations', $config['sources']['filesystem']['locations']);
+        $container->setParameter('sylius.theme.configuration.context.context_aware_paths', $config['context']['context_aware_paths']);
 
         $loader->load(sprintf('driver/%s.xml', $config['driver']));
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);

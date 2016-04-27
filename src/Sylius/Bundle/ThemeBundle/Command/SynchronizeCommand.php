@@ -12,11 +12,15 @@
 namespace Sylius\Bundle\ThemeBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
+use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Rafał Muszyński <rafal.muszynski@sourcefabric.org>
  */
 final class SynchronizeCommand extends ContainerAwareCommand
 {
@@ -27,7 +31,10 @@ final class SynchronizeCommand extends ContainerAwareCommand
     {
         $this
             ->setName('sylius:theme:synchronize')
-            ->setDescription('Synchronize themes.')
+            ->setDefinition([
+                new InputArgument('theme', InputArgument::OPTIONAL, 'Theme name (e.g. sylius/demo-theme)'),
+            ])
+            ->setDescription('Synchronize theme(s).')
         ;
     }
 
@@ -36,10 +43,40 @@ final class SynchronizeCommand extends ContainerAwareCommand
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $output->write('Synchronizing themes... ');
+        $output->write('Synchronizing theme(s)... ');
 
-        $this->getContainer()->get('sylius.theme.synchronizer')->synchronize();
+        $this->getContainer()->get('sylius.theme.synchronizer')->synchronize(
+            $this->findTheme($input->getArgument('theme'))
+        );
 
         $output->writeln('Success!');
+    }
+
+    /**
+     * @param null|string $themeName
+     *
+     * @return null|ThemeInterface
+     */
+    private function findTheme($themeName = null)
+    {
+        if (null === $themeName) {
+            return;
+        }
+
+        /** @var ThemeInterface $theme */
+        $theme = $this->getThemeRepository()->findOneByName($themeName);
+        if (null === $theme) {
+            throw new \InvalidArgumentException(sprintf('Could not find theme identified by name "%s"', $themeName));
+        }
+
+        return $theme;
+    }
+
+    /**
+     * @return ThemeRepositoryInterface
+     */
+    private function getThemeRepository()
+    {
+        return $this->getContainer()->get('sylius.repository.theme');
     }
 }

@@ -119,6 +119,24 @@ class Configuration implements ConfigurationInterface
      */
     private function addContextConfiguration(ArrayNodeDefinition $rootNode)
     {
-        $rootNode->children()->scalarNode('context')->defaultValue('sylius.theme.context.settable')->cannotBeEmpty();
+        $rootNode
+            ->children()
+                ->arrayNode('context')
+                    ->beforeNormalization()
+                    ->ifString()
+                        ->then(function($value) { return ['service_id' => $value]; })
+                    ->end()
+                    ->children()
+                        ->scalarNode('service_id')
+                            ->defaultValue('sylius.theme.context.settable')
+                            ->cannotBeEmpty()
+                        ->end()
+                        ->booleanNode('context_aware_paths')
+                            ->defaultFalse()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
     }
 }

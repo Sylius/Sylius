@@ -17,6 +17,7 @@ use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Rafał Muszyński <rafal.muszynski@sourcefabric.org>
  */
 final class ThemeSynchronizer implements ThemeSynchronizerInterface
 {
@@ -53,10 +54,10 @@ final class ThemeSynchronizer implements ThemeSynchronizerInterface
     /**
      * {@inheritdoc}
      */
-    public function synchronize()
+    public function synchronize(ThemeInterface $theme = null)
     {
-        $persistedThemes = $this->themeRepository->findAll();
         $loadedThemes = $this->themeLoader->load();
+        $persistedThemes = $this->getPersisted($theme);
 
         $removedThemes = $this->removeAbandonedThemes($persistedThemes, $loadedThemes);
         $existingThemes = array_udiff(
@@ -68,6 +69,20 @@ final class ThemeSynchronizer implements ThemeSynchronizerInterface
         );
 
         $this->updateThemes($existingThemes, $loadedThemes);
+    }
+
+    /**
+     * @param  ThemeInterface|null $theme
+     *
+     * @return ThemeInterface[]
+     */
+    private function getPersisted(ThemeInterface $theme = null)
+    {
+        if (null !== $theme) {
+            return [$theme];
+        }
+
+        return $this->themeRepository->findAll();
     }
 
     /**

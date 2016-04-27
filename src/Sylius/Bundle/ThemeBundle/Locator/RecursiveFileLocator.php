@@ -12,11 +12,13 @@
 namespace Sylius\Bundle\ThemeBundle\Locator;
 
 use Sylius\Bundle\ThemeBundle\Factory\FinderFactoryInterface;
-use Symfony\Component\Finder\Finder;
+use Sylius\Bundle\ThemeBundle\Helper\PathHelperInterface;
+use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\Finder\SplFileInfo;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Rafał Muszyński <rafal.muszynski@sourcefabric.org>
  */
 final class RecursiveFileLocator implements FileLocatorInterface
 {
@@ -31,13 +33,20 @@ final class RecursiveFileLocator implements FileLocatorInterface
     private $paths;
 
     /**
-     * @param FinderFactoryInterface $finderFactory
-     * @param array $paths An array of paths where to look for resources
+     * @var PathHelperInterface
      */
-    public function __construct(FinderFactoryInterface $finderFactory, array $paths)
+    private $helper;
+
+    /**
+     * @param FinderFactoryInterface $finderFactory
+     * @param array                  $paths         An array of paths where to look for resources
+     * @param PathHelperInterface    $helper
+     */
+    public function __construct(FinderFactoryInterface $finderFactory, array $paths, PathHelperInterface $helper)
     {
         $this->finderFactory = $finderFactory;
         $this->paths = $paths;
+        $this->helper = $helper;
     }
 
     /**
@@ -65,6 +74,7 @@ final class RecursiveFileLocator implements FileLocatorInterface
     {
         $this->assertNameIsNotEmpty($name);
 
+        $this->paths = $this->helper->applySuffixFor($this->paths);
         $found = false;
         foreach ($this->paths as $path) {
             try {

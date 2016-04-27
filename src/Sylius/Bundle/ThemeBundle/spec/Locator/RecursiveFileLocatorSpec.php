@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\ThemeBundle\Locator;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface;
 use Sylius\Bundle\ThemeBundle\Factory\FinderFactoryInterface;
 use Sylius\Bundle\ThemeBundle\Locator\FileLocatorInterface;
 use Sylius\Bundle\ThemeBundle\Locator\RecursiveFileLocator;
@@ -22,6 +23,7 @@ use Symfony\Component\Finder\SplFileInfo;
  * @mixin RecursiveFileLocator
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Rafał Muszyński <rafal.muszynski@sourcefabric.org>
  */
 class RecursiveFileLocatorSpec extends ObjectBehavior
 {
@@ -58,6 +60,81 @@ class RecursiveFileLocatorSpec extends ObjectBehavior
         $this->locateFileNamed('readme.md')->shouldReturn('/search/path/nested/readme.md');
     }
 
+    function it_searches_for_file_per_context_directory(
+        FinderFactoryInterface $finderFactory,
+        Finder $finder,
+        SplFileInfo $splFileInfo,
+        ThemeContextInterface $themeContext
+    ) {
+        $finderFactory->create()->willReturn($finder);
+        $themeContext->getName()->shouldBeCalled()->willReturn('context_dir');
+
+        $finder->name('readme.md')->shouldBeCalled()->willReturn($finder);
+        $finder->in('/search/path/context_dir')->shouldBeCalled()->willReturn($finder);
+        $finder->ignoreUnreadableDirs()->shouldBeCalled()->willReturn($finder);
+        $finder->files()->shouldBeCalled()->willReturn($finder);
+
+        $finder->getIterator()->willReturn(new \ArrayIterator([
+            $splFileInfo->getWrappedObject(),
+        ]));
+
+        $splFileInfo->getPathname()->willReturn('/search/path/context_dir/nested/readme.md');
+
+        $this->isContextAware(true)->shouldBeNull();
+        $this->setThemeContext($themeContext)->shouldBeNull();
+        $this->locateFileNamed('readme.md')->shouldReturn('/search/path/context_dir/nested/readme.md');
+    }
+
+    function it_does_not_make_context_aware_paths_when_no_context_name(
+        FinderFactoryInterface $finderFactory,
+        Finder $finder,
+        SplFileInfo $splFileInfo,
+        ThemeContextInterface $themeContext
+    ) {
+        $finderFactory->create()->willReturn($finder);
+        $themeContext->getName()->shouldBeCalled()->willReturn(null);
+
+        $finder->name('readme.md')->shouldBeCalled()->willReturn($finder);
+        $finder->in('/search/path/')->shouldBeCalled()->willReturn($finder);
+        $finder->ignoreUnreadableDirs()->shouldBeCalled()->willReturn($finder);
+        $finder->files()->shouldBeCalled()->willReturn($finder);
+
+        $finder->getIterator()->willReturn(new \ArrayIterator([
+            $splFileInfo->getWrappedObject(),
+        ]));
+
+        $splFileInfo->getPathname()->willReturn('/search/path/nested/readme.md');
+
+        $this->isContextAware(true)->shouldBeNull();
+        $this->setThemeContext($themeContext)->shouldBeNull();
+        $this->locateFileNamed('readme.md')->shouldReturn('/search/path/nested/readme.md');
+    }
+
+    function it_should_not_make_context_aware_paths_when_setting_disabled(
+        FinderFactoryInterface $finderFactory,
+        Finder $finder,
+        SplFileInfo $splFileInfo,
+        ThemeContextInterface $themeContext
+    ) {
+        $finderFactory->create()->willReturn($finder);
+        $themeContext->getName()->shouldNotBeCalled();
+
+        $finder->name('readme.md')->shouldBeCalled()->willReturn($finder);
+        $finder->in('/search/path/')->shouldBeCalled()->willReturn($finder);
+        $finder->ignoreUnreadableDirs()->shouldBeCalled()->willReturn($finder);
+        $finder->files()->shouldBeCalled()->willReturn($finder);
+
+        $finder->getIterator()->willReturn(new \ArrayIterator([
+            $splFileInfo->getWrappedObject(),
+        ]));
+
+        $splFileInfo->getPathname()->willReturn('/search/path/nested/readme.md');
+
+        $this->isContextAware(false)->shouldBeNull();
+        $this->setThemeContext($themeContext)->shouldBeNull();
+        $this->locateFileNamed('readme.md')->shouldReturn('/search/path/nested/readme.md');
+    }
+
     function it_searches_for_files(
         FinderFactoryInterface $finderFactory,
         Finder $finder,
@@ -82,6 +159,37 @@ class RecursiveFileLocatorSpec extends ObjectBehavior
         $this->locateFilesNamed('readme.md')->shouldReturn([
             '/search/path/nested1/readme.md',
             '/search/path/nested2/readme.md',
+        ]);
+    }
+
+    function it_searches_for_files_per_context_directory(
+        FinderFactoryInterface $finderFactory,
+        Finder $finder,
+        SplFileInfo $firstSplFileInfo,
+        SplFileInfo $secondSplFileInfo,
+        ThemeContextInterface $themeContext
+    ) {
+        $finderFactory->create()->willReturn($finder);
+        $themeContext->getName()->shouldBeCalled()->willReturn('context_dir');
+
+        $finder->name('readme.md')->shouldBeCalled()->willReturn($finder);
+        $finder->in('/search/path/context_dir')->shouldBeCalled()->willReturn($finder);
+        $finder->ignoreUnreadableDirs()->shouldBeCalled()->willReturn($finder);
+        $finder->files()->shouldBeCalled()->willReturn($finder);
+
+        $finder->getIterator()->willReturn(new \ArrayIterator([
+            $firstSplFileInfo->getWrappedObject(),
+            $secondSplFileInfo->getWrappedObject(),
+        ]));
+
+        $firstSplFileInfo->getPathname()->willReturn('/search/path/context_dir/nested1/readme.md');
+        $secondSplFileInfo->getPathname()->willReturn('/search/path/context_dir/nested2/readme.md');
+
+        $this->isContextAware(true)->shouldBeNull();
+        $this->setThemeContext($themeContext)->shouldBeNull();
+        $this->locateFilesNamed('readme.md')->shouldReturn([
+            '/search/path/context_dir/nested1/readme.md',
+            '/search/path/context_dir/nested2/readme.md',
         ]);
     }
 
