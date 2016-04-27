@@ -46,5 +46,7 @@ class SyliusChannelExtension extends AbstractResourceExtension
         foreach ($configFiles as $configFile) {
             $loader->load($configFile);
         }
+
+        $container->getDefinition('sylius.repository.channel')->setLazy(true);
     }
 }

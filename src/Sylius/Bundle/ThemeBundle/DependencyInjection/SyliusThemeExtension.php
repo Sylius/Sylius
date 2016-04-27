@@ -47,6 +47,8 @@ class SyliusThemeExtension extends AbstractResourceExtension
         $loader->load(sprintf('driver/%s.xml', $config['driver']));
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
+        $container->getDefinition('sylius.repository.theme')->setLazy(true);
+
         $container->setParameter('sylius.interface.theme.class', $config['resources']['theme']['classes']['interface']);
     }
 }
