@@ -124,7 +124,7 @@ final class ManagingProductAttributesContext implements Context
         $this->indexPage->open();
 
         Assert::true(
-            $this->indexPage->isResourceOnPage(['name' => $name]),
+            $this->indexPage->isSingleResourceOnPage(['name' => $name]),
             sprintf('The product attribute with name %s should appear on page, but it does not.', $name)
         );
     }
@@ -205,7 +205,7 @@ final class ManagingProductAttributesContext implements Context
         $this->indexPage->open();
 
         Assert::true(
-            $this->indexPage->isResourceOnPage(['code' => $code]),
+            $this->indexPage->isSingleResourceOnPage(['code' => $code]),
             sprintf('There should be only one product attribute with code %s, but it does not.', $code)
         );
     }
@@ -234,7 +234,7 @@ final class ManagingProductAttributesContext implements Context
         $this->indexPage->open();
 
         Assert::false(
-            $this->indexPage->isResourceOnPage([$elementName => $elementValue]),
+            $this->indexPage->isSingleResourceOnPage([$elementName => $elementValue]),
             sprintf('There should not be product attribute with %s %s, but it is.', $elementName, $elementValue)
         );
     }
@@ -290,7 +290,7 @@ final class ManagingProductAttributesContext implements Context
     public function thisProductAttributeShouldNoLongerExistInTheRegistry(AttributeInterface $productAttribute)
     {
         Assert::false(
-            $this->indexPage->isResourceOnPage(['code' => $productAttribute->getCode()]),
+            $this->indexPage->isSingleResourceOnPage(['code' => $productAttribute->getCode()]),
             sprintf('Product attribute %s should no exist in the registry, but it does.', $productAttribute->getName())
         );
     }
