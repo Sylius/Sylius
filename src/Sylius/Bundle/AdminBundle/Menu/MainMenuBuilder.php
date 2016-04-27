@@ -49,6 +49,69 @@ final class MainMenuBuilder extends AbstractAdminMenuBuilder
     /**
      * @param ItemInterface $menu
      */
+    private function configureMarketingSubMenu(ItemInterface $menu)
+    {
+        $marketingSubMenu = $menu
+            ->addChild('marketing')
+            ->setLabel('sylius.menu.admin.main.marketing.header')
+        ;
+
+        $marketingSubMenu
+            ->addChild('promotions', ['route' => 'sylius_admin_promotion_index'])
+            ->setLabel('sylius.menu.admin.main.marketing.promotions')
+            ->setLabelAttribute('icon', 'in cart')
+        ;
+    }
+
+    /**
+     * @param ItemInterface $menu
+     */
+    private function configureCustomersSubMenu(ItemInterface $menu)
+    {
+        $customersSubMenu = $menu
+            ->addChild('customers')
+            ->setLabel('sylius.menu.admin.main.customers.header')
+        ;
+
+        $customersSubMenu
+            ->addChild('customers', ['route' => 'sylius_admin_customer_index'])
+            ->setLabel('sylius.menu.admin.main.customers.customers')
+            ->setLabelAttribute('icon', 'users')
+        ;
+    }
+
+    /**
+     * @param ItemInterface $menu
+     */
+    private function configureCatalogSubMenu(ItemInterface $menu)
+    {
+        $catalogSubMenu = $menu
+            ->addChild('catalog')
+            ->setLabel('sylius.menu.admin.main.catalog.header')
+        ;
+
+        $catalogSubMenu
+            ->addChild('attributes', ['route' => 'sylius_admin_product_attribute_index'])
+            ->setLabel('sylius.menu.admin.main.catalog.attributes')
+            ->setLabelAttribute('icon', 'cubes')
+        ;
+
+        $catalogSubMenu
+            ->addChild('product_options', ['route' => 'sylius_admin_product_option_index'])
+            ->setLabel('sylius.menu.admin.main.catalog.product_options')
+            ->setLabelAttribute('icon', 'options')
+        ;
+
+        $catalogSubMenu
+            ->addChild('taxons', ['route' => 'sylius_admin_taxon_create'])
+            ->setLabel('sylius.menu.admin.main.catalog.taxons')
+            ->setLabelAttribute('icon', 'folder')
+        ;
+    }
+
+    /**
+     * @param ItemInterface $menu
+     */
     private function configureConfigurationSubMenu(ItemInterface $menu)
     {
         $configurationSubMenu = $menu
@@ -108,69 +171,6 @@ final class MainMenuBuilder extends AbstractAdminMenuBuilder
             ->addChild('channels', ['route' => 'sylius_admin_channel_index'])
             ->setLabel('sylius.menu.admin.main.configuration.channels')
             ->setLabelAttribute('icon', 'random')
-        ;
-    }
-
-    /**
-     * @param ItemInterface $menu
-     */
-    private function configureMarketingSubMenu(ItemInterface $menu)
-    {
-        $marketingSubMenu = $menu
-            ->addChild('marketing')
-            ->setLabel('sylius.menu.admin.main.marketing.header')
-        ;
-
-        $marketingSubMenu
-            ->addChild('promotions', ['route' => 'sylius_admin_promotion_index'])
-            ->setLabel('sylius.menu.admin.main.marketing.promotions')
-            ->setLabelAttribute('icon', 'in cart')
-        ;
-    }
-
-    /**
-     * @param ItemInterface $menu
-     */
-    private function configureCustomersSubMenu(ItemInterface $menu)
-    {
-        $customerSubMenu = $menu
-            ->addChild('customers')
-            ->setLabel('sylius.menu.admin.main.customers.header')
-        ;
-
-        $customerSubMenu
-            ->addChild('customers', ['route' => 'sylius_admin_customer_index'])
-            ->setLabel('sylius.menu.admin.main.customers.customers')
-            ->setLabelAttribute('icon', 'users')
-        ;
-    }
-
-    /**
-     * @param ItemInterface $menu
-     */
-    private function configureCatalogSubMenu(ItemInterface $menu)
-    {
-        $catalogSubMenu = $menu
-            ->addChild('catalog')
-            ->setLabel('sylius.menu.admin.main.catalog.header')
-        ;
-
-        $catalogSubMenu
-            ->addChild('attributes', ['route' => 'sylius_admin_product_attribute_index'])
-            ->setLabel('sylius.menu.admin.main.catalog.attributes')
-            ->setLabelAttribute('icon', 'cubes')
-        ;
-
-        $catalogSubMenu
-            ->addChild('product_options', ['route' => 'sylius_admin_product_option_index'])
-            ->setLabel('sylius.menu.admin.main.catalog.product_options')
-            ->setLabelAttribute('icon', 'options')
-        ;
-
-        $catalogSubMenu
-            ->addChild('taxons', ['route' => 'sylius_admin_taxon_create'])
-            ->setLabel('sylius.menu.admin.main.catalog.taxons')
-            ->setLabelAttribute('icon', 'folder')
         ;
     }
 }
