@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CoreBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
@@ -26,17 +27,20 @@ class LazyCacheWarmupPass implements CompilerPassInterface
     {
         $this->markServiceAsLazy($container, 'cmf_core.templating.helper');
         $this->markServiceAsLazy($container, 'cmf_create.rdf_type_factory');
+        $this->markServiceAsLazy($container, 'fos_oauth_server.server');
     }
 
     /**
      * @param ContainerBuilder $container
-     * @param $id
+     * @param string $id
      */
     private function markServiceAsLazy(ContainerBuilder $container, $id)
     {
-        if ($container->hasDefinition($id)) {
+        try {
             $definition = $container->findDefinition($id);
             $definition->setLazy(true);
+        } catch (InvalidArgumentException $exception) {
+            // intentionally left blank
         }
     }
 }
