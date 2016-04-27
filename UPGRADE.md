@@ -13,6 +13,11 @@ UPGRADE
 
 * Removed "exclude" option from ``taxon`` rule
 
+### SettingsBundle
+
+* Renamed `sylius_settings_all()` Twig function to `sylius_settings()`
+* Removed `sylius_settings_get('foo.property')` and `sylius_settings_has('foo.property')` Twig functions, use 
+  `sylius_settings('foo').property` and `sylius_settings('foo').property is defined` instead
 
 ## From 0.16 to 0.17.x
 
