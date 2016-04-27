@@ -26,18 +26,18 @@ prepare_for_behat_with_js() {
 }
 
 run_brand_new_behat() {
-    print_header "Testing (Behat - brand new, javascript scenarios; @javascript && ~@legacy)" "Sylius"
-    run_command "bin/behat --strict -f progress -p cached --tags=\"@javascript && ~@legacy\""
+    print_header "Testing (Behat - brand new, javascript scenarios; @javascript && ~@legacy && ~@todo && ~@cli)" "Sylius"
+    run_command "bin/behat --strict -f progress -p cached --tags=\"@javascript && ~@legacy && ~@todo && ~@cli\""
     if [[ $? = 1 ]]; then
-        run_command "bin/behat --strict -f progress -p cached --tags=\"@javascript && ~@legacy\" --rerun"
+        run_command "bin/behat --strict -f progress -p cached --tags=\"@javascript && ~@legacy && ~@todo && ~@cli\" --rerun"
     fi
 }
 
 run_legacy_behat() {
-    print_header "Testing (Behat - legacy, javascript scenarios; @javascript && @legacy)" "Sylius"
-    run_command "bin/behat --strict -f progress -p cached --tags=\"@javascript && @legacy\""
+    print_header "Testing (Behat - legacy, javascript scenarios; @javascript && @legacy && ~@todo && ~@cli)" "Sylius"
+    run_command "bin/behat --strict -f progress -p cached --tags=\"@javascript && @legacy && ~@todo && ~@cli\""
     if [[ $? = 1 ]]; then
-        run_command "bin/behat --strict -f progress -p cached --tags=\"@javascript && @legacy\" --rerun"
+        run_command "bin/behat --strict -f progress -p cached --tags=\"@javascript && @legacy && ~@todo && ~@cli\" --rerun"
     fi
 }
 
