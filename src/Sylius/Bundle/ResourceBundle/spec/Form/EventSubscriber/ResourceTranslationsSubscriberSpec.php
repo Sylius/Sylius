@@ -79,15 +79,45 @@ class ResourceTranslationsSubscriberSpec extends ObjectBehavior
         $event->getData()->willReturn($data);
         $event->getForm()->willReturn($form);
         $form->getParent()->willReturn($parent);
-        $parent->getNormData()->willReturn($translatable);
+        $parent->getData()->willReturn($translatable);
         $data->getIterator()->willReturn(new \ArrayIterator(['en_US' => $englishTranslation->getWrappedObject(), 'pl_PL' => $polishTranslation->getWrappedObject()]));
 
         $englishTranslation->setLocale('en_US')->shouldBeCalled();
         $englishTranslation->setTranslatable($translatable)->shouldBeCalled();
         $polishTranslation->setLocale('pl_PL')->shouldBeCalled();
         $polishTranslation->setTranslatable($translatable)->shouldBeCalled();
+        $event->setData($data)->shouldBeCalled();
 
         $this->submit($event);
 
+    }
+
+    function it_removes_empty_translations(
+        FormEvent $event,
+        FormInterface $form,
+        Collection $data,
+        FormInterface $parent,
+        TranslatableInterface $translatable,
+        TranslationInterface $englishTranslation,
+        \Iterator $iterator
+    ) {
+        $event->getData()->willReturn($data);
+        $event->getForm()->willReturn($form);
+        $form->getParent()->willReturn($parent);
+        $parent->getData()->willReturn($translatable);
+
+        $data->getIterator()->willReturn($iterator);
+        $iterator->rewind()->shouldBeCalled();
+        $iterator->valid()->willReturn(true, true, false)->shouldBeCalled();
+        $iterator->current()->willReturn($englishTranslation, null);
+        $iterator->key()->willReturn('en_US', 'pl_PL');
+
+        $englishTranslation->setLocale('en_US')->shouldBeCalled();
+        $englishTranslation->setTranslatable($translatable)->shouldBeCalled();
+        $iterator->next()->shouldBeCalled();
+        $data->offsetUnset('pl_PL')->shouldBeCalled();
+        $event->setData($data)->shouldBeCalled();
+
+        $this->submit($event);
     }
 }
