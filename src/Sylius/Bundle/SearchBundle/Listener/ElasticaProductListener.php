@@ -107,9 +107,9 @@ class ElasticaProductListener implements EventSubscriber
     }
 
     /**
-     * @param ProductInterface $product
+     * @param ProductInterface|null $product
      */
-    private function addScheduledForUpdate(ProductInterface $product)
+    private function addScheduledForUpdate(ProductInterface $product = null)
     {
         if ($this->objectPersister->handlesObject($product)) {
             $this->scheduledForUpdate[] = $product;
