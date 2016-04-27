@@ -5,7 +5,8 @@ Feature: Deleting a taxon
     I want to be able to delete a taxon
 
     Background:
-        Given I am logged in as an administrator
+        Given the store operates on a single channel in "France"
+        And I am logged in as an administrator
 
     @ui
     Scenario: Deleted taxon should disappear from the registry

@@ -123,6 +123,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'starts_at' => '#sylius_promotion_startsAt',
             'starts_at_date' => '#sylius_promotion_startsAt_date',
             'starts_at_time' => '#sylius_promotion_startsAt_time',
+            'ends_at' => '#sylius_promotion_endsAt',
             'ends_at_date' => '#sylius_promotion_endsAt_date',
             'ends_at_time' => '#sylius_promotion_endsAt_time',
         ];

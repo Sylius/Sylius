@@ -65,9 +65,9 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         $leafs = $this->getLeafs();
         foreach ($leafs as $leaf) {
             if ($leaf->getText() === $name) {
-                $leaf->pressButton('Delete');
+                $leaf->getParent()->pressButton('Delete');
 
-                break;
+                return;
             }
         }
 

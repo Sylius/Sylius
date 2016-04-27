@@ -2,19 +2,25 @@ sylius_admin_taxon:
     resource: |
         alias: sylius.taxon
         section: admin
-        templates: SyliusAdminBundle:Crud
-        only: ['update', 'delete']
+        templates: SyliusAdminBundle:Taxon
+        except: ['show', 'index']
         redirect: update
         vars:
             all:
+                subheader: sylius.ui.manage_categorization_of_your_products
                 templates:
                     form: SyliusAdminBundle:Taxon:_form.html.twig
-                    subheader: sylius.ui.manage_taxons
-                    icon: folder
     type: sylius.resource
 
 sylius_admin_taxon_index:
     path: /taxons/
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: sylius_admin_taxon_create
+        permanent: true
+
+sylius_admin_taxon_tree:
+    path: /taxons/tree
     methods: [GET]
     defaults:
         _controller: sylius.controller.taxon:indexAction
@@ -23,18 +29,3 @@ sylius_admin_taxon_index:
             repository:
                 method: findRootNodes
     host: "localhost"
-
-sylius_admin_taxon_create:
-    path: /taxons/new
-    methods: [GET, POST]
-    defaults:
-        _controller: sylius.controller.taxon:createAction
-        _sylius:
-            template: SyliusAdminBundle:Taxon:create.html.twig
-            section: admin
-            redirect:
-                route: sylius_admin_taxon_update
-                parameters: { id: resource.id }
-            vars:
-                templates:
-                    form: SyliusAdminBundle:Taxon:_form.html.twig
