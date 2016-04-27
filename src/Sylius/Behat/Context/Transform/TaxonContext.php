@@ -42,9 +42,12 @@ final class TaxonContext implements Context
      * @Transform /^parent taxon to "([^"]+)"$/
      * @Transform /^taxon with "([^"]+)" name/
      */
-    public function getTaxonByName($taxonName)
+    public function getTaxonByName($name)
     {
-        return $this->getTaxonBy(['name' => $taxonName]);
+        $taxon = $this->taxonRepository->findOneByName($name);
+        Assert::notNull($taxon, sprintf('Taxon with name "%s" does not exist.', $name));
+
+        return $taxon;
     }
 
     /**
@@ -52,7 +55,10 @@ final class TaxonContext implements Context
      */
     public function getTaxonByCode($code)
     {
-        return $this->getTaxonBy(['code' => $code]);
+        $taxon = $this->taxonRepository->findOneBy(['code' => $code]);
+        Assert::notNull($taxon, sprintf('Taxon with code "%s" does not exist.', $code));
+
+        return $taxon;
     }
 
     /**
@@ -66,16 +72,5 @@ final class TaxonContext implements Context
         ];
     }
 
-    /**
-     * @param array $parameters
-     *
-     * @return object
-     */
-    private function getTaxonBy(array $parameters)
-    {
-        $taxon = $this->taxonRepository->findOneBy($parameters);
-        Assert::notNull($taxon, 'Taxon does not exist.');
 
-        return $taxon;
-    }
 }

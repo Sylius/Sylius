@@ -5,7 +5,8 @@ Feature: Adding a new taxon
     I want to add a new taxon to the registry
 
     Background:
-        Given I am logged in as an administrator
+        Given the store operates on a single channel in "France"
+        And I am logged in as an administrator
 
     @ui
     Scenario: Adding a new taxon

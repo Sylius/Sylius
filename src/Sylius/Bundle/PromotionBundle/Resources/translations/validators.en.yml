@@ -14,8 +14,7 @@ sylius:
             max_length: Promotion name must not be longer than 1 character.|Promotion name must not be longer than {{ limit }} characters.
             min_length: Promotion name must be at least 1 character long.|Promotion name must be at least {{ limit }} characters long.
             not_blank: Please enter promotion name.
-        endsAt:
-            end_date_cannot_be_set_prior_start_date: End date cannot be set prior start date.
+        end_date_cannot_be_set_prior_start_date: End date cannot be set prior start date.
     promotion_coupon:
         code:
             max_length: Coupon code must not be longer than 1 character.|Coupon code must not be longer than {{ limit }} characters.
