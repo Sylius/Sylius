@@ -13,7 +13,7 @@ Feature: Editing a locale
         And I want to edit this locale
         When I disable it
         And I save my changes
-        Then I should be notified about successful edition
+        Then I should be notified that it has been successfully edited
         And this locale should be disabled
 
     @ui
@@ -22,5 +22,5 @@ Feature: Editing a locale
         And I want to edit this locale
         When I enable it
         And I save my changes
-        Then I should be notified about successful edition
+        Then I should be notified that it has been successfully edited
         And this locale should be enabled

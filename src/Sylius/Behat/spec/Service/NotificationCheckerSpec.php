@@ -41,30 +41,6 @@ class NotificationCheckerSpec extends ObjectBehavior
         $this->shouldImplement(NotificationCheckerInterface::class);
     }
 
-    function it_checks_if_successful_creation_notification_has_appeared(NotificationAccessorInterface $notificationAccessor)
-    {
-        $notificationAccessor->getType()->willReturn(NotificationType::success());
-        $notificationAccessor->getMessage()->willReturn('Some resource has been successfully created.');
-
-        $this->checkCreationNotification('some_resource');
-    }
-
-    function it_checks_if_successful_edition_notification_has_appeared(NotificationAccessorInterface $notificationAccessor)
-    {
-        $notificationAccessor->getType()->willReturn(NotificationType::success());
-        $notificationAccessor->getMessage()->willReturn('Some resource has been successfully updated.');
-
-        $this->checkEditionNotification('some_resource');
-    }
-
-    function it_checks_if_successful_deletion_notification_has_appeared(NotificationAccessorInterface $notificationAccessor)
-    {
-        $notificationAccessor->getType()->willReturn(NotificationType::success());
-        $notificationAccessor->getMessage()->willReturn('Some resource has been successfully deleted.');
-
-        $this->checkDeletionNotification('some_resource');
-    }
-
     function it_checks_if_successful_notification_has_appeared(NotificationAccessorInterface $notificationAccessor)
     {
         $notificationAccessor->getType()->willReturn(NotificationType::success());

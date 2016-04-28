@@ -27,8 +27,6 @@ use Webmozart\Assert\Assert;
  */
 final class ManagingZonesContext implements Context
 {
-    const RESOURCE_NAME = 'zone';
-
     /**
      * @var CreatePageInterface
      */
@@ -188,30 +186,6 @@ final class ManagingZonesContext implements Context
     public function iSaveMyChanges()
     {
         $this->updatePage->saveChanges();
-    }
-
-    /**
-     * @Then I should be notified that it has been successfully created
-     */
-    public function iShouldBeNotifiedAboutSuccessfulCreation()
-    {
-        $this->notificationChecker->checkCreationNotification(self::RESOURCE_NAME);
-    }
-
-    /**
-     * @Then I should be notified that it has been successfully edited
-     */
-    public function iShouldBeNotifiedAboutSuccessfulEdition()
-    {
-        $this->notificationChecker->checkEditionNotification(self::RESOURCE_NAME);
-    }
-
-    /**
-     * @Then I should be notified that it has been successfully deleted
-     */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted()
-    {
-        $this->notificationChecker->checkDeletionNotification(self::RESOURCE_NAME);
     }
 
     /**

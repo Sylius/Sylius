@@ -28,8 +28,6 @@ use Webmozart\Assert\Assert;
  */
 final class ManagingShippingMethodsContext implements Context
 {
-    const RESOURCE_NAME = 'shipping_method';
-
     /**
      * @var SharedStorageInterface
      */
@@ -136,14 +134,6 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
-     * @Then I should be notified that it has been successfully created
-     */
-    public function iShouldBeNotifiedItHasBeenSuccessfullyCreated()
-    {
-        $this->notificationChecker->checkCreationNotification(self::RESOURCE_NAME);
-    }
-
-    /**
      * @When I choose :calculatorName calculator
      * @When I do not specify amount for :calculatorName calculator
      */
@@ -244,14 +234,6 @@ final class ManagingShippingMethodsContext implements Context
     public function iSaveMyChanges()
     {
         $this->updatePage->saveChanges();
-    }
-
-    /**
-     * @Then I should be notified about successful edition
-     */
-    public function iShouldBeNotifiedAboutSuccessfulEdition()
-    {
-        $this->notificationChecker->checkEditionNotification(self::RESOURCE_NAME);
     }
 
     /**
@@ -386,14 +368,6 @@ final class ManagingShippingMethodsContext implements Context
             $this->indexPage->isSingleResourceOnPage(['code' => $shippingMethod->getCode()]),
             sprintf('Shipping method with code %s exists but should not.', $shippingMethod->getCode())
         );
-    }
-
-    /**
-     * @Then I should be notified that it has been successfully deleted
-     */
-    public function iShouldBeNotifiedAboutSuccessfulDeletion()
-    {
-        $this->notificationChecker->checkDeletionNotification(self::RESOURCE_NAME);
     }
 
     /**

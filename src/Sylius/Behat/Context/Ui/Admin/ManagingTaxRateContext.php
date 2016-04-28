@@ -15,7 +15,6 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\TaxRate\UpdatePageInterface;
 use Sylius\Behat\Service\CurrentPageResolverInterface;
-use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Page\Admin\TaxRate\CreatePageInterface;
 use Sylius\Component\Core\Model\TaxRateInterface;
 use Webmozart\Assert\Assert;
@@ -25,8 +24,6 @@ use Webmozart\Assert\Assert;
  */
 final class ManagingTaxRateContext implements Context
 {
-    const RESOURCE_NAME = 'tax_rate';
-
     /**
      * @var IndexPageInterface
      */
@@ -48,29 +45,21 @@ final class ManagingTaxRateContext implements Context
     private $currentPageResolver;
 
     /**
-     * @var NotificationCheckerInterface
-     */
-    private $notificationChecker;
-
-    /**
      * @param IndexPageInterface $indexPage
      * @param CreatePageInterface $createPage
      * @param UpdatePageInterface $updatePage
      * @param CurrentPageResolverInterface $currentPageResolver
-     * @param NotificationCheckerInterface $notificationChecker
      */
     public function __construct(
         IndexPageInterface $indexPage,
         CreatePageInterface $createPage, 
         UpdatePageInterface $updatePage, 
-        CurrentPageResolverInterface $currentPageResolver, 
-        NotificationCheckerInterface $notificationChecker
+        CurrentPageResolverInterface $currentPageResolver
     ) {
         $this->indexPage = $indexPage;
         $this->createPage = $createPage;
         $this->updatePage = $updatePage;
         $this->currentPageResolver = $currentPageResolver;
-        $this->notificationChecker = $notificationChecker;
     }
 
     /**
@@ -161,14 +150,6 @@ final class ManagingTaxRateContext implements Context
     }
 
     /**
-     * @Then I should be notified that it has been successfully created
-     */
-    public function iShouldBeNotifiedItHasBeenSuccessfulCreation()
-    {
-        $this->notificationChecker->checkCreationNotification(self::RESOURCE_NAME);
-    }
-
-    /**
      * @When I delete tax rate :taxRate
      */
     public function iDeletedTaxRate(TaxRateInterface $taxRate)
@@ -186,14 +167,6 @@ final class ManagingTaxRateContext implements Context
             $this->indexPage->isSingleResourceOnPage(['code' => $taxRate->getCode()]),
             sprintf('Tax rate with code %s exists but should not.', $taxRate->getCode())
         );
-    }
-
-    /**
-     * @Then I should be notified that it has been successfully deleted
-     */
-    public function iShouldBeNotifiedAboutSuccessfulDeletion()
-    {
-        $this->notificationChecker->checkDeletionNotification(self::RESOURCE_NAME);
     }
 
     /**
@@ -223,14 +196,6 @@ final class ManagingTaxRateContext implements Context
     public function iSaveMyChanges()
     {
         $this->updatePage->saveChanges();
-    }
-
-    /**
-     * @Then I should be notified about successful edition
-     */
-    public function iShouldBeNotifiedAboutSuccessfulEdition()
-    {
-        $this->notificationChecker->checkEditionNotification(self::RESOURCE_NAME);
     }
 
     /**

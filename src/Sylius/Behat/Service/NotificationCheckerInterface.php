@@ -20,21 +20,6 @@ use Sylius\Behat\NotificationType;
 interface NotificationCheckerInterface
 {
     /**
-     * @param string $resource
-     */
-    public function checkDeletionNotification($resource);
-
-    /**
-     * @param string $resource
-     */
-    public function checkCreationNotification($resource);
-
-    /**
-     * @param string $resource
-     */
-    public function checkEditionNotification($resource);
-
-    /**
      * @param string $message
      * @param NotificationType $type
      *

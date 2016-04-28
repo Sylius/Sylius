@@ -27,8 +27,6 @@ use Webmozart\Assert\Assert;
  */
 final class ManagingPromotionsContext implements Context
 {
-    const RESOURCE_NAME = 'promotion';
-
     /**
      * @var SharedStorageInterface
      */
@@ -72,7 +70,7 @@ final class ManagingPromotionsContext implements Context
         IndexPageInterface $indexPage,
         CreatePageInterface $createPage,
         UpdatePageInterface $updatePage,
-        CurrentPageResolverInterface $currentPageResolver, 
+        CurrentPageResolverInterface $currentPageResolver,
         NotificationCheckerInterface $notificationChecker
     ) {
         $this->sharedStorage = $sharedStorage;
@@ -175,14 +173,6 @@ final class ManagingPromotionsContext implements Context
     {
         $this->createPage->addAction('Order fixed discount');
         $this->createPage->fillActionOption('Amount', $amount);
-    }
-
-    /**
-     * @Then I should be notified that it has been successfully created
-     */
-    public function iShouldBeNotifiedItHasBeenSuccessfulCreation()
-    {
-        $this->notificationChecker->checkCreationNotification(self::RESOURCE_NAME);
     }
 
     /**
@@ -342,14 +332,6 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @Then I should be notified that it has been successfully edited
-     */
-    public function iShouldBeNotifiedAboutSuccessfulEdition()
-    {
-        $this->notificationChecker->checkEditionNotification(self::RESOURCE_NAME);
-    }
-
-    /**
      * @When /^I delete a ("([^"]+)" promotion)$/
      * @When /^I try to delete a ("([^"]+)" promotion)$/
      */
@@ -359,14 +341,6 @@ final class ManagingPromotionsContext implements Context
 
         $this->indexPage->open();
         $this->indexPage->deleteResourceOnPage(['name' => $promotion->getName()]);
-    }
-
-    /**
-     * @Then I should be notified that it has been successfully deleted
-     */
-    public function iShouldBeNotifiedAboutSuccessfulDeletion()
-    {
-        $this->notificationChecker->checkDeletionNotification(self::RESOURCE_NAME);
     }
 
     /**

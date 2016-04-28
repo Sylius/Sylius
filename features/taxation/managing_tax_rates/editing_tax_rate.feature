@@ -28,7 +28,7 @@ Feature: Editing tax rate
         Given I want to modify a tax rate "European Union Sales Tax"
         When I rename it to "EU VAT"
         And I save my changes
-        Then I should be notified about successful edition
+        Then I should be notified that it has been successfully edited
         And this tax rate name should be "EU VAT"
 
     @ui
@@ -36,7 +36,7 @@ Feature: Editing tax rate
         Given I want to modify a tax rate "European Union Sales Tax"
         When I specify its amount as 16%
         And I save my changes
-        Then I should be notified about successful edition
+        Then I should be notified that it has been successfully edited
         And this tax rate amount should be 16%
 
     @ui
@@ -45,7 +45,7 @@ Feature: Editing tax rate
         And I want to modify a tax rate "European Union Sales Tax"
         And I change it to be applicable for the "Food and Beverage" tax category
         And I save my changes
-        Then I should be notified about successful edition
+        Then I should be notified that it has been successfully edited
         And this tax rate should be applicable for the "Food and Beverage" tax category
 
     @ui
@@ -54,5 +54,5 @@ Feature: Editing tax rate
         And I want to modify a tax rate "European Union Sales Tax"
         And I change its zone to "The Rest of the World"
         And I save my changes
-        Then I should be notified about successful edition
+        Then I should be notified that it has been successfully edited
         And this tax rate should be applicable in "The Rest of the World" zone

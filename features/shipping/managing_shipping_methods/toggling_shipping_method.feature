@@ -15,7 +15,7 @@ Feature: Toggling a shipping method
         And I want to modify this shipping method
         When I disable it
         And I save my changes
-        Then I should be notified about successful edition
+        Then I should be notified that it has been successfully edited
         And this shipping method should be disabled
 
     @ui
@@ -24,5 +24,5 @@ Feature: Toggling a shipping method
         And I want to modify this shipping method
         When I enable it
         And I save my changes
-        Then I should be notified about successful edition
+        Then I should be notified that it has been successfully edited
         And this shipping method should be enabled

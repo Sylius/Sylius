@@ -27,5 +27,5 @@ Feature: Editing shipping method
         Given I want to modify a shipping method "UPS Carrier"
         When I rename it to "UPS Transport" in "English (United States)"
         And I save my changes
-        Then I should be notified about successful edition
+        Then I should be notified that it has been successfully edited
         And this shipping method name should be "UPS Transport"
