@@ -11,8 +11,6 @@
 
 namespace Sylius\Behat\Context\Ui\Admin;
 
-use Behat\Behat\Context\SnippetAcceptingContext;
-use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Order\ShowPageInterface;
@@ -22,7 +20,7 @@ use Webmozart\Assert\Assert;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-final class ManagingOrdersContext implements Context, SnippetAcceptingContext
+final class ManagingOrdersContext implements Context
 {
     const RESOURCE_NAME = 'order';
 

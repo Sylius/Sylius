@@ -11,7 +11,6 @@
 
 namespace Sylius\Behat\Page\Admin\Order;
 
-use Sylius\Behat\Page\Admin\Order\ShowPageInterface;
 use Sylius\Behat\Page\SymfonyPage;
 
 /**
