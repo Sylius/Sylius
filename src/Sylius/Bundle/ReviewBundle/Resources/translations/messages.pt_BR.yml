@@ -5,7 +5,13 @@ sylius:
     form:
         review:
             header: Adicionar um comentário
+            rating: Avaliação
             title: Título
+            comment: Comentários
             author: Autor
             status:
+                label: Estado
                 new: Novo
+                approved: Aprovado
+                rejected: Rejeitado
+            submit: Submeter

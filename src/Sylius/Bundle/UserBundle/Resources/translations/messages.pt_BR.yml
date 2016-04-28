@@ -32,3 +32,5 @@ sylius:
         user_reset_password:
             confirmation: Confirmação
             new: Nova senha
+    gender:
+        male: Masculino

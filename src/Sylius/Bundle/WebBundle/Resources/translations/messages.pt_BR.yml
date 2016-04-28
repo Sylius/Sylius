@@ -6,6 +6,7 @@ sylius:
         order:
             details: Detalhes do seu pedido
             download_invoice: Download da fatura
+            empty: Você não tem nenhum pedido ainda
             list: Todas os seus pedidos
             placed_at: 'Postado %at%'
             shipment:
@@ -17,8 +18,10 @@ sylius:
         imagine:
             publishable: Publicado
         simple:
+            index: Blocos simples
             publishable: Publicado
         slideshow:
+            index: Blocos de slideshow
             publishable: Publicado
         string:
             publishable: Publicado
@@ -39,6 +42,8 @@ sylius:
             order_item:
                 quantity: Quantidade
         forward: Continuar
+    confirmation:
+        message: Você quer excluir este item
     homepage:
         splash:
             headline: Bem-vindo ao Sylius
@@ -46,12 +51,17 @@ sylius:
     menu:
         publishable: Publicado
     meta:
+        backend_title: Painel Sylius
         frontend_title: Sylius, e-commerce moderno para Symfony2
     order:
+        comment:
+            notify: Notificação
         no_items: Este pedido não contém itens
         no_shipments: Não há nenhum envio para este pedido
         no_shipping_charges: Nenhuma taxa de envio aplicada
         no_taxes: Nenhuma taxa foi aplicada
+        state:
+            order_confimed: Pedido confirmado
     order_item:
         quantity: Quantidade
         sellable: Produto
@@ -64,16 +74,20 @@ sylius:
     promotion_coupon:
         generate: Gerar cupons
         index: Cupons
+        total_results: 'Total: %total%'
     shipment:
         update: Editar
     taxon:
         image: Escolher imagem
         no_image: Não há nenhuma imagem para estas taxas
     ui:
+        abandoned: Abandonado
+        access_token: Token de acesso
         action: Ação
         actions: Ações
         add: Adicionar
         add_action: Adicionar ação
+        add_association: Adicionar a associação
         add_coupon: Adicionar cupom
         add_image: Adicionar imagem
         add_member: Adicionar membro
@@ -109,15 +123,19 @@ sylius:
         change_password: Alterar sua senha
         change_your_password: Alterar sua senha
         channel: Canal
+        channels: Canais
         checkout: Finalizar compra
         choose_file: Escolha um arquivo
         city: Cidade
         code: Código
+        comment: Comentários
         company: Empresa
         completed: Concluído
         configuration: Configuração
         confirmation: Confirmação
         confirmation_title: Confirmação
+        contact_request_show: Solicitação de contato
+        contact_requests: Contatos Solicitados
         contain_variants: Contêm variantes
         content: Conteúdo
         countries: Países
@@ -127,24 +145,47 @@ sylius:
         coupons: Cupons
         create: Criar
         create_a_new_address: Criar um novo endereço
+        create_association_type: Criar o tipo de associação
+        create_contact_request: Criar solicitação de contato
+        create_contact_topic: Criar tópico de contato
         create_country: Criar país
+        create_currency: Criar moeda
+        create_customer: Criar cliente
         create_group: Cria grupo
         create_locale: Criar a localidade
+        create_menu: Criar menu
         create_new_coupon: Criar novo cupom
         create_new_page: Cria nova página
+        create_new_report: Criar novo relatório
+        create_option: Criar opção
         create_order: Criar pedido
         create_payment: Criar pagamento
         create_payment_method: Criar meio de pagamento
         create_product: Criar produto
+        create_product_association: Criar a associação do produto
+        create_product_association_type: Criar o tipo de associação de produto
+        create_product_attribute: Criar atributo do produto
         create_promotion: Criar promoção
+        create_redirect_route: Criar a rota de redirecionamento
+        create_report: Criar Relatório
+        create_route: Criar rota
         create_shipping_category: Criar categoria de envio
         create_shipping_method: Criar método de envio
+        create_simple_block: Criar bloco simples
+        create_slideshow_block: Criar bloco slideshow
+        create_string_block: Criar bloco de seqüência de caracteres
         create_tax_category: Criar categoria de imposto
         create_tax_rate: Criar imposto
         create_taxon: Criar táxon
+        create_user: Cria usuário
         create_variant: Criar variação
         create_zone: Criar zona
         created_at: Data de criação
+        creating_menu: Criar menu
+        creating_new_page: Criar nova página
+        creating_redirect_route: Criação de rota de redirecionamento
+        creating_route: Criação de rota
+        creation_date: Data Início
         creation_time: Data de criação
         currencies: Moedas
         currency: Moeda
@@ -152,6 +193,12 @@ sylius:
         current_password: Senha Atual
         current_promotions: Promoções existentes
         current_stock: Estoque atual
+        customer: Cliente
+        customer_details: Detalhes do Cliente
+        customer_id: ID Cliente
+        customer_not_notified: Cliente não notificado
+        customer_notified: Cliente notificado
+        customers: Clientes
         dashboard: Painel
         data: Dados
         default_billing_address: Endereço de cobrança padrão
@@ -183,8 +230,10 @@ sylius:
         editing_variant: Editando variação
         editing_zone: Editando zona
         email: Email
+        emails: E-mails
         empty: Vazio
         enabled: Ativado
+        end_date: Data Final
         ends_at: Termina em
         error: Erro
         exchange_rate: Taxa de câmbio
@@ -206,6 +255,7 @@ sylius:
         hostname: Nome do host
         id: ID
         images: Imagens
+        index_metadata: Metadados
         index_of_all_configured_locales: Índice de todas as localidades configuradas
         information: Info
         inventory_here_you_can_see_current_stock_levels: 'Estoque <small>Aqui você pode ver os nível do estoque atual</small>'
@@ -213,6 +263,7 @@ sylius:
         inventory_state: Situação do estoque
         inventory_tracking: Controle de estoque
         invoice: Fatura
+        items: Produtos
         items_total: Total de itens
         label: Rótulo
         last_login: Último login
@@ -222,40 +273,68 @@ sylius:
         last_week_revenue: Receita da semana passada
         lastname: Sobrenome
         latest_orders: Últimos Pedidos
+        links: Links
         locales: Localidades
+        lock: Trancar
+        locked: Fechado
         login: Login
         login_button: Login
         logout: Sair
         main_taxon: Táxon principal
+        male: Masculino
         manage: Gerenciar
+        manage_adjustments: Gerenciar ajustes
+        manage_attributes: Gerenciar Atributos
+        manage_channels: Gerenciar Canais
         manage_countries: Gerenciar países
+        manage_customers: Gerenciar clientes
+        manage_emails: Gerenciar E-mails
+        manage_metadata: Gerenciar Metadados
         manage_options: Gerenciar opções
         manage_orders: Gerenciar pedidos
         manage_payments: Gerenciar pagamentos
         manage_products: Gerenciar produtos
         manage_promotions: Gerenciar promoções
+        manage_reviews: Gerenciar as revisões
         manage_shipments: Gerenciar envios
         manage_shipping_categories: Gerenciar categorias de envio
         manage_shipping_methods: Gerenciar métodos de envio
         manage_tax_categories: Gerenciar categorias de impostos
         manage_tax_rates: Gerenciar impostos
+        manage_users: Gerenciar usuários
         manage_zones: Gerenciar zonas
+        marketing: Marketing
         members: Membros
         menu_nodes: Nó do menu
+        menus: Menus
         message: Mensagem
+        metadata_index: Metadados
         method: meio
         modified: Data de modificação
+        move_down: Mover abaixo
+        move_up: Mover para Cima
+        n_a: N/A
         name: Nome
         new: Novo
+        new_archetype: Novo Arquétipo
+        new_comment_posted_on_order: Novo comentário Postado em ordem
+        new_contact_request: Nova solicitação de contato
+        new_contact_topic: Novo tópico contato
         new_country: Novo país
+        new_currency: Nova Moeda
         new_customer: Novo cliente
         new_order: Novo pedido
         new_password: Nova senha
         new_payment: Novo pagamento
         new_payment_method: Novo meio de pagamento
+        new_permission: Nova permissão
         new_product: Novo produto
+        new_product_attribute: Novo atributo de produto
+        new_product_option: Nova opção de produto
         new_product_variant: Nova variação de produto
         new_promotion: Nova promoção
+        new_review: Nova Revisão
+        new_role: Novo papel
         new_shipping_category: Nova categoria de envio
         new_shipping_method: Novo método de envio
         new_tax_category: Nova categoria de imposto
@@ -265,14 +344,21 @@ sylius:
         new_zone: Nova zona
         newest_products: Novos produtos
         next: Próxima
+        "no": não
+        no_account: Ainda sem conta
+        no_association_types_to_display: Não há nenhum tipo de associação definido
+        no_comment: Nenhum comentário
         no_default_billing_address: Nenhum endereço de cobrança padrão
         no_default_shipping_address: Nenhum endereço de entrega padrão
         no_description: Sem descrição
+        no_pricing_configuration: Nenhuma configuração de preços
+        no_results: Sem resultados
         no_shipping_category: Sem categoria de expedição
         no_short_description: '<i>Sem resumo</i>'
         no_sku: '<i>Sem SKU</i>'
         no_tax_category: Nenhuma categoria de imposto
         not_available_in_your_country: Não está disponível no seu país
+        notify_customer: Notificar o cliente
         number: Número
         number_of_orders: Número de pedidos
         options: Opções
@@ -303,8 +389,11 @@ sylius:
         pricing: Preços
         processing: Processando
         product: Produto
+        product_archetypes: Arquétipos de produto
         product_association_type_index: Tipo de associação
+        product_association_types: Tipos de associação de produtos
         product_details_viewing_product_product: 'Detalhes de produto <small>Visualizando produto "<strong>%product%</strong>"</small>'
+        product_reviews: Comentários de produtos
         products: Produtos
         products_categorized_as_name: 'Produtos categorizados como "%name%"'
         products_categorized_under_taxon_taxon: 'Produtos <small>Categorizado na táxon "%taxon%"</small>'
@@ -315,6 +404,7 @@ sylius:
         promotions: Promoções
         province: Estado
         provinces: Estados
+        rating: Avaliação
         recent_orders: Pedidos Recentes
         recent_users: Usuários recentes
         refunded: Reembolsado
@@ -328,6 +418,7 @@ sylius:
         retail_price: Preço de venda
         return: Retorno
         returned: Devolvido
+        reviews: Revisões
         roles: Papéis
         routes: Rotas
         rules: Regras
@@ -337,10 +428,13 @@ sylius:
         save_changes: Salvar alterações
         scope: Escopo
         search: Pesquisar
+        security_settings: Configurações de segurança
         set_as_default_billing_address: Definir como endereço de cobrança padrão.
         set_as_default_shipping_address: Definir como endereço de entrega padrão.
         ship: Envio
+        shipment_confirmation_name: Confirmação de postagem
         shipment_details: Detalhes do envio
+        shipment_mode: Modo de envio
         shipment_state: Situação do envio
         shipments: Envios
         shipped: Enviado
@@ -356,14 +450,23 @@ sylius:
         shop_by: Comprar por
         show_all: Mostrar todos
         show_deleted: Mostrar excluídos
+        show_in_store: Mostrar na loja
+        show_metadata: Mostrar metadados
         sign_in_to_the_store_or_create_new_account: 'Cadastre-se na loja <small>ou crie uma nova conta</small>'
+        simple_blocks: Blocos simples
         sku: SKU
         slideshow: Apresentação de slides
+        slideshow_blocks: Blocos de slideshow
+        start_date: Data de Início
         starts_at: Começa em
         state: Estado
+        status: Estado
         street: Rua
+        string_blocks: Blocos de seqüência de caracteres
         subject: Assunto
         success: Sucesso
+        support: Suporte
+        sylius_logo: Sylius
         tax_categories: Categorias de impostos
         tax_category: Categoria de imposto
         tax_rate_details: Detalhes de imposto
@@ -373,10 +476,14 @@ sylius:
         taxation_settings: Configurações de taxas
         taxes: Taxas
         taxons: Taxas
+        thank_you_for_your_order: Obrigado pelo seu pedido
         theme:  Tema
         there_are_no_images_for_this_product: Não há imagens para este produto
         there_are_no_options_for_this_product: Não há opções para este produto
         there_are_no_taxons_for_this_product: Sem táxons
+        there_are_no_variants_to_display: Não há variantes para exibir
+        there_are_no_zones_configured: Não há zonas configuradas
+        there_is_no_main_taxon_for_this_product: Não há nenhuma taxação principal para este produto
         title: Título
         topic: Tópico
         total_orders: Total de pedidos
@@ -399,9 +506,14 @@ sylius:
         view_more: Ver mais
         void: Vazio
         warning: Aviso
+        welcome_to_our_store: Bem-vindo à nossa loja
         welcome_to_your_space: Bem-vindo ao seu espaço
+        "yes": Sim
         you_are_customer_since: Você é cliente desde
+        you_have_no_addresses_defined: Você não tem nenhum endereço definido
         you_have_no_new_orders: Você não possui pedidos
+        your_last_5_orders: Seus últimos 5 pedidos
+        your_order_has_been_shipped: Seu pedido foi enviado
         your_products: Seus produtos
         zone: Zona
         zone_details: Detalhes de zona
@@ -409,5 +521,7 @@ sylius:
     user:
         general_info: 'Informações gerais de "%username%"'
         impersonate: Entrar como este usuário
+        oauth:
+            none: Sem contas de OAuth conectadas
     variant:
         stock: Estoque atual

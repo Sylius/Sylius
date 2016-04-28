@@ -6,7 +6,8 @@ sylius:
         admin:
             main:
                 catalog:
-                    attributes: قابلیت ها
+                    header: کاتالوگ محصولات
+                    attributes: ویژگی‌ها
                 configuration:
                     channels: کانال های فروش
                     countries: كشور‌ها
@@ -17,10 +18,10 @@ sylius:
                     shipping_methods: شیوه های ارسال
                     tax_categories: رده های مالیات
                     tax_rates: نرخ های مالیات
-                    zones: مناطق
+                    zones: منطقه‌ها
                 marketing:
                     header: بازاریابی
-                    promotions: فروش ویژه
+                    promotions: فروش های ویژه
                 customers:
                     header: مشتری
                     customers: مشتریان

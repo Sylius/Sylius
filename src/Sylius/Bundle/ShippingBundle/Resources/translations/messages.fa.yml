@@ -24,6 +24,8 @@ sylius:
                 amount: مبلغ
             flexible_rate_configuration:
                 label: نرخ متغیر
+                additional_unit_cost: هزینه واحد اضافی
+                additional_unit_limit: حد مجاز واحدهای اضافی
                 first_unit_cost: هزینه ی اولین سفارش
             per_unit_rate_configuration:
                 label: هزینه ی ثابت به ازای هر سفارش

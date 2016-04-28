@@ -93,6 +93,11 @@ sylius:
     page:
         no_route: محتوای وارد شده بدون تعیین آدرس داخلی در صفحه ی اصلی نمایش داده نخواهد شد
         publishable: انتشار در سایت؟
+    payment:
+        transition:
+            cancel: لغو
+            complete: تکمیل فرایند
+            refund: استرداد فرایند
     pricing:
         volume_based:
             max: حداکثر سفارش
@@ -100,6 +105,7 @@ sylius:
     promotion_coupon:
         generate: ایجاد کد تخفیف
         index: لیست کدهای تخفیف
+        total_results: 'مجموع: %total%'
     report:
         data_fetcher: نوع منبع اطلاعات
         no_data: اطلاعاتی برای نمایش وجود ندارد
@@ -114,6 +120,13 @@ sylius:
             no_account: ثبت نام کنید
     shipment:
         no_items: هیچ آیتمی برای نمایش وجود ندارد
+        transition:
+            backorder: سفارش بازگشت انتقال
+            cancel: لغو
+            prepare: آماده سازی
+            release: رها سازی
+            return: بازگشت
+            ship: ارسال سفارش
         update: ويرايش
     stockable:
         on_hand: تعداد موجودی
@@ -122,6 +135,7 @@ sylius:
         no_image: هیچ عکسی برای این زیررده ثبت نشده است
     ui:
         abandoned: سفارش ناتمام
+        access_token: توکن دسترسی
         account_panel_outline: از این صفحه می توانید برای مشاهده, دنبال کردن و مدیریت اطلاعاتتان استفاده کنید.
         action: عمل
         actions: طریقه اعمال
@@ -178,6 +192,7 @@ sylius:
         cancel: لغو
         cancelled: پرداخت لغو شده
         cart_locked: سبد خرید قفل شده
+        cart_summary: خلاصه سبد خرید
         categorization: دسته بندی
         category: دسته
         change_password: تغییر کلمه عبور
@@ -364,6 +379,7 @@ sylius:
         guest: می خواهم بدون ثبت نام ادامه دهم
         hello_name: 'سلام <b>%name%</b>'
         hide_deleted: مخفی کردن آیتم های حذف شده
+        hostname: نام میزبان
         id: شناسه
         identifier: شناسه
         images: عکس ها
@@ -461,6 +477,7 @@ sylius:
         new_zone: منطقه جدید
         newest_products: جدیدترین کالاها
         next: بعدی
+        "no": خير
         no_account: ثبت نام کنید
         no_association_types_to_display: هیچ نوع ارتباط تعریف شده ای وجود ندارد
         no_comment: بدون نظر
@@ -541,6 +558,7 @@ sylius:
         provinces: استان ها
         qty_max: حداکثر حجم
         qty_min: حداقل حجم
+        rating: امتیازدهی
         recent_customers: مشتریان اخیر
         recent_orders: سفارش های اخیر
         recent_users: کاربران اخیر
@@ -613,6 +631,7 @@ sylius:
         subject: عنوان
         success: موفق
         support: پشتیبانی
+        sylius_logo: Sylius
         tax_categories: انواع مالیات
         tax_category: نوع مالیات
         tax_rate_details: جزئیات نرخ مالیات
@@ -623,6 +642,7 @@ sylius:
         taxes: مالیات
         taxons: رده ها
         thank_you_for_your_order: از سفارش شما سپاسگزاریم
+        theme: قالب
         there_are_no_archetypes_defined: قلم کالایی تعریف نشده
         there_are_no_attributes_configured: قابلیتی پیکربندی نشده
         there_are_no_blocks_to_display: هیچ بلاکی برای نمایش وجود ندارد
@@ -703,6 +723,7 @@ sylius:
         welcome: خوش آمدید
         welcome_to_our_store: به فروشگاه ما خوش آمدید
         welcome_to_your_space: به صفحه ی شخصیتان خوش آمدید
+        "yes": بلی
         you_are_customer_since: تاریخ ثبت نام در فروشگاه
         you_have_no_addresses_defined: هیچ آدرسی در حساب شما ثبت نشده است
         you_have_no_new_orders: سفارش جدیدی ندارید
