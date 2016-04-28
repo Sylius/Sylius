@@ -6,6 +6,8 @@ sylius:
         rule:
             unit_count_configuration:
                 count: Contagem
+                equal: Igual a
+            type: Tipo de regra
         shipment:
             state: Estado
             states:
@@ -18,12 +20,23 @@ sylius:
             tracking_code: Código de rastreamento
         shipping_calculator:
             flat_rate_configuration:
+                label: Taxa plana por remessa
                 amount: Quantidade
+            flexible_rate_configuration:
+                label: Taxa flexível
+                additional_unit_cost: 'Custo adicional de unidade '
+                additional_unit_limit: Limite de unidades adicionais
+                first_unit_cost: Primeira unidade de custo
             per_unit_rate_configuration:
+                label: Taxa fixa por unidade
                 amount: Quantidade
             weight_rate_configuration:
+                label: Taxa de peso com base
+                fixed: Valor fixo
+                variable: Quantidade variável
                 division: Divisão
             volume_rate_configuration:
+                label: Taxa de volume com base
                 amount: Quantidade
                 division: Divisão
         shipping_category:

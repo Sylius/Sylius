@@ -12,3 +12,4 @@ sylius:
         restore_deleted: '%resource% با موفقیت بازگردانده شد.'
         enable: '%resource% با موفقیت فعال شد.'
         disable: '%resource% با موفقیت غیرفعال شد.'
+        delete_error: 'امکلن حذف وجود ندارد. %resource% در حال استفاده می باشد.'

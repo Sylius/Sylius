@@ -11,8 +11,18 @@ sylius:
             presentation: عنوان برای مشتری
     ui:
         actions: طریقه اعمال
+        administration_panel_login: صفحه ورود به سيستم مديريت
+        an_error_occurred: یک خطا روی داده است
+        are_your_sure_you_want_to_perform_this_action: آیا از اعمال این کار اطمینان دارید؟
+        available_for_channels: قابل دسترسی برای کانال ها
         cancel: لغو
+        category_requirements: نیازمندی های شاخه
+        charges_and_taxes: هزینه و مالیات
+        clear_filters: پاک کردن فیلترها
         color: رنگ
+        configure_channels_available_in_your_store: کانال های در دسترس در فروشگاه های خود را پیکربندی کنید
+        confirm_your_action: عملیات را تایید کنید
+        contains: محتویات
         countries: كشور‌ها
         coupon_based: مبتنی بر کوپن
         create: ایجاد
@@ -22,24 +32,62 @@ sylius:
         default_locale: زبان پیش فرض
         delete: حذف
         description: شرح
+        disabled: غیرفعال
         edit: ويرايش
+        edit_channel: ویرایش کانال
+        edit_country: ویرایش کشور
+        edit_currency: ویرایش واحد پولی
+        edit_customer: ویرایش مشتری
+        edit_payment_method: ویرایش روش پرداخت
+        edit_product_option: ویرایش گزینه های محصول
+        edit_promotion: ویرایش فروش ویژه
+        edit_tax_category: ویرایش شاخه مالیات
+        edit_tax_rate: ویرایش نرخ مالیات
         empty: خالی
         enabled: فعال
+        ends_with: به پایان می رسد با
+        equal: برابر با
         exclusive: یکبار مصرف
         filter: فیلتر
+        in: در
+        info: اطلاعات
+        last_updated: آخرین بروز رسانی
         locales: زبان ها
+        manage_attributes_of_your_produts: مدیریت ویژگی های محصولات خود
+        manage_country: مدیریت کشور
+        manage_currencies_available_in_the_store: مدیریت واحدهای پولی موجود در فروشگاه
         manage_customer: مدیریت مشتریان
+        manage_languages_available_in_the_store: مدیریت زبان های موجود در فروشگاه
+        manage_payment_method: مدیریت روشهای پرداخت
+        manage_product_option: مدیریت گزینه های محصول
+        manage_shipping_destinations: مدیریت مقصدهای حمل و نقل
+        manage_taxons: مدیریت taxon های محصولات خود
+        manage_shipping_methods_for_your_store: مدیریت روش ها حمل و نقل فروشگاه
+        manage_taxation_of_your_products: مدیریت مالیات محصولات شما
         new: پرداخت ثبت شده
+        new_channel: کانال جدید
         new_country: کشور جدید
         new_currency: ارز جدید
+        new_locale: منطقه جدید
         new_tax_category: نوع مالیاتی جدید
         "no": false
+        no_account: بدون شناسه کاربری
+        no_results_to_display: هیچ نتیجه ای برای نمایش وجود ندارد
+        not_contains: خالی است
+        not_empty: خالی نیست
+        not_in: وجود ندارد در
+        or: یا
         powered_by: قدرت گرفته از
+        promotion_configuration: تنظیمات فروش ویژه
+        promotion_information: اطلاعات فروش ویژه
         save_changes: ذخیره تغییرات
         shipping_methods: شیوه های ارسال
+        show: نمایش
         sign_in: ورود
         sign_out: خروج
+        starts_with: شروع می شود با
         status: وضعیت
         success: موفق
+        tax_categories: شاخه های مالیات
         values: مقادیر
         "yes": true

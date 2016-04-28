@@ -1,0 +1,42 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    imagine_block:
+        end_date:
+            invalid_date: Publicar a data final é inválida.
+    menu:
+        name:
+            not_blank: Por favor, insira o nome do menu.
+        label:
+            not_blank: Por favor, digite o rótulo de menu.
+        end_date:
+            invalid_date: Publicar a data final é inválida.
+    menu_node:
+        end_date:
+            invalid_date: Publicar a data final é inválida.
+    route:
+        name:
+            not_blank: Por favor, digite o nome de rota.
+        content:
+            not_blank: Por favor, insira o conteúdo de rota.
+        end_date:
+            invalid_date: Publicar a data final é inválida.
+    slideshow_block:
+        name:
+            not_blank: Por favor, digite o nome do slideshow.
+        title:
+            not_blank: Por favor, digite o título do slideshow.
+        start_date:
+            invalid_date: A data de inicio da publicação é inválida.
+        end_date:
+            invalid_date: Publicar a data final é inválida.
+    simple_block:
+        end_date:
+            invalid_date: Publicar a data final é inválida.
+    string_block:
+        end_date:
+            invalid_date: Publicar a data final é inválida.
+    static_content:
+        end_date:
+            invalid_date: Publicar a data final é inválida.

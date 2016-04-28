@@ -6,6 +6,6 @@ sylius:
         archetype:
             code: نام انگلیسی
             name: نام
-            parent: رده پدر
-            attributes: قابلیت ها
-            options: آپشن ها
+            parent: شاخه بالادستی
+            attributes: ویژگی‌ها
+            options: گزینه‎ها

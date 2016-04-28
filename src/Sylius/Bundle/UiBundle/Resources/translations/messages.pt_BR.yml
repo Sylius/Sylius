@@ -82,5 +82,12 @@ sylius:
         promotion_information: Informações de promoção
         save_changes: Salvar alterações
         shipping_methods: Métodos de envio
+        show: Mostrar
+        sign_in: Entre
+        sign_out: Desconectar
+        starts_with: Começa com
+        status: Estado
         success: Sucesso
+        tax_categories: Categorias de imposto
+        values: Valores
         "yes": true
