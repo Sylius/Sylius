@@ -29,7 +29,7 @@ interface RepositoryInterface extends ObjectRepository
      *
      * @return mixed
      */
-    public function createPaginator(array $criteria = null, array $orderBy = null);
+    public function createPaginator(array $criteria = [], array $sorting = []);
 
     /**
      * @param ResourceInterface $resource
