@@ -11,9 +11,6 @@
 
 namespace Sylius\Bundle\ThemeBundle\Model;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
@@ -45,19 +42,19 @@ class Theme implements ThemeInterface
     protected $description;
 
     /**
-     * @var Collection|ThemeAuthor[]
+     * @var ThemeAuthor[]
      */
-    protected $authors;
+    protected $authors = [];
 
     /**
-     * @var Collection|ThemeInterface[]
+     * @var ThemeInterface[]
      */
-    protected $parents;
+    protected $parents = [];
 
     /**
-     * @var Collection|ThemeScreenshot[]
+     * @var ThemeScreenshot[]
      */
-    protected $screenshots;
+    protected $screenshots = [];
 
     public function __construct($name, $path)
     {
@@ -65,10 +62,6 @@ class Theme implements ThemeInterface
 
         $this->name = $name;
         $this->path = $path;
-
-        $this->authors = new ArrayCollection();
-        $this->parents = new ArrayCollection();
-        $this->screenshots = new ArrayCollection();
     }
 
     /**
@@ -140,7 +133,7 @@ class Theme implements ThemeInterface
      */
     public function getAuthors()
     {
-        return $this->authors->toArray();
+        return $this->authors;
     }
 
     /**
@@ -148,7 +141,7 @@ class Theme implements ThemeInterface
      */
     public function addAuthor(ThemeAuthor $author)
     {
-        $this->authors->add($author);
+        $this->authors[] = $author;
     }
 
     /**
@@ -156,7 +149,9 @@ class Theme implements ThemeInterface
      */
     public function removeAuthor(ThemeAuthor $author)
     {
-        $this->authors->removeElement($author);
+        $this->authors = array_filter($this->authors, function ($currentAuthor) use ($author) {
+            return $currentAuthor !== $author;
+        });
     }
 
     /**
@@ -164,7 +159,7 @@ class Theme implements ThemeInterface
      */
     public function getParents()
     {
-        return $this->parents->toArray();
+        return $this->parents;
     }
 
     /**
@@ -172,7 +167,7 @@ class Theme implements ThemeInterface
      */
     public function addParent(ThemeInterface $theme)
     {
-        $this->parents->add($theme);
+        $this->parents[] = $theme;
     }
 
     /**
@@ -180,7 +175,9 @@ class Theme implements ThemeInterface
      */
     public function removeParent(ThemeInterface $theme)
     {
-        $this->parents->removeElement($theme);
+        $this->parents = array_filter($this->parents, function ($currentTheme) use ($theme) {
+            return $currentTheme !== $theme;
+        });
     }
 
     /**
@@ -188,22 +185,24 @@ class Theme implements ThemeInterface
      */
     public function getScreenshots()
     {
-        return $this->screenshots->toArray();
+        return $this->screenshots;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function addScreenshot(ThemeScreenshot $themeScreenshot)
+    public function addScreenshot(ThemeScreenshot $screenshot)
     {
-        $this->screenshots->add($themeScreenshot);
+        $this->screenshots[] = $screenshot;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function removeScreenshot(ThemeScreenshot $themeScreenshot)
+    public function removeScreenshot(ThemeScreenshot $screenshot)
     {
-        $this->screenshots->removeElement($themeScreenshot);
+        $this->screenshots = array_filter($this->screenshots, function ($currentScreenshot) use ($screenshot) {
+            return $currentScreenshot !== $screenshot;
+        });
     }
 }

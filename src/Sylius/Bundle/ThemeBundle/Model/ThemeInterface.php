@@ -87,12 +87,12 @@ interface ThemeInterface
     public function getScreenshots();
 
     /**
-     * @param ThemeScreenshot $themeScreenshot
+     * @param ThemeScreenshot $screenshot
      */
-    public function addScreenshot(ThemeScreenshot $themeScreenshot);
+    public function addScreenshot(ThemeScreenshot $screenshot);
 
     /**
-     * @param ThemeScreenshot $themeScreenshot
+     * @param ThemeScreenshot $screenshot
      */
-    public function removeScreenshot(ThemeScreenshot $themeScreenshot);
+    public function removeScreenshot(ThemeScreenshot $screenshot);
 }

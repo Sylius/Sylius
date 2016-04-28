@@ -25,7 +25,6 @@
         <parameter key="sylius.factory.theme.class">Sylius\Bundle\ThemeBundle\Factory\ThemeFactory</parameter>
         <parameter key="sylius.factory.theme_author.class">Sylius\Bundle\ThemeBundle\Factory\ThemeAuthorFactory</parameter>
         <parameter key="sylius.factory.theme_screenshot.class">Sylius\Bundle\ThemeBundle\Factory\ThemeScreenshotFactory</parameter>
-        <parameter key="sylius.theme.hydrator.class">Sylius\Bundle\ThemeBundle\Hydrator\ThemeHydrator</parameter>
         <parameter key="sylius.theme.loader.class">Sylius\Bundle\ThemeBundle\Loader\ThemeLoader</parameter>
         <parameter key="sylius.theme.repository.class">Sylius\Bundle\ThemeBundle\Repository\InMemoryThemeRepository</parameter>
         <parameter key="sylius.theme.circular_dependency_checker.class">Sylius\Bundle\ThemeBundle\Loader\CircularDependencyChecker</parameter>
@@ -46,11 +45,7 @@
         <service id="sylius.factory.theme_author" class="%sylius.factory.theme_author.class%" public="false" />
         <service id="sylius.factory.theme_screenshot" class="%sylius.factory.theme_screenshot.class%" public="false" />
 
-        <service id="sylius.theme.hydrator" class="%sylius.theme.hydrator.class%" public="false">
-            <argument type="service">
-                <service class="Zend\Hydrator\Reflection" />
-            </argument>
-        </service>
+        <service id="sylius.theme.hydrator" class="Zend\Hydrator\Reflection" public="false" />
 
         <service id="sylius.theme.circular_dependency_checker" class="%sylius.theme.circular_dependency_checker.class%" public="false" />
 
