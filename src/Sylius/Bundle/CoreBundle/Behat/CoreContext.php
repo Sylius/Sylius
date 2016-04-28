@@ -551,6 +551,18 @@ class CoreContext extends DefaultContext
     }
 
     /**
+     * @Given /^product "([^""]*)" has no variants$/
+     */
+    public function productHasNoVariants($productName)
+    {
+        /** @var ProductInterface $product */
+        $product = $this->findOneByName('product', $productName);
+        $product->getVariants()->clear();
+
+        $this->getEntityManager()->flush();
+    }
+
+    /**
      * @Given all products are available in all variations
      */
     public function allProductsAreAvailableInAllVariations()

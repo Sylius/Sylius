@@ -134,7 +134,7 @@
                 </tr>
                 <tr>
                     <td>{{ 'sylius.ui.tax_category'|trans }}</td>
-                    <td>{{ product.variants.first().taxCategory|default('sylius.ui.no_tax_category'|trans) }}</td>
+                    <td>{{ product.firstVariant.taxCategory|default('sylius.ui.no_tax_category'|trans) }}</td>
                 </tr>
                 {% if product.restrictedZone %}
                     <tr>

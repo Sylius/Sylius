@@ -318,7 +318,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     public function getImage()
     {
         if ($this->images->isEmpty()) {
-            return $this->getProduct()->getImage();
+            return null;
         }
 
         return $this->images->first();

@@ -30,7 +30,7 @@ class ProductContext extends DefaultContext
         $factory = $this->getFactory('product');
 
         foreach ($table->getHash() as $data) {
-            $product = $factory->createNew();
+            $product = $factory->createWithVariant();
 
             $product->setCurrentLocale($this->getContainer()->getParameter('locale'));
             $product->setName(trim($data['name']));

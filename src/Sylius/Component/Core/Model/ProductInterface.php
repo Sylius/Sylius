@@ -103,4 +103,19 @@ interface ProductInterface extends
      * @param TaxonInterface $mainTaxon
      */
     public function setMainTaxon(TaxonInterface $mainTaxon = null);
+
+    /**
+     * @return ProductVariantInterface
+     */
+    public function getFirstVariant();
+
+    /**
+     * @return int
+     */
+    public function getPrice();
+
+    /**
+     * @return ImageInterface
+     */
+    public function getImage();
 }

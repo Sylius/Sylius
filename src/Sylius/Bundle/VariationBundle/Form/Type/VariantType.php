@@ -52,23 +52,7 @@ class VariantType extends AbstractResourceType
             ->addEventSubscriber(new AddCodeFormSubscriber())
         ;
 
-        if (!$options['master']) {
-            $builder->addEventSubscriber(new BuildVariantFormSubscriber($this->variableName, $builder->getFormFactory()));
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        parent::configureOptions($resolver);
-
-        $resolver
-            ->setDefaults([
-                'master' => false,
-            ])
-        ;
+        $builder->addEventSubscriber(new BuildVariantFormSubscriber($this->variableName, $builder->getFormFactory()));
     }
 
     /**

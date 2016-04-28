@@ -340,4 +340,40 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     {
         return $this->averageRating;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFirstVariant()
+    {
+        if ($this->variants->isEmpty()) {
+            return null;
+        }
+
+        return $this->variants->first();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPrice()
+    {
+        if (null === $this->getFirstVariant()) {
+            return null;
+        }
+
+        return $this->getFirstVariant()->getPrice();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getImage()
+    {
+        if (null === $this->getFirstVariant()) {
+            return null;
+        }
+
+        return $this->getFirstVariant()->getImage();
+    }
 }

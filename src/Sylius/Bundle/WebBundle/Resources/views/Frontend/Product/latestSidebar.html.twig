@@ -4,7 +4,11 @@
     {% for product in products %}
         <li>
             <a href="{{ path(product) }}" class="btn btn-link">
-                <img class="thumbnail" src="{{ product.image ? product.image.path|imagine_filter('sylius_small') : 'http://placehold.it/50x40' }}" alt="{{ product.name }}" />
+                {% if product.variants|length > 0 and product.image %}
+                    <img class="thumbnail" src="{{ product.image.path|imagine_filter('sylius_small') }}" alt="{{ product.name }}" />
+                {% else %}
+                    <img class="thumbnail" src="{{ 'http://placehold.it/50x40' }}" alt="{{ product.name }}" />
+                {% endif %}
                 <h4>{{ product.name }}</h4>
             </a>
         </li>

@@ -35,24 +35,6 @@ class VariantTypeSpec extends ObjectBehavior
         $this->shouldImplement(FormTypeInterface::class);
     }
 
-    function it_defines_assigned_data_class_and_validation_groups(OptionsResolver $resolver)
-    {
-        $resolver
-            ->setDefaults([
-                'data_class' => 'Variant',
-                'validation_groups' => [],
-            ])
-            ->shouldBeCalled();
-
-        $resolver
-            ->setDefaults([
-                'master' => false,
-            ])
-            ->shouldBeCalled();
-
-        $this->configureOptions($resolver);
-    }
-
     function it_has_valid_name()
     {
         $this->getName()->shouldReturn('sylius_server_variant');

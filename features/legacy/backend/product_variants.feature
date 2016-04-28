@@ -18,6 +18,8 @@ Feature: Product variants
             | Mug            | 5.99  |         |
             | Sticker        | 10.00 |         |
         And product "Super T-Shirt" is available in all variations
+        And product "Black T-Shirt" has no variants
+        And product "Sylius T-Shirt" has no variants
         And I am logged in as administrator
 
     Scenario: Viewing a product without options

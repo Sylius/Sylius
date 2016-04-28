@@ -34,7 +34,7 @@
                 <div class="media">
                     <a href="{{ path('sylius_backend_product_show', {'id': product.id}) }}" class="pull-left"
                        title="{{ 'sylius.ui.view_product_details'|trans({'%product%': product.name})|escape('html_attr') }}">
-                        <img src="{{ product.image ? product.image.path|imagine_filter('sylius_small') : 'http://placehold.it/50x40' }}" alt="" class="imgmedia-object" />
+                        <img src="{{ (product.variants|length > 0 and product.firstVariant.images.first()) ? product.firstVariant.images.first().path|imagine_filter('sylius_small') : 'http://placehold.it/50x40' }}" alt="" class="imgmedia-object" />
                     </a>
                     <div class="media-body">
                         <h5 class="media-heading">
@@ -48,27 +48,32 @@
                             {% endif %}
                         </h5>
                         <div class="media-body">
+<<<<<<< 9f32bf600349be9517eab5d41c6c09576d93308a
                             {% if product.code %}
                                 <strong>{{ 'sylius.ui.code'|trans }}: </strong> <code class="code">{{ product.code }}</code>
+=======
+                            {% if product.firstVariant %}
+                                <strong>{{ 'sylius.ui.sku'|trans }}: </strong> <code class="sku">{{ product.firstVariant.sku }}</code>
+>>>>>>> Fixes in code and templates due to master variant removal
                             {% endif %}
                         </div>
                     </div>
                 </div>
             </td>
-            {% if product.hasOptions %}
-                <td class="stock contain-variants text-muted">
+            <td class="stock contain-variants text-muted">
+                {% if product.hasOptions %}
                     <em>{{ 'sylius.ui.contain_variants'|trans }}</em>
-                </td>
-            {% endif %}
+                {% endif %}
+            </td>
 
 
             {# Retail Price #}
-            {% if not product.hasOptions %}
+            {% if not product.hasOptions and product.variants|length > 0 %}
                 <td class="retail-price">
-                    {{ product.variants.first().price|sylius_price }}
+                    {{ product.price|sylius_price }}
                 </td>
                 <td class="original-price">
-                    {{ product.variants.first().originalPrice|sylius_price }}
+                    {{ product.firstVariant.originalPrice|sylius_price }}
                 </td>
             {% else %}
                 <td class="retail-price text-muted">

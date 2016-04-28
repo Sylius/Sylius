@@ -372,7 +372,7 @@ class LoadProductsData extends DataFixture
      */
     protected function createProduct()
     {
-        return $this->getProductFactory()->createNew();
+        return $this->getProductFactory()->createWithVariant();
     }
 
     /**

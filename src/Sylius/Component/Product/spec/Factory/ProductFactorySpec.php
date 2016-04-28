@@ -71,13 +71,8 @@ class ProductFactorySpec extends ObjectBehavior
         ProductInterface $product,
         RepositoryInterface $archetypeRepository,
         ArchetypeBuilderInterface $archetypeBuilder,
-        ArchetypeInterface $archetype,
-        VariantInterface $variant,
-        FactoryInterface $variantFactory
+        ArchetypeInterface $archetype
     ) {
-        $variantFactory->createNew()->willReturn($variant);
-        $product->addVariant($variant)->shouldBeCalled();
-
         $factory->createNew()->willReturn($product);
 
         $archetypeRepository->findOneBy(['code' => 'book'])->willReturn($archetype);

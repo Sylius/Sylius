@@ -275,7 +275,7 @@ class ProductController extends ResourceController
             $results[] = [
                 'id' => $product->getFirstVariant()->getId(),
                 'name' => $product->getName(),
-                'image' => $product->getImage() ? $product->getImage()->getPath() : null,
+                'image' => $product->getFirstVariant()->getImage() ? $product->getFirstVariant()->getImage()->getPath() : null,
                 'price' => $helper->convertAndFormatAmount($product->getFirstVariant()->getPrice()),
                 'original_price' => $helper->convertAndFormatAmount($product->getFirstVariant()->getOriginalPrice()),
                 'raw_price' => $helper->convertAndFormatAmount($product->getFirstVariant()->getPrice(), null, true),

@@ -75,6 +75,8 @@ class VariantGenerator implements VariantGeneratorInterface
         foreach ($permutations as $permutation) {
             $variant = $this->variantFactory->createNew();
             $variant->setObject($variable);
+            // temporary solution - it should be deeply considered how to determine generated variant price
+            $variant->setPrice(rand(1000, 10000));
 
             if (is_array($permutation)) {
                 foreach ($permutation as $id) {
