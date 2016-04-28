@@ -15,7 +15,6 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Customer\CreatePageInterface;
-use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\User\Model\CustomerInterface;
 use Webmozart\Assert\Assert;
 
@@ -24,8 +23,6 @@ use Webmozart\Assert\Assert;
  */
 final class ManagingCustomersContext implements Context
 {
-    const RESOURCE_NAME = 'customer';
-
     /**
      * @var IndexPageInterface
      */
@@ -42,26 +39,18 @@ final class ManagingCustomersContext implements Context
     private $updatePage;
 
     /**
-     * @var NotificationCheckerInterface
-     */
-    private $notificationChecker;
-
-    /**
      * @param CreatePageInterface $createPage
      * @param IndexPageInterface $indexPage
      * @param UpdatePageInterface $updatePage
-     * @param NotificationCheckerInterface $notificationChecker
      */
     public function __construct(
         CreatePageInterface $createPage,
         IndexPageInterface $indexPage,
-        UpdatePageInterface $updatePage,
-        NotificationCheckerInterface $notificationChecker
+        UpdatePageInterface $updatePage
     ) {
         $this->createPage = $createPage;
         $this->indexPage = $indexPage;
         $this->updatePage = $updatePage;
-        $this->notificationChecker = $notificationChecker;
     }
 
     /**
@@ -104,14 +93,6 @@ final class ManagingCustomersContext implements Context
     public function iAddIt()
     {
         $this->createPage->create();
-    }
-
-    /**
-     * @Then I should be notified that it has been successfully created
-     */
-    public function iShouldBeNotifiedItHasBeenSuccessfulCreation()
-    {
-        $this->notificationChecker->checkCreationNotification(self::RESOURCE_NAME);
     }
 
     /**
@@ -159,14 +140,6 @@ final class ManagingCustomersContext implements Context
     public function iSaveMyChanges()
     {
         $this->updatePage->saveChanges();
-    }
-
-    /**
-     * @Then I should be notified that it has been successfully edited
-     */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited()
-    {
-        $this->notificationChecker->checkEditionNotification(self::RESOURCE_NAME);
     }
 
     /**

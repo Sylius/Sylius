@@ -16,7 +16,6 @@ use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Product\Attribute\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Product\Attribute\UpdatePageInterface;
 use Sylius\Behat\Service\CurrentPageResolverInterface;
-use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Product\Model\AttributeInterface;
 use Webmozart\Assert\Assert;
 
@@ -25,8 +24,6 @@ use Webmozart\Assert\Assert;
  */
 final class ManagingProductAttributesContext implements Context
 {
-    const RESOURCE_NAME = 'product_attribute';
-
     /**
      * @var CreatePageInterface
      */
@@ -43,11 +40,6 @@ final class ManagingProductAttributesContext implements Context
     private $updatePage;
 
     /**
-     * @var NotificationCheckerInterface
-     */
-    private $notificationChecker;
-
-    /**
      * @var CurrentPageResolverInterface
      */
     private $currentPageResolver;
@@ -57,20 +49,17 @@ final class ManagingProductAttributesContext implements Context
      * @param IndexPageInterface $indexPage
      * @param UpdatePageInterface $updatePage
      * @param CurrentPageResolverInterface $currentPageResolver
-     * @param NotificationCheckerInterface $notificationChecker
      */
     public function __construct(
         CreatePageInterface $createPage,
         IndexPageInterface $indexPage,
         UpdatePageInterface $updatePage,
-        CurrentPageResolverInterface $currentPageResolver,
-        NotificationCheckerInterface $notificationChecker
+        CurrentPageResolverInterface $currentPageResolver
     ) {
         $this->createPage = $createPage;
         $this->indexPage = $indexPage;
         $this->updatePage = $updatePage;
         $this->currentPageResolver = $currentPageResolver;
-        $this->notificationChecker = $notificationChecker;
     }
 
     /**
@@ -105,14 +94,6 @@ final class ManagingProductAttributesContext implements Context
     public function iAddIt()
     {
         $this->createPage->create();
-    }
-
-    /**
-     * @Then I should be notified that it has been successfully created
-     */
-    public function iShouldBeNotifiedAboutSuccessfulCreation()
-    {
-        $this->notificationChecker->checkCreationNotification(self::RESOURCE_NAME);
     }
 
     /**
@@ -152,14 +133,6 @@ final class ManagingProductAttributesContext implements Context
     public function iSaveMyChanges()
     {
         $this->updatePage->saveChanges();
-    }
-
-    /**
-     * @Then I should be notified that it has been successfully edited
-     */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited()
-    {
-        $this->notificationChecker->checkEditionNotification(self::RESOURCE_NAME);
     }
 
     /**
@@ -274,14 +247,6 @@ final class ManagingProductAttributesContext implements Context
     {
         $this->indexPage->open();
         $this->indexPage->deleteResourceOnPage(['code' => $productAttribute->getCode(), 'name' => $productAttribute->getName()]);
-    }
-
-    /**
-     * @Then I should be notified that it has been successfully deleted
-     */
-    public function iShouldBeNotifiedAboutSuccessfulDeletion()
-    {
-        $this->notificationChecker->checkDeletionNotification(self::RESOURCE_NAME);
     }
 
     /**

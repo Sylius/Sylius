@@ -26,8 +26,6 @@ use Webmozart\Assert\Assert;
  */
 final class ManagingChannelsContext implements Context
 {
-    const RESOURCE_NAME = 'channel';
-
     /**
      * @var IndexPageInterface
      */
@@ -109,14 +107,6 @@ final class ManagingChannelsContext implements Context
     public function iAddIt()
     {
         $this->createPage->create();
-    }
-
-    /**
-     * @Then I should be notified that it has been successfully created
-     */
-    public function iShouldBeNotifiedItHasBeenSuccessfulCreation()
-    {
-        $this->notificationChecker->checkCreationNotification(self::RESOURCE_NAME);
     }
 
     /**
@@ -317,14 +307,6 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
-     * @Then I should be notified that it has been successfully edited
-     */
-    public function iShouldBeNotifiedAboutSuccessfulEdition()
-    {
-        $this->notificationChecker->checkEditionNotification(self::RESOURCE_NAME);
-    }
-
-    /**
      * @Then /^(this channel) should be disabled$/
      */
     public function thisChannelShouldBeDisabled(ChannelInterface $channel)
@@ -359,14 +341,6 @@ final class ManagingChannelsContext implements Context
             $this->indexPage->isSingleResourceOnPage(['name' => $channelName]),
             sprintf('Channel with name %s exists but should not.', $channelName)
         );
-    }
-
-    /**
-     * @Then I should be notified that it has been successfully deleted
-     */
-    public function iShouldBeNotifiedAboutSuccessfulDeletion()
-    {
-        $this->notificationChecker->checkDeletionNotification(self::RESOURCE_NAME);
     }
 
     /**

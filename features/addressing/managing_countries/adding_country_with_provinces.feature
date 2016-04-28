@@ -13,7 +13,7 @@ Feature: Adding countries with provinces
         When I choose "United Kingdom"
         And I add the "Scotland" province with "GB-SCT" code
         And I add it
-        Then I should be notified about successful creation
+        Then I should be notified that it has been successfully created
         And the country "United Kingdom" should appear in the store
         And the country "United Kingdom" should have the "Scotland" province
 
@@ -24,7 +24,7 @@ Feature: Adding countries with provinces
         And I add the "Scotland" province with "GB-SCT" code
         And I add the "Northern Ireland" province with "GB-NIR" code and "N.Ireland" abbreviation
         And I add it
-        Then I should be notified about successful creation
+        Then I should be notified that it has been successfully created
         And the country "United Kingdom" should appear in the store
         And the country "United Kingdom" should have the "Scotland" province
         And the country "United Kingdom" should have the "Northern Ireland" province

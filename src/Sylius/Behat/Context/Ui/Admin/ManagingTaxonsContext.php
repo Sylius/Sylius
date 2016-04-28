@@ -15,7 +15,6 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Taxon\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Taxon\UpdatePageInterface;
 use Sylius\Behat\Service\CurrentPageResolverInterface;
-use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
@@ -24,8 +23,6 @@ use Webmozart\Assert\Assert;
  */
 final class ManagingTaxonsContext implements Context
 {
-    const RESOURCE_NAME = 'taxon';
-
     /**
      * @var CreatePageInterface
      */
@@ -42,26 +39,18 @@ final class ManagingTaxonsContext implements Context
     private $currentPageResolver;
 
     /**
-     * @var NotificationCheckerInterface
-     */
-    private $notificationChecker;
-
-    /**
      * @param CreatePageInterface $createPage
      * @param UpdatePageInterface $updatePage
      * @param CurrentPageResolverInterface $currentPageResolver
-     * @param NotificationCheckerInterface $notificationChecker
      */
     public function __construct(
         CreatePageInterface $createPage,
         UpdatePageInterface $updatePage,
-        CurrentPageResolverInterface $currentPageResolver,
-        NotificationCheckerInterface $notificationChecker
+        CurrentPageResolverInterface $currentPageResolver
     ) {
         $this->createPage = $createPage;
         $this->updatePage = $updatePage;
         $this->currentPageResolver = $currentPageResolver;
-        $this->notificationChecker = $notificationChecker;
     }
 
     /**
@@ -194,30 +183,6 @@ final class ManagingTaxonsContext implements Context
     public function iSaveMyChanges()
     {
         $this->updatePage->saveChanges();
-    }
-
-    /**
-     * @Then I should be notified that it has been successfully created
-     */
-    public function iShouldBeNotifiedItHasBeenSuccessfullyCreated()
-    {
-        $this->notificationChecker->checkCreationNotification(self::RESOURCE_NAME);
-    }
-
-    /**
-     * @Then I should be notified that it has been successfully edited
-     */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited()
-    {
-        $this->notificationChecker->checkEditionNotification(self::RESOURCE_NAME);
-    }
-
-    /**
-     * @Then I should be notified that it has been successfully deleted
-     */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyDeleted()
-    {
-        $this->notificationChecker->checkDeletionNotification(self::RESOURCE_NAME);
     }
 
     /**

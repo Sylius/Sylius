@@ -13,7 +13,7 @@ Feature: Managing provinces of a country
         Given I want to edit this country
         When I add the "Scotland" province with "GB-SCT" code
         And I save my changes
-        Then I should be notified about successful edition
+        Then I should be notified that it has been successfully edited
         And this country should have the "Scotland" province
 
     @ui @javascript
@@ -22,7 +22,7 @@ Feature: Managing provinces of a country
         And I want to edit this country
         When I delete the "Northern Ireland" province of this country
         And I save my changes
-        Then I should be notified about successful edition
+        Then I should be notified that it has been successfully edited
         And this country should not have the "Northern Ireland" province
 
     @ui @javascript
@@ -32,6 +32,6 @@ Feature: Managing provinces of a country
         When I delete the "Northern Ireland" province of this country
         And I add the "Scotland" province with "GB-SCT" code
         And I save my changes
-        Then I should be notified about successful edition
+        Then I should be notified that it has been successfully edited
         And this country should not have the "Northern Ireland" province
         And this country should have the "Scotland" province

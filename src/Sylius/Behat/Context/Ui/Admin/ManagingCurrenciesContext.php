@@ -16,7 +16,6 @@ use Sylius\Behat\Page\Admin\Currency\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Currency\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Currency\UpdatePageInterface;
 use Sylius\Behat\Service\CurrentPageResolverInterface;
-use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Webmozart\Assert\Assert;
 
@@ -25,8 +24,6 @@ use Webmozart\Assert\Assert;
  */
 final class ManagingCurrenciesContext implements Context
 {
-    const RESOURCE_NAME = 'currency';
-
     /**
      * @var IndexPageInterface
      */
@@ -43,11 +40,6 @@ final class ManagingCurrenciesContext implements Context
     private $updatePage;
 
     /**
-     * @var NotificationCheckerInterface
-     */
-    private $notificationChecker;
-
-    /**
      * @var CurrentPageResolverInterface
      */
     private $currentPageResolver;
@@ -57,20 +49,17 @@ final class ManagingCurrenciesContext implements Context
      * @param CreatePageInterface $createPage
      * @param UpdatePageInterface $updatePage
      * @param CurrentPageResolverInterface $currentPageResolver
-     * @param NotificationCheckerInterface $notificationChecker
      */
     public function __construct(
         IndexPageInterface $indexPage,
         CreatePageInterface $createPage,
         UpdatePageInterface $updatePage,
-        CurrentPageResolverInterface $currentPageResolver,
-        NotificationCheckerInterface $notificationChecker
+        CurrentPageResolverInterface $currentPageResolver
     ) {
         $this->createPage = $createPage;
         $this->indexPage = $indexPage;
         $this->updatePage = $updatePage;
         $this->currentPageResolver = $currentPageResolver;
-        $this->notificationChecker = $notificationChecker;
     }
 
     /**
@@ -96,14 +85,6 @@ final class ManagingCurrenciesContext implements Context
     public function iAddIt()
     {
         $this->createPage->create();
-    }
-
-    /**
-     * @Then I should be notified that it has been successfully created
-     */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyCreated()
-    {
-        $this->notificationChecker->checkCreationNotification(self::RESOURCE_NAME);
     }
 
     /**
@@ -159,14 +140,6 @@ final class ManagingCurrenciesContext implements Context
     public function iSaveMyChanges()
     {
         $this->updatePage->saveChanges();
-    }
-
-    /**
-     * @Then I should be notified that it has been successfully edited
-     */
-    public function iShouldBeNotifiedThatItHasBeenSuccessfullyEdited()
-    {
-        $this->notificationChecker->checkEditionNotification(self::RESOURCE_NAME);
     }
 
     /**

@@ -13,7 +13,7 @@ Feature: Editing country
         And I want to edit this country
         When I disable it
         And I save my changes
-        Then I should be notified about successful edition
+        Then I should be notified that it has been successfully edited
         And this country should be disabled
 
     @ui
@@ -22,7 +22,7 @@ Feature: Editing country
         And I want to edit this country
         When I enable it
         And I save my changes
-        Then I should be notified about successful edition
+        Then I should be notified that it has been successfully edited
         And this country should be enabled
 
     @ui
