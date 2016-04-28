@@ -28,6 +28,14 @@ class TaxRateType extends BaseTaxRateType
     {
         parent::buildForm($builder, $options);
 
-        $builder->add('zone', 'sylius_zone_choice');
+        $builder
+            ->add('zone', 'sylius_zone_choice')
+            ->add('appliedToIndividuals', 'checkbox', [
+                'label' => 'Apply to individuals',
+            ])
+            ->add('appliedToEntrepreneursAndResellers', 'checkbox', [
+                'label' => 'Apply to entrepreneurs and resellers'
+            ])
+        ;
     }
 }

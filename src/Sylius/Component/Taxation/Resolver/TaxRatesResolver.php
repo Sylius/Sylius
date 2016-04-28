@@ -17,7 +17,7 @@ use Sylius\Component\Taxation\Model\TaxableInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class TaxRateResolver implements TaxRateResolverInterface
+class TaxRatesResolver implements TaxRatesResolverInterface
 {
     /**
      * @var RepositoryInterface
@@ -43,6 +43,6 @@ class TaxRateResolver implements TaxRateResolverInterface
 
         $criteria = array_merge(['category' => $category], $criteria);
 
-        return $this->taxRateRepository->findOneBy($criteria);
+        return $this->taxRateRepository->findBy($criteria);
     }
 }

@@ -177,7 +177,7 @@ class TaxRate implements TaxRateInterface
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
     public function getLabel()
     {

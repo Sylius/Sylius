@@ -16,12 +16,12 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Taxation\Model\TaxableInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Component\Taxation\Model\TaxRateInterface;
-use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
+use Sylius\Component\Taxation\Resolver\TaxRatesResolverInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class TaxRateResolverSpec extends ObjectBehavior
+class TaxRatesResolverSpec extends ObjectBehavior
 {
     function let(RepositoryInterface $taxRateRepository)
     {
@@ -30,35 +30,35 @@ class TaxRateResolverSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Taxation\Resolver\TaxRateResolver');
+        $this->shouldHaveType('Sylius\Component\Taxation\Resolver\TaxRatesResolver');
     }
 
-    function it_implements_Sylius_tax_rate_resolver_interface()
+    function it_implements_Sylius_tax_rates_resolver_interface()
     {
-        $this->shouldImplement(TaxRateResolverInterface::class);
+        $this->shouldImplement(TaxRatesResolverInterface::class);
     }
 
-    function it_returns_tax_rate_for_given_taxable_category(
+    function it_returns_tax_rates_for_given_taxable_category(
         $taxRateRepository,
         TaxableInterface $taxable,
         TaxCategoryInterface $taxCategory,
         TaxRateInterface $taxRate
     ) {
         $taxable->getTaxCategory()->willReturn($taxCategory);
-        $taxRateRepository->findOneBy(['category' => $taxCategory])->shouldBeCalled()->willReturn($taxRate);
+        $taxRateRepository->findBy(['category' => $taxCategory])->shouldBeCalled()->willReturn([$taxRate]);
 
-        $this->resolve($taxable)->shouldReturn($taxRate);
+        $this->resolve($taxable)->shouldReturn([$taxRate]);
     }
 
-    function it_returns_null_if_tax_rate_for_given_taxable_category_does_not_exist(
+    function it_returns_null_if_tax_rates_for_given_taxable_category_does_not_exist(
         $taxRateRepository,
         TaxableInterface $taxable,
         TaxCategoryInterface $taxCategory
     ) {
         $taxable->getTaxCategory()->willReturn($taxCategory);
-        $taxRateRepository->findOneBy(['category' => $taxCategory])->shouldBeCalled()->willReturn(null);
+        $taxRateRepository->findBy(['category' => $taxCategory])->shouldBeCalled()->willReturn([]);
 
-        $this->resolve($taxable)->shouldReturn(null);
+        $this->resolve($taxable)->shouldReturn([]);
     }
 
     function it_returns_null_if_taxable_does_not_belong_to_any_category(

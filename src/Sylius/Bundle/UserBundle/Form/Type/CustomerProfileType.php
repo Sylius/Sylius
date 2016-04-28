@@ -46,6 +46,14 @@ class CustomerProfileType extends AbstractResourceType
                 'required' => false,
                 'label' => 'sylius.form.customer.phone_number',
             ])
+            ->add('vatNumber', 'text', [
+                'required' => false,
+                'label' => 'sylius.form.customer.vat_number'
+            ])
+            ->add('resellerId', 'text', [
+                'required' => false,
+                'label' => 'sylius.form.customer.reseller_id'
+            ])
         ;
     }
 

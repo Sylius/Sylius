@@ -28,7 +28,7 @@
         <parameter key="sylius.tax_calculator.class">Sylius\Component\Taxation\Calculator\DelegatingCalculator</parameter>
         <parameter key="sylius.tax_calculator.default.class">Sylius\Component\Taxation\Calculator\DefaultCalculator</parameter>
 
-        <parameter key="sylius.tax_rate_resolver.class">Sylius\Component\Taxation\Resolver\TaxRateResolver</parameter>
+        <parameter key="sylius.tax_rates_resolver.class">Sylius\Component\Taxation\Resolver\TaxRatesResolver</parameter>
     </parameters>
 
     <services>
@@ -55,7 +55,7 @@
             <tag name="sylius.tax_calculator" calculator="default" />
         </service>
 
-        <service id="sylius.tax_rate_resolver" class="%sylius.tax_rate_resolver.class%">
+        <service id="sylius.tax_rates_resolver" class="%sylius.tax_rates_resolver.class%">
             <argument type="service" id="sylius.repository.tax_rate" />
         </service>
     </services>

@@ -121,4 +121,34 @@ interface CustomerInterface extends
      * @param string $phoneNumber
      */
     public function setPhoneNumber($phoneNumber);
+
+    /**
+     * @return string
+     */
+    public function getVatNumber();
+
+    /**
+     * @param null|string $vatNumber
+     */
+    public function setVatNumber($vatNumber);
+
+    /**
+     * @return string
+     */
+    public function getResellerId();
+
+    /**
+     * @param null|string $resellerId
+     */
+    public function setResellerId($resellerId);
+
+    /**
+     * @return bool
+     */
+    public function isEntrepreneurOrReseller();
+
+    /**
+     * @return bool
+     */
+    public function isIndividual();
 }

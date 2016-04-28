@@ -35,6 +35,8 @@ class CustomerProfileTypeSpec extends ObjectBehavior
 
     function it_builds_a_form(FormBuilderInterface $builder)
     {
+        $builder->add('vatNumber', 'text', Argument::type('array'))->shouldbeCalled()->willReturn($builder);
+        $builder->add('resellerId', 'text', Argument::type('array'))->shouldbeCalled()->willReturn($builder);
         $builder->add('firstName', 'text', Argument::type('array'))->shouldbeCalled()->willReturn($builder);
         $builder->add('lastName', 'text', Argument::type('array'))->shouldbeCalled()->willReturn($builder);
         $builder->add('email', 'email', Argument::type('array'))->shouldbeCalled()->willReturn($builder);

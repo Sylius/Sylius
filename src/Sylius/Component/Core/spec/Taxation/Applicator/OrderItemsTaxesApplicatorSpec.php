@@ -27,7 +27,7 @@ use Sylius\Component\Core\Taxation\Applicator\OrderTaxesApplicatorInterface;
 use Sylius\Component\Order\Factory\AdjustmentFactoryInterface;
 use Sylius\Component\Taxation\Calculator\CalculatorInterface;
 use Sylius\Component\Taxation\Model\TaxRateInterface;
-use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
+use Sylius\Component\Taxation\Resolver\TaxRatesResolverInterface;
 
 /**
  * @mixin OrderItemsTaxesApplicator
@@ -41,9 +41,9 @@ class OrderItemsTaxesApplicatorSpec extends ObjectBehavior
         CalculatorInterface $calculator,
         AdjustmentFactoryInterface $adjustmentsFactory,
         IntegerDistributorInterface $distributor,
-        TaxRateResolverInterface $taxRateResolver
+        TaxRatesResolverInterface $taxRatesResolver
     ) {
-        $this->beConstructedWith($calculator, $adjustmentsFactory, $distributor, $taxRateResolver);
+        $this->beConstructedWith($calculator, $adjustmentsFactory, $distributor, $taxRatesResolver);
     }
 
     function it_is_initializable()
@@ -60,7 +60,7 @@ class OrderItemsTaxesApplicatorSpec extends ObjectBehavior
         $adjustmentsFactory,
         $calculator,
         $distributor,
-        $taxRateResolver,
+        $taxRatesResolver,
         AdjustmentInterface $taxAdjustment1,
         AdjustmentInterface $taxAdjustment2,
         Collection $items,
@@ -81,7 +81,7 @@ class OrderItemsTaxesApplicatorSpec extends ObjectBehavior
         $orderItem->getQuantity()->willReturn(2);
 
         $orderItem->getVariant()->willReturn($productVariant);
-        $taxRateResolver->resolve($productVariant, ['zone' => $zone])->willReturn($taxRate);
+        $taxRatesResolver->resolve($productVariant, ['zone' => $zone])->willReturn([$taxRate]);
 
         $orderItem->getTotal()->willReturn(1000);
         $calculator->calculate(1000, $taxRate)->willReturn(100);
@@ -119,7 +119,7 @@ class OrderItemsTaxesApplicatorSpec extends ObjectBehavior
     }
 
     function it_does_nothing_if_tax_rate_cannot_be_resolved(
-        $taxRateResolver,
+        $taxRatesResolver,
         Collection $items,
         \Iterator $iterator,
         OrderInterface $order,
@@ -139,7 +139,7 @@ class OrderItemsTaxesApplicatorSpec extends ObjectBehavior
         $orderItem->getQuantity()->willReturn(5);
 
         $orderItem->getVariant()->willReturn($productVariant);
-        $taxRateResolver->resolve($productVariant, ['zone' => $zone])->willReturn(null);
+        $taxRatesResolver->resolve($productVariant, ['zone' => $zone])->willReturn([]);
 
         $orderItem->getUnits()->shouldNotBeCalled();
 
@@ -150,7 +150,7 @@ class OrderItemsTaxesApplicatorSpec extends ObjectBehavior
         $adjustmentsFactory,
         $calculator,
         $distributor,
-        $taxRateResolver,
+        $taxRatesResolver,
         Collection $items,
         Collection $units,
         OrderInterface $order,
@@ -169,7 +169,7 @@ class OrderItemsTaxesApplicatorSpec extends ObjectBehavior
         $orderItem->getQuantity()->willReturn(2);
         $orderItem->getVariant()->willReturn($productVariant);
 
-        $taxRateResolver->resolve($productVariant, ['zone' => $zone])->willReturn($taxRate);
+        $taxRatesResolver->resolve($productVariant, ['zone' => $zone])->willReturn([$taxRate]);
 
         $orderItem->getTotal()->willReturn(1000);
         $calculator->calculate(1000, $taxRate)->willReturn(0);

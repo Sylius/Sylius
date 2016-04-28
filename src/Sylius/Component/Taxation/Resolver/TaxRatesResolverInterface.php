@@ -17,13 +17,13 @@ use Sylius\Component\Taxation\Model\TaxRateInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface TaxRateResolverInterface
+interface TaxRatesResolverInterface
 {
     /**
      * @param TaxableInterface $taxable
      * @param array            $criteria
      *
-     * @return null|TaxRateInterface
+     * @return null|TaxRateInterface[]
      */
     public function resolve(TaxableInterface $taxable, array $criteria = []);
 }

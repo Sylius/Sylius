@@ -18,6 +18,7 @@ use Sylius\Component\Taxation\Model\TaxRate as BaseTaxRate;
  * Tax rate applicable to selected zone.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Robin Jansen <robinjansen51@gmail.com>
  */
 class TaxRate extends BaseTaxRate implements TaxRateInterface
 {
@@ -27,6 +28,19 @@ class TaxRate extends BaseTaxRate implements TaxRateInterface
      * @var ZoneInterface
      */
     protected $zone;
+
+    /**
+     * @var bool
+     */
+    protected $appliedToIndividuals = true;
+
+    /**
+     * Resale Certificate is used in United States
+     * VAT (entrepreneur) is used in European Union
+     *
+     * @var bool
+     */
+    protected $appliedToEntrepreneursAndResellers = true;
 
     /**
      * {@inheritdoc}
@@ -44,5 +58,53 @@ class TaxRate extends BaseTaxRate implements TaxRateInterface
         $this->zone = $zone;
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isAppliedToIndividuals()
+    {
+        return $this->appliedToIndividuals;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAppliedToIndividuals()
+    {
+        return $this->appliedToIndividuals;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setAppliedToIndividuals($appliedToIndividuals)
+    {
+        $this->appliedToIndividuals = $appliedToIndividuals;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isAppliedToEntrepreneursAndResellers()
+    {
+        return $this->appliedToEntrepreneursAndResellers;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAppliedToEntrepreneursAndResellers()
+    {
+        return $this->appliedToEntrepreneursAndResellers;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setAppliedToEntrepreneursAndResellers($appliedToEntrepreneursAndResellers)
+    {
+        $this->appliedToEntrepreneursAndResellers = $appliedToEntrepreneursAndResellers;
     }
 }

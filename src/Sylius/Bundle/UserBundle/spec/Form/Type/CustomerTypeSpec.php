@@ -45,6 +45,8 @@ class CustomerTypeSpec extends ObjectBehavior
 
     function it_builds_form(FormBuilderInterface $builder, EventSubscriberInterface $addUserTypeSubscriber)
     {
+        $builder->add('resellerId', 'text', Argument::any())->shouldBeCalled()->willReturn($builder);
+        $builder->add('vatNumber', 'text', Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->add('firstName', 'text', Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->add('lastName', 'text', Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->add('email', 'email', Argument::any())->shouldBeCalled()->willReturn($builder);
