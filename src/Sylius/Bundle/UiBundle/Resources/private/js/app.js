@@ -33,6 +33,7 @@
     $('.ui.checkbox').checkbox();
     $('.ui.accordion').accordion();
     $('.link.ui.dropdown').dropdown({action: 'hide'});
+    $('.button.ui.dropdown').dropdown({action: 'hide'});
 
     $('.form button').on('click', function() {
       return $(this).closest('form').addClass('loading');

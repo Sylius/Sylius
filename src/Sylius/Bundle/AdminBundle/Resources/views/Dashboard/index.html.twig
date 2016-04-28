@@ -1,11 +1,183 @@
 {% extends 'SyliusAdminBundle::layout.html.twig' %}
 
+{% import 'SyliusUiBundle:Macro:headers.html.twig' as headers %}
+
 {% block title %}{{ parent() }}{{ 'sylius.ui.dashboard'|trans }}{% endblock %}
 
-{% block header %}
-{{ 'sylius.ui.dashboard'|trans }}
-{% endblock %}
-
 {% block content %}
-Hello!
+<div class="ui three column stackable grid">
+    <div class="column">
+        {{ headers.default('sylius.ui.dashboard'|trans, 'home', 'sylius.ui.overview_of_your_store'|trans) }}
+    </div>
+    <div class="middle aligned column">
+        <div class="ui large fluid icon input">
+            <i class="search icon"></i>
+            <input type="text" placeholder="Search products...">
+        </div>
+    </div>
+    <div class="middle aligned column">
+        <div class="ui floating labeled icon dropdown button">
+            <i class="dropdown icon"></i>
+        <span class="text">
+            <div class="ui teal empty circular label"></div>
+            US Mobile Store
+        </span>
+            <div class="menu">
+                <div class="header">
+                    Search channels
+                </div>
+                <div class="ui left icon input">
+                    <i class="search icon"></i>
+                    <input type="text" name="search" placeholder="Search...">
+                </div>
+                <div class="header">
+                    <i class="share alternate icon"></i>
+                    Select a channel
+                </div>
+                <div class="item">
+                    <div class="ui red empty circular label"></div>
+                    US Web Store
+                </div>
+                <div class="item">
+                    <div class="ui blue empty circular label"></div>
+                    EU Web Store
+                </div>
+                <div class="item">
+                    <div class="ui black empty circular label"></div>
+                    EU Mobile Store
+                </div>
+            </div>
+        </div>
+        <div class="ui floating labeled icon dropdown button">
+            <i class="dropdown icon"></i>
+            <span class="text">Today</span>
+            <div class="menu">
+                <div class="header">
+                    <i class="calendar icon"></i>
+                    Date range
+                </div>
+                <div class="item">
+                    Yesterday
+                </div>
+                <div class="item">
+                    Last 7 days
+                </div>
+                <div class="item">
+                    Last month
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="ui segment">
+    <div class="ui center aligned four column stackable divided grid">
+        <div class="column">
+            <div class="ui statistic">
+                <div class="value">
+                    $5,550
+                </div>
+                <div class="label">
+                    Sales
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="ui statistic">
+                <div class="value">
+                    25
+                </div>
+                <div class="label">
+                    New orders
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="ui statistic">
+                <div class="value">
+                    40
+                </div>
+                <div class="label">
+                    New customers
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="ui statistic">
+                <div class="value">
+                    $1,100
+                </div>
+                <div class="label">
+                    Average order value
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="ui two column stackable grid">
+    <div class="column">
+        <div class="ui segment">
+            <h4 class="ui dividing header">{{ 'sylius.ui.recent_orders'|trans }}</h4>
+            <table class="ui sortable stackable celled table">
+                <thead>
+                    <tr>
+                        <th>Customer</th>
+                        <th>Items</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <strong>john@example.com</strong>
+                            Johnatan Test
+                        </td>
+                        <td>5</td>
+                        <td>$4,000</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>sara@example.com</strong>
+                            Ricky Bones
+                        </td>
+                        <td>2</td>
+                        <td>$300</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <strong>martin@example.com</strong>
+                            Martin Gigs
+                        </td>
+                        <td>12</td>
+                        <td>$14,600</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="column">
+        <div class="ui segment">
+            <h4 class="ui dividing header">{{ 'sylius.ui.new_customers'|trans }}</h4>
+            <table class="ui sortable stackable celled table">
+                <thead>
+                <tr>
+                    <th>Customer</th>
+                    <th>Date</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        <strong>john@example.com</strong>
+                        Johnatan Test
+                    </td>
+                    <td>14-02-2015 14:30:21</td>
+                    <td><a href="#" class="ui button">View profile</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 {% endblock %}
