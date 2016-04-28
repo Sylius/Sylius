@@ -3,6 +3,7 @@ sylius:
         admin:
             main:
                 catalog:
+                    attributes: Attributes
                     header: Catalog
                     product_options: Product options
                     taxons: Taxons
@@ -17,12 +18,9 @@ sylius:
                     tax_categories: Tax categories
                     tax_rates: Tax rates
                     zones: Zones
-                marketing:
-                    header: Marketing
-                    promotions: Promotions
                 customers:
                     header: Customer
                     customers: Customers
-                catalog:
-                    header: Catalog
-                    attributes: Attributes
+                marketing:
+                    header: Marketing
+                    promotions: Promotions
