@@ -6,24 +6,36 @@ sylius_grid:
                 options:
                     class: "%sylius.model.promotion.class%"
             fields:
-                codeExclusiveAndCouponBased:
-                    type: twig
+                code:
+                    type: string
                     label: sylius.ui.code
-                    path: .
-                    options:
-                        template: SyliusAdminBundle:Promotion/Field:codeExclusiveAndCouponBased.html.twig
-                nameAndDescription:
+                name:
                     type: twig
                     label: sylius.ui.name
                     path: .
                     options:
                         template: SyliusAdminBundle:Grid/Field:nameAndDescription.html.twig
-                usedWithUsageLimit:
+                couponBased:
                     type: twig
-                    label: sylius.ui.used
+                    label: sylius.ui.coupons
+                    options:
+                        template: SyliusAdminBundle:Grid/Field:yesNo.html.twig
+                usage:
+                    type: twig
+                    label: sylius.ui.usage
                     path: .
                     options:
-                        template: SyliusAdminBundle:Promotion/Field:usedWithUsageLimit.html.twig
+                        template: SyliusAdminBundle:Promotion/Field:usage.html.twig
+            filters:
+                code:
+                    type: string
+                    label: sylius.ui.code
+                name:
+                    type: string
+                    label: sylius.ui.name
+                couponBased:
+                    type: boolean
+                    label: sylius.ui.coupons
             actions:
                 main:
                     create:
@@ -33,4 +45,3 @@ sylius_grid:
                         type: update
                     delete:
                         type: delete
-

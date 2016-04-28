@@ -1,23 +1,20 @@
-<div class="ui two column stackable grid">
-    <div class="column">
-        <div class="ui segment">
-            {{ form_errors(form) }}
-            <div class="one field">
-                {{ form_row(form.code) }}
-            </div>
-            <div class="one field">
-                {{ form_row(form.parent) }}
-            </div>
-        </div>
+<div class="ui segment">
+    {{ form_errors(form) }}
+    <div class="two fields">
+        {{ form_row(form.code) }}
+        {{ form_row(form.parent) }}
     </div>
-    <div class="column">
-        <div class="ui segment">
-            {% for locale, translationForm in form.translations %}
-                <h4 class="ui dividing header"><i class="{{ locale|slice(3, 2)|lower }} flag"></i> {{ locale|sylius_locale_name }}</h4>
-                {{ form_row(translationForm.name) }}
-                {{ form_row(translationForm.permalink) }}
-                {{ form_row(translationForm.description) }}
-            {% endfor %}
+</div>
+<div class="ui styled fluid accordion">
+    {% for locale, translationForm in form.translations %}
+        <div class="title{% if 0 == loop.index0 %} active{% endif %}">
+            <i class="dropdown icon"></i>
+            <i class="{{ locale|slice(3, 2)|lower }} flag"></i> {{ locale|sylius_locale_name }}
         </div>
-    </div>
+        <div class="content{% if 0 == loop.index0 %} active{% endif %}">
+            {{ form_row(translationForm.name) }}
+            {{ form_row(translationForm.permalink) }}
+            {{ form_row(translationForm.description) }}
+        </div>
+    {% endfor %}
 </div>

@@ -66,9 +66,12 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         $this->getDocument()->selectFieldOption('Gender', $gender);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function selectCreateAccount()
     {
-        $this->getDocument()->checkField('Create account?');
+        $this->getDocument()->find('css', 'label[for=sylius_customer_create_user]')->click();
     }
 
     /**

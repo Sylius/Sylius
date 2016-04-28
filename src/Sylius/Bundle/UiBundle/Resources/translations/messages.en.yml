@@ -7,6 +7,7 @@ sylius:
         option:
             presentation: Presentation
     ui:
+        all: All
         actions: Actions
         administration_panel_login: Administration panel login
         an_error_occurred: An error occurred
@@ -37,9 +38,13 @@ sylius:
         edit_customer: Edit customer
         edit_payment_method: Edit payment method
         edit_product_option: Edit product option
+        edit_product_attribute: Edit product attribute
         edit_promotion: Edit promotion
+        edit_shipping_method: Edit shipping method
         edit_tax_category: Edit tax category
         edit_tax_rate: Edit tax rate
+        edit_taxon: Edit taxon
+        edit_zone: Edit zone
         empty: Empty
         enabled: Enabled
         ends_with: Ends with
@@ -50,17 +55,18 @@ sylius:
         info: Info
         last_updated: Last updated
         locales: Locales
-        manage_attributes_of_your_produts: Manage attributes of your products
-        manage_country: Manage country
+        manage_attributes_of_your_products: Manage attributes of your products
         manage_currencies_available_in_the_store: Manage currencies available in the store
-        manage_customer: Manage customers
+        manage_your_customers: Manage your customers
         manage_languages_available_in_the_store: Manage languages available in the store
-        manage_payment_method: Manage payment methods
-        manage_product_option: Manage product option
+        manage_configuration_options_of_your_products: Manage configuration options of your products
+        manage_payment_methods_available_to_your_customers: Manage payment methods available to your customers
         manage_shipping_destinations: Manage shipping destinations
-        manage_taxons: Manage taxons of your products
+        manage_categorization_of_your_products: Manage categorization of your products
         manage_shipping_methods_for_your_store: Manage shipping methods for your store
         manage_taxation_of_your_products: Manage taxation of your products
+        manage_geographical_zones: Manage geographical zones
+        manage_discounts_and_promotional_campaigns: Manage discounts and promotional campaigns
         new: New
         new_channel: New channel
         new_country: New country
@@ -88,3 +94,16 @@ sylius:
         tax_categories: Tax categories
         values: Values
         yes: Yes
+        total_records: Total records
+        jump_to_page: Jump to page
+        go: Go
+        unlimited: Unlimited
+        no_requirement: No requirement
+        zone_consisting_of_countries: Zone consisting of countries
+        zone_consisting_of_provinces: Zone consisting of provinces
+        zone_consisting_of_other_zones: Zone consisting of other zones
+        no_theme: No theme
+        usage: Usage
+        customer_can_login_to_the_store: Customer can login to the store
+        account_credentials: Account credentials
+        extra_information: Extra information

@@ -57,7 +57,7 @@ class FieldSpec extends ObjectBehavior
         $this->setLabel('Is enabled?');
         $this->getLabel()->shouldReturn('Is enabled?');
     }
-    
+
     function it_has_no_options_by_default()
     {
         $this->getOptions()->shouldReturn([]);

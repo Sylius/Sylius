@@ -71,6 +71,4 @@ final class TaxonContext implements Context
             $this->getTaxonByName($secondTaxon)
         ];
     }
-
-
 }

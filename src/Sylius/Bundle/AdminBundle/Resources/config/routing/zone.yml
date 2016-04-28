@@ -8,11 +8,11 @@ sylius_admin_zone:
         grid: sylius_admin_zone
         vars:
             all:
-                subheader: sylius.ui.manage_zone
+                subheader: sylius.ui.manage_geographical_zones
                 templates:
                     form: SyliusAdminBundle:Zone:_form.html.twig
             index:
-                icon: location arrow
+                icon: world
     type: sylius.resource
 
 sylius_admin_zone_create:
@@ -29,6 +29,7 @@ sylius_admin_zone_create:
             template: SyliusAdminBundle:Crud:create.html.twig
             redirect: sylius_admin_zone_update
             vars:
+                subheader: sylius.ui.manage_geographical_zones
                 templates:
                     form: SyliusAdminBundle:Zone:_form.html.twig
     requirements:

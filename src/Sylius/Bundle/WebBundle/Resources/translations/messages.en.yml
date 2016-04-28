@@ -452,7 +452,7 @@ sylius:
         new_contact_topic: 'New contact topic'
         new_country: 'New country'
         new_currency: 'New currency'
-        new_customer: 'New Customer'
+        new_customer: 'New customer'
         new_order: 'New order'
         new_password: 'New password'
         new_payment: 'New payment'

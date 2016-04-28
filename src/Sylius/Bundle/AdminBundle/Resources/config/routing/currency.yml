@@ -12,5 +12,5 @@ sylius_admin_currency:
                 templates:
                     form: SyliusAdminBundle:Currency:_form.html.twig
             index:
-                icon: money
+                icon: dollar
     type: sylius.resource

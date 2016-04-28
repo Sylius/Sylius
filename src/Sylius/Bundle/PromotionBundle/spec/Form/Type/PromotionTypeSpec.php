@@ -50,7 +50,7 @@ class PromotionTypeSpec extends ObjectBehavior
         ;
 
         $builder
-            ->add('description', 'text', Argument::type('array'))
+            ->add('description', 'textarea', Argument::type('array'))
             ->willReturn($builder)
         ;
 

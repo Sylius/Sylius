@@ -15,13 +15,14 @@ sylius_grid:
                     type: string
                     label: sylius.ui.name
                 type:
-                    type: string
+                    type: twig
                     label: sylius.ui.type
-                updated_at:
-                    type: datetime
-                    label: sylius.ui.last_update
                     options:
-                        format: d-m-Y H:i
+                        template: SyliusAdminBundle:Grid/Field:label.html.twig
+            filters:
+                code:
+                    type: string
+                    label: sylius.ui.code
             actions:
                 main:
                     create:

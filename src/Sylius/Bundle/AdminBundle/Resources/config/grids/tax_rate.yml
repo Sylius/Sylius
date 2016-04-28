@@ -8,23 +8,30 @@ sylius_grid:
             sorting:
                 name: asc
             fields:
+                code:
+                    type: string
+                    label: sylius.ui.code
+                name:
+                    type: string
+                    label: sylius.ui.name
+                zone:
+                    type: string
+                    label: sylius.ui.zone
                 category:
                     type: string
                     label: sylius.ui.category
+                amount:
+                    type: twig
+                    label: sylius.ui.amount
+                    options:
+                        template: SyliusAdminBundle:TaxRate/Field:amount.html.twig
+            filters:
                 name:
                     type: string
                     label: sylius.ui.name
                 code:
                     type: string
                     label: sylius.ui.code
-                zone:
-                    type: string
-                    label: sylius.ui.zone
-                amount:
-                    type: twig
-                    label: sylius.ui.amount
-                    options:
-                        template: SyliusAdminBundle:TaxRate/Field:amount.html.twig
             actions:
                 main:
                     create:

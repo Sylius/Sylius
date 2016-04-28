@@ -13,14 +13,23 @@ sylius_grid:
                     type: string
                     label: sylius.ui.name
                 type:
-                    type: string
+                    type: twig
                     label: sylius.ui.type
+                    options:
+                        template: SyliusAdminBundle:Grid/Field:label.html.twig
+            filters:
+                name:
+                    type: string
+                    label: sylius.ui.name
+                code:
+                    type: string
+                    label: sylius.ui.code
             actions:
                 main:
                     create:
                         type: create_zone
                 item:
-                    delete:
-                        type: delete
                     update:
                         type: update
+                    delete:
+                        type: delete

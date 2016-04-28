@@ -49,6 +49,9 @@ class ArrayToDefinitionConverter implements ArrayToDefinitionConverterInterface
             if (array_key_exists('label', $filterConfiguration)) {
                 $filter->setLabel($filterConfiguration['label']);
             }
+            if (array_key_exists('options', $filterConfiguration)) {
+                $filter->setOptions($filterConfiguration['options']);
+            }
 
             $grid->addFilter($filter);
         }

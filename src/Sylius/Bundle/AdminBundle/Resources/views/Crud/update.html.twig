@@ -1,6 +1,7 @@
 {% extends 'SyliusAdminBundle::layout.html.twig' %}
 
 {% import 'SyliusUiBundle:Macro:headers.html.twig' as headers %}
+{% import 'SyliusUiBundle:Macro:buttons.html.twig' as buttons %}
 
 {% set header = configuration.vars.header|default(metadata.applicationName~'.ui.edit_'~metadata.name) %}
 
@@ -10,6 +11,16 @@
 
 {% block content %}
 {{ headers.default(header|trans, configuration.vars.icon|default('pencil'), configuration.vars.subheader|default(null)|trans) }}
+
+<div class="ui breadcrumb">
+    <a href="{{ path('sylius_admin_dashboard') }}" class="section">{{ 'sylius.ui.administration'|trans }}</a>
+    <i class="right chevron icon divider"></i>
+    <a href="{{ path(configuration.getRouteName('index')) }}" class="section">{{ (metadata.applicationName~'.ui.'~metadata.pluralName)|trans }}</a>
+    <i class="right chevron icon divider"></i>
+    <div class="section">{{ resource.code is defined ? resource.code : resource.id }}</div>
+    <i class="right chevron icon divider"></i>
+    <div class="active section">{{ 'sylius.ui.edit'|trans }}</div>
+</div>
 
 {{ form_start(form, {'action': path(configuration.getRouteName('update'), {'id': resource.id}), 'attr': {'class': 'ui form', 'novalidate': 'novalidate'}}) }}
     <div class="ui segment">

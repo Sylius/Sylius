@@ -1,9 +1,12 @@
 {{ form_errors(form) }}
-<div class="one field">
-    {{ form_row(form.code) }}
-    {{ form_row(form.name) }}
-    {{ form_row(form.type) }}
-    {{ form_row(form.members) }}
-    {{ form_row(form.scope) }}
+<div class="ui segment">
+    <div class="three fields">
+        {{ form_row(form.type) }}
+        {{ form_row(form.code) }}
+        {{ form_row(form.name) }}
+    </div>
 </div>
-{{ form_rest(form) }}
+<div class="ui segment">
+    <h4 class="ui dividing header">{{ 'sylius.ui.members'|trans }}</h4>
+    {{ form_row(form.members, {'label': false}) }}
+</div>

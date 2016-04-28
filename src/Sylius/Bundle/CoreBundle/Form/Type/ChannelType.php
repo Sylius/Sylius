@@ -51,6 +51,7 @@ class ChannelType extends BaseChannelType
                 'label' => 'sylius.form.channel.theme',
                 'required' => false,
                 'empty_data' => null,
+                'empty_value' => 'sylius.ui.no_theme'
             ])
             ->add('shippingMethods', 'sylius_shipping_method_choice', [
                 'label' => 'sylius.form.channel.shipping_methods',

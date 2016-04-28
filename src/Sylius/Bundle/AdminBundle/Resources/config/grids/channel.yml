@@ -9,30 +9,35 @@ sylius_grid:
                 name: asc
             fields:
                 code:
-                    type: string
+                    type: twig
                     label: sylius.ui.code
+                    path: .
+                    options:
+                        template: SyliusAdminBundle:Channel/Field:code.html.twig
                 nameAndDescription:
                     type: twig
                     label: sylius.ui.name
                     path: .
                     options:
                         template: SyliusAdminBundle:Grid/Field:nameAndDescription.html.twig
-                hostname:
-                    type: string
-                    label: sylius.ui.hostname
                 theme:
                     type: string
                     label: sylius.ui.theme
-                color:
-                    type: twig
-                    label: sylius.ui.color
-                    options:
-                        template: SyliusAdminBundle:Channel/Field:color.html.twig
                 enabled:
                     type: twig
                     label: sylius.ui.enabled
                     options:
                         template: SyliusAdminBundle:Grid/Field:enabled.html.twig
+            filters:
+                code:
+                    type: string
+                    label: sylius.ui.code
+                name:
+                    type: string
+                    label: sylius.ui.name
+                enabled:
+                    type: boolean
+                    label: sylius.ui.enabled
             actions:
                 main:
                     create:

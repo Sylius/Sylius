@@ -13,13 +13,22 @@ sylius_grid:
                     type: string
                     label: sylius.ui.name
                 gateway:
-                    type: string
+                    type: twig
                     label: sylius.ui.gateway
+                    options:
+                        template: SyliusAdminBundle:Grid/Field:label.html.twig
                 enabled:
                     type: twig
                     label: sylius.ui.enabled
                     options:
                         template: SyliusAdminBundle:Grid/Field:enabled.html.twig
+            filters:
+                code:
+                    type: string
+                    label: sylius.ui.code
+                enabled:
+                    type: boolean
+                    label: sylius.ui.enabled
             actions:
                 main:
                     create:

@@ -8,7 +8,7 @@ sylius_admin_product_attribute:
         grid: sylius_admin_product_attribute
         vars:
             all:
-                subheader: sylius.ui.manage_attributes_of_your_produts
+                subheader: sylius.ui.manage_attributes_of_your_products
                 templates:
                     form: SyliusAdminBundle:ProductAttribute:_form.html.twig
             index:
@@ -30,6 +30,7 @@ sylius_admin_product_attribute_create:
             template: SyliusAdminBundle:Crud:create.html.twig
             redirect: sylius_admin_product_attribute_update
             vars:
+                subheader: sylius.ui.manage_attributes_of_your_products
                 templates:
                     form: SyliusAdminBundle:ProductAttribute:_form.html.twig
 

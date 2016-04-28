@@ -1,28 +1,36 @@
-{{ form_errors(form) }}
-<div class="three fields">
-    {{ form_row(form.email) }}
-    {{ form_row(form.firstName) }}
-    {{ form_row(form.lastName) }}
-</div>
-<div class="three fields">
-    {{ form_row(form.birthday) }}
-    {{ form_row(form.gender) }}
-    {{ form_row(form.phoneNumber) }}
-</div>
-{% if form.user is defined %}
-    {% if form.user.vars.data.id is not defined %}
-        <div>
-            <label for="sylius_customer_create_user">
-                {{ 'sylius.form.customer.only_customer_registration'|trans }}
-            </label>
-            <div>
-                <input type="checkbox" id="sylius_customer_create_user">
+<div class="ui two column stackable grid">
+    {{ form_errors(form) }}
+    <div class="column">
+        <div class="ui segment">
+            <h4 class="ui dividing header">{{ 'sylius.ui.customer_details'|trans }}</h4>
+            <div class="two fields">
+                {{ form_row(form.firstName) }}
+                {{ form_row(form.lastName) }}
             </div>
+            {{ form_row(form.email) }}
         </div>
-    {% endif %}
-    <div id="user-form" {% if form.user.vars.data.id is not defined %} style="display: none" {% endif %}>
-        {{ form_row(form.user.plainPassword) }}
-        {{ form_row(form.user.enabled) }}
+        <div class="ui segment">
+            <h4 class="ui dividing header">{{ 'sylius.ui.extra_information'|trans }}</h4>
+            {{ form_row(form.gender) }}
+            {{ form_row(form.birthday) }}
+            {{ form_row(form.phoneNumber) }}
+        </div>
     </div>
-{% endif %}
-
+    <div class="column">
+        <div class="ui segment">
+            <h4 class="ui dividing header">{{ 'sylius.ui.account_credentials'|trans }}</h4>
+            <div class="field">
+                <div class="ui toggle checkbox">
+                    <input type="checkbox" id="sylius_customer_create_user" {% if customer.user is not empty %}checked="checked"{% endif %}>
+                    <label for="sylius_customer_create_user">{{ 'sylius.ui.customer_can_login_to_the_store'|trans }}?</label>
+                </div>
+            </div>
+            {% if form.user is defined %}
+                <div id="user-form" {% if form.user.vars.data.id is not defined %} style="display: none" {% endif %}>
+                    {{ form_row(form.user.plainPassword) }}
+                    {{ form_row(form.user.enabled) }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

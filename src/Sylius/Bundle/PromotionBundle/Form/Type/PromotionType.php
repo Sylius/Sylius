@@ -29,7 +29,7 @@ class PromotionType extends AbstractResourceType
             ->add('name', 'text', [
                 'label' => 'sylius.form.promotion.name',
             ])
-            ->add('description', 'text', [
+            ->add('description', 'textarea', [
                 'label' => 'sylius.form.promotion.description',
                 'required' => false,
             ])
@@ -38,16 +38,19 @@ class PromotionType extends AbstractResourceType
             ])
             ->add('usageLimit', 'integer', [
                 'label' => 'sylius.form.promotion.usage_limit',
+                'required' => false,
             ])
             ->add('startsAt', 'datetime', [
                 'label' => 'sylius.form.promotion.starts_at',
                 'date_widget' => 'single_text',
                 'time_widget' => 'single_text',
+                'required' => false,
             ])
             ->add('endsAt', 'datetime', [
                 'label' => 'sylius.form.promotion.ends_at',
                 'date_widget' => 'single_text',
                 'time_widget' => 'single_text',
+                'required' => false,
             ])
             ->add('couponBased', 'checkbox', [
                 'label' => 'sylius.form.promotion.coupon_based',

@@ -8,7 +8,7 @@ sylius_admin_payment_method:
         grid: sylius_admin_payment_method
         vars:
           all:
-              subheader: sylius.ui.manage_payment_method
+              subheader: sylius.ui.manage_payment_methods_available_to_your_customers
               templates:
                   form: SyliusAdminBundle:PaymentMethod:_form.html.twig
           index:

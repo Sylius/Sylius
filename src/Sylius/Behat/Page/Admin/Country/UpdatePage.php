@@ -82,10 +82,14 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             $provinces = $this->getElement('provinces');
 
             $item = $provinces
-                ->find('css', 'div[data-form-collection="item"] input[value="'.$provinceName.'"]')
+                ->find('css', sprintf('div[data-form-collection="item"] input[value="%s"]', $provinceName))
+                ->getParent()
+                ->getParent()
+                ->getParent()
                 ->getParent()
                 ->getParent()
             ;
+
             $item->clickLink('Delete');
         }
     }
