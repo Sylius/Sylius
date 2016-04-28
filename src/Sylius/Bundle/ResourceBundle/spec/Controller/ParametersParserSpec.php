@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\ResourceBundle\Controller;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ResourceBundle\ExpressionLanguage\ExpressionLanguage;
+use Sylius\Bundle\ResourceBundle\Controller\ParametersParserInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -24,6 +25,11 @@ class ParametersParserSpec extends ObjectBehavior
     function let(ExpressionLanguage $expression)
     {
         $this->beConstructedWith($expression);
+    }
+    
+    function it_implements_an_interface()
+    {
+        $this->shouldImplement(ParametersParserInterface::class);
     }
 
     function it_should_parse_parameters(Request $request)

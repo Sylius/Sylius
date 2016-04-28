@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\ResourceBundle\Grid\View;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ResourceBundle\Controller\ParametersParserInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Grid\View\ResourceGridView;
 use Sylius\Bundle\ResourceBundle\Grid\View\ResourceGridViewFactory;
@@ -21,6 +22,7 @@ use Sylius\Component\Grid\Data\DataProviderInterface;
 use Sylius\Component\Grid\Definition\Grid;
 use Sylius\Component\Grid\Parameters;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @mixin ResourceGridViewFactory
@@ -29,9 +31,9 @@ use Sylius\Component\Resource\Metadata\MetadataInterface;
  */
 class ResourceGridViewFactorySpec extends ObjectBehavior
 {
-    function let(DataProviderInterface $dataProvider)
+    function let(DataProviderInterface $dataProvider, ParametersParserInterface $parametersParser)
     {
-        $this->beConstructedWith($dataProvider);
+        $this->beConstructedWith($dataProvider, $parametersParser);
     }
 
     function it_is_initializable()
@@ -46,9 +48,11 @@ class ResourceGridViewFactorySpec extends ObjectBehavior
 
     function it_uses_data_provider_to_create_a_view_with_data_and_definition(
         DataProviderInterface $dataProvider,
+        ParametersParserInterface $parametersParser,
         Grid $grid,
         Parameters $parameters,
         MetadataInterface $resourceMetadata,
+        Request $request,
         RequestConfiguration $requestConfiguration
     ) {
         $expectedResourceGridView = new ResourceGridView(
@@ -58,6 +62,15 @@ class ResourceGridViewFactorySpec extends ObjectBehavior
             $resourceMetadata->getWrappedObject(),
             $requestConfiguration->getWrappedObject()
         );
+
+        $requestConfiguration->getRequest()->willReturn($request);
+        $parametersParser
+            ->parseRequestValues(['repository' => ['method' => 'createByCustomerQueryBuilder', 'arguments' => ['$customerId']]], $request)
+            ->willReturn(['repository' => ['method' => 'createByCustomerQueryBuilder', 'arguments' => [5]]])
+        ;
+
+        $grid->getDriverConfiguration()->willReturn(['repository' => ['method' => 'createByCustomerQueryBuilder', 'arguments' => ['$customerId']]]);
+        $grid->setDriverConfiguration(['repository' => ['method' => 'createByCustomerQueryBuilder', 'arguments' => [5]]])->shouldBeCalled();
 
         $dataProvider->getData($grid, $parameters)->willReturn(['foo', 'bar']);
 

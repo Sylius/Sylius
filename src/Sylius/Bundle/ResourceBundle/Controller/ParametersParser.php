@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ParametersParser
+class ParametersParser implements ParametersParserInterface
 {
     /**
      * @var ExpressionLanguage
@@ -33,10 +33,7 @@ class ParametersParser
     }
 
     /**
-     * @param array   $parameters
-     * @param Request $request
-     *
-     * @return array
+     * {@inheritdoc}
      */
     public function parseRequestValues(array $parameters, Request $request)
     {

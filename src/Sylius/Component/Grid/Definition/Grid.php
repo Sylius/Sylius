@@ -99,6 +99,14 @@ class Grid
     }
 
     /**
+     * @param array $driverConfiguration
+     */
+    public function setDriverConfiguration($driverConfiguration)
+    {
+        $this->driverConfiguration = $driverConfiguration;
+    }
+
+    /**
      * @return array
      */
     public function getSorting()
