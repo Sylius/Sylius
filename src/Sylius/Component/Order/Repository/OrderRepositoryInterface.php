@@ -33,4 +33,11 @@ interface OrderRepositoryInterface extends RepositoryInterface, HashSubjectRepos
      * @return bool
      */
     public function isNumberUsed($number);
+
+    /**
+     * @param string $orderNumber
+     *
+     * @return OrderInterface|null
+     */
+    public function findOneByNumber($orderNumber);
 }

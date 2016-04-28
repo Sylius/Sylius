@@ -41,7 +41,12 @@ class OrderController extends FOSRestController
      */
     public function indexAction()
     {
-        $orders = $this->getOrderRepository()->findBy(['customer' => $this->getCustomer()], ['updatedAt' => 'desc']);
+        $user = $this->getUser();
+        if (null === $user) {
+            throw $this->createAccessDeniedException();
+        }
+
+        $orders = $this->getOrderRepository()->findByCustomer($user->getCustomer(), ['updatedAt' => 'desc']);
 
         $view = $this
             ->view()
@@ -216,7 +221,7 @@ class OrderController extends FOSRestController
     protected function findOrderOr404($number)
     {
         /* @var $order OrderInterface */
-        if (null === $order = $this->getOrderRepository()->findOneBy(['number' => $number])) {
+        if (null === $order = $this->getOrderRepository()->findOneByNumber($number)) {
             throw $this->createNotFoundException('The order does not exist.');
         }
 
