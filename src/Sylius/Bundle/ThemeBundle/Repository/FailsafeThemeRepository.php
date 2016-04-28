@@ -116,12 +116,12 @@ final class FailsafeThemeRepository implements ThemeRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createPaginator(array $criteria = null, array $orderBy = null)
+    public function createPaginator(array $criteria = [], array $sorting = [])
     {
         try {
-            return $this->unstableRepository->createPaginator($criteria, $orderBy);
+            return $this->unstableRepository->createPaginator($criteria, $sorting);
         } catch (\Exception $exception) {
-            return $this->fallbackRepository->createPaginator($criteria, $orderBy);
+            return $this->fallbackRepository->createPaginator($criteria, $sorting);
         }
     }
 
