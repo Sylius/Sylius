@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\ThemeBundle\Loader;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ThemeBundle\Configuration\Provider\ConfigurationProviderInterface;
+use Sylius\Bundle\ThemeBundle\Configuration\ConfigurationProviderInterface;
 use Sylius\Bundle\ThemeBundle\Factory\ThemeAuthorFactoryInterface;
 use Sylius\Bundle\ThemeBundle\Factory\ThemeFactoryInterface;
 use Sylius\Bundle\ThemeBundle\Factory\ThemeScreenshotFactoryInterface;

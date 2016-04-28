@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\ThemeBundle\Loader;
 
-use Sylius\Bundle\ThemeBundle\Configuration\Provider\ConfigurationProviderInterface;
+use Sylius\Bundle\ThemeBundle\Configuration\ConfigurationProviderInterface;
 use Sylius\Bundle\ThemeBundle\Factory\ThemeAuthorFactoryInterface;
 use Sylius\Bundle\ThemeBundle\Factory\ThemeFactoryInterface;
 use Sylius\Bundle\ThemeBundle\Factory\ThemeScreenshotFactoryInterface;

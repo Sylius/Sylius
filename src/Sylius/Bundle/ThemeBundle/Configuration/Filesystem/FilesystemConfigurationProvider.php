@@ -9,11 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ThemeBundle\Configuration\Provider;
+namespace Sylius\Bundle\ThemeBundle\Configuration\Filesystem;
 
-use Sylius\Bundle\ThemeBundle\Configuration\Loader\ConfigurationLoaderInterface;
+use Sylius\Bundle\ThemeBundle\Configuration\ConfigurationProviderInterface;
 use Sylius\Bundle\ThemeBundle\Locator\FileLocatorInterface;
-use Symfony\Component\Config\Resource\FileResource;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
@@ -52,32 +51,11 @@ final class FilesystemConfigurationProvider implements ConfigurationProviderInte
      */
     public function getConfigurations()
     {
-        return $this->processFileResources(function ($file) {
-            return $this->loader->load($file);
-        });
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getResources()
-    {
-        return $this->processFileResources(function ($file) {
-            return new FileResource($file);
-        });
-    }
-
-    /**
-     * @param callable $callback
-     *
-     * @return array
-     */
-    private function processFileResources(callable $callback)
-    {
         try {
-            $configurationFiles = $this->fileLocator->locateFilesNamed($this->configurationFilename);
-
-            return array_map($callback, $configurationFiles);
+            return array_map(
+                [$this->loader, 'load'],
+                $this->fileLocator->locateFilesNamed($this->configurationFilename)
+            );
         } catch (\InvalidArgumentException $exception) {
             return [];
         }

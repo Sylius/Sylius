@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ThemeBundle\Configuration\Loader;
+namespace Sylius\Bundle\ThemeBundle\Configuration\Filesystem;
 
 use Sylius\Bundle\ThemeBundle\Filesystem\FilesystemInterface;
 

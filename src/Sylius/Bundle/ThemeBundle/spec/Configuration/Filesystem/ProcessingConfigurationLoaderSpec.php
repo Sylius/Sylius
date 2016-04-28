@@ -9,19 +9,19 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\ThemeBundle\Configuration\Loader;
+namespace spec\Sylius\Bundle\ThemeBundle\Configuration\Filesystem;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ThemeBundle\Configuration\Loader\ConfigurationLoaderInterface;
-use Sylius\Bundle\ThemeBundle\Configuration\Loader\ConfigurationProcessingLoader;
-use Sylius\Bundle\ThemeBundle\Configuration\Processor\ConfigurationProcessorInterface;
+use Sylius\Bundle\ThemeBundle\Configuration\ConfigurationProcessorInterface;
+use Sylius\Bundle\ThemeBundle\Configuration\Filesystem\ConfigurationLoaderInterface;
+use Sylius\Bundle\ThemeBundle\Configuration\Filesystem\ProcessingConfigurationLoader;
 
 /**
- * @mixin ConfigurationProcessingLoader
+ * @mixin ProcessingConfigurationLoader
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ConfigurationProcessingLoaderSpec extends ObjectBehavior
+class ProcessingConfigurationLoaderSpec extends ObjectBehavior
 {
     function let(ConfigurationLoaderInterface $decoratedLoader, ConfigurationProcessorInterface $configurationProcessor)
     {
@@ -30,7 +30,7 @@ class ConfigurationProcessingLoaderSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Configuration\Loader\ConfigurationProcessingLoader');
+        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Configuration\Filesystem\ProcessingConfigurationLoader');
     }
 
     function it_implements_loader_interface()

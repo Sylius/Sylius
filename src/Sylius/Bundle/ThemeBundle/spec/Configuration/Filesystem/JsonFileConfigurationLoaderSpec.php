@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\ThemeBundle\Configuration\Loader;
+namespace spec\Sylius\Bundle\ThemeBundle\Configuration\Filesystem;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ThemeBundle\Configuration\Loader\ConfigurationLoaderInterface;
-use Sylius\Bundle\ThemeBundle\Configuration\Loader\JsonFileConfigurationLoader;
+use Sylius\Bundle\ThemeBundle\Configuration\Filesystem\ConfigurationLoaderInterface;
+use Sylius\Bundle\ThemeBundle\Configuration\Filesystem\JsonFileConfigurationLoader;
 use Sylius\Bundle\ThemeBundle\Filesystem\FilesystemInterface;
 
 /**
@@ -30,7 +30,7 @@ class JsonFileConfigurationLoaderSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Configuration\Loader\JsonFileConfigurationLoader');
+        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Configuration\Filesystem\JsonFileConfigurationLoader');
     }
 
     function it_implements_configuration_loader_interface()

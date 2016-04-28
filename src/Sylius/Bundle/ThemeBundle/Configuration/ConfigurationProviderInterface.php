@@ -9,19 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ThemeBundle\Configuration\Loader;
+namespace Sylius\Bundle\ThemeBundle\Configuration;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-interface ConfigurationLoaderInterface
+interface ConfigurationProviderInterface
 {
     /**
-     * Loads configuration for given identifier (can be theme name or path to configuration file)
-     *
-     * @param string $identifier
-     *
      * @return array
      */
-    public function load($identifier);
+    public function getConfigurations();
 }

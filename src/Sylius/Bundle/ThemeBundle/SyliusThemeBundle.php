@@ -11,6 +11,8 @@
 
 namespace Sylius\Bundle\ThemeBundle;
 
+use Sylius\Bundle\ThemeBundle\Configuration\Filesystem\FilesystemConfigurationSourceFactory;
+use Sylius\Bundle\ThemeBundle\DependencyInjection\SyliusThemeExtension;
 use Sylius\Bundle\ThemeBundle\Translation\DependencyInjection\Compiler\TranslatorAliasingPass;
 use Sylius\Bundle\ThemeBundle\Translation\DependencyInjection\Compiler\TranslatorFallbackLocalesPass;
 use Sylius\Bundle\ThemeBundle\Translation\DependencyInjection\Compiler\TranslatorLoaderProviderPass;
@@ -24,11 +26,13 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 class SyliusThemeBundle extends Bundle
 {
     /**
-     * @param ContainerBuilder $container
+     * {@inheritdoc}
      */
     public function build(ContainerBuilder $container)
     {
-        parent::build($container);
+        /** @var SyliusThemeExtension $themeExtension */
+        $themeExtension = $container->getExtension('sylius_theme');
+        $themeExtension->addConfigurationSourceFactory(new FilesystemConfigurationSourceFactory());
 
         $container->addCompilerPass(new TranslatorAliasingPass());
         $container->addCompilerPass(new TranslatorFallbackLocalesPass());

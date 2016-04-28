@@ -9,12 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\ThemeBundle\Configuration\Provider;
+namespace spec\Sylius\Bundle\ThemeBundle\Configuration\Filesystem;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ThemeBundle\Configuration\Loader\ConfigurationLoaderInterface;
-use Sylius\Bundle\ThemeBundle\Configuration\Provider\ConfigurationProviderInterface;
-use Sylius\Bundle\ThemeBundle\Configuration\Provider\FilesystemConfigurationProvider;
+use Sylius\Bundle\ThemeBundle\Configuration\ConfigurationProviderInterface;
+use Sylius\Bundle\ThemeBundle\Configuration\Filesystem\ConfigurationLoaderInterface;
 use Sylius\Bundle\ThemeBundle\Locator\FileLocatorInterface;
 use Symfony\Component\Config\Resource\ResourceInterface;
 
@@ -32,7 +31,7 @@ class FilesystemConfigurationProviderSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Configuration\Provider\FilesystemConfigurationProvider');
+        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Configuration\Filesystem\FilesystemConfigurationProvider');
     }
 
     function it_implements_configuration_provider_interface()
@@ -61,40 +60,5 @@ class FilesystemConfigurationProviderSpec extends ObjectBehavior
         $fileLocator->locateFilesNamed('configurationfile.json')->willThrow(\InvalidArgumentException::class);
 
         $this->getConfigurations()->shouldReturn([]);
-    }
-
-    function it_provides_a_list_of_symfony_config_resources_used(FileLocatorInterface $fileLocator)
-    {
-        $fileLocator->locateFilesNamed('configurationfile.json')->willReturn([
-            '/cristopher/configurationfile.json',
-            '/richard/configurationfile.json',
-        ]);
-
-        $this->getResources()->shouldHaveAllElementsOf(ResourceInterface::class);
-    }
-
-    function it_provides_an_empty_list_of_symfony_config_resources_used_if_there_arent_any_found(FileLocatorInterface $fileLocator)
-    {
-        $fileLocator->locateFilesNamed('configurationfile.json')->willThrow(\InvalidArgumentException::class);
-
-        $this->getResources()->shouldReturn([]);
-    }
-
-    /**
-     * @return array
-     */
-    public function getMatchers()
-    {
-        return [
-            'haveAllElementsOf' => function (array $subject, $type) {
-                foreach ($subject as $element) {
-                    if ($type === get_class($element) || is_subclass_of($element, $type)) {
-                        return true;
-                    }
-                }
-
-                return false;
-            },
-        ];
     }
 }

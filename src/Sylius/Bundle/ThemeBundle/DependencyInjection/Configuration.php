@@ -11,8 +11,7 @@
 
 namespace Sylius\Bundle\ThemeBundle\DependencyInjection;
 
-use Sylius\Bundle\ThemeBundle\Model\Theme;
-use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
+use Sylius\Bundle\ThemeBundle\Configuration\ConfigurationSourceFactoryInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -20,8 +19,21 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class Configuration implements ConfigurationInterface
+final class Configuration implements ConfigurationInterface
 {
+    /**
+     * @var ConfigurationSourceFactoryInterface[]
+     */
+    private $configurationSourceFactories;
+
+    /**
+     * @param ConfigurationSourceFactoryInterface[] $configurationSourceFactories
+     */
+    public function __construct(array $configurationSourceFactories = [])
+    {
+        $this->configurationSourceFactories = $configurationSourceFactories;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -43,24 +55,19 @@ class Configuration implements ConfigurationInterface
     private function addSourcesConfiguration(ArrayNodeDefinition $rootNode)
     {
         $sourcesNodeBuilder = $rootNode
-            ->addDefaultsIfNotSet()
             ->fixXmlConfig('source')
                 ->children()
                     ->arrayNode('sources')
-                        ->addDefaultsIfNotSet()
                             ->children()
         ;
 
-        $sourcesNodeBuilder
-            ->arrayNode('filesystem')
-                ->addDefaultsIfNotSet()
-                ->fixXmlConfig('location')
-                    ->children()
-                        ->arrayNode('locations')
-                            ->requiresAtLeastOneElement()
-                            ->performNoDeepMerging()
-                            ->defaultValue(['%kernel.root_dir%/themes', '%kernel.root_dir%/../vendor/sylius/themes'])
-                            ->prototype('scalar')
-        ;
+        foreach ($this->configurationSourceFactories as $sourceFactory) {
+            $sourceNode = $sourcesNodeBuilder
+                ->arrayNode($sourceFactory->getName())
+                ->canBeEnabled()
+            ;
+
+            $sourceFactory->buildConfiguration($sourceNode);
+        }
     }
 }

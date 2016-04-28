@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ThemeBundle\Configuration\Loader;
+namespace Sylius\Bundle\ThemeBundle\Configuration\Filesystem;
 
-use Sylius\Bundle\ThemeBundle\Configuration\Processor\ConfigurationProcessorInterface;
+use Sylius\Bundle\ThemeBundle\Configuration\ConfigurationProcessorInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class ConfigurationProcessingLoader implements ConfigurationLoaderInterface
+final class ProcessingConfigurationLoader implements ConfigurationLoaderInterface
 {
     /**
      * @var ConfigurationLoaderInterface
