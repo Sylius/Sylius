@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
 interface ParametersParserInterface
 {
     /**
-     * @param array   $parameters
+     * @param array $parameters
      * @param Request $request
      *
      * @return array

@@ -101,7 +101,7 @@ class Grid
     /**
      * @param array $driverConfiguration
      */
-    public function setDriverConfiguration($driverConfiguration)
+    public function setDriverConfiguration(array $driverConfiguration)
     {
         $this->driverConfiguration = $driverConfiguration;
     }

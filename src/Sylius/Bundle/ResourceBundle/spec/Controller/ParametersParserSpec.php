@@ -27,7 +27,7 @@ class ParametersParserSpec extends ObjectBehavior
         $this->beConstructedWith($expression);
     }
     
-    function it_implements_an_interface()
+    function it_implements_parameters_parser_interface()
     {
         $this->shouldImplement(ParametersParserInterface::class);
     }
