@@ -131,6 +131,32 @@ final class OrderContext implements Context
     }
 
     /**
+     * @Given /^the customer ("[^"]+" addressed it to "[^"]+", "[^"]+" "[^"]+" in the "[^"]+")$/
+     */
+    public function theCustomerAddressedItTo(AddressInterface $address)
+    {
+        /** @var OrderInterface $order */
+        $order = $this->sharedStorage->get('order');
+
+        $order->setShippingAddress($address);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^for the billing address (of "[^"]+" in the "[^"]+", "[^"]+" "[^"]+", "[^"]+")$/
+     */
+    public function forTheBillingAddressOf(AddressInterface $address)
+    {
+        /** @var OrderInterface $order */
+        $order = $this->sharedStorage->get('order');
+
+        $order->setBillingAddress($address);
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @Given /^the customer chose ("[^"]+" shipping method) (to "[^"]+") with ("[^"]+" payment)$/
      */
     public function theCustomerChoseShippingToWithPayment(
@@ -158,9 +184,32 @@ final class OrderContext implements Context
     }
 
     /**
+     * @Given /^the customer chose ("[^"]+" shipping method) with ("[^"]+" payment)$/
+     */
+    public function theCustomerChoseShippingWithPayment(
+        ShippingMethodInterface $shippingMethod,
+        PaymentMethodInterface $paymentMethod
+    ) {
+        /** @var OrderInterface $order */
+        $order = $this->sharedStorage->get('order');
+
+        $this->orderShipmentFactory->processOrderShipment($order);
+        $order->getShipments()->first()->setMethod($shippingMethod);
+
+        $this->orderRecalculator->recalculate($order);
+
+        $payment = $this->paymentFactory->createWithAmountAndCurrency($order->getTotal(), $order->getCurrency());
+        $payment->setMethod($paymentMethod);
+
+        $order->addPayment($payment);
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @Given the customer bought a single :product
      */
-    public function theCustomerBoughtSingleProduct(ProductInterface $product)
+    public function theCustomerBoughtASingleProduct(ProductInterface $product)
     {
         $this->addSingleProductVariantToOrder($product->getMasterVariant(), $product->getPrice());
 

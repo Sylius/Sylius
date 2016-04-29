@@ -12,9 +12,11 @@
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Behat\Behat\Tester\Exception\PendingException;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Order\ShowPageInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -55,6 +57,14 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @When I see the :order order
+     */
+    public function iSeeTheOrder(OrderInterface $order)
+    {
+        $this->showPage->open(['id' => $order->getId()]);
+    }
+
+    /**
      * @Then I should see a single order from customer :customer
      */
     public function iShouldSeeASingleOrderFromCustomer(CustomerInterface $customer)
@@ -62,6 +72,61 @@ final class ManagingOrdersContext implements Context
         Assert::true(
             $this->indexPage->isSingleResourceOnPage(['customer' => $customer->getEmail()]),
             sprintf('Cannot find order for customer "%s" in the list.', $customer->getEmail())
+        );
+    }
+
+    /**
+     * @Then I should see :customerEmail customer
+     */
+    public function iShouldSeeCustomer($customerEmail)
+    {
+        Assert::true(
+            $this->showPage->hasCustomer($customerEmail),
+            sprintf('Cannot find customer "%s".', $customerEmail)
+        );
+    }
+
+    /**
+     * @Then I should see :customerName, :street, :postcode, :city, :countryName shipping address
+     */
+    public function iShouldSeeShippingAddress($customerName, $street, $postcode, $city, $countryName)
+    {
+        Assert::true(
+            $this->showPage->hasShippingAddress($customerName, $street, $postcode, $city, $countryName),
+            sprintf('Cannot find shipping address "%s, %s %s, %s".', $street, $postcode, $city, $countryName)
+        );
+    }
+
+    /**
+     * @Then I should see :customerName, :street, :postcode, :city, :countryName billing address
+     */
+    public function iShouldSeeBillingAddress($customerName, $street, $postcode, $city, $countryName)
+    {
+        Assert::true(
+            $this->showPage->hasBillingAddress($customerName, $street, $postcode, $city, $countryName),
+            sprintf('Cannot find shipping address "%s, %s %s, %s".', $street, $postcode, $city, $countryName)
+        );
+    }
+
+    /**
+     * @Then I should see :shippingMethodName shipment
+     */
+    public function iShouldSeeShipment($shippingMethodName)
+    {
+        Assert::true(
+            $this->showPage->hasShipment($shippingMethodName),
+            sprintf('Cannot find shipment "%s".', $shippingMethodName)
+        );
+    }
+
+    /**
+     * @Then I should see :paymentMethodName payment
+     */
+    public function iShouldSeePayment($paymentMethodName)
+    {
+        Assert::true(
+            $this->showPage->hasPayment($paymentMethodName),
+            sprintf('Cannot find payment "%s".', $paymentMethodName)
         );
     }
 }

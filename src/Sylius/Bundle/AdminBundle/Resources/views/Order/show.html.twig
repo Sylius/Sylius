@@ -18,7 +18,7 @@
             {{ label.default(state_text|trans) }}
 
             {{ 'sylius.ui.purchased_from'|trans }}
-            <strong>{{ order.channel.code }}</strong>
+            <strong class="ui {{ order.channel.color|lower }} small header">{{ order.channel.code }}</strong>
         </div>
     </div>
 </h1>
@@ -27,19 +27,19 @@
     <div class="twelve wide column">
         <div class="ui segment">
             <div class="ui four column grid">
-                <div class="column">
+                <div class="column" id="shipping-address">
                     <h3 class="ui header">
                         {{ 'sylius.ui.shipping_address'|trans }}
                     </h3>
                     {% include '@SyliusAdmin/Order/_address.html.twig' with {'address': order.shippingAddress} %}
                 </div>
-                <div class="column">
+                <div class="column" id="billing-address">
                     <h3 class="ui header">
                         {{ 'sylius.ui.billing_address'|trans }}
                     </h3>
                     {% include '@SyliusAdmin/Order/_address.html.twig' with {'address': order.billingAddress} %}
                 </div>
-                <div class="column">
+                <div class="column" id="payments">
                     <h3 class="ui header">
                         {{ 'sylius.ui.payments'|trans }}
                     </h3>
@@ -49,13 +49,13 @@
                             <i class="large money middle aligned icon"></i>
                             <div class="content">
                                 <a class="header">{{ payment.method }}</a>
-                                <div class="description">{{ payment.state }}</div>
+                                <div class="description">{{ label.default(payment.state|trans|capitalize) }}</div>
                             </div>
                         </div>
                         {% endfor %}
                     </div>
                 </div>
-                <div class="column">
+                <div class="column" id="shipments">
                     <h3 class="ui header">
                         {{ 'sylius.ui.shipments'|trans }}
                     </h3>
@@ -65,7 +65,7 @@
                                 <i class="large truck middle aligned icon"></i>
                                 <div class="content">
                                     <a class="header">{{ shipment.method }}</a>
-                                    <div class="description">{{ shipment.state }}</div>
+                                    <div class="description">{{ label.default(shipment.state|trans|capitalize) }}</div>
                                 </div>
                             </div>
                         {% endfor %}
@@ -73,23 +73,12 @@
                 </div>
             </div>
         </div>
-        <div class="ui segment">
-        </div>
     </div>
     <div class="four wide column">
-        <div class="ui special cards">
-            <div class="card">
-                <div class="blurring dimmable image">
-                    <div class="ui dimmer">
-                        <div class="content">
-                            <div class="center">
-                                <a href="#" class="ui inverted button">{{ 'sylius.ui.show'|trans }}</a>
-                            </div>
-                        </div>
-                    </div>
-                    <img src="{{ asset('assets/admin/img/avatar.png') }}">
-                </div>
+        <div class="ui cards">
+            <div class="card" id="customer">
                 <div class="content">
+                    <img class="right floated mini ui image" src="{{ asset('assets/admin/img/avatar.png') }}">
                     <a class="header">{{ customer.fullName }}</a>
                     <div class="meta">
                         <span class="date">{{ 'sylius.ui.customer_since'|trans }} {{ customer.createdAt|date }}</span>
