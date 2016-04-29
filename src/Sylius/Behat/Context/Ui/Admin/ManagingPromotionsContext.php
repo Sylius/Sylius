@@ -368,29 +368,20 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @When I specify that it should starts at :date
+     * @When I make it available from :startsDate to :endsDate
      */
-    public function iSpecifyThatItShouldStartAt(\DateTime $date)
+    public function iMakeItAvailableFromTo(\DateTime $startsDate, \DateTime $endsDate)
     {
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm($this->createPage, $this->updatePage);
 
-        $currentPage->setStartsAt($date);
+        $currentPage->setStartsAt($startsDate);
+        $currentPage->setEndsAt($endsDate);
     }
 
     /**
-     * @When I specify that it should ends at :date
+     * @Then the :promotion promotion should be available from :startsDate to :endsDate
      */
-    public function iSpecifyThatItShouldEndsAt(\DateTime $date)
-    {
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm($this->createPage, $this->updatePage);
-
-        $currentPage->setEndsAt($date);
-    }
-
-    /**
-     * @Then the :promotion promotion should be applicable from :startsDate to :endsDate
-     */
-    public function thePromotionShouldBeApplicableFromTo(PromotionInterface $promotion, \DateTime $startsDate, \DateTime $endsDate)
+    public function thePromotionShouldBeAvailableFromTo(PromotionInterface $promotion, \DateTime $startsDate, \DateTime $endsDate)
     {
         $this->iWantToModifyAPromotion($promotion);
 
@@ -406,7 +397,7 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @Then I should be notified that promotion cannot end before it starts
+     * @Then I should be notified that promotion cannot end before it start
      */
     public function iShouldBeNotifiedThatPromotionCannotEndBeforeItsEvenStart()
     {

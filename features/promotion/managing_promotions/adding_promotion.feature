@@ -62,7 +62,6 @@ Feature: Adding a new promotion
         Given I want to create a new promotion
         When I specify its code as "FULL_METAL_PROMOTION"
         And I name it "Full metal promotion"
-        And I specify that it should starts at "21.04.2017"
-        And I specify that it should ends at "21.05.2017"
+        And I make it available from "21.04.2017" to "21.05.2017"
         And I add it
         Then I should be notified that it has been successfully created
