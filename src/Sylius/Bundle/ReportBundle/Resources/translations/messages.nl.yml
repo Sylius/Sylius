@@ -6,7 +6,7 @@ sylius:
         report:
             name: Naam
             description: Omschrijving
-            data_fetcher: Gegevens ophaler
+            data_fetcher: Gegevensophaler
             renderer:
                 label: Renderer
                 template: Sjabloon
@@ -15,5 +15,5 @@ sylius:
             user_registration:
                 start: Begindatum
                 end: Einddatum
-                period: Tijd Periode
+                period: Tijdsperiode
                 empty_records: Lege regels afdrukken?

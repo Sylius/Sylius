@@ -41,7 +41,6 @@ sylius:
         info: Info
         last_updated: Përditësimi i fundit
         locales: Rajonet
-        manage_customer: Kontrollo blerësit
         manage_taxation_of_your_products: Menaxho taksimet e produktit tuaj
         new: E re
         new_country: Vend i ri

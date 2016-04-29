@@ -218,7 +218,6 @@ sylius:
         name: Navn
         new: Ny
         new_country: Nyt land
-        new_customer: Ny kunde
         new_order: Ny ordre
         new_password: Ny adgangskode
         new_payment: Ny betaling

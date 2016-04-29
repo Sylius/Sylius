@@ -17,6 +17,8 @@ sylius:
             not_blank: Per favore inserisci il valore della tassa.
         calculator:
             not_blank: Per favore seleziona il calcolatore della tassa.
+        zone:
+            not_blank: Seleziona una zona.
         code:
             not_blank: Inserisci il codice della tassazione fiscale locale.
             unique: "L'aliquota d'imposta con il codice dato esiste già."

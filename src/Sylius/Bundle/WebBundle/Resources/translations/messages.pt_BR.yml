@@ -322,7 +322,6 @@ sylius:
         new_contact_topic: Novo tópico contato
         new_country: Novo país
         new_currency: Nova Moeda
-        new_customer: Novo cliente
         new_order: Novo pedido
         new_password: Nova senha
         new_payment: Novo pagamento

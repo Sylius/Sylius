@@ -455,7 +455,6 @@ sylius:
         new_contact_topic: Nová téma
         new_country: Nová krajina
         new_currency: Nová mena
-        new_customer: Nový zákazník
         new_order: Nová objednávka
         new_password: Nové heslo
         new_payment: Nová platba

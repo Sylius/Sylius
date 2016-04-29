@@ -29,3 +29,5 @@ sylius:
         user_reset_password:
             confirmation: Confirmare
             new: Parolă nouă
+    gender:
+        unknown: Necunoscută

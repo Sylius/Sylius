@@ -214,7 +214,6 @@ sylius:
         name: Име
         new: Ново
         new_country: Новата страна
-        new_customer: Нов клиент
         new_order: Нова поръчка
         new_password: Нова парола
         new_payment: Ново плащане

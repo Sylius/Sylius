@@ -6,6 +6,8 @@ sylius:
         admin:
             main:
                 catalog:
+                    taxons: Kategoriler
+                    options: Ayarlar
                     attributes: Nitelikler
                 configuration:
                     channels: Kanallar

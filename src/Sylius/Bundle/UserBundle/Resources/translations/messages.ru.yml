@@ -33,3 +33,5 @@ sylius:
         user_reset_password:
             confirmation: Подтверждение
             new: Новый пароль
+    gender:
+        unknown: Неизвестен

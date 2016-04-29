@@ -21,7 +21,7 @@ sylius:
             payment_method: Mënyra e pagesës
             shipping_method: Mënyra e dërgesës
         promotion:
-            channels: Kanali
+            channels: Kanalet
         coupon:
             per_customer_usage_limit: Limiti i përdorimit për blerës
         group:

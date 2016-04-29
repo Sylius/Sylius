@@ -21,7 +21,7 @@ sylius:
             payment_method: Način plačila
             shipping_method: Način pošiljanja
         promotion:
-            channels: Kanal
+            channels: Kanali
         coupon:
             per_customer_usage_limit: Omejitev uporabe na kupca
         group:

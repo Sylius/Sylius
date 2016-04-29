@@ -6,6 +6,8 @@ sylius:
         admin:
             main:
                 catalog:
+                    taxons: Kategoritë
+                    options: Opsionet
                     attributes: Atributet
                 configuration:
                     channels: Kanalet

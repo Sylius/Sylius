@@ -4,7 +4,7 @@
 sylius:
     channel:
         code:
-            not_blank: Voer kanaal code in.
-            unique: Kanaal code moet uniek zijn.
+            not_blank: Voer kanaalcode in.
+            unique: Kanaalcode moet uniek zijn.
         name:
             not_blank: Voer kanaal naam in.

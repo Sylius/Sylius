@@ -164,7 +164,6 @@ sylius:
         modified: izmenjeno
         name: Ime
         new_country: Nova zemlja
-        new_customer: Nova mušterija
         new_order: Nova narudžbina
         new_payment: Novo plaćanje
         new_payment_method: Novi metod plaćanja

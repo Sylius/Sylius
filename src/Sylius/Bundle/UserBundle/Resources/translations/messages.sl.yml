@@ -31,5 +31,6 @@ sylius:
             confirmation: Potrditev
             new: Novo geslo
     gender:
+        unknown: Ni znano
         male: Moški
         female: Ženska

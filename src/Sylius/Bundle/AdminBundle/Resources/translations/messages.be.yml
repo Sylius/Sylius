@@ -5,6 +5,9 @@ sylius:
     menu:
         admin:
             main:
+                catalog:
+                    taxons: Катэгорыі
+                    options: Опцыі
                 configuration:
                     countries: Краіны
                     header: Канфігурацыя

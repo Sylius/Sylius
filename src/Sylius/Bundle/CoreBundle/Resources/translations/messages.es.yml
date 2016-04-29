@@ -21,7 +21,7 @@ sylius:
             payment_method: Método de pago
             shipping_method: Método de envío
         promotion:
-            channels: Canal
+            channels: Canales
         coupon:
             per_customer_usage_limit: Límite de uso por cliente
         group:

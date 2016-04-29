@@ -8,6 +8,8 @@ sylius:
             title: Tiêu đề
         cart:
             coupon: Phiếu giảm giá
+        promotion:
+            channels: Kênh
         group:
             name: Tên
             roles: Vai trò

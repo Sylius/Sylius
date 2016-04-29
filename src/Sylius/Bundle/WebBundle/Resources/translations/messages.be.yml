@@ -221,7 +221,6 @@ sylius:
         name: Імя
         new: Новы
         new_country: Новая краіна
-        new_customer: Новы пакупнік
         new_order: Новая замова
         new_password: Новы пароль
         new_payment: Новы плацёж

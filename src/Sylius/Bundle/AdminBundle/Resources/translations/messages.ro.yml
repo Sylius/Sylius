@@ -6,6 +6,8 @@ sylius:
         admin:
             main:
                 catalog:
+                    taxons: Categorii
+                    options: Opţiuni
                     attributes: Atribute
                 configuration:
                     countries: Țări

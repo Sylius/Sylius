@@ -53,15 +53,9 @@ sylius:
         info: Informações
         last_updated: Ultima atualização
         locales: Localidades
-        manage_attributes_of_your_produts: Gerenciar atributos de seus produtos
-        manage_country: Gerenciar o país
         manage_currencies_available_in_the_store: Gerenciar moedas disponíveis na loja
-        manage_customer: Gerenciar clientes
         manage_languages_available_in_the_store: Gerenciar idiomas disponíveis na loja
-        manage_payment_method: Gerenciar os métodos de pagamento
-        manage_product_option: Gerenciar opções de produto
         manage_shipping_destinations: Gerenciar destinos de transporte
-        manage_taxons: Gerenciar táxons de seus produtos
         manage_shipping_methods_for_your_store: Gerenciar os métodos de transporte para sua loja
         manage_taxation_of_your_products: Gerenciar a tributação de seus produtos
         new: Novo

@@ -180,7 +180,6 @@ sylius:
         name: ゾーン名
         new: sylius.breadcrumb.new
         new_country: 国を登録
-        new_customer: 新規顧客登録
         new_order: 新しい注文を登録
         new_password: 新しいパスワード
         new_payment: 入金を登録

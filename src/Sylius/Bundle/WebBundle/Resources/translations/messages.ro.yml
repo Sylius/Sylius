@@ -237,7 +237,6 @@ sylius:
         name: Nume
         new: Nouă
         new_country: Țară nouă
-        new_customer: Client nou
         new_order: Comandă nouă
         new_password: Parolă nouă
         new_payment: Plată nouă
