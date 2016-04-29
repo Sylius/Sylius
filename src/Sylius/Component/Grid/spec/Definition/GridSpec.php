@@ -58,6 +58,12 @@ class GridSpec extends ObjectBehavior
             'arguments' => ['$code']
         ]);
     }
+
+    function its_driver_configuration_is_mutable()
+    {
+        $this->setDriverConfiguration(['foo' => 'bar']);
+        $this->getDriverConfiguration()->shouldReturn(['foo' => 'bar']);
+    }
     
     function it_has_empty_sorting_configuration_by_default()
     {

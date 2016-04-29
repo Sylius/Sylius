@@ -18,6 +18,18 @@ class PaymentMethodRepository extends BasePaymentMethodRepository
     /**
      * {@inheritdoc}
      */
+    public function createListQueryBuilder()
+    {
+        return $this
+            ->createQueryBuilder('o')
+            ->addSelect('translation')
+            ->leftJoin('o.translations', 'translation')
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getQueryBuilderForChoiceType(array $options)
     {
         $queryBuilder = parent::getQueryBuilderForChoiceType($options);

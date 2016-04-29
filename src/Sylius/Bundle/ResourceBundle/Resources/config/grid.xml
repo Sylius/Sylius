@@ -24,6 +24,7 @@
     <services>
         <service id="sylius.grid.resource_view_factory" class="%sylius.grid.resource_view_factory.class%">
             <argument type="service" id="sylius.grid.data_provider" />
+            <argument type="service" id="sylius.resource_controller.parameters_parser" />
         </service>
         <service id="sylius.resource_controller.resources_resolver.grid_aware" class="%sylius.resource_controller.resources_resolver.grid_aware.class%" decorates="sylius.resource_controller.resources_resolver">
             <argument type="service" id="sylius.resource_controller.resources_resolver.grid_aware.inner" />

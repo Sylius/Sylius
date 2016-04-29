@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ResourceBundle\Grid\View;
 
+use Sylius\Bundle\ResourceBundle\Controller\ParametersParserInterface;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Component\Grid\Data\DataProviderInterface;
 use Sylius\Component\Grid\Definition\Grid;
@@ -28,11 +29,18 @@ class ResourceGridViewFactory implements ResourceGridViewFactoryInterface
     private $dataProvider;
 
     /**
-     * @param DataProviderInterface $dataProvider
+     * @var ParametersParserInterface
      */
-    public function __construct(DataProviderInterface $dataProvider)
+    private $parametersParser;
+
+    /**
+     * @param DataProviderInterface $dataProvider
+     * @param ParametersParserInterface $parametersParser
+     */
+    public function __construct(DataProviderInterface $dataProvider, ParametersParserInterface $parametersParser)
     {
         $this->dataProvider = $dataProvider;
+        $this->parametersParser = $parametersParser;
     }
 
     /**
@@ -40,6 +48,11 @@ class ResourceGridViewFactory implements ResourceGridViewFactoryInterface
      */
     public function create(Grid $grid, Parameters $parameters, MetadataInterface $metadata, RequestConfiguration $requestConfiguration)
     {
+        $driverConfiguration = $grid->getDriverConfiguration();
+        $request = $requestConfiguration->getRequest();
+
+        $grid->setDriverConfiguration($this->parametersParser->parseRequestValues($driverConfiguration, $request));
+
         return new ResourceGridView($this->dataProvider->getData($grid, $parameters), $grid, $parameters, $metadata, $requestConfiguration);
     }
 }
