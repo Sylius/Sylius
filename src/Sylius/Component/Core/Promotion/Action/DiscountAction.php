@@ -22,8 +22,6 @@ use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
- * Base discount action.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 abstract class DiscountAction implements PromotionActionInterface

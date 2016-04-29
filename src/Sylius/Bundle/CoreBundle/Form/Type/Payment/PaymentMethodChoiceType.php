@@ -18,8 +18,6 @@ use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Payment method choice type
- *
  * @author Kristian Loevstroem <kristian@loevstroem.dk>
  */
 class PaymentMethodChoiceType extends BasePaymentMethodChoiceType

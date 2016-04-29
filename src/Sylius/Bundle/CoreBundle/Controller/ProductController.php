@@ -26,17 +26,13 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * Product controller.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ProductController extends ResourceController
 {
     /**
-     * List products categorized under given taxon.
-     *
      * @param Request $request
-     * @param string  $permalink
+     * @param string $permalink
      *
      * @return Response
      *
@@ -95,8 +91,6 @@ class ProductController extends ResourceController
     }
 
     /**
-     * List products categorized under given taxon (fetch by its ID).
-     *
      * @param Request $request
      * @param int $id
      *
@@ -171,8 +165,6 @@ class ProductController extends ResourceController
     }
 
     /**
-     * Show product details in frontend.
-     *
      * @param Request $request
      *
      * @return Response
@@ -204,8 +196,6 @@ class ProductController extends ResourceController
     }
 
     /**
-     * Get product history changes.
-     *
      * @param Request $request
      *
      * @return Response
@@ -255,8 +245,6 @@ class ProductController extends ResourceController
     }
 
     /**
-     * Render product filter form.
-     *
      * @param Request $request
      *
      * @return Response
@@ -268,7 +256,11 @@ class ProductController extends ResourceController
         ]);
     }
 
-    // @todo refactor this when PRs about API & search get merged
+    /**
+     * @param Request $request
+     *
+     * @return JsonResponse
+     */
     public function searchAction(Request $request)
     {
         if (!$request->query->has('criteria')) {
@@ -295,10 +287,9 @@ class ProductController extends ResourceController
     }
 
     /**
-     * @param Request $request
-     * @param array $criteria
+     * @param RequestConfiguration $configuration
      *
-     * @return null|ProductInterface
+     * @return ProductInterface|null
      */
     public function findOr404(RequestConfiguration $configuration)
     {
@@ -311,6 +302,21 @@ class ProductController extends ResourceController
         return parent::findOr404($configuration);
     }
 
+    /**
+     * @param RequestConfiguration $configuration
+     * @param TaxonInterface $taxon
+     * @param Pagerfanta $results
+     * @param mixed $template
+     * @param mixed $page
+     * @param mixed|null $facets
+     * @param mixed|null $facetTags
+     * @param mixed|null $filters
+     * @param mixed|null $searchTerm
+     * @param mixed|null $searchParam
+     * @param mixed|null $requestMethod
+     *
+     * @return mixed
+     */
     private function renderResults(
         RequestConfiguration $configuration,
         TaxonInterface $taxon,
@@ -344,6 +350,7 @@ class ProductController extends ResourceController
     }
 
     /**
+     * @param RequestConfiguration $configuration
      * @param ArchetypeInterface $archetype
      * @param Pagerfanta $results
      * @param string $template

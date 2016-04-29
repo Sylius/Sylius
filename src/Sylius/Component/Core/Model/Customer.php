@@ -47,6 +47,7 @@ class Customer extends BaseCustomer implements CustomerInterface, ProductReviewe
     public function __construct()
     {
         parent::__construct();
+
         $this->orders = new ArrayCollection();
         $this->addresses = new ArrayCollection();
     }
@@ -57,8 +58,6 @@ class Customer extends BaseCustomer implements CustomerInterface, ProductReviewe
     public function setCurrency($currency)
     {
         $this->currency = $currency;
-
-        return $this;
     }
 
     /**
@@ -87,8 +86,6 @@ class Customer extends BaseCustomer implements CustomerInterface, ProductReviewe
         if (null !== $billingAddress) {
             $this->addAddress($billingAddress);
         }
-
-        return $this;
     }
 
     /**
@@ -109,8 +106,6 @@ class Customer extends BaseCustomer implements CustomerInterface, ProductReviewe
         if (null !== $shippingAddress) {
             $this->addAddress($shippingAddress);
         }
-
-        return $this;
     }
 
     /**
@@ -130,8 +125,6 @@ class Customer extends BaseCustomer implements CustomerInterface, ProductReviewe
             $this->addresses[] = $address;
             $address->setCustomer($this);
         }
-
-        return $this;
     }
 
     /**
@@ -141,8 +134,6 @@ class Customer extends BaseCustomer implements CustomerInterface, ProductReviewe
     {
         $this->addresses->removeElement($address);
         $address->setCustomer(null);
-
-        return $this;
     }
 
     /**

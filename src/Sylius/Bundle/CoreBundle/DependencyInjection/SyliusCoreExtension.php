@@ -22,8 +22,6 @@ use Symfony\Component\DependencyInjection\Parameter;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * Core extension.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
@@ -139,7 +137,7 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
     }
 
     /**
-     * @param array            $config
+     * @param array $config
      * @param ContainerBuilder $container
      */
     protected function loadCheckoutConfiguration(array $config, ContainerBuilder $container)
@@ -148,7 +146,6 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
             $container->setParameter(sprintf('sylius.checkout.step.%s.template', $name), $step['template']);
         }
     }
-
 
     /**
      * @param ContainerBuilder $container

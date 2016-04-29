@@ -37,11 +37,9 @@ class OrderCurrencyListener
     }
 
     /**
-     * Sets currency on the order
+     * @param GenericEvent $event
      *
      * @throws UnexpectedTypeException when event's subject is not an order
-     *
-     * @param GenericEvent $event
      */
     public function processOrderCurrency(GenericEvent $event)
     {

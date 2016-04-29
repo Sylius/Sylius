@@ -14,18 +14,11 @@ namespace Sylius\Component\Core\Pricing;
 use Sylius\Component\Pricing\Calculator\Calculators as BaseCalculators;
 
 /**
- * Core calculators.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class Calculators extends BaseCalculators
 {
-    // Channel based pricing.
     const CHANNEL_BASED = 'channel_based';
-
-    // Group based pricing.
     const GROUP_BASED = 'group_based';
-
-    // Address zone based pricing.
     const ZONE_BASED = 'zone_based';
 }

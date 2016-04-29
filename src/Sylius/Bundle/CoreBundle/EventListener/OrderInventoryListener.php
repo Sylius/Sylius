@@ -39,8 +39,6 @@ class OrderInventoryListener
     }
 
     /**
-     * Put order inventory on hold.
-     *
      * @param GenericEvent $event
      */
     public function holdInventoryUnits(GenericEvent $event)

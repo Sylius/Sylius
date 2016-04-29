@@ -20,9 +20,20 @@ use Sylius\Component\User\Context\CustomerContextInterface;
 
 class RestrictedZoneChecker implements RestrictedZoneCheckerInterface
 {
+    /**
+     * @var CustomerContextInterface
+     */
     private $customerContext;
+
+    /**
+     * @var ZoneMatcherInterface
+     */
     private $zoneMatcher;
 
+    /**
+     * @param CustomerContextInterface $customerContext
+     * @param ZoneMatcherInterface $zoneMatcher
+     */
     public function __construct(CustomerContextInterface $customerContext, ZoneMatcherInterface $zoneMatcher)
     {
         $this->customerContext = $customerContext;

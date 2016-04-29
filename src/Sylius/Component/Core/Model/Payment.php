@@ -15,15 +15,11 @@ use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Payment\Model\Payment as BasePayment;
 
 /**
- * Payment attached to order.
- *
  * @author Ka Yue Yeung <kayuey@gmail.com>
  */
 class Payment extends BasePayment implements PaymentInterface
 {
     /**
-     * Order instance.
-     *
      * @var BaseOrderInterface
      */
     protected $order;
@@ -42,7 +38,5 @@ class Payment extends BasePayment implements PaymentInterface
     public function setOrder(BaseOrderInterface $order = null)
     {
         $this->order = $order;
-
-        return $this;
     }
 }

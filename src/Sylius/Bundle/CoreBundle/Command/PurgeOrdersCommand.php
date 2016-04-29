@@ -16,8 +16,6 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Command to purge expired pending orders
- *
  * @author Ka-Yue Yeung <kayuey@gmail.com>
  */
 class PurgeOrdersCommand extends ContainerAwareCommand
@@ -30,6 +28,9 @@ class PurgeOrdersCommand extends ContainerAwareCommand
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $orderPendingDuration = $this->getContainer()->getParameter('sylius.order.pending.duration');

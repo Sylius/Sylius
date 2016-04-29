@@ -16,8 +16,6 @@ use Sylius\Component\Promotion\Model\Coupon as BaseCoupon;
 class Coupon extends BaseCoupon implements CouponInterface
 {
     /**
-     * The per customer usage limit
-     *
      * @var int
      */
     protected $perCustomerUsageLimit = 0;
@@ -36,7 +34,5 @@ class Coupon extends BaseCoupon implements CouponInterface
     public function setPerCustomerUsageLimit($perCustomerUsageLimit = 0)
     {
         $this->perCustomerUsageLimit = $perCustomerUsageLimit;
-
-        return $this;
     }
 }

@@ -14,15 +14,11 @@ namespace Sylius\Component\Core\Model;
 interface ProductVariantImageInterface extends ImageInterface
 {
     /**
-     * Get product variant.
-     *
      * @return ProductVariantInterface
      */
     public function getVariant();
 
     /**
-     * Set the product variant.
-     *
      * @param ProductVariantInterface $variant
      */
     public function setVariant(ProductVariantInterface $variant = null);

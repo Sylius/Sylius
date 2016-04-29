@@ -139,8 +139,6 @@ class Channel extends BaseChannel implements ChannelInterface
     public function setCurrencies(Collection $currencies)
     {
         $this->currencies = $currencies;
-
-        return $this;
     }
 
     /**
@@ -185,8 +183,6 @@ class Channel extends BaseChannel implements ChannelInterface
     public function setLocales(Collection $locales)
     {
         $this->locales = $locales;
-
-        return $this;
     }
 
     /**
@@ -303,8 +299,6 @@ class Channel extends BaseChannel implements ChannelInterface
     public function setTaxons(Collection $taxons)
     {
         $this->taxons = $taxons;
-
-        return $this;
     }
 
     /**

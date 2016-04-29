@@ -15,15 +15,11 @@ use Sylius\Component\Order\Model\OrderInterface as BaseOrderInterface;
 use Sylius\Component\Shipping\Model\Shipment as BaseShipment;
 
 /**
- * Shipment attached to order.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class Shipment extends BaseShipment implements ShipmentInterface
 {
     /**
-     * Order.
-     *
      * @var BaseOrderInterface
      */
     protected $order;
@@ -42,7 +38,5 @@ class Shipment extends BaseShipment implements ShipmentInterface
     public function setOrder(BaseOrderInterface $order = null)
     {
         $this->order = $order;
-
-        return $this;
     }
 }

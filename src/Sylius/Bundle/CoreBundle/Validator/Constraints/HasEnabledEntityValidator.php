@@ -46,7 +46,7 @@ class HasEnabledEntityValidator extends ConstraintValidator
     }
 
     /**
-     * @param object     $entity
+     * @param object $entity
      * @param Constraint $constraint
      *
      * @throws UnexpectedTypeException
@@ -95,7 +95,7 @@ class HasEnabledEntityValidator extends ConstraintValidator
      * validated, the entity is the last enabled entity available.
      *
      * @param array|\Iterator $result
-     * @param object          $entity
+     * @param object $entity
      *
      * @return bool
      */
@@ -134,7 +134,7 @@ class HasEnabledEntityValidator extends ConstraintValidator
 
     /**
      * @param ObjectManager|null $objectManager
-     * @param string             $exceptionMessage
+     * @param string $exceptionMessage
      */
     private function validateObjectManager($objectManager, $exceptionMessage)
     {
@@ -145,8 +145,8 @@ class HasEnabledEntityValidator extends ConstraintValidator
 
     /**
      * @param ObjectManager $objectManager
-     * @param object        $entity
-     * @param string        $enabledPropertyPath
+     * @param object $entity
+     * @param string $enabledPropertyPath
      */
     private function ensureEntityHasProvidedEnabledField(ObjectManager $objectManager, $entity, $enabledPropertyPath)
     {

@@ -23,6 +23,9 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 class Configuration implements ConfigurationInterface
 {
+    /**
+     * @return TreeBuilder
+     */
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
@@ -153,8 +156,8 @@ class Configuration implements ConfigurationInterface
     /**
      * Helper method to append checkout step nodes.
      *
-     * @param $name
-     * @param $defaultTemplate
+     * @param string $name
+     * @param string $defaultTemplate
      *
      * @return NodeDefinition
      */

@@ -16,8 +16,6 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
- * Command to release expired pending orders
- *
  * @author Foo Pang <foo.pang@gmail.com>
  */
 class ReleaseOrdersCommand extends ContainerAwareCommand
@@ -30,6 +28,9 @@ class ReleaseOrdersCommand extends ContainerAwareCommand
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $inventoryHoldingDuration = $this->getContainer()->getParameter('sylius.inventory.holding.duration');

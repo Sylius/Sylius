@@ -20,13 +20,22 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 
 class ImageUploadListener
 {
+    /**
+     * @var ImageUploaderInterface
+     */
     protected $uploader;
 
+    /**
+     * @param ImageUploaderInterface $uploader
+     */
     public function __construct(ImageUploaderInterface $uploader)
     {
         $this->uploader = $uploader;
     }
 
+    /**
+     * @param GenericEvent $event
+     */
     public function uploadProductImage(GenericEvent $event)
     {
         $subject = $event->getSubject();
@@ -50,6 +59,9 @@ class ImageUploadListener
         }
     }
 
+    /**
+     * @param GenericEvent $event
+     */
     public function uploadTaxonImage(GenericEvent $event)
     {
         $subject = $event->getSubject();

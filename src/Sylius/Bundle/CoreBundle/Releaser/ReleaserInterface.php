@@ -12,15 +12,11 @@
 namespace Sylius\Bundle\CoreBundle\Releaser;
 
 /**
- * Interface for the expired orders release.
- *
  * @author Foo Pang <foo.pang@gmail.com>
  */
 interface ReleaserInterface
 {
     /**
-     * Release all expired orders.
-     *
      * @param \DateTime $expiresAt
      *
      * @return bool

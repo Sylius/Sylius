@@ -14,8 +14,6 @@ namespace Sylius\Component\Core\OrderProcessing;
 use Sylius\Component\Core\Model\OrderInterface;
 
 /**
- * Order payment processor interface.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface PaymentProcessorInterface

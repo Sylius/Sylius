@@ -35,6 +35,7 @@ class CustomerGroupRuleChecker implements RuleCheckerInterface
         if (null === $customer = $subject->getCustomer()) {
             return false;
         }
+
         if (!$customer instanceof GroupableInterface) {
             return false;
         }

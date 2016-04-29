@@ -17,8 +17,6 @@ use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
 /**
- * Listener to prevent the deletion of last enabled channel.
- *
  * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
 class ChannelDeletionListener

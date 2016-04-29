@@ -22,8 +22,6 @@ use Sylius\Component\Promotion\Model\Promotion as BasePromotion;
 class Promotion extends BasePromotion implements PromotionInterface
 {
     /**
-     * Channels in which this product is available.
-     *
      * @var ChannelInterface[]|Collection
      */
     protected $channels;
@@ -31,6 +29,7 @@ class Promotion extends BasePromotion implements PromotionInterface
     public function __construct()
     {
         parent::__construct();
+        
         $this->channels = new ArrayCollection();
     }
 

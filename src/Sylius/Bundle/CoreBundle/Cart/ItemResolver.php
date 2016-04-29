@@ -25,24 +25,17 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Item resolver for cart bundle.
- * Returns proper item objects for cart add and remove actions.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class ItemResolver implements ItemResolverInterface
 {
     /**
-     * Cart provider.
-     *
      * @var CartProviderInterface
      */
     protected $cartProvider;
 
     /**
-     * Prica calculator.
-     *
      * @var DelegatingCalculatorInterface
      */
     protected $priceCalculator;
@@ -53,22 +46,16 @@ class ItemResolver implements ItemResolverInterface
     protected $productRepository;
 
     /**
-     * Form factory.
-     *
      * @var FormFactoryInterface
      */
     protected $formFactory;
 
     /**
-     * Stock availability checker.
-     *
      * @var AvailabilityCheckerInterface
      */
     protected $availabilityChecker;
 
     /**
-     * Restricted zone checker.
-     *
      * @var RestrictedZoneCheckerInterface
      */
     protected $restrictedZoneChecker;
@@ -79,8 +66,6 @@ class ItemResolver implements ItemResolverInterface
     protected $channelContext;
 
     /**
-     * Constructor.
-     *
      * @param CartProviderInterface          $cartProvider
      * @param RepositoryInterface            $productRepository
      * @param FormFactoryInterface           $formFactory
@@ -169,8 +154,6 @@ class ItemResolver implements ItemResolverInterface
     }
 
     /**
-     * Here we resolve the item identifier that is going to be added into the cart.
-     *
      * @param mixed $request
      *
      * @return string|int

@@ -15,8 +15,6 @@ use Sylius\Component\Order\Model\OrderAwareInterface;
 use Sylius\Component\Payment\Model\PaymentInterface as BasePaymentInterface;
 
 /**
- * Payment interface.
- *
  * @author Ka Yue Yeung <kayuey@gmail.com>
  */
 interface PaymentInterface extends BasePaymentInterface, OrderAwareInterface

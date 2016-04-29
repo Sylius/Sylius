@@ -20,6 +20,7 @@ use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\SyliusCheckoutEvents;
 use Sylius\Component\Resource\Event\ResourceEvent;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -68,9 +69,19 @@ class SecurityStep extends CheckoutStep
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function complete()
+    {
+        $this->dispatchCheckoutEvent(SyliusCheckoutEvents::SECURITY_COMPLETE, $this->getCurrentCart());
+
+        return parent::complete();
+    }
+
+    /**
      * @param ProcessContextInterface $context
-     * @param FormInterface           $registrationForm
-     * @param null|FormInterface      $guestForm
+     * @param FormInterface $registrationForm
+     * @param null|FormInterface $guestForm
      *
      * @return Response
      */
@@ -98,7 +109,7 @@ class SecurityStep extends CheckoutStep
     }
 
     /**
-     * @return null|FormInterface
+     * @return FormInterface|null
      */
     protected function getGuestForm()
     {
@@ -186,21 +197,11 @@ class SecurityStep extends CheckoutStep
     }
 
     /**
-     * @param $resource
+     * @param ResourceInterface $resource
      */
     protected function saveResource($resource)
     {
         $this->getManager()->persist($resource);
         $this->getManager()->flush();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function complete()
-    {
-        $this->dispatchCheckoutEvent(SyliusCheckoutEvents::SECURITY_COMPLETE, $this->getCurrentCart());
-
-        return parent::complete();
     }
 }

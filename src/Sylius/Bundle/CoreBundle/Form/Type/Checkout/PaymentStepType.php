@@ -17,8 +17,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
- * Checkout payment step form type.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class PaymentStepType extends AbstractResourceType
@@ -29,8 +27,8 @@ class PaymentStepType extends AbstractResourceType
     protected $channelContext;
 
     /**
-     * @param string                  $dataClass
-     * @param array                   $validationGroups
+     * @param string $dataClass
+     * @param array $validationGroups
      * @param ChannelContextInterface $channelContext
      */
     public function __construct($dataClass, array $validationGroups = [], ChannelContextInterface $channelContext)

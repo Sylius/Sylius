@@ -16,8 +16,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Products filter form type.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ProductFilterType extends AbstractType

@@ -48,8 +48,6 @@ interface ProductRepositoryInterface extends BaseProductRepositoryInterface
     public function createFilterPaginator(array $criteria = null, array $sorting = null);
 
     /**
-     * Get the product data for the details page.
-     *
      * @param int $id
      *
      * @return null|ProductInterface
@@ -57,8 +55,6 @@ interface ProductRepositoryInterface extends BaseProductRepositoryInterface
     public function findForDetailsPage($id);
 
     /**
-     * Find X recently added products.
-     *
      * @param int $limit
      * @param ChannelInterface $channel
      *

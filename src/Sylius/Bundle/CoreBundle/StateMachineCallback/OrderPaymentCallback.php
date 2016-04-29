@@ -17,8 +17,6 @@ use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Order\OrderTransitions;
 
 /**
- * Synchronization between payments and their order.
- *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
 class OrderPaymentCallback
@@ -59,7 +57,6 @@ class OrderPaymentCallback
             $order->setPaymentState($payment->getState());
         }
 
-        // be flexible over many payment methods
         if ($total >= $order->getTotal()) {
             $this->factory->get($order, OrderTransitions::GRAPH)->apply(OrderTransitions::SYLIUS_CONFIRM, true);
         }

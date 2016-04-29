@@ -34,23 +34,19 @@ class RouteProvider extends DoctrineProvider implements RouteProviderInterface
     protected $container;
 
     /**
-     * Route configuration for the object classes to search in
-     *
      * @var array
      */
     protected $routeConfigs;
 
     /**
-     * Contains an associative array of all the classes and the repositories needed in route generation
-     *
      * @var ObjectRepository[]
      */
     protected $classRepositories = [];
 
     /**
      * @param ContainerInterface $container
-     * @param ManagerRegistry    $managerRegistry
-     * @param array              $routeConfigs
+     * @param ManagerRegistry $managerRegistry
+     * @param array $routeConfigs
      */
     public function __construct(ContainerInterface $container, ManagerRegistry $managerRegistry, array $routeConfigs)
     {
@@ -160,10 +156,7 @@ class RouteProvider extends DoctrineProvider implements RouteProviderInterface
     }
 
     /**
-     * This method is called from a compiler pass
-     *
-     * @param string           $class
-     * @param string           $id
+     * {@inheritdoc}
      */
     public function addRepository($class, $id)
     {
@@ -175,8 +168,6 @@ class RouteProvider extends DoctrineProvider implements RouteProviderInterface
     }
 
     /**
-     * Get repository services.
-     *
      * @return array
      */
     private function getRepositories()
@@ -211,12 +202,6 @@ class RouteProvider extends DoctrineProvider implements RouteProviderInterface
         $className = ClassUtils::getClass($entity);
         $fieldName = $this->routeConfigs[$className]['field'];
 
-        // Used for matching by translated field
-        // eg:
-        // If the url slug doesn't match the current's locale slug
-        // the method getSlug would return the slug in current locale
-        // it won't match the url and will fail
-        // TODO refactor class if locale is included in url
         if (null === $value) {
             $value = $this->getFieldValue($entity, $fieldName);
         }

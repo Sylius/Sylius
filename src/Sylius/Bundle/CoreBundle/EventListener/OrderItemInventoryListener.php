@@ -18,23 +18,17 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
- * Order item inventory processing listener.
- *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class OrderItemInventoryListener
 {
     /**
-     * Event Dispatcher
-     *
      * @var EventDispatcherInterface
      */
     protected $eventDispatcher;
 
     /**
-     * Constructor.
-     *
      * @param EventDispatcherInterface $eventDispatcher
      */
     public function __construct(EventDispatcherInterface $eventDispatcher)
@@ -42,6 +36,9 @@ class OrderItemInventoryListener
         $this->eventDispatcher = $eventDispatcher;
     }
 
+    /**
+     * @param LifecycleEventArgs $args
+     */
     public function prePersist(LifecycleEventArgs $args)
     {
         $item = $args->getEntity();
@@ -53,6 +50,9 @@ class OrderItemInventoryListener
         $this->eventDispatcher->dispatch('sylius.order_item.pre_create', new GenericEvent($item));
     }
 
+    /**
+     * @param OnFlushEventArgs $args
+     */
     public function onFlush(OnFlushEventArgs $args)
     {
         $em = $args->getEntityManager();
@@ -75,6 +75,11 @@ class OrderItemInventoryListener
         }
     }
 
+    /**
+     * @param mixed $entity
+     *
+     * @return bool
+     */
     protected function supports($entity)
     {
         return $entity instanceof OrderItemInterface;

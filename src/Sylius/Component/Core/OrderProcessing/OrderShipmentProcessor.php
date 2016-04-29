@@ -12,6 +12,7 @@
 namespace Sylius\Component\Core\OrderProcessing;
 
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
@@ -37,17 +38,29 @@ class OrderShipmentProcessor implements OrderShipmentProcessorInterface
      */
     public function processOrderShipment(OrderInterface $order)
     {
-        if ($order->hasShipments()) {
-            $shipment = $order->getShipments()->first();
-        } else {
-            $shipment = $this->shipmentFactory->createNew();
-            $order->addShipment($shipment);
-        }
+        $shipment = $this->getOrderShipment($order);
 
         foreach ($order->getItemUnits() as $itemUnit) {
             if (null === $itemUnit->getShipment()) {
                 $shipment->addUnit($itemUnit);
             }
         }
+    }
+
+    /**
+     * @param OrderInterface $order
+     *
+     * @return ShipmentInterface
+     */
+    private function getOrderShipment(OrderInterface $order)
+    {
+        if ($order->hasShipments()) {
+            return $order->getShipments()->first();
+        }
+
+        $shipment = $this->shipmentFactory->createNew();
+        $order->addShipment($shipment);
+
+        return $shipment;
     }
 }

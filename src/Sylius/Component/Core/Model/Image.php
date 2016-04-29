@@ -18,22 +18,16 @@ class Image implements ImageInterface
     use TimestampableTrait;
 
     /**
-     * Id
-     *
      * @var int
      */
     protected $id;
 
     /**
-     * File
-     *
      * @var \SplFileInfo
      */
     protected $file;
 
     /**
-     * Path to file
-     *
      * @var string
      */
     protected $path;
@@ -44,8 +38,6 @@ class Image implements ImageInterface
     }
 
     /**
-     * Get id
-     *
      * @return int
      */
     public function getId()

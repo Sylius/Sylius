@@ -17,12 +17,13 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Group based pricing configuration form type.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class GroupBasedConfigurationType extends AbstractType
 {
+    /**
+     * @var RepositoryInterface
+     */
     protected $groupRepository;
 
     /**

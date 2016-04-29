@@ -16,13 +16,22 @@ use Sylius\Component\Core\Model\ImageInterface;
 
 class ImageUploader implements ImageUploaderInterface
 {
+    /**
+     * @var Filesystem
+     */
     protected $filesystem;
 
+    /**
+     * @param Filesystem $filesystem
+     */
     public function __construct(Filesystem $filesystem)
     {
         $this->filesystem = $filesystem;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function upload(ImageInterface $image)
     {
         if (!$image->hasFile()) {
@@ -46,11 +55,19 @@ class ImageUploader implements ImageUploaderInterface
         );
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function remove($path)
     {
         return $this->filesystem->delete($path);
     }
 
+    /**
+     * @param string $path
+     *
+     * @return string
+     */
     private function expandPath($path)
     {
         return sprintf(

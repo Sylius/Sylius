@@ -11,9 +11,9 @@
 
 namespace Sylius\Component\Core\Promotion\Action;
 
-use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
+use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Promotion\Action\PromotionActionInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
@@ -22,8 +22,6 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
- * Free product action.
- *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
 class AddProductAction implements PromotionActionInterface
@@ -48,8 +46,11 @@ class AddProductAction implements PromotionActionInterface
      * @param RepositoryInterface $variantRepository
      * @param OrderItemQuantityModifierInterface $orderItemQuantityModifier
      */
-    public function __construct(FactoryInterface $itemFactory, RepositoryInterface $variantRepository, OrderItemQuantityModifierInterface $orderItemQuantityModifier)
-    {
+    public function __construct(
+        FactoryInterface $itemFactory,
+        RepositoryInterface $variantRepository,
+        OrderItemQuantityModifierInterface $orderItemQuantityModifier
+    ) {
         $this->itemFactory = $itemFactory;
         $this->variantRepository = $variantRepository;
         $this->orderItemQuantityModifier = $orderItemQuantityModifier;

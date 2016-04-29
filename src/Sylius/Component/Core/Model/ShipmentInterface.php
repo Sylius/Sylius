@@ -15,8 +15,6 @@ use Sylius\Component\Order\Model\OrderAwareInterface;
 use Sylius\Component\Shipping\Model\ShipmentInterface as BaseShipmentInterface;
 
 /**
- * Shipment interface.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface ShipmentInterface extends BaseShipmentInterface, OrderAwareInterface

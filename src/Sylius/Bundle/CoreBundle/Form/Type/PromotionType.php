@@ -15,8 +15,6 @@ use Sylius\Bundle\PromotionBundle\Form\Type\PromotionType as BasePromotionType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Promotion form.
- *
  * @author Kristian Loevstroem <kristian@loevstroem.dk>
  */
 class PromotionType extends BasePromotionType

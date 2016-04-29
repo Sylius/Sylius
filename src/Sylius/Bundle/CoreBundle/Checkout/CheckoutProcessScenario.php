@@ -17,8 +17,6 @@ use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
 /**
- * Sylius checkout process.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class CheckoutProcessScenario implements ProcessScenarioInterface

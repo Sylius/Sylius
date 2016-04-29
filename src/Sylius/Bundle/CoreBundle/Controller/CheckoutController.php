@@ -18,11 +18,13 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\OrderCheckoutTransitions;
+use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\SyliusCheckoutEvents;
 use Sylius\Component\Core\SyliusOrderEvents;
 use Sylius\Component\Order\OrderTransitions;
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\EventDispatcher\GenericEvent;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -30,6 +32,14 @@ use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundE
 
 class CheckoutController extends FOSRestController
 {
+    /**
+     * @param Request $request
+     * @param mixed $orderId
+     *
+     * @return Response
+     *
+     * @throws \Exception
+     */
     public function proceedAction(Request $request, $orderId)
     {
         $order = $this->findOrderOr404($orderId);
@@ -66,6 +76,12 @@ class CheckoutController extends FOSRestController
         throw new \Exception('Could not process checkout API request.');
     }
 
+    /**
+     * @param Request $request
+     * @param OrderInterface $order
+     *
+     * @return Response
+     */
     public function addressingAction(Request $request, OrderInterface $order)
     {
         if ($order->isEmpty()) {
@@ -97,6 +113,12 @@ class CheckoutController extends FOSRestController
         return $this->handleView($this->view($form, 400));
     }
 
+    /**
+     * @param Request $request
+     * @param OrderInterface $order
+     *
+     * @return Response
+     */
     public function shippingAction(Request $request, OrderInterface $order)
     {
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::SHIPPING_INITIALIZE, $order);
@@ -134,6 +156,12 @@ class CheckoutController extends FOSRestController
         return $this->handleView($this->view($form, 400));
     }
 
+    /**
+     * @param Request $request
+     * @param OrderInterface $order
+     *
+     * @return Response
+     */
     public function paymentAction(Request $request, OrderInterface $order)
     {
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::PAYMENT_INITIALIZE, $order);
@@ -168,6 +196,12 @@ class CheckoutController extends FOSRestController
         return $this->handleView($this->view($form, 400));
     }
 
+    /**
+     * @param Request $request
+     * @param OrderInterface $order
+     *
+     * @return Response
+     */
     public function finalizeAction(Request $request, OrderInterface $order)
     {
         if ($request->isMethod('GET')) {
@@ -206,8 +240,6 @@ class CheckoutController extends FOSRestController
     }
 
     /**
-     * Get object manager.
-     *
      * @return ObjectManager
      */
     protected function getManager()
@@ -237,7 +269,7 @@ class CheckoutController extends FOSRestController
 
     /**
      * @param string $name
-     * @param Event  $event
+     * @param Event $event
      */
     protected function dispatchEvent($name, Event $event)
     {
@@ -245,7 +277,7 @@ class CheckoutController extends FOSRestController
     }
 
     /**
-     * @param string         $name
+     * @param string $name
      * @param OrderInterface $order
      */
     protected function dispatchCheckoutEvent($name, OrderInterface $order)
@@ -253,11 +285,21 @@ class CheckoutController extends FOSRestController
         $this->dispatchEvent($name, new GenericEvent($order));
     }
 
+    /**
+     * @return OrderRepositoryInterface
+     */
     private function getOrderRepository()
     {
         return $this->get('sylius.repository.order');
     }
 
+    /**
+     * @param mixed $id
+     *
+     * @return OrderInterface
+     *
+     * @throws NotFoundHttpException
+     */
     private function findOrderOr404($id)
     {
         if (!$order = $this->getOrderRepository()->find($id)) {
@@ -267,11 +309,21 @@ class CheckoutController extends FOSRestController
         return $order;
     }
 
+    /**
+     * @param OrderInterface $order
+     *
+     * @return FormInterface
+     */
     private function createCheckoutAddressingForm(OrderInterface $order)
     {
         return $this->createApiForm('sylius_checkout_addressing', $order);
     }
 
+    /**
+     * @param OrderInterface $order
+     *
+     * @return FormInterface
+     */
     private function createCheckoutShippingForm(OrderInterface $order)
     {
         $zones = $this->getZoneMatcher()->matchAll($order->getShippingAddress());
@@ -286,18 +338,30 @@ class CheckoutController extends FOSRestController
         ]);
     }
 
+    /**
+     * @param OrderInterface $order
+     *
+     * @return FormInterface
+     */
     private function createCheckoutPaymentForm(OrderInterface $order)
     {
         return $this->createApiForm('sylius_checkout_payment', $order);
     }
 
+    /**
+     * @param string $type
+     * @param mixed $value
+     * @param array $options
+     *
+     * @return FormInterface
+     */
     private function createApiForm($type, $value = null, array $options = [])
     {
         return $this->get('form.factory')->createNamed('', $type, $value, array_merge($options, ['csrf_protection' => false]));
     }
 
     /**
-     * @return null|CustomerInterface
+     * @return CustomerInterface|null
      */
     protected function getCustomer()
     {

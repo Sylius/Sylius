@@ -15,8 +15,6 @@ use Sylius\Bundle\TaxationBundle\Form\Type\TaxRateType as BaseTaxRateType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Tax rate form type, extended with zone selection field.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class TaxRateType extends BaseTaxRateType

@@ -53,8 +53,13 @@ class RestrictedZoneListener
      * @param SessionInterface $session
      * @param TranslatorInterface $translator
      */
-    public function __construct(RestrictedZoneCheckerInterface $restrictedZoneChecker, CartProviderInterface $cartProvider, ObjectManager $cartManager, SessionInterface $session, TranslatorInterface $translator)
-    {
+    public function __construct(
+        RestrictedZoneCheckerInterface $restrictedZoneChecker,
+        CartProviderInterface $cartProvider,
+        ObjectManager $cartManager,
+        SessionInterface $session,
+        TranslatorInterface $translator
+    ) {
         $this->restrictedZoneChecker = $restrictedZoneChecker;
         $this->cartProvider = $cartProvider;
         $this->cartManager = $cartManager;

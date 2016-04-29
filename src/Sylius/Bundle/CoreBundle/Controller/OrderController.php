@@ -77,8 +77,6 @@ class OrderController extends ResourceController
     }
 
     /**
-     * Get order history changes.
-     *
      * @param Request $request
      *
      * @return Response

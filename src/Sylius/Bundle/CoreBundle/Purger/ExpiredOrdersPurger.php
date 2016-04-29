@@ -20,29 +20,21 @@ use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Order\OrderTransitions;
 
 /**
- * Purge expired pending orders
- *
  * @author Ka-Yue Yeung <kayuey@gmail.com>
  */
 class ExpiredOrdersPurger implements PurgerInterface
 {
     /**
-     * Order manager.
-     *
      * @var ObjectManager
      */
     protected $manager;
 
     /**
-     * Order repository.
-     *
      * @var OrderRepositoryInterface
      */
     protected $repository;
 
     /**
-     * Expires at.
-     *
      * @var \DateTime
      */
     protected $expiresAt;
@@ -52,6 +44,11 @@ class ExpiredOrdersPurger implements PurgerInterface
      */
     protected $factory;
 
+    /**
+     * @param ObjectManager $manager
+     * @param OrderRepositoryInterface $repository
+     * @param FactoryInterface $factory
+     */
     public function __construct(ObjectManager $manager, OrderRepositoryInterface $repository, FactoryInterface $factory)
     {
         $this->manager = $manager;
@@ -60,8 +57,6 @@ class ExpiredOrdersPurger implements PurgerInterface
     }
 
     /**
-     * Set expires at.
-     *
      * @param \DateTime $expiresAt
      */
     public function setExpiresAt(\DateTime $expiresAt)
@@ -90,8 +85,6 @@ class ExpiredOrdersPurger implements PurgerInterface
     }
 
     /**
-     * Purge an order.
-     *
      * @param OrderInterface $order
      */
     protected function purgeOrder(OrderInterface $order)

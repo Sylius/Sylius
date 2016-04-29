@@ -16,8 +16,6 @@ use Sylius\Bundle\SettingsBundle\Model\SettingsInterface;
 use Sylius\Component\Rbac\Authorization\AuthorizationCheckerInterface;
 
 /**
- * Test (toggleable) authorization checker.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ToggleableAuthorizationChecker implements AuthorizationCheckerInterface

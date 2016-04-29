@@ -20,8 +20,6 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Checkout addressing step form type.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class AddressingStepType extends AbstractResourceType
