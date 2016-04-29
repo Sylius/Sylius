@@ -14,6 +14,9 @@ sylius:
             not_blank: Please enter your password.
             mismatch: The entered passwords don't match
             wrong_current: Provided password is different than the current one.
+        password:
+            min: Password must be at least {{ limit }} characters long.
+            max: Password must not be longer than {{ limit }} characters.
 
     customer:
         first_name:
