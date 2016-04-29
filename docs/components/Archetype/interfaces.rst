@@ -14,7 +14,8 @@ This interface should be implemented by models representing an **Archetype**.
 .. note::
 
     This interface extends the :ref:`component_resource_model_code-aware-interface`, :ref:`component_archetype_model_archetype-translation-interface`
-    and the :ref:`component_resource_model_timestampable-interface`. |br|
+    and the :ref:`component_resource_model_timestampable-interface`.
+
     You will find more information about this interface in `Sylius API ArchetypeInterface`_.
 
 .. _Sylius API ArchetypeInterface: http://api.sylius.org/Sylius/Component/Archetype/Model/ArchetypeInterface.html
@@ -45,7 +46,8 @@ the object class needs to implement the ``ArchetypeSubjectInterface``.
 .. note::
 
     This interface extends the :ref:`component_attribute_model_attribute-subject-interface`
-    and the :ref:`component_variation_model_variable-interface`. |br|
+    and the :ref:`component_variation_model_variable-interface`.
+
     You will find more information about this interface in `Sylius API ArchetypeSubjectInterface`_.
 
 .. _Sylius API ArchetypeSubjectInterface: http://api.sylius.org/Sylius/Component/Archetype/Model/ArchetypeSubjectInterface.html

@@ -15,7 +15,8 @@ The **TaxonInterface** gives an object an ability to have Taxons assigned as chi
 
     This interface extends the :ref:`component_resource_model_code-aware-interface`,
     :ref:`component_translation_model_translatable-interface`
-    and the :ref:`component_taxonomy_model_taxon-translation-interface`. |br|
+    and the :ref:`component_taxonomy_model_taxon-translation-interface`.
+
     You will find more information about that interface in `Sylius API TaxonInterface`_.
 
 .. _Sylius API TaxonInterface: http://api.sylius.org/Sylius/Component/Taxonomy/Model/TaxonInterface.html

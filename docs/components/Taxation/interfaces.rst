@@ -22,7 +22,8 @@ To create object which provides information about tax category, the object class
 **TaxCategoryInterface**.
 
 .. note::
-    This interface extends :ref:`component_resource_model_code-aware-interface` and :ref:`component_resource_model_timestampable-interface`. |br|
+    This interface extends :ref:`component_resource_model_code-aware-interface` and :ref:`component_resource_model_timestampable-interface`.
+
     For more detailed information go to `Sylius API Tax Category Interface`_.
 
 .. _Sylius API Tax Category Interface: http://api.sylius.org/Sylius/Component/Taxation/Model/TaxCategoryInterface.html
@@ -34,7 +35,8 @@ To create object which provides information about tax rate, the object class nee
 **TaxCategoryInterface**.
 
 .. note::
-    This interface extends :ref:`component_resource_model_code-aware-interface` and :ref:`component_resource_model_timestampable-interface`. |br|
+    This interface extends :ref:`component_resource_model_code-aware-interface` and :ref:`component_resource_model_timestampable-interface`.
+
     For more detailed information go to `Sylius API Tax Rate Interface`_.
 
 .. _Sylius API Tax Rate Interface: http://api.sylius.org/Sylius/Component/Taxation/Model/TaxCategoryInterface.html

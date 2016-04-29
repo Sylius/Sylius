@@ -63,7 +63,8 @@ This interface expects you to implement a way of setting an instance of **Locale
 and an array of translatable fields into your custom repository.
 
 .. note::
-   This interface extends the :ref:`component_resource_repository_repository-interface`. |br|
+   This interface extends the :ref:`component_resource_repository_repository-interface`.
+
    For more detailed information go to `Sylius API TranslatableResourceRepositoryInterface`_.
 
 .. _Sylius API TranslatableResourceRepositoryInterface: http://api.sylius.org/Sylius/Component/Translation/Repository/TranslatableResourceRepositoryInterface.html

@@ -39,7 +39,8 @@ concerning customer's address and as default has the following properties:
 
 
 .. note::
-   This model implements the :ref:`component_addressing_model_address-interface`. |br|
+   This model implements the :ref:`component_addressing_model_address-interface`.
+
    For more detailed information go to `Sylius API Address`_.
 
 .. _Sylius API Address: http://api.sylius.org/Sylius/Component/Addressing/Model/Address.html
@@ -66,7 +67,8 @@ It should contain all data concerning a country and as default has the following
 
 .. note::
    This model implements the :ref:`component_addressing_model_country-interface`
-   and :ref:`component_resource_model_code-aware-interface`. |br|
+   and :ref:`component_resource_model_code-aware-interface`.
+
    For more detailed information go to `Sylius API Country`_.
 
 .. _Sylius API Country: http://api.sylius.org/Sylius/Component/Addressing/Model/Country.html
@@ -94,7 +96,8 @@ It should contain all data concerning a province and as default has the followin
 
 .. note::
    This model implements the :ref:`component_addressing_model_province-interface`
-   and :ref:`component_resource_model_code-aware-interface`. |br|
+   and :ref:`component_resource_model_code-aware-interface`.
+
    For more detailed information go to `Sylius API Province`_.
 
 .. _Sylius API Province: http://api.sylius.org/Sylius/Component/Addressing/Model/Province.html
@@ -125,7 +128,8 @@ It should contain all data concerning a zone and as default has the following pr
 
 .. note::
    This model implements the :ref:`component_addressing_model_zone-interface`
-   and :ref:`component_resource_model_code-aware-interface`. |br|
+   and :ref:`component_resource_model_code-aware-interface`.
+
    For more detailed information go to `Sylius API Zone`_.
 
 .. _Sylius API Zone: http://api.sylius.org/Sylius/Component/Addressing/Model/Zone.html
@@ -151,7 +155,8 @@ On default this model has the following properties:
 
 .. note::
    This model implements :ref:`component_addressing_model_zone-member-interface`
-   and :ref:`component_resource_model_code-aware-interface`. |br|
+   and :ref:`component_resource_model_code-aware-interface`.
+
    For more detailed information go to `Sylius API ZoneMember`_.
 
 .. _Sylius API ZoneMember: http://api.sylius.org/Sylius/Component/Addressing/Model/ZoneMember.html

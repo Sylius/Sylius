@@ -23,7 +23,8 @@ from the :doc:`Payment </components/Payment/index>` component.
 
    $registry = new ServiceRegistry('Sylius\Component\Payment\Calculator\FeeCalculatorInterface');
 
-Once you've done that you can manage any object with the corresponding interface. |br|
+Once you've done that you can manage any object with the corresponding interface.
+
 So for starters, lets add some services:
 
 .. code-block:: php

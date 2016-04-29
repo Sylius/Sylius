@@ -32,7 +32,8 @@ Every attribute is represented by the **Attribute** model which by default has t
 
 .. note::
    This model extends the :ref:`component_translation_model_abstract-translatable` class
-   and implements the :ref:`component_attribute_model_attribute-interface`. |br|
+   and implements the :ref:`component_attribute_model_attribute-interface`.
+
    For more detailed information go to `Sylius API Attribute`_.
 
 .. _Sylius API Attribute: http://api.sylius.org/Sylius/Component/Attribute/Model/Attribute.html
@@ -77,7 +78,8 @@ It has the following properties:
    ``Value`` property is used only as proxy, that stores data in proper field. It's crucial to set attribute value in field, that is mapped as attribute's storage type.
 
 .. note::
-   This model implements the :ref:`component_attribute_model_attribute-value-interface`. |br|
+   This model implements the :ref:`component_attribute_model_attribute-value-interface`.
+
    For more detailed information go to `Sylius API AttributeValue`_.
 
 .. _Sylius API AttributeValue: http://api.sylius.org/Sylius/Component/Attribute/Model/AttributeValue.html
@@ -100,7 +102,8 @@ model which has the following properties:
 
 .. note::
    This model extends the :ref:`component_translation_model_abstract-translation` class
-   and implements the :ref:`component_attribute_model_attribute-translation-interface`. |br|
+   and implements the :ref:`component_attribute_model_attribute-translation-interface`.
+
    For more detailed information go to `Sylius API AttributeTranslation`_.
 
 .. _Sylius API AttributeTranslation: http://api.sylius.org/Sylius/Component/Attribute/Model/AttributeTranslation.html

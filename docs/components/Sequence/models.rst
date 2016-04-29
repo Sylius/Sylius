@@ -19,7 +19,8 @@ Sequence
 +------------+------------------------------+
 
 .. note::
-   This model implements the :ref:`component_sequence_model_sequence-interface`. |br|
+   This model implements the :ref:`component_sequence_model_sequence-interface`.
+
    For more detailed information go to `Sylius API Sequence`_.
 
 .. _Sylius API Sequence: http://api.sylius.org/Sylius/Component/Sequence/Model/Sequence.html

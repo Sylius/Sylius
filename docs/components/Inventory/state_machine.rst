@@ -7,7 +7,8 @@ Inventory Unit States
 Sylius itself uses a complex state machine system to manage all states of the business domain.
 This component has some sensible default states defined in the **InventoryUnitInterface**.
 
-All new **InventoryUnit** instances have the state ``checkout`` by default, which means they are in the cart and wait for verification. |br|
+All new **InventoryUnit** instances have the state ``checkout`` by default, which means they are in the cart and wait for verification.
+
 The following states are defined:
 
 +-------------------+-------------+-----------------------------------------------------------------+

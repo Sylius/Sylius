@@ -1,7 +1,8 @@
 Basic Usage
 ===========
 
-Storages are services managing data in any type of container. |br|
+Storages are services managing data in any type of container.
+
 By default there are three storages available:
 
 * :ref:`component_storage_cookie-storage`

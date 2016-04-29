@@ -12,7 +12,8 @@ AddressInterface
 This interface should be implemented by models representing the customer's address.
 
 .. note::
-   This interface extends :ref:`component_resource_model_timestampable-interface`. |br|
+   This interface extends :ref:`component_resource_model_timestampable-interface`.
+
    For more detailed information go to `Sylius API AddressInterface`_.
 
 .. _Sylius API AddressInterface: http://api.sylius.org/Sylius/Component/Addressing/Model/AddressInterface.html
@@ -25,7 +26,8 @@ CountryInterface
 This interfaces should be implemented by models representing a country.
 
 .. note::
-   This interface extends :ref:`component_resource_model_toggleable-interface`. |br|
+   This interface extends :ref:`component_resource_model_toggleable-interface`.
+
    For more detailed information go to `Sylius API CountryInterface`_.
 
 .. _Sylius API CountryInterface: http://api.sylius.org/Sylius/Component/Addressing/Model/CountryInterface.html
@@ -47,7 +49,8 @@ This interface should be implemented by models representing a part of a country.
 ZoneInterface
 ~~~~~~~~~~~~~
 
-This interface should be implemented by models representing a single zone. |br|
+This interface should be implemented by models representing a single zone.
+
 It also holds all the :doc:`/components/Addressing/zone_types`.
 
 .. note::

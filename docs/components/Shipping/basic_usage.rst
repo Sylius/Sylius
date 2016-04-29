@@ -476,12 +476,18 @@ Finally you can create a method resolver:
 The ``->getSupportedMethods($shipment)`` method return the number of methods allowed for shipment object.
 There are a few possibilities:
 
-1. All shippable objects and all ShippingMethod have category *Regular*. The returned number will be 3.  |br|
-2. All ShippingMethod and one shippable object have category *Regular*. Second shippable object has category *Light*. The returned number will be 3.  |br|
-3. Two ShippingMethod and one shippable object have category *Regular*. Second shippable object and one ShippingMethod have category *Light*. The returned number will be 3.  |br|
-4. Two ShippingMethod and one shippable object have category *Regular*. Second shippable object and second ShippingMethod have category *Light*. The second Shipping category sets the category requirements as CATEGORY_REQUIREMENT_MATCH_NONE. The returned number will be 2.  |br|
-5. Two ShippingMethod and all shippable objects have category *Regular*. Second ShippingMethod has category *Light*. The second Shipping category sets the category requirements as CATEGORY_REQUIREMENT_MATCH_NONE. The returned number |br| will be 3.  |br|
-6. Two ShippingMethod and one shippable object have category *Regular*. Second shippable object and second ShippingMethod have category *Light*. The second Shipping category sets the category requirements as CATEGORY_REQUIREMENT_MATCH_ALL. The returned number will be 2.  |br|
+1. All shippable objects and all ShippingMethod have category *Regular*. The returned number will be 3.
+
+2. All ShippingMethod and one shippable object have category *Regular*. Second shippable object has category *Light*. The returned number will be 3.
+
+3. Two ShippingMethod and one shippable object have category *Regular*. Second shippable object and one ShippingMethod have category *Light*. The returned number will be 3.
+
+4. Two ShippingMethod and one shippable object have category *Regular*. Second shippable object and second ShippingMethod have category *Light*. The second Shipping category sets the category requirements as CATEGORY_REQUIREMENT_MATCH_NONE. The returned number will be 2.
+
+5. Two ShippingMethod and all shippable objects have category *Regular*. Second ShippingMethod has category *Light*. The second Shipping category sets the category requirements as CATEGORY_REQUIREMENT_MATCH_NONE. The returned number will be 3.
+
+6. Two ShippingMethod and one shippable object have category *Regular*. Second shippable object and second ShippingMethod have category *Light*. The second Shipping category sets the category requirements as CATEGORY_REQUIREMENT_MATCH_ALL. The returned number will be 2.
+
 7. Two ShippingMethod have category *Regular*. All shippable object and second ShippingMethod have category *Light*. The second Shipping category sets the category requirements as CATEGORY_REQUIREMENT_MATCH_ALL. The returned number will be 1.
 
 .. note::

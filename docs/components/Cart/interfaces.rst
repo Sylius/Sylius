@@ -12,7 +12,8 @@ CartInterface
 This interface should be implemented by model representing a single Cart.
 
 .. note::
-    This interface extends the :ref:`component_order_model_order-interface` |br|
+    This interface extends the :ref:`component_order_model_order-interface`
+
     For more detailed information go to `Sylius API CartInterface`_.
 
 .. _Sylius API CartInterface: http://api.sylius.org/Sylius/Component/Cart/Model/CartInterface.html
@@ -25,7 +26,8 @@ CartItemInterface
 This interface should be implemented by model representing a single CartItem.
 
 .. note::
-    This interface extends the :ref:`component_order_model_order-item-interface` |br|
+    This interface extends the :ref:`component_order_model_order-item-interface`
+
     For more detailed information go to `Sylius API CartItemInterface`_.
 
 .. _Sylius API CartItemInterface: http://api.sylius.org/Sylius/Component/Cart/Model/CartItemInterface.html
@@ -84,7 +86,8 @@ CartRepositoryInterface
 In order to decouple from storage that provides expired carts, you should create repository class which implements this interface.
 
 .. note::
-    This interface extends the :ref:`component_order_repository_order-repository-interface` |br|
+    This interface extends the :ref:`component_order_repository_order-repository-interface`
+
     For more detailed information go to `Sylius API CartRepositoryInterface`_.
 
 .. _Sylius API CartRepositoryInterface: http://api.sylius.org/Sylius/Component/Cart/Repository/CartRepositoryInterface.html

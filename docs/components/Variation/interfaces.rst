@@ -26,7 +26,8 @@ When an object class implements the ``VariantInterface`` it has a possibility to
 
 .. note::
 
-    This interface extends the :ref:`component_resource_model_timestampable-interface`. |br|
+    This interface extends the :ref:`component_resource_model_timestampable-interface`.
+
     You will find more information about this interface in `Sylius API VariantInterface`_.
 
 .. _Sylius API VariantInterface: http://api.sylius.org/Sylius/Component/Variation/Model/VariantInterface.htm
@@ -41,7 +42,8 @@ In order for an object class to represent the option type it has to implement th
 .. note::
 
     This interface extends :ref:`component_resource_model_code-aware-interface`, :ref:`component_resource_model_timestampable-interface`
-    and the :ref:`component_variation_model_option-translation-interface`. |br|
+    and the :ref:`component_variation_model_option-translation-interface`.
+
     You will find more information about this interface in `Sylius API OptionInterface`_.
 
 .. _Sylius API OptionInterface: http://api.sylius.org/Sylius/Component/Variation/Model/OptionInterface.html
@@ -68,7 +70,8 @@ If you need to store a value of an **Option** you will have to create an object 
 
 .. note::
 
-    This interface extends :ref:`component_resource_model_code-aware-interface`. |br|
+    This interface extends :ref:`component_resource_model_code-aware-interface`.
+
     You will find more information about that interface in `Sylius API OptionValueInterface`_.
 
 .. _Sylius API OptionValueInterface: http://api.sylius.org/Sylius/Component/Variation/Model/OptionValueInterface.html

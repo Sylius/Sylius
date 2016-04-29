@@ -12,7 +12,8 @@ ChannelInterface
 This interface should be implemented by every custom sale channel model.
 
 .. note::
-   This interface extends :ref:`component_resource_model_timestampable-interface` and :ref:`component_resource_model_code-aware-interface`. |br|
+   This interface extends :ref:`component_resource_model_timestampable-interface` and :ref:`component_resource_model_code-aware-interface`.
+
    For more detailed information go to `Sylius API ChannelInterface`_.
 
 .. _Sylius API ChannelInterface: http://api.sylius.org/Sylius/Component/Channel/Model/ChannelInterface.html

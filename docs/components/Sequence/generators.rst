@@ -10,7 +10,8 @@ A custom generator model should extend this class in order to generate sequences
 on a given object that implements the :ref:`component_sequence_model_sequence-subject-interface`.
 
 .. note::
-   This class implements the :ref:`component_sequence_number_generator-interface`. |br|
+   This class implements the :ref:`component_sequence_number_generator-interface`.
+
    For more detailed information go to `Sylius API AbstractGenerator`_.
 
 .. _Sylius API AbstractGenerator: http://api.sylius.org/Sylius/Component/Sequence/Number/AbstractGenerator.html
@@ -45,7 +46,8 @@ Below you can see a snippet on how to use it:
 
 .. note::
    This generator implements the :ref:`component_sequence_number_generator-interface`
-   and extends the :ref:`component_sequence_number_abstract-generator`. |br|
+   and extends the :ref:`component_sequence_number_abstract-generator`.
+
    For more detailed information go to `Sylius API SequentialGenerator`_.
 
 .. _Sylius API SequentialGenerator: http://api.sylius.org/Sylius/Component/Sequence/Number/SequentialGenerator.html
@@ -77,7 +79,8 @@ and also random hashed segments of a given length.
 
 .. note::
    This generator implements the :ref:`component_sequence_number_generator-interface`
-   and extends the :ref:`component_sequence_number_abstract-generator`. |br|
+   and extends the :ref:`component_sequence_number_abstract-generator`.
+
    For more detailed information go to `Sylius API HashGenerator`_.
 
 .. _Sylius API HashGenerator: http://api.sylius.org/Sylius/Component/Sequence/Number/HashGenerator.html
@@ -90,7 +93,8 @@ GeneratorRegistry
 It returns the generator used for a given entity.
 
 .. note::
-   This service extends the :ref:`component_registry_service-registry`. |br|
+   This service extends the :ref:`component_registry_service-registry`.
+
    For more detailed information go to `Sylius API GeneratorRegistry`_.
 
 .. caution::

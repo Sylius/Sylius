@@ -31,7 +31,8 @@ Model Interfaces
 PriceableInterface
 ~~~~~~~~~~~~~~~~~~
 
-To calculate price of a subject, the subject class needs to implement the **PriceableInterface**, |br|
+To calculate price of a subject, the subject class needs to implement the **PriceableInterface**,
+
 which provides methods to describe price, type of calculator and configuration for subject.
 
 .. note::
