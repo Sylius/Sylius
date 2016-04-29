@@ -11,6 +11,9 @@
 
 namespace Sylius\Bundle\InstallerBundle\Command;
 
+use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Currency\Model\CurrencyInterface;
+use Sylius\Component\Locale\Model\LocaleInterface;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Intl\Intl;
@@ -24,9 +27,14 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 class SetupCommand extends AbstractInstallCommand
 {
     /**
-     * @var Currency
+     * @var CurrencyInterface
      */
     private $currency;
+
+    /**
+     * @var LocaleInterface
+     */
+    private $locale;
 
     /**
      * {@inheritdoc}
@@ -49,6 +57,7 @@ EOT
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $this->setupCurrency($input, $output);
+        $this->setupLocale($input, $output);
         $this->setupChannel();
         $this->setupAdministratorUser($input, $output);
     }
@@ -115,28 +124,46 @@ EOT
      * @param InputInterface  $input
      * @param OutputInterface $output
      */
+    protected function setupLocale(InputInterface $input, OutputInterface $output)
+    {
+        $localeRepository = $this->get('sylius.repository.locale');
+        $localeManager = $this->get('sylius.manager.locale');
+        $localeFactory = $this->get('sylius.factory.locale');
+
+        $code = trim($this->getContainer()->getParameter('sylius.locale'));
+        $name = Intl::getLanguageBundle()->getLanguageName($code);
+        $output->writeln(sprintf('Adding <info>%s</info> locale.', $name));
+
+        if (null !== $existingLocale = $localeRepository->findOneBy(['code' => $code])) {
+            $this->locale = $existingLocale;
+
+            $localeManager->flush();
+
+            return;
+        }
+
+        $locale = $localeFactory->createNew();
+        $locale->setCode($code);
+
+        $localeManager->persist($locale);
+        $localeManager->flush();
+
+        $this->locale = $locale;
+    }
+
+    /**
+     * @param InputInterface  $input
+     * @param OutputInterface $output
+     */
     protected function setupCurrency(InputInterface $input, OutputInterface $output)
     {
         $currencyRepository = $this->get('sylius.repository.currency');
         $currencyManager = $this->get('sylius.manager.currency');
         $currencyFactory = $this->get('sylius.factory.currency');
 
-        do {
-            $code = $this->getCurrencyCode($input, $output);
-
-            $valid = true;
-
-            if (0 !== count($errors = $this->validate(trim($code), [new Currency()]))) {
-                $valid = false;
-            }
-
-
-                $this->writeErrors($output, $errors);
-        } while (!$valid);
-
-        $code = trim($code);
+        $code = trim($this->getContainer()->getParameter('sylius.currency'));
         $name = Intl::getCurrencyBundle()->getCurrencyName($code);
-        $output->writeln(sprintf('Adding <info>%s</info>', $name));
+        $output->writeln(sprintf('Adding <info>%s</info> currency.', $name));
 
         if (null !== $existingCurrency = $currencyRepository->findOneBy(['code' => $code])) {
             $this->currency = $existingCurrency;
@@ -157,6 +184,8 @@ EOT
 
         $currencyManager->persist($currency);
         $currencyManager->flush();
+
+        $this->currency = $currency;
     }
 
     protected function setupChannel()
@@ -165,57 +194,22 @@ EOT
         $channelManager = $this->get('sylius.manager.channel');
         $channelFactory = $this->get('sylius.factory.channel');
 
-        $channel = $channelRepository->findOneByCode('DEFAULT');
+        $channel = $channelRepository->findOneByCode('default');
 
         if (null !== $channel) {
             return;
         }
 
+        /** @var ChannelInterface $channel */
         $channel = $channelFactory->createNew();
-        $channel->setCode('DEFAULT');
-        $channel->setName('DEFAULT');
-        $channel->setDefaultCurrency($this->currency);
+        $channel->setCode('default');
+        $channel->setName('Default');
+
+        $channel->addCurrency($this->currency);
+        $channel->addLocale($this->locale);
 
         $channelManager->persist($channel);
         $channelManager->flush();
-    }
-
-    /**
-     * @param InputInterface  $input
-     * @param OutputInterface $output
-     *
-     * @return array
-     */
-    private function getCurrencyCode(InputInterface $input, OutputInterface $output)
-    {
-        return $this->getCode(
-            $input,
-            $output,
-            'In which currency can your customers buy goods?',
-            'Please enter a currency code (For example "GBP") or press ENTER to use "USD".',
-            'USD'
-        );
-    }
-
-    /**
-     * @param InputInterface  $input
-     * @param OutputInterface $output
-     * @param string          $question
-     * @param string          $description
-     * @param string          $defaultAnswer
-     *
-     * @return array
-     */
-    private function getCode(InputInterface $input, OutputInterface $output, $question, $description, $defaultAnswer)
-    {
-        if ($input->getOption('no-interaction')) {
-            return [$defaultAnswer];
-        }
-
-        $output->writeln($description);
-        $code = $this->ask($output, '<question>'.$question.'</question> ', [], $defaultAnswer);
-
-        return $code;
     }
 
     /**
