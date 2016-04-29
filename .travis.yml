@@ -42,9 +42,11 @@ matrix:
 cache:
     directories:
         - ~/.composer/cache/files
+        - ~/.cache/pip
         - vendor
         - bin
         - node_modules
+        - docs/build
         - $SYLIUS_CACHE_DIR
 
 before_install:
