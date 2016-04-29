@@ -404,7 +404,7 @@ class ResourceController extends Controller
         $this->eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource);
 
         if (!$configuration->isHtmlRequest()) {
-            return $this->viewHandler->handle($configuration, View::create(null, 204));
+            return $this->viewHandler->handle($configuration, View::create($resource, 200));
         }
 
         $this->flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource);
