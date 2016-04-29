@@ -1,0 +1,6 @@
+{% macro sylius_display_price(variant) %}
+    {% if (variant.isPriceReduced) %}
+        <span> {{ variant.originalPrice|sylius_price }} </span>
+    {% endif %}
+    <span> {{ sylius_calculate_price(variant)|sylius_price }} </span>
+{% endmacro %}

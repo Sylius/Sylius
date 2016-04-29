@@ -50,6 +50,7 @@ imports:
     - suites/ui/product/managing_products.yml
     - suites/ui/product/managing_product_attributes.yml
     - suites/ui/product/managing_product_options.yml
+    - suites/ui/product/viewing_products.yml
     - suites/ui/promotion/applying_promotion_rules.yml
     - suites/ui/promotion/managing_promotions.yml
     - suites/ui/promotion/managing_promotion_coupons.yml

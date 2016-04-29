@@ -11,12 +11,13 @@
 
 namespace Sylius\Behat\Page\Shop\Product;
 
-use Sylius\Behat\Page\SymfonyPage;
-use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Routing\RouterInterface;
+use Sylius\Behat\Page\SymfonyPage;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
+ * @author Anna Walasek <anna.walasek@lakion.com>
  */
 class ShowPage extends SymfonyPage implements ShowPageInterface
 {
@@ -53,25 +54,66 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function visit($url)
     {
-        // Intentionally left blank, overriding getUrl method not to use it
+        $absoluteUrl = $this->makePathAbsolute($url);
+        $this->getDriver()->visit($absoluteUrl);
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function getUrl(array $urlParameters = [])
+    public function getName()
     {
-        if (!isset($urlParameters['product']) || !$urlParameters['product'] instanceof ProductInterface) {
-            throw new \InvalidArgumentException(
-                'There should be only one url parameter passed to ProductShowPage '.
-                'named "product", containing an instance of Core\'s ProductInterface'
-            );
+        return $this->getElement('name')->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isAttributeOnPage($name)
+    {
+        $rows = $this->getElement('attributes')->findAll('css', 'tbody > tr > td[id=sylius_attribute_name]');
+        foreach($rows as $row) {
+            if($name === $row->getText()) {
+                return true;
+            }
         }
 
-        $path = $this->router->generate($urlParameters['product']);
+        return false;
+    }
 
-        return $this->makePathAbsolute($path);
+    /**
+     * {@inheritdoc}
+     */
+    public function isAttributeValueOnPage($name)
+    {
+        $rows = $this->getElement('attributes')->findAll('css', 'tbody > tr > td[id=sylius_attribute_value]');
+        foreach($rows as $row) {
+            if($name === $row->getText()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRouteName()
+    {
+        return 'sylius_shop_product_show';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getDefinedElements()
+    {
+        return array_merge(parent::getDefinedElements(), [
+            'name' => '#sylius_product_name',
+            'attributes' => '#product-attributes'
+        ]);
     }
 }
