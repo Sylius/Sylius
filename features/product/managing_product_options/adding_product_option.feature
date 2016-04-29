@@ -5,7 +5,7 @@ Feature: Adding a new product option
     I want to be able to add a new product option to the registry
 
     Background:
-        Given the store operates on a single channel in "France"
+        Given the store is available in "English (United States)"
         And I am logged in as an administrator
 
     @ui @javascript

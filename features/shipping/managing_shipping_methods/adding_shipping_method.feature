@@ -5,7 +5,8 @@ Feature: Adding a new shipping method
     I want to add a new shipping method to the registry
 
     Background:
-        Given the store operates on a single channel in "France"
+        Given the store is available in "English (United States)"
+        And the store has a base currency "Euro"
         And there is a zone "EU" containing all members of the European Union
         And I am logged in as an administrator
 

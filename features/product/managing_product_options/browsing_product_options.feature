@@ -4,12 +4,10 @@ Feature: Browsing product options
     As an Administrator
     I want to be able to browse product options
 
-    Background:
-        And I am logged in as an administrator
-
     @ui
     Scenario: Browsing defined product options
-        Given the store has a product option "T-Shirt size" with a code "t_shirt_size"
+        Given I am logged in as an administrator
+        And the store has a product option "T-Shirt size" with a code "t_shirt_size"
         And the store has a product option "T-Shirt color" with a code "t_shirt_color"
         When I browse product options
         Then I should see 2 product options in the list

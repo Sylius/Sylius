@@ -5,7 +5,7 @@ Feature: Managing option values of a product option
     I want to be able to edit a product option and its option values
 
     Background:
-        Given the store operates on a single channel in "France"
+        Given the store is available in "English (United States)"
         And the store has a product option "T-Shirt size" with a code "t_shirt_size"
         And this product option has the "S" option value with code "OV1"
         And this product option has also the "M" option value with code "OV2"
