@@ -19,11 +19,6 @@ interface StockableInterface
     /**
      * @return string
      */
-    public function getSku();
-
-    /**
-     * @return string
-     */
     public function getInventoryName();
 
     /**

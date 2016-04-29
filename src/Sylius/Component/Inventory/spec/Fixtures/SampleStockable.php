@@ -21,14 +21,6 @@ class SampleStockable implements StockableInterface
     /**
      * {@inheritdoc}
      */
-    public function getSku()
-    {
-        return 'SHIRT-485-LARGE-GREEN';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getInventoryName()
     {
         return 'Shirt model number 485 Green L';
