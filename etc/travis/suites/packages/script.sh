@@ -4,6 +4,9 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../../../bash/common.lib.s
 
 code=0
 
+print_header "Building" "Documentation"
+run_command "sphinx-build -nW -b html docs docs/build" || code=$?
+
 etc/bin/validate-packages || code=$?
 etc/bin/test-packages || code=$?
 
