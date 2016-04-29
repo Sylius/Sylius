@@ -81,7 +81,7 @@
 
 <div id="sylius-cart-coupons" class="well well-sm">
     <div id="sylius-cart-coupons-collection">
-        {% if form.promotionCoupon in not null %}
+        {% if form.promotionCoupon is not null %}
             {{ form_row(form.promotionCoupon , {'label_attr': {'class': 'col-lg-12'}}) }}
         {% endif %}
     </div>
