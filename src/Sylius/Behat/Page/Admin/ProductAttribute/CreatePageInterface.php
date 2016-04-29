@@ -9,25 +9,25 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Behat\Page\Admin\Product\Attribute;
+namespace Sylius\Behat\Page\Admin\ProductAttribute;
 
-use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
+use Sylius\Behat\Page\Admin\Crud\CreatePageInterface as BaseCreatePageInterface;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-interface UpdatePageInterface extends BaseUpdatePageInterface
+interface CreatePageInterface extends BaseCreatePageInterface
 {
+    /**
+     * @param string $code
+     */
+    public function specifyCode($code);
+
     /**
      * @param string $name
      * @param string $language
      */
-    public function changeName($name, $language);
-
-    /**
-     * @return bool
-     */
-    public function isCodeDisabled();
+    public function nameIt($name, $language);
 
     /**
      * @return bool
