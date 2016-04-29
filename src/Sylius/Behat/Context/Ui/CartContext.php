@@ -60,7 +60,7 @@ final class CartContext implements Context
      */
     public function iAddProductToTheCart(ProductInterface $product)
     {
-        $this->productShowPage->open(['product' => $product]);
+        $this->productShowPage->open(['slug' => $product->getSlug()]);
         $this->productShowPage->addToCart();
 
         $this->sharedStorage->set('product', $product);
@@ -86,7 +86,7 @@ final class CartContext implements Context
      */
     public function iAddProductToTheCartSelectingVariant($variant, ProductInterface $product)
     {
-        $this->productShowPage->open(['product' => $product]);
+        $this->productShowPage->open(['slug' => $product->getSlug()]);
         $this->productShowPage->addToCartWithVariant($variant);
 
         $this->sharedStorage->set('product', $product);
@@ -116,7 +116,7 @@ final class CartContext implements Context
      */
     public function iAddProductsToTheCart(ProductInterface $product, $quantity)
     {
-        $this->productShowPage->open(['product' => $product]);
+        $this->productShowPage->open(['slug' => $product->getSlug()]);
         $this->productShowPage->addToCartWithQuantity($quantity);
 
         $this->sharedStorage->set('product', $product);

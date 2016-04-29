@@ -1,0 +1,10 @@
+sylius_shop_product_show:
+    path: /products/{slug}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product:detailsAction
+        _sylius:
+            template: SyliusShopBundle:Product:show.html.twig
+            repository:
+                method: findOneBySlug
+                arguments: [$slug]
