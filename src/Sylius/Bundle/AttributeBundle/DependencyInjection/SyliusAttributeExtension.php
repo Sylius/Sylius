@@ -32,6 +32,7 @@ class SyliusAttributeExtension extends AbstractResourceExtension
         $configFiles = [
             'services.xml',
             'attribute_types.xml',
+            'twig.xml'
         ];
 
         foreach ($configFiles as $configFile) {
