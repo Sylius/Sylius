@@ -108,7 +108,11 @@ class TaxonChoiceType extends AbstractType
         $choiceList = function (Options $options) use ($repository) {
             /* @var TaxonRepositoryInterface $repository */
             if (null !== $options['root']) {
-                $taxons = $repository->findChildren($options['root']);
+                if (is_string($options['root'])) {
+                    $taxons = $repository->findChildrenByRootCode($options['root']);
+                } else {
+                    $taxons = $repository->findChildren($options['root']);
+                }
             } else {
                 $taxons = $repository->findAll();
             }
@@ -126,7 +130,7 @@ class TaxonChoiceType extends AbstractType
                 'root' => null,
                 'filter' => null,
             ])
-            ->setAllowedTypes('root', [TaxonInterface::class, 'null'])
+            ->setAllowedTypes('root', [TaxonInterface::class, 'string', 'null'])
             ->setAllowedTypes('filter', ['callable', 'null'])
         ;
     }
