@@ -39,26 +39,18 @@ final class CurrencyContext implements Context
     private $currencyFactory;
 
     /**
-     * @var CurrencyNameConverterInterface
-     */
-    private $currencyNameConverter;
-
-    /**
      * @param SharedStorageInterface $sharedStorage
      * @param RepositoryInterface $currencyRepository
      * @param FactoryInterface $currencyFactory
-     * @param CurrencyNameConverterInterface $currencyNameConverter
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         RepositoryInterface $currencyRepository,
-        FactoryInterface $currencyFactory,
-        CurrencyNameConverterInterface $currencyNameConverter
+        FactoryInterface $currencyFactory
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->currencyRepository = $currencyRepository;
         $this->currencyFactory = $currencyFactory;
-        $this->currencyNameConverter = $currencyNameConverter;
     }
 
     /**
@@ -66,65 +58,90 @@ final class CurrencyContext implements Context
      */
     public function defaultCurrencyIs($currencyCode)
     {
-        $currency = $this->currencyFactory->createNew();
-        $currency->setCode($currencyCode);
-        $currency->setExchangeRate(1.0);
+        $currency = $this->createCurrency($currencyCode);
+        $currency->setEnabled(true);
+
         $channel = $this->sharedStorage->get('channel');
         $channel->setDefaultCurrency($currency);
 
-        $this->currencyRepository->add($currency);
+        $this->saveCurrency($currency);
     }
 
     /**
-     * @Given the store has currency :currencyName
+     * @Given the store has a base currency :currencyCode
      */
-    public function theStoreHasCurrency($currencyName)
+    public function theStoreHasBasedCurrency($currencyCode)
     {
-        $this->createCurrency($currencyName);
+        $currency = $this->createCurrency($currencyCode);
+        $currency->setEnabled(true);
+        $currency->setBase(true);
+
+        $this->saveCurrency($currency);
     }
 
     /**
-     * @Given the store has currency :firstCurrencyName, :secondCurrencyName and :thirdCurrencyName
+     * @Given the store has currency :currencyCode
      */
-    public function theStoreHasCurrencyAnd($firstCurrencyName, $secondCurrencyName, $thirdCurrencyName)
+    public function theStoreHasCurrency($currencyCode)
     {
-        $this->createCurrency($firstCurrencyName);
-        $this->createCurrency($secondCurrencyName);
-        $this->createCurrency($thirdCurrencyName);
+        $currency = $this->createCurrency($currencyCode);
+        $currency->setEnabled(true);
+
+        $this->saveCurrency($currency);
     }
 
     /**
-     * @Given the store has disabled currency :currencyName
+     * @Given the store has currency :currencyCode, :secondCurrencyCode
      */
-    public function theStoreHasDisabledCurrency($currencyName)
+    public function theStoreHasCurrencyAnd($currencyCode, $secondCurrencyCode)
     {
-        $this->createCurrency($currencyName, false);
+        $this->saveCurrency($this->createCurrency($currencyCode));
+        $this->saveCurrency($this->createCurrency($secondCurrencyCode));
     }
 
     /**
-     * @Given the store has currency :currencyName with exchange rate :exchangeRate
+     * @Given the store has disabled currency :currencyCode
      */
-    public function theStoreHasCurrencyWithExchangeRate($currencyName, $exchangeRate)
+    public function theStoreHasDisabledCurrency($currencyCode)
     {
-        $this->createCurrency($currencyName, true, $exchangeRate);
+        $currency = $this->createCurrency($currencyCode);
+        $currency->setEnabled(false);
+
+        $this->saveCurrency($currency);
     }
 
     /**
-     * @param string $currencyName
-     * @param bool $enabled
-     * @param float $exchangeRate
+     * @Given the store has currency :currencyCode with exchange rate :exchangeRate
      */
-    private function createCurrency($currencyName, $enabled = true, $exchangeRate = 1.0)
+    public function theStoreHasCurrencyWithExchangeRate($currencyCode, $exchangeRate)
     {
-        /** @var CurrencyInterface $currency */
-        $currency = $this->currencyFactory->createNew();
-        $currency->setCode($this->currencyNameConverter->convertToCode($currencyName));
-        $currency->setExchangeRate($exchangeRate);
-        if (is_bool($enabled)) {
-            $currency->setEnabled($enabled);
-        }
+        $currency = $this->createCurrency($currencyCode, $exchangeRate);
+        $currency->setEnabled(true);
 
+        $this->saveCurrency($currency);
+    }
+
+    /**
+     * @param CurrencyInterface $currency
+     */
+    private function saveCurrency(CurrencyInterface $currency)
+    {
         $this->sharedStorage->set('currency', $currency);
         $this->currencyRepository->add($currency);
+    }
+
+    /**
+     * @param $currencyCode
+     * @param float $exchangeRate
+     *
+     * @return CurrencyInterface
+     */
+    private function createCurrency($currencyCode, $exchangeRate = 1.0)
+    {
+        $currency = $this->currencyFactory->createNew();
+        $currency->setCode($currencyCode);
+        $currency->setExchangeRate($exchangeRate);
+
+        return $currency;
     }
 }

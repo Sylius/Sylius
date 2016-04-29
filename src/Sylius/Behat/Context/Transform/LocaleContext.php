@@ -34,6 +34,7 @@ final class LocaleContext implements Context
 
     /**
      * @Transform :language
+     * @Transform :localeCode
      */
     public function getLocaleCode($languageName)
     {
