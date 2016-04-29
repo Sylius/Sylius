@@ -19,7 +19,7 @@
     <div class="active section">{{ 'sylius.ui.new'|trans }}</div>
 </div>
 
-{{ form_start(form, {'action': path(configuration.getRouteName('create'), configuration.getFactoryArguments), 'attr': {'class': 'ui form', 'novalidate': 'novalidate'}}) }}
+{{ form_start(form, {'action': path(configuration.getRouteName('create'), configuration.vars.route.parameters is defined ? configuration.vars.route.parameters : {}), 'attr': {'class': 'ui form', 'novalidate': 'novalidate'}}) }}
     <div class="ui segment">
         {% if configuration.vars.templates.form is defined %}
             {% include configuration.vars.templates.form %}
