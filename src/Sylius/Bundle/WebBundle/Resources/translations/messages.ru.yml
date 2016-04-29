@@ -332,7 +332,6 @@ sylius:
         new_contact_topic: Новая тема контакта
         new_country: Добавить страну
         new_currency: Новая валюта
-        new_customer: Новый клиент
         new_order: Новый заказ
         new_password: Новый пароль
         new_payment: Новый платеж

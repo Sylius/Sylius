@@ -29,3 +29,5 @@ sylius:
         user_reset_password:
             confirmation: 确认
             new: 新密码
+    gender:
+        unknown: 未知

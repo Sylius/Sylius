@@ -5,6 +5,9 @@ sylius:
     menu:
         admin:
             main:
+                catalog:
+                    taxons: Taksonomier
+                    options: Instillinger
                 configuration:
                     countries: Land
                     header: Konfigurasjon

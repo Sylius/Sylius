@@ -60,7 +60,6 @@ sylius:
         name: Tên
         new: Mới
         new_country: Tạo quốc gia mới
-        new_customer: Khách hàng mới
         newest_products: Sản phẩm mới nhất
         number_of_orders: Số lượng đơn đặt hàng
         options: Tùy chọn

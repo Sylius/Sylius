@@ -455,7 +455,6 @@ sylius:
         new_contact_topic: موضوع پشتیبانی جدید
         new_country: کشور جدید
         new_currency: ارز جدید
-        new_customer: مشتری جدید
         new_order: سفارش جدید
         new_password: کلمه عبور جدید
         new_payment: پرداخت جدید

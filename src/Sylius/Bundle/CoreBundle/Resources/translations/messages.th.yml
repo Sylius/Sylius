@@ -21,7 +21,7 @@ sylius:
             payment_method: วิธีการชำระเงิน
             shipping_method: วิธีการจัดส่ง
         promotion:
-            channels: ช่อง
+            channels: ช่องทางการจัดจำหน่าย
         coupon:
             per_customer_usage_limit: จำกัดการใช้งานสำหรับลูกค้าแต่ละคน
         group:

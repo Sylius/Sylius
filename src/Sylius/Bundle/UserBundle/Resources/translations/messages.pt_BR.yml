@@ -33,4 +33,5 @@ sylius:
             confirmation: Confirmação
             new: Nova senha
     gender:
+        unknown: DESCONHECIDO
         male: Masculino

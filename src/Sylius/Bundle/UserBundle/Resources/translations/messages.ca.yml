@@ -22,3 +22,5 @@ sylius:
             different_billing_address: Utilitzar diferent adreça de facturació?
         user_filter:
             query: Cerca
+    gender:
+        unknown: Desconegut

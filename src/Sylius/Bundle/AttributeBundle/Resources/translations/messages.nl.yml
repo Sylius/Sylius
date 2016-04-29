@@ -16,11 +16,11 @@ sylius:
             configuration: Configuratie
             date: Datum
             datetime: Datum / tijd
-            integer: Integer
+            integer: Geheel getal
             percent: Percentage
             text: Tekst
             textarea: Tekstgebied
-            title: Attribuuttype
+            title: Attribuuttypes
             validation: Validatie
         attribute_type_configuration:
             datetime:

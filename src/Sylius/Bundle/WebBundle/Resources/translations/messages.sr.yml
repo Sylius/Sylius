@@ -176,7 +176,6 @@ sylius:
         modified: измењено
         name: Име
         new_country: Нова земља
-        new_customer: Нова муштерија
         new_order: Нова наруџбина
         new_password: Нова лозинка
         new_payment: Ново плаћање

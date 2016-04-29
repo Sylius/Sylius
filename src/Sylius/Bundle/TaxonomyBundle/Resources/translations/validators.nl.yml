@@ -4,9 +4,12 @@
 sylius:
     taxon:
         name:
-            max_length: Taxon naam mag niet langer zijn dan 255 karakters.
-            not_blank: Voer een taxon naam in.
+            max_length: Taxonnaam mag niet meer dan 255 tekens bevatten.
+            not_blank: Voer een taxonnaam in.
+        code:
+            unique: Taxon met deze code bestaat al.
+            not_blank: Voer een taxoncode in.
     taxonomy:
         name:
-            max_length: Taxonomie naam mag niet langer zijn dan 255 karakters.
+            max_length: Taxonomienaam mag niet langer zijn dan 255 karakters.
             not_blank: Voer een taxonomie naam in.

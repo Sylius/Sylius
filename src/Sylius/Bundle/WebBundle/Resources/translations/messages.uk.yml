@@ -245,7 +245,6 @@ sylius:
         new: Новий
         new_comment_posted_on_order: Новий коментар, доданий до замовлення
         new_country: Нова країна
-        new_customer: Новий клієнт
         new_order: Нове замовлення
         new_password: Новий пароль
         new_payment: Нова оплата

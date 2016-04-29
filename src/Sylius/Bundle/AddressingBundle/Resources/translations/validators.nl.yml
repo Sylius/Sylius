@@ -35,26 +35,26 @@ sylius:
             unique: De land ISO code moet uniek zijn.
     province:
         code:
-            min_length: Provinciecode moet minstens 5 karakters lang zijn.
-            not_blank: Gelieve een provincie code in te geven.
+            min_length: Provinciecode moet minstens 5 karakters bevatten.
+            not_blank: Gelieve een provinciecode in te geven.
             regex: 'Provinciecode zou het volgende formaat moeten hebben: XX-XX (bv. US-FL).'
-            unique: De provincie code moet uniek zijn.
+            unique: Provinciecode moet uniek zijn.
         name:
             max_length: Provincie naam mag niet langer dan 255 tekens zijn|Provincie naam mag niet langer dan 255 tekens zijn.
             min_length: Provincie naam moet minstens 2 tekens lang zijn|Provincie naam moet minstens 2 tekens lang zijn.
             not_blank: Voer een provincie naam in.
-            unique: De provincie naam moet uniek zijn.
+            unique: De provincienaam moet uniek zijn.
     zone:
         code:
-            not_blank: Gelieve een zone code in te geven.
+            not_blank: Gelieve een code in te geven voor deze zone.
             unique: De zone code moet uniek zijn.
         members:
             min_count: 'Voeg minstens {{ limit }} zone leden toe.'
         name:
             max_length: Zone naam mag niet langer dan 255 tekens zijn|Zone naam mag niet langer dan 255 tekens zijn.
-            min_length: Zone naam moet minstens 2 karakters lang zijn.
+            min_length: Zone naam moet minstens 2 karakters bevatten.
             not_blank: Voer een zone naam in.
     zone_member:
         code:
-            not_blank: Kies een zonelid.
+            not_blank: Kies een lid voor deze zone.
         unique: Het gekozen zonelid zit reeds in deze zone.

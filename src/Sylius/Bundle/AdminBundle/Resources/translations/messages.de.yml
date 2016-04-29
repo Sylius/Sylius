@@ -6,6 +6,8 @@ sylius:
         admin:
             main:
                 catalog:
+                    taxons: Gruppen
+                    options: Optionen
                     attributes: Attribute
                 configuration:
                     channels: Ausgabekanäle

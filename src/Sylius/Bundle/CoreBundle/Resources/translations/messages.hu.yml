@@ -19,6 +19,8 @@ sylius:
                 different_billing_address: A számlázási címe különbözik a megadott címtől?
             payment_method: Fizetési mód
             shipping_method: Szállítási mód
+        promotion:
+            channels: Csatornák
         group:
             name: Név
             roles: Szerepek

@@ -165,7 +165,6 @@ sylius:
         name: Nome
         new: Novo
         new_country: Novo país
-        new_customer: Novo cliente
         new_order: Novo pedido
         new_payment: Novo pagamento
         new_payment_method: Novo meio de pagamento

@@ -224,7 +224,6 @@ sylius:
         name: Navn
         new: Ny
         new_country: Nytt land
-        new_customer: Ny kunde
         new_order: Ny ordre
         new_password: Nytt Passord
         new_payment: Ny betaling

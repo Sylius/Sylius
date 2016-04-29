@@ -5,12 +5,13 @@ sylius:
     backend:
         menu:
             main:
-                api_clients: API Klanten
+                api_clients: API toepassingen
                 assortment: Assortiment
                 attributes: Attributen configureren
                 blocks: Blokken
                 channels: Kanalen
                 configuration: Configuratie
+                contact_requests: Contact verzoeken
                 contact_topics: Configureren van onderwerpen
                 content: Inhoud
                 countries: Landen
@@ -52,7 +53,7 @@ sylius:
                 taxons: Categorisering
                 zones: Zones
             sidebar:
-                api_clients: API Klanten
+                api_clients: API toepassingen
                 assortment: Assortiment
                 attributes: Attributen configureren
                 blocks: Blokken
@@ -73,6 +74,7 @@ sylius:
                 locales: "Talen/Regio's"
                 marketing: Marketing
                 menus: "Menu 's"
+                metadata: Metagegevens
                 new_order: Bestelling toevoegen
                 new_promotion: Kortingsactie toevoegen
                 options: Productopties
@@ -81,12 +83,14 @@ sylius:
                 payment_methods: Betaalmethoden
                 payments: Betalingen
                 permissions: Machtigingen
+                product_review: Productbeoordelingen
                 products: Producten
                 promotions: Promoties
                 redirects: Redirects
                 report: Rapporten
                 roles: Rollen
                 routes: Routes
+                review: Beoordelingen
                 sales: Bestellingen
                 security_settings: Beveiligingsinstellingen
                 shipments: Verzendingen

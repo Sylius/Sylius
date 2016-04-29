@@ -21,7 +21,7 @@ sylius:
             payment_method: Způsob Platby
             shipping_method: Způsob Dopravy
         promotion:
-            channels: Kanál
+            channels: Kanály
         coupon:
             per_customer_usage_limit: Omezení použití na zákazníka
         group:

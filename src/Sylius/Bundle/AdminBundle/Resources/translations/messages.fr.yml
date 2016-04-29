@@ -7,6 +7,8 @@ sylius:
             main:
                 catalog:
                     header: Catalogue
+                    taxons: Famille de tags
+                    options: Options
                     attributes: Attributs
                 configuration:
                     channels: Canaux

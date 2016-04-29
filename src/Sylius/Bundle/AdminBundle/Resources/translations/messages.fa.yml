@@ -7,6 +7,8 @@ sylius:
             main:
                 catalog:
                     header: کاتالوگ محصولات
+                    taxons: رده ها
+                    options: آپشن ها
                     attributes: ویژگی‌ها
                 configuration:
                     channels: کانال های فروش

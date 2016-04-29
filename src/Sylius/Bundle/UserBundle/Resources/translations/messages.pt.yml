@@ -8,3 +8,5 @@ sylius:
         customer:
             email: Endereço de email
             phone_number: Número de Telefone
+    gender:
+        unknown: Desconhecido

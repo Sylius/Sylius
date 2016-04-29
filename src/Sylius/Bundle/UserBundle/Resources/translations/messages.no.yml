@@ -29,3 +29,5 @@ sylius:
         user_reset_password:
             confirmation: Bekreft
             new: Nytt Passord
+    gender:
+        unknown: Ukjent

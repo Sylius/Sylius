@@ -175,7 +175,6 @@ sylius:
         name: 名称
         new: 新增
         new_country: 新建国家
-        new_customer: 新客户
         new_password: 新密码
         new_product: 新产品
         new_user: 新用户

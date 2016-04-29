@@ -21,3 +21,5 @@ sylius:
             different_billing_address: Να γίνει χρήση διαφορετικής διεύθυνσης για τιμολόγηση;
         user_filter:
             query: Αναζήτηση
+    gender:
+        unknown: Άγνωστο

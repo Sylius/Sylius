@@ -245,7 +245,6 @@ sylius:
         name: Név
         new: Új
         new_country: Új ország
-        new_customer: Új ügyfél
         new_order: Új rendelés
         new_password: Új jelszó
         new_payment: Új fizetés

@@ -34,5 +34,6 @@ sylius:
             confirmation: Potwierdzenie
             new: Nowe hasło
     gender:
+        unknown: Nieznany
         male: Mężczyzna
         female: Kobieta
