@@ -1,5 +1,5 @@
 SyliusPromotionBundle
-======================
+=====================
 
 Promotions system for Symfony2 applications.
 
@@ -28,5 +28,4 @@ This means you can for instance create the following promotions :
    action_applicator
    applying_promotions
    coupon_based
-   examples
    summary

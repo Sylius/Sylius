@@ -6,8 +6,10 @@ Symfony2 Bundles
 
     general/index
     SyliusAddressingBundle/index
+    SyliusArchetypeBundle/index
     SyliusAttributeBundle/index
     SyliusCartBundle/index
+    SyliusContactBundle/index
     SyliusFlowBundle/index
     SyliusGridBundle/index
     SyliusInventoryBundle/index

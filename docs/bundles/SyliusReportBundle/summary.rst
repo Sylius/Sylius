@@ -26,7 +26,7 @@ Tests
 
 .. code-block:: bash
 
-    $ composer install --dev --prefer-dist
+    $ composer install
     $ phpunit
 
 Working examples

@@ -15,7 +15,7 @@ This interface should be implemented by model representing a single Cart.
     This interface extends the :ref:`component_order_model_order-interface` |br|
     For more detailed information go to `Sylius API CartInterface`_.
 
-.. _Sylius API's CartInterface: http://api.sylius.org/Sylius/Component/Cart/Model/CartInterface.html
+.. _Sylius API CartInterface: http://api.sylius.org/Sylius/Component/Cart/Model/CartInterface.html
 
 .. _component_cart_model_cart-item-interface:
 
@@ -24,11 +24,11 @@ CartItemInterface
 
 This interface should be implemented by model representing a single CartItem.
 
-.. node::
+.. note::
     This interface extends the :ref:`component_order_model_order-item-interface` |br|
     For more detailed information go to `Sylius API CartItemInterface`_.
 
-.. _Sylius API's CartItemInterface: http://api.sylius.org/Sylius/Component/Cart/Model/CartItemInterface.html
+.. _Sylius API CartItemInterface: http://api.sylius.org/Sylius/Component/Cart/Model/CartItemInterface.html
 
 Service Interfaces
 ------------------
@@ -42,9 +42,9 @@ A cart provider retrieves existing cart or create new one based on the storage. 
 it needs to implement the ``CartProviderInterface``.
 
 .. note::
-    For more detailed information go to `Sylius Api CartProviderInterface`_.
+    For more detailed information go to `Sylius API CartProviderInterface`_.
 
-.. _Sylius Api CartProviderInterface: http://api.sylius.org/Sylius/Component/Cart/Provider/CartProviderInterface.html
+.. _Sylius API CartProviderInterface: http://api.sylius.org/Sylius/Component/Cart/Provider/CartProviderInterface.html
 
 .. _component_cart_purger_purger-interface:
 
@@ -54,9 +54,9 @@ PurgerInterface
 A cart purger purges all expired carts. To characterize an object which is a **Purger**, it needs to implement the ``PurgerInterface``.
 
 .. note::
-    For more detailed information go to `Sylius Api PurgerInterface`_.
+    For more detailed information go to `Sylius API PurgerInterface`_.
 
-.. _Sylius Api PurgerInterface: http://api.sylius.org/Sylius/Component/Cart/Purger/PurgerInterface.html
+.. _Sylius API PurgerInterface: http://api.sylius.org/Sylius/Component/Cart/Purger/PurgerInterface.html
 
 .. _component_cart_resolver_item-resolver-interface:
 
@@ -67,9 +67,9 @@ A cart resolver returns cart item that needs to be added based on given data. To
 it needs to implement the ``ItemResolverInterface``.
 
 .. note::
-    For more detailed information go to `Sylius Api ItemResolverInterface`_.
+    For more detailed information go to `Sylius API ItemResolverInterface`_.
 
-.. _Sylius Api ItemResolverInterface: http://api.sylius.org/Sylius/Component/Cart/Resolver/ItemResolverInterface.html
+.. _Sylius API ItemResolverInterface: http://api.sylius.org/Sylius/Component/Cart/Resolver/ItemResolverInterface.html
 
 .. caution::
     This method throws `ItemResolvingException`_ if an error occurs.
@@ -87,7 +87,7 @@ In order to decouple from storage that provides expired carts, you should create
     This interface extends the :ref:`component_order_repository_order-repository-interface` |br|
     For more detailed information go to `Sylius API CartRepositoryInterface`_.
 
-.. _Sylius API's CartRepositoryInterface: http://api.sylius.org/Sylius/Component/Cart/Repository/CartRepositoryInterface.html
+.. _Sylius API CartRepositoryInterface: http://api.sylius.org/Sylius/Component/Cart/Repository/CartRepositoryInterface.html
 
 CartContextInterface
 ~~~~~~~~~~~~~~~~~~~~

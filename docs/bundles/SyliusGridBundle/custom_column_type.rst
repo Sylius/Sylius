@@ -69,4 +69,4 @@ Now you can use your new column type in the grid configuration!
                     monitor:
                         type: tournament_monitor
                         options:
-                            dynamic: %kernel.debug%
+                            dynamic: "%kernel.debug%"

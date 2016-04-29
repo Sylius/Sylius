@@ -8,9 +8,9 @@ The first thing you should do it is implementing stockable object.
 Example implementation:
 
 .. code:: php
-    
-    <?php 
-    
+
+    <?php
+
     class Product implements StockableInterface
     {
         /**
@@ -22,7 +22,7 @@ Example implementation:
         {
             // TODO: Implement getSku() method.
         }
-    
+
         /**
          * Get inventory displayed name.
          *
@@ -32,7 +32,7 @@ Example implementation:
         {
             // TODO: Implement getInventoryName() method.
         }
-    
+
         /**
          * Simply checks if there any stock available.
          * It should also return true for items available on demand.
@@ -43,7 +43,7 @@ Example implementation:
         {
             // TODO: Implement isInStock() method.
         }
-    
+
         /**
          * Is stockable available on demand?
          *
@@ -53,7 +53,7 @@ Example implementation:
         {
             // TODO: Implement isAvailableOnDemand() method.
         }
-    
+
         /**
          * Get stock on hold.
          *
@@ -63,7 +63,7 @@ Example implementation:
         {
             // TODO: Implement getOnHold() method.
         }
-    
+
         /**
          * Set stock on hold.
          *
@@ -73,7 +73,7 @@ Example implementation:
         {
             // TODO: Implement setOnHold() method.
         }
-    
+
         /**
          * Get stock on hand.
          *
@@ -83,7 +83,7 @@ Example implementation:
         {
             // TODO: Implement getOnHand() method.
         }
-    
+
         /**
          * Set stock on hand.
          *
@@ -134,7 +134,7 @@ The **InventoryOperator** provides basic operations on your inventory.
 Decrease
 ~~~~~~~~
 
-This specific case will be more complicated. It uses backordersHandler to :ref:`process-backorders`_.
+This specific case will be more complicated. It uses backordersHandler to :ref:`process-backorders`.
 
 .. code:: php
 
@@ -280,7 +280,7 @@ This method will change inventory unit state to ``sold``.
 .. note::
     For more detailed information go to `Sylius API BackordersHandler`_.
 
-.. _Sylius API InventoryUnitFactory: http://api.sylius.org/Sylius/Component/Inventory/Operator/BackordersHandler.html
+.. _Sylius API BackordersHandler: http://api.sylius.org/Sylius/Component/Inventory/Operator/BackordersHandler.html
 
 .. _component_inventory_checker_availability-checker:
 
@@ -288,7 +288,7 @@ AvailabilityChecker
 -------------------
 
 The **AvailabilityChecker** checks availability of a given stockable object.
-To charactrize an object which is an **AvailabilityChecker**, it needs to implement the :ref:`component_inventory_checker_availability_checker_interface`_.
+To charactrize an object which is an **AvailabilityChecker**, it needs to implement the :ref:`component_inventory_checker_availability_checker_interface`.
 Second parameter of the ``->isStockSufficient()`` method gives a possibility to check for a given quantity of a stockable.
 
 .. code:: php
@@ -369,7 +369,7 @@ The **InventoryUnitFactory** creates a collection of new inventory units.
 
     $inventoryUnits = $inventoryUnitFactory->create($product, 10, InventoryUnitInterface::STATE_RETURNED);
     // Output will be collection of inventory units.
-    
+
     $inventoryUnits[0]->getStockable(); // Output will be your's stockable model.
     $inventoryUnits[0]->getInventoryState(); // Output will be 'returned'.
     count($inventoryUnits); // Output will be 10.

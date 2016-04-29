@@ -25,7 +25,7 @@ PaymentInterface
 ~~~~~~~~~~~~~~~~
 
 This interface should be implemented by any custom model representing a payment.
-Also it keeps all of the default :doc:`/components/Payment/payment_states`.
+Also it keeps all of the default :ref:`component_payment_payment-states`.
 
 .. note::
    This interface extends the :ref:`component_resource_model_code-aware-interface` and :ref:`component_resource_model_timestampable-interface`

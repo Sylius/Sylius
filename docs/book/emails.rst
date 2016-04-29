@@ -5,7 +5,7 @@ E-Mails
 =======
 
 Sylius is sending various e-mails and this chapter is a reference about all of them. Continue reading to learn what e-mails are sent, when and how to customize the templates.
-To understand how e-mail sending works internally, please refer to :doc:`SyliusMailerBundle documentation </bundles/SyliusMailerMailer/index>`.
+To understand how e-mail sending works internally, please refer to :doc:`SyliusMailerBundle documentation </bundles/SyliusMailerBundle/index>`.
 
 User Confirmation E-Mail
 ------------------------
@@ -13,7 +13,7 @@ User Confirmation E-Mail
 Every time new customer registers via registration form or checkout, ``user_confirmation`` e-mail is sent to him.
 The default template is
 
-.. code-block:: test
+.. code-block:: text
 
     SyliusWebBundle:Email:userConfirmation.html.twig
 

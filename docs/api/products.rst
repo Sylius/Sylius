@@ -1,7 +1,7 @@
 Products API
 ============
 
-Sylius products catalogue API endpoint is `/api/products` and it allows for browsing, creating & editing product information.
+Sylius products catalogue API endpoint is ``/api/products`` and it allows for browsing, creating & editing product information.
 
 Index of all products
 ---------------------
@@ -113,8 +113,8 @@ Response
         "updated_at": "2014-11-26T23:00:20+0000"
     }
 
-Create an product
----------------
+Creating an product
+-------------------
 
 To create a new product, you can execute the following request:
 

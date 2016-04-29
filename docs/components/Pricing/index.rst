@@ -9,4 +9,3 @@ Calculating prices is a common task for most PHP E-Commerce applications. This l
    installation
    basic_usage
    interfaces
-   default_calculators

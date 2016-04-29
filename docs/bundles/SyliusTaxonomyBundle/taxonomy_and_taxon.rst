@@ -89,7 +89,7 @@ To create new taxonomy instance, you can simply call ``createNew()`` method on t
     Creating taxonomy via this factory method makes the code more testable, and allows you to change taxonomy class easily.
 
 Saving & removing taxonomy
--------------------------
+--------------------------
 
 To save or remove a taxonomy, you can use any ``ObjectManager`` which manages Taxonomy. You can always access it via alias ``sylius.manager.taxonomy``.
 But it's also perfectly fine if you use ``doctrine.orm.entity_manager`` or other appropriate manager service.
@@ -158,7 +158,7 @@ To get a flat list of taxons under taxonomy, use the ``getTaxonsAsList`` method.
         // Find the taxonomy
         $taxonomyRepository = $this->container->get('sylius.repository.taxonomy');
         $taxonomy = $taxonomyRepository->findOneByName('Categories');
-        
+
         // Get the taxons as a list
         $taxonRepository = $this->container->get('sylius.repository.taxon');
         $taxons = $taxonRepository->getTaxonsAsList($taxonomy);

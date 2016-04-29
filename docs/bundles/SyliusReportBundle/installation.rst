@@ -8,14 +8,14 @@ If you have `Composer installed globally <http://getcomposer.org/doc/00-intro.md
 
 .. code-block:: bash
 
-    $ composer require "sylius/report-bundle"
+    $ composer require sylius/report-bundle
 
 Otherwise you have to download .phar file.
 
 .. code-block:: bash
 
     $ curl -sS https://getcomposer.org/installer | php
-    $ php composer.phar require "sylius/report-bundle"
+    $ php composer.phar require sylius/report-bundle
 
 Adding required bundles to the kernel
 -------------------------------------

@@ -146,7 +146,7 @@ Response
     }
 
 Deleting a promotion
--------------------
+--------------------
 
 You can delete a promotion from the system by making the following DELETE call:
 

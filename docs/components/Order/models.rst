@@ -100,7 +100,7 @@ OrderItemUnits have the following properties:
 +------------------+--------------------------------------------------------------------+
 
 .. note::
-This model implements the :ref:`component_order_model_order-item-unit-interface`
+    This model implements the :ref:`component_order_model_order-item-unit-interface`
     For more detailed information go to `Sylius API OrderItemUnit`_.
 
 .. _Sylius API OrderItemUnit: http://api.sylius.org/Sylius/Component/Order/Model/OrderItem.html

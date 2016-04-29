@@ -14,7 +14,7 @@ This interface should be implemented by model representing a single Authorizatio
 .. note::
     For more detailed information go to `Sylius API IdentityInterface`_.
 
-.. _Sylius Api IdentityInterface: http://api.sylius.org/Sylius/Component/Rbac/Model/IdentityInterface.html
+.. _Sylius API IdentityInterface: http://api.sylius.org/Sylius/Component/Rbac/Model/IdentityInterface.html
 
 .. _component_rbac_model_permission-interface:
 

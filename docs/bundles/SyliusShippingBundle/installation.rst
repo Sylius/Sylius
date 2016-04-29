@@ -8,14 +8,14 @@ If you have `Composer installed globally <http://getcomposer.org/doc/00-intro.md
 
 .. code-block:: bash
 
-    $ composer require "sylius/shipping-bundle"
+    $ composer require sylius/shipping-bundle
 
 Otherwise you have to download .phar file.
 
 .. code-block:: bash
 
     $ curl -sS https://getcomposer.org/installer | php
-    $ php composer.phar require "sylius/shipping-bundle"
+    $ php composer.phar require sylius/shipping-bundle
 
 Adding required bundles to the kernel
 -------------------------------------
@@ -77,7 +77,7 @@ Add the following to your ``app/config/routing.yml``.
 .. code-block:: yaml
 
     sylius_shipping:
-        resource: @SyliusShipping/Resources/config/routing.yml
+        resource: "@SyliusShipping/Resources/config/routing.yml"
 
 Updating database schema
 ------------------------

@@ -10,7 +10,7 @@ project = 'Sylius'
 copyright = u'2011-2016, Paweł Jędrzejewski'
 version = ''
 release = ''
-exclude_patterns = []
+exclude_patterns = ['_includes/*.rst']
 html_theme = 'sylius_rtd_theme'
 html_theme_path = ["_themes"]
 htmlhelp_basename = 'Syliusdoc'
@@ -23,5 +23,5 @@ lexers['php'] = PhpLexer(startinline=True)
 lexers['php-annotations'] = PhpLexer(startinline=True)
 primary_domain = 'php'
 rst_epilog = """
-.. include:: /newline.rst
+.. include:: /_includes/newline.rst
 """

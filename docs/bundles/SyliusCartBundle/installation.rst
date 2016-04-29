@@ -8,14 +8,14 @@ If you have `Composer installed globally <http://getcomposer.org/doc/00-intro.md
 
 .. code-block:: bash
 
-    $ composer require "sylius/cart-bundle"
+    $ composer require sylius/cart-bundle
 
 Otherwise you have to download .phar file.
 
 .. code-block:: bash
 
     $ curl -sS https://getcomposer.org/installer | php
-    $ php composer.phar require "sylius/cart-bundle"
+    $ php composer.phar require sylius/cart-bundle
 
 Adding required bundles to the kernel
 -------------------------------------
@@ -339,7 +339,7 @@ Import the default routing from your ``app/config/routing.yml``.
 .. code-block:: yaml
 
     sylius_cart:
-        resource: @SyliusCartBundle/Resources/config/routing.yml
+        resource: "@SyliusCartBundle/Resources/config/routing.yml"
         prefix: /cart
 
 Updating database schema

@@ -25,10 +25,10 @@ Locale has the following properties:
 +-------------+-----------------------------------------+
 
 .. hint::
-	This model has one const ``STORAGE_KEY`` it is key used to store the locale in storage.
+    This model has one const ``STORAGE_KEY`` it is key used to store the locale in storage.
 
 .. note::
-	This model implements the :ref:`component_locale_model_locale-interface`
+    This model implements the :ref:`component_locale_model_locale-interface`
     For more detailed information go to `Sylius API Locale`_.
 
 .. _Sylius API Locale: http://api.sylius.org/Sylius/Component/Locale/Model/Locale.html

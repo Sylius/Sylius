@@ -8,14 +8,14 @@ If you have `Composer installed globally <http://getcomposer.org/doc/00-intro.md
 
 .. code-block:: bash
 
-    $ composer require "sylius/settings-bundle"
+    $ composer require sylius/settings-bundle
 
 Otherwise you have to download .phar file.
 
 .. code-block:: bash
 
     $ curl -sS https://getcomposer.org/installer | php
-    $ php composer.phar require "sylius/settings-bundle"
+    $ php composer.phar require sylius/settings-bundle
 
 Adding required bundles to the kernel
 -------------------------------------
@@ -62,7 +62,7 @@ Put this configuration inside your ``app/config/config.yml``.
 
     doctrine_cache:
         providers:
-            sylius_settings: 
+            sylius_settings:
                 type: file_system
 
 Importing routing configuration
@@ -73,7 +73,7 @@ Import default routing from your ``app/config/routing.yml``.
 .. code-block:: yaml
 
     sylius_settings:
-        resource: @SyliusSettingsBundle/Resources/config/routing.yml
+        resource: "@SyliusSettingsBundle/Resources/config/routing.yml"
         prefix: /settings
 
 .. note::

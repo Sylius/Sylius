@@ -6,7 +6,7 @@ Tests
 
 .. code-block:: bash
 
-    $ composer install --prefer-dist
+    $ composer install
     $ bin/phpspec run -f pretty
     $ bin/phpunit
 
