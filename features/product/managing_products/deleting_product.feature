@@ -11,10 +11,11 @@ Feature: Deleting a product
         And this product has one review
         And I am logged in as an administrator
 
-    @ui @javascript
+    @ui
     Scenario: Deleted product disappears from the product catalog
         When I delete the "Toyota GT86 model" product
-        Then this product should not exist in the product catalog
+        Then I should be notified that it has been successfully deleted
+        And this product should not exist in the product catalog
 
     @domain
     Scenario: Deleted product variants disappear from the product catalog
