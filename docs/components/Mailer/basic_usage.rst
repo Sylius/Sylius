@@ -145,8 +145,6 @@ The **DefaultSettingsProvider** is service which provides you with default sende
     $defaultSettingsProvider->getSenderAddress(); // mike.ehrmantraut@gmail.com
     $defaultSettingsProvider->getSenderName(); // Output will be Mike Ehrmantraut
 
-.. note::
-
 .. _component_mailer_provider_email-provider:
 
 EmailProvider

@@ -4,22 +4,6 @@ Interfaces
 Models Interfaces
 -----------------
 
-.. _component_taxonomy_model_taxonomy-interface:
-
-TaxonomyInterface
-~~~~~~~~~~~~~~~~~
-
-The **TaxonomyInterface** gives an object a possibility to manage Taxons.
-
-.. note::
-    This interface extends the :ref:`component_resource_model_code-aware-interface`,
-    :ref:`component_translation_model_translatable-interface`,
-    the :ref:`component_taxonomy_model_taxonomy-translation-interface`
-    and the :ref:`component_taxonomy_model_taxons-aware-interface`. |br|
-    You will find more information about that interface in `Sylius API TaxonomyInterface`_.
-
-.. _Sylius API TaxonomyInterface: http://api.sylius.org/Sylius/Component/Taxonomy/Model/TaxonomyInterface.html
-
 .. _component_taxonomy_model_taxon-interface:
 
 TaxonInterface
@@ -31,7 +15,7 @@ The **TaxonInterface** gives an object an ability to have Taxons assigned as chi
 
     This interface extends the :ref:`component_resource_model_code-aware-interface`,
     :ref:`component_translation_model_translatable-interface`
-    and the :ref:`component_translation_model_taxon-translation-interface`. |br|
+    and the :ref:`component_taxonomy_model_taxon-translation-interface`. |br|
     You will find more information about that interface in `Sylius API TaxonInterface`_.
 
 .. _Sylius API TaxonInterface: http://api.sylius.org/Sylius/Component/Taxonomy/Model/TaxonInterface.html
@@ -48,32 +32,6 @@ The **TaxonsAwareInterface** should be implemented by models that can be classif
     You will find more information about that interface in `Sylius API TaxonsAwareInterface`_.
 
 .. _Sylius API TaxonsAwareInterface: http://api.sylius.org/Sylius/Component/Taxonomy/Model/TaxonsAwareInterface.html
-
-.. _component_taxonomy_model_taxonomies-aware-interface:
-
-TaxonomiesAwareInterface
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-The **TaxonomiesAwareInterface** should be implemented by models that can be classified with taxonomies.
-
-.. note::
-
-    You will find more information about that interface in `Sylius API TaxonomiesAwareInterface`_.
-
-.. _Sylius API TaxonomiesAwareInterface: http://api.sylius.org/Sylius/Component/Taxonomy/Model/TaxonomiesAwareInterface.html
-
-.. _component_taxonomy_model_taxonomy-translation-interface:
-
-TaxonomyTranslationInterface
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-This interface should be implemented by models that will store the **Taxonomy** translation data.
-
-.. note::
-
-    You will find more information about that interface in `Sylius API TaxonomyTranslationInterface`_.
-
-.. _Sylius API TaxonomyTranslationInterface: http://api.sylius.org/Sylius/Component/Taxonomy/Model/TaxonomyTranslationInterface.html
 
 .. _component_taxonomy_model_taxon-translation-interface:
 

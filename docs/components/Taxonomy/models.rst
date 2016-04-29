@@ -1,7 +1,7 @@
 Models
 ======
 
-Taxonomy is a list constructed from individual Taxons. Every taxonomy has one special taxon, which serves as a root of the tree.
+Taxonomy is a list constructed from individual Taxons. Taxonomy is a special case of Taxon itself (it has no parent).
 All taxons can have many child taxons, you can define as many of them as you need.
 
 Good examples of taxonomies are "Categories" and "Brands". Below you can see exemplary trees.
@@ -22,50 +22,6 @@ Good examples of taxonomies are "Categories" and "Brands". Below you can see exe
     |\__Mugland
      \__Bookmania
 
-.. _component_taxonomy_model_taxonomy:
-
-Taxonomy
---------
-
-+-----------------+-----------------------------------------------------------------+
-| Property        | Description                                                     |
-+=================+=================================================================+
-| id              | Unique id of the taxonomy                                       |
-+-----------------+-----------------------------------------------------------------+
-| name            | Name of the taxonomy taken from the root's ``TaxonTranslation`` |
-+                 +                                                                 +
-|                 | and stored on ``TaxonomyTranslation``                           |
-+-----------------+-----------------------------------------------------------------+
-| root            | First, root Taxon                                               |
-+-----------------+-----------------------------------------------------------------
-
-.. note::
-
-    This model implements the :ref:`component_taxonomy_model_taxonomy-interface`.
-    You will find more information about this model in `Sylius API Taxonomy`_.
-
-.. _Sylius API Taxonomy: http://api.sylius.org/Sylius/Component/Taxonomy/Model/Taxonomy.html
-
-.. _component_taxonomy_model_taxonomy-translation:
-
-TaxonomyTranslation
--------------------
-
-+-----------------+-----------------------------------------------------------------+
-| Property        | Description                                                     |
-+=================+=================================================================+
-| id              | Unique id of the taxonomy translation                           |
-+-----------------+-----------------------------------------------------------------+
-| name            | Name of the taxonomy taken from the root's ``TaxonTranslation`` |
-+-----------------+-----------------------------------------------------------------+
-
-.. note::
-
-    This model implements the :ref:`component_taxonomy_model_taxonomy-translation-interface`.
-    You will find more information about this model in `Sylius API TaxonomyTranslation`_.
-
-.. _Sylius API TaxonomyTranslation: http://api.sylius.org/Sylius/Component/Taxonomy/Model/TaxonomyTranslation.html
-
 .. _component_taxonomy_model_taxon:
 
 Taxon
@@ -85,8 +41,6 @@ Taxon
 | permalink       | Full permalink for given taxon taken form the ``TaxonTranslation`` |
 +-----------------+--------------------------------------------------------------------+
 | description     | Description of taxon taken from the ``TaxonTranslation``           |
-+-----------------+--------------------------------------------------------------------+
-| taxonomy        | Taxonomy object                                                    |
 +-----------------+--------------------------------------------------------------------+
 | parent          | Parent taxon                                                       |
 +-----------------+--------------------------------------------------------------------+

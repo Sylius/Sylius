@@ -184,7 +184,7 @@ Rule has the following properties:
 +---------------+------------------------------------------------+
 
 .. note::
-This model implements the :ref:`component_shipping_model_rule-interface`. |br|
+    This model implements the :ref:`component_shipping_model_rule-interface`. |br|
     For more detailed information go to `Sylius API Rule`_.
 
 .. _Sylius API Rule: http://api.sylius.org/Sylius/Component/Shipping/Model/Rule.html

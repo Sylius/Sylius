@@ -1,6 +1,8 @@
 Models
 ======
 
+.. _component_order_model_order:
+
 Order
 -----
 
@@ -209,5 +211,3 @@ Identities have the following properties:
     For more detailed information go to `Sylius API Identity`_.
 
 .. _Sylius API Identity: http://api.sylius.org/Sylius/Component/Order/Model/Identity.html
-
-.. _component_order_model_order:

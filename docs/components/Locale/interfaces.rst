@@ -18,7 +18,7 @@ This interface should be implemented by models representing a single **Locale**.
 
 .. _Sylius API LocaleInterface: http://api.sylius.org/Sylius/Component/Locale/Model/LocaleInterface.html
 
-.. _component_inventory_model_stockable-interface:
+.. _component_locale_model_locales-aware-interface:
 
 LocalesAwareInterface
 ~~~~~~~~~~~~~~~~~~~~~
@@ -34,7 +34,7 @@ If you want to have locales in your model just implement this interface.
 Service Interfaces
 ------------------
 
-.. _component_inventory_checker_availability-checker-interface:
+.. _component_locale_model_locale-context-interface:
 
 LocaleContextInterface
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -46,7 +46,7 @@ This interface is implemented by the service responsible for managing the curren
 
 .. _Sylius API LocaleContextInterface: http://api.sylius.org/Sylius/Component/Locale/Context/LocaleContextInterface.html
 
-.. _component_inventory_factory_inventory-unit-factory-interface:
+.. _component_locale_model_locale-provider-interface:
 
 LocaleProviderInterface
 ~~~~~~~~~~~~~~~~~~~~~~~

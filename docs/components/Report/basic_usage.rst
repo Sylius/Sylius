@@ -3,9 +3,7 @@ Basic Usage
 
 .. note::
     First of all you need to register your data fetcher and renderer.
-    For more detailed information go to :ref:`Registry`_.
-
-.. _Registry: http://docs.sylius.org/en/latest/components/Registry/basic_usage.html
+    For more detailed information go to :doc:`/components/Registry/basic_usage`.
 
 .. _component_report_data-fetcher_delegating-data-fetcher:
 

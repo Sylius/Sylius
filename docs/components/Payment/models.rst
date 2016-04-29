@@ -135,8 +135,7 @@ correct representation of the following payment properties:
 +-------------+---------------------------------+
 
 .. note::
-   This model extends the :ref:`component_resource_model_abstract-translation`
-   and implements the :ref:`component_payment_model_payment-method-translation-interface`. |br|
+   This model implements the :ref:`component_payment_model_payment-method-translation-interface`. |br|
    For more detailed information go to `Sylius API PaymentMethodTranslation`_.
 
 .. _Sylius API PaymentMethodTranslation: http://api.sylius.org/Sylius/Component/Payment/Model/PaymentMethodTranslation.html

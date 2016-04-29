@@ -68,7 +68,7 @@ If you need to store a value of an **Option** you will have to create an object 
 
 .. note::
 
-     This interface extends :ref:`component_resource_model_code-aware-interface`. |br|
+    This interface extends :ref:`component_resource_model_code-aware-interface`. |br|
     You will find more information about that interface in `Sylius API OptionValueInterface`_.
 
 .. _Sylius API OptionValueInterface: http://api.sylius.org/Sylius/Component/Variation/Model/OptionValueInterface.html

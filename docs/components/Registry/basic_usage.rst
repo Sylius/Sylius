@@ -13,7 +13,7 @@ To create a new **ServiceRegistry** you need to
 determine what kind of interface should be kept inside.
 
 For the sake of examples lets use the :ref:`component_payment_calculator_fee-calculator-interface`
-from the :ref:`component_payment_index` component.
+from the :doc:`Payment </components/Payment/index>` component.
 
 .. code-block:: php
 

@@ -108,7 +108,7 @@ Setting the origin of an object is really simple:
                                                 // id field needs to be set
 
    $originator->setOrigin($aware, $ancestor); // this however is successful
-   
+
    $aware->getOriginId(); // returns 2
    $aware->getOriginType(); // returns 'Example\Model\Ancestor'
 
@@ -121,8 +121,3 @@ Now, with origin set in ``$aware`` object and if we have our ``$ancestor`` in a 
 
 .. note::
    This service implements the :ref:`component_originator_originator_originator-interface`.
-
-.. caution::
-   Throws :ref:`component_resource_exception_unexpected-type-exception` and `\\InvalidArgumentException`_.
-
-.. _\\InvalidArgumentException: http://php.net/manual/en/class.invalidargumentexception.php

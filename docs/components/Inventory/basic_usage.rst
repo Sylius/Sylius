@@ -7,7 +7,7 @@ Stockable Object
 The first thing you should do it is implementing stockable object.
 Example implementation:
 
-.. code:: php
+.. code-block:: php
 
     <?php
 
@@ -102,7 +102,7 @@ InventoryOperator
 
 The **InventoryOperator** provides basic operations on your inventory.
 
-.. code:: php
+.. code-block:: php
 
     <?php
 
@@ -136,7 +136,7 @@ Decrease
 
 This specific case will be more complicated. It uses backordersHandler to :ref:`process-backorders`.
 
-.. code:: php
+.. code-block:: php
 
     <?php
 
@@ -220,7 +220,7 @@ Process backorders
 
 This method will change the inventory unit state to ``backordered`` if the quantity of requested inventory units will be insufficient.
 
-.. code:: php
+.. code-block:: php
 
     <?php
 
@@ -258,7 +258,7 @@ Fill backorders
 
 This method will change inventory unit state to ``sold``.
 
-.. code:: php
+.. code-block:: php
 
     <?php
 
@@ -288,10 +288,10 @@ AvailabilityChecker
 -------------------
 
 The **AvailabilityChecker** checks availability of a given stockable object.
-To charactrize an object which is an **AvailabilityChecker**, it needs to implement the :ref:`component_inventory_checker_availability_checker_interface`.
+To charactrize an object which is an **AvailabilityChecker**, it needs to implement the :ref:`component_inventory_checker_availability-checker-interface`.
 Second parameter of the ``->isStockSufficient()`` method gives a possibility to check for a given quantity of a stockable.
 
-.. code:: php
+.. code-block:: php
 
     <?php
 
@@ -312,7 +312,7 @@ Backorders
 The backorder property generally indicates that the customer's demand for a product or service
 exceeds a stockable's capacity to supply it.
 
-.. code:: php
+.. code-block:: php
 
     <?php
 
@@ -327,7 +327,7 @@ exceeds a stockable's capacity to supply it.
 Available On Demand
 ~~~~~~~~~~~~~~~~~~~
 
-.. code:: php
+.. code-block:: php
 
     <?php
 
@@ -355,7 +355,7 @@ InventoryUnitFactory
 
 The **InventoryUnitFactory** creates a collection of new inventory units.
 
-.. code:: php
+.. code-block:: php
 
     <?php
 
