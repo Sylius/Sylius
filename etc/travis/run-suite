@@ -1,10 +1,17 @@
 #!/usr/bin/env bash
 set -e
 
-if [ -f "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/suites/common/$2.sh" ]; then
-    /usr/bin/env bash "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/suites/common/$2.sh"
+code=0
+
+if [ -f "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/suites/common/$1.sh" ]; then
+    /usr/bin/env bash "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/suites/common/$1.sh" || code=$?
 fi
 
-if [ -f "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/suites/$1/$2.sh" ]; then
-    /usr/bin/env bash "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/suites/$1/$2.sh"
-fi
+IFS=' ' read -r -a suites <<< "$2"
+for suite in "${suites[@]}"; do
+    if [ -f "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/suites/${suite}/$1.sh" ]; then
+        /usr/bin/env bash "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/suites/${suite}/$1.sh" || code=$?
+    fi
+done
+
+exit ${code}
