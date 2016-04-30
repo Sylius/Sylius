@@ -32,5 +32,8 @@ sylius_admin_zone_create:
                 subheader: sylius.ui.manage_geographical_zones
                 templates:
                     form: SyliusAdminBundle:Zone:_form.html.twig
+                route:
+                    parameters:
+                        type: $type
     requirements:
         type: country|province|zone
