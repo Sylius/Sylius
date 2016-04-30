@@ -37,6 +37,8 @@ interface ProcessBuilderInterface
      *
      * @param string               $name
      * @param string|StepInterface $step Step alias or instance
+     * 
+     * @return ProcessBuilderInterface
      */
     public function add($name, $step);
 
