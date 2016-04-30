@@ -33,5 +33,6 @@ sylius:
             confirmation: Potvrzení
             new: Nové heslo
     gender:
+        unknown: Neznámý
         male: Muž
         female: Žena

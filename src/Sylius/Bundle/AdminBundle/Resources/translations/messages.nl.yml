@@ -6,6 +6,9 @@ sylius:
         admin:
             main:
                 catalog:
+                    header: Cataloog
+                    taxons: Taxons
+                    options: Opties
                     attributes: Attributen
                 configuration:
                     channels: Kanalen
@@ -15,7 +18,7 @@ sylius:
                     locales: "Talen/Regio's"
                     payment_methods: Betaalmethoden
                     shipping_methods: Verzendmethoden
-                    tax_categories: Belastingscategorieën
+                    tax_categories: Belastingcategorieën
                     tax_rates: BTW-tarieven
                     zones: Zones
                 marketing:

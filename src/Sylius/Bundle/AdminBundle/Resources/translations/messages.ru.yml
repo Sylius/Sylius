@@ -6,6 +6,8 @@ sylius:
         admin:
             main:
                 catalog:
+                    taxons: Налоги
+                    options: Список опций
                     attributes: Атрибуты
                 configuration:
                     channels: Каналы

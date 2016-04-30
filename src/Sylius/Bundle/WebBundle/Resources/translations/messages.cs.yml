@@ -351,7 +351,6 @@ sylius:
         new_contact_topic: Nové téma kontaktu
         new_country: Nové země
         new_currency: Nová měna
-        new_customer: Nový zákazník
         new_order: Nová objednávka
         new_password: Nové heslo
         new_payment: Nová platba

@@ -455,7 +455,6 @@ sylius:
         new_contact_topic: Rubrikë e re kontakti
         new_country: Vend i ri
         new_currency: Lloj i ri monedhe
-        new_customer: Blerës i ri
         new_order: Porosi e re
         new_password: Fjalëkalim i ri
         new_payment: Pagesë e re

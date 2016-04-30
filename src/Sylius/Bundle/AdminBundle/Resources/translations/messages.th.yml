@@ -6,6 +6,8 @@ sylius:
         admin:
             main:
                 catalog:
+                    taxons: หมวดหมู่
+                    options: ตัวเลือก
                     attributes: คุณลักษณะ (Attribute)
                 configuration:
                     channels: ช่องทางการจัดจำหน่าย

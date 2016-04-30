@@ -45,7 +45,6 @@ sylius:
         info: Información
         last_updated: Última actialización
         locales: Idiomas
-        manage_customer: Gestionar clientes
         manage_languages_available_in_the_store: Administrar idiomas disponibles en la tienda
         manage_shipping_destinations: Gestionar destinos de envío
         manage_shipping_methods_for_your_store: Manejar métodos de envío para su tienda

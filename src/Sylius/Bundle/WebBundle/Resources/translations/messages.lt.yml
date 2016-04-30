@@ -343,7 +343,6 @@ sylius:
         new_comment_posted_on_order: Užsakymas pakomentuotas
         new_country: Naujas šalis
         new_currency: Nauja valiuta
-        new_customer: Naujas klientas
         new_order: Naujas užsakymas
         new_password: Naujas slaptažodis
         new_payment: Naujas mokėjimas

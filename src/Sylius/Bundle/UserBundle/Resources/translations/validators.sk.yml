@@ -16,6 +16,9 @@ sylius:
             not_blank: Zadajte vaše heslo.
             mismatch: Zadané heslá sa nezhodujú
             wrong_current: Zadané heslo sa nezhoduje zo súčasným.
+        password:
+            min: 'Heslo musí obsahovať minimálne {{ limit }} znakov.'
+            max: 'Heslo nesmie byť dlhšie ako {{ limit }} znakov.'
     customer:
         first_name:
             max: 'Krstné meno nesmie byť dlhšie ako {{ limit }} znakov.'

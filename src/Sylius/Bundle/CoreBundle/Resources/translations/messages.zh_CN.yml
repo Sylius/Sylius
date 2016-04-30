@@ -20,6 +20,8 @@ sylius:
                 different_billing_address: 使用不同地址的帐单吗？
             payment_method: 付款方式
             shipping_method: 配送方式
+        promotion:
+            channels: 频道
         group:
             name: 名称
             roles: 角色

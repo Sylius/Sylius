@@ -6,6 +6,8 @@ sylius:
         admin:
             main:
                 catalog:
+                    taxons: Taksonai
+                    options: Parinktys
                     attributes: Atributai
                 configuration:
                     channels: Kanalai

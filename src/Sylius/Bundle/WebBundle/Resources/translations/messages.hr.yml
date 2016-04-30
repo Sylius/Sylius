@@ -224,7 +224,6 @@ sylius:
         name: Naziv
         new: Novo
         new_country: Nova država
-        new_customer: Novi kupac
         new_order: Nova narudžba
         new_password: Nova lozinka
         new_payment: Novo plaćanje

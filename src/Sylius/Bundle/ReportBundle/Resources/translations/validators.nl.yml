@@ -4,12 +4,12 @@
 sylius:
     report:
         name:
-            not_blank: Verslag naam mag niet leeg zijn
-            min_length: Rapportnaam moet uit minstens 2 karakters bestaan
-            max_length: Rapportnaam moet maximaal 255 karakters bevatten
+            not_blank: Rapportnaam mag niet leeg zijn
+            min_length: Rapportnaam moet uit minstens 2 tekens bestaan
+            max_length: Rapportnaam mag maximaal 255 tekens bevatten
         description:
-            not_blank: Beschrijving van het verslag mag niet leeg zijn
+            not_blank: Beschrijving van het rapport mag niet leeg zijn
         code:
-            not_blank: Rapport code mag niet leeg zijn.
+            not_blank: Rapportcode mag niet leeg zijn.
             unique: Deze code is al in gebruik.
-            single_word: Verslagcode moet een enkel woord zijn.
+            single_word: Rapportcode moet een enkel woord zijn.

@@ -101,7 +101,6 @@ sylius:
         method: τρόπος
         name: Ονομασία
         new_country: Νέα χώρα
-        new_customer: Νεος Πελάτης
         new_order: Νεα παραγγελία
         new_product: Νεο προϊόν
         new_zone: Νεα ζώνη

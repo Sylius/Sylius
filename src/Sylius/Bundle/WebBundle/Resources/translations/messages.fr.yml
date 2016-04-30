@@ -456,7 +456,6 @@ sylius:
         new_contact_topic: Nouvelle rubrique contact
         new_country: Nouveau pays
         new_currency: Nouvelle devise
-        new_customer: Nouveau client
         new_order: Nouvelle commande
         new_password: Nouveau mot de passe
         new_payment: Nouveau paiement

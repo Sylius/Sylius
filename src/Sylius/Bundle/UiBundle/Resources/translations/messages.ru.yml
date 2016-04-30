@@ -27,7 +27,6 @@ sylius:
         exclusive: Эксклюзив
         filter: Фильтр
         locales: Языки
-        manage_customer: Управление клиентами
         new: Новый
         new_country: Добавить страну
         new_currency: Новая валюта

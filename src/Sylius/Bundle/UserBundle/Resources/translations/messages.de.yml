@@ -35,5 +35,6 @@ sylius:
             confirmation: Bestätigung
             new: Neues Passwort
     gender:
+        unknown: Unbekannt
         male: Mann
         female: Frau

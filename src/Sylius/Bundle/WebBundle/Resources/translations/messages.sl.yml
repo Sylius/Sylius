@@ -430,7 +430,6 @@ sylius:
         new_contact_topic: Nova tema stika
         new_country: Nova država
         new_currency: Nova valuta
-        new_customer: Nov uporabnik
         new_order: Novo naročilo
         new_password: Novo geslo
         new_payment: Novo plačilo

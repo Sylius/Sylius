@@ -5,6 +5,9 @@ sylius:
     menu:
         admin:
             main:
+                catalog:
+                    taxons: Taxonok
+                    options: Beállítások
                 configuration:
                     channels: Csatornák
                     countries: Országok

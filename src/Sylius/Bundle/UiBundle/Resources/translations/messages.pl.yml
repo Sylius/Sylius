@@ -29,7 +29,6 @@ sylius:
         filter: Filtruj
         last_updated: Ostatnia aktualizacja
         locales: Ustawienia regionalne
-        manage_customer: Zarządzanie klientami
         new: Nowy
         new_country: Nowy kraj
         new_currency: Nowa waluta

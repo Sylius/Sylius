@@ -28,7 +28,6 @@ sylius:
         exclusive: Izključno
         filter: Filter
         locales: Področne nastavitve
-        manage_customer: Upravljanje strank
         new: Novo
         new_country: Nova država
         new_currency: Nova valuta

@@ -10,13 +10,18 @@ sylius:
         option:
             presentation: Presentazione
     ui:
+        all: Tutti
         actions: Azioni
         administration_panel_login: Login del pannello di amministrazione
         an_error_occurred: Si è verificato un errore
         are_your_sure_you_want_to_perform_this_action: Sei sicuro di voler eseguire questa azione?
+        available_for_channels: Disponibile per i canali
         cancel: Annulla
+        category_requirements: Requisiti della categoria
+        charges_and_taxes: Spese e tasse
         clear_filters: Cancella filtri
         color: Colore
+        configure_channels_available_in_your_store: Configura i canali disponibili nel tuo negozio
         confirm_your_action: "Confermare l'azione"
         contains: Contiene
         countries: Paesi
@@ -30,7 +35,18 @@ sylius:
         description: Descrizione
         disabled: Disattivato
         edit: Modifica
+        edit_channel: Modifica il canale
+        edit_country: Modifica il paese
+        edit_currency: Modifica valuta
+        edit_customer: Modifica cliente
+        edit_payment_method: Modifica il metodo di pagamento
+        edit_product_option: "Modificare l'opzione del prodotto"
+        edit_product_attribute: "Modificare l'attributo di prodotto"
+        edit_promotion: Modifica promozione
+        edit_shipping_method: Modifica metodo di spedizione
         edit_tax_category: Modificare la categoria fiscale
+        edit_tax_rate: Modifica aliquota fiscale
+        edit_zone: Modifica zona
         empty: Vuoto
         enabled: Abilitato
         ends_with: Finisce con
@@ -41,7 +57,12 @@ sylius:
         info: Info
         last_updated: Ultimo aggiornamento
         locales: Localizzazioni
-        manage_customer: Gestire i clienti
+        manage_attributes_of_your_products: Gestisci gli attributi dei tuoi prodotti
+        manage_your_customers: Gestisci i tuoi clienti
+        manage_languages_available_in_the_store: Gestisci le lingue disponibili nel negozio
+        manage_configuration_options_of_your_products: Gestisci le opzioni di configurazione dei tuoi prodotti
+        manage_payment_methods_available_to_your_customers: Gestisci i metodi di pagamento disponibili per i tuoi clienti
+        manage_shipping_destinations: Gestisci le destinazioni di spedizione
         manage_taxation_of_your_products: Gestire la tassazione dei vostri prodotti
         new: Nuovo
         new_country: Nuovo paese

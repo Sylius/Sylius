@@ -53,15 +53,9 @@ sylius:
         info: اطلاعات
         last_updated: آخرین بروز رسانی
         locales: زبان ها
-        manage_attributes_of_your_produts: مدیریت ویژگی های محصولات خود
-        manage_country: مدیریت کشور
         manage_currencies_available_in_the_store: مدیریت واحدهای پولی موجود در فروشگاه
-        manage_customer: مدیریت مشتریان
         manage_languages_available_in_the_store: مدیریت زبان های موجود در فروشگاه
-        manage_payment_method: مدیریت روشهای پرداخت
-        manage_product_option: مدیریت گزینه های محصول
         manage_shipping_destinations: مدیریت مقصدهای حمل و نقل
-        manage_taxons: مدیریت taxon های محصولات خود
         manage_shipping_methods_for_your_store: مدیریت روش ها حمل و نقل فروشگاه
         manage_taxation_of_your_products: مدیریت مالیات محصولات شما
         new: پرداخت ثبت شده

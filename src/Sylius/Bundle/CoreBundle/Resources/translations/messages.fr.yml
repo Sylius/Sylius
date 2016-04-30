@@ -21,7 +21,7 @@ sylius:
             payment_method: Moyen de paiement
             shipping_method: Mode de livraison
         promotion:
-            channels: Canal 
+            channels: Canaux
         coupon:
             per_customer_usage_limit: "Limite d'utilisation par client"
         group:
