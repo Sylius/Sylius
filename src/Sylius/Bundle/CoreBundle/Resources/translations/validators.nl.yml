@@ -20,4 +20,4 @@ sylius:
             min: De originele prijs mag niet negatief zijn.
     product_translation:
         short_description:
-            max: 'Korte omschrijving mag niet langer zijn dan {{ limit }} tekens bevatten.'
+            max: 'Korte omschrijving mag niet meer dan {{ limit }} tekens bevatten.'

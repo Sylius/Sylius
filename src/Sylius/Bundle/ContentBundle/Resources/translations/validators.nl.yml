@@ -4,7 +4,7 @@
 sylius:
     imagine_block:
         name:
-            not_blank: Vul een imagine bloknaam in.
+            not_blank: Vul een afbeeldingsbloknaam in.
         label:
             not_blank: Vul een imagine bloklabel in.
         filter:
@@ -17,16 +17,16 @@ sylius:
             invalid_date: Eind datum publiceren ongeldig.
     menu:
         name:
-            not_blank: Voer menu naam in.
+            not_blank: Voer menunaam in.
         label:
-            not_blank: Voer menu label in.
+            not_blank: Voer menulabel in.
         start_date:
             invalid_date: Start datum publiceren ongeldig.
         end_date:
             invalid_date: Eind datum publiceren ongeldig.
     menu_node:
         name:
-            not_blank: 'Voer menu "node" naam in.'
+            not_blank: Voer menu node naam in.
         label:
             not_blank: 'Voer menu "node" label in.'
         start_date:
@@ -55,7 +55,7 @@ sylius:
         name:
             not_blank: Voer eenvoudige blok naam in.
         title:
-            not_blank: Voer eenvoudige blok titel in.
+            not_blank: Voer eenvoudige bloktitel in.
         body:
             not_blank: Voer eenvoudige blok raamwerk in.
         start_date:
@@ -66,7 +66,7 @@ sylius:
         name:
             not_blank: Voer eenvoudige blok naam in.
         body:
-            not_blank: Voer eenvoudige blok raamwerk in.
+            not_blank: Voer eenvoudige blok inhoud in.
         start_date:
             invalid_date: Start datum publiceren ongeldig.
         end_date:

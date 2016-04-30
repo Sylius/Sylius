@@ -376,7 +376,6 @@ sylius:
         new_contact_topic: Yeni iletişim konusu
         new_country: Yeni ülke
         new_currency: Yeni para birimi
-        new_customer: Yeni müşteri
         new_order: Yeni sipariş
         new_password: Yeni parola
         new_payment: Yeni ödeme

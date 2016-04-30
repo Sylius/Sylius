@@ -21,7 +21,7 @@ sylius:
             payment_method: Ödeme Şekli
             shipping_method: Gönderim şekli
         promotion:
-            channels: Kanal
+            channels: Kanallar
         coupon:
             per_customer_usage_limit: Müşteri başına kullanım sınırı
         group:

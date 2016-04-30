@@ -5,6 +5,8 @@ sylius:
     menu:
         admin:
             main:
+                catalog:
+                    options: Опцйи
                 configuration:
                     countries: Страни
                     locales: Езикови променливи

@@ -21,7 +21,7 @@ sylius:
             payment_method: Apmokėjimo būdas
             shipping_method: Pristatymo būdas
         promotion:
-            channels: Kanalas
+            channels: Kanalai
         coupon:
             per_customer_usage_limit: Kliento naudojimosi ribos
         group:

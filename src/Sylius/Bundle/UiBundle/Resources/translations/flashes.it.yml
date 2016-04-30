@@ -1,0 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    ui:
+        the_channel_cannot_be_deleted_at_least_one_enabled_channel_is_required: "Il canale non può essere eliminato. E' necessario almeno un canale abilitato."

@@ -35,5 +35,6 @@ sylius:
             confirmation: Konfirmo
             new: Fjalëkalim i ri
     gender:
+        unknown: E panjohur
         male: Mashkull
         female: Femër

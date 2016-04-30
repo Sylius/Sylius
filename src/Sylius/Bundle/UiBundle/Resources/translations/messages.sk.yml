@@ -10,6 +10,7 @@ sylius:
         option:
             presentation: Verejný názov
     ui:
+        all: Všetky
         actions: Akcie
         administration_panel_login: Prihásenie do administračného rozhrania
         an_error_occurred: Vyskytla sa chyba
@@ -39,9 +40,14 @@ sylius:
         edit_currency: Úprava meny
         edit_customer: Úprava zákazníka
         edit_payment_method: Úprava spôsobu platby
+        edit_product_option: Upraviť produktovú voľbu
+        edit_product_attribute: Upraviť produktovú vlastnosť
         edit_promotion: Upraviť propagáciu
+        edit_shipping_method: Úpraviť spôsob doručenia
         edit_tax_category: Úprava daňovej kategórie
         edit_tax_rate: Upraviť sadzbu dane
+        edit_taxon: Úpraviť kategóriu
+        edit_zone: Upraviť zónu
         empty: Prázdne
         enabled: Zapnuté
         ends_with: Končí na
@@ -52,14 +58,18 @@ sylius:
         info: Info
         last_updated: Posledná aktualizácia
         locales: Jazyky
-        manage_country: Spravovať krajiny
+        manage_attributes_of_your_products: Spravovať vlastnosti vašich produktov
         manage_currencies_available_in_the_store: Spravovať dostupné meny v obchode
-        manage_customer: Správa zákazníkov
+        manage_your_customers: Spravovať vašich zákazníkov
         manage_languages_available_in_the_store: Spravovať dostupné jazyky v obchode
-        manage_payment_method: Spravovať spôsoby platby
+        manage_configuration_options_of_your_products: Spravovať nastavenia volieb vašich produktov
+        manage_payment_methods_available_to_your_customers: Spravovať platobné metódy k dispozícii pre vašich zákazníkov
         manage_shipping_destinations: Spravovať prepravné destinácie
+        manage_categorization_of_your_products: Spravovať kategorizáciu produktov
         manage_shipping_methods_for_your_store: Spravovať dostupné spôsoby dopravy v obchode
         manage_taxation_of_your_products: Spravovať zdaňovanie vašich produktov
+        manage_geographical_zones: Spravovať geografické zóny
+        manage_discounts_and_promotional_campaigns: Spravovať zlavy a propagačné kampane
         new: Nová
         new_channel: Nový kanál
         new_country: Nová krajina
@@ -87,3 +97,16 @@ sylius:
         tax_categories: Daňové kategórie
         values: Hodnoty
         "yes": true
+        total_records: Celkový počet záznamov
+        jump_to_page: Prejsť na stranu
+        go: Pokračovať
+        unlimited: Neobmedzené
+        no_requirement: Žiadne podmienky
+        zone_consisting_of_countries: Zóna pozostávajúca z krajín
+        zone_consisting_of_provinces: Zóna pozostávajúca z provincií
+        zone_consisting_of_other_zones: Zóna pozostávajúca z iných oblastí
+        no_theme: Žiadna Téma
+        usage: Použitie
+        customer_can_login_to_the_store: Zákazník sa môže prihlásiť do obchodu
+        account_credentials: Prihlasovacie údaje
+        extra_information: Ďalšie informácie

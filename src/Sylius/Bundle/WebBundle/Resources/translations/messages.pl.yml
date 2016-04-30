@@ -357,7 +357,6 @@ sylius:
         new_contact_topic: Nowy temat kontaktu
         new_country: Nowy kraj
         new_currency: Nowa waluta
-        new_customer: Nowy Klient
         new_order: Nowe zamówienie
         new_password: Nowe hasło
         new_payment: Nowa płatność

@@ -21,7 +21,7 @@ sylius:
             payment_method: روش پرداخت
             shipping_method: روش ارسال
         promotion:
-            channels: کانال فروش
+            channels: کانال های فروش
         coupon:
             per_customer_usage_limit: محدودیت استفاده (به عنوان مثال به ازای ... تعداد مشتری)
         group:

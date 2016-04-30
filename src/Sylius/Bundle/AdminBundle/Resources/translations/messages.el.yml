@@ -5,6 +5,8 @@ sylius:
     menu:
         admin:
             main:
+                catalog:
+                    options: Επιλογές
                 configuration:
                     countries: Χώρες
                     header: Παραμετροποίηση

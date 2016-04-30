@@ -6,6 +6,8 @@ sylius:
         admin:
             main:
                 catalog:
+                    taxons: Taxonomías
+                    options: Opciones de producto
                     attributes: Atributos
                 configuration:
                     channels: Canales

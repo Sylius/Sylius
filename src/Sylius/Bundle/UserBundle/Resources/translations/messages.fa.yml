@@ -35,5 +35,6 @@ sylius:
             confirmation: تایید
             new: کلمه عبور جدید
     gender:
+        unknown: پرداخت نامعلوم
         male: آقا
         female: خانم

@@ -455,7 +455,6 @@ sylius:
         new_contact_topic: เพิ่มหัวข้อการติดต่อ
         new_country: เพิ่มประเทศ
         new_currency: เพิ่มสกุลเงิน
-        new_customer: เพิ่มลูกค้า
         new_order: เพิ่มใบสั่งซื้อ
         new_password: รหัสผ่านใหม่
         new_payment: เพิ่มการชำระเงิน

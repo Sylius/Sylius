@@ -14,8 +14,11 @@ sylius:
                 returned: 'Geretourneerd op %at%'
                 shipped: 'Verzonden op %at%'
         title: Mijn account
+    archetype:
+        build: Bouw prototype
     block:
         imagine:
+            index: Afbeeldingsblokken
             publishable: Gepubliceerd
         simple:
             index: Eenvoudige blokken
@@ -24,7 +27,7 @@ sylius:
             index: Slideshow blokken
             publishable: Gepubliceerd
         string:
-            index: String blokken
+            index: Tekstblokken
             publishable: Gepubliceerd
     cart:
         empty: Uw winkelwagen is leeg
@@ -46,13 +49,13 @@ sylius:
         security:
             proceed_order: Doorgaan met uw bestelling
         shipping:
-            error: Het spijt ons, maar onze winkel is niet in staat om product verzending naar het land dat u hebt gekozen
+            error: Het spijt ons, maar onze winkel is niet in staat om het product verzending naar het land dat u hebt gekozen
     confirmation:
         message: Wilt u dit item verwijderen
     customer:
         filter:
             all: Toon alle klanten
-            registered: Geregistreerde klanten laten zien
+            registered: Geregistreerde klanten weergeven
             unconfirmed: Onbevestigde accounts weergeven
         general_info: "Klant '%fullName%' algemene info"
         no_groups: Er zijn geen groepen voor deze klant om weer te geven
@@ -66,17 +69,19 @@ sylius:
         publishable: Gepubliceerd
     meta:
         backend_title: Sylius Dashboard
+        frontend_description: Sylius is een moderne ecommerce oplossing voor PHP, gebaseerd op het Symfony2 framework
+        frontend_keywords: Sylius, ecommerce, symfony2, winkel, webwinkel, winkelwagen
         frontend_title: Sylius, een moderne ecommerce oplossing voor Symfony2
     order:
         adjustments:
-            lock_all: Vergrendelen van alle aanpassingen
-            unlock_all: Ontgrendelen alle aanpassingen
+            lock_all: Vergrendel alle aanpassingen
+            unlock_all: Ontgrendel alle aanpassingen
         comment:
             notify: Notificaties
         guest: Gast klant
         immutable_warning: Reeds verzonden orders kunnen niet meer worden gewijzigd
         no_items: Deze bestelling heeft geen artikelen
-        no_promotion: Geen coupons werden gebruikt
+        no_promotion: Coupons werden niet gebruikt
         no_shipments: Er zijn geen verzendingen voor deze bestelling
         no_shipping_charges: Geen verzendkosten
         no_taxes: Geen belastingen
@@ -86,27 +91,29 @@ sylius:
         quantity: Hoeveelheid
         sellable: Product
     page:
-        no_route: Uw inhoud wordt niet weergegeven in frontend als er geen route gedefinieerd is
+        no_route: Uw inhoud wordt niet weergegeven als er geen route gedefinieerd is
         publishable: Gepubliceerd
     payment:
         transition:
             cancel: annuleer
-            complete: voltooien
-            refund: terugbetaling
+            complete: voltooi
+            refund: betaal terug
     pricing:
         volume_based:
-            max: Maximum Volume
-            min: Minimum Volume
+            max: Max Volume
+            min: Min Volume
     promotion_coupon:
         generate: Coupons genereren
         index: Lijst van coupons
         total_results: 'Totaal: %total%'
     report:
+        data_fetcher: Gegevensverwerver type
         no_data: Er zijn geen gegevens om weer te geven
         no_report: Er is geen rapport om weer te geven
+        renderer: Renderer type
     review:
-        no_results: Er zijn geen recensies voor dit product.
-        no_reviews: Er zijn geen recensies.
+        no_results: Er zijn geen beoordelingen voor dit product.
+        no_reviews: Er zijn geen beoordelingen.
     security:
         login:
             info: 'Gelieve in te loggen met behulp van e-mail <b>"sylius@example.com"</b> en <b>"sylius"</b> als wachtwoord. <small>Mr. Sylius Demo gids</small>'
@@ -122,7 +129,7 @@ sylius:
             ship: verzend
         update: Bewerken
     stockable:
-        on_hand: Voorraad niveau
+        on_hand: Voorraadniveau
     taxon:
         image: Kies afbeelding
         no_image: Er is geen afbeelding voor deze taxon
@@ -159,6 +166,8 @@ sylius:
         administration_dashboard: Beheer Dashboard
         all_your_addresses: Al uw adressen
         amount: Bedrag
+        archetype: Prototype
+        archetypes: Prototypes
         association: Relatie
         association_types: Relatietypes
         associations: Relaties
@@ -178,6 +187,7 @@ sylius:
         body: Inhoud
         browse_products: Bekijk producten
         build: Bouwen
+        building_product_from_archetype: Nieuw product van prototype
         calculator: Calculator
         cancel: Annuleren
         cancelled: Geannuleerd
@@ -213,12 +223,15 @@ sylius:
         coupons: Coupons
         create: Creëer
         create_a_new_address: Voeg nieuw adres toe
+        create_archetype: Nieuw prototype
+        create_association_type: Nieuw relatietype
         create_contact_request: Contact verzoek aanmaken
         create_contact_topic: Contact thema aanmaken
         create_country: Nieuw land
         create_currency: Valuta maken
         create_customer: Nieuwe klant
         create_group: Nieuwe groep
+        create_imagine_block: Nieuw afbeeldingsblok
         create_locale: Nieuwe locatie
         create_menu: Menu aanmaken
         create_menu_node: Menu node aanmaken
@@ -230,9 +243,12 @@ sylius:
         create_payment: Nieuwe betaling
         create_payment_method: Nieuwe betaalmethode
         create_product: Nieuw product
+        create_product_association: Nieuw productrelatie
+        create_product_association_type: Nieuw productrelatie type
         create_product_attribute: Productattribuut aanmaken
         create_promotion: Nieuwe promotie
         create_redirect_route: Redirect route aanmaken
+        create_report: Nieuw rapport
         create_route: Route aanmaken
         create_shipping_category: Nieuwe verzendcategorie
         create_shipping_method: Nieuwe verzendmethode
@@ -246,9 +262,12 @@ sylius:
         create_variant: Nieuwe variant
         create_zone: Nieuwe zone
         created_at: Aangemaakt op
+        creating_a_new_imagine_block: Nieuw afbeeldingsblolk
         creating_a_new_simple_block: Creëren van een nieuw eenvoudige blok
         creating_a_new_slideshow_block: Creëren van een nieuw slideshow blok
+        creating_a_new_string_block: Nieuw tekstblok
         creating_menu: Menu maken
+        creating_menu_node: Nieuw menu node
         creating_new_page: Nieuwe pagina aanmaken
         creating_redirect_route: Redirect-route creëren
         creating_route: Route creëren
@@ -286,10 +305,14 @@ sylius:
         details: Details
         disable: Uitschakelen
         edit: Bewerken
+        edit_association_type: Bewerk relatietype
         edit_group: Bewerk groep
         edit_locale: Bewerk locatie
         edit_my_address: Bewerk mijn adres
+        edit_report: Rapport bewerken
         edit_your_personal_information: Bewerk uw persoonlijke informatie
+        editing_archetype: Bewerk prototype
+        editing_attribute: Bewerk attribuut
         editing_channel: Kanaal bewerken
         editing_contact_request: Contact verzoek bewerken
         editing_contact_topic: Contact thema bewerken
@@ -298,7 +321,9 @@ sylius:
         editing_currency: Valuta bewerken
         editing_customer: Klant bewerken
         editing_email: E-mail bewerken
+        editing_imagine_block: Bewerk afbeeldingsblok
         editing_menu: Menu bewerken
+        editing_menu_node: Bewerk menu node
         editing_option: Optie bewerken
         editing_order: Bestelling bewerken
         editing_page: Pagina bewerken
@@ -308,6 +333,7 @@ sylius:
         editing_product: Product bewerken
         editing_promotion: Promotie bewerken
         editing_redirect_route: Redirect route bewerken
+        editing_review: Bewerk beoordeling
         editing_role: Rol bewerken
         editing_route: Route bewerken
         editing_shipment: Verzending bewerken
@@ -315,6 +341,7 @@ sylius:
         editing_shipping_method: Bewerk verzendmethode
         editing_simple_block: Bewerk eenvoudige blok
         editing_slideshow_block: Slideshow blok bewerken
+        editing_string_block: Bewerk tekstblok
         editing_tax_category: Bewerk belastingcategorie
         editing_taxon: Taxon bewerken
         editing_user: Gebruiker bewerken
@@ -354,8 +381,11 @@ sylius:
         hide_deleted: Verberg verwijderd
         hostname: Hostnaam
         id: ID
+        identifier: Identificatie
         images: Afbeeldingen
+        imagine_blocks: Afbeeldingsblokken
         included_in_price: Inbegrepen in de prijs
+        index_metadata: Metagegevens
         index_of_all_configured_locales: Index van alle ingestelde locaties
         information: Informatie
         inventory_here_you_can_see_current_stock_levels: 'Voorraad<small>Hier kunt u de huidige voorraadniveaus zien</small>'
@@ -364,6 +394,7 @@ sylius:
         inventory_tracking: Voorraadbeheer
         invoice: Factuur
         is_enabled: Is ingeschakeld
+        items: Items
         items_total: Artikelen Totaal
         label: Label
         last_login: Laatst ingelogd
@@ -377,8 +408,10 @@ sylius:
         locales: Locaties
         lock: Vergrendelen
         locked: Vergrendeld
+        logged_in_as: 'Ingelogd als %username%'
         login: Inloggen
         login_button: Inloggen
+        login_sylius_store: 'Login <small>Sylius store</small>'
         logout: Uitloggen
         main_taxon: Hoofdcategorie
         male: Man
@@ -389,11 +422,13 @@ sylius:
         manage_countries: Beheer landen
         manage_customers: Klanten beheren
         manage_emails: E-mails beheren
+        manage_metadata: Beheer metagegevens
         manage_options: Productopties
         manage_orders: Bestellingen beheren
         manage_payments: Betalingen beheren
         manage_products: Beheer producten
         manage_promotions: Promoties beheren
+        manage_reviews: Beheer van beoordelingen
         manage_shipments: Verzendingen beheren
         manage_shipping_categories: Beheer verzendcategorieën
         manage_shipping_methods: Beheer verzendmethodes
@@ -414,6 +449,7 @@ sylius:
         n_a: N/B
         name: Naam
         new: Nieuw
+        new_archetype: Nieuw prototype
         new_comment_posted_on_order: Nieuwe commentaar gepost op bestelling
         new_contact_request: Nieuwe contact verzoek
         new_contact_topic: Nieuw contact thema
@@ -448,6 +484,7 @@ sylius:
         no_default_billing_address: Geen standaard factuuradres
         no_default_shipping_address: Geen standaard verzendadres
         no_description: Geen omschrijving
+        no_pricing_configuration: Geen prijsstelling geconfigureerd
         no_results: Geen resultaten
         no_shipping_category: Geen verzendcategorie
         no_short_description: '<i>Geen korte omschrijving</i>'
@@ -457,6 +494,8 @@ sylius:
         notify_customer: Klant informeren
         number: Nummer
         number_of_orders: Aantal bestellingen
+        oauth_provider: OAuth Provider
+        on_hold: In de wacht
         options: Opties
         order: Bestelling
         order_comment_name: Order Opmerkingen
@@ -496,15 +535,21 @@ sylius:
         priority: Prioriteit
         processing: In Behandeling
         product: Product
+        product_archetypes: Product prototypes
         product_association_index: Relatie
         product_association_type_index: Associatietype
+        product_association_types: Product relatietypes
+        product_associations: Product relaties
         product_attributes: Productattributen
         product_details_viewing_product_product: 'Product details <small>"<strong>%product%</strong>"</small>'
         product_options: Productopties
+        product_review: Productbeoordeling
+        product_reviews: Productbeoordelingen
         products: Producten
         products_categorized_as_name: 'Producten in "%name%"'
         products_categorized_under_taxon_taxon: 'Producten<small>Gecategoriseerd onder "%taxon%" taxon</small>'
         products_index_of_all_products_in_your_store: 'Producten <small>Index van alle producten in uw winkel</small>'
+        profile: Profiel
         promotion_coupons: Coupons
         promotion_details: Promotie details
         promotion_total: Korting totaal
@@ -517,6 +562,7 @@ sylius:
         recent_customers: Recente klanten
         recent_orders: Recente bestellingen
         recent_users: Recente gebruikers
+        redirect_routes: Redirect routes
         refunded: Terugbetaald
         register: Registreren
         register_button: Registreren
@@ -524,12 +570,20 @@ sylius:
         registration_date: Aanmelddatum
         release_inventory: Voorraad vrijgeven
         remember_me: Onthoud mijn gegevens
+        remove_attribute: Attribuut verwijderen
+        report_details: Rapport details
         reports: Rapporten
+        reset: Reset
+        reset_button: Reset
+        reset_password: Reset wachtwoord
+        restore: Terugzetten
         restricted_zone: Beperkte zone
         retail_price: Retail prijs
         return: Retourneren
         returned: Geretourneerd
         revert: Terugkeren
+        review_details: Beoordelingsdetails
+        reviews: Beoordelingen
         roles: Rollen
         routes: Routes
         rules: Regels
@@ -561,6 +615,8 @@ sylius:
         shop_by: Filter op
         show_all: Toon alles
         show_deleted: Toon verwijderd
+        show_in_store: Toon in winkel
+        show_metadata: Toon metadata
         sign_in_to_the_store_or_create_new_account: 'Inloggen <small>of maak een nieuw account</small>'
         simple_blocks: Eenvoudige blokken
         sku: SKU
@@ -575,6 +631,7 @@ sylius:
         subject: Onderwerp
         success: Succes
         support: Helpdesk
+        sylius_logo: Sylius
         tax_categories: Belasting Tarieven
         tax_category: Belasting categorie
         tax_rate_details: Belastingtarief details
@@ -584,8 +641,11 @@ sylius:
         taxation_settings: Belasting Instellingen
         taxes: Belastingen
         taxons: Taxons
+        thank_you_for_your_order: Bedankt voor uw bestelling
         theme: Thema
+        there_are_no_archetypes_defined: Er zijn geen archetypen gedefinieerd
         there_are_no_attributes_configured: Er zijn geen attributen geconfigureerd
+        there_are_no_blocks_to_display: Er zijn geen blokken weer te geven
         there_are_no_channels_configured: Er zijn geen kanalen geconfigureerd
         there_are_no_contact_requests_to_display: Er zijn geen contact verzoeken om weer te geven
         there_are_no_contact_topics_to_display: Er zijn geen contact onderwerpen weer te geven
@@ -597,6 +657,11 @@ sylius:
         there_are_no_groups_to_display: Er zijn geen groepen om weer te geven
         there_are_no_images_for_this_product: Er zijn geen afbeeldingen voor dit product
         there_are_no_inventory_items_to_display: Er zijn geen voorraadgegevens om weer te geven
+        there_are_no_inventory_units_to_display: Er zijn geen inventaris eenheden om weer te geven
+        there_are_no_locales_configured: Er zijn geen taalinstellingen geconfigureerd
+        there_are_no_logged_events_to_display: Er zijn geen geregistreerde events om weer te geven
+        there_are_no_menu_nodes_to_display: Er zijn geen menu nodes om weer te geven
+        there_are_no_menus_to_display: "Er zijn geen menu's om weer te geven"
         there_are_no_options_configured: Er zijn geen opties geconfigureerd
         there_are_no_options_for_this_product: Er zijn geen opties voor dit product
         there_are_no_orders_for_this_customer_to_display: Er zijn geen orders voor deze klant om weer te geven
@@ -606,14 +671,23 @@ sylius:
         there_are_no_permissions_defined: Er zijn geen machtigingen gedefinieerd
         there_are_no_products_to_display: Er zijn geen producten om weer te geven
         there_are_no_promotions_configured: Er zijn geen promoties geconfigureerd
+        there_are_no_redirect_routes_to_display: Er zijn geen routes om weer te geven
+        there_are_no_reports_created: Er zijn geen rapporten gemaakt
+        there_are_no_roles_defined: Er zijn geen rollen gedefinieerd
+        there_are_no_routes_to_display: Er zijn geen routes om weer te geven
         there_are_no_shipments_to_display: Er zijn geen verzendingen om weer te geven
         there_are_no_shipping_categories_configured: Er zijn geen verzendcategorieën geconfigureerd
         there_are_no_shipping_methods_configured: Er zijn geen verzendmethodes geconfigureerd
         there_are_no_tax_categories_configured: Er zijn geen belastingcategorieën geconfigureerd
+        there_are_no_tax_rates_configured: Er zijn geen belastingtarieven geconfigureerd
         there_are_no_taxons_for_this_product: Er zijn geen taxons voor dit product
+        there_are_no_taxons_to_display: Er zijn geen taxons gevonden
         there_are_no_users_to_display: Er zijn geen gebruikers om weer te geven
+        there_are_no_variants_to_display: Er zijn geen varianten om weer te geven
         there_are_no_zones_configured: Er zijn geen zones geconfigureerd
+        there_is_no_main_taxon_for_this_product: Er is geen categorie voor dit product
         this_months_statistics: Statistieken van deze maand
+        this_product_has_no_attributes_defined: Dit product heeft geen kenmerken
         title: Titel
         topic: Onderwerp
         total: Totaal
@@ -628,6 +702,8 @@ sylius:
         unit_price: Stukprijs
         unknown: Onbekend
         unlock: Ontgrendelen
+        update: Bewerken
+        update_product_association_type: Update van product koppelingstype
         updating_tax_rate: Belastingtarief bewerken
         usage_limit: Gebruikslimiet
         used: Gebruikt
@@ -635,22 +711,32 @@ sylius:
         user_details: Gebruikersdetails
         username: Gebruikersnaam
         users_list_of_all_users_registered_in_store: 'Gebruikers <small>Lijst van alle gebruikers in de winkel</small>'
+        values: Waarden
         variant_selection_method: Variant selectiemethode
         variants: Varianten
         view: Weergave
         view_more: Bekijk details
+        view_product_details: 'Bekijk %product% details'
         void: Leeg
+        volume_based_pricing: Volume gebaseerde prijzen
         warning: Waarschuwing
+        welcome: Welkom
+        welcome_to_our_store: Welkom in jouw winkel
         welcome_to_your_space: Welkom in uw account
+        "yes": Ja
         you_are_customer_since: U bent klant sinds
+        you_have_no_addresses_defined: U heeft geen adressen gedefinieerd
         you_have_no_new_orders: U heeft geen nieuwe bestellingen
         your_last_5_orders: Uw laatste 5 bestellingen
         your_order_has_been_shipped: Uw bestelling is verzonden
         your_products: Uw producten
         zone: Zone
+        zone_details: Zone details
         zones: Zones
     user:
         general_info: 'Gebruiker "%username%" algemene informatie'
         impersonate: Inloggen als gebruiker
+        oauth:
+            none: Geen OAuth accounts verbonden
     variant:
         stock: Huidige voorraad

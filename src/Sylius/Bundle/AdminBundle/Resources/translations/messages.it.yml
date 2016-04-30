@@ -6,6 +6,9 @@ sylius:
         admin:
             main:
                 catalog:
+                    header: Catalogo
+                    taxons: Taxons
+                    options: Opzioni
                     attributes: Attributi
                 configuration:
                     channels: Canali

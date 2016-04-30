@@ -18,6 +18,6 @@ sylius:
             not_blank: Vul uw bericht in.
     contact_topic:
         title:
-            not_blank: Vul onderwerp in.
+            not_blank: Vul een onderwerp in.
             min_length: Uw titel is te kort.
             max_length: Uw titel is te lang.

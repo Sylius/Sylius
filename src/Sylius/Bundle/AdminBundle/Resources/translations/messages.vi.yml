@@ -5,6 +5,8 @@ sylius:
     menu:
         admin:
             main:
+                catalog:
+                    options: Tùy chọn
                 configuration:
                     channels: Kênh
                     countries: Quốc gia
