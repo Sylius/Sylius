@@ -5,7 +5,7 @@ Feature: Text product attribute edition
     I want to be able to edit a text product attribute
 
     Background:
-        Given the store has locale "English (United States)"
+        Given the store is available in "English (United States)"
         And I am logged in as an administrator
 
     @ui

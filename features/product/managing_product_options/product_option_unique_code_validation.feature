@@ -5,7 +5,7 @@ Feature: Product option unique code validation
     I want to be prevented from adding two product options with the same code
 
     Background:
-        Given the store operates on a single channel in "France"
+        Given the store is available in "English (United States)"
         And the store has a product option "T-Shirt size" with a code "t_shirt_size"
         And I am logged in as an administrator
 

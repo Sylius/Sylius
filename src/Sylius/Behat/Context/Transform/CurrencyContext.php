@@ -48,13 +48,21 @@ final class CurrencyContext implements Context
      */
     public function getCurrencyByName($currencyName)
     {
-        $currencyCode = $this->currencyNameConverter->convertToCode($currencyName);
-        $currency = $this->currencyRepository->findOneBy(['code' => $currencyCode]);
+        $currency = $this->currencyRepository->findOneBy(['code' => $this->getCurrencyCodeByName($currencyName)]);
         Assert::notNull(
             $currency,
             sprintf('Currency with name %s does not exist.', $currencyName)
         );
 
         return $currency;
+    }
+
+    /**
+     * @Transform :currencyCode
+     * @Transform :secondCurrencyCode
+     */
+    public function getCurrencyCodeByName($currencyName)
+    {
+        return $this->currencyNameConverter->convertToCode($currencyName);
     }
 }

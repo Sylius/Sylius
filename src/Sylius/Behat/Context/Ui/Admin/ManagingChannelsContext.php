@@ -355,25 +355,25 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
-     * @When I make it available in :language
+     * @When I make it available in :locale
      */
-    public function iMakeItAvailableIn($language)
+    public function iMakeItAvailableIn($locale)
     {
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm($this->createPage, $this->updatePage);
 
-        $currentPage->chooseLocale($language);
+        $currentPage->chooseLocale($locale);
     }
 
     /**
-     * @Then the channel :channel should be available in :language
+     * @Then the channel :channel should be available in :locale
      */
-    public function theChannelShouldBeAvailableIn(ChannelInterface $channel, $language)
+    public function theChannelShouldBeAvailableIn(ChannelInterface $channel, $locale)
     {
         $this->updatePage->open(['id' => $channel->getId()]);
 
         Assert::true(
-            $this->updatePage->isLocaleChosen($language),
-            sprintf('Language %s should be selected but it is not', $language)
+            $this->updatePage->isLocaleChosen($locale),
+            sprintf('Language %s should be selected but it is not', $locale)
         );
     }
 

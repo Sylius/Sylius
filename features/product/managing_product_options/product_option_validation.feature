@@ -5,7 +5,7 @@ Feature: Product option validation
     I want to be prevented from adding it without specifying required fields
 
     Background:
-        Given the store operates on a single channel in "France"
+        Given the store is available in "English (United States)"
         And the store has a product option "T-Shirt color" with a code "t_shirt_color"
         And I am logged in as an administrator
 

@@ -5,7 +5,9 @@ Feature: Browsing shipping methods
     I want to be able to browse list of them
 
     Background:
-        Given the store operates on a single channel in "France"
+        Given the store is available in "English (United States)"
+        And the store has a base currency "Euro"
+        And there is a zone "EU" containing all members of the European Union
         And the store allows shipping with "UPS Carrier" and "FedEx Carrier"
         And I am logged in as an administrator
 

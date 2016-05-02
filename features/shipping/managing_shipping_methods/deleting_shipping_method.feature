@@ -5,7 +5,9 @@ Feature: Deleting a shipping method
     I want to be able to delete a shipping method
 
     Background:
-        Given the store operates on a single channel in "France"
+        Given the store is available in "English (United States)"
+        And the store has a base currency "Euro"
+        And there is a zone "EU" containing all members of the European Union
         And the store allows shipping with "UPS Ground"
         And I am logged in as an administrator
 

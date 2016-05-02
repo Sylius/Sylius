@@ -5,7 +5,8 @@ Feature: Shipping method flat rate per unit calculator validation
     I want to be prevented from adding it without specifying amount
 
     Background:
-        Given the store operates on a single channel in "France"
+        Given the store is available in "English (United States)"
+        And the store has a base currency "Euro"
         And there is a zone "EU" containing all members of the European Union
         Given I am logged in as an administrator
 

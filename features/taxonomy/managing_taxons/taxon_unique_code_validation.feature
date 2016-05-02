@@ -5,7 +5,7 @@ Feature: Taxon unique code validation
     I want to be prevented from adding two taxons with same code
 
     Background:
-        Given the store operates on a single channel in "France"
+        Given the store is available in "English (United States)"
         And the store classifies its products as "T-Shirts"
         And I am logged in as an administrator
 
