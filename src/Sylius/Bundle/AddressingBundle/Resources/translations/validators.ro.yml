@@ -9,6 +9,7 @@ sylius:
             not_blank: Vă rugăm să completați orașul.
         country:
             not_blank: Vă rugăm să alegeți țara.
+            disabled: Țara aleasă este dezactivată. Vă rugăm să alegeţi una diferită.
         first_name:
             max_length: Prenumele nu poate depăși 255 de caractere|Prenumele nu poate depăși 255 de caractere.
             min_length: Prenumele trebuie să conțină cel puţin 2 caractere|Prenumele trebuie să conțină cel puţin 2 caractere.
@@ -28,14 +29,32 @@ sylius:
             min_length: Adresa trebuie să conţină cel puţin 2 caractere|Adresa trebuie să conţină cel puţin 2 caractere.
             not_blank: Vă rugăm să completați adresa.
         not_shippable: Această adresă nu este o destinaţie de livrare validă.
+    country:
+        code:
+            not_blank: Vă rugăm să completați codul ISO a ţării.
+            unique: Codul ISO al țării trebuie să fie unic.
     province:
+        code:
+            min_length: Codul județului trebuie să conţină cel puţin 5 caractere|Codul județului trebuie să conţină cel puţin 5 caractere.
+            not_blank: Vă rugăm să introduceţi codul de provincie.
+            regex: Codul provinciei ar trebui să aibă următorul format XX-XX (ex. RO-BV).
+            unique: Codul provinciei trebuie să fie unic.
         name:
             max_length: Numele județului nu poate depăși 255 de caractere|Numele județului nu poate depăși 255 de caractere.
             min_length: Numele județului trebuie să conţină cel puţin 2 caractere|Numele județului trebuie să conţină cel puţin 2 caractere.
             not_blank: Vă rugăm să completați numele județului.
+            unique: Numele provinciei trebuie să fie unic.
     zone:
+        code:
+            not_blank: Vă rugăm să introduceţi codul de zonă.
+            unique: Codul de zonă trebuie să fie unic.
         members:
             min_count: 'Vă rugăm să adăugaţi cel puţin {{ limit }} membri de zonă.'
         name:
             max_length: Numele zonei nu poate depăși 255 de caractere|Numele zonei nu poate depăși 255 de caractere.
+            min_length: Numele trebuie să conțină cel puţin 2 caractere|Numele trebuie să conțină cel puţin 2 caractere.
             not_blank: Vă rugăm să completați numele zonei.
+    zone_member:
+        code:
+            not_blank: Vă rugăm să alegeţi membru zonă.
+        unique: Membru de zonă ales se află deja în această zonă.

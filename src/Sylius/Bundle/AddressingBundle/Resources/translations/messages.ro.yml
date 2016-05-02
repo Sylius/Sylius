@@ -21,6 +21,7 @@ sylius:
             enabled: Activat
         province:
             name: Nume
+            abbreviation: Abreviere
             select: Selectaţi
         zone:
             add_member: Adaugă membru
