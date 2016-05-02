@@ -93,6 +93,11 @@ sylius:
     page:
         no_route: Su contenido no aparecerá en la interfaz si no se ha definido ninguna ruta
         publishable: Publicado
+    payment:
+        transition:
+            cancel: cancelar
+            complete: completar
+            refund: reembolsar
     pricing:
         volume_based:
             max: Volumen máximo
@@ -100,6 +105,7 @@ sylius:
     promotion_coupon:
         generate: Generar cupones
         index: Listar cupones
+        total_results: 'Total: %total%'
     report:
         data_fetcher: Tipo de obtención de datos
         no_data: No hay datos para mostrar
@@ -114,6 +120,11 @@ sylius:
             no_account: Sin cuenta todavía
     shipment:
         no_items: No hay elementos para mostrar
+        transition:
+            cancel: cancelar
+            prepare: preparar
+            return: devolver
+            ship: enviar
         update: Editar
     stockable:
         on_hand: Nivel de existencias
@@ -179,6 +190,7 @@ sylius:
         cancel: Cancelar
         cancelled: Cancelado/a
         cart_locked: Carrito bloqueado
+        cart_summary: Resumen del carrito
         categorization: Categorización
         category: Categoria
         change_password: Cambiar mi contraseña
@@ -342,6 +354,7 @@ sylius:
         end_date: Fecha fin
         ends_at: Fecha de fin
         enjoy_all_the_features_that_are_available_on_your_personal_space_to_view_track_and_manage_all_your_data: Disfrute de todas las características disponibles en su espacio personal para examinar, controlar y gestionar todos sus datos
+        error: Error
         exchange_rate: Tasa o tipo de cambio
         existing_customer: Cliente existente
         expires_at: Caduca en
@@ -431,6 +444,7 @@ sylius:
         modified: Fecha de modificacion
         move_down: Bajar
         move_up: Subir
+        n_a: N/D
         name: Nombre
         new: Nuevo
         new_archetype: Nuevo prototipo
@@ -439,6 +453,7 @@ sylius:
         new_contact_topic: Nuevo tema de contacto
         new_country: Nuevo país
         new_currency: Nueva moneda
+        new_customer: Nuevo cliente
         new_order: Nuevo pedido
         new_password: Nueva contraseña
         new_payment: Nuevo pago
@@ -460,6 +475,7 @@ sylius:
         new_zone: Nueva zona
         newest_products: Novedades
         next: Siguiente
+        "no": 'No'
         no_account: Sin cuenta todavía
         no_association_types_to_display: No hay tipos de asociación definidos
         no_comment: No hay comentarios
@@ -613,6 +629,7 @@ sylius:
         subject: Asunto
         success: Exito
         support: Soporte
+        sylius_logo: Sylius
         tax_categories: Categorías de impuestos
         tax_category: Categoría de impuestos
         tax_rate_details: Mostrar
@@ -671,6 +688,7 @@ sylius:
         this_product_has_no_attributes_defined: Este producto no tiene atributos definidos
         title: Título
         topic: Asunto
+        total: Total
         total_orders: Pedidos
         total_qty: Cant total
         total_registrations: Usuarios
@@ -703,6 +721,7 @@ sylius:
         welcome: Bienvenido/a
         welcome_to_our_store: Bienvenido a nuestra tienda
         welcome_to_your_space: Bienvenido a tu espacio
+        "yes": Sí
         you_are_customer_since: Eres cliente desde
         you_have_no_addresses_defined: No tiene ninguna dirección definida
         you_have_no_new_orders: No tiene pedidos nuevos

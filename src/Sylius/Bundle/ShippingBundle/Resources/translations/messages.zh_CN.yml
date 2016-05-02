@@ -24,3 +24,4 @@ sylius:
             enabled: 已启用
             name: 名称
             tax_category: 税类别
+            translations: 翻译
