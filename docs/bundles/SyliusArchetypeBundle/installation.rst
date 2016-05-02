@@ -41,8 +41,8 @@ Don't worry, everything was automatically installed via Composer.
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
 
             new Sylius\Bundle\AttributeBundle\SyliusAttributeBundle(),
-            new Sylius\Bundle\AttributeBundle\SyliusVariationBundle(),
-            new Sylius\Bundle\AttributeBundle\SyliusArchetypeBundle(),
+            new Sylius\Bundle\VariationBundle\SyliusVariationBundle(),
+            new Sylius\Bundle\ArchetypeBundle\SyliusArchetypeBundle(),
             new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
 
             // Other bundles...
