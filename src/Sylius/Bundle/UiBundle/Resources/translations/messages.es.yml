@@ -10,15 +10,18 @@ sylius:
         option:
             presentation: Presentación
     ui:
+        all: Todos
         actions: Acciones
         administration_panel_login: Panel de administración
         an_error_occurred: Se ha producido un error
         are_your_sure_you_want_to_perform_this_action: ¿Está seguro que quiere realizar esta acción?
+        available_for_channels: Disponible para canales
         cancel: Cancelar
         category_requirements: Requisitos de la categoría
         charges_and_taxes: Tasas e impuestos
         clear_filters: Borrar filtros
         color: Color
+        configure_channels_available_in_your_store: Configurar canales disponibles en tu tienda
         confirm_your_action: Confirmar esta acción
         contains: Contiene
         countries: Países
@@ -32,10 +35,19 @@ sylius:
         description: Descripción
         disabled: Deshabilitado
         edit: Editar
+        edit_channel: Editar canal
         edit_country: Editar país
+        edit_currency: Editar moneda
+        edit_customer: Editar cliente
+        edit_payment_method: Editar método de pago
+        edit_product_option: Editar opción de producto
+        edit_product_attribute: Editar atributo de producto
         edit_promotion: Editar promoción
+        edit_shipping_method: Editar método de envío
         edit_tax_category: Editar categoría de impuesto
         edit_tax_rate: Editar tasa impositiva
+        edit_taxon: Editar taxonomía
+        edit_zone: Editar zona
         empty: Vaciar
         enabled: Activado
         ends_with: Termina en
@@ -45,22 +57,33 @@ sylius:
         info: Información
         last_updated: Última actialización
         locales: Idiomas
+        manage_attributes_of_your_products: Administrar atributos de los productos
+        manage_currencies_available_in_the_store: Administrar monedas disponibles en tu tienda
+        manage_your_customers: Administrar sus clientes
         manage_languages_available_in_the_store: Administrar idiomas disponibles en la tienda
+        manage_configuration_options_of_your_products: Administrar opciones de configuración para sus productos
+        manage_payment_methods_available_to_your_customers: Administrar métodos de pago disponibles para sus clientes
         manage_shipping_destinations: Gestionar destinos de envío
+        manage_categorization_of_your_products: Administrar categorización de productos
         manage_shipping_methods_for_your_store: Manejar métodos de envío para su tienda
         manage_taxation_of_your_products: Administrar impuestos de sus productos
+        manage_geographical_zones: Administrar zonas geográficas
+        manage_discounts_and_promotional_campaigns: Administrar descuentos y campañas promocionales
         new: Nuevo
+        new_channel: Nuevo canal
         new_country: Nuevo país
         new_currency: Nueva moneda
         new_locale: Nueva traducción
         new_tax_category: Nueva categoría de impuesto
         "no": false
+        no_account: sin cuenta
         no_results_to_display: No hay resultados para mostrar
         not_contains: No contiene
         not_empty: No está vacío
         not_in: No en
         or: o
         powered_by: Funciona con
+        promotion_configuration: Configuración de la promoción
         promotion_information: Información de la promoción
         save_changes: Guardar cambios
         shipping_methods: Métodos de envío
@@ -73,3 +96,16 @@ sylius:
         tax_categories: Categorías de impuestos
         values: Valores
         "yes": true
+        total_records: Número de registros
+        jump_to_page: Ir a la página
+        go: Ir
+        unlimited: Ilimitado
+        no_requirement: No necesario
+        zone_consisting_of_countries: Zona consistente en paises
+        zone_consisting_of_provinces: Zona consistente en provincias
+        zone_consisting_of_other_zones: Zona consistente en otras zonas
+        no_theme: Sin tema
+        usage: Utilización
+        customer_can_login_to_the_store: Los clientes pueden acceder a la tienda
+        account_credentials: Credenciales de la cuenta
+        extra_information: Información extra
