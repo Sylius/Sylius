@@ -22,25 +22,34 @@ sylius:
             shipping_method: 配送方式
         promotion:
             channels: 频道
+        coupon:
+            per_customer_usage_limit: 每个客户使用限制
         group:
             name: 名称
             roles: 角色
         channel:
             taxonomies: 分类
+            locale_default: 默认区域
             locales: 区域设置
             currency_default: 默认货币：
+            currencies: 货币
             shipping_methods: 发货方式
             payment_methods: 支付方式
+            theme: 主题
+            hostname: 主机名
         image:
             file: 图像
         locale:
             code: 代码
             enabled: 已启用
         order_filter:
+            created_at_from: 在之后创建
+            created_at_to: 在之前创建
             number: 数量
             total_from: 从
             total_to: 到
             payment_state: 付款状态
+            channel: 全部频道
         page:
             body: 正文
             id: ID
@@ -50,6 +59,7 @@ sylius:
             shipping_category: 送货类别
             short_description: 简短说明：
             variant_selection_method: 变量选择方法
+            main_taxon: 主分类
         product_filter:
             name: 名称
             sku: SKU
@@ -62,17 +72,25 @@ sylius:
                 meta_description: META描述
                 meta_keywords: Meta关键字：
                 title: 页标题
+                tracking_code:
+                    Tracking code (for example: Google Analytics 代码
             taxation:
                 default_tax_zone: 默认税区
+                default_tax_calculation_strategy: 默认税计算策略
+            security:
+                enabled: 启用？
         shipment_filter:
             created_at_from: 从
             created_at_to: 到
             number: 订单编号
             shipping_address: 发货到名称
+            channel: 全部频道
         payment_filter:
             created_at_from: 从
             created_at_to: 到
             number: 订单编号
+            billing_address: 帐单收件人姓名
+            channel: 全部频道
         shipping_method:
             zone: 区域
         taxon:
@@ -98,20 +116,38 @@ sylius:
             images: 图像
             on_hand: 当前货架
             price: 价格
+            original_price: 原价
             sku: SKU
             weight: 重量
             width: 宽度
         attribute:
             product_attribute_value:
+                attribute: 属性：
                 value: 值
         guest:
             email: 电子邮件
+        product_association:
+            product: 相关的产品
+            type: 关联类型
         product_association_type:
             name: 名称
         promotion_rule:
             contains_taxon:
+                taxon: 分类
                 count: 计数
             taxon:
                 taxons: 分类
             total_of_items_from_taxon:
+                taxon: 分类
                 amount: 金额
+    email:
+        order_confirmation:
+            name: 订单确认
+        order_comment:
+            name: 订单的评论
+        shipment_confirmation:
+            name: 发货单确认
+        user_confirmation:
+            name: 用户确认
+        password_reset:
+            name: 重置密码

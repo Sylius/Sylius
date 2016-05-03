@@ -6,18 +6,24 @@ sylius:
         admin:
             main:
                 catalog:
+                    header: 目录
                     taxons: 分类
                     options: 选项
+                    attributes: 属性
                 configuration:
                     channels: 频道
                     countries: 国家
+                    currencies: 货币
                     header: 配置
                     locales: 区域设置
                     payment_methods: 付款方法
                     shipping_methods: 发货方式
+                    tax_categories: 税类别
                     tax_rates: 税率
                     zones: 区域
                 marketing:
+                    header: 市场营销
                     promotions: 促销活动
                 customers:
                     header: 客户
+                    customers: 客户

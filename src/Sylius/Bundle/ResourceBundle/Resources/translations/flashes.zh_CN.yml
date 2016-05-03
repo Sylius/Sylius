@@ -8,3 +8,8 @@ sylius:
         delete: '%resource% 删除成功。'
         move: '%resource% 移动成功。'
         generate: '%resource%s 已生成成功。'
+        revert: '%resource% 已经被成功地还原。'
+        restore_deleted: '%resource% 已经被成功地还原。'
+        enable: '%resource% 已成功启用。'
+        disable: '%resource% 已被成功地禁用。'
+        delete_error: '不能删除，%resource% 正在使用中。'
