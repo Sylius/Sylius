@@ -12,6 +12,8 @@ sylius:
         gd: GD
         help: '安装和启用 %extension%扩展。'
         iconv: Iconv
+        exif: Exif
+        fileinfo: Fileinfo
         icu: ICU
         intl: Intl
         json_encode: JSON
@@ -25,15 +27,26 @@ sylius:
         simplexml_import_dom: SimpleXML
         token_get_all: Tokenizer
     filesystem:
+        header: 文件系统
+        cache:
+            header: 缓存
+            help:
+                To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
         exists: 存在
+        logs:
+            header: 日志
+            help:
+                To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
         not_exists: 不存在
         not_writable: 不可写
         parameters:
+            header: parameters.yml
             help:
                 To set permissions run: 'sudo chmod a + w %path%'
         vendors: 供应商
         writable: 可写
     settings:
+        header: PHP 版本和设置
         any: 任何
         detect_unicode: detect_unicode
         magic_quotes_gpc: magic_quotes_gpc
@@ -46,6 +59,7 @@ sylius:
         short_open_tag: 短的开放标签
         timezone: 时区
         timezone_deprecated:
+            header: 过时的时区
             help: '时区%timezone%已被否决。修复您的 php.ini 文件 （不推荐使用的时区 http://php.net/manual/en/timezones.others.php 的列表）。'
         version: PHP 版本
         version_recommanded: 推荐的 PHP 版本

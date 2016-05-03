@@ -643,7 +643,7 @@ sylius:
         taxons: Taxons
         thank_you_for_your_order: Bedankt voor uw bestelling
         theme: Thema
-        there_are_no_archetypes_defined: Er zijn geen archetypen gedefinieerd
+        there_are_no_archetypes_defined: Er zijn geen prototypes gedefinieerd
         there_are_no_attributes_configured: Er zijn geen attributen geconfigureerd
         there_are_no_blocks_to_display: Er zijn geen blokken weer te geven
         there_are_no_channels_configured: Er zijn geen kanalen geconfigureerd

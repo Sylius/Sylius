@@ -6,4 +6,5 @@ sylius:
         currency:
             exchange_rate: 汇率
             enabled: 已启用
+            base: 基础货币
             code: 名称

@@ -5,13 +5,34 @@ sylius:
     metadata:
         type:
             none: ' -无- '
+            twitter_summary_card: 摘要
+            twitter_summary_large_image_card: 摘要与大图片
             twitter_player_card: 玩家
             twitter_app_card: 程序
         page:
             title: 标题
             description: 描述
+            keywords: 关键字
+            twitter: Twiter卡
         twitter:
             title: 标题
             description: 描述
+            site: 网站
+            site_id: 站点ID
+            creator: 创建人
+            creator_id: 创建者 ID
             image: 图像
             player: 玩家
+            player_width: 播放器宽度
+            player_height: 播放器高度
+            player_stream: 播放器流媒体
+            player_stream_content_type: 播放器流媒体内容类型
+            app_name_iphone: Iphone 应用程序名称
+            app_id_iphone: Iphone 应用程序 ID
+            app_url_iphone: Iphone 应用程序 url
+            app_name_ipad: Ipad 应用程序名称
+            app_id_ipad: Ipad 应用程序 ID
+            app_url_ipad: Ipad 应用程序 url
+            app_name_googleplay: 谷歌应用市场应用程序名称
+            app_id_googleplay: 谷歌应用市场应用程序 ID
+            app_url_googleplay: 谷歌应用市场应用程序 url

@@ -6,15 +6,21 @@ sylius:
         product:
             name: 名称
             description: 描述
+            attributes: 属性
             options: 选项
             meta_keywords: Meta关键字：
             meta_description: META描述
             taxons: 分类
         product_variant:
             available_on: 可用
+            available_until: 有效期至
         product_archetype:
             name: 名称
             parent: 上一级
+            attributes: 属性
             options: 选项
         association_type:
             name: 名称
+        association:
+            type: 关联类型
+            product: 相关的产品
