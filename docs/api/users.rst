@@ -244,7 +244,7 @@ The successful response will contain the user object with a confirmation token a
         "locked": false,
         "password_requested_at": "2014-12-08T14:19:26+0000",
         "roles": [
-            "ROLE_SYLIUS_ADMIN"
+            "ROLE_ADMINISTRATION_ACCESS"
         ],
         "username": "sylius@example.com",
         "username_canonical": "sylius@example.com"
