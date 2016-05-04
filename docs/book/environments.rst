@@ -27,19 +27,6 @@ To run Sylius console in ``prod`` environment, add the following parameters to e
 
 You can access the website in production mode via the ``/app.php`` file in your website root (``web/``) or just ``/`` path. (on Apache)
 
-Staging
--------
-
-Staging environment or ``staging`` should be your before-production environment. It is very similar to the production env, except that it redirects e-mails to your configured address and uses test APIs (payment etc.) wherever possible.
-
-To run Sylius console in ``staging`` environment, add the following parameters to every command call:
-
-.. code-block:: bash
-
-   $ app/console --env=staging --no-debug cache:clear
-
-You can access the website in staging mode via the ``/app_staging.php`` file in the ``web/`` directory. (under your website root)
-
 Test
 ----
 
