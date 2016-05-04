@@ -76,6 +76,7 @@ sylius:
                     Tracking code (for example: Codice Google Analytics)
             taxation:
                 default_tax_zone: Aliquota predefinita
+                default_tax_calculation_strategy: Strategia di calcolo imposta predefinito
             security:
                 enabled: Abilitare?
         shipment_filter:
@@ -132,10 +133,12 @@ sylius:
             name: Nome
         promotion_rule:
             contains_taxon:
+                taxon: Tipologia
                 count: Conta
             taxon:
                 taxons: Taxons
             total_of_items_from_taxon:
+                taxon: Tipologia
                 amount: Valore
     email:
         order_confirmation:
@@ -146,3 +149,5 @@ sylius:
             name: Informazioni di spedizione
         user_confirmation:
             name: "Conferma dell'utente"
+        password_reset:
+            name: Reimpostazione password

@@ -16,6 +16,9 @@ sylius:
             not_blank: Inserisci la password.
             mismatch: Le password immesse non corrispondono
             wrong_current: La Password fornita è diversa da quella attuale.
+        password:
+            min: 'La password deve essere almeno di {{ limit }} caratteri.'
+            max: 'Password non deve essere più di {{ limit }} caratteri.'
     customer:
         first_name:
             max: 'Il nome non deve essere più lungo di {{ limit }} caratteri.'

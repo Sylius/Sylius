@@ -10,13 +10,18 @@ sylius:
         option:
             presentation: Prezantimi
     ui:
+        all: Të gjitha
         actions: Veprimet
         administration_panel_login: Login i panelit te administrimit
         an_error_occurred: Ndodhi një gabim
         are_your_sure_you_want_to_perform_this_action: Jeni i sigurte se deshironi te egzekutoni kete veprim?
+        available_for_channels: Ne dispozicion per kanale
         cancel: Fshi
+        category_requirements: Kërkesat e kategorisë
+        charges_and_taxes: Pagesat dhe taksat
         clear_filters: Hiq filtrin
         color: Ngjyra
+        configure_channels_available_in_your_store: Konfiguroni kanalet ne dispozicion ne depon tuaj
         confirm_your_action: Konfirmoni veprimin tuaj
         contains: Përmban
         countries: Vendet
@@ -30,7 +35,19 @@ sylius:
         description: Përshkrimi
         disabled: I çaktivizuar
         edit: Afisho
+        edit_channel: Modifiko kanalin
+        edit_country: Modifiko shtetin
+        edit_currency: Modifiko valuten
+        edit_customer: Modifiko klientin
+        edit_payment_method: Modifiko metoden e pageses
+        edit_product_option: Modifiko opsionet e produktit
+        edit_product_attribute: Modifiko atributet e produktit
+        edit_promotion: Modifiko promocionin
+        edit_shipping_method: Modifiko metoden e transportit
         edit_tax_category: Ndrysho kategorine e takses
+        edit_tax_rate: Modifiko normen e tatimit
+        edit_taxon: Modifiko kategorine
+        edit_zone: Modifiko zonen
         empty: Bosh
         enabled: E aktivizuar
         ends_with: Mbaron me
@@ -41,18 +58,34 @@ sylius:
         info: Info
         last_updated: Përditësimi i fundit
         locales: Rajonet
+        manage_attributes_of_your_products: Modifiko atributet e produktit
+        manage_currencies_available_in_the_store: Menaxho monedhat ne dispocion ne dyqan
+        manage_your_customers: Menaxho klientet
+        manage_languages_available_in_the_store: Menaxho gjuhet ne dispocion ne dyqan
+        manage_configuration_options_of_your_products: Menaxho opsionet e konfigurimit te produkteve
+        manage_payment_methods_available_to_your_customers: Menaxho metodat e pagesave ne dispocion per klientet
+        manage_shipping_destinations: Menaxho destinacionet e transportit
+        manage_categorization_of_your_products: Menaxho kategorizimin e produkteve
+        manage_shipping_methods_for_your_store: Menaxho metodat e transportit te dyqanit
         manage_taxation_of_your_products: Menaxho taksimet e produktit tuaj
+        manage_geographical_zones: Menaxho zonat gjeografike
+        manage_discounts_and_promotional_campaigns: Menaxho fushatat e uljeve dhe promocioneve
         new: E re
+        new_channel: Kanal i ri
         new_country: Vend i ri
         new_currency: Lloj i ri monedhe
         new_locale: Vendndodhje e re
         new_tax_category: Kategori e re taksimi
         "no": false
+        no_account: asnje llogari
         no_results_to_display: Nuk ka rezultate per tu shfaqur
         not_contains: Nuk permban
         not_empty: Jo bosh
         not_in: Jo brenda
+        or: ose
         powered_by: Mundësuar nga
+        promotion_configuration: Konfigurimi i promocionit
+        promotion_information: Informacione promocioni
         save_changes: Ruaj ndryshimet
         shipping_methods: Mënyrat e dërgesave
         show: Trego
@@ -64,3 +97,16 @@ sylius:
         tax_categories: Kategoritë e taksimit
         values: Vlerat
         "yes": true
+        total_records: Rekordet totale
+        jump_to_page: Kerce ne faqen
+        go: Shko
+        unlimited: E palimituar
+        no_requirement: Anje kerkese
+        zone_consisting_of_countries: Zone e perbere nga shtete
+        zone_consisting_of_provinces: Zone e perbere nga rrethe
+        zone_consisting_of_other_zones: Zone e perbere nga zona
+        no_theme: Asnje teme
+        usage: Perdorimi
+        customer_can_login_to_the_store: Klienti mund te hyje ne dyqan
+        account_credentials: Te dhenat e llogarise
+        extra_information: Informacione shtese

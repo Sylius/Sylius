@@ -33,8 +33,6 @@ sylius:
                     years: Vitet
                     header: Njësia
                 after: Përdorues i krijuar pas kësaj periudhe
-            shipping_country_configuration:
-                country: Vendi
             type: Lloji
         coupon:
             usage_limit: Kufiri i përdorimit

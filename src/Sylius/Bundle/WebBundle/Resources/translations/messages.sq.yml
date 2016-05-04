@@ -257,7 +257,7 @@ sylius:
         create_string_block: Krijo bllok zinxhir
         create_tax_category: Krijo një kategori taksimi
         create_tax_rate: Krijo normën e taksimit
-        create_taxon: Krijo taksonin
+        create_taxon: Krijo kategorine
         create_user: Krijo përdorues
         create_variant: Krijo variant
         create_zone: Krijo zonën
@@ -287,7 +287,7 @@ sylius:
         customer_orders: Porositë e blerësit
         customer_since: Ti je blerës që prej
         customers: Blerësit
-        customers_list_of_all_customers_in_store: 'Blerësi <small>Lista e të gjithë blerësve në dyqan</small>'
+        customers_list_of_all_customers_in_store: 'Blerësi <small>Lista e të gjithë blerësve në arkiv </small>'
         customize_default_metadata: Personalizo metadata baze
         customize_metadata: Personalizo metadata
         customize_products_metadata: Personalizo metadata te produktit
@@ -411,9 +411,9 @@ sylius:
         logged_in_as: 'Loguar si %username%'
         login: Futu
         login_button: Futu
-        login_sylius_store: 'Futu <small>Sylius dyqan</small>'
+        login_sylius_store: 'Futu <small>Sylius arkiv </small>'
         logout: Dil
-        main_taxon: Grupi kryesor
+        main_taxon: Kategoria kryesore
         male: Mashkull
         manage: Kontrollo
         manage_adjustments: Kontrollo parametrat
@@ -455,6 +455,7 @@ sylius:
         new_contact_topic: Rubrikë e re kontakti
         new_country: Vend i ri
         new_currency: Lloj i ri monedhe
+        new_customer: Klient i ri
         new_order: Porosi e re
         new_password: Fjalëkalim i ri
         new_payment: Pagesë e re
@@ -471,7 +472,7 @@ sylius:
         new_shipping_method: Mënyrë e re dërgimi
         new_tax_category: Kategori e re taksimi
         new_tax_rate: Normë e re taksimi
-        new_taxon: Takson i ri
+        new_taxon: Kategori e re
         new_user: Përdorues i ri
         new_zone: Zonë e re
         newest_products: Produktet më të reja
@@ -509,7 +510,7 @@ sylius:
         orders: Porositë
         original_price: Çmimi fillestar
         out_of_stock: Nuk ka në magazi
-        overview_of_your_store: Gjendja e dyqanit tënd
+        overview_of_your_store: Gjendja e arkivin tënd
         page: Faqja
         pages: Faqet
         parent: Prind
@@ -546,8 +547,8 @@ sylius:
         product_reviews: Recensionet e produktit
         products: Produktet
         products_categorized_as_name: 'Produkte të klasifikuar si "%name%"'
-        products_categorized_under_taxon_taxon: 'Produkte <small>Të kategorizuar nën "%taxon%" taxon</small>'
-        products_index_of_all_products_in_your_store: 'Produkte <small>Indeksi i të gjitha produkteve në magazinën tuaj</small>'
+        products_categorized_under_taxon_taxon: 'Produkte <small>Të kategorizuar nën "%taxon%" tipologjine </small>'
+        products_index_of_all_products_in_your_store: 'Produkte <small>Indeksi i të gjitha produkteve në arkivin tuaj</small>'
         profile: Profili
         promotion_coupons: Kuponat
         promotion_details: Hollësi të promocionit
@@ -565,7 +566,7 @@ sylius:
         refunded: Rimbursuar
         register: Regjistrohu
         register_button: Regjistrohu
-        registration_create_an_account_in_store: 'Regjistrimi <small>Krijo një llogari në dyqan</small>'
+        registration_create_an_account_in_store: 'Regjistrimi <small>Krijo një llogari në arkiv</small>'
         registration_date: Data e regjistrimit
         release_inventory: Lista e daljeve
         remember_me: Më mbaj mend
@@ -614,9 +615,9 @@ sylius:
         shop_by: Bli me
         show_all: Shfaqi të gjitha
         show_deleted: Shfaq të fshirat
-        show_in_store: Trego në magazinë
+        show_in_store: Trego në arkiv
         show_metadata: Shfaq metadata
-        sign_in_to_the_store_or_create_new_account: 'Futu në dyqanin <small> ose krijo llogari të re </small>'
+        sign_in_to_the_store_or_create_new_account: 'Futu në arkiv <small> ose krijo llogari të re </small>'
         simple_blocks: Blloqe të thjeshta
         sku: SKU
         slideshow: Slideshow
@@ -679,12 +680,12 @@ sylius:
         there_are_no_shipping_methods_configured: Nuk ka asnjë mënyrë dërgimi të konfiguruar
         there_are_no_tax_categories_configured: Nuk ka asnjë kategori taksimi të konfiguruar
         there_are_no_tax_rates_configured: Nuk ka asnjë normë taksimi të konfiguruar
-        there_are_no_taxons_for_this_product: Nuk ka asnjë takson për këtë produkt
+        there_are_no_taxons_for_this_product: Nuk ka asnjë kategori për këtë produkt
         there_are_no_taxons_to_display: "Nuk ka asnjë kategori për t'u shfaqur"
         there_are_no_users_to_display: "Nuk ka asnjë përdorues për t'u shfaqur"
         there_are_no_variants_to_display: "Nuk ka asnjë variant për t'u shfaqur"
         there_are_no_zones_configured: Nuk ka asnjë zonë të konfiguruar
-        there_is_no_main_taxon_for_this_product: Nuk ka asnjë taksim kryesor mbi këtë produkt
+        there_is_no_main_taxon_for_this_product: Nuk ka asnjë kategori kryesore mbi këtë produkt
         this_months_statistics: Statistikat e muajit në vazhdim
         this_product_has_no_attributes_defined: Ky produkt nuk ka atribute të përcaktuara
         title: Titulli
@@ -709,7 +710,7 @@ sylius:
         user_confirmation_name: Konfirmimi i përdoruesit
         user_details: Hollësi të përdoruesit
         username: Username
-        users_list_of_all_users_registered_in_store: 'Përdorues <small>Lista e të gjithë përdoruesve të regjistruar në dyqan</small>'
+        users_list_of_all_users_registered_in_store: 'Përdorues <small>Lista e të gjithë përdoruesve të regjistruar në arkiv</small>'
         values: Vlerat
         variant_selection_method: Metoda rezervë e përzgjedhjes
         variants: Variante
@@ -720,7 +721,7 @@ sylius:
         volume_based_pricing: Çmimi i bazuar në volum
         warning: Kujdes
         welcome: Mirësevini
-        welcome_to_our_store: Mirë se erdhët në dyqanin tonë
+        welcome_to_our_store: Mirë se erdhët në arkivin tone
         welcome_to_your_space: Mirë se erdhët në hapësirën tuaj
         "yes": Po
         you_are_customer_since: Ti je blerës qysh prej
