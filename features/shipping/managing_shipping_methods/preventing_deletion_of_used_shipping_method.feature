@@ -9,9 +9,9 @@ Feature: Prevent deletion of used shipping method
         And the store has a product "PHP T-Shirt"
         And the store allows shipping with "DHL Express"
         And the store allows paying with "Cash on Delivery"
-        And the customer "john.doe@gmail.com" placed an order "#00000022"
+        And there is a customer "john.doe@gmail.com" that placed an order "#00000022"
         And the customer chose "DHL Express" shipping method to "France" with "Cash on Delivery" payment
-        And the customer bought single "PHP T-Shirt"
+        And the customer bought a single "PHP T-Shirt"
         And I am logged in as an administrator
 
     @ui

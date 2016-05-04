@@ -119,9 +119,9 @@ final class OrderContext implements Context
     }
 
     /**
-     * @Given the customer :customer placed an order :orderNumber
+     * @Given there is a customer :customer that placed an order :orderNumber
      */
-    public function theCustomerPlacedAnOrder(CustomerInterface $customer, $orderNumber)
+    public function thereIsCustomerThatPlacedOrder(CustomerInterface $customer, $orderNumber)
     {
         $order = $this->createOrder($customer, $orderNumber);
 
@@ -158,7 +158,7 @@ final class OrderContext implements Context
     }
 
     /**
-     * @Given the customer bought single :product
+     * @Given the customer bought a single :product
      */
     public function theCustomerBoughtSingleProduct(ProductInterface $product)
     {
@@ -168,7 +168,7 @@ final class OrderContext implements Context
     }
 
     /**
-     * @Given /^the customer bought single ("[^"]+" variant of product "[^"]+")$/
+     * @Given /^the customer bought a single ("[^"]+" variant of product "[^"]+")$/
      */
     public function theCustomerBoughtSingleProductVariant(ProductVariantInterface $productVariant)
     {
@@ -178,7 +178,7 @@ final class OrderContext implements Context
     }
 
     /**
-     * @Given the customer bought single :product using :coupon coupon
+     * @Given the customer bought a single :product using :coupon coupon
      */
     public function theCustomerBoughtSingleUsing(ProductInterface $product, CouponInterface $coupon)
     {
