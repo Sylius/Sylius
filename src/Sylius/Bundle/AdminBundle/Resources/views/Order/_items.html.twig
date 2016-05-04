@@ -1,3 +1,5 @@
+{% set shippingAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::SHIPPING_ADJUSTMENT') %}
+
 <table class="ui celled padded table">
     <thead>
     <tr>
@@ -52,6 +54,26 @@
         <th colspan="5" class="right aligned">
             <strong>{{ 'sylius.ui.items_total'|trans }}</strong>:
             {{ order.itemsTotal|sylius_price(order.currency) }}
+        </th>
+    </tr>
+    <tr>
+        <th colspan="2">
+            <h5>{{ 'sylius.ui.shipping_charges'|trans }}</h5>
+            {% if not order.adjustments(shippingAdjustment).isEmpty() %}
+                <div class="ui relaxed divided list">
+                    {% for adjustment in order.adjustments(shippingAdjustment) %}
+                        <div class="item">
+                            {{ adjustment.label }} {{ adjustment.amount|sylius_price(order.currency) }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="text-muted"><small>{{ 'sylius.order.no_shipping_charges'|trans }}</small></p>
+            {% endif %}
+        </th>
+        <th colspan="3" class="right aligned">
+            <strong>{{ 'sylius.ui.shipping_total'|trans }}</strong>:
+            {{ order.adjustmentsTotal(shippingAdjustment)|sylius_price(order.currency) }}
         </th>
     </tr>
     <tr>
