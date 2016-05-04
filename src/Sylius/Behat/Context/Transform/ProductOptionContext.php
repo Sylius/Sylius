@@ -35,6 +35,7 @@ final class ProductOptionContext implements Context
 
     /**
      * @Transform /^product option "([^"]+)"$/
+     * @Transform /^"([^"]+)" option$/
      * @Transform :productOption
      */
     public function getProductOptionByName($productOptionName)

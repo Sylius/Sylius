@@ -27,7 +27,8 @@
         <parameter key="sylius.behat.response_loader.class">Sylius\Behat\Service\ResponseLoader</parameter>
         <parameter key="sylius.behat.notification_accessor.class">Sylius\Behat\Service\Accessor\NotificationAccessor</parameter>
         <parameter key="sylius.behat.notification_checker.class">Sylius\Behat\Service\NotificationChecker</parameter>
-        <parameter key="sylius.behat.current_page_resolver.class">Sylius\Behat\Service\CurrentPageResolver</parameter>
+        <parameter key="sylius.behat.current_page_resolver.class">Sylius\Behat\Service\Resolver\CurrentPageResolver</parameter>
+        <parameter key="sylius.behat.current_product_page_resolver.class">Sylius\Behat\Service\Resolver\CurrentProductPageResolver</parameter>
     </parameters>
 
     <services>
@@ -71,6 +72,9 @@
         <service id="sylius.behat.current_page_resolver" class="%sylius.behat.current_page_resolver.class%" scope="scenario" public="false">
             <argument type="service" id="mink.default_session" />
             <argument type="service" id="router" container="symfony" />
+        </service>
+        <service id="sylius.behat.current_product_page_resolver" class="%sylius.behat.current_product_page_resolver.class%" scope="scenario" public="false">
+            <argument type="service" id="sylius.behat.current_page_resolver" />
         </service>
     </services>
 </container>

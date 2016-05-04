@@ -163,4 +163,12 @@ final class ProductContext implements Context
     {
         expect($this->productVariantRepository->findBy(['object' => $product]))->toBe([]);
     }
+
+    /**
+     * @Given I am logged in as an administrator
+     */
+    public function iAmLoggedInAsAnAdministrator()
+    {
+        // Not applicable in the domain scope
+    }
 }

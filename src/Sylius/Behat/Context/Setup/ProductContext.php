@@ -20,6 +20,7 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
+use Sylius\Component\Product\Factory\ProductFactoryInterface;
 use Sylius\Component\Product\Model\AttributeInterface;
 use Sylius\Component\Product\Model\AttributeValueInterface;
 use Sylius\Component\Product\Model\OptionInterface;
@@ -45,7 +46,7 @@ final class ProductContext implements Context
     private $productRepository;
 
     /**
-     * @var FactoryInterface
+     * @var ProductFactoryInterface
      */
     private $productFactory;
 
@@ -82,7 +83,7 @@ final class ProductContext implements Context
     /**
      * @param SharedStorageInterface $sharedStorage
      * @param ProductRepositoryInterface $productRepository
-     * @param FactoryInterface $productFactory
+     * @param ProductFactoryInterface $productFactory
      * @param AttributeFactoryInterface $productAttributeFactory
      * @param FactoryInterface $productVariantFactory
      * @param FactoryInterface $attributeValueFactory
@@ -93,7 +94,7 @@ final class ProductContext implements Context
     public function __construct(
         SharedStorageInterface $sharedStorage,
         ProductRepositoryInterface $productRepository,
-        FactoryInterface $productFactory,
+        ProductFactoryInterface $productFactory,
         AttributeFactoryInterface $productAttributeFactory,
         FactoryInterface $attributeValueFactory,
         FactoryInterface $productVariantFactory,
@@ -113,24 +114,45 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Given /^the store has a product "([^"]+)"$/
+     * @Given the store has a product :productName
+     * @Given the store has a :productName product
      * @Given /^the store has a product "([^"]+)" priced at ("[^"]+")$/
      */
     public function storeHasAProductPricedAt($productName, $price = 0)
     {
-        /** @var ProductInterface $product */
-        $product = $this->productFactory->createNew();
+        $product = $this->createProduct($productName, $price);
 
-        $product->setName($productName);
-        $product->setPrice($price);
         $product->setDescription('Awesome '.$productName);
 
-        $channel = $this->sharedStorage->get('channel');
-        $product->addChannel($channel);
+        if ($this->sharedStorage->has('channel')) {
+            $channel = $this->sharedStorage->get('channel');
+            $product->addChannel($channel);
+        }
 
-        $this->productRepository->add($product);
+        $this->saveProduct($product);
+    }
 
-        $this->sharedStorage->set('product', $product);
+    /**
+     * @Given the store has a :productName configurable product
+     */
+    public function storeHasAConfigurableProduct($productName)
+    {
+        $product = $this->productFactory->createNewWithoutVariants();
+
+        $product->setName($productName);
+        $product->setCode($this->convertToCode($productName));
+        $product->setDescription('Awesome '.$productName);
+
+        $this->saveProduct($product);
+    }
+
+    /**
+     * @Given the store has :firstProductName and :secondProductName products
+     */
+    public function theStoreHasAProductAnd($firstProductName, $secondProductName)
+    {
+        $this->saveProduct($this->createProduct($firstProductName));
+        $this->saveProduct($this->createProduct($secondProductName));
     }
 
     /**
@@ -157,15 +179,12 @@ final class ProductContext implements Context
      */
     public function thereIsProductAvailableInGivenChannel($productName, ChannelInterface $channel)
     {
-        /** @var ProductInterface $product */
-        $product = $this->productFactory->createNew();
+        $product = $this->createProduct($productName);
 
-        $product->setName($productName);
-        $product->setPrice(0);
         $product->setDescription('Awesome ' . $productName);
         $product->addChannel($channel);
 
-        $this->productRepository->add($product);
+        $this->saveProduct($product);
     }
 
     /**
@@ -315,6 +334,18 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Given /^(this product) has (this product option)$/
+     * @Given /^(this product) has a ("[^"]+" option)$/
+     * @Given /^(this product) has an ("[^"]+" option)$/
+     */
+    public function thisProductHasThisProductOption(ProductInterface $product, OptionInterface $option)
+    {
+        $product->addOption($option);
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @param string $type
      * @param string $name
      * @param string $code
@@ -357,5 +388,42 @@ final class ProductContext implements Context
     private function getPriceFromString($price)
     {
         return (int) round(($price * 100), 2);
+    }
+
+    /**
+     * @param string $productName
+     * @param int $price
+     *
+     * @return ProductInterface
+     */
+    private function createProduct($productName, $price = 0)
+    {
+        /** @var ProductInterface $product */
+        $product = $this->productFactory->createNew();
+
+        $product->setName($productName);
+        $product->setPrice($price);
+        $product->setCode($this->convertToCode($productName));
+
+        return $product;
+    }
+
+    /**
+     * @param ProductInterface $product
+     */
+    private function saveProduct(ProductInterface $product)
+    {
+        $this->productRepository->add($product);
+        $this->sharedStorage->set('product', $product);
+    }
+
+    /**
+     * @param string $productName
+     *
+     * @return string
+     */
+    private function convertToCode($productName)
+    {
+        return strtoupper(str_replace(' ', '_', $productName));
     }
 }
