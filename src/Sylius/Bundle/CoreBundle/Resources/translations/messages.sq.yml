@@ -59,7 +59,7 @@ sylius:
             shipping_category: Kategoria e dërgesës
             short_description: Përshkrim i shkurtër
             variant_selection_method: Metoda rezervë e përzgjedhjes
-            main_taxon: Grupi kryesor
+            main_taxon: Tipologjia kryesore
         product_filter:
             name: Emri
             sku: SKU
@@ -76,6 +76,7 @@ sylius:
                     Tracking code (for example: Kodi i gjurmimit (psh. Google Analytics)
             taxation:
                 default_tax_zone: Zona e paracakruar e taksimit
+                default_tax_calculation_strategy: Strategjia baze e llogaritjes se taksave
             security:
                 enabled: E aktivizon?
         shipment_filter:
@@ -132,10 +133,12 @@ sylius:
             name: Emri
         promotion_rule:
             contains_taxon:
+                taxon: Fushe
                 count: Numëro
             taxon:
                 taxons: Kategoritë
             total_of_items_from_taxon:
+                taxon: Fushe
                 amount: Shuma
     email:
         order_confirmation:
@@ -146,3 +149,5 @@ sylius:
             name: Konfirmimi i dërgesës
         user_confirmation:
             name: Konfirmimi i përdoruesit
+        password_reset:
+            name: Ricakto Fjalëkalimin

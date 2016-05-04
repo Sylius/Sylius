@@ -6,6 +6,7 @@ sylius:
         admin:
             main:
                 catalog:
+                    header: Katalogu
                     taxons: Kategoritë
                     options: Opsionet
                     attributes: Atributet

@@ -22,3 +22,5 @@ sylius:
         code:
             not_blank: Shto kodin e mënyrës së dërgesës.
             unique: Mënyra e dërgesës me kodin e dhënë tashmë egziston.
+        zone:
+            not_blank: Ju lutem zgjidhni zonen e metodes se trasportit.

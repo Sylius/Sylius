@@ -17,6 +17,8 @@ sylius:
             not_blank: Fur shumën e normës së taksës.
         calculator:
             not_blank: Zgjidh llogaritësin e taksës.
+        zone:
+            not_blank: Ju lutem zgjidhni zonen e takses.
         code:
             not_blank: Shto kodin e normës së tatimit.
             unique: Norma e tatimit me kodin e dhënë tashmë egziston.

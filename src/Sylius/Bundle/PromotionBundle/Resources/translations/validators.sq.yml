@@ -14,6 +14,7 @@ sylius:
             max_length: 'Emri i promocionit nuk duhet të përmbajë më shumë se 1 karakter|Emri i promocionit nuk duhet të përmbajë më shumë se {{ limit }} karaktere.'
             min_length: 'Emri i promocionit duhet të përmbajë të paktën 1 karakter|Emri i promocionit duhet të përmbajë të paktën {{ limit }} karaktere.'
             not_blank: Fut emrin e promocionit.
+        end_date_cannot_be_set_prior_start_date: Dita e perfundimit nuk mund te jete e vendosur perpara dates se fillimit.
     promotion_coupon:
         code:
             max_length: 'Kodi i kuponit nuk duhet të përmbajë më shumë se 1 karakter|Kodi i kuponit nuk duhet të përmbajë më shumë se {{ limit }} karaktere.'
