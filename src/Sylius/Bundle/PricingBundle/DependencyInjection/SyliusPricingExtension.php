@@ -35,10 +35,10 @@ class SyliusPricingExtension extends Extension
     /**
      * {@inheritdoc}
      */
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $config, ContainerBuilder $container)
     {
-        $processor = new Processor();
-        $config = $processor->processConfiguration(new Configuration(), $configs);
+        $config = $this->processConfiguration($this->getConfiguration($config, $container), $config);
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
         foreach ($config['forms'] as $formType) {
             $class = '%sylius.form.extension.priceable.class%';
@@ -56,7 +56,6 @@ class SyliusPricingExtension extends Extension
             $container->setDefinition(sprintf('sylius.form.extension.priceable.%s', $formType), $definition);
         }
 
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
         $loader->load('templating.xml');
         $loader->load('twig.xml');

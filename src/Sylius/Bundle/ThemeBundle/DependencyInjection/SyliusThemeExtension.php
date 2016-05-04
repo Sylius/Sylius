@@ -26,11 +26,11 @@ final class SyliusThemeExtension extends AbstractResourceExtension implements Pr
     /**
      * {@inheritdoc}
      */
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $config, ContainerBuilder $container)
     {
-        $config = $this->processConfiguration(new Configuration(), $configs);
-
+        $config = $this->processConfiguration($this->getConfiguration($config, $container), $config);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config/services'));
+
         $loader->load('services.xml');
         $loader->load(sprintf('driver/%s.xml', $config['driver']));
 
