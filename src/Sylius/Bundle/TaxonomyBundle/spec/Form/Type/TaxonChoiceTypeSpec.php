@@ -41,7 +41,7 @@ class TaxonChoiceTypeSpec extends ObjectBehavior
         $resolver->setDefaults(Argument::withKey('root'))->shouldBeCalled()->willReturn($resolver);
         $resolver->setDefaults(Argument::withKey('filter'))->shouldBeCalled()->willReturn($resolver);
 
-        $resolver->setAllowedTypes('root', [TaxonInterface::class, 'null'])->shouldBeCalled()->willReturn($resolver);
+        $resolver->setAllowedTypes('root', [TaxonInterface::class, 'string', 'null'])->shouldBeCalled()->willReturn($resolver);
         $resolver->setAllowedTypes('filter', ['callable', 'null'])->shouldBeCalled()->willReturn($resolver);
 
         $this->configureOptions($resolver, []);

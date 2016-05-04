@@ -123,7 +123,7 @@ class TwigGridRenderer implements GridRendererInterface
         $criteria = $gridView->getParameters()->get('criteria', []);
 
         $form = $this->formFactory->createNamed('criteria', 'form', $criteria, ['csrf_protection' => false, 'required' => false]);
-        $form->add($filter->getName(), sprintf('sylius_grid_filter_%s', $filter->getType(), $filter->getOptions()));
+        $form->add($filter->getName(), sprintf('sylius_grid_filter_%s', $filter->getType()), $filter->getOptions());
 
         return $this->twig->render($this->filterTemplates[$type], [
             'grid' => $gridView,
