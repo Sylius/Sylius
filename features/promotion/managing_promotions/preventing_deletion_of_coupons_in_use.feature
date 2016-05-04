@@ -10,9 +10,9 @@ Feature: Not being able to delete a coupon which is in use
         And the store has a product "Jacket"
         And the store allows paying with "Cash on Delivery"
         And the store has promotion "Christmas sale" with coupon "Santa's gift"
-        And the customer "john.doe@gmail.com" placed an order "#00000022"
+        And there is a customer "john.doe@gmail.com" that placed an order "#00000022"
         And the customer chose "Free" shipping method to "France" with "Cash on Delivery" payment
-        And the customer bought single "Jacket" using "Santa's gift" coupon
+        And the customer bought a single "Jacket" using "Santa's gift" coupon
 
     @domain
     Scenario: Being unable to delete a used coupon
