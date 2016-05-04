@@ -89,6 +89,7 @@ class LoadProductsData extends DataFixture
             'es_ES' => sprintf('Camiseta "%s"', $this->fakers['es_ES']->word),
         ];
         $this->addTranslatedFields($product, $translatedNames);
+        $product->setCode($this->faker->uuid);
 
         $product->setVariantSelectionMethod(ProductInterface::VARIANT_SELECTION_MATCH);
 
@@ -137,6 +138,7 @@ class LoadProductsData extends DataFixture
             'es_ES' => sprintf('Pegatina "%s"', $this->fakers['es_ES']->word),
         ];
         $this->addTranslatedFields($product, $translatedNames);
+        $product->setCode($this->faker->uuid);
 
         $product->setVariantSelectionMethod(ProductInterface::VARIANT_SELECTION_MATCH);
 
@@ -180,6 +182,7 @@ class LoadProductsData extends DataFixture
             'es_ES' => sprintf('Taza "%s"', $this->fakers['es_ES']->word),
         ];
         $this->addTranslatedFields($product, $translatedNames);
+        $product->setCode($this->faker->uuid);
 
         $this->setTaxons($product, ['mugs', 'mugland']);
         $product->setMainTaxon($this->getReference('Sylius.Taxon.mugs'));
@@ -219,6 +222,7 @@ class LoadProductsData extends DataFixture
             'es_ES' => sprintf('Libro "%s" de "%s"', ucfirst($this->fakers['es_ES']->word), $author),
         ];
         $this->addTranslatedFields($product, $translatedNames);
+        $product->setCode($this->faker->uuid);
 
         $this->setTaxons($product, ['books', 'bookmania']);
         $product->setMainTaxon($this->getReference('Sylius.Taxon.books'));

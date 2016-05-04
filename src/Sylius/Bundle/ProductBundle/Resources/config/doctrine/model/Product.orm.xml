@@ -18,6 +18,8 @@
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
+        <field name="code" column="code" type="string" unique="true" nullable="false"/>
+        <field name="type" column="type" type="string" nullable="false" />
 
         <field name="availableOn" column="available_on" type="datetime" nullable="true">
             <gedmo:versioned />

@@ -29,6 +29,7 @@ sylius_backend_product_create:
         _sylius:
             template: SyliusWebBundle:Backend/Product:create.html.twig
             redirect: sylius_backend_product_show
+            form: sylius_product_legacy
 
 sylius_backend_product_create_from_archetype:
     path: /new-from-archetype
@@ -40,6 +41,7 @@ sylius_backend_product_create_from_archetype:
                 method: createFromArchetype
                 arguments: $archetype
             template: SyliusWebBundle:Backend/Product:create.html.twig
+            form: sylius_product_legacy
 
 sylius_backend_product_update:
     path: /{id}/edit
@@ -49,6 +51,7 @@ sylius_backend_product_update:
         _sylius:
             template: SyliusWebBundle:Backend/Product:update.html.twig
             redirect: sylius_backend_product_show
+            form: sylius_product_legacy
 
 sylius_backend_product_revert:
     path: /{id}/revert/{version}

@@ -34,6 +34,10 @@ class ProductContext extends DefaultContext
 
             $product->setCurrentLocale($this->getContainer()->getParameter('locale'));
             $product->setName(trim($data['name']));
+
+            $code = isset($data['sku']) ? $data['sku'] : $this->generateCode($data['name']);
+            $product->setCode($code);
+
             $product->getMasterVariant()->setPrice((int) round($data['price'] * 100));
 
             if (!empty($data['options'])) {
@@ -394,5 +398,15 @@ class ProductContext extends DefaultContext
     {
         $tr = $this->assertSession()->elementExists('css', sprintf('table#variants tbody tr:contains("%s")', $value));
         $tr->clickLink($button);
+    }
+
+    /**
+     * @param string $translatedNames
+     *
+     * @return string
+     */
+    private function generateCode($name)
+    {
+        return strtoupper(str_replace(' ', '_', str_replace("\"", "", $name)));
     }
 }

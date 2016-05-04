@@ -13,6 +13,7 @@ Sylius\Component\Core\Model\Product:
         currentTranslation: @productTranslation1
         variants: [@productVariant1]
         setPrice: [20]
+        code: MUG_SW
         setSku: [mug1]
     product2:
         updatedAt: 2015-10-04
@@ -20,6 +21,7 @@ Sylius\Component\Core\Model\Product:
         currentTranslation: @productTranslation2
         variants: [@productVariant2]
         setPrice: [20]
+        code: MUG_LOTR
         setSku: [mug2]
     product3:
         updatedAt: 2015-10-05
@@ -27,6 +29,7 @@ Sylius\Component\Core\Model\Product:
         currentTranslation: @productTranslation3
         variants: [@productVariant3]
         setPrice: [20]
+        code: MUG_BB
         setSku: [mug3]
 
 Sylius\Component\Core\Model\ProductTranslation:

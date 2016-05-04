@@ -38,6 +38,11 @@ class Product implements ProductInterface
     protected $id;
 
     /**
+     * @var string
+     */
+    protected $code;
+
+    /**
      * @var null|BaseArchetypeInterface
      */
     protected $archetype;
@@ -98,6 +103,22 @@ class Product implements ProductInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * @param string $code
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
     }
 
     /**

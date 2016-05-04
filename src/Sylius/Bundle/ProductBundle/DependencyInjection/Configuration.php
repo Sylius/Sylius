@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ProductBundle\DependencyInjection;
 
+use Sylius\Bundle\CoreBundle\Form\Type\LegacyProductType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductTranslationType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;

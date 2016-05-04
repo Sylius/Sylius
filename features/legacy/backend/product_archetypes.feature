@@ -82,6 +82,7 @@ Feature: Product archetypes
         And I click "Create product" near "T-Shirt"
         When I fill in the following:
             | Name        | Manchester United tee   |
+            | Code        | BOSTON_TEE              |
             | Description | Interesting description |
             | Price       | 59.99                   |
         And I go to "Attributes" tab

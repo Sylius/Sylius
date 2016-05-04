@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\ProductBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -59,6 +60,12 @@ class LegacyProductTypeSpec extends ObjectBehavior
         ;
 
         $builder
+            ->addEventSubscriber(Argument::type(AddCodeFormSubscriber::class))
+            ->shouldBeCalled()
+            ->willReturn($builder)
+        ;
+
+        $builder
             ->add('associations', 'collection', Argument::withEntry('type', 'sylius_product_association'))
             ->shouldBeCalled()
             ->willReturn($builder)
@@ -81,6 +88,6 @@ class LegacyProductTypeSpec extends ObjectBehavior
 
     function it_has_valid_name()
     {
-        $this->getName()->shouldReturn('legacy_sylius_product');
+        $this->getName()->shouldReturn('sylius_product_legacy');
     }
 }

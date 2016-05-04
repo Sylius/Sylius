@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ProductBundle\Form\Type;
 
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -49,6 +50,7 @@ class LegacyProductType extends AbstractResourceType
                 'multiple' => true,
                 'label' => 'sylius.form.product.options',
             ])
+            ->addEventSubscriber(new AddCodeFormSubscriber())
         ;
     }
 
@@ -57,6 +59,6 @@ class LegacyProductType extends AbstractResourceType
      */
     public function getName()
     {
-        return 'legacy_sylius_product';
+        return 'sylius_product_legacy';
     }
 }

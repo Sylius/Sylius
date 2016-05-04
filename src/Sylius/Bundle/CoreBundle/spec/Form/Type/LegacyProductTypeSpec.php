@@ -15,6 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Form\Type\LegacyProductType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductType;
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Component\Core\Model\Product;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -96,6 +97,13 @@ class LegacyProductTypeSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
+        
+        $builder
+            ->addEventSubscriber(Argument::type(AddCodeFormSubscriber::class))
+            ->shouldBeCalled()
+            ->willReturn($builder)
+        ;
+        
         $this->buildForm($builder, []);
     }
 }
