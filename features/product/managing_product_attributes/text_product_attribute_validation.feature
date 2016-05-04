@@ -11,7 +11,7 @@ Feature: Text product attribute validation
     @ui
     Scenario: Trying to add a new text product attribute without name
         Given I want to create a new text product attribute
-        When I specify it code as "t_shirt_with_cotton"
+        When I specify its code as "t_shirt_with_cotton"
         But I do not name it
         And I try to add it
         Then I should be notified that name is required
@@ -30,7 +30,7 @@ Feature: Text product attribute validation
     Scenario: Trying to remove name for existing text product attribute
         Given the store has a text product attribute "T-shirt cotton brand"
         And I want to edit this product attribute
-        When I specify it code as "t_shirt_with_cotton"
+        When I specify its code as "t_shirt_with_cotton"
         And I remove its name from "English (United States)" translation
         And I try to save my changes
         Then I should be notified that name is required

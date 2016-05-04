@@ -71,10 +71,10 @@ final class ManagingProductAttributesContext implements Context
     }
 
     /**
-     * @When I specify it code as :code
+     * @When I specify its code as :code
      * @When I do not specify its code
      */
-    public function iSpecifyItCodeAs($code = null)
+    public function iSpecifyItsCodeAs($code = null)
     {
         $this->createPage->specifyCode($code);
     }

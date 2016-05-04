@@ -11,7 +11,7 @@ Feature: Adding a new text product attribute
     @ui
     Scenario: Adding a new text product attribute
         Given I want to create a new text product attribute
-        When I specify it code as "t_shirt_brand"
+        When I specify its code as "t_shirt_brand"
         And I name it "T-shirt brand" in "English (United States)"
         And I add it
         Then I should be notified that it has been successfully created
