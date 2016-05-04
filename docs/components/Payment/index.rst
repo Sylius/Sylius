@@ -1,7 +1,8 @@
 Payment
 =======
 
-PHP library which provides abstraction of payments management. |br|
+PHP library which provides abstraction of payments management.
+
 It ships with default **Payment**, **PaymentMethod** and **CreditCard** models.
 
 .. note::

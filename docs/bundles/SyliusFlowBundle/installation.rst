@@ -8,14 +8,14 @@ If you have `Composer installed globally <http://getcomposer.org/doc/00-intro.md
 
 .. code-block:: bash
 
-    $ composer require "sylius/flow-bundle"
+    $ composer require sylius/flow-bundle
 
 Otherwise you have to download .phar file.
 
 .. code-block:: bash
 
     $ curl -sS https://getcomposer.org/installer | php
-    $ php composer.phar require "sylius/flow-bundle"
+    $ php composer.phar require sylius/flow-bundle
 
 Adding required bundles to the kernel
 -------------------------------------
@@ -152,7 +152,7 @@ Import routing configuration:
 .. code-block:: yaml
 
     acme_flow:
-        resource: @SyliusFlowBundle/Resources/config/routing.yml
+        resource: "@SyliusFlowBundle/Resources/config/routing.yml"
         prefix: /flow
 
 If you take a look into imported routing configuration, you will see that ``sylius_flow_start`` is a wizard entry point.

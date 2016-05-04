@@ -8,14 +8,14 @@ If you have `Composer installed globally <http://getcomposer.org/doc/00-intro.md
 
 .. code-block:: bash
 
-    $ composer require "sylius/omnipay-bundle"
+    $ composer require sylius/omnipay-bundle
 
 Otherwise you have to download .phar file.
 
 .. code-block:: bash
 
     $ curl -sS https://getcomposer.org/installer | php
-    $ php composer.phar require "sylius/omnipay-bundle"
+    $ php composer.phar require sylius/omnipay-bundle
 
 Adding required bundles to the kernel
 -------------------------------------
@@ -48,8 +48,8 @@ Put this configuration inside your ``app/config/config.yml``.
 
     sylius_omnipay:
         gateways:
-            AuthorizeNet_AIM:            # gateway name, use anyone 
-                type: AuthorizeNet_AIM   # predefined list of types, read father for explanation 
+            AuthorizeNet_AIM:            # gateway name, use anyone
+                type: AuthorizeNet_AIM   # predefined list of types, read father for explanation
                 label: Authorize.Net AIM # how is gateway will be displayed in a form, etc.
             AuthorizeNet_SIM:
                 type: AuthorizeNet_SIM

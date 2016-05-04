@@ -1,5 +1,5 @@
 Shipments API
-==========
+=============
 
 Sylius shipments API endpoint is `/api/shipments`.
 

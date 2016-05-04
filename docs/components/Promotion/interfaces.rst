@@ -27,7 +27,8 @@ This interface should be implemented by models representing a **Promotion**.
 
 .. note::
 
-    This interface extends the :ref:`component_resource_model_code-aware-interface` and :ref:`component_resource_model_timestampable-interface`. |br|
+    This interface extends the :ref:`component_resource_model_code-aware-interface` and :ref:`component_resource_model_timestampable-interface`.
+
     You will find more information about this interface in `Sylius API PromotionInterface`_.
 
 .. _Sylius API PromotionInterface: http://api.sylius.org/Sylius/Component/Promotion/Model/PromotionInterface.html
@@ -64,8 +65,9 @@ This interface should be implemented by models representing a **Coupon**.
 
 .. note::
 
-    This interface extends the :ref:`component_resource_model_code-aware-interface`,
-    :ref:`component_resource_model_soft-deletable-interface` and the :ref:`component_resource_model_timestampable-interface`. |br|
+    This interface extends the :ref:`component_resource_model_code-aware-interface`
+    and the :ref:`component_resource_model_timestampable-interface`.
+
     You will find more information about this interface in `Sylius API CouponInterface`_.
 
 .. _Sylius API CouponInterface: http://api.sylius.org/Sylius/Component/Promotion/Model/CouponInterface.html
@@ -103,7 +105,8 @@ the ``PromotionCountableSubjectInterface``.
 
 .. note::
 
-    This interface extends the :ref:`component_promotion_model_promotion-subject-interface`. |br|
+    This interface extends the :ref:`component_promotion_model_promotion-subject-interface`.
+
     You will find more information about this interface in `Sylius API PromotionCountableSubjectInterface`_.
 
 .. _Sylius API PromotionCountableSubjectInterface: http://api.sylius.org/Sylius/Component/Promotion/Model/PromotionCountableSubjectInterface.html
@@ -118,7 +121,8 @@ the ``PromotionCouponAwareSubjectInterface``.
 
 .. note::
 
-    This interface extends the :ref:`component_promotion_model_promotion-subject-interface`. |br|
+    This interface extends the :ref:`component_promotion_model_promotion-subject-interface`.
+
     You will find more information about this interface in `Sylius API PromotionCouponAwareSubjectInterface`_.
 
 .. _Sylius API PromotionCouponAwareSubjectInterface: http://api.sylius.org/Sylius/Component/Promotion/Model/PromotionCouponAwareSubjectInterface.html
@@ -133,7 +137,8 @@ the ``PromotionCouponsAwareSubjectInterface``.
 
 .. note::
 
-    This interface extends the :ref:`component_promotion_model_promotion-subject-interface`. |br|
+    This interface extends the :ref:`component_promotion_model_promotion-subject-interface`.
+
     You will find more information about this interface in `Sylius API PromotionCouponsAwareSubjectInterface`_.
 
 .. _Sylius API PromotionCouponsAwareSubjectInterface: http://api.sylius.org/Sylius/Component/Promotion/Model/PromotionCouponsAwareSubjectInterface.html
@@ -202,7 +207,8 @@ PromotionRepositoryInterface
 In order to be able to find active promotions in your system you should create a repository class which implements this interface.
 
 .. note::
-    This interface extends the :ref:`component_resource_repository_repository-interface`. |br|
+    This interface extends the :ref:`component_resource_repository_repository-interface`.
+
     For more detailed information about this interface go to `Sylius API PromotionRepositoryInterface`_.
 
 .. _Sylius API PromotionRepositoryInterface: http://api.sylius.org/Sylius/Component/Promotion/Repository/PromotionRepositoryInterface.html

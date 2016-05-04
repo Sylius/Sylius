@@ -1,5 +1,5 @@
 Channels API
-=========
+============
 
 Sylius channels API endpoint is ``/api/channels``.
 
@@ -111,8 +111,8 @@ Response
         "updated_at": "2014-11-26T23:00:15+0000"
     }
 
-Create an channel
----------------
+Creating a channel
+------------------
 
 To create a new channel, you can execute the following request:
 

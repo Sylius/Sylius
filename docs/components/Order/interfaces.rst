@@ -16,8 +16,9 @@ This interface should be implemented by model representing a single Order.
 
 .. note::
     This interface extends :ref:`component_resource_model_timestampable-interface`, :ref:`component_resource_model_timestampable-interface`,
-    :ref:`component_order_model_adjustable-interface`, :ref:`component_order_model_comment-aware-interface`,
-    :ref:`component_resource_model_soft-deletable-interface` and :ref:`component_sequence_model_sequence-subject-interface`. |br|
+    :ref:`component_order_model_adjustable-interface`, :ref:`component_order_model_comment-aware-interface`
+    and :ref:`component_sequence_model_sequence-subject-interface`.
+
     For more detailed information go to `Sylius API OrderInterface`_.
 
 .. _Sylius API OrderInterface: http://api.sylius.org/Sylius/Component/Order/Model/OrderInterface.html
@@ -43,7 +44,8 @@ OrderItemInterface
 This interface should be implemented by model representing a single OrderItem.
 
 .. note::
-    This interface extends the :ref:`component_order_model_order-aware-interface` and the :ref:`component_order_model_adjustable-interface`, |br|
+    This interface extends the :ref:`component_order_model_order-aware-interface` and the :ref:`component_order_model_adjustable-interface`,
+
     For more detailed information go to `Sylius API OrderItemInterface`_.
 
 .. _Sylius API OrderItemInterface: http://api.sylius.org/Sylius/Component/Order/Model/OrderItemInterface.html
@@ -57,7 +59,8 @@ OrderItemUnitInterface
 This interface should be implemented by model representing a single OrderItemUnit.
 
 .. note::
-This interface extends the :ref:`component_order_model_adjustable-interface`, |br|
+    This interface extends the :ref:`component_order_model_adjustable-interface`,
+
     For more detailed information go to `Sylius API OrderItemUnitInterface`_.
 
 .. _Sylius API OrderItemUnitInterface: http://api.sylius.org/Sylius/Component/Order/Model/OrderItemUnitInterface.html
@@ -71,7 +74,8 @@ AdjustmentInterface
 This interface should be implemented by model representing a single Adjustment.
 
 .. note::
-    This interface extends the :ref:`component_resource_model_timestampable-interface` and the :ref:`component_originator_model_origin-aware-interface` |br|
+    This interface extends the :ref:`component_resource_model_timestampable-interface` and the :ref:`component_originator_model_origin-aware-interface`
+
     For more detailed information go to `Sylius API AdjustmentInterface`_.
 
 .. _Sylius API AdjustmentInterface: http://api.sylius.org/Sylius/Component/Order/Model/AdjustmentInterface.html
@@ -85,8 +89,8 @@ This interface provides basic operations for adjustment management.
 Use this interface if you want to make a model adjustable.
 
 For example following models implement this interface:
-    * :ref:`component_resource_model_order`
-    * :ref:`component_resource_model_order-item`
+    * :ref:`component_order_model_order`
+    * :ref:`component_order_model_order-item`
 
 .. note::
     For more detailed information go to `Sylius API AdjustableInterface`_.
@@ -101,7 +105,8 @@ CommentInterface
 This interface should be implemented by model representing a single Comment.
 
 .. note::
-    This interface extends the :ref:`sylius_component_resource_model_timestampable-interface` |br|
+    This interface extends the :ref:`component_resource_model_timestampable-interface`
+
     For more detailed information go to `Sylius API CommentInterface`_.
 
 .. _Sylius API CommentInterface: http://api.sylius.org/Sylius/Component/Order/Model/CommentInterface.html
@@ -129,7 +134,7 @@ This interface should be implemented by model representing a single Identity. It
 .. note::
     For more detailed information go to `Sylius API IdentityInterface`_.
 
-.. _Sylius API CommentAwareInterface: http://api.sylius.org/Sylius/Component/Order/Model/IdentityInterface.html
+.. _Sylius API IdentityInterface: http://api.sylius.org/Sylius/Component/Order/Model/IdentityInterface.html
 
 Services Interfaces
 -------------------
@@ -144,7 +149,8 @@ you should create repository class which implements this interface.
 
 .. note::
     This interface extends the :ref:`component_resource_repository_repository-interface` and
-    the :ref:`component_sequence_repository_hash-subject-repository-interface`. |br|
+    the :ref:`component_sequence_repository_hash-subject-repository-interface`.
+
     For more detailed information about the interface go to `Sylius API OrderRepositoryInterface`_.
-    
+
 .. _Sylius API OrderRepositoryInterface: http://api.sylius.org/Sylius/Component/Order/Repository/OrderRepositoryInterface.html

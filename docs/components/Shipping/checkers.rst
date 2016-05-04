@@ -8,7 +8,8 @@ This class checks if item count exceeds (or at least is equal) the configured co
 An example about how to use it is on :ref:`component_shipping_checker-rule-checker-interface`.
 
 .. note::
-    This checker implements the :ref:`component_shipping_checker_rule-checker-interface`. |br|
+    This checker implements the :ref:`component_shipping_checker_rule-checker-interface`.
+
     For more detailed information go to `Sylius API ItemCountRuleChecker`_.
 
 .. _Sylius API ItemCountRuleChecker: http://api.sylius.org/Sylius/Component/Shipping/Checker/ItemCountRuleChecker.html
@@ -80,7 +81,8 @@ This class checks if shipping method rules are capable of shipping given subject
     The method ``->register()`` throws `InvalidArgumentException`_.
 
 .. note::
-    This model implements the :ref:`component_shipping_checker_shipping-method-eligibility-checker-interface`. |br|
+    This model implements the :ref:`component_shipping_checker_shipping-method-eligibility-checker-interface`.
+
     For more detailed information go to `Sylius API ShippingMethodEligibilityChecker`_.
 
 .. _Sylius API ShippingMethodEligibilityChecker: http://api.sylius.org/Sylius/Component/Shipping/Checker/ShippingMethodEligibilityChecker.html

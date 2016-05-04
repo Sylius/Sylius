@@ -7,7 +7,8 @@ Shipment States
 Sylius itself uses a state machine system to manage all states of the business domain. This component has some
 sensible default states defined in **ShipmentInterface**.
 
-All new **Shipment** instances have the state ``ready`` by default, which means they are prepared to be sent. |br|
+All new **Shipment** instances have the state ``ready`` by default, which means they are prepared to be sent.
+
 The following states are defined:
 
 +-------------------+-------------+-----------------------------------------------------------------+

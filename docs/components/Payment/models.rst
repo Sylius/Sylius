@@ -32,7 +32,8 @@ Every payment is represented by a **Payment** instance and has the following pro
 
 .. note::
    This model implements the :ref:`component_payment_model_payment-interface`
-   and the :ref:`component_payment_model_payment-subject-interface`. |br|
+   and the :ref:`component_payment_model_payment-subject-interface`.
+
    For more detailed information go to `Sylius API Payment`_.
 
 .. _Sylius API Payment: http://api.sylius.org/Sylius/Component/Payment/Model/Payment.html
@@ -72,7 +73,8 @@ Every credit card is represented by a **CreditCard** instance and has the follow
 +----------------+-------------------------------------------+
 
 .. note::
-   This model implements the :ref:`component_payment_model_credit-card-interface`. |br|
+   This model implements the :ref:`component_payment_model_credit-card-interface`.
+
    For more detailed information go to `Sylius API CreditCard`_.
 
 .. _Sylius API CreditCard: http://api.sylius.org/Sylius/Component/Payment/Model/CreditCard.html
@@ -111,7 +113,8 @@ Every method of payment is represented by a **PaymentMethod** instance and has t
 +----------------------------+-----------------------------------------------------------------+
 
 .. note::
-   This model implements the :ref:`component_payment_model_payment-method-interface`. |br|
+   This model implements the :ref:`component_payment_model_payment-method-interface`.
+
    For more detailed information go to `Sylius API PaymentMethod`_.
 
 .. _Sylius API PaymentMethod: http://api.sylius.org/Sylius/Component/Payment/Model/PaymentMethod.html
@@ -135,8 +138,8 @@ correct representation of the following payment properties:
 +-------------+---------------------------------+
 
 .. note::
-   This model extends the :ref:`component_resource_model_abstract-translation`
-   and implements the :ref:`component_payment_model_payment-method-translation-interface`. |br|
+   This model implements the :ref:`component_payment_model_payment-method-translation-interface`.
+
    For more detailed information go to `Sylius API PaymentMethodTranslation`_.
 
 .. _Sylius API PaymentMethodTranslation: http://api.sylius.org/Sylius/Component/Payment/Model/PaymentMethodTranslation.html

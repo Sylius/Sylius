@@ -26,7 +26,8 @@ Shipment has the following properties:
 +-----------+----------------------------------------------+
 
 .. note::
-    This model implements the :ref:`component_shipping_model_shipment-interface`. |br|
+    This model implements the :ref:`component_shipping_model_shipment-interface`.
+
     For more detailed information go to `Sylius API Shipment`_.
 
 .. _Sylius API Shipment: http://api.sylius.org/Sylius/Component/Shipping/Model/Shipment.html
@@ -54,7 +55,8 @@ ShipmentItems have the following properties:
 +---------------+----------------------------------------------+
 
 .. note::
-    This model implements the :ref:`component_shipping_model_shipment-item-interface`. |br|
+    This model implements the :ref:`component_shipping_model_shipment-item-interface`.
+
     For more detailed information go to `Sylius API ShipmentItem`_.
 
 .. _Sylius API ShipmentItem: http://api.sylius.org/Sylius/Component/Shipping/Model/ShipmentItem.html
@@ -88,7 +90,8 @@ ShippingCategory has the following properties:
     :doc:`/bundles/SyliusShippingBundle/shipping_requirements`.
 
 .. note::
-    This model implements the :ref:`component_shipping_model_shipping-category-interface`. |br|
+    This model implements the :ref:`component_shipping_model_shipping-category-interface`.
+
     For more detailed information go to `Sylius API ShippingCategory`_.
 
 .. _Sylius API ShippingCategory: http://api.sylius.org/Sylius/Component/Shipping/Model/ShippingCategory.html
@@ -134,7 +137,8 @@ It has the following properties:
 
 .. note::
     This model implements the :ref:`component_shipping_model_shipping-method-interface` and extends
-    :ref:`component_translation_model_abstract-translatable` class. |br|
+    :ref:`component_translation_model_abstract-translatable` class.
+
     For more detailed information go to `Sylius API ShippingMethod`_.
 
 .. _Sylius API ShippingMethod: http://api.sylius.org/Sylius/Component/Shipping/Model/ShippingMethod.html
@@ -159,7 +163,8 @@ It has the following properties:
 
 .. note::
     This model implements the :ref:`component_shipping_model_shipping-method-translation-interface` and extends
-    :ref:`component_translation_model_abstract-translation` class. |br|
+    :ref:`component_translation_model_abstract-translation` class.
+
     Form more information go to `Sylius API ShippingMethodTranslation`_.
 
 .. _Sylius API ShippingMethodTranslation: http://api.sylius.org/Sylius/Component/Shipping/Model/ShippingMethodTranslation.html
@@ -184,7 +189,8 @@ Rule has the following properties:
 +---------------+------------------------------------------------+
 
 .. note::
-This model implements the :ref:`component_shipping_model_rule-interface`. |br|
+    This model implements the :ref:`component_shipping_model_rule-interface`.
+
     For more detailed information go to `Sylius API Rule`_.
 
 .. _Sylius API Rule: http://api.sylius.org/Sylius/Component/Shipping/Model/Rule.html

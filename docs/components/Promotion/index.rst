@@ -8,6 +8,7 @@ Super-flexible promotions system with support of complex rules and actions. Coup
 
    installation
    basic_usage
+   checkers
    models
    interfaces
    promotion_events

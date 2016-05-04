@@ -25,7 +25,8 @@ This interface should be implemented by class which will provide information abo
 and so on. It also has a method for shipment tracking.
 
 .. note::
-    This interface extends the :ref:`component_shipping_model_shipping-subject-interface`. |br|
+    This interface extends the :ref:`component_shipping_model_shipping-subject-interface`.
+
     For more detailed information go to `Sylius API ShipmentInterface`_.
 
 .. _Sylius API ShipmentInterface: http://api.sylius.org/Sylius/Component/Shipping/Model/ShipmentInterface.html
@@ -39,7 +40,8 @@ This interface is implemented by class responsible for connecting shippable obje
 provides information about shipment state.
 
 .. note::
-    This interface extends the :ref:`component_shipping_model_shipping-subject-interface`. |br|
+    This interface extends the :ref:`component_shipping_model_shipping-subject-interface`.
+
     For more detailed information go to `Sylius API ShipmentItemInterface`_.
 
 .. _Sylius API ShipmentItemInterface: http://api.sylius.org/Sylius/Component/Shipping/Model/ShipmentItemInterface.html
@@ -63,7 +65,8 @@ This interface should be implemented by model representing a shipping category a
 shipments and connect it with right shipment method.
 
 .. note::
-    This interface extends the :ref:`component_resource_model_code-aware-interface` and :ref:`component_resource_model_timestampable-interface`. |br|
+    This interface extends the :ref:`component_resource_model_code-aware-interface` and :ref:`component_resource_model_timestampable-interface`.
+
     For more detailed information go to `Sylius API ShippingCategoryInterface`_.
 
 .. _Sylius API ShippingCategoryInterface: http://api.sylius.org/Sylius/Component/Shipping/Model/ShippingCategoryInterface.html
@@ -78,7 +81,8 @@ and allows to add a new restriction to a basic shipping method.
 
 .. note::
     This interface extends the :ref:`component_resource_model_code-aware-interface`, :ref:`component_resource_model_timestampable-interface`
-    and :ref:`component_shipping_model_shipping-method-translation-interface`. |br|
+    and :ref:`component_shipping_model_shipping-method-translation-interface`.
+
     For more detailed information go to `Sylius API ShippingMethodInterface`_.
 
 .. _Sylius API ShippingMethodInterface: http://api.sylius.org/Sylius/Component/Shipping/Model/ShippingMethodInterface.html

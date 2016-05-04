@@ -125,7 +125,7 @@ multiple (Default: false)
                             multiple: true
 
 Currency (*currency*)
--------------------
+---------------------
 
 This filter allows the user to select one or multiple currencies.
 

@@ -4,10 +4,11 @@ State Machine
 Order States
 ------------
 
-Sylius itself uses a complex state machine system to manage all states of the business domain. 
+Sylius itself uses a complex state machine system to manage all states of the business domain.
 This component has some sensible default states defined in the **OrderInterface**.
 
-All new **Order** instances have the state ``cart`` by default, which means they are unconfirmed. |br|
+All new **Order** instances have the state ``cart`` by default, which means they are unconfirmed.
+
 The following states are defined:
 
 +-------------------+-------------+-----------------------------------------------+

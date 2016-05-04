@@ -14,7 +14,8 @@ It also contains all the default :doc:`/components/Payment/credit_card_types`.
 
 .. note::
    This interface extends the :ref:`component_payment_model_payment-source-interface`
-   and the :ref:`component_resource_model_timestampable-interface`. |br|
+   and the :ref:`component_resource_model_timestampable-interface`.
+
    For more detailed information go to `Sylius API CreditCardInterface`_.
 
 .. _Sylius API CreditCardInterface: http://api.sylius.org/Sylius/Component/Payment/Model/CreditCardInterface.html
@@ -25,11 +26,12 @@ PaymentInterface
 ~~~~~~~~~~~~~~~~
 
 This interface should be implemented by any custom model representing a payment.
-Also it keeps all of the default :doc:`/components/Payment/payment_states`.
+Also it keeps all of the default :ref:`component_payment_payment-states`.
 
 .. note::
-   This interface extends the :ref:`component_resource_model_code-aware-interface` and :ref:`component_resource_model_timestampable-interface`
-   and the :ref:`component_resource_model_soft-deletable-interface`. |br|
+   This interface extends the :ref:`component_resource_model_code-aware-interface` and
+   :ref:`component_resource_model_timestampable-interface`.
+
    For more detailed information go to `Sylius API PaymentInterface`_.
 
 .. _Sylius API PaymentInterface: http://api.sylius.org/Sylius/Component/Payment/Model/PaymentInterface.html
@@ -44,7 +46,8 @@ models or services from this component, it needs to implement this interface.
 
 .. note::
    This interface extends the :ref:`component_resource_model_timestampable-interface`
-   and the :ref:`component_payment_model_payment-method-translation-interface`. |br|
+   and the :ref:`component_payment_model_payment-method-translation-interface`.
+
    For more detailed information go to `Sylius API PaymentMethodInterface`_.
 
 .. _Sylius API PaymentMethodInterface: http://api.sylius.org/Sylius/Component/Payment/Model/PaymentMethodInterface.html
@@ -80,7 +83,8 @@ which then could be used by the payment method itself.
 PaymentSourceInterface
 ~~~~~~~~~~~~~~~~~~~~~~
 
-This interface needs to be implemented by any custom payment source. |br|
+This interface needs to be implemented by any custom payment source.
+
 The default payment source is :ref:`component_payment_model_credit-card`.
 
 .. note::

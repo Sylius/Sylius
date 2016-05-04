@@ -79,7 +79,7 @@ Structure
 
 * Add a single space after each comma delimiter;
 
-* Add a single space around operators (``==``, ``&&``, ...);
+* Add a single space around operators (``===``, ``&&``, ...);
 
 * Add a comma after each array item in a multi-line array, even after the
   last one;
@@ -101,7 +101,7 @@ Structure
 * Use parentheses when instantiating classes regardless of the number of
   arguments the constructor has;
 
-* Exception message strings should be concatenated using :phpfunction:`sprintf`.
+* Exception message strings should be concatenated using ``sprintf``.
 
 Naming Conventions
 ------------------

@@ -61,7 +61,8 @@ Be aware that setting the default currency is done only once while creating the 
 afterwards you cannot change it.
 
 .. note::
-   This service implements the :ref:`component_currency_context_currency-context-interface`. |br|
+   This service implements the :ref:`component_currency_context_currency-context-interface`.
+
    For more detailed information go to `Sylius API CurrencyContext`_.
 
 .. _Sylius API CurrencyContext: http://api.sylius.org/Sylius/Component/Currency/Context/CurrencyContext.html
@@ -92,7 +93,8 @@ The **CurrencyConverter** allows you to convert a value accordingly to the excha
    $currencyConverter->convert(1000, 'USD'); // Returns 1500.
 
 .. note::
-   This service implements the :ref:`component_currency_converter_currency-converter-interface`. |br|
+   This service implements the :ref:`component_currency_converter_currency-converter-interface`.
+
    For more detailed information go to `Sylius API CurrencyConverter`_.
 
 .. _Sylius API CurrencyConverter: http://api.sylius.org/Sylius/Component/Currency/Converter/CurrencyConverter.html
@@ -123,7 +125,8 @@ The ``getAvailableCurrencies`` method retrieves all currencies which ``enabled``
 property is set to true and have been inserted in the given repository.
 
 .. note::
-   This service implements the :ref:`component_currency_provider_currency-provider-interface`. |br|
+   This service implements the :ref:`component_currency_provider_currency-provider-interface`.
+
    For more detailed information go to `Sylius API CurrencyProvider`_.
 
 .. _Sylius API CurrencyProvider: http://api.sylius.org/Sylius/Component/Currency/Provider/CurrencyProvider.html

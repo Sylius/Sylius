@@ -1,6 +1,8 @@
 Models
 ======
 
+.. _component_order_model_order:
+
 Order
 -----
 
@@ -100,7 +102,7 @@ OrderItemUnits have the following properties:
 +------------------+--------------------------------------------------------------------+
 
 .. note::
-This model implements the :ref:`component_order_model_order-item-unit-interface`
+    This model implements the :ref:`component_order_model_order-item-unit-interface`
     For more detailed information go to `Sylius API OrderItemUnit`_.
 
 .. _Sylius API OrderItemUnit: http://api.sylius.org/Sylius/Component/Order/Model/OrderItem.html
@@ -209,5 +211,3 @@ Identities have the following properties:
     For more detailed information go to `Sylius API Identity`_.
 
 .. _Sylius API Identity: http://api.sylius.org/Sylius/Component/Order/Model/Identity.html
-
-.. _component_order_model_order:

@@ -8,4 +8,3 @@ Symfony2 integration for `Omnipay <https://github.com/omnipay/omnipay>`_ library
 
    installation
    gateway
-   payment

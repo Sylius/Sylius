@@ -22,7 +22,8 @@ different presentations of its fields in various locales.
 +--------------------+-------------------------------------------------------------------------+
 
 .. note::
-   This model implements the :ref:`component_translation_model_translatable-interface`. |br|
+   This model implements the :ref:`component_translation_model_translatable-interface`.
+
    For more detailed information go to `Sylius API AbstractTranslatable`_.
 
 .. _Sylius API AbstractTranslatable: http://api.sylius.org/Sylius/Component/Translation/Model/AbstractTranslatable.html
@@ -44,7 +45,8 @@ maintaining a single translation for provided locale.
 +--------------+---------------------------------------------------------+
 
 .. note::
-   This model implements the :ref:`component_translation_model_translation-interface`. |br|
+   This model implements the :ref:`component_translation_model_translation-interface`.
+
    For more detailed information go to `Sylius API AbstractTranslation`_.
 
 .. _Sylius API AbstractTranslation: http://api.sylius.org/Sylius/Component/Translation/Model/AbstractTranslation.html

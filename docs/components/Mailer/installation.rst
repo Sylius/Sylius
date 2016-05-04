@@ -3,7 +3,7 @@ Installation
 
 You can install the component in 2 different ways:
 
-* :doc:`Install it via Composer </components/using_components>` (``sylius\mailer`` on `Packagist`_);
+* :doc:`Install it via Composer </components/general/using_components>` (``sylius/mailer`` on `Packagist`_);
 * Use the official Git repository (https://github.com/Sylius/Mailer).
 
 .. include:: /components/require_autoload.rst.inc

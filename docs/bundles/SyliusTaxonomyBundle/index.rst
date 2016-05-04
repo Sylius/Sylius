@@ -8,5 +8,5 @@ Flexible categorization system for Symfony2 applications.
 
    installation
    taxonomy_and_taxon
-   categorizing
+   categorization
    summary

@@ -13,7 +13,7 @@ To create a new **ServiceRegistry** you need to
 determine what kind of interface should be kept inside.
 
 For the sake of examples lets use the :ref:`component_payment_calculator_fee-calculator-interface`
-from the :ref:`component_payment_index` component.
+from the :doc:`Payment </components/Payment/index>` component.
 
 .. code-block:: php
 
@@ -23,7 +23,8 @@ from the :ref:`component_payment_index` component.
 
    $registry = new ServiceRegistry('Sylius\Component\Payment\Calculator\FeeCalculatorInterface');
 
-Once you've done that you can manage any object with the corresponding interface. |br|
+Once you've done that you can manage any object with the corresponding interface.
+
 So for starters, lets add some services:
 
 .. code-block:: php

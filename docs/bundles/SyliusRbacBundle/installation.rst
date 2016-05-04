@@ -8,14 +8,14 @@ If you have `Composer installed globally <http://getcomposer.org/doc/00-intro.md
 
 .. code-block:: bash
 
-    $ composer require sylius/rbac-bundle:0.15.0
+    $ composer require sylius/rbac-bundle
 
 Otherwise you have to download .phar file.
 
 .. code-block:: bash
 
     $ curl -sS https://getcomposer.org/installer | php
-    $ php composer.phar require sylius/rbac-bundle:0.15.0
+    $ php composer.phar require sylius/rbac-bundle
 
 Adding required bundles to the kernel
 -------------------------------------

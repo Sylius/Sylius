@@ -14,9 +14,9 @@ This interface should be implemented by models characterizing a product.
 .. note::
    This interface extends :ref:`component_archetype_model_archetype-subject-interface`,
    :ref:`component_resource_model_slug-aware-interface`,
-   :ref:`component_resource_model_soft-deletable-interface`,
    :ref:`component_resource_model_timestampable-interface`
-   and :ref:`component_product_model_product-translation-interface`. |br|
+   and :ref:`component_product_model_product-translation-interface`.
+
    For more information go to `Sylius API ProductInterface`_.
 
 .. _Sylius API ProductInterface: http://api.sylius.org/Sylius/Component/Product/Model/ProductInterface.html
@@ -29,7 +29,8 @@ ProductTranslationInterface
 This interface should be implemented by models used for storing a single translation of product fields.
 
 .. note::
-   This interface extends the :ref:`component_resource_model_slug-aware-interface`. |br|
+   This interface extends the :ref:`component_resource_model_slug-aware-interface`.
+
    For more information go to `Sylius API ProductTranslationInterface`_.
 
 .. _Sylius API ProductTranslationInterface: http://api.sylius.org/Sylius/Component/Product/Model/ProductTranslationInterface.html
@@ -43,7 +44,8 @@ This interfaces should be implemented by models used
 to bind an attribute and a value to a specific product.
 
 .. note::
-   This interface extends the :ref:`component_attribute_model_attribute-value-interface`. |br|
+   This interface extends the :ref:`component_attribute_model_attribute-value-interface`.
+
    For more information go to `Sylius API AttributeValueInterface`_.
 
 .. _Sylius API AttributeValueInterface: http://api.sylius.org/Sylius/Component/Product/Model/AttributeValueInterface.html
@@ -57,7 +59,8 @@ This interface should be implemented by models binding
 a product with a specific combination of attributes.
 
 .. note::
-   This interface extends the :ref:`component_variant_model_variant-interface`. |br|
+   This interface extends the :ref:`component_variation_model_variant-interface`.
+
    For more information go to `Sylius API VariantInterface`_.
 
 .. _Sylius API VariantInterface: http://api.sylius.org/Sylius/Component/Product/Model/VariantInterface.html

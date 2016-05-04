@@ -41,7 +41,8 @@ By default it contains the following properties:
 
 .. note::
    This model extends the :ref:`component_translation_model_abstract-translatable`
-   and implements the :ref:`component_product_model_product-interface`. |br|
+   and implements the :ref:`component_product_model_product-interface`.
+
    For more detailed information go to `Sylius API Product`_.
 
 .. _Sylius API Product: http://api.sylius.org/Sylius/Component/Product/Model/Product.html
@@ -63,7 +64,8 @@ By default it has the following properties:
 
 .. note::
    This model extends the :ref:`component_translation_model_abstract-translation`
-   and implements the :ref:`component_product_model_product-translation-interface`. |br|
+   and implements the :ref:`component_product_model_product-translation-interface`.
+
    For more detailed information go to `Sylius API ProductTranslation`_.
 
 .. _Sylius API ProductTranslation: http://api.sylius.org/Sylius/Component/Product/Model/ProductTranslation.html
@@ -78,7 +80,8 @@ is an instance of the :ref:`component_product_model_product-interface`.
 
 .. note::
    This model extends the :ref:`component_attribute_model_attribute-value`
-   and implements the :ref:`component_product_model_attribute-value-interface`. |br|
+   and implements the :ref:`component_product_model_attribute-value-interface`.
+
    For more detailed information go to `Sylius API AttributeValue`_.
 
 .. _Sylius API AttributeValue: http://api.sylius.org/Sylius/Component/Product/Model/AttributeValue.html
@@ -100,7 +103,8 @@ and provides an additional property:
 
 .. note::
    This model extends the :ref:`component_variation_model_variant`
-   and implements the :ref:`component_product_model_variant-interface`. |br|
+   and implements the :ref:`component_product_model_variant-interface`.
+
    For more detailed information go to `Sylius API Variant`_.
 
 .. _Sylius API Variant: http://api.sylius.org/Sylius/Component/Product/Model/Variant.html

@@ -33,12 +33,13 @@ Configuration reference
                             default: Sylius\Bundle\ProductBundle\Form\Type\Product\TranslationType
                     validation_groups:
                         default: [ sylius ]
+
 Tests
 -----
 
 .. code-block:: bash
 
-    $ composer install --dev --prefer-dist
+    $ composer install
     $ bin/phpspec run -fpretty --verbose
 
 Bug tracking

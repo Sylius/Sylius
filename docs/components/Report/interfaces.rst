@@ -12,7 +12,8 @@ ReportInterface
 This interface should be implemented by model representing a single Report.
 
 .. note::
-    This interface extends :ref:`component_resource_model_code-aware-interface`. |br|
+    This interface extends :ref:`component_resource_model_code-aware-interface`.
+
     For more detailed information go to `Sylius API ReportInterface`_.
 
 .. _Sylius API ReportInterface: http://api.sylius.org/Sylius/Component/Report/Model/ReportInterface.html

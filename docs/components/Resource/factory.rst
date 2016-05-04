@@ -11,5 +11,5 @@ Interface implemented by all Factory services for Resources. To learn more go to
 +-------------+--------------------------------------------+
 | Method      | Description                                |
 +=============+============================================+
-| createNew() | Create a new  instance of your resource    |
+| createNew() | Create a new instance of your resource     |
 +-------------+--------------------------------------------+

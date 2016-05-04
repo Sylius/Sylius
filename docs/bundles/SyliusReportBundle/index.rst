@@ -1,5 +1,5 @@
 SyliusReportBundle
-===================
+==================
 
 SyliusReportBundle is a flexible reports management system for Symfony2 applications.
 
@@ -10,6 +10,7 @@ Using this bundle, you can generate various and complex reports for your system,
 
    installation
    forms
+   report
    custom-data-fetcher
    custom-renderer
    summary

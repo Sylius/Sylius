@@ -55,11 +55,6 @@ You can also prefix the title of your pull request in a few cases:
   pull request, but you would like it to be reviewed. The pull request won't
   be merged until you say it is ready.
 
-* ``[WCM]`` (Waiting Code Merge) is used when you're documenting a new feature
-  or change that hasn't been accepted yet into the core code. The pull request
-  will not be merged until it is merged in the core code (or closed if the
-  change is rejected).
-
 .. _doc-contributing-pr-format:
 
 Documenting new Features or Behavior Changes
@@ -90,11 +85,6 @@ Steps:
 
 * Submit new issue in the GitHub tracker;
 * *(optional)* Submit a patch.
-
-Translating
------------
-
-Read the dedicated :doc:`document <translations>`.
 
 .. _`fork`:                       https://help.github.com/articles/fork-a-repo
 .. _`pull requests`:              https://help.github.com/articles/using-pull-requests

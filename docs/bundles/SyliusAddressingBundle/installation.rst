@@ -8,7 +8,7 @@ If you have `Composer installed globally <http://getcomposer.org/doc/00-intro.md
 
 .. code-block:: bash
 
-    $ composer require sylius/addressing-bundle:*
+    $ composer require sylius/addressing-bundle
 
 Otherwise you have to download .phar file.
 
@@ -87,7 +87,7 @@ Import the routing configuration by adding the following to your ``app/config/ro
 .. code-block:: yaml
 
     sylius_addressing:
-        resource: @SyliusAddressingBundle/Resources/config/routing.yml
+        resource: "@SyliusAddressingBundle/Resources/config/routing.yml"
 
 Updating database schema
 ------------------------

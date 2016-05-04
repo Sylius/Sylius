@@ -1,5 +1,5 @@
 Payments API
-==========
+============
 
 Sylius payment API endpoint is `/api/payments`.
 
@@ -66,7 +66,7 @@ Response
     }
 
 Getting a single payment
--------------------------
+------------------------
 
 You can view a single payment by executing the following request:
 
@@ -86,7 +86,7 @@ Response
     {"to": "do"}
 
 Deleting a payment
--------------------
+------------------
 
 You can delete a payment from the system by making the following DELETE call:
 

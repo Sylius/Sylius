@@ -8,5 +8,4 @@ Various data storage implementation in PHP.
 
    installation
    basic_usage
-   storages
    interfaces

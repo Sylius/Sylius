@@ -13,7 +13,8 @@ This interface provides you with basic management of a currency's code,
 name, exchange rate and whether the currency should be enabled or not.
 
 .. note::
-   This interface extends :ref:`componet_resource_model_code-aware-interface` and :ref:`component_resource_model_timestampable-interface`. |br|
+   This interface extends :ref:`component_resource_model_code-aware-interface` and :ref:`component_resource_model_timestampable-interface`.
+
    For more detailed information go to `Sylius API CurrencyInterface`_.
 
 .. _Sylius API CurrencyInterface: http://api.sylius.org/Sylius/Component/Currency/Model/CurrencyInterface.html

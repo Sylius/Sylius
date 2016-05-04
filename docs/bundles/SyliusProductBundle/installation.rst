@@ -8,14 +8,14 @@ If you have `Composer installed globally <http://getcomposer.org/doc/00-intro.md
 
 .. code-block:: bash
 
-    $ composer require "sylius/product-bundle"
+    $ composer require sylius/product-bundle
 
 Otherwise you have to download .phar file.
 
 .. code-block:: bash
 
     $ curl -sS https://getcomposer.org/installer | php
-    $ php composer.phar require "sylius/product-bundle"
+    $ php composer.phar require sylius/product-bundle
 
 Adding required bundles to the kernel
 -------------------------------------
@@ -81,7 +81,7 @@ Add the following to your ``app/config/routing.yml``.
 .. code-block:: yaml
 
     sylius_product:
-        resource: @SyliusProductBundle/Resources/config/routing.yml
+        resource: "@SyliusProductBundle/Resources/config/routing.yml"
 
 Updating database schema
 ------------------------

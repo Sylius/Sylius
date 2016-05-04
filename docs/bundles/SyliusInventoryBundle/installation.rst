@@ -8,14 +8,14 @@ If you have `Composer installed globally <http://getcomposer.org/doc/00-intro.md
 
 .. code-block:: bash
 
-    $ composer require "sylius/inventory-bundle"
+    $ composer require sylius/inventory-bundle
 
 Otherwise you have to download .phar file.
 
 .. code-block:: bash
 
     $ curl -sS https://getcomposer.org/installer | php
-    $ php composer.phar require "sylius/inventory-bundle"
+    $ php composer.phar require sylius/inventory-bundle
 
 Adding required bundles to the kernel
 -------------------------------------
@@ -226,7 +226,7 @@ Import the routing configuration by adding the following to your `app/config/rou
 .. code-block:: yaml
 
     sylius_inventory:
-        resource: @SyliusInventoryBundle/Resources/config/routing.yml
+        resource: "@SyliusInventoryBundle/Resources/config/routing.yml"
 
 
 Updating database schema

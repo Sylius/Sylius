@@ -14,7 +14,8 @@ used for describing a product's attribute.
 
 .. note::
    This interface extends the :ref:`component_resource_model_timestampable-interface` and
-   the :ref:`component_attribute_model_attribute-translation-interface`. |br|
+   the :ref:`component_attribute_model_attribute-translation-interface`.
+
    For more detailed information go to `Sylius API AttributeInterface`_.
 
 .. _Sylius API AttributeInterface: http://api.sylius.org/Sylius/Component/Attribute/Model/AttributeInterface.html
@@ -65,7 +66,7 @@ It will ask you to implement the management of :ref:`component_attribute_model_a
 .. _component_attribute_model_attribute-type-interface:
 
 AttributeTypeInterface
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~
 
 This interface should be implemented by models
 used for describing a product's attribute type.

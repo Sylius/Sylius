@@ -76,7 +76,7 @@ Configuration reference
 
 .. code-block:: bash
 
-    $ composer install --dev --prefer-dist
+    $ composer install
     $ bin/phpspec run -fpretty --verbose
 
 Bug tracking

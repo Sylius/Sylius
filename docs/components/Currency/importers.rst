@@ -22,7 +22,8 @@ By default there are two importers already implemented:
 * :ref:`component_currency_importer_open-exchange-rates-importer`
 
 .. tip::
-   Of course you are not limited to the default importers as you can simply make your own! |br|
+   Of course you are not limited to the default importers as you can simply make your own!
+
    The only thing you need to do is extend the **AbstractImporter**.
 
 .. _component_currency_importer_european-central-bank-importer:
@@ -55,7 +56,8 @@ The source of **EuropeanCentralBankImporter**'s data is the `European Central Ba
    $euroImporter->import($managedCurrencies); // Updates exchange rates for managed currencies.
 
 .. note::
-   This service extends the :ref:`component_currency_importer_abstract-importer`. |br|
+   This service extends the :ref:`component_currency_importer_abstract-importer`.
+
    For more detailed information go to `Sylius API EuropeanCentralBankImporter`_.
 
 .. _Sylius API EuropeanCentralBankImporter: http://api.sylius.org/Sylius/Component/Currency/Importer/EuropeanCentralBankImporter.html
@@ -88,7 +90,8 @@ The **OpenExchangeRatesImporter** gets it's data from `Open Exchange Rates`_.
    $openImporter->import($managedCurrencies); // Updates exchange rates for managed currencies.
 
 .. note::
-   This service extends the :ref:`component_currency_importer_abstract-importer`. |br|
+   This service extends the :ref:`component_currency_importer_abstract-importer`.
+
    For more detailed information go to `Sylius API OpenExchangeRatesImporter`_.
 
 .. _Sylius API OpenExchangeRatesImporter: http://api.sylius.org/Sylius/Component/Currency/Importer/OpenExchangeRatesImporter.html

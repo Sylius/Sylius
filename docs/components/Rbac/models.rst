@@ -35,7 +35,8 @@ Permissions have the following properties:
 +-------------+----------------------------------------------------------------------------------+
 
 .. note::
-    This model implements the :ref:`component_rbac_model_permission-interface`. |br|
+    This model implements the :ref:`component_rbac_model_permission-interface`.
+
     For more detailed information go to `Sylius API Permission`_.
 
 .. _Sylius API Permission: http://api.sylius.org/Sylius/Component/Rbac/Model/Permission.html
@@ -80,7 +81,8 @@ If you want to have **Roles** in your model, just implement :ref:`component_rbac
 +---------------+-----------------------------------------------------------------------+
 
 .. note::
-    This model implements the :ref:`component_rbac_model_role-interface`. |br|
+    This model implements the :ref:`component_rbac_model_role-interface`.
+
     For more detailed information go to `Sylius API Role`_.
 
 .. _Sylius API Role: http://api.sylius.org/Sylius/Component/Rbac/Model/Role.html

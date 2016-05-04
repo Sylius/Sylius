@@ -105,6 +105,8 @@ The current list of supported formats are the following:
 +-----------------+-------------+
 | yaml            | YAML        |
 +-----------------+-------------+
+| json            | JSON        |
++-----------------+-------------+
 | jinja           | Twig        |
 +-----------------+-------------+
 | html+jinja      | Twig        |
@@ -139,26 +141,6 @@ also specify alternative text for the link:
 .. code-block:: rst
 
     :doc:`Simple CRUD </bundles/SyliusResourceBundle/installation>`
-
-You can also add links to the API documentation:
-
-.. code-block:: rst
-
-    :namespace:`Sylius\\Bundle\\CoreBundle`
-
-    :class:`Sylius\\Bundle\\CoreBundle\\Model\\Order`
-
-    :method:`Sylius\\Bundle\\AddressingBundle\\Matcher\\ZoneMatcher::match`
-
-and to the PHP documentation:
-
-.. code-block:: rst
-
-    :phpclass:`SimpleXMLElement`
-
-    :phpmethod:`DateTime::createFromFormat`
-
-    :phpfunction:`iterator_to_array`
 
 Testing Documentation
 ~~~~~~~~~~~~~~~~~~~~~

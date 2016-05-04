@@ -14,7 +14,7 @@ This interface should be implemented by model representing a single Authorizatio
 .. note::
     For more detailed information go to `Sylius API IdentityInterface`_.
 
-.. _Sylius Api IdentityInterface: http://api.sylius.org/Sylius/Component/Rbac/Model/IdentityInterface.html
+.. _Sylius API IdentityInterface: http://api.sylius.org/Sylius/Component/Rbac/Model/IdentityInterface.html
 
 .. _component_rbac_model_permission-interface:
 
@@ -24,7 +24,8 @@ PermissionInterface
 This interface should be implemented by model representing a single Permission.
 
 .. note::
-    This interface extends :ref:`component_resource_model_code-aware-interface`, :ref:`component_resource_model_timestampable-interface` and :ref:`component_resource_model_resource-interface`. |br|
+    This interface extends :ref:`component_resource_model_code-aware-interface`, :ref:`component_resource_model_timestampable-interface` and :ref:`component_resource_model_resource-interface`.
+
     For more detailed information go to `Sylius API PermissionInterface`_.
 
 .. _Sylius API PermissionInterface: http://api.sylius.org/Sylius/Component/Rbac/Model/PermissionInterface.html
@@ -37,7 +38,8 @@ RoleInterface
 This interface should be implemented by model representing a single Role.
 
 .. note::
-    This interface extends :ref:`component_resource_model_code-aware-interface`, :ref:`component_resource_model_timestampable-interface` and :ref:`component_resource_model_resource-interface`. |br|
+    This interface extends :ref:`component_resource_model_code-aware-interface`, :ref:`component_resource_model_timestampable-interface` and :ref:`component_resource_model_resource-interface`.
+
     For more detailed information go to `Sylius API RoleInterface`_.
 
 .. _Sylius API RoleInterface: http://api.sylius.org/Sylius/Component/Rbac/Model/RoleInterface.html
@@ -114,7 +116,8 @@ RoleRepositoryInterface
 In order to decouple from storage that provides roles, you should create repository class which implements this interface.
 
 .. note::
-    This interface extends :ref:`component_resource_repository_repository-interface`. |br|
+    This interface extends :ref:`component_resource_repository_repository-interface`.
+
     For more detailed information go to `Sylius API RoleRepositoryInterface`_.
 
 .. _Sylius API RoleRepositoryInterface: http://api.sylius.org/Sylius/Component/Rbac/Repository/RoleRepositoryInterface.html

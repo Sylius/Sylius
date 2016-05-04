@@ -2,7 +2,7 @@ Extending the menu
 ==================
 
 You can add entries to the menu via events easily. You get passed a
-:class:`Sylius\\Bundle\\WebBundle\\Event\\MenuBuilderEvent` with ``FactoryInterface`` and ``ItemInterface`` of
+``Sylius\\Bundle\\WebBundle\\Event\\MenuBuilderEvent`` with ``FactoryInterface`` and ``ItemInterface`` of
 `KnpMenu`_. So you can manipulate the whole menu.
 
 Available for the backend and frontend menus, by listening/subscribing to any of the event constants defined in ``Sylius\Bundle\WebBundle\Event\MenuBuilderEvent``.
