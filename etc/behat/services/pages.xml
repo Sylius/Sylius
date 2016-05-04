@@ -150,6 +150,12 @@
         <service id="sylius.behat.page.admin.locale.update" class="%sylius.behat.page.admin.locale.update.class%" parent="sylius.behat.page.admin.crud.update" scope="scenario" public="false">
             <argument type="string">locale</argument>
         </service>
+        <service id="sylius.behat.page.admin.order.index" class="%sylius.behat.page.admin.order.index.class%" parent="sylius.behat.page.admin.crud.index" scope="scenario" public="false">
+            <argument type="string">order</argument>
+        </service>
+        <service id="sylius.behat.page.admin.order.show" class="%sylius.behat.page.admin.order.show.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false">
+            <argument type="service" id="sylius.behat.table_accessor" />
+        </service>
         <service id="sylius.behat.page.admin.payment_method.create" class="%sylius.behat.page.admin.payment_method.create.class%" parent="sylius.behat.page.admin.crud.create" scope="scenario" public="false">
             <argument type="string">payment_method</argument>
         </service>
@@ -238,10 +244,6 @@
         <service id="sylius.behat.page.admin.zone.update" class="%sylius.behat.page.admin.zone.update.class%" parent="sylius.behat.page.admin.crud.update" scope="scenario" public="false">
             <argument type="string">zone</argument>
         </service>
-        <service id="sylius.behat.page.admin.order.index" class="%sylius.behat.page.admin.order.index.class%" parent="sylius.behat.page.admin.crud.index" scope="scenario" public="false">
-            <argument type="string">order</argument>
-        </service>
-        <service id="sylius.behat.page.admin.order.show" class="%sylius.behat.page.admin.order.show.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
 
         <service id="sylius.behat.page.shop.home" class="%sylius.behat.page.shop.home.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
         <service id="sylius.behat.page.shop.cart.cart_summary" class="%sylius.behat.page.shop.cart.cart_summary.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />

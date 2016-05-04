@@ -51,4 +51,21 @@ interface ShowPageInterface extends PageInterface
      * @param string $paymentMethodName
      */
     public function hasPayment($paymentMethodName);
+
+    /**
+     * @return int
+     */
+    public function countItems();
+
+    /**
+     * @param string $productName
+     *
+     * @return bool
+     */
+    public function isProductInTheList($productName);
+
+    /**
+     * @param string $text
+     */
+    public function isTextOnPage($text);
 }

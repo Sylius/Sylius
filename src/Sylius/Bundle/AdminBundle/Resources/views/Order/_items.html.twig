@@ -1,0 +1,64 @@
+<table class="ui celled padded table">
+    <thead>
+    <tr>
+        <th class="two wide"></th>
+        <th>{{ 'sylius.ui.order_item_product'|trans }}</th>
+        <th class="one wide">{{ 'sylius.order_item.quantity'|trans }}</th>
+        <th class="two wide">{{ 'sylius.ui.unit_price'|trans }}</th>
+        <th class="two wide">{{ 'sylius.ui.total'|trans }}</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in order.items %}
+        {% set variant = item.variant %}
+        {% set product = variant.product %}
+        <tr>
+            <td class="center aligned">
+                <a href="{{ path('sylius_backend_product_show', {'id': product.id}) }}" title="View {{ product.name|escape('html_attr') }} details.">
+                    <img src="{{ product.image ? product.image.path|imagine_filter('sylius_small') : 'http://placehold.it/90x60' }}" />
+                </a>
+            </td>
+            <td class="single line">
+                <a href="{{ path('sylius_backend_product_show', {'id': product.id}) }}">
+                    <h4>{{ product.name }}</h4>
+                </a>
+                {% if product.hasOptions %}
+                    <div class="ui list">
+                        <div class="item">
+                            <strong>{{ 'sylius.ui.sku'|trans }}</strong>: <code>{{ variant.sku|default('SKU') }}</code>
+                        </div>
+                        {% for option in variant.options %}
+                            <div class="item">
+                                <strong>{{ option.presentation }}</strong>: {{ option.value  }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </td>
+            <td class="center aligned">
+                {{ item.quantity }}
+            </td>
+            <td class="center aligned">
+                {{ item.unitPrice|sylius_price(order.currency) }}
+            </td>
+            <td class="right aligned">
+                {{ item.total|sylius_price(order.currency) }}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    <tfoot class="full-width">
+    <tr>
+        <th colspan="5" class="right aligned">
+            <strong>{{ 'sylius.ui.items_total'|trans }}</strong>:
+            {{ order.itemsTotal|sylius_price(order.currency) }}
+        </th>
+    </tr>
+    <tr>
+        <th colspan="5" class="ui large header right aligned">
+            <strong>{{ 'sylius.ui.total'|trans }}</strong>:
+            {{ order.total|sylius_price(order.currency) }}
+        </th>
+    </tr>
+    </tfoot>
+</table>

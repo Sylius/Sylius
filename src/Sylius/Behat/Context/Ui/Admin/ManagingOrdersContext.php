@@ -129,4 +129,40 @@ final class ManagingOrdersContext implements Context
             sprintf('Cannot find payment "%s".', $paymentMethodName)
         );
     }
+
+    /**
+     * @Then /^I should see (\d+) items in the list$/
+     */
+    public function iShouldSeeItemsInTheList($amount)
+    {
+        $itemsCount = $this->showPage->countItems();
+
+        Assert::eq(
+            $amount,
+            $itemsCount,
+            sprintf('There should be %d items in the list, but get %d.', $amount, $itemsCount)
+        );
+    }
+
+    /**
+     * @Given I should see the product named :productName in the list
+     */
+    public function iShouldSeeTheProductNamedInTheList($productName)
+    {
+        Assert::true(
+            $this->showPage->isProductInTheList($productName),
+            sprintf('Product %s is not in the list.', $productName)
+        );
+    }
+
+    /**
+     * @Then I should see :text
+     */
+    public function iShouldSeeText($text)
+    {
+        Assert::true(
+            $this->showPage->isTextOnPage($text),
+            sprintf('Cannot find text "%s".', $text)
+        );
+    }
 }

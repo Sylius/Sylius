@@ -11,7 +11,11 @@
 
 namespace Sylius\Behat\Page\Admin\Order;
 
+use Behat\Mink\Exception\ElementNotFoundException;
+use Behat\Mink\Session;
 use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Behat\Service\Accessor\TableAccessorInterface;
+use Symfony\Component\Routing\RouterInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -19,6 +23,28 @@ use Sylius\Behat\Page\SymfonyPage;
  */
 class ShowPage extends SymfonyPage implements ShowPageInterface
 {
+    /**
+     * @var TableAccessorInterface
+     */
+    private $tableAccessor;
+
+    /**
+     * @param Session $session
+     * @param array $parameters
+     * @param RouterInterface $router
+     * @param TableAccessorInterface $tableAccessor
+     */
+    public function __construct(
+        Session $session,
+        array $parameters,
+        RouterInterface $router,
+        TableAccessorInterface $tableAccessor
+    ) {
+        parent::__construct($session, $parameters, $router);
+
+        $this->tableAccessor = $tableAccessor;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -72,6 +98,44 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
+    public function countItems()
+    {
+        return $this->tableAccessor->countTableBodyRows($this->getElement('table'));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isProductInTheList($productName)
+    {
+        try {
+            $rows = $this->tableAccessor->getRowsWithFields(
+                $this->getElement('table'),
+                ['item' => $productName]
+            );
+
+            return 1 === count($rows);
+
+        } catch (\InvalidArgumentException $exception) {
+            return false;
+        } catch (ElementNotFoundException $exception) {
+            return false;
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isTextOnPage($text)
+    {
+        $pageText = $this->getElement('page')->getText();
+
+        return stripos($pageText, $text) !== false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
@@ -80,6 +144,8 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'billing_address' => '#billing-address',
             'payments' => '#payments',
             'shipments' => '#shipments',
+            'table' => '.table',
+            'page' => 'body',
         ]);
     }
 
@@ -89,6 +155,14 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     protected function getRouteName()
     {
         return 'sylius_admin_order_show';
+    }
+
+    /**
+     * @return TableAccessorInterface
+     */
+    protected function getTableAccessor()
+    {
+        return $this->tableAccessor;
     }
 
     /**
@@ -108,6 +182,6 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             (stripos($elementText, $street) !== false) &&
             (stripos($elementText, $city) !== false) &&
             (stripos($elementText, $countryName.' '.$postcode) !== false)
-            ;
+        ;
     }
 }
