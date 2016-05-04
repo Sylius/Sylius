@@ -29,12 +29,8 @@ class SyliusFlowExtension extends Extension
      */
     public function load(array $config, ContainerBuilder $container)
     {
+        $config = $this->processConfiguration($this->getConfiguration($config, $container), $config);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config/container'));
-
-        $processor = new Processor();
-        $configuration = new Configuration();
-
-        $config = $processor->processConfiguration($configuration, $config);
 
         $container->setAlias('sylius.process_storage', $config['storage']);
 
