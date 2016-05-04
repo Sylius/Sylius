@@ -1,0 +1,22 @@
+{{ form_errors(form) }}
+<div class="ui two column stackable grid">
+    <div class="column">
+        <div class="ui segment">
+            {{ form_row(form.code) }}
+            {{ form_row(form.options) }}
+        </div>
+    </div>
+    <div class="column">
+        <div class="ui styled fluid accordion">
+            {% for locale, translationForm in form.translations %}
+                <div class="title{% if 0 == loop.index0 %} active{% endif %}">
+                    <i class="dropdown icon"></i>
+                    <i class="{{ locale|slice(3, 2)|lower }} flag"></i> {{ locale|sylius_locale_name }}
+                </div>
+                <div class="content{% if 0 == loop.index0 %} active{% endif %}">
+                    {{ form_row(translationForm.name) }}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

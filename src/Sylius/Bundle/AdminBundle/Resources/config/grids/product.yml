@@ -1,0 +1,25 @@
+sylius_grid:
+    grids:
+        sylius_admin_product:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: %sylius.model.product.class%
+            sorting:
+                code: asc
+            fields:
+                code:
+                    type: string
+                    label: sylius.ui.code
+                name:
+                    type: string
+                    label: sylius.ui.name
+            actions:
+                main:
+                    create:
+                        type: create_product
+                item:
+                    update:
+                        type: update
+                    delete:
+                        type: delete

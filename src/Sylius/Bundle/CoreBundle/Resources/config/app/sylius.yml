@@ -845,6 +845,7 @@ sylius_grid:
             delete_coupon: SyliusAdminBundle:PromotionCoupon/Action:delete.html.twig
             generate_coupon: SyliusAdminBundle:PromotionCoupon/Action:generate.html.twig
             create_zone: SyliusAdminBundle:Zone/Action:createZone.html.twig
+            create_product: SyliusAdminBundle:Product/Action:createProduct.html.twig
             create_product_attribute: SyliusAdminBundle:ProductAttribute/Action:createProductAttribute.html.twig
             show: SyliusAdminBundle:Grid/Action:show.html.twig
             create: SyliusAdminBundle:Grid/Action:create.html.twig

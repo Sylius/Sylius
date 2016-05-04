@@ -1,0 +1,13 @@
+<div class="ui labeled icon top right floating dropdown button primary link">
+    <i class="plus icon"></i>
+    <span class="text">{{ 'sylius.ui.create'|trans }}</span>
+    <div class="menu">
+        <div class="header">
+            <i class="diamond icon"></i>
+            {{ 'sylius.ui.type'|trans }}
+        </div>
+        <div class="divider"></div>
+        <a class="item" href="{{ path('sylius_admin_product_create') }}"><i class="plus icon"></i> {{ 'sylius.ui.simple_product'|trans }}</a>
+        <a class="item" href="{{ path('sylius_admin_product_create_configurable') }}"><i class="plus icon"></i> {{ 'sylius.ui.configurable_product'|trans }}</a>
+    </div>
+</div>

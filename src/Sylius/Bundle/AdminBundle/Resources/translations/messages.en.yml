@@ -3,10 +3,11 @@ sylius:
         admin:
             main:
                 catalog:
-                    header: Catalog
-                    taxons: Taxons
-                    options: Options
                     attributes: Attributes
+                    header: Catalog
+                    options: Options
+                    products: Products
+                    taxons: Taxons
                 configuration:
                     channels: Channels
                     countries: Countries
@@ -22,8 +23,8 @@ sylius:
                     header: Marketing
                     promotions: Promotions
                 customers:
-                    header: Customer
                     customers: Customers
+                    header: Customer
                 sales:
                     header: Sales
                     orders: Orders

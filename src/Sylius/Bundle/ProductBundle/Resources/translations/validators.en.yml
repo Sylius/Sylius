@@ -3,6 +3,9 @@ sylius:
         sku:
             not_blank: Please enter product SKU.
             unique: Product SKU must be unique.
+        code:
+            not_blank: Please enter product code.
+            unique: Product code must be unique.
         name:
             not_blank: Please enter product name.
             min_length: Product name must be at least 1 character long.|Product name must be at least {{ limit }} characters long.
