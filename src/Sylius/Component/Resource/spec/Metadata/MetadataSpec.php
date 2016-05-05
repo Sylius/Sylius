@@ -12,9 +12,6 @@
 namespace spec\Sylius\Component\Resource\Metadata;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\ProductBundle\Form\Type\ProductType;
-use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
-use Sylius\Component\Product\Model\Product;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 
 /**
@@ -30,13 +27,13 @@ class MetadataSpec extends ObjectBehavior
             'app.product',
             [
                 'driver' => 'doctrine/orm',
-                'templates' => 'SyliusProductBundle:Product',
+                'templates' => 'AppBundle:Resource',
                 'classes' => [
-                    'model' => Product::class,
+                    'model' => 'AppBundle\Model\Resource',
                     'form' => [
-                        'default' => ProductType::class,
-                        'choice' => ResourceChoiceType::class,
-                        'autocomplete' => 'Sylius\Bundle\ResourceBundle\Type\ResourceAutocompleteType',
+                        'default' => 'AppBundle\Form\Type\ResourceType',
+                        'choice' => 'AppBundle\Form\Type\ResourceChoiceType',
+                        'autocomplete' => 'AppBundle\Type\ResourceAutocompleteType',
                     ],
                 ],
             ],
@@ -92,7 +89,7 @@ class MetadataSpec extends ObjectBehavior
 
     function it_has_templates_namespace()
     {
-        $this->getTemplatesNamespace()->shouldReturn('SyliusProductBundle:Product');
+        $this->getTemplatesNamespace()->shouldReturn('AppBundle:Resource');
     }
 
     function it_has_access_to_specific_config_parameter()
@@ -116,7 +113,7 @@ class MetadataSpec extends ObjectBehavior
 
     function it_has_access_to_specific_classes()
     {
-        $this->getClass('model')->shouldReturn(Product::class);
+        $this->getClass('model')->shouldReturn('AppBundle\Model\Resource');
     }
 
     function it_throws_an_exception_when_class_does_not_exist()
