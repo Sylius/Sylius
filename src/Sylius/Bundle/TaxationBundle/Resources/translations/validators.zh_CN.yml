@@ -5,6 +5,9 @@ sylius:
     tax_category:
         name:
             not_blank: 请填写税目名称。
+        code:
+            not_blank: 请输入税类别代码。
+            unique: 给定代码的税收类别已存在。
     tax_rate:
         category:
             not_blank: 请选择税目。
@@ -14,3 +17,8 @@ sylius:
             not_blank: 请填写税率值。
         calculator:
             not_blank: 请选择税费计算器。
+        zone:
+            not_blank: 请选择税区。
+        code:
+            not_blank: 请输入税率代码。
+            unique: 给定代码的税率已存在。

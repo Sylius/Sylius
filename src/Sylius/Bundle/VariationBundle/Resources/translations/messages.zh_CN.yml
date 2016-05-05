@@ -7,6 +7,7 @@ sylius:
             presentation: 演示
         option:
             name: 名称
+            values: 可能的值
         option_value:
             add_value: 添加值
             value: 值
