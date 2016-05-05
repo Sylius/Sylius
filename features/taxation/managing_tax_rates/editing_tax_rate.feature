@@ -43,7 +43,7 @@ Feature: Editing tax rate
     Scenario: Changing related tax category
         Given the store has a tax category "Food and Beverage" also
         And I want to modify a tax rate "European Union Sales Tax"
-        And I change it to be applicable for the "Food and Beverage" tax category
+        When I change it to be applicable for the "Food and Beverage" tax category
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this tax rate should be applicable for the "Food and Beverage" tax category
@@ -52,7 +52,7 @@ Feature: Editing tax rate
     Scenario: Changing related zone
         Given there is a zone "The Rest of the World" containing all other countries
         And I want to modify a tax rate "European Union Sales Tax"
-        And I change its zone to "The Rest of the World"
+        When I change its zone to "The Rest of the World"
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this tax rate should be applicable in "The Rest of the World" zone

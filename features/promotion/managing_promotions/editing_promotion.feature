@@ -11,13 +11,13 @@ Feature: Editing promotion
 
     @ui
     Scenario: Seeing disabled code field when editing promotion
-        Given I want to modify a "Christmas sale" promotion
+        When I want to modify a "Christmas sale" promotion
         Then the code field should be disabled
 
     @ui
     Scenario: Editing promotions usage limit
         Given I want to modify a "Christmas sale" promotion
-        And I set its usage limit to 50
+        When I set its usage limit to 50
         And I save my changes
         Then I should be notified that it has been successfully edited
         And the "Christmas sale" promotion should be available to be used only 50 times
@@ -25,7 +25,7 @@ Feature: Editing promotion
     @ui
     Scenario: Editing promotion exclusiveness
         Given I want to modify a "Christmas sale" promotion
-        And I make it exclusive
+        When I make it exclusive
         And I save my changes
         Then I should be notified that it has been successfully edited
         And the "Christmas sale" promotion should be exclusive
@@ -33,7 +33,7 @@ Feature: Editing promotion
     @ui
     Scenario: Editing promotions coupon based option
         Given I want to modify a "Christmas sale" promotion
-        And I make it coupon based
+        When I make it coupon based
         And I save my changes
         Then I should be notified that it has been successfully edited
         And the "Christmas sale" promotion should be coupon based
@@ -41,7 +41,7 @@ Feature: Editing promotion
     @ui
     Scenario: Editing promotions channels
         Given I want to modify a "Christmas sale" promotion
-        And I make it applicable for the "France" channel
+        When I make it applicable for the "France" channel
         And I save my changes
         Then I should be notified that it has been successfully edited
         And the "Christmas sale" promotion should be applicable for the "France" channel
@@ -49,7 +49,7 @@ Feature: Editing promotion
     @ui
     Scenario: Adding a promotion with start and end date
         Given I want to modify a "Christmas sale" promotion
-        And I make it available from "12.12.2017" to "24.12.2017"
+        When I make it available from "12.12.2017" to "24.12.2017"
         And I save my changes
         Then I should be notified that it has been successfully edited
         And the "Christmas sale" promotion should be available from "12.12.2017" to "24.12.2017"

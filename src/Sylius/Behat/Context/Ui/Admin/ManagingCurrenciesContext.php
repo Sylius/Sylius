@@ -281,7 +281,7 @@ final class ManagingCurrenciesContext implements Context
     }
 
     /**
-     * @Given I browse currencies of the store
+     * @Given I want to browse currencies of the store
      */
     public function iWantToSeeAllCurrenciesInStore()
     {

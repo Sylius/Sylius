@@ -22,7 +22,7 @@ Feature: Selecting available payment methods for a channel
     Scenario: Adding payment methods to an existing channel
         Given the store operates on a channel named "Web store"
         And I want to modify this channel
-        And I select the "Offline" payment method
+        When I select the "Offline" payment method
         And I save my changes
         Then I should be notified that it has been successfully edited
         And the "Offline" payment method should be available for the "Web store" channel

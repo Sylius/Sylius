@@ -10,6 +10,6 @@ Feature: Browsing currencies
 
     @ui
     Scenario: Browsing currencies in store
-        Given I browse currencies of the store
+        When I want to browse currencies of the store
         Then I should see 2 currencies in the list
         And I should see the currency "British Pound Sterling" in the list

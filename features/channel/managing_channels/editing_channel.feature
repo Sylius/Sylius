@@ -18,7 +18,7 @@ Feature: Editing channel
 
     @ui
     Scenario: Seeing disabled code field when editing channel
-        Given I want to modify a channel "Web Channel"
+        When I want to modify a channel "Web Channel"
         Then the code field should be disabled
 
     @ui

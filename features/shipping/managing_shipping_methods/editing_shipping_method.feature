@@ -21,7 +21,7 @@ Feature: Editing shipping method
 
     @ui
     Scenario: Seeing disabled code field when editing shipping method
-        Given I want to modify a shipping method "UPS Carrier"
+        When I want to modify a shipping method "UPS Carrier"
         Then the code field should be disabled
 
     @ui @javascript
