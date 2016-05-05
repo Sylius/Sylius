@@ -12,8 +12,9 @@
 namespace Sylius\Bundle\PayumBundle\Model;
 
 use Payum\Core\Model\GatewayConfigInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 
-class GatewayConfig implements GatewayConfigInterface
+class GatewayConfig implements GatewayConfigInterface, ResourceInterface
 {
     /**
      * @var int
