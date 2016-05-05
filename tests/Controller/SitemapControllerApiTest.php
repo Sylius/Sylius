@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Tests\Controller;
+namespace Sylius\Tests\Controller;
 
 use Lakion\ApiTestCase\XmlApiTestCase;
 
