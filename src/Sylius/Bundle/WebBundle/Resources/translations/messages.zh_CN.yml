@@ -228,17 +228,66 @@ sylius:
         create_contact_request: 创建联系的请求
         create_contact_topic: 创建联系人主题
         create_country: 创建国家
+        create_currency: 创建货币
+        create_customer: 创建客户
         create_group: 创建组
+        create_imagine_block: 创造图像块
         create_locale: 创建区域设置
+        create_menu: 创建菜单
+        create_menu_node: 创建菜单节点
+        create_new_coupon: 创建新的优惠券
         create_new_page: 创建新页
+        create_new_report: 创建报表
+        create_option: 创建选项
+        create_order: 创建订单
+        create_payment: 创建付款
+        create_payment_method: 创建付款方法
+        create_product: 创建产品
+        create_product_association: 创建产品关联
+        create_product_association_type: 创建产品关联类型
+        create_product_attribute: 创建产品属性
+        create_promotion: 创建促销
+        create_redirect_route: 创建重定向路由
+        create_report: 创建报告
+        create_route: 创建路由
+        create_shipping_category: 创建配送类别
+        create_shipping_method: 创建送货方式
+        create_simple_block: 创建简单的块
+        create_slideshow_block: 创建幻灯片显示块
+        create_string_block: 创建字符串块
+        create_tax_category: 创建税收的类别
+        create_tax_rate: 创建税率
+        create_taxon: 创建分类
+        create_user: 创建用户
+        create_variant: 创建变体
         create_zone: 创建区域
         created_at: 创建于
+        creating_a_new_imagine_block: 创建一个新的图片块
+        creating_a_new_simple_block: 创建一个新的简单的块
+        creating_a_new_slideshow_block: 创建新的幻灯片显示块
+        creating_a_new_string_block: 创建新的字符串块
+        creating_menu: 创建菜单
+        creating_menu_node: 创建菜单节点
+        creating_new_page: 创建页面
+        creating_redirect_route: 创建重定向路由
+        creating_route: 创建路由
+        creation_date: 创建日期
+        creation_time: 创建时间
         currencies: 货币
         currency: 货币：
         current_orders: 当前订单
         current_password: 当前密码
+        current_promotions: 当前的促销活动
         current_stock: 当前货架
         customer: 客户
+        customer_details: 客户详细信息
+        customer_id: 客户ID
+        customer_not_notified: 未通知的客户
+        customer_notified: 已通知的客户
+        customer_orders: 客户订单
+        customer_since: 您是客户自从
+        customers: 客户
+        customers_list_of_all_customers_in_store: '客户 <small>显示一个店铺的全部客户</small>'
         customize_default_metadata: 自定义默认元数据
         customize_metadata: 自定义元数据
         customize_products_metadata: 自定义产品元数据
@@ -312,9 +361,11 @@ sylius:
         existing_customer: 现有客户
         expires_at: 截至于
         failed: 失败
+        female: 女士
         filter: 筛选器
         first_name: 名字
         firstname: 名字
+        forgot_password: 忘记密码
         gateway: 网关
         general_settings: 常规设置
         generate: 生成
@@ -324,6 +375,7 @@ sylius:
         hostname: 主机名
         id: ID
         images: 图像
+        index_metadata: 元数据
         information: 信息
         inventory_index: 库存
         inventory_state: 库存状态
@@ -337,6 +389,7 @@ sylius:
         last_week_revenue: 上个星期的收入
         lastname: 姓氏
         latest_orders: 最新订单
+        links: 链接
         locales: 区域设置
         login: 登录
         login_button: 登录
@@ -346,9 +399,12 @@ sylius:
         manage_countries: 管理国家
         manage_options: 管理选项
         manage_zones: 管理区域
+        marketing: 市场
         members: 会员
         menu_nodes: 菜单节点
+        menus: 菜单
         message: 消息
+        metadata_index: 元数据
         move_down: 向下移
         move_up: 向上移
         n_a: 未知
@@ -363,17 +419,35 @@ sylius:
         new_customer: 新客户
         new_password: 新密码
         new_product: 新产品
+        new_shipping_method: 新的送货方式
         new_tax_category: 新税种
+        new_tax_rate: 新税率
+        new_taxon: 新分类
         new_user: 新用户
         new_zone: 新的区域
         newest_products: 最新产品
         next: 下一步
+        "no": 取消
         no_account: 尚无帐号
+        no_association_types_to_display: 没有定义产品关联类型
+        no_comment: 无注释
         no_default_billing_address: 没有默认的帐单地址
         no_default_shipping_address: 没有默认发货地址
+        no_description: 没有描述
+        no_pricing_configuration: 没有定价的配置
+        no_results: 没有找到该查询的结果
+        no_shipping_category: 没有配送分类
+        no_short_description: '<i>没有简短的描述</i>'
+        no_sku: 没有 SKU
+        no_tax_category: 无税种分类
+        not_available_in_your_country: 在您的国家不可用
+        notify_customer: 通知客户
         number: 数量
         number_of_orders: 订单数
+        oauth_provider: OAuth 提供器
+        on_hold: 搁置
         options: 选项
+        order: 订单
         order_summary: 订单汇总
         order_value: 订单价值
         orders: 订单
@@ -388,6 +462,7 @@ sylius:
         payment_state: 付款状态
         payments: 付款
         pending: 等待中
+        permissions: 权限
         phone_number: 电话
         place_order: 下订单
         placed_at: 放置在
@@ -402,6 +477,7 @@ sylius:
         product_association_index: 关联
         product_association_type_index: 关联类型
         product_association_types: 产品关联类型
+        product_reviews: 商品评论
         products: 产品
         promotion_coupons: 优惠券
         promotion_total: 促进总计
@@ -414,8 +490,11 @@ sylius:
         register: 注册
         register_button: 注册
         registration_date: 注册日期：
+        remember_me: 记住我
+        reports: 报表
         restricted_zone: 限制的区
         returned: 已返还
+        reviews: 评论
         roles: 角色
         routes: 路由
         rules: 規則
@@ -448,6 +527,7 @@ sylius:
         string_blocks: 字符串块
         subject: 主题
         success: 成功
+        support: 支持
         tax_categories: 税类别
         tax_category: 税类别
         tax_rates: 税率

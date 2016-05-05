@@ -5,6 +5,7 @@ sylius:
     option:
         code:
             not_blank: 请输入选项编号。
+            unique: 给定代码的选项已存在。
         name:
             not_blank: 请输入选项名称。
             min_length: '选项名称必须是至少 1 个字符长。 |选项名称必须至少 {{ limit }} 个字符长。'
@@ -16,6 +17,9 @@ sylius:
         values:
             min_count: '请至少添加 {{ limit }} 选项限值。 |请至少添加 {{ limit }} 选项的限值。'
     option_value:
+        code:
+            not_blank: 请输入选项值的代码。
+            unique: 给定代码选项的值已存在。
         value:
             not_blank: 请输入选项的值。
     variant:
