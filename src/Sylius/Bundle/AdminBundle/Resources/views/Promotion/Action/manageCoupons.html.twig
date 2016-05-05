@@ -1,0 +1,13 @@
+{% import 'SyliusUiBundle:Macro:buttons.html.twig' as buttons %}
+
+{% if data.isCouponBased %}
+    <div class="ui labeled icon top right floating dropdown button primary link">
+        <i class="configure icon"></i>
+        <span class="text">{{ 'sylius.ui.manage_coupons'|trans }}</span>
+        <div class="menu">
+            <a class="item" href="{{ path('sylius_admin_promotion_coupon_index', { promotionId: data.id }) }}"><i class="tags icon"></i> {{ 'sylius.ui.promotion_coupons'|trans }}</a>
+            <a class="item" href="{{ path('sylius_admin_promotion_coupon_create', { promotionId: data.id }) }}"><i class="plus icon"></i> {{ 'sylius.ui.add_coupon'|trans }}</a>
+            <a class="item" href="#"><i class="random icon"></i> {{ 'sylius.ui.generating_coupons'|trans }}</a>
+        </div>
+    </div>
+{% endif %}

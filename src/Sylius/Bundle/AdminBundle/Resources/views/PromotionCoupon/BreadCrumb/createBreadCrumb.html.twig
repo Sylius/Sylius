@@ -1,0 +1,11 @@
+{% import 'SyliusAdminBundle:Crud/Macro:breadCrumb.html.twig' as breadCrumb %}
+
+{% set crumbs = {
+        0: { label: 'sylius.ui.administration'|trans, url: path('sylius_admin_dashboard') },
+        1: { label: 'sylius.ui.promotions'|trans, url: path('sylius_admin_promotion_index') },
+        2: { label: (metadata.applicationName~'.ui.'~metadata.pluralName)|trans, url: path(configuration.getRouteName('index'), configuration.vars.route.parameters is defined ? configuration.vars.route.parameters : {}) },
+        3: { label: 'sylius.ui.new'|trans }
+    }
+%}
+
+{{ breadCrumb.crumble(crumbs) }}

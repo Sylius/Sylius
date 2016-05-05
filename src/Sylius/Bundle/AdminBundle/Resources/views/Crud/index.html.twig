@@ -14,11 +14,7 @@
     <div class="column">
         {{ headers.default(header|trans, configuration.vars.icon|default('list'), configuration.vars.subheader|default(null)|trans) }}
 
-        <div class="ui breadcrumb">
-            <a href="{{ path('sylius_admin_dashboard') }}" class="section">{{ 'sylius.ui.administration'|trans }}</a>
-            <i class="right chevron icon divider"></i>
-            <div class="active section">{{ (metadata.applicationName~'.ui.'~metadata.pluralName)|trans }}</div>
-        </div>
+        {% include configuration.vars.templates.breadCrumb is defined ? configuration.vars.templates.breadCrumb : 'SyliusAdminBundle:Crud/BreadCrumb:indexBreadCrumb.html.twig' %}
     </div>
     <div class="middle aligned column">
         <div class="ui right floated buttons">

@@ -418,6 +418,16 @@ final class PromotionContext implements Context
     }
 
     /**
+     * @Given /^(it) is coupon based promotion$/
+     */
+    public function itIsCouponBasedPromotion(PromotionInterface $promotion)
+    {
+        $promotion->setCouponBased(true);
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @param array $taxonCodes
      *
      * @return array

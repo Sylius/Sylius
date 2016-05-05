@@ -31,7 +31,8 @@ class CouponType extends AbstractResourceType
             ])
             ->add('expiresAt', 'date', [
                 'label' => 'sylius.form.coupon.expires_at',
-                'empty_value' => /* @Ignore */ ['year' => '-', 'month' => '-', 'day' => '-'],
+                'widget' => 'single_text',
+                'empty_value' => ['year' => '-', 'month' => '-', 'day' => '-'],
             ])
             ->addEventSubscriber(new AddCodeFormSubscriber())
         ;

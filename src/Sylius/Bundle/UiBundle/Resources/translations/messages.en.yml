@@ -7,6 +7,7 @@ sylius:
         option:
             presentation: Presentation
     ui:
+        add_coupon: Add coupon
         all: All
         actions: Actions
         administration_panel_login: Administration panel login
@@ -50,12 +51,14 @@ sylius:
         ends_with: Ends with
         equal: Equal
         exclusive: Exclusive
+        expires_at: Expires at
         filter: Filter
         in: In
         info: Info
         last_updated: Last updated
         locales: Locales
         manage_attributes_of_your_products: Manage attributes of your products
+        manage_coupons: Manage coupons
         manage_currencies_available_in_the_store: Manage currencies available in the store
         manage_your_customers: Manage your customers
         manage_languages_available_in_the_store: Manage languages available in the store
