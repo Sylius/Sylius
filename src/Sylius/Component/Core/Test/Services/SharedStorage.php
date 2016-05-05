@@ -41,6 +41,14 @@ class SharedStorage implements SharedStorageInterface
     /**
      * {@inheritdoc}
      */
+    public function has($key)
+    {
+        return isset($this->clipboard[$key]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function set($key, $resource)
     {
         $this->clipboard[$key] = $resource;
