@@ -65,4 +65,11 @@ class SharedStorageSpec extends ObjectBehavior
 
         $this->get('channel')->shouldReturn($channel);
     }
+
+    function it_checks_if_resource_under_given_key_exist(ChannelInterface $channel)
+    {
+        $this->setClipboard(['channel' => $channel]);
+
+        $this->has('channel')->shouldReturn(true);
+    }
 }

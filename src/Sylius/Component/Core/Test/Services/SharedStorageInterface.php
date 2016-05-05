@@ -25,6 +25,13 @@ interface SharedStorageInterface
 
     /**
      * @param string $key
+     *
+     * @return bool
+     */
+    public function has($key);
+
+    /**
+     * @param string $key
      * @param mixed $resource
      */
     public function set($key, $resource);
