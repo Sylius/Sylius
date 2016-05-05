@@ -21,6 +21,7 @@ use Webmozart\Assert\Assert;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 final class ManagingOrdersContext implements Context
 {
@@ -145,24 +146,67 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Given I should see the product named :productName in the list
+     * @Then I should see the product named :productName in the list
+     * @Then the product named :productName should be in the items list
      */
-    public function iShouldSeeTheProductNamedInTheList($productName)
+    public function theProductShouldBeInTheItemsList($productName)
     {
         Assert::true(
             $this->showPage->isProductInTheList($productName),
-            sprintf('Product %s is not in the list.', $productName)
+            sprintf('Product %s is not in the item list.', $productName)
         );
     }
 
     /**
-     * @Then I should see :text
+     * @Then the order's items total should be :itemsTotal
      */
-    public function iShouldSeeText($text)
+    public function theOrdersItemsTotalShouldBe($itemsTotal)
+    {
+        $itemsTotalOnPage = $this->showPage->getItemsTotal();
+
+        Assert::eq(
+            $itemsTotal,
+            $itemsTotalOnPage,
+            sprintf('Items total is "%s", but should be "%s".', $itemsTotalOnPage, $itemsTotal)
+        );
+    }
+
+    /**
+     * @Then the order's total should be :total
+     */
+    public function theOrdersTotalShouldBe($total)
+    {
+        $totalOnPage = $this->showPage->getTotal();
+
+        Assert::eq(
+            $total,
+            $totalOnPage,
+            sprintf('Total is "%s", but should be "%s".', $totalOnPage, $total)
+        );
+    }
+
+    /**
+     * @Then the order's shipping charges should be :shippingCharge
+     */
+    public function theOrdersShippingChargesShouldBe($shippingCharge)
     {
         Assert::true(
-            $this->showPage->isTextOnPage($text),
-            sprintf('Cannot find text "%s".', $text)
+            $this->showPage->hasShippingCharge($shippingCharge),
+            sprintf('Shipping charges is not "%s".', $shippingCharge)
+        );
+    }
+
+    /**
+     * @Then the order's shipping total should be :shippingTotal
+     */
+    public function theOrdersShippingTotalShouldBe($shippingTotal)
+    {
+        $shippingTotalOnPage = $this->showPage->getShippingTotal();
+
+        Assert::eq(
+            $shippingTotal,
+            $shippingTotalOnPage,
+            sprintf('Shipping total is "%s", but should be "%s".', $shippingTotalOnPage, $shippingTotal)
         );
     }
 }

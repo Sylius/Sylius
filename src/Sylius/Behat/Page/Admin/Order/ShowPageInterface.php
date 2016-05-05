@@ -65,7 +65,24 @@ interface ShowPageInterface extends PageInterface
     public function isProductInTheList($productName);
 
     /**
-     * @param string $text
+     * @return string
      */
-    public function isTextOnPage($text);
+    public function getItemsTotal();
+
+    /**
+     * @return string
+     */
+    public function getTotal();
+
+    /**
+     * @return string
+     */
+    public function getShippingTotal();
+
+    /**
+     * @param string $shippingCharge
+     *
+     * @return bool
+     */
+    public function hasShippingCharge($shippingCharge);
 }

@@ -126,11 +126,41 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function isTextOnPage($text)
+    public function getItemsTotal()
     {
-        $pageText = $this->getElement('page')->getText();
+        $itemsTotalElement = $this->getElement('items_total');
 
-        return stripos($pageText, $text) !== false;
+        return trim(str_replace('Items total:', '', $itemsTotalElement->getText()));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTotal()
+    {
+        $totalElement = $this->getElement('total');
+
+        return trim(str_replace('Total:', '', $totalElement->getText()));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getShippingTotal()
+    {
+        $shippingTotalElement = $this->getElement('shipping_total');
+
+        return trim(str_replace('Shipping total:', '', $shippingTotalElement->getText()));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasShippingCharge($shippingCharge)
+    {
+        $shippingChargesText = $this->getElement('shipping_charges')->getText();
+
+        return stripos($shippingChargesText, $shippingCharge) !== false;
     }
 
     /**
@@ -145,7 +175,10 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'payments' => '#payments',
             'shipments' => '#shipments',
             'table' => '.table',
-            'page' => 'body',
+            'items_total' => '#items-total',
+            'total' => '#total',
+            'shipping_total' => '#shipping-total',
+            'shipping_charges' => '#shipping-charges',
         ]);
     }
 

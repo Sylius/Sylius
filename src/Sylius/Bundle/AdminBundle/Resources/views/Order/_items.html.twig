@@ -51,13 +51,13 @@
     </tbody>
     <tfoot class="full-width">
     <tr>
-        <th colspan="5" class="right aligned">
+        <th colspan="5" id="items-total" class="right aligned">
             <strong>{{ 'sylius.ui.items_total'|trans }}</strong>:
             {{ order.itemsTotal|sylius_price(order.currency) }}
         </th>
     </tr>
     <tr>
-        <th colspan="2">
+        <th colspan="2" id="shipping-charges">
             <h5>{{ 'sylius.ui.shipping_charges'|trans }}</h5>
             {% if not order.adjustments(shippingAdjustment).isEmpty() %}
                 <div class="ui relaxed divided list">
@@ -71,13 +71,13 @@
                 <p class="text-muted"><small>{{ 'sylius.order.no_shipping_charges'|trans }}</small></p>
             {% endif %}
         </th>
-        <th colspan="3" class="right aligned">
+        <th colspan="3" id="shipping-total" class="right aligned">
             <strong>{{ 'sylius.ui.shipping_total'|trans }}</strong>:
             {{ order.adjustmentsTotal(shippingAdjustment)|sylius_price(order.currency) }}
         </th>
     </tr>
     <tr>
-        <th colspan="5" class="ui large header right aligned">
+        <th colspan="5" id="total" class="ui large header right aligned">
             <strong>{{ 'sylius.ui.total'|trans }}</strong>:
             {{ order.total|sylius_price(order.currency) }}
         </th>

@@ -22,5 +22,5 @@ Feature: Seeing an order with its items
         Then I should see 2 items in the list
         And I should see the product named "Angel T-Shirt" in the list
         And I should see the product named "Angel Mug" in the list
-        And I should see "Items total: €58.00"
-        And I should see "Total: €58.00"
+        And the order's items total should be "€58.00"
+        And the order's total should be "€58.00"
