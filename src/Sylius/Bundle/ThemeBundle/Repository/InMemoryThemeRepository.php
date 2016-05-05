@@ -45,16 +45,6 @@ final class InMemoryThemeRepository implements ThemeRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function find($id)
-    {
-        $this->loadThemesIfNeeded();
-
-        return isset($this->themes[$id]) ? $this->themes[$id] : null;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function findAll()
     {
         $this->loadThemesIfNeeded();
@@ -69,13 +59,7 @@ final class InMemoryThemeRepository implements ThemeRepositoryInterface
     {
         $this->loadThemesIfNeeded();
 
-        foreach ($this->themes as $theme) {
-            if ($theme->getName() === $name) {
-                return $theme;
-            }
-        }
-
-        return null;
+        return isset($this->themes[$name]) ? $this->themes[$name] : null;
     }
 
     /**
@@ -102,7 +86,7 @@ final class InMemoryThemeRepository implements ThemeRepositoryInterface
 
         $themes = $this->themeLoader->load();
         foreach ($themes as $theme) {
-            $this->themes[$theme->getId()] = $theme;
+            $this->themes[$theme->getName()] = $theme;
         }
 
         $this->themesLoaded = true;

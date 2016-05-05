@@ -19,13 +19,6 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 interface ThemeRepositoryInterface
 {
     /**
-     * @param string $id
-     *
-     * @return ThemeInterface|null
-     */
-    public function find($id);
-
-    /**
      * @return ThemeInterface[]
      */
     public function findAll();

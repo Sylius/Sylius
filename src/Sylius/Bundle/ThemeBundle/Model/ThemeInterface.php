@@ -19,11 +19,6 @@ interface ThemeInterface
     /**
      * @return string
      */
-    public function getId();
-
-    /**
-     * @return string
-     */
     public function getName();
 
     /**

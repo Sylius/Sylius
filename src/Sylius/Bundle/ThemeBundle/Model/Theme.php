@@ -19,11 +19,6 @@ class Theme implements ThemeInterface
     /**
      * @var string
      */
-    protected $id;
-
-    /**
-     * @var string
-     */
     protected $name;
 
     /**
@@ -56,9 +51,13 @@ class Theme implements ThemeInterface
      */
     protected $screenshots = [];
 
+    /**
+     * @param string $name
+     * @param string $path
+     */
     public function __construct($name, $path)
     {
-        $this->id = substr(md5($name), 0, 8);
+        $this->assertNameIsValid($name);
 
         $this->name = $name;
         $this->path = $path;
@@ -69,15 +68,7 @@ class Theme implements ThemeInterface
      */
     public function __toString()
     {
-        return $this->title ?: $this->name ?: '';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getId()
-    {
-        return $this->id;
+        return $this->title ?: $this->name;
     }
 
     /**
@@ -204,5 +195,20 @@ class Theme implements ThemeInterface
         $this->screenshots = array_filter($this->screenshots, function ($currentScreenshot) use ($screenshot) {
             return $currentScreenshot !== $screenshot;
         });
+    }
+
+    /**
+     * @param string $name
+     */
+    private function assertNameIsValid($name)
+    {
+        $pattern = '/^[a-z\-]+\/[a-z\-]+$/i';
+        if (false === (bool) preg_match($pattern, $name)) {
+            throw new \InvalidArgumentException(sprintf(
+                'Given name "%s" does not match regular expression "%s".',
+                $name,
+                $pattern
+            ));
+        }
     }
 }

@@ -82,14 +82,11 @@ final class ThemeContext implements Context
     }
 
     /**
-     * @Given the store has :themeTitle theme
+     * @Given the store has :themeName theme
      */
-    public function storeHasTheme($themeTitle)
+    public function storeHasTheme($themeName)
     {
-        $themeName = str_replace(' ', '-', strtolower($themeTitle));
-
         $theme = $this->themeFactory->create($themeName, sprintf('%s/_themes/%s/', $this->cacheDir, $themeName));
-        $theme->setTitle($themeTitle);
 
         if (!file_exists($theme->getPath())) {
             mkdir($theme->getPath(), 0777, true);
@@ -97,7 +94,7 @@ final class ThemeContext implements Context
 
         file_put_contents(
             rtrim($theme->getPath(), '/') . '/composer.json',
-            sprintf('{ "name": "%s", "title": "%s" }', $themeName, $themeTitle)
+            sprintf('{ "name": "%s" }', $themeName)
         );
 
         $this->sharedStorage->set('theme', $theme);
@@ -108,7 +105,7 @@ final class ThemeContext implements Context
      */
     public function channelUsesTheme(ChannelInterface $channel, ThemeInterface $theme)
     {
-        $channel->setTheme($theme);
+        $channel->setThemeName($theme->getName());
 
         $this->channelManager->persist($channel);
         $this->channelManager->flush();
@@ -122,7 +119,7 @@ final class ThemeContext implements Context
      */
     public function channelDoesNotUseAnyTheme(ChannelInterface $channel)
     {
-        $channel->setTheme(null);
+        $channel->setThemeName(null);
 
         $this->channelManager->flush();
 

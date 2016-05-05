@@ -16,6 +16,7 @@ use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Theme\ChannelBasedThemeContext;
 use Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
+use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -27,9 +28,9 @@ use Sylius\Component\Core\Model\ChannelInterface;
  */
 class ChannelBasedThemeContextSpec extends ObjectBehavior
 {
-    function let(ChannelContextInterface $channelContext)
+    function let(ChannelContextInterface $channelContext, ThemeRepositoryInterface $themeRepository)
     {
-        $this->beConstructedWith($channelContext);
+        $this->beConstructedWith($channelContext, $themeRepository);
     }
 
     function it_is_initializable()
@@ -44,21 +45,25 @@ class ChannelBasedThemeContextSpec extends ObjectBehavior
 
     function it_returns_a_theme(
         ChannelContextInterface $channelContext,
+        ThemeRepositoryInterface $themeRepository,
         ChannelInterface $channel,
         ThemeInterface $theme
     ) {
         $channelContext->getChannel()->willReturn($channel);
-        $channel->getTheme()->willReturn($theme);
+        $channel->getThemeName()->willReturn('theme/name');
+        $themeRepository->findOneByName('theme/name')->willReturn($theme);
 
         $this->getTheme()->shouldReturn($theme);
     }
 
     function it_returns_null_if_channel_has_no_theme(
         ChannelContextInterface $channelContext,
+        ThemeRepositoryInterface $themeRepository,
         ChannelInterface $channel
     ) {
         $channelContext->getChannel()->willReturn($channel);
-        $channel->getTheme()->willReturn(null);
+        $channel->getThemeName()->willReturn(null);
+        $themeRepository->findOneByName(null)->willReturn(null);
 
         $this->getTheme()->shouldReturn(null);
     }

@@ -23,7 +23,6 @@
         "php": "^5.5.9|^7.0",
 
         "symfony/symfony": "^2.7.7",
-        "webmozart/assert": "^1.0",
         "zendframework/zend-hydrator": "^1.0|^2.0"
     },
     "require-dev": {

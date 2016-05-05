@@ -53,12 +53,12 @@ final class ThemeSettingsManagerSpec extends ObjectBehavior
         ThemeInterface $theme,
         SettingsInterface $settings
     ) {
-        $theme->getId()->willReturn('themeId');
+        $theme->getName()->willReturn('theme/name');
 
-        $schemaRegistry->has('theme_themeId')->willReturn(true);
+        $schemaRegistry->has('theme_theme/name')->willReturn(true);
         $schemaRegistry->register(Argument::cetera())->shouldNotBeCalled();
 
-        $decoratedSettingsManager->load('theme_themeId', null)->willReturn($settings);
+        $decoratedSettingsManager->load('theme_theme/name', null)->willReturn($settings);
 
         $this->load($theme)->shouldReturn($settings);
     }
@@ -71,15 +71,15 @@ final class ThemeSettingsManagerSpec extends ObjectBehavior
         SettingsInterface $settings,
         SchemaInterface $schema
     ) {
-        $theme->getId()->willReturn('themeId');
+        $theme->getName()->willReturn('theme/name');
 
-        $schemaRegistry->has('theme_themeId')->willReturn(false);
+        $schemaRegistry->has('theme_theme/name')->willReturn(false);
 
         $themeSettingsSchemaProvider->getSchema($theme)->willReturn($schema);
 
-        $schemaRegistry->register('theme_themeId', $schema)->shouldBeCalled();
+        $schemaRegistry->register('theme_theme/name', $schema)->shouldBeCalled();
 
-        $decoratedSettingsManager->load('theme_themeId', null)->willReturn($settings);
+        $decoratedSettingsManager->load('theme_theme/name', null)->willReturn($settings);
 
         $this->load($theme)->shouldReturn($settings);
     }

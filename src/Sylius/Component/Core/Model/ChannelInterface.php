@@ -40,14 +40,14 @@ interface ChannelInterface extends
     TaxonsAwareInterface
 {
     /**
-     * @return ThemeInterface
+     * @return string
      */
-    public function getTheme();
+    public function getThemeName();
 
     /**
-     * @param ThemeInterface $theme
+     * @param string $themeName
      */
-    public function setTheme(ThemeInterface $theme);
+    public function setThemeName($themeName);
 
     /**
      * @param LocaleInterface $locale

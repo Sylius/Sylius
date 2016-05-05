@@ -55,7 +55,7 @@ final class ThemeTranslationResource implements TranslationResourceInterface
         }
 
         $this->domain = $parts[0];
-        $this->locale = $parts[1] . '_' . $theme->getId();
+        $this->locale = $parts[1] . '_' . str_replace('/', '-', $theme->getName());
         $this->format = $parts[2];
     }
 

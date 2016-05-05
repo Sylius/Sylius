@@ -34,6 +34,7 @@
         <parameter key="sylius.theme.filesystem.class">Sylius\Bundle\ThemeBundle\Filesystem\Filesystem</parameter>
         <parameter key="sylius.theme.finder_factory.class">Sylius\Bundle\ThemeBundle\Factory\FinderFactory</parameter>
         <parameter key="sylius.theme.form.type.theme_choice.class">Sylius\Bundle\ThemeBundle\Form\Type\ThemeChoiceType</parameter>
+        <parameter key="sylius.theme.form.type.theme_name_choice.class">Sylius\Bundle\ThemeBundle\Form\Type\ThemeNameChoiceType</parameter>
     </parameters>
 
     <services>
@@ -78,6 +79,11 @@
         <service id="sylius.theme.form.type.theme_choice" class="%sylius.theme.form.type.theme_choice.class%">
             <argument type="service" id="sylius.repository.theme" />
             <tag name="form.type" alias="sylius_theme_choice" />
+        </service>
+
+        <service id="sylius.theme.form.type.theme_name_choice" class="%sylius.theme.form.type.theme_name_choice.class%">
+            <argument type="service" id="sylius.repository.theme" />
+            <tag name="form.type" alias="sylius_theme_name_choice" />
         </service>
     </services>
 </container>

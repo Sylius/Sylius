@@ -39,10 +39,11 @@ class ThemeSpec extends ObjectBehavior
         $this->shouldImplement(ThemeInterface::class);
     }
 
-    function it_has_immutable_id()
+    function its_name_cannot_have_underscores()
     {
-        $this->getId()->shouldBeString();
-        $this->getId()->shouldReturn(substr(md5('theme/name'), 0, 8));
+        $this->beConstructedWith('first_theme/name', '/theme/path');
+
+        $this->shouldThrow(\InvalidArgumentException::class)->duringInstantiation();
     }
 
     function it_has_immutable_name()

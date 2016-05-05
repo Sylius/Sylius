@@ -6,17 +6,17 @@ Feature: Displaying themed channel website
 
     Background:
         Given the store operates on a single channel in "France"
-        And the store has "Maverick Meerkat" theme
+        And the store has "maverick/meerkat" theme
         And this theme changes homepage template contents to "Onions and bananas"
 
     @ui
     Scenario: Displaying default shop homepage
         Given channel "France" does not use any theme
         When I visit this channel's homepage
-        Then I should not see a homepage from "Maverick Meerkat" theme
+        Then I should not see a homepage from "maverick/meerkat" theme
 
     @ui
     Scenario: Displaying themed shop homepage
-        Given channel "France" uses "Maverick Meerkat" theme
+        Given channel "France" uses "maverick/meerkat" theme
         When I visit this channel's homepage
         Then I should see a homepage from that theme

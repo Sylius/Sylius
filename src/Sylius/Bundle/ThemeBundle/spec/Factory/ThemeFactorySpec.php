@@ -44,7 +44,6 @@ class ThemeFactorySpec extends ObjectBehavior
             'haveNameAndPath' => function (ThemeInterface $theme, $expectedName, $expectedPath) {
                 return $expectedName === $theme->getName()
                     && $expectedPath === $theme->getPath()
-                    && null !== $theme->getId()
                 ;
             },
         ];
