@@ -26,6 +26,11 @@ class AvailableLocalesProvider implements AvailableLocalesProviderInterface
     private $localeRepository;
 
     /**
+     * @var array|null
+     */
+    private $localesCodes = null;
+
+    /**
      * @param RepositoryInterface $localeRepository
      */
     public function __construct(RepositoryInterface $localeRepository)
@@ -38,14 +43,19 @@ class AvailableLocalesProvider implements AvailableLocalesProviderInterface
      */
     public function getAvailableLocales()
     {
-        $localesCodes = [];
+        if (null !== $this->localesCodes) {
+            return $this->localesCodes;
+        }
+
+        $this->localesCodes = [];
+
         /** @var LocaleInterface[] $locales */
         $locales = $this->localeRepository->findBy(['enabled' => true]);
 
         foreach ($locales as $locale) {
-            $localesCodes[] = $locale->getCode();
+            $this->localesCodes[] = $locale->getCode();
         }
 
-        return $localesCodes;
+        return $this->localesCodes;
     }
 }
