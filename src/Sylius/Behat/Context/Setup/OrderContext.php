@@ -170,8 +170,6 @@ final class OrderContext implements Context
         $this->orderShipmentFactory->processOrderShipment($order);
         $order->getShipments()->first()->setMethod($shippingMethod);
 
-        $this->orderRecalculator->recalculate($order);
-
         $payment = $this->paymentFactory->createWithAmountAndCurrency($order->getTotal(), $order->getCurrency());
         $payment->setMethod($paymentMethod);
 
@@ -179,6 +177,8 @@ final class OrderContext implements Context
 
         $order->setShippingAddress($address);
         $order->setBillingAddress($address);
+
+        $this->orderRecalculator->recalculate($order);
 
         $this->objectManager->flush();
     }

@@ -1,4 +1,5 @@
 {% set shippingAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::SHIPPING_ADJUSTMENT') %}
+{% set taxAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::TAX_ADJUSTMENT') %}
 
 <table class="ui celled padded table">
     <thead>
@@ -57,6 +58,27 @@
         </th>
     </tr>
     <tr>
+        <th colspan="2" id="taxes">
+            <h5>{{ 'sylius.ui.taxes'|trans }}</h5>
+            {% set allOrderAdjustments = order.getAdjustmentsRecursively(taxAdjustment) %}
+            {% if not allOrderAdjustments is empty %}
+                <div class="ui relaxed divided list">
+                    {% for taxLabel, taxAmount in sylius_aggregate_adjustments(allOrderAdjustments) %}
+                        <div class="item">
+                            {{ taxLabel }} {{ taxAmount|sylius_price(order.currency) }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p><small>{{ 'sylius.order.no_taxes'|trans }}</small></p>
+            {% endif %}
+        </th>
+        <th colspan="3" id="tax-total" class="right aligned">
+            <strong>{{ 'sylius.ui.tax_total'|trans }}</strong>:
+            {{ order.getAdjustmentsTotalRecursively(taxAdjustment)|sylius_price(order.currency) }}
+        </th>
+    </tr>
+    <tr>
         <th colspan="2" id="shipping-charges">
             <h5>{{ 'sylius.ui.shipping_charges'|trans }}</h5>
             {% if not order.adjustments(shippingAdjustment).isEmpty() %}
@@ -68,12 +90,13 @@
                     {% endfor %}
                 </div>
             {% else %}
-                <p class="text-muted"><small>{{ 'sylius.order.no_shipping_charges'|trans }}</small></p>
+                <p><small>{{ 'sylius.order.no_shipping_charges'|trans }}</small></p>
             {% endif %}
         </th>
         <th colspan="3" id="shipping-total" class="right aligned">
             <strong>{{ 'sylius.ui.shipping_total'|trans }}</strong>:
-            {{ order.adjustmentsTotal(shippingAdjustment)|sylius_price(order.currency) }}
+            {% set shippingTotal = order.adjustmentsTotal(taxAdjustment) + order.adjustmentsTotal(shippingAdjustment) %}
+            {{ shippingTotal|sylius_price(order.currency) }}
         </th>
     </tr>
     <tr>

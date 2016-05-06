@@ -85,4 +85,9 @@ interface ShowPageInterface extends PageInterface
      * @return bool
      */
     public function hasShippingCharge($shippingCharge);
+
+    /**
+     * @return string
+     */
+    public function getTaxTotal();
 }

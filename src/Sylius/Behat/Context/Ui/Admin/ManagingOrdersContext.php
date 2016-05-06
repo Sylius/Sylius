@@ -209,4 +209,18 @@ final class ManagingOrdersContext implements Context
             sprintf('Shipping total is "%s", but should be "%s".', $shippingTotalOnPage, $shippingTotal)
         );
     }
+
+    /**
+     * @Then the order's tax total should be :taxTotal
+     */
+    public function theOrdersTaxTotalShouldBe($taxTotal)
+    {
+        $taxTotalOnPage = $this->showPage->getTaxTotal();
+
+        Assert::eq(
+            $taxTotal,
+            $taxTotalOnPage,
+            sprintf('Tax total is "%s", but should be "%s".', $taxTotalOnPage, $taxTotal)
+        );
+    }
 }

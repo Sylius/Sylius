@@ -156,6 +156,16 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
+    public function getTaxTotal()
+    {
+        $taxTotalElement = $this->getElement('tax_total');
+
+        return trim(str_replace('Tax total:', '', $taxTotalElement->getText()));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function hasShippingCharge($shippingCharge)
     {
         $shippingChargesText = $this->getElement('shipping_charges')->getText();
@@ -179,6 +189,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'total' => '#total',
             'shipping_total' => '#shipping-total',
             'shipping_charges' => '#shipping-charges',
+            'tax_total' => '#tax-total',
         ]);
     }
 
