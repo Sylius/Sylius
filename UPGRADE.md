@@ -3,6 +3,27 @@ UPGRADE
 
 ## From 0.17 to 0.18.x
 
+### Application
+
+* Moved some of the parameters out of parameters.yml.dist file, please check your configurations
+* Renamed basic parameters to match Symfony Standard's conventions:
+
+Before:
+
+```yaml
+%sylius.database.host%
+%sylius.locale%
+
+# etc.
+```
+
+After:
+
+```yaml
+%database_host%
+%locale%
+```
+
 ### Translation and TranslationBundle
 
 * Merged ``Translation`` component with ``Resource`` component
