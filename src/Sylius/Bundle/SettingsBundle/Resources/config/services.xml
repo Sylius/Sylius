@@ -48,12 +48,12 @@
             <argument type="service" id="event_dispatcher" />
         </service>
 
-        <service id="sylius.registry.settings_schema" class="%sylius.registry.settings_schema.class%">
+        <service id="sylius.registry.settings_schema" class="%sylius.registry.settings_schema.class%" lazy="true">
             <argument>%sylius.settings.schema_interface%</argument>
             <argument>Settings schema</argument>
         </service>
 
-        <service id="sylius.registry.settings_resolver" class="%sylius.registry.settings_resolver.class%">
+        <service id="sylius.registry.settings_resolver" class="%sylius.registry.settings_resolver.class%" lazy="true">
             <argument type="service">
                 <service class="Sylius\Component\Registry\ServiceRegistry">
                     <argument>%sylius.settings.resolver_interface%</argument>
