@@ -366,20 +366,35 @@ sylius:
         first_name: 名字
         firstname: 名字
         forgot_password: 忘记密码
+        fulfill: 完成
         gateway: 网关
+        general_info: 常规信息
         general_settings: 常规设置
         generate: 生成
+        generate_variants: 生成变体
+        generating_coupons: 生成优惠券
+        go_to_dashboard: 前往仪表盘
         grand_total: 总计
         groups: 团体
+        guest: 游客
+        hello_name: '您好 <b>%name%</b>！'
         hide_deleted: 隐藏已删除
         hostname: 主机名
         id: ID
+        identifier: 标识符
         images: 图像
+        imagine_blocks: 图片块
+        included_in_price: 包括在价格中
         index_metadata: 元数据
+        index_of_all_configured_locales: 全部已配置的区域
         information: 信息
+        inventory_here_you_can_see_current_stock_levels: '库存，<small>在这里你可以看到当前的库存水平</small>'
         inventory_index: 库存
         inventory_state: 库存状态
+        inventory_tracking: 库存跟踪
         invoice: 发票
+        is_enabled: 已启用
+        items: 项目
         items_total: 总计项目
         label: 标签
         last_login: 最后登录时间
@@ -391,13 +406,35 @@ sylius:
         latest_orders: 最新订单
         links: 链接
         locales: 区域设置
+        lock: 锁
+        locked: 被锁定
+        logged_in_as: '以 %username% 身份登录'
         login: 登录
         login_button: 登录
+        login_sylius_store: '登录 <small>Sylius 店铺</small>'
         logout: 注销
         main_taxon: 主分类
+        male: 男士
         manage: 管理
+        manage_adjustments: 管理调价
+        manage_attributes: 管理属性
+        manage_channels: 管理频道
         manage_countries: 管理国家
+        manage_customers: 管理客户
+        manage_emails: 管理电子邮件
+        manage_metadata: 管理元数据
         manage_options: 管理选项
+        manage_orders: 管理订单
+        manage_payments: 管理付款
+        manage_products: 管理产品
+        manage_promotions: 管理促销活动
+        manage_reviews: 管理评论
+        manage_shipments: 管理配送
+        manage_shipping_categories: 管理配送分类
+        manage_shipping_methods: 管理配送方法
+        manage_tax_categories: 管理税类别
+        manage_tax_rates: 管理税率
+        manage_users: 管理用户
         manage_zones: 管理区域
         marketing: 市场
         members: 会员
@@ -405,6 +442,8 @@ sylius:
         menus: 菜单
         message: 消息
         metadata_index: 元数据
+        method: 方法
+        modified: 已修改
         move_down: 向下移
         move_up: 向上移
         n_a: 未知
@@ -417,8 +456,19 @@ sylius:
         new_country: 新建国家
         new_currency: 新的货币
         new_customer: 新客户
+        new_order: 新订单：
         new_password: 新密码
+        new_payment: 新付款
+        new_payment_method: 新的支付方式
+        new_permission: 新建权限
         new_product: 新产品
+        new_product_attribute: 新的产品属性
+        new_product_option: 新的产品选项
+        new_product_variant: 新的产品变体
+        new_promotion: 新的促销
+        new_review: 新评论
+        new_role: 新建角色
+        new_shipping_category: 新配送分类
         new_shipping_method: 新的送货方式
         new_tax_category: 新税种
         new_tax_rate: 新税率
@@ -448,17 +498,28 @@ sylius:
         on_hold: 搁置
         options: 选项
         order: 订单
+        order_comment_name: 订单的评论
+        order_comments: 订单的评论
+        order_confirmation_name: 订单确认
+        order_details: 订单详情
+        order_item_product: 项
+        order_state: 订单状态
         order_summary: 订单汇总
         order_value: 订单价值
+        ordered: 已订购
         orders: 订单
         original_price: 原价
         out_of_stock: 售罄
         overview_of_your_store: 所有存货
+        page: 页面
         pages: 页
         parent: 上一级
         password: 密码
+        payment: 付款
+        payment_details: 付款详情
         payment_method: 付款方式：
         payment_methods: 支付方式
+        payment_mode: 付款模式
         payment_state: 付款状态
         payments: 付款
         pending: 等待中
@@ -471,29 +532,57 @@ sylius:
         previous: 上一步
         price: 价格
         pricing: 定价
+        priority: 优先级
         processing: 处理中...
         product: 产品
         product_archetypes: 产品原型
         product_association_index: 关联
         product_association_type_index: 关联类型
         product_association_types: 产品关联类型
+        product_associations: 产品关联
+        product_attributes: 产品属性
+        product_details_viewing_product_product: '产品详细 <small>查看产品"<strong>%product%</strong>"</small>'
+        product_options: 产品选项
+        product_review: 商品评论
         product_reviews: 商品评论
         products: 产品
+        products_categorized_as_name: '产品归类为"%name%"'
+        products_categorized_under_taxon_taxon: '产品 <small>在"%taxon%"分类下</small>'
+        products_index_of_all_products_in_your_store: '产品 <small>在你们店里的全部产品</small>'
+        profile: 资料
         promotion_coupons: 优惠券
+        promotion_details: 促销详细
         promotion_total: 促进总计
         promotions: 促销活动
         province: 省/直辖市/自治区
         provinces: 省份
+        qty_max: 最大数量
+        qty_min: 最小数量
         rating: 评分
+        recent_customers: 最近的客户
+        recent_orders: 最近的订单
         recent_users: 最近用户
+        redirect_routes: 重定向路由
         refunded: 已退款
         register: 注册
         register_button: 注册
+        registration_create_an_account_in_store: '注册 <small>创建帐户</small>'
         registration_date: 注册日期：
+        release_inventory: 释放库存
         remember_me: 记住我
+        remove_attribute: 删除属性
+        report_details: 报告详细
         reports: 报表
+        reset: 重置
+        reset_button: 重置
+        reset_password: 重置密码
+        restore: 恢复
         restricted_zone: 限制的区
+        retail_price: 零售价格
+        return: 返回
         returned: 已返还
+        revert: 还原
+        review_details: 评论详情
         reviews: 评论
         roles: 角色
         routes: 路由
@@ -504,8 +593,14 @@ sylius:
         save_changes: 保存变更
         scope: 范围
         search: 搜索
+        security_settings: 安全设置
         set_as_default_billing_address: 设置为默认帐单地址
         set_as_default_shipping_address: 设置为默认发货地址
+        ship: 配送
+        shipment_confirmation_name: 发货确认单
+        shipment_details: 配送详细
+        shipment_mode: 配送方法
+        shipment_state: 配送状态
         shipments: 发货
         shipped: 已发货
         shipping_address: 送货地址
@@ -513,13 +608,20 @@ sylius:
         shipping_category: 送货类别
         shipping_charges: 运费
         shipping_method: 发货方式
+        shipping_method_details: 配送方法详细
         shipping_methods: 发货方式
         shipping_state: 发货状态
         shipping_total: 运费共计
+        show_all: 显示全部
+        show_deleted: 显示已删除
+        show_in_store: 在商店中显示
+        show_metadata: 显示元数据
         sign_in_to_the_store_or_create_new_account: 登录/注册
         simple_blocks: 简单的块
         sku: SKU
         slideshow: 幻灯片：
+        slideshow_blocks: 幻灯片显示块
+        start_date: 开始日期
         starts_at: 开始于
         state: 州
         status: 状态
@@ -528,15 +630,63 @@ sylius:
         subject: 主题
         success: 成功
         support: 支持
+        sylius_logo: Sylius
         tax_categories: 税类别
         tax_category: 税类别
+        tax_rate_details: 税务率详细
         tax_rates: 税率
         tax_total: 税费总计
         taxation_categories: 征税类别
         taxation_settings: 税收的设置
         taxes: 税
         taxons: 分类
+        thank_you_for_your_order: 感谢您的下单。
         theme: 主题
+        there_are_no_archetypes_defined: 没有定义任何原型
+        there_are_no_attributes_configured: 没有配置任何属性
+        there_are_no_blocks_to_display: 没有可以显示的板块
+        there_are_no_channels_configured: 没有配置通道
+        there_are_no_contact_requests_to_display: 没有任何联系请求
+        there_are_no_contact_topics_to_display: 没有可显示的联系主题
+        there_are_no_countries_configured: 没有配置任何国家
+        there_are_no_coupon_to_display: 没有任何优惠券
+        there_are_no_currencies_to_display: 没有任何货币
+        there_are_no_customers_to_display: 没有任何客户
+        there_are_no_emails_configured: 没有配置电子邮件
+        there_are_no_groups_to_display: 没有可以显示的组。
+        there_are_no_images_for_this_product: 该产品产品没有任何图片
+        there_are_no_inventory_items_to_display: 没有可显示的库存项
+        there_are_no_inventory_units_to_display: 没有可显示的库存单位
+        there_are_no_locales_configured: 没有配置任何语言
+        there_are_no_logged_events_to_display: 没有记录的任何事件
+        there_are_no_menu_nodes_to_display: 没有任何菜单节点
+        there_are_no_menus_to_display: 没有要显示的菜单
+        there_are_no_options_configured: 没有配置选项
+        there_are_no_options_for_this_product: 没有此产品的选项
+        there_are_no_orders_for_this_customer_to_display: 这个用户没有订单
+        there_are_no_pages_to_display: 没有可显示的页面了
+        there_are_no_payment_methods_configured: 还没有配置付款方法
+        there_are_no_payments_configured: 还没有配置付款
+        there_are_no_permissions_defined: 还没有定义任何权限
+        there_are_no_products_to_display: 没有要显示的产品
+        there_are_no_promotions_configured: 没有配置促销活动
+        there_are_no_redirect_routes_to_display: 没有可显示得重定向路由
+        there_are_no_reports_created: 没有创建任何报表
+        there_are_no_roles_defined: 没有定义任何角色
+        there_are_no_routes_to_display: 没有任何路由
+        there_are_no_shipments_to_display: 没有任何配送
+        there_are_no_shipping_categories_configured: 没有配置任何配送分类
+        there_are_no_shipping_methods_configured: 没有配置配送方法
+        there_are_no_tax_categories_configured: 没有配置税收类别
+        there_are_no_tax_rates_configured: 没有配置税率
+        there_are_no_taxons_for_this_product: 此产品没有分类
+        there_are_no_taxons_to_display: 没有要显示的分类
+        there_are_no_users_to_display: 没有要显示的用户
+        there_are_no_variants_to_display: 没有要显示的变体
+        there_are_no_zones_configured: 没有配置的区域
+        there_is_no_main_taxon_for_this_product: 此产品没有主要分类
+        this_months_statistics: 这个月的统计数据
+        this_product_has_no_attributes_defined: 该产品没有定义任何属性
         title: 标题
         topic: 主题
         total: 共计
@@ -547,15 +697,37 @@ sylius:
         tracking_number: 追踪号码
         translations: 翻译
         type: 类型
+        unavailable: 不可用
         unit_price: 单价
         unknown: 未知
+        unlock: 解锁
+        update: 更新
+        update_product_association_type: 更新产品关联类型
+        updating_tax_rate: 更新税率
         usage_limit: 使用限制
+        used: 已被使用
+        user_confirmation_name: 用户确认
+        user_details: 用户详情
         username: 用户名
+        users_list_of_all_users_registered_in_store: '用户 <small>在该店铺中注册的所有用户列表</small>'
+        values: 值
         variant_selection_method: 变量选择方法
+        variants: 变体
+        view: 查看
+        view_more: 查看更多
+        view_product_details: '查看 %product% 详细信息'
         void: 作废
+        volume_based_pricing: 基于体积的定价
         warning: 警示
+        welcome: 欢迎
+        welcome_to_our_store: 欢迎来到我们的商店
         welcome_to_your_space: 欢迎来到您的共享空间
+        "yes": 是
         you_are_customer_since: 您是客户自从
+        you_have_no_addresses_defined: 你有没有定义任何地址
+        you_have_no_new_orders: 你有没有新的订单
+        your_last_5_orders: 你最近5个订单
+        your_order_has_been_shipped: 您的订单已发货
         your_products: 您的商品
         zone: 区域
         zone_details: 区域详细信息
@@ -563,5 +735,7 @@ sylius:
     user:
         general_info: '"%username%"的资料'
         impersonate: 作为此用户登录
+        oauth:
+            none: 没有连接的 OAuth 帐户
     variant:
         stock: 当前货架

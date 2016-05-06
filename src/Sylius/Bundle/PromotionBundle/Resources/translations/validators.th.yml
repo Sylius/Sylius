@@ -14,6 +14,7 @@ sylius:
             max_length: 'ชื่อโปรโมชั่นต้องมีความยาวไม่เกิน {{ limit }} ตัวอักษร'
             min_length: 'ชื่อโปรโมชั่นต้องมีความยาวอย่างน้อย {{ limit }} ตัวอักษร'
             not_blank: กรุณาระบุชื่อโปรโมชั่น
+        end_date_cannot_be_set_prior_start_date: ไม่สามารถกำหนดวันที่สิ้นสุดก่อนวันที่เริ่มต้นได้
     promotion_coupon:
         code:
             max_length: 'รหัสคูปองต้องมีความยาวไม่เกิน {{ limit }} ตัวอักษร'

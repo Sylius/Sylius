@@ -133,10 +133,12 @@ sylius:
             name: ชื่อ
         promotion_rule:
             contains_taxon:
+                taxon: หมวดหมู่
                 count: จำนวน
             taxon:
                 taxons: หมวดหมู่
             total_of_items_from_taxon:
+                taxon: หมวดหมู่
                 amount: ยอดรวม
     email:
         order_confirmation:
@@ -147,3 +149,5 @@ sylius:
             name: ยืนยันการจัดส่ง
         user_confirmation:
             name: ยืนยันการสั่งซื้อ
+        password_reset:
+            name: ตั้งรหัสผ่านใหม่
