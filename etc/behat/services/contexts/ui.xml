@@ -82,6 +82,7 @@
         </service>
 
         <service id="sylius.behat.context.ui.admin.managing_orders" class="%sylius.behat.context.ui.admin.managing_orders.class%" scope="scenario">
+            <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
             <argument type="service" id="sylius.behat.page.admin.order.index" />
             <argument type="service" id="sylius.behat.page.admin.order.show" />
             <tag name="sylius.behat.context" />

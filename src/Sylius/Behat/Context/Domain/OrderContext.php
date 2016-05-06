@@ -137,4 +137,20 @@ final class OrderContext implements Context
         $adjustments = $this->adjustmentRepository->findBy(['id' => $adjustments]);
         expect($adjustments)->toBe([]);
     }
+
+    /**
+     * @Given I am logged in as an administrator
+     */
+    public function iAmLoggedInAsAnAdministrator()
+    {
+        // Not applicable in the domain scope
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully deleted
+     */
+    public function iShouldBeNotifiedOfSuccess()
+    {
+        // Not applicable in the domain scope
+    }
 }

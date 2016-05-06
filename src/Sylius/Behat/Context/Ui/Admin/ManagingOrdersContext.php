@@ -17,6 +17,7 @@ use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Order\ShowPageInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -25,7 +26,10 @@ use Webmozart\Assert\Assert;
  */
 final class ManagingOrdersContext implements Context
 {
-    const RESOURCE_NAME = 'order';
+    /**
+     * @var SharedStorageInterface
+     */
+    private $sharedStorage;
 
     /**
      * @var IndexPageInterface
@@ -38,13 +42,16 @@ final class ManagingOrdersContext implements Context
     private $showPage;
 
     /**
+     * @param SharedStorageInterface $sharedStorage
      * @param IndexPageInterface $indexPage
      * @param ShowPageInterface $showPage
      */
     public function __construct(
+        SharedStorageInterface $sharedStorage,
         IndexPageInterface $indexPage,
         ShowPageInterface $showPage
     ) {
+        $this->sharedStorage = $sharedStorage;
         $this->indexPage = $indexPage;
         $this->showPage = $showPage;
     }
@@ -221,6 +228,30 @@ final class ManagingOrdersContext implements Context
             $taxTotal,
             $taxTotalOnPage,
             sprintf('Tax total is "%s", but should be "%s".', $taxTotalOnPage, $taxTotal)
+        );
+    }
+
+    /**
+     * @When I delete the order :order
+     */
+    public function iDeleteOrder(OrderInterface $order)
+    {
+        $this->sharedStorage->set('order', $order);
+
+        $this->indexPage->open();
+        $this->indexPage->deleteResourceOnPage(['number' => $order->getNumber()]);
+    }
+
+    /**
+     * @Then /^(this order) should not exist in the registry$/
+     */
+    public function orderShouldNotExistInTheRegistry(OrderInterface $order)
+    {
+        $this->indexPage->open();
+
+        Assert::false(
+            $this->indexPage->isSingleResourceOnPage(['number' => $order->getNumber()]),
+            sprintf('Order with number %s exists but should not.', $order->getNumber())
         );
     }
 }

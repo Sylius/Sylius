@@ -12,11 +12,13 @@ Feature: Deleting an order
         And there is a customer "john.doe@gmail.com" that placed an order "#00000022"
         And the customer chose "Free" shipping method to "France" with "Cash on Delivery" payment
         And the customer bought a single "PHP T-Shirt"
+        And I am logged in as an administrator
 
-    @domain
+    @domain @ui
     Scenario: Deleted order should disappear from the registry
         When I delete the order "#00000022"
-        Then this order should not exist in the registry
+        Then I should be notified that it has been successfully deleted
+        And this order should not exist in the registry
 
     @domain
     Scenario: Payments of a deleted order should disappear from the registry
