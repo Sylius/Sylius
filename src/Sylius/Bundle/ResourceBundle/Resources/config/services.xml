@@ -61,6 +61,7 @@
             <argument type="service" id="router" />
             <argument type="service" id="session" />
             <argument type="service" id="translator" />
+            <argument type="service" id="fos_rest.view_handler" />
             <tag name="kernel.event_subscriber" event="kernel.exception" />
         </service>
 
