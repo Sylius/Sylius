@@ -1,12 +1,12 @@
 Theme settings
 ==============
 
-ThemeBundle has built-in, optional integration with `SettingsBundle </en/latest/bundles/SyliusSettingsBundle.html>`_.
+ThemeBundle has built-in, optional integration with :doc:`SettingsBundle </bundles/SyliusSettingsBundle/index>`.
 
 Installation and configuration
 ------------------------------
 
-In order to start using settings for your themes, you should `install SettingsBundle </en/latest/bundles/SyliusSettingsBundle/installation.html>`_ first.
+In order to start using settings for your themes, you should :doc:`install SettingsBundle </bundles/SyliusSettingsBundle/installation>` first.
 
 Theme settings schema
 ---------------------

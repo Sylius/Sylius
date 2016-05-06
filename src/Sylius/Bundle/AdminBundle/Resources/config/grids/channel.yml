@@ -20,7 +20,7 @@ sylius_grid:
                     path: .
                     options:
                         template: SyliusAdminBundle:Grid/Field:nameAndDescription.html.twig
-                theme:
+                themeName:
                     type: string
                     label: sylius.ui.theme
                 enabled:

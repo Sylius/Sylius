@@ -15,7 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ThemeBundle\Controller\ThemeScreenshotController;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -31,9 +31,10 @@ final class ThemeScreenshotControllerSpec extends ObjectBehavior
      */
     private $fixturesPath;
 
-    function let(RepositoryInterface $themeRepository)
+    function let(ThemeRepositoryInterface $themeRepository)
     {
         $this->beConstructedWith($themeRepository);
+        
         $this->fixturesPath = realpath(__DIR__ . '/../Fixtures');
     }
 
@@ -42,9 +43,9 @@ final class ThemeScreenshotControllerSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Controller\ThemeScreenshotController');
     }
 
-    function it_streams_screenshot_as_a_response(RepositoryInterface $themeRepository, ThemeInterface $theme)
+    function it_streams_screenshot_as_a_response(ThemeRepositoryInterface $themeRepository, ThemeInterface $theme)
     {
-        $themeRepository->find(42)->willReturn($theme);
+        $themeRepository->findOneByName('theme/name')->willReturn($theme);
 
         $theme->getScreenshots()->willReturn([
             'screenshot/0-amazing.jpg', // exists
@@ -53,16 +54,16 @@ final class ThemeScreenshotControllerSpec extends ObjectBehavior
         $theme->getPath()->willReturn($this->fixturesPath);
 
         $this
-            ->streamScreenshotAction(42, 0)
+            ->streamScreenshotAction('theme/name', 0)
             ->shouldBeBinaryFileResponseStreamingFile($this->fixturesPath . '/screenshot/0-amazing.jpg')
         ;
     }
 
     function it_throws_not_found_http_exception_if_screenshot_cannot_be_found(
-        RepositoryInterface $themeRepository,
+        ThemeRepositoryInterface $themeRepository,
         ThemeInterface $theme
     ) {
-        $themeRepository->find(42)->willReturn($theme);
+        $themeRepository->findOneByName('theme/name')->willReturn($theme);
 
         $theme->getScreenshots()->willReturn([
             'screenshot/0-amazing.jpg', // exists
@@ -75,15 +76,15 @@ final class ThemeScreenshotControllerSpec extends ObjectBehavior
                 'Screenshot "%s/screenshot/1-awesome.jpg" does not exist',
                 $this->fixturesPath
             )))
-            ->during('streamScreenshotAction', [42, 1])
+            ->during('streamScreenshotAction', ['theme/name', 1])
         ;
     }
 
     function it_throws_not_found_http_exception_if_screenshot_number_exceeds_the_number_of_theme_screenshots(
-        RepositoryInterface $themeRepository,
+        ThemeRepositoryInterface $themeRepository,
         ThemeInterface $theme
     ) {
-        $themeRepository->find(42)->willReturn($theme);
+        $themeRepository->findOneByName('theme/name')->willReturn($theme);
 
         $theme->getScreenshots()->willReturn([
             'screenshot/0-amazing.jpg',
@@ -93,17 +94,17 @@ final class ThemeScreenshotControllerSpec extends ObjectBehavior
 
         $this
             ->shouldThrow(new NotFoundHttpException('Theme "Candy shop" does not have screenshot #4'))
-            ->during('streamScreenshotAction', [42, 4])
+            ->during('streamScreenshotAction', ['theme/name', 4])
         ;
     }
 
-    function it_throws_not_found_http_exception_if_theme_with_given_id_cannot_be_found(RepositoryInterface $themeRepository)
+    function it_throws_not_found_http_exception_if_theme_with_given_id_cannot_be_found(ThemeRepositoryInterface $themeRepository)
     {
-        $themeRepository->find(42)->willReturn(null);
+        $themeRepository->findOneByName('theme/name')->willReturn(null);
 
         $this
-            ->shouldThrow(new NotFoundHttpException('Theme with id 42 not found'))
-            ->during('streamScreenshotAction', [42, 666])
+            ->shouldThrow(new NotFoundHttpException('Theme with name "theme/name" not found'))
+            ->during('streamScreenshotAction', ['theme/name', 666])
         ;
     }
 

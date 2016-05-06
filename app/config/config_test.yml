@@ -39,6 +39,14 @@ sylius_rbac:
 sylius_channel:
     fake_channel_support: true
 
+sylius_theme:
+    sources:
+        filesystem:
+            directories:
+                - "%kernel.root_dir%/themes"
+                - "%kernel.root_dir%/../vendor/sylius/themes"
+                - "%kernel.cache_dir%/_themes"
+
 doctrine_cache:
     providers:
         sylius_settings:

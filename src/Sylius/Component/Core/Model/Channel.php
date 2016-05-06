@@ -62,9 +62,9 @@ class Channel extends BaseChannel implements ChannelInterface
     protected $taxons;
 
     /**
-     * @var ThemeInterface
+     * @var string
      */
-    protected $theme;
+    protected $themeName;
 
     public function __construct()
     {
@@ -80,17 +80,17 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function getTheme()
+    public function getThemeName()
     {
-        return $this->theme;
+        return $this->themeName;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setTheme(ThemeInterface $theme = null)
+    public function setThemeName($themeName)
     {
-        $this->theme = $theme;
+        $this->themeName = $themeName;
     }
 
     /**

@@ -12,17 +12,28 @@
 namespace Sylius\Bundle\ThemeBundle\Repository;
 
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-interface ThemeRepositoryInterface extends RepositoryInterface
+interface ThemeRepositoryInterface
 {
+    /**
+     * @return ThemeInterface[]
+     */
+    public function findAll();
+
     /**
      * @param string $name
      *
      * @return ThemeInterface|null
      */
     public function findOneByName($name);
+
+    /**
+     * @param string $title
+     *
+     * @return ThemeInterface|null
+     */
+    public function findOneByTitle($title);
 }

@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\ThemeBundle\Factory;
 
 use Sylius\Bundle\ThemeBundle\Model\ThemeScreenshot;
-use Webmozart\Assert\Assert;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
@@ -24,7 +23,9 @@ final class ThemeScreenshotFactory implements ThemeScreenshotFactoryInterface
      */
     public function createFromArray(array $data)
     {
-        Assert::keyExists($data, 'path');
+        if (!array_key_exists('path', $data)) {
+            throw new \InvalidArgumentException('Screenshot path is required.');
+        }
 
         $themeScreenshot = new ThemeScreenshot($data['path']);
 

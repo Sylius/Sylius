@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\ThemeBundle\Controller;
 
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -23,27 +23,27 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 final class ThemeScreenshotController
 {
     /**
-     * @var RepositoryInterface
+     * @var ThemeRepositoryInterface
      */
     private $themeRepository;
 
     /**
-     * @param RepositoryInterface $themeRepository
+     * @param ThemeRepositoryInterface $themeRepository
      */
-    public function __construct(RepositoryInterface $themeRepository)
+    public function __construct(ThemeRepositoryInterface $themeRepository)
     {
         $this->themeRepository = $themeRepository;
     }
 
     /**
-     * @param int $themeId
+     * @param string $themeName
      * @param int $screenshotNumber
      *
      * @return BinaryFileResponse
      */
-    public function streamScreenshotAction($themeId, $screenshotNumber)
+    public function streamScreenshotAction($themeName, $screenshotNumber)
     {
-        $screenshotPath = $this->getScreenshotPath($this->getTheme($themeId), $screenshotNumber);
+        $screenshotPath = $this->getScreenshotPath($this->getTheme($themeName), $screenshotNumber);
 
         try {
             return new BinaryFileResponse($screenshotPath);
@@ -72,15 +72,15 @@ final class ThemeScreenshotController
     }
 
     /**
-     * @param int $themeId
+     * @param string $themeName
      *
      * @return ThemeInterface
      */
-    private function getTheme($themeId)
+    private function getTheme($themeName)
     {
-        $theme = $this->themeRepository->find($themeId);
+        $theme = $this->themeRepository->findOneByName($themeName);
         if (null === $theme) {
-            throw new NotFoundHttpException(sprintf('Theme with id %d not found', $themeId));
+            throw new NotFoundHttpException(sprintf('Theme with name "%s" not found', $themeName));
         }
 
         return $theme;

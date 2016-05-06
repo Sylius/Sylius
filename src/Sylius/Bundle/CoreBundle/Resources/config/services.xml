@@ -154,6 +154,7 @@
 
         <service id="sylius.theme.context.channel_based" class="%sylius.theme.context.channel_based.class%" public="false">
             <argument type="service" id="sylius.context.channel" />
+            <argument type="service" id="sylius.repository.theme" />
         </service>
 
         <!-- cart -->

@@ -19,6 +19,8 @@ use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Zend\Hydrator\HydrationInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
@@ -51,24 +53,32 @@ final class ThemeContext implements Context
     private $channelManager;
 
     /**
+     * @var string
+     */
+    private $cacheDir;
+
+    /**
      * @param SharedStorageInterface $sharedStorage
      * @param ThemeRepositoryInterface $themeRepository
      * @param ThemeFactoryInterface $themeFactory
      * @param ChannelRepositoryInterface $channelRepository
      * @param ObjectManager $channelManager
+     * @param ContainerInterface $container
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         ThemeRepositoryInterface $themeRepository,
         ThemeFactoryInterface $themeFactory,
         ChannelRepositoryInterface $channelRepository,
-        ObjectManager $channelManager
+        ObjectManager $channelManager,
+        ContainerInterface $container
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->themeRepository = $themeRepository;
         $this->themeFactory = $themeFactory;
         $this->channelRepository = $channelRepository;
         $this->channelManager = $channelManager;
+        $this->cacheDir = $container->getParameter('kernel.cache_dir');
     }
 
     /**
@@ -76,15 +86,17 @@ final class ThemeContext implements Context
      */
     public function storeHasTheme($themeName)
     {
-        $theme = $this->themeFactory->createNamed($themeName);
-        $theme->setTitle($themeName);
-        $theme->setPath(sys_get_temp_dir() . '/theme-' . $theme->getCode() . time() . '/');
+        $theme = $this->themeFactory->create($themeName, sprintf('%s/_themes/%s/', $this->cacheDir, $themeName));
 
         if (!file_exists($theme->getPath())) {
             mkdir($theme->getPath(), 0777, true);
         }
 
-        $this->themeRepository->add($theme);
+        file_put_contents(
+            rtrim($theme->getPath(), '/') . '/composer.json',
+            sprintf('{ "name": "%s" }', $themeName)
+        );
+
         $this->sharedStorage->set('theme', $theme);
     }
 
@@ -93,8 +105,9 @@ final class ThemeContext implements Context
      */
     public function channelUsesTheme(ChannelInterface $channel, ThemeInterface $theme)
     {
-        $channel->setTheme($theme);
+        $channel->setThemeName($theme->getName());
 
+        $this->channelManager->persist($channel);
         $this->channelManager->flush();
 
         $this->sharedStorage->set('channel', $channel);
@@ -106,7 +119,7 @@ final class ThemeContext implements Context
      */
     public function channelDoesNotUseAnyTheme(ChannelInterface $channel)
     {
-        $channel->setTheme(null);
+        $channel->setThemeName(null);
 
         $this->channelManager->flush();
 

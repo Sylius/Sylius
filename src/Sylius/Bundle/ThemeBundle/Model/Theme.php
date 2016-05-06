@@ -11,19 +11,11 @@
 
 namespace Sylius\Bundle\ThemeBundle\Model;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
-
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 class Theme implements ThemeInterface
 {
-    /**
-     * @var int
-     */
-    protected $id;
-
     /**
      * @var string
      */
@@ -32,43 +24,43 @@ class Theme implements ThemeInterface
     /**
      * @var string
      */
-    protected $title;
-
-    /**
-     * @var string
-     */
     protected $path;
 
     /**
-     * @var string
+     * @var string|null
      */
-    protected $code;
+    protected $title;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $description;
 
     /**
-     * @var Collection|ThemeAuthor[]
+     * @var ThemeAuthor[]
      */
-    protected $authors;
+    protected $authors = [];
 
     /**
-     * @var Collection|ThemeInterface[]
+     * @var ThemeInterface[]
      */
-    protected $parents;
+    protected $parents = [];
 
     /**
-     * @var Collection|ThemeScreenshot[]
+     * @var ThemeScreenshot[]
      */
-    protected $screenshots;
+    protected $screenshots = [];
 
-    public function __construct()
+    /**
+     * @param string $name
+     * @param string $path
+     */
+    public function __construct($name, $path)
     {
-        $this->authors = new ArrayCollection();
-        $this->parents = new ArrayCollection();
-        $this->screenshots = new ArrayCollection();
+        $this->assertNameIsValid($name);
+
+        $this->name = $name;
+        $this->path = $path;
     }
 
     /**
@@ -76,15 +68,7 @@ class Theme implements ThemeInterface
      */
     public function __toString()
     {
-        return $this->title;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getId()
-    {
-        return $this->id;
+        return $this->title ?: $this->name;
     }
 
     /**
@@ -98,10 +82,9 @@ class Theme implements ThemeInterface
     /**
      * {@inheritdoc}
      */
-    public function setName($name)
+    public function getPath()
     {
-        $this->name = $name;
-        $this->code = substr(md5($name), 0, 8);
+        return $this->path;
     }
 
     /**
@@ -118,30 +101,6 @@ class Theme implements ThemeInterface
     public function setTitle($title)
     {
         $this->title = $title;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPath()
-    {
-        return $this->path;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setPath($path)
-    {
-        $this->path = $path;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCode()
-    {
-        return $this->code;
     }
 
     /**
@@ -165,7 +124,7 @@ class Theme implements ThemeInterface
      */
     public function getAuthors()
     {
-        return $this->authors->toArray();
+        return $this->authors;
     }
 
     /**
@@ -173,7 +132,7 @@ class Theme implements ThemeInterface
      */
     public function addAuthor(ThemeAuthor $author)
     {
-        $this->authors->add($author);
+        $this->authors[] = $author;
     }
 
     /**
@@ -181,7 +140,9 @@ class Theme implements ThemeInterface
      */
     public function removeAuthor(ThemeAuthor $author)
     {
-        $this->authors->removeElement($author);
+        $this->authors = array_filter($this->authors, function ($currentAuthor) use ($author) {
+            return $currentAuthor !== $author;
+        });
     }
 
     /**
@@ -189,7 +150,7 @@ class Theme implements ThemeInterface
      */
     public function getParents()
     {
-        return $this->parents->toArray();
+        return $this->parents;
     }
 
     /**
@@ -197,7 +158,7 @@ class Theme implements ThemeInterface
      */
     public function addParent(ThemeInterface $theme)
     {
-        $this->parents->add($theme);
+        $this->parents[] = $theme;
     }
 
     /**
@@ -205,7 +166,9 @@ class Theme implements ThemeInterface
      */
     public function removeParent(ThemeInterface $theme)
     {
-        $this->parents->removeElement($theme);
+        $this->parents = array_filter($this->parents, function ($currentTheme) use ($theme) {
+            return $currentTheme !== $theme;
+        });
     }
 
     /**
@@ -213,22 +176,39 @@ class Theme implements ThemeInterface
      */
     public function getScreenshots()
     {
-        return $this->screenshots->toArray();
+        return $this->screenshots;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function addScreenshot(ThemeScreenshot $themeScreenshot)
+    public function addScreenshot(ThemeScreenshot $screenshot)
     {
-        $this->screenshots->add($themeScreenshot);
+        $this->screenshots[] = $screenshot;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function removeScreenshot(ThemeScreenshot $themeScreenshot)
+    public function removeScreenshot(ThemeScreenshot $screenshot)
     {
-        $this->screenshots->removeElement($themeScreenshot);
+        $this->screenshots = array_filter($this->screenshots, function ($currentScreenshot) use ($screenshot) {
+            return $currentScreenshot !== $screenshot;
+        });
+    }
+
+    /**
+     * @param string $name
+     */
+    private function assertNameIsValid($name)
+    {
+        $pattern = '/^[a-z\-]+\/[a-z\-]+$/i';
+        if (false === (bool) preg_match($pattern, $name)) {
+            throw new \InvalidArgumentException(sprintf(
+                'Given name "%s" does not match regular expression "%s".',
+                $name,
+                $pattern
+            ));
+        }
     }
 }

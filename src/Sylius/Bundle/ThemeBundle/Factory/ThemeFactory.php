@@ -11,23 +11,18 @@
 
 namespace Sylius\Bundle\ThemeBundle\Factory;
 
-use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
-use Sylius\Component\Resource\Factory\Factory;
+use Sylius\Bundle\ThemeBundle\Model\Theme;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class ThemeFactory extends Factory implements ThemeFactoryInterface
+final class ThemeFactory implements ThemeFactoryInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function createNamed($name)
+    public function create($name, $path)
     {
-        /** @var ThemeInterface $theme */
-        $theme = $this->createNew();
-        $theme->setName($name);
-
-        return $theme;
+        return new Theme($name, $path);
     }
 }
