@@ -13,4 +13,4 @@ Feature: Deleting a channel
     Scenario: Deleted channel should disappear from the registry
         When I delete channel "Web Store"
         Then I should be notified that it has been successfully deleted
-        Then the "Web Store" channel should no longer exist in the registry
+        And the "Web Store" channel should no longer exist in the registry

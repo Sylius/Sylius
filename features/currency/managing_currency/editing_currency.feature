@@ -19,5 +19,5 @@ Feature: Editing a currency
     @ui
     Scenario: Seeing disabled code field while editing currency
         Given the store has currency "Euro"
-        And I want to edit this currency
+        When I want to edit this currency
         Then the code field should be disabled

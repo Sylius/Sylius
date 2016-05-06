@@ -378,7 +378,7 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
-     * @When I allow to paying :currency for this channel
+     * @When I allow for paying in :currency
      */
     public function iAllowToPayingForThisChannel($currency)
     {

@@ -13,7 +13,7 @@ Feature: Editing product options
     Scenario: Renaming the product option
         Given this product option has the "S" option value with code "t_shirt_size_s"
         And this product option has also the "M" option value with code "t_shirt_size_m"
-        Given I want to modify the "T-Shirt size" product option
+        And I want to modify the "T-Shirt size" product option
         When I rename it to "T-Shirt color" in "English (United States)"
         And I save my changes
         Then I should be notified that it has been successfully edited

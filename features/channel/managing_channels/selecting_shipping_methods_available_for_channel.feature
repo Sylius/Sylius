@@ -23,7 +23,7 @@ Feature: Selecting available shipping methods for a channel
     Scenario: Adding shipping methods to an existing channel
         Given the store operates on a channel named "Web store"
         And I want to modify this channel
-        And I select the "UPS Carrier" shipping method
+        When I select the "UPS Carrier" shipping method
         And I save my changes
         Then I should be notified that it has been successfully edited
         And the "UPS Carrier" shipping method should be available for the "Web store" channel
