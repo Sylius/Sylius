@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "be22ac00e98d8f30bab2c222978182e9",
-    "content-hash": "6738744613eabb4cdc2dad656ecdd67c",
+    "hash": "9116db8e9124dc6c2d0d48631a940bd4",
+    "content-hash": "9b9b8c7e6763ee69452f105cd20e8b13",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -3075,7 +3075,6 @@
                 "php",
                 "url"
             ],
-            "abandoned": "league/uri",
             "time": "2015-07-15 08:24:12"
         },
         {
@@ -5579,9 +5578,9 @@
             ],
             "authors": [
                 {
-                    "name": "Johannes Schmitt",
+                    "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
+                    "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -7765,7 +7764,7 @@
             ],
             "authors": [
                 {
-                    "name": "William Durand",
+                    "name": "William DURAND",
                     "email": "william.durand1@gmail.com",
                     "homepage": "http://www.willdurand.fr"
                 }
@@ -8257,16 +8256,16 @@
         },
         {
             "name": "behat/gherkin",
-            "version": "v4.4.0",
+            "version": "v4.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Behat/Gherkin.git",
-                "reference": "6b3f8cf3560dc4909c4cddd4f1af3e1f6e9d80af"
+                "reference": "1576b485c0f92ef6d27da9c4bbfc57ee30cf6911"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Behat/Gherkin/zipball/6b3f8cf3560dc4909c4cddd4f1af3e1f6e9d80af",
-                "reference": "6b3f8cf3560dc4909c4cddd4f1af3e1f6e9d80af",
+                "url": "https://api.github.com/repos/Behat/Gherkin/zipball/1576b485c0f92ef6d27da9c4bbfc57ee30cf6911",
+                "reference": "1576b485c0f92ef6d27da9c4bbfc57ee30cf6911",
                 "shasum": ""
             },
             "require": {
@@ -8311,7 +8310,7 @@
                 "gherkin",
                 "parser"
             ],
-            "time": "2015-09-29 13:41:19"
+            "time": "2015-12-30 14:47:00"
         },
         {
             "name": "behat/mink",
@@ -8655,16 +8654,16 @@
         },
         {
             "name": "coduo/php-matcher",
-            "version": "2.0.0",
+            "version": "2.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/coduo/php-matcher.git",
-                "reference": "fddefee866d44f673f68d2bc7716b7fa824b6942"
+                "reference": "a48618cdf1c63e40d0968e3d940fee10af228b07"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/coduo/php-matcher/zipball/fddefee866d44f673f68d2bc7716b7fa824b6942",
-                "reference": "fddefee866d44f673f68d2bc7716b7fa824b6942",
+                "url": "https://api.github.com/repos/coduo/php-matcher/zipball/a48618cdf1c63e40d0968e3d940fee10af228b07",
+                "reference": "a48618cdf1c63e40d0968e3d940fee10af228b07",
                 "shasum": ""
             },
             "require": {
@@ -8711,7 +8710,7 @@
                 "matcher",
                 "tests"
             ],
-            "time": "2016-03-18 09:28:02"
+            "time": "2016-04-12 12:03:33"
         },
         {
             "name": "coduo/php-to-string",
@@ -9207,24 +9206,24 @@
         },
         {
             "name": "malukenho/kawaii-gherkin",
-            "version": "0.1.2",
+            "version": "0.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/malukenho/kawaii-gherkin.git",
-                "reference": "ab9bafcee0e3054b2cd1aad9ad797eff27dda0fb"
+                "reference": "eb70f7bf017e597b611cb85e2238d7dc94315eb6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/malukenho/kawaii-gherkin/zipball/ab9bafcee0e3054b2cd1aad9ad797eff27dda0fb",
-                "reference": "ab9bafcee0e3054b2cd1aad9ad797eff27dda0fb",
+                "url": "https://api.github.com/repos/malukenho/kawaii-gherkin/zipball/eb70f7bf017e597b611cb85e2238d7dc94315eb6",
+                "reference": "eb70f7bf017e597b611cb85e2238d7dc94315eb6",
                 "shasum": ""
             },
             "require": {
                 "behat/gherkin": "^4.4",
                 "php": "~5.5|^7.0",
                 "sebastian/diff": "~1.2",
-                "symfony/console": "~2.0",
-                "symfony/finder": "~2.0"
+                "symfony/console": "~2.0|^3.0",
+                "symfony/finder": "~2.0|^3.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "^4.0"
@@ -9255,7 +9254,7 @@
                 "code standard",
                 "gherkin"
             ],
-            "time": "2016-02-08 14:10:57"
+            "time": "2016-03-31 11:32:46"
         },
         {
             "name": "matthiasnoback/symfony-config-test",
@@ -9623,8 +9622,7 @@
             "authors": [
                 {
                     "name": "Chris Boulton",
-                    "homepage": "http://github.com/chrisboulton",
-                    "role": "Original developer"
+                    "homepage": "http://github.com/chrisboulton"
                 }
             ],
             "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",
@@ -10241,28 +10239,28 @@
         },
         {
             "name": "sebastian/diff",
-            "version": "1.3.0",
+            "version": "1.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/diff.git",
-                "reference": "863df9687835c62aa423a22412d26fa2ebde3fd3"
+                "reference": "13edfd8706462032c2f52b4b862974dd46b71c9e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/diff/zipball/863df9687835c62aa423a22412d26fa2ebde3fd3",
-                "reference": "863df9687835c62aa423a22412d26fa2ebde3fd3",
+                "url": "https://api.github.com/repos/sebastianbergmann/diff/zipball/13edfd8706462032c2f52b4b862974dd46b71c9e",
+                "reference": "13edfd8706462032c2f52b4b862974dd46b71c9e",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.2"
+                "phpunit/phpunit": "~4.8"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.3-dev"
+                    "dev-master": "1.4-dev"
                 }
             },
             "autoload": {
@@ -10285,11 +10283,11 @@
                 }
             ],
             "description": "Diff implementation",
-            "homepage": "http://www.github.com/sebastianbergmann/diff",
+            "homepage": "https://github.com/sebastianbergmann/diff",
             "keywords": [
                 "diff"
             ],
-            "time": "2015-02-22 15:13:53"
+            "time": "2015-12-08 07:14:41"
         },
         {
             "name": "sebastian/environment",
