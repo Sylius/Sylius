@@ -28,6 +28,7 @@
         "zendframework/zend-stdlib": "^2.0|^3.0"
     },
     "require-dev": {
+        "pamil/prophecy-common": "^0.1",
         "phpspec/phpspec": "^2.4"
     },
     "config": {

@@ -11,9 +11,11 @@
 
 namespace spec\Sylius\Component\Channel\Context;
 
+use Pamil\ProphecyCommon\Promise\CompositePromise;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Channel\Context\CachedPerRequestChannelContext;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -99,5 +101,33 @@ class CachedPerRequestChannelContextSpec extends ObjectBehavior
 
         $this->getChannel()->shouldReturn($firstChannel);
         $this->getChannel()->shouldReturn($secondChannel);
+    }
+
+    function it_caches_channel_not_found_exceptions_for_the_same_request(
+        ChannelContextInterface $decoratedChannelContext,
+        RequestStack $requestStack,
+        Request $request
+    ) {
+        $requestStack->getMasterRequest()->willReturn($request, $request);
+
+        $decoratedChannelContext->getChannel()->willThrow(ChannelNotFoundException::class)->shouldBeCalledTimes(1);
+
+        $this->shouldThrow(ChannelNotFoundException::class)->during('getChannel');
+        $this->shouldThrow(ChannelNotFoundException::class)->during('getChannel');
+    }
+
+    function it_does_not_cache_channel_not_found_exceptions_for_null_master_requests(
+        ChannelContextInterface $decoratedChannelContext,
+        RequestStack $requestStack,
+        ChannelInterface $channel
+    ) {
+        $requestStack->getMasterRequest()->willReturn(null, null);
+
+        $decoratedChannelContext->getChannel()->will(
+            CompositePromise::it()->willThrow(ChannelNotFoundException::class)->andThenReturn($channel)
+        )->shouldBeCalledTimes(2);
+
+        $this->shouldThrow(ChannelNotFoundException::class)->during('getChannel');
+        $this->getChannel()->shouldReturn($channel);
     }
 }

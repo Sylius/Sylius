@@ -35,6 +35,11 @@ final class CachedPerRequestChannelContext implements ChannelContextInterface
     private $requestToChannelMap;
 
     /**
+     * @var \SplObjectStorage|ChannelNotFoundException[]
+     */
+    private $requestToExceptionMap;
+
+    /**
      * @param ChannelContextInterface $decoratedChannelContext
      * @param RequestStack $requestStack
      */
@@ -44,6 +49,7 @@ final class CachedPerRequestChannelContext implements ChannelContextInterface
         $this->requestStack = $requestStack;
 
         $this->requestToChannelMap = new \SplObjectStorage();
+        $this->requestToExceptionMap = new \SplObjectStorage();
     }
 
     /**
@@ -57,10 +63,20 @@ final class CachedPerRequestChannelContext implements ChannelContextInterface
             return $this->decoratedChannelContext->getChannel();
         }
 
-        if (!isset($this->requestToChannelMap[$objectIdentifier])) {
-            $this->requestToChannelMap[$objectIdentifier] = $this->decoratedChannelContext->getChannel();
+        if (isset($this->requestToExceptionMap[$objectIdentifier])) {
+            throw $this->requestToExceptionMap[$objectIdentifier];
         }
 
-        return $this->requestToChannelMap[$objectIdentifier];
+        try {
+            if (!isset($this->requestToChannelMap[$objectIdentifier])) {
+                $this->requestToChannelMap[$objectIdentifier] = $this->decoratedChannelContext->getChannel();
+            }
+
+            return $this->requestToChannelMap[$objectIdentifier];
+        } catch (ChannelNotFoundException $exception) {
+            $this->requestToExceptionMap[$objectIdentifier] = $exception;
+
+            throw $exception;
+        }
     }
 }

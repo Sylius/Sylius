@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "96017d67fe99cf84925e03ea8951b5ec",
-    "content-hash": "b645e29b67c1607cf7937aa2fc5c8d15",
+    "hash": "3874be82cb34f62c05c603bd2b95e224",
+    "content-hash": "33a7c69177690d9f4bae4dfa8566d909",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -9481,6 +9481,46 @@
                 "xml conversion"
             ],
             "time": "2015-09-16 18:59:23"
+        },
+        {
+            "name": "pamil/prophecy-common",
+            "version": "v0.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pamil/prophecy-common.git",
+                "reference": "1f51e88b488511260b8fbccdf5ac3b46dad3139c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pamil/prophecy-common/zipball/1f51e88b488511260b8fbccdf5ac3b46dad3139c",
+                "reference": "1f51e88b488511260b8fbccdf5ac3b46dad3139c",
+                "shasum": ""
+            },
+            "require": {
+                "phpspec/prophecy": "^1.0"
+            },
+            "require-dev": {
+                "phpspec/phpspec": "^2.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Pamil\\ProphecyCommon\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kamil Kokot",
+                    "email": "kamil@kokot.me",
+                    "homepage": "http://kamil.kokot.me"
+                }
+            ],
+            "description": "Common helper classes for Prophecy",
+            "time": "2016-05-06 08:34:42"
         },
         {
             "name": "phpdocumentor/reflection-docblock",
