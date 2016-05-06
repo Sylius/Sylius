@@ -6,6 +6,7 @@ sylius:
         admin:
             main:
                 catalog:
+                    header: แค็ตตาล็อก
                     taxons: หมวดหมู่
                     options: ตัวเลือก
                     attributes: คุณลักษณะ (Attribute)

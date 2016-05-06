@@ -19,16 +19,16 @@ sylius:
     block:
         imagine:
             index: บล็อกรูปภาพ
-            publishable: เผยแพร่แล้ว
+            publishable: ตั้งเวลาเผยแพร่
         simple:
             index: บล็อกง่าย ๆ
-            publishable: เผยแพร่แล้ว
+            publishable: ตั้งเวลาเผยแพร่
         slideshow:
             index: การแสดงสไลด์บล็อก
-            publishable: เผยแพร่แล้ว
+            publishable: ตั้งเวลาเผยแพร่
         string:
             index: สายบล็อก
-            publishable: เผยแพร่แล้ว
+            publishable: ตั้งเวลาเผยแพร่
     cart:
         empty: รถเข็นของคุณว่างเปล่า
         summary:
@@ -66,7 +66,7 @@ sylius:
             headline: ยินดีต้อนรับสู่ ツ Sylius
             subheadline: อีคอมเมิร์ซที่ทันสมัยสำหรับ Symfony2
     menu:
-        publishable: เผยแพร่แล้ว
+        publishable: ตั้งเวลาเผยแพร่
     meta:
         backend_title: แดชบอร์ด Sylius
         frontend_description: Sylius เป็นอีคอมเมิร์ซโซลูชั่นที่ทันสมัยสำหรับ PHP ที่พัฒนาด้วย Symfony2
@@ -92,7 +92,7 @@ sylius:
         sellable: สินค้า
     page:
         no_route: เนื้อหาของคุณจะปรากฏในระบบหน้าบ้าน (frontend) ถ้าไม่มีเส้นทางที่กำหนด
-        publishable: เผยแพร่แล้ว
+        publishable: ตั้งเวลาเผยแพร่
     payment:
         transition:
             cancel: ยกเลิก
@@ -455,6 +455,7 @@ sylius:
         new_contact_topic: เพิ่มหัวข้อการติดต่อ
         new_country: เพิ่มประเทศ
         new_currency: เพิ่มสกุลเงิน
+        new_customer: ลูกค้าใหม่
         new_order: เพิ่มใบสั่งซื้อ
         new_password: รหัสผ่านใหม่
         new_payment: เพิ่มการชำระเงิน
