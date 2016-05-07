@@ -4,13 +4,21 @@
 sylius:
     tax_category:
         name:
-            not_blank: Proszę podać nazwę kategorii podatku.
+            not_blank: Proszę podać nazwę kategorii podatkowej.
+        code:
+            not_blank: Proszę podać kod kategorii podatkowej.
+            unique: Kategoria podatkowa z podanym kodem już istnieje.
     tax_rate:
         category:
-            not_blank: Proszę wybrać kategorię podatku.
+            not_blank: Proszę wybrać kategorię podatkową.
         name:
             not_blank: Proszę podać nazwę stawki podatkowej.
         amount:
             not_blank: Proszę podać wartość stawki podatkowej.
         calculator:
-            not_blank: Proszę podać kalkulator stawki podatkowej.
+            not_blank: Proszę wybrać kalkulator stawki podatkowej.
+        zone:
+            not_blank: Proszę wybrać strefę podatkową.
+        code:
+            not_blank: Proszę podać kod stawki podatkowej.
+            unique: Stawka podatkowa z podanym kodem już istnieje.

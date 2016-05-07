@@ -6,6 +6,7 @@ sylius:
         order:
             details: 'Szczegóły  Twojego zamówienia'
             download_invoice: Pobierz fakturę
+            empty: Nie dokonałeś jeszcze żadnego zamówienia
             list: Wszystkie Twoje zamówienia
             placed_at: 'Umieszczone w %at%'
             shipment:
@@ -47,10 +48,16 @@ sylius:
         forward: Kontynuuj
         security:
             proceed_order: Kontynuuj zamówienie
+        shipping:
+            error: Przepraszamy, ale nasz sklep nie jest w stanie zapewnić wysyłki do wybranego kraju
+    confirmation:
+        message: Czy chcesz usunąć ten przedmiot
     customer:
         filter:
             all: Pokaż wszystkich klientów
+            registered: Pokaż zarejestrowanych klientów
             unconfirmed: Pokaż niepotwierdzone konta
+        no_groups: Nie ma żadnych grup dla tego klienta
     homepage:
         splash:
             headline: Witaj w Sylius
@@ -58,6 +65,8 @@ sylius:
     menu:
         publishable: Opublikowany
     meta:
+        backend_title: Panel administracyjny
+        frontend_description: Sylius jest nowoczesnym rozwiązaniem ecommerce dla PHP, bazującym na frameworku Symfony2
         frontend_title: Sylius, nowoczesny ecommerce dla Symfony2
     order:
         comment:

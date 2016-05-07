@@ -6,6 +6,7 @@ sylius:
         admin:
             main:
                 catalog:
+                    header: Katalog
                     taxons: Taksony
                     options: Warianty
                     attributes: Cechy
@@ -17,6 +18,7 @@ sylius:
                     locales: Ustawienia regionalne
                     payment_methods: Metody płatności
                     shipping_methods: Sposób wysyłki
+                    tax_categories: Kategorie podatkowe
                     tax_rates: Stawki podatkowe
                     zones: Strefy
                 marketing:

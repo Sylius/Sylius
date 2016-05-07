@@ -9,7 +9,7 @@ sylius:
             not_blank: Proszę podać miejscowość.
         country:
             not_blank: Proszę wybrać kraj.
-            disabled: Wybrany kraj jest wyłączony. Proszę wybrać inny.
+            disabled: Wybrany kraj nie jest dostępny. Proszę wybrać inny.
         first_name:
             max_length: Imię nie powinno przekraczać 255 znaków|Imię nie powinno przekraczać 255 znaków.
             min_length: Imię powinno mieć co najmniej 2 znaki|Imię powinno mieć co najmniej 2 znaki.
@@ -29,14 +29,32 @@ sylius:
             min_length: Adres powinien mieć co najmniej 2 znaki|Adres powinien mieć co najmniej 2 znaki.
             not_blank: Proszę podać ulicę.
         not_shippable: Ten adres nie jest prawidłowym adresem dostawy.
+    country:
+        code:
+            not_blank: Proszę podać kod ISO kraju.
+            unique: Kod ISO kraju musi być unikalny.
     province:
+        code:
+            min_length: Kod województwa musi mieć co najmniej 5 znaków|Kod województwa musi mieć co najmniej 5 znaków.
+            not_blank: Proszę podać kod województwa.
+            regex: Kod województwa powinien być w formacie XX-XX (np. US-FL).
+            unique: Kod województwa musi być unikalny.
         name:
             max_length: Nazwa województwa nie powinna przekraczać 255 znaków|Nazwa województwa nie powinna przekraczać 255 znaków.
             min_length: Nazwa województwa powinna mieć co najmniej 2 znaki|Nazwa województwa powinna mieć co najmniej 2 znaki.
             not_blank: Proszę podać nazwę województwa.
+            unique: Nazwa województwa musi być unikalna.
     zone:
+        code:
+            not_blank: Proszę podać kod strefy.
+            unique: Kod strefy musi być unikalny.
         members:
             min_count: '{1} Proszę podać co najmniej 1 kraj.|{2,3,4} Proszę podać co najmniej {{ limit }} kraje.|[5,Inf[ Proszę podać co najmniej {{ limit }} krajów.'
         name:
             max_length: Nazwa strefy nie powinna przekraczać 255 znaków|Nazwa strefy nie powinna przekraczać 255 znaków.
+            min_length: Nazwa strefy musi mieć co najmniej 2 znaki|Nazwa strefy musi mieć co najmniej 2 znaki.
             not_blank: Proszę podać nazwę strefy.
+    zone_member:
+        code:
+            not_blank: Proszę wybrać członka strefy.
+        unique: Wybrany członek należy już do tej strefy.
