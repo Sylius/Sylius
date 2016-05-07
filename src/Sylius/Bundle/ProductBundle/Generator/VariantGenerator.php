@@ -18,7 +18,7 @@ use Sylius\Component\Variation\Model\VariantInterface;
 use Sylius\Component\Variation\SetBuilder\SetBuilderInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
-use Symfony\Component\Validator\ValidatorInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * Default product variants generator. It saves only valid variants.
