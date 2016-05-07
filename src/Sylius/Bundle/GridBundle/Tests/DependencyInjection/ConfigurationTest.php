@@ -32,9 +32,8 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
                 [
                     'grids' => [
                         'sylius_admin_tax_category' => null
-                    ]
-
-                ]
+                    ],
+                ],
             ],
             [
                 'grids' => [
@@ -48,7 +47,8 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
                         'filters' => [],
                         'actions' => [],
                     ]
-                ]
+                ],
+                'drivers' => [ 'doctrine/orm' ]
             ]
         );
     }
@@ -88,6 +88,21 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
                     ]
                 ]
             ]
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_throw_an_exception_if_an_invalid_driver_is_enabled()
+    {
+        $this->assertConfigurationIsInvalid(
+            [
+                [
+                    'drivers' => [ 'doctrine/orm', 'foo/invalid' ],
+                ],
+            ],
+            'Invalid driver specified in ["doctrine\/orm","foo\/invalid"], valid drivers:'
         );
     }
 

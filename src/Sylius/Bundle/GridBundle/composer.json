@@ -32,7 +32,8 @@
         "matthiasnoback/symfony-dependency-injection-test": "0.*",
         "phpspec/phpspec": "^2.4",
         "phpunit/phpunit": "^4.8",
-        "twig/twig": "~1.11"
+        "twig/twig": "~1.11",
+        "matthiasnoback/symfony-config-test": "^1.4"
     },
     "config": {
         "bin-dir": "bin"
