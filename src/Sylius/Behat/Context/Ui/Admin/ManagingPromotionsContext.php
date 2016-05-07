@@ -13,7 +13,7 @@ namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\NotificationType;
-use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
+use Sylius\Behat\Page\Admin\Promotion\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Promotion\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Promotion\UpdatePageInterface;
 use Sylius\Behat\Service\CurrentPageResolverInterface;
@@ -87,6 +87,14 @@ final class ManagingPromotionsContext implements Context
     public function iWantToCreateANewPromotion()
     {
         $this->createPage->open();
+    }
+
+    /**
+     * @Given I want to see all promotion
+     */
+    public function iWantToSeeAllPromotion()
+    {
+        $this->indexPage->open();
     }
 
     /**
@@ -173,6 +181,40 @@ final class ManagingPromotionsContext implements Context
     {
         $this->createPage->addAction('Order fixed discount');
         $this->createPage->fillActionOption('Amount', $amount);
+    }
+
+    /**
+     * @Then /^I should see (\d+) promotions on the list$/
+     */
+    public function iShouldSeePromotionsOnTheList($number)
+    {
+        Assert::eq(
+            $number,
+            $this->indexPage->countItems(),
+            sprintf('I should see %s promotions but i see only %s', $number, $this->indexPage->countItems())
+        );
+    }
+
+    /**
+     * @Then /^(this promotion) should be coupon based$/
+     */
+    public function thisPromotionShouldBeCouponBased(PromotionInterface $promotion)
+    {
+        Assert::true(
+            $this->indexPage->isCouponBasedFor($promotion),
+            sprintf('Promotion with name %s should be coupon based', $promotion->getName())
+        );
+    }
+
+    /**
+     * @Then /^I should be able to manage those coupons for (this promotion)$/
+     */
+    public function iShouldBeAbleToManageThoseCouponsForThisPromotion(PromotionInterface $promotion)
+    {
+        Assert::true(
+            $this->indexPage->isAbleToManageCouponsFor($promotion),
+            sprintf('I should be able to manage coupons for given promotion with name %s but apparently i am not.', $promotion->getName())
+        );
     }
 
     /**

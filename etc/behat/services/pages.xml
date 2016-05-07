@@ -63,7 +63,7 @@
         <parameter key="sylius.behat.page.admin.product_option.index.class">%sylius.behat.page.admin.crud.index.class%</parameter>
         <parameter key="sylius.behat.page.admin.promotion.create.class">Sylius\Behat\Page\Admin\Promotion\CreatePage</parameter>
         <parameter key="sylius.behat.page.admin.promotion.update.class">Sylius\Behat\Page\Admin\Promotion\UpdatePage</parameter>
-        <parameter key="sylius.behat.page.admin.promotion.index.class">%sylius.behat.page.admin.crud.index.class%</parameter>
+        <parameter key="sylius.behat.page.admin.promotion.index.class">Sylius\Behat\Page\Admin\Promotion\IndexPage</parameter>
         <parameter key="sylius.behat.page.admin.promotion_coupon.create.class">Sylius\Behat\Page\Admin\PromotionCoupon\CreatePage</parameter>
         <parameter key="sylius.behat.page.admin.promotion_coupon.index.class">%sylius.behat.page.admin.crud.index.class%</parameter>
         <parameter key="sylius.behat.page.admin.promotion_coupon.update.class">%sylius.behat.page.admin.crud.update.class%</parameter>
