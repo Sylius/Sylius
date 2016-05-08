@@ -14,6 +14,7 @@ sylius:
             max_length: '{1} Nazwa promocji nie może być dłuższa niż 1 znak.|{2,3,4} Nazwa promocji nie może być dłuższa niż {{ limit }} znaki.|[5,Inf[ Nazwa promocji nie może być dłuższa niż {{ limit}} znaków.'
             min_length: '{1} Nazwa promocji musi być dłuższa niż 1 znak.|{2,3,4} Nazwa promocji musi być dłuższa niż {{ limit }} znaki.|[5,Inf[ Nazwa promocji musi być dłuższa niż {{ limit }} znaków.'
             not_blank: Proszę podać nazwę promocji.
+        end_date_cannot_be_set_prior_start_date: Data zakończenia nie może być wcześniejsza niż data startu.
     promotion_coupon:
         code:
             max_length: '{1} Kod kuponu promocyjnego nie może być dłuższy niż 1 znak.|{2,3,4} Kod kuponu promocyjnego nie może być dłuższy niż {{ limit }} znaki.|[5,Inf[ Kod kuponu promocyjnego nie może być dłuższy niż {{ limit}} znaków.'

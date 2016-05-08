@@ -3,11 +3,34 @@
 
 sylius:
     metadata:
+        type:
+            none: ' - BRAK - '
+            twitter_summary_card: Podsumowanie
+            twitter_summary_large_image_card: Podsumowanie z dużymi zdjęciami
+            twitter_player_card: Odtwarzacz
+            twitter_app_card: Aplikacja
         page:
             title: Tytuł
             description: Opis
             keywords: Słowa kluczowe
+            twitter: Karta Twitter
         twitter:
             title: Tytuł
             description: Opis
+            site: Strona
+            site_id: Identyfikator strony
+            creator: Autor
+            creator_id: Identyfikator autora
             image: Zdjęcie
+            player: Odtwarzacz
+            player_width: Szerokość odtwarzacza
+            player_height: Wysokość odtwarzacza
+            app_name_iphone: Nazwa aplikacji iPhone
+            app_id_iphone: Identyfikator aplikacji iPhone
+            app_url_iphone: Adres URL aplikacji iPhone
+            app_name_ipad: Nazwa aplikacji iPad
+            app_id_ipad: Identyfikator aplikacji iPad
+            app_url_ipad: Adres URL aplikacji iPad
+            app_name_googleplay: Nazwa aplikacji Google Play
+            app_id_googleplay: Identyfikator aplikacji Google Play
+            app_url_googleplay: Adres URL aplikacji Google Play

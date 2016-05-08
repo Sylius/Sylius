@@ -4,6 +4,7 @@
 sylius:
     form:
         review:
+            header: Dodaj recenzję
             rating: Ocena
             title: Tytuł
             comment: Komentarz
@@ -11,3 +12,6 @@ sylius:
             status:
                 label: Status
                 new: Nowy
+                approved: Zatwierdzona
+                rejected: Odrzucona
+            submit: Dodaj

@@ -1,0 +1,10 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    association_type:
+        name:
+            not_blank: Proszę podać nazwę powiązania.
+        code:
+            unique: Powiązanie z podanym kodem już istnieje.
+            not_blank: Proszę podać kod powiązania.
