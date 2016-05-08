@@ -11,7 +11,10 @@
 
 namespace Sylius\Component\Storage;
 
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 
 /**
  * @author Joseph Bielawski <stloyd@gmail.com>
@@ -22,6 +25,14 @@ class CookieStorage implements StorageInterface
      * @var Request
      */
     protected $request;
+    protected $lifetime = '+30 days';
+    protected $eventDispatcher;
+
+    public function __construct($lifetime, EventDispatcherInterface $eventDispatcher)
+    {
+        $this->lifetime = $lifetime;
+        $this->eventDispatcher = $eventDispatcher;
+    }
 
     /**
      * @param Request $request
@@ -53,6 +64,12 @@ class CookieStorage implements StorageInterface
     public function setData($key, $value)
     {
         $this->request->cookies->set($key, $value);
+
+        $this->eventDispatcher->addListener('kernel.response', function (FilterResponseEvent $event) use ($key, $value) {
+            $event->getResponse()->headers->setCookie(
+                new Cookie($key, $value, new \DateTime($this->lifetime))
+            );
+        });
     }
 
     /**
@@ -61,5 +78,9 @@ class CookieStorage implements StorageInterface
     public function removeData($key)
     {
         $this->request->cookies->remove($key);
+
+        $this->eventDispatcher->addListener('kernel.response', function (FilterResponseEvent $event) use ($key) {
+            $event->getResponse()->headers->clearCookie($key);
+        });
     }
 }
