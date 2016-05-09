@@ -10,6 +10,7 @@ Existing configuration sources
     :titlesonly:
 
     configuration_sources/filesystem
+    configuration_sources/test
 
 Creating custom configuration source
 ------------------------------------
