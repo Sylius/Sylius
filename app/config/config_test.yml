@@ -40,11 +40,7 @@ sylius_channel:
 
 sylius_theme:
     sources:
-        filesystem:
-            directories:
-                - "%kernel.root_dir%/themes"
-                - "%kernel.root_dir%/../vendor/sylius/themes"
-                - "%kernel.cache_dir%/_themes"
+        test: ~
 
 doctrine_cache:
     providers:

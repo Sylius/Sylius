@@ -6,6 +6,7 @@ default:
         ui_theming:
             contexts_as_services:
                 - sylius.behat.context.hook.doctrine_orm
+                - sylius.behat.context.hook.test_theme
 
                 - sylius.behat.context.transform.shared_storage
                 - sylius.behat.context.transform.channel
