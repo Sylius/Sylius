@@ -32,7 +32,7 @@ DateTime (*datetime*)
 This column type works exactly the same way as *string*, but expects *DateTime* instance and outputs a formatted date and time string.
 
 Date (*date*)
----------------------
+-------------
 
 This column type works exactly the same way as *string*, but expects *DateTime* instance and outputs a formatted date string.
 
@@ -77,7 +77,7 @@ Boolean column type expects the value to be boolean and renders a default or cus
                             template: :Grid/Column:_userStatus.html.twig # Optional!
 
 Array (*array*)
--------------------
+---------------
 
 This column type is a list of values. If you do not specify the Twig template, it will simply display the values as comma separated list. Otherwise it will render the value using Twig.
 

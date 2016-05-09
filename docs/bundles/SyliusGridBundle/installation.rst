@@ -22,7 +22,7 @@ Adding required bundles to the kernel
 
 You need to enable the bundle inside the kernel.
 
-If you're not using any other Sylius bundles, you will also need to add `SyliusResourceBundle` and its dependencies to kernel.
+If you're not using any other Sylius bundles, you will also need to add ``SyliusResourceBundle`` and its dependencies to kernel.
 Don't worry, everything was automatically installed via Composer.
 
 .. code-block:: php
