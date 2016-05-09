@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ThemeBundle;
 
 use Sylius\Bundle\ThemeBundle\Configuration\Filesystem\FilesystemConfigurationSourceFactory;
+use Sylius\Bundle\ThemeBundle\Configuration\Test\TestConfigurationSourceFactory;
 use Sylius\Bundle\ThemeBundle\DependencyInjection\SyliusThemeExtension;
 use Sylius\Bundle\ThemeBundle\Translation\DependencyInjection\Compiler\TranslatorAliasingPass;
 use Sylius\Bundle\ThemeBundle\Translation\DependencyInjection\Compiler\TranslatorFallbackLocalesPass;
@@ -33,6 +34,7 @@ class SyliusThemeBundle extends Bundle
         /** @var SyliusThemeExtension $themeExtension */
         $themeExtension = $container->getExtension('sylius_theme');
         $themeExtension->addConfigurationSourceFactory(new FilesystemConfigurationSourceFactory());
+        $themeExtension->addConfigurationSourceFactory(new TestConfigurationSourceFactory());
 
         $container->addCompilerPass(new TranslatorAliasingPass());
         $container->addCompilerPass(new TranslatorFallbackLocalesPass());
