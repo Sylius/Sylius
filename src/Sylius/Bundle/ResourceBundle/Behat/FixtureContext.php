@@ -29,9 +29,6 @@ class FixtureContext extends DefaultContext
         $this->getEntityManager()->flush();
     }
 
-    /**
-     * @Given /^there is the following "([^"]*)":$/
-     */
     public function thereIsResource($resource, $additionalData, $flush = true)
     {
         if ($additionalData instanceof TableNode) {
@@ -133,20 +130,12 @@ class FixtureContext extends DefaultContext
     protected function setDataToObject($object, array $data)
     {
         foreach ($data as $property => $value) {
-            if (1 === preg_match('/date/', strtolower($property))) {
+            if (1 === preg_match('/date/i', $property)) {
                 $value = new \DateTime($value);
             }
 
-            $propertyName = ucfirst($property);
-            if (false !== strpos(' ', $property)) {
-                $propertyName = '';
-                $propertyParts = explode(' ', $property);
-
-                foreach ($propertyParts as $part) {
-                    $part = ucfirst($part);
-                    $propertyName .= $part;
-                }
-            }
+            $propertyParts = explode(' ', $property);
+            $propertyName = implode(array_map('ucfirst', $propertyParts));
 
             $method = 'set'.$propertyName;
             if (method_exists($object, $method)) {
