@@ -176,6 +176,26 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
+    public function getPromotionTotal()
+    {
+        $promotionTotalElement = $this->getElement('promotion_total');
+
+        return trim(str_replace('Promotion total:', '', $promotionTotalElement->getText()));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasPromotionDiscount($promotionDiscount)
+    {
+        $promotionDiscountsText = $this->getElement('promotion_discounts')->getText();
+
+        return stripos($promotionDiscountsText, $promotionDiscount) !== false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
@@ -190,6 +210,8 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'shipping_total' => '#shipping-total',
             'shipping_charges' => '#shipping-charges',
             'tax_total' => '#tax-total',
+            'promotion_total' => '#promotion-total',
+            'promotion_discounts' => '#promotion-discounts',
         ]);
     }
 

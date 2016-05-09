@@ -232,6 +232,31 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @Then the order's promotion discount should be :promotionDiscount
+     */
+    public function theOrdersPromotionDiscountShouldBe($promotionDiscount)
+    {
+        Assert::true(
+            $this->showPage->hasPromotionDiscount($promotionDiscount),
+            sprintf('Promotion discount is not "%s".', $promotionDiscount)
+        );
+    }
+
+    /**
+     * @Then the order's promotion total should be :promotionTotal
+     */
+    public function theOrdersPromotionTotalShouldBe($promotionTotal)
+    {
+        $promotionTotalOnPage = $this->showPage->getPromotionTotal();
+
+        Assert::eq(
+            $promotionTotal,
+            $promotionTotalOnPage,
+            sprintf('Promotion total is "%s", but should be "%s".', $promotionTotalOnPage, $promotionTotal)
+        );
+    }
+
+    /**
      * @When I delete the order :order
      */
     public function iDeleteOrder(OrderInterface $order)

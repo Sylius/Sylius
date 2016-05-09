@@ -90,4 +90,16 @@ interface ShowPageInterface extends PageInterface
      * @return string
      */
     public function getTaxTotal();
+
+    /**
+     * @return string
+     */
+    public function getPromotionTotal();
+
+    /**
+     * @param string $promotionDiscount
+     *
+     * @return bool
+     */
+    public function hasPromotionDiscount($promotionDiscount);
 }
