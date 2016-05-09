@@ -554,6 +554,7 @@ sylius:
         provinces: Provinces
         qty_max: 'Qty max'
         qty_min: 'Qty min'
+        quantity: 'Qty'
         rating: Rating
         recent_customers: 'Recent customers'
         recent_orders: 'Recent orders'

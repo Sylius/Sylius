@@ -92,7 +92,7 @@ class CartSummaryPage extends SymfonyPage implements CartSummaryPageInterface
     public function removeProduct($productName)
     {
         $itemElement = $this->getElement('product row', ['%name%' => $productName]);
-        $itemElement->find('css', 'a.btn-danger')->click();
+        $itemElement->find('css', 'a#remove-button')->click();
     }
 
     /**
@@ -109,9 +109,57 @@ class CartSummaryPage extends SymfonyPage implements CartSummaryPageInterface
     /**
      * {@inheritdoc}
      */
+    public function isElementOnPage($elementName)
+    {
+        $items = $this->getElement('cart items')->findAll('css', 'thead > tr > th');
+        $summary = $this->getElement('cart summary')->findAll('css', 'tbody > tr > td > strong');
+        $elements = array_merge($items, $summary);
+
+        foreach($elements as $row) {
+            if($elementName === $row->getText()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTotal()
+    {
+        $totalElement = $this->getElement('total');
+
+        return $totalElement->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getUnitPrice()
+    {
+        $unitPriceElement = $this->getElement('unit price');
+
+        return $unitPriceElement->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getQuantity()
+    {
+        $quantityElement = $this->getElement('quantity', [ '%number%' => 0]);
+
+        return $quantityElement->getValue();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getRouteName()
     {
-        return 'sylius_cart_summary';
+        return 'sylius_shop_cart_summary';
     }
 
     /**
@@ -124,9 +172,14 @@ class CartSummaryPage extends SymfonyPage implements CartSummaryPageInterface
             'promotion total' => '#cart-summary td:contains("Promotion total")',
             'shipping total' => '#cart-summary td:contains("Shipping total")',
             'tax total' => '#cart-summary td:contains("Tax total")',
-            'product row' => '#cart-summary tbody tr:contains("%name%")',
+            'product row' => '#cart-items tbody tr:contains("%name%")',
             'product regular price' => '#cart-summary tr:contains("%name%") .regular-price',
             'product discount price' => '#cart-summary tr:contains("%name%") .discount-price',
+            'total' => '.total',
+            'quantity' => '#sylius_cart_items_%number%_quantity',
+            'unit price' => '.unit-price',
+            'cart items' => '#cart-items',
+            'cart summary' => '#cart-summary',
         ]);
     }
 }

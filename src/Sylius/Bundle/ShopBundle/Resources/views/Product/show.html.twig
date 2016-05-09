@@ -33,7 +33,7 @@
                 {% endif %}
             </div>
             <div class="ui hidden divider"></div>
-            <form action="{{ path('sylius_cart_item_add', {'id': product.id}) }}" method="post">
+            <form action="{{ path('sylius_shop_cart_item_add', {'id': product.id}) }}" method="post">
                 <div class="ui two column grid">
                     <div class="column">
                         {% if product.hasVariants %}
