@@ -363,7 +363,7 @@ class Product implements ProductInterface
     public function getAvailableVariants()
     {
         return $this->variants->filter(function (BaseVariantInterface $variant) {
-            return $variant->isMaster() && $variant->isAvailable();
+            return !$variant->isMaster() && $variant->isAvailable();
         });
     }
 
