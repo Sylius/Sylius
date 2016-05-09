@@ -128,5 +128,9 @@ final class SyliusThemeExtension extends Extension implements PrependExtensionIn
 
         $compositeConfigurationProvider = $container->getDefinition('sylius.theme.configuration.provider');
         $compositeConfigurationProvider->replaceArgument(0, $configurationProviders);
+
+        foreach ($this->configurationSourceFactories as $configurationSourceFactory) {
+            $container->addObjectResource($configurationSourceFactory);
+        }
     }
 }
