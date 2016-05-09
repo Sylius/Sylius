@@ -6,6 +6,7 @@ sylius:
         rule:
             unit_count_configuration:
                 count: Ilość
+                equal: Równy
             type: Typ reguły
         shipment:
             state: Status
@@ -23,7 +24,10 @@ sylius:
                 amount: Kwota
             flexible_rate_configuration:
                 label: Zmienna stawka
+                additional_unit_cost: Dodatkowy koszt jednostki
+                first_unit_cost: Koszt pierwszej jednostki
             per_unit_rate_configuration:
+                label: Jednolita stawka za jednostkę
                 amount: Kwota
             weight_rate_configuration:
                 label: Stawka zależna od wagi

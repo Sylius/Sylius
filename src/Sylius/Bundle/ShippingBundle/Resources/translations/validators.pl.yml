@@ -22,3 +22,5 @@ sylius:
         code:
             not_blank: Proszę wprowadzić kod metody wysyłki.
             unique: Metoda wysyłki z podanym kodem już istnieje.
+        zone:
+            not_blank: Proszę wybrać strefę dla metody wysyłki.

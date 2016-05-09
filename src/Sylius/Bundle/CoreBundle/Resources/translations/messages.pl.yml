@@ -75,6 +75,7 @@ sylius:
                     Tracking code (for example: Kod Google Analytics)
             taxation:
                 default_tax_zone: Domyślna strefa podatkowa
+                default_tax_calculation_strategy: Domyślna strategia obliczania podatku
             security:
                 enabled: Włączone?
         shipment_filter:
