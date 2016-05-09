@@ -16,7 +16,7 @@ In order to make it a Sylius resource, you need to configure it under ``sylius_r
                 classes:
                     model: AppBundle\Entity\Tournament
 
-That's it! Your class is now a resource. In order to learn what does it mean, please refer to `SyliusResourceBundle <http://docs.sylius.org/current/bundles/SyliusResourceBundle.html>`_ documentation.
+That's it! Your class is now a resource. In order to learn what does it mean, please refer to :doc:`SyliusResourceBundle </bundles/SyliusResourceBundle/index>` documentation.
 
 Columns Definition
 ------------------
@@ -27,7 +27,7 @@ Now we can configure our first grid:
 
     # app/config/config.yml
 
-    sylius_grids:
+    sylius_grid:
         grids:
             app_tournament:
                 driver: doctrine/orm # Use appropriate driver.
@@ -74,7 +74,7 @@ Okay, but we need some filters, right?
 
     # app/config/config.yml
 
-    sylius_grids:
+    sylius_grid:
         grids:
             app_tournament:
                 driver: doctrine/orm # Use appropriate driver.
@@ -111,7 +111,7 @@ We want to have our tournaments sorted by name, by default, right? That is easy!
 
     # app/config/config.yml
 
-    sylius_grids:
+    sylius_grid:
         grids:
             app_tournament:
                 driver: doctrine/orm # Use appropriate driver.
@@ -151,7 +151,7 @@ Next step is adding some actions to the grid. We start with the basic ones, edit
 
     # app/config/config.yml
 
-    sylius_grids:
+    sylius_grid:
         grids:
             app_tournament:
                 driver: doctrine/orm # Use appropriate driver.

@@ -6,7 +6,7 @@ Each column can be configured with several configuration fields, to make it more
 +------------+------------+------------------------------------------------------------------------------------------------------------------------+
 | Name       | Type       | Description                                                                                                            |
 +============+============+========================================================================================================================+
-| type       | string     | Type of column. Default column types are described `here </en/latest/bundles/SyliusGridBundle/column_types.html>`_.    |
+| type       | string     | Type of column. Default column types are described :doc:`here </bundles/SyliusGridBundle/column_types>`.               |
 +------------+------------+------------------------------------------------------------------------------------------------------------------------+
 | label      | string     | Label displayed in column header. By default, it is column name.                                                       |
 +------------+------------+------------------------------------------------------------------------------------------------------------------------+

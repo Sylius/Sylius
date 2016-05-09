@@ -74,7 +74,7 @@ And the form type:
 
         public function getType()
         {
-            return 'sylius_filter_tournament_statistics'; // The name is important to be ``sylius_filter_NAME``!
+            return 'sylius_filter_tournament_statistics'; // The name is important to be sylius_filter_NAME
         }
     }
 
