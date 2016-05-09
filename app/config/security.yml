@@ -61,20 +61,11 @@ security:
                 use_forward:  false
                 use_referer: true
             remember_me:
-                key: %sylius.secret%
+                key: %secret%
                 name: APP_REMEMBER_ME
                 lifetime: 31536000
                 always_remember_me: true
                 remember_me_parameter: _remember_me
-            oauth:
-                resource_owners:
-                    amazon:   "/connect-login/check-amazon"
-                    facebook: "/connect-login/check-facebook"
-                    google:   "/connect-login/check-google"
-                login_path:   /login
-                failure_path: /login
-                oauth_user_provider:
-                    service: sylius.oauth.user_provider
             logout: true
             anonymous: true
 

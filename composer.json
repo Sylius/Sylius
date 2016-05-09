@@ -37,7 +37,6 @@
         "friendsofsymfony/rest-bundle": "~1.5",
         "fzaninotto/faker": "~1.2",
         "gedmo/doctrine-extensions": "^2.4.12",
-        "hwi/oauth-bundle": "~0.3",
         "incenteev/composer-parameter-handler": "~2.0",
         "jackalope/jackalope": "^1.1.4",
         "jackalope/jackalope-doctrine-dbal": "^1.1.2",
@@ -97,7 +96,8 @@
         "phpspec/phpspec": "^2.4",
         "phpunit/phpunit": "~4.1",
         "se/selenium-server-standalone": "^2.52",
-        "mikey179/vfsStream": "^1.6"
+        "mikey179/vfsStream": "^1.6",
+        "hwi/oauth-bundle": "~0.3"
     },
     "replace": {
         "sylius/addressing": "self.version",

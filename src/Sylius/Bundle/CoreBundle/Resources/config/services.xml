@@ -135,7 +135,7 @@
         <service id="sylius.settings_schema.general" class="%sylius.settings_schema.general.class%">
             <argument type="collection">
                 <argument key="currency">%sylius.money.currency%</argument>
-                <argument key="locale">%sylius.locale%</argument>
+                <argument key="locale">%locale%</argument>
             </argument>
             <tag name="sylius.settings_schema" alias="sylius_general" />
         </service>
@@ -554,7 +554,7 @@
 
         <service id="sylius.channel_aware_locale_provider" class="%sylius.channel_aware_locale_provider.class%">
             <argument type="service" id="sylius.context.channel" />
-            <argument>%sylius.locale%</argument>
+            <argument>%locale%</argument>
         </service>
 
         <service id="sylius.data_collector" class="%sylius.data_collector.class%" public="false">

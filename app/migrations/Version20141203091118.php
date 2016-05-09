@@ -28,7 +28,7 @@ class Version20141203091118 extends AbstractMigration implements ContainerAwareI
     {
         if (null !== $container) {
             $this->container = $container;
-            $this->defaultLocale = $container->getParameter('sylius.locale');
+            $this->defaultLocale = $container->getParameter('locale');
         }
     }
 
