@@ -59,6 +59,14 @@ final class NotificationType
     }
 
     /**
+     * @return NotificationType
+     */
+    public static function information()
+    {
+        return static::getTyped('information');
+    }
+
+    /**
      * @param string $type
      *
      * @return NotificationType

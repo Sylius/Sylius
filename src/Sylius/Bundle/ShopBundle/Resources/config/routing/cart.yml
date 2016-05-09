@@ -1,0 +1,30 @@
+sylius_shop_cart_summary:
+    path: /cart
+    defaults:
+        _controller: sylius.controller.cart:summaryAction
+        _sylius:
+            template: SyliusShopBundle:Cart:summary.html.twig
+
+sylius_shop_cart_save:
+    path: /cart/save
+    defaults:
+        _controller: sylius.controller.cart:saveAction
+        _sylius:
+            template: SyliusShopBundle:Cart:summary.html.twig
+            redirect: sylius_shop_cart_summary
+
+sylius_shop_cart_item_add:
+    path: cart/add
+    defaults:
+        _controller: sylius.controller.cart_item:addAction
+        _sylius:
+            template: SyliusShopBundle:Cart:summary.html.twig
+            redirect: sylius_shop_cart_summary
+
+sylius_shop_cart_item_remove:
+    path: /cart/{id}/remove
+    defaults:
+        _controller: sylius.controller.cart_item:removeAction
+        _sylius:
+            template: SyliusShopBundle:Cart:summary.html.twig
+            redirect: sylius_shop_cart_summary

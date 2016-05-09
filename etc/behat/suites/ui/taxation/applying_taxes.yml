@@ -24,7 +24,7 @@ default:
                 - sylius.behat.context.setup.zone
                 - sylius.behat.context.setup.security
 
-                - sylius.behat.context.ui.cart
+                - sylius.behat.context.ui.shop.cart
                 - sylius.behat.context.ui.checkout
                 - sylius.behat.context.ui.user
             filters:

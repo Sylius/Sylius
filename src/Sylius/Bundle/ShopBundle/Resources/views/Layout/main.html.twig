@@ -164,6 +164,10 @@
     {% include 'SyliusShopBundle:Homepage:_header.html.twig' %}
 {% endblock %}
 
+{% block flashes %}
+    {% include 'SyliusUiBundle::_flashes.html.twig' %}
+{% endblock %}
+
 {% block content %}
 {% endblock %}
 
@@ -175,5 +179,6 @@
 {% block javascripts %}
     {% include 'SyliusUiBundle::_javascripts.html.twig' with {'path': 'assets/shop/js/app.js'} %}
 {% endblock %}
+
 </body>
 </html>

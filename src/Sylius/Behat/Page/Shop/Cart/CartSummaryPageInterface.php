@@ -38,6 +38,7 @@ interface CartSummaryPageInterface extends PageInterface
      */
     public function getPromotionTotal();
 
+
     /**
      * @param string $productName
      *
@@ -69,4 +70,26 @@ interface CartSummaryPageInterface extends PageInterface
      * @param int $quantity
      */
     public function changeQuantity($productName, $quantity);
+
+    /**
+     * @param string $elementName
+     *
+     * @return bool
+     */
+    public function isElementOnPage($elementName);
+
+    /**
+     * @return string
+     */
+    public function getTotal();
+
+    /**
+     * @return string
+     */
+    public function getUnitPrice();
+
+    /**
+     * @return mixed
+     */
+    public function getQuantity();
 }

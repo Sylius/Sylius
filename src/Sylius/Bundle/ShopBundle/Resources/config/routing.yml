@@ -5,3 +5,6 @@ sylius_shop_homepage:
 
 sylius_shop_product:
     resource: "@SyliusShopBundle/Resources/config/routing/product.yml"
+
+sylius_shop_cart:
+    resource: "@SyliusShopBundle/Resources/config/routing/cart.yml"
