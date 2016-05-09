@@ -60,6 +60,20 @@ class CouponFactorySpec extends ObjectBehavior
         ;
     }
 
+    function it_throws_invalid_argument_exception_when_promotion_is_not_coupon_based(
+        PromotionRepositoryInterface $promotionRepository,
+        PromotionInterface $promotion
+    ) {
+        $promotionRepository->find(13)->willReturn($promotion);
+        $promotion->getName()->willReturn('Christmas sale');
+        $promotion->isCouponBased()->willReturn(false);
+
+        $this
+            ->shouldThrow(\InvalidArgumentException::class)
+            ->during('createForPromotion', [13])
+        ;
+    }
+
     function it_creates_a_coupon_and_assigns_a_promotion_to_id(
         FactoryInterface $factory,
         PromotionRepositoryInterface $promotionRepository,
@@ -68,6 +82,7 @@ class CouponFactorySpec extends ObjectBehavior
     ) {
         $factory->createNew()->willReturn($coupon);
         $promotionRepository->find(13)->willReturn($promotion);
+        $promotion->isCouponBased()->willReturn(true);
         $coupon->setPromotion($promotion)->shouldBeCalled();
 
         $this->createForPromotion(13)->shouldReturn($coupon);

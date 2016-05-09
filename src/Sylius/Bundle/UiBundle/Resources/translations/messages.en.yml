@@ -64,6 +64,7 @@ sylius:
         manage_languages_available_in_the_store: Manage languages available in the store
         manage_configuration_options_of_your_products: Manage configuration options of your products
         manage_payment_methods_available_to_your_customers: Manage payment methods available to your customers
+        manage_promotion_coupons: Manage promotion coupons
         manage_shipping_destinations: Manage shipping destinations
         manage_categorization_of_your_products: Manage categorization of your products
         manage_shipping_methods_for_your_store: Manage shipping methods for your store
@@ -86,6 +87,7 @@ sylius:
         powered_by: Powered by
         promotion_configuration: Promotion configuration
         promotion_information: Promotion information
+        per_customer_usage_limit: Per customer usage limit
         save_changes: Save changes
         shipping_methods: Shipping methods
         show: Show

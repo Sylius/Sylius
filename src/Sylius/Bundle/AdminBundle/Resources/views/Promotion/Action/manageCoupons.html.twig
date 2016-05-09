@@ -7,7 +7,7 @@
         <div class="menu">
             <a class="item" href="{{ path('sylius_admin_promotion_coupon_index', { promotionId: data.id }) }}"><i class="tags icon"></i> {{ 'sylius.ui.promotion_coupons'|trans }}</a>
             <a class="item" href="{{ path('sylius_admin_promotion_coupon_create', { promotionId: data.id }) }}"><i class="plus icon"></i> {{ 'sylius.ui.add_coupon'|trans }}</a>
-            <a class="item" href="#"><i class="random icon"></i> {{ 'sylius.ui.generating_coupons'|trans }}</a>
+            <a class="item" href="{{ path('sylius_admin_promotion_coupon_generate', { promotionId: data.id }) }}"><i class="random icon"></i> {{ 'sylius.ui.generating_coupons'|trans }}</a>
         </div>
     </div>
 {% endif %}

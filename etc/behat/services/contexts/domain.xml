@@ -18,6 +18,7 @@
         <parameter key="sylius.behat.context.domain.shipment.class">Sylius\Behat\Context\Domain\ShippingContext</parameter>
         <parameter key="sylius.behat.context.domain.product.class">Sylius\Behat\Context\Domain\ProductContext</parameter>
         <parameter key="sylius.behat.context.domain.promotion.class">Sylius\Behat\Context\Domain\PromotionContext</parameter>
+        <parameter key="sylius.behat.context.domain.promotion_coupon.class">Sylius\Behat\Context\Domain\PromotionCouponContext</parameter>
     </parameters>
 
     <services>
@@ -46,6 +47,11 @@
         <service id="sylius.behat.context.domain.promotion" class="%sylius.behat.context.domain.promotion.class%" scope="scenario">
             <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
             <argument type="service" id="sylius.repository.promotion" container="symfony" />
+            <tag name="sylius.behat.context" />
+        </service>
+
+        <service id="sylius.behat.context.domain.promotion_coupon" class="%sylius.behat.context.domain.promotion_coupon.class%" scope="scenario">
+            <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
             <argument type="service" id="sylius.repository.promotion_coupon" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>

@@ -11,18 +11,19 @@
 
 namespace Sylius\Behat\Page\Admin\PromotionCoupon;
 
-use Sylius\Behat\Behaviour\SpecifiesItsCode;
-use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
+use Behat\Mink\Element\NodeElement;
+use Sylius\Behat\Behaviour\ChecksCodeImmutability;
+use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class CreatePage extends BaseCreatePage implements CreatePageInterface
+class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 {
-    use SpecifiesItsCode;
+    use ChecksCodeImmutability;
 
     /**
-     * {@inheritdoc}
+     * @param int $limit
      */
     public function setCustomerUsageLimit($limit)
     {
@@ -30,7 +31,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param \DateTime $date
      */
     public function setExpiresAt(\DateTime $date)
     {
@@ -40,11 +41,19 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param int $limit
      */
     public function setUsageLimit($limit)
     {
         $this->getDocument()->fillField('Usage limit', $limit);
+    }
+
+    /**
+     * @return NodeElement
+     */
+    protected function getCodeElement()
+    {
+        return $this->getElement('code');
     }
 
     /**

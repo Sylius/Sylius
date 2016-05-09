@@ -65,8 +65,9 @@
         <parameter key="sylius.behat.page.admin.promotion.update.class">Sylius\Behat\Page\Admin\Promotion\UpdatePage</parameter>
         <parameter key="sylius.behat.page.admin.promotion.index.class">Sylius\Behat\Page\Admin\Promotion\IndexPage</parameter>
         <parameter key="sylius.behat.page.admin.promotion_coupon.create.class">Sylius\Behat\Page\Admin\PromotionCoupon\CreatePage</parameter>
+        <parameter key="sylius.behat.page.admin.promotion_coupon.generate.class">Sylius\Behat\Page\Admin\PromotionCoupon\GeneratePage</parameter>
         <parameter key="sylius.behat.page.admin.promotion_coupon.index.class">%sylius.behat.page.admin.crud.index.class%</parameter>
-        <parameter key="sylius.behat.page.admin.promotion_coupon.update.class">%sylius.behat.page.admin.crud.update.class%</parameter>
+        <parameter key="sylius.behat.page.admin.promotion_coupon.update.class">Sylius\Behat\Page\Admin\PromotionCoupon\UpdatePage</parameter>
         <parameter key="sylius.behat.page.admin.shipping_method.create.class">Sylius\Behat\Page\Admin\ShippingMethod\CreatePage</parameter>
         <parameter key="sylius.behat.page.admin.shipping_method.index.class">%sylius.behat.page.admin.crud.index.class%</parameter>
         <parameter key="sylius.behat.page.admin.shipping_method.update.class">Sylius\Behat\Page\Admin\ShippingMethod\UpdatePage</parameter>
@@ -186,6 +187,7 @@
         <service id="sylius.behat.page.admin.promotion_coupon.create" class="%sylius.behat.page.admin.promotion_coupon.create.class%" parent="sylius.behat.page.admin.crud.create" scope="scenario" public="false">
             <argument type="string">promotion_coupon</argument>
         </service>
+        <service id="sylius.behat.page.admin.promotion_coupon.generate" class="%sylius.behat.page.admin.promotion_coupon.generate.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
         <service id="sylius.behat.page.admin.promotion_coupon.index" class="%sylius.behat.page.admin.promotion_coupon.index.class%" parent="sylius.behat.page.admin.crud.index" scope="scenario" public="false">
             <argument type="string">promotion_coupon</argument>
         </service>

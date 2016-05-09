@@ -16,6 +16,9 @@ sylius_grid:
                 usageLimit:
                     type: string
                     label: sylius.ui.usage_limit
+                perCustomerUsageLimit:
+                    type: string
+                    label: sylius.ui.per_customer_usage_limit
                 used:
                     type: string
                     label: sylius.ui.used
@@ -23,11 +26,13 @@ sylius_grid:
                     type: datetime
                     label: sylius.ui.expires_at
                     options:
-                        format: d-m-Y H:i
+                        format: d-m-Y
             actions:
                 main:
                     create:
                         type: create_coupon
+                    generate:
+                        type: generate_coupon
                 item:
                     update:
                         type: update_coupon

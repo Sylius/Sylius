@@ -12,5 +12,5 @@ Feature: Browsing promotion coupons
     @ui
     Scenario: Browsing coupons in store
         Given I want to see all related coupons to this promotion
-        Then I should see 1 coupon on the list
+        Then I should see 1 coupon on the list related to this promotion
         And I should see the coupon with code "Santa's gift"

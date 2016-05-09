@@ -1,4 +1,4 @@
-@managing_promotions
+@managing_promotion_coupons
 Feature: Not being able to delete a coupon which is in use
     In order to maintain proper payment history
     As an Administrator
@@ -13,9 +13,10 @@ Feature: Not being able to delete a coupon which is in use
         And there is a customer "john.doe@gmail.com" that placed an order "#00000022"
         And the customer chose "Free" shipping method to "France" with "Cash on Delivery" payment
         And the customer bought a single "Jacket" using "Santa's gift" coupon
+        And I am logged in as an administrator
 
     @domain
     Scenario: Being unable to delete a used coupon
-        When I try to delete "Santa's gift" coupon
+        When I try to delete "Santa's gift" coupon related to this promotion
         Then I should be notified that it is in use and cannot be deleted
         And this coupon should still exist in the registry
