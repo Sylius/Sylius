@@ -48,27 +48,28 @@ class LocaleType extends BaseLocaleType
     {
         parent::buildForm($builder, $options);
 
-        $builder->addEventListener(
-            FormEvents::PRE_SET_DATA,
-            function (FormEvent $event) {
-                // Adding dynamically created code field
-                $nameOptions = [
-                    'label' => 'sylius.form.locale.name',
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+            // Adding dynamically created code field
+            $nameOptions = [
+                'label' => 'sylius.form.locale.name',
+            ];
+
+            $locale = $event->getData();
+
+            if ($locale instanceof LocaleInterface && null !== $locale->getCode()) {
+                $nameOptions['disabled'] = true;
+                $nameOptions['choices'] = [
+                    $locale->getCode() => $this->getLocaleName($locale->getCode())
                 ];
-
-                $locale = $event->getData();
-                if ($locale instanceof LocaleInterface && null !== $locale->getCode()) {
-                    $nameOptions['disabled'] = true;
-                } else {
-                    $nameOptions['choices'] = $this->getAvailableLocales();
-                }
-
-                $nameOptions['choices_as_values'] = false;
-
-                $form = $event->getForm();
-                $form->add('code', 'locale', $nameOptions);
+            } else {
+                $nameOptions['choices'] = $this->getAvailableLocales();
             }
-        );
+
+            $nameOptions['choices_as_values'] = false;
+
+            $form = $event->getForm();
+            $form->add('code', 'locale', $nameOptions);
+        });
     }
 
     /**
@@ -80,18 +81,25 @@ class LocaleType extends BaseLocaleType
     }
 
     /**
-     * Should be private, used public to support PHP 5.3
+     * @param $code
      *
-     * @internal
-     *
+     * @return null|string
+     */
+    private function getLocaleName($code)
+    {
+        return Intl::getLocaleBundle()->getLocaleName($code);
+    }
+
+    /**
      * @return array
      */
-    public function getAvailableLocales()
+    private function getAvailableLocales()
     {
         $availableLocales = Intl::getLocaleBundle()->getLocaleNames();
 
         /** @var LocaleInterface[] $definedLocales */
         $definedLocales = $this->localeRepository->findAll();
+
         foreach ($definedLocales as $locale) {
             unset($availableLocales[$locale->getCode()]);
         }
