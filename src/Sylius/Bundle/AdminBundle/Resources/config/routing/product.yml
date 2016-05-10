@@ -15,7 +15,7 @@ sylius_admin_product:
                 icon: diamond
     type: sylius.resource
 
-sylius_admin_product_create_configurable:
+sylius_admin_product_create:
     path: /products/new
     methods: [GET, POST]
     defaults:
@@ -31,7 +31,7 @@ sylius_admin_product_create_configurable:
                 templates:
                     form: SyliusAdminBundle:Product:_form.html.twig
                 route:
-                    name: sylius_admin_product_create_configurable
+                    name: sylius_admin_product_create
 
 sylius_admin_product_create_simple:
     path: /products/new/simple
@@ -47,4 +47,4 @@ sylius_admin_product_create_simple:
                 templates:
                     form: SyliusAdminBundle:Product:_form.html.twig
                 route:
-                    name: sylius_admin_product_create
+                    name: sylius_admin_product_create_simple

@@ -20,6 +20,7 @@ use Sylius\Component\Resource\Model\ToggleableTrait;
 use Sylius\Component\Resource\Model\TranslatableTrait;
 use Sylius\Component\Variation\Model\OptionInterface as BaseOptionInterface;
 use Sylius\Component\Variation\Model\VariantInterface as BaseVariantInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -518,5 +519,13 @@ class Product implements ProductInterface
     public function hasAssociation(ProductAssociationInterface $association)
     {
         return $this->associations->contains($association);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSimple() 
+    {
+        return null !== $this->getMasterVariant() && !$this->hasOptions();
     }
 }

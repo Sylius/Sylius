@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ProductBundle\Form\Type;
 
+use Sylius\Bundle\ProductBundle\Form\EventSubscriber\ConfigurableProductSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -30,27 +31,8 @@ class ProductType extends AbstractResourceType
             ->add('masterVariant', 'sylius_product_variant', [
                 'master' => true,
             ])
-            ->add('attributes', 'collection', [
-                'required' => false,
-                'type' => 'sylius_product_attribute_value',
-                'prototype' => false,
-                'allow_add' => true,
-                'allow_delete' => true,
-                'by_reference' => false,
-            ])
-            ->add('associations', 'collection', [
-                'type' => 'sylius_product_association',
-                'allow_add' => true,
-                'allow_delete' => true,
-                'by_reference' => false,
-                'button_add_label' => 'sylius.ui.add_association',
-            ])
-            ->add('options', 'sylius_product_option_choice', [
-                'required' => false,
-                'multiple' => true,
-                'label' => 'sylius.form.product.options',
-            ])
             ->addEventSubscriber(new AddCodeFormSubscriber())
+            ->addEventSubscriber(new ConfigurableProductSubscriber())
         ;
     }
 

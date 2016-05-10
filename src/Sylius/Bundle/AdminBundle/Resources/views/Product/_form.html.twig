@@ -1,6 +1,4 @@
-{% set simple = constant('Sylius\\Component\\Product\\Model\\Product::SIMPLE') %}
-
-{% if product.type == simple %}
+{% if product.simple %}
     {% include 'SyliusAdminBundle:Product/Form:_simpleForm.html.twig' %}
 {% else %}
     {% include 'SyliusAdminBundle:Product/Form:_configurableForm.html.twig' %}

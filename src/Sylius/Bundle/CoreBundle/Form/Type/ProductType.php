@@ -34,27 +34,6 @@ class ProductType extends BaseProductType
                 'type' => 'sylius_product_translation',
                 'label' => 'sylius.form.product.translations',
             ])
-            ->add('shippingCategory', 'sylius_shipping_category_choice', [
-                'required' => false,
-                'empty_value' => '---',
-                'label' => 'sylius.form.product.shipping_category',
-            ])
-            ->add('taxons', 'sylius_taxon_choice', [
-                'label' => 'sylius.form.product.taxons',
-                'multiple' => true,
-            ])
-            ->add('channels', 'sylius_channel_choice', [
-                'multiple' => true,
-                'expanded' => true,
-                'label' => 'sylius.form.product.channels',
-            ])
-            ->add('restrictedZone', 'sylius_zone_choice', [
-                'empty_value' => '---',
-                'label' => 'sylius.form.product.restricted_zone',
-            ])
-            ->add('mainTaxon', 'sylius_taxon_choice', [
-                'label' => 'sylius.form.product.main_taxon',
-             ])
         ;
     }
 }

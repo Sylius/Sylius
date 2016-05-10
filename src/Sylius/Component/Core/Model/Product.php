@@ -203,6 +203,10 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
      */
     public function getPrice()
     {
+        if (null === $this->getMasterVariant()) {
+            return 0;
+        }
+
         return $this->getMasterVariant()->getPrice();
     }
 

@@ -19,12 +19,12 @@
     <class name="Sylius\Component\Product\Model\Product">
         <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
             <option name="fields">code</option>
-            <option name="message">sylius.tax_category.code.unique</option>
+            <option name="message">sylius.product.code.unique</option>
             <option name="groups">sylius</option>
         </constraint>
         <property name="code">
             <constraint name="NotBlank">
-                <option name="message">sylius.tax_category.code.not_blank</option>
+                <option name="message">sylius.product.code.not_blank</option>
                 <option name="groups">sylius</option>
             </constraint>
         </property>

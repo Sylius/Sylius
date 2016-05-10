@@ -72,4 +72,9 @@ interface ProductInterface extends
      * @param ProductAssociationInterface $association
      */
     public function removeAssociation(ProductAssociationInterface $association);
+    
+    /**
+     * @return bool
+     */
+    public function isSimple();
 }
