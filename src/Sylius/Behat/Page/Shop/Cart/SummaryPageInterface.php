@@ -12,12 +12,18 @@
 namespace Sylius\Behat\Page\Shop\Cart;
 
 use Sylius\Behat\Page\PageInterface;
+use Sylius\Component\Product\Model\ProductInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 interface SummaryPageInterface extends PageInterface
 {
+    /**
+     * @param ProductInterface $product
+     */
+    public function deleteProduct(ProductInterface $product);
+
     /**
      * @return string
      */

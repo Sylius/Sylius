@@ -106,6 +106,14 @@ final class CartContext implements Context
     }
 
     /**
+     * @When /^I delete (this product)$/
+     */
+    public function iDeleteThisProduct(ProductInterface $product)
+    {
+        $this->summaryPage->deleteProduct($product);
+    }
+
+    /**
      * @Then grand total value should be :total
      * @Then my cart total should be :total
      */
@@ -200,6 +208,14 @@ final class CartContext implements Context
             ($regularPrice - $amount),
             'Price after discount should be %2$s, but it is %s.'
         );
+    }
+
+    /**
+     * @Then I should be notified that this product has been successfully deleted
+     */
+    public function iShouldBeNotifiedThatThisProductHasBeenSuccessfullyDeleted()
+    {
+        $this->notificationChecker->checkNotification('Item has been removed from cart.', NotificationType::success());
     }
 
     /**
