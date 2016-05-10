@@ -13,14 +13,13 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Bundle\ThemeBundle\Configuration\Test\TestThemeConfigurationManagerInterface;
 use Sylius\Bundle\ThemeBundle\Factory\ThemeFactoryInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Zend\Hydrator\HydrationInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
@@ -53,9 +52,9 @@ final class ThemeContext implements Context
     private $channelManager;
 
     /**
-     * @var string
+     * @var TestThemeConfigurationManagerInterface
      */
-    private $cacheDir;
+    private $testThemeConfigurationManager;
 
     /**
      * @param SharedStorageInterface $sharedStorage
@@ -63,7 +62,7 @@ final class ThemeContext implements Context
      * @param ThemeFactoryInterface $themeFactory
      * @param ChannelRepositoryInterface $channelRepository
      * @param ObjectManager $channelManager
-     * @param ContainerInterface $container
+     * @param TestThemeConfigurationManagerInterface $testThemeConfigurationManager
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -71,14 +70,14 @@ final class ThemeContext implements Context
         ThemeFactoryInterface $themeFactory,
         ChannelRepositoryInterface $channelRepository,
         ObjectManager $channelManager,
-        ContainerInterface $container
+        TestThemeConfigurationManagerInterface $testThemeConfigurationManager
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->themeRepository = $themeRepository;
         $this->themeFactory = $themeFactory;
         $this->channelRepository = $channelRepository;
         $this->channelManager = $channelManager;
-        $this->cacheDir = $container->getParameter('kernel.cache_dir');
+        $this->testThemeConfigurationManager = $testThemeConfigurationManager;
     }
 
     /**
@@ -86,18 +85,11 @@ final class ThemeContext implements Context
      */
     public function storeHasTheme($themeName)
     {
-        $theme = $this->themeFactory->create($themeName, sprintf('%s/_themes/%s/', $this->cacheDir, $themeName));
+        $this->testThemeConfigurationManager->add([
+            'name' => $themeName,
+        ]);
 
-        if (!file_exists($theme->getPath())) {
-            mkdir($theme->getPath(), 0777, true);
-        }
-
-        file_put_contents(
-            rtrim($theme->getPath(), '/') . '/composer.json',
-            sprintf('{ "name": "%s" }', $themeName)
-        );
-
-        $this->sharedStorage->set('theme', $theme);
+        $this->sharedStorage->set('theme', $this->themeRepository->findOneByName($themeName));
     }
 
     /**
