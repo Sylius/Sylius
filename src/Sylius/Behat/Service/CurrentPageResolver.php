@@ -12,9 +12,9 @@
 namespace Sylius\Behat\Service;
 
 use Behat\Mink\Session;
-use Sylius\Behat\Page\Admin\Crud\CreatePageInterface;
-use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface;
+use Sylius\Behat\Page\SymfonyPageInterface;
 use Symfony\Component\Routing\Matcher\UrlMatcherInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -46,16 +46,16 @@ final class CurrentPageResolver implements CurrentPageResolverInterface
      * 
      * @throws \LogicException
      */
-    public function getCurrentPageWithForm(CreatePageInterface $createPage, UpdatePageInterface $updatePage)
+    public function getCurrentPageWithForm(array $pages)
     {
         $routeParameters = $this->urlMatcher->match(parse_url($this->session->getCurrentUrl(), PHP_URL_PATH));
+        
+        Assert::allIsInstanceOf($pages, SymfonyPageInterface::class);
 
-        if (false !== strpos($routeParameters['_route'], 'create')) {
-            return $createPage;
-        }
-
-        if (false !== strpos($routeParameters['_route'], 'update')) {
-            return $updatePage;
+        foreach ($pages as $page) {
+            if ($routeParameters['_route'] === $page->getRouteName()) {
+                return $page;
+            }
         }
 
         throw new \LogicException('Route name does not have any of "update" or "create" keyword, so matcher was unable to match proper page.');

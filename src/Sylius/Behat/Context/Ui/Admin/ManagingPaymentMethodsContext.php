@@ -78,7 +78,7 @@ final class ManagingPaymentMethodsContext implements Context
      */
     public function iNameItIn($name = null, $language)
     {
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm($this->createPage, $this->updatePage);
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
         $currentPage->nameIt($name, $language);
     }
@@ -130,7 +130,7 @@ final class ManagingPaymentMethodsContext implements Context
      */
     public function iChooseGateway($gatewayName)
     {
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm($this->createPage, $this->updatePage);
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
         $currentPage->chooseGateway($gatewayName);
     }
@@ -259,7 +259,7 @@ final class ManagingPaymentMethodsContext implements Context
      */
     private function assertFieldValidationMessage($element, $expectedMessage)
     {
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm($this->createPage, $this->updatePage);
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
         Assert::true(
             $currentPage->checkValidationMessageFor($element, $expectedMessage),

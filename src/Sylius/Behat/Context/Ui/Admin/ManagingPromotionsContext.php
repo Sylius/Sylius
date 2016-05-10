@@ -225,7 +225,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iSetItsUsageLimitTo($usageLimit)
     {
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm($this->createPage, $this->updatePage);
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
         $currentPage->fillUsageLimit($usageLimit);
     }
@@ -248,7 +248,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iMakeItExclusive()
     {
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm($this->createPage, $this->updatePage);
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
         $currentPage->makeExclusive();
     }
@@ -266,7 +266,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iMakeItCouponBased()
     {
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm($this->createPage, $this->updatePage);
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
         $currentPage->checkCouponBased();
     }
@@ -284,7 +284,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iMakeItApplicableForTheChannel($channelName)
     {
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm($this->createPage, $this->updatePage);
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
         $currentPage->checkChannel($channelName);
     }
@@ -372,7 +372,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iMakeItAvailableFromTo(\DateTime $startsDate, \DateTime $endsDate)
     {
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm($this->createPage, $this->updatePage);
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
         $currentPage->setStartsAt($startsDate);
         $currentPage->setEndsAt($endsDate);
@@ -401,7 +401,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iShouldBeNotifiedThatPromotionCannotEndBeforeItsEvenStart()
     {
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm($this->createPage, $this->updatePage);
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
         Assert::true(
             $currentPage->checkValidationMessageFor('ends_at', 'End date cannot be set prior start date.'),
@@ -415,7 +415,7 @@ final class ManagingPromotionsContext implements Context
      */
     private function assertFieldValidationMessage($element, $expectedMessage)
     {
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm($this->createPage, $this->updatePage);
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
         Assert::true(
             $currentPage->checkValidationMessageFor($element, $expectedMessage),

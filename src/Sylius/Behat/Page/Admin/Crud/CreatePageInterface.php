@@ -17,8 +17,16 @@ use Sylius\Behat\Page\SymfonyPageInterface;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-interface CreatePageInterface extends SymfonyPageInterface, PageWithFormInterface
+interface CreatePageInterface extends SymfonyPageInterface
 {
+    /**
+     * @param string $element
+     * @param string $message
+     *
+     * @return bool
+     */
+    public function checkValidationMessageFor($element, $message);
+
     /**
      * @throws ElementNotFoundException
      */
