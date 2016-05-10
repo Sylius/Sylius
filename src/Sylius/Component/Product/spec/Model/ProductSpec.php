@@ -204,6 +204,50 @@ class ProductSpec extends ObjectBehavior
     function it_should_initialize_variants_collection_by_default()
     {
         $this->getVariants()->shouldHaveType('Doctrine\Common\Collections\Collection');
+        $this->getAvailableVariants()->shouldHaveType('Doctrine\Common\Collections\Collection');
+    }
+
+    function it_should_exclude_unavailable_variants_when_available_variants_are_called(VariantInterface $variant)
+    {
+        $variant->isMaster()->willReturn(false);
+        $variant->isAvailable()->willReturn(false);
+
+        $variant->setProduct($this)->shouldBeCalled();
+
+        $this->addVariant($variant);
+        $this->getAvailableVariants()->shouldHaveCount(0);
+    }
+
+    function it_should_exclude_master_variants_when_available_variants_are_called(VariantInterface $variant)
+    {
+        $variant->isMaster()->willReturn(true);
+
+        $variant->setProduct($this)->shouldBeCalled();
+
+        $this->addVariant($variant);
+        $this->getAvailableVariants()->shouldHaveCount(0);
+    }
+
+    function it_should_return_available_variants_when_available_variants_are_called(
+        VariantInterface $masterVariant,
+        VariantInterface $unavailableVariant,
+        VariantInterface $variant
+    ) {
+        $masterVariant->isMaster()->willReturn(true);
+        $unavailableVariant->isMaster()->willReturn(false);
+        $unavailableVariant->isAvailable()->willReturn(false);
+        $variant->isMaster()->willReturn(false);
+        $variant->isAvailable()->willReturn(true);
+
+        $masterVariant->setProduct($this)->shouldBeCalled();
+        $unavailableVariant->setProduct($this)->shouldBeCalled();
+        $variant->setProduct($this)->shouldBeCalled();
+
+        $this->addVariant($masterVariant);
+        $this->addVariant($unavailableVariant);
+        $this->addVariant($variant);
+
+        $this->getAvailableVariants()->shouldHaveCount(1);
     }
 
     function it_should_initialize_option_collection_by_default()
