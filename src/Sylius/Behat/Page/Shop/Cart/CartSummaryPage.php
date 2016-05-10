@@ -157,6 +157,58 @@ class CartSummaryPage extends SymfonyPage implements CartSummaryPageInterface
     /**
      * {@inheritdoc}
      */
+    public function isSingleItemOnPage()
+    {
+        $items = $this->getElement('cart items')->findAll('css', 'tbody > tr');
+
+        return 1 === count($items);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isItemWithName($name)
+    {
+        $items = $this->getElement('cart items')->findAll('css', 'tbody  tr > td > div > a > strong');
+
+        foreach($items as $item) {
+            if($name === $item->getText()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isItemWithVariant($variantName)
+    {
+        $itemsVariants = $this->getElement('cart items')->findAll('css', 'tbody  tr > td > strong');
+
+        foreach($itemsVariants as $itemVariant) {
+            if($variantName === $itemVariant->getText()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getProductOption($productName, $optionName)
+    {
+        $itemElement = $this->getElement('product row', ['%name%' => $productName]);
+
+        return $itemElement->find('css', sprintf('li:contains("%s")', ucfirst($optionName)))->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getRouteName()
     {
         return 'sylius_shop_cart_summary';

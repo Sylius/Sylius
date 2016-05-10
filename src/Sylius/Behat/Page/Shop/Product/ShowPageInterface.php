@@ -13,6 +13,7 @@ namespace Sylius\Behat\Page\Shop\Product;
 
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\PageInterface;
+use Sylius\Component\Product\Model\OptionInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -37,6 +38,14 @@ interface ShowPageInterface extends PageInterface
      * @throws ElementNotFoundException
      */
     public function addToCartWithVariant($variant);
+
+    /**
+     * @param OptionInterface $option
+     * @param string $optionValue
+     *
+     * @throws ElementNotFoundException
+     */
+    public function addToCartWithOption(OptionInterface $option, $optionValue);
 
     /**
      * @return string

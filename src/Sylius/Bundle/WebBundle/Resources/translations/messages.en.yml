@@ -708,6 +708,7 @@ sylius:
         users_list_of_all_users_registered_in_store: 'Users <small>List of all users registered in store</small>'
         values: Values
         variant_selection_method: 'Variant selection method'
+        variant: Variants
         variants: Variants
         view: View
         view_more: 'View more'

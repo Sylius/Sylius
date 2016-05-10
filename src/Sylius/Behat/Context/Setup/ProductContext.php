@@ -21,6 +21,8 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Product\Model\AttributeValueInterface;
+use Sylius\Component\Product\Model\OptionInterface;
+use Sylius\Component\Product\Model\OptionValueInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
@@ -62,6 +64,16 @@ final class ProductContext implements Context
     private $attributeValueFactory;
 
     /**
+     * @var FactoryInterface
+     */
+    private $productOptionFactory;
+
+    /**
+     * @var FactoryInterface
+     */
+    private $productOptionValueFactory;
+
+    /**
      * @var ObjectManager
      */
     private $objectManager;
@@ -73,6 +85,8 @@ final class ProductContext implements Context
      * @param AttributeFactoryInterface $productAttributeFactory
      * @param FactoryInterface $productVariantFactory
      * @param FactoryInterface $attributeValueFactory
+     * @param FactoryInterface $productOptionFactory
+     * @param FactoryInterface $productOptionValueFactory
      * @param ObjectManager $objectManager
      */
     public function __construct(
@@ -82,6 +96,8 @@ final class ProductContext implements Context
         AttributeFactoryInterface $productAttributeFactory,
         FactoryInterface $productVariantFactory,
         FactoryInterface $attributeValueFactory,
+        FactoryInterface $productOptionFactory,
+        FactoryInterface $productOptionValueFactory,
         ObjectManager $objectManager
     ) {
         $this->sharedStorage = $sharedStorage;
@@ -90,6 +106,8 @@ final class ProductContext implements Context
         $this->productAttributeFactory = $productAttributeFactory;
         $this->productVariantFactory = $productVariantFactory;
         $this->attributeValueFactory = $attributeValueFactory;
+        $this->productOptionFactory = $productOptionFactory;
+        $this->productOptionValueFactory = $productOptionValueFactory;
         $this->objectManager = $objectManager;
     }
 
@@ -236,6 +254,45 @@ final class ProductContext implements Context
 
         $this->objectManager->flush();
     }
+
+    /**
+     * @Given /^(this product) has option "([^"]*)" with value "([^"]*)" priced at ("[^"]+")$/
+     */
+    public function thisProductHasOption(ProductInterface $product, $optionName, $value, $price)
+    {
+        /** @var OptionInterface $variant */
+        $option = $this->productOptionFactory->createNew();
+
+        $option->setName($optionName);
+        $option->setCode('PO1');
+
+        /** @var OptionValueInterface $optionValue */
+        $optionValue = $this->productOptionValueFactory->createNew();
+
+        $optionValue->setValue($value);
+        $optionValue->setCode('POV1');
+        $optionValue->setOption($option);
+
+        $option->addValue($optionValue);
+
+        /** @var ProductVariantInterface $variant */
+        $variant = $this->productVariantFactory->createNew();
+
+        $variant->setPrice($price);
+        $variant->addOption($optionValue);
+        $variant->setProduct($product);
+
+        $product->addOption($option);
+        $product->addVariant($variant);
+        $product->setVariantSelectionMethod(ProductInterface::VARIANT_SELECTION_MATCH);
+
+        $this->sharedStorage->set(sprintf('%s_option',$optionName), $option);
+
+        $this->objectManager->persist($option);
+        $this->objectManager->persist($optionValue);
+        $this->objectManager->flush();
+    }
+
 
     /**
      * @param string $type

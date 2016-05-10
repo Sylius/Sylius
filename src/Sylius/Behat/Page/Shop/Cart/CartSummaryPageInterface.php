@@ -89,7 +89,34 @@ interface CartSummaryPageInterface extends PageInterface
     public function getUnitPrice();
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getQuantity();
+
+    /**
+     * @return bool
+     */
+    public function isSingleItemOnPage();
+
+    /**
+     * @param string $name
+     *
+     * @return bool
+     */
+    public function isItemWithName($name);
+
+    /**
+     * @param string $variantName
+     *
+     * @return bool
+     */
+    public function isItemWithVariant($variantName);
+
+    /**
+     * @param string $productName
+     * @param string $optionName
+     *
+     * @return string
+     */
+    public function getProductOption($productName, $optionName);
 }

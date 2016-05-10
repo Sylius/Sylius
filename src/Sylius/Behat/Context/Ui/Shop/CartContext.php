@@ -18,6 +18,7 @@ use Sylius\Behat\Page\Shop\Cart\CartSummaryPageInterface;
 use Sylius\Behat\Page\Shop\Product\ShowPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
+use Sylius\Component\Product\Model\OptionInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Webmozart\Assert\Assert;
 
@@ -109,7 +110,7 @@ final class CartContext implements Context
         Assert::eq(
             $this->summaryPage->getGrandTotal(),
             $total,
-            'Grand total should be %2$s, but it is %s'
+            'Grand total should be %2$s, but it is %s.'
         );
     }
 
@@ -121,7 +122,11 @@ final class CartContext implements Context
     {
         $this->summaryPage->open();
 
-        expect($this->summaryPage->getTaxTotal())->toBe($taxTotal);
+        Assert::eq(
+            $this->summaryPage->getTaxTotal(),
+            $taxTotal,
+            'Tax total value should be %2$s, but it is %s.'
+        );
     }
 
     /**
@@ -132,7 +137,11 @@ final class CartContext implements Context
     {
         $this->summaryPage->open();
 
-        expect($this->summaryPage->getShippingTotal())->toBe($shippingTotal);
+        Assert::eq(
+            $this->summaryPage->getShippingTotal(),
+            $shippingTotal,
+            'Shipping total value should be %2$s, but it is %s.'
+        );
     }
 
     /**
@@ -143,7 +152,10 @@ final class CartContext implements Context
     {
         $this->summaryPage->open();
 
-        expect($this->summaryPage->getPromotionTotal())->toBe($promotionsTotal);
+        Assert::eq($this->summaryPage->getPromotionTotal(),
+        $promotionsTotal,
+        'Promotion total value should be %2$s, but it is %s.'
+        );
     }
 
     /**
@@ -187,7 +199,11 @@ final class CartContext implements Context
         $discountPrice = $this->getPriceFromString($this->summaryPage->getItemDiscountPrice($product->getName()));
         $regularPrice = $this->getPriceFromString($this->summaryPage->getItemRegularPrice($product->getName()));
 
-        expect($discountPrice)->toBe($regularPrice - $amount);
+        Assert::eq(
+            $discountPrice,
+            ($regularPrice - $amount),
+            'Price after discount should be %2$s, but it is %s.'
+        );
     }
 
     /**
@@ -197,7 +213,10 @@ final class CartContext implements Context
     {
         $this->summaryPage->open();
 
-        expect($this->summaryPage->isItemDiscounted($product->getName()))->toBe(false);
+        Assert::false(
+            $this->summaryPage->isItemDiscounted($product->getName()),
+            'The price should not be decreased, but it is.'
+        );
     }
 
 
@@ -232,6 +251,7 @@ final class CartContext implements Context
      * @Given I added :variant variant of product :product to the cart
      * @When I add :variant variant of product :product to the cart
      * @When I have :variant variant of product :product in the cart
+     * @When /^I add "([^"]+)" variant of (this product) to the cart$/
      */
     public function iAddProductToTheCartSelectingVariant($variant, ProductInterface $product)
     {
@@ -270,6 +290,7 @@ final class CartContext implements Context
     public function unitPriceValueShouldBe($price)
     {
         $this->summaryPage->open();
+
         Assert::eq(
             $this->summaryPage->getUnitPrice(),
             $price,
@@ -283,6 +304,7 @@ final class CartContext implements Context
     public function totalValueShouldBe($total)
     {
         $this->summaryPage->open();
+
         Assert::eq(
             $this->summaryPage->getTotal(),
             $total,
@@ -296,10 +318,87 @@ final class CartContext implements Context
     public function quantityValueShouldBe($quantity)
     {
         $this->summaryPage->open();
+
         Assert::eq(
             $this->summaryPage->getQuantity(),
             $quantity,
             'Quantity of product should be %2$s, but it is %s'
+        );
+    }
+
+    /**
+     * @Then I should be on my cart summary page
+     */
+    public function shouldBeOnMyCartSummaryPage()
+    {
+        Assert::true(
+            $this->summaryPage->isOpen(),
+            'Cart summary page should be open, but it does not.'
+        );
+    }
+
+    /**
+     * @Then I should be notified that the product has been successfully added
+     */
+    public function iShouldBeNotifiedThatItHasBeenSuccessfullyAdded()
+    {
+        $this->notificationChecker->checkNotification('Item has been added to cart.', NotificationType::success());
+    }
+
+    /**
+     * @Then I should see one item on my product list
+     */
+    public function iShouldSeeOneItemOnMyProductList()
+    {
+        Assert::true(
+            $this->summaryPage->isSingleItemOnPage(),
+            'There should be only one item on list, but it does not.'
+        );
+    }
+
+    /**
+     * @Then this item should have name :itemName
+     */
+    public function thisProductShouldHaveName($itemName)
+    {
+        Assert::true(
+            $this->summaryPage->isItemWithName($itemName),
+            sprintf('The product with name %s should appear on the list, but it does not.', $itemName)
+        );
+    }
+
+    /**
+     * @Then this item should have variant :variantName
+     */
+    public function thisItemShouldHaveVariant($variantName)
+    {
+        Assert::true(
+            $this->summaryPage->isItemWithVariant($variantName),
+            sprintf('The product with variant %s should appear on the list, but it does not.', $variantName)
+        );
+    }
+
+    /**
+     * @When /^I add (this product) with ([^"]+) "([^"]+)" to the cart$/
+     */
+    public function iAddThisProductWithSizeToTheCart(ProductInterface $product, $optionName, $optionValue)
+    {
+        $this->productShowPage->open(['slug' => $product->getSlug()]);
+
+        $option = $this->sharedStorage->get(sprintf('%s_option', $optionName));
+
+        $this->productShowPage->addToCartWithOption($option, $optionValue);
+    }
+
+    /**
+     * @Given /^(this product) should have ([^"]+) "([^"]+)"$/
+     */
+    public function thisItemShouldHaveSize(ProductInterface $product, $optionName, $optionValue)
+    {
+        Assert::contains(
+            $this->summaryPage->getProductOption($product->getName(), $optionName),
+            $optionValue,
+            'The product should have option with value %2$s, but it has option with value %s.'
         );
     }
 

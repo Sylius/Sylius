@@ -11,6 +11,7 @@
 
 namespace Sylius\Behat\Page\Shop\Product;
 
+use Sylius\Component\Product\Model\OptionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Sylius\Behat\Page\SymfonyPage;
@@ -48,6 +49,17 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
         $this->getDocument()->fillField($radio->getAttribute('name'), $radio->getAttribute('value'));
 
+        $this->getDocument()->pressButton('Add to cart');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addToCartWithOption(OptionInterface $option, $optionValue)
+    {
+        $select = $this->getDocument()->find('css', sprintf('select#sylius_cart_item_variant_%s', $option->getCode()));
+
+        $this->getDocument()->selectFieldOption($select->getAttribute('name'), $optionValue);
         $this->getDocument()->pressButton('Add to cart');
     }
 
