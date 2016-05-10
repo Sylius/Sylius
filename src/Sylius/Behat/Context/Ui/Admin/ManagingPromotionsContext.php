@@ -90,9 +90,9 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @Given I want to see all promotion
+     * @Given I want to browse promotions
      */
-    public function iWantToSeeAllPromotion()
+    public function iWantToBrowsePromotions()
     {
         $this->indexPage->open();
     }
@@ -118,6 +118,7 @@ final class ManagingPromotionsContext implements Context
 
     /**
      * @Then the :promotionName promotion should appear in the registry
+     * @Then the :promotionName promotion should exist in the registry
      * @Then this promotion should still be named :promotionName
      * @Then promotion :promotionName should still exist in the registry
      */
@@ -184,14 +185,14 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @Then /^I should see (\d+) promotions on the list$/
+     * @Then /^there should be (\d+) promotion(?:|s)$/
      */
-    public function iShouldSeePromotionsOnTheList($number)
+    public function thereShouldBePromotion($number)
     {
         Assert::eq(
             $number,
             $this->indexPage->countItems(),
-            sprintf('I should see %s promotions but i see only %s', $number, $this->indexPage->countItems())
+            'I should see %s promotions but i see only %2$s'
         );
     }
 
@@ -202,14 +203,14 @@ final class ManagingPromotionsContext implements Context
     {
         Assert::true(
             $this->indexPage->isCouponBasedFor($promotion),
-            sprintf('Promotion with name %s should be coupon based', $promotion->getName())
+            sprintf('Promotion with name "%s" should be coupon based', $promotion->getName())
         );
     }
 
     /**
-     * @Then /^I should be able to manage those coupons for (this promotion)$/
+     * @Then /^I should be able to manage coupons for (this promotion)$/
      */
-    public function iShouldBeAbleToManageThoseCouponsForThisPromotion(PromotionInterface $promotion)
+    public function iShouldBeAbleToManageCouponsForThisPromotion(PromotionInterface $promotion)
     {
         Assert::true(
             $this->indexPage->isAbleToManageCouponsFor($promotion),

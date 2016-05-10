@@ -82,6 +82,7 @@ class CouponFactorySpec extends ObjectBehavior
     ) {
         $factory->createNew()->willReturn($coupon);
         $promotionRepository->find(13)->willReturn($promotion);
+        $promotion->getName()->willReturn('Christmas sale');
         $promotion->isCouponBased()->willReturn(true);
         $coupon->setPromotion($promotion)->shouldBeCalled();
 

@@ -17,6 +17,7 @@ use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Promotion\Model\CouponInterface;
 use Sylius\Component\Promotion\Repository\CouponRepositoryInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -73,7 +74,10 @@ final class PromotionCouponContext implements Context
      */
     public function couponShouldNotExistInTheRegistry(CouponInterface $coupon)
     {
-        expect($this->couponRepository->findOneBy(['code' => $coupon->getCode()]))->toBe(null);
+        Assert::null(
+            $this->couponRepository->findOneBy(['code' => $coupon->getCode()]),
+            sprintf('The coupon with code %s should not exist', $coupon->getCode())
+        );
     }
 
     /**
@@ -91,7 +95,10 @@ final class PromotionCouponContext implements Context
      */
     public function couponShouldStillExistInTheRegistry(CouponInterface $coupon)
     {
-        expect($this->couponRepository->find($coupon->getId()))->toNotBe(null);
+        Assert::notNull(
+            $this->couponRepository->find($coupon->getId()),
+            sprintf('The coupon with id %s should exist', $coupon->getId())
+        );
     }
 
     /**

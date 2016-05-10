@@ -14,20 +14,20 @@ Feature: Coupon validation
     Scenario: Trying to add a new coupon without specifying its code
         Given I want to create a new coupon for this promotion
         When I do not specify its code
-        And I set its usage limit to 30
-        And I set its per customer usage limit to 25
-        And I make it available till "26.03.2017"
+        And I limit its usage to 30 times
+        And I limit its per customer usage to 40 times
+        And I make it valid until "26.03.2017"
         And I try to add it
         Then I should be notified that code is required
-        And I should see 0 coupon on the list related to this promotion
+        And there should be 0 coupon related to this promotion
 
     @ui
     Scenario: Trying to add a new coupon with usage limit below one
         Given I want to create a new coupon for this promotion
-        When I specify its code as "Santa's gift"
-        And I set its usage limit to 0
-        And I set its per customer usage limit to 25
-        And I make it available till "26.03.2017"
+        When I specify its code as "SANTA2016"
+        And I limit its usage to "-1" times
+        And I limit its per customer usage to 25 times
+        And I make it valid until "26.03.2017"
         And I try to add it
         Then I should be notified that coupon usage limit must be at least one
-        And I should see 0 coupon on the list related to this promotion
+        And there should be 0 coupon related to this promotion

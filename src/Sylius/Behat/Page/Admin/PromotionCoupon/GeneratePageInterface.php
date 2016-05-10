@@ -25,7 +25,7 @@ interface GeneratePageInterface extends PageInterface
      */
     public function checkAmountValidation($message);
 
-    public function  generate();
+    public function generate();
 
     /**
      * @param int $amount

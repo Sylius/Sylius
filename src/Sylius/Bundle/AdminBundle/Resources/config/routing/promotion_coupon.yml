@@ -14,7 +14,7 @@ sylius_admin_promotion_coupon_index:
                 templates:
                     breadCrumb: SyliusAdminBundle:PromotionCoupon/BreadCrumb:indexBreadCrumb.html.twig
                 icon: tags
-                subheader: sylius.ui.manage_promotion_coupons
+                subheader: sylius.ui.manage_coupons
 
 sylius_admin_promotion_coupon_create:
     path: /new

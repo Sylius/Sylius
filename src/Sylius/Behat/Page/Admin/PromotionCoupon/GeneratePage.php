@@ -93,7 +93,7 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
      */
     private function getValidatedField(NodeElement $element)
     {
-        while (null !== $element && !($element->hasClass('field'))) {
+        while (null !== $element && !$element->hasClass('field')) {
             $element = $element->getParent();
         }
 

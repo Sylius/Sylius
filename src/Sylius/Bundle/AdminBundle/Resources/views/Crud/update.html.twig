@@ -12,9 +12,9 @@
 {% block content %}
 {{ headers.default(header|trans, configuration.vars.icon|default('pencil'), configuration.vars.subheader|default(null)|trans) }}
 
-    {% include configuration.vars.templates.breadCrumb is defined ? configuration.vars.templates.breadCrumb : 'SyliusAdminBundle:Crud/BreadCrumb:updateBreadCrumb.html.twig' %}
+    {% include configuration.vars.templates.breadCrumb|default('SyliusAdminBundle:Crud/BreadCrumb:updateBreadCrumb.html.twig') %}
 
-{{ form_start(form, {'action': path(configuration.getRouteName('update'), configuration.vars.route.parameters is defined ? configuration.vars.route.parameters : { 'id': resource.id }), 'attr': {'class': 'ui form', 'novalidate': 'novalidate'}}) }}
+{{ form_start(form, {'action': path(configuration.getRouteName('update'), configuration.vars.route.parameters|default({ 'id': resource.id })), 'attr': {'class': 'ui form', 'novalidate': 'novalidate'}}) }}
     <div class="ui segment">
         <input type="hidden" name="_method" value="PUT" />
         {% if configuration.vars.templates.form is defined %}
@@ -22,7 +22,7 @@
         {% else %}
             {{ form_widget(form) }}
         {% endif %}
-        {% include 'SyliusUiBundle:Form:_saveChanges.html.twig' with {'cancel_path': path(configuration.getRouteName('index'), configuration.vars.route.parameters is defined ? configuration.vars.route.parameters : {})} %}
+        {% include 'SyliusUiBundle:Form:_saveChanges.html.twig' with {'cancel_path': path(configuration.getRouteName('index'), configuration.vars.route.parameters|default({}))} %}
     </div>
 {{ form_row(form._token) }}
 {{ form_end(form, {'render_rest': false}) }}

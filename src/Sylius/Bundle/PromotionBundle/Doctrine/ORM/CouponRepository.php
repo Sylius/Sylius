@@ -25,8 +25,8 @@ class CouponRepository extends EntityRepository implements CouponRepositoryInter
     public function createQueryBuilderWithPromotion($promotionId)
     {
         return
-            $this->createQueryBuilder('c')
-                ->where('c.promotion = :promotionId')
+            $this->createQueryBuilder('o')
+                ->where('o.promotion = :promotionId')
                 ->setParameter('promotionId', $promotionId)
             ;
     }

@@ -11,16 +11,16 @@
 {% block content %}
 {{ headers.default(header|trans, configuration.vars.icon|default('plus'), configuration.vars.subheader|default(null)|trans) }}
 
-{% include configuration.vars.templates.breadCrumb is defined ? configuration.vars.templates.breadCrumb : 'SyliusAdminBundle:Crud/BreadCrumb:createBreadCrumb.html.twig' %}
+{% include configuration.vars.templates.breadCrumb|default('SyliusAdminBundle:Crud/BreadCrumb:createBreadCrumb.html.twig') %}
 
-{{ form_start(form, {'action': path(configuration.getRouteName('create'), configuration.vars.route.parameters is defined ? configuration.vars.route.parameters : {}), 'attr': {'class': 'ui form', 'novalidate': 'novalidate'}}) }}
+{{ form_start(form, {'action': path(configuration.getRouteName('create'), configuration.vars.route.parameters|default({})), 'attr': {'class': 'ui form', 'novalidate': 'novalidate'}}) }}
     <div class="ui segment">
         {% if configuration.vars.templates.form is defined %}
             {% include configuration.vars.templates.form %}
         {% else %}
             {{ form_widget(form) }}
         {% endif %}
-        {% include 'SyliusUiBundle:Form:_create.html.twig' with {'cancel_path': path(configuration.getRouteName('index'), configuration.vars.route.parameters is defined ? configuration.vars.route.parameters : {})} %}
+        {% include 'SyliusUiBundle:Form:_create.html.twig' with {'cancel_path': path(configuration.getRouteName('index'), configuration.vars.route.parameters|default({}))} %}
     </div>
 {{ form_row(form._token) }}
 {{ form_end(form, {'render_rest': false}) }}

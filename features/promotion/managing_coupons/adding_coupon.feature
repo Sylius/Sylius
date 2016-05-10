@@ -13,10 +13,10 @@ Feature: Adding a new coupon
     @ui
     Scenario: Adding a new coupon
         Given I want to create a new coupon for this promotion
-        When I specify its code as "Santa"
-        And I set its usage limit to 10
-        And I set its per customer usage limit to 50
-        And I make it available till "21.04.2017"
+        When I specify its code as "SANTA2016"
+        And I limit its usage to 100 times
+        And I limit its per customer usage to 50 times
+        And I make it valid until "21.04.2017"
         And I add it
         Then I should be notified that it has been successfully created
-        And I should see the coupon with code "Santa"
+        And there should be coupon with code "SANTA2016"

@@ -112,6 +112,7 @@ final class PromotionContext implements Context
 
     /**
      * @Given the store has promotion :promotionName with coupon :couponCode
+     * @Given the store has also promotion :promotionName with coupon :couponCode
      */
     public function thereIsPromotionWithCoupon($promotionName, $couponCode)
     {

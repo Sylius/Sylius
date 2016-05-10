@@ -6,8 +6,8 @@ imports:
 
     - suites/domain/managing_orders.yml
     - suites/domain/managing_products.yml
-    - suites/domain/managing_promotions.yml
-    - suites/domain/managing_promotion_coupons.yml
+    - suites/domain/promotion/managing_promotions.yml
+    - suites/domain/promotion/managing_promotion_coupons.yml
 
     - suites/legacy/account.yml
     - suites/legacy/addressing.yml

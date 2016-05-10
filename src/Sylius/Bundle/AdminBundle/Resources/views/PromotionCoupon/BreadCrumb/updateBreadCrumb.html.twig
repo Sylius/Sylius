@@ -1,12 +1,12 @@
-{% import 'SyliusAdminBundle:Crud/Macro:breadCrumb.html.twig' as breadCrumb %}
+{% import 'SyliusAdminBundle:Crud/Macro:breadCrumb.html.twig' as breadcrumb %}
 
-{% set crumbs = {
-        0: { label: 'sylius.ui.administration'|trans, url: path('sylius_admin_dashboard') },
-        1: { label: 'sylius.ui.promotions'|trans, url: path('sylius_admin_promotion_index') },
-        2: { label: (metadata.applicationName~'.ui.'~metadata.pluralName)|trans, url: path(configuration.getRouteName('index'), configuration.vars.route.parameters is defined ? configuration.vars.route.parameters : {}) },
-        3: { label: resource.code is defined ? resource.code : resource.id },
-        4: { label: 'sylius.ui.edit'|trans }
-    }
+{% set breadcrumbs = [
+        { label: 'sylius.ui.administration'|trans, url: path('sylius_admin_dashboard') },
+        { label: 'sylius.ui.promotions'|trans, url: path('sylius_admin_promotion_index') },
+        { label: (metadata.applicationName~'.ui.'~metadata.pluralName)|trans, url: path(configuration.getRouteName('index'), configuration.vars.route.parameters|default({})) },
+        { label: resource.code|default(resource.id) },
+        { label: 'sylius.ui.edit'|trans }
+    ]
 %}
 
-{{ breadCrumb.crumble(crumbs) }}
+{{ breadcrumb.crumble(breadcrumbs) }}
