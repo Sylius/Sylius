@@ -93,7 +93,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getRouteName()
+    public function getRouteName()
     {
         return sprintf('sylius_admin_%s_index', $this->resourceName);
     }

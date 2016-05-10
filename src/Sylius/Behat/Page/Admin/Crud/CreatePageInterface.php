@@ -12,12 +12,12 @@
 namespace Sylius\Behat\Page\Admin\Crud;
 
 use Behat\Mink\Exception\ElementNotFoundException;
-use Sylius\Behat\Page\PageInterface;
+use Sylius\Behat\Page\SymfonyPageInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-interface CreatePageInterface extends PageInterface, PageWithFormInterface
+interface CreatePageInterface extends SymfonyPageInterface, PageWithFormInterface
 {
     /**
      * @throws ElementNotFoundException

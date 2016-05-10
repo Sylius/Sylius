@@ -11,12 +11,12 @@
 
 namespace Sylius\Behat\Page\Admin\Crud;
 
-use Sylius\Behat\Page\PageInterface;
+use Sylius\Behat\Page\SymfonyPageInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-interface UpdatePageInterface extends PageInterface, PageWithFormInterface
+interface UpdatePageInterface extends SymfonyPageInterface, PageWithFormInterface
 {
     /**
      * @param array $parameters where keys are some of arbitrary elements defined by user and values are expected values

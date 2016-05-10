@@ -34,7 +34,7 @@ class LoginPage extends SymfonyPage implements LoginPageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getRouteName()
+    public function getRouteName()
     {
         return 'sylius_user_security_login';
     }

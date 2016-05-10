@@ -109,7 +109,7 @@ class CartSummaryPage extends SymfonyPage implements CartSummaryPageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getRouteName()
+    public function getRouteName()
     {
         return 'sylius_cart_summary';
     }

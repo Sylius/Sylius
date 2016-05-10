@@ -41,7 +41,7 @@ class ThankYouPage extends SymfonyPage implements ThankYouPageInterface
     /**
      * @return string
      */
-    protected function getRouteName()
+    public function getRouteName()
     {
         return 'sylius_checkout_thank_you';
     }

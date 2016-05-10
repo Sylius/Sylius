@@ -60,7 +60,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getRouteName()
+    public function getRouteName()
     {
         return 'sylius_backend_product_index';
     }

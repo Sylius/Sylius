@@ -42,7 +42,7 @@ class ShippingStep extends SymfonyPage implements ShippingStepInterface
     /**
      * @return string
      */
-    protected function getRouteName()
+    public function getRouteName()
     {
         return 'sylius_checkout_shipping';
     }

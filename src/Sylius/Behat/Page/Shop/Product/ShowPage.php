@@ -53,7 +53,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getRouteName()
+    public function getRouteName()
     {
         // Intentionally left blank, overriding getUrl method not to use it
     }

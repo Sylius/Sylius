@@ -29,7 +29,7 @@ class FinalizeStep extends SymfonyPage implements FinalizeStepInterface
     /**
      * @return string
      */
-    protected function getRouteName()
+    public function getRouteName()
     {
         return 'sylius_checkout_finalize';
     }

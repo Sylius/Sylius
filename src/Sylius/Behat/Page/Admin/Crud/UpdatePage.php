@@ -79,7 +79,7 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getRouteName()
+    public function getRouteName()
     {
         return sprintf('sylius_admin_%s_update', $this->resourceName);
     }
