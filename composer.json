@@ -67,7 +67,7 @@
         "symfony/polyfill-intl-icu": "~1.0",
         "symfony/polyfill-mbstring": "~1.0",
         "symfony/swiftmailer-bundle": "^2.3",
-        "symfony/symfony": "^2.7.7",
+        "symfony/symfony": "^2.7.9",
         "twig/extensions": "~1.0",
         "twig/twig": "~1.11",
         "webmozart/assert": "^1.0",
