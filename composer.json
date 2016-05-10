@@ -87,17 +87,17 @@
         "behat/symfony2-extension": "~2.0",
         "bossa/phpspec2-expect": "^1.0",
         "fabpot/php-cs-fixer": "^1.11",
+        "hwi/oauth-bundle": "~0.3",
         "lakion/api-test-case": "^1.0@dev",
         "lakion/mink-debug-extension": "^1.0.3",
-        "malukenho/kawaii-gherkin": "^0.1.2",
+        "malukenho/kawaii-gherkin": "^0.1",
         "matthiasnoback/symfony-config-test": "^1.4",
         "matthiasnoback/symfony-dependency-injection-test": "^0.7.6",
+        "mikey179/vfsStream": "^1.6",
         "pamil/prophecy-common": "^0.1",
         "phpspec/phpspec": "^2.4",
         "phpunit/phpunit": "~4.1",
-        "se/selenium-server-standalone": "^2.52",
-        "mikey179/vfsStream": "^1.6",
-        "hwi/oauth-bundle": "~0.3"
+        "se/selenium-server-standalone": "^2.52"
     },
     "replace": {
         "sylius/addressing": "self.version",
