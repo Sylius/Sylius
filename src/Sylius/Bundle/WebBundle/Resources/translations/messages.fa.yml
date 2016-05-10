@@ -589,7 +589,7 @@ sylius:
         sales: میزان فروش ماه جاری
         sales_this_month: میزان فروش ماه جاری
         save: ذخیره
-        save_changes: ذخیره تغییرات
+        save_changes: ذخیره
         scope: محدوده
         search: جستجو
         security_settings: تنظیمات امنیتی

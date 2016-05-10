@@ -7,11 +7,11 @@ sylius:
             details: รายละเอียดใบสั่งซื้อ
             download_invoice: ดาวน์โหลดใบแจ้งหนี้
             empty: คุณยังไม่มีคำสั่งซื้อใดๆ ในตอนนี้
-            list: ใบสั่งซื้อทั้งหมดของคุณ
+            list: ใบสั่งซื้อทั้งหมด
             placed_at: 'Placed at %at%'
             shipment:
-                ready: 'พร้อมตั้งแต่ %at%'
-                returned: 'ส่งคืน %at%'
+                ready: 'พร้อมส่งตั้งแต่ %at%'
+                returned: 'ตีกลับ %at%'
                 shipped: 'จัดส่ง %at%'
         title: บัญชีของฉัน
     archetype:
@@ -125,7 +125,7 @@ sylius:
             cancel: ยกเลิก
             prepare: เตรียมความพร้อม
             release: นำออกแสดง
-            return: ส่งกลับ
+            return: ตีกลับ
             ship: จัดส่ง
         update: แก้ไข
     stockable:
@@ -154,7 +154,7 @@ sylius:
         add_new_role: เพิ่ม Role
         add_province: เพิ่มจังหวัด
         add_rule: เพิ่มกติกา
-        add_to_cart: หยิบใส่ตระกร้าสินค้า
+        add_to_cart: หยิบใส่ตะกร้า
         add_value: เพิ่มค่า
         adding_new_customer_groups: เพิ่มกลุ่มลูกค้าใหม่
         adding_new_email: เพิ่มอีเมลใหม่
@@ -192,7 +192,7 @@ sylius:
         cancel: ยกเลิก
         cancelled: ถูกยกเลิก
         cart_locked: รถเข็นถูกล็อกไว้
-        cart_summary: สรุปรายละเอียดสินค้าในตะกร้า
+        cart_summary: ตะกร้าสินค้า
         categorization: การจัดประเภท
         category: ประเภท
         change_password: เปลี่ยนรหัสผ่านของคุณ
@@ -526,7 +526,7 @@ sylius:
         permissions: สิทธิ์การเข้าถึง
         phone_number: หมายเลขโทรศัพท์
         place_order: สั่งซื้อสินค้า
-        placed_at: Placed at
+        placed_at: วันที่
         postcode: รหัสไปรษณีย์
         presentation: ผู้ใช้มองเห็น
         previous: ก่อนหน้านี้
@@ -579,8 +579,8 @@ sylius:
         restore: คืนค่า
         restricted_zone: จำกัดโซน
         retail_price: ราคาขายปลีก
-        return: ส่งกลับ
-        returned: ถูกส่งคืน
+        return: ตีกลับ
+        returned: ตีกลับ
         revert: กลับค่าเดิม
         review_details: รายละเอียดของรายงาน
         reviews: รีวิว

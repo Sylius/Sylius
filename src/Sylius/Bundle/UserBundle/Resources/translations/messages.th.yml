@@ -11,7 +11,7 @@ sylius:
             enabled: เปิดใช้งานแล้ว
             password:
                 label: รหัสผ่าน
-                confirmation: การตรวจสอบ
+                confirmation: ยืนยันรหัสผ่าน
             remember_me: จำฉันไว้
             shipping_address: ที่อยู่สำหรับจัดส่งสินค้า
         customer:

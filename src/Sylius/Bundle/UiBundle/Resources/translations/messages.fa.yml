@@ -74,7 +74,7 @@ sylius:
         powered_by: قدرت گرفته از
         promotion_configuration: تنظیمات فروش ویژه
         promotion_information: اطلاعات فروش ویژه
-        save_changes: ذخیره تغییرات
+        save_changes: ذخیره
         shipping_methods: شیوه های ارسال
         show: نمایش
         sign_in: ورود
