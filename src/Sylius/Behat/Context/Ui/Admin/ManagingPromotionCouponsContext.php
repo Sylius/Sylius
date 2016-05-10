@@ -238,6 +238,7 @@ final class ManagingPromotionCouponsContext implements Context
 
     /**
      * @When /^I delete ("[^"]+" coupon) related to (this promotion)$/
+     * @When /^I try to delete ("[^"]+" coupon) related to (this promotion)$/
      */
     public function iDeleteCouponRelatedToThisPromotion(CouponInterface $coupon, PromotionInterface $promotion)
     {
@@ -394,5 +395,27 @@ final class ManagingPromotionCouponsContext implements Context
     public function iShouldBeNotifiedThatItHasBeenSuccessfullyGenerated()
     {
         $this->notificationChecker->checkNotification('Success Promotion coupons have been successfully generated.', NotificationType::success());
+    }
+
+    /**
+     * @Then I should be notified that it is in use and cannot be deleted
+     */
+    public function iShouldBeNotifiedOfFailure()
+    {
+        $this->notificationChecker->checkNotification(
+            "Error Cannot delete, the promotion coupon is in use.",
+            NotificationType::failure()
+        );
+    }
+
+    /**
+     * @Then /^(this coupon) should still exist in the registry$/
+     */
+    public function couponShouldStillExistInTheRegistry(CouponInterface $coupon)
+    {
+        Assert::true(
+            $this->indexPage->isSingleResourceOnPage(['code' => $coupon->getCode()]),
+            sprintf('Coupon with code %s should exist', $coupon->getCode())
+        );
     }
 }

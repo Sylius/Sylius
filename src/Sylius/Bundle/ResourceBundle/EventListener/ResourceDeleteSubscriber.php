@@ -115,10 +115,8 @@ class ResourceDeleteSubscriber implements EventSubscriberInterface
 
         $referrer = $event->getRequest()->headers->get('referer');
 
-        if ($this->refersFromShow($referrer)) {
-            $event->setResponse(
-                $this->createRedirectResponse($originalRoute, ResourceActions::SHOW, ['id' => $requestAttributes->get('id')])
-            );
+        if (null !== $referrer) {
+            $event->setResponse(new RedirectResponse($referrer));
 
             return;
         }
@@ -138,18 +136,6 @@ class ResourceDeleteSubscriber implements EventSubscriberInterface
         $routeArrayWithoutPrefixes = array_slice($routeArrayWithoutAction, 2);
 
         return trim(implode(' ', $routeArrayWithoutPrefixes));
-    }
-
-    /**
-     * @param string $referrer
-     *
-     * @return bool
-     */
-    private function refersFromShow($referrer)
-    {
-        $referrerArray = explode('/', $referrer);
-
-        return is_numeric(array_pop($referrerArray));
     }
 
     /**
