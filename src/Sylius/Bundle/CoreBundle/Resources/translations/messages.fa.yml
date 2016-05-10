@@ -71,7 +71,7 @@ sylius:
                 locale: زبان
                 meta_description: توضیحات سئو
                 meta_keywords: کلمات کلیدی
-                title: عنوان صفحه
+                title: عنوان سایت
                 tracking_code:
                     Tracking code (for example: کد گوگل آنالیتیک)
             taxation:

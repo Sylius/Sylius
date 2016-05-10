@@ -10,6 +10,7 @@ sylius:
         option:
             presentation: Présentation
     ui:
+        all: Tous
         actions: Actions
         administration_panel_login: "Connexion à l'espace d'administration"
         an_error_occurred: "Une erreur s'est produite"
@@ -40,9 +41,12 @@ sylius:
         edit_customer: Modifier le client
         edit_payment_method: Modifier le mode de paiement
         edit_product_option: "Modifier l'option de produit"
+        edit_product_attribute: Mettre à jour les attributs du produit
         edit_promotion: Modifier la promotion
+        edit_shipping_method: Mettre à jour la méthode de livraison
         edit_tax_category: Éditer la catégorie de taxe
         edit_tax_rate: Modifier le taux de taxe
+        edit_zone: Editer la zone
         empty: Vide
         enabled: Activé
         ends_with: Se termine par
@@ -53,11 +57,18 @@ sylius:
         info: Info
         last_updated: Dernière mise à jour
         locales: Locales
+        manage_attributes_of_your_products: Gérer les attributs de vos produits
         manage_currencies_available_in_the_store: Gérer les devises disponibles pour la boutique
+        manage_your_customers: Gérez vos clients
         manage_languages_available_in_the_store: Gérer les langues disponibles dans le magasin
+        manage_configuration_options_of_your_products: Gérer les options de configuration de vos produits
+        manage_payment_methods_available_to_your_customers: Gérer les méthodes de paiement disponibles pour vos clients
         manage_shipping_destinations: Gérer les destinations de livraison
+        manage_categorization_of_your_products: Gérer les catégories de vos produits
         manage_shipping_methods_for_your_store: "Gérer les méthodes d'expédition pour votre magasin"
         manage_taxation_of_your_products: Gérer la fiscalité de vos produits
+        manage_geographical_zones: Gérer les zones géographiques
+        manage_discounts_and_promotional_campaigns: Gérer les remises et les campagnes promotionnelles
         new: Nouveau
         new_channel: Nouveau canal
         new_country: Nouveau pays
@@ -85,3 +96,14 @@ sylius:
         tax_categories: Catégories de taxes
         values: Valeurs
         "yes": true
+        total_records: Enregistrements totaux
+        jump_to_page: Aller à la page
+        go: Envoyer
+        unlimited: Illimité
+        no_requirement: Pas de prérequis
+        zone_consisting_of_countries: Zone composée de pays
+        zone_consisting_of_provinces: Zone composée de régions
+        zone_consisting_of_other_zones: "Zone constituée d'autres zones"
+        no_theme: Aucun thème
+        usage: Utilisation
+        extra_information: Informations complémentaires
