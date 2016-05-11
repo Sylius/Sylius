@@ -126,6 +126,7 @@ class TaxonChoiceType extends AbstractType
 
         $resolver
             ->setDefaults([
+                'choice_translation_domain' => false,
                 'choice_list' => $choiceList,
                 'root' => null,
                 'filter' => null,

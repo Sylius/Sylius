@@ -58,6 +58,7 @@ class VariantChoiceType extends AbstractType
 
         $resolver
             ->setDefaults([
+                'choice_translation_domain' => false,
                 'multiple' => false,
                 'expanded' => true,
                 'choice_list' => $choiceList,

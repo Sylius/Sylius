@@ -48,6 +48,7 @@ class CurrencyCodeChoiceTypeSpec extends ObjectBehavior
 
         $resolver
             ->setDefaults([
+                'choice_translation_domain' => false,
                 'choices' => ['EUR' => 'EUR - Euro'],
             ])
             ->shouldBeCalled();
