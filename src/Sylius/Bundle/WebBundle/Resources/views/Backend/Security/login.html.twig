@@ -15,9 +15,9 @@
         <![endif]-->
 
         {% block stylesheets %}
+            <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
+            <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" />
             {% stylesheets output='assets/compiled/backend_login.css' filter='cssrewrite'
-                '//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css'
-                '//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css'
                 'bundles/syliusweb/css/backend.css'
             %}
                 <link rel="stylesheet" href="{{ asset_url }}" type="text/css" />
