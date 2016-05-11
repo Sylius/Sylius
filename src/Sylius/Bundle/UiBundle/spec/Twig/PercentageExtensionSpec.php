@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\AttributeBundle\Twig;
+namespace spec\Sylius\Bundle\UiBundle\Twig;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -21,7 +21,7 @@ class PercentageExtensionSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\AttributeBundle\Twig\PercentageExtension');
+        $this->shouldHaveType('Sylius\Bundle\UiBundle\Twig\PercentageExtension');
     }
 
     function it_is_twig_extension()

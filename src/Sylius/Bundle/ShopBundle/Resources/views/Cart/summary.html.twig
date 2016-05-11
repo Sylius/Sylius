@@ -8,74 +8,84 @@
 {% block content %}
     <h1 class="ui dividing header">{{ 'sylius.ui.cart_summary'|trans|raw }}</h1>
     {% if not cart.empty %}
-        {{ form_errors(form) }}
+    {{ form_errors(form) }}
+    <div class="ui segment">
         <form action="{{ path('sylius_shop_cart_save') }}" method="post" novalidate>
-            <table class="ui compact celled definition table" id="cart-items">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>{{ 'sylius.ui.product'|trans }}</th>
-                    <th>{{ 'sylius.ui.quantity'|trans }}</th>
-                    <th></th>
-                    <th>{{ 'sylius.ui.unit_price'|trans }}</th>
-                    <th style="text-align: right;">{{ 'sylius.ui.total'|trans }}</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for item in form.items %}
-                    {% include 'SyliusShopBundle:Cart:_item.html.twig' %}
-                {% endfor %}
-                </tbody>
-            </table>
-            <table class="ui compact celled definition table" id="cart-summary">
-                <tbody>
-                {% set promotionTotal = cart.getPromotionsTotalRecursively() %}
-                {% if promotionTotal %}
-                    <tr>
-                        <td colspan="6" style="text-align: right;">
-                            <strong>{{ 'sylius.ui.promotion_total'|trans }}</strong>: -{{ (-1 * promotionTotal)|sylius_price }}
-                        </td>
-                    </tr>
-                {% endif %}
-                <tr>
-                    <td colspan="6" style="text-align: right;">
-                        {% set shippingTotal = cart.adjustmentsTotal(taxAdjustment) + cart.adjustmentsTotal(shippingAdjustment) %}
-                        <strong>{{ 'sylius.ui.shipping_total'|trans }}</strong>: {{ shippingTotal|sylius_price }}
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="4">
-                        <p><strong>{{ 'sylius.ui.taxes'|trans }}</strong></p>
-                        <ul>
-                            {% for taxLabel, taxAmount in sylius_aggregate_adjustments(cart.getAdjustmentsRecursively(taxAdjustment)) %}
-                                <li>{{ taxLabel }} {{ taxAmount|sylius_price }} </li>
-                            {% else %}
-                                <li><span class="label label-info">{{ 'sylius.order.no_taxes'|trans }}</span></li>
-                            {% endfor %}
-                        </ul>
-                    </td>
-                    <td colspan="2" style="text-align: right;">
-                        <strong>{{ 'sylius.ui.tax_total'|trans }}</strong>: {{ cart.getAdjustmentsTotalRecursively(taxAdjustment)|sylius_price }}
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="6" style="text-align: right;">
-                        <strong>{{ 'sylius.ui.grand_total'|trans }}</strong>: {{ cart.total|sylius_price }}
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-            {{ form_rest(form) }}
-            <div class="ui two clumn grid">
-                <div class="two wide column">
-                <button type="submit" class="ui button"><i class="icon save"></i> {{ 'sylius.ui.save'|trans }}</button>
-                    </div>
-                    <div class="column">
-                    <a href="{{ path('sylius_checkout_start') }}" class="ui button"><i class="icon shopping cart"></i> {{ 'sylius.ui.checkout'|trans }}</a>
-                </div>
+        <div class="ui two column grid">
+            <div class="column">
+                <table class="ui celled table" id="cart-items">
+                    <thead>
+                        <tr>
+                            <th>{{ 'sylius.ui.item'|trans }}</th>
+                            <th>{{ 'sylius.ui.quantity'|trans }}</th>
+                            <th>{{ 'sylius.ui.price'|trans }}</th>
+                            <th style="text-align: right;">{{ 'sylius.ui.subtotal'|trans }}</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in form.items %}
+                        {% include 'SyliusShopBundle:Cart:_item.html.twig' %}
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <button type="submit" class="ui button">
+                    <i class="icon save"></i>
+                    {{ 'sylius.ui.save'|trans }}
+                </button>
+                <a href="{{ path('sylius_shop_cart_clear') }}" class="ui button">
+                    <i class="icon remove"></i>
+                    {{ 'sylius.cart.summary.clear'|trans }}
+                </a>
             </div>
-            <div class="ui hidden divider"></div>
+            <div class="column">
+                <table class="ui single line table" id="cart-summary">
+                    <tbody>
+                        {% set promotionTotal =  cart.getPromotionsTotalRecursively() %}
+                        {% if promotionTotal %}
+                            <tr>
+                                <td colspan="6" style="text-align: right;">
+                                    <strong>{{ 'sylius.ui.promotion_total'|trans }}</strong>: -{{ (-1 * promotionTotal)|sylius_price }}
+                                </td>
+                            </tr>
+                        {% endif %}
+                        <tr>
+                            <td colspan="6" style="text-align: right;">
+                                {% set shippingTotal = cart.adjustmentsTotal(taxAdjustment) + cart.adjustmentsTotal(shippingAdjustment) %}
+                                <strong>{{ 'sylius.ui.shipping_total'|trans }}</strong>: {{ shippingTotal|sylius_price }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+                                <p><strong>{{ 'sylius.ui.taxes'|trans }}</strong></p>
+                                <ul>
+                                    {% for taxLabel, taxAmount in sylius_aggregate_adjustments(cart.getAdjustmentsRecursively(taxAdjustment)) %}
+                                        <li>{{ taxLabel }} {{ taxAmount|sylius_price }} </li>
+                                    {% else %}
+                                        <li><span class="label label-info">{{ 'sylius.order.no_taxes'|trans }}</span></li>
+                                    {% endfor %}
+                                </ul>
+                            </td>
+                            <td colspan="2" style="text-align: right;">
+                                <strong>{{ 'sylius.ui.tax_total'|trans }}</strong>: {{ cart.getAdjustmentsTotalRecursively(taxAdjustment)|sylius_price }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" style="text-align: right;">
+                                <strong>{{ 'sylius.ui.grand_total'|trans }}</strong>: {{ cart.total|sylius_price }}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                {{ form_rest(form) }}
+                <a href="{{ path('sylius_checkout_start') }}" class="ui button">
+                    <i class="icon shopping cart"></i>
+                    {{ 'sylius.ui.checkout'|trans }}
+                </a>
+            </div>
+        </div>
         </form>
+    </div>
     {% else %}
         {{ messages.info('sylius.cart.empty'|trans) }}
     {% endif %}

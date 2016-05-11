@@ -14,11 +14,10 @@ namespace Sylius\Behat\Context\Ui\Shop;
 use Behat\Behat\Context\Context;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\NotificationType;
-use Sylius\Behat\Page\Shop\Cart\CartSummaryPageInterface;
+use Sylius\Behat\Page\Shop\Cart\SummaryPageInterface;
 use Sylius\Behat\Page\Shop\Product\ShowPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
-use Sylius\Component\Product\Model\OptionInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Webmozart\Assert\Assert;
 
@@ -29,7 +28,12 @@ use Webmozart\Assert\Assert;
 final class CartContext implements Context
 {
     /**
-     * @var CartSummaryPageInterface
+     * @var SharedStorageInterface
+     */
+    private $sharedStorage;
+
+    /**
+     * @var SummaryPageInterface
      */
     private $summaryPage;
 
@@ -44,30 +48,25 @@ final class CartContext implements Context
     private $notificationChecker;
 
     /**
-     * @var SharedStorageInterface
-     */
-    private $sharedStorage;
-
-    /**
-     * @param CartSummaryPageInterface $summaryPage
+     * @param SharedStorageInterface $sharedStorage
+     * @param SummaryPageInterface $summaryPage
      * @param ShowPageInterface $productShowPage
      * @param NotificationCheckerInterface $notificationChecker
-     * @param SharedStorageInterface $sharedStorage
      */
     public function __construct(
-        CartSummaryPageInterface $summaryPage,
+        SharedStorageInterface $sharedStorage,
+        SummaryPageInterface $summaryPage,
         ShowPageInterface $productShowPage,
-        NotificationCheckerInterface $notificationChecker,
-        SharedStorageInterface $sharedStorage
+        NotificationCheckerInterface $notificationChecker
     ) {
+        $this->sharedStorage = $sharedStorage;
         $this->summaryPage = $summaryPage;
         $this->productShowPage = $productShowPage;
         $this->notificationChecker = $notificationChecker;
-        $this->sharedStorage = $sharedStorage;
     }
 
     /**
-     * @When I open cart summary page
+     * @When I see the summary of my cart
      */
     public function iOpenCartSummaryPage()
     {
@@ -75,11 +74,17 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then I should be notified that my cart is empty
+     * @Then my cart should be empty
+     * @Then cart should be empty with no value
      */
     public function iShouldBeNotifiedThatMyCartIsEmpty()
     {
-        $this->notificationChecker->checkNotification('Your cart is empty', NotificationType::information());
+        $this->summaryPage->open();
+
+        Assert::true(
+             $this->summaryPage->isEmpty(),
+            'There should appear information about empty cart, but it does not.'
+        );
     }
 
     /**
@@ -107,7 +112,7 @@ final class CartContext implements Context
     public function myCartTotalShouldBe($total)
     {
         $this->summaryPage->open();
-        Assert::eq(
+        Assert::same(
             $this->summaryPage->getGrandTotal(),
             $total,
             'Grand total should be %2$s, but it is %s.'
@@ -122,7 +127,7 @@ final class CartContext implements Context
     {
         $this->summaryPage->open();
 
-        Assert::eq(
+        Assert::same(
             $this->summaryPage->getTaxTotal(),
             $taxTotal,
             'Tax total value should be %2$s, but it is %s.'
@@ -137,7 +142,7 @@ final class CartContext implements Context
     {
         $this->summaryPage->open();
 
-        Assert::eq(
+        Assert::same(
             $this->summaryPage->getShippingTotal(),
             $shippingTotal,
             'Shipping total value should be %2$s, but it is %s.'
@@ -152,20 +157,11 @@ final class CartContext implements Context
     {
         $this->summaryPage->open();
 
-        Assert::eq($this->summaryPage->getPromotionTotal(),
-        $promotionsTotal,
-        'Promotion total value should be %2$s, but it is %s.'
+        Assert::same(
+            $this->summaryPage->getPromotionTotal(),
+            $promotionsTotal,
+            'Promotion total value should be %2$s, but it is %s.'
         );
-    }
-
-    /**
-     * @Given /^cart should be empty with no value$/
-     */
-    public function cartShouldBeEmptyWithNoValue()
-    {
-        $this->summaryPage->open();
-
-        expect($this->summaryPage)->toThrow(ElementNotFoundException::class)->during('getGrandTotal', []);
     }
 
     /**
@@ -196,10 +192,10 @@ final class CartContext implements Context
     {
         $this->summaryPage->open();
 
-        $discountPrice = $this->getPriceFromString($this->summaryPage->getItemDiscountPrice($product->getName()));
-        $regularPrice = $this->getPriceFromString($this->summaryPage->getItemRegularPrice($product->getName()));
+        $discountPrice = $this->summaryPage->getItemDiscountPrice($product->getName());
+        $regularPrice = $this->summaryPage->getItemRegularPrice($product->getName());
 
-        Assert::eq(
+        Assert::same(
             $discountPrice,
             ($regularPrice - $amount),
             'Price after discount should be %2$s, but it is %s.'
@@ -274,59 +270,6 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then I should see :elementName
-     */
-    public function iShouldSeeElement($elementName)
-    {
-        Assert::true(
-            $this->summaryPage->isElementOnPage($elementName),
-            sprintf('Element %s should appear on the page, but it does not.', $elementName)
-         );
-    }
-
-    /**
-     * @Given unit price value should be :price
-     */
-    public function unitPriceValueShouldBe($price)
-    {
-        $this->summaryPage->open();
-
-        Assert::eq(
-            $this->summaryPage->getUnitPrice(),
-            $price,
-            'Unit price should be %2$s, but it is %s'
-        );
-    }
-
-    /**
-     * @Given total value should be :total
-     */
-    public function totalValueShouldBe($total)
-    {
-        $this->summaryPage->open();
-
-        Assert::eq(
-            $this->summaryPage->getTotal(),
-            $total,
-            'Total should be %2$s, but it is %s'
-        );
-    }
-
-    /**
-     * @Given quantity value should be :quantity
-     */
-    public function quantityValueShouldBe($quantity)
-    {
-        $this->summaryPage->open();
-
-        Assert::eq(
-            $this->summaryPage->getQuantity(),
-            $quantity,
-            'Quantity of product should be %2$s, but it is %s'
-        );
-    }
-
-    /**
      * @Then I should be on my cart summary page
      */
     public function shouldBeOnMyCartSummaryPage()
@@ -346,9 +289,9 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then I should see one item on my product list
+     * @Then there should be one item in my cart
      */
-    public function iShouldSeeOneItemOnMyProductList()
+    public function thereShouldBeOneItemInMyCart()
     {
         Assert::true(
             $this->summaryPage->isSingleItemOnPage(),
@@ -400,15 +343,5 @@ final class CartContext implements Context
             $optionValue,
             'The product should have option with value %2$s, but it has option with value %s.'
         );
-    }
-
-    /**
-     * @param string $price
-     *
-     * @return int
-     */
-    private function getPriceFromString($price)
-    {
-        return (int) round((str_replace(['€', '£', '$'], '', $price) * 100), 2);
     }
 }

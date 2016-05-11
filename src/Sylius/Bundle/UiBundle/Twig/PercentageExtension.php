@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\AttributeBundle\Twig;
+namespace Sylius\Bundle\UiBundle\Twig;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>

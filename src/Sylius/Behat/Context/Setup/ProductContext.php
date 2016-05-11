@@ -20,6 +20,7 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
+use Sylius\Component\Product\Model\AttributeInterface;
 use Sylius\Component\Product\Model\AttributeValueInterface;
 use Sylius\Component\Product\Model\OptionInterface;
 use Sylius\Component\Product\Model\OptionValueInterface;
@@ -94,8 +95,8 @@ final class ProductContext implements Context
         ProductRepositoryInterface $productRepository,
         FactoryInterface $productFactory,
         AttributeFactoryInterface $productAttributeFactory,
-        FactoryInterface $productVariantFactory,
         FactoryInterface $attributeValueFactory,
+        FactoryInterface $productVariantFactory,
         FactoryInterface $productOptionFactory,
         FactoryInterface $productOptionValueFactory,
         ObjectManager $objectManager
@@ -104,8 +105,8 @@ final class ProductContext implements Context
         $this->productRepository = $productRepository;
         $this->productFactory = $productFactory;
         $this->productAttributeFactory = $productAttributeFactory;
-        $this->productVariantFactory = $productVariantFactory;
         $this->attributeValueFactory = $attributeValueFactory;
+        $this->productVariantFactory = $productVariantFactory;
         $this->productOptionFactory = $productOptionFactory;
         $this->productOptionValueFactory = $productOptionValueFactory;
         $this->objectManager = $objectManager;
@@ -210,8 +211,8 @@ final class ProductContext implements Context
      */
     public function thisProductHasAttributeWithValue(ProductInterface $product, $productAttributeType, $productAttributeName, $value)
     {
-        $this->createProductAttribute($productAttributeType,$productAttributeName);
-        $attributeValue = $this->createProductAttributeValue($value);
+        $attribute = $this->createProductAttribute($productAttributeType,$productAttributeName);
+        $attributeValue = $this->createProductAttributeValue($value, $attribute);
         $product->addAttribute($attributeValue);
 
         $this->objectManager->flush();
@@ -222,8 +223,8 @@ final class ProductContext implements Context
      */
     public function thisProductHasPercentAttributeWithValue(ProductInterface $product, $productAttributeName, $value)
     {
-        $this->createProductAttribute('percent',$productAttributeName);
-        $attributeValue = $this->createProductAttributeValue($value/100);
+        $attribute = $this->createProductAttribute('percent',$productAttributeName);
+        $attributeValue = $this->createProductAttributeValue($value/100, $attribute);
         $product->addAttribute($attributeValue);
 
         $this->objectManager->flush();
@@ -234,9 +235,9 @@ final class ProductContext implements Context
      */
     public function thisProductHasCheckboxAttributeWithValue(ProductInterface $product, $productAttributeType, $productAttributeName, $value)
     {
-        $this->createProductAttribute($productAttributeType, $productAttributeName);
+        $attribute = $this->createProductAttribute($productAttributeType, $productAttributeName);
         $booleanValue = ('Yes' === $value);
-        $attributeValue = $this->createProductAttributeValue($booleanValue);
+        $attributeValue = $this->createProductAttributeValue($booleanValue, $attribute);
         $product->addAttribute($attributeValue);
 
         $this->objectManager->flush();
@@ -247,8 +248,8 @@ final class ProductContext implements Context
      */
     public function thisProductHasDateTimeAttributeWithDate(ProductInterface $product, $productAttributeType, $productAttributeName, $date)
     {
-        $this->createProductAttribute($productAttributeType, $productAttributeName);
-        $attributeValue = $this->createProductAttributeValue(new \DateTime($date));
+        $attribute = $this->createProductAttribute($productAttributeType, $productAttributeName);
+        $attributeValue = $this->createProductAttributeValue(new \DateTime($date), $attribute);
 
         $product->addAttribute($attributeValue);
 
@@ -256,9 +257,9 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Given /^(this product) has option "([^"]*)" with value "([^"]*)" priced at ("[^"]+")$/
+     * @Given /^(this product) has option "([^"]+)" with values "([^"]+)" and "([^"]+)"$/
      */
-    public function thisProductHasOption(ProductInterface $product, $optionName, $value, $price)
+    public function thisProductHasOptionWithValues(ProductInterface $product, $optionName, $firstValue, $secondValue)
     {
         /** @var OptionInterface $variant */
         $option = $this->productOptionFactory->createNew();
@@ -267,37 +268,58 @@ final class ProductContext implements Context
         $option->setCode('PO1');
 
         /** @var OptionValueInterface $optionValue */
-        $optionValue = $this->productOptionValueFactory->createNew();
+        $firstOptionValue = $this->productOptionValueFactory->createNew();
 
-        $optionValue->setValue($value);
-        $optionValue->setCode('POV1');
-        $optionValue->setOption($option);
+        $firstOptionValue->setValue($firstValue);
+        $firstOptionValue->setCode('POV1');
+        $firstOptionValue->setOption($option);
 
-        $option->addValue($optionValue);
+        /** @var OptionValueInterface $optionValue */
+        $secondOptionValue = $this->productOptionValueFactory->createNew();
 
-        /** @var ProductVariantInterface $variant */
-        $variant = $this->productVariantFactory->createNew();
+        $secondOptionValue->setValue($secondValue);
+        $secondOptionValue->setCode('POV2');
+        $secondOptionValue->setOption($option);
 
-        $variant->setPrice($price);
-        $variant->addOption($optionValue);
-        $variant->setProduct($product);
+        $option->addValue($firstOptionValue);
+        $option->addValue($secondOptionValue);
 
         $product->addOption($option);
-        $product->addVariant($variant);
         $product->setVariantSelectionMethod(ProductInterface::VARIANT_SELECTION_MATCH);
 
         $this->sharedStorage->set(sprintf('%s_option',$optionName), $option);
+        $this->sharedStorage->set(sprintf('%s_option_value',$firstValue), $firstOptionValue);
+        $this->sharedStorage->set(sprintf('%s_option_value',$secondValue), $secondOptionValue);
 
         $this->objectManager->persist($option);
-        $this->objectManager->persist($optionValue);
+        $this->objectManager->persist($firstOptionValue);
+        $this->objectManager->persist($secondOptionValue);
         $this->objectManager->flush();
     }
 
+    /**
+     * @Given /^(this product) is available in "([^"]+)" size priced at ("[^"]+")$/
+     */
+    public function thisProductIsAvailableInSize(ProductInterface $product, $optionValueName, $price)
+    {
+        /** @var ProductVariantInterface $variant */
+        $variant = $this->productVariantFactory->createNew();
+
+        $optionValue = $this->sharedStorage->get(sprintf('%s_option_value',$optionValueName));
+
+        $variant->addOption($optionValue);
+        $variant->setPrice($price);
+
+        $product->addVariant($variant);
+        $this->objectManager->flush();
+    }
 
     /**
      * @param string $type
      * @param string $name
      * @param string $code
+     *
+     * @return AttributeInterface
      */
     private function createProductAttribute($type, $name, $code = 'PA112')
     {
@@ -306,7 +328,8 @@ final class ProductContext implements Context
         $productAttribute->setName($name);
 
         $this->objectManager->persist($productAttribute);
-        $this->sharedStorage->set('product_attribute', $productAttribute);
+
+        return $productAttribute;
     }
 
     /**
@@ -314,11 +337,11 @@ final class ProductContext implements Context
      *
      * @return AttributeValueInterface
      */
-    private function createProductAttributeValue($value)
+    private function createProductAttributeValue($value, AttributeInterface $attribute)
     {
         /** @var AttributeValueInterface $attributeValue */
         $attributeValue = $this->attributeValueFactory->createNew();
-        $attributeValue->setAttribute($this->sharedStorage->get('product_attribute'));
+        $attributeValue->setAttribute($attribute);
         $attributeValue->setValue($value);
 
         $this->objectManager->persist($attributeValue);

@@ -10,5 +10,5 @@ Feature: Viewing a product details
     @ui
     Scenario: Viewing a detailed page with product's name
         Given the store has a product "T-shirt banana"
-        When I open this product page
+        When I check this product's details
         Then I should see the product name "T-shirt banana"

@@ -16,7 +16,7 @@ use Sylius\Behat\Page\PageInterface;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-interface CartSummaryPageInterface extends PageInterface
+interface SummaryPageInterface extends PageInterface
 {
     /**
      * @return string
@@ -37,7 +37,6 @@ interface CartSummaryPageInterface extends PageInterface
      * @return string
      */
     public function getPromotionTotal();
-
 
     /**
      * @param string $productName
@@ -72,28 +71,6 @@ interface CartSummaryPageInterface extends PageInterface
     public function changeQuantity($productName, $quantity);
 
     /**
-     * @param string $elementName
-     *
-     * @return bool
-     */
-    public function isElementOnPage($elementName);
-
-    /**
-     * @return string
-     */
-    public function getTotal();
-
-    /**
-     * @return string
-     */
-    public function getUnitPrice();
-
-    /**
-     * @return string
-     */
-    public function getQuantity();
-
-    /**
      * @return bool
      */
     public function isSingleItemOnPage();
@@ -119,4 +96,9 @@ interface CartSummaryPageInterface extends PageInterface
      * @return string
      */
     public function getProductOption($productName, $optionName);
+
+    /**
+     * @return bool
+     */
+    public function isEmpty();
 }

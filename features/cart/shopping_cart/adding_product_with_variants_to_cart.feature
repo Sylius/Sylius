@@ -1,4 +1,4 @@
-@viewing_cart
+@shopping_cart
 Feature: Adding a product with selected variant to the cart
     In order to select products for purchase
     As a Visitor
@@ -15,6 +15,6 @@ Feature: Adding a product with selected variant to the cart
         When I add "Small logo" variant of this product to the cart
         Then I should be on my cart summary page
         And I should be notified that the product has been successfully added
-        And I should see one item on my product list
+        And there should be one item in my cart
         And this item should have name "T-shirt banana"
         And this item should have variant "Small logo"

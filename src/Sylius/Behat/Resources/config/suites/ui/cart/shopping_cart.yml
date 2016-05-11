@@ -3,7 +3,7 @@
 
 default:
     suites:
-        ui_viewing_cart:
+        ui_shopping_cart:
             contexts_as_services:
                 - sylius.behat.context.hook.doctrine_orm
 
@@ -15,4 +15,4 @@ default:
 
                 - sylius.behat.context.ui.shop.cart
             filters:
-                tags: "@viewing_cart && @ui"
+                tags: "@shopping_cart && @ui"

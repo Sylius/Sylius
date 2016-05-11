@@ -63,7 +63,7 @@ final class ProductContext implements Context
     }
 
     /**
-     * @When /^I open (this product) page$/
+     * @When /^I check (this product)'s details/
      */
     public function iOpenProductPage(ProductInterface $product)
     {
@@ -102,24 +102,13 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Then I should see the product attribute :attributeName
+     * @Then I should see the product attribute :attributeName with value :AttributeValue
      */
-    public function iShouldSeeTheProductAttribute($attributeName)
+    public function iShouldSeeTheProductAttributeWithValue($attributeName, $AttributeValue)
     {
         Assert::true(
-            $this->showPage->isAttributeOnPage($attributeName),
-            sprintf('Product should have attribute %s, but it does not.', $attributeName)
-        );
-    }
-
-    /**
-     * @Then I should see the product attribute value :value
-     */
-    public function iShouldSeeTheProductAttributeValue($value)
-    {
-        Assert::true(
-            $this->showPage->isAttributeValueOnPage($value),
-            sprintf('Product should have attribute with value %s, but it does not.', $value)
+            $this->showPage->isAttributeWithValueOnPage($attributeName, $AttributeValue),
+            sprintf('Product should have attribute %s with value %s, but it does not.', $attributeName, $AttributeValue)
         );
     }
 }

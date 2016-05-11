@@ -7,9 +7,11 @@ sylius:
         option:
             presentation: Presentation
     ui:
+        about: About
         add_coupon: Add coupon
         all: All
         actions: Actions
+        account_credentials: Account credentials
         administration_panel_login: Administration panel login
         an_error_occurred: An error occurred
         are_your_sure_you_want_to_perform_this_action: Are you sure you want to perform this action?
@@ -24,14 +26,18 @@ sylius:
         color: Color
         configure_channels_available_in_your_store: Configure channels available in your store
         confirm_your_action: Confirm your action
+        contact_us: Contact us
         contains: Contains
         countries: Countries
         coupons: Coupons
         coupon_based: Coupon based
         create: Create
         currencies: Currencies
+        customer_can_login_to_the_store: Customer can login to the store
+        customer_care: Customer Care
         dashboard: Dashboard
         date: Date
+        delivery_and_shipping: Delivery & Shipping
         default_currency: Default currency
         default_locale: Default locale
         delete: Delete
@@ -59,9 +65,12 @@ sylius:
         equal: Equal
         exclusive: Exclusive
         expires_at: Expires at
+        extra_information: Extra information
+        faqs: FAQs
         filter: Filter
         in: In
         info: Info
+        item: Item
         last_updated: Last updated
         locales: Locales
         manage_attributes_of_your_products: Manage attributes of your products
@@ -90,6 +99,7 @@ sylius:
         no_taxes: No taxes applied
         no_promotion: No promotion applied
         no_shipping_charges: No shipping charges applied
+        no_theme: No theme
         not_contains: Not contains
         not_empty: Not empty
         not_in: Not in
@@ -97,6 +107,8 @@ sylius:
         or: or
         partially_shipped: Partially shipped
         powered_by: Powered by
+        price: Price
+        privacy_policy: Privacy Policy
         process_your_orders: Process your orders
         promotion_configuration: Promotion configuration
         promotion_information: Promotion information
@@ -105,6 +117,7 @@ sylius:
         quantity: Qty
         ready: Ready
         returned: Returned
+        returns_policy: Returns Policy
         save_changes: Save changes
         shipped: Shipped
         shipping_methods: Shipping methods
@@ -117,8 +130,11 @@ sylius:
         success: Success
         tax: Tax
         tax_categories: Tax categories
+        terms_and_conditions: Terms and Conditions
+        usage: Usage
         values: Values
         yes: Yes
+        your_store: Your Store
         total_records: Total records
         jump_to_page: Jump to page
         go: Go
@@ -127,8 +143,3 @@ sylius:
         zone_consisting_of_countries: Zone consisting of countries
         zone_consisting_of_provinces: Zone consisting of provinces
         zone_consisting_of_other_zones: Zone consisting of other zones
-        no_theme: No theme
-        usage: Usage
-        customer_can_login_to_the_store: Customer can login to the store
-        account_credentials: Account credentials
-        extra_information: Extra information

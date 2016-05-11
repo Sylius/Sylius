@@ -8,68 +8,67 @@
 <h3 class="ui dividing header" id="sylius_product_name">
     {{ product.name }}
 </h3>
-<div class="ui two column grid">
-    <div class="column">
-        <div class="ui segment">
-            <a href="{{ path(product) }}" class="thumbnail">
+<div class="ui segment">
+    <div class="ui two column grid">
+        <div class="column">
+            <div class="ui segment">
                 <img src="{{ product.image ? product.image.path|imagine_filter('sylius_medium') : 'http://placehold.it/200x200' }}" alt="{{ product.name }}" />
-            </a>
-            {% if product.attributes|length > 0 %}
-            <table class="ui single line table" id="product-attributes">
-                <thead>
-                    <tr>
-                        <th colspan="2">{{ 'sylius.ui.attributes'|trans }}</th>
-                    </tr>
-                </thead>
-                <tbody>
-                {% for attribute in product.attributes %}
-                    <tr>
-                        <td id="sylius_attribute_name">
-                            {{ attribute.name }}
-                        </td>
-                        {% set attributeTemplate = 'SyliusAttributeBundle:Types:' ~ attribute.attribute.type ~ '.html.twig' %}
-                        {% include [attributeTemplate, 'SyliusShopBundle:Product:_attribute.html.twig'] with {'attribute': attribute} %}
-                    </tr>
-                {% endfor %}
-                </tbody>
-            </table>
-            {% endif %}
+                {% if product.attributes|length > 0 %}
+                <table class="ui single line table" id="product-attributes">
+                    <thead>
+                        <tr>
+                            <th colspan="2">{{ 'sylius.ui.attributes'|trans }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for attribute in product.attributes %}
+                        <tr>
+                            <td id="sylius_attribute_name">
+                                {{ attribute.name }}
+                            </td>
+                            <td id="sylius_attribute_value">
+                                {% set attributeTemplate = 'SyliusAttributeBundle:Types:' ~ attribute.attribute.type ~ '.html.twig' %}
+                                {% include [attributeTemplate, 'SyliusShopBundle:Product:_attribute.html.twig'] with {'attribute': attribute} %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                {% endif %}
+            </div>
         </div>
-    </div>
-    <div class="column">
-        <div class="ui segment">
-            <form action="{{ path('sylius_shop_cart_item_add', {'id': product.id}) }}" method="post">
-                {% if product.hasVariants %}
-                    {% include ['SyliusShopBundle:Product:_variant.html.twig'] with {'product': product, 'form': form} %}
-                {% else %}
-                    <h4>
-                        <span>
-                        {{ sylius_display_price(product.masterVariant) }}
-                        </span>
-                        {{ 'sylius.ui.price'|trans }}
-                    </h4>
-                {% endif %}
-                {% if not product.hasVariants and not sylius_inventory_is_available(product.masterVariant) %}
-                    <span class="ui red label">{{ 'sylius.ui.out_of_stock'|trans }}</span>
-                {% else %}
-                    {{ form_row(form.quantity, {'empty_value': '1'}) }}
-                    {{ form_widget(form._token) }}
-                    <div class="ui hidden divider"></div>
-                    {% if sylius_is_restricted(product) %}
-                        <button disabled="disabled" class="ui labeled icon button">
-                            <i class="icon cart"></i>
-                            {{ 'sylius.ui.not_available_in_your_country'|trans }}
-                        </button>
+        <div class="column">
+            <div class="ui segment">
+                <form action="{{ path('sylius_shop_cart_item_add', {'id': product.id}) }}" method="post">
+                    {% if product.hasVariants %}
+                        {% include ['SyliusShopBundle:Product:_variant.html.twig'] with {'product': product, 'form': form} %}
                     {% else %}
-                        <button type="submit" class="ui labeled icon button">
-                            <i class="icon cart"></i>
-                            {{ 'sylius.ui.add_to_cart'|trans }}
-                        </button>
+                        <h4>
+                            {{ 'sylius.ui.price'|trans }}
+                            {{ sylius_display_price(product.masterVariant) }}
+                        </h4>
                     {% endif %}
-                {% endif %}
-            </form>
+                    {% if not product.hasVariants and not sylius_inventory_is_available(product.masterVariant) %}
+                        <span class="ui red label">{{ 'sylius.ui.out_of_stock'|trans }}</span>
+                    {% else %}
+                        {{ form_row(form.quantity, {'empty_value': '1'}) }}
+                        {{ form_widget(form._token) }}
+                        <div class="ui hidden divider"></div>
+                        {% if sylius_is_restricted(product) %}
+                            <button disabled="disabled" class="ui labeled icon button">
+                                <i class="icon cart"></i>
+                                {{ 'sylius.ui.not_available_in_your_country'|trans }}
+                            </button>
+                        {% else %}
+                            <button type="submit" class="ui labeled icon button">
+                                <i class="icon cart"></i>
+                                {{ 'sylius.ui.add_to_cart'|trans }}
+                            </button>
+                        {% endif %}
+                    {% endif %}
+                </form>
+            </div>
         </div>
     </div>
 </div>
-    <div class="ui hidden divider"></div>
 {% endblock %}

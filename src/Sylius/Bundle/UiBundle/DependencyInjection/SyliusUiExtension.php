@@ -30,5 +30,6 @@ class SyliusUiExtension extends Extension
         $loader->load('controller.xml');
         $loader->load('menu.xml');
         $loader->load('form.xml');
+        $loader->load('twig.xml');
     }
 }
