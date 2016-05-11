@@ -53,6 +53,7 @@ class ProvinceChoiceType extends AbstractType
 
         $resolver
             ->setDefaults([
+                'choice_translation_domain' => false,
                 'choice_list' => $choices,
                 'country' => null,
                 'label' => 'sylius.form.address.province',

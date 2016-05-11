@@ -37,7 +37,10 @@ class AttributeTypeChoiceTypeSpec extends ObjectBehavior
 
     function it_configures_proper_options(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(['choices' => ['test' => 'Test attribute type']])->shouldBeCalled();
+        $resolver->setDefaults([
+            'choice_translation_domain' => false,
+            'choices' => ['test' => 'Test attribute type']
+        ])->shouldBeCalled();
 
         $this->configureOptions($resolver);
     }

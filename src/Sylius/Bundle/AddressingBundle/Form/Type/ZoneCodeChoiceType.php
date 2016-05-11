@@ -42,6 +42,7 @@ class ZoneCodeChoiceType extends AbstractType
         $resolver
             ->setDefaults([
                 'choices' => $this->getZoneCodes(),
+                'choice_translation_domain' => false,
                 'label' => 'sylius.form.zone.types.zone',
                 'empty_value' => 'sylius.form.zone.select',
             ])

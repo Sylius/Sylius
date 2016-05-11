@@ -38,9 +38,10 @@ class AttributeTypeChoiceType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver
-            ->setDefaults(
-                ['choices' => $this->attributeTypes]
-            )
+            ->setDefaults([
+                'choice_translation_domain' => false,
+                'choices' => $this->attributeTypes
+            ])
         ;
     }
 

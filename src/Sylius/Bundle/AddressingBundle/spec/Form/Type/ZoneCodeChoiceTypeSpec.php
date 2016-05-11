@@ -48,6 +48,7 @@ class ZoneCodeChoiceTypeSpec extends ObjectBehavior
 
         $resolver
             ->setDefaults([
+                'choice_translation_domain' => false,
                 'choices' => ['EU' => 'European Union'],
                 'label' => 'sylius.form.zone.types.zone',
                 'empty_value' => 'sylius.form.zone.select',

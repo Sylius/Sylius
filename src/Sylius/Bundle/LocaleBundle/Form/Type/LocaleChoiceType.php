@@ -66,6 +66,7 @@ class LocaleChoiceType extends AbstractType
 
         $resolver
             ->setDefaults([
+                'choice_translation_domain' => false,
                 'choice_list' => $choiceList,
                 'enabled' => null,
                 'label' => 'sylius.form.locale.locale',
