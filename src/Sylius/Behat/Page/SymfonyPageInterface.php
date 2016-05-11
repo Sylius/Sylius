@@ -9,20 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Behat\Page\Admin\Crud;
-
-use Sylius\Behat\Page\PageInterface;
+namespace Sylius\Behat\Page;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-interface PageWithFormInterface extends PageInterface
+interface SymfonyPageInterface extends PageInterface
 {
     /**
-     * @param string $element
-     * @param string $message
-     *
-     * @return bool
+     * @return string
      */
-    public function checkValidationMessageFor($element, $message);
+    public function getRouteName();
 }

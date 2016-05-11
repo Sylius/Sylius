@@ -91,7 +91,7 @@ class OrderPaymentsPage extends SymfonyPage implements OrderPaymentsPageInterfac
     /**
      * {@inheritdoc}
      */
-    protected function getRouteName()
+    public function getRouteName()
     {
         return 'sylius_order_payment_index';
     }

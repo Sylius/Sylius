@@ -11,12 +11,12 @@
 
 namespace Sylius\Behat\Page\Admin\Crud;
 
-use Sylius\Behat\Page\PageInterface;
+use Sylius\Behat\Page\SymfonyPageInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-interface IndexPageInterface extends PageInterface
+interface IndexPageInterface extends SymfonyPageInterface
 {
     /**
      * @param array $parameters

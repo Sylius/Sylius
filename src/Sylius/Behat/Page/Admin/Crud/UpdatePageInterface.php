@@ -11,13 +11,21 @@
 
 namespace Sylius\Behat\Page\Admin\Crud;
 
-use Sylius\Behat\Page\PageInterface;
+use Sylius\Behat\Page\SymfonyPageInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-interface UpdatePageInterface extends PageInterface, PageWithFormInterface
+interface UpdatePageInterface extends SymfonyPageInterface
 {
+    /**
+     * @param string $element
+     * @param string $message
+     *
+     * @return bool
+     */
+    public function checkValidationMessageFor($element, $message);
+
     /**
      * @param array $parameters where keys are some of arbitrary elements defined by user and values are expected values
      *

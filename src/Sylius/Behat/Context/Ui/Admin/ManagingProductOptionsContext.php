@@ -143,7 +143,7 @@ final class ManagingProductOptionsContext implements Context
      */
     public function iAddTheOptionValueWithCodeAndValue($value, $code)
     {
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm($this->createPage, $this->updatePage);
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
         $currentPage->addOptionValue($code, $value);
     }

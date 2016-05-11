@@ -20,7 +20,7 @@ use Symfony\Component\Routing\RouterInterface;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-abstract class SymfonyPage extends Page
+abstract class SymfonyPage extends Page implements SymfonyPageInterface
 {
     /**
      * @var RouterInterface
@@ -40,9 +40,9 @@ abstract class SymfonyPage extends Page
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
      */
-    abstract protected function getRouteName();
+    abstract public function getRouteName();
 
     /**
      * @param array $urlParameters

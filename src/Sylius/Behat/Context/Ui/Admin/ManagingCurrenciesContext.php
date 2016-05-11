@@ -233,7 +233,7 @@ final class ManagingCurrenciesContext implements Context
      */
     public function iShouldBeNotifiedThatExchangeRateIsRequired()
     {
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm($this->createPage, $this->updatePage);
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
         Assert::true(
             $currentPage->checkValidationMessageFor('exchangeRate', 'Please enter exchange rate.'),

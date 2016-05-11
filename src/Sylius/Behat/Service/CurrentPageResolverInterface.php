@@ -8,11 +8,10 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Sylius\Behat\Service;
 
-use Sylius\Behat\Page\Admin\Crud\CreatePageInterface;
-use Sylius\Behat\Page\Admin\Crud\PageWithFormInterface;
-use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface;
+use Sylius\Behat\Page\SymfonyPageInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -20,10 +19,9 @@ use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface;
 interface CurrentPageResolverInterface
 {
     /**
-     * @param CreatePageInterface $createPage
-     * @param UpdatePageInterface $updatePage
+     * @param SymfonyPageInterface[] $pages
      *
-     * @return PageWithFormInterface
+     * @return SymfonyPageInterface
      */
-    public function getCurrentPageWithForm(CreatePageInterface $createPage, UpdatePageInterface $updatePage);
+    public function getCurrentPageWithForm(array $pages);
 }

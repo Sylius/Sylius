@@ -13,8 +13,7 @@ namespace spec\Sylius\Behat\Service;
 
 use Behat\Mink\Session;
 use PhpSpec\ObjectBehavior;
-use Sylius\Behat\Page\Admin\Crud\CreatePageInterface;
-use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface;
+use Sylius\Behat\Page\SymfonyPageInterface;
 use Sylius\Behat\Service\CurrentPageResolver;
 use Sylius\Behat\Service\CurrentPageResolverInterface;
 use Symfony\Component\Routing\Matcher\UrlMatcherInterface;
@@ -41,39 +40,33 @@ class CurrentPageResolverSpec extends ObjectBehavior
         $this->shouldImplement(CurrentPageResolverInterface::class);
     }
 
-    function it_returns_create_page_if_current_route_name_contains_create_word(
+    function it_returns_current_page_based_on_matched_route(
         Session $session,
-        CreatePageInterface $createPage,
-        UpdatePageInterface $updatePage,
+        SymfonyPageInterface $createPage,
+        SymfonyPageInterface $updatePage,
         UrlMatcherInterface $urlMatcher
     ) {
         $session->getCurrentUrl()->willReturn('https://sylius.com/resource/new');
         $urlMatcher->match('/resource/new')->willReturn(['_route' => 'sylius_resource_create']);
 
-        $this->getCurrentPageWithForm($createPage, $updatePage)->shouldReturn($createPage);
-    }
+        $createPage->getRouteName()->willReturn('sylius_resource_create');
+        $updatePage->getRouteName()->willReturn('sylius_resource_update');
 
-    function it_returns_update_page_if_current_route_name_contains_update_word(
-        Session $session,
-        CreatePageInterface $createPage,
-        UpdatePageInterface $updatePage,
-        UrlMatcherInterface $urlMatcher
-    ) {
-        $session->getCurrentUrl()->willReturn('https://sylius.com/resource/edit');
-        $urlMatcher->match('/resource/edit')->willReturn(['_route' => 'sylius_resource_update']);
-
-        $this->getCurrentPageWithForm($createPage, $updatePage)->shouldReturn($updatePage);
+        $this->getCurrentPageWithForm([$createPage, $updatePage])->shouldReturn($createPage);
     }
 
     function it_throws_an_exception_if_neither_create_nor_update_key_word_has_been_found(
         Session $session,
-        CreatePageInterface $createPage,
-        UpdatePageInterface $updatePage,
+        SymfonyPageInterface $createPage,
+        SymfonyPageInterface $updatePage,
         UrlMatcherInterface $urlMatcher
     ) {
         $session->getCurrentUrl()->willReturn('https://sylius.com/resource/show');
         $urlMatcher->match('/resource/show')->willReturn(['_route' => 'sylius_resource_show']);
 
-        $this->shouldThrow(\LogicException::class)->during('getCurrentPageWithForm', [$createPage, $updatePage]);
+        $createPage->getRouteName()->willReturn('sylius_resource_create');
+        $updatePage->getRouteName()->willReturn('sylius_resource_update');
+
+        $this->shouldThrow(\LogicException::class)->during('getCurrentPageWithForm', [[$createPage, $updatePage]]);
     }
 }

@@ -235,7 +235,7 @@ final class ManagingTaxonsContext implements Context
      */
     public function iShouldBeNotifiedThatTaxonWithThisCodeAlreadyExists()
     {
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm($this->createPage, $this->updatePage);
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
         Assert::true(
             $currentPage->checkValidationMessageFor('code', 'Taxon with given code already exists.'),
@@ -248,7 +248,7 @@ final class ManagingTaxonsContext implements Context
      */
     public function iShouldBeNotifiedThatIsRequired($element)
     {
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm($this->createPage, $this->updatePage);
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
         Assert::true(
             $currentPage->checkValidationMessageFor($element, sprintf('Please enter taxon %s.', $element)),

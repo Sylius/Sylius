@@ -42,7 +42,7 @@ class PaymentStep extends SymfonyPage implements PaymentStepInterface
     /**
      * @return string
      */
-    protected function getRouteName()
+    public function getRouteName()
     {
         return 'sylius_checkout_payment';
     }

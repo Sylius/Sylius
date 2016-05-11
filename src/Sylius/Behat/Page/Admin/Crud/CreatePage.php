@@ -65,7 +65,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getRouteName()
+    public function getRouteName()
     {
         return sprintf('sylius_admin_%s_create', $this->resourceName);
     }

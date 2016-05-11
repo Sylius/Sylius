@@ -45,7 +45,7 @@ class AddressingStep extends SymfonyPage implements AddressingStepInterface
     /**
      * @return string
      */
-    protected function getRouteName()
+    public function getRouteName()
     {
         return 'sylius_checkout_addressing';
     }

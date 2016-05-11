@@ -47,7 +47,7 @@ class RegisterPage extends SymfonyPage implements RegisterPageInterface
     /**
      * {@inheritdoc}
      */
-    protected function getRouteName()
+    public function getRouteName()
     {
         return 'sylius_user_registration';
     }

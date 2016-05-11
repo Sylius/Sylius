@@ -48,7 +48,7 @@ class SecurityStep extends SymfonyPage implements SecurityStepInterface
     /**
      * {@inheritdoc}
      */
-    protected function getRouteName()
+    public function getRouteName()
     {
         return 'sylius_checkout_security';
     }
