@@ -1,0 +1,40 @@
+sylius_grid:
+    grids:
+        sylius_admin_promotion_coupon:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%sylius.model.promotion_coupon.class%"
+                    repository:
+                        method: createQueryBuilderWithPromotion
+                        arguments:
+                            promotionId: $promotionId
+            fields:
+                code:
+                    type: string
+                    label: sylius.ui.code
+                usageLimit:
+                    type: string
+                    label: sylius.ui.usage_limit
+                perCustomerUsageLimit:
+                    type: string
+                    label: sylius.ui.per_customer_usage_limit
+                used:
+                    type: string
+                    label: sylius.ui.used
+                expiresAt:
+                    type: datetime
+                    label: sylius.ui.expires_at
+                    options:
+                        format: d-m-Y
+            actions:
+                main:
+                    create:
+                        type: create_coupon
+                    generate:
+                        type: generate_coupon
+                item:
+                    update:
+                        type: update_coupon
+                    delete:
+                        type: delete_coupon

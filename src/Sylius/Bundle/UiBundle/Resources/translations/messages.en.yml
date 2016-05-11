@@ -7,6 +7,7 @@ sylius:
         option:
             presentation: Presentation
     ui:
+        add_coupon: Add coupon
         all: All
         actions: Actions
         administration_panel_login: Administration panel login
@@ -22,6 +23,7 @@ sylius:
         confirm_your_action: Confirm your action
         contains: Contains
         countries: Countries
+        coupons: Coupons
         coupon_based: Coupon based
         create: Create
         currencies: Currencies
@@ -40,6 +42,7 @@ sylius:
         edit_product_option: Edit product option
         edit_product_attribute: Edit product attribute
         edit_promotion: Edit promotion
+        edit_coupon: Edit coupon
         edit_shipping_method: Edit shipping method
         edit_tax_category: Edit tax category
         edit_tax_rate: Edit tax rate
@@ -50,12 +53,14 @@ sylius:
         ends_with: Ends with
         equal: Equal
         exclusive: Exclusive
+        expires_at: Expires at
         filter: Filter
         in: In
         info: Info
         last_updated: Last updated
         locales: Locales
         manage_attributes_of_your_products: Manage attributes of your products
+        manage_coupons: Manage coupons
         manage_currencies_available_in_the_store: Manage currencies available in the store
         manage_your_customers: Manage your customers
         manage_languages_available_in_the_store: Manage languages available in the store
@@ -72,6 +77,7 @@ sylius:
         new_country: New country
         new_currency: New currency
         new_locale: New locale
+        new_coupon: New coupon
         new_tax_category: New tax category
         no: No
         no_account: no account
@@ -83,6 +89,7 @@ sylius:
         powered_by: Powered by
         promotion_configuration: Promotion configuration
         promotion_information: Promotion information
+        per_customer_usage_limit: Per customer usage limit
         save_changes: Save changes
         shipping_methods: Shipping methods
         show: Show

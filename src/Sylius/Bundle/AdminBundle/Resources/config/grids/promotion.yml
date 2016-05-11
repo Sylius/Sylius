@@ -45,3 +45,5 @@ sylius_grid:
                         type: update
                     delete:
                         type: delete
+                    manageCoupons:
+                        type: manage_coupons

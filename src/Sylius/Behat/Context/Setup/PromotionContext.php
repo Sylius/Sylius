@@ -112,6 +112,7 @@ final class PromotionContext implements Context
 
     /**
      * @Given the store has promotion :promotionName with coupon :couponCode
+     * @Given the store has also promotion :promotionName with coupon :couponCode
      */
     public function thereIsPromotionWithCoupon($promotionName, $couponCode)
     {
@@ -415,6 +416,16 @@ final class PromotionContext implements Context
             $this->getTaxonFilterConfiguration($discountTaxonsCodes),
             $rule
         );
+    }
+
+    /**
+     * @Given /^(it) is coupon based promotion$/
+     */
+    public function itIsCouponBasedPromotion(PromotionInterface $promotion)
+    {
+        $promotion->setCouponBased(true);
+
+        $this->objectManager->flush();
     }
 
     /**

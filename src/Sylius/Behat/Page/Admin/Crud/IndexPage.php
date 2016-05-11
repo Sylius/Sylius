@@ -73,7 +73,11 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
      */
     public function countItems()
     {
-        return $this->getTableAccessor()->countTableBodyRows($this->getElement('table'));
+        try {
+            return $this->getTableAccessor()->countTableBodyRows($this->getElement('table'));
+        } catch (ElementNotFoundException $exception) {
+            return 0;
+        }
     }
 
     /**

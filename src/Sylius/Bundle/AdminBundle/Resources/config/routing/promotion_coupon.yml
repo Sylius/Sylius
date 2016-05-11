@@ -1,0 +1,91 @@
+sylius_admin_promotion_coupon_index:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.promotion_coupon:indexAction
+        _sylius:
+            template: SyliusAdminBundle:Crud:index.html.twig
+            grid: sylius_admin_promotion_coupon
+            section: admin
+            vars:
+                route:
+                    parameters:
+                        promotionId: $promotionId
+                templates:
+                    breadCrumb: SyliusAdminBundle:PromotionCoupon/BreadCrumb:indexBreadCrumb.html.twig
+                icon: tags
+                subheader: sylius.ui.manage_coupons
+
+sylius_admin_promotion_coupon_create:
+    path: /new
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.promotion_coupon:createAction
+        _sylius:
+            factory:
+                method: createForPromotion
+                arguments: [$promotionId]
+            template: SyliusAdminBundle:Crud:create.html.twig
+            grid: sylius_admin_promotion_coupon
+            section: admin
+            redirect:
+                route: sylius_admin_promotion_coupon_index
+                parameters: { promotionId: $promotionId }
+            vars:
+                route:
+                    parameters:
+                        promotionId: $promotionId
+                templates:
+                    form: SyliusAdminBundle:PromotionCoupon:_form.html.twig
+                    breadCrumb: SyliusAdminBundle:PromotionCoupon/BreadCrumb:createBreadCrumb.html.twig
+
+sylius_admin_promotion_coupon_update:
+    path: /{id}/edit
+    methods: [GET, PUT]
+    defaults:
+        _controller: sylius.controller.promotion_coupon:updateAction
+        _sylius:
+            template: SyliusAdminBundle:Crud:update.html.twig
+            grid: sylius_admin_promotion_coupon
+            section: admin
+            redirect:
+                route: sylius_admin_promotion_coupon_index
+                parameters: { promotionId: $promotionId }
+            vars:
+                route:
+                    parameters:
+                        id: $id
+                        promotionId: $promotionId
+                templates:
+                    form: SyliusAdminBundle:PromotionCoupon:_form.html.twig
+                    breadCrumb: SyliusAdminBundle:PromotionCoupon/BreadCrumb:updateBreadCrumb.html.twig
+
+sylius_admin_promotion_coupon_delete:
+    path: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.promotion_coupon:deleteAction
+        _sylius:
+            redirect: referer
+
+sylius_admin_promotion_coupon_generate:
+    path: /generate
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.promotion_coupon:generateAction
+        _sylius:
+            template: SyliusAdminBundle:PromotionCoupon:generate.html.twig
+            section: admin
+            redirect:
+                route: sylius_admin_promotion_coupon_index
+                parameters: { promotionId: $promotionId }
+            vars:
+                route:
+                    parameters:
+                        promotionId: $promotionId
+                templates:
+                    form: SyliusAdminBundle:PromotionCoupon:_generateForm.html.twig
+                    breadCrumb: SyliusAdminBundle:PromotionCoupon/BreadCrumb:generateBreadCrumb.html.twig
+                icon: random
+                header: sylius.ui.generate
+                subheader: sylius.ui.generating_coupons

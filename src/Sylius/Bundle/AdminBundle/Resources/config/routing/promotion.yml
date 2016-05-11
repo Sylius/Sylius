@@ -14,3 +14,7 @@ sylius_admin_promotion:
             index:
                 icon: in cart
     type: sylius.resource
+
+sylius_admin_promotion_coupon:
+    resource: "@SyliusAdminBundle/Resources/config/routing/promotion_coupon.yml"
+    prefix: /promotions/{promotionId}/coupons/

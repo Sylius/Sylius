@@ -1,0 +1,18 @@
+<div class="ui two column stackable grid">
+    {{ form_errors(form) }}
+    <div class="column">
+        <div class="ui segment">
+            <div class="two fields">
+                {{ form_row(form.amount) }}
+                {{ form_row(form.usageLimit) }}
+            </div>
+        </div>
+    </div>
+    <div class="column">
+        <div class="ui segment">
+            <div class="one fields">
+                {{ form_row(form.expiresAt) }}
+            </div>
+        </div>
+    </div>
+</div>

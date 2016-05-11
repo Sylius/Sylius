@@ -18,6 +18,7 @@
 
     <parameters>
         <parameter key="sylius.repository.promotion.class">Sylius\Bundle\PromotionBundle\Doctrine\ORM\PromotionRepository</parameter>
+        <parameter key="sylius.repository.promotion_coupon.class">Sylius\Bundle\PromotionBundle\Doctrine\ORM\CouponRepository</parameter>
     </parameters>
 
 </container>

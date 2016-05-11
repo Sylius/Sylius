@@ -13,7 +13,7 @@ namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\NotificationType;
-use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
+use Sylius\Behat\Page\Admin\Promotion\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Promotion\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Promotion\UpdatePageInterface;
 use Sylius\Behat\Service\CurrentPageResolverInterface;
@@ -90,6 +90,14 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
+     * @Given I want to browse promotions
+     */
+    public function iWantToBrowsePromotions()
+    {
+        $this->indexPage->open();
+    }
+
+    /**
      * @When I specify its code as :code
      * @When I do not specify its code
      */
@@ -110,6 +118,7 @@ final class ManagingPromotionsContext implements Context
 
     /**
      * @Then the :promotionName promotion should appear in the registry
+     * @Then the :promotionName promotion should exist in the registry
      * @Then this promotion should still be named :promotionName
      * @Then promotion :promotionName should still exist in the registry
      */
@@ -173,6 +182,40 @@ final class ManagingPromotionsContext implements Context
     {
         $this->createPage->addAction('Order fixed discount');
         $this->createPage->fillActionOption('Amount', $amount);
+    }
+
+    /**
+     * @Then /^there should be (\d+) promotion(?:|s)$/
+     */
+    public function thereShouldBePromotion($number)
+    {
+        Assert::eq(
+            $number,
+            $this->indexPage->countItems(),
+            'I should see %s promotions but i see only %2$s'
+        );
+    }
+
+    /**
+     * @Then /^(this promotion) should be coupon based$/
+     */
+    public function thisPromotionShouldBeCouponBased(PromotionInterface $promotion)
+    {
+        Assert::true(
+            $this->indexPage->isCouponBasedFor($promotion),
+            sprintf('Promotion with name "%s" should be coupon based', $promotion->getName())
+        );
+    }
+
+    /**
+     * @Then /^I should be able to manage coupons for (this promotion)$/
+     */
+    public function iShouldBeAbleToManageCouponsForThisPromotion(PromotionInterface $promotion)
+    {
+        Assert::true(
+            $this->indexPage->isAbleToManageCouponsFor($promotion),
+            sprintf('I should be able to manage coupons for given promotion with name %s but apparently i am not.', $promotion->getName())
+        );
     }
 
     /**

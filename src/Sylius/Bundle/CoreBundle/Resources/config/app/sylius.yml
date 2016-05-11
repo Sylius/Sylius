@@ -191,6 +191,7 @@ sylius_promotion:
         promotion_coupon:
             classes:
                 model: Sylius\Component\Core\Model\Coupon
+                repository: Sylius\Bundle\PromotionBundle\Doctrine\ORM\CouponRepository
                 form:
                     default: Sylius\Bundle\CoreBundle\Form\Type\CouponType
 
@@ -855,6 +856,11 @@ sylius_review:
 sylius_grid:
     templates:
         action:
+            manage_coupons: SyliusAdminBundle:Promotion/Action:manageCoupons.html.twig
+            create_coupon: SyliusAdminBundle:PromotionCoupon/Action:create.html.twig
+            update_coupon: SyliusAdminBundle:PromotionCoupon/Action:update.html.twig
+            delete_coupon: SyliusAdminBundle:PromotionCoupon/Action:delete.html.twig
+            generate_coupon: SyliusAdminBundle:PromotionCoupon/Action:generate.html.twig
             create_zone: SyliusAdminBundle:Zone/Action:createZone.html.twig
             create_product_attribute: SyliusAdminBundle:ProductAttribute/Action:createProductAttribute.html.twig
             create: SyliusAdminBundle:Grid/Action:create.html.twig
