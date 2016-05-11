@@ -12,15 +12,14 @@ Feature: Seeing an order with its items
         And the store allows paying with "Cash on Delivery"
         And there is a customer "lucy@teamlucifer.com" that placed an order "#00000666"
         And the customer chose "Free" shipping method to "United States" with "Cash on Delivery" payment
-        And the customer bought a single "Angel T-Shirt"
-        And the customer bought a single "Angel Mug"
+        And the customer bought an "Angel T-Shirt" and an "Angel Mug"
         And I am logged in as an administrator
 
     @ui
     Scenario: Seeing order items
-        When I see the "#00000666" order
-        Then I should see 2 items in the list
-        And I should see the product named "Angel T-Shirt" in the list
-        And I should see the product named "Angel Mug" in the list
+        When I view the summary of the order "#00000666"
+        Then it should have 2 items
+        And the product named "Angel T-Shirt" should be in the items list
+        And the product named "Angel Mug" should be in the items list
         And the order's items total should be "€58.00"
         And the order's total should be "€58.00"

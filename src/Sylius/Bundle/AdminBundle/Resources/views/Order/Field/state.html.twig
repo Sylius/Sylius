@@ -1,5 +1,3 @@
 {% import '@SyliusUi/Macro/labels.html.twig' as label %}
 
-{% set text = 'sylius.ui.'~data %}
-
-{{ label.default(text|trans) }}
+{{ label.default(('sylius.ui.'~data)|trans) }}

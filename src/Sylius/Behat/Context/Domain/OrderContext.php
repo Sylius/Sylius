@@ -149,7 +149,7 @@ final class OrderContext implements Context
     /**
      * @Then I should be notified that it has been successfully deleted
      */
-    public function iShouldBeNotifiedOfSuccess()
+    public function iShouldBeNotified()
     {
         // Not applicable in the domain scope
     }

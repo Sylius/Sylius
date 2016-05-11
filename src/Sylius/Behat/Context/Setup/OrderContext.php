@@ -137,7 +137,6 @@ final class OrderContext implements Context
     {
         /** @var OrderInterface $order */
         $order = $this->sharedStorage->get('order');
-
         $order->setShippingAddress($address);
 
         $this->objectManager->flush();
@@ -208,9 +207,28 @@ final class OrderContext implements Context
 
     /**
      * @Given the customer bought a single :product
-     * @Given /^the customer bought (\d+) (products "[^"]+")/
      */
-    public function theCustomerBoughtProducts($quantity = 1, ProductInterface $product)
+    public function theCustomerBoughtSingleProduct(ProductInterface $product)
+    {
+        $this->addProductVariantToOrder($product->getMasterVariant(), $product->getPrice(), 1);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^the customer bought ((?:a|an) "[^"]+") and ((?:a|an) "[^"]+")$/
+     */
+    public function theCustomerBoughtProductAndProduct(ProductInterface $product, ProductInterface $secondProduct)
+    {
+        $this->theCustomerBoughtSingleProduct($product);
+        $this->theCustomerBoughtSingleProduct($secondProduct);
+    }
+
+
+    /**
+     * @Given /^the customer bought (\d+) ("[^"]+" products)/
+     */
+    public function theCustomerBoughtSeveralProducts($quantity, ProductInterface $product)
     {
         $this->addProductVariantToOrder($product->getMasterVariant(), $product->getPrice(), $quantity);
 

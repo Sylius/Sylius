@@ -37,6 +37,7 @@ sylius:
         delete: Delete
         description: Description
         disabled: Disabled
+        discount: Discount
         edit: Edit
         edit_channel: Edit channel
         edit_country: Edit country
@@ -86,6 +87,9 @@ sylius:
         no: No
         no_account: no account
         no_results_to_display: There are no results to display
+        no_taxes: No taxes applied
+        no_promotion: No promotion applied
+        no_shipping_charges: No shipping charges applied
         not_contains: Not contains
         not_empty: Not empty
         not_in: Not in
@@ -98,6 +102,7 @@ sylius:
         promotion_information: Promotion information
         per_customer_usage_limit: Per customer usage limit
         purchased_from: Purchased from
+        quantity: Qty
         ready: Ready
         returned: Returned
         save_changes: Save changes
@@ -108,7 +113,9 @@ sylius:
         sign_out: Sign out
         starts_with: Starts with
         status: Status
+        subtotal: Subtotal
         success: Success
+        tax: Tax
         tax_categories: Tax categories
         values: Values
         yes: Yes

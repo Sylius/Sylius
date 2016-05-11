@@ -1,8 +1,8 @@
 @managing_orders
-Feature: Seeing an order's discounts
-    In order to see discount on specific order
+Feature: Seeing discounts of an order
+    In order to be aware of the amount of discount applied to an order
     As an Administrator
-    I want to be able to see discount value
+    I want to see the discount value of a specific order
 
     Background:
         Given the store operates on a single channel in "France"
@@ -19,29 +19,19 @@ Feature: Seeing an order's discounts
     @ui
     Scenario: Seeing promotion discount on order while buying at least 3 items
         Given the promotion gives "€15.00" discount to every order with quantity at least 3
-        And the customer bought 4 products "Angel T-Shirt"
-        When I see the "#00000666" order
-        And the order's items total should be "€156.00"
-        And the order's total should be "€141.00"
-        And the order's promotion total should be "-€15.00"
+        And the customer bought 4 "Angel T-Shirt" products
+        When I view the summary of the order "#00000666"
+        Then the order's items total should be "€156.00"
         And the order's promotion discount should be "Holiday promotion -€15.00"
+        And the order's promotion total should be "-€15.00"
+        And the order's total should be "€141.00"
 
     @ui
     Scenario: Seeing promotion discount on order's items while buying a product from a promoted taxon
-        Given the promotion gives "€10.00" off if order contains products classified as "T-Shirts"
+        Given the promotion gives "€10.00" off on every product classified as "T-Shirts"
         And the customer bought a single "Angel T-Shirt"
-        When I see the "#00000666" order
-        And the order's items total should be "€39.00"
+        When I view the summary of the order "#00000666"
+        Then the "Angel T-Shirt" should have "-€10.00" discount
+        And the order's items total should be "€29.00"
+        And the order's promotion total should be "€0.00"
         And the order's total should be "€29.00"
-        And the order's promotion total should be "-€10.00"
-        And the order's promotion discount should be "Holiday promotion -€10.00"
-
-    @ui
-    Scenario: Seeing promotion discount on order's items while buying the required number of products from a promoted taxon
-        Given the promotion gives "€20.00" off if order contains 2 products classified as "T-Shirts"
-        And the customer bought 3 products "Angel T-Shirt"
-        When I see the "#00000666" order
-        And the order's items total should be "€117.00"
-        And the order's total should be "€97.00"
-        And the order's promotion total should be "-€20.00"
-        And the order's promotion discount should be "Holiday promotion -€20.00"

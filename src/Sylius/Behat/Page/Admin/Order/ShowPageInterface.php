@@ -11,13 +11,13 @@
 
 namespace Sylius\Behat\Page\Admin\Order;
 
-use Sylius\Behat\Page\PageInterface;
+use Sylius\Behat\Page\SymfonyPageInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-interface ShowPageInterface extends PageInterface
+interface ShowPageInterface extends SymfonyPageInterface
 {
     /**
      * @param string $customerName
@@ -102,4 +102,11 @@ interface ShowPageInterface extends PageInterface
      * @return bool
      */
     public function hasPromotionDiscount($promotionDiscount);
+
+    /**
+     * @param string $itemName
+     *
+     * @return string
+     */
+    public function getItemDiscount($itemName);
 }

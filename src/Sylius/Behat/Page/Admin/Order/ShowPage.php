@@ -118,8 +118,6 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
         } catch (\InvalidArgumentException $exception) {
             return false;
-        } catch (ElementNotFoundException $exception) {
-            return false;
         }
     }
 
@@ -194,6 +192,31 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     }
 
     /**
+     * @param string $itemName
+     *
+     * @return string
+     */
+    public function getItemDiscount($itemName)
+    {
+        $rows = $this->tableAccessor->getRowsWithFields(
+            $this->getElement('table'),
+            ['item' => $itemName]
+        );
+
+        $discount = $rows[0]->find('css', '.discount')->getText();
+
+        return $discount;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRouteName()
+    {
+        return 'sylius_admin_order_show';
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function getDefinedElements()
@@ -213,14 +236,6 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'promotion_total' => '#promotion-total',
             'promotion_discounts' => '#promotion-discounts',
         ]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getRouteName()
-    {
-        return 'sylius_admin_order_show';
     }
 
     /**

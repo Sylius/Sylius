@@ -1,8 +1,8 @@
 @managing_orders
-Feature: Seeing an order with basic information
+Feature: Seeing basic information about an order
     In order to see details of a specific order
     As an Administrator
-    I want to be able to see order basic information
+    I want to be able to view basic information about an order
 
     Background:
         Given the store operates on a single channel in "France"
@@ -17,10 +17,10 @@ Feature: Seeing an order with basic information
         And I am logged in as an administrator
 
     @ui
-    Scenario: Seeing an order basics information
-        When I see the "#00000666" order
-        Then I should see "lucy@teamlucifer.com" customer
-        And I should see "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States" shipping address
-        And I should see "Mazikeen Lilim", "Pacific Coast Hwy", "90806", "Los Angeles", "United States" billing address
-        And I should see "Free" shipment
-        And I should see "Cash on Delivery" payment
+    Scenario: Seeing basic information about an order
+        When I view the summary of the order "#00000666"
+        Then it should have been placed by the customer "lucy@teamlucifer.com"
+        And it should be shipped to "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States"
+        And it should be billed to "Mazikeen Lilim", "Pacific Coast Hwy", "90806", "Los Angeles", "United States"
+        And it should be shipped via the "Free" shipping method
+        And it should be paid with "Cash on Delivery"

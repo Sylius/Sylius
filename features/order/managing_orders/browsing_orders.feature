@@ -16,5 +16,5 @@ Feature: Browsing orders
 
     @ui
     Scenario: Seeing a new order in the list
-        When I browse new orders
+        When I browse orders
         Then I should see a single order from customer "john.doe@gmail.com"

@@ -57,15 +57,15 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @When I browse new orders
+     * @When I browse orders
      */
-    public function iBrowseNewOrders()
+    public function iBrowseOrders()
     {
         $this->indexPage->open();
     }
 
     /**
-     * @When I see the :order order
+     * @When I view the summary of the order :order
      */
     public function iSeeTheOrder(OrderInterface $order)
     {
@@ -84,9 +84,9 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then I should see :customerEmail customer
+     * @Then it should have been placed by the customer :customerEmail
      */
-    public function iShouldSeeCustomer($customerEmail)
+    public function itShouldBePlacedByCustomer($customerEmail)
     {
         Assert::true(
             $this->showPage->hasCustomer($customerEmail),
@@ -95,9 +95,9 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then I should see :customerName, :street, :postcode, :city, :countryName shipping address
+     * @Then it should be shipped to :customerName, :street, :postcode, :city, :countryName
      */
-    public function iShouldSeeShippingAddress($customerName, $street, $postcode, $city, $countryName)
+    public function itShouldBeShippedTo($customerName, $street, $postcode, $city, $countryName)
     {
         Assert::true(
             $this->showPage->hasShippingAddress($customerName, $street, $postcode, $city, $countryName),
@@ -106,9 +106,9 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then I should see :customerName, :street, :postcode, :city, :countryName billing address
+     * @Then it should be billed to :customerName, :street, :postcode, :city, :countryName
      */
-    public function iShouldSeeBillingAddress($customerName, $street, $postcode, $city, $countryName)
+    public function itShouldBeBilledTo($customerName, $street, $postcode, $city, $countryName)
     {
         Assert::true(
             $this->showPage->hasBillingAddress($customerName, $street, $postcode, $city, $countryName),
@@ -117,9 +117,9 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then I should see :shippingMethodName shipment
+     * @Then it should be shipped via the :shippingMethodName shipping method
      */
-    public function iShouldSeeShipment($shippingMethodName)
+    public function itShouldBeShippedViaShippingMethod($shippingMethodName)
     {
         Assert::true(
             $this->showPage->hasShipment($shippingMethodName),
@@ -128,9 +128,9 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then I should see :paymentMethodName payment
+     * @Then it should be paid with :paymentMethodName
      */
-    public function iShouldSeePayment($paymentMethodName)
+    public function itShouldBePaidWith($paymentMethodName)
     {
         Assert::true(
             $this->showPage->hasPayment($paymentMethodName),
@@ -139,21 +139,20 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then /^I should see (\d+) items in the list$/
+     * @Then /^it should have (\d+) items$/
      */
-    public function iShouldSeeItemsInTheList($amount)
+    public function itShouldHaveAmountOfItems($amount)
     {
         $itemsCount = $this->showPage->countItems();
 
         Assert::eq(
             $amount,
             $itemsCount,
-            sprintf('There should be %d items in the list, but get %d.', $amount, $itemsCount)
+            sprintf('There should be %d items, but get %d.', $amount, $itemsCount)
         );
     }
 
     /**
-     * @Then I should see the product named :productName in the list
      * @Then the product named :productName should be in the items list
      */
     public function theProductShouldBeInTheItemsList($productName)
@@ -172,9 +171,9 @@ final class ManagingOrdersContext implements Context
         $itemsTotalOnPage = $this->showPage->getItemsTotal();
 
         Assert::eq(
-            $itemsTotal,
             $itemsTotalOnPage,
-            sprintf('Items total is "%s", but should be "%s".', $itemsTotalOnPage, $itemsTotal)
+            $itemsTotal,
+            'Items total is %s, but should be %s.'
         );
     }
 
@@ -186,14 +185,14 @@ final class ManagingOrdersContext implements Context
         $totalOnPage = $this->showPage->getTotal();
 
         Assert::eq(
-            $total,
             $totalOnPage,
-            sprintf('Total is "%s", but should be "%s".', $totalOnPage, $total)
+            $total,
+            'Total is %s, but should be %s.'
         );
     }
 
     /**
-     * @Then the order's shipping charges should be :shippingCharge
+     * @Then there should be a shipping charge :shippingCharge
      */
     public function theOrdersShippingChargesShouldBe($shippingCharge)
     {
@@ -250,9 +249,23 @@ final class ManagingOrdersContext implements Context
         $promotionTotalOnPage = $this->showPage->getPromotionTotal();
 
         Assert::eq(
-            $promotionTotal,
             $promotionTotalOnPage,
-            sprintf('Promotion total is "%s", but should be "%s".', $promotionTotalOnPage, $promotionTotal)
+            $promotionTotal,
+            'Promotion total is %s, but should be %s.'
+        );
+    }
+
+    /**
+     * @Then the :itemName should have :discount discount
+     */
+    public function theItemShouldHaveDiscount($itemName, $itemDiscount)
+    {
+        $itemDiscountOnPage = $this->showPage->getItemDiscount($itemName);
+
+        Assert::eq(
+            $itemDiscountOnPage,
+            $itemDiscount,
+            'Item discount is %s, but should be %s.'
         );
     }
 

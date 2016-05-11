@@ -49,7 +49,7 @@
                             <i class="large money middle aligned icon"></i>
                             <div class="content">
                                 <a class="header">{{ payment.method }}</a>
-                                <div class="description">{{ label.default(payment.state|trans|capitalize) }}</div>
+                                <div class="description">{{ label.default(('sylius.ui.'~payment.state)|trans|capitalize) }}</div>
                             </div>
                         </div>
                         {% endfor %}
@@ -65,7 +65,7 @@
                                 <i class="large truck middle aligned icon"></i>
                                 <div class="content">
                                     <a class="header">{{ shipment.method }}</a>
-                                    <div class="description">{{ label.default(shipment.state|trans|capitalize) }}</div>
+                                    <div class="description">{{ label.default(('sylius.ui.'~shipment.state)|trans|capitalize) }}</div>
                                 </div>
                             </div>
                         {% endfor %}
