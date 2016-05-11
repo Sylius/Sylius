@@ -11,6 +11,7 @@
 
 namespace spec\Sylius\Component\Product\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Association\Model\AssociableInterface;
@@ -207,7 +208,7 @@ class ProductSpec extends ObjectBehavior
         $this->getAvailableVariants()->shouldHaveType('Doctrine\Common\Collections\Collection');
     }
 
-    function it_should_exclude_unavailable_variants_when_available_variants_are_called(VariantInterface $variant)
+    function it_does_not_include_unavailable_variants_in_available_variants(VariantInterface $variant)
     {
         $variant->isMaster()->willReturn(false);
         $variant->isAvailable()->willReturn(false);
@@ -218,7 +219,7 @@ class ProductSpec extends ObjectBehavior
         $this->getAvailableVariants()->shouldHaveCount(0);
     }
 
-    function it_should_exclude_master_variants_when_available_variants_are_called(VariantInterface $variant)
+    function it_does_not_include_master_variant_in_available_variants(VariantInterface $variant)
     {
         $variant->isMaster()->willReturn(true);
 
@@ -228,7 +229,7 @@ class ProductSpec extends ObjectBehavior
         $this->getAvailableVariants()->shouldHaveCount(0);
     }
 
-    function it_should_return_available_variants_when_available_variants_are_called(
+    function it_returns_available_variants(
         VariantInterface $masterVariant,
         VariantInterface $unavailableVariant,
         VariantInterface $variant
@@ -248,6 +249,7 @@ class ProductSpec extends ObjectBehavior
         $this->addVariant($variant);
 
         $this->getAvailableVariants()->shouldHaveCount(1);
+        $this->getAvailableVariants()->first()->shouldReturn($variant);
     }
 
     function it_should_initialize_option_collection_by_default()
