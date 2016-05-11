@@ -19,7 +19,7 @@ default:
                 - sylius.behat.context.setup.product_review
                 - sylius.behat.context.setup.security
 
-                - sylius.behat.context.ui.product
+                - sylius.behat.context.ui.admin.managing_products
 
             filters:
                 tags: "@managing_products && @ui"

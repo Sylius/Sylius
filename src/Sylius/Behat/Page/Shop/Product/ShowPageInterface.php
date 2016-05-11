@@ -37,4 +37,28 @@ interface ShowPageInterface extends PageInterface
      * @throws ElementNotFoundException
      */
     public function addToCartWithVariant($variant);
+
+    /**
+     * @return string
+     */
+    public function getName();
+
+    /**
+     * @param string $url
+     */
+    public function visit($url);
+
+    /**
+     * @param string $name
+     *
+     * @return bool
+     */
+    public function isAttributeOnPage($name);
+
+    /**
+     * @param string $name
+     *
+     * @return bool
+     */
+    public function isAttributeValueOnPage($name);
 }

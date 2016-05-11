@@ -57,6 +57,10 @@ final class NotificationAccessor implements NotificationAccessorInterface
             return NotificationType::failure();
         }
 
+        if ($this->getMessageElement()->hasClass('info')) {
+            return NotificationType::information();
+        }
+
         throw new \RuntimeException('Cannot resolve notification type');
     }
 

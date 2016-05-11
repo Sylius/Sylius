@@ -33,7 +33,11 @@ abstract class Controller extends ResourceController
      */
     protected function redirectToCartSummary(RequestConfiguration $configuration)
     {
-        return $this->redirectHandler->redirectToRoute($configuration, $this->getCartSummaryRoute());
+        if(null === $configuration->getParameters()->get('redirect')) {
+            return $this->redirectHandler->redirectToRoute($configuration, $this->getCartSummaryRoute());
+        }
+
+        return $this->redirectHandler->redirectToRoute($configuration, $configuration->getParameters()->get('redirect'));
     }
 
     /**
