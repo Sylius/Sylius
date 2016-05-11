@@ -149,6 +149,14 @@ final class ManagingProductOptionsContext implements Context
     }
 
     /**
+     * @When I delete the :optionValue option value of this product option
+     */
+    public function iDeleteTheOptionValueOfThisProductOption($optionValue)
+    {
+        $this->updatePage->removeOptionValue($optionValue);
+    }
+
+    /**
      * @Then the product option :productOptionName should appear in the registry
      * @Then the product option :productOptionName should be in the registry
      */
@@ -304,13 +312,5 @@ final class ManagingProductOptionsContext implements Context
             $this->createPage->checkValidationMessageFor($element, $expectedMessage),
             sprintf('Product option %s should be required.', $element)
         );
-    }
-
-    /**
-     * @When /^I delete the "([^"]*)" option value of (this product option)$/
-     */
-    public function iDeleteTheOptionValueOfThisProductOption($optionValue, OptionInterface $productOption)
-    {
-        $this->updatePage->removeOptionValue($optionValue);
     }
 }
