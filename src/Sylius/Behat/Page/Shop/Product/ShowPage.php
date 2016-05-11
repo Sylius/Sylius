@@ -25,6 +25,23 @@ use Sylius\Behat\Page\SymfonyPage;
 class ShowPage extends SymfonyPage implements ShowPageInterface
 {
     /**
+     * @param Session $session
+     * @param array $parameters
+     * @param RouterInterface $router
+     * @param TableAccessorInterface $tableAccessor
+     */
+    public function __construct(
+        Session $session,
+        array $parameters,
+        RouterInterface $router,
+        TableAccessorInterface $tableAccessor
+    ) {
+        parent::__construct($session, $parameters, $router);
+
+        $this->tableAccessor = $tableAccessor;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function addToCart()
