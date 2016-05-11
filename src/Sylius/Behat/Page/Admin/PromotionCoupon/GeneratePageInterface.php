@@ -11,12 +11,12 @@
 
 namespace Sylius\Behat\Page\Admin\PromotionCoupon;
 
-use Sylius\Behat\Page\PageInterface;
+use Sylius\Behat\Page\SymfonyPageInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-interface GeneratePageInterface extends PageInterface
+interface GeneratePageInterface extends SymfonyPageInterface
 {
     /**
      * @param string $message
