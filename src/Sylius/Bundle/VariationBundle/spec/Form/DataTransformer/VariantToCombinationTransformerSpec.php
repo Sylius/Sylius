@@ -11,6 +11,7 @@
 
 namespace spec\Sylius\Bundle\VariationBundle\Form\DataTransformer;
 
+use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Variation\Model\OptionValueInterface;
 use Sylius\Component\Variation\Model\VariableInterface;
@@ -45,9 +46,10 @@ class VariantToCombinationTransformerSpec extends ObjectBehavior
         $this->shouldThrow(UnexpectedTypeException::class)->duringTransform([]);
     }
 
-    function it_should_transform_variant_into_variant_options(VariantInterface $variant)
+    function it_should_transform_variant_into_variant_options(VariantInterface $variant, Collection $options)
     {
-        $variant->getOptions()->willReturn([]);
+        $variant->getOptions()->willReturn($options);
+        $options->toArray()->willReturn([]);
 
         $this->transform($variant)->shouldReturn([]);
     }
