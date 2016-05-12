@@ -6,6 +6,7 @@ sylius:
         login:
             username: Krosnicko ime
     ui:
+        add_coupon: Dodaj kupon
         cancel: Otkaži
         countries: Zemlje
         create: Kreiraj

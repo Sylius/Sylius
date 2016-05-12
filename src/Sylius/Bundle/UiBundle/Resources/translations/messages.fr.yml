@@ -10,6 +10,7 @@ sylius:
         option:
             presentation: Présentation
     ui:
+        add_coupon: Ajouter un coupon
         all: Tous
         actions: Actions
         administration_panel_login: "Connexion à l'espace d'administration"
@@ -25,6 +26,7 @@ sylius:
         confirm_your_action: Confirmez votre action
         contains: Contient
         countries: Pays
+        coupons: Coupons de réduction
         coupon_based: Comprend des coupons
         create: Créer
         currencies: Devises
@@ -52,6 +54,7 @@ sylius:
         ends_with: Se termine par
         equal: Egal
         exclusive: Exclusif
+        expires_at: Expire le
         filter: Filtrer
         in: Dans
         info: Info

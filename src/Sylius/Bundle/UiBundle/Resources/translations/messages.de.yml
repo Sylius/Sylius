@@ -10,6 +10,7 @@ sylius:
         option:
             presentation: Präsentation
     ui:
+        add_coupon: Erstellt
         actions: Aktionen
         administration_panel_login: Administrations-Bereich Anmeldung
         an_error_occurred: Es ist ein Fehler aufgetreten
@@ -20,6 +21,7 @@ sylius:
         confirm_your_action: Aktion bestätigen
         contains: Enthält
         countries: Länder
+        coupons: Gutscheine
         coupon_based: Gutschein basierend
         create: Erstellen
         currencies: Währungen
@@ -37,6 +39,7 @@ sylius:
         ends_with: Endet mit
         equal: Gleich
         exclusive: Exklusiv
+        expires_at: Verfällt am
         filter: Filtern
         in: In
         info: Info

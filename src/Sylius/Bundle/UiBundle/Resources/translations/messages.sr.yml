@@ -8,6 +8,7 @@ sylius:
         option:
             presentation: Приказ
     ui:
+        add_coupon: Додај купон
         cancel: Откажи
         countries: Земље
         create: Креирај

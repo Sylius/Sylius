@@ -10,6 +10,7 @@ sylius:
         option:
             presentation: Nazwa publiczna
     ui:
+        add_coupon: Dodaj kupon promocyjny
         actions: Akcje
         an_error_occurred: Wystąpił błąd
         are_your_sure_you_want_to_perform_this_action: Czy na pewno chcesz wykonać tę akcję?
@@ -22,6 +23,7 @@ sylius:
         confirm_your_action: Potwierdź akcję
         contains: Zawiera
         countries: Kraje
+        coupons: Kupony
         coupon_based: Z wykorzystaniem kuponów
         create: Utwórz
         currencies: Waluty
@@ -47,6 +49,7 @@ sylius:
         empty: Brak
         enabled: Włączone
         exclusive: Ekskluzywny
+        expires_at: Wygasa dnia
         filter: Filtruj
         last_updated: Ostatnia aktualizacja
         locales: Ustawienia regionalne

@@ -10,9 +10,11 @@ sylius:
         option:
             presentation: Bemutató
     ui:
+        add_coupon: Kupon hozzáadása
         actions: Műveletek
         cancel: Mégse
         countries: Országok
+        coupons: Kuponok
         coupon_based: Kupon alapján
         create: Létrehozás
         dashboard: Vezérlőpult

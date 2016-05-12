@@ -10,10 +10,12 @@ sylius:
         option:
             presentation: Sunum
     ui:
+        add_coupon: Kupon Ekle
         actions: Eylemler
         cancel: İptal
         color: Renk
         countries: Ülkeler
+        coupons: Kuponlar
         coupon_based: Kupona dayalı
         create: Oluştur
         currencies: Para birimi
@@ -25,6 +27,7 @@ sylius:
         empty: Boş
         enabled: Etkin
         exclusive: Özel
+        expires_at: Süre sonu: 
         filter: Filtrele
         locales: Diller
         new: Yeni

@@ -10,10 +10,12 @@ sylius:
         option:
             presentation: Prezentacija
     ui:
+        add_coupon: Pridėti kuponą
         actions: Veiksmai
         cancel: Atšaukti
         color: Spalva
         countries: Šalys
+        coupons: Kuponai
         coupon_based: Pagal kuponą
         create: Sukurti
         currencies: Valiutos
@@ -25,6 +27,7 @@ sylius:
         empty: Išvalyti
         enabled: Įjungta
         exclusive: Išskirtinis
+        expires_at: Nustoja galioti
         filter: Filtruoti
         locales: Lokalės
         new: Naujas

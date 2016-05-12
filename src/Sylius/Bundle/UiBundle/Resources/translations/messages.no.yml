@@ -9,9 +9,11 @@ sylius:
         option:
             presentation: Presentasjon
     ui:
+        add_coupon: Legg til rabattkupong
         actions: Handlinger
         cancel: Avbryt
         countries: Land
+        coupons: Kuponger
         coupon_based: Kupongbasert
         create: Opprett
         dashboard: Panel

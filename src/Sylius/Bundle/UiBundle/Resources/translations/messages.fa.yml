@@ -10,6 +10,7 @@ sylius:
         option:
             presentation: عنوان برای مشتری
     ui:
+        add_coupon: ایجاد کد تخفیف
         actions: طریقه اعمال
         administration_panel_login: صفحه ورود به سيستم مديريت
         an_error_occurred: یک خطا روی داده است
@@ -24,6 +25,7 @@ sylius:
         confirm_your_action: عملیات را تایید کنید
         contains: محتویات
         countries: كشور‌ها
+        coupons: کدهای تخفیف
         coupon_based: مبتنی بر کوپن
         create: ایجاد
         currencies: واحدهای پول
@@ -48,6 +50,7 @@ sylius:
         ends_with: به پایان می رسد با
         equal: برابر با
         exclusive: یکبار مصرف
+        expires_at: انقضا در تاریخ
         filter: فیلتر
         in: در
         info: اطلاعات

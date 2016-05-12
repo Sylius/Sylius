@@ -10,6 +10,7 @@ sylius:
         option:
             presentation: Verejný názov
     ui:
+        add_coupon: Pridať kupón
         all: Všetky
         actions: Akcie
         administration_panel_login: Prihásenie do administračného rozhrania
@@ -25,6 +26,7 @@ sylius:
         confirm_your_action: Potvrďte vašu akciu
         contains: Obsahuje
         countries: Krajiny
+        coupons: Kupóny
         coupon_based: Používať kupóny
         create: Vytvoriť
         currencies: Meny
@@ -53,6 +55,7 @@ sylius:
         ends_with: Končí na
         equal: Rovná sa
         exclusive: Exkluzívne
+        expires_at: Platnosť do
         filter: Filter
         in: V
         info: Info

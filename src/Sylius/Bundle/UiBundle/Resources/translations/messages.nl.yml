@@ -10,6 +10,7 @@ sylius:
         option:
             presentation: Weergave
     ui:
+        add_coupon: Nieuwe coupon
         all: Alles
         actions: Acties
         administration_panel_login: Beheer
@@ -25,6 +26,7 @@ sylius:
         confirm_your_action: Bevestigen uw actie
         contains: Bevat
         countries: Landen
+        coupons: Coupons
         coupon_based: Coupon gebaseerd
         create: Creëer
         currencies: "Valuta's"
@@ -53,6 +55,7 @@ sylius:
         ends_with: Eindigt met
         equal: Gelijk
         exclusive: Exclusief
+        expires_at: Verloopt op
         filter: Filter
         in: In
         info: Info

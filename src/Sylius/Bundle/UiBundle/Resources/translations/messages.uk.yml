@@ -9,10 +9,12 @@ sylius:
         option:
             presentation: Презентація
     ui:
+        add_coupon: Додати купон
         actions: Дії
         cancel: Відмінити
         color: Колір
         countries: Країни
+        coupons: Купони
         coupon_based: На основі купону
         create: Створити
         dashboard: Панель керування

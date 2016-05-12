@@ -7,8 +7,10 @@ sylius:
             username: ユーザー名
             password: パスワード
     ui:
+        add_coupon: クーポンを追加
         cancel: キャンセル
         countries: 国の設定
+        coupons: sylius.breadcrumb.promotion_coupon.index
         create: 作成
         dashboard: ダッシュボード
         default_currency: デフォルトの通貨
