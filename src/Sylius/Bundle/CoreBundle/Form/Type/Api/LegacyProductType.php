@@ -11,11 +11,11 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Api;
 
-use Sylius\Bundle\CoreBundle\Form\Type\ProductType as BaseProductType;
+use Sylius\Bundle\CoreBundle\Form\Type\LegacyProductType as BaseProductType;
 use Sylius\Component\Core\Model\Taxon;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class ProductType extends BaseProductType
+class LegacyProductType extends BaseProductType
 {
     /**
      * {@inheritdoc}
@@ -56,6 +56,6 @@ class ProductType extends BaseProductType
      */
     public function getName()
     {
-        return 'sylius_api_product';
+        return 'legacy_sylius_api_product';
     }
 }

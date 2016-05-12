@@ -21,7 +21,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class ProductTypeSpec extends ObjectBehavior
+class LegacyProductTypeSpec extends ObjectBehavior
 {
     function let()
     {
@@ -30,7 +30,7 @@ class ProductTypeSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ProductBundle\Form\Type\ProductType');
+        $this->shouldHaveType('Sylius\Bundle\ProductBundle\Form\Type\LegacyProductType');
     }
 
     function it_is_a_form_type()
@@ -81,6 +81,6 @@ class ProductTypeSpec extends ObjectBehavior
 
     function it_has_valid_name()
     {
-        $this->getName()->shouldReturn('sylius_product');
+        $this->getName()->shouldReturn('legacy_sylius_product');
     }
 }

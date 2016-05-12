@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type;
 
-use Sylius\Bundle\ProductBundle\Form\Type\ProductType as BaseProductType;
+use Sylius\Bundle\ProductBundle\Form\Type\LegacyProductType as BaseProductType;
 use Sylius\Component\Core\Model\Product;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -20,7 +20,7 @@ use Symfony\Component\Form\FormBuilderInterface;
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class ProductType extends BaseProductType
+class LegacyProductType extends BaseProductType
 {
     /**
      * {@inheritdoc}
@@ -42,6 +42,10 @@ class ProductType extends BaseProductType
             ->add('taxons', 'sylius_taxon_choice', [
                 'label' => 'sylius.form.product.taxons',
                 'multiple' => true,
+            ])
+            ->add('variantSelectionMethod', 'choice', [
+                'label' => 'sylius.form.product.variant_selection_method',
+                'choices' => Product::getVariantSelectionMethodLabels(),
             ])
             ->add('channels', 'sylius_channel_choice', [
                 'multiple' => true,
