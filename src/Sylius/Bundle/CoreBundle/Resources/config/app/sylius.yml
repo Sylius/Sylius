@@ -853,6 +853,19 @@ sylius_review:
                 classes:
                     model: %sylius.model.customer.class%
 
+sylius_like:
+    resources:
+        product_review:
+            subject: %sylius.model.product_review.class%
+            like:
+                classes:
+                    model: Sylius\Component\Core\Model\ProductReviewLike
+                    form:
+                        default: Sylius\Bundle\CoreBundle\Form\Type\ProductReviewType
+            liker:
+                classes:
+                    model: %sylius.model.customer.class%
+
 sylius_grid:
     templates:
         action:
