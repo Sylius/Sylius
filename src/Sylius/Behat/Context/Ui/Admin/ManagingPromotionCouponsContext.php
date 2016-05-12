@@ -17,7 +17,7 @@ use Sylius\Behat\Page\Admin\PromotionCoupon\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\PromotionCoupon\GeneratePageInterface;
 use Sylius\Behat\Page\Admin\PromotionCoupon\UpdatePageInterface;
-use Sylius\Behat\Service\CurrentPageResolverInterface;
+use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Core\Model\CouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;

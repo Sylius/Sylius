@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Behat\Service;
+namespace spec\Sylius\Behat\Service\Resolver;
 
 use Behat\Mink\Session;
 use PhpSpec\ObjectBehavior;
 use Sylius\Behat\Page\SymfonyPageInterface;
-use Sylius\Behat\Service\CurrentPageResolver;
-use Sylius\Behat\Service\CurrentPageResolverInterface;
+use Sylius\Behat\Service\Resolver\CurrentPageResolver;
+use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Symfony\Component\Routing\Matcher\UrlMatcherInterface;
 
 /**
@@ -32,7 +32,7 @@ class CurrentPageResolverSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Behat\Service\CurrentPageResolver');
+        $this->shouldHaveType('Sylius\Behat\Service\Resolver\CurrentPageResolver');
     }
 
     function it_implements_current_page_resolver_interface()

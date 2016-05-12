@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Behat\Service;
+namespace Sylius\Behat\Service\Resolver;
 
 use Behat\Mink\Session;
 use Sylius\Behat\Page\SymfonyPageInterface;
@@ -58,6 +58,6 @@ final class CurrentPageResolver implements CurrentPageResolverInterface
             }
         }
 
-        throw new \LogicException('Route name does not have any of "update" or "create" keyword, so matcher was unable to match proper page.');
+        throw new \LogicException('Route name could not be matched to provided pages.');
     }
 }
