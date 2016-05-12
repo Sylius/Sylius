@@ -52,7 +52,7 @@ class VariantToCombinationTransformer implements DataTransformerInterface
             throw new UnexpectedTypeException($value, VariantInterface::class);
         }
 
-        return $value->getOptions();
+        return $value->getOptions()->toArray();
     }
 
     /**
