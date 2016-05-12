@@ -80,7 +80,7 @@ class PromotionRepository extends EntityRepository implements PromotionRepositor
                     $queryBuilder->expr()->gt($this->getPropertyName('endsAt'), ':date')
                 )
             )
-            ->andWhere($this->getPropertyName('enabled') . ' = 1')
+            ->andWhere($this->getPropertyName('enabled') . ' = true')
             ->setParameter('date', $date)
         ;
     }

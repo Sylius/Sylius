@@ -8,6 +8,7 @@ Feature: Coupon generate instruction validation
         Given the store operates on a single channel in "France"
         And there is a promotion "Christmas sale"
         And it is coupon based promotion
+        And it is enabled promotion
         And I am logged in as an administrator
 
     @ui

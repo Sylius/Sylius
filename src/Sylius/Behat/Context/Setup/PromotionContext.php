@@ -429,6 +429,16 @@ final class PromotionContext implements Context
     }
 
     /**
+     * @Given /^(it) is enabled promotion$/
+     */
+    public function itIsEnabledPromotion(PromotionInterface $promotion)
+    {
+        $promotion->setEnabled(true);
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @param array $taxonCodes
      *
      * @return array
