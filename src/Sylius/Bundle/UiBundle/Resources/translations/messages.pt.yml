@@ -8,6 +8,7 @@ sylius:
         option:
             presentation: Apresentação
     ui:
+        add_coupon: Adicionar cupom
         cancel: Cancelar
         countries: Países
         create: Criar

@@ -8,8 +8,10 @@ sylius:
         option:
             presentation: Презентация
     ui:
+        add_coupon: Добавяне на купон
         cancel: Откажи
         countries: Страни
+        coupons: Купони
         create: Създай
         dashboard: Табло
         delete: Изтрий

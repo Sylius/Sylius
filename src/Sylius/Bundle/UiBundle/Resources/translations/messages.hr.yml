@@ -10,9 +10,11 @@ sylius:
         option:
             presentation: Prezentacija
     ui:
+        add_coupon: Dodaj kod za popust
         actions: Akcije
         cancel: Prekini
         countries: Države
+        coupons: Kuponi
         coupon_based: Promocija bazirana na kuponima za popust
         create: Kreiraj
         dashboard: Kontrolna ploča

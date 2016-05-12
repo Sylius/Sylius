@@ -10,6 +10,7 @@ sylius:
         option:
             presentation: 演示
     ui:
+        add_coupon: 添加优惠券
         all: 全部
         actions: 操作
         administration_panel_login: 管理面板登录
@@ -25,6 +26,7 @@ sylius:
         confirm_your_action: 请确认你的行为
         contains: 包含
         countries: 国家
+        coupons: 优惠券
         coupon_based: 基于优惠券
         create: 创建
         currencies: 货币
@@ -53,6 +55,7 @@ sylius:
         ends_with: 结束于
         equal: 等于
         exclusive: 独家
+        expires_at: 截至于
         filter: 筛选器
         in: 在
         info: 信息

@@ -10,6 +10,7 @@ sylius:
         option:
             presentation: Presentazione
     ui:
+        add_coupon: Aggiungi coupon
         all: Tutti
         actions: Azioni
         administration_panel_login: Login del pannello di amministrazione
@@ -25,6 +26,7 @@ sylius:
         confirm_your_action: "Confermare l'azione"
         contains: Contiene
         countries: Paesi
+        coupons: Codici promozionali
         coupon_based: Basata su coupon
         create: Crea
         currencies: Monete
@@ -53,6 +55,7 @@ sylius:
         ends_with: Finisce con
         equal: Uguale
         exclusive: Esclusivo
+        expires_at: Scadenza il
         filter: Filtri
         in: In
         info: Info

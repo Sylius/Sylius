@@ -9,10 +9,12 @@ sylius:
         option:
             presentation: Prezentare
     ui:
+        add_coupon: Adaugă cod promoțional
         actions: Acțiuni
         cancel: Anulează
         color: Culoare
         countries: Țări
+        coupons: Coduri promoționale
         coupon_based: Bazat pe cod promoțional
         create: Creează
         dashboard: Panou de administrare

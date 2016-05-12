@@ -10,6 +10,7 @@ sylius:
         option:
             presentation: Apresentação
     ui:
+        add_coupon: Adicionar cupom
         actions: Ações
         administration_panel_login: Login do painel de administração
         an_error_occurred: Um erro ocorreu
@@ -24,6 +25,7 @@ sylius:
         confirm_your_action: Confirme sua ação
         contains: Contém
         countries: Países
+        coupons: Cupons
         coupon_based: Cupom com base
         create: Criar
         currencies: Moedas

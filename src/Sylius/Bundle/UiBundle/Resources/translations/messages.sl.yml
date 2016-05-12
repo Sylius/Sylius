@@ -10,10 +10,12 @@ sylius:
         option:
             presentation: Predstavitev
     ui:
+        add_coupon: Dodaj kupon
         actions: Dejanja
         cancel: Prekliči
         color: Barva
         countries: Države
+        coupons: Kuponi
         coupon_based: Kupon, ki temelji
         create: Ustvarite
         currencies: Valute
@@ -26,6 +28,7 @@ sylius:
         empty: Prazno
         enabled: Omogočeno
         exclusive: Izključno
+        expires_at: Poteče dne
         filter: Filter
         locales: Področne nastavitve
         new: Novo

@@ -9,9 +9,11 @@ sylius:
         option:
             presentation: Выгляд
     ui:
+        add_coupon: Дадаць купон
         actions: Дзеянні
         cancel: Адмяніць
         countries: Краіны
+        coupons: Купоны
         coupon_based: Заснавана на купонах
         create: Стварыць
         dashboard: Прыборная панэль
