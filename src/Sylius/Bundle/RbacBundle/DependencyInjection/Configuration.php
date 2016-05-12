@@ -12,9 +12,9 @@
 namespace Sylius\Bundle\RbacBundle\DependencyInjection;
 
 use Sylius\Bundle\RbacBundle\Form\Type\PermissionType;
+use Sylius\Bundle\RbacBundle\Form\Type\ResourceChoiceType;
 use Sylius\Bundle\RbacBundle\Form\Type\RoleType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
-use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Rbac\Model\Permission;
 use Sylius\Component\Rbac\Model\PermissionInterface;
