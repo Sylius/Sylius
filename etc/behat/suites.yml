@@ -63,3 +63,4 @@ imports:
     - suites/ui/user/managing_customers.yml
     - suites/ui/user/managing_users.yml
     - suites/ui/user/registering.yml
+    - suites/ui/order/managing_orders.yml

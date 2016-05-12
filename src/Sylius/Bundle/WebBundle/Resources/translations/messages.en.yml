@@ -187,7 +187,6 @@ sylius:
         building_product_from_archetype: 'Building product from archetype'
         calculator: Calculator
         cancel: Cancel
-        cancelled: Cancelled
         cart_locked: 'Cart locked'
         cart_summary: 'Cart summary'
         categorization: Categorization
@@ -282,7 +281,7 @@ sylius:
         customer_not_notified: 'Customer not notified'
         customer_notified: 'Customer notified'
         customer_orders: 'Customer orders'
-        customer_since: 'You are a customer since'
+        customer_since: 'Customer since'
         customers: Customers
         customers_list_of_all_customers_in_store: 'Customers <small>List of all customers in store</small>'
         customize_default_metadata: 'Customize default metadata'
@@ -577,7 +576,6 @@ sylius:
         restricted_zone: 'Restricted zone'
         retail_price: 'Retail price'
         return: Return
-        returned: Returned
         revert: Revert
         review_details: 'Review details'
         reviews: Reviews
@@ -599,7 +597,6 @@ sylius:
         shipment_mode: 'Shipment mode'
         shipment_state: 'Shipment state'
         shipments: Shipments
-        shipped: Shipped
         shipping_address: 'Shipping address'
         shipping_categories: 'Shipping Categories'
         shipping_category: 'Shipping category'

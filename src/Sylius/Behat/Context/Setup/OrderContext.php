@@ -131,11 +131,62 @@ final class OrderContext implements Context
     }
 
     /**
+     * @Given /^the customer ("[^"]+" addressed it to "[^"]+", "[^"]+" "[^"]+" in the "[^"]+")$/
+     */
+    public function theCustomerAddressedItTo(AddressInterface $address)
+    {
+        /** @var OrderInterface $order */
+        $order = $this->sharedStorage->get('order');
+        $order->setShippingAddress($address);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^for the billing address (of "[^"]+" in the "[^"]+", "[^"]+" "[^"]+", "[^"]+")$/
+     */
+    public function forTheBillingAddressOf(AddressInterface $address)
+    {
+        /** @var OrderInterface $order */
+        $order = $this->sharedStorage->get('order');
+
+        $order->setBillingAddress($address);
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @Given /^the customer chose ("[^"]+" shipping method) (to "[^"]+") with ("[^"]+" payment)$/
      */
     public function theCustomerChoseShippingToWithPayment(
         ShippingMethodInterface $shippingMethod,
         AddressInterface $address,
+        PaymentMethodInterface $paymentMethod
+    ) {
+        /** @var OrderInterface $order */
+        $order = $this->sharedStorage->get('order');
+
+        $this->orderShipmentFactory->processOrderShipment($order);
+        $order->getShipments()->first()->setMethod($shippingMethod);
+
+        $payment = $this->paymentFactory->createWithAmountAndCurrency($order->getTotal(), $order->getCurrency());
+        $payment->setMethod($paymentMethod);
+
+        $order->addPayment($payment);
+
+        $order->setShippingAddress($address);
+        $order->setBillingAddress($address);
+
+        $this->orderRecalculator->recalculate($order);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^the customer chose ("[^"]+" shipping method) with ("[^"]+" payment)$/
+     */
+    public function theCustomerChoseShippingWithPayment(
+        ShippingMethodInterface $shippingMethod,
         PaymentMethodInterface $paymentMethod
     ) {
         /** @var OrderInterface $order */
@@ -151,9 +202,6 @@ final class OrderContext implements Context
 
         $order->addPayment($payment);
 
-        $order->setShippingAddress($address);
-        $order->setBillingAddress($address);
-
         $this->objectManager->flush();
     }
 
@@ -162,7 +210,27 @@ final class OrderContext implements Context
      */
     public function theCustomerBoughtSingleProduct(ProductInterface $product)
     {
-        $this->addSingleProductVariantToOrder($product->getMasterVariant(), $product->getPrice());
+        $this->addProductVariantToOrder($product->getMasterVariant(), $product->getPrice(), 1);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^the customer bought ((?:a|an) "[^"]+") and ((?:a|an) "[^"]+")$/
+     */
+    public function theCustomerBoughtProductAndProduct(ProductInterface $product, ProductInterface $secondProduct)
+    {
+        $this->theCustomerBoughtSingleProduct($product);
+        $this->theCustomerBoughtSingleProduct($secondProduct);
+    }
+
+
+    /**
+     * @Given /^the customer bought (\d+) ("[^"]+" products)/
+     */
+    public function theCustomerBoughtSeveralProducts($quantity, ProductInterface $product)
+    {
+        $this->addProductVariantToOrder($product->getMasterVariant(), $product->getPrice(), $quantity);
 
         $this->objectManager->flush();
     }
@@ -172,7 +240,7 @@ final class OrderContext implements Context
      */
     public function theCustomerBoughtSingleProductVariant(ProductVariantInterface $productVariant)
     {
-        $this->addSingleProductVariantToOrder($productVariant, $productVariant->getPrice());
+        $this->addProductVariantToOrder($productVariant, $productVariant->getPrice());
 
         $this->objectManager->flush();
     }
@@ -182,7 +250,7 @@ final class OrderContext implements Context
      */
     public function theCustomerBoughtSingleUsing(ProductInterface $product, CouponInterface $coupon)
     {
-        $order = $this->addSingleProductVariantToOrder($product->getMasterVariant(), $product->getPrice());
+        $order = $this->addProductVariantToOrder($product->getMasterVariant(), $product->getPrice());
         $order->setPromotionCoupon($coupon);
 
         $this->orderRecalculator->recalculate($order);
@@ -208,10 +276,11 @@ final class OrderContext implements Context
     /**
      * @param ProductVariantInterface $productVariant
      * @param int $price
+     * @param int $quantity
      *
      * @return OrderInterface
      */
-    private function addSingleProductVariantToOrder(ProductVariantInterface $productVariant, $price)
+    private function addProductVariantToOrder(ProductVariantInterface $productVariant, $price, $quantity = 1)
     {
         $order = $this->sharedStorage->get('order');
 
@@ -220,7 +289,7 @@ final class OrderContext implements Context
         $item->setVariant($productVariant);
         $item->setUnitPrice($price);
 
-        $this->itemQuantityModifier->modify($item, 1);
+        $this->itemQuantityModifier->modify($item, $quantity);
 
         $order->addItem($item);
 
@@ -249,6 +318,7 @@ final class OrderContext implements Context
         $order->setNumber($number);
         $order->setChannel((null !== $channel) ? $channel : $this->sharedStorage->get('channel'));
         $order->setCurrency((null !== $currency) ? $currency : $this->sharedStorage->get('currency'));
+        $order->complete();
 
         return $order;
     }

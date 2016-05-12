@@ -1,0 +1,21 @@
+sylius_admin_order:
+    resource: |
+        alias: sylius.order
+        section: admin
+        templates: SyliusAdminBundle:Crud
+        except: ['create', 'update', 'show']
+        grid: sylius_admin_order
+        vars:
+          all:
+              subheader: sylius.ui.process_your_orders
+          index:
+              icon: cart
+    type: sylius.resource
+
+sylius_admin_order_show:
+    path: /orders/{id}
+    defaults:
+        _controller: sylius.controller.order:showAction
+        _sylius:
+            section: admin
+            template: SyliusAdminBundle:Order:show.html.twig

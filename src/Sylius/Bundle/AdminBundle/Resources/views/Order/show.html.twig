@@ -1,0 +1,102 @@
+{% extends 'SyliusAdminBundle::layout.html.twig' %}
+
+{% import '@SyliusUi/Macro/labels.html.twig' as label %}
+
+{% block title %}{{ parent() }} {{ 'sylius.ui.order'|trans ~' #'~ order.number }}{% endblock %}
+
+{% set customer = order.customer %}
+
+{% block content %}
+<h1 class="ui header">
+    <i class="circular cart icon"></i>
+    <div class="content">
+        {{ 'sylius.ui.order'|trans }} #{{ order.number }}
+        <div class="sub header">
+            {{ order.completedAt|date }}
+
+            {% set state_text = 'sylius.ui.'~order.state %}
+            {{ label.default(state_text|trans) }}
+
+            {{ 'sylius.ui.purchased_from'|trans }}
+            <strong class="ui {{ order.channel.color|lower }} small header">{{ order.channel.code }}</strong>
+        </div>
+    </div>
+</h1>
+
+<div class="ui grid">
+    <div class="twelve wide column">
+        <div class="ui segment">
+            <div class="ui four column grid">
+                <div class="column" id="shipping-address">
+                    <h3 class="ui header">
+                        {{ 'sylius.ui.shipping_address'|trans }}
+                    </h3>
+                    {% include '@SyliusAdmin/Order/_address.html.twig' with {'address': order.shippingAddress} %}
+                </div>
+                <div class="column" id="billing-address">
+                    <h3 class="ui header">
+                        {{ 'sylius.ui.billing_address'|trans }}
+                    </h3>
+                    {% include '@SyliusAdmin/Order/_address.html.twig' with {'address': order.billingAddress} %}
+                </div>
+                <div class="column" id="payments">
+                    <h3 class="ui header">
+                        {{ 'sylius.ui.payments'|trans }}
+                    </h3>
+                    <div class="ui relaxed divided list">
+                        {% for payment in order.payments %}
+                        <div class="item">
+                            <i class="large money middle aligned icon"></i>
+                            <div class="content">
+                                <a class="header">{{ payment.method }}</a>
+                                <div class="description">{{ label.default(('sylius.ui.'~payment.state)|trans|capitalize) }}</div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="column" id="shipments">
+                    <h3 class="ui header">
+                        {{ 'sylius.ui.shipments'|trans }}
+                    </h3>
+                    <div class="ui relaxed divided list">
+                        {% for shipment in order.shipments %}
+                            <div class="item">
+                                <i class="large truck middle aligned icon"></i>
+                                <div class="content">
+                                    <a class="header">{{ shipment.method }}</a>
+                                    <div class="description">{{ label.default(('sylius.ui.'~shipment.state)|trans|capitalize) }}</div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="four wide column">
+        <div class="ui cards">
+            <div class="card" id="customer">
+                <div class="content">
+                    <img class="right floated mini ui image" src="{{ asset('assets/admin/img/avatar.png') }}">
+                    <a class="header">{{ customer.fullName }}</a>
+                    <div class="meta">
+                        <span class="date">{{ 'sylius.ui.customer_since'|trans }} {{ customer.createdAt|date }}</span>
+                    </div>
+                </div>
+                <div class="extra content">
+                    <a href="mailto: {{ customer.email }}">
+                        <i class="envelope icon"></i>
+                        {{ customer.email }}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="sixteen wide column">
+        {% include '@SyliusAdmin/Order/_items.html.twig' %}
+    </div>
+</div>
+{% endblock %}

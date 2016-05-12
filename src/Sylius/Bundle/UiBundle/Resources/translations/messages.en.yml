@@ -14,9 +14,12 @@ sylius:
         an_error_occurred: An error occurred
         are_your_sure_you_want_to_perform_this_action: Are you sure you want to perform this action?
         available_for_channels: Available for channels
+        backordered: Backordered
         cancel: Cancel
+        cancelled: Cancelled
         category_requirements: Category requirements
         charges_and_taxes: Charges and taxes
+        checkout: Checkout
         clear_filters: Clear filters
         color: Color
         configure_channels_available_in_your_store: Configure channels available in your store
@@ -28,11 +31,13 @@ sylius:
         create: Create
         currencies: Currencies
         dashboard: Dashboard
+        date: Date
         default_currency: Default currency
         default_locale: Default locale
         delete: Delete
         description: Description
         disabled: Disabled
+        discount: Discount
         edit: Edit
         edit_channel: Edit channel
         edit_country: Edit country
@@ -82,22 +87,35 @@ sylius:
         no: No
         no_account: no account
         no_results_to_display: There are no results to display
+        no_taxes: No taxes applied
+        no_promotion: No promotion applied
+        no_shipping_charges: No shipping charges applied
         not_contains: Not contains
         not_empty: Not empty
         not_in: Not in
+        onhold: Onhold
         or: or
+        partially_shipped: Partially shipped
         powered_by: Powered by
+        process_your_orders: Process your orders
         promotion_configuration: Promotion configuration
         promotion_information: Promotion information
         per_customer_usage_limit: Per customer usage limit
+        purchased_from: Purchased from
+        quantity: Qty
+        ready: Ready
+        returned: Returned
         save_changes: Save changes
+        shipped: Shipped
         shipping_methods: Shipping methods
         show: Show
         sign_in: Sign in
         sign_out: Sign out
         starts_with: Starts with
         status: Status
+        subtotal: Subtotal
         success: Success
+        tax: Tax
         tax_categories: Tax categories
         values: Values
         yes: Yes
