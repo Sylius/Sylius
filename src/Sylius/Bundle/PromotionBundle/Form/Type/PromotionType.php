@@ -36,6 +36,9 @@ class PromotionType extends AbstractResourceType
             ->add('exclusive', 'checkbox', [
                 'label' => 'sylius.form.promotion.exclusive',
             ])
+            ->add('enabled', 'checkbox', [
+                'label' => 'sylius.form.promotion.enabled',
+            ])
             ->add('usageLimit', 'integer', [
                 'label' => 'sylius.form.promotion.usage_limit',
                 'required' => false,

@@ -14,13 +14,14 @@ namespace Sylius\Component\Promotion\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\TimestampableTrait;
+use Sylius\Component\Resource\Model\ToggleableTrait;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 class Promotion implements PromotionInterface
 {
-    use TimestampableTrait;
+    use TimestampableTrait, ToggleableTrait;
 
     /**
      * @var mixed

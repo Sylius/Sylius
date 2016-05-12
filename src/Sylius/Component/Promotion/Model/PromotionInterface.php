@@ -15,11 +15,12 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
+use Sylius\Component\Resource\Model\ToggleableInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-interface PromotionInterface extends CodeAwareInterface, TimestampableInterface, ResourceInterface
+interface PromotionInterface extends CodeAwareInterface, TimestampableInterface, ResourceInterface, ToggleableInterface
 {
     /**
      * @return string
