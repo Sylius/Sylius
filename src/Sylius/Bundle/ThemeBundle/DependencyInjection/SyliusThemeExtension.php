@@ -46,7 +46,6 @@ final class SyliusThemeExtension extends Extension implements PrependExtensionIn
         $this->resolveConfigurationSources($container, $config);
 
         $container->setAlias('sylius.context.theme', $config['context']);
-        $container->setAlias('sylius.repository.theme', 'sylius.theme.repository');
     }
 
     /**
