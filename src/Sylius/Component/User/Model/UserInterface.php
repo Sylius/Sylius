@@ -89,12 +89,22 @@ interface UserInterface extends
     /**
      * @return string
      */
-    public function getConfirmationToken();
+    public function getEmailVerificationToken();
 
     /**
-     * @param string $confirmationToken
+     * @param string $verificationToken
      */
-    public function setConfirmationToken($confirmationToken);
+    public function setEmailVerificationToken($verificationToken);
+
+    /**
+     * @return string
+     */
+    public function getPasswordResetToken();
+
+    /**
+     * @param string $passwordResetToken
+     */
+    public function setPasswordResetToken($passwordResetToken);
 
     /**
      * Sets the timestamp that the user requested a password reset.
@@ -111,6 +121,21 @@ interface UserInterface extends
      * @return bool true if the user's password request is non expired, false otherwise
      */
     public function isPasswordRequestNonExpired(\DateInterval $ttl);
+
+    /**
+     * @return bool
+     */
+    public function isVerified();
+
+    /**
+     * @return null|\DateTime
+     */
+    public function getVerifiedAt();
+
+    /**
+     * @param null|\DateTime $verifiedAt
+     */
+    public function setVerifiedAt(\DateTime $verifiedAt);
 
     /**
      * @param \DateTime $date

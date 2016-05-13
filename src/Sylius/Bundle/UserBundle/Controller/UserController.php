@@ -167,7 +167,7 @@ class UserController extends ResourceController
      */
     protected function handleExpiredToken(RequestConfiguration $configuration, $token, UserInterface $user)
     {
-        $user->setConfirmationToken(null);
+        $user->setPasswordResetToken(null);
         $user->setPasswordRequestedAt(null);
 
         $this->manager->flush();
@@ -192,7 +192,7 @@ class UserController extends ResourceController
      */
     protected function handleResetPasswordRequest(TokenProviderInterface $generator, UserInterface $user, $senderEvent)
     {
-        $user->setConfirmationToken($generator->generateUniqueToken());
+        $user->setPasswordResetToken($generator->generateUniqueToken());
         $user->setPasswordRequestedAt(new \DateTime());
 
         /* I have to use doctrine manager directly, because domain manager functions add a flash messages. I can't get rid of them.*/
@@ -215,7 +215,7 @@ class UserController extends ResourceController
     protected function handleResetPassword(Request $request, RequestConfiguration $configuration, UserInterface $user, $newPassword)
     {
         $user->setPlainPassword($newPassword);
-        $user->setConfirmationToken(null);
+        $user->setPasswordResetToken(null);
         $user->setPasswordRequestedAt(null);
 
         $dispatcher = $this->container->get('event_dispatcher');
