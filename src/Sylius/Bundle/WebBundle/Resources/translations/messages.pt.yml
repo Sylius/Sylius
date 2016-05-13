@@ -68,7 +68,6 @@ sylius:
         billing_address: Endereço de faturamento
         calculator: Calculadora
         cancel: Cancelar
-        cancelled: Cancelado
         categorization: Categorização
         category: Categoria
         checkout: Finalizar compra

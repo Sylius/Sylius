@@ -12,12 +12,15 @@ sylius:
         add_coupon: Додати купон
         actions: Дії
         cancel: Відмінити
+        cancelled: Відхилено
+        checkout: Оформити замовлення
         color: Колір
         countries: Країни
         coupons: Купони
         coupon_based: На основі купону
         create: Створити
         dashboard: Панель керування
+        date: Дата
         default_currency: Валюта за замовчуванням
         delete: Видалити
         description: Опис
@@ -29,7 +32,14 @@ sylius:
         new_country: Нова країна
         new_tax_category: Нова категорія оподаткування
         "no": false
+        no_taxes: Податки не застосовані
+        no_promotion: Промо-код не застосовано
+        no_shipping_charges: Націнки за доставку не застосовано
+        quantity: К-сть
+        ready: Готовий
+        returned: Повернуто
         save_changes: Зберегти зміни
+        shipped: Відправлено
         shipping_methods: Методи доставки
         success: Успішно
         "yes": true

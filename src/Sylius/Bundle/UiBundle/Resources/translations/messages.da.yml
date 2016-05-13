@@ -12,6 +12,7 @@ sylius:
         add_coupon: Tilføj kupon
         actions: Handlinger
         cancel: Anuller
+        checkout: Til kassen
         countries: Lande
         coupons: Kuponer
         coupon_based: Kupon baseret
@@ -28,7 +29,14 @@ sylius:
         new_country: Nyt land
         new_tax_category: Ny moms kategori
         "no": false
+        no_taxes: Ingen afgifter tilføjet
+        no_promotion: Ingen kampagnekode
+        no_shipping_charges: Ingen forsendelsesomkostninger
+        quantity: Antal
+        ready: Klar
+        returned: Returneret
         save_changes: Gem ændringer
+        shipped: Afsendt
         shipping_methods: Fragtmetoder
         success: Succes
         "yes": true

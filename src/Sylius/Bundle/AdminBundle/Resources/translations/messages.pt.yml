@@ -13,3 +13,6 @@ sylius:
                     zones: Zonas
                 marketing:
                     promotions: Promoções
+                sales:
+                    header: Vendas
+                    orders: Encomendas

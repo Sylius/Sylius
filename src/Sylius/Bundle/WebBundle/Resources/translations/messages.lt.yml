@@ -133,7 +133,6 @@ sylius:
         building_product_from_archetype: Produkto kūrimas iš archetipo
         calculator: Skaičiuoklė
         cancel: Atšaukti
-        cancelled: Atšaukta
         categorization: Skirstymas į kategorijas
         category: Kategorija
         change_password: Pakeisti savo slaptažodį
@@ -442,7 +441,6 @@ sylius:
         restricted_zone: Apribota zona
         retail_price: Mažmeninė kaina
         return: Grįžti
-        returned: Grąžintas
         revert: Atstatyti
         roles: Rolės
         routes: Maršrutai
@@ -461,7 +459,6 @@ sylius:
         shipment_details: Pristatymo detalės
         shipment_state: Pristatymo būsena
         shipments: Pristatymai
-        shipped: Pristatytas
         shipping_address: Pristatymo adresas
         shipping_categories: Pristatymo kategorijos
         shipping_category: Pristatymo kategorija

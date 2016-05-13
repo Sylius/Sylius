@@ -19,3 +19,5 @@ sylius:
                 customers:
                     header: Khách hàng
                     customers: Khách hàng
+                sales:
+                    orders: Đơn đặt hàng

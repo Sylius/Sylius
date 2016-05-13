@@ -27,3 +27,6 @@ sylius:
                 customers:
                     header: Klant
                     customers: Klanten
+                sales:
+                    header: Omzet
+                    orders: Bestellingen

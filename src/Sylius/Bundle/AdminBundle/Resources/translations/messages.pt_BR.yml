@@ -27,3 +27,6 @@ sylius:
                 customers:
                     header: Cliente
                     customers: Clientes
+                sales:
+                    header: Vendas
+                    orders: Pedidos

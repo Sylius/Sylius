@@ -144,7 +144,6 @@ sylius:
         build: Zbuduj
         calculator: Kalkulator
         cancel: Anuluj
-        cancelled: Anulowane
         categorization: Kategorie
         category: Kategoria
         change_password: Zmiana hasła
@@ -470,7 +469,6 @@ sylius:
         restricted_zone: Strefa zamknięta
         retail_price: Cena detaliczna
         return: Zwrot
-        returned: Zwrócone
         reviews: Opinie
         roles: Role
         routes: Ścieżki
@@ -489,7 +487,6 @@ sylius:
         shipment_details: Szczegóły przesyłki
         shipment_state: Status przesyłki
         shipments: Wysyłka
-        shipped: Dostarczono
         shipping_address: Adres do wysyłki
         shipping_categories: Kategorie wysyłki
         shipping_category: Kategoria wysyłki

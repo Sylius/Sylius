@@ -18,8 +18,10 @@ sylius:
         are_your_sure_you_want_to_perform_this_action: Ste si istý, že chcete vykonať túto akciu?
         available_for_channels: Dostupné pre kanály
         cancel: Zrušiť
+        cancelled: Zrušená
         category_requirements: Požiadavky pre kategóriu
         charges_and_taxes: Poplatky a dane
+        checkout: Košík
         clear_filters: Vymazať filter
         color: Farba
         configure_channels_available_in_your_store: Nastavte dostupné kanály vo vašom obchode
@@ -31,6 +33,7 @@ sylius:
         create: Vytvoriť
         currencies: Meny
         dashboard: Administračný panel
+        date: Dátum
         default_currency: Predvolená mena
         default_locale: Predvolený jazyk
         delete: Odstrániť
@@ -82,6 +85,9 @@ sylius:
         "no": false
         no_account: Žiadny účet
         no_results_to_display: Neexistujú žiadne vysledky na zobrazenie
+        no_taxes: Nie sú uplatnené žiadne dane
+        no_promotion: Nie sú uplatnené žiadne akcie
+        no_shipping_charges: Nie sú uplatnené žiadne poplatky za dopravu
         not_contains: Neobsahuje
         not_empty: Nie je prázdny
         not_in: Nie je v
@@ -89,7 +95,11 @@ sylius:
         powered_by: Vytvorené v systéme
         promotion_configuration: Nastavenie propagácii
         promotion_information: Informacie o propagácii
+        quantity: Množstvo
+        ready: Pripravená
+        returned: Vrátená
         save_changes: Uložiť zmeny
+        shipped: Odoslané
         shipping_methods: Spôsoby doručenia
         show: Zobraziť
         sign_in: Prihlásiť

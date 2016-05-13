@@ -16,3 +16,6 @@ sylius:
                     zones: Зоне
                 marketing:
                     promotions: Промоције
+                sales:
+                    header: Продаје
+                    orders: Наруџбине

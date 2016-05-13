@@ -24,3 +24,6 @@ sylius:
                 customers:
                     header: Ügyfél
                     customers: Ügyfelek
+                sales:
+                    header: Értékesítés
+                    orders: Rendelések

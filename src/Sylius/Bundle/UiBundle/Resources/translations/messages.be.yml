@@ -12,6 +12,8 @@ sylius:
         add_coupon: Дадаць купон
         actions: Дзеянні
         cancel: Адмяніць
+        cancelled: Адменена
+        checkout: Афрмленне замовы
         countries: Краіны
         coupons: Купоны
         coupon_based: Заснавана на купонах
@@ -28,7 +30,14 @@ sylius:
         new_country: Новая краіна
         new_tax_category: Новая катэгорыя падатка
         "no": false
+        no_taxes: Без падаткаў
+        no_promotion: Прамоцыя не дададзеная
+        no_shipping_charges: Без платы за дастаўку
+        quantity: Колькасць
+        ready: Гатова
+        returned: Вернута
         save_changes: Захаваць змены
+        shipped: Дастаўлена
         shipping_methods: Метады дастаўкі
         success: Поспех
         "yes": true

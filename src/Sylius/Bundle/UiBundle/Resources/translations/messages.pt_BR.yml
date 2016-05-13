@@ -17,8 +17,10 @@ sylius:
         are_your_sure_you_want_to_perform_this_action: Tem certeza de que deseja executar esta ação?
         available_for_channels: Disponível para os canais
         cancel: Cancelar
+        cancelled: Cancelado
         category_requirements: Requerimentos da categoria
         charges_and_taxes: Encargos e impostos
+        checkout: Finalizar compra
         clear_filters: Limpar os Filtros
         color: Cor
         configure_channels_available_in_your_store: Configurar os canais disponíveis na sua loja
@@ -30,6 +32,7 @@ sylius:
         create: Criar
         currencies: Moedas
         dashboard: Painel
+        date: Data
         default_currency: Moeda padrão
         default_locale: Localidade padrão
         delete: Excluir
@@ -69,6 +72,9 @@ sylius:
         "no": false
         no_account: Nenhuma conta
         no_results_to_display: Não há nenhum resultado para exibir
+        no_taxes: Nenhuma taxa foi aplicada
+        no_promotion: Sem promoções
+        no_shipping_charges: Nenhuma taxa de entrega foi aplicada
         not_contains: Não contêm
         not_empty: Não vazio
         not_in: Não em
@@ -76,7 +82,11 @@ sylius:
         powered_by: Desenvolvido por
         promotion_configuration: Configuração de promoção
         promotion_information: Informações de promoção
+        quantity: Quantidade
+        ready: Pronto
+        returned: Devolvido
         save_changes: Salvar alterações
+        shipped: Enviado
         shipping_methods: Métodos de envio
         show: Mostrar
         sign_in: Entre

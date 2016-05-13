@@ -85,7 +85,6 @@ sylius:
         build: sylius.breadcrumb.build
         calculator: Kalkulator
         cancel: Prekini
-        cancelled: Otkazano
         categorization: Kategorizacija
         category: Kategorija porezne stope
         change_password: Promijenite lozinku
@@ -299,7 +298,6 @@ sylius:
         restricted_zone: Ograničena zona pristupa
         retail_price: Prodajna cijena
         return: Vraćeno
-        returned: Vraćeno
         roles: Role (korisnička prava)
         routes: Rute
         rules: Pravila
@@ -315,7 +313,6 @@ sylius:
         shipment_details: Detalji pošiljke
         shipment_state: Stanje pošiljke
         shipments: Pošiljke
-        shipped: Poslano
         shipping_address: Adresa za slanje
         shipping_categories: Kategorije pošiljki
         shipping_category: Kategorija pošiljke

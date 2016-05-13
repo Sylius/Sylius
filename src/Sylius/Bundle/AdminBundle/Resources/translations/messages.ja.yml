@@ -15,3 +15,6 @@ sylius:
                     zones: 地域
                 marketing:
                     promotions: プロモーション管理
+                sales:
+                    header: sylius.breadcrumb.sales
+                    orders: 注文管理

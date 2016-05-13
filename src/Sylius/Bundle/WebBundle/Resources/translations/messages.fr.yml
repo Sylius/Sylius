@@ -191,7 +191,6 @@ sylius:
         building_product_from_archetype: Créer un produit depuis un prototype
         calculator: Calculateur
         cancel: Annuler
-        cancelled: Annulé
         cart_locked: Panier verrouillé
         cart_summary: Détail du panier
         categorization: Catégorisation
@@ -286,7 +285,6 @@ sylius:
         customer_not_notified: Client non informé
         customer_notified: Client informé
         customer_orders: Commandes clients
-        customer_since: Vous êtes client depuis
         customers: Clients
         customers_list_of_all_customers_in_store: 'Clients <small>Liste de tous les clients de la boutique</small>'
         customize_default_metadata: Personnaliser les méta-données par défaut
@@ -581,7 +579,6 @@ sylius:
         restricted_zone: Restriction de zone
         retail_price: Prix
         return: Retour
-        returned: Retourné
         revert: Revenir en arrière
         review_details: Détails
         reviews: Avis
@@ -603,7 +600,6 @@ sylius:
         shipment_mode: Mode de livraison
         shipment_state: "Statut d'expédition"
         shipments: Expéditions
-        shipped: Expédié
         shipping_address: Adresse de livraison
         shipping_categories: "Catégories d'expédition"
         shipping_category: Catégorie de livraison

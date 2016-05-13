@@ -134,7 +134,6 @@ sylius:
         build: Sestavit
         calculator: Kalkulačka
         cancel: Zrušit
-        cancelled: Zrušeno
         categorization: Kategorizace
         category: Kategorie
         change_password: Změnit heslo
@@ -450,7 +449,6 @@ sylius:
         restricted_zone: Zóna s omezeným přístupem
         retail_price: Maloobchodní cena
         return: Vrátit
-        returned: Vráceno
         revert: Vrátit
         roles: Role
         routes: Cesty
@@ -469,7 +467,6 @@ sylius:
         shipment_details: Detaily dodávky
         shipment_state: Stav dodávky
         shipments: Zásilky
-        shipped: Dodáno
         shipping_address: Doručovací adresa
         shipping_categories: Přepravní kategorie
         shipping_category: Typ dopravy

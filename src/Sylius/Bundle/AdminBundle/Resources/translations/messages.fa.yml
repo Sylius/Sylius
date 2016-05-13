@@ -27,3 +27,6 @@ sylius:
                 customers:
                     header: مشتری
                     customers: مشتریان
+                sales:
+                    header: میزان فروش ماه جاری
+                    orders: سفارش‌ها

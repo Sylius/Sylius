@@ -18,8 +18,10 @@ sylius:
         are_your_sure_you_want_to_perform_this_action: 是否确实执行此操作？
         available_for_channels: 可用于频道
         cancel: '取消 '
+        cancelled: 已取消.
         category_requirements: 类别要求
         charges_and_taxes: 费和税
+        checkout: 结账
         clear_filters: 清除筛选
         color: 颜色
         configure_channels_available_in_your_store: 配置可用的频道
@@ -31,6 +33,7 @@ sylius:
         create: 创建
         currencies: 货币
         dashboard: 仪表板
+        date: 日期
         default_currency: 默认货币：
         default_locale: 默认区域
         delete: 删除
@@ -82,6 +85,9 @@ sylius:
         "no": false
         no_account: 没有账户
         no_results_to_display: 没有要显示的结果
+        no_taxes: 无税
+        no_promotion: 没有推广应用
+        no_shipping_charges: 无运费
         not_contains: 不包含
         not_empty: 不为空
         not_in: 不在
@@ -89,7 +95,11 @@ sylius:
         powered_by: 基于
         promotion_configuration: 促销配置
         promotion_information: 促销信息
+        quantity: 数量
+        ready: 就绪
+        returned: 已返还
         save_changes: 保存变更
+        shipped: 已发货
         shipping_methods: 发货方式
         show: 显示
         sign_in: 登录

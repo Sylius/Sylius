@@ -134,7 +134,6 @@ sylius:
         building_product_from_archetype: Построить продукт из архетипа
         calculator: Калькулятор
         cancel: Отмена
-        cancelled: Отменён
         categorization: Каталоги
         category: sylius.tax_rate.category
         change_password: Change my password
@@ -420,7 +419,6 @@ sylius:
         restricted_zone: Зона ограничений
         retail_price: Розничная цена
         return: Возврат
-        returned: Возвращено
         roles: Роли
         routes: Маршруты
         rules: Правила
@@ -439,7 +437,6 @@ sylius:
         shipment_mode: Способ доставки
         shipment_state: Статус доставки
         shipments: Посылки
-        shipped: Доставлено
         shipping_address: Адрес доставки
         shipping_categories: Список категорий доставки
         shipping_category: Категория доставки

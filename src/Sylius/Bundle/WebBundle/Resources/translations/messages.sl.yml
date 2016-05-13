@@ -173,7 +173,6 @@ sylius:
         building_product_from_archetype: Gradnja izdelka iz prototipa
         calculator: Kalkulator
         cancel: Prekliči
-        cancelled: Preklicano
         cart_locked: Košarica zaklenjena
         categorization: Kategorizacija
         category: Kategorija
@@ -267,7 +266,6 @@ sylius:
         customer_not_notified: Kupec ni obveščen
         customer_notified: Kupec je obveščen
         customer_orders: Naročila kupca
-        customer_since: Kupec ste od
         customers: Kupci
         customers_list_of_all_customers_in_store: 'Kupci <small>Seznam vseh kupcev v trgovini</small>'
         customize_default_metadata: Prilagodite privzete metapodatke
@@ -549,7 +547,6 @@ sylius:
         restricted_zone: Območje z omejitvami
         retail_price: Maloprodajna cena
         return: Vračilo
-        returned: Vrnjeno
         revert: Povrni
         roles: Vloge
         routes: Poti
@@ -569,7 +566,6 @@ sylius:
         shipment_mode: Način dobave
         shipment_state: Stanje pošiljanja
         shipments: Pošiljke
-        shipped: Poslano
         shipping_address: Naslov za dostavo
         shipping_categories: Kategorije dostave
         shipping_category: Kategorija dostave

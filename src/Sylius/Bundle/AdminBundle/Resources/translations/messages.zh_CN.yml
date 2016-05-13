@@ -27,3 +27,6 @@ sylius:
                 customers:
                     header: 客户
                     customers: 客户
+                sales:
+                    header: 销售额
+                    orders: 订单

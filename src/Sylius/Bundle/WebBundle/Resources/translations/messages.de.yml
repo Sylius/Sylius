@@ -190,7 +190,6 @@ sylius:
         building_product_from_archetype: Produkt aus Vorlage erstellen
         calculator: Steuersatzrechner
         cancel: Abbrechen
-        cancelled: Abgebrochen
         cart_locked: Warenkorb gesperrt
         cart_summary: Warenkorb-Übersicht
         categorization: Produktkategorisierung
@@ -285,7 +284,6 @@ sylius:
         customer_not_notified: Kunde nicht benachrichtigt
         customer_notified: Kunde benachrichtigt
         customer_orders: Kundenbestellungen
-        customer_since: Sie sind Kunde seit
         customers: Kunden
         customers_list_of_all_customers_in_store: 'Kunden<small>Liste aller Kunden</small>'
         customize_default_metadata: Standard-Metadaten anpassen
@@ -579,7 +577,6 @@ sylius:
         restricted_zone: Eingeschränktes Versandgebiet
         retail_price: Listenpreis
         return: Zurückschicken
-        returned: Zurückgesandt
         revert: Wiederherstellen
         review_details: Bewertungsdetails
         reviews: Rezensionen
@@ -601,7 +598,6 @@ sylius:
         shipment_mode: Versandart
         shipment_state: Versandstatus
         shipments: Lieferungen
-        shipped: Versandt
         shipping_address: Lieferadresse
         shipping_categories: Versandgruppen
         shipping_category: Versandkategorie

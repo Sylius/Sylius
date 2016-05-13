@@ -18,8 +18,10 @@ sylius:
         are_your_sure_you_want_to_perform_this_action: Weet u zeker dat u deze actie wilt uitvoeren?
         available_for_channels: Beschikbaar voor kanalen
         cancel: Annuleren
+        cancelled: Geannuleerd
         category_requirements: Categorie vereisten
         charges_and_taxes: Heffingen en belastingen
+        checkout: Afrekenen
         clear_filters: Wis filters
         color: Kleur
         configure_channels_available_in_your_store: Configureer beschikbare kanalen in uw winkel
@@ -31,6 +33,7 @@ sylius:
         create: Creëer
         currencies: "Valuta's"
         dashboard: Dashboard
+        date: Datum
         default_currency: Standaard valuta
         default_locale: Standaardlandinstelling
         delete: Verwijderen
@@ -82,6 +85,9 @@ sylius:
         "no": false
         no_account: geen account
         no_results_to_display: Er zijn geen resultaten om weer te geven
+        no_taxes: Geen belasting toegepast
+        no_promotion: Geen promotie toegepast
+        no_shipping_charges: Geen verzendkosten
         not_contains: Bevat niet
         not_empty: Niet leeg
         not_in: Niet in
@@ -89,7 +95,11 @@ sylius:
         powered_by: Mogelijk gemaakt door
         promotion_configuration: Promotie configuratie
         promotion_information: Promotie informatie
+        quantity: Hoeveelheid
+        ready: Klaar
+        returned: Geretourneerd
         save_changes: Aanpassingen opslaan
+        shipped: Verzonden
         shipping_methods: Verzendmethoden
         show: Toon
         sign_in: Aanmelden

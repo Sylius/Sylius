@@ -323,7 +323,6 @@ sylius:
         restricted_zone: Tiltott zóna
         retail_price: Kiskereskedelmi ár
         return: Vissza
-        returned: Visszaküldött
         reviews: Értékelések
         roles: Szerepek
         routes: Útvonalak
@@ -340,7 +339,6 @@ sylius:
         shipment_details: Szállítás részletei
         shipment_state: Szállítási állapot
         shipments: Szállítások
-        shipped: Kiszállítva
         shipping_address: Szállítási cím
         shipping_categories: Szállítási kategóriák
         shipping_category: Szállítási kategória

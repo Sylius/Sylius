@@ -18,8 +18,10 @@ sylius:
         are_your_sure_you_want_to_perform_this_action: คุณแน่ใจหรือคุณต้องการดำเนินการนี้หรือไม่
         available_for_channels: พร้อมจำหน่ายสำหรับ Channels
         cancel: ยกเลิก
+        cancelled: ถูกยกเลิก
         category_requirements: ข้อกำหนดสำหรับหมวดหมู่
         charges_and_taxes: ค่าธรรมเนียมและภาษี
+        checkout: ชำระเงิน
         clear_filters: ล้างตัวกรอง
         color: สี
         configure_channels_available_in_your_store: กำหนดช่องทางจัดจำหน่าย (Channel)
@@ -31,6 +33,7 @@ sylius:
         create: สร้าง
         currencies: สกุลเงิน
         dashboard: แดชบอร์ด
+        date: วันที่
         default_currency: สกุลเงินหลัก
         default_locale: ตำแหน่งที่ตั้งเริ่มต้น
         delete: ลบ
@@ -82,6 +85,9 @@ sylius:
         "no": false
         no_account: ไม่มีบัญชี
         no_results_to_display: ไม่มีผลลัพธ์จะแสดง
+        no_taxes: ไม่รวมภาษี
+        no_promotion: ไม่รวมโปรโมชั่น
+        no_shipping_charges: ไม่มีค่าธรรมเนียมการจัดส่ง
         not_contains: ไม่ประกอบด้วย
         not_empty: ไม่ว่างเปล่า
         not_in: ไม่ได้อยู่ใน
@@ -91,7 +97,11 @@ sylius:
             โดย
         promotion_configuration: กำหนดค่าโปรโมชั่น
         promotion_information: ข้อมูลโปรโมชั่น
+        quantity: ปริมาณ
+        ready: พร้อมส่ง
+        returned: ถูกส่งคืน
         save_changes: บันทึกการเปลี่ยนแปลง
+        shipped: ส่งของแล้ว
         shipping_methods: วิธีการจัดส่ง
         show: แสดง
         sign_in: ลงชื่อเข้าใช้

@@ -132,14 +132,12 @@ sylius:
         register: Καταχώρηση
         restricted_zone: Απαγορευμένη ζώνη
         retail_price: Τιμή
-        returned: Επεστράφησαν
         roles: Ρόλοι
         rules: Κανόνες
         save: Αποθήκευση
         save_changes: Αποθήκευση αλλαγών
         search: Αναζήτηση
         shipments: Αποστολές
-        shipped: Αποστάλθηκαν
         shipping_address: Διεύθυνση αποστολής
         shipping_category: Κατηγορία αποστολής
         shipping_charges: Έξοδα αποστολής

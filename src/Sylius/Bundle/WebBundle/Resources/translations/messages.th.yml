@@ -190,7 +190,6 @@ sylius:
         building_product_from_archetype: สร้างสินค้าจากต้นแบบ
         calculator: การคำนวณ
         cancel: ยกเลิก
-        cancelled: ถูกยกเลิก
         cart_locked: รถเข็นถูกล็อกไว้
         cart_summary: ตะกร้าสินค้า
         categorization: การจัดประเภท
@@ -285,7 +284,6 @@ sylius:
         customer_not_notified: ลูกค้าที่ไม่ได้รับแจ้ง
         customer_notified: ลูกค้าที่แจ้ง
         customer_orders: ใบสั่งของลูกค้า
-        customer_since: คุณเป็นลูกค้าตั้งแต่
         customers: ลูกค้า
         customers_list_of_all_customers_in_store: 'ลูกค้า<small>รายการของลูกค้าทั้งหมดในร้าน</small>'
         customize_default_metadata: กำหนดค่า Default metadata
@@ -580,7 +578,6 @@ sylius:
         restricted_zone: จำกัดโซน
         retail_price: ราคาขายปลีก
         return: ตีกลับ
-        returned: ตีกลับ
         revert: กลับค่าเดิม
         review_details: รายละเอียดของรายงาน
         reviews: รีวิว
@@ -602,7 +599,6 @@ sylius:
         shipment_mode: โหมดการจัดส่ง
         shipment_state: สถานะการจัดส่ง
         shipments: การจัดส่งสินค้า
-        shipped: ส่งของแล้ว
         shipping_address: ที่อยู่สำหรับจัดส่งสินค้า
         shipping_categories: ประเภทการจัดส่ง
         shipping_category: ประเภทการจัดส่ง

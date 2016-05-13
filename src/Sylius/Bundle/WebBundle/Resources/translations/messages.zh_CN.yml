@@ -190,7 +190,6 @@ sylius:
         building_product_from_archetype: 从原型创建产品
         calculator: 计算器
         cancel: '取消 '
-        cancelled: 已取消
         cart_locked: 购物车已锁定
         cart_summary: 购物车清单
         categorization: 分类
@@ -285,7 +284,6 @@ sylius:
         customer_not_notified: 未通知的客户
         customer_notified: 已通知的客户
         customer_orders: 客户订单
-        customer_since: 您是客户自从
         customers: 客户
         customers_list_of_all_customers_in_store: '客户 <small>显示一个店铺的全部客户</small>'
         customize_default_metadata: 自定义默认元数据
@@ -580,7 +578,6 @@ sylius:
         restricted_zone: 限制的区
         retail_price: 零售价格
         return: 返回
-        returned: 已返还
         revert: 还原
         review_details: 评论详情
         reviews: 评论
@@ -602,7 +599,6 @@ sylius:
         shipment_mode: 配送方法
         shipment_state: 配送状态
         shipments: 发货
-        shipped: 已发货
         shipping_address: 送货地址
         shipping_categories: 发货类别
         shipping_category: 送货类别
