@@ -35,7 +35,6 @@ class LocaleMenuBuilder extends MenuBuilder
     /**
      * @param FactoryInterface $factory
      * @param AuthorizationCheckerInterface $authorizationChecker
-     * @param TranslatorInterface $translator
      * @param EventDispatcherInterface $eventDispatcher
      * @param LocaleProviderInterface $localeProvider
      * @param RbacAuthorizationCheckerInterface $rbacAuthorizationChecker
@@ -43,12 +42,11 @@ class LocaleMenuBuilder extends MenuBuilder
     public function __construct(
         FactoryInterface $factory,
         AuthorizationCheckerInterface $authorizationChecker,
-        TranslatorInterface $translator,
         EventDispatcherInterface $eventDispatcher,
         LocaleProviderInterface $localeProvider,
         RbacAuthorizationCheckerInterface $rbacAuthorizationChecker
     ) {
-        parent::__construct($factory, $authorizationChecker, $translator, $eventDispatcher, $rbacAuthorizationChecker);
+        parent::__construct($factory, $authorizationChecker, $eventDispatcher, $rbacAuthorizationChecker);
 
         $this->localeProvider = $localeProvider;
     }
@@ -77,7 +75,10 @@ class LocaleMenuBuilder extends MenuBuilder
             $menu->addChild($locale, [
                 'route' => 'sylius_locale_change',
                 'routeParameters' => ['locale' => $locale],
-            ])->setLabel(Intl::getLocaleBundle()->getLocaleName($locale));
+            ])
+                ->setLabel(Intl::getLocaleBundle()->getLocaleName($locale))
+                ->setExtra('translation_domain', false)
+            ;
         }
 
         return $menu;

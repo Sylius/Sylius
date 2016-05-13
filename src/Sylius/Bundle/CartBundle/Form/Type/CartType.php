@@ -31,7 +31,9 @@ class CartType extends AbstractResourceType
             ->add('items', 'collection', [
                 'type' => 'sylius_cart_item',
             ])
-            ->add('additionalInformation')
+            ->add('additionalInformation', 'textarea', [
+                'label' => 'sylius.form.cart.additional_information'
+            ])
         ;
     }
 

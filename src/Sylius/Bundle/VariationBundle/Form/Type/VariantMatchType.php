@@ -46,6 +46,7 @@ class VariantMatchType extends AbstractType
                 'label' => $option->getName(),
                 'option' => $option,
                 'property_path' => '['.$i.']',
+                'translation_domain' => false,
             ]);
         }
 

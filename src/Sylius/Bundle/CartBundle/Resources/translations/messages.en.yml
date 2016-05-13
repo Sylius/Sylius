@@ -1,5 +1,7 @@
 sylius:
     form:
+        cart:
+            additional_information: Additional Information
         cart_item:
             quantity: Quantity
             

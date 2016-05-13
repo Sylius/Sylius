@@ -40,13 +40,6 @@ abstract class MenuBuilder
     protected $authorizationChecker;
 
     /**
-     * Translator instance.
-     *
-     * @var TranslatorInterface
-     */
-    protected $translator;
-
-    /**
      * Request.
      *
      * @var Request
@@ -68,20 +61,17 @@ abstract class MenuBuilder
      *
      * @param FactoryInterface $factory
      * @param AuthorizationCheckerInterface $authorizationChecker
-     * @param TranslatorInterface $translator
      * @param EventDispatcherInterface $eventDispatcher
      * @param RbacAuthorizationCheckerInterface $rbacAuthorizationChecker
      */
     public function __construct(
         FactoryInterface $factory,
         AuthorizationCheckerInterface $authorizationChecker,
-        TranslatorInterface $translator,
         EventDispatcherInterface $eventDispatcher,
         RbacAuthorizationCheckerInterface $rbacAuthorizationChecker
     ) {
         $this->factory = $factory;
         $this->authorizationChecker = $authorizationChecker;
-        $this->translator = $translator;
         $this->eventDispatcher = $eventDispatcher;
         $this->rbacAuthorizationChecker = $rbacAuthorizationChecker;
     }
@@ -94,18 +84,5 @@ abstract class MenuBuilder
     public function setRequest(Request $request = null)
     {
         $this->request = $request;
-    }
-
-    /**
-     * Translate label.
-     *
-     * @param string $label
-     * @param array  $parameters
-     *
-     * @return string
-     */
-    protected function translate($label, $parameters = [])
-    {
-        return $this->translator->trans(/* @Ignore */ $label, $parameters, 'menu');
     }
 }

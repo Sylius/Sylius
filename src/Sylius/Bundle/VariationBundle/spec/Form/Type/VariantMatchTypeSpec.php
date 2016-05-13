@@ -47,6 +47,7 @@ class VariantMatchTypeSpec extends ObjectBehavior
             'label' => 'option_name',
             'option' => $option,
             'property_path' => '[0]',
+            'translation_domain' => false,
         ])->shouldBeCalled();
 
         $builder->addModelTransformer(
