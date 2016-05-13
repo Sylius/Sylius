@@ -57,6 +57,8 @@ sylius:
         edit_product_attribute: Edit product attribute
         edit_product_option: Edit product option
         edit_promotion: Edit promotion
+        edit_promotion_coupon: Edit promotion coupon
+        edit_coupon: Edit coupon
         edit_shipping_method: Edit shipping method
         edit_tax_category: Edit tax category
         edit_tax_rate: Edit tax rate
@@ -67,6 +69,7 @@ sylius:
         ends_with: Ends with
         equal: Equal
         exclusive: Exclusive
+        expiration_and_usage_limits: Expiration and usage limits
         expires_at: Expires at
         extra_information: Extra information
         faqs: FAQs
@@ -77,6 +80,7 @@ sylius:
         item: Item
         jump_to_page: Jump to page
         last_updated: Last updated
+        list_coupons: List coupons
         locales: Locales
         manage_attributes_of_your_products: Manage attributes of your products
         manage_categorization_of_your_products: Manage categorization of your products
@@ -98,6 +102,8 @@ sylius:
         new_coupon: New coupon
         new_currency: New currency
         new_locale: New locale
+        new_coupon: New coupon
+        new_promotion_coupon: New promotion coupon
         new_tax_category: New tax category
         new_orders: New orders
         new_customers: New customers

@@ -12,7 +12,7 @@
 {% block content %}
 {{ headers.default(header|trans, configuration.vars.icon|default('pencil'), configuration.vars.subheader|default(null)|trans) }}
 
-    {% include configuration.vars.templates.breadCrumb|default('SyliusAdminBundle:Crud/BreadCrumb:updateBreadCrumb.html.twig') %}
+{% include configuration.vars.templates.breadcrumb|default('SyliusAdminBundle:Crud/Breadcrumb:_update.html.twig') %}
 
 {{ form_start(form, {'action': path(configuration.getRouteName('update'), configuration.vars.route.parameters|default({ 'id': resource.id })), 'attr': {'class': 'ui form', 'novalidate': 'novalidate'}}) }}
     <div class="ui segment">

@@ -29,9 +29,9 @@ final class MainMenuBuilder extends AbstractAdminMenuBuilder
         $menu = $this->factory->createItem('root');
 
         $this->configureCatalogSubMenu($menu);
+        $this->configureSalesMenu($menu);
         $this->configureCustomersSubMenu($menu);
         $this->configureMarketingSubMenu($menu);
-        $this->configureSalesMenu($menu);
         $this->configureConfigurationSubMenu($menu);
 
         $this->eventDispatcher->dispatch(self::EVENT_NAME, new MenuBuilderEvent($this->factory, $menu));

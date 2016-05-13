@@ -2,32 +2,28 @@
 
 {% import 'SyliusUiBundle:Macro:headers.html.twig' as headers %}
 
-{% set header = configuration.vars.header|default(metadata.applicationName~'.ui.generate') %}
+{% set header = 'sylius.ui.generate_coupons' %}
 
 {% block title %}{{ parent() }} {{ header|trans }}{% endblock %}
 
 {% form_theme form 'SyliusUiBundle:Form:theme.html.twig' %}
 
 {% block content %}
-    {{ headers.default(header|trans, configuration.vars.icon|default('random'), configuration.vars.subheader|default(null)|trans) }}
+{{ headers.default(header|trans, 'random', 'sylius.ui.manage_discounts_and_promotional_campaigns'|trans) }}
 
-    {% include configuration.vars.templates.breadCrumb|default('SyliusAdminBundle:Crud/BreadCrumb:generateBreadCrumb.html.twig') %}
+{% include 'SyliusAdminBundle:PromotionCoupon/Breadcrumb:_generate.html.twig' %}
 
-    {{ form_start(form, {'action': path('sylius_admin_promotion_coupon_generate', configuration.vars.route.parameters|default({})), 'attr': {'class': 'ui form', 'novalidate': 'novalidate'}}) }}
-    <div class="ui segment">
-        {% if configuration.vars.templates.form is defined %}
-            {% include configuration.vars.templates.form %}
-        {% else %}
-            {{ form_widget(form) }}
-        {% endif %}
-        <div class="ui basic segment">
-            <div class="ui buttons">
-                <button class="ui labeled icon primary button" type="submit"><i class="random icon"></i>{{- 'sylius.ui.generate'|trans -}}</button>
-                <div class="or" data-text="{{ 'sylius.ui.or'|trans }}"></div>
-                {% include '@SyliusUi/Form/_cancelButton.twig' with {'path': path(configuration.getRouteName('index'), configuration.vars.route.parameters|default({}))} %}
-            </div>
+{{ form_start(form, {'action': path('sylius_admin_promotion_coupon_generate', {'promotionId': promotion.id}), 'attr': {'class': 'ui form', 'novalidate': 'novalidate'}}) }}
+<div class="ui segment">
+    {% include '@SyliusAdmin/PromotionCoupon/_generateForm.html.twig' %}
+    <div class="ui basic segment">
+        <div class="ui buttons">
+            <button class="ui labeled icon primary button" type="submit"><i class="random icon"></i>{{- 'sylius.ui.generate'|trans -}}</button>
+            <div class="or" data-text="{{ 'sylius.ui.or'|trans }}"></div>
+            {% include '@SyliusUi/Form/_cancelButton.twig' with {'path': path(configuration.getRouteName('index'), {'promotionId': promotion.id})} %}
         </div>
     </div>
-    {{ form_row(form._token) }}
-    {{ form_end(form, {'render_rest': false}) }}
+</div>
+{{ form_row(form._token) }}
+{{ form_end(form, {'render_rest': false}) }}
 {% endblock %}

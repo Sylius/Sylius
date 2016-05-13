@@ -1,0 +1,14 @@
+<div class="ui fluid card" id="customer">
+    <div class="content">
+        <a href="{{ path('sylius_admin_customer_update', {'id': customer.id}) }}" class="header">{{ customer.fullName }}</a>
+        <div class="meta">
+            <span class="date">{{ 'sylius.ui.customer_since'|trans }} {{ customer.createdAt|date }}.</span>
+        </div>
+    </div>
+    <div class="extra content">
+        <a href="mailto: {{ customer.email }}">
+            <i class="envelope icon"></i>
+            {{ customer.email }}
+        </a>
+    </div>
+</div>

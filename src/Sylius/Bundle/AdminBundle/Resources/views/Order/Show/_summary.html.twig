@@ -1,0 +1,21 @@
+<table class="ui celled compact table">
+    <thead>
+    <tr>
+        <th>{{ 'sylius.ui.order_item_product'|trans }}</th>
+        <th class="one wide">{{ 'sylius.ui.quantity'|trans }}</th>
+        <th class="two wide">{{ 'sylius.ui.unit_price'|trans }}</th>
+        <th class="two wide">{{ 'sylius.ui.subtotal'|trans }}</th>
+        <th class="one wide">{{ 'sylius.ui.tax'|trans }}</th>
+        <th class="one wide">{{ 'sylius.ui.discount'|trans }}</th>
+        <th class="two wide">{{ 'sylius.ui.total'|trans }}</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in order.items %}
+        {% include '@SyliusAdmin/Order/Show/Summary/_item.html.twig' %}
+    {% endfor %}
+    </tbody>
+    <tfoot>
+    {% include '@SyliusAdmin/Order/Show/Summary/_totals.html.twig' %}
+    </tfoot>
+</table>

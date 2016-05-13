@@ -1,0 +1,14 @@
+<div class="item">
+    <div class="right floated content">
+        {{ label.default(('sylius.ui.'~payment.state)|trans) }}
+    </div>
+    <i class="large payment icon"></i>
+    <div class="content">
+        <div class="header">
+            {{ payment.method }}
+        </div>
+        <div class="description">
+            {{ payment.amount|sylius_money(payment.currency) }}
+        </div>
+    </div>
+</div>
