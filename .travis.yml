@@ -46,7 +46,6 @@ cache:
         - vendor
         - bin
         - node_modules
-        - docs/build
         - $SYLIUS_CACHE_DIR
 
 before_install:
