@@ -26,7 +26,7 @@
                     <td>{{ channel.hostname }}</td>
                     <td>{% if channel.defaultLocale is not null %}{{ channel.defaultLocale.code }}{% endif %}</td>
                     <td>{% if channel.defaultCurrency is not null %}{{ channel.defaultCurrency.code }}{% endif %}</td>
-                    <td>{{ channel.theme.title|default('') }}</td>
+                    <td>{{ channel.themeName }}</td>
                     <td>{{ misc.state_label(channel.enabled) }}</td>
                     <td>{{ channel.updatedAt|date }}</td>
                     <td>
