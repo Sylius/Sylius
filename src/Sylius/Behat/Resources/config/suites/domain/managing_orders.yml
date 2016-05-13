@@ -20,6 +20,9 @@ default:
                 - sylius.behat.context.setup.shipping
                 - sylius.behat.context.setup.order
 
+                - sylius.behat.context.domain.notification
+                - sylius.behat.context.domain.security
+
                 - sylius.behat.context.domain.order
                 - sylius.behat.context.domain.payment
                 - sylius.behat.context.domain.shipment
