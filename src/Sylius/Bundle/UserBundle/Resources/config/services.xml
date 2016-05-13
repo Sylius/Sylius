@@ -51,6 +51,7 @@
         <parameter key="sylius.listener.user_auto_login.class">Sylius\Bundle\UserBundle\EventListener\UserAutoLoginListener</parameter>
         <parameter key="sylius.listener.user_reloader.class">Sylius\Bundle\UserBundle\EventListener\UserReloaderListener</parameter>
         <parameter key="sylius.listener.user_mailer_listener.class">Sylius\Bundle\UserBundle\EventListener\MailerListener</parameter>
+        <parameter key="sylius.listener.user_registration.class">Sylius\Bundle\UserBundle\EventListener\UserRegistrationListener</parameter>
 
         <parameter key="sylius.form.event_subscriber.add_user_type.class">Sylius\Bundle\UserBundle\Form\EventSubscriber\AddUserFormSubscriber</parameter>
         <parameter key="sylius.form.event_subscriber.set_customer_type.class">Sylius\Bundle\UserBundle\Form\EventSubscriber\SetCustomerFormSubscriber</parameter>
@@ -147,11 +148,18 @@
             <argument type="service" id="sylius.email_sender" />
             <tag name="kernel.event_listener" event="sylius.user.password_reset.request.pin" method="sendResetPasswordPinEmail" />
             <tag name="kernel.event_listener" event="sylius.user.password_reset.request.token" method="sendResetPasswordTokenEmail" />
+            <tag name="kernel.event_listener" event="sylius.user.email_verification.token" method="sendValidationTokenEmail" />
         </service>
         <service id="sylius.listener.user_delete" class="%sylius.listener.user_delete.class%">
             <argument type="service" id="security.token_storage" />
             <argument type="service" id="session" />
             <tag name="kernel.event_listener" event="sylius.user.pre_delete" method="deleteUser" />
+        </service>
+        <service id="sylius.listener.user_registration" class="%sylius.listener.user_registration.class%">
+            <argument type="service" id="sylius.manager.user" />
+            <argument type="service" id="sylius.user.token_provider" />
+            <argument type="service" id="event_dispatcher" />
+            <tag name="kernel.event_listener" event="sylius.customer.post_register" method="sendVerificationEmail" />
         </service>
 
         <!-- User Providers -->

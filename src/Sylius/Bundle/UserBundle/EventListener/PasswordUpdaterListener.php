@@ -50,20 +50,6 @@ class PasswordUpdaterListener
     }
 
     /**
-     * @param LifecycleEventArgs $event
-     */
-    protected function updatePassword(LifecycleEventArgs $event)
-    {
-        $item = $event->getEntity();
-
-        if (!$item instanceof UserInterface) {
-            return;
-        }
-
-        $this->updateUserPassword($item);
-    }
-
-    /**
      * @param GenericEvent $event
      */
     public function genericEventUpdater(GenericEvent $event)
@@ -113,5 +99,19 @@ class PasswordUpdaterListener
     public function preUpdate(LifecycleEventArgs $event)
     {
         $this->updatePassword($event);
+    }
+
+    /**
+     * @param LifecycleEventArgs $event
+     */
+    protected function updatePassword(LifecycleEventArgs $event)
+    {
+        $item = $event->getEntity();
+
+        if (!$item instanceof UserInterface) {
+            return;
+        }
+
+        $this->updateUserPassword($item);
     }
 }

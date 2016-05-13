@@ -16,7 +16,10 @@ Feature: Verifying account's email address
 
     @todo
     Scenario: Getting verified after clicking the link in the verification message
-        Given I am not a verified user "bob@example.com" identified by "drowssap"
+        Given I am not logged in
+        And I am not a verified user "bob@example.com"
+        When I use the verification email to verify
+        Then I should be logged in
         And I should be notified that the verification was successful
 
     @todo

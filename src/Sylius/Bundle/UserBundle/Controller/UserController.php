@@ -105,6 +105,97 @@ class UserController extends ResourceController
         );
     }
 
+    /**
+     * @param Request $request
+     * @param string $email
+     * @param string $token
+     *
+     * @return Response
+     */
+    public function verifyAction(Request $request, $email, $token)
+    {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+        $redirectRoute = $request->attributes->get('_sylius[redirect]', 'sylius_shop_account_dashboard', true);
+        $response = $this->redirectToRoute($redirectRoute);
+
+        /** @var UserInterface $user */
+        $user = $this->repository->findOneByToken($token);
+        if (null === $user) {
+            if (!$configuration->isHtmlRequest()) {
+                return $this->viewHandler->handle($configuration, View::create($configuration, 400));
+            }
+
+            $this->addFlash('error', 'sylius.user.verification.error');
+
+            return $this->redirectToRoute('sylius_shop_homepage');
+        }
+        if ($user !== $this->container->get('sylius.context.customer')->getCustomer()->getUser()) {
+            $securityToken = $this->container->get('security.token_storage')->getToken();
+            $this->container->get('security.logout.handler.session')->logout($request, $response, $securityToken);
+            $response->headers->remove('APP_REMEMBER_ME');
+
+            $this->container->get('sylius.security.user_login')->login($user);
+        }
+
+        $view = View::create($user);
+
+        $user->setVerifiedAt(new \DateTime());
+        $user->setEmailVerificationToken(null);
+
+        $this->manager->persist($user);
+        $this->manager->flush();
+
+        if (!$configuration->isHtmlRequest()) {
+            return $this->viewHandler->handle($configuration, $view);
+        }
+
+        $flashMessage = $request->attributes->get('_sylius[flash]', 'sylius.user.verification.success');
+        $this->addFlash('success', $flashMessage);
+
+        return $response;
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function requestVerificationTokenAction(Request $request)
+    {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+        $redirectRoute = $request->attributes->get('_sylius[redirect]', 'sylius_shop_account_dashboard', true);
+
+        /** @var UserInterface $user */
+        $user = $this->container->get('sylius.context.customer')->getCustomer()->getUser();
+        if (null === $user->getVerifiedAt()) {
+            if (!$configuration->isHtmlRequest()) {
+                return $this->viewHandler->handle($configuration, View::create(null, 204));
+            }
+
+            $tokenGenerator = $this->container->get('sylius.user.token_provider');
+
+            $user->setEmailVerificationToken($tokenGenerator->generateUniqueToken());
+
+            $this->manager->persist($user);
+            $this->manager->flush();
+
+            $dispatcher = $this->container->get('event_dispatcher');
+            $dispatcher->dispatch(UserEvents::REQUEST_VERIFICATION_TOKEN, new GenericEvent($user));
+
+            $this->addFlash('success', 'sylius.user.verification.request.success');
+
+            return $this->redirectToRoute($redirectRoute);
+        }
+
+        if (!$configuration->isHtmlRequest()) {
+            return $this->viewHandler->handle($configuration, View::create($configuration, 418));
+        }
+
+        $this->addFlash('notice', 'sylius.user.verification.notice');
+
+        return $this->redirectToRoute($redirectRoute);
+    }
+
     protected function prepareResetPasswordRequest(Request $request, TokenProviderInterface $generator, $senderEvent)
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
@@ -273,7 +364,7 @@ class UserController extends ResourceController
      */
     protected function findUserByToken($token)
     {
-        $user = $this->repository->findOneBy(['confirmationToken' => $token]);
+        $user = $this->repository->findOneByToken($token);
         if (null === $user) {
             throw new NotFoundHttpException('This token does not exist');
         }

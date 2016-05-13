@@ -12,20 +12,22 @@
 namespace spec\Sylius\Component\User\Security;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Query\FilterCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Model\UserInterface;
+use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Sylius\Component\User\Security\Generator\GeneratorInterface;
+use Sylius\Component\User\Security\TokenProvider;
 use Sylius\Component\User\Security\TokenProviderInterface;
 
 /**
+ * @mixin TokenProvider
+ *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class TokenProviderSpec extends ObjectBehavior
 {
-    public function let(RepositoryInterface $repository, EntityManagerInterface $manager, GeneratorInterface $generator)
+    public function let(UserRepositoryInterface $repository, EntityManagerInterface $manager, GeneratorInterface $generator)
     {
         $this->beConstructedWith($repository, $manager, $generator, 12);
     }
@@ -42,7 +44,7 @@ class TokenProviderSpec extends ObjectBehavior
 
     public function it_generates_random_token($repository, $generator)
     {
-        $repository->findOneBy(Argument::any())->willReturn(null);
+        $repository->findOneByToken(Argument::any())->willReturn(null);
 
         $generator->generate(12)->shouldBeCalled()->willReturn('tesToken1234');
 
@@ -51,8 +53,8 @@ class TokenProviderSpec extends ObjectBehavior
 
     public function it_generates_unique_random_token($repository, $generator, UserInterface $user)
     {
-        $repository->findOneBy(['confirmationToken' => 'tesToken1234'])->willReturn($user);
-        $repository->findOneBy(['confirmationToken' => 'tesToken1235'])->willReturn(null);
+        $repository->findOneByToken('tesToken1234')->willReturn($user);
+        $repository->findOneByToken('tesToken1235')->willReturn(null);
 
         $generator->generate(12)->shouldBeCalled()->willReturn('tesToken1234', 'tesToken1235');
 

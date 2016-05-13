@@ -18,4 +18,5 @@ class Emails
 {
     const RESET_PASSWORD_TOKEN = 'reset_password_token';
     const RESET_PASSWORD_PIN = 'reset_password_pin';
+    const EMAIL_VERIFICATION_TOKEN = 'verification_token';
 }

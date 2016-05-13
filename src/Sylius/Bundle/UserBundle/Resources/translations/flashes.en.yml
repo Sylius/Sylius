@@ -12,3 +12,9 @@ sylius:
                 success: Your password has been changed successfully!
         reset_password:
             requested: If the email you have specified exists in our system, we have sent there an instruction on how to reset your password.
+        verification:
+            request:
+                success: An email with the verification link has been sent to your email address.
+            error: The verification token is invalid.
+            success: Your email has been successfully verified.
+            notice: Your email is already verified.

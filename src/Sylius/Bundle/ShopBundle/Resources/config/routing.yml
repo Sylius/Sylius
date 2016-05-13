@@ -45,6 +45,10 @@ sylius_shop_partial_provinces:
         _sylius:
             template: SyliusShopBundle:Checkout:_provinces.html.twig
 
+sylius_shop_verification:
+    prefix: /verify
+    resource: "@SyliusUserBundle/Resources/config/routing/verification.yml"
+
 # Have to be the last one!
 sylius_shop_static_content:
     resource: "@SyliusShopBundle/Resources/config/routing/static_content.yml"

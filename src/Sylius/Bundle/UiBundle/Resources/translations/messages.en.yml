@@ -497,6 +497,7 @@ sylius:
         not_contains: Not contains
         not_empty: Not empty
         not_in: Not in
+        not_verified: Not verified
         notify_customer: 'Notify Customer'
         number: Number
         number_of_orders: 'Number of orders'
@@ -581,6 +582,7 @@ sylius:
         province: Province
         provinces: Provinces
         purchased_from: Purchased from
+        personal_information: Personal information
         qty: Qty
         qty_max: 'Qty max'
         qty_min: 'Qty min'
@@ -775,6 +777,8 @@ sylius:
         variant: Variant
         variant_selection_method: 'Variant selection method'
         variants: Variants
+        verified: Verified
+        verify: Verify
         view: View
         view_and_edit_cart: View and edit cart
         view_more: 'View more'

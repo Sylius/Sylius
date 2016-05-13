@@ -73,6 +73,6 @@ class TokenProvider implements TokenProviderInterface
      */
     protected function isUsedCode($token)
     {
-        return null !== $this->repository->findOneBy(['confirmationToken' => $token]);
+        return null !== $this->repository->findOneByToken($token);
     }
 }

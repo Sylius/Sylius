@@ -11,3 +11,7 @@ sylius_password_resetting:
 sylius_account:
     resource: @SyliusUserBundle/Resources/config/routing/account.yml
     prefix: /account
+
+sylius_verification:
+    resource: @SyliusUserBundle/Resources/config/routing/verification.yml
+    prefix: /verify
