@@ -53,7 +53,7 @@ that needs to be done. This service handles this task, adding and removing prope
    <?php
 
    $orderItemFactory = $this->get('sylius.factory.order_item');
-   $orderItemQuantityModifier = $this->get('sylius.modifier.order_item_quantity');
+   $orderItemQuantityModifier = $this->get('sylius.order_item_quantity_modifier');
 
    $orderItem = $orderItemFactory->createNew();
    $orderItem->getQuantity(); // default quantity of order item is "0"
