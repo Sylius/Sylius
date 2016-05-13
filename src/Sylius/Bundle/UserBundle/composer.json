@@ -37,12 +37,15 @@
         "sylius/user": "^0.18",
         "sylius/resource-bundle": "^0.18",
         "sylius/mailer-bundle": "^0.18",
-        "symfony/framework-bundle": "^2.7.7",
-        "hwi/oauth-bundle": "~0.3"
+        "symfony/framework-bundle": "^2.7.7"
     },
     "require-dev": {
         "phpspec/phpspec": "^2.4",
-        "symfony/form": "^2.7"
+        "symfony/form": "^2.7",
+        "hwi/oauth-bundle": "~0.3"
+    },
+    "suggest": {
+        "hwi/oauth-bundle": "For OAuth integration"
     },
     "config": {
         "bin-dir": "bin"
