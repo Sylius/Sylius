@@ -33,7 +33,6 @@
 
         <parameter key="sylius.user_provider.name.class">Sylius\Bundle\UserBundle\Provider\UsernameProvider</parameter>
         <parameter key="sylius.user_provider.name_or_email.class">Sylius\Bundle\UserBundle\Provider\UsernameOrEmailProvider</parameter>
-        <parameter key="sylius.oauth.user_provider.class">Sylius\Bundle\UserBundle\OAuth\UserProvider</parameter>
         <parameter key="sylius.user_provider.email.class">Sylius\Bundle\UserBundle\Provider\EmailProvider</parameter>
 
         <parameter key="sylius.form.type.user_login.class">Sylius\Bundle\UserBundle\Form\Type\UserLoginType</parameter>
@@ -164,16 +163,6 @@
         </service>
         <service id="sylius.user_provider.name" class="%sylius.user_provider.name.class%">
             <argument type="service" id="sylius.repository.user" />
-            <argument type="service" id="sylius.user.canonicalizer" />
-        </service>
-        <service id="sylius.oauth.user_provider" class="%sylius.oauth.user_provider.class%" lazy="true">
-            <argument type="service" id="sylius.factory.customer" />
-            <argument type="service" id="sylius.repository.customer" />
-            <argument type="service" id="sylius.factory.user" />
-            <argument type="service" id="sylius.repository.user" />
-            <argument type="service" id="sylius.factory.user_oauth" />
-            <argument type="service" id="sylius.repository.user_oauth" />
-            <argument type="service" id="sylius.manager.user" />
             <argument type="service" id="sylius.user.canonicalizer" />
         </service>
 
