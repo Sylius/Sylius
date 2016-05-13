@@ -19,6 +19,10 @@ sylius:
         new_country: 国を登録
         new_tax_category: 税区分を登録
         "no": false
+        no_taxes: 税は加算されていません。
+        no_promotion: プロモーションは適用されていません。
+        no_shipping_charges: 送料無料
+        quantity: 数量
         save_changes: 保存
         shipping_methods: 配送方法管理
         success: 成功

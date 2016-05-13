@@ -18,8 +18,10 @@ sylius:
         are_your_sure_you_want_to_perform_this_action: Jeni i sigurte se deshironi te egzekutoni kete veprim?
         available_for_channels: Ne dispozicion per kanale
         cancel: Fshi
+        cancelled: E fshirë
         category_requirements: Kërkesat e kategorisë
         charges_and_taxes: Pagesat dhe taksat
+        checkout: Kontrolli
         clear_filters: Hiq filtrin
         color: Ngjyra
         configure_channels_available_in_your_store: Konfiguroni kanalet ne dispozicion ne depon tuaj
@@ -31,6 +33,7 @@ sylius:
         create: Krijo
         currencies: Monedhat
         dashboard: Paneli
+        date: Data
         default_currency: Monedha e paracaktuar
         default_locale: Lokalizimi i parazgjedhur
         delete: Fshi
@@ -82,6 +85,9 @@ sylius:
         "no": false
         no_account: asnje llogari
         no_results_to_display: Nuk ka rezultate per tu shfaqur
+        no_taxes: Nuk zbatohen taksa
+        no_promotion: Nuk është përdorur asnjë reklamë
+        no_shipping_charges: Nuk ka asnjë pagesë dërgimi
         not_contains: Nuk permban
         not_empty: Jo bosh
         not_in: Jo brenda
@@ -89,7 +95,11 @@ sylius:
         powered_by: Mundësuar nga
         promotion_configuration: Konfigurimi i promocionit
         promotion_information: Informacione promocioni
+        quantity: Sasitë
+        ready: Gati
+        returned: I kthyer
         save_changes: Ruaj ndryshimet
+        shipped: Dërguar
         shipping_methods: Mënyrat e dërgesave
         show: Trego
         sign_in: Hyr

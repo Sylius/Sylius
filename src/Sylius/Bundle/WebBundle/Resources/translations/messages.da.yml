@@ -290,7 +290,6 @@ sylius:
         restricted_zone: Begrænset zone
         retail_price: Kostpris
         return: Returner
-        returned: Returneret
         roles: Roller
         rules: Regler
         sales: Salg
@@ -305,7 +304,6 @@ sylius:
         shipment_details: Forsendelsesdetaljer
         shipment_state: Forsendelsesstatus
         shipments: Forsendelser
-        shipped: Afsendt
         shipping_address: Leveringsadresse
         shipping_categories: Forsendelses kategorier
         shipping_category: Fragt kategori

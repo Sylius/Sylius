@@ -190,7 +190,6 @@ sylius:
         building_product_from_archetype: Vytvoriť produkt z prototypu
         calculator: Spôsob vypočtu
         cancel: Zrušiť
-        cancelled: Zrušené
         cart_locked: Košík uzamknutý
         cart_summary: Obsah košíka
         categorization: Kategórie
@@ -285,7 +284,6 @@ sylius:
         customer_not_notified: Upozornenie nebolo poslané
         customer_notified: Upozornenie poslané
         customer_orders: Objednávky zákazníka
-        customer_since: Ste zákazníkom od
         customers: Zákazníci
         customers_list_of_all_customers_in_store: 'Zákazníci, <small>zoznam všetkých zakazníkov v obchode</small>'
         customize_default_metadata: Úprava predvolených metadáta
@@ -580,7 +578,6 @@ sylius:
         restricted_zone: Zóna s obmedzeným prístupom
         retail_price: Predajná cena
         return: Vrátiť
-        returned: Vrátené
         revert: Vrátiť spať
         review_details: Detail recenzie
         reviews: Recenzie
@@ -602,7 +599,6 @@ sylius:
         shipment_mode: Spôsob doručenia
         shipment_state: Stav zásielky
         shipments: Zásielky
-        shipped: Odoslané
         shipping_address: Adresa doručenia
         shipping_categories: Kategórie doručenia
         shipping_category: Kategória doručenia

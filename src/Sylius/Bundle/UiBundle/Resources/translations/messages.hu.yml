@@ -13,6 +13,7 @@ sylius:
         add_coupon: Kupon hozzáadása
         actions: Műveletek
         cancel: Mégse
+        checkout: Fizetés
         countries: Országok
         coupons: Kuponok
         coupon_based: Kupon alapján
@@ -29,7 +30,14 @@ sylius:
         new_country: Új ország
         new_tax_category: Új adókategória
         "no": false
+        no_taxes: Az adó nem kett alkalmazva
+        no_promotion: Promóció nem lett alkalmazva
+        no_shipping_charges: A szállítási díj nem lett alkalmazva
+        quantity: Mennyiség
+        ready: Kész
+        returned: Visszaküldött
         save_changes: Módosítások mentése
+        shipped: Kiszállítva
         shipping_methods: Szállítási módok
         success: Siker
         "yes": true

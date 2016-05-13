@@ -190,7 +190,6 @@ sylius:
         building_product_from_archetype: Duke ndërtuar produktin nga prototipi
         calculator: Llogaritësi
         cancel: Fshi
-        cancelled: E fshirë
         cart_locked: Karroca e kycur
         cart_summary: Përmbajtja e karrocës
         categorization: Kategorizimi
@@ -285,7 +284,6 @@ sylius:
         customer_not_notified: Blerësi nuk u njoftua
         customer_notified: Blerësi u njoftua
         customer_orders: Porositë e blerësit
-        customer_since: Ti je blerës që prej
         customers: Blerësit
         customers_list_of_all_customers_in_store: 'Blerësi <small>Lista e të gjithë blerësve në arkiv </small>'
         customize_default_metadata: Personalizo metadata baze
@@ -580,7 +578,6 @@ sylius:
         restricted_zone: Zonë e kufizuar
         retail_price: Çmimi me pakicë
         return: Rikthehu
-        returned: I kthyer
         revert: Rikthe
         review_details: Detajet e recensionit
         reviews: Recensionet
@@ -602,7 +599,6 @@ sylius:
         shipment_mode: Mënyra e dërgesës
         shipment_state: Gjendja e dërgesës
         shipments: Dërgesat
-        shipped: Dërguar
         shipping_address: Adresa e dërgimit
         shipping_categories: Kategoritë e dërgesës
         shipping_category: Kategoria e dërgesës

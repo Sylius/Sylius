@@ -25,3 +25,6 @@ sylius:
                 customers:
                     header: Zákazník
                     customers: Zákazníci
+                sales:
+                    header: Prodeje
+                    orders: Objednávky

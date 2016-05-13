@@ -146,7 +146,6 @@ sylius:
         building_product_from_archetype: Güzel örneği yapı ürün
         calculator: Hesaplayıcı
         cancel: İptal
-        cancelled: İptal Edildi
         categorization: Sınıflandırma
         category: Kategori
         change_password: Parolanızı değiştirin
@@ -480,7 +479,6 @@ sylius:
         restricted_zone: Kısıtlı bölge
         retail_price: Perakende fiyatı
         return: İade
-        returned: İade Edildi
         revert: Döndür
         reviews: Yorumlar
         roles: Roller
@@ -500,7 +498,6 @@ sylius:
         shipment_details: Kargo ayrıntıları
         shipment_state: Teslimat durumu
         shipments: Kargo İşlemleri
-        shipped: Kargolandı
         shipping_address: Teslimat adresi
         shipping_categories: Kargo Kategorileri
         shipping_category: Teslimat kategorisi

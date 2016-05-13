@@ -16,6 +16,8 @@ sylius:
         an_error_occurred: Es ist ein Fehler aufgetreten
         are_your_sure_you_want_to_perform_this_action: Möchten Sie diese Aktion sicher durchführen?
         cancel: Abbrechen
+        cancelled: Abgebrochen
+        checkout: Zur Kasse
         clear_filters: Filter löschen
         color: Farbe
         confirm_your_action: Aktion bestätigen
@@ -26,6 +28,7 @@ sylius:
         create: Erstellen
         currencies: Währungen
         dashboard: Dashboard
+        date: Datum
         default_currency: Standardwährung
         default_locale: Standard Lokalisierung
         delete: Löschen
@@ -53,12 +56,19 @@ sylius:
         new_tax_category: Neue Steuerkategorie
         "no": false
         no_results_to_display: Es gibt keine Ergebnisse zum Anzeigen
+        no_taxes: Keine Steuern
+        no_promotion: Keine Reklame
+        no_shipping_charges: Keine Versandkosten
         not_contains: Enthält nicht
         not_empty: Nicht leer
         not_in: Nicht in
         or: oder
         powered_by: Powered by
+        quantity: Anzahl
+        ready: Bereit
+        returned: Zurückgesandt
         save_changes: Änderungen speichern
+        shipped: Versandt
         shipping_methods: Versandmethoden
         show: Anzeigen
         sign_in: Anmelden

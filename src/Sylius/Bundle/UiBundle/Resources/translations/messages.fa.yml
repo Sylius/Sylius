@@ -17,8 +17,10 @@ sylius:
         are_your_sure_you_want_to_perform_this_action: آیا از اعمال این کار اطمینان دارید؟
         available_for_channels: قابل دسترسی برای کانال ها
         cancel: لغو
+        cancelled: پرداخت لغو شده
         category_requirements: نیازمندی های شاخه
         charges_and_taxes: هزینه و مالیات
+        checkout: پرداخت نشده
         clear_filters: پاک کردن فیلترها
         color: رنگ
         configure_channels_available_in_your_store: کانال های در دسترس در فروشگاه های خود را پیکربندی کنید
@@ -30,6 +32,7 @@ sylius:
         create: ایجاد
         currencies: واحدهای پول
         dashboard: داشبورد
+        date: تاریخ
         default_currency: واحد پولی پیش‌فرض
         default_locale: زبان پیش فرض
         delete: حذف
@@ -70,6 +73,9 @@ sylius:
         "no": false
         no_account: بدون شناسه کاربری
         no_results_to_display: هیچ نتیجه ای برای نمایش وجود ندارد
+        no_taxes: هیچ مالیاتی روی این سفارش اعمال نشده است
+        no_promotion: هیچ نوع تخفیفی روی این سفارش اعمال نشده است
+        no_shipping_charges: هیچ هزینه ی ارسالی روی این سفارش اعمال نشده است
         not_contains: خالی است
         not_empty: خالی نیست
         not_in: وجود ندارد در
@@ -77,7 +83,11 @@ sylius:
         powered_by: قدرت گرفته از
         promotion_configuration: تنظیمات فروش ویژه
         promotion_information: اطلاعات فروش ویژه
+        quantity: تعداد
+        ready: آماده ارسال
+        returned: برگشت داده شده
         save_changes: ذخیره
+        shipped: ارسال شده
         shipping_methods: شیوه های ارسال
         show: نمایش
         sign_in: ورود

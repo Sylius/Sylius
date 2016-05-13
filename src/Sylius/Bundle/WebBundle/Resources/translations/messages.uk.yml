@@ -98,7 +98,6 @@ sylius:
         build: Побудувати
         calculator: Калькулятор
         cancel: Відмінити
-        cancelled: Відхилено
         categorization: Категоризація
         category: Категорія
         change_password: Змінити пароль
@@ -322,7 +321,6 @@ sylius:
         restricted_zone: Заборонена зона
         retail_price: Роздрібна ціна
         return: Повернення
-        returned: Повернуто
         roles: Ролі
         routes: Маршрути
         rules: Правила
@@ -340,7 +338,6 @@ sylius:
         shipment_details: Деталі відправки
         shipment_state: Статус доставки
         shipments: Відправки
-        shipped: Відправлено
         shipping_address: Адреса доставки
         shipping_categories: Категорії доставки
         shipping_category: Категорія доставки

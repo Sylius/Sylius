@@ -25,3 +25,6 @@ sylius:
                 customers:
                     header: Kupec
                     customers: Kupci
+                sales:
+                    header: Prodaja
+                    orders: Naročila

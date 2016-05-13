@@ -25,3 +25,6 @@ sylius:
                 customers:
                     header: Müşteri
                     customers: Müşteriler
+                sales:
+                    header: Satışlar
+                    orders: Siparişler

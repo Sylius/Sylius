@@ -27,3 +27,6 @@ sylius:
                 customers:
                     header: Blerësi
                     customers: Blerësit
+                sales:
+                    header: Shitjet
+                    orders: Porositë

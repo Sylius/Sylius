@@ -13,6 +13,8 @@ sylius:
         add_coupon: Pridėti kuponą
         actions: Veiksmai
         cancel: Atšaukti
+        cancelled: Atšaukta
+        checkout: Apmokėjimas
         color: Spalva
         countries: Šalys
         coupons: Kuponai
@@ -35,8 +37,15 @@ sylius:
         new_currency: Nauja valiuta
         new_tax_category: Nauja mokesčių kategorija
         "no": false
+        no_taxes: Nepritaikyta jokių mokesčių
+        no_promotion: Nepritaikyta jokių nuolaidų
+        no_shipping_charges: Nepritaikyta jokių pristatymo mokesčių
         powered_by: Sukurta
+        quantity: Kiekis
+        ready: Paruošta
+        returned: Grąžintas
         save_changes: Išsaugoti pakeitimus
+        shipped: Pristatytas
         shipping_methods: Pristatymo būdai
         sign_in: Prisijungti
         sign_out: Atsijungti

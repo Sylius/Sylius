@@ -190,7 +190,6 @@ sylius:
         building_product_from_archetype: Nieuw product van prototype
         calculator: Calculator
         cancel: Annuleren
-        cancelled: Geannuleerd
         cart_locked: Winkelwagen vergrendeld
         cart_summary: Winkelwagen overzicht
         categorization: Categorisering
@@ -285,7 +284,6 @@ sylius:
         customer_not_notified: Klant is niet geïnformeerd
         customer_notified: Klant op de hoogte gesteld
         customer_orders: Klantorders
-        customer_since: U bent al klant sinds
         customers: Klanten
         customers_list_of_all_customers_in_store: 'Klanten een <small>lijst van alle klanten in de winkel</small>'
         customize_default_metadata: Aanpassen van de standaard metadata
@@ -580,7 +578,6 @@ sylius:
         restricted_zone: Beperkte zone
         retail_price: Retail prijs
         return: Retourneren
-        returned: Geretourneerd
         revert: Terugkeren
         review_details: Beoordelingsdetails
         reviews: Beoordelingen
@@ -602,7 +599,6 @@ sylius:
         shipment_mode: Verzendmethode
         shipment_state: Verzendstatus
         shipments: Verzendingen
-        shipped: Verzonden
         shipping_address: Bezorgadres
         shipping_categories: Verzendcategorieën
         shipping_category: Verzend categorie

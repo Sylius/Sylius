@@ -15,8 +15,10 @@ sylius:
         an_error_occurred: Wystąpił błąd
         are_your_sure_you_want_to_perform_this_action: Czy na pewno chcesz wykonać tę akcję?
         cancel: Anuluj
+        cancelled: Anulowane
         category_requirements: Wymagania kategorii
         charges_and_taxes: Opłaty i podatki
+        checkout: Koszyk
         clear_filters: Wyczyść filtry
         color: Kolor
         configure_channels_available_in_your_store: Skonfiguruj kanały dostępne w twoim sklepie
@@ -28,6 +30,7 @@ sylius:
         create: Utwórz
         currencies: Waluty
         dashboard: Panel
+        date: Data
         default_currency: Domyślna waluta
         default_locale: Domyślne ustawienia regionalne
         delete: Usuń
@@ -73,8 +76,15 @@ sylius:
         new_tax_category: Nowa kategoria podatkowa
         "no": false
         no_results_to_display: Brak wyników do wyświetlenia
+        no_taxes: Brak podatku
+        no_promotion: Brak rabatów
+        no_shipping_charges: Brak opłaty za wysyłkę
         promotion_configuration: Konfiguracja promocji
+        quantity: Ilość
+        ready: Gotowe
+        returned: Zwrócone
         save_changes: Zapisz zmiany
+        shipped: Dostarczono
         shipping_methods: Metody wysyłki
         show: Pokaż
         status: Status

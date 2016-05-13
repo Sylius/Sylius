@@ -190,7 +190,6 @@ sylius:
         building_product_from_archetype: ایجاد محصول از روی قلم محصول
         calculator: نوع محاسبه
         cancel: لغو
-        cancelled: پرداخت لغو شده
         cart_locked: سبد خرید قفل شده
         cart_summary: خلاصه سبد خرید
         categorization: دسته بندی
@@ -285,7 +284,6 @@ sylius:
         customer_not_notified: به مشتری اطلاع رسانی نشده
         customer_notified: به مشتری اطلاع رسانی شده
         customer_orders: سفارش مشتریان
-        customer_since: تاریخ عضویت در
         customers: مشتریان
         customers_list_of_all_customers_in_store: 'مشتریان <small> لیست کل مشتری های فروشگاه <small>'
         customize_default_metadata: تغییر فراداده پیش فرض
@@ -579,7 +577,6 @@ sylius:
         restricted_zone: مناطق ممنوع
         retail_price: قیمت خرده فروشی
         return: بازگشت
-        returned: برگشت داده شده
         revert: بازگشت به تنظیمات اولیه
         review_details: جزئیات نقد و بررسی
         reviews: نقد و بررسی
@@ -601,7 +598,6 @@ sylius:
         shipment_mode: نحوه ی ارسال
         shipment_state: وضعیت ارسال
         shipments: ارسال محصول
-        shipped: ارسال شده
         shipping_address: آدرس تحویل سفارش
         shipping_categories: انواع ارسال
         shipping_category: نوع ارسال

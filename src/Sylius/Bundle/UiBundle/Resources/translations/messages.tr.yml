@@ -13,6 +13,8 @@ sylius:
         add_coupon: Kupon Ekle
         actions: Eylemler
         cancel: İptal
+        cancelled: İptal Edildi
+        checkout: 'Ödeme  yap'
         color: Renk
         countries: Ülkeler
         coupons: Kuponlar
@@ -35,7 +37,14 @@ sylius:
         new_currency: Yeni para birimi
         new_tax_category: Yeni vergi kategorisi
         "no": false
+        no_taxes: Vergi uygulanmadı
+        no_promotion: Uygulanan hiçbir promosyon yoktur
+        no_shipping_charges: Uygulanan hiçbir kargo ücreti yoktur
+        quantity: Adet
+        ready: Hazır
+        returned: İade Edildi
         save_changes: Değişiklikleri kaydet
+        shipped: Kargolandı
         shipping_methods: Gönderim metodları
         success: Başarılı
         "yes": true

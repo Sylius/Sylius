@@ -85,7 +85,6 @@ sylius:
         build: Bygg
         calculator: Kalkulator
         cancel: Avbryt
-        cancelled: Avbrutt
         categorization: Kategorisering
         category: Kategori
         change_password: Endre passord
@@ -298,7 +297,6 @@ sylius:
         restricted_zone: Begrenset sone
         retail_price: Utsalgspris
         return: Retur
-        returned: Returnert
         roles: Roller
         routes: Ruter
         rules: Regler
@@ -314,7 +312,6 @@ sylius:
         shipment_details: Forsendelsedetaljer
         shipment_state: Forsendelsestatus
         shipments: Forsendelser
-        shipped: Sendt
         shipping_address: Leveringsadresse
         shipping_categories: Fraktkategorier
         shipping_category: Fraktkategori

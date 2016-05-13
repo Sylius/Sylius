@@ -98,7 +98,6 @@ sylius:
         build: Generare
         calculator: Calculator
         cancel: Anulează
-        cancelled: Anulată
         categorization: Categorizare
         category: Categorie
         change_password: Modificare parolă
@@ -311,7 +310,6 @@ sylius:
         restricted_zone: Zonă restricționată
         retail_price: Preţ
         return: Returnare
-        returned: Returnată
         roles: Roluri
         routes: Rute
         rules: Reguli
@@ -327,7 +325,6 @@ sylius:
         shipment_details: Detalii livrare
         shipment_state: Status livrare
         shipments: Livrări
-        shipped: Expediată
         shipping_address: Adresa de livrare
         shipping_categories: Categorii de livrare
         shipping_category: Categoria de livrare

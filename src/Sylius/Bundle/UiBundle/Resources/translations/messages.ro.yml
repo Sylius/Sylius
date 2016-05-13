@@ -12,6 +12,8 @@ sylius:
         add_coupon: Adaugă cod promoțional
         actions: Acțiuni
         cancel: Anulează
+        cancelled: Anulată
+        checkout: Trimite comanda
         color: Culoare
         countries: Țări
         coupons: Coduri promoționale
@@ -29,7 +31,14 @@ sylius:
         new_country: Țară nouă
         new_tax_category: Categorie de taxă nouă
         "no": false
+        no_taxes: Nu se aplică taxe
+        no_promotion: Fără reduceri
+        no_shipping_charges: Nu se aplică taxe pentru livrare
+        quantity: Cantitate
+        ready: Gata
+        returned: Returnată
         save_changes: Salvează modificările
+        shipped: Expediată
         shipping_methods: Metode de livrare
         success: Succes
         "yes": true

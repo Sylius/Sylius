@@ -24,3 +24,6 @@ sylius:
                 customers:
                     header: Klienta
                     customers: Klientai
+                sales:
+                    header: Pardavimai
+                    orders: Užsakymai

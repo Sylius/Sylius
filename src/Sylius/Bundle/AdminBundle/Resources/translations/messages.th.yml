@@ -27,3 +27,6 @@ sylius:
                 customers:
                     header: ลูกค้า
                     customers: ลูกค้า
+                sales:
+                    header: ขาย
+                    orders: ใบสั่งซื้อ

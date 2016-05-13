@@ -13,3 +13,5 @@ sylius:
                     zones: Zone
                 marketing:
                     promotions: Promocije
+                sales:
+                    orders: Narudžbine

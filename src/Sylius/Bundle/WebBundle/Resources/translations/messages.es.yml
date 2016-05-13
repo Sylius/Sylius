@@ -11,8 +11,8 @@ sylius:
             placed_at: 'Hecho el %at%'
             shipment:
                 ready: 'Preparado desde %at%'
-                returned: 'Devuelto %at%'
-                shipped: 'Enviado %at%'
+                returned: 'Devuelto el %at%'
+                shipped: 'Enviado el %at%'
         title: Mi cuenta
     archetype:
         build: Construir prototipo
@@ -123,6 +123,7 @@ sylius:
         transition:
             cancel: cancelar
             prepare: preparar
+            release: lanzamiento
             return: devolver
             ship: enviar
         update: Editar
@@ -188,7 +189,6 @@ sylius:
         building_product_from_archetype: Construir producto de prototipo
         calculator: Calculadora
         cancel: Cancelar
-        cancelled: Cancelado/a
         cart_locked: Carrito bloqueado
         cart_summary: Resumen del carrito
         categorization: Categorización
@@ -283,7 +283,7 @@ sylius:
         customer_not_notified: Cliente no notificado
         customer_notified: Cliente notificado
         customer_orders: Pedidos del cliente
-        customer_since: Usted es cliente desde
+        customer_since: Cliente desde
         customers: Clientes
         customers_list_of_all_customers_in_store: 'Clientes <small>Lista de todos los clientes en la tienda</small>'
         customize_default_metadata: Personalizar metadatos predeterminados
@@ -578,11 +578,10 @@ sylius:
         restricted_zone: Zona restringida
         retail_price: Precio
         return: Devolver
-        returned: Devuelto
         revert: Revertir
         review_details: Detalles de reseña
         reviews: Reseñas
-        roles: Roles
+        roles: Perfiles
         routes: Rutas
         rules: Reglas
         sales: Ventas
@@ -600,7 +599,6 @@ sylius:
         shipment_mode: Modo de envío
         shipment_state: Estado del envio
         shipments: Envios
-        shipped: Enviado
         shipping_address: Dirección de envio
         shipping_categories: Categorías de envío
         shipping_category: Categoría de envío

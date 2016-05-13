@@ -117,7 +117,6 @@ sylius:
         browse_products: Visualizar produtos
         calculator: Calculadora
         cancel: Cancelar
-        cancelled: Cancelado
         categorization: Categorização
         category: Categoria
         change_password: Alterar sua senha
@@ -416,7 +415,6 @@ sylius:
         restricted_zone: Zona restrita
         retail_price: Preço de venda
         return: Retorno
-        returned: Devolvido
         reviews: Revisões
         roles: Papéis
         routes: Rotas
@@ -436,7 +434,6 @@ sylius:
         shipment_mode: Modo de envio
         shipment_state: Situação do envio
         shipments: Envios
-        shipped: Enviado
         shipping_address: Endereço de entrega
         shipping_categories: Categorias de envio
         shipping_category: Categoria de expedição
