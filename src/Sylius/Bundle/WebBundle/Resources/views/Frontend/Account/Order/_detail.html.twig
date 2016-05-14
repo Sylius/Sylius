@@ -81,7 +81,7 @@
                         {{ 'sylius.ui.promotion_total'|trans }}
                     </span>
                 </td>
-                <td>{{ order.adjustmentsTotal(promotionAdjustment)|sylius_money(order.currency) }}</td>
+                <td>{{ order.getPromotionsTotalRecursively()|sylius_money(order.currency) }}</td>
             </tr>
             <tr>
                 <th colspan="3">
