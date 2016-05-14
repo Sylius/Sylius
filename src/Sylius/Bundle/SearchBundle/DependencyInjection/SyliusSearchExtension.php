@@ -90,11 +90,13 @@ class SyliusSearchExtension extends AbstractResourceExtension implements Prepend
             $elasticaConfig = $processor->processConfiguration($configuration, $container->getExtensionConfig('fos_elastica'));
 
             foreach ($elasticaConfig['indexes'] as $index => $config) {
-                $elasticaProductListenerDefinition = new Definition(ElasticaProductListener::class);
-                $elasticaProductListenerDefinition->addArgument(new Reference('fos_elastica.object_persister.' . $index . '.product'));
-                $elasticaProductListenerDefinition->addTag('doctrine.event_subscriber');
+                if (array_key_exists('product', $config['types'])) {
+                    $elasticaProductListenerDefinition = new Definition(ElasticaProductListener::class);
+                    $elasticaProductListenerDefinition->addArgument(new Reference('fos_elastica.object_persister.' . $index . '.product'));
+                    $elasticaProductListenerDefinition->addTag('doctrine.event_subscriber');
 
-                $container->setDefinition('sylius_product.listener.index_' . $index . '.product_update', $elasticaProductListenerDefinition);
+                    $container->setDefinition('sylius_product.listener.index_' . $index . '.product_update', $elasticaProductListenerDefinition);
+                }
             }
         }
     }
