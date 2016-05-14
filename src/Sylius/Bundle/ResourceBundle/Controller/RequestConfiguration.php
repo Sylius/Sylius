@@ -152,7 +152,7 @@ class RequestConfiguration
      */
     public function getRouteName($name)
     {
-        $sectionPrefix = $this->getSection() ? $this->getSection().'_' : '';
+        $sectionPrefix = $this->getSection() ? $this->getSection() . '_' : '';
 
         return sprintf('%s_%s%s_%s', $this->metadata->getApplicationName(), $sectionPrefix, $this->metadata->getName(), $name);
     }
@@ -194,7 +194,7 @@ class RequestConfiguration
             return null;
         }
 
-        return '#'.$redirect['hash'];
+        return '#' . $redirect['hash'];
     }
 
     /**
@@ -254,13 +254,14 @@ class RequestConfiguration
      */
     public function getLimit()
     {
-        $limit = null;
-
-        if ($this->isLimited()) {
-            $limit = (int) $this->parameters->get('limit', 10);
+        if (!$this->isLimited()) {
+            return null;
         }
 
-        return $limit;
+        $limit = $this->parameters->get('limit', 10);
+        $limit = $this->request->get('limit', $limit);
+
+        return $this->getMaxLimit($limit);
     }
 
     /**
@@ -268,15 +269,31 @@ class RequestConfiguration
      */
     public function isPaginated()
     {
-        return (bool) $this->parameters->get('paginate', true);
+        $paginate = (bool) $this->parameters->get('paginate', true);
+        $requestPaginate = $this->request->get('paginate', $paginate);
+
+        if (is_string($requestPaginate) && !is_numeric($requestPaginate)) {
+            $requestPaginate = filter_var($requestPaginate, FILTER_VALIDATE_BOOLEAN);
+        }
+
+        return (bool) $requestPaginate;
     }
 
     /**
+     * Gets the number of resources per page.
+     * The limit parameter from query string has priority from paginate.
+     *
      * @return int
      */
     public function getPaginationMaxPerPage()
     {
-        return (int) $this->parameters->get('paginate', 10);
+        $maxPerPage = $this->parameters->get('paginate', 10);
+        $maxPerPage = $this->parameters->get('limit', $maxPerPage);
+
+        $maxPerPage = $this->request->get('paginate', $maxPerPage);
+        $maxPerPage = $this->request->get('limit', $maxPerPage);
+
+        return $this->getMaxLimit($maxPerPage);
     }
 
     /**
@@ -556,5 +573,16 @@ class RequestConfiguration
         }
 
         return $this->parameters->get('grid');
+    }
+
+    /**
+     * @param int $limit
+     * @return int
+     */
+    public function getMaxLimit($limit)
+    {
+        $maxLimit = (int) $this->parameters->get('max_limit', 100);
+
+        return (int) min($limit, $maxLimit);
     }
 }
