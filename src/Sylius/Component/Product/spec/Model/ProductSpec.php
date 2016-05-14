@@ -11,6 +11,7 @@
 
 namespace spec\Sylius\Component\Product\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Association\Model\AssociableInterface;
@@ -204,6 +205,51 @@ class ProductSpec extends ObjectBehavior
     function it_should_initialize_variants_collection_by_default()
     {
         $this->getVariants()->shouldHaveType('Doctrine\Common\Collections\Collection');
+        $this->getAvailableVariants()->shouldHaveType('Doctrine\Common\Collections\Collection');
+    }
+
+    function it_does_not_include_unavailable_variants_in_available_variants(VariantInterface $variant)
+    {
+        $variant->isMaster()->willReturn(false);
+        $variant->isAvailable()->willReturn(false);
+
+        $variant->setProduct($this)->shouldBeCalled();
+
+        $this->addVariant($variant);
+        $this->getAvailableVariants()->shouldHaveCount(0);
+    }
+
+    function it_does_not_include_master_variant_in_available_variants(VariantInterface $variant)
+    {
+        $variant->isMaster()->willReturn(true);
+
+        $variant->setProduct($this)->shouldBeCalled();
+
+        $this->addVariant($variant);
+        $this->getAvailableVariants()->shouldHaveCount(0);
+    }
+
+    function it_returns_available_variants(
+        VariantInterface $masterVariant,
+        VariantInterface $unavailableVariant,
+        VariantInterface $variant
+    ) {
+        $masterVariant->isMaster()->willReturn(true);
+        $unavailableVariant->isMaster()->willReturn(false);
+        $unavailableVariant->isAvailable()->willReturn(false);
+        $variant->isMaster()->willReturn(false);
+        $variant->isAvailable()->willReturn(true);
+
+        $masterVariant->setProduct($this)->shouldBeCalled();
+        $unavailableVariant->setProduct($this)->shouldBeCalled();
+        $variant->setProduct($this)->shouldBeCalled();
+
+        $this->addVariant($masterVariant);
+        $this->addVariant($unavailableVariant);
+        $this->addVariant($variant);
+
+        $this->getAvailableVariants()->shouldHaveCount(1);
+        $this->getAvailableVariants()->first()->shouldReturn($variant);
     }
 
     function it_should_initialize_option_collection_by_default()
