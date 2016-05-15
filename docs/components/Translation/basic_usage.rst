@@ -153,6 +153,27 @@ You can always use the ``translate`` method by itself, but the same principal is
 
 .. _\\RuntimeException: https://secure.php.net/manual/pl/class.runtimeexception.php
 
+.. _component_translation_with_bundle:
+
+Usage with SyliusTranslationBundle
+----------------------------------
+
+When using in conjuction with the `SyliusTranslationBundle` and persisting with doctrine
+make sure you have configured your entities under the `sylius_resource` configuration 
+option. For example:
+
+.. code-block:: yaml
+
+   sylius_resource:
+     resources:
+        app.book:
+            classes: 
+              model: Example\Model\Book
+            translation:
+              classes:
+                model: Example\Model\BookTranslation
+
+
 .. _component_translation_provider_locale-provider:
 
 LocaleProvider
