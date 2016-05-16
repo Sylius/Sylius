@@ -106,14 +106,6 @@ final class CartContext implements Context
     }
 
     /**
-     * @When /^I delete (this product)$/
-     */
-    public function iDeleteThisProduct(ProductInterface $product)
-    {
-        $this->summaryPage->deleteProduct($product);
-    }
-
-    /**
      * @Then grand total value should be :total
      * @Then my cart total should be :total
      */
@@ -208,14 +200,6 @@ final class CartContext implements Context
             ($regularPrice - $amount),
             'Price after discount should be %2$s, but it is %s.'
         );
-    }
-
-    /**
-     * @Then I should be notified that this product has been successfully deleted
-     */
-    public function iShouldBeNotifiedThatThisProductHasBeenSuccessfullyDeleted()
-    {
-        $this->notificationChecker->checkNotification('Item has been removed from cart.', NotificationType::success());
     }
 
     /**
@@ -340,7 +324,7 @@ final class CartContext implements Context
     /**
      * @When /^I add (this product) with ([^"]+) "([^"]+)" to the cart$/
      */
-    public function iAddThisProductWithSizeToTheCart(ProductInterface $product, $optionName, $optionValue)
+    public function iAddThisProductWithToTheCart(ProductInterface $product, $optionName, $optionValue)
     {
         $this->productShowPage->open(['slug' => $product->getSlug()]);
 
@@ -358,6 +342,26 @@ final class CartContext implements Context
             $this->summaryPage->getProductOption($product->getName(), $optionName),
             $optionValue,
             'The product should have option with value %2$s, but it has option with value %s.'
+        );
+    }
+
+    /**
+     * @When I clear my cart
+     */
+    public function iClearMyCart()
+    {
+        $this->summaryPage->clearCart();
+    }
+
+    /**
+     * @Then /^I should see "([^"]+)" with quantity (\d+) in my cart$/
+     */
+    public function iShouldSeeWithQuantityInMyCart($productName, $quantity)
+    {
+        Assert::same(
+            $this->summaryPage->getQuantity($productName),
+            $quantity,
+            'The quantity of product should be %2$s, but it is %s'
         );
     }
 }

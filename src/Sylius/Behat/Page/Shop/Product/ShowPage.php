@@ -11,8 +11,6 @@
 
 namespace Sylius\Behat\Page\Shop\Product;
 
-use Behat\Mink\Session;
-use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Sylius\Component\Product\Model\OptionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
@@ -24,23 +22,6 @@ use Sylius\Behat\Page\SymfonyPage;
  */
 class ShowPage extends SymfonyPage implements ShowPageInterface
 {
-    /**
-     * @param Session $session
-     * @param array $parameters
-     * @param RouterInterface $router
-     * @param TableAccessorInterface $tableAccessor
-     */
-    public function __construct(
-        Session $session,
-        array $parameters,
-        RouterInterface $router,
-        TableAccessorInterface $tableAccessor
-    ) {
-        parent::__construct($session, $parameters, $router);
-
-        $this->tableAccessor = $tableAccessor;
-    }
-
     /**
      * {@inheritdoc}
      */

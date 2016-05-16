@@ -12,44 +12,15 @@
 namespace Sylius\Behat\Page\Shop\Cart;
 
 use Behat\Mink\Exception\ElementNotFoundException;
-use Behat\Mink\Session;
 use Sylius\Behat\Page\SymfonyPage;
-use Sylius\Behat\Service\Accessor\TableAccessorInterface;
-use Sylius\Component\Product\Model\ProductInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Anna Walasek <anna.walasek@lakion.com>
  */
 class SummaryPage extends SymfonyPage implements SummaryPageInterface
 {
-    /**
-     * @var TableAccessorInterface
-     */
-    private $tableAccessor;
-
-    /**
-     * @param Session $session
-     * @param array $parameters
-     * @param RouterInterface $router
-     * @param TableAccessorInterface $tableAccessor
-     */
-    public function __construct(Session $session, array $parameters, RouterInterface $router, TableAccessorInterface $tableAccessor)
-    {
-        parent::__construct($session, $parameters, $router);
-
-        $this->tableAccessor = $tableAccessor;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function deleteProduct(ProductInterface $product)
-    {
-        $productRow = $this->tableAccessor->getRowWithFields($this->getElement('table'), ['Product' => $product->getName()]);
-        $productRow->clickLink('remove-button');
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -198,6 +169,21 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     /**
      * {@inheritdoc}
      */
+    public function getQuantity($productName)
+    {
+        $itemElement = $this->getElement('product row', ['%name%' => $productName]);
+
+        return (int) $itemElement->find('css', 'input[type=number]')->getValue();
+    }
+
+    public function clearCart()
+    {
+        $this->getElement('clear button')->click();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
@@ -213,7 +199,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
             'unit price' => '.unit-price',
             'cart items' => '#cart-items',
             'cart summary' => '#cart-summary',
-            'table' => '.table',
+            'clear button' => 'a[class*="clear"]',
         ]);
     }
 
