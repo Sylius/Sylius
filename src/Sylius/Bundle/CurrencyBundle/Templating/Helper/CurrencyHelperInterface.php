@@ -32,11 +32,10 @@ interface CurrencyHelperInterface
     /**
      * @param int $amount
      * @param string|null $currency
-     * @param bool $decimal
      *
      * @return string
      */
-    public function convertAndFormatAmount($amount, $currency = null, $decimal = false);
+    public function convertAndFormatAmount($amount, $currency = null);
 
     /**
      * @return string
