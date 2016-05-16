@@ -35,9 +35,9 @@ class FormContext extends BaseFormContext
     }
 
     /**
-     * @Given /^I fill in the (\d+)(st|nd|th) province with "([^""]*)"$/
+     * @Given /^I fill in the (\d+)(?:st|nd|th) province with "([^"]+)"$/
      */
-    public function fillProvinceName($position, $fake, $value)
+    public function fillProvinceName($position, $value)
     {
         $countryCode = $this->getSession()->getPage()->findField('sylius_country[code]')->getValue();
         $this->fillInField('sylius_country[provinces]['.($position - 1).'][name]', $value);
@@ -45,15 +45,15 @@ class FormContext extends BaseFormContext
     }
 
     /**
-     * @Given /^I select "([^""]*)" from the (\d+)(st|nd|th) country$/
+     * @Given /^I select "([^"]+)" from the (\d+)(?:st|nd|th) country$/
      */
-    public function fillCountryMember($value, $position, $fake)
+    public function fillCountryMember($value, $position)
     {
         $this->fillInField('sylius_country[members]['.($position - 1).'][country]', $value);
     }
 
     /**
-     * @Given /^I remove the first (country|province)$/
+     * @Given /^I remove the first (?:country|province)$/
      */
     public function iRemoveTheFirstMember()
     {

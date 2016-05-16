@@ -12,6 +12,8 @@
 namespace Sylius\Bundle\AddressingBundle\Form\Type;
 
 use Sylius\Component\Addressing\Model\CountryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -19,15 +21,26 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class CountryCodeChoiceType extends CountryChoiceType
+class CountryCodeChoiceType extends AbstractType
 {
+    /**
+     * @var RepositoryInterface
+     */
+    protected $countryRepository;
+
+    /**
+     * @param RepositoryInterface $countryRepository
+     */
+    public function __construct(RepositoryInterface $countryRepository)
+    {
+        $this->countryRepository = $countryRepository;
+    }
+
     /**
      * {@inheritdoc}
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        parent::configureOptions($resolver);
-
         $choices = function (Options $options) {
             if (null === $options['enabled']) {
                 $countries = $this->countryRepository->findAll();
@@ -38,8 +51,21 @@ class CountryCodeChoiceType extends CountryChoiceType
             return $this->getCountryCodes($countries);
         };
 
-        $resolver->setDefault('choice_list', null);
-        $resolver->setDefault('choices', $choices);
+        $resolver->setDefaults([
+            'choices' => $choices,
+            'choices_as_values' => true,
+            'enabled' => true,
+            'label' => 'sylius.form.address.country',
+            'empty_value' => 'sylius.form.country.select',
+        ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getParent()
+    {
+        return 'choice';
     }
 
     /**
@@ -61,10 +87,11 @@ class CountryCodeChoiceType extends CountryChoiceType
 
         /* @var CountryInterface $country */
         foreach ($countries as $country) {
-            $countryCodes[$country->getCode()] = Intl::getRegionBundle()->getCountryName($country->getCode());
+            $countryName = Intl::getRegionBundle()->getCountryName($country->getCode());
+            $countryCodes[$countryName] = $country->getCode();
         }
 
-        asort($countryCodes);
+        ksort($countryCodes);
 
         return $countryCodes;
     }
