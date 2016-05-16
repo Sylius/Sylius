@@ -88,17 +88,20 @@ class RedirectHandlerSpec extends ObjectBehavior
         $this->redirectToResource($configuration, $resource)->shouldHaveType(RedirectResponse::class);
     }
 
-    function it_redirects_to_index(RequestConfiguration $configuration, $router)
-    {
+    function it_redirects_to_index(
+        RequestConfiguration $configuration,
+        ResourceInterface $resource,
+        RouterInterface $router
+    ) {
         $configuration->getRedirectRoute('index')->willReturn('my_route');
-        $configuration->getRedirectParameters()->willReturn([]);
+        $configuration->getRedirectParameters($resource)->willReturn([]);
 
         $router->generate('my_route', [])->willReturn('http://myurl.com');
 
         $configuration->getRedirectHash()->willReturn(null);
         $configuration->isHeaderRedirection()->willReturn(false);
 
-        $this->redirectToIndex($configuration)->shouldHaveType(RedirectResponse::class);
+        $this->redirectToIndex($configuration, $resource)->shouldHaveType(RedirectResponse::class);
     }
 
     function it_redirects_to_route(RequestConfiguration $configuration, $router)
