@@ -40,6 +40,8 @@ class SingleResourceProvider implements SingleResourceProviderInterface
             $criteria = ['slug' => $request->attributes->get('slug')];
         }
 
+        $criteria = array_merge($criteria, $requestConfiguration->getCriteria());
+
         return $repository->findOneBy($criteria);
     }
 }
