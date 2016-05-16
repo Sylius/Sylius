@@ -14,4 +14,3 @@ parameters:
             meta: doctrine_cache.providers.phpcr_meta
             nodes: doctrine_cache.providers.phpcr_nodes
     phpcr_workspace: default
-
