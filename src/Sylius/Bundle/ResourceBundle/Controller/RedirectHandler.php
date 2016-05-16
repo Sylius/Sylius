@@ -62,7 +62,7 @@ class RedirectHandler implements RedirectHandlerInterface
         return $this->redirectToRoute(
             $configuration,
             $configuration->getRedirectRoute('index'),
-            $configuration->getRedirectParameters()
+            $configuration->getRedirectParameters($resource)
         );
     }
 
