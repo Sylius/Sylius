@@ -74,12 +74,12 @@ class CurrencyHelper extends Helper implements CurrencyHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function convertAndFormatAmount($amount, $currency = null, $decimal = false)
+    public function convertAndFormatAmount($amount, $currency = null)
     {
         $currency = $currency ?: $this->currencyContext->getCurrency();
         $amount = $this->currencyConverter->convertFromBase($amount, $currency);
 
-        return $this->moneyFormatter->format($amount, $currency, $decimal);
+        return $this->moneyFormatter->format($amount, $currency);
     }
 
     /**

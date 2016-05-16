@@ -23,7 +23,7 @@ use Symfony\Component\Templating\Helper\Helper;
 
 /**
  * @mixin CurrencyHelper
- * 
+ *
  * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
@@ -82,10 +82,10 @@ class CurrencyHelperSpec extends ObjectBehavior
         $converter->convertFromBase(312, 'PLN')->willReturn(407);
         $converter->convertFromBase(500, 'PLN')->willReturn(653);
 
-        $moneyFormatter->format(19, 'USD', false)->willReturn('$0.19');
-        $moneyFormatter->format(1913, 'USD', false)->willReturn('$19.13');
-        $moneyFormatter->format(407, 'PLN', false)->willReturn('4.07 zł');
-        $moneyFormatter->format(653, 'PLN', false)->willReturn('6.53 zł');
+        $moneyFormatter->format(19, 'USD')->willReturn('$0.19');
+        $moneyFormatter->format(1913, 'USD')->willReturn('$19.13');
+        $moneyFormatter->format(407, 'PLN')->willReturn('4.07 zł');
+        $moneyFormatter->format(653, 'PLN')->willReturn('6.53 zł');
 
         $this->convertAndFormatAmount(15, 'USD')->shouldReturn('$0.19');
         $this->convertAndFormatAmount(2500, 'USD')->shouldReturn('$19.13');

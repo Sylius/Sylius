@@ -278,7 +278,7 @@ class ProductController extends ResourceController
                 'image' => $product->getImage() ? $product->getImage()->getPath() : null,
                 'price' => $helper->convertAndFormatAmount($product->getMasterVariant()->getPrice()),
                 'original_price' => $helper->convertAndFormatAmount($product->getMasterVariant()->getOriginalPrice()),
-                'raw_price' => $helper->convertAndFormatAmount($product->getMasterVariant()->getPrice(), null, true),
+                'raw_price' => $helper->convertAmount($product->getMasterVariant()->getPrice(), null),
                 'desc' => $product->getShortDescription(),
             ];
         }
