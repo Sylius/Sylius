@@ -35,7 +35,7 @@ class ProductContext extends DefaultContext
             $product->setCurrentLocale($this->getContainer()->getParameter('locale'));
             $product->setName(trim($data['name']));
 
-            $code = isset($data['sku']) ? $data['sku'] : $this->generateCode($data['name']);
+            $code = isset($data['code']) ? $data['code'] : $this->generateCode($data['name']);
             $product->setCode($code);
 
             $product->getFirstVariant()->setCode($code);
