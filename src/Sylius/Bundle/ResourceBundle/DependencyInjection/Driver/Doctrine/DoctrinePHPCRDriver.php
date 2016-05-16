@@ -18,6 +18,8 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Parameter;
 use Symfony\Component\DependencyInjection\Reference;
+use Sylius\Bundle\ResourceBundle\Form\Type\DefaultResourceType;
+use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\Form\Builder\DefaultFormBuilder;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -68,6 +70,32 @@ class DoctrinePHPCRDriver extends AbstractDoctrineDriver
      */
     protected function addDefaultForm(ContainerBuilder $container, MetadataInterface $metadata)
     {
+        $options = array_merge(
+            [
+                'default_parent_path' => null,
+                'autocreate' => false,
+            ],
+            $metadata->hasParameter('options') ? $metadata->getParameter('options') : []
+        );
+
+        $defaultFormBuilderDefinition = new Definition(DefaultFormBuilder::class);
+        $defaultFormBuilderDefinition->setArguments([
+            new Reference($metadata->getServiceId('manager')),
+            $options['default_parent_path'],
+            $options['autocreate']
+        ]);
+
+
+        $definition = new Definition(DefaultResourceType::class);
+        $definition
+            ->setArguments([
+                $this->getMetdataDefinition($metadata),
+                $defaultFormBuilderDefinition,
+            ])
+            ->addTag('form.type', ['alias' => sprintf('%s_%s', $metadata->getApplicationName(), $metadata->getName())])
+        ;
+
+        $container->setDefinition(sprintf('%s.form.type.%s', $metadata->getApplicationName(), $metadata->getName()), $definition);
     }
 
     /**
