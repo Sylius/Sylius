@@ -11,39 +11,24 @@
 
 namespace Sylius\Bundle\ResourceBundle\EventListener;
 
-use Doctrine\Common\EventSubscriber;
-use Doctrine\ODM\MongoDB\Event\LoadClassMetadataEventArgs;
-use Doctrine\ODM\MongoDB\Mapping\ClassMetadata;
-use Doctrine\ODM\MongoDB\Mapping\ClassMetadataInfo;
-use Sylius\Component\Resource\Metadata\RegistryInterface;
+use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
+use Doctrine\ORM\Events;
+use Doctrine\ORM\Mapping\ClassMetadata;
+use Doctrine\ORM\Mapping\ClassMetadataInfo;
 
 /**
- * Doctrine listener used to manipulate mappings.
- *
- * @author Ivannis Suárez Jérez <ivannis.suarez@gmail.com>
+ * @author Ivan Molchanov <ivan.molchanov@opensoftdev.ru>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class LoadODMMetadataSubscriber implements EventSubscriber
+class ORMMappedSuperClassSubscriber extends AbstractDoctrineSubscriber
 {
-    /**
-     * @var RegistryInterface
-     */
-    private $resourceRegistry;
-
-    /**
-     * @param RegistryInterface $resourceRegistry
-     */
-    public function __construct(RegistryInterface $resourceRegistry)
-    {
-        $this->resourceRegistry = $resourceRegistry;
-    }
-
     /**
      * @return array
      */
     public function getSubscribedEvents()
     {
         return [
-            'loadClassMetadata',
+            Events::loadClassMetadata,
         ];
     }
 
@@ -52,13 +37,15 @@ class LoadODMMetadataSubscriber implements EventSubscriber
      */
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
     {
-        /** @var ClassMetadata $metadata */
         $metadata = $eventArgs->getClassMetadata();
+        if (false === $this->isSyliusClass($metadata)) {
+            return;
+        }
 
-        $this->convertToDocumentIfNeeded($metadata);
+        $this->convertToEntityIfNeeded($metadata);
 
         if (!$metadata->isMappedSuperclass) {
-            $this->setAssociationMappings($metadata, $eventArgs->getDocumentManager()->getConfiguration());
+            $this->setAssociationMappings($metadata, $eventArgs->getEntityManager()->getConfiguration());
         } else {
             $this->unsetAssociationMappings($metadata);
         }
@@ -67,7 +54,7 @@ class LoadODMMetadataSubscriber implements EventSubscriber
     /**
      * @param ClassMetadataInfo $metadata
      */
-    private function convertToDocumentIfNeeded(ClassMetadataInfo $metadata)
+    private function convertToEntityIfNeeded(ClassMetadataInfo $metadata)
     {
         foreach ($this->resourceRegistry->getAll() as $alias => $resourceMetadata) {
             if ($metadata->getName() !== $resourceMetadata->getClass('model')) {
@@ -89,12 +76,15 @@ class LoadODMMetadataSubscriber implements EventSubscriber
     private function setAssociationMappings(ClassMetadataInfo $metadata, $configuration)
     {
         foreach (class_parents($metadata->getName()) as $parent) {
-            $parentMetadata = new ClassMetadata($parent);
+            $parentMetadata = new ClassMetadata(
+                $parent,
+                $configuration->getNamingStrategy()
+            );
             if (in_array($parent, $configuration->getMetadataDriverImpl()->getAllClassNames())) {
                 $configuration->getMetadataDriverImpl()->loadMetadataForClass($parent, $parentMetadata);
                 if ($parentMetadata->isMappedSuperclass) {
-                    foreach ($parentMetadata->associationMappings as $key => $value) {
-                        if ($this->hasRelation($value['association'])) {
+                    foreach ($parentMetadata->getAssociationMappings() as $key => $value) {
+                        if ($this->hasRelation($value['type'])) {
                             $metadata->associationMappings[$key] = $value;
                         }
                     }
@@ -108,8 +98,8 @@ class LoadODMMetadataSubscriber implements EventSubscriber
      */
     private function unsetAssociationMappings(ClassMetadataInfo $metadata)
     {
-        foreach ($metadata->associationMappings as $key => $value) {
-            if ($this->hasRelation($value['association'])) {
+        foreach ($metadata->getAssociationMappings() as $key => $value) {
+            if ($this->hasRelation($value['type'])) {
                 unset($metadata->associationMappings[$key]);
             }
         }
@@ -125,10 +115,9 @@ class LoadODMMetadataSubscriber implements EventSubscriber
         return in_array(
             $type,
             [
-                ClassMetadataInfo::REFERENCE_ONE,
-                ClassMetadataInfo::REFERENCE_MANY,
-                ClassMetadataInfo::EMBED_ONE,
-                ClassMetadataInfo::EMBED_MANY,
+                ClassMetadataInfo::MANY_TO_MANY,
+                ClassMetadataInfo::ONE_TO_MANY,
+                ClassMetadataInfo::ONE_TO_ONE,
             ],
             true
         );
