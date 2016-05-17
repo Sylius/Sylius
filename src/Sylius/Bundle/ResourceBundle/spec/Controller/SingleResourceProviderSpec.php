@@ -123,11 +123,11 @@ class SingleResourceProviderSpec extends ObjectBehavior
         $requestConfiguration->getRepositoryMethod()->willReturn(null);
         $requestConfiguration->getRequest()->willReturn($request);
         $request->attributes = $requestAttributes;
-        $requestAttributes->has('id')->willReturn(true);
-        $requestAttributes->get('id')->willReturn(3);
-        $requestAttributes->has('slug')->willReturn(false);
+        $requestAttributes->has('id')->willReturn(false);
+        $requestAttributes->has('slug')->willReturn(true);
+        $requestAttributes->get('slug')->willReturn('banana');
 
-        $repository->findOneBy(['id' => 3, 'request-configuration-criteria' => '1'])->willReturn($resource);
+        $repository->findOneBy(['slug' => 'banana', 'request-configuration-criteria' => '1'])->willReturn($resource);
 
         $this->get($requestConfiguration, $repository)->shouldReturn($resource);
     }
@@ -144,8 +144,7 @@ class SingleResourceProviderSpec extends ObjectBehavior
         $requestConfiguration->getRepositoryMethod()->willReturn(null);
         $requestConfiguration->getRequest()->willReturn($request);
         $request->attributes = $requestAttributes;
-        $requestAttributes->has('id')->willReturn(true);
-        $requestAttributes->get('id')->willReturn(3);
+        $requestAttributes->has('id')->willReturn(false);
         $requestAttributes->has('slug')->willReturn(false);
 
         $repository->findOneBy(['id' => 5])->willReturn($resource);
