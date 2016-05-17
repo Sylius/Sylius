@@ -76,7 +76,7 @@ class FixedDiscountActionSpec extends ObjectBehavior
         $firstItem->getTotal()->willReturn(6000);
         $secondItem->getTotal()->willReturn(4000);
 
-        $proportionalIntegerDistributor->distribute(10000, [6000, 4000], -1000)->willReturn([-600, -400]);
+        $proportionalIntegerDistributor->distribute([6000, 4000], -1000)->willReturn([-600, -400]);
         $unitsPromotionAdjustmentsApplicator->apply($order, $promotion, [-600, -400])->shouldBeCalled();
 
         $this->execute($order, ['amount' => 1000], $promotion);
@@ -101,7 +101,7 @@ class FixedDiscountActionSpec extends ObjectBehavior
         $firstItem->getTotal()->willReturn(6000);
         $secondItem->getTotal()->willReturn(4000);
 
-        $proportionalIntegerDistributor->distribute(10000, [6000, 4000], -10000)->willReturn([-6000, -4000]);
+        $proportionalIntegerDistributor->distribute([6000, 4000], -10000)->willReturn([-6000, -4000]);
         $unitsPromotionAdjustmentsApplicator->apply($order, $promotion, [-6000, -4000])->shouldBeCalled();
 
         $this->execute($order, ['amount' => 15000], $promotion);
@@ -142,12 +142,12 @@ class FixedDiscountActionSpec extends ObjectBehavior
     function it_throws_exception_if_configuration_is_invalid(OrderInterface $order, PromotionInterface $promotion)
     {
         $this
-            ->shouldThrow(new \InvalidArgumentException('"amount" must be set and must be an integer.'))
+            ->shouldThrow(\InvalidArgumentException::class)
             ->during('execute', [$order, [], $promotion])
         ;
 
         $this
-            ->shouldThrow(new \InvalidArgumentException('"amount" must be set and must be an integer.'))
+            ->shouldThrow(\InvalidArgumentException::class)
             ->during('execute', [$order, ['amount' => 'string'], $promotion])
         ;
     }
@@ -157,7 +157,7 @@ class FixedDiscountActionSpec extends ObjectBehavior
         PromotionSubjectInterface $subject
     ) {
         $this
-            ->shouldThrow(new UnexpectedTypeException($subject->getWrappedObject(), OrderInterface::class))
+            ->shouldThrow(\InvalidArgumentException::class)
             ->during('execute', [$subject, [], $promotion])
         ;
     }
@@ -204,7 +204,7 @@ class FixedDiscountActionSpec extends ObjectBehavior
         PromotionSubjectInterface $subject
     ) {
         $this
-            ->shouldThrow(new UnexpectedTypeException($subject->getWrappedObject(), OrderInterface::class))
+            ->shouldThrow(\InvalidArgumentException::class)
             ->during('revert', [$subject, [], $promotion])
         ;
     }

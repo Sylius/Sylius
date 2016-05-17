@@ -16,6 +16,7 @@ use Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicat
 use Sylius\Component\Originator\Originator\OriginatorInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -74,7 +75,7 @@ class FixedDiscountAction extends DiscountAction
             $itemsTotals[] = $item->getTotal();
         }
 
-        $splitPromotion = $this->distributor->distribute($subject->getPromotionSubjectTotal(), $itemsTotals, $promotionAmount);
+        $splitPromotion = $this->distributor->distribute($itemsTotals, $promotionAmount);
         $this->unitsPromotionAdjustmentsApplicator->apply($subject, $promotion, $splitPromotion);
     }
 
@@ -91,9 +92,8 @@ class FixedDiscountAction extends DiscountAction
      */
     protected function isConfigurationValid(array $configuration)
     {
-        if (!isset($configuration['amount']) || !is_int($configuration['amount'])) {
-            throw new \InvalidArgumentException('"amount" must be set and must be an integer.');
-        }
+        Assert::keyExists($configuration, 'amount');
+        Assert::integer($configuration['amount']);
     }
 
     /**

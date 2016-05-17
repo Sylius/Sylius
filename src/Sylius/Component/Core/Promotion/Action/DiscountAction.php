@@ -13,11 +13,13 @@ namespace Sylius\Component\Core\Promotion\Action;
 
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Originator\Originator\OriginatorInterface;
 use Sylius\Component\Promotion\Action\PromotionActionInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -39,6 +41,11 @@ abstract class DiscountAction implements PromotionActionInterface
     }
 
     /**
+     * @param array $configuration
+     */
+    abstract protected function isConfigurationValid(array $configuration);
+
+    /**
      * {@inheritdoc}
      */
     public function revert(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
@@ -49,11 +56,7 @@ abstract class DiscountAction implements PromotionActionInterface
 
         foreach ($subject->getItems() as $item) {
             foreach ($item->getUnits() as $unit) {
-                foreach ($unit->getAdjustments(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT) as $adjustment) {
-                    if ($promotion === $this->originator->getOrigin($adjustment)) {
-                        $unit->removeAdjustment($adjustment);
-                    }
-                }
+                $this->removeUnitOrderPromotionAdjustmentsByOrigin($unit, $promotion);
             }
         }
     }
@@ -65,19 +68,21 @@ abstract class DiscountAction implements PromotionActionInterface
      */
     protected function isSubjectValid(PromotionSubjectInterface $subject)
     {
-        if (!$subject instanceof OrderInterface) {
-            throw new UnexpectedTypeException($subject, OrderInterface::class);
-        }
+        Assert::implementsInterface($subject, OrderInterface::class);
 
-        if (0 === $subject->countItems()) {
-            return false;
-        }
-
-        return true;
+        return 0 !== $subject->countItems();
     }
 
     /**
-     * @param array $configuration
+     * @param OrderItemUnitInterface $unit
+     * @param PromotionInterface $promotion
      */
-    protected abstract function isConfigurationValid(array $configuration);
+    private function removeUnitOrderPromotionAdjustmentsByOrigin(OrderItemUnitInterface $unit, PromotionInterface $promotion)
+    {
+        foreach ($unit->getAdjustments(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT) as $adjustment) {
+            if ($promotion === $this->originator->getOrigin($adjustment)) {
+                $unit->removeAdjustment($adjustment);
+            }
+        }
+    }
 }

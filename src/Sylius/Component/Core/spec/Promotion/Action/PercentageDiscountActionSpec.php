@@ -103,12 +103,12 @@ class PercentageDiscountActionSpec extends ObjectBehavior
     function it_throws_exception_if_configuration_is_invalid(OrderInterface $order, PromotionInterface $promotion)
     {
         $this
-            ->shouldThrow(new \InvalidArgumentException('"percentage" must be set and must be a float.'))
+            ->shouldThrow(\InvalidArgumentException::class)
             ->during('execute', [$order, [], $promotion])
         ;
 
         $this
-            ->shouldThrow(new \InvalidArgumentException('"percentage" must be set and must be a float.'))
+            ->shouldThrow(\InvalidArgumentException::class)
             ->during('execute', [$order, ['percentage' => 'string'], $promotion])
         ;
     }
@@ -118,7 +118,7 @@ class PercentageDiscountActionSpec extends ObjectBehavior
         PromotionSubjectInterface $subject
     ) {
         $this
-            ->shouldThrow(new UnexpectedTypeException($subject->getWrappedObject(), OrderInterface::class))
+            ->shouldThrow(\InvalidArgumentException::class)
             ->during('execute', [$subject, [], $promotion])
         ;
     }
@@ -165,7 +165,7 @@ class PercentageDiscountActionSpec extends ObjectBehavior
         PromotionSubjectInterface $subject
     ) {
         $this
-            ->shouldThrow(new UnexpectedTypeException($subject->getWrappedObject(), OrderInterface::class))
+            ->shouldThrow(\InvalidArgumentException::class)
             ->during('revert', [$subject, [], $promotion])
         ;
     }

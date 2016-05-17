@@ -19,6 +19,7 @@ use Sylius\Component\Order\Factory\AdjustmentFactoryInterface;
 use Sylius\Component\Order\Model\OrderItemUnitInterface;
 use Sylius\Component\Originator\Originator\OriginatorInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -60,11 +61,7 @@ class UnitsPromotionAdjustmentsApplicator implements UnitsPromotionAdjustmentsAp
      */
     public function apply(OrderInterface $order, PromotionInterface $promotion, array $adjustmentsAmounts)
     {
-        if ($order->countItems() !== count($adjustmentsAmounts)) {
-            throw new \InvalidArgumentException(
-                'Number of adjustments amount to distribute must be equal with number of order items.'
-            );
-        }
+        Assert::eq($order->countItems(), count($adjustmentsAmounts));
 
         $i = 0;
         foreach ($order->getItems() as $item) {

@@ -31,29 +31,37 @@ class ProportionalIntegerDistributorSpec extends ObjectBehavior
 
     function it_distributes_integer_based_on_elements_participation_in_total()
     {
-        $this->distribute(8000, [4000, 2000, 2000], 300)->shouldReturn([150, 75, 75]);
+        $this->distribute([4000, 2000, 2000], 300)->shouldReturn([150, 75, 75]);
     }
 
     function it_distributes_negative_integer_based_on_elements_participation_in_total()
     {
-        $this->distribute(8000, [4000, 2000, 2000], -300)->shouldReturn([-150, -75, -75]);
+        $this->distribute([4000, 2000, 2000], -300)->shouldReturn([-150, -75, -75]);
     }
 
     function it_distributes_integer_based_on_elements_participation_in_total_even_if_it_can_be_divided_easily()
     {
-        $this->distribute(8000, [4300, 1400, 2300], 300)->shouldReturn([162, 52, 86]);
+        $this->distribute([4300, 1400, 2300], 300)->shouldReturn([162, 52, 86]);
     }
 
     function it_distributes_negative_integer_based_on_elements_participation_in_total_even_if_it_can_be_divided_easily()
     {
-        $this->distribute(8000, [4300, 1400, 2300], -300)->shouldReturn([-162, -52, -86]);
+        $this->distribute([4300, 1400, 2300], -300)->shouldReturn([-162, -52, -86]);
     }
 
-    function it_throws_exception_if_elements_sum_is_not_equal_with_total()
+    function it_throws_exception_if_amount_is_not_integer()
     {
         $this
-            ->shouldThrow(new \InvalidArgumentException('Element sum should be equal with total.'))
-            ->during('distribute', [1000, [500, 400], 200])
+            ->shouldThrow(\InvalidArgumentException::class)
+            ->during('distribute', [[4300, 1400, 2300], 'string'])
+        ;
+    }
+
+    function it_throws_exception_if_any_of_integers_array_element_is_not_integer()
+    {
+        $this
+            ->shouldThrow(\InvalidArgumentException::class)
+            ->during('distribute', [[4300, '1400', 2300], 300])
         ;
     }
 }

@@ -17,11 +17,10 @@ namespace Sylius\Component\Core\Distributor;
 interface ProportionalIntegerDistributorInterface
 {
     /**
-     * @param int $total
-     * @param array $elements
+     * @param array $integers
      * @param int $amount
      *
      * @return array
      */
-    public function distribute($total, array $elements, $amount);
+    public function distribute(array $integers, $amount);
 }

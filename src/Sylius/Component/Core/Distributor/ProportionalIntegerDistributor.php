@@ -11,22 +11,25 @@
 
 namespace Sylius\Component\Core\Distributor;
 
+use Webmozart\Assert\Assert;
+
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ProportionalIntegerDistributor implements ProportionalIntegerDistributorInterface
+final class ProportionalIntegerDistributor implements ProportionalIntegerDistributorInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function distribute($total, array $elements, $amount)
+    public function distribute(array $integers, $amount)
     {
-        if ($total !== array_sum($elements)) {
-            throw new \InvalidArgumentException('Element sum should be equal with total.');
-        }
+        Assert::allInteger($integers);
+        Assert::integer($amount);
 
+        $total = array_sum($integers);
         $distributedAmounts = [];
-        foreach ($elements as $element) {
+
+        foreach ($integers as $element) {
             $distributedAmounts[] = (int) round(($element * $amount) / $total, 0, PHP_ROUND_HALF_DOWN);
         }
 

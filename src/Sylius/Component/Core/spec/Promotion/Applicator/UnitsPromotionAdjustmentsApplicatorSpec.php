@@ -205,9 +205,7 @@ class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
         $order->countItems()->willReturn(2);
 
         $this
-            ->shouldThrow(new \InvalidArgumentException(
-                'Number of adjustments amount to distribute must be equal with number of order items.'
-            ))
+            ->shouldThrow(\InvalidArgumentException::class)
             ->during('apply', [$order, $promotion, [1999]])
         ;
     }
