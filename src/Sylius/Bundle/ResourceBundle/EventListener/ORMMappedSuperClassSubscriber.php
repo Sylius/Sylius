@@ -61,10 +61,6 @@ class ORMMappedSuperClassSubscriber extends AbstractDoctrineSubscriber
                 continue;
             }
 
-            if ($resourceMetadata->hasClass('repository')) {
-                $metadata->setCustomRepositoryClass($resourceMetadata->getClass('repository'));
-            }
-
             $metadata->isMappedSuperclass = false;
         }
     }
