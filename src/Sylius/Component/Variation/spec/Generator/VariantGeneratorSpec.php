@@ -13,7 +13,6 @@ namespace spec\Sylius\Component\Variation\Generator;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Variation\Generator\VariantGeneratorInterface;
 use Sylius\Component\Variation\Model\OptionInterface;
@@ -57,7 +56,7 @@ class VariantGeneratorSpec extends ObjectBehavior
         OptionValue $whiteColor,
         SetBuilderInterface $setBuilder,
         VariableInterface $productVariable,
-        ProductVariantInterface $permutationVariant
+        VariantInterface $permutationVariant
     ) {
         $productVariable->hasOptions()->willReturn(true);
 
@@ -78,7 +77,6 @@ class VariantGeneratorSpec extends ObjectBehavior
 
         $variantFactory->createNew()->willReturn($permutationVariant);
         $permutationVariant->setObject($productVariable)->shouldBeCalled();
-        $permutationVariant->setPrice(Argument::any())->shouldBeCalled();
         $permutationVariant->addOption(Argument::type('Sylius\Component\Variation\Model\OptionValue'))->shouldBeCalled();
         $productVariable->addVariant($permutationVariant)->shouldBeCalled();
 
@@ -97,7 +95,7 @@ class VariantGeneratorSpec extends ObjectBehavior
         OptionValue $whiteColor,
         SetBuilderInterface $setBuilder,
         VariableInterface $productVariable,
-        ProductVariantInterface $permutationVariant
+        VariantInterface $permutationVariant
     ) {
         $productVariable->hasOptions()->willReturn(true);
 
@@ -130,7 +128,6 @@ class VariantGeneratorSpec extends ObjectBehavior
 
         $variantFactory->createNew()->willReturn($permutationVariant);
         $permutationVariant->setObject($productVariable)->shouldBeCalled();
-        $permutationVariant->setPrice(Argument::any())->shouldBeCalled();
         $permutationVariant->addOption(Argument::type('Sylius\Component\Variation\Model\OptionValue'))->shouldBeCalled();
         $productVariable->addVariant($permutationVariant)->shouldBeCalled();
 
