@@ -20,6 +20,8 @@ use Symfony\Component\DependencyInjection\Parameter;
 use Symfony\Component\DependencyInjection\Reference;
 use Sylius\Bundle\ResourceBundle\Form\Type\DefaultResourceType;
 use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\Form\Builder\DefaultFormBuilder;
+use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener\NameResolverListener;
+use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener\DefaultPathListener;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -27,6 +29,57 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\Form\Builder\DefaultFormBuil
  */
 class DoctrinePHPCRDriver extends AbstractDoctrineDriver
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function load(ContainerBuilder $container, MetadataInterface $metadata)
+    {
+        parent::load($container, $metadata);
+        $this->addResourceListeners($container, $metadata);
+    }
+
+    /**
+     * Add resource event listeners.
+     */
+    protected function addResourceListeners(ContainerBuilder $container, MetadataInterface $metadata)
+    {
+        $createEventName = sprintf('%s.%s.pre_%s', $metadata->getApplicationName(), $metadata->getName(), 'create');
+        $updateEventName = sprintf('%s.%s.pre_%s', $metadata->getApplicationName(), $metadata->getName(), 'update');
+
+        // default path listener
+        $defaultPath = new Definition(DefaultPathListener::class);
+        $defaultPath->setArguments([
+            new Reference('sylius.resource_registry'),
+            new Reference($metadata->getServiceId('manager'))
+        ]);
+        $defaultPath->addTag('kernel.event_listener', [
+            'event' => $createEventName,
+            'method' => 'onPreCreate'
+        ]);
+        $container->setDefinition(
+            'sylius.resource.doctrine.odm.phpcr.event_listener.default_path',
+            $defaultPath
+        );
+
+        // name resolver listener
+        $nameResolver = new Definition(NameResolverListener::class);
+        $nameResolver->setArguments([
+            new Reference($metadata->getServiceId('manager'))
+        ]);
+        $nameResolver->addTag('kernel.event_listener', [
+            'event' => $createEventName,
+            'method' => 'onPreCreate'
+        ]);
+        $nameResolver->addTag('kernel.event_listener', [
+            'event' => $updateEventName,
+            'method' => 'onPreCreate'
+        ]);
+        $container->setDefinition(
+            'sylius.resource.doctrine.odm.phpcr.event_listener.name_resolver',
+            $nameResolver
+        );
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -70,19 +123,9 @@ class DoctrinePHPCRDriver extends AbstractDoctrineDriver
      */
     protected function addDefaultForm(ContainerBuilder $container, MetadataInterface $metadata)
     {
-        $options = array_merge(
-            [
-                'default_parent_path' => null,
-                'autocreate' => false,
-            ],
-            $metadata->hasParameter('options') ? $metadata->getParameter('options') : []
-        );
-
-        $defaultFormBuilderDefinition = new Definition(DefaultFormBuilder::class);
-        $defaultFormBuilderDefinition->setArguments([
-            new Reference($metadata->getServiceId('manager')),
-            $options['default_parent_path'],
-            $options['autocreate']
+        $builderDefinition = new Definition(DefaultFormBuilder::class);
+        $builderDefinition->setArguments([
+            new Reference($metadata->getServiceId('manager'))
         ]);
 
 
@@ -90,7 +133,7 @@ class DoctrinePHPCRDriver extends AbstractDoctrineDriver
         $definition
             ->setArguments([
                 $this->getMetdataDefinition($metadata),
-                $defaultFormBuilderDefinition,
+                $builderDefinition,
             ])
             ->addTag('form.type', ['alias' => sprintf('%s_%s', $metadata->getApplicationName(), $metadata->getName())])
         ;

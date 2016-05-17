@@ -31,29 +31,13 @@ class DefaultFormBuilder implements DefaultFormBuilderInterface
     private $documentManager;
 
     /**
-     * @var string
-     */
-    private $defaultPath;
-
-    /**
-     * @var bool
-     */
-    private $autocreate;
-
-    /**
      * @param DocumentManagerInterface $documentManager
-     * @param mixed $defaultPath
-     * @param mixed $autocreate
      */
     public function __construct(
-        DocumentManagerInterface $documentManager,
-        $defaultPath = null,
-        $autocreate = false
+        DocumentManagerInterface $documentManager
     )
     {
         $this->documentManager = $documentManager;
-        $this->defaultPath = $defaultPath;
-        $this->autocreate = $autocreate;
     }
 
     /**
@@ -82,15 +66,5 @@ class DefaultFormBuilder implements DefaultFormBuilderInterface
 
             $formBuilder->add($fieldName, null, $options);
         }
-
-        $formBuilder->addEventSubscriber(new DefaultPathSubscriber(
-            $this->documentManager,
-            $this->defaultPath,
-            $this->autocreate
-        ));
-
-        $formBuilder->addEventSubscriber(new NameResolverSubscriber(
-            $this->documentManager
-        ));
     }
 }

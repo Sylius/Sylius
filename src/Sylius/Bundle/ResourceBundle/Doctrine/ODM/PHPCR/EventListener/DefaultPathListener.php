@@ -1,15 +1,18 @@
 <?php
 
-namespace Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\Form\Subscriber;
+namespace Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormEvent;
 use Doctrine\ODM\PHPCR\DocumentManagerInterface;
 use PHPCR\Util\NodeHelper;
+use Sylius\Component\Resource\Metadata\Registry;
+use Doctrine\ODM\PHPCR\Mapping\ClassMetadata;
+use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 
 /**
- * Automatically set the parent after submitting the form.
+ * Automatically set the parent brefore the creation.
  *
  * TODO: Allow `rewrite` (or similar) option to allow the forceful setting
  *       of the parent even if the parent is already set (and is different from
@@ -18,50 +21,36 @@ use PHPCR\Util\NodeHelper;
  *
  * @author Daniel Leech <daniel@dantleech.com>
  */
-class DefaultPathSubscriber implements EventSubscriberInterface
+class DefaultPathListener
 {
+    /**
+     * @var Registry
+     */
+    private $registry;
+
     /**
      * @var DocumentManagerInterface
      */
     private $documentManager;
 
     /**
-     * @var string
-     */
-    private $defaultPath;
-
-    /**
-     * @var bool
-     */
-    private $autocreate;
-
-    public static function getSubscribedEvents()
-    {
-        return [
-            FormEvents::POST_SUBMIT => 'onPostSubmit',
-        ];
-    }
-
-    /**
+     * @param Registry $registry
      * @param DocumentManagerInterface $documentManager
-     * @param mixed $defaultPath
-     * @param mixed $autocreate
      */
     public function __construct(
-        DocumentManagerInterface $documentManager,
-        $defaultPath,
-        $autocreate
+        Registry $registry,
+        DocumentManagerInterface $documentManager
     )
     {
+        $this->registry = $registry;
         $this->documentManager = $documentManager;
-        $this->defaultPath = $defaultPath;
-        $this->autocreate = $autocreate;
     }
 
 
-    public function onPostSubmit(FormEvent $event)
+    public function onPreCreate(ResourceControllerEvent $event)
     {
-        $document = $event->getData();
+        $document = $event->getSubject();
+
         if (!is_object($document)) {
             throw new \InvalidArgumentException(sprintf(
                 'Expected an object, got a "%s"',
@@ -69,15 +58,41 @@ class DefaultPathSubscriber implements EventSubscriberInterface
             ));
         }
 
-        $metadata = $this->documentManager->getClassMetadata(get_class($document));
+        $class = get_class($document);
 
-        if (!$this->defaultPath) {
+        $resourceMetadata = $this->registry->getByClass($class);
+        $documentMetadata = $this->documentManager->getClassMetadata(get_class($document));
+
+        $options = array_merge(
+            [
+                'default_parent_path' => null,
+                'autocreate' => false,
+            ],
+            $resourceMetadata->getParameter('options')
+        );
+
+        if (null === $options['default_parent_path']) {
             return;
         }
 
+        $this->resolveParent(
+            $document,
+            $documentMetadata,
+            $options['default_parent_path'],
+            $options['autocreate']
+        );
+    }
+
+    private function resolveParent(
+        $document,
+        ClassMetadata $metadata,
+        $defaultParentPath,
+        $autocreate
+    )
+    {
         if (!$parentField = $metadata->parentMapping) {
             throw new \RuntimeException(sprintf(
-                'A default parent path has been specified, but no parent mapping has been applied to "%s"',
+                'A default parent path has been specified, but no parent mapping has been applied to document "%s"',
                 get_class($document)
             ));
         }
@@ -88,9 +103,9 @@ class DefaultPathSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $parentDocument = $this->documentManager->find(null, $this->defaultPath);
+        $parentDocument = $this->documentManager->find(null, $defaultParentPath);
 
-        if (true === $this->autocreate && null === $parentDocument) {
+        if (true === $autocreate && null === $parentDocument) {
             NodeHelper::createPath($this->documentManager->getPhpcrSession(), $this->defaultPath);
             $parentDocument = $this->documentManager->find(null, $this->defaultPath);
         }
@@ -98,7 +113,7 @@ class DefaultPathSubscriber implements EventSubscriberInterface
         if (null === $parentDocument) {
             throw new \RuntimeException(sprintf(
                 'Parent path was null and the default parent path "%s" does not exist.`autocreate` was set to "%s"',
-                $this->defaultPath, $this->autocreate ? 'true' : 'false'
+                $this->defaultPath, $autocreate ? 'true' : 'false'
             ));
         }
 

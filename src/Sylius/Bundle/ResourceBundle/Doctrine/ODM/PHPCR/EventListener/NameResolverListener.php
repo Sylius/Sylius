@@ -1,6 +1,6 @@
 <?php
 
-namespace Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\Form\Subscriber;
+namespace Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvents;
@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormEvent;
 use Doctrine\ODM\PHPCR\DocumentManagerInterface;
 use PHPCR\Util\NodeHelper;
 use Doctrine\ODM\PHPCR\Mapping\ClassMetadata;
+use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 
 /**
  * Handles the resolution of the PHPCR node name field.
@@ -26,19 +27,14 @@ use Doctrine\ODM\PHPCR\Mapping\ClassMetadata;
  *
  * @author Daniel Leech <daniel@dantleech.com>
  */
-class NameResolverSubscriber implements EventSubscriberInterface
+class NameResolverListener
 {
+    const REPLACEMENT_CHAR = ' ';
+
     /**
      * @var DocumentManagerInterface
      */
     private $documentManager;
-
-    public static function getSubscribedEvents()
-    {
-        return [
-            FormEvents::POST_SUBMIT => 'onPostSubmit',
-        ];
-    }
 
     /**
      * @param DocumentManagerInterface $documentManager
@@ -51,9 +47,9 @@ class NameResolverSubscriber implements EventSubscriberInterface
     }
 
 
-    public function onPostSubmit(FormEvent $event)
+    public function onPreCreate(ResourceControllerEvent $event)
     {
-        $document = $event->getData();
+        $document = $event->getSubject();
 
         if (!is_object($document)) {
             throw new \InvalidArgumentException(sprintf(
@@ -83,6 +79,7 @@ class NameResolverSubscriber implements EventSubscriberInterface
 
         $baseCandidateName = $metadata->getFieldValue($document, $nameField);
         $candidateName = $baseCandidateName;
+        $candidateName = preg_replace('/\\/|:|\\[|\\]|\\||\\*/', self::REPLACEMENT_CHAR, $candidateName);
 
         $index = 1;
         while (true) {
@@ -97,7 +94,6 @@ class NameResolverSubscriber implements EventSubscriberInterface
             if (null === $existing) {
                 // Remove any illegal characters
                 // TODO: Put this into a helper class and test it.
-                $candidateName = preg_replace('/\\/|:|\\[|\\]|\\||\\*/', '_', $candidateName);
                 $metadata->setFieldValue($document, $nameField, $candidateName);
                 return;
             }
