@@ -35,3 +35,4 @@ sylius:
             new: Новый пароль
     gender:
         unknown: Неизвестен
+        male: Мужской

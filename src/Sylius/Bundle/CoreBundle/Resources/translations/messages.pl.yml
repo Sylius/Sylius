@@ -36,6 +36,7 @@ sylius:
             shipping_methods: Metody wysyłki
             payment_methods: Metody płatności
             theme: Motyw
+            hostname: Nazwa hosta
         image:
             file: Zdjęcie
         locale:
@@ -146,3 +147,5 @@ sylius:
             name: Potwierdzenie dostawy
         user_confirmation:
             name: Potwierdzenia przez użytkownika
+        password_reset:
+            name: Resetowanie hasła

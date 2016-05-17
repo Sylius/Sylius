@@ -81,6 +81,9 @@ sylius:
     page:
         no_route: Treści nie będą wyświetlane na stronie jeśli trasa nie jest zdefiniowana
         publishable: Opublikowany
+    payment:
+        transition:
+            cancel: anuluj
     pricing:
         volume_based:
             max: Ilość maks.
@@ -303,6 +306,7 @@ sylius:
         groups: Grupy
         guest: Gość
         hide_deleted: Ukryj usunięte
+        hostname: Nazwa hosta
         id: ID
         identifier: Identyfikator
         images: Zdjęcia

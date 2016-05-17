@@ -67,7 +67,9 @@ sylius:
     meta:
         frontend_title: Sylius, современное решение электронной коммерции для Symfony2
     order:
+        guest: Гость
         no_items: Заказ не содержит товаров
+        no_promotion: Ни одного купона не было использовано
         no_shipments: Для данного заказа нет отправлений
         no_shipping_charges: Нет затрат на доставку
         no_taxes: Налогами не облагается
@@ -75,7 +77,11 @@ sylius:
         quantity: Кол-во
         sellable: Товар
     page:
+        no_route: Содержимое не будет отображено в интерфейсе, если для него не определен маршрут
         publishable: Опубликовано
+    payment:
+        transition:
+            refund: Возврат
     pricing:
         volume_based:
             max: Макс. часть
@@ -84,6 +90,8 @@ sylius:
         generate: Генерировать купоны
         index: Список купонов
     shipment:
+        transition:
+            ship: отправить
         update: Редактировать
     taxon:
         image: Выбрать изображение
@@ -172,6 +180,7 @@ sylius:
         create_group: Создать группу
         create_imagine_block: Создать блок-изображение
         create_locale: Добавить язык
+        create_menu_node: Создание пункта меню
         create_new_coupon: Создать новый купон
         create_new_page: Создать новую страницу
         create_order: Заказать
@@ -268,6 +277,7 @@ sylius:
         generate: Сгенерировать
         generate_variants: Генерировать варианты
         generating_coupons: Генерирование купонов
+        go_to_dashboard: Перейти в панель управления
         grand_total: Всего в корзине
         groups: Группы
         guest: Гость
@@ -297,8 +307,10 @@ sylius:
         locales: Языки
         login: Войти
         login_button: Вход
+        login_sylius_store: 'Вход в <small>магазин Sylius</small>'
         logout: Выход
         main_taxon: Основной таксон
+        male: Мужской
         manage: Управление
         manage_channels: Управление каналами
         manage_countries: Управление странами

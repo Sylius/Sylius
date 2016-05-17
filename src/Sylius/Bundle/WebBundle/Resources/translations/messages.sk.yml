@@ -284,6 +284,7 @@ sylius:
         customer_not_notified: Upozornenie nebolo poslané
         customer_notified: Upozornenie poslané
         customer_orders: Objednávky zákazníka
+        customer_since: Zákazník od
         customers: Zákazníci
         customers_list_of_all_customers_in_store: 'Zákazníci, <small>zoznam všetkých zakazníkov v obchode</small>'
         customize_default_metadata: Úprava predvolených metadáta
