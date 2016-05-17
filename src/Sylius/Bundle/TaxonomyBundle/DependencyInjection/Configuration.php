@@ -12,6 +12,10 @@
 namespace Sylius\Bundle\TaxonomyBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceAutocompleteType;
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceFromIdentifierType;
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceToHiddenIdentifierType;
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceToIdentifierType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonTranslationType;
 use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonType;
@@ -80,6 +84,8 @@ class Configuration implements ConfigurationInterface
                                             ->addDefaultsIfNotSet()
                                             ->children()
                                                 ->scalarNode('default')->defaultValue(TaxonType::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('to_identifier')->defaultValue(ResourceToIdentifierType::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('to_hidden_identifier')->defaultValue(ResourceToHiddenIdentifierType::class)->cannotBeEmpty()->end()
                                             ->end()
                                         ->end()
                                     ->end()

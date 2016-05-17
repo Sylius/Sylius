@@ -45,7 +45,7 @@ class ResourceAutocompleteToIdentifierTransformer implements DataTransformerInte
 
         $accessor = PropertyAccess::createPropertyAccessor();
 
-        return array('select' => $accessor->getValue($value, $this->select), 'resource' => $value);
+        return ['select' => $accessor->getValue($value, $this->select), 'resource' => $value];
     }
 
     /**

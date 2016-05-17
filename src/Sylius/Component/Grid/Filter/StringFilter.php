@@ -63,10 +63,14 @@ class StringFilter implements FilterInterface
         $dataSource->restrict($expression);
     }
 
+
     /**
+     * @param ExpressionBuilderInterface $expressionBuilder
      * @param string $type
      * @param string $field
      * @param mixed  $value
+     * 
+     * @return static
      */
     private function getExpression(ExpressionBuilderInterface $expressionBuilder, $type, $field, $value)
     {

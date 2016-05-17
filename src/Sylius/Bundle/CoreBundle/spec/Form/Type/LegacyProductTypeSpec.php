@@ -83,7 +83,7 @@ class LegacyProductTypeSpec extends ObjectBehavior
             ->willReturn($builder)
         ;
         $builder
-            ->add('mainTaxon', 'sylius_taxon_choice', Argument::cetera())
+            ->add('mainTaxon', 'sylius_taxon_to_hidden_identifier', Argument::cetera())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;

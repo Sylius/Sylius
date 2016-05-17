@@ -14,9 +14,25 @@
         $('input[class^="autocomplete"]').select2({
             ajax: {
                 dataType: "json",
-                url:  $('input[class^="autocomplete"]').attr('src'),
+                minimumInputLength: 2,
+                quietMillis: 250,
+                url: $('input[class^="autocomplete"]').attr('src'),
+                data: function (term) {
+                    return {
+                        criteria: { name: {type: 'contains', value: term} }
+                    };
+                },
                 results: function (data) {
-                    return {results: data};
+                    var myResults = [];
+                    $.each(data._embedded.items, function (index, item) {
+                        myResults.push({
+                            'id': item.id,
+                            'text': item.name
+                        });
+                    });
+                    return {
+                        results: myResults
+                    };
                 }
             }
         });

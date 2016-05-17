@@ -29,3 +29,12 @@ sylius_admin_taxon_tree:
             repository:
                 method: findRootNodes
     host: "localhost"
+
+sylius_admin_api_taxon_index:
+    path: api/taxons
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.taxon:indexAction
+        _format: json
+        _sylius:
+            grid: sylius_admin_taxon

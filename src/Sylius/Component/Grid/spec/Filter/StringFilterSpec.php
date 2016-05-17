@@ -171,4 +171,17 @@ class StringFilterSpec extends ObjectBehavior
 
         $this->apply($dataSource, 'name', 'John', ['fields' => ['firstName', 'lastName']]);
     }
+    
+    function it_filters_translation_fields( 
+        DataSourceInterface $dataSource,
+        ExpressionBuilderInterface $expressionBuilder
+    ) {
+        $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
+
+        $expressionBuilder->like('translation.name', '%John%')->willReturn('EXPR');
+
+        $dataSource->restrict('EXPR')->shouldBeCalled();
+
+        $this->apply($dataSource, 'name', 'John', ['fields' => ['translation.name']]);
+    }
 }

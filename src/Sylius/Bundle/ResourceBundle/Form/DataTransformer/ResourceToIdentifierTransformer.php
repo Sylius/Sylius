@@ -48,6 +48,26 @@ class ResourceToIdentifierTransformer implements DataTransformerInterface
      */
     public function transform($value)
     {
+        if (empty($value)) {
+            return '';
+        }
+
+        $class = $this->repository->getClassName();
+
+        if (!$value instanceof $class) {
+            throw new UnexpectedTypeException($value, $class);
+        }
+
+        $accessor = PropertyAccess::createPropertyAccessor();
+
+        return $accessor->getValue($value, $this->identifier);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function reverseTransform($value)
+    {
         if (!$value) {
             return null;
         }
@@ -63,25 +83,5 @@ class ResourceToIdentifierTransformer implements DataTransformerInterface
         }
 
         return $entity;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function reverseTransform($value)
-    {
-        if (empty($value)) {
-            return '';
-        }
-
-        $class = $this->repository->getClassName();
-
-        if (!$value instanceof $class) {
-            throw new UnexpectedTypeException($value, $class);
-        }
-
-        $accessor = PropertyAccess::createPropertyAccessor();
-
-        return $accessor->getValue($value, $this->identifier);
     }
 }

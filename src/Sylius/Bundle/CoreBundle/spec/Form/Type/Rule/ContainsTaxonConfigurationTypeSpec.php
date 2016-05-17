@@ -42,7 +42,7 @@ class ContainsTaxonConfigurationTypeSpec extends ObjectBehavior
         $taxonRepository->getClassName()->willReturn('taxon');
 
         $builder
-            ->add('taxon', 'sylius_entity_to_identifier', Argument::type('array'))
+            ->add('taxon', 'sylius_taxon_to_identifier', Argument::type('array'))
             ->shouldBeCalled()
             ->willReturn($builder);
         ;
