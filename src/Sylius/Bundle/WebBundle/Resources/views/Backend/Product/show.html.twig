@@ -132,10 +132,6 @@
                     <td>{{ 'sylius.ui.shipping_category'|trans }}</td>
                     <td>{{ product.shippingCategory|default('sylius.ui.no_shipping_category'|trans) }}</td>
                 </tr>
-                <tr>
-                    <td>{{ 'sylius.ui.tax_category'|trans }}</td>
-                    <td>{{ product.firstVariant.taxCategory|default('sylius.ui.no_tax_category'|trans) }}</td>
-                </tr>
                 {% if product.restrictedZone %}
                     <tr>
                         <td>{{ 'sylius.ui.restricted_zone'|trans }}</td>

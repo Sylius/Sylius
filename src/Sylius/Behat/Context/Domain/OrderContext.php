@@ -110,7 +110,7 @@ final class OrderContext implements Context
      */
     public function orderItemShouldNotExistInTheRegistry(ProductInterface $product)
     {
-        $orderItems = $this->orderItemRepository->findBy(['variant' => $product->getVariants()->first()]);
+        $orderItems = $this->orderItemRepository->findBy(['variant' => $product->getFirstVariant()]);
 
         expect($orderItems)->toBe([]);
     }

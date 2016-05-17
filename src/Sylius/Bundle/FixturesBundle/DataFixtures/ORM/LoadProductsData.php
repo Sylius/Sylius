@@ -272,7 +272,7 @@ class LoadProductsData extends DataFixture
     protected function addVariant(ProductInterface $product, $code = null)
     {
         /** @var ProductVariantInterface $variant */
-        $variant = $product->getVariants()->first();
+        $variant = $product->getFirstVariant();
         $variant->setProduct($product);
         $variant->setPrice($this->faker->randomNumber(4));
         $variant->setCode(null === $code ? $this->getUniqueCode() : $code);

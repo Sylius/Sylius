@@ -81,7 +81,8 @@ class VariantCombinationValidatorSpec extends ObjectBehavior
         ]);
 
         $variant->getObject()->willReturn($variable);
-        $variant->getOptions()->willReturn([$option]);
+
+        $variant->getOptions()->willReturn(new \ArrayIterator([$option->getWrappedObject()]));
 
         $existingVariant->hasOption($option)->willReturn(true);
 

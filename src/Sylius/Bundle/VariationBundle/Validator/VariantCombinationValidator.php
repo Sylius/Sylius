@@ -56,6 +56,10 @@ class VariantCombinationValidator extends ConstraintValidator
 
             $matches = true;
 
+            if (!$variant->getOptions()->count()) {
+                continue;
+            }
+
             foreach ($variant->getOptions() as $option) {
                 if (!$existingVariant->hasOption($option)) {
                     $matches = false;

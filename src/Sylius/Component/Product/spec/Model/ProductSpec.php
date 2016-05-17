@@ -167,11 +167,15 @@ class ProductSpec extends ObjectBehavior
         $this->hasVariants()->shouldReturn(false);
     }
 
-    function its_hasVariants_should_return_true_only_if_any_variants_defined(VariantInterface $variant)
-    {
-        $variant->setProduct($this)->shouldBeCalled();
+    function its_hasVariants_should_return_true_only_if_multiple_variants_are_defined(
+        VariantInterface $firstVariant,
+        VariantInterface $secondVariant
+    ) {
+        $firstVariant->setProduct($this)->shouldBeCalled();
+        $secondVariant->setProduct($this)->shouldBeCalled();
 
-        $this->addVariant($variant);
+        $this->addVariant($firstVariant);
+        $this->addVariant($secondVariant);
         $this->hasVariants()->shouldReturn(true);
     }
 
@@ -183,7 +187,6 @@ class ProductSpec extends ObjectBehavior
 
     function it_does_not_include_unavailable_variants_in_available_variants(VariantInterface $variant)
     {
-        $variant->isMaster()->willReturn(false);
         $variant->isAvailable()->willReturn(false);
 
         $variant->setProduct($this)->shouldBeCalled();
@@ -192,32 +195,16 @@ class ProductSpec extends ObjectBehavior
         $this->getAvailableVariants()->shouldHaveCount(0);
     }
 
-    function it_does_not_include_master_variant_in_available_variants(VariantInterface $variant)
-    {
-        $variant->isMaster()->willReturn(true);
-
-        $variant->setProduct($this)->shouldBeCalled();
-
-        $this->addVariant($variant);
-        $this->getAvailableVariants()->shouldHaveCount(0);
-    }
-
     function it_returns_available_variants(
-        VariantInterface $masterVariant,
         VariantInterface $unavailableVariant,
         VariantInterface $variant
     ) {
-        $masterVariant->isMaster()->willReturn(true);
-        $unavailableVariant->isMaster()->willReturn(false);
         $unavailableVariant->isAvailable()->willReturn(false);
-        $variant->isMaster()->willReturn(false);
         $variant->isAvailable()->willReturn(true);
 
-        $masterVariant->setProduct($this)->shouldBeCalled();
         $unavailableVariant->setProduct($this)->shouldBeCalled();
         $variant->setProduct($this)->shouldBeCalled();
 
-        $this->addVariant($masterVariant);
         $this->addVariant($unavailableVariant);
         $this->addVariant($variant);
 
