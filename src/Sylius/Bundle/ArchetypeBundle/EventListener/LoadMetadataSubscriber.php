@@ -142,12 +142,12 @@ class LoadMetadataSubscriber implements EventSubscriber
             'fieldName' => 'parent',
             'type' => ClassMetadataInfo::MANY_TO_ONE,
             'targetEntity' => $class['archetype']['classes']['model'],
-            'joinColumn' => [
+            'joinColumns' => [[
                 'name' => 'parent_id',
                 'referencedColumnName' => 'id',
                 'nullable' => true,
                 'onDelete' => 'SET NULL',
-            ],
+            ]],
         ];
 
         $metadata->mapManyToOne($parentMapping);
