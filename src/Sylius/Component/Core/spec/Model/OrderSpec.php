@@ -11,6 +11,7 @@
 
 namespace spec\Sylius\Component\Core\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Channel\Model\ChannelInterface;
@@ -463,6 +464,33 @@ class OrderSpec extends ObjectBehavior
         $this->getShippingTotal()->shouldReturn(1070);
     }
 
+    function it_returns_shipping_total_decreased_by_shipping_promotion(
+        AdjustmentInterface $shippingAdjustment,
+        AdjustmentInterface $shippingTaxAdjustment,
+        AdjustmentInterface $shippingPromotionAdjustment
+    ) {
+        $shippingAdjustment->getType()->willReturn(AdjustmentInterface::SHIPPING_ADJUSTMENT);
+        $shippingAdjustment->isNeutral()->willReturn(false);
+        $shippingAdjustment->getAmount()->willReturn(1000);
+
+        $shippingTaxAdjustment->getType()->willReturn(AdjustmentInterface::TAX_ADJUSTMENT);
+        $shippingTaxAdjustment->isNeutral()->willReturn(false);
+        $shippingTaxAdjustment->getAmount()->willReturn(70);
+
+        $shippingPromotionAdjustment->getType()->willReturn(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT);
+        $shippingPromotionAdjustment->isNeutral()->willReturn(false);
+        $shippingPromotionAdjustment->getAmount()->willReturn(-100);
+
+        $shippingAdjustment->setAdjustable($this)->shouldBeCalled();
+        $shippingTaxAdjustment->setAdjustable($this)->shouldBeCalled();
+        $shippingPromotionAdjustment->setAdjustable($this)->shouldBeCalled();
+        $this->addAdjustment($shippingAdjustment);
+        $this->addAdjustment($shippingTaxAdjustment);
+        $this->addAdjustment($shippingPromotionAdjustment);
+
+        $this->getShippingTotal()->shouldReturn(970);
+    }
+
     function it_does_not_include_neutral_tax_adjustments_in_shipping_total(
         AdjustmentInterface $shippingAdjustment,
         AdjustmentInterface $neutralShippingTaxAdjustment
@@ -483,30 +511,46 @@ class OrderSpec extends ObjectBehavior
         $this->getShippingTotal()->shouldReturn(1000);
     }
 
-    function it_returns_promotions_total_recursively(
-        AdjustmentInterface $orderPromotionAdjustment,
-        AdjustmentInterface $orderItemPromotionAdjustment,
-        OrderItemInterface $orderItem
+    function it_returns_0_as_promotion_total_when_there_are_no_order_promotion_adjustments()
+    {
+        $this->getOrderPromotionTotal()->shouldReturn(0);
+    }
+
+    function it_returns_sum_of_all_order_promotion_adjustments_applied_to_items_as_order_promotion_total(
+        OrderItemInterface $orderItem1,
+        OrderItemInterface $orderItem2
     ) {
-        $orderPromotionAdjustment->getAmount()->willReturn(10000);
-        $orderItemPromotionAdjustment->getAmount()->willReturn(5000);
+        $orderItem1->getTotal()->willReturn(500);
+        $orderItem2->getTotal()->willReturn(300);
 
-        $orderPromotionAdjustment->isNeutral()->willReturn(false);
-        $orderItemPromotionAdjustment->isNeutral()->willReturn(false);
+        $orderItem1->getAdjustmentsTotalRecursively(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)->willReturn(-400);
+        $orderItem2->getAdjustmentsTotalRecursively(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)->willReturn(-600);
 
-        $orderPromotionAdjustment->getType()->willReturn(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT);
-        $orderItemPromotionAdjustment->getType()->willReturn(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT);
+        $orderItem1->setOrder($this)->shouldBeCalled();
+        $orderItem2->setOrder($this)->shouldBeCalled();
+        $this->addItem($orderItem1);
+        $this->addItem($orderItem2);
 
-        $orderPromotionAdjustment->setAdjustable($this)->shouldBeCalled();
+        $this->getOrderPromotionTotal()->shouldReturn(-1000);
+    }
 
-        $orderItem->getAdjustmentsRecursively(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)->willReturn([$orderItemPromotionAdjustment]);
-        $orderItem->setOrder($this)->shouldBeCalled();
-        $orderItem->getTotal()->willReturn(15000);
-        $orderItem->getAdjustmentsRecursively(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)->willReturn([]);
+    function it_does_not_include_shipping_promotion_adjustment_in_order_promotion_total(
+        AdjustmentInterface $shippingPromotionAdjustment,
+        OrderItemInterface $orderItem1
+    ) {
+        $orderItem1->getTotal()->willReturn(500);
+        $orderItem1->getAdjustmentsTotalRecursively(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)->willReturn(-400);
 
-        $this->addItem($orderItem);
-        $this->addAdjustment($orderPromotionAdjustment);
+        $shippingPromotionAdjustment->getType()->willReturn(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT);
+        $shippingPromotionAdjustment->isNeutral()->willReturn(false);
+        $shippingPromotionAdjustment->getAmount()->willReturn(-100);
 
-        $this->getPromotionsTotalRecursively()->shouldReturn(15000);
+        $orderItem1->setOrder($this)->shouldBeCalled();
+        $this->addItem($orderItem1);
+
+        $shippingPromotionAdjustment->setAdjustable($this)->shouldBeCalled();
+        $this->addAdjustment($shippingPromotionAdjustment);
+
+        $this->getOrderPromotionTotal()->shouldReturn(-400);
     }
 }
