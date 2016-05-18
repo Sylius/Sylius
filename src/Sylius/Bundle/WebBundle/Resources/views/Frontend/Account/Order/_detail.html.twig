@@ -64,7 +64,7 @@
                         {{ 'sylius.ui.tax_total'|trans }}
                     </span>
                 </td>
-                <td>{{ order.getAdjustmentsTotalRecursively(taxAdjustment)|sylius_money(order.currency) }}</td>
+                <td>{{ order.taxTotal|sylius_money(order.currency) }}</td>
             </tr>
             <tr>
                 <td colspan="3">

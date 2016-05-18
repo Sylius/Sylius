@@ -29,6 +29,8 @@ use Sylius\Component\Promotion\Model\CouponInterface;
 use Sylius\Component\User\Model\CustomerInterface;
 
 /**
+ * @mixin \Sylius\Component\Core\Model\Order
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class OrderSpec extends ObjectBehavior
@@ -356,6 +358,89 @@ class OrderSpec extends ObjectBehavior
 
         $this->removePromotion($promotion);
         $this->shouldNotHavePromotion($promotion);
+    }
+
+    function it_returns_0_tax_total_when_there_are_no_items_and_adjustments()
+    {
+        $this->getTaxTotal()->shouldReturn(0);
+    }
+
+    function it_returns_tax_of_all_items_as_tax_total_when_there_are_no_tax_adjustments(
+        OrderItemInterface $orderItem1,
+        OrderItemInterface $orderItem2
+    ) {
+        $orderItem1->getTotal()->willReturn(1100);
+        $orderItem1->getTaxTotal()->willReturn(100);
+        $orderItem2->getTotal()->willReturn(1050);
+        $orderItem2->getTaxTotal()->willReturn(50);
+
+        $orderItem1->setOrder($this)->shouldBeCalled();
+        $orderItem2->setOrder($this)->shouldBeCalled();
+        $this->addItem($orderItem1);
+        $this->addItem($orderItem2);
+
+        $this->getTaxTotal()->shouldReturn(150);
+    }
+
+    function it_returns_tax_of_all_items_and_non_neutral_shipping_tax_as_tax_total(
+        OrderItemInterface $orderItem1,
+        OrderItemInterface $orderItem2,
+        AdjustmentInterface $shippingAdjustment,
+        AdjustmentInterface $shippingTaxAdjustment
+    ) {
+        $orderItem1->getTotal()->willReturn(1100);
+        $orderItem1->getTaxTotal()->willReturn(100);
+        $orderItem2->getTotal()->willReturn(1050);
+        $orderItem2->getTaxTotal()->willReturn(50);
+
+        $shippingAdjustment->getType()->willReturn(AdjustmentInterface::SHIPPING_ADJUSTMENT);
+        $shippingAdjustment->isNeutral()->willReturn(false);
+        $shippingAdjustment->getAmount()->willReturn(1000);
+        $shippingTaxAdjustment->getType()->willReturn(AdjustmentInterface::TAX_ADJUSTMENT);
+        $shippingTaxAdjustment->isNeutral()->willReturn(false);
+        $shippingTaxAdjustment->getAmount()->willReturn(70);
+
+        $orderItem1->setOrder($this)->shouldBeCalled();
+        $orderItem2->setOrder($this)->shouldBeCalled();
+        $this->addItem($orderItem1);
+        $this->addItem($orderItem2);
+
+        $shippingTaxAdjustment->setAdjustable($this)->shouldBeCalled();
+        $this->addAdjustment($shippingTaxAdjustment);
+
+        $this->getTaxTotal()->shouldReturn(220);
+    }
+
+    function it_returns_tax_of_all_items_and_neutral_shipping_tax_as_tax_total(
+        OrderItemInterface $orderItem1,
+        OrderItemInterface $orderItem2,
+        AdjustmentInterface $shippingAdjustment,
+        AdjustmentInterface $shippingTaxAdjustment
+    ) {
+        $orderItem1->getTotal()->willReturn(1100);
+        $orderItem1->getTaxTotal()->willReturn(100);
+        $orderItem2->getTotal()->willReturn(1050);
+        $orderItem2->getTaxTotal()->willReturn(50);
+
+        $shippingAdjustment->getType()->willReturn(AdjustmentInterface::SHIPPING_ADJUSTMENT);
+        $shippingAdjustment->isNeutral()->willReturn(false);
+        $shippingAdjustment->getAmount()->willReturn(1000);
+
+        $shippingTaxAdjustment->getType()->willReturn(AdjustmentInterface::TAX_ADJUSTMENT);
+        $shippingTaxAdjustment->isNeutral()->willReturn(true);
+        $shippingTaxAdjustment->getAmount()->willReturn(70);
+
+        $orderItem1->setOrder($this)->shouldBeCalled();
+        $orderItem2->setOrder($this)->shouldBeCalled();
+        $this->addItem($orderItem1);
+        $this->addItem($orderItem2);
+
+        $shippingAdjustment->setAdjustable($this)->shouldBeCalled();
+        $shippingTaxAdjustment->setAdjustable($this)->shouldBeCalled();
+        $this->addAdjustment($shippingAdjustment);
+        $this->addAdjustment($shippingTaxAdjustment);
+
+        $this->getTaxTotal()->shouldReturn(220);
     }
 
     function it_returns_promotions_total_recursively(

@@ -53,7 +53,7 @@
                 {{ (item.unitPrice * item.quantity)|sylius_price(order.currency) }}
             </td>
             <td class="center aligned">
-                {{ item.getAdjustmentsTotalRecursively(taxAdjustment)|sylius_price(order.currency) }}
+                {{ item.taxTotal|sylius_price(order.currency) }}
             </td>
             <td class="center aligned discount">
                 {% set itemDiscount = item.getAdjustmentsTotalRecursively(itemPromotionAdjustment) %}
@@ -111,7 +111,7 @@
         </th>
         <th colspan="4" id="tax-total" class="right aligned">
             <strong>{{ 'sylius.ui.tax_total'|trans }}</strong>:
-            {{ order.getAdjustmentsTotalRecursively(taxAdjustment)|sylius_price(order.currency) }}
+            {{ order.taxTotal|sylius_price(order.currency) }}
         </th>
     </tr>
     <tr>

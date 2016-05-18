@@ -65,7 +65,7 @@
             </td>
             <td colspan="2">
                 <span class="pull-right">
-                <strong>{{ 'sylius.ui.tax_total'|trans }}</strong>: {{ order.getAdjustmentsTotalRecursively(taxAdjustment)|sylius_price }}
+                <strong>{{ 'sylius.ui.tax_total'|trans }}</strong>: {{ order.taxTotal|sylius_price }}
                 </span>
             </td>
         </tr>

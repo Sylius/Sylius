@@ -13,6 +13,7 @@ namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
@@ -22,6 +23,8 @@ use Sylius\Component\Shipping\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Model\ShipmentUnitInterface;
 
 /**
+ * @mixin \Sylius\Component\Core\Model\OrderItemUnit
+ *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class OrderItemUnitSpec extends ObjectBehavior
@@ -110,5 +113,58 @@ class OrderItemUnitSpec extends ObjectBehavior
     {
         $this->setShippingState(ShipmentInterface::STATE_SHIPPED);
         $this->getShippingState()->shouldReturn(ShipmentInterface::STATE_SHIPPED);
+    }
+
+    function it_returns_0_tax_total_when_there_are_no_tax_adjustments()
+    {
+        $this->getTaxTotal()->shouldReturn(0);
+    }
+
+    function it_returns_sum_of_neutral_and_non_neutral_tax_adjustments_as_tax_total(
+        OrderItemInterface $orderItem,
+        AdjustmentInterface $nonNeutralTaxAdjustment,
+        AdjustmentInterface $neutralTaxAdjustment
+    ) {
+        $neutralTaxAdjustment->isNeutral()->willReturn(true);
+        $neutralTaxAdjustment->getType()->willReturn(AdjustmentInterface::TAX_ADJUSTMENT);
+        $neutralTaxAdjustment->getAmount()->willReturn(200);
+        $nonNeutralTaxAdjustment->isNeutral()->willReturn(false);
+        $nonNeutralTaxAdjustment->getType()->willReturn(AdjustmentInterface::TAX_ADJUSTMENT);
+        $nonNeutralTaxAdjustment->getAmount()->willReturn(300);
+
+        $orderItem->recalculateUnitsTotal()->shouldBeCalled();
+        $neutralTaxAdjustment->setAdjustable($this)->shouldBeCalled();
+        $nonNeutralTaxAdjustment->setAdjustable($this)->shouldBeCalled();
+        $this->addAdjustment($neutralTaxAdjustment);
+        $this->addAdjustment($nonNeutralTaxAdjustment);
+
+        $this->getTaxTotal()->shouldReturn(500);
+    }
+
+    function it_returns_only_sum_of_neutral_and_non_neutral_tax_adjustments_as_tax_total(
+        OrderItemInterface $orderItem,
+        AdjustmentInterface $nonNeutralTaxAdjustment,
+        AdjustmentInterface $neutralTaxAdjustment,
+        AdjustmentInterface $notTaxAdjustment
+    ) {
+        $neutralTaxAdjustment->isNeutral()->willReturn(true);
+        $neutralTaxAdjustment->getType()->willReturn(AdjustmentInterface::TAX_ADJUSTMENT);
+        $neutralTaxAdjustment->getAmount()->willReturn(200);
+        $nonNeutralTaxAdjustment->isNeutral()->willReturn(false);
+        $nonNeutralTaxAdjustment->getType()->willReturn(AdjustmentInterface::TAX_ADJUSTMENT);
+        $nonNeutralTaxAdjustment->getAmount()->willReturn(300);
+        $notTaxAdjustment->isNeutral()->willReturn(false);
+        $notTaxAdjustment->getType()->willReturn(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT);
+        $notTaxAdjustment->getAmount()->willReturn(100);
+
+        $orderItem->recalculateUnitsTotal()->shouldBeCalled();
+        $neutralTaxAdjustment->setAdjustable($this)->shouldBeCalled();
+        $nonNeutralTaxAdjustment->setAdjustable($this)->shouldBeCalled();
+        $notTaxAdjustment->setAdjustable($this)->shouldBeCalled();
+        $this->addAdjustment($neutralTaxAdjustment);
+        $this->addAdjustment($nonNeutralTaxAdjustment);
+        $this->addAdjustment($notTaxAdjustment);
+
+        $this->getTaxTotal()->shouldReturn(500);
     }
 }
