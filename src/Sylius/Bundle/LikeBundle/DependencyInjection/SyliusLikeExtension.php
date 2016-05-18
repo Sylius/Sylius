@@ -36,6 +36,10 @@ class SyliusLikeExtension extends AbstractResourceExtension
 
         $this->registerResources('sylius', $config['driver'], $this->resolveResources($config['resources'], $container), $container);
 
+        foreach ($config['resources'] as $name => $parameters) {
+            $this->addRequiredArgumentsToForms($name, $parameters, $container);
+        }
+
         $configFiles = [
             'services.xml',
         ];
@@ -70,5 +74,23 @@ class SyliusLikeExtension extends AbstractResourceExtension
         }
 
         return $resolvedResources;
+    }
+
+    /**
+     * @param string $name
+     * @param array $parameters
+     * @param ContainerBuilder $container
+     */
+    private function addRequiredArgumentsToForms($name, array $parameters, ContainerBuilder $container)
+    {
+        if (!$container->hasDefinition('sylius.form.type.'.$name.'_like')) {
+            return;
+        }
+
+        foreach ($parameters['like']['classes']['form'] as $formName => $form) {
+            $formKey = ('default' === $formName) ? $name.'_like' : $name.'_like_'.$formName;
+            $formDefinition = $container->getDefinition('sylius.form.type.'.$formKey);
+            $formDefinition->addArgument($name);
+        }
     }
 }
