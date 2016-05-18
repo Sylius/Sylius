@@ -291,26 +291,6 @@ class OrderItemSpec extends ObjectBehavior
         $this->getTotal()->shouldReturn(0);
     }
 
-    function it_has_correct_total_after_adjustments_clear(
-        AdjustmentInterface $adjustment1,
-        AdjustmentInterface $adjustment2
-    ) {
-        $adjustment1->isNeutral()->willReturn(false);
-        $adjustment1->getAmount()->willReturn(200);
-        $adjustment1->setAdjustable($this)->shouldBeCalled();
-
-        $adjustment2->isNeutral()->willReturn(false);
-        $adjustment2->getAmount()->willReturn(300);
-        $adjustment2->setAdjustable($this)->shouldBeCalled();
-
-        $this->addAdjustment($adjustment1);
-        $this->addAdjustment($adjustment2);
-        $this->getTotal()->shouldReturn(500);
-
-        $this->clearAdjustments();
-        $this->getTotal()->shouldReturn(0);
-    }
-
     function it_has_0_total_when_adjustment_decreases_total_under_0(
         AdjustmentInterface $adjustment,
         OrderItemUnitInterface $orderItemUnit1

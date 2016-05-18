@@ -13,6 +13,7 @@ namespace Sylius\Component\Order\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -140,9 +141,7 @@ class OrderItem implements OrderItemInterface
      */
     public function setUnitPrice($unitPrice)
     {
-        if (!is_int($unitPrice)) {
-            throw new \InvalidArgumentException('Unit price must be an integer.');
-        }
+        Assert::integer($unitPrice, 'Unit price must be an integer.');
 
         $this->unitPrice = $unitPrice;
         $this->recalculateUnitsTotal();
@@ -353,10 +352,6 @@ class OrderItem implements OrderItemInterface
     public function removeAdjustments($type)
     {
         foreach ($this->getAdjustments($type) as $adjustment) {
-            if ($adjustment->isLocked()) {
-                continue;
-            }
-
             $this->removeAdjustment($adjustment);
         }
     }
@@ -370,15 +365,6 @@ class OrderItem implements OrderItemInterface
         foreach ($this->units as $unit) {
             $unit->removeAdjustments($type);
         }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function clearAdjustments()
-    {
-        $this->adjustments->clear();
-        $this->recalculateAdjustmentsTotal();
     }
 
     /**

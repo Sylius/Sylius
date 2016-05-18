@@ -444,15 +444,4 @@ class OrderSpec extends ObjectBehavior
         $this->clearItems();
         $this->shouldBeEmpty();
     }
-
-    function it_should_be_able_to_clear_adjustments(AdjustmentInterface $adjustment)
-    {
-        $this->hasAdjustment($adjustment)->shouldReturn(false);
-        $this->addAdjustment($adjustment);
-        $this->hasAdjustment($adjustment)->shouldReturn(true);
-
-        $this->clearAdjustments();
-
-        $this->hasAdjustment($adjustment)->shouldReturn(false);
-    }
 }

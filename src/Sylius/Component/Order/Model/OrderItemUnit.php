@@ -157,22 +157,8 @@ class OrderItemUnit implements OrderItemUnitInterface
     public function removeAdjustments($type)
     {
         foreach ($this->getAdjustments($type) as $adjustment) {
-            if ($adjustment->isLocked()) {
-                continue;
-            }
-
             $this->removeAdjustment($adjustment);
         }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function clearAdjustments()
-    {
-        $this->adjustments->clear();
-        $this->recalculateAdjustmentsTotal();
-        $this->orderItem->recalculateUnitsTotal();
     }
 
     /**

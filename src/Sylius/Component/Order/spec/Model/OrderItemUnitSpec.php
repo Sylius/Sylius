@@ -45,6 +45,34 @@ class OrderItemUnitSpec extends ObjectBehavior
         $this->getTotal()->shouldReturn(1000);
     }
 
+    function it_includes_non_neutral_adjustments_in_total(AdjustmentInterface $adjustment, OrderItemInterface $orderItem)
+    {
+        $adjustment->isNeutral()->willReturn(false);
+        $adjustment->getAmount()->willReturn(400);
+
+        $orderItem->recalculateUnitsTotal()->shouldBeCalled();
+        $adjustment->setAdjustable($this)->shouldBeCalled();
+
+        $this->addAdjustment($adjustment);
+
+        $this->getTotal()->shouldReturn(1400);
+    }
+
+    function it_returns_0_as_total_even_when_adjustments_decreases_it_below_0(
+        AdjustmentInterface $adjustment,
+        OrderItemInterface $orderItem
+    ) {
+        $adjustment->isNeutral()->willReturn(false);
+        $adjustment->getAmount()->willReturn(-1400);
+
+        $orderItem->recalculateUnitsTotal()->shouldBeCalled();
+        $adjustment->setAdjustable($this)->shouldBeCalled();
+
+        $this->addAdjustment($adjustment);
+
+        $this->getTotal()->shouldReturn(0);
+    }
+
     function it_adds_and_removes_adjustments(AdjustmentInterface $adjustment, OrderItemInterface $orderItem)
     {
         $orderItem->recalculateUnitsTotal()->shouldBeCalled();
@@ -111,30 +139,6 @@ class OrderItemUnitSpec extends ObjectBehavior
         $this->removeAdjustment($adjustment1);
 
         $this->getTotal()->shouldReturn(1300);
-    }
-
-    function it_has_correct_total_after_adjustments_clear(
-        AdjustmentInterface $adjustment1,
-        AdjustmentInterface $adjustment2,
-        OrderItemInterface $orderItem
-    ) {
-        $orderItem->recalculateUnitsTotal()->shouldBeCalled(3);
-
-        $adjustment1->isNeutral()->willReturn(false);
-        $adjustment1->getAmount()->willReturn(200);
-        $adjustment1->setAdjustable($this)->shouldBeCalled();
-
-        $adjustment2->isNeutral()->willReturn(false);
-        $adjustment2->getAmount()->willReturn(300);
-        $adjustment2->setAdjustable($this)->shouldBeCalled();
-
-        $this->addAdjustment($adjustment1);
-        $this->addAdjustment($adjustment2);
-
-        $this->getTotal()->shouldReturn(1500);
-
-        $this->clearAdjustments();
-        $this->getTotal()->shouldReturn(1000);
     }
 
     function it_has_correct_total_after_neutral_adjustment_add_and_remove(

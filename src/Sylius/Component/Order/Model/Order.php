@@ -299,14 +299,6 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getTotalItems()
-    {
-        return $this->countItems();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getTotalQuantity()
     {
         $quantity = 0;
@@ -466,15 +458,6 @@ class Order implements OrderInterface
 
             $this->removeAdjustment($adjustment);
         }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function clearAdjustments()
-    {
-        $this->adjustments->clear();
-        $this->recalculateAdjustmentsTotal();
     }
 
     /**

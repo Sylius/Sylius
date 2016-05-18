@@ -13,6 +13,7 @@ namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Order\Model\OrderItemUnit as BaseOrderItemUnit;
+use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Shipping\Model\ShipmentInterface as BaseShipmentInterface;
 
 /**
@@ -20,6 +21,8 @@ use Sylius\Component\Shipping\Model\ShipmentInterface as BaseShipmentInterface;
  */
 class OrderItemUnit extends BaseOrderItemUnit implements OrderItemUnitInterface
 {
+    use TimestampableTrait;
+
     /**
      * @var string InventoryUnitInterface::STATE_*
      */
@@ -34,16 +37,6 @@ class OrderItemUnit extends BaseOrderItemUnit implements OrderItemUnitInterface
      * @var string BaseShipmentInterface::STATE_*
      */
     protected $shippingState = BaseShipmentInterface::STATE_CHECKOUT;
-
-    /**
-     * @var \DateTime
-     */
-    protected $createdAt;
-
-    /**
-     * @var \DateTime
-     */
-    protected $updatedAt;
 
     /**
      * @param OrderItemInterface $orderItem
@@ -141,37 +134,5 @@ class OrderItemUnit extends BaseOrderItemUnit implements OrderItemUnitInterface
     public function setShippingState($state)
     {
         $this->shippingState = $state;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCreatedAt(\DateTime $createdAt)
-    {
-        $this->createdAt = $createdAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setUpdatedAt(\DateTime $updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
     }
 }
