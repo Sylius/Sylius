@@ -98,7 +98,13 @@ class RequestConfiguration
      */
     public function getDefaultTemplate($name)
     {
-        return sprintf('%s:%s.%s', $this->metadata->getTemplatesNamespace() ?: ':', $name, 'twig');
+        $templatesNamespace = $this->metadata->getTemplatesNamespace();
+
+        if (false !== strpos($templatesNamespace, ':')) {
+            return sprintf('%s:%s.%s', $templatesNamespace ?: ':', $name, 'twig');
+        }
+
+        return sprintf('%s/%s.%s', $templatesNamespace, $name, 'twig');
     }
 
     /**
