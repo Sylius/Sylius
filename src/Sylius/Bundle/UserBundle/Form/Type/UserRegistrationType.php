@@ -13,6 +13,7 @@ namespace Sylius\Bundle\UserBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -32,6 +33,18 @@ class UserRegistrationType extends AbstractResourceType
                 'invalid_message' => 'sylius.user.plainPassword.mismatch',
             ])
         ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults([
+            'data_class' => $this->dataClass,
+            'validation_groups' => $this->validationGroups,
+            'cascade_validation' => true,
+        ]);
     }
 
     /**

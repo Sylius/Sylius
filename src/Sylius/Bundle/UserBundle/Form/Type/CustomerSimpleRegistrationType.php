@@ -51,6 +51,8 @@ class CustomerSimpleRegistrationType extends AbstractResourceType
             ])
             ->add('user', 'sylius_user_registration', [
                 'label' => false,
+                'validation_groups' => $this->validationGroups,
+                'cascade_validation' => true,
             ])
             ->addEventSubscriber(new CustomerRegistrationFormSubscriber($this->customerRepository))
             ->addEventSubscriber(new UserRegistrationFormSubscriber())

@@ -23,6 +23,7 @@
         <parameter key="sylius.behat.page.shop.cart_summary.class">Sylius\Behat\Page\Shop\Cart\SummaryPage</parameter>
         <parameter key="sylius.behat.page.shop.product.show.class">Sylius\Behat\Page\Shop\Product\ShowPage</parameter>
         <parameter key="sylius.behat.page.shop.order.order_payments.class">Sylius\Behat\Page\Shop\Order\OrderPaymentsPage</parameter>
+        <parameter key="sylius.behat.page.shop.shop_home.class">Sylius\Behat\Page\Shop\ShopHomePage</parameter>
     </parameters>
 
     <services>
@@ -32,5 +33,6 @@
         <service id="sylius.behat.page.shop.order.order_payments" class="%sylius.behat.page.shop.order.order_payments.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false">
             <argument type="service" id="sylius.behat.table_accessor" />
         </service>
+        <service id="sylius.behat.page.shop.shop_home" class="%sylius.behat.page.shop.shop_home.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
     </services>
 </container>

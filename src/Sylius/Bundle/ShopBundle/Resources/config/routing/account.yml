@@ -21,3 +21,17 @@ sylius_shop_account_profile_update:
                 method: find
                 arguments: [expr:service('sylius.context.customer').getCustomer().getId()]
             redirect: sylius_shop_account_dashboard
+
+sylius_shop_account_registration:
+    path: /register
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.customer:createAction
+        _sylius:
+            form: sylius_customer_registration
+            event: register
+            template: SyliusShopBundle:Account:register.html.twig
+            permission: false
+            redirect:
+                route: sylius_shop_homepage
+                parameters: { email: resource.email }

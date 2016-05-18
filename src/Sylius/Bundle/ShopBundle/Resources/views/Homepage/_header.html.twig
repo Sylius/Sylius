@@ -38,8 +38,12 @@
             </div>
             <a class="item">Furniture</a>
             <div class="right item">
-                <a class="ui inverted button">Log in</a>
-                <a class="ui inverted button">Sign Up</a>
+                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                    <a class="ui inverted button" href="{{ path('sylius_shop_logout') }}">{{ 'sylius.ui.logout'|trans }}</a>
+                {% else %}
+                    <a class="ui inverted button" href="{{ path('sylius_shop_login') }}">{{ 'sylius.ui.login'|trans }}</a>
+                {% endif %}
+                <a class="ui inverted button">{{ 'sylius.ui.register'|trans }}</a>
             </div>
         </div>
     </div>

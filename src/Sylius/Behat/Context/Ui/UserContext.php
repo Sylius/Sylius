@@ -41,11 +41,6 @@ final class UserContext implements Context
     private $customerShowPage;
 
     /**
-     * @var LoginPageInterface
-     */
-    private $loginPage;
-
-    /**
      * @var RegisterPageInterface
      */
     private $registerPage;
@@ -54,30 +49,18 @@ final class UserContext implements Context
      * @param SharedStorageInterface $sharedStorage
      * @param UserRepositoryInterface $userRepository
      * @param ShowPageInterface $customerShowPage
-     * @param LoginPageInterface $loginPage
      * @param RegisterPageInterface $registerPage
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         UserRepositoryInterface $userRepository,
         ShowPageInterface $customerShowPage,
-        LoginPageInterface $loginPage,
         RegisterPageInterface $registerPage
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->userRepository = $userRepository;
         $this->customerShowPage = $customerShowPage;
-        $this->loginPage = $loginPage;
         $this->registerPage = $registerPage;
-    }
-
-    /**
-     * @Given /^I log in as "([^"]*)" with "([^"]*)" password$/
-     */
-    public function iLogInAs($login, $password)
-    {
-        $this->loginPage->open();
-        $this->loginPage->logIn($login, $password);
     }
 
     /**

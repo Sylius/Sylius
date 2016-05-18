@@ -90,6 +90,7 @@
     <class name="Sylius\Component\User\Model\User">
         <property name="plainPassword">
             <constraint name="NotBlank">
+                <option name="message">sylius.user.plainPassword.not_blank</option>
                 <option name="groups">
                     <value>sylius_user_registration</value>
                     <value>sylius_user_create</value>

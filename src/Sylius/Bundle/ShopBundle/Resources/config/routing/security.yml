@@ -1,0 +1,22 @@
+# This file is a part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_shop_login:
+    path: /login
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.user_security:loginAction
+        _sylius:
+            template: SyliusShopBundle:Account:login.html.twig
+
+sylius_shop_login_check:
+    path: /login-check
+    defaults:
+        _controller: sylius.controller.user_security:checkAction
+
+sylius_shop_logout:
+    path: /logout
+
+sylius_shop_password_resetting:
+    resource: @SyliusUserBundle/Resources/config/routing/password_reset.yml
+    prefix: /resetting
