@@ -25,12 +25,23 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
      */
     public function checkAmountValidation($message)
     {
-        $foundedElement = $this->getValidatedField($this->getElement('amount'));
-        if (null === $foundedElement) {
-            throw new ElementNotFoundException($this->getSession(), 'Element', 'css', '#sylius_promotion_coupon_instruction_amount');
-        }
+        return $this->checkValidationMessageFor('amount', $message);
+    }
 
-        return $message === $foundedElement->find('css', '.pointing')->getText();
+    /**
+     * {@inheritdoc}
+     */
+    public function checkCodeLengthValidation($message)
+    {
+        return $this->checkValidationMessageFor('code_length', $message);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function checkGenerationValidation($message)
+    {
+        return false !== strpos($this->getElement('form')->find('css', '.ui.red.label')->getText(), $message);
     }
 
     public function generate()
@@ -44,6 +55,14 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
     public function specifyAmount($amount)
     {
         $this->getDocument()->fillField('Amount', $amount);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function specifyCodeLength($codeLength)
+    {
+        $this->getDocument()->fillField('Code length', $codeLength);
     }
 
     /**
@@ -81,7 +100,27 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
             'amount' => '#sylius_promotion_coupon_generate_instruction_amount',
             'usage_limit' => '#sylius_promotion_coupon_generate_instruction_usageLimit',
             'expires_at' => '#sylius_promotion_coupon_generate_instruction_expiresAt',
+            'code_length' => '#sylius_promotion_coupon_generate_instruction_codeLength',
+            'form' => '.two.column.stackable.grid',
         ]);
+    }
+
+    /**
+     * @param string $element
+     * @param string $message
+     *
+     * @return bool
+     *
+     * @throws ElementNotFoundException
+     */
+    private function checkValidationMessageFor($element, $message)
+    {
+        $foundedElement = $this->getValidatedField($this->getElement($element));
+        if (null === $foundedElement) {
+            throw new ElementNotFoundException($this->getSession(), 'Element', 'css', '#sylius_promotion_coupon_instruction_amount');
+        }
+
+        return $message === $foundedElement->find('css', '.pointing')->getText();
     }
 
     /**

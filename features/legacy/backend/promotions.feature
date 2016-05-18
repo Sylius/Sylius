@@ -154,6 +154,7 @@ Feature: Promotions
         Given I am on the page of promotion "Press Campaign"
         And I follow "Generate coupons"
         When I fill in "Amount" with "50"
+        And I fill in "Code length" with "6"
         And I press "Generate"
         Then I should see "Promotion coupons have been successfully generated"
 
@@ -161,6 +162,7 @@ Feature: Promotions
         Given I am on the page of promotion "Press Campaign"
         And I follow "Generate coupons"
         When I fill in "Amount" with "5"
+        And I fill in "Code length" with "6"
         And I fill in "Usage limit" with "5"
         And I press "Generate"
         Then I should see "Promotion coupons have been successfully generated"
@@ -169,6 +171,7 @@ Feature: Promotions
         Given I am on the page of promotion "Press Campaign"
         And I follow "Generate coupons"
         And I fill in "Amount" with "50"
+        And I fill in "Code length" with "6"
         And I press "Generate"
         Then I should see "Promotion coupons have been successfully generated"
         And I should see "Total: 55"

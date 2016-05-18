@@ -116,6 +116,15 @@ final class ManagingPromotionCouponsContext implements Context
     }
 
     /**
+     * @When /^I specify its code length as (\d+)$/
+     * @When I do not specify its code length
+     */
+    public function iSpecifyItsCodeLengthAs($codeLength = null)
+    {
+        $this->generatePage->specifyCodeLength($codeLength);
+    }
+
+    /**
      * @When /^I limit generated coupons usage to (\d+) times$/
      */
     public function iSetGeneratedCouponsUsageLimitTo($limit)
@@ -133,26 +142,11 @@ final class ManagingPromotionCouponsContext implements Context
 
     /**
      * @When I specify its code as :code
-     */
-    public function iSpecifyItsCodeAs($code)
-    {
-        $this->createPage->specifyCode($code);
-    }
-
-    /**
      * @When I do not specify its code
      */
-    public function iDoNotSpecifyItsCode()
+    public function iSpecifyItsCodeAs($code = null)
     {
-        // Intentionally left blank to fulfill context expectation
-    }
-
-    /**
-     * @When I do not specify its amount
-     */
-    public function iDoNotSpecifyItsAmount()
-    {
-        // Intentionally left blank to fulfill context expectation
+        $this->createPage->specifyCode($code);
     }
 
     /**
@@ -173,8 +167,9 @@ final class ManagingPromotionCouponsContext implements Context
 
     /**
      * @When I specify its amount as :amount
+     * @When I do not specify its amount
      */
-    public function iSpecifyItsAmountAs($amount)
+    public function iSpecifyItsAmountAs($amount = null)
     {
         $this->generatePage->specifyAmount($amount);
     }
@@ -354,6 +349,17 @@ final class ManagingPromotionCouponsContext implements Context
     }
 
     /**
+     * @Then I should be notified that generate code length is required
+     */
+    public function iShouldBeNotifiedThatCodeLengthIsRequired()
+    {
+        Assert::true(
+            $this->generatePage->checkCodeLengthValidation('Please enter coupon code length.'),
+            'Generate code length violation message should appear on page, but it does not.'
+        );
+    }
+
+    /**
      * @Then /^there should still be only one coupon with code "([^"]+)" related to (this promotion)$/
      */
     public function thereShouldStillBeOnlyOneCouponWithCodeRelatedTo($code, PromotionInterface $promotion)
@@ -417,6 +423,19 @@ final class ManagingPromotionCouponsContext implements Context
         Assert::true(
             $this->indexPage->isSingleResourceOnPage(['code' => $coupon->getCode()]),
             sprintf('Coupon with code %s should exist.', $coupon->getCode())
+        );
+    }
+
+    /**
+     * @Then /^I should be notified that generating (\d+) coupons with code length equal to (\d+) is not possible$/
+     */
+    public function iShouldBeNotifiedThatGeneratingCouponsWithCodeLengthIsNotPossible($amount, $codeLength)
+    {
+        $message = sprintf('Invalid coupons code length or coupons amount. It is not possible to generate %d unique coupons with code length equals %d. Possible generate amount is 8.', $amount, $codeLength);
+
+        Assert::true(
+            $this->generatePage->checkGenerationValidation($message),
+            'Generate violation message should appear on page, but it does not.'
         );
     }
 }

@@ -25,6 +25,20 @@ interface GeneratePageInterface extends SymfonyPageInterface
      */
     public function checkAmountValidation($message);
 
+    /**
+     * @param string $message
+     *
+     * @return bool
+     */
+    public function checkCodeLengthValidation($message);
+
+    /**
+     * @param string $message
+     *
+     * @return bool
+     */
+    public function checkGenerationValidation($message);
+
     public function generate();
 
     /**
@@ -33,12 +47,17 @@ interface GeneratePageInterface extends SymfonyPageInterface
     public function specifyAmount($amount);
 
     /**
-     * @param int $limit
+     * @param int $codeLength
      */
-    public function setUsageLimit($limit);
+    public function specifyCodeLength($codeLength);
 
     /**
      * @param \DateTime $date
      */
     public function setExpiresAt(\DateTime $date);
+
+    /**
+     * @param int $limit
+     */
+    public function setUsageLimit($limit);
 }
