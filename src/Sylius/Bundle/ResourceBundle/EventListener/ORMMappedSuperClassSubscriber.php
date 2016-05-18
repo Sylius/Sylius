@@ -11,38 +11,24 @@
 
 namespace Sylius\Bundle\ResourceBundle\EventListener;
 
-use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
+use Doctrine\ORM\Events;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;
-use Sylius\Component\Resource\Metadata\RegistryInterface;
 
 /**
  * @author Ivan Molchanov <ivan.molchanov@opensoftdev.ru>
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class LoadORMMetadataSubscriber implements EventSubscriber
+class ORMMappedSuperClassSubscriber extends AbstractDoctrineSubscriber
 {
-    /**
-     * @var RegistryInterface
-     */
-    private $resourceRegistry;
-
-    /**
-     * @param RegistryInterface $resourceRegistry
-     */
-    public function __construct(RegistryInterface $resourceRegistry)
-    {
-        $this->resourceRegistry = $resourceRegistry;
-    }
-
     /**
      * @return array
      */
     public function getSubscribedEvents()
     {
         return [
-            'loadClassMetadata',
+            Events::loadClassMetadata,
         ];
     }
 
@@ -51,8 +37,10 @@ class LoadORMMetadataSubscriber implements EventSubscriber
      */
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
     {
-        /** @var ClassMetadata $metadata */
         $metadata = $eventArgs->getClassMetadata();
+        if (false === $this->isSyliusClass($metadata)) {
+            return;
+        }
 
         $this->convertToEntityIfNeeded($metadata);
 
@@ -71,10 +59,6 @@ class LoadORMMetadataSubscriber implements EventSubscriber
         foreach ($this->resourceRegistry->getAll() as $alias => $resourceMetadata) {
             if ($metadata->getName() !== $resourceMetadata->getClass('model')) {
                 continue;
-            }
-
-            if ($resourceMetadata->hasClass('repository')) {
-                $metadata->setCustomRepositoryClass($resourceMetadata->getClass('repository'));
             }
 
             $metadata->isMappedSuperclass = false;

@@ -11,39 +11,25 @@
 
 namespace Sylius\Bundle\ResourceBundle\EventListener;
 
-use Doctrine\Common\EventSubscriber;
 use Doctrine\ODM\MongoDB\Event\LoadClassMetadataEventArgs;
+use Doctrine\ODM\MongoDB\Events;
 use Doctrine\ODM\MongoDB\Mapping\ClassMetadata;
 use Doctrine\ODM\MongoDB\Mapping\ClassMetadataInfo;
-use Sylius\Component\Resource\Metadata\RegistryInterface;
 
 /**
  * Doctrine listener used to manipulate mappings.
  *
  * @author Ivannis Suárez Jérez <ivannis.suarez@gmail.com>
  */
-class LoadODMMetadataSubscriber implements EventSubscriber
+class ODMMappedSuperClassSubscriber extends AbstractDoctrineSubscriber
 {
-    /**
-     * @var RegistryInterface
-     */
-    private $resourceRegistry;
-
-    /**
-     * @param RegistryInterface $resourceRegistry
-     */
-    public function __construct(RegistryInterface $resourceRegistry)
-    {
-        $this->resourceRegistry = $resourceRegistry;
-    }
-
     /**
      * @return array
      */
     public function getSubscribedEvents()
     {
         return [
-            'loadClassMetadata',
+            Events::loadClassMetadata,
         ];
     }
 
@@ -52,8 +38,10 @@ class LoadODMMetadataSubscriber implements EventSubscriber
      */
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
     {
-        /** @var ClassMetadata $metadata */
         $metadata = $eventArgs->getClassMetadata();
+        if (false === $this->isSyliusClass($metadata)) {
+            return;
+        }
 
         $this->convertToDocumentIfNeeded($metadata);
 
@@ -72,10 +60,6 @@ class LoadODMMetadataSubscriber implements EventSubscriber
         foreach ($this->resourceRegistry->getAll() as $alias => $resourceMetadata) {
             if ($metadata->getName() !== $resourceMetadata->getClass('model')) {
                 continue;
-            }
-
-            if ($resourceMetadata->hasClass('repository')) {
-                $metadata->setCustomRepositoryClass($resourceMetadata->getClass('repository'));
             }
 
             $metadata->isMappedSuperclass = false;
