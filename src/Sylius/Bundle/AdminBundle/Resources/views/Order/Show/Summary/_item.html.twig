@@ -24,23 +24,23 @@
             </div>
         {% endif %}
     </td>
-    <td class="right aligned">
-        {{ item.quantity }}
-    </td>
-    <td class="right aligned">
+    <td class="right aligned unit-price">
         {{ item.unitPrice|sylius_price(order.currency) }}
     </td>
-    <td class="right aligned">
-        {{ (item.unitPrice * item.quantity)|sylius_price(order.currency) }}
+    <td class="right aligned quantity">
+        {{ item.quantity }}
     </td>
-    <td class="right aligned">
-        {{ item.getAdjustmentsTotalRecursively(taxAdjustment)|sylius_price(order.currency) }}
+    <td class="right aligned subtotal">
+        {{ item.subtotal|sylius_price(order.currency) }}
     </td>
     <td class="right aligned discount">
-        {% set itemDiscount = item.getAdjustmentsTotalRecursively(itemPromotionAdjustment) %}
+        {% set itemDiscount = item.getAdjustmentsTotalRecursively(orderPromotionAdjustment) %}
         {% if not itemDiscount == 0 %}-{% endif %}{{ (-1 * itemDiscount)|sylius_price(order.currency) }}
     </td>
-    <td class="right aligned">
+    <td class="right aligned tax">
+        {{ item.taxTotal|sylius_price(order.currency) }}
+    </td>
+    <td class="right aligned total">
         {{ item.total|sylius_price(order.currency) }}
     </td>
 </tr>

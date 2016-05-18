@@ -178,4 +178,9 @@ interface OrderInterface extends
      * @return bool
      */
     public function isInvoiceAvailable();
+
+    /**
+     * @return int
+     */
+    public function getTaxTotal();
 }

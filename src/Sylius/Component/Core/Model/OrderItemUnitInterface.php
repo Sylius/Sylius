@@ -20,4 +20,8 @@ use Sylius\Component\Shipping\Model\ShipmentUnitInterface;
  */
 interface OrderItemUnitInterface extends BaseOrderItemUnitInterface, InventoryUnitInterface, ShipmentUnitInterface
 {
+    /**
+     * @return int
+     */
+    public function getTaxTotal();
 }

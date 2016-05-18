@@ -524,4 +524,24 @@ class Order extends Cart implements OrderInterface
             $this->getAdjustmentsTotalRecursively(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)
         ;
     }
+
+    /**
+     * Returns sum of neutral and non neutral tax adjustments on order and total tax of order items.
+     *
+     * {@inheritdoc}
+     */
+    public function getTaxTotal()
+    {
+        $taxTotal = 0;
+
+        foreach ($this->getAdjustments(AdjustmentInterface::TAX_ADJUSTMENT) as $taxAdjustment) {
+            $taxTotal += $taxAdjustment->getAmount();
+        }
+
+        foreach ($this->items as $item) {
+            $taxTotal += $item->getTaxTotal();
+        }
+
+        return $taxTotal;
+    }
 }
