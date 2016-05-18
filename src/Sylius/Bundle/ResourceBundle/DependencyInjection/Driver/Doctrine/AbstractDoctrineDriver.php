@@ -17,8 +17,6 @@ use Symfony\Component\DependencyInjection\Alias;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
-use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener\Subscriber\NameResolverListener;
-use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener\Subscriber\DefaultPathListener;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>

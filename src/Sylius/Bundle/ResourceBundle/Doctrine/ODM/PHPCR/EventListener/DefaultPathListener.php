@@ -14,9 +14,6 @@ use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 /**
  * Automatically set the parent brefore the creation.
  *
- * TODO: Allow `rewrite` (or similar) option to allow the forceful setting
- *       of the parent even if the parent is already set (and is different from
- *       the candidate parent).
  * TODO: Only applies when ClassMetadata::GENERATOR_TYPE_PARENT strategy is used.
  *
  * @author Daniel Leech <daniel@dantleech.com>
@@ -46,27 +43,22 @@ class DefaultPathListener
         $this->documentManager = $documentManager;
     }
 
-
+    /**
+     * @param ResourceControllerEvent $event
+     */
     public function onPreCreate(ResourceControllerEvent $event)
     {
         $document = $event->getSubject();
 
-        if (!is_object($document)) {
-            throw new \InvalidArgumentException(sprintf(
-                'Expected an object, got a "%s"',
-                gettype($document)
-            ));
-        }
-
         $class = get_class($document);
 
         $resourceMetadata = $this->registry->getByClass($class);
-        $documentMetadata = $this->documentManager->getClassMetadata(get_class($document));
 
         $options = array_merge(
             [
                 'default_parent_path' => null,
                 'autocreate' => false,
+                'force' => false,
             ],
             $resourceMetadata->getParameter('options')
         );
@@ -77,9 +69,10 @@ class DefaultPathListener
 
         $this->resolveParent(
             $document,
-            $documentMetadata,
+            $this->documentManager->getClassMetadata($class),
             $options['default_parent_path'],
-            $options['autocreate']
+            $options['autocreate'],
+            $options['force']
         );
     }
 
@@ -87,7 +80,8 @@ class DefaultPathListener
         $document,
         ClassMetadata $metadata,
         $defaultParentPath,
-        $autocreate
+        $autocreate,
+        $force
     )
     {
         if (!$parentField = $metadata->parentMapping) {
@@ -97,23 +91,26 @@ class DefaultPathListener
             ));
         }
 
-        $actualParent = $metadata->getFieldValue($document, $parentField);
+        if (false === $force) {
+            $actualParent = $metadata->getFieldValue($document, $parentField);
 
-        if ($actualParent) {
-            return;
+            if ($actualParent) {
+                return;
+            }
         }
 
         $parentDocument = $this->documentManager->find(null, $defaultParentPath);
 
         if (true === $autocreate && null === $parentDocument) {
-            NodeHelper::createPath($this->documentManager->getPhpcrSession(), $this->defaultPath);
-            $parentDocument = $this->documentManager->find(null, $this->defaultPath);
+            $nodeHelper = new NodeHelper();
+            $nodeHelper->createPath($this->documentManager->getPhpcrSession(), $defaultParentPath);
+            $parentDocument = $this->documentManager->find(null, $defaultParentPath);
         }
 
         if (null === $parentDocument) {
             throw new \RuntimeException(sprintf(
-                'Parent path was null and the default parent path "%s" does not exist.`autocreate` was set to "%s"',
-                $this->defaultPath, $autocreate ? 'true' : 'false'
+                'Document at default parent path "%s" does not exist. `autocreate` was set to "%s"',
+                $defaultParentPath, $autocreate ? 'true' : 'false'
             ));
         }
 

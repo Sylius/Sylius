@@ -128,17 +128,22 @@ class DoctrinePHPCRDriver extends AbstractDoctrineDriver
             new Reference($metadata->getServiceId('manager'))
         ]);
 
-
         $definition = new Definition(DefaultResourceType::class);
         $definition
             ->setArguments([
                 $this->getMetdataDefinition($metadata),
                 $builderDefinition,
             ])
-            ->addTag('form.type', ['alias' => sprintf('%s_%s', $metadata->getApplicationName(), $metadata->getName())])
+            ->addTag('form.type', [
+                'alias' => sprintf('%s_%s', $metadata->getApplicationName(), $metadata->getName())
+            ])
         ;
 
-        $container->setDefinition(sprintf('%s.form.type.%s', $metadata->getApplicationName(), $metadata->getName()), $definition);
+        $container->setDefinition(sprintf(
+            '%s.form.type.%s',
+            $metadata->getApplicationName(),
+            $metadata->getName()
+        ), $definition);
     }
 
     /**
