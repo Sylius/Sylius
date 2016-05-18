@@ -49,6 +49,11 @@ class ProportionalIntegerDistributorSpec extends ObjectBehavior
         $this->distribute([4300, 1400, 2300], -300)->shouldReturn([-162, -52, -86]);
     }
 
+    function it_distributes_integer_even_if_its_indivisible_by_number_of_items()
+    {
+        $this->distribute([4300, 1400, 2300], -299)->shouldReturn([-161, -52, -86]);
+    }
+
     function it_throws_exception_if_amount_is_not_integer()
     {
         $this

@@ -11,6 +11,7 @@
 
 namespace spec\Sylius\Component\Core\Promotion\Applicator;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Distributor\IntegerDistributorInterface;
@@ -68,7 +69,7 @@ class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
 
         $order
             ->getItems()
-            ->willReturn(new \ArrayIterator([$coltItem->getWrappedObject(), $magnumItem->getWrappedObject()]))
+            ->willReturn(new ArrayCollection([$coltItem->getWrappedObject(), $magnumItem->getWrappedObject()]))
         ;
 
         $coltItem->getQuantity()->willReturn(2);
@@ -79,11 +80,11 @@ class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
 
         $coltItem
             ->getUnits()
-            ->willReturn(new \ArrayIterator([$firstColtUnit->getWrappedObject(), $secondColtUnit->getWrappedObject()]))
+            ->willReturn(new ArrayCollection([$firstColtUnit->getWrappedObject(), $secondColtUnit->getWrappedObject()]))
         ;
         $magnumItem
             ->getUnits()
-            ->willReturn(new \ArrayIterator([$magnumUnit->getWrappedObject()]))
+            ->willReturn(new ArrayCollection([$magnumUnit->getWrappedObject()]))
         ;
 
         $promotion->getName()->willReturn('Winter guns promotion!');
@@ -124,7 +125,7 @@ class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
 
         $order
             ->getItems()
-            ->willReturn(new \ArrayIterator([$coltItem->getWrappedObject(), $magnumItem->getWrappedObject()]))
+            ->willReturn(new ArrayCollection([$coltItem->getWrappedObject(), $magnumItem->getWrappedObject()]))
         ;
 
         $coltItem->getQuantity()->willReturn(1);
@@ -134,11 +135,11 @@ class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
 
         $coltItem
             ->getUnits()
-            ->willReturn(new \ArrayIterator([$coltUnit->getWrappedObject()]))
+            ->willReturn(new ArrayCollection([$coltUnit->getWrappedObject()]))
         ;
         $magnumItem
             ->getUnits()
-            ->willReturn(new \ArrayIterator([$magnumUnit->getWrappedObject()]))
+            ->willReturn(new ArrayCollection([$magnumUnit->getWrappedObject()]))
         ;
 
         $promotion->getName()->willReturn('Winter guns promotion!');
@@ -156,7 +157,119 @@ class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
         $this->apply($order, $promotion, [1, 0]);
     }
 
+    function it_does_not_distribute_0_amount_to_item_even_if_its_middle_element(
+        AdjustmentFactoryInterface $adjustmentFactory,
+        AdjustmentInterface $firstAdjustment,
+        AdjustmentInterface $secondAdjustment,
+        IntegerDistributorInterface $distributor,
+        OrderInterface $order,
+        OrderItemInterface $coltItem,
+        OrderItemInterface $magnumItem,
+        OrderItemInterface $winchesterItem,
+        OrderItemUnitInterface $coltUnit,
+        OrderItemUnitInterface $magnumUnit,
+        OrderItemUnitInterface $winchesterUnit,
+        OriginatorInterface $originator,
+        PromotionInterface $promotion
+    ) {
+        $order->countItems()->willReturn(3);
+
+        $order
+            ->getItems()
+            ->willReturn(new ArrayCollection([
+                $coltItem->getWrappedObject(),
+                $magnumItem->getWrappedObject(),
+                $winchesterItem->getWrappedObject(),
+            ]))
+        ;
+
+        $coltItem->getQuantity()->willReturn(1);
+        $magnumItem->getQuantity()->willReturn(1);
+        $winchesterItem->getQuantity()->willReturn(1);
+
+        $distributor->distribute(1, 1)->willReturn([1]);
+
+        $coltItem
+            ->getUnits()
+            ->willReturn(new ArrayCollection([$coltUnit->getWrappedObject()]))
+        ;
+        $magnumItem
+            ->getUnits()
+            ->willReturn(new ArrayCollection([$magnumUnit->getWrappedObject()]))
+        ;
+        $winchesterItem
+            ->getUnits()
+            ->willReturn(new ArrayCollection([$winchesterUnit->getWrappedObject()]))
+        ;
+
+        $promotion->getName()->willReturn('Winter guns promotion!');
+
+        $adjustmentFactory
+            ->createWithData(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT, 'Winter guns promotion!', 1)
+            ->willReturn($firstAdjustment, $secondAdjustment)
+        ;
+
+        $originator->setOrigin($firstAdjustment, $promotion)->shouldBeCalled();
+        $originator->setOrigin($secondAdjustment, $promotion)->shouldBeCalled();
+
+        $coltUnit->addAdjustment($firstAdjustment)->shouldBeCalled();
+        $magnumUnit->addAdjustment(Argument::any())->shouldNotBeCalled();
+        $winchesterUnit->addAdjustment($secondAdjustment)->shouldBeCalled();
+
+        $this->apply($order, $promotion, [1, 0, 1]);
+    }
+
     function it_does_not_distribute_0_amount_to_unit(
+        AdjustmentFactoryInterface $adjustmentFactory,
+        AdjustmentInterface $firstAdjustment,
+        AdjustmentInterface $secondAdjustment,
+        IntegerDistributorInterface $distributor,
+        OrderInterface $order,
+        OrderItemInterface $coltItem,
+        OrderItemUnitInterface $firstColtUnit,
+        OrderItemUnitInterface $secondColtUnit,
+        OrderItemUnitInterface $thirdColtUnit,
+        OriginatorInterface $originator,
+        PromotionInterface $promotion
+    ) {
+        $order->countItems()->willReturn(1);
+
+        $order
+            ->getItems()
+            ->willReturn(new ArrayCollection([$coltItem->getWrappedObject()]))
+        ;
+
+        $coltItem->getQuantity()->willReturn(3);
+
+        $distributor->distribute(1, 3)->willReturn([1, 0, 1]);
+
+        $coltItem
+            ->getUnits()
+            ->willReturn(new ArrayCollection([
+                $firstColtUnit->getWrappedObject(),
+                $secondColtUnit->getWrappedObject(),
+                $thirdColtUnit->getWrappedObject()
+            ]))
+        ;
+
+        $promotion->getName()->willReturn('Winter guns promotion!');
+
+        $adjustmentFactory
+            ->createWithData(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT, 'Winter guns promotion!', 1)
+            ->willReturn($firstAdjustment, $secondAdjustment)
+        ;
+
+        $originator->setOrigin($firstAdjustment, $promotion)->shouldBeCalled();
+        $originator->setOrigin($secondAdjustment, $promotion)->shouldBeCalled();
+
+        $firstColtUnit->addAdjustment($firstAdjustment)->shouldBeCalled();
+        $secondColtUnit->addAdjustment(Argument::any())->shouldNotBeCalled();
+        $thirdColtUnit->addAdjustment($secondAdjustment)->shouldBeCalled();
+
+        $this->apply($order, $promotion, [1]);
+    }
+
+    function it_does_not_distribute_0_amount_to_unit_even_if_its_middle_element(
         AdjustmentFactoryInterface $adjustmentFactory,
         AdjustmentInterface $adjustment,
         IntegerDistributorInterface $distributor,
@@ -171,7 +284,7 @@ class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
 
         $order
             ->getItems()
-            ->willReturn(new \ArrayIterator([$coltItem->getWrappedObject()]))
+            ->willReturn(new ArrayCollection([$coltItem->getWrappedObject()]))
         ;
 
         $coltItem->getQuantity()->willReturn(2);
@@ -180,7 +293,7 @@ class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
 
         $coltItem
             ->getUnits()
-            ->willReturn(new \ArrayIterator([$firstColtUnit->getWrappedObject(), $secondColtUnit->getWrappedObject()]))
+            ->willReturn(new ArrayCollection([$firstColtUnit->getWrappedObject(), $secondColtUnit->getWrappedObject()]))
         ;
 
         $promotion->getName()->willReturn('Winter guns promotion!');

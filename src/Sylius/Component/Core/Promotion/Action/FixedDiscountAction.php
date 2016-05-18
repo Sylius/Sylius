@@ -30,7 +30,7 @@ class FixedDiscountAction extends DiscountAction
     /**
      * @var ProportionalIntegerDistributorInterface
      */
-    private $distributor;
+    private $proportionalDistributor;
 
     /**
      * @var UnitsPromotionAdjustmentsApplicatorInterface
@@ -50,7 +50,7 @@ class FixedDiscountAction extends DiscountAction
     ) {
         parent::__construct($originator);
 
-        $this->distributor = $proportionalIntegerDistributor;
+        $this->proportionalDistributor = $proportionalIntegerDistributor;
         $this->unitsPromotionAdjustmentsApplicator = $unitsPromotionAdjustmentsApplicator;
     }
 
@@ -75,7 +75,7 @@ class FixedDiscountAction extends DiscountAction
             $itemsTotals[] = $item->getTotal();
         }
 
-        $splitPromotion = $this->distributor->distribute($itemsTotals, $promotionAmount);
+        $splitPromotion = $this->proportionalDistributor->distribute($itemsTotals, $promotionAmount);
         $this->unitsPromotionAdjustmentsApplicator->apply($subject, $promotion, $splitPromotion);
     }
 
@@ -104,6 +104,6 @@ class FixedDiscountAction extends DiscountAction
      */
     private function calculateAdjustmentAmount($promotionSubjectTotal, $targetPromotionAmount)
     {
-        return -1 * min(abs($promotionSubjectTotal), abs($targetPromotionAmount));
+        return -1 * min($promotionSubjectTotal, $targetPromotionAmount);
     }
 }

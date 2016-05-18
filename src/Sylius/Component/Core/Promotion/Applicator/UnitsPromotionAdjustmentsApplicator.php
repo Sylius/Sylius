@@ -65,12 +65,12 @@ class UnitsPromotionAdjustmentsApplicator implements UnitsPromotionAdjustmentsAp
 
         $i = 0;
         foreach ($order->getItems() as $item) {
-            if (0 === $adjustmentsAmounts[$i]) {
+            $adjustmentAmount = $adjustmentsAmounts[$i++];
+            if (0 === $adjustmentAmount) {
                 continue;
             }
 
-            $this->applyAdjustmentsOnItemUnits($item, $promotion, $adjustmentsAmounts[$i]);
-            $i++;
+            $this->applyAdjustmentsOnItemUnits($item, $promotion, $adjustmentAmount);
         }
     }
 
@@ -85,12 +85,12 @@ class UnitsPromotionAdjustmentsApplicator implements UnitsPromotionAdjustmentsAp
 
         $i = 0;
         foreach ($item->getUnits() as $unit) {
-            if (0 === $splitPromotionAmount[$i]) {
+            $promotionAmount = $splitPromotionAmount[$i++];
+            if (0 === $promotionAmount) {
                 continue;
             }
 
-            $this->addAdjustment($promotion, $unit, $splitPromotionAmount[$i]);
-            $i++;
+            $this->addAdjustment($promotion, $unit, $promotionAmount);
         }
     }
 

@@ -69,7 +69,7 @@
     <tr>
         <th colspan="8" id="items-total" class="right aligned">
             <strong>{{ 'sylius.ui.items_total'|trans }}</strong>:
-            {{ order.itemsTotal|sylius_price(order.currency) }}
+            {{ (order.itemsTotal - order.getAdjustmentsTotalRecursively(orderPromotionAdjustment))|sylius_price(order.currency) }}
         </th>
     </tr>
     <tr>
@@ -117,11 +117,12 @@
     <tr>
         <th colspan="4" id="promotion-discounts">
             <h5>{{ 'sylius.checkout.finalize.order.promotion_discount'|trans }}</h5>
-            {% if not order.adjustments(orderPromotionAdjustment).isEmpty() %}
+            {% set orderPromotions = sylius_aggregate_adjustments(order.getAdjustmentsRecursively(orderPromotionAdjustment)) %}
+            {% if not orderPromotions is empty %}
                 <div class="ui relaxed list">
-                    {% for adjustment in order.adjustments(orderPromotionAdjustment) %}
+                    {% for label, amount in orderPromotions %}
                         <div class="item">
-                            {{ adjustment.label }} {% if not adjustment.amount == 0 %}-{% endif %}{{ (-1 * adjustment.amount)|sylius_price(order.currency) }}
+                            {{ label }} {% if not amount == 0 %}-{% endif %}{{ (-1 * amount)|sylius_price(order.currency) }}
                         </div>
                     {% endfor %}
                 </div>
@@ -131,7 +132,7 @@
         </th>
         <th colspan="4" id="promotion-total" class="right aligned">
             <strong>{{ 'sylius.ui.promotion_total'|trans }}</strong>:
-            {% set orderDiscount = order.adjustmentsTotal(orderPromotionAdjustment) %}
+            {% set orderDiscount = order.adjustmentsTotalRecursively(orderPromotionAdjustment) %}
             {% if not orderDiscount == 0 %}-{% endif %}{{ (-1 * orderDiscount)|sylius_price(order.currency) }}
         </th>
     </tr>
