@@ -44,7 +44,7 @@ class EventDispatcherSpec extends ObjectBehavior
         $this->shouldImplement(ControllerEventDispatcherInterface::class);
     }
 
-    function it_dispatches_appriopriate_event_for_a_resource(
+    function it_dispatches_appropriate_event_for_a_resource(
         RequestConfiguration $requestConfiguration,
         MetadataInterface $metadata,
         EventDispatcherInterface $eventDispatcher,
@@ -60,7 +60,7 @@ class EventDispatcherSpec extends ObjectBehavior
         $this->dispatch(ResourceActions::SHOW, $requestConfiguration, $resource)->shouldHaveType(ResourceControllerEvent::class);
     }
 
-    function it_dispatches_appriopriate_custom_event_for_a_resource(
+    function it_dispatches_appropriate_custom_event_for_a_resource(
         RequestConfiguration $requestConfiguration,
         MetadataInterface $metadata,
         EventDispatcherInterface $eventDispatcher,
@@ -76,7 +76,7 @@ class EventDispatcherSpec extends ObjectBehavior
         $this->dispatch(ResourceActions::CREATE, $requestConfiguration, $resource)->shouldHaveType(ResourceControllerEvent::class);
     }
 
-    function it_dispatches_appriopriate_pre_event_for_a_resource(
+    function it_dispatches_appropriate_pre_event_for_a_resource(
         RequestConfiguration $requestConfiguration,
         MetadataInterface $metadata,
         EventDispatcherInterface $eventDispatcher,
@@ -92,7 +92,7 @@ class EventDispatcherSpec extends ObjectBehavior
         $this->dispatchPreEvent(ResourceActions::CREATE, $requestConfiguration, $resource);
     }
 
-    function it_dispatches_appriopriate_custom_pre_event_for_a_resource(
+    function it_dispatches_appropriate_custom_pre_event_for_a_resource(
         RequestConfiguration $requestConfiguration,
         MetadataInterface $metadata,
         EventDispatcherInterface $eventDispatcher,
@@ -108,7 +108,7 @@ class EventDispatcherSpec extends ObjectBehavior
         $this->dispatchPreEvent(ResourceActions::CREATE, $requestConfiguration, $resource);
     }
 
-    function it_dispatches_appriopriate_post_event_for_a_resource(
+    function it_dispatches_appropriate_post_event_for_a_resource(
         RequestConfiguration $requestConfiguration,
         MetadataInterface $metadata,
         EventDispatcherInterface $eventDispatcher,
@@ -124,7 +124,7 @@ class EventDispatcherSpec extends ObjectBehavior
         $this->dispatchPostEvent(ResourceActions::CREATE, $requestConfiguration, $resource);
     }
 
-    function it_dispatches_appriopriate_custom_post_event_for_a_resource(
+    function it_dispatches_appropriate_custom_post_event_for_a_resource(
         RequestConfiguration $requestConfiguration,
         MetadataInterface $metadata,
         EventDispatcherInterface $eventDispatcher,

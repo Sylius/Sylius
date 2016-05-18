@@ -88,11 +88,11 @@ class ReportContext extends DefaultContext
         $report->setDataFetcher($dataFetcherType);
         $report->setDataFetcherConfiguration($dataFetcherConfiguration);
 
-        $menager = $this->getEntityManager();
-        $menager->persist($report);
+        $manager = $this->getEntityManager();
+        $manager->persist($report);
 
         if ($flush) {
-            $menager->flush();
+            $manager->flush();
         }
 
         return $report;

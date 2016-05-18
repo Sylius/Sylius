@@ -24,7 +24,7 @@ class HasEnabledEntitySpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\Validator\Constraints\HasEnabledEntity');
     }
 
-    public function it_is_a_contraint()
+    public function it_is_a_constraint()
     {
         $this->shouldHaveType(Constraint::class);
     }

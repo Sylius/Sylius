@@ -21,7 +21,7 @@ class InStockSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\InventoryBundle\Validator\Constraints\InStock');
     }
 
-    function it_is_a_contraint()
+    function it_is_a_constraint()
     {
         $this->shouldHaveType(Constraint::class);
     }

@@ -237,7 +237,7 @@ class ThemeConfigurationTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertConfigurationIsValid(
             [
-                ['parents' => ['example/parent-theme', 'exampe/parent-theme-2']],
+                ['parents' => ['example/parent-theme', 'example/parent-theme-2']],
             ],
             'parents'
         );

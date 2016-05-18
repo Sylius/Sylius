@@ -205,7 +205,7 @@ final class ManagingProductOptionsContext implements Context
     /**
      * @Then the product option with :element :value should not be added
      */
-    public function theProductoptionWithElementValueShouldNotBeAdded($element, $value)
+    public function theProductOptionWithElementValueShouldNotBeAdded($element, $value)
     {
         $this->iBrowseProductOptions();
 

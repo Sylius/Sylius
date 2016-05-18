@@ -34,7 +34,7 @@ class CouponToCodeTransformerSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\PromotionBundle\Form\DataTransformer\CouponToCodeTransformer');
     }
 
-    function it_should_return_empty_string_if_null_transormed()
+    function it_should_return_empty_string_if_null_transformed()
     {
         $this->transform(null)->shouldReturn('');
     }

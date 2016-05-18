@@ -33,7 +33,7 @@ class ActionTypeSpec extends ObjectBehavior
         $this->beConstructedWith('Action', $actionRegistry);
     }
 
-    function it_is_initializabled()
+    function it_is_initializable()
     {
         $this->shouldHaveType(ActionType::class);
     }

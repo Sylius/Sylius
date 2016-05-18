@@ -18,7 +18,7 @@ use Sylius\Component\Rbac\Model\RoleInterface;
 use Sylius\Component\Rbac\Repository\RoleRepositoryInterface;
 
 /**
- * Nested Set roles resolver for optimalization.
+ * Nested Set roles resolver for optimization.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */

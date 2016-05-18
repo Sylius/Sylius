@@ -39,7 +39,7 @@ class UpdateExchangeRateCommandSpec extends ObjectBehavior
         $this->getName()->shouldReturn('sylius:currency:update');
     }
 
-    function it_updates_a_avaivalble_exchange_rate(
+    function it_updates_a_available_exchange_rate(
         ContainerInterface $container,
         InputInterface $input,
         OutputInterface $output,

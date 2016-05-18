@@ -26,7 +26,7 @@ class ProcessValidatorExceptionSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\FlowBundle\Validator\ProcessValidatorException');
     }
 
-    function it_is_http_excetion()
+    function it_is_http_exception()
     {
         $this->shouldHaveType(HttpException::class);
     }

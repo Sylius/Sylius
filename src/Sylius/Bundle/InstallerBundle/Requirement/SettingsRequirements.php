@@ -34,7 +34,7 @@ class SettingsRequirements extends RequirementCollection
                 phpversion()
             ))
             ->add(new Requirement(
-                $translator->trans('sylius.settings.version_recommanded', [], 'requirements'),
+                $translator->trans('sylius.settings.version_recommended', [], 'requirements'),
                 version_compare(phpversion(), self::RECOMMENDED_PHP_VERSION, '>='),
                 '>='.self::RECOMMENDED_PHP_VERSION,
                 phpversion(),

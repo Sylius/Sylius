@@ -146,7 +146,7 @@ class ChannelContext extends DefaultContext
     /**
      * @Given /^There is channel "([^""]*)" named "([^""]*)" for url "([^""]*)"$/
      */
-    public function thereIsChannel($code, $name, $url, $locales = null, $currencies = 'EUR', $shippingMethods = null, $paymentMethos = null, $flush = true)
+    public function thereIsChannel($code, $name, $url, $locales = null, $currencies = 'EUR', $shippingMethods = null, $paymentMethods = null, $flush = true)
     {
         /* @var $channel ChannelInterface */
         $channel = $this->getFactory('channel')->createNew();
@@ -154,7 +154,7 @@ class ChannelContext extends DefaultContext
         $channel->setName($name);
         $channel->setHostname($url);
 
-        $this->configureChannel($channel, $locales, $currencies, $shippingMethods, $paymentMethos);
+        $this->configureChannel($channel, $locales, $currencies, $shippingMethods, $paymentMethods);
 
         $manager = $this->getEntityManager();
         $manager->persist($channel);

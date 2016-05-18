@@ -272,7 +272,7 @@ class MetadataContext extends DefaultContext
     private function assertItIsMetadataCustomizationPage(ElementInterface $element, $regexp)
     {
         if (!$this->isItMetadataCustomizationPage($element, $regexp)) {
-            throw new \Exception(sprintf('It is not metadata customziation page (regexp: %s)', $regexp));
+            throw new \Exception(sprintf('It is not metadata customization page (regexp: %s)', $regexp));
         }
     }
 

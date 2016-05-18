@@ -37,7 +37,7 @@ class QueryLoggerSpec extends ObjectBehavior
         $this->shouldImplement(SQLLogger::class);
     }
 
-    function it_saves_runned_queries()
+    function it_saves_ran_queries()
     {
         $this->startQuery('SQL QUERY', ['param' => 'value'], ['types?']);
 

@@ -57,7 +57,7 @@ EOT
             }
 
             $user->addRole($securityRole);
-            $output->writeln(sprintf('Scurity role <comment>%s</comment> has been added to user <comment>%s</comment>', $securityRole, (string)$user));
+            $output->writeln(sprintf('Security role <comment>%s</comment> has been added to user <comment>%s</comment>', $securityRole, (string)$user));
         }
 
         if (!$error) {

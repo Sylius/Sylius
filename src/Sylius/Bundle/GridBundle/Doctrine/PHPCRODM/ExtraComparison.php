@@ -13,7 +13,7 @@ namespace Sylius\Bundle\GridBundle\Doctrine\PHPCRODM;
 
 /**
  * Contains constants values for comparisons which are not supported
- * by the Doctrine\Common\Colletion\Expr\Comparison class.
+ * by the Doctrine\Common\Collection\Expr\Comparison class.
  */
 class ExtraComparison
 {

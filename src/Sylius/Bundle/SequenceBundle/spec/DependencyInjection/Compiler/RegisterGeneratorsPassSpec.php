@@ -27,7 +27,7 @@ class RegisterGeneratorsPassSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\SequenceBundle\DependencyInjection\Compiler\RegisterGeneratorsPass');
     }
 
-    public function it_is_a_coplier_pass()
+    public function it_is_a_compiler_pass()
     {
         $this->shouldImplement(CompilerPassInterface::class);
     }

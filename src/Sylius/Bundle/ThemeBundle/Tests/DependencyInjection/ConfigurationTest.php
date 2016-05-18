@@ -52,7 +52,7 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function its_context_can_be_overrided()
+    public function its_context_can_be_overridden()
     {
         $this->assertProcessedConfigurationEquals(
             [

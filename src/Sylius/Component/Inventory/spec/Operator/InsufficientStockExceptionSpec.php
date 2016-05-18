@@ -29,7 +29,7 @@ class InsufficientStockExceptionSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Component\Inventory\Operator\InsufficientStockException');
     }
 
-    function it_is_an_uderflow_exception()
+    function it_is_an_underflow_exception()
     {
         $this->shouldHaveType(\UnderflowException::class);
     }

@@ -37,8 +37,8 @@ class TemplatingTest extends ThemeBundleTestCase
     {
         return [
             ['TestBundle:Templating:vanillaTemplate.txt.twig', 'TestBundle:Templating:vanillaTemplate.txt.twig'],
-            ['TestBundle:Templating:vanillaOverridedTemplate.txt.twig', 'TestBundle:Templating:vanillaOverridedTemplate.txt.twig (app overrided)'],
-            ['TestBundle:Templating:vanillaOverridedThemeTemplate.txt.twig', 'TestBundle:Templating:vanillaOverridedThemeTemplate.txt.twig|sylius/first-test-theme'],
+            ['TestBundle:Templating:vanillaOverriddenTemplate.txt.twig', 'TestBundle:Templating:vanillaOverriddenTemplate.txt.twig (app overridden)'],
+            ['TestBundle:Templating:vanillaOverriddenThemeTemplate.txt.twig', 'TestBundle:Templating:vanillaOverriddenThemeTemplate.txt.twig|sylius/first-test-theme'],
             ['TestBundle:Templating:bothThemesTemplate.txt.twig', 'TestBundle:Templating:bothThemesTemplate.txt.twig|sylius/first-test-theme'],
             ['TestBundle:Templating:lastThemeTemplate.txt.twig', 'TestBundle:Templating:lastThemeTemplate.txt.twig|sylius/second-test-theme'],
         ];

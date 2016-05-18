@@ -57,7 +57,7 @@ class PaymentMethodSpec extends ObjectBehavior
         $this->getName()->shouldReturn('Stripe');
     }
 
-    function it_is_convertable_to_string_and_returns_its_name()
+    function it_is_convertible_to_string_and_returns_its_name()
     {
         $this->setName('PayPal');
         $this->__toString()->shouldReturn('PayPal');

@@ -33,7 +33,7 @@ class RuleTypeSpec extends ObjectBehavior
         $this->beConstructedWith('Rule', $checkerRegistry);
     }
 
-    function it_is_initializabled()
+    function it_is_initializable()
     {
         $this->shouldHaveType(RuleType::class);
     }

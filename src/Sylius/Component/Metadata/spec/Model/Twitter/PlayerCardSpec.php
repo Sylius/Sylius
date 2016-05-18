@@ -42,7 +42,7 @@ class PlayerCardSpec extends ObjectBehavior
         \PHPUnit_Framework_Assert::assertEquals('Lorem ipsum', $that->getTitle());
     }
 
-    function it_is_mergable_with_same_class_object()
+    function it_is_mergeable_with_same_class_object()
     {
         $metadata = new PlayerCard();
         $metadata->setTitle('Lorem ipsum');

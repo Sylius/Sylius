@@ -371,7 +371,7 @@
 			var maxValue = max(valuesArray),
 				minValue = min(valuesArray);
 
-			// We need some degree of seperation here to calculate the scales if all the values are the same
+			// We need some degree of separation here to calculate the scales if all the values are the same
 			// Adding/minusing 0.5 will give us a range of 1.
 			if (maxValue === minValue){
 				maxValue += 0.5;
@@ -824,7 +824,7 @@
 			return this;
 		},
 		stop : function(){
-			// Stops any current animation loop occuring
+			// Stops any current animation loop occurring
 			helpers.cancelAnimFrame.call(root, this.animationFrame);
 			return this;
 		},
@@ -2779,7 +2779,7 @@
 				},this);
 
 
-				// Control points need to be calculated in a seperate loop, because we need to know the current x/y of the point
+				// Control points need to be calculated in a separate loop, because we need to know the current x/y of the point
 				// This would cause issues when there is no animation, because the y of the next point would be 0, so beziers would be skewed
 				if (this.options.bezierCurve){
 					helpers.each(pointsWithValues, function(point, index){

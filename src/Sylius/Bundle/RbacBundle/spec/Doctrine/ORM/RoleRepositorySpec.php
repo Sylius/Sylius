@@ -35,7 +35,7 @@ class RoleRepositorySpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\RbacBundle\Doctrine\ORM\RoleRepository');
     }
 
-    function it_gets_chield_roles(
+    function it_gets_child_roles(
         $em,
         RoleInterface $role,
         QueryBuilder $builder,

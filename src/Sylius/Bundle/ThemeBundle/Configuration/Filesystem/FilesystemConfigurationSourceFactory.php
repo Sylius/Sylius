@@ -46,7 +46,7 @@ final class FilesystemConfigurationSourceFactory implements ConfigurationSourceF
      */
     public function initializeSource(ContainerBuilder $container, array $config)
     {
-        $resursiveFileLocator = new Definition(RecursiveFileLocator::class, [
+        $recursiveFileLocator = new Definition(RecursiveFileLocator::class, [
             new Reference('sylius.theme.finder_factory'),
             $config['directories'],
         ]);
@@ -59,7 +59,7 @@ final class FilesystemConfigurationSourceFactory implements ConfigurationSourceF
         ]);
 
         $configurationProvider = new Definition(FilesystemConfigurationProvider::class, [
-            $resursiveFileLocator,
+            $recursiveFileLocator,
             $configurationLoader,
             $config['filename'],
         ]);

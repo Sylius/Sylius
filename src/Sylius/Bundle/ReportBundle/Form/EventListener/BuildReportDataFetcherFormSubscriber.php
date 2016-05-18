@@ -31,16 +31,16 @@ class BuildReportDataFetcherFormSubscriber implements EventSubscriberInterface
     /**
      * @var ServiceRegistryInterface
      */
-    private $dataFecherRegistry;
+    private $dataFetcherRegistry;
 
     /**
      * @var FormFactoryInterface
      */
     private $factory;
 
-    public function __construct(ServiceRegistryInterface $dataFecherRegistry, FormFactoryInterface $factory)
+    public function __construct(ServiceRegistryInterface $dataFetcherRegistry, FormFactoryInterface $factory)
     {
-        $this->dataFecherRegistry = $dataFecherRegistry;
+        $this->dataFetcherRegistry = $dataFetcherRegistry;
         $this->factory = $factory;
     }
 
@@ -90,7 +90,7 @@ class BuildReportDataFetcherFormSubscriber implements EventSubscriberInterface
      */
     protected function addConfigurationFields(FormInterface $form, $dataFetcherType, array $config = [])
     {
-        $dataFetcher = $this->dataFecherRegistry->get($dataFetcherType);
+        $dataFetcher = $this->dataFetcherRegistry->get($dataFetcherType);
         $formType = $dataFetcher->getType();
 
         try {

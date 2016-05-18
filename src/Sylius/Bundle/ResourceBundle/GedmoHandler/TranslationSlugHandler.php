@@ -148,7 +148,7 @@ class TranslationSlugHandler implements SlugHandlerInterface
             throw new InvalidMappingException("Unable to find tree parent slug relation through field - [{$options['relationField']}] in class - {$meta->name}");
         }
 //      TODO Check parent relation in translatable entity is single valued
-//      (Note: don't know if that's possible here as we need the relationField class metadada)
+//      (Note: don't know if that's possible here as we need the relationField class metadata)
     }
 
     /**
