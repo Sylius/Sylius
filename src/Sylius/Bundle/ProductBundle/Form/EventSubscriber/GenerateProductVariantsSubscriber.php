@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ProductBundle\Form\EventSubscriber;
 
 use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\Variation\Generator\VariantGeneratorInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -20,8 +21,21 @@ use Webmozart\Assert\Assert;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class ProductOptionFieldSubscriber implements EventSubscriberInterface
+class GenerateProductVariantsSubscriber implements EventSubscriberInterface
 {
+    /**
+     * @var VariantGeneratorInterface
+     */
+    private $generator;
+
+    /**
+     * @param VariantGeneratorInterface $generator
+     */
+    public function __construct(VariantGeneratorInterface $generator)
+    {
+        $this->generator = $generator;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -42,19 +56,6 @@ class ProductOptionFieldSubscriber implements EventSubscriberInterface
 
         Assert::isInstanceOf($product, ProductInterface::class);
 
-        $form = $event->getForm();
-
-        /** Options should be disabled for configurable product if it has at least one defined variant */
-        $disableOptions = (null !== $product->getMasterVariant()) && (false === $product->hasVariants());
-
-        $form->add(
-            'options', 
-            'sylius_product_option_choice', [
-                'required' => false, 
-                'disabled' => $disableOptions, 
-                'multiple' => true, 
-                'label' => 'sylius.form.product.options',
-            ]
-        );
+        $this->generator->generate($product);
     }
 }

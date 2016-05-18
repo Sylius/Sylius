@@ -276,10 +276,11 @@ Feature: Products
     Scenario: Creating product with main taxon
         Given I am on the product creation page
         And I fill in the following:
-            | Name        | The best T-shirt        |
-            | Code        | BEST_T_SHIRT            |
-            | Description | Interesting description |
-            | Price       | 2.99                    |
+            | Name                                     | The best T-shirt        |
+            | sylius_product_legacy_code               | BEST_T_SHIRT            |
+            | sylius_product_legacy_masterVariant_code | BEST_T_SHIRT            |
+            | Description                              | Interesting description |
+            | Price                                    | 2.99                    |
         And go to "Categorization" tab
         And I select "New" from "Main taxon"
         And I press "Create"

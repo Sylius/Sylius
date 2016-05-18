@@ -47,6 +47,7 @@ class SimpleProductSubscriber implements EventSubscriberInterface
             $form = $event->getForm();
 
             $form->add('masterVariant', 'sylius_product_variant', ['master' => true]);
+            $form->remove('options');
         }
     }
 

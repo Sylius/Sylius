@@ -15,10 +15,10 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Faker\Factory as FakerFactory;
 use Faker\Generator;
-use Sylius\Bundle\ProductBundle\Generator\VariantGenerator;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\AddressInterface;
+use Sylius\Component\Variation\Generator\VariantGenerator;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -98,7 +98,7 @@ abstract class DataFixture extends AbstractFixture implements ContainerAwareInte
      */
     protected function getVariantGenerator()
     {
-        return $this->get('sylius.generator.product_variant');
+        return $this->get('sylius.generator.variant');
     }
 
     /**
