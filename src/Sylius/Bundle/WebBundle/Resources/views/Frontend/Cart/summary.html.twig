@@ -42,7 +42,7 @@
         {% endfor %}
     </tbody>
     <tfoot>
-        {% set promotionTotal = cart.getPromotionsTotalRecursively() %}
+        {% set promotionTotal = cart.orderPromotionTotal %}
         {% if promotionTotal %}
         <tr>
             <td colspan="6" style="text-align: right;">

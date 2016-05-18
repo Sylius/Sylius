@@ -130,7 +130,7 @@
         </th>
         <th colspan="4" id="promotion-total" class="right aligned">
             <strong>{{ 'sylius.ui.promotion_total'|trans }}</strong>:
-            {% set orderDiscount = order.adjustmentsTotal(orderPromotionAdjustment) %}
+            {% set orderDiscount = order.orderPromotionTotal %}
             {% if not orderDiscount == 0 %}-{% endif %}{{ (-1 * orderDiscount)|sylius_price(order.currency) }}
         </th>
     </tr>

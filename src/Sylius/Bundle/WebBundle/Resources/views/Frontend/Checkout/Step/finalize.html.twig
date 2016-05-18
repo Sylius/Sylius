@@ -96,10 +96,9 @@
                 {% endfor %}
                 </ul>
                 </td>
-                {% set promotionTotal = order.getPromotionsTotalRecursively() %}
                 <td colspan="2">
                     <span class="pull-right">
-                    <strong>{{ 'sylius.ui.promotion_total'|trans }}</strong>: -{{ (-1 * promotionTotal)|sylius_price }}
+                    <strong>{{ 'sylius.ui.promotion_total'|trans }}</strong>: -{{ (-1 * order.orderPromotionTotal)|sylius_price }}
                     </span>
                 </td>
             </tr>
