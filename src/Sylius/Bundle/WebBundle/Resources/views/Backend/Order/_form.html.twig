@@ -148,7 +148,7 @@
         </td>
         <td class="text-right" colspan="3">
             <strong>{{ 'sylius.ui.shipping_total'|trans }}</strong>:
-            <span class="amount">{{ order.adjustmentsTotal(shippingAdjustment)|sylius_price(order.currency) }}</span>
+            <span class="amount">{{ order.shippingTotal|sylius_price(order.currency) }}</span>
         </td>
     </tr>
     <tr class="promotion-discount">
