@@ -443,6 +443,46 @@ class OrderSpec extends ObjectBehavior
         $this->getTaxTotal()->shouldReturn(220);
     }
 
+    function it_includes_non_neutral_tax_adjustments_in_shipping_total(
+        AdjustmentInterface $shippingAdjustment,
+        AdjustmentInterface $shippingTaxAdjustment
+    ) {
+        $shippingAdjustment->getType()->willReturn(AdjustmentInterface::SHIPPING_ADJUSTMENT);
+        $shippingAdjustment->isNeutral()->willReturn(false);
+        $shippingAdjustment->getAmount()->willReturn(1000);
+
+        $shippingTaxAdjustment->getType()->willReturn(AdjustmentInterface::TAX_ADJUSTMENT);
+        $shippingTaxAdjustment->isNeutral()->willReturn(false);
+        $shippingTaxAdjustment->getAmount()->willReturn(70);
+
+        $shippingAdjustment->setAdjustable($this)->shouldBeCalled();
+        $shippingTaxAdjustment->setAdjustable($this)->shouldBeCalled();
+        $this->addAdjustment($shippingAdjustment);
+        $this->addAdjustment($shippingTaxAdjustment);
+
+        $this->getShippingTotal()->shouldReturn(1070);
+    }
+
+    function it_does_not_include_neutral_tax_adjustments_in_shipping_total(
+        AdjustmentInterface $shippingAdjustment,
+        AdjustmentInterface $neutralShippingTaxAdjustment
+    ) {
+        $shippingAdjustment->getType()->willReturn(AdjustmentInterface::SHIPPING_ADJUSTMENT);
+        $shippingAdjustment->isNeutral()->willReturn(false);
+        $shippingAdjustment->getAmount()->willReturn(1000);
+
+        $neutralShippingTaxAdjustment->getType()->willReturn(AdjustmentInterface::TAX_ADJUSTMENT);
+        $neutralShippingTaxAdjustment->isNeutral()->willReturn(true);
+        $neutralShippingTaxAdjustment->getAmount()->willReturn(70);
+
+        $shippingAdjustment->setAdjustable($this)->shouldBeCalled();
+        $neutralShippingTaxAdjustment->setAdjustable($this)->shouldBeCalled();
+        $this->addAdjustment($shippingAdjustment);
+        $this->addAdjustment($neutralShippingTaxAdjustment);
+
+        $this->getShippingTotal()->shouldReturn(1000);
+    }
+
     function it_returns_promotions_total_recursively(
         AdjustmentInterface $orderPromotionAdjustment,
         AdjustmentInterface $orderItemPromotionAdjustment,

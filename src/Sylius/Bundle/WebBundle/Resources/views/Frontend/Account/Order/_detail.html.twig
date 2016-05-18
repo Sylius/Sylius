@@ -72,7 +72,7 @@
                         {{ 'sylius.ui.shipping_total'|trans }}
                     </span>
                 </td>
-                <td>{{ order.adjustmentsTotal(shippingAdjustment)|sylius_money(order.currency) }}</td>
+                <td>{{ order.shippingTotal|sylius_money(order.currency) }}</td>
             </tr>
             <tr>
                 <td colspan="3">

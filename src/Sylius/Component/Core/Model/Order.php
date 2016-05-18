@@ -537,11 +537,21 @@ class Order extends Cart implements OrderInterface
         foreach ($this->getAdjustments(AdjustmentInterface::TAX_ADJUSTMENT) as $taxAdjustment) {
             $taxTotal += $taxAdjustment->getAmount();
         }
-
         foreach ($this->items as $item) {
             $taxTotal += $item->getTaxTotal();
         }
 
         return $taxTotal;
+    }
+
+    public function getShippingTotal()
+    {
+        $shippingTotal = $this->getAdjustmentsTotal(AdjustmentInterface::TAX_ADJUSTMENT);
+
+        foreach ($this->getAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT) as $shippingAdjustment) {
+            $shippingTotal += $shippingAdjustment->getAmount();
+        }
+
+        return $shippingTotal;
     }
 }
