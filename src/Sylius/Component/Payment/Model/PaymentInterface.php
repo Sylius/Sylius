@@ -30,6 +30,7 @@ interface PaymentInterface extends TimestampableInterface, ResourceInterface
     const STATE_VOID = 'void';
     const STATE_REFUNDED = 'refunded';
     const STATE_UNKNOWN = 'unknown';
+    const STATE_PAYEDOUT = 'payedout';
 
     /**
      * @return PaymentMethodInterface
