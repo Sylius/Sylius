@@ -72,6 +72,17 @@ class RequestConfigurationSpec extends ObjectBehavior
         $this->getDefaultTemplate('custom.html')->shouldReturn('SyliusAdminBundle:Product:custom.html.twig');
     }
 
+    function it_returns_default_template_names_for_a_directory_based_templates(MetadataInterface $metadata)
+    {
+        $metadata->getTemplatesNamespace()->willReturn('book/Backend');
+
+        $this->getDefaultTemplate('index.html')->shouldReturn('book/Backend/index.html.twig');
+        $this->getDefaultTemplate('show.html')->shouldReturn('book/Backend/show.html.twig');
+        $this->getDefaultTemplate('create.html')->shouldReturn('book/Backend/create.html.twig');
+        $this->getDefaultTemplate('update.html')->shouldReturn('book/Backend/update.html.twig');
+        $this->getDefaultTemplate('custom.html')->shouldReturn('book/Backend/custom.html.twig');
+    }
+
     function it_takes_the_custom_template_if_specified(MetadataInterface $metadata, Parameters $parameters)
     {
         $metadata->getTemplatesNamespace()->willReturn('SyliusAdminBundle:Product');
