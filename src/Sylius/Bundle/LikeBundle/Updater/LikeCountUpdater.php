@@ -10,7 +10,7 @@ namespace Sylius\Bundle\LikeBundle\Updater;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Like\Model\DislikableInterface;
 use Sylius\Component\Like\Model\LikableInterface;
-use Sylius\Component\Review\Calculator\LikableLikeCountCalculatorInterface;
+use Sylius\Component\Review\Calculator\LikeCountCalculatorInterface;
 
 
 /**
@@ -19,9 +19,9 @@ use Sylius\Component\Review\Calculator\LikableLikeCountCalculatorInterface;
 class LikeCountUpdater
 {
     /**
-     * @var LikableLikeCountCalculatorInterface
+     * @var LikeCountCalculatorInterface
      */
-    private $likableLikeCountCalculator;
+    private $likeCountCalculator;
 
     /**
      * @var ObjectManager
@@ -31,12 +31,12 @@ class LikeCountUpdater
     /**
      * RecalculateLikeCountListener constructor.
      *
-     * @param LikableLikeCountCalculatorInterface $likableLikeCountCalculator
+     * @param LikeCountCalculatorInterface $likeCountCalculator
      * @param ObjectManager $likeSubjectManager
      */
-    public function __construct(LikableLikeCountCalculatorInterface $likableLikeCountCalculator, ObjectManager $likeSubjectManager)
+    public function __construct(LikeCountCalculatorInterface $likeCountCalculator, ObjectManager $likeSubjectManager)
     {
-        $this->likableLikeCountCalculator = $likableLikeCountCalculator;
+        $this->likeCountCalculator = $likeCountCalculator;
         $this->likeSubjectManager = $likeSubjectManager;
     }
 
@@ -46,11 +46,11 @@ class LikeCountUpdater
     public function update(LikableInterface $likeSubject)
     {
         $likeSubject
-            ->setLikeCount($this->likableLikeCountCalculator->calculateLikeCount($likeSubject));
+            ->setLikeCount($this->likeCountCalculator->calculateLikeCount($likeSubject));
 
         if ($likeSubject instanceof DislikableInterface) {
             $likeSubject
-                ->setDislikeCount($this->likableLikeCountCalculator->calculateDislikeCount($likeSubject));
+                ->setDislikeCount($this->likeCountCalculator->calculateDislikeCount($likeSubject));
         }
 
         $this->likeSubjectManager->flush();

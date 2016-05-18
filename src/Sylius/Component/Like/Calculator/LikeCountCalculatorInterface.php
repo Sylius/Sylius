@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Review\Calculator;
+namespace Sylius\Component\Like\Calculator;
 
 use Sylius\Component\Like\Model\LikableInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-interface LikableLikeCountCalculatorInterface
+interface LikeCountCalculatorInterface
 {
     /**
      * @param LikableInterface $likable

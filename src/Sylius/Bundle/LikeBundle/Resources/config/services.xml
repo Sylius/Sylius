@@ -6,6 +6,9 @@
 
     <parameters>
         <parameter key="sylius.event_subscriber.like.load_metadata.class">Sylius\Bundle\LikeBundle\EventListener\LoadMetadataSubscriber</parameter>
+        <parameter key="sylius.listener.recalculate_like_count.class">Sylius\Bundle\LikeBundle\EventListener\RecalculateLikeCountListener</parameter>
+        <parameter key="sylius.like.calculator.like_count.class">Sylius\Component\Like\Calculator\LikeCountCalculator</parameter>
+        <parameter key="sylius.like.updater.like_count.class">Sylius\Bundle\LikeBundle\Updater\LikeCountUpdater</parameter>
     </parameters>
 
     <services>
@@ -13,6 +16,21 @@
         <service id="sylius.event_subscriber.like.load_metadata" class="%sylius.event_subscriber.like.load_metadata.class%">
             <argument>%sylius.like.subjects%</argument>
             <tag name="doctrine.event_subscriber" />
+        </service>
+
+        <!--Listeners-->
+        <service id="sylius.listener.recalculate_like_count" class="%sylius.listener.recalculate_like_count.class%">
+            <argument type="service" id="sylius.like.updater.like_count" />
+            <!-- TODO: add events dynamically with all subjects in configuration -->
+            <tag name="kernel.event_listener" event="sylius.product_review_like.post_create" method="recalculateLikeCount" />
+            <tag name="kernel.event_listener" event="sylius.product_review_like.post_update" method="recalculateLikeCount" />
+            <tag name="kernel.event_listener" event="sylius.product_review_like.post_delete" method="recalculateLikeCount" />
+        </service>
+
+        <service id="sylius.like.calculator.like_count" class="%sylius.like.calculator.like_count.class%" />
+        <service id="sylius.like.updater.like_count" class="%sylius.like.updater.like_count.class%">
+            <argument type="service" id="sylius.like.calculator.like_count" />
+            <argument type="service" id="doctrine.orm.default_entity_manager" />
         </service>
     </services>
 </container>

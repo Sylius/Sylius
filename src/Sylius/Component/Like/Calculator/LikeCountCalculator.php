@@ -12,12 +12,11 @@
 namespace Sylius\Component\Like\Calculator;
 
 use Sylius\Component\Like\Model\LikableInterface;
-use Sylius\Component\Review\Calculator\LikableLikeCountCalculatorInterface;
 
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class LikableLikeCountCalculator implements LikableLikeCountCalculatorInterface
+class LikeCountCalculator implements LikeCountCalculatorInterface
 {
     /**
      * {@inheritdoc}
