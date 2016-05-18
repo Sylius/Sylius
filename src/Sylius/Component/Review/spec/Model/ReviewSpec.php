@@ -26,7 +26,7 @@ class ReviewSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Component\Review\Model\Review');
     }
 
-    function it_implements_review_interace()
+    function it_implements_review_interface()
     {
         $this->shouldImplement(ReviewInterface::class);
     }

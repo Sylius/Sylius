@@ -89,7 +89,7 @@ abstract class AbstractDriver implements DriverInterface
         $definition = new Definition($metadata->getClass('controller'));
         $definition
             ->setArguments([
-                $this->getMetdataDefinition($metadata),
+                $this->getMetadataDefinition($metadata),
                 new Reference('sylius.resource_controller.request_configuration_factory'),
                 new Reference('sylius.resource_controller.view_handler'),
                 new Reference($metadata->getServiceId('repository')),
@@ -192,7 +192,7 @@ abstract class AbstractDriver implements DriverInterface
      *
      * @return Definition
      */
-    protected function getMetdataDefinition(MetadataInterface $metadata)
+    protected function getMetadataDefinition(MetadataInterface $metadata)
     {
         $definition = new Definition(Metadata::class);
         $definition

@@ -83,7 +83,7 @@ sylius:
         no_shipping_charges: 'No shipping charges applied'
         no_taxes: 'No taxes applied'
         state:
-            order_confimed: 'Order confirmed'
+            order_confirmed: 'Order confirmed'
     order_item:
         quantity: Qty
         sellable: Product

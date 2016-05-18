@@ -422,13 +422,13 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     /**
      * @param NodeElement $table
      * @param array $fields
-     * @param bool $onlyFirstOccurence
+     * @param bool $onlyFirstOccurrence
      *
      * @return NodeElement[]
      *
      * @throws \Exception If columns or rows were not found
      */
-    protected function getRowsWithFields(NodeElement $table, array $fields, $onlyFirstOccurence = false)
+    protected function getRowsWithFields(NodeElement $table, array $fields, $onlyFirstOccurrence = false)
     {
         $rows = $table->findAll('css', 'tr');
 
@@ -470,7 +470,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
             if ($found) {
                 $foundRows[] = $row;
 
-                if ($onlyFirstOccurence) {
+                if ($onlyFirstOccurrence) {
                     break;
                 }
             }
@@ -502,7 +502,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
     /**
      * @param callable $callback
      * @param int $limit
-     * @param int $delay In miliseconds
+     * @param int $delay In milliseconds
      *
      * @return mixed
      *

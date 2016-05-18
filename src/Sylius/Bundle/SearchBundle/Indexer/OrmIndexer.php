@@ -87,7 +87,7 @@ class OrmIndexer implements IndexerInterface
     {
         $this->setEntityManager($em);
 
-        $this->addToOutput('Reseting index');
+        $this->addToOutput('Resetting index');
 
         $connection = $em->getConnection();
 

@@ -32,7 +32,7 @@ class RuleCollectionTypeSpec extends ObjectBehavior
         $this->beConstructedWith($registry);
     }
 
-    function it_is_initializabled()
+    function it_is_initializable()
     {
         $this->shouldHaveType(RuleCollectionType::class);
     }

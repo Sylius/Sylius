@@ -23,7 +23,7 @@ class DataSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Component\Report\DataFetcher\Data');
     }
 
-    public function it_has_label_ifnromation()
+    public function it_has_label_information()
     {
         $this->setLabels([]);
         $this->getLabels()->shouldReturn([]);

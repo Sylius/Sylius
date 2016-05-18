@@ -23,7 +23,7 @@ class VariantChoiceTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('varibale_name');
+        $this->beConstructedWith('variable_name');
     }
 
     function it_is_initializable()
@@ -62,6 +62,6 @@ class VariantChoiceTypeSpec extends ObjectBehavior
 
     function it_has_a_name()
     {
-        $this->getName()->shouldReturn('sylius_varibale_name_variant_choice');
+        $this->getName()->shouldReturn('sylius_variable_name_variant_choice');
     }
 }

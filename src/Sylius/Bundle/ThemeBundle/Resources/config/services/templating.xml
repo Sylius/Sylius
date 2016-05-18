@@ -54,7 +54,7 @@
             <tag name="kernel.cache_warmer" priority="20" />
         </service>
 
-        <!-- Overrided services -->
+        <!-- Overridden services -->
         <service id="templating.cache_warmer.template_paths" class="%templating.cache_warmer.template_paths.class%" public="false">
             <argument type="service" id="templating.finder" />
             <argument type="service" id="sylius.theme.templating.file_locator.inner" /> <!-- using default templating locator, as TemplatePathsCacheWarmer accepts TemplateLocator class instances only -->

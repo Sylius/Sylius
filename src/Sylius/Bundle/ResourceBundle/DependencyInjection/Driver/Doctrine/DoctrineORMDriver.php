@@ -71,7 +71,7 @@ class DoctrineORMDriver extends AbstractDoctrineDriver
         $definition = new Definition(DefaultResourceType::class);
         $definition
             ->setArguments([
-                $this->getMetdataDefinition($metadata),
+                $this->getMetadataDefinition($metadata),
                 $defaultFormBuilderDefinition,
             ])
             ->addTag('form.type', ['alias' => sprintf('%s_%s', $metadata->getApplicationName(), $metadata->getName())])

@@ -37,12 +37,12 @@ class BuildReportDataFetcherFormSubscriberSpec extends ObjectBehavior
         $this->shouldImplement(EventSubscriberInterface::class);
     }
 
-    function let(ServiceRegistryInterface $dataFecherRegistry, FormFactoryInterface $factory, DataFetcherInterface $dataFetcher)
+    function let(ServiceRegistryInterface $dataFetcherRegistry, FormFactoryInterface $factory, DataFetcherInterface $dataFetcher)
     {
-        $dataFecherRegistry->get('test_data_fetcher')->willReturn($dataFetcher);
+        $dataFetcherRegistry->get('test_data_fetcher')->willReturn($dataFetcher);
         $dataFetcher->getType()->willReturn('sylius_data_fetcher_test_type');
 
-        $this->beConstructedWith($dataFecherRegistry, $factory);
+        $this->beConstructedWith($dataFetcherRegistry, $factory);
     }
 
     function it_adds_configuration_fields_in_pre_set_data(

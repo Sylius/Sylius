@@ -73,7 +73,7 @@ class TwigGridRendererSpec extends ObjectBehavior
         $this->renderAction($gridView, $action)->shouldReturn('<a href="#">Action!</a>');
     }
 
-    function it_renders_field_with_data_via_appriopriate_field_type(
+    function it_renders_field_with_data_via_appropriate_field_type(
         GridView $gridView,
         Field $field,
         ServiceRegistryInterface $fieldsRegistry,

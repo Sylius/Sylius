@@ -29,7 +29,7 @@ use Doctrine\ODM\PHPCR\Query\Builder\ConstraintFieldIsset;
 class QueryBuilderWalker
 {
     /**
-     * Create a stirng representation of the given query builder node.
+     * Create a string representation of the given query builder node.
      *
      * @param AbstractNode $node
      *

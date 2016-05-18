@@ -47,7 +47,7 @@ class ListCommand extends ContainerAwareCommand
             return;
         }
 
-        $output->writeln('<question>Succesfully loaded themes:</question>');
+        $output->writeln('<question>Successfully loaded themes:</question>');
 
         $table = new Table($output);
         $table->setHeaders(['Title', 'Name', 'Path']);

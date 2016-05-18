@@ -29,7 +29,7 @@ class AbstractTranslationSpec extends ObjectBehavior
         $this->shouldImplement(TranslationInterface::class);
     }
 
-    function its_translatable_is_mutabale(TranslatableInterface $translatable)
+    function its_translatable_is_mutable(TranslatableInterface $translatable)
     {
         $this->setTranslatable($translatable);
         $this->getTranslatable()->shouldReturn($translatable);

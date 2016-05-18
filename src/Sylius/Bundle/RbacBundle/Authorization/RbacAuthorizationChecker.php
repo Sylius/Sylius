@@ -26,11 +26,11 @@ class RbacAuthorizationChecker implements ResourceBundleAuthorizationCheckerInte
     private $rbacAuthorizationChecker;
 
     /**
-     * @param AuthorizationCheckerInterface $rbacAuhtorizationChecker
+     * @param AuthorizationCheckerInterface $rbacAuthorizationChecker
      */
-    public function __construct(AuthorizationCheckerInterface $rbacAuhtorizationChecker)
+    public function __construct(AuthorizationCheckerInterface $rbacAuthorizationChecker)
     {
-        $this->rbacAuthorizationChecker = $rbacAuhtorizationChecker;
+        $this->rbacAuthorizationChecker = $rbacAuthorizationChecker;
     }
 
     /**

@@ -21,7 +21,7 @@ class OptionValueCollectionTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('varibale_name');
+        $this->beConstructedWith('variable_name');
     }
 
     function it_is_initializable()
@@ -41,7 +41,7 @@ class OptionValueCollectionTypeSpec extends ObjectBehavior
         $option->getId()->shouldBeCalled()->willReturn(3);
         $option->getName()->shouldBeCalled()->willReturn('option_name');
 
-        $builder->add('3', 'sylius_varibale_name_option_value_choice', [
+        $builder->add('3', 'sylius_variable_name_option_value_choice', [
             'label' => 'option_name',
             'option' => $option,
             'property_path' => '[0]',
@@ -60,7 +60,7 @@ class OptionValueCollectionTypeSpec extends ObjectBehavior
         $option->getName()->shouldBeCalled()->willReturn(null);
         $option->getCode()->shouldBeCalled()->willReturn('option_code');
 
-        $builder->add('3', 'sylius_varibale_name_option_value_choice', [
+        $builder->add('3', 'sylius_variable_name_option_value_choice', [
             'label' => 'option_code',
             'option' => $option,
             'property_path' => '[0]',
@@ -82,6 +82,6 @@ class OptionValueCollectionTypeSpec extends ObjectBehavior
 
     function it_has_a_name()
     {
-        $this->getName()->shouldReturn('sylius_varibale_name_option_value_collection');
+        $this->getName()->shouldReturn('sylius_variable_name_option_value_collection');
     }
 }

@@ -41,14 +41,14 @@ class PaymentFactorySpec extends ObjectBehavior
         $this->shouldImplement(FactoryInterface::class);
     }
 
-    function it_delegatates_creation_of_new_resource(FactoryInterface $paymentFactory, PaymentInterface $payment)
+    function it_delegates_creation_of_new_resource(FactoryInterface $paymentFactory, PaymentInterface $payment)
     {
         $paymentFactory->createNew()->willReturn($payment);
 
         $this->createNew()->shouldReturn($payment);
     }
 
-    function it_creates_payment_with_currency_and_amout(
+    function it_creates_payment_with_currency_and_amount(
         FactoryInterface $paymentFactory,
         PaymentInterface $payment
     ) {

@@ -46,12 +46,12 @@ class FilesystemConfigurationProviderSpec extends ObjectBehavior
             '/richard/configurationfile.json',
         ]);
 
-        $loader->load('/cristopher/configurationfile.json')->willReturn(['name' => 'cristopher/sylus-theme']);
-        $loader->load('/richard/configurationfile.json')->willReturn(['name' => 'richard/sylus-theme']);
+        $loader->load('/cristopher/configurationfile.json')->willReturn(['name' => 'cristopher/sylius-theme']);
+        $loader->load('/richard/configurationfile.json')->willReturn(['name' => 'richard/sylius-theme']);
 
         $this->getConfigurations()->shouldReturn([
-            ['name' => 'cristopher/sylus-theme'],
-            ['name' => 'richard/sylus-theme'],
+            ['name' => 'cristopher/sylius-theme'],
+            ['name' => 'richard/sylius-theme'],
         ]);
     }
 

@@ -43,7 +43,7 @@ class UniqueReviewerEmailValidatorSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\ReviewBundle\Validator\Constraints\UniqueReviewerEmailValidator');
     }
 
-    function it_extends_contraint_validator_class()
+    function it_extends_constraint_validator_class()
     {
         $this->shouldHaveType(ConstraintValidator::class);
     }

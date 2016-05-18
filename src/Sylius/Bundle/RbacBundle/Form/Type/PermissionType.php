@@ -17,7 +17,7 @@ use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * RBAC Persmission type form type.
+ * RBAC Permission type form type.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
