@@ -14,8 +14,6 @@ namespace Sylius\Component\Cart\Model;
 use Sylius\Component\Order\Model\OrderItem;
 
 /**
- * Model for cart items.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class CartItem extends OrderItem implements CartItemInterface

@@ -10,17 +10,13 @@
  */
 
 namespace Sylius\Component\Order\Model;
+use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-interface OrderItemUnitInterface extends AdjustableInterface
+interface OrderItemUnitInterface extends ResourceInterface, AdjustableInterface
 {
-    /**
-     * @return mixed
-     */
-    public function getId();
-
     /**
      * @return int
      */

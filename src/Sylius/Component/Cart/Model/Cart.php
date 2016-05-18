@@ -14,10 +14,6 @@ namespace Sylius\Component\Cart\Model;
 use Sylius\Component\Order\Model\Order;
 
 /**
- * Model for carts.
- * All driver entities and documents should extend this class or implement
- * proper interface.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class Cart extends Order implements CartInterface
@@ -39,7 +35,7 @@ class Cart extends Order implements CartInterface
      */
     public function getIdentifier()
     {
-        return parent::getId();
+        return $this->getId();
     }
 
     /**
