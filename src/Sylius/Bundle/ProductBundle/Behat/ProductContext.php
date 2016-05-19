@@ -39,6 +39,7 @@ class ProductContext extends DefaultContext
             $product->setCode($code);
 
             $product->getMasterVariant()->setPrice((int) round($data['price'] * 100));
+            $product->getMasterVariant()->setCode($code);
 
             if (!empty($data['options'])) {
                 foreach (explode(',', $data['options']) as $option) {
@@ -57,10 +58,6 @@ class ProductContext extends DefaultContext
                 $attributeValue->setValue($attribute[1]);
 
                 $product->addAttribute($attributeValue);
-            }
-
-            if (isset($data['sku'])) {
-                $product->setSku($data['sku']);
             }
 
             if (isset($data['description'])) {

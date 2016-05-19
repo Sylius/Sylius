@@ -90,6 +90,7 @@ Feature: Product variants
     Scenario: Generating only missing variants of product with multiple options
         Given I am creating variant of "Sylius T-Shirt"
         When I fill in "Price" with "19.99"
+        And I fill in "Code" with "T_SHIRT"
         And I select "L" from "T-Shirt size"
         And I select "Red" from "T-Shirt color"
         And I press "Create"
@@ -101,6 +102,7 @@ Feature: Product variants
     Scenario: Creating a product variant by selecting option
         Given I am creating variant of "Black T-Shirt"
         When I fill in "Price" with "19.99"
+        And I fill in "Code" with "T_SHIRT"
         And I select "L" from "T-Shirt size"
         And I press "Create"
         Then I should be on the page of product "Black T-Shirt"
@@ -109,6 +111,7 @@ Feature: Product variants
     Scenario: Creating a product variant by selecting multiple options
         Given I am creating variant of "Sylius T-Shirt"
         When I fill in "Price" with "19.99"
+        And I fill in "Code" with "T_SHIRT"
         And I select "L" from "T-Shirt size"
         And I select "Red" from "T-Shirt color"
         And I press "Create"

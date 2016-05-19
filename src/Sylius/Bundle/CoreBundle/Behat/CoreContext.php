@@ -801,6 +801,7 @@ class CoreContext extends DefaultContext
 
         foreach ($product->getVariants() as $variant) {
             $variant->setPrice($product->getMasterVariant()->getPrice());
+            $variant->setCode($this->faker->unique->uuid);
         }
 
         $this->getEntityManager()->persist($product);

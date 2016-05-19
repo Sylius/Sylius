@@ -27,9 +27,6 @@ class ProductVariantType extends BaseVariantType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('sku', 'text', [
-                'label' => 'sylius.form.variant.sku',
-            ])
             ->add('price', 'sylius_money', [
                 'label' => 'sylius.form.variant.price',
             ])

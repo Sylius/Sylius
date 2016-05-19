@@ -11,7 +11,8 @@
 
 namespace Sylius\Bundle\ProductBundle\Form\Type;
 
-use Sylius\Bundle\ProductBundle\Form\EventSubscriber\ConfigurableProductSubscriber;
+use Sylius\Bundle\ProductBundle\Form\EventSubscriber\ProductOptionFieldSubscriber;
+use Sylius\Bundle\ProductBundle\Form\EventSubscriber\SimpleProductSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -28,11 +29,9 @@ class ProductType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('masterVariant', 'sylius_product_variant', [
-                'master' => true,
-            ])
             ->addEventSubscriber(new AddCodeFormSubscriber())
-            ->addEventSubscriber(new ConfigurableProductSubscriber())
+            ->addEventSubscriber(new ProductOptionFieldSubscriber())
+            ->addEventSubscriber(new SimpleProductSubscriber())
         ;
     }
 

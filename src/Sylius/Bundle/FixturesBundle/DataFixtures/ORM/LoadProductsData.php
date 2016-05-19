@@ -255,7 +255,7 @@ class LoadProductsData extends DataFixture
         foreach ($product->getVariants() as $variant) {
             $variant->setAvailableOn($this->faker->dateTimeThisYear);
             $variant->setPrice($this->faker->randomNumber(4));
-            $variant->setSku($this->getUniqueSku());
+            $variant->setCode($this->getUniqueCode());
             $variant->setOnHand($this->faker->randomNumber(1));
 
             $this->setReference('Sylius.Variant-'.$this->totalVariants, $variant);
@@ -268,14 +268,14 @@ class LoadProductsData extends DataFixture
      * Adds master variant to product.
      *
      * @param ProductInterface $product
-     * @param string           $sku
+     * @param string $code
      */
-    protected function addMasterVariant(ProductInterface $product, $sku = null)
+    protected function addMasterVariant(ProductInterface $product, $code = null)
     {
         $variant = $product->getMasterVariant();
         $variant->setProduct($product);
         $variant->setPrice($this->faker->randomNumber(4));
-        $variant->setSku(null === $sku ? $this->getUniqueSku() : $sku);
+        $variant->setCode(null === $code ? $this->getUniqueCode() : $code);
         $variant->setAvailableOn($this->faker->dateTimeThisYear);
         $variant->setOnHand($this->faker->randomNumber(1));
         $variant->setTaxCategory($this->getTaxCategory('taxable'));
@@ -295,8 +295,8 @@ class LoadProductsData extends DataFixture
      * Adds attribute to product with given value.
      *
      * @param ProductInterface $product
-     * @param string           $code
-     * @param string           $value
+     * @param string $code
+     * @param string $value
      */
     protected function addAttribute(ProductInterface $product, $code, $value)
     {
@@ -313,7 +313,7 @@ class LoadProductsData extends DataFixture
      * Adds taxons to given product.
      *
      * @param ProductInterface $product
-     * @param array            $taxonCodes
+     * @param array $taxonCodes
      */
     protected function setTaxons(ProductInterface $product, array $taxonCodes)
     {
@@ -330,7 +330,7 @@ class LoadProductsData extends DataFixture
      * Set channels.
      *
      * @param ProductInterface $product
-     * @param array            $channelCodes
+     * @param array $channelCodes
      */
     protected function setChannels(ProductInterface $product, array $channelCodes)
     {
@@ -352,13 +352,11 @@ class LoadProductsData extends DataFixture
     /**
      * Get unique SKU.
      *
-     * @param int $length
-     *
      * @return string
      */
-    protected function getUniqueSku($length = 5)
+    protected function getUniqueCode()
     {
-        return $this->faker->unique()->randomNumber($length);
+        return $this->faker->unique()->uuid();
     }
 
     /**

@@ -47,16 +47,6 @@ interface ProductInterface extends
     /**
      * @return string
      */
-    public function getSku();
-
-    /**
-     * @param string $sku
-     */
-    public function setSku($sku);
-
-    /**
-     * @return string
-     */
     public function getVariantSelectionMethod();
 
     /**

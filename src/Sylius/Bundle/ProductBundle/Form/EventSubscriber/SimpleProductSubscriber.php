@@ -20,7 +20,7 @@ use Webmozart\Assert\Assert;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class ConfigurableProductSubscriber implements EventSubscriberInterface
+class SimpleProductSubscriber implements EventSubscriberInterface
 {
     /**
      * {@inheritdoc}
@@ -29,6 +29,7 @@ class ConfigurableProductSubscriber implements EventSubscriberInterface
     {
         return [
             FormEvents::PRE_SET_DATA => 'preSetData',
+            FormEvents::PRE_SUBMIT => 'preSubmit',
         ];
     }
 
@@ -43,20 +44,25 @@ class ConfigurableProductSubscriber implements EventSubscriberInterface
         Assert::isInstanceOf($product, ProductInterface::class);
 
         if ($product->isSimple()) {
+            $form = $event->getForm();
+
+            $form->add('masterVariant', 'sylius_product_variant', ['master' => true]);
+        }
+    }
+
+    /**
+     * @param FormEvent $event
+     */
+    public function preSubmit(FormEvent $event)
+    {
+        $data = $event->getData();
+
+        if (empty($data) || !array_key_exists('masterVariant', $data) || !array_key_exists('code', $data)) {
             return;
         }
 
-        $form = $event->getForm();
-        $form->remove('masterVariant');
+        $data['masterVariant']['code'] = $data['code'];
 
-        /** Options should be disabled for configurable product if it has at least one defined variant */
-        $disableOptions = (null !== $product->getMasterVariant()) && (false === $product->hasVariants());
-
-        $form->add('options', 'sylius_product_option_choice', [
-            'required' => false,
-            'disabled' => $disableOptions,
-            'multiple' => true,
-            'label' => 'sylius.form.product.options',
-        ]);
+        $event->setData($data);
     }
 }
