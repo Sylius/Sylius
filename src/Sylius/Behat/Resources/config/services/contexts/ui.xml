@@ -24,6 +24,7 @@
         <parameter key="sylius.behat.context.ui.admin.managing_products.class">Sylius\Behat\Context\Ui\Admin\ManagingProductsContext</parameter>
         <parameter key="sylius.behat.context.ui.admin.managing_product_attributes.class">Sylius\Behat\Context\Ui\Admin\ManagingProductAttributesContext</parameter>
         <parameter key="sylius.behat.context.ui.admin.managing_product_options.class">Sylius\Behat\Context\Ui\Admin\ManagingProductOptionsContext</parameter>
+        <parameter key="sylius.behat.context.ui.admin.managing_product_variants.class">Sylius\Behat\Context\Ui\Admin\ManagingProductVariantsContext</parameter>
         <parameter key="sylius.behat.context.ui.admin.managing_promotions.class">Sylius\Behat\Context\Ui\Admin\ManagingPromotionsContext</parameter>
         <parameter key="sylius.behat.context.ui.admin.managing_promotion_coupons.class">Sylius\Behat\Context\Ui\Admin\ManagingPromotionCouponsContext</parameter>
         <parameter key="sylius.behat.context.ui.admin.managing_shipping_methods.class">Sylius\Behat\Context\Ui\Admin\ManagingShippingMethodsContext</parameter>
@@ -132,6 +133,17 @@
             <argument type="service" id="sylius.behat.page.admin.product_option.create" />
             <argument type="service" id="sylius.behat.page.admin.product_option.update" />
             <argument type="service" id="sylius.behat.current_page_resolver" />
+            <tag name="sylius.behat.context" />
+        </service>
+
+
+        <service id="sylius.behat.context.ui.admin.managing_product_variants" class="%sylius.behat.context.ui.admin.managing_product_variants.class%" scope="scenario">
+            <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
+            <argument type="service" id="sylius.behat.page.admin.product_variant.create" />
+            <argument type="service" id="sylius.behat.page.admin.product_variant.index" />
+            <argument type="service" id="sylius.behat.page.admin.product_variant.update" />
+            <argument type="service" id="sylius.behat.current_page_resolver" />
+            <argument type="service" id="sylius.behat.notification_checker" />
             <tag name="sylius.behat.context" />
         </service>
 

@@ -24,6 +24,7 @@
         <import resource="admin/product.xml" />
         <import resource="admin/product_attribute.xml" />
         <import resource="admin/product_option.xml" />
+        <import resource="admin/product_variant.xml" />
         <import resource="admin/promotion.xml" />
         <import resource="admin/promotion_coupon.xml" />
         <import resource="admin/shipping_method.xml" />
