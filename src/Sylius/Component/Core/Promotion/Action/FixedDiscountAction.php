@@ -11,38 +11,72 @@
 
 namespace Sylius\Component\Core\Promotion\Action;
 
-use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\Distributor\ProportionalIntegerDistributorInterface;
+use Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicatorInterface;
+use Sylius\Component\Originator\Originator\OriginatorInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class FixedDiscountAction extends DiscountAction
 {
     const TYPE = 'order_fixed_discount';
 
     /**
+     * @var ProportionalIntegerDistributorInterface
+     */
+    private $proportionalDistributor;
+
+    /**
+     * @var UnitsPromotionAdjustmentsApplicatorInterface
+     */
+    private $unitsPromotionAdjustmentsApplicator;
+
+    /**
+     * {@inheritdoc}
+     *
+     * @param ProportionalIntegerDistributorInterface $proportionalIntegerDistributor
+     * @param UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
+     */
+    public function __construct(
+        OriginatorInterface $originator,
+        ProportionalIntegerDistributorInterface $proportionalIntegerDistributor,
+        UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
+    ) {
+        parent::__construct($originator);
+
+        $this->proportionalDistributor = $proportionalIntegerDistributor;
+        $this->unitsPromotionAdjustmentsApplicator = $unitsPromotionAdjustmentsApplicator;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function execute(PromotionSubjectInterface $subject, array $configuration, PromotionInterface $promotion)
     {
-        if (!$subject instanceof OrderInterface && !$subject instanceof OrderItemInterface) {
-            throw new UnexpectedTypeException(
-                $subject,
-                'Sylius\Component\Core\Model\OrderInterface or Sylius\Component\Core\Model\OrderItemInterface'
-            );
+        if (!$this->isSubjectValid($subject)) {
+            return;
         }
 
-        $adjustment = $this->createAdjustment($promotion);
-        $adjustment->setAmount(
-            $this->calculateAdjustmentAmount($subject->getPromotionSubjectTotal(), $configuration['amount'])
-        );
+        $this->isConfigurationValid($configuration);
 
-        $subject->addAdjustment($adjustment);
+        $promotionAmount = $this->calculateAdjustmentAmount($subject->getPromotionSubjectTotal(), $configuration['amount']);
+        if (0 === $promotionAmount) {
+            return;
+        }
+
+        $itemsTotals = [];
+        foreach ($subject->getItems() as $item) {
+            $itemsTotals[] = $item->getTotal();
+        }
+
+        $splitPromotion = $this->proportionalDistributor->distribute($itemsTotals, $promotionAmount);
+        $this->unitsPromotionAdjustmentsApplicator->apply($subject, $promotion, $splitPromotion);
     }
 
     /**
@@ -51,6 +85,15 @@ class FixedDiscountAction extends DiscountAction
     public function getConfigurationFormType()
     {
         return 'sylius_promotion_action_fixed_discount_configuration';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function isConfigurationValid(array $configuration)
+    {
+        Assert::keyExists($configuration, 'amount');
+        Assert::integer($configuration['amount']);
     }
 
     /**
