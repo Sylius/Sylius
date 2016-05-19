@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <imports>
+        <import resource="admin/channel.xml" />
+        <import resource="admin/country.xml" />
+        <import resource="admin/currency.xml" />
+        <import resource="admin/customer.xml" />
+        <import resource="admin/locale.xml" />
+        <import resource="admin/order.xml" />
+        <import resource="admin/payment_method.xml" />
+        <import resource="admin/product.xml" />
+        <import resource="admin/product_attribute.xml" />
+        <import resource="admin/product_option.xml" />
+        <import resource="admin/promotion.xml" />
+        <import resource="admin/promotion_coupon.xml" />
+        <import resource="admin/shipping_method.xml" />
+        <import resource="admin/tax_category.xml" />
+        <import resource="admin/tax_rate.xml" />
+        <import resource="admin/taxon.xml" />
+        <import resource="admin/zone.xml" />
+    </imports>
+
+    <parameters>
+        <parameter key="sylius.behat.page.admin.crud.index.class">Sylius\Behat\Page\Admin\Crud\IndexPage</parameter>
+        <parameter key="sylius.behat.page.admin.crud.create.class">Sylius\Behat\Page\Admin\Crud\CreatePage</parameter>
+        <parameter key="sylius.behat.page.admin.crud.update.class">Sylius\Behat\Page\Admin\Crud\UpdatePage</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.behat.page.admin.crud.index" class="%sylius.behat.page.admin.crud.index.class%" parent="sylius.behat.symfony_page" abstract="true" scope="scenario" public="false">
+            <argument type="service" id="sylius.behat.table_accessor" />
+        </service>
+        <service id="sylius.behat.page.admin.crud.create" class="%sylius.behat.page.admin.crud.create.class%" parent="sylius.behat.symfony_page" abstract="true" scope="scenario" public="false" />
+        <service id="sylius.behat.page.admin.crud.update" class="%sylius.behat.page.admin.crud.update.class%" parent="sylius.behat.symfony_page" abstract="true" scope="scenario" public="false" />
+    </services>
+</container>

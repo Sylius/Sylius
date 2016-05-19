@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <imports>
+        <import resource="shop/checkout.xml" />
+        <import resource="shop/user.xml" />
+    </imports>
+
+    <parameters>
+        <parameter key="sylius.behat.page.shop.home.class">Sylius\Behat\Page\Shop\HomePage</parameter>
+        <parameter key="sylius.behat.page.shop.cart.cart_summary.class">Sylius\Behat\Page\Shop\Cart\CartSummaryPage</parameter>
+        <parameter key="sylius.behat.page.shop.product.show.class">Sylius\Behat\Page\Shop\Product\ShowPage</parameter>
+        <parameter key="sylius.behat.page.shop.order.order_payments.class">Sylius\Behat\Page\Shop\Order\OrderPaymentsPage</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.behat.page.shop.home" class="%sylius.behat.page.shop.home.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
+        <service id="sylius.behat.page.shop.cart.cart_summary" class="%sylius.behat.page.shop.cart.cart_summary.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
+        <service id="sylius.behat.page.shop.product.show" class="%sylius.behat.page.shop.product.show.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
+        <service id="sylius.behat.page.shop.order.order_payments" class="%sylius.behat.page.shop.order.order_payments.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false">
+            <argument type="service" id="sylius.behat.table_accessor" />
+        </service>
+    </services>
+</container>

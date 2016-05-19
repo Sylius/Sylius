@@ -13,9 +13,10 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <imports>
-        <import resource="services/contexts.xml"/>
-        <import resource="services/pages.xml"/>
+        <import resource="services/contexts.xml" />
+        <import resource="services/pages.xml" />
     </imports>
+
     <parameters>
         <parameter key="sylius.behat.cookie_setter.class">Sylius\Behat\Service\Setter\CookieSetter</parameter>
         <parameter key="sylius.behat.channel_context_setter.class">Sylius\Behat\Service\Setter\ChannelContextSetter</parameter>
@@ -28,8 +29,11 @@
         <parameter key="sylius.behat.notification_checker.class">Sylius\Behat\Service\NotificationChecker</parameter>
         <parameter key="sylius.behat.current_page_resolver.class">Sylius\Behat\Service\CurrentPageResolver</parameter>
     </parameters>
+
     <services>
-        <service id="mink.default_session" class="Behat\Mink\Session" factory-service="mink" factory-method="getSession" lazy="true" scope="scenario" public="false" />
+        <service id="mink.default_session" class="Behat\Mink\Session" lazy="true" scope="scenario" public="false">
+            <factory service="mink" method="getSession" />
+        </service>
 
         <service id="sylius.behat.cookie_setter" class="%sylius.behat.cookie_setter.class%" scope="scenario" public="false">
             <argument type="service" id="mink.default_session" />
