@@ -12,8 +12,12 @@
 namespace spec\Sylius\Component\Promotion\Generator;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Promotion\Generator\Instruction;
+use Sylius\Component\Promotion\Generator\InstructionInterface;
 
 /**
+ * @mixin Instruction
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class InstructionSpec extends ObjectBehavior
@@ -21,6 +25,11 @@ class InstructionSpec extends ObjectBehavior
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Promotion\Generator\Instruction');
+    }
+
+    function it_implements_instruction_interface()
+    {
+        $this->shouldImplement(InstructionInterface::class);
     }
 
     function it_should_have_amount_equal_to_5_by_default()

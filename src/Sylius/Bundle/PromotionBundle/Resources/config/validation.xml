@@ -94,6 +94,7 @@
     </class>
 
     <class name="Sylius\Component\Promotion\Generator\Instruction">
+        <constraint name="Sylius\Bundle\PromotionBundle\Validator\Constraints\CouponPossibleGenerationAmount" />
         <property name="amount">
             <constraint name="NotBlank">
                 <option name="message">sylius.promotion_coupon_generate_instruction.amount.not_blank</option>
@@ -107,6 +108,17 @@
             <constraint name="Range">
                 <option name="min">1</option>
                 <option name="minMessage">sylius.promotion_coupon_generate_instruction.usage_limit.min</option>
+            </constraint>
+        </property>
+        <property name="codeLength">
+            <constraint name="Range">
+                <option name="min">1</option>
+                <option name="minMessage">sylius.promotion_coupon_generate_instruction.code_length.min</option>
+                <option name="max">40</option>
+                <option name="maxMessage">sylius.promotion_coupon_generate_instruction.code_length.max</option>
+            </constraint>
+            <constraint name="NotBlank">
+                <option name="message">sylius.promotion_coupon_generate_instruction.code_length.not_blank</option>
             </constraint>
         </property>
     </class>
