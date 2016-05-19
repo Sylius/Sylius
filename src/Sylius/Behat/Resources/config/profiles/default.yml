@@ -45,7 +45,7 @@ default:
 
         Sylius\Behat\Extension\MultiContainerExtension:
             imports:
-                - "etc/behat/services.xml"
+                - "src/Sylius/Behat/Resources/config/services.xml"
 
         Sylius\Behat\Extension\SymfonyExtension: ~
 

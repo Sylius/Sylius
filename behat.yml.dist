@@ -2,5 +2,5 @@
 # (c) Paweł Jędrzejewski
 
 imports:
-    - etc/behat/profiles.yml
-    - etc/behat/suites.yml
+    - src/Sylius/Behat/Resources/config/profiles.yml
+    - src/Sylius/Behat/Resources/config/suites.yml
