@@ -1,0 +1,69 @@
+sylius_admin_product_variant_index:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product_variant:indexAction
+        _sylius:
+            template: SyliusAdminBundle:Crud:index.html.twig
+            grid: sylius_admin_product_variant
+            section: admin
+            vars:
+                route:
+                    parameters:
+                        productId: $productId
+                templates:
+                    breadcrumb: SyliusAdminBundle:ProductVariant/Breadcrumb:_index.html.twig
+                icon: cubes
+                subheader: sylius.ui.manage_coupons
+
+sylius_admin_product_variant_create:
+    path: /new
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.product_variant:createAction
+        _sylius:
+            factory:
+                method: createForProductWithId
+                arguments: [$productId]
+            template: SyliusAdminBundle:Crud:create.html.twig
+            grid: sylius_admin_product_variant
+            section: admin
+            redirect:
+                route: sylius_admin_product_variant_index
+                parameters: { productId: $productId }
+            vars:
+                route:
+                    parameters:
+                        productId: $productId
+                templates:
+                    form: SyliusAdminBundle:ProductVariant:_form.html.twig
+                    breadcrumb: SyliusAdminBundle:ProductVariant/Breadcrumb:_create.html.twig
+
+sylius_admin_product_variant_update:
+    path: /{id}/edit
+    methods: [GET, PUT]
+    defaults:
+        _controller: sylius.controller.product_variant:updateAction
+        _sylius:
+            template: SyliusAdminBundle:Crud:update.html.twig
+            grid: sylius_admin_product_variant
+            section: admin
+            redirect:
+                route: sylius_admin_product_variant_index
+                parameters: { productId: $productId }
+            vars:
+                route:
+                    parameters:
+                        id: $id
+                        productId: $productId
+                templates:
+                    form: SyliusAdminBundle:ProductVariant:_form.html.twig
+                    breadcrumb: SyliusAdminBundle:ProductVariant/Breadcrumb:_update.html.twig
+
+sylius_admin_product_variant_delete:
+    path: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.product_variant:deleteAction
+        _sylius:
+            redirect: referer

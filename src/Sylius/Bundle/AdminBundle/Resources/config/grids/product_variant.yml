@@ -1,0 +1,27 @@
+sylius_grid:
+    grids:
+        sylius_admin_product_variant:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%sylius.model.product_variant.class%"
+                    repository:
+                        method: createQueryBuilderWithProduct
+                        arguments:
+                            productId: $productId
+            fields:
+                code:
+                    type: string
+                    label: sylius.ui.code
+                presentation:
+                    type: string
+                    label: sylius.ui.presentation
+            actions:
+                main:
+                    create:
+                        type: create_variant
+                item:
+                    update:
+                        type: update_variant
+                    delete:
+                        type: delete_variant

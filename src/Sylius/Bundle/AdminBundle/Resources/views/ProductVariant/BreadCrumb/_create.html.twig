@@ -1,0 +1,14 @@
+{% import 'SyliusAdminBundle:Crud/Macro:breadcrumb.html.twig' as breadcrumb %}
+
+{% set product_id = app.request.attributes.get('productId') %}
+
+{% set breadcrumbs = [
+        { label: 'sylius.ui.administration'|trans, url: path('sylius_admin_dashboard') },
+        { label: 'sylius.ui.products'|trans, url: path('sylius_admin_product_index') },
+        { label: product_id },
+        { label: 'sylius.ui.variants'|trans, url: path(configuration.getRouteName('index'), {'productId': product_id}) },
+        { label: 'sylius.ui.new'|trans }
+    ]
+%}
+
+{{ breadcrumb.crumble(breadcrumbs) }}
