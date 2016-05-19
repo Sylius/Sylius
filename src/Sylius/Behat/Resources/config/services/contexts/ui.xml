@@ -136,7 +136,6 @@
             <tag name="sylius.behat.context" />
         </service>
 
-
         <service id="sylius.behat.context.ui.admin.managing_product_variants" class="%sylius.behat.context.ui.admin.managing_product_variants.class%" scope="scenario">
             <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
             <argument type="service" id="sylius.behat.page.admin.product_variant.create" />

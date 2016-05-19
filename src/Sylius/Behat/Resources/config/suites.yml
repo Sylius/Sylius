@@ -5,7 +5,8 @@ imports:
     - suites/cli/installer.yml
 
     - suites/domain/managing_orders.yml
-    - suites/domain/managing_products.yml
+    - suites/domain/product/managing_products.yml
+    - suites/domain/product/managing_product_variants.yml
     - suites/domain/promotion/managing_promotions.yml
     - suites/domain/promotion/managing_promotion_coupons.yml
 

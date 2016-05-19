@@ -27,4 +27,9 @@ interface CreatePageInterface extends BaseCreatePageInterface
      * @param string $code
      */
     public function specifyCode($code);
+
+    /**
+     * @param string $name
+     */
+    public function nameIt($name);
 }

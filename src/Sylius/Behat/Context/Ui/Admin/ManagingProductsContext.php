@@ -177,9 +177,9 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @When /^I specify its price to ("(?:€|£|\$)[^"]+")$/
+     * @When /^I set its price to ("(?:€|£|\$)[^"]+")$/
      */
-    public function iSpecifyItsPriceTo($price)
+    public function iSetItsPriceTo($price)
     {
         $this->createSimpleProductPage->specifyPrice($price);
     }

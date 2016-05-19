@@ -97,7 +97,7 @@ final class ProductContext implements Context
     }
 
     /**
-     * @When /^I should be notified that this (?:variant|product) is in use and cannot be deleted$/
+     * @Then /^I should be notified that this (?:variant|product) is in use and cannot be deleted$/
      */
     public function iShouldBeNotifiedThatThisProductVariantIsInUseAndCannotBeDeleted()
     {

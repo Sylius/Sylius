@@ -165,6 +165,7 @@ final class ProductContext implements Context
         $variant = $this->productVariantFactory->createNew();
 
         $variant->setPresentation($productVariantName);
+        $variant->setCode($this->convertToCode($productVariantName));
         $variant->setPrice($price);
         $variant->setProduct($product);
         $product->addVariant($variant);
@@ -404,6 +405,7 @@ final class ProductContext implements Context
         $product->setName($productName);
         $product->setPrice($price);
         $product->setCode($this->convertToCode($productName));
+        $product->getMasterVariant()->setCode($product->getCode());
 
         return $product;
     }

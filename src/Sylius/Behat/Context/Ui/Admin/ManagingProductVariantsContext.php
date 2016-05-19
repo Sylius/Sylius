@@ -83,7 +83,7 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @Given /^I want to create a new product variant for (this product)$/
+     * @Given /^I want to create a new variant of (this product)$/
      */
     public function iWantToCreateANewProduct(ProductInterface $product)
     {
@@ -112,7 +112,7 @@ final class ManagingProductVariantsContext implements Context
      */
     public function iRenameItTo($name)
     {
-        $this->createPage->nameIt($name);
+        $this->updatePage->nameIt($name);
     }
 
     /**
@@ -125,38 +125,37 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @When /^I specify its price to ("(?:€|£|\$)[^"]+")$/
+     * @When /^I set its price to ("(?:€|£|\$)[^"]+")$/
      */
-    public function iSpecifyItsPriceTo($price)
+    public function iSetItsPriceTo($price)
     {
         $this->createPage->specifyPrice($price);
     }
 
     /**
-     * @Given the product variant :productVariantName should appear in the shop
-     * @Given the product variant :productVariantName should be in the shop
-     * @Given this product variant should still be named :productVariantName
+     * @Then the :productVariantName variant of the :product product should appear in the shop
      */
-    public function theProductVariantShouldAppearInTheShop($productVariantName)
+    public function theProductVariantShouldAppearInTheShop($productVariantName, ProductInterface $product)
     {
-        $this->iWantToBrowseProducts();
+        $this->iWantToViewAllVariantsOfThisProduct($product);
 
         Assert::true(
-            $this->indexPage->isSingleResourceOnPage(['name' => $productVariantName]),
+            $this->indexPage->isSingleResourceOnPage(['presentation' => $productVariantName]),
             sprintf('The product variant with name %s has not been found.', $productVariantName)
         );
     }
 
     /**
-     * @When I want to browse products
+     * @When /^I want to view all variants of (this product)$/
      */
-    public function iWantToBrowseProducts()
+    public function iWantToViewAllVariantsOfThisProduct(ProductInterface $product)
     {
-        $this->indexPage->open();
+        $this->indexPage->open(['productId' => $product->getId()]);
     }
 
     /**
-     * @Then I should see :numberOfProductVariants products in the list
+     * @Then I should see :numberOfProductVariants variants in the list
+     * @Then I should see :numberOfProductVariants variant in the list
      */
     public function iShouldSeeProductsInTheList($numberOfProductVariants)
     {
@@ -170,32 +169,31 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @When I delete the :productVariant productVariant
-     * @When I try to delete the :productVariant productVariant
+     * @When /^I delete the ("[^"]+" variant of product "[^"]+")$/
+     * @When /^I try to delete the ("[^"]+" variant of product "[^"]+")$/
      */
-    public function iDeleteProductVariant(ProductVariantInterface $productVariant)
+    public function iDeleteTheVariantOfProduct(ProductVariantInterface $productVariant)
     {
-        $this->sharedStorage->set('product_variant', $productVariant);
+        $this->iWantToViewAllVariantsOfThisProduct($productVariant->getProduct());
 
-        $this->iWantToBrowseProducts();
-        $this->indexPage->deleteResourceOnPage(['name' => $productVariant->getName()]);
+        $this->indexPage->deleteResourceOnPage(['code' => $productVariant->getCode()]);
     }
 
     /**
-     * @Then /^(this product variant) should not exist in the product catalog$/
+     * @Then /^(this variant) should not exist in the product catalog$/
      */
-    public function productVariantShouldNotExist(ProductVariantInterface $product)
+    public function productVariantShouldNotExist(ProductVariantInterface $productVariant)
     {
-        $this->iWantToBrowseProducts();
+        $this->iWantToViewAllVariantsOfThisProduct($productVariant->getProduct());
 
         Assert::false(
-            $this->indexPage->isSingleResourceOnPage(['presentation' => $product->getPresentation()]),
-            sprintf('Product variant with code %s exists but should not.', $product->getPresentation())
+            $this->indexPage->isSingleResourceOnPage(['presentation' => $productVariant->getPresentation()]),
+            sprintf('Product variant with code %s exists but should not.', $productVariant->getPresentation())
         );
     }
 
     /**
-     * @Then I should be notified that this product is in use and cannot be deleted
+     * @Then I should be notified that this variant is in use and cannot be deleted
      */
     public function iShouldBeNotifiedOfFailure()
     {
@@ -206,11 +204,11 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @Then /^(this product variant) should still exist in the product catalog$/
+     * @Then /^(this variant) should still exist in the product catalog$/
      */
     public function productShouldExistInTheProductCatalog(ProductVariantInterface $productVariant)
     {
-        $this->theProductShouldAppearInTheShop($productVariant->getPresentation());
+        $this->theProductVariantShouldAppearInTheShop($productVariant->getPresentation(), $productVariant->getProduct());
     }
 
     /**
@@ -231,22 +229,6 @@ final class ManagingProductVariantsContext implements Context
             $this->updatePage->isCodeDisabled(),
             'Code should be immutable, but it does not.'
         );
-    }
-
-    /**
-     * @Then /^this product price should be "(?:€|£|\$)([^"]+)"$/
-     */
-    public function thisProductPriceShouldBeEqualTo($price)
-    {
-        $this->assertElementValue('price', $price);
-    }
-
-    /**
-     * @Then this product name should be :name
-     */
-    public function thisProductElementShouldBe($name)
-    {
-        $this->assertElementValue('presentation', $name);
     }
 
     /**
@@ -272,19 +254,6 @@ final class ManagingProductVariantsContext implements Context
     public function iChangeItsPriceTo($price)
     {
         $this->updatePage->specifyPrice($price);
-    }
-
-    /**
-     * @Given product with :element :value should not be added
-     */
-    public function productWithNameShouldNotBeAdded($element, $value)
-    {
-        $this->iWantToBrowseProducts();
-
-        Assert::false(
-            $this->indexPage->isSingleResourceOnPage([$element => $value]),
-            sprintf('Product with %s %s was created, but it should not.', $element, $value)
-        );
     }
 
     /**
