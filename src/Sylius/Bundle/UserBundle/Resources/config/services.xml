@@ -25,7 +25,6 @@
         <parameter key="sylius.user.code_provider.class">Sylius\Component\User\Security\TokenProvider</parameter>
         <parameter key="sylius.user.user_reloader.class">Sylius\Bundle\UserBundle\Reloader\UserReloader</parameter>
 
-        <parameter key="sylius.security.authentication_utils.class">Sylius\Bundle\UserBundle\Security\Authentication\AuthenticationUtils</parameter>
         <parameter key="sylius.security.user_login.class">Sylius\Bundle\UserBundle\Security\UserLogin</parameter>
 
         <parameter key="sylius.user.token_generator.class">Sylius\Component\User\Security\Generator\TokenGenerator</parameter>
@@ -99,9 +98,6 @@
             <argument>%sylius.user.resetting.pin_length%</argument>
         </service>
 
-        <service id="security.authentication_utils" class="%sylius.security.authentication_utils.class%">
-            <argument type="service" id="service_container" />
-        </service>
         <service id="sylius.security.user_login" class="%sylius.security.user_login.class%">
             <argument type="service" id="security.token_storage" />
             <argument type="service" id="security.user_checker" />
