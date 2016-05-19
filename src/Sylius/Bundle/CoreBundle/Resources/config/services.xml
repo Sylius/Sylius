@@ -40,6 +40,8 @@
         <parameter key="sylius.order_processing.prices_recalculator.class">Sylius\Component\Core\OrderProcessing\PricesRecalculator</parameter>
         <parameter key="sylius.order_processing.order_recalculator.class">Sylius\Component\Core\OrderProcessing\OrderRecalculator</parameter>
 
+        <parameter key="sylius.adjustments_remover.class">Sylius\Component\Core\Remover\AdjustmentsRemover</parameter>
+
         <parameter key="sylius.taxation.order_shipment_taxes_applicator.class">Sylius\Component\Core\Taxation\Applicator\OrderShipmentTaxesApplicator</parameter>
         <parameter key="sylius.taxation.order_items_taxes_applicator.class">Sylius\Component\Core\Taxation\Applicator\OrderItemsTaxesApplicator</parameter>
         <parameter key="sylius.taxation.order_item_units_taxes_applicator.class">Sylius\Component\Core\Taxation\Applicator\OrderItemUnitsTaxesApplicator</parameter>
@@ -314,6 +316,7 @@
             <argument type="service" id="sylius.price_calculator" />
         </service>
         <service id="sylius.order_processing.order_recalculator" class="%sylius.order_processing.order_recalculator.class%">
+            <argument type="service" id="sylius.adjustments_remover" />
             <argument type="service" id="sylius.taxation.order_taxes_processor" />
             <argument type="service" id="sylius.order_processing.prices_recalculator" />
             <argument type="service" id="sylius.promotion_processor" />
@@ -331,6 +334,8 @@
             <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="sm.factory" />
         </service>
+
+        <service id="sylius.adjustments_remover" class="%sylius.adjustments_remover.class%" />
 
         <!-- listeners -->
         <service id="sylius.listener.cart_blamer" class="%sylius.listener.cart_blamer.class%">

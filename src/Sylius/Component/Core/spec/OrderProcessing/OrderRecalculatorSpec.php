@@ -17,6 +17,7 @@ use Sylius\Component\Core\OrderProcessing\OrderRecalculator;
 use Sylius\Component\Core\OrderProcessing\OrderRecalculatorInterface;
 use Sylius\Component\Core\OrderProcessing\PricesRecalculatorInterface;
 use Sylius\Component\Core\OrderProcessing\ShippingChargesProcessorInterface;
+use Sylius\Component\Core\Remover\AdjustmentsRemoverInterface;
 use Sylius\Component\Core\Taxation\Processor\OrderTaxesProcessorInterface;
 use Sylius\Component\Promotion\Processor\PromotionProcessorInterface;
 
@@ -28,12 +29,19 @@ use Sylius\Component\Promotion\Processor\PromotionProcessorInterface;
 class OrderRecalculatorSpec extends ObjectBehavior
 {
     function let(
+        AdjustmentsRemoverInterface $adjustmentsRemover,
         OrderTaxesProcessorInterface $taxesProcessor,
         PricesRecalculatorInterface $pricesRecalculator,
         PromotionProcessorInterface $promotionProcessor,
         ShippingChargesProcessorInterface $shippingChargesProcessor
     ) {
-        $this->beConstructedWith($taxesProcessor, $pricesRecalculator, $promotionProcessor, $shippingChargesProcessor);
+        $this->beConstructedWith(
+            $adjustmentsRemover,
+            $taxesProcessor,
+            $pricesRecalculator,
+            $promotionProcessor,
+            $shippingChargesProcessor
+        );
     }
 
     function it_is_initializable()
@@ -47,13 +55,15 @@ class OrderRecalculatorSpec extends ObjectBehavior
     }
 
     function it_recalculates_order_promotions_taxes_and_shipping_charges(
+        AdjustmentsRemoverInterface $adjustmentsRemover,
         PromotionProcessorInterface $promotionProcessor,
         PricesRecalculatorInterface $pricesRecalculator,
         OrderTaxesProcessorInterface $taxesProcessor,
         ShippingChargesProcessorInterface $shippingChargesProcessor,
         OrderInterface $order
     ) {
-        $pricesRecalculator->recalculate($order);
+        $adjustmentsRemover->remove($order)->shouldBeCalled();
+        $pricesRecalculator->recalculate($order)->shouldBeCalled();
         $promotionProcessor->process($order)->shouldBeCalled();
         $taxesProcessor->process($order)->shouldBeCalled();
         $shippingChargesProcessor->applyShippingCharges($order)->shouldBeCalled();
