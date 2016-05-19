@@ -21,7 +21,8 @@ use Symfony\Component\DependencyInjection\Reference;
 use Sylius\Bundle\ResourceBundle\Form\Type\DefaultResourceType;
 use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\Form\Builder\DefaultFormBuilder;
 use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener\NameResolverListener;
-use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener\DefaultPathListener;
+use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener\DefaultParentListener;
+use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener\NameFilterListener;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -39,45 +40,95 @@ class DoctrinePHPCRDriver extends AbstractDoctrineDriver
     }
 
     /**
-     * Add resource event listeners.
+     * @param ContainerBuilder $container
+     * @param MetadataInterface $metadata
      */
     protected function addResourceListeners(ContainerBuilder $container, MetadataInterface $metadata)
     {
+        $options = array_merge(
+            [
+                'default_parent_path' => null,
+                'autocreate' => false,
+                'force' => false,
+                'name_filter' => true,
+                'name_resolver' => true,
+            ],
+            $metadata->getParameter('options')
+        );
+
         $createEventName = sprintf('%s.%s.pre_%s', $metadata->getApplicationName(), $metadata->getName(), 'create');
         $updateEventName = sprintf('%s.%s.pre_%s', $metadata->getApplicationName(), $metadata->getName(), 'update');
 
-        // default path listener
-        $defaultPath = new Definition(DefaultPathListener::class);
-        $defaultPath->setArguments([
-            new Reference('sylius.resource_registry'),
-            new Reference($metadata->getServiceId('manager'))
-        ]);
-        $defaultPath->addTag('kernel.event_listener', [
-            'event' => $createEventName,
-            'method' => 'onPreCreate'
-        ]);
-        $container->setDefinition(
-            'sylius.resource.doctrine.odm.phpcr.event_listener.default_path',
-            $defaultPath
-        );
+        if ($options['default_parent_path']) {
+            $defaultPath = new Definition(DefaultParentListener::class);
+            $defaultPath->setArguments([
+                new Reference($metadata->getServiceId('manager')),
+                $options['default_parent_path'],
+                $options['autocreate'],
+                $options['force']
+            ]);
+            $defaultPath->addTag('kernel.event_listener', [
+                'event' => $createEventName,
+                'method' => 'onPreCreate'
+            ]);
 
-        // name resolver listener
-        $nameResolver = new Definition(NameResolverListener::class);
-        $nameResolver->setArguments([
-            new Reference($metadata->getServiceId('manager'))
-        ]);
-        $nameResolver->addTag('kernel.event_listener', [
-            'event' => $createEventName,
-            'method' => 'onPreCreate'
-        ]);
-        $nameResolver->addTag('kernel.event_listener', [
-            'event' => $updateEventName,
-            'method' => 'onPreCreate'
-        ]);
-        $container->setDefinition(
-            'sylius.resource.doctrine.odm.phpcr.event_listener.name_resolver',
-            $nameResolver
-        );
+            $container->setDefinition(
+                sprintf(
+                    '%s.resource.%s.doctrine.odm.phpcr.event_listener.default_path',
+                    $metadata->getApplicationName(),
+                    $metadata->getName()
+                ),
+                $defaultPath
+            );
+        }
+
+        if ($options['name_filter']) {
+            $nameFilter = new Definition(NameFilterListener::class);
+            $nameFilter->setArguments([
+                new Reference($metadata->getServiceId('manager'))
+            ]);
+            $nameFilter->addTag('kernel.event_listener', [
+                'event' => $createEventName,
+                'method' => 'onEvent'
+            ]);
+            $nameFilter->addTag('kernel.event_listener', [
+                'event' => $updateEventName,
+                'method' => 'onEvent'
+            ]);
+
+            $container->setDefinition(
+                sprintf(
+                    '%s.resource.%s.doctrine.odm.phpcr.event_listener.name_filter',
+                    $metadata->getApplicationName(),
+                    $metadata->getName()
+                ),
+                $nameFilter
+            );
+        }
+
+        if ($options['name_resolver']) {
+            $nameResolver = new Definition(NameResolverListener::class);
+            $nameResolver->setArguments([
+                new Reference($metadata->getServiceId('manager'))
+            ]);
+            $nameResolver->addTag('kernel.event_listener', [
+                'event' => $createEventName,
+                'method' => 'onEvent'
+            ]);
+            $nameResolver->addTag('kernel.event_listener', [
+                'event' => $updateEventName,
+                'method' => 'onEvent'
+            ]);
+
+            $container->setDefinition(
+                sprintf(
+                    '%s.resource.%s.doctrine.odm.phpcr.event_listener.name_resolver',
+                    $metadata->getApplicationName(),
+                    $metadata->getName()
+                ),
+                $nameResolver
+            );
+        }
     }
 
     /**

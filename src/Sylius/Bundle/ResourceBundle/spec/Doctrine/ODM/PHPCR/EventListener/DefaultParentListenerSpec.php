@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener\DefaultPathListener;
+use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener\DefaultParentListener;
 use Doctrine\ODM\PHPCR\Mapping\ClassMetadata;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Resource\Metadata\Registry;
@@ -25,58 +25,30 @@ use PHPCR\SessionInterface;
 /**
  * @author Daniel Leech <daniel@dantleech.com>
  */
-class DefaultPathListenerSpec extends ObjectBehavior
+class DefaultParentListenerSpec extends ObjectBehavior
 {
     function let(
-        Registry $registry,
         DocumentManagerInterface $documentManager
     )
     {
         $this->beConstructedWith(
-            $registry,
-            $documentManager
+            $documentManager,
+            '/path/to'
         );
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(DefaultPathListener::class);
-    }
-
-    function it_should_return_early_if_default_parent_path_is_null(
-        ResourceControllerEvent $event,
-        Registry $registry,
-        Metadata $resourceMetadata,
-        DocumentManagerInterface $documentManager
-    )
-    {
-        $event->getSubject()->willReturn(new \stdClass());
-        $registry->getByClass(\stdClass::class)->willReturn(
-            $resourceMetadata
-        );
-
-        $resourceMetadata->getParameter('options')->willReturn([
-        ]);
-
-        $this->onPreCreate($event);
-        $documentManager->getClassMetadata(Argument::cetera())->shouldNotHaveBeenCalled();
+        $this->shouldHaveType(DefaultParentListener::class);
     }
 
     function it_should_throw_an_exception_if_no_parent_mapping_exists(
         ResourceControllerEvent $event,
-        Registry $registry,
-        Metadata $resourceMetadata,
         ClassMetadata $documentMetadata,
         DocumentManagerInterface $documentManager
     )
     {
         $event->getSubject()->willReturn(new \stdClass());
-        $registry->getByClass(\stdClass::class)->willReturn(
-            $resourceMetadata
-        );
-        $resourceMetadata->getParameter('options')->willReturn([
-            'default_parent_path' => '/path/to',
-        ]);
         $documentManager->getClassMetadata(\stdClass::class)->willReturn(
             $documentMetadata
         );
@@ -92,19 +64,16 @@ class DefaultPathListenerSpec extends ObjectBehavior
 
     function it_should_throw_an_exception_if_the_parent_does_not_exist_and_autocreate_is_false(
         ResourceControllerEvent $event,
-        Registry $registry,
-        Metadata $resourceMetadata,
         ClassMetadata $documentMetadata,
         DocumentManagerInterface $documentManager
     )
     {
-        $event->getSubject()->willReturn(new \stdClass());
-        $registry->getByClass(\stdClass::class)->willReturn(
-            $resourceMetadata
+        $this->beConstructedWith(
+            $documentManager,
+            '/path/to',
+            false
         );
-        $resourceMetadata->getParameter('options')->willReturn([
-            'default_parent_path' => '/path/to',
-        ]);
+        $event->getSubject()->willReturn(new \stdClass());
         $documentManager->getClassMetadata(\stdClass::class)->willReturn(
             $documentMetadata
         );
@@ -121,8 +90,6 @@ class DefaultPathListenerSpec extends ObjectBehavior
 
     function it_should_set_the_parent_document(
         ResourceControllerEvent $event,
-        Registry $registry,
-        Metadata $resourceMetadata,
         ClassMetadata $documentMetadata,
         DocumentManagerInterface $documentManager
     )
@@ -131,42 +98,35 @@ class DefaultPathListenerSpec extends ObjectBehavior
         $parentDocument = new \stdClass();
 
         $event->getSubject()->willReturn($subjectDocument);
-        $registry->getByClass(\stdClass::class)->willReturn(
-            $resourceMetadata
-        );
-        $resourceMetadata->getParameter('options')->willReturn([
-            'default_parent_path' => '/path/to',
-        ]);
         $documentManager->getClassMetadata(\stdClass::class)->willReturn(
             $documentMetadata
         );
         $documentMetadata->parentMapping = 'parent';
+        $documentMetadata->getFieldValue($subjectDocument, 'parent')->willReturn(null);
         $documentManager->find(null, '/path/to')->willReturn($parentDocument);
-        $documentMetadata->setFieldValue($subjectDocument, 'parent', $parentDocument);
+        $documentMetadata->setFieldValue($subjectDocument, 'parent', $parentDocument)->shouldBeCalled();
+
         $this->onPreCreate($event);
     }
 
     function it_should_autocreate_and_set_the_parent_document(
         ResourceControllerEvent $event,
-        Registry $registry,
-        Metadata $resourceMetadata,
         ClassMetadata $documentMetadata,
         DocumentManagerInterface $documentManager,
         SessionInterface $session,
         NodeInterface $node
     )
     {
+        $this->beConstructedWith(
+            $documentManager,
+            '/path/to',
+            true
+        );
+
         $subjectDocument = new \stdClass();
         $parentDocument = new \stdClass();
 
         $event->getSubject()->willReturn($subjectDocument);
-        $registry->getByClass(\stdClass::class)->willReturn(
-            $resourceMetadata
-        );
-        $resourceMetadata->getParameter('options')->willReturn([
-            'default_parent_path' => '/path/to',
-            'autocreate' => true,
-        ]);
         $documentManager->getClassMetadata(\stdClass::class)->willReturn(
             $documentMetadata
         );
@@ -189,23 +149,21 @@ class DefaultPathListenerSpec extends ObjectBehavior
 
     function it_should_set_the_parent_document_if_force_is_true_and_the_parent_is_already_set(
         ResourceControllerEvent $event,
-        Registry $registry,
-        Metadata $resourceMetadata,
         ClassMetadata $documentMetadata,
         DocumentManagerInterface $documentManager
     )
     {
+        $this->beConstructedWith(
+            $documentManager,
+            '/path/to',
+            false,
+            true
+        );
+
         $subjectDocument = new \stdClass();
         $parentDocument = new \stdClass();
 
         $event->getSubject()->willReturn($subjectDocument);
-        $registry->getByClass(\stdClass::class)->willReturn(
-            $resourceMetadata
-        );
-        $resourceMetadata->getParameter('options')->willReturn([
-            'default_parent_path' => '/path/to',
-            'force' => true,
-        ]);
 
         $documentManager->getClassMetadata(\stdClass::class)->willReturn(
             $documentMetadata
@@ -221,8 +179,6 @@ class DefaultPathListenerSpec extends ObjectBehavior
 
     function it_should_return_early_if_force_is_false_and_subject_already_has_a_parent(
         ResourceControllerEvent $event,
-        Registry $registry,
-        Metadata $resourceMetadata,
         ClassMetadata $documentMetadata,
         DocumentManagerInterface $documentManager
     )
@@ -230,12 +186,6 @@ class DefaultPathListenerSpec extends ObjectBehavior
         $subjectDocument = new \stdClass();
 
         $event->getSubject()->willReturn($subjectDocument);
-        $registry->getByClass(\stdClass::class)->willReturn(
-            $resourceMetadata
-        );
-        $resourceMetadata->getParameter('options')->willReturn([
-            'default_parent_path' => '/path/to',
-        ]);
 
         $documentManager->getClassMetadata(\stdClass::class)->willReturn(
             $documentMetadata
@@ -249,4 +199,3 @@ class DefaultPathListenerSpec extends ObjectBehavior
         $this->onPreCreate($event);
     }
 }
-

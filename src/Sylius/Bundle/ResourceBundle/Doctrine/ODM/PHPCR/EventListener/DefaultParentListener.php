@@ -7,40 +7,53 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormEvent;
 use Doctrine\ODM\PHPCR\DocumentManagerInterface;
 use PHPCR\Util\NodeHelper;
-use Sylius\Component\Resource\Metadata\Registry;
 use Doctrine\ODM\PHPCR\Mapping\ClassMetadata;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 
 /**
  * Automatically set the parent brefore the creation.
  *
- * TODO: Only applies when ClassMetadata::GENERATOR_TYPE_PARENT strategy is used.
- *
  * @author Daniel Leech <daniel@dantleech.com>
  */
-class DefaultPathListener
+class DefaultParentListener
 {
-    /**
-     * @var Registry
-     */
-    private $registry;
-
     /**
      * @var DocumentManagerInterface
      */
     private $documentManager;
 
     /**
-     * @param Registry $registry
+     * @var string
+     */
+    private $parentPath;
+
+    /**
+     * @var bool
+     */
+    private $autocreate;
+
+    /**
+     * @var bool
+     */
+    private $force;
+
+    /**
      * @param DocumentManagerInterface $documentManager
+     * @param string $parentPath
+     * @param bool $parentPath
+     * @param bool $force
      */
     public function __construct(
-        Registry $registry,
-        DocumentManagerInterface $documentManager
+        DocumentManagerInterface $documentManager,
+        $parentPath,
+        $autocreate = false,
+        $force = false
     )
     {
-        $this->registry = $registry;
         $this->documentManager = $documentManager;
+        $this->parentPath = $parentPath;
+        $this->autocreate = $autocreate;
+        $this->force = $force;
     }
 
     /**
@@ -49,39 +62,17 @@ class DefaultPathListener
     public function onPreCreate(ResourceControllerEvent $event)
     {
         $document = $event->getSubject();
-
         $class = get_class($document);
-
-        $resourceMetadata = $this->registry->getByClass($class);
-
-        $options = array_merge(
-            [
-                'default_parent_path' => null,
-                'autocreate' => false,
-                'force' => false,
-            ],
-            $resourceMetadata->getParameter('options')
-        );
-
-        if (null === $options['default_parent_path']) {
-            return;
-        }
 
         $this->resolveParent(
             $document,
-            $this->documentManager->getClassMetadata($class),
-            $options['default_parent_path'],
-            $options['autocreate'],
-            $options['force']
+            $this->documentManager->getClassMetadata($class)
         );
     }
 
     private function resolveParent(
         $document,
-        ClassMetadata $metadata,
-        $defaultParentPath,
-        $autocreate,
-        $force
+        ClassMetadata $metadata
     )
     {
         if (!$parentField = $metadata->parentMapping) {
@@ -91,7 +82,7 @@ class DefaultPathListener
             ));
         }
 
-        if (false === $force) {
+        if (false === $this->force) {
             $actualParent = $metadata->getFieldValue($document, $parentField);
 
             if ($actualParent) {
@@ -99,18 +90,17 @@ class DefaultPathListener
             }
         }
 
-        $parentDocument = $this->documentManager->find(null, $defaultParentPath);
+        $parentDocument = $this->documentManager->find(null, $this->parentPath);
 
-        if (true === $autocreate && null === $parentDocument) {
-            $nodeHelper = new NodeHelper();
-            $nodeHelper->createPath($this->documentManager->getPhpcrSession(), $defaultParentPath);
-            $parentDocument = $this->documentManager->find(null, $defaultParentPath);
+        if (true === $this->autocreate && null === $parentDocument) {
+            NodeHelper::createPath($this->documentManager->getPhpcrSession(), $this->parentPath);
+            $parentDocument = $this->documentManager->find(null, $this->parentPath);
         }
 
         if (null === $parentDocument) {
             throw new \RuntimeException(sprintf(
                 'Document at default parent path "%s" does not exist. `autocreate` was set to "%s"',
-                $defaultParentPath, $autocreate ? 'true' : 'false'
+                $this->parentPath, $this->autocreate ? 'true' : 'false'
             ));
         }
 

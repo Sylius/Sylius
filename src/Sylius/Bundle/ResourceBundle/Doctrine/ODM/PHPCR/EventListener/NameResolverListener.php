@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -13,24 +22,13 @@ use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 /**
  * Handles the resolution of the PHPCR node name field.
  *
- * - If a node already exists with the same name, then a numerical index will
- *   be appended to the name.
- * - Invalid characters will be replaced with "_"
+ * If a node already exists with the same name, then a numerical index will be
+ * appended to the name.
  * 
- * @see http://www.day.com/specs/jcr/2.0/3_Repository_Model.html#3.2.2%20Local%20Names
- * @see https://github.com/phpcr/phpcr-utils/blob/master/src/PHPCR/Util/PathHelper.php#L95
- *
- * TODO: Allow specification of replacement character?
- * TODO: Allow strict mode? i.e. throw exceptions if the node exists or if it
- *       contains illegal characters (in which case a Validator should also be
- *       added).
- *
  * @author Daniel Leech <daniel@dantleech.com>
  */
 class NameResolverListener
 {
-    const REPLACEMENT_CHAR = ' ';
-
     /**
      * @var DocumentManagerInterface
      */
@@ -46,32 +44,28 @@ class NameResolverListener
         $this->documentManager = $documentManager;
     }
 
-
-    public function onPreCreate(ResourceControllerEvent $event)
+    /**
+     * @param ResourceControllerEvent $event
+     */
+    public function onEvent(ResourceControllerEvent $event)
     {
         $document = $event->getSubject();
-
-        if (!is_object($document)) {
-            throw new \InvalidArgumentException(sprintf(
-                'Expected an object, got a "%s"',
-                gettype($document)
-            ));
-        }
 
         $metadata = $this->documentManager->getClassMetadata(get_class($document));
 
         if ($metadata->idGenerator !== ClassMetadata::GENERATOR_TYPE_PARENT) {
-            return;
+            throw new \RuntimeException(sprintf(
+'Document of class "%s" must be using the GENERATOR_TYPE_PARENT identificatio strategy (value %s), it is current using "%s" (this may be an automatic configuration: be sure to map both the `nodename` and the `parentDocument`).',
+                get_class($document),
+                ClassMetadata::GENERATOR_TYPE_PARENT,
+                $metadata->idGenerator
+            ));
         }
 
-        // TODO: Throw exception in these two cases? PHPCR-ODM will fail
-        //       (later) anyway if either of these are true.
-        if (null === $nameField = $metadata->nodename) {
-            return;
-        }
-        if (null === $parentField = $metadata->parentMapping) {
-            return;
-        }
+        // NOTE: that the PHPCR-ODM requires these two fields to be set when
+        //       when the GENERATOR_TYPE_PARENT "ID" strategy is used.
+        $nameField = $metadata->nodename;
+        $parentField = $metadata->parentMapping;
 
         $parentDocument = $metadata->getFieldValue($document, $parentField);
         $phpcrNode = $this->documentManager->getNodeForDocument($parentDocument);
@@ -79,7 +73,6 @@ class NameResolverListener
 
         $baseCandidateName = $metadata->getFieldValue($document, $nameField);
         $candidateName = $baseCandidateName;
-        $candidateName = preg_replace('/\\/|:|\\[|\\]|\\||\\*/', self::REPLACEMENT_CHAR, $candidateName);
 
         $index = 1;
         while (true) {
@@ -92,14 +85,12 @@ class NameResolverListener
             }
 
             if (null === $existing) {
-                // Remove any illegal characters
-                // TODO: Put this into a helper class and test it.
                 $metadata->setFieldValue($document, $nameField, $candidateName);
                 return;
             }
 
             $candidateName = sprintf('%s-%d', $baseCandidateName, $index);
+            $index++;
         }
     }
-
 }
