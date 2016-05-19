@@ -34,6 +34,10 @@ class ProductHierarchyProvider implements MetadataHierarchyProviderInterface
         $productArchetype = $product->getArchetype();
         if (null !== $productArchetype) {
             $hierarchy[] = $productArchetype->getMetadataIdentifier();
+            
+            while ($productArchetype = $productArchetype->getParent()) {
+                $hierarchy[] = $productArchetype->getMetadataIdentifier();
+            }
         }
 
         $hierarchy[] = $product->getMetadataClassIdentifier();
