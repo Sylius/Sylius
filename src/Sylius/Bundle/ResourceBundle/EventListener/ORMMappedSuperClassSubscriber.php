@@ -38,9 +38,6 @@ class ORMMappedSuperClassSubscriber extends AbstractDoctrineSubscriber
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
     {
         $metadata = $eventArgs->getClassMetadata();
-        if (false === $this->isSyliusClass($metadata)) {
-            return;
-        }
 
         $this->convertToEntityIfNeeded($metadata);
 
@@ -56,11 +53,17 @@ class ORMMappedSuperClassSubscriber extends AbstractDoctrineSubscriber
      */
     private function convertToEntityIfNeeded(ClassMetadataInfo $metadata)
     {
-        foreach ($this->resourceRegistry->getAll() as $alias => $resourceMetadata) {
-            if ($metadata->getName() !== $resourceMetadata->getClass('model')) {
-                continue;
-            }
+        if (false === $metadata->isMappedSuperclass) {
+            return;
+        }
 
+        try {
+            $resourceMetadata = $this->resourceRegistry->getByClass($metadata->getName());
+        } catch (\InvalidArgumentException $exception) {
+            return;
+        }
+
+        if ($metadata->getName() === $resourceMetadata->getClass('model')) {
             $metadata->isMappedSuperclass = false;
         }
     }
@@ -76,13 +79,20 @@ class ORMMappedSuperClassSubscriber extends AbstractDoctrineSubscriber
                 $parent,
                 $configuration->getNamingStrategy()
             );
-            if (in_array($parent, $configuration->getMetadataDriverImpl()->getAllClassNames())) {
-                $configuration->getMetadataDriverImpl()->loadMetadataForClass($parent, $parentMetadata);
-                if ($parentMetadata->isMappedSuperclass) {
-                    foreach ($parentMetadata->getAssociationMappings() as $key => $value) {
-                        if ($this->hasRelation($value['type'])) {
-                            $metadata->associationMappings[$key] = $value;
-                        }
+
+            if (false === $this->isSyliusClass($parentMetadata)) {
+                continue;
+            }
+
+            if (false === in_array($parent, $configuration->getMetadataDriverImpl()->getAllClassNames())) {
+                continue;
+            }
+
+            $configuration->getMetadataDriverImpl()->loadMetadataForClass($parent, $parentMetadata);
+            if ($parentMetadata->isMappedSuperclass) {
+                foreach ($parentMetadata->getAssociationMappings() as $key => $value) {
+                    if ($this->hasRelation($value['type'])) {
+                        $metadata->associationMappings[$key] = $value;
                     }
                 }
             }
@@ -94,6 +104,10 @@ class ORMMappedSuperClassSubscriber extends AbstractDoctrineSubscriber
      */
     private function unsetAssociationMappings(ClassMetadataInfo $metadata)
     {
+        if (false === $this->isSyliusClass($metadata)) {
+            return;
+        }
+
         foreach ($metadata->getAssociationMappings() as $key => $value) {
             if ($this->hasRelation($value['type'])) {
                 unset($metadata->associationMappings[$key]);
