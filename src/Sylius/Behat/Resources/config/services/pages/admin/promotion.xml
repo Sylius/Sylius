@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="sylius.behat.page.admin.promotion.create.class">Sylius\Behat\Page\Admin\Promotion\CreatePage</parameter>
+        <parameter key="sylius.behat.page.admin.promotion.update.class">Sylius\Behat\Page\Admin\Promotion\UpdatePage</parameter>
+        <parameter key="sylius.behat.page.admin.promotion.index.class">Sylius\Behat\Page\Admin\Promotion\IndexPage</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.behat.page.admin.promotion.create" class="%sylius.behat.page.admin.promotion.create.class%" parent="sylius.behat.page.admin.crud.create" scope="scenario" public="false">
+            <argument type="string">promotion</argument>
+        </service>
+        <service id="sylius.behat.page.admin.promotion.update" class="%sylius.behat.page.admin.promotion.update.class%" parent="sylius.behat.page.admin.crud.update" scope="scenario" public="false">
+            <argument type="string">promotion</argument>
+        </service>
+        <service id="sylius.behat.page.admin.promotion.index" class="%sylius.behat.page.admin.promotion.index.class%" parent="sylius.behat.page.admin.crud.index" scope="scenario" public="false">
+            <argument type="string">promotion</argument>
+        </service>
+    </services>
+</container>

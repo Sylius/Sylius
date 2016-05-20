@@ -13,11 +13,11 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <imports>
-        <import resource="contexts/cli.xml"/>
-        <import resource="contexts/domain.xml"/>
-        <import resource="contexts/hook.xml"/>
-        <import resource="contexts/setup.xml"/>
-        <import resource="contexts/transform.xml"/>
-        <import resource="contexts/ui.xml"/>
+        <import resource="contexts/cli.xml" />
+        <import resource="contexts/domain.xml" />
+        <import resource="contexts/hook.xml" />
+        <import resource="contexts/setup.xml" />
+        <import resource="contexts/transform.xml" />
+        <import resource="contexts/ui.xml" />
     </imports>
 </container>

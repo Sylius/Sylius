@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="sylius.behat.page.admin.channel.create.class">Sylius\Behat\Page\Admin\Channel\CreatePage</parameter>
+        <parameter key="sylius.behat.page.admin.channel.update.class">Sylius\Behat\Page\Admin\Channel\UpdatePage</parameter>
+        <parameter key="sylius.behat.page.admin.channel.index.class">Sylius\Behat\Page\Admin\Channel\IndexPage</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.behat.page.admin.channel.create" class="%sylius.behat.page.admin.channel.create.class%" parent="sylius.behat.page.admin.crud.create" scope="scenario" public="false">
+            <argument type="string">channel</argument>
+        </service>
+        <service id="sylius.behat.page.admin.channel.index" class="%sylius.behat.page.admin.channel.index.class%" parent="sylius.behat.page.admin.crud.index" scope="scenario" public="false">
+            <argument type="string">channel</argument>
+        </service>
+        <service id="sylius.behat.page.admin.channel.update" class="%sylius.behat.page.admin.channel.update.class%" parent="sylius.behat.page.admin.crud.update" scope="scenario" public="false">
+            <argument type="string">channel</argument>
+        </service>
+    </services>
+</container>

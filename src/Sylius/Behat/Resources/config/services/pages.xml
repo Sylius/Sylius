@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <imports>
+        <import resource="pages/admin.xml" />
+        <import resource="pages/shop.xml" />
+    </imports>
+
+    <parameters>
+        <parameter key="sylius.behat.page.class">Sylius\Behat\Page\Page</parameter>
+        <parameter key="sylius.behat.symfony_page.class">Sylius\Behat\Page\SymfonyPage</parameter>
+
+        <parameter key="sylius.behat.page.external.paypal_checkout_express.class">Sylius\Behat\Page\External\PaypalExpressCheckoutPage</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.behat.page" class="%sylius.behat.page.class%" abstract="true" scope="scenario" public="false">
+            <argument type="service" id="mink.default_session" />
+            <argument>%mink.parameters%</argument>
+        </service>
+        <service id="sylius.behat.symfony_page" class="%sylius.behat.symfony_page.class%" parent="sylius.behat.page" abstract="true" scope="scenario" public="false">
+            <argument type="service" id="router" container="symfony_shared" />
+        </service>
+
+        <service id="sylius.behat.page.external.paypal_checkout_express" class="%sylius.behat.page.external.paypal_checkout_express.class%" parent="sylius.behat.page" scope="scenario" public="false" >
+            <argument type="service" id="sylius.repository.payment_security_token" container="symfony" />
+        </service>
+    </services>
+</container>
