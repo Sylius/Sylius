@@ -16,7 +16,7 @@ use Doctrine\ORM\Events;
 use Doctrine\ORM\Mapping\ClassMetadata;
 
 /**
- * @author Ben Davies <ben.davies@gmail.org>
+ * @author Ben Davies <ben.davies@gmail.com>
  */
 class ORMRepositoryClassSubscriber extends AbstractDoctrineSubscriber
 {

@@ -16,7 +16,7 @@ use Doctrine\ODM\MongoDB\Events;
 use Doctrine\ODM\MongoDB\Mapping\ClassMetadata;
 
 /**
- * @author Ben Davies <ben.davies@gmail.org>
+ * @author Ben Davies <ben.davies@gmail.com>
  */
 class ODMRepositoryClassSubscriber extends AbstractDoctrineSubscriber
 {
