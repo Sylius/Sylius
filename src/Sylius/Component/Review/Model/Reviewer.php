@@ -12,7 +12,7 @@
 namespace Sylius\Component\Review\Model;
 
 /**
- * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class Reviewer implements ReviewerInterface
 {
