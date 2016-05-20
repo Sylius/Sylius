@@ -42,10 +42,13 @@ class ProductVariantHierarchyProvider implements MetadataHierarchyProviderInterf
         $productArchetype = $product->getArchetype();
         if (null !== $productArchetype) {
             $hierarchy[] = $productArchetype->getMetadataIdentifier();
+
+            while ($productArchetype = $productArchetype->getParent()) {
+                $hierarchy[] = $productArchetype->getMetadataIdentifier();
+            }
         }
 
         $hierarchy[] = $product->getMetadataClassIdentifier();
-
         $hierarchy[] = 'DefaultPage';
 
         return $hierarchy;
