@@ -18,6 +18,7 @@ use Sylius\Component\Promotion\Processor\PromotionProcessorInterface;
 
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class OrderRecalculator implements OrderRecalculatorInterface
 {
@@ -47,6 +48,7 @@ class OrderRecalculator implements OrderRecalculatorInterface
     private $shippingChargesProcessor;
 
     /**
+     * @param AdjustmentsRemoverInterface $adjustmentsRemover
      * @param OrderTaxesProcessorInterface $taxesProcessor
      * @param PricesRecalculatorInterface $pricesRecalculator
      * @param PromotionProcessorInterface $promotionProcessor
@@ -73,7 +75,7 @@ class OrderRecalculator implements OrderRecalculatorInterface
      */
     public function recalculate(OrderInterface $order)
     {
-        $this->adjustmentsRemover->remove($order);
+        $this->adjustmentsRemover->removeFrom($order);
         $this->pricesRecalculator->recalculate($order);
         $this->shippingChargesProcessor->applyShippingCharges($order);
         $this->promotionProcessor->process($order);

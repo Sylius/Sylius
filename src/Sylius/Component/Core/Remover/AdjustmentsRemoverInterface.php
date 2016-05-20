@@ -21,5 +21,5 @@ interface AdjustmentsRemoverInterface
     /**
      * @param OrderInterface $order
      */
-    public function remove(OrderInterface $order);
+    public function removeFrom(OrderInterface $order);
 }

@@ -62,7 +62,7 @@ class OrderRecalculatorSpec extends ObjectBehavior
         ShippingChargesProcessorInterface $shippingChargesProcessor,
         OrderInterface $order
     ) {
-        $adjustmentsRemover->remove($order)->shouldBeCalled();
+        $adjustmentsRemover->removeFrom($order)->shouldBeCalled();
         $pricesRecalculator->recalculate($order)->shouldBeCalled();
         $promotionProcessor->process($order)->shouldBeCalled();
         $taxesProcessor->process($order)->shouldBeCalled();

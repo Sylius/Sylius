@@ -201,6 +201,48 @@ class OrderSpec extends ObjectBehavior
         $this->hasAdjustment($adjustment)->shouldReturn(false);
     }
 
+    function it_removes_adjustments_recursively_properly(
+        AdjustmentInterface $orderAdjustment,
+        OrderItemInterface $item
+    ) {
+        $this->addAdjustment($orderAdjustment);
+        $this->addItem($item);
+
+        $item->removeAdjustmentsRecursively(null)->shouldBeCalled();
+
+        $this->removeAdjustmentsRecursively();
+
+        $this->hasAdjustment($orderAdjustment)->shouldReturn(false);
+    }
+
+    function it_removes_adjustments_recursively_by_type_properly(
+        AdjustmentInterface $orderPromotionAdjustment,
+        AdjustmentInterface $orderTaxAdjustment,
+        OrderItemInterface $item
+    ) {
+        $orderPromotionAdjustment->getType()->willReturn('promotion');
+        $orderPromotionAdjustment->isNeutral()->willReturn(true);
+        $orderPromotionAdjustment->setAdjustable($this)->shouldBeCalled();
+        $orderPromotionAdjustment->isLocked()->willReturn(false);
+
+        $orderTaxAdjustment->getType()->willReturn('tax');
+        $orderTaxAdjustment->isNeutral()->willReturn(true);
+        $orderTaxAdjustment->setAdjustable($this)->shouldBeCalled();
+        $orderTaxAdjustment->isLocked()->willReturn(false);
+
+        $this->addAdjustment($orderPromotionAdjustment);
+        $this->addAdjustment($orderTaxAdjustment);
+        $this->addItem($item);
+
+        $item->removeAdjustmentsRecursively('tax')->shouldBeCalled();
+        $orderTaxAdjustment->setAdjustable(null)->shouldBeCalled();
+
+        $this->removeAdjustmentsRecursively('tax');
+
+        $this->hasAdjustment($orderPromotionAdjustment)->shouldReturn(true);
+        $this->hasAdjustment($orderTaxAdjustment)->shouldReturn(false);
+    }
+
     function it_returns_adjustments_recursively(
         AdjustmentInterface $orderAdjustment,
         AdjustmentInterface $itemAdjustment1,

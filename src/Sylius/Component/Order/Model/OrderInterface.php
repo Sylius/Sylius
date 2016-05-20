@@ -158,4 +158,9 @@ interface OrderInterface extends
      * @return int
      */
     public function getAdjustmentsTotalRecursively($type = null);
+
+    /**
+     * @param string|null $type
+     */
+    public function removeAdjustmentsRecursively($type = null);
 }

@@ -35,24 +35,12 @@ class AdjustmentsRemoverSpec extends ObjectBehavior
         $this->shouldImplement(AdjustmentsRemoverInterface::class);
     }
 
-    function it_removes_adjustments_from_order_recursively(
-        OrderInterface $order,
-        OrderItemUnitInterface $firstUnit,
-        OrderItemUnitInterface $secondUnit
-    ) {
-        $order->removeAdjustments(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)->shouldBeCalled();
-        $order->removeAdjustments(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)->shouldBeCalled();
-        $order->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
+    function it_removes_adjustments_from_order_recursively(OrderInterface $order)
+    {
+        $order->removeAdjustmentsRecursively(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)->shouldBeCalled();
+        $order->removeAdjustmentsRecursively(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)->shouldBeCalled();
+        $order->removeAdjustmentsRecursively(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
 
-        $order->getItemUnits()->willReturn(new \ArrayIterator([$firstUnit->getWrappedObject(), $secondUnit->getWrappedObject()]));
-
-        $firstUnit->removeAdjustments(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)->shouldBeCalled();
-        $firstUnit->removeAdjustments(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)->shouldBeCalled();
-        $firstUnit->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
-        $secondUnit->removeAdjustments(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)->shouldBeCalled();
-        $secondUnit->removeAdjustments(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)->shouldBeCalled();
-        $secondUnit->removeAdjustments(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
-
-        $this->remove($order);
+        $this->removeFrom($order);
     }
 }

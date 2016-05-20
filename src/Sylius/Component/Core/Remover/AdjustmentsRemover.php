@@ -21,35 +21,18 @@ use Sylius\Component\Core\Model\OrderItemUnitInterface;
 class AdjustmentsRemover implements AdjustmentsRemoverInterface
 {
     /**
-     * @var array
-     */
-    protected $adjustmentsToRemove = [
-        AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT,
-        AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT,
-        AdjustmentInterface::TAX_ADJUSTMENT
-    ];
-
-    /**
      * {@inheritdoc}
      */
-    public function remove(OrderInterface $order)
+    public function removeFrom(OrderInterface $order)
     {
-        $units = $order->getItemUnits();
-        foreach ($this->adjustmentsToRemove as $type) {
-            $order->removeAdjustments($type);
-            $this->removeUnitsAdjustments($units, $type);
-        }
-    }
+        $adjustmentsToRemove = [
+            AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT,
+            AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT,
+            AdjustmentInterface::TAX_ADJUSTMENT
+        ];
 
-    /**
-     * @param \Traversable $units
-     * @param string $type
-     */
-    private function removeUnitsAdjustments(\Traversable $units, $type)
-    {
-        /** @var OrderItemUnitInterface $unit */
-        foreach ($units as $unit) {
-            $unit->removeAdjustments($type);
+        foreach ($adjustmentsToRemove as $type) {
+            $order->removeAdjustmentsRecursively($type);
         }
     }
 }
