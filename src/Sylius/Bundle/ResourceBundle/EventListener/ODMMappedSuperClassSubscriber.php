@@ -39,9 +39,6 @@ class ODMMappedSuperClassSubscriber extends AbstractDoctrineSubscriber
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
     {
         $metadata = $eventArgs->getClassMetadata();
-        if (false === $this->isSyliusClass($metadata)) {
-            return;
-        }
 
         $this->convertToDocumentIfNeeded($metadata);
 
@@ -57,11 +54,17 @@ class ODMMappedSuperClassSubscriber extends AbstractDoctrineSubscriber
      */
     private function convertToDocumentIfNeeded(ClassMetadataInfo $metadata)
     {
-        foreach ($this->resourceRegistry->getAll() as $alias => $resourceMetadata) {
-            if ($metadata->getName() !== $resourceMetadata->getClass('model')) {
-                continue;
-            }
+        if (false === $metadata->isMappedSuperclass) {
+            return;
+        }
 
+        try {
+            $resourceMetadata = $this->resourceRegistry->getByClass($metadata->getName());
+        } catch (\InvalidArgumentException $exception) {
+            return;
+        }
+
+        if ($metadata->getName() === $resourceMetadata->getClass('model')) {
             $metadata->isMappedSuperclass = false;
         }
     }
@@ -74,16 +77,24 @@ class ODMMappedSuperClassSubscriber extends AbstractDoctrineSubscriber
     {
         foreach (class_parents($metadata->getName()) as $parent) {
             $parentMetadata = new ClassMetadata($parent);
-            if (in_array($parent, $configuration->getMetadataDriverImpl()->getAllClassNames())) {
-                $configuration->getMetadataDriverImpl()->loadMetadataForClass($parent, $parentMetadata);
-                if ($parentMetadata->isMappedSuperclass) {
-                    foreach ($parentMetadata->associationMappings as $key => $value) {
-                        if ($this->hasRelation($value['association'])) {
-                            $metadata->associationMappings[$key] = $value;
-                        }
+
+            if (false === $this->isSyliusClass($parentMetadata)) {
+                continue;
+            }
+
+            if (false === in_array($parent, $configuration->getMetadataDriverImpl()->getAllClassNames())) {
+                continue;
+            }
+
+            $configuration->getMetadataDriverImpl()->loadMetadataForClass($parent, $parentMetadata);
+            if ($parentMetadata->isMappedSuperclass) {
+                foreach ($parentMetadata->associationMappings as $key => $value) {
+                    if ($this->hasRelation($value['association'])) {
+                        $metadata->associationMappings[$key] = $value;
                     }
                 }
             }
+
         }
     }
 
@@ -92,6 +103,10 @@ class ODMMappedSuperClassSubscriber extends AbstractDoctrineSubscriber
      */
     private function unsetAssociationMappings(ClassMetadataInfo $metadata)
     {
+        if (false === $this->isSyliusClass($metadata)) {
+            return;
+        }
+
         foreach ($metadata->associationMappings as $key => $value) {
             if ($this->hasRelation($value['association'])) {
                 unset($metadata->associationMappings[$key]);
