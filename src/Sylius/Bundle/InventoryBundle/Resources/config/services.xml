@@ -41,6 +41,7 @@
 
         <service id="sylius.backorders_handler" class="%sylius.backorders_handler.class%">
             <argument type="service" id="sylius.repository.inventory_unit" />
+            <argument type="service" id="sm.factory" />
         </service>
 
         <service id="sylius.listener.inventory" class="%sylius.listener.inventory.class%">

@@ -12,7 +12,9 @@
 namespace Sylius\Component\Inventory\Operator;
 
 use Doctrine\Common\Collections\Collection;
-use Doctrine\Common\Persistence\ObjectRepository;
+use SM\Factory\FactoryInterface;
+use Sylius\Component\Inventory\Repository\InventoryUnitRepositoryInterface;
+use Sylius\Component\Inventory\InventoryUnitTransitions;
 use Sylius\Component\Inventory\Model\InventoryUnit;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
@@ -21,24 +23,28 @@ use Sylius\Component\Inventory\Model\StockableInterface;
  * Backorders handler.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Robin Jansen <robinjansen51@gmail.com>
  */
-class BackordersHandler implements BackordersHandlerInterface
+final class BackordersHandler implements BackordersHandlerInterface
 {
     /**
-     * Inventory unit repository.
-     *
-     * @var ObjectRepository
+     * @var InventoryUnitRepositoryInterface
      */
     protected $repository;
 
     /**
-     * Constructor.
-     *
-     * @param ObjectRepository $repository
+     * @var FactoryInterface
      */
-    public function __construct(ObjectRepository $repository)
+    protected $factory;
+
+    /**
+     * @param InventoryUnitRepositoryInterface $repository
+     * @param FactoryInterface $factory
+     */
+    public function __construct(InventoryUnitRepositoryInterface $repository, FactoryInterface $factory)
     {
         $this->repository = $repository;
+        $this->factory = $factory;
     }
 
     /**
@@ -78,13 +84,15 @@ class BackordersHandler implements BackordersHandlerInterface
             return;
         }
 
-        $units = $this->repository->findBy([
-            'stockable' => $stockable,
-            'inventoryState' => InventoryUnitInterface::STATE_BACKORDERED,
-        ], ['createdAt' => 'ASC']);
+        $units = $this->repository
+            ->findByStockableAndInventoryState($stockable, InventoryUnitInterface::STATE_BACKORDERED, $onHand)
+        ;
 
         foreach ($units as $unit) {
-            $unit->setInventoryState(InventoryUnitInterface::STATE_SOLD);
+            $this->factory
+                ->get($unit, InventoryUnitTransitions::GRAPH)
+                ->apply(InventoryUnitTransitions::SYLIUS_SELL)
+            ;
 
             if (--$onHand === 0) {
                 break;

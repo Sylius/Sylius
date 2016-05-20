@@ -12,7 +12,7 @@ winzou_state_machine:
             returned:    ~
         transitions:
             hold:
-                from: [checkout]
+                from: [checkout, backordered]
                 to:   onhold
             release:
                 from: [onhold]

@@ -166,6 +166,11 @@ winzou_state_machine:
     sylius_inventory_unit:
         callbacks:
             after:
+                sylius_update_shipment_state:
+                    from: 'backordered'
+                    to: ['onhold', 'sold']
+                    do: [@sylius.callback.order_item_unit, 'updateShipmentStateOnInventoryRestock']
+                    args: ['object']
                 sylius_sync_shipping:
                     excluded_to: [sold]
                     do:   [@sm.callback.cascade_transition, 'apply']

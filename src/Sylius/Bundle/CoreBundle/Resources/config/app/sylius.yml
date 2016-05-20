@@ -181,10 +181,13 @@ sylius_promotion:
 sylius_inventory:
     backorders: %sylius.inventory.backorders_enabled%
     track_inventory: %sylius.inventory.tracking_enabled%
+    events:
+        - sylius.product_variant.pre_update
     resources:
         inventory_unit:
             classes:
                 model: %sylius.model.order_item_unit.class%
+                repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderItemUnitRepository
 
 sylius_payment:
     resources:
@@ -232,6 +235,7 @@ sylius_order:
         order_item_unit:
             classes:
                 model: Sylius\Component\Core\Model\OrderItemUnit
+                repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\OrderItemUnitRepository
 
 sylius_sequence:
     generators:
