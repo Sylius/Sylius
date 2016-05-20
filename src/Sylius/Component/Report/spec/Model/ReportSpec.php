@@ -15,7 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Report\Model\ReportInterface;
 
 /**
- * @author Łukasz Chruściel <lchrusciel@gmail.com>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class ReportSpec extends ObjectBehavior

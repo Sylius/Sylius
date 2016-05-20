@@ -18,7 +18,7 @@ use Sylius\Component\Report\DataFetcher\DelegatingDataFetcherInterface;
 use Sylius\Component\Report\Model\ReportInterface;
 
 /**
- * @author Łukasz Chruściel <lchrusciel@gmail.com>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class DelegatingDataFetcherSpec extends ObjectBehavior
 {

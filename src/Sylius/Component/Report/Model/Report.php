@@ -15,7 +15,7 @@ use Sylius\Component\Report\DataFetcher\DefaultDataFetchers;
 use Sylius\Component\Report\Renderer\DefaultRenderers;
 
 /**
- * @author Łukasz Chruściel <lchrusciel@gmail.com>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class Report implements ReportInterface
