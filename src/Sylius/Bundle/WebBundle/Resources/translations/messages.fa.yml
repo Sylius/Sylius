@@ -85,8 +85,6 @@ sylius:
         no_shipments: هیچ ارسالی برای این سفارش وجود ندارد
         no_shipping_charges: هیچ هزینه ی ارسالی روی این سفارش اعمال نشده است
         no_taxes: هیچ مالیاتی روی این سفارش اعمال نشده است
-        state:
-            order_confimed: سفارس تایید شده
     order_item:
         quantity: تعداد
         sellable: محصول

@@ -85,8 +85,6 @@ sylius:
         no_shipments: Non ci sono spedizioni per questo ordine
         no_shipping_charges: Nessuna spesa di spedizione applicata
         no_taxes: Nessuna tassa applicata
-        state:
-            order_confimed: Ordine confermato
     order_item:
         quantity: Q.tà
         sellable: Prodotto

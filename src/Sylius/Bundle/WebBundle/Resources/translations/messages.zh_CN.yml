@@ -85,8 +85,6 @@ sylius:
         no_shipments: 该订单无配送信息
         no_shipping_charges: 无运费
         no_taxes: 无税
-        state:
-            order_confimed: 订单已确认
     order_item:
         quantity: 数量
         sellable: 产品

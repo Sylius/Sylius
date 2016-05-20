@@ -85,8 +85,6 @@ sylius:
         no_shipments: Za to naročilo ni na voljo nobenih pošiljk
         no_shipping_charges: Stroški pošiljanja niso uporabljeni
         no_taxes: Davki niso uporabljeni
-        state:
-            order_confimed: Naročilo potrjeno
     order_item:
         quantity: Količina
         sellable: Izdelek

@@ -85,8 +85,6 @@ sylius:
         no_shipments: Nuk ka asnjë dërgesë për këtë porosi
         no_shipping_charges: Nuk ka asnjë pagesë dërgimi
         no_taxes: Nuk zbatohen taksa
-        state:
-            order_confimed: Porosia e konfirmuar
     order_item:
         quantity: Sasitë
         sellable: Produkti

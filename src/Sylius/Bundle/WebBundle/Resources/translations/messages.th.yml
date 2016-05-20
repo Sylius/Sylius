@@ -85,8 +85,6 @@ sylius:
         no_shipments: ไม่มีการจัดส่งสำหรับใบสั่งซื้อนี้
         no_shipping_charges: ไม่มีค่าธรรมเนียมการจัดส่ง
         no_taxes: ไม่รวมภาษี
-        state:
-            order_confimed: ยืนยันการสั่งซื้อ
     order_item:
         quantity: ปริมาณ
         sellable: สินค้า

@@ -85,8 +85,6 @@ sylius:
         no_shipments: Aucune expédition pour cette commande
         no_shipping_charges: Aucun frais de port appliqué
         no_taxes: Pas de taxe appliquée
-        state:
-            order_confimed: Commande confirmée
     order_item:
         quantity: Quantité
         sellable: Produit
