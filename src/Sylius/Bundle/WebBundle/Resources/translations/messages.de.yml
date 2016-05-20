@@ -85,8 +85,6 @@ sylius:
         no_shipments: Kein Versand für diese Bestellung
         no_shipping_charges: Keine Versandkosten
         no_taxes: Keine Steuern
-        state:
-            order_confimed: Bestellung bestätigt
     order_item:
         quantity: Artikelmenge
         sellable: Verkäuflich

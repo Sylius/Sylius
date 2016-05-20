@@ -6,6 +6,7 @@ sylius:
         admin:
             main:
                 catalog:
+                    header: Katalog
                     taxons: Gruppen
                     options: Optionen
                     attributes: Attribute

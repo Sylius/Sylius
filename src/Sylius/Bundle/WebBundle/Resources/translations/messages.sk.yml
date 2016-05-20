@@ -85,8 +85,6 @@ sylius:
         no_shipments: Pre túto objednávku neexistujú žiadne zásielky
         no_shipping_charges: Nie sú uplatnené žiadne poplatky za dopravu
         no_taxes: Nie sú uplatnené žiadne dane
-        state:
-            order_confimed: Objednávka potvrdená
     order_item:
         quantity: Množstvo
         sellable: Produkt

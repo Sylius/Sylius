@@ -85,8 +85,6 @@ sylius:
         no_shipments: Er zijn geen verzendingen voor deze bestelling
         no_shipping_charges: Geen verzendkosten
         no_taxes: Geen belastingen
-        state:
-            order_confimed: Bestelling bevestigd
     order_item:
         quantity: Hoeveelheid
         sellable: Product
