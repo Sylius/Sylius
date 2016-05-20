@@ -1,0 +1,16 @@
+parameters:
+    sylius.inventory.backorders_enabled: true
+    sylius.inventory.tracking_enabled: true
+    sylius.inventory.holding.duration: 15 minutes
+    sylius.order.allow_guest_order: false
+    sylius.order.pending.duration: 3 hours
+    sylius.cache:
+        type: file_system
+    sylius.uploader.filesystem: sylius_image
+    phpcr_backend:
+        type: doctrinedbal
+        connection: default
+        caches:
+            meta: doctrine_cache.providers.phpcr_meta
+            nodes: doctrine_cache.providers.phpcr_nodes
+    phpcr_workspace: default

@@ -5,7 +5,8 @@ UPGRADE
 
 ### Application
 
-* Moved some of the parameters out of parameters.yml.dist file, please check your configurations
+* Moved some of the parameters out of parameters.yml.dist file, please check your configurations;
+* Moved parameters are now in ``CoreBundle/Resource/config/app.parameters.yml``, you should import them before your own parameters.yml file;
 * Renamed basic parameters to match Symfony Standard's conventions:
 
 Before:
@@ -22,6 +23,49 @@ After:
 ```yaml
 %database_host%
 %locale%
+```
+
+### HWIOAuthBundle is now optional 
+
+HWIOAuthBundle for social logins is no longer a required dependency. If you would like to use it in your project, you should add it to composer.json's ``require`` section, install it and add proper configuration for routing:
+
+```yml
+# routing.yml
+
+hwi_oauth_security:
+    resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
+    prefix: /connect-login
+ 
+hwi_oauth_redirect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+    prefix: /connect
+ 
+amazon_login:
+    path: /connect-login/check-amazon
+ 
+facebook_login:
+    path: /connect-login/check-facebook
+ 
+google_login:
+    path: /connect-login/check-google
+```
+
+And for security:
+
+```yml
+# security.yml
+
+# For your shop firewall, configure "oauth" section:
+
+oauth:
+    resource_owners:
+        amazon:   "/connect-login/check-amazon"
+        facebook: "/connect-login/check-facebook"
+        google:   "/connect-login/check-google"
+        login_path:   /login
+        failure_path: /login
+        oauth_user_provider:
+            service: sylius.oauth.user_provider
 ```
 
 ### Translation and TranslationBundle
