@@ -542,10 +542,7 @@ class Order extends Cart implements OrderInterface
     {
         $shippingTotal = $this->getAdjustmentsTotal(AdjustmentInterface::TAX_ADJUSTMENT);
         $shippingTotal += $this->getAdjustmentsTotal(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT);
-
-        foreach ($this->getAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT) as $shippingAdjustment) {
-            $shippingTotal += $shippingAdjustment->getAmount();
-        }
+        $shippingTotal += $this->getAdjustmentsTotal(AdjustmentInterface::SHIPPING_ADJUSTMENT);
 
         return $shippingTotal;
     }

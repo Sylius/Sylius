@@ -37,4 +37,14 @@ interface OrderItemInterface extends CartItemInterface
      * @return int
      */
     public function getTaxTotal();
+
+    /**
+     * @return int
+     */
+    public function getDiscountedUnitPrice();
+
+    /**
+     * @return int
+     */
+    public function getSubtotal();
 }
