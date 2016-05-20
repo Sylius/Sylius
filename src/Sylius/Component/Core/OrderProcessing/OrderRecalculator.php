@@ -12,14 +12,21 @@
 namespace Sylius\Component\Core\OrderProcessing;
 
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Remover\AdjustmentsRemoverInterface;
 use Sylius\Component\Core\Taxation\Processor\OrderTaxesProcessorInterface;
 use Sylius\Component\Promotion\Processor\PromotionProcessorInterface;
 
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class OrderRecalculator implements OrderRecalculatorInterface
 {
+    /**
+     * @var AdjustmentsRemoverInterface
+     */
+    private $adjustmentsRemover;
+
     /**
      * @var OrderTaxesProcessorInterface
      */
@@ -41,17 +48,20 @@ class OrderRecalculator implements OrderRecalculatorInterface
     private $shippingChargesProcessor;
 
     /**
+     * @param AdjustmentsRemoverInterface $adjustmentsRemover
      * @param OrderTaxesProcessorInterface $taxesProcessor
      * @param PricesRecalculatorInterface $pricesRecalculator
      * @param PromotionProcessorInterface $promotionProcessor
      * @param ShippingChargesProcessorInterface $shippingChargesProcessor
      */
     public function __construct(
+        AdjustmentsRemoverInterface $adjustmentsRemover,
         OrderTaxesProcessorInterface $taxesProcessor,
         PricesRecalculatorInterface $pricesRecalculator,
         PromotionProcessorInterface $promotionProcessor,
         ShippingChargesProcessorInterface $shippingChargesProcessor
     ) {
+        $this->adjustmentsRemover = $adjustmentsRemover;
         $this->taxesProcessor = $taxesProcessor;
         $this->pricesRecalculator = $pricesRecalculator;
         $this->promotionProcessor = $promotionProcessor;
@@ -65,6 +75,7 @@ class OrderRecalculator implements OrderRecalculatorInterface
      */
     public function recalculate(OrderInterface $order)
     {
+        $this->adjustmentsRemover->removeFrom($order);
         $this->pricesRecalculator->recalculate($order);
         $this->shippingChargesProcessor->applyShippingCharges($order);
         $this->promotionProcessor->process($order);

@@ -463,6 +463,17 @@ class Order implements OrderInterface
     /**
      * {@inheritdoc}
      */
+    public function removeAdjustmentsRecursively($type = null)
+    {
+        $this->removeAdjustments($type);
+        foreach ($this->items as $item) {
+            $item->removeAdjustmentsRecursively($type);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function recalculateAdjustmentsTotal()
     {
         $this->adjustmentsTotal = 0;
