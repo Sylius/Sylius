@@ -33,6 +33,7 @@ After:
 ### Core and CoreBundle
 
 * Removed "exclude" option from ``taxon`` rule
+* Changed ``ORDER_PROMOTION_ADJUSTMENT``s to be added on ``OrderItemUnit`` level instead of ``Order`` level, based on distributed promotion amount 
 
 ### SettingsBundle
 
