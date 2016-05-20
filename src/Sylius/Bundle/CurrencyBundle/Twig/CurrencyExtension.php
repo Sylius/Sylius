@@ -16,7 +16,7 @@ use Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelperInterface;
 /**
  * Sylius currency Twig helper.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class CurrencyExtension extends \Twig_Extension
 {

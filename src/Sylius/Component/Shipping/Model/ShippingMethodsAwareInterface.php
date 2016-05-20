@@ -14,7 +14,7 @@ namespace Sylius\Component\Shipping\Model;
 use Doctrine\Common\Collections\Collection;
 
 /**
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface ShippingMethodsAwareInterface
 {

@@ -16,7 +16,7 @@ use Doctrine\Common\Collections\Collection;
 /**
  * Interface for object referencing multiple payment methods.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface PaymentMethodsAwareInterface
 {

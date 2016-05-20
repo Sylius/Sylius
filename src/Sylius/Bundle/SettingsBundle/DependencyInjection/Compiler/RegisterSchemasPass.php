@@ -19,7 +19,7 @@ use Symfony\Component\DependencyInjection\Reference;
  * Registers all settings schemas in the schema registry.
  * Save the configuration names in parameter for the provider.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class RegisterSchemasPass implements CompilerPassInterface
 {
