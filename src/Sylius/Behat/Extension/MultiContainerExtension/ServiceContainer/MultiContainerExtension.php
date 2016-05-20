@@ -61,7 +61,11 @@ final class MultiContainerExtension implements Extension
     public function configure(ArrayNodeDefinition $builder)
     {
         $config = $builder->children();
-        $config->arrayNode('imports')->prototype('scalar');
+        $config
+            ->arrayNode('imports')
+                ->performNoDeepMerging()
+                ->prototype('scalar')
+        ;
     }
 
     /**
