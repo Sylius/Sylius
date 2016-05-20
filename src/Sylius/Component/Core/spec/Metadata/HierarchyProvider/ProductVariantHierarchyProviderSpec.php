@@ -53,6 +53,7 @@ class ProductVariantHierarchyProviderSpec extends ObjectBehavior
         $product->getMetadataIdentifier()->shouldBeCalled()->willReturn('Product-42');
         $product->getMetadataClassIdentifier()->shouldBeCalled()->willReturn('Product');
 
+        $archetype->getParent()->shouldBeCalled()->willReturn(null);
         $archetype->getMetadataIdentifier()->shouldBeCalled()->willReturn('Archetype-42');
 
         $productVariant->getProduct()->shouldBeCalled()->willReturn($product);
@@ -63,6 +64,40 @@ class ProductVariantHierarchyProviderSpec extends ObjectBehavior
             'ProductVariant-42',
             'Product-42',
             'Archetype-42',
+            'Product',
+            'DefaultPage',
+        ]);
+    }
+
+    function it_generates_correct_hierarchy_when_product_variant_has_archetype_hierarcy(
+        ProductVariantInterface $productVariant,
+        ProductInterface $product,
+        ArchetypeInterface $archetype,
+        ArchetypeInterface $parentArchetype,
+        ArchetypeInterface $grandparentArchetype
+    ) {
+        $productVariant->getMetadataIdentifier()->shouldBeCalled()->willReturn('ProductVariant-42');
+
+        $product->getMetadataIdentifier()->shouldBeCalled()->willReturn('Product-42');
+        $product->getMetadataClassIdentifier()->shouldBeCalled()->willReturn('Product');
+
+        $archetype->getMetadataIdentifier()->shouldBeCalled()->willReturn('Archetype-42');
+        $archetype->getParent()->shouldBeCalled()->willReturn($parentArchetype);
+        $parentArchetype->getMetadataIdentifier()->shouldBeCalled()->willReturn('Archetype-21');
+        $parentArchetype->getParent()->shouldBeCalled()->willReturn($grandparentArchetype);
+        $grandparentArchetype->getMetadataIdentifier()->shouldBeCalled()->willReturn('Archetype-10');
+        $grandparentArchetype->getParent()->shouldBeCalled()->willReturn(null);
+
+        $productVariant->getProduct()->shouldBeCalled()->willReturn($product);
+
+        $product->getArchetype()->shouldBeCalled()->willReturn($archetype);
+
+        $this->getHierarchyByMetadataSubject($productVariant)->shouldReturn([
+            'ProductVariant-42',
+            'Product-42',
+            'Archetype-42',
+            'Archetype-21',
+            'Archetype-10',
             'Product',
             'DefaultPage',
         ]);
