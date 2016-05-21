@@ -1,0 +1,30 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+default:
+    suites:
+        ui_dashboard:
+            contexts_as_services:
+                - sylius.behat.context.hook.doctrine_orm
+
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.currency
+                - sylius.behat.context.setup.geographical
+                - sylius.behat.context.setup.order
+                - sylius.behat.context.setup.payment
+                - sylius.behat.context.setup.product
+                - sylius.behat.context.setup.promotion
+                - sylius.behat.context.setup.security
+                - sylius.behat.context.setup.shipping
+                - sylius.behat.context.setup.zone
+
+                - sylius.behat.context.transform.customer
+                - sylius.behat.context.transform.lexical
+                - sylius.behat.context.transform.order
+
+                - sylius.behat.context.transform.shared_storage
+
+                - sylius.behat.context.ui.admin.dashboard
+                - sylius.behat.context.ui.admin.notification
+            filters:
+                tags: "@admin_dashboard && @ui"
