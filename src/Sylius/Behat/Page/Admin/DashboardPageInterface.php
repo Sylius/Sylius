@@ -18,4 +18,23 @@ use Sylius\Behat\Page\SymfonyPageInterface;
  */
 interface DashboardPageInterface extends SymfonyPageInterface
 {
+    /**
+     * @return int
+     */
+    public function getTotalSales();
+
+    /**
+     * @return int
+     */
+    public function getNumberOfNewOrders();
+
+    /**
+     * @return int
+     */
+    public function getNumberOfNewCustomers();
+
+    /**
+     * @return int
+     */
+    public function getAverageOrderValue();
 }

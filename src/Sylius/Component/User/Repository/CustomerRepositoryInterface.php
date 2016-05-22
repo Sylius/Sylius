@@ -21,6 +21,11 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 interface CustomerRepositoryInterface extends RepositoryInterface
 {
     /**
+     * @return int
+     */
+    public function count();
+
+    /**
      * @param mixed $id
      *
      * @return null|UserInterface

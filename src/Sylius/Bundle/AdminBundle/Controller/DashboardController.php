@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\AdminBundle\Controller;
 
+use Sylius\Component\Core\Dashboard\DashboardStatisticsProviderInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -20,15 +21,22 @@ use Symfony\Component\HttpFoundation\Request;
 class DashboardController
 {
     /**
+     * @var DashboardStatisticsProviderInterface
+     */
+    private $statisticsProvider;
+
+    /**
      * @var EngineInterface
      */
     private $templatingEngine;
 
     /**
+     * @param DashboardStatisticsProviderInterface $statisticsProvider
      * @param EngineInterface $templatingEngine
      */
-    public function __construct(EngineInterface $templatingEngine)
+    public function __construct(DashboardStatisticsProviderInterface $statisticsProvider, EngineInterface $templatingEngine)
     {
+        $this->statisticsProvider = $statisticsProvider;
         $this->templatingEngine = $templatingEngine;
     }
 
@@ -39,6 +47,8 @@ class DashboardController
      */
     public function indexAction(Request $request)
     {
-        return $this->templatingEngine->renderResponse('SyliusAdminBundle:Dashboard:index.html.twig');
+        $stats = $this->statisticsProvider->getStatistics();
+
+        return $this->templatingEngine->renderResponse('SyliusAdminBundle:Dashboard:index.html.twig', ['statistics' => $stats]);
     }
 }

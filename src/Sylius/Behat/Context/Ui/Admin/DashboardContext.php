@@ -11,8 +11,10 @@
 
 namespace Sylius\Behat\Context\Ui\Admin;
 
+use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\DashboardPageInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -30,5 +32,45 @@ final class DashboardContext implements Context
     public function __construct(DashboardPageInterface $dashboardPage)
     {
         $this->dashboardPage = $dashboardPage;
+    }
+
+    /**
+     * @When I open administration dashboard
+     */
+    public function iOpenAdministrationDashboard()
+    {
+        $this->dashboardPage->open();
+    }
+
+    /**
+     * @Then I should see :number new orders
+     */
+    public function iShouldSeeNewOrders($number)
+    {
+        Assert::eq($this->dashboardPage->getNumberOfNewOrders(), $number);
+    }
+
+    /**
+     * @Then I should see :number new customers
+     */
+    public function iShouldSeeNewCustomers($number)
+    {
+        Assert::eq($this->dashboardPage->getNumberOfNewCustomers(), $number);
+    }
+
+    /**
+     * @Then there should be total sales of :total
+     */
+    public function thereShouldBeTotalSalesOf($total)
+    {
+        Assert::eq($this->dashboardPage->getTotalSales(), $total);
+    }
+
+    /**
+     * @Then the average order value should be :value
+     */
+    public function myAverageOrderValueShouldBe($value)
+    {
+        Assert::eq($this->dashboardPage->getAverageOrderValue(), $value);
     }
 }

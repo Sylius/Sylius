@@ -21,6 +21,16 @@ use Sylius\Component\Sequence\Repository\HashSubjectRepositoryInterface;
 interface OrderRepositoryInterface extends RepositoryInterface, HashSubjectRepositoryInterface
 {
     /**
+     * @return int
+     */
+    public function count();
+
+    /**
+     * @return int
+     */
+    public function getTotalSales();
+
+    /**
      * @param int $amount
      *
      * @return OrderInterface[]

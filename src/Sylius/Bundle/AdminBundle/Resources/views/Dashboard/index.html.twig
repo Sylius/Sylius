@@ -5,198 +5,51 @@
 {% block title %}{{ parent() }}{{ 'sylius.ui.dashboard'|trans }}{% endblock %}
 
 {% block content %}
-<div class="ui three column stackable grid">
-    <div class="column">
-        {{ headers.default('sylius.ui.dashboard'|trans, 'home', 'sylius.ui.overview_of_your_store'|trans) }}
-    </div>
-    <div class="middle aligned column">
-        <div class="ui large fluid icon input">
-            <i class="search icon"></i>
-            <input type="text" placeholder="Search products...">
-        </div>
-    </div>
-    <div class="middle aligned column">
-        <div class="ui floating labeled icon dropdown button">
-            <i class="dropdown icon"></i>
-        <span class="text">
-            <div class="ui teal empty circular label"></div>
-            US Mobile Store
-        </span>
-            <div class="menu">
-                <div class="header">
-                    Search channels
-                </div>
-                <div class="ui left icon input">
-                    <i class="search icon"></i>
-                    <input type="text" name="search" placeholder="Search...">
-                </div>
-                <div class="header">
-                    <i class="share alternate icon"></i>
-                    Select a channel
-                </div>
-                <div class="item">
-                    <div class="ui red empty circular label"></div>
-                    US Web Store
-                </div>
-                <div class="item">
-                    <div class="ui blue empty circular label"></div>
-                    EU Web Store
-                </div>
-                <div class="item">
-                    <div class="ui black empty circular label"></div>
-                    EU Mobile Store
-                </div>
-            </div>
-        </div>
-        <div class="ui floating labeled icon dropdown button">
-            <i class="dropdown icon"></i>
-            <span class="text">Today</span>
-            <div class="menu">
-                <div class="header">
-                    <i class="calendar icon"></i>
-                    Date range
-                </div>
-                <div class="item">
-                    Yesterday
-                </div>
-                <div class="item">
-                    Last 7 days
-                </div>
-                <div class="item">
-                    Last month
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+{{ headers.default('sylius.ui.dashboard'|trans, 'home', 'sylius.ui.overview_of_your_store'|trans) }}
 
-<div class="ui fluid labeled four icon item menu">
-    <a class="item">
-        <i class="cubes icon"></i>
-        {{ 'sylius.ui.products'|trans }}
-    </a>
-    <a class="item">
-        <i class="shop icon"></i>
-        {{ 'sylius.ui.orders'|trans }}
-    </a>
-    <a class="item">
-        <i class="users icon"></i>
-        {{ 'sylius.ui.customers'|trans }}
-    </a>
-    <a class="item">
-        <i class="ticket icon"></i>
-        {{ 'sylius.ui.promotions'|trans }}
-    </a>
-</div>
+{% include '@SyliusAdmin/Dashboard/_menu.html.twig' %}
 
 <div class="ui segment">
     <div class="ui center aligned four column stackable divided grid">
         <div class="column">
             <div class="ui statistic">
-                <div class="value">
-                    $5,550
+                <div id="total-sales" class="value">
+                    {{ statistics.totalSales|sylius_money }}
                 </div>
                 <div class="label">
-                    Sales
+                    {{ 'sylius.ui.sales'|trans }}
                 </div>
             </div>
         </div>
         <div class="column">
             <div class="ui statistic">
-                <div class="value">
-                    25
+                <div id="new-orders" class="value">
+                    {{ statistics.numberOfNewOrders }}
                 </div>
                 <div class="label">
-                    New orders
+                    {{ 'sylius.ui.new_orders'|trans }}
                 </div>
             </div>
         </div>
         <div class="column">
             <div class="ui statistic">
-                <div class="value">
-                    40
+                <div id="new-customers" class="value">
+                    {{ statistics.numberOfNewCustomers }}
                 </div>
                 <div class="label">
-                    New customers
+                    {{ 'sylius.ui.new_customers'|trans }}
                 </div>
             </div>
         </div>
         <div class="column">
             <div class="ui statistic">
-                <div class="value">
-                    $1,100
+                <div id="average-order-value" class="value">
+                    {{ statistics.averageOrderValue|sylius_money }}
                 </div>
                 <div class="label">
-                    Average order value
+                    {{ 'sylius.ui.average_order_value'|trans }}
                 </div>
             </div>
-        </div>
-    </div>
-</div>
-
-<div class="ui two column stackable grid">
-    <div class="column">
-        <div class="ui segment">
-            <h4 class="ui dividing header">{{ 'sylius.ui.recent_orders'|trans }}</h4>
-            <table class="ui sortable stackable celled table">
-                <thead>
-                    <tr>
-                        <th>Customer</th>
-                        <th>Items</th>
-                        <th>Total</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <strong>john@example.com</strong>
-                            Johnatan Test
-                        </td>
-                        <td>5</td>
-                        <td>$4,000</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <strong>sara@example.com</strong>
-                            Ricky Bones
-                        </td>
-                        <td>2</td>
-                        <td>$300</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <strong>martin@example.com</strong>
-                            Martin Gigs
-                        </td>
-                        <td>12</td>
-                        <td>$14,600</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="column">
-        <div class="ui segment">
-            <h4 class="ui dividing header">{{ 'sylius.ui.new_customers'|trans }}</h4>
-            <table class="ui sortable stackable celled table">
-                <thead>
-                <tr>
-                    <th>Customer</th>
-                    <th>Date</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>
-                        <strong>john@example.com</strong>
-                        Johnatan Test
-                    </td>
-                    <td>14-02-2015 14:30:21</td>
-                    <td><a href="#" class="ui button">View profile</a></td>
-                </tr>
-                </tbody>
-            </table>
         </div>
     </div>
 </div>
