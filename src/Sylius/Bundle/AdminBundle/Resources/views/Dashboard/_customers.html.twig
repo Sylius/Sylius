@@ -1,0 +1,32 @@
+{% import 'SyliusUiBundle:Macro:messages.html.twig' as messages %}
+{% import 'SyliusUiBundle:Macro:buttons.html.twig' as buttons %}
+
+<div class="ui segment">
+    <h3 class="ui dividing header">{{ 'sylius.ui.new_customers'|trans }}</h3>
+
+    {% if customers|length > 0 %}
+        <table class="ui stackable table" id="customers">
+            <thead>
+                <th>{{ 'sylius.ui.name'|trans }}</th>
+                <th></th>
+            </thead>
+            <tbody>
+            {% for customer in customers %}
+                <tr>
+                    <td>
+                        <strong>{{ customer.fullName }}</strong><br>
+                        {{ customer.email }}
+                    </td>
+                    <td>
+                        <div class="ui right floated buttons">
+                            {{ buttons.edit(path('sylius_admin_customer_update', {'id': customer.id})) }}
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        {{ messages.info('sylius.ui.no_results_to_display'|trans) }}
+    {% endif %}
+</div>

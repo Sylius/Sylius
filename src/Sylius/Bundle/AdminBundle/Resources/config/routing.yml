@@ -60,3 +60,7 @@ sylius_admin_tax_rate:
 
 sylius_admin_zone:
     resource: "@SyliusAdminBundle/Resources/config/routing/zone.yml"
+
+sylius_admin_partial:
+    resource: "@SyliusAdminBundle/Resources/config/routing/partial.yml"
+    prefix: /_partial

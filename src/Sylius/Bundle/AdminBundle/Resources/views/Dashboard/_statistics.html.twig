@@ -1,0 +1,44 @@
+<div class="ui segment">
+    <div class="ui center aligned four column stackable divided grid">
+        <div class="column">
+            <div class="ui statistic">
+                <div id="total-sales" class="value">
+                    {{ statistics.totalSales|sylius_money }}
+                </div>
+                <div class="label">
+                    {{ 'sylius.ui.sales'|trans }}
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="ui statistic">
+                <div id="new-orders" class="value">
+                    {{ statistics.numberOfNewOrders }}
+                </div>
+                <div class="label">
+                    {{ 'sylius.ui.orders'|trans }}
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="ui statistic">
+                <div id="new-customers" class="value">
+                    {{ statistics.numberOfNewCustomers }}
+                </div>
+                <div class="label">
+                    {{ 'sylius.ui.customers'|trans }}
+                </div>
+            </div>
+        </div>
+        <div class="column">
+            <div class="ui statistic">
+                <div id="average-order-value" class="value">
+                    {{ statistics.averageOrderValue|sylius_money }}
+                </div>
+                <div class="label">
+                    {{ 'sylius.ui.average_order_value'|trans }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,9 @@
+sylius_admin_partial_customer_latest:
+    path: /latest/{count}
+    defaults:
+        _controller: sylius.controller.customer:indexAction
+        _sylius:
+            repository:
+                method: findLatest
+                arguments: [$count]
+            template: $template

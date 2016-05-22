@@ -31,11 +31,11 @@ interface OrderRepositoryInterface extends RepositoryInterface, HashSubjectRepos
     public function getTotalSales();
 
     /**
-     * @param int $amount
+     * @param int $count
      *
      * @return OrderInterface[]
      */
-    public function findRecentOrders($amount = 10);
+    public function findLatest($count);
 
     /**
      * @param int|string $number

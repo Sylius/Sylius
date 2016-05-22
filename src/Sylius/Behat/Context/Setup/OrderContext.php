@@ -290,6 +290,46 @@ final class OrderContext implements Context
     }
 
     /**
+     * @Given :numberOfCustomers customers have added products to the cart for total of :total
+     */
+    public function customersHaveAddedProductsToTheCartForTotalOf($numberOfCustomers, $total)
+    {
+        $customers = [];
+
+        for ($i = 0; $i < $numberOfCustomers; $i++) {
+            $customer = $this->customerFactory->createNew();
+            $customer->setEmail(sprintf('john%s@doe.com', uniqid()));
+            $customer->setFirstname('John');
+            $customer->setLastname('Doe'.$i);
+
+            $customers[] = $customer;
+
+            $this->customerRepository->add($customer);
+        }
+
+        $sampleProductVariant = $this->sharedStorage->get('variant');
+        $total = $this->getPriceFromString($total);
+
+        for ($i = 0; $i < $numberOfCustomers; $i++) {
+            $order = $this->createOrder($customers[rand(0, $numberOfCustomers - 1)]);
+            $order->setCompletedAt(null);
+
+            $price = $i === ($numberOfCustomers - 1) ? $total : rand(1, $total);
+            $total -= $price;
+
+            $item = $this->orderItemFactory->createNew();
+            $item->setVariant($sampleProductVariant);
+            $item->setUnitPrice($price);
+
+            $this->itemQuantityModifier->modify($item, 1);
+
+            $order->addItem($item);
+
+            $this->orderRepository->add($order);
+        }
+    }
+
+    /**
      * @Given :numberOfCustomers customers have placed :numberOfOrders orders for total of :total
      * @Given then :numberOfCustomers more customers have placed :numberOfOrders orders for total of :total
      */
@@ -366,7 +406,7 @@ final class OrderContext implements Context
      */
     private function createOrder(
         CustomerInterface $customer,
-        $number,
+        $number = null,
         ChannelInterface $channel = null,
         CurrencyInterface $currency = null
     ) {

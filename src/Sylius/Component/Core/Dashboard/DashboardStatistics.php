@@ -81,6 +81,10 @@ class DashboardStatistics
      */
     public function getAverageOrderValue()
     {
+        if (0 === $this->numberOfNewOrders) {
+            return 0;
+        }
+
         return (int) round($this->totalSales / $this->numberOfNewOrders);
     }
 }

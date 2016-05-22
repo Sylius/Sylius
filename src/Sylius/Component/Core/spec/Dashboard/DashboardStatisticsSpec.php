@@ -59,4 +59,11 @@ class DashboardStatisticsSpec extends ObjectBehavior
     {
         $this->getAverageOrderValue()->shouldReturn(107);
     }
+
+    function it_returns_0_as_average_order_value_when_there_are_no_orders()
+    {
+        $this->beConstructedWith(0, 0, 2);
+
+        $this->getAverageOrderValue()->shouldReturn(0);
+    }
 }

@@ -1,0 +1,9 @@
+sylius_admin_partial_order_latest:
+    path: /latest/{count}
+    defaults:
+        _controller: sylius.controller.order:indexAction
+        _sylius:
+            repository:
+                method: findLatest
+                arguments: [$count]
+            template: $template

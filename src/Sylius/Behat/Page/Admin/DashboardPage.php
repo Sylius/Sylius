@@ -11,13 +11,35 @@
 
 namespace Sylius\Behat\Page\Admin;
 
+use Behat\Mink\Session;
 use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Behat\Service\Accessor\TableAccessorInterface;
+use Symfony\Component\Routing\RouterInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class DashboardPage extends SymfonyPage implements DashboardPageInterface
 {
+    /**
+     * @var TableAccessorInterface
+     */
+    private $tableAccessor;
+
+    /**
+     * @param TableAccessorInterface $tableAccessor
+     */
+    public function __construct(
+        Session $session,
+        array $parameters,
+        RouterInterface $router,
+        TableAccessorInterface $tableAccessor
+    ) {
+        parent::__construct($session, $parameters, $router);
+
+        $this->tableAccessor = $tableAccessor;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -37,9 +59,25 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     /**
      * {@inheritdoc}
      */
+    public function getNumberOfNewOrdersInTheList()
+    {
+        return $this->tableAccessor->countTableBodyRows($this->getElement('order_list'));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getNumberOfNewCustomers()
     {
         return $this->getElement('new_customers')->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getNumberOfNewCustomersInTheList()
+    {
+        return $this->tableAccessor->countTableBodyRows($this->getElement('customer_list'));
     }
 
     /**
@@ -68,6 +106,8 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
             'new_orders' => '#new-orders',
             'new_customers' => '#new-customers',
             'average_order_value' => '#average-order-value',
+            'customer_list' => '#customers',
+            'order_list' => '#orders',
         ]);
     }
 }

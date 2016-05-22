@@ -11,7 +11,6 @@
 
 namespace Sylius\Behat\Context\Ui\Admin;
 
-use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\DashboardPageInterface;
 use Webmozart\Assert\Assert;
@@ -72,5 +71,21 @@ final class DashboardContext implements Context
     public function myAverageOrderValueShouldBe($value)
     {
         Assert::eq($this->dashboardPage->getAverageOrderValue(), $value);
+    }
+
+    /**
+     * @Then I should see :number customers in the list
+     */
+    public function iShouldSeeCustomersInTheList2($number)
+    {
+        Assert::eq($this->dashboardPage->getNumberOfNewCustomersInTheList(), $number);
+    }
+
+    /**
+     * @Then I should see :number new orders in the list
+     */
+    public function iShouldSeeNewOrdersInTheList($number)
+    {
+        Assert::eq($this->dashboardPage->getNumberOfNewOrdersInTheList(), $number);
     }
 }

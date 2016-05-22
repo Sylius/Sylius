@@ -24,8 +24,11 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
      */
     public function count()
     {
-        return (int) $this->createQueryBuilder('o')
+        $queryBuilder = $this->createQueryBuilder('o');
+
+        return (int) $queryBuilder
             ->select('COUNT(o.id)')
+            ->andWhere($queryBuilder->expr()->isNotNull('o.completedAt'))
             ->getQuery()
             ->getSingleScalarResult()
         ;
@@ -36,8 +39,11 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
      */
     public function getTotalSales()
     {
-        return (int) $this->createQueryBuilder('o')
+        $queryBuilder = $this->createQueryBuilder('o');
+
+        return (int) $queryBuilder
             ->select('SUM(o.total)')
+            ->andWhere($queryBuilder->expr()->isNotNull('o.completedAt'))
             ->getQuery()
             ->getSingleScalarResult()
         ;
@@ -46,15 +52,15 @@ class OrderRepository extends EntityRepository implements OrderRepositoryInterfa
     /**
      * {@inheritdoc}
      */
-    public function findRecentOrders($amount = 10)
+    public function findLatest($count)
     {
         $queryBuilder = $this->createQueryBuilder('o');
 
         return $queryBuilder
-            ->leftJoin('o.items', 'item')
             ->addSelect('item')
+            ->leftJoin('o.items', 'item')
             ->andWhere($queryBuilder->expr()->isNotNull('o.completedAt'))
-            ->setMaxResults($amount)
+            ->setMaxResults($count)
             ->orderBy('o.completedAt', 'desc')
             ->getQuery()
             ->getResult()

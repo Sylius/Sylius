@@ -16,6 +16,7 @@ sylius:
         an_error_occurred: An error occurred
         are_your_sure_you_want_to_perform_this_action: Are you sure you want to perform this action?
         available_for_channels: Available for channels
+        average_order_value: Average order value
         backordered: Backordered
         cancel: Cancel
         cancelled: Cancelled
@@ -98,6 +99,8 @@ sylius:
         new_currency: New currency
         new_locale: New locale
         new_tax_category: New tax category
+        new_orders: New orders
+        new_customers: New customers
         no: No
         no_account: no account
         no_promotion: No promotion applied

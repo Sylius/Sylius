@@ -31,7 +31,17 @@ interface DashboardPageInterface extends SymfonyPageInterface
     /**
      * @return int
      */
+    public function getNumberOfNewOrdersInTheList();
+
+    /**
+     * @return int
+     */
     public function getNumberOfNewCustomers();
+
+    /**
+     * @return int
+     */
+    public function getNumberOfNewCustomersInTheList();
 
     /**
      * @return int
