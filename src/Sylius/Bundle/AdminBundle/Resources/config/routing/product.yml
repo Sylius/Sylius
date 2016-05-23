@@ -1,0 +1,50 @@
+sylius_admin_product:
+    resource: |
+        alias: sylius.product
+        section: admin
+        templates: SyliusAdminBundle:Crud
+        except: ['show']
+        redirect: update
+        grid: sylius_admin_product
+        vars:
+            all:
+                subheader: sylius.ui.manage_your_products
+                templates:
+                    form: SyliusAdminBundle:Product:_form.html.twig
+            index:
+                icon: diamond
+    type: sylius.resource
+
+sylius_admin_product_create:
+    path: /products/new
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.product:createAction
+        _sylius:
+            section: admin
+            factory:
+                method: createNewWithoutVariants
+            template: SyliusAdminBundle:Crud:create.html.twig
+            redirect: sylius_admin_product_update
+            vars:
+                subheader: sylius.ui.manage_your_products
+                templates:
+                    form: SyliusAdminBundle:Product:_form.html.twig
+                route:
+                    name: sylius_admin_product_create
+
+sylius_admin_product_create_simple:
+    path: /products/new/simple
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.product:createAction
+        _sylius:
+            section: admin
+            template: SyliusAdminBundle:Crud:create.html.twig
+            redirect: sylius_admin_product_update
+            vars:
+                subheader: sylius.ui.manage_your_products
+                templates:
+                    form: SyliusAdminBundle:Product:_form.html.twig
+                route:
+                    name: sylius_admin_product_create_simple

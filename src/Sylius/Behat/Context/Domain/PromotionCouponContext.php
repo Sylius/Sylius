@@ -100,20 +100,4 @@ final class PromotionCouponContext implements Context
             sprintf('The coupon with id %s should exist', $coupon->getId())
         );
     }
-
-    /**
-     * @Then I should be notified that it has been successfully deleted
-     */
-    public function iShouldBeNotifiedOfSuccess()
-    {
-        // Not applicable in the domain scope
-    }
-
-    /**
-     * @Given I am logged in as an administrator
-     */
-    public function iAmLoggedInAsAnAdministrator()
-    {
-        // Not applicable in the domain scope
-    }
 }

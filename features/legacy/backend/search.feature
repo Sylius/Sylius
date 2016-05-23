@@ -30,6 +30,7 @@ Feature: Orm indexer event listener
         Given I am on the product creation page
         When I fill in the following:
             | Name        | Index test product      |
+            | Code        | TEST_PRODUCT            |
             | Description | Interesting description |
             | Price       | 29.99                   |
         And I press "Create"

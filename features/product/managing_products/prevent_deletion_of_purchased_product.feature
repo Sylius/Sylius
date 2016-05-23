@@ -12,8 +12,9 @@ Feature: Prevent deletion of purchased product
         And there is a customer "john.doe@gmail.com" that placed an order "#00000027"
         And the customer chose "Free" shipping method to "France" with "Cash on Delivery" payment
         And the customer bought a single "Toyota GT86 model"
+        And I am logged in as an administrator
 
-    @domain
+    @domain @ui
     Scenario: Purchased product cannot be deleted
         When I try to delete the "Toyota GT86 model" product
         Then I should be notified that this product is in use and cannot be deleted

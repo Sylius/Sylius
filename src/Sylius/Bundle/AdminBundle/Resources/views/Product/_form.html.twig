@@ -1,0 +1,5 @@
+{% if product.simple %}
+    {% include 'SyliusAdminBundle:Product/Form:_simpleForm.html.twig' %}
+{% else %}
+    {% include 'SyliusAdminBundle:Product/Form:_configurableForm.html.twig' %}
+{% endif %}

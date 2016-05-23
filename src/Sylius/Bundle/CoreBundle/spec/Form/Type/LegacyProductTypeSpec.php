@@ -13,7 +13,9 @@ namespace spec\Sylius\Bundle\CoreBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\CoreBundle\Form\Type\LegacyProductType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductType;
+use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Component\Core\Model\Product;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -21,7 +23,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class ProductTypeSpec extends ObjectBehavior
+class LegacyProductTypeSpec extends ObjectBehavior
 {
     function let(CanonicalizerInterface $canonicalizer)
     {
@@ -30,12 +32,12 @@ class ProductTypeSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Form\Type\ProductType');
+        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Form\Type\LegacyProductType');
     }
 
     function it_extends_product_type_from_product_bundle()
     {
-        $this->shouldHaveType(ProductType::class);
+        $this->shouldHaveType(LegacyProductType::class);
     }
 
     function it_builds_form(FormBuilderInterface $builder)
@@ -95,6 +97,13 @@ class ProductTypeSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
+        
+        $builder
+            ->addEventSubscriber(Argument::type(AddCodeFormSubscriber::class))
+            ->shouldBeCalled()
+            ->willReturn($builder)
+        ;
+        
         $this->buildForm($builder, []);
     }
 }

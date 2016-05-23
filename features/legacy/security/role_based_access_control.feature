@@ -65,6 +65,7 @@ Feature: Hierarchical Role based access control (HRBAC)
             | Name        | Book about Everything   |
             | Description | Interesting description |
             | Price       | 29.99                   |
+            | Code        | OMNI_BOOK               |
         And I press "Create"
         Then I should be on the page of product "Book about Everything"
         And I should see "Product has been successfully created"

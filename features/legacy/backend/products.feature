@@ -77,6 +77,7 @@ Feature: Products
         Given I am on the product creation page
         When I fill in the following:
             | Name        | Book about Everything   |
+            | Code        | TEE_CODE                |
             | Description | Interesting description |
             | Price       | 29.99                   |
         And I press "Create"
@@ -87,6 +88,7 @@ Feature: Products
         Given I am on the product creation page
         When I fill in the following:
             | Name        | Book about Everything   |
+            | Code        | TEE_CODE                |
             | Description | Interesting description |
             | Price       | 4.10                    |
         And I press "Create"
@@ -98,6 +100,7 @@ Feature: Products
         Given I am on the product creation page
         When I fill in the following:
             | Name        | Manchester United tee   |
+            | Code        | TEE_CODE                |
             | Description | Interesting description |
             | Price       | 59.99                   |
         And I select "T-Shirt size" from "Options"
@@ -111,6 +114,7 @@ Feature: Products
         Given I am on the product creation page
         When I fill in the following:
             | Name        | Manchester United tee   |
+            | Code        | TEE_CODE                |
             | Description | Interesting description |
             | Price       | 59.99                   |
         And go to "Association" tab
@@ -128,6 +132,7 @@ Feature: Products
         Given I am on the product creation page
         When I fill in the following:
             | Name        | Manchester United tee   |
+            | Code        | TEE_CODE                |
             | Description | Interesting description |
             | Price       | 59.99                   |
         And go to "Attributes" tab
@@ -142,6 +147,7 @@ Feature: Products
         Given I am on the product creation page
         When I fill in the following:
             | Name        | Manchester United tee   |
+            | Code        | TEE_CODE                |
             | Description | Interesting description |
             | Price       | 59.99                   |
         And go to "Attributes" tab
@@ -156,6 +162,7 @@ Feature: Products
         Given I am on the product creation page
         When I fill in the following:
             | Name        | FC Barcelona tee        |
+            | Code        | TEE_CODE                |
             | Description | Interesting description |
             | Price       | 59.99                   |
         And go to "Attributes" tab
@@ -175,6 +182,7 @@ Feature: Products
         Given I am on the product creation page
         When I fill in the following:
             | Name        | FC Barcelona tee        |
+            | Code        | TEE_CODE                |
             | Description | Interesting description |
             | Price       | 59.99                   |
         And I go to "Attributes" tab
@@ -191,6 +199,7 @@ Feature: Products
             | Name        | Manchester United tee   |
             | Description | Interesting description |
             | Price       | 59.99                   |
+            | Code        | BOSTON_TEE              |
         And I press "Create"
         When I go to the product index page
         Then I should see 5 products in the list
@@ -259,6 +268,7 @@ Feature: Products
         Given I am on the product creation page
         And I fill in the following:
             | Name        | The best T-shirt        |
+            | Code        | BEST_T_SHIRT            |
             | Description | Interesting description |
             | Price       | 2.99                    |
         And go to "Categorization" tab
