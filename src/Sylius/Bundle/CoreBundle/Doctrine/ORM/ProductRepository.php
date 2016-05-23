@@ -27,6 +27,17 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
     /**
      * {@inheritdoc}
      */
+    public function createListQueryBuilder()
+    {
+        return $this->createQueryBuilder('o')
+            ->addSelect('translation')
+            ->leftJoin('o.translations', 'translation')
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function createByTaxonPaginator(TaxonInterface $taxon, array $criteria = [])
     {
         $queryBuilder = $this->createQueryBuilder('o');

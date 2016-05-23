@@ -34,6 +34,7 @@
     $('.ui.accordion').accordion();
     $('.link.ui.dropdown').dropdown({action: 'hide'});
     $('.button.ui.dropdown').dropdown({action: 'hide'});
+    $('.menu .item').tab();
 
     $('.form button').on('click', function() {
       return $(this).closest('form').addClass('loading');

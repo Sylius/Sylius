@@ -95,7 +95,7 @@ sylius:
         manage_shipping_methods_for_your_store: Manage shipping methods for your store
         manage_taxation_of_your_products: Manage taxation of your products
         manage_your_customers: Manage your customers
-        manage_your_products: Manage your products
+        manage_your_product_catalog: Manage your product catalog
         new: New
         new_channel: New channel
         new_country: New country
