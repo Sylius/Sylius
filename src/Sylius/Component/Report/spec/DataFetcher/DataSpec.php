@@ -14,7 +14,7 @@ namespace spec\Sylius\Component\Report\DataFetcher;
 use PhpSpec\ObjectBehavior;
 
 /**
- * @author Łukasz Chruściel <lchrusciel@gmail.com>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class DataSpec extends ObjectBehavior
 {

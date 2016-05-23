@@ -16,7 +16,7 @@ use Sylius\Component\Report\Model\ReportInterface;
 /**
  * Delegating data fetcher.
  *
- * @author Łukasz Chruściel <lchrusciel@gmail.com>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 interface DelegatingDataFetcherInterface
 {
