@@ -11,6 +11,7 @@
 
 namespace spec\Sylius\Bundle\VariationBundle\Validator;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\VariationBundle\Validator\Constraint\VariantCombination;
@@ -82,7 +83,7 @@ class VariantCombinationValidatorSpec extends ObjectBehavior
 
         $variant->getObject()->willReturn($variable);
 
-        $variant->getOptions()->willReturn(new \ArrayIterator([$option->getWrappedObject()]));
+        $variant->getOptions()->willReturn(new ArrayCollection([$option->getWrappedObject()]));
 
         $existingVariant->hasOption($option)->willReturn(true);
 

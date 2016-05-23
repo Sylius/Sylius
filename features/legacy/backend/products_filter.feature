@@ -7,11 +7,11 @@ Feature: Products filter
     Background:
         Given store has default configuration
         And the following products exist:
-            | name          | price | sku |
-            | Super T-Shirt | 19.99 | 123 |
-            | Black T-Shirt | 19.99 | 321 |
-            | Sticker       | 10.00 | 555 |
-            | Orange        | 10.00 | 124 |
+            | name          | price | code |
+            | Super T-Shirt | 19.99 | 123  |
+            | Black T-Shirt | 19.99 | 321  |
+            | Sticker       | 10.00 | 555  |
+            | Orange        | 10.00 | 124  |
         And I am logged in as administrator
 
     Scenario: Filtering products by name
@@ -25,7 +25,7 @@ Feature: Products filter
 
     Scenario: Filtering products by SKU
         Given I am on the product index page
-        When I fill in "Code" with "555"
+        When I fill in "Code" with "555-VARIANT"
         And I press "Filter"
         Then I should be on the product index page
         And I should see 1 product in the list

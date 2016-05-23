@@ -137,7 +137,7 @@ final class ProductContext implements Context
      */
     public function storeHasAConfigurableProduct($productName)
     {
-        $product = $this->productFactory->createNewWithoutVariants();
+        $product = $this->productFactory->createNew();
 
         $product->setName($productName);
         $product->setCode($this->convertToCode($productName));
@@ -405,9 +405,9 @@ final class ProductContext implements Context
         $product = $this->productFactory->createWithVariant();
 
         $product->setName($productName);
-        $product->getVariants()->first()->setPrice($price);
+        $product->getFirstVariant()->setPrice($price);
         $product->setCode($this->convertToCode($productName));
-        $product->getMasterVariant()->setCode($product->getCode());
+        $product->getFirstVariant()->setCode($product->getCode());
 
         return $product;
     }

@@ -340,7 +340,7 @@ class Product implements ProductInterface
      */
     public function hasVariants()
     {
-        return 1 < $this->getVariants()->count();
+        return !$this->getVariants()->isEmpty();
     }
 
     /**
@@ -498,6 +498,6 @@ class Product implements ProductInterface
      */
     public function isSimple() 
     {
-        return null !== $this->getMasterVariant() && !$this->hasOptions();
+        return 1 === $this->variants->count() && !$this->hasOptions();
     }
 }

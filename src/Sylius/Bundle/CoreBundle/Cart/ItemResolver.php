@@ -113,11 +113,11 @@ class ItemResolver implements ItemResolverInterface
         $form->submit($data);
 
         // If our product has no variants, we simply set the master variant of it.
-        if (null === $item->getVariant() && !$product->hasVariants()) {
+        if (null === $item->getVariant() && 1 === $product->getVariants()->count()) {
             $item->setVariant($product->getFirstVariant());
         }
 
-        if (null === $item->getVariant() && $product->hasVariants()) {
+        if (null === $item->getVariant() && 1 > $product->getVariants()->count()) {
             throw new ItemResolvingException('Please select variant');
         }
 

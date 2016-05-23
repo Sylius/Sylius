@@ -187,7 +187,7 @@ class CoreContext extends DefaultContext
             /* @var $item OrderItemInterface */
             $item = $orderItemFactory->createNew();
             $item->setVariant($product->getFirstVariant());
-            $item->setUnitPrice($product->getFirstVariant()->getPrice());
+            $item->setUnitPrice($product->getPrice());
 
             $orderItemQuantityModifier->modify($item, $data['quantity']);
 
@@ -812,7 +812,7 @@ class CoreContext extends DefaultContext
         $this->getService('sylius.generator.variant')->generate($product);
 
         foreach ($product->getVariants() as $variant) {
-            $variant->setPrice($product->getFirstVariant()->getPrice());
+            $variant->setPrice((null !== $product->getPrice()) ? $product->getPrice() : rand(1000, 10000));
             $variant->setCode($this->faker->unique->uuid);
         }
 

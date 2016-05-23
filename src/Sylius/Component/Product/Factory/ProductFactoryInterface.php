@@ -30,9 +30,4 @@ interface ProductFactoryInterface extends TranslatableFactoryInterface
      * @return ProductInterface
      */
     public function createFromArchetype($archetypeCode);
-
-    /**
-     * @return ProductInterface
-     */
-    public function createNewWithoutVariants();
 }

@@ -69,9 +69,12 @@ Feature: Product variants
         Given I am viewing product "Black T-Shirt"
         When I follow "Generate variants"
         And I fill in the following:
-            | sylius_product_variant_generation_variants_1_code | T_SHIRT_S |
-            | sylius_product_variant_generation_variants_2_code | T_SHIRT_M |
-            | sylius_product_variant_generation_variants_3_code | T_SHIRT_L |
+            | sylius_product_variant_generation_variants_0_code  | T_SHIRT_S |
+            | sylius_product_variant_generation_variants_1_code  | T_SHIRT_M |
+            | sylius_product_variant_generation_variants_2_code  | T_SHIRT_L |
+            | sylius_product_variant_generation_variants_0_price | 100.00    |
+            | sylius_product_variant_generation_variants_1_price | 150.00    |
+            | sylius_product_variant_generation_variants_2_price | 200.00    |
         And I press "Save changes"
         Then I should still be on the page of product "Black T-Shirt"
         And I should see "Product has been successfully updated."

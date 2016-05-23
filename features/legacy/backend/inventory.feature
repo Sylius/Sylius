@@ -31,7 +31,7 @@ Feature: Inventory tracking
 
     Scenario: Updating product stock level
         Given I am on the page of product "Sticker"
-        When I click "Edit" near "-"
+        When I click "Edit" near "STICKER-VARIANT"
         When I fill in "Current stock" with "10"
         And I press "Save changes"
         Then I should be on the page of product "Sticker"
@@ -39,7 +39,7 @@ Feature: Inventory tracking
 
     Scenario: Making product not available on demand
         Given I am on the page of product "Sticker"
-        When I click "Edit" near "-"
+        When I click "Edit" near "STICKER-VARIANT"
         When I uncheck "Available on demand"
         And I press "Save changes"
         Then I should be on the page of product "Sticker"

@@ -38,7 +38,7 @@ class ProductContext extends DefaultContext
             $code = isset($data['code']) ? $data['code'] : $this->generateCode($data['name']);
             $product->setCode($code);
 
-            $product->getFirstVariant()->setCode($code);
+            $product->getFirstVariant()->setCode($code.'-VARIANT');
             $product->getFirstVariant()->setPrice((int) round($data['price'] * 100));
 
             if (!empty($data['options'])) {

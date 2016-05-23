@@ -1,24 +1,13 @@
 Sylius\Component\Core\Model\ProductVariant:
     productVariant1:
-<<<<<<< 5dec350d2f16a9384f267d1dd5c3db27f4ce9a25
-        master: true
         code: MUG_1
+        setPrice: [20]
     productVariant2:
-        master: true
         code: MUG_2
+        setPrice: [20]
     productVariant3:
-        master: true
         code: MUG_3
-=======
         setPrice: [20]
-        setSku: [mug1]
-    productVariant2:
-        setPrice: [20]
-        setSku: [mug2]
-    productVariant3:
-        setPrice: [20]
-        setSku: [mug3]
->>>>>>> [Core][Product][Web] Remove deleted methods usage on Product
 
 Sylius\Component\Core\Model\Product:
     product1:

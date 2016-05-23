@@ -46,7 +46,7 @@ class SimpleProductSubscriber implements EventSubscriberInterface
         if ($product->isSimple()) {
             $form = $event->getForm();
 
-            $form->add('masterVariant', 'sylius_product_variant', ['master' => true]);
+            $form->add('variant', 'sylius_product_variant', ['property_path' => 'variants[0]']);
             $form->remove('options');
         }
     }
@@ -58,11 +58,11 @@ class SimpleProductSubscriber implements EventSubscriberInterface
     {
         $data = $event->getData();
 
-        if (empty($data) || !array_key_exists('masterVariant', $data) || !array_key_exists('code', $data)) {
+        if (empty($data) || !array_key_exists('variant', $data) || !array_key_exists('code', $data)) {
             return;
         }
 
-        $data['masterVariant']['code'] = $data['code'];
+        $data['variant']['code'] = $data['code'];
 
         $event->setData($data);
     }

@@ -272,7 +272,7 @@ class LoadProductsData extends DataFixture
     protected function addVariant(ProductInterface $product, $code = null)
     {
         /** @var ProductVariantInterface $variant */
-        $variant = $product->getFirstVariant();
+        $variant = $this->get('sylius.factory.product_variant')->createNew();
         $variant->setProduct($product);
         $variant->setPrice($this->faker->randomNumber(4));
         $variant->setCode(null === $code ? $this->getUniqueCode() : $code);
@@ -283,6 +283,8 @@ class LoadProductsData extends DataFixture
         $mainTaxon = $product->getMainTaxon();
         $image = clone $this->getReference('Sylius.Image.'.$mainTaxon->getCode());
         $variant->addImage($image);
+
+        $product->addVariant($variant);
 
         $this->setReference('Sylius.Variant-'.$this->totalVariants, $variant);
 
@@ -372,7 +374,7 @@ class LoadProductsData extends DataFixture
      */
     protected function createProduct()
     {
-        return $this->getProductFactory()->createWithVariant();
+        return $this->getProductFactory()->createNew();
     }
 
     /**

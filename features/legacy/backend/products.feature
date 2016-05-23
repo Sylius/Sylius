@@ -67,11 +67,9 @@ Feature: Products
     Scenario: Creating simple product without any attributes and options
         Given I am on the product creation page
         When I fill in the following:
-            | Name                               | Book about Everything   |
-            | sylius_product_legacy_code         | TEE_CODE                |
-            | sylius_product_legacy_variant_code | TEE_CODE                |
-            | Description                        | Interesting description |
-            | Price                              | 29.99                   |
+            | Name        | Book about Everything   |
+            | Code        | TEE_CODE                |
+            | Description | Interesting description |
         And I press "Create"
         Then I should be on the page of product "Book about Everything"
         And I should see "Product has been successfully created"
@@ -79,11 +77,9 @@ Feature: Products
     Scenario: Prices are saved correctly
         Given I am on the product creation page
         When I fill in the following:
-            | Name                               | Book about Everything   |
-            | sylius_product_legacy_code         | TEE_CODE                |
-            | sylius_product_legacy_variant_code | TEE_CODE                |
-            | Description                        | Interesting description |
-            | Price                              | 4.10                    |
+            | Name        | Book about Everything   |
+            | Code        | TEE_CODE                |
+            | Description | Interesting description |
         And I press "Create"
         Then I should be on the page of product "Book about Everything"
         And I should see "Product has been successfully created"
@@ -91,11 +87,9 @@ Feature: Products
     Scenario: Creating product with options
         Given I am on the product creation page
         When I fill in the following:
-            | Name                               | Manchester United tee   |
-            | sylius_product_legacy_code         | TEE_CODE                |
-            | sylius_product_legacy_variant_code | TEE_CODE                |
-            | Description                        | Interesting description |
-            | Price                              | 59.99                   |
+            | Name        | Manchester United tee   |
+            | Code        | TEE_CODE                |
+            | Description | Interesting description |
         And I select "T-Shirt size" from "Options"
         And I press "Create"
         Then I should be on the page of product "Manchester United tee"
@@ -106,11 +100,9 @@ Feature: Products
     Scenario: Creating product with association
         Given I am on the product creation page
         When I fill in the following:
-            | Name                               | Manchester United tee   |
-            | sylius_product_legacy_code         | TEE_CODE                |
-            | sylius_product_legacy_variant_code | TEE_CODE                |
-            | Description                        | Interesting description |
-            | Price                              | 59.99                   |
+            | Name        | Manchester United tee   |
+            | Code        | TEE_CODE                |
+            | Description | Interesting description |
         And go to "Association" tab
         And I click "Add association"
         And I select "Up sell" from "Association type"
@@ -125,11 +117,9 @@ Feature: Products
     Scenario: Creating product with string attribute
         Given I am on the product creation page
         When I fill in the following:
-            | Name                               | Manchester United tee   |
-            | sylius_product_legacy_code         | TEE_CODE                |
-            | sylius_product_legacy_variant_code | TEE_CODE                |
-            | Description                        | Interesting description |
-            | Price                              | 59.99                   |
+            | Name        | Manchester United tee   |
+            | Code        | TEE_CODE                |
+            | Description | Interesting description |
         And go to "Attributes" tab
         And I add "T-Shirt fabric" attribute
         And I fill in "T-Shirt fabric" with "Polyester"
@@ -141,11 +131,9 @@ Feature: Products
     Scenario: Creating product with checkbox attribute
         Given I am on the product creation page
         When I fill in the following:
-            | Name                               | Manchester United tee   |
-            | sylius_product_legacy_code         | TEE_CODE                |
-            | sylius_product_legacy_variant_code | TEE_CODE                |
-            | Description                        | Interesting description |
-            | Price                              | 59.99                   |
+            | Name        | Manchester United tee   |
+            | Code        | TEE_CODE                |
+            | Description | Interesting description |
         And go to "Attributes" tab
         And I add "T-Shirt fare trade" attribute
         And I check "T-Shirt fare trade"
@@ -157,11 +145,9 @@ Feature: Products
     Scenario: Creating product with multiple attributes
         Given I am on the product creation page
         When I fill in the following:
-            | Name                               | FC Barcelona tee        |
-            | sylius_product_legacy_code         | TEE_CODE                |
-            | sylius_product_legacy_variant_code | TEE_CODE                |
-            | Description                        | Interesting description |
-            | Price                              | 59.99                   |
+            | Name        | FC Barcelona tee        |
+            | Code        | TEE_CODE                |
+            | Description | Interesting description |
         And go to "Attributes" tab
         And I add following attributes:
             | T-Shirt fabric     |
@@ -178,11 +164,9 @@ Feature: Products
     Scenario: Created product does not pass validation
         Given I am on the product creation page
         When I fill in the following:
-            | Name                               | FC Barcelona tee        |
-            | sylius_product_legacy_code         | TEE_CODE                |
-            | sylius_product_legacy_variant_code | TEE_CODE                |
-            | Description                        | Interesting description |
-            | Price                              | 59.99                   |
+            | Name        | FC Barcelona tee        |
+            | Code        | TEE_CODE                |
+            | Description | Interesting description |
         And I go to "Attributes" tab
         And I add "T-Shirt fabric" attribute
         And I fill in "T-Shirt fabric" with "X"
@@ -194,11 +178,9 @@ Feature: Products
     Scenario: Created products appear in the list
         Given I am on the product creation page
         And I fill in the following:
-            | Name                               | Manchester United tee   |
-            | Description                        | Interesting description |
-            | Price                              | 59.99                   |
-            | sylius_product_legacy_code         | BOSTON_TEE              |
-            | sylius_product_legacy_variant_code | BOSTON_TEE              |
+            | Name        | Manchester United tee   |
+            | Description | Interesting description |
+            | Code        | BOSTON_TEE              |
         And I press "Create"
         When I go to the product index page
         Then I should see 5 products in the list
@@ -258,11 +240,9 @@ Feature: Products
     Scenario: Creating product with main taxon
         Given I am on the product creation page
         And I fill in the following:
-            | Name                               | The best T-shirt        |
-            | sylius_product_legacy_code         | BEST_T_SHIRT            |
-            | sylius_product_legacy_variant_code | BEST_T_SHIRT            |
-            | Description                        | Interesting description |
-            | Price                              | 2.99                    |
+            | Name        | The best T-shirt        |
+            | Code        | BEST_T_SHIRT            |
+            | Description | Interesting description |
         And go to "Categorization" tab
         And I select "New" from "Main taxon"
         And I press "Create"

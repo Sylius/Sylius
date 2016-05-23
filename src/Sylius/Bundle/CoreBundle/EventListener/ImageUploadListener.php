@@ -17,6 +17,7 @@ use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
+use Webmozart\Assert\Assert;
 
 class ImageUploadListener
 {
@@ -39,9 +40,8 @@ class ImageUploadListener
     public function uploadProductImage(GenericEvent $event)
     {
         $subject = $event->getSubject();
-        if (!$subject instanceof ProductVariantInterface) {
-            throw new UnexpectedTypeException($subject, ProductVariantInterface::class);
-        }
+
+        Assert::isInstanceOf($subject, ProductVariantInterface::class);
 
         $images = $subject->getImages();
         foreach ($images as $image) {
