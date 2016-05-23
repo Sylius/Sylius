@@ -1,0 +1,14 @@
+# This file is a part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_shop_homepage:
+    path: /
+    defaults:
+        _controller: sylius.controller.shop.homepage:indexAction
+
+sylius_shop_product:
+    resource: "@SyliusShopBundle/Resources/config/routing/product.yml"
+
+sylius_shop_cart:
+    prefix: /cart
+    resource: "@SyliusShopBundle/Resources/config/routing/cart.yml"

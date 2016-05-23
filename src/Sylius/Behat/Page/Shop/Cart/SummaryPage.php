@@ -11,12 +11,13 @@
 
 namespace Sylius\Behat\Page\Shop\Cart;
 
+use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\SymfonyPage;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class CartSummaryPage extends SymfonyPage implements CartSummaryPageInterface
+class SummaryPage extends SymfonyPage implements SummaryPageInterface
 {
     /**
      * {@inheritdoc}
@@ -65,7 +66,7 @@ class CartSummaryPage extends SymfonyPage implements CartSummaryPageInterface
     {
         $regularPriceElement = $this->getElement('product regular price', ['%name%' => $productName]);
 
-        return trim($regularPriceElement->getText());
+        return $this->getPriceFromString(trim($regularPriceElement->getText()));
     }
 
     /**
@@ -75,7 +76,7 @@ class CartSummaryPage extends SymfonyPage implements CartSummaryPageInterface
     {
         $discountPriceElement = $this->getElement('product discount price', ['%name%' => $productName]);
 
-        return trim($discountPriceElement->getText());
+        return $this->getPriceFromString(trim($discountPriceElement->getText()));
     }
 
     /**
@@ -92,7 +93,7 @@ class CartSummaryPage extends SymfonyPage implements CartSummaryPageInterface
     public function removeProduct($productName)
     {
         $itemElement = $this->getElement('product row', ['%name%' => $productName]);
-        $itemElement->find('css', 'a.btn-danger')->click();
+        $itemElement->find('css', 'a#remove-button')->click();
     }
 
     /**
@@ -109,9 +110,58 @@ class CartSummaryPage extends SymfonyPage implements CartSummaryPageInterface
     /**
      * {@inheritdoc}
      */
+    public function isSingleItemOnPage()
+    {
+        $items = $this->getElement('cart items')->findAll('css', 'tbody > tr');
+
+        return 1 === count($items);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isItemWithName($name)
+    {
+       return $this->findItemWith($name, 'tbody  tr > td > div > a > strong');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isItemWithVariant($variantName)
+    {
+       return $this->findItemWith($variantName, 'tbody  tr > td > strong');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getProductOption($productName, $optionName)
+    {
+        $itemElement = $this->getElement('product row', ['%name%' => $productName]);
+
+        return $itemElement->find('css', sprintf('li:contains("%s")', ucfirst($optionName)))->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isEmpty()
+    {
+        $isEmpty = strpos($this->getDocument()->find('css', '.message')->getText(), 'Your cart is empty');
+        if (false === $isEmpty ) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getRouteName()
     {
-        return 'sylius_cart_summary';
+        return 'sylius_shop_cart_summary';
     }
 
     /**
@@ -124,9 +174,45 @@ class CartSummaryPage extends SymfonyPage implements CartSummaryPageInterface
             'promotion total' => '#cart-summary td:contains("Promotion total")',
             'shipping total' => '#cart-summary td:contains("Shipping total")',
             'tax total' => '#cart-summary td:contains("Tax total")',
-            'product row' => '#cart-summary tbody tr:contains("%name%")',
-            'product regular price' => '#cart-summary tr:contains("%name%") .regular-price',
-            'product discount price' => '#cart-summary tr:contains("%name%") .discount-price',
+            'product row' => '#cart-items tbody tr:contains("%name%")',
+            'product regular price' => '#cart-items tr:contains("%name%") .regular-price',
+            'product discount price' => '#cart-items tr:contains("%name%") .discount-price',
+            'total' => '.total',
+            'quantity' => '#sylius_cart_items_%number%_quantity',
+            'unit price' => '.unit-price',
+            'cart items' => '#cart-items',
+            'cart summary' => '#cart-summary',
         ]);
+    }
+
+    /**
+     * @param $attributeName
+     * @param $selector
+     *
+     * @return bool
+     *
+     * @throws ElementNotFoundException
+     */
+    private function findItemWith($attributeName, $selector)
+    {
+        $itemsAttributes = $this->getElement('cart items')->findAll('css', $selector);
+
+        foreach($itemsAttributes as $itemAttribute) {
+            if($attributeName === $itemAttribute->getText()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @param string $price
+     *
+     * @return int
+     */
+    private function getPriceFromString($price)
+    {
+        return (int) round((str_replace(['€', '£', '$'], '', $price) * 100), 2);
     }
 }

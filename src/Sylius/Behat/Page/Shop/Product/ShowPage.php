@@ -11,12 +11,16 @@
 
 namespace Sylius\Behat\Page\Shop\Product;
 
-use Sylius\Behat\Page\SymfonyPage;
-use Sylius\Component\Core\Model\ProductInterface;
+use Behat\Mink\Session;
+use Sylius\Behat\Service\Accessor\TableAccessorInterface;
+use Sylius\Component\Product\Model\OptionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Routing\RouterInterface;
+use Sylius\Behat\Page\SymfonyPage;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
+ * @author Anna Walasek <anna.walasek@lakion.com>
  */
 class ShowPage extends SymfonyPage implements ShowPageInterface
 {
@@ -53,25 +57,73 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function addToCartWithOption(OptionInterface $option, $optionValue)
     {
-        // Intentionally left blank, overriding getUrl method not to use it
+        $select = $this->getDocument()->find('css', sprintf('select#sylius_cart_item_variant_%s', $option->getCode()));
+
+        $this->getDocument()->selectFieldOption($select->getAttribute('name'), $optionValue);
+        $this->getDocument()->pressButton('Add to cart');
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function getUrl(array $urlParameters = [])
+    public function visit($url)
     {
-        if (!isset($urlParameters['product']) || !$urlParameters['product'] instanceof ProductInterface) {
-            throw new \InvalidArgumentException(
-                'There should be only one url parameter passed to ProductShowPage '.
-                'named "product", containing an instance of Core\'s ProductInterface'
-            );
+        $absoluteUrl = $this->makePathAbsolute($url);
+        $this->getDriver()->visit($absoluteUrl);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return $this->getElement('name')->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isAttributeWithValueOnPage($attributeName, $attributeValue)
+    {
+        return (
+            $this->isAttributeWith($attributeName, 'tbody > tr > td[id=sylius_attribute_name]') &&
+            $this->isAttributeWith($attributeValue, 'tbody > tr > td[id=sylius_attribute_value]')
+        );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRouteName()
+    {
+        return 'sylius_shop_product_show';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getDefinedElements()
+    {
+        return array_merge(parent::getDefinedElements(), [
+            'name' => '#sylius_product_name',
+            'attributes' => '#product-attributes'
+        ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    private function isAttributeWith($fieldValue, $selector)
+    {
+        $rows = $this->getElement('attributes')->findAll('css', $selector);
+        foreach($rows as $row) {
+            if($fieldValue === $row->getText()) {
+                return true;
+            }
         }
 
-        $path = $this->router->generate($urlParameters['product']);
-
-        return $this->makePathAbsolute($path);
+        return false;
     }
 }

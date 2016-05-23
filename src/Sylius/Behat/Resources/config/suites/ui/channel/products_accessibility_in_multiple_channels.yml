@@ -16,7 +16,7 @@ default:
                 - sylius.behat.context.setup.currency
 
                 - sylius.behat.context.ui.channel
-                - sylius.behat.context.ui.product
+                - sylius.behat.context.ui.shop.product
 
             filters:
                 tags: "@products_accessibility_in_multiple_channels && @ui"

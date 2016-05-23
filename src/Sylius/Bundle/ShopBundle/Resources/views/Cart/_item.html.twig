@@ -1,0 +1,22 @@
+{% set product = item.vars.value.variant.product %}
+<tr>
+    {% include ['SyliusShopBundle:Cart:_variant.html.twig'] with {'variant': item.vars.value.variant} %}
+    <td>
+        {{ form_row(item.quantity, {'label': false}) }}
+    </td>
+    <td class="unit-price">
+        {{ item.vars.value.unitPrice|sylius_price }}
+    </td>
+    <td style="text-align: right">
+        {% set regularPrice = item.vars.value|sylius_regular_price %}
+        {% if regularPrice != item.vars.value.total %}
+            <span class="regular-price" style="text-decoration: line-through">{{ regularPrice|sylius_price }}</span>
+            <span class="discount-price">{{ item.vars.value.total|sylius_price }}</span>
+        {% else %}
+            <span class="total">{{ item.vars.value.total|sylius_price }}</span>
+        {% endif %}
+    </td>
+    <td>
+        <a href="{{ path('sylius_shop_cart_item_remove', {'id': item.vars.value.id}) }}" class="ui button" id="remove-button"><i class="icon trash"></i></a>
+    </td>
+</tr>

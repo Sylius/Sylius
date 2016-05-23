@@ -456,6 +456,8 @@ class WebContext extends DefaultContext
      */
     public function iChooseAttributeType($type)
     {
+        $this->iWait(100);
+
         $this->assertSession()->elementExists('css', '#attribute-types-modal');
 
         $attributeTypesModalContainer = $this->getSession()->getPage()->find('css', '#attribute-types-modal');

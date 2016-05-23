@@ -40,6 +40,7 @@ imports:
 
     - suites/ui/addressing/managing_countries.yml
     - suites/ui/addressing/managing_zones.yml
+    - suites/ui/cart/shopping_cart.yml
     - suites/ui/channel/managing_channels.yml
     - suites/ui/channel/products_accessibility_in_multiple_channels.yml
     - suites/ui/channel/theming.yml
@@ -50,6 +51,7 @@ imports:
     - suites/ui/product/managing_products.yml
     - suites/ui/product/managing_product_attributes.yml
     - suites/ui/product/managing_product_options.yml
+    - suites/ui/product/viewing_products.yml
     - suites/ui/promotion/applying_promotion_rules.yml
     - suites/ui/promotion/managing_promotions.yml
     - suites/ui/promotion/managing_promotion_coupons.yml

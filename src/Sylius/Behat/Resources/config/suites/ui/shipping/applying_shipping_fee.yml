@@ -25,7 +25,7 @@ default:
                 - sylius.behat.context.setup.taxation
                 - sylius.behat.context.setup.zone
 
-                - sylius.behat.context.ui.cart
+                - sylius.behat.context.ui.shop.cart
                 - sylius.behat.context.ui.checkout
             filters:
                 tags: "@applying_shipping_fee && @ui"

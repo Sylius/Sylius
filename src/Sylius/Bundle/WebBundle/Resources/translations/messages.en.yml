@@ -554,6 +554,7 @@ sylius:
         provinces: Provinces
         qty_max: 'Qty max'
         qty_min: 'Qty min'
+        quantity: 'Quantity'
         rating: Rating
         recent_customers: 'Recent customers'
         recent_orders: 'Recent orders'
@@ -707,6 +708,7 @@ sylius:
         users_list_of_all_users_registered_in_store: 'Users <small>List of all users registered in store</small>'
         values: Values
         variant_selection_method: 'Variant selection method'
+        variant: Variants
         variants: Variants
         view: View
         view_more: 'View more'
