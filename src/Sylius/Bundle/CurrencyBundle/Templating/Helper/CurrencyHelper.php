@@ -15,6 +15,7 @@ use Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatterInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
 use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
+use Sylius\Component\Locale\Context\LocaleContext;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\Templating\Helper\Helper;
 
@@ -44,6 +45,11 @@ class CurrencyHelper extends Helper implements CurrencyHelperInterface
     private $currencyProvider;
 
     /**
+     * @var LocaleContext
+     */
+    private $localeContext;
+
+    /**
      * @param CurrencyContextInterface $currencyContext
      * @param CurrencyConverterInterface $converter
      * @param MoneyFormatterInterface $moneyFormatter
@@ -53,12 +59,14 @@ class CurrencyHelper extends Helper implements CurrencyHelperInterface
         CurrencyContextInterface $currencyContext,
         CurrencyConverterInterface $converter,
         MoneyFormatterInterface $moneyFormatter,
-        CurrencyProviderInterface $currencyProvider
+        CurrencyProviderInterface $currencyProvider,
+        LocaleContext $localeContext
     ) {
         $this->currencyContext = $currencyContext;
         $this->currencyConverter = $converter;
         $this->moneyFormatter = $moneyFormatter;
         $this->currencyProvider = $currencyProvider;
+        $this->localeContext = $localeContext;
     }
 
     /**
@@ -78,8 +86,9 @@ class CurrencyHelper extends Helper implements CurrencyHelperInterface
     {
         $currency = $currency ?: $this->currencyContext->getCurrency();
         $amount = $this->currencyConverter->convertFromBase($amount, $currency);
+        $locale = $this->localeContext->getCurrentLocale();
 
-        return $this->moneyFormatter->format($amount, $currency);
+        return $this->moneyFormatter->format($amount, $currency, $locale);
     }
 
     /**

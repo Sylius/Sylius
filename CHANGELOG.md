@@ -1,6 +1,7 @@
 ## CHANGELOG
 
 ### v0.18.0 2016-05-20
+- [#5089](https://github.com/Sylius/Sylius/pull/5089) Fix missing locale management in currency (@jon92)
 - [#5076](https://github.com/Sylius/Sylius/pull/5076) [Travis] Ensure full suite is always run on branch builds (@pamil)
 - [#5074](https://github.com/Sylius/Sylius/pull/5074) [Metadata] Add hierarchical archetype support to ProductVariant Metadata (@peteward)
 - [#5075](https://github.com/Sylius/Sylius/pull/5075) fix mapped superclass subscribers for overidden resources (@bendavies)
