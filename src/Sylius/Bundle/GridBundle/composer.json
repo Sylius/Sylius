@@ -22,7 +22,7 @@
     "require": {
         "php": "^5.6|^7.0",
 
-        "sylius/grid": "^0.18",
+        "sylius/grid": "^0.19",
 
         "symfony/form": "^2.7",
         "symfony/framework-bundle": "^2.7.7"
@@ -54,7 +54,7 @@
     ],
     "extra": {
         "branch-alias": {
-            "dev-master": "0.18-dev"
+            "dev-master": "0.19-dev"
         }
     }
 }
