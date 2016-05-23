@@ -563,4 +563,28 @@ class RequestConfiguration
 
         return $this->parameters->get('grid');
     }
+
+    /**
+     * @return bool
+     */
+    public function hasStateMachine()
+    {
+        return $this->parameters->has('state_machine');
+    }
+
+    /**
+     * @return string
+     */
+    public function getStateMachineGraph()
+    {
+        return $this->parameters->get('state_machine[graph]', null, true);
+    }
+
+    /**
+     * @return string
+     */
+    public function getStateMachineTransition()
+    {
+        return $this->parameters->get('state_machine[transition]', null, true);
+    }
 }

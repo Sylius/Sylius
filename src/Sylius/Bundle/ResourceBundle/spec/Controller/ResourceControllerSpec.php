@@ -27,6 +27,7 @@ use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceFormFactoryInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ResourcesCollectionProviderInterface;
 use Sylius\Bundle\ResourceBundle\Controller\SingleResourceProviderInterface;
+use Sylius\Bundle\ResourceBundle\Controller\StateMachineInterface;
 use Sylius\Bundle\ResourceBundle\Controller\ViewHandlerInterface;
 use Sylius\Bundle\ResourceBundle\Event\ResourceControllerEvent;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -65,7 +66,8 @@ class ResourceControllerSpec extends ObjectBehavior
         RedirectHandlerInterface $redirectHandler,
         FlashHelperInterface $flashHelper,
         AuthorizationCheckerInterface $authorizationChecker,
-        EventDispatcherInterface $eventDispatcher
+        EventDispatcherInterface $eventDispatcher,
+        StateMachineInterface $stateMachine
     ) {
         $this->beConstructedWith(
             $metadata,
@@ -81,7 +83,8 @@ class ResourceControllerSpec extends ObjectBehavior
             $redirectHandler,
             $flashHelper,
             $authorizationChecker,
-            $eventDispatcher
+            $eventDispatcher,
+            $stateMachine
         );
     }
 
@@ -710,6 +713,7 @@ class ResourceControllerSpec extends ObjectBehavior
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
         $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::UPDATE)->willReturn('sylius.product.update');
+        $configuration->hasStateMachine()->willReturn(false);
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.update')->willReturn(true);
 
@@ -912,6 +916,7 @@ class ResourceControllerSpec extends ObjectBehavior
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
         $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::UPDATE)->willReturn('sylius.product.update');
+        $configuration->hasStateMachine()->willReturn(false);
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.update')->willReturn(true);
 
@@ -966,6 +971,7 @@ class ResourceControllerSpec extends ObjectBehavior
         $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::UPDATE)->willReturn('sylius.product.update');
         $configuration->isHtmlRequest()->willReturn(false);
+        $configuration->hasStateMachine()->willReturn(false);
 
         $authorizationChecker->isGranted($configuration, 'sylius.product.update')->willReturn(true);
 
@@ -1039,6 +1045,63 @@ class ResourceControllerSpec extends ObjectBehavior
             ->shouldThrow(new HttpException(500, 'Cannot update this channel.'))
             ->during('updateAction', [$request])
         ;
+    }
+
+    function it_applies_state_machine_transition_to_updated_resource_if_configured(
+        MetadataInterface $metadata,
+        RequestConfigurationFactoryInterface $requestConfigurationFactory,
+        RequestConfiguration $configuration,
+        AuthorizationCheckerInterface $authorizationChecker,
+        ObjectManager $manager,
+        RepositoryInterface $repository,
+        SingleResourceProviderInterface $singleResourceProvider,
+        StateMachineInterface $stateMachine,
+        ResourceInterface $resource,
+        ResourceFormFactoryInterface $resourceFormFactory,
+        Form $form,
+        EventDispatcherInterface $eventDispatcher,
+        RedirectHandlerInterface $redirectHandler,
+        FlashHelperInterface $flashHelper,
+        ResourceControllerEvent $event,
+        Request $request,
+        Response $redirectResponse
+    ) {
+        $metadata->getApplicationName()->willReturn('sylius');
+        $metadata->getName()->willReturn('product');
+
+        $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->hasPermission()->willReturn(true);
+        $configuration->getPermission(ResourceActions::UPDATE)->willReturn('sylius.product.update');
+        $configuration->hasStateMachine()->willReturn(true);
+
+        $authorizationChecker->isGranted($configuration, 'sylius.product.update')->willReturn(true);
+
+        $configuration->isHtmlRequest()->willReturn(true);
+        $configuration->getTemplate(ResourceActions::UPDATE)->willReturn('SyliusShopBundle:Product:update.html.twig');
+
+        $singleResourceProvider->get($configuration, $repository)->willReturn($resource);
+        $resourceFormFactory->create($configuration, $resource)->willReturn($form);
+
+        $request->isMethod('PATCH')->willReturn(false);
+        $request->getMethod()->willReturn('PUT');
+
+        $form->submit($request, true)->willReturn($form);
+
+        $form->isSubmitted()->willReturn(true);
+        $form->isValid()->willReturn(true);
+        $form->getData()->willReturn($resource);
+
+        $eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($event);
+        $event->isStopped()->willReturn(false);
+
+        $manager->flush()->shouldBeCalled();
+        $stateMachine->apply($configuration, $resource)->shouldBeCalled();
+        $eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource)->shouldBeCalled();
+
+        $flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource)->shouldBeCalled();
+        $redirectHandler->redirectToResource($configuration, $resource)->willReturn($redirectResponse);
+
+        $this->updateAction($request)->shouldReturn($redirectResponse);
     }
 
     function it_throws_a_403_exception_if_user_is_unauthorized_to_delete_a_single_resource(
@@ -1239,6 +1302,222 @@ class ResourceControllerSpec extends ObjectBehavior
         $this
             ->shouldThrow(new HttpException(500, 'Cannot delete this product.'))
             ->during('deleteAction', [$request])
+        ;
+    }
+
+    function it_throws_a_403_exception_if_user_is_unauthorized_to_apply_state_machine_transition_on_resource(
+        MetadataInterface $metadata,
+        RequestConfigurationFactoryInterface $requestConfigurationFactory,
+        RequestConfiguration $configuration,
+        Request $request,
+        AuthorizationCheckerInterface $authorizationChecker
+    ) {
+        $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->hasPermission()->willReturn(true);
+        $configuration->getPermission(ResourceActions::UPDATE)->willReturn('sylius.product.update');
+
+        $authorizationChecker->isGranted($configuration, 'sylius.product.update')->willReturn(false);
+
+        $this
+            ->shouldThrow(new AccessDeniedException())
+            ->during('applyStateMachineTransitionAction', [$request])
+        ;
+    }
+
+    function it_throws_a_404_exception_if_resource_is_not_found_when_trying_to_apply_state_machine_transition(
+        MetadataInterface $metadata,
+        RequestConfigurationFactoryInterface $requestConfigurationFactory,
+        RequestConfiguration $configuration,
+        Request $request,
+        AuthorizationCheckerInterface $authorizationChecker,
+        RepositoryInterface $repository,
+        SingleResourceProviderInterface $singleResourceProvider
+    ) {
+        $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->hasPermission()->willReturn(true);
+        $configuration->getPermission(ResourceActions::UPDATE)->willReturn('sylius.product.update');
+
+        $authorizationChecker->isGranted($configuration, 'sylius.product.update')->willReturn(true);
+        $singleResourceProvider->get($configuration, $repository)->willReturn(null);
+
+        $this
+            ->shouldThrow(new NotFoundHttpException())
+            ->during('applyStateMachineTransitionAction', [$request])
+        ;
+    }
+
+    function it_applies_state_machine_transition_to_resource_and_redirects_for_html_request(
+        MetadataInterface $metadata,
+        RequestConfigurationFactoryInterface $requestConfigurationFactory,
+        RequestConfiguration $configuration,
+        AuthorizationCheckerInterface $authorizationChecker,
+        StateMachineInterface $stateMachine,
+        RepositoryInterface $repository,
+        ObjectManager $manager,
+        SingleResourceProviderInterface $singleResourceProvider,
+        ResourceInterface $resource,
+        RedirectHandlerInterface $redirectHandler,
+        FlashHelperInterface $flashHelper,
+        EventDispatcherInterface $eventDispatcher,
+        ResourceControllerEvent $event,
+        Request $request,
+        Response $redirectResponse
+    ) {
+        $metadata->getApplicationName()->willReturn('sylius');
+        $metadata->getName()->willReturn('product');
+
+        $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->hasPermission()->willReturn(true);
+        $configuration->getPermission(ResourceActions::UPDATE)->willReturn('sylius.product.update');
+
+        $authorizationChecker->isGranted($configuration, 'sylius.product.update')->willReturn(true);
+        $singleResourceProvider->get($configuration, $repository)->willReturn($resource);
+
+        $configuration->isHtmlRequest()->willReturn(true);
+
+        $eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($event);
+        $event->isStopped()->willReturn(false);
+
+        $stateMachine->apply($configuration, $resource)->shouldBeCalled();
+        $manager->flush()->shouldBeCalled();
+
+        $eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource)->shouldBeCalled();
+
+        $flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource)->shouldBeCalled();
+        $redirectHandler->redirectToResource($configuration, $resource)->willReturn($redirectResponse);
+
+        $this->applyStateMachineTransitionAction($request)->shouldReturn($redirectResponse);
+    }
+
+    function it_does_not_apply_state_machine_transition_on_resource_and_redirects_for_html_requests_stopped_via_event(
+        MetadataInterface $metadata,
+        RequestConfigurationFactoryInterface $requestConfigurationFactory,
+        RequestConfiguration $configuration,
+        AuthorizationCheckerInterface $authorizationChecker,
+        StateMachineInterface $stateMachine,
+        ObjectManager $manager,
+        RepositoryInterface $repository,
+        SingleResourceProviderInterface $singleResourceProvider,
+        ResourceInterface $resource,
+        RedirectHandlerInterface $redirectHandler,
+        FlashHelperInterface $flashHelper,
+        EventDispatcherInterface $eventDispatcher,
+        ResourceControllerEvent $event,
+        Request $request,
+        Response $redirectResponse
+    ) {
+        $metadata->getApplicationName()->willReturn('sylius');
+        $metadata->getName()->willReturn('product');
+
+        $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->hasPermission()->willReturn(true);
+        $configuration->getPermission(ResourceActions::UPDATE)->willReturn('sylius.product.update');
+
+        $authorizationChecker->isGranted($configuration, 'sylius.product.update')->willReturn(true);
+        $singleResourceProvider->get($configuration, $repository)->willReturn($resource);
+
+        $configuration->isHtmlRequest()->willReturn(true);
+
+        $eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($event);
+        $event->isStopped()->willReturn(true);
+
+        $manager->flush()->shouldNotBeCalled();
+        $stateMachine->apply($resource)->shouldNotBeCalled();
+
+        $eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource)->shouldNotBeCalled();
+        $flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource)->shouldNotBeCalled();
+
+        $flashHelper->addFlashFromEvent($configuration, $event)->shouldBeCalled();
+        $redirectHandler->redirectToResource($configuration, $resource)->willReturn($redirectResponse);
+
+        $this->applyStateMachineTransitionAction($request)->shouldReturn($redirectResponse);
+    }
+
+    function it_applies_state_machine_transition_on_resource_and_returns_200_for_non_html_requests(
+        MetadataInterface $metadata,
+        RequestConfigurationFactoryInterface $requestConfigurationFactory,
+        RequestConfiguration $configuration,
+        AuthorizationCheckerInterface $authorizationChecker,
+        ViewHandlerInterface $viewHandler,
+        StateMachineInterface $stateMachine,
+        ObjectManager $manager,
+        RepositoryInterface $repository,
+        SingleResourceProviderInterface $singleResourceProvider,
+        ResourceInterface $resource,
+        EventDispatcherInterface $eventDispatcher,
+        ResourceControllerEvent $event,
+        Request $request,
+        Response $response
+    ) {
+        $metadata->getApplicationName()->willReturn('sylius');
+        $metadata->getName()->willReturn('product');
+
+        $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->hasPermission()->willReturn(true);
+        $configuration->getPermission(ResourceActions::UPDATE)->willReturn('sylius.product.update');
+
+        $authorizationChecker->isGranted($configuration, 'sylius.product.update')->willReturn(true);
+        $singleResourceProvider->get($configuration, $repository)->willReturn($resource);
+
+        $configuration->isHtmlRequest()->willReturn(false);
+
+        $eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($event);
+        $event->isStopped()->willReturn(false);
+
+        $stateMachine->apply($configuration, $resource)->shouldBeCalled();
+        $manager->flush()->shouldBeCalled();
+
+        $eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource)->shouldBeCalled();
+
+        $expectedView = View::create($resource, 200);
+
+        $viewHandler->handle($configuration, Argument::that($this->getViewComparingCallback($expectedView)))->willReturn($response);
+
+        $this->applyStateMachineTransitionAction($request)->shouldReturn($response);
+    }
+
+    function it_does_not_apply_state_machine_transition_resource_and_throws_http_exception_for_non_html_requests_stopped_via_event(
+        MetadataInterface $metadata,
+        RequestConfigurationFactoryInterface $requestConfigurationFactory,
+        RequestConfiguration $configuration,
+        AuthorizationCheckerInterface $authorizationChecker,
+        RepositoryInterface $repository,
+        ObjectManager $objectManager,
+        StateMachineInterface $stateMachine,
+        SingleResourceProviderInterface $singleResourceProvider,
+        ResourceInterface $resource,
+        FlashHelperInterface $flashHelper,
+        EventDispatcherInterface $eventDispatcher,
+        ResourceControllerEvent $event,
+        Request $request
+    ) {
+        $metadata->getApplicationName()->willReturn('sylius');
+        $metadata->getName()->willReturn('product');
+
+        $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->hasPermission()->willReturn(true);
+        $configuration->getPermission(ResourceActions::UPDATE)->willReturn('sylius.product.update');
+
+        $authorizationChecker->isGranted($configuration, 'sylius.product.update')->willReturn(true);
+        $singleResourceProvider->get($configuration, $repository)->willReturn($resource);
+
+        $configuration->isHtmlRequest()->willReturn(false);
+
+        $eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($event);
+        $event->isStopped()->willReturn(true);
+        $event->getMessage()->willReturn('Cannot approve this product.');
+        $event->getErrorCode()->willReturn(500);
+
+        $stateMachine->apply($configuration, $resource)->shouldNotBeCalled();
+        $objectManager->flush()->shouldNotBeCalled();
+
+        $eventDispatcher->dispatchPostEvent(Argument::any())->shouldNotBeCalled();
+        $flashHelper->addSuccessFlash(Argument::any())->shouldNotBeCalled();
+        $flashHelper->addFlashFromEvent(Argument::any())->shouldNotBeCalled();
+
+        $this
+            ->shouldThrow(new HttpException(500, 'Cannot approve this product.'))
+            ->during('applyStateMachineTransitionAction', [$request])
         ;
     }
 

@@ -35,7 +35,8 @@
         "symfony/framework-bundle": "^2.7.7",
         "symfony/twig-bundle": "^2.7",
         "white-october/pagerfanta-bundle": "^1.0",
-        "willdurand/hateoas-bundle": "^0.4|^1.0"
+        "willdurand/hateoas-bundle": "^0.4|^1.0",
+        "winzou/state-machine-bundle": "^0.2"
     },
     "require-dev": {
         "akeneo/phpspec-skip-example-extension": "~1.2",

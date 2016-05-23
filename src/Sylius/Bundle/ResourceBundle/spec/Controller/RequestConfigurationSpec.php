@@ -514,4 +514,18 @@ class RequestConfigurationSpec extends ObjectBehavior
             ->during('getGrid')
         ;
     }
+    
+    function it_can_have_state_machine_transition(Parameters $parameters)
+    {
+        $parameters->has('state_machine')->willReturn(false);
+        $this->hasStateMachine()->shouldReturn(false);
+       
+        $parameters->has('state_machine')->willReturn(true);
+        $parameters->get('state_machine[graph]', null, true)->willReturn('sylius_product_review_state');
+        $parameters->get('state_machine[transition]', null, true)->willReturn('approve');
+
+        $this->hasStateMachine()->shouldReturn(true);
+        $this->getStateMachineGraph()->shouldReturn('sylius_product_review_state');
+        $this->getStateMachineTransition()->shouldReturn('approve');
+    }
 }
