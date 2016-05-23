@@ -24,6 +24,8 @@ interface CouponGeneratorInterface
     /**
      * @param PromotionInterface $promotion
      * @param InstructionInterface $instruction
+     * 
+     * @return array of generated coupons with coupon code as a key
      */
     public function generate(PromotionInterface $promotion, InstructionInterface $instruction);
 }

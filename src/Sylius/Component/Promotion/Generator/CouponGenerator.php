@@ -45,11 +45,6 @@ class CouponGenerator implements CouponGeneratorInterface
     protected $generationPolicy;
 
     /**
-     * @var CouponInterface[]
-     */
-    protected $generatedCoupons = [];
-
-    /**
      * @param FactoryInterface $couponFactory
      * @param CouponRepositoryInterface $couponRepository
      * @param ObjectManager $objectManager
@@ -72,53 +67,54 @@ class CouponGenerator implements CouponGeneratorInterface
      */
     public function generate(PromotionInterface $promotion, InstructionInterface $instruction)
     {
-        $this->generatedCoupons = [];
+        $generatedCoupons = [];
 
         $this->assertGenerationIsPossible($instruction);
         for ($i = 0, $amount = $instruction->getAmount(); $i < $amount; ++$i) {
-            $code = $this->generateUniqueCode($instruction->getCodeLength());
+            $code = $this->generateUniqueCode($instruction->getCodeLength(), $generatedCoupons);
             $coupon = $this->couponFactory->createNew();
             $coupon->setPromotion($promotion);
             $coupon->setCode($code);
             $coupon->setUsageLimit($instruction->getUsageLimit());
             $coupon->setExpiresAt($instruction->getExpiresAt());
 
-            $this->generatedCoupons[$code] = true;
+            $generatedCoupons[$code] = $coupon;
 
             $this->objectManager->persist($coupon);
         }
 
         $this->objectManager->flush();
 
-        return $this->generatedCoupons;
+        return $generatedCoupons;
     }
-
 
     /**
      * @param int $codeLength
+     * @param array $generatedCoupons
      *
      * @return string
      */
-    protected function generateUniqueCode($codeLength)
+    protected function generateUniqueCode($codeLength, array $generatedCoupons)
     {
         Assert::nullOrRange($codeLength, 1, 40, 'Invalid %d code length should be between %d and %d');
 
         do {
             $hash = sha1(microtime(true));
             $code = strtoupper(substr($hash, 0, $codeLength));
-        } while ($this->isUsedCode($code));
+        } while ($this->isUsedCode($code, $generatedCoupons));
 
         return $code;
     }
 
     /**
      * @param string $code
+     * @param array $generatedCoupons
      *
      * @return bool
      */
-    protected function isUsedCode($code)
+    protected function isUsedCode($code, array $generatedCoupons)
     {
-        if (isset($this->generatedCoupons[$code])) {
+        if (isset($generatedCoupons[$code])) {
             return true;
         }
 
