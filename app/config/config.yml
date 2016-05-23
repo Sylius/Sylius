@@ -5,9 +5,9 @@ imports:
     - { resource: "parameters.yml" }
     - { resource: "security.yml" }
 
-    - { resource: "@SyliusCoreBundle/Resources/config/config.yml" }
-    - { resource: "@SyliusWebBundle/Resources/config/config.yml" }
-    - { resource: "@SyliusAdminBundle/Resources/config/config.yml" }
+    - { resource: "@SyliusCoreBundle/Resources/config/app/config.yml" }
+    - { resource: "@SyliusWebBundle/Resources/config/app/config.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/app/config.yml" }
 
 framework:
     translator: { fallback: "%locale%" }

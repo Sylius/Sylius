@@ -1,0 +1,12 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+imports:
+    - { resource: "state_machine.yml" }
+
+jms_serializer:
+    metadata:
+        directories:
+            sylius-inventory:
+                namespace_prefix: "Sylius\\Component\\Inventory"
+                path: "@SyliusInventoryBundle/Resources/config/serializer"

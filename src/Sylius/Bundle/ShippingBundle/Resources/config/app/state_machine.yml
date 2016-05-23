@@ -1,13 +1,6 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-jms_serializer:
-    metadata:
-        directories:
-            sylius-shipping:
-                namespace_prefix: "Sylius\\Component\\Shipping"
-                path: "@SyliusShippingBundle/Resources/config/serializer"
-
 winzou_state_machine:
     sylius_shipment:
         class: "%sylius.model.shipment.class%"
