@@ -114,6 +114,16 @@ final class CustomerContext implements Context
     }
 
     /**
+     * @Given there is a customer account :name with email :email identified by :password
+     */
+    public function theStoreHasCustomerAccountWithEmailAndPassword($name, $email, $password)
+    {
+        $names = explode(' ', $name);
+        
+        $this->createCustomerWithUserAccount($email, $password, true, $names[0], $names[1]);
+    }
+
+    /**
      * @param string $email
      * @param string $firstName
      * @param string $lastName
@@ -134,14 +144,21 @@ final class CustomerContext implements Context
      * @param string $email
      * @param string $password
      * @param bool $enabled
+     * @param string $firstName
+     * @param string $lastName
      */
-    private function createCustomerWithUserAccount($email, $password, $enabled = true)
-    {
+    private function createCustomerWithUserAccount(
+        $email,
+        $password,
+        $enabled = true,
+        $firstName = self::DEFAULT_CUSTOMER_FIRST_NAME,
+        $lastName = self::DEFAULT_CUSTOMER_LAST_NAME
+    ) {
         $user = $this->userFactory->createNew();
         $customer = $this->customerFactory->createNew();
 
-        $customer->setFirstname(self::DEFAULT_CUSTOMER_FIRST_NAME);
-        $customer->setLastname(self::DEFAULT_CUSTOMER_LAST_NAME);
+        $customer->setFirstname($firstName);
+        $customer->setLastname($lastName);
         $customer->setEmail($email);
 
         $user->setUsername($email);

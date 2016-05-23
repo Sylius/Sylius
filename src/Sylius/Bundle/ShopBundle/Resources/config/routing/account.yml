@@ -1,0 +1,20 @@
+# This file is a part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_shop_account_dashboard:
+    path: /
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.customer:showProfileAction
+        _sylius:
+            template: SyliusShopBundle:Account:dashboard.html.twig
+
+sylius_shop_account_profile_update:
+    path: /profile/edit
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.customer:updateProfileAction
+        _sylius:
+            template: SyliusShopBundle:Account:updateProfile.html.twig
+            form: sylius_customer_profile
+            redirect: sylius_shop_account_dashboard

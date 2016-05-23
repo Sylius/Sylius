@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="sylius.behat.page.class">Sylius\Behat\Page\Page</parameter>
+
+        <parameter key="sylius.behat.page.admin.crud.index.class">Sylius\Behat\Page\Admin\Crud\IndexPage</parameter>
+        <parameter key="sylius.behat.page.admin.crud.create.class">Sylius\Behat\Page\Admin\Crud\CreatePage</parameter>
+        <parameter key="sylius.behat.page.admin.crud.update.class">Sylius\Behat\Page\Admin\Crud\UpdatePage</parameter>
+
+        <parameter key="sylius.behat.page.shop.account.dashboard.class">Sylius\Behat\Page\Shop\Account\DashboardPage</parameter>
+        <parameter key="sylius.behat.page.shop.account.profile_update.class">Sylius\Behat\Page\Shop\Account\ProfileUpdatePage</parameter>
+        <parameter key="sylius.behat.page.shop.cart.cart_summary.class">Sylius\Behat\Page\Shop\Cart\SummaryPage</parameter>
+        <parameter key="sylius.behat.page.shop.checkout.addressing_step.class">Sylius\Behat\Page\Shop\Checkout\AddressingStep</parameter>
+        <parameter key="sylius.behat.page.shop.checkout.finalize_step.class">Sylius\Behat\Page\Shop\Checkout\FinalizeStep</parameter>
+        <parameter key="sylius.behat.page.shop.checkout.payment_step.class">Sylius\Behat\Page\Shop\Checkout\PaymentStep</parameter>
+        <parameter key="sylius.behat.page.shop.checkout.security_step.class">Sylius\Behat\Page\Shop\Checkout\SecurityStep</parameter>
+        <parameter key="sylius.behat.page.shop.checkout.shipping_step.class">Sylius\Behat\Page\Shop\Checkout\ShippingStep</parameter>
+        <parameter key="sylius.behat.page.shop.checkout.thank_you.class">Sylius\Behat\Page\Shop\Checkout\ThankYouPage</parameter>
+        <parameter key="sylius.behat.page.shop.home.class">Sylius\Behat\Page\Shop\HomePage</parameter>
+        <parameter key="sylius.behat.page.shop.order.order_payments.class">Sylius\Behat\Page\Shop\Order\OrderPaymentsPage</parameter>
+        <parameter key="sylius.behat.page.shop.product.show.class">Sylius\Behat\Page\Shop\Product\ShowPage</parameter>
+        <parameter key="sylius.behat.page.shop.user.login.class">Sylius\Behat\Page\Shop\User\LoginPage</parameter>
+        <parameter key="sylius.behat.page.shop.user.register.class">Sylius\Behat\Page\Shop\User\RegisterPage</parameter>
+
+        <parameter key="sylius.behat.page.external.paypal_checkout_express.class">Sylius\Behat\Page\External\PaypalExpressCheckoutPage</parameter>
+
+        <parameter key="sylius.behat.page.admin.channel.create.class">Sylius\Behat\Page\Admin\Channel\CreatePage</parameter>
+        <parameter key="sylius.behat.page.admin.channel.update.class">Sylius\Behat\Page\Admin\Channel\UpdatePage</parameter>
+        <parameter key="sylius.behat.page.admin.channel.index.class">Sylius\Behat\Page\Admin\Channel\IndexPage</parameter>
+        <parameter key="sylius.behat.page.admin.country.create.class">Sylius\Behat\Page\Admin\Country\CreatePage</parameter>
+        <parameter key="sylius.behat.page.admin.country.index.class">Sylius\Behat\Page\Admin\Country\IndexPage</parameter>
+        <parameter key="sylius.behat.page.admin.country.update.class">Sylius\Behat\Page\Admin\Country\UpdatePage</parameter>
+        <parameter key="sylius.behat.page.admin.currency.create.class">Sylius\Behat\Page\Admin\Currency\CreatePage</parameter>
+        <parameter key="sylius.behat.page.admin.currency.index.class">Sylius\Behat\Page\Admin\Currency\IndexPage</parameter>
+        <parameter key="sylius.behat.page.admin.currency.update.class">Sylius\Behat\Page\Admin\Currency\UpdatePage</parameter>
+        <parameter key="sylius.behat.page.admin.customer.create.class">Sylius\Behat\Page\Admin\Customer\CreatePage</parameter>
+        <parameter key="sylius.behat.page.admin.customer.index.class">Sylius\Behat\Page\Admin\Customer\IndexPage</parameter>
+        <parameter key="sylius.behat.page.admin.customer.update.class">Sylius\Behat\Page\Admin\Customer\UpdatePage</parameter>
+        <parameter key="sylius.behat.page.admin.customer.show.class">Sylius\Behat\Page\Admin\Customer\ShowPage</parameter>
+        <parameter key="sylius.behat.page.admin.locale.create.class">Sylius\Behat\Page\Admin\Locale\CreatePage</parameter>
+        <parameter key="sylius.behat.page.admin.locale.index.class">Sylius\Behat\Page\Admin\Locale\IndexPage</parameter>
+        <parameter key="sylius.behat.page.admin.locale.update.class">Sylius\Behat\Page\Admin\Locale\UpdatePage</parameter>
+        <parameter key="sylius.behat.page.admin.payment_method.create.class">Sylius\Behat\Page\Admin\PaymentMethod\CreatePage</parameter>
+        <parameter key="sylius.behat.page.admin.payment_method.index.class">%sylius.behat.page.admin.crud.index.class%</parameter>
+        <parameter key="sylius.behat.page.admin.payment_method.update.class">Sylius\Behat\Page\Admin\PaymentMethod\UpdatePage</parameter>
+        <parameter key="sylius.behat.page.admin.product.show.class">Sylius\Behat\Page\Admin\Product\ShowPage</parameter>
+        <parameter key="sylius.behat.page.admin.product.index.class">Sylius\Behat\Page\Admin\Product\IndexPage</parameter>
+        <parameter key="sylius.behat.page.admin.product_attribute.create.class">Sylius\Behat\Page\Admin\ProductAttribute\CreatePage</parameter>
+        <parameter key="sylius.behat.page.admin.product_attribute.index.class">%sylius.behat.page.admin.crud.index.class%</parameter>
+        <parameter key="sylius.behat.page.admin.product_attribute.update.class">Sylius\Behat\Page\Admin\ProductAttribute\UpdatePage</parameter>
+        <parameter key="sylius.behat.page.admin.product_option.create.class">Sylius\Behat\Page\Admin\ProductOption\CreatePage</parameter>
+        <parameter key="sylius.behat.page.admin.product_option.update.class">Sylius\Behat\Page\Admin\ProductOption\UpdatePage</parameter>
+        <parameter key="sylius.behat.page.admin.product_option.index.class">%sylius.behat.page.admin.crud.index.class%</parameter>
+        <parameter key="sylius.behat.page.admin.promotion.create.class">Sylius\Behat\Page\Admin\Promotion\CreatePage</parameter>
+        <parameter key="sylius.behat.page.admin.promotion.update.class">Sylius\Behat\Page\Admin\Promotion\UpdatePage</parameter>
+        <parameter key="sylius.behat.page.admin.promotion.index.class">Sylius\Behat\Page\Admin\Promotion\IndexPage</parameter>
+        <parameter key="sylius.behat.page.admin.promotion_coupon.create.class">Sylius\Behat\Page\Admin\PromotionCoupon\CreatePage</parameter>
+        <parameter key="sylius.behat.page.admin.promotion_coupon.generate.class">Sylius\Behat\Page\Admin\PromotionCoupon\GeneratePage</parameter>
+        <parameter key="sylius.behat.page.admin.promotion_coupon.index.class">%sylius.behat.page.admin.crud.index.class%</parameter>
+        <parameter key="sylius.behat.page.admin.promotion_coupon.update.class">Sylius\Behat\Page\Admin\PromotionCoupon\UpdatePage</parameter>
+        <parameter key="sylius.behat.page.admin.shipping_method.create.class">Sylius\Behat\Page\Admin\ShippingMethod\CreatePage</parameter>
+        <parameter key="sylius.behat.page.admin.shipping_method.index.class">%sylius.behat.page.admin.crud.index.class%</parameter>
+        <parameter key="sylius.behat.page.admin.shipping_method.update.class">Sylius\Behat\Page\Admin\ShippingMethod\UpdatePage</parameter>
+        <parameter key="sylius.behat.page.admin.taxon.create.class">Sylius\Behat\Page\Admin\Taxon\CreatePage</parameter>
+        <parameter key="sylius.behat.page.admin.taxon.update.class">Sylius\Behat\Page\Admin\Taxon\UpdatePage</parameter>
+        <parameter key="sylius.behat.page.admin.tax_category.create.class">Sylius\Behat\Page\Admin\TaxCategory\CreatePage</parameter>
+        <parameter key="sylius.behat.page.admin.tax_category.index.class">%sylius.behat.page.admin.crud.index.class%</parameter>
+        <parameter key="sylius.behat.page.admin.tax_category.update.class">Sylius\Behat\Page\Admin\TaxCategory\UpdatePage</parameter>
+        <parameter key="sylius.behat.page.admin.tax_rate.create.class">Sylius\Behat\Page\Admin\TaxRate\CreatePage</parameter>
+        <parameter key="sylius.behat.page.admin.tax_rate.index.class">%sylius.behat.page.admin.crud.index.class%</parameter>
+        <parameter key="sylius.behat.page.admin.tax_rate.update.class">Sylius\Behat\Page\Admin\TaxRate\UpdatePage</parameter>
+        <parameter key="sylius.behat.page.admin.zone.create.class">Sylius\Behat\Page\Admin\Zone\CreatePage</parameter>
+        <parameter key="sylius.behat.page.admin.zone.index.class">%sylius.behat.page.admin.crud.index.class%</parameter>
+        <parameter key="sylius.behat.page.admin.zone.update.class">Sylius\Behat\Page\Admin\Zone\UpdatePage</parameter>
+        <parameter key="sylius.behat.page.admin.order.index.class">%sylius.behat.page.admin.crud.index.class%</parameter>
+        <parameter key="sylius.behat.page.admin.order.show.class">Sylius\Behat\Page\Admin\Order\ShowPage</parameter>
+
+        <parameter key="sylius.behat.symfony_page.class">Sylius\Behat\Page\SymfonyPage</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.behat.page" class="%sylius.behat.page.class%" abstract="true" scope="scenario" public="false">
+            <argument type="service" id="mink.default_session" />
+            <argument>%mink.parameters%</argument>
+        </service>
+
+        <service id="sylius.behat.page.admin.crud.index" class="%sylius.behat.page.admin.crud.index.class%" parent="sylius.behat.symfony_page" abstract="true" scope="scenario" public="false">
+            <argument type="service" id="sylius.behat.table_accessor" />
+        </service>
+        <service id="sylius.behat.page.admin.crud.create" class="%sylius.behat.page.admin.crud.create.class%" parent="sylius.behat.symfony_page" abstract="true" scope="scenario" public="false" />
+        <service id="sylius.behat.page.admin.crud.update" class="%sylius.behat.page.admin.crud.update.class%" parent="sylius.behat.symfony_page" abstract="true" scope="scenario" public="false" />
+
+        <service id="sylius.behat.page.admin.channel.create" class="%sylius.behat.page.admin.channel.create.class%" parent="sylius.behat.page.admin.crud.create" scope="scenario" public="false">
+            <argument type="string">channel</argument>
+        </service>
+        <service id="sylius.behat.page.admin.channel.index" class="%sylius.behat.page.admin.channel.index.class%" parent="sylius.behat.page.admin.crud.index" scope="scenario" public="false">
+            <argument type="string">channel</argument>
+        </service>
+        <service id="sylius.behat.page.admin.channel.update" class="%sylius.behat.page.admin.channel.update.class%" parent="sylius.behat.page.admin.crud.update" scope="scenario" public="false">
+            <argument type="string">channel</argument>
+        </service>
+        <service id="sylius.behat.page.admin.product_show" class="%sylius.behat.page.admin.product.show.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
+        <service id="sylius.behat.page.admin.product_index" class="%sylius.behat.page.admin.product.index.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false">
+            <argument type="service" id="sylius.behat.table_accessor" />
+        </service>
+        <service id="sylius.behat.page.admin.country.index" class="%sylius.behat.page.admin.country.index.class%" parent="sylius.behat.page.admin.crud.index" scope="scenario" public="false">
+            <argument type="string">country</argument>
+        </service>
+        <service id="sylius.behat.page.admin.country.create" class="%sylius.behat.page.admin.country.create.class%" parent="sylius.behat.page.admin.crud.create" scope="scenario" public="false">
+            <argument type="string">country</argument>
+        </service>
+        <service id="sylius.behat.page.admin.country.update" class="%sylius.behat.page.admin.country.update.class%" parent="sylius.behat.page.admin.crud.update" scope="scenario" public="false">
+            <argument type="string">country</argument>
+        </service>
+        <service id="sylius.behat.page.admin.currency.create" class="%sylius.behat.page.admin.currency.create.class%" parent="sylius.behat.page.admin.crud.create" scope="scenario" public="false">
+            <argument type="string">currency</argument>
+        </service>
+        <service id="sylius.behat.page.admin.currency.index" class="%sylius.behat.page.admin.currency.index.class%" parent="sylius.behat.page.admin.crud.index" scope="scenario" public="false">
+            <argument type="string">currency</argument>
+        </service>
+        <service id="sylius.behat.page.admin.currency.update" class="%sylius.behat.page.admin.currency.update.class%" parent="sylius.behat.page.admin.crud.update" scope="scenario" public="false">
+            <argument type="string">currency</argument>
+        </service>
+        <service id="sylius.behat.page.admin.customer.create" class="%sylius.behat.page.admin.customer.create.class%" parent="sylius.behat.page.admin.crud.create" scope="scenario" public="false">
+            <argument type="string">customer</argument>
+        </service>
+        <service id="sylius.behat.page.admin.customer.index" class="%sylius.behat.page.admin.customer.index.class%" parent="sylius.behat.page.admin.crud.index" scope="scenario" public="false">
+            <argument type="string">customer</argument>
+        </service>
+        <service id="sylius.behat.page.admin.customer.update" class="%sylius.behat.page.admin.customer.update.class%" parent="sylius.behat.page.admin.crud.update" scope="scenario" public="false">
+            <argument type="string">customer</argument>
+        </service>
+        <service id="sylius.behat.page.admin.customer.show" class="%sylius.behat.page.admin.customer.show.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
+        <service id="sylius.behat.page.admin.locale.create" class="%sylius.behat.page.admin.locale.create.class%" parent="sylius.behat.page.admin.crud.create" scope="scenario" public="false">
+            <argument type="string">locale</argument>
+        </service>
+        <service id="sylius.behat.page.admin.locale.index" class="%sylius.behat.page.admin.locale.index.class%" parent="sylius.behat.page.admin.crud.index" scope="scenario" public="false">
+            <argument type="string">locale</argument>
+        </service>
+        <service id="sylius.behat.page.admin.locale.update" class="%sylius.behat.page.admin.locale.update.class%" parent="sylius.behat.page.admin.crud.update" scope="scenario" public="false">
+            <argument type="string">locale</argument>
+        </service>
+        <service id="sylius.behat.page.admin.order.index" class="%sylius.behat.page.admin.order.index.class%" parent="sylius.behat.page.admin.crud.index" scope="scenario" public="false">
+            <argument type="string">order</argument>
+        </service>
+        <service id="sylius.behat.page.admin.order.show" class="%sylius.behat.page.admin.order.show.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false">
+            <argument type="service" id="sylius.behat.table_accessor" />
+        </service>
+        <service id="sylius.behat.page.admin.payment_method.create" class="%sylius.behat.page.admin.payment_method.create.class%" parent="sylius.behat.page.admin.crud.create" scope="scenario" public="false">
+            <argument type="string">payment_method</argument>
+        </service>
+        <service id="sylius.behat.page.admin.payment_method.index" class="%sylius.behat.page.admin.payment_method.index.class%" parent="sylius.behat.page.admin.crud.index" scope="scenario" public="false">
+            <argument type="string">payment_method</argument>
+        </service>
+        <service id="sylius.behat.page.admin.payment_method.update" class="%sylius.behat.page.admin.payment_method.update.class%" parent="sylius.behat.page.admin.crud.update" scope="scenario" public="false">
+            <argument type="string">payment_method</argument>
+        </service>
+        <service id="sylius.behat.page.admin.product_attribute.create" class="%sylius.behat.page.admin.product_attribute.create.class%" parent="sylius.behat.page.admin.crud.create" scope="scenario" public="false">
+            <argument type="string">product_attribute</argument>
+        </service>
+        <service id="sylius.behat.page.admin.product_attribute.index" class="%sylius.behat.page.admin.product_attribute.index.class%" parent="sylius.behat.page.admin.crud.index" scope="scenario" public="false">
+            <argument type="string">product_attribute</argument>
+        </service>
+        <service id="sylius.behat.page.admin.product_attribute.update" class="%sylius.behat.page.admin.product_attribute.update.class%" parent="sylius.behat.page.admin.crud.update" scope="scenario" public="false">
+            <argument type="string">product_attribute</argument>
+        </service>
+        <service id="sylius.behat.page.admin.product_option.create" class="%sylius.behat.page.admin.product_option.create.class%" parent="sylius.behat.page.admin.crud.create" scope="scenario" public="false">
+            <argument type="string">product_option</argument>
+        </service>
+        <service id="sylius.behat.page.admin.product_option.update" class="%sylius.behat.page.admin.product_option.update.class%" parent="sylius.behat.page.admin.crud.update" scope="scenario" public="false">
+            <argument type="string">product_option</argument>
+        </service>
+        <service id="sylius.behat.page.admin.product_option.index" class="%sylius.behat.page.admin.product_option.index.class%" parent="sylius.behat.page.admin.crud.index" scope="scenario" public="false">
+            <argument type="string">product_option</argument>
+        </service>
+        <service id="sylius.behat.page.admin.promotion.create" class="%sylius.behat.page.admin.promotion.create.class%" parent="sylius.behat.page.admin.crud.create" scope="scenario" public="false">
+            <argument type="string">promotion</argument>
+        </service>
+        <service id="sylius.behat.page.admin.promotion.update" class="%sylius.behat.page.admin.promotion.update.class%" parent="sylius.behat.page.admin.crud.update" scope="scenario" public="false">
+            <argument type="string">promotion</argument>
+        </service>
+        <service id="sylius.behat.page.admin.promotion.index" class="%sylius.behat.page.admin.promotion.index.class%" parent="sylius.behat.page.admin.crud.index" scope="scenario" public="false">
+            <argument type="string">promotion</argument>
+        </service>
+        <service id="sylius.behat.page.admin.promotion_coupon.create" class="%sylius.behat.page.admin.promotion_coupon.create.class%" parent="sylius.behat.page.admin.crud.create" scope="scenario" public="false">
+            <argument type="string">promotion_coupon</argument>
+        </service>
+        <service id="sylius.behat.page.admin.promotion_coupon.generate" class="%sylius.behat.page.admin.promotion_coupon.generate.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
+        <service id="sylius.behat.page.admin.promotion_coupon.index" class="%sylius.behat.page.admin.promotion_coupon.index.class%" parent="sylius.behat.page.admin.crud.index" scope="scenario" public="false">
+            <argument type="string">promotion_coupon</argument>
+        </service>
+        <service id="sylius.behat.page.admin.promotion_coupon.update" class="%sylius.behat.page.admin.promotion_coupon.update.class%" parent="sylius.behat.page.admin.crud.update" scope="scenario" public="false">
+            <argument type="string">promotion_coupon</argument>
+        </service>
+        <service id="sylius.behat.page.admin.shipping_method.create" class="%sylius.behat.page.admin.shipping_method.create.class%" parent="sylius.behat.page.admin.crud.create" scope="scenario" public="false">
+            <argument type="string">shipping_method</argument>
+        </service>
+        <service id="sylius.behat.page.admin.shipping_method.index" class="%sylius.behat.page.admin.shipping_method.index.class%" parent="sylius.behat.page.admin.crud.index" scope="scenario" public="false">
+            <argument type="string">shipping_method</argument>
+        </service>
+        <service id="sylius.behat.page.admin.shipping_method.update" class="%sylius.behat.page.admin.shipping_method.update.class%" parent="sylius.behat.page.admin.crud.update" scope="scenario" public="false">
+            <argument type="string">shipping_method</argument>
+        </service>
+        <service id="sylius.behat.page.admin.taxon.create" class="%sylius.behat.page.admin.taxon.create.class%" parent="sylius.behat.page.admin.crud.create" scope="scenario" public="false">
+            <argument type="string">taxon</argument>
+        </service>
+        <service id="sylius.behat.page.admin.taxon.update" class="%sylius.behat.page.admin.taxon.update.class%" parent="sylius.behat.page.admin.crud.update" scope="scenario" public="false">
+            <argument type="string">taxon</argument>
+        </service>
+        <service id="sylius.behat.page.admin.tax_category.create" class="%sylius.behat.page.admin.tax_category.create.class%" parent="sylius.behat.page.admin.crud.create" scope="scenario" public="false">
+            <argument type="string">tax_category</argument>
+        </service>
+        <service id="sylius.behat.page.admin.tax_category.index" class="%sylius.behat.page.admin.tax_category.index.class%" parent="sylius.behat.page.admin.crud.index" scope="scenario" public="false">
+            <argument type="string">tax_category</argument>
+        </service>
+        <service id="sylius.behat.page.admin.tax_category.update" class="%sylius.behat.page.admin.tax_category.update.class%" parent="sylius.behat.page.admin.crud.update" scope="scenario" public="false">
+            <argument type="string">tax_category</argument>
+        </service>
+        <service id="sylius.behat.page.admin.tax_rate.create" class="%sylius.behat.page.admin.tax_rate.create.class%" parent="sylius.behat.page.admin.crud.create" scope="scenario" public="false">
+            <argument type="string">tax_rate</argument>
+        </service>
+        <service id="sylius.behat.page.admin.tax_rate.index" class="%sylius.behat.page.admin.tax_rate.index.class%" parent="sylius.behat.page.admin.crud.index" scope="scenario" public="false">
+            <argument type="string">tax_rate</argument>
+        </service>
+        <service id="sylius.behat.page.admin.tax_rate.update" class="%sylius.behat.page.admin.tax_rate.update.class%" parent="sylius.behat.page.admin.crud.update" scope="scenario" public="false">
+            <argument type="string">tax_rate</argument>
+        </service>
+        <service id="sylius.behat.page.admin.zone.create" class="%sylius.behat.page.admin.zone.create.class%" parent="sylius.behat.page.admin.crud.create" scope="scenario" public="false">
+            <argument type="string">zone</argument>
+        </service>
+        <service id="sylius.behat.page.admin.zone.index" class="%sylius.behat.page.admin.zone.index.class%" parent="sylius.behat.page.admin.crud.index" scope="scenario" public="false">
+            <argument type="string">zone</argument>
+        </service>
+        <service id="sylius.behat.page.admin.zone.update" class="%sylius.behat.page.admin.zone.update.class%" parent="sylius.behat.page.admin.crud.update" scope="scenario" public="false">
+            <argument type="string">zone</argument>
+        </service>
+
+        <service id="sylius.behat.page.shop.account.dashboard" class="%sylius.behat.page.shop.account.dashboard.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
+        <service id="sylius.behat.page.shop.account.profile_update" class="%sylius.behat.page.shop.account.profile_update.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
+        <service id="sylius.behat.page.shop.home" class="%sylius.behat.page.shop.home.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
+        <service id="sylius.behat.page.shop.cart.cart_summary" class="%sylius.behat.page.shop.cart.cart_summary.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
+        <service id="sylius.behat.page.shop.product.show" class="%sylius.behat.page.shop.product.show.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" >
+            <argument type="service" id="sylius.behat.table_accessor" />
+        </service>
+        <service id="sylius.behat.page.shop.user.login" class="%sylius.behat.page.shop.user.login.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
+        <service id="sylius.behat.page.shop.user.register" class="%sylius.behat.page.shop.user.register.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
+        <service id="sylius.behat.page.shop.order.order_payments" class="%sylius.behat.page.shop.order.order_payments.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false">
+            <argument type="service" id="sylius.behat.table_accessor" />
+        </service>
+        <service id="sylius.behat.page.shop.checkout.thank_you" class="%sylius.behat.page.shop.checkout.thank_you.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
+        <service id="sylius.behat.page.shop.checkout.addressing_step" class="%sylius.behat.page.shop.checkout.addressing_step.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
+        <service id="sylius.behat.page.shop.checkout.finalize_step" class="%sylius.behat.page.shop.checkout.finalize_step.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
+        <service id="sylius.behat.page.shop.checkout.payment_step" class="%sylius.behat.page.shop.checkout.payment_step.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
+        <service id="sylius.behat.page.shop.checkout.security_step" class="%sylius.behat.page.shop.checkout.security_step.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
+        <service id="sylius.behat.page.shop.checkout.shipping_step" class="%sylius.behat.page.shop.checkout.shipping_step.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
+
+        <service id="sylius.behat.page.external.paypal_checkout_express" class="%sylius.behat.page.external.paypal_checkout_express.class%" parent="sylius.behat.page" scope="scenario" public="false" >
+            <argument type="service" id="sylius.repository.payment_security_token" container="symfony" />
+        </service>
+
+        <service id="sylius.behat.symfony_page" class="%sylius.behat.symfony_page.class%" parent="sylius.behat.page" abstract="true" scope="scenario" public="false">
+            <argument type="service" id="router" container="symfony_shared" />
+        </service>
+    </services>
+</container>

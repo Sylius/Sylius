@@ -9,19 +9,19 @@ Feature: Editing a customer profile
         And there is a customer account "Francis Underwood" with email "francis@underwood.com" identified by "whitehouse"
         And I am logged in as "francis@underwood.com"
 
-    @todo
+    @ui
     Scenario: Changing my first name and last name
         Given I want to modify my customer profile
         And I specify the first name as "Will"
         And I specify the last name as "Conway"
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And the customer name should be "Will Conway"
+        And my name should be "Will Conway"
 
-    @todo
+    @ui
     Scenario: Changing my email
         Given I want to modify my customer profile
         And I specify the email as "frank@underwood.com"
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And the customer email should be "frank@underwood.com"
+        And my email should be "frank@underwood.com"

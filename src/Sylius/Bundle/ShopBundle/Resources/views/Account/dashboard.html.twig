@@ -1,0 +1,64 @@
+{% extends 'SyliusShopBundle:Layout:main.html.twig' %}
+
+{% block content %}
+    <div class="ui breadcrumb">
+        <a class="section">Home</a>
+        <div class="divider"> / </div>
+        <div class="active section">My account</div>
+    </div>
+
+    <div class="ui stackable grid">
+        <div class="four wide column">
+            {% include 'SyliusShopBundle:Account:_main.html.twig' %}
+        </div>
+        <div class="twelve wide column">
+            <h1 class="ui monster section dividing header">
+                My dashboard
+                <div class="sub header">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</div>
+            </h1>
+            <div class="ui large list" id="customer-information">
+                <div class="ui item">
+                    {{ customer.firstName }} {{ customer.lastName }}
+                </div>
+                <div class="ui item">
+                    <strong>{{ customer.email }}</strong>
+                </div>
+                <div class="ui item">
+                    {{ 'sylius.ui.you_are_customer_since'|trans }} {{ app.user.createdAt|date() }}
+                </div>
+            </div>
+            <div class="ui text menu">
+                <a href="#" class="item"><i class="pencil icon"></i> Edit</a>
+                <a href="#" class="item"><i class="lock icon"></i> Change password</a>
+            </div>
+            <h2 class="ui dividing header">Address book</h2>
+            <div class="ui stackable two column grid">
+                <div class="column">
+                    <h3 class="ui small header">
+                        Billing address:
+                    </h3>
+                    <address>
+                        <strong>John Doe</strong><br/>
+                        +48 213 432 123<br/>
+                        Dubois 114/116<br/>
+                        London<br/>
+                        <i class="pl flag"></i>
+                        Poland 94-254
+                    </address>
+                    <div class="ui text menu">
+                        <a href="#" class="item"><i class="pencil icon"></i> Edit address</a>
+                    </div>
+                </div>
+                <div class="column">
+                    <h3 class="ui small header">
+                        Shipping address:
+                    </h3>
+                    <div class="ui info message">You have no shipping address defined.</div>
+                    <div class="ui text menu">
+                        <a href="#" class="item"><i class="plus icon"></i> Add new address</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
