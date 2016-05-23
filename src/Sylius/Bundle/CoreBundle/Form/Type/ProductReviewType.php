@@ -14,7 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Form\Type;
 use Sylius\Bundle\ReviewBundle\Form\Type\ReviewType;
 
 /**
- * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class ProductReviewType extends ReviewType
 {

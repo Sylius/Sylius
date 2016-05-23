@@ -14,7 +14,7 @@ namespace Sylius\Bundle\ReviewBundle\Validator\Constraints;
 use Symfony\Component\Validator\Constraint;
 
 /**
- * @author Mateusz Zalewski <mateusz.p.zalewski@gmail.com>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 class UniqueReviewerEmail extends Constraint
