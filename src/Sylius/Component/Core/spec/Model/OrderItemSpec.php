@@ -68,26 +68,6 @@ class OrderItemSpec extends ObjectBehavior
         $this->getTaxTotal()->shouldReturn(820);
     }
 
-    function it_returns_discounted_unit_price_which_consist_of_unit_price_decreased_by_item_promotions(
-        OrderItemUnitInterface $firstUnit,
-        OrderItemUnitInterface $secondUnit
-    ) {
-        $this->setUnitPrice(10000);
-
-        $firstUnit->getOrderItem()->willReturn($this);
-        $firstUnit->getTotal()->willReturn(9000);
-        $firstUnit->getAdjustmentsTotal(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)->willReturn(1000);
-
-        $secondUnit->getOrderItem()->willReturn($this);
-        $secondUnit->getTotal()->willReturn(9500);
-        $secondUnit->getAdjustmentsTotal(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)->willReturn(500);
-
-        $this->addUnit($firstUnit);
-        $this->addUnit($secondUnit);
-
-        $this->getDiscountedUnitPrice()->shouldReturn(8500);
-    }
-
     function it_returns_subtotal_which_consist_of_discounted_unit_price_multiplied_by_quantity(
         OrderItemUnitInterface $firstUnit,
         OrderItemUnitInterface $secondUnit
@@ -96,15 +76,15 @@ class OrderItemSpec extends ObjectBehavior
 
         $firstUnit->getOrderItem()->willReturn($this);
         $firstUnit->getTotal()->willReturn(9000);
-        $firstUnit->getAdjustmentsTotal(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)->willReturn(1000);
+        $firstUnit->getAdjustmentsTotal(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)->willReturn(-1000);
 
         $secondUnit->getOrderItem()->willReturn($this);
         $secondUnit->getTotal()->willReturn(9500);
-        $secondUnit->getAdjustmentsTotal(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)->willReturn(500);
+        $secondUnit->getAdjustmentsTotal(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)->willReturn(-500);
 
         $this->addUnit($firstUnit);
         $this->addUnit($secondUnit);
 
-        $this->getSubtotal()->shouldReturn(17000);
+        $this->getSubtotal()->shouldReturn(18500);
     }
 }

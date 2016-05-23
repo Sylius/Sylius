@@ -81,21 +81,13 @@ class OrderItem extends CartItem implements OrderItemInterface
     /**
      * {@inheritdoc}
      */
-    public function getDiscountedUnitPrice()
-    {
-        $orderItemDiscounts = 0;
-        foreach ($this->units as $unit) {
-            $orderItemDiscounts += $unit->getAdjustmentsTotal(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT);
-        }
-
-        return $this->unitPrice - $orderItemDiscounts;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getSubtotal()
     {
-        return $this->getDiscountedUnitPrice() * $this->quantity;
+        $subtotal = $this->unitPrice * $this->quantity;
+        foreach ($this->units as $unit) {
+            $subtotal += $unit->getAdjustmentsTotal(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT);
+        }
+
+        return $subtotal;
     }
 }

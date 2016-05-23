@@ -196,16 +196,59 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
      *
      * @return string
      */
+    public function getItemUnitPrice($itemName)
+    {
+        return $this->getItemProperty($itemName, 'unit-price');
+    }
+
+    /**
+     * @param string $itemName
+     *
+     * @return string
+     */
+    public function getItemQuantity($itemName)
+    {
+        return $this->getItemProperty($itemName, 'quantity');
+    }
+
+    /**
+     * @param string $itemName
+     *
+     * @return string
+     */
+    public function getItemSubtotal($itemName)
+    {
+        return $this->getItemProperty($itemName, 'subtotal');
+    }
+
+    /**
+     * @param string $itemName
+     *
+     * @return string
+     */
     public function getItemDiscount($itemName)
     {
-        $rows = $this->tableAccessor->getRowsWithFields(
-            $this->getElement('table'),
-            ['item' => $itemName]
-        );
+        return $this->getItemProperty($itemName, 'discount');
+    }
 
-        $discount = $rows[0]->find('css', '.discount')->getText();
+    /**
+     * @param string $itemName
+     *
+     * @return string
+     */
+    public function getItemTax($itemName)
+    {
+        return $this->getItemProperty($itemName, 'tax');
+    }
 
-        return $discount;
+    /**
+     * @param string $itemName
+     *
+     * @return string
+     */
+    public function getItemTotal($itemName)
+    {
+        return $this->getItemProperty($itemName, 'total');
     }
 
     /**
@@ -222,19 +265,19 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'customer' => '#customer',
-            'shipping_address' => '#shipping-address',
             'billing_address' => '#billing-address',
-            'payments' => '#payments',
-            'shipments' => '#shipments',
-            'table' => '.table',
+            'customer' => '#customer',
             'items_total' => '#items-total',
-            'total' => '#total',
-            'shipping_total' => '#shipping-total',
-            'shipping_charges' => '#shipping-charges',
-            'tax_total' => '#tax-total',
-            'promotion_total' => '#promotion-total',
+            'payments' => '#payments',
             'promotion_discounts' => '#promotion-discounts',
+            'promotion_total' => '#promotion-total',
+            'shipments' => '#shipments',
+            'shipping_address' => '#shipping-address',
+            'shipping_charges' => '#shipping-charges',
+            'shipping_total' => '#shipping-total',
+            'table' => '.table',
+            'tax_total' => '#tax-total',
+            'total' => '#total',
         ]);
     }
 
@@ -264,5 +307,21 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             (stripos($elementText, $city) !== false) &&
             (stripos($elementText, $countryName.' '.$postcode) !== false)
         ;
+    }
+
+    /**
+     * @param string $itemName
+     * @param string $property
+     *
+     * @return string
+     */
+    private function getItemProperty($itemName, $property)
+    {
+        $rows = $this->tableAccessor->getRowsWithFields(
+            $this->getElement('table'),
+            ['item' => $itemName]
+        );
+
+        return $rows[0]->find('css', '.'.$property)->getText();
     }
 }
