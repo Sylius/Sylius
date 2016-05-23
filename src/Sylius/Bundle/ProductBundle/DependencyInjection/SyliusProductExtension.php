@@ -65,6 +65,9 @@ class SyliusProductExtension extends AbstractResourceExtension implements Prepen
         foreach ($configFiles as $configFile) {
             $loader->load($configFile);
         }
+
+        $formDefinition = $container->getDefinition('sylius.form.type.product_variant_generation');
+        $formDefinition->addArgument($container->getDefinition('sylius.form.listener.product_variant_generator'));
     }
 
     /**

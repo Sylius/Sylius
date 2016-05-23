@@ -13,6 +13,7 @@ namespace Sylius\Bundle\ProductBundle\DependencyInjection;
 
 use Sylius\Bundle\ProductBundle\Form\Type\ProductTranslationType;
 use Sylius\Bundle\ProductBundle\Form\Type\ProductType;
+use Sylius\Bundle\ProductBundle\Form\Type\ProductVariantGenerationType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
@@ -78,6 +79,7 @@ class Configuration implements ConfigurationInterface
                                             ->addDefaultsIfNotSet()
                                             ->children()
                                                 ->scalarNode('default')->defaultValue(ProductType::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('variant_generation')->defaultValue(ProductVariantGenerationType::class)->cannotBeEmpty()->end()
                                                 ->scalarNode('choice')->defaultValue(ResourceChoiceType::class)->cannotBeEmpty()->end()
                                             ->end()
                                         ->end()
@@ -87,6 +89,11 @@ class Configuration implements ConfigurationInterface
                                     ->addDefaultsIfNotSet()
                                     ->children()
                                         ->arrayNode('default')
+                                            ->prototype('scalar')->end()
+                                            ->defaultValue(['sylius'])
+                                            ->cannotBeEmpty()
+                                        ->end()
+                                        ->arrayNode('variant_generation')
                                             ->prototype('scalar')->end()
                                             ->defaultValue(['sylius'])
                                             ->cannotBeEmpty()
