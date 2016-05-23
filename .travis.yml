@@ -20,24 +20,19 @@ matrix:
             addons:
                 apt:
                     packages:
-                       - parallel
+                        - parallel
         -
             php: 5.6
             env: SYLIUS_SUITE="application"
             services:
                 - memcached
         -
-            php: 5.5
-            env: SYLIUS_SUITE="application"
-            services:
-                - memcached
-        -
-           php: 5.5
-           env: SYLIUS_SUITE="packages"
-           addons:
-               apt:
-                   packages:
-                      - parallel
+            php: 5.6
+            env: SYLIUS_SUITE="packages"
+            addons:
+                apt:
+                    packages:
+                        - parallel
 
 cache:
     directories:

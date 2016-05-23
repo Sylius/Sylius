@@ -28,7 +28,7 @@
         }
     ],
     "require": {
-        "php": "^5.5.9|^7.0",
+        "php": "^5.6|^7.0",
 
         "doctrine/orm": "^2.4.8,<2.5",
         "sylius/resource": "^0.18",
