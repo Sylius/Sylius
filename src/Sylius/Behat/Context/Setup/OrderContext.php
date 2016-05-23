@@ -294,18 +294,7 @@ final class OrderContext implements Context
      */
     public function customersHaveAddedProductsToTheCartForTotalOf($numberOfCustomers, $total)
     {
-        $customers = [];
-
-        for ($i = 0; $i < $numberOfCustomers; $i++) {
-            $customer = $this->customerFactory->createNew();
-            $customer->setEmail(sprintf('john%s@doe.com', uniqid()));
-            $customer->setFirstname('John');
-            $customer->setLastname('Doe'.$i);
-
-            $customers[] = $customer;
-
-            $this->customerRepository->add($customer);
-        }
+        $customers = $this->generateCustomers($numberOfCustomers);
 
         $sampleProductVariant = $this->sharedStorage->get('variant');
         $total = $this->getPriceFromString($total);
@@ -335,19 +324,7 @@ final class OrderContext implements Context
      */
     public function customersHavePlacedOrdersForTotalOf($numberOfCustomers, $numberOfOrders, $total)
     {
-        $customers = [];
-
-        for ($i = 0; $i < $numberOfCustomers; $i++) {
-            $customer = $this->customerFactory->createNew();
-            $customer->setEmail(sprintf('john%s@doe.com', uniqid()));
-            $customer->setFirstname('John');
-            $customer->setLastname('Doe'.$i);
-
-            $customers[] = $customer;
-
-            $this->customerRepository->add($customer);
-        }
-
+        $customers = $this->generateCustomers($numberOfCustomers);
         $sampleProductVariant = $this->sharedStorage->get('variant');
         $total = $this->getPriceFromString($total);
 
@@ -419,6 +396,29 @@ final class OrderContext implements Context
         $order->complete();
 
         return $order;
+    }
+
+    /**
+     * @param $count
+     *
+     * @return CustomerInterface[]
+     */
+    private function generateCustomers($count)
+    {
+        $customers = [];
+
+        for ($i = 0; $i < $count; $i++) {
+            $customer = $this->customerFactory->createNew();
+            $customer->setEmail(sprintf('john%s@doe.com', uniqid()));
+            $customer->setFirstname('John');
+            $customer->setLastname('Doe'.$i);
+
+            $customers[] = $customer;
+
+            $this->customerRepository->add($customer);
+        }
+
+        return $customers;
     }
 
     /**
