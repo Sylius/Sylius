@@ -48,12 +48,6 @@ doctrine_cache:
         sylius_settings: "%sylius.cache%"
         sylius_rbac: "%sylius.cache%"
 
-doctrine_migrations:
-    dir_name: "@SyliusCoreBundle/Migrations"
-    namespace: Sylius\Bundle\CoreBundle\Migrations
-    table_name: sylius_migrations
-    name: Sylius Migrations
-
 doctrine_phpcr:
     session:
         backend:
