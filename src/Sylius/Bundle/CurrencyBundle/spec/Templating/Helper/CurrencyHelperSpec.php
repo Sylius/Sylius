@@ -19,6 +19,7 @@ use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
+use Sylius\Component\Locale\Context\LocaleContext;
 use Symfony\Component\Templating\Helper\Helper;
 
 /**
@@ -33,9 +34,10 @@ class CurrencyHelperSpec extends ObjectBehavior
         CurrencyContextInterface $currencyContext,
         CurrencyConverterInterface $converter,
         MoneyFormatterInterface $moneyFormatter,
-        CurrencyProviderInterface $currencyProvider
+        CurrencyProviderInterface $currencyProvider,
+        LocaleContext $localeContext
     ) {
-        $this->beConstructedWith($currencyContext, $converter, $moneyFormatter, $currencyProvider);
+        $this->beConstructedWith($currencyContext, $converter, $moneyFormatter, $currencyProvider, $localeContext);
     }
 
     function it_is_initializable()
