@@ -24,7 +24,7 @@ use Symfony\Component\Templating\Helper\Helper;
 /**
  * @mixin CurrencyHelper
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 class CurrencyHelperSpec extends ObjectBehavior

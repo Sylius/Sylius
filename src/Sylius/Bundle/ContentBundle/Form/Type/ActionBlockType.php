@@ -17,7 +17,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * Action block type.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ActionBlockType extends AbstractResourceType
 {

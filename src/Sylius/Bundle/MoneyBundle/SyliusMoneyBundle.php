@@ -16,7 +16,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 /**
  * Money bundle.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class SyliusMoneyBundle extends Bundle
 {

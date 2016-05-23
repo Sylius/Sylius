@@ -16,7 +16,7 @@ use Sylius\Component\Rbac\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Templating\Helper\Helper;
 
 /**
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class RbacHelperSpec extends ObjectBehavior
 {

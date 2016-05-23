@@ -29,7 +29,7 @@ use Sylius\Component\Taxonomy\Model\TaxonsAwareInterface;
  *   - Shipping methods;
  *   - Taxons.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface ChannelInterface extends
     BaseChannelInterface,

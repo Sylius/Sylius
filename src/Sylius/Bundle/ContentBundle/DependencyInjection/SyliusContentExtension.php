@@ -20,7 +20,7 @@ use Symfony\Component\DependencyInjection\Reference;
 /**
  * Content extension.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class SyliusContentExtension extends AbstractResourceExtension
 {

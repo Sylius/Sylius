@@ -21,7 +21,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 /**
  * Variant controller.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class VariantController extends ResourceController
 {

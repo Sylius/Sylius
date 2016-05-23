@@ -20,7 +20,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 /**
  * Money extension.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class SyliusMoneyExtension extends Extension
 {

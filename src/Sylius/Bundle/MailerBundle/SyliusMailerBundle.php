@@ -17,7 +17,7 @@ use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 /**
  * Mailer and e-mails management.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class SyliusMailerBundle extends AbstractResourceBundle
 {

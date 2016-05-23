@@ -12,7 +12,7 @@
 namespace Sylius\Component\Addressing\Model;
 
 /**
- * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class Province implements ProvinceInterface
 {

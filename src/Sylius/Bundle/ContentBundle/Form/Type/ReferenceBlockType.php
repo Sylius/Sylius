@@ -17,7 +17,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * Reference block type.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ReferenceBlockType extends AbstractResourceType
 {

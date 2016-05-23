@@ -16,7 +16,7 @@ use Sylius\Bundle\RbacBundle\Templating\Helper\RbacHelper;
 /**
  * Sylius RBAC Twig helper.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@diweb.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class RbacExtension extends \Twig_Extension
 {

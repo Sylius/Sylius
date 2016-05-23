@@ -17,7 +17,7 @@ use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 /**
  * User bundle.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class SyliusUserBundle extends AbstractResourceBundle
 {

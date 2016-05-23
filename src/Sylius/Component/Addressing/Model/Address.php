@@ -14,7 +14,7 @@ namespace Sylius\Component\Addressing\Model;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 
 /**
- * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class Address implements AddressInterface
 {

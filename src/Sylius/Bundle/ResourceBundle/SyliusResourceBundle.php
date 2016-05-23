@@ -20,7 +20,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 /**
  * Resource bundle.
  *
- * @author Paweł Jędrzejewski <pjedrzejewski@sylius.pl>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class SyliusResourceBundle extends Bundle
 {
