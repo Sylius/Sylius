@@ -72,6 +72,8 @@ class CouponGenerator implements CouponGeneratorInterface
      */
     public function generate(PromotionInterface $promotion, InstructionInterface $instruction)
     {
+        $this->generatedCoupons = [];
+
         $this->assertGenerationIsPossible($instruction);
         for ($i = 0, $amount = $instruction->getAmount(); $i < $amount; ++$i) {
             $code = $this->generateUniqueCode($instruction->getCodeLength());
@@ -87,7 +89,8 @@ class CouponGenerator implements CouponGeneratorInterface
         }
 
         $this->objectManager->flush();
-        $this->generatedCoupons = [];
+
+        return $this->generatedCoupons;
     }
 
 
