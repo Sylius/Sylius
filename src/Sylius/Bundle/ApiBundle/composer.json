@@ -23,7 +23,7 @@
         "php": "^5.6|^7.0",
 
         "friendsofsymfony/oauth-server-bundle": "~1.4",
-        "sylius/resource-bundle": "^0.18",
+        "sylius/resource-bundle": "^0.19",
         "symfony/framework-bundle": "^2.7.7"
     },
     "require-dev": {
@@ -52,7 +52,7 @@
     ],
     "extra": {
         "branch-alias": {
-            "dev-master": "0.18-dev"
+            "dev-master": "0.19-dev"
         }
     }
 }

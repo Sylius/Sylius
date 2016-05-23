@@ -22,7 +22,7 @@
     "require": {
         "php": "^5.6|^7.0",
 
-        "sylius/metadata": "^0.18"
+        "sylius/metadata": "^0.19"
     },
     "require-dev": {
         "phpspec/phpspec": "^2.4"
@@ -43,7 +43,7 @@
     ],
     "extra": {
         "branch-alias": {
-            "dev-master": "0.18-dev"
+            "dev-master": "0.19-dev"
         }
     }
 }

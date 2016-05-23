@@ -30,9 +30,9 @@
     "require": {
         "php": "^5.6|^7.0",
 
-        "sylius/resource": "^0.18",
-        "sylius/attribute": "^0.18",
-        "sylius/variation": "^0.18",
+        "sylius/resource": "^0.19",
+        "sylius/attribute": "^0.19",
+        "sylius/variation": "^0.19",
         "doctrine/collections": "^1.0.0"
     },
     "require-dev": {
@@ -57,7 +57,7 @@
     ],
     "extra": {
         "branch-alias": {
-            "dev-master": "0.18-dev"
+            "dev-master": "0.19-dev"
         }
     }
 }

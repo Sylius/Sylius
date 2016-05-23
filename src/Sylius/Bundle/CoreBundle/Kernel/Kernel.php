@@ -21,10 +21,10 @@ use Symfony\Component\HttpKernel\Kernel as BaseKernel;
  */
 abstract class Kernel extends BaseKernel
 {
-    const VERSION = '0.18.0-dev';
-    const VERSION_ID = '00180';
+    const VERSION = '0.19.0-dev';
+    const VERSION_ID = '00190';
     const MAJOR_VERSION = '0';
-    const MINOR_VERSION = '18';
+    const MINOR_VERSION = '19';
     const RELEASE_VERSION = '0';
     const EXTRA_VERSION = 'DEV';
 
