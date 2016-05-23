@@ -34,10 +34,9 @@ class CurrencyHelperSpec extends ObjectBehavior
         CurrencyContextInterface $currencyContext,
         CurrencyConverterInterface $converter,
         MoneyFormatterInterface $moneyFormatter,
-        CurrencyProviderInterface $currencyProvider,
-        LocaleContext $localeContext
+        CurrencyProviderInterface $currencyProvider
     ) {
-        $this->beConstructedWith($currencyContext, $converter, $moneyFormatter, $currencyProvider, $localeContext);
+        $this->beConstructedWith($currencyContext, $converter, $moneyFormatter, $currencyProvider);
     }
 
     function it_is_initializable()
