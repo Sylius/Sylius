@@ -13,6 +13,17 @@
 
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
 
-    <mapped-superclass name="Sylius\Component\Core\Model\ProductReview" table="sylius_product_review" />
+    <mapped-superclass name="Sylius\Component\Core\Model\ProductReview" table="sylius_product_review">
+        <field name="likeCount" column="like_count" type="integer">
+            <options>
+                <option name="default">0</option>
+            </options>
+        </field>
+        <field name="dislikeCount" column="dislike_count" type="integer">
+            <options>
+                <option name="default">0</option>
+            </options>
+        </field>
+    </mapped-superclass>
 
 </doctrine-mapping>
