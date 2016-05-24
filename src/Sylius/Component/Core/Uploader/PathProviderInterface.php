@@ -11,15 +11,18 @@
 
 namespace Sylius\Component\Core\Uploader;
 
-use Sylius\Component\Core\Model\ImageInterface;
+use Gaufrette\Filesystem;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-interface ImageUploaderInterface
+interface PathProviderInterface
 {
     /**
-     * @param ImageInterface $image
+     * @param Filesystem $filesystem
+     * @param \SplFileInfo $file
+     *
+     * @return string
      */
-    public function upload(ImageInterface $image);
+    public function provide(Filesystem $filesystem, \SplFileInfo $file);
 }
