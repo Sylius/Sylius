@@ -27,6 +27,7 @@
         <parameter key="sylius.checkout_form.summary.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\SummaryType</parameter>
 
         <parameter key="sylius.form.type.image.class">Sylius\Bundle\CoreBundle\Form\Type\ImageType</parameter>
+        <parameter key="sylius.form.type.image_taxon.class">Sylius\Bundle\CoreBundle\Form\Type\TaxonImageType</parameter>
         <parameter key="sylius.form.type.list.class">Sylius\Bundle\CoreBundle\Form\Type\ListType</parameter>
         <parameter key="sylius.form.type.advanced_order.class">Sylius\Bundle\CoreBundle\Form\Type\AdvancedOrderType</parameter>
         <parameter key="sylius.form.type.country.class">Sylius\Bundle\CoreBundle\Form\Type\CountryType</parameter>
@@ -110,7 +111,7 @@
             <tag name="form.type" alias="sylius_image" />
         </service>
 
-        <service id="sylius.form.type.taxon_image" class="%sylius.form.type.image.class%">
+        <service id="sylius.form.type.image_taxon" class="%sylius.form.type.image_taxon.class%">
             <argument>%sylius.model.taxon_image.class%</argument>
             <tag name="form.type" alias="sylius_image_taxon" />
         </service>
