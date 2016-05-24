@@ -30,11 +30,11 @@
     "require": {
         "php": "^5.6|^7.0",
 
-        "symfony/framework-bundle": "^2.7.7",
+        "symfony/framework-bundle": "^2.8",
         "doctrine/orm": "^2.4.8,<2.5",
         "stof/doctrine-extensions-bundle": "~1.1",
-        "symfony/form": "^2.7.7",
-        "symfony/validator": "^2.7.7",
+        "symfony/form": "^2.8",
+        "symfony/validator": "^2.8",
         "sylius/resource-bundle": "^0.19",
         "sylius/association": "^0.19"
     },

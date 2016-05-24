@@ -35,12 +35,12 @@
         "sylius/report": "^0.19",
         "sylius/money-bundle": "^0.19",
         "sylius/resource-bundle": "^0.19",
-        "symfony/framework-bundle": "^2.7.7"
+        "symfony/framework-bundle": "^2.8"
     },
     "require-dev": {
         "phpspec/phpspec": "^2.4",
-        "symfony/form": "^2.7",
-        "symfony/validator": "^2.7"
+        "symfony/form": "^2.8",
+        "symfony/validator": "^2.8"
     },
     "config": {
         "bin-dir": "bin"

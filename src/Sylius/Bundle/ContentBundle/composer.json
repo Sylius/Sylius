@@ -24,7 +24,7 @@
 
         "jackalope/jackalope-doctrine-dbal": "^1.1.2",
         "sylius/resource-bundle": "^0.19",
-        "symfony/framework-bundle": "^2.7.7",
+        "symfony/framework-bundle": "^2.8",
         "symfony-cmf/block-bundle": "~1.2",
         "symfony-cmf/content-bundle": "~1.2",
         "symfony-cmf/create-bundle": "~1.2",
@@ -35,7 +35,7 @@
     "require-dev": {
         "liip/imagine-bundle": "^1.0",
         "phpspec/phpspec": "^2.4",
-        "symfony/form": "^2.7"
+        "symfony/form": "^2.8"
     },
     "config": {
         "bin-dir": "bin"
