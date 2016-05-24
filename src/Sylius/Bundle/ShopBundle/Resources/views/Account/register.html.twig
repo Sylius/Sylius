@@ -5,7 +5,7 @@
 {% block content %}
 <div class="ui column stackable center page grid">
     <div class="five wide column"></div>
-    <form class="ui six wide column form segment" action="{{ path('sylius_shop_account_registration') }}" method="post" novalidate>
+    <form class="ui six wide column form segment" action="{{ path('sylius_shop_registration') }}" method="post" novalidate>
         {{ form_errors(form) }}
         <div class="field">
             {{ form_row(form.firstName) }}

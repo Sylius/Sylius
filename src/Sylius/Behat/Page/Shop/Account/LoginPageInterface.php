@@ -28,12 +28,12 @@ interface LoginPageInterface extends SymfonyPageInterface
     public function logIn();
 
     /**
-     * @param string $email
-     */
-    public function specifyEmail($email);
-
-    /**
      * @param string $password
      */
     public function specifyPassword($password);
+
+    /**
+     * @param string $userName
+     */
+    public function specifyUserName($userName);
 }

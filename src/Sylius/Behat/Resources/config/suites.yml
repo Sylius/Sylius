@@ -39,6 +39,8 @@ imports:
     - suites/legacy/user.yml
 
     - suites/ui/account/customer.yml
+    - suites/ui/account/login.yml
+    - suites/ui/account/registration.yml
     - suites/ui/addressing/managing_countries.yml
     - suites/ui/addressing/managing_zones.yml
     - suites/ui/cart/shopping_cart.yml

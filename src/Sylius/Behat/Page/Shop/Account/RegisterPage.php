@@ -19,7 +19,6 @@ use Sylius\Behat\Page\SymfonyPage;
  */
 class RegisterPage extends SymfonyPage implements RegisterPageInterface
 {
-
     /**
      * {@inheritdoc}
      *
@@ -27,12 +26,12 @@ class RegisterPage extends SymfonyPage implements RegisterPageInterface
      */
     public function checkValidationMessageFor($element, $message)
     {
-        $foundedElement = $this->getFieldElement($element);
-        if (null === $foundedElement) {
+        $foundElement = $this->getFieldElement($element);
+        if (null === $foundElement) {
             throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.form-error');
         }
 
-        return $message === $foundedElement->find('css', '.form-error')->getText();
+        return $message === $foundElement->find('css', '.form-error')->getText();
     }
 
     /**
@@ -40,7 +39,7 @@ class RegisterPage extends SymfonyPage implements RegisterPageInterface
      */
     public function getRouteName()
     {
-        return 'sylius_shop_account_registration';
+        return 'sylius_shop_registration';
     }
 
     public function register()

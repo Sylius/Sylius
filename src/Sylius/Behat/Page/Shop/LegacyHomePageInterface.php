@@ -11,15 +11,15 @@
 
 namespace Sylius\Behat\Page\Shop;
 
-use Sylius\Behat\Page\SymfonyPageInterface;
+use Sylius\Behat\Page\PageInterface;
 
 /**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-interface ShopHomePageInterface extends SymfonyPageInterface
+interface LegacyHomePageInterface extends PageInterface
 {
     /**
-     * @return bool
+     * @return string
      */
-    public function hasLogoutButton();
+    public function getContents();
 }

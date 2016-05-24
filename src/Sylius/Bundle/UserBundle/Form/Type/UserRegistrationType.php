@@ -38,18 +38,6 @@ class UserRegistrationType extends AbstractResourceType
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults([
-            'data_class' => $this->dataClass,
-            'validation_groups' => $this->validationGroups,
-            'cascade_validation' => true,
-        ]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
         return 'sylius_user_registration';

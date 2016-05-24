@@ -21,16 +21,26 @@ class HomePage extends SymfonyPage implements HomePageInterface
     /**
      * {@inheritdoc}
      */
-    public function getContents()
+    public function getRouteName()
     {
-        return $this->getDocument()->getContent();
+        return 'sylius_shop_homepage';
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function hasLogoutButton()
     {
-        return 'sylius_homepage';
+        return $this->getElement('right_menu')->hasLink('Logout');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getDefinedElements()
+    {
+        return array_merge(parent::getDefinedElements(),[
+            'right_menu' => '.right.item',
+        ]);
     }
 }

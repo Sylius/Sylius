@@ -4,8 +4,8 @@
 
 {% block content %}
 <div class="ui column stackable center page grid">
-    {% if error %}
-        {{ messages.error(error.messageKey|trans(error.messageData, 'security')) }}
+    {% if last_error %}
+        {{ messages.error(last_error.messageKey|trans(last_error.messageData, 'security')) }}
     {% endif %}
     <div class="five wide column"></div>
     <form class="ui six wide column form segment" action="{{ path('sylius_shop_login_check') }}" method="post" novalidate>

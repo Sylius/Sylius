@@ -34,17 +34,17 @@ class LoginPage extends SymfonyPage implements LoginPageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyEmail($email)
+    public function specifyPassword($password)
     {
-        $this->getDocument()->fillField('Email', $email);
+        $this->getDocument()->fillField('Password', $password);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function specifyPassword($password)
+    public function specifyUserName($userName)
     {
-        $this->getDocument()->fillField('Password', $password);
+        $this->getDocument()->fillField('Username', $userName);
     }
 
     /**
