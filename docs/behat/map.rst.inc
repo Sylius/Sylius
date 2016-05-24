@@ -3,3 +3,4 @@
 * :doc:`/behat/how-to-define-new-suite`
 * :doc:`/behat/how-to-use-transformers`
 * :doc:`/behat/introduction-to-containers-and-scopes`
+* :doc:`/behat/basic-usage`
