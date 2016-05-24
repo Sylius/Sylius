@@ -12,8 +12,13 @@
 namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Shop\Account\LoginPageInterface;
+use Sylius\Behat\Page\Shop\Account\ResetPasswordPageInterface;
 use Sylius\Behat\Page\Shop\HomePageInterface;
+use Sylius\Behat\Service\Accessor\EmailCheckerInterface;
+use Sylius\Behat\Service\NotificationCheckerInterface;
+use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -22,23 +27,57 @@ use Webmozart\Assert\Assert;
 class LoginContext implements Context
 {
     /**
-     * @var LoginPageInterface
-     */
-    private $loginPage;
-
-    /**
      * @var HomePageInterface
      */
     private $homePage;
 
     /**
-     * @param LoginPageInterface $loginPage
-     * @param HomePageInterface $homePage
+     * @var LoginPageInterface
      */
-    public function __construct(LoginPageInterface $loginPage, HomePageInterface $homePage)
-    {
-        $this->loginPage = $loginPage;
+    private $loginPage;
+
+    /**
+     * @var ResetPasswordPageInterface
+     */
+    private $resetPasswordPage;
+
+    /**
+     * @var CurrentPageResolverInterface
+     */
+    private $currentPageResolver;
+
+    /**
+     * @var EmailCheckerInterface
+     */
+    private $emailChecker;
+
+    /**
+     * @var NotificationCheckerInterface
+     */
+    private $notificationChecker;
+
+    /**
+     * @param HomePageInterface $homePage
+     * @param LoginPageInterface $loginPage
+     * @param ResetPasswordPageInterface $resetPasswordPage
+     * @param CurrentPageResolverInterface $currentPageResolver
+     * @param EmailCheckerInterface $emailChecker
+     * @param NotificationCheckerInterface $notificationChecker
+     */
+    public function __construct(
+        HomePageInterface $homePage,
+        LoginPageInterface $loginPage,
+        ResetPasswordPageInterface $resetPasswordPage,
+        CurrentPageResolverInterface $currentPageResolver,
+        EmailCheckerInterface $emailChecker,
+        NotificationCheckerInterface $notificationChecker
+    ) {
         $this->homePage = $homePage;
+        $this->loginPage = $loginPage;
+        $this->resetPasswordPage = $resetPasswordPage;
+        $this->currentPageResolver = $currentPageResolver;
+        $this->emailChecker = $emailChecker;
+        $this->notificationChecker = $notificationChecker;
     }
 
     /**
@@ -50,12 +89,29 @@ class LoginContext implements Context
     }
 
     /**
+     * @Given I want to reset password
+     */
+    public function iWantToResetPassword()
+    {
+        $this->resetPasswordPage->open();
+    }
+
+    /**
      * @When I specify the user name as :userName
      * @When I do not specify the user name
      */
     public function iSpecifyTheUserName($userName = null)
     {
         $this->loginPage->specifyUserName($userName);
+    }
+
+    /**
+     * @When I specify the email as :email
+     * @When I do not specify the email
+     */
+    public function iSpecifyTheEmail($email = null)
+    {
+        $this->resetPasswordPage->specifyEmail($email);
     }
 
     /**
@@ -73,6 +129,14 @@ class LoginContext implements Context
     public function iLogIn()
     {
         $this->loginPage->logIn();
+    }
+
+    /**
+     * @When I reset it
+     */
+    public function iResetIt()
+    {
+        $this->resetPasswordPage->reset();
     }
 
     /**
@@ -105,6 +169,36 @@ class LoginContext implements Context
         Assert::true(
             $this->loginPage->hasValidationErrorWith('Error Invalid credentials.'),
             'I should see validation error.'
+        );
+    }
+
+    /**
+     * @Then I should be notified that email with reset instruction has been send
+     */
+    public function iShouldBeNotifiedThatEmailWithResetInstructionWasSend()
+    {
+        $this->notificationChecker->checkNotification('If the email you have specified exists in our system, we have sent there an instruction on how to reset your password.', NotificationType::success());
+    }
+
+    /**
+     * @Then the email with reset token should be sent to :email
+     */
+    public function theEmailWithResetTokenShouldBeSentTo($email)
+    {
+        Assert::true(
+            $this->emailChecker->hasRecipient($email),
+            sprintf('Email should be send to %s, but it does not', $email)
+        );
+    }
+
+    /**
+     * @Then I should be notified that the :elementName is required
+     */
+    public function iShouldBeNotifiedThatElementIsRequired($elementName)
+    {
+        Assert::true(
+            $this->resetPasswordPage->checkValidationMessageFor($elementName, sprintf('Please enter your %s.', $elementName)),
+            sprintf('The %s should be required.', $elementName)
         );
     }
 }

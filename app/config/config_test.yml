@@ -10,6 +10,11 @@ parameters:
 framework:
     test: ~
     default_locale: "en"
+    profiler:
+        matcher:
+            path: ^/shop/*
+        only_exceptions: false
+        collect: true
     session:
         storage_id: session.storage.mock_file
 

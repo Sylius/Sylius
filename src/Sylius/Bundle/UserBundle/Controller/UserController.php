@@ -112,6 +112,7 @@ class UserController extends ResourceController
         $passwordReset = new PasswordResetRequest();
         $formType = $request->attributes->get('_sylius[form]', 'sylius_user_request_password_reset', true);
         $form = $this->createResourceForm($configuration, $formType, $passwordReset);
+        $template = $request->attributes->get('_sylius[template]', 'SyliusUserBundle:User:requestPasswordReset.html.twig', true);
 
         if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH']) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
             $user = $this->repository->findOneByEmail($passwordReset->getEmail());
@@ -124,8 +125,10 @@ class UserController extends ResourceController
             }
 
             $this->addFlash('success', 'sylius.user.reset_password.requested');
+            $redirectRouteName = $request->attributes->get('_sylius[redirect]', 'sylius_user_security_login', true);
 
-            return new RedirectResponse($this->container->get('router')->generate('sylius_user_security_login'));
+
+            return new RedirectResponse($this->container->get('router')->generate($redirectRouteName));
         }
 
         if (!$configuration->isHtmlRequest()) {
@@ -133,7 +136,7 @@ class UserController extends ResourceController
         }
 
         return $this->container->get('templating')->renderResponse(
-            $configuration->getTemplate('requestPasswordReset.html'),
+            $template,
             [
                 'form' => $form->createView(),
             ]
