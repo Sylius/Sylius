@@ -10,10 +10,12 @@ sylius:
         option:
             presentation: Présentation
     ui:
-        add_coupon: Ajouter un coupon
-        all: Tous
+        about: À propos
+        account_credentials: "Informations d'intentification"
         actions: Actions
+        add_coupon: Ajouter un coupon
         administration_panel_login: "Connexion à l'espace d'administration"
+        all: Tous
         an_error_occurred: "Une erreur s'est produite"
         are_your_sure_you_want_to_perform_this_action: Êtes-vous sûr de vouloir effectuer cette action ?
         available_for_channels: Disponible pour le canal
@@ -26,10 +28,11 @@ sylius:
         color: Couleur
         configure_channels_available_in_your_store: Configurer les canaux de distribution disponibles dans votre boutique
         confirm_your_action: Confirmez votre action
+        contact_us: Nous contacter
         contains: Contient
         countries: Pays
-        coupons: Coupons de réduction
         coupon_based: Comprend des coupons
+        coupons: Coupons de réduction
         create: Créer
         currencies: Devises
         dashboard: Tableau de bord
@@ -39,14 +42,15 @@ sylius:
         delete: Supprimer
         description: Description
         disabled: Désactivés
+        discount: Réduction
         edit: Modifier
         edit_channel: Modifier le canal de distribution
         edit_country: Modifier le pays
         edit_currency: Modifier la devise
         edit_customer: Modifier le client
         edit_payment_method: Modifier le mode de paiement
-        edit_product_option: "Modifier l'option de produit"
         edit_product_attribute: Mettre à jour les attributs du produit
+        edit_product_option: "Modifier l'option de produit"
         edit_promotion: Modifier la promotion
         edit_shipping_method: Mettre à jour la méthode de livraison
         edit_tax_category: Éditer la catégorie de taxe
@@ -58,23 +62,28 @@ sylius:
         equal: Egal
         exclusive: Exclusif
         expires_at: Expire le
+        extra_information: Informations complémentaires
+        faqs: FAQs
         filter: Filtrer
+        go: Envoyer
         in: Dans
         info: Info
+        item: Élément
+        jump_to_page: Aller à la page
         last_updated: Dernière mise à jour
         locales: Locales
         manage_attributes_of_your_products: Gérer les attributs de vos produits
-        manage_currencies_available_in_the_store: Gérer les devises disponibles pour la boutique
-        manage_your_customers: Gérez vos clients
-        manage_languages_available_in_the_store: Gérer les langues disponibles dans le magasin
+        manage_categorization_of_your_products: Gérer les catégories de vos produits
         manage_configuration_options_of_your_products: Gérer les options de configuration de vos produits
+        manage_currencies_available_in_the_store: Gérer les devises disponibles pour la boutique
+        manage_discounts_and_promotional_campaigns: Gérer les remises et les campagnes promotionnelles
+        manage_geographical_zones: Gérer les zones géographiques
+        manage_languages_available_in_the_store: Gérer les langues disponibles dans le magasin
         manage_payment_methods_available_to_your_customers: Gérer les méthodes de paiement disponibles pour vos clients
         manage_shipping_destinations: Gérer les destinations de livraison
-        manage_categorization_of_your_products: Gérer les catégories de vos produits
         manage_shipping_methods_for_your_store: "Gérer les méthodes d'expédition pour votre magasin"
         manage_taxation_of_your_products: Gérer la fiscalité de vos produits
-        manage_geographical_zones: Gérer les zones géographiques
-        manage_discounts_and_promotional_campaigns: Gérer les remises et les campagnes promotionnelles
+        manage_your_customers: Gérez vos clients
         new: Nouveau
         new_channel: Nouveau canal
         new_country: Nouveau pays
@@ -83,15 +92,18 @@ sylius:
         new_tax_category: Nouvelle catégorie de taxe
         "no": false
         no_account: Aucun compte
-        no_results_to_display: "Il n'y a aucun résultat à afficher"
-        no_taxes: Aucune taxe
         no_promotion: Aucune remise appliquée
+        no_requirement: Pas de prérequis
+        no_results_to_display: "Il n'y a aucun résultat à afficher"
         no_shipping_charges: Aucun frais de port
+        no_taxes: Aucune taxe
+        no_theme: Aucun thème
         not_contains: Ne contient pas
         not_empty: Non vide
         not_in: Pas dans
         or: ou
         powered_by: Propulsé par
+        price: Prix
         promotion_configuration: Configuration des promotions
         promotion_information: Information de la promotion
         quantity: Quantité
@@ -107,16 +119,11 @@ sylius:
         status: Statut
         success: Succès
         tax_categories: Catégories de taxes
+        total_records: Enregistrements totaux
+        unlimited: Illimité
+        usage: Utilisation
         values: Valeurs
         "yes": true
-        total_records: Enregistrements totaux
-        jump_to_page: Aller à la page
-        go: Envoyer
-        unlimited: Illimité
-        no_requirement: Pas de prérequis
         zone_consisting_of_countries: Zone composée de pays
-        zone_consisting_of_provinces: Zone composée de régions
         zone_consisting_of_other_zones: "Zone constituée d'autres zones"
-        no_theme: Aucun thème
-        usage: Utilisation
-        extra_information: Informations complémentaires
+        zone_consisting_of_provinces: Zone composée de régions

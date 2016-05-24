@@ -6,10 +6,11 @@ sylius:
         admin:
             main:
                 catalog:
-                    header: کاتالوگ محصولات
-                    taxons: رده ها
-                    options: آپشن ها
                     attributes: ویژگی‌ها
+                    header: کاتالوگ محصولات
+                    options: آپشن ها
+                    products: محصولات
+                    taxons: رده ها
                 configuration:
                     channels: کانال های فروش
                     countries: كشور‌ها
@@ -25,8 +26,8 @@ sylius:
                     header: بازاریابی
                     promotions: فروش های ویژه
                 customers:
-                    header: مشتری
                     customers: مشتریان
+                    header: مشتری
                 sales:
                     header: میزان فروش ماه جاری
                     orders: سفارش‌ها

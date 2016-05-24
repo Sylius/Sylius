@@ -12,6 +12,7 @@ sylius:
         locales: Miền địa phương
         new_country: Tạo quốc gia mới
         "no": false
+        price: Giá
         quantity: Số lượng
         shipping_methods: Phương thức vận chuyển
         success: Thành công

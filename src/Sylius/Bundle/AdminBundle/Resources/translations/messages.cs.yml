@@ -6,9 +6,10 @@ sylius:
         admin:
             main:
                 catalog:
-                    taxons: Taxony
-                    options: Možnosti
                     attributes: Atributy
+                    options: Možnosti
+                    products: Produkty
+                    taxons: Taxony
                 configuration:
                     channels: Kanály
                     countries: Země
@@ -23,8 +24,8 @@ sylius:
                     header: Marketing
                     promotions: Akce
                 customers:
-                    header: Zákazník
                     customers: Zákazníci
+                    header: Zákazník
                 sales:
                     header: Prodeje
                     orders: Objednávky

@@ -10,12 +10,16 @@ sylius:
         option:
             presentation: Apresentação
     ui:
-        add_coupon: Adicionar cupom
+        about: Sobre
+        account_credentials: Credenciais de conta
         actions: Ações
+        add_coupon: Adicionar cupom
         administration_panel_login: Login do painel de administração
+        all: Todos(as)
         an_error_occurred: Um erro ocorreu
         are_your_sure_you_want_to_perform_this_action: Tem certeza de que deseja executar esta ação?
         available_for_channels: Disponível para os canais
+        backordered: Devolução
         cancel: Cancelar
         cancelled: Cancelado
         category_requirements: Requerimentos da categoria
@@ -23,77 +27,126 @@ sylius:
         checkout: Finalizar compra
         clear_filters: Limpar os Filtros
         color: Cor
+        configurable_product: Produto configurável
         configure_channels_available_in_your_store: Configurar os canais disponíveis na sua loja
         confirm_your_action: Confirme sua ação
+        contact_us: Contate-nos
         contains: Contém
         countries: Países
-        coupons: Cupons
         coupon_based: Cupom com base
+        coupons: Cupons
         create: Criar
         currencies: Moedas
+        customer_can_login_to_the_store: Cliente pode acessar a loja
+        customer_care: Atendimento ao cliente
         dashboard: Painel
         date: Data
         default_currency: Moeda padrão
         default_locale: Localidade padrão
         delete: Excluir
+        delivery_and_shipping: Entrega e frete
         description: Descrição
         disabled: Desligado
+        discount: Desconto
         edit: Editar
         edit_channel: Editar canal
         edit_country: Editar o país
+        edit_coupon: Editar cupom
         edit_currency: Editar moeda
         edit_customer: Editar cliente
         edit_payment_method: Edite o método de pagamento
+        edit_product: Editar produto
+        edit_product_attribute: Editar atributo do produto
         edit_product_option: Editar a opção de produto
         edit_promotion: Editar promoção
+        edit_shipping_method: Editar método de envio
         edit_tax_category: Editar categoria de imposto
         edit_tax_rate: Editar a taxa de imposto
+        edit_taxon: Editar taxação
+        edit_zone: Editar zona
         empty: Vazio
         enabled: Ativado
         ends_with: Termina com
         equal: Igual
         exclusive: Exclusivo
+        expires_at: Expira em
+        extra_information: Informações extras
+        faqs: Perguntas freqüentes
         filter: Filtrar
+        go: Prosseguir
         in: Em
         info: Informações
+        item: Produto
+        jump_to_page: Ir para a página
         last_updated: Ultima atualização
         locales: Localidades
+        manage_attributes_of_your_products: Gerenciar atributos de seus produtos
+        manage_categorization_of_your_products: Gerenciar a categorização de seus produtos
+        manage_configuration_options_of_your_products: Gerenciar as opções de configuração de seus produtos
+        manage_coupons: Gerenciar cupons
         manage_currencies_available_in_the_store: Gerenciar moedas disponíveis na loja
+        manage_discounts_and_promotional_campaigns: Gerenciar descontos e campanhas promocionais
+        manage_geographical_zones: Gerenciar zonas geográficas
         manage_languages_available_in_the_store: Gerenciar idiomas disponíveis na loja
+        manage_payment_methods_available_to_your_customers: Gerenciar os métodos de pagamento disponíveis para seus clientes
         manage_shipping_destinations: Gerenciar destinos de transporte
         manage_shipping_methods_for_your_store: Gerenciar os métodos de transporte para sua loja
         manage_taxation_of_your_products: Gerenciar a tributação de seus produtos
+        manage_your_customers: Gerenciar seus Clientes
+        manage_your_products: Gerenciar seus produtos
         new: Novo
         new_channel: Novo Canal
         new_country: Novo país
+        new_coupon: Novo cupom
         new_currency: Nova Moeda
         new_locale: Nova localidade
         new_tax_category: Nova categoria de imposto
         "no": false
         no_account: Nenhuma conta
-        no_results_to_display: Não há nenhum resultado para exibir
-        no_taxes: Nenhuma taxa foi aplicada
         no_promotion: Sem promoções
+        no_requirement: Não há exigência
+        no_results_to_display: Não há nenhum resultado para exibir
         no_shipping_charges: Nenhuma taxa de entrega foi aplicada
+        no_taxes: Nenhuma taxa foi aplicada
+        no_theme: Sem tema
         not_contains: Não contêm
         not_empty: Não vazio
         not_in: Não em
+        onhold: Em espera
         or: Ou
+        partially_shipped: Parcialmente enviado
+        per_customer_usage_limit: Limite de uso por cliente
         powered_by: Desenvolvido por
+        price: Preço
+        privacy_policy: Política de privacidade
+        process_your_orders: Processar os seus pedidos
         promotion_configuration: Configuração de promoção
         promotion_information: Informações de promoção
+        purchased_from: Comprado de
         quantity: Quantidade
         ready: Pronto
         returned: Devolvido
+        returns_policy: Política de devolução
         save_changes: Salvar alterações
         shipped: Enviado
         shipping_methods: Métodos de envio
         show: Mostrar
         sign_in: Entre
         sign_out: Desconectar
+        simple_product: Produto simples
         starts_with: Começa com
         status: Estado
+        subtotal: Subtotal
         success: Sucesso
+        tax: Taxa
         tax_categories: Categorias de imposto
+        terms_and_conditions: Termos e condições
+        total_records: Total de registros
+        unlimited: Sem limite
+        usage: Uso
         values: Valores
         "yes": true
+        your_store: Sua loja
+        zone_consisting_of_countries: Zona constituída por países
+        zone_consisting_of_other_zones: Zona constituída por outras zonas
+        zone_consisting_of_provinces: Zona constituída por províncias

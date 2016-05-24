@@ -6,8 +6,9 @@ sylius:
         admin:
             main:
                 catalog:
-                    taxons: Таксони
                     options: Опції
+                    products: Продукти
+                    taxons: Таксони
                 configuration:
                     channels: Канали
                     countries: Країни
@@ -22,8 +23,8 @@ sylius:
                     header: Маркетинг
                     promotions: Промо-акції
                 customers:
-                    header: Клієнт
                     customers: Клієнти
+                    header: Клієнт
                 sales:
                     header: Продажі
                     orders: Замовлення

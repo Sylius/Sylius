@@ -19,9 +19,9 @@ sylius:
         new_country: Нова земља
         new_tax_category: Нова категорија пореза
         "no": false
-        no_taxes: Нису додати порези
         no_promotion: Ниједна промоција није додата
         no_shipping_charges: Нису додати трошкови поруџбине
+        no_taxes: Нису додати порези
         quantity: Количина
         save_changes: Сачувај измене
         shipping_methods: Начини доставе

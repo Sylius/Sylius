@@ -1,0 +1,7 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    resource:
+        not_enabled: O recurso fornecido está desativado
+        not_disabled: O recurso fornecido está ativado

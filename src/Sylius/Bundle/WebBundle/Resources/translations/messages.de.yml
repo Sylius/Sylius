@@ -553,6 +553,7 @@ sylius:
         provinces: Bundesländer
         qty_max: Maximal Anzahl
         qty_min: Mindestanzahl
+        quantity: Stückzahl
         rating: Bewertung
         recent_customers: Neuste Kunden
         recent_orders: Letzte Bestellungen
@@ -706,6 +707,7 @@ sylius:
         users_list_of_all_users_registered_in_store: Benutzer
         values: Werte
         variant_selection_method: Variantenauswahlmethode
+        variant: Varianten
         variants: Varianten
         view: Anzeigen
         view_more: Mehr anzeigen

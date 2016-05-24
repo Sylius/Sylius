@@ -85,6 +85,8 @@ sylius:
         no_shipments: 该订单无配送信息
         no_shipping_charges: 无运费
         no_taxes: 无税
+        state:
+            order_confirmed: 已确认
     order_item:
         quantity: 数量
         sellable: 产品
@@ -282,6 +284,7 @@ sylius:
         customer_not_notified: 未通知的客户
         customer_notified: 已通知的客户
         customer_orders: 客户订单
+        customer_since: 客户自
         customers: 客户
         customers_list_of_all_customers_in_store: '客户 <small>显示一个店铺的全部客户</small>'
         customize_default_metadata: 自定义默认元数据
@@ -554,6 +557,7 @@ sylius:
         provinces: 省份
         qty_max: 最大数量
         qty_min: 最小数量
+        quantity: 数量
         rating: 评分
         recent_customers: 最近的客户
         recent_orders: 最近的订单
@@ -606,6 +610,7 @@ sylius:
         shipping_methods: 发货方式
         shipping_state: 发货状态
         shipping_total: 运费共计
+        shop_by: 由店
         show_all: 显示全部
         show_deleted: 显示已删除
         show_in_store: 在商店中显示
@@ -706,6 +711,7 @@ sylius:
         users_list_of_all_users_registered_in_store: '用户 <small>在该店铺中注册的所有用户列表</small>'
         values: 值
         variant_selection_method: 变量选择方法
+        variant: 变体
         variants: 变体
         view: 查看
         view_more: 查看更多

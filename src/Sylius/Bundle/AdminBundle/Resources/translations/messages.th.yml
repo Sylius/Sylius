@@ -6,10 +6,11 @@ sylius:
         admin:
             main:
                 catalog:
-                    header: แค็ตตาล็อก
-                    taxons: หมวดหมู่
-                    options: ตัวเลือก
                     attributes: คุณลักษณะ (Attribute)
+                    header: แค็ตตาล็อก
+                    options: ตัวเลือก
+                    products: สินค้า
+                    taxons: หมวดหมู่
                 configuration:
                     channels: ช่องทางการจัดจำหน่าย
                     countries: ประเทศ
@@ -25,8 +26,8 @@ sylius:
                     header: การตลาด
                     promotions: ส่งเสริมการขาย
                 customers:
-                    header: ลูกค้า
                     customers: ลูกค้า
+                    header: ลูกค้า
                 sales:
                     header: ขาย
                     orders: ใบสั่งซื้อ

@@ -10,10 +10,10 @@ sylius:
         option:
             presentation: Präsentation
     ui:
-        add_coupon: Erstellt
-        all: Alle
         actions: Aktionen
+        add_coupon: Erstellt
         administration_panel_login: Administrations-Bereich Anmeldung
+        all: Alle
         an_error_occurred: Es ist ein Fehler aufgetreten
         are_your_sure_you_want_to_perform_this_action: Möchten Sie diese Aktion sicher durchführen?
         cancel: Abbrechen
@@ -24,8 +24,8 @@ sylius:
         confirm_your_action: Aktion bestätigen
         contains: Enthält
         countries: Länder
-        coupons: Gutscheine
         coupon_based: Gutschein basierend
+        coupons: Gutscheine
         create: Erstellen
         currencies: Währungen
         dashboard: Dashboard
@@ -47,6 +47,7 @@ sylius:
         filter: Filtern
         in: In
         info: Info
+        item: Produkt
         last_updated: Letzte Aktualisierung
         locales: Gebietsschemata
         manage_taxation_of_your_products: Besteuerung der Produkte verwalten
@@ -56,15 +57,16 @@ sylius:
         new_locale: Neue Lokalisierung
         new_tax_category: Neue Steuerkategorie
         "no": false
-        no_results_to_display: Es gibt keine Ergebnisse zum Anzeigen
-        no_taxes: Keine Steuern
         no_promotion: Keine Reklame
+        no_results_to_display: Es gibt keine Ergebnisse zum Anzeigen
         no_shipping_charges: Keine Versandkosten
+        no_taxes: Keine Steuern
         not_contains: Enthält nicht
         not_empty: Nicht leer
         not_in: Nicht in
         or: oder
         powered_by: Powered by
+        price: Preis
         quantity: Anzahl
         ready: Bereit
         returned: Zurückgesandt

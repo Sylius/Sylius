@@ -28,3 +28,11 @@ sylius:
             player_stream: Player stream
             player_stream_content_type: Player stream tipo de conteúdo
             app_name_iphone: Nome do aplicativo de iPhone
+            app_id_iphone: ID do aplicativo de iPhone
+            app_url_iphone: Url do aplicativo de iPhone
+            app_name_ipad: Nome do aplicativo de iPad
+            app_id_ipad: ID do aplicativo de iPad
+            app_url_ipad: Url do aplicativo de iPad
+            app_name_googleplay: Nome do aplicativo Google Play
+            app_id_googleplay: Id no Google Play
+            app_url_googleplay: Url do Google Play

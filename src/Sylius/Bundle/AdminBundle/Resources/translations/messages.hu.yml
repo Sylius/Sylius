@@ -6,8 +6,9 @@ sylius:
         admin:
             main:
                 catalog:
-                    taxons: Taxonok
                     options: Beállítások
+                    products: Termékek
+                    taxons: Taxonok
                 configuration:
                     channels: Csatornák
                     countries: Országok
@@ -22,8 +23,8 @@ sylius:
                     header: Marketing
                     promotions: Promóciók
                 customers:
-                    header: Ügyfél
                     customers: Ügyfelek
+                    header: Ügyfél
                 sales:
                     header: Értékesítés
                     orders: Rendelések

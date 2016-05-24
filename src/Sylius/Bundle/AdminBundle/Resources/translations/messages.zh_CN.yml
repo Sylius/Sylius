@@ -6,10 +6,11 @@ sylius:
         admin:
             main:
                 catalog:
-                    header: 目录
-                    taxons: 分类
-                    options: 选项
                     attributes: 属性
+                    header: 目录
+                    options: 选项
+                    products: 产品
+                    taxons: 分类
                 configuration:
                     channels: 频道
                     countries: 国家
@@ -25,8 +26,8 @@ sylius:
                     header: 市场营销
                     promotions: 促销活动
                 customers:
-                    header: 客户
                     customers: 客户
+                    header: 客户
                 sales:
                     header: 销售额
                     orders: 订单

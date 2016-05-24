@@ -28,6 +28,7 @@ sylius:
         presentation: Präsentation
         province: Kanton
         provinces: Kantone
+        quantity: Stückzahl
         restricted_zone: Beschränktes Versandgebiet
         roles: Rollen
         scope: Umfang

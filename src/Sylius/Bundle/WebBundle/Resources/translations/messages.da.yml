@@ -281,6 +281,7 @@ sylius:
         promotions: Kampagner
         province: Provins
         provinces: Provinser
+        quantity: Mængde
         recent_orders: De seneste ordrer
         recent_users: De seneste brugere
         register: Registrer

@@ -310,6 +310,7 @@ sylius:
         promotions: Промо-акції
         province: Область
         provinces: Провінції
+        quantity: Кількість
         recent_orders: Останні замовлення
         recent_users: Недавні користувачі
         refunded: Повернуто

@@ -3,6 +3,9 @@
 
 sylius:
     option:
+        code:
+            not_blank: Por favor, digite o nome de opção.
+            unique: A opção com determinado código já existe.
         name:
             not_blank: Por favor, digite o nome de opção.
             min_length: 'Nome da opção deve ter pelo menos 1 caracter. |Nome da opção deve ter pelo menos {{limit}} caracteres.'
@@ -14,6 +17,9 @@ sylius:
         values:
             min_count: 'Por favor, adicione pelo menos {{limite}} valores de opção. |Por favor, adicione pelo menos valores de opção de {{limit}}.'
     option_value:
+        code:
+            not_blank: Por favor digite o valor do código opcional.
+            unique: O valor da opção com determinado código já existe.
         value:
             not_blank: Por favor, insira o valor de opção.
     variant:

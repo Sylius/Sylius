@@ -17,5 +17,6 @@ sylius:
         enabled: Activat
         new: Nou
         "no": false
+        price: Preu
         success: Realitzat amb èxit
         "yes": true

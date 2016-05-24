@@ -10,8 +10,8 @@ sylius:
         option:
             presentation: Nazwa publiczna
     ui:
-        add_coupon: Dodaj kupon promocyjny
         actions: Akcje
+        add_coupon: Dodaj kupon promocyjny
         an_error_occurred: Wystąpił błąd
         are_your_sure_you_want_to_perform_this_action: Czy na pewno chcesz wykonać tę akcję?
         cancel: Anuluj
@@ -25,8 +25,8 @@ sylius:
         confirm_your_action: Potwierdź akcję
         contains: Zawiera
         countries: Kraje
-        coupons: Kupony
         coupon_based: Z wykorzystaniem kuponów
+        coupons: Kupony
         create: Utwórz
         currencies: Waluty
         dashboard: Panel
@@ -41,8 +41,8 @@ sylius:
         edit_currency: Edytuj walutę
         edit_customer: Edytuj klienta
         edit_payment_method: Edytuj metodę płatności
-        edit_product_option: Edytuj opcję produktu
         edit_product_attribute: Edytuj cechę produktu
+        edit_product_option: Edytuj opcję produktu
         edit_promotion: Edytuj promocję
         edit_shipping_method: Edytuj metodę wysyłki
         edit_tax_category: Edytuj kategorię podatkową
@@ -54,20 +54,21 @@ sylius:
         exclusive: Ekskluzywny
         expires_at: Wygasa dnia
         filter: Filtruj
+        item: Element
         last_updated: Ostatnia aktualizacja
         locales: Ustawienia regionalne
         manage_attributes_of_your_products: Zarządzaj cechami produktów
-        manage_currencies_available_in_the_store: Zarządzaj walutami dostępnymi w sklepie
-        manage_your_customers: Zarządzaj klientami
-        manage_languages_available_in_the_store: Zarządzaj językami dostępnymi w sklepie
+        manage_categorization_of_your_products: Zarządzaj kategoryzacją produktów
         manage_configuration_options_of_your_products: Zarządzaj opcjami konfiguracji produktów
+        manage_currencies_available_in_the_store: Zarządzaj walutami dostępnymi w sklepie
+        manage_discounts_and_promotional_campaigns: Zarządzaj rabatami i kampaniami promocyjnymi
+        manage_geographical_zones: Zarządzaj strefami geograficznymi
+        manage_languages_available_in_the_store: Zarządzaj językami dostępnymi w sklepie
         manage_payment_methods_available_to_your_customers: Zarządzaj metodami płatności dostępnymi dla klientów
         manage_shipping_destinations: Zarządzaj miejscami docelowymi wysyłek
-        manage_categorization_of_your_products: Zarządzaj kategoryzacją produktów
         manage_shipping_methods_for_your_store: Zarządzaj metodami wysyłki w sklepie
         manage_taxation_of_your_products: Zarządzaj opodatkowaniem produktów
-        manage_geographical_zones: Zarządzaj strefami geograficznymi
-        manage_discounts_and_promotional_campaigns: Zarządzaj rabatami i kampaniami promocyjnymi
+        manage_your_customers: Zarządzaj klientami
         new: Nowy
         new_channel: Nowy kanał
         new_country: Nowy kraj
@@ -75,10 +76,11 @@ sylius:
         new_locale: Nowe ustawienia regionalne
         new_tax_category: Nowa kategoria podatkowa
         "no": false
-        no_results_to_display: Brak wyników do wyświetlenia
-        no_taxes: Brak podatku
         no_promotion: Brak rabatów
+        no_results_to_display: Brak wyników do wyświetlenia
         no_shipping_charges: Brak opłaty za wysyłkę
+        no_taxes: Brak podatku
+        price: Cena
         promotion_configuration: Konfiguracja promocji
         quantity: Ilość
         ready: Gotowe
@@ -91,5 +93,5 @@ sylius:
         success: Sukces
         "yes": true
         zone_consisting_of_countries: Strefa składająca się z krajów
-        zone_consisting_of_provinces: Strefa składająca się z województw
         zone_consisting_of_other_zones: Strefa składająca się z innych stref
+        zone_consisting_of_provinces: Strefa składająca się z województw

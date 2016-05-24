@@ -6,10 +6,11 @@ sylius:
         admin:
             main:
                 catalog:
-                    header: Katalóg
-                    taxons: Kategórie
-                    options: Voľby
                     attributes: Vlastnosti
+                    header: Katalóg
+                    options: Voľby
+                    products: Produkty
+                    taxons: Kategórie
                 configuration:
                     channels: Kanály
                     countries: Krajiny
@@ -25,8 +26,8 @@ sylius:
                     header: Marketing
                     promotions: Akcie
                 customers:
-                    header: Zákazník
                     customers: Zákazníci
+                    header: Zákazník
                 sales:
                     header: Predaj
                     orders: Objednávky

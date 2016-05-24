@@ -6,10 +6,11 @@ sylius:
         admin:
             main:
                 catalog:
-                    header: Cataloog
-                    taxons: Taxons
-                    options: Opties
                     attributes: Attributen
+                    header: Cataloog
+                    options: Opties
+                    products: Producten
+                    taxons: Taxons
                 configuration:
                     channels: Kanalen
                     countries: Landen
@@ -25,8 +26,8 @@ sylius:
                     header: Marketing
                     promotions: Promoties
                 customers:
-                    header: Klant
                     customers: Klanten
+                    header: Klant
                 sales:
                     header: Omzet
                     orders: Bestellingen

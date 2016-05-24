@@ -10,15 +10,15 @@ sylius:
         option:
             presentation: Sunum
     ui:
-        add_coupon: Kupon Ekle
         actions: Eylemler
+        add_coupon: Kupon Ekle
         cancel: İptal
         cancelled: İptal Edildi
         checkout: 'Ödeme  yap'
         color: Renk
         countries: Ülkeler
-        coupons: Kuponlar
         coupon_based: Kupona dayalı
+        coupons: Kuponlar
         create: Oluştur
         currencies: Para birimi
         dashboard: Kontrol Paneli
@@ -31,15 +31,17 @@ sylius:
         exclusive: Özel
         expires_at: Süre sonu: 
         filter: Filtrele
+        item: Öğe
         locales: Diller
         new: Yeni
         new_country: Yeni ülke
         new_currency: Yeni para birimi
         new_tax_category: Yeni vergi kategorisi
         "no": false
-        no_taxes: Vergi uygulanmadı
         no_promotion: Uygulanan hiçbir promosyon yoktur
         no_shipping_charges: Uygulanan hiçbir kargo ücreti yoktur
+        no_taxes: Vergi uygulanmadı
+        price: Fiyatı
         quantity: Adet
         ready: Hazır
         returned: İade Edildi

@@ -11,9 +11,14 @@ sylius:
         email:
             not_blank: Por favor, insira seu email.
             invalid: Este email é inválido.
+            not_registered: Não existe um usuário com este e-mail. Registre-se primeiro.
         plainPassword:
             not_blank: Por favor informe sua senha.
             mismatch: As senhas não são idênticas
+            wrong_current: Senha fornecida é diferente do atual.
+        password:
+            min: 'Senha deve ter pelo menos {{ limit }} caracteres.'
+            max: 'Senha não deve ter mais de {{ limit }} caracteres.'
     customer:
         first_name:
             max: 'Nome não pode ser maior que {{ limit }} caracteres.'
@@ -23,6 +28,8 @@ sylius:
             max: 'Sobrenome não pode ser maior que {{ limit }} caracteres.'
             min: 'Sobrenome deve ter no mínimo {{ limit }} caracteres.'
             not_blank: Por favor, digite seu sobrenome.
+        gender:
+            not_blank: Por favor, escolha o seu sexo.
         email:
             already_used: Este email já foi utilizadao para cadastro, por favor logar ou usar esqueceu sua senha.
             max: 'Email não pode ter mais do que {{ limit }} caracteres.'

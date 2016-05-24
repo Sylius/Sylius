@@ -10,8 +10,8 @@ sylius:
         option:
             presentation: عنوان برای مشتری
     ui:
-        add_coupon: ایجاد کد تخفیف
         actions: طریقه اعمال
+        add_coupon: ایجاد کد تخفیف
         administration_panel_login: صفحه ورود به سيستم مديريت
         an_error_occurred: یک خطا روی داده است
         are_your_sure_you_want_to_perform_this_action: آیا از اعمال این کار اطمینان دارید؟
@@ -27,8 +27,8 @@ sylius:
         confirm_your_action: عملیات را تایید کنید
         contains: محتویات
         countries: كشور‌ها
-        coupons: کدهای تخفیف
         coupon_based: مبتنی بر کوپن
+        coupons: کدهای تخفیف
         create: ایجاد
         currencies: واحدهای پول
         dashboard: داشبورد
@@ -57,6 +57,7 @@ sylius:
         filter: فیلتر
         in: در
         info: اطلاعات
+        item: کالا
         last_updated: آخرین بروز رسانی
         locales: زبان ها
         manage_currencies_available_in_the_store: مدیریت واحدهای پولی موجود در فروشگاه
@@ -72,15 +73,16 @@ sylius:
         new_tax_category: نوع مالیاتی جدید
         "no": false
         no_account: بدون شناسه کاربری
-        no_results_to_display: هیچ نتیجه ای برای نمایش وجود ندارد
-        no_taxes: هیچ مالیاتی روی این سفارش اعمال نشده است
         no_promotion: هیچ نوع تخفیفی روی این سفارش اعمال نشده است
+        no_results_to_display: هیچ نتیجه ای برای نمایش وجود ندارد
         no_shipping_charges: هیچ هزینه ی ارسالی روی این سفارش اعمال نشده است
+        no_taxes: هیچ مالیاتی روی این سفارش اعمال نشده است
         not_contains: خالی است
         not_empty: خالی نیست
         not_in: وجود ندارد در
         or: یا
         powered_by: قدرت گرفته از
+        price: قیمت
         promotion_configuration: تنظیمات فروش ویژه
         promotion_information: اطلاعات فروش ویژه
         quantity: تعداد

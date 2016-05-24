@@ -85,6 +85,8 @@ sylius:
         no_shipments: No hay envíos para este pedido
         no_shipping_charges: Sin cargos de envío aplicados
         no_taxes: Sin impuestos
+        state:
+            order_confirmed: Pedido confirmado
     order_item:
         quantity: Cantidad
         sellable: Producto
@@ -119,6 +121,7 @@ sylius:
     shipment:
         no_items: No hay elementos para mostrar
         transition:
+            backorder: en espera
             cancel: cancelar
             prepare: preparar
             release: lanzamiento
@@ -554,6 +557,7 @@ sylius:
         provinces: Provincias
         qty_max: Cantidad Maxima
         qty_min: Cantidad minima
+        quantity: Cantidad
         rating: Valoración
         recent_customers: Clientes recientes
         recent_orders: Pedidos recientes
@@ -707,6 +711,7 @@ sylius:
         users_list_of_all_users_registered_in_store: Lista de todos los usuarios registrados en la tienda
         values: Valores
         variant_selection_method: étodo de selección de la variante
+        variant: Variantes
         variants: Variantes
         view: Ver
         view_more: Ver más

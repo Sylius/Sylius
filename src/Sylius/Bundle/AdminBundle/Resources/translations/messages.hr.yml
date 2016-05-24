@@ -6,8 +6,9 @@ sylius:
         admin:
             main:
                 catalog:
-                    taxons: Taksoni
                     options: Opcije
+                    products: Proizvodi
+                    taxons: Taksoni
                 configuration:
                     countries: Države
                     header: Postavke

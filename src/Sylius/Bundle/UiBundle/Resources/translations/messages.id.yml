@@ -11,4 +11,5 @@ sylius:
         default_currency: Mata uang default
         enabled: Diaktifkan
         "no": false
+        price: Harga
         "yes": true

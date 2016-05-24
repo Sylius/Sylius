@@ -6,9 +6,10 @@ sylius:
         admin:
             main:
                 catalog:
-                    taxons: Taksoni
-                    options: Možnosti
                     attributes: Atributi
+                    options: Možnosti
+                    products: Izdelki
+                    taxons: Taksoni
                 configuration:
                     channels: Kanali
                     countries: Države
@@ -23,8 +24,8 @@ sylius:
                     header: Oglaševanje
                     promotions: Promocije
                 customers:
-                    header: Kupec
                     customers: Kupci
+                    header: Kupec
                 sales:
                     header: Prodaja
                     orders: Naročila

@@ -9,14 +9,14 @@ sylius:
         option:
             presentation: Выгляд
     ui:
-        add_coupon: Дадаць купон
         actions: Дзеянні
+        add_coupon: Дадаць купон
         cancel: Адмяніць
         cancelled: Адменена
         checkout: Афрмленне замовы
         countries: Краіны
-        coupons: Купоны
         coupon_based: Заснавана на купонах
+        coupons: Купоны
         create: Стварыць
         dashboard: Прыборная панэль
         default_currency: Галоўная валюта
@@ -25,14 +25,16 @@ sylius:
         edit: Рэдагаваць
         enabled: Уключана
         filter: Фільтр
+        item: Тавар
         locales: Месцы размяшчэння
         new: Новы
         new_country: Новая краіна
         new_tax_category: Новая катэгорыя падатка
         "no": false
-        no_taxes: Без падаткаў
         no_promotion: Прамоцыя не дададзеная
         no_shipping_charges: Без платы за дастаўку
+        no_taxes: Без падаткаў
+        price: Кошт
         quantity: Колькасць
         ready: Гатова
         returned: Вернута

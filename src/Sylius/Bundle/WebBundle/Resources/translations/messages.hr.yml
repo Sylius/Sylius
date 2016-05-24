@@ -287,6 +287,7 @@ sylius:
         promotions: Promocije
         province: Županija
         provinces: Županije
+        quantity: Količina
         recent_orders: Posljednje narudžbe
         recent_users: Posljednji korisnici
         refunded: Refundirano

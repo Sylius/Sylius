@@ -20,9 +20,10 @@ sylius:
         filter: Φίλτρο
         new_country: Νέα χώρα
         "no": false
-        no_taxes: Δεν έχουν εφαρμοστεί φόροι
         no_promotion: Δεν έχει εφαρμοστεί προώθηση
         no_shipping_charges: Δεν έχουν εφαρμοστεί έξοδα αποστολής
+        no_taxes: Δεν έχουν εφαρμοστεί φόροι
+        price: Τιμή
         quantity: Ποσότητα
         ready: Έτοιμα
         returned: Επεστράφησαν

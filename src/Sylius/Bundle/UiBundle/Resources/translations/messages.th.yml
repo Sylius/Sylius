@@ -10,10 +10,11 @@ sylius:
         option:
             presentation: ผู้ใช้มองเห็น
     ui:
-        add_coupon: เพิ่มคูปอง
-        all: ทั้งหมด
+        account_credentials: ข้อมูลลับของบัญชี
         actions: ดำเนินการ
+        add_coupon: เพิ่มคูปอง
         administration_panel_login: เข้าสู่ระบบ Admin
+        all: ทั้งหมด
         an_error_occurred: เกิดข้อผิดพลาด
         are_your_sure_you_want_to_perform_this_action: คุณแน่ใจหรือคุณต้องการดำเนินการนี้หรือไม่
         available_for_channels: พร้อมจำหน่ายสำหรับ Channels
@@ -28,10 +29,11 @@ sylius:
         confirm_your_action: ยืนยันการกระทำของคุณ
         contains: ประกอบด้วย
         countries: ประเทศ
-        coupons: คูปอง
         coupon_based: ขึ้นกับคูปอง
+        coupons: คูปอง
         create: สร้าง
         currencies: สกุลเงิน
+        customer_can_login_to_the_store: ลูกค้าสามารถเข้าสู่ระบบได้
         dashboard: แดชบอร์ด
         date: วันที่
         default_currency: สกุลเงินหลัก
@@ -45,8 +47,8 @@ sylius:
         edit_currency: แก้ไขสกุลเงิน
         edit_customer: แก้ไขข้อมูลลูกค้า
         edit_payment_method: แก้ไขวิธีการชำระเงิน
-        edit_product_option: แก้ไขตัวเลือกสินค้า
         edit_product_attribute: แก้ไขคุณลักษณะสินค้า
+        edit_product_option: แก้ไขตัวเลือกสินค้า
         edit_promotion: แก้ไขโปรโมชั่น
         edit_shipping_method: แก้ไขวิธีการจัดส่ง
         edit_tax_category: แก้ไขประเภทภาษี
@@ -59,23 +61,27 @@ sylius:
         equal: เท่ากับ
         exclusive: พิเศษ
         expires_at: หมดอายุวันที่
+        extra_information: ข้อมูลเพิ่มเติม
         filter: ตัวกรอง
+        go: Go
         in: ใน
         info: ข้อมูล
+        item: รายการ
+        jump_to_page: ไปหน้า
         last_updated: ปรับปรุงครั้งล่าสุด
         locales: ภาษาที่ใช้
         manage_attributes_of_your_products: จัดการคุณลักษณะของสินค้าของคุณ
-        manage_currencies_available_in_the_store: จัดการสกุลเงิน
-        manage_your_customers: จัดการข้อมูลลูกค้า
-        manage_languages_available_in_the_store: จัดการภาษาที่พร้อมใช้งานในร้าน
+        manage_categorization_of_your_products: จัดการภาษี
         manage_configuration_options_of_your_products: จัดการตัวเลือกการกำหนดค่าของสินค้าของคุณ
+        manage_currencies_available_in_the_store: จัดการสกุลเงิน
+        manage_discounts_and_promotional_campaigns: จัดการส่วนลดและแคมเปญส่งเสริมการขาย
+        manage_geographical_zones: จัดการโซนทางภูมิศาสตร์
+        manage_languages_available_in_the_store: จัดการภาษาที่พร้อมใช้งานในร้าน
         manage_payment_methods_available_to_your_customers: จัดการวิธีการชำระเงินสำหรับลูกค้าของคุณ
         manage_shipping_destinations: จัดการวิธีการจัดส่ง
-        manage_categorization_of_your_products: จัดการภาษี
         manage_shipping_methods_for_your_store: จัดการวิธีการจัดส่งสินค้า
         manage_taxation_of_your_products: จัดการภาษีผลิตภัณฑ์ของคุณ
-        manage_geographical_zones: จัดการโซนทางภูมิศาสตร์
-        manage_discounts_and_promotional_campaigns: จัดการส่วนลดและแคมเปญส่งเสริมการขาย
+        manage_your_customers: จัดการข้อมูลลูกค้า
         new: รายการใหม่
         new_channel: เพิ่มช่องทางจำหน่าย
         new_country: ประเทศใหม่
@@ -84,10 +90,12 @@ sylius:
         new_tax_category: ประเภทภาษีใหม่
         "no": false
         no_account: ไม่มีบัญชี
-        no_results_to_display: ไม่มีผลลัพธ์จะแสดง
-        no_taxes: ไม่รวมภาษี
         no_promotion: ไม่รวมโปรโมชั่น
+        no_requirement: ไม่มีข้อกำหนด
+        no_results_to_display: ไม่มีผลลัพธ์จะแสดง
         no_shipping_charges: ไม่มีค่าธรรมเนียมการจัดส่ง
+        no_taxes: ไม่รวมภาษี
+        no_theme: No theme
         not_contains: ไม่ประกอบด้วย
         not_empty: ไม่ว่างเปล่า
         not_in: ไม่ได้อยู่ใน
@@ -95,6 +103,7 @@ sylius:
         powered_by: |
             ขับเคลื่อน
             โดย
+        price: ราคา
         promotion_configuration: กำหนดค่าโปรโมชั่น
         promotion_information: ข้อมูลโปรโมชั่น
         quantity: ปริมาณ
@@ -110,18 +119,11 @@ sylius:
         status: สถานะ
         success: สำเร็จ
         tax_categories: ประเภทภาษี
+        total_records: รายการทั้งหมด
+        unlimited: ไม่จำกัด
+        usage: การใช้งาน
         values: ค่า
         "yes": true
-        total_records: รายการทั้งหมด
-        jump_to_page: ไปหน้า
-        go: Go
-        unlimited: ไม่จำกัด
-        no_requirement: ไม่มีข้อกำหนด
         zone_consisting_of_countries: โซนที่ประกอบด้วยประเทศ
-        zone_consisting_of_provinces: โซนที่ประกอบด้วยประเทศ
         zone_consisting_of_other_zones: โซนที่ประกอบด้วยโซนอื่นๆ
-        no_theme: No theme
-        usage: การใช้งาน
-        customer_can_login_to_the_store: ลูกค้าสามารถเข้าสู่ระบบได้
-        account_credentials: ข้อมูลลับของบัญชี
-        extra_information: ข้อมูลเพิ่มเติม
+        zone_consisting_of_provinces: โซนที่ประกอบด้วยประเทศ

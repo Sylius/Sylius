@@ -462,6 +462,7 @@ sylius:
         provinces: İller
         qty_max: Maks miktar
         qty_min: Min miktar
+        quantity: Adet
         recent_customers: Son müşteriler
         recent_orders: Son siparişler
         recent_users: Son kullanıcılar
@@ -558,6 +559,7 @@ sylius:
         username: Kullanıcı adı
         users_list_of_all_users_registered_in_store: '<small>Tüm kullanıcıların listesini deposunda kayıtlı</small> kullanıcılar'
         variant_selection_method: Varyant seçme yöntemi
+        variant: Türevleri
         variants: Türevleri
         view: Görüntüle
         view_more: Detayları göster
