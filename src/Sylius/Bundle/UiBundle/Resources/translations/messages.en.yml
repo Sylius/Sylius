@@ -96,6 +96,7 @@ sylius:
         manage_taxation_of_your_products: Manage taxation of your products
         manage_your_customers: Manage your customers
         manage_your_product_catalog: Manage your product catalog
+        media: Media
         new: New
         new_channel: New channel
         new_country: New country
@@ -145,6 +146,7 @@ sylius:
         subtotal: Subtotal
         success: Success
         tax: Tax
+        taxonomy: Taxonomy
         tax_categories: Tax categories
         terms_and_conditions: Terms and Conditions
         total_records: Total records

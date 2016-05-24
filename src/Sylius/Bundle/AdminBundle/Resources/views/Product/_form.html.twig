@@ -1,10 +1,12 @@
 {{ form_errors(form) }}
 
 <div class="ui stackable grid">
-    <div class="four wide column">
+    <div class="three wide column">
         {% include '@SyliusAdmin/Product/_menu.html.twig' %}
     </div>
-    <div class="twelve wide column">
-        {% include '@SyliusAdmin/Product/_tabs.html.twig' %}
+    <div class="thirteen wide column">
+        <div class="ui segment">
+            {% include '@SyliusAdmin/Product/_tabs.html.twig' %}
+        </div>
     </div>
 </div>
