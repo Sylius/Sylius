@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c146d059e81a758b4c3fae5bbae7e244",
-    "content-hash": "4428c9cc3d8aa00241751656a74b7310",
+    "hash": "36c709990b5529f8c61cc9ddf6c1a390",
+    "content-hash": "e878856f6e84a310a0273b9e07e097d5",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -2975,7 +2975,7 @@
                     "email": "stof@notk.org"
                 },
                 {
-                    "name": "Knplabs",
+                    "name": "KnpLabs",
                     "homepage": "http://knplabs.com"
                 },
                 {
@@ -7086,12 +7086,12 @@
             "version": "1.2.3",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony-cmf/CreateBundle.git",
+                "url": "https://github.com/symfony-cmf/create-bundle.git",
                 "reference": "86a3ade0210bc30b304f9d992ff21c403681d7f3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony-cmf/CreateBundle/zipball/86a3ade0210bc30b304f9d992ff21c403681d7f3",
+                "url": "https://api.github.com/repos/symfony-cmf/create-bundle/zipball/86a3ade0210bc30b304f9d992ff21c403681d7f3",
                 "reference": "86a3ade0210bc30b304f9d992ff21c403681d7f3",
                 "shasum": ""
             },
@@ -7312,7 +7312,7 @@
             ],
             "authors": [
                 {
-                    "name": "Symfony CMF Community",
+                    "name": "Symfony CMF community",
                     "homepage": "https://github.com/symfony-cmf/Routing/contributors"
                 }
             ],
@@ -10008,12 +10008,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Lakion/ApiTestCase.git",
-                "reference": "c4d37eccbaa49f06a317d22198649517627ed599"
+                "reference": "ec152e9d55d3e4a05eb7192c522661ec7620b5e3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Lakion/ApiTestCase/zipball/c4d37eccbaa49f06a317d22198649517627ed599",
-                "reference": "c4d37eccbaa49f06a317d22198649517627ed599",
+                "url": "https://api.github.com/repos/Lakion/ApiTestCase/zipball/ec152e9d55d3e4a05eb7192c522661ec7620b5e3",
+                "reference": "ec152e9d55d3e4a05eb7192c522661ec7620b5e3",
                 "shasum": ""
             },
             "require": {
@@ -10078,7 +10078,7 @@
                 "testcase",
                 "xml"
             ],
-            "time": "2016-03-26 13:06:40"
+            "time": "2016-06-06 12:52:07"
         },
         {
             "name": "lakion/mink-debug-extension",

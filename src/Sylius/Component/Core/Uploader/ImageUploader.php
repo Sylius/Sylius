@@ -44,7 +44,7 @@ final class ImageUploader implements ImageUploaderInterface
      */
     public function upload(ImageInterface $image)
     {
-        if (false === $image->hasFile()) {
+        if (!$image->hasFile()) {
             return;
         }
 

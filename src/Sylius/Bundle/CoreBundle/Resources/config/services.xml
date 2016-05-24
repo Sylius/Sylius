@@ -456,8 +456,22 @@
 
         <service id="sylius.image_uploader" class="%sylius.image_uploader.class%">
             <argument type="service">
-                <service class="Gaufrette\Filesystem" factory-service="knp_gaufrette.filesystem_map" factory-method="get">
+                <service class="Gaufrette\Filesystem">
                     <argument>%sylius.uploader.filesystem%</argument>
+                    <factory service="knp_gaufrette.filesystem_map" method="get" />
+                </service>
+            </argument>
+            <argument type="service" id="sylius.image_uploader.path_provider" />
+        </service>
+
+        <service id="sylius.image_uploader.path_provider" class="Sylius\Component\Core\Uploader\GeneratorBasedPathProvider">
+            <argument type="service">
+                <service class="Sylius\Component\Core\Uploader\ChunkingPathGenerator">
+                    <argument type="service">
+                        <service class="Sylius\Component\Core\Uploader\NonrandomPathGenerator" />
+                    </argument>
+                    <argument>2</argument>
+                    <argument>2</argument>
                 </service>
             </argument>
         </service>

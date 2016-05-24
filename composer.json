@@ -98,6 +98,7 @@
         "pamil/prophecy-common": "^0.1",
         "pamil/phpspec-generator-extension": "^0.3",
         "phpspec/phpspec": "^2.4",
+        "phpspec/prophecy": "^1.6",
         "phpunit/phpunit": "~4.1",
         "se/selenium-server-standalone": "^2.52"
     },
