@@ -39,6 +39,7 @@
         <parameter key="sylius.behat.context.ui.theme.class">Sylius\Behat\Context\Ui\ThemeContext</parameter>
         <parameter key="sylius.behat.context.ui.user.class">Sylius\Behat\Context\Ui\UserContext</parameter>
 
+        <parameter key="sylius.behat.context.ui.shop.account.class">Sylius\Behat\Context\Ui\Shop\AccountContext</parameter>
         <parameter key="sylius.behat.context.ui.shop.cart.class">Sylius\Behat\Context\Ui\Shop\CartContext</parameter>
         <parameter key="sylius.behat.context.ui.shop.product.class">Sylius\Behat\Context\Ui\Shop\ProductContext</parameter>
     </parameters>
@@ -244,6 +245,13 @@
             <argument type="service" id="sylius.behat.page.admin.customer.show" />
             <argument type="service" id="sylius.behat.page.shop.user.login" />
             <argument type="service" id="sylius.behat.page.shop.user.register" />
+            <tag name="sylius.behat.context" />
+        </service>
+
+        <service id="sylius.behat.context.ui.shop.account" class="%sylius.behat.context.ui.shop.account.class%" scope="scenario">
+            <argument type="service" id="sylius.behat.page.shop.account.dashboard" />
+            <argument type="service" id="sylius.behat.page.shop.account.profile_update" />
+            <argument type="service" id="sylius.behat.notification_checker" />
             <tag name="sylius.behat.context" />
         </service>
 

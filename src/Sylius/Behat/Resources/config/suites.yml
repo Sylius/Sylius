@@ -38,6 +38,7 @@ imports:
     - suites/legacy/taxonomy.yml
     - suites/legacy/user.yml
 
+    - suites/ui/account/customer_account.yml
     - suites/ui/addressing/managing_countries.yml
     - suites/ui/addressing/managing_zones.yml
     - suites/ui/cart/shopping_cart.yml
