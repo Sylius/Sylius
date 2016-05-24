@@ -16,24 +16,19 @@ use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Taxonomy\Model\Taxon as BaseTaxon;
 use Sylius\Component\Taxonomy\Model\TaxonTranslation;
 
-class Taxon extends BaseTaxon implements ImageInterface, TaxonInterface
+class Taxon extends BaseTaxon implements TaxonInterface
 {
     use TimestampableTrait;
-
-    /**
-     * @var \SplFileInfo
-     */
-    protected $file;
-
-    /**
-     * @var string
-     */
-    protected $path;
 
     /**
      * @var ArrayCollection
      */
     protected $products;
+
+    /**
+     * @var ImageInterface
+     */
+    protected $image;
 
     public function __construct()
     {
@@ -46,49 +41,25 @@ class Taxon extends BaseTaxon implements ImageInterface, TaxonInterface
     /**
      * {@inheritdoc}
      */
-    public function hasFile()
+    public function hasImage()
     {
-        return null !== $this->file;
+        return null !== $this->image;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getFile()
+    public function getImage()
     {
-        return $this->file;
+        return $this->image;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setFile(\SplFileInfo $file)
+    public function setImage(ImageInterface $image)
     {
-        $this->file = $file;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasPath()
-    {
-        return null !== $this->path;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPath()
-    {
-        return $this->path;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setPath($path)
-    {
-        $this->path = $path;
+        $this->image = $image;
     }
 
     /**
