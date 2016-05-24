@@ -53,7 +53,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
      */
     public function getNumberOfNewOrders()
     {
-        return $this->getElement('new_orders')->getText();
+        return (int) $this->getElement('new_orders')->getText();
     }
 
     /**
@@ -69,7 +69,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
      */
     public function getNumberOfNewCustomers()
     {
-        return $this->getElement('new_customers')->getText();
+        return (int) $this->getElement('new_customers')->getText();
     }
 
     /**

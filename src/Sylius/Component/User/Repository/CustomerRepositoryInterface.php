@@ -12,7 +12,7 @@
 namespace Sylius\Component\User\Repository;
 
 use Pagerfanta\Pagerfanta;
-use Sylius\Component\Core\Model\UserInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -26,9 +26,16 @@ interface CustomerRepositoryInterface extends RepositoryInterface
     public function count();
 
     /**
+     * @param int $count
+     *
+     * @return CustomerInterface[]
+     */
+    public function findLatest($count);
+
+    /**
      * @param mixed $id
      *
-     * @return null|UserInterface
+     * @return null|CustomerInterface
      */
     public function findForDetailsPage($id);
 

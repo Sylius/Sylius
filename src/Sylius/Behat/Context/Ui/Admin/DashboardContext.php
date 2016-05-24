@@ -46,7 +46,7 @@ final class DashboardContext implements Context
      */
     public function iShouldSeeNewOrders($number)
     {
-        Assert::eq($this->dashboardPage->getNumberOfNewOrders(), $number);
+        Assert::same($this->dashboardPage->getNumberOfNewOrders(), $number);
     }
 
     /**
@@ -54,7 +54,7 @@ final class DashboardContext implements Context
      */
     public function iShouldSeeNewCustomers($number)
     {
-        Assert::eq($this->dashboardPage->getNumberOfNewCustomers(), $number);
+        Assert::same($this->dashboardPage->getNumberOfNewCustomers(), $number);
     }
 
     /**
@@ -62,7 +62,7 @@ final class DashboardContext implements Context
      */
     public function thereShouldBeTotalSalesOf($total)
     {
-        Assert::eq($this->dashboardPage->getTotalSales(), $total);
+        Assert::same($this->dashboardPage->getTotalSales(), $total);
     }
 
     /**
@@ -70,7 +70,7 @@ final class DashboardContext implements Context
      */
     public function myAverageOrderValueShouldBe($value)
     {
-        Assert::eq($this->dashboardPage->getAverageOrderValue(), $value);
+        Assert::same($this->dashboardPage->getAverageOrderValue(), $value);
     }
 
     /**
@@ -78,7 +78,7 @@ final class DashboardContext implements Context
      */
     public function iShouldSeeCustomersInTheList2($number)
     {
-        Assert::eq($this->dashboardPage->getNumberOfNewCustomersInTheList(), $number);
+        Assert::same($this->dashboardPage->getNumberOfNewCustomersInTheList(), $number);
     }
 
     /**
@@ -86,6 +86,6 @@ final class DashboardContext implements Context
      */
     public function iShouldSeeNewOrdersInTheList($number)
     {
-        Assert::eq($this->dashboardPage->getNumberOfNewOrdersInTheList(), $number);
+        Assert::same($this->dashboardPage->getNumberOfNewOrdersInTheList(), $number);
     }
 }

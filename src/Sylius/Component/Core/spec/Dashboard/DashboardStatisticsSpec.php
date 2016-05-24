@@ -34,9 +34,11 @@ class DashboardStatisticsSpec extends ObjectBehavior
 
     function it_throws_exception_if_any_of_values_if_not_an_int()
     {
+        $this->beConstructedWith('string', 2.5, 'foo');
+
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('__construct', ['string', 2.5, 'foo'])
+            ->duringInstantiation()
         ;
     }
     
