@@ -1,7 +1,7 @@
 @customer_account
 Feature: Editing a customer profile
     In order to manage my personal information
-    As a logged user
+    As a Customer
     I want to be able to edit my name and email
 
     Background:

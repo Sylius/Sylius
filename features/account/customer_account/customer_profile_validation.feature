@@ -1,8 +1,8 @@
 @customer_account
 Feature: Customer profile validation
     In order to avoid making mistakes when changing my personal information
-    As a logged user
-    I want to be prevented from changing fields to incorrect values
+    As a Customer
+    I want to be prevented from entering incorrect values
 
     Background:
         Given the store operates on a single channel in "France"
