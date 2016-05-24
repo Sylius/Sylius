@@ -1,0 +1,35 @@
+<table class="ui single line table" id="product-variants">
+    <thead>
+    <tr>
+        <th>{{ 'sylius.ui.variant'|trans }}</th>
+        <th>{{ 'sylius.ui.price'|trans }}</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for variant in product.variants if variant.available %}
+        <tr>
+            <td>
+                {{ variant.presentation }}
+                {% if product.hasOptions() %}
+                    <div class="ui horizontal divided list">
+                        {% for option in variant.options %}
+                            <div class="item">
+                                {{ option.value }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </td>
+            <td>{{ variant.price|sylius_price }}</td>
+            <td>
+                {% if sylius_inventory_is_available(variant) %}
+                    {{ form_widget(form.variant[loop.index0]) }}
+                {% else %}
+                    <span class="ui label">{{ 'sylius.ui.out_of_stock'|trans }}</span>
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>

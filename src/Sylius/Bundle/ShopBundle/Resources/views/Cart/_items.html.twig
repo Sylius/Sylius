@@ -1,0 +1,28 @@
+<div class="ui segment">
+    <table class="ui very basic celled table">
+        <thead>
+        <tr>
+            <th>{{ 'sylius.ui.item'|trans }}</th>
+            <th>{{ 'sylius.ui.unit_price'|trans }}</th>
+            <th>{{ 'sylius.ui.qty'|trans }}</th>
+            <th>{{ 'sylius.ui.subtotal'|trans }}</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for item in cart.items %}
+                {% include '@SyliusShop/Cart/_item.html.twig' %}
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="ui hidden divider"></div>
+    <div class="ui action input">
+        {{ form_widget(form.promotionCoupon, {'attr': {'placeholder': 'sylius.ui.enter_your_code'|trans~'...'}}) }}
+        <button type="submit" class="ui teal icon labeled button"><i class="ticket icon"></i> {{ 'sylius.ui.apply_coupon'|trans }}</button>
+    </div>
+    <div class="ui hidden divider"></div>
+    <a href="{{ path('sylius_shop_cart_clear') }}" class="ui clear button">
+        <i class="icon remove"></i> {{ 'sylius.ui.clear_cart'|trans }}
+    </a>
+    <button type="submit" class="ui icon button"><i class="save icon"></i> {{ 'sylius.ui.update_cart'|trans }}</button>
+</div>

@@ -1,0 +1,14 @@
+<div class="ui bottom attached tab segment" data-tab="attributes">
+    <table class="ui definition table">
+        <tbody>
+        {% for attribute in product.attributes %}
+            <tr>
+                <td>{{ attribute.name }}</td>
+                <td>
+                    {% include [('SyliusAttributeBundle:Types:'~attribute.attribute.type~'.html.twig')] with {'attribute': attribute} %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>

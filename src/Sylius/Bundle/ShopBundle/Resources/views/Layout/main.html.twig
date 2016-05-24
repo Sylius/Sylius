@@ -15,170 +15,31 @@
     {% block stylesheets %}
         {% include 'SyliusUiBundle::_stylesheets.html.twig' with {'path': 'assets/shop/css/style.css'} %}
     {% endblock %}
-
-    <style type="text/css">
-        #header {
-            margin-top: 40px;
-        }
-        .masthead.segment {
-          min-height: 400px;
-          padding: 1em 0em;
-        }
-        .masthead .logo.item img {
-          margin-right: 1em;
-        }
-        .masthead .ui.menu .ui.button {
-          margin-left: 0.5em;
-        }
-        .masthead h1.ui.header {
-          margin-top: 1em;
-          margin-bottom: 0em;
-          font-size: 4em;
-          font-weight: normal;
-        }
-        .masthead h2 {
-          font-size: 1.7em;
-          font-weight: normal;
-        }
-
-        .ui.vertical.stripe {
-          padding: 3em 0em;
-        }
-        .ui.vertical.stripe h3 {
-          font-size: 2em;
-        }
-        .ui.vertical.stripe .button + h3,
-        .ui.vertical.stripe p + h3 {
-          margin-top: 3em;
-        }
-        .ui.vertical.stripe .floated.image {
-          clear: both;
-        }
-        .ui.vertical.stripe p {
-          font-size: 1.33em;
-        }
-        .ui.vertical.stripe .horizontal.divider {
-          margin: 3em 0em;
-        }
-
-        .quote.stripe.segment {
-          padding: 0em;
-        }
-        .quote.stripe.segment .grid .column {
-          padding-top: 5em;
-          padding-bottom: 5em;
-        }
-
-        .footer.segment {
-          padding: 5em 0em;
-        }
-
-        .secondary.pointing.menu .toc.item {
-          display: none;
-        }
-
-        @media only screen and (max-width: 700px) {
-          .ui.fixed.menu {
-            display: none !important;
-          }
-          .secondary.pointing.menu .item,
-          .secondary.pointing.menu .menu {
-            display: none;
-          }
-          .secondary.pointing.menu .toc.item {
-            display: block;
-          }
-          .masthead.segment {
-            min-height: 350px;
-          }
-          .masthead h1.ui.header {
-            font-size: 2em;
-            margin-top: 1.5em;
-          }
-          .masthead h2 {
-            margin-top: 0.5em;
-            font-size: 1.5em;
-          }
-        }
-      </style>
 </head>
 
 <body class="pushable">
-<div class="ui right sidebar vertical inverted menu" id="sidebar">
-    <a href="#" class="item"><i class="cart icon"></i> Your cart</a>
-    <div class="item">
-        <div class="active header">Items</div>
-        <div class="menu">
-            <div class="item">
-                Bud Light x 4 $29.99
-            </div>
-            <div class="item">
-                Bud Light x 4 $29.99
-            </div>
-            <div class="item">
-                Bud Light x 4 $29.99
-            </div>
-        </div>
-    </div>
-    <div class="item">
-        Quantity: 10 <br>
-        Tax Total: $5.99 <br>
-        Shipping Total: $2.99 <br>
-        Total: $29.99 <br>
-    </div>
-</div>
 <div class="pusher">
-<div class="ui sticky menu">
-    <div class="ui pointing dropdown link item">
-        <span class="text">USD</span>
-        <i class="dropdown icon"></i>
-        <div class="menu">
-            <a class="item">USD</a>
-            <a class="item">GBP</a>
-            <a class="item">EUR</a>
-            <a class="item">PLN</a>
-        </div>
+    <div id="menu" class="ui large sticky inverted stackable menu">
+        {% include 'SyliusShopBundle:Homepage/Menu:_security.html.twig' %}
     </div>
-    <div class="ui pointing dropdown link item">
-        <span class="text"><i class="us flag"></i> English</span>
-        <i class="dropdown icon"></i>
-        <div class="menu">
-            <a class="item"><i class="us flag"></i> English</a>
-            <a class="item"><i class="pl flag"></i> Polish</a>
-            <a class="item"><i class="es flag"></i> Spanish</a>
-            <a class="item"><i class="fr flag"></i> French</a>
-            <a class="item"><i class="de flag"></i> Germany</a>
-        </div>
+
+    <div class="ui container">
+        {% include '@SyliusShop/Homepage/_header.html.twig' %}
+
+        {% render(url('sylius_shop_partial_taxon_by_code', {'code': 'category', 'template': '@SyliusShop/Taxon/_horizontalMenu.html.twig'})) %}
+        {% include '@SyliusUi/_flashes.html.twig' %}
+
+        {% block content %}
+        {% endblock %}
     </div>
-    <div class="right menu">
-        <div class="item">
-            <div class="ui transparent icon input">
-                <input type="text" placeholder="Search...">
-                <i class="search link icon"></i>
-            </div>
-        </div>
-        <a class="item" id="sidebar-toggle"><i class="cart icon"></i> 10 items for $29.99</a>
-    </div>
-</div>
-{% block header %}
-    {% include 'SyliusShopBundle:Homepage:_header.html.twig' %}
-{% endblock %}
 
-{% block flashes %}
-    {% include 'SyliusUiBundle::_flashes.html.twig' %}
-{% endblock %}
-
-{% block content %}
-{% endblock %}
-
-{% block footer %}
-    {% include 'SyliusShopBundle:Homepage:_footer.html.twig' %}
-{% endblock %}
+    {% block footer %}
+        {% include 'SyliusShopBundle:Homepage:_footer.html.twig' %}
+    {% endblock %}
 </div>
 
 {% block javascripts %}
     {% include 'SyliusUiBundle::_javascripts.html.twig' with {'path': 'assets/shop/js/app.js'} %}
 {% endblock %}
-
 </body>
 </html>

@@ -1,0 +1,8 @@
+<div class="right menu">
+    {% if is_granted('ROLE_AUTHENTICATED_REMEMBERED') %}
+        <a href="{{ path('sylius_shop_logout') }}" class="item">{{ 'sylius.ui.logout'|trans }}</a>
+    {% else %}
+        <a href="{{ path('sylius_shop_login') }}" class="item">{{ 'sylius.ui.login'|trans }}</a>
+        <a href="{{ path('sylius_shop_registration') }}" class="item">{{ 'sylius.ui.register'|trans }}</a>
+    {% endif %}
+</div>

@@ -1,60 +1,31 @@
 {% extends 'SyliusShopBundle:Layout:main.html.twig' %}
 
-{% from 'SyliusShopBundle:Product:macros.html.twig' import sylius_display_price%}
-
-{% set form = sylius_cart_form({'product': product}) %}
-
 {% block content %}
-<h3 class="ui dividing header" id="sylius_product_name">
-    {{ product.name }}
-</h3>
-<div class="ui segment">
-    <div class="ui two column grid">
-        <div class="column">
-            <div class="ui segment">
-                <img src="{{ product.image ? product.image.path|imagine_filter('sylius_medium') : 'http://placehold.it/200x200' }}" alt="{{ product.name }}" />
-                {% if product.attributes|length > 0 %}
-                <table class="ui single line table" id="product-attributes">
-                    <thead>
-                        <tr>
-                            <th colspan="2">{{ 'sylius.ui.attributes'|trans }}</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {% for attribute in product.attributes %}
-                        <tr>
-                            <td id="sylius_attribute_name">
-                                {{ attribute.name }}
-                            </td>
-                            <td id="sylius_attribute_value">
-                                {% set attributeTemplate = 'SyliusAttributeBundle:Types:' ~ attribute.attribute.type ~ '.html.twig' %}
-                                {% include [attributeTemplate, 'SyliusShopBundle:Product:_attribute.html.twig'] with {'attribute': attribute} %}
-                            </td>
-                        </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-                {% endif %}
-            </div>
-        </div>
-        <div class="column">
-            <div class="ui segment">
-                <form action="{{ path('sylius_shop_cart_item_add', {'id': product.id}) }}" method="post" novalidate>
-                    {% include ['SyliusShopBundle:Product:_variant.html.twig'] with {'product': product, 'form': form} %}
-                    {% if not product.hasVariants and not sylius_inventory_is_available(product.firstVariant) %}
-                        <span class="ui red label">{{ 'sylius.ui.out_of_stock'|trans }}</span>
-                    {% else %}
-                        {{ form_row(form.quantity, {'empty_value': '1'}) }}
-                        {{ form_widget(form._token) }}
-                        <div class="ui hidden divider"></div>
-                        <button type="submit" class="ui labeled icon button">
-                            <i class="icon cart"></i>
-                            {{ 'sylius.ui.add_to_cart'|trans }}
-                        </button>
-                    {% endif %}
-                </form>
-            </div>
-        </div>
+{% include '@SyliusShop/Product/Show/_breadcrumb.html.twig' %}
+{% include '@SyliusShop/Product/Show/_header.html.twig' %}
+
+<div class="ui two column stackable grid">
+    <div class="column">
+        {% include '@SyliusShop/Product/Show/_price.html.twig' %}
+    </div>
+    <div class="right aligned column">
+        <span>{{ 'sylius.ui.code'|trans }}: {{ product.code }}</span>
     </div>
 </div>
+
+<div class="ui basic segment">
+    <p>
+        {{ product.shortDescription }}
+    </p>
+</div>
+
+{% include '@SyliusShop/Product/Show/_addToCart.html.twig' %}
+
+<div class="ui hidden divider"></div>
+
+<div class="ui top attached large tabular menu">
+    {% include '@SyliusShop/Product/Show/_menu.html.twig' %}
+</div>
+{% include '@SyliusShop/Product/Show/_tabs.html.twig' %}
+
 {% endblock %}

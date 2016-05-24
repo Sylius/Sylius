@@ -1,0 +1,27 @@
+{% macro item(taxon) %}
+    {% import _self as macros %}
+
+    {% if taxon.children|length > 0 %}
+        <div class="ui dropdown item">
+            <span class="text">{{ taxon.name }}</span>
+            <i class="dropdown icon"></i>
+            <div class="menu">
+                {% for childTaxon in taxon.children %}
+                    {{ macros.item(childTaxon) }}
+                {% endfor %}
+            </div>
+        </div>
+    {% else %}
+        <a href="#" class="item">{{ taxon.name }}</a>
+    {% endif %}
+{% endmacro %}
+
+{% import _self as macros %}
+
+{% if taxons|length > 0 %}
+<div class="ui large stackable menu">
+    {% for taxon in taxons %}
+        {{ macros.item(taxon) }}
+    {% endfor %}
+</div>
+{% endif %}
