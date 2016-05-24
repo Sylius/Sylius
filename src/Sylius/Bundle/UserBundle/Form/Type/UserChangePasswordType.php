@@ -22,6 +22,26 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class UserChangePasswordType extends AbstractType
 {
     /**
+     * @var string
+     */
+    protected $dataClass = null;
+
+    /**
+     * @var string[]
+     */
+    protected $validationGroups = [];
+
+    /**
+     * @param string $dataClass
+     * @param string[] $validationGroups
+     */
+    public function __construct($dataClass, array $validationGroups = [])
+    {
+        $this->dataClass = $dataClass;
+        $this->validationGroups = $validationGroups;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -45,8 +65,8 @@ class UserChangePasswordType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => ChangePassword::class,
-            'validation_groups' => ['sylius'],
+            'data_class' => $this->dataClass,
+            'validation_groups' => $this->validationGroups,
         ]);
     }
 
