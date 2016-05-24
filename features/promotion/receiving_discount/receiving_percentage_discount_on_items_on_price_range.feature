@@ -16,7 +16,6 @@ Feature: Receiving percentage discount on products from specific price range
         When I add product "PHP T-Shirt" to the cart
         Then its price should be decreased by "€10.00"
         And my cart total should be "€90.00"
-        And my discount should be "-€10.00"
 
     @ui
     Scenario: Receiving percentage discount on a single item with price equal to filter minimum criteria
@@ -24,7 +23,6 @@ Feature: Receiving percentage discount on products from specific price range
         When I add product "PHP T-Shirt" to the cart
         Then its price should be decreased by "€10.00"
         And my cart total should be "€90.00"
-        And my discount should be "-€10.00"
 
     @ui
     Scenario: Receiving percentage discount on a single item fulfilling range price criteria
@@ -32,7 +30,6 @@ Feature: Receiving percentage discount on products from specific price range
         When I add product "PHP Mug" to the cart
         Then its price should be decreased by "€10.00"
         And my cart total should be "€10.00"
-        And my discount should be "-€10.00"
 
     @ui
     Scenario: Receiving percentage discount on a single item with price equal to filter range minimum criteria
@@ -40,7 +37,6 @@ Feature: Receiving percentage discount on products from specific price range
         When I add product "PHP Mug" to the cart
         Then its price should be decreased by "€10.00"
         And my cart total should be "€10.00"
-        And my discount should be "-€10.00"
 
     @ui
     Scenario: Receiving percentage discount on a single item with price equal to filter range maximum criteria
@@ -48,7 +44,6 @@ Feature: Receiving percentage discount on products from specific price range
         When I add product "PHP Mug" to the cart
         Then its price should be decreased by "€10.00"
         And my cart total should be "€10.00"
-        And my discount should be "-€10.00"
 
     @ui
     Scenario: Receiving percentage discount on multiple items fulfilling range price criteria
@@ -56,7 +51,6 @@ Feature: Receiving percentage discount on products from specific price range
         When I add 3 products "PHP T-Shirt" to the cart
         Then theirs price should be decreased by "€150.00"
         And my cart total should be "€150.00"
-        And my discount should be "-€150.00"
 
     @ui
     Scenario: Receiving percentage discount only on items that fit price range criteria
@@ -66,7 +60,6 @@ Feature: Receiving percentage discount on products from specific price range
         Then product "PHP T-Shirt" price should be decreased by "€25.00"
         And product "PHP Mug" price should not be decreased
         And my cart total should be "€95.00"
-        And my discount should be "-€25.00"
 
     @ui
     Scenario: Receiving different discounts on items from different price ranges
@@ -78,4 +71,3 @@ Feature: Receiving percentage discount on products from specific price range
         Then product "PHP T-Shirt" price should be decreased by "€10.00"
         And product "PHP Mug" price should be decreased by "€18.00"
         And my cart total should be "€92.00"
-        And my discount should be "-€28.00"

@@ -41,7 +41,7 @@
             <div class="column">
                 <table class="ui single line table" id="cart-summary">
                     <tbody>
-                        {% set promotionTotal =  cart.getPromotionsTotalRecursively() %}
+                        {% set promotionTotal =  cart.orderPromotionTotal %}
                         {% if promotionTotal %}
                             <tr>
                                 <td colspan="6" style="text-align: right;">
@@ -51,8 +51,7 @@
                         {% endif %}
                         <tr>
                             <td colspan="6" style="text-align: right;">
-                                {% set shippingTotal = cart.adjustmentsTotal(taxAdjustment) + cart.adjustmentsTotal(shippingAdjustment) %}
-                                <strong>{{ 'sylius.ui.shipping_total'|trans }}</strong>: {{ shippingTotal|sylius_price }}
+                                <strong>{{ 'sylius.ui.shipping_total'|trans }}</strong>: {{ cart.shippingTotal|sylius_price }}
                             </td>
                         </tr>
                         <tr>

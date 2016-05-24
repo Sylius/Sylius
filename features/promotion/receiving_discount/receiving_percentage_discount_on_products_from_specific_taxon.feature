@@ -19,14 +19,12 @@ Feature: Receiving percentage discount on products from specific taxon
         When I add product "PHP T-Shirt" to the cart
         Then its price should be decreased by "€20.00"
         And my cart total should be "€80.00"
-        And my discount should be "-€20.00"
 
     @ui
     Scenario: Receiving percentage discount on a multiple items from specific taxon
         When I add 3 products "PHP T-Shirt" to the cart
         Then theirs price should be decreased by "€60.00"
         And my cart total should be "€240.00"
-        And my discount should be "-€60.00"
 
     @ui
     Scenario: Receiving percentage discount only on items from specific taxon
@@ -35,7 +33,6 @@ Feature: Receiving percentage discount on products from specific taxon
         Then product "PHP T-Shirt" price should be decreased by "€20.00"
         And product "PHP Mug" price should not be decreased
         And my cart total should be "€100.00"
-        And my discount should be "-€20.00"
 
     @ui
     Scenario: Receiving different discounts on items from different taxons
@@ -46,4 +43,3 @@ Feature: Receiving percentage discount on products from specific taxon
         Then product "PHP T-Shirt" price should be decreased by "€20.00"
         And product "PHP Mug" price should be decreased by "€10.00"
         And my cart total should be "€90.00"
-        And my discount should be "-€30.00"

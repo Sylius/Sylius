@@ -30,8 +30,7 @@ Feature: Reapplying promotion on cart change
         And I chose "DHL" shipping method
         When I change shipping method to "FedEx"
         Then my cart total should be "€100.00"
-        And my cart shipping fee should be "€30.00"
-        And my discount should be "-€30.00"
+        And my cart shipping fee should be "€0.00"
 
     @ui
     Scenario: Receiving discount after removing an item from the cart and then adding another one
