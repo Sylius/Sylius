@@ -21,3 +21,12 @@ sylius_shop_account_profile_update:
                 method: find
                 arguments: [expr:service('sylius.context.customer').getCustomer().getId()]
             redirect: sylius_shop_account_dashboard
+
+sylius_shop_account_change_password:
+    path: /change-password
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.user:changePasswordAction
+        _sylius:
+            template: SyliusShopBundle:Account:changePassword.html.twig
+            redirect: sylius_shop_account_dashboard

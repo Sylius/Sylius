@@ -9,7 +9,7 @@ Feature: Changing a customer password
         And there is a customer account "francis@underwood.com" identified by "whitehouse"
         And I am logged in as "francis@underwood.com"
 
-    @todo
+    @ui
     Scenario: Trying to change my password with a wrong current password
         Given I want to change my password
         And I specify the current password as "greenhouse"
@@ -18,8 +18,8 @@ Feature: Changing a customer password
         And I try to save my changes
         Then I should be notified that provided password is different than the current one
 
-    @todo
-    Scenario: Trying to change my password with a wrong confirmation password
+    @ui
+    Scenario: Trying to change my password with a wrong confirmation password2
         Given I want to change my password
         And I specify the current password as "whitehouse"
         And I specify the new password as "blackhouse"
@@ -27,7 +27,7 @@ Feature: Changing a customer password
         And I try to save my changes
         Then I should be notified that the entered passwords do not match
 
-    @todo
+    @ui
     Scenario: Trying to change my password with a too short password
         Given I want to change my password
         And I specify the current password as "whitehouse"

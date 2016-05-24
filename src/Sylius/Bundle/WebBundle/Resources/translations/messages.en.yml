@@ -196,8 +196,6 @@ sylius:
         cart_summary: 'Cart summary'
         categorization: Categorization
         category: Category
-        change_password: 'Change your password'
-        change_your_password: 'Change your password'
         channel: Channel
         channels: Channels
         checkout: Checkout

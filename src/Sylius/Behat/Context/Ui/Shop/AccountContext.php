@@ -13,6 +13,8 @@ namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\NotificationType;
+use Sylius\Behat\Page\PageInterface;
+use Sylius\Behat\Page\Shop\Account\ChangePasswordPageInterface;
 use Sylius\Behat\Page\Shop\Account\DashboardPageInterface;
 use Sylius\Behat\Page\Shop\Account\ProfileUpdatePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
@@ -24,11 +26,6 @@ use Webmozart\Assert\Assert;
 final class AccountContext implements Context
 {
     /**
-     * @var NotificationCheckerInterface
-     */
-    private $notificationChecker;
-
-    /**
      * @var DashboardPageInterface
      */
     private $dashboardPage;
@@ -37,20 +34,33 @@ final class AccountContext implements Context
      * @var ProfileUpdatePageInterface
      */
     private $profileUpdatePage;
+    
+    /**
+     * @var ChangePasswordPageInterface
+     */
+    private $changePasswordPage;
 
     /**
-     * @param NotificationCheckerInterface $notificationChecker
+     * @var NotificationCheckerInterface
+     */
+    private $notificationChecker;
+
+    /**
      * @param DashboardPageInterface $dashboardPage
      * @param ProfileUpdatePageInterface $profileUpdatePage
+     * @param ChangePasswordPageInterface $changePasswordPage
+     * @param NotificationCheckerInterface $notificationChecker
      */
     public function __construct(
-        NotificationCheckerInterface $notificationChecker,
         DashboardPageInterface $dashboardPage,
-        ProfileUpdatePageInterface $profileUpdatePage
+        ProfileUpdatePageInterface $profileUpdatePage,
+        ChangePasswordPageInterface $changePasswordPage,
+        NotificationCheckerInterface $notificationChecker
     ) {
-        $this->notificationChecker = $notificationChecker;
         $this->dashboardPage = $dashboardPage;
         $this->profileUpdatePage = $profileUpdatePage;
+        $this->changePasswordPage = $changePasswordPage;
+        $this->notificationChecker = $notificationChecker;
     }
 
     /**
@@ -138,7 +148,7 @@ final class AccountContext implements Context
      */
     public function iShouldBeNotifiedThatElementIsRequired($element)
     {
-        $this->assertFieldValidationMessage($element, sprintf('Please enter your %s.', $element));
+        $this->assertFieldValidationMessage($this->profileUpdatePage, $element, sprintf('Please enter your %s.', $element));
     }
 
     /**
@@ -146,7 +156,7 @@ final class AccountContext implements Context
      */
     public function iShouldBeNotifiedThatElementIsInvalid($element)
     {
-        $this->assertFieldValidationMessage($element, sprintf('This %s is invalid.', $element));
+        $this->assertFieldValidationMessage($this->profileUpdatePage, $element, sprintf('This %s is invalid.', $element));
     }
 
     /**
@@ -154,18 +164,93 @@ final class AccountContext implements Context
      */
     public function iShouldBeNotifiedThatTheEmailIsAlreadyUsed()
     {
-        $this->assertFieldValidationMessage('email', 'This email is already used.');
+        $this->assertFieldValidationMessage($this->profileUpdatePage, 'email', 'This email is already used.');
     }
 
     /**
+     * @Given /^I want to change my password$/
+     */
+    public function iWantToChangeMyPassword()
+    {
+        $this->changePasswordPage->open();
+    }
+
+    /**
+     * @Given I change password from :oldPassword to :newPassword
+     */
+    public function iChangePasswordTo($oldPassword, $newPassword)
+    {
+        $this->iSpecifyTheCurrentPasswordAs($oldPassword);
+        $this->iSpecifyTheNewPasswordAs($newPassword);
+        $this->iSpecifyTheConfirmationPasswordAs($newPassword);
+    }
+
+    /**
+     * @Then I should be notified that my password has been successfully changed
+     */
+    public function iShouldBeNotifiedThatMyPasswordHasBeenSuccessfullyChanged()
+    {
+        $this->notificationChecker->checkNotification('has been changed successfully!', NotificationType::success());
+    }
+
+    /**
+     * @Given I specify the current password as :password
+     */
+    public function iSpecifyTheCurrentPasswordAs($password)
+    {
+        $this->changePasswordPage->specifyCurrentPassword($password);
+    }
+
+    /**
+     * @Given I specify the new password as :password
+     */
+    public function iSpecifyTheNewPasswordAs($password)
+    {
+        $this->changePasswordPage->specifyNewPassword($password);
+    }
+
+    /**
+     * @Given I specify the confirmation password as :password
+     */
+    public function iSpecifyTheConfirmationPasswordAs($password)
+    {
+        $this->changePasswordPage->specifyConfirmationPassword($password);
+    }
+
+    /**
+     * @Then I should be notified that provided password is different than the current one
+     */
+    public function iShouldBeNotifiedThatProvidedPasswordIsDifferentThanTheCurrentOne()
+    {
+        $this->assertFieldValidationMessage($this->changePasswordPage, 'current password', 'Provided password is different than the current one.');
+    }
+
+    /**
+     * @Then I should be notified that the entered passwords do not match
+     */
+    public function iShouldBeNotifiedThatTheEnteredPasswordsDoNotMatch()
+    {
+        $this->assertFieldValidationMessage($this->changePasswordPage, 'new password', 'The entered passwords don\'t match');
+    }
+
+    /**
+     * @Then I should be notified that the password should be at least 4 characters long
+     */
+    public function iShouldBeNotifiedThatThePasswordShouldBeAtLeastCharactersLong()
+    {
+        $this->assertFieldValidationMessage($this->changePasswordPage, 'new password', 'Password must be at least 4 characters long.');
+    }
+
+    /**
+     * @param PageInterface $page
      * @param string $element
      * @param string $expectedMessage
      */
-    private function assertFieldValidationMessage($element, $expectedMessage)
+    private function assertFieldValidationMessage(PageInterface $page, $element, $expectedMessage)
     {
         Assert::true(
-            $this->profileUpdatePage->checkValidationMessageFor($element, $expectedMessage),
-            sprintf('The %s should be required.', $element)
+            $page->checkValidationMessageFor($element, $expectedMessage),
+            sprintf('There should be a message: "%s".', $expectedMessage)
         );
     }
 }

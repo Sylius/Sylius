@@ -257,9 +257,10 @@
         </service>
 
         <service id="sylius.behat.context.ui.shop.account" class="%sylius.behat.context.ui.shop.account.class%" scope="scenario">
-            <argument type="service" id="sylius.behat.notification_checker" />
             <argument type="service" id="sylius.behat.page.shop.account.dashboard" />
             <argument type="service" id="sylius.behat.page.shop.account.profile_update" />
+            <argument type="service" id="sylius.behat.page.shop.account.change_password" />
+            <argument type="service" id="sylius.behat.notification_checker" />
             <tag name="sylius.behat.context" />
         </service>
 
