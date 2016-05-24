@@ -17,13 +17,13 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius.controller.admin.dashboard.class">Sylius\Bundle\AdminBundle\Controller\DashboardController</parameter>
+        <parameter key="sylius.dashboard.statistics_provider.class">Sylius\Component\Core\Dashboard\DashboardStatisticsProvider</parameter>
     </parameters>
 
     <services>
-        <service id="sylius.controller.admin.dashboard" class="%sylius.controller.admin.dashboard.class%">
-            <argument type="service" id="sylius.dashboard.statistics_provider" />
-            <argument type="service" id="templating" />
+        <service id="sylius.dashboard.statistics_provider" class="%sylius.dashboard.statistics_provider.class%">
+            <argument type="service" id="sylius.repository.order" />
+            <argument type="service" id="sylius.repository.customer" />
         </service>
     </services>
 

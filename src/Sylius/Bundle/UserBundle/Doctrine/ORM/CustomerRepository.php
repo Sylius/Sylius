@@ -22,6 +22,31 @@ class CustomerRepository extends EntityRepository implements CustomerRepositoryI
     /**
      * {@inheritdoc}
      */
+    public function count()
+    {
+        return (int) $this->createQueryBuilder('o')
+            ->select('COUNT(o.id)')
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findLatest($count)
+    {
+        return $this->createQueryBuilder('o')
+            ->addOrderBy('o.createdAt', 'desc')
+            ->setMaxResults($count)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function findForDetailsPage($id)
     {
         $queryBuilder = $this->createQueryBuilder('o');

@@ -1,0 +1,7 @@
+sylius_admin_partial_customer:
+    resource: "@SyliusAdminBundle/Resources/config/routing/partial/customer.yml"
+    prefix: /customers
+
+sylius_admin_partial_order:
+    resource: "@SyliusAdminBundle/Resources/config/routing/partial/order.yml"
+    prefix: /orders

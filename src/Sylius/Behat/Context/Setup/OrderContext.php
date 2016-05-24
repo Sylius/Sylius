@@ -31,6 +31,7 @@ use Sylius\Component\Payment\Factory\PaymentFactoryInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Model\CustomerInterface;
 use Sylius\Component\User\Model\UserInterface;
 
@@ -75,6 +76,16 @@ final class OrderContext implements Context
     private $itemQuantityModifier;
 
     /**
+     * @var FactoryInterface
+     */
+    private $customerFactory;
+
+    /**
+     * @var RepositoryInterface
+     */
+    private $customerRepository;
+
+    /**
      * @var OrderRecalculatorInterface
      */
     private $orderRecalculator;
@@ -92,7 +103,8 @@ final class OrderContext implements Context
      * @param PaymentFactoryInterface $paymentFactory
      * @param FactoryInterface $orderItemFactory
      * @param OrderItemQuantityModifierInterface $itemQuantityModifier
-     * @param SharedStorageInterface $sharedStorage
+     * @param FactoryInterface $customerFactory
+     * @param RepositoryInterface $customerRepository
      * @param OrderRecalculatorInterface $orderRecalculator
      * @param ObjectManager $objectManager
      */
@@ -104,6 +116,8 @@ final class OrderContext implements Context
         PaymentFactoryInterface $paymentFactory,
         FactoryInterface $orderItemFactory,
         OrderItemQuantityModifierInterface $itemQuantityModifier,
+        FactoryInterface $customerFactory,
+        RepositoryInterface $customerRepository,
         OrderRecalculatorInterface $orderRecalculator,
         ObjectManager $objectManager
     ) {
@@ -114,6 +128,8 @@ final class OrderContext implements Context
         $this->paymentFactory = $paymentFactory;
         $this->orderItemFactory = $orderItemFactory;
         $this->itemQuantityModifier = $itemQuantityModifier;
+        $this->customerFactory = $customerFactory;
+        $this->customerRepository = $customerRepository;
         $this->orderRecalculator = $orderRecalculator;
         $this->objectManager = $objectManager;
     }
@@ -274,6 +290,65 @@ final class OrderContext implements Context
     }
 
     /**
+     * @Given :numberOfCustomers customers have added products to the cart for total of :total
+     */
+    public function customersHaveAddedProductsToTheCartForTotalOf($numberOfCustomers, $total)
+    {
+        $customers = $this->generateCustomers($numberOfCustomers);
+
+        $sampleProductVariant = $this->sharedStorage->get('variant');
+        $total = $this->getPriceFromString($total);
+
+        for ($i = 0; $i < $numberOfCustomers; $i++) {
+            $order = $this->createOrder($customers[rand(0, $numberOfCustomers - 1)]);
+            $order->setCompletedAt(null);
+
+            $price = $i === ($numberOfCustomers - 1) ? $total : rand(1, $total);
+            $total -= $price;
+
+            $item = $this->orderItemFactory->createNew();
+            $item->setVariant($sampleProductVariant);
+            $item->setUnitPrice($price);
+
+            $this->itemQuantityModifier->modify($item, 1);
+
+            $order->addItem($item);
+
+            $this->orderRepository->add($order);
+        }
+    }
+
+    /**
+     * @Given :numberOfCustomers customers have placed :numberOfOrders orders for total of :total
+     * @Given then :numberOfCustomers more customers have placed :numberOfOrders orders for total of :total
+     */
+    public function customersHavePlacedOrdersForTotalOf($numberOfCustomers, $numberOfOrders, $total)
+    {
+        $customers = $this->generateCustomers($numberOfCustomers);
+        $sampleProductVariant = $this->sharedStorage->get('variant');
+        $total = $this->getPriceFromString($total);
+
+        for ($i = 0; $i < $numberOfOrders; $i++) {
+            $order = $this->createOrder($customers[rand(0, $numberOfCustomers - 1)], '#'.uniqid());
+            $order->setPaymentState(PaymentInterface::STATE_COMPLETED);
+            $order->setCompletedAt(new \DateTime());
+
+            $price = $i === ($numberOfOrders - 1) ? $total : rand(1, $total);
+            $total -= $price;
+
+            $item = $this->orderItemFactory->createNew();
+            $item->setVariant($sampleProductVariant);
+            $item->setUnitPrice($price);
+
+            $this->itemQuantityModifier->modify($item, 1);
+
+            $order->addItem($item);
+
+            $this->orderRepository->add($order);
+        }
+    }
+
+    /**
      * @param ProductVariantInterface $productVariant
      * @param int $price
      * @param int $quantity
@@ -308,7 +383,7 @@ final class OrderContext implements Context
      */
     private function createOrder(
         CustomerInterface $customer,
-        $number,
+        $number = null,
         ChannelInterface $channel = null,
         CurrencyInterface $currency = null
     ) {
@@ -321,5 +396,38 @@ final class OrderContext implements Context
         $order->complete();
 
         return $order;
+    }
+
+    /**
+     * @param $count
+     *
+     * @return CustomerInterface[]
+     */
+    private function generateCustomers($count)
+    {
+        $customers = [];
+
+        for ($i = 0; $i < $count; $i++) {
+            $customer = $this->customerFactory->createNew();
+            $customer->setEmail(sprintf('john%s@doe.com', uniqid()));
+            $customer->setFirstname('John');
+            $customer->setLastname('Doe'.$i);
+
+            $customers[] = $customer;
+
+            $this->customerRepository->add($customer);
+        }
+
+        return $customers;
+    }
+
+    /**
+     * @param string $price
+     *
+     * @return int
+     */
+    private function getPriceFromString($price)
+    {
+        return (int) round((str_replace(['€', '£', '$'], '', $price) * 100), 2);
     }
 }
