@@ -78,6 +78,12 @@
             <argument>%sylius.model.product_variant_image.class%</argument>
             <tag name="form.type" alias="sylius_image" />
         </service>
+
+        <service id="sylius.form.type.taxon_image" class="%sylius.form.type.image.class%">
+            <argument>%sylius.model.taxon_image.class%</argument>
+            <tag name="form.type" alias="sylius_image_taxon" />
+        </service>
+
         <service id="sylius.form.type.list" class="%sylius.form.type.list.class%">
             <tag name="form.type" alias="list" />
         </service>

@@ -18,11 +18,10 @@
 
     <mapped-superclass name="Sylius\Component\Core\Model\Taxon" table="sylius_taxon">
 
-        <one-to-one field="image" target-entity="Sylius\Component\Core\Model\Image">
+        <one-to-one field="image" target-entity="Sylius\Component\Core\Model\TaxonImageInterface" mapped-by="taxon">
             <cascade>
                 <cascade-all/>
             </cascade>
-            <join-column name="image_id" referenced-column-name="id" nullable="true" />
         </one-to-one>
 
        <many-to-many field="products" mapped-by="taxons" target-entity="Sylius\Component\Product\Model\ProductInterface"/>
