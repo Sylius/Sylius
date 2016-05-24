@@ -27,7 +27,7 @@ class IndexPage extends BaseIndexPage implements IndexPageInterface
     {
         $actions = $this->getPromotionFieldsWithHeader($promotion, 'Actions');
 
-        return $actions->hasLink('Coupons');
+        return $actions->hasLink('List coupons');
     }
 
     /**

@@ -4,7 +4,7 @@
     <h3 class="ui dividing header">
         {{ 'sylius.ui.payments'|trans }}
     </h3>
-    <div class="ui relaxed divided list">
+    <div class="ui relaxed divided list" id="payments">
         {% for payment in order.payments %}
             {% include '@SyliusAdmin/Order/Show/_payment.html.twig' %}
         {% endfor %}
