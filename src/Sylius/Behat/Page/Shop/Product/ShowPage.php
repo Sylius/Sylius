@@ -11,8 +11,6 @@
 
 namespace Sylius\Behat\Page\Shop\Product;
 
-use Behat\Mink\Session;
-use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Sylius\Component\Product\Model\OptionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;

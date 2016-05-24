@@ -12,7 +12,7 @@ Feature: Adding a product with selected option to the cart
         Given the store has a product "T-shirt banana"
         And this product has option "Size" with values "S" and "M"
         And this product is available in "S" size priced at "€12.54"
-        When I add this product with Size "S" to the cart
+        When I add "T-shirt banana" with Size "S" to the cart
         Then I should be on my cart summary page
         And I should be notified that the product has been successfully added
         And there should be one item in my cart

@@ -17,6 +17,7 @@ use Sylius\Component\Product\Model\OptionInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ * @author Anna Walasek <anna.walasek@lakion.com>
  */
 interface ShowPageInterface extends PageInterface
 {

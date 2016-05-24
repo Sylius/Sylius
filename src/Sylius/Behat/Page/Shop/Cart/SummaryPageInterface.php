@@ -12,9 +12,11 @@
 namespace Sylius\Behat\Page\Shop\Cart;
 
 use Sylius\Behat\Page\PageInterface;
+use Sylius\Component\Product\Model\ProductInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ * @author Anna Walasek <anna.walasek@lakion.com>
  */
 interface SummaryPageInterface extends PageInterface
 {
@@ -101,4 +103,13 @@ interface SummaryPageInterface extends PageInterface
      * @return bool
      */
     public function isEmpty();
+
+    /**
+     * @param $productName
+     *
+     * @return int
+     */
+    public function getQuantity($productName);
+
+    public function clearCart();
 }

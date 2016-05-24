@@ -18,6 +18,7 @@ use Sylius\Behat\Page\Shop\Cart\SummaryPageInterface;
 use Sylius\Behat\Page\Shop\Product\ShowPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
+use Sylius\Component\Product\Model\OptionInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Webmozart\Assert\Assert;
 
@@ -322,15 +323,13 @@ final class CartContext implements Context
     }
 
     /**
-     * @When /^I add (this product) with ([^"]+) "([^"]+)" to the cart$/
+     * @When I add :product with :productOption :productOptionValue to the cart
      */
-    public function iAddThisProductWithSizeToTheCart(ProductInterface $product, $optionName, $optionValue)
+    public function iAddThisProductWithToTheCart(ProductInterface $product, OptionInterface $productOption, $productOptionValue)
     {
         $this->productShowPage->open(['slug' => $product->getSlug()]);
 
-        $option = $this->sharedStorage->get(sprintf('%s_option', $optionName));
-
-        $this->productShowPage->addToCartWithOption($option, $optionValue);
+        $this->productShowPage->addToCartWithOption($productOption, $productOptionValue);
     }
 
     /**
@@ -342,6 +341,26 @@ final class CartContext implements Context
             $this->summaryPage->getProductOption($product->getName(), $optionName),
             $optionValue,
             'The product should have option with value %2$s, but it has option with value %s.'
+        );
+    }
+
+    /**
+     * @When I clear my cart
+     */
+    public function iClearMyCart()
+    {
+        $this->summaryPage->clearCart();
+    }
+
+    /**
+     * @Then /^I should see "([^"]+)" with quantity (\d+) in my cart$/
+     */
+    public function iShouldSeeWithQuantityInMyCart($productName, $quantity)
+    {
+        Assert::same(
+            $this->summaryPage->getQuantity($productName),
+            $quantity,
+            'The quantity of product should be %2$s, but it is %s'
         );
     }
 }
