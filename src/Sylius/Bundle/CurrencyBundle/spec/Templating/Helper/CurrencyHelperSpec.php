@@ -19,7 +19,6 @@ use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
-use Sylius\Component\Locale\Context\LocaleContext;
 use Symfony\Component\Templating\Helper\Helper;
 
 /**

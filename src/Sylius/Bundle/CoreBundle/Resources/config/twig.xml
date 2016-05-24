@@ -19,7 +19,7 @@
     <parameters>
         <parameter key="sylius.twig.extension.restricted_zone.class">Sylius\Bundle\CoreBundle\Twig\RestrictedZoneExtension</parameter>
         <parameter key="sylius.twig.extension.regular_price.class">Sylius\Bundle\CoreBundle\Twig\RegularPriceExtension</parameter>
-        <parameter key="sylius.twig.extension.currency.class">Sylius\Bundle\CoreBundle\Twig\CurrencyExtension</parameter>
+        <parameter key="sylius.twig.extension.currency.decorator.class">Sylius\Bundle\CoreBundle\Twig\CurrencyExtension</parameter>
     </parameters>
 
     <services>
@@ -31,8 +31,8 @@
             <argument type="service" id="sylius.templating.helper.regular_price" />
             <tag name="twig.extension" />
         </service>
-        <service id="sylius.twig.extension.currency" class="%sylius.twig.extension.currency.class%" public="false">
-            <argument type="service" id="sylius.templating.helper.currency" />
+        <service id="sylius.twig.extension.currency.decorator" class="%sylius.twig.extension.currency.decorator.class%" public="false">
+            <argument type="service" id="sylius.templating.helper.currency.decorator" />
             <tag name="twig.extension" />
         </service>
     </services>

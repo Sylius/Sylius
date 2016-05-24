@@ -14,7 +14,7 @@ namespace Sylius\Bundle\CoreBundle\Twig;
 use Sylius\Bundle\CoreBundle\Templating\Helper\CurrencyHelper;
 
 /**
- * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
+ * @author Jonathan Douet <jonathan.douet@smile.eu>
  */
 class CurrencyExtension extends \Twig_Extension
 {
@@ -46,6 +46,6 @@ class CurrencyExtension extends \Twig_Extension
      */
     public function getName()
     {
-        return 'sylius_currency';
+        return 'sylius_currency_decorator';
     }
 }

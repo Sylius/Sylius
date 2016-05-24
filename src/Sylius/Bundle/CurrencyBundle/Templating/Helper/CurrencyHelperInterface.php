@@ -31,6 +31,15 @@ interface CurrencyHelperInterface
 
     /**
      * @param int $amount
+     * @param string $currency
+     * @param string|null $locale
+     *
+     * @return string
+     */
+    public function formatAmount($amount, $currency, $locale=null);
+
+    /**
+     * @param int $amount
      * @param string|null $currency
      *
      * @return string

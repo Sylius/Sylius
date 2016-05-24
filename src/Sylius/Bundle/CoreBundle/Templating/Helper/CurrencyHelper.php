@@ -12,17 +12,13 @@
 namespace Sylius\Bundle\CoreBundle\Templating\Helper;
 
 use Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelperInterface;
-use Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatterInterface;
-use Sylius\Component\Currency\Context\CurrencyContextInterface;
-use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
-use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
-use Symfony\Component\Intl\Intl;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
+use Symfony\Component\Templating\Helper\Helper;
 
 /**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Jonathan Douet <jonathan.douet@smile.eu>
  */
-class CurrencyHelper implements CurrencyHelperInterface
+class CurrencyHelper extends Helper implements CurrencyHelperInterface
 {
     /**
      * @var LocaleContextInterface
@@ -30,33 +26,17 @@ class CurrencyHelper implements CurrencyHelperInterface
     protected $localeContext;
 
     /**
-     * @var CurrencyContextInterface
+     * @var CurrencyHelperInterface
      */
-    private $currencyContext;
-
-    /**
-     * @var MoneyFormatterInterface
-     */
-    private $moneyFormatter;
-
-    /**
-     * @var CurrencyProviderInterface
-     */
-    private $currencyProvider;
+    private $currencyHelperDecorated;
 
 
     public function __construct(
-        LocaleContextInterface $localeContext,
-        CurrencyContextInterface $currencyContext,
-        CurrencyConverterInterface $converter,
-        MoneyFormatterInterface $moneyFormatter,
-        CurrencyProviderInterface $currencyProvider
+        \Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelper $currencyHelperDecorated,
+        LocaleContextInterface $localeContext
     ) {
+        $this->currencyHelperDecorated = $currencyHelperDecorated;
         $this->localeContext = $localeContext;
-        $this->currencyContext = $currencyContext;
-        $this->currencyConverter = $converter;
-        $this->moneyFormatter = $moneyFormatter;
-        $this->currencyProvider = $currencyProvider;
     }
 
     /**
@@ -64,30 +44,42 @@ class CurrencyHelper implements CurrencyHelperInterface
      */
     public function convertAndFormatAmount($amount, $currency = null)
     {
-        $currency = $currency ?: $this->currencyContext->getCurrency();
-        $amount = $this->currencyConverter->convertFromBase($amount, $currency);
+        $currency = $currency ?: $this->currencyHelperDecorated->getCurrency();
+        $amount = $this->convertAmount($amount, $currency);
         $locale = $this->localeContext->getCurrentLocale();
-        return $this->moneyFormatter->format($amount, $currency, $locale);
+
+        return $this->formatAmount($amount, $currency, $locale);
     }
 
     /**
-     * @param int $amount
-     * @param string|null $currency
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function convertAmount($amount, $currency = null)
     {
-        $currency = $currency ?: $this->currencyContext->getCurrency();
-
-        return $this->currencyConverter->convertFromBase($amount, $currency);
+        return $this->currencyHelperDecorated->convertAmount($amount, $currency);
     }
 
     /**
-     * @return string
+     * {@inheritdoc}
+     */
+    public function formatAmount($amount, $currency, $locale = null)
+    {
+        return $this->currencyHelperDecorated->formatAmount($amount, $currency, $locale);
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function getBaseCurrencySymbol()
     {
-        return Intl::getCurrencyBundle()->getCurrencySymbol($this->currencyProvider->getBaseCurrency()->getCode());
+        return $this->currencyHelperDecorated->getBaseCurrencySymbol();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'sylius_currency_decorator';
     }
 }

@@ -74,12 +74,23 @@ class CurrencyHelper extends Helper implements CurrencyHelperInterface
     /**
      * {@inheritdoc}
      */
+    public function formatAmount($amount, $currency, $locale = null)
+    {
+        if($locale) {
+            return $this->moneyFormatter->format($amount, $currency, $locale);
+        }
+        return $this->moneyFormatter->format($amount, $currency);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function convertAndFormatAmount($amount, $currency = null)
     {
-        $currency = $currency ?: $this->currencyContext->getCurrency();
+        $currency = $currency ?: $this->getCurrency();
         $amount = $this->currencyConverter->convertFromBase($amount, $currency);
 
-        return $this->moneyFormatter->format($amount, $currency);
+        return $this->formatAmount($amount, $currency);
     }
 
     /**
@@ -88,6 +99,14 @@ class CurrencyHelper extends Helper implements CurrencyHelperInterface
     public function getBaseCurrencySymbol()
     {
         return Intl::getCurrencyBundle()->getCurrencySymbol($this->currencyProvider->getBaseCurrency()->getCode());
+    }
+
+    /**
+     * @return CurrencyContextInterface
+     */
+    public function getCurrency()
+    {
+        return $this->currencyContext->getCurrency();
     }
 
     /**
