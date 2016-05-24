@@ -27,9 +27,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     }
 
     /**
-     * @param string $name
-     *
-     * @return bool
+     * {@inheritdoc}
      */
     public function hasCustomerName($name)
     {
@@ -37,9 +35,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     }
 
     /**
-     * @param string $email
-     *
-     * @return bool
+     * {@inheritdoc}
      */
     public function hasCustomerEmail($email)
     {

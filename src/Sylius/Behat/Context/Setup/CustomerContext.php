@@ -114,13 +114,15 @@ final class CustomerContext implements Context
     }
 
     /**
-     * @Given there is a customer account :name with email :email identified by :password
+     * @Given there is a customer :name identified by an email :email and a password :password
      */
     public function theStoreHasCustomerAccountWithEmailAndPassword($name, $email, $password)
     {
         $names = explode(' ', $name);
-        
-        $this->createCustomerWithUserAccount($email, $password, true, $names[0], $names[1]);
+        $firstName = $names[0];
+        $lastName = count($names) > 1 ? $names[1] : self::DEFAULT_CUSTOMER_LAST_NAME;
+
+        $this->createCustomerWithUserAccount($email, $password, true, $firstName, $lastName);
     }
 
     /**

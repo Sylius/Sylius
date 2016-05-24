@@ -13,8 +13,11 @@ sylius_shop_account_profile_update:
     path: /profile/edit
     methods: [GET, POST]
     defaults:
-        _controller: sylius.controller.customer:updateProfileAction
+        _controller: sylius.controller.customer:updateAction
         _sylius:
             template: SyliusShopBundle:Account:updateProfile.html.twig
             form: sylius_customer_profile
+            repository:
+                method: find
+                arguments: [expr:service('sylius.context.customer').getCustomer().getId()]
             redirect: sylius_shop_account_dashboard

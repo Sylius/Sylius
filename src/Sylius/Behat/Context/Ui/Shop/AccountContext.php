@@ -56,9 +56,9 @@ final class AccountContext implements Context
     }
 
     /**
-     * @Given I want to modify my customer profile
+     * @Given I want to modify my profile
      */
-    public function iWantToModifyMyCustomerProfile()
+    public function iWantToModifyMyProfile()
     {
         $this->profileUpdatePage->open();
     }
@@ -108,8 +108,8 @@ final class AccountContext implements Context
     }
 
     /**
-     * @Given my name should be :name
-     * @Given my name should still be :name
+     * @Then my name should be :name
+     * @Then my name should still be :name
      */
     public function myNameShouldBe($name)
     {
@@ -122,8 +122,8 @@ final class AccountContext implements Context
     }
 
     /**
-     * @Given my email should be :email
-     * @Given my email should still be :email
+     * @Then my email should be :email
+     * @Then my email should still be :email
      */
     public function myEmailShouldBe($email)
     {
@@ -144,7 +144,15 @@ final class AccountContext implements Context
     }
 
     /**
-     * @Then /^I should be notified that the email is already used$/
+     * @Then /^I should be notified that the ([^"]+) is invalid$/
+     */
+    public function iShouldBeNotifiedThatElementIsInvalid($element)
+    {
+        $this->assertFieldValidationMessage($element, sprintf('This %s is invalid.', $element));
+    }
+
+    /**
+     * @Then I should be notified that the email is already used
      */
     public function iShouldBeNotifiedThatTheEmailIsAlreadyUsed()
     {
