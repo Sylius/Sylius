@@ -320,9 +320,6 @@ sylius_mailer:
         user_confirmation:
             subject: sylius.emails.user_confirmation.subject
             template: SyliusWebBundle:Email:userConfirmation.html.twig
-        password_reset:
-            subject: sylius.emails.user.password_reset.subject
-            template: SyliusWebBundle:Email:passwordReset.html.twig
         reset_password_token:
             subject: sylius.emails.user.password_reset.subject
             template: SyliusWebBundle:Email:passwordReset.html.twig
