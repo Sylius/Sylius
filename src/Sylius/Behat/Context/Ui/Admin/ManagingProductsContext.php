@@ -452,6 +452,17 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @Given /^(this product) main taxon should be "([^"]+)"$/
+     */
+    public function thisProductMainTaxonShouldBe($taxonName)
+    {
+        Assert::true(
+            $this->updateConfigurableProductPage->isMainTaxonChosen(),
+            sprintf('The main taxon %s should be chosen, but it does not.', $taxonName)
+        );
+    }
+
+    /**
      * @param string $element
      * @param string $value
      */

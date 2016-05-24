@@ -13,6 +13,7 @@ namespace Sylius\Behat\Page\Admin\Product;
 
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -45,6 +46,14 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
     public function isProductOptionsDisabled()
     {
         return 'disabled' === $this->getElement('options')->getAttribute('disabled');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isMainTaxonChosen(TaxonInterface $taxon)
+    {
+        return $taxon->getId() === $this->getDocument()->find('css', '#sylius_product_mainTaxon')->getAttribute('value');
     }
 
     /**
