@@ -18,6 +18,7 @@
         <parameter key="sylius.behat.page.shop.account.login.class">Sylius\Behat\Page\Shop\Account\LoginPage</parameter>
         <parameter key="sylius.behat.page.shop.account.profile_update.class">Sylius\Behat\Page\Shop\Account\ProfileUpdatePage</parameter>
         <parameter key="sylius.behat.page.shop.account.register.class">Sylius\Behat\Page\Shop\Account\RegisterPage</parameter>
+        <parameter key="sylius.behat.page.shop.account.reset_password.class">Sylius\Behat\Page\Shop\Account\ResetPasswordPage</parameter>
     </parameters>
 
     <services>
@@ -26,5 +27,6 @@
         <service id="sylius.behat.page.shop.account.login" class="%sylius.behat.page.shop.account.login.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
         <service id="sylius.behat.page.shop.account.profile_update" class="%sylius.behat.page.shop.account.profile_update.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
         <service id="sylius.behat.page.shop.account.register" class="%sylius.behat.page.shop.account.register.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
+        <service id="sylius.behat.page.shop.account.reset_password" class="%sylius.behat.page.shop.account.reset_password.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
     </services>
 </container>

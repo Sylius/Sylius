@@ -20,6 +20,7 @@
     <parameters>
         <parameter key="sylius.behat.cookie_setter.class">Sylius\Behat\Service\Setter\CookieSetter</parameter>
         <parameter key="sylius.behat.channel_context_setter.class">Sylius\Behat\Service\Setter\ChannelContextSetter</parameter>
+        <parameter key="sylius.behat.email_checker.class">Sylius\Behat\Service\Accessor\EmailChecker</parameter>
         <parameter key="sylius.behat.security.class">Sylius\Behat\Service\SecurityService</parameter>
         <parameter key="sylius.behat.table_accessor.class">Sylius\Behat\Service\Accessor\TableAccessor</parameter>
         <parameter key="sylius.behat.paypal_api_mocker.class">Sylius\Behat\Service\Mocker\PaypalApiMocker</parameter>
@@ -43,6 +44,11 @@
 
         <service id="sylius.behat.channel_context_setter" class="%sylius.behat.channel_context_setter.class%" scope="scenario" public="false">
             <argument type="service" id="sylius.behat.cookie_setter" />
+        </service>
+
+        <service id="sylius.behat.email_checker" class="%sylius.behat.email_checker.class%" scope="scenario" public="false">
+            <argument type="service" id="profiler" container="symfony" />
+            <argument type="service" id="mink.default_session" />
         </service>
 
         <service id="sylius.behat.security" class="%sylius.behat.security.class%" scope="scenario" public="false">
