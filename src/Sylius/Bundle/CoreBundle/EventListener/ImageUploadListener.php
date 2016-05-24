@@ -14,8 +14,8 @@ namespace Sylius\Bundle\CoreBundle\EventListener;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
-use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Variation\Resolver\VariantResolverInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Webmozart\Assert\Assert;
 
@@ -74,8 +74,13 @@ class ImageUploadListener
         $subject = $event->getSubject();
         Assert::isInstanceOf($subject, TaxonInterface::class);
 
-        if ($subject->hasFile()) {
-            $this->uploader->upload($subject);
+        if ($subject->hasImage()) {
+            $this->uploader->upload($subject->getImage());
+
+            // Upload failed? Let's remove that image.
+            if (null === $subject->getImage()->getPath()) {
+                $subject->removeImage();
+            }
         }
     }
 

@@ -20,8 +20,7 @@
 
         <one-to-one field="image" target-entity="Sylius\Component\Core\Model\Image">
             <cascade>
-                <cascade-persist/>
-                <cascade-remove />
+                <cascade-all/>
             </cascade>
             <join-column name="image_id" referenced-column-name="id" nullable="true" />
         </one-to-one>

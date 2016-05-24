@@ -39,6 +39,8 @@ interface TaxonInterface extends VariableTaxonInterface
      */
     public function getImage();
 
+    public function removeImage();
+
     /**
      * @param ImageInterface $image
      */
