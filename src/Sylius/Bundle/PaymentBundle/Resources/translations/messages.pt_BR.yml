@@ -17,6 +17,7 @@ sylius:
                 header: Situação do pagamento
                 checkout: Finalizar compra
                 completed: Concluído
+                authorized: Autorizado
                 failed: Falhou
                 new: Novo
                 pending: Pendente

@@ -129,6 +129,7 @@ sylius:
         promotions: Προσφορές
         province: Επαρχία
         provinces: Επαρχίες
+        quantity: Ποσότητα
         register: Καταχώρηση
         restricted_zone: Απαγορευμένη ζώνη
         retail_price: Τιμή

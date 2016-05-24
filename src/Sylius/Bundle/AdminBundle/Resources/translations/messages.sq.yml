@@ -6,10 +6,11 @@ sylius:
         admin:
             main:
                 catalog:
-                    header: Katalogu
-                    taxons: Kategoritë
-                    options: Opsionet
                     attributes: Atributet
+                    header: Katalogu
+                    options: Opsionet
+                    products: Produktet
+                    taxons: Kategoritë
                 configuration:
                     channels: Kanalet
                     countries: Vendet
@@ -25,8 +26,8 @@ sylius:
                     header: Marketingu
                     promotions: Reklamat
                 customers:
-                    header: Blerësi
                     customers: Blerësit
+                    header: Blerësi
                 sales:
                     header: Shitjet
                     orders: Porositë

@@ -555,6 +555,7 @@ sylius:
         provinces: Provincie
         qty_max: Max. množstvo
         qty_min: Min. množstvo
+        quantity: Množstvo
         rating: Hodnotenie
         recent_customers: Najnovši zákaznici
         recent_orders: Posledné objednávky
@@ -708,6 +709,7 @@ sylius:
         users_list_of_all_users_registered_in_store: 'Používatelia <small>Zoznam všetkých používateľov zaregistrovaných v obchode</small>'
         values: Hodnoty
         variant_selection_method: Spôsob výberu produktového variantu
+        variant: Varianty
         variants: Varianty
         view: Zobraziť
         view_more: Zobraziť viac

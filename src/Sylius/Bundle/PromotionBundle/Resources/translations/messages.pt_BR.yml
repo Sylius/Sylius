@@ -24,19 +24,32 @@ sylius:
                 amount: Quantidade
             nth_order_configuration:
                 nth: N-ésimo
+            customer_loyalty_configuration:
+                time: Tempo
+                unit:
+                    days: Dias
+                    weeks: Semanas
+                    months: Meses
+                    years: Anos
+                    header: Unidade
+                after: Usuário criado após este período
             shipping_country_configuration:
                 country: País
             type: Tipo
         coupon:
             usage_limit: Limite de utilização
+            expires_at: Expira em
         coupon_generate_instruction:
             amount: Quantidade
             usage_limit: Limite de utilização
+            expires_at: Expira em
+            code_length: Comprimento do código
         promotion:
             actions: Ações
             add_action: Adicionar ação
             add_rule: Adicionar regra
             coupon_based: Cupom com base
+            exclusive: Exclusivo
             description: Descrição
             ends_at: Termina em
             name: Nome

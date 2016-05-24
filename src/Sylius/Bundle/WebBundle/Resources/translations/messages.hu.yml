@@ -313,6 +313,7 @@ sylius:
         promotions: Promóciók
         province: Tartomány/állam
         provinces: Tartományok
+        quantity: Mennyiség
         recent_orders: Legutóbbi rendelések
         recent_users: Legutóbbi felhasználók
         register: Regisztráció

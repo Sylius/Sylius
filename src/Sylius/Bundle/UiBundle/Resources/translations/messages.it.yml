@@ -10,10 +10,11 @@ sylius:
         option:
             presentation: Presentazione
     ui:
-        add_coupon: Aggiungi coupon
-        all: Tutti
+        account_credentials: "Credenziali dell'account"
         actions: Azioni
+        add_coupon: Aggiungi coupon
         administration_panel_login: Login del pannello di amministrazione
+        all: Tutti
         an_error_occurred: Si è verificato un errore
         are_your_sure_you_want_to_perform_this_action: Sei sicuro di voler eseguire questa azione?
         available_for_channels: Disponibile per i canali
@@ -28,10 +29,11 @@ sylius:
         confirm_your_action: "Confermare l'azione"
         contains: Contiene
         countries: Paesi
-        coupons: Codici promozionali
         coupon_based: Basata su coupon
+        coupons: Codici promozionali
         create: Crea
         currencies: Monete
+        customer_can_login_to_the_store: "Cliente può accedere all'archivio"
         dashboard: Pannello amministrazione
         date: Data
         default_currency: Valuta predefinita
@@ -45,8 +47,8 @@ sylius:
         edit_currency: Modifica valuta
         edit_customer: Modifica cliente
         edit_payment_method: Modifica il metodo di pagamento
-        edit_product_option: "Modificare l'opzione del prodotto"
         edit_product_attribute: "Modificare l'attributo di prodotto"
+        edit_product_option: "Modificare l'opzione del prodotto"
         edit_promotion: Modifica promozione
         edit_shipping_method: Modifica metodo di spedizione
         edit_tax_category: Modificare la categoria fiscale
@@ -59,23 +61,27 @@ sylius:
         equal: Uguale
         exclusive: Esclusivo
         expires_at: Scadenza il
+        extra_information: Informazioni aggiuntive
         filter: Filtri
+        go: Vai
         in: In
         info: Info
+        item: Articolo
+        jump_to_page: Vai alla pagina
         last_updated: Ultimo aggiornamento
         locales: Localizzazioni
         manage_attributes_of_your_products: Gestisci gli attributi dei tuoi prodotti
-        manage_currencies_available_in_the_store: "Gestisci le valute disponibili nell'archivio"
-        manage_your_customers: Gestisci i tuoi clienti
-        manage_languages_available_in_the_store: Gestisci le lingue disponibili nel negozio
+        manage_categorization_of_your_products: Gestisci la categorizzazione dei vostri prodotti
         manage_configuration_options_of_your_products: Gestisci le opzioni di configurazione dei tuoi prodotti
+        manage_currencies_available_in_the_store: "Gestisci le valute disponibili nell'archivio"
+        manage_discounts_and_promotional_campaigns: Gestisci sconti e campagne promozionali
+        manage_geographical_zones: Gestisci le zone geografiche
+        manage_languages_available_in_the_store: Gestisci le lingue disponibili nel negozio
         manage_payment_methods_available_to_your_customers: Gestisci i metodi di pagamento disponibili per i tuoi clienti
         manage_shipping_destinations: Gestisci le destinazioni di spedizione
-        manage_categorization_of_your_products: Gestisci la categorizzazione dei vostri prodotti
         manage_shipping_methods_for_your_store: Gestisci i metodi di spedizione per il tuo negozio
         manage_taxation_of_your_products: Gestire la tassazione dei vostri prodotti
-        manage_geographical_zones: Gestisci le zone geografiche
-        manage_discounts_and_promotional_campaigns: Gestisci sconti e campagne promozionali
+        manage_your_customers: Gestisci i tuoi clienti
         new: Nuovo
         new_channel: Nuovo canale
         new_country: Nuovo paese
@@ -84,15 +90,18 @@ sylius:
         new_tax_category: Nuova categoria fiscale
         "no": false
         no_account: nessun account
-        no_results_to_display: Non ci sono risultati da visualizzare
-        no_taxes: Nessuna tassa applicata
         no_promotion: Nessuna promozione applicata
+        no_requirement: Nessun requisito
+        no_results_to_display: Non ci sono risultati da visualizzare
         no_shipping_charges: Nessuna maggiorazione di spedizione applicata
+        no_taxes: Nessuna tassa applicata
+        no_theme: Nessun tema
         not_contains: Non contiene
         not_empty: Non è vuoto
         not_in: Non in
         or: oppure
         powered_by: Promosso da
+        price: Prezzo
         promotion_configuration: Configurazione della promozione
         promotion_information: Informazioni della promozione
         quantity: Q.tà
@@ -108,18 +117,11 @@ sylius:
         status: Stato
         success: Successo
         tax_categories: Categorie di tassazione
+        total_records: Totale record
+        unlimited: Ilimitado
+        usage: Utilizzo
         values: Valori
         "yes": true
-        total_records: Totale record
-        jump_to_page: Vai alla pagina
-        go: Vai
-        unlimited: Ilimitado
-        no_requirement: Nessun requisito
         zone_consisting_of_countries: Zona costituita da paesi
-        zone_consisting_of_provinces: Zona che consiste in province
         zone_consisting_of_other_zones: Zona costituita da altre zone
-        no_theme: Nessun tema
-        usage: Utilizzo
-        customer_can_login_to_the_store: "Cliente può accedere all'archivio"
-        account_credentials: "Credenziali dell'account"
-        extra_information: Informazioni aggiuntive
+        zone_consisting_of_provinces: Zona che consiste in province

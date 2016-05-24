@@ -6,6 +6,9 @@ sylius:
         sku:
             not_blank: Por favor, insira o SKU do produto.
             unique: SKU de produto deve ser único.
+        code:
+            not_blank: Por favor, insira o código do produto.
+            unique: Código do produto deve ser unico.
         name:
             not_blank: Por favor, digite o nome do produto.
             min_length: 'Nome do produto deve ser pelo menos 1 caracter. |Nome do produto deve ter pelo menos {{limit}} caracteres.'
@@ -14,3 +17,11 @@ sylius:
         sku:
             not_blank: Por favor insira a variante SKU.
             unique: SKU variante deve ser único.
+    archetype:
+        name:
+            not_blank: Por favor, digite o nome de arquétipo.
+            min_length: 'Nome de arquétipo deve ser pelo menos 1 caractere longa. | Nome de arquétipo deve ser pelo menos {{ limit }} caracteres.'
+            max_length: 'Nome de arquétipo não deve ter mais de 1 caractere. | Nome de arquétipo não deve ter mais de {{ limit }} caracteres.'
+        code:
+            unique: Arquétipo com determinado código já existe.
+            not_blank: Por favor digite o código do arquétipo.

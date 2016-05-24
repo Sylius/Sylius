@@ -417,6 +417,7 @@ sylius:
         promotions: Список рекламных акций
         province: Регион
         provinces: Области
+        quantity: Количество
         recent_customers: Последние клиенты
         recent_orders: Недавние заказы
         recent_users: Последние пользователи

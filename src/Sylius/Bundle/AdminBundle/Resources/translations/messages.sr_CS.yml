@@ -5,6 +5,8 @@ sylius:
     menu:
         admin:
             main:
+                catalog:
+                    products: Poroizvodi
                 configuration:
                     countries: Zemlje
                     payment_methods: Opcije plaćanja

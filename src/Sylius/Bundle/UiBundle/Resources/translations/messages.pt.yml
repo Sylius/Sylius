@@ -23,9 +23,9 @@ sylius:
         new_country: Novo país
         new_tax_category: Nova categoria de imposto
         "no": false
-        no_taxes: Nenhuma taxa foi aplicada
         no_promotion: Sem promoções
         no_shipping_charges: Nenhuma taxa de entrega foi aplicada
+        no_taxes: Nenhuma taxa foi aplicada
         quantity: Quantidade
         save_changes: Salvar modificações
         shipping_methods: Métodos de envio

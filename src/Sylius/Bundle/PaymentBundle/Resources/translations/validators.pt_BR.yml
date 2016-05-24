@@ -26,3 +26,14 @@ sylius:
             max_length: 'Nome do meio de pagamento deve ter {{limit}} caracteres ou menos.'
             min_length: 'Nome do método de pagamento deve ter pelo menos {{limit}} caracteres de comprimento.'
             not_blank: Por favor, digite o nome do meio de pagamento.
+        fee_calculator_configuration:
+            amount:
+                greater_than_or_equal: 'A taxa não pode ser inferior a {{ compared_value }}.'
+                not_blank: Por favor, digite a quantidade de taxa.
+            percent:
+                max_range: 'Taxa de porcentagem não pode ser superior a {{ limit }}.'
+                min_range: 'Taxa de porcentagem não pode ser inferior a {{ limit }}.'
+                not_blank: Por favor, digite a porcentagem de taxa.
+        code:
+            not_blank: Por favor, digite o nome do meio de pagamento.
+            unique: O método de pagamento com determinado código já existe.

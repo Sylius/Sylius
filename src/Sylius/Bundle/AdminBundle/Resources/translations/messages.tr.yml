@@ -6,9 +6,10 @@ sylius:
         admin:
             main:
                 catalog:
-                    taxons: Kategoriler
-                    options: Ayarlar
                     attributes: Nitelikler
+                    options: Ayarlar
+                    products: Ürünler
+                    taxons: Kategoriler
                 configuration:
                     channels: Kanallar
                     countries: Ülkeler
@@ -23,8 +24,8 @@ sylius:
                     header: Pazarlama
                     promotions: Promosyonlar
                 customers:
-                    header: Müşteri
                     customers: Müşteriler
+                    header: Müşteri
                 sales:
                     header: Satışlar
                     orders: Siparişler

@@ -6,6 +6,9 @@ sylius:
         sku:
             not_blank: "Veuillez saisir l'UGS (SKU) du produit."
             unique: "L'UGS du produit doit être unique."
+        code:
+            not_blank: Veillez introduire le code du produit.
+            unique: Le code du produit doit être unique.
         name:
             not_blank: Veuillez saisir le nom du produit.
             min_length: 'Le nom du produit doit contenir au moins 1 caractère.|Le nom du produit ne doit pas dépasser {{ limit }} caractères.'

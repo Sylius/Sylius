@@ -6,9 +6,10 @@ sylius:
         admin:
             main:
                 catalog:
-                    taxons: Налоги
-                    options: Список опций
                     attributes: Атрибуты
+                    options: Список опций
+                    products: Товары
+                    taxons: Налоги
                 configuration:
                     channels: Каналы
                     countries: Страны
@@ -24,8 +25,8 @@ sylius:
                     header: Маркетинг
                     promotions: Рекламные акции
                 customers:
-                    header: Клиент
                     customers: Клиенты
+                    header: Клиент
                 sales:
                     header: Продажи
                     orders: Заказы

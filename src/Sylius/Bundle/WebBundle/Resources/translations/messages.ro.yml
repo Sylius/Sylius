@@ -300,6 +300,7 @@ sylius:
         promotions: Promoţii
         province: Județ
         provinces: Județe
+        quantity: Cantitate
         recent_orders: Comenzi recente
         recent_users: Utilizatori recenți
         refunded: Rambursată

@@ -37,6 +37,7 @@ sylius:
         presentation: Presentation
         province: Län
         provinces: Län
+        quantity: Antal
         roles: Roller
         routes: Rutter
         scope: Omfattning

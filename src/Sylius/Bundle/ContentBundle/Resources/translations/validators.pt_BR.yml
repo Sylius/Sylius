@@ -3,6 +3,16 @@
 
 sylius:
     imagine_block:
+        name:
+            not_blank: Introduza o nome do bloco imaginário.
+        label:
+            not_blank: Por favor, digite o bloco imaginário.
+        filter:
+            not_blank: Por favor, digite o bloco de filtro imaginário.
+        image:
+            not_blank: Por favor escolha o bloco imaginário de imagem.
+        start_date:
+            invalid_date: Data inicio de publicação é inválida.
         end_date:
             invalid_date: Publicar a data final é inválida.
     menu:
@@ -10,9 +20,17 @@ sylius:
             not_blank: Por favor, insira o nome do menu.
         label:
             not_blank: Por favor, digite o rótulo de menu.
+        start_date:
+            invalid_date: Data inicio de publicação é inválida.
         end_date:
             invalid_date: Publicar a data final é inválida.
     menu_node:
+        name:
+            not_blank: Por favor insira o nome de nó do menu.
+        label:
+            not_blank: Por favor, digite o rótulo de nó de menu.
+        start_date:
+            invalid_date: Data inicio de publicação é inválida.
         end_date:
             invalid_date: Publicar a data final é inválida.
     route:
@@ -20,6 +38,8 @@ sylius:
             not_blank: Por favor, digite o nome de rota.
         content:
             not_blank: Por favor, insira o conteúdo de rota.
+        start_date:
+            invalid_date: Data inicio de publicação é inválida.
         end_date:
             invalid_date: Publicar a data final é inválida.
     slideshow_block:
@@ -32,11 +52,33 @@ sylius:
         end_date:
             invalid_date: Publicar a data final é inválida.
     simple_block:
+        name:
+            not_blank: Por favor, digite o nome do bloco simples.
+        title:
+            not_blank: Por favor, digite o título do bloco simples.
+        body:
+            not_blank: Por favor, entre no corpo de bloco simples.
+        start_date:
+            invalid_date: Data inicio de publicação é inválida.
         end_date:
             invalid_date: Publicar a data final é inválida.
     string_block:
+        name:
+            not_blank: Por favor, digite o nome do bloco simples.
+        body:
+            not_blank: Por favor, insira o corpo do bloco simples.
+        start_date:
+            invalid_date: Data inicio de publicação é inválida.
         end_date:
             invalid_date: Publicar a data final é inválida.
     static_content:
+        name:
+            not_blank: Por favor, digite o nome de conteúdo estático.
+        title:
+            not_blank: Por favor, digite o nome de conteúdo estático.
+        body:
+            not_blank: Por favor, digite o conteúdo estático.
+        start_date:
+            invalid_date: A data de inicio da publicação é inválida.
         end_date:
             invalid_date: Publicar a data final é inválida.

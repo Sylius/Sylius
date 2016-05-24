@@ -6,10 +6,11 @@ sylius:
         admin:
             main:
                 catalog:
-                    header: Catalogue
-                    taxons: Famille de tags
-                    options: Options
                     attributes: Attributs
+                    header: Catalogue
+                    options: Options
+                    products: Produits
+                    taxons: Famille de tags
                 configuration:
                     channels: Canaux
                     countries: Pays
@@ -25,8 +26,8 @@ sylius:
                     header: Marketing
                     promotions: Promotions
                 customers:
-                    header: Client
                     customers: Clients
+                    header: Client
                 sales:
                     header: Ventes
                     orders: Commandes

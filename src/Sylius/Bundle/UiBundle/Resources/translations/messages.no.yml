@@ -9,14 +9,14 @@ sylius:
         option:
             presentation: Presentasjon
     ui:
-        add_coupon: Legg til rabattkupong
         actions: Handlinger
+        add_coupon: Legg til rabattkupong
         cancel: Avbryt
         cancelled: Avbrutt
         checkout: Gå til kassen
         countries: Land
-        coupons: Kuponger
         coupon_based: Kupongbasert
+        coupons: Kuponger
         create: Opprett
         dashboard: Panel
         default_currency: Standard valuta
@@ -25,14 +25,16 @@ sylius:
         edit: Rediger
         enabled: Aktivert
         filter: Filtrer
+        item: Produkt
         locales: Nasjonale innstillinger
         new: Ny
         new_country: Nytt land
         new_tax_category: Ny momskategori
         "no": false
-        no_taxes: Ingen mva lagt til
         no_promotion: Ingen tilbudskode
         no_shipping_charges: Ingen fraktkostnader lagt til
+        no_taxes: Ingen mva lagt til
+        price: Pris
         quantity: Antall
         ready: Klar
         returned: Returnert

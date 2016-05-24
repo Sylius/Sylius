@@ -17,13 +17,14 @@ sylius:
         delete: Изтрий
         edit: Редактирай
         filter: Филтър
+        item: артикул
         locales: Езикови променливи
         new_country: Новата страна
         new_tax_category: Нова данъчна категория
         "no": false
-        no_taxes: Няма такси
         no_promotion: Нама приложена промоция
         no_shipping_charges: Няма такси за доставка
+        no_taxes: Няма такси
         quantity: Количество
         save_changes: Запиши промените
         shipping_methods: Начин на доставка

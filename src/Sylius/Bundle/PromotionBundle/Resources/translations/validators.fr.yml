@@ -29,3 +29,6 @@ sylius:
             not_blank: Veuillez saisir le nombre de code promo à générer.
         usage_limit:
             min: "La limite d'utilisation du code promo généré doit être au moins de {{ limit }}."
+        code_length:
+            min: "Le coupon doit être d'au moins {{ limit }} caractères."
+            max: 'Le coupon ne peut faire plus de {{ limit }} caractères.'

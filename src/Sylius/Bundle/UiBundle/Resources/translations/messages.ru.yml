@@ -10,15 +10,15 @@ sylius:
         option:
             presentation: Публичное название
     ui:
-        add_coupon: Добавить купон
         actions: Действия
+        add_coupon: Добавить купон
         cancel: Отмена
         cancelled: Отменён
         checkout: Сверка
         color: Цвет
         countries: Страны
-        coupons: sylius.breadcrumb.promotion_coupon.index
         coupon_based: Основана на купонах
+        coupons: sylius.breadcrumb.promotion_coupon.index
         create: Добавить
         currencies: Валюты
         dashboard: Приборная панель
@@ -32,15 +32,17 @@ sylius:
         exclusive: Эксклюзив
         expires_at: Истекает
         filter: Фильтр
+        item: Товар
         locales: Языки
         new: Новый
         new_country: Добавить страну
         new_currency: Новая валюта
         new_tax_category: Создать налоговую категорию
         "no": false
-        no_taxes: Без НДС
         no_promotion: Без скидки
         no_shipping_charges: Без оплаты за пересылку
+        no_taxes: Без НДС
+        price: Цена
         quantity: Количество
         ready: Готов
         returned: Возвращено

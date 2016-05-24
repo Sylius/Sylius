@@ -35,6 +35,7 @@ sylius:
         price: Harga
         province: Provinsi
         provinces: Provinsi
+        quantity: Kuantitas
         restricted_zone: Zona Terbatas
         roles: Peran
         routes: Rute

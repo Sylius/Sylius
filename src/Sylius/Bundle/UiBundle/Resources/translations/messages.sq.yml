@@ -10,10 +10,11 @@ sylius:
         option:
             presentation: Prezantimi
     ui:
-        add_coupon: Shto kupon
-        all: Të gjitha
+        account_credentials: Te dhenat e llogarise
         actions: Veprimet
+        add_coupon: Shto kupon
         administration_panel_login: Login i panelit te administrimit
+        all: Të gjitha
         an_error_occurred: Ndodhi një gabim
         are_your_sure_you_want_to_perform_this_action: Jeni i sigurte se deshironi te egzekutoni kete veprim?
         available_for_channels: Ne dispozicion per kanale
@@ -28,10 +29,11 @@ sylius:
         confirm_your_action: Konfirmoni veprimin tuaj
         contains: Përmban
         countries: Vendet
-        coupons: Kuponat
         coupon_based: Bazuar në kupon
+        coupons: Kuponat
         create: Krijo
         currencies: Monedhat
+        customer_can_login_to_the_store: Klienti mund te hyje ne dyqan
         dashboard: Paneli
         date: Data
         default_currency: Monedha e paracaktuar
@@ -45,8 +47,8 @@ sylius:
         edit_currency: Modifiko valuten
         edit_customer: Modifiko klientin
         edit_payment_method: Modifiko metoden e pageses
-        edit_product_option: Modifiko opsionet e produktit
         edit_product_attribute: Modifiko atributet e produktit
+        edit_product_option: Modifiko opsionet e produktit
         edit_promotion: Modifiko promocionin
         edit_shipping_method: Modifiko metoden e transportit
         edit_tax_category: Ndrysho kategorine e takses
@@ -59,23 +61,27 @@ sylius:
         equal: E njëjtë
         exclusive: Ekskluziv
         expires_at: Skadon më
+        extra_information: Informacione shtese
         filter: Filtri
+        go: Shko
         in: Brenda
         info: Info
+        item: Po ashtu
+        jump_to_page: Kerce ne faqen
         last_updated: Përditësimi i fundit
         locales: Rajonet
         manage_attributes_of_your_products: Modifiko atributet e produktit
-        manage_currencies_available_in_the_store: Menaxho monedhat ne dispocion ne dyqan
-        manage_your_customers: Menaxho klientet
-        manage_languages_available_in_the_store: Menaxho gjuhet ne dispocion ne dyqan
+        manage_categorization_of_your_products: Menaxho kategorizimin e produkteve
         manage_configuration_options_of_your_products: Menaxho opsionet e konfigurimit te produkteve
+        manage_currencies_available_in_the_store: Menaxho monedhat ne dispocion ne dyqan
+        manage_discounts_and_promotional_campaigns: Menaxho fushatat e uljeve dhe promocioneve
+        manage_geographical_zones: Menaxho zonat gjeografike
+        manage_languages_available_in_the_store: Menaxho gjuhet ne dispocion ne dyqan
         manage_payment_methods_available_to_your_customers: Menaxho metodat e pagesave ne dispocion per klientet
         manage_shipping_destinations: Menaxho destinacionet e transportit
-        manage_categorization_of_your_products: Menaxho kategorizimin e produkteve
         manage_shipping_methods_for_your_store: Menaxho metodat e transportit te dyqanit
         manage_taxation_of_your_products: Menaxho taksimet e produktit tuaj
-        manage_geographical_zones: Menaxho zonat gjeografike
-        manage_discounts_and_promotional_campaigns: Menaxho fushatat e uljeve dhe promocioneve
+        manage_your_customers: Menaxho klientet
         new: E re
         new_channel: Kanal i ri
         new_country: Vend i ri
@@ -84,15 +90,18 @@ sylius:
         new_tax_category: Kategori e re taksimi
         "no": false
         no_account: asnje llogari
-        no_results_to_display: Nuk ka rezultate per tu shfaqur
-        no_taxes: Nuk zbatohen taksa
         no_promotion: Nuk është përdorur asnjë reklamë
+        no_requirement: Anje kerkese
+        no_results_to_display: Nuk ka rezultate per tu shfaqur
         no_shipping_charges: Nuk ka asnjë pagesë dërgimi
+        no_taxes: Nuk zbatohen taksa
+        no_theme: Asnje teme
         not_contains: Nuk permban
         not_empty: Jo bosh
         not_in: Jo brenda
         or: ose
         powered_by: Mundësuar nga
+        price: Çmimi
         promotion_configuration: Konfigurimi i promocionit
         promotion_information: Informacione promocioni
         quantity: Sasitë
@@ -108,18 +117,11 @@ sylius:
         status: Statusi
         success: Sukses
         tax_categories: Kategoritë e taksimit
+        total_records: Rekordet totale
+        unlimited: E palimituar
+        usage: Perdorimi
         values: Vlerat
         "yes": true
-        total_records: Rekordet totale
-        jump_to_page: Kerce ne faqen
-        go: Shko
-        unlimited: E palimituar
-        no_requirement: Anje kerkese
         zone_consisting_of_countries: Zone e perbere nga shtete
-        zone_consisting_of_provinces: Zone e perbere nga rrethe
         zone_consisting_of_other_zones: Zone e perbere nga zona
-        no_theme: Asnje teme
-        usage: Perdorimi
-        customer_can_login_to_the_store: Klienti mund te hyje ne dyqan
-        account_credentials: Te dhenat e llogarise
-        extra_information: Informacione shtese
+        zone_consisting_of_provinces: Zone e perbere nga rrethe

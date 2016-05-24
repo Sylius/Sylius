@@ -5,6 +5,8 @@ sylius:
     menu:
         admin:
             main:
+                catalog:
+                    products: Produtos
                 configuration:
                     countries: Países
                     payment_methods: Métodos de pagamento

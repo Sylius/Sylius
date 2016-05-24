@@ -284,6 +284,7 @@ sylius:
         promotions: Прамоцыі
         province: Вобласць
         provinces: Вобласці
+        quantity: Колькасць
         recent_orders: Нядаўнія замовы
         recent_users: Нядаўнія карыстальнікі
         refunded: Вернута

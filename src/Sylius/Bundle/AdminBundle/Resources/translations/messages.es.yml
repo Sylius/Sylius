@@ -6,9 +6,11 @@ sylius:
         admin:
             main:
                 catalog:
-                    taxons: Taxonomías
-                    options: Opciones de producto
                     attributes: Atributos
+                    header: Catálogo
+                    options: Opciones de producto
+                    products: Productos
+                    taxons: Taxonomías
                 configuration:
                     channels: Canales
                     countries: Países
@@ -24,8 +26,8 @@ sylius:
                     header: Márketing
                     promotions: Promociones
                 customers:
-                    header: Cliente
                     customers: Clientes
+                    header: Cliente
                 sales:
                     header: Ventas
                     orders: Pedidos

@@ -10,15 +10,15 @@ sylius:
         option:
             presentation: Predstavitev
     ui:
-        add_coupon: Dodaj kupon
         actions: Dejanja
+        add_coupon: Dodaj kupon
         cancel: Prekliči
         cancelled: Preklicano
         checkout: Plačilo
         color: Barva
         countries: Države
-        coupons: Kuponi
         coupon_based: Kupon, ki temelji
+        coupons: Kuponi
         create: Ustvarite
         currencies: Valute
         dashboard: Nadzorna plošča
@@ -33,16 +33,18 @@ sylius:
         exclusive: Izključno
         expires_at: Poteče dne
         filter: Filter
+        item: Izdelek
         locales: Področne nastavitve
         new: Novo
         new_country: Nova država
         new_currency: Nova valuta
         new_tax_category: Nova davčna kategorija
         "no": false
-        no_taxes: Davki niso uporabljeni
         no_promotion: Uporabljene ni nobene promocije
         no_shipping_charges: Stroški pošiljanja niso uporabljeni
+        no_taxes: Davki niso uporabljeni
         powered_by: Poganja
+        price: Cena
         quantity: Količina
         ready: Pripravljen
         returned: Vrnjeno

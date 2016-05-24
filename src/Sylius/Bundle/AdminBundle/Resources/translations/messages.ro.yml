@@ -6,9 +6,10 @@ sylius:
         admin:
             main:
                 catalog:
-                    taxons: Categorii
-                    options: Opţiuni
                     attributes: Atribute
+                    options: Opţiuni
+                    products: Produse
+                    taxons: Categorii
                 configuration:
                     countries: Țări
                     header: Configurare

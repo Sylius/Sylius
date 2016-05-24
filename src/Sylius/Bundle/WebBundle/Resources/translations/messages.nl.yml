@@ -554,6 +554,7 @@ sylius:
         provinces: Provincies
         qty_max: Maximum aantal
         qty_min: Minimum aantal
+        quantity: Hoeveelheid
         rating: Beoordeling
         recent_customers: Recente klanten
         recent_orders: Recente bestellingen
@@ -707,6 +708,7 @@ sylius:
         users_list_of_all_users_registered_in_store: 'Gebruikers <small>Lijst van alle gebruikers in de winkel</small>'
         values: Waarden
         variant_selection_method: Variant selectiemethode
+        variant: Varianten
         variants: Varianten
         view: Weergave
         view_more: Bekijk details

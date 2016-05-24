@@ -426,6 +426,7 @@ sylius:
         provinces: Provincijos
         qty_max: Kiekis max
         qty_min: Kiekis min
+        quantity: Kiekis
         recent_orders: Naujausi užsakymai
         recent_users: Naujausi vartotojai
         redirect_routes: Nukreipimo maršrutai
@@ -519,6 +520,7 @@ sylius:
         username: Vartotojo vardas
         users_list_of_all_users_registered_in_store: 'Vartotojai <small>visų registruotų vartotojų sąrašas</small>'
         variant_selection_method: Varianto pasirinkimo būdas
+        variant: Variantai
         variants: Variantai
         view: Peržiūrėti
         view_more: Rodyti daugiau

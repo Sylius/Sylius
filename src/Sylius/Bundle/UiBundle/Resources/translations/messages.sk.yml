@@ -10,10 +10,11 @@ sylius:
         option:
             presentation: Verejný názov
     ui:
-        add_coupon: Pridať kupón
-        all: Všetky
+        account_credentials: Prihlasovacie údaje
         actions: Akcie
+        add_coupon: Pridať kupón
         administration_panel_login: Prihásenie do administračného rozhrania
+        all: Všetky
         an_error_occurred: Vyskytla sa chyba
         are_your_sure_you_want_to_perform_this_action: Ste si istý, že chcete vykonať túto akciu?
         available_for_channels: Dostupné pre kanály
@@ -29,10 +30,11 @@ sylius:
         confirm_your_action: Potvrďte vašu akciu
         contains: Obsahuje
         countries: Krajiny
-        coupons: Kupóny
         coupon_based: Používať kupóny
+        coupons: Kupóny
         create: Vytvoriť
         currencies: Meny
+        customer_can_login_to_the_store: Zákazník sa môže prihlásiť do obchodu
         dashboard: Administračný panel
         date: Dátum
         default_currency: Predvolená mena
@@ -44,13 +46,13 @@ sylius:
         edit: Upraviť
         edit_channel: Úprava kanálu
         edit_country: Upraviť krajinu
+        edit_coupon: Upraviť kupón
         edit_currency: Úprava meny
         edit_customer: Úprava zákazníka
         edit_payment_method: Úprava spôsobu platby
-        edit_product_option: Upraviť produktovú voľbu
         edit_product_attribute: Upraviť produktovú vlastnosť
+        edit_product_option: Upraviť produktovú voľbu
         edit_promotion: Upraviť propagáciu
-        edit_coupon: Upraviť kupón
         edit_shipping_method: Úpraviť spôsob doručenia
         edit_tax_category: Úprava daňovej kategórie
         edit_tax_rate: Upraviť sadzbu dane
@@ -62,48 +64,55 @@ sylius:
         equal: Rovná sa
         exclusive: Exkluzívne
         expires_at: Platnosť do
+        extra_information: Ďalšie informácie
         filter: Filter
+        go: Pokračovať
         in: V
         info: Info
+        item: Položka
+        jump_to_page: Prejsť na stranu
         last_updated: Posledná aktualizácia
         locales: Jazyky
         manage_attributes_of_your_products: Spravovať vlastnosti vašich produktov
+        manage_categorization_of_your_products: Spravovať kategorizáciu produktov
+        manage_configuration_options_of_your_products: Spravovať nastavenia volieb vašich produktov
         manage_coupons: Spravovať kupóny
         manage_currencies_available_in_the_store: Spravovať dostupné meny v obchode
-        manage_your_customers: Spravovať vašich zákazníkov
+        manage_discounts_and_promotional_campaigns: Spravovať zlavy a propagačné kampane
+        manage_geographical_zones: Spravovať geografické zóny
         manage_languages_available_in_the_store: Spravovať dostupné jazyky v obchode
-        manage_configuration_options_of_your_products: Spravovať nastavenia volieb vašich produktov
         manage_payment_methods_available_to_your_customers: Spravovať platobné metódy k dispozícii pre vašich zákazníkov
         manage_shipping_destinations: Spravovať prepravné destinácie
-        manage_categorization_of_your_products: Spravovať kategorizáciu produktov
         manage_shipping_methods_for_your_store: Spravovať dostupné spôsoby dopravy v obchode
         manage_taxation_of_your_products: Spravovať zdaňovanie vašich produktov
-        manage_geographical_zones: Spravovať geografické zóny
-        manage_discounts_and_promotional_campaigns: Spravovať zlavy a propagačné kampane
+        manage_your_customers: Spravovať vašich zákazníkov
         new: Nová
         new_channel: Nový kanál
         new_country: Nová krajina
+        new_coupon: Nový kupón
         new_currency: Nová mena
         new_locale: Nový jazyk
-        new_coupon: Nový kupón
         new_tax_category: Nová daňová kategoria
         "no": false
         no_account: Žiadny účet
-        no_results_to_display: Neexistujú žiadne vysledky na zobrazenie
-        no_taxes: Nie sú uplatnené žiadne dane
         no_promotion: Nie sú uplatnené žiadne akcie
+        no_requirement: Žiadne podmienky
+        no_results_to_display: Neexistujú žiadne vysledky na zobrazenie
         no_shipping_charges: Nie sú uplatnené žiadne poplatky za dopravu
+        no_taxes: Nie sú uplatnené žiadne dane
+        no_theme: Žiadna Téma
         not_contains: Neobsahuje
         not_empty: Nie je prázdny
         not_in: Nie je v
         onhold: Pozastavené
         or: alebo
         partially_shipped: Čiastočne dodané
+        per_customer_usage_limit: Obmedzenie použitia pre zákazníka
         powered_by: Vytvorené v systéme
+        price: Cena
         process_your_orders: Spracovať vaše objednávky
         promotion_configuration: Nastavenie propagácii
         promotion_information: Informacie o propagácii
-        per_customer_usage_limit: Obmedzenie použitia pre zákazníka
         purchased_from: Zakúpené od
         quantity: Množstvo
         ready: Pripravená
@@ -120,18 +129,11 @@ sylius:
         success: Úspech
         tax: Daň
         tax_categories: Daňové kategórie
+        total_records: Celkový počet záznamov
+        unlimited: Neobmedzené
+        usage: Použitie
         values: Hodnoty
         "yes": true
-        total_records: Celkový počet záznamov
-        jump_to_page: Prejsť na stranu
-        go: Pokračovať
-        unlimited: Neobmedzené
-        no_requirement: Žiadne podmienky
         zone_consisting_of_countries: Zóna pozostávajúca z krajín
-        zone_consisting_of_provinces: Zóna pozostávajúca z provincií
         zone_consisting_of_other_zones: Zóna pozostávajúca z iných oblastí
-        no_theme: Žiadna Téma
-        usage: Použitie
-        customer_can_login_to_the_store: Zákazník sa môže prihlásiť do obchodu
-        account_credentials: Prihlasovacie údaje
-        extra_information: Ďalšie informácie
+        zone_consisting_of_provinces: Zóna pozostávajúca z provincií

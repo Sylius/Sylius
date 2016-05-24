@@ -553,6 +553,7 @@ sylius:
         provinces: استان ها
         qty_max: حداکثر حجم
         qty_min: حداقل حجم
+        quantity: تعداد
         rating: امتیازدهی
         recent_customers: مشتریان اخیر
         recent_orders: سفارش های اخیر
@@ -706,6 +707,7 @@ sylius:
         users_list_of_all_users_registered_in_store: 'کاربران <small> لیست همه کاربران ثبت شده در این فروشگاه </small>'
         values: مقادیر
         variant_selection_method: انتخاب نوع ترکیب بندی
+        variant: تنوع کالا
         variants: تنوع کالا
         view: مشاهده
         view_more: مشاهده بیشتر

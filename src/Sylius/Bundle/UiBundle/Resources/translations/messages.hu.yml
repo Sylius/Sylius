@@ -10,13 +10,13 @@ sylius:
         option:
             presentation: Bemutató
     ui:
-        add_coupon: Kupon hozzáadása
         actions: Műveletek
+        add_coupon: Kupon hozzáadása
         cancel: Mégse
         checkout: Fizetés
         countries: Országok
-        coupons: Kuponok
         coupon_based: Kupon alapján
+        coupons: Kuponok
         create: Létrehozás
         dashboard: Vezérlőpult
         default_currency: Alapértelmezett pénznem
@@ -25,14 +25,16 @@ sylius:
         edit: Szerkesztés
         enabled: Engedélyezve
         filter: Szűrő
+        item: Cikk
         locales: Területi beállítások
         new: Új
         new_country: Új ország
         new_tax_category: Új adókategória
         "no": false
-        no_taxes: Az adó nem kett alkalmazva
         no_promotion: Promóció nem lett alkalmazva
         no_shipping_charges: A szállítási díj nem lett alkalmazva
+        no_taxes: Az adó nem kett alkalmazva
+        price: Ár
         quantity: Mennyiség
         ready: Kész
         returned: Visszaküldött

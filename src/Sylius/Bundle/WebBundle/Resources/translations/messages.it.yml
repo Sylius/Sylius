@@ -555,6 +555,7 @@ sylius:
         provinces: Province
         qty_max: Max Qty
         qty_min: Min qty
+        quantity: Quantità
         rating: Voto
         recent_customers: Clienti recenti
         recent_orders: Ordini recenti
@@ -708,6 +709,7 @@ sylius:
         users_list_of_all_users_registered_in_store: 'Utenti <small>Lista degli utenti registrati al negozio</small>'
         values: Valori
         variant_selection_method: Metodo di selezione variante
+        variant: Varianti
         variants: Varianti
         view: Vista
         view_more: Dettaglio
