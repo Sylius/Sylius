@@ -10,8 +10,8 @@ Feature: Changing a customer password
         And I am logged in as "francis@underwood.com"
 
     @ui
-    Scenario: Changing my email
+    Scenario: Changing my password
         Given I want to change my password
-        And I change password from "whitehouse" to "blackhouse"
+        When I change password from "whitehouse" to "blackhouse"
         And I save my changes
         Then I should be notified that my password has been successfully changed

@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\UserBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\UserBundle\Form\Model\ChangePassword;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -21,6 +22,11 @@ use Symfony\Component\Form\FormBuilderInterface;
  */
 class UserChangePasswordTypeSpec extends ObjectBehavior
 {
+    function let()
+    {
+        $this->beConstructedWith(ChangePassword::class, ['sylius']);
+    }
+    
     function it_extends_abstract_type()
     {
         $this->shouldHaveType(AbstractType::class);

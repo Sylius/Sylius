@@ -59,10 +59,7 @@
         <parameter key="sylius.user.validator.unique_registered_user.class">Sylius\Bundle\UserBundle\Validator\Constraints\RegisteredUserValidator</parameter>
         <parameter key="sylius.user.validator.customer_initializer.class">Sylius\Bundle\UserBundle\Validator\Initializer\CustomerInitializer</parameter>
 
-        <parameter key="sylius.form.type.user_change_password.date_class">Sylius\Bundle\UserBundle\Form\Model\ChangePassword</parameter>
-        <parameter key="sylius.form.type.user_change_password.validation_groups" type="collection">
-            <parameter>sylius</parameter>
-        </parameter>
+        <parameter key="sylius.form.model.change_password.class">Sylius\Bundle\UserBundle\Form\Model\ChangePassword</parameter>
     </parameters>
 
     <services>
@@ -178,7 +175,7 @@
             <tag name="form.type" alias="sylius_user_reset_password" />
         </service>
         <service id="sylius.form.type.user_change_password" class="%sylius.form.type.user_change_password.class%">
-            <argument type="string">%sylius.form.type.user_change_password.date_class%</argument>
+            <argument type="string">%sylius.form.model.change_password.class%</argument>
             <argument type="collection">
                 <argument>sylius</argument>
             </argument>

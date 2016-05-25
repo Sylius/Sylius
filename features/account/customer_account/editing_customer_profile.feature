@@ -12,7 +12,7 @@ Feature: Editing a customer profile
     @ui
     Scenario: Changing my first name and last name
         Given I want to modify my profile
-        And I specify the first name as "Will"
+        When I specify the first name as "Will"
         And I specify the last name as "Conway"
         And I save my changes
         Then I should be notified that it has been successfully edited
@@ -21,7 +21,7 @@ Feature: Editing a customer profile
     @ui
     Scenario: Changing my email
         Given I want to modify my profile
-        And I specify the email as "frank@underwood.com"
+        When I specify the email as "frank@underwood.com"
         And I save my changes
         Then I should be notified that it has been successfully edited
         And my email should be "frank@underwood.com"
