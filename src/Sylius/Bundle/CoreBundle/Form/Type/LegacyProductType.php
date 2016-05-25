@@ -42,6 +42,7 @@ class LegacyProductType extends BaseProductType
             ->add('taxons', 'sylius_taxon_choice', [
                 'label' => 'sylius.form.product.taxons',
                 'multiple' => true,
+                'attr' => ['style' => 'height: 30%']
             ])
             ->add('variantSelectionMethod', 'choice', [
                 'label' => 'sylius.form.product.variant_selection_method',
