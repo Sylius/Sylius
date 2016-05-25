@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Product\Generator;
 
+use Sylius\Component\Product\Checker\ProductVariantsParityCheckerInterface;
 use Sylius\Component\Product\Factory\ProductVariantFactoryInterface;
 use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
@@ -18,13 +19,14 @@ use Webmozart\Assert\Assert;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 final class ProductVariantGenerator implements ProductVariantGeneratorInterface
 {
     /**
      * @var ProductVariantFactoryInterface
      */
-    protected $productVariantFactory;
+    private $productVariantFactory;
 
     /**
      * @var CartesianSetBuilder
@@ -32,12 +34,21 @@ final class ProductVariantGenerator implements ProductVariantGeneratorInterface
     private $setBuilder;
 
     /**
-     * @param ProductVariantFactoryInterface $productVariantFactory
+     * @var ProductVariantsParityCheckerInterface
      */
-    public function __construct(ProductVariantFactoryInterface $productVariantFactory)
-    {
+    private $variantsParityChecker;
+
+    /**
+     * @param ProductVariantFactoryInterface $productVariantFactory
+     * @param ProductVariantsParityCheckerInterface $variantsParityChecker
+     */
+    public function __construct(
+        ProductVariantFactoryInterface $productVariantFactory,
+        ProductVariantsParityCheckerInterface $variantsParityChecker
+    ) {
         $this->productVariantFactory = $productVariantFactory;
         $this->setBuilder = new CartesianSetBuilder();
+        $this->variantsParityChecker = $variantsParityChecker;
     }
 
     /**
@@ -61,7 +72,10 @@ final class ProductVariantGenerator implements ProductVariantGeneratorInterface
 
         foreach ($permutations as $permutation) {
             $variant = $this->createVariant($product, $optionMap, $permutation);
-            $product->addVariant($variant);
+
+            if (!$this->variantsParityChecker->checkParity($variant, $product)) {
+                $product->addVariant($variant);
+            }
         }
     }
 

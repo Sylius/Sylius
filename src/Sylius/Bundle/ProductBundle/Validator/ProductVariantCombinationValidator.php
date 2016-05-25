@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\ProductBundle\Validator;
 
-use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\Product\Checker\ProductVariantsParityCheckerInterface;
 use Sylius\Component\Product\Model\ProductVariantInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -22,6 +22,19 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
  */
 class ProductVariantCombinationValidator extends ConstraintValidator
 {
+    /**
+     * @var ProductVariantsParityCheckerInterface
+     */
+    private $variantsParityChecker;
+
+    /**
+     * @param ProductVariantsParityCheckerInterface $variantsParityChecker
+     */
+    public function __construct(ProductVariantsParityCheckerInterface $variantsParityChecker)
+    {
+        $this->variantsParityChecker = $variantsParityChecker;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -36,37 +49,8 @@ class ProductVariantCombinationValidator extends ConstraintValidator
             return;
         }
 
-        if ($this->matches($value, $product)) {
+        if ($this->variantsParityChecker->checkParity($value, $product)) {
             $this->context->addViolation($constraint->message);
         }
-    }
-
-    /**
-     * @param ProductVariantInterface  $variant
-     * @param ProductInterface $variable
-     *
-     * @return bool
-     */
-    private function matches(ProductVariantInterface $variant, ProductInterface $variable)
-    {
-        foreach ($variable->getVariants() as $existingVariant) {
-            if ($variant === $existingVariant || !$variant->getOptionValues()->count()) {
-                continue;
-            }
-
-            $matches = true;
-
-            foreach ($variant->getOptionValues() as $optionValue) {
-                if (!$existingVariant->hasOptionValue($optionValue)) {
-                    $matches = false;
-                }
-            }
-
-            if ($matches) {
-                return true;
-            }
-        }
-
-        return false;
     }
 }
