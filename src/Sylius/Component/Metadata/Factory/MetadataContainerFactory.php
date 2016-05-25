@@ -45,10 +45,11 @@ final class MetadataContainerFactory implements MetadataContainerFactoryInterfac
     /**
      * {@inheritdoc}
      */
-    public function createIdentifiedBy($id)
+    public function createIdentifiedBy($type, $code)
     {
         $metadataContainer = $this->createNew();
-        $metadataContainer->setId($id);
+        $metadataContainer->setCode($code);
+        $metadataContainer->setType($type);
 
         return $metadataContainer;
     }

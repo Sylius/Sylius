@@ -3,14 +3,7 @@
 <html>
     <head>
         {% block head %}
-            <meta charset="UTF-8">
-            <title>
-                {% block title %}
-                    {{ settings.title|default('sylius.meta.frontend_title'|trans) }}
-                {% endblock %}
-            </title>
-            <meta name="description" content="{{ settings.meta_description|default('sylius.meta.frontend_description'|trans) }}">
-            <meta name="keywords" content="{{ settings.meta_keywords|default('sylius.meta.frontend_keywords'|trans) }}">
+            {{ sylius_metadata_render_page() }}
         {% endblock %}
 
         <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Open+Sans:300italic,400,300,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>

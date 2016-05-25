@@ -42,9 +42,9 @@ final class ProcessedMetadataProvider implements MetadataProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function findMetadataBySubject(MetadataSubjectInterface $metadataSubject)
+    public function findMetadataBySubject(MetadataSubjectInterface $metadataSubject, $type)
     {
-        $compiledMetadata = $this->metadataProvider->findMetadataBySubject($metadataSubject);
+        $compiledMetadata = $this->metadataProvider->findMetadataBySubject($metadataSubject, $type);
 
         if (null === $compiledMetadata) {
             return null;

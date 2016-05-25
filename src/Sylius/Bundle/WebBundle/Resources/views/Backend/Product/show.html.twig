@@ -22,7 +22,10 @@
     {% else %}
         {{ buttons.enable(path('sylius_backend_product_enable', {'id': product.id})) }}
     {% endif %}
-    <a href="{{ path('sylius_backend_metadata_container_customize', { 'id': product.metadataIdentifier }) }}" class="btn btn-default">
+    <a href="{{ path('sylius_backend_page_metadata_container_customize', {
+            'type': constant('Sylius\\Component\\Metadata\\Model\\MetadataType::PAGE'),
+            'code': product.metadataIdentifier
+        }) }}" class="btn btn-default">
         <i class="glyphicon glyphicon-file"></i><span>{{ 'sylius.ui.customize_metadata'|trans }}</span>
     </a>
     {{ buttons.edit(path('sylius_backend_product_update', {'id': product.id})) }}

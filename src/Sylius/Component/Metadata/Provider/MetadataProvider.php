@@ -55,7 +55,7 @@ final class MetadataProvider implements MetadataProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function findMetadataBySubject(MetadataSubjectInterface $metadataSubject)
+    public function findMetadataBySubject(MetadataSubjectInterface $metadataSubject, $type)
     {
         $identifiers = $this->metadataHierarchyProvider->getHierarchyByMetadataSubject($metadataSubject);
 
@@ -63,8 +63,7 @@ final class MetadataProvider implements MetadataProviderInterface
         $baseMetadata = null;
         foreach ($identifiers as $identifier) {
             /** @var MetadataContainerInterface $metadataContainer */
-            // TODO: Use find($identifier) after Resource refactoring (PR #2255)
-            $metadataContainer = $this->metadataContainerRepository->findOneBy(['id' => $identifier]);
+            $metadataContainer = $this->metadataContainerRepository->findOneBy(['type' => $type, 'code' => $identifier]);
 
             if (null === $metadataContainer) {
                 continue;

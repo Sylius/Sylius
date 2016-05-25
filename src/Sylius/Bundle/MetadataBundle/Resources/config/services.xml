@@ -31,6 +31,7 @@
         <parameter key="sylius.metadata.provider.processed.class">Sylius\Component\Metadata\Provider\ProcessedMetadataProvider</parameter>
 
         <parameter key="sylius.metadata.hierarchy_provider.class">Sylius\Component\Metadata\HierarchyProvider\CompositeMetadataHierarchyProvider</parameter>
+        <parameter key="sylius.metadata.hierarchy_provider.page.class">Sylius\Component\Metadata\HierarchyProvider\PageHierarchyProvider</parameter>
     </parameters>
 
     <services>
@@ -82,6 +83,10 @@
 
         <service id="sylius.metadata.hierarchy_provider" class="%sylius.metadata.hierarchy_provider.class%">
             <argument type="collection" /> <!-- Metadata hierarchy provider array -->
+        </service>
+
+        <service id="sylius.metadata.hierarchy_provider.page" class="%sylius.metadata.hierarchy_provider.page.class%" public="false">
+            <tag name="sylius.metadata_hierarchy_provider" />
         </service>
     </services>
 

@@ -29,6 +29,26 @@ interface MetadataContainerInterface extends ResourceInterface
     public function setId($id);
 
     /**
+     * @return string
+     */
+    public function getCode();
+
+    /**
+     * @param string $code
+     */
+    public function setCode($code);
+
+    /**
+     * @return string
+     */
+    public function getType();
+
+    /**
+     * @param string $type
+     */
+    public function setType($type);
+
+    /**
      * @return MetadataInterface
      */
     public function getMetadata();

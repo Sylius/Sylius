@@ -17,7 +17,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class MetadataContainerType extends AbstractResourceType
+class PageMetadataContainerType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}
@@ -25,7 +25,8 @@ class MetadataContainerType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('id', 'text', ['read_only' => true])
+            ->add('code', 'text', ['read_only' => true])
+            ->add('type', 'text', ['read_only' => true])
             ->add('metadata', 'sylius_page_metadata')
         ;
     }
@@ -35,6 +36,6 @@ class MetadataContainerType extends AbstractResourceType
      */
     public function getName()
     {
-        return 'sylius_metadata_container';
+        return 'sylius_page_metadata_container';
     }
 }

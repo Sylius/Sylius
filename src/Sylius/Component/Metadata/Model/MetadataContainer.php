@@ -22,6 +22,16 @@ class MetadataContainer implements MetadataContainerInterface
     protected $id;
 
     /**
+     * @var string
+     */
+    protected $code;
+
+    /**
+     * @var string
+     */
+    protected $type;
+
+    /**
      * @var MetadataInterface
      */
     protected $metadata;
@@ -40,6 +50,38 @@ class MetadataContainer implements MetadataContainerInterface
     public function setId($id)
     {
         $this->id = $id;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
     }
 
     /**

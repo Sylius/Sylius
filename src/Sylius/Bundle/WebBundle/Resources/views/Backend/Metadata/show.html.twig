@@ -22,7 +22,7 @@
 <ol class="breadcrumb">
     <li>{{ 'sylius.ui.configuration'|trans }}</li>
     <li><a href="{{ path('sylius_backend_metadata_container_index') }}">{{ 'sylius.ui.metadata_index'|trans }}</a></li>
-    <li>{{ metadata_container.id }}</li>
+    <li>{{ metadata_container.type }}: {{ metadata_container.code }}</li>
 </ol>
 {% endblock %}
 
@@ -30,7 +30,7 @@
 <div class="page-header">
     <div class="actions-menu">
         {{ buttons.manage(path('sylius_backend_metadata_container_index'), 'sylius.ui.manage_metadata'|trans) }}
-        {{ buttons.edit(path('sylius_backend_metadata_container_customize', { 'id': metadata_container.id })) }}
+        {{ buttons.edit(path('sylius_backend_page_metadata_container_customize', { 'type': metadata_container.type, 'code': metadata_container.code })) }}
         {{ buttons.delete(path('sylius_backend_metadata_container_delete', { 'id': metadata_container.id }), null, false, false) }}
     </div>
     <h1><i class="glyphicon glyphicon-flag"></i> {{ 'sylius.ui.show_metadata'|trans|raw }}</h1>
@@ -39,13 +39,15 @@
 <table class="table table-bordered table-condensed">
     <thead>
         <tr>
-            <th>{{ 'sylius.ui.id'|trans }}</th>
+            <th>{{ 'sylius.ui.type'|trans }}</th>
+            <th>{{ 'sylius.ui.code'|trans }}</th>
             <th>{{ 'sylius.ui.content'|trans }}</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td>{{ metadata_container.id }}</td>
+            <td>{{ metadata_container.type }}</td>
+            <td>{{ metadata_container.code }}</td>
             <td>{{ _self.dataAsList(metadata_container.metadata.toArray()) }}</td>
         </tr>
     </tbody>

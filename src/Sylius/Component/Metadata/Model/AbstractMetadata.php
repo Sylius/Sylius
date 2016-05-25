@@ -24,13 +24,9 @@ abstract class AbstractMetadata implements MetadataInterface
     public function merge(MetadataInterface $metadata)
     {
         if (!$metadata instanceof $this || !$this instanceof $metadata) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    'You can only merge instances of the same classes. Tried to merge "%s" with "%s".',
-                    get_class($this),
-                    get_class($metadata)
-                )
-            );
+            // Because this merging is recursive, there could be child subjects of different types
+            // If they're incompatible just return to allow merging to continue throughout other levels
+            return;
         }
 
         $inheritedVariables = get_object_vars($metadata);

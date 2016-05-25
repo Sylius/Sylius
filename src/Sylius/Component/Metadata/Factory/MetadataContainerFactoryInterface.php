@@ -19,9 +19,10 @@ use Sylius\Component\Metadata\Model\MetadataContainerInterface;
 interface MetadataContainerFactoryInterface
 {
     /**
-     * @param string $id
+     * @param string $type
+     * @param string $code
      *
      * @return MetadataContainerInterface
      */
-    public function createIdentifiedBy($id);
+    public function createIdentifiedBy($type, $code);
 }

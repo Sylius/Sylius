@@ -12,8 +12,8 @@
 namespace Sylius\Bundle\MetadataBundle\DependencyInjection;
 
 use Sylius\Bundle\MetadataBundle\Controller\MetadataController;
+use Sylius\Bundle\MetadataBundle\Doctrine\ORM\MetadataContainerRepository;
 use Sylius\Bundle\MetadataBundle\Model\MetadataContainer;
-use Sylius\Bundle\MetadataBundle\Form\Type\MetadataContainerType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Metadata\Factory\MetadataContainerFactory;
 use Sylius\Component\Metadata\Model\MetadataContainerInterface;
@@ -74,14 +74,18 @@ class Configuration implements ConfigurationInterface
                             ->scalarNode('model')->defaultValue(MetadataContainer::class)->cannotBeEmpty()->end()
                             ->scalarNode('interface')->defaultValue(MetadataContainerInterface::class)->cannotBeEmpty()->end()
                             ->scalarNode('controller')->defaultValue(MetadataController::class)->cannotBeEmpty()->end()
-                            ->scalarNode('repository')->cannotBeEmpty()->end()
+                            ->scalarNode('repository')->defaultValue(MetadataContainerRepository::class)->cannotBeEmpty()->end()
                             ->scalarNode('factory')->defaultValue(MetadataContainerFactory::class)->end()
-                            ->arrayNode('form')
-                                ->addDefaultsIfNotSet()
-                                ->children()
-                                    ->scalarNode('default')->defaultValue(MetadataContainerType::class)->cannotBeEmpty()->end()
-                                ->end()
-                            ->end()
+                              // TODO: The default doesn't make sense now as you need 'type' to clarify
+                              // it also breaks as it's expecting a form definition that doesn't exist
+                              // an alternative here in future would be some configuration of the various types as
+                              // a separate section that could be used to dynamically handle type admin
+//                            ->arrayNode('form')
+//                                ->addDefaultsIfNotSet()
+//                                ->children()
+//                                    ->scalarNode('default')->defaultValue(PageMetadataContainerType::class)->cannotBeEmpty()->end()
+//                                ->end()
+//                            ->end()
                         ->end()
                     ->end()
                     ->arrayNode('validation_groups')

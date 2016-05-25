@@ -52,7 +52,7 @@ class MetadataContext extends DefaultContext
      */
     public function iAmCustomizingMetadata($identifier = 'FooBar')
     {
-        $this->getSession()->visit($this->generateUrl('sylius_backend_metadata_container_customize', ['id' => $identifier]));
+        $this->getSession()->visit($this->generateUrl('sylius_backend_page_metadata_container_customize', ['id' => $identifier]));
     }
 
     /**

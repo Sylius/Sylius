@@ -11,20 +11,35 @@
 <ol class="breadcrumb">
     <li>{{ 'sylius.ui.configuration'|trans }}</li>
     <li><a href="{{ path('sylius_backend_metadata_container_index') }}">{{ 'sylius.ui.metadata_index'|trans }}</a></li>
-    <li><a href="{{ path('sylius_backend_metadata_container_show', {'id': metadata_container.id}) }}">{{ metadata_container.id }}</a></li>
+    {% if metadata_container.id %}
+        <li>
+            <a href="{{ path('sylius_backend_metadata_container_show', {'id': metadata_container.id}) }}">
+                {{ metadata_container.type }}: {{ metadata_container.code }}
+            </a>
+        </li>
+    {% else %}
+        <li>{{ metadata_container.type }}: {{ metadata_container.code }}</li>
+    {% endif %}
     <li>{{ 'sylius.ui.edit'|trans }}</li>
 </ol>
 {% endblock %}
 
 {% block content %}
 <div class="page-header">
-    <h1><i class="glyphicon glyphicon-pencil"></i> {{ 'sylius.ui.customizing_metadata'|trans|raw }} {{ metadata_container.id }}</h1>
+    <h1><i class="glyphicon glyphicon-pencil"></i> {{ 'sylius.ui.customizing_metadata'|trans|raw }} {{ metadata_container.type }} {{ metadata_container.code }}</h1>
 </div>
 
 {{ form_errors(form) }}
 
-<form action="{{ path('sylius_backend_metadata_container_customize', {'id': metadata_container.id }) }}" method="post" class="form-horizontal" novalidate>
-    {% include 'SyliusWebBundle:Backend/Metadata:_form.html.twig' %}
+<form method="post" class="form-horizontal" novalidate
+      action="{{ path('sylius_backend_page_metadata_container_customize', {'type': metadata_container.type, 'code': metadata_container.code }) }}">
+
+    {# TODO: This is not great, need a better pattern here #}
+    {% if 'page' == metadata_container.type %}
+        {% include 'SyliusWebBundle:Backend/Metadata:_formPage.html.twig' %}
+    {% else %}
+        {% include 'SyliusWebBundle:Backend/Metadata:_form.html.twig' %}
+    {% endif %}
     {{ update() }}
 </form>
 {% endblock %}
