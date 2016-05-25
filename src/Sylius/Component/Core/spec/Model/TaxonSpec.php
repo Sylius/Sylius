@@ -25,11 +25,10 @@ final class TaxonSpec extends ObjectBehavior
     function it_is_Sylius_Taxon()
     {
         $this->shouldImplement(TaxonInterface::class);
-        $this->shouldImplement(ImageInterface::class);
     }
 
-    function it_should_not_path_defined_by_default()
+    function it_should_not_image_defined_by_default()
     {
-        $this->getPath()->shouldReturn(null);
+        $this->getImage()->shouldReturn(null);
     }
 }

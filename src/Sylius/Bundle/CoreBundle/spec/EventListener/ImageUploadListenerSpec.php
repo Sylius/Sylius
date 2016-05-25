@@ -82,11 +82,14 @@ final class ImageUploadListenerSpec extends ObjectBehavior
     function it_uses_image_uploader_to_upload_taxon_image(
         GenericEvent $event,
         Taxon $taxon,
-        ImageUploaderInterface $uploader
+        ImageUploaderInterface $uploader,
+        ImageInterface $image
     ) {
         $event->getSubject()->willReturn($taxon);
-        $uploader->upload($taxon)->shouldBeCalled();
-        $taxon->hasFile()->willReturn(true);
+        $taxon->hasImage()->willReturn(true);
+        $taxon->getImage()->willReturn($image);
+        $uploader->upload($taxon->getImage())->shouldBeCalled();
+        $image->getPath()->willReturn('some_path');
 
         $this->uploadTaxonImage($event);
     }
