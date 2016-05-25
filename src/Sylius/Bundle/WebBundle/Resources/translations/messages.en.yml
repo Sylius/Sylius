@@ -10,6 +10,11 @@ sylius:
                 ready: 'Ready since %at%'
                 returned: 'Returned %at%'
                 shipped: 'Shipped %at%'
+                checkout: 'Checked out %at%'
+                pending: 'Pending %at%'
+                onhold: 'On hold since %at%'
+                backordered: 'Backordered since %at%'
+                cancelled: 'Cancelled %at%'
         title: 'My account'
     archetype:
         build: 'Build archetype'
