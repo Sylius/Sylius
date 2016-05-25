@@ -96,6 +96,18 @@ sylius:
         no_route: 'Your content will not appear in frontend if no route is defined'
         publishable: Published
     payment:
+        state:
+            checkout: Checkout
+            completed: Completed
+            authorized: Authorized
+            failed: Failed
+            new: New
+            pending: Pending
+            processing: Processing
+            unknown: Unknown
+            void: Void
+            cancelled: Cancelled
+            refunded: Refunded
         transition:
             cancel: cancel
             complete: complete
@@ -122,6 +134,15 @@ sylius:
             no_account: 'No account yet'
     shipment:
         no_items: 'There are no items to display'
+        state:
+            ready: Ready
+            returned: Returned
+            shipped: Shipped
+            checkout: Checked out
+            pending: Pending
+            onhold: On hold
+            backordered: Backordered
+            cancelled: Cancelled
         transition:
             backorder: backorder
             cancel: cancel
