@@ -59,7 +59,16 @@ class Taxon extends BaseTaxon implements TaxonInterface
      */
     public function setImage(ImageInterface $image)
     {
+        $image->setTaxon($this);
         $this->image = $image;
+    }
+
+    public function removeImage()
+    {
+        if($this->hasImage()) {
+            $this->image->setTaxon(null);
+            $this->image = null;
+        }
     }
 
     /**

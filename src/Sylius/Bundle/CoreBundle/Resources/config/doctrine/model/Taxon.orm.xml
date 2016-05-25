@@ -20,8 +20,7 @@
 
         <one-to-one field="image" target-entity="Sylius\Component\Core\Model\TaxonImageInterface" mapped-by="taxon">
             <cascade>
-                <cascade-persist/>
-                <cascade-remove />
+                <cascade-all/>
             </cascade>
         </one-to-one>
 
