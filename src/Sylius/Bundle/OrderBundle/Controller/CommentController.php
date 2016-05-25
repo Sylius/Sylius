@@ -13,6 +13,7 @@ namespace Sylius\Bundle\OrderBundle\Controller;
 
 use FOS\RestBundle\View\View;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -39,16 +40,18 @@ class CommentController extends ResourceController
         $form = $this->resourceFormFactory->create($configuration, $resource);
 
         if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
+            $this->eventDispatcher->dispatchPreEvent(ResourceActions::CREATE, $configuration, $resource);
             $resource->setOrder($order);
             $resource->setAuthor($this->getUser()->getEmail());
 
             $this->repository->add($resource);
+            $this->eventDispatcher->dispatchPostEvent(ResourceActions::CREATE, $configuration, $resource);
 
             return $this->redirectHandler->redirectToRoute($configuration, 'sylius_backend_order_show', ['id' => $order->getId()]);
         }
 
         if (!$configuration->isHtmlRequest()) {
-            return $this->viewHandler->handle(View::create($form, 400));
+            return $this->viewHandler->handle($configuration, View::create($form, 400));
         }
 
         $view = View::create()
