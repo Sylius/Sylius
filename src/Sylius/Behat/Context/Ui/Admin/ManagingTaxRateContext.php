@@ -236,7 +236,7 @@ final class ManagingTaxRateContext implements Context
 
         Assert::true(
             $this->indexPage->isSingleResourceOnPage([$element => $code]),
-            sprintf('Tax rate with %s %s cannot be founded.', $element, $code)
+            sprintf('Tax rate with %s %s cannot be found.', $element, $code)
         );
     }
 

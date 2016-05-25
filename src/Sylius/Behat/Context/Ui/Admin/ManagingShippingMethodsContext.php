@@ -184,7 +184,7 @@ final class ManagingShippingMethodsContext implements Context
 
         Assert::true(
             $this->indexPage->isSingleResourceOnPage([$element => $code]),
-            sprintf('Shipping method with %s %s cannot be founded.', $element, $code)
+            sprintf('Shipping method with %s %s cannot be found.', $element, $code)
         );
     }
 

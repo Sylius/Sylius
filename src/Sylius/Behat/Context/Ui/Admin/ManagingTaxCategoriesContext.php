@@ -200,7 +200,7 @@ final class ManagingTaxCategoriesContext implements Context
         $this->indexPage->open();
         Assert::true(
             $this->indexPage->isSingleResourceOnPage([$element => $code]),
-            sprintf('Tax category with %s %s cannot be founded.', $element, $code)
+            sprintf('Tax category with %s %s cannot be found.', $element, $code)
         );
     }
 
