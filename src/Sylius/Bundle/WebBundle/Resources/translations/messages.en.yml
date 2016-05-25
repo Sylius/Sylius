@@ -143,6 +143,7 @@ sylius:
             onhold: On hold
             backordered: Backordered
             cancelled: Cancelled
+            partially_shipped: Partially shipped
         transition:
             backorder: backorder
             cancel: cancel
