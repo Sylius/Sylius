@@ -13,6 +13,7 @@ namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
+use Sylius\Component\Currency\Model\CurrencyInterface;
 
 /**
  * Default currency fixtures.
@@ -21,6 +22,11 @@ use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
  */
 class LoadCurrencyData extends DataFixture
 {
+    const BASE_CURRENCY = 'EUR';
+
+    /**
+     * @var array
+     */
     protected $currencies = [
         'EUR' => 1.00,
         'USD' => 1.30,
@@ -40,6 +46,9 @@ class LoadCurrencyData extends DataFixture
             $currency->setCode($code);
             $currency->setExchangeRate($rate);
             $currency->setEnabled(true);
+            if (self::BASE_CURRENCY === $code) {
+                $currency->setBase(true);
+            }
 
             $this->setReference('Sylius.Currency.'.$code, $currency);
 
