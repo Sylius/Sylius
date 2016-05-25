@@ -65,7 +65,7 @@ that needs to be done. This service handles this task, adding and removing prope
    $orderItem->getQuantity(); // after using modifier, quantity is as expected
    $orderItem->getTotal();    // item's total is sum of all units' total (units has been created by modifier)
 
-   $orderItemQuantityModifier->($modify, 2);
+   $orderItemQuantityModifier->modify($orderItem, 2);
 
    // OrderItemQuantityModifier can also reduce item's quantity and remove unnecessary units
 
