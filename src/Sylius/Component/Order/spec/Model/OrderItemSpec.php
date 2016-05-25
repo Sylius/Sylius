@@ -11,6 +11,7 @@
 
 namespace spec\Sylius\Component\Order\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Order\Model\AdjustableInterface;
@@ -406,6 +407,8 @@ class OrderItemSpec extends ObjectBehavior
 
     function it_returns_correct_adjustments_total_recursively(
         AdjustmentInterface $adjustment1,
+        AdjustmentInterface $taxAdjustment1,
+        AdjustmentInterface $taxAdjustment2,
         OrderItemUnitInterface $orderItemUnit1,
         OrderItemUnitInterface $orderItemUnit2
     ) {
@@ -413,12 +416,17 @@ class OrderItemSpec extends ObjectBehavior
         $adjustment1->isNeutral()->willReturn(false);
         $adjustment1->setAdjustable($this)->shouldBeCalled();
 
+        $taxAdjustment1->getAmount()->willReturn(150);
+        $taxAdjustment1->isNeutral()->willReturn(false);
+        $taxAdjustment2->getAmount()->willReturn(100);
+        $taxAdjustment2->isNeutral()->willReturn(false);
+
         $orderItemUnit1->getOrderItem()->willReturn($this->getWrappedObject());
         $orderItemUnit1->getTotal()->willReturn(500);
-        $orderItemUnit1->getAdjustmentsTotal(null)->willReturn(150);
+        $orderItemUnit1->getAdjustments(null)->willReturn(new ArrayCollection([$taxAdjustment1->getWrappedObject()]));
         $orderItemUnit2->getOrderItem()->willReturn($this->getWrappedObject());
         $orderItemUnit2->getTotal()->willReturn(300);
-        $orderItemUnit2->getAdjustmentsTotal(null)->willReturn(100);
+        $orderItemUnit2->getAdjustments(null)->willReturn(new ArrayCollection([$taxAdjustment2->getWrappedObject()]));
 
         $this->addAdjustment($adjustment1);
         $this->addUnit($orderItemUnit1);
@@ -429,6 +437,9 @@ class OrderItemSpec extends ObjectBehavior
 
     function it_returns_correct_adjustments_total_by_type_recursively(
         AdjustmentInterface $adjustment1,
+        AdjustmentInterface $promotionAdjustment,
+        AdjustmentInterface $taxAdjustment1,
+        AdjustmentInterface $taxAdjustment2,
         OrderItemUnitInterface $orderItemUnit1,
         OrderItemUnitInterface $orderItemUnit2
     ) {
@@ -437,14 +448,21 @@ class OrderItemSpec extends ObjectBehavior
         $adjustment1->isNeutral()->willReturn(false);
         $adjustment1->setAdjustable($this)->shouldBeCalled();
 
+        $promotionAdjustment->getAmount()->willReturn(30);
+        $promotionAdjustment->isNeutral()->willReturn(false);
+        $taxAdjustment1->getAmount()->willReturn(150);
+        $taxAdjustment1->isNeutral()->willReturn(false);
+        $taxAdjustment2->getAmount()->willReturn(100);
+        $taxAdjustment2->isNeutral()->willReturn(false);
+
         $orderItemUnit1->getOrderItem()->willReturn($this->getWrappedObject());
         $orderItemUnit1->getTotal()->willReturn(500);
-        $orderItemUnit1->getAdjustmentsTotal('tax')->willReturn(150);
-        $orderItemUnit1->getAdjustmentsTotal('promotion')->willReturn(30);
+        $orderItemUnit1->getAdjustments('tax')->willReturn(new ArrayCollection([$taxAdjustment1->getWrappedObject()]));
+        $orderItemUnit1->getAdjustments('promotion')->willReturn(new ArrayCollection([$promotionAdjustment->getWrappedObject()]));
         $orderItemUnit2->getOrderItem()->willReturn($this->getWrappedObject());
         $orderItemUnit2->getTotal()->willReturn(300);
-        $orderItemUnit2->getAdjustmentsTotal('tax')->willReturn(100);
-        $orderItemUnit2->getAdjustmentsTotal('promotion')->willReturn(0);
+        $orderItemUnit2->getAdjustments('tax')->willReturn(new ArrayCollection([$taxAdjustment2->getWrappedObject()]));
+        $orderItemUnit2->getAdjustments('promotion')->willReturn(new ArrayCollection());
 
         $this->addAdjustment($adjustment1);
         $this->addUnit($orderItemUnit1);

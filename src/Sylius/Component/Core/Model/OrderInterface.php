@@ -143,11 +143,6 @@ interface OrderInterface extends
     public function setPromotionCoupon(BaseCouponInterface $coupon = null);
 
     /**
-     * @return int
-     */
-    public function getPromotionsTotalRecursively();
-
-    /**
      * @return string
      */
     public function getShippingState();
@@ -178,4 +173,19 @@ interface OrderInterface extends
      * @return bool
      */
     public function isInvoiceAvailable();
+
+    /**
+     * @return int
+     */
+    public function getTaxTotal();
+
+    /**
+     * @return int
+     */
+    public function getShippingTotal();
+
+    /**
+     * @return int
+     */
+    public function getOrderPromotionTotal();
 }

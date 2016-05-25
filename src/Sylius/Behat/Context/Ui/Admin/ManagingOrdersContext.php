@@ -256,16 +256,95 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @When I check :itemName data
+     */
+    public function iCheckData($itemName)
+    {
+        $this->sharedStorage->set('item', $itemName);
+    }
+
+    /**
+     * @Then /^(its) unit price should be ([^"]+)$/
+     */
+    public function itemUnitPriceShouldBe($itemName, $unitPrice)
+    {
+        $itemUnitPriceOnPage = $this->showPage->getItemUnitPrice($itemName);
+
+        Assert::eq(
+            $itemUnitPriceOnPage,
+            $unitPrice,
+            'Item unit price is %s, but should be %s.'
+        );
+    }
+
+    /**
+     * @Then /^(its) quantity should be ([^"]+)$/
+     */
+    public function itemQuantityShouldBe($itemName, $quantity)
+    {
+        $itemQuantityOnPage = $this->showPage->getItemQuantity($itemName);
+
+        Assert::eq(
+            $itemQuantityOnPage,
+            $quantity,
+            'Item quantity is %s, but should be %s.'
+        );
+    }
+
+    /**
+     * @Then /^(its) subtotal should be ([^"]+)$/
+     */
+    public function itemSubtotalShouldBe($itemName, $subtotal)
+    {
+        $itemSubtotalOnPage = $this->showPage->getItemSubtotal($itemName);
+
+        Assert::eq(
+            $itemSubtotalOnPage,
+            $subtotal,
+            'Item subtotal is %s, but should be %s.'
+        );
+    }
+
+    /**
+     * @Then /^(its) discount should be ([^"]+)$/
      * @Then the :itemName should have :discount discount
      */
-    public function theItemShouldHaveDiscount($itemName, $itemDiscount)
+    public function theItemShouldHaveDiscount($itemName, $discount)
     {
         $itemDiscountOnPage = $this->showPage->getItemDiscount($itemName);
 
         Assert::eq(
             $itemDiscountOnPage,
-            $itemDiscount,
+            $discount,
             'Item discount is %s, but should be %s.'
+        );
+    }
+
+    /**
+     * @Then /^(its) tax should be ([^"]+)$/
+     */
+    public function itemTaxShouldBe($itemName, $tax)
+    {
+        $itemTaxOnPage = $this->showPage->getItemTax($itemName);
+
+        Assert::eq(
+            $itemTaxOnPage,
+            $tax,
+            'Item tax is %s, but should be %s.'
+        );
+    }
+
+    /**
+     * @Then /^(its) total should be ([^"]+)$/
+     */
+    public function itemTotalShouldBe($itemName, $total)
+    {
+        $itemTotalOnPage = $this->showPage->getItemTotal($itemName);
+
+        Assert::eq(
+            $itemTotalOnPage,
+            $total,
+            'Item total is %s, but should be %s.'
         );
     }
 

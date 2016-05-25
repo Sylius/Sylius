@@ -43,5 +43,5 @@ Feature: Receiving fixed discount on cart
         When I add product "PHP T-Shirt" to the cart
         And I proceed selecting "DHL" shipping method
         Then my cart total should be "€100.00"
-        And my cart shipping fee should be "€10.00"
+        And my cart shipping total should be "€10.00"
         And my discount should be "-€10.00"

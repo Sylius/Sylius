@@ -31,7 +31,7 @@ Feature: Apply correct shipping fee with product taxes on order
         And I choose "Offline" payment method
         Then my cart total should be "€135.30"
         And my cart taxes should be "€25.30"
-        And my cart shipping fee should be "€12.30"
+        And my cart shipping total should be "€12.30"
 
     @ui
     Scenario: Proper shipping fee, tax and products' taxes after addressing
@@ -40,4 +40,4 @@ Feature: Apply correct shipping fee with product taxes on order
         And I choose "Offline" payment method
         Then my cart total should be "€352.00"
         And my cart taxes should be "€32.00"
-        And my cart shipping fee should be "€22.00"
+        And my cart shipping total should be "€22.00"

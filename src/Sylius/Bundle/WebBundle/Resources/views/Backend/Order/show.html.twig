@@ -139,7 +139,7 @@
             </td>
             <td class="text-right" colspan="3">
                 <strong>{{ 'sylius.ui.tax_total'|trans }}</strong>:
-                <span class="amount">{{ order.getAdjustmentsTotalRecursively(taxAdjustment)|sylius_price(order.currency) }}</span>
+                <span class="amount">{{ order.taxTotal|sylius_price(order.currency) }}</span>
             </td>
         </tr>
         <tr class="shipping-charges">
@@ -157,7 +157,7 @@
             </td>
             <td class="text-right" colspan="3">
                 <strong>{{ 'sylius.ui.shipping_total'|trans }}</strong>:
-                <span class="amount">{{ order.adjustmentsTotal(shippingAdjustment)|sylius_price(order.currency) }}</span>
+                <span class="amount">{{ order.shippingTotal|sylius_price(order.currency) }}</span>
             </td>
         </tr>
         <tr class="promotion-discount">
@@ -175,7 +175,7 @@
             </td>
             <td class="text-right" colspan="3">
                 <strong>{{ 'sylius.ui.promotion_total'|trans }}</strong>:
-                <span class="amount">{{ order.getPromotionsTotalRecursively()|sylius_price(order.currency) }}</span>
+                <span class="amount">{{ order.orderPromotionTotal|sylius_price(order.currency) }}</span>
             </td>
         </tr>
         {% if not order.adjustments().isEmpty() %}

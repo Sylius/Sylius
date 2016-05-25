@@ -11,6 +11,7 @@
 
 namespace spec\Sylius\Component\Core\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Channel\Model\ChannelInterface;
@@ -29,6 +30,8 @@ use Sylius\Component\Promotion\Model\CouponInterface;
 use Sylius\Component\User\Model\CustomerInterface;
 
 /**
+ * @mixin \Sylius\Component\Core\Model\Order
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class OrderSpec extends ObjectBehavior
@@ -358,30 +361,196 @@ class OrderSpec extends ObjectBehavior
         $this->shouldNotHavePromotion($promotion);
     }
 
-    function it_returns_promotions_total_recursively(
-        AdjustmentInterface $orderPromotionAdjustment,
-        AdjustmentInterface $orderItemPromotionAdjustment,
-        OrderItemInterface $orderItem
+    function it_returns_0_tax_total_when_there_are_no_items_and_adjustments()
+    {
+        $this->getTaxTotal()->shouldReturn(0);
+    }
+
+    function it_returns_tax_of_all_items_as_tax_total_when_there_are_no_tax_adjustments(
+        OrderItemInterface $orderItem1,
+        OrderItemInterface $orderItem2
     ) {
-        $orderPromotionAdjustment->getAmount()->willReturn(10000);
-        $orderItemPromotionAdjustment->getAmount()->willReturn(5000);
+        $orderItem1->getTotal()->willReturn(1100);
+        $orderItem1->getTaxTotal()->willReturn(100);
+        $orderItem2->getTotal()->willReturn(1050);
+        $orderItem2->getTaxTotal()->willReturn(50);
 
-        $orderPromotionAdjustment->isNeutral()->willReturn(false);
-        $orderItemPromotionAdjustment->isNeutral()->willReturn(false);
+        $orderItem1->setOrder($this)->shouldBeCalled();
+        $orderItem2->setOrder($this)->shouldBeCalled();
+        $this->addItem($orderItem1);
+        $this->addItem($orderItem2);
 
-        $orderPromotionAdjustment->getType()->willReturn(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT);
-        $orderItemPromotionAdjustment->getType()->willReturn(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT);
+        $this->getTaxTotal()->shouldReturn(150);
+    }
 
-        $orderPromotionAdjustment->setAdjustable($this)->shouldBeCalled();
+    function it_returns_tax_of_all_items_and_non_neutral_shipping_tax_as_tax_total(
+        OrderItemInterface $orderItem1,
+        OrderItemInterface $orderItem2,
+        AdjustmentInterface $shippingAdjustment,
+        AdjustmentInterface $shippingTaxAdjustment
+    ) {
+        $orderItem1->getTotal()->willReturn(1100);
+        $orderItem1->getTaxTotal()->willReturn(100);
+        $orderItem2->getTotal()->willReturn(1050);
+        $orderItem2->getTaxTotal()->willReturn(50);
 
-        $orderItem->getAdjustmentsRecursively(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)->willReturn([$orderItemPromotionAdjustment]);
-        $orderItem->setOrder($this)->shouldBeCalled();
-        $orderItem->getTotal()->willReturn(15000);
-        $orderItem->getAdjustmentsRecursively(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)->willReturn([]);
+        $shippingAdjustment->getType()->willReturn(AdjustmentInterface::SHIPPING_ADJUSTMENT);
+        $shippingAdjustment->isNeutral()->willReturn(false);
+        $shippingAdjustment->getAmount()->willReturn(1000);
+        $shippingTaxAdjustment->getType()->willReturn(AdjustmentInterface::TAX_ADJUSTMENT);
+        $shippingTaxAdjustment->isNeutral()->willReturn(false);
+        $shippingTaxAdjustment->getAmount()->willReturn(70);
 
-        $this->addItem($orderItem);
-        $this->addAdjustment($orderPromotionAdjustment);
+        $orderItem1->setOrder($this)->shouldBeCalled();
+        $orderItem2->setOrder($this)->shouldBeCalled();
+        $this->addItem($orderItem1);
+        $this->addItem($orderItem2);
 
-        $this->getPromotionsTotalRecursively()->shouldReturn(15000);
+        $shippingTaxAdjustment->setAdjustable($this)->shouldBeCalled();
+        $this->addAdjustment($shippingTaxAdjustment);
+
+        $this->getTaxTotal()->shouldReturn(220);
+    }
+
+    function it_returns_tax_of_all_items_and_neutral_shipping_tax_as_tax_total(
+        OrderItemInterface $orderItem1,
+        OrderItemInterface $orderItem2,
+        AdjustmentInterface $shippingAdjustment,
+        AdjustmentInterface $shippingTaxAdjustment
+    ) {
+        $orderItem1->getTotal()->willReturn(1100);
+        $orderItem1->getTaxTotal()->willReturn(100);
+        $orderItem2->getTotal()->willReturn(1050);
+        $orderItem2->getTaxTotal()->willReturn(50);
+
+        $shippingAdjustment->getType()->willReturn(AdjustmentInterface::SHIPPING_ADJUSTMENT);
+        $shippingAdjustment->isNeutral()->willReturn(false);
+        $shippingAdjustment->getAmount()->willReturn(1000);
+
+        $shippingTaxAdjustment->getType()->willReturn(AdjustmentInterface::TAX_ADJUSTMENT);
+        $shippingTaxAdjustment->isNeutral()->willReturn(true);
+        $shippingTaxAdjustment->getAmount()->willReturn(70);
+
+        $orderItem1->setOrder($this)->shouldBeCalled();
+        $orderItem2->setOrder($this)->shouldBeCalled();
+        $this->addItem($orderItem1);
+        $this->addItem($orderItem2);
+
+        $shippingAdjustment->setAdjustable($this)->shouldBeCalled();
+        $shippingTaxAdjustment->setAdjustable($this)->shouldBeCalled();
+        $this->addAdjustment($shippingAdjustment);
+        $this->addAdjustment($shippingTaxAdjustment);
+
+        $this->getTaxTotal()->shouldReturn(220);
+    }
+
+    function it_includes_non_neutral_tax_adjustments_in_shipping_total(
+        AdjustmentInterface $shippingAdjustment,
+        AdjustmentInterface $shippingTaxAdjustment
+    ) {
+        $shippingAdjustment->getType()->willReturn(AdjustmentInterface::SHIPPING_ADJUSTMENT);
+        $shippingAdjustment->isNeutral()->willReturn(false);
+        $shippingAdjustment->getAmount()->willReturn(1000);
+
+        $shippingTaxAdjustment->getType()->willReturn(AdjustmentInterface::TAX_ADJUSTMENT);
+        $shippingTaxAdjustment->isNeutral()->willReturn(false);
+        $shippingTaxAdjustment->getAmount()->willReturn(70);
+
+        $shippingAdjustment->setAdjustable($this)->shouldBeCalled();
+        $shippingTaxAdjustment->setAdjustable($this)->shouldBeCalled();
+        $this->addAdjustment($shippingAdjustment);
+        $this->addAdjustment($shippingTaxAdjustment);
+
+        $this->getShippingTotal()->shouldReturn(1070);
+    }
+
+    function it_returns_shipping_total_decreased_by_shipping_promotion(
+        AdjustmentInterface $shippingAdjustment,
+        AdjustmentInterface $shippingTaxAdjustment,
+        AdjustmentInterface $shippingPromotionAdjustment
+    ) {
+        $shippingAdjustment->getType()->willReturn(AdjustmentInterface::SHIPPING_ADJUSTMENT);
+        $shippingAdjustment->isNeutral()->willReturn(false);
+        $shippingAdjustment->getAmount()->willReturn(1000);
+
+        $shippingTaxAdjustment->getType()->willReturn(AdjustmentInterface::TAX_ADJUSTMENT);
+        $shippingTaxAdjustment->isNeutral()->willReturn(false);
+        $shippingTaxAdjustment->getAmount()->willReturn(70);
+
+        $shippingPromotionAdjustment->getType()->willReturn(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT);
+        $shippingPromotionAdjustment->isNeutral()->willReturn(false);
+        $shippingPromotionAdjustment->getAmount()->willReturn(-100);
+
+        $shippingAdjustment->setAdjustable($this)->shouldBeCalled();
+        $shippingTaxAdjustment->setAdjustable($this)->shouldBeCalled();
+        $shippingPromotionAdjustment->setAdjustable($this)->shouldBeCalled();
+        $this->addAdjustment($shippingAdjustment);
+        $this->addAdjustment($shippingTaxAdjustment);
+        $this->addAdjustment($shippingPromotionAdjustment);
+
+        $this->getShippingTotal()->shouldReturn(970);
+    }
+
+    function it_does_not_include_neutral_tax_adjustments_in_shipping_total(
+        AdjustmentInterface $shippingAdjustment,
+        AdjustmentInterface $neutralShippingTaxAdjustment
+    ) {
+        $shippingAdjustment->getType()->willReturn(AdjustmentInterface::SHIPPING_ADJUSTMENT);
+        $shippingAdjustment->isNeutral()->willReturn(false);
+        $shippingAdjustment->getAmount()->willReturn(1000);
+
+        $neutralShippingTaxAdjustment->getType()->willReturn(AdjustmentInterface::TAX_ADJUSTMENT);
+        $neutralShippingTaxAdjustment->isNeutral()->willReturn(true);
+        $neutralShippingTaxAdjustment->getAmount()->willReturn(70);
+
+        $shippingAdjustment->setAdjustable($this)->shouldBeCalled();
+        $neutralShippingTaxAdjustment->setAdjustable($this)->shouldBeCalled();
+        $this->addAdjustment($shippingAdjustment);
+        $this->addAdjustment($neutralShippingTaxAdjustment);
+
+        $this->getShippingTotal()->shouldReturn(1000);
+    }
+
+    function it_returns_0_as_promotion_total_when_there_are_no_order_promotion_adjustments()
+    {
+        $this->getOrderPromotionTotal()->shouldReturn(0);
+    }
+
+    function it_returns_sum_of_all_order_promotion_adjustments_applied_to_items_as_order_promotion_total(
+        OrderItemInterface $orderItem1,
+        OrderItemInterface $orderItem2
+    ) {
+        $orderItem1->getTotal()->willReturn(500);
+        $orderItem2->getTotal()->willReturn(300);
+
+        $orderItem1->getAdjustmentsTotalRecursively(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)->willReturn(-400);
+        $orderItem2->getAdjustmentsTotalRecursively(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)->willReturn(-600);
+
+        $orderItem1->setOrder($this)->shouldBeCalled();
+        $orderItem2->setOrder($this)->shouldBeCalled();
+        $this->addItem($orderItem1);
+        $this->addItem($orderItem2);
+
+        $this->getOrderPromotionTotal()->shouldReturn(-1000);
+    }
+
+    function it_does_not_include_shipping_promotion_adjustment_in_order_promotion_total(
+        AdjustmentInterface $shippingPromotionAdjustment,
+        OrderItemInterface $orderItem1
+    ) {
+        $orderItem1->getTotal()->willReturn(500);
+        $orderItem1->getAdjustmentsTotalRecursively(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)->willReturn(-400);
+
+        $shippingPromotionAdjustment->getType()->willReturn(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT);
+        $shippingPromotionAdjustment->isNeutral()->willReturn(false);
+        $shippingPromotionAdjustment->getAmount()->willReturn(-100);
+
+        $orderItem1->setOrder($this)->shouldBeCalled();
+        $this->addItem($orderItem1);
+
+        $shippingPromotionAdjustment->setAdjustable($this)->shouldBeCalled();
+        $this->addAdjustment($shippingPromotionAdjustment);
+
+        $this->getOrderPromotionTotal()->shouldReturn(-400);
     }
 }

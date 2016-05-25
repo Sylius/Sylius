@@ -515,13 +515,51 @@ class Order extends Cart implements OrderInterface
     }
 
     /**
+     * Returns sum of neutral and non neutral tax adjustments on order and total tax of order items.
+     *
+     * {@inheritdoc}
+     */
+    public function getTaxTotal()
+    {
+        $taxTotal = 0;
+
+        foreach ($this->getAdjustments(AdjustmentInterface::TAX_ADJUSTMENT) as $taxAdjustment) {
+            $taxTotal += $taxAdjustment->getAmount();
+        }
+        foreach ($this->items as $item) {
+            $taxTotal += $item->getTaxTotal();
+        }
+
+        return $taxTotal;
+    }
+
+    /**
+     * Returns shipping fee together with taxes decreased by shipping discount.
+     *
      * @return int
      */
-    public function getPromotionsTotalRecursively()
+    public function getShippingTotal()
     {
-        return
-            $this->getAdjustmentsTotalRecursively(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT) +
-            $this->getAdjustmentsTotalRecursively(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)
-        ;
+        $shippingTotal = $this->getAdjustmentsTotal(AdjustmentInterface::TAX_ADJUSTMENT);
+        $shippingTotal += $this->getAdjustmentsTotal(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT);
+        $shippingTotal += $this->getAdjustmentsTotal(AdjustmentInterface::SHIPPING_ADJUSTMENT);
+
+        return $shippingTotal;
+    }
+
+    /**
+     * Returns amount of order discount. Does not include order item and shipping discounts.
+     *
+     * @return int
+     */
+    public function getOrderPromotionTotal()
+    {
+        $orderPromotionTotal = 0;
+
+        foreach ($this->items as $item) {
+            $orderPromotionTotal += $item->getAdjustmentsTotalRecursively(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT);
+        }
+
+        return $orderPromotionTotal;
     }
 }

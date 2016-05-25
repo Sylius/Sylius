@@ -57,4 +57,37 @@ class OrderItem extends CartItem implements OrderItemInterface
             && $item->getVariant() === $this->variant
         );
     }
+
+    /**
+     * Returns sum of neutral and non neutral tax adjustments on order item and total tax of units.
+     *
+     * {@inheritdoc}
+     */
+    public function getTaxTotal()
+    {
+        $taxTotal = 0;
+
+        foreach ($this->getAdjustments(AdjustmentInterface::TAX_ADJUSTMENT) as $taxAdjustment) {
+            $taxTotal += $taxAdjustment->getAmount();
+        }
+
+        foreach ($this->units as $unit) {
+            $taxTotal += $unit->getTaxTotal();
+        }
+
+        return $taxTotal;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSubtotal()
+    {
+        $subtotal = $this->unitPrice * $this->quantity;
+        foreach ($this->units as $unit) {
+            $subtotal += $unit->getAdjustmentsTotal(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT);
+        }
+
+        return $subtotal;
+    }
 }

@@ -65,7 +65,7 @@
             </td>
             <td colspan="2">
                 <span class="pull-right">
-                <strong>{{ 'sylius.ui.tax_total'|trans }}</strong>: {{ order.getAdjustmentsTotalRecursively(taxAdjustment)|sylius_price }}
+                <strong>{{ 'sylius.ui.tax_total'|trans }}</strong>: {{ order.taxTotal|sylius_price }}
                 </span>
             </td>
         </tr>
@@ -82,8 +82,7 @@
             </td>
             <td colspan="2">
                 <span class="pull-right">
-                    {% set shippingTotal = order.adjustmentsTotal(taxAdjustment) + order.adjustmentsTotal(shippingAdjustment) %}
-                    <strong>{{ 'sylius.ui.shipping_total'|trans }}</strong>: {{ shippingTotal|sylius_price }}
+                    <strong>{{ 'sylius.ui.shipping_total'|trans }}</strong>: {{ order.shippingTotal|sylius_price }}
                 </span>
             </td>
         </tr>
@@ -97,10 +96,9 @@
                 {% endfor %}
                 </ul>
                 </td>
-                {% set promotionTotal = order.getPromotionsTotalRecursively() %}
                 <td colspan="2">
                     <span class="pull-right">
-                    <strong>{{ 'sylius.ui.promotion_total'|trans }}</strong>: -{{ (-1 * promotionTotal)|sylius_price }}
+                    <strong>{{ 'sylius.ui.promotion_total'|trans }}</strong>: -{{ (-1 * order.orderPromotionTotal)|sylius_price }}
                     </span>
                 </td>
             </tr>

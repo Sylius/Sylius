@@ -137,9 +137,10 @@ final class CartContext implements Context
 
     /**
      * @Then shipping total value should be :shippingTotal
-     * @Then my cart shipping fee should be :shippingTotal
+     * @Then my cart shipping total should be :shippingTotal
+     * @Then my cart shipping should be for free
      */
-    public function myCartShippingFeeShouldBe($shippingTotal)
+    public function myCartShippingFeeShouldBe($shippingTotal = '€0.00')
     {
         $this->summaryPage->open();
 

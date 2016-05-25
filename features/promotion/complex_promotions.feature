@@ -46,7 +46,7 @@ Feature: Receiving a discount based on a configured promotion
         Then theirs price should be decreased by "€70.00"
         And my cart total should be "€630.00"
         And my discount should be "-€80.00"
-        And my cart shipping fee should be "€10.00"
+        And my cart shipping total should be "€10.00"
 
     @ui
     Scenario: Receiving a discount on items and the whole order from one promotion based on items total

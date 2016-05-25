@@ -303,6 +303,7 @@ sylius:
         description: Description
         details: Details
         disable: Disable
+        discounted_unit_price: 'Discounted unit price'
         edit: Edit
         edit_association_type: 'Edit Association type'
         edit_group: 'Edit group'

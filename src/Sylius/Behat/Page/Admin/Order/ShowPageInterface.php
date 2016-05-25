@@ -108,5 +108,40 @@ interface ShowPageInterface extends SymfonyPageInterface
      *
      * @return string
      */
+    public function getItemUnitPrice($itemName);
+
+    /**
+     * @param string $itemName
+     *
+     * @return string
+     */
+    public function getItemQuantity($itemName);
+
+    /**
+     * @param string $itemName
+     *
+     * @return string
+     */
+    public function getItemSubtotal($itemName);
+
+    /**
+     * @param string $itemName
+     *
+     * @return string
+     */
     public function getItemDiscount($itemName);
+
+    /**
+     * @param string $itemName
+     *
+     * @return string
+     */
+    public function getItemTax($itemName);
+
+    /**
+     * @param string $itemName
+     *
+     * @return string
+     */
+    public function getItemTotal($itemName);
 }

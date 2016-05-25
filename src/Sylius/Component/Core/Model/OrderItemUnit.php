@@ -135,4 +135,20 @@ class OrderItemUnit extends BaseOrderItemUnit implements OrderItemUnitInterface
     {
         $this->shippingState = $state;
     }
+
+    /**
+     * Returns sum of neutral and non neutral tax adjustments.
+     *
+     * {@inheritdoc}
+     */
+    public function getTaxTotal()
+    {
+        $taxTotal = 0;
+
+        foreach ($this->getAdjustments(AdjustmentInterface::TAX_ADJUSTMENT) as $taxAdjustment) {
+            $taxTotal += $taxAdjustment->getAmount();
+        }
+
+        return $taxTotal;
+    }
 }

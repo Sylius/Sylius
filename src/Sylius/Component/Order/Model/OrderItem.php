@@ -327,7 +327,9 @@ class OrderItem implements OrderItemInterface
 
         $total = 0;
         foreach ($this->getAdjustments($type) as $adjustment) {
-            $total += $adjustment->getAmount();
+            if (!$adjustment->isNeutral()) {
+                $total += $adjustment->getAmount();
+            }
         }
 
         return $total;
@@ -338,9 +340,12 @@ class OrderItem implements OrderItemInterface
      */
     public function getAdjustmentsTotalRecursively($type = null)
     {
-        $total = $this->getAdjustmentsTotal($type);
-        foreach ($this->units as $unit) {
-            $total += $unit->getAdjustmentsTotal($type);
+        $total = 0;
+
+        foreach ($this->getAdjustmentsRecursively($type) as $adjustment) {
+            if (!$adjustment->isNeutral()) {
+                $total += $adjustment->getAmount();
+            }
         }
 
         return $total;

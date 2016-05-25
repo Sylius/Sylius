@@ -427,7 +427,9 @@ class Order implements OrderInterface
 
         $total = 0;
         foreach ($this->getAdjustments($type) as $adjustment) {
-            $total += $adjustment->getAmount();
+            if (!$adjustment->isNeutral()) {
+                $total += $adjustment->getAmount();
+            }
         }
 
         return $total;
@@ -440,7 +442,9 @@ class Order implements OrderInterface
     {
         $total = 0;
         foreach ($this->getAdjustmentsRecursively($type) as $adjustment) {
-            $total += $adjustment->getAmount();
+            if (!$adjustment->isNeutral()) {
+                $total += $adjustment->getAmount();
+            }
         }
 
         return $total;
