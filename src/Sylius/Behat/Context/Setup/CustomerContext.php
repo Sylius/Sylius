@@ -107,6 +107,7 @@ final class CustomerContext implements Context
 
     /**
      * @Given there is enabled customer account :email with password :password
+     * @Given there is a customer account :email identified by :password
      */
     public function theStoreHasEnabledCustomerAccountWithPassword($email, $password)
     {

@@ -21,6 +21,8 @@ sylius:
         cancel: Cancel
         cancelled: Cancelled
         category_requirements: Category requirements
+        change_password: Change password
+        change_your_password: Change your password
         charges_and_taxes: Charges and taxes
         checkout: Checkout
         clear_filters: Clear filters
@@ -133,6 +135,7 @@ sylius:
         purchased_from: Purchased from
         quantity: Qty
         ready: Ready
+        repeat_new_password: Repeat new password
         returned: Returned
         returns_policy: Returns Policy
         save_changes: Save changes

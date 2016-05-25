@@ -17,46 +17,38 @@ use Sylius\Behat\Page\SymfonyPage;
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowksi@lakion.com>
  */
-class ProfileUpdatePage extends SymfonyPage implements ProfileUpdatePageInterface
+class ChangePasswordPage extends SymfonyPage implements ChangePasswordPageInterface
 {
     /**
      * {@inheritdoc}
      */
     public function getRouteName()
     {
-        return 'sylius_shop_account_profile_update';
+        return 'sylius_shop_account_change_password';
     }
 
     /**
-     * {@inheritdoc}
+     * @param string $password
      */
-    public function specifyFirstName($firstName)
+    public function specifyCurrentPassword($password)
     {
-        $this->getDocument()->fillField('First name', $firstName);
+        $this->getElement('current_password')->setValue($password);
     }
 
     /**
-     * {@inheritdoc}
+     * @param string $password
      */
-    public function specifyLastName($lastName)
+    public function specifyNewPassword($password)
     {
-        $this->getDocument()->fillField('Last name', $lastName);
+        $this->getElement('new_password')->setValue($password);
     }
 
     /**
-     * {@inheritdoc}
+     * @param string $password
      */
-    public function specifyEmail($email)
+    public function specifyConfirmationPassword($password)
     {
-        $this->getDocument()->fillField('Email', $email);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function saveChanges()
-    {
-        $this->getDocument()->pressButton('Save changes');
+        $this->getElement('confirmation')->setValue($password);
     }
 
     /**
@@ -64,12 +56,12 @@ class ProfileUpdatePage extends SymfonyPage implements ProfileUpdatePageInterfac
      */
     public function checkValidationMessageFor($element, $message)
     {
-        $foundedElement = $this->getFieldElement($element);
-        if (null === $foundedElement) {
+        $foundElement = $this->getFieldElement($element);
+        if (null === $foundElement) {
             throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.pointing');
         }
 
-        return $message === $foundedElement->find('css', '.form-error')->getText();
+        return $message === $foundElement->find('css', '.form-error')->getText();
     }
 
     /**
@@ -78,9 +70,9 @@ class ProfileUpdatePage extends SymfonyPage implements ProfileUpdatePageInterfac
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'first_name' => '#sylius_customer_profile_firstName',
-            'last_name' => '#sylius_customer_profile_lastName',
-            'email' => '#sylius_customer_profile_email',
+            'current_password' => '#sylius_user_change_password_currentPassword',
+            'new_password' => '#sylius_user_change_password_newPassword_first',
+            'confirmation' => '#sylius_user_change_password_newPassword_second',
         ]);
     }
 

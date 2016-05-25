@@ -51,7 +51,12 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
             'customer' => '#customer-information',
         ]);
     }
-    
+
+    /**
+     * @param $value
+     * 
+     * @return bool
+     */
     private function hasValueInCustomerSection($value)
     {
         $customerText = $this->getElement('customer')->getText();

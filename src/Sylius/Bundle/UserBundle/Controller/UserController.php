@@ -47,7 +47,7 @@ class UserController extends ResourceController
         $form = $this->createResourceForm($configuration, $formType, $changePassword);
 
         if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH']) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
-            return $this->handleChangePassword($configuration, $user, $changePassword->getNewPassword());
+            return $this->handleChangePassword($request, $configuration, $user, $changePassword->getNewPassword());
         }
 
         if (!$configuration->isHtmlRequest()) {
@@ -89,7 +89,7 @@ class UserController extends ResourceController
         $form = $this->createResourceForm($configuration, $formType, $changePassword);
 
         if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH']) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
-            return $this->handleResetPassword($configuration, $user, $changePassword->getPassword());
+            return $this->handleResetPassword($request, $configuration, $user, $changePassword->getPassword());
         }
 
         if (!$configuration->isHtmlRequest()) {
@@ -202,13 +202,14 @@ class UserController extends ResourceController
     }
 
     /**
+     * @param Request $request
      * @param RequestConfiguration $configuration
      * @param UserInterface $user
      * @param string $newPassword
      *
      * @return RedirectResponse
      */
-    protected function handleResetPassword(RequestConfiguration $configuration, UserInterface $user, $newPassword)
+    protected function handleResetPassword(Request $request, RequestConfiguration $configuration, UserInterface $user, $newPassword)
     {
         $user->setPlainPassword($newPassword);
         $user->setConfirmationToken(null);
@@ -226,17 +227,20 @@ class UserController extends ResourceController
             return $this->viewHandler->handle($configuration, View::create($user, 204));
         }
 
-        return new RedirectResponse($this->container->get('router')->generate('sylius_user_security_login'));
+        $redirectRouteName = $request->attributes->get('_sylius[redirect]', 'sylius_user_security_login', true);
+
+        return new RedirectResponse($this->container->get('router')->generate($redirectRouteName));
     }
 
     /**
+     * @param Request $request
      * @param RequestConfiguration $configuration
      * @param UserInterface $user
      * @param string $newPassword
      *
      * @return RedirectResponse
      */
-    protected function handleChangePassword(RequestConfiguration $configuration, UserInterface $user, $newPassword)
+    protected function handleChangePassword(Request $request, RequestConfiguration $configuration, UserInterface $user, $newPassword)
     {
         $user->setPlainPassword($newPassword);
 
@@ -252,7 +256,9 @@ class UserController extends ResourceController
             return $this->viewHandler->handle($configuration, View::create($user, 204));
         }
 
-        return new RedirectResponse($this->container->get('router')->generate('sylius_account_profile_show'));
+        $redirectRouteName = $request->attributes->get('_sylius[redirect]', 'sylius_account_profile_show', true);
+
+        return new RedirectResponse($this->container->get('router')->generate($redirectRouteName));
     }
 
     /**
