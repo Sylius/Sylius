@@ -1,0 +1,46 @@
+{% set orderPromotionAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT') %}
+{% set itemPromotionAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT') %}
+{% set shippingAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::SHIPPING_ADJUSTMENT') %}
+{% set taxAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::TAX_ADJUSTMENT') %}
+
+{% set variant = item.variant %}
+{% set product = variant.product %}
+
+<tr>
+    <td class="single line">
+        <strong class="ui header">
+            {{ product.name }}
+            <span class="sub header">
+                {{ product.code }}
+            </span>
+        </strong>
+        {% if product.hasOptions() %}
+            <div class="ui horizontal divided list">
+                {% for option in variant.options %}
+                    <div class="item">
+                        {{ option.value }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </td>
+    <td class="right aligned">
+        {{ item.quantity }}
+    </td>
+    <td class="right aligned">
+        {{ item.unitPrice|sylius_price(order.currency) }}
+    </td>
+    <td class="right aligned">
+        {{ (item.unitPrice * item.quantity)|sylius_price(order.currency) }}
+    </td>
+    <td class="right aligned">
+        {{ item.getAdjustmentsTotalRecursively(taxAdjustment)|sylius_price(order.currency) }}
+    </td>
+    <td class="right aligned discount">
+        {% set itemDiscount = item.getAdjustmentsTotalRecursively(itemPromotionAdjustment) %}
+        {% if not itemDiscount == 0 %}-{% endif %}{{ (-1 * itemDiscount)|sylius_price(order.currency) }}
+    </td>
+    <td class="right aligned">
+        {{ item.total|sylius_price(order.currency) }}
+    </td>
+</tr>

@@ -8,11 +8,11 @@ sylius_admin_product:
         grid: sylius_admin_product
         vars:
             all:
-                subheader: sylius.ui.manage_your_products
+                subheader: sylius.ui.manage_your_product_catalog
                 templates:
                     form: SyliusAdminBundle:Product:_form.html.twig
             index:
-                icon: diamond
+                icon: cube
     type: sylius.resource
 
 sylius_admin_product_create:
@@ -27,7 +27,7 @@ sylius_admin_product_create:
             template: SyliusAdminBundle:Crud:create.html.twig
             redirect: sylius_admin_product_update
             vars:
-                subheader: sylius.ui.manage_your_products
+                subheader: sylius.ui.manage_your_product_catalog
                 templates:
                     form: SyliusAdminBundle:Product:_form.html.twig
                 route:
@@ -43,7 +43,7 @@ sylius_admin_product_create_simple:
             template: SyliusAdminBundle:Crud:create.html.twig
             redirect: sylius_admin_product_update
             vars:
-                subheader: sylius.ui.manage_your_products
+                subheader: sylius.ui.manage_your_product_catalog
                 templates:
                     form: SyliusAdminBundle:Product:_form.html.twig
                 route:

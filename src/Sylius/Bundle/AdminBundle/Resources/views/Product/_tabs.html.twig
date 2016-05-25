@@ -1,0 +1,7 @@
+{% include '@SyliusAdmin/Product/Tab/_details.html.twig' %}
+{% include '@SyliusAdmin/Product/Tab/_taxonomy.html.twig' %}
+{% include '@SyliusAdmin/Product/Tab/_attributes.html.twig' %}
+{% if product.simple %}
+{% include '@SyliusAdmin/Product/Tab/_media.html.twig' %}
+{% include '@SyliusAdmin/Product/Tab/_taxes.html.twig' %}
+{% endif %}

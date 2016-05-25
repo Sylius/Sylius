@@ -27,12 +27,16 @@ sylius_grid:
                     label: sylius.ui.expires_at
                     options:
                         format: d-m-Y
+            filters:
+                code:
+                    type: string
+                    label: sylius.ui.code
             actions:
                 main:
-                    create:
-                        type: create_coupon
                     generate:
                         type: generate_coupon
+                    create:
+                        type: create_coupon
                 item:
                     update:
                         type: update_coupon

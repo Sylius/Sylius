@@ -49,7 +49,7 @@ class StringFilter implements FilterInterface
         $value = array_key_exists('value', $data) ? $data['value'] : null;
 
         if (1 === count($fields)) {
-            $expression = $this->getExpression($expressionBuilder, $type, $name, $value);
+            $expression = $this->getExpression($expressionBuilder, $type, $fields[0], $value);
         } else {
             $expressions = [];
 

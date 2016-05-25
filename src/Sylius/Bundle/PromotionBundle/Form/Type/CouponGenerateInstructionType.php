@@ -15,8 +15,6 @@ use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Coupon generate instruction type.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class CouponGenerateInstructionType extends AbstractResourceType
@@ -34,12 +32,13 @@ class CouponGenerateInstructionType extends AbstractResourceType
                 'label' => 'sylius.form.coupon_generate_instruction.code_length',
             ])
             ->add('usageLimit', 'integer', [
+                'required' => false,
                 'label' => 'sylius.form.coupon_generate_instruction.usage_limit',
             ])
             ->add('expiresAt', 'date', [
+                'required' => false,
                 'label' => 'sylius.form.coupon_generate_instruction.expires_at',
                 'widget' => 'single_text',
-                'empty_value' => ['year' => '-', 'month' => '-', 'day' => '-'],
             ])
         ;
     }

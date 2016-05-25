@@ -23,6 +23,20 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
     /**
      * {@inheritdoc}
      */
+    public function createListQueryBuilder()
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+
+        return $queryBuilder
+            ->addSelect('customer')
+            ->leftJoin('o.customer', 'customer')
+            ->andWhere($queryBuilder->expr()->isNotNull('o.completedAt'))
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function createPaginatorByCustomer(CustomerInterface $customer, array $sorting = [])
     {
         $queryBuilder = $this->createQueryBuilderWithCustomer($customer, $sorting);

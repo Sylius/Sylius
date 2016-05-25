@@ -41,9 +41,9 @@ sylius_grid:
                     create:
                         type: create
                 item:
+                    manage_coupons:
+                        type: manage_coupons
                     update:
                         type: update
                     delete:
                         type: delete
-                    manageCoupons:
-                        type: manage_coupons

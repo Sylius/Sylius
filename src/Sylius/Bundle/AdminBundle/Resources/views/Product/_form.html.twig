@@ -1,5 +1,12 @@
-{% if product.simple %}
-    {% include 'SyliusAdminBundle:Product/Form:_simpleForm.html.twig' %}
-{% else %}
-    {% include 'SyliusAdminBundle:Product/Form:_configurableForm.html.twig' %}
-{% endif %}
+{{ form_errors(form) }}
+
+<div class="ui stackable grid">
+    <div class="three wide column">
+        {% include '@SyliusAdmin/Product/_menu.html.twig' %}
+    </div>
+    <div class="thirteen wide column">
+        <div class="ui segment">
+            {% include '@SyliusAdmin/Product/_tabs.html.twig' %}
+        </div>
+    </div>
+</div>

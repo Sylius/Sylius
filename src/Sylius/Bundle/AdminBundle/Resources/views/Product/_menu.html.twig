@@ -1,0 +1,19 @@
+<div class="ui large fluid vertical menu">
+    <a href="#" class="active item" data-tab="details">
+        {{ 'sylius.ui.details'|trans }}
+    </a>
+    <a href="#" class="item" data-tab="taxonomy">
+        {{ 'sylius.ui.taxonomy'|trans }}
+    </a>
+    <a href="#" class="item" data-tab="attributes">
+        {{ 'sylius.ui.attributes'|trans }}
+    </a>
+    {% if product.simple %}
+    <a href="#" class="item" data-tab="media">
+        {{ 'sylius.ui.media'|trans }}
+    </a>
+    <a href="#" class="item" data-tab="taxes">
+        {{ 'sylius.ui.taxes'|trans }}
+    </a>
+    {% endif %}
+</div>

@@ -19,6 +19,8 @@ use Sylius\Component\Order\Repository\OrderRepositoryInterface as BaseOrderRepos
 
 interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
 {
+    public function createListQueryBuilder();
+
     /**
      * @param \DateTime $expiresAt
      * @param string $state

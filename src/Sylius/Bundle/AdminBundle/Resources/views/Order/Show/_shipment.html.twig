@@ -1,0 +1,14 @@
+<div class="item">
+    <div class="right floated content">
+        {{ label.default(('sylius.ui.'~shipment.state)|trans) }}
+    </div>
+    <i class="large truck icon"></i>
+    <div class="content">
+        <div class="header">
+            {{ shipment.method }}
+        </div>
+        <div class="description">
+            <i class="globe icon"></i>{{ shipment.method.zone }}
+        </div>
+    </div>
+</div>

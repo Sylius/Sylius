@@ -23,6 +23,8 @@ use Sylius\Component\Product\Repository\ProductRepositoryInterface as BaseProduc
  */
 interface ProductRepositoryInterface extends BaseProductRepositoryInterface
 {
+    public function createListQueryBuilder();
+
     /**
      * @param TaxonInterface $taxon
      * @param array $criteria

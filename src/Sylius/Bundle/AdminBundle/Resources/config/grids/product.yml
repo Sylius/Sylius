@@ -5,6 +5,8 @@ sylius_grid:
                 name: doctrine/orm
                 options:
                     class: %sylius.model.product.class%
+                    repository:
+                        method: createListQueryBuilder
             sorting:
                 code: asc
             fields:
@@ -14,6 +16,23 @@ sylius_grid:
                 name:
                     type: string
                     label: sylius.ui.name
+                enabled:
+                    type: twig
+                    label: sylius.ui.enabled
+                    options:
+                        template: SyliusAdminBundle:Grid/Field:enabled.html.twig
+            filters:
+                code:
+                    type: string
+                    label: sylius.ui.code
+                name:
+                    type: string
+                    label: sylius.ui.name
+                    options:
+                        fields: [translation.name]
+                enabled:
+                    type: boolean
+                    label: sylius.ui.enabled
             actions:
                 main:
                     create:

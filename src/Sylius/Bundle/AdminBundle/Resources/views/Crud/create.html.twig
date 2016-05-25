@@ -11,7 +11,7 @@
 {% block content %}
 {{ headers.default(header|trans, configuration.vars.icon|default('plus'), configuration.vars.subheader|default(null)|trans) }}
 
-{% include configuration.vars.templates.breadCrumb|default('SyliusAdminBundle:Crud/BreadCrumb:createBreadCrumb.html.twig') %}
+{% include configuration.vars.templates.breadcrumb|default('SyliusAdminBundle:Crud/Breadcrumb:_create.html.twig') %}
 
 {{ form_start(form, {'action': path(configuration.vars.route.name|default(configuration.getRouteName('create')), configuration.vars.route.parameters|default({})), 'attr': {'class': 'ui form', 'novalidate': 'novalidate'}}) }}
     <div class="ui segment">

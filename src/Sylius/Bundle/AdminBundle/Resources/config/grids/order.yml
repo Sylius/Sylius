@@ -5,12 +5,23 @@ sylius_grid:
                 name: doctrine/orm
                 options:
                     class: "%sylius.model.order.class%"
+                    repository:
+                        method: createListQueryBuilder
             sorting:
                 completedAt: desc
             fields:
+                channel:
+                    type: twig
+                    label: sylius.ui.channel
+                    path: channel
+                    options:
+                        template: SyliusAdminBundle:Order/Field:channel.html.twig
                 number:
-                    type: string
+                    type: twig
                     label: sylius.ui.number
+                    path: .
+                    options:
+                        template: SyliusAdminBundle:Order/Field:number.html.twig
                 date:
                     type: datetime
                     label: sylius.ui.date
@@ -43,6 +54,15 @@ sylius_grid:
                     path: .
                     options:
                         template: SyliusAdminBundle:Order/Field:total.html.twig
+            filters:
+                number:
+                    type: string
+                    label: sylius.ui.number
+                customer:
+                    type: string
+                    label: sylius.ui.customer
+                    options:
+                        fields: [customer.email, customer.firstName, customer.lastName]
             actions:
                 item:
                     show:

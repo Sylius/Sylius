@@ -14,7 +14,7 @@
     <div class="column">
         {{ headers.default(header|trans, configuration.vars.icon|default('list'), configuration.vars.subheader|default(null)|trans) }}
 
-        {% include configuration.vars.templates.breadCrumb|default('SyliusAdminBundle:Crud/BreadCrumb:indexBreadCrumb.html.twig') %}
+        {% include configuration.vars.templates.breadcrumb|default('SyliusAdminBundle:Crud/Breadcrumb:_index.html.twig') %}
     </div>
     <div class="middle aligned column">
         <div class="ui right floated buttons">
