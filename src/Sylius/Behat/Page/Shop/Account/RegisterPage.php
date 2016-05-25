@@ -39,7 +39,7 @@ class RegisterPage extends SymfonyPage implements RegisterPageInterface
      */
     public function getRouteName()
     {
-        return 'sylius_shop_registration';
+        return 'sylius_shop_register';
     }
 
     public function register()

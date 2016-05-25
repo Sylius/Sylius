@@ -7,7 +7,7 @@ sylius_shop_login:
     defaults:
         _controller: sylius.controller.security:loginAction
         _sylius:
-            template: SyliusShopBundle:Account:login.html.twig
+            template: SyliusShopBundle::login.html.twig
 
 sylius_shop_login_check:
     path: /login-check
@@ -16,6 +16,20 @@ sylius_shop_login_check:
 
 sylius_shop_logout:
     path: /logout
+
+sylius_shop_register:
+    path: /register
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.customer:createAction
+        _sylius:
+            form: sylius_customer_registration
+            event: register
+            template: SyliusShopBundle::register.html.twig
+            permission: false
+            redirect:
+                route: sylius_shop_homepage
+                parameters: { email: resource.email }
 
 sylius_shop_request_password_reset_token:
     path: /resetting/request-token
@@ -26,16 +40,3 @@ sylius_shop_request_password_reset_token:
             template: SyliusShopBundle:Account:requestPasswordReset.html.twig
             redirect: sylius_shop_login
 
-sylius_shop_registration:
-    path: /register
-    methods: [GET, POST]
-    defaults:
-        _controller: sylius.controller.customer:createAction
-        _sylius:
-            form: sylius_customer_registration
-            event: register
-            template: SyliusShopBundle:Account:register.html.twig
-            permission: false
-            redirect:
-                route: sylius_shop_homepage
-                parameters: { email: resource.email }

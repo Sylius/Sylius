@@ -1,0 +1,43 @@
+{% extends '@SyliusShop/Layout/main.html.twig' %}
+
+{% form_theme form 'SyliusUiBundle:Form:theme.html.twig' %}
+
+{% import 'SyliusUiBundle:Macro:messages.html.twig' as messages %}
+
+{% block content %}
+    <h1 class="ui header">
+        <i class="circular user icon"></i>
+        <div class="content">
+            {{ 'sylius.ui.customer_login'|trans }}
+            <div class="sub header">{{ 'sylius.ui.access_your_store_account_or_create_a_new_one'|trans }}</div>
+        </div>
+    </h1>
+
+    <div class="ui padded segment">
+        <div class="ui two column very relaxed stackable grid">
+            <div class="column">
+                <h4 class="ui dividing header">{{ 'sylius.ui.registered_customers'|trans }}</h4>
+                <p>{{ 'sylius.ui.if_you_have_an_account_sign_in_with_your_email_address'|trans }}.</p>
+                {{ form_start(form, {'action': path('sylius_shop_login_check'), 'attr': {'class': 'ui form', 'novalidate': 'novalidate'}}) }}
+                {% if last_error %}
+                    {{ messages.error(last_error.messageKey|trans(last_error.messageData, 'security')) }}
+                {% endif %}
+                    {{ form_row(form._username) }}
+                    {{ form_row(form._password) }}
+                    {{ form_row(form._remember_me) }}
+                    <button type="submit" class="ui blue submit button">{{ 'sylius.ui.login'|trans }}</button>
+                {{ form_end(form, {'render_rest': false}) }}
+            </div>
+            <div class="ui vertical divider">
+                {{ 'sylius.ui.or'|trans }}
+            </div>
+            <div class="column">
+                <h4 class="ui dividing header">{{ 'sylius.ui.new_customers'|trans }}</h4>
+                <a href="{{ path('sylius_shop_register') }}" class="ui big green labeled icon fluid button">
+                    <i class="signup icon"></i>
+                    {{ 'sylius.ui.create_an_account'|trans }}
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

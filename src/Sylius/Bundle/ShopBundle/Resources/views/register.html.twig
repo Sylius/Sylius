@@ -1,0 +1,29 @@
+{% extends '@SyliusShop/Layout/main.html.twig' %}
+
+{% block content %}
+    <h1 class="ui header">
+        <i class="circular user icon"></i>
+        <div class="content">
+            {{ 'sylius.ui.register_in_the_store'|trans }}
+            <div class="sub header">{{ 'sylius.ui.create_new_customer_account'|trans }}</div>
+        </div>
+    </h1>
+
+    <div class="ui padded segment">
+        {{ form_start(form, {'action': path('sylius_shop_register'), 'attr': {'class': 'ui form', 'novalidate': 'novalidate'}}) }}
+            <h4 class="ui dividing header">{{ 'sylius.ui.personal_information'|trans }}</h4>
+            <div class="two fields">
+                {{ form_row(form.firstName) }}
+                {{ form_row(form.lastName) }}
+            </div>
+            {{ form_row(form.email) }}
+            <h4 class="ui dividing header">{{ 'sylius.ui.account_credentials'|trans }}</h4>
+            {{ form_row(form.user.plainPassword.first) }}
+            {{ form_row(form.user.plainPassword.second) }}
+            <button type="submit" class="ui large primary button">
+                {{ 'sylius.ui.create_an_account'|trans }}
+            </button>
+        {{ form_row(form._token) }}
+        {{ form_end(form, {'render_rest': false}) }}
+    </div>
+{% endblock %}

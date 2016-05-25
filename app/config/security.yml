@@ -99,16 +99,19 @@ security:
         - { path: ^/connect.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: "/account.*", role: ROLE_USER }
+        - { path: "^/account.*", role: ROLE_USER }
+
+        - { path: ^/shop/login.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/shop/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: "/shop/account.*", role: ROLE_USER }
 
         - { path: ^/administration/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/administration/login-check, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: "/administration.*", role: ROLE_ADMINISTRATION_ACCESS }
+        - { path: "^/administration.*", role: ROLE_ADMINISTRATION_ACCESS }
 
         - { path: ^/admin/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/login-check, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: "/admin.*", role: ROLE_ADMINISTRATION_ACCESS }
+        - { path: "^/admin.*", role: ROLE_ADMINISTRATION_ACCESS }
 
         - { path: ^/api, role: ROLE_API_ACCESS }
 
