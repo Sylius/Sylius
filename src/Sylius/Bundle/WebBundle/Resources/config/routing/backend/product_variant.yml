@@ -39,8 +39,16 @@ sylius_backend_product_variant_delete:
 
 sylius_backend_product_variant_generate:
     path: /generate
-    methods: [PATCH]
+    methods: [GET, PUT]
     defaults:
-        _controller: sylius.controller.product_variant:generateAction
+        _controller: sylius.controller.product:updateAction
         _sylius:
-            redirect: referer
+            template: SyliusWebBundle:Backend/ProductVariant:generate.html.twig
+            redirect:
+                route: sylius_backend_product_show
+                parameters: {'id': $productId}
+            form:
+                type: sylius_product_variant_generation
+            repository:
+                method: find
+                arguments: [$productId]

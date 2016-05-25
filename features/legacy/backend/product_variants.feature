@@ -65,42 +65,20 @@ Feature: Product variants
 
     Scenario: Generating all possible variants of product
         Given I am viewing product "Black T-Shirt"
-        When I press "Generate variants"
+        When I follow "Generate variants"
+        And I fill in the following:
+            | sylius_product_variant_generation_variants_1_code | T_SHIRT_S |
+            | sylius_product_variant_generation_variants_2_code | T_SHIRT_M |
+            | sylius_product_variant_generation_variants_3_code | T_SHIRT_L |
+        And I press "Save changes"
         Then I should still be on the page of product "Black T-Shirt"
-        And I should see "Variants have been successfully generated"
+        And I should see "Product has been successfully updated."
         And I should see 3 variants in the list
-
-    Scenario: Generating only missing variants of product
-        Given I am creating variant of "Black T-Shirt"
-        When I fill in "Price" with "19.99"
-        And I select "L" from "T-Shirt size"
-        And I press "Create"
-        And I press "Generate variants"
-        Then I should still be on the page of product "Black T-Shirt"
-        And I should see "Variants have been successfully generated"
-        And I should see 3 variants in the list
-
-    Scenario: Generating all possible variants of product with multiple options
-        Given I am viewing product "Sylius T-Shirt"
-        When I press "Generate variants"
-        Then I should still be on the page of product "Sylius T-Shirt"
-        And I should see "Variants have been successfully generated"
-        And I should see 9 variants in the list
-
-    Scenario: Generating only missing variants of product with multiple options
-        Given I am creating variant of "Sylius T-Shirt"
-        When I fill in "Price" with "19.99"
-        And I select "L" from "T-Shirt size"
-        And I select "Red" from "T-Shirt color"
-        And I press "Create"
-        And I press "Generate variants"
-        Then I should still be on the page of product "Sylius T-Shirt"
-        And I should see "Variants have been successfully generated"
-        And I should see 9 variants in the list
 
     Scenario: Creating a product variant by selecting option
         Given I am creating variant of "Black T-Shirt"
         When I fill in "Price" with "19.99"
+        And I fill in "Code" with "T_SHIRT"
         And I select "L" from "T-Shirt size"
         And I press "Create"
         Then I should be on the page of product "Black T-Shirt"
@@ -109,6 +87,7 @@ Feature: Product variants
     Scenario: Creating a product variant by selecting multiple options
         Given I am creating variant of "Sylius T-Shirt"
         When I fill in "Price" with "19.99"
+        And I fill in "Code" with "T_SHIRT"
         And I select "L" from "T-Shirt size"
         And I select "Red" from "T-Shirt color"
         And I press "Create"

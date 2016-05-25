@@ -29,10 +29,11 @@ Feature: Orm indexer event listener
     Scenario: Creating simple product and indexing it
         Given I am on the product creation page
         When I fill in the following:
-            | Name        | Index test product      |
-            | Code        | TEST_PRODUCT            |
-            | Description | Interesting description |
-            | Price       | 29.99                   |
+            | Name                                     | Index test product      |
+            | sylius_product_legacy_code               | TEST_PRODUCT            |
+            | sylius_product_legacy_masterVariant_code | TEST_PRODUCT            |
+            | Description                              | Interesting description |
+            | Price                                    | 29.99                   |
         And I press "Create"
         Then I should be on the page of product "Index test product"
         And I should see "Product has been successfully created"

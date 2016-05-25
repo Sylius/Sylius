@@ -60,7 +60,7 @@ sylius:
             main_taxon: Main taxon
         product_filter:
             name: Name
-            sku: SKU
+            code: Code
         product_variant:
             tax_category: Tax category
         settings:

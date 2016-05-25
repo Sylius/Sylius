@@ -1,4 +1,4 @@
-@managing_products
+@managing_product_variants
 Feature: Prevent deletion of purchased product variant
     In order to maintain proper order history
     As an Administrator
@@ -13,8 +13,9 @@ Feature: Prevent deletion of purchased product variant
         And there is a customer "john.doe@gmail.com" that placed an order "#00000022"
         And the customer chose "Free" shipping method to "France" with "Cash on Delivery" payment
         And the customer bought a single "Medium PHP Mug" variant of product "PHP Mug"
+        And I am logged in as an administrator
 
-    @domain
+    @domain @ui
     Scenario: Purchased product variant cannot be deleted
         When I try to delete the "Medium PHP Mug" variant of product "PHP Mug"
         Then I should be notified that this variant is in use and cannot be deleted

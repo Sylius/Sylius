@@ -92,7 +92,7 @@
                 </a>
                 {% if product.hasOptions %}
                 <ul class="list-unstyled">
-                    <li class="sku"><strong>{{ 'sylius.ui.sku'|trans }}</strong>: <code>{{ variant.sku|default('SKU') }}</code></li>
+                    <li class="code"><strong>{{ 'sylius.ui.code'|trans }}</strong>: <code>{{ variant.code|default('SKU') }}</code></li>
                     {% for option in variant.options %}
                     <li><strong>{{ option.presentation }}</strong>: {{ option.value  }}</li>
                     {% endfor %}
@@ -246,7 +246,7 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>{{ 'sylius.ui.sku'|trans }}</th>
+                    <th>{{ 'sylius.ui.code'|trans }}</th>
                     <th>{{ 'sylius.ui.name'|trans }}</th>
                     <th>{{ 'sylius.ui.inventory_state'|trans }}</th>
                     <th>{{ 'sylius.ui.shipping_state'|trans }}</th>
@@ -259,7 +259,7 @@
                 {% for unit in order.itemUnits %}
                 <tr>
                     <td>{{ loop.index }}</td>
-                    <td>{{ unit.stockable.sku }}</td>
+                    <td>{{ unit.stockable.code }}</td>
                     <td>{{ unit.inventoryName }}</td>
                     <td>{{ unit.inventoryState|humanize }}</td>
                     <td>{{ unit.shippingState|humanize }}</td>

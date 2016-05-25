@@ -20,7 +20,7 @@ use Webmozart\Assert\Assert;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class ConfigurableProductSubscriber implements EventSubscriberInterface
+class ProductOptionFieldSubscriber implements EventSubscriberInterface
 {
     /**
      * {@inheritdoc}
@@ -42,21 +42,19 @@ class ConfigurableProductSubscriber implements EventSubscriberInterface
 
         Assert::isInstanceOf($product, ProductInterface::class);
 
-        if ($product->isSimple()) {
-            return;
-        }
-
         $form = $event->getForm();
-        $form->remove('masterVariant');
 
         /** Options should be disabled for configurable product if it has at least one defined variant */
         $disableOptions = (null !== $product->getMasterVariant()) && (false === $product->hasVariants());
 
-        $form->add('options', 'sylius_product_option_choice', [
-            'required' => false,
-            'disabled' => $disableOptions,
-            'multiple' => true,
-            'label' => 'sylius.form.product.options',
-        ]);
+        $form->add(
+            'options', 
+            'sylius_product_option_choice', [
+                'required' => false, 
+                'disabled' => $disableOptions, 
+                'multiple' => true, 
+                'label' => 'sylius.form.product.options',
+            ]
+        );
     }
 }

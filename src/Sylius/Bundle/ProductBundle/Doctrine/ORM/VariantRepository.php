@@ -33,4 +33,15 @@ class VariantRepository extends EntityRepository implements VariantRepositoryInt
             ->getOneOrNullResult()
         ;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createQueryBuilderWithProduct($productId)
+    {
+        return $this->createQueryBuilder('o')
+            ->where('o.object = :productId')
+            ->setParameter('productId', $productId)
+        ;
+    }
 }

@@ -5,7 +5,8 @@ imports:
     - suites/cli/installer.yml
 
     - suites/domain/managing_orders.yml
-    - suites/domain/managing_products.yml
+    - suites/domain/product/managing_products.yml
+    - suites/domain/product/managing_product_variants.yml
     - suites/domain/promotion/managing_promotions.yml
     - suites/domain/promotion/managing_promotion_coupons.yml
 
@@ -55,6 +56,7 @@ imports:
     - suites/ui/payment/managing_payment_methods.yml
     - suites/ui/product/managing_product_attributes.yml
     - suites/ui/product/managing_product_options.yml
+    - suites/ui/product/managing_product_variants.yml
     - suites/ui/product/managing_products.yml
     - suites/ui/product/viewing_products.yml
     - suites/ui/promotion/applying_promotion_rules.yml

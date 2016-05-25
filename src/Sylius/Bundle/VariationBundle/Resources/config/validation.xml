@@ -17,6 +17,12 @@
                                         http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
 
     <class name="Sylius\Component\Variation\Model\Variant">
+        <property name="code">
+            <constraint name="NotBlank">
+                <option name="message">sylius.option.code.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
         <constraint name="Sylius\Bundle\VariationBundle\Validator\Constraint\VariantCombination">
             <option name="groups">sylius</option>
         </constraint>

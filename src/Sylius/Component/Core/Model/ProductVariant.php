@@ -24,11 +24,6 @@ use Sylius\Component\Variation\Model\VariantInterface as BaseVariantInterface;
 class ProductVariant extends BaseVariant implements ProductVariantInterface
 {
     /**
-     * @var string
-     */
-    protected $sku;
-
-    /**
      * @var int
      */
     protected $price;
@@ -139,22 +134,6 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     public function getMetadataIdentifier()
     {
         return $this->getMetadataClassIdentifier().'-'.$this->getId();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getSku()
-    {
-        return $this->sku;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setSku($sku)
-    {
-        $this->sku = $sku;
     }
 
     /**

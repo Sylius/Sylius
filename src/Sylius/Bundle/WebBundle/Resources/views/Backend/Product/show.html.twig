@@ -69,8 +69,8 @@
                     <td>{{ product.id }}</td>
                 </tr>
                 <tr>
-                    <td>{{ 'sylius.ui.sku'|trans }}</td>
-                    <td>{{ product.sku }}</td>
+                    <td>{{ 'sylius.ui.code'|trans }}</td>
+                    <td>{{ product.code }}</td>
                 </tr>
                 <tr>
                     <td>{{ 'sylius.ui.name'|trans }}</td>
@@ -275,7 +275,7 @@
 <div class="well well-sm">
     {{ buttons.create(path('sylius_backend_product_variant_create', {'productId': product.id}), 'sylius.ui.create_variant'|trans) }}
     {% if product.hasOptions %}
-        {{ buttons.patch(path('sylius_backend_product_variant_generate', {'productId': product.id}), 'sylius.ui.generate_variants'|trans) }}
+        {{ buttons.create(path('sylius_backend_product_variant_generate', {'productId': product.id}), 'sylius.ui.generate_variants'|trans) }}
     {% endif %}
     <div class="pull-right">
         <strong>{{ 'sylius.ui.variant_selection_method'|trans }}</strong>: {{ product.variantSelectionMethodLabel }}

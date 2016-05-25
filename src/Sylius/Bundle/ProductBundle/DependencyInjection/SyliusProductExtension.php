@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\ProductBundle\DependencyInjection;
 
-use Sylius\Bundle\ProductBundle\Controller\VariantController;
 use Sylius\Bundle\ProductBundle\Form\Type\VariantType;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Sylius\Component\Product\Factory\ProductVariantFactory;
@@ -34,10 +33,8 @@ use Sylius\Component\Product\Model\VariantInterface;
 use Sylius\Component\Resource\Factory;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * Product catalog extension.
@@ -65,6 +62,9 @@ class SyliusProductExtension extends AbstractResourceExtension implements Prepen
         foreach ($configFiles as $configFile) {
             $loader->load($configFile);
         }
+
+        $formDefinition = $container->getDefinition('sylius.form.type.product_variant_generation');
+        $formDefinition->addArgument($container->getDefinition('sylius.form.listener.product_variant_generator'));
     }
 
     /**
@@ -133,7 +133,6 @@ class SyliusProductExtension extends AbstractResourceExtension implements Prepen
                         'classes' => [
                             'model' => Variant::class,
                             'interface' => VariantInterface::class,
-                            'controller' => VariantController::class,
                             'factory' => ProductVariantFactory::class,
                             'form' => [
                                 'default' => VariantType::class,

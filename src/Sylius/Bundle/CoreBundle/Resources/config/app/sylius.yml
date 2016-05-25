@@ -844,6 +844,9 @@ sylius_grid:
             create_zone: SyliusAdminBundle:Zone/Action:createZone.html.twig
             create_product: SyliusAdminBundle:Product/Action:createProduct.html.twig
             create_product_attribute: SyliusAdminBundle:ProductAttribute/Action:createProductAttribute.html.twig
+            create_variant: SyliusAdminBundle:ProductVariant/Action:create.html.twig
+            update_variant: SyliusAdminBundle:ProductVariant/Action:update.html.twig
+            delete_variant: SyliusAdminBundle:ProductVariant/Action:delete.html.twig
             show: SyliusAdminBundle:Grid/Action:show.html.twig
             create: SyliusAdminBundle:Grid/Action:create.html.twig
             update: SyliusAdminBundle:Grid/Action:update.html.twig

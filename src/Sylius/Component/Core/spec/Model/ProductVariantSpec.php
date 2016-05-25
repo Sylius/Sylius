@@ -189,17 +189,17 @@ class ProductVariantSpec extends ObjectBehavior
         $this->getShippingHeight()->shouldReturn(110);
     }
 
-    function it_has_no_sku_by_default()
+    function it_has_no_code_by_default()
     {
-        $this->getSku()->shouldReturn(null);
+        $this->getCode()->shouldReturn(null);
     }
 
-    function its_sku_is_mutable()
+    function its_code_is_mutable()
     {
         $sku = 'dummy-sku123';
 
-        $this->setSku($sku);
-        $this->getSku()->shouldReturn($sku);
+        $this->setCode($sku);
+        $this->getCode()->shouldReturn($sku);
     }
 
     function it_does_not_have_tax_category_by_default()

@@ -28,6 +28,11 @@ class Variant implements VariantInterface
     protected $id;
 
     /**
+     * @var string
+     */
+    protected $code;
+
+    /**
      * @var bool
      */
     protected $master = false;
@@ -59,6 +64,22 @@ class Variant implements VariantInterface
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * @param string $code
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
     }
 
     /**

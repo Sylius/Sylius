@@ -9,7 +9,7 @@
     <thead>
         <tr>
             <th>{{ sylius_resource_sort('id', '#id') }}</th>
-            <th>{{ sylius_resource_sort('sku', 'sylius.ui.sku'|trans) }}</th>
+            <th>{{ sylius_resource_sort('code', 'sylius.ui.code'|trans) }}</th>
             <th>{{ sylius_resource_sort('name', 'sylius.ui.name'|trans) }}</th>
             <th>{{ sylius_resource_sort('onHand', 'sylius.stockable.on_hand'|trans) }}</th>
             <th>{{ sylius_resource_sort('onHold', 'sylius.ui.on_hold'|trans) }}</th>
@@ -23,7 +23,7 @@
                     {{ product.id }}
                 </td>
                 <td>
-                    {{ product.sku }}
+                    {{ product.code }}
                 </td>
                 <td>
                     <a href="{{ path('sylius_backend_product_show', {'id': product.id}) }}" class="btn btn-link">

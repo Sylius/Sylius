@@ -25,4 +25,11 @@ interface VariantRepositoryInterface extends RepositoryInterface
      * @return VariantInterface|null
      */
     public function findOneByName($name);
+
+    /**
+     * @param mixed $productId
+     *
+     * @return QueryBuilder
+     */
+    public function createQueryBuilderWithProduct($productId);
 }

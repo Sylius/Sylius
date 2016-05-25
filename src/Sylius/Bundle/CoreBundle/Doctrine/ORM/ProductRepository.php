@@ -110,10 +110,10 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
                 ->setParameter('name', '%'.$criteria['name'].'%')
             ;
         }
-        if (!empty($criteria['sku'])) {
+        if (!empty($criteria['code'])) {
             $queryBuilder
-                ->andWhere('variant.sku = :sku')
-                ->setParameter('sku', $criteria['sku'])
+                ->andWhere('variant.code = :code')
+                ->setParameter('code', $criteria['code'])
             ;
         }
 

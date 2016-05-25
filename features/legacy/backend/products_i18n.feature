@@ -26,7 +26,8 @@ Feature: Products
         Given I am on the product creation page
         And I fill in the following:
             | Price                                                | 29.99                    |
-            | Code                                                 | SOY_PRODUCT              |
+            | sylius_product_legacy_code                           | SOY_PRODUCT              |
+            | sylius_product_legacy_masterVariant_code             | SOY_PRODUCT              |
             | sylius_product_legacy_translations_es_ES_name        | Soy i18n                 |
             | sylius_product_legacy_translations_es_ES_description | Conmemorando el dia i18n |
             | sylius_product_legacy_translations_en_US_name        | I am i18n                |

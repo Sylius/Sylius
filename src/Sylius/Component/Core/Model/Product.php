@@ -97,22 +97,6 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function getSku()
-    {
-        return $this->getMasterVariant()->getSku();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setSku($sku)
-    {
-        $this->getMasterVariant()->setSku($sku);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getVariantSelectionMethod()
     {
         return $this->variantSelectionMethod;

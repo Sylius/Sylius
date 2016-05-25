@@ -19,22 +19,17 @@
     <parameters>
         <parameter key="sylius.listener.archetype_update.class">Sylius\Bundle\ProductBundle\EventListener\ArchetypeUpdateListener</parameter>
         <parameter key="sylius.set_builder.cartesian.class">Sylius\Component\Variation\SetBuilder\CartesianSetBuilder</parameter>
-        <parameter key="sylius.generator.product_variant.class">Sylius\Bundle\ProductBundle\Generator\VariantGenerator</parameter>
 
         <!-- Should be deleted after old backend deletion -->
         <parameter key="sylius.form.type.product_legacy.class">Sylius\Bundle\ProductBundle\Form\Type\LegacyProductType</parameter>
 
         <parameter key="sylius.validator.product.unique.class">Sylius\Bundle\ProductBundle\Validator\ProductUniqueValidator</parameter>
+
+        <parameter key="sylius.form.listener.product_variant_generator.class">Sylius\Bundle\ProductBundle\Form\EventSubscriber\GenerateProductVariantsSubscriber</parameter>
     </parameters>
 
     <services>
         <service id="sylius.set_builder.cartesian" class="%sylius.set_builder.cartesian.class%" />
-        <service id="sylius.generator.product_variant" class="%sylius.generator.product_variant.class%">
-            <argument type="service" id="sylius.factory.product_variant" />
-            <argument type="service" id="sylius.set_builder.cartesian" />
-            <argument type="service" id="validator" />
-            <argument type="service" id="event_dispatcher"/>
-        </service>
 
         <service id="sylius.validator.product.unique" class="%sylius.validator.product.unique.class%">
             <argument type="service" id="sylius.repository.product" />
@@ -55,6 +50,10 @@
                 <argument>%sylius.validation_groups.product%</argument>
             </argument>
             <tag name="form.type" alias="sylius_product_legacy" />
+        </service>
+
+        <service id="sylius.form.listener.product_variant_generator" class="%sylius.form.listener.product_variant_generator.class%">
+            <argument type="service" id="sylius.generator.variant" />
         </service>
     </services>
 

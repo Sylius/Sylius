@@ -14,7 +14,7 @@ Feature: Adding a new product
         Given I want to create a new simple product
         When I specify its code as "BOARD_DICE_BREWING"
         And I name it "Dice Brewing" in "English (United States)"
-        And I specify its price to "$10.00"
+        And I set its price to "$10.00"
         And I add it
         Then I should be notified that it has been successfully created
         And the product "Dice Brewing" should appear in the shop

@@ -8,7 +8,7 @@
     <thead>
         <tr>
             <th>id</th>
-            <th>{{ 'sylius.ui.sku'|trans }}</th>
+            <th>{{ 'sylius.ui.code'|trans }}</th>
             <th></th>
             <th>{{ 'sylius.ui.availability'|trans }}</th>
             <th>{{ 'sylius.ui.last_update'|trans }}</th>
@@ -25,7 +25,7 @@
         {% set product = variant.product %}
         <tr id="{{ variant.id }}">
             <td>{{ variant.id }}</td>
-            <td>{{ variant.sku ?: '-' }}</td>
+            <td>{{ variant.code ?: '-' }}</td>
             <td>{% if variant.images.count > 0 %}
                 <img class="img-polaroid" src="{{ variant.images.offsetGet(0).path|imagine_filter('sylius_small') }}" />
             {% endif %}

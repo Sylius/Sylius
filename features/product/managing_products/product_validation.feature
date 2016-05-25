@@ -13,7 +13,7 @@ Feature: Products validation
     Scenario: Adding a new simple product without specifying its code
         Given I want to create a new simple product
         When I name it "Dice Brewing" in "English (United States)"
-        And I specify its price to "$10.00"
+        And I set its price to "$10.00"
         And I try to add it
         Then I should be notified that code is required
         And product with name "Dice Brewing" should not be added
@@ -22,7 +22,7 @@ Feature: Products validation
     Scenario: Adding a new simple product without specifying its name
         Given I want to create a new simple product
         When I specify its code as "BOARD_DICE_BREWING"
-        And I specify its price to "$10.00"
+        And I set its price to "$10.00"
         And I try to add it
         Then I should be notified that name is required
         And product with code "BOARD_DICE_BREWING" should not be added
