@@ -23,6 +23,7 @@
         <parameter key="sylius.validator.variant.combination.class">Sylius\Bundle\VariationBundle\Validator\VariantCombinationValidator</parameter>
 
         <parameter key="sylius.generator.variant.class">Sylius\Component\Variation\Generator\VariantGenerator</parameter>
+        <parameter key="sylius.checker.variants_parity_checker.class">Sylius\Component\Variation\Checker\VariantsParityChecker</parameter>
     </parameters>
 
     <services>
@@ -36,13 +37,17 @@
             <tag name="validator.constraint_validator" alias="sylius.validator.variant.unique" />
         </service>
         <service id="sylius.validator.variant.combination" class="%sylius.validator.variant.combination.class%">
+            <argument type="service" id="sylius.checker.variants_parity_checker" />
             <tag name="validator.constraint_validator" alias="sylius.validator.variant.combination" />
         </service>
 
         <service id="sylius.generator.variant" class="%sylius.generator.variant.class%">
             <argument type="service" id="sylius.factory.product_variant" />
             <argument type="service" id="sylius.set_builder.cartesian" />
+            <argument type="service" id="sylius.checker.variants_parity_checker" />
         </service>
+
+        <service id="sylius.checker.variants_parity_checker" class="%sylius.checker.variants_parity_checker.class%" />
     </services>
 
 </container>
