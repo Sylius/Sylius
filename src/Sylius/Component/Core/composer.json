@@ -56,7 +56,7 @@
     },
     "require-dev": {
         "phpspec/phpspec": "^2.4",
-        "symfony/property-access": "^2.7"
+        "symfony/property-access": "^2.8"
     },
     "config": {
         "bin-dir": "bin"

@@ -24,8 +24,8 @@
 
         "sylius/grid": "^0.19",
 
-        "symfony/form": "^2.7",
-        "symfony/framework-bundle": "^2.7.7"
+        "symfony/form": "^2.8",
+        "symfony/framework-bundle": "^2.8"
     },
     "require-dev": {
         "doctrine/orm": "^2.4.8,<2.5",

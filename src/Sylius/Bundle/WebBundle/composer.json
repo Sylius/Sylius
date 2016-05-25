@@ -27,7 +27,7 @@
         "knplabs/knp-snappy-bundle": "^1.0",
         "liip/imagine-bundle": "~1.0",
         "sylius/core-bundle": "^0.19",
-        "symfony/framework-bundle": "^2.7.7"
+        "symfony/framework-bundle": "^2.8"
     },
     "config": {
         "bin-dir": "bin"

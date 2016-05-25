@@ -23,8 +23,8 @@
         "php": "^5.6|^7.0",
 
         "doctrine/common": "~2.3",
-        "symfony/event-dispatcher": "^2.7",
-        "symfony/property-access": "^2.7",
+        "symfony/event-dispatcher": "^2.8",
+        "symfony/property-access": "^2.8",
         "winzou/state-machine": "~0.1",
         "pagerfanta/pagerfanta": "^1.0"
     },

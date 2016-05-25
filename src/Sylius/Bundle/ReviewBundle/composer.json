@@ -34,7 +34,7 @@
     "require": {
         "php": "^5.6|^7.0",
 
-        "symfony/framework-bundle": "^2.7.7",
+        "symfony/framework-bundle": "^2.8",
         "stof/doctrine-extensions-bundle": "~1.1",
         "sylius/review": "^0.19",
         "sylius/user-bundle": "^0.19",
@@ -42,8 +42,8 @@
     },
     "require-dev": {
         "phpspec/phpspec": "^2.4",
-        "symfony/form": "^2.7",
-        "symfony/validator": "^2.7"
+        "symfony/form": "^2.8",
+        "symfony/validator": "^2.8"
     },
     "config": {
         "bin-dir": "bin"

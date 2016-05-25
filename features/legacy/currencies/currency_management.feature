@@ -78,7 +78,7 @@ Feature: Currency management
 
     Scenario: Trying to create a currency with existing code
         Given I am on the currency creation page
-        When I select "British Pound Sterling" from "Name"
+        When I select "British Pound" from "Name"
         And I fill in "Exchange rate" with "0.235654"
         And I press "Create"
         Then I should still be on the currency creation page

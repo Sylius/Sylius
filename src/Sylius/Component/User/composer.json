@@ -33,7 +33,7 @@
         "doctrine/orm": "^2.4.8,<2.5",
         "sylius/resource": "^0.19",
         "sylius/storage": "^0.19",
-        "symfony/security": "^2.7",
+        "symfony/security": "^2.8",
         "symfony/polyfill-mbstring": "~1.0"
     },
     "require-dev": {
