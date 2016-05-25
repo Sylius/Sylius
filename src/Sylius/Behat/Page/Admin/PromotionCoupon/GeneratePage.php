@@ -115,12 +115,12 @@ class GeneratePage extends SymfonyPage implements GeneratePageInterface
      */
     private function checkValidationMessageFor($element, $message)
     {
-        $foundedElement = $this->getValidatedField($this->getElement($element));
-        if (null === $foundedElement) {
+        $foundElement = $this->getValidatedField($this->getElement($element));
+        if (null === $foundElement) {
             throw new ElementNotFoundException($this->getSession(), 'Element', 'css', '#sylius_promotion_coupon_instruction_amount');
         }
 
-        return $message === $foundedElement->find('css', '.pointing')->getText();
+        return $message === $foundElement->find('css', '.pointing')->getText();
     }
 
     /**

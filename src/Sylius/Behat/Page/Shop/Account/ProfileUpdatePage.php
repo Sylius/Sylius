@@ -64,12 +64,12 @@ class ProfileUpdatePage extends SymfonyPage implements ProfileUpdatePageInterfac
      */
     public function checkValidationMessageFor($element, $message)
     {
-        $foundedElement = $this->getFieldElement($element);
-        if (null === $foundedElement) {
+        $foundElement = $this->getFieldElement($element);
+        if (null === $foundElement) {
             throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.pointing');
         }
 
-        return $message === $foundedElement->find('css', '.form-error')->getText();
+        return $message === $foundElement->find('css', '.form-error')->getText();
     }
 
     /**

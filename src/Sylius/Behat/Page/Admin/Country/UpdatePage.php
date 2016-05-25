@@ -159,12 +159,12 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     {
         $provinceForm = $this->getLastProvinceElement();
 
-        $foundedElement = $provinceForm->find('css', '.pointing');
-        if (null === $foundedElement) {
+        $foundElement = $provinceForm->find('css', '.pointing');
+        if (null === $foundElement) {
             throw new ElementNotFoundException($this->getSession(), 'Tag', 'css', '.pointing');
         }
 
-        return $message === $foundedElement->getText();
+        return $message === $foundElement->getText();
     }
 
     /**
