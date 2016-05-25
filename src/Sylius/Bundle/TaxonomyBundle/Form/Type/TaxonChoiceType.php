@@ -114,15 +114,7 @@ class TaxonChoiceType extends AbstractType
                     $taxons = $repository->findChildren($options['root']);
                 }
             } else {
-                $taxons = array();
-                $rootTaxons = $repository->findRootNodes();
-                foreach ($rootTaxons as $rootTaxon) {
-                    $taxons[] = $rootTaxon;
-                    $childTaxons = $repository->findChildren($rootTaxon);
-                    foreach ($childTaxons as $childTaxon) {
-                        $taxons[] = $childTaxon;
-                    }
-                }
+                $taxons = $repository->findNodesTreeSorted();
             }
 
             if (null !== $options['filter']) {

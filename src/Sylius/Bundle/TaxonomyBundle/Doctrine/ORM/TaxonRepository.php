@@ -100,6 +100,20 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
     /**
      * {@inheritdoc}
      */
+    public function findNodesTreeSorted()
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+        $queryBuilder
+            ->orderBy('o.root')
+            ->addOrderBy('o.left')
+        ;
+    
+        return $queryBuilder->getQuery()->getResult();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getFormQueryBuilder()
     {
         return $this->createQueryBuilder('o');
