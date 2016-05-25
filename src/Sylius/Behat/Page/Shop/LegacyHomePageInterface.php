@@ -9,21 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Behat\Page\Shop\User;
+namespace Sylius\Behat\Page\Shop;
 
-use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\PageInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-interface LoginPageInterface extends PageInterface
+interface LegacyHomePageInterface extends PageInterface
 {
     /**
-     * @param string $email
-     * @param string $password
-     *
-     * @throws ElementNotFoundException
+     * @return string
      */
-    public function logIn($email, $password);
+    public function getContents();
 }

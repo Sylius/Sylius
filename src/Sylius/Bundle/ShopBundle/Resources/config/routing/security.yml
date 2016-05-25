@@ -1,0 +1,32 @@
+# This file is a part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_shop_login:
+    path: /login
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.security:loginAction
+        _sylius:
+            template: SyliusShopBundle:Account:login.html.twig
+
+sylius_shop_login_check:
+    path: /login-check
+    defaults:
+        _controller: sylius.controller.user_security:checkAction
+
+sylius_shop_logout:
+    path: /logout
+
+sylius_shop_registration:
+    path: /register
+    methods: [GET, POST]
+    defaults:
+        _controller: sylius.controller.customer:createAction
+        _sylius:
+            form: sylius_customer_registration
+            event: register
+            template: SyliusShopBundle:Account:register.html.twig
+            permission: false
+            redirect:
+                route: sylius_shop_homepage
+                parameters: { email: resource.email }

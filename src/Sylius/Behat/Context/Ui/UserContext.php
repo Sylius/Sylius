@@ -14,7 +14,7 @@ namespace Sylius\Behat\Context\Ui;
 use Behat\Behat\Context\Context;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\Admin\Customer\ShowPageInterface;
-use Sylius\Behat\Page\Shop\User\LoginPageInterface;
+use Sylius\Behat\Page\Shop\Account\LoginPageInterface;
 use Sylius\Behat\Page\Shop\User\RegisterPageInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
@@ -72,12 +72,14 @@ final class UserContext implements Context
     }
 
     /**
-     * @Given /^I log in as "([^"]*)" with "([^"]*)" password$/
+     * @Given I log in as :email with :password password
      */
-    public function iLogInAs($login, $password)
+    public function iLogInAsWithPassword($email, $password)
     {
         $this->loginPage->open();
-        $this->loginPage->logIn($login, $password);
+        $this->loginPage->specifyUserName($email);
+        $this->loginPage->specifyPassword($password);
+        $this->loginPage->logIn();
     }
 
     /**

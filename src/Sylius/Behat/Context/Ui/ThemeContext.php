@@ -14,7 +14,7 @@ namespace Sylius\Behat\Context\Ui;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Channel\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Channel\UpdatePageInterface;
-use Sylius\Behat\Page\Shop\HomePageInterface;
+use Sylius\Behat\Page\Shop\LegacyHomePageInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
@@ -40,7 +40,7 @@ final class ThemeContext implements Context
     private $channelUpdatePage;
 
     /**
-     * @var HomePageInterface
+     * @var LegacyHomePageInterface
      */
     private $homePage;
 
@@ -48,13 +48,13 @@ final class ThemeContext implements Context
      * @param SharedStorageInterface $sharedStorage
      * @param IndexPageInterface $channelIndexPage
      * @param UpdatePageInterface $channelUpdatePage
-     * @param HomePageInterface $homePage
+     * @param LegacyHomePageInterface $homePage
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         IndexPageInterface $channelIndexPage,
         UpdatePageInterface $channelUpdatePage,
-        HomePageInterface $homePage
+        LegacyHomePageInterface $homePage
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->channelIndexPage = $channelIndexPage;

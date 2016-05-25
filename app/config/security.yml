@@ -48,6 +48,23 @@ security:
             stateless:  true
             anonymous:  true
 
+        shop:
+            switch_user: { role: ROLE_ALLOWED_TO_SWITCH }
+            context: user
+            pattern: /shop/.*
+            form_login:
+                provider: sylius_user_provider
+                login_path: sylius_shop_login
+                check_path: sylius_shop_login_check
+                failure_path: sylius_shop_login
+                default_target_path: sylius_shop_homepage
+                use_forward: false
+                use_referer: true
+            logout:
+                path: sylius_shop_logout
+                target: sylius_shop_login
+            anonymous: true
+
         main:
             switch_user: { role: ROLE_ALLOWED_TO_SWITCH }
             context:     user
@@ -83,6 +100,7 @@ security:
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: "/account.*", role: ROLE_USER }
+        - { path: "/shop/account.*", role: ROLE_USER }
 
         - { path: ^/administration/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/administration/login-check, role: IS_AUTHENTICATED_ANONYMOUSLY }

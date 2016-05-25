@@ -16,3 +16,6 @@ sylius_shop_product:
 sylius_shop_cart:
     prefix: /cart
     resource: "@SyliusShopBundle/Resources/config/routing/cart.yml"
+
+sylius_shop_security:
+    resource: "@SyliusShopBundle/Resources/config/routing/security.yml"

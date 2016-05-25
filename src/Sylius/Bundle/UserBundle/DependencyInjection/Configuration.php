@@ -223,7 +223,7 @@ class Configuration implements ConfigurationInterface
                                         ->end()
                                         ->arrayNode('registration')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(['sylius'])
+                                            ->defaultValue(['sylius', 'sylius_user_registration'])
                                         ->end()
                                     ->end()
                                 ->end()

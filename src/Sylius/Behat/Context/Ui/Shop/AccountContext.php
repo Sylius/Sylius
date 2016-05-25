@@ -13,11 +13,9 @@ namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\NotificationType;
-use Sylius\Behat\Page\Shop\Account\DashboardPage;
 use Sylius\Behat\Page\Shop\Account\DashboardPageInterface;
 use Sylius\Behat\Page\Shop\Account\ProfileUpdatePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
-use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -26,33 +24,33 @@ use Webmozart\Assert\Assert;
 final class AccountContext implements Context
 {
     /**
+     * @var NotificationCheckerInterface
+     */
+    private $notificationChecker;
+
+    /**
      * @var DashboardPageInterface
      */
     private $dashboardPage;
-    
+
     /**
      * @var ProfileUpdatePageInterface
      */
     private $profileUpdatePage;
 
     /**
-     * @var NotificationCheckerInterface
-     */
-    private $notificationChecker;
-
-    /**
+     * @param NotificationCheckerInterface $notificationChecker
      * @param DashboardPageInterface $dashboardPage
      * @param ProfileUpdatePageInterface $profileUpdatePage
-     * @param NotificationCheckerInterface $notificationChecker
      */
     public function __construct(
+        NotificationCheckerInterface $notificationChecker,
         DashboardPageInterface $dashboardPage,
-        ProfileUpdatePageInterface $profileUpdatePage,
-        NotificationCheckerInterface $notificationChecker
+        ProfileUpdatePageInterface $profileUpdatePage
     ) {
+        $this->notificationChecker = $notificationChecker;
         $this->dashboardPage = $dashboardPage;
         $this->profileUpdatePage = $profileUpdatePage;
-        $this->notificationChecker = $notificationChecker;
     }
 
     /**

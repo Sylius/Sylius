@@ -24,13 +24,13 @@
                     "Please choose your gender."
                 ]
             },
-            "groups": {},
             "phoneNumber": {},
+            "groups": {},
             "user": {
                 "children": {
                     "plainPassword": {
                         "errors": [
-                            "This value should not be blank."
+                            "Please enter your password."
                         ]
                     },
                     "enabled": {},
