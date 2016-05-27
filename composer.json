@@ -192,7 +192,11 @@
         ]
     },
     "autoload": {
-        "psr-0": { "Sylius\\": "src/" }
+        "psr-4": {
+            "Sylius\\Behat\\": "src/Sylius/Behat/",
+            "Sylius\\Bundle\\": "src/Sylius/Bundle/",
+            "Sylius\\Component\\": "src/Sylius/Component/"
+        }
     },
     "config": {
         "bin-dir": "bin"

@@ -1,0 +1,12 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+imports:
+    - { resource: "state_machine.yml" }
+
+jms_serializer:
+    metadata:
+        directories:
+            sylius-shipping:
+                namespace_prefix: "Sylius\\Component\\Shipping"
+                path: "@SyliusShippingBundle/Resources/config/serializer"

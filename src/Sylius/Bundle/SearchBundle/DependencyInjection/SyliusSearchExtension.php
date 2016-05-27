@@ -14,6 +14,7 @@ namespace Sylius\Bundle\SearchBundle\DependencyInjection;
 use FOS\ElasticaBundle\DependencyInjection\Configuration as FosElasticaConfiguration;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Sylius\Bundle\SearchBundle\DependencyInjection\Configuration as SyliusSearchConfiguration;
+use Sylius\Bundle\SearchBundle\Extension\Doctrine\MatchAgainstFunction;
 use Sylius\Bundle\SearchBundle\Listener\ElasticaProductListener;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
@@ -34,17 +35,11 @@ class SyliusSearchExtension extends AbstractResourceExtension implements Prepend
     public function load(array $config, ContainerBuilder $container)
     {
         $config = $this->processConfiguration($this->getConfiguration($config, $container), $config);
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
 
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
-        $configFiles = [
-            'services.xml',
-        ];
-
-        foreach ($configFiles as $configFile) {
-            $loader->load($configFile);
-        }
+        $loader->load('services.xml');
 
         $container->setParameter('sylius_search.config', $config);
 
@@ -68,6 +63,7 @@ class SyliusSearchExtension extends AbstractResourceExtension implements Prepend
     public function prepend(ContainerBuilder $container)
     {
         $this->prependElasticaProductListener($container);
+        $this->prependDoctrineOrm($container);
     }
 
     /**
@@ -99,5 +95,29 @@ class SyliusSearchExtension extends AbstractResourceExtension implements Prepend
                 }
             }
         }
+    }
+
+    /**
+     * @param ContainerBuilder $container
+     */
+    private function prependDoctrineOrm(ContainerBuilder $container)
+    {
+        if (!$container->hasExtension('doctrine')) {
+            return;
+        }
+
+        $container->prependExtensionConfig('doctrine', [
+            'orm' => [
+                'entity_managers' => [
+                    'default' => [
+                        'dql' => [
+                            'string_functions' => [
+                                'MATCH' => MatchAgainstFunction::class,
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+        ]);
     }
 }

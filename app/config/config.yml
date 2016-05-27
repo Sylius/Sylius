@@ -2,87 +2,61 @@
 # (c) Paweł Jędrzejewski
 
 imports:
-    - { resource: @SyliusCoreBundle/Resources/config/app/parameters.yml }
-    - { resource: parameters.yml }
-    - { resource: security.yml }
-    - { resource: migrations.yml }
-    - { resource: @SyliusCoreBundle/Resources/config/app/main.yml }
-    - { resource: @SyliusAdminBundle/Resources/config/app/main.yml }
+    - { resource: "parameters.yml" }
+    - { resource: "security.yml" }
+
+    - { resource: "@SyliusCoreBundle/Resources/config/app/config.yml" }
+    - { resource: "@SyliusWebBundle/Resources/config/app/config.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/app/config.yml" }
 
 framework:
-    translator:      { fallback: %locale% }
-    secret:          %secret%
+    translator: { fallback: "%locale%" }
+    secret: "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"
-        strict_requirements: %kernel.debug%
-    form:            true
+        strict_requirements: "%kernel.debug%"
+    form: true
     csrf_protection: true
-    validation:      { enable_annotations: true }
-    templating:      { engines: ['twig'] }
-    default_locale:  "%locale%"
+    validation: { enable_annotations: true }
+    templating: { engines: ["twig"] }
+    default_locale: "%locale%"
     trusted_proxies: ~
     session:
-        # handler_id set to null will use default session handler from php.ini
-        handler_id:  ~
-
-twig:
-    form:
-        resources:
-            - SyliusWebBundle:Common:forms.html.twig
-            - SyliusResourceBundle::forms.html.twig
-            - CmfMediaBundle:Form:fields.html.twig
-    debug:            %kernel.debug%
-    strict_variables: %kernel.debug%
-    paths:
-        %kernel.root_dir%/../vendor/payum/payum/src/Payum/Core/Resources/views: PayumCore
-        %kernel.root_dir%/../vendor/payum/payum/src/Payum/Stripe/Resources/views: PayumStripe
-
-assetic:
-    debug:          %kernel.debug%
-    use_controller: false
-    bundles:        ['SyliusWebBundle', 'CmfCreateBundle', 'SyliusResourceBundle']
-    filters:
-        cssrewrite: ~
+        handler_id: ~
 
 doctrine:
     dbal:
-        driver:   %database_driver%
-        host:     %database_host%
-        port:     %database_port%
-        dbname:   %database_name%
-        user:     %database_user%
-        password: %database_password%
-        charset:  UTF8
-    orm:
-        auto_generate_proxy_classes: %kernel.debug%
-        entity_managers:
-            default:
-                auto_mapping: true
-                mappings:
-                    gedmo_loggable:
-                        type: annotation
-                        prefix: Gedmo\Loggable\Entity
-                        dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Loggable/Entity"
-                        is_bundle: false
-                dql:
-                    string_functions:
-                        MATCH: Sylius\Bundle\SearchBundle\Extension\Doctrine\MatchAgainstFunction
+        driver: "%database_driver%"
+        host: "%database_host%"
+        port: "%database_port%"
+        dbname: "%database_name%"
+        user: "%database_user%"
+        password: "%database_password%"
+        charset: UTF8
 
-doctrine_phpcr:
-    session:
-        backend: %phpcr_backend%
-        workspace: %phpcr_workspace%
-    odm:
-        auto_mapping: true
-        auto_generate_proxy_classes: %kernel.debug%
+doctrine_migrations:
+    dir_name: "%kernel.root_dir%/migrations"
+    namespace: Sylius\Migrations
+    table_name: sylius_migrations
+    name: Sylius Migrations
 
 swiftmailer:
-    transport: %mailer_transport%
-    host:      %mailer_host%
-    username:  %mailer_user%
-    password:  %mailer_password%
+    transport: "%mailer_transport%"
+    host: "%mailer_host%"
+    username: "%mailer_user%"
+    password: "%mailer_password%"
+
+twig:
+    form_themes:
+        - "SyliusWebBundle:Common:forms.html.twig"
+        - "SyliusResourceBundle::forms.html.twig"
 
 fos_rest:
+    view:
+        formats:
+            json: true
+            xml:  true
+        empty_content: 204
     format_listener:
         rules:
             - { path: '^/api', priorities: ['json', 'xml'], fallback_format: json, prefer_extension: true }

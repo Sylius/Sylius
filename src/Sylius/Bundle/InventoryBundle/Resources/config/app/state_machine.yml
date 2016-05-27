@@ -1,0 +1,31 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+winzou_state_machine:
+    sylius_inventory_unit:
+        class: "%sylius.model.inventory_unit.class%"
+        property_path: inventoryState
+        graph: sylius_inventory_unit
+        state_machine_class: "%sylius.state_machine.class%"
+        states:
+            checkout: ~
+            onhold: ~
+            sold: ~
+            backordered: ~
+            returned: ~
+        transitions:
+            hold:
+                from: [checkout]
+                to: onhold
+            release:
+                from: [onhold]
+                to: checkout
+            backorder:
+                from: [checkout, onhold]
+                to: backordered
+            sell:
+                from: [checkout, onhold, backordered]
+                to: sold
+            return:
+                from: [shipped]
+                to: returned

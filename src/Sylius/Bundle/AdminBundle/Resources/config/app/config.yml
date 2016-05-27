@@ -1,0 +1,40 @@
+imports:
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/channel.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/country.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/currency.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/customer.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/locale.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/order.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/payment_method.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/product.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/product_attribute.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/product_option.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/product_variant.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/promotion.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/promotion_coupon.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/shipping_method.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/tax_category.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/tax_rate.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/zone.yml" }
+
+sylius_grid:
+    templates:
+        action:
+            manage_coupons: "SyliusAdminBundle:Promotion/Action:manageCoupons.html.twig"
+            create_coupon: "SyliusAdminBundle:PromotionCoupon/Action:create.html.twig"
+            update_coupon: "SyliusAdminBundle:PromotionCoupon/Action:update.html.twig"
+            delete_coupon: "SyliusAdminBundle:PromotionCoupon/Action:delete.html.twig"
+            generate_coupon: "SyliusAdminBundle:PromotionCoupon/Action:generate.html.twig"
+            create_zone: "SyliusAdminBundle:Zone/Action:createZone.html.twig"
+            create_product: "SyliusAdminBundle:Product/Action:createProduct.html.twig"
+            create_product_attribute: "SyliusAdminBundle:ProductAttribute/Action:createProductAttribute.html.twig"
+            create_variant: "SyliusAdminBundle:ProductVariant/Action:create.html.twig"
+            update_variant: "SyliusAdminBundle:ProductVariant/Action:update.html.twig"
+            delete_variant: "SyliusAdminBundle:ProductVariant/Action:delete.html.twig"
+            show: "SyliusAdminBundle:Grid/Action:show.html.twig"
+            create: "SyliusAdminBundle:Grid/Action:create.html.twig"
+            update: "SyliusAdminBundle:Grid/Action:update.html.twig"
+            delete: "SyliusAdminBundle:Grid/Action:delete.html.twig"
+        filter:
+            string: "SyliusAdminBundle:Grid/Filter:string.html.twig"
+            boolean: "SyliusAdminBundle:Grid/Filter:boolean.html.twig"

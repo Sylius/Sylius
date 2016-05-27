@@ -10,17 +10,11 @@
 /app/config/parameters.yml
 /app/config/*.local.yml
 
+/web/assets
 /web/bundles
-/web/assets/admin
-/web/assets/shop
-/web/assets/css
-/web/assets/js
-/web/assets/fonts
-/web/assets/img
-/web/assets/compiled
-/web/media
 /web/css
 /web/js
+/web/media
 
 /bin
 /vendor

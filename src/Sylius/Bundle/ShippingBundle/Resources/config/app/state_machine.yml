@@ -1,0 +1,81 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+winzou_state_machine:
+    sylius_shipment:
+        class: "%sylius.model.shipment.class%"
+        property_path: state
+        graph: sylius_shipment
+        state_machine_class: "%sylius.state_machine.class%"
+        states:
+            checkout: ~
+            pending: ~
+            onhold: ~
+            ready: ~
+            backordered: ~
+            shipped: ~
+            cancelled: ~
+            returned: ~
+        transitions:
+            hold:
+                from: [checkout]
+                to: onhold
+            release:
+                from: [onhold]
+                to: checkout
+            backorder:
+                from: [checkout, onhold]
+                to: backordered
+            prepare:
+                from: [checkout, onhold, backordered]
+                to: ready
+            ship:
+                from: [ready]
+                to: shipped
+            cancel:
+                from: [checkout, onhold, ready, backordered]
+                to: cancelled
+            return:
+                from: [shipped]
+                to: returned
+        callbacks:
+            after:
+                sylius_sync_units:
+                    do: ["@sm.callback.cascade_transition", "apply"]
+                    args: ["object.getUnits()", "event", "null", "'sylius_shipment_unit'"]
+
+    sylius_shipment_unit:
+        class: "%sylius.model.shipment_unit.class%"
+        property_path: shippingState
+        graph: sylius_shipment_unit
+        state_machine_class: "%sylius.state_machine.class%"
+        states:
+            checkout: ~
+            onhold: ~
+            ready: ~
+            backordered: ~
+            shipped: ~
+            cancelled: ~
+            returned: ~
+        transitions:
+            hold:
+                from: [checkout]
+                to: onhold
+            release:
+                from: [onhold]
+                to: checkout
+            backorder:
+                from: [checkout, onhold]
+                to: backordered
+            prepare:
+                from: [checkout, onhold, backordered]
+                to: ready
+            ship:
+                from: [ready]
+                to: shipped
+            cancel:
+                from: [checkout, onhold, ready, backordered]
+                to: cancelled
+            return:
+                from: [shipped]
+                to: returned

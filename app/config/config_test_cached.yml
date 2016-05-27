@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 imports:
-    - { resource: config_test.yml }
+    - { resource: "config_test.yml" }
 
 doctrine:
     orm:

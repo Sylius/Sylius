@@ -1,0 +1,210 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+winzou_state_machine:
+    sylius_order_checkout:
+        class: "%sylius.model.order.class%"
+        property_path: checkoutState
+        graph: sylius_order_checkout
+        state_machine_class: "%sylius.state_machine.class%"
+        states:
+            cart: ~
+            addressed: ~
+            shipping_selected: ~
+            payment_selected: ~
+            completed: ~
+        transitions:
+            address:
+                from: [cart]
+                to: addressed
+            readdress:
+                from: [payment_selected, shipping_selected, addressed]
+                to: cart
+            select_shipping:
+                from: [addressed]
+                to: shipping_selected
+            reselect_shipping:
+                from: [payment_selected, shipping_selected]
+                to: addressed
+            select_payment:
+                from: [shipping_selected]
+                to: payment_selected
+            reselect_payment:
+                from: [payment_selected]
+                to: shipping_selected
+            complete:
+                from: [payment_selected]
+                to: completed
+        callbacks:
+            after:
+                recalculate_order:
+                    on: ["address", "readdress", "select_shipping", "reselect_shipping", "select_payment", "reselect_payment"]
+                    do: ["@sylius.order_processing.order_recalculator", "recalculate"]
+                    args: ["object"]
+
+    sylius_order_shipping:
+        class: "%sylius.model.order.class%"
+        property_path: shippingState
+        graph: sylius_order_shipping
+        state_machine_class: "%sylius.state_machine.class%"
+        states:
+            checkout: ~
+            onhold: ~
+            ready: ~
+            backordered: ~
+            partially_shipped: ~
+            shipped: ~
+            cancelled: ~
+            returned: ~
+        transitions:
+            hold:
+                from: [checkout]
+                to: onhold
+            create:
+                from: [checkout, onhold]
+                to: ready
+            ship:
+                from: [ready, partially_shipped]
+                to: shipped
+            ship_partially:
+                from: [ready, partially_shipped]
+                to: partially_shipped
+            return:
+                from: [partially_shipped, shipped]
+                to: returned
+            cancel:
+                from: [checkout, onhold, ready, backordered]
+                to: cancelled
+
+    sylius_order_payment:
+        class: "%sylius.model.order.class%"
+        property_path: paymentState
+        graph: sylius_order_payment
+        state_machine_class: "%sylius.state_machine.class%"
+        states:
+            new: ~
+            pending: ~
+            processing: ~
+            completed: ~
+            void: ~
+            failed: ~
+            cancelled: ~
+            refunded: ~
+        transitions:
+            create:
+                from: [new]
+                to: pending
+            process:
+                from: [new, pending]
+                to: processing
+            complete:
+                from: [pending, processing]
+                to: completed
+            fail:
+                from: [pending, processing]
+                to: failed
+            cancel:
+                from: [new, pending, processing]
+                to: cancelled
+            refund:
+                from: [completed]
+                to: refunded
+
+    sylius_payment:
+        callbacks:
+            after:
+                sylius_update_order:
+                    on: "complete"
+                    do: ["@sylius.callback.order_payment", "updateOrderOnPayment"]
+                    args: ["object"]
+
+    sylius_order:
+        callbacks:
+            after:
+                sylius_update_inventory:
+                    on: "confirm"
+                    do: ["@sylius.order_processing.inventory_handler", "updateInventory"]
+                    args: ["object"]
+                sylius_update_shipment:
+                    on: "confirm"
+                    do: ["@sylius.callback.shipment_states", "updateOrderShipmentStates"]
+                    args: ["object"]
+                sylius_increment_coupon:
+                    on: "confirm"
+                    do: ["@sylius.callback.coupon_usage", "incrementCouponUsage"]
+                    args: ["object"]
+                sylius_order_confirmation_email:
+                    on: ["confirm"]
+                    do: ["@sylius.email_manager.order", "sendConfirmationEmail"]
+                    args: ["object"]
+                sylius_release_inventory:
+                    on: "release"
+                    do: ["@sylius.order_processing.inventory_handler", "releaseInventory"]
+                    args: ["object"]
+                sylius_release_shipment:
+                    on: "release"
+                    do: ["@sm.callback.cascade_transition", "apply"]
+                    args: ["object.getShipments()", "event", "'release'", "'sylius_shipment'"]
+                sylius_void_payment:
+                    on: "release"
+                    do: ["@sm.callback.cascade_transition", "apply"]
+                    args: ["object.getPayments()", "event", "'void'", "'sylius_payment'"]
+                sylius_increment_sold_variants:
+                    on: "confirm"
+                    do: ["@sylius.callback.complete_order", "increaseSoldVariants"]
+                    args: ["object"]
+                sylius_decrement_sold_variants:
+                    on: "cancel"
+                    do: ["@sylius.callback.complete_order", "decreaseSoldVariants"]
+                    args: ["object"]
+                sylius_increment_promotion:
+                    on: "create"
+                    do: ["@sylius.callback.promotion_usage", "incrementPromotionUsage"]
+                    args: ["object"]
+                sylius_decrement_promotion:
+                    on: ["release", "abandon"]
+                    do: ["@sylius.callback.promotion_usage", "decrementPromotionUsage"]
+                    args: ["object"]
+
+    sylius_inventory_unit:
+        callbacks:
+            after:
+                sylius_sync_shipping:
+                    excluded_to: [sold]
+                    do: ["@sm.callback.cascade_transition", "apply"]
+                    args: ["object", "event", "null", "'sylius_shipment_unit'"]
+
+    sylius_shipment:
+        callbacks:
+            after:
+                sylius_sync_order_ship:
+                    to: "shipped"
+                    do: ["@sylius.callback.order_shipment", "updateOrderShippingState"]
+                    args: ["object.getOrder()"]
+                sylius_shipping_confirmation_email:
+                    to: "shipped"
+                    do: ["@sylius.email_manager.shipment", "sendConfirmationEmail"]
+                    args: ["object"]
+
+    sylius_review:
+        class: "%sylius.model.product_review.class%"
+        property_path: status
+        graph: sylius_product_review
+        state_machine_class: Sylius\Component\Resource\StateMachine\StateMachine
+        states:
+            new: ~
+            accepted: ~
+            rejected: ~
+        transitions:
+            accept:
+                from: [new]
+                to: accepted
+            reject:
+                from: [new]
+                to: rejected
+        callbacks:
+            after:
+                update_price:
+                    on: "accept"
+                    do: ["@sylius.review.updater.average_rating", updateFromReview]
+                    args: ["object"]
