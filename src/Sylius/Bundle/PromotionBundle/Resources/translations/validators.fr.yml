@@ -32,3 +32,5 @@ sylius:
         code_length:
             min: "Le coupon doit être d'au moins {{ limit }} caractères."
             max: 'Le coupon ne peut faire plus de {{ limit }} caractères.'
+            not_blank: Veuillez saisir la longueur du code promo.
+        possible_generation_amount: 'La longueur du code ou la quantité du coupon sont invalides. Il est impossible de générer %expectedAmount% coupons unique avec une longueur de code de %codeLength%. La quantité possible de coupon à générer est de %possibleAmount%.'

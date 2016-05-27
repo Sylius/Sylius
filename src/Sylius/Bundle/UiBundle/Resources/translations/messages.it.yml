@@ -21,6 +21,7 @@ sylius:
         cancel: Annulla
         cancelled: Annullato
         category_requirements: Requisiti della categoria
+        change_your_password: Modifica la password
         charges_and_taxes: Spese e tasse
         checkout: Checkout
         clear_filters: Cancella filtri
@@ -64,11 +65,13 @@ sylius:
         extra_information: Informazioni aggiuntive
         filter: Filtri
         go: Vai
+        generate_coupons: Genera coupon
         in: In
         info: Info
         item: Articolo
         jump_to_page: Vai alla pagina
         last_updated: Ultimo aggiornamento
+        list_coupons: Lista coupon
         locales: Localizzazioni
         manage_attributes_of_your_products: Gestisci gli attributi dei tuoi prodotti
         manage_categorization_of_your_products: Gestisci la categorizzazione dei vostri prodotti

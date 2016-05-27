@@ -25,7 +25,7 @@ sylius:
             title: Tiêu đề
         product_filter:
             name: Tên
-            sku: MÃ SẢN PHẨM
+            code: Mã
         settings:
             general:
                 locale: Ngôn ngữ

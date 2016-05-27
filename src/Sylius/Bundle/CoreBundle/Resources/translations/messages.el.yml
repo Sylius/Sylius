@@ -43,7 +43,7 @@ sylius:
             variant_selection_method: Μέθοδος επιλογής παραλλαγής
         product_filter:
             name: Ονομασία
-            sku: ΚΩΔΙΚΟΣ ΠΡΟΪΟΝΤΟΣ
+            code: Κώδικος
         product_variant:
             tax_category: Φορολογική κατηγορία
         settings:

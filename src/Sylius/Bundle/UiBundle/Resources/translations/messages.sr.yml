@@ -16,6 +16,8 @@ sylius:
         delete: Обриши
         edit: Измени
         filter: Филтер
+        generate_coupons: Генериши купоне
+        list_coupons: Листа купона
         new_country: Нова земља
         new_tax_category: Нова категорија пореза
         "no": false

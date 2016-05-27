@@ -94,6 +94,18 @@ sylius:
         no_route: 如果没有定义路由，您的内容不会在前端显示
         publishable: 发布
     payment:
+        state:
+            checkout: 结账
+            completed: 已完成
+            authorized: 已授权
+            failed: 失败
+            new: 新增
+            pending: 等待中
+            processing: 处理中...
+            unknown: 未知
+            void: 作废
+            cancelled: 已取消.
+            refunded: 已退款
         transition:
             cancel: 取消
             complete: 完成
@@ -120,6 +132,15 @@ sylius:
             no_account: 尚无帐号
     shipment:
         no_items: 没有要显示的项目
+        state:
+            ready: 就绪
+            returned: 已返还
+            shipped: 已发货
+            pending: 等待中
+            onhold: 搁置
+            backordered: 未出货订单
+            cancelled: 已取消.
+            partially_shipped: 部分已发货
         transition:
             backorder: 延期交货
             cancel: 取消
@@ -194,8 +215,6 @@ sylius:
         cart_summary: 购物车清单
         categorization: 分类
         category: 分类
-        change_password: 更改您的密码
-        change_your_password: 更改您的密码
         channel: 頻道
         channels: 频道
         checkout: 结账

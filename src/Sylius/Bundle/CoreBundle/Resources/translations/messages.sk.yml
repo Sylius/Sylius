@@ -62,7 +62,7 @@ sylius:
             main_taxon: Hlavná kategória
         product_filter:
             name: Názov
-            sku: Skladový kód (SKU)
+            code: Kód
         product_variant:
             tax_category: Daňová kategória
         settings:

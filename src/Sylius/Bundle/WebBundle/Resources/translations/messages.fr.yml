@@ -13,6 +13,11 @@ sylius:
                 ready: 'Prêt depuis %at%'
                 returned: 'Retourné le %at%'
                 shipped: 'Livré le %at%'
+                checkout: 'Vérifié le %at%'
+                pending: 'En attente depuis le %at%'
+                onhold: 'En attente depuis le %at%'
+                backordered: 'En rupture de stock depuis le %at%'
+                cancelled: 'Annulé le %at%'
         title: Mon compte
     archetype:
         build: Construire un prototype
@@ -85,6 +90,8 @@ sylius:
         no_shipments: Aucune expédition pour cette commande
         no_shipping_charges: Aucun frais de port appliqué
         no_taxes: Pas de taxe appliquée
+        state:
+            order_confirmed: Commande confirmée
     order_item:
         quantity: Quantité
         sellable: Produit
@@ -92,6 +99,18 @@ sylius:
         no_route: "Votre contenu ne va pas apparaître sur la boutique si aucune route n'est définie"
         publishable: Publié
     payment:
+        state:
+            checkout: Paiement
+            completed: Complété
+            authorized: Autorisé
+            failed: Échoué
+            new: Nouveau
+            pending: En attente
+            processing: En cours
+            unknown: Inconnu
+            void: Nul
+            cancelled: Annulé
+            refunded: Remboursé
         transition:
             cancel: annuler
             complete: terminé
@@ -119,6 +138,16 @@ sylius:
             no_account: "Vous n'avez encore pas de compte"
     shipment:
         no_items: "Il n'y a aucun élément à afficher"
+        state:
+            ready: Prêt
+            returned: Retourné
+            shipped: Expédié
+            checkout: Vérifié
+            pending: En attente
+            onhold: En attente
+            backordered: Rupture de stock
+            cancelled: Annulé
+            partially_shipped: Partiellement expédiée
         transition:
             backorder: rupture de stock
             cancel: annuler
@@ -193,8 +222,6 @@ sylius:
         cart_summary: Détail du panier
         categorization: Catégorisation
         category: Catégorie
-        change_password: Modifier votre mot de passe
-        change_your_password: Modifier votre mot de passe
         channel: Canal
         channels: Canaux
         checkout: Paiement
@@ -283,6 +310,7 @@ sylius:
         customer_not_notified: Client non informé
         customer_notified: Client informé
         customer_orders: Commandes clients
+        customer_since: Client depuis le
         customers: Clients
         customers_list_of_all_customers_in_store: 'Clients <small>Liste de tous les clients de la boutique</small>'
         customize_default_metadata: Personnaliser les méta-données par défaut
@@ -301,6 +329,7 @@ sylius:
         description: Description
         details: Détails
         disable: Desactiver
+        discounted_unit_price: Prix unitaire réduit
         edit: Modifier
         edit_association_type: "Modifier le type d'association"
         edit_group: Modifier le groupe

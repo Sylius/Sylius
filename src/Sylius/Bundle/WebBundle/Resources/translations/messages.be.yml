@@ -44,10 +44,28 @@ sylius:
     order_item:
         quantity: Колькасць
         sellable: Тавар
+    payment:
+        state:
+            checkout: Афрмленне замовы
+            completed: Завершана
+            failed: Памылка
+            new: Новы
+            pending: У чаканні
+            processing: Апрацоўваецца
+            unknown: Невядома
+            void: Пусты
+            cancelled: Адменена
+            refunded: Вернута
     promotion_coupon:
         generate: Генераваць купоны
         index: Стварыць спіс купонаў
     shipment:
+        state:
+            ready: Гатова
+            returned: Вернута
+            shipped: Дастаўлена
+            pending: У чаканні
+            cancelled: Адменена
         update: Рэдагаваць
     taxon:
         image: Абраць выяву
@@ -86,8 +104,6 @@ sylius:
         cancel: Адмяніць
         categorization: Класіфікацыя
         category: Катэгорыя
-        change_password: Змяніць пароль
-        change_your_password: Змяніць пароль
         checkout: Афрмленне замовы
         choose_file: Абярыце файл
         city: Горад

@@ -92,6 +92,18 @@ sylius:
         no_route: เนื้อหาของคุณจะปรากฏในระบบหน้าบ้าน (frontend) ถ้าไม่มีเส้นทางที่กำหนด
         publishable: ตั้งเวลาเผยแพร่
     payment:
+        state:
+            checkout: ชำระเงิน
+            completed: เสร็จสมบูรณ์
+            authorized: อำนาจ
+            failed: ล้มเหลว
+            new: รายการใหม่
+            pending: อยู่ระหว่างดำเนินการ
+            processing: กำลังดำเนินการ
+            unknown: ไม่ทราบสถานะ
+            void: โมฆะ
+            cancelled: ถูกยกเลิก
+            refunded: คืนเงินแล้ว
         transition:
             cancel: ยกเลิก
             complete: เรียบร้อย
@@ -118,6 +130,13 @@ sylius:
             no_account: ไม่มีบัญชี
     shipment:
         no_items: ไม่มีรายการแสดง
+        state:
+            ready: พร้อมส่ง
+            returned: ถูกส่งคืน
+            shipped: ส่งของแล้ว
+            pending: อยู่ระหว่างดำเนินการ
+            onhold: On hold
+            cancelled: ถูกยกเลิก
         transition:
             backorder: สินค้าค้างส่ง
             cancel: ยกเลิก
@@ -192,8 +211,6 @@ sylius:
         cart_summary: ตะกร้าสินค้า
         categorization: การจัดประเภท
         category: ประเภท
-        change_password: เปลี่ยนรหัสผ่านของคุณ
-        change_your_password: เปลี่ยนรหัสผ่านของคุณ
         channel: ช่องทางการจัดจำหน่าย
         channels: ช่องทางการจัดจำหน่าย
         checkout: ชำระเงิน

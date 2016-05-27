@@ -53,7 +53,7 @@ sylius:
             variant_selection_method: Метод вибору варіанту
         product_filter:
             name: Ім’я
-            sku: Артикул
+            code: Код
         product_variant:
             tax_category: Категорія податку
         settings:

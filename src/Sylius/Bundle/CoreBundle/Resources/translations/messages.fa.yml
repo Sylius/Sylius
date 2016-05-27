@@ -62,7 +62,7 @@ sylius:
             main_taxon: رده اصلی
         product_filter:
             name: نام
-            sku: کد محصول
+            code: نام انگلیسی
         product_variant:
             tax_category: نوع مالیات
         settings:

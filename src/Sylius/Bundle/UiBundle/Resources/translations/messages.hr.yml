@@ -14,6 +14,7 @@ sylius:
         add_coupon: Dodaj kod za popust
         cancel: Prekini
         cancelled: Otkazano
+        change_your_password: Promijenite lozinku
         checkout: Blagajna
         countries: Države
         coupon_based: Promocija bazirana na kuponima za popust
@@ -26,7 +27,9 @@ sylius:
         edit: Uredi
         enabled: Omogući
         filter: Filter
+        generate_coupons: Generirajte kod za popust
         item: sylius.order_item.product
+        list_coupons: Izlist kodova za popust
         locales: Lokaliteti
         new: Novo
         new_country: Nova država

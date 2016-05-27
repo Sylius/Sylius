@@ -21,6 +21,7 @@ sylius:
         cancel: ยกเลิก
         cancelled: ถูกยกเลิก
         category_requirements: ข้อกำหนดสำหรับหมวดหมู่
+        change_your_password: เปลี่ยนรหัสผ่านของคุณ
         charges_and_taxes: ค่าธรรมเนียมและภาษี
         checkout: ชำระเงิน
         clear_filters: ล้างตัวกรอง
@@ -64,11 +65,13 @@ sylius:
         extra_information: ข้อมูลเพิ่มเติม
         filter: ตัวกรอง
         go: Go
+        generate_coupons: สร้างคูปอง
         in: ใน
         info: ข้อมูล
         item: รายการ
         jump_to_page: ไปหน้า
         last_updated: ปรับปรุงครั้งล่าสุด
+        list_coupons: รายการคูปอง
         locales: ภาษาที่ใช้
         manage_attributes_of_your_products: จัดการคุณลักษณะของสินค้าของคุณ
         manage_categorization_of_your_products: จัดการภาษี

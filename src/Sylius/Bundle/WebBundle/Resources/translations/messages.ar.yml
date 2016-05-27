@@ -15,6 +15,9 @@ sylius:
         publishable: تم النشر
     page:
         publishable: تم النشر
+    payment:
+        state:
+            new: جديد
     ui:
         add: اضافة
         city: المدينة

@@ -14,6 +14,7 @@ sylius:
         add_coupon: Přidat kupón
         cancel: Zrušit
         cancelled: Zrušeno
+        change_your_password: Změnit heslo
         checkout: Objednat
         color: Barva
         countries: Země
@@ -32,7 +33,9 @@ sylius:
         exclusive: Exkluzivní
         expires_at: Končí v
         filter: Filtr
+        generate_coupons: Generovat kupóny
         item: Položka
+        list_coupons: Seznam kupónů
         locales: Lokalizace
         new: Nový
         new_country: Nové země

@@ -44,10 +44,24 @@ sylius:
     order_item:
         quantity: Antal
         sellable: Produkt
+    payment:
+        state:
+            checkout: Til kassen
+            completed: Gennemført
+            failed: Mislykkedes
+            new: Ny
+            pending: Afventer
+            processing: Behandler
+            unknown: Ukendt
     promotion_coupon:
         generate: Generere kuponer
         index: Kupon liste
     shipment:
+        state:
+            ready: Klar
+            returned: Returneret
+            shipped: Afsendt
+            pending: Afventer
         update: Rediger
     taxon:
         image: Vælg billede
@@ -85,8 +99,6 @@ sylius:
         cancel: Anuller
         categorization: Kategorisering
         category: Kategori
-        change_password: Ændre din adgangskode
-        change_your_password: Ændre din adgangskode
         checkout: Til kassen
         choose_file: Vælg Arkiv
         city: By

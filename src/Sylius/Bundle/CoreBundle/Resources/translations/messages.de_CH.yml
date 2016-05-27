@@ -47,7 +47,7 @@ sylius:
             variant_selection_method: Varianten
         product_filter:
             name: Name
-            sku: Bestandseinheit
+            code: Code
         product_variant:
             tax_category: Steuerkategorie
         settings:

@@ -58,7 +58,7 @@ sylius:
             variant_selection_method: Varyant seçme yöntemi
         product_filter:
             name: Ad
-            sku: Stok Kodu
+            code: Kod
         product_variant:
             tax_category: Vergi kategorisi
         settings:

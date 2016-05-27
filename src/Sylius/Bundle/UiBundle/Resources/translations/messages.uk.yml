@@ -13,6 +13,7 @@ sylius:
         add_coupon: Додати купон
         cancel: Відмінити
         cancelled: Відхилено
+        change_your_password: Змінити пароль
         checkout: Оформити замовлення
         color: Колір
         countries: Країни
@@ -27,7 +28,9 @@ sylius:
         edit: Редагувати
         enabled: Увімкнено
         filter: Фільтр
+        generate_coupons: Генерувати купони
         item: Елемент
+        list_coupons: Список купонів
         locales: Локалі
         new: Новий
         new_country: Нова країна

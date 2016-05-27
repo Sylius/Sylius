@@ -62,7 +62,7 @@ sylius:
             main_taxon: หมวดหมู่หลัก
         product_filter:
             name: ชื่อ
-            sku: SKU
+            code: รหัส
         product_variant:
             tax_category: ประเภทภาษี
         settings:

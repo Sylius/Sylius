@@ -92,6 +92,18 @@ sylius:
         no_route: محتوای وارد شده بدون تعیین آدرس داخلی در صفحه ی اصلی نمایش داده نخواهد شد
         publishable: انتشار در سایت؟
     payment:
+        state:
+            checkout: پرداخت نشده
+            completed: پرداخت کامل شده
+            authorized: پرداخت تایید شده
+            failed: پرداخت ناموفق
+            new: پرداخت ثبت شده
+            pending: پرداخت منتظر تایید
+            processing: پرداخت در حال پردازش
+            unknown: پرداخت نامعلوم
+            void: پرداخت نامعتبر
+            cancelled: پرداخت لغو شده
+            refunded: پرداخت برگشت داده شده
         transition:
             cancel: لغو
             complete: تکمیل فرایند
@@ -118,6 +130,13 @@ sylius:
             no_account: ثبت نام کنید
     shipment:
         no_items: هیچ آیتمی برای نمایش وجود ندارد
+        state:
+            ready: آماده ارسال
+            returned: برگشت داده شده
+            shipped: ارسال شده
+            pending: پرداخت منتظر تایید
+            onhold: در حالت انتظار
+            cancelled: پرداخت لغو شده
         transition:
             backorder: سفارش بازگشت انتقال
             cancel: لغو
@@ -192,8 +211,6 @@ sylius:
         cart_summary: خلاصه سبد خرید
         categorization: دسته بندی
         category: دسته
-        change_password: تغییر کلمه عبور
-        change_your_password: تغییر کلمه عبور
         channel: کانال فروش
         channels: کانال های فروش
         checkout: پرداخت نشده

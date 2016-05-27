@@ -91,6 +91,19 @@ sylius:
     page:
         no_route: Vaša vsebina ne bo prikazana v ospredju, če ni definirane nobene poti
         publishable: Objavljeno
+    payment:
+        state:
+            checkout: Plačilo
+            completed: Zaključeno
+            authorized: Pooblaščeno
+            failed: Ni uspelo
+            new: Novo
+            pending: Na čakanju
+            processing: V teku
+            unknown: Ni znano
+            void: Nično
+            cancelled: Preklicano
+            refunded: Povrnjena kupnina
     pricing:
         volume_based:
             max: Največja prostornina
@@ -109,6 +122,13 @@ sylius:
             no_account: Nimate še računa
     shipment:
         no_items: Ni elementov za prikaz
+        state:
+            ready: Pripravljen
+            returned: Vrnjeno
+            shipped: Poslano
+            pending: Na čakanju
+            onhold: Na čakanju
+            cancelled: Preklicano
         update: Urejanje
     stockable:
         on_hand: Raven zalog
@@ -174,8 +194,6 @@ sylius:
         cart_locked: Košarica zaklenjena
         categorization: Kategorizacija
         category: Kategorija
-        change_password: Spremenite vaše geslo
-        change_your_password: Spremenite vaše geslo
         channel: Kanal
         channels: Kanali
         checkout: Plačilo

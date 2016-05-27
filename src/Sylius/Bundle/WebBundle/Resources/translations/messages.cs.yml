@@ -76,6 +76,19 @@ sylius:
     page:
         no_route: Váš obsah se zákazníkům nezobrazí, pokud není definováno žádné URL směrování
         publishable: Publikováno
+    payment:
+        state:
+            checkout: Objednat
+            completed: Dokončeno
+            authorized: Autorizováno
+            failed: Neúspěšné
+            new: Nový
+            pending: Čekající
+            processing: Zpracovává se
+            unknown: Neznámý
+            void: Neplatné
+            cancelled: Zrušeno
+            refunded: Platba vrácena
     pricing:
         volume_based:
             max: Maximální objem
@@ -84,6 +97,12 @@ sylius:
         generate: Generovat kupóny
         index: Seznam kupónů
     shipment:
+        state:
+            ready: Připraven
+            returned: Vráceno
+            shipped: Dodáno
+            pending: Čekající
+            cancelled: Zrušeno
         update: Úpravy
     taxon:
         image: Zvolit obrázek
@@ -136,8 +155,6 @@ sylius:
         cancel: Zrušit
         categorization: Kategorizace
         category: Kategorie
-        change_password: Změnit heslo
-        change_your_password: Změnit heslo
         channel: Kanál
         channels: Kanály
         checkout: Objednat

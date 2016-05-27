@@ -19,6 +19,8 @@ sylius:
         description: Descrição
         edit: Editar
         filter: Filtrar
+        generate_coupons: Gerar cupons
+        list_coupons: Cupons
         new: Novo
         new_country: Novo país
         new_tax_category: Nova categoria de imposto

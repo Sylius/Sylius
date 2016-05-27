@@ -21,6 +21,7 @@ sylius:
         cancel: Annuleren
         cancelled: Geannuleerd
         category_requirements: Categorie vereisten
+        change_your_password: Verander uw wachtwoord
         charges_and_taxes: Heffingen en belastingen
         checkout: Afrekenen
         clear_filters: Wis filters
@@ -64,11 +65,13 @@ sylius:
         extra_information: Extra informatie
         filter: Filter
         go: Ga
+        generate_coupons: Coupons genereren
         in: In
         info: Info
         item: Artikel
         jump_to_page: Ga naar pagina
         last_updated: Laatst bijgewerkt
+        list_coupons: Lijst van coupons
         locales: "Talen/Regio's"
         manage_attributes_of_your_products: Beheer kenmerken van uw producten
         manage_categorization_of_your_products: Beheer categorisering van uw producten

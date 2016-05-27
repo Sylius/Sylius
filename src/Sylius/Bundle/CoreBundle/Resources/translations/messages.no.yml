@@ -51,7 +51,7 @@ sylius:
             variant_selection_method: Metode for valg av variant
         product_filter:
             name: Navn
-            sku: Strekkode
+            code: Kode
         product_variant:
             tax_category: Skattekategori
         settings:

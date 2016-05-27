@@ -22,6 +22,7 @@ sylius:
         cancel: '取消 '
         cancelled: 已取消.
         category_requirements: 类别要求
+        change_your_password: 更改您的密码
         charges_and_taxes: 费和税
         checkout: 结账
         clear_filters: 清除筛选
@@ -67,11 +68,13 @@ sylius:
         extra_information: 额外信息
         filter: 筛选器
         go: 前往
+        generate_coupons: 生成优惠券
         in: 在
         info: 信息
         item: 项
         jump_to_page: 跳转到页
         last_updated: 上次更新时间：
+        list_coupons: 优惠券列表
         locales: 区域设置
         manage_attributes_of_your_products: 管理您的产品属性
         manage_categorization_of_your_products: 管理您的产品分类

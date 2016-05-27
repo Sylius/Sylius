@@ -13,6 +13,7 @@ sylius:
         add_coupon: Дадаць купон
         cancel: Адмяніць
         cancelled: Адменена
+        change_your_password: Змяніць пароль
         checkout: Афрмленне замовы
         countries: Краіны
         coupon_based: Заснавана на купонах
@@ -25,7 +26,9 @@ sylius:
         edit: Рэдагаваць
         enabled: Уключана
         filter: Фільтр
+        generate_coupons: Генераваць купоны
         item: Тавар
+        list_coupons: Стварыць спіс купонаў
         locales: Месцы размяшчэння
         new: Новы
         new_country: Новая краіна

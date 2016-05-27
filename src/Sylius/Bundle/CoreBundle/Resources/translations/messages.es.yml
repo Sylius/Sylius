@@ -62,7 +62,7 @@ sylius:
             main_taxon: Clasificación principal
         product_filter:
             name: Nombre
-            sku: SKU
+            code: Código
         product_variant:
             tax_category: Categoría de impuestos
         settings:

@@ -18,6 +18,7 @@ sylius:
         are_your_sure_you_want_to_perform_this_action: Möchten Sie diese Aktion sicher durchführen?
         cancel: Abbrechen
         cancelled: Abgebrochen
+        change_your_password: Passwort ändern
         checkout: Zur Kasse
         clear_filters: Filter löschen
         color: Farbe
@@ -45,10 +46,12 @@ sylius:
         exclusive: Exklusiv
         expires_at: Verfällt am
         filter: Filtern
+        generate_coupons: Generieren
         in: In
         info: Info
         item: Produkt
         last_updated: Letzte Aktualisierung
+        list_coupons: Gutscheine
         locales: Gebietsschemata
         manage_taxation_of_your_products: Besteuerung der Produkte verwalten
         new: Neu

@@ -57,10 +57,28 @@ sylius:
         sellable: Produs
     page:
         publishable: Publicat
+    payment:
+        state:
+            checkout: Trimite comanda
+            completed: Finalizată
+            failed: Eșuată
+            new: Nouă
+            pending: În așteptare
+            processing: În curs de procesare
+            unknown: Necunoscută
+            void: Nulă
+            cancelled: Anulată
+            refunded: Rambursată
     promotion_coupon:
         generate: Generare coduri promoționale
         index: Listare coduri promoționale
     shipment:
+        state:
+            ready: Gata
+            returned: Returnată
+            shipped: Expediată
+            pending: În așteptare
+            cancelled: Anulată
         update: Editare
     taxon:
         image: Selectaţi imagine
@@ -100,8 +118,6 @@ sylius:
         cancel: Anulează
         categorization: Categorizare
         category: Categorie
-        change_password: Modificare parolă
-        change_your_password: Modificare parolă
         checkout: Finalizare comandă
         choose_file: Alege fișier
         city: Oraș
