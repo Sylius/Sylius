@@ -1,0 +1,12 @@
+{% import 'SyliusUiBundle:Macro:buttons.html.twig' as buttons %}
+
+{% if not data.isSimple %}
+    <div class="ui floating labeled icon dropdown button link">
+        <i class="cubes icon"></i>
+        <span class="text">{{ 'sylius.ui.manage_variants'|trans }}</span>
+        <div class="menu">
+            <a class="item" href="{{ path('sylius_admin_product_variant_index', { productId: data.id }) }}"><i class="list icon"></i> {{ 'sylius.ui.list_variants'|trans }}</a>
+            <a class="item" href="{{ path('sylius_admin_product_variant_create', { productId: data.id }) }}"><i class="plus icon"></i> {{ 'sylius.ui.add'|trans }}</a>
+        </div>
+    </div>
+{% endif %}

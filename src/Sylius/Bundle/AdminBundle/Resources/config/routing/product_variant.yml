@@ -14,7 +14,7 @@ sylius_admin_product_variant_index:
                 templates:
                     breadcrumb: SyliusAdminBundle:ProductVariant/Breadcrumb:_index.html.twig
                 icon: cubes
-                subheader: sylius.ui.manage_coupons
+                subheader: sylius.ui.manage_variants
 
 sylius_admin_product_variant_create:
     path: /new

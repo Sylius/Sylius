@@ -38,6 +38,8 @@ sylius_grid:
                     create:
                         type: create_product
                 item:
+                    manage_variants:
+                        type: manage_variants
                     update:
                         type: update
                     delete:

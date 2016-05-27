@@ -58,9 +58,9 @@ sylius:
         edit_product: Edit product
         edit_product_attribute: Edit product attribute
         edit_product_option: Edit product option
+        edit_product_variant: Edit product variant
         edit_promotion: Edit promotion
         edit_promotion_coupon: Edit promotion coupon
-        edit_coupon: Edit coupon
         edit_shipping_method: Edit shipping method
         edit_tax_category: Edit tax category
         edit_tax_rate: Edit tax rate
@@ -84,6 +84,7 @@ sylius:
         jump_to_page: Jump to page
         last_updated: Last updated
         list_coupons: List coupons
+        list_variants: List variants
         locales: Locales
         manage_attributes_of_your_products: Manage attributes of your products
         manage_categorization_of_your_products: Manage categorization of your products
@@ -97,6 +98,7 @@ sylius:
         manage_shipping_destinations: Manage shipping destinations
         manage_shipping_methods_for_your_store: Manage shipping methods for your store
         manage_taxation_of_your_products: Manage taxation of your products
+        manage_variants: Manage variants
         manage_your_customers: Manage your customers
         manage_your_product_catalog: Manage your product catalog
         media: Media
@@ -130,6 +132,7 @@ sylius:
         price: Price
         privacy_policy: Privacy Policy
         process_your_orders: Process your orders
+        product_variants: Product variants
         promotion_configuration: Promotion configuration
         promotion_information: Promotion information
         purchased_from: Purchased from
