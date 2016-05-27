@@ -82,15 +82,10 @@ EOT
             }
         }
 
-        $map = [
-            Kernel::ENV_DEV => '/app_dev.php',
-            Kernel::ENV_TEST => '/app_test.php',
-            Kernel::ENV_STAGING => '/app_staging.php',
-            Kernel::ENV_PROD => '/',
-        ];
+        $frontControllerPath = 'prod' === $this->getEnvironment() ? '/' : sprintf('/app_%s.php', $this->getEnvironment());
 
         $output->writeln($this->getProperFinalMessage());
-        $output->writeln(sprintf('You can now open your store at the following path under the website root: <info>%s.</info>', $map[$this->getEnvironment()]));
+        $output->writeln(sprintf('You can now open your store at the following path under the website root: <info>%s.</info>', $frontControllerPath));
     }
 
     /**

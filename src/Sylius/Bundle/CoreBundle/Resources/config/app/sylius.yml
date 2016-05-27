@@ -1,13 +1,6 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-parameters:
-    sylius.inventory.holding.duration: 15 minutes
-    sylius.order.pending.duration: 3 hours
-    sylius.cache:
-        type: file_system
-    sylius.uploader.filesystem: sylius_image
-
 sylius_addressing:
     scopes:
         shipping: shipping
