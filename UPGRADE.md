@@ -3,7 +3,9 @@ UPGRADE
 
 ## From 0.18 to 0.19.x
 
+### Variation and VariationBundle
 
+* Removed concept of master variant (removed ``$master`` flag from ``Sylius\Component\Variation\Model\Variant``), all usages of **master** variant has been, for now, replaced with **first** variant;
 
 ## From 0.17 to 0.18.x
 

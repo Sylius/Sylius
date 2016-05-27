@@ -94,18 +94,17 @@ Product variants management
    use Sylius\Component\Product\Model\Variant;
 
    $variant = new Variant();
-   $masterVariant = new Variant();
    $availableVariant = new Variant();
 
    $variants = new ArrayCollection();
 
    $availableVariant->setAvailableOn(new \DateTime());
 
-   $product->setMasterVariant($masterVariant);
-   $product->hasVariants(); // return true
+   $product->hasVariants(); // return false
 
    $product->addVariant($variant);
    $product->hasVariant($variant); // returns true
+   $product->hasVariants(); // returns true
    $product->removeVariant($variant);
 
    $variants->add($variant);
@@ -115,14 +114,11 @@ Product variants management
 
    $product->getVariants(); // Returns an array containing $variant and $availableVariant.
 
-The ``getVariants`` method returns only variants which are not set as master.
-
 .. code-block:: php
 
    $product->getAvailableVariants(); // Returns an array containing only $availableVariant.
 
-``getAvailableVariants`` ignores the master variant and
-returns only variants which ``availableOn`` property is set to a past time.
+``getAvailableVariants`` returns only variants which ``availableOn`` property is set to a past time.
 
 .. note::
    Only instances of **Variant** from the :doc:`/components/Product/index` component

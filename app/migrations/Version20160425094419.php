@@ -18,8 +18,6 @@ class Version20160425094419 extends AbstractMigration
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('DROP INDEX fulltext_search_idx ON sylius_search_index');
-        $this->addSql('CREATE INDEX fulltext_search_idx ON sylius_search_index (item_id)');
         $this->addSql('ALTER TABLE sylius_product_variant DROP is_master');
     }
 
@@ -32,7 +30,5 @@ class Version20160425094419 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() != 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('ALTER TABLE sylius_product_variant ADD is_master TINYINT(1) NOT NULL');
-        $this->addSql('DROP INDEX fulltext_search_idx ON sylius_search_index');
-        $this->addSql('CREATE FULLTEXT INDEX fulltext_search_idx ON sylius_search_index (value)');
     }
 }

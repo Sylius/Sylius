@@ -9,9 +9,9 @@
 
 {% macro volume_based_prototype(form) %}
     {% import _self as button %}
-    {% set rank = form.masterVariant.pricingConfiguration.vars.prototype.children %}
+    {% set rank = form.variant.pricingConfiguration.vars.prototype.children %}
     <tr class="sylius-assortment-product-pricing-ranks-item"
-        id="sylius_product_masterVariant_pricingConfiguration___name__">
+        id="sylius_product_variant_pricingConfiguration___name__">
         <td>{{ form_widget(rank.min) }}</td>
         <td>{{ form_widget(rank.max) }}</td>
         <td>{{ form_widget(rank.price) }}</td>
@@ -31,7 +31,7 @@
         </thead>
         <tbody id="sylius-assortment-product-pricing-ranks" class="collection-container"
                data-prototype="{{ _self.volume_based_prototype(form)|e }}">
-        {% for rank in form.masterVariant.pricingConfiguration.children %}
+        {% for rank in form.variant.pricingConfiguration.children %}
             <tr class="sylius-assortment-product-pricing-ranks-item">
                 <td>{{ form_widget(rank.children.min) }}</td>
                 <td>{{ form_widget(rank.children.max) }}</td>

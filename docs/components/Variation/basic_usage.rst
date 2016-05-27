@@ -10,11 +10,11 @@ Let's see how an exemplary class implementing the **VariableInterface** should l
 
     <?php
 
-    use Sylius\Component\Variation\Model\VariableInterface;
-    use Doctrine\Common\Collections\Collection;
     use Doctrine\Common\Collections\ArrayCollection;
-    use Sylius\Component\Variation\Model\VariantInterface;
+    use Doctrine\Common\Collections\Collection;
     use Sylius\Component\Variation\Model\OptionInterface;
+    use Sylius\Component\Variation\Model\VariableInterface;
+    use Sylius\Component\Variation\Model\VariantInterface;
 
     class Clothing implements VariableInterface
     {
@@ -34,11 +34,6 @@ Let's see how an exemplary class implementing the **VariableInterface** should l
         private $options;
 
         /**
-         * @var VariantInterface
-         */
-        private $master;
-
-        /**
          * @param string $name
          */
         public function __construct($name)
@@ -51,29 +46,9 @@ Let's see how an exemplary class implementing the **VariableInterface** should l
         /**
          * {@inheritdoc}
          */
-        public function getMasterVariant()
-        {
-            return $this->master;
-        }
-
-        /**
-         * {@inheritdoc}
-         */
-        public function setMasterVariant(VariantInterface $variant)
-        {
-            $this->master = $variant;
-        }
-
-        /**
-         * {@inheritdoc}
-         */
         public function hasVariants()
         {
-            if ($this->variants->isEmpty()) {
-                return false;
-            }
-
-            return true;
+            return !$this->variants->isEmpty();
         }
 
         /**
@@ -113,11 +88,7 @@ Let's see how an exemplary class implementing the **VariableInterface** should l
          */
         public function hasVariant(VariantInterface $variant)
         {
-            if ($this->variants->contains($variant)) {
-                return true;
-            }
-
-            return false;
+            return $this->variants->contains($variant);
         }
 
         /**
@@ -125,11 +96,7 @@ Let's see how an exemplary class implementing the **VariableInterface** should l
          */
         public function hasOptions()
         {
-            if ($this->options->isEmpty()) {
-                return false;
-            }
-
-            return true;
+            return !$this->options->isEmpty();
         }
 
         /**
@@ -169,11 +136,7 @@ Let's see how an exemplary class implementing the **VariableInterface** should l
          */
         public function hasOption(OptionInterface $option)
         {
-            if ($this->options->contains($option)) {
-                return true;
-            }
-
-            return false;
+            return $this->options->contains($option);
         }
     }
 
