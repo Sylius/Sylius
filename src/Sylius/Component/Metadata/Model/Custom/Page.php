@@ -28,6 +28,6 @@ class Page implements PageInterface
      */
     public function getMetadataIdentifier()
     {
-        throw new \LogicException(__METHOD__ . ' should not be called in a Page context, only getMetadataClassIdentifier');
+        return self::METADATA_CLASS_IDENTIFIER;
     }
 }

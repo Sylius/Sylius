@@ -47,6 +47,7 @@ doctrine_cache:
     providers:
         sylius_settings: "%sylius.cache%"
         sylius_rbac: "%sylius.cache%"
+        sylius_metadata: "%sylius.cache%"
 
 doctrine_phpcr:
     session:
