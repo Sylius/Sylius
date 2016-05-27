@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ResourceBundle\Form\EventSubscriber;
 
+use Sylius\Component\Resource\Model\NullDetectableInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -69,7 +70,7 @@ class ResourceTranslationsSubscriber implements EventSubscriberInterface
         $translatable = $parent->getData();
 
         foreach ($data as $locale => $translation) {
-            if(null === $translation) {
+            if (null === $translation || ($translation instanceof NullDetectableInterface && $translation->isNull())) {
                 unset($data[$locale]);
                 continue;
             }

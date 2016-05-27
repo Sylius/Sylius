@@ -18,7 +18,7 @@ use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class MetadataAccessor implements MetadataAccessorInterface
+class MetadataAccessor implements MetadataAccessorInterface
 {
     /**
      * @var MetadataProviderInterface

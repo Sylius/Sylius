@@ -41,7 +41,9 @@
             <argument type="service" id="twig" />
         </service>
 
-        <service id="sylius.metadata.accessor" class="%sylius.metadata.accessor.class%">
+        <!-- Lazy to avoid Circular reference exception:
+                TwigExtension -> Accessor -> Provider -> Processor -> Twig -> TwigExtension -->
+        <service id="sylius.metadata.accessor" class="%sylius.metadata.accessor.class%" lazy="true">
             <argument type="service" id="sylius.metadata.provider" />
             <argument type="service" id="property_accessor" />
         </service>

@@ -12,11 +12,12 @@
 namespace Sylius\Component\Metadata\Model;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Component\Resource\Model\TranslatableInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-interface MetadataContainerInterface extends ResourceInterface
+interface MetadataContainerInterface extends ResourceInterface, TranslatableInterface
 {
     /**
      * @return string

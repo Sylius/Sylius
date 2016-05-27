@@ -10,7 +10,7 @@
 
 namespace Sylius\Component\Metadata\Repository;
 
-use Sylius\Component\Metadata\Model\MetadataContainer;
+use Sylius\Component\Metadata\Model\MetadataContainerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -22,7 +22,7 @@ interface MetadataContainerRepositoryInterface extends RepositoryInterface
      * @param string $type
      * @param string $code
      *
-     * @return MetadataContainer|null
+     * @return MetadataContainerInterface|null
      */
     public function findOneByTypeAndCode($type, $code);
 }

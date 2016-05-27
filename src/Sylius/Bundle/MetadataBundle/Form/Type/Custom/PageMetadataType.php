@@ -87,6 +87,13 @@ class PageMetadataType extends AbstractResourceType
                 return implode(', ', $originalKeywords);
             },
             function ($submittedKeywords) {
+                $submittedKeywords = trim($submittedKeywords);
+
+                // explode on empty string creates array of single empty value - avoid this
+                if (!strlen($submittedKeywords)) {
+                    return [];
+                }
+
                 return array_map('trim', explode(',', $submittedKeywords));
             }
         ));

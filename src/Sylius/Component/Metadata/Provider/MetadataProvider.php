@@ -81,7 +81,7 @@ final class MetadataProvider implements MetadataProviderInterface
         if (null === $baseMetadata) {
             return null;
         }
-
+        
         return $this->metadataCompiler->compile($baseMetadata, $parents);
     }
 }

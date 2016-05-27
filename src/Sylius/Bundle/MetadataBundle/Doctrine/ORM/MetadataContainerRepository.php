@@ -26,6 +26,8 @@ class MetadataContainerRepository extends EntityRepository implements MetadataCo
     public function findOneByTypeAndCode($type, $code)
     {
         return $this->createQueryBuilder('o')
+            ->join('o.translations', 'translations')
+            ->addSelect('translations')
             ->where('o.type = :type')
             ->andWhere('o.code = :code')
             ->setParameter('type', $type)

@@ -33,23 +33,23 @@
         {{ buttons.edit(path('sylius_backend_page_metadata_container_customize', { 'type': metadata_container.type, 'code': metadata_container.code })) }}
         {{ buttons.delete(path('sylius_backend_metadata_container_delete', { 'id': metadata_container.id }), null, false, false) }}
     </div>
-    <h1><i class="glyphicon glyphicon-flag"></i> {{ 'sylius.ui.show_metadata'|trans|raw }}</h1>
+    <h1><i class="glyphicon glyphicon-flag"></i> {{ 'sylius.ui.show_metadata'|trans|raw }} <small>{{ metadata_container.type }}: {{ metadata_container.code }}</small></h1>
 </div>
 
 <table class="table table-bordered table-condensed">
     <thead>
         <tr>
-            <th>{{ 'sylius.ui.type'|trans }}</th>
-            <th>{{ 'sylius.ui.code'|trans }}</th>
+            <th>{{ 'sylius.ui.locale'|trans }}</th>
             <th>{{ 'sylius.ui.content'|trans }}</th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>{{ metadata_container.type }}</td>
-            <td>{{ metadata_container.code }}</td>
-            <td>{{ _self.dataAsList(metadata_container.metadata.toArray()) }}</td>
-        </tr>
+        {% for translation in metadata_container.translations %}
+            <tr>
+                <td>{{ translation.locale }}</td>
+                <td>{{ _self.dataAsList(translation.metadata.toArray()) }}</td>
+            </tr>
+        {% endfor %}
     </tbody>
 </table>
 {% endblock %}

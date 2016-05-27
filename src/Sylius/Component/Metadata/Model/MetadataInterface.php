@@ -30,4 +30,9 @@ interface MetadataInterface
      * @param callable $callable
      */
     public function forAll(callable $callable);
+
+    /**
+     * @return boolean
+     */
+    public function isEmpty();
 }

@@ -34,12 +34,7 @@
 <form method="post" class="form-horizontal" novalidate
       action="{{ path('sylius_backend_page_metadata_container_customize', {'type': metadata_container.type, 'code': metadata_container.code }) }}">
 
-    {# TODO: This is not great, need a better pattern here #}
-    {% if 'page' == metadata_container.type %}
-        {% include 'SyliusWebBundle:Backend/Metadata:_formPage.html.twig' %}
-    {% else %}
-        {% include 'SyliusWebBundle:Backend/Metadata:_form.html.twig' %}
-    {% endif %}
+    {% include 'SyliusWebBundle:Backend/Metadata:_form.html.twig' %}
     {{ update() }}
 </form>
 {% endblock %}

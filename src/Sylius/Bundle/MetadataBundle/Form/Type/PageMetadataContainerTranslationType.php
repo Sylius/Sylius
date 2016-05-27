@@ -15,23 +15,16 @@ use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Pete Ward <peter.ward@reiss.com>
  */
-class PageMetadataContainerType extends AbstractResourceType
+class PageMetadataContainerTranslationType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('code', 'text', ['read_only' => true])
-            ->add('type', 'text', ['read_only' => true])
-            ->add('translations', 'sylius_translations', [
-                'type' => 'sylius_page_metadata_container_translation',
-                'label' => 'sylius.form.translations',
-            ])
-        ;
+        $builder->add('metadata', 'sylius_page_metadata', ['label' => false]);
     }
 
     /**
@@ -39,6 +32,6 @@ class PageMetadataContainerType extends AbstractResourceType
      */
     public function getName()
     {
-        return 'sylius_page_metadata_container';
+        return 'sylius_page_metadata_container_translation';
     }
 }

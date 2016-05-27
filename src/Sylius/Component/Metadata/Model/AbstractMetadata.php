@@ -71,4 +71,38 @@ abstract class AbstractMetadata implements MetadataInterface
             $this->$key = $callable($value);
         }
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isEmpty()
+    {
+        $inheritedVariables = get_object_vars($this);
+
+        foreach ($inheritedVariables as $inheritedKey => $inheritedValue) {
+            if ($this->{$inheritedKey} instanceof MetadataInterface) {
+                if (!$this->{$inheritedKey}->isEmpty()) {
+                    return false;
+                }
+
+                continue;
+            }
+
+            if (!empty($inheritedValue)) {
+                // If we have a value, is it the same as the class default? If so consider this as empty,
+                // it's not a customised value (e.g. UTF-8 on charset)
+                if (!isset($reflectionClass)) {
+                    $reflectionClass = new \ReflectionClass($this);
+                    $defaultProperties = $reflectionClass->getDefaultProperties();
+                }
+                if (isset($defaultProperties[$inheritedKey]) && $defaultProperties[$inheritedKey] == $inheritedValue) {
+                    continue;
+                }
+
+                return false;
+            }
+        }
+
+        return true;
+    }
 }
