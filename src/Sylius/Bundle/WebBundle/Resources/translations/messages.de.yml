@@ -92,6 +92,18 @@ sylius:
         no_route: Die Seite wird nicht im Frontend angezeigt, da keine Route definiert worden ist
         publishable: Veröffentlicht
     payment:
+        state:
+            checkout: Zur Kasse
+            completed: Abgeschlossen
+            authorized: Autorisiert
+            failed: Fehlgeschlagen
+            new: Neu
+            pending: Ausstehend
+            processing: Wird verarbeitet
+            unknown: Unbekannt
+            void: Ungültig
+            cancelled: Abgebrochen
+            refunded: Rückerstattet
         transition:
             cancel: Abbrechen
             complete: Abgeschlossen
@@ -118,6 +130,13 @@ sylius:
             no_account: Noch keinen Account
     shipment:
         no_items: Es gibt keine Elemente anzuzeigen
+        state:
+            ready: Bereit
+            returned: Zurückgesandt
+            shipped: Versandt
+            pending: Ausstehend
+            onhold: Angehalten
+            cancelled: Abgebrochen
         transition:
             backorder: Rückstand
             cancel: Abbrechen
@@ -192,8 +211,6 @@ sylius:
         cart_summary: Warenkorb-Übersicht
         categorization: Produktkategorisierung
         category: Kategorie
-        change_password: Passwort ändern
-        change_your_password: Passwort ändern
         channel: Promotionskanäle
         channels: Ausgabekanäle
         checkout: Zur Kasse

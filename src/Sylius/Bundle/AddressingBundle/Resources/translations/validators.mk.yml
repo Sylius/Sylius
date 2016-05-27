@@ -1,0 +1,10 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    address:
+        city:
+            max_length: Името на градот не може да биде подолго од 255 карактери.
+            min_length: Името на градот мора да содржи барем два карактери.
+        country:
+            not_blank: Ве молиме одберете држава.

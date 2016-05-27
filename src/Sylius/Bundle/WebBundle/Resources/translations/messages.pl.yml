@@ -82,6 +82,18 @@ sylius:
         no_route: Treści nie będą wyświetlane na stronie jeśli trasa nie jest zdefiniowana
         publishable: Opublikowany
     payment:
+        state:
+            checkout: Koszyk
+            completed: Zakończone
+            authorized: Upoważniony
+            failed: Nieudane
+            new: Nowy
+            pending: Oczekujący
+            processing: Przetwarzany
+            unknown: Nieznany
+            void: Nieważna
+            cancelled: Anulowane
+            refunded: Zwrócone
         transition:
             cancel: anuluj
     pricing:
@@ -92,6 +104,12 @@ sylius:
         generate: Wygeneruj kupony promocyjne
         index: Lista kuponów promocyjnych
     shipment:
+        state:
+            ready: Gotowe
+            returned: Zwrócone
+            shipped: Dostarczono
+            pending: Oczekujący
+            cancelled: Anulowane
         transition:
             cancel: anuluj
         update: Edytuj
@@ -149,8 +167,6 @@ sylius:
         cancel: Anuluj
         categorization: Kategorie
         category: Kategoria
-        change_password: Zmiana hasła
-        change_your_password: Zmiana hasła
         channel: Kanał
         channels: Kanały
         checkout: Koszyk

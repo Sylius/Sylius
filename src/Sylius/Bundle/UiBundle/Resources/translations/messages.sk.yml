@@ -22,6 +22,7 @@ sylius:
         cancel: Zrušiť
         cancelled: Zrušená
         category_requirements: Požiadavky pre kategóriu
+        change_your_password: Zmena hesla
         charges_and_taxes: Poplatky a dane
         checkout: Košík
         clear_filters: Vymazať filter
@@ -67,11 +68,13 @@ sylius:
         extra_information: Ďalšie informácie
         filter: Filter
         go: Pokračovať
+        generate_coupons: Vygenerovať kupóny
         in: V
         info: Info
         item: Položka
         jump_to_page: Prejsť na stranu
         last_updated: Posledná aktualizácia
+        list_coupons: Zoznam kupónov
         locales: Jazyky
         manage_attributes_of_your_products: Spravovať vlastnosti vašich produktov
         manage_categorization_of_your_products: Spravovať kategorizáciu produktov

@@ -58,7 +58,7 @@ sylius:
             variant_selection_method: Varianto pasirinkimo būdas
         product_filter:
             name: Pavadinimas
-            sku: Kodas
+            code: Kodas
         product_variant:
             tax_category: Mokesčių kategorija
         settings:

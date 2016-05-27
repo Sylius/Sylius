@@ -51,7 +51,7 @@ sylius:
             variant_selection_method: Változat kiválasztási módszer
         product_filter:
             name: Név
-            sku: SKU
+            code: Kód
         product_variant:
             tax_category: ÁFA-kategória
         settings:

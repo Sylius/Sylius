@@ -59,7 +59,7 @@ sylius:
             variant_selection_method: Način izbora variante
             main_taxon: Glavni takson
         product_filter:
-            sku: SKU
+            code: Koda
         product_variant:
             tax_category: Kategorija davka
         settings:

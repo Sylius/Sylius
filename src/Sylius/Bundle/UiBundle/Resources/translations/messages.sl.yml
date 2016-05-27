@@ -14,6 +14,7 @@ sylius:
         add_coupon: Dodaj kupon
         cancel: Prekliči
         cancelled: Preklicano
+        change_your_password: Spremenite vaše geslo
         checkout: Plačilo
         color: Barva
         countries: Države
@@ -33,7 +34,9 @@ sylius:
         exclusive: Izključno
         expires_at: Poteče dne
         filter: Filter
+        generate_coupons: Generirajte kupone
         item: Izdelek
+        list_coupons: Seznam kuponov
         locales: Področne nastavitve
         new: Novo
         new_country: Nova država

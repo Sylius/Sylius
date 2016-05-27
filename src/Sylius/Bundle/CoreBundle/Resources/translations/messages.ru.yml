@@ -60,7 +60,7 @@ sylius:
             main_taxon: Основной таксон
         product_filter:
             name: Название
-            sku: Идентификатор товарной позиции
+            code: Код
         product_variant:
             tax_category: Категория налогов
         settings:

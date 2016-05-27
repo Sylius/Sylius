@@ -81,6 +81,19 @@ sylius:
     page:
         no_route: Yol yok tanımlanmışsa, içeriğinizi önyüz içinde görünmez
         publishable: yayınla
+    payment:
+        state:
+            checkout: 'Ödeme  yap'
+            completed: Tamamlandı
+            authorized: Yetkili
+            failed: Başarısız oldu
+            new: Yeni
+            pending: Beklemede
+            processing: İşlem Yapılıyor
+            unknown: Bilinmiyor
+            void: Boş
+            cancelled: İptal Edildi
+            refunded: İade Edildi
     pricing:
         volume_based:
             max: Max birim
@@ -95,6 +108,12 @@ sylius:
         login:
             info: '<b>"İyi sylius@example.com"</b> e-posta ve <b>"sylius"</b> şifrenizi kullanarak giriş yapınız. <small>Bay Sylius Demo Kılavuzu</small>'
     shipment:
+        state:
+            ready: Hazır
+            returned: İade Edildi
+            shipped: Kargolandı
+            pending: Beklemede
+            cancelled: İptal Edildi
         update: Düzenle
     taxon:
         image: Resim seç
@@ -148,8 +167,6 @@ sylius:
         cancel: İptal
         categorization: Sınıflandırma
         category: Kategori
-        change_password: Parolanızı değiştirin
-        change_your_password: Parolanızı değiştirin
         channel: Kanal
         channels: Kanallar
         checkout: 'Ödeme  yap'

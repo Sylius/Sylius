@@ -37,7 +37,7 @@ sylius:
             short_description: Kort beskrivning
         product_filter:
             name: Namn
-            sku: SKU
+            code: Kod
         product_variant:
             tax_category: Momskategori
         settings:

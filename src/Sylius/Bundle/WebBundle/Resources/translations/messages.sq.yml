@@ -92,6 +92,18 @@ sylius:
         no_route: Përmbajtja jote nuk do të shfaqet në faqen e parë nëse nuk ke përcaktuar rrugën
         publishable: Publikuar
     payment:
+        state:
+            checkout: Kontrolli
+            completed: Përfunduar
+            authorized: Autorizuar
+            failed: Nuk u krye
+            new: E re
+            pending: Në pritje
+            processing: Duke u procesuar
+            unknown: E panjohur
+            void: Bosh
+            cancelled: E fshirë
+            refunded: Rimbursuar
         transition:
             cancel: anulo
             complete: perfundo
@@ -118,6 +130,13 @@ sylius:
             no_account: Ende nuk keni krijuar account
     shipment:
         no_items: "Nuk ka asnjë artikull për t'u shfaqur"
+        state:
+            ready: Gati
+            returned: I kthyer
+            shipped: Dërguar
+            pending: Në pritje
+            onhold: Ne pritje
+            cancelled: E fshirë
         transition:
             backorder: kthe urdherin
             cancel: anulo
@@ -192,8 +211,6 @@ sylius:
         cart_summary: Përmbajtja e karrocës
         categorization: Kategorizimi
         category: Kategorija
-        change_password: Ndrysho fjalëkalimin
-        change_your_password: Ndrysho fjalëkalimin
         channel: Kanali
         channels: Kanalet
         checkout: Kontrolli

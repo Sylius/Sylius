@@ -92,6 +92,18 @@ sylius:
         no_route: Obsah sa nezobrazi vo verejnej časti stránky, pokiaľ nie je definovaná URL cesta
         publishable: Uverejnené
     payment:
+        state:
+            checkout: Košík
+            completed: Dokončená
+            authorized: Autorizovaná
+            failed: Neúspešná
+            new: Nová
+            pending: Čakajúca
+            processing: Spracúvava sa
+            unknown: Neznáme
+            void: Neplatná
+            cancelled: Zrušená
+            refunded: Vrátené peniaze
         transition:
             cancel: zrušiť
             complete: dokončené
@@ -118,6 +130,15 @@ sylius:
             no_account: Ešte nemáte konto
     shipment:
         no_items: Neexistujú žiadne položky na zobrazenie
+        state:
+            ready: Pripravená
+            returned: Vrátená
+            shipped: Odoslané
+            pending: Čakajúca
+            onhold: Rezerované
+            backordered: Predobjednané
+            cancelled: Zrušená
+            partially_shipped: Čiastočne dodané
         transition:
             backorder: predobjednaná
             cancel: zrušiť
@@ -192,8 +213,6 @@ sylius:
         cart_summary: Obsah košíka
         categorization: Kategórie
         category: Kategória
-        change_password: Zmena hesla
-        change_your_password: Zmena hesla
         channel: Kanál
         channels: Kanály
         checkout: Košík

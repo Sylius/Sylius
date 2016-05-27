@@ -13,6 +13,7 @@ sylius:
         add_coupon: Adaugă cod promoțional
         cancel: Anulează
         cancelled: Anulată
+        change_your_password: Modificare parolă
         checkout: Trimite comanda
         color: Culoare
         countries: Țări
@@ -26,7 +27,9 @@ sylius:
         edit: Editare
         enabled: Activat
         filter: Filtrează
+        generate_coupons: Generare coduri promoționale
         item: Produs
+        list_coupons: Listare coduri promoționale
         locales: Setări regionale
         new: Nouă
         new_country: Țară nouă

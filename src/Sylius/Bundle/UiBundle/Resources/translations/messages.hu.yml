@@ -13,6 +13,7 @@ sylius:
         actions: Műveletek
         add_coupon: Kupon hozzáadása
         cancel: Mégse
+        change_your_password: Jelszó módosítása
         checkout: Fizetés
         countries: Országok
         coupon_based: Kupon alapján
@@ -25,7 +26,9 @@ sylius:
         edit: Szerkesztés
         enabled: Engedélyezve
         filter: Szűrő
+        generate_coupons: Kuponok generálása
         item: Cikk
+        list_coupons: Kuponok listázása
         locales: Területi beállítások
         new: Új
         new_country: Új ország

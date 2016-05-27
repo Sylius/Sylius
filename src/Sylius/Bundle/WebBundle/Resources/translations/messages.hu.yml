@@ -57,10 +57,25 @@ sylius:
         sellable: Termék
     page:
         publishable: Megjelent
+    payment:
+        state:
+            checkout: Fizetés
+            completed: Befejezve
+            failed: Sikertelen
+            new: Új
+            pending: Függőben
+            processing: Feldolgozás alatt
+            unknown: Ismeretlen
+            void: Hiányos
     promotion_coupon:
         generate: Kuponok generálása
         index: Kuponok listázása
     shipment:
+        state:
+            ready: Kész
+            returned: Visszaküldött
+            shipped: Kiszállítva
+            pending: Függőben
         update: Szerkesztés
     taxon:
         image: Kép választása
@@ -100,8 +115,6 @@ sylius:
         cancel: Mégse
         categorization: Kategorizálás
         category: Kategória
-        change_password: Jelszó módosítása
-        change_your_password: Jelszó módosítása
         channels: Csatornák
         checkout: Fizetés
         choose_file: Válassza ki a fájlt

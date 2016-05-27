@@ -30,6 +30,18 @@ sylius:
     order_item:
         quantity: Ποσότητα
         sellable: Προϊόν
+    payment:
+        state:
+            checkout: Ολοκλήρωση αγορών
+            pending: Σε εκκρεμότητα
+            processing: Σε εξέλιξη
+            unknown: Άγνωστο
+    shipment:
+        state:
+            ready: Έτοιμα
+            returned: Επεστράφησαν
+            shipped: Αποστάλθηκαν
+            pending: Σε εκκρεμότητα
     ui:
         actions: Ενέργειες
         add_member: Προσθήκη μέλους

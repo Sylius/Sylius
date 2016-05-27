@@ -75,6 +75,19 @@ sylius:
     page:
         no_route: Jūsų turinys nebus rodomas, jei nukreipimas nėra nurodytas
         publishable: Paskelbta
+    payment:
+        state:
+            checkout: Apmokėjimas
+            completed: Baigtas
+            authorized: Patvirtintas
+            failed: Nepavyko
+            new: Naujas
+            pending: Laukiama
+            processing: Apdorojamas
+            unknown: Nežinoma
+            void: Nenurodyta
+            cancelled: Atšaukta
+            refunded: Grąžinta
     pricing:
         volume_based:
             max: Maks. kiekis
@@ -83,6 +96,12 @@ sylius:
         generate: Generuoti kuponus
         index: Kuponų sąrašas
     shipment:
+        state:
+            ready: Paruošta
+            returned: Grąžintas
+            shipped: Pristatytas
+            pending: Laukiama
+            cancelled: Atšaukta
         update: Redaguoti
     taxon:
         image: Pasirinkite paveikslėlį
@@ -135,8 +154,6 @@ sylius:
         cancel: Atšaukti
         categorization: Skirstymas į kategorijas
         category: Kategorija
-        change_password: Pakeisti savo slaptažodį
-        change_your_password: Pakeisti savo slaptažodį
         channel: Kanalas
         channels: Kanalai
         checkout: Apmokėjimas

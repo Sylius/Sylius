@@ -71,8 +71,6 @@ sylius:
         cancel: キャンセル
         categorization: カテゴリ設定
         category: 税区分
-        change_password: パスワードの変更
-        change_your_password: パスワードの変更
         checkout: 注文に進む
         choose_file: ファイルを選択
         city: 市町村

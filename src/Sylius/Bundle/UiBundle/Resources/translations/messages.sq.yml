@@ -21,6 +21,7 @@ sylius:
         cancel: Fshi
         cancelled: E fshirë
         category_requirements: Kërkesat e kategorisë
+        change_your_password: Ndrysho fjalëkalimin
         charges_and_taxes: Pagesat dhe taksat
         checkout: Kontrolli
         clear_filters: Hiq filtrin
@@ -64,11 +65,13 @@ sylius:
         extra_information: Informacione shtese
         filter: Filtri
         go: Shko
+        generate_coupons: Gjenero kupona
         in: Brenda
         info: Info
         item: Po ashtu
         jump_to_page: Kerce ne faqen
         last_updated: Përditësimi i fundit
+        list_coupons: Listo kuponat
         locales: Rajonet
         manage_attributes_of_your_products: Modifiko atributet e produktit
         manage_categorization_of_your_products: Menaxho kategorizimin e produkteve

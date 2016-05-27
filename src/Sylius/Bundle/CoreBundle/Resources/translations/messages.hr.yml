@@ -51,7 +51,7 @@ sylius:
             variant_selection_method: Način odabira varijante
         product_filter:
             name: Naziv
-            sku: KOD (SKU)
+            code: ISO kod
         product_variant:
             tax_category: Kategorija artikla
         settings:

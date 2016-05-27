@@ -80,6 +80,18 @@ sylius:
         no_route: Содержимое не будет отображено в интерфейсе, если для него не определен маршрут
         publishable: Опубликовано
     payment:
+        state:
+            checkout: Сверка
+            completed: Завершен
+            authorized: Авторизовано
+            failed: Провален
+            new: Новый
+            pending: Ожидает
+            processing: Обрабатывается
+            unknown: Неизвестен
+            void: Пустой
+            cancelled: Отменён
+            refunded: Возвращено
         transition:
             refund: Возврат
     pricing:
@@ -90,6 +102,12 @@ sylius:
         generate: Генерировать купоны
         index: Список купонов
     shipment:
+        state:
+            ready: Готов
+            returned: Возвращено
+            shipped: Доставлено
+            pending: Ожидает
+            cancelled: Отменён
         transition:
             ship: отправить
         update: Редактировать
@@ -144,8 +162,6 @@ sylius:
         cancel: Отмена
         categorization: Каталоги
         category: sylius.tax_rate.category
-        change_password: Change my password
-        change_your_password: Change my password
         channel: Канал
         channels: Каналы
         checkout: Сверка

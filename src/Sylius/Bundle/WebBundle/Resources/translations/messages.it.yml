@@ -92,6 +92,18 @@ sylius:
         no_route: Il contenuto non apparirà nel frontend se nessuna rotta è definita
         publishable: Pubblicato
     payment:
+        state:
+            checkout: Checkout
+            completed: Completato
+            authorized: Autorizzato
+            failed: Fallimento
+            new: Nuovo
+            pending: In attesa
+            processing: In elaborazione
+            unknown: Sconosciuto
+            void: Nullo
+            cancelled: Annullato
+            refunded: Rimborsato
         transition:
             cancel: annulla
             complete: completare
@@ -119,6 +131,13 @@ sylius:
             no_account: Non hai ancora un account
     shipment:
         no_items: Non ci sono articoli da mostrare
+        state:
+            ready: Pronto
+            returned: Restituito
+            shipped: Spedito
+            pending: In attesa
+            onhold: In attesa
+            cancelled: Annullato
         transition:
             backorder: backorder
             cancel: annulla
@@ -193,8 +212,6 @@ sylius:
         cart_summary: Riepilogo carrello
         categorization: Categorizzazione
         category: Categoria fiscale
-        change_password: Modifica la password
-        change_your_password: Modifica la password
         channel: Canale
         channels: Canali
         checkout: "Procedi all'acquisto"

@@ -57,10 +57,28 @@ sylius:
         sellable: Товар
     page:
         publishable: Опублікований
+    payment:
+        state:
+            checkout: Оформити замовлення
+            completed: Завершено
+            failed: Помилка
+            new: Новий
+            pending: В очікуванні
+            processing: В процесі
+            unknown: Не вказаний
+            void: Порожнє
+            cancelled: Відхилено
+            refunded: Повернуто
     promotion_coupon:
         generate: Генерувати купони
         index: Список купонів
     shipment:
+        state:
+            ready: Готовий
+            returned: Повернуто
+            shipped: Відправлено
+            pending: В очікуванні
+            cancelled: Відхилено
         update: Редагувати
     taxon:
         image: Вибрати зображення
@@ -100,8 +118,6 @@ sylius:
         cancel: Відмінити
         categorization: Категоризація
         category: Категорія
-        change_password: Змінити пароль
-        change_your_password: Змінити пароль
         channels: Канали
         checkout: Оформити замовлення
         choose_file: Обрати файл

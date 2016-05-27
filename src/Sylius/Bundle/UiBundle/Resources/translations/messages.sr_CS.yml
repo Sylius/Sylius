@@ -13,6 +13,8 @@ sylius:
         dashboard: Komandna Tabla
         delete: Obrisati
         edit: Izmeniti
+        generate_coupons: Generiši kupone
+        list_coupons: Lista kupona
         new_country: Nova zemlja
         new_tax_category: Nova kategorija poreza
         "no": false

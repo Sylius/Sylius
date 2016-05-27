@@ -62,7 +62,7 @@ sylius:
             main_taxon: Tipologjia kryesore
         product_filter:
             name: Emri
-            sku: SKU
+            code: Kodi
         product_variant:
             tax_category: Kategoria e taksimit
         settings:

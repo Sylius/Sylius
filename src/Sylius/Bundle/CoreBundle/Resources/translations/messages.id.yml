@@ -44,7 +44,7 @@ sylius:
             variant_selection_method: Metode Pilih Varian
         product_filter:
             name: Nama
-            sku: SKU
+            code: Kode
         product_variant:
             tax_category: Kategori Pajak
         settings:

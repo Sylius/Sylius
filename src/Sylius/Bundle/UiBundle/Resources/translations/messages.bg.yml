@@ -10,6 +10,7 @@ sylius:
     ui:
         add_coupon: Добавяне на купон
         cancel: Откажи
+        change_your_password: Смяна на парола
         countries: Страни
         coupons: Купони
         create: Създай
@@ -17,7 +18,9 @@ sylius:
         delete: Изтрий
         edit: Редактирай
         filter: Филтър
+        generate_coupons: Генериране на купони
         item: артикул
+        list_coupons: Списък купони
         locales: Езикови променливи
         new_country: Новата страна
         new_tax_category: Нова данъчна категория

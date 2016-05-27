@@ -12,6 +12,7 @@ sylius:
         actions: Handlinger
         add_coupon: Tilføj kupon
         cancel: Anuller
+        change_your_password: Ændre din adgangskode
         checkout: Til kassen
         countries: Lande
         coupon_based: Kupon baseret
@@ -24,7 +25,9 @@ sylius:
         edit: Rediger
         enabled: Aktiveret
         filter: Filter
+        generate_coupons: Generere kuponer
         item: Varen
+        list_coupons: Kupon liste
         locales: Landekoder
         new: Ny
         new_country: Nyt land

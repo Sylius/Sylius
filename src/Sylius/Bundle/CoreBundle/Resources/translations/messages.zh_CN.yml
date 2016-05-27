@@ -62,7 +62,7 @@ sylius:
             main_taxon: 主分类
         product_filter:
             name: 名称
-            sku: SKU
+            code: 代码
         product_variant:
             tax_category: 税类别
         settings:

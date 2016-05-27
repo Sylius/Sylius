@@ -13,6 +13,11 @@ sylius:
                 ready: 'Pronto desde %at%'
                 returned: 'Devolvido %at%'
                 shipped: 'Enviado %at%'
+                checkout: 'Revisado por %at%'
+                pending: 'Pendente %at%'
+                onhold: 'Na espera desde %at%'
+                backordered: 'Backordered desde %at%'
+                cancelled: '%at% cancelado'
         title: Minha conta
     archetype:
         build: Construir protótipo
@@ -94,6 +99,18 @@ sylius:
         no_route: Seu conteúdo não irá aparecerer no frontend se nenhuma rota for definida
         publishable: Publicado
     payment:
+        state:
+            checkout: Finalizar compra
+            completed: Concluído
+            authorized: Autorizado
+            failed: Falhou
+            new: Novo
+            pending: Pendente
+            processing: Processando
+            unknown: DESCONHECIDO
+            void: Vazio
+            cancelled: Cancelado
+            refunded: Reembolsado
         transition:
             cancel: cancelar
             complete: completado
@@ -120,6 +137,15 @@ sylius:
             no_account: Ainda sem conta
     shipment:
         no_items: Não existem itens para exibir
+        state:
+            ready: Pronto
+            returned: Devolvido
+            shipped: Enviado
+            pending: Pendente
+            onhold: Em espera
+            backordered: Devolução
+            cancelled: Cancelado
+            partially_shipped: Parcialmente enviado
         transition:
             backorder: devolução
             cancel: cancelar
@@ -194,8 +220,6 @@ sylius:
         cart_summary: Resumo do carrinho
         categorization: Categorização
         category: Categoria
-        change_password: Alterar sua senha
-        change_your_password: Alterar sua senha
         channel: Canal
         channels: Canais
         checkout: Finalizar compra

@@ -19,10 +19,13 @@ sylius:
         an_error_occurred: Um erro ocorreu
         are_your_sure_you_want_to_perform_this_action: Tem certeza de que deseja executar esta ação?
         available_for_channels: Disponível para os canais
+        average_order_value: Valor médio do pedido
         backordered: Devolução
         cancel: Cancelar
         cancelled: Cancelado
         category_requirements: Requerimentos da categoria
+        change_password: Alterar senha
+        change_your_password: Alterar sua senha
         charges_and_taxes: Encargos e impostos
         checkout: Finalizar compra
         clear_filters: Limpar os Filtros
@@ -59,6 +62,7 @@ sylius:
         edit_product_attribute: Editar atributo do produto
         edit_product_option: Editar a opção de produto
         edit_promotion: Editar promoção
+        edit_promotion_coupon: Editar o cupom de promoção
         edit_shipping_method: Editar método de envio
         edit_tax_category: Editar categoria de imposto
         edit_tax_rate: Editar a taxa de imposto
@@ -69,16 +73,19 @@ sylius:
         ends_with: Termina com
         equal: Igual
         exclusive: Exclusivo
+        expiration_and_usage_limits: Expiração e limite de uso
         expires_at: Expira em
         extra_information: Informações extras
         faqs: Perguntas freqüentes
         filter: Filtrar
         go: Prosseguir
+        generate_coupons: Gerar cupons
         in: Em
         info: Informações
         item: Produto
         jump_to_page: Ir para a página
         last_updated: Ultima atualização
+        list_coupons: Cupons
         locales: Localidades
         manage_attributes_of_your_products: Gerenciar atributos de seus produtos
         manage_categorization_of_your_products: Gerenciar a categorização de seus produtos
@@ -93,14 +100,18 @@ sylius:
         manage_shipping_methods_for_your_store: Gerenciar os métodos de transporte para sua loja
         manage_taxation_of_your_products: Gerenciar a tributação de seus produtos
         manage_your_customers: Gerenciar seus Clientes
-        manage_your_products: Gerenciar seus produtos
+        manage_your_product_catalog: Gerenciar o seu catálogo de produtos
+        media: Mídia
         new: Novo
         new_channel: Novo Canal
         new_country: Novo país
         new_coupon: Novo cupom
         new_currency: Nova Moeda
         new_locale: Nova localidade
+        new_promotion_coupon: Novo cupom de promoção
         new_tax_category: Nova categoria de imposto
+        new_orders: Novos pedidos
+        new_customers: Novos clientes
         "no": false
         no_account: Nenhuma conta
         no_promotion: Sem promoções
@@ -125,6 +136,7 @@ sylius:
         purchased_from: Comprado de
         quantity: Quantidade
         ready: Pronto
+        repeat_new_password: Repita a nova senha
         returned: Devolvido
         returns_policy: Política de devolução
         save_changes: Salvar alterações
@@ -139,6 +151,7 @@ sylius:
         subtotal: Subtotal
         success: Sucesso
         tax: Taxa
+        taxonomy: Taxonomia
         tax_categories: Categorias de imposto
         terms_and_conditions: Termos e condições
         total_records: Total de registros

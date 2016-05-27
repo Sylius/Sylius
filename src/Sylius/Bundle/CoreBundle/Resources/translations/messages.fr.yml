@@ -62,7 +62,7 @@ sylius:
             main_taxon: Taxinomie principale
         product_filter:
             name: Nom
-            sku: Référence
+            code: Code
         product_variant:
             tax_category: Catégorie de taxe
         settings:

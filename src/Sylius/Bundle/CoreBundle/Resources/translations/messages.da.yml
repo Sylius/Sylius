@@ -51,7 +51,7 @@ sylius:
             variant_selection_method: Variant udvælgelsesmetode
         product_filter:
             name: Navn
-            sku: SKU
+            code: Kode
         product_variant:
             tax_category: Momskategori
         settings:

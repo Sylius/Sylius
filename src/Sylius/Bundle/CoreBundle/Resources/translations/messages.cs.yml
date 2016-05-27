@@ -58,7 +58,7 @@ sylius:
             variant_selection_method: Metoda výběru varianty
         product_filter:
             name: Název
-            sku: SKU
+            code: Kód
         product_variant:
             tax_category: Typ daně
         settings:

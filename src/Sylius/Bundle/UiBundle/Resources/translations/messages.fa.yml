@@ -19,6 +19,7 @@ sylius:
         cancel: لغو
         cancelled: پرداخت لغو شده
         category_requirements: نیازمندی های شاخه
+        change_your_password: تغییر کلمه عبور
         charges_and_taxes: هزینه و مالیات
         checkout: پرداخت نشده
         clear_filters: پاک کردن فیلترها
@@ -55,10 +56,12 @@ sylius:
         exclusive: یکبار مصرف
         expires_at: انقضا در تاریخ
         filter: فیلتر
+        generate_coupons: ایجاد کد تخفیف
         in: در
         info: اطلاعات
         item: کالا
         last_updated: آخرین بروز رسانی
+        list_coupons: لیست کدهای تخفیف
         locales: زبان ها
         manage_currencies_available_in_the_store: مدیریت واحدهای پولی موجود در فروشگاه
         manage_languages_available_in_the_store: مدیریت زبان های موجود در فروشگاه

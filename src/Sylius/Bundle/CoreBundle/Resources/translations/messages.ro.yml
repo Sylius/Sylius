@@ -51,7 +51,7 @@ sylius:
             variant_selection_method: Metoda de selectare a variantei
         product_filter:
             name: Nume
-            sku: SKU
+            code: Cod
         product_variant:
             tax_category: Categoria de taxă
         settings:

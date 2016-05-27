@@ -92,6 +92,18 @@ sylius:
         no_route: Uw inhoud wordt niet weergegeven als er geen route gedefinieerd is
         publishable: Gepubliceerd
     payment:
+        state:
+            checkout: Afrekenen
+            completed: Voltooid
+            authorized: Gemachtigd
+            failed: Mislukt
+            new: Nieuw
+            pending: In behandeling
+            processing: Verwerken
+            unknown: Onbekend
+            void: Leeg
+            cancelled: Geannuleerd
+            refunded: Terugbetaald
         transition:
             cancel: annuleer
             complete: voltooi
@@ -118,6 +130,13 @@ sylius:
             no_account: Nog geen account
     shipment:
         no_items: Er zijn geen items om weer te geven
+        state:
+            ready: Klaar
+            returned: Geretourneerd
+            shipped: Verzonden
+            pending: In behandeling
+            onhold: In de wacht
+            cancelled: Geannuleerd
         transition:
             backorder: nabestelling
             cancel: annuleer
@@ -192,8 +211,6 @@ sylius:
         cart_summary: Winkelwagen overzicht
         categorization: Categorisering
         category: Categorie
-        change_password: Verander uw wachtwoord
-        change_your_password: Verander uw wachtwoord
         channel: Kanalen
         channels: Kanalen
         checkout: Afrekenen

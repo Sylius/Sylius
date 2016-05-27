@@ -44,10 +44,28 @@ sylius:
     order_item:
         quantity: Količina
         sellable: Artikal
+    payment:
+        state:
+            checkout: Blagajna
+            completed: Završeno
+            failed: Neuspješno
+            new: Novo
+            pending: Na čekanju
+            processing: U obradi
+            unknown: Nepoznato
+            void: Nevažeće
+            cancelled: Otkazano
+            refunded: Refundirano
     promotion_coupon:
         generate: Generirajte kod za popust
         index: Izlist kodova za popust
     shipment:
+        state:
+            ready: Spremno
+            returned: Vraćeno
+            shipped: Poslano
+            pending: Na čekanju
+            cancelled: Otkazano
         update: Uredi
     taxon:
         image: Izaberite sliku
@@ -87,8 +105,6 @@ sylius:
         cancel: Prekini
         categorization: Kategorizacija
         category: Kategorija porezne stope
-        change_password: Promijenite lozinku
-        change_your_password: Promijenite lozinku
         checkout: Blagajna
         choose_file: Odaberite dokument
         city: Grad

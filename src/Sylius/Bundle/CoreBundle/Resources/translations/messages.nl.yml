@@ -62,7 +62,7 @@ sylius:
             main_taxon: Hoofdcategorie
         product_filter:
             name: Naam
-            sku: SKU
+            code: Code
         product_variant:
             tax_category: Belasting categorie
         settings:

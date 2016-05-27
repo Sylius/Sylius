@@ -17,6 +17,7 @@ sylius:
         cancel: Anuluj
         cancelled: Anulowane
         category_requirements: Wymagania kategorii
+        change_your_password: Zmiana hasła
         charges_and_taxes: Opłaty i podatki
         checkout: Koszyk
         clear_filters: Wyczyść filtry
@@ -54,8 +55,10 @@ sylius:
         exclusive: Ekskluzywny
         expires_at: Wygasa dnia
         filter: Filtruj
+        generate_coupons: Wygeneruj kupony promocyjne
         item: Element
         last_updated: Ostatnia aktualizacja
+        list_coupons: Lista kuponów promocyjnych
         locales: Ustawienia regionalne
         manage_attributes_of_your_products: Zarządzaj cechami produktów
         manage_categorization_of_your_products: Zarządzaj kategoryzacją produktów

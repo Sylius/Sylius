@@ -44,10 +44,28 @@ sylius:
     order_item:
         quantity: Antall
         sellable: Produkt
+    payment:
+        state:
+            checkout: Gå til kassen
+            completed: Fullført
+            failed: Mislyktes
+            new: Ny
+            pending: Venter
+            processing: Behandler
+            unknown: Ukjent
+            void: Ugyldig
+            cancelled: Avbrutt
+            refunded: Refundert
     promotion_coupon:
         generate: Generer kuponger
         index: List ut kuponger
     shipment:
+        state:
+            ready: Klar
+            returned: Returnert
+            shipped: Sendt
+            pending: Venter
+            cancelled: Avbrutt
         update: Rediger
     taxon:
         image: Velg bilde
@@ -87,8 +105,6 @@ sylius:
         cancel: Avbryt
         categorization: Kategorisering
         category: Kategori
-        change_password: Endre passord
-        change_your_password: Endre passord
         checkout: Gå til kassen
         choose_file: Velg fil
         city: By

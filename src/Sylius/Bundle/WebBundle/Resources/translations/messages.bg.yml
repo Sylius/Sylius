@@ -86,8 +86,6 @@ sylius:
         cancel: Откажи
         categorization: Категоризация
         category: Категория
-        change_password: Смяна на парола
-        change_your_password: Смяна на парола
         checkout: Плащане
         choose_file: Избор на файл
         city: Град

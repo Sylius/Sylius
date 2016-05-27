@@ -14,6 +14,7 @@ sylius:
         add_coupon: Добавить купон
         cancel: Отмена
         cancelled: Отменён
+        change_your_password: Change my password
         checkout: Сверка
         color: Цвет
         countries: Страны
@@ -32,7 +33,9 @@ sylius:
         exclusive: Эксклюзив
         expires_at: Истекает
         filter: Фильтр
+        generate_coupons: Генерировать купоны
         item: Товар
+        list_coupons: Список купонов
         locales: Языки
         new: Новый
         new_country: Добавить страну
