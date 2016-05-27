@@ -43,16 +43,10 @@ class GeneralSettingsSchema implements SchemaInterface
     {
         $builder
             ->setDefaults(array_merge([
-                'title' => 'Sylius - Modern ecommerce for Symfony2',
-                'meta_keywords' => 'symfony, sylius, ecommerce, webshop, shopping cart',
-                'meta_description' => 'Sylius is modern ecommerce solution for PHP. Based on the Symfony2 framework.',
                 'locale' => 'en',
                 'currency' => 'USD',
                 'tracking_code' => '',
             ], $this->defaults))
-            ->setAllowedTypes('title', 'string')
-            ->setAllowedTypes('meta_keywords', 'string')
-            ->setAllowedTypes('meta_description', 'string')
             ->setAllowedTypes('locale', 'string')
             ->setAllowedTypes('currency', 'string')
             ->setAllowedTypes('tracking_code', ['null', 'string'])
@@ -65,24 +59,6 @@ class GeneralSettingsSchema implements SchemaInterface
     public function buildForm(FormBuilderInterface $builder)
     {
         $builder
-            ->add('title', 'text', [
-                'label' => 'sylius.form.settings.general.title',
-                'constraints' => [
-                    new NotBlank(),
-                ],
-            ])
-            ->add('meta_keywords', 'text', [
-                'label' => 'sylius.form.settings.general.meta_keywords',
-                'constraints' => [
-                    new NotBlank(),
-                ],
-            ])
-            ->add('meta_description', 'textarea', [
-                'label' => 'sylius.form.settings.general.meta_description',
-                'constraints' => [
-                    new NotBlank(),
-                ],
-            ])
             ->add('locale', 'locale', [
                 'label' => 'sylius.form.settings.general.locale',
                 'constraints' => [
