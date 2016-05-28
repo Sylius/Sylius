@@ -22,6 +22,7 @@ use Sylius\Component\Rbac\Model\RoleInterface;
 class CachedPermissionMap implements PermissionMapInterface
 {
     const DEFAULT_TTL = 60;
+    const CACHE_KEY_PREFIX = 'rbac_role:';
 
     /**
      * @var PermissionMapInterface
@@ -86,6 +87,6 @@ class CachedPermissionMap implements PermissionMapInterface
      */
     private function getCacheKey(RoleInterface $role)
     {
-        return $role->getCode();
+        return self::CACHE_KEY_PREFIX . $role->getCode();
     }
 }
