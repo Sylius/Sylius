@@ -23,6 +23,7 @@ use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\Form\Builder\DefaultFormBuil
 use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener\NameResolverListener;
 use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener\DefaultParentListener;
 use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener\NameFilterListener;
+use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -45,27 +46,47 @@ class DoctrinePHPCRDriver extends AbstractDoctrineDriver
      */
     protected function addResourceListeners(ContainerBuilder $container, MetadataInterface $metadata)
     {
-        $options = array_merge(
-            [
-                'default_parent_path' => null,
-                'autocreate' => false,
-                'force' => false,
+        $defaultOptions = [
+                // if no parent is given default to the parent path given here.
+                'parent_path_default' => null,
+
+                // auto-create the parent path if it does not exist.
+                'parent_path_autocreate' => false,
+
+                // set true to always override the parent path.
+                'parent_path_force' => false,
+
+                // automatically replace invalid characters in the node name
+                // with a blank space.
                 'name_filter' => true,
+
+                // automatically resolve same-name-sibling conflicts.
                 'name_resolver' => true,
-            ],
-            $metadata->getParameter('options')
+        ];
+        $metadataOptions = $metadata->hasParameter('options') ? $metadata->getParameter('options') : [];
+
+        if ($diff = array_diff(array_keys($metadataOptions), array_keys($defaultOptions))) {
+            throw new InvalidArgumentException(sprintf(
+                'Unknown PHPCR-ODM configuration options: "%s"',
+                implode('", "', $diff)
+            ));
+        }
+
+        $options = array_merge(
+            $defaultOptions,
+            $metadataOptions
         );
 
         $createEventName = sprintf('%s.%s.pre_%s', $metadata->getApplicationName(), $metadata->getName(), 'create');
         $updateEventName = sprintf('%s.%s.pre_%s', $metadata->getApplicationName(), $metadata->getName(), 'update');
 
-        if ($options['default_parent_path']) {
+        if ($options['parent_path_default']) {
             $defaultPath = new Definition(DefaultParentListener::class);
             $defaultPath->setArguments([
                 new Reference($metadata->getServiceId('manager')),
-                $options['default_parent_path'],
-                $options['autocreate'],
-                $options['force']
+                $options['parent_path_default'],
+                $options['parent_path_autocreate'],
+                $options['parent_path_force']
             ]);
             $defaultPath->addTag('kernel.event_listener', [
                 'event' => $createEventName,
@@ -182,7 +203,7 @@ class DoctrinePHPCRDriver extends AbstractDoctrineDriver
         $definition = new Definition(DefaultResourceType::class);
         $definition
             ->setArguments([
-                $this->getMetdataDefinition($metadata),
+                $this->getMetadataDefinition($metadata),
                 $builderDefinition,
             ])
             ->addTag('form.type', [
