@@ -21,6 +21,7 @@ imports:
     - { resource: "@SyliusUserBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusVariationBundle/Resources/config/app/config.yml" }
 
+    - { resource: "parameters.yml" }
     - { resource: "sylius.yml" }
     - { resource: "state_machine.yml" }
 
