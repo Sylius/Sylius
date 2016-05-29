@@ -19,6 +19,7 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Metadata\Model\Custom\PageMetadata;
 use Sylius\Component\Metadata\Model\Custom\PageMetadataInterface;
 use Sylius\Component\Metadata\Model\MetadataContainerInterface;
+use Sylius\Component\Metadata\Model\MetadataType;
 use Sylius\Component\Metadata\Model\Twitter\AppCard;
 use Sylius\Component\Metadata\Model\Twitter\CardInterface;
 use Sylius\Component\Metadata\Model\Twitter\PlayerCard;
@@ -52,7 +53,10 @@ class MetadataContext extends DefaultContext
      */
     public function iAmCustomizingMetadata($identifier = 'FooBar')
     {
-        $this->getSession()->visit($this->generateUrl('sylius_backend_page_metadata_container_customize', ['id' => $identifier]));
+        $this->getSession()->visit($this->generateUrl('sylius_backend_metadata_container_customize', [
+            'type' => MetadataType::PAGE,
+            'code' => $identifier
+        ]));
     }
 
     /**

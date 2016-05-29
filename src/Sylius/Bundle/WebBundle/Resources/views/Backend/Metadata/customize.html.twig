@@ -32,7 +32,7 @@
 {{ form_errors(form) }}
 
 <form method="post" class="form-horizontal" novalidate
-      action="{{ path('sylius_backend_page_metadata_container_customize', {'type': metadata_container.type, 'code': metadata_container.code }) }}">
+      action="{{ path('sylius_backend_metadata_container_customize', {'type': metadata_container.type, 'code': metadata_container.code }) }}">
 
     {% include 'SyliusWebBundle:Backend/Metadata:_form.html.twig' %}
     {{ update() }}

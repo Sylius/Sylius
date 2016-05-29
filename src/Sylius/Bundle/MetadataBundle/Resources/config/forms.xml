@@ -21,8 +21,6 @@
         <parameter key="sylius.metadata.dynamic_forms_choices_map.class">Sylius\Bundle\MetadataBundle\DynamicForm\DynamicFormsChoicesMap</parameter>
         <parameter key="sylius.metadata.form.type.dynamic_form_choice.class">Sylius\Bundle\MetadataBundle\DynamicForm\Type\DynamicFormChoiceType</parameter>
 
-        <parameter key="sylius.form.type.page_metadata_container.class">Sylius\Bundle\MetadataBundle\Form\Type\PageMetadataContainerType</parameter>
-        <parameter key="sylius.form.type.page_metadata_container_translation.class">Sylius\Bundle\MetadataBundle\Form\Type\PageMetadataContainerTranslationType</parameter>
         <parameter key="sylius.form.type.page_metadata.class">Sylius\Bundle\MetadataBundle\Form\Type\Custom\PageMetadataType</parameter>
         <parameter key="sylius.form.type.twitter_card.class">Sylius\Bundle\MetadataBundle\Form\Type\Twitter\TwitterCardType</parameter>
         <parameter key="sylius.form.type.twitter_summary_card.class">Sylius\Bundle\MetadataBundle\Form\Type\Twitter\SummaryCardType</parameter>
@@ -36,8 +34,6 @@
         <parameter key="sylius.model.twitter_player_card.class">Sylius\Component\Metadata\Model\Twitter\PlayerCard</parameter>
         <parameter key="sylius.model.twitter_app_card.class">Sylius\Component\Metadata\Model\Twitter\AppCard</parameter>
 
-        <parameter key="sylius.validation_groups.page_metadata_container_translation" type="collection"><parameter>Default</parameter></parameter>
-        <parameter key="sylius.validation_groups.page_metadata_container" type="collection"><parameter>Default</parameter></parameter>
         <parameter key="sylius.validation_groups.page_metadata" type="collection"><parameter>Default</parameter></parameter>
         <parameter key="sylius.validation_groups.twitter_summary_card" type="collection"><parameter>Default</parameter></parameter>
         <parameter key="sylius.validation_groups.twitter_summary_large_image_card" type="collection"><parameter>Default</parameter></parameter>
@@ -92,18 +88,6 @@
             <argument>%sylius.model.twitter_app_card.class%</argument>
             <argument>%sylius.validation_groups.twitter_app_card%</argument>
             <tag name="form.type" alias="sylius_twitter_app_card" />
-        </service>
-
-        <service id="sylius.form.type.page_metadata_container" class="%sylius.form.type.page_metadata_container.class%">
-            <argument>%sylius.model.metadata_container.class%</argument>
-            <argument>%sylius.validation_groups.page_metadata_container%</argument>
-            <tag name="form.type" alias="sylius_page_metadata_container" />
-        </service>
-
-        <service id="sylius.form.type.page_metadata_container_translation" class="%sylius.form.type.page_metadata_container_translation.class%">
-            <argument>%sylius.model.metadata_container_translation.class%</argument>
-            <argument>%sylius.validation_groups.page_metadata_container_translation%</argument>
-            <tag name="form.type" alias="sylius_page_metadata_container_translation" />
         </service>
     </services>
 

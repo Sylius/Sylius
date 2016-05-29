@@ -51,11 +51,13 @@ class ResourceTranslationsSubscriber implements EventSubscriberInterface
     public function preSetData(FormEvent $event)
     {
         $form = $event->getForm();
+        // NOTE: This needs changing from SF 2.7 => 2.8 - type => entry_type, options => entry_options
         $type = $form->getConfig()->getOption('type');
+        $options = $form->getConfig()->getOption('options');
 
         foreach ($this->locales as $locale => $isRequired) {
             if (false === $form->has($locale)) {
-                $form->add($locale, $type, ['required' => $isRequired]);
+                $form->add($locale, $type, array_merge($options, ['required' => $isRequired]));
             }
         }
     }

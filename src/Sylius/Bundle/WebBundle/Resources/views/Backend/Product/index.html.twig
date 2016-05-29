@@ -15,7 +15,7 @@
 <div class="page-header">
     <div class="actions-menu">
         {{ buttons.create(path('sylius_backend_product_create'), 'sylius.ui.create_product'|trans) }}
-        <a href="{{ path('sylius_backend_page_metadata_container_customize', {
+        <a href="{{ path('sylius_backend_metadata_container_customize', {
                 'type': constant('Sylius\\Component\\Metadata\\Model\\MetadataType::PAGE'),
                 'code': constant('Sylius\\Component\\Core\\Model\\ProductInterface::METADATA_CLASS_IDENTIFIER')
             })}}" class="btn btn-default">

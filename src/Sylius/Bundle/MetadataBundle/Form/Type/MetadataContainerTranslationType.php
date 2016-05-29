@@ -13,25 +13,29 @@ namespace Sylius\Bundle\MetadataBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Pete Ward <peter.ward@reiss.com>
  */
-class PageMetadataContainerType extends AbstractResourceType
+class MetadataContainerTranslationType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('code', 'text', ['read_only' => true])
-            ->add('type', 'text', ['read_only' => true])
-            ->add('translations', 'sylius_translations', [
-                'type' => 'sylius_page_metadata_container_translation',
-                'label' => 'sylius.form.translations',
-            ])
-        ;
+        $builder->add('metadata', $options['metadata_form'], ['label' => false]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        parent::configureOptions($resolver);
+
+        $resolver->setRequired('metadata_form');
     }
 
     /**
@@ -39,6 +43,6 @@ class PageMetadataContainerType extends AbstractResourceType
      */
     public function getName()
     {
-        return 'sylius_page_metadata_container';
+        return 'sylius_metadata_container_translation';
     }
 }

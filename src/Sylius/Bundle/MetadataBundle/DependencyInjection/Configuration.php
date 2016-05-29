@@ -13,6 +13,8 @@ namespace Sylius\Bundle\MetadataBundle\DependencyInjection;
 
 use Sylius\Bundle\MetadataBundle\Controller\MetadataController;
 use Sylius\Bundle\MetadataBundle\Doctrine\ORM\MetadataContainerRepository;
+use Sylius\Bundle\MetadataBundle\Form\Type\MetadataContainerTranslationType;
+use Sylius\Bundle\MetadataBundle\Form\Type\MetadataContainerType;
 use Sylius\Bundle\MetadataBundle\Model\MetadataContainer;
 use Sylius\Bundle\MetadataBundle\Model\MetadataContainerTranslation;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
@@ -79,16 +81,12 @@ class Configuration implements ConfigurationInterface
                             ->scalarNode('controller')->defaultValue(MetadataController::class)->cannotBeEmpty()->end()
                             ->scalarNode('repository')->defaultValue(MetadataContainerRepository::class)->cannotBeEmpty()->end()
                             ->scalarNode('factory')->defaultValue(MetadataContainerFactory::class)->end()
-                              // TODO: The default doesn't make sense now as you need 'type' to clarify
-                              // it also breaks as it's expecting a form definition that doesn't exist
-                              // an alternative here in future would be some configuration of the various types as
-                              // a separate section that could be used to dynamically handle type admin
-//                            ->arrayNode('form')
-//                                ->addDefaultsIfNotSet()
-//                                ->children()
-//                                    ->scalarNode('default')->defaultValue(PageMetadataContainerType::class)->cannotBeEmpty()->end()
-//                                ->end()
-//                            ->end()
+                            ->arrayNode('form')
+                                ->addDefaultsIfNotSet()
+                                ->children()
+                                    ->scalarNode('default')->defaultValue(MetadataContainerType::class)->cannotBeEmpty()->end()
+                                ->end()
+                            ->end()
                         ->end()
                     ->end()
                     ->arrayNode('validation_groups')
@@ -112,6 +110,12 @@ class Configuration implements ConfigurationInterface
                                     ->scalarNode('controller')->defaultValue(MetadataController::class)->cannotBeEmpty()->end()
                                     ->scalarNode('repository')->cannotBeEmpty()->end()
                                     ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                    ->arrayNode('form')
+                                        ->addDefaultsIfNotSet()
+                                        ->children()
+                                            ->scalarNode('default')->defaultValue(MetadataContainerTranslationType::class)->cannotBeEmpty()->end()
+                                        ->end()
+                                    ->end()
                                 ->end()
                             ->end()
                             ->arrayNode('validation_groups')

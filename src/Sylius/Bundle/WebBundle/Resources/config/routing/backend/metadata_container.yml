@@ -13,23 +13,20 @@ sylius_backend_metadata_container_index:
             sorting:
                 id: asc
 
-# TODO: It would be good to have a generic `sylius_backend_metadata_container_customize` with a generic 'type'
-# but I think this would require further DI work to configure types and associate FormTypes and possibly templates
-# against them. Out of scope at this point.
-sylius_backend_page_metadata_container_customize:
-    path: /customize/page/{code}
+sylius_backend_metadata_container_customize:
+    path: /customize/{type}/{code}
     methods: [GET, POST, PUT]
     defaults:
         _controller: sylius.controller.metadata_container:customizeAction
         _sylius:
-            form: sylius_page_metadata_container
+            form:
+                type: sylius_metadata_container
             factory:
                 method: createIdentifiedBy
-                arguments: ['page', $code]
+                arguments: [$type, $code]
             repository:
                 method: findOneByTypeAndCode
-                arguments: ['page', $code]
-
+                arguments: [$type, $code]
             template: SyliusWebBundle:Backend/Metadata:customize.html.twig
             redirect: sylius_backend_metadata_container_show
 

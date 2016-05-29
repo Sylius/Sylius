@@ -49,7 +49,7 @@
             <td>{{ variant.originalPrice|sylius_price }}</td>
             <td>
                 <div class="pull-right">
-                <a href="{{ path('sylius_backend_page_metadata_container_customize', {
+                <a href="{{ path('sylius_backend_metadata_container_customize', {
                         'type': constant('Sylius\\Component\\Metadata\\Model\\MetadataType::PAGE'),
                         'code': variant.metadataIdentifier
                     })}}" class="btn btn-default">
