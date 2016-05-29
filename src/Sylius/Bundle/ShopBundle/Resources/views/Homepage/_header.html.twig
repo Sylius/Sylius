@@ -1,7 +1,10 @@
 <div class="ui basic segment">
-    <div class="ui one column stackable grid">
+    <div class="ui two column stackable grid">
         <div class="column">
             <a href="{{ path('sylius_shop_homepage') }}"><img src="{{ asset('assets/shop/img/logo.png') }}" class="ui small image" /></a>
+        </div>
+        <div class="right aligned column">
+            {% include '@SyliusShop/Cart/_widget.html.twig' %}
         </div>
     </div>
 </div>

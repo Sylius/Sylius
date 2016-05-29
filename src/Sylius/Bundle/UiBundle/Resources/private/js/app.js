@@ -58,6 +58,12 @@
     $('.button.ui.dropdown').dropdown({action: 'hide'});
     $('.ui.fluid.search.selection.ui.dropdown').dropdown();
     $('.menu .item').tab();
+    $('.cart.button')
+        .popup({
+          popup: $('.cart.popup'),
+          on: 'click',
+        })
+    ;
 
     $('.form button').on('click', function() {
       return $(this).closest('form').addClass('loading');

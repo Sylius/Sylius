@@ -56,6 +56,9 @@ sylius:
         create: Create
         currencies: Currencies
         customer_can_login_to_the_store: Customer can login to the store
+        set_a_new_password_for_your_account: Set a new password for your account
+        my_account: My account
+        home: Home
         customer_care: Customer Care
         customer_login: Customer login
         dashboard: Dashboard
@@ -97,6 +100,10 @@ sylius:
         filter: Filter
         go: Go
         generate_coupons: Generate coupons
+        hello: Hello
+        manage_your_personal_information_and_preferences: Manage your personal information and preferences
+        latest_products: Latest products
+        view_and_edit_cart: View and edit cart
         in: In
         info: Info
         item: Item

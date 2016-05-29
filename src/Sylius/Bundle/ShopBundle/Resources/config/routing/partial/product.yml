@@ -11,3 +11,13 @@ sylius_shop_partial_product_index:
                 method: findEnabledByTaxonCodeAndChannel
                 arguments: [$code, 'expr:service("sylius.context.channel").getChannel()']
             template: SyliusShopBundle:Product:index.html.twig
+
+sylius_shop_partial_taxon_by_code:
+    path: /{code}
+    defaults:
+        _controller: sylius.controller.taxon:indexAction
+        _sylius:
+            repository:
+                method: findChildrenAsTreeByRootCode
+                arguments: [$code]
+            template: $template

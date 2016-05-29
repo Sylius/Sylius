@@ -1,4 +1,4 @@
-<table class="ui single line table" id="product-variants">
+<table class="ui single line compact table" id="product-variants">
     <thead>
     <tr>
         <th>{{ 'sylius.ui.variant'|trans }}</th>
@@ -22,9 +22,9 @@
                 {% endif %}
             </td>
             <td>{{ variant.price|sylius_price }}</td>
-            <td>
+            <td class="right aligned">
                 {% if sylius_inventory_is_available(variant) %}
-                    {{ form_widget(form.variant[loop.index0]) }}
+                    {{ form_row(form.variant[loop.index0], {'label': false}) }}
                 {% else %}
                     <span class="ui label">{{ 'sylius.ui.out_of_stock'|trans }}</span>
                 {% endif %}

@@ -57,12 +57,12 @@ interface ProductRepositoryInterface extends BaseProductRepositoryInterface
     public function findForDetailsPage($id);
 
     /**
-     * @param int $limit
      * @param ChannelInterface $channel
+     * @param int $count
      *
      * @return ProductInterface[]
      */
-    public function findLatest($limit = 10, ChannelInterface $channel);
+    public function findLatestByChannel(ChannelInterface $channel, $count);
 
     /**
      * @param ArchetypeInterface $archetype

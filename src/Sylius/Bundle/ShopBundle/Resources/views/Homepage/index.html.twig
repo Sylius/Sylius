@@ -1,4 +1,9 @@
 {% extends 'SyliusShopBundle:Layout:main.html.twig' %}
 
 {% block content %}
+<h1 class="ui horizontal section divider header">
+    {{ 'sylius.ui.latest_products'|trans }}
+</h1>
+
+{% render(url('sylius_shop_partial_product_latest', {'count': 8, 'template': '@SyliusShop/Product/_simpleList.html.twig'})) %}
 {% endblock %}

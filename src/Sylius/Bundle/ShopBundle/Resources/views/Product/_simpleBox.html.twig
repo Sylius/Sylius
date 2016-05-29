@@ -1,0 +1,15 @@
+<div class="ui fluid card">
+    <a href="{{ path('sylius_shop_product_show', {'slug': product.slug}) }}" class="blurring dimmable image">
+        <div class="ui dimmer">
+            <div class="content">
+                <div class="center">
+                    <div class="ui inverted button">{{ 'sylius.ui.view_more'|trans }}</div>
+                </div>
+            </div>
+        </div>
+        <img src="http://placehold.it/200x200">
+    </a>
+    <div class="content">
+        <a href="{{ path('sylius_shop_product_show', {'slug': product.slug}) }}" class="header">{{ product.name }}</a>
+    </div>
+</div>

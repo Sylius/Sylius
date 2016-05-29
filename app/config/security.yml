@@ -51,15 +51,21 @@ security:
         shop:
             switch_user: { role: ROLE_ALLOWED_TO_SWITCH }
             context: user
-            pattern: /shop/.*
+            pattern:     /shop/.*
             form_login:
                 provider: sylius_user_provider
                 login_path: sylius_shop_login
                 check_path: sylius_shop_login_check
                 failure_path: sylius_shop_login
                 default_target_path: sylius_shop_homepage
-                use_forward: false
+                use_forward:  false
                 use_referer: true
+            remember_me:
+                key: %secret%
+                name: APP_REMEMBER_ME
+                lifetime: 31536000
+                always_remember_me: true
+                remember_me_parameter: _remember_me
             logout:
                 path: sylius_shop_logout
                 target: sylius_shop_login

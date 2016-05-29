@@ -1,9 +1,11 @@
-sylius_shop_partial_taxon_by_code:
-    path: /{code}
+sylius_shop_partial_product_latest:
+    path: /latest/{count}
     defaults:
-        _controller: sylius.controller.taxon:indexAction
+        _controller: sylius.controller.product:indexAction
         _sylius:
             repository:
-                method: findChildrenAsTreeByRootCode
-                arguments: [$code]
+                method: findLatestByChannel
+                arguments:
+                    - "expr:service('sylius.context.channel').getChannel()"
+                    - $count
             template: $template

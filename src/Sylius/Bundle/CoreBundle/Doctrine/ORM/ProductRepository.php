@@ -159,7 +159,7 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
     /**
      * {@inheritdoc}
      */
-    public function findLatest($limit = 10, ChannelInterface $channel)
+    public function findLatestByChannel(ChannelInterface $channel, $count)
     {
         return $this->createQueryBuilder('o')
             ->innerJoin('o.channels', 'channel')
@@ -167,7 +167,7 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
             ->andWhere('o.enabled = true')
             ->andWhere('channel = :channel')
             ->setParameter('channel', $channel)
-            ->setMaxResults($limit)
+            ->setMaxResults($count)
             ->getQuery()
             ->getResult()
         ;
