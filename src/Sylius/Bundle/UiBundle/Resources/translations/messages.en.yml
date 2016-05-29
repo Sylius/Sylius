@@ -27,7 +27,23 @@ sylius:
         change_your_password: Change your password
         charges_and_taxes: Charges and taxes
         checkout: Checkout
+        have_an_account_already: Have an account already
+        sign_in_here: Sign in here
+        forgot_password: Forgot password
+        your_shopping_cart: Your shopping cart
+        your_cart_is_empty: Your cart is empty
         clear_filters: Clear filters
+        enter_your_code: Enter your code
+        qty: Qty
+        clear_cart: Clear cart
+        update_cart: Update cart
+        apply_coupon: Apply coupon
+        edit_your_items_apply_coupon_or_proceed_to_the_checkout: Edit your items, apply coupon or proceed to the checkout
+        create_an_account: Create an account
+        summary: Summary
+        create_a_new_customer_account: Create a new customer account
+        if_you_have_an_account_sign_in_with_your_email_address: If you have an account, sign in with your e-mail address
+        access_your_store_account_or_create_a_new_one: Access your store account or create a new one
         color: Color
         configurable_product: Configurable product
         configure_channels_available_in_your_store: Configure channels available in your store
@@ -41,6 +57,7 @@ sylius:
         currencies: Currencies
         customer_can_login_to_the_store: Customer can login to the store
         customer_care: Customer Care
+        customer_login: Customer login
         dashboard: Dashboard
         date: Date
         default_currency: Default currency
@@ -139,11 +156,14 @@ sylius:
         promotion_configuration: Promotion configuration
         promotion_information: Promotion information
         purchased_from: Purchased from
+        personal_information: Personal information
         quantity: Qty
         ready: Ready
         repeat_new_password: Repeat new password
         returned: Returned
         returns_policy: Returns Policy
+        registered_customers: Registered customers
+        register_in_the_store: Register in the store
         save_changes: Save changes
         select_taxon: Select taxon
         shipped: Shipped

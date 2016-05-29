@@ -1,5 +1,7 @@
 <div class="right menu">
     {% if is_granted('ROLE_AUTHENTICATED_REMEMBERED') %}
+        <div class="item">{{ 'sylius.ui.hello'|trans }}, {{ app.user.customer.fullName }}</div>
+        <a href="{{ path('sylius_shop_account_dashboard') }}" class="item">{{ 'sylius.ui.my_account'|trans }}</a>
         <a href="{{ path('sylius_shop_logout') }}" class="item">{{ 'sylius.ui.logout'|trans }}</a>
     {% else %}
         <a href="{{ path('sylius_shop_login') }}" class="item">{{ 'sylius.ui.login'|trans }}</a>

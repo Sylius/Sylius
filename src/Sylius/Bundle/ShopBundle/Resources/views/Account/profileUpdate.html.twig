@@ -1,0 +1,39 @@
+{% extends 'SyliusShopBundle:Layout:main.html.twig' %}
+
+{% form_theme form '@SyliusUi/Form/theme.html.twig' %}
+
+{% block content %}
+<div class="ui breadcrumb">
+    <a href="{{ path('sylius_shop_homepage') }}" class="section">{{ 'sylius.ui.home'|trans }}</a>
+    <div class="divider"> / </div>
+    <a href="{{ path('sylius_shop_account_dashboard') }}" class="section">{{ 'sylius.ui.my_account'|trans }}</a>
+    <div class="divider"> / </div>
+    <div class="active section">{{ 'sylius.ui.personal_information'|trans }}</div>
+</div>
+
+<div class="ui stackable grid">
+    <div class="four wide column">
+        {% include 'SyliusShopBundle:Account:_menu.html.twig' %}
+    </div>
+    <div class="twelve wide column">
+        <div class="ui segment">
+            {{ form_start(form, {'action': path('sylius_shop_account_profile_update'), 'attr': {'class': 'ui form', 'novalidate': 'novalidate'}}) }}
+                <h4 class="ui dividing header">{{ 'sylius.ui.edit_your_personal_information'|trans }}</h4>
+                <div class="two fields">
+                    <div class="field">{{ form_row(form.firstName) }}</div>
+                    <div class="field">{{ form_row(form.lastName) }}</div>
+                </div>
+                {{ form_row(form.email) }}
+                <div class="two fields">
+                    <div class="field">{{ form_row(form.birthday) }}</div>
+                    <div class="field">{{ form_row(form.gender) }}</div>
+                </div>
+                {{ form_row(form.phoneNumber) }}
+
+                <button type="submit" class="ui large primary button">{{ 'sylius.ui.save_changes'|trans }}</button>
+            {{ form_row(form._token) }}
+            {{ form_end(form, {'render_rest': false}) }}
+        </div>
+    </div>
+</div>
+{% endblock %}

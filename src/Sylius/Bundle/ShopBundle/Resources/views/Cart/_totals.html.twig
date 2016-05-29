@@ -1,10 +1,11 @@
 {% set taxAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::TAX_ADJUSTMENT') %}
 {% set shippingAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::SHIPPING_ADJUSTMENT') %}
+{% set promotionAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT') %}
 
-{% set promotionTotal =  cart.getPromotionsTotalRecursively() %}
+{% set promotionTotal =  cart.getAdjustmentsTotalRecursively(promotionAdjustment) %}
 
 <div class="ui segment">
-    <h2 class="ui dividing header">Summary</h2>
+    <h2 class="ui dividing header">{{ 'sylius.ui.summary'|trans }}</h2>
     <table class="ui very basic table">
         <tbody>
         <tr>
@@ -13,7 +14,7 @@
         </tr>
         <tr>
             <td>{{ 'sylius.ui.shipping'|trans }}:</td>
-            <td class="right aligned">$10.00</td>
+            <td class="right aligned">{{ cart.getAdjustmentsTotal(shippingAdjustment)|sylius_price }}</td>
         </tr>
         {% if promotionTotal %}
         <tr>

@@ -69,12 +69,12 @@ gulp.task('admin-css', function() {
 
     var cssStream = gulp.src(paths.admin.css)
         .pipe(concat('css-files.css'))
-        ;
+    ;
 
     var sassStream = gulp.src(paths.admin.sass)
         .pipe(sass())
         .pipe(concat('sass-files.scss'))
-        ;
+    ;
 
     return merge(cssStream, sassStream)
         .pipe(order(['css-files.css', 'sass-files.scss']))
@@ -83,14 +83,14 @@ gulp.task('admin-css', function() {
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest(adminRootPath + 'css/'))
         .pipe(livereload())
-        ;
+    ;
 });
 
 gulp.task('admin-img', function() {
     return gulp.src(paths.admin.img)
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest(adminRootPath + 'img/'))
-        ;
+    ;
 });
 
 gulp.task('admin-watch', function() {
@@ -108,7 +108,7 @@ gulp.task('shop-js', function () {
         .pipe(gulpif(env === 'prod', uglify))
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest(shopRootPath + 'js/'))
-        ;
+    ;
 });
 
 gulp.task('shop-css', function() {
@@ -116,12 +116,12 @@ gulp.task('shop-css', function() {
 
     var cssStream = gulp.src(paths.shop.css)
         .pipe(concat('css-files.css'))
-        ;
+    ;
 
     var sassStream = gulp.src(paths.shop.sass)
         .pipe(sass())
         .pipe(concat('sass-files.scss'))
-        ;
+    ;
 
     return merge(cssStream, sassStream)
         .pipe(order(['css-files.css', 'sass-files.scss']))
@@ -130,14 +130,14 @@ gulp.task('shop-css', function() {
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest(shopRootPath + 'css/'))
         .pipe(livereload())
-        ;
+    ;
 });
 
 gulp.task('shop-img', function() {
     return gulp.src(paths.shop.img)
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest(shopRootPath + 'img/'))
-        ;
+    ;
 });
 
 gulp.task('shop-watch', function() {

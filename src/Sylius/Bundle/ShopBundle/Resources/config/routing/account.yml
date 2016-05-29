@@ -15,7 +15,7 @@ sylius_shop_account_profile_update:
     defaults:
         _controller: sylius.controller.customer:updateAction
         _sylius:
-            template: SyliusShopBundle:Account:updateProfile.html.twig
+            template: SyliusShopBundle:Account:profileUpdate.html.twig
             form: sylius_customer_profile
             repository:
                 method: find
