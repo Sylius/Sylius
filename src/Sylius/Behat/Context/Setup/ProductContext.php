@@ -137,7 +137,7 @@ final class ProductContext implements Context
      */
     public function storeHasAConfigurableProduct($productName)
     {
-        $product = $this->productFactory->createNewWithoutVariants();
+        $product = $this->productFactory->createNew();
 
         $product->setName($productName);
         $product->setCode($this->convertToCode($productName));
@@ -193,7 +193,7 @@ final class ProductContext implements Context
      */
     public function productBelongsToTaxCategory(ProductInterface $product, TaxCategoryInterface $taxCategory)
     {
-        $product->getMasterVariant()->setTaxCategory($taxCategory);
+        $product->getFirstVariant()->setTaxCategory($taxCategory);
         $this->objectManager->flush();
     }
 
@@ -402,12 +402,12 @@ final class ProductContext implements Context
     private function createProduct($productName, $price = 0)
     {
         /** @var ProductInterface $product */
-        $product = $this->productFactory->createNew();
+        $product = $this->productFactory->createWithVariant();
 
         $product->setName($productName);
-        $product->setPrice($price);
+        $product->getFirstVariant()->setPrice($price);
         $product->setCode($this->convertToCode($productName));
-        $product->getMasterVariant()->setCode($product->getCode());
+        $product->getFirstVariant()->setCode($product->getCode());
 
         return $product;
     }

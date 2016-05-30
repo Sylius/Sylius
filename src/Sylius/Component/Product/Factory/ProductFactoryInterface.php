@@ -20,14 +20,14 @@ use Sylius\Component\Resource\Factory\TranslatableFactoryInterface;
 interface ProductFactoryInterface extends TranslatableFactoryInterface
 {
     /**
+     * @return ProductInterface
+     */
+    public function createWithVariant();
+
+    /**
      * @param mixed $archetypeCode
      *
      * @return ProductInterface
      */
     public function createFromArchetype($archetypeCode);
-
-    /**
-     * @return ProductInterface
-     */
-    public function createNewWithoutVariants();
 }

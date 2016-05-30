@@ -62,11 +62,9 @@ Feature: Hierarchical Role based access control (HRBAC)
         Given I am logged in as "Catalog Manager"
         And I am on the product creation page
         When I fill in the following:
-            | Name                                     | Book about Everything   |
-            | Description                              | Interesting description |
-            | Price                                    | 29.99                   |
-            | sylius_product_legacy_code               | OMNI_BOOK               |
-            | sylius_product_legacy_masterVariant_code | OMNI_BOOK               |
+            | Name                       | Book about Everything   |
+            | Description                | Interesting description |
+            | sylius_product_legacy_code | OMNI_BOOK               |
         And I press "Create"
         Then I should be on the page of product "Book about Everything"
         And I should see "Product has been successfully created"

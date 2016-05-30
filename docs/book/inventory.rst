@@ -14,13 +14,13 @@ It is always accessible via simple API:
 
     echo $productVariant->getOnHand(); // Prints current inventory.
 
-Every variant also has an unique SKU and can be available on demand, if you do not want to have strict inventory tracking.
+Every variant also has an unique code and can be available on demand, if you do not want to have strict inventory tracking.
 
 .. code-block:: php
 
     <?php
 
-    $variant = $product->getMasterVariant();
+    $variant = $product->getFirstVariant();
     $variant->setAvailableOnDemand(false);
 
     if ($variant->isAvailableOnDemand()) {

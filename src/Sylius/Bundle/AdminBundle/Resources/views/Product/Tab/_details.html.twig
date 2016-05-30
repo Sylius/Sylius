@@ -5,8 +5,9 @@
     <div class="ui segment">
         {{ form_row(form.code) }}
         {% if product.simple %}
-            {{ form_row(form.masterVariant.price) }}
-            {{ form_row(form.masterVariant.onHand) }}
+            {{ form_row(form.variant.code) }}
+            {{ form_row(form.variant.price) }}
+            {{ form_row(form.variant.onHand) }}
         {% else %}
             {{ form_row(form.options) }}
         {% endif %}

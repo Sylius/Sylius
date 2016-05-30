@@ -81,11 +81,9 @@ Feature: Product archetypes
         Given I am on the product archetype index page
         And I click "Create product" near "T-Shirt"
         When I fill in the following:
-            | Name                                     | Manchester United tee   |
-            | sylius_product_legacy_code               | BOSTON_TEE              |
-            | sylius_product_legacy_masterVariant_code | BOSTON_TEE              |
-            | Description                              | Interesting description |
-            | Price                                    | 59.99                   |
+            | Name                       | Manchester United tee   |
+            | sylius_product_legacy_code | BOSTON_TEE              |
+            | Description                | Interesting description |
         And I go to "Attributes" tab
         And I fill in the following:
             | T-Shirt fabric     | Cotton 100%          |

@@ -1,7 +1,8 @@
 <div class="row product">
     <div class="col-md-3">
         <a href="{{ path(product) }}" class="thumbnail">
-            <img src="{{ product.image ? product.image.path|imagine_filter('sylius_medium') : 'http://placehold.it/200x200' }}" alt="{{ product.name }}" />
+            {% set image = (product.variants|length > 0 and product.image) ? product.image.path|imagine_filter('sylius_medium') : 'http://placehold.it/200x200' %}
+            <img src="{{ image }}" alt="{{ product.name }}" />
         </a>
     </div>
     <div class="col-md-9">
@@ -11,7 +12,7 @@
         <hr>
         {% if not product.hasOptions %}
             <div class="pull-left">
-            {% if not sylius_inventory_is_available(product.masterVariant) %}
+            {% if not sylius_inventory_is_available(product.firstVariant) %}
                 <br />
                 <span class="label label-important">{{ 'sylius.ui.out_of_stock'|trans }}</span>
             {% else %}

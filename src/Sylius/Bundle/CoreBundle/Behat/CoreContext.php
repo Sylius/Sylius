@@ -186,8 +186,8 @@ class CoreContext extends DefaultContext
 
             /* @var $item OrderItemInterface */
             $item = $orderItemFactory->createNew();
-            $item->setVariant($product->getMasterVariant());
-            $item->setUnitPrice($product->getMasterVariant()->getPrice());
+            $item->setVariant($product->getFirstVariant());
+            $item->setUnitPrice($product->getPrice());
 
             $orderItemQuantityModifier->modify($item, $data['quantity']);
 
@@ -327,10 +327,10 @@ class CoreContext extends DefaultContext
     {
         /* @var $product ProductInterface */
         $product = $this->findOneByName('product', $productName);
-        $masterVariant = $product->getMasterVariant();
+        $variant = $product->getFirstVariant();
 
-        /* @var $masterVariant ProductVariantInterface */
-        $masterVariant->setPricingCalculator(PriceCalculators::VOLUME_BASED);
+        /* @var $variant ProductVariantInterface */
+        $variant->setPricingCalculator(PriceCalculators::VOLUME_BASED);
         $configuration = [];
 
         foreach ($table->getHash() as $data) {
@@ -348,7 +348,7 @@ class CoreContext extends DefaultContext
             ];
         }
 
-        $masterVariant->setPricingConfiguration($configuration);
+        $variant->setPricingConfiguration($configuration);
 
         $manager = $this->getEntityManager();
         $manager->persist($product);
@@ -361,10 +361,10 @@ class CoreContext extends DefaultContext
     public function productHasTheFollowingGroupBasedPricing($productName, TableNode $table)
     {
         $product = $this->findOneByName('product', $productName);
-        $masterVariant = $product->getMasterVariant();
+        $variant = $product->getFirstVariant();
 
-        /* @var $masterVariant ProductVariantInterface */
-        $masterVariant->setPricingCalculator(PriceCalculators::GROUP_BASED);
+        /* @var $variant ProductVariantInterface */
+        $variant->setPricingCalculator(PriceCalculators::GROUP_BASED);
         $configuration = [];
 
         foreach ($table->getHash() as $data) {
@@ -372,7 +372,7 @@ class CoreContext extends DefaultContext
             $configuration[$group->getId()] = (float) $data['price'] * 100;
         }
 
-        $masterVariant->setPricingConfiguration($configuration);
+        $variant->setPricingConfiguration($configuration);
 
         $manager = $this->getEntityManager();
         $manager->persist($product);
@@ -546,6 +546,18 @@ class CoreContext extends DefaultContext
         $product = $this->findOneByName('product', $productName);
 
         $this->generateProductVariations($product);
+
+        $this->getEntityManager()->flush();
+    }
+
+    /**
+     * @Given /^product "([^""]*)" has no variants$/
+     */
+    public function productHasNoVariants($productName)
+    {
+        /** @var ProductInterface $product */
+        $product = $this->findOneByName('product', $productName);
+        $product->getVariants()->clear();
 
         $this->getEntityManager()->flush();
     }
@@ -800,7 +812,7 @@ class CoreContext extends DefaultContext
         $this->getService('sylius.generator.variant')->generate($product);
 
         foreach ($product->getVariants() as $variant) {
-            $variant->setPrice($product->getMasterVariant()->getPrice());
+            $variant->setPrice((null !== $product->getPrice()) ? $product->getPrice() : rand(1000, 10000));
             $variant->setCode($this->faker->unique->uuid);
         }
 

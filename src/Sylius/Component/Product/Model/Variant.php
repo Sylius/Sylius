@@ -74,10 +74,6 @@ class Variant extends BaseVariant implements VariantInterface
     public function setAvailableOn(\DateTime $availableOn = null)
     {
         $this->availableOn = $availableOn;
-
-        if ($this->isMaster() && null !== $this->object) {
-            $this->getProduct()->setAvailableOn($availableOn);
-        }
     }
 
     /**
@@ -94,23 +90,5 @@ class Variant extends BaseVariant implements VariantInterface
     public function setAvailableUntil(\DateTime $availableUntil = null)
     {
         $this->availableUntil = $availableUntil;
-
-        if ($this->isMaster() && null !== $this->object) {
-            $this->getProduct()->setAvailableUntil($availableUntil);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setDefaults(BaseVariantInterface $masterVariant)
-    {
-        parent::setDefaults($masterVariant);
-
-        if (!$masterVariant instanceof VariantInterface) {
-            throw new \InvalidArgumentException('Product variants must implement "Sylius\Component\Product\Model\VariantInterface".');
-        }
-
-        $this->setAvailableOn($masterVariant->getAvailableOn());
     }
 }

@@ -11,6 +11,7 @@
 
 namespace spec\Sylius\Bundle\VariationBundle\Validator;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\VariationBundle\Validator\Constraint\VariantCombination;
@@ -37,17 +38,6 @@ class VariantCombinationValidatorSpec extends ObjectBehavior
         $this->shouldImplement(ConstraintValidator::class);
     }
 
-    function it_should_not_add_violation_if_variant_is_master(VariantInterface $variant)
-    {
-        $constraint = new VariantCombination([
-            'message' => 'Variant with given presentation already exists',
-        ]);
-
-        $variant->isMaster()->willReturn(true);
-
-        $this->validate($variant, $constraint);
-    }
-
     function it_should_not_add_violation_if_variable_dont_have_options(
         VariantInterface $variant,
         VariableInterface $variable
@@ -56,7 +46,6 @@ class VariantCombinationValidatorSpec extends ObjectBehavior
             'message' => 'Variant with given options already exists',
         ]);
 
-        $variant->isMaster()->willReturn(false);
         $variant->getObject()->willReturn($variable);
 
         $variable->hasVariants()->willReturn(false);
@@ -73,7 +62,6 @@ class VariantCombinationValidatorSpec extends ObjectBehavior
             'message' => 'Variant with given options already exists',
         ]);
 
-        $variant->isMaster()->willReturn(false);
         $variant->getObject()->willReturn($variable);
 
         $variable->hasVariants()->willReturn(true);
@@ -93,9 +81,9 @@ class VariantCombinationValidatorSpec extends ObjectBehavior
             'message' => 'Variant with given options already exists',
         ]);
 
-        $variant->isMaster()->willReturn(false);
         $variant->getObject()->willReturn($variable);
-        $variant->getOptions()->willReturn([$option]);
+
+        $variant->getOptions()->willReturn(new ArrayCollection([$option->getWrappedObject()]));
 
         $existingVariant->hasOption($option)->willReturn(true);
 

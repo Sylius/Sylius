@@ -63,7 +63,7 @@ class UpdateConfigurableProductPage extends BaseUpdatePage implements UpdateConf
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_product_code',
             'options' => '#sylius_product_options',
-            'price' => '#sylius_product_masterVariant_price',
+            'price' => '#sylius_product_variant_price',
             'name' => '#sylius_product_translations_en_US_name',
         ]);
     }

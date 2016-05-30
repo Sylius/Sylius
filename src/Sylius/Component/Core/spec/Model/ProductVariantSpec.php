@@ -96,17 +96,6 @@ class ProductVariantSpec extends ObjectBehavior
         $this->shouldThrow(\InvalidArgumentException::class)->duringSetOriginalPrice(new \stdClass());
     }
 
-    function it_should_inherit_price_from_master_variant(ProductVariantInterface $masterVariant)
-    {
-        $masterVariant->isMaster()->willReturn(true);
-        $masterVariant->getAvailableOn()->willReturn(new \DateTime('yesterday'));
-        $masterVariant->getPrice()->willReturn(499);
-
-        $this->setDefaults($masterVariant);
-
-        $this->getPrice()->shouldReturn(499);
-    }
-
     function it_implements_Sylius_shippable_interface()
     {
         $this->shouldImplement('Sylius\Component\Shipping\Model\ShippableInterface');

@@ -29,24 +29,6 @@ class LegacyProductType extends BaseProductType
                 'multiple' => true,
                 'class' => Taxon::class,
             ])
-            ->add('price', 'sylius_money', [
-                'property_path' => 'masterVariant.price',
-            ])
-            ->add('onHand', 'integer', [
-                'property_path' => 'masterVariant.onHand',
-            ])
-            ->add('sku', 'text', [
-                'property_path' => 'masterVariant.sku',
-            ])
-            ->add('images', 'collection', [
-                'type' => 'sylius_image',
-                'allow_add' => true,
-                'allow_delete' => true,
-                'by_reference' => false,
-                'label' => 'sylius.form.variant.images',
-                'property_path' => 'masterVariant.images',
-            ])
-            ->remove('masterVariant')
             ->remove('variantSelectionMethod')
         ;
     }

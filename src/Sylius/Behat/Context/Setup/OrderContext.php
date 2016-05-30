@@ -226,7 +226,7 @@ final class OrderContext implements Context
      */
     public function theCustomerBoughtSingleProduct(ProductInterface $product)
     {
-        $this->addProductVariantToOrder($product->getMasterVariant(), $product->getPrice(), 1);
+        $this->addProductVariantToOrder($product->getFirstVariant(), $product->getPrice(), 1);
 
         $this->objectManager->flush();
     }
@@ -246,7 +246,7 @@ final class OrderContext implements Context
      */
     public function theCustomerBoughtSeveralProducts($quantity, ProductInterface $product)
     {
-        $this->addProductVariantToOrder($product->getMasterVariant(), $product->getPrice(), $quantity);
+        $this->addProductVariantToOrder($product->getFirstVariant(), $product->getPrice(), $quantity);
 
         $this->objectManager->flush();
     }
@@ -266,7 +266,7 @@ final class OrderContext implements Context
      */
     public function theCustomerBoughtSingleUsing(ProductInterface $product, CouponInterface $coupon)
     {
-        $order = $this->addProductVariantToOrder($product->getMasterVariant(), $product->getPrice());
+        $order = $this->addProductVariantToOrder($product->getFirstVariant(), $product->getPrice());
         $order->setPromotionCoupon($coupon);
 
         $this->orderRecalculator->recalculate($order);
@@ -362,7 +362,7 @@ final class OrderContext implements Context
         /** @var OrderItemInterface $item */
         $item = $this->orderItemFactory->createNew();
         $item->setVariant($productVariant);
-        $item->setUnitPrice($price);
+        $item->setUnitPrice($productVariant->getPrice());
 
         $this->itemQuantityModifier->modify($item, $quantity);
 

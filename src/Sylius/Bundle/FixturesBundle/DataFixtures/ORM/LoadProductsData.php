@@ -15,6 +15,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Product\Model\AttributeValueInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 
@@ -97,7 +98,7 @@ class LoadProductsData extends DataFixture
         $product->setMainTaxon($this->getReference('Sylius.Taxon.t-shirts'));
         $product->setArchetype($this->getReference('Sylius.Archetype.t_shirt'));
 
-        $this->addMasterVariant($product);
+        $this->addVariant($product);
         $this->setChannels($product, ['DEFAULT']);
 
         // T-Shirt brand.
@@ -146,7 +147,7 @@ class LoadProductsData extends DataFixture
         $product->setMainTaxon($this->getReference('Sylius.Taxon.stickers'));
         $product->setArchetype($this->getReference('Sylius.Archetype.sticker'));
 
-        $this->addMasterVariant($product);
+        $this->addVariant($product);
         $this->setChannels($product, ['DEFAULT']);
 
         // Sticker resolution.
@@ -188,7 +189,7 @@ class LoadProductsData extends DataFixture
         $product->setMainTaxon($this->getReference('Sylius.Taxon.mugs'));
         $product->setArchetype($this->getReference('Sylius.Archetype.mug'));
 
-        $this->addMasterVariant($product);
+        $this->addVariant($product);
         $this->setChannels($product, ['DEFAULT']);
 
         $randomMugMaterial = $this->faker->randomElement(['Invisible porcelain', 'Banana skin', 'Porcelain', 'Sand']);
@@ -228,7 +229,7 @@ class LoadProductsData extends DataFixture
         $product->setMainTaxon($this->getReference('Sylius.Taxon.books'));
         $product->setArchetype($this->getReference('Sylius.Archetype.book'));
 
-        $this->addMasterVariant($product, $isbn);
+        $this->addVariant($product, $isbn);
         $this->setChannels($product, ['DEFAULT']);
 
         $this->addAttribute($product, 'book_author', $author);
@@ -265,14 +266,13 @@ class LoadProductsData extends DataFixture
     }
 
     /**
-     * Adds master variant to product.
-     *
      * @param ProductInterface $product
      * @param string $code
      */
-    protected function addMasterVariant(ProductInterface $product, $code = null)
+    protected function addVariant(ProductInterface $product, $code = null)
     {
-        $variant = $product->getMasterVariant();
+        /** @var ProductVariantInterface $variant */
+        $variant = $this->get('sylius.factory.product_variant')->createNew();
         $variant->setProduct($product);
         $variant->setPrice($this->faker->randomNumber(4));
         $variant->setCode(null === $code ? $this->getUniqueCode() : $code);
@@ -284,11 +284,11 @@ class LoadProductsData extends DataFixture
         $image = clone $this->getReference('Sylius.Image.'.$mainTaxon->getCode());
         $variant->addImage($image);
 
+        $product->addVariant($variant);
+
         $this->setReference('Sylius.Variant-'.$this->totalVariants, $variant);
 
         ++$this->totalVariants;
-
-        $product->setMasterVariant($variant);
     }
 
     /**
@@ -370,8 +370,6 @@ class LoadProductsData extends DataFixture
     }
 
     /**
-     * Create new product instance.
-     *
      * @return ProductInterface
      */
     protected function createProduct()

@@ -22,8 +22,6 @@ sylius_admin_product_create:
         _controller: sylius.controller.product:createAction
         _sylius:
             section: admin
-            factory:
-                method: createNewWithoutVariants
             template: SyliusAdminBundle:Crud:create.html.twig
             redirect: sylius_admin_product_update
             vars:
@@ -40,6 +38,8 @@ sylius_admin_product_create_simple:
         _controller: sylius.controller.product:createAction
         _sylius:
             section: admin
+            factory:
+                method: createWithVariant
             template: SyliusAdminBundle:Crud:create.html.twig
             redirect: sylius_admin_product_update
             vars:

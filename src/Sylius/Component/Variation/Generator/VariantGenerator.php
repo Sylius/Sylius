@@ -13,6 +13,7 @@ namespace Sylius\Component\Variation\Generator;
 
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Variation\Model\VariableInterface;
+use Sylius\Component\Variation\Model\VariantInterface;
 use Sylius\Component\Variation\SetBuilder\SetBuilderInterface;
 
 /**
@@ -73,19 +74,31 @@ class VariantGenerator implements VariantGeneratorInterface
         $permutations = $this->setBuilder->build($optionSet);
 
         foreach ($permutations as $permutation) {
-            $variant = $this->variantFactory->createNew();
-            $variant->setObject($variable);
-            $variant->setDefaults($variable->getMasterVariant());
-
-            if (is_array($permutation)) {
-                foreach ($permutation as $id) {
-                    $variant->addOption($optionMap[$id]);
-                }
-            } else {
-                $variant->addOption($optionMap[$permutation]);
-            }
-
+            $variant = $this->createVariant($variable, $optionMap, $permutation);
             $variable->addVariant($variant);
         }
+    }
+
+    /**
+     * @param VariableInterface $variable
+     * @param array $optionMap
+     * @param mixed $permutation
+     *
+     * @return VariantInterface
+     */
+    protected function createVariant(VariableInterface $variable, array $optionMap, $permutation)
+    {
+        $variant = $this->variantFactory->createNew();
+        $variant->setObject($variable);
+
+        if (is_array($permutation)) {
+            foreach ($permutation as $id) {
+                $variant->addOption($optionMap[$id]);
+            }
+        } else {
+            $variant->addOption($optionMap[$permutation]);
+        }
+
+        return $variant;
     }
 }

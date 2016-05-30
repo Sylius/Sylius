@@ -307,7 +307,6 @@ class ElasticsearchFinder extends AbstractFinder
 
         $nestedOrFilter = new BoolOr();
         $this->addAvailableProductsVariantFilters($nestedOrFilter, 'variants');
-        $this->addAvailableProductsVariantFilters($nestedOrFilter, 'masterVariant');
 
         $boolFilter->addMust($nestedOrFilter);
     }
@@ -539,7 +538,7 @@ class ElasticsearchFinder extends AbstractFinder
 
     /**
      * @param BoolOr $nestedOrFilter Nested or filter
-     * @param string $nestedProperty Nested property (can be 'variants' or 'masterVariant')
+     * @param string $nestedProperty Nested property (can be 'variants')
      */
     private function addAvailableProductsVariantFilters(BoolOr $nestedOrFilter, $nestedProperty)
     {

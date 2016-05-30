@@ -30,16 +30,16 @@ class ProductContext extends DefaultContext
         $factory = $this->getFactory('product');
 
         foreach ($table->getHash() as $data) {
-            $product = $factory->createNew();
+            $product = $factory->createWithVariant();
 
             $product->setCurrentLocale($this->getContainer()->getParameter('locale'));
             $product->setName(trim($data['name']));
 
-            $code = isset($data['sku']) ? $data['sku'] : $this->generateCode($data['name']);
+            $code = isset($data['code']) ? $data['code'] : $this->generateCode($data['name']);
             $product->setCode($code);
 
-            $product->getMasterVariant()->setPrice((int) round($data['price'] * 100));
-            $product->getMasterVariant()->setCode($code);
+            $product->getFirstVariant()->setCode($code.'-VARIANT');
+            $product->getFirstVariant()->setPrice((int) round($data['price'] * 100));
 
             if (!empty($data['options'])) {
                 foreach (explode(',', $data['options']) as $option) {
@@ -65,7 +65,7 @@ class ProductContext extends DefaultContext
             }
 
             if (isset($data['quantity'])) {
-                $product->getMasterVariant()->setOnHand($data['quantity']);
+                $product->getFirstVariant()->setOnHand($data['quantity']);
             }
 
             if (isset($data['variants selection']) && !empty($data['variants selection'])) {
@@ -73,7 +73,7 @@ class ProductContext extends DefaultContext
             }
 
             if (isset($data['tax category'])) {
-                $product->getMasterVariant()->setTaxCategory($this->findOneByName('tax_category', trim($data['tax category'])));
+                $product->getFirstVariant()->setTaxCategory($this->findOneByName('tax_category', trim($data['tax category'])));
             }
 
             if (isset($data['taxons'])) {
@@ -294,13 +294,13 @@ class ProductContext extends DefaultContext
      */
     private function configureProductPricingCalculator(ProductInterface $product, array $data)
     {
-        $product->getMasterVariant()->setPricingCalculator($data['pricing calculator']);
+        $product->getFirstVariant()->setPricingCalculator($data['pricing calculator']);
 
         if (!isset($data['calculator configuration']) || '' === $data['calculator configuration']) {
             throw new \InvalidArgumentException('You must set chosen calculator configuration');
         }
 
-        $product->getMasterVariant()->setPricingConfiguration($this->getPricingCalculatorConfiguration($data));
+        $product->getFirstVariant()->setPricingConfiguration($this->getPricingCalculatorConfiguration($data));
     }
 
     /**
@@ -365,7 +365,7 @@ class ProductContext extends DefaultContext
         if (null === $product) {
             $product = $this->getRepository('product')->createNew();
             $product->setName($name);
-            $product->setPrice(0);
+            $product->getFirstVariant()->setPrice(0);
             $product->setDescription('Lorem ipsum');
         }
 

@@ -2,54 +2,7 @@
 
 <div class="tab-pane active" id="main">
     {{ form_row(form.translations, {'attr': {'class': 'input-lg'}}) }}
-    {{ form_row(form.masterVariant.code) }}
     {{ form_row(form.code) }}
-    <hr />
-    <div class="row">
-        <div class="col-md-6">
-            <div class="form-group">
-                {{ form_label(form.masterVariant.availableOn) }}
-                <div class="col-lg-10">
-                    {{ form_widget(form.masterVariant.availableOn, {'label': false}) }}
-                </div>
-            </div>
-            <div class="form-group">
-                {{ form_label(form.masterVariant.availableUntil) }}
-                <div class="col-lg-10">
-                    {{ form_widget(form.masterVariant.availableUntil, {'label': false}) }}
-                </div>
-            </div>
-            {{ form_row(form.masterVariant.availableOnDemand) }}
-            {{ form_row(form.masterVariant.onHand) }}
-
-            <hr />
-            {{ form_row(form.masterVariant.price) }}
-            {{ form_row(form.masterVariant.originalPrice) }}
-            {{ form_row(form.masterVariant.pricingCalculator) }}
-
-            {% if form.masterVariant.pricingConfiguration is defined %}
-                {% if form.masterVariant.pricingCalculator.vars.value == 'volume_based' %}
-                    <div>
-                        {{ form_label(form.masterVariant.pricingConfiguration) }}
-                        {% include "SyliusWebBundle::Backend/Product/Form/_volume_based_config.html.twig" %}
-                    </div>
-                {% else %}
-                    {{ form_row(form.masterVariant.pricingConfiguration) }}
-                {% endif %}
-            {% endif %}
-
-            <hr />
-            {{ form_row(form.shippingCategory) }}
-        </div>
-        <div class="col-md-6">
-            {{ form_row(form.masterVariant.taxCategory) }}
-            {{ form_row(form.masterVariant.width) }}
-            {{ form_row(form.masterVariant.height) }}
-            {{ form_row(form.masterVariant.depth) }}
-            {{ form_row(form.masterVariant.weight) }}
-            <hr />
-            {{ form_row(form.restrictedZone) }}
-            {{ form_row(form.variantSelectionMethod) }}
-        </div>
-    </div>
+    {{ form_row(form.restrictedZone) }}
+    {{ form_row(form.variantSelectionMethod) }}
 </div>

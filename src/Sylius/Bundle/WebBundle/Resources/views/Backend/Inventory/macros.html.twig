@@ -32,14 +32,14 @@
                 </td>
                 <td>
                     {% if not product.hasOptions %}
-                        <span class="label label-{{ product.masterVariant.isInStock ? 'success' : 'danger' }}">{{ product.masterVariant.onHand }}</span>
+                        <span class="label label-{{ product.firstVariant.isInStock ? 'success' : 'danger' }}">{{ product.firstVariant.onHand }}</span>
                     {% else %}
                         -
                     {% endif %}
                 </td>
                 <td>
                     {% if not product.hasOptions %}
-                        <span class="label label-{{ product.masterVariant.onHold ? 'warning' : 'success' }}">{{ product.masterVariant.onHold }}</span>
+                        <span class="label label-{{ product.firstVariant.onHold ? 'warning' : 'success' }}">{{ product.firstVariant.onHold }}</span>
                     {% else %}
                         -
                     {% endif %}

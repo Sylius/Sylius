@@ -12,6 +12,7 @@
 namespace Sylius\Component\Product\Factory;
 
 use Sylius\Component\Archetype\Builder\ArchetypeBuilderInterface;
+use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -64,21 +65,20 @@ class ProductFactory implements ProductFactoryInterface
      */
     public function createNew()
     {
-        $variant = $this->variantFactory->createNew();
-        $variant->setMaster(true);
-
-        $product = $this->factory->createNew();
-        $product->setMasterVariant($variant);
-
-        return $product;
+        return $this->factory->createNew();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function createNewWithoutVariants()
+    public function createWithVariant()
     {
-        return $this->factory->createNew();
+        $variant = $this->variantFactory->createNew();
+
+        $product = $this->factory->createNew();
+        $product->addVariant($variant);
+
+        return $product;
     }
 
     /**

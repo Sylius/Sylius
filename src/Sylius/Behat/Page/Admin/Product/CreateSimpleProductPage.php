@@ -47,7 +47,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_product_code',
             'name' => '#sylius_product_translations_en_US_name',
-            'price' => '#sylius_product_masterVariant_price',
+            'price' => '#sylius_product_variant_price',
         ]);
     }
 

@@ -291,16 +291,6 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
-    public function setDefaults(BaseVariantInterface $masterVariant)
-    {
-        parent::setDefaults($masterVariant);
-
-        $this->setPrice($masterVariant->getPrice());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getShippingCategory()
     {
         return $this->getProduct()->getShippingCategory();
@@ -328,7 +318,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     public function getImage()
     {
         if ($this->images->isEmpty()) {
-            return $this->getProduct()->getImage();
+            return null;
         }
 
         return $this->images->first();

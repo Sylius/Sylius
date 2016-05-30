@@ -49,12 +49,14 @@ class VariantGeneratorSpec extends ObjectBehavior
     }
 
     function it_generates_variants_for_every_value_of_an_objects_single_option(
-        VariableInterface $productVariable,
         FactoryInterface $variantFactory,
-        SetBuilderInterface $setBuilder,
         OptionInterface $colorOption,
-        OptionValue $blackColor, OptionValue $whiteColor, OptionValue $redColor,
-        VariantInterface $masterVariant, VariantInterface $permutationVariant
+        OptionValue $blackColor,
+        OptionValue $redColor,
+        OptionValue $whiteColor,
+        SetBuilderInterface $setBuilder,
+        VariableInterface $productVariable,
+        VariantInterface $permutationVariant
     ) {
         $productVariable->hasOptions()->willReturn(true);
 
@@ -73,11 +75,8 @@ class VariantGeneratorSpec extends ObjectBehavior
             ['black1', 'white2', 'red3'],
         ]);
 
-        $productVariable->getMasterVariant()->willReturn($masterVariant);
-
         $variantFactory->createNew()->willReturn($permutationVariant);
         $permutationVariant->setObject($productVariable)->shouldBeCalled();
-        $permutationVariant->setDefaults($masterVariant)->shouldBeCalled();
         $permutationVariant->addOption(Argument::type('Sylius\Component\Variation\Model\OptionValue'))->shouldBeCalled();
         $productVariable->addVariant($permutationVariant)->shouldBeCalled();
 
@@ -85,13 +84,18 @@ class VariantGeneratorSpec extends ObjectBehavior
     }
 
     function it_generates_variants_for_every_possible_permutation_of_an_objects_options_and_option_values(
-        VariableInterface $productVariable,
         FactoryInterface $variantFactory,
+        OptionInterface $colorOption,
+        OptionInterface $sizeOption,
+        OptionValue $blackColor,
+        OptionValue $largeSize,
+        OptionValue $mediumSize,
+        OptionValue $redColor,
+        OptionValue $smallSize,
+        OptionValue $whiteColor,
         SetBuilderInterface $setBuilder,
-        OptionInterface $colorOption, OptionInterface $sizeOption,
-        OptionValue $blackColor, OptionValue $whiteColor, OptionValue $redColor,
-        OptionValue $smallSize, OptionValue $mediumSize, OptionValue $largeSize,
-        VariantInterface $masterVariant, VariantInterface $permutationVariant
+        VariableInterface $productVariable,
+        VariantInterface $permutationVariant
     ) {
         $productVariable->hasOptions()->willReturn(true);
 
@@ -122,11 +126,8 @@ class VariantGeneratorSpec extends ObjectBehavior
             ['red3', 'large6'],
         ]);
 
-        $productVariable->getMasterVariant()->willReturn($masterVariant);
-
         $variantFactory->createNew()->willReturn($permutationVariant);
         $permutationVariant->setObject($productVariable)->shouldBeCalled();
-        $permutationVariant->setDefaults($masterVariant)->shouldBeCalled();
         $permutationVariant->addOption(Argument::type('Sylius\Component\Variation\Model\OptionValue'))->shouldBeCalled();
         $productVariable->addVariant($permutationVariant)->shouldBeCalled();
 

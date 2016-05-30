@@ -4,7 +4,9 @@
         <img class="img-rounded img-responsive"
              src="{{ result.image ? result.image.path|imagine_filter('sylius_medium') : 'http://placehold.it/262x255' }}"
              alt="{{ result.name }}"/>
-        <span class="label label-primary">{{ sylius_calculate_price(result.masterVariant)|sylius_price }}</span>
+        {% for variant in result.variants %}
+            <span class="label label-primary">{{ sylius_calculate_price(variant)|sylius_price }}</span>
+        {% endfor %}
         <button class="btn btn-success btn-xs pull-right"><i
                     class="icon-shopping-cart icon-white"></i> {{ 'sylius.ui.add_to_cart'|trans }}</button>
     </a>

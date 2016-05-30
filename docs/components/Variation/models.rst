@@ -13,8 +13,6 @@ Every variant is represented by **Variant** instance and has the following prope
 +==============+=============================================+
 | id           | Unique id of the variant                    |
 +--------------+---------------------------------------------+
-| master       | Defines whether variant is master           |
-+--------------+---------------------------------------------+
 | presentation | Name displayed to user                      |
 +--------------+---------------------------------------------+
 | object       | Related product                             |

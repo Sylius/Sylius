@@ -69,24 +69,13 @@ The response will contain the newly created order information.
                             "immutable":false,
                             "variant":{
                                 "id":13099,
-                                "master":false,
                                 "object":{
                                     "id":2107,
                                     "name":"T-Shirt \"voluptas\"",
+                                    "code": "T-SHIRT-VOLUPTAS",
                                     "description":"Non molestias voluptas quae nemo omnis totam. Impedit ad perferendis quaerat sint numquam voluptate eum. Facilis sed accusamus enim repellendus officiis rerum at.",
                                     "created_at":"2014-11-26T23:00:17+0000",
                                     "updated_at":"2014-11-26T23:00:17+0000",
-                                    "masterVariant":{
-                                        "id":13085,
-                                        "master":true,
-                                        "options":[
-
-                                        ],
-                                        "created_at":"2014-11-26T23:00:17+0000",
-                                        "updated_at":"2014-11-26T23:00:17+0000",
-                                        "available_on":"2014-08-27T08:51:04+0000",
-                                        "sku":"43596"
-                                    },
                                     "short_description":"Quos in dignissimos in fugit culpa vitae."
                                 },
                                 "created_at":"2014-11-26T23:00:17+0000",
@@ -197,24 +186,13 @@ Response
                 "immutable":false,
                 "variant":{
                     "id":13099,
-                    "master":false,
                     "object":{
                         "id":2107,
                         "name":"T-Shirt \"voluptas\"",
+                        "code": "T-SHIRT-VOLUPTAS"
                         "description":"Non molestias voluptas quae nemo omnis totam. Impedit ad perferendis quaerat sint numquam voluptate eum. Facilis sed accusamus enim repellendus officiis rerum at.",
                         "created_at":"2014-11-26T23:00:17+0000",
                         "updated_at":"2014-11-26T23:00:17+0000",
-                        "masterVariant":{
-                            "id":13085,
-                            "master":true,
-                            "options":[
-
-                            ],
-                            "created_at":"2014-11-26T23:00:17+0000",
-                            "updated_at":"2014-11-26T23:00:17+0000",
-                            "available_on":"2014-08-27T08:51:04+0000",
-                            "sku":"43596"
-                        },
                         "short_description":"Quos in dignissimos in fugit culpa vitae."
                     },
                     "created_at":"2014-11-26T23:00:17+0000",
@@ -542,7 +520,6 @@ Response will contain a representation of the newly created item.
             "available_on": "2014-04-01T06:43:02+0000",
             "created_at": "2014-12-03T09:54:35+0000",
             "id": 779,
-            "master": true,
             "object": {
                 "attributes": [
                     {

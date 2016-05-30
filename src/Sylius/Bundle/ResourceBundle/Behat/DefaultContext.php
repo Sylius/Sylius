@@ -204,7 +204,7 @@ abstract class DefaultContext extends RawMinkContext implements Context, KernelA
                     break;
 
                 case 'variant':
-                    $configuration[$key] = $this->getRepository('product')->findOneByName($value)->getMasterVariant()->getId();
+                    $configuration[$key] = $this->getRepository('product')->findOneByName($value)->getFirstVariant()->getId();
                     break;
 
                 case 'amount':
