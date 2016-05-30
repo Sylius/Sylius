@@ -18,6 +18,7 @@ sylius:
         available_for_channels: Available for channels
         average_order_value: Average order value
         backordered: Backordered
+        complete: Complete
         cancel: Cancel
         cancelled: Cancelled
         category_requirements: Category requirements

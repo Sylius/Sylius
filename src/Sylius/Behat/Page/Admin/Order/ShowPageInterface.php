@@ -30,6 +30,8 @@ interface ShowPageInterface extends SymfonyPageInterface
      * @param string $postcode
      * @param string $city
      * @param string $countryName
+     *
+     * @return bool
      */
     public function hasShippingAddress($customerName, $street, $postcode, $city, $countryName);
 
@@ -39,18 +41,31 @@ interface ShowPageInterface extends SymfonyPageInterface
      * @param string $postcode
      * @param string $city
      * @param string $countryName
+     *
+     * @return bool
      */
     public function hasBillingAddress($customerName, $street, $postcode, $city, $countryName);
 
     /**
      * @param string $shippingMethodName
+     *
+     * @return bool
      */
     public function hasShipment($shippingMethodName);
 
     /**
      * @param string $paymentMethodName
+     *
+     * @return bool
      */
     public function hasPayment($paymentMethodName);
+
+    /**
+     * @return bool
+     */
+    public function hasCompletePaymentButton();
+
+    public function completePayment();
 
     /**
      * @return int

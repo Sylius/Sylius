@@ -19,3 +19,14 @@ sylius_admin_order_show:
         _sylius:
             section: admin
             template: SyliusAdminBundle:Order:show.html.twig
+
+sylius_admin_order_payment_complete:
+    path: /orders/payments/{id}/complete
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.payment:applyStateMachineTransitionAction
+        _sylius:
+            state_machine:
+                graph: sylius_payment
+                transition: complete
+            redirect: referer

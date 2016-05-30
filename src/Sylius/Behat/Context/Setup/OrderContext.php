@@ -349,6 +349,17 @@ final class OrderContext implements Context
     }
 
     /**
+     * @Given /^(this order) has already completed payment$/
+     */
+    public function thisOrderHasAlreadyCompletedPayment(OrderInterface $order)
+    {
+        $payment = $order->getLastPayment();
+        $payment->setState(PaymentInterface::STATE_COMPLETED);
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @param ProductVariantInterface $productVariant
      * @param int $price
      * @param int $quantity

@@ -10,5 +10,13 @@
         <div class="description">
             {{ payment.amount|sylius_money(payment.currency) }}
         </div>
+        <div class="actions">
+            {% if sm_can(payment, 'complete', 'sylius_payment') %}
+                <form action="{{ path('sylius_admin_order_payment_complete', { id: payment.id }) }}" method="post" novalidate>
+                    <input type="hidden" name="_method" value="PUT">
+                    <button type="submit">{{ 'sylius.ui.complete'|trans }}</button>
+                </form>
+            {% endif %}
+        </div>
     </div>
 </div>

@@ -98,6 +98,19 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
+    public function hasCompletePaymentButton()
+    {
+        return $this->getElement('payments')->hasButton('Complete');
+    }
+
+    public function completePayment()
+    {
+        $this->getElement('payments')->pressButton('Complete');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function countItems()
     {
         return $this->tableAccessor->countTableBodyRows($this->getElement('table'));
