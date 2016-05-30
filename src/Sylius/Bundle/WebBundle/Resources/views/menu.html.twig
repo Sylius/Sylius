@@ -3,7 +3,13 @@
 {% block label %}
     {% if item.labelAttribute('icon') %}<i class="{{ item.labelAttribute('icon') }}"></i>{% endif %}
     {% if not item.labelAttribute('iconOnly') %}
-        <span>{% if options.allow_safe_labels and item.getExtra('safe_label', false) %}{{ item.label|trans|raw }}{% else %}{{ item.label|trans }}{% endif %}</span>
+        {% set label = item.label %}
+        {% if item.extra('translation_domain') is not same as(false)%}
+            {% set translation_parameters = item.extra('translation_parameters')|default({}) %}
+            {% set translation_domain = item.extra('translation_domain')|default('menu') %}
+            {% set label = item.label|trans(translation_parameters, translation_domain) %}
+        {% endif %}
+        <span>{{ options.allow_safe_labels ? label|raw : label }}</span>
     {% endif %}
     {% if item.labelAttribute('data-image') %}<img src="{{ item.labelAttribute('data-image')|imagine_filter('sylius_small') }}" alt="{{ item.name }}" class="menu-thumbnail"/>{% endif %}
 {% endblock %}

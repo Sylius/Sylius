@@ -44,7 +44,7 @@ class CartTypeSpec extends ObjectBehavior
         ;
 
         $builder
-            ->add('additionalInformation')
+            ->add('additionalInformation', 'textarea', ['label' => 'sylius.form.cart.additional_information'])
             ->willReturn($builder)
         ;
 

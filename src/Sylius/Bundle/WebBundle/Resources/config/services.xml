@@ -65,7 +65,6 @@
         <service id="sylius.menu_builder.frontend" class="%sylius.menu_builder.frontend.class%">
             <argument type="service" id="knp_menu.factory" />
             <argument type="service" id="security.authorization_checker" />
-            <argument type="service" id="translator" />
             <argument type="service" id="event_dispatcher" />
             <argument type="service" id="sylius.authorization_checker" />
             <argument type="service" id="sylius.currency_provider" />
@@ -81,7 +80,6 @@
         <service id="sylius.menu_builder.backend" class="%sylius.menu_builder.backend.class%">
             <argument type="service" id="knp_menu.factory" />
             <argument type="service" id="security.authorization_checker" />
-            <argument type="service" id="translator" />
             <argument type="service" id="event_dispatcher" />
             <argument type="service" id="sylius.authorization_checker" />
             <call method="setRequest">
@@ -91,7 +89,6 @@
         <service id="sylius.menu_builder.locale" class="%sylius.menu_builder.locale.class%">
             <argument type="service" id="knp_menu.factory" />
             <argument type="service" id="security.authorization_checker" />
-            <argument type="service" id="translator" />
             <argument type="service" id="event_dispatcher" />
             <argument type="service" id="sylius.channel_aware_locale_provider" />
             <argument type="service" id="sylius.authorization_checker" />

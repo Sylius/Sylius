@@ -20,7 +20,7 @@
     </div>
     <div class="col-md-9">
         <a href="{{ path(product) }}" class="btn btn-link"><h3>{{ product.name }}</h3></a>
-        <p>{{ product.shortDescription|default('sylius.product.no_description')|trans|raw }}</p>
+        <p>{{ product.shortDescription|default('sylius.ui.no_description'|trans)|raw }}</p>
         {% if product.averageRating %}
         <h3>{{ 'sylius.ui.rating'|trans }}: {{ product.averageRating|round(2, 'floor') }}</h3>
         {% endif %}
@@ -60,7 +60,7 @@
     </div>
     <div class="col-md-6">
         <h4>{{ 'sylius.ui.description'|trans }}</h4>
-        <p>{{ product.description|default('sylius.product.no_description')|trans|raw }}</p>
+        <p>{{ product.description|default('sylius.ui.no_description'|trans)|raw }}</p>
     </div>
 </div>
 <hr>
