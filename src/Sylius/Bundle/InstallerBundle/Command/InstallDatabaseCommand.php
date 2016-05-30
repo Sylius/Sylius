@@ -42,7 +42,7 @@ EOT
         if (!$this->isDatabasePresent()) {
             $commands = [
                 'doctrine:database:create',
-                'doctrine:schema:create',
+                'doctrine:migrations:migrate' => ['--no-interaction' => true],
                 'cache:clear',
                 'doctrine:phpcr:repository:init',
             ];
@@ -56,26 +56,26 @@ EOT
         $commands = [];
 
         if ($input->getOption('no-interaction')) {
-            $commands['doctrine:schema:update'] = ['--force' => true];
+            $commands['doctrine:migrations:migrate'] = ['--no-interaction' => true];
         } else {
             if ($dialog->askConfirmation(
-                $output,
-                '<question>It appears that your database already exists. Would you like to reset it? (y/N)</question> ',
-                false
-            )
+                    $output,
+                    '<question>It appears that your database already exists. Would you like to reset it? (y/N)</question> ',
+                    false
+                )
             ) {
                 $commands['doctrine:database:drop'] = ['--force' => true];
                 $commands[] = 'doctrine:database:create';
-                $commands[] = 'doctrine:schema:create';
+                $commands['doctrine:migrations:migrate'] = ['--no-interaction' => true];
             } elseif ($this->isSchemaPresent()) {
                 if ($dialog->askConfirmation(
-                    $output,
-                    '<question>Seems like your database contains schema. Do you want to reset it? (y/N)</question> ',
-                    false
-                )
+                        $output,
+                        '<question>Seems like your database contains schema. Do you want to reset it? (y/N)</question> ',
+                        false
+                    )
                 ) {
                     $commands['doctrine:schema:drop'] = ['--force' => true];
-                    $commands[] = 'doctrine:schema:create';
+                    $commands['doctrine:migrations:migrate'] = ['--no-interaction' => true];
                 }
             }
         }
