@@ -23,9 +23,9 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ItemFixedDiscountAction extends ItemDiscountAction
+class UnitFixedDiscountAction extends UnitDiscountAction
 {
-    const TYPE = 'item_fixed_discount';
+    const TYPE = 'unit_fixed_discount';
 
     /**
      * @var FilterInterface

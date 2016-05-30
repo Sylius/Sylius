@@ -77,14 +77,16 @@ class OrderItemSpec extends ObjectBehavior
         $firstUnit->getOrderItem()->willReturn($this);
         $firstUnit->getTotal()->willReturn(9000);
         $firstUnit->getAdjustmentsTotal(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)->willReturn(-1000);
+        $firstUnit->getAdjustmentsTotal(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)->willReturn(0);
 
         $secondUnit->getOrderItem()->willReturn($this);
         $secondUnit->getTotal()->willReturn(9500);
         $secondUnit->getAdjustmentsTotal(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)->willReturn(-500);
+        $secondUnit->getAdjustmentsTotal(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)->willReturn(-1000);
 
         $this->addUnit($firstUnit);
         $this->addUnit($secondUnit);
 
-        $this->getSubtotal()->shouldReturn(18500);
+        $this->getSubtotal()->shouldReturn(17500);
     }
 }

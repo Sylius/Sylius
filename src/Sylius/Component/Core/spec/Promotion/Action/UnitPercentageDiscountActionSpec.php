@@ -20,7 +20,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
-use Sylius\Component\Core\Promotion\Action\ItemDiscountAction;
+use Sylius\Component\Core\Promotion\Action\UnitDiscountAction;
 use Sylius\Component\Core\Promotion\Filter\FilterInterface;
 use Sylius\Component\Originator\Originator\OriginatorInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
@@ -30,7 +30,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ItemPercentageDiscountActionSpec extends ObjectBehavior
+class UnitPercentageDiscountActionSpec extends ObjectBehavior
 {
     function let(
         FactoryInterface $adjustmentFactory,
@@ -44,12 +44,12 @@ class ItemPercentageDiscountActionSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Promotion\Action\ItemPercentageDiscountAction');
+        $this->shouldHaveType('Sylius\Component\Core\Promotion\Action\UnitPercentageDiscountAction');
     }
 
     function it_is_item_discount_action()
     {
-        $this->shouldHaveType(ItemDiscountAction::class);
+        $this->shouldHaveType(UnitDiscountAction::class);
     }
 
     function it_applies_percentage_discount_on_every_unit_in_order(
@@ -93,13 +93,13 @@ class ItemPercentageDiscountActionSpec extends ObjectBehavior
 
         $adjustmentFactory->createNew()->willReturn($promotionAdjustment1, $promotionAdjustment2);
 
-        $promotionAdjustment1->setType(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)->shouldBeCalled();
+        $promotionAdjustment1->setType(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)->shouldBeCalled();
         $promotionAdjustment1->setLabel('Test promotion')->shouldBeCalled();
         $promotionAdjustment1->setAmount(-100)->shouldBeCalled();
 
         $originator->setOrigin($promotionAdjustment1, $promotion)->shouldBeCalled();
 
-        $promotionAdjustment2->setType(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)->shouldBeCalled();
+        $promotionAdjustment2->setType(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)->shouldBeCalled();
         $promotionAdjustment2->setLabel('Test promotion')->shouldBeCalled();
         $promotionAdjustment2->setAmount(-100)->shouldBeCalled();
 
@@ -151,7 +151,7 @@ class ItemPercentageDiscountActionSpec extends ObjectBehavior
 
         $adjustmentFactory->createNew()->willReturn($promotionAdjustment1);
 
-        $promotionAdjustment1->setType(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)->shouldBeCalled();
+        $promotionAdjustment1->setType(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)->shouldBeCalled();
         $promotionAdjustment1->setLabel('Test promotion')->shouldBeCalled();
         $promotionAdjustment1->setAmount(-1)->shouldBeCalled();
 
@@ -192,7 +192,7 @@ class ItemPercentageDiscountActionSpec extends ObjectBehavior
         $orderItem->getUnits()->willReturn($units);
         $units->getIterator()->willReturn(new \ArrayIterator([$unit->getWrappedObject()]));
 
-        $unit->getAdjustments(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)->willReturn($adjustments);
+        $unit->getAdjustments(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)->willReturn($adjustments);
         $adjustments
             ->getIterator()
             ->willReturn(new \ArrayIterator([$promotionAdjustment1->getWrappedObject(), $promotionAdjustment2->getWrappedObject()]))

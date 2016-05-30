@@ -24,9 +24,9 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ItemPercentageDiscountAction extends ItemDiscountAction
+class UnitPercentageDiscountAction extends UnitDiscountAction
 {
-    const TYPE = 'item_percentage_discount';
+    const TYPE = 'unit_percentage_discount';
 
     /**
      * @var IntegerDistributorInterface

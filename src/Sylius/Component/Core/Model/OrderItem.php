@@ -86,6 +86,7 @@ class OrderItem extends CartItem implements OrderItemInterface
         $subtotal = $this->unitPrice * $this->quantity;
         foreach ($this->units as $unit) {
             $subtotal += $unit->getAdjustmentsTotal(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT);
+            $subtotal += $unit->getAdjustmentsTotal(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT);
         }
 
         return $subtotal;

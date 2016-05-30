@@ -200,7 +200,7 @@ final class PromotionContext implements Context
         $discount,
         TaxonInterface $taxon
     ) {
-        $this->createItemPercentagePromotion($promotion, $discount, $this->getTaxonFilterConfiguration([$taxon->getCode()]));
+        $this->createUnitPercentagePromotion($promotion, $discount, $this->getTaxonFilterConfiguration([$taxon->getCode()]));
     }
 
     /**
@@ -211,7 +211,7 @@ final class PromotionContext implements Context
         $discount,
         TaxonInterface $taxon
     ) {
-        $this->createItemFixedPromotion($promotion, $discount, $this->getTaxonFilterConfiguration([$taxon->getCode()]));
+        $this->createUnitFixedPromotion($promotion, $discount, $this->getTaxonFilterConfiguration([$taxon->getCode()]));
     }
 
     /**
@@ -222,7 +222,7 @@ final class PromotionContext implements Context
         $discount,
         $amount
     ) {
-        $this->createItemFixedPromotion($promotion, $discount, $this->getPriceRangeFilterConfiguration($amount));
+        $this->createUnitFixedPromotion($promotion, $discount, $this->getPriceRangeFilterConfiguration($amount));
     }
 
     /**
@@ -234,7 +234,7 @@ final class PromotionContext implements Context
         $minAmount,
         $maxAmount
     ) {
-        $this->createItemFixedPromotion(
+        $this->createUnitFixedPromotion(
             $promotion,
             $discount,
             $this->getPriceRangeFilterConfiguration($minAmount, $maxAmount)
@@ -249,7 +249,7 @@ final class PromotionContext implements Context
         $discount,
         $amount
     ) {
-        $this->createItemPercentagePromotion($promotion, $discount, $this->getPriceRangeFilterConfiguration($amount));
+        $this->createUnitPercentagePromotion($promotion, $discount, $this->getPriceRangeFilterConfiguration($amount));
     }
 
     /**
@@ -261,7 +261,7 @@ final class PromotionContext implements Context
         $minAmount,
         $maxAmount
     ) {
-        $this->createItemPercentagePromotion(
+        $this->createUnitPercentagePromotion(
             $promotion,
             $discount,
             $this->getPriceRangeFilterConfiguration($minAmount, $maxAmount)
@@ -353,7 +353,7 @@ final class PromotionContext implements Context
     ) {
         $rule = $this->ruleFactory->createContainsTaxon($targetTaxon->getCode(), 1);
 
-        $this->createItemPercentagePromotion($promotion, $discount, $this->getTaxonFilterConfiguration([$discountTaxon->getCode()]), $rule);
+        $this->createUnitPercentagePromotion($promotion, $discount, $this->getTaxonFilterConfiguration([$discountTaxon->getCode()]), $rule);
     }
 
     /**
@@ -370,7 +370,7 @@ final class PromotionContext implements Context
 
         $rule = $this->ruleFactory->createItemTotal($targetAmount);
 
-        $this->createItemFixedPromotion($promotion, $discount, [], $rule);
+        $this->createUnitFixedPromotion($promotion, $discount, [], $rule);
     }
 
     /**
@@ -388,7 +388,7 @@ final class PromotionContext implements Context
 
         $rule = $this->ruleFactory->createItemTotal($targetAmount);
 
-        $this->createItemPercentagePromotion(
+        $this->createUnitPercentagePromotion(
             $promotion,
             $taxonDiscount,
             $this->getTaxonFilterConfiguration([$taxon->getCode()]),
@@ -410,7 +410,7 @@ final class PromotionContext implements Context
 
         $rule = $this->ruleFactory->createTaxon($targetTaxonsCodes);
 
-        $this->createItemPercentagePromotion(
+        $this->createUnitPercentagePromotion(
             $promotion,
             $discount,
             $this->getTaxonFilterConfiguration($discountTaxonsCodes),
@@ -459,9 +459,9 @@ final class PromotionContext implements Context
      * @param int $discount
      * @param array $configuration
      */
-    private function createItemFixedPromotion(PromotionInterface $promotion, $discount, array $configuration = [], $rule = null)
+    private function createUnitFixedPromotion(PromotionInterface $promotion, $discount, array $configuration = [], $rule = null)
     {
-        $this->persistPromotion($promotion, $this->actionFactory->createItemFixedDiscount($discount), $configuration, $rule);
+        $this->persistPromotion($promotion, $this->actionFactory->createUnitFixedDiscount($discount), $configuration, $rule);
     }
 
     /**
@@ -469,9 +469,9 @@ final class PromotionContext implements Context
      * @param int $discount
      * @param array $configuration
      */
-    private function createItemPercentagePromotion(PromotionInterface $promotion, $discount, array $configuration = [], $rule = null)
+    private function createUnitPercentagePromotion(PromotionInterface $promotion, $discount, array $configuration = [], $rule = null)
     {
-        $this->persistPromotion($promotion, $this->actionFactory->createItemPercentageDiscount($discount), $configuration, $rule);
+        $this->persistPromotion($promotion, $this->actionFactory->createUnitPercentageDiscount($discount), $configuration, $rule);
     }
 
     /**
