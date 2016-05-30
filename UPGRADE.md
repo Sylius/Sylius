@@ -3,6 +3,12 @@ UPGRADE
 
 ## From 0.18 to 0.19.x
 
+### Core and CoreBundle
+
+* Introduced new adjustments type ``ORDER_UNIT_PROMOTION``
+* Changed current *item* promotion actions to *unit* promotion actions (as they're applied on ``OrderItemUnit`` level)
+* Introduced ``getDiscountedUnitPrice`` method on ``OrderItem``, which returns single *unit* price lowered by ``ORDER_UNIT_PROMOTION`` adjustments
+
 ### Variation and VariationBundle
 
 * Removed concept of master variant (removed ``$master`` flag from ``Sylius\Component\Variation\Model\Variant``), all usages of **master** variant has been, for now, replaced with **first** variant;
