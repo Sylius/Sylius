@@ -82,6 +82,13 @@ class OrderItemSpec extends ObjectBehavior
         $this->getDiscountedUnitPrice()->shouldReturn(9500);
     }
 
+    function it_returns_unit_price_as_discounted_unit_price_if_there_are_no_units()
+    {
+        $this->setUnitPrice(10000);
+
+        $this->getDiscountedUnitPrice()->shouldReturn(10000);
+    }
+
     function it_returns_subtotal_which_consist_of_discounted_unit_price_multiplied_by_quantity(
         OrderItemUnitInterface $firstUnit,
         OrderItemUnitInterface $secondUnit
