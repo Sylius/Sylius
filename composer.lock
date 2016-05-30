@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "bc28746d35a29a97e3dbac9df86d8e32",
-    "content-hash": "9037cbec7ea7d1a5f62461a0f1d85116",
+    "hash": "c146d059e81a758b4c3fae5bbae7e244",
+    "content-hash": "4428c9cc3d8aa00241751656a74b7310",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -10442,6 +10442,54 @@
                 "xml conversion"
             ],
             "time": "2015-09-16 18:59:23"
+        },
+        {
+            "name": "pamil/phpspec-generator-extension",
+            "version": "v0.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/pamil/phpspec-generator-extension.git",
+                "reference": "bde9234c84755d9c42f78a2ab509c469ca956e7d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/pamil/phpspec-generator-extension/zipball/bde9234c84755d9c42f78a2ab509c469ca956e7d",
+                "reference": "bde9234c84755d9c42f78a2ab509c469ca956e7d",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.6|^7.0",
+                "phpspec/phpspec": "^2.4"
+            },
+            "require-dev": {
+                "behat/behat": "^3.1",
+                "bossa/phpspec2-expect": "^1.0"
+            },
+            "type": "phpspec-extension",
+            "autoload": {
+                "psr-4": {
+                    "Pamil\\PhpSpecGeneratorExtension\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kamil Kokot",
+                    "email": "kamil@kokot.me",
+                    "homepage": "http://kamil.kokot.me"
+                }
+            ],
+            "description": "Provides matchers useful for specifying generators",
+            "keywords": [
+                "extension",
+                "generator",
+                "matcher",
+                "phpspec"
+            ],
+            "time": "2016-06-09 13:05:30"
         },
         {
             "name": "pamil/prophecy-common",
