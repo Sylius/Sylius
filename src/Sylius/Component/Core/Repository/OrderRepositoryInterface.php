@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Core\Repository;
 
+use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\PagerfantaInterface;
 use Sylius\Component\Core\Model\CouponInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -19,7 +20,18 @@ use Sylius\Component\Order\Repository\OrderRepositoryInterface as BaseOrderRepos
 
 interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
 {
+    /**
+     * @return QueryBuilder
+     */
     public function createListQueryBuilder();
+    
+    /**
+     * @param CustomerInterface $customer
+     * @param array $sorting
+     *
+     * @return QueryBuilder
+     */
+    public function createQueryBuilderWithCustomer(CustomerInterface $customer, array $sorting = []);
 
     /**
      * @param \DateTime $expiresAt

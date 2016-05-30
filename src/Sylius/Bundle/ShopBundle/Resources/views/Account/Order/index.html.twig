@@ -1,0 +1,25 @@
+{% extends 'SyliusShopBundle:Layout:main.html.twig' %}
+
+{% block content %}
+    <div class="ui breadcrumb">
+        <a class="section">Home</a>
+        <div class="divider"> / </div>
+        <a class="section">My account</a>
+        <div class="divider"> / </div>
+        <div class="active section">Order history</div>
+    </div>
+
+    <div class="ui stackable grid">
+        <div class="four wide column">
+            {% include 'SyliusShopBundle:Account:_main.html.twig' %}
+        </div>
+        <div class="twelve wide column">
+            <h1 class="ui monster section dividing header">
+                Order history
+                <div class="sub header">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</div>
+            </h1>
+
+            {{ sylius_grid_render(resources, 'SyliusShopBundle:Account/Order:_grid.html.twig') }}
+        </div>
+    </div>
+{% endblock %}

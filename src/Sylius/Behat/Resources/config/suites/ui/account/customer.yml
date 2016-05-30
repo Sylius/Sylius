@@ -7,11 +7,22 @@ default:
             contexts_as_services:
                 - sylius.behat.context.hook.doctrine_orm
 
+                - sylius.behat.context.transform.addressing
+                - sylius.behat.context.transform.customer
+                - sylius.behat.context.transform.lexical
+                - sylius.behat.context.transform.order
+                - sylius.behat.context.transform.payment
+                - sylius.behat.context.transform.product
                 - sylius.behat.context.transform.shared_storage
+                - sylius.behat.context.transform.shipping_method
 
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.customer
+                - sylius.behat.context.setup.order
+                - sylius.behat.context.setup.payment
+                - sylius.behat.context.setup.product
                 - sylius.behat.context.setup.security
+                - sylius.behat.context.setup.shipping
                 - sylius.behat.context.setup.user
 
                 - sylius.behat.context.ui.shop.account

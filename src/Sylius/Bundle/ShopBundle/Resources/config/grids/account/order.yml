@@ -1,0 +1,40 @@
+sylius_grid:
+    grids:
+        sylius_shop_account_order:
+            driver:
+                name: doctrine/orm
+                options:
+                    class: "%sylius.model.order.class%"
+                    repository:
+                        method: createQueryBuilderWithCustomer
+                        arguments: [expr:service('sylius.context.customer').getCustomer()]
+            sorting:
+                completedAt: desc
+            fields:
+                date:
+                    type: datetime
+                    label: sylius.ui.date
+                    path: completedAt
+                    options:
+                        format: d-m-Y H:i:s
+                number:
+                    type: twig
+                    label: sylius.ui.number
+                    path: .
+                    options:
+                        template: SyliusAdminBundle:Order/Field:number.html.twig
+                total:
+                    type: twig
+                    label: sylius.ui.total
+                    path: .
+                    options:
+                        template: SyliusAdminBundle:Order/Field:total.html.twig
+                state:
+                    type: twig
+                    label: sylius.ui.state
+                    options:
+                        template: SyliusAdminBundle:Order/Field:state.html.twig
+            actions:
+                item:
+                    show:
+                        type: show

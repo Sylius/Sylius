@@ -1,0 +1,11 @@
+# This file is a part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_shop_account_order:
+    resource: |
+        alias: sylius.order
+        section: shop
+        templates: SyliusShopBundle:Account/Order
+        except: ['create', 'update', 'delete']
+        grid: sylius_shop_account_order
+    type: sylius.resource

@@ -275,6 +275,7 @@
             <argument type="service" id="sylius.behat.page.shop.account.dashboard" />
             <argument type="service" id="sylius.behat.page.shop.account.profile_update" />
             <argument type="service" id="sylius.behat.page.shop.account.change_password" />
+            <argument type="service" id="sylius.behat.page.shop.account.order.index" />
             <argument type="service" id="sylius.behat.notification_checker" />
             <tag name="sylius.behat.context" />
         </service>

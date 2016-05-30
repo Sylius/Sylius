@@ -16,9 +16,11 @@ use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\PageInterface;
 use Sylius\Behat\Page\Shop\Account\ChangePasswordPageInterface;
 use Sylius\Behat\Page\Shop\Account\DashboardPageInterface;
+use Sylius\Behat\Page\Shop\Account\Order\IndexPage;
 use Sylius\Behat\Page\Shop\Account\ProfileUpdatePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
+use Sylius\Component\Core\Model\OrderInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -35,11 +37,16 @@ final class AccountContext implements Context
      * @var ProfileUpdatePageInterface
      */
     private $profileUpdatePage;
-    
+
     /**
      * @var ChangePasswordPageInterface
      */
     private $changePasswordPage;
+
+    /**
+     * @var IndexPage
+     */
+    private $orderIndexPage;
 
     /**
      * @var NotificationCheckerInterface
@@ -50,17 +57,20 @@ final class AccountContext implements Context
      * @param DashboardPageInterface $dashboardPage
      * @param ProfileUpdatePageInterface $profileUpdatePage
      * @param ChangePasswordPageInterface $changePasswordPage
+     * @param IndexPage $orderIndexPage
      * @param NotificationCheckerInterface $notificationChecker
      */
     public function __construct(
         DashboardPageInterface $dashboardPage,
         ProfileUpdatePageInterface $profileUpdatePage,
         ChangePasswordPageInterface $changePasswordPage,
+        IndexPage $orderIndexPage,
         NotificationCheckerInterface $notificationChecker
     ) {
         $this->dashboardPage = $dashboardPage;
         $this->profileUpdatePage = $profileUpdatePage;
         $this->changePasswordPage = $changePasswordPage;
+        $this->orderIndexPage = $orderIndexPage;
         $this->notificationChecker = $notificationChecker;
     }
 
@@ -240,6 +250,37 @@ final class AccountContext implements Context
     public function iShouldBeNotifiedThatThePasswordShouldBeAtLeastCharactersLong()
     {
         $this->assertFieldValidationMessage($this->changePasswordPage, 'new_password', 'Password must be at least 4 characters long.');
+    }
+
+    /**
+     * @When I browse my orders
+     */
+    public function iBrowseMyOrders()
+    {
+        $this->orderIndexPage->open();
+    }
+
+    /**
+     * @Then I should see a single order in the list
+     */
+    public function iShouldSeeASingleOrderInTheList()
+    {
+        Assert::same(
+            1,
+            $this->orderIndexPage->countItems(),
+            '%s rows with orders should appear on page, %s rows has been found'
+        );
+    }
+
+    /**
+     * @Given this order should have :order number
+     */
+    public function thisOrderShouldHaveNumber(OrderInterface $order)
+    {
+        Assert::true(
+            $this->orderIndexPage->isOrderWithNumberInTheList($order->getNumber()),
+            sprintf('Cannot find order with number "%s" in the list.', $order->getNumber())
+        );
     }
 
     /**
