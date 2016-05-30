@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Twig;
 
-use Sylius\Bundle\CoreBundle\Templating\Helper\CurrencyHelper;
+use Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelperInterface;
 
 /**
  * @author Jonathan Douet <jonathan.douet@smile.eu>
@@ -19,14 +19,14 @@ use Sylius\Bundle\CoreBundle\Templating\Helper\CurrencyHelper;
 class CurrencyExtension extends \Twig_Extension
 {
     /**
-     * @var CurrencyHelper
+     * @var CurrencyHelperInterface
      */
     private $currencyHelper;
 
     /**
-     * @param CurrencyHelper $currencyHelper
+     * @param CurrencyHelperInterface $currencyHelper
      */
-    public function __construct(CurrencyHelper $currencyHelper)
+    public function __construct(CurrencyHelperInterface $currencyHelper)
     {
         $this->currencyHelper = $currencyHelper;
     }

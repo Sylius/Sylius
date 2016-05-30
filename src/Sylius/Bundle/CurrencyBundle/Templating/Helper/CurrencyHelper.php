@@ -76,9 +76,10 @@ class CurrencyHelper extends Helper implements CurrencyHelperInterface
      */
     public function formatAmount($amount, $currency, $locale = null)
     {
-        if($locale) {
+        if (null !== $locale) {
             return $this->moneyFormatter->format($amount, $currency, $locale);
         }
+
         return $this->moneyFormatter->format($amount, $currency);
     }
 

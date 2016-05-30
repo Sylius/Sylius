@@ -28,14 +28,14 @@ class CurrencyHelper extends Helper implements CurrencyHelperInterface
     /**
      * @var CurrencyHelperInterface
      */
-    private $currencyHelperDecorated;
+    private $decoratedCurrencyHelper;
 
 
     public function __construct(
-        \Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelper $currencyHelperDecorated,
+        CurrencyHelperInterface $decoratedCurrencyHelper,
         LocaleContextInterface $localeContext
     ) {
-        $this->currencyHelperDecorated = $currencyHelperDecorated;
+        $this->decoratedCurrencyHelper = $decoratedCurrencyHelper;
         $this->localeContext = $localeContext;
     }
 
@@ -44,7 +44,7 @@ class CurrencyHelper extends Helper implements CurrencyHelperInterface
      */
     public function convertAndFormatAmount($amount, $currency = null)
     {
-        $currency = $currency ?: $this->currencyHelperDecorated->getCurrency();
+        $currency = $currency ?: $this->decoratedCurrencyHelper->getCurrency();
         $amount = $this->convertAmount($amount, $currency);
         $locale = $this->localeContext->getCurrentLocale();
 
@@ -56,7 +56,7 @@ class CurrencyHelper extends Helper implements CurrencyHelperInterface
      */
     public function convertAmount($amount, $currency = null)
     {
-        return $this->currencyHelperDecorated->convertAmount($amount, $currency);
+        return $this->decoratedCurrencyHelper->convertAmount($amount, $currency);
     }
 
     /**
@@ -64,7 +64,7 @@ class CurrencyHelper extends Helper implements CurrencyHelperInterface
      */
     public function formatAmount($amount, $currency, $locale = null)
     {
-        return $this->currencyHelperDecorated->formatAmount($amount, $currency, $locale);
+        return $this->decoratedCurrencyHelper->formatAmount($amount, $currency, $locale);
     }
 
     /**
@@ -72,7 +72,7 @@ class CurrencyHelper extends Helper implements CurrencyHelperInterface
      */
     public function getBaseCurrencySymbol()
     {
-        return $this->currencyHelperDecorated->getBaseCurrencySymbol();
+        return $this->decoratedCurrencyHelper->getBaseCurrencySymbol();
     }
 
     /**
