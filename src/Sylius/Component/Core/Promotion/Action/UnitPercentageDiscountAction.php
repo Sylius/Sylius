@@ -29,11 +29,6 @@ class UnitPercentageDiscountAction extends UnitDiscountAction
     const TYPE = 'unit_percentage_discount';
 
     /**
-     * @var IntegerDistributorInterface
-     */
-    private $distributor;
-
-    /**
      * @var FilterInterface
      */
     private $priceRangeFilter;
@@ -46,20 +41,17 @@ class UnitPercentageDiscountAction extends UnitDiscountAction
     /**
      * @param FactoryInterface $adjustmentFactory
      * @param OriginatorInterface $originator
-     * @param IntegerDistributorInterface $distributor
      * @param FilterInterface $priceRangeFilter
      * @param FilterInterface $taxonFilter
      */
     public function __construct(
         FactoryInterface $adjustmentFactory,
         OriginatorInterface $originator,
-        IntegerDistributorInterface $distributor,
         FilterInterface $priceRangeFilter,
         FilterInterface $taxonFilter
     ) {
         parent::__construct($adjustmentFactory, $originator);
 
-        $this->distributor = $distributor;
         $this->priceRangeFilter = $priceRangeFilter;
         $this->taxonFilter = $taxonFilter;
     }
@@ -77,10 +69,8 @@ class UnitPercentageDiscountAction extends UnitDiscountAction
         $filteredItems = $this->taxonFilter->filter($filteredItems, $configuration);
 
         foreach ($filteredItems as $item) {
-            $promotionAmount = (int) round($item->getTotal() * $configuration['percentage']);
-            $distributedAmounts = $this->distributor->distribute($promotionAmount, $item->getQuantity());
-
-            $this->setUnitsAdjustments($item, $distributedAmounts, $promotion);
+            $promotionAmount = (int) round($item->getUnitPrice() * $configuration['percentage']);
+            $this->setUnitsAdjustments($item, $promotionAmount, $promotion);
         }
     }
 
@@ -94,19 +84,13 @@ class UnitPercentageDiscountAction extends UnitDiscountAction
 
     /**
      * @param OrderItemInterface $item
-     * @param array $distributedAmounts
+     * @param int $promotionAmount
      * @param PromotionInterface $promotion
      */
-    private function setUnitsAdjustments(OrderItemInterface $item, array $distributedAmounts, PromotionInterface $promotion)
+    private function setUnitsAdjustments(OrderItemInterface $item, $promotionAmount, PromotionInterface $promotion)
     {
-        $i = 0;
         foreach ($item->getUnits() as $unit) {
-            if (0 === $distributedAmounts[$i]) {
-                break;
-            }
-
-            $this->addAdjustmentToUnit($unit, $distributedAmounts[$i], $promotion);
-            $i++;
+            $this->addAdjustmentToUnit($unit, $promotionAmount, $promotion);
         }
     }
 }

@@ -515,7 +515,6 @@
         <service id="sylius.promotion_action.unit_percentage_discount" class="%sylius.promotion_action.unit_percentage_discount.class%">
             <argument type="service" id="sylius.factory.adjustment" />
             <argument type="service" id="sylius.originator" />
-            <argument type="service" id="sylius.integer_distributor" />
             <argument type="service" id="sylius.promotion_filter.price_range" />
             <argument type="service" id="sylius.promotion_filter.taxon" />
             <tag name="sylius.promotion_action" type="unit_percentage_discount" label="Item percentage discount" />
