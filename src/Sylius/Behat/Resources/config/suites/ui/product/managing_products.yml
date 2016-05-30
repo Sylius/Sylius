@@ -17,6 +17,7 @@ default:
                 - sylius.behat.context.transform.product_option
                 - sylius.behat.context.transform.shared_storage
                 - sylius.behat.context.transform.shipping_method
+                - sylius.behat.context.transform.taxon
                 - sylius.behat.context.transform.zone
 
                 - sylius.behat.context.setup.channel

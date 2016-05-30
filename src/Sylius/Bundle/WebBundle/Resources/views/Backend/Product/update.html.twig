@@ -10,11 +10,6 @@
     'bundles/syliusattribute/js/sylius-attribute.js'
 %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
-    <script language="javascript" type="text/javascript">
-        $('#sylius_product_mainTaxon').resourceAutocomplete({
-            src: "{{ path('sylius_admin_api_taxon_index') }}"
-        });
-    </script>
 {% endjavascripts %}
 {% endblock %}
 

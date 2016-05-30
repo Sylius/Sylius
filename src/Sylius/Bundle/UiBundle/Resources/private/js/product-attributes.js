@@ -34,7 +34,7 @@
         $('.attribute button').off('click').on('click', function() {
             var attributeId = $(this).parents('.attribute').attr('data-id');
 
-            $('.ui.dropdown.search').dropdown('remove selected', attributeId);
+            $('div#attributeChoice > .ui.dropdown.search').dropdown('remove selected', attributeId);
             $(this).parent().remove();
         });
     }
@@ -83,7 +83,7 @@
         setAttributeChoiceListener();
         controlAttributesList();
 
-        $('.ui.dropdown.search').dropdown({
+        $('div#attributeChoice > .ui.dropdown.search').dropdown({
             onRemove: function(removedValue, removedText, $removedChoice) {
                 modifyAttributesListOnSelectorElementDelete(removedValue);
             }

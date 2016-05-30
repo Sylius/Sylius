@@ -40,33 +40,33 @@ class IdentifierToResourceTransformerSpec extends ObjectBehavior
         $this->shouldImplement(DataTransformerInterface::class);
     }
 
-    function it_does_not_transform_null_value($repository)
+    function it_does_not_transform_null_value(RepositoryInterface $repository)
     {
         $repository->findOneBy(Argument::any())->shouldNotBeCalled();
 
         $this->transform(null)->shouldReturn(null);
     }
 
-    function it_throws_an_exception_on_non_existing_entity($repository)
+    function it_throws_an_exception_on_non_existing_resource(RepositoryInterface $repository)
     {
         $repository->getClassName()->willReturn(FakeEntity::class);
-        $repository->findOneBy(['id' => 6])->shouldBeCalled()->willReturn(null);
+        $repository->findOneBy(['id' => 6])->willReturn(null);
 
-        $this->shouldThrow(TransformationFailedException::class)->during('transform', array(6));
+        $this->shouldThrow(TransformationFailedException::class)->during('transform', [6]);
     }
 
-    function it_transforms_identifier_in_entity($repository, FakeEntity $entity)
+    function it_transforms_identifier_in_resource(RepositoryInterface $repository, FakeEntity $resource)
     {
-        $repository->findOneBy(['id' => 5])->willReturn($entity);
-        $this->transform(5)->shouldReturn($entity);
+        $repository->findOneBy(['id' => 5])->willReturn($resource);
+        $this->transform(5)->shouldReturn($resource);
     }
 
-    function it_reverses_null_value_to_empty_string()
+    function it_does_not_reverse_null_value()
     {
-        $this->reverseTransform(null)->shouldReturn('');
+        $this->reverseTransform(null)->shouldReturn(null);
     }
 
-    function it_reverses_entity_in_identifier($repository, FakeEntity $value)
+    function it_reverse_transform_resource_to_identifier(RepositoryInterface $repository, FakeEntity $value)
     {
         $repository->getClassName()->willReturn(FakeEntity::class);
         $value->getId()->willReturn(6);

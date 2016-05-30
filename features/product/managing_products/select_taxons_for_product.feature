@@ -5,15 +5,24 @@ Feature: Select taxon for a product
     I want to be able to select taxons for a product
 
     Background:
-        Given the store is available in "English (United States)"
+        Given the store operates on a single channel in "France"
         And the store classifies its products as "T-Shirts", "Accessories", "Funny" and "Sad"
-        And the store has a "T-shirt Banana" configurable product
+        And the store has a "T-Shirt Banana" configurable product
+        And the store has a product "T-Shirt Batman"
         And I am logged in as an administrator
 
-    @todo @javascript
-    Scenario: Selecting a main taxon of configurable product
-        Given I want to modify the "T-shirt Banana" product
-        When I select main taxon "T-shirts"
+    @ui @javascript
+    Scenario: Specifying main taxon for configurable product
+        Given I want to modify the "T-Shirt Banana" product
+        When I choose main taxon "T-Shirts"
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And this product main taxon should be "T-shirts"
+        And this product main taxon should be "T-Shirts"
+
+    @ui @javascript
+    Scenario: Specifying main taxon for simple product
+        Given I want to modify the "T-Shirt Batman" product
+        When I choose main taxon "Sad"
+        And I save my changes
+        Then I should be notified that it has been successfully edited
+        And this product main taxon should be "Sad"

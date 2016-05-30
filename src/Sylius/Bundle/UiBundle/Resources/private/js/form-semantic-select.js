@@ -13,16 +13,17 @@
     $(document).ready(function() {
         $('.ui.fluid.search.selection.dropdown').dropdown({
             delay: {
-                search: 500,
+                search: 250,
             },
             apiSettings: {
                 action: 'get taxons',
                 dataType: 'JSON',
-                data:  { 
-                    criteria: { name: {type: 'contains', value: '' } }
+                data: { 
+                    criteria: { name: { type: 'contains', value: '' } }
                 },
                 beforeSend: function(settings) {
                     settings.data.criteria.name.value = settings.urlData.query;
+                    return settings;
                 },
                 onResponse: function (response) {
                     var myResults = [];

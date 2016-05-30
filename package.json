@@ -5,8 +5,7 @@
   "main": "Gulpfile.js",
   "dependencies": {
     "jquery": "^2.2.0",
-    "semantic-ui-css": "^2.1.8",
-    "select2": "^4.0.0"
+    "semantic-ui-css": "^2.1.8"
   },
   "devDependencies": {
     "gulp": "^3.9.0",

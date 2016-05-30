@@ -72,8 +72,8 @@ class ResourceToHiddenIdentifierTypeSpec extends ObjectBehavior
 
     function it_has_a_name($metadata)
     {
-        $metadata->getName()->willReturn('name');
+        $metadata->getName()->willReturn('taxon');
         $metadata->getApplicationName()->willReturn('sylius');
-        $this->getName()->shouldReturn('sylius_name_to_hidden_identifier');
+        $this->getName()->shouldReturn('sylius_taxon_to_hidden_identifier');
     }
 }

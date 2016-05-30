@@ -16,6 +16,7 @@ use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
@@ -47,11 +48,12 @@ class IdentifierToResourceTransformer implements DataTransformerInterface
      */
     public function transform($value)
     {
-        if (!$value) {
+        if (null === $value) {
             return null;
         }
 
-        if (null === $entity = $this->repository->findOneBy([$this->identifier => $value])) {
+        $resource = $this->repository->findOneBy([$this->identifier => $value]);
+        if (null === $resource) {
             throw new TransformationFailedException(sprintf(
                 'Object "%s" with identifier "%s"="%s" does not exist.',
                 $this->repository->getClassName(),
@@ -60,7 +62,7 @@ class IdentifierToResourceTransformer implements DataTransformerInterface
             ));
         }
 
-        return $entity;
+        return $resource;
     }
 
     /**
@@ -69,14 +71,11 @@ class IdentifierToResourceTransformer implements DataTransformerInterface
     public function reverseTransform($value)
     {
         if (null === $value) {
-            return '';
+            return null;
         }
 
         $class = $this->repository->getClassName();
-
-        if (!$value instanceof $class) {
-            throw new UnexpectedTypeException($value, $class);
-        }
+        Assert::isInstanceOf($value, $class);
 
         $accessor = PropertyAccess::createPropertyAccessor();
 

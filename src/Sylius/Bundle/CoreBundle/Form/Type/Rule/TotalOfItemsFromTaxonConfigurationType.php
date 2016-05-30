@@ -39,7 +39,7 @@ class TotalOfItemsFromTaxonConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('taxon', 'sylius_taxon_to_identifier', [
+            ->add('taxon', 'sylius_taxon_from_identifier', [
                 'label' => 'sylius.form.promotion_rule.total_of_items_from_taxon.taxon',
                 'class' => $this->taxonRepository->getClassName(),
                 'query_builder' => function () {

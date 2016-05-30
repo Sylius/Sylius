@@ -39,18 +39,18 @@ class ResourceToIdentifierTransformerSpec extends ObjectBehavior
         $this->reverseTransform(null)->shouldReturn(null);
     }
 
-    function it_throws_an_exception_on_non_existing_entity(RepositoryInterface $repository)
+    function it_throws_an_exception_on_non_existing_resource(RepositoryInterface $repository)
     {
-        $repository->findOneBy(['id' => 6])->shouldBeCalled()->willReturn(null);
+        $repository->findOneBy(['id' => 6])->willReturn(null);
 
         $this->shouldThrow(TransformationFailedException::class)->during('reverseTransform', [6]);
     }
 
-    function it_reverses_identifier_to_entity(RepositoryInterface $repository, FakeEntity $entity)
+    function it_reverse_transform_identifier_to_resource(RepositoryInterface $repository, FakeEntity $resource)
     {
-        $repository->findOneBy(['id' => 5])->shouldBeCalled()->willReturn($entity);
+        $repository->findOneBy(['id' => 5])->willReturn($resource);
 
-        $this->reverseTransform(5)->shouldReturn($entity);
+        $this->reverseTransform(5)->shouldReturn($resource);
     }
 
     function it_transforms_null_value_to_empty_string()
@@ -58,9 +58,9 @@ class ResourceToIdentifierTransformerSpec extends ObjectBehavior
         $this->transform(null)->shouldReturn('');
     }
 
-    function it_transforms_entity_in_identifier(FakeEntity $value)
+    function it_transforms_resource_in_identifier(FakeEntity $value)
     {
-        $value->getId()->shouldBeCalled()->willReturn(6);
+        $value->getId()->willReturn(6);
 
         $this->transform($value)->shouldReturn(6);
     }

@@ -16,6 +16,7 @@ use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\TransformationFailedException;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
@@ -48,15 +49,13 @@ class ResourceToIdentifierTransformer implements DataTransformerInterface
      */
     public function transform($value)
     {
-        if (empty($value)) {
+        if (null === $value) {
             return '';
         }
 
         $class = $this->repository->getClassName();
+        Assert::isInstanceOf($value, $class);
 
-        if (!$value instanceof $class) {
-            throw new UnexpectedTypeException($value, $class);
-        }
 
         $accessor = PropertyAccess::createPropertyAccessor();
 
@@ -68,7 +67,7 @@ class ResourceToIdentifierTransformer implements DataTransformerInterface
      */
     public function reverseTransform($value)
     {
-        if (!$value) {
+        if (null === $value) {
             return null;
         }
 

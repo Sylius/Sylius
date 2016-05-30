@@ -12,6 +12,7 @@
 namespace Sylius\Behat\Page\Admin\Product;
 
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -47,4 +48,16 @@ interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
      * @return bool
      */
     public function hasAttribute($attribute);
+
+    /**
+     * @param string $taxonName
+     *
+     * @return bool
+     */
+    public function isMainTaxonChosen($taxonName);
+
+    /**
+     * @param TaxonInterface $taxon
+     */
+    public function selectMainTaxon(TaxonInterface $taxon);
 }

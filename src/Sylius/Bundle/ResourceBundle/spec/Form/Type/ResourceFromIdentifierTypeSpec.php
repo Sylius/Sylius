@@ -67,11 +67,11 @@ class ResourceFromIdentifierTypeSpec extends ObjectBehavior
         $this->getParent()->shouldReturn('entity');
     }
 
-    function it_has_a_name($metadata)
+    function it_has_a_name(MetadataInterface $metadata)
     {
-        $metadata->getName()->willReturn('name');
+        $metadata->getName()->willReturn('product');
         $metadata->getApplicationName()->willReturn('sylius');
 
-        $this->getName()->shouldReturn('sylius_name_from_identifier');
+        $this->getName()->shouldReturn('sylius_product_from_identifier');
     }
 }

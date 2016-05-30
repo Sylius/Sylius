@@ -64,7 +64,7 @@ interface TaxonRepositoryInterface extends RepositoryInterface
     /**
      * @return QueryBuilder
      */
-    public function createQueryBuilderByTranslation();
+    public function createListQueryBuilder();
 
     /**
      * @return QueryBuilder
