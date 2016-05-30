@@ -206,6 +206,16 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
      *
      * @return string
      */
+    public function getItemDiscountedUnitPrice($itemName)
+    {
+        return $this->getItemProperty($itemName, 'discounted-unit-price');
+    }
+
+    /**
+     * @param string $itemName
+     *
+     * @return string
+     */
     public function getItemQuantity($itemName)
     {
         return $this->getItemProperty($itemName, 'quantity');

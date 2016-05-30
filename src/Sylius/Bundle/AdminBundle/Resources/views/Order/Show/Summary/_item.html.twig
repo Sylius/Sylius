@@ -27,6 +27,9 @@
     <td class="right aligned unit-price">
         {{ item.unitPrice|sylius_price(order.currency) }}
     </td>
+    <td class="right aligned discounted-unit-price">
+        {{ item.discountedUnitPrice|sylius_price(order.currency) }}
+    </td>
     <td class="right aligned quantity">
         {{ item.quantity }}
     </td>
