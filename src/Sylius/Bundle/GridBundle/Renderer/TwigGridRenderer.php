@@ -120,10 +120,11 @@ class TwigGridRenderer implements GridRendererInterface
             throw new \InvalidArgumentException(sprintf('Missing template for filter type "%s".', $type));
         }
 
-        $criteria = $gridView->getParameters()->get('criteria', []);
-
-        $form = $this->formFactory->createNamed('criteria', 'form', $criteria, ['csrf_protection' => false, 'required' => false]);
+        $form = $this->formFactory->createNamed('criteria', 'form', [], ['csrf_protection' => false, 'required' => false]);
         $form->add($filter->getName(), sprintf('sylius_grid_filter_%s', $filter->getType()), $filter->getOptions());
+
+        $criteria = $gridView->getParameters()->get('criteria', []);
+        $form->submit($criteria);
 
         return $this->twig->render($this->filterTemplates[$type], [
             'grid' => $gridView,
