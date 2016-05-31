@@ -48,6 +48,8 @@ class AttributeController extends ResourceController
      */
     public function renderAttributesAction(Request $request)
     {
+        $template = ($request->attributes->has('template')) ? $request->attributes->get('template') : 'SyliusAttributeBundle::attributeChoice.html.twig';
+
         $form = $this->get('form.factory')->create(
             sprintf('sylius_%s_choice', $this->metadata->getName()),
             null,
@@ -57,7 +59,7 @@ class AttributeController extends ResourceController
             ]
         );
 
-        return $this->render('SyliusAttributeBundle::attributeChoice.html.twig', ['form' => $form->createView()]);
+        return $this->render($template, ['form' => $form->createView()]);
     }
 
     /**
@@ -67,7 +69,7 @@ class AttributeController extends ResourceController
      */
     public function renderAttributeValueFormsAction(Request $request)
     {
-        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+        $template = ($request->attributes->has('template')) ? $request->attributes->get('template') : 'SyliusAttributeBundle::attributeValueForms.html.twig';
 
         $attributeRepository = $this->get($this->metadata->getServiceId('repository'));
         $forms = [];
@@ -84,7 +86,7 @@ class AttributeController extends ResourceController
             $forms[$attribute->getId()] = $form->createView();
         }
 
-        return $this->render('SyliusAttributeBundle::attributeValueForms.html.twig', [
+        return $this->render($template, [
             'forms' => $forms,
             'count' => $request->query->get('count'),
             'metadata' => $this->metadata,

@@ -364,6 +364,14 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @Given I set its :attribute attribute to :value
+     */
+    public function iSetItsAttributeTo($attribute, $value)
+    {
+        $this->createSimpleProductPage->addAttribute($attribute, $value);
+    }
+
+    /**
      * @Given product with :element :value should not be added
      */
     public function productWithNameShouldNotBeAdded($element, $value)

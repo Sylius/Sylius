@@ -42,9 +42,21 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     /**
      * {@inheritdoc}
      */
+    public function addAttribute($attribute, $value)
+    {
+        $attributesTab = $this->getElement('attributes');
+        if (!$attributesTab->hasClass('active')) {
+            $attributesTab->click();
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
+            'attributes' => '.menu [data-tab="attributes"]',
             'code' => '#sylius_product_code',
             'name' => '#sylius_product_translations_en_US_name',
             'price' => '#sylius_product_variant_price',

@@ -33,4 +33,10 @@ interface CreateSimpleProductPageInterface extends BaseCreatePageInterface
      * @param string $localeCode
      */
     public function nameItIn($name, $localeCode);
+
+    /**
+     * @param string $attribute
+     * @param string $value
+     */
+    public function addAttribute($attribute, $value);
 }
