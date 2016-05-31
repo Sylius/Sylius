@@ -28,6 +28,7 @@ use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\OrderProcessing\OrderShipmentProcessorInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
+use Sylius\Component\Order\OrderTransitions;
 use Sylius\Component\Payment\Factory\PaymentFactoryInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
@@ -366,6 +367,26 @@ final class OrderContext implements Context
         $payment = $order->getLastPayment();
         $this->stateMachineFactory->get($payment, PaymentTransitions::GRAPH)->apply(PaymentTransitions::SYLIUS_COMPLETE);
 
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^the customer canceled (this order)$/
+     */
+    public function theCustomerCanceledThisOrder(OrderInterface $order)
+    {
+        $this->stateMachineFactory->get($order, OrderTransitions::GRAPH)->apply(OrderTransitions::SYLIUS_CANCEL);
+        
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^the customer confirmed (this order)$/
+     */
+    public function theCustomerConfirmedThisOrder(OrderInterface $order)
+    {
+        $this->stateMachineFactory->get($order, OrderTransitions::GRAPH)->apply(OrderTransitions::SYLIUS_CONFIRM);
+       
         $this->objectManager->flush();
     }
 

@@ -12,7 +12,6 @@
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
-use Behat\Behat\Tester\Exception\PendingException;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Order\ShowPageInterface;
@@ -433,6 +432,48 @@ final class ManagingOrdersContext implements Context
         Assert::false(
             $this->showPage->canCompleteLastPayment($payment),
             'It should not have complete payment button.'
+        );
+    }
+
+    /**
+     * @When I cancel this order
+     */
+    public function iCancelThisOrder()
+    {
+        $this->showPage->cancelOrder();
+    }
+
+    /**
+     * @Then I should be notified that it has been successfully updated
+     */
+    public function iShouldBeNotifiedAboutItHasBeenSuccessfullyCanceled()
+    {
+        $this->notificationChecker->checkNotification(
+            'Order has been successfully updated.',
+            NotificationType::success()
+        );
+    }
+
+    /**
+     * @Then I should not be able to cancel this order
+     */
+    public function iShouldNotBeAbleToCancelThisOrder()
+    {
+        Assert::false(
+            $this->showPage->hasCancelButton(),
+            'There should not be a cancel button, but it is.'
+        );
+    }
+
+    /**
+     * @Then its state should be :state
+     */
+    public function itsStateShouldBe($state)
+    {
+        Assert::same(
+            $this->showPage->getOrderState(),
+            $state,
+            'The order state should be %2$s, but it is %s.'
         );
     }
 }

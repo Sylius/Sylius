@@ -20,6 +20,17 @@ sylius_admin_order_show:
             section: admin
             template: SyliusAdminBundle:Order:show.html.twig
 
+sylius_admin_order_cancel:
+    path: /orders/{id}/cancel
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.order:applyStateMachineTransitionAction
+        _sylius:
+            state_machine:
+                graph: sylius_order
+                transition: cancel
+            redirect: referer
+
 sylius_admin_order_payment_complete:
     path: /orders/{id}/payments/{paymentId}/complete
     methods: [PUT]
