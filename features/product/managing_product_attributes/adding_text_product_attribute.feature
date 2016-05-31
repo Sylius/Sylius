@@ -15,7 +15,7 @@ Feature: Adding a new text product attribute
         And I name it "T-shirt brand" in "English (United States)"
         And I add it
         Then I should be notified that it has been successfully created
-        And the attribute "T-shirt brand" should appear in the store
+        And the text attribute "T-shirt brand" should appear in the store
 
     @ui
     Scenario: Seeing disabled type field while adding text a product attribute

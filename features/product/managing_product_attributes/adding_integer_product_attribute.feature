@@ -15,7 +15,7 @@ Feature: Adding a new integer product attribute
         And I name it "Book pages" in "English (United States)"
         And I add it
         Then I should be notified that it has been successfully created
-        And the attribute "Book pages" should appear in the store
+        And the integer attribute "Book pages" should appear in the store
 
     @ui
     Scenario: Seeing disabled type field while adding a integer product attribute
