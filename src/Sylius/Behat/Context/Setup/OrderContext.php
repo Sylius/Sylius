@@ -219,6 +219,7 @@ final class OrderContext implements Context
         $order->addPayment($payment);
 
         $this->objectManager->flush();
+        $this->sharedStorage->set('payment', $payment);
     }
 
     /**
@@ -357,6 +358,7 @@ final class OrderContext implements Context
         $payment->setState(PaymentInterface::STATE_COMPLETED);
 
         $this->objectManager->flush();
+        $this->sharedStorage->set('payment', $payment);
     }
 
     /**

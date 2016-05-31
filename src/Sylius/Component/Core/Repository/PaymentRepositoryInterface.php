@@ -12,12 +12,12 @@
 namespace Sylius\Component\Core\Repository;
 
 use Pagerfanta\Pagerfanta;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Payment\Repository\PaymentRepositoryInterface as BasePaymentRepositoryInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-interface PaymentRepositoryInterface extends RepositoryInterface
+interface PaymentRepositoryInterface extends BasePaymentRepositoryInterface
 {
     /**
      * @param array|null $criteria

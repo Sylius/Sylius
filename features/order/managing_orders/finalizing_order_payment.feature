@@ -19,7 +19,7 @@ Feature: Finalizing order payment
     @ui
     Scenario: Finalizing order's payment
         Given I view the summary of the order "#00000666"
-        When I complete its payment
+        When I complete this payment
         Then I should be notified that the order's payment has been successfully completed
         And it should have completed payment state
 
@@ -27,4 +27,4 @@ Feature: Finalizing order payment
     Scenario: Unable to finalize completed order's payment
         Given this order has already completed payment
         When I view the summary of the order "#00000666"
-        Then I should not be able to finalize its payment
+        Then I should not be able to finalize this payment

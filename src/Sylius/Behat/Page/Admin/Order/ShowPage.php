@@ -11,10 +11,11 @@
 
 namespace Sylius\Behat\Page\Admin\Order;
 
-use Behat\Mink\Exception\ElementNotFoundException;
+use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
 use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
+use Sylius\Component\Core\Model\PaymentInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
@@ -98,14 +99,17 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasCompletePaymentButton()
+    public function canCompleteLastPayment(PaymentInterface $payment)
     {
-        return $this->getElement('payments')->hasButton('Complete');
+        return $this->getLastPaymentElement($payment)->hasButton('Complete');
     }
 
-    public function completePayment()
+    /**
+     * {@inheritdoc}
+     */
+    public function completeLastPayment(PaymentInterface $payment)
     {
-        $this->getElement('payments')->pressButton('Complete');
+        $this->getLastPaymentElement($payment)->pressButton('Complete');
     }
 
     /**
@@ -346,5 +350,18 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         );
 
         return $rows[0]->find('css', '.'.$property)->getText();
+    }
+
+    /**
+     * @param PaymentInterface $payment
+     *
+     * @return NodeElement|null
+     */
+    private function getLastPaymentElement(PaymentInterface $payment)
+    {
+        $paymentStateElements = $this->getElement('payments')->findAll('css', sprintf('span.ui.label:contains(\'%s\')', ucfirst($payment->getState())));
+        $paymentStateElement = end($paymentStateElements);
+
+        return $paymentStateElement->getParent()->getParent();
     }
 }

@@ -12,6 +12,7 @@
 namespace Sylius\Behat\Page\Admin\Order;
 
 use Sylius\Behat\Page\SymfonyPageInterface;
+use Sylius\Component\Core\Model\PaymentInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -61,11 +62,16 @@ interface ShowPageInterface extends SymfonyPageInterface
     public function hasPayment($paymentMethodName);
 
     /**
+     * @param PaymentInterface $payment
+     *
      * @return bool
      */
-    public function hasCompletePaymentButton();
+    public function canCompleteLastPayment(PaymentInterface $payment);
 
-    public function completePayment();
+    /**
+     * @param PaymentInterface $payment
+     */
+    public function completeLastPayment(PaymentInterface $payment);
 
     /**
      * @return int

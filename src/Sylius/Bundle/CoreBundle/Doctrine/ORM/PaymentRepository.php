@@ -12,10 +12,10 @@
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
 use Pagerfanta\Pagerfanta;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Bundle\PaymentBundle\Doctrine\ORM\PaymentRepository as BasePaymentRepository;
 use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
 
-class PaymentRepository extends EntityRepository implements PaymentRepositoryInterface
+class PaymentRepository extends BasePaymentRepository implements PaymentRepositoryInterface
 {
     /**
      * @param array $criteria

@@ -84,11 +84,11 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @When I complete its payment
+     * @When /^I complete (this payment)$/
      */
-    public function iCompleteItsPayment()
+    public function iCompleteThisPayment(PaymentInterface $payment)
     {
-        $this->showPage->completePayment();
+        $this->showPage->completeLastPayment($payment);
     }
 
     /**
@@ -425,12 +425,12 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then I should not be able to finalize its payment
+     * @Then /^I should not be able to finalize (this payment)$/
      */
-    public function iShouldNotBeAbleToFinalizeItsPayment()
+    public function iShouldNotBeAbleToFinalizeItsPayment(PaymentInterface $payment)
     {
         Assert::false(
-            $this->showPage->hasCompletePaymentButton(),
+            $this->showPage->canCompleteLastPayment($payment),
             'It should not have complete payment button'
         );
     }
