@@ -68,6 +68,27 @@ class OrderItemSpec extends ObjectBehavior
         $this->getTaxTotal()->shouldReturn(820);
     }
 
+    function it_returns_discounted_unit_price_which_is_first_unit_price_lowered_by_unit_promotions(
+        OrderItemUnitInterface $unit
+    ) {
+        $this->setUnitPrice(10000);
+
+        $unit->getOrderItem()->willReturn($this);
+        $unit->getTotal()->willReturn(9000);
+        $unit->getAdjustmentsTotal(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)->willReturn(-500);
+
+        $this->addUnit($unit);
+
+        $this->getDiscountedUnitPrice()->shouldReturn(9500);
+    }
+
+    function it_returns_unit_price_as_discounted_unit_price_if_there_are_no_units()
+    {
+        $this->setUnitPrice(10000);
+
+        $this->getDiscountedUnitPrice()->shouldReturn(10000);
+    }
+
     function it_returns_subtotal_which_consist_of_discounted_unit_price_multiplied_by_quantity(
         OrderItemUnitInterface $firstUnit,
         OrderItemUnitInterface $secondUnit
@@ -76,15 +97,15 @@ class OrderItemSpec extends ObjectBehavior
 
         $firstUnit->getOrderItem()->willReturn($this);
         $firstUnit->getTotal()->willReturn(9000);
-        $firstUnit->getAdjustmentsTotal(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)->willReturn(-1000);
+        $firstUnit->getAdjustmentsTotal(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)->willReturn(-500);
 
         $secondUnit->getOrderItem()->willReturn($this);
-        $secondUnit->getTotal()->willReturn(9500);
-        $secondUnit->getAdjustmentsTotal(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)->willReturn(-500);
+        $secondUnit->getTotal()->willReturn(9000);
+        $secondUnit->getAdjustmentsTotal(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)->willReturn(-500);
 
         $this->addUnit($firstUnit);
         $this->addUnit($secondUnit);
 
-        $this->getSubtotal()->shouldReturn(18500);
+        $this->getSubtotal()->shouldReturn(19000);
     }
 }

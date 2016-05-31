@@ -10,6 +10,7 @@
  */
 
 namespace Sylius\Component\Order\Model;
+
 use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**

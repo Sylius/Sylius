@@ -28,6 +28,7 @@ Feature: Seeing order item detailed data
         Given I view the summary of the order "#00000666"
         When I check "Iron Man T-Shirt" data
         Then its unit price should be €39.00
+        And its discounted unit price should be €37.00
         And its quantity should be 4
         And its subtotal should be €148.00
         And its discount should be -€12.00

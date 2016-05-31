@@ -25,7 +25,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-abstract class ItemDiscountAction implements PromotionActionInterface
+abstract class UnitDiscountAction implements PromotionActionInterface
 {
     /**
      * @var FactoryInterface
@@ -78,7 +78,7 @@ abstract class ItemDiscountAction implements PromotionActionInterface
      */
     protected function removeUnitOrderItemAdjustments(OrderItemUnitInterface $unit, PromotionInterface $promotion)
     {
-        foreach ($unit->getAdjustments(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT) as $adjustment) {
+        foreach ($unit->getAdjustments(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT) as $adjustment) {
             if ($promotion === $this->originator->getOrigin($adjustment)) {
                 $unit->removeAdjustment($adjustment);
             }
@@ -92,7 +92,7 @@ abstract class ItemDiscountAction implements PromotionActionInterface
      */
     protected function addAdjustmentToUnit(OrderItemUnitInterface $unit, $amount, PromotionInterface $promotion)
     {
-        $adjustment = $this->createAdjustment($promotion, AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT);
+        $adjustment = $this->createAdjustment($promotion, AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT);
         $adjustment->setAmount(-$amount);
 
         $unit->addAdjustment($adjustment);

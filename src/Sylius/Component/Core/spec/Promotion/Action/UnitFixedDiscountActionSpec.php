@@ -19,7 +19,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
-use Sylius\Component\Core\Promotion\Action\ItemDiscountAction;
+use Sylius\Component\Core\Promotion\Action\UnitDiscountAction;
 use Sylius\Component\Core\Promotion\Filter\FilterInterface;
 use Sylius\Component\Originator\Originator\OriginatorInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
@@ -29,7 +29,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ItemFixedDiscountActionSpec extends ObjectBehavior
+class UnitFixedDiscountActionSpec extends ObjectBehavior
 {
     function let(
         FactoryInterface $adjustmentFactory,
@@ -42,12 +42,12 @@ class ItemFixedDiscountActionSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Promotion\Action\ItemFixedDiscountAction');
+        $this->shouldHaveType('Sylius\Component\Core\Promotion\Action\UnitFixedDiscountAction');
     }
 
     function it_is_discount_action()
     {
-        $this->shouldHaveType(ItemDiscountAction::class);
+        $this->shouldHaveType(UnitDiscountAction::class);
     }
 
     function it_applies_fixed_discount_on_every_unit_in_order(
@@ -88,14 +88,14 @@ class ItemFixedDiscountActionSpec extends ObjectBehavior
         $adjustmentFactory->createNew()->willReturn($promotionAdjustment1, $promotionAdjustment2);
 
         $unit1->getTotal()->willReturn(1000);
-        $promotionAdjustment1->setType(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)->shouldBeCalled();
+        $promotionAdjustment1->setType(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)->shouldBeCalled();
         $promotionAdjustment1->setLabel('Test promotion')->shouldBeCalled();
         $promotionAdjustment1->setAmount(-500)->shouldBeCalled();
 
         $originator->setOrigin($promotionAdjustment1, $promotion)->shouldBeCalled();
 
         $unit2->getTotal()->willReturn(1000);
-        $promotionAdjustment2->setType(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)->shouldBeCalled();
+        $promotionAdjustment2->setType(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)->shouldBeCalled();
         $promotionAdjustment2->setLabel('Test promotion')->shouldBeCalled();
         $promotionAdjustment2->setAmount(-500)->shouldBeCalled();
 
@@ -160,14 +160,14 @@ class ItemFixedDiscountActionSpec extends ObjectBehavior
         $adjustmentFactory->createNew()->willReturn($promotionAdjustment1, $promotionAdjustment2);
 
         $unit1->getTotal()->willReturn(300);
-        $promotionAdjustment1->setType(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)->shouldBeCalled();
+        $promotionAdjustment1->setType(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)->shouldBeCalled();
         $promotionAdjustment1->setLabel('Test promotion')->shouldBeCalled();
         $promotionAdjustment1->setAmount(-300)->shouldBeCalled();
 
         $originator->setOrigin($promotionAdjustment1, $promotion)->shouldBeCalled();
 
         $unit2->getTotal()->willReturn(200);
-        $promotionAdjustment2->setType(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)->shouldBeCalled();
+        $promotionAdjustment2->setType(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)->shouldBeCalled();
         $promotionAdjustment2->setLabel('Test promotion')->shouldBeCalled();
         $promotionAdjustment2->setAmount(-200)->shouldBeCalled();
 
@@ -208,7 +208,7 @@ class ItemFixedDiscountActionSpec extends ObjectBehavior
         $orderItem->getUnits()->willReturn($units);
         $units->getIterator()->willReturn(new \ArrayIterator([$unit->getWrappedObject()]));
 
-        $unit->getAdjustments(AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT)->willReturn($adjustments);
+        $unit->getAdjustments(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)->willReturn($adjustments);
         $adjustments
             ->getIterator()
             ->willReturn(new \ArrayIterator([$promotionAdjustment1->getWrappedObject(), $promotionAdjustment2->getWrappedObject()]))

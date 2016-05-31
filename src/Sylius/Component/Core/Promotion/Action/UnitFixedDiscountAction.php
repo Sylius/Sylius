@@ -11,7 +11,6 @@
 
 namespace Sylius\Component\Core\Promotion\Action;
 
-use Sylius\Component\Core\Distributor\IntegerDistributorInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Promotion\Filter\FilterInterface;
@@ -24,14 +23,9 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ItemPercentageDiscountAction extends ItemDiscountAction
+class UnitFixedDiscountAction extends UnitDiscountAction
 {
-    const TYPE = 'item_percentage_discount';
-
-    /**
-     * @var IntegerDistributorInterface
-     */
-    private $distributor;
+    const TYPE = 'unit_fixed_discount';
 
     /**
      * @var FilterInterface
@@ -46,20 +40,17 @@ class ItemPercentageDiscountAction extends ItemDiscountAction
     /**
      * @param FactoryInterface $adjustmentFactory
      * @param OriginatorInterface $originator
-     * @param IntegerDistributorInterface $distributor
      * @param FilterInterface $priceRangeFilter
      * @param FilterInterface $taxonFilter
      */
     public function __construct(
         FactoryInterface $adjustmentFactory,
         OriginatorInterface $originator,
-        IntegerDistributorInterface $distributor,
         FilterInterface $priceRangeFilter,
         FilterInterface $taxonFilter
     ) {
         parent::__construct($adjustmentFactory, $originator);
 
-        $this->distributor = $distributor;
         $this->priceRangeFilter = $priceRangeFilter;
         $this->taxonFilter = $taxonFilter;
     }
@@ -73,14 +64,15 @@ class ItemPercentageDiscountAction extends ItemDiscountAction
             throw new UnexpectedTypeException($subject, OrderInterface::class);
         }
 
+        if (0 === $configuration['amount']) {
+            return;
+        }
+
         $filteredItems = $this->priceRangeFilter->filter($subject->getItems()->toArray(), $configuration);
         $filteredItems = $this->taxonFilter->filter($filteredItems, $configuration);
 
         foreach ($filteredItems as $item) {
-            $promotionAmount = (int) round($item->getTotal() * $configuration['percentage']);
-            $distributedAmounts = $this->distributor->distribute($promotionAmount, $item->getQuantity());
-
-            $this->setUnitsAdjustments($item, $distributedAmounts, $promotion);
+            $this->setUnitsAdjustments($item, $configuration['amount'], $promotion);
         }
     }
 
@@ -89,24 +81,22 @@ class ItemPercentageDiscountAction extends ItemDiscountAction
      */
     public function getConfigurationFormType()
     {
-        return 'sylius_promotion_action_percentage_discount_configuration';
+        return 'sylius_promotion_action_fixed_discount_configuration';
     }
 
     /**
      * @param OrderItemInterface $item
-     * @param array $distributedAmounts
+     * @param int $amount
      * @param PromotionInterface $promotion
      */
-    private function setUnitsAdjustments(OrderItemInterface $item, array $distributedAmounts, PromotionInterface $promotion)
+    private function setUnitsAdjustments(OrderItemInterface $item, $amount, PromotionInterface $promotion)
     {
-        $i = 0;
         foreach ($item->getUnits() as $unit) {
-            if (0 === $distributedAmounts[$i]) {
-                break;
-            }
-
-            $this->addAdjustmentToUnit($unit, $distributedAmounts[$i], $promotion);
-            $i++;
+            $this->addAdjustmentToUnit(
+                $unit,
+                min($unit->getTotal(), $amount),
+                $promotion
+            );
         }
     }
 }

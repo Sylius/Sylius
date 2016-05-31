@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Core\Promotion\Action;
 
+use Sylius\Component\Core\Distributor\IntegerDistributorInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Promotion\Filter\FilterInterface;
@@ -23,9 +24,9 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ItemFixedDiscountAction extends ItemDiscountAction
+class UnitPercentageDiscountAction extends UnitDiscountAction
 {
-    const TYPE = 'item_fixed_discount';
+    const TYPE = 'unit_percentage_discount';
 
     /**
      * @var FilterInterface
@@ -64,15 +65,12 @@ class ItemFixedDiscountAction extends ItemDiscountAction
             throw new UnexpectedTypeException($subject, OrderInterface::class);
         }
 
-        if (0 === $configuration['amount']) {
-            return;
-        }
-
         $filteredItems = $this->priceRangeFilter->filter($subject->getItems()->toArray(), $configuration);
         $filteredItems = $this->taxonFilter->filter($filteredItems, $configuration);
 
         foreach ($filteredItems as $item) {
-            $this->setUnitsAdjustments($item, $configuration['amount'], $promotion);
+            $promotionAmount = (int) round($item->getUnitPrice() * $configuration['percentage']);
+            $this->setUnitsAdjustments($item, $promotionAmount, $promotion);
         }
     }
 
@@ -81,22 +79,18 @@ class ItemFixedDiscountAction extends ItemDiscountAction
      */
     public function getConfigurationFormType()
     {
-        return 'sylius_promotion_action_fixed_discount_configuration';
+        return 'sylius_promotion_action_percentage_discount_configuration';
     }
 
     /**
      * @param OrderItemInterface $item
-     * @param int $amount
+     * @param int $promotionAmount
      * @param PromotionInterface $promotion
      */
-    private function setUnitsAdjustments(OrderItemInterface $item, $amount, PromotionInterface $promotion)
+    private function setUnitsAdjustments(OrderItemInterface $item, $promotionAmount, PromotionInterface $promotion)
     {
         foreach ($item->getUnits() as $unit) {
-            $this->addAdjustmentToUnit(
-                $unit,
-                min($unit->getTotal(), $amount),
-                $promotion
-            );
+            $this->addAdjustmentToUnit($unit, $promotionAmount, $promotion);
         }
     }
 }

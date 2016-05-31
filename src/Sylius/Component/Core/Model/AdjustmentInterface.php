@@ -20,4 +20,5 @@ interface AdjustmentInterface extends BaseAdjustmentInterface
     const SHIPPING_ADJUSTMENT = 'shipping';
     const ORDER_PROMOTION_ADJUSTMENT = 'order_promotion';
     const ORDER_ITEM_PROMOTION_ADJUSTMENT = 'order_item_promotion';
+    const ORDER_UNIT_PROMOTION_ADJUSTMENT = 'order_unit_promotion';
 }

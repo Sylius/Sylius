@@ -31,7 +31,7 @@ interface ActionFactoryInterface extends FactoryInterface
      *
      * @return ActionInterface
      */
-    public function createItemFixedDiscount($amount);
+    public function createUnitFixedDiscount($amount);
 
     /**
      * @param float $percentage
@@ -45,7 +45,7 @@ interface ActionFactoryInterface extends FactoryInterface
      *
      * @return ActionInterface
      */
-    public function createItemPercentageDiscount($percentage);
+    public function createUnitPercentageDiscount($percentage);
 
     /**
      * @param float $percentage

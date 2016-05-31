@@ -278,6 +278,20 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @Then /^(its) discounted unit price should be ([^"]+)$/
+     */
+    public function itemDiscountedUnitPriceShouldBe($itemName, $discountedUnitPrice)
+    {
+        $itemUnitPriceOnPage = $this->showPage->getItemDiscountedUnitPrice($itemName);
+
+        Assert::eq(
+            $itemUnitPriceOnPage,
+            $discountedUnitPrice,
+            'Item discounted unit price is %s, but should be %s.'
+        );
+    }
+
+    /**
      * @Then /^(its) quantity should be ([^"]+)$/
      */
     public function itemQuantityShouldBe($itemName, $quantity)
