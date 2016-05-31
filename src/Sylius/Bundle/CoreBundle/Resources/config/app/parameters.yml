@@ -2,7 +2,10 @@
 # (c) Paweł Jędrzejewski
 
 parameters:
+    sylius.inventory.backorders_enabled: true
+    sylius.inventory.tracking_enabled: true
     sylius.inventory.holding.duration: 15 minutes
+    sylius.order.allow_guest_order: false
     sylius.order.pending.duration: 3 hours
     sylius.cache:
         type: file_system
