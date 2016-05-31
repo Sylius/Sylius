@@ -14,11 +14,14 @@ sylius:
             street: الشارع
             province: مقاطعة
         country:
+            add_province: اضافة جهة/مقاطعة
             name: الاسم
             provinces: المقاطعات
             select: اختر
+            enabled: مفتوح
         province:
             name: الاسم
+            abbreviation: مختصرات
             select: اختر
         zone:
             members: الأعضاء
