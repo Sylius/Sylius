@@ -13,10 +13,13 @@ namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Behat\Behat\Tester\Exception\PendingException;
+use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Order\ShowPageInterface;
+use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Webmozart\Assert\Assert;
 
@@ -42,18 +45,26 @@ final class ManagingOrdersContext implements Context
     private $showPage;
 
     /**
+     * @var NotificationCheckerInterface
+     */
+    private $notificationChecker;
+
+    /**
      * @param SharedStorageInterface $sharedStorage
      * @param IndexPageInterface $indexPage
      * @param ShowPageInterface $showPage
+     * @param NotificationCheckerInterface $notificationChecker
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         IndexPageInterface $indexPage,
-        ShowPageInterface $showPage
+        ShowPageInterface $showPage,
+        NotificationCheckerInterface $notificationChecker
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->indexPage = $indexPage;
         $this->showPage = $showPage;
+        $this->notificationChecker = $notificationChecker;
     }
 
     /**
@@ -70,6 +81,14 @@ final class ManagingOrdersContext implements Context
     public function iSeeTheOrder(OrderInterface $order)
     {
         $this->showPage->open(['id' => $order->getId()]);
+    }
+
+    /**
+     * @When /^I mark (this order) as a paid$/
+     */
+    public function iMarkThisOrderAsAPaid(OrderInterface $order)
+    {
+        $this->showPage->completeLastPayment($order->getLastPayment());
     }
 
     /**
@@ -383,6 +402,37 @@ final class ManagingOrdersContext implements Context
         Assert::false(
             $this->indexPage->isSingleResourceOnPage(['number' => $order->getNumber()]),
             sprintf('Order with number %s exists but should not.', $order->getNumber())
+        );
+    }
+
+    /**
+     * @Then I should be notified that the order's payment has been successfully completed
+     */
+    public function iShouldBeNotifiedThatTheOrderSPaymentHasBeenSuccessfullyCompleted()
+    {
+        $this->notificationChecker->checkNotification('Payment has been successfully updated.', NotificationType::success());
+    }
+
+    /**
+     * @Then it should have completed payment state
+     */
+    public function itShouldHaveCompletedPaymentState()
+    {
+        Assert::true(
+            $this->showPage->hasPayment('Completed'),
+            'It should have payment with completed state.'
+        );
+    }
+
+    /**
+     * @Then /^I should not be able to mark (this order) as paid again$/
+     */
+    public function iShouldNotBeAbleToFinalizeItsPayment(OrderInterface $order)
+    {
+        $payment = $order->getLastPayment(PaymentInterface::STATE_COMPLETED);
+        Assert::false(
+            $this->showPage->canCompleteLastPayment($payment),
+            'It should not have complete payment button.'
         );
     }
 }

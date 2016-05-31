@@ -97,6 +97,7 @@
             <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
             <argument type="service" id="sylius.behat.page.admin.order.index" />
             <argument type="service" id="sylius.behat.page.admin.order.show" />
+            <argument type="service" id="sylius.behat.notification_checker" />
             <tag name="sylius.behat.context" />
         </service>
 

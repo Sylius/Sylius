@@ -18,6 +18,23 @@ use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
 class PaymentRepository extends EntityRepository implements PaymentRepositoryInterface
 {
     /**
+     * {@inheritdoc}
+     */
+    public function findByOrderIdAndId($orderId, $id)
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+
+        return $queryBuilder
+            ->where('o.order = :orderId')
+            ->andWhere('o.id = :id')
+            ->setParameter('orderId', $orderId)
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
+    /**
      * @param array $criteria
      * @param array $sorting
      *

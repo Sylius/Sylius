@@ -12,6 +12,7 @@
 namespace Sylius\Behat\Page\Admin\Order;
 
 use Sylius\Behat\Page\SymfonyPageInterface;
+use Sylius\Component\Core\Model\PaymentInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -30,6 +31,8 @@ interface ShowPageInterface extends SymfonyPageInterface
      * @param string $postcode
      * @param string $city
      * @param string $countryName
+     *
+     * @return bool
      */
     public function hasShippingAddress($customerName, $street, $postcode, $city, $countryName);
 
@@ -39,18 +42,36 @@ interface ShowPageInterface extends SymfonyPageInterface
      * @param string $postcode
      * @param string $city
      * @param string $countryName
+     *
+     * @return bool
      */
     public function hasBillingAddress($customerName, $street, $postcode, $city, $countryName);
 
     /**
      * @param string $shippingMethodName
+     *
+     * @return bool
      */
     public function hasShipment($shippingMethodName);
 
     /**
      * @param string $paymentMethodName
+     *
+     * @return bool
      */
     public function hasPayment($paymentMethodName);
+
+    /**
+     * @param PaymentInterface $payment
+     *
+     * @return bool
+     */
+    public function canCompleteLastPayment(PaymentInterface $payment);
+
+    /**
+     * @param PaymentInterface $payment
+     */
+    public function completeLastPayment(PaymentInterface $payment);
 
     /**
      * @return int
