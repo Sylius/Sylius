@@ -1,6 +1,6 @@
 @managing_orders
 Feature: Finalizing order payment
-    In order to mark order's payment state as a complete
+    In order to mark order's payment state as complete
     As an Administrator
     I want to be able to finalize payment
 
@@ -19,12 +19,12 @@ Feature: Finalizing order payment
     @ui
     Scenario: Finalizing order's payment
         Given I view the summary of the order "#00000666"
-        When I complete this payment
+        When I mark this order as a paid
         Then I should be notified that the order's payment has been successfully completed
         And it should have completed payment state
 
     @ui
     Scenario: Unable to finalize completed order's payment
-        Given this order has already completed payment
+        Given this order is already paid
         When I view the summary of the order "#00000666"
-        Then I should not be able to finalize this payment
+        Then I should not be able to mark this order as paid again

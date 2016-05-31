@@ -84,11 +84,11 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @When /^I complete (this payment)$/
+     * @When /^I mark (this order) as a paid$/
      */
-    public function iCompleteThisPayment(PaymentInterface $payment)
+    public function iMarkThisOrderAsAPaid(OrderInterface $order)
     {
-        $this->showPage->completeLastPayment($payment);
+        $this->showPage->completeLastPayment($order->getLastPayment());
     }
 
     /**
@@ -425,13 +425,14 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then /^I should not be able to finalize (this payment)$/
+     * @Then /^I should not be able to mark (this order) as paid again$/
      */
-    public function iShouldNotBeAbleToFinalizeItsPayment(PaymentInterface $payment)
+    public function iShouldNotBeAbleToFinalizeItsPayment(OrderInterface $order)
     {
+        $payment = $order->getLastPayment(PaymentInterface::STATE_COMPLETED);
         Assert::false(
             $this->showPage->canCompleteLastPayment($payment),
-            'It should not have complete payment button'
+            'It should not have complete payment button.'
         );
     }
 }

@@ -18,7 +18,6 @@
 
     <parameters>
         <parameter key="sylius.form.type.payment_method_choice.class">Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodEntityType</parameter>
-        <parameter key="sylius.repository.payment.class">Sylius\Bundle\PaymentBundle\Doctrine\ORM\PaymentRepository</parameter>
     </parameters>
 
 </container>

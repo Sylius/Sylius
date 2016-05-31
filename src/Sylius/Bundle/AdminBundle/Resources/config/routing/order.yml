@@ -27,7 +27,7 @@ sylius_admin_order_payment_complete:
         _controller: sylius.controller.payment:applyStateMachineTransitionAction
         _sylius:
             repository:
-                method: findByOrderAndId
+                method: findByOrderIdAndId
                 arguments:
                     id: $id
                     paymentId: $paymentId

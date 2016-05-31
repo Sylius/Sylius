@@ -13,6 +13,7 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
+use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CouponInterface;
 use Sylius\Component\Core\OrderProcessing\OrderRecalculatorInterface;
@@ -30,6 +31,7 @@ use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Payment\Factory\PaymentFactoryInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
+use Sylius\Component\Payment\PaymentTransitions;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Model\CustomerInterface;
@@ -96,6 +98,11 @@ final class OrderContext implements Context
     private $objectManager;
 
     /**
+     * @var StateMachineFactoryInterface
+     */
+    private $stateMachineFactory;
+
+    /**
      * @param SharedStorageInterface $sharedStorage
      * @param OrderRepositoryInterface $orderRepository
      * @param FactoryInterface $orderFactory
@@ -107,6 +114,7 @@ final class OrderContext implements Context
      * @param RepositoryInterface $customerRepository
      * @param OrderRecalculatorInterface $orderRecalculator
      * @param ObjectManager $objectManager
+     * @param StateMachineFactoryInterface $stateMachineFactory
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -119,7 +127,8 @@ final class OrderContext implements Context
         FactoryInterface $customerFactory,
         RepositoryInterface $customerRepository,
         OrderRecalculatorInterface $orderRecalculator,
-        ObjectManager $objectManager
+        ObjectManager $objectManager,
+        StateMachineFactoryInterface $stateMachineFactory
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->orderRepository = $orderRepository;
@@ -132,6 +141,7 @@ final class OrderContext implements Context
         $this->customerRepository = $customerRepository;
         $this->orderRecalculator = $orderRecalculator;
         $this->objectManager = $objectManager;
+        $this->stateMachineFactory = $stateMachineFactory;
     }
 
     /**
@@ -219,7 +229,6 @@ final class OrderContext implements Context
         $order->addPayment($payment);
 
         $this->objectManager->flush();
-        $this->sharedStorage->set('payment', $payment);
     }
 
     /**
@@ -350,15 +359,14 @@ final class OrderContext implements Context
     }
 
     /**
-     * @Given /^(this order) has already completed payment$/
+     * @Given /^(this order) is already paid$/
      */
-    public function thisOrderHasAlreadyCompletedPayment(OrderInterface $order)
+    public function thisOrderIsAlreadyPaid(OrderInterface $order)
     {
         $payment = $order->getLastPayment();
-        $payment->setState(PaymentInterface::STATE_COMPLETED);
+        $this->stateMachineFactory->get($payment, PaymentTransitions::GRAPH)->apply(PaymentTransitions::SYLIUS_COMPLETE);
 
         $this->objectManager->flush();
-        $this->sharedStorage->set('payment', $payment);
     }
 
     /**
