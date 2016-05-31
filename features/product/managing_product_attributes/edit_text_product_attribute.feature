@@ -15,7 +15,7 @@ Feature: Text product attribute edition
         When I change it name to "T-shirt material" in "English (United States)"
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And the attribute "T-shirt material" should appear in the store
+        And the text attribute "T-shirt material" should appear in the store
 
     @ui
     Scenario: Seeing disabled code field while editing a product attribute

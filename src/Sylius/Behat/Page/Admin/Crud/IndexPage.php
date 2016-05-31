@@ -69,6 +69,26 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function isSingleResourceWithSpecificElementOnPage(array $parameters, $element)
+    {
+        try {
+            $rows = $this->tableAccessor->getRowsWithFields($this->getElement('table'), $parameters);
+
+            if (1 !== count($rows)) {
+                return false;
+            }
+
+            return null !== $rows[0]->find('css', $element);
+        } catch (\InvalidArgumentException $exception) {
+            return false;
+        } catch (ElementNotFoundException $exception) {
+            return false;
+        }
+    }
+
+    /**
      * @return int
      */
     public function countItems()

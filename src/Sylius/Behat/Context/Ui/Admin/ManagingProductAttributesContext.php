@@ -97,16 +97,31 @@ final class ManagingProductAttributesContext implements Context
     }
 
     /**
-     * @Then the attribute :name should appear in the store
      * @Then I should see the product attribute :name in the list
      */
-    public function theAttributeShouldAppearInTheStore($name)
+    public function iShouldSeeTheProductAttributeInTheList($name)
     {
         $this->indexPage->open();
 
         Assert::true(
             $this->indexPage->isSingleResourceOnPage(['name' => $name]),
             sprintf('The product attribute with name %s should appear on page, but it does not.', $name)
+        );
+    }
+
+    /**
+     * @Then the :type attribute :name should appear in the store
+     */
+    public function theAttributeShouldAppearInTheStore($type, $name)
+    {
+        $this->indexPage->open();
+
+        Assert::true(
+            $this->indexPage->isSingleResourceWithSpecificElementOnPage(
+                ['name' => $name],
+                sprintf('td span.ui.label:contains("%s")', $type)
+            ),
+            sprintf('The product attribute with name %s and type %s should appear on page, but it does not.', $name, $type)
         );
     }
 

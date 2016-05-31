@@ -27,6 +27,14 @@ interface IndexPageInterface extends SymfonyPageInterface
 
     /**
      * @param array $parameters
+     * @param string $element
+     *
+     * @return bool
+     */
+    public function isSingleResourceWithSpecificElementOnPage(array $parameters, $element);
+
+    /**
+     * @param array $parameters
      *
      * @return bool
      */

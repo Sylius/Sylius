@@ -15,7 +15,7 @@ Feature: Adding a new percent product attribute
         And I name it "T-shirt cotton content" in "English (United States)"
         And I add it
         Then I should be notified that it has been successfully created
-        And the attribute "T-shirt cotton content" should appear in the store
+        And the percent attribute "T-shirt cotton content" should appear in the store
 
     @ui
     Scenario: Seeing disabled type field while adding a percent product attribute
