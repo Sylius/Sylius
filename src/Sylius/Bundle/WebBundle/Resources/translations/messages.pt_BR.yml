@@ -327,6 +327,7 @@ sylius:
         description: Descrição
         details: Detalhes
         disable: Desativar
+        discounted_unit_price: Preço unitário com desconto
         edit: Editar
         edit_association_type: Editar um tipo de associação
         edit_group: Editar grupo

@@ -320,6 +320,7 @@ sylius:
         description: Popis
         details: Podrobnosti
         disable: Vypnúť
+        discounted_unit_price: Zľavnená jednotková cena
         edit: Upraviť
         edit_association_type: Upraviť typ priradenia
         edit_group: Upraviť skupinu

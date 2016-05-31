@@ -61,6 +61,7 @@ sylius:
         edit_product: Editar produto
         edit_product_attribute: Editar atributo do produto
         edit_product_option: Editar a opção de produto
+        edit_product_variant: Editar a variante do produto
         edit_promotion: Editar promoção
         edit_promotion_coupon: Editar o cupom de promoção
         edit_shipping_method: Editar método de envio
@@ -86,6 +87,7 @@ sylius:
         jump_to_page: Ir para a página
         last_updated: Ultima atualização
         list_coupons: Cupons
+        list_variants: Lista de variantes
         locales: Localidades
         manage_attributes_of_your_products: Gerenciar atributos de seus produtos
         manage_categorization_of_your_products: Gerenciar a categorização de seus produtos
@@ -99,6 +101,7 @@ sylius:
         manage_shipping_destinations: Gerenciar destinos de transporte
         manage_shipping_methods_for_your_store: Gerenciar os métodos de transporte para sua loja
         manage_taxation_of_your_products: Gerenciar a tributação de seus produtos
+        manage_variants: Gerenciar as variantes
         manage_your_customers: Gerenciar seus Clientes
         manage_your_product_catalog: Gerenciar o seu catálogo de produtos
         media: Mídia
@@ -131,6 +134,7 @@ sylius:
         price: Preço
         privacy_policy: Política de privacidade
         process_your_orders: Processar os seus pedidos
+        product_variants: Variantes de produto
         promotion_configuration: Configuração de promoção
         promotion_information: Informações de promoção
         purchased_from: Comprado de

@@ -29,3 +29,7 @@ sylius:
             not_blank: Voer het aantal te genereren coupons in.
         usage_limit:
             min: 'Gebruikslimiet van de gegenereerde coupons moet minstens {{ limit }} zijn.'
+        code_length:
+            min: 'Couponcode moet ten minste {{ limit }} tekens lang zijn.'
+            max: 'Couponcode mag niet meer dan {{ limit }} karakters bevatten.'
+            not_blank: Voer de lengte van de couponcode in.

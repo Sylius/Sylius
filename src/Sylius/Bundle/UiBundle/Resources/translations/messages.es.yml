@@ -134,7 +134,7 @@ sylius:
         promotion_configuration: Configuración de la promoción
         promotion_information: Información de la promoción
         purchased_from: Comprado de
-        quantity: Cantidad
+        quantity: Cant.
         ready: Listo
         repeat_new_password: Repetir nueva contraseña
         returned: Devuelto

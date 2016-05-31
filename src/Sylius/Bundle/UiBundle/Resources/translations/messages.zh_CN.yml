@@ -10,6 +10,7 @@ sylius:
         option:
             presentation: 演示
     ui:
+        about: 关于
         account_credentials: 帐户凭据
         actions: 操作
         add_coupon: 添加优惠券

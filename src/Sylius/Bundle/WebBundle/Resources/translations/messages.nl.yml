@@ -13,6 +13,10 @@ sylius:
                 ready: 'Gereed sinds %at%'
                 returned: 'Geretourneerd op %at%'
                 shipped: 'Verzonden op %at%'
+                pending: 'Hangende %at%'
+                onhold: 'Wachtstand sinds %at%'
+                backordered: 'Bijbesteld sinds %at%'
+                cancelled: 'Geannuleerd %at%'
         title: Mijn account
     archetype:
         build: Bouw prototype
@@ -85,6 +89,8 @@ sylius:
         no_shipments: Er zijn geen verzendingen voor deze bestelling
         no_shipping_charges: Geen verzendkosten
         no_taxes: Geen belastingen
+        state:
+            order_confirmed: Bestelling bevestigd
     order_item:
         quantity: Hoeveelheid
         sellable: Product
@@ -136,7 +142,9 @@ sylius:
             shipped: Verzonden
             pending: In behandeling
             onhold: In de wacht
+            backordered: Bijbesteld
             cancelled: Geannuleerd
+            partially_shipped: Gedeeltelijk verzonden
         transition:
             backorder: nabestelling
             cancel: annuleer
@@ -299,6 +307,7 @@ sylius:
         customer_not_notified: Klant is niet geïnformeerd
         customer_notified: Klant op de hoogte gesteld
         customer_orders: Klantorders
+        customer_since: Klant sinds
         customers: Klanten
         customers_list_of_all_customers_in_store: 'Klanten een <small>lijst van alle klanten in de winkel</small>'
         customize_default_metadata: Aanpassen van de standaard metadata

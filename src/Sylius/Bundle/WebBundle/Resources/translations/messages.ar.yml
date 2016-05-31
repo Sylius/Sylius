@@ -20,6 +20,7 @@ sylius:
             new: جديد
     ui:
         add: اضافة
+        add_province: اضافة جهة/مقاطعة
         city: المدينة
         company: الشركة
         countries: البلدان

@@ -38,7 +38,7 @@ sylius:
         empty: El carrito está vacío
         summary:
             clear: Vaciar carrito
-            quantity: Cantidad
+            quantity: Cant.
         total_items: Total de articulos
     checkout:
         finalize:
@@ -52,7 +52,7 @@ sylius:
                 quantity: Cantidad
         forward: Siguiente
         security:
-            proceed_order: Proceder con su orden
+            proceed_order: Realizar pedido
         shipping:
             error: Lo sentimos, pero nuestra tienda no puede enviar productos al país que ha elegido
     confirmation:
@@ -141,6 +141,7 @@ sylius:
             ready: Listo
             returned: Devuelto
             shipped: Enviado
+            checkout: Completado
             pending: Pendiente
             onhold: En espera
             backordered: Pendientes de entrega
@@ -327,6 +328,7 @@ sylius:
         description: Descripción
         details: Detalles
         disable: Desactivar
+        discounted_unit_price: Precio unitario con descuento
         edit: Editar
         edit_association_type: Editar tipo de asociación
         edit_group: Editar grupo
