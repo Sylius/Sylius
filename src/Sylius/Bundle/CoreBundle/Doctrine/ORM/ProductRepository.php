@@ -102,6 +102,9 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
             ->leftJoin('o.translations', 'translation')
             ->addSelect('variant')
             ->leftJoin('o.variants', 'variant')
+            ->addSelect('archetype')
+            ->leftJoin('o.archetype', 'archetype')
+            ->leftJoin('archetype.translations', 'archetype_translation')
         ;
 
         if (!empty($criteria['name'])) {

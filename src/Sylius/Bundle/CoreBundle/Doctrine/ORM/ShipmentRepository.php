@@ -36,13 +36,14 @@ class ShipmentRepository extends EntityRepository implements ShipmentRepositoryI
      */
     public function createFilterPaginator(array $criteria = null, array $sorting = null)
     {
-        $queryBuilder = $this->createQueryBuilder('o');
-
-        $queryBuilder
-            ->innerJoin('o.order', 'shipmentOrder')
-            ->innerJoin('shipmentOrder.shippingAddress', 'address')
+        $queryBuilder = $this->createQueryBuilder('o')
             ->addSelect('shipmentOrder')
+            ->innerJoin('o.order', 'shipmentOrder')
             ->addSelect('address')
+            ->innerJoin('shipmentOrder.shippingAddress', 'address')
+            ->addSelect('method')
+            ->leftJoin('o.method', 'method')
+            ->leftJoin('method.translations', 'method_translation')
         ;
 
         if (!empty($criteria['number'])) {
