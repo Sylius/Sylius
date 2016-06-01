@@ -126,16 +126,6 @@ fos_elastica:
                                  name: { type: string }
                                  metaKeywords: { type: string }
                                  metaDescription: { type: string }
-                         masterVariant:
-                             type: nested
-                             properties:
-                                 code: { type: string }
-                                 availableOn: { type: date, index: not_analyzed }
-                                 availableUntil: { type: date }
-                                 availableOnDemand: { type: boolean }
-                                 presentation: { type: string }
-                                 onHand: { type: integer, index: not_analyzed }
-                                 onHold: { type: integer, index: not_analyzed }
                          variants:
                              type: nested
                              properties:
