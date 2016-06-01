@@ -47,6 +47,7 @@
         <parameter key="sylius.form.type.shipping_calculator.volume_rate.class">Sylius\Bundle\ShippingBundle\Form\Type\Calculator\VolumeRateConfigurationType</parameter>
 
         <parameter key="sylius.form.type.shipment_tracking.class">Sylius\Bundle\ShippingBundle\Form\Type\ShipmentTrackingType</parameter>
+        <parameter key="sylius.form.type.shipment_ship.class">Sylius\Bundle\ShippingBundle\Form\Type\ShipmentShipType</parameter>
 
         <parameter key="sylius.processor.shipment_processor.class">Sylius\Component\Shipping\Processor\ShipmentProcessor</parameter>
     </parameters>
@@ -129,6 +130,10 @@
         <service id="sylius.form.type.shipment_tracking" class="%sylius.form.type.shipment_tracking.class%">
             <argument>%sylius.model.shipment.class%</argument>
             <tag name="form.type" alias="sylius_shipment_tracking" />
+        </service>
+        <service id="sylius.form.type.shipment_ship" class="%sylius.form.type.shipment_ship.class%">
+            <argument>%sylius.model.shipment.class%</argument>
+            <tag name="form.type" alias="sylius_shipment_ship" />
         </service>
 
         <service id="sylius.processor.shipment_processor" class="%sylius.processor.shipment_processor.class%">

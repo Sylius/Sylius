@@ -40,8 +40,8 @@ sylius_admin_order_payment_complete:
             repository:
                 method: findByOrderIdAndId
                 arguments:
-                    id: $id
-                    paymentId: $paymentId
+                    orderId: $id
+                    id: $paymentId
             state_machine:
                 graph: sylius_payment
                 transition: complete
