@@ -85,6 +85,7 @@ sylius:
         edit_promotion_coupon: Edit promotion coupon
         edit_shipping_method: Edit shipping method
         edit_tax_category: Edit tax category
+        shop_by_brand: Shop by brand
         edit_tax_rate: Edit tax rate
         edit_taxon: Edit taxon
         edit_zone: Edit zone
