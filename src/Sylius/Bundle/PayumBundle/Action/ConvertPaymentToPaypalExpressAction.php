@@ -15,7 +15,6 @@ use Payum\Core\Action\ActionInterface;
 use Payum\Core\Exception\RequestNotSupportedException;
 use Payum\Core\Request\Convert;
 use Sylius\Component\Core\Model\AdjustmentInterface;
-use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Payment\InvoiceNumberGeneratorInterface;
 
@@ -55,13 +54,14 @@ class ConvertPaymentToPaypalExpressAction implements ActionInterface
 
         $m = 0;
         foreach ($order->getItems() as $item) {
-            $details['L_PAYMENTREQUEST_0_AMT'.$m] = round($item->getTotal() / $item->getQuantity() / 100, 2);
+            $details['L_PAYMENTREQUEST_0_NAME'.$m] = $item->getVariant()->getProduct()->getName();
+            $details['L_PAYMENTREQUEST_0_AMT'.$m] = round($item->getDiscountedUnitPrice() / 100, 2);
             $details['L_PAYMENTREQUEST_0_QTY'.$m] = $item->getQuantity();
 
             ++$m;
         }
 
-        if (0 !== $taxTotal = $this->calculateNonNeutralTaxTotal($order)) {
+        if (0 !== $taxTotal = $order->getAdjustmentsTotalRecursively(AdjustmentInterface::TAX_ADJUSTMENT)) {
             $details['L_PAYMENTREQUEST_0_NAME'.$m] = 'Tax Total';
             $details['L_PAYMENTREQUEST_0_AMT'.$m] = round($taxTotal / 100, 2);
             $details['L_PAYMENTREQUEST_0_QTY'.$m] = 1;
@@ -69,7 +69,7 @@ class ConvertPaymentToPaypalExpressAction implements ActionInterface
             ++$m;
         }
 
-        if (0 !== $promotionTotal = $order->getAdjustmentsTotal(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)) {
+        if (0 !== $promotionTotal = $order->getOrderPromotionTotal()) {
             $details['L_PAYMENTREQUEST_0_NAME'.$m] = 'Discount';
             $details['L_PAYMENTREQUEST_0_AMT'.$m] = round($promotionTotal / 100, 2);
             $details['L_PAYMENTREQUEST_0_QTY'.$m] = 1;
@@ -77,7 +77,7 @@ class ConvertPaymentToPaypalExpressAction implements ActionInterface
             ++$m;
         }
 
-        if (0 !== $shippingTotal = $order->getAdjustmentsTotal(AdjustmentInterface::SHIPPING_ADJUSTMENT)) {
+        if (0 !== $shippingTotal = $order->getShippingTotal()) {
             $details['L_PAYMENTREQUEST_0_NAME'.$m] = 'Shipping Total';
             $details['L_PAYMENTREQUEST_0_AMT'.$m] = round($shippingTotal / 100, 2);
             $details['L_PAYMENTREQUEST_0_QTY'.$m] = 1;
@@ -96,22 +96,5 @@ class ConvertPaymentToPaypalExpressAction implements ActionInterface
             $request->getSource() instanceof PaymentInterface &&
             $request->getTo() === 'array'
         ;
-    }
-
-    /**
-     * @param OrderInterface $order
-     *
-     * @return int
-     */
-    private function calculateNonNeutralTaxTotal(OrderInterface $order)
-    {
-        $nonNeutralTaxTotal = 0;
-        foreach ($order->getAdjustments(AdjustmentInterface::TAX_ADJUSTMENT) as $taxAdjustment) {
-            if (!$taxAdjustment->isNeutral()) {
-                $nonNeutralTaxTotal = $taxAdjustment->getAmount();
-            }
-        }
-
-        return $nonNeutralTaxTotal;
     }
 }
