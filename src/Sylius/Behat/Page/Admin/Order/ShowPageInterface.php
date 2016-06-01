@@ -172,4 +172,16 @@ interface ShowPageInterface extends SymfonyPageInterface
      * @return string
      */
     public function getItemTotal($itemName);
+    
+    /**
+     * @return bool
+     */
+    public function hasCancelButton();
+
+    /**
+     * @return string
+     */
+    public function getOrderState();
+
+    public function cancelOrder();
 }

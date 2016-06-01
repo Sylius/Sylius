@@ -277,6 +277,27 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     {
         return $this->getItemProperty($itemName, 'total');
     }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function hasCancelButton()
+    {
+        return $this->getDocument()->hasButton('Cancel');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOrderState()
+    {
+        return $this->getElement('order_state')->getText();
+    }
+
+    public function cancelOrder()
+    {
+        $this->getDocument()->pressButton('Cancel');
+    }
 
     /**
      * {@inheritdoc}
@@ -305,6 +326,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'table' => '.table',
             'tax_total' => '#tax-total',
             'total' => '#total',
+            'order_state' => 'div.sub.header > span.ui.label',
         ]);
     }
 
