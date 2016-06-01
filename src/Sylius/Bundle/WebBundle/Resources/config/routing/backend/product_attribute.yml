@@ -8,7 +8,13 @@ sylius_backend_product_attribute_index:
         _controller: sylius.controller.product_attribute:indexAction
         _sylius:
             template: SyliusWebBundle:Backend/ProductAttribute:index.html.twig
+            repository:
+                method: createFilterPaginator
+                arguments: [$criteria, $sorting]
+            paginate: 20
             sortable: true
+            sorting:
+                updatedAt: desc
 
 sylius_backend_product_attribute_create:
     path: /new/{type}

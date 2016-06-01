@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Attribute\Repository;
 
+use Pagerfanta\PagerfantaInterface;
 use Sylius\Component\Attribute\Model\AttributeInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -25,4 +26,12 @@ interface AttributeRepositoryInterface extends RepositoryInterface
      * @return AttributeInterface|null
      */
     public function findOneByName($name);
+
+    /**
+     * @param array $criteria
+     * @param array $sorting
+     *
+     * @return PagerfantaInterface
+     */
+    public function createFilterPaginator(array $criteria = null, array $sorting = null);
 }

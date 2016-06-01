@@ -40,14 +40,16 @@ class PaymentRepository extends EntityRepository implements PaymentRepositoryInt
      *
      * @return Pagerfanta
      */
-    public function createFilterPaginator(array $criteria = [], array $sorting = [])
+    public function createFilterPaginator(array $criteria = null, array $sorting = null)
     {
-        $queryBuilder = $this->getCollectionQueryBuilder();
-        $queryBuilder
-            ->leftJoin($this->getPropertyName('order'), 'paymentOrder')
-            ->leftJoin('paymentOrder.billingAddress', 'address')
+        $queryBuilder = $this->createQueryBuilder('o')
             ->addSelect('paymentOrder')
+            ->leftJoin('o.order', 'paymentOrder')
             ->addSelect('address')
+            ->leftJoin('paymentOrder.billingAddress', 'address')
+            ->addSelect('method')
+            ->leftJoin('o.method', 'method')
+            ->leftJoin('method.translations', 'method_translation')
         ;
 
         if (!empty($criteria['number'])) {
