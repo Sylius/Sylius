@@ -12,7 +12,7 @@
 namespace Sylius\Behat\Page\Admin\Order;
 
 use Sylius\Behat\Page\SymfonyPageInterface;
-use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -55,6 +55,23 @@ interface ShowPageInterface extends SymfonyPageInterface
     public function hasShipment($shippingMethodName);
 
     /**
+     * @param string $code
+     */
+    public function specifyTrackingCode($code);
+
+    /**
+     * @param OrderInterface $order
+     *
+     * @return bool
+     */
+    public function canShipOrder(OrderInterface $order);
+
+    /**
+     * @param OrderInterface $order
+     */
+    public function shipOrder(OrderInterface $order);
+
+    /**
      * @param string $paymentMethodName
      *
      * @return bool
@@ -62,16 +79,16 @@ interface ShowPageInterface extends SymfonyPageInterface
     public function hasPayment($paymentMethodName);
 
     /**
-     * @param PaymentInterface $payment
+     * @param OrderInterface $order
      *
      * @return bool
      */
-    public function canCompleteLastPayment(PaymentInterface $payment);
+    public function canCompleteOrderLastPayment(OrderInterface $order);
 
     /**
-     * @param PaymentInterface $payment
+     * @param OrderInterface $order
      */
-    public function completeLastPayment(PaymentInterface $payment);
+    public function completeOrderLastPayment(OrderInterface $order);
 
     /**
      * @return int

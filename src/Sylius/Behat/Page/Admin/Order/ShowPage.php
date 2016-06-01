@@ -15,7 +15,7 @@ use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
 use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
-use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
@@ -79,37 +79,52 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasShipment($shippingMethodName)
+    public function hasShipment($shippingDetails)
     {
         $shipmentsText = $this->getElement('shipments')->getText();
 
-        return stripos($shipmentsText, $shippingMethodName) !== false;
+        return stripos($shipmentsText, $shippingDetails) !== false;
+    }
+
+    public function specifyTrackingCode($code)
+    {
+        $this->getDocument()->fillField('Tracking Code', $code);
+    }
+
+    public function canShipOrder(OrderInterface $order)
+    {
+        return $this->getLastOrderShipmentElement($order)->hasButton('Ship');
+    }
+
+    public function shipOrder(OrderInterface $order)
+    {
+        $this->getLastOrderShipmentElement($order)->pressButton('Ship');
     }
 
     /**
      * {@inheritdoc}
      */
-    public function hasPayment($paymentMethodName)
+    public function hasPayment($paymentDetails)
     {
         $paymentsText = $this->getElement('payments')->getText();
 
-        return stripos($paymentsText, $paymentMethodName) !== false;
+        return stripos($paymentsText, $paymentDetails) !== false;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function canCompleteLastPayment(PaymentInterface $payment)
+    public function canCompleteOrderLastPayment(OrderInterface $order)
     {
-        return $this->getLastPaymentElement($payment)->hasButton('Complete');
+        return $this->getLastOrderPaymentElement($order)->hasButton('Complete');
     }
 
     /**
      * {@inheritdoc}
      */
-    public function completeLastPayment(PaymentInterface $payment)
+    public function completeOrderLastPayment(OrderInterface $order)
     {
-        $this->getLastPaymentElement($payment)->pressButton('Complete');
+        $this->getLastOrderPaymentElement($order)->pressButton('Complete');
     }
 
     /**
@@ -375,15 +390,32 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     }
 
     /**
-     * @param PaymentInterface $payment
+     * @param OrderInterface $order
      *
      * @return NodeElement|null
      */
-    private function getLastPaymentElement(PaymentInterface $payment)
+    private function getLastOrderPaymentElement(OrderInterface $order)
     {
+        $payment = $order->getPayments()->last();
+
         $paymentStateElements = $this->getElement('payments')->findAll('css', sprintf('span.ui.label:contains(\'%s\')', ucfirst($payment->getState())));
         $paymentStateElement = end($paymentStateElements);
 
         return $paymentStateElement->getParent()->getParent();
+    }
+
+    /**
+     * @param OrderInterface $order
+     *
+     * @return NodeElement|null
+     */
+    private function getLastOrderShipmentElement(OrderInterface $order)
+    {
+        $shipment = $order->getShipments()->last();
+
+        $shipmentStateElements = $this->getElement('shipments')->findAll('css', sprintf('span.ui.label:contains(\'%s\')', ucfirst($shipment->getState())));
+        $shipmentStateElement = end($shipmentStateElements);
+
+        return $shipmentStateElement->getParent()->getParent();
     }
 }
