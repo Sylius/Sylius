@@ -55,7 +55,7 @@ That's it. SyliusResourceBundle allows to generate a default CRUD interface incl
 
     app_tournament:
         resource: app.tournament
-        type: sylius.crud
+        type: sylius.resource
 
 This will generate the following paths:
 
