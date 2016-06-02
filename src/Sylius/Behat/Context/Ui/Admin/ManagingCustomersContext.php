@@ -199,6 +199,20 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
+     * @Then /^I should be notified that ([^"]+) should be ([^"]+)$/
+     */
+    public function iShouldBeNotifiedThatTheElementShouldBe($elementName, $validationMessage)
+    {
+        Assert::true(
+            $this->updatePage->checkValidationMessageFor(
+                $elementName,
+                sprintf('%s must be %s', $elementName, $validationMessage)
+            ),
+            sprintf('Customer % should be %s.', $elementName, $validationMessage)
+        );
+    }
+
+    /**
      * @Then the customer with email :email should not appear in the store
      */
     public function theCustomerShouldNotAppearInTheStore($email)
@@ -234,6 +248,20 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
+     * @Then the customer :customer should still have empty first name
+     */
+    public function theCustomerShouldStillHaveEmptyFirstName(CustomerInterface $customer)
+    {
+        $this->updatePage->open(['id' => $customer->getId()]);
+
+        Assert::eq(
+            '',
+            $this->updatePage->getFirstName(),
+            'Customer should have empty first name, but it does not.'
+        );
+    }
+
+    /**
      * @When I remove its last name
      */
     public function iRemoveItsLastName()
@@ -252,6 +280,20 @@ final class ManagingCustomersContext implements Context
             $lastName,
             $this->updatePage->getLastName(),
             sprintf('Customer should have last name %s, but it does not.', $lastName)
+        );
+    }
+
+    /**
+     * @Then the customer :customer should still have empty last name
+     */
+    public function theCustomerShouldStillHaveEmptyLastName(CustomerInterface $customer)
+    {
+        $this->updatePage->open(['id' => $customer->getId()]);
+
+        Assert::eq(
+            '',
+            $this->updatePage->getLastName(),
+            'Customer should have empty last name, but it does not.'
         );
     }
 

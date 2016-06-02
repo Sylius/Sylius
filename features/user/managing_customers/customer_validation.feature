@@ -37,11 +37,29 @@ Feature: Customer validation
     @ui
     Scenario: Trying to remove first name from existing customer
         Given the store has customer "l.skywalker@gmail.com" with first name "Luke"
-        Given I want to edit the customer "l.skywalker@gmail.com"
+        And I want to edit the customer "l.skywalker@gmail.com"
         When I remove its first name
         And I try to save my changes
         Then I should be notified that first name is required
         And the customer "l.skywalker@gmail.com" should still have first name "Luke"
+
+    @ui
+    Scenario: Trying to specify too short first name for existing customer
+        Given the store has customer "l.skywalker@gmail.com"
+        And I want to edit the customer "l.skywalker@gmail.com"
+        When I specify their first name as "L"
+        And I try to save my changes
+        Then I should be notified that first name should be at least 2 characters long
+        And the customer "l.skywalker@gmail.com" should still have empty first name
+
+    @ui
+    Scenario: Trying to specify too short last name for existing customer
+        Given the store has customer "l.skywalker@gmail.com" with first name "Luke"
+        And I want to edit the customer "l.skywalker@gmail.com"
+        When I specify their last name as "S"
+        And I try to save my changes
+        Then I should be notified that last name should be at least 2 characters long
+        And the customer "l.skywalker@gmail.com" should still have empty last name
 
     @ui
     Scenario: Trying to remove last name from existing customer
