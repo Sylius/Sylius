@@ -6,7 +6,7 @@
 <tr>
     <th colspan="8" id="items-total" class="right aligned">
         <strong>{{ 'sylius.ui.subtotal'|trans }}</strong>:
-        {{ (order.itemsTotal - order.getAdjustmentsTotalRecursively(orderPromotionAdjustment))|sylius_price(order.currency) }}
+        {{ order.itemsTotal|sylius_price(order.currency) }}
     </th>
 </tr>
 <tr>
