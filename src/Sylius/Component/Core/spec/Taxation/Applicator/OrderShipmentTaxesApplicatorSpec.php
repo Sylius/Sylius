@@ -52,7 +52,7 @@ class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
         $this->shouldImplement(OrderTaxesApplicatorInterface::class);
     }
 
-    function it_applies_shipment_taxes_on_order_based_on_shipment_adjustments_and_rate(
+    function it_applies_shipment_taxes_on_order_based_on_shipment_adjustments_promotions_and_rate(
         $adjustmentsFactory,
         $calculator,
         $taxRateResolver,
@@ -75,7 +75,9 @@ class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
         $order->getAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->willReturn($shippingAdjustments);
         $shippingAdjustments->isEmpty()->willReturn(false);
         $shippingAdjustments->last()->willReturn($shippingAdjustment);
-        $shippingAdjustment->getAmount()->willReturn(1000);
+
+        $shippingAdjustment->getAmount()->willReturn(1200);
+        $order->getAdjustmentsTotal(AdjustmentInterface::ORDER_SHIPPING_PROMOTION_ADJUSTMENT)->willReturn(-200);
 
         $calculator->calculate(1000, $taxRate)->willReturn(100);
 
@@ -104,7 +106,9 @@ class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
         $order->getAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->willReturn($shippingAdjustments);
         $shippingAdjustments->isEmpty()->willReturn(false);
         $shippingAdjustments->last()->willReturn($shippingAdjustment);
+
         $shippingAdjustment->getAmount()->willReturn(1000);
+        $order->getAdjustmentsTotal(AdjustmentInterface::ORDER_SHIPPING_PROMOTION_ADJUSTMENT)->willReturn(0);
 
         $calculator->calculate(1000, $taxRate)->willReturn(0);
 

@@ -97,8 +97,10 @@ class ShippingDiscountAction implements PromotionActionInterface
      *
      * @return AdjustmentInterface
      */
-    protected function createAdjustment(PromotionInterface $promotion, $type = AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)
-    {
+    protected function createAdjustment(
+        PromotionInterface $promotion,
+        $type = AdjustmentInterface::ORDER_SHIPPING_PROMOTION_ADJUSTMENT
+    ) {
         $adjustment = $this->adjustmentFactory->createNew();
         $adjustment->setType($type);
         $adjustment->setLabel($promotion->getName());

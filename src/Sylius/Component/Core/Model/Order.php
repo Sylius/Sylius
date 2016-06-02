@@ -540,9 +540,9 @@ class Order extends Cart implements OrderInterface
      */
     public function getShippingTotal()
     {
-        $shippingTotal = $this->getAdjustmentsTotal(AdjustmentInterface::TAX_ADJUSTMENT);
-        $shippingTotal += $this->getAdjustmentsTotal(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT);
-        $shippingTotal += $this->getAdjustmentsTotal(AdjustmentInterface::SHIPPING_ADJUSTMENT);
+        $shippingTotal = $this->getAdjustmentsTotal(AdjustmentInterface::SHIPPING_ADJUSTMENT);
+        $shippingTotal += $this->getAdjustmentsTotal(AdjustmentInterface::ORDER_SHIPPING_PROMOTION_ADJUSTMENT);
+        $shippingTotal += $this->getAdjustmentsTotal(AdjustmentInterface::TAX_ADJUSTMENT);
 
         return $shippingTotal;
     }

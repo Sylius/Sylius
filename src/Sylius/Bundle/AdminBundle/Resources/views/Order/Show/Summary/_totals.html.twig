@@ -26,8 +26,7 @@
     </td>
     <td colspan="4" id="shipping-total" class="right aligned">
         <strong>{{ 'sylius.ui.shipping_total'|trans }}</strong>:
-        {% set shippingTotal = order.adjustmentsTotal(taxAdjustment) + order.adjustmentsTotal(shippingAdjustment) %}
-        {{ shippingTotal|sylius_price(order.currency) }}
+        {{ order.shippingTotal|sylius_price(order.currency) }}
     </td>
 </tr>
 <tr>
