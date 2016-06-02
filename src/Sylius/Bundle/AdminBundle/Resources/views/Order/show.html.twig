@@ -7,16 +7,18 @@
 {% set customer = order.customer %}
 
 {% block content %}
-{% include '@SyliusAdmin/Order/Show/_header.html.twig' %}
-{% include '@SyliusAdmin/Order/Breadcrumb/_show.html.twig' %}
-<div class="action">
-    {% if sm_can(order, 'cancel', 'sylius_order') %}
-        <form action="{{ path('sylius_admin_order_cancel', {'id': order.id} ) }}" method="post" novalidate>
-            <input type="hidden" name="_method" value="PUT">
-            <button class="ui top attached button" type="submit">{{'sylius.ui.cancel'|trans  }}</button>
-        </form>
-    {% endif %}
+<div class="ui stackable two column grid">
+    <div class="column">
+        {% include '@SyliusAdmin/Order/Show/_header.html.twig' %}
+    </div>
+    <div class="right aligned column">
+        {% include '@SyliusAdmin/Order/Show/_actions.html.twig' %}
+    </div>
 </div>
+<div class="ui divider"></div>
+
+{% include '@SyliusAdmin/Order/Breadcrumb/_show.html.twig' %}
+
 <div class="ui stackable grid">
     <div class="eleven wide column">
         <div class="ui segment">
