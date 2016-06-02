@@ -1,7 +1,7 @@
 Documentation Format
 ====================
 
-The Sylius documentation uses `reStructuredText`_ as its markup language and
+The Sylius documentation uses the `reStructuredText`_ as its markup language and
 `Sphinx`_ for building the output (HTML, PDF, ...).
 
 reStructuredText
@@ -23,7 +23,7 @@ Sphinx
 ------
 
 Sphinx is a build system that adds some nice tools to create documentation
-from reStructuredText documents. As such, it adds new directives and
+from the reStructuredText documents. As such, it adds new directives and
 interpreted text roles to standard reST `markup`_.
 
 Syntax Highlighting
@@ -135,66 +135,28 @@ Using the path and filename of the page without the extension, for example:
 
     :doc:`/bundles/SyliusAddressingBundle/installation`
 
-The link text will be the main heading of the document linked to. You can
-also specify alternative text for the link:
+The link's text will be the main heading of the document linked to. You can
+also specify an alternative text for the link:
 
 .. code-block:: rst
 
     :doc:`Simple CRUD </bundles/SyliusResourceBundle/installation>`
 
-Testing Documentation
-~~~~~~~~~~~~~~~~~~~~~
+You can also link to pages outside of the documentation, for instance to the `Github`_.
 
-To test documentation before a commit:
+.. code-block:: rst
 
-* Install `Sphinx`_;
+    `Github`_ //it is an intext link.
 
-* Run the `Sphinx quick setup`_;
 
-* Install the Sphinx extensions (see below);
+At the bottom of the document in which you are using your link add a reference:
 
-* Run ``make html`` and view the generated HTML in the ``build`` directory.
+.. code-block:: rst
 
-Installing the Sphinx extensions
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    .. _`Github`: http://www.github.com // with a url to your desired destination.
 
-* Download the extension from the `source`_ repository
-
-* Copy the ``sensio`` directory to the ``_exts`` folder under your source
-  folder (where ``conf.py`` is located)
-
-* Add the following to the ``conf.py`` file:
-
-.. code-block:: py
-
-    # ...
-    sys.path.append(os.path.abspath('_exts'))
-
-    # adding PhpLexer
-    from sphinx.highlighting import lexers
-    from pygments.lexers.web import PhpLexer
-
-    # ...
-    # add the extensions to the list of extensions
-    extensions = [..., 'sensio.sphinx.refinclude', 'sensio.sphinx.configurationblock', 'sensio.sphinx.phpcode']
-
-    # enable highlighting for PHP code not between ``<?php ... ?>`` by default
-    lexers['php'] = PhpLexer(startinline=True)
-    lexers['php-annotations'] = PhpLexer(startinline=True)
-    lexers['php-standalone'] = PhpLexer(startinline=True)
-    lexers['php-symfony'] = PhpLexer(startinline=True)
-
-    # use PHP as the primary domain
-    primary_domain = 'php'
-
-    # set URL for API links
-    api_url = 'http://api.sylius.org/master/%s'
-
-.. _reStructuredText:        http://docutils.sourceforge.net/rst.html
-.. _Sphinx:                  http://sphinx-doc.org/
-.. _documents:               https://github.com/Sylius/Sylius-Docs
-.. _reStructuredText Primer: http://sphinx-doc.org/rest.html
-.. _markup:                  http://sphinx-doc.org/markup/
-.. _Pygments website:        http://pygments.org/languages/
-.. _source:                  https://github.com/fabpot/sphinx-php
-.. _Sphinx quick setup:      http://sphinx-doc.org/tutorial.html#setting-up-the-documentation-sources
+.. _`documents`:               https://github.com/Sylius/Sylius/tree/master/docs
+.. _`reStructuredText Primer`: http://www.sphinx-doc.org/en/stable/rest.html
+.. _`markup`:                  http://www.sphinx-doc.org/en/stable/markup/
+.. _`Pygments website`:                  http://pygments.org/languages/
+.. _`Github`:                  http://www.github.com

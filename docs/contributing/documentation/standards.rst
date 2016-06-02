@@ -51,10 +51,19 @@ Code Examples
 * The code follows the :doc:`Sylius Coding Standards </contributing/code/standards>`
   as well as the `Twig Coding Standards`_;
 * To avoid horizontal scrolling on code blocks, we prefer to break a line
-  correctly if it crosses the 85th character;
+  correctly if it crosses the 85th character, which in many IDEs is signalised by a vertical line;
 * When you fold one or more lines of code, place ``...`` in a comment at the point
-  of the fold. These comments are: ``// ...`` (php), ``# ...`` (yaml/bash), ``{# ... #}``
-  (twig), ``<!-- ... -->`` (xml/html), ``; ...`` (ini), ``...`` (text);
+  of the fold. These comments are:
+
+.. code-block:: text
+
+      // ... (php),
+      # ... (yaml/bash),
+      {# ... #} (twig)
+      <!-- ... --> (xml/html),
+      ; ... (ini),
+      ... (text)
+
 * When you fold a part of a line, e.g. a variable value, put ``...`` (without comment)
   at the place of the fold;
 * Description of the folded code: (optional)
