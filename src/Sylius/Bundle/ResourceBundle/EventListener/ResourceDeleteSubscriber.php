@@ -98,7 +98,7 @@ class ResourceDeleteSubscriber implements EventSubscriberInterface
                         'code' => $exception->getSQLState(),
                         'message' => $this->translator->trans('sylius.resource.delete_error', ['%resource%' => $resourceName], 'flashes'),
                     ]
-                ], 500))
+                ], 409))
             );
 
             return;
