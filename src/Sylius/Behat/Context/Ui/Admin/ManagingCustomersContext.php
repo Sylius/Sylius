@@ -126,6 +126,7 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
+     * @Given /^I want to edit (this customer)$/
      * @Given I want to edit the customer :customer
      */
     public function iWantToEditThisCustomer(CustomerInterface $customer)
@@ -194,7 +195,7 @@ final class ManagingCustomersContext implements Context
     {
         Assert::true(
             $this->createPage->checkValidationMessageFor($elementName, sprintf('Please enter your %s.', $elementName)),
-            sprintf('Customer % should be required.', $elementName)
+            sprintf('Customer %s should be required.', $elementName)
         );
     }
 
@@ -206,9 +207,9 @@ final class ManagingCustomersContext implements Context
         Assert::true(
             $this->updatePage->checkValidationMessageFor(
                 $elementName,
-                sprintf('%s must be %s', $elementName, $validationMessage)
+                sprintf('%s must be %s.', ucfirst($elementName), $validationMessage)
             ),
-            sprintf('Customer % should be %s.', $elementName, $validationMessage)
+            sprintf('Customer %s should be %s.', $elementName, $validationMessage)
         );
     }
 
@@ -234,30 +235,17 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Then the customer :customer should still have first name :firstName
+     * @Then /^(this customer) should have an empty first name$/
+     * @Then the customer :customer should still have an empty first name
      */
-    public function theCustomerShouldStillHaveFirstName(CustomerInterface $customer, $firstName)
-    {
-        $this->updatePage->open(['id' => $customer->getId()]);
-
-        Assert::eq(
-            $firstName,
-            $this->updatePage->getFirstName(),
-            sprintf('Customer should have first name %s, but it does not.', $firstName)
-        );
-    }
-
-    /**
-     * @Then the customer :customer should still have empty first name
-     */
-    public function theCustomerShouldStillHaveEmptyFirstName(CustomerInterface $customer)
+    public function theCustomerShouldStillHaveAnEmptyFirstName(CustomerInterface $customer)
     {
         $this->updatePage->open(['id' => $customer->getId()]);
 
         Assert::eq(
             '',
             $this->updatePage->getFirstName(),
-            'Customer should have empty first name, but it does not.'
+            'Customer should have an empty first name, but it does not.'
         );
     }
 
@@ -270,30 +258,17 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Then the customer :customer should still have last name :lastName
+     * @Then /^(this customer) should have an empty last name$/
+     * @Then the customer :customer should still have an empty last name
      */
-    public function theCustomerShouldStillHaveLastName(CustomerInterface $customer, $lastName)
-    {
-        $this->updatePage->open(['id' => $customer->getId()]);
-
-        Assert::eq(
-            $lastName,
-            $this->updatePage->getLastName(),
-            sprintf('Customer should have last name %s, but it does not.', $lastName)
-        );
-    }
-
-    /**
-     * @Then the customer :customer should still have empty last name
-     */
-    public function theCustomerShouldStillHaveEmptyLastName(CustomerInterface $customer)
+    public function theCustomerShouldStillHaveAnEmptyLastName(CustomerInterface $customer)
     {
         $this->updatePage->open(['id' => $customer->getId()]);
 
         Assert::eq(
             '',
             $this->updatePage->getLastName(),
-            'Customer should have empty last name, but it does not.'
+            'Customer should have an empty last name, but it does not.'
         );
     }
 

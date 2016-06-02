@@ -10,15 +10,13 @@ Feature: Adding a new customer account
     @ui @javascript
     Scenario: Adding a new customer with an account
         Given I want to create a new customer account
-        When I specify their first name as "Luke"
-        And I specify their last name as "Skywalker"
-        And I specify their email as "l.skywalker@gmail.com"
+        When I specify their email as "l.skywalker@gmail.com"
         And I choose create account option
         And I specify its password as "psw123"
         And I add them
         Then I should be notified that it has been successfully created
         And the customer "l.skywalker@gmail.com" should appear in the store
-        And the customer "l.skywalker@gmail.com" should have an account created
+        And this customer should have an account created
 
     @ui @javascript
     Scenario: Creating an account for existing customer
