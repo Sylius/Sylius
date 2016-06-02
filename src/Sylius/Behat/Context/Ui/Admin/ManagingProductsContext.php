@@ -372,6 +372,20 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @Given /^attribute "([^"]+)" of (product "[^"]+") should be "([^"]+)"$/
+     */
+    public function itsAttributeShouldBe($attribute, ProductInterface $product, $value)
+    {
+        $this->updateSimpleProductPage->open(['id' => $product->getId()]);
+
+        Assert::same(
+            $value,
+            $this->updateSimpleProductPage->getAttributeValue($attribute),
+            sprintf('Attribute "%s" should have value "%s" but it does not.', $attribute, $value)
+        );
+    }
+
+    /**
      * @Given product with :element :value should not be added
      */
     public function productWithNameShouldNotBeAdded($element, $value)

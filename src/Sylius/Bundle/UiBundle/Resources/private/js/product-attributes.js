@@ -11,9 +11,6 @@
     'use strict';
 
     function addAttributesNumber(number) {
-        console.log(number);
-        console.log(getNextIndex());
-
         var currentIndex = parseInt(getNextIndex());
         $('#attributesContainer').attr('data-count', currentIndex+number);
     }
@@ -23,8 +20,9 @@
     }
 
     function controlAttributesList() {
-        $('#attributesContainer input').each(function() {
-            $('[name="sylius_product_attribute_choice"]').find('option[value="'+$(this).attr('value')+'"]').remove();
+        $('#attributesContainer .attribute').each(function() {
+            var value = $(this).attr('data-id');
+            $('[name="sylius_product_attribute_choice"]').dropdown('set selected', value);
         });
     }
 
@@ -37,6 +35,7 @@
             var attributeId = $(this).parents('.attribute').attr('data-id');
 
             $('.ui.dropdown.search').dropdown('remove selected', attributeId);
+            $(this).parent().remove();
         });
     }
 

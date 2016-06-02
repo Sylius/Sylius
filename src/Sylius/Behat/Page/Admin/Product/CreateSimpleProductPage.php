@@ -14,6 +14,7 @@ namespace Sylius\Behat\Page\Admin\Product;
 use Behat\Mink\Driver\Selenium2Driver;
 use Sylius\Behat\Behaviour\SpecifiesItsCode;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -50,15 +51,10 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
             $attributesTab->click();
         }
 
-        $attributeOption = $this->getElement('attributes-choice')->find('css', 'option:contains("'.$attribute.'")');
-        $id = $attributeOption->getAttribute('value');
+        $attributeOption = $this->getElement('attributes-choice')->find('css', 'option:contains("' . $attribute . '")');
+        $this->selectElementFromAttributesDropdown($attributeOption->getAttribute('value'));
 
-        /** @var Selenium2Driver $driver */
-        $driver = $this->getDriver();
-        $driver->executeScript('$(\'[name="sylius_product_attribute_choice"]\').dropdown(\'show\');');
-        $driver->executeScript('$(\'[name="sylius_product_attribute_choice"]\').dropdown(\'set selected\', '.$id.');');
-
-        $this->getElement('add-attributes-button')->press();
+        $this->getDocument()->pressButton('Add attributes');
         $this->waitWhileFormIsLoading();
 
         $this->getElement('attribute-value', ['%attribute%' => $attribute])->setValue($value);
@@ -78,7 +74,6 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'add-attributes-button' => 'button:contains("Add attributes")',
             'attribute-value' => '.attribute:contains("%attribute%") input',
             'attributes-choice' => 'select[name="sylius_product_attribute_choice"]',
             'code' => '#sylius_product_code',
@@ -87,6 +82,19 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
             'price' => '#sylius_product_variant_price',
             'tab' => '.menu [data-tab="%name%"]',
         ]);
+    }
+
+    /**
+     * @param int $id
+     */
+    private function selectElementFromAttributesDropdown($id)
+    {
+        /** @var Selenium2Driver $driver */
+        $driver = $this->getDriver();
+        Assert::isInstanceOf($driver, Selenium2Driver::class);
+
+        $driver->executeScript('$(\'[name="sylius_product_attribute_choice"]\').dropdown(\'show\');');
+        $driver->executeScript('$(\'[name="sylius_product_attribute_choice"]\').dropdown(\'set selected\', ' . $id . ');');
     }
 
     private function waitWhileFormIsLoading()
