@@ -16,12 +16,12 @@ Feature: Adding a new customer account
         And I add them
         Then I should be notified that it has been successfully created
         And the customer "l.skywalker@gmail.com" should appear in the store
-        And this customer should have an account created
+        And the customer "l.skywalker@gmail.com" should have an account created
 
     @ui @javascript
     Scenario: Creating an account for existing customer
         Given the store has customer "Frodo Baggins" with email "f.baggins@example.com"
-        And I want to edit the customer "f.baggins@example.com"
+        And I want to edit this customer
         When I choose create account option
         And I specify its password as "killSauron"
         And I save my changes

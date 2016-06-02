@@ -3,16 +3,8 @@
     "message": "Validation Failed",
     "errors": {
         "children": {
-            "firstName": {
-                "errors": [
-                    "Please enter your first name."
-                ]
-            },
-            "lastName": {
-                "errors": [
-                    "Please enter your last name."
-                ]
-            },
+            "firstName": {},
+            "lastName": {},
             "email": {
                 "errors": [
                     "Please enter your email."

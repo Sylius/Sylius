@@ -75,12 +75,6 @@ Feature: Customers management
         When I follow "Create customer"
         Then I should be on the customer creation page
 
-    Scenario: Submitting empty form
-        Given I am on the customer creation page
-        When I press "Create"
-        Then I should still be on the customer creation page
-        And I should see "Please enter your first name"
-
     @javascript
     Scenario: Creating customer with user
         Given I am on the customer creation page
