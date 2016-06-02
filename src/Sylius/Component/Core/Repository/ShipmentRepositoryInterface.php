@@ -21,6 +21,14 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 interface ShipmentRepositoryInterface extends RepositoryInterface
 {
     /**
+     * @param mixed $orderId
+     * @param mixed $id
+     *
+     * @return ShipmentInterface|null
+     */
+    public function findByOrderIdAndId($orderId, $id);
+
+    /**
      * @param string $name
      *
      * @return ShipmentInterface|null

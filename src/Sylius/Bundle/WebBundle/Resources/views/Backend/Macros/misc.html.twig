@@ -92,7 +92,7 @@
                 {% if tracking_form is defined and tracking_form is not null %}
                     {% include 'SyliusWebBundle:Backend/Shipment:trackingForm.html.twig' with {'form': tracking_form} %}
                 {% else %}
-                    {% render(controller('sylius.controller.backend.form:showAction', {'type': 'sylius_shipment_tracking', 'template': 'SyliusWebBundle:Backend/Shipment:trackingForm.html.twig'})) %}
+                    {% render(controller('sylius.controller.backend.form:showAction', {'type': 'sylius_shipment_ship', 'template': 'SyliusWebBundle:Backend/Shipment:trackingForm.html.twig'})) %}
                 {% endif %}
             </form>
         {% else %}

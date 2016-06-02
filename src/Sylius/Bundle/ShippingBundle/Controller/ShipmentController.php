@@ -31,7 +31,7 @@ class ShipmentController extends ResourceController
         $this->isGrantedOr403($configuration, ResourceActions::UPDATE);
         $shipment = $this->findOr404($configuration);
 
-        $form = $this->createForm('sylius_shipment_tracking', $shipment);
+        $form = $this->createForm('sylius_shipment_ship', $shipment);
 
         if ($form->submit($request)->isValid()) {
             $this

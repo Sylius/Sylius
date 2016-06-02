@@ -35,6 +35,7 @@ use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\PaymentTransitions;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Shipping\ShipmentTransitions;
 use Sylius\Component\User\Model\CustomerInterface;
 use Sylius\Component\User\Model\UserInterface;
 
@@ -388,6 +389,37 @@ final class OrderContext implements Context
         $this->stateMachineFactory->get($order, OrderTransitions::GRAPH)->apply(OrderTransitions::SYLIUS_CONFIRM);
        
         $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^(this order) is ready to ship$/
+     */
+    public function thisOrderIsReadyToShip(OrderInterface $order)
+    {
+        $this->applyShipmentTransitionOnOrder($order, ShipmentTransitions::SYLIUS_PREPARE);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^(this order) has already been shipped$/
+     */
+    public function thisOrderHasAlreadyBeenShipped(OrderInterface $order)
+    {
+        $this->applyShipmentTransitionOnOrder($order, ShipmentTransitions::SYLIUS_PREPARE);
+        $this->applyShipmentTransitionOnOrder($order, ShipmentTransitions::SYLIUS_SHIP);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @param OrderInterface $order
+     * @param string $transition
+     */
+    private function applyShipmentTransitionOnOrder(OrderInterface $order, $transition)
+    {
+        $shipment = $order->getShipments()->first();
+        $this->stateMachineFactory->get($shipment, ShipmentTransitions::GRAPH)->apply($transition);
     }
 
     /**

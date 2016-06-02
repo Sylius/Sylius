@@ -7,3 +7,27 @@ sylius_admin_partial_order_latest:
                 method: findLatest
                 arguments: [$count]
             template: $template
+
+sylius_admin_partial_order_shipment_ship:
+    path: /orders/{id}/shipments/{shipmentId}/ship
+    methods: [GET, PUT]
+    defaults:
+        _controller: sylius.controller.shipment:updateAction
+        _sylius:
+            repository:
+                method: findByOrderIdAndId
+                arguments:
+                    orderId: $id
+                    id: $shipmentId
+            state_machine:
+                graph: sylius_shipment
+                transition: ship
+            redirect: referer
+            section: admin
+            template: SyliusAdminBundle:Order:shipmentShip.html.twig
+            form: sylius_shipment_ship
+            vars:
+                route:
+                    parameters:
+                        id: $id
+                        shipmentId: $shipmentId

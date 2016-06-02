@@ -15,9 +15,9 @@ use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * @author Saša Stamenković <umpirsky@gmail.com>
+ * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class ShipmentTrackingType extends AbstractResourceType
+class ShipmentShipType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}
@@ -39,6 +39,6 @@ class ShipmentTrackingType extends AbstractResourceType
      */
     public function getName()
     {
-        return 'sylius_shipment_tracking';
+        return 'sylius_shipment_ship';
     }
 }

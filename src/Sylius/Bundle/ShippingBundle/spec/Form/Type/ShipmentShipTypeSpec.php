@@ -13,25 +13,28 @@ namespace spec\Sylius\Bundle\ShippingBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\ShippingBundle\Form\Type\ShipmentShipType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Test\FormBuilderInterface;
+use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * @author Arnaud Langlade <arn0d.dev@gamil.com>
+ * @mixin ShipmentShipType
+ *
+ * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class ShipmentTrackingTypeSpec extends ObjectBehavior
+class ShipmentShipTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('ShipmentTracking', ['sylius']);
+        $this->beConstructedWith('ShipmentShip', ['sylius']);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Form\Type\ShipmentTrackingType');
+        $this->shouldHaveType('Sylius\Bundle\ShippingBundle\Form\Type\ShipmentShipType');
     }
 
-    function it_is_a_form()
+    function it_is_a_form_type()
     {
         $this->shouldHaveType(AbstractType::class);
     }
@@ -40,13 +43,11 @@ class ShipmentTrackingTypeSpec extends ObjectBehavior
     {
         $builder->add('tracking', 'text', Argument::type('array'))->shouldBeCalled()->willreturn($builder);
 
-        $this->buildForm($builder, [
-            'multiple' => true,
-        ]);
+        $this->buildForm($builder, []);
     }
 
-    function it_has_a_name()
+    function it_has_name()
     {
-        $this->getName()->shouldReturn('sylius_shipment_tracking');
+        $this->getName()->shouldReturn('sylius_shipment_ship');
     }
 }

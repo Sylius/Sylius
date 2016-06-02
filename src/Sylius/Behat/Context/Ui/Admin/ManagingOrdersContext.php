@@ -18,7 +18,6 @@ use Sylius\Behat\Page\Admin\Order\ShowPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Webmozart\Assert\Assert;
 
@@ -87,7 +86,23 @@ final class ManagingOrdersContext implements Context
      */
     public function iMarkThisOrderAsAPaid(OrderInterface $order)
     {
-        $this->showPage->completeLastPayment($order->getLastPayment());
+        $this->showPage->completeOrderLastPayment($order);
+    }
+
+    /**
+     * @When specify its tracking code as :trackingCode
+     */
+    public function specifyItsTrackingCodeAs($trackingCode)
+    {
+        $this->showPage->specifyTrackingCode($trackingCode);
+    }
+
+    /**
+     * @Given /^I ship (this order)$/
+     */
+    public function iShipThisOrder(OrderInterface $order)
+    {
+        $this->showPage->shipOrder($order);
     }
 
     /**
@@ -428,10 +443,39 @@ final class ManagingOrdersContext implements Context
      */
     public function iShouldNotBeAbleToFinalizeItsPayment(OrderInterface $order)
     {
-        $payment = $order->getLastPayment(PaymentInterface::STATE_COMPLETED);
         Assert::false(
-            $this->showPage->canCompleteLastPayment($payment),
+            $this->showPage->canCompleteOrderLastPayment($order),
             'It should not have complete payment button.'
+        );
+    }
+
+    /**
+     * @Then I should be notified that the order's shipment has been successfully shipped
+     */
+    public function iShouldBeNotifiedThatTheOrderSShipmentHasBeenSuccessfullyShipped()
+    {
+        $this->notificationChecker->checkNotification('Shipment has been successfully updated.', NotificationType::success());
+    }
+
+    /**
+     * @Then its shipment state should be :shipmentState
+     */
+    public function itsShipmentStateShouldBe($shipmentState)
+    {
+        Assert::true(
+            $this->showPage->hasShipment($shipmentState),
+            sprintf('It should have shipment with %s state', $shipmentState)
+        );
+    }
+
+    /**
+     * @Then /^I should not be able to ship (this order)$/
+     */
+    public function iShouldNotBeAbleToShipThisOrder(OrderInterface $order)
+    {
+        Assert::false(
+            $this->showPage->canShipOrder($order),
+            'It should not have ship shipment button.'
         );
     }
 
