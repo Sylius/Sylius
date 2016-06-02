@@ -45,6 +45,7 @@
     $('.loadable.button').on('click', function() {
       return $(this).addClass('loading');
     });
+    $('.popups').popup();
 
     $('[data-requires-confirmation]').requireConfirmation();
 
