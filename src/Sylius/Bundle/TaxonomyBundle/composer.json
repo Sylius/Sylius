@@ -26,7 +26,8 @@
         "stof/doctrine-extensions-bundle": "~1.1",
         "sylius/taxonomy": "^0.19",
         "sylius/resource-bundle": "^0.19",
-        "symfony/framework-bundle": "^2.8"
+        "symfony/framework-bundle": "^2.8",
+        "webmozart/assert": "^1.0"
     },
     "require-dev": {
         "phpspec/phpspec": "^2.4",
