@@ -314,7 +314,7 @@ class ResourceController extends Controller
             $this->eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource);
 
             if (!$configuration->isHtmlRequest()) {
-                return $this->viewHandler->handle($configuration, View::create($resource, 204));
+                return $this->viewHandler->handle($configuration, View::create(null, 204));
             }
 
             $this->flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource);
@@ -451,7 +451,7 @@ class ResourceController extends Controller
         $this->eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource);
 
         if (!$configuration->isHtmlRequest()) {
-            return $this->viewHandler->handle($configuration, View::create($resource, 204));
+            return $this->viewHandler->handle($configuration, View::create(null, 204));
         }
 
         $this->flashHelper->addSuccessFlash($configuration, $enabled ? 'enable' : 'disable', $resource);
@@ -503,7 +503,7 @@ class ResourceController extends Controller
         $this->eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource);
 
         if (!$configuration->isHtmlRequest()) {
-            return $this->viewHandler->handle($configuration, View::create($resource, 204));
+            return $this->viewHandler->handle($configuration, View::create(null, 204));
         }
 
         $this->flashHelper->addSuccessFlash($configuration, 'move', $resource);
