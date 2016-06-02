@@ -32,7 +32,7 @@ sylius_admin_order_cancel:
             redirect: referer
 
 sylius_admin_order_payment_complete:
-    path: /orders/{id}/payments/{paymentId}/complete
+    path: /orders/{orderId}/payments/{id}/complete
     methods: [PUT]
     defaults:
         _controller: sylius.controller.payment:applyStateMachineTransitionAction
@@ -40,8 +40,8 @@ sylius_admin_order_payment_complete:
             repository:
                 method: findByOrderIdAndId
                 arguments:
-                    orderId: $id
-                    id: $paymentId
+                    orderId: $orderId
+                    id: $id
             state_machine:
                 graph: sylius_payment
                 transition: complete

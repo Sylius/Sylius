@@ -9,7 +9,7 @@ sylius_admin_partial_order_latest:
             template: $template
 
 sylius_admin_partial_order_shipment_ship:
-    path: /orders/{id}/shipments/{shipmentId}/ship
+    path: /orders/{orderId}/shipments/{id}/ship
     methods: [GET, PUT]
     defaults:
         _controller: sylius.controller.shipment:updateAction
@@ -17,8 +17,8 @@ sylius_admin_partial_order_shipment_ship:
             repository:
                 method: findByOrderIdAndId
                 arguments:
-                    orderId: $id
-                    id: $shipmentId
+                    orderId: $orderId
+                    id: $id
             state_machine:
                 graph: sylius_shipment
                 transition: ship
@@ -29,5 +29,5 @@ sylius_admin_partial_order_shipment_ship:
             vars:
                 route:
                     parameters:
+                        orderId: $orderId
                         id: $id
-                        shipmentId: $shipmentId
