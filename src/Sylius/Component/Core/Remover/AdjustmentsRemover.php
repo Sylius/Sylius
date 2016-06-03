@@ -26,8 +26,9 @@ class AdjustmentsRemover implements AdjustmentsRemoverInterface
     public function removeFrom(OrderInterface $order)
     {
         $adjustmentsToRemove = [
-            AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT,
             AdjustmentInterface::ORDER_ITEM_PROMOTION_ADJUSTMENT,
+            AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT,
+            AdjustmentInterface::ORDER_SHIPPING_PROMOTION_ADJUSTMENT,
             AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT,
             AdjustmentInterface::TAX_ADJUSTMENT
         ];

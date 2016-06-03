@@ -406,6 +406,9 @@ class OrderSpec extends ObjectBehavior
         $this->addItem($orderItem1);
         $this->addItem($orderItem2);
 
+        $shippingAdjustment->setAdjustable($this)->shouldBeCalled();
+        $this->addAdjustment($shippingAdjustment);
+
         $shippingTaxAdjustment->setAdjustable($this)->shouldBeCalled();
         $this->addAdjustment($shippingTaxAdjustment);
 
@@ -477,7 +480,7 @@ class OrderSpec extends ObjectBehavior
         $shippingTaxAdjustment->isNeutral()->willReturn(false);
         $shippingTaxAdjustment->getAmount()->willReturn(70);
 
-        $shippingPromotionAdjustment->getType()->willReturn(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT);
+        $shippingPromotionAdjustment->getType()->willReturn(AdjustmentInterface::ORDER_SHIPPING_PROMOTION_ADJUSTMENT);
         $shippingPromotionAdjustment->isNeutral()->willReturn(false);
         $shippingPromotionAdjustment->getAmount()->willReturn(-100);
 

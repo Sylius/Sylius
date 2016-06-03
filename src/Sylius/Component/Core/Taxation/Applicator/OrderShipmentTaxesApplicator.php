@@ -74,8 +74,9 @@ class OrderShipmentTaxesApplicator implements OrderTaxesApplicatorInterface
             return;
         }
 
-        $lastShippingAdjustment = $shippingAdjustments->last();
-        $taxAmount = $this->calculator->calculate($lastShippingAdjustment->getAmount(), $taxRate);
+        $shippingPrice = $order->getShippingTotal();
+
+        $taxAmount = $this->calculator->calculate($shippingPrice, $taxRate);
         if (0 === $taxAmount) {
             return;
         }

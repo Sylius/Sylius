@@ -6,7 +6,7 @@
 <tr>
     <th colspan="8" id="items-total" class="right aligned">
         <strong>{{ 'sylius.ui.subtotal'|trans }}</strong>:
-        {{ (order.itemsTotal - order.getAdjustmentsTotalRecursively(orderPromotionAdjustment))|sylius_price(order.currency) }}
+        {{ order.itemsTotal|sylius_price(order.currency) }}
     </th>
 </tr>
 <tr>
@@ -26,8 +26,7 @@
     </td>
     <td colspan="4" id="shipping-total" class="right aligned">
         <strong>{{ 'sylius.ui.shipping_total'|trans }}</strong>:
-        {% set shippingTotal = order.adjustmentsTotal(taxAdjustment) + order.adjustmentsTotal(shippingAdjustment) %}
-        {{ shippingTotal|sylius_price(order.currency) }}
+        {{ order.shippingTotal|sylius_price(order.currency) }}
     </td>
 </tr>
 <tr>
@@ -48,7 +47,7 @@
     </td>
     <td colspan="4" id="tax-total" class="right aligned">
         <strong>{{ 'sylius.ui.tax_total'|trans }}</strong>:
-        {{ order.getAdjustmentsTotalRecursively(taxAdjustment)|sylius_price(order.currency) }}
+        {{ order.taxTotal|sylius_price(order.currency) }}
     </td>
 </tr>
 <tr>
