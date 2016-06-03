@@ -76,8 +76,9 @@ class ProductSpec extends ObjectBehavior
         $taxon->getRoot()->willReturn($rootTaxon);
         $this->setTaxons(new ArrayCollection([$taxon->getWrappedObject()]));
 
-        $returnedTaxons = $this->getTaxons('Brand');
+        $returnedTaxons = $this->getTaxons('brand');
         $returnedTaxons->shouldHaveType('Doctrine\Common\Collections\Collection');
+        $returnedTaxons->count()->shouldReturn(1);
     }
 
     function its_variant_selection_method_is_choice_by_default()
