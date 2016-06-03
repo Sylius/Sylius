@@ -146,7 +146,9 @@ class OrderItemUnit extends BaseOrderItemUnit implements OrderItemUnitInterface
         $taxTotal = 0;
 
         foreach ($this->getAdjustments(AdjustmentInterface::TAX_ADJUSTMENT) as $taxAdjustment) {
-            $taxTotal += $taxAdjustment->getAmount();
+            if (!$taxAdjustment->isNeutral()) {
+                $taxTotal += $taxAdjustment->getAmount();
+            }
         }
 
         return $taxTotal;

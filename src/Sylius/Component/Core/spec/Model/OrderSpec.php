@@ -406,6 +406,9 @@ class OrderSpec extends ObjectBehavior
         $this->addItem($orderItem1);
         $this->addItem($orderItem2);
 
+        $shippingAdjustment->setAdjustable($this)->shouldBeCalled();
+        $this->addAdjustment($shippingAdjustment);
+
         $shippingTaxAdjustment->setAdjustable($this)->shouldBeCalled();
         $this->addAdjustment($shippingTaxAdjustment);
 

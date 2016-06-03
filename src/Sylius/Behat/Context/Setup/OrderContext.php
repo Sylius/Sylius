@@ -250,7 +250,6 @@ final class OrderContext implements Context
         $this->theCustomerBoughtSingleProduct($secondProduct);
     }
 
-
     /**
      * @Given /^the customer bought (\d+) ("[^"]+" products)/
      */
