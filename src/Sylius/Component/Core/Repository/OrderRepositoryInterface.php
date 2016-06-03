@@ -124,4 +124,12 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
      * @return int
      */
     public function revenueBetweenDates(\DateTime $from, \DateTime $to, $state = null);
+
+    /**
+     * @param array $sorting
+     * @param int $limit
+     *
+     * @return OrderInterface[]
+     */
+    public function findCompleted(array $sorting = [], $limit = 5);
 }
