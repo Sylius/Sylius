@@ -991,7 +991,7 @@ class ResourceControllerSpec extends ObjectBehavior
         $manager->flush()->shouldBeCalled();
         $eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource)->shouldBeCalled();
 
-        $expectedView = View::create($resource, 204);
+        $expectedView = View::create(null, 204);
         $viewHandler->handle($configuration, Argument::that($this->getViewComparingCallback($expectedView)))->willReturn($response);
 
         $this->updateAction($request)->shouldReturn($response);
