@@ -29,3 +29,6 @@ sylius:
             not_blank: Proszę podać liczbę kuponów do wygenerowania.
         usage_limit:
             min: 'Ograniczenie użycia wygenerowanych kuponów musi wynosić co najmniej {{ limit }}.'
+        code_length:
+            not_blank: Proszę podać długość kodu kuponu.
+        possible_generation_amount: 'Nieprawidłowa długość kodu lub ilość kuponów. Nie można wygenerować %expectedAmount% unikalnych kuponów z długością kodu równą %codeLength%. Możliwa do wygenerowania liczba kuponów to %possibleAmount%.'

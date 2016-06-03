@@ -71,10 +71,15 @@ sylius:
     order:
         comment:
             notify: Powiadomienie
+        guest: Gość
+        immutable_warning: Wysłane zamówienia są nieedytowalne
         no_items: To zamówienie nie posiada żadnych produktów
+        no_promotion: Kupony nie zostały użyte
         no_shipments: Nie wybrano metody wysyłki dla tego zamówienia
         no_shipping_charges: Brak opłaty za wysyłkę
         no_taxes: Brak podatku
+        state:
+            order_confirmed: Zamówienie potwierdzone
     order_item:
         quantity: Ilość
         sellable: Produkt
@@ -110,6 +115,7 @@ sylius:
             shipped: Dostarczono
             pending: Oczekujący
             cancelled: Anulowane
+            partially_shipped: Częściowo wysłane
         transition:
             cancel: anuluj
         update: Edytuj
