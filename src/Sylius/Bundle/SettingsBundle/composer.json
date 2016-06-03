@@ -22,7 +22,6 @@
     "require": {
         "php": "^5.6|^7.0",
 
-        "doctrine/doctrine-cache-bundle": "~1.0",
         "sylius/registry": "^0.19",
         "sylius/resource-bundle": "^0.19",
         "symfony/framework-bundle": "^2.8"
