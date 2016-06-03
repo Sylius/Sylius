@@ -18,6 +18,12 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Parameter;
 use Symfony\Component\DependencyInjection\Reference;
+use Sylius\Bundle\ResourceBundle\Form\Type\DefaultResourceType;
+use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\Form\Builder\DefaultFormBuilder;
+use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener\NameResolverListener;
+use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener\DefaultParentListener;
+use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\EventListener\NameFilterListener;
+use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -25,6 +31,127 @@ use Symfony\Component\DependencyInjection\Reference;
  */
 class DoctrinePHPCRDriver extends AbstractDoctrineDriver
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function load(ContainerBuilder $container, MetadataInterface $metadata)
+    {
+        parent::load($container, $metadata);
+        $this->addResourceListeners($container, $metadata);
+    }
+
+    /**
+     * @param ContainerBuilder $container
+     * @param MetadataInterface $metadata
+     */
+    protected function addResourceListeners(ContainerBuilder $container, MetadataInterface $metadata)
+    {
+        $defaultOptions = [
+                // if no parent is given default to the parent path given here.
+                'parent_path_default' => null,
+
+                // auto-create the parent path if it does not exist.
+                'parent_path_autocreate' => false,
+
+                // set true to always override the parent path.
+                'parent_path_force' => false,
+
+                // automatically replace invalid characters in the node name
+                // with a blank space.
+                'name_filter' => true,
+
+                // automatically resolve same-name-sibling conflicts.
+                'name_resolver' => true,
+        ];
+        $metadataOptions = $metadata->hasParameter('options') ? $metadata->getParameter('options') : [];
+
+        if ($diff = array_diff(array_keys($metadataOptions), array_keys($defaultOptions))) {
+            throw new InvalidArgumentException(sprintf(
+                'Unknown PHPCR-ODM configuration options: "%s"',
+                implode('", "', $diff)
+            ));
+        }
+
+        $options = array_merge(
+            $defaultOptions,
+            $metadataOptions
+        );
+
+        $createEventName = sprintf('%s.%s.pre_%s', $metadata->getApplicationName(), $metadata->getName(), 'create');
+        $updateEventName = sprintf('%s.%s.pre_%s', $metadata->getApplicationName(), $metadata->getName(), 'update');
+
+        if ($options['parent_path_default']) {
+            $defaultPath = new Definition(DefaultParentListener::class);
+            $defaultPath->setArguments([
+                new Reference($metadata->getServiceId('manager')),
+                $options['parent_path_default'],
+                $options['parent_path_autocreate'],
+                $options['parent_path_force']
+            ]);
+            $defaultPath->addTag('kernel.event_listener', [
+                'event' => $createEventName,
+                'method' => 'onPreCreate'
+            ]);
+
+            $container->setDefinition(
+                sprintf(
+                    '%s.resource.%s.doctrine.odm.phpcr.event_listener.default_path',
+                    $metadata->getApplicationName(),
+                    $metadata->getName()
+                ),
+                $defaultPath
+            );
+        }
+
+        if ($options['name_filter']) {
+            $nameFilter = new Definition(NameFilterListener::class);
+            $nameFilter->setArguments([
+                new Reference($metadata->getServiceId('manager'))
+            ]);
+            $nameFilter->addTag('kernel.event_listener', [
+                'event' => $createEventName,
+                'method' => 'onEvent'
+            ]);
+            $nameFilter->addTag('kernel.event_listener', [
+                'event' => $updateEventName,
+                'method' => 'onEvent'
+            ]);
+
+            $container->setDefinition(
+                sprintf(
+                    '%s.resource.%s.doctrine.odm.phpcr.event_listener.name_filter',
+                    $metadata->getApplicationName(),
+                    $metadata->getName()
+                ),
+                $nameFilter
+            );
+        }
+
+        if ($options['name_resolver']) {
+            $nameResolver = new Definition(NameResolverListener::class);
+            $nameResolver->setArguments([
+                new Reference($metadata->getServiceId('manager'))
+            ]);
+            $nameResolver->addTag('kernel.event_listener', [
+                'event' => $createEventName,
+                'method' => 'onEvent'
+            ]);
+            $nameResolver->addTag('kernel.event_listener', [
+                'event' => $updateEventName,
+                'method' => 'onEvent'
+            ]);
+
+            $container->setDefinition(
+                sprintf(
+                    '%s.resource.%s.doctrine.odm.phpcr.event_listener.name_resolver',
+                    $metadata->getApplicationName(),
+                    $metadata->getName()
+                ),
+                $nameResolver
+            );
+        }
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -68,6 +195,27 @@ class DoctrinePHPCRDriver extends AbstractDoctrineDriver
      */
     protected function addDefaultForm(ContainerBuilder $container, MetadataInterface $metadata)
     {
+        $builderDefinition = new Definition(DefaultFormBuilder::class);
+        $builderDefinition->setArguments([
+            new Reference($metadata->getServiceId('manager'))
+        ]);
+
+        $definition = new Definition(DefaultResourceType::class);
+        $definition
+            ->setArguments([
+                $this->getMetadataDefinition($metadata),
+                $builderDefinition,
+            ])
+            ->addTag('form.type', [
+                'alias' => sprintf('%s_%s', $metadata->getApplicationName(), $metadata->getName())
+            ])
+        ;
+
+        $container->setDefinition(sprintf(
+            '%s.form.type.%s',
+            $metadata->getApplicationName(),
+            $metadata->getName()
+        ), $definition);
     }
 
     /**
