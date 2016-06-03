@@ -32,7 +32,7 @@ class DashboardController extends Controller
 
         return $this->render('SyliusWebBundle:Backend/Dashboard:main.html.twig', [
             'orders_count' => $orderRepository->countBetweenDates(new \DateTime('1 month ago'), new \DateTime()),
-            'orders' => $orderRepository->findBy([], ['updatedAt' => 'desc'], 5),
+            'orders' => $orderRepository->findCompleted(['updatedAt' => 'desc'], 5),
             'customers' => $customerRepository->findBy([], ['id' => 'desc'], 5),
             'registrations_count' => $userRepository->countBetweenDates(new \DateTime('1 month ago'), new \DateTime()),
             'sales' => $orderRepository->revenueBetweenDates(new \DateTime('1 month ago'), new \DateTime()),

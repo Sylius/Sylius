@@ -385,6 +385,23 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function findCompleted(array $sorting = [], $limit = 5)
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+        $queryBuilder->andWhere($queryBuilder->expr()->isNotNull('o.completedAt'));
+
+        $this->applySorting($queryBuilder, $sorting);
+
+        return $queryBuilder
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
      * @param CustomerInterface $customer
      * @param array $sorting
      *
