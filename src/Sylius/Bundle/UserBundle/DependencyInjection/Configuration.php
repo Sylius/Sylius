@@ -133,7 +133,7 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->arrayNode('default')
                                             ->prototype('scalar')->end()
-                                            ->defaultValue(['sylius', 'sylius_customer_profile'])
+                                            ->defaultValue(['sylius'])
                                         ->end()
                                         ->arrayNode('profile')
                                             ->prototype('scalar')->end()

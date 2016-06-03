@@ -56,10 +56,15 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     {
         $foundElement = $this->getFieldElement($element);
         if (null === $foundElement) {
+            throw new ElementNotFoundException($this->getSession(), 'Field element');
+        }
+
+        $validationMessage = $foundElement->find('css', '.pointing');
+        if (null === $validationMessage) {
             throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.pointing');
         }
 
-        return $message === $foundElement->find('css', '.pointing')->getText();
+        return $message === $validationMessage->getText();
     }
 
     /**
