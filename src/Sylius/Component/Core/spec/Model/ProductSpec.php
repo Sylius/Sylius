@@ -71,20 +71,13 @@ class ProductSpec extends ObjectBehavior
     function its_taxons_should_be_returned_by_taxonomy(
         TaxonInterface $taxon,
         TaxonInterface $rootTaxon
-    )
-    {
-        $rootTaxon->addChild($taxon);
-        $rootTaxon->setName('Brand');
-
+    ) {
+        $rootTaxon->getName()->willReturn('Brand');
         $taxon->getRoot()->willReturn($rootTaxon);
-        $taxons = new ArrayCollection([$taxon->getWrappedObject()]);
+        $this->setTaxons(new ArrayCollection([$taxon->getWrappedObject()]));
 
-        $this->setTaxons($taxons);
-        $taxon->getRoot()->shouldBeCalled();
-        $rootTaxon->getName()->shouldBeCalled();
-
-        $this->getTaxons('Brand')
-            ->shouldHaveType('Doctrine\Common\Collections\Collection');
+        $returnedTaxons = $this->getTaxons('Brand');
+        $returnedTaxons->shouldHaveType('Doctrine\Common\Collections\Collection');
     }
 
     function its_variant_selection_method_is_choice_by_default()
