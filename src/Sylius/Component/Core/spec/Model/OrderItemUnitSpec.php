@@ -120,7 +120,7 @@ class OrderItemUnitSpec extends ObjectBehavior
         $this->getTaxTotal()->shouldReturn(0);
     }
 
-    function it_returns_sum_of_non_neutral_tax_adjustments_as_tax_total(
+    function it_returns_sum_of_neutral_and_non_neutral_tax_adjustments_as_tax_total(
         OrderItemInterface $orderItem,
         AdjustmentInterface $nonNeutralTaxAdjustment,
         AdjustmentInterface $neutralTaxAdjustment
@@ -138,16 +138,16 @@ class OrderItemUnitSpec extends ObjectBehavior
         $this->addAdjustment($neutralTaxAdjustment);
         $this->addAdjustment($nonNeutralTaxAdjustment);
 
-        $this->getTaxTotal()->shouldReturn(300);
+        $this->getTaxTotal()->shouldReturn(500);
     }
 
-    function it_returns_only_sum_of_non_neutral_tax_adjustments_as_tax_total(
+    function it_returns_only_sum_of_neutral_and_non_neutral_tax_adjustments_as_tax_total(
         OrderItemInterface $orderItem,
         AdjustmentInterface $nonNeutralTaxAdjustment,
         AdjustmentInterface $neutralTaxAdjustment,
         AdjustmentInterface $notTaxAdjustment
     ) {
-        $neutralTaxAdjustment->isNeutral()->willReturn(false);
+        $neutralTaxAdjustment->isNeutral()->willReturn(true);
         $neutralTaxAdjustment->getType()->willReturn(AdjustmentInterface::TAX_ADJUSTMENT);
         $neutralTaxAdjustment->getAmount()->willReturn(200);
         $nonNeutralTaxAdjustment->isNeutral()->willReturn(false);

@@ -56,7 +56,6 @@ class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
         $adjustmentsFactory,
         $calculator,
         $taxRateResolver,
-        AdjustmentInterface $shippingAdjustment,
         AdjustmentInterface $shippingTaxAdjustment,
         Collection $shippingAdjustments,
         OrderInterface $order,
@@ -74,10 +73,8 @@ class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
 
         $order->getAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->willReturn($shippingAdjustments);
         $shippingAdjustments->isEmpty()->willReturn(false);
-        $shippingAdjustments->last()->willReturn($shippingAdjustment);
 
-        $shippingAdjustment->getAmount()->willReturn(1200);
-        $order->getAdjustmentsTotal(AdjustmentInterface::ORDER_SHIPPING_PROMOTION_ADJUSTMENT)->willReturn(-200);
+        $order->getShippingTotal()->willReturn(1000);
 
         $calculator->calculate(1000, $taxRate)->willReturn(100);
 
@@ -91,7 +88,6 @@ class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
         $adjustmentsFactory,
         $calculator,
         $taxRateResolver,
-        AdjustmentInterface $shippingAdjustment,
         Collection $shippingAdjustments,
         OrderInterface $order,
         ShipmentInterface $shipment,
@@ -105,10 +101,8 @@ class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
 
         $order->getAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->willReturn($shippingAdjustments);
         $shippingAdjustments->isEmpty()->willReturn(false);
-        $shippingAdjustments->last()->willReturn($shippingAdjustment);
 
-        $shippingAdjustment->getAmount()->willReturn(1000);
-        $order->getAdjustmentsTotal(AdjustmentInterface::ORDER_SHIPPING_PROMOTION_ADJUSTMENT)->willReturn(0);
+        $order->getShippingTotal()->willReturn(1000);
 
         $calculator->calculate(1000, $taxRate)->willReturn(0);
 
@@ -146,6 +140,7 @@ class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
     }
 
     function it_does_nothing_if_order_has_no_shipping_adjustments(
+        $taxRateResolver,
         Collection $shippingAdjustments,
         OrderInterface $order,
         ShipmentInterface $shipment,
@@ -156,7 +151,7 @@ class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
         $order->getAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT)->willReturn($shippingAdjustments);
         $shippingAdjustments->isEmpty()->willReturn(true);
 
-        $shippingAdjustments->last()->shouldNotBeCalled();
+        $taxRateResolver->resolve(Argument::any())->shouldNotBeCalled();
 
         $this->apply($order, $zone);
     }

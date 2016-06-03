@@ -9,12 +9,9 @@ Feature: Seeing taxes of order items
         And there is a zone "EU" containing all members of the European Union
         And default tax zone is "EU"
         And the store has "EU VAT" tax rate of 23% for "Clothes" within "EU" zone
-        And the store has included in price "Guns tax" tax rate of 10% for "Guns" within "EU" zone
         And the store has a product "PHP T-Shirt" priced at "€80.00"
         And the store has a product "Symfony2 T-Shirt" priced at "€140.00"
         And it belongs to "Clothes" tax category
-        And the store has a product "Winchester M1866" priced at "€220.00"
-        And it belongs to "Guns" tax category
         And the store ships everything for free within "EU" zone
         And the store allows paying offline
         And there is a customer "lucy@teamlucifer.com" that placed an order "#00000666"
@@ -28,12 +25,3 @@ Feature: Seeing taxes of order items
         Then the order's shipping total should be "€0.00"
         And the order's tax total should be "€32.20"
         And the order's total should be "€252.20"
-
-    @ui
-    Scenario: Seeing included in price taxes of order items are not counted in taxes total
-        Given the customer bought a "Symfony2 T-Shirt" and a "Winchester M1866"
-        And the customer chose "Free" shipping method to "France" with "Offline" payment
-        When I view the summary of the order "#00000666"
-        Then the order's shipping total should be "€0.00"
-        And the order's tax total should be "€32.20"
-        And the order's total should be "€392.20"
