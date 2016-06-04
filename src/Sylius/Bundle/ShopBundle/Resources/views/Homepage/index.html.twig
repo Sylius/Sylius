@@ -8,10 +8,10 @@
 
 {% include '@SyliusShop/Homepage/_promos.html.twig' %}
 
+{% include '@SyliusShop/Homepage/_grid.html.twig' %}
+
 <h2 class="ui horizontal section divider header">
     {{ 'sylius.ui.shop_by_brand'|trans }}
 </h2>
 {% render(url('sylius_shop_partial_taxon_by_code', {'code': 'brand', 'template': '@SyliusShop/Taxon/_horizontalMenu.html.twig'})) %}
-
-{% include '@SyliusShop/Homepage/_grid.html.twig' %}
 {% endblock %}

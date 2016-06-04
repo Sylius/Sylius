@@ -2,24 +2,35 @@
 
 {% block content %}
 {% include '@SyliusShop/Product/Show/_breadcrumb.html.twig' %}
-{% include '@SyliusShop/Product/Show/_header.html.twig' %}
 
 <div class="ui two column stackable grid">
     <div class="column">
-        {% include '@SyliusShop/Product/Show/_price.html.twig' %}
+        {% include '@SyliusShop/Product/Show/_images.html.twig' %}
     </div>
-    <div class="right aligned column">
-        <span>{{ 'sylius.ui.code'|trans }}: {{ product.code }}</span>
+    <div class="column">
+        {% include '@SyliusShop/Product/Show/_header.html.twig' %}
+        {% include '@SyliusShop/Product/Show/_reviews.html.twig' %}
+        <div class="ui two column stackable grid">
+            <div class="column">
+                {% include '@SyliusShop/Product/Show/_price.html.twig' %}
+            </div>
+            <div class="right aligned column">
+                <h3 class="ui sub header">
+                    {{ 'sylius.ui.out_of_stock'|trans }}
+                </h3>
+                <span>{{ 'sylius.ui.code'|trans }}: {{ product.code }}</span>
+            </div>
+        </div>
+        <div class="ui basic segment">
+            <p>
+                {{ product.shortDescription }}
+            </p>
+        </div>
+        {% include '@SyliusShop/Product/Show/_addToCart.html.twig' %}
+        <div class="ui hidden divider"></div>
+        {% include '@SyliusShop/Product/Show/_social.html.twig' %}
     </div>
 </div>
-
-<div class="ui basic segment">
-    <p>
-        {{ product.shortDescription }}
-    </p>
-</div>
-
-{% include '@SyliusShop/Product/Show/_addToCart.html.twig' %}
 
 <div class="ui hidden divider"></div>
 
@@ -27,5 +38,7 @@
     {% include '@SyliusShop/Product/Show/_menu.html.twig' %}
 </div>
 {% include '@SyliusShop/Product/Show/_tabs.html.twig' %}
+
+{% include '@SyliusShop/Product/Show/_associations.html.twig' %}
 
 {% endblock %}

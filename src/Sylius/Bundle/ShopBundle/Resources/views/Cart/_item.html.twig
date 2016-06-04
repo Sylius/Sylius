@@ -5,7 +5,7 @@
 <tr>
     <td class="single line">
         <strong class="ui small header">
-            {{ product.name }}
+            <a href="{{ path('sylius_shop_product_show', {'slug': product.slug}) }}">{{ product.name }}</a>
             <span class="sub header">
                 {{ product.code }}
             </span>

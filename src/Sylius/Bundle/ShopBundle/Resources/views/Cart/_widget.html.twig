@@ -3,7 +3,7 @@
 <div class="ui circular cart button" data-position="bottom center">
     <i class="cart icon"></i> {{ cart.total|sylius_price }}{% if not cart.empty %}, {{ cart.items|length }} {{ 'sylius.ui.items'|trans|lower }}{% endif %}
 </div>
-<div class="ui large flowing cart popup hidden">
+<div class="ui large flowing cart hidden popup">
     {% if cart.empty %}
         {{ 'sylius.ui.your_cart_is_empty'|trans }}.
     {% else %}

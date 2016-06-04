@@ -2,6 +2,10 @@
     <div class="ui breadcrumb">
         <a href="{{ path('sylius_shop_homepage') }}" class="section">{{ 'sylius.ui.home'|trans }}</a>
         <div class="divider"> / </div>
+        {% if product.mainTaxon is not empty %}
+        <a href="#" class="section">{{ product.mainTaxon.name }}</a>
+        <div class="divider"> / </div>
+        {% endif %}
         <div class="active section">{{ product.name }}</div>
     </div>
 </div>
