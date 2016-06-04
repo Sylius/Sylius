@@ -450,7 +450,7 @@ final class OrderContext implements Context
      * @param CustomerInterface $customer
      * @param string $number
      * @param ChannelInterface|null $channel
-     * @param CurrencyInterface|null $currency
+     * @param string|null $currencyCode
      *
      * @return OrderInterface
      */
@@ -458,14 +458,14 @@ final class OrderContext implements Context
         CustomerInterface $customer,
         $number = null,
         ChannelInterface $channel = null,
-        CurrencyInterface $currency = null
+        $currencyCode = null
     ) {
         $order = $this->orderFactory->createNew();
 
         $order->setCustomer($customer);
         $order->setNumber($number);
         $order->setChannel((null !== $channel) ? $channel : $this->sharedStorage->get('channel'));
-        $order->setCurrency((null !== $currency) ? $currency : $this->sharedStorage->get('currency'));
+        $order->setCurrency((null !== $currencyCode) ? $currencyCode : $this->sharedStorage->get('currency')->getCode());
         $order->complete();
 
         return $order;
