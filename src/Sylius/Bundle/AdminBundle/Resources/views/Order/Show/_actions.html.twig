@@ -1,0 +1,6 @@
+{% if sm_can(order, 'cancel', 'sylius_order') %}
+    <form action="{{ path('sylius_admin_order_cancel', {'id': order.id} ) }}" method="post" novalidate>
+        <input type="hidden" name="_method" value="PUT">
+        <button class="ui yellow labeled icon loadable button" type="submit"><i class="ban icon"></i> {{'sylius.ui.cancel'|trans  }}</button>
+    </form>
+{% endif %}

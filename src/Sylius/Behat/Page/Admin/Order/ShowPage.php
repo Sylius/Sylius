@@ -88,7 +88,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
     public function specifyTrackingCode($code)
     {
-        $this->getDocument()->fillField('Tracking Code', $code);
+        $this->getDocument()->fillField('sylius_shipment_ship_tracking', $code);
     }
 
     public function canShipOrder(OrderInterface $order)

@@ -42,6 +42,10 @@
     $('.message .close').on('click', function() {
       return $(this).closest('.message').transition('fade');
     });
+    $('.loadable.button').on('click', function() {
+      return $(this).addClass('loading');
+    });
+    $('.popups').popup();
 
     $('[data-requires-confirmation]').requireConfirmation();
 

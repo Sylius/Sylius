@@ -715,7 +715,7 @@ sylius:
         total_orders: 'Total orders'
         total_qty: 'Total Qty'
         total_registrations: 'Total registrations'
-        tracking_code: 'Tracking Code'
+        tracking_code: 'Tracking code'
         tracking_number: 'Tracking number'
         translations: Translations
         type: Type

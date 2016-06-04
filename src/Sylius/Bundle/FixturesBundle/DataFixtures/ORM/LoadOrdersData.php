@@ -70,11 +70,8 @@ class LoadOrdersData extends DataFixture
             $this->dispatchEvents($order);
 
             $order->complete();
+            $paymentState = $this->faker->boolean(50) ? PaymentInterface::STATE_COMPLETED : PaymentInterface::STATE_NEW;
 
-            $paymentState = PaymentInterface::STATE_COMPLETED;
-            if (rand(1, 10) < 5) {
-                $paymentState = PaymentInterface::STATE_NEW;
-            }
             $order->setCustomer($this->getReference('Sylius.Customer-'.rand(1, 15)));
             $this->createPayment($order, $paymentState);
 
@@ -120,7 +117,7 @@ class LoadOrdersData extends DataFixture
         /* @var $shipment ShipmentInterface */
         $shipment = $this->getShipmentFactory()->createNew();
         $shipment->setMethod($this->getReference('Sylius.ShippingMethod.ups_ground'));
-        $shipment->setState($this->getShipmentState());
+        $shipment->setState($this->faker->boolean(50) ? ShipmentInterface::STATE_READY : ShipmentInterface::STATE_SHIPPED);
 
         foreach ($order->getItemUnits() as $item) {
             $shipment->addUnit($item);
@@ -135,34 +132,5 @@ class LoadOrdersData extends DataFixture
         $dispatcher->dispatch(SyliusCartEvents::CART_CHANGE, new GenericEvent($order));
         $dispatcher->dispatch(SyliusCheckoutEvents::SHIPPING_PRE_COMPLETE, new GenericEvent($order));
         $this->get('sm.factory')->get($order, OrderTransitions::GRAPH)->apply(OrderTransitions::SYLIUS_CREATE);
-    }
-
-    protected function getPaymentState()
-    {
-        return array_rand(array_flip([
-            PaymentInterface::STATE_COMPLETED,
-            PaymentInterface::STATE_FAILED,
-            PaymentInterface::STATE_NEW,
-            PaymentInterface::STATE_PENDING,
-            PaymentInterface::STATE_PROCESSING,
-            PaymentInterface::STATE_VOID,
-            PaymentInterface::STATE_CANCELLED,
-            PaymentInterface::STATE_REFUNDED,
-            PaymentInterface::STATE_UNKNOWN,
-        ]));
-    }
-
-    protected function getShipmentState()
-    {
-        return array_rand(array_flip([
-            ShipmentInterface::STATE_PENDING,
-            ShipmentInterface::STATE_ONHOLD,
-            ShipmentInterface::STATE_CHECKOUT,
-            ShipmentInterface::STATE_SHIPPED,
-            ShipmentInterface::STATE_READY,
-            ShipmentInterface::STATE_BACKORDERED,
-            ShipmentInterface::STATE_RETURNED,
-            ShipmentInterface::STATE_CANCELLED,
-        ]));
     }
 }

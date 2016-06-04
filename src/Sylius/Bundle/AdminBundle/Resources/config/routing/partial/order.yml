@@ -24,7 +24,7 @@ sylius_admin_partial_order_shipment_ship:
                 transition: ship
             redirect: referer
             section: admin
-            template: SyliusAdminBundle:Order:shipmentShip.html.twig
+            template: SyliusAdminBundle:Order/Show/Form:_ship.html.twig
             form: sylius_shipment_ship
             vars:
                 route:
