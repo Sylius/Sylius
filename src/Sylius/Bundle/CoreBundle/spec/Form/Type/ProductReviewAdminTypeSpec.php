@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\CoreBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\CoreBundle\Form\Type\ProductReviewType;
+use Sylius\Bundle\ReviewBundle\Form\Type\ReviewType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -34,7 +34,7 @@ class ProductReviewAdminTypeSpec extends ObjectBehavior
 
     function it_extends_product_review_admin_type()
     {
-        $this->shouldHaveType(ProductReviewType::class);
+        $this->shouldHaveType(ReviewType::class);
     }
 
     function it_builds_form(FormBuilderInterface $builder)
@@ -59,18 +59,6 @@ class ProductReviewAdminTypeSpec extends ObjectBehavior
 
         $builder
             ->add('comment', 'textarea', Argument::cetera())
-            ->willReturn($builder)
-            ->shouldBeCalled()
-        ;
-
-        $builder
-            ->add('author', 'entity', Argument::cetera())
-            ->willReturn($builder)
-            ->shouldBeCalled()
-        ;
-
-        $builder
-            ->add('reviewSubject', 'entity', Argument::cetera())
             ->willReturn($builder)
             ->shouldBeCalled()
         ;

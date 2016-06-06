@@ -29,24 +29,6 @@ Feature: Reviews
         When I follow "Product reviews"
         Then I should see 3 reviews in the list
 
-    Scenario: Adding new review with default options
-        Given I am on the product review creation page
-        When I fill in the following:
-            | Title   | New review        |
-            | Comment | Lorem ipsum dolor |
-        And I select the "5" radio button
-        And I press "Create"
-        Then I should be on the page of product review with title "New review"
-        And I should see "Review has been successfully created."
-        And I should see "Lorem ipsum dolor"
-
-    Scenario: Prevent adding review without required fields
-        Given I am on the product review creation page
-        When I press "Create"
-        Then I should still be on the product review creation page
-        And I should see "You must check review rating."
-        And I should see "Review title should not be blank."
-
     Scenario: Accessing review edit page from the list
         Given I am on the product review index page
         When I press "Edit" near "Very good"

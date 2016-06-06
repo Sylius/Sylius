@@ -11,9 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type;
 
-use Sylius\Component\Core\Model\Customer;
-use Sylius\Component\Core\Model\Product;
-use Symfony\Component\Form\FormBuilderInterface;
+use Sylius\Bundle\ReviewBundle\Form\Type\ReviewType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -21,29 +19,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-class ProductReviewAdminType extends ProductReviewType
+class ProductReviewAdminType extends ReviewType
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function buildForm(FormBuilderInterface $builder, array $options)
-    {
-        parent::buildForm($builder, $options);
-
-        $builder
-            ->add('reviewSubject', 'entity', [
-                'class' => Product::class,
-                'label' => 'sylius.form.review.product',
-                'property' => 'name',
-            ])
-            ->add('author', 'entity', [
-                'class' => Customer::class,
-                'label' => 'sylius.form.review.author',
-                'property' => 'email',
-            ])
-        ;
-    }
-
     /**
      * {@inheritdoc}
      */
