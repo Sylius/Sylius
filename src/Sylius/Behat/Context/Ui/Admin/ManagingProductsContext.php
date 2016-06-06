@@ -364,7 +364,7 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Given I set its :attribute attribute to :value
+     * @When I set its :attribute attribute to :value
      */
     public function iSetItsAttributeTo($attribute, $value)
     {
@@ -372,7 +372,7 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Given I remove its :attribute attribute
+     * @When I remove its :attribute attribute
      */
     public function iRemoveItsAttribute($attribute)
     {
@@ -380,7 +380,7 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Given /^attribute "([^"]+)" of (product "[^"]+") should be "([^"]+)"$/
+     * @Then /^attribute "([^"]+)" of (product "[^"]+") should be "([^"]+)"$/
      */
     public function itsAttributeShouldBe($attribute, ProductInterface $product, $value)
     {
@@ -394,7 +394,7 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Given /^(product "[^"]+") should not have a "([^"]+)" attribute$/
+     * @Then /^(product "[^"]+") should not have a "([^"]+)" attribute$/
      */
     public function productShouldNotHaveAttribute(ProductInterface $product, $attribute)
     {

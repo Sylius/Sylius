@@ -40,7 +40,7 @@
     }
 
     function modifyAttributeForms(data) {
-        $.each($(data).find('input,select,textarea'), function(){
+        $.each($(data).find('input,select,textarea'), function() {
             if ($(this).attr('data-name') != null) {
                 $(this).attr('name', $(this).attr('data-name'));
             }
@@ -65,7 +65,7 @@
                 url: $(this).parent().attr('data-action'),
                 data: data,
                 dataType: 'html'
-            }).done(function(data){
+            }).done(function(data) {
                 var finalData = modifyAttributeForms($(data));
                 $attributesContainer.append(finalData);
 
@@ -79,7 +79,7 @@
         });
     }
 
-    $(document).ready(function(){
+    $(document).ready(function() {
         setAttributeChoiceListener();
         controlAttributesList();
 

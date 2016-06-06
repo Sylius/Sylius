@@ -48,7 +48,7 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     {
         $this->clickAttributesTabIfItsNotActive();
 
-        $attributeOption = $this->getElement('attributes-choice')->find('css', 'option:contains("' . $attribute . '")');
+        $attributeOption = $this->getElement('attributes-choice')->find('css', sprintf('option:contains("%s")', $attribute));
         $this->selectElementFromAttributesDropdown($attributeOption->getAttribute('value'));
 
         $this->getDocument()->pressButton('Add attributes');
@@ -102,13 +102,16 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         Assert::isInstanceOf($driver, Selenium2Driver::class);
 
         $driver->executeScript('$(\'[name="sylius_product_attribute_choice"]\').dropdown(\'show\');');
-        $driver->executeScript('$(\'[name="sylius_product_attribute_choice"]\').dropdown(\'set selected\', ' . $id . ');');
+        $driver->executeScript(sprintf('$(\'[name="sylius_product_attribute_choice"]\').dropdown(\'set selected\', %s);', $id));
     }
 
+    /**
+     * @param int $timeout
+     */
     private function waitForFormElement($timeout = 5)
     {
         $form = $this->getElement('form');
-        $this->getDocument()->waitFor(5, function () use ($form) {
+        $this->getDocument()->waitFor($timeout, function () use ($form) {
             return false === strpos($form->getAttribute('class'), 'loading');
         });
     }

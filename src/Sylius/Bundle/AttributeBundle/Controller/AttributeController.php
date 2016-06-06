@@ -48,7 +48,7 @@ class AttributeController extends ResourceController
      */
     public function renderAttributesAction(Request $request)
     {
-        $template = ($request->attributes->has('template')) ? $request->attributes->get('template') : 'SyliusAttributeBundle::attributeChoice.html.twig';
+        $template = $request->attributes->get('template', 'SyliusAttributeBundle::attributeChoice.html.twig');
 
         $form = $this->get('form.factory')->create(
             sprintf('sylius_%s_choice', $this->metadata->getName()),
@@ -69,7 +69,7 @@ class AttributeController extends ResourceController
      */
     public function renderAttributeValueFormsAction(Request $request)
     {
-        $template = ($request->attributes->has('template')) ? $request->attributes->get('template') : 'SyliusAttributeBundle::attributeValueForms.html.twig';
+        $template = $request->attributes->get('template', 'SyliusAttributeBundle::attributeValueForms.html.twig');
 
         $attributeRepository = $this->get($this->metadata->getServiceId('repository'));
         $forms = [];

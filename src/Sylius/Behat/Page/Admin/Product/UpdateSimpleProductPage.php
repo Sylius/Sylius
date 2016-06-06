@@ -65,7 +65,7 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
      */
     public function hasAttribute($attribute)
     {
-        return null !== $this->getDocument()->find('css', '.attribute .label:contains("'.$attribute.'")');
+        return null !== $this->getDocument()->find('css', sprintf('.attribute .label:contains("%s")', $attribute));
     }
 
     /**
