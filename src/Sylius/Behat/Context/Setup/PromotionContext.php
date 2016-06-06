@@ -176,7 +176,7 @@ final class PromotionContext implements Context
     /**
      * @Given /^([^"]+) gives ("[^"]+%") discount on shipping to every order$/
      */
-    public function itGivesPercentageDiscountOnShippingToEveryOrder(PromotionInterface $promotion, $discount)
+    public function itGivesPercentageDiscountOnShippingToEveryOrder($promotion, $discount)
     {
         $action = $this->actionFactory->createPercentageShippingDiscount($discount);
         $promotion->addAction($action);
