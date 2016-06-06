@@ -142,6 +142,13 @@ interface ShowPageInterface extends SymfonyPageInterface
     public function hasPromotionDiscount($promotionDiscount);
 
     /**
+     * @param string $tax
+     *
+     * @return bool
+     */
+    public function hasTax($tax);
+
+    /**
      * @param string $itemName
      *
      * @return string

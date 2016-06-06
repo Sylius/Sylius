@@ -62,7 +62,7 @@ class AdjustmentsByLabelAggregatorSpec extends ObjectBehavior
         $adjustment2->getAmount()->willReturn(3000);
 
         $this
-            ->shouldThrow(new \InvalidArgumentException('Each adjustments array element must implement '.AdjustmentInterface::class.'.'))
+            ->shouldThrow(\InvalidArgumentException::class)
             ->during('aggregate', [[$adjustment1, $adjustment2, 'badObject']])
         ;
     }

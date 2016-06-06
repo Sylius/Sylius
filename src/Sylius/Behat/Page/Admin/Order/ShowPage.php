@@ -224,6 +224,16 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function hasTax($tax)
+    {
+        $taxesText = $this->getElement('taxes')->getText();
+
+        return stripos($taxesText, $tax) !== false;
+    }
+
+    /**
      * @param string $itemName
      *
      * @return string
@@ -340,6 +350,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'shipping_total' => '#shipping-total',
             'table' => '.table',
             'tax_total' => '#tax-total',
+            'taxes' => '#taxes',
             'total' => '#total',
             'order_state' => 'div.sub.header > span.ui.label',
         ]);
