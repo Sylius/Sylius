@@ -25,15 +25,13 @@ final class VariantsParityChecker implements VariantsParityCheckerInterface
      */
     public function checkParity(VariantInterface $variant, VariableInterface $variable)
     {
-        Assert::same(
-            count($variant->getOptions()),
-            count($variable->getOptions()),
-            'Number of set option values should be equal to number of available options.'
-        );
-
         foreach ($variable->getVariants() as $existingVariant) {
             // This check is require, because this function has to look for any other different variant with same option values set
             if ($variant === $existingVariant) {
+                continue;
+            }
+
+            if (count($variant->getOptions()) !== count($variable->getOptions())) {
                 continue;
             }
 
