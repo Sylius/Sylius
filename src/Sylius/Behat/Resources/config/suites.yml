@@ -49,6 +49,7 @@ imports:
     - suites/ui/channel/managing_channels.yml
     - suites/ui/channel/products_accessibility_in_multiple_channels.yml
     - suites/ui/channel/theming.yml
+    - suites/ui/checkout/addressing.yml
     - suites/ui/checkout/paying_for_order.yml
     - suites/ui/currency/managing_currencies.yml
     - suites/ui/locale/managing_locales.yml

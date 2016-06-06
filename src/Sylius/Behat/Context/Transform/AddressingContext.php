@@ -54,6 +54,14 @@ final class AddressingContext implements Context
     }
 
     /**
+     * @Transform address
+     */
+    public function createDefaultAddress()
+    {
+        return $this->createAddress();
+    }
+
+    /**
      * @Transform /^"([^"]+)" addressed it to "([^"]+)", "([^"]+)" "([^"]+)" in the "([^"]+)"$/
      * @Transform /^of "([^"]+)" in the "([^"]+)", "([^"]+)" "([^"]+)", "([^"]+)"$/
      */
