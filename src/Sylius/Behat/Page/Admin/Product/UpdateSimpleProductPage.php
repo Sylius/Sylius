@@ -63,10 +63,18 @@ class UpdateSimpleProductPage extends BaseUpdatePage implements UpdateSimpleProd
     /**
      * {@inheritdoc}
      */
+    public function hasAttribute($attribute)
+    {
+        return null !== $this->getDocument()->find('css', '.attribute .label:contains("'.$attribute.'")');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'attribute' => '.attribute:contains("%attribute%") input',
+            'attribute' => '.attribute .label:contains("%attribute%") ~ input',
             'code' => '#sylius_product_code',
             'price' => '#sylius_product_variant_price',
             'name' => '#sylius_product_translations_en_US_name',

@@ -372,6 +372,14 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @Given I remove its :attribute attribute
+     */
+    public function iRemoveItsAttribute($attribute)
+    {
+        $this->createSimpleProductPage->removeAttribute($attribute);
+    }
+
+    /**
      * @Given /^attribute "([^"]+)" of (product "[^"]+") should be "([^"]+)"$/
      */
     public function itsAttributeShouldBe($attribute, ProductInterface $product, $value)
@@ -382,6 +390,19 @@ final class ManagingProductsContext implements Context
             $value,
             $this->updateSimpleProductPage->getAttributeValue($attribute),
             sprintf('Attribute "%s" should have value "%s" but it does not.', $attribute, $value)
+        );
+    }
+
+    /**
+     * @Given /^(product "[^"]+") should not have a "([^"]+)" attribute$/
+     */
+    public function productShouldNotHaveAttribute(ProductInterface $product, $attribute)
+    {
+        $this->updateSimpleProductPage->open(['id' => $product->getId()]);
+
+        Assert::false(
+            $this->updateSimpleProductPage->hasAttribute($attribute),
+            sprintf('Product "%s" should not have attribute "%s" but it does.', $product->getName(), $attribute)
         );
     }
 

@@ -46,18 +46,25 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
      */
     public function addAttribute($attribute, $value)
     {
-        $attributesTab = $this->getElement('tab', ['%name%' => 'attributes']);
-        if (!$attributesTab->hasClass('active')) {
-            $attributesTab->click();
-        }
+        $this->clickAttributesTabIfItsNotActive();
 
         $attributeOption = $this->getElement('attributes-choice')->find('css', 'option:contains("' . $attribute . '")');
         $this->selectElementFromAttributesDropdown($attributeOption->getAttribute('value'));
 
         $this->getDocument()->pressButton('Add attributes');
-        $this->waitWhileFormIsLoading();
+        $this->waitForFormElement();
 
         $this->getElement('attribute-value', ['%attribute%' => $attribute])->setValue($value);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeAttribute($attribute)
+    {
+        $this->clickAttributesTabIfItsNotActive();
+
+        $this->getElement('attribute-delete-button', ['%attribute%' => $attribute])->press();
     }
 
     /**
@@ -74,7 +81,8 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'attribute-value' => '.attribute:contains("%attribute%") input',
+            'attribute-value' => '.attribute .label:contains("%attribute%") ~ input',
+            'attribute-delete-button' => '.attribute .label:contains("%attribute%") ~ button',
             'attributes-choice' => 'select[name="sylius_product_attribute_choice"]',
             'code' => '#sylius_product_code',
             'form' => 'form[name="sylius_product"]',
@@ -97,11 +105,19 @@ class CreateSimpleProductPage extends BaseCreatePage implements CreateSimpleProd
         $driver->executeScript('$(\'[name="sylius_product_attribute_choice"]\').dropdown(\'set selected\', ' . $id . ');');
     }
 
-    private function waitWhileFormIsLoading()
+    private function waitForFormElement($timeout = 5)
     {
         $form = $this->getElement('form');
         $this->getDocument()->waitFor(5, function () use ($form) {
             return false === strpos($form->getAttribute('class'), 'loading');
         });
+    }
+
+    private function clickAttributesTabIfItsNotActive()
+    {
+        $attributesTab = $this->getElement('tab', ['%name%' => 'attributes']);
+        if (!$attributesTab->hasClass('active')) {
+            $attributesTab->click();
+        }
     }
 }

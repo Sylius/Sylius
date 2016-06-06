@@ -70,11 +70,16 @@ final class ProductAttributeContext implements Context
     /**
      * @param string $type
      * @param string $name
-     * @param string $code
+     * @param string|null $code
      */
-    private function createProductAttribute($type, $name, $code = 'PA112')
+    private function createProductAttribute($type, $name, $code = null)
     {
         $productAttribute = $this->productAttributeFactory->createTyped($type);
+
+        if (null === $code) {
+            $code = str_replace(' ', '_', strtoupper($name));
+        }
+
         $productAttribute->setCode($code);
         $productAttribute->setName($name);
 
