@@ -144,7 +144,6 @@ final class CheckoutContext implements Context
     public function iProceedWithTheCheckoutAddressingStep()
     {
         $this->addressingPage->open();
-        $this->addressingPage->open();
     }
 
     /**

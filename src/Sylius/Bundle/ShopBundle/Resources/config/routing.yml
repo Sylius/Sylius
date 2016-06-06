@@ -19,3 +19,7 @@ sylius_shop_cart:
 
 sylius_shop_security:
     resource: "@SyliusShopBundle/Resources/config/routing/security.yml"
+
+sylius_shop_checkout:
+    prefix: /checkout
+    resource: "@SyliusShopBundle/Resources/config/routing/checkout.yml"

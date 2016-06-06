@@ -1,0 +1,14 @@
+<div class="ui basic segment">
+    <div class="ui large text menu">
+        <div class="ui small image">
+            <img src="{{ asset('assets/shop/img/logo.png') }}" />
+        </div>
+        <div class="right menu">
+            {% if order.customer is not empty %}
+                <div class="item">{{ 'sylius.ui.checking_out_as'|trans }} {{ order.customer.fullName|default(order.customer.email) }}.</div>
+            {% else %}
+                <a href="{{ path('sylius_shop_login') }}" class="item">{{ 'sylius.ui.sign_in'|trans }}</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
