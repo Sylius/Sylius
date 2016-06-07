@@ -182,7 +182,7 @@ Shipping Method Translation
 ---------------------------
 
 **ShippingMethodTranslation** allows shipping method's name translation according to given locales. To see how to use translation
-please go to :ref:`component_translation_basic-translations`.
+please go to :ref:`component_resource_translations_usage`.
 
 Rule
 ----

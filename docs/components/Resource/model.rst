@@ -83,3 +83,35 @@ and will ask you to implement the following methods to your model:
 +------------------------------------+------------------------------------------+-------------------+
 | setSlug(string $slug = null)       | Set slug                                 | void              |
 +------------------------------------+------------------------------------------+-------------------+
+
+.. _component_resource_model_translatable-interface:
+
+TranslatableInterface
+---------------------
+
+This interface should be implemented by a model used in more than one language.
+
+.. hint::
+   Although you can implement this interface in your class, it's easier to just
+   use the :ref:`component_resource_translations_translatable-trait` class.
+
+.. note::
+   For more detailed information go to `Sylius API TranslatableInterface`_.
+
+.. _Sylius API TranslatableInterface: http://api.sylius.org/Sylius/Component/Resource/Model/TranslatableInterface.html
+
+.. _component_resource_model_translation-interface:
+
+TranslationInterface
+--------------------
+
+This interface should be implemented by a model responsible for keeping a single translation.
+
+.. hint::
+   And as above, although you are completely free to create your own class implementing this interface,
+   it's already implemented in the :ref:`component_resource_translations_abstract-translation` class.
+
+.. note::
+   For more detailed information go to `Sylius API TranslationInterface`_.
+
+.. _Sylius API TranslationInterface: http://api.sylius.org/Sylius/Component/Resource/Model/TranslationInterface.html

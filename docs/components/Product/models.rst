@@ -40,7 +40,7 @@ By default it contains the following properties:
 +-----------------+-----------------------------------------------------------------------------+
 
 .. note::
-   This model extends the :ref:`component_translation_model_abstract-translatable`
+   This model uses the :ref:`component_resource_translations_translatable-trait`
    and implements the :ref:`component_product_model_product-interface`.
 
    For more detailed information go to `Sylius API Product`_.
@@ -63,7 +63,7 @@ By default it has the following properties:
 +-----------------+--------------------------------------+
 
 .. note::
-   This model extends the :ref:`component_translation_model_abstract-translation`
+   This model extends the :ref:`component_resource_translations_abstract-translation` class
    and implements the :ref:`component_product_model_product-translation-interface`.
 
    For more detailed information go to `Sylius API ProductTranslation`_.
