@@ -47,17 +47,10 @@
                         {{ form_row(form.quantity, {'empty_value': '1'}) }}
                         {{ form_widget(form._token) }}
                         <div class="ui hidden divider"></div>
-                        {% if sylius_is_restricted(product) %}
-                            <button disabled="disabled" class="ui labeled icon button">
-                                <i class="icon cart"></i>
-                                {{ 'sylius.ui.not_available_in_your_country'|trans }}
-                            </button>
-                        {% else %}
-                            <button type="submit" class="ui labeled icon button">
-                                <i class="icon cart"></i>
-                                {{ 'sylius.ui.add_to_cart'|trans }}
-                            </button>
-                        {% endif %}
+                        <button type="submit" class="ui labeled icon button">
+                            <i class="icon cart"></i>
+                            {{ 'sylius.ui.add_to_cart'|trans }}
+                        </button>
                     {% endif %}
                 </form>
             </div>

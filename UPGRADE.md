@@ -8,6 +8,7 @@ UPGRADE
 * Introduced new adjustments type ``ORDER_UNIT_PROMOTION``
 * Changed current *item* promotion actions to *unit* promotion actions (as they're applied on ``OrderItemUnit`` level)
 * Introduced ``getDiscountedUnitPrice`` method on ``OrderItem``, which returns single *unit* price lowered by ``ORDER_UNIT_PROMOTION`` adjustments
+* Removed the concept of restricted zone per product
 
 ### Variation and VariationBundle
 

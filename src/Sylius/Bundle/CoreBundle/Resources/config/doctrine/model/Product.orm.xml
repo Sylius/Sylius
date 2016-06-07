@@ -31,10 +31,6 @@
             <gedmo:versioned />
         </many-to-one>
 
-        <many-to-one field="restrictedZone" target-entity="Sylius\Component\Addressing\Model\ZoneInterface">
-            <join-column name="restricted_zone" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
-        </many-to-one>
-
         <many-to-many field="taxons" inversed-by="products" target-entity="Sylius\Component\Taxonomy\Model\TaxonInterface">
             <join-table name="sylius_product_taxon">
                 <join-columns>

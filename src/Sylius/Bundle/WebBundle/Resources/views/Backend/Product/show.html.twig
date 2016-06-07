@@ -132,14 +132,6 @@
                     <td>{{ 'sylius.ui.shipping_category'|trans }}</td>
                     <td>{{ product.shippingCategory|default('sylius.ui.no_shipping_category'|trans) }}</td>
                 </tr>
-                {% if product.restrictedZone %}
-                    <tr>
-                        <td>{{ 'sylius.ui.restricted_zone'|trans }}</td>
-                        <td>
-                            <a href="{{ path('sylius_backend_zone_show', {'id': product.restrictedZone.id}) }}">{{ product.restrictedZone.name }}</a>
-                        </td>
-                    </tr>
-                {% endif %}
                 <tr>
                     <td></td>
                     <td><span class="label label-{{ product.enabled ? 'success' : 'important'}}">{{ product.enabled ? 'Enabled' : 'Disabled' }}</span></td>

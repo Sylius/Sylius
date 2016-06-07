@@ -83,11 +83,6 @@ class LegacyProductTypeSpec extends ObjectBehavior
             ->willReturn($builder)
         ;
         $builder
-            ->add('restrictedZone', 'sylius_zone_choice', Argument::cetera())
-            ->shouldBeCalled()
-            ->willReturn($builder)
-        ;
-        $builder
             ->add('mainTaxon', 'sylius_taxon_choice', Argument::cetera())
             ->shouldBeCalled()
             ->willReturn($builder)
