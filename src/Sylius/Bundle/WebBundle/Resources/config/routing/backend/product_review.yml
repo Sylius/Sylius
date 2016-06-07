@@ -6,23 +6,13 @@ sylius_backend_product_review_index:
         _sylius:
             template: SyliusWebBundle:Backend/Review:index.html.twig
 
-sylius_backend_product_review_create:
-    pattern: /new
-    methods: [GET, POST]
-    defaults:
-        _controller: sylius.controller.product_review:createAction
-        _sylius:
-            template: SyliusWebBundle:Backend/Review:create.html.twig
-            redirect: sylius_backend_product_review_show
-            form: sylius_product_review_admin
-
 sylius_backend_product_review_update:
     pattern: /{id}/edit
     methods: [GET, PUT, POST]
     defaults:
         _controller: sylius.controller.product_review:updateAction
         _sylius:
-            form: sylius_product_review_admin
+            form: sylius_product_review
             template: SyliusWebBundle:Backend/Review:update.html.twig
             redirect: sylius_backend_product_review_show
 
