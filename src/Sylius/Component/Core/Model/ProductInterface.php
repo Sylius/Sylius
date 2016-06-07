@@ -29,7 +29,8 @@ interface ProductInterface extends
     TaxonsAwareInterface,
     ChannelsAwareInterface,
     MetadataSubjectInterface,
-    ReviewableInterface
+    ReviewableInterface,
+    RestrictedZoneInterface
 {
     /*
      * Variant selection methods.
