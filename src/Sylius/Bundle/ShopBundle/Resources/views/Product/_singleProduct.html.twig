@@ -1,0 +1,13 @@
+{% from 'SyliusShopBundle:Product:macros.html.twig' import sylius_display_price %}
+
+<div class="content">
+    <div class="header">{{ product.name|truncate(18) }}</div>
+</div>
+<div class="extra content">
+    <span class="right floated">
+        <button class="ui primary button">Add to cart</button>
+    </span>
+    <span>
+        {{ sylius_display_price(product.firstVariant) }}
+    </span>
+</div>

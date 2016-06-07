@@ -18,6 +18,7 @@ use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Test\Services\DefaultChannelFactoryInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
+use Sylius\Component\Currency\Model\CurrencyInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -126,6 +127,26 @@ final class ChannelContext implements Context
         $this->changeChannelState($channel, false);
     }
 
+    /**
+     * @Given /^(this channel) has (currency "([^"]+)")$/
+     */
+    public function thisChannelHasCurrency(ChannelInterface $channel, CurrencyInterface $currency)
+    {
+        $channel->addCurrency($currency);
+        $this->channelManager->flush();
+        $this->sharedStorage->set('channel', $channel);
+    }
+
+    /**
+     * @Given /^(this channel) host is "([^"]+)"$/
+     */
+    public function thisChannelHostIs(ChannelInterface $channel, $hostName)
+    {
+        $channel->setHostname($hostName);
+        $this->channelManager->flush();
+        $this->sharedStorage->set('channel', $channel);
+    }
+    
     /**
      * @param ChannelInterface $channel
      * @param bool $state

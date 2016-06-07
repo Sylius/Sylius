@@ -207,6 +207,23 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
     /**
      * {@inheritdoc}
      */
+    public function findByTaxonCodeAndChannel($code, ChannelInterface $channel)
+    {
+        return $this->createQueryBuilder('o')
+            ->innerJoin('o.taxons', 'taxon')
+            ->andWhere('taxon.code = :code')
+            ->innerJoin('o.channels', 'channel')
+            ->andWhere('channel = :channel')
+            ->setParameter('code', $code)
+            ->setParameter('channel', $channel)
+            ->getQuery()
+            ->getResult();
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = null)
     {
         if (isset($criteria['channels'])) {

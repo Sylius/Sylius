@@ -16,13 +16,14 @@
         <import resource="shop/account.xml" />
         <import resource="shop/checkout.xml" />
         <import resource="shop/user.xml" />
+        <import resource="shop/product.xml" />
+        <import resource="shop/taxon.xml" />
     </imports>
 
     <parameters>
         <parameter key="sylius.behat.page.shop.cart_summary.class">Sylius\Behat\Page\Shop\Cart\SummaryPage</parameter>
         <parameter key="sylius.behat.page.shop.home.class">Sylius\Behat\Page\Shop\HomePage</parameter>
         <parameter key="sylius.behat.page.shop.legacy_home.class">Sylius\Behat\Page\Shop\LegacyHomePage</parameter>
-        <parameter key="sylius.behat.page.shop.product.show.class">Sylius\Behat\Page\Shop\Product\ShowPage</parameter>
         <parameter key="sylius.behat.page.shop.order.order_payments.class">Sylius\Behat\Page\Shop\Order\OrderPaymentsPage</parameter>
     </parameters>
 
@@ -30,7 +31,6 @@
         <service id="sylius.behat.page.shop.cart_summary" class="%sylius.behat.page.shop.cart_summary.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
         <service id="sylius.behat.page.shop.home" class="%sylius.behat.page.shop.home.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
         <service id="sylius.behat.page.shop.legacy_home" class="%sylius.behat.page.shop.legacy_home.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
-        <service id="sylius.behat.page.shop.product.show" class="%sylius.behat.page.shop.product.show.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
         <service id="sylius.behat.page.shop.order.order_payments" class="%sylius.behat.page.shop.order.order_payments.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false">
             <argument type="service" id="sylius.behat.table_accessor" />
         </service>

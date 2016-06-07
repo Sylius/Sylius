@@ -12,8 +12,13 @@
 namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Page\Shop\Product\IndexPageInterface;
 use Sylius\Behat\Page\Shop\Product\ShowPageInterface;
+use Sylius\Behat\Page\SymfonyPageInterface;
+use Sylius\Behat\Service\Setter\ChannelContextSetterInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -29,11 +34,36 @@ final class ProductContext implements Context
     private $showPage;
 
     /**
-     * @param ShowPageInterface $showPage
+     * @var IndexPageInterface
      */
-    public function __construct(ShowPageInterface $showPage)
-    {
+    private $indexPage;
+
+    /**
+     * @var ChannelContextSetterInterface
+     */
+    private $channelContextSetter;
+
+    /**
+     * @var SymfonyPageInterface
+     */
+    private $taxonShowPage;
+
+    /**
+     * @param ShowPageInterface $showPage
+     * @param IndexPageInterface $indexPage
+     * @param SymfonyPageInterface $taxonShowPage
+     * @param ChannelContextSetterInterface $channelContextSetter
+     */
+    public function __construct(
+        ShowPageInterface $showPage,
+        IndexPageInterface $indexPage,
+        SymfonyPageInterface $taxonShowPage,
+        ChannelContextSetterInterface $channelContextSetter
+    ) {
         $this->showPage = $showPage;
+        $this->indexPage = $indexPage;
+        $this->taxonShowPage = $taxonShowPage;
+        $this->channelContextSetter = $channelContextSetter;
     }
 
     /**
@@ -109,6 +139,55 @@ final class ProductContext implements Context
         Assert::true(
             $this->showPage->isAttributeWithValueOnPage($attributeName, $AttributeValue),
             sprintf('Product should have attribute %s with value %s, but it does not.', $attributeName, $AttributeValue)
+        );
+    }
+
+    /**
+     * @Given /^I want to see products in (channel "([^"]*)")$/
+     */
+    public function iWantToSeeProductsInChannel(ChannelInterface $channel)
+    {
+        $this->channelContextSetter->setChannel($channel);
+    }
+
+    /**
+     * @When /^I check list of products for (taxon "([^"]+)")$/
+     */
+    public function iCheckListOfProductsForTaxon(TaxonInterface $taxon)
+    {
+        $this->taxonShowPage->open(['permalink' => $taxon->getPermalink()]);
+    }
+
+    /**
+     * @Then I should see the product :productName
+     */
+    public function iShouldSeeProduct($productName)
+    {
+        Assert::true(
+            $this->indexPage->isResourceOnPage($productName),
+            sprintf("The product %s should appear on page, but it does not.", $productName)
+        );
+    }
+
+    /**
+     * @Then I should not see the product :productName
+     */
+    public function iShouldNotSeeProduct($productName)
+    {
+        Assert::false(
+            $this->indexPage->isResourceOnPage($productName),
+            sprintf("The product %s should not appear on page, but it does.", $productName)
+        );
+    }
+
+    /**
+     * @Then I should see information about empty list of products
+     */
+    public function iShouldSeeInformationAboutEmptyListOfProducts()
+    {
+        Assert::true(
+            $this->indexPage->isEmpty(),
+            'There should appear information about empty list of products, but it does not.'
         );
     }
 }

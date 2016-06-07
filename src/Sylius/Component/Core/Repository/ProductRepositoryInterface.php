@@ -79,4 +79,12 @@ interface ProductRepositoryInterface extends BaseProductRepositoryInterface
      * @return ProductInterface|null
      */
     public function findOneByIdAndChannel($id, ChannelInterface $channel = null);
+
+    /**
+     * @param string $code
+     * @param ChannelInterface $channel
+     * 
+     * @return ProductInterface[]|null
+     */
+    public function findByTaxonCodeAndChannel($code, ChannelInterface $channel);
 }

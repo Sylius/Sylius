@@ -23,3 +23,10 @@ sylius_shop_security:
 sylius_shop_checkout:
     prefix: /checkout
     resource: "@SyliusShopBundle/Resources/config/routing/checkout.yml"
+
+sylius_shop_taxon:
+    resource: "@SyliusShopBundle/Resources/config/routing/taxon.yml"
+
+sylius_shop_partial_product:
+    resource: "@SyliusShopBundle/Resources/config/routing/partial/product.yml"
+    prefix: partial

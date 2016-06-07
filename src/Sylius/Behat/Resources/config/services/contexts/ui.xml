@@ -293,6 +293,9 @@
 
         <service id="sylius.behat.context.ui.shop.product" class="%sylius.behat.context.ui.shop.product.class%" scope="scenario">
             <argument type="service" id="sylius.behat.page.shop.product.show" />
+            <argument type="service" id="sylius.behat.page.shop.product.index" />
+            <argument type="service" id="sylius.behat.page.shop.taxon.show" />
+            <argument type="service" id="sylius.behat.channel_context_setter" />
             <tag name="sylius.behat.context" />
         </service>
 
