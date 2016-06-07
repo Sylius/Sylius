@@ -10,4 +10,6 @@ Domain management abstraction for PHP. It provides interface for most common ope
    model
    factory
    repository
+   service
+   translation
    summary

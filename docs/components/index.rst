@@ -40,7 +40,6 @@ We recommend checking out :doc:`/components/general/index`, which will get you s
     Storage/index
     Taxation/index
     Taxonomy/index
-    Translation/index
     User/index
     Variation/index
 

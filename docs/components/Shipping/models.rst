@@ -136,8 +136,8 @@ It has the following properties:
 +---------------------+-------------------------------------------------------------------------+
 
 .. note::
-    This model implements the :ref:`component_shipping_model_shipping-method-interface` and extends
-    :ref:`component_translation_model_abstract-translatable` class.
+    This model implements the :ref:`component_shipping_model_shipping-method-interface` and uses the
+    :ref:`component_resource_translations_translatable-trait`.
 
     For more detailed information go to `Sylius API ShippingMethod`_.
 
@@ -163,7 +163,7 @@ It has the following properties:
 
 .. note::
     This model implements the :ref:`component_shipping_model_shipping-method-translation-interface` and extends
-    :ref:`component_translation_model_abstract-translation` class.
+    :ref:`component_resource_translations_abstract-translation` class.
 
     Form more information go to `Sylius API ShippingMethodTranslation`_.
 

@@ -1,7 +1,7 @@
-Basic Usage
-===========
+Translations
+============
 
-.. _book-translation:
+.. _component_resource_translations_abstract-translation:
 
 Implementing AbstractTranslation
 --------------------------------
@@ -14,7 +14,7 @@ First let's create a class which will keep our translatable properties:
 
    namespace Example\Model;
 
-   use Sylius\Component\Translation\Model\AbstractTranslation;
+   use Sylius\Component\Resource\Model\AbstractTranslation;
 
    class BookTranslation extends AbstractTranslation
    {
@@ -40,10 +40,10 @@ First let's create a class which will keep our translatable properties:
        }
    }
 
-.. _book:
+.. _component_resource_translations_translatable-trait:
 
-Implementing AbstractTranslatable
----------------------------------
+Using TranslatableTrait
+-----------------------
 
 Now the following class will be actually capable of translating the **title**:
 
@@ -53,10 +53,13 @@ Now the following class will be actually capable of translating the **title**:
 
    namespace Example\Model;
 
-   use Sylius\Component\Translation\Model\AbstractTranslatable;
+   use Sylius\Component\Resource\Model\TranslatableInterface;
+   use Sylius\Component\Resource\Model\TranslatableTrait;
 
-   class Book extends AbstractTranslatable
+   class Book implements TranslatableInterface
    {
+       use TranslatableTrait;
+
        /**
         * @return string
         */
@@ -78,12 +81,12 @@ Now the following class will be actually capable of translating the **title**:
    As you could notice, inside both methods we use the ``translate`` method.
    More specified explanation on what it does is described further on.
 
-.. _component_translation_basic-translations:
+.. _component_resource_translations_usage:
 
 Using Translations
 ------------------
 
-Once we have both abstract classes implemented we can start translating.
+Once we have both classes implemented we can start translating.
 So first we need to create a few instances of our translation class:
 
 .. code-block:: php
@@ -153,7 +156,7 @@ You can always use the ``translate`` method by itself, but the same principal is
 
 .. _\\RuntimeException: https://secure.php.net/manual/pl/class.runtimeexception.php
 
-.. _component_translation_provider_locale-provider:
+.. _component_resource_provider_locale-provider:
 
 LocaleProvider
 --------------
@@ -161,15 +164,15 @@ LocaleProvider
 This service provides you with an easy way of managing locales.
 The first parameter set in it's constructor is the current locale and the second, fallback.
 
-In this example let's use the provider with our :ref:`Book <book>`
-class which extends the :ref:`component_translation_model_abstract-translatable`:
+In this example let's use the provider with our `Book`
+class which uses the :ref:`component_resource_translations_translatable-trait`:
 
 .. code-block:: php
 
    <?php
 
    use Example\Model\Book;
-   use Sylius\Component\Translation\Provider\LocaleProvider;
+   use Sylius\Component\Resource\Provider\LocaleProvider;
 
    $provider = new LocaleProvider('de', 'en');
 
@@ -181,15 +184,15 @@ class which extends the :ref:`component_translation_model_abstract-translatable`
    $book->getCurrentLocale(); // returns 'de'
    $book->getFallbackLocale(); // returns 'en'
 
-... and with an :ref:`component_translation_model_abstract-translation`
-class such as the exemplary :ref:`BookTranslation <book-translation>` it goes:
+... and with an :ref:`component_resource_translations_abstract-translation`
+class such as the exemplary `BookTranslation` it goes:
 
 .. code-block:: php
 
    <?php
 
    use Example\Model\BookTranslation;
-   use Sylius\Component\Translation\Provider\LocaleProvider;
+   use Sylius\Component\Resource\Provider\LocaleProvider;
 
    $provider = new LocaleProvider('de', 'en');
 
@@ -200,4 +203,4 @@ class such as the exemplary :ref:`BookTranslation <book-translation>` it goes:
    $translation->getLocale(); // returns 'de'
 
 .. note::
-   This service implements the :ref:`component_translation_provider_locale-provider-interface`.
+   This service implements the :ref:`component_resource_provider_locale-provider-interface`.

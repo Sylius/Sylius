@@ -31,7 +31,7 @@ Every attribute is represented by the **Attribute** model which by default has t
 +---------------+-----------------------------------------------------------+
 
 .. note::
-   This model extends the :ref:`component_translation_model_abstract-translatable` class
+   This model uses the :ref:`component_resource_translations_translatable-trait`
    and implements the :ref:`component_attribute_model_attribute-interface`.
 
    For more detailed information go to `Sylius API Attribute`_.
@@ -101,7 +101,7 @@ model which has the following properties:
 +-----------+----------------------------------------+
 
 .. note::
-   This model extends the :ref:`component_translation_model_abstract-translation` class
+   This model extends the :ref:`component_resource_translations_abstract-translation` class
    and implements the :ref:`component_attribute_model_attribute-translation-interface`.
 
    For more detailed information go to `Sylius API AttributeTranslation`_.
