@@ -7,45 +7,23 @@
     <div class="ui stackable grid" id="shipping_methods">
         <div class="eleven wide column">
             <div class="ui padded segment">
-                <div class="ui fluid divided stackable items">
-                    <div class="item">
-                        <div class="field">
-                            <div class="ui radio checkbox">
-                                <input type="radio" name="fruit" checked="" tabindex="0" class="hidden">
-                            </div>
-                        </div>
-                        <div class="content">
-                            <a class="header">Free Shipping</a>
-                            <div class="description">
-                                <p>Free shipping for everywhere in the US.</p>
-                            </div>
-                        </div>
-                        <div class="extra">
-                            <div class="ui right floated label">
-                                $0.00
-                            </div>
-                        </div>
-                    </div>
-                    <div class="item">
-                        <div class="field">
-                            <div class="ui radio checkbox">
-                                <input type="radio" name="fruit" tabindex="0" class="hidden">
-                            </div>
-                        </div>
-                        <div class="content">
-                            <a class="header">DHL Express</a>
-                            <div class="description">
-                                <p>Fast and cheap shipping for everywhere in the world.</p>
-                            </div>
-                        </div>
-                        <div class="extra">
-                            <div class="ui right floated label">
-                                $40.00
-                            </div>
-                        </div>
-                    </div>
+                {{ form_start(form, {'action': path('sylius_shop_checkout_shipping'), 'attr': {'class': 'ui form', 'novalidate': 'novalidate'}}) }}
+                <input type="hidden" name="_method" value="PUT" />
+
+                <div id="sylius-shipping-address">
+                    {% for shipment in order.shipments %}
+
+                        {% set shipmentForm = form.shipments[loop.index0] %}
+
+                        {{ dump(shipmentForm.method) }}
+
+                    {% endfor %}
                 </div>
-                <button type="submit" class="ui large primary icon labeled button"><i class="arrow right icon"></i> Next</button>
+
+                <div class="ui hidden divider"></div>
+                <button type="submit" class="ui large primary icon labeled button"><i class="arrow right icon"></i> {{ 'sylius.ui.next'|trans }}</button>
+                {{ form_row(form._token) }}
+                {{ form_end(form, {'render_rest': false}) }}
             </div>
         </div>
         <div class="five wide column">

@@ -31,7 +31,7 @@ sylius_shop_checkout_shipping:
         _controller: sylius.controller.order:updateAction
         _sylius:
             template: SyliusShopBundle:Checkout:shipping.html.twig
-#            form: sylius_shop_checkout_addressing
+            form: sylius_shop_checkout_shipping
             repository:
                 method: find
                 arguments: [expr:service('sylius.cart_provider').getCart()]
