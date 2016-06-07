@@ -576,7 +576,8 @@
         </service>
 
         <service id="sylius.data_collector" class="%sylius.data_collector.class%" public="false">
-            <tag name="data_collector" template="SyliusCoreBundle:Collector:sylius" id="sylius" priority="255" />
+            <argument type="service" id="sylius.context.shopper" />
+            <tag name="data_collector" template="SyliusCoreBundle:Collector:sylius" id="sylius_core" priority="255" />
         </service>
 
         <service id="sylius.dynamic_router" class="%sylius.dynamic_router.class%">
