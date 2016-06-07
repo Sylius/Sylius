@@ -1,0 +1,84 @@
+{% extends '@SyliusShop/Layout/checkout.html.twig' %}
+
+{% form_theme form 'SyliusUiBundle:Form:theme.html.twig' %}
+
+{% block content %}
+    <div class="ui four steps">
+        <a class="completed step" href="#">
+            <i class="plane icon"></i>
+            <div class="content">
+                <div class="title">Addressing</div>
+                <div class="description">Specify your billing and shipping address</div>
+            </div>
+        </a>
+        <div class="active step">
+            <i class="truck icon"></i>
+            <div class="content">
+                <div class="title">Shipping</div>
+                <div class="description">Choose your shipping method</div>
+            </div>
+        </div>
+        <div class="disabled step">
+            <i class="payment icon"></i>
+            <div class="content">
+                <div class="title">Payment</div>
+                <div class="description">Choose your payment method</div>
+            </div>
+        </div>
+        <div class="disabled step">
+            <i class="checkered flag icon"></i>
+            <div class="content">
+                <div class="title">Summary</div>
+                <div class="description">Confirm your order</div>
+            </div>
+        </div>
+    </div>
+    <div class="ui stackable grid">
+        <div class="eleven wide column">
+            <div class="ui padded segment">
+                <div class="ui fluid divided stackable items">
+                    <div class="item">
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="fruit" checked="" tabindex="0" class="hidden">
+                            </div>
+                        </div>
+                        <div class="content">
+                            <a class="header">Free Shipping</a>
+                            <div class="description">
+                                <p>Free shipping for everywhere in the US.</p>
+                            </div>
+                        </div>
+                        <div class="extra">
+                            <div class="ui right floated label">
+                                $0.00
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                <input type="radio" name="fruit" tabindex="0" class="hidden">
+                            </div>
+                        </div>
+                        <div class="content">
+                            <a class="header">DHL Express</a>
+                            <div class="description">
+                                <p>Fast and cheap shipping for everywhere in the world.</p>
+                            </div>
+                        </div>
+                        <div class="extra">
+                            <div class="ui right floated label">
+                                $40.00
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="ui large primary icon labeled button"><i class="arrow right icon"></i> Next</button>
+            </div>
+        </div>
+        <div class="five wide column">
+            {% include '@SyliusShop/Checkout/_summary.html.twig' with { 'order': order } %}
+        </div>
+    </div>
+{% endblock %}
