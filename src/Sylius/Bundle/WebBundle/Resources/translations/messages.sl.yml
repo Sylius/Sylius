@@ -671,7 +671,6 @@ sylius:
         total_orders: Naročila skupaj
         total_qty: Skupna količina
         total_registrations: Skupaj registracij
-        tracking_code: Koda za sledenje
         tracking_number: Številka sledenja
         translations: Prevodi
         type: Vrsta

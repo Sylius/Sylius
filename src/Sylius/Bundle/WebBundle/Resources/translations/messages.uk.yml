@@ -393,7 +393,6 @@ sylius:
         total_orders: Всього замовлень
         total_qty: Загальна кількість
         total_registrations: Всього реєстрацій
-        tracking_code: Трекінг-код
         tracking_number: Трекінг-номер
         translations: Переклади
         type: Тип

@@ -706,7 +706,6 @@ sylius:
         total_orders: ใบสั่งซื้อทั้งหมด
         total_qty: ปริมาณรวม
         total_registrations: การลงทะเบียนทั้งหมด
-        tracking_code: รหัสการติดตาม
         tracking_number: หมายเลขการติดตาม
         translations: การแปลภาษา
         type: ชนิด

@@ -706,7 +706,6 @@ sylius:
         total_orders: Porositë totale
         total_qty: Sasia totale
         total_registrations: Regjistrimet totale
-        tracking_code: Kodi i gjurmimit
         tracking_number: Numri i gjurmimit
         translations: Përkthime
         type: Lloji

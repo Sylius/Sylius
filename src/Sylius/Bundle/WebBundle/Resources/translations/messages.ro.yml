@@ -378,7 +378,6 @@ sylius:
         total_orders: Număr comenzi
         total_qty: Cantitate totală
         total_registrations: Total înregistrări
-        tracking_code: Număr de urmărire
         tracking_number: Număr de urmărire
         type: Tip
         unavailable: Indisponibil

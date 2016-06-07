@@ -530,7 +530,6 @@ sylius:
         total_orders: Celkem objednávek
         total_qty: Celkové množství
         total_registrations: Celkem registrací
-        tracking_code: Sledovací kód
         tracking_number: Číslo zásilky
         translations: Překlady
         type: Typ

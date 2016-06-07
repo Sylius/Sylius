@@ -522,7 +522,6 @@ sylius:
         total_orders: Viso užsakymų
         total_qty: Bendras kiekis
         total_registrations: Viso registracijų
-        tracking_code: Sekimo kodas
         tracking_number: Sekimo numeris
         type: Tipas
         unavailable: Nepasiekiamas
