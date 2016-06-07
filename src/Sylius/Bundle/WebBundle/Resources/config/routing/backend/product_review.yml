@@ -12,7 +12,7 @@ sylius_backend_product_review_update:
     defaults:
         _controller: sylius.controller.product_review:updateAction
         _sylius:
-            form: sylius_product_review_admin
+            form: sylius_product_review
             template: SyliusWebBundle:Backend/Review:update.html.twig
             redirect: sylius_backend_product_review_show
 

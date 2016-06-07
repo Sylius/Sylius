@@ -81,7 +81,6 @@ class Configuration implements ConfigurationInterface
                                             ->addDefaultsIfNotSet()
                                             ->children()
                                                 ->scalarNode('default')->defaultValue(ReviewType::class)->cannotBeEmpty()->end()
-                                                ->scalarNode('admin')->isRequired()->end()
                                             ->end()
                                         ->end()
                                     ->end()
