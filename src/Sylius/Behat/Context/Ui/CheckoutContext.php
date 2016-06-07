@@ -13,6 +13,7 @@ namespace Sylius\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Shop\Checkout\AddressingPageInterface;
+use Sylius\Behat\Page\Shop\Checkout\ShippingPageInterface;
 use Sylius\Behat\Page\Shop\Order\OrderPaymentsPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\AddressingStepInterface;
 use Sylius\Behat\Page\Shop\Checkout\FinalizeStepInterface;
@@ -80,6 +81,11 @@ final class CheckoutContext implements Context
     private $orderPaymentsPage;
 
     /**
+     * @var ShippingPageInterface
+     */
+    private $shippingPage;
+
+    /**
      * @var OrderRepositoryInterface
      */
     private $orderRepository;
@@ -90,6 +96,7 @@ final class CheckoutContext implements Context
      * @param AddressingStepInterface $checkoutAddressingStep
      * @param AddressingPageInterface $addressingPage
      * @param ShippingStepInterface $checkoutShippingStep
+     * @param ShippingPageInterface $shippingPage
      * @param PaymentStepInterface $checkoutPaymentStep
      * @param FinalizeStepInterface $checkoutFinalizeStep
      * @param ThankYouPageInterface $checkoutThankYouPage
@@ -102,6 +109,7 @@ final class CheckoutContext implements Context
         AddressingStepInterface $checkoutAddressingStep,
         AddressingPageInterface $addressingPage,
         ShippingStepInterface $checkoutShippingStep,
+        ShippingPageInterface $shippingPage,
         PaymentStepInterface $checkoutPaymentStep,
         FinalizeStepInterface $checkoutFinalizeStep,
         ThankYouPageInterface $checkoutThankYouPage,
@@ -113,6 +121,7 @@ final class CheckoutContext implements Context
         $this->checkoutAddressingStep = $checkoutAddressingStep;
         $this->addressingPage = $addressingPage;
         $this->checkoutShippingStep = $checkoutShippingStep;
+        $this->shippingPage = $shippingPage;
         $this->checkoutPaymentStep = $checkoutPaymentStep;
         $this->checkoutFinalizeStep = $checkoutFinalizeStep;
         $this->checkoutThankYouPage = $checkoutThankYouPage;
@@ -156,6 +165,16 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @When /^I specified the shipping (address)$/
+     */
+    public function iSpecifiedTheShippingAddress(AddressInterface $address)
+    {
+        $this->addressingPage->open();
+        $this->addressingPage->specifyShippingAddress($address);
+        $this->iProceedWithTheNextStep();
+    }
+
+    /**
      * @When I choose the different billing address
      */
     public function iChooseTheDifferentBillingAddress()
@@ -163,13 +182,69 @@ final class CheckoutContext implements Context
         $this->addressingPage->chooseDifferentBillingAddress();
     }
 
+    public function iSpecifyTheBillingSLastNameAs($lastName = null)
+    {
+        $this->addressingPage->specifyBillingAddressLastName($lastName);
+    }
+
     /**
-     * @When I proceed to the next step
-     * @When I try to proceed to the next step
+     * @When I specify the billing's street as :streetName
+     * @When I do not specify the billing's street
      */
-    public function iProceedToTheNextStep()
+    public function iSpecifyTheBillingSStreetAs($streetName = null)
+    {
+        $this->addressingPage->specifyBillingAddressStreet($streetName);
+    }
+
+    /**
+     * @Given I choose :countryName as billing's country
+     */
+    public function iChooseAsBillingSCountry($countryName)
+    {
+        $this->addressingPage->chooseBillingAddressCountry($countryName);
+    }
+
+    /**
+     * @When I specify the billing's city as :cityName
+     * @When I do not specify the billing's city
+     */
+    public function iSpecifyTheBillingSCityAs($cityName = null)
+    {
+        $this->addressingPage->specifyBillingAddressCity($cityName);
+    }
+
+    /**
+     * @When I specify the billing's postcode as :postcode
+     * @When I do not specify the billing's postcode
+     */
+    public function iSpecifyTheBillingSPostcodeAs($postcode = null)
+    {
+        $this->addressingPage->specifyBillingAddressPostcode($postcode);
+    }
+
+    /**
+     * @When I select :shippingMethod shipping method
+     */
+    public function iSelectShippingMethod($shippingMethod)
+    {
+        $this->shippingPage->selectShippingMethod($shippingMethod);
+    }
+
+    /**
+     * @When I proceed with the next step
+     * @When I try to proceed with the next step
+     */
+    public function iProceedWithTheNextStep()
     {
         $this->addressingPage->nextStep();
+    }
+
+    /**
+     * @When I proceed with the payment step
+     */
+    public function iProceedWithThePaymentStep()
+    {
+        $this->shippingPage->nextStep();
     }
 
     /**

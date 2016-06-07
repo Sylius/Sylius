@@ -1,4 +1,4 @@
-@checkout_addressing
+@checkout_shipping
 Feature: Selecting order shipping method
     In order to ship my order properly
     As a Customer
@@ -14,8 +14,7 @@ Feature: Selecting order shipping method
     @ui
     Scenario: Selecting one of available shipping method
         Given I have product "Targaryen T-Shirt" in the cart
-        And I specified the shipping address as "Frost Alley, Ankh Morpork, 90210, France" for "Jon Snow"
-        And I proceed with the checkout shipping step
+        And I specified the shipping address
         When I select "Raven Post" shipping method
-        And I proceed with the next step
+        And I proceed with the payment step
         Then I should be notified that the order has been successfully addressed
