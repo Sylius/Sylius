@@ -11,48 +11,39 @@
 
 namespace Sylius\Component\Cart\Context;
 
-use Sylius\Component\Cart\Model\CartInterface;
-use Sylius\Component\Storage\StorageInterface;
+use Sylius\Component\Registry\PrioritizedServiceRegistryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class CartContext implements CartContextInterface
 {
     /**
-     * Cart storage.
-     *
-     * @var StorageInterface
+     * @var PrioritizedServiceRegistryInterface
      */
-    protected $storage;
+    private $providersRegistry;
 
-    public function __construct(StorageInterface $storage)
+    /**
+     * @param PrioritizedServiceRegistryInterface $providersRegistry
+     */
+    public function __construct(PrioritizedServiceRegistryInterface $providersRegistry)
     {
-        $this->storage = $storage;
+        $this->providersRegistry = $providersRegistry;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getCurrentCartIdentifier()
+    public function getCart()
     {
-        return $this->storage->getData(self::STORAGE_KEY);
-    }
+        foreach ($this->providersRegistry->all() as $cartProvider) {
+            $cart = $cartProvider->getCart();
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setCurrentCartIdentifier(CartInterface $cart)
-    {
-        $this->storage->setData(self::STORAGE_KEY, $cart->getIdentifier());
-    }
+            if (null !== $cart) {
+                return $cart;
+            }
+        }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function resetCurrentCartIdentifier()
-    {
-        $this->storage->removeData(self::STORAGE_KEY);
+        throw new CartNotFoundException();
     }
 }

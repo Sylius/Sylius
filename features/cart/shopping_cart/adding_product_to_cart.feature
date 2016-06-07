@@ -15,3 +15,13 @@ Feature: Adding a simple product to the cart
         And I should be notified that the product has been successfully added
         And there should be one item in my cart
         And this item should have name "T-shirt banana"
+
+    @ui
+    Scenario: Adding a product to the cart as a logged in customer
+        Given I am a logged in customer
+        And the store has a product "Oathkeeper" priced at "€99.99"
+        When I add this product to the cart
+        Then I should be on my cart summary page
+        And I should be notified that the product has been successfully added
+        And there should be one item in my cart
+        And this item should have name "Oathkeeper"

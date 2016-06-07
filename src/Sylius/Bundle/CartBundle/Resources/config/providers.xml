@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.cart_provider.new.class">Sylius\Component\Cart\Provider\NewCartProvider</parameter>
+        <parameter key="sylius.cart_provider.session.class">Sylius\Bundle\CartBundle\Provider\SessionCartProvider</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.cart_provider.new" class="%sylius.cart_provider.new.class%">
+            <argument type="service" id="sylius.factory.cart" />
+            <tag name="sylius.cart_provider" priority="-999" />
+        </service>
+        <service id="sylius.cart_provider.session" class="%sylius.cart_provider.session.class%">
+            <argument type="service" id="session" />
+            <argument>_sylius.cart</argument>
+            <argument type="service" id="sylius.repository.cart" />
+            <tag name="sylius.cart_provider" priority="-888" />
+        </service>
+    </services>
+</container>

@@ -13,7 +13,6 @@ namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Event\PurchaseCompleteEvent;
-use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
@@ -24,7 +23,6 @@ use Symfony\Component\Translation\TranslatorInterface;
 class PurchaseListenerSpec extends ObjectBehavior
 {
     function let(
-        CartProviderInterface $cartProvider,
         UrlGeneratorInterface $router,
         SessionInterface $session,
         FlashBagInterface $flashBag,
@@ -32,7 +30,7 @@ class PurchaseListenerSpec extends ObjectBehavior
         PurchaseCompleteEvent $event,
         PaymentInterface $payment
     ) {
-        $this->beConstructedWith($cartProvider, $router, $session, $translator, 'sylius_checkout_payment');
+        $this->beConstructedWith($router, $session, $translator, 'sylius_checkout_payment');
 
         $session->getBag('flashes')->willReturn($flashBag);
         $event->getSubject()->willReturn($payment);
@@ -45,13 +43,10 @@ class PurchaseListenerSpec extends ObjectBehavior
     }
 
     function it_should_abandon_cart_if_payment_status_success(
-        CartProviderInterface $cartProvider,
         PurchaseCompleteEvent $event,
         PaymentInterface $payment
     ) {
         $payment->getState()->willReturn(PaymentInterface::STATE_COMPLETED);
-
-        $cartProvider->abandonCart()->shouldBeCalled();
 
         $event->setResponse(new RedirectResponse('/payment'))->shouldNotBeCalled();
 
@@ -77,13 +72,10 @@ class PurchaseListenerSpec extends ObjectBehavior
     }
 
     function it_should_abandon_cart_if_payment_status_pending(
-        CartProviderInterface $cartProvider,
         PurchaseCompleteEvent $event,
         PaymentInterface $payment
     ) {
         $payment->getState()->willReturn(PaymentInterface::STATE_PENDING);
-
-        $cartProvider->abandonCart()->shouldBeCalled();
 
         $event->setResponse(new RedirectResponse('/payment'))->shouldNotBeCalled();
 
@@ -109,13 +101,10 @@ class PurchaseListenerSpec extends ObjectBehavior
     }
 
     function it_should_abandon_cart_if_payment_status_processing(
-        CartProviderInterface $cartProvider,
         PurchaseCompleteEvent $event,
         PaymentInterface $payment
     ) {
         $payment->getState()->willReturn(PaymentInterface::STATE_PROCESSING);
-
-        $cartProvider->abandonCart()->shouldBeCalled();
 
         $event->setResponse(new RedirectResponse('/payment'))->shouldNotBeCalled();
 
@@ -141,13 +130,10 @@ class PurchaseListenerSpec extends ObjectBehavior
     }
 
     function it_should_not_abandon_cart_if_payment_status_canceled(
-        CartProviderInterface $cartProvider,
         PurchaseCompleteEvent $event,
         PaymentInterface $payment
     ) {
         $payment->getState()->willReturn(PaymentInterface::STATE_VOID);
-
-        $cartProvider->abandonCart()->shouldNotBeCalled();
 
         $event->setResponse(new RedirectResponse('/payment'))->shouldBeCalled();
 
@@ -173,13 +159,10 @@ class PurchaseListenerSpec extends ObjectBehavior
     }
 
     function it_should_not_abandon_cart_if_payment_status_failed(
-        CartProviderInterface $cartProvider,
         PurchaseCompleteEvent $event,
         PaymentInterface $payment
     ) {
         $payment->getState()->willReturn(PaymentInterface::STATE_FAILED);
-
-        $cartProvider->abandonCart()->shouldNotBeCalled();
 
         $event->setResponse(new RedirectResponse('/payment'))->shouldBeCalled();
 
@@ -205,13 +188,10 @@ class PurchaseListenerSpec extends ObjectBehavior
     }
 
     function it_should_not_abandon_cart_if_payment_status_unknown(
-        CartProviderInterface $cartProvider,
         PurchaseCompleteEvent $event,
         PaymentInterface $payment
     ) {
         $payment->getState()->willReturn(PaymentInterface::STATE_UNKNOWN);
-
-        $cartProvider->abandonCart()->shouldNotBeCalled();
 
         $event->setResponse(new RedirectResponse('/payment'))->shouldBeCalled();
 

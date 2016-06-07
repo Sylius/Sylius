@@ -15,7 +15,7 @@ use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
 use Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelperInterface;
 use Sylius\Bundle\WebBundle\Event\MenuBuilderEvent;
-use Sylius\Component\Cart\Provider\CartProviderInterface;
+use Sylius\Component\Cart\Context\CartContextInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
 use Sylius\Component\Rbac\Authorization\AuthorizationCheckerInterface as RbacAuthorizationCheckerInterface;
@@ -51,9 +51,9 @@ class FrontendMenuBuilder extends MenuBuilder
     /**
      * Cart provider.
      *
-     * @var CartProviderInterface
+     * @var CartContextInterface
      */
-    protected $cartProvider;
+    protected $cartContext;
 
     /**
      * Currency converter helper.
@@ -80,7 +80,7 @@ class FrontendMenuBuilder extends MenuBuilder
      * @param RbacAuthorizationCheckerInterface $rbacAuthorizationChecker
      * @param CurrencyProviderInterface $currencyProvider
      * @param TaxonRepositoryInterface $taxonRepository
-     * @param CartProviderInterface $cartProvider
+     * @param CartContextInterface $cartContext
      * @param CurrencyHelperInterface $currencyHelper
      * @param ChannelContextInterface $channelContext
      * @param TokenStorageInterface $tokenStorage
@@ -93,7 +93,7 @@ class FrontendMenuBuilder extends MenuBuilder
         RbacAuthorizationCheckerInterface $rbacAuthorizationChecker,
         CurrencyProviderInterface $currencyProvider,
         TaxonRepositoryInterface $taxonRepository,
-        CartProviderInterface $cartProvider,
+        CartContextInterface $cartContext,
         CurrencyHelperInterface $currencyHelper,
         ChannelContextInterface $channelContext,
         TokenStorageInterface $tokenStorage
@@ -102,7 +102,7 @@ class FrontendMenuBuilder extends MenuBuilder
 
         $this->currencyProvider = $currencyProvider;
         $this->taxonRepository = $taxonRepository;
-        $this->cartProvider = $cartProvider;
+        $this->cartContext = $cartContext;
         $this->currencyHelper = $currencyHelper;
         $this->channelContext = $channelContext;
         $this->tokenStorage = $tokenStorage;
@@ -122,12 +122,8 @@ class FrontendMenuBuilder extends MenuBuilder
         ]);
         $menu->setCurrentUri($this->request->getRequestUri());
 
-        if ($this->cartProvider->hasCart()) {
-            $cart = $this->cartProvider->getCart();
-            $cartTotals = ['items' => $cart->getTotalQuantity(), 'total' => $cart->getTotal()];
-        } else {
-            $cartTotals = ['items' => 0, 'total' => 0];
-        }
+        $cart = $this->cartContext->getCart();
+        $cartTotals = ['items' => $cart->getTotalQuantity(), 'total' => $cart->getTotal()];
 
         $menu->addChild('cart', [
             'route' => 'sylius_cart_summary',

@@ -12,10 +12,10 @@
 namespace spec\Sylius\Bundle\CartBundle\Templating\Helper;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
+use Sylius\Component\Cart\Context\CartContextInterface;
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Cart\Model\CartItemInterface;
-use Sylius\Component\Cart\Provider\CartProviderInterface;
+use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
@@ -25,12 +25,12 @@ use Symfony\Component\Templating\Helper\Helper;
 class CartHelperSpec extends ObjectBehavior
 {
     function let(
-        CartProviderInterface $cartProvider,
+        CartContextInterface $cartContext,
         FactoryInterface $itemFactory,
         FormFactoryInterface $formFactory,
         OrderItemQuantityModifierInterface $orderItemQuantityModifier
     ) {
-        $this->beConstructedWith($cartProvider, $itemFactory, $formFactory, $orderItemQuantityModifier);
+        $this->beConstructedWith($cartContext, $itemFactory, $formFactory, $orderItemQuantityModifier);
     }
 
     function it_is_initializable()
@@ -43,9 +43,9 @@ class CartHelperSpec extends ObjectBehavior
         $this->shouldHaveType(Helper::class);
     }
 
-    function its_getCurrentCart_returns_current_cart_via_provider($cartProvider, CartInterface $cart)
+    function its_getCurrentCart_returns_current_cart_via_provider($cartContext, CartInterface $cart)
     {
-        $cartProvider->getCart()->willReturn($cart);
+        $cartContext->getCart()->willReturn($cart);
 
         $this->getCurrentCart()->shouldReturn($cart);
     }

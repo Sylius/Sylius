@@ -41,6 +41,7 @@ class SyliusCartExtension extends AbstractResourceExtension implements PrependEx
 
         $configFiles = [
             'services.xml',
+            'providers.xml',
             'templating.xml',
             'twig.xml',
         ];
@@ -49,11 +50,7 @@ class SyliusCartExtension extends AbstractResourceExtension implements PrependEx
             $loader->load($configFile);
         }
 
-        $container->setAlias('sylius.cart_provider', $config['provider']);
         $container->setAlias('sylius.cart_resolver', $config['resolver']);
-
-        $definition = $container->getDefinition('sylius.context.cart');
-        $definition->replaceArgument(0, new Reference($config['storage']));
 
         $definition = $container->getDefinition('sylius.form.type.cart_item');
         $definition->addArgument(new Reference('sylius.form.data_mapper.order_item_quantity'));
