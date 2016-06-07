@@ -233,7 +233,6 @@
             <argument type="service" id="sylius.behat.page.shop.checkout.thank_you" />
             <argument type="service" id="sylius.behat.page.shop.order.order_payments" />
             <argument type="service" id="sylius.repository.order" container="symfony" />
-            <argument type="service" id="sylius.behat.notification_checker" />
             <tag name="sylius.behat.context" />
         </service>
 

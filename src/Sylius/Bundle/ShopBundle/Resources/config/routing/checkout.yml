@@ -6,10 +6,11 @@ sylius_shop_checkout_addressing:
         _sylius:
             template: SyliusShopBundle:Checkout:addressing.html.twig
             form: sylius_shop_checkout_addressing
+            flash: false
             repository:
                 method: find
                 arguments: [expr:service('sylius.cart_provider').getCart()]
             state_machine:
                 graph: sylius_order_checkout
                 transition: address
-            redirect: sylius_shop_homepage
+            redirect: sylius_shop_cart_summary

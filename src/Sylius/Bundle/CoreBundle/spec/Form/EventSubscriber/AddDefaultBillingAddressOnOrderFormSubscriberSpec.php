@@ -29,7 +29,7 @@ class AddDefaultBillingAddressOnOrderFormSubscriberSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddDefaultBillingAddressOnOrderFormSubscriber');
     }
 
-    function it_is_a_event_subscriber()
+    function it_is_an_event_subscriber()
     {
         $this->shouldImplement(EventSubscriberInterface::class);
     }

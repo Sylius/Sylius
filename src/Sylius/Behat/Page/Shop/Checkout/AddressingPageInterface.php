@@ -33,69 +33,14 @@ interface AddressingPageInterface extends SymfonyPageInterface
     public function checkValidationMessageFor($element, $message);
 
     /**
-     * @param string|null $firstName
+     * @param AddressInterface $billingAddress
      */
-    public function specifyShippingAddressFirstName($firstName = null);
-
-    /**
-     * @param string|null $lastName
-     */
-    public function specifyShippingAddressLastName($lastName = null);
-
-    /**
-     * @param string|null $streetName
-     */
-    public function specifyShippingAddressStreet($streetName = null);
-
-    /**
-     * @param string|null $countryName
-     */
-    public function chooseShippingAddressCountry($countryName = null);
-
-    /**
-     * @param string|null $cityName
-     */
-    public function specifyShippingAddressCity($cityName = null);
-
-    /**
-     * @param string|null $postcode
-     */
-    public function specifyShippingAddressPostcode($postcode = null);
+    public function specifyBillingAddress(AddressInterface $billingAddress);
 
     /**
      * @param AddressInterface $shippingAddress
      */
     public function specifyShippingAddress(AddressInterface $shippingAddress);
-
-    /**
-     * @param string|null $firstName
-     */
-    public function specifyBillingAddressFirstName($firstName = null);
-
-    /**
-     * @param string|null $lastName
-     */
-    public function specifyBillingAddressLastName($lastName = null);
-
-    /**
-     * @param string|null $streetName
-     */
-    public function specifyBillingAddressStreet($streetName = null);
-
-    /**
-     * @param string|null $countryName
-     */
-    public function chooseBillingAddressCountry($countryName = null);
-
-    /**
-     * @param string|null $cityName
-     */
-    public function specifyBillingAddressCity($cityName = null);
-
-    /**
-     * @param string|null $postcode
-     */
-    public function specifyBillingAddressPostcode($postcode = null);
 
     public function nextStep();
 }

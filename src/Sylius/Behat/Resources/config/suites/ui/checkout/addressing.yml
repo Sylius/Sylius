@@ -3,7 +3,7 @@
 
 default:
     suites:
-        ui_checkout_addressing:
+        ui_checkout:
             contexts_as_services:
                 - sylius.behat.context.hook.doctrine_orm
 
@@ -18,4 +18,4 @@ default:
                 - sylius.behat.context.ui.checkout
                 - sylius.behat.context.ui.shop.cart
             filters:
-                tags: "@checkout_addressing && @ui"
+                tags: "@checkout && @ui"

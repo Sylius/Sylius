@@ -16,6 +16,7 @@ use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Component\Core\Model\AddressInterface;
 use Symfony\Component\Intl\Intl;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -36,7 +37,11 @@ class AddressingPage extends SymfonyPage implements AddressingPageInterface
     public function chooseDifferentBillingAddress()
     {
         $billingAddressSwitch = $this->getElement('different_billing_address');
-        $this->assertCheckboxState($billingAddressSwitch, false);
+        Assert::false(
+            $billingAddressSwitch->isChecked(),
+            'Previous state of different billing address switch was true expected to be false'
+        );
+
         $billingAddressSwitch->check();
     }
 
@@ -52,55 +57,12 @@ class AddressingPage extends SymfonyPage implements AddressingPageInterface
             throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.pointing');
         }
 
-        return $message === $foundElement->find('css', '.pointing')->getText();
-    }
+        $validationMessage = $foundElement->find('css', '.pointing');
+        if (null === $validationMessage) {
+            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.pointing');
+        }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function specifyShippingAddressFirstName($firstName = null)
-    {
-        $this->getElement('shipping_first_name')->setValue($firstName);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function specifyShippingAddressLastName($lastName = null)
-    {
-        $this->getElement('shipping_last_name')->setValue($lastName);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function specifyShippingAddressStreet($streetName = null)
-    {
-        $this->getElement('shipping_street')->setValue($streetName);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function chooseShippingAddressCountry($countryName = null)
-    {
-        $this->getElement('shipping_country')->selectOption($countryName);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function specifyShippingAddressCity($cityName = null)
-    {
-        $this->getElement('shipping_city')->setValue($cityName);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function specifyShippingAddressPostcode($postcode = null)
-    {
-        $this->getElement('shipping_postcode')->setValue($postcode);
+        return $message === $validationMessage->getText();
     }
 
     /**
@@ -108,60 +70,25 @@ class AddressingPage extends SymfonyPage implements AddressingPageInterface
      */
     public function specifyShippingAddress(AddressInterface $shippingAddress)
     {
-        $this->specifyShippingAddressFirstName($shippingAddress->getFirstName());
-        $this->specifyShippingAddressLastName($shippingAddress->getLastName());
-        $this->specifyShippingAddressStreet($shippingAddress->getStreet());
-        $this->chooseShippingAddressCountry(Intl::getRegionBundle()->getCountryNames('en')[$shippingAddress->getCountryCode()]);
-        $this->specifyShippingAddressCity($shippingAddress->getCity());
-        $this->specifyShippingAddressPostcode($shippingAddress->getPostcode());
+        $this->getElement('shipping_first_name')->setValue($shippingAddress->getFirstName());
+        $this->getElement('shipping_last_name')->setValue($shippingAddress->getLastName());
+        $this->getElement('shipping_street')->setValue($shippingAddress->getStreet());
+        $this->getElement('shipping_country')->selectOption($this->getCountryNameOrDefault($shippingAddress->getCountryCode()));
+        $this->getElement('shipping_city')->setValue($shippingAddress->getCity());
+        $this->getElement('shipping_postcode')->setValue($shippingAddress->getPostcode());
     }
 
     /**
      * {@inheritdoc}
      */
-    public function specifyBillingAddressFirstName($firstName = null)
+    public function specifyBillingAddress(AddressInterface $billingAddress)
     {
-        $this->getElement('billing_first_name')->setValue($firstName);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function specifyBillingAddressLastName($lastName = null)
-    {
-        $this->getElement('billing_last_name')->setValue($lastName);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function specifyBillingAddressStreet($streetName = null)
-    {
-        $this->getElement('billing_street')->setValue($streetName);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function chooseBillingAddressCountry($countryName = null)
-    {
-        $this->getElement('billing_country')->selectOption($countryName);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function specifyBillingAddressCity($cityName = null)
-    {
-        $this->getElement('billing_city')->setValue($cityName);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function specifyBillingAddressPostcode($postcode = null)
-    {
-        $this->getElement('billing_postcode')->setValue($postcode);
+        $this->getElement('billing_first_name')->setValue($billingAddress->getFirstName());
+        $this->getElement('billing_last_name')->setValue($billingAddress->getLastName());
+        $this->getElement('billing_street')->setValue($billingAddress->getStreet());
+        $this->getElement('billing_country')->selectOption($this->getCountryNameOrDefault($billingAddress->getCountryCode()));
+        $this->getElement('billing_city')->setValue($billingAddress->getCity());
+        $this->getElement('billing_postcode')->setValue($billingAddress->getPostcode());
     }
 
     public function nextStep()
@@ -175,33 +102,32 @@ class AddressingPage extends SymfonyPage implements AddressingPageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'shipping_first_name' => '#sylius_shop_checkout_addressing_shippingAddress_firstName',
-            'shipping_last_name' => '#sylius_shop_checkout_addressing_shippingAddress_lastName',
-            'shipping_street' => '#sylius_shop_checkout_addressing_shippingAddress_street',
-            'shipping_country' => '#sylius_shop_checkout_addressing_shippingAddress_countryCode',
-            'shipping_city' => '#sylius_shop_checkout_addressing_shippingAddress_city',
-            'shipping_postcode' => '#sylius_shop_checkout_addressing_shippingAddress_postcode',
-            'different_billing_address' => '#sylius_shop_checkout_addressing_differentBillingAddress',
             'billing_first_name' => '#sylius_shop_checkout_addressing_billingAddress_firstName',
             'billing_last_name' => '#sylius_shop_checkout_addressing_billingAddress_lastName',
             'billing_street' => '#sylius_shop_checkout_addressing_billingAddress_street',
             'billing_country' => '#sylius_shop_checkout_addressing_billingAddress_countryCode',
             'billing_city' => '#sylius_shop_checkout_addressing_billingAddress_city',
             'billing_postcode' => '#sylius_shop_checkout_addressing_billingAddress_postcode',
+            'different_billing_address' => '#sylius_shop_checkout_addressing_differentBillingAddress',
+            'shipping_first_name' => '#sylius_shop_checkout_addressing_shippingAddress_firstName',
+            'shipping_last_name' => '#sylius_shop_checkout_addressing_shippingAddress_lastName',
+            'shipping_street' => '#sylius_shop_checkout_addressing_shippingAddress_street',
+            'shipping_country' => '#sylius_shop_checkout_addressing_shippingAddress_countryCode',
+            'shipping_city' => '#sylius_shop_checkout_addressing_shippingAddress_city',
+            'shipping_postcode' => '#sylius_shop_checkout_addressing_shippingAddress_postcode',
         ]);
     }
 
     /**
-     * @param NodeElement $toggleableElement
-     * @param bool $expectedState
-     *
-     * @throws \RuntimeException
+     * @param string|null $code
+     * 
+     * @return string
      */
-    private function assertCheckboxState(NodeElement $toggleableElement, $expectedState)
+    private function getCountryNameOrDefault($code)
     {
-        if ($toggleableElement->isChecked() !== $expectedState) {
-            throw new \RuntimeException(sprintf('Toggleable element state %s but expected %s.', $toggleableElement->isChecked(), $expectedState));
-        }
+        $countryName = null === $code ? 'Select' : Intl::getRegionBundle()->getCountryNames('en')[$code];
+
+        return $countryName;
     }
 
     /**

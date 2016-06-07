@@ -32,7 +32,7 @@ class AddressingType extends AbstractResourceType
             ->add('differentBillingAddress', 'checkbox', [
                 'mapped' => false,
                 'required' => false,
-                'label' => 'sylius.form.checkout.addressing.different_billing_address'
+                'label' => 'sylius.form.checkout.addressing.different_billing_address',
             ])
             ->addEventSubscriber(new AddDefaultBillingAddressOnOrderFormSubscriber())
         ;
