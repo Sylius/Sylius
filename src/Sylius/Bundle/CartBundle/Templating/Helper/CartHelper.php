@@ -13,7 +13,7 @@ namespace Sylius\Bundle\CartBundle\Templating\Helper;
 
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Cart\Model\CartInterface;
-use Sylius\Component\Cart\Provider\CartProviderInterface;
+use Sylius\Component\Cart\Context\CartContextInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormView;
@@ -22,9 +22,9 @@ use Symfony\Component\Templating\Helper\Helper;
 class CartHelper extends Helper
 {
     /**
-     * @var CartProviderInterface
+     * @var CartContextInterface
      */
-    protected $cartProvider;
+    protected $cartContext;
 
     /**
      * @var FactoryInterface
@@ -42,14 +42,14 @@ class CartHelper extends Helper
     protected $orderItemQuantityModifier;
 
     /**
-     * @param CartProviderInterface $cartProvider
+     * @param CartContextInterface $cartContext
      * @param FactoryInterface $cartItemFactory
      * @param FormFactoryInterface $formFactory
      * @param OrderItemQuantityModifierInterface $orderItemQuantityModifier
      */
-    public function __construct(CartProviderInterface $cartProvider, FactoryInterface $cartItemFactory, FormFactoryInterface $formFactory, OrderItemQuantityModifierInterface $orderItemQuantityModifier)
+    public function __construct(CartContextInterface $cartContext, FactoryInterface $cartItemFactory, FormFactoryInterface $formFactory, OrderItemQuantityModifierInterface $orderItemQuantityModifier)
     {
-        $this->cartProvider = $cartProvider;
+        $this->cartContext = $cartContext;
         $this->cartItemFactory = $cartItemFactory;
         $this->formFactory = $formFactory;
         $this->orderItemQuantityModifier = $orderItemQuantityModifier;
@@ -60,15 +60,7 @@ class CartHelper extends Helper
      */
     public function getCurrentCart()
     {
-        return $this->cartProvider->getCart();
-    }
-
-    /**
-     * @return bool
-     */
-    public function hasCart()
-    {
-        return $this->cartProvider->hasCart();
+        return $this->cartContext->getCart();
     }
 
     /**

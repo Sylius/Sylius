@@ -149,7 +149,7 @@
 
         <!-- cart -->
         <service id="sylius.cart_item_resolver.default" class="%sylius.cart_item_resolver.default.class%">
-            <argument type="service" id="sylius.cart_provider" />
+            <argument type="service" id="sylius.context.cart" />
             <argument type="service" id="sylius.repository.product" />
             <argument type="service" id="form.factory" />
             <argument type="service" id="sylius.availability_checker" />
@@ -159,7 +159,7 @@
 
         <!-- checkout -->
         <service id="sylius.checkout_scenario" class="%sylius.checkout_scenario.class%">
-            <argument type="service" id="sylius.cart_provider" />
+            <argument type="service" id="sylius.context.cart" />
             <tag name="sylius.process.scenario" alias="sylius_checkout" />
         </service>
 
@@ -286,12 +286,6 @@
         <service id="sylius.adjustments_remover" class="%sylius.adjustments_remover.class%" />
 
         <!-- listeners -->
-        <service id="sylius.listener.cart_blamer" class="%sylius.listener.cart_blamer.class%">
-            <argument type="service" id="sylius.manager.cart" />
-            <argument type="service" id="sylius.cart_provider" />
-            <tag name="kernel.event_listener" event="sylius.user.security.implicit_login" method="onImplicitLogin" />
-            <tag name="kernel.event_listener" event="security.interactive_login" method="onInteractiveLogin" />
-        </service>
         <service id="sylius.listener.order_inventory" class="%sylius.listener.order_inventory.class%">
             <argument type="service" id="sylius.order_processing.inventory_handler" />
             <tag name="kernel.event_listener" event="sylius.checkout.finalize.pre_complete" method="holdInventoryUnits" />
@@ -368,7 +362,7 @@
             <tag name="kernel.event_listener" event="sylius.cart_change" method="recalculateOrder"/>
         </service>
         <service id="sylius.listener.user_cart_recalculation" class="%sylius.listener.user_cart_recalculation.class%">
-            <argument type="service" id="sylius.cart_provider" />
+            <argument type="service" id="sylius.context.cart" />
             <argument type="service" id="sylius.order_processing.order_recalculator" />
             <tag name="kernel.event_listener" event="sylius.user.security.implicit_login" method="recalculateCartWhileLogin" />
             <tag name="kernel.event_listener" event="security.interactive_login" method="recalculateCartWhileLogin" />

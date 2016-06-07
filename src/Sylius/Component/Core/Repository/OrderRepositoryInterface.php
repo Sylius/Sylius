@@ -18,7 +18,7 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface as BaseOrderRepositoryInterface;
 
-interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
+interface OrderRepositoryInterface extends BaseOrderRepositoryInterface, CartRepositoryInterface
 {
     /**
      * @return QueryBuilder

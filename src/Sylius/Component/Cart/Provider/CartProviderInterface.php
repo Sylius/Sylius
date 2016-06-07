@@ -14,39 +14,14 @@ namespace Sylius\Component\Cart\Provider;
 use Sylius\Component\Cart\Model\CartInterface;
 
 /**
- * Interface for object that is accessor for cart.
- * It should retrieve existing cart or create new one based on storage.
+ * Used by context to obtain a cart.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface CartProviderInterface
 {
     /**
-     * Returns true if a cart exists otherwise false.
-     * It does not create a new cart if none exists
-     *
-     * @return bool
-     */
-    public function hasCart();
-
-    /**
-     * Returns current cart.
-     * If none found is by storage, it should create new one and save it.
-     *
-     * @return CartInterface
+     * @return null|CartInterface
      */
     public function getCart();
-
-    /**
-     * Sets given cart as current one.
-     * Also should update storage if any is used.
-     *
-     * @param CartInterface $cart
-     */
-    public function setCart(CartInterface $cart);
-
-    /**
-     * Abandon current cart.
-     */
-    public function abandonCart();
 }

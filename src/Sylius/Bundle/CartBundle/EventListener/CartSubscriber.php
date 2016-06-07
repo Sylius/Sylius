@@ -15,7 +15,6 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Cart\Event\CartEvent;
 use Sylius\Component\Cart\Event\CartItemEvent;
-use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Cart\SyliusCartEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -36,11 +35,6 @@ class CartSubscriber implements EventSubscriberInterface
     protected $validator;
 
     /**
-     * @var CartProviderInterface
-     */
-    protected $cartProvider;
-
-    /**
      * @var OrderItemQuantityModifierInterface
      */
     protected $orderItemQuantityModifier;
@@ -48,18 +42,15 @@ class CartSubscriber implements EventSubscriberInterface
     /**
      * @param ObjectManager $cartManager
      * @param ValidatorInterface $validator
-     * @param CartProviderInterface $cartProvider
      * @param OrderItemQuantityModifierInterface $orderItemQuantityModifier
      */
     public function __construct(
         ObjectManager $cartManager,
         ValidatorInterface $validator,
-        CartProviderInterface $cartProvider,
         OrderItemQuantityModifierInterface $orderItemQuantityModifier
     ) {
         $this->cartManager = $cartManager;
         $this->validator = $validator;
-        $this->cartProvider = $cartProvider;
         $this->orderItemQuantityModifier = $orderItemQuantityModifier;
     }
 
@@ -111,7 +102,6 @@ class CartSubscriber implements EventSubscriberInterface
     {
         $this->cartManager->remove($event->getCart());
         $this->cartManager->flush();
-        $this->cartProvider->abandonCart();
     }
 
     /**
@@ -127,8 +117,6 @@ class CartSubscriber implements EventSubscriberInterface
         if ($valid) {
             $this->cartManager->persist($cart);
             $this->cartManager->flush();
-
-            $this->cartProvider->setCart($cart);
         }
     }
 }
