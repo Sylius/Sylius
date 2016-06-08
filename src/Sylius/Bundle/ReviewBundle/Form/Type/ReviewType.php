@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ReviewBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Bundle\UserBundle\Form\EventSubscriber\AddCustomerGuestTypeFormSubscriber;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -57,6 +58,7 @@ class ReviewType extends AbstractResourceType
             ->add('comment', 'textarea', [
                 'label' => 'sylius.form.review.comment',
             ])
+            ->addEventSubscriber(new AddCustomerGuestTypeFormSubscriber('author'))
         ;
     }
 
@@ -68,6 +70,7 @@ class ReviewType extends AbstractResourceType
         parent::configureOptions($resolver);
 
         $resolver->setDefaults([
+            'author' => null,
             'rating_steps' => 5,
             'cascade_validation' => true,
         ]);
