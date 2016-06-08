@@ -8,16 +8,16 @@ Feature: Seeing aggregated taxes of an order
         Given the store operates on a single channel in "France"
         And there is a zone "EU" containing all members of the European Union
         And default tax zone is "EU"
-        And the store has "EU VAT" tax rate of 23% for "Bows" within "EU" zone
-        And the store has "EU Low VAT" tax rate of 10% for "Swords" within "EU" zone
+        And the store has "EU VAT" tax rate of 23% for "Standard EU services" within "EU" zone
+        And the store has "EU Low VAT" tax rate of 10% for "Lowered EU services" within "EU" zone
         And the store has a product "Composite bow" priced at "€100.00"
-        And it belongs to "Bows" tax category
+        And it belongs to "Standard EU services" tax category
         And the store has a product "Claymore" priced at "€50.00"
-        And it belongs to "Swords" tax category
+        And it belongs to "Lowered EU services" tax category
         And the store has a product "Bastard sword" priced at "€150.00"
-        And it belongs to "Swords" tax category
+        And it belongs to "Lowered EU services" tax category
         And the store has "DHL" shipping method with "€10.00" fee within "EU" zone
-        And shipping method "DHL" belongs to "Bows" tax category
+        And shipping method "DHL" belongs to "Standard EU services" tax category
         And the store allows paying offline
         And there is a customer "charles.the.great@medieval.com" that placed an order "#00000001"
         And I am logged in as an administrator
