@@ -1,28 +1,31 @@
 {% extends '@SyliusShop/Layout/checkout.html.twig' %}
 
-{% form_theme form 'SyliusUiBundle:Form:theme.html.twig' %}
-
 {% block content %}
     {% include '@SyliusShop/Checkout/_steps.html.twig' with { 'active': 'shipping' } %}
-    <div class="ui stackable grid" id="shipping_methods">
+    <div class="ui stackable grid">
         <div class="eleven wide column">
             <div class="ui padded segment">
                 {{ form_start(form, {'action': path('sylius_shop_checkout_shipping'), 'attr': {'class': 'ui form', 'novalidate': 'novalidate'}}) }}
-                <input type="hidden" name="_method" value="PUT" />
-
-                <div id="sylius-shipping-address">
+                <div class="ui fluid stackable items">
+                    <input type="hidden" name="_method" value="PUT" />
                     {% for shipment in order.shipments %}
-
                         {% set shipmentForm = form.shipments[loop.index0] %}
-
-                        {{ dump(shipmentForm.method) }}
-
+                        {% for shippingMethod in shipmentForm.method %}
+                            <div class="item">
+                                <div class="field">
+                                    <div class="ui radio checkbox">
+                                        {{ form_widget(shippingMethod, {'attr': {'class': 'hidden'}}) }}
+                                    </div>
+                                </div>
+                                <div class="content">
+                                    <a class="header">{{ form_label(shippingMethod) }}</a>
+                                </div>
+                            </div>
+                        {% endfor %}
                     {% endfor %}
+                    {{ form_row(form._token) }}
                 </div>
-
-                <div class="ui hidden divider"></div>
                 <button type="submit" class="ui large primary icon labeled button"><i class="arrow right icon"></i> {{ 'sylius.ui.next'|trans }}</button>
-                {{ form_row(form._token) }}
                 {{ form_end(form, {'render_rest': false}) }}
             </div>
         </div>

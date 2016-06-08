@@ -39,6 +39,9 @@
         <parameter key="sylius.order_processing.shipping_processor.class">Sylius\Component\Core\OrderProcessing\ShippingChargesProcessor</parameter>
         <parameter key="sylius.order_processing.prices_recalculator.class">Sylius\Component\Core\OrderProcessing\PricesRecalculator</parameter>
         <parameter key="sylius.order_processing.order_recalculator.class">Sylius\Component\Core\OrderProcessing\OrderRecalculator</parameter>
+        <parameter key="sylius.order_processing.order_processor.class">Sylius\Component\Core\OrderProcessing\OrderProcessor</parameter>
+
+        <parameter key="sylius.resolver.default_shipping_method.class">Sylius\Component\Core\Resolver\DefaultShippingMethodResolver</parameter>
 
         <parameter key="sylius.adjustments_remover.class">Sylius\Component\Core\Remover\AdjustmentsRemover</parameter>
 
@@ -237,6 +240,7 @@
         </service>
         <service id="sylius.order_processing.state_resolver" class="%sylius.order_processing.state_resolver.class%" />
         <service id="sylius.order_processing.shipment_processor" class="%sylius.order_processing.shipment_processor.class%">
+            <argument type="service" id="sylius.resolver.default_shipping_method" />
             <argument type="service" id="sylius.factory.shipment" />
         </service>
         <service id="sylius.order_processing.payment_processor" class="%sylius.order_processing.payment_processor.class%">
@@ -317,6 +321,13 @@
             <argument type="service" id="sylius.order_processing.prices_recalculator" />
             <argument type="service" id="sylius.promotion_processor" />
             <argument type="service" id="sylius.order_processing.shipping_processor" />
+        </service>
+        <service id="sylius.order_processing.order_processor" class="%sylius.order_processing.order_processor.class%">
+            <argument type="service" id="sylius.order_processing.shipment_processor" />
+        </service>
+
+        <service id="sylius.resolver.default_shipping_method" class="%sylius.resolver.default_shipping_method.class%">
+            <argument type="service" id="sylius.repository.shipping_method" />
         </service>
 
         <service id="sylius.order.purger" class="%sylius.order.purger.class%">

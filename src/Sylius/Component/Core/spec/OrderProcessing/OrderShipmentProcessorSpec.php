@@ -17,7 +17,9 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\OrderProcessing\OrderShipmentProcessorInterface;
+use Sylius\Component\Core\Resolver\DefaultShippingMethodResolverInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 
 /**
  * @mixin \Sylius\Component\Core\OrderProcessing\OrderShipmentProcessor
@@ -26,9 +28,11 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
  */
 class OrderShipmentProcessorSpec extends ObjectBehavior
 {
-    function let(FactoryInterface $shipmentFactory)
-    {
-        $this->beConstructedWith($shipmentFactory);
+    function let(
+        DefaultShippingMethodResolverInterface $defaultShippingMethodResolver,
+        FactoryInterface $shipmentFactory
+    ) {
+        $this->beConstructedWith($defaultShippingMethodResolver, $shipmentFactory);
     }
 
     function it_is_initializable()
@@ -41,18 +45,23 @@ class OrderShipmentProcessorSpec extends ObjectBehavior
         $this->shouldImplement(OrderShipmentProcessorInterface::class);
     }
 
-    function it_creates_a_single_shipment_and_assigns_all_units_to_it(
+    function it_creates_a_single_shipment_with_default_shipping_method_and_assigns_all_units_to_it(
+        DefaultShippingMethodResolverInterface $defaultShippingMethodResolver,
         FactoryInterface $shipmentFactory,
         OrderInterface $order,
-        ShipmentInterface $shipment,
         OrderItemUnitInterface $itemUnit1,
-        OrderItemUnitInterface $itemUnit2
+        OrderItemUnitInterface $itemUnit2,
+        ShipmentInterface $shipment,
+        ShippingMethodInterface $defaultShippingMethod
     ) {
+        $defaultShippingMethodResolver->getDefaultShippingMethod()->willReturn($defaultShippingMethod);
+
         $shipmentFactory->createNew()->willReturn($shipment);
 
         $order->hasShipments()->willReturn(false);
         $order->getItemUnits()->willReturn([$itemUnit1, $itemUnit2]);
 
+        $shipment->setMethod($defaultShippingMethod)->shouldBeCalled();
         $shipment->addUnit($itemUnit1)->shouldBeCalled();
         $shipment->addUnit($itemUnit2)->shouldBeCalled();
 

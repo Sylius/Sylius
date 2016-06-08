@@ -11,6 +11,8 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Checkout;
 
+use Sylius\Bundle\CoreBundle\Form\EventSubscriber\AvailableShippingMethodsSubscriber;
+use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -20,20 +22,24 @@ use Symfony\Component\Form\FormBuilderInterface;
 class ShippingType extends AbstractType
 {
     /**
+     * @var ZoneMatcherInterface
+     */
+    private $zoneMatcher;
+
+    /**
+     * @param ZoneMatcherInterface $zoneMatcher
+     */
+    public function __construct(ZoneMatcherInterface $zoneMatcher)
+    {
+        $this->zoneMatcher = $zoneMatcher;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('shipments', 'collection', [
-            'type' => 'sylius_checkout_shipment',
-            'label' => false,
-            'options' => [
-                'criteria' => [
-                    'enabled' => true,
-                    'zone' => [1, 3],
-                ]
-            ],
-        ]);
+        $builder->addEventSubscriber(new AvailableShippingMethodsSubscriber($this->zoneMatcher));
     }
 
     /**
