@@ -250,6 +250,17 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @Then the order should have tax :tax
+     */
+    public function theOrderShouldHaveTax($tax)
+    {
+        Assert::true(
+            $this->showPage->hasTax($tax),
+            sprintf('Order should have tax "%s", but it does not.', $tax)
+        );
+    }
+
+    /**
      * @Then the order's tax total should be :taxTotal
      */
     public function theOrdersTaxTotalShouldBe($taxTotal)
