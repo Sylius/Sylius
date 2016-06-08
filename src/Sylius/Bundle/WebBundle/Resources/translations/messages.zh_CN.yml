@@ -711,7 +711,6 @@ sylius:
         total_orders: 订单总数
         total_qty: 总计数量
         total_registrations: 注册总数
-        tracking_code: 快递单号
         tracking_number: 追踪号码
         translations: 翻译
         type: 类型

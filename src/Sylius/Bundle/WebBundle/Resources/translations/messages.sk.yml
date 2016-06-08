@@ -710,7 +710,6 @@ sylius:
         total_orders: Celkový počet objednávok
         total_qty: Celkové množstvo
         total_registrations: Celkový počet registrácií
-        tracking_code: Sledovací kód
         tracking_number: Sledovací kód
         translations: Preklady
         type: Typ

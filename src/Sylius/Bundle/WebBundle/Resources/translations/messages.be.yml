@@ -361,7 +361,6 @@ sylius:
         total_orders: Усе замовы
         total_qty: Агульная колькасць
         total_registrations: Усе рэгістрацыі
-        tracking_code: Трэкінг-код
         tracking_number: Нумар адпраўлення
         type: Тып
         unavailable: Не даступны

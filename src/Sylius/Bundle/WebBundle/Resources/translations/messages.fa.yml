@@ -705,7 +705,6 @@ sylius:
         total_orders: کل سفارش ها
         total_qty: تعداد کل
         total_registrations: تعداد مشتری های ثبت شده
-        tracking_code: کد پیگیری
         tracking_number: کد پیگیری
         translations: زبان های
         type: نوع

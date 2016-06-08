@@ -366,7 +366,6 @@ sylius:
         total_orders: Totale bestillinger
         total_qty: Totalt antall
         total_registrations: Totalt antall registreringer
-        tracking_code: Sporingskode
         tracking_number: Sporingsnummer
         type: Type
         unavailable: Ikke tilgjengelig

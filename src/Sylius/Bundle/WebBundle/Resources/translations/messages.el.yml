@@ -169,7 +169,6 @@ sylius:
         taxes: Φόροι
         title: Τίτλος
         total: Σύνολο
-        tracking_code: Κωδικός παρακολούθησης
         type: Τύπος
         unit_price: Τιμή μονάδας
         unknown: Άγνωστο

@@ -368,7 +368,6 @@ sylius:
         total_orders: Narudžbe u trenutnom mjesecu
         total_qty: Ukupna kol
         total_registrations: Registracije u trenutnom mjesecu
-        tracking_code: Kod za praćenje
         tracking_number: Kod za praćenje
         type: Tip
         unavailable: Nedostupno

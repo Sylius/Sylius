@@ -705,7 +705,6 @@ sylius:
         total_orders: Gesamtbestellungen
         total_qty: Stück Ges.
         total_registrations: Gesamteregistrierungen
-        tracking_code: Tracking-Code
         tracking_number: Sendungsnummer
         translations: Übersetzungen
         type: Typ
