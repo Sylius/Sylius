@@ -13,8 +13,12 @@ sylius_shop_checkout_addressing:
     defaults:
         _controller: sylius.controller.order:updateAction
         _sylius:
+            permission: false
             template: SyliusShopBundle:Checkout:addressing.html.twig
-            form: sylius_shop_checkout_addressing
+            form:
+                type: sylius_shop_checkout_addressing
+                options:
+                    customer: expr:service('sylius.context.customer').getCustomer()
             flash: false
             repository:
                 method: find

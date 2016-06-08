@@ -1,4 +1,7 @@
 <div id="sylius-shipping-address">
+    {% if form.customer.email is defined %}
+        {{ form_row(form.customer.email) }}
+    {% endif %}
     {% include '@SyliusShop/Checkout/Form/_address.html.twig' with {'form': form.shippingAddress, 'order': order} %}
     {{ form_row(form.differentBillingAddress, {'attr': {'data-toggles': 'sylius-billing-address'}}) }}
 </div>

@@ -14,11 +14,15 @@ namespace spec\Sylius\Component\Review\Factory;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Review\Factory\ReviewFactory;
 use Sylius\Component\Review\Factory\ReviewFactoryInterface;
 use Sylius\Component\Review\Model\ReviewableInterface;
+use Sylius\Component\Review\Model\ReviewerInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 
 /**
+ * @mixin ReviewFactory
+ * 
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 class ReviewFactorySpec extends ObjectBehavior
@@ -71,5 +75,20 @@ class ReviewFactorySpec extends ObjectBehavior
         $review->setReviewSubject($subject)->shouldBeCalled();
 
         $this->createForSubject(10)->shouldReturn($review);
+    }
+
+    function it_creates_a_review_with_subject_and_reviewer(
+        $factory,
+        $subjectRepository,
+        ReviewableInterface $subject,
+        ReviewInterface $review,
+        ReviewerInterface $reviewer
+    ) {
+        $factory->createNew()->willReturn($review);
+        $subjectRepository->find(10)->willReturn($subject);
+        $review->setReviewSubject($subject)->shouldBeCalled();
+        $review->setAuthor($reviewer)->shouldBeCalled();
+
+        $this->createForSubjectWithReviewer(10, $reviewer);
     }
 }

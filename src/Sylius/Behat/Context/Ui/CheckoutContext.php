@@ -21,7 +21,6 @@ use Sylius\Behat\Page\Shop\Checkout\PaymentStepInterface;
 use Sylius\Behat\Page\Shop\Checkout\SecurityStepInterface;
 use Sylius\Behat\Page\Shop\Checkout\ShippingStepInterface;
 use Sylius\Behat\Page\Shop\Checkout\ThankYouPageInterface;
-use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\UserInterface;
@@ -180,6 +179,15 @@ final class CheckoutContext implements Context
     public function iChooseTheDifferentBillingAddress()
     {
         $this->addressingPage->chooseDifferentBillingAddress();
+    }
+
+    /**
+     * @When I specify the email as :email
+     * @When I do not specify the email
+     */
+    public function iSpecifyTheEmail($email = null)
+    {
+        $this->addressingPage->specifyEmail($email);
     }
 
     /**

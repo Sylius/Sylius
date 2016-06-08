@@ -12,7 +12,9 @@
 namespace Sylius\Bundle\CoreBundle\Form\Type\Checkout;
 
 use Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddDefaultBillingAddressOnOrderFormSubscriber;
+use Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddEmailGuestFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Bundle\UserBundle\Form\EventSubscriber\AddCustomerGuestTypeFormSubscriber;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -35,6 +37,7 @@ class AddressingType extends AbstractResourceType
                 'label' => 'sylius.form.checkout.addressing.different_billing_address',
             ])
             ->addEventSubscriber(new AddDefaultBillingAddressOnOrderFormSubscriber())
+            ->addEventSubscriber(new AddCustomerGuestTypeFormSubscriber('customer'))
         ;
     }
 
@@ -47,6 +50,7 @@ class AddressingType extends AbstractResourceType
 
         $resolver
             ->setDefaults([
+                'customer' => null,
                 'cascade_validation' => true,
             ])
         ;

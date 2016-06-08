@@ -20,6 +20,12 @@ sylius_product_review_create:
         _sylius:
             template: 'SyliusWebBundle:Frontend/Review:_form.html.twig'
             factory:
-                method: createForSubject
-                arguments: [$productId]
+                method: createForSubjectWithReviewer
+                arguments:
+                    subjectId: $productId
+                    reviewer: expr:service('sylius.context.customer').getCustomer()
+            form:
+                type: sylius_product_review
+                options:
+                    author: expr:service('sylius.context.customer').getCustomer()
             permission: false

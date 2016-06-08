@@ -52,12 +52,24 @@ class ReviewFactory implements ReviewFactoryInterface
      */
     public function createForSubject($subjectId)
     {
+
         if (null === $subject = $this->subjectRepository->find($subjectId)) {
             throw new \InvalidArgumentException(sprintf('Review subject with id "%s" does not exist.', $subjectId));
         }
 
         $review = $this->factory->createNew();
         $review->setReviewSubject($subject);
+
+        return $review;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createForSubjectWithReviewer($subjectId, $reviewer)
+    {
+        $review = $this->createForSubject($subjectId);
+        $review->setAuthor($reviewer);
 
         return $review;
     }

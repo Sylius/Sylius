@@ -91,6 +91,14 @@ class AddressingPage extends SymfonyPage implements AddressingPageInterface
         $this->getElement('billing_postcode')->setValue($billingAddress->getPostcode());
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function specifyEmail($email)
+    {
+        $this->getElement('customer_email')->setValue($email);
+    }
+
     public function nextStep()
     {
         $this->getDocument()->pressButton('Next');
@@ -108,6 +116,7 @@ class AddressingPage extends SymfonyPage implements AddressingPageInterface
             'billing_country' => '#sylius_shop_checkout_addressing_billingAddress_countryCode',
             'billing_city' => '#sylius_shop_checkout_addressing_billingAddress_city',
             'billing_postcode' => '#sylius_shop_checkout_addressing_billingAddress_postcode',
+            'customer_email' => '#sylius_shop_checkout_addressing_customer_email',
             'different_billing_address' => '#sylius_shop_checkout_addressing_differentBillingAddress',
             'shipping_first_name' => '#sylius_shop_checkout_addressing_shippingAddress_firstName',
             'shipping_last_name' => '#sylius_shop_checkout_addressing_shippingAddress_lastName',
