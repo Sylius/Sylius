@@ -11,9 +11,9 @@
 
 namespace Sylius\Bundle\ResourceBundle\EventListener;
 
-use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
+use Coduo\ToString\StringConverter;
 use FOS\RestBundle\View\View;
-use FOS\RestBundle\View\ViewHandlerInterface as RestViewHandlerInterface;
+use Sylius\Bundle\ResourceBundle\Exception\ResourceConstraintViolationException;
 use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -23,6 +23,7 @@ use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Translation\TranslatorInterface;
+use FOS\RestBundle\View\ViewHandlerInterface as RestViewHandlerInterface;
 
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
@@ -83,20 +84,35 @@ class ResourceDeleteSubscriber implements EventSubscriberInterface
     public function onResourceDelete(GetResponseForExceptionEvent $event)
     {
         $exception = $event->getException();
-        if (!$exception instanceof ForeignKeyConstraintViolationException) {
+        if (!$exception instanceof ResourceConstraintViolationException) {
             return;
         }
 
         $requestAttributes = $event->getRequest()->attributes;
         $originalRoute = $requestAttributes->get('_route');
-        $resourceName = $this->getResourceNameFromRoute($originalRoute);
+
+        if (null === $requestAttributes->has('_controller')) {
+            return;
+        }
+
+        $resource = $exception->getResource();
+        $requestConfiguration = $exception->getRequestConfiguration();
+
+        $resourceName = $requestConfiguration->getMetadata()->getName();
+        $message = $this->translator->trans(
+            sprintf('sylius.resource.%s.delete_error', $resourceName),
+            [
+                '%resource%' => $this->castResourceToString($resource)
+            ],
+            'flashes'
+        );
 
         if (!$this->isHtmlRequest($event->getRequest())) {
             $event->setResponse(
                 $this->viewHandler->handle(View::create([
                     'error' => [
                         'code' => $exception->getSQLState(),
-                        'message' => $this->translator->trans('sylius.resource.delete_error', ['%resource%' => $resourceName], 'flashes'),
+                        'message' => $message,
                     ]
                 ], 409))
             );
@@ -104,15 +120,7 @@ class ResourceDeleteSubscriber implements EventSubscriberInterface
             return;
         }
 
-        if (null === $requestAttributes->get('_controller')) {
-            return;
-        }
-
-        $this->session->getBag('flashes')->add(
-            'error',
-            $this->translator->trans('sylius.resource.delete_error', ['%resource%' => $resourceName], 'flashes')
-        );
-
+        $this->session->getBag('flashes')->add('error', $message);
         $referrer = $event->getRequest()->headers->get('referer');
 
         if (null !== $referrer) {
@@ -122,20 +130,6 @@ class ResourceDeleteSubscriber implements EventSubscriberInterface
         }
 
         $event->setResponse($this->createRedirectResponse($originalRoute, ResourceActions::INDEX));
-    }
-
-    /**
-     * @param string $route
-     *
-     * @return string
-     */
-    private function getResourceNameFromRoute($route)
-    {
-        $routeArray = explode('_', $route);
-        $routeArrayWithoutAction = array_slice($routeArray, 0, count($routeArray) - 1);
-        $routeArrayWithoutPrefixes = array_slice($routeArrayWithoutAction, 2);
-
-        return trim(implode(' ', $routeArrayWithoutPrefixes));
     }
 
     /**
@@ -160,5 +154,15 @@ class ResourceDeleteSubscriber implements EventSubscriberInterface
     private function isHtmlRequest(Request $request)
     {
         return 'html' === $request->getRequestFormat();
+    }
+
+    /**
+     * @param $resource
+     *
+     * @return string
+     */
+    protected function castResourceToString($resource)
+    {
+        return new StringConverter($resource);
     }
 }
