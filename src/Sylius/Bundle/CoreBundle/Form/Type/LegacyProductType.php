@@ -53,10 +53,6 @@ class LegacyProductType extends BaseProductType
                 'expanded' => true,
                 'label' => 'sylius.form.product.channels',
             ])
-            ->add('restrictedZone', 'sylius_zone_choice', [
-                'empty_value' => '---',
-                'label' => 'sylius.form.product.restricted_zone',
-            ])
             ->add('mainTaxon', 'sylius_taxon_choice', [
                 'label' => 'sylius.form.product.main_taxon',
              ])

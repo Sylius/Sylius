@@ -96,17 +96,6 @@ class ProductSpec extends ObjectBehavior
         $this->getShippingCategory()->shouldReturn($shippingCategory);
     }
 
-    function it_has_no_restricted_zone_by_default()
-    {
-        $this->getRestrictedZone()->shouldReturn(null);
-    }
-
-    function its_restricted_zone_is_mutable(ZoneInterface $zone)
-    {
-        $this->setRestrictedZone($zone);
-        $this->getRestrictedZone()->shouldReturn($zone);
-    }
-
     function it_has_no_main_taxon_by_default()
     {
         $this->getMainTaxon()->shouldReturn(null);

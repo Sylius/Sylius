@@ -11,7 +11,6 @@
 
 namespace Sylius\Bundle\CoreBundle\Cart;
 
-use Sylius\Component\Addressing\Checker\RestrictedZoneCheckerInterface;
 use Sylius\Component\Cart\Model\CartItemInterface;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Cart\Resolver\ItemResolverInterface;
@@ -56,11 +55,6 @@ class ItemResolver implements ItemResolverInterface
     protected $availabilityChecker;
 
     /**
-     * @var RestrictedZoneCheckerInterface
-     */
-    protected $restrictedZoneChecker;
-
-    /**
      * @var ChannelContextInterface
      */
     protected $channelContext;
@@ -70,7 +64,6 @@ class ItemResolver implements ItemResolverInterface
      * @param RepositoryInterface            $productRepository
      * @param FormFactoryInterface           $formFactory
      * @param AvailabilityCheckerInterface   $availabilityChecker
-     * @param RestrictedZoneCheckerInterface $restrictedZoneChecker
      * @param DelegatingCalculatorInterface  $priceCalculator
      * @param ChannelContextInterface        $channelContext
      */
@@ -79,7 +72,6 @@ class ItemResolver implements ItemResolverInterface
         RepositoryInterface            $productRepository,
         FormFactoryInterface           $formFactory,
         AvailabilityCheckerInterface   $availabilityChecker,
-        RestrictedZoneCheckerInterface $restrictedZoneChecker,
         DelegatingCalculatorInterface  $priceCalculator,
         ChannelContextInterface        $channelContext
     ) {
@@ -87,7 +79,6 @@ class ItemResolver implements ItemResolverInterface
         $this->productRepository = $productRepository;
         $this->formFactory = $formFactory;
         $this->availabilityChecker = $availabilityChecker;
-        $this->restrictedZoneChecker = $restrictedZoneChecker;
         $this->priceCalculator = $priceCalculator;
         $this->channelContext = $channelContext;
     }
@@ -102,10 +93,6 @@ class ItemResolver implements ItemResolverInterface
         $channel = $this->channelContext->getChannel();
         if (!$product = $this->productRepository->findOneByIdAndChannel($id, $channel)) {
             throw new ItemResolvingException('Requested product was not found.');
-        }
-
-        if ($this->restrictedZoneChecker->isRestricted($product)) {
-            throw new ItemResolvingException('Selected item is not available in your country.');
         }
 
         // We use forms to easily set the quantity and pick variant but you can do here whatever is required to create the item.

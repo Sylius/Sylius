@@ -122,11 +122,7 @@
             {{ form_widget(form._token) }}
             <br>
             <br>
-            {% if sylius_is_restricted(product) %}
-            <button disabled="disabled" class="btn btn-success btn-lg btn-block"><i class="icon-shopping-cart icon-white icon-large"></i> {{ 'sylius.ui.not_available_in_your_country'|trans }}</button>
-            {% else %}
-                <button type="submit" class="btn btn-success btn-lg btn-block"><i class="icon-shopping-cart icon-white icon-large"></i> {{ 'sylius.ui.add_to_cart'|trans }}</button>
-            {% endif %}
+            <button type="submit" class="btn btn-success btn-lg btn-block"><i class="icon-shopping-cart icon-white icon-large"></i> {{ 'sylius.ui.add_to_cart'|trans }}</button>
         {% endif %}
     </div>
 </form>

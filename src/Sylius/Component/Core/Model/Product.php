@@ -43,11 +43,6 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     protected $shippingCategory;
 
     /**
-     * @var ZoneInterface
-     */
-    protected $restrictedZone;
-
-    /**
      * @var ChannelInterface[]|Collection
      */
     protected $channels;
@@ -196,22 +191,6 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     public function setShippingCategory(ShippingCategoryInterface $category = null)
     {
         $this->shippingCategory = $category;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getRestrictedZone()
-    {
-        return $this->restrictedZone;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setRestrictedZone(ZoneInterface $zone = null)
-    {
-        $this->restrictedZone = $zone;
     }
 
     /**

@@ -601,7 +601,6 @@ sylius:
         reset_button: Reset
         reset_password: 'Reset password'
         restore: Restore
-        restricted_zone: 'Restricted zone'
         retail_price: 'Retail price'
         return: Return
         revert: Revert

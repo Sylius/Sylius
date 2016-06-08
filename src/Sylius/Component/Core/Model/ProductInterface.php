@@ -85,16 +85,6 @@ interface ProductInterface extends
     public function setShippingCategory(ShippingCategoryInterface $category = null);
 
     /**
-     * @return ZoneInterface
-     */
-    public function getRestrictedZone();
-
-    /**
-     * @param ZoneInterface $zone
-     */
-    public function setRestrictedZone(ZoneInterface $zone = null);
-
-    /**
      * @return TaxonInterface
      */
     public function getMainTaxon();
