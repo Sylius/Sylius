@@ -42,3 +42,17 @@ sylius_admin_get_attribute_types:
     defaults:
         _controller: sylius.controller.product_attribute:getAttributeTypesAction
         template: SyliusAdminBundle:ProductAttribute/Types:attributeTypes.html.twig
+
+sylius_admin_get_product_attributes:
+    path: /attributes
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product_attribute:renderAttributesAction
+        template: SyliusAdminBundle:Product/Attribute:attributeChoice.html.twig
+
+sylius_admin_render_attribute_forms:
+    path: /attribute-forms
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product_attribute:renderAttributeValueFormsAction
+        template: SyliusAdminBundle:Product/Attribute:attributeValues.html.twig

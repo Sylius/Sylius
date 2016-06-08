@@ -33,4 +33,18 @@ interface UpdateSimpleProductPageInterface extends BaseUpdatePageInterface
      * @param string $localeCode
      */
     public function nameItIn($name, $localeCode);
+
+    /**
+     * @param string $attribute
+     *
+     * @return string
+     */
+    public function getAttributeValue($attribute);
+
+    /**
+     * @param string $attribute
+     *
+     * @return bool
+     */
+    public function hasAttribute($attribute);
 }

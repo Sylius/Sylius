@@ -32,6 +32,15 @@ class ProductType extends AbstractResourceType
             ->addEventSubscriber(new AddCodeFormSubscriber())
             ->addEventSubscriber(new ProductOptionFieldSubscriber())
             ->addEventSubscriber(new SimpleProductSubscriber())
+            ->add('attributes', 'collection', [
+                'required' => false,
+                'type' => 'sylius_product_attribute_value',
+                'prototype' => false,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'label' => false,
+            ])
         ;
     }
 

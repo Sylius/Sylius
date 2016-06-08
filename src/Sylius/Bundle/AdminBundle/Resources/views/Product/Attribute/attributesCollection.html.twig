@@ -1,0 +1,63 @@
+{% extends 'SyliusUiBundle:Form:theme.html.twig' %}
+
+{% from '@SyliusAdmin/Product/Attribute/attributeValues.html.twig' import checkboxField %}
+{% from '@SyliusAdmin/Product/Attribute/attributeValues.html.twig' import textField %}
+
+
+{% block collection_widget -%}
+    {% from 'SyliusResourceBundle:Macros:notification.html.twig' import error %}
+    {% set attr = attr|merge({'class': attr.class|default ~ ' controls collection-widget'}) %}
+
+    {% spaceless %}
+        <div data-form-type="collection" {{ block('widget_container_attributes') }}
+                {% if prototype is defined and allow_add %}
+                    data-prototype='{{ _self.collection_item(prototype, allow_delete, button_delete_label, '__name__')|e }}'
+                {%- endif -%}
+        >
+            {{ error(form.vars.errors) }}
+
+            {% if prototypes|default is iterable %}
+                {% for key, subPrototype in prototypes %}
+                    <input type="hidden" data-form-prototype="{{ key }}" value="{{ _self.collection_item(subPrototype, allow_delete, button_delete_label, '__name__')|e }}" />
+                {% endfor %}
+            {% endif %}
+
+            <div data-form-collection="list">
+                {% for child in form %}
+                    {{ _self.collection_item(child, allow_delete, button_delete_label, loop.index0) }}
+                {% endfor %}
+            </div>
+
+            {% if prototype is defined and allow_add %}
+                <a href="#" class="ui labeled icon button" data-form-collection="add">
+                    <i class="plus square outline icon"></i>
+                    {{ button_add_label|trans }}
+                </a>
+            {% endif %}
+        </div>
+    {% endspaceless %}
+{%- endblock collection_widget %}
+
+{% macro collection_item(form, allow_delete, button_delete_label, index) %}
+    <div class="attribute" data-id="{{ form.vars.data.attribute.id }}">
+        {% set id = form.vars.id %}
+        {% if 'checkbox' in form.vars.value.type %}
+            <div class="ui toggle checkbox" style="margin-top: 15px; margin-bottom: 15px;">
+                {{ form_widget(form.value) }}
+                <label>{{ form.vars.value.attribute.name }}</label>
+            </div>
+            <button class="ui red right labeled icon button" style="float: right;">
+                <i class="remove icon"></i> {{ 'sylius.ui.delete'|trans }}
+            </button>
+        {% else %}
+            <div class="ui right fluid labeled input" style="margin-top: 15px; margin-bottom: 15px;">
+                <div class="ui label">{{ form.vars.value.attribute.name }}</div>
+                {{ form_widget(form.value) }}
+                <button class="ui red right labeled icon button">
+                    <i class="remove icon"></i> {{ 'sylius.ui.delete'|trans }}
+                </button>
+            </div>
+        {% endif %}
+        {{ form_widget(form.attribute, {'attr': {'style': 'display: none'}}) }}
+    </div>
+{% endmacro %}
