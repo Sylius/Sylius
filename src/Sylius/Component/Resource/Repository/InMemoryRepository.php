@@ -167,7 +167,7 @@ class InMemoryRepository implements RepositoryInterface
         $resources = $this->findAll();
 
         if (!empty($sorting)) {
-            $resources = $this->applyOrder($resources, $orderBy);
+            $resources = $this->applyOrder($resources, $sorting);
         }
 
         if (!empty($criteria)) {

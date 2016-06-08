@@ -25,7 +25,7 @@ interface RepositoryInterface extends ObjectRepository
 
     /**
      * @param array $criteria
-     * @param array $orderBy
+     * @param array $sorting
      *
      * @return mixed
      */
