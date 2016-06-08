@@ -231,6 +231,17 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Then I should not be able to select :shippingMethod shipping method
+     */
+    public function iShouldNotBeAbleToSelectShippingMethod($shippingMethod)
+    {
+        Assert::false(
+            $this->shippingPage->hasShippingMethod($shippingMethod),
+            sprintf('Shipping method "%s" should not be available but it does.', $shippingMethod)
+        );
+    }
+
+    /**
      * @When I proceed with the next step
      * @When I try to proceed with the next step
      */
@@ -401,6 +412,17 @@ final class CheckoutContext implements Context
     {
         $this->assertElementValidationMessage($type, $firstElement, sprintf('Please enter %s.', $firstElement));
         $this->assertElementValidationMessage($type, $secondElement, sprintf('Please enter %s.', $secondElement));
+    }
+
+    /**
+     * @Given I should be alerted, that there is no shipping method available for me
+     */
+    public function iShouldBeAlertedThatThereIsNoShippingMethodAvailableForMe()
+    {
+        Assert::true(
+            $this->shippingPage->hasNoShippingMethodsMessage(),
+            'Shipping page should have no shipping methods message but it does not.'
+        );
     }
 
     /**

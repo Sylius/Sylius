@@ -11,6 +11,7 @@
 
 namespace Sylius\Behat\Page\Shop\Checkout;
 
+use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\SymfonyPage;
 
 /**
@@ -31,8 +32,32 @@ class ShippingPage extends SymfonyPage implements ShippingPageInterface
      */
     public function selectShippingMethod($shippingMethod)
     {
-        $shippingMethodElement = $this->getElement('shipping_method', ['%shipping_method%' => $shippingMethod]);
-        $shippingMethodElement->check();
+        $shippingMethodElement = $this->getElement('shipping_method');
+        $shippingMethodValue = $this->getElement('shipping_method_option', ['%shipping_method%' => $shippingMethod])->getValue();
+
+        $shippingMethodElement->selectOption($shippingMethodValue);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasShippingMethod($shippingMethod)
+    {
+        try {
+            $this->getElement('shipping_method_option', ['%shipping_method%' => $shippingMethod]);
+        } catch (ElementNotFoundException $exception) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasNoShippingMethodsMessage()
+    {
+        return null !== $this->getDocument()->find('css', '#no_shipping_methods');
     }
 
     public function nextStep()
@@ -46,7 +71,8 @@ class ShippingPage extends SymfonyPage implements ShippingPageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'shipping_method' => '#shipping_methods .content:contains("%shipping_method%") ~ .field input',
+            'shipping_method' => '[name="sylius_shop_checkout_shipping[shipments][0][method]"]',
+            'shipping_method_option' => '.item:contains("%shipping_method%") input',
         ]);
     }
 }

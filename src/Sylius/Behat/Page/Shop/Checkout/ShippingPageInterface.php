@@ -23,5 +23,17 @@ interface ShippingPageInterface extends SymfonyPageInterface
      */
     public function selectShippingMethod($shippingMethod);
 
+    /**
+     * @param string $shippingMethod
+     *
+     * @return bool
+     */
+    public function hasShippingMethod($shippingMethod);
+
+    /**
+     * @return bool
+     */
+    public function hasNoShippingMethodsMessage();
+
     public function nextStep();
 }

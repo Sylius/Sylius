@@ -4,7 +4,7 @@
     {% include '@SyliusShop/Checkout/_steps.html.twig' with { 'active': 'shipping' } %}
     <div class="ui stackable grid">
         <div class="eleven wide column">
-            <div class="ui padded segment">
+            <div class="ui padded segment" id="shipping_methods">
                 {{ form_start(form, {'action': path('sylius_shop_checkout_shipping'), 'attr': {'class': 'ui form', 'novalidate': 'novalidate'}}) }}
                 <div class="ui fluid stackable items">
                     <input type="hidden" name="_method" value="PUT" />
@@ -14,13 +14,15 @@
                             <div class="item">
                                 <div class="field">
                                     <div class="ui radio checkbox">
-                                        {{ form_widget(shippingMethod, {'attr': {'class': 'hidden'}}) }}
+                                        {{ form_widget(shippingMethod) }}
                                     </div>
                                 </div>
                                 <div class="content">
                                     <a class="header">{{ form_label(shippingMethod) }}</a>
                                 </div>
                             </div>
+                        {% else %}
+                            <h3 id="no_shipping_methods">There are currently no shipping methods available for your shipping address.</h3>
                         {% endfor %}
                     {% endfor %}
                     {{ form_row(form._token) }}

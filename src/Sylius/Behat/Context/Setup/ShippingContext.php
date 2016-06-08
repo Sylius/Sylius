@@ -122,6 +122,14 @@ final class ShippingContext implements Context
     }
 
     /**
+     * @Given /^the store has disabled "([^"]+)" shipping method with ("[^"]+") fee$/
+     */
+    public function storeHasDisabledShippingMethodWithFee($shippingMethodName, $fee)
+    {
+        $this->createShippingMethod($shippingMethodName, null, null, 'en', ['amount' => $fee], DefaultCalculators::FLAT_RATE, false);
+    }
+
+    /**
      * @Given /^(shipping method "[^"]+") belongs to ("[^"]+" tax category)$/
      */
     public function shippingMethodBelongsToTaxCategory(ShippingMethodInterface $shippingMethod, TaxCategoryInterface $taxCategory)
@@ -155,6 +163,7 @@ final class ShippingContext implements Context
      * @param string $locale
      * @param array $configuration
      * @param string $calculator
+     * @param bool $enabled
      */
     private function createShippingMethod(
         $name,
@@ -162,7 +171,8 @@ final class ShippingContext implements Context
         ZoneInterface $zone = null,
         $locale = 'en',
         $configuration = ['amount' => 0],
-        $calculator = DefaultCalculators::FLAT_RATE
+        $calculator = DefaultCalculators::FLAT_RATE,
+        $enabled = true
     ) {
         if (null === $zone) {
             $zone = $this->sharedStorage->get('zone');
@@ -180,6 +190,7 @@ final class ShippingContext implements Context
         $shippingMethod->setConfiguration($configuration);
         $shippingMethod->setCalculator($calculator);
         $shippingMethod->setZone($zone);
+        $shippingMethod->setEnabled($enabled);
 
         if ($this->sharedStorage->has('channel')) {
             $channel = $this->sharedStorage->get('channel');
