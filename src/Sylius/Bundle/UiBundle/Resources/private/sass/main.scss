@@ -73,3 +73,10 @@ th {
 .ui.monster.header {
   font-size: 3em;
 }
+.ui.styled.header {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background-color: $color-header-background;
+  font-size: 0.9em;
+  padding-bottom: 7px;
+}
