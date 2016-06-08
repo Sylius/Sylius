@@ -14,6 +14,7 @@ namespace Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Repository\ZoneRepositoryInterface;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\TaxRateInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -200,7 +201,7 @@ final class TaxationContext implements Context
      */
     private function getCodeFromName($taxRateName)
     {
-        return str_replace(' ', '_', strtolower($taxRateName));
+        return StringInflector::nameToLowercaseCode($taxRateName);
     }
 
     /**

@@ -18,6 +18,7 @@ use Sylius\Behat\Page\Shop\Account\ChangePasswordPageInterface;
 use Sylius\Behat\Page\Shop\Account\DashboardPageInterface;
 use Sylius\Behat\Page\Shop\Account\ProfileUpdatePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Webmozart\Assert\Assert;
 
 /**
@@ -148,7 +149,7 @@ final class AccountContext implements Context
      */
     public function iShouldBeNotifiedThatElementIsRequired($element)
     {
-        $this->assertFieldValidationMessage($this->profileUpdatePage, str_replace(' ', '_', $element), sprintf('Please enter your %s.', $element));
+        $this->assertFieldValidationMessage($this->profileUpdatePage, StringInflector::nameToCode($element), sprintf('Please enter your %s.', $element));
     }
 
     /**
@@ -156,7 +157,7 @@ final class AccountContext implements Context
      */
     public function iShouldBeNotifiedThatElementIsInvalid($element)
     {
-        $this->assertFieldValidationMessage($this->profileUpdatePage, str_replace(' ', '_', $element), sprintf('This %s is invalid.', $element));
+        $this->assertFieldValidationMessage($this->profileUpdatePage, StringInflector::nameToCode($element), sprintf('This %s is invalid.', $element));
     }
 
     /**

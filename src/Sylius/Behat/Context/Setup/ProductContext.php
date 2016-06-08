@@ -15,6 +15,7 @@ use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Attribute\Factory\AttributeFactoryInterface;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
@@ -428,6 +429,6 @@ final class ProductContext implements Context
      */
     private function convertToCode($productName)
     {
-        return strtoupper(str_replace(' ', '_', $productName));
+        return StringInflector::nameToUpercaseCode($productName);
     }
 }
