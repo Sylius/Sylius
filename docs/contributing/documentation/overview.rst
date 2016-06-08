@@ -54,24 +54,22 @@ Testing Documentation
 
 To test the documentation before a commit:
 
-* Install `Python`_
+* Install `pip`_, the Python package manager,
+
+* Download the documentation requirements,
 
 .. code-block:: bash
 
-    $ brew install python
+    $ pip install -r requirements.txt
+    # This makes sure that the version of Sphinx you'll get is >=1.4.2!
 
-* Install `Sphinx`_
+* Install `Sphinx`_,
 
 .. code-block:: bash
 
-    $ sudo pip install Sphinx
-
-.. note::
-
-    Please, make sure that the version of `Sphinx`_ you've got is >=1.4.2!
+    $ pip install Sphinx
 
 * In the ``docs`` directory run ``sphinx-build -b html . build`` and view the generated HTML files in the ``build`` directory.
-
 
 Creating a Pull Request
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -140,6 +138,6 @@ Steps:
 
 .. _`fork`:                       https://help.github.com/articles/fork-a-repo
 .. _`pull requests`:              https://help.github.com/articles/using-pull-requests
-.. _`Python`:                     https://www.python.org/
+.. _`pip`:                        https://pip.pypa.io/en/stable/installing/
 .. _`Sphinx`:                     http://www.sphinx-doc.org/en/stable/
 .. _`Github tracker`:             https://github.com/Sylius/Sylius/issues/new
