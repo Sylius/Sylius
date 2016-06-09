@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b5cad1f69cfb45a94d9dd58864884a4d",
-    "content-hash": "d4896dae3b6edf958e5908676687e8e2",
+    "hash": "c0f4a0b1d10ad646847b62c2fb224dff",
+    "content-hash": "4c2af036ab7065e9d121e876d0848a43",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -9753,6 +9753,7 @@
                 }
             ],
             "description": "A tool to automatically fix PHP code style",
+            "abandoned": "friendsofphp/php-cs-fixer",
             "time": "2016-02-26 07:37:29"
         },
         {
@@ -10011,7 +10012,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Lakion/ApiTestCase/zipball/c4d37eccbaa49f06a317d22198649517627ed599",
+                "url": "https://api.github.com/repos/Lakion/ApiTestCase/zipball/ec152e9d55d3e4a05eb7192c522661ec7620b5e3",
                 "reference": "c4d37eccbaa49f06a317d22198649517627ed599",
                 "shasum": ""
             },
@@ -11495,7 +11496,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^5.6|^7.0",
+        "php": "^5.5.9|^7.0",
         "ext-exif": "*",
         "ext-fileinfo": "*",
         "ext-gd": "*"
