@@ -12,4 +12,27 @@
 -->
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <imports>
+        <import resource="fixture.xml"/>
+        <import resource="suite.xml"/>
+        <import resource="loader.xml"/>
+    </imports>
+
+    <services>
+        <service id="sylius_fixtures.fixtures_suite_load_command" class="Sylius\Bundle\FixturesBundle\Command\FixturesSuiteLoadCommand">
+            <argument type="service" id="sylius_fixtures.suite_registry" />
+            <argument type="service" id="sylius_fixtures.suite_loader" />
+            <tag name="console.command" />
+        </service>
+
+        <service id="sylius_fixtures.fixtures_suite_list_command" class="Sylius\Bundle\FixturesBundle\Command\FixturesSuiteListCommand">
+            <argument type="service" id="sylius_fixtures.suite_registry" />
+            <tag name="console.command" />
+        </service>
+
+        <service id="sylius_fixtures.fixtures_list_command" class="Sylius\Bundle\FixturesBundle\Command\FixturesListCommand">
+            <argument type="service" id="sylius_fixtures.fixture_registry" />
+            <tag name="console.command" />
+        </service>
+    </services>
 </container>

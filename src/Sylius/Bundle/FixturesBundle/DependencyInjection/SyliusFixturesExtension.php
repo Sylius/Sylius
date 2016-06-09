@@ -22,6 +22,15 @@ final class SyliusFixturesExtension extends Extension
 
         $loader->load('services.xml');
 
+        $this->registerSuites($config, $container);
+    }
+
+    /**
+     * @param array $config
+     * @param ContainerBuilder $container
+     */
+    private function registerSuites(array $config, ContainerBuilder $container)
+    {
         $suiteRegistry = $container->findDefinition('sylius_fixtures.suite_registry');
         foreach ($config['suites'] as $suiteName => $suiteConfiguration) {
             $suiteRegistry->addMethodCall('addSuite', [$suiteName, $suiteConfiguration]);
