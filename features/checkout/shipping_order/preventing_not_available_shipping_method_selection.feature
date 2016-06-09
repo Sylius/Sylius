@@ -1,4 +1,4 @@
-@checkout_shipping
+@checkout
 Feature: Preventing not available shipping method selection
     In order to ship my order properly
     As a Customer
@@ -14,9 +14,9 @@ Feature: Preventing not available shipping method selection
         Given the store has "Raven Post" shipping method with "€10.00" fee
         And the store has disabled "Dragon Post" shipping method with "€30.00" fee
         And I have product "Targaryen T-Shirt" in the cart
-        When I proceed with the checkout addressing step
-        And I specify the shipping address
-        And I proceed with the next step
+        When I am at the checkout addressing step
+        And I specify the shipping address as "Ankh Morpork", "Frost Alley", "90210", "France" for "Jon Snow"
+        And I proceed to the shipping step
         Then I should not be able to select "Dragon Post" shipping method
 
     @ui
@@ -26,9 +26,9 @@ Feature: Preventing not available shipping method selection
         And the store has "Dragon Post" shipping method with "€30.00" fee within "EU" zone
         And the store has "Raven Post" shipping method with "€10.00" fee for the rest of the world
         And I have product "Targaryen T-Shirt" in the cart
-        When I proceed with the checkout addressing step
-        And I specify the shipping address
-        And I proceed with the next step
+        When I am at the checkout addressing step
+        And I specify the shipping address as "Ankh Morpork", "Frost Alley", "90210", "France" for "Jon Snow"
+        And I proceed to the shipping step
         Then I should not be able to select "Raven Post" shipping method
 
     @ui
@@ -38,9 +38,9 @@ Feature: Preventing not available shipping method selection
         And the store has "Dragon Post" shipping method with "€30.00" fee for the rest of the world
         And the store has disabled "Raven Post" shipping method with "€10.00" fee
         And I have product "Targaryen T-Shirt" in the cart
-        When I proceed with the checkout addressing step
-        And I specify the shipping address
-        And I proceed with the next step
+        When I am at the checkout addressing step
+        And I specify the shipping address as "Ankh Morpork", "Frost Alley", "90210", "France" for "Jon Snow"
+        And I proceed to the shipping step
         Then I should not be able to select "Raven Post" shipping method
         And I should not be able to select "Dragon Post" shipping method
         And I should be alerted, that there is no shipping method available for me

@@ -165,13 +165,13 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @When /^I specified the shipping (address)$/
+     * @When /^I specified the shipping (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
      */
     public function iSpecifiedTheShippingAddress(AddressInterface $address)
     {
         $this->addressingPage->open();
         $this->addressingPage->specifyShippingAddress($address);
-        $this->iProceedWithTheNextStep();
+        $this->iProceedWithTheShippingStep();
     }
 
     /**
@@ -242,10 +242,10 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @When I proceed with the next step
-     * @When I try to proceed with the next step
+     * @When I proceed to the shipping step
+     * @When I try to proceed to the shipping step
      */
-    public function iProceedWithTheNextStep()
+    public function iProceedWithTheShippingStep()
     {
         $this->addressingPage->nextStep();
     }
@@ -394,6 +394,17 @@ final class CheckoutContext implements Context
         $this->orderPaymentsPage->waitForResponse(5, ['number' => $this->getLastOrder()->getNumber()]);
 
         expect($this->orderPaymentsPage->isOpen(['number' => $this->getLastOrder()->getNumber()]))->toBe(true);
+    }
+
+    /**
+     * @Then I should be on the checkout shipping step
+     */
+    public function iShouldBeOnTheCheckoutShippingStep()
+    {
+        Assert::true(
+            $this->shippingPage->isOpen(),
+            'Checkout shipping page should be opened, but it is not.'
+        );
     }
 
     /**

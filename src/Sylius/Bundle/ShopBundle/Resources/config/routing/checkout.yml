@@ -22,7 +22,9 @@ sylius_shop_checkout_addressing:
             state_machine:
                 graph: sylius_order_checkout
                 transition: address
-            redirect: sylius_shop_checkout_shipping
+            redirect:
+                route: sylius_shop_checkout_shipping
+                parameters: []
 
 sylius_shop_checkout_shipping:
     path: /shipping

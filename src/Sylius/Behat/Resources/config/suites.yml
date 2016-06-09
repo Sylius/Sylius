@@ -51,7 +51,6 @@ imports:
     - suites/ui/channel/theming.yml
     - suites/ui/checkout/checkout.yml
     - suites/ui/checkout/paying_for_order.yml
-    - suites/ui/checkout/shipping.yml
     - suites/ui/currency/managing_currencies.yml
     - suites/ui/locale/managing_locales.yml
     - suites/ui/order/managing_orders.yml
