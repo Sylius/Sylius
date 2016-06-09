@@ -130,11 +130,11 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
     /**
      * {@inheritdoc}
      */
-    public function getTaxons($rootTaxon = null)
+    public function getTaxons($rootTaxonCode = null)
     {
-        if (null !== $rootTaxon) {
-            return $this->taxons->filter(function (BaseTaxonInterface $taxon) use ($rootTaxon) {
-                return $rootTaxon === strtolower($taxon->getRoot()->getName());
+        if (null !== $rootTaxonCode) {
+            return $this->taxons->filter(function (BaseTaxonInterface $taxon) use ($rootTaxonCode) {
+                return $rootTaxonCode === strtolower($taxon->getRoot()->getCode());
             });
         }
 
