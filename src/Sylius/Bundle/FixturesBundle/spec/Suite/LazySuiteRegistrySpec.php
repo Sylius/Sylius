@@ -43,7 +43,7 @@ final class LazySuiteRegistrySpec extends ObjectBehavior
 
     function it_returns_a_constructed_suite(SuiteFactoryInterface $suiteFactory, SuiteInterface $suite)
     {
-        $this->registerSuite('suite_name', ['fixtures' => []]);
+        $this->addSuite('suite_name', ['fixtures' => []]);
 
         $suiteFactory->createSuite('suite_name', ['fixtures' => []])->willReturn($suite);
 
@@ -53,7 +53,7 @@ final class LazySuiteRegistrySpec extends ObjectBehavior
 
     function it_constructs_a_suite_only_once(SuiteFactoryInterface $suiteFactory, SuiteInterface $suite)
     {
-        $this->registerSuite('suite_name', ['fixtures' => []]);
+        $this->addSuite('suite_name', ['fixtures' => []]);
 
         $suiteFactory->createSuite('suite_name', ['fixtures' => []])->shouldBeCalledTimes(1)->willReturn($suite);
 

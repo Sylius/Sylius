@@ -1,12 +1,24 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace spec\Sylius\Bundle\FixturesBundle\Loader;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\FixturesBundle\Fixture\FixtureInterface;
+use Sylius\Bundle\FixturesBundle\Loader\FixtureLoader;
+use Sylius\Bundle\FixturesBundle\Loader\FixtureLoaderInterface;
 
 /**
- * @mixin \Sylius\Bundle\FixturesBundle\Loader\FixtureLoader
+ * @mixin FixtureLoader
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
@@ -17,8 +29,15 @@ final class FixtureLoaderSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\FixturesBundle\Loader\FixtureLoader');
     }
 
-    function it_implements_TODO_interface()
+    function it_implements_fixture_loader_interface()
     {
-        $this->shouldImplement('Sylius\Bundle\FixturesBundle\Loader\FixtureLoaderInterface');
+        $this->shouldImplement(FixtureLoaderInterface::class);
+    }
+
+    function it_loads_a_fixture(FixtureInterface $fixture)
+    {
+        $fixture->load(['options'])->shouldBeCalled();
+
+        $this->load($fixture, ['options']);
     }
 }

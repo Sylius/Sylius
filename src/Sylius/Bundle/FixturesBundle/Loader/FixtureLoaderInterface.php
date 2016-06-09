@@ -11,10 +11,16 @@
 
 namespace Sylius\Bundle\FixturesBundle\Loader;
 
+use Sylius\Bundle\FixturesBundle\Fixture\FixtureInterface;
+
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 interface FixtureLoaderInterface
 {
-
+    /**
+     * @param FixtureInterface $fixture
+     * @param array $options
+     */
+    public function load(FixtureInterface $fixture, array $options);
 }

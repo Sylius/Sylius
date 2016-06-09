@@ -11,10 +11,38 @@
 
 namespace Sylius\Bundle\FixturesBundle\Loader;
 
+use Sylius\Bundle\FixturesBundle\Fixture\FixtureInterface;
+use Sylius\Bundle\FixturesBundle\Suite\SuiteInterface;
+
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class SuiteLoader implements SuiteLoaderInterface
 {
+    /**
+     * @var FixtureLoaderInterface
+     */
+    private $fixtureLoader;
 
+    /**
+     * @param FixtureLoaderInterface $fixtureLoader
+     */
+    public function __construct(FixtureLoaderInterface $fixtureLoader)
+    {
+        $this->fixtureLoader = $fixtureLoader;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function load(SuiteInterface $suite)
+    {
+        /**
+         * @var FixtureInterface $fixture
+         * @var array $fixtureOptions
+         */
+        foreach ($suite->getFixtures() as $fixture => $fixtureOptions) {
+            $this->fixtureLoader->load($fixture, $fixtureOptions);
+        }
+    }
 }

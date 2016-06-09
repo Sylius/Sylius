@@ -11,10 +11,18 @@
 
 namespace Sylius\Bundle\FixturesBundle\Loader;
 
+use Sylius\Bundle\FixturesBundle\Fixture\FixtureInterface;
+
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class FixtureLoader implements FixtureLoaderInterface
 {
-    
+    /**
+     * {@inheritdoc}
+     */
+    public function load(FixtureInterface $fixture, array $options)
+    {
+       $fixture->load($options);
+    }
 }

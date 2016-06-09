@@ -26,7 +26,7 @@ interface FixtureRegistryInterface
     public function getFixture($name);
 
     /**
-     * @return FixtureInterface[]
+     * @return FixtureInterface[] Name indexed
      */
     public function getFixtures();
 }

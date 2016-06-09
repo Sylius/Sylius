@@ -44,6 +44,6 @@ final class FixtureOptionsProcessorSpec extends ObjectBehavior
     {
         $configurationProcessor->processConfiguration($fixture, [['option' => 'value']])->willReturn(['processed_option' => 'processed_value']);
 
-        $this->process($fixture, ['option' => 'value'])->shouldReturn(['processed_option' => 'processed_value']);
+        $this->process($fixture, [['option' => 'value']])->shouldReturn(['processed_option' => 'processed_value']);
     }
 }
