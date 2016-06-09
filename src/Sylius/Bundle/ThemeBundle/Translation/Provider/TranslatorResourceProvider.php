@@ -19,7 +19,7 @@ final class TranslatorResourceProvider implements TranslatorResourceProviderInte
     /**
      * @var TranslationResourceInterface[]
      */
-    private $resources;
+    private $resources = [];
 
     /**
      * @var array
