@@ -226,6 +226,7 @@
             <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
             <argument type="service" id="sylius.behat.page.shop.checkout.security_step" />
             <argument type="service" id="sylius.behat.page.shop.checkout.addressing_step" />
+            <argument type="service" id="sylius.behat.page.shop.checkout.addressing" />
             <argument type="service" id="sylius.behat.page.shop.checkout.shipping_step" />
             <argument type="service" id="sylius.behat.page.shop.checkout.payment_step" />
             <argument type="service" id="sylius.behat.page.shop.checkout.finalize_step" />

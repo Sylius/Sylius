@@ -1,5 +1,26 @@
 (function($) {
   $.fn.extend({
+    toggleElement: function() {
+      return this.each(function() {
+        $(this).on('change', function(event) {
+          event.preventDefault();
+
+          var toggleElement = $(this);
+          var targetElement = $('#' + toggleElement.data('toggles'));
+
+          if (toggleElement.is(':checked')) {
+            targetElement.show();
+          } else {
+            targetElement.hide();
+          }
+        });
+
+        return $(this).trigger('change');
+      });
+    }
+  });
+
+  $.fn.extend({
     requireConfirmation: function() {
       return this.each(function() {
         return $(this).on('click', function(event) {
@@ -48,6 +69,7 @@
     $('.popups').popup();
 
     $('[data-requires-confirmation]').requireConfirmation();
+    $('[data-toggles]').toggleElement();
 
     $('.special.cards .image').dimmer({
       on: 'hover'

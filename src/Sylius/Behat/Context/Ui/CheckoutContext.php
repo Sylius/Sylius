@@ -12,6 +12,7 @@
 namespace Sylius\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Page\Shop\Checkout\AddressingPageInterface;
 use Sylius\Behat\Page\Shop\Order\OrderPaymentsPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\AddressingStepInterface;
 use Sylius\Behat\Page\Shop\Checkout\FinalizeStepInterface;
@@ -19,11 +20,14 @@ use Sylius\Behat\Page\Shop\Checkout\PaymentStepInterface;
 use Sylius\Behat\Page\Shop\Checkout\SecurityStepInterface;
 use Sylius\Behat\Page\Shop\Checkout\ShippingStepInterface;
 use Sylius\Behat\Page\Shop\Checkout\ThankYouPageInterface;
+use Sylius\Behat\Service\NotificationCheckerInterface;
+use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -44,6 +48,11 @@ final class CheckoutContext implements Context
      * @var AddressingStepInterface
      */
     private $checkoutAddressingStep;
+
+    /**
+     * @var AddressingPageInterface
+     */
+    private $addressingPage;
 
     /**
      * @var ShippingStepInterface
@@ -79,6 +88,7 @@ final class CheckoutContext implements Context
      * @param SharedStorageInterface $sharedStorage
      * @param SecurityStepInterface $checkoutSecurityStep
      * @param AddressingStepInterface $checkoutAddressingStep
+     * @param AddressingPageInterface $addressingPage
      * @param ShippingStepInterface $checkoutShippingStep
      * @param PaymentStepInterface $checkoutPaymentStep
      * @param FinalizeStepInterface $checkoutFinalizeStep
@@ -90,6 +100,7 @@ final class CheckoutContext implements Context
         SharedStorageInterface $sharedStorage,
         SecurityStepInterface $checkoutSecurityStep,
         AddressingStepInterface $checkoutAddressingStep,
+        AddressingPageInterface $addressingPage,
         ShippingStepInterface $checkoutShippingStep,
         PaymentStepInterface $checkoutPaymentStep,
         FinalizeStepInterface $checkoutFinalizeStep,
@@ -100,6 +111,7 @@ final class CheckoutContext implements Context
         $this->sharedStorage = $sharedStorage;
         $this->checkoutSecurityStep = $checkoutSecurityStep;
         $this->checkoutAddressingStep = $checkoutAddressingStep;
+        $this->addressingPage = $addressingPage;
         $this->checkoutShippingStep = $checkoutShippingStep;
         $this->checkoutPaymentStep = $checkoutPaymentStep;
         $this->checkoutFinalizeStep = $checkoutFinalizeStep;
@@ -115,6 +127,49 @@ final class CheckoutContext implements Context
     {
         $this->checkoutAddressingStep->open();
         $this->checkoutAddressingStep->continueCheckout();
+    }
+
+    /**
+     * @Given I am at the checkout addressing step
+     */
+    public function iAmAtTheCheckoutAddressingStep()
+    {
+        $this->addressingPage->open();
+    }
+
+    /**
+     * @When /^I specify the shipping (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
+     * @When /^I (do not specify any shipping address) information$/
+     */
+    public function iSpecifyTheShippingAddressAs(AddressInterface $address)
+    {
+        $this->addressingPage->specifyShippingAddress($address);
+    }
+
+    /**
+     * @When /^I specify the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
+     * @When /^I (do not specify any billing address) information$/
+     */
+    public function iSpecifyTheBillingAddressAs(AddressInterface $address)
+    {
+        $this->addressingPage->specifyBillingAddress($address);
+    }
+
+    /**
+     * @When I choose the different billing address
+     */
+    public function iChooseTheDifferentBillingAddress()
+    {
+        $this->addressingPage->chooseDifferentBillingAddress();
+    }
+
+    /**
+     * @When I proceed to the next step
+     * @When I try to proceed to the next step
+     */
+    public function iProceedToTheNextStep()
+    {
+        $this->addressingPage->nextStep();
     }
 
     /**
@@ -262,6 +317,31 @@ final class CheckoutContext implements Context
     {
         expect($this->orderPaymentsPage->countPaymentWithSpecificState(PaymentInterface::STATE_CANCELLED))->toBe(2);
         expect($this->orderPaymentsPage->countPaymentWithSpecificState(PaymentInterface::STATE_NEW))->toBe(1);
+    }
+
+    /**
+     * @Then /^I should(?:| also) be notified that the "([^"]+)" and the "([^"]+)" in (shipping|billing) details are required$/
+     */
+    public function iShouldBeNotifiedThatTheAndTheInShippingDetailsAreRequired($firstElement, $secondElement, $type)
+    {
+        $this->assertElementValidationMessage($type, $firstElement, sprintf('Please enter %s.', $firstElement));
+        $this->assertElementValidationMessage($type, $secondElement, sprintf('Please enter %s.', $secondElement));
+    }
+
+    /**
+     * @param string $type
+     * @param string $element
+     * @param string $expectedMessage
+     *
+     * @throws \InvalidArgumentException
+     */
+    private function assertElementValidationMessage($type, $element, $expectedMessage)
+    {
+        $element = sprintf('%s_%s', $type, implode('_', explode(' ', $element)));
+        Assert::true(
+            $this->addressingPage->checkValidationMessageFor($element, $expectedMessage),
+            sprintf('The %s should be required.', $element)
+        );
     }
 
     /**

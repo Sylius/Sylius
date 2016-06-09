@@ -1,0 +1,28 @@
+<div class="ui styled fluid accordion">
+    <div class="title">
+        <i class="dropdown icon"></i>
+        {{ 'sylius.ui.cart_summary'|trans }}
+    </div>
+    <div class="content">
+        <table class="ui very basic table">
+            <thead>
+            <tr>
+                <th>{{ 'sylius.ui.item'|trans }}</th>
+                <th>{{ 'sylius.ui.quantity'|trans }}</th>
+                <th>{{ 'sylius.ui.subtotal'|trans }}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in order.items %}
+                <tr>
+                    <td>{{ item.getVariant.product.name }}</td>
+                    <td class="center aligned">
+                        {{ item.quantity }}
+                    </td>
+                    <td>{{ item.subtotal|sylius_price }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

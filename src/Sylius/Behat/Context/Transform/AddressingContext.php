@@ -54,6 +54,25 @@ final class AddressingContext implements Context
     }
 
     /**
+     * @Transform /^address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)"$/
+     */
+    public function createNewAddressWith($cityName, $street, $postcode, $countryName, $customerName)
+    {
+        $countryCode = $this->countryNameConverter->convertToCode($countryName);
+        $customerName = explode(' ', $customerName);
+        
+        return $this->createAddress($countryCode, $customerName[0], $customerName[1], $cityName, $street, $postcode);
+    }
+
+    /**
+     * @Transform /^do not specify any (shipping|billing) address$/
+     */
+    public function createEmptyAddress()
+    {
+        return $this->addressFactory->createNew();
+    }
+
+    /**
      * @Transform /^"([^"]+)" addressed it to "([^"]+)", "([^"]+)" "([^"]+)" in the "([^"]+)"$/
      * @Transform /^of "([^"]+)" in the "([^"]+)", "([^"]+)" "([^"]+)", "([^"]+)"$/
      */

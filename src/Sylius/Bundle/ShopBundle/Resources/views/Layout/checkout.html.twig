@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>{% block title %}Sylius{% endblock %}</title>
+
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+    {% block metatags %}
+    {% endblock %}
+
+    {% block stylesheets %}
+        {% include 'SyliusUiBundle::_stylesheets.html.twig' with {'path': 'assets/shop/css/style.css'} %}
+    {% endblock %}
+</head>
+
+<body>
+<div class="ui container">
+    <div class="ui basic segment">
+        <div class="ui large text menu">
+            <div class="ui small image">
+                <img src="{{ asset('assets/shop/img/logo.png') }}" />
+            </div>
+            <div class="right menu">
+                <a href="#" class="item">Sign in</a>
+            </div>
+        </div>
+    </div>
+
+    {% block content %}
+    {% endblock %}
+</div>
+
+{% block javascripts %}
+    {% include 'SyliusUiBundle::_javascripts.html.twig' with {'path': 'assets/shop/js/app.js'} %}
+{% endblock %}
+</body>
+</html>

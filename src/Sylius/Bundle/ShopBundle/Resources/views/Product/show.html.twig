@@ -39,7 +39,7 @@
         </div>
         <div class="column">
             <div class="ui segment">
-                <form action="{{ path('sylius_shop_cart_item_add', {'id': product.id}) }}" method="post">
+                <form action="{{ path('sylius_shop_cart_item_add', {'id': product.id}) }}" method="post" novalidate>
                     {% include ['SyliusShopBundle:Product:_variant.html.twig'] with {'product': product, 'form': form} %}
                     {% if not product.hasVariants and not sylius_inventory_is_available(product.firstVariant) %}
                         <span class="ui red label">{{ 'sylius.ui.out_of_stock'|trans }}</span>
