@@ -185,6 +185,9 @@ class RequestConfigurationSpec extends ObjectBehavior
         $parameters->get('redirect')->willReturn('string');
         $this->getRedirectParameters()->shouldReturn([]);
 
+        $parameters->get('redirect')->willReturn(['parameters' => []]);
+        $this->getRedirectParameters()->shouldReturn([]);
+
         $parameters->get('redirect')->willReturn(['parameters' => ['myParameter']]);
         $this->getRedirectParameters()->shouldReturn(['myParameter']);
 
