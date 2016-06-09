@@ -7,7 +7,7 @@ Architecture Overview
 Before we dive separately into every Sylius concept, you need to have an overview of how our main application is structured.
 You already know that Sylius is built from components and Symfony2 bundles, which are integration layers with the framework.
 
-All bundles share the conventions for naming things and the same way of data persistence. Sylius, by default, uses Doctrine ORM for managing all entities.
+All bundles share the same conventions for naming things and the way of data persistence. Sylius, by default, uses the Doctrine ORM for managing all entities.
 
 For deeper understanding of how Doctrine works, please refer to the `excellent documentation on their official website <http://doctrine-orm.readthedocs.org/en/latest/>`_.
 
@@ -22,18 +22,40 @@ Sylius resource management system lives in the **SyliusResourceBundle** and can 
 Services
 ````````
 
-For every resource you have three very important services available:
+For every resource you have four essential services available:
 
+* Factory
 * Manager
 * Repository
 * Controller
 
-Let us take the "product" resource as an example. By default, It is represented by ``Sylius\Component\Core\Model\Product`` class and implement proper ``ProductInterface``.
+Let us take the "product" resource as an example. By default, it is represented by an object of a class that implements the ``Sylius\Component\Core\Model\ProductInterface``.
+
+Factory
+'''''''
+
+The factory service gives you an ability to create new default objects. It can be accessed via the *sylius.factory.product* id (for the Product resource of course).
+
+.. code-block:: php
+
+    <?php
+
+    public function myAction()
+    {
+        $factory = $this->container->get('sylius.factory.product');
+
+        /** @var ProductInterface $product **/
+        $product = $factory->createNew();
+    }
+
+.. note::
+
+    Creating resources via this factory method makes the code more testable, and allows you to change the model class easily.
 
 Manager
 '''''''
 
-The manager service is just an alias to appropriate Doctrine's *ObjectManager* and can be accessed via the *sylius.manager.product* id.
+The manager service is just an alias to appropriate Doctrine's `ObjectManager`_ and can be accessed via the *sylius.manager.product* id.
 API is exactly the same and you are probably already familiar with it:
 
 .. code-block:: php
@@ -44,9 +66,16 @@ API is exactly the same and you are probably already familiar with it:
     {
         $manager = $this->container->get('sylius.manager.product');
 
-        $manager->persist($product1);
-        $manager->remove($product2);
-        $manager->flush(); // Save changes in database.
+        // Assuming that the $product1 exists in the database we can perform such operations:
+        $manager->remove($product1);
+
+        // If we have created the $product2 using a factory, we can persist it in the database.
+        $manager->persist($product2);
+
+        // Before performing a flush, the changes we have made, are not saved. There is only the $product1 in the database.
+        $manager->flush(); // Saves changes in the database.
+
+        //After these operations we have only $product2 in the database. The $product1 has been removed.
     }
 
 Repository
@@ -65,10 +94,10 @@ The repository service is available via the *sylius.repository.product* id and c
         $repository = $this->container->get('sylius.repository.product');
 
         $product = $repository->find(4); // Get product with id 4, returns null if not found.
-        $product = $repository->findOneBy(array('slug' => 'my-super-product')); // Get one product by defined criteria.
+        $product = $repository->findOneBy(['slug' => 'my-super-product']); // Get one product by defined criteria.
 
         $products = $repository->findAll(); // Load all the products!
-        $products = $repository->findBy(array('special' => true)); // Find products matching some custom criteria.
+        $products = $repository->findBy(['special' => true]); // Find products matching some custom criteria.
     }
 
 Every Sylius repository supports paginating resources. To create a `Pagerfanta instance <https://github.com/whiteoctober/Pagerfanta>`_ use the ``createPaginator`` method.
@@ -98,28 +127,10 @@ Paginator can be created for a specific criteria and with desired sorting.
     {
         $repository = $this->container->get('sylius.repository.product');
 
-        $products = $repository->createPaginator(array('foo' => true), array('createdAt' => 'desc'));
+        $products = $repository->createPaginator(['foo' => true], ['createdAt' => 'desc']);
         $products->setMaxPerPage(3);
         $products->setCurrentPage($request->query->get('page', 1));
     }
-
-To create a new object instance, you can simply call the ``createNew()`` method on the repository.
-
-Now let's try something else than product, we'll create a new TaxRate model.
-
-.. code-block:: php
-
-    <?php
-
-    public function myAction()
-    {
-        $repository = $this->container->get('sylius.repository.tax_rate');
-        $taxRate = $repository->createNew();
-    }
-
-.. note::
-
-    Creating resources via this factory method makes the code more testable, and allows you to change the model class easily.
 
 Controller
 ''''''''''
@@ -132,13 +143,13 @@ This service is the most important for every resource and provides a format agno
 * [GET/PUT]  updateAction() for updating an existing resource
 * [DELETE]   deleteAction() for removing an existing resource
 
-As you can see, these actions match the common operations in any REST API and yes, they are format agnostic.
-That means, all Sylius controllers can serve HTML, JSON or XML, depending on what do you request.
+As you see, these actions match the common operations in any REST API and yes, they are format agnostic.
+This means, all Sylius controllers can serve HTML, JSON or XML, depending on what you request.
 
 Additionally, all these actions are very flexible and allow you to use different templates, forms, repository methods per route.
 The bundle is very powerful and allows you to register your own resources as well. To give you some idea of what is possible, here are some examples!
 
-Displaying a resource with custom template and repository methods:
+Displaying a resource with a custom template and repository methods:
 
 .. code-block:: yaml
 
@@ -152,10 +163,10 @@ Displaying a resource with custom template and repository methods:
             _sylius:
                 template: AppStoreBundle:Product:show.html.twig # Use a custom template.
                 repository:
-                    method: findForStore # Use custom repository method.
+                    method: findForStore # Use a custom repository method.
                     arguments: [$slug] # Pass the slug from the url to the repository.
 
-Creating a product using custom form and redirection method:
+Creating a product using custom form and a redirection method:
 
 .. code-block:: yaml
 
@@ -170,21 +181,23 @@ Creating a product using custom form and redirection method:
                 form: app_user_product # Use this form type!
                 template: AppStoreBundle:Product:create.html.twig # Use a custom template.
                 factory: 
-                    method: createForStore # Use custom factory method to create a product.
+                    method: createForStore # Use a custom factory method to create a product.
                     arguments: [$store] # Pass the store name from the url.
                 redirect:
                     route: app_product_index # Redirect the user to his products.
                     parameters: [$store]
 
-All other methods have the same level of flexibility and are documented in the [SyliusResourceBundle guide].
+All other methods have the same level of flexibility and are documented in the :doc:`Resource Bundle Guide </bundles/SyliusResourceBundle/index>`.
 
-Core and Web Interface
-----------------------
+Core, Admin and Ui
+------------------
 
-Main application is constructed from two main bundles:
+Main application is constructed from four main bundles:
 
 **SyliusCoreBundle**, which is the glue for all other bundles. It is the integration layer of Core component - the heart of Sylius, providing the whole e-commerce framework.
-**SyliusWebBundle**, which contains the default web interface, assets, templates and menu builders.
+**SyliusUiBundle**, which contains the default web interface, assets, templates and menu builders.
+**SyliusAdminBundle**, which contains the default administration of the whole system, that is easily extensible.
+**SyliusShopBundle**, that takes care of the things visible for the customer like the customer account or the cart.
 
 Third Party Libraries
 ---------------------
@@ -198,12 +211,4 @@ Sylius uses a lot of libraries for various tasks:
 * [HWIOAuthBundle] for facebook/amazon/google logins
 * [Pagerfanta] for pagination
 
-Final Thoughts
---------------
-
-...
-
-Learn more
-----------
-
-* ...
+.. _`ObjectManager`: http://www.doctrine-project.org/api/common/2.4/class-Doctrine.Common.Persistence.ObjectManager.html
