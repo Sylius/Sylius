@@ -11,6 +11,7 @@
 
 namespace spec\Sylius\Component\Core\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Addressing\Model\ZoneInterface;
@@ -65,6 +66,19 @@ class ProductSpec extends ObjectBehavior
     {
         $this->setTaxons($taxons);
         $this->getTaxons()->shouldReturn($taxons);
+    }
+
+    function its_taxons_should_be_returned_by_taxonomy(
+        TaxonInterface $taxon,
+        TaxonInterface $rootTaxon
+    ) {
+        $rootTaxon->getName()->willReturn('Brand');
+        $taxon->getRoot()->willReturn($rootTaxon);
+        $this->setTaxons(new ArrayCollection([$taxon->getWrappedObject()]));
+
+        $returnedTaxons = $this->getTaxons('brand');
+        $returnedTaxons->shouldHaveType('Doctrine\Common\Collections\Collection');
+        $returnedTaxons->count()->shouldReturn(1);
     }
 
     function its_variant_selection_method_is_choice_by_default()
