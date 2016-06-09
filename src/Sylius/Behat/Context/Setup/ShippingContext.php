@@ -183,6 +183,11 @@ final class ShippingContext implements Context
 
         $this->shippingMethodRepository->add($shippingMethod);
         $this->sharedStorage->set('shipping_method', $shippingMethod);
+
+        if ($this->sharedStorage->has('channel')) {
+            $channel = $this->sharedStorage->get('channel');
+            $channel->addShippingMethod($shippingMethod);
+        }
     }
 
     /**

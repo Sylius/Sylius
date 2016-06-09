@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ShippingBundle\Form\Type;
 
+use Sylius\Component\Registry\PrioritizedServiceRegistryInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
@@ -35,11 +36,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class ShippingMethodChoiceType extends AbstractType
 {
     /**
-     * Supported methods resolver.
-     *
-     * @var MethodsResolverInterface
+     * @var PrioritizedServiceRegistryInterface
      */
-    protected $resolver;
+    protected $resolversRegistry;
 
     /**
      * @var ServiceRegistryInterface
@@ -52,16 +51,16 @@ class ShippingMethodChoiceType extends AbstractType
     protected $repository;
 
     /**
-     * @param MethodsResolverInterface    $resolver
-     * @param ServiceRegistryInterface    $calculators
-     * @param RepositoryInterface         $repository
+     * @param PrioritizedServiceRegistryInterface $resolversRegistry
+     * @param ServiceRegistryInterface $calculators
+     * @param RepositoryInterface $repository
      */
     public function __construct(
-        MethodsResolverInterface $resolver,
+        PrioritizedServiceRegistryInterface $resolversRegistry,
         ServiceRegistryInterface $calculators,
         RepositoryInterface $repository
     ) {
-        $this->resolver = $resolver;
+        $this->resolversRegistry = $resolversRegistry;
         $this->calculators = $calculators;
         $this->repository = $repository;
     }
@@ -82,10 +81,16 @@ class ShippingMethodChoiceType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $choiceList = function (Options $options) {
+            $methods = $methods = $this->repository->findAll();
+
             if (isset($options['subject'])) {
-                $methods = $this->resolver->getSupportedMethods($options['subject'], $options['criteria']);
-            } else {
-                $methods = $this->repository->findBy($options['criteria']);
+                /** @var MethodsResolverInterface $resolver */
+                foreach ($this->resolversRegistry->all() as $resolver) {
+                    if ($resolver->supports($options['subject'])) {
+                        $methods = $resolver->getSupportedMethods($options['subject']);
+                        break;
+                    }
+                }
             }
 
             return new ObjectChoiceList($methods, null, [], null, 'id');

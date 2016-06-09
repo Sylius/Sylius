@@ -18,6 +18,7 @@ use Sylius\Bundle\ShippingBundle\Controller\ShipmentController;
 use Sylius\Bundle\ShippingBundle\Form\Type\RuleType;
 use Sylius\Bundle\ShippingBundle\Form\Type\ShipmentType;
 use Sylius\Bundle\ShippingBundle\Form\Type\ShippingCategoryType;
+use Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodChoiceType;
 use Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodTranslationType;
 use Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType;
 use Sylius\Component\Resource\Factory\Factory;
@@ -136,7 +137,7 @@ class Configuration implements ConfigurationInterface
                                             ->addDefaultsIfNotSet()
                                             ->children()
                                                 ->scalarNode('default')->defaultValue(ShippingMethodType::class)->cannotBeEmpty()->end()
-                                                ->scalarNode('choice')->defaultValue(ResourceChoiceType::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('choice')->defaultValue(ShippingMethodChoiceType::class)->cannotBeEmpty()->end()
                                             ->end()
                                         ->end()
                                     ->end()
