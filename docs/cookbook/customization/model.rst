@@ -7,7 +7,7 @@ All models in Sylius are placed in the ``Sylius\Component\*ComponentName*\Model`
     Many models in Sylius are **extended in the Core component**.
     If the model you are willing to override exists in the ``Core`` your should be extending the ``Core`` one, not the base model from the component.
 
-Why would you customize a model?
+Why would you customize a Model?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To give you an idea of some purposes of models customizing have a look at a few examples:
