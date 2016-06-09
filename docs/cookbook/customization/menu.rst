@@ -1,5 +1,5 @@
-Extending the menu
-==================
+Customizing Menu
+================
 
 You can add entries to the menu via events easily. You get passed a
 ``Sylius\\Bundle\\WebBundle\\Event\\MenuBuilderEvent`` with ``FactoryInterface`` and ``ItemInterface`` of

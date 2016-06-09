@@ -4,8 +4,8 @@ Cookbook
 .. toctree::
     :hidden:
 
+    customization/customization-guide
     installation-commands
-    extending-menu
     registry
 
 .. include:: /cookbook/map.rst.inc
