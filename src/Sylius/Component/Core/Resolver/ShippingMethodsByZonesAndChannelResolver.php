@@ -12,7 +12,6 @@
 namespace Sylius\Component\Core\Resolver;
 
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
-use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;

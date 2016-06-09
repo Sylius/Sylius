@@ -28,6 +28,9 @@
 
         <parameter key="sylius.registry.shipping_rule_checker.class">Sylius\Component\Registry\ServiceRegistry</parameter>
 
+        <parameter key="sylius.registry.shipping_methods_resolver.class">Sylius\Component\Registry\PrioritizedServiceRegistry</parameter>
+        <parameter key="sylius.shipping_methods_resolver.interface">Sylius\Component\Shipping\Resolver\MethodsResolverInterface</parameter>
+
         <parameter key="sylius.shipping_eligibility_checker.class">Sylius\Component\Shipping\Checker\ShippingMethodEligibilityChecker</parameter>
         <parameter key="sylius.shipping_rule_checker.unit_count.class">Sylius\Component\Shipping\Checker\UnitCountRuleChecker</parameter>
 
@@ -67,9 +70,15 @@
             <argument>shipping rule checker</argument>
         </service>
 
+        <service id="sylius.registry.shipping_methods_resolver" class="%sylius.registry.shipping_methods_resolver.class%">
+            <argument>%sylius.shipping_methods_resolver.interface%</argument>
+            <argument>Shipping methods resolver</argument>
+        </service>
+
         <service id="sylius.shipping_methods_resolver" class="%sylius.shipping_methods_resolver.class%">
             <argument type="service" id="sylius.repository.shipping_method" />
             <argument type="service" id="sylius.shipping_eligibility_checker" />
+            <tag name="sylius.shipping_method_resolver" type="default" label="Default" />
         </service>
         <service id="sylius.form.type.shipping_method_choice" class="%sylius.form.type.shipping_method_choice.class%">
             <argument type="service" id="sylius.shipping_methods_resolver" />

@@ -121,6 +121,8 @@
         <parameter key="sylius.integer_distributor.class">Sylius\Component\Core\Distributor\IntegerDistributor</parameter>
         <parameter key="sylius.proportional_integer_distributor.class">Sylius\Component\Core\Distributor\ProportionalIntegerDistributor</parameter>
 
+        <parameter key="sylius.shipping_methods_resolver.by_zones_and_channel.class">Sylius\Component\Core\Resolver\ShippingMethodsByZonesAndChannelResolver</parameter>
+
         <!-- Data fetchers -->
         <parameter key="sylius.form.type.data_fetcher.number_of_orders.class">Sylius\Bundle\CoreBundle\Form\Type\DataFetcher\NumberOfOrdersType</parameter>
         <parameter key="sylius.form.type.data_fetcher.sales_total.class">Sylius\Bundle\CoreBundle\Form\Type\DataFetcher\SalesTotalType</parameter>
@@ -620,6 +622,12 @@
             <argument type="service" id="sylius.purger.orm_purger.inner" />
             <argument type="service" id="doctrine.orm.entity_manager" />
             <argument type="service" id="sylius.sql_logger.purger" />
+        </service>
+
+        <service id="sylius.shipping_methods_resolver.by_zones_and_channel" class="%sylius.shipping_methods_resolver.by_zones_and_channel.class%">
+            <argument type="service" id="sylius.repository.shipping_method" />
+            <argument type="service" id="sylius.zone_matcher" />
+            <tag name="sylius.shipping_method_resolver" type="by_zones_and_channel" label="By zones and channel" priority="1" />
         </service>
 
         <!-- Data fetchers -->
