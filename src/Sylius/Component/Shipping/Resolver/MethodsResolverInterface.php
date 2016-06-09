@@ -21,9 +21,15 @@ interface MethodsResolverInterface
 {
     /**
      * @param ShippingSubjectInterface $subject
-     * @param array                    $criteria
      *
      * @return ShippingMethodInterface[]
      */
-    public function getSupportedMethods(ShippingSubjectInterface $subject, array $criteria = []);
+    public function getSupportedMethods(ShippingSubjectInterface $subject);
+
+    /**
+     * @param ShippingSubjectInterface $subject
+     *
+     * @return bool
+     */
+    public function supports(ShippingSubjectInterface $subject);
 }
