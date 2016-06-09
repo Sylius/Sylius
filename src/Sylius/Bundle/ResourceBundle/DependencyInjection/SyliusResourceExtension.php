@@ -19,6 +19,8 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\Config\Loader\LoaderInterface;
+use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -60,7 +62,32 @@ class SyliusResourceExtension extends Extension
             $container->setParameter('sylius.translation.available_locales', $config['translation']['available_locales']);
         }
 
-        foreach ($config['resources'] as $alias => $resourceConfig) {
+        $container->setParameter('sylius.resource.settings', $config['settings']);
+        $container->setAlias('sylius.resource_controller.authorization_checker', $config['authorization_checker']);
+
+        $this->loadPersistence($config['drivers'], $config['resources'], $loader);
+        $this->loadResources($config['resources'], $container);
+    }
+
+    private function loadPersistence(array $enabledDrivers, array $resources, LoaderInterface $loader)
+    {
+        foreach ($resources as $alias => $resource) {
+            if (!in_array($resource['driver'], $enabledDrivers)) {
+                throw new InvalidArgumentException(sprintf(
+                    'Resource "%s" uses driver "%s", but this driver has not been enabled.',
+                    $alias, $resource['driver']
+                ));
+            }
+        }
+
+        foreach ($enabledDrivers as $enabledDriver) {
+            $loader->load(sprintf('driver/%s.xml', $enabledDriver));
+        }
+    }
+
+    private function loadResources(array $resources, ContainerBuilder $container)
+    {
+        foreach ($resources as $alias => $resourceConfig) {
             $metadata = Metadata::fromAliasAndConfiguration($alias, $resourceConfig);
 
             $resources = $container->hasParameter('sylius.resources') ? $container->getParameter('sylius.resources') : [];
@@ -82,8 +109,5 @@ class SyliusResourceExtension extends Extension
                 DriverProvider::get($metadata)->load($container, $metadata);
             }
         }
-
-        $container->setParameter('sylius.resource.settings', $config['settings']);
-        $container->setAlias('sylius.resource_controller.authorization_checker', $config['authorization_checker']);
     }
 }

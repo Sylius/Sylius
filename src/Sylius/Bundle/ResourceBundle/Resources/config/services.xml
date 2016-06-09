@@ -19,9 +19,7 @@
     <parameters>
         <parameter key="sylius.resource_registry.class">Sylius\Component\Resource\Metadata\Registry</parameter>
 
-        <parameter key="sylius.orm.repository.class">Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository</parameter>
-        <parameter key="sylius.mongodb_odm.repository.class">Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB\DocumentRepository</parameter>
-        <parameter key="sylius.phpcr_odm.repository.class">Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository</parameter>
+        <parameter key="sylius.mongodb_.repository.class">Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB\DocumentRepository</parameter>
 
         <parameter key="sylius.expression_language.class">Sylius\Bundle\ResourceBundle\ExpressionLanguage\ExpressionLanguage</parameter>
 
@@ -33,17 +31,8 @@
 
         <parameter key="sylius.event_subscriber.resource_delete.class">Sylius\Bundle\ResourceBundle\EventListener\ResourceDeleteSubscriber</parameter>
 
-        <parameter key="sylius.event_subscriber.orm_mapped_super_class.class">Sylius\Bundle\ResourceBundle\EventListener\ORMMappedSuperClassSubscriber</parameter>
-        <parameter key="sylius.event_subscriber.odm_mapped_super_class.class">Sylius\Bundle\ResourceBundle\EventListener\ODMMappedSuperClassSubscriber</parameter>
-
-        <parameter key="sylius.event_subscriber.orm_repository_class.class">Sylius\Bundle\ResourceBundle\EventListener\ORMRepositoryClassSubscriber</parameter>
-        <parameter key="sylius.event_subscriber.odm_repository_class.class">Sylius\Bundle\ResourceBundle\EventListener\ODMRepositoryClassSubscriber</parameter>
-
         <parameter key="sylius.validator.enabled.class">Sylius\Bundle\ResourceBundle\Validator\EnabledValidator</parameter>
         <parameter key="sylius.validator.disabled.class">Sylius\Bundle\ResourceBundle\Validator\DisabledValidator</parameter>
-
-        <parameter key="sylius.translation.translatable_listener.doctrine.orm.class">Sylius\Bundle\ResourceBundle\EventListener\ORMTranslatableListener</parameter>
-        <parameter key="sylius.translation.translatable_listener.doctrine.mongodb_odm.class">Sylius\Bundle\ResourceBundle\EventListener\MongoDBODMTranslatableListener</parameter>
 
         <!-- Sylius State Machine -->
         <parameter key="sylius.state_machine.class">Sylius\Component\Resource\StateMachine\StateMachine</parameter>
@@ -68,23 +57,6 @@
             <tag name="kernel.event_subscriber" event="kernel.exception" />
         </service>
 
-        <service id="sylius.event_subscriber.orm_mapped_super_class" class="%sylius.event_subscriber.orm_mapped_super_class.class%">
-            <argument type="service" id="sylius.resource_registry" />
-            <tag name="doctrine.event_subscriber" priority="8192" />
-        </service>
-        <service id="sylius.event_subscriber.odm_mapped_super_class" class="%sylius.event_subscriber.odm_mapped_super_class.class%">
-            <argument type="service" id="sylius.resource_registry" />
-            <tag name="doctrine_mongodb.odm.event_subscriber" priority="8192" />
-        </service>
-
-        <service id="sylius.event_subscriber.orm_repository_class" class="%sylius.event_subscriber.orm_repository_class.class%">
-            <argument type="service" id="sylius.resource_registry" />
-            <tag name="doctrine.event_subscriber" priority="8192" />
-        </service>
-        <service id="sylius.event_subscriber.odm_repository_class" class="%sylius.event_subscriber.odm_repository_class.class%">
-            <argument type="service" id="sylius.resource_registry" />
-            <tag name="doctrine_mongodb.odm.event_subscriber" priority="8192" />
-        </service>
 
         <service id="sylius.form.type.entity_hidden" class="%sylius.form.type.entity_hidden.class%">
             <argument type="service" id="doctrine" />
