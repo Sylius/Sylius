@@ -29,5 +29,8 @@
 
     {{ form_row(form._token) }}
     {{ form_end(form, {'render_rest': false}) }}
+
+    <h4 class="ui horizontal section divider header">{{ 'sylius.ui.you_may_also_like'|trans }}</h4>
+    {% render(url('sylius_shop_partial_product_latest', {'count': 4, 'template': '@SyliusShop/Product/_simpleList.html.twig'})) %}
 {% endif %}
 {% endblock %}

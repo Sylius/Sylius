@@ -3,6 +3,7 @@
 {% form_theme form 'SyliusUiBundle:Form:theme.html.twig' %}
 
 {% block content %}
+    {% include '@SyliusShop/Checkout/_header.html.twig' %}
     {% include '@SyliusShop/Checkout/_steps.html.twig' %}
     <div class="ui stackable grid">
         <div class="eleven wide column">
@@ -13,13 +14,20 @@
                 {% include '@SyliusShop/Checkout/Form/_addressing.html.twig' %}
 
                 <div class="ui hidden divider"></div>
-                <button type="submit" class="ui large primary icon labeled button"><i class="arrow right icon"></i> {{ 'sylius.ui.next'|trans }}</button>
+                <div class="ui two column grid">
+                    <div class="column">
+                        <a href="{{ path('sylius_shop_homepage') }}" class="ui large icon labeled button"><i class="arrow left icon"></i> {{ 'sylius.ui.back_to_store'|trans }}</a>
+                    </div>
+                    <div class="right aligned column">
+                        <button type="submit" class="ui large primary icon labeled button"><i class="arrow right icon"></i> {{ 'sylius.ui.next'|trans }}</button>
+                    </div>
+                </div>
                 {{ form_row(form._token) }}
                 {{ form_end(form, {'render_rest': false}) }}
             </div>
         </div>
         <div class="five wide column">
-            {% include '@SyliusShop/Checkout/_summary.html.twig' with { 'order': order } %}
+            {% include '@SyliusShop/Checkout/_summary.html.twig' with {'order': order} %}
         </div>
     </div>
 {% endblock %}

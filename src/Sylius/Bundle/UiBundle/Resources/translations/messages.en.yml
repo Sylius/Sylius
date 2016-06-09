@@ -12,6 +12,7 @@ sylius:
         actions: Actions
         add_coupon: Add coupon
         add_to_cart: Add to cart
+        addressing: Addressing
         administration_panel_login: Administration panel login
         all: All
         an_error_occurred: An error occurred
@@ -29,6 +30,8 @@ sylius:
         checkout: Checkout
         have_an_account_already: Have an account already
         sign_in_here: Sign in here
+        checking_out_as: Checking out as
+        you_may_also_like: You may also like
         forgot_password: Forgot password
         your_shopping_cart: Your shopping cart
         your_cart_is_empty: Your cart is empty

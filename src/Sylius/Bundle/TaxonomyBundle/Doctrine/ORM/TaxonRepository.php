@@ -66,7 +66,9 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
     {
         $root = $this->findOneBy(['code' => $code]);
 
-        Assert::notNull($root, sprintf('Taxon with code "%s" not found.', $code));
+        if (null === $root) {
+            return [];
+        }
 
         return $this->findChildren($root);
     }
@@ -78,7 +80,9 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
     {
         $root = $this->findOneBy(['code' => $code]);
 
-        Assert::notNull($root, sprintf('Taxon with code "%s" not found.', $code));
+        if (null === $root) {
+            return [];
+        }
 
         return $this->findChildrenAsTree($root);
     }

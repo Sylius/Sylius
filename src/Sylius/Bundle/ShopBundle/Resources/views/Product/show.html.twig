@@ -9,16 +9,12 @@
     </div>
     <div class="column">
         {% include '@SyliusShop/Product/Show/_header.html.twig' %}
-        {% include '@SyliusShop/Product/Show/_reviews.html.twig' %}
-        <div class="ui two column stackable grid">
-            <div class="column">
+        <div class="ui stackable grid">
+            <div class="four wide column">
                 {% include '@SyliusShop/Product/Show/_price.html.twig' %}
             </div>
-            <div class="right aligned column">
-                <h3 class="ui sub header">
-                    {{ 'sylius.ui.out_of_stock'|trans }}
-                </h3>
-                <span>{{ 'sylius.ui.code'|trans }}: {{ product.code }}</span>
+            <div class="twelve wide right aligned column">
+                <span class="ui sub header">{{ product.code }}</span>
             </div>
         </div>
         <div class="ui basic segment">

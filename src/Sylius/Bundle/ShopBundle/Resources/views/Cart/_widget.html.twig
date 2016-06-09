@@ -1,6 +1,6 @@
 {% set cart = sylius_cart_get() %}
 
-<div class="ui circular cart button" data-position="bottom center">
+<div class="ui circular cart button">
     <i class="cart icon"></i> {{ cart.total|sylius_price }}{% if not cart.empty %}, {{ cart.items|length }} {{ 'sylius.ui.items'|trans|lower }}{% endif %}
 </div>
 <div class="ui large flowing cart hidden popup">
@@ -14,6 +14,6 @@
     </div>
     <a href="{{ path('sylius_shop_cart_summary') }}" class="ui fluid basic text button">{{ 'sylius.ui.view_and_edit_cart'|trans }}</a>
     <div class="ui divider"></div>
-    <a href="#" class="ui fluid primary button">{{ 'sylius.ui.checkout'|trans }}</a>
+    <a href="{{ path('sylius_shop_checkout_start') }}" class="ui fluid primary button">{{ 'sylius.ui.checkout'|trans }}</a>
     {% endif %}
 </div>
