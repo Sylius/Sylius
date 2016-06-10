@@ -120,9 +120,9 @@ payum:
 
     gateways:
         offline:
-            offline: ~
+            factory: offline
         cash_on_delivery:
-            offline: ~
+            factory: offline
 
 sonata_block:
     default_contexts: [cms]

@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b5cad1f69cfb45a94d9dd58864884a4d",
-    "content-hash": "d4896dae3b6edf958e5908676687e8e2",
+    "hash": "bc28746d35a29a97e3dbac9df86d8e32",
+    "content-hash": "9037cbec7ea7d1a5f62461a0f1d85116",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -5542,16 +5542,16 @@
         },
         {
             "name": "payum/payum",
-            "version": "1.3.2",
+            "version": "1.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Payum/Payum.git",
-                "reference": "c89e3e8bdbf34f1fb66d250f201af71b808d9afe"
+                "reference": "f652094b313b4f0e8bf8154bec674547fe84d479"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Payum/Payum/zipball/c89e3e8bdbf34f1fb66d250f201af71b808d9afe",
-                "reference": "c89e3e8bdbf34f1fb66d250f201af71b808d9afe",
+                "url": "https://api.github.com/repos/Payum/Payum/zipball/f652094b313b4f0e8bf8154bec674547fe84d479",
+                "reference": "f652094b313b4f0e8bf8154bec674547fe84d479",
                 "shasum": ""
             },
             "require": {
@@ -5588,7 +5588,7 @@
                 "omnipay/dummy": "~2.0",
                 "paypal/rest-api-sdk-php": "0.5.*",
                 "payum/omnipay-bridge": "^1",
-                "php-http/guzzle6-adapter": "^1.0",
+                "php-http/guzzle6-adapter": "^1.1.1",
                 "phpunit/phpunit": "~4.0",
                 "propel/propel1": "~1.7",
                 "psr/log": "~1.0",
@@ -5663,28 +5663,27 @@
                 "stripe.js",
                 "withdrawal"
             ],
-            "time": "2016-04-29 06:02:20"
+            "time": "2016-06-09 08:35:01"
         },
         {
             "name": "payum/payum-bundle",
-            "version": "1.2.3",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Payum/PayumBundle.git",
-                "reference": "07ac974e35a6a7ebc58f96274e4d32768be2afb6"
+                "reference": "b5a9ac17213b52df688cc48a4ef6347d584400ed"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Payum/PayumBundle/zipball/07ac974e35a6a7ebc58f96274e4d32768be2afb6",
-                "reference": "07ac974e35a6a7ebc58f96274e4d32768be2afb6",
+                "url": "https://api.github.com/repos/Payum/PayumBundle/zipball/b5a9ac17213b52df688cc48a4ef6347d584400ed",
+                "reference": "b5a9ac17213b52df688cc48a4ef6347d584400ed",
                 "shasum": ""
             },
             "require": {
-                "payum/core": "^1.2",
+                "payum/core": "^1.3.3",
                 "php": "^5.5.0|^7.0",
                 "symfony/form": "~2.8|~3.0",
                 "symfony/framework-bundle": "~2.8|~3.0",
-                "symfony/twig-bundle": "~2.8|~3.0",
                 "symfony/validator": "~2.8|~3.0"
             },
             "require-dev": {
@@ -5698,9 +5697,10 @@
                 "omnipay/paypal": "~2.0",
                 "omnipay/stripe": "~2.0",
                 "paypal/rest-api-sdk-php": "0.5.*",
-                "payum/jms-payment-bridge": "~1.0@dev",
-                "payum/omnipay-bridge": "~1.0@dev",
-                "payum/payum": "^1.2@dev",
+                "payum/jms-payment-bridge": "^1@dev",
+                "payum/omnipay-bridge": "^1@dev",
+                "payum/payum": "^1.3@dev",
+                "php-http/guzzle6-adapter": "^1",
                 "phpunit/phpunit": "~4.0",
                 "sonata-project/admin-bundle": "~2.4@dev",
                 "stripe/stripe-php": "~1.0",
@@ -5717,7 +5717,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.2-dev"
+                    "dev-master": "2.1-dev"
                 }
             },
             "autoload": {
@@ -5763,7 +5763,7 @@
                 "stripe.js",
                 "symfony"
             ],
-            "time": "2016-03-07 19:13:26"
+            "time": "2016-05-31 20:28:14"
         },
         {
             "name": "php-http/guzzle6-adapter",
@@ -9753,6 +9753,7 @@
                 }
             ],
             "description": "A tool to automatically fix PHP code style",
+            "abandoned": "friendsofphp/php-cs-fixer",
             "time": "2016-02-26 07:37:29"
         },
         {
