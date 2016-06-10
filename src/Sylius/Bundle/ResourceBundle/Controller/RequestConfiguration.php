@@ -234,7 +234,11 @@ class RequestConfiguration
     {
         $redirect = $this->parameters->get('redirect');
 
-        if (!is_array($redirect) || empty($redirect['parameters'])) {
+        if ($this->areParametersIntentionallyEmptyArray($redirect)) {
+            return [];
+        }
+
+        if (!is_array($redirect)) {
             $redirect = ['parameters' => []];
         }
 
@@ -586,5 +590,15 @@ class RequestConfiguration
     public function getStateMachineTransition()
     {
         return $this->parameters->get('state_machine[transition]', null, true);
+    }
+
+    /**
+     * @param mixed $redirect
+     *
+     * @return bool
+     */
+    private function areParametersIntentionallyEmptyArray($redirect)
+    {
+        return isset($redirect['parameters']) && is_array($redirect['parameters']) && empty($redirect['parameters']);
     }
 }
