@@ -4,3 +4,23 @@
     {% endif %}
     <span> {{ sylius_calculate_price(variant)|sylius_price }} </span>
 {% endmacro %}
+
+{% macro list(products, limit = 2) %}
+    {% import 'SyliusUiBundle:Macro:messages.html.twig' as messages %}
+
+    <div class="ui horizontal segments">
+    {% for product in products %}
+        <div class="ui segment">
+            {% include 'SyliusShopBundle:Product:_singleProduct.html.twig' %}
+        </div>
+        {% if 0 == loop.index % limit %}
+            </div>
+            <div class="ui horizontal segments">
+        {% endif %}
+    {% else %}
+        <div class="ui segment">
+            {{ messages.info('sylius.ui.there_are_no_products_to_display'|trans) }}
+        </div>
+    {% endfor %}
+    </div>
+{% endmacro %}

@@ -18,6 +18,7 @@ use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Test\Services\DefaultChannelFactoryInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
+use Sylius\Component\Currency\Model\CurrencyInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -125,7 +126,7 @@ final class ChannelContext implements Context
     {
         $this->changeChannelState($channel, false);
     }
-
+    
     /**
      * @param ChannelInterface $channel
      * @param bool $state

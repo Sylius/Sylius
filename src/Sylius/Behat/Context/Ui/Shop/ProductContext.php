@@ -13,7 +13,9 @@ namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Shop\Product\ShowPageInterface;
+use Sylius\Behat\Page\SymfonyPageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -29,11 +31,20 @@ final class ProductContext implements Context
     private $showPage;
 
     /**
-     * @param ShowPageInterface $showPage
+     * @var SymfonyPageInterface
      */
-    public function __construct(ShowPageInterface $showPage)
-    {
+    private $taxonShowPage;
+
+    /**
+     * @param ShowPageInterface $showPage
+     * @param SymfonyPageInterface $taxonShowPage
+     */
+    public function __construct(
+        ShowPageInterface $showPage,
+        SymfonyPageInterface $taxonShowPage
+    ) {
         $this->showPage = $showPage;
+        $this->taxonShowPage = $taxonShowPage;
     }
 
     /**
@@ -109,6 +120,47 @@ final class ProductContext implements Context
         Assert::true(
             $this->showPage->isAttributeWithValueOnPage($attributeName, $AttributeValue),
             sprintf('Product should have attribute %s with value %s, but it does not.', $attributeName, $AttributeValue)
+        );
+    }
+    
+    /**
+     * @When /^I browse products from (taxon "([^"]+)")$/
+     */
+    public function iCheckListOfProductsForTaxon(TaxonInterface $taxon)
+    {
+        $this->taxonShowPage->open(['permalink' => $taxon->getPermalink()]);
+    }
+
+    /**
+     * @Then I should see the product :productName
+     */
+    public function iShouldSeeProduct($productName)
+    {
+        Assert::true(
+            $this->taxonShowPage->isProductInList($productName),
+            sprintf("The product %s should appear on page, but it does not.", $productName)
+        );
+    }
+
+    /**
+     * @Then I should not see the product :productName
+     */
+    public function iShouldNotSeeProduct($productName)
+    {
+        Assert::false(
+            $this->taxonShowPage->isProductInList($productName),
+            sprintf("The product %s should not appear on page, but it does.", $productName)
+        );
+    }
+
+    /**
+     * @Then I should see empty list of products
+     */
+    public function iShouldSeeEmptyListOfProducts()
+    {
+        Assert::true(
+            $this->taxonShowPage->isEmpty(),
+            'There should appear information about empty list of products, but it does not.'
         );
     }
 }

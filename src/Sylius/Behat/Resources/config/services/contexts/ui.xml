@@ -43,6 +43,7 @@
 
         <parameter key="sylius.behat.context.ui.shop.account.class">Sylius\Behat\Context\Ui\Shop\AccountContext</parameter>
         <parameter key="sylius.behat.context.ui.shop.cart.class">Sylius\Behat\Context\Ui\Shop\CartContext</parameter>
+        <parameter key="sylius.behat.context.ui.shop.current_channel.class">Sylius\Behat\Context\Ui\Shop\CurrentChannelContext</parameter>
         <parameter key="sylius.behat.context.ui.shop.login.class">Sylius\Behat\Context\Ui\Shop\LoginContext</parameter>
         <parameter key="sylius.behat.context.ui.shop.product.class">Sylius\Behat\Context\Ui\Shop\ProductContext</parameter>
         <parameter key="sylius.behat.context.ui.shop.registration.class">Sylius\Behat\Context\Ui\Shop\RegistrationContext</parameter>
@@ -285,6 +286,11 @@
             <tag name="sylius.behat.context" />
         </service>
 
+        <service id="sylius.behat.context.ui.shop.current_channel" class="%sylius.behat.context.ui.shop.current_channel.class%" scope="scenario">
+            <argument type="service" id="sylius.behat.channel_context_setter" />
+            <tag name="sylius.behat.context" />
+        </service>
+
         <service id="sylius.behat.context.ui.shop.login" class="%sylius.behat.context.ui.shop.login.class%" scope="scenario">
             <argument type="service" id="sylius.behat.page.shop.account.login" />
             <argument type="service" id="sylius.behat.page.shop.home" />
@@ -293,6 +299,7 @@
 
         <service id="sylius.behat.context.ui.shop.product" class="%sylius.behat.context.ui.shop.product.class%" scope="scenario">
             <argument type="service" id="sylius.behat.page.shop.product.show" />
+            <argument type="service" id="sylius.behat.page.shop.taxon.show" />
             <tag name="sylius.behat.context" />
         </service>
 

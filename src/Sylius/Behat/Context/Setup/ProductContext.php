@@ -177,6 +177,7 @@ final class ProductContext implements Context
 
     /**
      * @Given /^there is product "([^"]+)" available in ((?:this|that|"[^"]+") channel)$/
+     * @Given /^the store has a product "([^"]+)" available in ("([^"]+)" channel)$/
      */
     public function thereIsProductAvailableInGivenChannel($productName, ChannelInterface $channel)
     {
