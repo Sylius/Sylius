@@ -46,6 +46,7 @@ payum:
 
 swiftmailer:
     disable_delivery: true
+    logging: true
 
 sylius_channel:
     fake_channel_support: true
