@@ -13,7 +13,6 @@ namespace Sylius\Component\Shipping\Resolver;
 
 use Doctrine\Common\Persistence\ObjectRepository;
 use Sylius\Component\Shipping\Checker\ShippingMethodEligibilityCheckerInterface;
-use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
 /**
@@ -24,7 +23,7 @@ class MethodsResolver implements MethodsResolverInterface
     /**
      * @var ObjectRepository
      */
-    protected $repository;
+    protected $shippingMethodRepository;
 
     /**
      * @var ShippingMethodEligibilityCheckerInterface
@@ -32,25 +31,27 @@ class MethodsResolver implements MethodsResolverInterface
     protected $eligibilityChecker;
 
     /**
-     * @param ObjectRepository                          $repository
+     * @param ObjectRepository $shippingMethodRepository
      * @param ShippingMethodEligibilityCheckerInterface $eligibilityChecker
      */
-    public function __construct(ObjectRepository $repository, ShippingMethodEligibilityCheckerInterface $eligibilityChecker)
-    {
-        $this->repository = $repository;
+    public function __construct(
+        ObjectRepository $shippingMethodRepository,
+        ShippingMethodEligibilityCheckerInterface $eligibilityChecker
+    ) {
+        $this->shippingMethodRepository = $shippingMethodRepository;
         $this->eligibilityChecker = $eligibilityChecker;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getSupportedMethods(ShippingSubjectInterface $subject, array $criteria = [])
+    public function getSupportedMethods(ShippingSubjectInterface $subject)
     {
         $methods = [];
 
-        foreach ($this->getMethods($criteria) as $method) {
-            if ($this->eligibilityChecker->isEligible($subject, $method)) {
-                $methods[] = $method;
+        foreach ($this->shippingMethodRepository->findBy(['enabled' => true]) as $shippingMethod) {
+            if ($this->eligibilityChecker->isEligible($subject, $shippingMethod)) {
+                $methods[] = $shippingMethod;
             }
         }
 
@@ -58,12 +59,10 @@ class MethodsResolver implements MethodsResolverInterface
     }
 
     /**
-     * @param array $criteria
-     *
-     * @return ShippingMethodInterface[]
+     * {@inheritdoc}
      */
-    protected function getMethods(array $criteria = [])
+    public function supports(ShippingSubjectInterface $subject)
     {
-        return $this->repository->findBy($criteria);
+        return true;
     }
 }

@@ -15,21 +15,14 @@ use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
 /**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-interface MethodsResolverInterface
+interface CompositeMethodsResolverInterface
 {
     /**
-     * @param ShippingSubjectInterface $subject
+     * @param ShippingSubjectInterface $shippingSubject
      *
      * @return ShippingMethodInterface[]
      */
-    public function getSupportedMethods(ShippingSubjectInterface $subject);
-
-    /**
-     * @param ShippingSubjectInterface $subject
-     *
-     * @return bool
-     */
-    public function supports(ShippingSubjectInterface $subject);
+    public function getSupportedMethods(ShippingSubjectInterface $shippingSubject);
 }
