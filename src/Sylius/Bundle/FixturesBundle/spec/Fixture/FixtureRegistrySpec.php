@@ -37,19 +37,24 @@ final class FixtureRegistrySpec extends ObjectBehavior
 
     function it_has_a_fixtures(FixtureInterface $fixture)
     {
-        $this->addFixture('fixture', $fixture);
+        $fixture->getName()->willReturn('fixture');
+
+        $this->addFixture($fixture);
 
         $this->getFixture('fixture')->shouldReturn($fixture);
         $this->getFixtures()->shouldReturn(['fixture' => $fixture]);
     }
 
-    function it_saves_the_last_fixture_with_given_name(FixtureInterface $firstFixture, FixtureInterface $lastFixture)
-    {
-        $this->addFixture('fixture', $firstFixture);
-        $this->addFixture('fixture', $lastFixture);
+    function it_throws_an_exception_if_trying_to_another_fixture_with_the_same_name(
+        FixtureInterface $fixture,
+        FixtureInterface $anotherFixture
+    ) {
+        $fixture->getName()->willReturn('fixture');
+        $anotherFixture->getName()->willReturn('fixture');
 
-        $this->getFixture('fixture')->shouldReturn($lastFixture);
-        $this->getFixture('fixture')->shouldNotReturn($firstFixture);
+        $this->addFixture($fixture);
+        $this->shouldThrow(\InvalidArgumentException::class)->during('addFixture', [$fixture]);
+        $this->shouldThrow(\InvalidArgumentException::class)->during('addFixture', [$anotherFixture]);
     }
 
     function it_returns_an_empty_fixtures_list_if_it_does_not_have_any_fixtures()

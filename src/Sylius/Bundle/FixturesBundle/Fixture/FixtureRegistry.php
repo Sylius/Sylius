@@ -22,12 +22,18 @@ final class FixtureRegistry implements FixtureRegistryInterface
     private $fixtures = [];
 
     /**
-     * @param string $name
      * @param FixtureInterface $fixture
      */
-    public function addFixture($name, FixtureInterface $fixture)
+    public function addFixture(FixtureInterface $fixture)
     {
-        $this->fixtures[$name] = $fixture;
+        if (isset($this->fixtures[$fixture->getName()])) {
+            throw new \InvalidArgumentException(sprintf(
+                'Fixture with name "%s" is already registered.',
+                $fixture->getName()
+            ));
+        }
+
+        $this->fixtures[$fixture->getName()] = $fixture;
     }
 
     /**

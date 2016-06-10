@@ -28,55 +28,15 @@ final class FixtureRegistryPassTest extends AbstractCompilerPassTestCase
     public function it_registers_fixtures()
     {
         $this->setDefinition('sylius_fixtures.fixture_registry', new Definition());
-        $this->setDefinition('acme.fixture', (new Definition())->addTag('sylius_fixtures.fixture', ['fixture-name' => 'foobar']));
-
-        $this->compile();
-
-        $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
-            'sylius_fixtures.fixture_registry',
-            'addFixture',
-            ['foobar', new Reference('acme.fixture')]
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function it_registers_fixtures_under_multiple_names()
-    {
-        $fixtureDefinition = new Definition();
-        $fixtureDefinition->addTag('sylius_fixtures.fixture', ['fixture-name' => 'foo']);
-        $fixtureDefinition->addTag('sylius_fixtures.fixture', ['fixture-name' => 'bar']);
-
-        $this->setDefinition('sylius_fixtures.fixture_registry', new Definition());
-        $this->setDefinition('acme.fixture', $fixtureDefinition);
-
-        $this->compile();
-
-        $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
-            'sylius_fixtures.fixture_registry',
-            'addFixture',
-            ['foo', new Reference('acme.fixture')]
-        );
-
-        $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
-            'sylius_fixtures.fixture_registry',
-            'addFixture',
-            ['bar', new Reference('acme.fixture')]
-        );
-    }
-
-    /**
-     * @test
-     *
-     * @expectedException \InvalidArgumentException
-     */
-    public function it_throws_an_exception_if_tag_does_not_include_name_attribute()
-    {
-        $this->setDefinition('sylius_fixtures.fixture_registry', new Definition());
         $this->setDefinition('acme.fixture', (new Definition())->addTag('sylius_fixtures.fixture'));
 
         $this->compile();
+
+        $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
+            'sylius_fixtures.fixture_registry',
+            'addFixture',
+            [new Reference('acme.fixture')]
+        );
     }
 
     /**

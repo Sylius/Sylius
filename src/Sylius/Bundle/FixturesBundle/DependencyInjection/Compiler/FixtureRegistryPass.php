@@ -34,16 +34,7 @@ final class FixtureRegistryPass implements CompilerPassInterface
 
         $taggedServices = $container->findTaggedServiceIds('sylius_fixtures.fixture');
         foreach ($taggedServices as $id => $tags) {
-            foreach ($tags as $tag) {
-                if (!isset($tag['fixture-name'])) {
-                    throw new \InvalidArgumentException('Fixtures tagged with "sylius_fixtures.fixture" also have to include "fixture-name" tag attribute!');
-                }
-
-                $fixtureRegistry->addMethodCall('addFixture', [
-                    $tag['fixture-name'],
-                    new Reference($id),
-                ]);
-            }
+            $fixtureRegistry->addMethodCall('addFixture', [new Reference($id)]);
         }
     }
 }
