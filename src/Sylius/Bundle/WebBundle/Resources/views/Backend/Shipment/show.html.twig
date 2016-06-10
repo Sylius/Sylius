@@ -98,7 +98,7 @@
         <thead>
             <tr>
                 <th>#</th>
-                <th>{{ 'sylius.ui.sku'|trans }}</th>
+                <th>{{ 'sylius.ui.code'|trans }}</th>
                 <th>{{ 'sylius.ui.name'|trans }}</th>
                 <th>{{ 'sylius.ui.state'|trans }}</th>
                 <th>{{ 'sylius.ui.inventory_state'|trans }}</th>
@@ -110,7 +110,7 @@
         {% for item in shipment.units %}
             <tr>
                 <td>{{ loop.index }}</td>
-                <td>{{ item.stockable.sku }}</td>
+                <td>{{ item.stockable.code }}</td>
                 <td>{{ item.inventoryName }}</td>
                 <td><span class="label label-success">{{ item.shippingState }}</span></td>
                 <td><span class="label label-{{ item.sold ? 'success' : 'important' }}">{{ item.inventoryState }}</span></td>
