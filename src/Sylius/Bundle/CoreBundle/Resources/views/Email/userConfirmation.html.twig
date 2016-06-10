@@ -1,6 +1,10 @@
 {% block subject %}
-    {% autoescape false %}
-    {{ 'email.customer_welcome.subject'|trans }}
-    {% endautoescape %}
+    {{ 'sylius.ui.welcome_to_our_store'|trans }}
 {% endblock %}
-{% block body %}{% endblock %}
+
+{% block body %}
+    {{ 'sylius.ui.welcome_to_our_store'|trans }}
+    <br/><br/>
+    {{ 'sylius.email.user_confirmation.registered'|trans }}<br/>
+    {{ 'sylius.email.user_confirmation.thank_you'|trans }} {{ user.username }}.
+{% endblock %}
