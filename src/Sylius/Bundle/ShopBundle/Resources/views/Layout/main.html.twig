@@ -26,7 +26,7 @@
     <div class="ui container">
         {% include '@SyliusShop/Homepage/_header.html.twig' %}
 
-        {% render(url('sylius_shop_partial_taxon_by_code', {'code': 'category', 'template': '@SyliusShop/Taxon/_horizontalMenu.html.twig'})) %}
+        {% render(url('sylius_shop_partial_taxon_index_by_code', {'code': 'category', 'template': '@SyliusShop/Taxon/_horizontalMenu.html.twig'})) %}
         {% include '@SyliusUi/_flashes.html.twig' %}
 
         {% block content %}

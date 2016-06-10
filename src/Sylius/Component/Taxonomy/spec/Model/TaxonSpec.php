@@ -58,6 +58,30 @@ class TaxonSpec extends ObjectBehavior
         $this->getParent()->shouldReturn($taxon);
     }
 
+    function it_returns_an_array_of_all_parent_taxons(
+        TaxonInterface $categoryTaxon,
+        TaxonInterface $tshirtsTaxon
+    ) {
+        $categoryTaxon->getParent()->willReturn(null);
+        $tshirtsTaxon->getParent()->willReturn($categoryTaxon);
+        $this->setParent($tshirtsTaxon);
+        
+        $this->getParents()->shouldReturn([$tshirtsTaxon, $categoryTaxon]);
+    }
+
+    function it_returns_an_array_of_with_a_single_parent_taxon(TaxonInterface $parentTaxon)
+    {
+        $parentTaxon->getParent()->willReturn(null);
+        $this->setParent($parentTaxon);
+
+        $this->getParents()->shouldReturn([$parentTaxon]);
+    }
+
+    function it_returns_empty_array_for_root_taxon()
+    {
+        $this->getParents()->shouldReturn([]);
+    }
+
     function it_is_root_by_default()
     {
         $this->shouldBeRoot();

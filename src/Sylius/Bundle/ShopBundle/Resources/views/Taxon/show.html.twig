@@ -1,5 +1,15 @@
 {% extends 'SyliusShopBundle:Layout:main.html.twig' %}
 
 {% block content %}
-    {{ render(url('sylius_shop_partial_product_index', {'code': taxon.code })) }}
+{% include '@SyliusShop/Taxon/Show/_breadcrumb.html.twig' %}
+{% include '@SyliusShop/Taxon/Show/_header.html.twig' %}
+
+<div class="ui stackable grid">
+    <div class="four wide column">
+        {% include '@SyliusShop/Taxon/Show/_children.html.twig' %}
+    </div>
+    <div class="twelve wide column">
+        {{ render(url('sylius_shop_partial_product_index_by_taxon_code', {'code': taxon.code, 'template': '@SyliusShop/Product/_gridList.html.twig'})) }}
+    </div>
+</div>
 {% endblock %}

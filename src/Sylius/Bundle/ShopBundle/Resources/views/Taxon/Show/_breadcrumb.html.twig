@@ -1,0 +1,11 @@
+{% set parents = taxon.parents|reverse %}
+
+<div class="ui breadcrumb">
+    <a href={{ path('sylius_shop_homepage') }}" class="section">{{ 'sylius.ui.home'|trans }}</a>
+    <div class="divider"> / </div>
+    {% for parent in parents %}
+    <a href="{{ path('sylius_shop_taxon_show', {'permalink': parent.permalink}) }}" class="section">{{ parent.name }}</a>
+    <div class="divider"> / </div>
+    {% endfor %}
+    <div class="active section">{{ taxon.name }}</div>
+</div>

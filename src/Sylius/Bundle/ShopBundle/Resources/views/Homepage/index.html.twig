@@ -4,7 +4,7 @@
 <h2 class="ui horizontal section divider header">
     {{ 'sylius.ui.latest_products'|trans }}
 </h2>
-{% render(url('sylius_shop_partial_product_latest', {'count': 4, 'template': '@SyliusShop/Product/_simpleList.html.twig'})) %}
+{% render(url('sylius_shop_partial_product_index_latest', {'count': 4, 'template': '@SyliusShop/Product/_simpleList.html.twig'})) %}
 
 {% include '@SyliusShop/Homepage/_promos.html.twig' %}
 
@@ -13,5 +13,5 @@
 <h2 class="ui horizontal section divider header">
     {{ 'sylius.ui.shop_by_brand'|trans }}
 </h2>
-{% render(url('sylius_shop_partial_taxon_by_code', {'code': 'brand', 'template': '@SyliusShop/Taxon/_horizontalMenu.html.twig'})) %}
+{% render(url('sylius_shop_partial_taxon_index_by_code', {'code': 'brand', 'template': '@SyliusShop/Taxon/_horizontalMenu.html.twig'})) %}
 {% endblock %}

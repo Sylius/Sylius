@@ -2,6 +2,7 @@
 
 {% block content %}
 {% include '@SyliusShop/Product/Show/_breadcrumb.html.twig' %}
+<div class="ui hidden divider"></div>
 
 <div class="ui two column stackable grid">
     <div class="column">
@@ -24,7 +25,6 @@
         </div>
         {% include '@SyliusShop/Product/Show/_addToCart.html.twig' %}
         <div class="ui hidden divider"></div>
-        {% include '@SyliusShop/Product/Show/_social.html.twig' %}
     </div>
 </div>
 
@@ -36,5 +36,4 @@
 {% include '@SyliusShop/Product/Show/_tabs.html.twig' %}
 
 {% include '@SyliusShop/Product/Show/_associations.html.twig' %}
-
 {% endblock %}

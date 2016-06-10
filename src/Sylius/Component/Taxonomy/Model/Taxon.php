@@ -139,6 +139,24 @@ class Taxon implements TaxonInterface
     /**
      * {@inheritdoc}
      */
+    public function getParents()
+    {
+        if (null === $parent = $this->getParent()) {
+            return [];
+        }
+
+        $parents = [$parent];
+
+        while (null !== $parent->getParent()) {
+            $parents[] = $parent = $parent->getParent();
+        }
+
+        return $parents;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getChildren()
     {
         return $this->children;
