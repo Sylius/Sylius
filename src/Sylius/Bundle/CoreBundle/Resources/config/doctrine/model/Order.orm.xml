@@ -7,7 +7,7 @@
                   xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
 
     <mapped-superclass name="Sylius\Component\Core\Model\Order" table="sylius_order">
-        <field name="currency" length="3">
+        <field name="currencyCode" column="currency_code" length="3">
             <gedmo:versioned />
         </field>
 

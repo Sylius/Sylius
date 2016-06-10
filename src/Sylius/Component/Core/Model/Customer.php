@@ -22,7 +22,7 @@ class Customer extends BaseCustomer implements CustomerInterface, ProductReviewe
     /**
      * @var string
      */
-    protected $currency;
+    protected $currencyCode;
 
     /**
      * @var ArrayCollection
@@ -55,17 +55,17 @@ class Customer extends BaseCustomer implements CustomerInterface, ProductReviewe
     /**
      * {@inheritdoc}
      */
-    public function setCurrency($currency)
+    public function setCurrencyCode($currencyCode)
     {
-        $this->currency = $currency;
+        $this->currencyCode = $currencyCode;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getCurrency()
+    public function getCurrencyCode()
     {
-        return $this->currency;
+        return $this->currencyCode;
     }
 
     /**

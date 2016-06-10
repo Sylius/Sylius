@@ -46,7 +46,7 @@ class MoneyTypeExtension extends AbstractTypeExtension
     {
         $resolver
             ->setDefaults([
-                'currency' => $this->currencyContext->getCurrency(),
+                'currency' => $this->currencyContext->getCurrencyCode(),
             ])
         ;
     }

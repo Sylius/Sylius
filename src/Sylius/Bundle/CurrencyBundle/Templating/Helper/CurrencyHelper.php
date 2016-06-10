@@ -64,22 +64,22 @@ class CurrencyHelper extends Helper implements CurrencyHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function convertAmount($amount, $currency = null)
+    public function convertAmount($amount, $currencyCode = null)
     {
-        $currency = $currency ?: $this->currencyContext->getCurrency();
+        $currencyCode = $currencyCode ?: $this->currencyContext->getCurrencyCode();
 
-        return $this->currencyConverter->convertFromBase($amount, $currency);
+        return $this->currencyConverter->convertFromBase($amount, $currencyCode);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function convertAndFormatAmount($amount, $currency = null)
+    public function convertAndFormatAmount($amount, $currencyCode = null)
     {
-        $currency = $currency ?: $this->currencyContext->getCurrency();
-        $amount = $this->currencyConverter->convertFromBase($amount, $currency);
+        $currencyCode = $currencyCode ?: $this->currencyContext->getCurrencyCode();
+        $amount = $this->currencyConverter->convertFromBase($amount, $currencyCode);
 
-        return $this->moneyFormatter->format($amount, $currency);
+        return $this->moneyFormatter->format($amount, $currencyCode);
     }
 
     /**

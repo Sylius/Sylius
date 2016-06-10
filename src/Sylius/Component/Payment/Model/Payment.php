@@ -13,6 +13,7 @@ namespace Sylius\Component\Payment\Model;
 
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Resource\Model\TimestampableTrait;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -34,7 +35,7 @@ class Payment implements PaymentInterface
     /**
      * @var string
      */
-    protected $currency;
+    protected $currencyCode;
 
     /**
      * @var int
@@ -117,17 +118,19 @@ class Payment implements PaymentInterface
     /**
      * {@inheritdoc}
      */
-    public function getCurrency()
+    public function getCurrencyCode()
     {
-        return $this->currency;
+        return $this->currencyCode;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setCurrency($currency)
+    public function setCurrencyCode($currencyCode)
     {
-        $this->currency = $currency;
+        Assert::string($currencyCode);
+
+        $this->currencyCode = $currencyCode;
     }
 
     /**

@@ -164,10 +164,10 @@ Feature: Reports
             | Mug  | 10    | 456 |
             | Book | 22    | 948 |
         And the following orders exist:
-            | customer                | shipment                 | address                                                           | currency | exchange_rate |
-            | sylius@example.com      | UPS, shipped, DTBHH380HG | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France | EUR      | 1.00000       |
-            | linustorvalds@linux.com | DHL, shipped, DTBHH380HH | Linus Torvalds, Väätäjänniementie 59, 00440, Helsinki, Finland    | USD      | 0.5           |
-            | sylius@example.com      | UPS, shipped, DTBHH380HI | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France | GBP      | 1.25          |
+            | customer                | shipment                 | address                                                           | currency_code | exchange_rate |
+            | sylius@example.com      | UPS, shipped, DTBHH380HG | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France | EUR           | 1.00000       |
+            | linustorvalds@linux.com | DHL, shipped, DTBHH380HH | Linus Torvalds, Väätäjänniementie 59, 00440, Helsinki, Finland    | USD           | 0.5           |
+            | sylius@example.com      | UPS, shipped, DTBHH380HI | Théophile Morel, 17 avenue Jean Portalis, 33000, Bordeaux, France | GBP           | 1.25          |
         And order #000000001 has following items:
             | product | quantity |
             | Mug     | 2        |

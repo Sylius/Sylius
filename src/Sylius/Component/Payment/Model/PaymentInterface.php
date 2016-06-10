@@ -65,12 +65,12 @@ interface PaymentInterface extends TimestampableInterface, ResourceInterface
     /**
      * @return string
      */
-    public function getCurrency();
+    public function getCurrencyCode();
 
     /**
      * @param string
      */
-    public function setCurrency($currency);
+    public function setCurrencyCode($currencyCode);
 
     /**
      * @return int

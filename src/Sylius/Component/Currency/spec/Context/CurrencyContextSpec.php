@@ -32,22 +32,22 @@ class CurrencyContextSpec extends ObjectBehavior
         $this->shouldImplement(CurrencyContextInterface::class);
     }
 
-    function it_gets_default_currency()
+    function it_gets_default_currency_code()
     {
-        $this->getDefaultCurrency()->shouldReturn('EUR');
+        $this->getDefaultCurrencyCode()->shouldReturn('EUR');
     }
 
-    function it_gets_currency_from_session($storage)
+    function it_gets_currency_code_from_session($storage)
     {
         $storage->getData(CurrencyContextInterface::STORAGE_KEY, 'EUR')->willReturn('RSD');
 
-        $this->getCurrency()->shouldReturn('RSD');
+        $this->getCurrencyCode()->shouldReturn('RSD');
     }
 
-    function it_sets_currency_to_session($storage)
+    function it_sets_currency_code_to_session($storage)
     {
         $storage->setData(CurrencyContextInterface::STORAGE_KEY, 'PLN')->shouldBeCalled();
 
-        $this->setCurrency('PLN');
+        $this->setCurrencyCode('PLN');
     }
 }

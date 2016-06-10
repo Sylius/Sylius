@@ -86,11 +86,11 @@ class LoadUsersData extends DataFixture
      * @param string $password
      * @param bool   $enabled
      * @param array  $roles
-     * @param string $currency
+     * @param string $currencyCode
      *
      * @return UserInterface
      */
-    protected function createUser($email, $password, $enabled = true, array $roles = ['ROLE_USER'], $currency = 'EUR')
+    protected function createUser($email, $password, $enabled = true, array $roles = ['ROLE_USER'], $currencyCode = 'EUR')
     {
         $canonicalizer = $this->get('sylius.user.canonicalizer');
 
@@ -99,7 +99,7 @@ class LoadUsersData extends DataFixture
         $customer = $this->getCustomerFactory()->createNew();
         $customer->setFirstname($this->faker->firstName);
         $customer->setLastname($this->faker->lastName);
-        $customer->setCurrency($currency);
+        $customer->setCurrencyCode($currencyCode);
         $user->setCustomer($customer);
         $user->setUsername($email);
         $user->setEmail($email);

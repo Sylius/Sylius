@@ -25,5 +25,5 @@ interface PaymentFactoryInterface extends FactoryInterface
      *
      * @return PaymentInterface
      */
-    public function createWithAmountAndCurrency($amount, $currency);
+    public function createWithAmountAndCurrencyCode($amount, $currency);
 }

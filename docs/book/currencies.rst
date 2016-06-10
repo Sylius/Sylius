@@ -33,10 +33,10 @@ To manage the currently used currency, we use **CurrencyContext**. You can alway
 
     public function fooAction()
     {
-        $currency = $this->get('sylius.context.currency')->getCurrency();
+        $currency = $this->get('sylius.context.currency')->getCurrencyCode();
     }
 
-To change the currently used currency, you can simply use the ``setCurrency()`` method of context service.
+To change the currently used currency, you can simply use the ``setCurrencyCode()`` method of context service.
 
 .. code-block:: php
 
@@ -44,7 +44,7 @@ To change the currently used currency, you can simply use the ``setCurrency()`` 
 
     public function fooAction()
     {
-        $this->get('sylius.context.currency')->setCurrency('PLN');
+        $this->get('sylius.context.currency')->setCurrencyCode('PLN');
     }
 
 The currency context can be injected into your custom service and give you access to currently used currency.

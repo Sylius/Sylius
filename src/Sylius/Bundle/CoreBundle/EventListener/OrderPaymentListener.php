@@ -58,7 +58,7 @@ class OrderPaymentListener
 
         /** @var $payment PaymentInterface */
         $payment = $order->getPayments()->last();
-        $payment->setCurrency($order->getCurrency());
+        $payment->setCurrencyCode($order->getCurrencyCode());
         $payment->setAmount($order->getTotal());
     }
 

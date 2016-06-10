@@ -16,6 +16,9 @@ sylius:
             min_length: The credit card's CVV code must be at most than {{ limit }} digits long.
         expiry_year:
             not_blank: Please select the expiration year.
+    payment:
+        currency_code:
+            not_valid: The currency code you entered is invalid.
     payment_method:
         gateway:
             not_blank: Please select payment method gateway.

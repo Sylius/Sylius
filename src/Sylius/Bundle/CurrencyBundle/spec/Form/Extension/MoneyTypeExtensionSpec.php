@@ -32,7 +32,7 @@ class MoneyTypeExtensionSpec extends ObjectBehavior
 
     function it_has_options($currencyContext, OptionsResolver $resolver)
     {
-        $currencyContext->getCurrency()->shouldBeCalled()->willReturn('EUR');
+        $currencyContext->getCurrencyCode()->shouldBeCalled()->willReturn('EUR');
         $resolver->setDefaults(['currency' => 'EUR'])->shouldBeCalled();
 
         $this->configureOptions($resolver);

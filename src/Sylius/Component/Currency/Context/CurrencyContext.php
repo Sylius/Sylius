@@ -18,7 +18,7 @@ class CurrencyContext implements CurrencyContextInterface
     /**
      * @var string
      */
-    protected $defaultCurrency;
+    protected $defaultCurrencyCode;
 
     /**
      * @var StorageInterface
@@ -27,35 +27,35 @@ class CurrencyContext implements CurrencyContextInterface
 
     /**
      * @param StorageInterface $storage
-     * @param string           $defaultCurrency
+     * @param string $defaultCurrencyCode
      */
-    public function __construct(StorageInterface $storage, $defaultCurrency)
+    public function __construct(StorageInterface $storage, $defaultCurrencyCode)
     {
         $this->storage = $storage;
-        $this->defaultCurrency = $defaultCurrency;
+        $this->defaultCurrencyCode = $defaultCurrencyCode;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getDefaultCurrency()
+    public function getDefaultCurrencyCode()
     {
-        return $this->defaultCurrency;
+        return $this->defaultCurrencyCode;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getCurrency()
+    public function getCurrencyCode()
     {
-        return $this->storage->getData(self::STORAGE_KEY, $this->defaultCurrency);
+        return $this->storage->getData(self::STORAGE_KEY, $this->defaultCurrencyCode);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setCurrency($currency)
+    public function setCurrencyCode($currencyCode)
     {
-        return $this->storage->setData(self::STORAGE_KEY, $currency);
+        return $this->storage->setData(self::STORAGE_KEY, $currencyCode);
     }
 }

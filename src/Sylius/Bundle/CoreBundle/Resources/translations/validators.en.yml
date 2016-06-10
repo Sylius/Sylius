@@ -2,6 +2,12 @@ sylius:
     checkout:
         shipping_method:
             not_blank: Please select shipping method.
+    customer:
+        currency_code:
+            not_valid: The currency code you entered is invalid.
+    order:
+        currency_code:
+            not_valid: The currency code you entered is invalid.
     locale:
         code:
             not_blank: Please enter locale code.

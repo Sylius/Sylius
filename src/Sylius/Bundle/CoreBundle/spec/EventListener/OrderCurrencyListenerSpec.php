@@ -40,13 +40,13 @@ class OrderCurrencyListenerSpec extends ObjectBehavior
         ;
     }
 
-    function it_sets_currency_on_order(
+    function it_sets_currency_code_on_order(
         $currencyContext,
         GenericEvent $event,
         OrderInterface $order
     ) {
         $event->getSubject()->willReturn($order);
-        $currencyContext->getCurrency()->shouldBeCalled()->willReturn('PLN');
+        $currencyContext->getCurrencyCode()->shouldBeCalled()->willReturn('PLN');
 
         $this->processOrderCurrency($event);
     }

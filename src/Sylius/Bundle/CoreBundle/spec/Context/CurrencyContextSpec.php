@@ -49,12 +49,12 @@ class CurrencyContextSpec extends ObjectBehavior
         $this->shouldHaveType(SyliusCurrencyContext::class);
     }
 
-    function it_gets_default_currency()
+    function it_gets_default_currency_code()
     {
-        $this->getDefaultCurrency()->shouldReturn('EUR');
+        $this->getDefaultCurrencyCode()->shouldReturn('EUR');
     }
 
-    function it_gets_currency_from_session_if_there_is_no_customer(
+    function it_gets_currency_code_from_session_if_there_is_no_customer(
         $customerContext,
         $storage,
         ChannelInterface $channel,
@@ -67,20 +67,20 @@ class CurrencyContextSpec extends ObjectBehavior
 
         $storage->getData(sprintf(CurrencyContext::STORAGE_KEY, 'WEB'), 'EUR')->willReturn('RSD');
 
-        $this->getCurrency()->shouldReturn('RSD');
+        $this->getCurrencyCode()->shouldReturn('RSD');
     }
 
-    function it_gets_currency_from_customer(
+    function it_gets_currency_code_from_customer(
         CustomerInterface $customer,
         $customerContext
     ) {
         $customerContext->getCustomer()->willReturn($customer);
-        $customer->getCurrency()->willReturn('PLN');
+        $customer->getCurrencyCode()->willReturn('PLN');
 
-        $this->getCurrency()->shouldReturn('PLN');
+        $this->getCurrencyCode()->shouldReturn('PLN');
     }
 
-    function it_sets_currency_to_session_if_there_is_no_customer(
+    function it_sets_currency_code_to_session_if_there_is_no_customer(
         $customerContext,
         $storage,
         ChannelInterface $channel,
@@ -93,21 +93,21 @@ class CurrencyContextSpec extends ObjectBehavior
 
         $storage->setData(sprintf(CurrencyContext::STORAGE_KEY, 'WEB'), 'PLN')->shouldBeCalled();
 
-        $this->setCurrency('PLN');
+        $this->setCurrencyCode('PLN');
     }
 
-    function it_sets_currency_to_customer(
+    function it_sets_currency_code_to_customer(
         CustomerInterface $customer,
         $customerContext,
         ChannelInterface $channel,
         $channelContext
     ) {
         $customerContext->getCustomer()->willReturn($customer);
-        $customer->setCurrency('PLN')->shouldBeCalled();
+        $customer->setCurrencyCode('PLN')->shouldBeCalled();
 
         $channel->getCode()->willReturn('WEB');
         $channelContext->getChannel()->willReturn($channel);
 
-        $this->setCurrency('PLN');
+        $this->setCurrencyCode('PLN');
     }
 }

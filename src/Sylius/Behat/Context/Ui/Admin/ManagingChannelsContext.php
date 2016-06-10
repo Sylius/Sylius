@@ -378,25 +378,25 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
-     * @When I allow for paying in :currency
+     * @When I allow for paying in :currencyCode
      */
-    public function iAllowToPayingForThisChannel($currency)
+    public function iAllowToPayingForThisChannel($currencyCode)
     {
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
-        $currentPage->chooseCurrency($currency);
+        $currentPage->chooseCurrency($currencyCode);
     }
 
     /**
-     * @Then paying in :currency should be possible for the :channel channel
+     * @Then paying in :currencyCode should be possible for the :channel channel
      */
-    public function payingInEuroShouldBePossibleForTheChannel($currency, ChannelInterface $channel)
+    public function payingInEuroShouldBePossibleForTheChannel($currencyCode, ChannelInterface $channel)
     {
         $this->updatePage->open(['id' => $channel->getId()]);
 
         Assert::true(
-            $this->updatePage->isCurrencyChosen($currency),
-            sprintf('Currency %s should be selected but it is not', $currency)
+            $this->updatePage->isCurrencyChosen($currencyCode),
+            sprintf('Currency %s should be selected but it is not', $currencyCode)
         );
     }
 

@@ -46,9 +46,9 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function chooseCurrency($currency)
+    public function chooseCurrency($currencyCode)
     {
-        $this->getDocument()->selectFieldOption('Currencies', $currency);
+        $this->getDocument()->selectFieldOption('Currencies', $currencyCode);
     }
 
     /**

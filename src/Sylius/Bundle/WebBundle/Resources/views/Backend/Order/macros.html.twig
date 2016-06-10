@@ -44,7 +44,7 @@
             <td>
                 <p>{{ order.customer.fullName }} <br><a href="{{ path('sylius_backend_customer_show', {'id': order.customer.id}) }}">{{ order.customer.email }}</a></p>
             </td>
-            <td>{{ order.total|sylius_price(order.currency) }}</td>
+            <td>{{ order.total|sylius_price(order.currencyCode) }}</td>
             <td>{{ order.additionalInformation }}</td>
             <td>
                 <div class="pull-right">
@@ -102,7 +102,7 @@
                     {{ order.customer.email }}
                 </a>
             </td>
-            <td>{{ order.total|sylius_price(order.currency) }}</td>
+            <td>{{ order.total|sylius_price(order.currencyCode) }}</td>
         </tr>
         {% endfor %}
     </tbody>

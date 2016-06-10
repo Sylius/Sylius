@@ -31,7 +31,7 @@ class OrderType extends BaseOrderType
                     new NotBlank(),
                 ],
             ])
-            ->add('currency', 'sylius_currency_code_choice', [
+            ->add('currencyCode', 'sylius_currency_code_choice', [
                 'constraints' => [
                     new NotBlank(),
                 ],

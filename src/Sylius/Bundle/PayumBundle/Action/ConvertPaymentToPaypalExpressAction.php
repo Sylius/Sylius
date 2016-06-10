@@ -48,7 +48,7 @@ class ConvertPaymentToPaypalExpressAction implements ActionInterface
 
         $details = [];
         $details['PAYMENTREQUEST_0_INVNUM'] = $this->invoiceNumberGenerator->generate($order, $payment);
-        $details['PAYMENTREQUEST_0_CURRENCYCODE'] = $order->getCurrency();
+        $details['PAYMENTREQUEST_0_CURRENCYCODE'] = $order->getCurrencyCode();
         $details['PAYMENTREQUEST_0_AMT'] = round($order->getTotal() / 100, 2);
         $details['PAYMENTREQUEST_0_ITEMAMT'] = round($order->getTotal() / 100, 2);
 

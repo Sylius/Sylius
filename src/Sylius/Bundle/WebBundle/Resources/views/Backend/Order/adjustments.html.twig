@@ -52,7 +52,7 @@
                 {{ adjustment.label }}
             </td>
             <td>
-                {{ adjustment.amount|sylius_price(order.currency) }}
+                {{ adjustment.amount|sylius_price(order.currencyCode) }}
             </td>
             <td>
                 {{ misc.state_label(adjustment.locked) }}

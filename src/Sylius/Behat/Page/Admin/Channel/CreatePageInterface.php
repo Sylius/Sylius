@@ -53,9 +53,9 @@ interface CreatePageInterface extends BaseCreatePageInterface
     public function chooseLocale($language);
 
     /**
-     * @param string $currency
+     * @param string $currencyCode
      */
-    public function chooseCurrency($currency);
+    public function chooseCurrency($currencyCode);
 
     /**
      * @param string $shippingMethod

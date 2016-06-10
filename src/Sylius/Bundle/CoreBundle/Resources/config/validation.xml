@@ -16,6 +16,14 @@
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
                                         http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
 
+    <class name="Sylius\Component\Core\Model\Customer">
+        <property name="currencyCode">
+            <constraint name="Currency">
+                <option name="message">sylius.customer.currency_code.not_valid</option>
+            </constraint>
+        </property>
+    </class>
+
     <class name="Sylius\Component\Core\Model\Order">
         <property name="shippingAddress">
             <constraint name="Valid" />
@@ -25,6 +33,11 @@
         </property>
         <property name="shipments">
             <constraint name="Valid" />
+        </property>
+        <property name="currencyCode">
+            <constraint name="Currency">
+                <option name="message">sylius.order.currency_code.not_valid</option>
+            </constraint>
         </property>
     </class>
 
