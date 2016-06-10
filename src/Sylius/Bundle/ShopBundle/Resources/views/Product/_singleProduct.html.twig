@@ -5,9 +5,11 @@
 </div>
 <div class="extra content">
     <span class="right floated">
-        <button class="ui primary button">Add to cart</button>
+        <button class="ui primary button">{{ 'sylius.ui.add_to_cart'|trans }}</button>
     </span>
     <span>
-        {{ sylius_display_price(product.firstVariant) }}
+        {% if product.firstVariant is not null %}
+            {{ sylius_display_price(product.firstVariant) }}
+        {% endif %}
     </span>
 </div>

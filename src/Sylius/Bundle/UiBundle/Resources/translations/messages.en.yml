@@ -11,6 +11,7 @@ sylius:
         account_credentials: Account credentials
         actions: Actions
         add_coupon: Add coupon
+        add_to_cart: Add to cart
         administration_panel_login: Administration panel login
         all: All
         an_error_occurred: An error occurred

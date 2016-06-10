@@ -126,26 +126,6 @@ final class ChannelContext implements Context
     {
         $this->changeChannelState($channel, false);
     }
-
-    /**
-     * @Given /^(this channel) has (currency "([^"]+)")$/
-     */
-    public function thisChannelHasCurrency(ChannelInterface $channel, CurrencyInterface $currency)
-    {
-        $channel->addCurrency($currency);
-        $this->channelManager->flush();
-        $this->sharedStorage->set('channel', $channel);
-    }
-
-    /**
-     * @Given /^(this channel) host is "([^"]+)"$/
-     */
-    public function thisChannelHostIs(ChannelInterface $channel, $hostName)
-    {
-        $channel->setHostname($hostName);
-        $this->channelManager->flush();
-        $this->sharedStorage->set('channel', $channel);
-    }
     
     /**
      * @param ChannelInterface $channel

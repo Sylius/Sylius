@@ -28,5 +28,5 @@ sylius_shop_taxon:
     resource: "@SyliusShopBundle/Resources/config/routing/taxon.yml"
 
 sylius_shop_partial_product:
-    resource: "@SyliusShopBundle/Resources/config/routing/partial/product.yml"
-    prefix: partial
+    resource: "@SyliusShopBundle/Resources/config/routing/partial.yml"
+    prefix: /_partial

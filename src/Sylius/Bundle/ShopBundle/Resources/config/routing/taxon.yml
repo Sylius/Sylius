@@ -2,7 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius_shop_taxon_show:
-    path: taxons/{permalink}
+    path: /taxons/{permalink}
     methods: [GET]
     defaults:
         _controller: sylius.controller.taxon:showAction

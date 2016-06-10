@@ -9,19 +9,19 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Behat\Page\Shop\Product;
+namespace Sylius\Behat\Page\Shop\Taxon;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-interface IndexPageInterface
+interface ShowPageInterface
 {
     /**
-     * @param string $resourceName
-     * 
+     * @param string $productName
+     *
      * @return bool
      */
-    public function isResourceOnPage($resourceName);
+    public function isProductInList($productName);
 
     /**
      * @return bool

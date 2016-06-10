@@ -12,11 +12,8 @@
 namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\Page\Shop\Product\IndexPageInterface;
 use Sylius\Behat\Page\Shop\Product\ShowPageInterface;
 use Sylius\Behat\Page\SymfonyPageInterface;
-use Sylius\Behat\Service\Setter\ChannelContextSetterInterface;
-use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
@@ -34,36 +31,20 @@ final class ProductContext implements Context
     private $showPage;
 
     /**
-     * @var IndexPageInterface
-     */
-    private $indexPage;
-
-    /**
-     * @var ChannelContextSetterInterface
-     */
-    private $channelContextSetter;
-
-    /**
      * @var SymfonyPageInterface
      */
     private $taxonShowPage;
 
     /**
      * @param ShowPageInterface $showPage
-     * @param IndexPageInterface $indexPage
      * @param SymfonyPageInterface $taxonShowPage
-     * @param ChannelContextSetterInterface $channelContextSetter
      */
     public function __construct(
         ShowPageInterface $showPage,
-        IndexPageInterface $indexPage,
-        SymfonyPageInterface $taxonShowPage,
-        ChannelContextSetterInterface $channelContextSetter
+        SymfonyPageInterface $taxonShowPage
     ) {
         $this->showPage = $showPage;
-        $this->indexPage = $indexPage;
         $this->taxonShowPage = $taxonShowPage;
-        $this->channelContextSetter = $channelContextSetter;
     }
 
     /**
@@ -141,17 +122,9 @@ final class ProductContext implements Context
             sprintf('Product should have attribute %s with value %s, but it does not.', $attributeName, $AttributeValue)
         );
     }
-
+    
     /**
-     * @Given /^I want to see products in (channel "([^"]*)")$/
-     */
-    public function iWantToSeeProductsInChannel(ChannelInterface $channel)
-    {
-        $this->channelContextSetter->setChannel($channel);
-    }
-
-    /**
-     * @When /^I check list of products for (taxon "([^"]+)")$/
+     * @When /^I browse products from (taxon "([^"]+)")$/
      */
     public function iCheckListOfProductsForTaxon(TaxonInterface $taxon)
     {
@@ -164,7 +137,7 @@ final class ProductContext implements Context
     public function iShouldSeeProduct($productName)
     {
         Assert::true(
-            $this->indexPage->isResourceOnPage($productName),
+            $this->taxonShowPage->isProductInList($productName),
             sprintf("The product %s should appear on page, but it does not.", $productName)
         );
     }
@@ -175,18 +148,18 @@ final class ProductContext implements Context
     public function iShouldNotSeeProduct($productName)
     {
         Assert::false(
-            $this->indexPage->isResourceOnPage($productName),
+            $this->taxonShowPage->isProductInList($productName),
             sprintf("The product %s should not appear on page, but it does.", $productName)
         );
     }
 
     /**
-     * @Then I should see information about empty list of products
+     * @Then I should see empty list of products
      */
-    public function iShouldSeeInformationAboutEmptyListOfProducts()
+    public function iShouldSeeEmptyListOfProducts()
     {
         Assert::true(
-            $this->indexPage->isEmpty(),
+            $this->taxonShowPage->isEmpty(),
             'There should appear information about empty list of products, but it does not.'
         );
     }

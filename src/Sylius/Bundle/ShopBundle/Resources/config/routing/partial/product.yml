@@ -2,12 +2,12 @@
 # (c) Paweł Jędrzejewski
 
 sylius_shop_partial_product_index:
-    path: /products
+    path: /
     methods: [GET]
     defaults:
         _controller: sylius.controller.product:indexAction
         _sylius:
             repository:
-                method: findByTaxonCodeAndChannel
+                method: findEnabledByTaxonCodeAndChannel
                 arguments: [$code, 'expr:service("sylius.context.channel").getChannel()']
             template: SyliusShopBundle:Product:index.html.twig

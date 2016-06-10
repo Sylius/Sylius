@@ -86,5 +86,5 @@ interface ProductRepositoryInterface extends BaseProductRepositoryInterface
      * 
      * @return ProductInterface[]|null
      */
-    public function findByTaxonCodeAndChannel($code, ChannelInterface $channel);
+    public function findEnabledByTaxonCodeAndChannel($code, ChannelInterface $channel);
 }
