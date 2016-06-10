@@ -64,5 +64,5 @@ interface ShowPageInterface extends PageInterface
      *
      * @return bool
      */
-     public function isAttributeWithValueOnPage($attributeName, $AttributeValue);
+     public function hasAttributeWithValue($attributeName, $AttributeValue);
 }

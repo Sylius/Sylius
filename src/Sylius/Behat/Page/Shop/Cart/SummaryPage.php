@@ -26,9 +26,9 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
      */
     public function getGrandTotal()
     {
-        $grandTotalElement = $this->getElement('grand_total');
+        $totalElement = $this->getElement('grand_total');
 
-        return trim(str_replace('Grand total:', '', $grandTotalElement->getText()));
+        return $totalElement->getText();
     }
 
     /**
@@ -38,7 +38,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     {
         $taxTotalElement = $this->getElement('tax_total');
 
-        return trim(str_replace('Tax total:', '', $taxTotalElement->getText()));
+        return $taxTotalElement->getText();
     }
 
     /**
@@ -48,7 +48,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     {
         $shippingTotalElement = $this->getElement('shipping_total');
 
-        return trim(str_replace('Shipping total:', '', $shippingTotalElement->getText()));
+        return $shippingTotalElement->getText();
     }
 
     /**
@@ -58,7 +58,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     {
         $shippingTotalElement = $this->getElement('promotion_total');
 
-        return trim(str_replace('Promotion total:', '', $shippingTotalElement->getText()));
+        return $shippingTotalElement->getText();
     }
 
     /**
@@ -106,7 +106,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
         $itemElement = $this->getElement('product_row', ['%name%' => $productName]);
         $itemElement->find('css', 'input[type=number]')->setValue($quantity);
 
-        $this->getDocument()->pressButton('Save');
+        $this->getElement('save_button')->click();
     }
 
     /**
@@ -122,15 +122,15 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     /**
      * {@inheritdoc}
      */
-    public function isItemWithName($name)
+    public function hasItemNamed($name)
     {
-       return $this->findItemWith($name, 'tbody  tr > td > div > a > strong');
+       return $this->findItemWith($name, '.sylius-product-name');
     }
 
     /**
      * {@inheritdoc}
      */
-    public function isItemWithVariant($variantName)
+    public function hasItemWithVariantNamed($variantName)
     {
        return $this->findItemWith($variantName, 'tbody  tr > td > strong');
     }
@@ -187,19 +187,16 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'grand_total' => '#cart-summary td:contains("Grand total")',
-            'promotion_total' => '#cart-summary td:contains("Promotion total")',
-            'shipping_total' => '#cart-summary td:contains("Shipping total")',
-            'tax_total' => '#cart-summary td:contains("Tax total")',
-            'product_row' => '#cart-items tbody tr:contains("%name%")',
-            'product_regular_price' => '#cart-items tr:contains("%name%") .regular-price',
-            'product_discount_price' => '#cart-items tr:contains("%name%") .discount-price',
-            'total' => '.total',
-            'quantity' => '#sylius_cart_items_%number%_quantity',
-            'unit_price' => '.unit-price',
-            'cart_items' => '#cart-items',
-            'cart_summary' => '#cart-summary',
-            'clear_button' => 'a[class*="clear"]',
+            'total' => '#sylius-cart-grand-total',
+            'promotion_total' => '#sylius-cart-promotion-total',
+            'shipping_total' => '#sylius-cart-shipping-total',
+            'tax_total' => '#sylius-cart-tax-total',
+            'product_row' => '#sylius-cart-items tbody tr:contains("%name%")',
+            'product_regular_price' => '#sylius-cart-items tr:contains("%name%") .regular-price',
+            'product_discount_price' => '#sylius-cart-items tr:contains("%name%") .discount-price',
+            'cart_items' => '#sylius-cart-items',
+            'clear_button' => '#sylius-cart-clear',
+            'save_button' => '#sylius-save',
         ]);
     }
 
@@ -215,8 +212,8 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     {
         $itemsAttributes = $this->getElement('cart_items')->findAll('css', $selector);
 
-        foreach($itemsAttributes as $itemAttribute) {
-            if($attributeName === $itemAttribute->getText()) {
+        foreach ($itemsAttributes as $itemAttribute) {
+            if ($attributeName === $itemAttribute->getText()) {
                 return true;
             }
         }

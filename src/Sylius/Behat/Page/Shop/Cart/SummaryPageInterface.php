@@ -82,14 +82,14 @@ interface SummaryPageInterface extends PageInterface
      *
      * @return bool
      */
-    public function isItemWithName($name);
+    public function hasItemNamed($name);
 
     /**
      * @param string $variantName
      *
      * @return bool
      */
-    public function isItemWithVariant($variantName);
+    public function hasItemWithVariantNamed($variantName);
 
     /**
      * @param string $productName

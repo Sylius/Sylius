@@ -25,6 +25,7 @@ use Webmozart\Assert\Assert;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Anna Walasek <anna.walasek@lakion.com>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class CartContext implements Context
 {
@@ -307,7 +308,7 @@ final class CartContext implements Context
     public function thisProductShouldHaveName($itemName)
     {
         Assert::true(
-            $this->summaryPage->isItemWithName($itemName),
+            $this->summaryPage->hasItemNamed($itemName),
             sprintf('The product with name %s should appear on the list, but it does not.', $itemName)
         );
     }
@@ -318,7 +319,7 @@ final class CartContext implements Context
     public function thisItemShouldHaveVariant($variantName)
     {
         Assert::true(
-            $this->summaryPage->isItemWithVariant($variantName),
+            $this->summaryPage->hasItemWithVariantNamed($variantName),
             sprintf('The product with variant %s should appear on the list, but it does not.', $variantName)
         );
     }
