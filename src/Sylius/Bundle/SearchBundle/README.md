@@ -48,7 +48,7 @@ The default value for both search and filter forms is GET but you can use post b
 request_method: POST
 ```
 
-### Engine 
+### Engine
 
 ```yaml
 engine: orm
@@ -113,25 +113,36 @@ fos_elastica:
              types:
                  product:
                      mappings:
-                         name:
-                             type: string
-                             analyzer: my_analyzer
-                         description: ~
-                         slug: ~
-                         color: ~
-                         price:
-                            type: integer
-                         channels:
-                            type: string
-                            index: not_analyzed
-                         taxons:
-                            type: string
-                            index: not_analyzed
-                         size: ~
-                         author: ~
-                         made_of:
-                            type: string
-                            index: not_analyzed
+                         id: { type: integer, index: not_analyzed }
+                         name: { type: string, analyzer: my_analyzer }
+                         description: { type: string }
+                         price: { type: integer }
+                         shortDescription: { type: string }
+                         slug: { type: string, index: not_analyzed }
+                         translations:
+                             type: nested
+                             properties:
+                                 locale: { type: string, index: not_analyzed }
+                                 name: { type: string }
+                                 metaKeywords: { type: string }
+                                 metaDescription: { type: string }
+                         variants:
+                             type: nested
+                             properties:
+                                 code: { type: string }
+                                 availableOn: { type: date, index: not_analyzed }
+                                 availableUntil: { type: date }
+                                 availableOnDemand: { type: boolean }
+                                 presentation: { type: string }
+                                 onHand: { type: integer, index: not_analyzed }
+                                 onHold: { type: integer, index: not_analyzed }
+                         attributes:
+                             type: nested
+                             properties:
+                                 value: { type: string }
+                         channels: { type: string, index: not_analyzed }
+                         taxons: { type: string, index: not_analyzed }
+                         enabled: { type: boolean }
 
                      persistence:
                          driver: orm
@@ -256,7 +267,7 @@ And constructed with the following guidelines.
 * New additions without breaking backwards compatibility bumps the minor.
 * Bug fixes and misc changes bump the patch.
 
-For more information on SemVer, please visit [semver.org website](http://semver.org/).  
+For more information on SemVer, please visit [semver.org website](http://semver.org/).
 This versioning method is same for all **Sylius** bundles and applications.
 
 MIT License
