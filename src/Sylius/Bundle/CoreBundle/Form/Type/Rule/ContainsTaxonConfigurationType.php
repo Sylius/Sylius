@@ -39,7 +39,7 @@ class ContainsTaxonConfigurationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('taxon', 'sylius_entity_to_identifier', [
+            ->add('taxon', 'sylius_taxon_from_identifier', [
                 'label' => 'sylius.form.promotion_rule.contains_taxon.taxon',
                 'class' => $this->taxonRepository->getClassName(),
                 'query_builder' => function () {

@@ -18,7 +18,7 @@ use Symfony\Component\Form\Exception\UnexpectedTypeException;
 // Since the root namespace "spec" is not in our autoload
 require_once __DIR__.DIRECTORY_SEPARATOR.'FakeEntity.php';
 
-class ObjectSelectionToIdentifierCollectionTransformerSpec extends ObjectBehavior
+class ResourceSelectionToIdentifierCollectionTransformerSpec extends ObjectBehavior
 {
     function let()
     {
@@ -27,7 +27,7 @@ class ObjectSelectionToIdentifierCollectionTransformerSpec extends ObjectBehavio
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Form\DataTransformer\ObjectSelectionToIdentifierCollectionTransformer');
+        $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Form\DataTransformer\ResourceSelectionToIdentifierCollectionTransformer');
     }
 
     function it_does_transform_null_value()

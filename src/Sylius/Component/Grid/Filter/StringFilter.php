@@ -64,9 +64,12 @@ class StringFilter implements FilterInterface
     }
 
     /**
+     * @param ExpressionBuilderInterface $expressionBuilder
      * @param string $type
      * @param string $field
      * @param mixed  $value
+     * 
+     * @return ExpressionBuilderInterface
      */
     private function getExpression(ExpressionBuilderInterface $expressionBuilder, $type, $field, $value)
     {

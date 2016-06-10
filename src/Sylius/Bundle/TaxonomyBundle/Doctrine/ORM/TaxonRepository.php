@@ -114,6 +114,14 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
     /**
      * {@inheritdoc}
      */
+    public function createListQueryBuilder()
+    {
+        return $this->createQueryBuilder('o')->leftJoin('o.translations', 'translation');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getFormQueryBuilder()
     {
         return $this->createQueryBuilder('o');

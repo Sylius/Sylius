@@ -72,3 +72,7 @@ sylius_admin_zone:
 sylius_admin_partial:
     resource: "@SyliusAdminBundle/Resources/config/routing/partial.yml"
     prefix: /_partial
+
+sylius_admin_api_taxon:
+    resource: "@SyliusAdminBundle/Resources/config/routing/api/taxon.yml"
+    prefix: /api

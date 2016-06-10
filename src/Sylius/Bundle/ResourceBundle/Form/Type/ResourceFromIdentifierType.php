@@ -11,37 +11,36 @@
 
 namespace Sylius\Bundle\ResourceBundle\Form\Type;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
-use Sylius\Bundle\ResourceBundle\Form\DataTransformer\ObjectToIdentifierTransformer;
+use Sylius\Bundle\ResourceBundle\Form\DataTransformer\IdentifierToResourceTransformer;
+use Sylius\Component\Resource\Metadata\MetadataInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Object to identifier type.
- *
- * @author Alexandre Bacco <alexandre.bacco@gmail.com>
+ * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class ObjectToIdentifierType extends AbstractType
+class ResourceFromIdentifierType extends AbstractType
 {
     /**
-     * Manager registry.
-     *
-     * @var ManagerRegistry
+     * @var RepositoryInterface
      */
-    protected $manager;
+    protected $repository;
 
     /**
-     * Form name.
-     *
-     * @var string
+     * @var MetadataInterface
      */
-    protected $name;
+    protected $metadata;
 
-    public function __construct(ManagerRegistry $manager, $name)
+    /**
+     * @param RepositoryInterface $repository
+     * @param MetadataInterface $metadata
+     */
+    public function __construct(RepositoryInterface $repository, MetadataInterface $metadata)
     {
-        $this->manager = $manager;
-        $this->name = $name;
+        $this->repository = $repository;
+        $this->metadata = $metadata;
     }
 
     /**
@@ -50,7 +49,7 @@ class ObjectToIdentifierType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->addModelTransformer(
-            new ObjectToIdentifierTransformer($this->manager->getRepository($options['class']), $options['identifier'])
+            new IdentifierToResourceTransformer($this->repository, $options['identifier'])
         );
     }
 
@@ -80,6 +79,6 @@ class ObjectToIdentifierType extends AbstractType
      */
     public function getName()
     {
-        return $this->name;
+        return sprintf('%s_%s_from_identifier', $this->metadata->getApplicationName(), $this->metadata->getName());
     }
 }

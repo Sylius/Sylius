@@ -24,6 +24,7 @@ use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentProductPageResolverInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
+use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -448,6 +449,38 @@ final class ManagingProductsContext implements Context
         Assert::true(
             $this->updateConfigurableProductPage->isCodeDisabled(),
             'Option should be immutable, but it does not.'
+        );
+    }
+
+    /**
+     * @When /^I choose main (taxon "([^"]+)")$/
+     */
+    public function iChooseMainTaxon(TaxonInterface $taxon)
+    {
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([
+            $this->updateSimpleProductPage,
+            $this->updateConfigurableProductPage,
+        ], $this->sharedStorage->get('product'));
+        
+        $currentPage->selectMainTaxon($taxon);
+    }
+
+    /**
+     * @Then /^(this product) main taxon should be "([^"]+)"$/
+     */
+    public function thisProductMainTaxonShouldBe(ProductInterface $product, $taxonName)
+    {
+        /** @var UpdatePageInterface $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([
+            $this->updateSimpleProductPage,
+            $this->updateConfigurableProductPage,
+        ], $this->sharedStorage->get('product'));
+
+        $currentPage->open(['id' => $product->getId()]);
+        
+        Assert::true(
+            $this->updateConfigurableProductPage->isMainTaxonChosen($taxonName),
+            sprintf('The main taxon %s should be chosen, but it does not.', $taxonName)
         );
     }
 

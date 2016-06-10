@@ -41,6 +41,7 @@ class ProductType extends AbstractResourceType
                 'by_reference' => false,
                 'label' => false,
             ])
+            ->add('mainTaxon', 'sylius_taxon_to_hidden_identifier')
         ;
     }
 

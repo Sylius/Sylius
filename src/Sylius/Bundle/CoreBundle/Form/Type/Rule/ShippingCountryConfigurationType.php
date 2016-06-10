@@ -20,29 +20,14 @@ use Symfony\Component\Form\FormBuilderInterface;
 class ShippingCountryConfigurationType extends AbstractType
 {
     /**
-     * @var string
-     */
-    protected $countryClass;
-
-    /**
-     * @param string $countryClass
-     */
-    public function __construct($countryClass)
-    {
-        $this->countryClass = $countryClass;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('country', 'sylius_entity_to_identifier', [
+            ->add('country', 'sylius_country_code_choice', [
                 'label' => 'sylius.form.rule.shipping_country_configuration.country',
                 'empty_value' => 'sylius.form.country.select',
-                'class' => $this->countryClass,
-                'identifier' => 'id',
             ])
         ;
     }

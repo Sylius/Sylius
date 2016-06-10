@@ -152,12 +152,17 @@ abstract class AbstractDriver implements DriverInterface
 
             switch ($formName) {
                 case 'choice':
+                    $definition->addArgument($this->getMetadataDefinition($metadata));
+                    break;
+
+                case 'to_identifier':
+                case 'from_identifier':
+                case 'to_hidden_identifier':
                     $definition->setArguments([
-                        $metadata->getClass('model'),
-                        $metadata->getDriver(),
-                        $alias,
+                        new Reference($metadata->getServiceId('repository')),
+                        $this->getMetadataDefinition($metadata),
                     ]);
-                break;
+                    break;
 
                 default:
                     $validationGroupsParameterName = sprintf('%s.validation_groups.%s%s', $metadata->getApplicationName(), $metadata->getName(), $suffix);
@@ -171,7 +176,7 @@ abstract class AbstractDriver implements DriverInterface
                         $metadata->getClass('model'),
                         $validationGroups,
                     ]);
-                break;
+                    break;
             }
 
             $definition->addTag('form.type', ['alias' => $alias]);

@@ -64,5 +64,10 @@ interface TaxonRepositoryInterface extends RepositoryInterface
     /**
      * @return QueryBuilder
      */
+    public function createListQueryBuilder();
+
+    /**
+     * @return QueryBuilder
+     */
     public function getFormQueryBuilder();
 }

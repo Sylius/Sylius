@@ -26,8 +26,8 @@
         <parameter key="sylius.expression_language.class">Sylius\Bundle\ResourceBundle\ExpressionLanguage\ExpressionLanguage</parameter>
 
         <parameter key="sylius.form.extension.collection.class">Sylius\Bundle\ResourceBundle\Form\Extension\CollectionExtension</parameter>
-        <parameter key="sylius.form.type.entity_hidden.class">Sylius\Bundle\ResourceBundle\Form\Type\EntityHiddenType</parameter>
-        <parameter key="sylius.form.type.object_to_identifier.class">Sylius\Bundle\ResourceBundle\Form\Type\ObjectToIdentifierType</parameter>
+        <parameter key="sylius.form.type.resource_to_hidden_identifier.class">Sylius\Bundle\ResourceBundle\Form\Type\ResourceToHiddenIdentifierType</parameter>
+        <parameter key="sylius.form.type.resource_to_identifier.class">Sylius\Bundle\ResourceBundle\Form\Type\ResourceToIdentifierType</parameter>
         <parameter key="sylius.form.extension.date.class">Sylius\Bundle\ResourceBundle\Form\Extension\DateExtension</parameter>
         <parameter key="sylius.form.type.resource_choice.class">Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType</parameter>
 
@@ -86,11 +86,6 @@
             <tag name="doctrine_mongodb.odm.event_subscriber" priority="8192" />
         </service>
 
-        <service id="sylius.form.type.entity_hidden" class="%sylius.form.type.entity_hidden.class%">
-            <argument type="service" id="doctrine" />
-            <tag name="form.type" alias="entity_hidden" />
-        </service>
-        <service id="sylius.form.type.object_to_identifier" class="%sylius.form.type.object_to_identifier.class%" abstract="true" />
         <service id="sylius.form.extension.collection"
                  class="%sylius.form.extension.collection.class%">
             <tag name="form.type_extension" alias="collection" />

@@ -9,11 +9,11 @@ Sylius\Component\Taxonomy\Model\Taxon:
         code:
             expose: true
             type: string
-        name:
-            expose: true
-            type: string
         path:
             expose: true
             type: string
         children:
             expose: true
+    virtual_properties:
+        getName:
+            serialized_name: name

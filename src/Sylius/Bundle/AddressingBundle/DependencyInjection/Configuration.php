@@ -23,6 +23,7 @@ use Sylius\Bundle\AddressingBundle\Form\Type\ZoneType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Bundle\ResourceBundle\Form\Type\ResourceFromIdentifierType;
 use Sylius\Component\Addressing\Model\Address;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\Country;
@@ -130,6 +131,7 @@ class Configuration implements ConfigurationInterface
                                             ->children()
                                                 ->scalarNode('default')->defaultValue(CountryType::class)->cannotBeEmpty()->end()
                                                 ->scalarNode('choice')->defaultValue(CountryChoiceType::class)->cannotBeEmpty()->end()
+                                                ->scalarNode('from_identifier')->defaultValue(ResourceFromIdentifierType::class)->cannotBeEmpty()->end()
                                             ->end()
                                         ->end()
                                     ->end()
@@ -138,6 +140,10 @@ class Configuration implements ConfigurationInterface
                                     ->addDefaultsIfNotSet()
                                     ->children()
                                         ->arrayNode('default')
+                                            ->prototype('scalar')->end()
+                                            ->defaultValue(['sylius'])
+                                        ->end()
+                                        ->arrayNode('from_identifier')
                                             ->prototype('scalar')->end()
                                             ->defaultValue(['sylius'])
                                         ->end()

@@ -55,6 +55,7 @@
     $('.ui.accordion').accordion();
     $('.link.ui.dropdown').dropdown({action: 'hide'});
     $('.button.ui.dropdown').dropdown({action: 'hide'});
+    $('.ui.fluid.search.selection.ui.dropdown').dropdown();
     $('.menu .item').tab();
 
     $('.form button').on('click', function() {

@@ -143,6 +143,7 @@ sylius:
         returned: Returned
         returns_policy: Returns Policy
         save_changes: Save changes
+        select_taxon: Select taxon
         shipped: Shipped
         shipping_methods: Shipping methods
         show: Show
