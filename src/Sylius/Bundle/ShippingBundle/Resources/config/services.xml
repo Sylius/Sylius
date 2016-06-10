@@ -21,6 +21,7 @@
 
         <parameter key="sylius.form.type.shipping_rule_unit_count_configuration.class">Sylius\Bundle\ShippingBundle\Form\Type\Rule\UnitCountConfigurationType</parameter>
 
+        <parameter key="sylius.composite_shipping_methods_resolver.class">Sylius\Component\Shipping\Resolver\CompositeMethodsResolver</parameter>
         <parameter key="sylius.shipping_methods_resolver.class">Sylius\Component\Shipping\Resolver\MethodsResolver</parameter>
 
         <parameter key="sylius.registry.shipping_calculator.class">Sylius\Component\Registry\ServiceRegistry</parameter>
@@ -75,13 +76,17 @@
             <argument>Shipping methods resolver</argument>
         </service>
 
+        <service id="sylius.composite_shipping_methods_resolver" class="%sylius.composite_shipping_methods_resolver.class%">
+            <argument type="service" id="sylius.registry.shipping_methods_resolver" />
+        </service>
         <service id="sylius.shipping_methods_resolver" class="%sylius.shipping_methods_resolver.class%">
             <argument type="service" id="sylius.repository.shipping_method" />
             <argument type="service" id="sylius.shipping_eligibility_checker" />
             <tag name="sylius.shipping_method_resolver" type="default" label="Default" />
         </service>
+
         <service id="sylius.form.type.shipping_method_choice" class="%sylius.form.type.shipping_method_choice.class%">
-            <argument type="service" id="sylius.registry.shipping_methods_resolver" />
+            <argument type="service" id="sylius.composite_shipping_methods_resolver" />
             <argument type="service" id="sylius.registry.shipping_calculator" />
             <argument type="service" id="sylius.repository.shipping_method" />
             <tag name="form.type" alias="sylius_shipping_method_choice" />

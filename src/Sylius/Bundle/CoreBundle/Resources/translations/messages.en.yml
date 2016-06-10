@@ -149,3 +149,6 @@ sylius:
             name: User confirmation
         password_reset:
             name: Password reset
+
+    shipping_method_resolver:
+        by_zones_and_channel: By zones and channel

@@ -17,6 +17,7 @@ use Sylius\Component\Registry\PrioritizedServiceRegistryInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
+use Sylius\Component\Shipping\Resolver\CompositeMethodsResolverInterface;
 use Sylius\Component\Shipping\Resolver\MethodsResolverInterface;
 use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
@@ -29,11 +30,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class ShippingMethodChoiceTypeSpec extends ObjectBehavior
 {
     function let(
-        PrioritizedServiceRegistryInterface $resolversRegistry,
+        CompositeMethodsResolverInterface $compositeMethodsResolver,
         ServiceRegistryInterface $calculators,
         RepositoryInterface $repository
     ) {
-        $this->beConstructedWith($resolversRegistry, $calculators, $repository);
+        $this->beConstructedWith($compositeMethodsResolver, $calculators, $repository);
     }
 
     function it_is_initializable()

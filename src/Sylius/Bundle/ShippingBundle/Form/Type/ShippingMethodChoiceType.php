@@ -16,6 +16,7 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
+use Sylius\Component\Shipping\Resolver\CompositeMethodsResolverInterface;
 use Sylius\Component\Shipping\Resolver\MethodsResolverInterface;
 use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
@@ -36,9 +37,9 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class ShippingMethodChoiceType extends AbstractType
 {
     /**
-     * @var PrioritizedServiceRegistryInterface
+     * @var CompositeMethodsResolverInterface
      */
-    protected $resolversRegistry;
+    protected $compositeShippingMethodsResolver;
 
     /**
      * @var ServiceRegistryInterface
@@ -51,16 +52,16 @@ class ShippingMethodChoiceType extends AbstractType
     protected $repository;
 
     /**
-     * @param PrioritizedServiceRegistryInterface $resolversRegistry
+     * @param CompositeMethodsResolverInterface $compositeShippingMethodsResolver
      * @param ServiceRegistryInterface $calculators
      * @param RepositoryInterface $repository
      */
     public function __construct(
-        PrioritizedServiceRegistryInterface $resolversRegistry,
+        CompositeMethodsResolverInterface $compositeShippingMethodsResolver,
         ServiceRegistryInterface $calculators,
         RepositoryInterface $repository
     ) {
-        $this->resolversRegistry = $resolversRegistry;
+        $this->compositeShippingMethodsResolver = $compositeShippingMethodsResolver;
         $this->calculators = $calculators;
         $this->repository = $repository;
     }
@@ -81,17 +82,12 @@ class ShippingMethodChoiceType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $choiceList = function (Options $options) {
-            $methods = $methods = $this->repository->findAll();
-
+            $resolvedMethods = [];
             if (isset($options['subject'])) {
-                /** @var MethodsResolverInterface $resolver */
-                foreach ($this->resolversRegistry->all() as $resolver) {
-                    if ($resolver->supports($options['subject'])) {
-                        $methods = $resolver->getSupportedMethods($options['subject']);
-                        break;
-                    }
-                }
+                $resolvedMethods = $this->compositeShippingMethodsResolver->getSupportedMethods($options['subject']);
             }
+
+            $methods = (!empty($resolvedMethods)) ? $resolvedMethods : $this->repository->findAll();
 
             return new ObjectChoiceList($methods, null, [], null, 'id');
         };

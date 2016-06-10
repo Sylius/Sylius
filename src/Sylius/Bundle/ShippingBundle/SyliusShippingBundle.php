@@ -15,7 +15,7 @@ use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Bundle\ShippingBundle\DependencyInjection\Compiler\RegisterCalculatorsPass;
 use Sylius\Bundle\ShippingBundle\DependencyInjection\Compiler\RegisterRuleCheckersPass;
-use Sylius\Bundle\ShippingBundle\DependencyInjection\Compiler\RegisterShippingMethodsResolverPass;
+use Sylius\Bundle\ShippingBundle\DependencyInjection\Compiler\RegisterShippingMethodsResolversPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
@@ -48,7 +48,7 @@ class SyliusShippingBundle extends AbstractResourceBundle
 
         $container->addCompilerPass(new RegisterCalculatorsPass());
         $container->addCompilerPass(new RegisterRuleCheckersPass());
-        $container->addCompilerPass(new RegisterShippingMethodsResolverPass());
+        $container->addCompilerPass(new RegisterShippingMethodsResolversPass());
     }
 
     /**

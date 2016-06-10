@@ -23,7 +23,7 @@ class MethodsResolver implements MethodsResolverInterface
     /**
      * @var ObjectRepository
      */
-    protected $repository;
+    protected $shippingMethodRepository;
 
     /**
      * @var ShippingMethodEligibilityCheckerInterface
@@ -31,12 +31,14 @@ class MethodsResolver implements MethodsResolverInterface
     protected $eligibilityChecker;
 
     /**
-     * @param ObjectRepository $repository
+     * @param ObjectRepository $shippingMethodRepository
      * @param ShippingMethodEligibilityCheckerInterface $eligibilityChecker
      */
-    public function __construct(ObjectRepository $repository, ShippingMethodEligibilityCheckerInterface $eligibilityChecker)
-    {
-        $this->repository = $repository;
+    public function __construct(
+        ObjectRepository $shippingMethodRepository,
+        ShippingMethodEligibilityCheckerInterface $eligibilityChecker
+    ) {
+        $this->shippingMethodRepository = $shippingMethodRepository;
         $this->eligibilityChecker = $eligibilityChecker;
     }
 
@@ -47,9 +49,9 @@ class MethodsResolver implements MethodsResolverInterface
     {
         $methods = [];
 
-        foreach ($this->repository->findBy(['enabled' => true]) as $method) {
-            if ($this->eligibilityChecker->isEligible($subject, $method)) {
-                $methods[] = $method;
+        foreach ($this->shippingMethodRepository->findBy(['enabled' => true]) as $shippingMethod) {
+            if ($this->eligibilityChecker->isEligible($subject, $shippingMethod)) {
+                $methods[] = $shippingMethod;
             }
         }
 

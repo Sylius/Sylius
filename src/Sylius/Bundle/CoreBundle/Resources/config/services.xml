@@ -627,7 +627,7 @@
         <service id="sylius.shipping_methods_resolver.by_zones_and_channel" class="%sylius.shipping_methods_resolver.by_zones_and_channel.class%">
             <argument type="service" id="sylius.repository.shipping_method" />
             <argument type="service" id="sylius.zone_matcher" />
-            <tag name="sylius.shipping_method_resolver" type="by_zones_and_channel" label="By zones and channel" priority="1" />
+            <tag name="sylius.shipping_method_resolver" type="by_zones_and_channel" label="sylius.shipping_methods_resolver.by_zones_and_channel" priority="1" />
         </service>
 
         <!-- Data fetchers -->
