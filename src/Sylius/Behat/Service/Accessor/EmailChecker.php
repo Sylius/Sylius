@@ -66,11 +66,14 @@ class EmailChecker implements EmailCheckerInterface
         $messages = [];
 
         do {
+            $client->back();
             $response = $client->getResponse();
             $profile = $this->symfonyProfiler->loadProfileFromResponse($response);
+            if (false === $profile) {
+                continue;
+            }
             $swiftMailerCollector = $profile->getCollector('swiftmailer');
             $messages = array_merge($messages, $swiftMailerCollector->getMessages());
-            $client->back();
         } while (empty($messages));
         $client->followRedirects();
 

@@ -12,7 +12,7 @@ framework:
     default_locale: "en"
     profiler:
         matcher:
-            path: ^/shop/*
+            path: ^/shop/resetting/request-token
         only_exceptions: false
         collect: true
     session:
@@ -46,6 +46,7 @@ payum:
 
 swiftmailer:
     disable_delivery: true
+    logging: true
 
 sylius_channel:
     fake_channel_support: true
