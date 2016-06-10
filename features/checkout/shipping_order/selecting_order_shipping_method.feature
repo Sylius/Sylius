@@ -2,7 +2,7 @@
 Feature: Selecting order shipping method
     In order to ship my order properly
     As a Customer
-    I want to be able to choose shipping method
+    I want to be able to choose a shipping method
 
     Background:
         Given the store operates on a single channel in "France"
@@ -16,4 +16,4 @@ Feature: Selecting order shipping method
         Given I have product "Targaryen T-Shirt" in the cart
         And I specified the shipping address as "Ankh Morpork", "Frost Alley", "90210", "France" for "Jon Snow"
         When I select "Raven Post" shipping method
-        And I proceed with the payment step
+        And I complete the shipping step

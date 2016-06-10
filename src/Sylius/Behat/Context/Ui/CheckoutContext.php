@@ -171,7 +171,7 @@ final class CheckoutContext implements Context
     {
         $this->addressingPage->open();
         $this->addressingPage->specifyShippingAddress($address);
-        $this->iProceedWithTheShippingStep();
+        $this->iCompleteTheAddressingStep();
     }
 
     /**
@@ -180,46 +180,6 @@ final class CheckoutContext implements Context
     public function iChooseTheDifferentBillingAddress()
     {
         $this->addressingPage->chooseDifferentBillingAddress();
-    }
-
-    public function iSpecifyTheBillingSLastNameAs($lastName = null)
-    {
-        $this->addressingPage->specifyBillingAddressLastName($lastName);
-    }
-
-    /**
-     * @When I specify the billing's street as :streetName
-     * @When I do not specify the billing's street
-     */
-    public function iSpecifyTheBillingSStreetAs($streetName = null)
-    {
-        $this->addressingPage->specifyBillingAddressStreet($streetName);
-    }
-
-    /**
-     * @Given I choose :countryName as billing's country
-     */
-    public function iChooseAsBillingSCountry($countryName)
-    {
-        $this->addressingPage->chooseBillingAddressCountry($countryName);
-    }
-
-    /**
-     * @When I specify the billing's city as :cityName
-     * @When I do not specify the billing's city
-     */
-    public function iSpecifyTheBillingSCityAs($cityName = null)
-    {
-        $this->addressingPage->specifyBillingAddressCity($cityName);
-    }
-
-    /**
-     * @When I specify the billing's postcode as :postcode
-     * @When I do not specify the billing's postcode
-     */
-    public function iSpecifyTheBillingSPostcodeAs($postcode = null)
-    {
-        $this->addressingPage->specifyBillingAddressPostcode($postcode);
     }
 
     /**
@@ -242,18 +202,18 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @When I proceed to the shipping step
-     * @When I try to proceed to the shipping step
+     * @When I complete the addressing step
+     * @When I try to complete the addressing step
      */
-    public function iProceedWithTheShippingStep()
+    public function iCompleteTheAddressingStep()
     {
         $this->addressingPage->nextStep();
     }
 
     /**
-     * @When I proceed with the payment step
+     * @When I complete the shipping step
      */
-    public function iProceedWithThePaymentStep()
+    public function iCompleteTheShippingStep()
     {
         $this->shippingPage->nextStep();
     }
@@ -426,9 +386,9 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Given I should be alerted, that there is no shipping method available for me
+     * @Then I should be informed that my order cannot be shipped to this address
      */
-    public function iShouldBeAlertedThatThereIsNoShippingMethodAvailableForMe()
+    public function iShouldBeInformedThatMyOrderCannotBeShippedToThisAddress()
     {
         Assert::true(
             $this->shippingPage->hasNoShippingMethodsMessage(),

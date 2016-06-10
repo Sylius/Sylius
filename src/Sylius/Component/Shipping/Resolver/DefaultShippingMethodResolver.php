@@ -9,13 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Core\Resolver;
+namespace Sylius\Component\Shipping\Resolver;
 
-use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Repository\ShippingMethodRepositoryInterface;
-use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface;
-use Webmozart\Assert\Assert;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -38,28 +35,13 @@ class DefaultShippingMethodResolver implements DefaultShippingMethodResolverInte
     /**
      * {@inheritdoc}
      */
-    public function getDefaultShippingMethod(ShipmentInterface $shippingSubject)
+    public function getDefaultShippingMethod(ShipmentInterface $shipment)
     {
-        Assert::isInstanceOf($shippingSubject, \Sylius\Component\Core\Model\ShipmentInterface::class);
-
         $shippingMethods = $this->shippingMethodRepository->findBy(['enabled' => true]);
         if (empty($shippingMethods)) {
             return null;
         }
-
-        /** @var ChannelInterface $channel */
-        $channel = $shippingSubject->getOrder()->getChannel();
-
-        foreach ($shippingMethods as $key => $shippingMethod) {
-            if (!$channel->hasShippingMethod($shippingMethod)) {
-                unset($shippingMethods[$key]);
-            }
-        }
-
-        if (empty($shippingMethods)) {
-            return null;
-        }
-
-        return current($shippingMethods);
+        
+        return $shippingMethods[0];
     }
 }

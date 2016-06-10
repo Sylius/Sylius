@@ -13,8 +13,8 @@ namespace Sylius\Component\Core\OrderProcessing;
 
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
-use Sylius\Component\Core\Resolver\DefaultShippingMethodResolverInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -70,8 +70,8 @@ class OrderShipmentProcessor implements OrderShipmentProcessorInterface
 
         /** @var ShipmentInterface $shipment */
         $shipment = $this->shipmentFactory->createNew();
-        $shipment->setMethod($this->defaultShippingMethodResolver->getDefaultShippingMethod());
         $order->addShipment($shipment);
+        $shipment->setMethod($this->defaultShippingMethodResolver->getDefaultShippingMethod($shipment));
 
         return $shipment;
     }

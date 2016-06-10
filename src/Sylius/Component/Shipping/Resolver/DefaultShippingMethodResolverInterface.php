@@ -9,9 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Core\Resolver;
+namespace Sylius\Component\Shipping\Resolver;
 
 use Sylius\Component\Core\Model\ShippingMethodInterface;
+use Sylius\Component\Shipping\Model\ShipmentInterface;
+use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -19,7 +21,9 @@ use Sylius\Component\Core\Model\ShippingMethodInterface;
 interface DefaultShippingMethodResolverInterface
 {
     /**
+     * @param ShipmentInterface $shipment
+     *
      * @return ShippingMethodInterface|null
      */
-    public function getDefaultShippingMethod();
+    public function getDefaultShippingMethod(ShipmentInterface $shipment);
 }

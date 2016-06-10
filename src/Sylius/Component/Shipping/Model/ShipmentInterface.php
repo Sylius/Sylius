@@ -48,7 +48,7 @@ interface ShipmentInterface extends ResourceInterface, ShippingSubjectInterface,
     /**
      * @param ShippingMethodInterface $method
      */
-    public function setMethod(ShippingMethodInterface $method);
+    public function setMethod(ShippingMethodInterface $method = null);
 
     /**
      * @return Collection|ShipmentUnitInterface[]

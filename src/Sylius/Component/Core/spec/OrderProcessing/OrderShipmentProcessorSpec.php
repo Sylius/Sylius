@@ -17,9 +17,9 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\OrderProcessing\OrderShipmentProcessorInterface;
-use Sylius\Component\Core\Resolver\DefaultShippingMethodResolverInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
+use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface;
 
 /**
  * @mixin \Sylius\Component\Core\OrderProcessing\OrderShipmentProcessor
@@ -54,7 +54,7 @@ class OrderShipmentProcessorSpec extends ObjectBehavior
         ShipmentInterface $shipment,
         ShippingMethodInterface $defaultShippingMethod
     ) {
-        $defaultShippingMethodResolver->getDefaultShippingMethod()->willReturn($defaultShippingMethod);
+        $defaultShippingMethodResolver->getDefaultShippingMethod($shipment)->willReturn($defaultShippingMethod);
 
         $shipmentFactory->createNew()->willReturn($shipment);
 

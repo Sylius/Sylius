@@ -326,10 +326,6 @@
             <argument type="service" id="sylius.order_processing.shipment_processor" />
         </service>
 
-        <service id="sylius.resolver.default_shipping_method" class="%sylius.resolver.default_shipping_method.class%">
-            <argument type="service" id="sylius.repository.shipping_method" />
-        </service>
-
         <service id="sylius.order.purger" class="%sylius.order.purger.class%">
             <argument type="service" id="sylius.manager.order" />
             <argument type="service" id="sylius.repository.order" />

@@ -12,9 +12,12 @@
 namespace spec\Sylius\Component\Core\Resolver;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
-use Sylius\Component\Core\Resolver\DefaultShippingMethodResolverInterface;
 use Sylius\Component\Shipping\Repository\ShippingMethodRepositoryInterface;
+use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -36,21 +39,60 @@ class DefaultShippingMethodResolverSpec extends ObjectBehavior
         $this->shouldImplement(DefaultShippingMethodResolverInterface::class);
     }
 
-    function it_returns_first_shipping_method_as_default(
+    function it_returns_first_enabled_shipping_method_from_shipment_order_channel_as_default(
+        ChannelInterface $channel,
+        OrderInterface $order,
+        ShipmentInterface $shipment,
         ShippingMethodInterface $firstShippingMethod,
         ShippingMethodInterface $secondShippingMethod,
+        ShippingMethodInterface $thirdShippingMethod,
         ShippingMethodRepositoryInterface $shippingMethodRepository
     ) {
-        $shippingMethodRepository->findAll()->willReturn([$firstShippingMethod, $secondShippingMethod]);
+        $shippingMethodRepository
+            ->findBy(['enabled' => true])
+            ->willReturn([$firstShippingMethod, $secondShippingMethod, $thirdShippingMethod])
+        ;
 
-        $this->getDefaultShippingMethod()->shouldReturn($firstShippingMethod);
+        $shipment->getOrder()->willReturn($order);
+        $order->getChannel()->willReturn($channel);
+
+        $channel->hasShippingMethod($firstShippingMethod)->willReturn(false);
+        $channel->hasShippingMethod($secondShippingMethod)->willReturn(true);
+        $channel->hasShippingMethod($thirdShippingMethod)->willReturn(true);
+
+        $this->getDefaultShippingMethod($shipment)->shouldReturn($secondShippingMethod);
     }
 
-    function it_returns_null_if_there_is_not_shipping_methods(
+    function it_returns_null_if_there_is_no_enabled_shipping_methods(
+        ShippingMethodRepositoryInterface $shippingMethodRepository,
+        ShipmentInterface $shipment
+    ) {
+        $shippingMethodRepository->findBy(['enabled' => true])->willReturn([]);
+
+        $this->getDefaultShippingMethod($shipment)->shouldReturn(null);
+    }
+
+    function it_returns_null_if_there_is_no_enabled_shipping_methods_for_channel(
+        ChannelInterface $channel,
+        OrderInterface $order,
+        ShipmentInterface $shipment,
+        ShippingMethodInterface $firstShippingMethod,
+        ShippingMethodInterface $secondShippingMethod,
+        ShippingMethodInterface $thirdShippingMethod,
         ShippingMethodRepositoryInterface $shippingMethodRepository
     ) {
-        $shippingMethodRepository->findAll()->willReturn([]);
+        $shippingMethodRepository
+            ->findBy(['enabled' => true])
+            ->willReturn([$firstShippingMethod, $secondShippingMethod, $thirdShippingMethod])
+        ;
 
-        $this->getDefaultShippingMethod()->shouldReturn(null);
+        $shipment->getOrder()->willReturn($order);
+        $order->getChannel()->willReturn($channel);
+
+        $channel->hasShippingMethod($firstShippingMethod)->willReturn(false);
+        $channel->hasShippingMethod($secondShippingMethod)->willReturn(false);
+        $channel->hasShippingMethod($thirdShippingMethod)->willReturn(false);
+
+        $this->getDefaultShippingMethod($shipment)->shouldReturn(null);
     }
 }

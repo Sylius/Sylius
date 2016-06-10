@@ -96,7 +96,7 @@ class Shipment implements ShipmentInterface
     /**
      * {@inheritdoc}
      */
-    public function setMethod(ShippingMethodInterface $method)
+    public function setMethod(ShippingMethodInterface $method = null)
     {
         $this->method = $method;
     }

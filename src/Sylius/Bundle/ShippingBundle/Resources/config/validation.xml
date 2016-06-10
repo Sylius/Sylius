@@ -92,6 +92,12 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
+        <property name="method">
+            <constraint name="NotBlank">
+                <option name="message">sylius.shipment.shipping_method.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
     </class>
 
 </constraint-mapping>
