@@ -30,19 +30,12 @@ final class Suite implements SuiteInterface
     private $fixtures;
 
     /**
-     * @var SplPriorityQueue
-     */
-    private $fixturesOptions;
-
-    /**
      * @param string $name
      */
     public function __construct($name)
     {
         $this->name = $name;
-
         $this->fixtures = new SplPriorityQueue();
-        $this->fixturesOptions = new SplPriorityQueue();
     }
 
     /**
@@ -52,8 +45,7 @@ final class Suite implements SuiteInterface
      */
     public function addFixture(FixtureInterface $fixture, array $options, $priority = 0)
     {
-        $this->fixtures->insert($fixture, $priority);
-        $this->fixturesOptions->insert($options, $priority);
+        $this->fixtures->insert(['fixture' => $fixture, 'options' => $options], $priority);
     }
 
     /**
@@ -69,6 +61,8 @@ final class Suite implements SuiteInterface
      */
     public function getFixtures()
     {
-        return new ObjectMapIterator($this->fixtures->toArray(), $this->fixturesOptions->toArray());
+        foreach ($this->fixtures as $fixture) {
+            yield $fixture['fixture'] => $fixture['options'];
+        }
     }
 }

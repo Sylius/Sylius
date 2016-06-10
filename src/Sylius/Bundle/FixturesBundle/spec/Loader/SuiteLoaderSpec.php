@@ -48,10 +48,10 @@ final class SuiteLoaderSpec extends ObjectBehavior
         FixtureInterface $firstFixture,
         FixtureInterface $secondFixture
     ) {
-        $suite->getFixtures()->willReturn(new ObjectMapIterator(
-            [$firstFixture->getWrappedObject(), $secondFixture->getWrappedObject()],
-            [['options 1'], ['options 2']]
-        ));
+        $suite->getFixtures()->will(function () use ($firstFixture, $secondFixture) {
+            yield $firstFixture->getWrappedObject() => ['options 1'];
+            yield $secondFixture->getWrappedObject() => ['options 2'];
+        });
 
         $fixtureLoader->load($firstFixture, ['options 1'])->shouldBeCalled();
         $fixtureLoader->load($secondFixture, ['options 2'])->shouldBeCalled();
