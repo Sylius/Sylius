@@ -8,6 +8,8 @@
 [![HHVM Status](https://img.shields.io/hhvm/Sylius/Sylius.svg)](http://hhvm.h4cc.de/package/sylius/sylius)
 [![Dependency Status](https://www.versioneye.com/php/sylius:sylius/badge.svg)](https://www.versioneye.com/php/sylius:sylius)
 
+# It is a clear version of **Sylius** with 5.5.9 php version support kept. 
+
 Sylius is an open source e-commerce solution for **PHP**, based on the [**Symfony2**](http://symfony.com) framework.
 
 Ultimate goal of the project is to create a webshop engine, which is user-friendly, *loved* by developers and has a helpful community.
