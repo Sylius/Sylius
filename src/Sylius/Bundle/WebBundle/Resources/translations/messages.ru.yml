@@ -120,6 +120,7 @@ sylius:
         actions: Действия
         add: Добавить
         add_action: Добавить действие
+        add_attributes: Добавить атрибуты
         add_channel: Добавить канал
         add_coupon: Добавить купон
         add_image: Добавить изображение
@@ -445,7 +446,6 @@ sylius:
         release_inventory: Инвентаризация выпуска
         remember_me: Запомнить меня
         reports: Отчеты
-        restricted_zone: Зона ограничений
         retail_price: Розничная цена
         return: Возврат
         roles: Роли
@@ -517,7 +517,6 @@ sylius:
         total_orders: Заказов в этом месяце
         total_qty: Общее количество
         total_registrations: Регистраций в этом месяце
-        tracking_code: Код для отслеживания
         tracking_number: Номер для отслеживания
         translations: ﻿Переводы
         type: Тип

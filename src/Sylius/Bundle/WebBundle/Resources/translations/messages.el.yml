@@ -143,7 +143,6 @@ sylius:
         provinces: Επαρχίες
         quantity: Ποσότητα
         register: Καταχώρηση
-        restricted_zone: Απαγορευμένη ζώνη
         retail_price: Τιμή
         roles: Ρόλοι
         rules: Κανόνες
@@ -169,7 +168,6 @@ sylius:
         taxes: Φόροι
         title: Τίτλος
         total: Σύνολο
-        tracking_code: Κωδικός παρακολούθησης
         type: Τύπος
         unit_price: Τιμή μονάδας
         unknown: Άγνωστο

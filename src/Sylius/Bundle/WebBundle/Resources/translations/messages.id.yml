@@ -3,6 +3,8 @@
 
 sylius:
     ui:
+        add_member: Tambah anggota
+        add_province: Tambah Provinsi
         available_on_demand: Tersedia
         billing_address: Alamat Penagihan
         body: Body
@@ -30,13 +32,12 @@ sylius:
         number: Nomor
         password: Kata sandi
         phone_number: Nomor telepon
-        postcode: Kodepos
+        postcode: Kode pos
         presentation: Presentasi
         price: Harga
         province: Provinsi
         provinces: Provinsi
         quantity: Kuantitas
-        restricted_zone: Zona Terbatas
         roles: Peran
         routes: Rute
         scope: Ruang lingkup

@@ -164,6 +164,7 @@ sylius:
         add_action: 添加操作
         add_association: 添加关联
         add_attribute: 添加属性
+        add_attributes: 添加属性
         add_channel: 添加频道
         add_choice: 添加选项
         add_coupon: 添加优惠券
@@ -596,7 +597,6 @@ sylius:
         reset_button: 重置
         reset_password: 重置密码
         restore: 恢复
-        restricted_zone: 限制的区
         retail_price: 零售价格
         return: 返回
         revert: 还原
@@ -711,7 +711,6 @@ sylius:
         total_orders: 订单总数
         total_qty: 总计数量
         total_registrations: 注册总数
-        tracking_code: 快递单号
         tracking_number: 追踪号码
         translations: 翻译
         type: 类型

@@ -16,6 +16,9 @@ sylius:
             not_blank: Proszę wprowadzić swoje hasło.
             mismatch: Wpisane hasła nie pasują
             wrong_current: Podane hasło jest inne od istniejącego.
+        password:
+            min: 'Hasło musi mieć co najmniej {{ limit }} znaków.'
+            max: 'Hasło nie może być dłuższe niż {{ limit }} znaków.'
     customer:
         first_name:
             max: 'Imię nie może być dłuższe niż {{ limit }} znaków.'
@@ -25,6 +28,8 @@ sylius:
             max: 'Nazwisko nie może być dłuższe niż {{ limit }} znaków.'
             min: 'Nazwisko nie może mieć mniej niż {{ limit }} znaków.'
             not_blank: Proszę podać swoje nazwisko.
+        gender:
+            not_blank: Proszę wybrać płeć.
         email:
             already_used: Ten e-mail jest już używany, proszę się zalogować lub użyć opcji przypominania hasła.
             max: 'E-mail nie może być dłuższy niż {{ limit }} znaków.'

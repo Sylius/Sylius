@@ -85,6 +85,8 @@ sylius:
         no_shipments: Pre túto objednávku neexistujú žiadne zásielky
         no_shipping_charges: Nie sú uplatnené žiadne poplatky za dopravu
         no_taxes: Nie sú uplatnené žiadne dane
+        state:
+            order_confirmed: Objednávka potvrdená
     order_item:
         quantity: Množstvo
         sellable: Produkt
@@ -162,6 +164,7 @@ sylius:
         add_action: Pridať podmienku
         add_association: Pridať priradenie
         add_attribute: Pridať vlastnosť
+        add_attributes: Pridať vlastnosť
         add_channel: Pridať kanál
         add_choice: Pridať možnosť
         add_coupon: Pridať kupón
@@ -595,7 +598,6 @@ sylius:
         reset_button: Obnoviť
         reset_password: Obnoviť heslo
         restore: Obnoviť
-        restricted_zone: Zóna s obmedzeným prístupom
         retail_price: Predajná cena
         return: Vrátiť
         revert: Vrátiť spať
@@ -710,7 +712,7 @@ sylius:
         total_orders: Celkový počet objednávok
         total_qty: Celkové množstvo
         total_registrations: Celkový počet registrácií
-        tracking_code: Sledovací kód
+        tracking_code: Trackovací kód
         tracking_number: Sledovací kód
         translations: Preklady
         type: Typ

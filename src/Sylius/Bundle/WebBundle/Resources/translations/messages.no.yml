@@ -311,7 +311,6 @@ sylius:
         register_button: Registrer
         registration_date: Registreringdato
         release_inventory: Utgivelselager
-        restricted_zone: Begrenset sone
         retail_price: Utsalgspris
         return: Retur
         roles: Roller
@@ -366,7 +365,6 @@ sylius:
         total_orders: Totale bestillinger
         total_qty: Totalt antall
         total_registrations: Totalt antall registreringer
-        tracking_code: Sporingskode
         tracking_number: Sporingsnummer
         type: Type
         unavailable: Ikke tilgjengelig

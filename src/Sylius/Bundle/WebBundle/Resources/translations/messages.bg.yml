@@ -280,7 +280,6 @@ sylius:
         register_button: Регистриране
         registration_date: Дата на регистрация
         release_inventory: Освобождаване запаси
-        restricted_zone: Ограничена зона
         retail_price: Цена на дребно
         return: Връщане
         roles: Роли
@@ -334,7 +333,6 @@ sylius:
         total_orders: Общо поръчки
         total_qty: Общо количество
         total_registrations: Общо регистрации
-        tracking_code: Проследяващ код
         tracking_number: Номер за проследяване
         type: Тип
         unavailable: Не е налично

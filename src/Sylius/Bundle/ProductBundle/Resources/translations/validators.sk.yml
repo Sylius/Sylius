@@ -6,6 +6,9 @@ sylius:
         sku:
             not_blank: Prosím, zadajte skladový kód (SKU) produktu.
             unique: Skladový kód produktu (SKU) musí byť unikátny.
+        code:
+            not_blank: Prosím, zadajte kód produktu.
+            unique: Kód produktu musí byť unikátny.
         name:
             not_blank: Prosím, zadajte názov produktu.
             min_length: 'Názov produktu musí mať aspoň 1 znak. | Názov produktu musí mať aspoň {{ limit }} znakov.'

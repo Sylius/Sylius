@@ -308,7 +308,6 @@ sylius:
         register_button: Зарэгістравацца
         registration_date: Рэгістрацыйныя звесткі
         release_inventory: Правесці інвентарызацыю
-        restricted_zone: Забароненая зона
         retail_price: Рознічная цана
         return: Вярнуць
         roles: Ролі
@@ -361,7 +360,6 @@ sylius:
         total_orders: Усе замовы
         total_qty: Агульная колькасць
         total_registrations: Усе рэгістрацыі
-        tracking_code: Трэкінг-код
         tracking_number: Нумар адпраўлення
         type: Тып
         unavailable: Не даступны

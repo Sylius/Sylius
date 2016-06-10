@@ -130,6 +130,7 @@ sylius:
         add_action: Dodaj akcje
         add_association: Dodaj powiązanie
         add_attribute: Dodaj cechę
+        add_attributes: Dodaj atrybuty
         add_channel: Dodaj kanał
         add_choice: Dodaj wybór
         add_coupon: Dodaj kupon promocyjny
@@ -493,7 +494,6 @@ sylius:
         report_details: Szczegóły raportu
         reports: Raporty
         restore: Przywróć
-        restricted_zone: Strefa zamknięta
         retail_price: Cena detaliczna
         return: Zwrot
         reviews: Opinie
@@ -564,7 +564,6 @@ sylius:
         total_orders: Zamówienia
         total_qty: Całkowita ilość
         total_registrations: Rejestracje
-        tracking_code: Kod śledzenia
         tracking_number: Numer śledzenia
         translations: Tłumaczenia
         type: Typ

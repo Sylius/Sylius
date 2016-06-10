@@ -114,6 +114,7 @@ sylius:
         add: Přidat
         add_action: Přidat akci
         add_attribute: Přidat atribut
+        add_attributes: Přidat atribut
         add_channel: Přidat kanál
         add_choice: Přidat výběr
         add_coupon: Přidat kupón
@@ -464,7 +465,6 @@ sylius:
         remember_me: Pamatuj si mě
         remove_attribute: Odstranit atribut
         reports: Reporty
-        restricted_zone: Zóna s omezeným přístupem
         retail_price: Maloobchodní cena
         return: Vrátit
         revert: Vrátit
@@ -530,7 +530,6 @@ sylius:
         total_orders: Celkem objednávek
         total_qty: Celkové množství
         total_registrations: Celkem registrací
-        tracking_code: Sledovací kód
         tracking_number: Číslo zásilky
         translations: Překlady
         type: Typ

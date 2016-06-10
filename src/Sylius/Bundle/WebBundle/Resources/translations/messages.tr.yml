@@ -494,7 +494,6 @@ sylius:
         remove_attribute: Özniteliğini kaldır
         report_details: Rapor ayrıntıları
         reports: Raporlar
-        restricted_zone: Kısıtlı bölge
         retail_price: Perakende fiyatı
         return: İade
         revert: Döndür
@@ -561,7 +560,6 @@ sylius:
         total_orders: Toplam siparişler
         total_qty: Toplam miktar
         total_registrations: Toplam kayıtlar
-        tracking_code: İzleme Kodu
         tracking_number: Kargo takip numarası
         type: Türü
         unavailable: 'sylius -> ürün -> kullanılamıyor'

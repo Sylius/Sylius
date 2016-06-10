@@ -334,7 +334,6 @@ sylius:
         registration_date: Regisztráció dátuma
         release_inventory: Kibocsáthatható készlet
         reports: Jelentések
-        restricted_zone: Tiltott zóna
         retail_price: Kiskereskedelmi ár
         return: Vissza
         reviews: Értékelések
@@ -391,7 +390,6 @@ sylius:
         total_orders: Rendelések összesen
         total_qty: Össz mennyiség
         total_registrations: Regisztrációk összesen
-        tracking_code: Követési kód
         tracking_number: Kiszállítási szám
         type: Típus
         unavailable: Nem elérhető

@@ -19,17 +19,22 @@ sylius:
         an_error_occurred: 发生了一个错误。
         are_your_sure_you_want_to_perform_this_action: 是否确实执行此操作？
         available_for_channels: 可用于频道
+        average_order_value: 订单均价
         backordered: 未出货订单
+        complete: 完成
         cancel: '取消 '
         cancelled: 已取消.
         category_requirements: 类别要求
+        change_password: 更改密码
         change_your_password: 更改您的密码
         charges_and_taxes: 费和税
         checkout: 结账
         clear_filters: 清除筛选
         color: 颜色
+        configurable_product: 可配置的产品
         configure_channels_available_in_your_store: 配置可用的频道
         confirm_your_action: 请确认你的行为
+        contact_us: 联系我们
         contains: 包含
         countries: 国家
         coupon_based: 基于优惠券
@@ -37,11 +42,13 @@ sylius:
         create: 创建
         currencies: 货币
         customer_can_login_to_the_store: 客户可以登录到该店铺
+        customer_care: 客户关怀
         dashboard: 仪表板
         date: 日期
         default_currency: 默认货币：
         default_locale: 默认区域
         delete: 删除
+        delivery_and_shipping: 配送
         description: 描述
         disabled: 已禁用
         discount: 折扣
@@ -52,9 +59,12 @@ sylius:
         edit_currency: 编辑货币
         edit_customer: 编辑客户
         edit_payment_method: 编辑付款方式
+        edit_product: 编辑产品
         edit_product_attribute: 编辑产品属性
         edit_product_option: 编辑产品选项
+        edit_product_variant: 编辑产品变体
         edit_promotion: 编辑促销
+        edit_promotion_coupon: 编辑促销优惠券
         edit_shipping_method: 编辑送货方式
         edit_tax_category: 编辑税收的类别
         edit_tax_rate: 编辑税率
@@ -65,8 +75,10 @@ sylius:
         ends_with: 结束于
         equal: 等于
         exclusive: 独家
+        expiration_and_usage_limits: 过期时间和使用限制
         expires_at: 截至于
         extra_information: 额外信息
+        faqs: 常见问题
         filter: 筛选器
         go: 前往
         generate_coupons: 生成优惠券
@@ -76,6 +88,7 @@ sylius:
         jump_to_page: 跳转到页
         last_updated: 上次更新时间：
         list_coupons: 优惠券列表
+        list_variants: 显示全部产品变体
         locales: 区域设置
         manage_attributes_of_your_products: 管理您的产品属性
         manage_categorization_of_your_products: 管理您的产品分类
@@ -89,14 +102,20 @@ sylius:
         manage_shipping_destinations: 管理配送的地址
         manage_shipping_methods_for_your_store: 管理您的店铺的送货方式
         manage_taxation_of_your_products: 管理您的产品的征税
+        manage_variants: 管理产品变体
         manage_your_customers: 管理您的客户
+        manage_your_product_catalog: 管理您的产品目录
+        media: 新闻
         new: 新增
         new_channel: 新建通道
         new_country: 新建国家
         new_coupon: 新建优惠券
         new_currency: 添加币种
         new_locale: 新增区域
+        new_promotion_coupon: 新建促销优惠券
         new_tax_category: 新税种
+        new_orders: 新订单
+        new_customers: 新客户
         "no": false
         no_account: 没有账户
         no_promotion: 没有推广应用
@@ -114,30 +133,38 @@ sylius:
         per_customer_usage_limit: 每位客户使用限制
         powered_by: 基于
         price: 价格
+        privacy_policy: 隐私条款
         process_your_orders: 处理您的订单
+        product_variants: 产品变体
         promotion_configuration: 促销配置
         promotion_information: 促销信息
         purchased_from: 从购买
         quantity: 数量
         ready: 就绪
+        repeat_new_password: 重新输入新密码
         returned: 已返还
+        returns_policy: 退货政策
         save_changes: 保存变更
         shipped: 已发货
         shipping_methods: 发货方式
         show: 显示
         sign_in: 登录
         sign_out: 退出
+        simple_product: 简单的产品
         starts_with: 开始于
         status: 状态
         subtotal: 小计
         success: 成功
         tax: 税收
+        taxonomy: 分类
         tax_categories: 税类别
+        terms_and_conditions: 服务条款
         total_records: 总记录数
         unlimited: 无限制
         usage: 统计
         values: 值
         "yes": true
+        your_store: 您的商店
         zone_consisting_of_countries: 由国家组成的区域
         zone_consisting_of_other_zones: 由其他区域构成
         zone_consisting_of_provinces: 区域由省构成
