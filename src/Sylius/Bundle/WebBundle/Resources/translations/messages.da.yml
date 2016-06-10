@@ -300,7 +300,6 @@ sylius:
         register_button: Registrer
         registration_date: Registreringsdato
         release_inventory: Frigiv varer
-        restricted_zone: Begrænset zone
         retail_price: Kostpris
         return: Returner
         roles: Roller
@@ -354,7 +353,6 @@ sylius:
         total_orders: Totale ordrer
         total_qty: Samlet antal
         total_registrations: Totale registreringer
-        tracking_code: Sporingskode
         tracking_number: Sporingsnummer
         type: Type
         unavailable: Ikke tilgængelig

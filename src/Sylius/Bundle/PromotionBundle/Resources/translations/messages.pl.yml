@@ -43,6 +43,7 @@ sylius:
             amount: Ilość
             usage_limit: Limit użycia
             expires_at: Wygasa dnia
+            code_length: Długość kodu
         promotion:
             actions: Akcje
             add_action: Dodaj akcje

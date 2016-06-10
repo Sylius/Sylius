@@ -90,7 +90,6 @@ sylius:
         province: Província
         provinces: Províncies
         quantity: Quantitat
-        restricted_zone: Àrea restringida
         roles: Rols
         scope: "Àmbit d'aplicació"
         search: Cerca

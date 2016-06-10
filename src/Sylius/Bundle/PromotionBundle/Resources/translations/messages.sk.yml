@@ -43,6 +43,7 @@ sylius:
             amount: Suma
             usage_limit: Limit použitia
             expires_at: Platnosť do
+            code_length: Dĺžka kódu
         promotion:
             actions: Akcie
             add_action: Pridať podmienku

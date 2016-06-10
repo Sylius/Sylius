@@ -168,6 +168,7 @@ sylius:
         add_action: Actie toevoegen
         add_association: Relatie toevoegen
         add_attribute: Attribuut toevoegen
+        add_attributes: Attributen toevoegen
         add_channel: Kanaal toevoegen
         add_choice: Keuze toevoegen
         add_coupon: Nieuwe coupon
@@ -600,7 +601,6 @@ sylius:
         reset_button: Reset
         reset_password: Reset wachtwoord
         restore: Terugzetten
-        restricted_zone: Beperkte zone
         retail_price: Retail prijs
         return: Retourneren
         revert: Terugkeren
@@ -715,7 +715,6 @@ sylius:
         total_orders: Aantal bestellingen
         total_qty: Totale Hoeveelheid
         total_registrations: Aantal registraties
-        tracking_code: Tracking Code
         tracking_number: Tracking code
         translations: Vertalingen
         type: Type

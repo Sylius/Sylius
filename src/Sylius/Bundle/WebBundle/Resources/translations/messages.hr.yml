@@ -312,7 +312,6 @@ sylius:
         registration_date: Datum registracije
         release_inventory: Oslobodi skladište
         remember_me: Zapamti me
-        restricted_zone: Ograničena zona pristupa
         retail_price: Prodajna cijena
         return: Vraćeno
         roles: Role (korisnička prava)
@@ -368,7 +367,6 @@ sylius:
         total_orders: Narudžbe u trenutnom mjesecu
         total_qty: Ukupna kol
         total_registrations: Registracije u trenutnom mjesecu
-        tracking_code: Kod za praćenje
         tracking_number: Kod za praćenje
         type: Tip
         unavailable: Nedostupno

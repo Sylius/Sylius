@@ -160,6 +160,7 @@ sylius:
         add_action: Shto veprim
         add_association: Shto lidhje
         add_attribute: Shto atribut
+        add_attributes: Shto atribut
         add_channel: Shto kanal
         add_choice: Shto zgjedhje
         add_coupon: Shto kupon
@@ -591,7 +592,6 @@ sylius:
         reset_button: Rivendos
         reset_password: Rivendos fjalëkalimin
         restore: Rivendos
-        restricted_zone: Zonë e kufizuar
         retail_price: Çmimi me pakicë
         return: Rikthehu
         revert: Rikthe
@@ -706,7 +706,6 @@ sylius:
         total_orders: Porositë totale
         total_qty: Sasia totale
         total_registrations: Regjistrimet totale
-        tracking_code: Kodi i gjurmimit
         tracking_number: Numri i gjurmimit
         translations: Përkthime
         type: Lloji

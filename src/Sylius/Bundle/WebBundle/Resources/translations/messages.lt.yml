@@ -456,7 +456,6 @@ sylius:
         remove_attribute: Pašalinkite atributą
         report_details: Ataskaitos duomenys
         reports: Ataskaitos
-        restricted_zone: Apribota zona
         retail_price: Mažmeninė kaina
         return: Grįžti
         revert: Atstatyti
@@ -522,7 +521,6 @@ sylius:
         total_orders: Viso užsakymų
         total_qty: Bendras kiekis
         total_registrations: Viso registracijų
-        tracking_code: Sekimo kodas
         tracking_number: Sekimo numeris
         type: Tipas
         unavailable: Nepasiekiamas

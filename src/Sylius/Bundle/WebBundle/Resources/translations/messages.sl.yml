@@ -145,6 +145,7 @@ sylius:
         add_action: Dodajte dejanje
         add_association: Dodajte povezavo
         add_attribute: Dodajte atribut
+        add_attributes: Dodaj atribut
         add_channel: Dodaj kanal
         add_choice: Dodajte izbiro
         add_coupon: Dodaj kupon
@@ -372,6 +373,7 @@ sylius:
         guest: Gost
         hello_name: 'Pozdravljeni, <b>%name%</b>'
         hide_deleted: Skrijte izbrisane
+        hostname: Ime gostitelja
         id: ID
         identifier: Identifikator
         images: Slike
@@ -561,7 +563,6 @@ sylius:
         reset_button: Ponastavitev
         reset_password: Ponastavitev gesla
         restore: Povrni
-        restricted_zone: Območje z omejitvami
         retail_price: Maloprodajna cena
         return: Vračilo
         revert: Povrni
@@ -620,6 +621,7 @@ sylius:
         taxes: Davki
         taxons: Taksoni
         thank_you_for_your_order: Hvala za vaše naročilo
+        theme: Tema
         there_are_no_archetypes_defined: Definiranega ni nobenega prototipa
         there_are_no_attributes_configured: Na voljo ni nobenega nastavljenega atributa
         there_are_no_blocks_to_display: Noben blok ni na voljo za prikaz
@@ -671,7 +673,6 @@ sylius:
         total_orders: Naročila skupaj
         total_qty: Skupna količina
         total_registrations: Skupaj registracij
-        tracking_code: Koda za sledenje
         tracking_number: Številka sledenja
         translations: Prevodi
         type: Vrsta

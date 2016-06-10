@@ -24,6 +24,7 @@ sylius:
             birthday: Data urodzenia
             billing_address: Adres do rachunku
             different_billing_address: Użyć innego adresu do rozliczeń?
+            only_customer_registration: Utworzyć konto?
         user_filter:
             query: Szukaj
         user_change_password:

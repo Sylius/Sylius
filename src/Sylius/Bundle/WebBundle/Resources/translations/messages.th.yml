@@ -160,6 +160,7 @@ sylius:
         add_action: เพิ่มการดำเนินการ
         add_association: เพิ่มการเชื่อมโยง
         add_attribute: เพิ่มคุณลักษณะ
+        add_attributes: เพิ่มคุณลักษณะ
         add_channel: เพิ่มช่องทาง
         add_choice: เพิ่มตัวเลือก
         add_coupon: เพิ่มคูปอง
@@ -591,7 +592,6 @@ sylius:
         reset_button: ตั้งค่าใหม่
         reset_password: กำหนดรหัสผ่านใหม่
         restore: คืนค่า
-        restricted_zone: จำกัดโซน
         retail_price: ราคาขายปลีก
         return: ตีกลับ
         revert: กลับค่าเดิม
@@ -706,7 +706,6 @@ sylius:
         total_orders: ใบสั่งซื้อทั้งหมด
         total_qty: ปริมาณรวม
         total_registrations: การลงทะเบียนทั้งหมด
-        tracking_code: รหัสการติดตาม
         tracking_number: หมายเลขการติดตาม
         translations: การแปลภาษา
         type: ชนิด

@@ -52,6 +52,7 @@ sylius:
             min_count: 'Prosimo, dodajte vsaj {{ limit }} člane cone.'
         name:
             max_length: Ime cone ne sme biti daljše od 255 znakov|Ime cone ne sme biti daljše od 255 znakov.
+            min_length: Ime pasu mora biti dolgo vsaj 2 znaka|Ime pasu mora biti dolgo vsaj 2 znaka.
             not_blank: Prosimo, vnesite ime cone.
     zone_member:
         code:

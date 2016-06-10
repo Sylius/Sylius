@@ -160,6 +160,7 @@ sylius:
         add_action: افزودن عملیات
         add_association: ایجاد ارتباط
         add_attribute: ایجاد قابلیت
+        add_attributes: افزودن قابلیت
         add_channel: افزودن کانال
         add_choice: افزودن گزینه
         add_coupon: ایجاد کد تخفیف
@@ -590,7 +591,6 @@ sylius:
         reset_button: تغییر
         reset_password: تنظیم مجدد کلمه عبور
         restore: بازگشت به تنظیمات اولیه
-        restricted_zone: مناطق ممنوع
         retail_price: قیمت خرده فروشی
         return: بازگشت
         revert: بازگشت به تنظیمات اولیه
@@ -705,7 +705,6 @@ sylius:
         total_orders: کل سفارش ها
         total_qty: تعداد کل
         total_registrations: تعداد مشتری های ثبت شده
-        tracking_code: کد پیگیری
         tracking_number: کد پیگیری
         translations: زبان های
         type: نوع

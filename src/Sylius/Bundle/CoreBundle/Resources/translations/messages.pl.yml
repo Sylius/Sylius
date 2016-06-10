@@ -133,10 +133,12 @@ sylius:
             name: Nazwa
         promotion_rule:
             contains_taxon:
+                taxon: Takson
                 count: Ilość
             taxon:
                 taxons: Taksony
             total_of_items_from_taxon:
+                taxon: Takson
                 amount: Kwota
     email:
         order_confirmation:

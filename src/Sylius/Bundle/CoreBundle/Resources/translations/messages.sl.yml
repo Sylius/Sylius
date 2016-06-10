@@ -35,6 +35,8 @@ sylius:
             currencies: Valute
             shipping_methods: Načini dostave
             payment_methods: Načini plačil
+            theme: Tema
+            hostname: Ime gostitelja
         image:
             file: Slika
         locale:
@@ -68,6 +70,8 @@ sylius:
                 locale: Jezik
                 tracking_code:
                     Tracking code (for example: Koda Google Analytics)
+            taxation:
+                default_tax_calculation_strategy: Privzeta strategija izračuna davka
             security:
                 enabled: Omogočeno?
         shipment_filter:
@@ -115,10 +119,12 @@ sylius:
             name: Ime
         promotion_rule:
             contains_taxon:
+                taxon: Sistematske skupine
                 count: Število
             taxon:
                 taxons: Taksoni
             total_of_items_from_taxon:
+                taxon: Sistematske skupine
                 amount: Znesek
     email:
         order_confirmation:
@@ -129,3 +135,5 @@ sylius:
             name: Potrditev pošiljke
         user_confirmation:
             name: Potrditev uporabnika
+        password_reset:
+            name: Ponastavitev gesla

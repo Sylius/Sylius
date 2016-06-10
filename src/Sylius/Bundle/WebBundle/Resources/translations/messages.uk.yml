@@ -88,6 +88,7 @@ sylius:
         actions: Дії
         add: Додати
         add_action: Додати дію
+        add_attributes: Додати атрибути
         add_coupon: Додати купон
         add_image: Додати зображення
         add_member: Додати члена групи
@@ -335,7 +336,6 @@ sylius:
         registration_date: Дата реєстрації
         release_inventory: Інвентаризація випуску
         reports: Звіти
-        restricted_zone: Заборонена зона
         retail_price: Роздрібна ціна
         return: Повернення
         roles: Ролі
@@ -393,7 +393,6 @@ sylius:
         total_orders: Всього замовлень
         total_qty: Загальна кількість
         total_registrations: Всього реєстрацій
-        tracking_code: Трекінг-код
         tracking_number: Трекінг-номер
         translations: Переклади
         type: Тип

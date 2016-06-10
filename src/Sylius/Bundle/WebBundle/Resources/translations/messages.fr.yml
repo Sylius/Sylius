@@ -171,6 +171,7 @@ sylius:
         add_action: Ajouter une action
         add_association: Ajouter une association
         add_attribute: Ajouter un attribut
+        add_attributes: Ajouter des attributs
         add_channel: Ajouter un canal
         add_choice: Ajouter un choix
         add_coupon: Ajouter un coupon
@@ -604,7 +605,6 @@ sylius:
         reset_button: Réinitialiser
         reset_password: Réinitialisation du mot de passe
         restore: Restaurer
-        restricted_zone: Restriction de zone
         retail_price: Prix
         return: Retour
         revert: Revenir en arrière
@@ -719,7 +719,6 @@ sylius:
         total_orders: Nombre total de commandes
         total_qty: Qté totale
         total_registrations: "Nombre total d'inscriptions"
-        tracking_code: Code de suivi
         tracking_number: Numéro de suivi
         translations: Traductions
         type: Type
