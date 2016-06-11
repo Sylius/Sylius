@@ -1,4 +1,4 @@
-{% extends '@SyliusShop/Layout/main.html.twig' %}
+{% extends '@SyliusShop/layout.html.twig' %}
 
 {% block content %}
     {% block breadcrumb %}
@@ -6,7 +6,7 @@
 
     <div class="ui stackable grid">
         <div class="four wide column">
-            {% include 'SyliusShopBundle:Account:_menu.html.twig' %}
+            {% include '@SyliusShop/Account/_menu.html.twig' %}
         </div>
         <div class="twelve wide column">
             {% block subcontent %}

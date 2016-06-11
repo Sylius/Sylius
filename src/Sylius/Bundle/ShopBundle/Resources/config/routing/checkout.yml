@@ -1,3 +1,6 @@
+# This file is a part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 sylius_shop_checkout_start:
     path: /
     defaults:

@@ -3,6 +3,7 @@
 
 sylius_shop_partial_product_index_latest:
     path: /latest/{count}
+    methods: [GET]
     defaults:
         _controller: sylius.controller.product:indexAction
         _sylius:

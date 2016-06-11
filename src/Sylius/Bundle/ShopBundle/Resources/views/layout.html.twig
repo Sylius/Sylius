@@ -13,14 +13,14 @@
     {% endblock %}
 
     {% block stylesheets %}
-        {% include 'SyliusUiBundle::_stylesheets.html.twig' with {'path': 'assets/shop/css/style.css'} %}
+        {% include '@SyliusUi/_stylesheets.html.twig' with {'path': 'assets/shop/css/style.css'} %}
     {% endblock %}
 </head>
 
 <body class="pushable">
 <div class="pusher">
     <div id="menu" class="ui large sticky inverted stackable menu">
-        {% include 'SyliusShopBundle:Homepage/Menu:_security.html.twig' %}
+        {% include '@SyliusShop/Homepage/Menu/_security.html.twig' %}
     </div>
 
     <div class="ui container">
@@ -34,12 +34,12 @@
     </div>
 
     {% block footer %}
-        {% include 'SyliusShopBundle:Homepage:_footer.html.twig' %}
+        {% include '@SyliusShop/Homepage/_footer.html.twig' %}
     {% endblock %}
 </div>
 
 {% block javascripts %}
-    {% include 'SyliusUiBundle::_javascripts.html.twig' with {'path': 'assets/shop/js/app.js'} %}
+    {% include '@SyliusUi/_javascripts.html.twig' with {'path': 'assets/shop/js/app.js'} %}
 {% endblock %}
 </body>
 </html>

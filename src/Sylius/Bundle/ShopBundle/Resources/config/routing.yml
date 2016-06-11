@@ -13,15 +13,15 @@ sylius_shop_product:
     resource: "@SyliusShopBundle/Resources/config/routing/product.yml"
 
 sylius_shop_cart:
-    prefix: /cart
     resource: "@SyliusShopBundle/Resources/config/routing/cart.yml"
+    prefix: /cart
 
 sylius_shop_security:
     resource: "@SyliusShopBundle/Resources/config/routing/security.yml"
 
 sylius_shop_checkout:
-    prefix: /checkout
     resource: "@SyliusShopBundle/Resources/config/routing/checkout.yml"
+    prefix: /checkout
 
 sylius_shop_account:
     resource: "@SyliusShopBundle/Resources/config/routing/account.yml"
