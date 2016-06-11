@@ -11,9 +11,12 @@
 
 namespace Sylius\Component\Core\Model;
 
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
 
-interface ImageInterface extends TimestampableInterface
+interface ImageInterface extends
+    ResourceInterface,
+    TimestampableInterface
 {
     /**
      * @return bool
