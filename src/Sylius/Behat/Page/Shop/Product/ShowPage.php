@@ -44,7 +44,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
      */
     public function addToCartWithVariant($variant)
     {
-        $item = $this->getDocument()->find('css', sprintf('#product-variants tbody tr:contains("%s")', $variant));
+        $item = $this->getDocument()->find('css', sprintf('#sylius-product-variants tbody tr:contains("%s")', $variant));
         $radio = $item->find('css', 'input');
 
         $this->getDocument()->fillField($radio->getAttribute('name'), $radio->getAttribute('value'));

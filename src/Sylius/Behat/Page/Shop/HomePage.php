@@ -31,7 +31,7 @@ class HomePage extends SymfonyPage implements HomePageInterface
      */
     public function hasLogoutButton()
     {
-        return $this->getElement('right_menu')->hasLink('Logout');
+        return $this->hasElement('logout_button');
     }
 
     /**
@@ -40,7 +40,7 @@ class HomePage extends SymfonyPage implements HomePageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(),[
-            'right_menu' => '.right.item',
+            'logout_button' => '.sylius-logout-button',
         ]);
     }
 }

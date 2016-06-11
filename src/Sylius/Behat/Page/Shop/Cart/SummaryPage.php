@@ -95,7 +95,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     public function removeProduct($productName)
     {
         $itemElement = $this->getElement('product_row', ['%name%' => $productName]);
-        $itemElement->find('css', 'a#remove-button')->click();
+        $itemElement->find('css', 'a.sylius-cart-remove-button')->click();
     }
 
     /**
@@ -132,17 +132,24 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
      */
     public function hasItemWithVariantNamed($variantName)
     {
-       return $this->findItemWith($variantName, 'tbody  tr > td > strong');
+       return $this->findItemWith($variantName, '.sylius-product-variant-name');
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getProductOption($productName, $optionName)
+    public function hasItemWithOptionValue($productName, $optionName, $optionValue)
     {
         $itemElement = $this->getElement('product_row', ['%name%' => $productName]);
 
-        return $itemElement->find('css', sprintf('li:contains("%s")', ucfirst($optionName)))->getText();
+        $selector = sprintf('.sylius-product-options > .item[data-sylius-option-name="%s"]', $optionName);
+        $optionValueElement = $itemElement->find('css', $selector);
+
+        if (null === $optionValueElement) {
+            throw new ElementNotFoundException($this->getSession(), sprintf('Option value of "%s"', $optionName), 'css', $selector);
+        }
+
+        return $optionValue === $optionValueElement->getText();
     }
 
     /**
@@ -150,12 +157,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
      */
     public function isEmpty()
     {
-        $isEmpty = strpos($this->getDocument()->find('css', '.message')->getText(), 'Your cart is empty');
-        if (false === $isEmpty ) {
-            return false;
-        }
-
-        return true;
+        return false !== strpos($this->getDocument()->find('css', '.message')->getText(), 'Your cart is empty');
     }
 
     /**
@@ -187,7 +189,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'total' => '#sylius-cart-grand-total',
+            'grand_total' => '#sylius-cart-grand-total',
             'promotion_total' => '#sylius-cart-promotion-total',
             'shipping_total' => '#sylius-cart-shipping-total',
             'tax_total' => '#sylius-cart-tax-total',

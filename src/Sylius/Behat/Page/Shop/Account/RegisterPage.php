@@ -21,30 +21,31 @@ class RegisterPage extends SymfonyPage implements RegisterPageInterface
 {
     /**
      * {@inheritdoc}
-     *
-     * @throws ElementNotFoundException
-     */
-    public function checkValidationMessageFor($element, $message)
-    {
-        $foundElement = $this->getFieldElement($element);
-        if (null === $foundElement) {
-            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.form-error');
-        }
-
-        return $message === $foundElement->find('css', '.form-error')->getText();
-    }
-
-    /**
-     * {@inheritdoc}
      */
     public function getRouteName()
     {
         return 'sylius_shop_register';
     }
 
+    /**
+     * {@inheritdoc}
+     *
+     * @throws ElementNotFoundException
+     */
+    public function checkValidationMessageFor($element, $message)
+    {
+        $errorLabel = $this->getElement($element)->getParent()->find('css', '.sylius-validation-error');
+
+        if (null === $errorLabel) {
+            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.sylius-validation-error');
+        }
+
+        return $message === $errorLabel->getText();
+    }
+
     public function register()
     {
-        $this->getDocument()->pressButton('Register');
+        $this->getDocument()->pressButton('Create an account');
     }
 
     /**
@@ -108,22 +109,5 @@ class RegisterPage extends SymfonyPage implements RegisterPageInterface
             'password verification' => '#sylius_customer_registration_user_plainPassword_second',
             'phone number' => '#sylius_customer_registration_phoneNumber',
         ]);
-    }
-
-    /**
-     * @param string $element
-     *
-     * @return \Behat\Mink\Element\NodeElement|null
-     *
-     * @throws ElementNotFoundException
-     */
-    private function getFieldElement($element)
-    {
-        $element = $this->getElement($element);
-        while (null !== $element && !($element->hasClass('field'))) {
-            $element = $element->getParent();
-        }
-
-        return $element;
     }
 }

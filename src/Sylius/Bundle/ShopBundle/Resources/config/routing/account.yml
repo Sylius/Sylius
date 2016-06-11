@@ -19,18 +19,18 @@ sylius_shop_account_dashboard:
                 method: find
                 arguments: [expr:service('sylius.context.customer').getCustomer()]
 
-sylius_shop_account_profile:
-    path: /profile
+sylius_shop_account_profile_update:
+    path: /profile/edit
     methods: [GET, PUT]
     defaults:
         _controller: sylius.controller.customer:updateAction
         _sylius:
-            template: SyliusShopBundle:Account:profile.html.twig
+            template: SyliusShopBundle:Account:profileUpdate.html.twig
             form: sylius_customer_profile
             repository:
                 method: find
                 arguments: [expr:service('sylius.context.customer').getCustomer()]
-            redirect: sylius_shop_account_profile
+            redirect: sylius_shop_account_profile_update
 
 sylius_shop_account_change_password:
     path: /change-password

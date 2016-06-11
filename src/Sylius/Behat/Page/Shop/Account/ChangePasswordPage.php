@@ -28,6 +28,20 @@ class ChangePasswordPage extends SymfonyPage implements ChangePasswordPageInterf
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function checkValidationMessageFor($element, $message)
+    {
+        $errorLabel = $this->getElement($element)->getParent()->find('css', '.sylius-validation-error');
+
+        if (null === $errorLabel) {
+            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.sylius-validation-error');
+        }
+
+        return $message === $errorLabel->getText();
+    }
+
+    /**
      * @param string $password
      */
     public function specifyCurrentPassword($password)
@@ -54,19 +68,6 @@ class ChangePasswordPage extends SymfonyPage implements ChangePasswordPageInterf
     /**
      * {@inheritdoc}
      */
-    public function checkValidationMessageFor($element, $message)
-    {
-        $foundElement = $this->getFieldElement($element);
-        if (null === $foundElement) {
-            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.pointing');
-        }
-
-        return $message === $foundElement->find('css', '.form-error')->getText();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
@@ -74,22 +75,5 @@ class ChangePasswordPage extends SymfonyPage implements ChangePasswordPageInterf
             'new_password' => '#sylius_user_change_password_newPassword_first',
             'confirmation' => '#sylius_user_change_password_newPassword_second',
         ]);
-    }
-
-    /**
-     * @param string $element
-     *
-     * @return \Behat\Mink\Element\NodeElement|null
-     *
-     * @throws ElementNotFoundException
-     */
-    private function getFieldElement($element)
-    {
-        $element = $this->getElement($element);
-        while (null !== $element && !($element->hasClass('field'))) {
-            $element = $element->getParent();
-        }
-
-        return $element;
     }
 }

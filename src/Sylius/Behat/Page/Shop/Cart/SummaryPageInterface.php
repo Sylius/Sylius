@@ -94,10 +94,11 @@ interface SummaryPageInterface extends PageInterface
     /**
      * @param string $productName
      * @param string $optionName
+     * @param string $optionValue
      *
      * @return string
      */
-    public function getProductOption($productName, $optionName);
+    public function hasItemWithOptionValue($productName, $optionName, $optionValue);
 
     /**
      * @return bool

@@ -339,11 +339,7 @@ final class CartContext implements Context
      */
     public function thisItemShouldHaveSize(ProductInterface $product, $optionName, $optionValue)
     {
-        Assert::contains(
-            $this->summaryPage->getProductOption($product->getName(), $optionName),
-            $optionValue,
-            'The product should have option with value %2$s, but it has option with value %s.'
-        );
+        Assert::true($this->summaryPage->hasItemWithOptionValue($product->getName(), $optionName,  $optionValue));
     }
 
     /**

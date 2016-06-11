@@ -242,7 +242,7 @@ class RequestConfiguration
             $redirect = ['parameters' => []];
         }
 
-        $parameters = $redirect['parameters'];
+        $parameters = isset($redirect['parameters']) ? $redirect['parameters'] : [];
 
         if (null !== $resource) {
             $parameters = $this->parseResourceValues($parameters, $resource);

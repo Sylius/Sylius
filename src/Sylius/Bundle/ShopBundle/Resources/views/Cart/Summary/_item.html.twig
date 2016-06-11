@@ -5,18 +5,24 @@
 <tr>
     <td class="single line">
         <strong class="ui small header">
-            <a href="{{ path('sylius_shop_product_show', {'slug': product.slug}) }}">{{ product.name }}</a>
+            <a href="{{ path('sylius_shop_product_show', {'slug': product.slug}) }}" class="sylius-product-name">{{ product.name }}</a>
             <span class="sub header">
                 {{ product.code }}
             </span>
         </strong>
         {% if product.hasOptions() %}
-            <div class="ui horizontal divided list">
+            <div class="ui horizontal divided list sylius-product-options">
                 {% for option in variant.options %}
-                    <div class="item">
+                    <div class="item" data-sylius-option-name="{{ option.presentation }}">
                         {{ option.value }}
                     </div>
                 {% endfor %}
+            </div>
+        {% elseif variant.presentation is not null %}
+            <div class="ui horizontal divided list">
+                <div class="item sylius-product-variant-name">
+                    {{ variant.presentation }}
+                </div>
             </div>
         {% endif %}
     </td>
@@ -30,6 +36,6 @@
         {{ item.total|sylius_price(cart.currency) }}
     </td>
     <td class="center aligned">
-        <a href="{{ path('sylius_shop_cart_item_remove', {'id': item.id}) }}" class="ui circular icon button"><i class="remove icon"></i></a>
+        <a href="{{ path('sylius_shop_cart_item_remove', {'id': item.id}) }}" class="ui circular icon button sylius-cart-remove-button"><i class="remove icon"></i></a>
     </td>
 </tr>
