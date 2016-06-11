@@ -53,6 +53,14 @@ class PaymentSecurityToken implements
     /**
      * {@inheritdoc}
      */
+    public function getId()
+    {
+        return $this->hash;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function setDetails($details)
     {
         $this->details = $details;

@@ -13,6 +13,7 @@ namespace Sylius\Bundle\ResourceBundle\Tests\DependencyInjection\Compiler;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler\RegisterResourcesPass;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
@@ -32,8 +33,8 @@ class RegisterResourcesPassTest extends AbstractCompilerPassTestCase
         $this->setParameter(
             'sylius.resources',
             [
-                'app.book' => ['classes' => ['model' => \stdClass::class]],
-                'app.author' => ['classes' => ['interface' => \Countable::class]],
+                'app.book' => ['classes' => ['model' => BookClass::class]],
+                'app.author' => ['classes' => ['model' => AuthorClass::class]],
             ]
         );
 
@@ -42,13 +43,13 @@ class RegisterResourcesPassTest extends AbstractCompilerPassTestCase
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'sylius.resource_registry',
             'addFromAliasAndConfiguration',
-            ['app.book', ['classes' => ['model' => \stdClass::class]]]
+            ['app.book', ['classes' => ['model' => BookClass::class]]]
         );
 
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
             'sylius.resource_registry',
             'addFromAliasAndConfiguration',
-            ['app.author', ['classes' => ['interface' => \Countable::class]]]
+            ['app.author', ['classes' => ['model' => AuthorClass::class]]]
         );
     }
 
@@ -59,4 +60,18 @@ class RegisterResourcesPassTest extends AbstractCompilerPassTestCase
     {
         $container->addCompilerPass(new RegisterResourcesPass());
     }
+}
+
+class AbstractResource implements ResourceInterface
+{
+    public function getId()
+    {
+        return;
+    }
+}
+class BookClass extends AbstractResource
+{
+}
+class AuthorClass extends AbstractResource
+{
 }
