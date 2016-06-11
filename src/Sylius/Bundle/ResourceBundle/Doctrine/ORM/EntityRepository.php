@@ -47,12 +47,12 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
     /**
      * {@inheritdoc}
      */
-    public function createPaginator(array $criteria = [], array $sorting = [])
+    public function createPaginator(array $criteria = [], array $sorting = null)
     {
         $queryBuilder = $this->createQueryBuilder('o');
 
         $this->applyCriteria($queryBuilder, $criteria);
-        $this->applySorting($queryBuilder, $sorting);
+        $this->applySorting($queryBuilder, $sorting ?: []);
 
         return $this->getPaginator($queryBuilder);
     }
@@ -80,7 +80,7 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
 
     /**
      * @param QueryBuilder $queryBuilder
-     * @param array $criteria
+     * @param array        $criteria
      */
     protected function applyCriteria(QueryBuilder $queryBuilder, array $criteria = [])
     {
@@ -102,7 +102,7 @@ class EntityRepository extends BaseEntityRepository implements RepositoryInterfa
 
     /**
      * @param QueryBuilder $queryBuilder
-     * @param array $sorting
+     * @param array        $sorting
      */
     protected function applySorting(QueryBuilder $queryBuilder, array $sorting = [])
     {
