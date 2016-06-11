@@ -50,6 +50,10 @@ class FlashHelper implements FlashHelperInterface
         $metadata = $requestConfiguration->getMetadata();
         $flashMessage = $requestConfiguration->getFlashMessage($actionName);
 
+        if (false === $flashMessage) {
+            return;
+        }
+
         $translatedMessage = $this->translateMessage($flashMessage, $metadata);
 
         if ($flashMessage === $translatedMessage) {
