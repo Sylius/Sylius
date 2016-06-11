@@ -28,6 +28,16 @@
     </div>
 {%- endblock checkbox_row %}
 
+{% block radio_row -%}
+    <div class="field{% if (not compound or force_error|default(false)) and not valid %} error{% endif %}">
+        <div class="ui radio checkbox">
+            {{- form_label(form) -}}
+            {{- form_widget(form) -}}
+            {{- form_errors(form) -}}
+        </div>
+    </div>
+{%- endblock radio_row %}
+
 {% block money_widget -%}
     <div class="ui labeled input">
         <div class="ui label">{{ sylius_currency_symbol() }}</div>

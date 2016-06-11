@@ -3,7 +3,7 @@
 {% form_theme form 'SyliusUiBundle:Form:theme.html.twig' %}
 
 <div class="ui segment">
-    {{ form_start(form, {'action': path('sylius_shop_cart_item_add', {'id': product.id}), 'attr': {'class': 'ui form', 'novalidate': 'novalidate'}}) }}
+    {{ form_start(form, {'action': path('sylius_shop_cart_item_add', {'id': product.id}), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
     {% if not product.simple %}
         {% if product.variantSelectionMethodChoice %}
             {% include '@SyliusShop/Product/Show/_variants.html.twig' %}

@@ -15,10 +15,12 @@
 {% block subcontent %}
     <div class="ui segment">
         <h1 class="ui dividing header">
-            {{ 'sylius.ui.edit_profile'|trans }}
+            {{ 'sylius.ui.your_profile'|trans }}
             <div class="sub header">{{ 'sylius.ui.edit_your_personal_information'|trans }}</div>
         </h1>
-        {{ form_start(form, {'action': path('sylius_shop_account_profile_update'), 'attr': {'class': 'ui form', 'novalidate': 'novalidate'}}) }}
+        {{ form_start(form, {'action': path('sylius_shop_account_profile'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
+            <input type="hidden" name="_method" value="PUT" />
+
             <div class="two fields">
                 <div class="field">{{ form_row(form.firstName) }}</div>
                 <div class="field">{{ form_row(form.lastName) }}</div>

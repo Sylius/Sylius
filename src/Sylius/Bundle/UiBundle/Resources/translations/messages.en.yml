@@ -20,6 +20,7 @@ sylius:
         available_for_channels: Available for channels
         average_order_value: Average order value
         backordered: Backordered
+        back_to_store: Back to store
         complete: Complete
         cancel: Cancel
         cancelled: Cancelled
@@ -197,6 +198,7 @@ sylius:
         usage: Usage
         values: Values
         yes: Yes
+        your_profile: Your profile
         your_store: Your Store
         zone_consisting_of_countries: Zone consisting of countries
         zone_consisting_of_other_zones: Zone consisting of other zones

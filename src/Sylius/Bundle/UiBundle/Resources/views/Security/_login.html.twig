@@ -14,13 +14,13 @@
             </div>
         {% endif %}
 
-        <form class="ui large form" action="{{ action|default('/') }}" method="post" novalidate>
+        {{ form_start(form, {'action': action|default('/'), 'attr': {'class': 'ui large loadable form', 'novalidate': 'novalidate'}}) }}
             <div class="ui left aligned segment">
                 {{ form_row(form._username, {'value': last_username|default('')}) }}
                 {{ form_row(form._password) }}
                 {{ form_row(form._remember_me) }}
                 <button type="submit" class="ui fluid large primary submit button">Login</button>
             </div>
-        </form>
+        {{ form_end(form, {'render_rest': false}) }}
     </div>
 </div>

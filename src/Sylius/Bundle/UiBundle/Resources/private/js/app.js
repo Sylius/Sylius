@@ -67,7 +67,7 @@
         })
     ;
 
-    $('.form button').on('click', function() {
+    $('form.loadable button').on('click', function() {
       return $(this).closest('form').addClass('loading');
     });
     $('.message .close').on('click', function() {

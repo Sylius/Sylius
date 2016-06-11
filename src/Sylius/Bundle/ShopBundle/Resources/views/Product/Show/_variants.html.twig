@@ -7,7 +7,7 @@
     </tr>
     </thead>
     <tbody>
-    {% for variant in product.variants if variant.available %}
+    {% for variant in product.variants %}
         <tr>
             <td>
                 {{ variant.presentation }}
@@ -23,11 +23,7 @@
             </td>
             <td>{{ variant.price|sylius_price }}</td>
             <td class="right aligned">
-                {% if sylius_inventory_is_available(variant) %}
-                    {{ form_row(form.variant[loop.index0], {'label': false}) }}
-                {% else %}
-                    <span class="ui label">{{ 'sylius.ui.out_of_stock'|trans }}</span>
-                {% endif %}
+                {{ form_row(form.variant[loop.index0], {'label': false}) }}
             </td>
         </tr>
     {% endfor %}

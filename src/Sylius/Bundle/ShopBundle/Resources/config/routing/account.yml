@@ -1,26 +1,36 @@
 # This file is a part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-sylius_shop_account_dashboard:
+sylius_show_account_root:
     path: /
+    defaults:
+        _controller: FrameworkBundle:Redirect:redirect
+        route: sylius_shop_account_dashboard
+        permanent: true
+
+sylius_shop_account_dashboard:
+    path: /dashboard
     methods: [GET]
     defaults:
-        _controller: sylius.controller.customer:showProfileAction
+        _controller: sylius.controller.customer:showAction
         _sylius:
             template: SyliusShopBundle:Account:dashboard.html.twig
+            repository:
+                method: find
+                arguments: [expr:service('sylius.context.customer').getCustomer()]
 
-sylius_shop_account_profile_update:
-    path: /profile/edit
-    methods: [GET, POST]
+sylius_shop_account_profile:
+    path: /profile
+    methods: [GET, PUT]
     defaults:
         _controller: sylius.controller.customer:updateAction
         _sylius:
-            template: SyliusShopBundle:Account:profileUpdate.html.twig
+            template: SyliusShopBundle:Account:profile.html.twig
             form: sylius_customer_profile
             repository:
                 method: find
-                arguments: [expr:service('sylius.context.customer').getCustomer().getId()]
-            redirect: sylius_shop_account_profile_update
+                arguments: [expr:service('sylius.context.customer').getCustomer()]
+            redirect: sylius_shop_account_profile
 
 sylius_shop_account_change_password:
     path: /change-password
