@@ -11,10 +11,12 @@
 
 namespace Sylius\Component\Order\Model;
 
+use Sylius\Component\Resource\Model\ResourceInterface;
+
 /**
  * @author Daniel Kucharski <daniel@xerias.be>
  */
-interface IdentityInterface
+interface IdentityInterface extends ResourceInterface
 {
     /**
      * @return string $name
