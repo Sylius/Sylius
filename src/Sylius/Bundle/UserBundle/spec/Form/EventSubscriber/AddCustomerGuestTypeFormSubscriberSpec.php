@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\UserBundle\Form\EventSubscriber;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\UserBundle\Form\EventSubscriber\AddCustomerGuestTypeFormSubscriber;
+use Sylius\Component\User\Model\CustomerAwareInterface;
 use Sylius\Component\User\Model\CustomerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormConfigInterface;
@@ -47,12 +48,15 @@ class AddCustomerGuestTypeFormSubscriberSpec extends ObjectBehavior
         $this->getSubscribedEvents()->shouldReturn([FormEvents::PRE_SET_DATA => 'preSetData']);
     }
 
-    function it_adds_customer_guest_form_type_if_user_is_not_logged_in(
+    function it_adds_customer_guest_form_type_if_user_is_not_logged_in_and_resource_does_not_have_customer(
         FormInterface $form,
         FormEvent $event,
-        FormConfigInterface $formConfig
+        FormConfigInterface $formConfig,
+        CustomerAwareInterface $resource
     ) {
         $event->getForm()->willReturn($form);
+        $event->getData()->willReturn($resource);
+        $resource->getCustomer()->willReturn(null);
         $form->getConfig()->willReturn($formConfig);
         $formConfig->getOption('customer')->willReturn(null);
         $form->add('customer', 'sylius_customer_guest')->shouldBeCalled();
@@ -60,15 +64,35 @@ class AddCustomerGuestTypeFormSubscriberSpec extends ObjectBehavior
         $this->preSetData($event);
     }
 
-    function it_sets_customer_on_resource(
+    function it_does_not_add_customer_guest_form_type_if_customer_is_logged_in(
         FormInterface $form,
         FormEvent $event,
         FormConfigInterface $formConfig,
+        CustomerInterface $customer,
+        CustomerAwareInterface $resource
+    ) {
+        $event->getForm()->willReturn($form);
+        $event->getData()->willReturn($resource);
+        $resource->getCustomer()->willReturn(null);
+        $form->getConfig()->willReturn($formConfig);
+        $formConfig->getOption('customer')->willReturn($customer);
+        $form->add('customer', 'sylius_customer_guest')->shouldNotBeCalled();
+
+        $this->preSetData($event);
+    }
+
+    function it_does_not_add_customer_guest_form_type_if_customer_exists_already(
+        FormInterface $form,
+        FormEvent $event,
+        FormConfigInterface $formConfig,
+        CustomerAwareInterface $resource,
         CustomerInterface $customer
     ) {
         $event->getForm()->willReturn($form);
+        $event->getData()->willReturn($resource);
+        $resource->getCustomer()->willReturn($customer);
         $form->getConfig()->willReturn($formConfig);
-        $formConfig->getOption('customer')->willReturn($customer);
+        $formConfig->getOption('customer')->willReturn(null);
         $form->add('customer', 'sylius_customer_guest')->shouldNotBeCalled();
 
         $this->preSetData($event);

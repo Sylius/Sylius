@@ -27,4 +27,12 @@ interface ReviewFactoryInterface extends FactoryInterface
      * @return ReviewInterface
      */
     public function createForSubject($subjectId);
+
+    /**
+     * @param mixed $subjectId
+     * @param ReviewerInterface|null $reviewer
+     * 
+     * @return ReviewInterface
+     */
+    public function createForSubjectWithReviewer($subjectId, $reviewer);
 }

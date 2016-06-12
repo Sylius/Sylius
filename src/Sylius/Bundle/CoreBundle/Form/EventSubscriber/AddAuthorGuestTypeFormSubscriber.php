@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\UserBundle\Form\EventSubscriber;
+namespace Sylius\Bundle\CoreBundle\Form\EventSubscriber;
 
-use Sylius\Component\User\Model\CustomerAwareInterface;
+use Sylius\Component\Review\Model\ReviewInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -19,21 +19,8 @@ use Symfony\Component\Form\FormEvents;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class AddCustomerGuestTypeFormSubscriber implements EventSubscriberInterface
+class AddAuthorGuestTypeFormSubscriber implements EventSubscriberInterface
 {
-    /**
-     * @var string
-     */
-    private $field;
-
-    /**
-     * @param string $field
-     */
-    public function __construct($field)
-    {
-        $this->field = $field;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -50,12 +37,12 @@ class AddCustomerGuestTypeFormSubscriber implements EventSubscriberInterface
     public function preSetData(FormEvent $event)
     {
         $form = $event->getForm();
-        /** @var CustomerAwareInterface $subject */
-        $resource = $event->getData();
-        $customer = $form->getConfig()->getOption($this->field);
+        /** @var ReviewInterface $review */
+        $review = $event->getData();
+        $author = $form->getConfig()->getOption('author');
 
-        if (null === $customer && null === $resource->getCustomer()) {
-            $form->add($this->field, 'sylius_customer_guest');
+        if (null === $author && null === $review->getAuthor()) {
+            $form->add('author', 'sylius_customer_guest');
         }
     }
 }

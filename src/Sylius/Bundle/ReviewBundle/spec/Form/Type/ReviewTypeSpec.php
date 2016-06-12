@@ -59,12 +59,6 @@ class ReviewTypeSpec extends ObjectBehavior
             ->shouldBeCalled()
         ;
 
-        $builder
-            ->addEventSubscriber(new AddCustomerGuestTypeFormSubscriber('author'))
-            ->willReturn($builder)
-            ->shouldBeCalled()
-        ;
-
         $this->buildForm($builder, ['rating_steps' => 5]);
     }
 
@@ -79,7 +73,6 @@ class ReviewTypeSpec extends ObjectBehavior
 
         $resolver->setDefaults(
             [
-                'author' => null,
                 'rating_steps' => 5,
                 'cascade_validation' => true,
             ]
