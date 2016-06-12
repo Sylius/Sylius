@@ -10,12 +10,36 @@ sylius_grid:
                         arguments:
                             productId: $productId
             fields:
+                name:
+                    type: twig
+                    path: .
+                    label: sylius.ui.name
+                    options:
+                        template: SyliusAdminBundle:ProductVariant/Field:name.html.twig
                 code:
                     type: string
                     label: sylius.ui.code
-                presentation:
+                price:
+                    type: twig
+                    path: price
+                    label: sylius.ui.price
+                    options:
+                        template: SyliusAdminBundle:Grid/Field:money.html.twig
+                inventory:
+                    type: twig
+                    path: .
+                    label: sylius.ui.inventory
+                    options:
+                        template: SyliusAdminBundle:ProductVariant/Field:inventory.html.twig
+            filters:
+                code:
                     type: string
-                    label: sylius.ui.presentation
+                    label: sylius.ui.code
+                name:
+                    type: string
+                    label: sylius.ui.name
+                    options:
+                        fields: [presentation]
             actions:
                 main:
                     create:

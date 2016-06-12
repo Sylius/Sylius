@@ -30,9 +30,19 @@ class ProductType extends BaseProductType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('translations', 'sylius_translations', [
-                'type' => 'sylius_product_translation',
-                'label' => 'sylius.form.product.translations',
+            ->add('channels', 'sylius_channel_choice', [
+                'multiple' => true,
+                'expanded' => true,
+                'label' => 'sylius.form.product.channels',
+            ])
+            ->add('mainTaxon', 'sylius_taxon_to_hidden_identifier')
+            ->add('taxons', 'sylius_taxon_choice', [
+                'label' => 'sylius.form.product.taxons',
+                'multiple' => true,
+            ])
+            ->add('variantSelectionMethod', 'choice', [
+                'label' => 'sylius.form.product.variant_selection_method',
+                'choices' => Product::getVariantSelectionMethodLabels(),
             ])
         ;
     }
