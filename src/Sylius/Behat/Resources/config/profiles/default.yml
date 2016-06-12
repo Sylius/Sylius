@@ -36,8 +36,7 @@ default:
                 firefox:
                     selenium2:
                         browser: firefox
-            show_auto: true
-            show_cmd: open %s
+            show_auto: false
 
         Behat\Symfony2Extension:
             kernel:

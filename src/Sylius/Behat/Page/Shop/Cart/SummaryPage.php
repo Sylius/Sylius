@@ -132,7 +132,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
      */
     public function hasItemNamed($name)
     {
-       return $this->findItemWith($name, '.sylius-product-name');
+       return $this->hasItemWith($name, '.sylius-product-name');
     }
 
     /**
@@ -140,7 +140,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
      */
     public function hasItemWithVariantNamed($variantName)
     {
-       return $this->findItemWith($variantName, '.sylius-product-variant-name');
+       return $this->hasItemWith($variantName, '.sylius-product-variant-name');
     }
 
     /**
@@ -210,7 +210,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
      *
      * @throws ElementNotFoundException
      */
-    private function findItemWith($attributeName, $selector)
+    private function hasItemWith($attributeName, $selector)
     {
         $itemsAttributes = $this->getElement('cart_items')->findAll('css', $selector);
 

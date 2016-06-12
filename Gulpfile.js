@@ -61,7 +61,7 @@ gulp.task('admin-js', function () {
         .pipe(gulpif(env === 'prod', uglify))
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest(adminRootPath + 'js/'))
-        ;
+    ;
 });
 
 gulp.task('admin-css', function() {

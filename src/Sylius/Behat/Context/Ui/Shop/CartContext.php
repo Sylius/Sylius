@@ -337,9 +337,12 @@ final class CartContext implements Context
     /**
      * @Given /^(this product) should have ([^"]+) "([^"]+)"$/
      */
-    public function thisItemShouldHaveSize(ProductInterface $product, $optionName, $optionValue)
+    public function thisItemShouldHaveOptionValue(ProductInterface $product, $optionName, $optionValue)
     {
-        Assert::true($this->summaryPage->hasItemWithOptionValue($product->getName(), $optionName,  $optionValue));
+        Assert::true(
+            $this->summaryPage->hasItemWithOptionValue($product->getName(), $optionName, $optionValue),
+            sprintf('Product in cart "%s" should have option %s with value %s, but it has not.', $product->getName(), $optionName, $optionValue)
+        );
     }
 
     /**

@@ -53,6 +53,8 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
             ->addSelect('children')
             ->leftJoin('o.children', 'children')
             ->andWhere('o.parent = :parent')
+            ->addOrderBy('o.root')
+            ->addOrderBy('o.left')
             ->setParameter('parent', $taxon)
         ;
 
