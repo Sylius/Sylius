@@ -24,6 +24,14 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     /**
      * {@inheritdoc}
      */
+    public function getRouteName()
+    {
+        return 'sylius_shop_cart_summary';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getGrandTotal()
     {
         $totalElement = $this->getElement('grand_total');
@@ -64,21 +72,21 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getItemRegularPrice($productName)
+    public function getItemTotal($productName)
     {
-        $regularPriceElement = $this->getElement('product_regular_price', ['%name%' => $productName]);
+        $itemTotalElement = $this->getElement('product_total', ['%name%' => $productName]);
 
-        return $this->getPriceFromString(trim($regularPriceElement->getText()));
+        return $this->getPriceFromString(trim($itemTotalElement->getText()));
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getItemDiscountPrice($productName)
+    public function getItemDiscountedTotal($productName)
     {
-        $discountPriceElement = $this->getElement('product_discount_price', ['%name%' => $productName]);
+        $discountedItemTotalElement = $this->getElement('product_discounted_total', ['%name%' => $productName]);
 
-        return $this->getPriceFromString(trim($discountPriceElement->getText()));
+        return $this->getPriceFromString(trim($discountedItemTotalElement->getText()));
     }
 
     /**
@@ -86,7 +94,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
      */
     public function isItemDiscounted($productName)
     {
-        return $this->hasElement('product_discount_price', ['%name%' => $productName]);
+        return $this->hasElement('product_discounted_total', ['%name%' => $productName]);
     }
 
     /**
@@ -163,14 +171,6 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
-    {
-        return 'sylius_shop_cart_summary';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getQuantity($productName)
     {
         $itemElement = $this->getElement('product_row', ['%name%' => $productName]);
@@ -194,8 +194,8 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
             'shipping_total' => '#sylius-cart-shipping-total',
             'tax_total' => '#sylius-cart-tax-total',
             'product_row' => '#sylius-cart-items tbody tr:contains("%name%")',
-            'product_regular_price' => '#sylius-cart-items tr:contains("%name%") .regular-price',
-            'product_discount_price' => '#sylius-cart-items tr:contains("%name%") .discount-price',
+            'product_total' => '#sylius-cart-items tr:contains("%name%") .sylius-total',
+            'product_discounted_total' => '#sylius-cart-items tr:contains("%name%") .sylius-discounted-total',
             'cart_items' => '#sylius-cart-items',
             'clear_button' => '#sylius-cart-clear',
             'save_button' => '#sylius-save',

@@ -26,16 +26,23 @@
             </div>
         {% endif %}
     </td>
-    <td class="right aligned sylius-unit-price">
-        {{ item.unitPrice|sylius_price(cart.currency) }}
+    <td class="right aligned">
+        <span class="sylius-unit-price">{{ item.unitPrice|sylius_price(cart.currency) }}</span>
     </td>
     <td class="center aligned">
         {{ form_widget(item_form.quantity) }}
     </td>
-    <td class="right aligned">
-        {{ item.total|sylius_price(cart.currency) }}
-    </td>
     <td class="center aligned">
         <a href="{{ path('sylius_shop_cart_item_remove', {'id': item.id}) }}" class="ui circular icon button sylius-cart-remove-button"><i class="remove icon"></i></a>
+    </td>
+    <td class="right aligned">
+        {# Todo: Fix this mess... #}
+        {% set regular_total = item|sylius_regular_price %}
+        {% if 0 != item.getAdjustmentsTotalRecursively('order_unit_promotion') %}
+            <span class="sylius-total" style="text-decoration: line-through">{{ regular_total|sylius_price }}</span>
+            <span class="sylius-discounted-total">{{ item.total|sylius_price }}</span>
+        {% else %}
+            <span class="sylius-total">{{ regular_total|sylius_price }}</span>
+        {% endif %}
     </td>
 </tr>
