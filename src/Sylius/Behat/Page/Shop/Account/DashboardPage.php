@@ -45,10 +45,35 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     /**
      * {@inheritdoc}
      */
+    public function isVerified()
+    {
+        return !$this->hasElement('verification');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasVerificationButton()
+    {
+        return $this->getDocument()->hasButton('Verify');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function pressVerify()
+    {
+        $this->getDocument()->pressButton('Verify');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
             'customer' => '#customer-information',
+            'verification' => '#verification-form',
         ]);
     }
 

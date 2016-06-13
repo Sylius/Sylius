@@ -32,7 +32,7 @@
         <a href="{{ path('sylius_shop_account_profile_update') }}" class="item"><i class="pencil icon"></i> {{ 'sylius.ui.edit'|trans }}</a>
         <a href="{{ path('sylius_shop_account_change_password') }}" class="item"><i class="lock icon"></i> {{ 'sylius.ui.change_password'|trans }}</a>
         {% if customer.user.verifiedAt is null %}
-            <form class="item" action="{{ path('sylius_user_verification_token') }}" method="post">
+            <form class="item" id="verification-form" action="{{ path('sylius_user_request_verification_token') }}" method="post">
                 <button type="submit" class="ui green basic button labeled icon mini">
                     <i class="checkmark icon"></i> {{ 'sylius.ui.verify'|trans }}
                 </button>

@@ -187,7 +187,7 @@ class LoginContext implements Context
     {
         Assert::true(
             $this->emailChecker->hasRecipient($email),
-            sprintf('Email should be send to %s, but it does not', $email)
+            sprintf('Email should have been sent to %s.', $email)
         );
     }
 

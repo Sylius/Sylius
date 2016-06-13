@@ -57,6 +57,8 @@ class EmailChecker implements EmailCheckerInterface
 
     /**
      * @return \Swift_Mime_Message[]
+     *
+     * @throws \Exception
      */
     private function getMessages()
     {
@@ -64,9 +66,14 @@ class EmailChecker implements EmailCheckerInterface
         $client = $this->getClient();
         $client->followRedirects(false);
         $messages = [];
+        $historySteps = 0;
 
         do {
-            $client->back();
+            try {
+                $client->back();
+            } catch (\LogicException $exception) {
+                throw new \Exception('No emails were found.');
+            }
             $response = $client->getResponse();
             $profile = $this->symfonyProfiler->loadProfileFromResponse($response);
             if (false === $profile) {
@@ -74,8 +81,13 @@ class EmailChecker implements EmailCheckerInterface
             }
             $swiftMailerCollector = $profile->getCollector('swiftmailer');
             $messages = array_merge($messages, $swiftMailerCollector->getMessages());
+            ++$historySteps;
         } while (empty($messages));
         $client->followRedirects();
+
+        for ($i = 0; $i < $historySteps; $i++) {
+            $client->forward();
+        }
 
         return $messages;
     }

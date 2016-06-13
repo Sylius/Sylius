@@ -294,6 +294,8 @@
             <argument type="service" id="sylius.behat.page.shop.home" />
             <argument type="service" id="sylius.behat.notification_checker" />
             <argument type="service" id="sylius.behat.page.shop.account.register" />
+            <argument type="service" id="sylius.behat.page.shop.account.verify" />
+            <argument type="service" id="sylius.behat.email_checker" />
             <argument type="service" id="sylius.behat.shared_storage" />
             <tag name="sylius.behat.context" />
         </service>

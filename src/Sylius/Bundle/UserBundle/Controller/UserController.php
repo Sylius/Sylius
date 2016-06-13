@@ -129,15 +129,15 @@ class UserController extends ResourceController
 
             return $this->redirectToRoute('sylius_shop_homepage');
         }
-        if ($user !== $this->container->get('sylius.context.customer')->getCustomer()->getUser()) {
-            $securityToken = $this->container->get('security.token_storage')->getToken();
-            $this->container->get('security.logout.handler.session')->logout($request, $response, $securityToken);
-            $response->headers->remove('APP_REMEMBER_ME');
-
-            $this->container->get('sylius.security.user_login')->login($user);
+        if (null !== $customer = $this->container->get('sylius.context.customer')->getCustomer()) {
+            if ($user !== $customer->getUser()) {
+                $securityToken = $this->container->get('security.token_storage')->getToken();
+                $this->container->get('security.logout.handler.session')->logout($request, $response, $securityToken);
+                $response->headers->remove('APP_REMEMBER_ME');
+            }
         }
 
-        $view = View::create($user);
+        $this->container->get('sylius.security.user_login')->login($user);
 
         $user->setVerifiedAt(new \DateTime());
         $user->setEmailVerificationToken(null);
@@ -146,7 +146,7 @@ class UserController extends ResourceController
         $this->manager->flush();
 
         if (!$configuration->isHtmlRequest()) {
-            return $this->viewHandler->handle($configuration, $view);
+            return $this->viewHandler->handle($configuration, View::create($user));
         }
 
         $flashMessage = $request->attributes->get('_sylius[flash]', 'sylius.user.verification.success');

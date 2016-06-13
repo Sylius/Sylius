@@ -12,7 +12,7 @@ framework:
     default_locale: "en"
     profiler:
         matcher:
-            path: ^/shop/forgotten-password
+            path: ^/shop/forgotten-password|^/shop/verify|^/shop/register
         only_exceptions: false
         collect: true
     session:

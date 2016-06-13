@@ -18,6 +18,7 @@ use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Core\Test\Factory\TestUserFactoryInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 
 /**
@@ -155,6 +156,49 @@ final class UserContext implements Context
     }
 
     /**
+     * @Given his account is not verified
+     * @Given I have not verified my account yet
+     */
+    public function accountIsNotVerified()
+    {
+        $user = $this->sharedStorage->get('user');
+        $user->setVerifiedAt(null);
+
+        $this->userManager->flush();
+    }
+
+    /**
+     * @Given I have already received the verification email
+     */
+    public function iHaveReceivedVerificationEmail()
+    {
+        $user = $this->sharedStorage->get('user');
+
+        $this->prepareUserVerification($user);
+    }
+
+    /**
+     * @Given the verification email has already been sent to :email
+     */
+    public function theVerificationEmailHasBeenSentTo($email)
+    {
+        $user = $this->userRepository->findOneByEmail($email);
+
+        $this->prepareUserVerification($user);
+    }
+
+    /**
+     * @Given I have already verified my account
+     */
+    public function iHaveAlreadyVerifiedMyAccount()
+    {
+        $user = $this->sharedStorage->get('user');
+        $user->setVerifiedAt(new \DateTime());
+
+        $this->userManager->flush();
+    }
+
+    /**
      * @param string $firstName
      * @param string $lastName
      * @param string $country
@@ -181,5 +225,18 @@ final class UserContext implements Context
         $address->setCountryCode($this->countryCodeConverter->convertToCode($country));
 
         return $address;
+    }
+
+    /**
+     * @param UserInterface $user
+     */
+    private function prepareUserVerification(UserInterface $user)
+    {
+        $token = 'marryhadalittlelamb';
+        $this->sharedStorage->set('verification_token', $token);
+
+        $user->setEmailVerificationToken($token);
+
+        $this->userManager->flush();
     }
 }

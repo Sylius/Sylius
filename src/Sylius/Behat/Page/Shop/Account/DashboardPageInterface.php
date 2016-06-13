@@ -24,11 +24,23 @@ interface DashboardPageInterface extends PageInterface
      * @return bool
      */
     public function hasCustomerName($name);
-    
+
     /**
      * @param string $email
      *
      * @return bool
      */
     public function hasCustomerEmail($email);
+
+    /**
+     * @return bool
+     */
+    public function isVerified();
+
+    /**
+     * @return bool
+     */
+    public function hasVerificationButton();
+
+    public function pressVerify();
 }

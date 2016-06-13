@@ -13,8 +13,10 @@ sylius:
         reset_password:
             requested: If the email you have specified exists in our system, we have sent there an instruction on how to reset your password.
         verification:
+            error: The verification token is invalid.
+            notice: Your email is already verified.
+            success: Your email has been successfully verified.
             request:
                 success: An email with the verification link has been sent to your email address.
-            error: The verification token is invalid.
-            success: Your email has been successfully verified.
-            notice: Your email is already verified.
+    customer:
+        register: Thank you for registering, check your email to verify your account.
