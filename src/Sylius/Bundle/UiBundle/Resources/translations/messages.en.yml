@@ -30,6 +30,7 @@ sylius:
         change_address: Change address
         change_password: Change password
         change_your_password: Change your password
+        change_shipping_method: Change shipping method
         charges_and_taxes: Charges and taxes
         checkout: Checkout
         have_an_account_already: Have an account already

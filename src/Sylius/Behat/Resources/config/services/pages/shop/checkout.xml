@@ -17,6 +17,7 @@
         <parameter key="sylius.behat.page.shop.checkout.addressing_step.class">Sylius\Behat\Page\Shop\Checkout\AddressingStep</parameter>
         <parameter key="sylius.behat.page.shop.checkout.finalize_step.class">Sylius\Behat\Page\Shop\Checkout\FinalizeStep</parameter>
         <parameter key="sylius.behat.page.shop.checkout.payment_step.class">Sylius\Behat\Page\Shop\Checkout\PaymentStep</parameter>
+        <parameter key="sylius.behat.page.shop.checkout.payment.class">Sylius\Behat\Page\Shop\Checkout\PaymentPage</parameter>
         <parameter key="sylius.behat.page.shop.checkout.security_step.class">Sylius\Behat\Page\Shop\Checkout\SecurityStep</parameter>
         <parameter key="sylius.behat.page.shop.checkout.shipping.class">Sylius\Behat\Page\Shop\Checkout\ShippingPage</parameter>
         <parameter key="sylius.behat.page.shop.checkout.shipping_step.class">Sylius\Behat\Page\Shop\Checkout\ShippingStep</parameter>
@@ -28,6 +29,7 @@
         <service id="sylius.behat.page.shop.checkout.addressing_step" class="%sylius.behat.page.shop.checkout.addressing_step.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
         <service id="sylius.behat.page.shop.checkout.finalize_step" class="%sylius.behat.page.shop.checkout.finalize_step.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
         <service id="sylius.behat.page.shop.checkout.payment_step" class="%sylius.behat.page.shop.checkout.payment_step.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
+        <service id="sylius.behat.page.shop.checkout.payment" class="%sylius.behat.page.shop.checkout.payment.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
         <service id="sylius.behat.page.shop.checkout.security_step" class="%sylius.behat.page.shop.checkout.security_step.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
         <service id="sylius.behat.page.shop.checkout.shipping" class="%sylius.behat.page.shop.checkout.shipping.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
         <service id="sylius.behat.page.shop.checkout.shipping_step" class="%sylius.behat.page.shop.checkout.shipping_step.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />

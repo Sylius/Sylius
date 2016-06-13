@@ -324,6 +324,7 @@
         </service>
         <service id="sylius.order_processing.order_processor" class="%sylius.order_processing.order_processor.class%">
             <argument type="service" id="sylius.order_processing.shipment_processor" />
+            <argument type="service" id="sylius.order_processing.payment_processor" />
         </service>
 
         <service id="sylius.order.purger" class="%sylius.order.purger.class%">

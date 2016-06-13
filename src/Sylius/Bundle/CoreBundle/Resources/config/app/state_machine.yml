@@ -38,7 +38,7 @@ winzou_state_machine:
         callbacks:
             after:
                 process_order:
-                    on: ["address"]
+                    on: ["address", "select_shipping"]
                     do: ["@sylius.order_processing.order_processor", "process"]
                     args: ["object"]
                 recalculate_order:

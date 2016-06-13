@@ -120,4 +120,13 @@
         </property>
     </class>
 
+    <class name="Sylius\Component\Payment\Model\Payment">
+        <property name="method">
+            <constraint name="NotBlank">
+                <option name="message">sylius.payment.method.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+    </class>
+
 </constraint-mapping>

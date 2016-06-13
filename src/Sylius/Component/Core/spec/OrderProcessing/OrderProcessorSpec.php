@@ -15,15 +15,18 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderProcessing\OrderProcessorInterface;
 use Sylius\Component\Core\OrderProcessing\OrderShipmentProcessorInterface;
+use Sylius\Component\Core\OrderProcessing\PaymentProcessorInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class OrderProcessorSpec extends ObjectBehavior
 {
-    function let(OrderShipmentProcessorInterface $orderShipmentProcessor)
-    {
-        $this->beConstructedWith($orderShipmentProcessor);
+    function let(
+        OrderShipmentProcessorInterface $orderShipmentProcessor,
+        PaymentProcessorInterface $paymentProcessor
+    ) {
+        $this->beConstructedWith($orderShipmentProcessor, $paymentProcessor);
     }
 
     function it_is_initializable()
@@ -36,11 +39,13 @@ class OrderProcessorSpec extends ObjectBehavior
         $this->shouldImplement(OrderProcessorInterface::class);
     }
 
-    function it_runs_order_shipment_processor_to_control_order_shipments(
+    function it_runs_order_shipment_processor_and_payment_processor_to_control_order_shipments_and_payments(
         OrderInterface $order,
-        OrderShipmentProcessorInterface $orderShipmentProcessor
+        OrderShipmentProcessorInterface $orderShipmentProcessor,
+        PaymentProcessorInterface $paymentProcessor
     ) {
         $orderShipmentProcessor->processOrderShipment($order)->shouldBeCalled();
+        $paymentProcessor->processOrderPayments($order)->shouldBeCalled();
 
         $this->process($order);
     }

@@ -7,16 +7,17 @@ Feature: Preventing not available payment method selection
     Background:
         Given the store operates on a single channel in "France"
         And the store has a product "PHP T-Shirt" priced at "$19.99"
-        And the store has "Offline" payment method
-        And the store has "Raven Post" shipping method with "€10.00" fee
-        And I am logged in as customer
+        And the store allows paying with "Paypal Express Checkout"
+        And the store ships everywhere for free
+        And I am logged in customer
 
-    @todo
+    @ui
     Scenario: Not being able to select disabled payment method
-        Given the store has "Offline" payment method
-        And the store has disabled "Paypal Express" payment method
+        Given the payment method "Paypal Express Checkout" is disabled
         And I have product "PHP T-Shirt" in the cart
-        When I am at the checkout shipment step
-        And  I select "Raven Post" shipping method
+        And I am at the checkout addressing step
+        When I specify the shipping address as "Ankh Morpork", "Frost Alley", "90210", "France" for "Jon Snow"
+        And I complete the addressing step
+        And I select "Free" shipping method
         And I complete the shipping step
-        Then I should not be able to select "Paypal Express" payment method
+        Then I should not be able to select "Paypal Express Checkout" payment method
