@@ -15,6 +15,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Shop\Checkout\AddressingPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\PaymentPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\ShippingPageInterface;
+use Sylius\Behat\Page\Shop\Checkout\SummaryPageInterface;
 use Sylius\Behat\Page\Shop\Order\OrderPaymentsPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\AddressingStepInterface;
 use Sylius\Behat\Page\Shop\Checkout\FinalizeStepInterface;
@@ -91,6 +92,11 @@ final class CheckoutContext implements Context
     private $shippingPage;
 
     /**
+     * @var SummaryPageInterface
+     */
+    private $summaryPage;
+
+    /**
      * @var OrderRepositoryInterface
      */
     private $orderRepository;
@@ -104,6 +110,7 @@ final class CheckoutContext implements Context
      * @param ShippingPageInterface $shippingPage
      * @param PaymentStepInterface $checkoutPaymentStep
      * @param PaymentPageInterface $paymentPage
+     * @param SummaryPageInterface $summaryPage
      * @param FinalizeStepInterface $checkoutFinalizeStep
      * @param ThankYouPageInterface $checkoutThankYouPage
      * @param OrderPaymentsPageInterface $orderPaymentsPage
@@ -118,6 +125,7 @@ final class CheckoutContext implements Context
         ShippingPageInterface $shippingPage,
         PaymentStepInterface $checkoutPaymentStep,
         PaymentPageInterface $paymentPage,
+        SummaryPageInterface $summaryPage,
         FinalizeStepInterface $checkoutFinalizeStep,
         ThankYouPageInterface $checkoutThankYouPage,
         OrderPaymentsPageInterface $orderPaymentsPage,
@@ -131,6 +139,7 @@ final class CheckoutContext implements Context
         $this->shippingPage = $shippingPage;
         $this->checkoutPaymentStep = $checkoutPaymentStep;
         $this->paymentPage = $paymentPage;
+        $this->summaryPage = $summaryPage;
         $this->checkoutFinalizeStep = $checkoutFinalizeStep;
         $this->checkoutThankYouPage = $checkoutThankYouPage;
         $this->orderPaymentsPage = $orderPaymentsPage;
@@ -160,6 +169,8 @@ final class CheckoutContext implements Context
      */
     public function iSpecifyTheShippingAddressAs(AddressInterface $address)
     {
+        $this->sharedStorage->set('shipping_address', $address);
+
         $this->addressingPage->specifyShippingAddress($address);
     }
 
@@ -169,6 +180,8 @@ final class CheckoutContext implements Context
      */
     public function iSpecifyTheBillingAddressAs(AddressInterface $address)
     {
+        $this->sharedStorage->set('billing_address', $address);
+
         $this->addressingPage->specifyBillingAddress($address);
     }
 
@@ -437,7 +450,6 @@ final class CheckoutContext implements Context
         Assert::true(
             $this->addressingPage->canSignIn(),
             'I should be able to login, but I am not.'
-        );
     }
 
     /**
@@ -459,7 +471,37 @@ final class CheckoutContext implements Context
         Assert::true(
             $this->addressingPage->checkInvalidCredentialsValidation(),
             'I should see validation error, but I do not.'
+    }
+
+    /**
+     * @Then /^I should see (this shipping address) as shipping address$/
+     */
+    public function iShouldSeeThisShippingAddressAsShippingAddress(AddressInterface $address)
+    {
+        Assert::true(
+            $this->summaryPage->hasShippingAddress($address),
+            'Shipping address is improper.'
         );
+    }
+
+    /**
+     * @Then /^I should see (this billing address) as billing address$/
+     */
+    public function iShouldSeeThisBillingAddressAsBillingAddress(AddressInterface $address)
+    {
+        Assert::true(
+            $this->summaryPage->hasBillingAddress($address),
+            'Billing address is improper.'
+        );
+    }
+
+    /**
+     * @Then /^I should see (this shipping address) as shipping and billing address$/
+     */
+    public function iShouldSeeThisShippingAddressAsShippingAndBillingAddress(AddressInterface $address)
+    {
+        $this->iShouldSeeThisShippingAddressAsShippingAddress($address);
+        $this->iShouldSeeThisBillingAddressAsBillingAddress($address);
     }
 
     /**

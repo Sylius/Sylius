@@ -232,6 +232,7 @@
             <argument type="service" id="sylius.behat.page.shop.checkout.shipping" />
             <argument type="service" id="sylius.behat.page.shop.checkout.payment_step" />
             <argument type="service" id="sylius.behat.page.shop.checkout.payment" />
+            <argument type="service" id="sylius.behat.page.shop.checkout.summary" />
             <argument type="service" id="sylius.behat.page.shop.checkout.finalize_step" />
             <argument type="service" id="sylius.behat.page.shop.checkout.thank_you" />
             <argument type="service" id="sylius.behat.page.shop.order.order_payments" />

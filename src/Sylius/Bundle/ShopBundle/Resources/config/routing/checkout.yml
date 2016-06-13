@@ -63,3 +63,15 @@ sylius_shop_checkout_payment:
                 graph: sylius_order_checkout
                 transition: select_payment
             redirect: sylius_shop_homepage
+
+sylius_shop_checkout_summary:
+    path: /summary
+    methods: [GET, PUT]
+    defaults:
+        _controller: sylius.controller.order:updateAction
+        _sylius:
+            template: SyliusShopBundle:Checkout:summary.html.twig
+            repository:
+                method: find
+                arguments: [expr:service('sylius.cart_provider').getCart()]
+            redirect: sylius_shop_homepage
