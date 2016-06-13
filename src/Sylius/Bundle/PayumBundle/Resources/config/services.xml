@@ -31,6 +31,10 @@
             <tag name="payum.extension" all="true" />
         </service>
 
+        <service id="sylius.payum.http_client" class="Payum\Core\HttpClientInterface">
+            <factory class="Payum\Core\Bridge\Guzzle\HttpClientFactory" method="create" />
+        </service>
+
         <!-- PayPal -->
         <service id="sylius.payum.action.convert_payment_to_paypal_express" class="Sylius\Bundle\PayumBundle\Action\ConvertPaymentToPaypalExpressAction">
             <argument type="service" id="sylius.invoice_number_generator" />
