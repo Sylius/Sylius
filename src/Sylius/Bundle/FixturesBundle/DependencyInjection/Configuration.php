@@ -28,37 +28,74 @@ final class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('sylius_fixtures');
 
-        /** @var ArrayNodeDefinition $suiteNode */
-        $suiteNode = $rootNode
-            ->children()
-                ->arrayNode('suites')
-                    ->useAttributeAsKey('name')
-                    ->prototype('array')
+        $this->buildSuitesNode($rootNode);
+
+        return $treeBuilder;
+    }
+
+    /**
+     * @param ArrayNodeDefinition $rootNode
+     */
+    private function buildSuitesNode(ArrayNodeDefinition $rootNode)
+    {
+        /** @var ArrayNodeDefinition $suitesNode */
+        $suitesNode = $rootNode->children()
+            ->arrayNode('suites')
+                ->useAttributeAsKey('name')
+                ->prototype('array')
         ;
 
-        /** @var ArrayNodeDefinition $fixtureNode */
-        $fixtureNode = $suiteNode
-            ->children()
-                ->arrayNode('fixtures')
-                    ->useAttributeAsKey('name')
-                    ->prototype('array')
+        $this->buildFixturesNode($suitesNode);
+        $this->buildListenersNode($suitesNode);
+    }
+
+    /**
+     * @param ArrayNodeDefinition $suitesNode
+     */
+    private function buildFixturesNode(ArrayNodeDefinition $suitesNode)
+    {
+        /** @var ArrayNodeDefinition $fixturesNode */
+        $fixturesNode = $suitesNode->children()
+            ->arrayNode('fixtures')
+                ->useAttributeAsKey('name')
+                ->prototype('array')
         ;
 
-        $fixtureAttributesNodeBuilder = $fixtureNode->canBeUnset()->children();
-        $fixtureAttributesNodeBuilder->integerNode('priority')->defaultValue(0);
+        $this->buildAttributesNode($fixturesNode);
+    }
 
-        /** @var ArrayNodeDefinition $fixtureOptionsNode */
-        $fixtureOptionsNode = $fixtureAttributesNodeBuilder->arrayNode('options');
-        $fixtureOptionsNode
-            ->addDefaultChildrenIfNoneSet()
+    /**
+     * @param ArrayNodeDefinition $suitesNode
+     */
+    private function buildListenersNode(ArrayNodeDefinition $suitesNode)
+    {
+        /** @var ArrayNodeDefinition $listenersNode */
+        $listenersNode = $suitesNode->children()
+            ->arrayNode('listeners')
+                ->useAttributeAsKey('name')
+                ->prototype('array')
+        ;
+
+        $this->buildAttributesNode($listenersNode);
+    }
+
+    /**
+     * @param ArrayNodeDefinition $node
+     */
+    private function buildAttributesNode(ArrayNodeDefinition $node)
+    {
+        $attributesNodeBuilder = $node->canBeUnset()->children();
+        $attributesNodeBuilder->integerNode('priority')->defaultValue(0);
+
+        /** @var ArrayNodeDefinition $optionsNode */
+        $optionsNode = $attributesNodeBuilder->arrayNode('options')->addDefaultChildrenIfNoneSet();
+        $optionsNode
             ->beforeNormalization()
                 ->always(function ($value) {
                     return [$value];
                 })
-            ->end()
         ;
-        $fixtureOptionsNode->prototype('variable');
 
-        return $treeBuilder;
+        $optionsNode->prototype('variable');
     }
 }

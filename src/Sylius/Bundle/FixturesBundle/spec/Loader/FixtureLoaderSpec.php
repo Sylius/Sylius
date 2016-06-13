@@ -16,6 +16,7 @@ use Prophecy\Argument;
 use Sylius\Bundle\FixturesBundle\Fixture\FixtureInterface;
 use Sylius\Bundle\FixturesBundle\Loader\FixtureLoader;
 use Sylius\Bundle\FixturesBundle\Loader\FixtureLoaderInterface;
+use Sylius\Bundle\FixturesBundle\Suite\SuiteInterface;
 
 /**
  * @mixin FixtureLoader
@@ -34,10 +35,10 @@ final class FixtureLoaderSpec extends ObjectBehavior
         $this->shouldImplement(FixtureLoaderInterface::class);
     }
 
-    function it_loads_a_fixture(FixtureInterface $fixture)
+    function it_loads_a_fixture(SuiteInterface $suite, FixtureInterface $fixture)
     {
         $fixture->load(['options'])->shouldBeCalled();
 
-        $this->load($fixture, ['options']);
+        $this->load($suite, $fixture, ['options']);
     }
 }

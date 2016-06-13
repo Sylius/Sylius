@@ -17,7 +17,8 @@ namespace Sylius\Bundle\FixturesBundle\Fixture;
 final class FixtureNotFoundException extends \InvalidArgumentException
 {
     /**
-     * {@inheritdoc}
+     * @param string $name
+     * @param \Exception|null $previous
      */
     public function __construct($name, \Exception $previous = null)
     {

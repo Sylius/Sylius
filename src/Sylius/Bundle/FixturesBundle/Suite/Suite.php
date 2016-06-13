@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\FixturesBundle\Suite;
 
 use Sylius\Bundle\FixturesBundle\Fixture\FixtureInterface;
+use Sylius\Bundle\FixturesBundle\Listener\ListenerInterface;
 use Zend\Stdlib\SplPriorityQueue;
 
 /**
@@ -30,12 +31,18 @@ final class Suite implements SuiteInterface
     private $fixtures;
 
     /**
+     * @var SplPriorityQueue
+     */
+    private $listeners;
+
+    /**
      * @param string $name
      */
     public function __construct($name)
     {
         $this->name = $name;
         $this->fixtures = new SplPriorityQueue();
+        $this->listeners = new SplPriorityQueue();
     }
 
     /**
@@ -46,6 +53,16 @@ final class Suite implements SuiteInterface
     public function addFixture(FixtureInterface $fixture, array $options, $priority = 0)
     {
         $this->fixtures->insert(['fixture' => $fixture, 'options' => $options], $priority);
+    }
+
+    /**
+     * @param ListenerInterface $listener
+     * @param array $options
+     * @param int $priority
+     */
+    public function addListener(ListenerInterface $listener, array $options, $priority = 0)
+    {
+        $this->listeners->insert(['listener' => $listener, 'options' => $options], $priority);
     }
 
     /**
@@ -63,6 +80,16 @@ final class Suite implements SuiteInterface
     {
         foreach ($this->fixtures as $fixture) {
             yield $fixture['fixture'] => $fixture['options'];
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getListeners()
+    {
+        foreach ($this->listeners as $listener) {
+            yield $listener['listener'] => $listener['options'];
         }
     }
 }

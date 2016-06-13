@@ -14,10 +14,12 @@ namespace spec\Sylius\Bundle\FixturesBundle\Suite;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\FixturesBundle\Fixture\FixtureInterface;
-use Sylius\Bundle\FixturesBundle\Fixture\FixtureOptionsProcessorInterface;
 use Sylius\Bundle\FixturesBundle\Fixture\FixtureRegistryInterface;
+use Sylius\Bundle\FixturesBundle\Listener\ListenerInterface;
+use Sylius\Bundle\FixturesBundle\Listener\ListenerRegistryInterface;
 use Sylius\Bundle\FixturesBundle\Suite\SuiteFactory;
 use Sylius\Bundle\FixturesBundle\Suite\SuiteFactoryInterface;
+use Symfony\Component\Config\Definition\Processor;
 
 /**
  * @mixin SuiteFactory
@@ -26,9 +28,9 @@ use Sylius\Bundle\FixturesBundle\Suite\SuiteFactoryInterface;
  */
 final class SuiteFactorySpec extends ObjectBehavior
 {
-    function let(FixtureRegistryInterface $fixtureRegistry, FixtureOptionsProcessorInterface $fixtureOptionsProcessor)
+    function let(FixtureRegistryInterface $fixtureRegistry, ListenerRegistryInterface $listenerRegistry, Processor $optionsProcessor)
     {
-        $this->beConstructedWith($fixtureRegistry, $fixtureOptionsProcessor);
+        $this->beConstructedWith($fixtureRegistry, $listenerRegistry, $optionsProcessor);
     }
 
     function it_is_initializable()
@@ -43,7 +45,7 @@ final class SuiteFactorySpec extends ObjectBehavior
 
     function it_creates_a_new_empty_suite()
     {
-        $suite = $this->createSuite('suite_name', ['fixtures' => []]);
+        $suite = $this->createSuite('suite_name', ['listeners' => [], 'fixtures' => []]);
 
         $suite->getName()->shouldReturn('suite_name');
         $suite->getFixtures()->shouldGenerate();
@@ -51,17 +53,17 @@ final class SuiteFactorySpec extends ObjectBehavior
 
     function it_creates_a_new_suite_with_fixtures(
         FixtureRegistryInterface $fixtureRegistry,
-        FixtureOptionsProcessorInterface $fixtureOptionsProcessor,
+        Processor $optionsProcessor,
         FixtureInterface $firstFixture,
         FixtureInterface $secondFixture
     ) {
         $fixtureRegistry->getFixture('first_fixture')->willReturn($firstFixture);
         $fixtureRegistry->getFixture('second_fixture')->willReturn($secondFixture);
 
-        $fixtureOptionsProcessor->process($firstFixture, [[]])->willReturn([]);
-        $fixtureOptionsProcessor->process($secondFixture, [[]])->willReturn([]);
+        $optionsProcessor->processConfiguration($firstFixture, [[]])->willReturn([]);
+        $optionsProcessor->processConfiguration($secondFixture, [[]])->willReturn([]);
 
-        $suite = $this->createSuite('suite_name', ['fixtures' => [
+        $suite = $this->createSuite('suite_name', ['listeners' => [], 'fixtures' => [
             'first_fixture' => ['options' => [[]]],
             'second_fixture' => ['options' => [[]]],
         ]]);
@@ -72,17 +74,17 @@ final class SuiteFactorySpec extends ObjectBehavior
 
     function it_creates_a_new_suite_with_prioritized_fixtures(
         FixtureRegistryInterface $fixtureRegistry,
-        FixtureOptionsProcessorInterface $fixtureOptionsProcessor,
+        Processor $optionsProcessor,
         FixtureInterface $fixture,
         FixtureInterface $higherPriorityFixture
     ) {
         $fixtureRegistry->getFixture('fixture')->willReturn($fixture);
         $fixtureRegistry->getFixture('higher_priority_fixture')->willReturn($higherPriorityFixture);
 
-        $fixtureOptionsProcessor->process($fixture, [[]])->willReturn([]);
-        $fixtureOptionsProcessor->process($higherPriorityFixture, [[]])->willReturn([]);
+        $optionsProcessor->processConfiguration($fixture, [[]])->willReturn([]);
+        $optionsProcessor->processConfiguration($higherPriorityFixture, [[]])->willReturn([]);
 
-        $suite = $this->createSuite('suite_name', ['fixtures' => [
+        $suite = $this->createSuite('suite_name', ['listeners' => [], 'fixtures' => [
             'fixture' => ['priority' => 5, 'options' => [[]]],
             'higher_priority_fixture' => ['priority' => 10, 'options' => [[]]],
         ]]);
@@ -93,14 +95,14 @@ final class SuiteFactorySpec extends ObjectBehavior
 
     function it_creates_a_new_suite_with_customized_fixture(
         FixtureRegistryInterface $fixtureRegistry,
-        FixtureOptionsProcessorInterface $fixtureOptionsProcessor,
+        Processor $optionsProcessor,
         FixtureInterface $fixture
     ) {
         $fixtureRegistry->getFixture('fixture')->willReturn($fixture);
 
-        $fixtureOptionsProcessor->process($fixture, [['fixture_option' => 'fixture_value']])->willReturn(['fixture_option' => 'fixture_value']);
+        $optionsProcessor->processConfiguration($fixture, [['fixture_option' => 'fixture_value']])->willReturn(['fixture_option' => 'fixture_value']);
 
-        $suite = $this->createSuite('suite_name', ['fixtures' => [
+        $suite = $this->createSuite('suite_name', ['listeners' => [], 'fixtures' => [
             'fixture' => ['options' => [['fixture_option' => 'fixture_value']]],
         ]]);
 
@@ -108,15 +110,86 @@ final class SuiteFactorySpec extends ObjectBehavior
         $suite->getFixtures()->shouldGenerate([$fixture, ['fixture_option' => 'fixture_value']]);
     }
 
+    function it_creates_a_new_suite_with_listeners(
+        ListenerRegistryInterface $listenerRegistry,
+        Processor $optionsProcessor,
+        ListenerInterface $firstListener,
+        ListenerInterface $secondListener
+    ) {
+        $listenerRegistry->getListener('first_listener')->willReturn($firstListener);
+        $listenerRegistry->getListener('second_listener')->willReturn($secondListener);
+
+        $optionsProcessor->processConfiguration($firstListener, [[]])->willReturn([]);
+        $optionsProcessor->processConfiguration($secondListener, [[]])->willReturn([]);
+
+        $suite = $this->createSuite('suite_name', ['fixtures' => [], 'listeners' => [
+            'first_listener' => ['options' => [[]]],
+            'second_listener' => ['options' => [[]]],
+        ]]);
+
+        $suite->getName()->shouldReturn('suite_name');
+        $suite->getListeners()->shouldGenerateKeys($firstListener, $secondListener);
+    }
+
+    function it_creates_a_new_suite_with_prioritized_listeners(
+        ListenerRegistryInterface $listenerRegistry,
+        Processor $optionsProcessor,
+        ListenerInterface $listener,
+        ListenerInterface $higherPriorityListener
+    ) {
+        $listenerRegistry->getListener('listener')->willReturn($listener);
+        $listenerRegistry->getListener('higher_priority_listener')->willReturn($higherPriorityListener);
+
+        $optionsProcessor->processConfiguration($listener, [[]])->willReturn([]);
+        $optionsProcessor->processConfiguration($higherPriorityListener, [[]])->willReturn([]);
+
+        $suite = $this->createSuite('suite_name', ['fixtures' => [], 'listeners' => [
+            'listener' => ['priority' => 5, 'options' => [[]]],
+            'higher_priority_listener' => ['priority' => 10, 'options' => [[]]],
+        ]]);
+
+        $suite->getName()->shouldReturn('suite_name');
+        $suite->getListeners()->shouldGenerateKeys($higherPriorityListener, $listener);
+    }
+
+    function it_creates_a_new_suite_with_customized_listener(
+        ListenerRegistryInterface $listenerRegistry,
+        Processor $optionsProcessor,
+        ListenerInterface $listener
+    ) {
+        $listenerRegistry->getListener('listener')->willReturn($listener);
+
+        $optionsProcessor->processConfiguration($listener, [['listener_option' => 'listener_value']])->willReturn(['listener_option' => 'listener_value']);
+
+        $suite = $this->createSuite('suite_name', ['fixtures' => [], 'listeners' => [
+            'listener' => ['options' => [['listener_option' => 'listener_value']]],
+        ]]);
+
+        $suite->getName()->shouldReturn('suite_name');
+        $suite->getListeners()->shouldGenerate([$listener, ['listener_option' => 'listener_value']]);
+    }
+
     function it_throws_an_exception_if_suite_options_does_not_have_fixtures()
     {
-        $this->shouldThrow(\InvalidArgumentException::class)->during('createSuite', ['suite_name', []]);
+        $this->shouldThrow(\InvalidArgumentException::class)->during('createSuite', ['suite_name', ['listeners' => []]]);
+    }
+
+    function it_throws_an_exception_if_suite_options_does_not_have_listeners()
+    {
+        $this->shouldThrow(\InvalidArgumentException::class)->during('createSuite', ['suite_name', ['fixtures' => []]]);
     }
 
     function it_throws_an_exception_if_fixture_does_not_have_options_defined()
     {
-        $this->shouldThrow(\InvalidArgumentException::class)->during('createSuite', ['suite_name', ['fixtures' => [
+        $this->shouldThrow(\InvalidArgumentException::class)->during('createSuite', ['suite_name', ['listeners' => [], 'fixtures' => [
             'fixture' => [],
+        ]]]);
+    }
+
+    function it_throws_an_exception_if_listener_does_not_have_options_defined()
+    {
+        $this->shouldThrow(\InvalidArgumentException::class)->during('createSuite', ['suite_name', ['fixtures' => [], 'listeners' => [
+            'listener' => [],
         ]]]);
     }
 }

@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\FixturesBundle\Suite;
+namespace Sylius\Bundle\FixturesBundle\Listener;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class SuiteNotFoundException extends \InvalidArgumentException
+final class ListenerNotFoundException extends \InvalidArgumentException
 {
     /**
      * @param string $name
@@ -22,6 +22,6 @@ final class SuiteNotFoundException extends \InvalidArgumentException
      */
     public function __construct($name, \Exception $previous = null)
     {
-        parent::__construct(sprintf('Suite with name "%s" could not be found!', $name), 0, $previous);
+        parent::__construct(sprintf('Listener with name "%s" could not be found!', $name), 0, $previous);
     }
 }

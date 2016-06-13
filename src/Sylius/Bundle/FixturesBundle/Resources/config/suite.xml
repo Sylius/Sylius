@@ -15,7 +15,10 @@
     <services>
         <service id="sylius_fixtures.suite_factory" class="Sylius\Bundle\FixturesBundle\Suite\SuiteFactory" public="false">
             <argument type="service" id="sylius_fixtures.fixture_registry" />
-            <argument type="service" id="sylius_fixtures.fixture_options_processor" />
+            <argument type="service" id="sylius_fixtures.listener_registry" />
+            <argument type="service">
+                <service class="Symfony\Component\Config\Definition\Processor" />
+            </argument>
         </service>
 
         <service id="sylius_fixtures.suite_registry" class="Sylius\Bundle\FixturesBundle\Suite\LazySuiteRegistry" public="false">

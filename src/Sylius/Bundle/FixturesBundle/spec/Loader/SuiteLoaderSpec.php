@@ -17,7 +17,6 @@ use Sylius\Bundle\FixturesBundle\Fixture\FixtureInterface;
 use Sylius\Bundle\FixturesBundle\Loader\FixtureLoaderInterface;
 use Sylius\Bundle\FixturesBundle\Loader\SuiteLoader;
 use Sylius\Bundle\FixturesBundle\Loader\SuiteLoaderInterface;
-use Sylius\Bundle\FixturesBundle\Suite\ObjectMapIterator;
 use Sylius\Bundle\FixturesBundle\Suite\SuiteInterface;
 
 /**
@@ -53,8 +52,8 @@ final class SuiteLoaderSpec extends ObjectBehavior
             yield $secondFixture->getWrappedObject() => ['options 2'];
         });
 
-        $fixtureLoader->load($firstFixture, ['options 1'])->shouldBeCalled();
-        $fixtureLoader->load($secondFixture, ['options 2'])->shouldBeCalled();
+        $fixtureLoader->load($suite, $firstFixture, ['options 1'])->shouldBeCalled();
+        $fixtureLoader->load($suite, $secondFixture, ['options 2'])->shouldBeCalled();
 
         $this->load($suite);
     }

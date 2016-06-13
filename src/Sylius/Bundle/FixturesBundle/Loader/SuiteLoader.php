@@ -42,7 +42,7 @@ final class SuiteLoader implements SuiteLoaderInterface
          * @var array $fixtureOptions
          */
         foreach ($suite->getFixtures() as $fixture => $fixtureOptions) {
-            $this->fixtureLoader->load($fixture, $fixtureOptions);
+            $this->fixtureLoader->load($suite, $fixture, $fixtureOptions);
         }
     }
 }

@@ -26,10 +26,9 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
     public function it_allows_to_register_suite_with_fixture()
     {
-        $this->assertProcessedConfigurationEquals(
+        $this->assertConfigurationIsValid(
             [['suites' => ['suite' => ['fixtures' => ['fixture' => null]]]]],
-            ['suites' => ['suite' => ['fixtures' => ['fixture' => ['options' => [[]], 'priority' => 0]]]]],
-            'suites'
+            'suites.*.fixtures'
         );
     }
 
@@ -38,16 +37,12 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
     public function it_allows_to_register_multiple_suites()
     {
-        $this->assertProcessedConfigurationEquals(
+        $this->assertConfigurationIsValid(
             [['suites' => [
                 'first_suite' => ['fixtures' => ['fixture' => null]],
                 'second_suite' => ['fixtures' => ['fixture' => null]],
             ]]],
-            ['suites' => [
-                'first_suite' => ['fixtures' => ['fixture' => ['options' => [[]], 'priority' => 0]]],
-                'second_suite' => ['fixtures' => ['fixture' => ['options' => [[]], 'priority' => 0]]],
-            ]],
-            'suites'
+            'suites.*.fixtures'
         );
     }
 
@@ -69,7 +64,7 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
                 'first_suite' => ['fixtures' => ['fixture' => ['options' => [[]], 'priority' => 0]]],
                 'second_suite' => ['fixtures' => ['fixture' => ['options' => [[]], 'priority' => 0]]],
             ]],
-            'suites'
+            'suites.*.fixtures'
         );
     }
 
@@ -78,16 +73,12 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
      */
     public function it_allows_to_register_multiple_fixtures_for_one_suite()
     {
-        $this->assertProcessedConfigurationEquals(
+        $this->assertConfigurationIsValid(
             [['suites' => ['suite' => ['fixtures' => [
                 'first_fixture' => null,
                 'second_fixture' => null,
             ]]]]],
-            ['suites' => ['suite' => ['fixtures' => [
-                'first_fixture' => ['options' => [[]], 'priority' => 0],
-                'second_fixture' => ['options' => [[]], 'priority' => 0],
-            ]]]],
-            'suites'
+            'suites.*.fixtures'
         );
     }
 
@@ -109,7 +100,7 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
             ['suites' => ['suite' => ['fixtures' => [
                 'first_fixture' => ['options' => [[]], 'priority' => 0],
             ]]]],
-            'suites'
+            'suites.*.fixtures'
         );
     }
 
@@ -131,7 +122,7 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
                 'first_fixture' => ['options' => [[]], 'priority' => 0],
                 'second_fixture' => ['options' => [[]], 'priority' => 0],
             ]]]],
-            'suites'
+            'suites.*.fixtures'
         );
     }
 
@@ -152,7 +143,7 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
             ['suites' => ['suite' => ['fixtures' => [
                 'fixture' => ['options' => [['option' => 4], ['option' => 2]], 'priority' => 0],
             ]]]],
-            'suites'
+            'suites.*.fixtures'
         );
     }
 
@@ -173,7 +164,7 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
             ['suites' => ['suite' => ['fixtures' => [
                 'fixture' => ['options' => [['option' => 4]], 'priority' => 0],
             ]]]],
-            'suites'
+            'suites.*.fixtures'
         );
     }
 

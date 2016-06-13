@@ -9,18 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\FixturesBundle\Fixture;
+namespace Sylius\Bundle\FixturesBundle\Listener;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-interface FixtureOptionsProcessorInterface
+interface BeforeFixtureListenerInterface extends ListenerInterface
 {
     /**
-     * @param FixtureInterface $fixture
+     * @param FixtureEvent $fixtureEvent
      * @param array $options
-     *
-     * @return array
      */
-    public function process(FixtureInterface $fixture, array $options);
+    public function beforeFixture(FixtureEvent $fixtureEvent, array $options);
 }

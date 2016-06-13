@@ -22,7 +22,16 @@ interface SuiteInterface
     public function getName();
 
     /**
+     * @see \Sylius\Bundle\FixturesBundle\Fixture\FixtureInterface
+     *
      * @return \Traversable Fixtures as keys, options as values
      */
     public function getFixtures();
+
+    /**
+     * @see \Sylius\Bundle\FixturesBundle\Listener\ListenerInterface
+     *
+     * @return \Traversable Listeners as keys, options as values
+     */
+    public function getListeners();
 }
