@@ -45,23 +45,7 @@ class ShippingStepType extends AbstractResourceType
         $builder
             ->add('shipments', 'collection', [
                 'type' => 'sylius_checkout_shipment',
-                'options' => ['criteria' => $options['criteria'], 'channel' => $this->channelContext->getChannel()],
             ])
-        ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        parent::configureOptions($resolver);
-
-        $resolver
-            ->setDefined([
-                'criteria',
-            ])
-            ->setAllowedTypes('criteria', 'array')
         ;
     }
 

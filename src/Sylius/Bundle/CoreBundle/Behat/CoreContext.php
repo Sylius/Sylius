@@ -463,6 +463,9 @@ class CoreContext extends DefaultContext
 
         $method->setEnabled($enabled);
 
+        $channel = $this->getRepository('channel')->findAll()[0];
+        $channel->addShippingMethod($method);
+
         $manager = $this->getEntityManager();
         $manager->persist($method);
         if ($flush) {

@@ -13,12 +13,8 @@ namespace spec\Sylius\Bundle\CoreBundle\Form\Type\Checkout;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\CoreBundle\Form\EventSubscriber\AvailableShippingMethodsSubscriber;
 use Sylius\Bundle\CoreBundle\Form\Type\Checkout\ShippingType;
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
-use Sylius\Component\Addressing\Model\ZoneInterface;
-use Sylius\Component\Core\Model\AddressInterface;
-use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -44,9 +40,16 @@ class ShippingTypeSpec extends ObjectBehavior
         $this->shouldHaveType(AbstractType::class);
     }
 
-    function it_builds_form_with_subscriber(FormBuilderInterface $builder)
+    function it_builds_form_with_proper_fields(FormBuilderInterface $builder)
     {
-        $builder->addEventSubscriber(Argument::type(AvailableShippingMethodsSubscriber::class))->shouldBeCalled();
+        $builder
+            ->add('shipments', 'collection', [
+                'type' => 'sylius_checkout_shipment',
+                'label' => false,
+            ])
+            ->shouldBeCalled()
+            ->willReturn($builder)
+        ;
 
         $this->buildForm($builder, []);
     }

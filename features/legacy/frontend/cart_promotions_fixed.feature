@@ -13,6 +13,9 @@ Feature: Checkout fixed discount promotions
         And there are following taxons defined:
             | code | name     |
             | RTX1 | Category |
+        And the following zones are defined:
+            | name    | type    | members |
+            | Germany | country | Germany |
         And taxon "Category" has following children:
             | Clothing[TX1] > Ubuntu T-Shirts[TX2] |
             | Clothing[TX1] > Debian T-Shirts[TX3] |
@@ -31,7 +34,10 @@ Feature: Checkout fixed discount promotions
             | P2   | 300 EUR             | 40 EUR Discount for orders over 300 EUR                  |
             | P3   | Shipping to Germany | 40 EUR Discount for orders with shipping country Germany |
             | P4   | Ubuntu T-Shirts     | 40 EUR Discount for Ubuntu T-Shirts                      |
-            | P5   | 3rd order           | 10 EUR Discount for 3rd order                            |
+            | P5   | 3rd order           | 10 EUR Discount for 3rd order
+        And the following shipping methods exist:
+            | code | zone    | name        | calculator | configuration |
+            | SM1  | Germany | DHL Express | Flat rate  | Amount: 0     |
         And all products are assigned to the default channel
         And all promotions are assigned to the default channel
         And promotion "3 items" has following rules defined:
