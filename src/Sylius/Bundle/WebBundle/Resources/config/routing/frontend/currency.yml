@@ -2,6 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius_currency_change:
-    path: /change/{currency}
+    path: /change/{currencyCode}
     defaults:
         _controller: sylius.controller.currency:changeAction

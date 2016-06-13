@@ -13,6 +13,7 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Component\User\Model\Customer as BaseCustomer;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
@@ -57,6 +58,8 @@ class Customer extends BaseCustomer implements CustomerInterface, ProductReviewe
      */
     public function setCurrencyCode($currencyCode)
     {
+        Assert::string($currencyCode);
+        
         $this->currencyCode = $currencyCode;
     }
 
