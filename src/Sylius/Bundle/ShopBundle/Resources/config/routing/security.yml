@@ -31,7 +31,7 @@ sylius_shop_register:
                 route: sylius_shop_account_dashboard
 
 sylius_shop_request_password_reset_token:
-    path: /resetting/request-token
+    path: /forgotten-password
     methods: [GET, POST]
     defaults:
         _controller: sylius.controller.user:requestPasswordResetTokenAction
