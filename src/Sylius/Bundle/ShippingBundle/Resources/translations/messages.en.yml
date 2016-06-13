@@ -56,6 +56,7 @@ sylius:
             category: Category
             category_requirement: Category requirement
             configuration: Configuration
+            description: Description
             enabled: Enabled
             name: Name
             tax_category: Tax category

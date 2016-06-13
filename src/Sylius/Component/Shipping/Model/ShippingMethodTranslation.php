@@ -29,6 +29,11 @@ class ShippingMethodTranslation extends AbstractTranslation implements ShippingM
     protected $name;
 
     /**
+     * @var string
+     */
+    protected $description;
+
+    /**
      * {@inheritdoc}
      */
     public function __toString()
@@ -58,5 +63,21 @@ class ShippingMethodTranslation extends AbstractTranslation implements ShippingM
     public function setName($name)
     {
         $this->name = $name;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
     }
 }

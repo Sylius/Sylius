@@ -34,6 +34,16 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function describeIt($description, $languageCode)
+    {
+        $this->getDocument()->fillField(
+            sprintf('sylius_shipping_method_translations_%s_description', $languageCode), $description
+        );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function specifyAmount($amount)
     {
         $this->getDocument()->fillField('Amount', $amount);

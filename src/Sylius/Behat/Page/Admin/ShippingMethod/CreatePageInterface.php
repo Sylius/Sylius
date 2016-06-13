@@ -30,6 +30,12 @@ interface CreatePageInterface extends BaseCreatePageInterface
     public function nameIt($name, $language);
 
     /**
+     * @param string $description
+     * @param string $languageCode
+     */
+    public function describeIt($description, $languageCode);
+
+    /**
      * @param string $amount
      */
     public function specifyAmount($amount);

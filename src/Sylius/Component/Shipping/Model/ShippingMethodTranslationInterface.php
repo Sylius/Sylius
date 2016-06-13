@@ -27,4 +27,14 @@ interface ShippingMethodTranslationInterface extends ResourceInterface
      * @param string $name
      */
     public function setName($name);
+
+    /**
+     * @return string
+     */
+    public function getDescription();
+
+    /**
+     * @param string $description
+     */
+    public function setDescription($description);
 }

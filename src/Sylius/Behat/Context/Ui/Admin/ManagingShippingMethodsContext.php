@@ -109,6 +109,14 @@ final class ManagingShippingMethodsContext implements Context
     }
 
     /**
+     * @When I describe it as :description in :language
+     */
+    public function iDescribeItAsIn($description, $language)
+    {
+        $this->createPage->describeIt($description, $language);
+    }
+
+    /**
      * @When I define it for the :zoneName zone
      */
     public function iDefineItForTheZone($zoneName)
