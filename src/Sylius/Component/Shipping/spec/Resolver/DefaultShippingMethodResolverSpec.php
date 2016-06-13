@@ -12,8 +12,8 @@
 namespace spec\Sylius\Component\Shipping\Resolver;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
+use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Repository\ShippingMethodRepositoryInterface;
 use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface;
 

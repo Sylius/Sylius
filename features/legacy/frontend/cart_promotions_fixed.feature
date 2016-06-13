@@ -34,7 +34,7 @@ Feature: Checkout fixed discount promotions
             | P2   | 300 EUR             | 40 EUR Discount for orders over 300 EUR                  |
             | P3   | Shipping to Germany | 40 EUR Discount for orders with shipping country Germany |
             | P4   | Ubuntu T-Shirts     | 40 EUR Discount for Ubuntu T-Shirts                      |
-            | P5   | 3rd order           | 10 EUR Discount for 3rd order
+            | P5   | 3rd order           | 10 EUR Discount for 3rd order                            |
         And the following shipping methods exist:
             | code | zone    | name        | calculator | configuration |
             | SM1  | Germany | DHL Express | Flat rate  | Amount: 0     |
