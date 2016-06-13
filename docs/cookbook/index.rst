@@ -4,7 +4,6 @@ Cookbook
 .. toctree::
     :hidden:
 
-    customization/customization-guide
     installation-commands
     registry
 

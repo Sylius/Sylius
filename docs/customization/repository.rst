@@ -28,7 +28,7 @@ For the ``ProductRepository`` run:
 
 .. code-block:: bash
 
-    $ php app/console container:debug | grep sylius.repository.product
+    $ php app/console debug:container sylius.repository.product
 
 As a result you will get the ``Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepository`` - this is the class that you need to be extending.
 

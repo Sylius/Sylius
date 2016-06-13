@@ -25,6 +25,16 @@ The Developer's guide to leveraging the flexibility of Sylius.
 
 .. include:: /book/map.rst.inc
 
+The Customization Guide
+-----------------------
+
+.. toctree::
+   :hidden:
+
+   customization/customization-guide
+
+.. include:: /customization/map.rst.inc
+
 The API Guide
 -------------
 

@@ -34,7 +34,7 @@ These will be the steps that you will have to take to achieve that:
 1. If your are planning to add new fields remember that beforehand they need to be added on the model that the form type is based on.
 
     In case of our example if you need to have the ``contactHours`` on the model and the entity mapping for the ``Address`` resource.
-    To get to know how to prepare that go :doc:`there </cookbook/customization/model>`.
+    To get to know how to prepare that go :doc:`there </customization/model>`.
 
 2. Write your own form type class that will be extending the default one. Place it in your ``AppBundle\Form\Type`` directory.
 

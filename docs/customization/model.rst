@@ -89,7 +89,7 @@ The file should be placed in ``AppBundle/Resources/config/doctrine/Country.orm.y
                     model: AppBundle\Entity\Country
 
 4. Additionally if you want to give the administrator an ability to add a ``flag`` to any of Countries
-you'll need to update its form type. Check how to do it :doc:`here </cookbook/customization/form>`.
+you'll need to update its form type. Check how to do it :doc:`here </customization/form>`.
 
 What happens while overriding Models?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

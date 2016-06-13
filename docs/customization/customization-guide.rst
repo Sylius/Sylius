@@ -8,6 +8,7 @@ The Customization Guide
     form
     repository
     controller
+    validation
     menu
 
-.. include:: /cookbook/customization/map.rst.inc
+.. include:: /customization/map.rst.inc
