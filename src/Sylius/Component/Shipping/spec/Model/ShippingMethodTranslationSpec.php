@@ -45,6 +45,12 @@ class ShippingMethodTranslationSpec extends ObjectBehavior
         $this->getName()->shouldReturn('Shippable goods');
     }
 
+    function its_description_is_mutable()
+    {
+        $this->setDescription('Very good shipping, cheap price, good delivery time.');
+        $this->getDescription()->shouldReturn('Very good shipping, cheap price, good delivery time.');
+    }
+
     function it_returns_name_when_converted_to_string()
     {
         $this->setName('Shippable goods');

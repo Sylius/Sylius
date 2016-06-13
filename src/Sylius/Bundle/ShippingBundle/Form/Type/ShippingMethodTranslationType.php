@@ -30,6 +30,10 @@ class ShippingMethodTranslationType extends AbstractResourceType
             ->add('name', 'text', [
                 'label' => 'sylius.form.shipping_method.name',
             ])
+            ->add('description', 'textarea', [
+                'label' => 'sylius.form.shipping_method.description',
+                'required' => false,
+            ])
         ;
     }
 

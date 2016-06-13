@@ -39,6 +39,11 @@ class ShippingMethodTranslationTypeSpec extends ObjectBehavior
             ->add('name', 'text', Argument::any())
             ->willReturn($builder)
         ;
+        $builder
+            ->add('description', 'textarea', Argument::any())
+            ->shouldBeCalled()
+            ->willReturn($builder)
+        ;
 
         $this->buildForm($builder, []);
     }
