@@ -20,6 +20,14 @@ use Sylius\Component\Core\Model\AddressInterface;
 interface SummaryPageInterface extends SymfonyPageInterface
 {
     /**
+     * @param string $productName
+     * @param string $quantity
+     *
+     * @return bool
+     */
+    public function hasItemWithProductAndQuantity($productName, $quantity);
+
+    /**
      * @param AddressInterface $address
      *
      * @return bool

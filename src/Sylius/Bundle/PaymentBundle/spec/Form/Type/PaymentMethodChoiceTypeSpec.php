@@ -19,7 +19,6 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
@@ -47,7 +46,7 @@ class PaymentMethodChoiceTypeSpec extends ObjectBehavior
 
         $this->buildForm($builder, ['multiple' => true]);
     }
-    
+
     public function it_configures_options(OptionsResolver $resolver) 
     {
         $resolver->setDefaults(Argument::withKey('choice_list'))->shouldBeCalled()->willReturn($resolver);

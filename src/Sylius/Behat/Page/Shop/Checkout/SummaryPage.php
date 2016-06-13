@@ -11,9 +11,12 @@
 
 namespace Sylius\Behat\Page\Shop\Checkout;
 
+use Behat\Mink\Session;
 use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Symfony\Component\Intl\Intl;
+use Symfony\Component\Routing\RouterInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -21,11 +24,50 @@ use Symfony\Component\Intl\Intl;
 class SummaryPage extends SymfonyPage implements SummaryPageInterface
 {
     /**
+     * @var TableAccessorInterface
+     */
+    private $tableAccessor;
+
+    /**
+     * @param Session $session
+     * @param array $parameters
+     * @param RouterInterface $router
+     * @param TableAccessorInterface $tableAccessor
+     */
+    public function __construct(
+        Session $session,
+        array $parameters,
+        RouterInterface $router,
+        TableAccessorInterface $tableAccessor
+    ) {
+        parent::__construct($session, $parameters, $router);
+
+        $this->tableAccessor = $tableAccessor;
+    }
+
+
+    /**
      * {@inheritdoc}
      */
     public function getRouteName()
     {
         return 'sylius_shop_checkout_summary';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasItemWithProductAndQuantity($productName, $quantity)
+    {
+        $table = $this->getElement('items_table');
+
+        try {
+            $this->tableAccessor->getRowWithFields($table, ['item' => $productName, 'qty' => $quantity]);
+        } catch (\InvalidArgumentException $exception) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -56,6 +98,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
         return array_merge(parent::getDefinedElements(), [
             'billing_address' => '#addresses div:contains("Billing address") address',
             'shipping_address' => '#addresses div:contains("Shipping address") address',
+            'items_table' => '#items table',
         ]);
     }
 

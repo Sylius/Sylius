@@ -582,6 +582,17 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Given I should have :quantity :productName products in the cart
+     */
+    public function iShouldHaveProductsInTheCart($quantity, $productName)
+    {
+        Assert::true(
+            $this->summaryPage->hasItemWithProductAndQuantity($productName, $quantity),
+            sprintf('There is no "%s" with quantity %s on order summary page, but it should.', $productName, $quantity)
+        );
+    }
+
+    /**
      * @param string $type
      * @param string $element
      * @param string $expectedMessage

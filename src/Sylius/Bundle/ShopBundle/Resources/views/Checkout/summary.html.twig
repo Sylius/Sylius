@@ -3,41 +3,25 @@
 {% block content %}
     {% include '@SyliusShop/Checkout/_header.html.twig' %}
     {% include '@SyliusShop/Checkout/_steps.html.twig' with { 'active': 'summary' } %}
-    <div class="ui padded segment">
+    <div class="ui padded segment" id="items">
         <table class="ui celled table">
             <thead>
             <tr>
-                <th>Item</th>
-                <th>Price</th>
-                <th>Qty</th>
-                <th>Subtotal</th>
+                <th>{{ 'sylius.ui.item'|trans }}</th>
+                <th>{{ 'sylius.ui.price'|trans }}</th>
+                <th>{{ 'sylius.ui.qty'|trans }}</th>
+                <th>{{ 'sylius.ui.subtotal'|trans }}</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>Simple T-Shirt</td>
-                <td>$14.00</td>
-                <td class="center aligned">
-                    1
-                </td>
-                <td class="right aligned">$14.00</td>
-            </tr>
-            <tr>
-                <td>Mug Bomb</td>
-                <td>$20.00</td>
-                <td class="center aligned">
-                    2
-                </td>
-                <td class="right aligned">$40.00</td>
-            </tr>
-            <tr>
-                <td>Sticker Kiki</td>
-                <td>$5.00</td>
-                <td class="center aligned">
-                    1
-                </td>
-                <td class="right aligned">$10.00</td>
-            </tr>
+            {% for item in order.items %}
+                <tr>
+                    <td>{{ item.product }}</td>
+                    <td>{{ item.unitPrice|sylius_price }}</td>
+                    <td class="center aligned">{{ item.quantity }}</td>
+                    <td class="right aligned">{{ item.subtotal|sylius_price }}</td>
+                </tr>
+            {% endfor %}
             <tr>
                 <td colspan="4" class="right aligned">
                     Tax: $10.00
@@ -58,6 +42,7 @@
             <div class="column">
                 <h4 class="ui dividing header">{{ 'sylius.ui.billing_address'|trans }}</h4>
                 {% include '@SyliusShop/Checkout/_address.html.twig' with {'address': order.billingAddress} %}
+            </div>
             </div>
         </div>
         <h4 class="ui dividing header">Shipping and payment methods</h4>
