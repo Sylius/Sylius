@@ -37,6 +37,9 @@ To simplify let's say that it will be a string, where you will hold a path to th
 
     use Sylius\Component\Addressing\Model\Country as BaseCountry;
 
+    /**
+     * @author Name Surname <name.surname@test.com>
+     */
     class Country extends BaseCountry
     {
         /**
