@@ -11,6 +11,8 @@
 
 namespace Sylius\Bundle\FixturesBundle\Listener;
 
+use Webmozart\Assert\Assert;
+
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
@@ -26,12 +28,7 @@ final class ListenerRegistry implements ListenerRegistryInterface
      */
     public function addListener(ListenerInterface $listener)
     {
-        if (isset($this->listeners[$listener->getName()])) {
-            throw new \InvalidArgumentException(sprintf(
-                'Listener with name "%s" is already registered.',
-                $listener->getName()
-            ));
-        }
+        Assert::keyNotExists($this->listeners, $listener->getName(), 'Listener with name "%s" is already registered.');
 
         $this->listeners[$listener->getName()] = $listener;
     }

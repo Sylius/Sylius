@@ -21,7 +21,7 @@ interface FixtureRegistryInterface
      *
      * @return FixtureInterface
      *
-     * @throw FixtureNotFoundException
+     * @throws FixtureNotFoundException
      */
     public function getFixture($name);
 

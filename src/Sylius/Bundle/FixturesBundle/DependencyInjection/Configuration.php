@@ -39,10 +39,11 @@ final class Configuration implements ConfigurationInterface
     private function buildSuitesNode(ArrayNodeDefinition $rootNode)
     {
         /** @var ArrayNodeDefinition $suitesNode */
-        $suitesNode = $rootNode->children()
-            ->arrayNode('suites')
-                ->useAttributeAsKey('name')
-                ->prototype('array')
+        $suitesNode = $rootNode
+            ->children()
+                ->arrayNode('suites')
+                    ->useAttributeAsKey('name')
+                    ->prototype('array')
         ;
 
         $this->buildFixturesNode($suitesNode);
@@ -55,10 +56,11 @@ final class Configuration implements ConfigurationInterface
     private function buildFixturesNode(ArrayNodeDefinition $suitesNode)
     {
         /** @var ArrayNodeDefinition $fixturesNode */
-        $fixturesNode = $suitesNode->children()
-            ->arrayNode('fixtures')
-                ->useAttributeAsKey('name')
-                ->prototype('array')
+        $fixturesNode = $suitesNode
+            ->children()
+                ->arrayNode('fixtures')
+                    ->useAttributeAsKey('name')
+                    ->prototype('array')
         ;
 
         $this->buildAttributesNode($fixturesNode);
@@ -70,10 +72,11 @@ final class Configuration implements ConfigurationInterface
     private function buildListenersNode(ArrayNodeDefinition $suitesNode)
     {
         /** @var ArrayNodeDefinition $listenersNode */
-        $listenersNode = $suitesNode->children()
-            ->arrayNode('listeners')
-                ->useAttributeAsKey('name')
-                ->prototype('array')
+        $listenersNode = $suitesNode
+            ->children()
+                ->arrayNode('listeners')
+                    ->useAttributeAsKey('name')
+                    ->prototype('array')
         ;
 
         $this->buildAttributesNode($listenersNode);
@@ -88,14 +91,9 @@ final class Configuration implements ConfigurationInterface
         $attributesNodeBuilder->integerNode('priority')->defaultValue(0);
 
         /** @var ArrayNodeDefinition $optionsNode */
-        $optionsNode = $attributesNodeBuilder->arrayNode('options')->addDefaultChildrenIfNoneSet();
-        $optionsNode
-            ->beforeNormalization()
-                ->always(function ($value) {
-                    return [$value];
-                })
-        ;
-
+        $optionsNode = $attributesNodeBuilder->arrayNode('options');
+        $optionsNode->addDefaultChildrenIfNoneSet();
+        $optionsNode->beforeNormalization()->always(function ($value) { return [$value]; });
         $optionsNode->prototype('variable');
     }
 }

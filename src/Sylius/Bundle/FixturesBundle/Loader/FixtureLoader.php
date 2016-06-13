@@ -24,6 +24,6 @@ final class FixtureLoader implements FixtureLoaderInterface
      */
     public function load(SuiteInterface $suite, FixtureInterface $fixture, array $options)
     {
-       $fixture->load($options);
+        $fixture->load($options);
     }
 }

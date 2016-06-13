@@ -22,7 +22,7 @@ abstract class AbstractFixture implements FixtureInterface
     /**
      * {@inheritdoc}
      */
-    public function getConfigTreeBuilder()
+    final public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
         $optionsNode = $treeBuilder->root($this->getName());

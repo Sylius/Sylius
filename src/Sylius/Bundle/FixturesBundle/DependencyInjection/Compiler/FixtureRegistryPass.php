@@ -33,7 +33,7 @@ final class FixtureRegistryPass implements CompilerPassInterface
         $fixtureRegistry = $container->findDefinition('sylius_fixtures.fixture_registry');
 
         $taggedServices = $container->findTaggedServiceIds('sylius_fixtures.fixture');
-        foreach ($taggedServices as $id => $tags) {
+        foreach (array_keys($taggedServices) as $id) {
             $fixtureRegistry->addMethodCall('addFixture', [new Reference($id)]);
         }
     }

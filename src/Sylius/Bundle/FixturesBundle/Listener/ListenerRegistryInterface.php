@@ -21,7 +21,7 @@ interface ListenerRegistryInterface
      *
      * @return ListenerInterface
      *
-     * @throw ListenerNotFoundException
+     * @throws ListenerNotFoundException
      */
     public function getListener($name);
 

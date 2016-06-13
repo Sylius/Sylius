@@ -33,7 +33,7 @@ final class ListenerRegistryPass implements CompilerPassInterface
         $listenerRegistry = $container->findDefinition('sylius_fixtures.listener_registry');
 
         $taggedServices = $container->findTaggedServiceIds('sylius_fixtures.listener');
-        foreach ($taggedServices as $id => $tags) {
+        foreach (array_keys($taggedServices) as $id) {
             $listenerRegistry->addMethodCall('addListener', [new Reference($id)]);
         }
     }
