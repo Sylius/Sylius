@@ -454,6 +454,37 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Then /^I should see (this shipping address) as shipping address$/
+     */
+    public function iShouldSeeThisShippingAddressAsShippingAddress(AddressInterface $address)
+    {
+        Assert::true(
+            $this->summaryPage->hasShippingAddress($address),
+            'Shipping address is improper.'
+        );
+    }
+
+    /**
+     * @Then /^I should see (this billing address) as billing address$/
+     */
+    public function iShouldSeeThisBillingAddressAsBillingAddress(AddressInterface $address)
+    {
+        Assert::true(
+            $this->summaryPage->hasBillingAddress($address),
+            'Billing address is improper.'
+        );
+    }
+
+    /**
+     * @Then /^I should see (this shipping address) as shipping and billing address$/
+     */
+    public function iShouldSeeThisShippingAddressAsShippingAndBillingAddress(AddressInterface $address)
+    {
+        $this->iShouldSeeThisShippingAddressAsShippingAddress($address);
+        $this->iShouldSeeThisBillingAddressAsBillingAddress($address);
+    }
+
+    /**
      * @Then I should be able to log in
      */
     public function iShouldBeAbleToLogIn()
@@ -484,37 +515,6 @@ final class CheckoutContext implements Context
             $this->addressingPage->checkInvalidCredentialsValidation(),
             'I should see validation error, but I do not.'
         );
-    }
-
-    /**
-     * @Then /^I should see (this shipping address) as shipping address$/
-     */
-    public function iShouldSeeThisShippingAddressAsShippingAddress(AddressInterface $address)
-    {
-        Assert::true(
-            $this->summaryPage->hasShippingAddress($address),
-            'Shipping address is improper.'
-        );
-    }
-
-    /**
-     * @Then /^I should see (this billing address) as billing address$/
-     */
-    public function iShouldSeeThisBillingAddressAsBillingAddress(AddressInterface $address)
-    {
-        Assert::true(
-            $this->summaryPage->hasBillingAddress($address),
-            'Billing address is improper.'
-        );
-    }
-
-    /**
-     * @Then /^I should see (this shipping address) as shipping and billing address$/
-     */
-    public function iShouldSeeThisShippingAddressAsShippingAndBillingAddress(AddressInterface $address)
-    {
-        $this->iShouldSeeThisShippingAddressAsShippingAddress($address);
-        $this->iShouldSeeThisBillingAddressAsBillingAddress($address);
     }
 
     /**
@@ -561,6 +561,17 @@ final class CheckoutContext implements Context
         $this->iCompleteTheShippingStep();
         $this->iSelectPaymentMethod($paymentMethod);
         $this->iCompleteThePaymentStep();
+    }
+
+    /**
+     * @Given I should have :quantity :productName products in the cart
+     */
+    public function iShouldHaveProductsInTheCart($quantity, $productName)
+    {
+        Assert::true(
+            $this->summaryPage->hasItemWithProductAndQuantity($productName, $quantity),
+            sprintf('There is no "%s" with quantity %s on order summary page, but it should.', $productName, $quantity)
+        );
     }
 
     /**

@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\PaymentBundle\DependencyInjection;
 
+use Sylius\Bundle\CoreBundle\Form\Type\Payment\PaymentMethodChoiceType;
 use Sylius\Bundle\PaymentBundle\Form\Type\CreditCardType;
 use Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodChoiceType;
 use Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodTranslationType;
