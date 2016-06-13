@@ -19,6 +19,7 @@
     <parameters>
         <parameter key="sylius.templating.helper.money.class">Sylius\Bundle\CoreBundle\Templating\Helper\MoneyHelper</parameter>
         <parameter key="sylius.templating.helper.regular_price.class">Sylius\Bundle\CoreBundle\Templating\Helper\RegularPriceHelper</parameter>
+        <parameter key="sylius.templating.helper.currency.decorator.class">Sylius\Bundle\CoreBundle\Templating\Helper\CurrencyHelper</parameter>
     </parameters>
 
     <services>
@@ -27,6 +28,12 @@
             <argument type="service" id="sylius.context.currency" />
             <argument type="service" id="sylius.formatter.money" />
             <tag name="templating.helper" alias="sylius_money" />
+        </service>
+
+        <service id="sylius.templating.helper.currency.decorator" class="%sylius.templating.helper.currency.decorator.class%" lazy="true" decorates="sylius.templating.helper.currency" decoration-inner-name="currency_helper.inner">
+            <argument type="service" id="currency_helper.inner" />
+            <argument type="service" id="sylius.context.locale" />
+            <tag name="templating.helper" alias="sylius_currency_decorator" />
         </service>
 
         <service id="sylius.templating.helper.regular_price" class="%sylius.templating.helper.regular_price.class%" lazy="true">
