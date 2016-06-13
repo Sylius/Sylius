@@ -13,13 +13,14 @@ namespace Sylius\Bundle\FixturesBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class SyliusFixturesExtension extends Extension
+final class SyliusFixturesExtension extends Extension implements PrependExtensionInterface
 {
     /**
      * {@inheritdoc}
@@ -32,6 +33,28 @@ final class SyliusFixturesExtension extends Extension
         $loader->load('services.xml');
 
         $this->registerSuites($config, $container);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function prepend(ContainerBuilder $container)
+    {
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config/driver'));
+
+        $extensionsNamesToConfigurationFiles = [
+            'doctrine' => 'doctrine/orm.xml',
+            'doctrine_mongodb' => 'doctrine/mongodb.xml',
+            'doctrine_phpcr' => 'doctrine/phpcr.xml',
+        ];
+        
+        foreach ($extensionsNamesToConfigurationFiles as $extensionName => $configurationFile) {
+            if (!$container->hasExtension($extensionName)) {
+                continue;
+            }
+            
+            $loader->load($configurationFile);
+        }
     }
 
     /**
