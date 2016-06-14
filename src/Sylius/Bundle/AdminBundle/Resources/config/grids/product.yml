@@ -13,6 +13,7 @@ sylius_grid:
                 image:
                     type: twig
                     label: sylius.ui.image
+                    path: .
                     options:
                         template: SyliusAdminBundle:Product/Field:image.html.twig
                 code:

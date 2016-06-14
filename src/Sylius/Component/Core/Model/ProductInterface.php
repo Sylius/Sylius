@@ -108,4 +108,9 @@ interface ProductInterface extends
      * @return ImageInterface
      */
     public function getImage();
+
+    /**
+     * @return ImageInterface[]
+     */
+    public function getImages();
 }

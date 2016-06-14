@@ -4,12 +4,15 @@
 
 <tr>
     <td class="single line">
-        <span class="ui small header">
-            <a href="{{ path('sylius_shop_product_show', {'slug': product.slug}) }}" class="sylius-product-name">{{ product.name }}</a>
-            <span class="sub header">
-                {{ product.code }}
-            </span>
-        </span>
+        <div class="ui header">
+            {% include '@SyliusShop/Product/_mainImage.html.twig' with {'product': product, 'filter': 'sylius_shop_product_tiny_thumbnail'} %}
+            <div class="content">
+                <a href="{{ path('sylius_shop_product_show', {'slug': product.slug}) }}" class="sylius-product-name">{{ product.name }}</a>
+                <span class="sub header">
+                    {{ product.code }}
+                </span>
+            </div>
+        </div>
         {% if product.hasOptions() %}
             <div class="ui horizontal divided list sylius-product-options">
                 {% for option in variant.options %}

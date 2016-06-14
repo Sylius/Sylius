@@ -355,4 +355,16 @@ class Product extends BaseProduct implements ProductInterface, ReviewableProduct
 
         return $this->getFirstVariant()->getImage();
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getImages()
+    {
+        if (null === $this->getFirstVariant()) {
+            return new ArrayCollection();
+        }
+
+        return $this->getFirstVariant()->getImages();
+    }
 }
