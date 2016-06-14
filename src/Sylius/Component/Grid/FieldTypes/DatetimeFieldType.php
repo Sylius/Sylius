@@ -14,6 +14,7 @@ namespace Sylius\Component\Grid\FieldTypes;
 use Sylius\Component\Grid\DataExtractor\DataExtractorInterface;
 use Sylius\Component\Grid\Definition\Field;
 use Webmozart\Assert\Assert;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -36,10 +37,8 @@ class DatetimeFieldType implements FieldTypeInterface
     /**
      * {@inheritdoc}
      */
-    public function render(Field $field, $data)
+    public function render(Field $field, $data, array $options)
     {
-        Assert::keyExists($field->getOptions(), 'format');
-
         $value = $this->dataExtractor->get($field, $data);
         if (null === $value) {
             return null;
@@ -47,7 +46,20 @@ class DatetimeFieldType implements FieldTypeInterface
 
         Assert::isInstanceOf($value, \DateTime::class);
 
-        return $value->format($field->getOptions()['format']);
+        return $value->format($options['format']);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults([
+            'format' => 'Y:m:d H:i:s'
+        ]);
+        $resolver->setAllowedTypes([
+            'format' => 'string'
+        ]);
     }
 
     /**

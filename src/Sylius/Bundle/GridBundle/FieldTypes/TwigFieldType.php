@@ -14,6 +14,7 @@ namespace Sylius\Bundle\GridBundle\FieldTypes;
 use Sylius\Component\Grid\DataExtractor\DataExtractorInterface;
 use Sylius\Component\Grid\Definition\Field;
 use Sylius\Component\Grid\FieldTypes\FieldTypeInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -43,13 +44,26 @@ class TwigFieldType implements FieldTypeInterface
     /**
      * {@inheritdoc}
      */
-    public function render(Field $field, $data)
+    public function render(Field $field, $data, array $options)
     {
         if ('.' !== $field->getPath()) {
             $data = $this->dataExtractor->get($field, $data);
         }
 
-        return $this->twig->render($field->getOptions()['template'], ['data' => $data]);
+        return $this->twig->render($options['template'], ['data' => $data]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setRequired([
+            'template'
+        ]);
+        $resolver->setAllowedTypes([
+            'template' => 'string',
+        ]);
     }
 
     /**

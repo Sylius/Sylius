@@ -12,6 +12,7 @@
 namespace Sylius\Component\Grid\FieldTypes;
 
 use Sylius\Component\Grid\Definition\Field;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -19,10 +20,21 @@ use Sylius\Component\Grid\Definition\Field;
 interface FieldTypeInterface
 {
     /**
+     * Return a HTML representation of the $field using the given $data and
+     * $options.
+     *
      * @param Field $field
      * @param mixed $data
+     * @param array $options
      *
      * @return mixed
      */
-    public function render(Field $field, $data);
+    public function render(Field $field, $data, array $options);
+
+    /**
+     * Configure options for this field type.
+     *
+     * @param OptionsResolver $resolver
+     */
+    public function configureOptions(OptionsResolver $resolver);
 }
