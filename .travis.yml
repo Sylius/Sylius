@@ -15,25 +15,15 @@ matrix:
             services:
                 - memcached
         -
-            php: 7.0
-            env: SYLIUS_SUITE="docs packages"
-            addons:
-                apt:
-                    packages:
-                        - parallel
-        -
             php: 5.6
             env: SYLIUS_SUITE="application"
             services:
                 - memcached
         -
-            php: 5.6
-            env: SYLIUS_SUITE="packages"
-            addons:
-                apt:
-                    packages:
-                        - parallel
-
+            php: 5.5
+            env: SYLIUS_SUITE="application"
+            services:
+                - memcached
 cache:
     directories:
         - ~/.composer/cache/files
