@@ -220,6 +220,9 @@ sylius_promotion:
                 repository: Sylius\Bundle\PromotionBundle\Doctrine\ORM\CouponRepository
                 form:
                     default: Sylius\Bundle\CoreBundle\Form\Type\CouponType
+        promotion_action:
+            classes:
+                factory: Sylius\Component\Core\Factory\ActionFactory
 
 sylius_rbac:
     resources:
