@@ -4,12 +4,12 @@
 
 <tr>
     <td class="single line">
-        <strong class="ui small header">
+        <span class="ui small header">
             <a href="{{ path('sylius_shop_product_show', {'slug': product.slug}) }}" class="sylius-product-name">{{ product.name }}</a>
             <span class="sub header">
                 {{ product.code }}
             </span>
-        </strong>
+        </span>
         {% if product.hasOptions() %}
             <div class="ui horizontal divided list sylius-product-options">
                 {% for option in variant.options %}

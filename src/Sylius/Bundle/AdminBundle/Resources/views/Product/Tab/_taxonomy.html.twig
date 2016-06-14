@@ -1,10 +1,14 @@
 <div class="ui tab" data-tab="taxonomy">
     <h3 class="ui dividing header">{{ 'sylius.ui.taxonomy'|trans }}</h3>
+    <div class="field">
         {{ form_label(form.mainTaxon) }}
         <div class="ui fluid search selection dropdown">
-            {{ form_row(form.mainTaxon, {'attr': {'class' : 'autocomplete'}}) }}
+            {{ form_widget(form.mainTaxon, {'attr': {'class' : 'autocomplete'}}) }}
             <i class="dropdown icon"></i>
             <div class="default text">{{'sylius.ui.select_taxon'|trans}}</div>
             <div class="menu"></div>
         </div>
+    </div>
+    <div class="ui divider"></div>
+    {{ form_row(form.taxons) }}
 </div>

@@ -67,5 +67,3 @@ sylius_grid:
                 item:
                     show:
                         type: show
-                    delete:
-                        type: delete

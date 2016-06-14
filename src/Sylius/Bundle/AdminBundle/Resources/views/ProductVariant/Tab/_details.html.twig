@@ -1,0 +1,30 @@
+<div class="ui active tab" data-tab="details">
+    <div class="ui segments">
+        <div class="ui segment">
+            {{ form_row(form.code) }}
+            <div class="two fields">
+                {{ form_row(form.price) }}
+                {{ form_row(form.originalPrice) }}
+            </div>
+        </div>
+        {% if form.options is defined and form.options|length > 0 %}
+        <div class="ui segment">
+            <h4 class="ui dividing header">{{ 'sylius.ui.options'|trans }}</h4>
+            {% for option_form in form.options %}
+                {{ form_row(option_form) }}
+            {% endfor %}
+        </div>
+        {% endif %}
+        <div class="ui segment">
+            <h4 class="ui dividing header">{{ 'sylius.ui.inventory'|trans }}</h4>
+            {{ form_row(form.onHand) }}
+        </div>
+        <div class="ui segment">
+            <h4 class="ui dividing header">{{ 'sylius.ui.availability'|trans }}</h4>
+            <div class="two fields">
+                {{ form_row(form.availableOn) }}
+                {{ form_row(form.availableUntil) }}
+            </div>
+        </div>
+    </div>
+</div>

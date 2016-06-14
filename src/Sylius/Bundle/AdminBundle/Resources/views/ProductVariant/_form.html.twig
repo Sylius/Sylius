@@ -1,19 +1,10 @@
-<div class="ui two column stackable grid">
-    {{ form_errors(form) }}
-    <div class="column">
-        <div class="ui segment">
-            <div class="two fields">
-                {{ form_row(form.presentation) }}
-                {{ form_row(form.onHand) }}
-            </div>
-        </div>
+{{ form_errors(form) }}
+
+<div class="ui stackable grid">
+    <div class="three wide column">
+        {% include '@SyliusAdmin/ProductVariant/_menu.html.twig' %}
     </div>
-    <div class="column">
-        <div class="ui segment">
-            <div class="two fields">
-                {{ form_row(form.price) }}
-                {{ form_row(form.code) }}
-            </div>
-        </div>
+    <div class="thirteen wide column">
+        {% include '@SyliusAdmin/ProductVariant/_tabs.html.twig' %}
     </div>
 </div>

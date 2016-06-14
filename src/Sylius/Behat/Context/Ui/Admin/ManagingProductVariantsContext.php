@@ -133,15 +133,15 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @Then the :productVariantName variant of the :product product should appear in the shop
+     * @Then the :productVariantCode variant of the :product product should appear in the shop
      */
-    public function theProductVariantShouldAppearInTheShop($productVariantName, ProductInterface $product)
+    public function theProductVariantShouldAppearInTheShop($productVariantCode, ProductInterface $product)
     {
         $this->iWantToViewAllVariantsOfThisProduct($product);
 
         Assert::true(
-            $this->indexPage->isSingleResourceOnPage(['presentation' => $productVariantName]),
-            sprintf('The product variant with name %s has not been found.', $productVariantName)
+            $this->indexPage->isSingleResourceOnPage(['code' => $productVariantCode]),
+            sprintf('The product variant with code %s has not been found.', $productVariantCode)
         );
     }
 
@@ -208,7 +208,7 @@ final class ManagingProductVariantsContext implements Context
      */
     public function productShouldExistInTheProductCatalog(ProductVariantInterface $productVariant)
     {
-        $this->theProductVariantShouldAppearInTheShop($productVariant->getPresentation(), $productVariant->getProduct());
+        $this->theProductVariantShouldAppearInTheShop($productVariant->getCode(), $productVariant->getProduct());
     }
 
     /**

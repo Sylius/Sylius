@@ -10,6 +10,11 @@ sylius_grid:
             sorting:
                 code: asc
             fields:
+                image:
+                    type: twig
+                    label: sylius.ui.image
+                    options:
+                        template: SyliusAdminBundle:Product/Field:image.html.twig
                 code:
                     type: string
                     label: sylius.ui.code

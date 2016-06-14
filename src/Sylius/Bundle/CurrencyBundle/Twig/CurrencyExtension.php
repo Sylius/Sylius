@@ -40,6 +40,7 @@ class CurrencyExtension extends \Twig_Extension
     {
         return [
             new \Twig_SimpleFunction('sylius_currency_symbol', [$this->helper, 'getBaseCurrencySymbol']),
+            new \Twig_SimpleFunction('sylius_base_currency_code', [$this->helper, 'getBaseCurrencyCode']),
         ];
     }
 

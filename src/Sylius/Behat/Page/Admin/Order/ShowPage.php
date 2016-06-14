@@ -324,6 +324,11 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         $this->getDocument()->pressButton('Cancel');
     }
 
+    public function deleteOrder()
+    {
+        $this->getDocument()->pressButton('Delete');
+    }
+
     /**
      * {@inheritdoc}
      */
