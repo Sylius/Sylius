@@ -91,6 +91,14 @@ class CurrencyHelper extends Helper implements CurrencyHelperInterface
     }
 
     /**
+     * @return string
+     */
+    public function getBaseCurrencyCode()
+    {
+        return $this->currencyProvider->getBaseCurrency()->getCode();
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function getName()

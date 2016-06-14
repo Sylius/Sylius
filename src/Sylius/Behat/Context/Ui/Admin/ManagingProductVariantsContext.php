@@ -208,7 +208,7 @@ final class ManagingProductVariantsContext implements Context
      */
     public function productShouldExistInTheProductCatalog(ProductVariantInterface $productVariant)
     {
-        $this->theProductVariantShouldAppearInTheShop($productVariant->getPresentation(), $productVariant->getProduct());
+        $this->theProductVariantShouldAppearInTheShop($productVariant->getCode(), $productVariant->getProduct());
     }
 
     /**
