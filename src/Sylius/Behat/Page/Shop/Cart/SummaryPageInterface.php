@@ -45,14 +45,14 @@ interface SummaryPageInterface extends PageInterface
      *
      * @return string
      */
-    public function getItemRegularPrice($productName);
+    public function getItemTotal($productName);
 
     /**
      * @param string $productName
      *
      * @return string
      */
-    public function getItemDiscountPrice($productName);
+    public function getItemDiscountedTotal($productName);
 
     /**
      * @param string $productName
@@ -82,22 +82,23 @@ interface SummaryPageInterface extends PageInterface
      *
      * @return bool
      */
-    public function isItemWithName($name);
+    public function hasItemNamed($name);
 
     /**
      * @param string $variantName
      *
      * @return bool
      */
-    public function isItemWithVariant($variantName);
+    public function hasItemWithVariantNamed($variantName);
 
     /**
      * @param string $productName
      * @param string $optionName
+     * @param string $optionValue
      *
      * @return string
      */
-    public function getProductOption($productName, $optionName);
+    public function hasItemWithOptionValue($productName, $optionName, $optionValue);
 
     /**
      * @return bool

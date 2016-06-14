@@ -25,6 +25,7 @@ use Webmozart\Assert\Assert;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Anna Walasek <anna.walasek@lakion.com>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class CartContext implements Context
 {
@@ -194,12 +195,12 @@ final class CartContext implements Context
     {
         $this->summaryPage->open();
 
-        $discountPrice = $this->summaryPage->getItemDiscountPrice($product->getName());
-        $regularPrice = $this->summaryPage->getItemRegularPrice($product->getName());
+        $discountedTotal = $this->summaryPage->getItemDiscountedTotal($product->getName());
+        $total = $this->summaryPage->getItemTotal($product->getName());
 
         Assert::same(
-            $discountPrice,
-            ($regularPrice - $amount),
+            $discountedTotal,
+            ($total - $amount),
             'Price after discount should be %2$s, but it is %s.'
         );
     }
@@ -307,7 +308,7 @@ final class CartContext implements Context
     public function thisProductShouldHaveName($itemName)
     {
         Assert::true(
-            $this->summaryPage->isItemWithName($itemName),
+            $this->summaryPage->hasItemNamed($itemName),
             sprintf('The product with name %s should appear on the list, but it does not.', $itemName)
         );
     }
@@ -318,7 +319,7 @@ final class CartContext implements Context
     public function thisItemShouldHaveVariant($variantName)
     {
         Assert::true(
-            $this->summaryPage->isItemWithVariant($variantName),
+            $this->summaryPage->hasItemWithVariantNamed($variantName),
             sprintf('The product with variant %s should appear on the list, but it does not.', $variantName)
         );
     }
@@ -336,12 +337,11 @@ final class CartContext implements Context
     /**
      * @Given /^(this product) should have ([^"]+) "([^"]+)"$/
      */
-    public function thisItemShouldHaveSize(ProductInterface $product, $optionName, $optionValue)
+    public function thisItemShouldHaveOptionValue(ProductInterface $product, $optionName, $optionValue)
     {
-        Assert::contains(
-            $this->summaryPage->getProductOption($product->getName(), $optionName),
-            $optionValue,
-            'The product should have option with value %2$s, but it has option with value %s.'
+        Assert::true(
+            $this->summaryPage->hasItemWithOptionValue($product->getName(), $optionName, $optionValue),
+            sprintf('Product in cart "%s" should have option %s with value %s, but it has not.', $product->getName(), $optionName, $optionValue)
         );
     }
 

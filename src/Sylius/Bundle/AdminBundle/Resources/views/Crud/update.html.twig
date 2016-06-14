@@ -14,7 +14,7 @@
 
 {% include configuration.vars.templates.breadcrumb|default('SyliusAdminBundle:Crud/Breadcrumb:_update.html.twig') %}
 
-{{ form_start(form, {'action': path(configuration.getRouteName('update'), configuration.vars.route.parameters|default({ 'id': resource.id })), 'attr': {'class': 'ui form', 'novalidate': 'novalidate'}}) }}
+{{ form_start(form, {'action': path(configuration.getRouteName('update'), configuration.vars.route.parameters|default({ 'id': resource.id })), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
     <div class="ui segment">
         <input type="hidden" name="_method" value="PUT" />
         {% if configuration.vars.templates.form is defined %}

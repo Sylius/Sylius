@@ -17,4 +17,4 @@ Feature: Adding a product with selected option to the cart
         And I should be notified that the product has been successfully added
         And there should be one item in my cart
         And this item should have name "T-shirt banana"
-        And this product should have size "S"
+        And this product should have Size "S"

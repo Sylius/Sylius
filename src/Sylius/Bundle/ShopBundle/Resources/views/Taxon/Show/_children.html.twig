@@ -1,0 +1,8 @@
+{% if taxon.children|length > 0 %}
+<div class="ui fluid vertical menu">
+    <div class="header item">{{ taxon.name }}</div>
+    {% for child in taxon.children %}
+    <a href="{{ path('sylius_shop_taxon_show', {'permalink': child.permalink}) }}" class="item">{{ child.name }}</a>
+    {% endfor %}
+</div>
+{% endif %}

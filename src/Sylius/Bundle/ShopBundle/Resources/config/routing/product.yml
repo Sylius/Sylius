@@ -1,10 +1,15 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 sylius_shop_product_show:
     path: /products/{slug}
     methods: [GET]
     defaults:
-        _controller: sylius.controller.product:detailsAction
+        _controller: sylius.controller.product:showAction
         _sylius:
             template: SyliusShopBundle:Product:show.html.twig
             repository:
-                method: findOneBySlug
-                arguments: [$slug]
+                method: findOneBySlugAndChannel
+                arguments:
+                    - $slug
+                    - 'expr:service("sylius.context.channel").getChannel()'

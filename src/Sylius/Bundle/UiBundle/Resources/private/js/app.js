@@ -57,17 +57,21 @@
     $('.button.ui.dropdown').dropdown({action: 'hide'});
     $('.ui.fluid.search.selection.ui.dropdown').dropdown();
     $('.menu .item').tab();
+    $('.card .image').dimmer({on: 'hover'});
+    $('.ui.rating').rating('disable');
+    $('.cart.button')
+        .popup({
+            popup: $('.cart.popup'),
+            on: 'click',
+        })
+    ;
 
-    $('.form button').on('click', function() {
+    $('form.loadable button').on('click', function() {
       return $(this).closest('form').addClass('loading');
     });
     $('.message .close').on('click', function() {
       return $(this).closest('.message').transition('fade');
     });
-    $('.loadable.button').on('click', function() {
-      return $(this).addClass('loading');
-    });
-    $('.popups').popup();
 
     $('[data-requires-confirmation]').requireConfirmation();
     $('[data-toggles]').toggleElement();

@@ -24,11 +24,19 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     /**
      * {@inheritdoc}
      */
+    public function getRouteName()
+    {
+        return 'sylius_shop_cart_summary';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getGrandTotal()
     {
-        $grandTotalElement = $this->getElement('grand_total');
+        $totalElement = $this->getElement('grand_total');
 
-        return trim(str_replace('Grand total:', '', $grandTotalElement->getText()));
+        return $totalElement->getText();
     }
 
     /**
@@ -38,7 +46,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     {
         $taxTotalElement = $this->getElement('tax_total');
 
-        return trim(str_replace('Tax total:', '', $taxTotalElement->getText()));
+        return $taxTotalElement->getText();
     }
 
     /**
@@ -48,7 +56,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     {
         $shippingTotalElement = $this->getElement('shipping_total');
 
-        return trim(str_replace('Shipping total:', '', $shippingTotalElement->getText()));
+        return $shippingTotalElement->getText();
     }
 
     /**
@@ -58,27 +66,27 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     {
         $shippingTotalElement = $this->getElement('promotion_total');
 
-        return trim(str_replace('Promotion total:', '', $shippingTotalElement->getText()));
+        return $shippingTotalElement->getText();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getItemRegularPrice($productName)
+    public function getItemTotal($productName)
     {
-        $regularPriceElement = $this->getElement('product_regular_price', ['%name%' => $productName]);
+        $itemTotalElement = $this->getElement('product_total', ['%name%' => $productName]);
 
-        return $this->getPriceFromString(trim($regularPriceElement->getText()));
+        return $this->getPriceFromString(trim($itemTotalElement->getText()));
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getItemDiscountPrice($productName)
+    public function getItemDiscountedTotal($productName)
     {
-        $discountPriceElement = $this->getElement('product_discount_price', ['%name%' => $productName]);
+        $discountedItemTotalElement = $this->getElement('product_discounted_total', ['%name%' => $productName]);
 
-        return $this->getPriceFromString(trim($discountPriceElement->getText()));
+        return $this->getPriceFromString(trim($discountedItemTotalElement->getText()));
     }
 
     /**
@@ -86,7 +94,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
      */
     public function isItemDiscounted($productName)
     {
-        return $this->hasElement('product_discount_price', ['%name%' => $productName]);
+        return $this->hasElement('product_discounted_total', ['%name%' => $productName]);
     }
 
     /**
@@ -95,7 +103,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     public function removeProduct($productName)
     {
         $itemElement = $this->getElement('product_row', ['%name%' => $productName]);
-        $itemElement->find('css', 'a#remove-button')->click();
+        $itemElement->find('css', 'a.sylius-cart-remove-button')->click();
     }
 
     /**
@@ -106,7 +114,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
         $itemElement = $this->getElement('product_row', ['%name%' => $productName]);
         $itemElement->find('css', 'input[type=number]')->setValue($quantity);
 
-        $this->getDocument()->pressButton('Save');
+        $this->getElement('save_button')->click();
     }
 
     /**
@@ -122,27 +130,34 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     /**
      * {@inheritdoc}
      */
-    public function isItemWithName($name)
+    public function hasItemNamed($name)
     {
-       return $this->findItemWith($name, 'tbody  tr > td > div > a > strong');
+       return $this->hasItemWith($name, '.sylius-product-name');
     }
 
     /**
      * {@inheritdoc}
      */
-    public function isItemWithVariant($variantName)
+    public function hasItemWithVariantNamed($variantName)
     {
-       return $this->findItemWith($variantName, 'tbody  tr > td > strong');
+       return $this->hasItemWith($variantName, '.sylius-product-variant-name');
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getProductOption($productName, $optionName)
+    public function hasItemWithOptionValue($productName, $optionName, $optionValue)
     {
         $itemElement = $this->getElement('product_row', ['%name%' => $productName]);
 
-        return $itemElement->find('css', sprintf('li:contains("%s")', ucfirst($optionName)))->getText();
+        $selector = sprintf('.sylius-product-options > .item[data-sylius-option-name="%s"]', $optionName);
+        $optionValueElement = $itemElement->find('css', $selector);
+
+        if (null === $optionValueElement) {
+            throw new ElementNotFoundException($this->getSession(), sprintf('Option value of "%s"', $optionName), 'css', $selector);
+        }
+
+        return $optionValue === $optionValueElement->getText();
     }
 
     /**
@@ -150,20 +165,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
      */
     public function isEmpty()
     {
-        $isEmpty = strpos($this->getDocument()->find('css', '.message')->getText(), 'Your cart is empty');
-        if (false === $isEmpty ) {
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getRouteName()
-    {
-        return 'sylius_shop_cart_summary';
+        return false !== strpos($this->getDocument()->find('css', '.message')->getText(), 'Your cart is empty');
     }
 
     /**
@@ -187,19 +189,16 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'grand_total' => '#cart-summary td:contains("Grand total")',
-            'promotion_total' => '#cart-summary td:contains("Promotion total")',
-            'shipping_total' => '#cart-summary td:contains("Shipping total")',
-            'tax_total' => '#cart-summary td:contains("Tax total")',
-            'product_row' => '#cart-items tbody tr:contains("%name%")',
-            'product_regular_price' => '#cart-items tr:contains("%name%") .regular-price',
-            'product_discount_price' => '#cart-items tr:contains("%name%") .discount-price',
-            'total' => '.total',
-            'quantity' => '#sylius_cart_items_%number%_quantity',
-            'unit_price' => '.unit-price',
-            'cart_items' => '#cart-items',
-            'cart_summary' => '#cart-summary',
-            'clear_button' => 'a[class*="clear"]',
+            'grand_total' => '#sylius-cart-grand-total',
+            'promotion_total' => '#sylius-cart-promotion-total',
+            'shipping_total' => '#sylius-cart-shipping-total',
+            'tax_total' => '#sylius-cart-tax-total',
+            'product_row' => '#sylius-cart-items tbody tr:contains("%name%")',
+            'product_total' => '#sylius-cart-items tr:contains("%name%") .sylius-total',
+            'product_discounted_total' => '#sylius-cart-items tr:contains("%name%") .sylius-discounted-total',
+            'cart_items' => '#sylius-cart-items',
+            'clear_button' => '#sylius-cart-clear',
+            'save_button' => '#sylius-save',
         ]);
     }
 
@@ -211,12 +210,12 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
      *
      * @throws ElementNotFoundException
      */
-    private function findItemWith($attributeName, $selector)
+    private function hasItemWith($attributeName, $selector)
     {
         $itemsAttributes = $this->getElement('cart_items')->findAll('css', $selector);
 
-        foreach($itemsAttributes as $itemAttribute) {
-            if($attributeName === $itemAttribute->getText()) {
+        foreach ($itemsAttributes as $itemAttribute) {
+            if ($attributeName === $itemAttribute->getText()) {
                 return true;
             }
         }

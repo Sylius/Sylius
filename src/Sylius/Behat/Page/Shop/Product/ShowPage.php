@@ -44,7 +44,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
      */
     public function addToCartWithVariant($variant)
     {
-        $item = $this->getDocument()->find('css', sprintf('#product-variants tbody tr:contains("%s")', $variant));
+        $item = $this->getDocument()->find('css', sprintf('#sylius-product-variants tbody tr:contains("%s")', $variant));
         $radio = $item->find('css', 'input');
 
         $this->getDocument()->fillField($radio->getAttribute('name'), $radio->getAttribute('value'));
@@ -83,12 +83,20 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function isAttributeWithValueOnPage($attributeName, $attributeValue)
+    public function hasAttributeWithValue($name, $value)
     {
-        return (
-            $this->isAttributeWith($attributeName, 'tbody > tr > td[id=sylius_attribute_name]') &&
-            $this->isAttributeWith($attributeValue, 'tbody > tr > td[id=sylius_attribute_value]')
-        );
+        $tableWithAttributes = $this->getElement('attributes');
+
+        $nameTdSelector = sprintf('tr > td.sylius-product-attribute-name:contains("%s")', $name);
+        $nameTd = $tableWithAttributes->find('css', $nameTdSelector);
+
+        if (null === $nameTd) {
+            return false;
+        }
+
+        $row = $nameTd->getParent();
+
+        return $value === $row->find('css', 'td.sylius-product-attribute-value')->getText();
     }
 
     /**
@@ -105,23 +113,8 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'name' => '#sylius_product_name',
-            'attributes' => '#product-attributes'
+            'name' => '#sylius-product-name',
+            'attributes' => '#sylius-product-attributes'
         ]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    private function isAttributeWith($fieldValue, $selector)
-    {
-        $rows = $this->getElement('attributes')->findAll('css', $selector);
-        foreach($rows as $row) {
-            if($fieldValue === $row->getText()) {
-                return true;
-            }
-        }
-
-        return false;
     }
 }

@@ -45,6 +45,11 @@ interface TaxonInterface extends
     public function setParent(TaxonInterface $taxon = null);
 
     /**
+     * @return TaxonInterface[]
+     */
+    public function getParents();
+
+    /**
      * @return Collection|TaxonInterface[]
      */
     public function getChildren();

@@ -159,7 +159,7 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
     /**
      * {@inheritdoc}
      */
-    public function findLatest($limit = 10, ChannelInterface $channel)
+    public function findLatestByChannel(ChannelInterface $channel, $count)
     {
         return $this->createQueryBuilder('o')
             ->innerJoin('o.channels', 'channel')
@@ -167,7 +167,7 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
             ->andWhere('o.enabled = true')
             ->andWhere('channel = :channel')
             ->setParameter('channel', $channel)
-            ->setMaxResults($limit)
+            ->setMaxResults($count)
             ->getQuery()
             ->getResult()
         ;
@@ -219,6 +219,24 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
             ->setParameter('channel', $channel)
             ->getQuery()
             ->getResult();
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findOneBySlugAndChannel($slug, ChannelInterface $channel)
+    {
+        return $this->createQueryBuilder('o')
+            ->leftJoin('o.translations', 'translation')
+            ->innerJoin('o.channels', 'channel')
+            ->andWhere('channel = :channel')
+            ->andWhere('o.enabled = true')
+            ->andWhere('translation.slug = :slug')
+            ->setParameter('slug', $slug)
+            ->setParameter('channel', $channel)
+            ->getQuery()
+            ->getOneOrNullResult();
         ;
     }
 

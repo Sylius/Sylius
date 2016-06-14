@@ -44,13 +44,49 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
     /**
      * {@inheritdoc}
      */
+    public function findChildrenAsTree(TaxonInterface $taxon)
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+        $queryBuilder
+            ->addSelect('translation')
+            ->leftJoin('o.translations', 'translation')
+            ->addSelect('children')
+            ->leftJoin('o.children', 'children')
+            ->andWhere('o.parent = :parent')
+            ->addOrderBy('o.root')
+            ->addOrderBy('o.left')
+            ->setParameter('parent', $taxon)
+        ;
+
+        return $queryBuilder->getQuery()->getResult();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function findChildrenByRootCode($code)
     {
         $root = $this->findOneBy(['code' => $code]);
 
-        Assert::notNull($root, sprintf('Taxon with code "%s" not found.', $code));
+        if (null === $root) {
+            return [];
+        }
 
         return $this->findChildren($root);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findChildrenAsTreeByRootCode($code)
+    {
+        $root = $this->findOneBy(['code' => $code]);
+
+        if (null === $root) {
+            return [];
+        }
+
+        return $this->findChildrenAsTree($root);
     }
 
     /**

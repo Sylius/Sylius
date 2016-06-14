@@ -1,120 +1,17 @@
-{% extends 'SyliusShopBundle:Layout:main.html.twig' %}
+{% extends '@SyliusShop/layout.html.twig' %}
 
 {% block content %}
-<div class="ui vertical stripe segment">
-    <div class="ui text container">
-        <h4 class="ui horizontal header divider">New Arrivals</h4>
-        <div class="ui two column grid">
-            <div class="column">
-                <div class="ui fluid card">
-                    <div class="blurring dimmable image">
-                        <div class="ui dimmer">
-                            <div class="content">
-                                <div class="center">
-                                    <div class="ui inverted button">Add to cart</div>
-                                </div>
-                            </div>
-                        </div>
-                        <img src="http://media.bizj.us/view/img/4769431/bud-light-2015-super-bowl-ad*1200xx1337-752-19-0.png">
-                    </div>
-                    <div class="content">
-                        <div class="header">Bud Light</div>
-                        <div class="meta">
-                            <a>Beer</a>
-                        </div>
-                        <div class="description">
-                            The most amazing beer in the USA!
-                        </div>
-                    </div>
-                    <div class="extra content">
-                        <span class="right floated">
-                            <button class="ui primary button">Add to cart</button>
-                        </span>
-                        <span>
-                            <i class="dollar icon"></i>
-                            4.99
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <div class="column">
-                <div class="ui fluid card">
-                    <div class="image">
-                        <img src="http://media.bizj.us/view/img/4769431/bud-light-2015-super-bowl-ad*1200xx1337-752-19-0.png">
-                    </div>
-                    <div class="content">
-                        <div class="header">Bud Light</div>
-                        <div class="meta">
-                            <a>Beer</a>
-                        </div>
-                        <div class="description">
-                            The most amazing beer in the USA!
-                        </div>
-                    </div>
-                    <div class="extra content">
-                        <span class="right floated">
-                            <button class="ui primary button">Add to cart</button>
-                        </span>
-                        <span>
-                            <i class="dollar icon"></i>
-                            4.99
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="ui two column grid">
-            <div class="column">
-                <div class="ui fluid card">
-                    <div class="image">
-                        <img src="http://media.bizj.us/view/img/4769431/bud-light-2015-super-bowl-ad*1200xx1337-752-19-0.png">
-                    </div>
-                    <div class="content">
-                        <div class="header">Bud Light</div>
-                        <div class="meta">
-                            <a>Beer</a>
-                        </div>
-                        <div class="description">
-                            The most amazing beer in the USA!
-                        </div>
-                    </div>
-                    <div class="extra content">
-                        <span class="right floated">
-                            <button class="ui primary button">Add to cart</button>
-                        </span>
-                        <span>
-                            <i class="dollar icon"></i>
-                            4.99
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <div class="column">
-                <div class="ui fluid card">
-                    <div class="image">
-                        <img src="http://media.bizj.us/view/img/4769431/bud-light-2015-super-bowl-ad*1200xx1337-752-19-0.png">
-                    </div>
-                    <div class="content">
-                        <div class="header">Bud Light</div>
-                        <div class="meta">
-                            <a>Beer</a>
-                        </div>
-                        <div class="description">
-                            The most amazing beer in the USA!
-                        </div>
-                    </div>
-                    <div class="extra content">
-                        <span class="right floated">
-                            <button class="ui primary button">Add to cart</button>
-                        </span>
-                        <span>
-                            <i class="dollar icon"></i>
-                            4.99
-                        </span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<h2 class="ui horizontal section divider header">
+    {{ 'sylius.ui.latest_products'|trans }}
+</h2>
+{% render(url('sylius_shop_partial_product_index_latest', {'count': 4, 'template': '@SyliusShop/Product/_simpleList.html.twig'})) %}
+
+{% include '@SyliusShop/Homepage/_promos.html.twig' %}
+
+{% include '@SyliusShop/Homepage/_grid.html.twig' %}
+
+<h2 class="ui horizontal section divider header">
+    {{ 'sylius.ui.shop_by_brand'|trans }}
+</h2>
+{% render(url('sylius_shop_partial_taxon_index_by_code', {'code': 'brand', 'template': '@SyliusShop/Taxon/_horizontalMenu.html.twig'})) %}
 {% endblock %}

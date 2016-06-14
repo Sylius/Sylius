@@ -8,7 +8,7 @@ sylius_partial_product_latest:
         _sylius:
             paginate: false
             repository:
-                method: findLatest
-                arguments: [$limit, 'expr:service("sylius.context.channel").getChannel()']
+                method: findLatestByChannel
+                arguments: ['expr:service("sylius.context.channel").getChannel()', $limit]
             template: $template
             permission: false

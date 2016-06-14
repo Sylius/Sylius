@@ -44,6 +44,7 @@ var paths = {
         ],
         sass: [
             'src/Sylius/Bundle/UiBundle/Resources/private/sass/**',
+            'src/Sylius/Bundle/ShopBundle/Resources/private/scss/**',
         ],
         css: [
             'node_modules/semantic-ui-css/semantic.min.css',

@@ -118,7 +118,7 @@ final class ProductContext implements Context
     public function iShouldSeeTheProductAttributeWithValue($attributeName, $AttributeValue)
     {
         Assert::true(
-            $this->showPage->isAttributeWithValueOnPage($attributeName, $AttributeValue),
+            $this->showPage->hasAttributeWithValue($attributeName, $AttributeValue),
             sprintf('Product should have attribute %s with value %s, but it does not.', $attributeName, $AttributeValue)
         );
     }

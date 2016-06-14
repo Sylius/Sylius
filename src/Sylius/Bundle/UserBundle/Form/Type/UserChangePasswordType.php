@@ -48,12 +48,12 @@ class UserChangePasswordType extends AbstractType
     {
         $builder
             ->add('currentPassword', 'password', [
-                'label' => 'sylius.form.user.password.current',
+                'label' => 'sylius.form.user_change_password.current',
             ])
             ->add('newPassword', 'repeated', [
                 'type' => 'password',
-                'first_options' => ['label' => 'sylius.form.user.password.label'],
-                'second_options' => ['label' => 'sylius.form.user.password.confirmation'],
+                'first_options' => ['label' => 'sylius.form.user_change_password.new'],
+                'second_options' => ['label' => 'sylius.form.user_change_password.confirmation'],
                 'invalid_message' => 'sylius.user.plainPassword.mismatch',
             ])
         ;

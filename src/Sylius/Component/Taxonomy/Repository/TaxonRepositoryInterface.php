@@ -31,11 +31,25 @@ interface TaxonRepositoryInterface extends RepositoryInterface
     public function findChildren(TaxonInterface $taxon);
 
     /**
+     * @param TaxonInterface $taxon
+     *
+     * @return TaxonInterface[]
+     */
+    public function findChildrenAsTree(TaxonInterface $taxon);
+
+    /**
      * @param string $code
      *
      * @return TaxonInterface[]
      */
     public function findChildrenByRootCode($code);
+
+    /**
+     * @param string $code
+     *
+     * @return TaxonInterface[]
+     */
+    public function findChildrenAsTreeByRootCode($code);
 
     /**
      * @return TaxonInterface[]

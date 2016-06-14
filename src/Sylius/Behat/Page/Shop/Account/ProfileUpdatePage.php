@@ -30,6 +30,20 @@ class ProfileUpdatePage extends SymfonyPage implements ProfileUpdatePageInterfac
     /**
      * {@inheritdoc}
      */
+    public function checkValidationMessageFor($element, $message)
+    {
+        $errorLabel = $this->getElement($element)->getParent()->find('css', '.sylius-validation-error');
+
+        if (null === $errorLabel) {
+            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.sylius-validation-error');
+        }
+
+        return $message === $errorLabel->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function specifyFirstName($firstName)
     {
         $this->getDocument()->fillField('First name', $firstName);
@@ -62,19 +76,6 @@ class ProfileUpdatePage extends SymfonyPage implements ProfileUpdatePageInterfac
     /**
      * {@inheritdoc}
      */
-    public function checkValidationMessageFor($element, $message)
-    {
-        $foundElement = $this->getFieldElement($element);
-        if (null === $foundElement) {
-            throw new ElementNotFoundException($this->getSession(), 'Validation message', 'css', '.pointing');
-        }
-
-        return $message === $foundElement->find('css', '.form-error')->getText();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
@@ -82,22 +83,5 @@ class ProfileUpdatePage extends SymfonyPage implements ProfileUpdatePageInterfac
             'last_name' => '#sylius_customer_profile_lastName',
             'email' => '#sylius_customer_profile_email',
         ]);
-    }
-
-    /**
-     * @param string $element
-     *
-     * @return \Behat\Mink\Element\NodeElement|null
-     *
-     * @throws ElementNotFoundException
-     */
-    private function getFieldElement($element)
-    {
-        $element = $this->getElement($element);
-        while (null !== $element && !($element->hasClass('field'))) {
-            $element = $element->getParent();
-        }
-
-        return $element;
     }
 }

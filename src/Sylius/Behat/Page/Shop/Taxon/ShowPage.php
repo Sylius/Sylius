@@ -21,16 +21,17 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
+    public function getRouteName()
+    {
+        return 'sylius_shop_taxon_show';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function isProductInList($productName)
     {
-        $elements= $this->getDocument()->findAll('css', 'div.header');
-        foreach ($elements as $element) {
-            if ($productName === $element->getText()) {
-                return true;
-            }
-        }
-
-        return false;
+        return null !== $this->getDocument()->find('css', sprintf('.sylius-product-name:contains("%s")', $productName));
     }
 
     /**
@@ -38,14 +39,6 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
      */
     public function isEmpty()
     {
-        return false !== strpos($this->getDocument()->find('css', '.message')->getText(), 'There are no products to display');
-    }
-    
-    /**
-     * {@inheritdoc}
-     */
-    public function getRouteName()
-    {
-        return 'sylius_shop_taxon_show';
+        return false !== strpos($this->getDocument()->find('css', '.message')->getText(), 'There are no results to display');
     }
 }

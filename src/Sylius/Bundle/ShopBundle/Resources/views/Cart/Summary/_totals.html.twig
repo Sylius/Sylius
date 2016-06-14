@@ -1,0 +1,27 @@
+{% set promotionTotal =  cart.orderPromotionTotal %}
+
+<div class="ui segment">
+    <h2 class="ui dividing header">{{ 'sylius.ui.summary'|trans }}</h2>
+    <table class="ui very basic table">
+        <tbody>
+        <tr>
+            <td>{{ 'sylius.ui.tax'|trans }}:</td>
+            <td id="sylius-cart-tax-total" class="right aligned">{{ cart.taxTotal|sylius_price }}</td>
+        </tr>
+        <tr>
+            <td>{{ 'sylius.ui.shipping'|trans }}:</td>
+            <td id="sylius-cart-shipping-total" class="right aligned">{{ cart.shippingTotal|sylius_price }}</td>
+        </tr>
+        {% if promotionTotal %}
+        <tr>
+            <td>{{ 'sylius.ui.discount'|trans }}:</td>
+            <td id="sylius-cart-promotion-total" class="right aligned">-{{ (-1 * promotionTotal)|sylius_price }}</td>
+        </tr>
+        {% endif %}
+        <tr style="font-size: 2em;">
+            <td>{{ 'sylius.ui.order_total'|trans }}:</td>
+            <td id="sylius-cart-grand-total" class="right aligned">{{ cart.total|sylius_price }}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>

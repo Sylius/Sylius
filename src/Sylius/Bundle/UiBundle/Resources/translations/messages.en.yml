@@ -12,6 +12,7 @@ sylius:
         actions: Actions
         add_coupon: Add coupon
         add_to_cart: Add to cart
+        addressing: Addressing
         administration_panel_login: Administration panel login
         all: All
         an_error_occurred: An error occurred
@@ -19,6 +20,7 @@ sylius:
         available_for_channels: Available for channels
         average_order_value: Average order value
         backordered: Backordered
+        back_to_store: Back to store
         complete: Complete
         cancel: Cancel
         cancelled: Cancelled
@@ -27,7 +29,25 @@ sylius:
         change_your_password: Change your password
         charges_and_taxes: Charges and taxes
         checkout: Checkout
+        have_an_account_already: Have an account already
+        sign_in_here: Sign in here
+        checking_out_as: Checking out as
+        you_may_also_like: You may also like
+        forgot_password: Forgot password
+        your_shopping_cart: Your shopping cart
+        your_cart_is_empty: Your cart is empty
         clear_filters: Clear filters
+        enter_your_code: Enter your code
+        qty: Qty
+        clear_cart: Clear cart
+        update_cart: Update cart
+        apply_coupon: Apply coupon
+        edit_your_items_apply_coupon_or_proceed_to_the_checkout: Edit your items, apply coupon or proceed to the checkout
+        create_an_account: Create an account
+        summary: Summary
+        create_a_new_customer_account: Create a new customer account
+        if_you_have_an_account_sign_in_with_your_email_address: If you have an account, sign in with your e-mail address
+        access_your_store_account_or_create_a_new_one: Access your store account or create a new one
         color: Color
         configurable_product: Configurable product
         configure_channels_available_in_your_store: Configure channels available in your store
@@ -40,7 +60,11 @@ sylius:
         create: Create
         currencies: Currencies
         customer_can_login_to_the_store: Customer can login to the store
+        set_a_new_password_for_your_account: Set a new password for your account
+        my_account: My account
+        home: Home
         customer_care: Customer Care
+        customer_login: Customer login
         dashboard: Dashboard
         date: Date
         default_currency: Default currency
@@ -65,6 +89,7 @@ sylius:
         edit_promotion_coupon: Edit promotion coupon
         edit_shipping_method: Edit shipping method
         edit_tax_category: Edit tax category
+        shop_by_brand: Shop by brand
         edit_tax_rate: Edit tax rate
         edit_taxon: Edit taxon
         edit_zone: Edit zone
@@ -80,6 +105,10 @@ sylius:
         filter: Filter
         go: Go
         generate_coupons: Generate coupons
+        hello: Hello
+        manage_your_personal_information_and_preferences: Manage your personal information and preferences
+        latest_products: Latest products
+        view_and_edit_cart: View and edit cart
         in: In
         info: Info
         item: Item
@@ -128,6 +157,7 @@ sylius:
         not_in: Not in
         onhold: Onhold
         or: or
+        order_total: Order total
         partially_shipped: Partially shipped
         per_customer_usage_limit: Per customer usage limit
         powered_by: Powered by
@@ -138,14 +168,18 @@ sylius:
         promotion_configuration: Promotion configuration
         promotion_information: Promotion information
         purchased_from: Purchased from
+        personal_information: Personal information
         quantity: Qty
         ready: Ready
         repeat_new_password: Repeat new password
         returned: Returned
         returns_policy: Returns Policy
+        registered_customers: Registered customers
+        register_in_the_store: Register in the store
         save_changes: Save changes
         select_taxon: Select taxon
         shipped: Shipped
+        shipping: Shipping
         shipping_methods: Shipping methods
         show: Show
         sign_in: Sign in
@@ -164,6 +198,7 @@ sylius:
         usage: Usage
         values: Values
         yes: Yes
+        your_profile: Your profile
         your_store: Your Store
         zone_consisting_of_countries: Zone consisting of countries
         zone_consisting_of_other_zones: Zone consisting of other zones
