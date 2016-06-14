@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\CoreBundle\Form\EventSubscriber;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddAuthorGuestTypeFormSubscriber;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Review\Model\ReviewerInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -44,10 +45,10 @@ class AddAuthorGuestTypeFormSubscriberSpec extends ObjectBehavior
     }
 
     function it_adds_author_guest_form_type_if_user_is_not_logged_in_and_review_subject_does_not_have_author(
-        FormInterface $form,
         FormEvent $event,
-        FormConfigInterface $formConfig,
-        ReviewInterface $review
+        FormInterface $form,
+        ReviewInterface $review,
+        FormConfigInterface $formConfig
     ) {
         $event->getForm()->willReturn($form);
         $event->getData()->willReturn($review);
@@ -60,11 +61,11 @@ class AddAuthorGuestTypeFormSubscriberSpec extends ObjectBehavior
     }
 
     function it_does_not_add_author_guest_form_type_if_user_is_logged_in(
-        FormInterface $form,
         FormEvent $event,
+        FormInterface $form,
+        ReviewInterface $review,
         FormConfigInterface $formConfig,
-        ReviewerInterface $author,
-        ReviewInterface $review
+        ReviewerInterface $author
     ) {
         $event->getForm()->willReturn($form);
         $event->getData()->willReturn($review);
@@ -77,10 +78,10 @@ class AddAuthorGuestTypeFormSubscriberSpec extends ObjectBehavior
     }
 
     function it_does_not_add_author_guest_form_type_if_review_has_author(
-        FormInterface $form,
         FormEvent $event,
-        FormConfigInterface $formConfig,
+        FormInterface $form,
         ReviewInterface $review,
+        FormConfigInterface $formConfig,
         ReviewerInterface $author
     ) {
         $event->getForm()->willReturn($form);
@@ -91,5 +92,19 @@ class AddAuthorGuestTypeFormSubscriberSpec extends ObjectBehavior
         $form->add('author', 'sylius_customer_guest')->shouldNotBeCalled();
 
         $this->preSetData($event);
+    }
+
+    function it_throws_invalid_argument_exception_if_resource_is_not_customer_aware(
+        FormEvent $event,
+        FormInterface $form,
+        ResourceInterface $resource,
+        FormConfigInterface $formConfig
+    ) {
+        $event->getForm()->willReturn($form);
+        $event->getData()->willReturn($resource);
+        $form->getConfig()->willReturn($formConfig);
+        $formConfig->getOption('author')->willReturn(null);
+
+        $this->shouldThrow(\InvalidArgumentException::class)->during('preSetData', [$event]);
     }
 }

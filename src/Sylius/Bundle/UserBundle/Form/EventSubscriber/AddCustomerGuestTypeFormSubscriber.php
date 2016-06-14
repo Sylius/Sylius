@@ -15,6 +15,7 @@ use Sylius\Component\User\Model\CustomerAwareInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -53,6 +54,8 @@ class AddCustomerGuestTypeFormSubscriber implements EventSubscriberInterface
         /** @var CustomerAwareInterface $subject */
         $resource = $event->getData();
         $customer = $form->getConfig()->getOption($this->field);
+
+        Assert::isInstanceOf($resource, CustomerAwareInterface::class);
 
         if (null === $customer && null === $resource->getCustomer()) {
             $form->add($this->field, 'sylius_customer_guest');

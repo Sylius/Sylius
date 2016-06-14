@@ -47,14 +47,14 @@ class ReviewFactorySpec extends ObjectBehavior
         $this->shouldImplement(ReviewFactoryInterface::class);
     }
 
-    function it_creates_new_review($factory, ReviewInterface $review)
+    function it_creates_new_review(FactoryInterface $factory, ReviewInterface $review)
     {
         $factory->createNew()->willReturn($review);
 
         $this->createNew()->shouldReturn($review);
     }
 
-    function it_throws_an_exception_when_subject_is_not_found($subjectRepository)
+    function it_throws_an_exception_when_subject_is_not_found(RepositoryInterface $subjectRepository)
     {
         $subjectRepository->find(20)->willReturn(null);
 
@@ -65,8 +65,8 @@ class ReviewFactorySpec extends ObjectBehavior
     }
 
     function it_creates_a_review_with_subject(
-        $factory,
-        $subjectRepository,
+        FactoryInterface $factory,
+        RepositoryInterface $subjectRepository,
         ReviewableInterface $subject,
         ReviewInterface $review
     ) {
@@ -78,8 +78,8 @@ class ReviewFactorySpec extends ObjectBehavior
     }
 
     function it_creates_a_review_with_subject_and_reviewer(
-        $factory,
-        $subjectRepository,
+        FactoryInterface $factory,
+        RepositoryInterface $subjectRepository,
         ReviewableInterface $subject,
         ReviewInterface $review,
         ReviewerInterface $reviewer

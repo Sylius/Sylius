@@ -13,6 +13,7 @@ namespace Sylius\Component\Review\Factory;
 
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Review\Model\ReviewerInterface;
 
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
@@ -52,7 +53,6 @@ class ReviewFactory implements ReviewFactoryInterface
      */
     public function createForSubject($subjectId)
     {
-
         if (null === $subject = $this->subjectRepository->find($subjectId)) {
             throw new \InvalidArgumentException(sprintf('Review subject with id "%s" does not exist.', $subjectId));
         }
@@ -66,7 +66,7 @@ class ReviewFactory implements ReviewFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createForSubjectWithReviewer($subjectId, $reviewer)
+    public function createForSubjectWithReviewer($subjectId, ReviewerInterface $reviewer = null)
     {
         $review = $this->createForSubject($subjectId);
         $review->setAuthor($reviewer);

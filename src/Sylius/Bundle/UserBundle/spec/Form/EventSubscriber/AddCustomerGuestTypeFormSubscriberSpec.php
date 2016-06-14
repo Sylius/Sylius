@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\UserBundle\Form\EventSubscriber;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\UserBundle\Form\EventSubscriber\AddCustomerGuestTypeFormSubscriber;
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\User\Model\CustomerAwareInterface;
 use Sylius\Component\User\Model\CustomerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -96,5 +97,19 @@ class AddCustomerGuestTypeFormSubscriberSpec extends ObjectBehavior
         $form->add('customer', 'sylius_customer_guest')->shouldNotBeCalled();
 
         $this->preSetData($event);
+    }
+
+    function it_throws_invalid_argument_exception_if_resource_is_not_customer_aware(
+        FormInterface $form,
+        FormEvent $event,
+        FormConfigInterface $formConfig,
+        ResourceInterface $resource
+    ) {
+        $event->getForm()->willReturn($form);
+        $event->getData()->willReturn($resource);
+        $form->getConfig()->willReturn($formConfig);
+        $formConfig->getOption('customer')->willReturn(null);
+
+        $this->shouldThrow(\InvalidArgumentException::class)->during('preSetData', [$event]);
     }
 }
