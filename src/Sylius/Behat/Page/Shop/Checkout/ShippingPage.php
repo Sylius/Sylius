@@ -57,7 +57,13 @@ class ShippingPage extends SymfonyPage implements ShippingPageInterface
      */
     public function hasNoShippingMethodsMessage()
     {
-        return null !== $this->getDocument()->find('css', '#no_shipping_methods');
+        try {
+            $this->getElement('order_cannot_be_shipped_message');
+        } catch (ElementNotFoundException $exception) {
+            return false;
+        }
+
+        return true;
     }
 
     public function nextStep()
@@ -71,6 +77,7 @@ class ShippingPage extends SymfonyPage implements ShippingPageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
+            'order_cannot_be_shipped_message' => '#sylius-order-cannot-be-shipped',
             'shipping_method' => '[name="sylius_shop_checkout_shipping[shipments][0][method]"]',
             'shipping_method_option' => '.item:contains("%shipping_method%") input',
         ]);

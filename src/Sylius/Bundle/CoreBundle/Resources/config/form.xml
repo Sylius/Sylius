@@ -69,11 +69,9 @@
         <service id="sylius.checkout_form.shipping" class="%sylius.checkout_form.shipping.class%">
             <argument>%sylius.model.order.class%</argument>
             <argument>%sylius.validation_groups.order%</argument>
-            <argument type="service" id="sylius.context.channel"/>
             <tag name="form.type" alias="sylius_checkout_shipping" />
         </service>
         <service id="sylius.checkout_form.shop_shipping" class="%sylius.checkout_form.shop_shipping.class%">
-            <argument type="service" id="sylius.zone_matcher" />
             <tag name="form.type" alias="sylius_shop_checkout_shipping" />
         </service>
         <service id="sylius.checkout_form.shipment" class="%sylius.checkout_form.shipment.class%">

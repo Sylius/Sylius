@@ -1,6 +1,7 @@
-{% extends '@SyliusShop/Layout/checkout.html.twig' %}
+{% extends '@SyliusShop/Checkout/layout.html.twig' %}
 
 {% block content %}
+    {% include '@SyliusShop/Checkout/_header.html.twig' %}
     {% include '@SyliusShop/Checkout/_steps.html.twig' with { 'active': 'shipping' } %}
     <div class="ui stackable grid">
         <div class="eleven wide column">
@@ -10,6 +11,7 @@
                     <input type="hidden" name="_method" value="PUT" />
                     {% for shipment in order.shipments %}
                         {% set shipmentForm = form.shipments[loop.index0] %}
+                        {{ form_errors(shipmentForm.method) }}
                         {% for shippingMethod in shipmentForm.method %}
                             <div class="item">
                                 <div class="field">
@@ -19,10 +21,15 @@
                                 </div>
                                 <div class="content">
                                     <a class="header">{{ form_label(shippingMethod) }}</a>
+                                    {% if shippingMethod.parent.vars.choices[loop.index0].data.description is not null %}
+                                        <div class="description">
+                                            <p>{{ shippingMethod.parent.vars.choices[loop.index0].data.description }}</p>
+                                        </div>
+                                    {% endif %}
                                 </div>
                             </div>
                         {% else %}
-                            <h3 id="no_shipping_methods">There are currently no shipping methods available for your shipping address.</h3>
+                            <h3 id="sylius-order-cannot-be-shipped">{{ 'sylius.ui.no_shipping_methods_available'|trans }}</h3>
                         {% endfor %}
                     {% endfor %}
                     {{ form_row(form._token) }}

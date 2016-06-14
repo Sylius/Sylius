@@ -11,28 +11,15 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Checkout;
 
-use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 class ShippingType extends AbstractType
 {
-    /**
-     * @var ZoneMatcherInterface
-     */
-    private $zoneMatcher;
-
-    /**
-     * @param ZoneMatcherInterface $zoneMatcher
-     */
-    public function __construct(ZoneMatcherInterface $zoneMatcher)
-    {
-        $this->zoneMatcher = $zoneMatcher;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -41,6 +28,16 @@ class ShippingType extends AbstractType
         $builder->add('shipments', 'collection', [
             'type' => 'sylius_checkout_shipment',
             'label' => false,
+        ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults([
+            'validation_groups' => ['sylius'],
         ]);
     }
 

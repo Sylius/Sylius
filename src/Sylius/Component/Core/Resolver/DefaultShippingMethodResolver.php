@@ -60,6 +60,6 @@ class DefaultShippingMethodResolver implements DefaultShippingMethodResolverInte
             return null;
         }
 
-        return current($shippingMethods);
+        return array_values($shippingMethods)[0];
     }
 }

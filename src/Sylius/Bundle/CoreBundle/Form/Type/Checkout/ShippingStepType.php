@@ -22,22 +22,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class ShippingStepType extends AbstractResourceType
 {
     /**
-     * @var ChannelContextInterface
-     */
-    protected $channelContext;
-
-    /**
-     * @param string $dataClass
-     * @param array $validationGroups
-     * @param ChannelContextInterface $channelContext
-     */
-    public function __construct($dataClass, array $validationGroups = [], ChannelContextInterface $channelContext)
-    {
-        parent::__construct($dataClass, $validationGroups);
-        $this->channelContext = $channelContext;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)

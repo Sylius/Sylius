@@ -50,11 +50,8 @@ class ShipmentType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $notBlank = new NotBlank(['groups' => ['sylius']]);
-        $notBlank->message = $this->translator->trans('sylius.checkout.shipping_method.not_blank', [], 'validators');
-
         $builder
-            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) use ($notBlank) {
+            ->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
                 $form = $event->getForm();
                 $shipment = $event->getData();
 
@@ -62,9 +59,6 @@ class ShipmentType extends AbstractType
                     'label' => 'sylius.form.checkout.shipping_method',
                     'subject' => $shipment,
                     'expanded' => true,
-                    'constraints' => [
-                        $notBlank,
-                    ],
                 ]);
             });
     }
