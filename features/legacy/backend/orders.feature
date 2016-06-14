@@ -49,22 +49,6 @@ Feature: Orders management
         Then I should be on the order index page
         And I should see order with total "€14.74" in the list
 
-    Scenario: Accessing the order creation form
-        Given I am on the dashboard page
-        When I follow "Current orders"
-        And I follow "Create order"
-        Then I should be on the order creation page
-
-    Scenario: Accessing the order editing form
-        Given I am viewing order with number "000000001"
-        When I follow "Edit"
-        Then I should be editing order with number "000000001"
-
-    Scenario: Accessing the editing form from the list
-        Given I am on the order index page
-        When I click "Edit" near "#000000002"
-        Then I should be editing order with number "000000002"
-
     @javascript
     Scenario: Deleting the order
         Given I am viewing order with number "000000001"

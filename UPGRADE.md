@@ -9,6 +9,7 @@ UPGRADE
 * Changed current *item* promotion actions to *unit* promotion actions (as they're applied on ``OrderItemUnit`` level)
 * Introduced ``getDiscountedUnitPrice`` method on ``OrderItem``, which returns single *unit* price lowered by ``ORDER_UNIT_PROMOTION`` adjustments
 * Removed the concept of restricted zone per product
+* Renamed ``currency`` to ``currencyCode`` in variables and methods where the code string is being used (especially in ``Order``, ``Customer`` and ``CurrencyContext``)
 
 ### PayumBundle
 
@@ -17,6 +18,10 @@ UPGRADE
 ### Variation and VariationBundle
 
 * Removed concept of master variant (removed ``$master`` flag from ``Sylius\Component\Variation\Model\Variant``), all usages of **master** variant has been, for now, replaced with **first** variant;
+
+### Payment
+
+* Renamed ``currency`` to ``currencyCode`` in variables and methods where the code string is being used (especially in ``Payment`` and ``PaymentFactory``)
 
 ## From 0.17 to 0.18.x
 
