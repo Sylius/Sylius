@@ -17,6 +17,7 @@ use Sylius\Bundle\GridBundle\FieldTypes\TwigFieldType;
 use Sylius\Component\Grid\DataExtractor\DataExtractorInterface;
 use Sylius\Component\Grid\Definition\Field;
 use Sylius\Component\Grid\FieldTypes\FieldTypeInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @mixin TwigFieldType
@@ -45,25 +46,37 @@ class TwigFieldTypeSpec extends ObjectBehavior
         \Twig_Environment $twig,
         Field $field
     ) {
-        $field->getOptions()->willReturn(['template' => 'foo.html.twig']);
         $field->getPath()->willReturn('foo');
 
         $dataExtractor->get($field, ['foo' => 'bar'])->willReturn('Value');
         $twig->render('foo.html.twig', ['data' => 'Value'])->willReturn('<html>Value</html>');
 
-        $this->render($field, ['foo' => 'bar'])->shouldReturn('<html>Value</html>');
+        $this->render($field, ['foo' => 'bar'], [
+            'template' => 'foo.html.twig',
+        ])->shouldReturn('<html>Value</html>');
     }
     
     function it_uses_data_directly_if_dot_is_configured_as_path(
         \Twig_Environment $twig,
         Field $field
     ) {
-        $field->getOptions()->willReturn(['template' => 'foo.html.twig']);
         $field->getPath()->willReturn('.');
-
         $twig->render('foo.html.twig', ['data' => 'bar'])->willReturn('<html>Bar</html>');
 
-        $this->render($field, 'bar')->shouldReturn('<html>Bar</html>');
+        $this->render($field, 'bar', [
+            'template' => 'foo.html.twig',
+        ])->shouldReturn('<html>Bar</html>');
+    }
+
+    function it_should_configure_options(
+        OptionsResolver $resolver
+    )
+    {
+        $resolver->setRequired(['template'])->shouldBeCalled();
+        $resolver->setAllowedTypes([
+            'template' => [ 'string' ]
+        ])->shouldBeCalled();
+        $this->configureOptions($resolver);
     }
 
     function it_has_name()

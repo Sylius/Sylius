@@ -62,7 +62,7 @@ class TwigFieldType implements FieldTypeInterface
             'template'
         ]);
         $resolver->setAllowedTypes([
-            'template' => 'string',
+            'template' => ['string'],
         ]);
     }
 

@@ -16,6 +16,7 @@ use Sylius\Component\Grid\DataExtractor\DataExtractorInterface;
 use Sylius\Component\Grid\Definition\Field;
 use Sylius\Component\Grid\FieldTypes\DatetimeFieldType;
 use Sylius\Component\Grid\FieldTypes\FieldTypeInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @mixin DatetimeFieldType
@@ -45,39 +46,45 @@ class DatetimeFieldTypeSpec extends ObjectBehavior
         Field $field
     ) {
         $dataExtractor->get($field, ['foo' => 'bar'])->willReturn($dateTime);
-        $field->getOptions()->willReturn(['format' => 'Y-m-d']);
 
         $dateTime->format('Y-m-d')->willReturn('2001-10-10');
 
-        $this->render($field, ['foo' => 'bar'])->shouldReturn('2001-10-10');
+        $this->render($field, ['foo' => 'bar'], [
+            'format' => 'Y-m-d',
+        ])->shouldReturn('2001-10-10');
     }
 
     function it_returns_null_if_property_accessor_returns_null(DataExtractorInterface $dataExtractor, Field $field)
     {
         $dataExtractor->get($field, ['foo' => 'bar'])->willReturn(null);
-        $field->getOptions()->willReturn(['format' => '']);
 
-        $this->render($field, ['foo' => 'bar'])->shouldReturn(null);
+        $this->render($field, ['foo' => 'bar'], [
+            'format' => ''
+        ])->shouldReturn(null);
+    }
+
+    function is_configures_options(
+        OptionsResolver $resolver
+    )
+    {
+        $resolver->setDefaults([
+            'format' => 'Y:m:d H:i:s'
+        ])->shouldBeCalled();
+        $resolver->setAllowedTypes([
+            'format' => ['string']
+        ])->shouldBeCalled();
+        $this->configureOptions($resolver);
     }
 
     function it_throws_exception_if_returned_value_is_not_datetime(DataExtractorInterface $dataExtractor, Field $field)
     {
         $dataExtractor->get($field, ['foo' => 'bar'])->willReturn('badObject');
-        $field->getOptions()->willReturn(['format' => '']);
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('render', [$field, ['foo' => 'bar']])
-        ;
-    }
-
-    function it_throws_exception_if_format_option_is_not_set(Field $field)
-    {
-        $field->getOptions()->willReturn([]);
-
-        $this
-            ->shouldThrow(\InvalidArgumentException::class)
-            ->during('render', [$field, ['foo' => 'bar']])
+            ->during('render', [$field, ['foo' => 'bar'], [
+                'format' => '',
+            ]])
         ;
     }
 

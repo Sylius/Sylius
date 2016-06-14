@@ -43,13 +43,13 @@ class StringFieldTypeSpec extends ObjectBehavior
     function it_uses_data_extractor_to_obtain_data_and_renders_it(DataExtractorInterface $dataExtractor, Field $field)
     {
         $dataExtractor->get($field, ['foo' => 'bar'])->willReturn('Value');
-        $this->render($field, ['foo' => 'bar'])->shouldReturn('Value');
+        $this->render($field, ['foo' => 'bar'], [])->shouldReturn('Value');
     }
 
     function it_escapes_string_values(DataExtractorInterface $dataExtractor, Field $field)
     {
         $dataExtractor->get($field, ['foo' => 'bar'])->willReturn('<i class="book icon"></i>');
-        $this->render($field, ['foo' => 'bar'])->shouldReturn('&lt;i class=&quot;book icon&quot;&gt;&lt;/i&gt;');
+        $this->render($field, ['foo' => 'bar'], [])->shouldReturn('&lt;i class=&quot;book icon&quot;&gt;&lt;/i&gt;');
     }
 
     function it_does_not_escape_non_string_values(DataExtractorInterface $dataExtractor, Field $field)
@@ -57,7 +57,7 @@ class StringFieldTypeSpec extends ObjectBehavior
         $data = new \stdClass();
 
         $dataExtractor->get($field, ['foo' => 'bar'])->willReturn($data);
-        $this->render($field, ['foo' => 'bar'])->shouldReturn($data);
+        $this->render($field, ['foo' => 'bar'], [])->shouldReturn($data);
     }
 
     function it_has_name()
