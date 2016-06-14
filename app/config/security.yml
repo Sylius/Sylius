@@ -53,6 +53,8 @@ security:
             context: user
             pattern: /shop/.*
             form_login:
+                success_handler: sylius.authenticaiton.success_handler
+                failure_handler: sylius.authentication.failure_handler
                 provider: sylius_user_provider
                 login_path: sylius_shop_login
                 check_path: sylius_shop_login_check
