@@ -20,4 +20,9 @@ interface PromotionCouponAwareSubjectInterface extends PromotionSubjectInterface
      * @return null|CouponInterface
      */
     public function getPromotionCoupon();
+    
+    /**
+     * @param CouponInterface $coupon
+     */
+    public function setPromotionCoupon(CouponInterface $coupon);
 }
