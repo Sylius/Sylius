@@ -38,3 +38,17 @@ sylius_shop_request_password_reset_token:
         _sylius:
             template: SyliusShopBundle:Account:requestPasswordReset.html.twig
             redirect: sylius_shop_login
+
+sylius_shop_user_check_action:
+    path: /check-user
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.user:showAction
+        _format: json
+        _sylius:
+            repository:
+                method: findOneByEmail
+                arguments:
+                    email: $email
+            permission: false
+            serialization_groups: [Secured]
