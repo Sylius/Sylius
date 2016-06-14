@@ -47,6 +47,18 @@ class AddressingPage extends SymfonyPage implements AddressingPageInterface
 
     /**
      * {@inheritdoc}
+     */
+    public function checkInvalidCredentialsValidation()
+    {
+        $this->getElement('login_password')->waitFor(5, function () {
+            return $this->getElement('login_password')->getParent()->find('css', '.red')->isVisible();
+        });
+
+        return $this->checkValidationMessageFor('login_password', 'Invalid credentials.');
+    }
+
+    /**
+     * {@inheritdoc}
      *
      * @throws ElementNotFoundException
      */
@@ -99,6 +111,42 @@ class AddressingPage extends SymfonyPage implements AddressingPageInterface
         $this->getElement('customer_email')->setValue($email);
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function canSignIn()
+    {
+        return $this->isSignInActionAvailable() && $this->hasElement('login_password');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function specifyPassword($password)
+    {
+        $this->getDocument()->waitFor(5, function () {
+            return $this->getElement('login_password')->isVisible();
+        });
+
+        $this->getElement('login_password')->setValue($password);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function signIn()
+    {
+        $this->isSignInActionAvailable();
+
+        try {
+            $this->getDocument()->pressButton('Sign in');
+        } catch (ElementNotFoundException $elementNotFoundException) {
+            $this->getDocument()->clickLink('Sign in');
+        }
+
+        $this->waitForLoginAction();
+    }
+
     public function nextStep()
     {
         $this->getDocument()->pressButton('Next');
@@ -124,6 +172,7 @@ class AddressingPage extends SymfonyPage implements AddressingPageInterface
             'shipping_country' => '#sylius_shop_checkout_addressing_shippingAddress_countryCode',
             'shipping_city' => '#sylius_shop_checkout_addressing_shippingAddress_city',
             'shipping_postcode' => '#sylius_shop_checkout_addressing_shippingAddress_postcode',
+            'login_password' => 'input[type=\'password\']',
         ]);
     }
 
@@ -154,5 +203,22 @@ class AddressingPage extends SymfonyPage implements AddressingPageInterface
         }
 
         return $element;
+    }
+
+    /**
+     * @return bool
+     */
+    private function isSignInActionAvailable()
+    {
+        return $this->getDocument()->waitFor(5, function () {
+            return $this->getDocument()->hasButton('Sign in') || $this->getDocument()->hasLink('Sign in');
+        });
+    }
+
+    private function waitForLoginAction()
+    {
+        $this->getDocument()->waitFor(5, function () {
+            return !$this->hasElement('login_password');
+        });
     }
 }

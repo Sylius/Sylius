@@ -333,6 +333,22 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @When I specify the password as :password
+     */
+    public function iSpecifyThePasswordAs($password)
+    {
+        $this->addressingPage->specifyPassword($password);
+    }
+
+    /**
+     * @When I sign in
+     */
+    public function iSignIn()
+    {
+        $this->addressingPage->signIn();
+    }
+
+    /**
      * @Then I should see the thank you page
      */
     public function iShouldSeeTheThankYouPage()
@@ -401,6 +417,39 @@ final class CheckoutContext implements Context
         Assert::true(
             $this->shippingPage->hasNoShippingMethodsMessage(),
             'Shipping page should have no shipping methods message but it does not.'
+        );
+    }
+
+    /**
+     * @Then I should be able to log in
+     */
+    public function iShouldBeAbleToLogIn()
+    {
+        Assert::true(
+            $this->addressingPage->canSignIn(),
+            'I should be able to login'
+        );
+    }
+
+    /**
+     * @Then the login form should no longer be accessible
+     */
+    public function theLoginFormShouldNoLongerBeAccessible()
+    {
+        Assert::false(
+            $this->addressingPage->canSignIn(),
+            'I should not be able to login'
+        );
+    }
+
+    /**
+     * @Then I should be notified about bad credentials
+     */
+    public function iShouldBeNotifiedAboutBadCredentials()
+    {
+        Assert::true(
+            $this->addressingPage->checkInvalidCredentialsValidation(),
+            'I should see validation error.'
         );
     }
 
