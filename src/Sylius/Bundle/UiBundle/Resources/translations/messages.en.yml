@@ -18,6 +18,8 @@ sylius:
         an_error_occurred: An error occurred
         are_your_sure_you_want_to_perform_this_action: Are you sure you want to perform this action?
         available_for_channels: Available for channels
+        available_on_hand: Available on hand
+        reserved: Reserved
         average_order_value: Average order value
         backordered: Backordered
         back_to_store: Back to store
@@ -38,6 +40,8 @@ sylius:
         your_cart_is_empty: Your cart is empty
         clear_filters: Clear filters
         enter_your_code: Enter your code
+        filters: Filters
+        image: Image
         qty: Qty
         clear_cart: Clear cart
         update_cart: Update cart
@@ -112,6 +116,7 @@ sylius:
         in: In
         info: Info
         item: Item
+        inventory: Inventory
         jump_to_page: Jump to page
         last_updated: Last updated
         list_coupons: List coupons

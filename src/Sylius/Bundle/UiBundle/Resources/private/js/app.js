@@ -69,6 +69,9 @@
     $('form.loadable button').on('click', function() {
       return $(this).closest('form').addClass('loading');
     });
+    $('.loadable.button').on('click', function() {
+      return $(this).addClass('loading');
+    });
     $('.message .close').on('click', function() {
       return $(this).closest('.message').transition('fade');
     });

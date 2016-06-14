@@ -32,6 +32,14 @@ class ProductType extends AbstractResourceType
             ->addEventSubscriber(new AddCodeFormSubscriber())
             ->addEventSubscriber(new ProductOptionFieldSubscriber())
             ->addEventSubscriber(new SimpleProductSubscriber())
+            ->add('enabled', 'checkbox', [
+                'required' => false,
+                'label' => 'sylius.form.product.enabled',
+            ])
+            ->add('translations', 'sylius_translations', [
+                'type' => 'sylius_product_translation',
+                'label' => 'sylius.form.product.translations',
+            ])
             ->add('attributes', 'collection', [
                 'required' => false,
                 'type' => 'sylius_product_attribute_value',
@@ -41,7 +49,6 @@ class ProductType extends AbstractResourceType
                 'by_reference' => false,
                 'label' => false,
             ])
-            ->add('mainTaxon', 'sylius_taxon_to_hidden_identifier')
         ;
     }
 
