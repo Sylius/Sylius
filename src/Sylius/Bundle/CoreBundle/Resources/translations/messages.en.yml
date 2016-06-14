@@ -147,16 +147,14 @@ sylius:
             name: Order comment
         shipment_confirmation:
             name: Shipment confirmation
-            content: Your order has been sent. Thank you for a successful transaction.
+            content: Your order has been sent.<br/>Thank you for a successful transaction.
         user_confirmation:
             name: User confirmation
-            registered: You have just been registered.
-            thank_you: Thank you
+            subject: Welcome to our store
+            content: Welcome to our store<br/><br/>You have just been registered.<br/>Thank you {{ user.username }}.
         password_reset:
-            content: To reset your password - please visit
-            hello: Hello
             name: Password reset
-            regards: Regards, the Team.
+            content: <h3>Hello {{ user.username }}</h3>To reset your password - please visit {{ url }} <br/><br/>Regards, the Team.
 
     shipping_method_resolver:
         by_zones_and_channel: By zones and channel

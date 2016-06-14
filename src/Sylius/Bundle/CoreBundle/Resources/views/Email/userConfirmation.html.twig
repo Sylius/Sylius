@@ -1,10 +1,7 @@
 {% block subject %}
-    {{ 'sylius.ui.welcome_to_our_store'|trans }}
+    {{ 'sylius.email.user_confirmation.subject'|trans }}
 {% endblock %}
 
 {% block body %}
-    {{ 'sylius.ui.welcome_to_our_store'|trans }}
-    <br/><br/>
-    {{ 'sylius.email.user_confirmation.registered'|trans }}<br/>
-    {{ 'sylius.email.user_confirmation.thank_you'|trans }} {{ user.username }}.
+    {{ 'sylius.email.user_confirmation.content'|trans }}
 {% endblock %}
