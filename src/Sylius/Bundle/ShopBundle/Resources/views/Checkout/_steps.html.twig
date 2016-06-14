@@ -1,23 +1,33 @@
+{% if active is not defined or active == 'addressing' %}
+    {% set steps = { 'addressing': 'active', 'shipping': 'disabled', 'payment': 'disabled', 'summary': 'disabled' } %}
+{% elseif active == 'shipping' %}
+    {% set steps = { 'addressing': 'completed', 'shipping': 'active', 'payment': 'disabled', 'summary': 'disabled' } %}
+{% elseif active == 'payment' %}
+    {% set steps = { 'addressing': 'completed', 'shipping': 'completed', 'payment': 'active', 'summary': 'disabled' } %}
+{% else %}
+    {% set steps = { 'addressing': 'completed', 'shipping': 'completed', 'payment': 'completed', 'summary': 'active' } %}
+{% endif %}
+
 <div class="ui four steps">
-    <a class="active step" href="#">
+    <a class="{{ steps['addressing'] }} step" href="#">
         <i class="map icon"></i>
         <div class="content">
             <div class="title">{{ 'sylius.ui.addressing'|trans }}</div>
         </div>
     </a>
-    <div class="disabled step">
+    <div class="{{ steps['shipping'] }} step">
         <i class="truck icon"></i>
         <div class="content">
             <div class="title">{{ 'sylius.ui.shipping'|trans }}</div>
         </div>
     </div>
-    <div class="disabled step">
+    <div class="{{ steps['payment'] }} step">
         <i class="payment icon"></i>
         <div class="content">
             <div class="title">{{ 'sylius.ui.payment'|trans }}</div>
         </div>
     </div>
-    <div class="disabled step">
+    <div class="{{ steps['summary'] }} step">
         <i class="checkered flag icon"></i>
         <div class="content">
             <div class="title">{{ 'sylius.ui.summary'|trans }}</div>

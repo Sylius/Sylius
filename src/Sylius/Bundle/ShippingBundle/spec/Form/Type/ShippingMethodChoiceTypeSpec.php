@@ -54,19 +54,6 @@ class ShippingMethodChoiceTypeSpec extends ObjectBehavior
         $this->buildForm($builder, ['multiple' => true]);
     }
 
-    function it_has_options(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults(Argument::withKey('choice_list'))->shouldBeCalled()->willReturn($resolver);
-        $resolver->setDefined([
-            'subject',
-        ])->shouldBeCalled()->willReturn($resolver);
-
-        $resolver->setAllowedTypes('subject', ShippingSubjectInterface::class)->shouldBeCalled()->willReturn($resolver);
-        $resolver->setAllowedTypes('criteria', 'array')->shouldBeCalled()->willReturn($resolver);
-
-        $this->configureOptions($resolver);
-    }
-
     function it_has_a_parent()
     {
         $this->getParent()->shouldReturn('choice');

@@ -23,6 +23,9 @@
         <property name="billingAddress">
             <constraint name="Valid" />
         </property>
+        <property name="shipments">
+            <constraint name="Valid" />
+        </property>
     </class>
 
     <class name="Sylius\Component\Core\Model\ProductVariant">

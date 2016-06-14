@@ -14,6 +14,7 @@ namespace Sylius\Component\Core\OrderProcessing;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -21,15 +22,24 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 class OrderShipmentProcessor implements OrderShipmentProcessorInterface
 {
     /**
+     * @var DefaultShippingMethodResolverInterface
+     */
+    protected $defaultShippingMethodResolver;
+
+    /**
      * @var FactoryInterface
      */
     protected $shipmentFactory;
 
     /**
+     * @param DefaultShippingMethodResolverInterface $defaultShippingMethodResolver
      * @param FactoryInterface $shipmentFactory
      */
-    public function __construct(FactoryInterface $shipmentFactory)
-    {
+    public function __construct(
+        DefaultShippingMethodResolverInterface $defaultShippingMethodResolver,
+        FactoryInterface $shipmentFactory
+    ) {
+        $this->defaultShippingMethodResolver = $defaultShippingMethodResolver;
         $this->shipmentFactory = $shipmentFactory;
     }
 
@@ -58,8 +68,10 @@ class OrderShipmentProcessor implements OrderShipmentProcessorInterface
             return $order->getShipments()->first();
         }
 
+        /** @var ShipmentInterface $shipment */
         $shipment = $this->shipmentFactory->createNew();
         $order->addShipment($shipment);
+        $shipment->setMethod($this->defaultShippingMethodResolver->getDefaultShippingMethod($shipment));
 
         return $shipment;
     }

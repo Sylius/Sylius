@@ -18,10 +18,11 @@
 
     <parameters>
         <parameter key="sylius.checkout_form.addressing.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\AddressingStepType</parameter>
-        <parameter key="sylius.checkout_form.shop_addressing.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\AddressingType</parameter>
-        <parameter key="sylius.checkout_form.shipping.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\ShippingStepType</parameter>
-        <parameter key="sylius.checkout_form.shipment.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\ShipmentType</parameter>
         <parameter key="sylius.checkout_form.payment.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\PaymentStepType</parameter>
+        <parameter key="sylius.checkout_form.shipment.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\ShipmentType</parameter>
+        <parameter key="sylius.checkout_form.shipping.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\ShippingStepType</parameter>
+        <parameter key="sylius.checkout_form.shop_addressing.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\AddressingType</parameter>
+        <parameter key="sylius.checkout_form.shop_shipping.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\ShippingType</parameter>
 
         <parameter key="sylius.form.type.image.class">Sylius\Bundle\CoreBundle\Form\Type\ImageType</parameter>
         <parameter key="sylius.form.type.list.class">Sylius\Bundle\CoreBundle\Form\Type\ListType</parameter>
@@ -68,8 +69,13 @@
         <service id="sylius.checkout_form.shipping" class="%sylius.checkout_form.shipping.class%">
             <argument>%sylius.model.order.class%</argument>
             <argument>%sylius.validation_groups.order%</argument>
-            <argument type="service" id="sylius.context.channel"/>
             <tag name="form.type" alias="sylius_checkout_shipping" />
+        </service>
+        <service id="sylius.checkout_form.shop_shipping" class="%sylius.checkout_form.shop_shipping.class%">
+            <argument type="collection">
+                <argument>sylius</argument>
+            </argument>
+            <tag name="form.type" alias="sylius_shop_checkout_shipping" />
         </service>
         <service id="sylius.checkout_form.shipment" class="%sylius.checkout_form.shipment.class%">
             <argument>%sylius.model.shipment.class%</argument>

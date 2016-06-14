@@ -108,13 +108,6 @@ class ShippingStep extends CheckoutStep
             $this->get('session')->getFlashBag()->add('error', 'sylius.checkout.shipping.error');
         }
 
-        return $this->createForm('sylius_checkout_shipping', $order, [
-            'criteria' => [
-                'zone' => !empty($this->zones) ? array_map(function ($zone) {
-                    return $zone->getId();
-                }, $this->zones) : null,
-                'enabled' => true,
-            ],
-        ]);
+        return $this->createForm('sylius_checkout_shipping', $order);
     }
 }

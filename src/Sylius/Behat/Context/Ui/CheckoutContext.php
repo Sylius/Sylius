@@ -13,6 +13,7 @@ namespace Sylius\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Shop\Checkout\AddressingPageInterface;
+use Sylius\Behat\Page\Shop\Checkout\ShippingPageInterface;
 use Sylius\Behat\Page\Shop\Order\OrderPaymentsPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\AddressingStepInterface;
 use Sylius\Behat\Page\Shop\Checkout\FinalizeStepInterface;
@@ -80,6 +81,11 @@ final class CheckoutContext implements Context
     private $orderPaymentsPage;
 
     /**
+     * @var ShippingPageInterface
+     */
+    private $shippingPage;
+
+    /**
      * @var OrderRepositoryInterface
      */
     private $orderRepository;
@@ -90,6 +96,7 @@ final class CheckoutContext implements Context
      * @param AddressingStepInterface $checkoutAddressingStep
      * @param AddressingPageInterface $addressingPage
      * @param ShippingStepInterface $checkoutShippingStep
+     * @param ShippingPageInterface $shippingPage
      * @param PaymentStepInterface $checkoutPaymentStep
      * @param FinalizeStepInterface $checkoutFinalizeStep
      * @param ThankYouPageInterface $checkoutThankYouPage
@@ -102,6 +109,7 @@ final class CheckoutContext implements Context
         AddressingStepInterface $checkoutAddressingStep,
         AddressingPageInterface $addressingPage,
         ShippingStepInterface $checkoutShippingStep,
+        ShippingPageInterface $shippingPage,
         PaymentStepInterface $checkoutPaymentStep,
         FinalizeStepInterface $checkoutFinalizeStep,
         ThankYouPageInterface $checkoutThankYouPage,
@@ -113,6 +121,7 @@ final class CheckoutContext implements Context
         $this->checkoutAddressingStep = $checkoutAddressingStep;
         $this->addressingPage = $addressingPage;
         $this->checkoutShippingStep = $checkoutShippingStep;
+        $this->shippingPage = $shippingPage;
         $this->checkoutPaymentStep = $checkoutPaymentStep;
         $this->checkoutFinalizeStep = $checkoutFinalizeStep;
         $this->checkoutThankYouPage = $checkoutThankYouPage;
@@ -156,6 +165,16 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @When /^I specified the shipping (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
+     */
+    public function iSpecifiedTheShippingAddress(AddressInterface $address)
+    {
+        $this->addressingPage->open();
+        $this->addressingPage->specifyShippingAddress($address);
+        $this->iCompleteTheAddressingStep();
+    }
+
+    /**
      * @When I choose the different billing address
      */
     public function iChooseTheDifferentBillingAddress()
@@ -164,12 +183,39 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @When I proceed to the next step
-     * @When I try to proceed to the next step
+     * @When I select :shippingMethod shipping method
      */
-    public function iProceedToTheNextStep()
+    public function iSelectShippingMethod($shippingMethod)
+    {
+        $this->shippingPage->selectShippingMethod($shippingMethod);
+    }
+
+    /**
+     * @Then I should not be able to select :shippingMethod shipping method
+     */
+    public function iShouldNotBeAbleToSelectShippingMethod($shippingMethod)
+    {
+        Assert::false(
+            $this->shippingPage->hasShippingMethod($shippingMethod),
+            sprintf('Shipping method "%s" should not be available but it does.', $shippingMethod)
+        );
+    }
+
+    /**
+     * @When I complete the addressing step
+     * @When I try to complete the addressing step
+     */
+    public function iCompleteTheAddressingStep()
     {
         $this->addressingPage->nextStep();
+    }
+
+    /**
+     * @When I complete the shipping step
+     */
+    public function iCompleteTheShippingStep()
+    {
+        $this->shippingPage->nextStep();
     }
 
     /**
@@ -311,6 +357,17 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Then I should be on the checkout shipping step
+     */
+    public function iShouldBeOnTheCheckoutShippingStep()
+    {
+        Assert::true(
+            $this->shippingPage->isOpen(),
+            'Checkout shipping page should be opened, but it is not.'
+        );
+    }
+
+    /**
      * @Then I should see two cancelled payments and new one ready to be paid
      */
     public function iShouldSeeTwoCancelledPaymentsAndNewOneReadyToBePaid()
@@ -326,6 +383,17 @@ final class CheckoutContext implements Context
     {
         $this->assertElementValidationMessage($type, $firstElement, sprintf('Please enter %s.', $firstElement));
         $this->assertElementValidationMessage($type, $secondElement, sprintf('Please enter %s.', $secondElement));
+    }
+
+    /**
+     * @Then I should be informed that my order cannot be shipped to this address
+     */
+    public function iShouldBeInformedThatMyOrderCannotBeShippedToThisAddress()
+    {
+        Assert::true(
+            $this->shippingPage->hasNoShippingMethodsMessage(),
+            'Shipping page should have no shipping methods message but it does not.'
+        );
     }
 
     /**

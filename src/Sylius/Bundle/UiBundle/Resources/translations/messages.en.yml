@@ -150,6 +150,7 @@ sylius:
         no_requirement: No requirement
         no_results_to_display: There are no results to display
         no_shipping_charges: No shipping charges applied
+        no_shipping_methods_available: There are currently no shipping methods available for your shipping address.
         no_taxes: No taxes applied
         no_theme: No theme
         not_contains: Not contains
