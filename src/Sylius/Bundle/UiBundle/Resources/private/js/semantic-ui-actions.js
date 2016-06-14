@@ -9,8 +9,10 @@
 
 (function ($) {
     'use strict';
-    
+
     $.fn.api.settings.api = {
         'get taxons' : '/admin/api/taxons',
+        'check user': '/shop/check-user',
+        'login check': '/shop/login-check'
     };
 })(jQuery);
