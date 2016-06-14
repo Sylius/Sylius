@@ -1,0 +1,10 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    channel:
+        code:
+            not_blank: Kérjük, írja be a csatorna kódját.
+            unique: Csatorna kódjának egyedinek kell lennie.
+        name:
+            not_blank: Kérjük, adja meg a csatorna nevét.

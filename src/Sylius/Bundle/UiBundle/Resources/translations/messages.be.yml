@@ -11,6 +11,7 @@ sylius:
     ui:
         actions: Дзеянні
         add_coupon: Дадаць купон
+        add_to_cart: Дадаць у кошык
         cancel: Адмяніць
         cancelled: Адменена
         change_your_password: Змяніць пароль

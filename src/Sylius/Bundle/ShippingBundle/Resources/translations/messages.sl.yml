@@ -42,6 +42,7 @@ sylius:
             category: Kategorija
             category_requirement: Zahteva kategorije
             configuration: Konfiguracija
+            description: Opis
             enabled: Omogočeno
             name: Ime
             tax_category: Kategorija davka

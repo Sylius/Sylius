@@ -28,6 +28,7 @@ sylius:
         shipping_method:
             category: Κατηγορία
             configuration: Παραμετροποίηση
+            description: Περιγραφή
             enabled: Ενεργοποιημένο
             name: Ονομασία
             tax_category: Φορολογική κατηγορία

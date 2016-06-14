@@ -13,6 +13,7 @@ sylius:
         account_credentials: Prihlasovacie údaje
         actions: Akcie
         add_coupon: Pridať kupón
+        add_to_cart: Pridať do košíka
         administration_panel_login: Prihásenie do administračného rozhrania
         all: Všetky
         an_error_occurred: Vyskytla sa chyba

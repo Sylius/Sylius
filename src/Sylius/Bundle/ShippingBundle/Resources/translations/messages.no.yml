@@ -34,6 +34,7 @@ sylius:
             category: Kategori
             category_requirement: Kategorikrav
             configuration: Konfigurasjon
+            description: Beskrivelse
             enabled: Aktivert
             name: Navn
             tax_category: Skattekategori

@@ -12,6 +12,7 @@ sylius:
     ui:
         actions: Akce
         add_coupon: Přidat kupón
+        add_to_cart: Přidat do košíku
         cancel: Zrušit
         cancelled: Zrušeno
         change_your_password: Změnit heslo

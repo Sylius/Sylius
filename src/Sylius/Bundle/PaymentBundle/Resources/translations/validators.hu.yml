@@ -16,6 +16,7 @@ sylius:
         security_code:
             not_blank: Kérjük, írja be a biztonsági kódot.
             max_length: 'A hitelkártya CVV kódja legalább {{ limit }} számjegyből kell állnia.'
+            min_length: 'A bankkártya CVV kódjának több mint {{ limit }} számjegyből kell állnia.'
         expiry_year:
             not_blank: Kérjük, válassza ki a lejárati évet.
     payment_method:
@@ -25,3 +26,14 @@ sylius:
             max_length: 'A fizetési mód neve nem lehet {{ limit }} karakter hosszú.'
             min_length: 'A fizetési mód neve legalább {{ limit }} karakter hosszú kell legyen.'
             not_blank: Kérjük, írja be a fizetési mód nevét.
+        fee_calculator_configuration:
+            amount:
+                greater_than_or_equal: 'A díj nem lehet alacsonyabb, mint {{ compared_value }}.'
+                not_blank: Kérjük, írja be a díj összegét.
+            percent:
+                max_range: 'Százalékos díj nem lehet nagyobb, mint {{ limit }}.'
+                min_range: 'Százalékos díj nem lehet alacsonyabb, mint {{ limit }}.'
+                not_blank: Kérjük, írja be a százalék díjat.
+        code:
+            not_blank: Kérjük, írja be a fizetési mód kódját.
+            unique: A fizetési mód a megadott kóddal már létezik.

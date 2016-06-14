@@ -42,6 +42,7 @@ sylius:
             category: Категория
             category_requirement: Условия категории
             configuration: Конфигурация
+            description: Описание
             enabled: Активен
             name: Название
             tax_category: Категория налогов

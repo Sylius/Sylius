@@ -47,6 +47,7 @@ sylius:
             category: Categoría
             category_requirement: Requisito de la categoría
             configuration: Configuración
+            description: Descripción
             enabled: Activado
             name: Nombre
             tax_category: Categoría de impuestos

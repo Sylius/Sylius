@@ -11,6 +11,7 @@ sylius:
     ui:
         actions: Handlinger
         add_coupon: Tilføj kupon
+        add_to_cart: Tilføj til kurv
         cancel: Anuller
         change_your_password: Ændre din adgangskode
         checkout: Til kassen

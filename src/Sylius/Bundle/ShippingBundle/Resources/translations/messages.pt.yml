@@ -11,4 +11,5 @@ sylius:
         shipping_category:
             description: Descrição
         shipping_method:
+            description: Descrição
             tax_category: Categoria de imposto

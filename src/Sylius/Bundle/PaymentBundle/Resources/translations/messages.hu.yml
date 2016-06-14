@@ -17,12 +17,15 @@ sylius:
                 header: Fizetés állapota
                 checkout: Fizetés
                 completed: Befejezve
+                authorized: Engedélyezve 
                 failed: Sikertelen
                 new: Új
                 pending: Függőben
                 processing: Feldolgozás alatt
                 unknown: Ismeretlen
                 void: Hiányos
+                cancelled: Megszakítva
+                refunded: Visszatérítve
         payment_method:
             description: Leírás
             enabled: Engedélyezve?

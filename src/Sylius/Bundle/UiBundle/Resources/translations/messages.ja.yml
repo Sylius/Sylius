@@ -8,6 +8,7 @@ sylius:
             password: パスワード
     ui:
         add_coupon: クーポンを追加
+        add_to_cart: カートに入れる
         cancel: キャンセル
         change_your_password: パスワードの変更
         countries: 国の設定

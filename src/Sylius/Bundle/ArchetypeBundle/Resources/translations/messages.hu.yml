@@ -7,4 +7,5 @@ sylius:
             code: Kód
             name: Név
             parent: Szülő
+            attributes: Tulajdonságok
             options: Beállítások

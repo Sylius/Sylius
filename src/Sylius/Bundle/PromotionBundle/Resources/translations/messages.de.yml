@@ -20,6 +20,7 @@ sylius:
                 exclude: Ausschließen
             cart_quantity_configuration:
                 count: Anzahl
+                equal: Gleich
             item_total_configuration:
                 amount: Anzahl
             nth_order_configuration:

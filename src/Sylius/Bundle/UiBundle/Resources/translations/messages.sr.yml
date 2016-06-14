@@ -9,6 +9,7 @@ sylius:
             presentation: Приказ
     ui:
         add_coupon: Додај купон
+        add_to_cart: Додај у корпу
         cancel: Откажи
         countries: Земље
         create: Креирај

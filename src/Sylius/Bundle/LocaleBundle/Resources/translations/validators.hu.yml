@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    locale:
+        code:
+            not_blank: Kérjük, válassza ki a nyelvi kódot.
+            unique: A nyelvi kódnak egyedinek kell lennie.

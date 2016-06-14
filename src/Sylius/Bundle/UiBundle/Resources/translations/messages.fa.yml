@@ -12,6 +12,7 @@ sylius:
     ui:
         actions: طریقه اعمال
         add_coupon: ایجاد کد تخفیف
+        add_to_cart: افزودن به سبد خرید
         administration_panel_login: صفحه ورود به سيستم مديريت
         an_error_occurred: یک خطا روی داده است
         are_your_sure_you_want_to_perform_this_action: آیا از اعمال این کار اطمینان دارید؟

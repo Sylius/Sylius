@@ -34,6 +34,7 @@ sylius:
             category: Kategorija
             category_requirement: Zahtjevi kategorije
             configuration: Postavke
+            description: Opis
             enabled: Omogući
             name: Naziv
             tax_category: Kategorija artikla

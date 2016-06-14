@@ -34,6 +34,7 @@ sylius:
             category: Categorie
             category_requirement: Cerința categoriei
             configuration: Configurare
+            description: Descriere
             enabled: Activat
             name: Nume
             tax_category: Categoria de taxă

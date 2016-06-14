@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    parameter:
+        namespace:
+            max_length: A paraméter névtere nem lehet hosszabb, mint 255 karakter| A paraméter névtere nem lehet hosszabb 255 karakternél.
+            min_length: A paraméter névterének legalább 2 karakter hosszúnak kell lennie| A paraméter névterének legalább 2 karakter hosszúnak kell lennie.
+            not_blank: Kérjük válasszon egy névterületet ennek a paraméternek.
+        name:
+            max_length: A paraméter neve nem lehet hosszabb, mint 255 karakter| A paraméter neve nem lehet hosszabb 255 karakternél.
+            min_length: A paraméter névének legalább 2 karakter hosszúnak kell lennie| A paraméter névének legalább 2 karakter hosszúnak kell lennie.
+            not_blank: Kérjük, írja be a paraméter nevét.

@@ -9,4 +9,7 @@ sylius:
             configuration: Konfiguráció
         pricing:
             volume_based:
+                label: Ár beállítások
+                min: Min mennyiség
+                max: Max mennyiség
                 price: Ár

@@ -9,6 +9,7 @@ sylius:
             presentation: Apresentação
     ui:
         add_coupon: Adicionar cupom
+        add_to_cart: Adicionar ao carrinho
         cancel: Cancelar
         cancelled: Cancelado
         checkout: Finalizar compra

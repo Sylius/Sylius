@@ -14,6 +14,7 @@ sylius:
         account_credentials: 帐户凭据
         actions: 操作
         add_coupon: 添加优惠券
+        add_to_cart: 放进购物车
         administration_panel_login: 管理面板登录
         all: 全部
         an_error_occurred: 发生了一个错误。

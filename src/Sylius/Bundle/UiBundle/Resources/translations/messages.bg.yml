@@ -9,6 +9,7 @@ sylius:
             presentation: Презентация
     ui:
         add_coupon: Добавяне на купон
+        add_to_cart: Добави в количката
         cancel: Откажи
         change_your_password: Смяна на парола
         countries: Страни

@@ -42,6 +42,7 @@ sylius:
             category: Kategorie
             category_requirement: Požadavek kategorie
             configuration: Konfigurace
+            description: Popis
             enabled: Povoleno
             name: Jméno
             tax_category: Typ daně

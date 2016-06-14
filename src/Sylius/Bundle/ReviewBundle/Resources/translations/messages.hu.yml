@@ -4,7 +4,14 @@
 sylius:
     form:
         review:
+            header: Vélemény hozzáadása
+            rating: Értékelés
             title: Cím
+            comment: Hozzászólás
             author: Szerző
             status:
+                label: Állapot
                 new: Új
+                approved: Jóváhagyott
+                rejected: Elutasított
+            submit: Elküld

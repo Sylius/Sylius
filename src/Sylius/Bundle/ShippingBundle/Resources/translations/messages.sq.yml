@@ -47,6 +47,7 @@ sylius:
             category: Kategorija
             category_requirement: Kërkesa e kategorisë
             configuration: Konfigurimi
+            description: Përshkrimi
             enabled: E aktivizuar
             name: Emri
             tax_category: Kategoria e taksimit

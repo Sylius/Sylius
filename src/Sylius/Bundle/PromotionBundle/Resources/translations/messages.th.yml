@@ -20,6 +20,7 @@ sylius:
                 exclude: ไม่รวม
             cart_quantity_configuration:
                 count: จำนวน
+                equal: เท่ากับ
             item_total_configuration:
                 amount: ยอดรวม
             nth_order_configuration:

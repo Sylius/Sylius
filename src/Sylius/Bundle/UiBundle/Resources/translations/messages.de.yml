@@ -12,6 +12,7 @@ sylius:
     ui:
         actions: Aktionen
         add_coupon: Erstellt
+        add_to_cart: In den Warenkorb
         administration_panel_login: Administrations-Bereich Anmeldung
         all: Alle
         an_error_occurred: Es ist ein Fehler aufgetreten
