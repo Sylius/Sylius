@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Core\Test\Factory;
 
+use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
@@ -40,7 +41,7 @@ class TestPromotionFactory implements TestPromotionFactoryInterface
         $promotion = $this->promotionFactory->createNew();
 
         $promotion->setName($name);
-        $promotion->setCode($this->getCodeFromName($name));
+        $promotion->setCode(StringInflector::nameToLowercaseCode($name));
         $promotion->setDescription('Promotion '.$name);
         $promotion->setStartsAt(new \DateTime('-3 days'));
         $promotion->setEndsAt(new \DateTime('+3 days'));
@@ -57,15 +58,5 @@ class TestPromotionFactory implements TestPromotionFactoryInterface
         $promotion->addChannel($channel);
 
         return $promotion;
-    }
-
-    /**
-     * @param string $promotionName
-     *
-     * @return string
-     */
-    private function getCodeFromName($promotionName)
-    {
-        return str_replace(' ', '_', strtolower($promotionName));
     }
 }

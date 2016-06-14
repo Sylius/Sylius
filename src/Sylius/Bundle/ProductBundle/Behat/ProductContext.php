@@ -398,7 +398,7 @@ class ProductContext extends DefaultContext
     }
 
     /**
-     * @param string $translatedNames
+     * @param string $name
      *
      * @return string
      */

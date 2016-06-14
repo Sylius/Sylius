@@ -16,6 +16,7 @@ use Behat\Mink\Driver\Selenium2Driver;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Cart\SyliusCartEvents;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -425,7 +426,7 @@ class CoreContext extends DefaultContext
     public function thereAreShippingMethods(TableNode $table)
     {
         foreach ($table->getHash() as $data) {
-            $calculator = array_key_exists('calculator', $data) ? str_replace(' ', '_', strtolower($data['calculator'])) : DefaultCalculators::PER_UNIT_RATE;
+            $calculator = array_key_exists('calculator', $data) ? StringInflector::nameToLowercaseCode($data['calculator']) : DefaultCalculators::PER_UNIT_RATE;
             $configuration = array_key_exists('configuration', $data) ? $this->getConfiguration($data['configuration']) : null;
             $taxCategory = (isset($data['tax category'])) ? $this->findOneByName('tax_category', trim($data['tax category'])) : null;
 

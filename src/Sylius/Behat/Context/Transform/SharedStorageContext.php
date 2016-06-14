@@ -12,6 +12,7 @@
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 
 /**
@@ -45,6 +46,6 @@ final class SharedStorageContext implements Context
      */
     public function getResource($resource)
     {
-        return $this->sharedStorage->get(str_replace(' ', '_', $resource));
+        return $this->sharedStorage->get(StringInflector::nameToCode($resource));
     }
 }
