@@ -12,8 +12,8 @@
 namespace Sylius\Component\Shipping\Resolver;
 
 use Sylius\Component\Core\Model\ShippingMethodInterface;
+use Sylius\Component\Shipping\Exception\UnresolvedDefaultShippingMethodException;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
-use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -23,7 +23,9 @@ interface DefaultShippingMethodResolverInterface
     /**
      * @param ShipmentInterface $shipment
      *
-     * @return ShippingMethodInterface|null
+     * @return ShippingMethodInterface
+     *
+     * @throws UnresolvedDefaultShippingMethodException
      */
     public function getDefaultShippingMethod(ShipmentInterface $shipment);
 }

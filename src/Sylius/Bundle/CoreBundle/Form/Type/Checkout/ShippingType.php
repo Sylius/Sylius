@@ -21,6 +21,19 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class ShippingType extends AbstractType
 {
     /**
+     * @var string[]
+     */
+    private $validationGroups;
+
+    /**
+     * @param array $validationGroups
+     */
+    public function __construct(array $validationGroups = [])
+    {
+        $this->validationGroups = $validationGroups;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -37,7 +50,7 @@ class ShippingType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'validation_groups' => ['sylius'],
+            'validation_groups' => $this->validationGroups,
         ]);
     }
 

@@ -16,6 +16,7 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
+use Sylius\Component\Shipping\Exception\UnresolvedDefaultShippingMethodException;
 use Sylius\Component\Shipping\Repository\ShippingMethodRepositoryInterface;
 use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface;
 
@@ -63,16 +64,19 @@ class DefaultShippingMethodResolverSpec extends ObjectBehavior
         $this->getDefaultShippingMethod($shipment)->shouldReturn($secondShippingMethod);
     }
 
-    function it_returns_null_if_there_is_no_enabled_shipping_methods(
+    function it_throws_exception_if_there_is_no_enabled_shipping_methods(
         ShippingMethodRepositoryInterface $shippingMethodRepository,
         ShipmentInterface $shipment
     ) {
         $shippingMethodRepository->findBy(['enabled' => true])->willReturn([]);
 
-        $this->getDefaultShippingMethod($shipment)->shouldReturn(null);
+        $this
+            ->shouldThrow(UnresolvedDefaultShippingMethodException::class)
+            ->during('getDefaultShippingMethod', [$shipment])
+        ;
     }
 
-    function it_returns_null_if_there_is_no_enabled_shipping_methods_for_channel(
+    function it_throws_exception_if_there_is_no_enabled_shipping_methods_for_channel(
         ChannelInterface $channel,
         OrderInterface $order,
         ShipmentInterface $shipment,
@@ -93,6 +97,15 @@ class DefaultShippingMethodResolverSpec extends ObjectBehavior
         $channel->hasShippingMethod($secondShippingMethod)->willReturn(false);
         $channel->hasShippingMethod($thirdShippingMethod)->willReturn(false);
 
-        $this->getDefaultShippingMethod($shipment)->shouldReturn(null);
+        $this
+            ->shouldThrow(UnresolvedDefaultShippingMethodException::class)
+            ->during('getDefaultShippingMethod', [$shipment])
+        ;
+    }
+
+    function it_throws_exception_if_passed_shipment_is_not_core_shipment_object(
+        \Sylius\Component\Shipping\Model\ShipmentInterface $shipment
+    ) {
+        $this->shouldThrow(\InvalidArgumentException::class)->during('getDefaultShippingMethod', [$shipment]);
     }
 }

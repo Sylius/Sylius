@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Shipping\Resolver;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Shipping\Exception\UnresolvedDefaultShippingMethodException;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Repository\ShippingMethodRepositoryInterface;
@@ -48,12 +49,15 @@ class DefaultShippingMethodResolverSpec extends ObjectBehavior
         $this->getDefaultShippingMethod($shipment)->shouldReturn($firstShippingMethod);
     }
 
-    function it_returns_null_if_there_is_no_enabled_shipping_methods(
+    function it_throws_exception_if_there_is_no_enabled_shipping_methods(
         ShippingMethodRepositoryInterface $shippingMethodRepository,
         ShipmentInterface $shipment
     ) {
         $shippingMethodRepository->findBy(['enabled' => true])->willReturn([]);
 
-        $this->getDefaultShippingMethod($shipment)->shouldReturn(null);
+        $this
+            ->shouldThrow(UnresolvedDefaultShippingMethodException::class)
+            ->during('getDefaultShippingMethod', [$shipment])
+        ;
     }
 }

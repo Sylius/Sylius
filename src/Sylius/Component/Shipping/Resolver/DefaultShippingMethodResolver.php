@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Shipping\Resolver;
 
+use Sylius\Component\Shipping\Exception\UnresolvedDefaultShippingMethodException;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Repository\ShippingMethodRepositoryInterface;
 
@@ -39,7 +40,7 @@ class DefaultShippingMethodResolver implements DefaultShippingMethodResolverInte
     {
         $shippingMethods = $this->shippingMethodRepository->findBy(['enabled' => true]);
         if (empty($shippingMethods)) {
-            return null;
+            throw new UnresolvedDefaultShippingMethodException();
         }
         
         return $shippingMethods[0];

@@ -12,7 +12,9 @@
 namespace Sylius\Component\Core\Resolver;
 
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Shipping\Exception\UnresolvedDefaultShippingMethodException;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
+use Sylius\Component\Core\Model\ShipmentInterface as CoreShipmentInterface;
 use Sylius\Component\Shipping\Repository\ShippingMethodRepositoryInterface;
 use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface;
 use Webmozart\Assert\Assert;
@@ -38,28 +40,24 @@ class DefaultShippingMethodResolver implements DefaultShippingMethodResolverInte
     /**
      * {@inheritdoc}
      */
-    public function getDefaultShippingMethod(ShipmentInterface $shippingSubject)
+    public function getDefaultShippingMethod(ShipmentInterface $shipment)
     {
-        Assert::isInstanceOf($shippingSubject, \Sylius\Component\Core\Model\ShipmentInterface::class);
+        Assert::isInstanceOf($shipment, CoreShipmentInterface::class);
 
         $shippingMethods = $this->shippingMethodRepository->findBy(['enabled' => true]);
         if (empty($shippingMethods)) {
-            return null;
+            throw new UnresolvedDefaultShippingMethodException();
         }
 
         /** @var ChannelInterface $channel */
-        $channel = $shippingSubject->getOrder()->getChannel();
+        $channel = $shipment->getOrder()->getChannel();
 
-        foreach ($shippingMethods as $key => $shippingMethod) {
-            if (!$channel->hasShippingMethod($shippingMethod)) {
-                unset($shippingMethods[$key]);
+        foreach ($shippingMethods as $shippingMethod) {
+            if ($channel->hasShippingMethod($shippingMethod)) {
+                return $shippingMethod;
             }
         }
 
-        if (empty($shippingMethods)) {
-            return null;
-        }
-
-        return array_values($shippingMethods)[0];
+        throw new UnresolvedDefaultShippingMethodException();
     }
 }

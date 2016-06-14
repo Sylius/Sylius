@@ -17,6 +17,7 @@ use Sylius\Bundle\CoreBundle\Form\Type\Checkout\ShippingType;
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @mixin ShippingType
@@ -25,6 +26,11 @@ use Symfony\Component\Form\FormBuilderInterface;
  */
 class ShippingTypeSpec extends ObjectBehavior
 {
+    function let()
+    {
+        $this->beConstructedWith(['sylius']);
+    }
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\Form\Type\Checkout\ShippingType');
@@ -47,6 +53,18 @@ class ShippingTypeSpec extends ObjectBehavior
         ;
 
         $this->buildForm($builder, []);
+    }
+
+    function it_configures_options(OptionsResolver $resolver)
+    {
+        $resolver
+            ->setDefaults([
+                'validation_groups' => ['sylius'],
+            ])
+            ->shouldBeCalled()
+        ;
+
+        $this->configureOptions($resolver);
     }
 
     function it_has_name()

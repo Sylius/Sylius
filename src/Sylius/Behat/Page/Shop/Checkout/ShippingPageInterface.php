@@ -19,7 +19,7 @@ use Sylius\Behat\Page\SymfonyPageInterface;
 interface ShippingPageInterface extends SymfonyPageInterface
 {
     /**
-     * @param $shippingMethod
+     * @param string $shippingMethod
      */
     public function selectShippingMethod($shippingMethod);
 
