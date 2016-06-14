@@ -14,8 +14,7 @@ Feature: Adding a new product variant
     Scenario: Adding a new product variant
         Given I want to create a new variant of this product
         When I specify its code as "VODKA_WYBOROWA_PREMIUM"
-        And I name it "Wyborowa Vodka Exquisite"
         And I set its price to "$100.00"
         And I add it
         Then I should be notified that it has been successfully created
-        And the "Wyborowa Vodka Exquisite" variant of the "Wyborowa Vodka" product should appear in the shop
+        And the "VODKA_WYBOROWA_PREMIUM" variant of the "Wyborowa Vodka" product should appear in the shop

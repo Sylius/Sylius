@@ -208,4 +208,6 @@ interface ShowPageInterface extends SymfonyPageInterface
     public function getOrderState();
 
     public function cancelOrder();
+
+    public function deleteOrder();
 }

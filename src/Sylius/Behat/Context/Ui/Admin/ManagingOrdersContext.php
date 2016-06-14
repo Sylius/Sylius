@@ -413,8 +413,8 @@ final class ManagingOrdersContext implements Context
     {
         $this->sharedStorage->set('order', $order);
 
-        $this->indexPage->open();
-        $this->indexPage->deleteResourceOnPage(['number' => $order->getNumber()]);
+        $this->showPage->open(['id' => $order->getId()]);
+        $this->showPage->deleteOrder();
     }
 
     /**
