@@ -62,3 +62,7 @@ sylius_fixtures:
                 shipping_method:
                     options:
                         shipping_methods: 20
+
+                channel:
+                    options:
+                        channels: 3

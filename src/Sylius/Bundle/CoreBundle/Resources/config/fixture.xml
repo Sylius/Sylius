@@ -58,5 +58,15 @@
             <argument type="service" id="sylius.repository.locale" />
             <tag name="sylius_fixtures.fixture" />
         </service>
+
+        <service id="sylius.fixture.channel" class="Sylius\Bundle\CoreBundle\Fixture\ChannelFixture">
+            <argument type="service" id="sylius.factory.channel" />
+            <argument type="service" id="sylius.manager.channel" />
+            <argument type="service" id="sylius.repository.locale" />
+            <argument type="service" id="sylius.repository.currency" />
+            <argument type="service" id="sylius.repository.payment_method" />
+            <argument type="service" id="sylius.repository.shipping_method" />
+            <tag name="sylius_fixtures.fixture" />
+        </service>
     </services>
 </container>
