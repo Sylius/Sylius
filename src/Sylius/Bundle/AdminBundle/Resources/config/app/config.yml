@@ -40,3 +40,9 @@ sylius_grid:
         filter:
             string: "SyliusAdminBundle:Grid/Filter:string.html.twig"
             boolean: "SyliusAdminBundle:Grid/Filter:boolean.html.twig"
+
+liip_imagine:
+    filter_sets:
+        sylius_admin_product_thumbnail:
+            filters:
+                thumbnail: { size: [50, 50], mode: outbound }

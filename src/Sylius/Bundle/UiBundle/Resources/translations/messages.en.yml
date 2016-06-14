@@ -40,6 +40,8 @@ sylius:
         your_cart_is_empty: Your cart is empty
         clear_filters: Clear filters
         enter_your_code: Enter your code
+        filters: Filters
+        image: Image
         qty: Qty
         clear_cart: Clear cart
         update_cart: Update cart

@@ -58,6 +58,8 @@ sylius:
             short_description: Short description
             variant_selection_method: Variant selection method
             main_taxon: Main taxon
+            channels: Channels
+            enabled: Enabled
         product_filter:
             name: Name
             code: Code

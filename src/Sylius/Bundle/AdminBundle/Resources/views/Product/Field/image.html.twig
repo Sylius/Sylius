@@ -1,0 +1,7 @@
+{% set path = data is not null ? data.path : null %}
+
+{% if path is not null %}
+    <img class="ui bordered image" src="{{ path|imagine_filter('sylius_admin_product_thumbnail') }}" alt="" />
+{% else %}
+    <span class="ui large circular disabled icon button"><i class="file image outline icon"></i></span>
+{% endif %}
