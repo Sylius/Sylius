@@ -420,8 +420,10 @@
         </service>
         <service id="sylius.listener.image_upload" class="%sylius.listener.image_upload.class%">
             <argument type="service" id="sylius.image_uploader" />
-            <tag name="kernel.event_listener" event="sylius.product_variant.pre_create" method="uploadProductImage" />
-            <tag name="kernel.event_listener" event="sylius.product_variant.pre_update" method="uploadProductImage" />
+            <tag name="kernel.event_listener" event="sylius.product.pre_create" method="uploadProductImage" />
+            <tag name="kernel.event_listener" event="sylius.product.pre_update" method="uploadProductImage" />
+            <tag name="kernel.event_listener" event="sylius.product_variant.pre_create" method="uploadProductVariantImage" />
+            <tag name="kernel.event_listener" event="sylius.product_variant.pre_update" method="uploadProductVariantImage" />
             <tag name="kernel.event_listener" event="sylius.taxon.pre_create" method="uploadTaxonImage" />
             <tag name="kernel.event_listener" event="sylius.taxon.pre_update" method="uploadTaxonImage" />
         </service>
