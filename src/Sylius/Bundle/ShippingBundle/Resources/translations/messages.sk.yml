@@ -47,6 +47,7 @@ sylius:
             category: Kategória
             category_requirement: Podmienka pre kategóriu doručenia
             configuration: Konfigurácia
+            description: Popis
             enabled: Zapnuté
             name: Názov
             tax_category: Daňová kategória

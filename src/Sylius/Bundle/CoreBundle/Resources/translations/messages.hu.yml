@@ -8,6 +8,7 @@ sylius:
                 price: Egységár
                 quantity: Mennyiség
                 variant: Változat
+            customer_group: Felhasználói csoport
         block:
             body: Törzs
             id: Azonosító
@@ -21,25 +22,34 @@ sylius:
             shipping_method: Szállítási mód
         promotion:
             channels: Csatornák
+        coupon:
+            per_customer_usage_limit: Felhasználókénti felhasználási korlát
         group:
             name: Név
             roles: Szerepek
         channel:
             taxonomies: Taxonómiák
+            locale_default: Alapértelmezett nyelv
             locales: Területi beállítások
             currency_default: Alapértelmezett pénznem
+            currencies: Pénznemek
             shipping_methods: Szállítási módok
             payment_methods: Fizetési módok
+            theme: Téma
+            hostname: Hoszt neve
         image:
             file: Kép
         locale:
             code: Kód
             enabled: Engedélyezve
         order_filter:
+            created_at_from: Ez után készítve
+            created_at_to: Ez előtt készítve
             number: Szám
             total_from: -tól
             total_to: -ig
             payment_state: Fizetés állapota
+            channel: Minden csatorna
         page:
             body: Törzs
             id: Azonosító
@@ -49,6 +59,7 @@ sylius:
             shipping_category: Szállítási kategória
             short_description: Rövid leírás
             variant_selection_method: Változat kiválasztási módszer
+            main_taxon: Fő taxonómia
         product_filter:
             name: Név
             code: Kód
@@ -61,17 +72,25 @@ sylius:
                 meta_description: Meta leírás
                 meta_keywords: Meta kulcsszavak
                 title: Oldal címe
+                tracking_code:
+                    Tracking code (for example: A Google Analytics kód)
             taxation:
                 default_tax_zone: Alapértelmezett adósáv
+                default_tax_calculation_strategy: Alapértelmezett adó számítási stratégia
+            security:
+                enabled: Engedélyezve?
         shipment_filter:
             created_at_from: -tól
             created_at_to: -ig
             number: Rendelés azonosítója
             shipping_address: Szállítás erre a névre
+            channel: Minden csatorna
         payment_filter:
             created_at_from: -tól
             created_at_to: -ig
             number: Rendelés azonosítója
+            billing_address: Számlázási név
+            channel: Minden csatorna
         shipping_method:
             zone: Zóna
         taxon:
@@ -97,20 +116,40 @@ sylius:
             images: Képek
             on_hand: Aktuális készlet
             price: Ár
+            original_price: Eredeti ár
             sku: SKU
             weight: Súly
             width: Szélesség
         attribute:
             product_attribute_value:
+                attribute: Tulajdonság
                 value: Érték
         guest:
             email: E-mail
+        product_association:
+            product: Kapcsolódó termék
+            type: Kapcsolódó típus
         product_association_type:
             name: Név
         promotion_rule:
             contains_taxon:
+                taxon: Taxonómia
                 count: Mennyiség
             taxon:
                 taxons: Taxonok
             total_of_items_from_taxon:
+                taxon: Taxonómia
                 amount: Összeg
+    email:
+        order_confirmation:
+            name: Rendelés visszaigazolás
+        order_comment:
+            name: Rendelés megjegyzés
+        shipment_confirmation:
+            name: Szállítási mód megerősítése
+        user_confirmation:
+            name: Felhasználói megerősítés
+        password_reset:
+            name: Jelszó visszaállítás
+    shipping_method_resolver:
+        by_zones_and_channel: Zóna és csatorna szerint

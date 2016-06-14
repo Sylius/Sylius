@@ -12,6 +12,7 @@ sylius:
     ui:
         actions: Veiksmai
         add_coupon: Pridėti kuponą
+        add_to_cart: Įdėti į krepšelį
         cancel: Atšaukti
         cancelled: Atšaukta
         change_your_password: Pakeisti savo slaptažodį

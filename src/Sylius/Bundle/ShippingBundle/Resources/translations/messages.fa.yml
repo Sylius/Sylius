@@ -47,6 +47,7 @@ sylius:
             category: دسته
             category_requirement: نیازمندی های دسته
             configuration: تنظیمات
+            description: شرح
             enabled: فعال
             name: نام
             tax_category: نوع مالیات

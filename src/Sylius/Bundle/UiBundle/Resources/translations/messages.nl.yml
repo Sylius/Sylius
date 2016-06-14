@@ -13,6 +13,7 @@ sylius:
         account_credentials: Logingegevens
         actions: Acties
         add_coupon: Nieuwe coupon
+        add_to_cart: In winkelwagen
         administration_panel_login: Beheer
         all: Alles
         an_error_occurred: Er deed zich een fout voor

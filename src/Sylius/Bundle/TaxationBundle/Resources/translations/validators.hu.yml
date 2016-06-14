@@ -5,6 +5,9 @@ sylius:
     tax_category:
         name:
             not_blank: Kérjük, adja meg az adókategória nevét.
+        code:
+            not_blank: Kérjük, adja meg az adókategória kódját.
+            unique: Az adó kategória ezzel a kóddal már létezik.
     tax_rate:
         category:
             not_blank: Kérjük, válasszon adókategóriát.
@@ -14,3 +17,8 @@ sylius:
             not_blank: Kérjük, adja meg az adó mértékét.
         calculator:
             not_blank: Válasszon adó kalkulátort.
+        zone:
+            not_blank: Kérjük válasszon adózási területet.
+        code:
+            not_blank: Kérjük, írja be az adó mértékét.
+            unique: Ez az adóegység ezzel a kóddal már létezik.

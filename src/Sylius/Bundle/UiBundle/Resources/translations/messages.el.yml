@@ -10,6 +10,7 @@ sylius:
             presentation: Παρουσίαση
     ui:
         actions: Ενέργειες
+        add_to_cart: Προσθήκη στο καλάθι
         cancel: Άκυρο
         checkout: Ολοκλήρωση αγορών
         countries: Χώρες

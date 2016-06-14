@@ -20,6 +20,7 @@ sylius:
                 exclude: به جز اینها
             cart_quantity_configuration:
                 count: تعداد
+                equal: برابر با
             item_total_configuration:
                 amount: مبلغ
             nth_order_configuration:

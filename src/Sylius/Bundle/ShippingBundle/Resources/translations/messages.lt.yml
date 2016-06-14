@@ -35,6 +35,7 @@ sylius:
             category: Kategorija
             category_requirement: Kategorijos reikalavimas
             configuration: Konfigūracija
+            description: Aprašymas
             enabled: Įjungta
             name: Pavadinimas
             tax_category: Mokesčių kategorija

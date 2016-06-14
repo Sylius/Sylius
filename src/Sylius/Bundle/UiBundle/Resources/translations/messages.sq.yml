@@ -13,6 +13,7 @@ sylius:
         account_credentials: Te dhenat e llogarise
         actions: Veprimet
         add_coupon: Shto kupon
+        add_to_cart: Shto në kartë
         administration_panel_login: Login i panelit te administrimit
         all: Të gjitha
         an_error_occurred: Ndodhi një gabim

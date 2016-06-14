@@ -47,6 +47,7 @@ sylius:
             category: 分类
             category_requirement: 类别要求
             configuration: 配置：
+            description: 描述
             enabled: 已启用
             name: 名称
             tax_category: 税类别

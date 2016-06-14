@@ -3,6 +3,9 @@
 
 sylius:
     option:
+        code:
+            not_blank: Kérjük, írja be az opció kódját.
+            unique: Az opció az adott kóddal már létezik.
         name:
             not_blank: Kérjük, adja meg az opció nevét.
             min_length: 'Az opciónév legalább 1 karakter hosszú kell legyen. | Az opciónév legalább {{ limit }} karakter hosszú kell legyen.'
@@ -14,6 +17,9 @@ sylius:
         values:
             min_count: 'Kérjük, adjon meg legalább {{ limit }} opció értéket. | Kérjük adjon meg legalább {{ limit }} opció értéket.'
     option_value:
+        code:
+            not_blank: Kérjük adja meg az opció értékének kódját.
+            unique: Az opció értéke az adott kóddal már létezik.
         value:
             not_blank: Kérjük, adja meg az opció értékét.
     variant:

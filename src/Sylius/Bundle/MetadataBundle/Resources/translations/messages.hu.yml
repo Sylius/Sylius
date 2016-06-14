@@ -3,10 +3,36 @@
 
 sylius:
     metadata:
+        type:
+            none: ' -NINCS- '
+            twitter_summary_card: Összefoglaló
+            twitter_summary_large_image_card: Összefoglaló nagy képpel
+            twitter_player_card: Lejátszó
+            twitter_app_card: Alkalmazás
         page:
             title: Cím
             description: Leírás
+            keywords: Kulcsszavak
+            twitter: Twitter kártya
         twitter:
             title: Cím
             description: Leírás
+            site: Honlap
+            site_id: Webhely azonosító
+            creator: Készítő
+            creator_id: Készítő azonosító
             image: Kép
+            player: Lejátszó
+            player_width: Lejátszó szélessége
+            player_height: Lejátszó magassága
+            player_stream: Lejátszó folyam
+            player_stream_content_type: Lejátszási folyam tartalom típusa
+            app_name_iphone: Iphone alkalmazás neve
+            app_id_iphone: IPhone alkalmazás azonosítója
+            app_url_iphone: Iphone alkalmazás Url-címe
+            app_name_ipad: Ipad alkalmazás neve
+            app_id_ipad: IPad alkalmazás azonosítója
+            app_url_ipad: Ipad alkalmazás Url-címe
+            app_name_googleplay: A Google Play alkalmazás neve
+            app_id_googleplay: A Google Play alkalmazás azonosítója
+            app_url_googleplay: A Google Play alkalmazás Url-címe

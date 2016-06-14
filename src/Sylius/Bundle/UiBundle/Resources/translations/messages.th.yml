@@ -13,6 +13,7 @@ sylius:
         account_credentials: ข้อมูลลับของบัญชี
         actions: ดำเนินการ
         add_coupon: เพิ่มคูปอง
+        add_to_cart: หยิบใส่ตะกร้า
         administration_panel_login: เข้าสู่ระบบ Admin
         all: ทั้งหมด
         an_error_occurred: เกิดข้อผิดพลาด

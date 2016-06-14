@@ -34,6 +34,7 @@ sylius:
             category: Катэгорыя
             category_requirement: Умовы катэгорыі
             configuration: Канфігурацыя
+            description: Апісанне
             enabled: Уключана
             name: Назва
             tax_category: Катэгорыя падатку

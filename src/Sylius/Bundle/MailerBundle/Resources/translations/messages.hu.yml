@@ -5,4 +5,9 @@ sylius:
     form:
         email:
             enabled: Engedélyezve
+            subject: Tárgy
+            sender_name: A feladó neve
+            sender_address: A feladó címe
             content: Tartalom
+            template: Sablon
+            no_template: Egyéni sablon használata

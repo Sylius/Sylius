@@ -12,6 +12,7 @@ sylius:
     ui:
         actions: Akcije
         add_coupon: Dodaj kod za popust
+        add_to_cart: Dodaj u košaricu
         cancel: Prekini
         cancelled: Otkazano
         change_your_password: Promijenite lozinku

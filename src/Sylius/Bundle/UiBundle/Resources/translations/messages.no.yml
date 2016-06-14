@@ -11,6 +11,7 @@ sylius:
     ui:
         actions: Handlinger
         add_coupon: Legg til rabattkupong
+        add_to_cart: Legg i handlekurv
         cancel: Avbryt
         cancelled: Avbrutt
         change_your_password: Endre passord

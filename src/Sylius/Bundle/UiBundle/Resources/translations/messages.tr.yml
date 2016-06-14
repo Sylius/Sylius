@@ -12,6 +12,7 @@ sylius:
     ui:
         actions: Eylemler
         add_coupon: Kupon Ekle
+        add_to_cart: Sepete ekle
         cancel: İptal
         cancelled: İptal Edildi
         change_your_password: Parolanızı değiştirin

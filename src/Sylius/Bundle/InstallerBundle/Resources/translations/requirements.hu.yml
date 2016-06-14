@@ -12,6 +12,8 @@ sylius:
         gd: GD
         help: 'Telepítsd és engedélyezd a(z) %extension% kiegészítőt.'
         iconv: Iconv
+        exif: Exif
+        fileinfo: Fájl infó
         icu: ICU
         intl: Intl
         json_encode: JSON
@@ -38,6 +40,7 @@ sylius:
         not_exists: nem létezik
         not_writable: nem írható
         parameters:
+            header: parameters.yml
             help:
                 To set permissions run: 'sudo chmod a + w % path %'
         vendors: vendors

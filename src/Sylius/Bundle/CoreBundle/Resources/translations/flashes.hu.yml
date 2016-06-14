@@ -9,6 +9,7 @@ sylius:
         success: Köszönjük a rendelést!
         canceled: Az Ön fizetése törölve lett.
         processing: A fizetés jelenleg feldolgozás alatt áll.
+        new: A fizetésed új.
         failed: A fizetés el lett utasítva.
         unknown: Ismeretlen hiba fizetés közben.
         out_of_stock: 'A raktáron csak %quantity% %name% van.'

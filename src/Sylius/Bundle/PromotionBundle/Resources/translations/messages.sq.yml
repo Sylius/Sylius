@@ -20,6 +20,7 @@ sylius:
                 exclude: Përjashto
             cart_quantity_configuration:
                 count: Numëro
+                equal: E njëjtë
             item_total_configuration:
                 amount: Shuma
             nth_order_configuration:

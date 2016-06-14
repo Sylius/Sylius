@@ -11,6 +11,7 @@ sylius:
     ui:
         actions: Acțiuni
         add_coupon: Adaugă cod promoțional
+        add_to_cart: Adaugă în coș
         cancel: Anulează
         cancelled: Anulată
         change_your_password: Modificare parolă

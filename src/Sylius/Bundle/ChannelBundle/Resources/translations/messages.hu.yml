@@ -6,4 +6,6 @@ sylius:
         channel:
             name: Név
             description: Leírás
+            url: Webcím
             enabled: Engedélyezve
+            color: Szín

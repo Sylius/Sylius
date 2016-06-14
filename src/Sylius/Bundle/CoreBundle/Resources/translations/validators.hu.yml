@@ -2,11 +2,22 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    checkout:
+        shipping_method:
+            not_blank: Kérjük, válassza ki a szállítási formát.
     locale:
         code:
             not_blank: Kérjük, írja be a hely kódját.
             unique: A területi beállítás már létezik.
     product_variant:
+        onHand:
+            min: 'A készletnek nagyobbnak kell lenni mint {{ limit }}.'
+            not_blank: Kérjük, adja meg a készletet.
         price:
             min: Az ár nem lehet negatív szám.
             not_blank: Kérjük, írja be az árat.
+        original_price:
+            min: Az eredeti ár nem lehet negatív.
+    product_translation:
+        short_description:
+            max: 'Rövid leírás nem lehet hosszabb mint {{ limit }} karakterek.'

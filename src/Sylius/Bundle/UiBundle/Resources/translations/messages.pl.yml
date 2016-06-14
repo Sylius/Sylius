@@ -12,6 +12,7 @@ sylius:
     ui:
         actions: Akcje
         add_coupon: Dodaj kupon promocyjny
+        add_to_cart: Dodaj do koszyka
         an_error_occurred: Wystąpił błąd
         are_your_sure_you_want_to_perform_this_action: Czy na pewno chcesz wykonać tę akcję?
         cancel: Anuluj

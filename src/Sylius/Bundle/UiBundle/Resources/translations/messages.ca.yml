@@ -9,6 +9,7 @@ sylius:
         option:
             presentation: Presentació
     ui:
+        add_to_cart: Afegir a la cistella
         checkout: Realitza la compra
         default_currency: Moneda predeterminada
         delete: Suprimir

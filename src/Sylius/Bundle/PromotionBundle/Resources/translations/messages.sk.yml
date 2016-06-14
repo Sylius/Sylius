@@ -20,6 +20,7 @@ sylius:
                 exclude: Vylúčiť
             cart_quantity_configuration:
                 count: Počet
+                equal: Rovná sa
             item_total_configuration:
                 amount: Suma
             nth_order_configuration:

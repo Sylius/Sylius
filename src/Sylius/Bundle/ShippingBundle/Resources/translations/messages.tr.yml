@@ -42,6 +42,7 @@ sylius:
             category: Kategori
             category_requirement: Kategori gereksinimi
             configuration: Ayarlar
+            description: Açıklama
             enabled: Etkin
             name: Ad
             tax_category: Vergi kategorisi

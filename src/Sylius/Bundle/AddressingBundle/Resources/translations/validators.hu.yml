@@ -52,6 +52,7 @@ sylius:
             min_count: 'Kérjük, hogy adjon meg legalább {{limit}} zóna tagot.'
         name:
             max_length: A zóna elnevezése nem lehet hosszabb 255 karakternél.
+            min_length: A zóna nevének legalább 2 karakter hosszúnak kell lennie|A zóna nevének legalább 2 karakter hosszúnak kell lennie.
             not_blank: Kérjük, hogy írja be a zóna nevét.
     zone_member:
         code:

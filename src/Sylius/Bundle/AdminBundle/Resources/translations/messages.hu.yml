@@ -6,12 +6,15 @@ sylius:
         admin:
             main:
                 catalog:
+                    attributes: Tulajdonságok
+                    header: Katalógus
                     options: Beállítások
                     products: Termékek
                     taxons: Taxonok
                 configuration:
                     channels: Csatornák
                     countries: Országok
+                    currencies: Pénznemek
                     header: Konfiguráció
                     locales: Területi beállítások
                     payment_methods: Fizetési módok

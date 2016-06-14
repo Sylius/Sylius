@@ -11,6 +11,8 @@ sylius:
             enabled: Engedélyezve
             password:
                 label: Jelszó
+                confirmation: Ellenőrzés
+            remember_me: Emlékezzen rám
             shipping_address: Szállítási cím
         customer:
             first_name: Keresztnév
@@ -18,8 +20,11 @@ sylius:
             last_name: Vezetéknév
             email: E-mail
             phone_number: Telefonszám
+            gender: Neme
+            birthday: Születésnap
             billing_address: Számlázási cím
             different_billing_address: A számlázási címe különbözik a megadott címtől?
+            only_customer_registration: Fiók készítése?
         user_filter:
             query: Keresés
         user_change_password:
@@ -31,3 +36,5 @@ sylius:
             new: Új jelszó
     gender:
         unknown: Ismeretlen
+        male: Férfi
+        female: Nő

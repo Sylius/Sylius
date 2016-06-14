@@ -14,6 +14,7 @@ sylius:
         account_credentials: "Informations d'intentification"
         actions: Actions
         add_coupon: Ajouter un coupon
+        add_to_cart: Ajouter au panier
         administration_panel_login: "Connexion à l'espace d'administration"
         all: Tous
         an_error_occurred: "Une erreur s'est produite"

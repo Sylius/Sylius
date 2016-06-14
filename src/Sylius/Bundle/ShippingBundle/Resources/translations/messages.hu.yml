@@ -6,6 +6,8 @@ sylius:
         rule:
             unit_count_configuration:
                 count: Mennyiség
+                equal: Egyenlő
+            type: Szabály típusa
         shipment:
             state: Állapot
             states:
@@ -14,15 +16,27 @@ sylius:
                 ready: Kész
                 shipped: Kiszállítva
                 returned: Visszaküldött
+                cancelled: Megszakítva
             tracking_code: Követési kód
         shipping_calculator:
             flat_rate_configuration:
+                label: Átalánydíj szállítmányonként
                 amount: Összeg
+            flexible_rate_configuration:
+                label: Rugalmas díjszabás
+                additional_unit_cost: További elemek költsége
+                additional_unit_limit: További elemek limitje
+                first_unit_cost: Első elem költsége
             per_unit_rate_configuration:
+                label: Átalánydíj per elem
                 amount: Összeg
             weight_rate_configuration:
+                label: Súlyalapú
+                fixed: Fix összeg
+                variable: Változó összeg
                 division: Részleg
             volume_rate_configuration:
+                label: Térfogat alapú
                 amount: Összeg
                 division: Részleg
         shipping_category:
@@ -33,6 +47,8 @@ sylius:
             category: Kategória
             category_requirement: Kategória követelmény
             configuration: Konfiguráció
+            description: Leírás
             enabled: Engedélyezve
             name: Név
             tax_category: ÁFA-kategória
+            translations: Fordítások

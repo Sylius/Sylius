@@ -1,0 +1,17 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    user:
+        email:
+            not_exist: Nem létezik felhasználó ezzel az email címmel.
+        password:
+            invalid: Hibás jelenlegi jelszó.
+            request:
+                success: Küldtünk Önnek egy E-mailt, a jelszava visszaállításának instrukcióival!
+            reset:
+                success: Jelszava sikeresen visszaállítva!
+            change:
+                success: Jelszavát sikeresen megváltoztattuk!
+        reset_password:
+            requested: Ha az általad megadott email létezik rendszerünkben, akkor küldtünk egy emailt a további instrukciókkal.

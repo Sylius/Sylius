@@ -11,6 +11,7 @@ sylius:
             description: Descripció
             name: Nom
         shipping_method:
+            description: Descripció
             enabled: Activat
             name: Nom
             tax_category: "Categoria d'impost"

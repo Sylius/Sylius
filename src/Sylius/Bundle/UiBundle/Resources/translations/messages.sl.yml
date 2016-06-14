@@ -12,6 +12,7 @@ sylius:
     ui:
         actions: Dejanja
         add_coupon: Dodaj kupon
+        add_to_cart: Dodajte v košarico
         cancel: Prekliči
         cancelled: Preklicano
         change_your_password: Spremenite vaše geslo

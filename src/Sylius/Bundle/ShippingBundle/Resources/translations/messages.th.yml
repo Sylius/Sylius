@@ -47,6 +47,7 @@ sylius:
             category: หมวดหมู่
             category_requirement: ความต้องการสำหรับหมวดหมู่
             configuration: การกำหนดค่า (Configuration)
+            description: คำอธิบาย
             enabled: เปิดใช้งานแล้ว
             name: ชื่อ
             tax_category: ประเภทภาษี
