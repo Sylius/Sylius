@@ -26,5 +26,15 @@
             <argument>%currency%</argument>
             <tag name="sylius_fixtures.fixture" />
         </service>
+
+        <service id="sylius.fixture.geographical" class="Sylius\Bundle\CoreBundle\Fixture\GeographicalFixture">
+            <argument type="service" id="sylius.factory.country" />
+            <argument type="service" id="sylius.manager.country" />
+            <argument type="service" id="sylius.factory.province" />
+            <argument type="service" id="sylius.manager.province" />
+            <argument type="service" id="sylius.factory.zone" />
+            <argument type="service" id="sylius.manager.zone" />
+            <tag name="sylius_fixtures.fixture" />
+        </service>
     </services>
 </container>

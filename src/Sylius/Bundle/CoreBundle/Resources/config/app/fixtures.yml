@@ -22,3 +22,31 @@ sylius_fixtures:
                             - USD
                             - GBP
                             - CHF
+
+                geographical:
+                    options:
+                        provinces:
+                            US:
+                                US-CA: California
+                                US-OR: Oregon
+                                US-WA: Washington
+                                US-AL: Alabama
+                                US-TN: Tennessee
+                        zones:
+                            US-WEST-COAST:
+                                name: "West coast of USA"
+                                provinces:
+                                    - US-CA
+                                    - US-OR
+                                    - US-WA
+                            EUROPE:
+                                name: "European countries"
+                                countries:
+                                    - PL
+                                    - DE
+                                    - FR
+                            YO-DAWG:
+                                name: "Zone in a zone"
+                                zones:
+                                    - US-WEST-COAST
+                                    - EUROPE
