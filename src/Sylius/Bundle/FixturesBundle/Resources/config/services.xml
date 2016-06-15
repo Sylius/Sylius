@@ -15,8 +15,9 @@
     <imports>
         <import resource="fixture.xml"/>
         <import resource="listener.xml"/>
-        <import resource="suite.xml"/>
         <import resource="loader.xml"/>
+        <import resource="logger.xml"/>
+        <import resource="suite.xml"/>
     </imports>
 
     <services>

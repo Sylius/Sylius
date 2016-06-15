@@ -78,7 +78,8 @@ final class Suite implements SuiteInterface
      */
     public function getFixtures()
     {
-        foreach ($this->fixtures as $fixture) {
+        $fixtures = clone $this->fixtures;
+        foreach ($fixtures as $fixture) {
             yield $fixture['fixture'] => $fixture['options'];
         }
     }
@@ -88,7 +89,8 @@ final class Suite implements SuiteInterface
      */
     public function getListeners()
     {
-        foreach ($this->listeners as $listener) {
+        $listeners = clone $this->listeners;
+        foreach ($listeners as $listener) {
             yield $listener['listener'] => $listener['options'];
         }
     }
