@@ -21,7 +21,7 @@
             </argument>
         </service>
 
-        <service id="sylius_fixtures.suite_registry" class="Sylius\Bundle\FixturesBundle\Suite\LazySuiteRegistry" public="false">
+        <service id="sylius_fixtures.suite_registry" class="Sylius\Bundle\FixturesBundle\Suite\LazySuiteRegistry">
             <argument type="service" id="sylius_fixtures.suite_factory" />
         </service>
     </services>
