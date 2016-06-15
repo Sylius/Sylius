@@ -382,7 +382,9 @@ class LoadProductsData extends DataFixture
      */
     protected function defineTotalVariants()
     {
-        define('SYLIUS_FIXTURES_TOTAL_VARIANTS', $this->totalVariants);
+        if (!defined('SYLIUS_FIXTURES_TOTAL_VARIANTS')) {
+            define('SYLIUS_FIXTURES_TOTAL_VARIANTS', $this->totalVariants);
+        }
     }
 
     protected function addTranslatedFields(ProductInterface $product, $translatedNames)
