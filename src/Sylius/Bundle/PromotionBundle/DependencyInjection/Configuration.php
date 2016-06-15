@@ -19,7 +19,6 @@ use Sylius\Bundle\PromotionBundle\Form\Type\RuleType;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Component\Core\Factory\ActionFactory;
 use Sylius\Component\Promotion\Factory\CouponFactory;
 use Sylius\Component\Promotion\Model\Action;
 use Sylius\Component\Promotion\Model\ActionInterface;
@@ -156,7 +155,7 @@ class Configuration implements ConfigurationInterface
                                         ->scalarNode('interface')->defaultValue(ActionInterface::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
-                                        ->scalarNode('factory')->defaultValue(ActionFactory::class)->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                         ->arrayNode('form')
                                             ->addDefaultsIfNotSet()
                                             ->children()
