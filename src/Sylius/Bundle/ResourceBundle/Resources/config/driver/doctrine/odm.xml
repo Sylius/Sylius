@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns="http://symfony.com/schema/dic/services"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+
+        <parameter key="sylius.mongodb_odm.repository.class">Sylius\Bundle\ResourceBundle\Doctrine\ODM\MongoDB\DocumentRepository</parameter>
+        <parameter key="sylius.event_subscriber.odm_mapped_super_class.class">Sylius\Bundle\ResourceBundle\EventListener\ODMMappedSuperClassSubscriber</parameter>
+
+        <parameter key="sylius.event_subscriber.odm_repository_class.class">Sylius\Bundle\ResourceBundle\EventListener\ODMRepositoryClassSubscriber</parameter>
+        <parameter key="sylius.translation.translatable_listener.doctrine.mongodb_odm.class">Sylius\Bundle\ResourceBundle\EventListener\MongoDBODMTranslatableListener</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.event_subscriber.odm_mapped_super_class" class="%sylius.event_subscriber.odm_mapped_super_class.class%">
+            <argument type="service" id="sylius.resource_registry" />
+            <tag name="doctrine_mongodb.odm.event_subscriber" priority="8192" />
+        </service>
+
+        <service id="sylius.event_subscriber.odm_repository_class" class="%sylius.event_subscriber.odm_repository_class.class%">
+            <argument type="service" id="sylius.resource_registry" />
+            <tag name="doctrine_mongodb.odm.event_subscriber" priority="8192" />
+        </service>
+    </services>
+</container>
+
