@@ -56,8 +56,8 @@
                 <button class="ui red right labeled icon button">
                     <i class="remove icon"></i> {{ 'sylius.ui.delete'|trans }}
                 </button>
+                {{ form_widget(form.attribute, {'attr': {'style': 'display: none'}}) }}
             </div>
         {% endif %}
-        {{ form_widget(form.attribute, {'attr': {'style': 'display: none'}}) }}
     </div>
 {% endmacro %}
