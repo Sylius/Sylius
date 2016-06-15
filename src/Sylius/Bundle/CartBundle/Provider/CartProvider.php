@@ -117,7 +117,7 @@ class CartProvider implements CartProviderInterface
      *
      * @return CartInterface
      */
-    private function provideCart()
+    protected function provideCart()
     {
         $cartIdentifier = $this->cartContext->getCurrentCartIdentifier();
         if ($cartIdentifier !== null) {
