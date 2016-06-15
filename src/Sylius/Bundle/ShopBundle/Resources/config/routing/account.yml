@@ -1,7 +1,7 @@
 # This file is a part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-sylius_show_account_root:
+sylius_shop_account_root:
     path: /
     defaults:
         _controller: FrameworkBundle:Redirect:redirect
