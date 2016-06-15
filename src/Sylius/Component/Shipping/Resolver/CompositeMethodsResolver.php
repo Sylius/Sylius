@@ -51,6 +51,12 @@ class CompositeMethodsResolver implements MethodsResolverInterface
      */
     public function supports(ShippingSubjectInterface $subject)
     {
-        return true;
+        foreach ($this->resolversRegistry->all() as $resolver) {
+            if ($resolver->supports($subject)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

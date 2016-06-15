@@ -37,7 +37,7 @@ class ShippingMethodChoiceType extends AbstractType
     /**
      * @var MethodsResolverInterface
      */
-    protected $compositeShippingMethodsResolver;
+    protected $shippingMethodsResolver;
 
     /**
      * @var ServiceRegistryInterface
@@ -50,16 +50,16 @@ class ShippingMethodChoiceType extends AbstractType
     protected $repository;
 
     /**
-     * @param MethodsResolverInterface $compositeShippingMethodsResolver
+     * @param MethodsResolverInterface $shippingMethodsResolver
      * @param ServiceRegistryInterface $calculators
      * @param RepositoryInterface $repository
      */
     public function __construct(
-        MethodsResolverInterface $compositeShippingMethodsResolver,
+        MethodsResolverInterface $shippingMethodsResolver,
         ServiceRegistryInterface $calculators,
         RepositoryInterface $repository
     ) {
-        $this->compositeShippingMethodsResolver = $compositeShippingMethodsResolver;
+        $this->shippingMethodsResolver = $shippingMethodsResolver;
         $this->calculators = $calculators;
         $this->repository = $repository;
     }
@@ -80,8 +80,8 @@ class ShippingMethodChoiceType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $choiceList = function (Options $options) {
-            if (isset($options['subject'])) {
-                $methods = $this->compositeShippingMethodsResolver->getSupportedMethods($options['subject']);
+            if (isset($options['subject']) && $this->shippingMethodsResolver->supports($options['subject'])) {
+                $methods = $this->shippingMethodsResolver->getSupportedMethods($options['subject']);
             } else {
                 $methods = $this->repository->findAll();
             }

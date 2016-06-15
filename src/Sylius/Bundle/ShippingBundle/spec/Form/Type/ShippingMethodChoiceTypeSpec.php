@@ -26,11 +26,11 @@ use Symfony\Component\Form\FormBuilderInterface;
 class ShippingMethodChoiceTypeSpec extends ObjectBehavior
 {
     function let(
-        MethodsResolverInterface $compositeMethodsResolver,
+        MethodsResolverInterface $methodsResolver,
         ServiceRegistryInterface $calculators,
         RepositoryInterface $repository
     ) {
-        $this->beConstructedWith($compositeMethodsResolver, $calculators, $repository);
+        $this->beConstructedWith($methodsResolver, $calculators, $repository);
     }
 
     function it_is_initializable()
