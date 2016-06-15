@@ -40,6 +40,7 @@
 
                 onSuccess: function (response) {
                     element.remove();
+                    location.reload();
                 },
 
                 onFailure: function (response) {

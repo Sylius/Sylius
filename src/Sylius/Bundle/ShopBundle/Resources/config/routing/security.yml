@@ -40,7 +40,7 @@ sylius_shop_request_password_reset_token:
             redirect: sylius_shop_login
 
 sylius_shop_user_check_action:
-    path: /check-user
+    path: /user-check
     methods: [GET]
     defaults:
         _controller: sylius.controller.user:showAction

@@ -82,5 +82,31 @@
     $('.special.cards .image').dimmer({
       on: 'hover'
     });
+
+    var email = $('#sylius_shop_checkout_addressing_customer_email');
+    email.apiToggle({
+      action: 'user check',
+      dataType: 'json',
+      method: 'GET',
+      throttle: 1500,
+
+      beforeSend: function (settings) {
+        settings.data = {
+          email: email.val()
+        };
+
+        return settings;
+      },
+
+      successTest: function (response) {
+        return email.val() === response.username;
+      }
+    }, $('#sylius-api-login-form'));
+
+    $('#sylius-api-login').apiLogin({
+      action: 'login check',
+      method: 'POST',
+      throttle: 500
+    });
   });
 })(jQuery);

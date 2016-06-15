@@ -31,38 +31,3 @@
         </div>
     </div>
 {% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-    <script>
-        (function ( $ ) {
-            var toggleableElement = $('#apiToggleable');
-            var email = $('#sylius_shop_checkout_addressing_customer_email');
-
-            email.apiToggle({
-                action: 'check user',
-                dataType: 'json',
-                method: 'GET',
-                throttle: 1500,
-
-                beforeSend: function (settings) {
-                    settings.data = {
-                        email: email.val()
-                    };
-
-                    return settings;
-                },
-
-                successTest: function (response) {
-                    return email.val() === response.username;
-                }
-            }, toggleableElement);
-
-            $('#apiLogin').apiLogin({
-                action: 'login check',
-                method: 'POST',
-                throttle: 500
-            });
-        })( jQuery );
-    </script>
-{% endblock %}

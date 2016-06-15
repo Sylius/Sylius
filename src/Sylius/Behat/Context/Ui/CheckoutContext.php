@@ -427,7 +427,7 @@ final class CheckoutContext implements Context
     {
         Assert::true(
             $this->addressingPage->canSignIn(),
-            'I should be able to login'
+            'I should be able to login, but I am not.'
         );
     }
 
@@ -438,7 +438,7 @@ final class CheckoutContext implements Context
     {
         Assert::false(
             $this->addressingPage->canSignIn(),
-            'I should not be able to login'
+            'I should not be able to login, but I am.'
         );
     }
 
@@ -449,7 +449,7 @@ final class CheckoutContext implements Context
     {
         Assert::true(
             $this->addressingPage->checkInvalidCredentialsValidation(),
-            'I should see validation error.'
+            'I should see validation error, but I do not.'
         );
     }
 

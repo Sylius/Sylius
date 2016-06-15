@@ -52,6 +52,8 @@ interface AddressingPageInterface extends SymfonyPageInterface
      */
     public function canSignIn();
 
+    public function signIn();
+
     /**
      * @param string $email
      */
@@ -61,8 +63,6 @@ interface AddressingPageInterface extends SymfonyPageInterface
      * @param string $password
      */
     public function specifyPassword($password);
-    
-    public function signIn();
 
     public function nextStep();
 }

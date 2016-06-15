@@ -1,15 +1,15 @@
 <div id="sylius-shipping-address">
     {% if form.customer.email is defined %}
-        <div class="one field" id="apiLogin">
+        <div class="one field" id="sylius-api-login">
             {{ form_row(form.customer.email) }}
-            <div class="ui action input" id="apiToggleable">
-                <a class="ui blue labeled icon button" href="#">
+            <div class="ui action input" id="sylius-api-login-form">
+                <a class="ui blue labeled icon button" href="#" id="sylius-api-login-submit">
                     <i class="user icon"></i>
                     {{ 'sylius.ui.sign_in'|trans }}
                 </a>
                 <div class="inline field">
                     <input type="password" placeholder="{{ 'sylius.ui.password'|trans }}">
-                    <div class="ui left pointing red basic label">
+                    <div class="ui left pointing red basic label" id="sylius-api-validation-error">
                     </div>
                 </div>
             </div>

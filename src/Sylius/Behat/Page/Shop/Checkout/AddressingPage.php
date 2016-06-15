@@ -51,7 +51,12 @@ class AddressingPage extends SymfonyPage implements AddressingPageInterface
     public function checkInvalidCredentialsValidation()
     {
         $this->getElement('login_password')->waitFor(5, function () {
-            return $this->getElement('login_password')->getParent()->find('css', '.red')->isVisible();
+            $validationElement = $this->getElement('login_password')->getParent()->find('css', '.red.label');
+            if (null === $validationElement) {
+                return false;
+            }
+
+            return $validationElement->isVisible();
         });
 
         return $this->checkValidationMessageFor('login_password', 'Invalid credentials.');
@@ -116,7 +121,22 @@ class AddressingPage extends SymfonyPage implements AddressingPageInterface
      */
     public function canSignIn()
     {
-        return $this->isSignInActionAvailable() && $this->hasElement('login_password');
+        return $this->isSignInActionAvailable();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function signIn()
+    {
+        $this->isSignInActionAvailable();
+        try {
+            $this->getElement('login_button')->press();
+        } catch (ElementNotFoundException $elementNotFoundException) {
+            $this->getElement('login_button')->click();
+        }
+
+        $this->waitForLoginAction();
     }
 
     /**
@@ -129,22 +149,6 @@ class AddressingPage extends SymfonyPage implements AddressingPageInterface
         });
 
         $this->getElement('login_password')->setValue($password);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function signIn()
-    {
-        $this->isSignInActionAvailable();
-
-        try {
-            $this->getDocument()->pressButton('Sign in');
-        } catch (ElementNotFoundException $elementNotFoundException) {
-            $this->getDocument()->clickLink('Sign in');
-        }
-
-        $this->waitForLoginAction();
     }
 
     public function nextStep()
@@ -173,6 +177,7 @@ class AddressingPage extends SymfonyPage implements AddressingPageInterface
             'shipping_city' => '#sylius_shop_checkout_addressing_shippingAddress_city',
             'shipping_postcode' => '#sylius_shop_checkout_addressing_shippingAddress_postcode',
             'login_password' => 'input[type=\'password\']',
+            'login_button' => '#sylius-api-login-submit',
         ]);
     }
 
@@ -211,7 +216,7 @@ class AddressingPage extends SymfonyPage implements AddressingPageInterface
     private function isSignInActionAvailable()
     {
         return $this->getDocument()->waitFor(5, function () {
-            return $this->getDocument()->hasButton('Sign in') || $this->getDocument()->hasLink('Sign in');
+            return $this->hasElement('login_button');
         });
     }
 
