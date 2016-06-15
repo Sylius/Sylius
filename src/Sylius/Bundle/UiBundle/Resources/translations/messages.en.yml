@@ -27,6 +27,7 @@ sylius:
         cancel: Cancel
         cancelled: Cancelled
         category_requirements: Category requirements
+        change_address: Change address
         change_password: Change password
         change_your_password: Change your password
         charges_and_taxes: Charges and taxes
@@ -155,7 +156,7 @@ sylius:
         no_requirement: No requirement
         no_results_to_display: There are no results to display
         no_shipping_charges: No shipping charges applied
-        no_shipping_methods_available: There are currently no shipping methods available for your shipping address.
+        no_shipping_methods_available: There are currently no shipping methods available for your shipping address
         no_taxes: No taxes applied
         no_theme: No theme
         not_contains: Not contains
@@ -195,6 +196,7 @@ sylius:
         status: Status
         subtotal: Subtotal
         success: Success
+        shipment: Shipment
         tax: Tax
         taxonomy: Taxonomy
         tax_categories: Tax categories

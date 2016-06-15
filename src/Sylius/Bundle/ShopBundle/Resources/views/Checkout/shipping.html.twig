@@ -1,40 +1,29 @@
 {% extends '@SyliusShop/Checkout/layout.html.twig' %}
 
+{% form_theme form '@SyliusUi/Form/theme.html.twig' %}
+
 {% block content %}
     {% include '@SyliusShop/Checkout/_header.html.twig' %}
-    {% include '@SyliusShop/Checkout/_steps.html.twig' with { 'active': 'shipping' } %}
+    {% include '@SyliusShop/Checkout/_steps.html.twig' with {'active': 'shipping'} %}
+
     <div class="ui stackable grid">
         <div class="eleven wide column">
             <div class="ui padded segment" id="shipping_methods">
-                {{ form_start(form, {'action': path('sylius_shop_checkout_shipping'), 'attr': {'class': 'ui form', 'novalidate': 'novalidate'}}) }}
-                <div class="ui fluid stackable items">
-                    <input type="hidden" name="_method" value="PUT" />
-                    {% for shipment in order.shipments %}
-                        {% set shipmentForm = form.shipments[loop.index0] %}
-                        {{ form_errors(shipmentForm.method) }}
-                        {% for shippingMethod in shipmentForm.method %}
-                            <div class="item">
-                                <div class="field">
-                                    <div class="ui radio checkbox">
-                                        {{ form_widget(shippingMethod) }}
-                                    </div>
-                                </div>
-                                <div class="content">
-                                    <a class="header">{{ form_label(shippingMethod) }}</a>
-                                    {% if shippingMethod.parent.vars.choices[loop.index0].data.description is not null %}
-                                        <div class="description">
-                                            <p>{{ shippingMethod.parent.vars.choices[loop.index0].data.description }}</p>
-                                        </div>
-                                    {% endif %}
-                                </div>
-                            </div>
-                        {% else %}
-                            <h3 id="sylius-order-cannot-be-shipped">{{ 'sylius.ui.no_shipping_methods_available'|trans }}</h3>
-                        {% endfor %}
-                    {% endfor %}
-                    {{ form_row(form._token) }}
+                {{ form_start(form, {'action': path('sylius_shop_checkout_shipping'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
+                <input type="hidden" name="_method" value="PUT" />
+
+                {% include '@SyliusShop/Checkout/Form/_shipping.html.twig' %}
+
+                <div class="ui hidden divider"></div>
+                <div class="ui two column grid">
+                    <div class="column">
+                        <a href="#" class="ui large icon labeled button"><i class="arrow left icon"></i> {{ 'sylius.ui.change_address'|trans }}</a>
+                    </div>
+                    <div class="right aligned column">
+                        <button type="submit" class="ui large primary icon labeled button"><i class="arrow right icon"></i> {{ 'sylius.ui.next'|trans }}</button>
+                    </div>
                 </div>
-                <button type="submit" class="ui large primary icon labeled button"><i class="arrow right icon"></i> {{ 'sylius.ui.next'|trans }}</button>
+                {{ form_row(form._token) }}
                 {{ form_end(form, {'render_rest': false}) }}
             </div>
         </div>

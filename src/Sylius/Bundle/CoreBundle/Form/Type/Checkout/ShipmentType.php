@@ -31,18 +31,11 @@ class ShipmentType extends AbstractType
     protected $dataClass;
 
     /**
-     * @var TranslatorInterface
-     */
-    protected $translator;
-
-    /**
      * @param string $dataClass
-     * @param TranslatorInterface $translator
      */
-    public function __construct($dataClass, TranslatorInterface $translator)
+    public function __construct($dataClass)
     {
         $this->dataClass = $dataClass;
-        $this->translator = $translator;
     }
 
     /**
@@ -56,6 +49,7 @@ class ShipmentType extends AbstractType
                 $shipment = $event->getData();
 
                 $form->add('method', 'sylius_shipping_method_choice', [
+                    'required' => true,
                     'label' => 'sylius.form.checkout.shipping_method',
                     'subject' => $shipment,
                     'expanded' => true,
@@ -72,10 +66,6 @@ class ShipmentType extends AbstractType
             ->setDefaults([
                 'data_class' => $this->dataClass,
             ])
-            ->setDefined([
-                'channel',
-            ])
-            ->setAllowedTypes('channel', [ChannelInterface::class, 'null'])
         ;
     }
 
