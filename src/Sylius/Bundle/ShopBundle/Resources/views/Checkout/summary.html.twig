@@ -33,8 +33,8 @@
             </tbody>
             <tfoot>
             <tr>
-                <th colspan="4" class="right aligned">
-                    Tax: $10.00
+                <th colspan="4" class="right aligned" id="tax-total">
+                    {{ 'sylius.ui.tax'|trans }}: {{ order.taxTotal|sylius_price }}
                 </th>
             </tr>
             <tr>
@@ -84,6 +84,8 @@
                         </div>
                     </div>
                 {% endfor %}
+            <div class="column">
+                {% include '@SyliusShop/Checkout/_shipping.html.twig' with {'order': order} %}
             </div>
         </div>
         <div class="ui hidden divider"></div>

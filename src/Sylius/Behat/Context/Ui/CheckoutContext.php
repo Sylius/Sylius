@@ -616,6 +616,17 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Given I should see the shipping total with price :price
+     */
+    public function iShouldSeeTheShippingTotalWithPrice($price)
+    {
+        Assert::true(
+            $this->summaryPage->hasShippingTotal($price),
+            sprintf('The shipping total should be %s, but it is not.',$price)
+        );
+    }
+
+    /**
      * @Then /^the ("[^"]+" product) should have unit price discounted by ("\$\d+")$/
      */
     public function theShouldHaveUnitPriceDiscountedFor(ProductInterface $product, $amount)

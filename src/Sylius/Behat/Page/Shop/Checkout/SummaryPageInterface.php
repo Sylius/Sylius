@@ -93,4 +93,11 @@ interface SummaryPageInterface extends SymfonyPageInterface
      * @return bool
      */
     public function hasTaxTotal($taxTotal);
+
+    /**
+     * @param string $price
+     * 
+     * @return bool
+     */
+    public function hasShippingTotal($price);
 }
