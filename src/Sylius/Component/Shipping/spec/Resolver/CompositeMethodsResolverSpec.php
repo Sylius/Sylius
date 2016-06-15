@@ -16,7 +16,6 @@ use Sylius\Component\Registry\PrioritizedServiceRegistryInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 use Sylius\Component\Shipping\Resolver\CompositeMethodsResolver;
-use Sylius\Component\Shipping\Resolver\CompositeMethodsResolverInterface;
 use Sylius\Component\Shipping\Resolver\MethodsResolverInterface;
 
 /**
@@ -38,7 +37,7 @@ class CompositeMethodsResolverSpec extends ObjectBehavior
 
     function it_implements_composite_methods_resolver_interface()
     {
-        $this->shouldImplement(CompositeMethodsResolverInterface::class);
+        $this->shouldImplement(MethodsResolverInterface::class);
     }
     
     function it_uses_registry_to_provide_shipping_methods_for_shipping_subject(
