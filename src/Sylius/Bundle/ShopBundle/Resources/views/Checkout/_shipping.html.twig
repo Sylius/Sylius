@@ -1,0 +1,12 @@
+{% for shipment in order.shipments %}
+    <div class="ui large icon message">
+        <i class="truck icon"></i>
+        <div class="content">
+            <div class="header">
+                {{ shipment.method.name }}
+            </div>
+            <p>{{ shipment.method.description }}</p>
+        </div>
+    </div>
+{% endfor %}
+<p id="shipping-total" style="font-size: 1.5em;">{{ 'sylius.ui.total'|trans}} : {{ order.getShippingTotal|sylius_price(order.currencyCode) }}</p>

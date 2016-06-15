@@ -134,6 +134,14 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     /**
      * {@inheritdoc}
      */
+    public function hasShippingTotal($price)
+    {
+        return false !== strpos($this->getElement('shipping_total')->getText(), $price);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
@@ -143,6 +151,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
             'product_row' => 'tbody tr:contains("%name%")',
             'order_total' => 'td:contains("Total")',
             'tax_total' => '#tax-total',
+            'shipping_total' => '#shipping-total',
         ]);
     }
 
