@@ -13,16 +13,12 @@ namespace spec\Sylius\Bundle\ShippingBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Registry\PrioritizedServiceRegistryInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
-use Sylius\Component\Shipping\Resolver\CompositeMethodsResolverInterface;
 use Sylius\Component\Shipping\Resolver\MethodsResolverInterface;
 use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Arnaud Langlade <arn0d.dev@gamil.com>
@@ -30,11 +26,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class ShippingMethodChoiceTypeSpec extends ObjectBehavior
 {
     function let(
-        CompositeMethodsResolverInterface $compositeMethodsResolver,
+        MethodsResolverInterface $methodsResolver,
         ServiceRegistryInterface $calculators,
         RepositoryInterface $repository
     ) {
-        $this->beConstructedWith($compositeMethodsResolver, $calculators, $repository);
+        $this->beConstructedWith($methodsResolver, $calculators, $repository);
     }
 
     function it_is_initializable()
