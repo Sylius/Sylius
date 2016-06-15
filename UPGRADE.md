@@ -10,6 +10,10 @@ UPGRADE
 * Introduced ``getDiscountedUnitPrice`` method on ``OrderItem``, which returns single *unit* price lowered by ``ORDER_UNIT_PROMOTION`` adjustments
 * Removed the concept of restricted zone per product
 
+### PayumBundle
+
+* Upgraded to PayumBundle v2.1, configuration has changed, please take a look at [Payum/PayumBundle/Upgrade.md](https://github.com/Payum/PayumBundle/blob/master/UPGRADE.md)
+
 ### Variation and VariationBundle
 
 * Removed concept of master variant (removed ``$master`` flag from ``Sylius\Component\Variation\Model\Variant``), all usages of **master** variant has been, for now, replaced with **first** variant;
@@ -38,7 +42,7 @@ After:
 %locale%
 ```
 
-### HWIOAuthBundle is now optional 
+### HWIOAuthBundle is now optional
 
 HWIOAuthBundle for social logins is no longer a required dependency. If you would like to use it in your project, you should add it to composer.json's ``require`` section, install it and add proper configuration for routing:
 
@@ -48,17 +52,17 @@ HWIOAuthBundle for social logins is no longer a required dependency. If you woul
 hwi_oauth_security:
     resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
     prefix: /connect-login
- 
+
 hwi_oauth_redirect:
     resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
     prefix: /connect
- 
+
 amazon_login:
     path: /connect-login/check-amazon
- 
+
 facebook_login:
     path: /connect-login/check-facebook
- 
+
 google_login:
     path: /connect-login/check-google
 ```
@@ -90,12 +94,12 @@ oauth:
 ### Core and CoreBundle
 
 * Removed "exclude" option from ``taxon`` rule
-* Changed ``ORDER_PROMOTION_ADJUSTMENT``s to be added on ``OrderItemUnit`` level instead of ``Order`` level, based on distributed promotion amount 
+* Changed ``ORDER_PROMOTION_ADJUSTMENT``s to be added on ``OrderItemUnit`` level instead of ``Order`` level, based on distributed promotion amount
 
 ### SettingsBundle
 
 * Renamed `sylius_settings_all()` Twig function to `sylius_settings()`
-* Removed `sylius_settings_get('foo.property')` and `sylius_settings_has('foo.property')` Twig functions, use 
+* Removed `sylius_settings_get('foo.property')` and `sylius_settings_has('foo.property')` Twig functions, use
   `sylius_settings('foo').property` and `sylius_settings('foo').property is defined` instead
 
 ## From 0.16 to 0.17.x

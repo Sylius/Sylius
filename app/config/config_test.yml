@@ -38,11 +38,12 @@ monolog:
 payum:
     gateways:
         paypal_express_checkout:
-            paypal_express_checkout_nvp:
-                username: TEST
-                password: TEST
-                signature: TEST
-                sandbox: true
+            factory: paypal_express_checkout
+            payum.http_client: @sylius.payum.http_client
+            username: TEST
+            password: TEST
+            signature: TEST
+            sandbox: true
 
 swiftmailer:
     disable_delivery: true

@@ -271,7 +271,7 @@ class OrderController extends FOSRestController
      */
     protected function getTokenFactory()
     {
-        return $this->get('payum.security.token_factory');
+        return $this->get('payum')->getTokenFactory();
     }
 
     /**
@@ -279,7 +279,7 @@ class OrderController extends FOSRestController
      */
     protected function getHttpRequestVerifier()
     {
-        return $this->get('payum.security.http_request_verifier');
+        return $this->get('payum')->getHttpRequestVerifier();
     }
 
     /**
