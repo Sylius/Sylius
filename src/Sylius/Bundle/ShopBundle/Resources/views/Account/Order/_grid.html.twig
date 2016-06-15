@@ -6,7 +6,6 @@
 
 {% set path = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
 
-{{ pagination.render(data) }}
 {% if data|length > 0 %}
     <table class="ui table">
         <thead>

@@ -164,6 +164,7 @@ sylius:
         not_in: Not in
         onhold: Onhold
         or: or
+        order_history: Order history
         order_total: Order total
         partially_shipped: Partially shipped
         per_customer_usage_limit: Per customer usage limit

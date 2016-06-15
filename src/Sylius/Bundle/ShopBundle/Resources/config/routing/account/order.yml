@@ -4,7 +4,7 @@
 sylius_shop_account_order:
     resource: |
         alias: sylius.order
-        section: shop
+        section: shop_account
         templates: SyliusShopBundle:Account/Order
         except: ['create', 'update', 'delete']
         grid: sylius_shop_account_order
