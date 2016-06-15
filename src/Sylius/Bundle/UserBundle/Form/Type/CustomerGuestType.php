@@ -23,23 +23,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 class CustomerGuestType extends AbstractResourceType
 {
     /**
-     * @var EventSubscriberInterface
-     */
-    private $guestCustomerSubscriber;
-
-    /**
-     * @param string $dataClass
-     * @param array $validationGroups
-     * @param EventSubscriberInterface $guestCustomerSubscriber
-     */
-    public function __construct($dataClass, array $validationGroups, EventSubscriberInterface $guestCustomerSubscriber)
-    {
-        parent::__construct($dataClass, $validationGroups);
-
-        $this->guestCustomerSubscriber = $guestCustomerSubscriber;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options = [])
@@ -48,8 +31,6 @@ class CustomerGuestType extends AbstractResourceType
             ->add('email', 'email', [
                 'label' => 'sylius.form.customer.email',
             ])
-            ->addEventSubscriber($this->guestCustomerSubscriber)
-            ->setDataLocked(false)
         ;
     }
 

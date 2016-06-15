@@ -10,16 +10,19 @@ Feature: Reviews
             | beth@foo.com   |
             | martha@foo.com |
             | rick@foo.com   |
+        And there are following customers:
+            | email           |
+            | jon@example.com |
         And the following products exist:
             | name            | price | average rating |
             | Black T-Shirt   | 18.99 | 4              |
             | Sylius Tee      | 12.99 | 5              |
             | Symfony T-Shirt | 15.00 | 1              |
         And there are following reviews:
-            | title      | rating | comment               | author         | product         | subject type | status |
-            | Really bad | 1      | Lorem ipsum dolor sit | beth@foo.com   | Symfony T-Shirt | product      |        |
-            | Very good  | 4      | Lorem ipsum dolor sit | martha@foo.com | Black T-Shirt   | product      |        |
-            | Awesome    | 5      | Lorem ipsum dolor sit | rick@foo.com   | Sylius Tee      | product      | new    |
+            | title      | rating | comment               | author          | product         | subject type | status |
+            | Really bad | 1      | Lorem ipsum dolor sit | beth@foo.com    | Symfony T-Shirt | product      |        |
+            | Very good  | 4      | Lorem ipsum dolor sit | jon@example.com | Black T-Shirt   | product      |        |
+            | Awesome    | 5      | Lorem ipsum dolor sit | rick@foo.com    | Sylius Tee      | product      | new    |
         And there is default currency configured
         And there is default channel configured
         And I am logged in as administrator

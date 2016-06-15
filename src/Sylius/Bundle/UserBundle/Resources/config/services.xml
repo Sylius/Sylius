@@ -40,8 +40,6 @@
         <parameter key="sylius.form.type.user_change_password.class">Sylius\Bundle\UserBundle\Form\Type\UserChangePasswordType</parameter>
         <parameter key="sylius.form.type.gender.class">Sylius\Bundle\UserBundle\Form\Type\GenderType</parameter>
 
-        <parameter key="sylius.form.subscriber.guest_customer.class">Sylius\Bundle\UserBundle\Form\EventListener\GuestCustomerFormSubscriber</parameter>
-
         <parameter key="sylius.listener.default_username.class">Sylius\Bundle\UserBundle\EventListener\DefaultUsernameORMListener</parameter>
         <parameter key="sylius.listener.customer_aware.class">Sylius\Bundle\UserBundle\EventListener\CustomerAwareListener</parameter>
         <parameter key="sylius.listener.user_delete.class">Sylius\Bundle\UserBundle\EventListener\UserDeleteListener</parameter>
@@ -187,13 +185,6 @@
 
         <!-- Form event subscribers-->
         <service id="sylius.form.event_subscriber.add_user_type" class="%sylius.form.event_subscriber.add_user_type.class%" />
-
-        <!-- Form listener -->
-        <service id="sylius.form.subscriber.guest_customer" class="%sylius.form.subscriber.guest_customer.class%">
-            <argument type="service" id="sylius.repository.customer" />
-            <argument type="service" id="sylius.factory.customer" />
-            <argument type="service" id="sylius.context.customer" />
-        </service>
 
         <!-- Validators -->
         <service id="validator.unique.registered_user" class="%sylius.user.validator.unique_registered_user.class%">

@@ -14,6 +14,7 @@ namespace spec\Sylius\Bundle\ReviewBundle\Form\Type;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Bundle\UserBundle\Form\EventSubscriber\AddCustomerGuestTypeFormSubscriber;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -47,12 +48,6 @@ class ReviewTypeSpec extends ObjectBehavior
         ;
 
         $builder
-            ->add('author', 'sylius_customer_guest', Argument::cetera())
-            ->willReturn($builder)
-            ->shouldBeCalled()
-        ;
-
-        $builder
             ->add('title', 'text', Argument::cetera())
             ->willReturn($builder)
             ->shouldBeCalled()
@@ -71,8 +66,15 @@ class ReviewTypeSpec extends ObjectBehavior
     {
         $resolver->setDefaults(
             [
-                'rating_steps' => 5,
+                'data_class' => 'dataClass',
                 'validation_groups' => ['validation_group'],
+            ]
+        )->shouldBeCalled();
+
+        $resolver->setDefaults(
+            [
+                'rating_steps' => 5,
+                'cascade_validation' => true,
             ]
         )->shouldBeCalled();
 

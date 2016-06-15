@@ -13,6 +13,7 @@ namespace Sylius\Component\Review\Factory;
 
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Review\Model\ReviewerInterface;
 
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
@@ -58,6 +59,17 @@ class ReviewFactory implements ReviewFactoryInterface
 
         $review = $this->factory->createNew();
         $review->setReviewSubject($subject);
+
+        return $review;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createForSubjectWithReviewer($subjectId, ReviewerInterface $reviewer = null)
+    {
+        $review = $this->createForSubject($subjectId);
+        $review->setAuthor($reviewer);
 
         return $review;
     }

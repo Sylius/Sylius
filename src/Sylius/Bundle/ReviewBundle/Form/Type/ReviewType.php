@@ -51,9 +51,6 @@ class ReviewType extends AbstractResourceType
                 'expanded' => true,
                 'multiple' => false,
             ])
-            ->add('author', 'sylius_customer_guest', [
-                'label' => false,
-            ])
             ->add('title', 'text', [
                 'label' => 'sylius.form.review.title',
             ])
@@ -68,9 +65,11 @@ class ReviewType extends AbstractResourceType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
+        parent::configureOptions($resolver);
+
         $resolver->setDefaults([
             'rating_steps' => 5,
-            'validation_groups' => $this->validationGroups,
+            'cascade_validation' => true,
         ]);
     }
 

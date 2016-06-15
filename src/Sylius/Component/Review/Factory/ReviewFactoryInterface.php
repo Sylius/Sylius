@@ -13,6 +13,7 @@ namespace Sylius\Component\Review\Factory;
 
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Review\Model\ReviewableInterface;
+use Sylius\Component\Review\Model\ReviewerInterface;
 use Sylius\Component\Review\Model\ReviewInterface;
 
 /**
@@ -26,4 +27,12 @@ interface ReviewFactoryInterface extends FactoryInterface
      * @return ReviewInterface
      */
     public function createForSubject($subjectId);
+
+    /**
+     * @param mixed $subjectId
+     * @param ReviewerInterface|null $reviewer
+     * 
+     * @return ReviewInterface
+     */
+    public function createForSubjectWithReviewer($subjectId, ReviewerInterface $reviewer = null);
 }

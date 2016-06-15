@@ -42,5 +42,10 @@ interface AddressingPageInterface extends SymfonyPageInterface
      */
     public function specifyShippingAddress(AddressInterface $shippingAddress);
 
+    /**
+     * @param string $email
+     */
+    public function specifyEmail($email);
+
     public function nextStep();
 }

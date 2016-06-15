@@ -17,7 +17,7 @@
             </label>
         {% endfor %}
         </div>
-        {% if not is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+        {% if form.author is defined %}
             {{ form_row(form.author) }}
         {% endif %}
 
