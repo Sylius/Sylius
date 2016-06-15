@@ -8,6 +8,7 @@ commands=(
     validate-behat-features
     test-phpspec
     test-phpunit
+    test-fixtures
     test-behat-without-javascript
     test-behat-with-javascript
 )
