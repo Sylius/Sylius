@@ -1,11 +1,9 @@
 {% block subject %}
-    {% autoescape false %}
-    {{ 'email.order_comment.subject'|trans }}
-    {% endautoescape %}
+    {{ 'sylius.email.order_comment.name'|trans }} {{ order.number }}
 {% endblock %}
 
 {% block body %}
-    <h1>{{ 'email.order_comment.header'|trans }}</h1>
+    <h1>{{ 'sylius.ui.order'|trans }} {{ 'sylius.ui.number'|trans~':' }}{{ order.number }}</h1>
     {% if comment %}
         <h3>{{ comment.comment }}</h3>
     {% endif %}
