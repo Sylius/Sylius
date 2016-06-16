@@ -6,6 +6,7 @@ Feature: Order addressing validation
 
     Background:
         Given the store operates on a single channel in "France"
+        And the store ships everywhere for free
         And the store has a product "PHP T-Shirt" priced at "$19.99"
         And I am logged in customer
 

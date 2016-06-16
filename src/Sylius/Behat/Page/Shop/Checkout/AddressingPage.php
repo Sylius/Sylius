@@ -47,6 +47,23 @@ class AddressingPage extends SymfonyPage implements AddressingPageInterface
 
     /**
      * {@inheritdoc}
+     */
+    public function checkInvalidCredentialsValidation()
+    {
+        $this->getElement('login_password')->waitFor(5, function () {
+            $validationElement = $this->getElement('login_password')->getParent()->find('css', '.red.label');
+            if (null === $validationElement) {
+                return false;
+            }
+
+            return $validationElement->isVisible();
+        });
+
+        return $this->checkValidationMessageFor('login_password', 'Invalid credentials.');
+    }
+
+    /**
+     * {@inheritdoc}
      *
      * @throws ElementNotFoundException
      */
@@ -99,6 +116,41 @@ class AddressingPage extends SymfonyPage implements AddressingPageInterface
         $this->getElement('customer_email')->setValue($email);
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function canSignIn()
+    {
+        return $this->isSignInActionAvailable();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function signIn()
+    {
+        $this->isSignInActionAvailable();
+        try {
+            $this->getElement('login_button')->press();
+        } catch (ElementNotFoundException $elementNotFoundException) {
+            $this->getElement('login_button')->click();
+        }
+
+        $this->waitForLoginAction();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function specifyPassword($password)
+    {
+        $this->getDocument()->waitFor(5, function () {
+            return $this->getElement('login_password')->isVisible();
+        });
+
+        $this->getElement('login_password')->setValue($password);
+    }
+
     public function nextStep()
     {
         $this->getDocument()->pressButton('Next');
@@ -124,6 +176,8 @@ class AddressingPage extends SymfonyPage implements AddressingPageInterface
             'shipping_country' => '#sylius_shop_checkout_addressing_shippingAddress_countryCode',
             'shipping_city' => '#sylius_shop_checkout_addressing_shippingAddress_city',
             'shipping_postcode' => '#sylius_shop_checkout_addressing_shippingAddress_postcode',
+            'login_password' => 'input[type=\'password\']',
+            'login_button' => '#sylius-api-login-submit',
         ]);
     }
 
@@ -154,5 +208,22 @@ class AddressingPage extends SymfonyPage implements AddressingPageInterface
         }
 
         return $element;
+    }
+
+    /**
+     * @return bool
+     */
+    private function isSignInActionAvailable()
+    {
+        return $this->getDocument()->waitFor(5, function () {
+            return $this->hasElement('login_button');
+        });
+    }
+
+    private function waitForLoginAction()
+    {
+        $this->getDocument()->waitFor(5, function () {
+            return !$this->hasElement('login_password');
+        });
     }
 }

@@ -1,6 +1,19 @@
 <div id="sylius-shipping-address">
     {% if form.customer.email is defined %}
-        {{ form_row(form.customer.email) }}
+        <div class="one field" id="sylius-api-login">
+            {{ form_row(form.customer.email) }}
+            <div class="ui action input" id="sylius-api-login-form">
+                <a class="ui blue labeled icon button" href="#" id="sylius-api-login-submit">
+                    <i class="user icon"></i>
+                    {{ 'sylius.ui.sign_in'|trans }}
+                </a>
+                <div class="inline field">
+                    <input type="password" placeholder="{{ 'sylius.ui.password'|trans }}">
+                    <div class="ui left pointing red basic label" id="sylius-api-validation-error">
+                    </div>
+                </div>
+            </div>
+        </div>
     {% endif %}
     {% include '@SyliusShop/Checkout/Form/_address.html.twig' with {'form': form.shippingAddress, 'order': order} %}
     {{ form_row(form.differentBillingAddress, {'attr': {'data-toggles': 'sylius-billing-address'}}) }}

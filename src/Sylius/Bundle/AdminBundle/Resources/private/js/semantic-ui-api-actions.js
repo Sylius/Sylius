@@ -9,8 +9,8 @@
 
 (function ($) {
     'use strict';
-    
+
     $.fn.api.settings.api = {
-        'get taxons' : '/admin/api/taxons',
+        'get taxons' : '/admin/api/taxons'
     };
 })(jQuery);
