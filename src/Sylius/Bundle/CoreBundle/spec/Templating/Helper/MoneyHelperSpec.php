@@ -49,7 +49,7 @@ class MoneyHelperSpec extends ObjectBehavior
         MoneyFormatterInterface $moneyFormatter
     ) {
         $localeContext->getDefaultLocale()->willReturn('fr_FR');
-        $currencyContext->getCurrency()->willReturn('EUR');
+        $currencyContext->getCurrencyCode()->willReturn('EUR');
         $moneyFormatter->format(500, 'EUR', 'fr_FR')->willReturn('€5.00');
 
         $this->formatAmount(500)->shouldReturn('€5.00');

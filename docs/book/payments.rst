@@ -32,7 +32,7 @@ All these properties are easily accessible through simple API:
 
     <?php
 
-    echo $payment->getAmount() . $payment->getCurrency();
+    echo $payment->getAmount() . $payment->getCurrencyCode();
 
     $order = $payment->getOrder(); // Get the order.
 

@@ -16,6 +16,14 @@
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
                                         http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
 
+    <class name="Sylius\Component\Payment\Model\Payment">
+        <property name="currency">
+            <constraint name="Currency">
+                <option name="message">sylius.payment.currency_code.not_valid</option>
+            </constraint>
+        </property>
+    </class>
+
     <class name="Sylius\Component\Payment\Model\PaymentMethod">
         <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity" >
             <option name="fields">code</option>

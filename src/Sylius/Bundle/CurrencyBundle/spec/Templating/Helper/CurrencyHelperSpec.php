@@ -57,7 +57,7 @@ class CurrencyHelperSpec extends ObjectBehavior
         CurrencyContextInterface $currencyContext,
         CurrencyConverterInterface $converter
     ) {
-        $currencyContext->getCurrency()->willReturn('PLN');
+        $currencyContext->getCurrencyCode()->willReturn('PLN');
 
         $converter->convertFromBase(15, 'USD')->willReturn(19);
         $converter->convertFromBase(2500, 'USD')->willReturn(1913);
@@ -75,7 +75,7 @@ class CurrencyHelperSpec extends ObjectBehavior
         CurrencyConverterInterface $converter,
         MoneyFormatterInterface $moneyFormatter
     ) {
-        $currencyContext->getCurrency()->willReturn('PLN');
+        $currencyContext->getCurrencyCode()->willReturn('PLN');
 
         $converter->convertFromBase(15, 'USD')->willReturn(19);
         $converter->convertFromBase(2500, 'USD')->willReturn(1913);

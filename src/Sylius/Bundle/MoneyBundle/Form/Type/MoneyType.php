@@ -29,16 +29,16 @@ class MoneyType extends AbstractType
      *
      * @var string
      */
-    private $currency;
+    private $currencyCode;
 
     /**
      * Constructor.
      *
-     * @param string $currency
+     * @param string $currencyCode
      */
-    public function __construct($currency)
+    public function __construct($currencyCode)
     {
-        $this->currency = $currency;
+        $this->currencyCode = $currencyCode;
     }
 
     /**
@@ -73,7 +73,7 @@ class MoneyType extends AbstractType
     {
         $resolver
             ->setDefaults([
-                'currency' => $this->currency,
+                'currency' => $this->currencyCode,
                 'divisor' => 100,
             ])
         ;

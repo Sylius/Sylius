@@ -81,12 +81,12 @@ class OrderPaymentListenerSpec extends ObjectBehavior
         $order->hasPayments()->willReturn(true);
         $order->getPayments()->willReturn($payments);
         $order->getTotal()->willReturn(1000);
-        $order->getCurrency()->willReturn('USD');
+        $order->getCurrencyCode()->willReturn('USD');
 
         $payments->last()->willReturn($payment);
 
         $payment->setAmount(1000)->shouldBeCalled();
-        $payment->setCurrency('USD')->shouldBeCalled();
+        $payment->setCurrencyCode('USD')->shouldBeCalled();
 
         $this->updateOrderPayment($event);
     }

@@ -44,7 +44,7 @@ class PaymentProcessor implements PaymentProcessorInterface
         }
 
         /** @var $payment PaymentInterface */
-        $payment = $this->paymentFactory->createWithAmountAndCurrency($order->getTotal(), $order->getCurrency());
+        $payment = $this->paymentFactory->createWithAmountAndCurrencyCode($order->getTotal(), $order->getCurrencyCode());
         $this->setPaymentMethodIfNeeded($order, $payment);
 
         $order->addPayment($payment);

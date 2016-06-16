@@ -9,7 +9,7 @@
                         <span class="pull-right">
                             {{ misc.state_label(payment.state, 'payment') }}
                         </span>
-                        {{ payment.method }} - {{ payment.amount|sylius_price(payment.currency) }}
+                        {{ payment.method }} - {{ payment.amount|sylius_price(payment.currencyCode) }}
                     </a>
                     {% if hide_form|default(false) is same as(false) %}
                         {{ misc.payment_form(payment) }}

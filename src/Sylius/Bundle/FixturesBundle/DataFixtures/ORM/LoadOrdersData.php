@@ -61,8 +61,8 @@ class LoadOrdersData extends DataFixture
 
             $this->createShipment($order);
 
-            $order->setCurrency($this->faker->randomElement(array_keys($currencyExchangeRates)));
-            $order->setExchangeRate($currencyExchangeRates[$order->getCurrency()]);
+            $order->setCurrencyCode($this->faker->randomElement(array_keys($currencyExchangeRates)));
+            $order->setExchangeRate($currencyExchangeRates[$order->getCurrencyCode()]);
             $order->setShippingAddress($this->createAddress());
             $order->setBillingAddress($this->createAddress());
             $order->setCreatedAt($this->faker->dateTimeBetween('1 year ago', 'now'));
@@ -103,7 +103,7 @@ class LoadOrdersData extends DataFixture
         $payment->setOrder($order);
         $payment->setMethod($this->getReference('Sylius.PaymentMethod.offline'));
         $payment->setAmount($order->getTotal());
-        $payment->setCurrency($order->getCurrency());
+        $payment->setCurrencyCode($order->getCurrencyCode());
         $payment->setState(null === $state ? $this->getPaymentState() : $state);
         $payment->setDetails($this->faker->creditCardDetails());
 

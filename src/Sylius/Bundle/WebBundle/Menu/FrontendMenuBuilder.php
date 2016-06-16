@@ -226,7 +226,7 @@ class FrontendMenuBuilder extends MenuBuilder
 
             $menu->addChild($code, [
                 'route' => 'sylius_currency_change',
-                'routeParameters' => ['currency' => $code],
+                'routeParameters' => ['currencyCode' => $code],
                 'linkAttributes' => ['title' => $this->translate('sylius.frontend.menu.currency', ['%currency%' => $code])],
             ])->setLabel(Intl::getCurrencyBundle()->getCurrencySymbol($code));
         }

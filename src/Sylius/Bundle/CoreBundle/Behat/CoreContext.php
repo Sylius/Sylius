@@ -148,8 +148,8 @@ class CoreContext extends DefaultContext
 
             $this->createPayment($order, $paymentMethod);
 
-            $currency = isset($data['currency']) ? trim($data['currency']) : 'EUR';
-            $order->setCurrency($currency);
+            $currencyCode = isset($data['currency_code']) ? trim($data['currency_code']) : 'EUR';
+            $order->setCurrencyCode($currencyCode);
 
             if (isset($data['exchange_rate']) && '' !== trim($data['exchange_rate'])) {
                 $order->setExchangeRate($data['exchange_rate']);
@@ -645,7 +645,7 @@ class CoreContext extends DefaultContext
         $payment->setOrder($order);
         $payment->setMethod($method);
         $payment->setAmount($order->getTotal());
-        $payment->setCurrency($order->getCurrency() ?: 'EUR');
+        $payment->setCurrencyCode($order->getCurrencyCode() ?: 'EUR');
         $payment->setState(PaymentInterface::STATE_COMPLETED);
 
         $order->addPayment($payment);

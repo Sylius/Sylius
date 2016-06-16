@@ -51,16 +51,16 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function isLocaleChosen($language);
 
     /**
-     * @param string $currency
+     * @param string $currencyCode
      */
-    public function chooseCurrency($currency);
+    public function chooseCurrency($currencyCode);
 
     /**
-     * @param string $currency
+     * @param string $currencyCode
      *
      * @return bool
      */
-    public function isCurrencyChosen($currency);
+    public function isCurrencyChosen($currencyCode);
 
     /**
      * @param string $shippingMethod

@@ -64,13 +64,13 @@ class CurrencyContext extends BaseCurrencyContext
         $this->customerManager = $customerManager;
         $this->channelContext = $channelContext;
 
-        parent::__construct($storage, $this->getDefaultCurrency());
+        parent::__construct($storage, $this->getDefaultCurrencyCode());
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getDefaultCurrency()
+    public function getDefaultCurrencyCode()
     {
         return $this->settingsManager->load('sylius_general')->get('currency');
     }
@@ -78,29 +78,29 @@ class CurrencyContext extends BaseCurrencyContext
     /**
      * {@inheritdoc}
      */
-    public function getCurrency()
+    public function getCurrencyCode()
     {
-        if ((null !== $customer = $this->customerContext->getCustomer()) && null !== $customer->getCurrency()) {
-            return $customer->getCurrency();
+        if ((null !== $customer = $this->customerContext->getCustomer()) && null !== $customer->getCurrencyCode()) {
+            return $customer->getCurrencyCode();
         }
 
         $channel = $this->channelContext->getChannel();
 
-        return $this->storage->getData($this->getStorageKey($channel->getCode()), $this->defaultCurrency);
+        return $this->storage->getData($this->getStorageKey($channel->getCode()), $this->defaultCurrencyCode);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setCurrency($currency)
+    public function setCurrencyCode($currencyCode)
     {
         if (null === $customer = $this->customerContext->getCustomer()) {
             $channel = $this->channelContext->getChannel();
 
-            return $this->storage->setData($this->getStorageKey($channel->getCode()), $currency);
+            return $this->storage->setData($this->getStorageKey($channel->getCode()), $currencyCode);
         }
 
-        $customer->setCurrency($currency);
+        $customer->setCurrencyCode($currencyCode);
 
         $this->customerManager->persist($customer);
         $this->customerManager->flush();

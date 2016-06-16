@@ -22,15 +22,15 @@ interface CurrencyContextInterface
     /**
      * @return string
      */
-    public function getDefaultCurrency();
+    public function getDefaultCurrencyCode();
 
     /**
      * @return string
      */
-    public function getCurrency();
+    public function getCurrencyCode();
 
     /**
-     * @param string $currency
+     * @param string $currencyCode
      */
-    public function setCurrency($currency);
+    public function setCurrencyCode($currencyCode);
 }

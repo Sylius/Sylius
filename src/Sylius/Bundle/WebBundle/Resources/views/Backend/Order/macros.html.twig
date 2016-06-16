@@ -44,14 +44,11 @@
             <td>
                 <p>{{ order.customer.fullName }} <br><a href="{{ path('sylius_backend_customer_show', {'id': order.customer.id}) }}">{{ order.customer.email }}</a></p>
             </td>
-            <td>{{ order.total|sylius_price(order.currency) }}</td>
+            <td>{{ order.total|sylius_price(order.currencyCode) }}</td>
             <td>{{ order.additionalInformation }}</td>
             <td>
                 <div class="pull-right">
                 {{ buttons.show(path('sylius_backend_order_show', {'id': order.id})) }}
-                {% if not order.shippingState is constant('Sylius\\Component\\Shipping\\Model\\ShipmentInterface::STATE_SHIPPED') %}
-                    {{ buttons.edit(path('sylius_backend_order_update', {'id': order.id})) }}
-                {% endif %}
                 {{ buttons.delete(path('sylius_backend_order_delete', {'id': order.id})) }}
                 </div>
             </td>
@@ -102,7 +99,7 @@
                     {{ order.customer.email }}
                 </a>
             </td>
-            <td>{{ order.total|sylius_price(order.currency) }}</td>
+            <td>{{ order.total|sylius_price(order.currencyCode) }}</td>
         </tr>
         {% endfor %}
     </tbody>

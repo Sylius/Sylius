@@ -17,7 +17,6 @@ use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CouponInterface;
 use Sylius\Component\Core\OrderProcessing\OrderRecalculatorInterface;
-use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -197,7 +196,7 @@ final class OrderContext implements Context
         $this->orderShipmentFactory->processOrderShipment($order);
         $order->getShipments()->first()->setMethod($shippingMethod);
 
-        $payment = $this->paymentFactory->createWithAmountAndCurrency($order->getTotal(), $order->getCurrency());
+        $payment = $this->paymentFactory->createWithAmountAndCurrencyCode($order->getTotal(), $order->getCurrencyCode());
         $payment->setMethod($paymentMethod);
 
         $order->addPayment($payment);
@@ -225,7 +224,7 @@ final class OrderContext implements Context
 
         $this->orderRecalculator->recalculate($order);
 
-        $payment = $this->paymentFactory->createWithAmountAndCurrency($order->getTotal(), $order->getCurrency());
+        $payment = $this->paymentFactory->createWithAmountAndCurrencyCode($order->getTotal(), $order->getCurrencyCode());
         $payment->setMethod($paymentMethod);
 
         $order->addPayment($payment);
@@ -465,7 +464,7 @@ final class OrderContext implements Context
         $order->setCustomer($customer);
         $order->setNumber($number);
         $order->setChannel((null !== $channel) ? $channel : $this->sharedStorage->get('channel'));
-        $order->setCurrency((null !== $currencyCode) ? $currencyCode : $this->sharedStorage->get('currency')->getCode());
+        $order->setCurrencyCode((null !== $currencyCode) ? $currencyCode : $this->sharedStorage->get('currency')->getCode());
         $order->complete();
 
         return $order;

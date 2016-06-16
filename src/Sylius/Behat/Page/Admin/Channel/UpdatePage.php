@@ -59,17 +59,17 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function chooseCurrency($currency)
+    public function chooseCurrency($currencyCode)
     {
-        $this->getDocument()->selectFieldOption('Currencies', $currency);
+        $this->getDocument()->selectFieldOption('Currencies', $currencyCode);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function isCurrencyChosen($currency)
+    public function isCurrencyChosen($currencyCode)
     {
-        return $this->getElement('currencies')->find('named', array('option', $currency))->hasAttribute('selected');
+        return $this->getElement('currencies')->find('named', array('option', $currencyCode))->hasAttribute('selected');
     }
 
     /**

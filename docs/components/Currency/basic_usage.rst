@@ -48,14 +48,14 @@ In this example let's use the default :ref:`component_storage_session-storage`.
    $session->start();
    $sessionStorage = new SessionStorage($session);
 
-   $currency = 'USD'; // The currency code which will be used by default in this context.
+   $currencyCode = 'USD'; // The currency code which will be used by default in this context.
 
-   $currencyContext = new CurrencyContext($sessionStorage, $currency);
+   $currencyContext = new CurrencyContext($sessionStorage, $currencyCode);
 
-   $currencyContext->getDefaultCurrency(); // Returns 'USD'.
-   $currencyContext->getCurrency('GBP'); // Returns 'USD' as the given code is not in storage.
-   $currencyContext->setCurrency('GBP');
-   $currencyContext->getCurrency('GBP'); // Returns 'GBP' for now it's available in the storage.
+   $currencyContext->getDefaultCurrencyCode(); // Returns 'USD'.
+   $currencyContext->getCurrencyCode('GBP'); // Returns 'USD' as the given code is not in storage.
+   $currencyContext->setCurrencyCode('GBP');
+   $currencyContext->getCurrencyCode('GBP'); // Returns 'GBP' for now it's available in the storage.
 
 Be aware that setting the default currency is done only once while creating the context,
 afterwards you cannot change it.

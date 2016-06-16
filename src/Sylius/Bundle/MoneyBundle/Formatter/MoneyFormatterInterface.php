@@ -17,10 +17,10 @@ interface MoneyFormatterInterface
 {
     /**
      * @param int $amount
-     * @param string $currency
+     * @param string $currencyCode
      * @param string $locale
      *
      * @return string
      */
-    public function format($amount, $currency, $locale = 'en');
+    public function format($amount, $currencyCode, $locale = 'en');
 }

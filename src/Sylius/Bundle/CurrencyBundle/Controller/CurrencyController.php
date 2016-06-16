@@ -23,15 +23,15 @@ class CurrencyController extends ResourceController
 {
     /**
      * @param Request $request
-     * @param string  $currency
+     * @param string $currencyCode
      *
      * @return RedirectResponse
      */
-    public function changeAction(Request $request, $currency)
+    public function changeAction(Request $request, $currencyCode)
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
-        $this->getCurrencyContext()->setCurrency($currency);
+        $this->getCurrencyContext()->setCurrencyCode($currencyCode);
 
         return $this->redirectHandler->redirectToReferer($configuration);
     }

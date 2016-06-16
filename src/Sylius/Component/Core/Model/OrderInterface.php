@@ -118,14 +118,12 @@ interface OrderInterface extends
     /**
      * @return string
      */
-    public function getCurrency();
+    public function getCurrencyCode();
 
     /**
      * @param string
-     *
-     * @return OrderInterface
      */
-    public function setCurrency($currency);
+    public function setCurrencyCode($currencyCode);
 
     /**
      * @return float

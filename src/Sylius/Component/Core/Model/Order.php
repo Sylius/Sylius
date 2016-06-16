@@ -21,6 +21,7 @@ use Sylius\Component\Payment\Model\PaymentInterface as BasePaymentInterface;
 use Sylius\Component\Promotion\Model\CouponInterface as BaseCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface as BasePromotionInterface;
 use Sylius\Component\User\Model\CustomerInterface as BaseCustomerInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -61,7 +62,7 @@ class Order extends Cart implements OrderInterface
     /**
      * @var string
      */
-    protected $currency;
+    protected $currencyCode;
 
     /**
      * @var float
@@ -386,17 +387,19 @@ class Order extends Cart implements OrderInterface
     /**
      * {@inheritdoc}
      */
-    public function getCurrency()
+    public function getCurrencyCode()
     {
-        return $this->currency;
+        return $this->currencyCode;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setCurrency($currency)
+    public function setCurrencyCode($currencyCode)
     {
-        $this->currency = $currency;
+        Assert::string($currencyCode);
+
+        $this->currencyCode = $currencyCode;
     }
 
     /**

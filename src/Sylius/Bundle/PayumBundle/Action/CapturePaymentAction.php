@@ -44,7 +44,7 @@ class CapturePaymentAction extends GatewayAwareAction
                 $payumPayment = new PayumPayment();
                 $payumPayment->setNumber($order->getNumber());
                 $payumPayment->setTotalAmount($order->getTotal());
-                $payumPayment->setCurrencyCode($order->getCurrency());
+                $payumPayment->setCurrencyCode($order->getCurrencyCode());
                 $payumPayment->setClientEmail($order->getCustomer()->getEmail());
                 $payumPayment->setClientId($order->getCustomer()->getId());
                 $payumPayment->setDescription(sprintf(

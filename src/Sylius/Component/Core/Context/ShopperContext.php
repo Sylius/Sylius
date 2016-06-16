@@ -72,7 +72,7 @@ final class ShopperContext implements ShopperContextInterface
      */
     public function getCurrencyCode()
     {
-        return $this->currencyContext->getCurrency();
+        return $this->currencyContext->getCurrencyCode();
     }
 
     /**

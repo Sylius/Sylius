@@ -30,7 +30,7 @@
         {% endif %}
     </td>
     <td class="right aligned">
-        <span class="sylius-unit-price">{{ item.unitPrice|sylius_price(cart.currency) }}</span>
+        <span class="sylius-unit-price">{{ item.unitPrice|sylius_price(cart.currencyCode) }}</span>
     </td>
     <td class="center aligned">
         {{ form_widget(item_form.quantity) }}

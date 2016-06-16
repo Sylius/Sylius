@@ -229,15 +229,15 @@ class OrderSpec extends ObjectBehavior
         $this->getAdjustments(AdjustmentInterface::TAX_ADJUSTMENT)->count()->shouldReturn(0); //tax adjustment has been removed
     }
 
-    function it_should_not_have_currency_defined_by_default()
+    function it_should_not_have_currency_code_defined_by_default()
     {
-        $this->getCurrency()->shouldReturn(null);
+        $this->getCurrencyCode()->shouldReturn(null);
     }
 
-    function it_should_allow_defining_currency()
+    function it_should_allow_defining_currency_code()
     {
-        $this->setCurrency('PLN');
-        $this->getCurrency()->shouldReturn('PLN');
+        $this->setCurrencyCode('PLN');
+        $this->getCurrencyCode()->shouldReturn('PLN');
     }
 
     function it_has_default_exchange_rate_equal_to_1()

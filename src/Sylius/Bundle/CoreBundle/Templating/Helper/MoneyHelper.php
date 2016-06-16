@@ -54,11 +54,11 @@ class MoneyHelper implements MoneyHelperInterface
     /**
      * {@inheritdoc}
      */
-    public function formatAmount($amount, $currency = null, $locale = null)
+    public function formatAmount($amount, $currencyCode = null, $locale = null)
     {
         $locale = $locale ?: $this->localeContext->getDefaultLocale();
-        $currency = $currency ?: $this->currencyContext->getCurrency();
+        $currencyCode = $currencyCode ?: $this->currencyContext->getCurrencyCode();
 
-        return $this->moneyFormatter->format($amount, $currency, $locale);
+        return $this->moneyFormatter->format($amount, $currencyCode, $locale);
     }
 }

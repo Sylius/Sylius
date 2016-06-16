@@ -55,8 +55,8 @@ class PaymentFactorySpec extends ObjectBehavior
         $paymentFactory->createNew()->willReturn($payment);
 
         $payment->setAmount(1234)->shouldBeCalled();
-        $payment->setCurrency('EUR')->shouldBeCalled();
+        $payment->setCurrencyCode('EUR')->shouldBeCalled();
 
-        $this->createWithAmountAndCurrency(1234, 'EUR');
+        $this->createWithAmountAndCurrencyCode(1234, 'EUR');
     }
 }

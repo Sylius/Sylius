@@ -14,26 +14,6 @@ sylius_backend_order_index:
             paginate: 20
             sortable: true
 
-sylius_backend_order_create:
-    path: /new
-    methods: [GET, POST]
-    defaults:
-        _controller: sylius.controller.order:createAction
-        _sylius:
-            template: SyliusWebBundle:Backend/Order:create.html.twig
-            redirect: sylius_backend_order_show
-            form:     sylius_advanced_order
-
-sylius_backend_order_update:
-    path: /{id}/edit
-    methods: [GET, PUT]
-    defaults:
-        _controller: sylius.controller.order:updateAction
-        _sylius:
-            template: SyliusWebBundle:Backend/Order:update.html.twig
-            redirect: sylius_backend_order_show
-            form:     sylius_advanced_order
-
 sylius_backend_order_revert:
     path: /{id}/revert/{version}
     methods: [PATCH]
