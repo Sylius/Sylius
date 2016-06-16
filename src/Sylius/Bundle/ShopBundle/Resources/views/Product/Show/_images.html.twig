@@ -1,15 +1,16 @@
 <a href="#" class="ui fluid image">
-    <img src="http://placehold.it/400x300" />
+    {% set path = product.image is not null ? product.image.path|imagine_filter('sylius_shop_product_large_thumbnail') : 'http://placehold.it/400x300' %}
+
+    <img src="{{ path }}" alt="" />
 </a>
+{% if product.images|length > 1 %}
 <div class="ui divider"></div>
 <div class="ui small images">
+    {% for image in product.images %}
+    {% set path = image.path is not null ? image.path|imagine_filter('sylius_shop_product_small_thumbnail') : 'http://placehold.it/200x200' %}
     <a href="#" class="ui image">
-        <img src="http://placehold.it/150x100" />
+        <img src="{{ path }}" />
     </a>
-    <a href="#" class="ui image">
-        <img src="http://placehold.it/150x100" />
-    </a>
-    <a href="#" class="ui image">
-        <img src="http://placehold.it/150x100" />
-    </a>
+    {% endfor %}
 </div>
+{% endif %}

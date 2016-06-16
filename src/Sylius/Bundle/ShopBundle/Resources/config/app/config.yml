@@ -1,0 +1,17 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+liip_imagine:
+    filter_sets:
+        sylius_shop_product_tiny_thumbnail:
+            filters:
+                thumbnail: { size: [64, 64], mode: outbound }
+        sylius_shop_product_small_thumbnail:
+            filters:
+                thumbnail: { size: [150, 112], mode: outbound }
+        sylius_shop_product_thumbnail:
+            filters:
+                thumbnail: { size: [260, 260], mode: outbound }
+        sylius_shop_product_large_thumbnail:
+            filters:
+                thumbnail: { size: [550, 412], mode: outbound }
