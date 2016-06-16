@@ -15,9 +15,8 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\OrderProcessing\InventoryHandlerInterface;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\GenericEvent;
-use Symfony\Component\PropertyAccess\PropertyAccess;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -29,6 +28,14 @@ class OrderInventoryListener
      * @var InventoryHandlerInterface
      */
     protected $inventoryHandler;
+
+    /**
+     * @var array
+     */
+    private static $orderStateToInventoryUnitState = [
+        OrderInterface::STATE_PENDING => InventoryUnitInterface::STATE_ONHOLD,
+        OrderInterface::STATE_SHIPPED => InventoryUnitInterface::STATE_SOLD,
+    ];
 
     /**
      * @param InventoryHandlerInterface $inventoryHandler
@@ -43,9 +50,7 @@ class OrderInventoryListener
      */
     public function holdInventoryUnits(GenericEvent $event)
     {
-        $this->inventoryHandler->holdInventory(
-            $this->getOrder($event)
-        );
+        $this->inventoryHandler->holdInventory($this->getOrder($event));
     }
 
     /**
@@ -55,18 +60,13 @@ class OrderInventoryListener
     {
         $orderItem = $this->getItem($event);
 
-        $state = PropertyAccess::createPropertyAccessor()->getValue(
-            [
-                OrderInterface::STATE_PENDING => InventoryUnitInterface::STATE_ONHOLD,
-                OrderInterface::STATE_SHIPPED => InventoryUnitInterface::STATE_SOLD,
-            ],
-            sprintf('[%s]', $orderItem->getOrder()->getState())
-        );
+        $orderState = $orderItem->getOrder()->getState();
+        if (!isset(static::$orderStateToInventoryUnitState[$orderState])) {
+            return;
+        }
 
-        if (null !== $state) {
-            foreach ($orderItem->getUnits() as $itemUnit) {
-                $itemUnit->setInventoryState($state);
-            }
+        foreach ($orderItem->getUnits() as $itemUnit) {
+            $itemUnit->setInventoryState(static::$orderStateToInventoryUnitState[$orderState]);
         }
     }
 
@@ -74,19 +74,12 @@ class OrderInventoryListener
      * @param GenericEvent $event
      *
      * @return OrderInterface
-     *
-     * @throws UnexpectedTypeException
      */
     protected function getOrder(GenericEvent $event)
     {
         $order = $event->getSubject();
 
-        if (!$order instanceof OrderInterface) {
-            throw new UnexpectedTypeException(
-                $order,
-                OrderInterface::class
-            );
-        }
+        Assert::isInstanceOf($order, OrderInterface::class);
 
         return $order;
     }
@@ -95,19 +88,12 @@ class OrderInventoryListener
      * @param GenericEvent $event
      *
      * @return OrderItemInterface
-     *
-     * @throws UnexpectedTypeException
      */
     protected function getItem(GenericEvent $event)
     {
         $item = $event->getSubject();
 
-        if (!$item instanceof OrderItemInterface) {
-            throw new UnexpectedTypeException(
-                $item,
-                'Sylius\Component\Core\Model\OrderItemInterface'
-            );
-        }
+        Assert::isInstanceOf($item, OrderItemInterface::class);
 
         return $item;
     }
