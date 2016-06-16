@@ -17,6 +17,7 @@ use Sylius\Behat\Page\PageInterface;
 use Sylius\Behat\Page\Shop\Account\ChangePasswordPageInterface;
 use Sylius\Behat\Page\Shop\Account\DashboardPageInterface;
 use Sylius\Behat\Page\Shop\Account\Order\IndexPage;
+use Sylius\Behat\Page\Shop\Account\Order\IndexPageInterface;
 use Sylius\Behat\Page\Shop\Account\ProfileUpdatePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
@@ -44,7 +45,7 @@ final class AccountContext implements Context
     private $changePasswordPage;
 
     /**
-     * @var IndexPage
+     * @var IndexPageInterface
      */
     private $orderIndexPage;
 
@@ -267,8 +268,8 @@ final class AccountContext implements Context
     {
         Assert::same(
             1,
-            $this->orderIndexPage->countItems(),
-            '%s rows with orders should appear on page, %s rows has been found'
+            $this->orderIndexPage->countOrders(),
+            '%s rows with orders should appear on page, %s rows have been found.'
         );
     }
 

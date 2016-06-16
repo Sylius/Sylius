@@ -27,11 +27,10 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
     
     /**
      * @param CustomerInterface $customer
-     * @param array $sorting
      *
      * @return QueryBuilder
      */
-    public function createQueryBuilderWithCustomer(CustomerInterface $customer, array $sorting = []);
+    public function createByCustomerQueryBuilder(CustomerInterface $customer);
 
     /**
      * @param \DateTime $expiresAt

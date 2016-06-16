@@ -37,7 +37,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createQueryBuilderWithCustomer(CustomerInterface $customer, array $sorting = [])
+    public function createByCustomerQueryBuilder(CustomerInterface $customer)
     {
         $queryBuilder = $this->createQueryBuilder('o');
 
@@ -48,8 +48,6 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
             ->setParameter('customer', $customer)
         ;
 
-        $this->applySorting($queryBuilder, $sorting);
-
         return $queryBuilder;
     }
 
@@ -58,7 +56,8 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
      */
     public function createPaginatorByCustomer(CustomerInterface $customer, array $sorting = [])
     {
-        $queryBuilder = $this->createQueryBuilderWithCustomer($customer, $sorting);
+        $queryBuilder = $this->createByCustomerQueryBuilder($customer);
+        $this->applySorting($queryBuilder, $sorting);
 
         return $this->getPaginator($queryBuilder);
     }
@@ -68,7 +67,8 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
      */
     public function findByCustomer(CustomerInterface $customer, array $sorting = [])
     {
-        $queryBuilder = $this->createQueryBuilderWithCustomer($customer, $sorting);
+        $queryBuilder = $this->createByCustomerQueryBuilder($customer);
+        $this->applySorting($queryBuilder, $sorting);
 
         return $queryBuilder
             ->getQuery()
@@ -259,7 +259,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
      */
     public function countByCustomerAndPaymentState(CustomerInterface $customer, $state)
     {
-        $queryBuilder = $this->createQueryBuilderWithCustomer($customer);
+        $queryBuilder = $this->createByCustomerQueryBuilder($customer);
 
         $queryBuilder
             ->select('count(o.id)')

@@ -46,9 +46,17 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function countItems()
+    public function getRouteName()
     {
-        return $this->tableAccessor->countTableBodyRows($this->getElement('table'));
+        return 'sylius_shop_account_order_index';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function countOrders()
+    {
+        return $this->tableAccessor->countTableBodyRows($this->getElement('customer_orders'));
     }
 
     /**
@@ -58,7 +66,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     {
         try {
             $rows = $this->tableAccessor->getRowsWithFields(
-                $this->getElement('table'),
+                $this->getElement('customer_orders'),
                 ['number' => $number]
             );
 
@@ -72,18 +80,10 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
-    {
-        return 'sylius_shop_order_index';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'table' => '.table',
+            'customer_orders' => '#sylius-customer-orders',
         ]);
     }
 }

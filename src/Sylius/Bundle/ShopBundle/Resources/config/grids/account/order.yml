@@ -6,7 +6,7 @@ sylius_grid:
                 options:
                     class: "%sylius.model.order.class%"
                     repository:
-                        method: createQueryBuilderWithCustomer
+                        method: createByCustomerQueryBuilder
                         arguments: [expr:service('sylius.context.customer').getCustomer()]
             sorting:
                 completedAt: desc
@@ -22,19 +22,15 @@ sylius_grid:
                     label: sylius.ui.number
                     path: .
                     options:
-                        template: SyliusAdminBundle:Order/Field:number.html.twig
+                        template: SyliusShopBundle:Account/Order/Field:number.html.twig
                 total:
                     type: twig
                     label: sylius.ui.total
                     path: .
                     options:
-                        template: SyliusAdminBundle:Order/Field:total.html.twig
+                        template: SyliusShopBundle:Account/Order/Field:total.html.twig
                 state:
                     type: twig
                     label: sylius.ui.state
                     options:
-                        template: SyliusAdminBundle:Order/Field:state.html.twig
-            actions:
-                item:
-                    show:
-                        type: show
+                        template: SyliusShopBundle:Account/Order/Field:state.html.twig
