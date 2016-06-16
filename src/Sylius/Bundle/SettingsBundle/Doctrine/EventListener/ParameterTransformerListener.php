@@ -47,10 +47,11 @@ final class ParameterTransformerListener
      */
     public function postLoad(LifecycleEventArgs $event)
     {
+        $entityManager = $event->getEntityManager();
         $settings = $event->getObject();
 
         if ($settings instanceof SettingsInterface) {
-            $this->reverseTransform($settings);
+            $this->transform($settings, $entityManager);
         }
     }
 
