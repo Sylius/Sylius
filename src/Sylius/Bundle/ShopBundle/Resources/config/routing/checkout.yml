@@ -62,7 +62,9 @@ sylius_shop_checkout_payment:
             state_machine:
                 graph: sylius_order_checkout
                 transition: select_payment
-            redirect: sylius_shop_homepage
+            redirect:
+                route: sylius_shop_checkout_summary
+                parameters: []
 
 sylius_shop_checkout_summary:
     path: /summary

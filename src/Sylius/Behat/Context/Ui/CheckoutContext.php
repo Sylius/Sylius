@@ -191,7 +191,7 @@ final class CheckoutContext implements Context
     public function iSpecifiedTheShippingAddress(AddressInterface $address)
     {
         $this->addressingPage->open();
-        $this->addressingPage->specifyShippingAddress($address);
+        $this->iSpecifyTheShippingAddressAs($address);
         $this->iCompleteTheAddressingStep();
     }
 
@@ -414,6 +414,17 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Then I should be on the checkout summary step
+     */
+    public function iShouldBeOnTheCheckoutSummaryStep()
+    {
+        Assert::true(
+            $this->summaryPage->isOpen(),
+            'Checkout summary page should be opened, but it is not.'
+        );
+    }
+
+    /**
      * @Then I should see two cancelled payments and new one ready to be paid
      */
     public function iShouldSeeTwoCancelledPaymentsAndNewOneReadyToBePaid()
@@ -537,6 +548,17 @@ final class CheckoutContext implements Context
             $this->paymentPage->hasPaymentMethod($paymentMethodName),
             sprintf('Payment method "%s" should not be available but it does.', $paymentMethodName)
         );
+    }
+
+    /**
+     * @Given I complete order with :shippingMethod shipping method and :paymentMethod payment
+     */
+    public function iCompleteOrderWithShippingMethodAndPayment($shippingMethod, $paymentMethod)
+    {
+        $this->iSelectShippingMethod($shippingMethod);
+        $this->iCompleteTheShippingStep();
+        $this->iSelectPaymentMethod($paymentMethod);
+        $this->iCompleteThePaymentStep();
     }
 
     /**

@@ -11,23 +11,23 @@ Feature: Seeing order addresses on order summary page
         And the store allows paying offline
         And I am logged in customer
 
-    @todo
+    @ui
     Scenario: Seeing the same shipping and billing address on order summary
         Given I have product "Lannister Coat" in the cart
-        And I am at the checkout addressing step
-        When I specify the shipping address as "Ankh Morpork", "Frost Alley", "90210", "France" for "Jon Snow"
+        When I specified the shipping address as "Ankh Morpork", "Frost Alley", "90210", "France" for "Jon Snow"
         And I complete order with "Free" shipping method and "Offline" payment
-        Then I should be on the checkout summary page
+        Then I should be on the checkout summary step
         And I should see this shipping address as shipping and billing address
 
-    @todo
+    @ui
     Scenario: Seeing different shipping and billing address on order summary
         Given I have product "Lannister Coat" in the cart
         And I am at the checkout addressing step
         When I specify the shipping address as "Ankh Morpork", "Frost Alley", "90210", "France" for "Jon Snow"
         And I choose the different billing address
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "France" for "Eddard Stark"
+        And I complete the addressing step
         And I complete order with "Free" shipping method and "Offline" payment
-        Then I should be on the checkout summary page
+        Then I should be on the checkout summary step
         And I should see this shipping address as shipping address
         And I should see this billing address as billing address

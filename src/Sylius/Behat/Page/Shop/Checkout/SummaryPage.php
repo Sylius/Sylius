@@ -43,7 +43,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
      */
     public function hasBillingAddress(AddressInterface $address)
     {
-        $billingAddress = $this->getElement('billingAddress')->getText();
+        $billingAddress = $this->getElement('billing_address')->getText();
 
         return $this->isAddressValid($billingAddress, $address);
     }
@@ -75,7 +75,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
             $this->hasAddressPart($displayedAddress, $address->getStreet()) &&
             $this->hasAddressPart($displayedAddress, $address->getCity()) &&
             $this->hasAddressPart($displayedAddress, $address->getProvinceCode(), true) &&
-            $this->hasAddressPart($displayedAddress, Intl::getRegionBundle()->getCountryName($address->getCountryCode(), 'en')) &&
+            $this->hasAddressPart($displayedAddress, $this->getCountryName($address->getCountryCode())) &&
             $this->hasAddressPart($displayedAddress, $address->getPostcode())
         ;
     }
@@ -93,5 +93,15 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
         }
 
         return false !== strpos($address, $addressPart);
+    }
+
+    /**
+     * @param string $countryCode
+     *
+     * @return string
+     */
+    private function getCountryName($countryCode)
+    {
+        return strtoupper(Intl::getRegionBundle()->getCountryName($countryCode, 'en'));
     }
 }
