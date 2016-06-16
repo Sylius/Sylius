@@ -13,6 +13,7 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Service\SecurityServiceInterface;
+use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Core\Test\Factory\TestUserFactoryInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
@@ -92,5 +93,13 @@ final class SecurityContext implements Context
         $this->securityService->logIn($admin->getEmail());
 
         $this->sharedStorage->set('admin', $admin);
+    }
+
+    /**
+     * @Given /^(this user) is logged in$/
+     */
+    public function thisCustomerIsLoggedIn(UserInterface $user)
+    {
+        $this->securityService->logIn($user->getEmail());
     }
 }

@@ -531,4 +531,12 @@ final class ManagingOrdersContext implements Context
             'The order state should be %2$s, but it is %s.'
         );
     }
+
+    /**
+     * @Then it should have a :state state
+     */
+    public function itShouldHaveState($state)
+    {
+        $this->indexPage->isSingleResourceOnPage(['state' => $state]);
+    }
 }

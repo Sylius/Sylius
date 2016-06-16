@@ -323,7 +323,7 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @When I proceed selecting :paymentMethodName payment method
+     * @When /^(?:I|he|she) proceed selecting "([^"]+)" payment method$/
      */
     public function iProceedSelectingOfflinePaymentMethod($paymentMethodName)
     {
@@ -363,7 +363,7 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @When I confirm my order
+     * @When /^(?:I|he|she) confirm (?:my|his|her) order$/
      */
     public function iConfirmMyOrder()
     {
