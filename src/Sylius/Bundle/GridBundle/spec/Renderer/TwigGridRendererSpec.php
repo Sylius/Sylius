@@ -22,6 +22,7 @@ use Sylius\Component\Grid\Renderer\GridRendererInterface;
 use Sylius\Component\Grid\View\GridView;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @mixin TwigGridRenderer
@@ -81,7 +82,17 @@ class TwigGridRendererSpec extends ObjectBehavior
     ) {
         $field->getType()->willReturn('string');
         $fieldsRegistry->get('string')->willReturn($fieldType);
-        $fieldType->render($field, 'Value')->willReturn('<strong>Value</strong>');
+        $fieldType->configureOptions(Argument::type(OptionsResolver::class))
+            ->will(function ($args) {
+                $args[0]->setRequired('foo');
+            })
+        ;
+
+        $field->getOptions()->willReturn([
+            'foo' => 'bar',
+        ]);
+        $fieldType->render($field, 'Value', ['foo' => 'bar'])->willReturn('<strong>Value</strong>');
+
 
         $this->renderField($gridView, $field, 'Value')->shouldReturn('<strong>Value</strong>');
     }

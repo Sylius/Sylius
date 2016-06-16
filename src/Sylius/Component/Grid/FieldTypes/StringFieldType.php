@@ -13,6 +13,7 @@ namespace Sylius\Component\Grid\FieldTypes;
 
 use Sylius\Component\Grid\DataExtractor\DataExtractorInterface;
 use Sylius\Component\Grid\Definition\Field;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -35,11 +36,18 @@ class StringFieldType implements FieldTypeInterface
     /**
      * {@inheritdoc}
      */
-    public function render(Field $field, $data)
+    public function render(Field $field, $data, array $options)
     {
         $value = $this->dataExtractor->get($field, $data);
 
         return is_string($value) ? htmlspecialchars($value) : $value;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
     }
 
     /**
