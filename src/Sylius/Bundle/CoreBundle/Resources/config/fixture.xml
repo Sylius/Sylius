@@ -44,18 +44,18 @@
             <tag name="sylius_fixtures.fixture" />
         </service>
 
+        <service id="sylius.fixture.shipping_category" class="Sylius\Bundle\CoreBundle\Fixture\ShippingCategoryFixture">
+            <argument type="service" id="sylius.factory.shipping_category" />
+            <argument type="service" id="sylius.manager.shipping_category" />
+            <tag name="sylius_fixtures.fixture" />
+        </service>
+
         <service id="sylius.fixture.shipping_method" class="Sylius\Bundle\CoreBundle\Fixture\ShippingMethodFixture">
             <argument type="service" id="sylius.factory.shipping_method" />
             <argument type="service" id="sylius.manager.shipping_method" />
             <argument type="service" id="sylius.repository.zone" />
             <argument type="service" id="sylius.repository.shipping_category" />
             <argument type="service" id="sylius.repository.locale" />
-            <tag name="sylius_fixtures.fixture" />
-        </service>
-
-        <service id="sylius.fixture.shipping_category" class="Sylius\Bundle\CoreBundle\Fixture\ShippingCategoryFixture">
-            <argument type="service" id="sylius.factory.shipping_category" />
-            <argument type="service" id="sylius.manager.shipping_category" />
             <tag name="sylius_fixtures.fixture" />
         </service>
     </services>

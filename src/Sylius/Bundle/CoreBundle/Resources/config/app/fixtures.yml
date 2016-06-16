@@ -58,3 +58,7 @@ sylius_fixtures:
                 shipping_category:
                     options:
                         shipping_categories: 10
+
+                shipping_method:
+                    options:
+                        shipping_methods: 20
