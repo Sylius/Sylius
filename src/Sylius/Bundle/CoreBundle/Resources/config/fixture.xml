@@ -76,5 +76,13 @@
             <argument type="service" id="sylius.repository.currency" />
             <tag name="sylius_fixtures.fixture" />
         </service>
+
+        <service id="sylius.fixture.product_option" class="Sylius\Bundle\CoreBundle\Fixture\ProductOptionFixture">
+            <argument type="service" id="sylius.factory.product_option" />
+            <argument type="service" id="sylius.manager.product_option" />
+            <argument type="service" id="sylius.factory.product_option_value" />
+            <argument type="service" id="sylius.repository.locale" />
+            <tag name="sylius_fixtures.fixture" />
+        </service>
     </services>
 </container>

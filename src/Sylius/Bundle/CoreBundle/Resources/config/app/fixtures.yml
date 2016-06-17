@@ -72,3 +72,7 @@ sylius_fixtures:
                 user:
                     options:
                         random: 20
+
+                product_option:
+                    options:
+                        random: 10
