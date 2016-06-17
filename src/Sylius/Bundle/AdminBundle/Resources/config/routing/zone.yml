@@ -39,6 +39,5 @@ sylius_admin_zone_create:
                     parameters:
                         type: $type
             permission: true
-
     requirements:
         type: country|province|zone

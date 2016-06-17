@@ -6,7 +6,6 @@ sylius_admin_login:
             template: SyliusAdminBundle:Security:login.html.twig
             permission: true
 
-
 sylius_admin_login_check:
     path: /login-check
     defaults:

@@ -32,5 +32,4 @@ sylius_admin_taxon_tree:
             repository:
                 method: findRootNodes
             permission: true
-
     host: "localhost"
