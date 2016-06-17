@@ -35,6 +35,7 @@
         "sylius/content-bundle": "^0.19",
         "sylius/currency-bundle": "^0.19",
         "sylius/flow-bundle": "^0.19",
+        "sylius/fixtures-bundle": "^0.19",
         "sylius/inventory-bundle": "^0.19",
         "sylius/locale-bundle": "^0.19",
         "sylius/money-bundle": "^0.19",

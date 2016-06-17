@@ -1,0 +1,16 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_fixtures:
+    suites:
+        default:
+            listeners:
+                orm_purger: ~
+            fixtures:
+                locale:
+                    options:
+                        locales:
+                            - en_US
+                            - en_GB
+                            - es_ES
+                            - pl_PL

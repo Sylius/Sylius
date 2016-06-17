@@ -24,6 +24,7 @@ imports:
     - { resource: "parameters.yml" }
     - { resource: "sylius.yml" }
     - { resource: "state_machine.yml" }
+    - { resource: "fixtures.yml" }
 
 assetic:
     debug: "%kernel.debug%"
