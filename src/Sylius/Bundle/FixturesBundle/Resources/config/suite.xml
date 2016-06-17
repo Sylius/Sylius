@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="sylius_fixtures.suite_factory" class="Sylius\Bundle\FixturesBundle\Suite\SuiteFactory" public="false">
+            <argument type="service" id="sylius_fixtures.fixture_registry" />
+            <argument type="service" id="sylius_fixtures.listener_registry" />
+            <argument type="service">
+                <service class="Symfony\Component\Config\Definition\Processor" />
+            </argument>
+        </service>
+
+        <service id="sylius_fixtures.suite_registry" class="Sylius\Bundle\FixturesBundle\Suite\LazySuiteRegistry">
+            <argument type="service" id="sylius_fixtures.suite_factory" />
+        </service>
+    </services>
+</container>

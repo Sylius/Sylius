@@ -22,11 +22,19 @@
     "require": {
         "php": "^5.6|^7.0",
 
-        "sylius/core-bundle": "^0.19"
+        "doctrine/data-fixtures": "^1.1",
+        "monolog/monolog": "^1.8",
+        "symfony/framework-bundle": "^2.8",
+        "symfony/monolog-bridge": "^2.8",
+        "webmozart/assert": "^1.0",
+        "zendframework/zend-stdlib": "^3.0"
     },
     "require-dev": {
-        "doctrine/doctrine-fixtures-bundle": "2.2.*",
-        "fzaninotto/faker": "1.2.*"
+        "matthiasnoback/symfony-config-test": "dev-partially-test-below-prototypes as v1.4.0",
+        "matthiasnoback/symfony-dependency-injection-test": "^0.7",
+        "pamil/phpspec-generator-extension": "^0.3",
+        "phpspec/phpspec": "^2.5",
+        "phpunit/phpunit": "^5.3"
     },
     "config": {
         "bin-dir": "bin"
@@ -37,6 +45,10 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/pamil/SymfonyConfigTest.git"
+        },
         {
             "type": "path",
             "url": "../../*/*"

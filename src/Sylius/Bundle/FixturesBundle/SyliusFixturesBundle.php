@@ -11,13 +11,24 @@
 
 namespace Sylius\Bundle\FixturesBundle;
 
+use Sylius\Bundle\FixturesBundle\DependencyInjection\Compiler\FixtureRegistryPass;
+use Sylius\Bundle\FixturesBundle\DependencyInjection\Compiler\ListenerRegistryPass;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
- * Sylius fixtures bundle.
- *
- * @author Charles Sarrazin <charles@sarraz.in>
+ * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 class SyliusFixturesBundle extends Bundle
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function build(ContainerBuilder $container)
+    {
+        parent::build($container);
+
+        $container->addCompilerPass(new FixtureRegistryPass());
+        $container->addCompilerPass(new ListenerRegistryPass());
+    }
 }
