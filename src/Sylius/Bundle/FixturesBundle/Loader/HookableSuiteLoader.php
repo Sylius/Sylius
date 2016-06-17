@@ -24,14 +24,14 @@ final class HookableSuiteLoader implements SuiteLoaderInterface
     /**
      * @var SuiteLoaderInterface
      */
-    private $baseSuiteLoader;
+    private $decoratedSuiteLoader;
 
     /**
-     * @param SuiteLoaderInterface $baseSuiteLoader
+     * @param SuiteLoaderInterface $decoratedSuiteLoader
      */
-    public function __construct(SuiteLoaderInterface $baseSuiteLoader)
+    public function __construct(SuiteLoaderInterface $decoratedSuiteLoader)
     {
-        $this->baseSuiteLoader = $baseSuiteLoader;
+        $this->decoratedSuiteLoader = $decoratedSuiteLoader;
     }
 
     /**
@@ -43,7 +43,7 @@ final class HookableSuiteLoader implements SuiteLoaderInterface
 
         $this->executeBeforeSuiteListeners($suite, $suiteEvent);
 
-        $this->baseSuiteLoader->load($suite);
+        $this->decoratedSuiteLoader->load($suite);
 
         $this->executeAfterSuiteListeners($suite, $suiteEvent);
     }

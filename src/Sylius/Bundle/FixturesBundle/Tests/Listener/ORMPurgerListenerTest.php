@@ -25,7 +25,7 @@ final class ORMPurgerListenerTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    function its_purge_mode_is_delete()
+    function purge_mode_is_set_to_delete_by_default()
     {
         $this->assertProcessedConfigurationEquals([[]], ['mode' => 'delete'], 'mode');
     }
@@ -33,7 +33,7 @@ final class ORMPurgerListenerTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    function its_purge_mode_can_be_changed_to_truncate()
+    function purge_mode_can_be_changed_to_truncate()
     {
         $this->assertProcessedConfigurationEquals([['mode' => 'truncate']], ['mode' => 'truncate'], 'mode');
     }
@@ -41,7 +41,7 @@ final class ORMPurgerListenerTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    function its_purge_mode_cannot_be_changed_to_anything_else_than_defined()
+    function purge_mode_can_be_either_delete_or_truncate()
     {
         $this->assertPartialConfigurationIsInvalid([['mode' => 'lol']], 'mode');
     }
@@ -49,7 +49,7 @@ final class ORMPurgerListenerTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    function its_manager_is_the_default_one()
+    function managers_are_set_to_null_by_default()
     {
         $this->assertProcessedConfigurationEquals([[]], ['managers' => [null]], 'managers');
     }
@@ -57,7 +57,7 @@ final class ORMPurgerListenerTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    function its_default_manager_can_be_replaced_with_custom_ones()
+    function managers_are_optional()
     {
         $this->assertProcessedConfigurationEquals([['managers' => ['custom']]], ['managers' => ['custom']], 'managers');
     }

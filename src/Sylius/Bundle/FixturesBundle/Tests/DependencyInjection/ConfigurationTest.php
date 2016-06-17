@@ -24,7 +24,7 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function it_allows_to_register_suite_with_fixture()
+    public function suite_can_have_one_fixture()
     {
         $this->assertConfigurationIsValid(
             [['suites' => ['suite' => ['fixtures' => ['fixture' => null]]]]],
@@ -35,7 +35,7 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function it_allows_to_register_multiple_suites()
+    public function multiple_suites_are_allowed()
     {
         $this->assertConfigurationIsValid(
             [['suites' => [
@@ -49,7 +49,7 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function it_allows_to_add_a_new_suite()
+    public function consecutive_configurations_can_add_suites()
     {
         $this->assertProcessedConfigurationEquals(
             [
@@ -71,7 +71,7 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function it_allows_to_register_multiple_fixtures_for_one_suite()
+    public function suite_can_have_multiple_fixtures()
     {
         $this->assertConfigurationIsValid(
             [['suites' => ['suite' => ['fixtures' => [
@@ -85,7 +85,7 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function it_allows_to_unset_a_fixture()
+    public function consecutive_configurations_can_remove_a_fixture_from_the_suite()
     {
         $this->assertProcessedConfigurationEquals(
             [
@@ -107,7 +107,7 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function it_allows_to_add_a_new_fixture_to_a_suite()
+    public function consecutive_configurations_can_add_fixtures_to_the_suite()
     {
         $this->assertProcessedConfigurationEquals(
             [
@@ -129,7 +129,7 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function it_collects_all_fixtures_options()
+    public function all_fixture_options_from_consecutive_configurations_are_collected()
     {
         $this->assertProcessedConfigurationEquals(
             [
@@ -150,7 +150,7 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function it_does_not_replace_fixture_options_if_not_defined_explicitly()
+    public function fixture_options_are_not_replaced_implicitly()
     {
         $this->assertProcessedConfigurationEquals(
             [

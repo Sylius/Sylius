@@ -27,9 +27,9 @@ use Sylius\Bundle\FixturesBundle\Suite\SuiteInterface;
  */
 final class HookableSuiteLoaderSpec extends ObjectBehavior
 {
-    function let(SuiteLoaderInterface $baseSuiteLoader)
+    function let(SuiteLoaderInterface $decoratedSuiteLoader)
     {
-        $this->beConstructedWith($baseSuiteLoader);
+        $this->beConstructedWith($decoratedSuiteLoader);
     }
 
     function it_is_initializable()
@@ -42,17 +42,17 @@ final class HookableSuiteLoaderSpec extends ObjectBehavior
         $this->shouldImplement(SuiteLoaderInterface::class);
     }
 
-    function it_delegates_suite_loading_to_the_base_loader(SuiteLoaderInterface $baseSuiteLoader, SuiteInterface $suite)
+    function it_delegates_suite_loading_to_the_base_loader(SuiteLoaderInterface $decoratedSuiteLoader, SuiteInterface $suite)
     {
         $suite->getListeners()->willReturn([]);
 
-        $baseSuiteLoader->load($suite)->shouldBeCalled();
+        $decoratedSuiteLoader->load($suite)->shouldBeCalled();
 
         $this->load($suite);
     }
 
     function it_executes_before_suite_listeners(
-        SuiteLoaderInterface $baseSuiteLoader,
+        SuiteLoaderInterface $decoratedSuiteLoader,
         SuiteInterface $suite,
         BeforeSuiteListenerInterface $beforeSuiteListener
     ) {
@@ -62,13 +62,13 @@ final class HookableSuiteLoaderSpec extends ObjectBehavior
 
         $beforeSuiteListener->beforeSuite(new SuiteEvent($suite->getWrappedObject()), [])->shouldBeCalledTimes(1);
 
-        $baseSuiteLoader->load($suite)->shouldBeCalled();
+        $decoratedSuiteLoader->load($suite)->shouldBeCalled();
 
         $this->load($suite);
     }
 
     function it_executes_after_suite_listeners(
-        SuiteLoaderInterface $baseSuiteLoader,
+        SuiteLoaderInterface $decoratedSuiteLoader,
         SuiteInterface $suite,
         AfterSuiteListenerInterface $afterSuiteListener
     ) {
@@ -76,7 +76,7 @@ final class HookableSuiteLoaderSpec extends ObjectBehavior
             yield $afterSuiteListener->getWrappedObject() => [];
         });
 
-        $baseSuiteLoader->load($suite)->shouldBeCalled();
+        $decoratedSuiteLoader->load($suite)->shouldBeCalled();
 
         $afterSuiteListener->afterSuite(new SuiteEvent($suite->getWrappedObject()), [])->shouldBeCalledTimes(1);
 
@@ -84,7 +84,7 @@ final class HookableSuiteLoaderSpec extends ObjectBehavior
     }
 
     function it_executes_customized_suite_listeners(
-        SuiteLoaderInterface $baseSuiteLoader,
+        SuiteLoaderInterface $decoratedSuiteLoader,
         SuiteInterface $suite,
         BeforeSuiteListenerInterface $beforeSuiteListener,
         AfterSuiteListenerInterface $afterSuiteListener
@@ -96,7 +96,7 @@ final class HookableSuiteLoaderSpec extends ObjectBehavior
 
         $beforeSuiteListener->beforeSuite(new SuiteEvent($suite->getWrappedObject()), ['listener_option1' => 'listener_value1'])->shouldBeCalledTimes(1);
 
-        $baseSuiteLoader->load($suite)->shouldBeCalled();
+        $decoratedSuiteLoader->load($suite)->shouldBeCalled();
 
         $afterSuiteListener->afterSuite(new SuiteEvent($suite->getWrappedObject()), ['listener_option2' => 'listener_value2'])->shouldBeCalledTimes(1);
 

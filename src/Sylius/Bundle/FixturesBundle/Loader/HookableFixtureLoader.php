@@ -25,14 +25,14 @@ final class HookableFixtureLoader implements FixtureLoaderInterface
     /**
      * @var FixtureLoaderInterface
      */
-    private $baseFixtureLoader;
+    private $decoratedFixtureLoader;
 
     /**
-     * @param FixtureLoaderInterface $baseFixtureLoader
+     * @param FixtureLoaderInterface $decoratedFixtureLoader
      */
-    public function __construct(FixtureLoaderInterface $baseFixtureLoader)
+    public function __construct(FixtureLoaderInterface $decoratedFixtureLoader)
     {
-        $this->baseFixtureLoader = $baseFixtureLoader;
+        $this->decoratedFixtureLoader = $decoratedFixtureLoader;
     }
 
     /**
@@ -44,7 +44,7 @@ final class HookableFixtureLoader implements FixtureLoaderInterface
 
         $this->executeBeforeFixtureListeners($suite, $fixtureEvent);
 
-        $this->baseFixtureLoader->load($suite, $fixture, $options);
+        $this->decoratedFixtureLoader->load($suite, $fixture, $options);
 
         $this->executeAfterFixtureListeners($suite, $fixtureEvent);
     }
