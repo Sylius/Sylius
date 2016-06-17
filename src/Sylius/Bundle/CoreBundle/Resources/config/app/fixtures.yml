@@ -14,3 +14,11 @@ sylius_fixtures:
                             - en_GB
                             - es_ES
                             - pl_PL
+
+                currency:
+                    options:
+                        currencies:
+                            - EUR
+                            - USD
+                            - GBP
+                            - CHF

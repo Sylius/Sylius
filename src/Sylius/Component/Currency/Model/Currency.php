@@ -112,7 +112,7 @@ class Currency implements CurrencyInterface
      */
     public function setEnabled($enabled)
     {
-        if ($this->isBase()) {
+        if ($this->isBase() && !$enabled) {
             throw new \LogicException('You cannot change the enabled status of the base currency!');
         }
 
@@ -145,5 +145,10 @@ class Currency implements CurrencyInterface
     public function setBase($base)
     {
         $this->base = $base;
+
+        if ($base) {
+            $this->enabled = true;
+            $this->exchangeRate = 1;
+        }
     }
 }

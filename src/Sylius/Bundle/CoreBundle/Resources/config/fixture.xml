@@ -19,5 +19,12 @@
             <argument>%locale%</argument>
             <tag name="sylius_fixtures.fixture" />
         </service>
+
+        <service id="sylius.fixture.currency" class="Sylius\Bundle\CoreBundle\Fixture\CurrencyFixture">
+            <argument type="service" id="sylius.factory.currency" />
+            <argument type="service" id="sylius.manager.currency" />
+            <argument>%currency%</argument>
+            <tag name="sylius_fixtures.fixture" />
+        </service>
     </services>
 </container>
