@@ -1,0 +1,9 @@
+{% extends '@SyliusShop/Account/layout.html.twig' %}
+
+{% block subcontent %}
+    <h1 class="ui dividing header">
+        {{ 'sylius.ui.order_history'|trans }}
+    </h1>
+
+    {{ sylius_grid_render(resources, 'SyliusShopBundle:Account/Order:_grid.html.twig') }}
+{% endblock %}

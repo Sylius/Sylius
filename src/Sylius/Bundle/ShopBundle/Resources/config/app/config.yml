@@ -1,6 +1,9 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+imports:
+    - { resource: "@SyliusShopBundle/Resources/config/grids/account/order.yml" }
+
 liip_imagine:
     filter_sets:
         sylius_shop_product_tiny_thumbnail:

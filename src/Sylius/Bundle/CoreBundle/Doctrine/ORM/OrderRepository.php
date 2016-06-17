@@ -37,9 +37,27 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
     /**
      * {@inheritdoc}
      */
+    public function createByCustomerQueryBuilder(CustomerInterface $customer)
+    {
+        $queryBuilder = $this->createQueryBuilder('o');
+
+        $queryBuilder
+            ->andWhere($queryBuilder->expr()->isNotNull('o.completedAt'))
+            ->innerJoin('o.customer', 'customer')
+            ->andWhere('customer = :customer')
+            ->setParameter('customer', $customer)
+        ;
+
+        return $queryBuilder;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function createPaginatorByCustomer(CustomerInterface $customer, array $sorting = [])
     {
-        $queryBuilder = $this->createQueryBuilderWithCustomer($customer, $sorting);
+        $queryBuilder = $this->createByCustomerQueryBuilder($customer);
+        $this->applySorting($queryBuilder, $sorting);
 
         return $this->getPaginator($queryBuilder);
     }
@@ -49,7 +67,8 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
      */
     public function findByCustomer(CustomerInterface $customer, array $sorting = [])
     {
-        $queryBuilder = $this->createQueryBuilderWithCustomer($customer, $sorting);
+        $queryBuilder = $this->createByCustomerQueryBuilder($customer);
+        $this->applySorting($queryBuilder, $sorting);
 
         return $queryBuilder
             ->getQuery()
@@ -240,7 +259,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
      */
     public function countByCustomerAndPaymentState(CustomerInterface $customer, $state)
     {
-        $queryBuilder = $this->createQueryBuilderWithCustomer($customer);
+        $queryBuilder = $this->createByCustomerQueryBuilder($customer);
 
         $queryBuilder
             ->select('count(o.id)')
@@ -399,28 +418,6 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
             ->getQuery()
             ->getResult()
         ;
-    }
-
-    /**
-     * @param CustomerInterface $customer
-     * @param array $sorting
-     *
-     * @return QueryBuilder
-     */
-    private function createQueryBuilderWithCustomer(CustomerInterface $customer, array $sorting = [])
-    {
-        $queryBuilder = $this->createQueryBuilder('o');
-
-        $queryBuilder
-            ->andWhere($queryBuilder->expr()->isNotNull('o.completedAt'))
-            ->innerJoin('o.customer', 'customer')
-            ->andWhere('customer = :customer')
-            ->setParameter('customer', $customer)
-        ;
-
-        $this->applySorting($queryBuilder, $sorting);
-
-        return $queryBuilder;
     }
 
     /**
