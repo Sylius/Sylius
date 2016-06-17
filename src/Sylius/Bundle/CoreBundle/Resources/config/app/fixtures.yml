@@ -6,6 +6,8 @@ sylius_fixtures:
         default:
             listeners:
                 orm_purger: ~
+                logger: ~
+
             fixtures:
                 locale:
                     options:
