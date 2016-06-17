@@ -58,6 +58,8 @@ sylius:
             short_description: Короткое описание
             variant_selection_method: Метод выбора вариантов
             main_taxon: Основной таксон
+            channels: Каналы
+            enabled: Активен
         product_filter:
             name: Название
             code: Код

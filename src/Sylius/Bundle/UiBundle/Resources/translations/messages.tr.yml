@@ -17,12 +17,18 @@ sylius:
         cancelled: İptal Edildi
         change_your_password: Parolanızı değiştirin
         checkout: 'Ödeme  yap'
+        your_cart_is_empty: Sepetiniz boş
+        image: Resim
+        qty: Adet
+        clear_cart: Sepeti boşalt
         color: Renk
         countries: Ülkeler
         coupon_based: Kupona dayalı
         coupons: Kuponlar
         create: Oluştur
         currencies: Para birimi
+        my_account: Hesabım
+        home: Ana Sayfa
         dashboard: Kontrol Paneli
         default_currency: Varsayılan para birimi
         delete: Sil
@@ -35,6 +41,7 @@ sylius:
         filter: Filtrele
         generate_coupons: Kuponlar oluşturmak
         item: Öğe
+        inventory: Stok
         list_coupons: Kupon Listeleri
         locales: Diller
         new: Yeni

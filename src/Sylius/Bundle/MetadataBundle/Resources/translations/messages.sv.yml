@@ -3,5 +3,36 @@
 
 sylius:
     metadata:
+        type:
+            none: ' -INGEN- '
+            twitter_summary_card: Sammanfattning
+            twitter_summary_large_image_card: Sammanfattning med stor bild
+            twitter_player_card: Spelare
+            twitter_app_card: Applikation
+        page:
+            title: Titel
+            description: Beskrivning
+            keywords: Nyckelord
+            twitter: Twitter-kort
         twitter:
+            title: Titel
+            description: Beskrivning
+            site: Sida
+            site_id: Sid-ID
+            creator: Skapare
+            creator_id: Skapare-ID
             image: Bild
+            player: Spelare
+            player_width: Spelarbredd
+            player_height: Spelarhöjd
+            player_stream: Spelarström
+            player_stream_content_type: Spelarströms innehållstyp
+            app_name_iphone: Iphone applikationsnamn
+            app_id_iphone: Iphone applikations-ID
+            app_url_iphone: Iphone applikationsurl
+            app_name_ipad: Ipad applikationsnamn
+            app_id_ipad: Ipad applikations-ID
+            app_url_ipad: Ipad applikationsurl
+            app_name_googleplay: Google Play applikationsnamn
+            app_id_googleplay: Google Play applikations-ID
+            app_url_googleplay: Google Play applikationsurl

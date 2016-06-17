@@ -24,3 +24,6 @@ sylius:
             unique: De verzendmethode met gegeven code bestaat al.
         zone:
             not_blank: Gelieve een verzendmethode zone te selecteren.
+    shipment:
+        shipping_method:
+            not_blank: Gelieve een verzendmethode te kiezen.

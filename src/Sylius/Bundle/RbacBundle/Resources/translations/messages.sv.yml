@@ -6,5 +6,7 @@ sylius:
         role:
             code: Kod
             name: Namn
+            description: Beskrivning
         permission:
             code: Kod
+            description: Beskrivning

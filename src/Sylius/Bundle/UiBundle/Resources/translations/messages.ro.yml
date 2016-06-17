@@ -16,11 +16,17 @@ sylius:
         cancelled: Anulată
         change_your_password: Modificare parolă
         checkout: Trimite comanda
+        your_cart_is_empty: Coșul este gol
+        image: Imagine
+        qty: Cantitate
+        clear_cart: Golește coșul
         color: Culoare
         countries: Țări
         coupon_based: Bazat pe cod promoțional
         coupons: Coduri promoționale
         create: Creează
+        my_account: Contul meu
+        home: Pagina principală
         dashboard: Panou de administrare
         default_currency: Moneda implicită
         delete: Șterge
@@ -30,6 +36,7 @@ sylius:
         filter: Filtrează
         generate_coupons: Generare coduri promoționale
         item: Produs
+        inventory: Inventar
         list_coupons: Listare coduri promoționale
         locales: Setări regionale
         new: Nouă

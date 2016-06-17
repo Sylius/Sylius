@@ -9,6 +9,9 @@ sylius:
         add_coupon: Dodaj kupon
         add_to_cart: Dodaj u korpu
         cancel: Otkaži
+        your_cart_is_empty: Korpa je prazna
+        qty: Količina
+        clear_cart: Izpraznite korpu
         countries: Zemlje
         create: Kreiraj
         dashboard: Komandna Tabla

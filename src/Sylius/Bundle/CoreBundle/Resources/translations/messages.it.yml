@@ -60,6 +60,8 @@ sylius:
             short_description: Descrizione breve
             variant_selection_method: Metodo di selezione delle varianti
             main_taxon: Taxon principale
+            channels: Canali
+            enabled: Abilitato
         product_filter:
             name: Nome
             code: Codice
@@ -149,5 +151,6 @@ sylius:
             name: Informazioni di spedizione
         user_confirmation:
             name: "Conferma dell'utente"
+            subject: Benvenuto nel nostro negozio
         password_reset:
             name: Reimpostazione password

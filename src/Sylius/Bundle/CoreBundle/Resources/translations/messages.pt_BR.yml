@@ -60,6 +60,8 @@ sylius:
             short_description: Breve descrição
             variant_selection_method: Método de seleção da variação
             main_taxon: Táxon principal
+            channels: Canais
+            enabled: Ativado
         product_filter:
             name: Nome
             code: Código
@@ -149,5 +151,6 @@ sylius:
             name: Confirmação de postagem
         user_confirmation:
             name: Confirmação do usuário
+            subject: Bem-vindo à nossa loja
         password_reset:
             name: Redefinir a senha

@@ -4,6 +4,7 @@
 sylius:
     form:
         taxon:
+            description: Beskrivning
             name: Namn
         taxonomy:
             name: Namn

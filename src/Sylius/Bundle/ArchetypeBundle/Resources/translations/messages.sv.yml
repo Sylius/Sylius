@@ -6,3 +6,6 @@ sylius:
         archetype:
             code: Kod
             name: Namn
+            parent: Förälder
+            attributes: Attribut
+            options: Alternativ

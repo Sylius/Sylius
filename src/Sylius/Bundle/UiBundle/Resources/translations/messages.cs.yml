@@ -17,12 +17,18 @@ sylius:
         cancelled: Zrušeno
         change_your_password: Změnit heslo
         checkout: Objednat
+        your_cart_is_empty: Váš košík je prázdný
+        image: Obrázek
+        qty: Množství
+        clear_cart: Vyprázdnit košík
         color: Barva
         countries: Země
         coupon_based: Kupón na bázi
         coupons: Kupóny
         create: Vytvořit
         currencies: Měny
+        my_account: Účet
+        home: Domů
         dashboard: Nástěnka
         date: Datum
         default_currency: Výchozí měna
@@ -36,6 +42,7 @@ sylius:
         filter: Filtr
         generate_coupons: Generovat kupóny
         item: Položka
+        inventory: Sklad
         list_coupons: Seznam kupónů
         locales: Lokalizace
         new: Nový

@@ -24,3 +24,6 @@ sylius:
             unique: Spôsobu doručenia s daným kódom už existuje.
         zone:
             not_blank: Zadajte zónu pre spôsob doručenia.
+    shipment:
+        shipping_method:
+            not_blank: Prosím zadajte spôsob dopravy.

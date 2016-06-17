@@ -1,0 +1,33 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    menu:
+        admin:
+            main:
+                catalog:
+                    attributes: Attribut
+                    header: Katalog
+                    options: Alternativ
+                    products: Produkter
+                    taxons: Taxa
+                configuration:
+                    channels: Kanaler
+                    countries: Länder
+                    currencies: Valutor
+                    header: Konfiguration
+                    locales: Språk
+                    payment_methods: Betalningsmetoder
+                    shipping_methods: Leveransmetoder
+                    tax_categories: Skattekategorier
+                    tax_rates: Skattesatser
+                    zones: Zoner
+                marketing:
+                    header: Marknadsföring
+                    promotions: Kampanjer
+                customers:
+                    customers: Kunder
+                    header: Kunder
+                sales:
+                    header: Försäljning
+                    orders: Ordrar

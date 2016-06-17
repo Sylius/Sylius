@@ -43,6 +43,7 @@ sylius:
             shipping_category: "Categoria d'enviament"
             short_description: Descripció breu
             variant_selection_method: Mètode de selecció de variant
+            enabled: Activat
         product_filter:
             name: Nom
             code: Codi

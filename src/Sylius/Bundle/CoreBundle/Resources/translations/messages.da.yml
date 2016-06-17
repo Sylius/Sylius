@@ -49,6 +49,7 @@ sylius:
             shipping_category: Fragt kategori
             short_description: Kort beskrivelse
             variant_selection_method: Variant udvælgelsesmetode
+            enabled: Aktiveret
         product_filter:
             name: Navn
             code: Kode

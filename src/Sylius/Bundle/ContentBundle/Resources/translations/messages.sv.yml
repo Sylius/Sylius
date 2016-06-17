@@ -4,14 +4,18 @@
 sylius:
     form:
         action_block:
+            action_name: Åtgärdens namn
             id: Id
             publish_end_date: Publicera slut-datum
             publish_start_date: Publicera start-datum
             publishable: Publicerad
         imagine_block:
+            filter: Filter
             image: Bild
             internal_name: Internt namn
+            label: Etikett
             link_url: Länk url
+            parent: Förälder
             publish_end_date: Publicera slut-datum
             publish_start_date: Publicera start-datum
             publishable: Publicerad
@@ -22,22 +26,27 @@ sylius:
             childrens: Barnens
             display: Visa
             display_children: Visa barn
+            label: Etikett
             name: Namn
+            parent: Förälder
             publish_end_date: Publicera slut-datum
             publish_start_date: Publicera start-datum
             publishable: Publicerad
             route: Rutt
             uri: URI
         menu_block:
+            body: Brödtext
             id: Id
             name: Namn
             publish_end_date: Publicera slut-datum
             publish_start_date: Publicera start-datum
             publishable: Publicerad
         menu_node_block:
+            content: Innehåll
             display: Visa
             display_children: Visa barn
             internal_name: Internt namn
+            label: Etikett
             link_type: Länk-typ
             publish_end_date: Publicera slut-datum
             publish_start_date: Publicera start-datum
@@ -50,31 +59,47 @@ sylius:
             route_name: Rutt_namn
             uri: URI
         reference_block:
+            body: Brödtext
             id: Id
             publish_end_date: Publicera slut-datum
             publish_start_date: Publicera start-datum
             publishable: Publicerad
+            title: Titel
         route:
+            content: Innehåll
             name: Namn
+            parent: Förälder
         simple_block:
+            body: Brödtext
             internal_name: Internt namn
+            parent: Förälder
             publish_end_date: Publicera slut-datum
             publish_start_date: Publicera start-datum
             publishable: Publicerad
+            title: Titel
         slideshow_block:
+            add_slide: Lägg till bild
             childrens: Barnens
             internal_name: Internt namn
+            parent: Förälder
             publish_end_date: Publicera slut-datum
             publish_start_date: Publicera start-datum
             publishable: Publicerad
+            title: Titel
         static_content:
+            body: Brödtext
             id: Id
             internal_name: Internt namn
+            menu_nodes: Menynoder
+            parent: Förälder
             publish_end_date: Publicera slut-datum
             publish_start_date: Publicera start-datum
             publishable: Publicerad
             routes: Rutter
+            title: Titel
         string_block:
+            body: Brödtext
+            id: ID
             name: Namn
             publish_end_date: Publicera slut-datum
             publish_start_date: Publicera start-datum

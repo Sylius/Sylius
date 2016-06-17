@@ -16,11 +16,17 @@ sylius:
         cancelled: Відхилено
         change_your_password: Змінити пароль
         checkout: Оформити замовлення
+        your_cart_is_empty: Ваш кошик пустий
+        image: Зображення
+        qty: К-сть
+        clear_cart: Очистити кошик
         color: Колір
         countries: Країни
         coupon_based: На основі купону
         coupons: Купони
         create: Створити
+        my_account: Мій обліковий запис
+        home: Головна
         dashboard: Панель керування
         date: Дата
         default_currency: Валюта за замовчуванням
@@ -31,6 +37,7 @@ sylius:
         filter: Фільтр
         generate_coupons: Генерувати купони
         item: Елемент
+        inventory: Інвентаризація
         list_coupons: Список купонів
         locales: Локалі
         new: Новий

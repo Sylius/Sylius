@@ -60,6 +60,8 @@ sylius:
             short_description: Rövid leírás
             variant_selection_method: Változat kiválasztási módszer
             main_taxon: Fő taxonómia
+            channels: Csatornák
+            enabled: Engedélyezve
         product_filter:
             name: Név
             code: Kód
@@ -149,6 +151,7 @@ sylius:
             name: Szállítási mód megerősítése
         user_confirmation:
             name: Felhasználói megerősítés
+            subject: Üdvözöljük áruházunkban
         password_reset:
             name: Jelszó visszaállítás
     shipping_method_resolver:

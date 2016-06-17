@@ -1,0 +1,20 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    checkout:
+        shipping_method:
+            not_blank: Var god välj leveranssätt.
+    locale:
+        code:
+            not_blank: Var god ange språkkod.
+            unique: Detta språk finns redan.
+    product_variant:
+        price:
+            min: Priset får inte vara negativt.
+            not_blank: Var god ange priset.
+        original_price:
+            min: Ursprungliga priset får inte vara negativt.
+    product_translation:
+        short_description:
+            max: 'En kort beskrivning kan inte vara längre än {{ limit }} tecken.'

@@ -60,6 +60,8 @@ sylius:
             short_description: 简短说明：
             variant_selection_method: 变量选择方法
             main_taxon: 主分类
+            channels: 频道
+            enabled: 已启用
         product_filter:
             name: 名称
             code: 代码
@@ -149,5 +151,6 @@ sylius:
             name: 发货单确认
         user_confirmation:
             name: 用户确认
+            subject: 欢迎来到我们的商店
         password_reset:
             name: 重置密码

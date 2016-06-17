@@ -56,6 +56,8 @@ sylius:
             shipping_category: Teslimat kategorisi
             short_description: Kısa açıklama
             variant_selection_method: Varyant seçme yöntemi
+            channels: Kanallar
+            enabled: Etkin
         product_filter:
             name: Ad
             code: Kod

@@ -41,6 +41,7 @@ sylius:
             shipping_category: Κατηγορία αποστολής
             short_description: Σύντομη περιγραφή
             variant_selection_method: Μέθοδος επιλογής παραλλαγής
+            enabled: Ενεργοποιημένο
         product_filter:
             name: Ονομασία
             code: Κώδικος

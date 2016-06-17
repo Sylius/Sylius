@@ -45,6 +45,7 @@ sylius:
             shipping_category: Versandkategorie
             short_description: Kurzbeschreibung
             variant_selection_method: Varianten
+            enabled: Aktiviert
         product_filter:
             name: Name
             code: Code

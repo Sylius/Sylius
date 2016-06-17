@@ -15,36 +15,106 @@ sylius:
         publishable: Publicerad
     page:
         publishable: Publicerad
+    payment:
+        state:
+            checkout: Kassa
+            completed: Slutförd
+            authorized: Auktoriserad
+            failed: Misslyckad
+            new: Ny
+            pending: Väntande
+            processing: Behandlar
+            unknown: Okänd
+            void: Tom
+            cancelled: Avbruten
+            refunded: Återbetald
+    pricing:
+        volume_based:
+            max: Största volym
+            min: Minsta volym
+    shipment:
+        state:
+            pending: Väntande
+            cancelled: Avbruten
     ui:
+        add: Lägg tilll
+        add_attributes: Lägg till attribut
+        add_member: Lägg till medlem
+        add_province: Lägg till provins
+        add_value: Lägg till värde
+        available_on_demand: Tillgänglig på begäran
         billing_address: Faktureringsadress
+        body: Brödtext
+        checkout: Kassa
         city: Ort
         code: Kod
         company: Företag
+        completed: Slutförd
         coupon: Rabattkupong
+        currencies: Valutor
+        current_stock: I lager
         default_currency: Standardvaluta
+        default_locale: Standardspråk
+        delete: Radera
+        description: Beskrivning
+        email: E-post
         enabled: Aktiverad
+        exchange_rate: Växlingskurs
+        failed: Misslyckad
+        filter: Filter
         first_name: Förnamn
         firstname: Förnamn
+        gateway: Portal
         groups: Grupper
+        hostname: Värdnamn
         id: Id
+        images: Bilder
+        label: Etikett
+        last_name: Efternamn
+        lastname: Efternamn
         members: Medlemmar
+        menu_nodes: Menynoder
         message: Meddelande
         name: Namn
+        new: Ny
         number: Nummer
+        original_price: Ursprungligt pris
+        password: Lösenord
+        payment_method: Betalningsmetod
+        payment_methods: Betalningsmetoder
         payment_state: Betalningsstatus
+        pending: Väntande
         phone_number: Telefonnummer
         postcode: Postnummer
         presentation: Presentation
+        price: Pris
+        pricing: Prissättning
+        processing: Behandlar
+        product_association_type_index: Associationstyp
         province: Län
         provinces: Län
         quantity: Antal
+        refunded: Återbetald
         roles: Roller
         routes: Rutter
         scope: Omfattning
+        search: Sök
+        shipping_address: Leveransadress
         shipping_category: Kategori
+        shipping_methods: Leveransmetoder
         sku: SKU
         street: Gatuadress
+        subject: Ämne
         tax_category: Momskategori
+        theme: Tema
+        title: Titel
         topic: Ämne
+        translations: Översättningar
         unit_price: Enhetspris
+        unknown: Okänd
+        username: Användarnanm
+        variant_selection_method: Metod för val av variant
+        void: Tom
         zone: Zon
+    variant:
+        stock: I lager

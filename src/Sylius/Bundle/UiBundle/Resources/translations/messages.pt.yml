@@ -13,8 +13,12 @@ sylius:
         cancel: Cancelar
         cancelled: Cancelado
         checkout: Finalizar compra
+        your_cart_is_empty: Seu carrinho está vazio
+        qty: Quantidade
+        clear_cart: Esvaziar carrinho
         countries: Países
         create: Criar
+        home: Home
         dashboard: Painel de Instrumentos
         delete: Apagar
         description: Descrição

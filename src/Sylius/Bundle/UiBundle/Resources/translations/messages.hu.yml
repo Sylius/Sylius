@@ -15,6 +15,7 @@ sylius:
         actions: Műveletek
         add_coupon: Kupon hozzáadása
         add_to_cart: Kosárba
+        addressing: Címzés
         administration_panel_login: Adminisztrációs panel bejelentkezés
         all: Mind
         an_error_occurred: Hiba történt
@@ -22,6 +23,7 @@ sylius:
         available_for_channels: Minden csatornán elérhető
         average_order_value: Átlagos rendelési érték
         backordered: Előrendelve
+        back_to_store: Vissza az áruházba
         complete: Befejezve
         cancel: Mégse
         cancelled: Megszakítva
@@ -30,7 +32,26 @@ sylius:
         change_your_password: Jelszó módosítása
         charges_and_taxes: Díjak és adók
         checkout: Fizetés
+        have_an_account_already: Már van egy fiókod
+        sign_in_here: Bejelentkezés itt
+        checking_out_as: Fizetés mint
+        you_may_also_like: Ez még talán érdekelhet
+        forgot_password: Elfelejtett jelszó
+        your_shopping_cart: Kosarad
+        your_cart_is_empty: Az Ön kosara üres
         clear_filters: Szűrők törlése
+        enter_your_code: Add meg a kódodat
+        image: Kép
+        qty: Mennyiség
+        clear_cart: Kosár ürítése
+        update_cart: Kosár frissítése
+        apply_coupon: Kupon használata
+        edit_your_items_apply_coupon_or_proceed_to_the_checkout: Módosítsd a tételeid, használj fel kupont vagy haladj tovább a fizetéshez
+        create_an_account: Fiók létrehozása
+        summary: Összefoglaló
+        create_a_new_customer_account: Új ügyfél létrehozása
+        if_you_have_an_account_sign_in_with_your_email_address: Ha van fiókod, jelentkezzen be az e-mail címeddel
+        access_your_store_account_or_create_a_new_one: Lépj be a fiókodba vagy készíts egy újat
         color: Szín
         configurable_product: Konfigurálható termék
         configure_channels_available_in_your_store: Az áruházban elérhető csatornák beállítása
@@ -43,7 +64,11 @@ sylius:
         create: Létrehozás
         currencies: Pénznemek
         customer_can_login_to_the_store: A vevő betud jelentkezni az áruházba
+        set_a_new_password_for_your_account: Hozzon létre egy új jelszót a fiókodhoz
+        my_account: Fiókom
+        home: Főoldal
         customer_care: Ügyfélszolgálat
+        customer_login: Ügyfél bejelentkezés
         dashboard: Vezérlőpult
         date: Dátum
         default_currency: Alapértelmezett pénznem
@@ -68,6 +93,7 @@ sylius:
         edit_promotion_coupon: Promóciós kupon módosítása
         edit_shipping_method: Szállítási módszer módosítása
         edit_tax_category: Adó-kategória módosítása
+        shop_by_brand: Vásárlás márka szerint
         edit_tax_rate: Adókulcs módosítása
         edit_taxon: Taxon módosítása
         edit_zone: Zóna módosítása
@@ -83,9 +109,14 @@ sylius:
         filter: Szűrő
         go: Mehet
         generate_coupons: Kuponok generálása
+        hello: Üdvözlünk
+        manage_your_personal_information_and_preferences: Személyes adatok és a beállítások kezelése
+        latest_products: Legújabb termékeink
+        view_and_edit_cart: Kosár megtekintése és módosítása
         in: Benne van
         info: Információ
         item: Cikk
+        inventory: Leltár
         jump_to_page: Ugrás az oldalra
         last_updated: Utolsó frissítés
         list_coupons: Kuponok listázása
@@ -130,6 +161,7 @@ sylius:
         not_in: Nincs benne
         onhold: Visszatartott
         or: vagy
+        order_total: Rendelés összesen
         partially_shipped: Részlegesen kiszállítva
         per_customer_usage_limit: Vásárlónkénti felhasználási limit
         powered_by: Működteti
@@ -140,14 +172,18 @@ sylius:
         promotion_configuration: Promóció beállítása
         promotion_information: Promóció információ
         purchased_from: Megvásárolva innét
+        personal_information: Személyes információk
         quantity: Mennyiség
         ready: Kész
         repeat_new_password: Új jelszó ismétlése
         returned: Visszaküldött
         returns_policy: Visszatérítés irányelv
+        registered_customers: Regisztrált felhasználók
+        register_in_the_store: Regisztrálja az áruházban
         save_changes: Módosítások mentése
         select_taxon: Válassza ki a taxon-t
         shipped: Kiszállítva
+        shipping: Szállítás
         shipping_methods: Szállítási módok
         show: Megjelenítés
         sign_in: Bejelentkezés
@@ -166,6 +202,7 @@ sylius:
         usage: Használat
         values: Értékek
         "yes": true
+        your_profile: Adatlapod
         your_store: Saját áruház
         zone_consisting_of_countries: Országok szerinti övezetek
         zone_consisting_of_other_zones: Más területek szerinti övezetek

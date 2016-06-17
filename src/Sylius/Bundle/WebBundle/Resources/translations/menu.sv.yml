@@ -5,10 +5,12 @@ sylius:
     backend:
         menu:
             main:
+                currencies: Valutor
                 groups: Grupper
                 roles: Roller
                 routes: Rutter
             sidebar:
+                currencies: Valutor
                 groups: Grupper
                 roles: Roller
                 routes: Rutter

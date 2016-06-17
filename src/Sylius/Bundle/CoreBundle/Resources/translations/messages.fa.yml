@@ -60,6 +60,8 @@ sylius:
             short_description: شرح کوتاه
             variant_selection_method: انتخاب نوع ترکیب بندی
             main_taxon: رده اصلی
+            channels: کانال های فروش
+            enabled: فعال
         product_filter:
             name: نام
             code: نام انگلیسی
@@ -149,5 +151,6 @@ sylius:
             name: تایید ارسال
         user_confirmation:
             name: تایید کاربر
+            subject: به فروشگاه ما خوش آمدید
         password_reset:
             name: بازیابی کلمه عبور

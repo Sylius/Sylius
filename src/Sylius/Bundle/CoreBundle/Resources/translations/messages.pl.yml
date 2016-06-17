@@ -60,6 +60,8 @@ sylius:
             short_description: Krótki opis
             variant_selection_method: Metody wyboru wariantu
             main_taxon: Główne grupy
+            channels: Kanały
+            enabled: Włączone
         product_filter:
             name: Nazwa
             code: Kod

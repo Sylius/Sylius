@@ -5,6 +5,7 @@ sylius:
     form:
         channel:
             name: Namn
+            description: Beskrivning
             url: URL
             enabled: Aktiverad
             color: Färg

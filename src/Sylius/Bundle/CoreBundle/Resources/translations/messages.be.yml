@@ -49,6 +49,7 @@ sylius:
             shipping_category: Катэгорыя дастаўкі
             short_description: Кароткае апісанне
             variant_selection_method: Метад выбару варыянта
+            enabled: Уключана
         product_filter:
             name: Імя
             code: Код

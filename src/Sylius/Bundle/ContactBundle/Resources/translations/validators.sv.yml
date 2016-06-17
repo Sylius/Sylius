@@ -18,5 +18,6 @@ sylius:
             not_blank: Skriv ditt meddelande.
     contact_topic:
         title:
+            not_blank: Var god ange en titel.
             min_length: Din titel är för kort.
             max_length: Din titel är för lång.

@@ -3,6 +3,6 @@
 
 sylius:
     form:
-        promotion:
-            description: Beskrivning
-            name: Namn
+        collection:
+            add: Lägg tilll
+            delete: Radera

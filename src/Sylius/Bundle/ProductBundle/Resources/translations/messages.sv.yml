@@ -5,6 +5,7 @@ sylius:
     form:
         product:
             name: Namn
+            description: Beskrivning
             meta_keywords: Metasökord
             meta_description: Metabeskrivning
         product_archetype:

@@ -17,12 +17,19 @@ sylius:
         cancelled: Отменён
         change_your_password: Change my password
         checkout: Сверка
+        your_cart_is_empty: Ваша корзина пуста
+        image: Изображение
+        qty: Количество
+        clear_cart: Очистка корзины
+        summary: Резюме
         color: Цвет
         countries: Страны
         coupon_based: Основана на купонах
         coupons: sylius.breadcrumb.promotion_coupon.index
         create: Добавить
         currencies: Валюты
+        my_account: Моя учетная запись
+        home: Домой
         dashboard: Приборная панель
         date: Дата
         default_currency: Валюта по умолчанию
@@ -36,6 +43,7 @@ sylius:
         filter: Фильтр
         generate_coupons: Генерировать купоны
         item: Товар
+        inventory: Запасы
         list_coupons: Список купонов
         locales: Языки
         new: Новый

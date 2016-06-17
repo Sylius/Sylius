@@ -21,7 +21,12 @@ sylius:
         change_your_password: Zmiana hasła
         charges_and_taxes: Opłaty i podatki
         checkout: Koszyk
+        your_cart_is_empty: Twój koszyk jest pusty
         clear_filters: Wyczyść filtry
+        image: Zdjęcie
+        qty: Ilość
+        clear_cart: Wyczyść koszyk
+        summary: Podsumowanie
         color: Kolor
         configure_channels_available_in_your_store: Skonfiguruj kanały dostępne w twoim sklepie
         confirm_your_action: Potwierdź akcję
@@ -32,6 +37,8 @@ sylius:
         coupons: Kupony
         create: Utwórz
         currencies: Waluty
+        my_account: Moje konto
+        home: Panel
         dashboard: Panel
         date: Data
         default_currency: Domyślna waluta
@@ -67,6 +74,7 @@ sylius:
         generate_coupons: Wygeneruj kupony promocyjne
         info: Info
         item: Element
+        inventory: Zapasy
         jump_to_page: Przejdź na stronę
         last_updated: Ostatnia aktualizacja
         list_coupons: Lista kuponów promocyjnych

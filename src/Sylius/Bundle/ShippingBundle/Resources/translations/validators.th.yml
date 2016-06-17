@@ -24,3 +24,6 @@ sylius:
             unique: รหัสวิธีการจัดส่งถูกใช้งานแล้ว
         zone:
             not_blank: กรุณาระบุโซนสำหรับวิธีจัดส่ง
+    shipment:
+        shipping_method:
+            not_blank: กรุณาเลือกวิธีการจัดส่ง

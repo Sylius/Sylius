@@ -3,9 +3,17 @@
 
 sylius:
     form:
+        shipment:
+            states:
+                checkout: Kassa
+                pending: Väntande
+                cancelled: Avbruten
         shipping_category:
+            description: Beskrivning
             name: Namn
         shipping_method:
+            description: Beskrivning
             enabled: Aktiverad
             name: Namn
             tax_category: Momskategori
+            translations: Översättningar
