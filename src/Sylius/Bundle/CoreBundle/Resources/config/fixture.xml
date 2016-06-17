@@ -84,5 +84,13 @@
             <argument type="service" id="sylius.repository.locale" />
             <tag name="sylius_fixtures.fixture" />
         </service>
+
+        <service id="sylius.fixture.product_attribute" class="Sylius\Bundle\CoreBundle\Fixture\ProductAttributeFixture">
+            <argument type="service" id="sylius.factory.product_attribute" />
+            <argument type="service" id="sylius.manager.product_attribute" />
+            <argument type="service" id="sylius.repository.locale" />
+            <argument>%sylius.attribute.attribute_types%</argument>
+            <tag name="sylius_fixtures.fixture" />
+        </service>
     </services>
 </container>

@@ -76,3 +76,7 @@ sylius_fixtures:
                 product_option:
                     options:
                         random: 10
+
+                product_attribute:
+                    options:
+                        random: 10
