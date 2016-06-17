@@ -128,9 +128,9 @@ final class ChannelFixture extends AbstractResourceFixture
     {
         $resourceNode
             ->children()
-                ->scalarNode('code')->end()
-                ->scalarNode('hostname')->end()
-                ->scalarNode('color')->end()
+                ->scalarNode('code')->cannotBeEmpty()->end()
+                ->scalarNode('hostname')->cannotBeEmpty()->end()
+                ->scalarNode('color')->cannotBeEmpty()->end()
                 ->booleanNode('enabled')->end()
                 ->arrayNode('locales')->prototype('scalar')->end()->end()
                 ->arrayNode('currencies')->prototype('scalar')->end()->end()

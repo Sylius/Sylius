@@ -21,14 +21,14 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class PaymentMethodFixtureTest extends \PHPUnit_Framework_TestCase
+final class PaymentMethodFixtureConfigurationTest extends \PHPUnit_Framework_TestCase
 {
     use ConfigurationTestCaseTrait;
 
     /**
      * @test
      */
-    public function it_has_offline_gateway_by_default()
+    public function gateway_is_set_to_offline_by_default()
     {
         $this->assertProcessedConfigurationEquals(
             [[]],
@@ -40,7 +40,7 @@ final class PaymentMethodFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function its_default_gateway_can_be_overwritten()
+    public function gateway_can_be_overwritten()
     {
         $this->assertProcessedConfigurationEquals(
             [['gateway' => 'custom']],
@@ -52,7 +52,7 @@ final class PaymentMethodFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function it_requires_payment_methods_node_to_be_set()
+    public function payment_methods_must_be_set_and_not_empty()
     {
         $this->assertPartialConfigurationIsInvalid([[]], 'payment_methods');
         $this->assertPartialConfigurationIsInvalid([['payment_methods' => null]], 'payment_methods');
@@ -62,19 +62,7 @@ final class PaymentMethodFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function its_payment_methods_can_be_set()
-    {
-        $this->assertProcessedConfigurationEquals(
-            [['payment_methods' => ['PayPal', 'PayU']]],
-            ['payment_methods' => ['PayPal', 'PayU']],
-            'payment_methods'
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function it_generates_random_payment_methods_names_if_number_is_given()
+    public function if_payment_methods_contains_a_number_then_it_is_amount_of_randomly_generated_resources()
     {
         $processedConfiguration = (new PartialProcessor())->processConfiguration(
             $this->getConfiguration(),
@@ -91,6 +79,18 @@ final class PaymentMethodFixtureTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->assertCount(2, $processedConfiguration['payment_methods']);
+    }
+
+    /**
+     * @test
+     */
+    public function payment_methods_can_be_populated_with_custom_names()
+    {
+        $this->assertProcessedConfigurationEquals(
+            [['payment_methods' => ['PayPal', 'PayU']]],
+            ['payment_methods' => ['PayPal', 'PayU']],
+            'payment_methods'
+        );
     }
 
     /**

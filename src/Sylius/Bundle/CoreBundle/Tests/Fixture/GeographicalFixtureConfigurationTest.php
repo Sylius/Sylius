@@ -22,14 +22,14 @@ use Symfony\Component\Intl\Intl;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class GeographicalFixtureTest extends \PHPUnit_Framework_TestCase
+final class GeographicalFixtureConfigurationTest extends \PHPUnit_Framework_TestCase
 {
     use ConfigurationTestCaseTrait;
 
     /**
      * @test
      */
-    public function it_does_not_require_to_be_configured()
+    public function fixture_does_not_need_to_be_configured()
     {
         $this->assertConfigurationIsValid([[]]);
     }
@@ -37,7 +37,7 @@ final class GeographicalFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function it_creates_all_known_countries_by_default()
+    public function countries_are_set_to_all_known_countries_by_default()
     {
         $this->assertProcessedConfigurationEquals(
             [[]],
@@ -49,7 +49,7 @@ final class GeographicalFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function it_replaces_predefined_countries_list_with_custom_ones()
+    public function countries_can_be_replaced_with_custom_ones()
     {
         $this->assertConfigurationIsValid(
             [['countries' => ['PL', 'DE', 'FR']]],
@@ -60,7 +60,7 @@ final class GeographicalFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function it_creates_no_provinces_by_default()
+    public function provinces_are_empty_by_default()
     {
         $this->assertProcessedConfigurationEquals(
             [[]],
@@ -72,7 +72,7 @@ final class GeographicalFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function it_creates_custom_provinces()
+    public function provinces_can_be_set()
     {
         $this->assertConfigurationIsValid(
             [['provinces' => ['US' => ['AL' => 'Alabama']]]],
@@ -83,7 +83,7 @@ final class GeographicalFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function it_creates_no_zones_by_default()
+    public function zones_are_empty_by_default()
     {
         $this->assertProcessedConfigurationEquals(
             [[]],
@@ -95,7 +95,7 @@ final class GeographicalFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function it_creates_custom_countries_based_zone()
+    public function zones_can_be_defined_as_country_based()
     {
         $this->assertConfigurationIsValid(
             [['zones' => ['EU' => ['name' => 'Some EU countries', 'countries' => ['PL', 'DE', 'FR']]]]],
@@ -106,18 +106,7 @@ final class GeographicalFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function it_creates_custom_zones_based_zone()
-    {
-        $this->assertConfigurationIsValid(
-            [['zones' => ['AMERICA' => ['name' => 'America', 'zones' => ['NORTH-AMERICA', 'SOUTH-AMERICA']]]]],
-            'zones'
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function it_creates_custom_provinces_based_zone()
+    public function zones_can_be_defined_as_province_based()
     {
         $this->assertConfigurationIsValid(
             [['zones' => ['WEST-COAST' => ['name' => 'West Coast', 'provinces' => ['US-CA', 'US-OR', 'US-WA']]]]],
@@ -128,7 +117,18 @@ final class GeographicalFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function its_zone_definition_has_exactly_one_type_of_members()
+    public function zones_can_be_defined_as_zone_based()
+    {
+        $this->assertConfigurationIsValid(
+            [['zones' => ['AMERICA' => ['name' => 'America', 'zones' => ['NORTH-AMERICA', 'SOUTH-AMERICA']]]]],
+            'zones'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function zone_can_be_defined_with_exactly_one_kind_of_members()
     {
         $this->assertPartialConfigurationIsInvalid(
             [['zones' => ['ZONE' => ['name' => 'zone']]]],

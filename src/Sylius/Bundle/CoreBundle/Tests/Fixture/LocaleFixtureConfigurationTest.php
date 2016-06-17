@@ -19,16 +19,24 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class LocaleFixtureTest extends \PHPUnit_Framework_TestCase
+final class LocaleFixtureConfigurationTest extends \PHPUnit_Framework_TestCase
 {
     use ConfigurationTestCaseTrait;
 
     /**
      * @test
      */
-    public function it_does_not_require_any_locales()
+    public function locales_are_not_required()
     {
         $this->assertConfigurationIsValid([[]], 'locales');
+    }
+
+    /**
+     * @test
+     */
+    public function locales_can_be_set()
+    {
+        $this->assertConfigurationIsValid([['locales' => ['en_US', 'pl_PL', 'es_ES']]], 'locales');
     }
 
     /**

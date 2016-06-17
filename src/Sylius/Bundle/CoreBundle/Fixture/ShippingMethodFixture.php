@@ -117,13 +117,13 @@ final class ShippingMethodFixture extends AbstractResourceFixture
     {
         $resourceNode
             ->children()
-                ->scalarNode('code')->end()
+                ->scalarNode('code')->cannotBeEmpty()->end()
                 ->booleanNode('enabled')->end()
                 ->scalarNode('zone')->cannotBeEmpty()->end()
                 ->scalarNode('category')->cannotBeEmpty()->end()
                 ->arrayNode('calculator')
                     ->children()
-                        ->scalarNode('type')->cannotBeEmpty()->end()
+                        ->scalarNode('type')->isRequired()->cannotBeEmpty()->end()
                         ->variableNode('configuration')->end()
                     ->end()
                 ->end()

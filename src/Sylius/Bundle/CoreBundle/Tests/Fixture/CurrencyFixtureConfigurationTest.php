@@ -19,14 +19,14 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class CurrencyFixtureTest extends \PHPUnit_Framework_TestCase
+final class CurrencyFixtureConfigurationTest extends \PHPUnit_Framework_TestCase
 {
     use ConfigurationTestCaseTrait;
 
     /**
      * @test
      */
-    public function it_does_not_require_any_currencies()
+    public function currencies_are_not_required()
     {
         $this->assertConfigurationIsValid([[]], 'currencies');
     }
@@ -34,7 +34,7 @@ final class CurrencyFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function its_currencies_can_be_defined()
+    public function currencies_can_be_set()
     {
        $this->assertConfigurationIsValid([['currencies' => ['EUR', 'USD', 'PLN']]], 'currencies');
     }

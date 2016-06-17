@@ -21,14 +21,14 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class ShippingCategoryFixtureTest extends \PHPUnit_Framework_TestCase
+final class ShippingCategoryFixtureConfigurationTest extends \PHPUnit_Framework_TestCase
 {
     use ConfigurationTestCaseTrait;
 
     /**
      * @test
      */
-    public function it_requires_shipping_categories_node_to_be_set()
+    public function shipping_categories_must_be_set_and_not_empty()
     {
         $this->assertPartialConfigurationIsInvalid([[]], 'shipping_categories');
         $this->assertPartialConfigurationIsInvalid([['shipping_categories' => null]], 'shipping_categories');
@@ -38,19 +38,7 @@ final class ShippingCategoryFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function its_shipping_categories_can_be_set()
-    {
-        $this->assertProcessedConfigurationEquals(
-            [['shipping_categories' => ['Big', 'Small']]],
-            ['shipping_categories' => ['Big', 'Small']],
-            'shipping_categories'
-        );
-    }
-
-    /**
-     * @test
-     */
-    public function it_generates_random_shipping_categories_names_if_number_is_given()
+    public function if_shipping_categories_contains_a_number_then_it_is_amount_of_randomly_generated_resources()
     {
         $processedConfiguration = (new PartialProcessor())->processConfiguration(
             $this->getConfiguration(),
@@ -67,6 +55,18 @@ final class ShippingCategoryFixtureTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->assertCount(2, $processedConfiguration['shipping_categories']);
+    }
+
+    /**
+     * @test
+     */
+    public function shipping_categories_can_be_populated_with_custom_names()
+    {
+        $this->assertProcessedConfigurationEquals(
+            [['shipping_categories' => ['Big', 'Small']]],
+            ['shipping_categories' => ['Big', 'Small']],
+            'shipping_categories'
+        );
     }
 
     /**

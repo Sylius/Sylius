@@ -102,6 +102,7 @@ abstract class AbstractResourceFixture extends AbstractFixture
                 ->children()
                     ->scalarNode($this->resourceNodeIdentifier)
                         ->isRequired()
+                        ->cannotBeEmpty()
             ;
 
             $resourceNode
