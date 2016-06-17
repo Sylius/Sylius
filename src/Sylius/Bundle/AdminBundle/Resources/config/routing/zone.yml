@@ -14,6 +14,9 @@ sylius_admin_zone:
             index:
                 icon: world
     type: sylius.resource
+    defaults:
+        _sylius:
+            permission: true
 
 sylius_admin_zone_create:
     path: /zones/{type}/new
@@ -35,5 +38,7 @@ sylius_admin_zone_create:
                 route:
                     parameters:
                         type: $type
+            permission: true
+
     requirements:
         type: country|province|zone

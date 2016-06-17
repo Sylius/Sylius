@@ -14,3 +14,6 @@ sylius_admin_currency:
             index:
                 icon: dollar
     type: sylius.resource
+    defaults:
+        _sylius:
+            permission: true

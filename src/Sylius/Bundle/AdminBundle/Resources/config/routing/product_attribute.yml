@@ -14,6 +14,9 @@ sylius_admin_product_attribute:
             index:
                 icon: cubes
     type: sylius.resource
+    defaults:
+        _sylius:
+            permission: true
 
 sylius_admin_product_attribute_create:
     path: /product-attributes/{type}/new
@@ -35,6 +38,7 @@ sylius_admin_product_attribute_create:
                 route:
                     parameters:
                         type: $type
+            permission: true
 
 sylius_admin_get_attribute_types:
     path: /attribute-types

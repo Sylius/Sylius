@@ -14,3 +14,6 @@ sylius_admin_payment_method:
           index:
               icon: payment
     type: sylius.resource
+    defaults:
+        _sylius:
+            permission: true

@@ -11,6 +11,9 @@ sylius_admin_taxon:
                 templates:
                     form: SyliusAdminBundle:Taxon:_form.html.twig
     type: sylius.resource
+    defaults:
+        _sylius:
+            permission: true
 
 sylius_admin_taxon_index:
     path: /taxons/
@@ -28,4 +31,6 @@ sylius_admin_taxon_tree:
             template: SyliusAdminBundle:Taxon:index.html.twig
             repository:
                 method: findRootNodes
+            permission: true
+
     host: "localhost"

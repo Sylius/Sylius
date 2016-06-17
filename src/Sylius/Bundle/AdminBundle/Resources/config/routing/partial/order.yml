@@ -7,6 +7,7 @@ sylius_admin_partial_order_latest:
                 method: findLatest
                 arguments: [$count]
             template: $template
+            permission: true
 
 sylius_admin_partial_order_shipment_ship:
     path: /orders/{orderId}/shipments/{id}/ship
@@ -31,3 +32,4 @@ sylius_admin_partial_order_shipment_ship:
                     parameters:
                         orderId: $orderId
                         id: $id
+            permission: true

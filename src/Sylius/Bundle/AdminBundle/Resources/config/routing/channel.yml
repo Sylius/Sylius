@@ -14,3 +14,6 @@ sylius_admin_channel:
           index:
               icon: share alternate
     type: sylius.resource
+    defaults:
+        _sylius:
+            permission: true

@@ -11,6 +11,9 @@ sylius_admin_order:
           index:
               icon: cart
     type: sylius.resource
+    defaults:
+        _sylius:
+            permission: true
 
 sylius_admin_order_show:
     path: /orders/{id}
@@ -19,6 +22,7 @@ sylius_admin_order_show:
         _sylius:
             section: admin
             template: SyliusAdminBundle:Order:show.html.twig
+            permission: true
 
 sylius_admin_order_cancel:
     path: /orders/{id}/cancel
@@ -30,6 +34,7 @@ sylius_admin_order_cancel:
                 graph: sylius_order
                 transition: cancel
             redirect: referer
+            permission: true
 
 sylius_admin_order_payment_complete:
     path: /orders/{orderId}/payments/{id}/complete
@@ -46,3 +51,4 @@ sylius_admin_order_payment_complete:
                 graph: sylius_payment
                 transition: complete
             redirect: referer
+            permission: true

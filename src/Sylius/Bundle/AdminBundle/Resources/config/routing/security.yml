@@ -4,6 +4,8 @@ sylius_admin_login:
         _controller: sylius.controller.security:loginAction
         _sylius:
             template: SyliusAdminBundle:Security:login.html.twig
+            permission: true
+
 
 sylius_admin_login_check:
     path: /login-check

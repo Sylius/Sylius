@@ -14,3 +14,6 @@ sylius_admin_product_option:
           index:
               icon: options
     type: sylius.resource
+    defaults:
+        _sylius:
+            permission: true

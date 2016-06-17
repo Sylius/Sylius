@@ -14,3 +14,6 @@ sylius_admin_locale:
             index:
                 icon: translate
     type: sylius.resource
+    defaults:
+        _sylius:
+            permission: true

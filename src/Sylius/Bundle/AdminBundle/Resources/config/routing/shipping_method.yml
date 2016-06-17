@@ -14,3 +14,6 @@ sylius_admin_shipping_method:
           index:
               icon: shipping
     type: sylius.resource
+    defaults:
+        _sylius:
+            permission: true

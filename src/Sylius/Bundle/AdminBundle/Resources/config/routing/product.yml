@@ -14,6 +14,9 @@ sylius_admin_product:
             index:
                 icon: cube
     type: sylius.resource
+    defaults:
+        _sylius:
+            permission: true
 
 sylius_admin_product_create:
     path: /products/new
@@ -30,6 +33,7 @@ sylius_admin_product_create:
                     form: SyliusAdminBundle:Product:_form.html.twig
                 route:
                     name: sylius_admin_product_create
+            permission: true
 
 sylius_admin_product_create_simple:
     path: /products/new/simple
@@ -48,3 +52,4 @@ sylius_admin_product_create_simple:
                     form: SyliusAdminBundle:Product:_form.html.twig
                 route:
                     name: sylius_admin_product_create_simple
+            permission: true

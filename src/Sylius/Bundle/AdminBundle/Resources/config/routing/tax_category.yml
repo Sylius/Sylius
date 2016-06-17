@@ -14,3 +14,6 @@ sylius_admin_tax_category:
           index:
               icon: tags
     type: sylius.resource
+    defaults:
+        _sylius:
+            permission: true
