@@ -470,7 +470,7 @@ class RequestConfiguration
     public function hasPermission()
     {
         if (!$this->parameters->has('permission')) {
-            return true;
+            return false;
         }
 
         return false !== $this->parameters->get('permission');
