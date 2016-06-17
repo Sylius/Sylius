@@ -54,3 +54,7 @@ sylius_fixtures:
                 payment_method:
                     options:
                         payment_methods: 10
+
+                shipping_category:
+                    options:
+                        shipping_categories: 10
