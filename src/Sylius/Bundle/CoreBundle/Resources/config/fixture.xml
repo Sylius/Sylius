@@ -68,5 +68,13 @@
             <argument type="service" id="sylius.repository.shipping_method" />
             <tag name="sylius_fixtures.fixture" />
         </service>
+
+        <service id="sylius.fixture.user" class="Sylius\Bundle\CoreBundle\Fixture\UserFixture">
+            <argument type="service" id="sylius.factory.user" />
+            <argument type="service" id="sylius.manager.user" />
+            <argument type="service" id="sylius.factory.customer" />
+            <argument type="service" id="sylius.repository.currency" />
+            <tag name="sylius_fixtures.fixture" />
+        </service>
     </services>
 </container>

@@ -66,3 +66,7 @@ sylius_fixtures:
                 channel:
                     options:
                         channels: 3
+
+                user:
+                    options:
+                        users: 20
