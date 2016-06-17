@@ -52,33 +52,18 @@ final class PaymentMethodFixtureConfigurationTest extends \PHPUnit_Framework_Tes
     /**
      * @test
      */
-    public function payment_methods_must_be_set_and_not_empty()
+    public function payment_methods_are_optional()
     {
-        $this->assertPartialConfigurationIsInvalid([[]], 'payment_methods');
-        $this->assertPartialConfigurationIsInvalid([['payment_methods' => null]], 'payment_methods');
-        $this->assertPartialConfigurationIsInvalid([['payment_methods' => []]], 'payment_methods');
+        $this->assertConfigurationIsValid([[]], 'payment_methods');
     }
 
     /**
      * @test
      */
-    public function if_payment_methods_contains_a_number_then_it_is_amount_of_randomly_generated_resources()
+    public function payment_methods_can_be_generated_randomly()
     {
-        $processedConfiguration = (new PartialProcessor())->processConfiguration(
-            $this->getConfiguration(),
-            'payment_methods',
-            [['payment_methods' => 3]]
-        );
-
-        $this->assertCount(3, $processedConfiguration['payment_methods']);
-
-        $processedConfiguration = (new PartialProcessor())->processConfiguration(
-            $this->getConfiguration(),
-            'payment_methods',
-            [['payment_methods' => '2']]
-        );
-
-        $this->assertCount(2, $processedConfiguration['payment_methods']);
+        $this->assertConfigurationIsValid([['random' => 4]], 'random');
+        $this->assertPartialConfigurationIsInvalid([['random' => -1]], 'random');
     }
 
     /**
@@ -88,9 +73,44 @@ final class PaymentMethodFixtureConfigurationTest extends \PHPUnit_Framework_Tes
     {
         $this->assertProcessedConfigurationEquals(
             [['payment_methods' => ['PayPal', 'PayU']]],
-            ['payment_methods' => ['PayPal', 'PayU']],
+            ['payment_methods' => [['name' => 'PayPal'], ['name' => 'PayU']]],
             'payment_methods'
         );
+    }
+
+    /**
+     * @test
+     */
+    public function payment_method_name_is_required()
+    {
+        $this->assertPartialConfigurationIsInvalid([['payment_methods' => [null]]], 'payment_methods');
+        $this->assertPartialConfigurationIsInvalid([['payment_methods' => [['name' => null]]]], 'payment_methods');
+
+        $this->assertConfigurationIsValid([['payment_methods' => [['name' => 'custom1']]]], 'payment_methods');
+    }
+
+    /**
+     * @test
+     */
+    public function payment_method_code_is_optional()
+    {
+        $this->assertConfigurationIsValid([['payment_methods' => [['code' => 'CUSTOM']]]], 'payment_methods.*.code');
+    }
+
+    /**
+     * @test
+     */
+    public function payment_method_gateway_is_optional()
+    {
+        $this->assertConfigurationIsValid([['payment_methods' => [['gateway' => 'online']]]], 'payment_methods.*.gateway');
+    }
+
+    /**
+     * @test
+     */
+    public function payment_method_may_be_toggled()
+    {
+        $this->assertConfigurationIsValid([['payment_methods' => [['enabled' => false]]]], 'payment_methods.*.enabled');
     }
 
     /**

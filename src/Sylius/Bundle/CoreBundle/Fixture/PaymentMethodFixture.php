@@ -12,28 +12,24 @@
 namespace Sylius\Bundle\CoreBundle\Fixture;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
+use Symfony\Component\OptionsResolver\Options;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class PaymentMethodFixture extends AbstractFixture
+final class PaymentMethodFixture extends AbstractResourceFixture
 {
     /**
      * @var FactoryInterface
      */
     private $paymentMethodFactory;
-
-    /**
-     * @var ObjectManager
-     */
-    private $paymentMethodManager;
 
     /**
      * @var RepositoryInterface
@@ -55,26 +51,12 @@ final class PaymentMethodFixture extends AbstractFixture
         ObjectManager $paymentMethodManager,
         RepositoryInterface $localeRepository
     ) {
+        parent::__construct($paymentMethodManager, 'payment_methods', 'name');
 
         $this->paymentMethodFactory = $paymentMethodFactory;
-        $this->paymentMethodManager = $paymentMethodManager;
         $this->localeRepository = $localeRepository;
 
         $this->faker = \Faker\Factory::create();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function load(array $options)
-    {
-        foreach ($options['payment_methods'] as $name) {
-            $paymentMethod = $this->createPaymentMethod($name, $options['gateway']);
-
-            $this->paymentMethodManager->persist($paymentMethod);
-        }
-
-        $this->paymentMethodManager->flush();
     }
 
     /**
@@ -88,56 +70,73 @@ final class PaymentMethodFixture extends AbstractFixture
     /**
      * {@inheritdoc}
      */
-    protected function configureOptionsNode(ArrayNodeDefinition $optionsNode)
-    {
-        $optionsNodeBuilder = $optionsNode->children();
-
-        $optionsNodeBuilder->scalarNode('gateway')->defaultValue('offline');
-
-        /** @var ArrayNodeDefinition $paymentMethodsNode */
-        $paymentMethodsNode = $optionsNodeBuilder->arrayNode('payment_methods');
-        $paymentMethodsNode
-            ->isRequired()
-            ->requiresAtLeastOneElement()
-            ->beforeNormalization()
-                ->ifTrue(function ($value) {
-                    return is_numeric($value) && 0 !== (int) $value;
-                })
-                ->then(function ($amount) {
-                    $names = [];
-                    for ($i = 0; $i < (int) $amount; ++$i) {
-                        $names[] = $this->faker->words(3, true);
-                    }
-
-                    return $names;
-                })
-        ;
-        $paymentMethodsNode->prototype('scalar');
-    }
-
-    /**
-     * @param string $name
-     * @param string $gateway
-     *
-     * @return PaymentMethodInterface
-     */
-    private function createPaymentMethod($name, $gateway)
+    protected function loadResource(array $options)
     {
         /** @var PaymentMethodInterface $paymentMethod */
         $paymentMethod = $this->paymentMethodFactory->createNew();
 
-        $paymentMethod->setCode(StringInflector::nameToCode($name));
-        $paymentMethod->setGateway($gateway);
-        $paymentMethod->setEnabled(true);
+        $paymentMethod->setCode($options['code']);
+        $paymentMethod->setGateway($options['gateway']);
+        $paymentMethod->setEnabled($options['enabled']);
 
         foreach ($this->getLocales() as $localeCode) {
             $paymentMethod->setCurrentLocale($localeCode);
             $paymentMethod->setFallbackLocale($localeCode);
 
-            $paymentMethod->setName(sprintf('[%s] %s', $localeCode, $name));
+            $paymentMethod->setName(sprintf('[%s] %s', $localeCode, $options['name']));
         }
 
         return $paymentMethod;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function configureOptionsNode(ArrayNodeDefinition $optionsNode)
+    {
+        $optionsNode->children()->scalarNode('gateway')->defaultValue('offline');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function configureResourceNode(ArrayNodeDefinition $resourceNode)
+    {
+        $resourceNode
+            ->children()
+                ->scalarNode('code')->cannotBeEmpty()->end()
+                ->scalarNode('gateway')->cannotBeEmpty()->end()
+                ->booleanNode('enabled')->end()
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function configureResourceOptionsResolver(array $options, OptionsResolver $optionsResolver)
+    {
+        $optionsResolver
+            ->setRequired('name')
+            ->setDefault('code', function (Options $options) {
+                return StringInflector::nameToCode($options['name']);
+            })
+            ->setDefault('gateway', $options['gateway'])
+            ->setDefault('enabled', true)
+            ->setAllowedTypes('enabled', 'bool')
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function generateResourcesOptions($amount)
+    {
+        $resourcesOptions = [];
+        for ($i = 0; $i < $amount; ++$i) {
+            $resourcesOptions[] = ['name' => $this->faker->words(3, true)];
+        }
+
+        return $resourcesOptions;
     }
 
     /**

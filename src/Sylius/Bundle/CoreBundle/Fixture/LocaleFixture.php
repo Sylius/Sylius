@@ -54,14 +54,14 @@ final class LocaleFixture extends AbstractFixture
      */
     public function load(array $options)
     {
-        $localesCodes = array_unique(array_merge([$this->baseLocaleCode], $options['locales']));
+        $localesCodes = array_merge([$this->baseLocaleCode => true], $options['locales']);
 
-        foreach ($localesCodes as $localeCode) {
+        foreach ($localesCodes as $localeCode => $enabled) {
             /** @var LocaleInterface $locale */
             $locale = $this->localeFactory->createNew();
 
             $locale->setCode($localeCode);
-            $locale->setEnabled(true);
+            $locale->setEnabled($enabled);
 
             $this->localeManager->persist($locale);
         }
@@ -85,7 +85,9 @@ final class LocaleFixture extends AbstractFixture
         $optionsNode
             ->children()
                 ->arrayNode('locales')
+                    ->useAttributeAsKey('code')
                     ->prototype('scalar')
+                        ->defaultTrue()
         ;
     }
 }

@@ -10,18 +10,18 @@ sylius_fixtures:
                 locale:
                     options:
                         locales:
-                            - en_US
-                            - en_GB
-                            - es_ES
-                            - pl_PL
+                            en_US: ~
+                            en_GB: ~
+                            es_ES: ~
+                            pl_PL: ~
 
                 currency:
                     options:
                         currencies:
-                            - EUR
-                            - USD
-                            - GBP
-                            - CHF
+                            EUR: ~
+                            USD: ~
+                            GBP: ~
+                            CHF: ~
 
                 geographical:
                     options:
@@ -53,20 +53,20 @@ sylius_fixtures:
 
                 payment_method:
                     options:
-                        payment_methods: 10
+                        random: 10
 
                 shipping_category:
                     options:
-                        shipping_categories: 10
+                        random: 10
 
                 shipping_method:
                     options:
-                        shipping_methods: 20
+                        random: 20
 
                 channel:
                     options:
-                        channels: 3
+                        random: 3
 
                 user:
                     options:
-                        users: 20
+                        random: 20

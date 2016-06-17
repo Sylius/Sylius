@@ -28,33 +28,18 @@ final class ShippingCategoryFixtureConfigurationTest extends \PHPUnit_Framework_
     /**
      * @test
      */
-    public function shipping_categories_must_be_set_and_not_empty()
+    public function shipping_categories_are_optional()
     {
-        $this->assertPartialConfigurationIsInvalid([[]], 'shipping_categories');
-        $this->assertPartialConfigurationIsInvalid([['shipping_categories' => null]], 'shipping_categories');
-        $this->assertPartialConfigurationIsInvalid([['shipping_categories' => []]], 'shipping_categories');
+        $this->assertConfigurationIsValid([[]], 'shipping_categories');
     }
 
     /**
      * @test
      */
-    public function if_shipping_categories_contains_a_number_then_it_is_amount_of_randomly_generated_resources()
+    public function shipping_categories_can_be_generated_randomly()
     {
-        $processedConfiguration = (new PartialProcessor())->processConfiguration(
-            $this->getConfiguration(),
-            'shipping_categories',
-            [['shipping_categories' => 3]]
-        );
-
-        $this->assertCount(3, $processedConfiguration['shipping_categories']);
-
-        $processedConfiguration = (new PartialProcessor())->processConfiguration(
-            $this->getConfiguration(),
-            'shipping_categories',
-            [['shipping_categories' => '2']]
-        );
-
-        $this->assertCount(2, $processedConfiguration['shipping_categories']);
+        $this->assertConfigurationIsValid([['random' => 4]], 'random');
+        $this->assertPartialConfigurationIsInvalid([['random' => -1]], 'random');
     }
 
     /**
@@ -64,9 +49,36 @@ final class ShippingCategoryFixtureConfigurationTest extends \PHPUnit_Framework_
     {
         $this->assertProcessedConfigurationEquals(
             [['shipping_categories' => ['Big', 'Small']]],
-            ['shipping_categories' => ['Big', 'Small']],
+            ['shipping_categories' => [['name' => 'Big'], ['name' => 'Small']]],
             'shipping_categories'
         );
+    }
+
+    /**
+     * @test
+     */
+    public function shipping_category_name_is_required()
+    {
+        $this->assertPartialConfigurationIsInvalid([['shipping_categories' => [null]]], 'shipping_categories');
+        $this->assertPartialConfigurationIsInvalid([['shipping_categories' => [['name' => null]]]], 'shipping_categories');
+
+        $this->assertConfigurationIsValid([['shipping_categories' => [['name' => 'custom1']]]], 'shipping_categories');
+    }
+
+    /**
+     * @test
+     */
+    public function shipping_category_code_is_optional()
+    {
+        $this->assertConfigurationIsValid([['shipping_categories' => [['code' => 'CUSTOM']]]], 'shipping_categories.*.code');
+    }
+
+    /**
+     * @test
+     */
+    public function shipping_category_description_is_optional()
+    {
+        $this->assertConfigurationIsValid([['shipping_categories' => [['description' => 'Lorem ipsum']]]], 'shipping_categories.*.description');
     }
 
     /**

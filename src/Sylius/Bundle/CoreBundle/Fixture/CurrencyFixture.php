@@ -54,14 +54,14 @@ final class CurrencyFixture extends AbstractFixture
      */
     public function load(array $options)
     {
-        $currenciesCodes = array_unique(array_merge([$this->baseCurrencyCode], $options['currencies']));
+        $currenciesCodes = array_merge([$this->baseCurrencyCode => true], $options['currencies']);
 
-        foreach ($currenciesCodes as $currencyCode) {
+        foreach ($currenciesCodes as $currencyCode => $enabled) {
             /** @var CurrencyInterface $currency */
             $currency = $this->currencyFactory->createNew();
 
             $currency->setCode($currencyCode);
-            $currency->setEnabled(true);
+            $currency->setEnabled($enabled);
 
             if ($currencyCode === $this->baseCurrencyCode) {
                 $currency->setBase(true);
@@ -91,7 +91,9 @@ final class CurrencyFixture extends AbstractFixture
         $optionsNode
             ->children()
                 ->arrayNode('currencies')
-                    ->prototype('scalar')
+                    ->useAttributeAsKey('code')
+                    ->prototype('boolean')
+                        ->defaultTrue()
         ;
     }
 }

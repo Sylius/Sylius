@@ -17,21 +17,18 @@ use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
+use Symfony\Component\OptionsResolver\Options;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class ShippingCategoryFixture extends AbstractFixture
+final class ShippingCategoryFixture extends AbstractResourceFixture
 {
     /**
      * @var FactoryInterface
      */
     private $shippingCategoryFactory;
-
-    /**
-     * @var ObjectManager
-     */
-    private $shippingCategoryManager;
 
     /**
      * @var \Faker\Generator
@@ -46,25 +43,11 @@ final class ShippingCategoryFixture extends AbstractFixture
         FactoryInterface $shippingCategoryFactory,
         ObjectManager $shippingCategoryManager
     ) {
+        parent::__construct($shippingCategoryManager, 'shipping_categories', 'name');
 
         $this->shippingCategoryFactory = $shippingCategoryFactory;
-        $this->shippingCategoryManager = $shippingCategoryManager;
 
         $this->faker = \Faker\Factory::create();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function load(array $options)
-    {
-        foreach ($options['shipping_categories'] as $name) {
-            $shippingCategory = $this->createShippingCategory($name, $this->faker->paragraph);
-
-            $this->shippingCategoryManager->persist($shippingCategory);
-        }
-
-        $this->shippingCategoryManager->flush();
     }
 
     /**
@@ -78,46 +61,56 @@ final class ShippingCategoryFixture extends AbstractFixture
     /**
      * {@inheritdoc}
      */
-    protected function configureOptionsNode(ArrayNodeDefinition $optionsNode)
-    {
-        $optionsNodeBuilder = $optionsNode->children();
-
-        /** @var ArrayNodeDefinition $shippingCategoriesNode */
-        $shippingCategoriesNode = $optionsNodeBuilder->arrayNode('shipping_categories');
-        $shippingCategoriesNode
-            ->isRequired()
-            ->requiresAtLeastOneElement()
-            ->beforeNormalization()
-                ->ifTrue(function ($value) {
-                    return is_numeric($value) && 0 !== (int) $value;
-                })
-                ->then(function ($amount) {
-                    $names = [];
-                    for ($i = 0; $i < (int) $amount; ++$i) {
-                        $names[] = $this->faker->words(3, true);
-                    }
-
-                    return $names;
-                })
-        ;
-        $shippingCategoriesNode->prototype('scalar');
-    }
-
-    /**
-     * @param string $name
-     * @param string $description
-     *
-     * @return ShippingCategoryInterface
-     */
-    private function createShippingCategory($name, $description)
+    protected function loadResource(array $options)
     {
         /** @var ShippingCategoryInterface $shippingCategory */
         $shippingCategory = $this->shippingCategoryFactory->createNew();
 
-        $shippingCategory->setCode(StringInflector::nameToCode($name));
-        $shippingCategory->setName($name);
-        $shippingCategory->setDescription($description);
+        $shippingCategory->setCode($options['code']);
+        $shippingCategory->setName($options['name']);
+        $shippingCategory->setDescription($options['description']);
 
         return $shippingCategory;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function configureResourceNode(ArrayNodeDefinition $resourceNode)
+    {
+        $resourceNode
+            ->children()
+            ->scalarNode('code')->cannotBeEmpty()->end()
+            ->scalarNode('description')->cannotBeEmpty()->end()
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function configureResourceOptionsResolver(array $options, OptionsResolver $optionsResolver)
+    {
+        $optionsResolver
+            ->setRequired('name')
+            ->setDefault('code', function (Options $options) {
+                return StringInflector::nameToCode($options['name']);
+            })
+            ->setDefault('description', function (Options $options) {
+                return $this->faker->paragraph;
+            })
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function generateResourcesOptions($amount)
+    {
+        $resourcesOptions = [];
+        for ($i = 0; $i < $amount; ++$i) {
+            $resourcesOptions[] = ['name' => $this->faker->words(3, true)];
+        }
+
+        return $resourcesOptions;
     }
 }

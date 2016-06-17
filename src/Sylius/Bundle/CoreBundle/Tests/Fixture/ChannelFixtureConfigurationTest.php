@@ -28,33 +28,18 @@ final class ChannelFixtureConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function channels_must_be_set_and_not_empty()
+    public function channels_are_optional()
     {
-        $this->assertPartialConfigurationIsInvalid([[]], 'channels');
-        $this->assertPartialConfigurationIsInvalid([['channels' => null]], 'channels');
-        $this->assertPartialConfigurationIsInvalid([['channels' => []]], 'channels');
+        $this->assertConfigurationIsValid([[]], 'channels');
     }
 
     /**
      * @test
      */
-    public function if_channels_contains_a_number_then_it_is_amount_of_randomly_generated_resources()
+    public function channels_can_be_generated_randomly()
     {
-        $processedConfiguration = (new PartialProcessor())->processConfiguration(
-            $this->getConfiguration(),
-            'channels',
-            [['channels' => 3]]
-        );
-
-        static::assertCount(3, $processedConfiguration['channels']);
-
-        $processedConfiguration = (new PartialProcessor())->processConfiguration(
-            $this->getConfiguration(),
-            'channels',
-            [['channels' => '2']]
-        );
-
-        static::assertCount(2, $processedConfiguration['channels']);
+        $this->assertConfigurationIsValid([['random' => 4]], 'random');
+        $this->assertPartialConfigurationIsInvalid([['random' => -1]], 'random');
     }
 
     /**

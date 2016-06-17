@@ -32,33 +32,18 @@ final class UserFixtureConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function users_must_be_set_and_not_empty()
+    public function users_are_optional()
     {
-        $this->assertPartialConfigurationIsInvalid([[]], 'users');
-        $this->assertPartialConfigurationIsInvalid([['users' => null]], 'users');
-        $this->assertPartialConfigurationIsInvalid([['users' => []]], 'users');
+        $this->assertConfigurationIsValid([[]], 'users');
     }
 
     /**
      * @test
      */
-    public function if_users_contains_a_number_then_it_is_amount_of_randomly_generated_resources()
+    public function users_can_be_generated_randomly()
     {
-        $processedConfiguration = (new PartialProcessor())->processConfiguration(
-            $this->getConfiguration(),
-            'users',
-            [['users' => 3]]
-        );
-
-        static::assertCount(3, $processedConfiguration['users']);
-
-        $processedConfiguration = (new PartialProcessor())->processConfiguration(
-            $this->getConfiguration(),
-            'users',
-            [['users' => '2']]
-        );
-
-        static::assertCount(2, $processedConfiguration['users']);
+        $this->assertConfigurationIsValid([['random' => 4]], 'random');
+        $this->assertPartialConfigurationIsInvalid([['random' => -1]], 'random');
     }
 
     /**

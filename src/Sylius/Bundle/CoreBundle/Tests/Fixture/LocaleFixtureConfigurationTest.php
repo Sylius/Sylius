@@ -36,7 +36,7 @@ final class LocaleFixtureConfigurationTest extends \PHPUnit_Framework_TestCase
      */
     public function locales_can_be_set()
     {
-        $this->assertConfigurationIsValid([['locales' => ['en_US', 'pl_PL', 'es_ES']]], 'locales');
+        $this->assertConfigurationIsValid([['locales' => ['en_US' => true, 'pl_PL' => false, 'es_ES' => true]]], 'locales');
     }
 
     /**

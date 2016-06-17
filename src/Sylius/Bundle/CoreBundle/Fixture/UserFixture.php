@@ -78,22 +78,22 @@ final class UserFixture extends AbstractResourceFixture
     /**
      * {@inheritdoc}
      */
-    protected function loadResource(array $resourceOptions)
+    protected function loadResource(array $options)
     {
         /** @var CustomerInterface $customer */
         $customer = $this->customerFactory->createNew();
-        $customer->setEmail($resourceOptions['email']);
-        $customer->setFirstName($resourceOptions['first_name']);
-        $customer->setLastName($resourceOptions['last_name']);
-        $customer->setCurrencyCode($resourceOptions['currency_code']);
+        $customer->setEmail($options['email']);
+        $customer->setFirstName($options['first_name']);
+        $customer->setLastName($options['last_name']);
+        $customer->setCurrencyCode($options['currency_code']);
 
         /** @var UserInterface $user */
         $user = $this->userFactory->createNew();
-        $user->setPlainPassword($resourceOptions['password']);
-        $user->setEnabled($resourceOptions['enabled']);
+        $user->setPlainPassword($options['password']);
+        $user->setEnabled($options['enabled']);
         $user->addRole('ROLE_USER');
 
-        if ($resourceOptions['admin']) {
+        if ($options['admin']) {
             $user->addRole('ROLE_ADMINISTRATION_ACCESS');
         }
 
@@ -121,7 +121,7 @@ final class UserFixture extends AbstractResourceFixture
     /**
      * {@inheritdoc}
      */
-    protected function configureOptionsResolver(OptionsResolver $optionsResolver)
+    protected function configureResourceOptionsResolver(array $options, OptionsResolver $optionsResolver)
     {
         $optionsResolver
             ->setRequired(['email'])
@@ -154,13 +154,13 @@ final class UserFixture extends AbstractResourceFixture
     /**
      * {@inheritdoc}
      */
-    protected function generateResourcesConfigurations($amount)
+    protected function generateResourcesOptions($amount)
     {
-        $emails = [];
+        $resourcesOptions = [];
         for ($i = 0; $i < $amount; ++$i) {
-            $emails[] = $this->faker->email;
+            $resourcesOptions[] = ['email' => $this->faker->email];
         }
 
-        return array_unique($emails);
+        return $resourcesOptions;
     }
 }

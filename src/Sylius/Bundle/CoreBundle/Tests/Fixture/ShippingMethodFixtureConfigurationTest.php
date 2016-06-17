@@ -31,33 +31,18 @@ final class ShippingMethodFixtureConfigurationTest extends \PHPUnit_Framework_Te
     /**
      * @test
      */
-    public function shipping_methods_must_be_set_and_not_empty()
+    public function shipping_methods_are_optional()
     {
-        $this->assertPartialConfigurationIsInvalid([[]], 'shipping_methods');
-        $this->assertPartialConfigurationIsInvalid([['shipping_methods' => null]], 'shipping_methods');
-        $this->assertPartialConfigurationIsInvalid([['shipping_methods' => []]], 'shipping_methods');
+        $this->assertConfigurationIsValid([[]], 'shipping_methods');
     }
 
     /**
      * @test
      */
-    public function if_shipping_methods_contains_a_number_then_it_is_amount_of_randomly_generated_resources()
+    public function shipping_methods_can_be_generated_randomly()
     {
-        $processedConfiguration = (new PartialProcessor())->processConfiguration(
-            $this->getConfiguration(),
-            'shipping_methods',
-            [['shipping_methods' => 3]]
-        );
-
-        static::assertCount(3, $processedConfiguration['shipping_methods']);
-
-        $processedConfiguration = (new PartialProcessor())->processConfiguration(
-            $this->getConfiguration(),
-            'shipping_methods',
-            [['shipping_methods' => '2']]
-        );
-
-        static::assertCount(2, $processedConfiguration['shipping_methods']);
+        $this->assertConfigurationIsValid([['random' => 4]], 'random');
+        $this->assertPartialConfigurationIsInvalid([['random' => -1]], 'random');
     }
 
     /**

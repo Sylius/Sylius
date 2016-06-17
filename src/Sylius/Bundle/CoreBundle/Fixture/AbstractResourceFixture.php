@@ -13,9 +13,11 @@ namespace Sylius\Bundle\CoreBundle\Fixture;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
+use Sylius\Bundle\FixturesBundle\Fixture\FixtureInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
+use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Webmozart\Assert\Assert;
@@ -23,7 +25,7 @@ use Webmozart\Assert\Assert;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-abstract class AbstractResourceFixture extends AbstractFixture
+abstract class AbstractResourceFixture implements FixtureInterface
 {
     /**
      * @var ObjectManager
@@ -33,23 +35,23 @@ abstract class AbstractResourceFixture extends AbstractFixture
     /**
      * @var string
      */
-    private $resourceNodeName;
+    private $nodeName;
 
     /**
      * @var string|null
      */
-    private $resourceNodeIdentifier;
+    private $identifierField;
 
     /**
      * @param ObjectManager $resourceManager
-     * @param string $resourceNodeName
-     * @param string|null $resourceNodeIdentifier
+     * @param string $nodeName
+     * @param string|null $identifierField
      */
-    public function __construct(ObjectManager $resourceManager, $resourceNodeName, $resourceNodeIdentifier = null)
+    public function __construct(ObjectManager $resourceManager, $nodeName, $identifierField = null)
     {
         $this->resourceManager = $resourceManager;
-        $this->resourceNodeName = $resourceNodeName;
-        $this->resourceNodeIdentifier = $resourceNodeIdentifier;
+        $this->nodeName = $nodeName;
+        $this->identifierField = $identifierField;
     }
 
     /**
@@ -57,11 +59,10 @@ abstract class AbstractResourceFixture extends AbstractFixture
      */
     final public function load(array $options)
     {
-        $optionsResolver = new OptionsResolver();
+        $optionsResolver = $this->createConfiguredOptionsResolver($options);
 
-        $this->configureOptionsResolver($optionsResolver);
-
-        foreach ($options[$this->resourceNodeName] as $resourceOptions) {
+        $resourcesOptions = array_merge($options[$this->nodeName], $this->generateResourcesOptions($options['random']));
+        foreach ($resourcesOptions as $resourceOptions) {
             $resource = $this->loadResource($optionsResolver->resolve($resourceOptions));
 
             $this->resourceManager->persist($resource);
@@ -73,50 +74,53 @@ abstract class AbstractResourceFixture extends AbstractFixture
     /**
      * {@inheritdoc}
      */
-    final protected function configureOptionsNode(ArrayNodeDefinition $optionsNode)
+    final public function getConfigTreeBuilder()
     {
-        /** @var ArrayNodeDefinition $resourcesNode */
-        $resourcesNode = $optionsNode->children()->arrayNode($this->resourceNodeName);
+        $treeBuilder = new TreeBuilder();
+        $optionsNode = $treeBuilder->root($this->getName());
 
-        $resourcesNode
-            ->beforeNormalization()
-                ->ifTrue(function ($value) {
-                    return is_numeric($value) && 0 !== (int) $value;
-                })
-                ->then(function ($amount) {
-                    return $this->generateResourcesConfigurations($amount);
-                })
-            ->end()
-        ;
+        $optionsNode->children()->integerNode('random')->min(0)->defaultValue(0);
+
+        /** @var ArrayNodeDefinition $resourcesNode */
+        $resourcesNode = $optionsNode->children()->arrayNode($this->nodeName);
 
         /** @var ArrayNodeDefinition $resourceNode */
         $resourceNode = $resourcesNode
-            ->isRequired()
             ->requiresAtLeastOneElement()
             ->prototype('array')
         ;
 
-
-        if (null !== $this->resourceNodeIdentifier) {
+        if (null !== $this->identifierField) {
             $resourceNode
                 ->children()
-                    ->scalarNode($this->resourceNodeIdentifier)
-                        ->isRequired()
-                        ->cannotBeEmpty()
+                ->scalarNode($this->identifierField)
+                ->isRequired()
+                ->cannotBeEmpty()
             ;
 
             $resourceNode
                 ->beforeNormalization()
-                    ->ifString()
-                    ->then(function ($identifier) {
-                        return [$this->resourceNodeIdentifier => $identifier];
-                    })
+                ->ifString()
+                ->then(function ($identifier) {
+                    return [$this->identifierField => $identifier];
+                })
             ;
         }
 
         $resourceNode->ignoreExtraKeys(false);
 
+        $this->configureOptionsNode($optionsNode);
         $this->configureResourceNode($resourceNode);
+
+        return $treeBuilder;
+    }
+
+    /**
+     * @param ArrayNodeDefinition $optionsNode
+     */
+    protected function configureOptionsNode(ArrayNodeDefinition $optionsNode)
+    {
+        // empty
     }
 
     /**
@@ -128,9 +132,10 @@ abstract class AbstractResourceFixture extends AbstractFixture
     }
 
     /**
+     * @param array $options
      * @param OptionsResolver $optionsResolver
      */
-    protected function configureOptionsResolver(OptionsResolver $optionsResolver)
+    protected function configureResourceOptionsResolver(array $options, OptionsResolver $optionsResolver)
     {
         // empty
     }
@@ -191,16 +196,31 @@ abstract class AbstractResourceFixture extends AbstractFixture
     }
 
     /**
-     * @param array $resourceOptions
+     * @param array $options
      *
      * @return ResourceInterface
      */
-    abstract protected function loadResource(array $resourceOptions);
+    abstract protected function loadResource(array $options);
 
     /**
      * @param int $amount
      *
      * @return array
      */
-    abstract protected function generateResourcesConfigurations($amount);
+    abstract protected function generateResourcesOptions($amount);
+
+    /**
+     * @param array $options
+     *
+     * @return OptionsResolver
+     */
+    private function createConfiguredOptionsResolver(array $options)
+    {
+        unset($options[$this->nodeName]);
+
+        $optionsResolver = new OptionsResolver();
+        $this->configureResourceOptionsResolver($options, $optionsResolver);
+
+        return $optionsResolver;
+    }
 }

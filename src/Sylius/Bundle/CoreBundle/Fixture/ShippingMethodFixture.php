@@ -133,7 +133,7 @@ final class ShippingMethodFixture extends AbstractResourceFixture
     /**
      * {@inheritdoc}
      */
-    protected function configureOptionsResolver(OptionsResolver $optionsResolver)
+    protected function configureResourceOptionsResolver(array $options, OptionsResolver $optionsResolver)
     {
         $optionsResolver
             ->setRequired(['name'])
@@ -157,14 +157,14 @@ final class ShippingMethodFixture extends AbstractResourceFixture
     /**
      * {@inheritdoc}
      */
-    protected function generateResourcesConfigurations($amount)
+    protected function generateResourcesOptions($amount)
     {
-        $names = [];
+        $resourcesOptions = [];
         for ($i = 0; $i < (int) $amount; ++$i) {
-            $names[] = $this->faker->words(3, true);
+            $resourcesOptions[] = ['name' => $this->faker->words(3, true)];
         }
 
-        return $names;
+        return $resourcesOptions;
     }
 
     /**
