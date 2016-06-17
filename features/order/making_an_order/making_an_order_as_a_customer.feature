@@ -10,14 +10,12 @@ Feature: Making an order
         And the store ships everywhere for free
         And the store allows paying offline
         And there is a user "john.doe@example.com"
-        And this user is logged in
-        And he has product "PHP T-Shirt" in the cart
-        And he proceed selecting "Offline" payment method
-        And he confirm his order
+        And this user has this product in the cart
         And I am logged in as an administrator
 
     @ui
     Scenario: Verifying that order has new state
+        Given this user bought this product
         When I browse orders
         Then I should see a single order from customer "john.doe@example.com"
         And it should have a "new" state

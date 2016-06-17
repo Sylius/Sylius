@@ -17,6 +17,8 @@ use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Shop\Cart\SummaryPageInterface;
 use Sylius\Behat\Page\Shop\Product\ShowPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
+use Sylius\Behat\Service\SecurityServiceInterface;
+use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Product\Model\OptionInterface;
 use Sylius\Component\Product\Model\ProductInterface;
@@ -50,21 +52,29 @@ final class CartContext implements Context
     private $notificationChecker;
 
     /**
+     * @var SecurityServiceInterface
+     */
+    private $securityService;
+
+    /**
      * @param SharedStorageInterface $sharedStorage
      * @param SummaryPageInterface $summaryPage
      * @param ShowPageInterface $productShowPage
      * @param NotificationCheckerInterface $notificationChecker
+     * @param SecurityServiceInterface $securityService
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         SummaryPageInterface $summaryPage,
         ShowPageInterface $productShowPage,
-        NotificationCheckerInterface $notificationChecker
+        NotificationCheckerInterface $notificationChecker,
+        SecurityServiceInterface $securityService
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->summaryPage = $summaryPage;
         $this->productShowPage = $productShowPage;
         $this->notificationChecker = $notificationChecker;
+        $this->securityService = $securityService;
     }
 
     /**
@@ -221,7 +231,7 @@ final class CartContext implements Context
     /**
      * @Given /^I add (this product) to the cart$/
      * @Given I added product :product to the cart
-     * @Given /^(?:I|he|she) (?:have|had|has) (product "[^"]+") in the cart$/
+     * @Given /^I (?:have|had) (product "[^"]+") in the cart$/
      * @When I add product :product to the cart
      */
     public function iAddProductToTheCart(ProductInterface $product)
@@ -230,6 +240,16 @@ final class CartContext implements Context
         $this->productShowPage->addToCart();
 
         $this->sharedStorage->set('product', $product);
+    }
+
+    /**
+     * @Given /^(this user) has (this product) in the cart$/
+     */
+    public function heHasThisProductInTheCart(UserInterface $user, ProductInterface $product)
+    {
+        $this->securityService->performActionAs($user, function () use ($product) {
+            $this->iAddProductToTheCart($product);
+        });
     }
 
     /**

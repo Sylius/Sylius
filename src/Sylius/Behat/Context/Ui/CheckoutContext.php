@@ -24,6 +24,7 @@ use Sylius\Behat\Page\Shop\Checkout\SecurityStepInterface;
 use Sylius\Behat\Page\Shop\Checkout\ShippingStepInterface;
 use Sylius\Behat\Page\Shop\Checkout\ThankYouPageInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
+use Sylius\Behat\Service\SecurityServiceInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\UserInterface;
@@ -103,6 +104,11 @@ final class CheckoutContext implements Context
     private $orderRepository;
 
     /**
+     * @var SecurityServiceInterface
+     */
+    private $securityService;
+
+    /**
      * @param SharedStorageInterface $sharedStorage
      * @param SecurityStepInterface $checkoutSecurityStep
      * @param AddressingStepInterface $checkoutAddressingStep
@@ -116,6 +122,7 @@ final class CheckoutContext implements Context
      * @param ThankYouPageInterface $checkoutThankYouPage
      * @param OrderPaymentsPageInterface $orderPaymentsPage
      * @param OrderRepositoryInterface $orderRepository
+     * @param SecurityServiceInterface $securityService
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -130,7 +137,8 @@ final class CheckoutContext implements Context
         FinalizeStepInterface $checkoutFinalizeStep,
         ThankYouPageInterface $checkoutThankYouPage,
         OrderPaymentsPageInterface $orderPaymentsPage,
-        OrderRepositoryInterface $orderRepository
+        OrderRepositoryInterface $orderRepository,
+        SecurityServiceInterface $securityService
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->checkoutSecurityStep = $checkoutSecurityStep;
@@ -145,6 +153,7 @@ final class CheckoutContext implements Context
         $this->checkoutThankYouPage = $checkoutThankYouPage;
         $this->orderPaymentsPage = $orderPaymentsPage;
         $this->orderRepository = $orderRepository;
+        $this->securityService = $securityService;
     }
 
     /**
@@ -162,6 +171,17 @@ final class CheckoutContext implements Context
     public function iAmAtTheCheckoutAddressingStep()
     {
         $this->addressingPage->open();
+    }
+
+    /**
+     * @Given /^(this user) bought this product$/
+     */
+    public function thisUserBought(UserInterface $user)
+    {
+        $this->securityService->performActionAs($user, function () {
+            $this->iProceedSelectingOfflinePaymentMethod();
+            $this->iConfirmMyOrder();
+        });
     }
 
     /**
@@ -323,9 +343,9 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @When /^(?:I|he|she) proceed selecting "([^"]+)" payment method$/
+     * @When I proceed selecting :paymentMethodName payment method
      */
-    public function iProceedSelectingOfflinePaymentMethod($paymentMethodName)
+    public function iProceedSelectingOfflinePaymentMethod($paymentMethodName = 'Offline')
     {
         $this->iProceedSelectingShippingCountryAndPaymentMethod(null, $paymentMethodName);
     }
@@ -363,7 +383,7 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @When /^(?:I|he|she) confirm (?:my|his|her) order$/
+     * @When /^I confirm my order$/
      */
     public function iConfirmMyOrder()
     {

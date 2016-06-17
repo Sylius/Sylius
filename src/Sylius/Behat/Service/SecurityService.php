@@ -72,19 +72,71 @@ final class SecurityService implements SecurityServiceInterface
             throw new \InvalidArgumentException(sprintf('There is no user with email %s', $email));
         }
 
-        $this->logInUser($user);
+        $this->logUserIn($user);
+    }
+
+    public function logOut()
+    {
+        $this->setSerializedToken(null);
+
+        $this->cookieSetter->setCookie($this->session->getName(), $this->session->getId());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function performActionAs(UserInterface $user, callable $action)
+    {
+        $previousToken = $this->getToken();
+        $this->logUserIn($user);
+        $action();
+
+        if (null !== $previousToken) {
+            $this->restorePreviousSessionToken($previousToken);
+
+            return;
+        }
+
+        $this->logOut();
     }
 
     /**
      * @param UserInterface $user
      */
-    private function logInUser(UserInterface $user)
+    private function logUserIn(UserInterface $user)
     {
         $token = new UsernamePasswordToken($user, $user->getPassword(), 'randomstringbutnotnull', $user->getRoles());
+        $serializedToken = serialize($token);
 
-        $this->session->set($this->sessionTokenVariable, serialize($token));
-        $this->session->save();
+        $this->setSerializedToken($serializedToken);
 
         $this->cookieSetter->setCookie($this->session->getName(), $this->session->getId());
+    }
+
+    /**
+     * @param string $token
+     */
+    private function restorePreviousSessionToken($token)
+    {
+        $this->setSerializedToken($token);
+
+        $this->cookieSetter->setCookie($this->session->getName(), $this->session->getId());
+    }
+
+    /**
+     * @param string $token
+     */
+    private function setSerializedToken($token)
+    {
+        $this->session->set($this->sessionTokenVariable, $token);
+        $this->session->save();
+    }
+
+    /**
+     * @return string
+     */
+    private function getToken()
+    {
+        return $this->session->get($this->sessionTokenVariable);
     }
 }
