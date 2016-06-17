@@ -43,7 +43,7 @@ final class PaymentMethodFixture extends AbstractFixture
     /**
      * @var \Faker\Generator
      */
-    private $defaultFaker;
+    private $faker;
 
     /**
      * @param FactoryInterface $paymentMethodFactory
@@ -60,7 +60,7 @@ final class PaymentMethodFixture extends AbstractFixture
         $this->paymentMethodManager = $paymentMethodManager;
         $this->localeRepository = $localeRepository;
 
-        $this->defaultFaker = \Faker\Factory::create();
+        $this->faker = \Faker\Factory::create();
     }
 
     /**
@@ -106,7 +106,7 @@ final class PaymentMethodFixture extends AbstractFixture
                 ->then(function ($amount) {
                     $names = [];
                     for ($i = 0; $i < (int) $amount; ++$i) {
-                        $names[] = $this->defaultFaker->words(3, true);
+                        $names[] = $this->faker->words(3, true);
                     }
 
                     return $names;

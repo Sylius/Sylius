@@ -53,7 +53,7 @@ final class ChannelFixture extends AbstractResourceFixture
     /**
      * @var \Faker\Generator
      */
-    private $defaultFaker;
+    private $faker;
 
     /**
      * @param ChannelFactoryInterface $channelFactory
@@ -79,7 +79,7 @@ final class ChannelFixture extends AbstractResourceFixture
         $this->paymentMethodRepository = $paymentMethodRepository;
         $this->shippingMethodRepository = $shippingMethodRepository;
 
-        $this->defaultFaker = \Faker\Factory::create();
+        $this->faker = \Faker\Factory::create();
     }
 
     /**
@@ -177,7 +177,7 @@ final class ChannelFixture extends AbstractResourceFixture
     {
         $names = [];
         for ($i = 0; $i < (int) $amount; ++$i) {
-            $names[] = $this->defaultFaker->words(3, true);
+            $names[] = $this->faker->words(3, true);
         }
 
         return $names;

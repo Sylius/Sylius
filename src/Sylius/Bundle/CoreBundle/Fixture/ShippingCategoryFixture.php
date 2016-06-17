@@ -36,7 +36,7 @@ final class ShippingCategoryFixture extends AbstractFixture
     /**
      * @var \Faker\Generator
      */
-    private $defaultFaker;
+    private $faker;
 
     /**
      * @param FactoryInterface $shippingCategoryFactory
@@ -50,7 +50,7 @@ final class ShippingCategoryFixture extends AbstractFixture
         $this->shippingCategoryFactory = $shippingCategoryFactory;
         $this->shippingCategoryManager = $shippingCategoryManager;
 
-        $this->defaultFaker = \Faker\Factory::create();
+        $this->faker = \Faker\Factory::create();
     }
 
     /**
@@ -59,7 +59,7 @@ final class ShippingCategoryFixture extends AbstractFixture
     public function load(array $options)
     {
         foreach ($options['shipping_categories'] as $name) {
-            $shippingCategory = $this->createShippingCategory($name, $this->defaultFaker->paragraph);
+            $shippingCategory = $this->createShippingCategory($name, $this->faker->paragraph);
 
             $this->shippingCategoryManager->persist($shippingCategory);
         }
@@ -94,7 +94,7 @@ final class ShippingCategoryFixture extends AbstractFixture
                 ->then(function ($amount) {
                     $names = [];
                     for ($i = 0; $i < (int) $amount; ++$i) {
-                        $names[] = $this->defaultFaker->words(3, true);
+                        $names[] = $this->faker->words(3, true);
                     }
 
                     return $names;
