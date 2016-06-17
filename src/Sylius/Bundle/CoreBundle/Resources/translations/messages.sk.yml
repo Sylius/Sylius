@@ -60,6 +60,8 @@ sylius:
             short_description: Krátky popis
             variant_selection_method: Spôsob výberu produktového variantu
             main_taxon: Hlavná kategória
+            channels: Kanály
+            enabled: Zapnuté
         product_filter:
             name: Názov
             code: Kód
@@ -149,5 +151,6 @@ sylius:
             name: Potvrdenie odoslania zásielky
         user_confirmation:
             name: Potvrdenie registrácie použivateľa
+            subject: Vitajte v našom obchode
         password_reset:
             name: Obnoviť heslo

@@ -6,6 +6,7 @@ sylius:
         option:
             presentation: Präsentation
     ui:
+        image: Bild
         default_currency: Standardwährung
         enabled: Aktiviert
         "no": false

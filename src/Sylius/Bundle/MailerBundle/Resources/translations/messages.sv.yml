@@ -5,3 +5,9 @@ sylius:
     form:
         email:
             enabled: Aktiverad
+            subject: Ämne
+            sender_name: Avsändarnamn
+            sender_address: Avsändaradress
+            content: Innehåll
+            template: Mall
+            no_template: Använd anpassad mall

@@ -60,6 +60,8 @@ sylius:
             short_description: Kratek opis
             variant_selection_method: Način izbora variante
             main_taxon: Glavni takson
+            channels: Kanali
+            enabled: Omogočeno
         product_filter:
             code: Koda
         product_variant:
@@ -135,5 +137,6 @@ sylius:
             name: Potrditev pošiljke
         user_confirmation:
             name: Potrditev uporabnika
+            subject: Dobrodošli v naši trgovini
         password_reset:
             name: Ponastavitev gesla

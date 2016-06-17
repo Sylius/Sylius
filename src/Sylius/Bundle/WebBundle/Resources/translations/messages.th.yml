@@ -13,6 +13,11 @@ sylius:
                 ready: 'พร้อมส่งตั้งแต่ %at%'
                 returned: 'ตีกลับ %at%'
                 shipped: 'จัดส่ง %at%'
+                checkout: 'เช็คเอาท์ %at%'
+                pending: '%at% ค้างอยู่'
+                onhold: 'คงค้างตั้งแต่ %at%'
+                backordered: 'ค้างส่งตั้งแต่ %at%'
+                cancelled: 'ยกเลิก %at%'
         title: บัญชีของฉัน
     archetype:
         build: สร้างต้นแบบ
@@ -85,6 +90,8 @@ sylius:
         no_shipments: ไม่มีการจัดส่งสำหรับใบสั่งซื้อนี้
         no_shipping_charges: ไม่มีค่าธรรมเนียมการจัดส่ง
         no_taxes: ไม่รวมภาษี
+        state:
+            order_confirmed: ใบสั่งที่ยืนยัน
     order_item:
         quantity: ปริมาณ
         sellable: สินค้า
@@ -134,9 +141,12 @@ sylius:
             ready: พร้อมส่ง
             returned: ถูกส่งคืน
             shipped: ส่งของแล้ว
+            checkout: เช็คเอาท์
             pending: อยู่ระหว่างดำเนินการ
             onhold: On hold
+            backordered: สั่งซื้อเมื่อมีของ
             cancelled: ถูกยกเลิก
+            partially_shipped: ส่งบางส่วน
         transition:
             backorder: สินค้าค้างส่ง
             cancel: ยกเลิก
@@ -300,6 +310,7 @@ sylius:
         customer_not_notified: ลูกค้าที่ไม่ได้รับแจ้ง
         customer_notified: ลูกค้าที่แจ้ง
         customer_orders: ใบสั่งของลูกค้า
+        customer_since: ลูกค้าตั้งแต่
         customers: ลูกค้า
         customers_list_of_all_customers_in_store: 'ลูกค้า<small>รายการของลูกค้าทั้งหมดในร้าน</small>'
         customize_default_metadata: กำหนดค่า Default metadata
@@ -318,6 +329,7 @@ sylius:
         description: คำอธิบาย
         details: ราย​ละเอียด
         disable: ปิดการใช้งาน
+        discounted_unit_price: ราคาลดต่อหน่วยราคา
         edit: แก้ไข
         edit_association_type: แก้ไขชนิดความสัมพันธ์
         edit_group: แก้ไขกลุ่ม
@@ -706,6 +718,7 @@ sylius:
         total_orders: ใบสั่งซื้อทั้งหมด
         total_qty: ปริมาณรวม
         total_registrations: การลงทะเบียนทั้งหมด
+        tracking_code: รหัสการติดตาม
         tracking_number: หมายเลขการติดตาม
         translations: การแปลภาษา
         type: ชนิด

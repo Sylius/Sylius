@@ -60,6 +60,8 @@ sylius:
             short_description: Përshkrim i shkurtër
             variant_selection_method: Metoda rezervë e përzgjedhjes
             main_taxon: Tipologjia kryesore
+            channels: Kanalet
+            enabled: E aktivizuar
         product_filter:
             name: Emri
             code: Kodi
@@ -149,5 +151,6 @@ sylius:
             name: Konfirmimi i dërgesës
         user_confirmation:
             name: Konfirmimi i përdoruesit
+            subject: Mirë se erdhët në arkivin tone
         password_reset:
             name: Ricakto Fjalëkalimin

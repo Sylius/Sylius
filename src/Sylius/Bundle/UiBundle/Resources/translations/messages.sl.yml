@@ -17,12 +17,20 @@ sylius:
         cancelled: Preklicano
         change_your_password: Spremenite vaše geslo
         checkout: Plačilo
+        forgot_password: Pozabljeno geslo
+        your_cart_is_empty: Vaša košarica je prazna
+        image: Slika
+        qty: Količina
+        clear_cart: Spraznite košarico
+        summary: Povzetek
         color: Barva
         countries: Države
         coupon_based: Kupon, ki temelji
         coupons: Kuponi
         create: Ustvarite
         currencies: Valute
+        my_account: Moj račun
+        home: Domov
         dashboard: Nadzorna plošča
         date: Datum
         default_currency: Privzeta valuta
@@ -37,6 +45,7 @@ sylius:
         filter: Filter
         generate_coupons: Generirajte kupone
         item: Izdelek
+        inventory: Inventar
         list_coupons: Seznam kuponov
         locales: Področne nastavitve
         new: Novo

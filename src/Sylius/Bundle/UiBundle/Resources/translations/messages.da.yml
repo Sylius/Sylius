@@ -15,10 +15,16 @@ sylius:
         cancel: Anuller
         change_your_password: Ændre din adgangskode
         checkout: Til kassen
+        your_cart_is_empty: Din kurv er tom
+        image: Billede
+        qty: Antal
+        clear_cart: Tøm kurv
         countries: Lande
         coupon_based: Kupon baseret
         coupons: Kuponer
         create: Opret
+        my_account: Min konto
+        home: Hjem
         dashboard: Kontrolpanel
         default_currency: Standard valuta
         delete: Slet
@@ -28,6 +34,7 @@ sylius:
         filter: Filter
         generate_coupons: Generere kuponer
         item: Varen
+        inventory: Lager
         list_coupons: Kupon liste
         locales: Landekoder
         new: Ny

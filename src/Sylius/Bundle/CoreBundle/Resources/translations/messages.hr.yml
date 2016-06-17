@@ -49,6 +49,7 @@ sylius:
             shipping_category: Kategorija pošiljke
             short_description: Kratak opis
             variant_selection_method: Način odabira varijante
+            enabled: Omogući
         product_filter:
             name: Naziv
             code: ISO kod

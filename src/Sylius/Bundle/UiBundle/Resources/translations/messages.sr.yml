@@ -11,8 +11,13 @@ sylius:
         add_coupon: Додај купон
         add_to_cart: Додај у корпу
         cancel: Откажи
+        your_cart_is_empty: Ваша корпа је празна
+        qty: Количина
+        clear_cart: Испразни корпу
         countries: Земље
         create: Креирај
+        my_account: Мој налог
+        home: Почетна страна
         dashboard: Командна Табла
         delete: Обриши
         edit: Измени

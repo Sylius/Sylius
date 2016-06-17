@@ -56,6 +56,8 @@ sylius:
             shipping_category: Pristatymo kategorija
             short_description: Trumpas aprašymas
             variant_selection_method: Varianto pasirinkimo būdas
+            channels: Kanalai
+            enabled: Įjungta
         product_filter:
             name: Pavadinimas
             code: Kodas

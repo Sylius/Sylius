@@ -17,12 +17,18 @@ sylius:
         cancelled: Atšaukta
         change_your_password: Pakeisti savo slaptažodį
         checkout: Apmokėjimas
+        your_cart_is_empty: Jūsų krepšelis yra tuščias
+        image: Paveikslėlis
+        qty: Kiekis
+        clear_cart: Ištuštinti krepšelį
         color: Spalva
         countries: Šalys
         coupon_based: Pagal kuponą
         coupons: Kuponai
         create: Sukurti
         currencies: Valiutos
+        my_account: Mano paskyra
+        home: Pagrindinis puslapis
         dashboard: Skydelis
         default_currency: Numatytoji valiuta
         delete: Šalinti
@@ -35,6 +41,7 @@ sylius:
         filter: Filtruoti
         generate_coupons: Generuoti kuponus
         item: Produktas
+        inventory: Atsargos
         list_coupons: Kuponų sąrašas
         locales: Lokalės
         new: Naujas

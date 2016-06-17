@@ -12,15 +12,21 @@ sylius:
         add_to_cart: Добави в количката
         cancel: Откажи
         change_your_password: Смяна на парола
+        your_cart_is_empty: Вашата кошница е празна
+        qty: Количество
+        clear_cart: Изчисти кошницата
         countries: Страни
         coupons: Купони
         create: Създай
+        my_account: Моят акаунт
+        home: Начална страница
         dashboard: Табло
         delete: Изтрий
         edit: Редактирай
         filter: Филтър
         generate_coupons: Генериране на купони
         item: артикул
+        inventory: Инвентар
         list_coupons: Списък купони
         locales: Езикови променливи
         new_country: Новата страна

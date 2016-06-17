@@ -49,6 +49,7 @@ sylius:
             shipping_category: Fraktkategori
             short_description: Kort beskrivelse
             variant_selection_method: Metode for valg av variant
+            enabled: Aktivert
         product_filter:
             name: Navn
             code: Kode

@@ -51,6 +51,8 @@ sylius:
             shipping_category: Категорія доставки
             short_description: Короткий опис
             variant_selection_method: Метод вибору варіанту
+            channels: Канали
+            enabled: Увімкнено
         product_filter:
             name: Ім’я
             code: Код

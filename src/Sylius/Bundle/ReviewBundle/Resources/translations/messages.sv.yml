@@ -3,6 +3,7 @@
 
 sylius:
     form:
-        promotion:
-            description: Beskrivning
-            name: Namn
+        review:
+            title: Titel
+            status:
+                new: Ny

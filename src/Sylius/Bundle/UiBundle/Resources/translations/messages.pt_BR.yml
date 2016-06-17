@@ -29,7 +29,13 @@ sylius:
         change_your_password: Alterar sua senha
         charges_and_taxes: Encargos e impostos
         checkout: Finalizar compra
+        forgot_password: Esqueceu a senha
+        your_cart_is_empty: Seu carrinho está vazio
         clear_filters: Limpar os Filtros
+        image: Imagem
+        qty: Quantidade
+        clear_cart: Esvaziar carrinho
+        summary: Resumo
         color: Cor
         configurable_product: Produto configurável
         configure_channels_available_in_your_store: Configurar os canais disponíveis na sua loja
@@ -42,6 +48,8 @@ sylius:
         create: Criar
         currencies: Moedas
         customer_can_login_to_the_store: Cliente pode acessar a loja
+        my_account: Minha conta
+        home: Home
         customer_care: Atendimento ao cliente
         dashboard: Painel
         date: Data
@@ -85,6 +93,7 @@ sylius:
         in: Em
         info: Informações
         item: Produto
+        inventory: Estoque
         jump_to_page: Ir para a página
         last_updated: Ultima atualização
         list_coupons: Cupons

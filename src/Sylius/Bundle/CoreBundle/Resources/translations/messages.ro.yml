@@ -49,6 +49,7 @@ sylius:
             shipping_category: Categoria de livrare
             short_description: Descriere scurtă
             variant_selection_method: Metoda de selectare a variantei
+            enabled: Activat
         product_filter:
             name: Nume
             code: Cod

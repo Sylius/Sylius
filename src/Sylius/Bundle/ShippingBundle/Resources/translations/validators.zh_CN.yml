@@ -24,3 +24,6 @@ sylius:
             unique: 给定发货方式的代码已存在。
         zone:
             not_blank: 请选择配送区域。
+    shipment:
+        shipping_method:
+            not_blank: 请选择配送方式。

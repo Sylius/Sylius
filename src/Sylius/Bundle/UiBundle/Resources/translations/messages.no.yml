@@ -16,10 +16,16 @@ sylius:
         cancelled: Avbrutt
         change_your_password: Endre passord
         checkout: Gå til kassen
+        your_cart_is_empty: Handlevognen er tom
+        image: Bilde
+        qty: Antall
+        clear_cart: Tøm handlevogn
         countries: Land
         coupon_based: Kupongbasert
         coupons: Kuponger
         create: Opprett
+        my_account: Min konto
+        home: Hjem
         dashboard: Panel
         default_currency: Standard valuta
         delete: Slett
@@ -29,6 +35,7 @@ sylius:
         filter: Filtrer
         generate_coupons: Generer kuponger
         item: Produkt
+        inventory: Lager
         list_coupons: List ut kuponger
         locales: Nasjonale innstillinger
         new: Ny

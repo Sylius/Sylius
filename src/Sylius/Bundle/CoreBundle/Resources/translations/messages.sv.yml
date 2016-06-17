@@ -8,6 +8,11 @@ sylius:
                 price: Enhetspris
                 quantity: Antal
                 variant: Variant
+            customer_group: Kundgrupp
+        block:
+            body: Brödtext
+            id: ID
+            title: Titel
         cart:
             coupon: Rabattkupong
         checkout:
@@ -15,11 +20,23 @@ sylius:
                 different_billing_address: Använda annan adress för fakturering?
             payment_method: Betalsätt
             shipping_method: Fraktsätt
+        promotion:
+            channels: Kanaler
+        coupon:
+            per_customer_usage_limit: Begränsning per kund
         group:
             name: Namn
             roles: Roller
         channel:
+            taxonomies: Taxonomier
+            locale_default: Standardspråk
+            locales: Språk
             currency_default: Standardvaluta
+            currencies: Valutor
+            shipping_methods: Leveransmetoder
+            payment_methods: Betalningsmetoder
+            theme: Tema
+            hostname: Värdnamn
         image:
             file: Bild
         locale:
@@ -32,9 +49,18 @@ sylius:
             total_from: Från
             total_to: Till
             payment_state: Betalningsstatus
+            channel: Alla kanaler
+        page:
+            body: Brödtext
+            id: ID
+            title: Titel
         product:
+            restricted_zone: Begränsat område
             shipping_category: Kategori
             short_description: Kort beskrivning
+            variant_selection_method: Metod för val av variant
+            channels: Kanaler
+            enabled: Aktiverad
         product_filter:
             name: Namn
             code: Kod
@@ -47,17 +73,24 @@ sylius:
                 meta_description: Metabeskrivning
                 meta_keywords: Metasökord
                 title: Sidans titel
+                tracking_code:
+                    Tracking code (for example: Google Analytics-kod)
             taxation:
                 default_tax_zone: Standardmomszon
+                default_tax_calculation_strategy: Standard skatteberäkningsstrategi
+            security:
+                enabled: Aktivera?
         shipment_filter:
             created_at_from: Från
             created_at_to: Till
             number: Beställningsnummer
             shipping_address: Skickas till
+            channel: Alla kanaler
         payment_filter:
             created_at_from: Från
             created_at_to: Till
             number: Beställningsnummer
+            channel: Alla kanaler
         shipping_method:
             zone: Zon
         taxon:
@@ -71,7 +104,52 @@ sylius:
             first_name: Förnamn
             groups: Grupper
             roles: Roller
+            last_name: Efternamn
+            password: Lösenord
+            shipping_address: Leveransadress
+        user_filter:
+            query: Sök
         variant:
+            available_on_demand: Tillgänglig på begäran
+            depth: Djup
+            height: Höjd
+            images: Bilder
+            on_hand: I lager
+            price: Pris
+            original_price: Ursprungligt pris
             sku: SKU
+            weight: Vikt
+            width: Bredd
+        attribute:
+            product_attribute_value:
+                attribute: Attribut
+                value: Värde
+        guest:
+            email: E-post
+        product_association:
+            product: Tillhörande produkt
+            type: Associationstyp
         product_association_type:
             name: Namn
+        promotion_rule:
+            contains_taxon:
+                taxon: Taxon
+                count: Antal
+            taxon:
+                taxons: Taxa
+            total_of_items_from_taxon:
+                taxon: Taxon
+                amount: Antal
+    email:
+        order_confirmation:
+            name: Orderbekräftelse
+        order_comment:
+            name: Orderkommentar
+        shipment_confirmation:
+            name: Leveransbekräftelse
+        user_confirmation:
+            name: Användarbekräftelse
+        password_reset:
+            name: Återställ lösenord
+    shipping_method_resolver:
+        by_zones_and_channel: Genom zoner och kanaler

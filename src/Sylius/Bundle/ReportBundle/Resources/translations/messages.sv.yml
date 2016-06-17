@@ -5,3 +5,6 @@ sylius:
     form:
         report:
             name: Namn
+            description: Beskrivning
+            renderer:
+                template: Mall

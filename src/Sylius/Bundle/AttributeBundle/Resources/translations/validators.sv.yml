@@ -7,6 +7,9 @@ sylius:
             not_blank: Ange attributnamn.
             min_length: 'Attributnamn måste vara minst 1 tecken.|Attributnamn måste vara minst {{ limit }} tecken.'
             max_length: 'Attributnamn får inte vara längre än 1 tecken.|Attributnamn får inte vara längre än {{ limit }} tecken.'
+        code:
+            not_blank: Var god ange en attributkod.
+            unique: Denna kod används redan.
         presentation:
             not_blank: Ange attributpresentation.
             min_length: 'Attributpresentationen måste vara minst 1 tecken långt.|Attributpresentationen måste vara minst {{ limit }} tecken långt.'

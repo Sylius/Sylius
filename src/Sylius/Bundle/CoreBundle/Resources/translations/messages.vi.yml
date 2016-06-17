@@ -23,6 +23,8 @@ sylius:
         page:
             id: ID
             title: Tiêu đề
+        product:
+            channels: Kênh
         product_filter:
             name: Tên
             code: Mã

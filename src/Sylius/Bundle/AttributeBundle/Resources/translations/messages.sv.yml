@@ -4,6 +4,29 @@
 sylius:
     form:
         attribute:
+            add: Lägg tilll
+            add_attributes: Lägg till attribut
             choices: Val
             code: Kod
             name: Namn
+            translations: Översättningar
+            type: Typ
+        attribute_type:
+            checkbox: Kryssruta
+            configuration: Konfiguration
+            date: Datum
+            datetime: Datum och tid
+            integer: Heltal
+            percent: Procent
+            text: Text
+            textarea: Textfält
+            title: Attributtyper
+            validation: Validering
+        attribute_type_configuration:
+            datetime:
+                format: Format
+            date:
+                format: Format
+            text:
+                min: Minimal längd
+                max: Maximal längd

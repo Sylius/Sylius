@@ -60,6 +60,8 @@ sylius:
             short_description: คำอธิบายโดยย่อ
             variant_selection_method: วิธีการเลือกตัวแปร
             main_taxon: หมวดหมู่หลัก
+            channels: ช่องทางการจัดจำหน่าย
+            enabled: เปิดใช้งานแล้ว
         product_filter:
             name: ชื่อ
             code: รหัส
@@ -149,5 +151,8 @@ sylius:
             name: ยืนยันการจัดส่ง
         user_confirmation:
             name: ยืนยันการสั่งซื้อ
+            subject: ยินดีต้อนรับสู่ร้านของเรา
         password_reset:
             name: ตั้งรหัสผ่านใหม่
+    shipping_method_resolver:
+        by_zones_and_channel: โดยพื้นที่และช่องทาง

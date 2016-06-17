@@ -25,7 +25,13 @@ sylius:
         change_your_password: Modifica la password
         charges_and_taxes: Spese e tasse
         checkout: Checkout
+        forgot_password: Hai dimenticato la password
+        your_cart_is_empty: Il tuo carrello è vuoto
         clear_filters: Cancella filtri
+        image: Immagine
+        qty: Q.tà
+        clear_cart: Svuota carrello
+        summary: Riepilogo
         color: Colore
         configure_channels_available_in_your_store: Configura i canali disponibili nel tuo negozio
         confirm_your_action: "Confermare l'azione"
@@ -36,6 +42,8 @@ sylius:
         create: Crea
         currencies: Monete
         customer_can_login_to_the_store: "Cliente può accedere all'archivio"
+        my_account: Il mio account
+        home: Home
         dashboard: Pannello amministrazione
         date: Data
         default_currency: Valuta predefinita
@@ -70,6 +78,7 @@ sylius:
         in: In
         info: Info
         item: Articolo
+        inventory: Magazzino
         jump_to_page: Vai alla pagina
         last_updated: Ultimo aggiornamento
         list_coupons: Lista coupon

@@ -42,6 +42,7 @@ sylius:
             shipping_category: Kategori Pengiriman
             short_description: Deskripsi singkat
             variant_selection_method: Metode Pilih Varian
+            enabled: Diaktifkan
         product_filter:
             name: Nama
             code: Kode

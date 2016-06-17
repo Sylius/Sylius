@@ -24,3 +24,6 @@ sylius:
             unique: A szállítási módszer a megadott kóddal már létezik.
         zone:
             not_blank: Kérjük, válassza ki a szállítási típus zónáját.
+    shipment:
+        shipping_method:
+            not_blank: Kérjük, válassza ki a szállítási formát.

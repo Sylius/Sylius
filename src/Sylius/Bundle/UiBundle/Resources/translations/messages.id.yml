@@ -8,6 +8,7 @@ sylius:
         option:
             presentation: Presentasi
     ui:
+        image: Gambar
         default_currency: Mata uang default
         enabled: Diaktifkan
         "no": false

@@ -21,7 +21,13 @@ sylius:
         cancelled: Abgebrochen
         change_your_password: Passwort ändern
         checkout: Zur Kasse
+        forgot_password: Passwort vergessen
+        your_cart_is_empty: Ihr Warenkorb ist leer
         clear_filters: Filter löschen
+        image: Foto
+        qty: Anzahl
+        clear_cart: Warenkorb leeren
+        summary: Zusammenfassung
         color: Farbe
         confirm_your_action: Aktion bestätigen
         contains: Enthält
@@ -30,6 +36,8 @@ sylius:
         coupons: Gutscheine
         create: Erstellen
         currencies: Währungen
+        my_account: Mein Account
+        home: Startseite
         dashboard: Dashboard
         date: Datum
         default_currency: Standardwährung
@@ -51,6 +59,7 @@ sylius:
         in: In
         info: Info
         item: Produkt
+        inventory: Lagerbestände
         last_updated: Letzte Aktualisierung
         list_coupons: Gutscheine
         locales: Gebietsschemata

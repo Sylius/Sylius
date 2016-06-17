@@ -3,11 +3,42 @@
 
 sylius:
     form:
+        login:
+            username: Användarnanm
+            password: Lösenord
+            remember_me: Kom ihåg mig
         option:
             presentation: Presentation
     ui:
+        about: Om
+        account_credentials: Kontouppgifter
+        actions: Åtgärder
+        add_coupon: Lägg till kupong
+        add_to_cart: Lägg i varukorg
+        administration_panel_login: 'Administrationspanel - inloggning'
+        all: Alla
+        an_error_occurred: Ett fel uppstod
+        are_your_sure_you_want_to_perform_this_action: Är du säker på att du vill utföra den här åtgärden?
+        available_for_channels: Tillgänglig för kanaler
+        reserved: Reserverad
+        average_order_value: Genomsnittsligt ordervärde
+        back_to_store: Tillbaka till butik
+        complete: Slutförd
+        cancel: Avbryt
+        cancelled: Avbruten
+        checkout: Kassa
+        image: Bild
+        summary: Sammanfattning
         color: Färg
+        currencies: Valutor
+        date: Datum
         default_currency: Standardvaluta
+        default_locale: Standardspråk
+        delete: Radera
+        description: Beskrivning
         enabled: Aktiverad
+        filter: Filter
+        new: Ny
         "no": false
+        price: Pris
         "yes": true

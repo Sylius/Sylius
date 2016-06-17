@@ -9,6 +9,7 @@ sylius:
             not_blank: Ange stad.
         country:
             not_blank: Välj ett land.
+            disabled: Valt land är inaktiverat. Var god välj ett annat.
         first_name:
             max_length: Förnamn får inte vara längre än 255 tecken|Förnamn får inte vara längre än 255 tecken.
             min_length: Förnamn måste vara minst 2 tecken|Förnamn måste vara minst 2 tecken.
@@ -28,14 +29,32 @@ sylius:
             min_length: Gatuadressen måste vara minst 2 tecken lång|Gatuadressen måste vara minst 2 tecken lång.
             not_blank: Ange gatuadress.
         not_shippable: Denna adress är inte en giltig fraktadress.
+    country:
+        code:
+            not_blank: Var god ange landets ISOkod.
+            unique: Landets ISOkod måste vara unik.
     province:
+        code:
+            min_length: Provinsens namn måste innehålla minst 5 tecken|Provinsens namn måste innehålla minst 5 tecken.
+            not_blank: Var god ange provinskod.
+            regex: Provinskoden bör ha följande format XX-XX (e.g. US-FL).
+            unique: Provinskoden måste vara unik.
         name:
             max_length: Länets namn får inte vara längre än 255 tecken|Länets namn får inte vara längre än 255 tecken.
             min_length: Länets namn måste vara minst 2 tecken|Länets namn måste vara minst 2 tecken.
             not_blank: Ange län.
+            unique: Provinsens namn måste vara unik.
     zone:
+        code:
+            not_blank: Var god skriv in en zonkod.
+            unique: Zonkoden måste vara unik.
         members:
             min_count: 'Lägg till minst {{ limit }} zonmedlem.'
         name:
             max_length: Zonnamn får inte vara längre än 255 tecken|Zonnamn får inte vara längre än 255 tecken.
+            min_length: Zonnamnet måste innehålla minst 2 tecken|Zonnamnet måste innehålla minst 2 tecken.
             not_blank: Ange zon.
+    zone_member:
+        code:
+            not_blank: Var god välj en zonmedlem.
+        unique: Vald zonmedlem är redan i den här zonen.

@@ -14,14 +14,17 @@ sylius:
             street: Gatuadress
             province: Län
         country:
+            add_province: Lägg till provins
             name: Namn
             provinces: Län
             select: Välj
             enabled: Aktiverad
         province:
             name: Namn
+            abbreviation: Förkortning
             select: Välj
         zone:
+            add_member: Lägg till medlem
             members: Medlemmar
             name: Namn
             type: Typ
@@ -31,5 +34,6 @@ sylius:
                 zone: Zon
             scope: Omfattning
             select: Välj
+            select_scope: Välj omfattning
         zone_member:
             select: Välj

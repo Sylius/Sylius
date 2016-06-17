@@ -44,6 +44,7 @@ sylius:
             amount: ยอดรวม
             usage_limit: ขีดจำกัดการใช้งาน
             expires_at: หมดอายุวันที่
+            code_length: ความยาวของรหัส
         promotion:
             actions: ดำเนินการ
             add_action: เพิ่มการดำเนินการ

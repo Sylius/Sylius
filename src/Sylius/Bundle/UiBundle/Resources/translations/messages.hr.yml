@@ -17,10 +17,16 @@ sylius:
         cancelled: Otkazano
         change_your_password: Promijenite lozinku
         checkout: Blagajna
+        your_cart_is_empty: Košarica je prazna
+        image: Fotografija
+        qty: Količina
+        clear_cart: Izpraznite košaricu
         countries: Države
         coupon_based: Promocija bazirana na kuponima za popust
         coupons: Kuponi
         create: Kreiraj
+        my_account: Moj profil
+        home: Početna
         dashboard: Kontrolna ploča
         default_currency: Zadana valuta
         delete: sylius.account.address.action.delete
@@ -30,6 +36,7 @@ sylius:
         filter: Filter
         generate_coupons: Generirajte kod za popust
         item: sylius.order_item.product
+        inventory: Skladište
         list_coupons: Izlist kodova za popust
         locales: Lokaliteti
         new: Novo

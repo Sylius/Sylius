@@ -6,9 +6,12 @@ sylius:
         login:
             password: Mật khẩu
     ui:
+        image: Hình ảnh
+        qty: Số lượng
         countries: Quốc gia
         create: Tạo
         dashboard: Bảng tin
+        inventory: Hàng tồn kho
         locales: Miền địa phương
         new_country: Tạo quốc gia mới
         "no": false

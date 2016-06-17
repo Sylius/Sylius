@@ -60,6 +60,8 @@ sylius:
             short_description: Kurzbeschreibung
             variant_selection_method: Variantenauswahlmethode
             main_taxon: Haupt-Taxonomie
+            channels: Ausgabekanäle
+            enabled: Aktiviert
         product_filter:
             name: Name
             code: Code
@@ -147,3 +149,4 @@ sylius:
             name: Versandbestätigung
         user_confirmation:
             name: Bestätigung durch den Benutzer
+            subject: Willkommen Sie in unserem Shop

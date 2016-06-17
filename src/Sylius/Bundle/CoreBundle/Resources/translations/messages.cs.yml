@@ -56,6 +56,8 @@ sylius:
             shipping_category: Typ dopravy
             short_description: Stručný popis
             variant_selection_method: Metoda výběru varianty
+            channels: Kanály
+            enabled: Povoleno
         product_filter:
             name: Název
             code: Kód

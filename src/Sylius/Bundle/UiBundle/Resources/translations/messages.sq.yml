@@ -25,7 +25,13 @@ sylius:
         change_your_password: Ndrysho fjalëkalimin
         charges_and_taxes: Pagesat dhe taksat
         checkout: Kontrolli
+        forgot_password: Harruat fjalëkalimin
+        your_cart_is_empty: Karta jote është bosh
         clear_filters: Hiq filtrin
+        image: Imazhi
+        qty: Sasitë
+        clear_cart: Fshi kartën
+        summary: Permbledhje
         color: Ngjyra
         configure_channels_available_in_your_store: Konfiguroni kanalet ne dispozicion ne depon tuaj
         confirm_your_action: Konfirmoni veprimin tuaj
@@ -36,6 +42,8 @@ sylius:
         create: Krijo
         currencies: Monedhat
         customer_can_login_to_the_store: Klienti mund te hyje ne dyqan
+        my_account: Llogaria ime
+        home: Faqja kryesore
         dashboard: Paneli
         date: Data
         default_currency: Monedha e paracaktuar
@@ -70,6 +78,7 @@ sylius:
         in: Brenda
         info: Info
         item: Po ashtu
+        inventory: Gjendja e magazinës
         jump_to_page: Kerce ne faqen
         last_updated: Përditësimi i fundit
         list_coupons: Listo kuponat

@@ -24,3 +24,6 @@ sylius:
             unique: Mënyra e dërgesës me kodin e dhënë tashmë egziston.
         zone:
             not_blank: Ju lutem zgjidhni zonen e metodes se trasportit.
+    shipment:
+        shipping_method:
+            not_blank: Zgjidh mënyrën e dërgesës.

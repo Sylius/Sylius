@@ -30,7 +30,13 @@ sylius:
         change_your_password: 更改您的密码
         charges_and_taxes: 费和税
         checkout: 结账
+        forgot_password: 忘记密码
+        your_cart_is_empty: 您的购物车是空的
         clear_filters: 清除筛选
+        image: 图像
+        qty: 数量
+        clear_cart: 清空购物车
+        summary: 摘要
         color: 颜色
         configurable_product: 可配置的产品
         configure_channels_available_in_your_store: 配置可用的频道
@@ -43,6 +49,8 @@ sylius:
         create: 创建
         currencies: 货币
         customer_can_login_to_the_store: 客户可以登录到该店铺
+        my_account: 我的账户
+        home: 首页
         customer_care: 客户关怀
         dashboard: 仪表板
         date: 日期
@@ -86,6 +94,7 @@ sylius:
         in: 在
         info: 信息
         item: 项
+        inventory: 库存
         jump_to_page: 跳转到页
         last_updated: 上次更新时间：
         list_coupons: 优惠券列表
