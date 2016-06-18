@@ -6,6 +6,7 @@ sylius_admin_zone:
         except: ['show', 'create']
         redirect: update
         grid: sylius_admin_zone
+        permission: true
         vars:
             all:
                 subheader: sylius.ui.manage_geographical_zones
@@ -14,9 +15,6 @@ sylius_admin_zone:
             index:
                 icon: world
     type: sylius.resource
-    defaults:
-        _sylius:
-            permission: true
 
 sylius_admin_zone_create:
     path: /zones/{type}/new
@@ -31,6 +29,7 @@ sylius_admin_zone_create:
                     type: $type
             template: SyliusAdminBundle:Crud:create.html.twig
             redirect: sylius_admin_zone_update
+            permission: true
             vars:
                 subheader: sylius.ui.manage_geographical_zones
                 templates:
@@ -38,6 +37,5 @@ sylius_admin_zone_create:
                 route:
                     parameters:
                         type: $type
-            permission: true
     requirements:
         type: country|province|zone

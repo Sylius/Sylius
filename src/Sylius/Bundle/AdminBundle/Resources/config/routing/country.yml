@@ -6,6 +6,7 @@ sylius_admin_country:
         except: ['show', 'delete']
         redirect: update
         grid: sylius_admin_country
+        permission: true
         vars:
             all:
                 subheader: sylius.ui.manage_shipping_destinations
@@ -14,6 +15,3 @@ sylius_admin_country:
             index:
                 icon: flag
     type: sylius.resource
-    defaults:
-        _sylius:
-            permission: true

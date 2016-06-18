@@ -6,6 +6,7 @@ sylius_admin_product_option:
         except: ['show']
         redirect: update
         grid: sylius_admin_product_option
+        permission: true
         vars:
           all:
               subheader: sylius.ui.manage_configuration_options_of_your_products
@@ -14,6 +15,3 @@ sylius_admin_product_option:
           index:
               icon: options
     type: sylius.resource
-    defaults:
-        _sylius:
-            permission: true

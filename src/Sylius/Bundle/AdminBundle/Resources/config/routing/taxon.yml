@@ -5,15 +5,13 @@ sylius_admin_taxon:
         templates: SyliusAdminBundle:Taxon
         except: ['show', 'index']
         redirect: update
+        permission: true
         vars:
             all:
                 subheader: sylius.ui.manage_categorization_of_your_products
                 templates:
                     form: SyliusAdminBundle:Taxon:_form.html.twig
     type: sylius.resource
-    defaults:
-        _sylius:
-            permission: true
 
 sylius_admin_taxon_index:
     path: /taxons/

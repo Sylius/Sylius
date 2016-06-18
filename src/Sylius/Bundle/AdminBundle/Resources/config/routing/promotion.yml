@@ -6,6 +6,7 @@ sylius_admin_promotion:
         except: ['show']
         redirect: update
         grid: sylius_admin_promotion
+        permission: true
         vars:
             all:
                 subheader: sylius.ui.manage_discounts_and_promotional_campaigns
@@ -14,6 +15,3 @@ sylius_admin_promotion:
             index:
                 icon: in cart
     type: sylius.resource
-    defaults:
-        _sylius:
-            permission: true

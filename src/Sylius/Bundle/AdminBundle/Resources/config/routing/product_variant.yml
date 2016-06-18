@@ -7,6 +7,7 @@ sylius_admin_product_variant_index:
             template: SyliusAdminBundle:Crud:index.html.twig
             grid: sylius_admin_product_variant
             section: admin
+            permission: true
             vars:
                 route:
                     parameters:
@@ -15,7 +16,6 @@ sylius_admin_product_variant_index:
                     breadcrumb: SyliusAdminBundle:ProductVariant/Breadcrumb:_index.html.twig
                 icon: cubes
                 subheader: sylius.ui.manage_variants
-            permission: true
 
 sylius_admin_product_variant_create:
     path: /new
@@ -32,6 +32,7 @@ sylius_admin_product_variant_create:
             redirect:
                 route: sylius_admin_product_variant_index
                 parameters: { productId: $productId }
+            permission: true
             vars:
                 route:
                     parameters:
@@ -39,7 +40,6 @@ sylius_admin_product_variant_create:
                 templates:
                     form: SyliusAdminBundle:ProductVariant:_form.html.twig
                     breadcrumb: SyliusAdminBundle:ProductVariant/Breadcrumb:_create.html.twig
-            permission: true
 
 sylius_admin_product_variant_update:
     path: /{id}/edit
@@ -53,6 +53,7 @@ sylius_admin_product_variant_update:
             redirect:
                 route: sylius_admin_product_variant_index
                 parameters: { productId: $productId }
+            permission: true
             vars:
                 route:
                     parameters:

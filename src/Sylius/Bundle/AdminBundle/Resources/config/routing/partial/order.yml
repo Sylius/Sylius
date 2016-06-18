@@ -27,9 +27,9 @@ sylius_admin_partial_order_shipment_ship:
             section: admin
             template: SyliusAdminBundle:Order/Show/Form:_ship.html.twig
             form: sylius_shipment_ship
+            permission: true
             vars:
                 route:
                     parameters:
                         orderId: $orderId
                         id: $id
-            permission: true
