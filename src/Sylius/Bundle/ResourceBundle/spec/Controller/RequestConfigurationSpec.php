@@ -432,15 +432,13 @@ class RequestConfigurationSpec extends ObjectBehavior
 
     function it_has_permission_unless_defined_as_false_in_parameters(Parameters $parameters)
     {
-        $parameters->has('permission')->willReturn(false);
+        $parameters->get('permission', false)->willReturn(false);
         $this->shouldNotHavePermission();
 
-        $parameters->has('permission')->willReturn(true);
-        $parameters->get('permission')->willReturn('custom_permission');
+        $parameters->get('permission', false)->willReturn('custom_permission');
         $this->shouldHavePermission();
 
-        $parameters->has('permission')->willReturn(true);
-        $parameters->get('permission')->willReturn(false);
+        $parameters->get('permission', false)->willReturn(false);
         $this->shouldNotHavePermission();
     }
 
@@ -449,7 +447,6 @@ class RequestConfigurationSpec extends ObjectBehavior
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 
-        $parameters->has('permission')->willReturn(true);
         $parameters->get('permission')->willReturn(true);
 
         $this->getPermission('index')->shouldReturn('sylius.product.index');
@@ -457,7 +454,6 @@ class RequestConfigurationSpec extends ObjectBehavior
 
     function it_takes_permission_name_from_parameters_if_provided(Parameters $parameters)
     {
-        $parameters->has('permission')->willReturn(true);
         $parameters->get('permission')->willReturn('app.sales_order.view_pricing');
 
         $this->getPermission('index')->shouldReturn('app.sales_order.view_pricing');
@@ -465,8 +461,7 @@ class RequestConfigurationSpec extends ObjectBehavior
 
     function it_throws_an_exception_when_permission_is_set_as_false_in_parameters_but_still_trying_to_get_it(Parameters $parameters)
     {
-        $parameters->has('permission')->willReturn(true);
-        $parameters->get('permission')->willReturn(false);
+        $parameters->get('permission')->willReturn(null);
 
         $this
             ->shouldThrow(\LogicException::class)

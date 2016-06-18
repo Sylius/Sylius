@@ -481,13 +481,13 @@ class RequestConfiguration
      */
     public function getPermission($name)
     {
-        if (!$this->hasPermission()) {
+        $permission = $this->parameters->get('permission');
+
+        if (null === $permission) {
             throw new \LogicException('Current action does not require any authorization.');
         }
 
-        $permission = $this->parameters->get('permission');
-
-        if ($permission === true) {
+        if (true === $permission) {
             return sprintf('%s.%s.%s', $this->metadata->getApplicationName(), $this->metadata->getName(), $name);
         }
 
