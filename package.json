@@ -1,8 +1,4 @@
 {
-  "name": "sylius",
-  "version": "0.17.0",
-  "description": "eCommerce for Developers",
-  "main": "Gulpfile.js",
   "dependencies": {
     "jquery": "^2.2.0",
     "semantic-ui-css": "^2.1.8"
@@ -25,9 +21,5 @@
     "url": "git+https://github.com/Sylius/Sylius.git"
   },
   "author": "Paweł Jędrzejewski",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Sylius/Sylius/issues"
-  },
-  "homepage": "http://sylius.org"
+  "license": "MIT"
 }
