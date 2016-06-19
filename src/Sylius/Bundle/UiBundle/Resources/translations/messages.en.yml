@@ -189,6 +189,7 @@ sylius:
         shipped: Shipped
         shipping: Shipping
         shipping_methods: Shipping methods
+        ship_to: Ship to
         show: Show
         sign_in: Sign in
         sign_out: Sign out
