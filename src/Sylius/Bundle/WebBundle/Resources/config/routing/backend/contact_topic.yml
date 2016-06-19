@@ -10,6 +10,7 @@ sylius_backend_contact_topic_index:
             template: SyliusWebBundle:Backend/ContactTopic:index.html.twig
             sortable: true
             paginate: false
+            permission: true
 
 sylius_backend_contact_topic_create:
     path: /new
@@ -19,6 +20,7 @@ sylius_backend_contact_topic_create:
         _sylius:
             template: SyliusWebBundle:Backend/ContactTopic:create.html.twig
             redirect: sylius_backend_contact_topic_index
+            permission: true
 
 sylius_backend_contact_topic_update:
     path: /{id}/edit
@@ -28,6 +30,7 @@ sylius_backend_contact_topic_update:
         _sylius:
             template: SyliusWebBundle:Backend/ContactTopic:update.html.twig
             redirect: sylius_backend_contact_topic_index
+            permission: true
 
 sylius_backend_contact_topic_delete:
     path: /{id}
@@ -37,3 +40,4 @@ sylius_backend_contact_topic_delete:
         _sylius:
             template: SyliusWebBundle:Backend/Misc:delete.html.twig
             redirect: sylius_backend_contact_topic_index
+            permission: true

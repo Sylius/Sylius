@@ -11,3 +11,4 @@ sylius_backend_promotion_rule_delete:
             redirect:
                 route: sylius_backend_promotion_show
                 parameters: {'id': $promotionId}
+            permission: true

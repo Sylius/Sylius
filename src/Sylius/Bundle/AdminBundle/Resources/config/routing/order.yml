@@ -5,6 +5,7 @@ sylius_admin_order:
         templates: SyliusAdminBundle:Crud
         except: ['create', 'update', 'show']
         grid: sylius_admin_order
+        permission: true
         vars:
           all:
               subheader: sylius.ui.process_your_orders
@@ -19,6 +20,7 @@ sylius_admin_order_show:
         _sylius:
             section: admin
             template: SyliusAdminBundle:Order:show.html.twig
+            permission: true
 
 sylius_admin_order_cancel:
     path: /orders/{id}/cancel
@@ -30,6 +32,7 @@ sylius_admin_order_cancel:
                 graph: sylius_order
                 transition: cancel
             redirect: referer
+            permission: true
 
 sylius_admin_order_payment_complete:
     path: /orders/{orderId}/payments/{id}/complete
@@ -46,3 +49,4 @@ sylius_admin_order_payment_complete:
                 graph: sylius_payment
                 transition: complete
             redirect: referer
+            permission: true

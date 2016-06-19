@@ -9,3 +9,4 @@ sylius_backend_user_delete:
         _sylius:
             template: SyliusWebBundle:Backend/Misc:delete.html.twig
             redirect: sylius_backend_customer_index
+            permission: true

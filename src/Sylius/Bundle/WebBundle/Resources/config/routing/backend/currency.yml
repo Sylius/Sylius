@@ -10,6 +10,7 @@ sylius_backend_currency_index:
             template: SyliusWebBundle:Backend/Currency:index.html.twig
             sortable: true
             paginate: false
+            permission: true
 
 sylius_backend_currency_create:
     path: /new
@@ -19,6 +20,7 @@ sylius_backend_currency_create:
         _sylius:
             template: SyliusWebBundle:Backend/Currency:create.html.twig
             redirect: sylius_backend_currency_index
+            permission: true
 
 sylius_backend_currency_update:
     path: /{id}/edit
@@ -28,6 +30,7 @@ sylius_backend_currency_update:
         _sylius:
             template: SyliusWebBundle:Backend/Currency:update.html.twig
             redirect: sylius_backend_currency_index
+            permission: true
 
 sylius_backend_currency_enable:
     path: /{id}/enable
@@ -36,6 +39,7 @@ sylius_backend_currency_enable:
         _controller: sylius.controller.currency:enableAction
         _sylius:
             redirect: sylius_backend_currency_index
+            permission: true
 
 sylius_backend_currency_disable:
     path: /{id}/disable
@@ -44,3 +48,4 @@ sylius_backend_currency_disable:
         _controller: sylius.controller.currency:disableAction
         _sylius:
             redirect: sylius_backend_currency_index
+            permission: true

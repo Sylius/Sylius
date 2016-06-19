@@ -11,6 +11,7 @@ sylius_backend_taxon_index:
             paginate: false
             repository:
                 method: findRootNodes
+            permission: true
 
 sylius_backend_taxon_create:
     path: /new
@@ -20,6 +21,7 @@ sylius_backend_taxon_create:
         _sylius:
             template: SyliusWebBundle:Backend/Taxon:create.html.twig
             redirect: sylius_backend_taxon_index
+            permission: true
 
 sylius_backend_taxon_update:
     path: /{id}/edit
@@ -29,6 +31,7 @@ sylius_backend_taxon_update:
         _sylius:
             template: SyliusWebBundle:Backend/Taxon:update.html.twig
             redirect: sylius_backend_taxon_index
+            permission: true
 
 sylius_backend_taxon_delete:
     path: /{id}
@@ -38,6 +41,7 @@ sylius_backend_taxon_delete:
         _sylius:
             template: SyliusWebBundle:Backend/Misc:delete.html.twig
             redirect: sylius_backend_taxon_index
+            permission: true
 
 sylius_backend_taxon_product_index:
     path: /{id}/products
@@ -47,6 +51,7 @@ sylius_backend_taxon_product_index:
         _sylius:
             template: SyliusWebBundle:Backend/Taxon:productIndex.html.twig
             paginate: 30
+            permission: true
 
 sylius_backend_taxon_show:
     path: /{id}
@@ -55,3 +60,4 @@ sylius_backend_taxon_show:
         _controller: sylius.controller.taxon:showAction
         _sylius:
             template: SyliusWebBundle:Backend/Taxon:show.html.twig
+            permission: true

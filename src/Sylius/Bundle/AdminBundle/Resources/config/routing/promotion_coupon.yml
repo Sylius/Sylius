@@ -7,6 +7,7 @@ sylius_admin_promotion_coupon_index:
             template: SyliusAdminBundle:Crud:index.html.twig
             grid: sylius_admin_promotion_coupon
             section: admin
+            permission: true
             vars:
                 route:
                     parameters:
@@ -31,6 +32,7 @@ sylius_admin_promotion_coupon_create:
             redirect:
                 route: sylius_admin_promotion_coupon_index
                 parameters: { promotionId: $promotionId }
+            permission: true
             vars:
                 route:
                     parameters:
@@ -52,6 +54,7 @@ sylius_admin_promotion_coupon_update:
             redirect:
                 route: sylius_admin_promotion_coupon_index
                 parameters: { promotionId: $promotionId }
+            permission: true
             vars:
                 route:
                     parameters:
@@ -73,6 +76,7 @@ sylius_admin_promotion_coupon_generate:
             redirect:
                 route: sylius_admin_promotion_coupon_index
                 parameters: { promotionId: $promotionId }
+            permission: true
 
 sylius_admin_promotion_coupon_delete:
     path: /{id}
@@ -81,3 +85,4 @@ sylius_admin_promotion_coupon_delete:
         _controller: sylius.controller.promotion_coupon:deleteAction
         _sylius:
             redirect: referer
+            permission: true

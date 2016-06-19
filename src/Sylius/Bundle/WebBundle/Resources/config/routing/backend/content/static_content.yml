@@ -9,6 +9,7 @@ sylius_backend_static_content_index:
         _sylius:
             template: SyliusWebBundle:Backend/Content/StaticContent:index.html.twig
             sortable: true
+            permission: true
 
 sylius_backend_static_content_create:
     path:    /new
@@ -18,6 +19,7 @@ sylius_backend_static_content_create:
         _sylius:
             template: SyliusWebBundle:Backend/Content/StaticContent:create.html.twig
             redirect: sylius_backend_static_content_index
+            permission: true
 
 sylius_backend_static_content_update:
     path:    /{id}/edit
@@ -30,6 +32,7 @@ sylius_backend_static_content_update:
                 method: find
                 arguments: [$id]
             redirect: sylius_backend_static_content_index
+            permission: true
     requirements:
         id: ".+"
 
@@ -44,5 +47,6 @@ sylius_backend_static_content_delete:
                 method: find
                 arguments: [$id]
             redirect: sylius_backend_static_content_index
+            permission: true
     requirements:
         id: ".+"

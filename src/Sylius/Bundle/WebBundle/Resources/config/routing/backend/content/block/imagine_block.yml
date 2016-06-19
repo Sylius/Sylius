@@ -9,6 +9,7 @@ sylius_backend_imagine_block_index:
         _sylius:
             template: SyliusWebBundle:Backend/Content/Block/Imagine:index.html.twig
             sortable: true
+            permission: true
 
 sylius_backend_imagine_block_create:
     path:    /new
@@ -18,6 +19,7 @@ sylius_backend_imagine_block_create:
         _sylius:
             template: SyliusWebBundle:Backend/Content/Block/Imagine:create.html.twig
             redirect: sylius_backend_imagine_block_index
+            permission: true
 
 sylius_backend_imagine_block_update:
     path:    /{id}/edit
@@ -30,6 +32,7 @@ sylius_backend_imagine_block_update:
                 method: find
                 arguments: [$id]
             redirect: sylius_backend_imagine_block_index
+            permission: true
     requirements:
         id: ".+"
 
@@ -44,5 +47,6 @@ sylius_backend_imagine_block_delete:
                 method: find
                 arguments: [$id]
             redirect: sylius_backend_imagine_block_index
+            permission: true
     requirements:
         id: ".+"

@@ -6,6 +6,7 @@ sylius_admin_product_attribute:
         except: ['show', 'create']
         redirect: update
         grid: sylius_admin_product_attribute
+        permission: true
         vars:
             all:
                 subheader: sylius.ui.manage_attributes_of_your_products
@@ -28,6 +29,7 @@ sylius_admin_product_attribute_create:
                     type: $type
             template: SyliusAdminBundle:Crud:create.html.twig
             redirect: sylius_admin_product_attribute_update
+            permission: true
             vars:
                 subheader: sylius.ui.manage_attributes_of_your_products
                 templates:

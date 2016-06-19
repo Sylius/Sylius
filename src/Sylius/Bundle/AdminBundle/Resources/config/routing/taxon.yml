@@ -5,6 +5,7 @@ sylius_admin_taxon:
         templates: SyliusAdminBundle:Taxon
         except: ['show', 'index']
         redirect: update
+        permission: true
         vars:
             all:
                 subheader: sylius.ui.manage_categorization_of_your_products
@@ -28,4 +29,5 @@ sylius_admin_taxon_tree:
             template: SyliusAdminBundle:Taxon:index.html.twig
             repository:
                 method: findRootNodes
+            permission: true
     host: "localhost"

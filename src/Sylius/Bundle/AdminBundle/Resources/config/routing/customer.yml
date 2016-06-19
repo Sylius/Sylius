@@ -6,6 +6,7 @@ sylius_admin_customer:
         except: ['show']
         redirect: update
         grid: sylius_admin_customer
+        permission: true
         vars:
             all:
                 subheader: sylius.ui.manage_your_customers

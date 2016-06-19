@@ -11,6 +11,7 @@ sylius_backend_locale_index:
             sortable: true
             sorting:
                 code: desc
+            permission: true
 
 sylius_backend_locale_create:
     path: /new
@@ -20,6 +21,7 @@ sylius_backend_locale_create:
         _sylius:
             template: SyliusWebBundle:Backend/Locale:create.html.twig
             redirect: sylius_backend_locale_index
+            permission: true
 
 sylius_backend_locale_enable:
     path: /{id}/enable
@@ -28,6 +30,7 @@ sylius_backend_locale_enable:
         _controller: sylius.controller.locale:enableAction
         _sylius:
             redirect: sylius_backend_locale_index
+            permission: true
             
 sylius_backend_locale_disable:
     path: /{id}/disable
@@ -36,3 +39,4 @@ sylius_backend_locale_disable:
         _controller: sylius.controller.locale:disableAction
         _sylius:
             redirect: sylius_backend_locale_index
+            permission: true

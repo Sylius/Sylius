@@ -6,6 +6,7 @@ sylius_admin_channel:
         except: ['show']
         redirect: update
         grid: sylius_admin_channel
+        permission: true
         vars:
           all:
               subheader: sylius.ui.configure_channels_available_in_your_store
