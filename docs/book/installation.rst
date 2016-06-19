@@ -126,7 +126,7 @@ And now you can use gulp for installing views, by just running a simple command:
 
 .. code-block:: bash
 
-    $ gulp
+    $ npm run gulp
 
 After you've run the ``gulp`` command please have a look at the ``/admin`` url, where you will find the administration panel.
 
