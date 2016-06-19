@@ -12,6 +12,7 @@ sylius_backend_customer_index:
                 method: createFilterPaginator
                 arguments: [$criteria, $sorting]
             sortable: true
+            permission: true
 
 sylius_backend_customer_create:
     path: /new
@@ -21,6 +22,7 @@ sylius_backend_customer_create:
         _sylius:
             template: SyliusWebBundle:Backend/Customer:create.html.twig
             redirect: sylius_backend_customer_show
+            permission: true
 
 sylius_backend_customer_update:
     path: /{id}/edit
@@ -30,6 +32,7 @@ sylius_backend_customer_update:
         _sylius:
             template: SyliusWebBundle:Backend/Customer:update.html.twig
             redirect: sylius_backend_customer_show
+            permission: true
 
 sylius_backend_customer_show:
     path: /{id}
@@ -41,3 +44,4 @@ sylius_backend_customer_show:
             repository:
                 method: findForDetailsPage
                 arguments: [$id]
+            permission: true

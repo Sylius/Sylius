@@ -9,6 +9,7 @@ sylius_backend_menu_node_index:
         _sylius:
             template: SyliusWebBundle:Backend/Content/MenuNode:index.html.twig
             sortable: true
+            permission: true
 
 sylius_backend_menu_node_create:
     path:    /new
@@ -18,6 +19,7 @@ sylius_backend_menu_node_create:
         _sylius:
             template: SyliusWebBundle:Backend/Content/MenuNode:create.html.twig
             redirect: sylius_backend_menu_node_index
+            permission: true
 
 sylius_backend_menu_node_update:
     path:    /{id}/edit
@@ -30,6 +32,7 @@ sylius_backend_menu_node_update:
                 method: find
                 arguments: [$id]
             redirect: sylius_backend_menu_node_index
+            permission: true
     requirements:
         id: ".+"
 
@@ -43,5 +46,6 @@ sylius_backend_menu_node_delete:
                 method: find
                 arguments: [$id]
             redirect: sylius_backend_menu_node_index
+            permission: true
     requirements:
         id: ".+"

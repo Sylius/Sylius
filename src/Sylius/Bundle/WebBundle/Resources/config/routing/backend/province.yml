@@ -11,3 +11,4 @@ sylius_backend_province_delete:
             redirect:
                 route: sylius_backend_country_show
                 parameters: {'id': $countryId}
+            permission: true

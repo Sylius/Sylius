@@ -9,6 +9,7 @@ sylius_backend_shipping_method_index:
         _sylius:
             template: SyliusWebBundle:Backend/ShippingMethod:index.html.twig
             sortable: true
+            permission: true
 #            TODO allow sort by translated field
 #            sorting:
 #                name: desc
@@ -21,6 +22,7 @@ sylius_backend_shipping_method_create:
         _sylius:
             template: SyliusWebBundle:Backend/ShippingMethod:create.html.twig
             redirect: sylius_backend_shipping_method_show
+            permission: true
 
 sylius_backend_shipping_method_update:
     path: /{id}/edit
@@ -30,6 +32,7 @@ sylius_backend_shipping_method_update:
         _sylius:
             template: SyliusWebBundle:Backend/ShippingMethod:update.html.twig
             redirect: sylius_backend_shipping_method_show
+            permission: true
 
 sylius_backend_shipping_method_enable:
     path: /{id}/enable
@@ -38,6 +41,7 @@ sylius_backend_shipping_method_enable:
         _controller: sylius.controller.shipping_method:enableAction
         _sylius:
             redirect: sylius_backend_shipping_method_index
+            permission: true
 
 sylius_backend_shipping_method_disable:
     path: /{id}/disable
@@ -46,6 +50,7 @@ sylius_backend_shipping_method_disable:
         _controller: sylius.controller.shipping_method:disableAction
         _sylius:
             redirect: sylius_backend_shipping_method_index
+            permission: true
 
 sylius_backend_shipping_method_show:
     path: /{id}
@@ -54,6 +59,7 @@ sylius_backend_shipping_method_show:
         _controller: sylius.controller.shipping_method:showAction
         _sylius:
             template: SyliusWebBundle:Backend/ShippingMethod:show.html.twig
+            permission: true
 
 sylius_backend_shipping_method_delete:
     path: /{id}
@@ -62,3 +68,4 @@ sylius_backend_shipping_method_delete:
         _controller: sylius.controller.shipping_method:deleteAction
         _sylius:
             redirect: sylius_backend_shipping_method_index
+            permission: true

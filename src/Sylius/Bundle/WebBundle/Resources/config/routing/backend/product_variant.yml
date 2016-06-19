@@ -14,6 +14,7 @@ sylius_backend_product_variant_create:
             redirect:
                 route: sylius_backend_product_show
                 parameters: {'id': $productId}
+            permission: true
 
 sylius_backend_product_variant_update:
     path: /{id}/edit
@@ -25,6 +26,7 @@ sylius_backend_product_variant_update:
             redirect:
                 route: sylius_backend_product_show
                 parameters: {'id': $productId}
+            permission: true
 
 sylius_backend_product_variant_delete:
     path: /{id}
@@ -36,6 +38,7 @@ sylius_backend_product_variant_delete:
             redirect:
                 route: sylius_backend_product_show
                 parameters: {'id': $productId}
+            permission: true
 
 sylius_backend_product_variant_generate:
     path: /generate
@@ -52,3 +55,4 @@ sylius_backend_product_variant_generate:
             repository:
                 method: find
                 arguments: [$productId]
+            permission: true

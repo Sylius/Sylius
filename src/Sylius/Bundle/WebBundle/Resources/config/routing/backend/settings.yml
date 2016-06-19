@@ -7,6 +7,7 @@ sylius_backend_general_settings:
         _controller: sylius.controller.settings:updateAction
         schema: sylius_general
         template: SyliusWebBundle:Backend/Settings:general.html.twig
+        permission: true
 
 sylius_backend_security_settings:
     path: /security
@@ -14,6 +15,7 @@ sylius_backend_security_settings:
         _controller: sylius.controller.settings:updateAction
         schema: sylius_security
         template: SyliusWebBundle:Backend/Settings:security.html.twig
+        permission: true
 
 sylius_backend_taxation_settings:
     path: /taxation
@@ -21,3 +23,4 @@ sylius_backend_taxation_settings:
         _controller: sylius.controller.settings:updateAction
         schema: sylius_taxation
         template: SyliusWebBundle:Backend/Settings:taxation.html.twig
+        permission: true

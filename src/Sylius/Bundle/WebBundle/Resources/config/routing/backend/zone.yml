@@ -9,6 +9,7 @@ sylius_backend_zone_index:
         _sylius:
             template: SyliusWebBundle:Backend/Zone:index.html.twig
             sortable: true
+            permission: true
 
 sylius_backend_zone_create:
     path: /{type}/new
@@ -21,6 +22,7 @@ sylius_backend_zone_create:
             factory:
                 method: createTyped
                 arguments: [$type]
+            permission: true
     requirements:
         type: country|province|zone
 
@@ -32,6 +34,7 @@ sylius_backend_zone_update:
         _sylius:
             template: SyliusWebBundle:Backend/Zone:update.html.twig
             redirect: sylius_backend_zone_show
+            permission: true
 
 sylius_backend_zone_delete:
     path: /{id}
@@ -41,6 +44,7 @@ sylius_backend_zone_delete:
         _sylius:
             template: SyliusWebBundle:Backend/Misc:delete.html.twig
             redirect: sylius_backend_zone_index
+            permission: true
 
 sylius_backend_zone_show:
     path: /{id}
@@ -49,3 +53,4 @@ sylius_backend_zone_show:
         _controller: sylius.controller.zone:showAction
         _sylius:
             template: SyliusWebBundle:Backend/Zone:show.html.twig
+            permission: true

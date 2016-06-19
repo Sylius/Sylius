@@ -13,6 +13,7 @@ sylius_backend_order_index:
                 arguments: [$criteria, $sorting]
             paginate: 20
             sortable: true
+            permission: true
 
 sylius_backend_order_revert:
     path: /{id}/revert/{version}
@@ -21,6 +22,7 @@ sylius_backend_order_revert:
         _controller: sylius.controller.order:revertAction
         _sylius:
             redirect: sylius_backend_order_show
+            permission: true
 
 sylius_backend_order_delete:
     path: /{id}
@@ -30,6 +32,7 @@ sylius_backend_order_delete:
         _sylius:
             template: SyliusWebBundle:Backend/Misc:delete.html.twig
             redirect: sylius_backend_order_index
+            permission: true
 
 sylius_backend_order_history:
     path: /{id}/history
@@ -41,6 +44,7 @@ sylius_backend_order_history:
             repository:
                 method: findForDetailsPage
                 arguments: [$id]
+            permission: true
 
 sylius_backend_order_show:
     path: /{id}
@@ -52,6 +56,7 @@ sylius_backend_order_show:
             repository:
                 method: findForDetailsPage
                 arguments: [$id]
+            permission: true
 
 sylius_backend_order_by_customer:
     path: /u/{id}
@@ -62,6 +67,7 @@ sylius_backend_order_by_customer:
             template: SyliusWebBundle:Backend/Order:indexByCustomer.html.twig
             sortable: true
             sorting: { updatedAt: desc }
+            permission: true
 
 sylius_backend_order_release_inventory:
     path: /release-inventory/{id}
@@ -76,6 +82,7 @@ sylius_backend_order_comment_create:
         _controller: sylius.controller.comment:createAction
         _sylius:
             template: SyliusWebBundle:Backend/Order:createComment.html.twig
+            permission: true
 
 sylius_backend_order_adjustment_index:
     path: /{id}/adjustments
@@ -84,6 +91,7 @@ sylius_backend_order_adjustment_index:
         _controller: sylius.controller.order:showAction
         _sylius:
             template: SyliusWebBundle:Backend/Order:adjustments.html.twig
+            permission: true
 
 sylius_backend_order_adjustment_lock:
     path: /{id}/adjustment
@@ -94,6 +102,7 @@ sylius_backend_order_adjustment_lock:
             redirect:
                 route: sylius_backend_order_adjustment_index
                 parameters: {'id': $id}
+            permission: true
 
 sylius_backend_order_adjustment_delete:
     path: /{orderId}/adjustment/{id}
@@ -104,3 +113,4 @@ sylius_backend_order_adjustment_delete:
             redirect:
                 route: sylius_backend_order_adjustment_index
                 parameters: {'id': $orderId}
+            permission: true

@@ -12,6 +12,7 @@ sylius_backend_product_index:
             repository:
                 method: createFilterPaginator
                 arguments: [$criteria, $sorting]
+            permission: true
 
 # @todo refactor this when PRs about API & search get merged
 sylius_backend_product_find:
@@ -30,6 +31,7 @@ sylius_backend_product_create:
             template: SyliusWebBundle:Backend/Product:create.html.twig
             redirect: sylius_backend_product_show
             form: sylius_product_legacy
+            permission: true
 
 sylius_backend_product_create_from_archetype:
     path: /new-from-archetype
@@ -42,6 +44,7 @@ sylius_backend_product_create_from_archetype:
                 arguments: $archetype
             template: SyliusWebBundle:Backend/Product:create.html.twig
             form: sylius_product_legacy
+            permission: true
 
 sylius_backend_product_update:
     path: /{id}/edit
@@ -52,6 +55,7 @@ sylius_backend_product_update:
             template: SyliusWebBundle:Backend/Product:update.html.twig
             redirect: sylius_backend_product_show
             form: sylius_product_legacy
+            permission: true
 
 sylius_backend_product_revert:
     path: /{id}/revert/{version}
@@ -60,6 +64,7 @@ sylius_backend_product_revert:
         _controller: sylius.controller.product:revertAction
         _sylius:
             redirect: sylius_backend_product_show
+            permission: true
 
 sylius_backend_product_delete:
     path: /{id}
@@ -69,6 +74,7 @@ sylius_backend_product_delete:
         _sylius:
             template: SyliusWebBundle:Backend/Misc:delete.html.twig
             redirect: sylius_backend_product_index
+            permission: true
 
 sylius_backend_product_delete_restore:
     path: /{id}/restore
@@ -77,6 +83,7 @@ sylius_backend_product_delete_restore:
         _controller: sylius.controller.product:restoreAction
         _sylius:
             redirect: sylius_backend_product_show
+            permission: true
 
 sylius_backend_product_history:
     path: /{id}/history
@@ -88,6 +95,7 @@ sylius_backend_product_history:
             repository:
                 method: findForDetailsPage
                 arguments: [$id]
+            permission: true
 
 sylius_backend_product_show:
     path: /{id}
@@ -99,6 +107,7 @@ sylius_backend_product_show:
             repository:
                 method: findForDetailsPage
                 arguments: [$id]
+            permission: true
 
 sylius_backend_product_enable:
     path: /{id}/enable
@@ -107,6 +116,7 @@ sylius_backend_product_enable:
         _controller: sylius.controller.product:enableAction
         _sylius:
             redirect: sylius_backend_product_index
+            permission: true
 
 sylius_backend_product_disable:
     path: /{id}/disable
@@ -115,3 +125,4 @@ sylius_backend_product_disable:
         _controller: sylius.controller.product:disableAction
         _sylius:
             redirect: sylius_backend_product_index
+            permission: true

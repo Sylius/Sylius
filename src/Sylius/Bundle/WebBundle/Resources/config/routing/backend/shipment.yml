@@ -15,6 +15,7 @@ sylius_backend_shipment_index:
             sortable: true
             sorting:
                 updatedAt: desc
+            permission: true
 
 sylius_backend_shipment_update:
     path: /{id}/edit
@@ -24,6 +25,7 @@ sylius_backend_shipment_update:
         _sylius:
             template: SyliusWebBundle:Backend/Shipment:update.html.twig
             redirect: sylius_backend_shipment_show
+            permission: true
 
 sylius_backend_shipment_delete:
     path: /{id}
@@ -33,6 +35,7 @@ sylius_backend_shipment_delete:
         _sylius:
             template: SyliusWebBundle:Backend/Misc:delete.html.twig
             redirect: sylius_backend_shipment_index
+            permission: true
 
 sylius_backend_shipment_show:
     path: /{id}
@@ -41,6 +44,7 @@ sylius_backend_shipment_show:
         _controller: sylius.controller.shipment:showAction
         _sylius:
             template: SyliusWebBundle:Backend/Shipment:show.html.twig
+            permission: true
 
 sylius_backend_shipment_ship:
     path: /ship/{id}
@@ -50,6 +54,7 @@ sylius_backend_shipment_ship:
         _sylius:
             template: SyliusWebBundle:Backend/Shipment:show.html.twig
             redirect: sylius_backend_shipment_show
+            permission: true
 
 sylius_backend_shipment_update_state:
     path: /update-state/{id}/{transition}
@@ -61,3 +66,4 @@ sylius_backend_shipment_update_state:
                 graph: sylius_shipment
                 transition: $transition
             redirect: referer
+            permission: true
