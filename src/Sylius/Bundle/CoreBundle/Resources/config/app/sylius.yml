@@ -147,7 +147,6 @@ sylius_money:
     locale: "%locale%"
 
 sylius_order:
-    guest_order: false
     resources:
         order:
             classes:
