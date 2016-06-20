@@ -19,7 +19,7 @@ Feature: Apply correct taxes for products with different tax rates for different
         And it belongs to "Clothes" tax category
         And the store has a product "Symfony Mug" priced at "€50.00"
         And it belongs to "Mugs" tax category
-        And I am logged in customer
+        And I am a logged in customer
 
     @ui
     Scenario: Displaying correct tax before specifying shipping address

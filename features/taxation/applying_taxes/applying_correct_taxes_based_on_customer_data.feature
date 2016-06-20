@@ -35,7 +35,7 @@ Feature: Apply correct taxes based on customer data
 
     @ui
     Scenario: Proper taxes for logged in Customer with already specified shipping address
-        Given I am logged in customer
+        Given I am a logged in customer
         And my default shipping address is "Australia"
         When I add product "PHP T-Shirt" to the cart
         And I proceed without selecting shipping address

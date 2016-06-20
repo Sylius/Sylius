@@ -9,7 +9,7 @@ Feature: Receiving percentage discount on shipping
         And the store has "DHL" shipping method with "€10.00" fee
         And the store has a product "PHP T-Shirt" priced at "€100.00"
         And there is a promotion "Holiday promotion"
-        And I am logged in customer
+        And I am a logged in customer
 
     @ui
     Scenario: Receiving percentage discount on shipping

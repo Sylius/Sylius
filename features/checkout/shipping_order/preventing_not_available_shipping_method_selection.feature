@@ -7,7 +7,7 @@ Feature: Preventing not available shipping method selection
     Background:
         Given the store operates on a single channel in "France"
         And the store has a product "Targaryen T-Shirt" priced at "$19.99"
-        And I am logged in customer
+        And I am a logged in customer
 
     @ui
     Scenario: Not being able to select disabled shipping method

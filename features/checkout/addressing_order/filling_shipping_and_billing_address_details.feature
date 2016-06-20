@@ -8,7 +8,7 @@ Feature: Addressing an order
         Given the store operates on a single channel in "France"
         And the store has a product "PHP T-Shirt" priced at "$19.99"
         And the store ships everywhere for free
-        And I am logged in customer
+        And I am a logged in customer
 
     @ui
     Scenario: Address an order without different billing address

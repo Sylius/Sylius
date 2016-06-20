@@ -8,7 +8,7 @@ Feature: Reapplying promotion on cart change
         Given the store operates on a single channel in "France"
         And the store has a product "PHP T-Shirt" priced at "€100.00"
         And there is a promotion "Holiday promotion"
-        And I am logged in customer
+        And I am a logged in customer
 
     @ui
     Scenario: Not receiving discount on shipping after removing last item from cart
