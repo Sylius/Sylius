@@ -1,19 +1,20 @@
 SyliusFixturesBundle [![Build status...](https://secure.travis-ci.org/Sylius/SyliusFixturesBundle.png?branch=master)](http://travis-ci.org/Sylius/SyliusFixturesBundle)
-================
+====================
 
-Sylius fixtures bundle. It contains the fixtures from the core bundle so a user can install the core without the fixtures.
+Configurable fixtures for Symfony2 applications.
 
 Sylius
 ------
 
 **Sylius** - Modern ecommerce for Symfony2. Visit [Sylius.org](http://sylius.org).
 
-[phpspec](http://phpspec.net) examples
---------------------------------------
+Tests
+-----
 
 ```bash
 $ composer install
 $ bin/phpspec run -f pretty
+$ bin/phpunit --testdox
 ```
 
 Documentation
@@ -25,17 +26,6 @@ Contributing
 ------------
 
 All informations about contributing to Sylius can be found on [this page](http://docs.sylius.org/en/latest/contributing/index.html).
-
-Mailing lists
--------------
-
-### Users
-
-Questions? Feel free to ask on [users mailing list](http://groups.google.com/group/sylius).
-
-### Developers
-
-To contribute and develop this bundle, use the [developers mailing list](http://groups.google.com/group/sylius-dev).
 
 Sylius twitter account
 ----------------------
@@ -60,7 +50,7 @@ And constructed with the following guidelines.
 * Bug fixes and misc changes bump the patch.
 
 For more information on SemVer, please visit [semver.org website](http://semver.org/).  
-This versioning method is same for all **Sylius** bundles and applications.
+This versioning method is the same for all **Sylius** bundles and applications.
 
 MIT License
 -----------
@@ -70,5 +60,5 @@ License can be found [here](https://github.com/Sylius/SyliusFixturesBundle/blob/
 Authors
 -------
 
-The bundle was originally created by [Charles Sarrazin](https://twitter.com/csarrazi).
+The bundle was originally created by [Kamil Kokot](http://kamil.kokot.me).
 See the list of [contributors](https://github.com/Sylius/SyliusFixturesBundle/contributors).
