@@ -35,5 +35,8 @@ abstract class AbstractListener implements ListenerInterface
     /**
      * @param ArrayNodeDefinition $optionsNode
      */
-    abstract protected function configureOptionsNode(ArrayNodeDefinition $optionsNode);
+    protected function configureOptionsNode(ArrayNodeDefinition $optionsNode)
+    {
+        // empty
+    }
 }
