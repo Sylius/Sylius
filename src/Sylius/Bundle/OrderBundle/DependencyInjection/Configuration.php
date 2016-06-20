@@ -60,13 +60,6 @@ class Configuration implements ConfigurationInterface
             ->addDefaultsIfNotSet()
             ->children()
                 ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
-                ->booleanNode('guest_order')
-                    ->beforeNormalization()
-                        ->ifString()
-                        ->then(function ($v) { return (bool) $v; })
-                    ->end()
-                    ->defaultFalse()
-                ->end()
             ->end()
         ;
 
