@@ -92,3 +92,7 @@ sylius_fixtures:
                 tax_rate:
                     options:
                         random: 10
+
+                taxon:
+                    options:
+                        random: 50

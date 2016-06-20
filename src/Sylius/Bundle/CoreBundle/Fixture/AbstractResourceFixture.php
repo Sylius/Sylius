@@ -207,6 +207,8 @@ abstract class AbstractResourceFixture implements FixtureInterface
             if (null === $identifier) {
                 $resources = $repository->findAll();
 
+                Assert::notEmpty($resources);
+
                 return $resources[array_rand($resources)];
             }
 
