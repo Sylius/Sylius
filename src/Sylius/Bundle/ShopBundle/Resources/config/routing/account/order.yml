@@ -9,3 +9,19 @@ sylius_shop_account_order_index:
         _sylius:
             template: SyliusShopBundle:Account/Order:index.html.twig
             grid: sylius_shop_account_order
+            section: shop_account
+
+sylius_shop_account_order_show:
+    path: /{number}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.order:showAction
+        _sylius:
+            template: SyliusShopBundle:Account/Order:show.html.twig
+            grid: sylius_shop_account_order
+            section: shop_account
+            repository:
+                method: findOneByNumberAndCustomer
+                arguments:
+                    - $number
+                    - 'expr:service("sylius.context.customer").getCustomer()'

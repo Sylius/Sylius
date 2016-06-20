@@ -17,12 +17,12 @@ Feature: Viewing details of an order
         And I chose "Free" shipping method with "Cash on Delivery" payment
         And I bought an "Angel T-Shirt" and an "Angel Mug"
 
-    @todo
+    @ui @javascript
     Scenario: Viewing basic information about an order
         When I view the summary of the order "#00000666"
         And it should has number "#00000666"
         And I should see 2 items in the list
         And the product named "Angel T-Shirt" should be in the items list
         And the product named "Angel Mug" should be in the items list
-        And I should see "€58.00" as order's items total
+        And I should see "€58.00" as order's subtotal
         And I should see "€58.00" as order's total

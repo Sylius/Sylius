@@ -160,7 +160,7 @@ final class OrderContext implements Context
     }
 
     /**
-     * @Given /^(I) placed an order "([^"]+)"$/
+     * @Given /^(I) placed (an order "[^"]+")$/
      */
     public function iPlacedAnOrder(UserInterface $user, $orderNumber)
     {
@@ -262,6 +262,7 @@ final class OrderContext implements Context
 
     /**
      * @Given /^the customer bought ((?:a|an) "[^"]+") and ((?:a|an) "[^"]+")$/
+     * @Given /^I bought ((?:a|an) "[^"]+") and ((?:a|an) "[^"]+")$/
      */
     public function theCustomerBoughtProductAndProduct(ProductInterface $product, ProductInterface $secondProduct)
     {

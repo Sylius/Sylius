@@ -421,6 +421,22 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function findOneByNumberAndCustomer($number, CustomerInterface $customer)
+    {
+        return $this->createQueryBuilder('o')
+            ->leftJoin('o.customer', 'customer')
+            ->andWhere('customer = :customer')
+            ->andWhere('o.number = :number')
+            ->setParameter('customer', $customer)
+            ->setParameter('number', $number)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
+    /**
      * @param \DateTime $from
      * @param \DateTime $to
      * @param string $state

@@ -1,0 +1,35 @@
+{% import '@SyliusUi/Macro/labels.html.twig' as label %}
+{% extends '@SyliusShop/Account/layout.html.twig' %}
+
+{% block subcontent %}
+    <h1 class="ui dividing header">
+        {{ 'sylius.ui.order_details'|trans }}
+    </h1>
+    <div class="ui padded segment" id="items">
+        <div class="ui list">
+            <div class="item"><strong>{{ 'sylius.ui.placed_at'|trans }} {{ order.createdAt|date() }}</strong></div>
+            <div class="ui hidden divider"></div>
+            <div class="item" id="number">{{ 'sylius.ui.number'|trans }} <strong>#{{ order.number }}</strong></div>
+            <div class="item">{{ 'sylius.ui.state'|trans }} <strong>{{ label.default(('sylius.ui.'~order.state)|trans) }}</strong></div>
+        </div>
+        <div class="ui hidden divider"></div>
+        {% include '@SyliusShop/Account/Order/_items.html.twig' %}
+        <div class="ui two column stackable grid" id="addresses">
+            <div class="column" id="shipping-address">
+                <h4 class="ui dividing header">{{ 'sylius.ui.shipping_address'|trans }}</h4>
+                {% include '@SyliusShop/Account/Order/_address.html.twig' with {'address': order.shippingAddress} %}
+            </div>
+            <div class="column" id="billing-address">
+                <h4 class="ui dividing header">{{ 'sylius.ui.billing_address'|trans }}</h4>
+                {% include '@SyliusShop/Account/Order/_address.html.twig' with {'address': order.billingAddress} %}
+            </div>
+        </div>
+        <h4 class="ui dividing header">
+            {{ 'sylius.ui.shipping_and_payment_methods'|trans }}
+        </h4>
+        <div class="ui two column stackable grid">
+            {% include '@SyliusShop/Account/Order/_payments.html.twig' %}
+            {% include '@SyliusShop/Account/Order/_shipments.html.twig' %}
+        </div>
+    </div>
+{% endblock %}

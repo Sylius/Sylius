@@ -38,10 +38,22 @@ final class OrderContext implements Context
      */
     public function getOrderByNumber($orderNumber)
     {
+        $orderNumber = $this->getOrderNumber($orderNumber);
         $order = $this->orderRepository->findOneBy(['number' => $orderNumber]);
 
         Assert::notNull($order, sprintf('Cannot find order with number %s', $orderNumber));
 
         return $order;
+    }
+
+    /**
+     * @Transform :orderNumber
+     * @Transform /^an order "([^"]+)"$/
+     */
+    public function getOrderNumber($orderNumber)
+    {
+        $orderNumber = str_replace('#', '', $orderNumber);
+
+        return $orderNumber;
     }
 }

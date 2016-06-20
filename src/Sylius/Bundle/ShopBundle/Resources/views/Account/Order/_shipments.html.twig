@@ -1,0 +1,17 @@
+{% import '@SyliusUi/Macro/labels.html.twig' as label %}
+
+<div class="column">
+    <div class="ui large icon message">
+        <i class="truck icon"></i>
+        <div class="content">
+            {% for shipment in order.shipments %}
+                <div class="header">
+                    {{ shipment.method }}
+                </div>
+                <p>
+                    <i class="globe icon"></i>{{ shipment.method.zone }}
+                </p>
+            {% endfor %}
+        </div>
+    </div>
+</div>

@@ -16,7 +16,7 @@ Feature: Viewing details of an order
         And I chose "Free" shipping method with "Cash on Delivery" payment
         And I bought a single "Angel T-Shirt"
 
-    @todo
+    @ui
     Scenario: Viewing basic information about an order
         When I view the summary of the order "#00000666"
         And it should has number "#00000666"
