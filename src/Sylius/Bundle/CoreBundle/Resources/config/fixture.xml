@@ -107,5 +107,13 @@
             <argument type="service" id="sylius.manager.tax_category" />
             <tag name="sylius_fixtures.fixture" />
         </service>
+
+        <service id="sylius.fixture.tax_rate" class="Sylius\Bundle\CoreBundle\Fixture\TaxRateFixture">
+            <argument type="service" id="sylius.factory.tax_rate" />
+            <argument type="service" id="sylius.manager.tax_rate" />
+            <argument type="service" id="sylius.repository.zone" />
+            <argument type="service" id="sylius.repository.tax_category" />
+            <tag name="sylius_fixtures.fixture" />
+        </service>
     </services>
 </container>

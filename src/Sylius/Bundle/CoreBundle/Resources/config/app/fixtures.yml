@@ -88,3 +88,7 @@ sylius_fixtures:
                 tax_category:
                     options:
                         random: 10
+
+                tax_rate:
+                    options:
+                        random: 10
