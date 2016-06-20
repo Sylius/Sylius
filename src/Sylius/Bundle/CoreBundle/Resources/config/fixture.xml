@@ -101,5 +101,11 @@
             <argument type="service" id="sylius.repository.locale" />
             <tag name="sylius_fixtures.fixture" />
         </service>
+
+        <service id="sylius.fixture.tax_category" class="Sylius\Bundle\CoreBundle\Fixture\TaxCategoryFixture">
+            <argument type="service" id="sylius.factory.tax_category" />
+            <argument type="service" id="sylius.manager.tax_category" />
+            <tag name="sylius_fixtures.fixture" />
+        </service>
     </services>
 </container>

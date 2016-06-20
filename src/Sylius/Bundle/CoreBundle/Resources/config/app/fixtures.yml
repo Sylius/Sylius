@@ -84,3 +84,7 @@ sylius_fixtures:
                 product_archetype:
                     options:
                         random: 10
+
+                tax_category:
+                    options:
+                        random: 10
