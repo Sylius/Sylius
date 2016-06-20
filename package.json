@@ -20,6 +20,9 @@
     "gulp-uglifycss": "^1.0.5",
     "merge-stream": "^1.0.0"
   },
+  "scripts": {
+      "gulp": "gulp"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Sylius/Sylius.git"

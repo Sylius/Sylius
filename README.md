@@ -42,7 +42,7 @@ If you want to try out new Sylius UI, please run the following commands:
 
 ```bash
 $ npm install
-$ gulp
+$ npm run gulp
 ```
 
 [Behat](http://behat.org) scenarios
