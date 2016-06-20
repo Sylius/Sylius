@@ -1,71 +1,75 @@
-Customizing Menu
-================
+Customizing Menus
+=================
 
-You can add entries to the menu via events easily. You get passed a
-``Sylius\\Bundle\\WebBundle\\Event\\MenuBuilderEvent`` with ``FactoryInterface`` and ``ItemInterface`` of
-`KnpMenu`_. So you can manipulate the whole menu.
+Adding new positions in your menu is done **via events**.
 
-Available for the backend and frontend menus, by listening/subscribing to any of the event constants defined in ``Sylius\Bundle\WebBundle\Event\MenuBuilderEvent``.
+You have got the ``Sylius\Bundle\WebBundle\Event\MenuBuilderEvent`` with ``FactoryInterface`` and ``ItemInterface`` of `KnpMenu`_. So you can manipulate the whole menu.
 
-Example Usage
--------------
+You've got such events that you should be subscribing to:
 
 .. code-block:: php
 
-    // src/Acme/ReportsBundle/EventListener/MenuBuilderListener.php
-    namespace Acme\ReportsBundle\EventListener;
+    sylius.menu.admin.main                  # Admin Panel menu
+    sylius.menu_builder.frontend.main       # Main Shop menu (top bar)
+    sylius.menu_builder.frontend.currency   #
+    sylius.menu_builder.frontend.taxons     #
+    sylius.menu_builder.frontend.social     #
+    sylius.menu_builder.frontend.account    #
 
-    use Sylius\Bundle\WebBundle\Event\MenuBuilderEvent;
+How to customize a Menu?
+------------------------
 
+1. In order to add items to any to the Menus in **Sylius** you have to create a ``AppBundle\EventListener\MenuBuilderListener`` class.
+
+In the example below we are adding a one new item to the Admin panel menu and a one new item to main menu of the shop.
+
+.. code-block:: php
+
+    <?php
+
+    namespace AppBundle\EventListener;
+
+    use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
+    use Sylius\Bundle\WebBundle\Event\MenuBuilderEvent as FrontendMenuBuilderEvent;
+
+    /**
+     * @author Name Surname <name.surname@test.com>
+     */
     class MenuBuilderListener
     {
+        /**
+         * @param MenuBuilderEvent $event
+         */
         public function addBackendMenuItems(MenuBuilderEvent $event)
         {
             $menu = $event->getMenu();
 
-            $menu['sales']->addChild('reports', array(
-                'route' => 'acme_reports_index',
-                'labelAttributes' => array('icon' => 'glyphicon glyphicon-stats'),
-            ))->setLabel('Daily and monthly reports');
+            $menu->addChild('backend_main')
+                ->setLabel('Test Backend Main');
+        }
+
+        /**
+         * @param FrontendMenuBuilderEvent $event
+         */
+        public function addFrontendMenuItems(FrontendMenuBuilderEvent $event)
+        {
+            $menu = $event->getMenu();
+
+            $menu->addChild('frontend')
+                ->setLabel('Frontend Menu Item');
         }
     }
 
-.. configuration-block::
+2. After creating your class with proper methods for all the menu customizations you need, you need to subscribe your
+listener to proper events in the ``AppBundle\Resources\config.services.yml``.
 
-    .. code-block:: yaml
+.. code-block:: yaml
 
-        services:
-            acme_reports.menu_builder:
-                class: Acme\ReportsBundle\EventListener\MenuBuilderListener
-                tags:
-                    - { name: kernel.event_listener, event: sylius.menu_builder.backend.main, method: addBackendMenuItems }
-                    - { name: kernel.event_listener, event: sylius.menu_builder.backend.sidebar, method: addBackendMenuItems }
-
-    .. code-block:: xml
-
-        <!-- src/Acme/ReportsBundle/Resources/config/services.xml -->
-        <?xml version="1.0" encoding="UTF-8" ?>
-        <container xmlns="http://symfony.com/schema/dic/services"
-            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-
-            <services>
-                <service id="acme_reports.menu_builder" class="Acme\ReportsBundle\EventListener\MenuBuilderListener">
-                    <tag name="kernel.event_listener" event="sylius.menu_builder.backend.main" method="addBackendMenuItems" />
-                    <tag name="kernel.event_listener" event="sylius.menu_builder.backend.sidebar" method="addBackendMenuItems" />
-                </service>
-            </services>
-        </container>
-
-    .. code-block:: php
-
-        // src/Acme/ReportsBundle/Resources/config/services.php
-        use Symfony\Component\DependencyInjection\Definition;
-
-        $definition = new Definition('Acme\ReportsBundle\EventListener\MenuBuilderListener');
-        $definition->->addTag('kernel.event_listener', array('event' => 'sylius.menu_builder.backend.main', 'method' => 'addBackendMenuItems'));
-        $definition->->addTag('kernel.event_listener', array('event' => 'sylius.menu_builder.backend.sidebar', 'method' => 'addBackendMenuItems'));
-
-        $container->setDefinition('acme_reports.menu_builder', $definition);
+    services:
+        app.admin.menu_builder_listener:
+            class: AppBundle\EventListener\MenuBuilderListener
+            tags:
+                - { name: kernel.event_listener, event: sylius.menu.admin.main, method: addBackendMenuItems }
+                - { name: kernel.event_listener, event: sylius.menu_builder.frontend.currency, method: addFrontendMenuItems }
 
 .. _KnpMenu: https://github.com/KnpLabs/KnpMenu

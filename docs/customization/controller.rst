@@ -7,7 +7,7 @@ If you want to override some controller action check which controller you should
 .. note::
     There are two types of controllers we can define in Sylius.
     **Resource Controllers** - are basing only on one Entity, so they return only the resources they have in their name. For instance ProductController should return only Products.
-    **Frontend Controllers** - these may use many entities at once, they are useful on more general pages. The best example here is the HomepageController that may return many different objects, such as products, banners, blog posts etc.
+    **Standard Controllers** - non-resource; these may use many entities at once, they are useful on more general pages. The best example here is the HomepageController that may return many different objects, such as products, banners, blog posts etc.
 
 
 Why would you customize a Controller?
