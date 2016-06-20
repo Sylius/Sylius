@@ -170,6 +170,29 @@ abstract class AbstractResourceFixture implements FixtureInterface
     }
 
     /**
+     * Normalizes empty array to all resources.
+     * Normalizes identifiers array to matched resources.
+     *
+     * @param RepositoryInterface $repository
+     * @param int $limit
+     * @param string $searchedField
+     *
+     * @return \Closure
+     */
+    final protected static function createLimitedResourcesNormalizer(RepositoryInterface $repository, $limit = 2, $searchedField = 'code')
+    {
+        return function (Options $options, array $identifiers) use ($repository, $limit, $searchedField) {
+            $nestedNormalizer = static::createResourcesNormalizer($repository, $searchedField);
+
+            $resources = $nestedNormalizer($options, $identifiers);
+
+            shuffle($resources);
+
+            return array_splice($resources, 0, $limit);
+        };
+    }
+
+    /**
      * Normalizes null to a random resource.
      * Normalizes identifier to matched resource.
      *

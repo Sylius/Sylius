@@ -80,3 +80,7 @@ sylius_fixtures:
                 product_attribute:
                     options:
                         random: 10
+
+                product_archetype:
+                    options:
+                        random: 10

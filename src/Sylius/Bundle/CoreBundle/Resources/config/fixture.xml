@@ -92,5 +92,14 @@
             <argument>%sylius.attribute.attribute_types%</argument>
             <tag name="sylius_fixtures.fixture" />
         </service>
+
+        <service id="sylius.fixture.product_archetype" class="Sylius\Bundle\CoreBundle\Fixture\ProductArchetypeFixture">
+            <argument type="service" id="sylius.factory.product_archetype" />
+            <argument type="service" id="sylius.manager.product_archetype" />
+            <argument type="service" id="sylius.repository.product_option" />
+            <argument type="service" id="sylius.repository.product_attribute" />
+            <argument type="service" id="sylius.repository.locale" />
+            <tag name="sylius_fixtures.fixture" />
+        </service>
     </services>
 </container>
