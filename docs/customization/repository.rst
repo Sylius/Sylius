@@ -18,8 +18,7 @@ You may need for instance:
 How to customize a Repository?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Let's assume that you would want to find ``Products`` that are the bestsellers in your shop.
-
+Let's assume that you would want to find products that are the bestsellers in your shop.
 
 1. Create your own repository class under the ``AppBundle\Repository`` namespace.
 Remember that it has to extend a proper base class. How can you check that?
@@ -38,32 +37,29 @@ As a result you will get the ``Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepo
 
     namespace AppBundle\Repository;
 
-    use Doctrine\ORM\QueryBuilder;
     use Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
 
-    /**
-     * @author Name Surname <name.surname@test.com>
-     */
     class ProductRepository extends BaseProductRepository
-
-    /**
-     * @param int $limit
-     *
-     * @return array
-     */
-    public function findBySold($limit = 4)
     {
-        $queryBuilder = $this->createQueryBuilder('o');
-        $queryBuilder
-            ->addSelect('variant')
-            ->addSelect('translation')
-            ->leftJoin('o.variants', 'variant')
-            ->leftJoin('o.translations', 'translation')
-            ->addOrderBy('variant.sold', 'DESC')
-            ->setMaxResults($limit)
-        ;
+        /**
+         * @param int $limit
+         *
+         * @return array
+         */
+        public function findBySold($limit = 4)
+        {
+            $queryBuilder = $this->createQueryBuilder('o');
+            $queryBuilder
+                ->addSelect('variant')
+                ->addSelect('translation')
+                ->leftJoin('o.variants', 'variant')
+                ->leftJoin('o.translations', 'translation')
+                ->addOrderBy('variant.sold', 'DESC')
+                ->setMaxResults($limit)
+            ;
 
-        return $queryBuilder->getQuery()->getResult();
+            return $queryBuilder->getQuery()->getResult();
+        }
     }
 
 We are using the `Query Builder`_ in the Repositories.

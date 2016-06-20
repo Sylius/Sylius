@@ -16,7 +16,7 @@ Your business needs may sometimes slightly differ from our internal assumptions.
 You can:
 
 * add completely **new fields**, if you need another phone number for your customers,
-* **modify** existing fields, change labels, make required, change choice types etc.,
+* **modify** existing fields, make them required, change their HTML class, change labels etc.,
 * **remove** fields that are not used.
 
 How to customize a Form?
@@ -38,6 +38,16 @@ These will be the steps that you will have to take to achieve that:
 
 2. Write your own form type class that will be extending the default one. Place it in your ``AppBundle\Form\Type`` directory.
 
+Your new class has to extend a proper base class. How can you check that?
+
+For the ``AddressType`` run:
+
+.. code-block:: bash
+
+    $ php app/console debug:container sylius.form.type.address
+
+As a result you will get the ``Sylius\Bundle\AddressingBundle\Form\Type\AddressType`` - this is the class that you need to be extending.
+
 .. code-block:: php
 
     <?php
@@ -47,9 +57,6 @@ These will be the steps that you will have to take to achieve that:
     use Sylius\Bundle\AddressingBundle\Form\Type\AddressType as BaseAddressType;
     use Symfony\Component\Form\FormBuilderInterface;
 
-    /**
-     * @author Name Surname <name.surname@test.com>
-     */
     class AddressType extends BaseAddressType
     {
         /**

@@ -15,7 +15,7 @@ To give you an idea of some purposes of models customizing have a look at a few 
 * Add ``flag`` field to the ``Country``
 * Add ``secondNumber`` to the ``Customer``
 * Change the ``reviewSubject`` of a ``Review`` (in Sylius we have ``ProductReviews`` but you can imagine for instance a ``CustomerReview``)
-* Add ``description`` to the ``PaymentMethod``
+* Add ``icon`` to the ``PaymentMethod``
 
 And of course many similar operations limited only by your imagination.
 Let's now see how you should perform such customizations.
@@ -24,8 +24,17 @@ How to customize a Model?
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Let's take the ``Sylius\Component\Addressing\Country`` as an example. This one is not extended in Core.
-Assuming that you would want to add another field on the model - for instance ``flag``.
-To simplify let's say that it will be a string, where you will hold a path to the image file.
+How can you check that?
+
+For the ``Country`` run:
+
+.. code-block:: bash
+
+    $ php app/console debug:container --parameter=sylius.model.country.class
+
+As a result you will get the ``Sylius\Component\Addressing\Model\Country`` - this is the class that you need to be extending.
+
+Assuming that you would want to add another field on the model - for instance a ``flag``.
 
 1. The first thing to do is to write your own class which will extend the base `Country`` class.
 
@@ -37,18 +46,15 @@ To simplify let's say that it will be a string, where you will hold a path to th
 
     use Sylius\Component\Addressing\Model\Country as BaseCountry;
 
-    /**
-     * @author Name Surname <name.surname@test.com>
-     */
     class Country extends BaseCountry
     {
         /**
-         * @var string
+         * @var bool
          */
         private $flag;
 
         /**
-         * @return string
+         * @return bool
          */
         public function getFlag()
         {
@@ -56,7 +62,7 @@ To simplify let's say that it will be a string, where you will hold a path to th
         }
 
         /**
-         * @param string $flag
+         * @param bool $flag
          */
         public function setFlag($flag)
         {
@@ -71,12 +77,12 @@ The file should be placed in ``AppBundle/Resources/config/doctrine/Country.orm.y
 .. code-block:: yaml
 
     AppBundle\Entity\Country:
-    type: entity
-    table: sylius_country
-    fields:
-        flag:
-            type: string
-            nullable: true
+        type: entity
+        table: sylius_country
+        fields:
+            flag:
+                type: boolean
+                nullable: true
 
 3. Finally you'll need to override the model's class in the ``app/config/config.yml``.
 
@@ -88,7 +94,7 @@ The file should be placed in ``AppBundle/Resources/config/doctrine/Country.orm.y
                 classes:
                     model: AppBundle\Entity\Country
 
-4. Additionally if you want to give the administrator an ability to add a ``flag`` to any of Countries
+4. Additionally if you want to give the administrator an ability to add a ``flag`` to any of Countries,
 you'll need to update its form type. Check how to do it :doc:`here </customization/form>`.
 
 What happens while overriding Models?

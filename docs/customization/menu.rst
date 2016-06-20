@@ -19,7 +19,7 @@ You've got such events that you should be subscribing to:
 How to customize a Menu?
 ------------------------
 
-1. In order to add items to any to the Menus in **Sylius** you have to create a ``AppBundle\EventListener\MenuBuilderListener`` class.
+1. In order to add items to any of the Menus in **Sylius** you have to create a ``AppBundle\EventListener\MenuBuilderListener`` class.
 
 In the example below we are adding a one new item to the Admin panel menu and a one new item to main menu of the shop.
 
@@ -32,9 +32,6 @@ In the example below we are adding a one new item to the Admin panel menu and a 
     use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
     use Sylius\Bundle\WebBundle\Event\MenuBuilderEvent as FrontendMenuBuilderEvent;
 
-    /**
-     * @author Name Surname <name.surname@test.com>
-     */
     class MenuBuilderListener
     {
         /**
@@ -60,7 +57,7 @@ In the example below we are adding a one new item to the Admin panel menu and a 
         }
     }
 
-2. After creating your class with proper methods for all the menu customizations you need, you need to subscribe your
+2. After creating your class with proper methods for all the menu customizations you need, subscribe your
 listener to proper events in the ``AppBundle\Resources\config.services.yml``.
 
 .. code-block:: yaml

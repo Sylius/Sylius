@@ -4,9 +4,6 @@
 
 {% block content %}
 <div class="ui column stackable center page grid">
-    <h1>
-        This Is My Headline
-    </h1>
     {% if last_error %}
         {{ messages.error(last_error.messageKey|trans(last_error.messageData, 'security')) }}
     {% endif %}
