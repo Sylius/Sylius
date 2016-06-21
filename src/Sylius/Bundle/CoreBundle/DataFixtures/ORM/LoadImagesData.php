@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
+namespace Sylius\Bundle\CoreBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
+use Sylius\Bundle\CoreBundle\DataFixtures\DataFixture;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 

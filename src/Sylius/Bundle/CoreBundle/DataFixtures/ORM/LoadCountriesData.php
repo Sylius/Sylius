@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
+namespace Sylius\Bundle\CoreBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
+use Sylius\Bundle\CoreBundle\DataFixtures\DataFixture;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Symfony\Component\Intl\Intl;
 

@@ -9,55 +9,76 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\FixturesBundle\DataFixtures\ORM;
+namespace Sylius\Bundle\CoreBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use FOS\OAuthServerBundle\Model\ClientManagerInterface;
-use OAuth2\OAuth2;
-use Sylius\Bundle\ApiBundle\Model\Client;
-use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
+use Sylius\Bundle\CoreBundle\DataFixtures\DataFixture;
 use Sylius\Component\Core\Model\UserInterface;
 
 /**
- * Api fixtures.
+ * User fixtures.
  *
- * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class LoadApiData extends DataFixture
+class LoadUsersData extends DataFixture
 {
+    private $usernames = [];
+
     /**
      * {@inheritdoc}
      */
     public function load(ObjectManager $manager)
     {
-        // create user with API role
         $user = $this->createUser(
-            'api@example.com',
-            'api',
+            'sylius@example.com',
+            'sylius',
             true,
-            ['ROLE_API_ACCESS']
+            ['ROLE_USER', 'ROLE_ADMINISTRATION_ACCESS']
         );
         $user->addAuthorizationRole($this->get('sylius.repository.role')->findOneBy(['code' => 'administrator']));
 
         $manager->persist($user);
         $manager->flush();
 
-        $clientManager = $this->getClientManager();
+        $this->setReference('Sylius.User-Administrator', $user);
 
-        /** @var Client $client */
-        $client = $clientManager->createClient();
-        $client->setRandomId('demo_client');
-        $client->setSecret('secret_demo_client');
-        $client->setAllowedGrantTypes(
-            [
-                OAuth2::GRANT_TYPE_USER_CREDENTIALS,
-                OAuth2::GRANT_TYPE_IMPLICIT,
-                OAuth2::GRANT_TYPE_REFRESH_TOKEN,
-                OAuth2::GRANT_TYPE_AUTH_CODE,
-                OAuth2::GRANT_TYPE_CLIENT_CREDENTIALS,
-            ]
-        );
-        $clientManager->updateClient($client);
+        for ($i = 1; $i <= 15; ++$i) {
+            $username = $this->faker->username;
+
+            while (isset($this->usernames[$username])) {
+                $username = $this->faker->username;
+            }
+
+            $user = $this->createUser(
+                $username.'@example.com',
+                $username,
+                $this->faker->boolean()
+            );
+
+            $user->setCreatedAt($this->faker->dateTimeThisMonth);
+
+            $manager->persist($user);
+            $this->usernames[$username] = true;
+
+            $this->setReference('Sylius.User-'.$i, $user);
+            $this->setReference('Sylius.Customer-'.$i, $user->getCustomer());
+        }
+
+        $customer = $this->getCustomerFactory()->createNew();
+        $customer->setFirstname($this->faker->firstName);
+        $customer->setLastname($this->faker->lastName);
+        $customer->setEmail('customer@email.com');
+        $manager->persist($customer);
+
+        $manager->flush();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOrder()
+    {
+        return 20;
     }
 
     /**
@@ -91,21 +112,5 @@ class LoadApiData extends DataFixture
         $this->get('sylius.user.password_updater')->updatePassword($user);
 
         return $user;
-    }
-
-    /**
-     * @return ClientManagerInterface
-     */
-    private function getClientManager()
-    {
-        return $this->container->get('fos_oauth_server.client_manager.default');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getOrder()
-    {
-        return 20;
     }
 }

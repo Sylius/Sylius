@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\FixturesBundle\DataFixtures\PHPCR;
+namespace Sylius\Bundle\CoreBundle\DataFixtures\PHPCR;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use PHPCR\Util\NodeHelper;
-use Sylius\Bundle\FixturesBundle\DataFixtures\DataFixture;
+use Sylius\Bundle\CoreBundle\DataFixtures\DataFixture;
 
 class LoadBlocksData extends DataFixture
 {
