@@ -12,4 +12,5 @@ Configurable fixtures management for Symfony2 applications.
     custom_fixture
     custom_listener
     builtin_listeners
+    commands
     summary
