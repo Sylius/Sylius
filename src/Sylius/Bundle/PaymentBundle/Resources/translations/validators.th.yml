@@ -19,6 +19,9 @@ sylius:
             min_length: 'รหัส CVV ของบัตรเครดิตต้องมีความยาวไม่เกิน {{ limit }} หมายเลข'
         expiry_year:
             not_blank: กรุณาเลือกปีหมดอายุ
+    payment:
+        currency_code:
+            not_valid: รหัสสกุลเงินที่คุณป้อนไม่ถูกต้อง
     payment_method:
         gateway:
             not_blank: กรุณาเลือกช่องทางการชำระเงิน

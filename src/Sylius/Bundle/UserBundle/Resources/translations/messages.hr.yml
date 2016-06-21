@@ -20,9 +20,11 @@ sylius:
             last_name: Prezime
             email: E-mail
             phone_number: Kontakt telefon
+            gender: Spol
             birthday: Datum rođenja
             billing_address: Adresa za dostavu
             different_billing_address: Želim koristiti drugu adresu za račun.
+            only_customer_registration: Napravite račun
         user_filter:
             query: Pretraga
         user_change_password:
@@ -34,3 +36,5 @@ sylius:
             new: Nova lozinka
     gender:
         unknown: Nepoznato
+        male: Muški
+        female: Ženski

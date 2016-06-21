@@ -21,6 +21,8 @@ sylius:
         an_error_occurred: Hiba történt
         are_your_sure_you_want_to_perform_this_action: Biztos vagy benne, hogy végrehajtod ezt a műveletet?
         available_for_channels: Minden csatornán elérhető
+        available_on_hand: Rendelkezésre álló
+        reserved: Fenntartott
         average_order_value: Átlagos rendelési érték
         backordered: Előrendelve
         back_to_store: Vissza az áruházba
@@ -28,6 +30,7 @@ sylius:
         cancel: Mégse
         cancelled: Megszakítva
         category_requirements: Kategória követelmények
+        change_address: Cím módosítása
         change_password: Jelszó változtatás
         change_your_password: Jelszó módosítása
         charges_and_taxes: Díjak és adók
@@ -41,6 +44,7 @@ sylius:
         your_cart_is_empty: Az Ön kosara üres
         clear_filters: Szűrők törlése
         enter_your_code: Add meg a kódodat
+        filters: Szűrők
         image: Kép
         qty: Mennyiség
         clear_cart: Kosár ürítése
@@ -154,6 +158,7 @@ sylius:
         no_requirement: Nincs követelmény
         no_results_to_display: Nincs megjeleníthető eredmény
         no_shipping_charges: A szállítási díj nem lett alkalmazva
+        no_shipping_methods_available: Jelenleg nem tudunk az általad megadott szállítási címre szállítást vállalni
         no_taxes: Az adó nem kett alkalmazva
         no_theme: Nincs téma
         not_contains: Nem tartalmaz
@@ -161,6 +166,7 @@ sylius:
         not_in: Nincs benne
         onhold: Visszatartott
         or: vagy
+        order_history: Rendelési előzmények
         order_total: Rendelés összesen
         partially_shipped: Részlegesen kiszállítva
         per_customer_usage_limit: Vásárlónkénti felhasználási limit
@@ -193,6 +199,7 @@ sylius:
         status: Állapot
         subtotal: Részösszeg
         success: Siker
+        shipment: Szállítás
         tax: Adó
         taxonomy: Taxonómia
         tax_categories: Adó kategóriák

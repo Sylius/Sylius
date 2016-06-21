@@ -10,38 +10,60 @@ sylius:
         option:
             presentation: Prezentacija
     ui:
+        about: Ukratko
         actions: Akcije
         add_coupon: Dodaj kod za popust
         add_to_cart: Dodaj u košaricu
+        all: Sve
+        back_to_store: Povratak u trgovinu
         cancel: Prekini
         cancelled: Otkazano
+        change_password: Promijenite lozinku
         change_your_password: Promijenite lozinku
         checkout: Blagajna
+        sign_in_here: Prijavite se ovdje
+        forgot_password: Zaboravljena lozinka
         your_cart_is_empty: Košarica je prazna
+        clear_filters: Očistite filtere
+        enter_your_code: Unesite kod
+        filters: Filteri
         image: Fotografija
         qty: Količina
         clear_cart: Izpraznite košaricu
+        summary: Sažetak
+        color: Boja
+        contact_us: Kontaktirajte nas
         countries: Države
         coupon_based: Promocija bazirana na kuponima za popust
         coupons: Kuponi
         create: Kreiraj
+        currencies: Valute
         my_account: Moj profil
         home: Početna
         dashboard: Kontrolna ploča
+        date: Datum
         default_currency: Zadana valuta
         delete: sylius.account.address.action.delete
         description: Opis
+        disabled: Onemogućeno
         edit: Uredi
         enabled: Omogući
+        faqs: Česta pitanja
         filter: Filter
         generate_coupons: Generirajte kod za popust
+        info: Info
         item: sylius.order_item.product
         inventory: Skladište
         list_coupons: Izlist kodova za popust
         locales: Lokaliteti
         new: Novo
+        new_channel: Novi kanal
         new_country: Nova država
+        new_coupon: Novi kupon
+        new_currency: Nova valuta
+        new_locale: Novi lokalitet
         new_tax_category: Nova kategorija poreza
+        new_orders: Nova narudžba
         "no": false
         no_promotion: Proizvod nema akciju
         no_shipping_charges: Nema troškova dostave
@@ -54,4 +76,5 @@ sylius:
         shipped: Poslano
         shipping_methods: Načini slanja
         success: Uspješno
+        values: Vrijednosti
         "yes": true

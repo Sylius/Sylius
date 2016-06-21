@@ -149,10 +149,13 @@ sylius:
             name: ความเห็นเกี่ยวกับการสั่งซื้อ
         shipment_confirmation:
             name: ยืนยันการจัดส่ง
+            content: 'การสั่งซื้อของคุณถูกส่งไปยังเจ้าหน้าที่แล้ว <br/> ขอขอบคุณที่ใช้บริการ'
         user_confirmation:
             name: ยืนยันการสั่งซื้อ
             subject: ยินดีต้อนรับสู่ร้านของเรา
+            content: 'ยินดีต้อนรับสู่ร้านค้าออนไลน์ของเรา <br/> <br/> คุณได้ลงทะเบียนเรียบร้อยแล้ว. <br/> ขอบคุณ {{ user.username }}'
         password_reset:
             name: ตั้งรหัสผ่านใหม่
+            content: '<h3>สวัสดี {{ user.username }}</h3> หากคุณต้องการรีเซ็ตรหัสผ่าน - คลิกไปที่ {{ url }} <br/> <br/> ขอแสดงความนับถือ'
     shipping_method_resolver:
         by_zones_and_channel: โดยพื้นที่และช่องทาง
