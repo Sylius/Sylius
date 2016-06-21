@@ -32,7 +32,7 @@ class PaymentStepType extends AbstractType
     {
         $this->validationGroups = $validationGroups;
     }
-    
+
     /**
      * {@inheritdoc}
      */

@@ -22,8 +22,6 @@ class OrderProcessor implements OrderProcessorInterface
      * @var OrderShipmentProcessorInterface
      */
     private $orderShipmentProcessor;
-    
-    private $paymentProcessor;
 
     /**
      * @var PaymentProcessorInterface

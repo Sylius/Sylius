@@ -23,6 +23,7 @@ use Sylius\Behat\Page\Shop\Checkout\PaymentStepInterface;
 use Sylius\Behat\Page\Shop\Checkout\SecurityStepInterface;
 use Sylius\Behat\Page\Shop\Checkout\ShippingStepInterface;
 use Sylius\Behat\Page\Shop\Checkout\ThankYouPageInterface;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\UserInterface;
@@ -169,7 +170,12 @@ final class CheckoutContext implements Context
      */
     public function iSpecifyTheShippingAddressAs(AddressInterface $address)
     {
-        $this->sharedStorage->set('shipping_address', $address);
+        $key = sprintf(
+            'shipping_address_%s_%s',
+            strtolower($address->getFirstName()),
+            strtolower($address->getLastName())
+        );
+        $this->sharedStorage->set($key, $address);
 
         $this->addressingPage->specifyShippingAddress($address);
     }
@@ -180,7 +186,13 @@ final class CheckoutContext implements Context
      */
     public function iSpecifyTheBillingAddressAs(AddressInterface $address)
     {
-        $this->sharedStorage->set('billing_address', $address);
+        $this->iChooseTheDifferentBillingAddress();
+        $key = sprintf(
+            'billing_address_%s_%s',
+            strtolower($address->getFirstName()),
+            strtolower($address->getLastName())
+        );
+        $this->sharedStorage->set($key, $address);
 
         $this->addressingPage->specifyBillingAddress($address);
     }
@@ -192,6 +204,10 @@ final class CheckoutContext implements Context
     {
         $this->addressingPage->open();
         $this->iSpecifyTheShippingAddressAs($address);
+
+        $key = sprintf('billing_address_%s_%s', strtolower($address->getFirstName()), strtolower($address->getLastName()));
+        $this->sharedStorage->set($key, $address);
+
         $this->iCompleteTheAddressingStep();
     }
 
@@ -461,6 +477,7 @@ final class CheckoutContext implements Context
         Assert::true(
             $this->addressingPage->canSignIn(),
             'I should be able to login, but I am not.'
+        );
     }
 
     /**
@@ -482,13 +499,15 @@ final class CheckoutContext implements Context
         Assert::true(
             $this->addressingPage->checkInvalidCredentialsValidation(),
             'I should see validation error, but I do not.'
+        );
     }
 
     /**
-     * @Then /^I should see (this shipping address) as shipping address$/
+     * @Then my order's shipping address should be to :fullName
      */
-    public function iShouldSeeThisShippingAddressAsShippingAddress(AddressInterface $address)
+    public function iShouldSeeThisShippingAddressAsShippingAddress($fullName)
     {
+        $address = $this->sharedStorage->get('shipping_address_'.StringInflector::nameToLowercaseCode($fullName));
         Assert::true(
             $this->summaryPage->hasShippingAddress($address),
             'Shipping address is improper.'
@@ -496,10 +515,11 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Then /^I should see (this billing address) as billing address$/
+     * @Then my order's billing address should be to :fullName
      */
-    public function iShouldSeeThisBillingAddressAsBillingAddress(AddressInterface $address)
+    public function iShouldSeeThisBillingAddressAsBillingAddress($fullName)
     {
+        $address = $this->sharedStorage->get('billing_address_'.StringInflector::nameToLowercaseCode($fullName));
         Assert::true(
             $this->summaryPage->hasBillingAddress($address),
             'Billing address is improper.'
@@ -507,12 +527,12 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Then /^I should see (this shipping address) as shipping and billing address$/
+     * @Then address to :fullName should be used for both shipping and billing of my order`
      */
-    public function iShouldSeeThisShippingAddressAsShippingAndBillingAddress(AddressInterface $address)
+    public function iShouldSeeThisShippingAddressAsShippingAndBillingAddress($fullName)
     {
-        $this->iShouldSeeThisShippingAddressAsShippingAddress($address);
-        $this->iShouldSeeThisBillingAddressAsBillingAddress($address);
+        $this->iShouldSeeThisShippingAddressAsShippingAddress($fullName);
+        $this->iShouldSeeThisBillingAddressAsBillingAddress($fullName);
     }
 
     /**
@@ -551,7 +571,7 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Given I complete order with :shippingMethod shipping method and :paymentMethod payment
+     * @When I proceed order with :shippingMethod shipping method and :paymentMethod payment
      */
     public function iCompleteOrderWithShippingMethodAndPayment($shippingMethod, $paymentMethod)
     {
