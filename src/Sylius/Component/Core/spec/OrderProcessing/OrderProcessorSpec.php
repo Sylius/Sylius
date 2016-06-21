@@ -49,22 +49,4 @@ class OrderProcessorSpec extends ObjectBehavior
 
         $this->process($order);
     }
-
-    function it_runs_payment_processor_to_control_order_payments(
-        OrderInterface $order,
-        PaymentProcessorInterface $paymentProcessor
-    ) {
-        $paymentProcessor->processOrderPayments($order)->shouldBeCalled();
-
-        $this->process($order);
-    }
-
-    function it_runs_payment_processor_to_control_order_payments(
-        OrderInterface $order,
-        PaymentProcessorInterface $paymentProcessor
-    ) {
-        $paymentProcessor->processOrderPayments($order)->shouldBeCalled();
-
-        $this->process($order);
-    }
 }
