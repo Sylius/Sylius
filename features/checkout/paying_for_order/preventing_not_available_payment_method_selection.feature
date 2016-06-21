@@ -9,7 +9,7 @@ Feature: Preventing not available payment method selection
         And the store has a product "PHP T-Shirt" priced at "$19.99"
         And the store allows paying with "Paypal Express Checkout"
         And the store ships everywhere for free
-        And I am logged in customer
+        And I am a logged in customer
 
     @ui
     Scenario: Not being able to select disabled payment method

@@ -1,15 +1,15 @@
 @checkout
 Feature: Seeing order addresses on order summary page
-    In order be certain about shipping and bulling address
+    In order to be certain about shipping and billing address
     As a Customer
-    I want to be able to see addresses on order summary page
+    I want to be able to see addresses on the order summary page
 
     Background:
         Given the store operates on a single channel in "France"
         And the store has a product "Lannister Coat" priced at "$19.99"
         And the store ships everywhere for free
         And the store allows paying offline
-        And I am logged in customer
+        And I am a logged in customer
 
     @ui
     Scenario: Seeing the same shipping and billing address on order summary
