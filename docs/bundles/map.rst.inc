@@ -4,6 +4,7 @@
 * :doc:`/bundles/SyliusAttributeBundle/index`
 * :doc:`/bundles/SyliusCartBundle/index`
 * :doc:`/bundles/SyliusContactBundle/index`
+* :doc:`/bundles/SyliusFixturesBundle/index`
 * :doc:`/bundles/SyliusFlowBundle/index`
 * :doc:`/bundles/SyliusGridBundle/index`
 * :doc:`/bundles/SyliusInventoryBundle/index`
