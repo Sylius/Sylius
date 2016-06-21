@@ -8,4 +8,5 @@ Configurable fixtures management for Symfony2 applications.
     :maxdepth: 2
 
     installation
+    architecture
     summary
