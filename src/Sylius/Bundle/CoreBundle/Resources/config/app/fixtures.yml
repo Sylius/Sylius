@@ -96,3 +96,7 @@ sylius_fixtures:
                 taxon:
                     options:
                         random: 50
+
+                product:
+                    options:
+                        random: 20
