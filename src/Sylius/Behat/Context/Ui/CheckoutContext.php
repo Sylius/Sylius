@@ -638,6 +638,28 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Given I should see promotion total :promotionTotal
+     */
+    public function iShouldSeeDiscountTotal($promotionTotal)
+    {
+        Assert::true(
+            $this->summaryPage->hasPromotionTotal($promotionTotal),
+            sprintf('The total discount should be %s, but it does not.', $promotionTotal)
+        );
+    }
+
+    /**
+     * @Given I should see promotion :promotionName
+     */
+    public function iShouldSeePromotion($promotionName)
+    {
+        Assert::true(
+            $this->summaryPage->hasPromotion($promotionName),
+            sprintf('The promotion %s should appear on the page, but it does not.', $promotionName)
+        );
+    }
+
+    /**
      * @Given my tax total should be :taxTotal
      */
     public function myTaxTotalShouldBe($taxTotal)

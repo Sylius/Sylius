@@ -152,6 +152,22 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     /**
      * {@inheritdoc}
      */
+    public function hasPromotionTotal($promotionTotal)
+    {
+        return false !== strpos($this->getElement('promotion_total')->getText(), $promotionTotal);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasPromotion($promotionName)
+    {
+        return false !== stripos($this->getElement('promotion_discounts')->getText(), $promotionName);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function hasTaxTotal($taxTotal)
     {
         return false !== strpos($this->getElement('tax_total')->getText(), $taxTotal);
@@ -170,6 +186,8 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
             'payment_method' => '#sylius-checkout-summary-payment-method',
             'product_row' => 'tbody tr:contains("%name%")',
             'order_total' => 'td:contains("Total")',
+            'promotion_total' => '#promotion-total',
+            'promotion_discounts' => '#promotion-discounts',
             'tax_total' => '#tax-total',
         ]);
     }

@@ -30,17 +30,22 @@
                     <td class="right aligned">{{ item.subtotal|sylius_price }}</td>
                 </tr>
             {% endfor %}
+            </tbody>
+            <tfoot>
             <tr>
-                <td colspan="4" class="right aligned" id="tax-total">
-                    {{ 'sylius.ui.tax_total'|trans}} : {{ order.taxTotal|sylius_price(order.currencyCode) }}
-                </td>
+                <th colspan="4" class="right aligned">
+                    Tax: $10.00
+                </th>
+            </tr>
+            <tr>
+                {% include '@SyliusShop/Checkout/_promotion.html.twig' with {'order': order} %}
             </tr>
             <tr>
                 <td colspan="4" class="right aligned" style="font-size: 1.5em;">
                     {{ 'sylius.ui.total'|trans }}: {{ order.total|sylius_price }}
                 </td>
             </tr>
-            </tbody>
+            </tfoot>
         </table>
         <div class="ui two column stackable grid" id="addresses">
             <div class="column">
