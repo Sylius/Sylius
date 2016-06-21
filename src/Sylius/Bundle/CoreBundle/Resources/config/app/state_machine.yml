@@ -126,7 +126,7 @@ winzou_state_machine:
         callbacks:
             after:
                 sylius_update_inventory:
-                    on: "confirm"
+                    on: "create"
                     do: ["@sylius.order_processing.inventory_handler", "updateInventory"]
                     args: ["object"]
                 sylius_update_shipment:
