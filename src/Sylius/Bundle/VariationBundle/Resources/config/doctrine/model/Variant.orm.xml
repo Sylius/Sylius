@@ -25,7 +25,7 @@
 
         <field name="code" column="code" type="string" unique="true"  nullable="false"/>
 
-        <field name="presentation" column="presentation" type="string" nullable="true" />
+        <field name="name" column="name" type="string" nullable="true" />
 
         <field name="createdAt" column="created_at" type="datetime">
             <gedmo:timestampable on="create"/>

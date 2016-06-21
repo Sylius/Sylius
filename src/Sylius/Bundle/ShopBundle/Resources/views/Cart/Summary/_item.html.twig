@@ -21,10 +21,10 @@
                     </div>
                 {% endfor %}
             </div>
-        {% elseif variant.presentation is not null %}
+        {% elseif variant.name is not null %}
             <div class="ui horizontal divided list">
                 <div class="item sylius-product-variant-name">
-                    {{ variant.presentation }}
+                    {{ variant.name }}
                 </div>
             </div>
         {% endif %}

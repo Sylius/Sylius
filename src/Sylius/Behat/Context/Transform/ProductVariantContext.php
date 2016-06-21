@@ -50,7 +50,7 @@ final class ProductVariantContext implements Context
             throw new \InvalidArgumentException(sprintf('Product with name "%s" does not exist', $productName));
         }
 
-        $productVariant = $this->productVariantRepository->findOneBy(['presentation' => $variantName, 'object' => $product]);
+        $productVariant = $this->productVariantRepository->findOneBy(['name' => $variantName, 'object' => $product]);
         if (null === $productVariant) {
             throw new \InvalidArgumentException(sprintf('Product variant with name "%s" of product "%s" does not exist', $variantName, $productName));
         }

@@ -72,14 +72,14 @@
                     {% for variant in product.variants if variant.available %}
                     <tr>
                         <td>
-                            {% if variant.presentation is empty %}
+                            {% if variant.name is empty %}
                             <ul class="unstyled">
                                 {% for option in variant.options %}
-                                <li><strong>{{ option.presentation }}</strong>: {{ option.value }}</li>
+                                <li><strong>{{ option.name }}</strong>: {{ option.value }}</li>
                                 {% endfor %}
                             </ul>
                             {% else %}
-                                {{ variant.presentation }}
+                                {{ variant.name }}
                             {% endif %}
                         </td>
                         <td>

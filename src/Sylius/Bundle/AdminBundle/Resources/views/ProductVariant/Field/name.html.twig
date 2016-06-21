@@ -1,6 +1,6 @@
 <span class="ui small header">
     {% set product = data.product %}
-    {{ data.presentation is null ? product.name : data.presentation }}
+    {{ data.name is null ? product.name : data.name }}
 </span>
 {% if data.options|length > 0 %}
     <br>

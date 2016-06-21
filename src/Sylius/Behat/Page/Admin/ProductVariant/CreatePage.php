@@ -34,7 +34,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      */
     public function nameIt($name)
     {
-        $this->getDocument()->fillField('Presentation', $name);
+        $this->getDocument()->fillField('Name', $name);
     }
 
     /**
