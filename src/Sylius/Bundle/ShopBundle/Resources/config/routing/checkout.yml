@@ -44,4 +44,22 @@ sylius_shop_checkout_shipping:
             state_machine:
                 graph: sylius_order_checkout
                 transition: select_shipping
+            redirect:
+                route: sylius_shop_checkout_payment
+                parameters: []
+
+sylius_shop_checkout_payment:
+    path: /payment
+    methods: [GET, PUT]
+    defaults:
+        _controller: sylius.controller.order:updateAction
+        _sylius:
+            template: SyliusShopBundle:Checkout:payment.html.twig
+            form: sylius_checkout_payment_step
+            repository:
+                method: find
+                arguments: [expr:service('sylius.cart_provider').getCart()]
+            state_machine:
+                graph: sylius_order_checkout
+                transition: select_payment
             redirect: sylius_shop_homepage

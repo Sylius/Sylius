@@ -24,11 +24,20 @@ class OrderProcessor implements OrderProcessorInterface
     private $orderShipmentProcessor;
 
     /**
-     * @param OrderShipmentProcessorInterface $orderShipmentProcessor
+     * @var PaymentProcessorInterface
      */
-    public function __construct(OrderShipmentProcessorInterface $orderShipmentProcessor)
-    {
+    private $paymentProcessor;
+
+    /**
+     * @param OrderShipmentProcessorInterface $orderShipmentProcessor
+     * @param PaymentProcessorInterface $paymentProcessor
+     */
+    public function __construct(
+        OrderShipmentProcessorInterface $orderShipmentProcessor, 
+        PaymentProcessorInterface $paymentProcessor
+    ) {
         $this->orderShipmentProcessor = $orderShipmentProcessor;
+        $this->paymentProcessor = $paymentProcessor;
     }
 
     /**
@@ -37,5 +46,6 @@ class OrderProcessor implements OrderProcessorInterface
     public function process(OrderInterface $order)
     {
         $this->orderShipmentProcessor->processOrderShipment($order);
+        $this->paymentProcessor->processOrderPayments($order);
     }
 }

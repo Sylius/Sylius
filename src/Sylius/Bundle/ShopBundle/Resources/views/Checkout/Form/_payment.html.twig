@@ -1,0 +1,36 @@
+<div class="ui unmargined segments">
+    {% for payment in order.payments %}
+        <div class="ui segment">
+            <div class="ui dividing header">{{ 'sylius.ui.payment'|trans }} #{{ loop.index }}</div>
+            <div class="ui fluid stackable items">
+                {% set payment_form = form.payments[loop.index0] %}
+                {{ form_errors(payment_form.method) }}
+                {% for payment_method_choice in payment_form.method %}
+                    <div class="item">
+                        <div class="field">
+                            <div class="ui radio checkbox">
+                                {{ form_widget(payment_method_choice) }}
+                            </div>
+                        </div>
+                        <div class="content">
+                            <a class="header">{{ form_label(payment_method_choice) }}</a>
+                            {% if payment_method_choice.parent.vars.choices[loop.index0].data.description is not null %}
+                                <div class="description">
+                                    <p>{{ payment_method_choice.parent.vars.choices[loop.index0].data.description }}</p>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="ui icon message" id="sylius-order-cannot-be-shipped">
+                        <i class="warning sign icon"></i>
+                        <div class="content">
+                            <div class="header">{{ 'sylius.ui.warning'|trans }}</div>
+                            <p>{{ 'sylius.ui.no_payment_methods_available'|trans }}.</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
+</div>

@@ -13,6 +13,7 @@ namespace Sylius\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Shop\Checkout\AddressingPageInterface;
+use Sylius\Behat\Page\Shop\Checkout\PaymentPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\ShippingPageInterface;
 use Sylius\Behat\Page\Shop\Order\OrderPaymentsPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\AddressingStepInterface;
@@ -65,6 +66,11 @@ final class CheckoutContext implements Context
     private $checkoutPaymentStep;
 
     /**
+     * @var PaymentPageInterface
+     */
+    private $paymentPage;
+
+    /**
      * @var FinalizeStepInterface
      */
     private $checkoutFinalizeStep;
@@ -97,6 +103,7 @@ final class CheckoutContext implements Context
      * @param ShippingStepInterface $checkoutShippingStep
      * @param ShippingPageInterface $shippingPage
      * @param PaymentStepInterface $checkoutPaymentStep
+     * @param PaymentPageInterface $paymentPage
      * @param FinalizeStepInterface $checkoutFinalizeStep
      * @param ThankYouPageInterface $checkoutThankYouPage
      * @param OrderPaymentsPageInterface $orderPaymentsPage
@@ -110,6 +117,7 @@ final class CheckoutContext implements Context
         ShippingStepInterface $checkoutShippingStep,
         ShippingPageInterface $shippingPage,
         PaymentStepInterface $checkoutPaymentStep,
+        PaymentPageInterface $paymentPage,
         FinalizeStepInterface $checkoutFinalizeStep,
         ThankYouPageInterface $checkoutThankYouPage,
         OrderPaymentsPageInterface $orderPaymentsPage,
@@ -122,6 +130,7 @@ final class CheckoutContext implements Context
         $this->checkoutShippingStep = $checkoutShippingStep;
         $this->shippingPage = $shippingPage;
         $this->checkoutPaymentStep = $checkoutPaymentStep;
+        $this->paymentPage = $paymentPage;
         $this->checkoutFinalizeStep = $checkoutFinalizeStep;
         $this->checkoutThankYouPage = $checkoutThankYouPage;
         $this->orderPaymentsPage = $orderPaymentsPage;
@@ -450,6 +459,41 @@ final class CheckoutContext implements Context
         Assert::true(
             $this->addressingPage->checkInvalidCredentialsValidation(),
             'I should see validation error, but I do not.'
+        );
+    }
+
+    /**
+     * @Given I am at the checkout payment step
+     */
+    public function iAmAtTheCheckoutPaymentStep()
+    {
+        $this->paymentPage->open();
+    }
+
+    /**
+     * @When I complete the payment step
+     */
+    public function iCompleteThePaymentStep()
+    {
+        $this->paymentPage->nextStep();
+    }
+
+    /**
+     * @When I select :paymentMethodName payment method
+     */
+    public function iSelectPaymentMethod($paymentMethodName)
+    {
+        $this->paymentPage->selectPaymentMethod($paymentMethodName);
+    }
+
+    /**
+     * @Then I should not be able to select :paymentMethodName payment method
+     */
+    public function iShouldNotBeAbleToSelectPaymentMethod($paymentMethodName)
+    {
+        Assert::false(
+            $this->paymentPage->hasPaymentMethod($paymentMethodName),
+            sprintf('Payment method "%s" should not be available but it does.', $paymentMethodName)
         );
     }
 

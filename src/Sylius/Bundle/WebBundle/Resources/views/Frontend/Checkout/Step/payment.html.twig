@@ -8,17 +8,14 @@
 {% include 'SyliusWebBundle:Frontend/Checkout:_progressBar.html.twig' %}
 
 <form method="post" action="{{ path(context.process.forwardRoute, {'stepName': context.currentStep.name}) }}" class="form-horizontal" novalidate>
-
-{{ form_errors(form) }}
-
-    {{ form_label(form.paymentMethod) }}
+    {{ form_errors(form) }}
     <fieldset>
-        {% for paymentMethodForm in form.paymentMethod %}
-            {{ form_row(paymentMethodForm) }}
+        {% for payment in order.payments %}
+            {% set paymentForm = form.payments[loop.index0] %}
+            {{ form_row(paymentForm.method) }}
         {% endfor %}
     </fieldset>
-
-{{ form_widget(form._token) }}
+    {{ form_widget(form._token) }}
 
 <div class="form-actions">
     <a href="{{ path(context.process.displayRoute, {'stepName': context.previousStep.name}) }}" class="btn btn-lg"><i class="icon-chevron-left"></i> {{ 'sylius.ui.back'|trans }}</a> &nbsp;

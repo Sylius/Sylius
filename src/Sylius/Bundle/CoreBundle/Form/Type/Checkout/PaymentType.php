@@ -11,40 +11,35 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Checkout;
 
+use Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddPaymentMethodsFormSubscriber;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints\NotBlank;
 
 /**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class PaymentStepType extends AbstractType
+class PaymentType extends AbstractType
 {
     /**
-    * @var string[]
-    */
-    private $validationGroups;
+     * @var string
+     */
+    private $dataClass;
 
     /**
-     * @param array $validationGroups
+     * @param string $dataClass
      */
-    public function __construct(array $validationGroups = [])
+    public function __construct($dataClass)
     {
-        $this->validationGroups = $validationGroups;
+        $this->dataClass = $dataClass;
     }
-
+    
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('payments', 'collection', [
-                'type' => 'sylius_checkout_payment',
-                'label' => false,
-            ])
-        ;
+        $builder->addEventSubscriber(new AddPaymentMethodsFormSubscriber());
     }
 
     /**
@@ -52,7 +47,7 @@ class PaymentStepType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefault('validation_groups', $this->validationGroups);
+        $resolver->setDefault('data_class', $this->dataClass);
     }
 
     /**
@@ -60,6 +55,6 @@ class PaymentStepType extends AbstractType
      */
     public function getName()
     {
-        return 'sylius_checkout_payment_step';
+        return 'sylius_checkout_payment';
     }
 }
