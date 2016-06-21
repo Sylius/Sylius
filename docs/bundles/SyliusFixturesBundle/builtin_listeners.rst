@@ -1,12 +1,12 @@
 Built-in listeners
 ==================
 
-**SyliusFixturesBundle** comes bundled with a few useful listeners.
+**SyliusFixturesBundle** comes with a few useful listeners.
 
 Logger (``logger``)
 -------------------
 
-Provides output during running ``sylius:fixtures:load`` command.
+Provides output while running ``sylius:fixtures:load`` command.
 
 .. code-block:: bash
 
@@ -24,7 +24,7 @@ Provides output during running ``sylius:fixtures:load`` command.
     Running fixture "currency"...
     $ _
 
-Has no configuration options, can be enabled by:
+The logger does not have any configuration options. It can be enabled in such a way:
 
 .. code-block:: yaml
 
@@ -42,7 +42,7 @@ Purges the relational database. Uses ``delete`` purge mode and the default entit
 Configuration options:
 
     - ``purge_mode`` - sets how databse is purged, available values: ``delete`` (default), ``truncate``
-    - ``managers`` - array of entity managers names used to purge the database, ``[null]`` by default
+    - ``managers`` - an array of entity managers' names used to purge the database, ``[null]`` by default
 
 Example configuration:
 
@@ -64,7 +64,7 @@ Purges the document database. Uses the default document manager if not configure
 
 Configuration options:
 
-    - ``managers`` - array of document managers names used to purge the database, ``[null]`` by default
+    - ``managers`` - an array of document managers' names used to purge the database, ``[null]`` by default
 
 Example configuration:
 

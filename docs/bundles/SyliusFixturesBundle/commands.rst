@@ -4,7 +4,7 @@ Commands
 Listing fixtures
 ----------------
 
-To list all available suites and fixtures, use ``sylius:fixtures:list`` command.
+To list all available suites and fixtures, use the ``sylius:fixtures:list`` command.
 
 .. code-block:: bash
 
@@ -22,7 +22,7 @@ To list all available suites and fixtures, use ``sylius:fixtures:list`` command.
 Loading fixtures
 ----------------
 
-To load a suite, use ``sylius:fixtures:load [suite]`` command.
+To load a suite, use the ``sylius:fixtures:load [suite]`` command.
 
 .. code-block:: bash
 

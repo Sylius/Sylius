@@ -34,19 +34,19 @@ persist some entities in the database, upload some files, dispatch some events o
                         priority: 0 # The higher priority is, the sooner the fixture will be executed
                         options: ~ # Fixture options
 
-They implement ``Sylius\Bundle\FixturesBundle\Fixture\FixtureInterface`` and needs to be registered under
-``sylius_fixtures.fixture`` tag in order to be used in suite configuration.
+They implement the ``Sylius\Bundle\FixturesBundle\Fixture\FixtureInterface`` and need to be registered under
+the ``sylius_fixtures.fixture`` tag in order to be used in suite configuration.
 
 .. note::
 
-    The former interface extends ``ConfigurationInterface``, which is widely known from ``Configuration`` classes
+    The former interface extends the ``ConfigurationInterface``, which is widely known from ``Configuration`` classes
     placed under ``DependencyInjection`` directory in Symfony bundles.
 
 
 Listeners
 ---------
 
-Listeners allows you to execute code at some point of fixtures loading.
+Listeners allow you to execute code at some point of fixtures loading.
 
 .. code-block:: yaml
 
@@ -67,7 +67,7 @@ They implement at least one of four interfaces:
 
 .. note::
 
-    The former interface extends ``ConfigurationInterface``, which is widely known from ``Configuration`` classes
+    The former interface extends the ``ConfigurationInterface``, which is widely known from ``Configuration`` classes
     placed under ``DependencyInjection`` directory in Symfony bundles.
 
-In order to be used in suite configuration, they need to be registered under ``sylius_fixtures.listener``.
+In order to be used in suite configuration, they need to be registered under the ``sylius_fixtures.listener``.

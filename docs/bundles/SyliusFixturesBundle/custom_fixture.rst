@@ -4,7 +4,7 @@ Custom fixture
 Basic fixture
 -------------
 
-Let's create a fixture that loads all countries from ``Intl`` library. We'll extend on ``AbstractFixture`` in order
+Let's create a fixture that loads all countries from the ``Intl`` library. We'll extend the ``AbstractFixture`` in order
 to skip the configuration part for now:
 
 .. code-block:: php
@@ -44,7 +44,7 @@ to skip the configuration part for now:
 
 The next step is to register this fixture:
 
-.. code-block:: yaml
+.. code-block:: xml
 
     <service id="app.fixture.country" class="AppBundle\Fixture\CountryFixture">
         <argument type="service" id="doctrine.orm.entity_manager" />
@@ -52,7 +52,7 @@ The next step is to register this fixture:
     </service>
 
 
-Fixture is already registered and ready to use in your suite:
+Fixture is now registered and ready to use in your suite:
 
 .. code-block:: yaml
 
@@ -65,10 +65,12 @@ Fixture is already registered and ready to use in your suite:
 Configurable fixture
 --------------------
 
-Loading all countries may be useful, but what if you want to load some defined countries in one suite and all
-countries in the other? You don't need to create multiple fixtures, one configurable will do the job!
+Loading all countries may be useful, but what if you want to load only some defined countries in one suite and all
+the countries in the another one? You don't need to create multiple fixtures, a one configurable fixture will do the job!
 
 .. code-block:: php
+
+    // ...
 
     final class CountryFixture extends AbstractFixture implements FixtureInterface
     {
@@ -98,11 +100,11 @@ countries in the other? You don't need to create multiple fixtures, one configur
 
 .. note::
 
-    ``AbstractFixture`` implements ``ConfigurationInterface::getConfigTreeBuilder()`` and exposes handy
+    The ``AbstractFixture`` implements the ``ConfigurationInterface::getConfigTreeBuilder()`` and exposes a handy
     ``configureOptionsNode()`` method to reduce the boilerplate. It is possible to test this configuration
     using `SymfonyConfigTest`_ library. For examples of that tests have a look at `Sylius Fixtures Configuration Tests`_.
 
-Now, it is possible for fixture to create different outcomes just by changing its configuration:
+Now, it is possible for the fixture to create different outcomes by just changing its configuration:
 
 .. code-block:: yaml
 

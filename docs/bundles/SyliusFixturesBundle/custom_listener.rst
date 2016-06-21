@@ -30,14 +30,14 @@ Let's create a listener that removes the directory before loading the fixtures.
 
 The next step is to register this listener:
 
-.. code-block:: yaml
+.. code-block:: xml
 
     <service id="app.listener.directory_purger" class="AppBundle\Listener\DirectoryPurgerListener">
         <tag name="sylius_fixtures.listener" />
     </service>
 
 
-Listener is already registered and ready to use in your suite:
+Listener is now registered and ready to use in your suite:
 
 .. code-block:: yaml
 
@@ -50,10 +50,12 @@ Listener is already registered and ready to use in your suite:
 Configurable listener
 ---------------------
 
-Listener that removes hardcoded directory isn't very useful. Allowing it to receive an array of directories would make
+Listener that removes a hardcoded directory isn't very useful. Allowing it to receive an array of directories would make
 this listener a lot more reusable.
 
 .. code-block:: php
+
+    // ...
 
     final class DirectoryPurgerListener extends AbstarctListener implements ListenerInterface
     {
@@ -76,7 +78,7 @@ this listener a lot more reusable.
 
 .. note::
 
-    ``AbstractListener`` implements ``ConfigurationInterface::getConfigTreeBuilder()`` and exposes handy
+    The ``AbstractListener`` implements the ``ConfigurationInterface::getConfigTreeBuilder()`` and exposes a handy
     ``configureOptionsNode()`` method to reduce the boilerplate. It is possible to test this configuration
     using `SymfonyConfigTest`_ library.
 
