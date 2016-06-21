@@ -30,3 +30,4 @@ Feature: Seeing order addresses on order summary page
         Then I should be on the checkout summary step
         And my order's shipping address should be to "Jon Snow"
         But my order's billing address should be to "Eddard Stark"
+e
