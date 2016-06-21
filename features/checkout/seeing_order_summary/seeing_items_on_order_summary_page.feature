@@ -11,7 +11,7 @@ Feature: Seeing order items on order summary page
         And the store has a product "Stark T-Shirt" priced at "$21.50"
         And the store ships everywhere for free
         And the store allows paying offline
-        And I am logged in customer
+        And I am a logged in customer
 
     @ui
     Scenario: Seeing order items and theirs quantuty on the order summary page
