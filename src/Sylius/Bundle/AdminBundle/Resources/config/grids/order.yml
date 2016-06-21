@@ -37,17 +37,23 @@ sylius_grid:
                     type: twig
                     label: sylius.ui.state
                     options:
-                        template: SyliusAdminBundle:Order/Field:state.html.twig
+                        template: SyliusAdminBundle:Grid/Field:state.html.twig
+                        vars:
+                            labels: SyliusAdminBundle:Order/Label/State
                 paymentState:
                     type: twig
                     label: sylius.ui.payment_state
                     options:
-                        template: SyliusAdminBundle:Order/Field:state.html.twig
+                        template: SyliusAdminBundle:Grid/Field:state.html.twig
+                        vars:
+                            labels: SyliusAdminBundle:Order/Label/PaymentState
                 shippingState:
                     type: twig
                     label: sylius.ui.shipping_state
                     options:
-                        template: SyliusAdminBundle:Order/Field:state.html.twig
+                        template: SyliusAdminBundle:Grid/Field:state.html.twig
+                        vars:
+                            labels: SyliusAdminBundle:Order/Label/ShippingState
                 total:
                     type: twig
                     label: sylius.ui.total

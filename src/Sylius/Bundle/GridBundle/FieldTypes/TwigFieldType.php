@@ -50,7 +50,7 @@ class TwigFieldType implements FieldTypeInterface
             $data = $this->dataExtractor->get($field, $data);
         }
 
-        return $this->twig->render($options['template'], ['data' => $data]);
+        return $this->twig->render($options['template'], ['data' => $data, 'options' => $options]);
     }
 
     /**
@@ -58,11 +58,14 @@ class TwigFieldType implements FieldTypeInterface
      */
     public function configureOptions(OptionsResolver $resolver)
     {
+        $resolver->setDefined('vars');
+
         $resolver->setRequired([
             'template'
         ]);
         $resolver->setAllowedTypes([
             'template' => ['string'],
+            'vars' => ['array'],
         ]);
     }
 

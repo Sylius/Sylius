@@ -49,7 +49,7 @@ class TwigFieldTypeSpec extends ObjectBehavior
         $field->getPath()->willReturn('foo');
 
         $dataExtractor->get($field, ['foo' => 'bar'])->willReturn('Value');
-        $twig->render('foo.html.twig', ['data' => 'Value'])->willReturn('<html>Value</html>');
+        $twig->render('foo.html.twig', ['data' => 'Value', 'options' => ['template' => 'foo.html.twig']])->willReturn('<html>Value</html>');
 
         $this->render($field, ['foo' => 'bar'], [
             'template' => 'foo.html.twig',
@@ -61,21 +61,21 @@ class TwigFieldTypeSpec extends ObjectBehavior
         Field $field
     ) {
         $field->getPath()->willReturn('.');
-        $twig->render('foo.html.twig', ['data' => 'bar'])->willReturn('<html>Bar</html>');
+        $twig->render('foo.html.twig', ['data' => 'bar', 'options' => ['template' => 'foo.html.twig']])->willReturn('<html>Bar</html>');
 
-        $this->render($field, 'bar', [
-            'template' => 'foo.html.twig',
-        ])->shouldReturn('<html>Bar</html>');
+        $this->render($field, 'bar', ['template' => 'foo.html.twig'])->shouldReturn('<html>Bar</html>');
     }
 
     function it_should_configure_options(
         OptionsResolver $resolver
-    )
-    {
+    ) {
+        $resolver->setDefined('vars')->shouldBeCalled();
         $resolver->setRequired(['template'])->shouldBeCalled();
         $resolver->setAllowedTypes([
-            'template' => [ 'string' ]
+            'template' => ['string'],
+            'vars' => ['array'],
         ])->shouldBeCalled();
+
         $this->configureOptions($resolver);
     }
 
