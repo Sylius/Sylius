@@ -1,3 +1,6 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
 sylius_grid:
     grids:
         sylius_shop_account_order:
@@ -11,18 +14,21 @@ sylius_grid:
             sorting:
                 completedAt: desc
             fields:
-                date:
-                    type: datetime
-                    label: sylius.ui.date
-                    path: completedAt
-                    options:
-                        format: d-m-Y H:i:s
                 number:
                     type: twig
                     label: sylius.ui.number
-                    path: .
                     options:
                         template: SyliusShopBundle:Account/Order/Field:number.html.twig
+                completedAt:
+                    type: datetime
+                    label: sylius.ui.date
+                    options:
+                        format: m/d/Y
+                shippingAddress:
+                    type: twig
+                    label: sylius.ui.ship_to
+                    options:
+                        template: SyliusShopBundle:Account/Order/Field:shippingAddress.html.twig
                 total:
                     type: twig
                     label: sylius.ui.total
