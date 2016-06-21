@@ -3,7 +3,6 @@
 {% from '@SyliusAdmin/Product/Attribute/attributeValues.html.twig' import checkboxField %}
 {% from '@SyliusAdmin/Product/Attribute/attributeValues.html.twig' import textField %}
 
-
 {% block collection_widget -%}
     {% from 'SyliusResourceBundle:Macros:notification.html.twig' import error %}
     {% set attr = attr|merge({'class': attr.class|default ~ ' controls collection-widget'}) %}
@@ -56,8 +55,8 @@
                 <button class="ui red right labeled icon button">
                     <i class="remove icon"></i> {{ 'sylius.ui.delete'|trans }}
                 </button>
-                {{ form_widget(form.attribute, {'attr': {'style': 'display: none'}}) }}
             </div>
         {% endif %}
+        <input type="hidden" name="{{ form.attribute.vars.full_name }}" id="{{ form.attribute.vars.id }}" value="{{ form.vars.data.attribute.id }}"/>
     </div>
 {% endmacro %}
