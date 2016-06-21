@@ -16,6 +16,8 @@ use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Sylius\Component\Core\Model\AddressInterface;
+use Sylius\Component\Core\Model\ShippingMethodInterface;
+use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\Routing\RouterInterface;
@@ -95,6 +97,30 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     /**
      * {@inheritdoc}
      */
+    public function hasShippingMethod(ShippingMethodInterface $shippingMethod)
+    {
+        if (!$this->hasElement('shipping_method')) {
+            return false;
+        }
+
+        return false !== strpos($this->getElement('shipping_method')->getText(), $shippingMethod->getName());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasPaymentMethod(PaymentMethodInterface $paymentMethod)
+    {
+        if (!$this->hasElement('payment_method')) {
+            return false;
+        }
+
+        return false !== strpos($this->getElement('payment_method')->getText(), $paymentMethod->getName());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function hasProductDiscountedUnitPriceBy(ProductInterface $product, $amount)
     {
         $productRowElement = $this->getProductRowElement($product);
@@ -140,6 +166,8 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
             'billing_address' => '#addresses div:contains("Billing address") address',
             'shipping_address' => '#addresses div:contains("Shipping address") address',
             'items_table' => '#items table',
+            'shipping_method' => '#sylius-checkout-summary-shipping-method',
+            'payment_method' => '#sylius-checkout-summary-payment-method',
             'product_row' => 'tbody tr:contains("%name%")',
             'order_total' => 'td:contains("Total")',
             'tax_total' => '#tax-total',

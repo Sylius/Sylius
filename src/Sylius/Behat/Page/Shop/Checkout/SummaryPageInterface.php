@@ -14,6 +14,8 @@ namespace Sylius\Behat\Page\Shop\Checkout;
 use Sylius\Behat\Page\SymfonyPageInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ShippingMethodInterface;
+use Sylius\Component\Payment\Model\PaymentMethodInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -41,6 +43,20 @@ interface SummaryPageInterface extends SymfonyPageInterface
      * @return bool
      */
     public function hasBillingAddress(AddressInterface $address);
+
+    /**
+     * @param PaymentMethodInterface $paymentMethod
+     *
+     * @return bool
+     */
+    public function hasPaymentMethod(PaymentMethodInterface $paymentMethod);
+
+    /**
+     * @param ShippingMethodInterface $shippingMethod
+     *
+     * @return bool
+     */
+    public function hasShippingMethod(ShippingMethodInterface $shippingMethod);
 
     /**
      * @param ProductInterface $product
