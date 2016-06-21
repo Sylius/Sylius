@@ -12,9 +12,11 @@
 namespace Sylius\Behat\Page\Shop\Checkout;
 
 use Behat\Mink\Session;
+use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Sylius\Component\Core\Model\AddressInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -93,13 +95,56 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     /**
      * {@inheritdoc}
      */
+    public function hasProductDiscountedUnitPriceBy(ProductInterface $product, $amount)
+    {
+        $productRowElement = $this->getProductRowElement($product);
+        $discountedPriceElement = $productRowElement->find('css', 'td > s');
+        if (null === $discountedPriceElement) {
+            return false;
+        }
+        $priceElement = $discountedPriceElement->getParent();
+        $prices = explode(' ', $priceElement->getText());
+        $priceWithoutDiscount = $this->getPriceFromString($prices[0]);
+        $priceWithDiscount = $this->getPriceFromString($prices[1]);
+        $discount = $priceWithoutDiscount - $priceWithDiscount;
+
+        return $discount === $amount;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasOrderTotal($total)
+    {
+        if (!$this->hasElement('order_total')) {
+            return false;
+        }
+
+        return $this->getTotalFromString($this->getElement('order_total')->getText()) === $total;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
             'billing_address' => '#addresses div:contains("Billing address") address',
             'shipping_address' => '#addresses div:contains("Shipping address") address',
             'items_table' => '#items table',
+            'product_row' => 'tbody tr:contains("%name%")',
+            'order_total' => 'td:contains("Total")',
         ]);
+    }
+
+    /**
+     * @param ProductInterface $product
+     *
+     * @return NodeElement
+     */
+    private function getProductRowElement(ProductInterface $product)
+    {
+        return $this->getElement('product_row', ['%name%' => $product->getName()]);
     }
 
     /**
@@ -146,5 +191,27 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     private function getCountryName($countryCode)
     {
         return strtoupper(Intl::getRegionBundle()->getCountryName($countryCode, 'en'));
+    }
+
+    /**
+     * @param string $price
+     *
+     * @return int
+     */
+    private function getPriceFromString($price)
+    {
+        return (int) round((str_replace(['€', '£', '$'], '', $price) * 100), 2);
+    }
+
+    /**
+     * @param string $total
+     * 
+     * @return int
+     */
+    private function getTotalFromString($total)
+    {
+        $total = str_replace('Total:', '', $total);
+
+        return $this->getPriceFromString($total);
     }
 }
