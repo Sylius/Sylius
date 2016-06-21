@@ -9,7 +9,7 @@ Feature: Selecting order shipping method
         And the store has a product "Targaryen T-Shirt" priced at "$19.99"
         And the store has "Raven Post" shipping method with "€10.00" fee
         And the store has "Dragon Post" shipping method with "€30.00" fee
-        And I am logged in customer
+        And I am a logged in customer
 
     @ui
     Scenario: Selecting one of available shipping method

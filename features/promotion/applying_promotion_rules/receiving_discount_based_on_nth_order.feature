@@ -11,7 +11,7 @@ Feature: Receiving discount based on nth order
         And the store allows paying offline
         And there is a promotion "5th order promotion"
         And it gives "€20.00" off customer's 5th order
-        And I am logged in customer
+        And I am a logged in customer
 
     @ui
     Scenario: Receiving a discount on an order if it's nth order placed

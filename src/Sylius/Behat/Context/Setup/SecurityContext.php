@@ -69,7 +69,7 @@ final class SecurityContext implements Context
     }
 
     /**
-     * @Given /^I am logged in customer$/
+     * @Given /^I am a logged in customer$/
      */
     public function iAmLoggedInCustomer()
     {
