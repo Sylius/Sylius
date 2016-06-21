@@ -1,14 +1,14 @@
 {
     "name": "sylius/fixtures-bundle",
     "type": "symfony-bundle",
-    "description": "Sylius fixtures bundle. It contains the fixtures from the core bundle so a user can install the core without the fixtures.",
-    "keywords": ["shop", "ecommerce", "store", "webshop", "sylius"],
+    "description": "Configurable fixtures for Symfony2 applications.",
+    "keywords": ["sylius", "fixtures", "symfony"],
     "homepage": "http://sylius.org",
     "license": "MIT",
     "authors": [
         {
-            "name": "Paweł Jędrzejewski",
-            "homepage": "http://pjedrzejewski.com"
+            "name": "Kamil Kokot",
+            "homepage": "http://kamil.kokot.me"
         },
         {
             "name": "Sylius project",

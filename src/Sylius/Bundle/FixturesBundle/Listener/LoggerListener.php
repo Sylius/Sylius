@@ -55,12 +55,4 @@ final class LoggerListener extends AbstractListener implements BeforeSuiteListen
     {
         return 'logger';
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function configureOptionsNode(ArrayNodeDefinition $optionsNode)
-    {
-        // left blank
-    }
 }
