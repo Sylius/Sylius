@@ -5,7 +5,7 @@ sylius:
             password: Password
             remember_me: Remember me
         option:
-            presentation: Presentation
+            name: Name
     ui:
         about: About
         account_credentials: Account credentials

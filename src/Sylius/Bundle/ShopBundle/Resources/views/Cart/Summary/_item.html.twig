@@ -16,7 +16,7 @@
         {% if product.hasOptions() %}
             <div class="ui horizontal divided list sylius-product-options">
                 {% for option in variant.options %}
-                    <div class="item" data-sylius-option-name="{{ option.presentation }}">
+                    <div class="item" data-sylius-option-name="{{ option.name }}">
                         {{ option.value }}
                     </div>
                 {% endfor %}

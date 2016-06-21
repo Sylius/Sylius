@@ -15,7 +15,7 @@ Feature: Product archetypes
             | O5   | Beverage milk  | None[OV12], Whole[OV13], Skinny[OV14], Soya[OV15] |
             | O6   | Coffee variety | Colombian[OV16], Ethiopian[OV17]                  |
         And there are following attributes:
-            | name               | name           | type     |
+            | name               | presentation   | type     |
             | T-Shirt collection | Collection     | text     |
             | T-Shirt fabric     | T-Shirt fabric | text     |
             | Bag material       | Material       | text     |

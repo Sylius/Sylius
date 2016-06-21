@@ -21,7 +21,7 @@
             <generator strategy="AUTO" />
         </id>
 
-        <field name="name" column="presentation" type="string" />
+        <field name="name" column="name" type="string" />
     </mapped-superclass>
 
 </doctrine-mapping>
