@@ -7,6 +7,7 @@ sylius:
             code: ISO kod
             name: Naziv grupe
             description: Opis
+            permissions: Dozvole
             parent: Nadređena kategorija
         permission:
             code: ISO kod

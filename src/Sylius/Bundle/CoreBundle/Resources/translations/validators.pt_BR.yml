@@ -5,6 +5,12 @@ sylius:
     checkout:
         shipping_method:
             not_blank: Por favor selecione um método de envio.
+    customer:
+        currency_code:
+            not_valid: O usuário digitado está incorreto.
+    order:
+        currency_code:
+            not_valid: O código de moeda que você inseriu é inválido.
     locale:
         code:
             not_blank: Por favor, digite o código do locale.

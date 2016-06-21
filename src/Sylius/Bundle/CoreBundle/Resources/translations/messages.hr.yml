@@ -19,6 +19,8 @@ sylius:
                 different_billing_address: Želim koristiti drugu adresu za račun.
             payment_method: Način plaćanja
             shipping_method: Vrsta dostave
+        promotion:
+            channels: Kanali
         group:
             name: Naziv grupe
             roles: Role (korisnička prava)
@@ -49,6 +51,7 @@ sylius:
             shipping_category: Kategorija pošiljke
             short_description: Kratak opis
             variant_selection_method: Način odabira varijante
+            channels: Kanali
             enabled: Omogući
         product_filter:
             name: Naziv
@@ -115,3 +118,13 @@ sylius:
                 taxons: Taksoni
             total_of_items_from_taxon:
                 amount: Iznos
+    email:
+        order_confirmation:
+            name: Potvrda narudžbe
+        order_comment:
+            name: Komentar na narudžbu
+        shipment_confirmation:
+            name: Potvrda dostave
+        user_confirmation:
+            name: Potvrda korisnika
+            subject: Dobrodošli na našu trgovinu

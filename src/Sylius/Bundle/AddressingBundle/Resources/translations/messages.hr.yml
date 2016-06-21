@@ -14,16 +14,17 @@ sylius:
             street: Ulica
             province: Pokrajina
         country:
-            add_province: Dodaj regiju
+            add_province: Dodaj pokrajinu
             name: Naziv Države
             provinces: Pokrajine
             select: Odaberite
-            enabled: Omogući
+            enabled: Omogućeno
         province:
             name: Naziv pokrajine
+            abbreviation: Skraćeno
             select: Odaberite
         zone:
-            add_member: Dodaj člana
+            add_member: Dodaj
             members: Članovi
             name: Naziv regije
             type: Vrsta

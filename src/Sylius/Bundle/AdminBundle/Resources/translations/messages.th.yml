@@ -6,17 +6,17 @@ sylius:
         admin:
             main:
                 catalog:
-                    attributes: คุณลักษณะ (Attribute)
+                    attributes: คุณสมบัติ
                     header: แค็ตตาล็อก
-                    options: ตัวเลือก
+                    options: ตัวเลือกสินค้า
                     products: สินค้า
-                    taxons: หมวดหมู่
+                    taxons: การจัดหมวดหมู่
                 configuration:
-                    channels: ช่องทางการจัดจำหน่าย
+                    channels: ช่องทางจำหน่าย
                     countries: ประเทศ
                     currencies: สกุลเงิน
-                    header: การกำหนดค่า (Configuration)
-                    locales: ภาษาที่ใช้
+                    header: การกำหนดค่า
+                    locales: ภาษา
                     payment_methods: วิธีการชำระเงิน
                     shipping_methods: วิธีการจัดส่ง
                     tax_categories: ประเภทภาษี
@@ -24,10 +24,10 @@ sylius:
                     zones: โซน
                 marketing:
                     header: การตลาด
-                    promotions: ส่งเสริมการขาย
+                    promotions: โปรโมชั่น
                 customers:
                     customers: ลูกค้า
                     header: ลูกค้า
                 sales:
-                    header: ขาย
+                    header: ยอดขาย
                     orders: ใบสั่งซื้อ

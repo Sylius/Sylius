@@ -6,28 +6,31 @@ sylius:
         login:
             username: ชื่อผู้ใช้
             password: รหัสผ่าน
-            remember_me: จำฉันไว้
+            remember_me: จำการการเข้าระบบของฉันไว้
         option:
-            presentation: ผู้ใช้มองเห็น
+            presentation: คำที่ใช้แสดง
     ui:
         about: เกี่ยวกับเรา
-        account_credentials: ข้อมูลลับของบัญชี
+        account_credentials: ข้อมูลประจำตัวบัญชี
         actions: ดำเนินการ
         add_coupon: เพิ่มคูปอง
-        add_to_cart: หยิบใส่ตะกร้า
+        add_to_cart: หยิบใส่รถเข็น
         addressing: ที่อยู่
         administration_panel_login: เข้าสู่ระบบ Admin
         all: ทั้งหมด
         an_error_occurred: เกิดข้อผิดพลาด
-        are_your_sure_you_want_to_perform_this_action: คุณแน่ใจหรือคุณต้องการดำเนินการนี้หรือไม่
-        available_for_channels: พร้อมจำหน่ายสำหรับ Channels
+        are_your_sure_you_want_to_perform_this_action: คุณแน่ใจหรือคุณต้องการดำเนินการนี้?
+        available_for_channels: มีใน channels
+        available_on_hand: พร้อมจำหน่าย
+        reserved: ถูกจอง
         average_order_value: ค่าเฉลี่ยการสั่งซื้อ
-        backordered: สั่งซื้อเมื่อมีของ
+        backordered: ค้างส่ง
         back_to_store: กลับไปยังร้านค้า
         complete: เสร็จสมบูรณ์
         cancel: ยกเลิก
         cancelled: ถูกยกเลิก
         category_requirements: ข้อกำหนดสำหรับหมวดหมู่
+        change_address: เปลี่ยนที่อยู่
         change_password: เปลี่ยนรหัสผ่าน
         change_your_password: เปลี่ยนรหัสผ่านของคุณ
         charges_and_taxes: ค่าธรรมเนียมและภาษี
@@ -38,22 +41,23 @@ sylius:
         you_may_also_like: คุณอาจจะชอบสินค้าเหล่านี้
         forgot_password: ลืมรหัสผ่าน
         your_shopping_cart: รถเข็นของคุณ
-        your_cart_is_empty: รถเข็นของคุณว่างเปล่า
-        clear_filters: ล้างตัวกรอง
+        your_cart_is_empty: ไม่มีสินค้าในรถเข็นของคุณ
+        clear_filters: ล้างการกรอง
         enter_your_code: ระบุรหัสของคุณ
+        filters: กรองข้อมูล
         image: รูปภาพ
-        qty: ปริมาณ
+        qty: จำนวน
         clear_cart: ล้างรถเข็น
-        update_cart: อัพเดตรถเข็น
+        update_cart: ปรับปรุงข้อมูลรถเข็น
         apply_coupon: ใช้คูปอง
-        edit_your_items_apply_coupon_or_proceed_to_the_checkout: แก้ไขรายการของคุณ ใช้คูปอง หรือดำเนินการชำระเงิน
+        edit_your_items_apply_coupon_or_proceed_to_the_checkout: แก้ไขรายการสินค้าของคุณ ใช้คูปอง หรือดำเนินการชำระเงิน
         create_an_account: สร้างบัญชีผู้ใช้
-        summary: สรุป
+        summary: สรุปรายการ
         create_a_new_customer_account: สร้างบัญชีลูกค้าใหม่
-        if_you_have_an_account_sign_in_with_your_email_address: หากคุณมีบัญชีอยู่แล้ว เข้าสู่ระบบด้วยอีเมลของคุณ
+        if_you_have_an_account_sign_in_with_your_email_address: หากคุณมีบัญชีอยู่แล้ว คุณสามารถเข้าสู่ระบบด้วยอีเมลของคุณ
         access_your_store_account_or_create_a_new_one: เข้าถึงบัญชีผู้ใช้ของคุณ หรือสร้างใหม่
         color: สี
-        configurable_product: สินค้าแบบปรับแต่งได้
+        configurable_product: สินค้าแบบปรับได้
         configure_channels_available_in_your_store: กำหนดช่องทางจัดจำหน่าย (Channel)
         confirm_your_action: ยืนยันการกระทำของคุณ
         contact_us: ติดต่อเรา
@@ -66,16 +70,16 @@ sylius:
         customer_can_login_to_the_store: ลูกค้าสามารถเข้าสู่ระบบได้
         set_a_new_password_for_your_account: ตั้งรหัสผ่านใหม่สำหรับบัญชีของคุณ
         my_account: บัญชีของฉัน
-        home: หน้าหลัก
+        home: หน้า​แรก​
         customer_care: การดูแลลูกค้า
         customer_login: เข้าสู่ระบบ
         dashboard: แดชบอร์ด
         date: วันที่
-        default_currency: สกุลเงินหลัก
-        default_locale: ตำแหน่งที่ตั้งเริ่มต้น
+        default_currency: สกุลเงินเริ่มต้น
+        default_locale: ภาษาเริ่มต้น
         delete: ลบ
         delivery_and_shipping: การจัดส่งสินค้า
-        description: คำอธิบาย
+        description: รายละเอียด
         disabled: ปิดการใช้งาน
         discount: ส่วนลด
         edit: แก้ไข
@@ -86,9 +90,9 @@ sylius:
         edit_customer: แก้ไขข้อมูลลูกค้า
         edit_payment_method: แก้ไขวิธีการชำระเงิน
         edit_product: แก้ไขสินค้า
-        edit_product_attribute: แก้ไขคุณลักษณะสินค้า
+        edit_product_attribute: แก้ไขคุณสมบัติสินค้า
         edit_product_option: แก้ไขตัวเลือกสินค้า
-        edit_product_variant: แก้ไขตัวเลือกสินค้า
+        edit_product_variant: แก้ไขสินค้าย่อย
         edit_promotion: แก้ไขโปรโมชั่น
         edit_promotion_coupon: แก้ไขคูปองโปรโมชั่น
         edit_shipping_method: แก้ไขวิธีการจัดส่ง
@@ -102,27 +106,27 @@ sylius:
         ends_with: ลงท้ายด้วย
         equal: เท่ากับ
         exclusive: พิเศษ
-        expiration_and_usage_limits: หมดอายุและจำกัดการใช้งาน
+        expiration_and_usage_limits: การหมดอายุและการจำกัดการใช้
         expires_at: หมดอายุวันที่
         extra_information: ข้อมูลเพิ่มเติม
-        faqs: คำถามที่พบบ่อย
-        filter: ตัวกรอง
+        faqs: ถาม-ตอบ
+        filter: กรองข้อมูล
         go: Go
         generate_coupons: สร้างคูปอง
         hello: สวัสดี!
         manage_your_personal_information_and_preferences: จัดการข้อมูลส่วนบุคคลและการตั้งค่าของคุณ
         latest_products: สินค้าใหม่ล่าสุด
         view_and_edit_cart: ดูและแก้ไขรถเข็น
-        in: ใน
+        in: มีใน
         info: ข้อมูล
         item: รายการ
         inventory: คลังสินค้า
-        jump_to_page: ไปหน้า
-        last_updated: ปรับปรุงครั้งล่าสุด
+        jump_to_page: ไปที่หน้า
+        last_updated: อัพเดทล่าสุด
         list_coupons: รายการคูปอง
-        list_variants: รายการย่อย
-        locales: ภาษาที่ใช้
-        manage_attributes_of_your_products: จัดการคุณลักษณะของสินค้าของคุณ
+        list_variants: รายการสินค้าย่อย
+        locales: ภาษา
+        manage_attributes_of_your_products: จัดการคุณสมบัติของสินค้าของคุณ
         manage_categorization_of_your_products: จัดการภาษี
         manage_configuration_options_of_your_products: จัดการตัวเลือกการกำหนดค่าของสินค้าของคุณ
         manage_coupons: จัดการตัวเลือก
@@ -134,10 +138,10 @@ sylius:
         manage_shipping_destinations: จัดการวิธีการจัดส่ง
         manage_shipping_methods_for_your_store: จัดการวิธีการจัดส่งสินค้า
         manage_taxation_of_your_products: จัดการภาษีผลิตภัณฑ์ของคุณ
-        manage_variants: จัดการรายการย่อย
+        manage_variants: จัดการสินค้าย่อย
         manage_your_customers: จัดการข้อมูลลูกค้า
         manage_your_product_catalog: จัดแค็ตตาล็อกสินค้า
-        media: สื่อ
+        media: ภาพประกอบ
         new: รายการใหม่
         new_channel: เพิ่มช่องทางจำหน่าย
         new_country: ประเทศใหม่
@@ -150,17 +154,19 @@ sylius:
         new_customers: เพิ่มลูกค้า
         "no": false
         no_account: ไม่มีบัญชี
-        no_promotion: ไม่รวมโปรโมชั่น
+        no_promotion: ไม่มีการใช้โปรโมชั่น
         no_requirement: ไม่มีข้อกำหนด
         no_results_to_display: ไม่มีผลลัพธ์จะแสดง
-        no_shipping_charges: ไม่มีค่าธรรมเนียมการจัดส่ง
-        no_taxes: ไม่รวมภาษี
+        no_shipping_charges: ไม่มีค่าธรรมเนียมในการจัดส่ง
+        no_shipping_methods_available: การจัดส่งไม่พร้อมใช้งานสำหรับที่อยู่ของคุณ
+        no_taxes: ไม่มีภาษี
         no_theme: No theme
         not_contains: ไม่ประกอบด้วย
         not_empty: ไม่ว่างเปล่า
         not_in: ไม่ได้อยู่ใน
         onhold: Onhold
         or: หรือ
+        order_history: ประวัติการสั่งซื้อ
         order_total: คำสั่งซื้อทั้งหมด
         partially_shipped: ส่งบางส่วน
         per_customer_usage_limit: จำกัดตามการใช้งานของลูกค้า
@@ -175,14 +181,14 @@ sylius:
         promotion_information: ข้อมูลโปรโมชั่น
         purchased_from: ซื้อจาก
         personal_information: ข้อมูลส่วนบุคคล
-        quantity: ปริมาณ
+        quantity: จำนวน
         ready: พร้อมส่ง
         repeat_new_password: ใส่รหัสอีกครั้ง
         returned: ถูกส่งคืน
         returns_policy: นโยบายการคืนสินค้า
         registered_customers: ลูกค้าที่ลงทะเบียน
         register_in_the_store: ลงทะเบียนกับการร้านค้า
-        save_changes: บันทึกการเปลี่ยนแปลง
+        save_changes: บันทึกการแก้ไข
         select_taxon: เลือกหมวดหมู่
         shipped: ส่งของแล้ว
         shipping: จัดส่ง
@@ -195,6 +201,7 @@ sylius:
         status: สถานะ
         subtotal: ยอดรวม
         success: สำเร็จ
+        shipment: การจัดส่ง
         tax: ภาษี
         taxonomy: การจัดประเภท
         tax_categories: ประเภทภาษี

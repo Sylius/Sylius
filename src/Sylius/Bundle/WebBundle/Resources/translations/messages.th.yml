@@ -144,7 +144,7 @@ sylius:
             checkout: เช็คเอาท์
             pending: อยู่ระหว่างดำเนินการ
             onhold: On hold
-            backordered: สั่งซื้อเมื่อมีของ
+            backordered: ค้างส่ง
             cancelled: ถูกยกเลิก
             partially_shipped: ส่งบางส่วน
         transition:

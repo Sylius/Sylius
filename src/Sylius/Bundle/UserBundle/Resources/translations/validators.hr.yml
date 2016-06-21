@@ -11,9 +11,14 @@ sylius:
         email:
             not_blank: Molimo unesite vašu email adresu.
             invalid: Ovaj e-mail nije valjan.
+            not_registered: Korisni s ovom email adresom ne postoji. Registrirajte se.
         plainPassword:
             not_blank: Molimo unesite vašu lozinku.
             mismatch: Unesene lozinke se ne podudaraju
+            wrong_current: Unesena lozinka je različita od trenutne.
+        password:
+            min: 'Lozinka treba biti dugačka najmanje {{ limit }} znakova.'
+            max: 'Lozinka ne može imati više od {{ limit }} znakova.'
     customer:
         first_name:
             max: 'Ime ne smije biti duže od {{ limit }} znakova.'
@@ -23,6 +28,8 @@ sylius:
             max: 'Prezime ne smije biti duže od {{ limit }} znakova.'
             min: 'Prezime mora imati najmanje {{ limit }} znakova.'
             not_blank: Molimo unesite Vaše prezime.
+        gender:
+            not_blank: Odaberite spol.
         email:
             already_used: Ovaj e-mail se već koristi, molimo prijavite se ili koristite resetiranje lozinke.
             max: 'Email ne smije imati više od {{ limit }} znakova.'
@@ -30,3 +37,4 @@ sylius:
             not_blank: Molimo unesite vašu email adresu.
             invalid: Ovaj e-mail nije valjan.
             unique: Ova e-pošta se već koristi.
+            registered: Ovaje email je već registriran, molimo prijavite se ili koristite zaboravljenu lozinku.
