@@ -61,14 +61,23 @@ abstract class AbstractResourceFixture implements FixtureInterface
     {
         $optionsResolver = $this->createConfiguredOptionsResolver($options);
 
+        $i = 0;
         $resourcesOptions = array_merge($options[$this->nodeName], $this->generateResourcesOptions($options['random']));
         foreach ($resourcesOptions as $resourceOptions) {
             $resource = $this->loadResource($optionsResolver->resolve($resourceOptions));
 
             $this->resourceManager->persist($resource);
+
+            ++$i;
+
+            if (0 === ($i % 10)) {
+                $this->resourceManager->flush();
+                $this->resourceManager->clear();
+            }
         }
 
         $this->resourceManager->flush();
+        $this->resourceManager->clear();
     }
 
     /**
