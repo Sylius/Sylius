@@ -31,8 +31,8 @@
                 </tr>
             {% endfor %}
             <tr>
-                <td colspan="4" class="right aligned">
-                    Tax: $10.00
+                <td colspan="4" class="right aligned" id="tax-total">
+                    {{ 'sylius.ui.tax_total'|trans}} : {{ order.taxTotal|sylius_price(order.currencyCode) }}
                 </td>
             </tr>
             <tr>
