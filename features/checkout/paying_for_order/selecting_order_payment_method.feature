@@ -9,7 +9,7 @@ Feature: Selecting an order payment method
         And the store has a product "PHP T-Shirt" priced at "$19.99"
         And the store ships everywhere for free
         And the store allows paying with "Paypal Express Checkout"
-        And I am logged in customer
+        And I am a logged in customer
 
     @ui
     Scenario: Selecting a payment method
