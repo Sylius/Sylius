@@ -9,4 +9,5 @@ Configurable fixtures management for Symfony2 applications.
 
     installation
     architecture
+    custom_fixture
     summary
