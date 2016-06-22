@@ -573,12 +573,23 @@ final class CheckoutContext implements Context
     /**
      * @When I proceed order with :shippingMethod shipping method and :paymentMethod payment
      */
-    public function iCompleteOrderWithShippingMethodAndPayment($shippingMethod, $paymentMethod)
+    public function iProceedOrderWithShippingMethodAndPayment($shippingMethod, $paymentMethod)
     {
         $this->iSelectShippingMethod($shippingMethod);
         $this->iCompleteTheShippingStep();
         $this->iSelectPaymentMethod($paymentMethod);
         $this->iCompleteThePaymentStep();
+    }
+
+    /**
+     * @Given I should have :quantity :productName products in the cart
+     */
+    public function iShouldHaveProductsInTheCart($quantity, $productName)
+    {
+        Assert::true(
+            $this->summaryPage->hasItemWithProductAndQuantity($productName, $quantity),
+            sprintf('There is no "%s" with quantity %s on order summary page, but it should.', $productName, $quantity)
+        );
     }
 
     /**
