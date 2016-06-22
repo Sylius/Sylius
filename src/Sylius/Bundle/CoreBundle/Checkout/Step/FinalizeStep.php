@@ -70,8 +70,6 @@ class FinalizeStep extends CheckoutStep
     {
         $this->get('session')->set('sylius_order_id', $order->getId());
 
-        $currencyProvider = $this->get('sylius.currency_provider');
-
         $this->dispatchCheckoutEvent(SyliusOrderEvents::PRE_CREATE, $order);
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::FINALIZE_PRE_COMPLETE, $order);
 

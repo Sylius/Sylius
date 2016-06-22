@@ -36,10 +36,6 @@ sylius_cart:
     resource: @SyliusCartBundle/Resources/config/routing.yml
     prefix: /cart
 
-sylius_order:
-    resource: @SyliusWebBundle/Resources/config/routing/frontend/order.yml
-    prefix: /order
-
 sylius_cart_summary:
     path: /cart
     defaults:
