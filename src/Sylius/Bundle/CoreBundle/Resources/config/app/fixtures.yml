@@ -1,0 +1,102 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_fixtures:
+    suites:
+        default:
+            listeners:
+                orm_purger: ~
+                logger: ~
+
+            fixtures:
+                locale:
+                    options:
+                        locales:
+                            en_US: ~
+                            en_GB: ~
+                            es_ES: ~
+                            pl_PL: ~
+
+                currency:
+                    options:
+                        currencies:
+                            EUR: ~
+                            USD: ~
+                            GBP: ~
+                            CHF: ~
+
+                geographical:
+                    options:
+                        provinces:
+                            US:
+                                US-CA: California
+                                US-OR: Oregon
+                                US-WA: Washington
+                                US-AL: Alabama
+                                US-TN: Tennessee
+                        zones:
+                            US-WEST-COAST:
+                                name: "West coast of USA"
+                                provinces:
+                                    - US-CA
+                                    - US-OR
+                                    - US-WA
+                            EUROPE:
+                                name: "European countries"
+                                countries:
+                                    - PL
+                                    - DE
+                                    - FR
+                            YO-DAWG:
+                                name: "Zone in a zone"
+                                zones:
+                                    - US-WEST-COAST
+                                    - EUROPE
+
+                payment_method:
+                    options:
+                        random: 10
+
+                shipping_category:
+                    options:
+                        random: 10
+
+                shipping_method:
+                    options:
+                        random: 20
+
+                channel:
+                    options:
+                        random: 3
+
+                user:
+                    options:
+                        random: 20
+
+                product_option:
+                    options:
+                        random: 10
+
+                product_attribute:
+                    options:
+                        random: 10
+
+                product_archetype:
+                    options:
+                        random: 10
+
+                tax_category:
+                    options:
+                        random: 10
+
+                tax_rate:
+                    options:
+                        random: 10
+
+                taxon:
+                    options:
+                        random: 50
+
+                product:
+                    options:
+                        random: 20
