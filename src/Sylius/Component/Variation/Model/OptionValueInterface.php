@@ -52,9 +52,9 @@ interface OptionValueInterface extends ResourceInterface, CodeAwareInterface, Tr
     public function getOptionCode();
 
     /**
-     * Proxy method to access the presentation of real option object.
+     * Proxy method to access the name of real option object.
      *
-     * @return string The presentation of object
+     * @return string The name of object
      */
-    public function getPresentation();
+    public function getName();
 }

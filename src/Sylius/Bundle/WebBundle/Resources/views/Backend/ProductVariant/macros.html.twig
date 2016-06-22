@@ -35,7 +35,7 @@
             <td>
                 <ul>
                 {% for option in variant.options %}
-                    <li><strong>{{ option.presentation|default(option.optionCode) }}</strong>: {{ option.value }}</li>
+                    <li><strong>{{ option.name|default(option.optionCode) }}</strong>: {{ option.value }}</li>
                 {% endfor %}
                 </ul>
             </td>

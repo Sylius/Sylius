@@ -39,8 +39,8 @@ Feature: Browse products, categories, attributes and options in preferred langua
             | attribute      | name     | locale |
             | T-Shirt fabric | Material | es_ES  |
         And the following option translations exist:
-            | option | presentation | locale |
-            | O2     | Talla        | es_ES  |
+            | option | name  | locale |
+            | O2     | Talla | es_ES  |
         And all products are assigned to the default channel
 
     Scenario: Seeing translated product name, options and attributes

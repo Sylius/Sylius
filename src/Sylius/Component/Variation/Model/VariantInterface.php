@@ -27,12 +27,12 @@ interface VariantInterface extends TimestampableInterface, ResourceInterface, Co
      *
      * @return string
      */
-    public function getPresentation();
+    public function getName();
 
     /**
-     * @param string $presentation
+     * @param string $name
      */
-    public function setPresentation($presentation);
+    public function setName($name);
 
     /**
      * @return VariableInterface

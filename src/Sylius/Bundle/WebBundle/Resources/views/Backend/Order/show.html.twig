@@ -92,7 +92,7 @@
                 <ul class="list-unstyled">
                     <li class="code"><strong>{{ 'sylius.ui.code'|trans }}</strong>: <code>{{ variant.code|default('SKU') }}</code></li>
                     {% for option in variant.options %}
-                    <li><strong>{{ option.presentation }}</strong>: {{ option.value  }}</li>
+                    <li><strong>{{ option.name }}</strong>: {{ option.value  }}</li>
                     {% endfor %}
                 </ul>
                 {% endif %}

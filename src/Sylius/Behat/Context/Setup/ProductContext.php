@@ -165,7 +165,7 @@ final class ProductContext implements Context
         /** @var ProductVariantInterface $variant */
         $variant = $this->productVariantFactory->createNew();
 
-        $variant->setPresentation($productVariantName);
+        $variant->setName($productVariantName);
         $variant->setCode($this->convertToCode($productVariantName));
         $variant->setPrice($price);
         $variant->setProduct($product);
@@ -208,7 +208,7 @@ final class ProductContext implements Context
             /** @var ProductVariantInterface $variant */
             $variant = $this->productVariantFactory->createNew();
 
-            $variant->setPresentation($variantHash['name']);
+            $variant->setName($variantHash['name']);
             $variant->setCode($this->convertToCode($variantHash['name']));
             $variant->setPrice($this->getPriceFromString(str_replace(['$', '€', '£'], '', $variantHash['price'])));
             $variant->setProduct($product);

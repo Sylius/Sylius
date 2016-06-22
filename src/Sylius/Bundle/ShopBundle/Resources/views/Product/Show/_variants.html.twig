@@ -10,7 +10,7 @@
     {% for variant in product.variants %}
         <tr>
             <td>
-                {{ variant.presentation }}
+                {{ variant.name }}
                 {% if product.hasOptions() %}
                     <div class="ui horizontal divided list">
                         {% for option in variant.options %}

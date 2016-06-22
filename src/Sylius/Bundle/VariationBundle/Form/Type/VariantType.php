@@ -45,9 +45,9 @@ class VariantType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('presentation', 'text', [
+            ->add('name', 'text', [
                 'required' => false,
-                'label' => 'sylius.form.variant.presentation',
+                'label' => 'sylius.form.variant.name',
             ])
             ->addEventSubscriber(new AddCodeFormSubscriber())
         ;

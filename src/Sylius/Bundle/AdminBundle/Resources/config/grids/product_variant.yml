@@ -45,7 +45,7 @@ sylius_grid:
                     type: string
                     label: sylius.ui.name
                     options:
-                        fields: [presentation]
+                        fields: [name]
             actions:
                 main:
                     create:

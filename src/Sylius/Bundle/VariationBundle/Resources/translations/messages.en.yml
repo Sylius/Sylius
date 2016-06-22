@@ -1,7 +1,7 @@
 sylius:
     form:
         variant:
-            presentation: Presentation
+            name: Name
         option:
             name: Name
             values: Possible values

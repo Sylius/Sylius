@@ -9,5 +9,5 @@ Sylius\Component\Variation\Model\OptionValue:
             expose: true
             type: string
     virtual_properties:
-        getPresentation:
+        getName:
             serialized_name: name

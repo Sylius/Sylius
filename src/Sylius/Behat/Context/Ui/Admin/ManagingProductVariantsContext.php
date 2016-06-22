@@ -187,8 +187,8 @@ final class ManagingProductVariantsContext implements Context
         $this->iWantToViewAllVariantsOfThisProduct($productVariant->getProduct());
 
         Assert::false(
-            $this->indexPage->isSingleResourceOnPage(['presentation' => $productVariant->getPresentation()]),
-            sprintf('Product variant with code %s exists but should not.', $productVariant->getPresentation())
+            $this->indexPage->isSingleResourceOnPage(['name' => $productVariant->getName()]),
+            sprintf('Product variant with code %s exists but should not.', $productVariant->getName())
         );
     }
 

@@ -133,7 +133,7 @@ fos_elastica:
                                  availableOn: { type: date, index: not_analyzed }
                                  availableUntil: { type: date }
                                  availableOnDemand: { type: boolean }
-                                 presentation: { type: string }
+                                 name: { type: string }
                                  onHand: { type: integer, index: not_analyzed }
                                  onHold: { type: integer, index: not_analyzed }
                          attributes:

@@ -49,14 +49,14 @@ class VariantUniqueValidatorSpec extends ObjectBehavior
         $context
     ) {
         $constraint = new VariantUnique([
-            'property' => 'presentation',
-            'message' => 'Variant with given presentation already exists',
+            'property' => 'name',
+            'message' => 'Variant with given name already exists',
         ]);
 
-        $variant->getPresentation()->willReturn('IPHONE5WHITE');
-        $variantRepository->findOneBy(['presentation' => 'IPHONE5WHITE'])->willReturn($conflictualVariant);
+        $variant->getName()->willReturn('IPHONE5WHITE');
+        $variantRepository->findOneBy(['name' => 'IPHONE5WHITE'])->willReturn($conflictualVariant);
 
-        $context->addViolationAt('presentation', 'Variant with given presentation already exists', Argument::any())->shouldBeCalled();
+        $context->addViolationAt('name', 'Variant with given name already exists', Argument::any())->shouldBeCalled();
 
         $this->validate($variant, $constraint);
     }
@@ -67,12 +67,12 @@ class VariantUniqueValidatorSpec extends ObjectBehavior
         $context
     ) {
         $constraint = new VariantUnique([
-            'property' => 'presentation',
-            'message' => 'Variant with given presentation already exists',
+            'property' => 'name',
+            'message' => 'Variant with given name already exists',
         ]);
 
-        $variant->getPresentation()->willReturn('111AAA');
-        $variantRepository->findOneBy(['presentation' => '111AAA'])->willReturn(null);
+        $variant->getName()->willReturn('111AAA');
+        $variantRepository->findOneBy(['name' => '111AAA'])->willReturn(null);
 
         $context->addViolationAt(Argument::any())->shouldNotBeCalled();
 
@@ -85,12 +85,12 @@ class VariantUniqueValidatorSpec extends ObjectBehavior
         $context
     ) {
         $constraint = new VariantUnique([
-            'property' => 'presentation',
-            'message' => 'Variant with given presentation already exists',
+            'property' => 'name',
+            'message' => 'Variant with given name already exists',
         ]);
 
-        $variant->getPresentation()->willReturn('111AAA');
-        $variantRepository->findOneBy(['presentation' => '111AAA'])->willReturn($variant);
+        $variant->getName()->willReturn('111AAA');
+        $variantRepository->findOneBy(['name' => '111AAA'])->willReturn($variant);
 
         $context->addViolationAt(Argument::any())->shouldNotBeCalled();
 

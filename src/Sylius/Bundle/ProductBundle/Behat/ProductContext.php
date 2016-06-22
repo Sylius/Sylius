@@ -282,7 +282,7 @@ class ProductContext extends DefaultContext
             $option = $this->findOneBy('product_option', ['code' => $data['option']]);
             $option->setCurrentLocale($data['locale']);
             $option->setFallbackLocale($data['locale']);
-            $option->setName($data['presentation']);
+            $option->setName($data['name']);
         }
 
         $manager->flush();

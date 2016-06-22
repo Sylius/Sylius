@@ -24,6 +24,6 @@ class VariantChoiceList extends ObjectChoiceList
      */
     public function __construct(VariableInterface $variable)
     {
-        parent::__construct($variable->getVariants(), 'presentation', [], null, 'id');
+        parent::__construct($variable->getVariants(), 'name', [], null, 'id');
     }
 }
