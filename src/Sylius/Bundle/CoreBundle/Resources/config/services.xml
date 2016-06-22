@@ -17,7 +17,8 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <imports>
-        <import resource="fixture.xml" />
+        <import resource="fixtures.xml" />
+        <import resource="fixtures_factories.xml" />
     </imports>
 
     <parameters>
