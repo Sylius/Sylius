@@ -33,11 +33,6 @@ class AttributeValue implements AttributeValueInterface
     protected $attribute;
 
     /**
-     * @var mixed
-     */
-    protected $value;
-
-    /**
      * @var string
      */
     private $text;
