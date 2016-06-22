@@ -326,16 +326,7 @@ class CheckoutController extends FOSRestController
      */
     private function createCheckoutShippingForm(OrderInterface $order)
     {
-        $zones = $this->getZoneMatcher()->matchAll($order->getShippingAddress());
-
-        return $this->createApiForm('sylius_checkout_shipping', $order, [
-            'criteria' => [
-                'zone' => !empty($zones) ? array_map(function ($zone) {
-                    return $zone->getId();
-                }, $zones) : null,
-                'enabled' => true,
-            ],
-        ]);
+        return $this->createApiForm('sylius_checkout_shipping', $order);
     }
 
     /**
