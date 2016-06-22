@@ -31,7 +31,7 @@ The Customization Guide
 .. toctree::
    :hidden:
 
-   customization/customization-guide
+   customization/index
 
 .. include:: /customization/map.rst.inc
 

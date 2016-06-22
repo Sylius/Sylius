@@ -4,3 +4,4 @@
 * :doc:`/customization/controller`
 * :doc:`/customization/validation`
 * :doc:`/customization/menu`
+* :doc:`/customization/template`

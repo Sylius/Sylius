@@ -10,5 +10,6 @@ The Customization Guide
     controller
     validation
     menu
+    template
 
 .. include:: /customization/map.rst.inc
