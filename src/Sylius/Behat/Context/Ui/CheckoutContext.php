@@ -573,7 +573,7 @@ final class CheckoutContext implements Context
     /**
      * @When I proceed order with :shippingMethod shipping method and :paymentMethod payment
      */
-    public function iCompleteOrderWithShippingMethodAndPayment($shippingMethod, $paymentMethod)
+    public function iProceedOrderWithShippingMethodAndPayment($shippingMethod, $paymentMethod)
     {
         $this->iSelectShippingMethod($shippingMethod);
         $this->iCompleteTheShippingStep();

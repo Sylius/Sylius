@@ -47,7 +47,7 @@ class PaymentMethodChoiceTypeSpec extends ObjectBehavior
 
         $this->buildForm($builder, ['multiple' => true]);
     }
-
+    
     public function it_configures_options(OptionsResolver $resolver) 
     {
         $resolver->setDefaults(Argument::withKey('choice_list'))->shouldBeCalled()->willReturn($resolver);
