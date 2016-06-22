@@ -597,7 +597,7 @@ sylius_rbac:
         sylius.manage.order_item: [sylius.order_item.show, sylius.order_item.index, sylius.order_item.create, sylius.order_item.update, sylius.order_item.delete]
         sylius.manage.adjustment: [sylius.adjustment.show, sylius.adjustment.index, sylius.adjustment.create, sylius.adjustment.update, sylius.adjustment.delete]
         sylius.manage.shipment: [sylius.shipment.show, sylius.shipment.index, sylius.shipment.create, sylius.shipment.update, sylius.shipment.delete]
-        sylius.manage.promotion: [sylius.promotion.show, sylius.promotion.index, sylius.promotion.create, sylius.promotion.update, sylius.promotion.delete,sylius.promotion_rule.delete, sylius.promotion_action.delete]
+        sylius.manage.promotion: [sylius.promotion.show, sylius.promotion.index, sylius.promotion.create, sylius.promotion.update, sylius.promotion.delete, sylius.promotion_rule.delete, sylius.promotion_action.delete]
         sylius.manage.promotion_coupon: [sylius.promotion_coupon.show, sylius.promotion_coupon.index, sylius.promotion_coupon.create, sylius.promotion_coupon.update, sylius.promotion_coupon.delete]
         sylius.manage.locale: [sylius.locale.show, sylius.locale.index, sylius.locale.create, sylius.locale.update, sylius.locale.delete]
         sylius.manage.payment: [sylius.payment.show, sylius.payment.index, sylius.payment.create, sylius.payment.update, sylius.payment.delete]
