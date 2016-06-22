@@ -26,6 +26,7 @@ interface OrderInterface extends
     SequenceSubjectInterface,
     TimestampableInterface
 {
+    const STATE_NEW = 'new';
     const STATE_CART = 'cart';
     const STATE_CART_LOCKED = 'cart_locked';
     const STATE_PENDING = 'pending';

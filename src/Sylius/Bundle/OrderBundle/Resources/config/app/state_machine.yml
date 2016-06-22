@@ -8,6 +8,7 @@ winzou_state_machine:
         graph: sylius_order
         state_machine_class: "%sylius.state_machine.class%"
         states:
+            new: ~
             cart: ~
             cart_locked: ~
             pending: ~
@@ -26,7 +27,7 @@ winzou_state_machine:
                 to: cart
             create:
                 from: [cart]
-                to: pending
+                to: new
             release:
                 from: [pending]
                 to: released

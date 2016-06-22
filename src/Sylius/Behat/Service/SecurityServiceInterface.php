@@ -11,6 +11,8 @@
 
 namespace Sylius\Behat\Service;
 
+use Sylius\Component\Core\Model\UserInterface;
+
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
@@ -22,4 +24,12 @@ interface SecurityServiceInterface
      * @throws \InvalidArgumentException
      */
     public function logIn($email);
+    
+    public function logOut();
+
+    /**
+     * @param UserInterface $user
+     * @param callable $action
+     */
+    public function performActionAs(UserInterface $user, callable $action);
 }
