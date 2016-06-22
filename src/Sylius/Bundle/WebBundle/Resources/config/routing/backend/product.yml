@@ -57,15 +57,6 @@ sylius_backend_product_update:
             form: sylius_product_legacy
             permission: true
 
-sylius_backend_product_revert:
-    path: /{id}/revert/{version}
-    methods: [PATCH]
-    defaults:
-        _controller: sylius.controller.product:revertAction
-        _sylius:
-            redirect: sylius_backend_product_show
-            permission: true
-
 sylius_backend_product_delete:
     path: /{id}
     methods: [DELETE]
@@ -74,15 +65,6 @@ sylius_backend_product_delete:
         _sylius:
             template: SyliusWebBundle:Backend/Misc:delete.html.twig
             redirect: sylius_backend_product_index
-            permission: true
-
-sylius_backend_product_delete_restore:
-    path: /{id}/restore
-    methods: [PATCH]
-    defaults:
-        _controller: sylius.controller.product:restoreAction
-        _sylius:
-            redirect: sylius_backend_product_show
             permission: true
 
 sylius_backend_product_history:

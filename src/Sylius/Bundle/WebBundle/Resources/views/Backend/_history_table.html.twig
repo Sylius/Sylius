@@ -21,7 +21,6 @@
             <th class="logged-at">{{ 'sylius.history.logged_at'|trans }}</th>
             <th class="data">{{ 'sylius.ui.data'|trans }}</th>
             <th class="author">{{ 'sylius.ui.author'|trans }}</th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -52,11 +51,6 @@
                 {% endif %}
             </td>
             <td>{{ log.username|default('unknown') }}</td>
-            <td>
-                {% if revert_route is defined and (log.version != 1 or length > 1) and not loop.first and not disabled is defined %}
-                    {{ buttons.patch(path(revert_route, {'id': log.objectId, 'version': log.version}), 'sylius.ui.revert'|trans) }}
-                {% endif %}
-            </td>
         </tr>
     {% endfor %}
     </tbody>

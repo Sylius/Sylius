@@ -15,15 +15,6 @@ sylius_backend_order_index:
             sortable: true
             permission: true
 
-sylius_backend_order_revert:
-    path: /{id}/revert/{version}
-    methods: [PATCH]
-    defaults:
-        _controller: sylius.controller.order:revertAction
-        _sylius:
-            redirect: sylius_backend_order_show
-            permission: true
-
 sylius_backend_order_delete:
     path: /{id}
     methods: [DELETE]
