@@ -46,7 +46,7 @@ Feature: Verifying account's email address
         And I have already verified my account
         Then I should be unable to resend the verification email
 
-    @todo
+    @ui
     Scenario: Receiving account verification email after registration
         When I register with email "ted@example.com" and password "aliceinwonderland"
         Then I should be logged in

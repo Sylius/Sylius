@@ -31,9 +31,8 @@
             <argument type="service" id="sylius.behat.cookie_setter" />
         </service>
 
-        <service id="sylius.behat.email_checker" class="Sylius\Behat\Service\Accessor\EmailChecker" scope="scenario" public="false">
-            <argument type="service" id="profiler" container="symfony" />
-            <argument type="service" id="mink.default_session" />
+        <service id="sylius.behat.email_checker" class="Sylius\Bundle\CoreBundle\Test\Services\EmailChecker" scope="scenario" public="false">
+            <argument type="string">%paths.base%/app/cache/test/spool/</argument>
         </service>
 
         <service id="sylius.behat.security" class="Sylius\Behat\Service\SecurityService" scope="scenario" public="false">

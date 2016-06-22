@@ -11,33 +11,26 @@
 
 namespace Sylius\Behat\Service\Accessor;
 
-use Behat\Mink\Session;
-use Symfony\Component\HttpKernel\Client;
-use Symfony\Component\HttpKernel\Profiler\Profiler;
+use Symfony\Component\Finder\Finder;
+use Symfony\Component\Finder\SplFileInfo;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
+ * @author Jan Góralski <jan.goralski@lakion.com>
  */
 class EmailChecker implements EmailCheckerInterface
 {
     /**
-     * @var Profiler
+     * @var string
      */
-    private $symfonyProfiler;
+    private $spoolDirectory;
 
     /**
-     * @var Session
+     * @param string $spoolDirectory
      */
-    private $session;
-
-    /**
-     * @param Profiler $symfonyProfiler
-     * @param Session $session
-     */
-    public function __construct(Profiler $symfonyProfiler, Session $session)
+    public function __construct($spoolDirectory)
     {
-        $this->symfonyProfiler = $symfonyProfiler;
-        $this->session = $session;
+        $this->spoolDirectory = $spoolDirectory;
     }
 
     /**
@@ -45,9 +38,9 @@ class EmailChecker implements EmailCheckerInterface
      */
     public function hasRecipient($recipient)
     {
-        $messages = $this->getMessages();
+        $messages = $this->getMessages($this->spoolDirectory);
         foreach ($messages as $message) {
-            if (array_key_exists($recipient, $message->getTo())) {
+            if (false !== strpos($message, $recipient)) {
                 return true;
             }
         }
@@ -56,47 +49,22 @@ class EmailChecker implements EmailCheckerInterface
     }
 
     /**
-     * @return \Swift_Mime_Message[]
+     * @param string $directory
      *
-     * @throws \Exception
+     * @return array
      */
-    private function getMessages()
+    private function getMessages($directory)
     {
-        /** @var Client $client */
-        $client = $this->getClient();
-        $client->followRedirects(false);
-        $messages = [];
-        $historySteps = 0;
+        $finder = new Finder();
+        $finder->files()->name('*.message')->in($directory);
+        $spools = [];
 
-        do {
-            try {
-                $client->back();
-            } catch (\LogicException $exception) {
-                throw new \Exception('No emails were found.');
-            }
-            $response = $client->getResponse();
-            $profile = $this->symfonyProfiler->loadProfileFromResponse($response);
-            if (false === $profile) {
-                continue;
-            }
-            $swiftMailerCollector = $profile->getCollector('swiftmailer');
-            $messages = array_merge($messages, $swiftMailerCollector->getMessages());
-            ++$historySteps;
-        } while (empty($messages));
-        $client->followRedirects();
-
-        for ($i = 0; $i < $historySteps; $i++) {
-            $client->forward();
+        /** @var SplFileInfo $file */
+        foreach($finder as $file) {
+            $spools[] = $file->getContents();
+            unlink($file->getRealPath());
         }
 
-        return $messages;
-    }
-
-    /**
-     * @return Client
-     */
-    private function getClient()
-    {
-        return $this->session->getDriver()->getClient();
+        return $spools;
     }
 }
