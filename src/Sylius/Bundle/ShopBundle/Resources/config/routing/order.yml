@@ -1,0 +1,23 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_shop_order_pay:
+    path: /{orderId}/pay
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.order:payAction
+        _sylius:
+            redirect: sylius_checkout_thank_you
+            after_pay:
+                route: sylius_shop_order_after_pay
+                parameters: { orderId: $orderId }
+
+sylius_shop_order_after_pay:
+    path: /{orderId}/after-pay
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.order:afterPayAction
+        _sylius:
+            redirect:
+                route: sylius_shop_order_pay
+                parameters: { orderId: $orderId }
