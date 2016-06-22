@@ -113,10 +113,10 @@
     </tfoot>
 </table>
 
-{% if order.additionalInformation is not empty %}
+{% if order.notes is not empty %}
     <div id="sylius-order-additional-information" class="well well-sm">
         <strong>{{ 'sylius.ui.additional_information'|trans }}</strong>:
-        {{ order.additionalInformation }}
+        {{ order.notes }}
     </div>
 {% endif %}
 

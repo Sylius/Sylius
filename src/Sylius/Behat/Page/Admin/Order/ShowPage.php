@@ -17,6 +17,7 @@ use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Routing\RouterInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -340,6 +341,17 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
+    public function hasNote($note)
+    {
+        $orderNotesElement = $this->getElement('order_notes');
+        Assert::notNull($orderNotesElement, 'Cannot find order notes');
+
+        return $orderNotesElement->getText() === $note;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
@@ -358,6 +370,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'taxes' => '#taxes',
             'total' => '#total',
             'order_state' => 'div.sub.header > span.ui.label',
+            'order_notes' => '#sylius-order-notes',
         ]);
     }
 

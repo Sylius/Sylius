@@ -210,4 +210,11 @@ interface ShowPageInterface extends SymfonyPageInterface
     public function cancelOrder();
 
     public function deleteOrder();
+
+    /**
+     * @param string $note
+     * 
+     * @return bool
+     */
+    public function hasNote($note);
 }

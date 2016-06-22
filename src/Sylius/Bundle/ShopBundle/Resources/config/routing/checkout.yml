@@ -79,4 +79,9 @@ sylius_shop_checkout_summary:
             repository:
                 method: find
                 arguments: [expr:service('sylius.cart_provider').getCart()]
+            state_machine:
+                graph: sylius_order
+                transition: create
             redirect: sylius_shop_homepage
+            form:
+                type: sylius_checkout_summary_note

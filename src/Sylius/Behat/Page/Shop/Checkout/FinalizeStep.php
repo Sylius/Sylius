@@ -11,6 +11,7 @@
 
 namespace Sylius\Behat\Page\Shop\Checkout;
 
+use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\SymfonyPage;
 
 /**
@@ -23,7 +24,11 @@ class FinalizeStep extends SymfonyPage implements FinalizeStepInterface
      */
     public function confirmOrder()
     {
-        $this->getDocument()->clickLink('Place order');
+        try {
+            $this->getDocument()->clickLink('Place order');
+        } catch (ElementNotFoundException $exception) {
+            $this->getDocument()->pressButton('Place order');
+        }
     }
 
     /**

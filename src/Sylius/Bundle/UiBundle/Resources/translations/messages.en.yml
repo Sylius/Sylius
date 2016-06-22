@@ -6,6 +6,7 @@ sylius:
             remember_me: Remember me
         option:
             name: Name
+        notes: Extra notes
     ui:
         about: About
         account_credentials: Account credentials
@@ -48,6 +49,7 @@ sylius:
         clear_cart: Clear cart
         update_cart: Update cart
         apply_coupon: Apply coupon
+        extra_notes: Extra notes
         edit_your_items_apply_coupon_or_proceed_to_the_checkout: Edit your items, apply coupon or proceed to the checkout
         create_an_account: Create an account
         summary: Summary
