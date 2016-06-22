@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\CoreBundle\Form\Type\Checkout;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -29,6 +28,20 @@ class ShippingStepType extends AbstractResourceType
         $builder
             ->add('shipments', 'collection', [
                 'type' => 'sylius_checkout_shipment',
+            ])
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        parent::configureOptions($resolver);
+
+        $resolver
+            ->setDefaults([
+                'criteria' => null,
             ])
         ;
     }
