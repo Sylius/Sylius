@@ -160,6 +160,6 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             (stripos($elementText, $street) !== false) &&
             (stripos($elementText, $city) !== false) &&
             (stripos($elementText, $countryName.' '.$postcode) !== false)
-            ;
+        ;
     }
 }
