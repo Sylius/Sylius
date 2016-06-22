@@ -15,6 +15,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Shop\Checkout\AddressingPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\PaymentPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\ShippingPageInterface;
+use Sylius\Behat\Page\Shop\Checkout\SummaryPageInterface;
 use Sylius\Behat\Page\Shop\Order\OrderPaymentsPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\AddressingStepInterface;
 use Sylius\Behat\Page\Shop\Checkout\FinalizeStepInterface;
@@ -22,6 +23,7 @@ use Sylius\Behat\Page\Shop\Checkout\PaymentStepInterface;
 use Sylius\Behat\Page\Shop\Checkout\SecurityStepInterface;
 use Sylius\Behat\Page\Shop\Checkout\ShippingStepInterface;
 use Sylius\Behat\Page\Shop\Checkout\ThankYouPageInterface;
+use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\UserInterface;
@@ -91,6 +93,11 @@ final class CheckoutContext implements Context
     private $shippingPage;
 
     /**
+     * @var SummaryPageInterface
+     */
+    private $summaryPage;
+
+    /**
      * @var OrderRepositoryInterface
      */
     private $orderRepository;
@@ -104,6 +111,7 @@ final class CheckoutContext implements Context
      * @param ShippingPageInterface $shippingPage
      * @param PaymentStepInterface $checkoutPaymentStep
      * @param PaymentPageInterface $paymentPage
+     * @param SummaryPageInterface $summaryPage
      * @param FinalizeStepInterface $checkoutFinalizeStep
      * @param ThankYouPageInterface $checkoutThankYouPage
      * @param OrderPaymentsPageInterface $orderPaymentsPage
@@ -118,6 +126,7 @@ final class CheckoutContext implements Context
         ShippingPageInterface $shippingPage,
         PaymentStepInterface $checkoutPaymentStep,
         PaymentPageInterface $paymentPage,
+        SummaryPageInterface $summaryPage,
         FinalizeStepInterface $checkoutFinalizeStep,
         ThankYouPageInterface $checkoutThankYouPage,
         OrderPaymentsPageInterface $orderPaymentsPage,
@@ -131,6 +140,7 @@ final class CheckoutContext implements Context
         $this->shippingPage = $shippingPage;
         $this->checkoutPaymentStep = $checkoutPaymentStep;
         $this->paymentPage = $paymentPage;
+        $this->summaryPage = $summaryPage;
         $this->checkoutFinalizeStep = $checkoutFinalizeStep;
         $this->checkoutThankYouPage = $checkoutThankYouPage;
         $this->orderPaymentsPage = $orderPaymentsPage;
@@ -160,6 +170,13 @@ final class CheckoutContext implements Context
      */
     public function iSpecifyTheShippingAddressAs(AddressInterface $address)
     {
+        $key = sprintf(
+            'shipping_address_%s_%s',
+            strtolower($address->getFirstName()),
+            strtolower($address->getLastName())
+        );
+        $this->sharedStorage->set($key, $address);
+
         $this->addressingPage->specifyShippingAddress($address);
     }
 
@@ -169,6 +186,14 @@ final class CheckoutContext implements Context
      */
     public function iSpecifyTheBillingAddressAs(AddressInterface $address)
     {
+        $this->iChooseTheDifferentBillingAddress();
+        $key = sprintf(
+            'billing_address_%s_%s',
+            strtolower($address->getFirstName()),
+            strtolower($address->getLastName())
+        );
+        $this->sharedStorage->set($key, $address);
+
         $this->addressingPage->specifyBillingAddress($address);
     }
 
@@ -178,7 +203,11 @@ final class CheckoutContext implements Context
     public function iSpecifiedTheShippingAddress(AddressInterface $address)
     {
         $this->addressingPage->open();
-        $this->addressingPage->specifyShippingAddress($address);
+        $this->iSpecifyTheShippingAddressAs($address);
+
+        $key = sprintf('billing_address_%s_%s', strtolower($address->getFirstName()), strtolower($address->getLastName()));
+        $this->sharedStorage->set($key, $address);
+
         $this->iCompleteTheAddressingStep();
     }
 
@@ -401,6 +430,17 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Then I should be on the checkout summary step
+     */
+    public function iShouldBeOnTheCheckoutSummaryStep()
+    {
+        Assert::true(
+            $this->summaryPage->isOpen(),
+            'Checkout summary page should be opened, but it is not.'
+        );
+    }
+
+    /**
      * @Then I should see two cancelled payments and new one ready to be paid
      */
     public function iShouldSeeTwoCancelledPaymentsAndNewOneReadyToBePaid()
@@ -463,6 +503,39 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Then my order's shipping address should be to :fullName
+     */
+    public function iShouldSeeThisShippingAddressAsShippingAddress($fullName)
+    {
+        $address = $this->sharedStorage->get('shipping_address_'.StringInflector::nameToLowercaseCode($fullName));
+        Assert::true(
+            $this->summaryPage->hasShippingAddress($address),
+            'Shipping address is improper.'
+        );
+    }
+
+    /**
+     * @Then my order's billing address should be to :fullName
+     */
+    public function iShouldSeeThisBillingAddressAsBillingAddress($fullName)
+    {
+        $address = $this->sharedStorage->get('billing_address_'.StringInflector::nameToLowercaseCode($fullName));
+        Assert::true(
+            $this->summaryPage->hasBillingAddress($address),
+            'Billing address is improper.'
+        );
+    }
+
+    /**
+     * @Then address to :fullName should be used for both shipping and billing of my order`
+     */
+    public function iShouldSeeThisShippingAddressAsShippingAndBillingAddress($fullName)
+    {
+        $this->iShouldSeeThisShippingAddressAsShippingAddress($fullName);
+        $this->iShouldSeeThisBillingAddressAsBillingAddress($fullName);
+    }
+
+    /**
      * @Given I am at the checkout payment step
      */
     public function iAmAtTheCheckoutPaymentStep()
@@ -495,6 +568,17 @@ final class CheckoutContext implements Context
             $this->paymentPage->hasPaymentMethod($paymentMethodName),
             sprintf('Payment method "%s" should not be available but it does.', $paymentMethodName)
         );
+    }
+
+    /**
+     * @When I proceed order with :shippingMethod shipping method and :paymentMethod payment
+     */
+    public function iCompleteOrderWithShippingMethodAndPayment($shippingMethod, $paymentMethod)
+    {
+        $this->iSelectShippingMethod($shippingMethod);
+        $this->iCompleteTheShippingStep();
+        $this->iSelectPaymentMethod($paymentMethod);
+        $this->iCompleteThePaymentStep();
     }
 
     /**

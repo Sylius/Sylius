@@ -21,6 +21,7 @@
         <parameter key="sylius.behat.page.shop.checkout.security_step.class">Sylius\Behat\Page\Shop\Checkout\SecurityStep</parameter>
         <parameter key="sylius.behat.page.shop.checkout.shipping.class">Sylius\Behat\Page\Shop\Checkout\ShippingPage</parameter>
         <parameter key="sylius.behat.page.shop.checkout.shipping_step.class">Sylius\Behat\Page\Shop\Checkout\ShippingStep</parameter>
+        <parameter key="sylius.behat.page.shop.checkout.summary.class">Sylius\Behat\Page\Shop\Checkout\SummaryPage</parameter>
         <parameter key="sylius.behat.page.shop.checkout.thank_you.class">Sylius\Behat\Page\Shop\Checkout\ThankYouPage</parameter>
     </parameters>
 
@@ -33,6 +34,7 @@
         <service id="sylius.behat.page.shop.checkout.security_step" class="%sylius.behat.page.shop.checkout.security_step.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
         <service id="sylius.behat.page.shop.checkout.shipping" class="%sylius.behat.page.shop.checkout.shipping.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
         <service id="sylius.behat.page.shop.checkout.shipping_step" class="%sylius.behat.page.shop.checkout.shipping_step.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
+        <service id="sylius.behat.page.shop.checkout.summary" class="%sylius.behat.page.shop.checkout.summary.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
         <service id="sylius.behat.page.shop.checkout.thank_you" class="%sylius.behat.page.shop.checkout.thank_you.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
     </services>
 </container>

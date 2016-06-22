@@ -1,0 +1,91 @@
+{% extends '@SyliusShop/Checkout/layout.html.twig' %}
+
+{% block content %}
+    {% include '@SyliusShop/Checkout/_header.html.twig' %}
+    {% include '@SyliusShop/Checkout/_steps.html.twig' with { 'active': 'summary' } %}
+    <div class="ui padded segment">
+        <table class="ui celled table">
+            <thead>
+            <tr>
+                <th>Item</th>
+                <th>Price</th>
+                <th>Qty</th>
+                <th>Subtotal</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>Simple T-Shirt</td>
+                <td>$14.00</td>
+                <td class="center aligned">
+                    1
+                </td>
+                <td class="right aligned">$14.00</td>
+            </tr>
+            <tr>
+                <td>Mug Bomb</td>
+                <td>$20.00</td>
+                <td class="center aligned">
+                    2
+                </td>
+                <td class="right aligned">$40.00</td>
+            </tr>
+            <tr>
+                <td>Sticker Kiki</td>
+                <td>$5.00</td>
+                <td class="center aligned">
+                    1
+                </td>
+                <td class="right aligned">$10.00</td>
+            </tr>
+            <tr>
+                <td colspan="4" class="right aligned">
+                    Tax: $10.00
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" class="right aligned" style="font-size: 1.5em;">
+                    Total: $110.00
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="ui two column stackable grid" id="addresses">
+            <div class="column">
+                <h4 class="ui dividing header">{{ 'sylius.ui.shipping_address'|trans }}</h4>
+                {% include '@SyliusShop/Checkout/_address.html.twig' with {'address': order.shippingAddress} %}
+            </div>
+            <div class="column">
+                <h4 class="ui dividing header">{{ 'sylius.ui.billing_address'|trans }}</h4>
+                {% include '@SyliusShop/Checkout/_address.html.twig' with {'address': order.billingAddress} %}
+            </div>
+        </div>
+        <h4 class="ui dividing header">Shipping and payment methods</h4>
+        <div class="ui two column stackable grid">
+            <div class="column">
+                <div class="ui large icon message">
+                    <i class="truck icon"></i>
+                    <div class="content">
+                        <div class="header">
+                            FedEx Express
+                        </div>
+                        <p>Get the best delivery service and get your goods next day.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="column">
+                <div class="ui large icon message">
+                    <i class="payment icon"></i>
+                    <div class="content">
+                        <div class="header">
+                            Payment with cash
+                        </div>
+                        <p>Paying with cash on delivery.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui hidden divider"></div>
+        <button type="submit" class="ui large primary icon labeled button"><i class="check icon"></i> Place order</button>
+    </div>
+{% endblock %}

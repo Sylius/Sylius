@@ -24,7 +24,6 @@ Feature: Addressing an order
         And I am at the checkout addressing step
         When I specify the email as "eddard.stark@example.com"
         And I specify the shipping address as "Ankh Morpork", "Frost Alley", "90210", "France" for "Jon Snow"
-        And I choose the different billing address
         And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "France" for "Eddard Stark"
         And I complete the addressing step
         Then I should be on the checkout shipping step

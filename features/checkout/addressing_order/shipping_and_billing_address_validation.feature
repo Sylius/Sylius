@@ -24,7 +24,6 @@ Feature: Order addressing validation
         Given I have product "PHP T-Shirt" in the cart
         And I am at the checkout addressing step
         When I specify the shipping address as "Ankh Morpork", "Frost Alley", "90210", "France" for "Jon Snow"
-        And I choose the different billing address
         And I do not specify any billing address information
         And I try to complete the addressing step
         Then I should be notified that the "first name" and the "last name" in billing details are required
