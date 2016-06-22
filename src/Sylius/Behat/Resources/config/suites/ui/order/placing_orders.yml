@@ -3,16 +3,16 @@
 
 default:
     suites:
-        ui_making_orders:
+        ui_placing_orders:
             contexts_as_services:
                 - sylius.behat.context.hook.doctrine_orm
 
                 - sylius.behat.context.setup.channel
-                - sylius.behat.context.setup.user
                 - sylius.behat.context.setup.payment
                 - sylius.behat.context.setup.product
                 - sylius.behat.context.setup.security
                 - sylius.behat.context.setup.shipping
+                - sylius.behat.context.setup.user
 
                 - sylius.behat.context.transform.customer
                 - sylius.behat.context.transform.lexical
@@ -24,4 +24,4 @@ default:
                 - sylius.behat.context.ui.shop.cart
 
             filters:
-                tags: "@making_orders && @ui"
+                tags: "@placing_orders && @ui"

@@ -383,7 +383,7 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @When /^I confirm my order$/
+     * @When I confirm my order
      */
     public function iConfirmMyOrder()
     {

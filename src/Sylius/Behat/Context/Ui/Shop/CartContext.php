@@ -243,9 +243,9 @@ final class CartContext implements Context
     }
 
     /**
-     * @Given /^(this user) has (this product) in the cart$/
+     * @Given /^(this user) has ("[^"]+" product) in the cart$/
      */
-    public function heHasThisProductInTheCart(UserInterface $user, ProductInterface $product)
+    public function thisUserHasProductInTheCart(UserInterface $user, ProductInterface $product)
     {
         $this->securityService->performActionAs($user, function () use ($product) {
             $this->iAddProductToTheCart($product);
