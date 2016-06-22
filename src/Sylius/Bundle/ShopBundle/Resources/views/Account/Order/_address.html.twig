@@ -1,0 +1,16 @@
+<address>
+    {% if address.company is not null %}
+        <strong>{{ address.company }}</strong><br>
+    {% endif %}
+    <strong>{{ address.firstName }} {{ address.lastName }}</strong><br>
+    {% if address.phoneNumber is not null %}
+        {{ address.phoneNumber }}<br/>
+    {% endif %}
+    {{ address.street }}<br/>
+    {{ address.city }}<br/>
+    {% if address.provinceCode %}
+        {{ address.provinceCode|sylius_province_abbreviation }}<br/>
+    {% endif %}
+    <i class="{{ address.countryCode|lower }} flag"></i>
+    {{ address.countryCode|sylius_country_name|upper }} {{ address.postcode }}
+</address>

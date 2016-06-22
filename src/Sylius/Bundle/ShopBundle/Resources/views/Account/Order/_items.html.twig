@@ -1,0 +1,50 @@
+{% set orderPromotionAdjustment = constant('Sylius\\Component\\Core\\Model\\AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT') %}
+
+<table class="ui celled table" id="sylius-customer-order-items">
+    <thead>
+    <tr>
+        <th>{{ 'sylius.ui.item'|trans }}</th>
+        <th>{{ 'sylius.ui.price'|trans }}</th>
+        <th>{{ 'sylius.ui.qty'|trans }}</th>
+        <th>{{ 'sylius.ui.subtotal'|trans }}</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for item in order.items %}
+        <tr>
+            <td>{{ item.product }}</td>
+            <td>{{ item.unitPrice|sylius_price(order.currencyCode) }}</td>
+            <td class="center aligned">{{ item.quantity }}</td>
+            <td class="right aligned">{{ item.subtotal|sylius_price(order.currencyCode) }}</td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    <tfoot>
+    <tr>
+        <th colspan="4" class="right aligned" id="subtotal">
+            {{ 'sylius.ui.subtotal'|trans }}: {{ order.itemsTotal|sylius_price(order.currencyCode) }}
+        </th>
+    </tr>
+    <tr>
+        <td colspan="4" class="right aligned">
+            {{ 'sylius.ui.shipping_total'|trans }}: {{ order.shippingTotal|sylius_price(order.currencyCode) }}
+        </td>
+    </tr>
+    <tr>
+        <td colspan="4" class="right aligned">
+            {{ 'sylius.ui.tax_total'|trans }}: {{ order.taxTotal|sylius_price(order.currencyCode) }}
+        </td>
+    </tr>
+    <tr>
+        <td colspan="4" class="right aligned">
+            {% set orderDiscount = order.adjustmentsTotalRecursively(orderPromotionAdjustment) %}
+            {{ 'sylius.ui.promotion_total'|trans }}: {% if not orderDiscount == 0 %}-{% endif %}{{ (-1 * orderDiscount)|sylius_price(order.currencyCode) }}
+        </td>
+    </tr>
+    <tr>
+        <td colspan="4" class="right aligned" style="font-size: 1.5em;" id="total">
+            {{ 'sylius.ui.total'|trans }}: {{ order.total|sylius_price(order.currencyCode) }}
+        </td>
+    </tr>
+    </tfoot>
+</table>

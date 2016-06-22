@@ -1,0 +1,17 @@
+{% import '@SyliusUi/Macro/labels.html.twig' as label %}
+
+<div class="column">
+    <div class="ui large icon message">
+        <i class="payment icon"></i>
+        <div class="content">
+            {% for payment in order.payments %}
+                <div class="header">
+                    {{ payment.method }}
+                </div>
+                <p>
+                    {{ payment.amount|sylius_money(payment.currencyCode) }}
+                </p>
+            {% endfor %}
+        </div>
+    </div>
+</div>

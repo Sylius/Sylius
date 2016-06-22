@@ -165,6 +165,7 @@ sylius:
         not_in: Not in
         onhold: Onhold
         or: or
+        order_details: Details of your order
         order_history: Order history
         order_total: Order total
         partially_shipped: Partially shipped
@@ -189,6 +190,7 @@ sylius:
         select_taxon: Select taxon
         shipped: Shipped
         shipping: Shipping
+        shipping_and_payment_methods: Shipping and payment methods
         shipping_methods: Shipping methods
         ship_to: Ship to
         show: Show

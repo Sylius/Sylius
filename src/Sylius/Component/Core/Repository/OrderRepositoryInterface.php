@@ -143,4 +143,12 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
      * @return OrderInterface[]
      */
     public function findCompleted(array $sorting = [], $limit = 5);
+
+    /**
+     * @param string $number
+     * @param CustomerInterface $customer
+     *
+     * @return OrderInterface|null
+     */
+    public function findOneByNumberAndCustomer($number, CustomerInterface $customer);
 }
