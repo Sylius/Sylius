@@ -126,6 +126,22 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     /**
      * {@inheritdoc}
      */
+    public function hasPromotionTotal($promotionTotal)
+    {
+        return false !== strpos($this->getElement('promotion_total')->getText(), $promotionTotal);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasPromotion($promotionName)
+    {
+        return false !== stripos($this->getElement('promotion_discounts')->getText(), $promotionName);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
@@ -134,6 +150,8 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
             'items_table' => '#items table',
             'product_row' => 'tbody tr:contains("%name%")',
             'order_total' => 'td:contains("Total")',
+            'promotion_total' => '#promotion-total',
+            'promotion_discounts' => '#promotion-discounts',
         ]);
     }
 
