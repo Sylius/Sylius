@@ -74,7 +74,7 @@ class ReportController extends ResourceController
             return $this->container->get('templating')->renderResponse('SyliusReportBundle::noDataTemplate.html.twig');
         }
 
-        $configuration = $request->query->get('configuration', $configuration);
+        $configuration = ($request->query->has('configuration')) ? $request->query->get('configuration', $configuration) : $report->getDataFetcherConfiguration();
         $configuration['baseCurrency'] = $currencyProvider->getBaseCurrency();
 
         $data = $this->getReportDataFetcher()->fetch($report, $configuration);
