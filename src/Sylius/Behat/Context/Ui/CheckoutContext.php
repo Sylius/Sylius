@@ -636,6 +636,17 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Given my tax total should be :taxTotal
+     */
+    public function myTaxTotalShouldBe($taxTotal)
+    {
+        Assert::true(
+            $this->summaryPage->hasTaxTotal($taxTotal),
+            sprintf('The tax total should be %s, but it does not.', $taxTotal)
+        );
+    }
+
+    /**
      * @param string $type
      * @param string $element
      * @param string $expectedMessage

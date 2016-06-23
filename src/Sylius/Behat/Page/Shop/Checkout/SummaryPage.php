@@ -126,6 +126,14 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     /**
      * {@inheritdoc}
      */
+    public function hasTaxTotal($taxTotal)
+    {
+        return false !== strpos($this->getElement('tax_total')->getText(), $taxTotal);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
@@ -134,6 +142,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
             'items_table' => '#items table',
             'product_row' => 'tbody tr:contains("%name%")',
             'order_total' => 'td:contains("Total")',
+            'tax_total' => '#tax-total',
         ]);
     }
 

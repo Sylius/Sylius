@@ -56,4 +56,11 @@ interface SummaryPageInterface extends SymfonyPageInterface
      * @return bool
      */
     public function hasOrderTotal($total);
+
+    /**
+     * @param string $taxTotal
+     * 
+     * @return bool
+     */
+    public function hasTaxTotal($taxTotal);
 }
