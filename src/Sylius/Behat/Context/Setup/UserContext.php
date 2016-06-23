@@ -143,7 +143,7 @@ final class UserContext implements Context
     }
 
     /**
-     * @Given the store has customer service account identified by :email
+     * @Given there is an administrator identified by :email
      */
     public function theStoreHasCustomerServiceAccountIdentifiedBy($email)
     {

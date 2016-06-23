@@ -43,7 +43,6 @@ final class CustomerContext implements Context
 
     /**
      * @Transform :customer
-     * @Transform /^made by "[^"]+"$/
      */
     public function getOrCreateCustomerByEmail($email)
     {

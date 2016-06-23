@@ -17,7 +17,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class SummaryNoteType extends AbstractResourceType
+class SummaryType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}
@@ -35,6 +35,6 @@ class SummaryNoteType extends AbstractResourceType
      */
     public function getName()
     {
-        return 'sylius_checkout_summary_note';
+        return 'sylius_checkout_summary';
     }
 }

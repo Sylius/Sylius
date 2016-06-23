@@ -13,16 +13,16 @@ namespace spec\Sylius\Bundle\CoreBundle\Form\Type\Checkout;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\CoreBundle\Form\Type\Checkout\SummaryNoteType;
+use Sylius\Bundle\CoreBundle\Form\Type\Checkout\SummaryType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * @mixin SummaryNoteType
+ * @mixin SummaryType
  * 
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class SummaryNoteTypeSpec extends ObjectBehavior
+class SummaryTypeSpec extends ObjectBehavior
 {
     function let()
     {
@@ -31,7 +31,7 @@ class SummaryNoteTypeSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Form\Type\Checkout\SummaryNoteType');
+        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Form\Type\Checkout\SummaryType');
     }
 
     function it_is_a_resource_form_type()
@@ -48,6 +48,6 @@ class SummaryNoteTypeSpec extends ObjectBehavior
 
     function it_has_name()
     {
-        $this->getName()->shouldReturn('sylius_checkout_summary_note');
+        $this->getName()->shouldReturn('sylius_checkout_summary');
     }
 }

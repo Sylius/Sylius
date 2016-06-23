@@ -486,4 +486,10 @@ class OrderSpec extends ObjectBehavior
         $this->clearItems();
         $this->shouldBeEmpty();
     }
+
+    function it_has_notes()
+    {
+        $this->setNotes('something squishy');
+        $this->getNotes()->shouldReturn('something squishy');
+    }
 }

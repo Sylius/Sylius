@@ -24,7 +24,7 @@
         <parameter key="sylius.checkout_form.shipping.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\ShippingStepType</parameter>
         <parameter key="sylius.checkout_form.shop_addressing.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\AddressingType</parameter>
         <parameter key="sylius.checkout_form.shop_shipping.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\ShippingType</parameter>
-        <parameter key="sylius.checkout_form.summary_note.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\SummaryNoteType</parameter>
+        <parameter key="sylius.checkout_form.summary.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\SummaryType</parameter>
 
         <parameter key="sylius.form.type.image.class">Sylius\Bundle\CoreBundle\Form\Type\ImageType</parameter>
         <parameter key="sylius.form.type.list.class">Sylius\Bundle\CoreBundle\Form\Type\ListType</parameter>
@@ -94,9 +94,9 @@
             </argument>
             <tag name="form.type" alias="sylius_checkout_payment_step" />
         </service>
-        <service id="sylius_checkout_form.summary_note" class="%sylius.checkout_form.summary_note.class%">
+        <service id="sylius_checkout_form.summary" class="%sylius.checkout_form.summary.class%">
             <argument>%sylius.model.cart.class%</argument>
-            <tag name="form.type" alias="sylius_checkout_summary_note" />
+            <tag name="form.type" alias="sylius_checkout_summary" />
         </service>
 
         <service id="sylius.form.type.cart" class="%sylius.form.type.cart.class%">

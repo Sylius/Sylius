@@ -84,4 +84,4 @@ sylius_shop_checkout_summary:
                 transition: create
             redirect: sylius_shop_homepage
             form:
-                type: sylius_checkout_summary_note
+                type: sylius_checkout_summary

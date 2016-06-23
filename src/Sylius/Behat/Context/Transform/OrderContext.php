@@ -65,11 +65,10 @@ final class OrderContext implements Context
         $customer = $this->customerRepository->findOneBy(['email' => $email]);
         Assert::notNull($customer, sprintf('Cannot find customer with email %s.', $email));
 
-        $order = $this->orderRepository->findByCustomer($customer);
-        $order = end($order);
-        Assert::isInstanceOf($order, OrderInterface::class, sprintf('Cannot find order for %s.', $customer->getFullName()));
+        $orders = $this->orderRepository->findByCustomer($customer);
+        Assert::notEmpty($orders);
 
-        return $order;
+        return end($orders);
     }
 
     /**

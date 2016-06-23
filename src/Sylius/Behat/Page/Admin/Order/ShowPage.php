@@ -17,7 +17,6 @@ use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Routing\RouterInterface;
-use Webmozart\Assert\Assert;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -333,20 +332,19 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getRouteName()
+    public function hasNote($note)
     {
-        return 'sylius_admin_order_show';
+        $orderNotesElement = $this->getElement('order_notes');
+
+        return $orderNotesElement->getText() === $note;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function hasNote($note)
+    public function getRouteName()
     {
-        $orderNotesElement = $this->getElement('order_notes');
-        Assert::notNull($orderNotesElement, 'Cannot find order notes');
-
-        return $orderNotesElement->getText() === $note;
+        return 'sylius_admin_order_show';
     }
 
     /**
