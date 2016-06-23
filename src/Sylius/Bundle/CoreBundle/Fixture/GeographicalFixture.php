@@ -142,7 +142,7 @@ final class GeographicalFixture extends AbstractFixture
         $zoneNode
             ->performNoDeepMerging()
             ->children()
-                ->scalarNode('name')->isRequired()->cannotBeEmpty()->end()
+                ->scalarNode('name')->cannotBeEmpty()->end()
                 ->arrayNode('countries')->prototype('scalar')->end()->end()
                 ->arrayNode('zones')->prototype('scalar')->end()->end()
                 ->arrayNode('provinces')->prototype('scalar')->end()->end()

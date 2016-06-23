@@ -12,15 +12,12 @@
 namespace Sylius\Bundle\CoreBundle\Fixture;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
+use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Bundle\FixturesBundle\Fixture\FixtureInterface;
-use Sylius\Component\Resource\Model\ResourceInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Webmozart\Assert\Assert;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
@@ -30,28 +27,43 @@ abstract class AbstractResourceFixture implements FixtureInterface
     /**
      * @var ObjectManager
      */
-    private $resourceManager;
+    private $objectManager;
 
     /**
-     * @var string
+     * @var ExampleFactoryInterface
      */
-    private $nodeName;
+    private $exampleFactory;
 
     /**
-     * @var string|null
+     * @var OptionsResolver
      */
-    private $identifierField;
+    private $optionsResolver;
 
     /**
-     * @param ObjectManager $resourceManager
-     * @param string $nodeName
-     * @param string|null $identifierField
+     * @param ObjectManager $objectManager
+     * @param ExampleFactoryInterface $exampleFactory
      */
-    public function __construct(ObjectManager $resourceManager, $nodeName, $identifierField = null)
+    public function __construct(ObjectManager $objectManager, ExampleFactoryInterface $exampleFactory)
     {
-        $this->resourceManager = $resourceManager;
-        $this->nodeName = $nodeName;
-        $this->identifierField = $identifierField;
+        $this->objectManager = $objectManager;
+        $this->exampleFactory = $exampleFactory;
+
+        $this->optionsResolver =
+            (new OptionsResolver())
+                ->setDefault('random', 0)
+                ->setAllowedTypes('random', 'int')
+                ->setDefault('prototype', [])
+                ->setAllowedTypes('prototype', 'array')
+                ->setDefault('custom', [])
+                ->setAllowedTypes('custom', 'array')
+                ->setNormalizer('custom', function (Options $options, array $custom) {
+                    if ($options['random'] <= 0) {
+                        return $custom;
+                    }
+
+                    return array_merge($custom, array_fill(0, $options['random'], $options['prototype']));
+                })
+        ;
     }
 
     /**
@@ -59,25 +71,24 @@ abstract class AbstractResourceFixture implements FixtureInterface
      */
     final public function load(array $options)
     {
-        $optionsResolver = $this->createConfiguredOptionsResolver($options);
+        $options = $this->optionsResolver->resolve($options);
 
         $i = 0;
-        $resourcesOptions = array_merge($options[$this->nodeName], $this->generateResourcesOptions($options['random']));
-        foreach ($resourcesOptions as $resourceOptions) {
-            $resource = $this->loadResource($optionsResolver->resolve($resourceOptions));
+        foreach ($options['custom'] as $resourceOptions) {
+            $resource = $this->exampleFactory->create($resourceOptions);
 
-            $this->resourceManager->persist($resource);
+            $this->objectManager->persist($resource);
 
             ++$i;
 
             if (0 === ($i % 10)) {
-                $this->resourceManager->flush();
-                $this->resourceManager->clear();
+                $this->objectManager->flush();
+                $this->objectManager->clear();
             }
         }
 
-        $this->resourceManager->flush();
-        $this->resourceManager->clear();
+        $this->objectManager->flush();
+        $this->objectManager->clear();
     }
 
     /**
@@ -91,45 +102,13 @@ abstract class AbstractResourceFixture implements FixtureInterface
         $optionsNode->children()->integerNode('random')->min(0)->defaultValue(0);
 
         /** @var ArrayNodeDefinition $resourcesNode */
-        $resourcesNode = $optionsNode->children()->arrayNode($this->nodeName);
+        $resourcesNode = $optionsNode->children()->arrayNode('custom');
 
         /** @var ArrayNodeDefinition $resourceNode */
-        $resourceNode = $resourcesNode
-            ->requiresAtLeastOneElement()
-            ->prototype('array')
-        ;
-
-        if (null !== $this->identifierField) {
-            $resourceNode
-                ->children()
-                ->scalarNode($this->identifierField)
-                ->isRequired()
-                ->cannotBeEmpty()
-            ;
-
-            $resourceNode
-                ->beforeNormalization()
-                ->ifString()
-                ->then(function ($identifier) {
-                    return [$this->identifierField => $identifier];
-                })
-            ;
-        }
-
-        $resourceNode->ignoreExtraKeys(false);
-
-        $this->configureOptionsNode($optionsNode);
+        $resourceNode = $resourcesNode->requiresAtLeastOneElement()->prototype('array');
         $this->configureResourceNode($resourceNode);
 
         return $treeBuilder;
-    }
-
-    /**
-     * @param ArrayNodeDefinition $optionsNode
-     */
-    protected function configureOptionsNode(ArrayNodeDefinition $optionsNode)
-    {
-        // empty
     }
 
     /**
@@ -138,123 +117,5 @@ abstract class AbstractResourceFixture implements FixtureInterface
     protected function configureResourceNode(ArrayNodeDefinition $resourceNode)
     {
         // empty
-    }
-
-    /**
-     * @param array $options
-     * @param OptionsResolver $optionsResolver
-     */
-    protected function configureResourceOptionsResolver(array $options, OptionsResolver $optionsResolver)
-    {
-        // empty
-    }
-
-    /**
-     * Normalizes empty array to all resources.
-     * Normalizes identifiers array to matched resources.
-     *
-     * @param RepositoryInterface $repository
-     * @param string $searchedField
-     *
-     * @return \Closure
-     */
-    final protected static function createResourcesNormalizer(RepositoryInterface $repository, $searchedField = 'code')
-    {
-        return function (Options $options, array $identifiers) use ($repository, $searchedField) {
-            if (0 === count($identifiers)) {
-                return $repository->findAll();
-            }
-
-            $resources = [];
-            foreach ($identifiers as $identifier) {
-                $resource = $repository->findOneBy([$searchedField => $identifier]);
-
-                Assert::notNull($resource);
-
-                $resources[] = $resource;
-            }
-
-            return $resources;
-        };
-    }
-
-    /**
-     * Normalizes empty array to all resources.
-     * Normalizes identifiers array to matched resources.
-     *
-     * @param RepositoryInterface $repository
-     * @param int $limit
-     * @param string $searchedField
-     *
-     * @return \Closure
-     */
-    final protected static function createLimitedResourcesNormalizer(RepositoryInterface $repository, $limit = 2, $searchedField = 'code')
-    {
-        return function (Options $options, array $identifiers) use ($repository, $limit, $searchedField) {
-            $nestedNormalizer = static::createResourcesNormalizer($repository, $searchedField);
-
-            $resources = $nestedNormalizer($options, $identifiers);
-
-            shuffle($resources);
-
-            return array_splice($resources, 0, $limit);
-        };
-    }
-
-    /**
-     * Normalizes null to a random resource.
-     * Normalizes identifier to matched resource.
-     *
-     * @param RepositoryInterface $repository
-     * @param string $searchedField
-     *
-     * @return \Closure
-     */
-    final protected static function createResourceNormalizer(RepositoryInterface $repository, $searchedField = 'code')
-    {
-        return function (Options $options, $identifier) use ($repository, $searchedField) {
-            if (null === $identifier) {
-                $resources = $repository->findAll();
-
-                Assert::notEmpty($resources);
-
-                return $resources[array_rand($resources)];
-            }
-
-            $resource = $repository->findOneBy([$searchedField => $identifier]);
-
-            Assert::notNull($resource);
-
-            return $resource;
-        };
-    }
-
-    /**
-     * @param array $options
-     *
-     * @return ResourceInterface
-     */
-    abstract protected function loadResource(array $options);
-
-    /**
-     * @param int $amount
-     *
-     * @return array
-     */
-    abstract protected function generateResourcesOptions($amount);
-
-    /**
-     * @param array $options
-     *
-     * @return OptionsResolver
-     */
-    private function createConfiguredOptionsResolver(array $options)
-    {
-        unset($options[$this->nodeName]);
-
-        $optionsResolver = new OptionsResolver();
-        $this->configureResourceOptionsResolver($options, $optionsResolver);
-
-        return $optionsResolver;
     }
 }

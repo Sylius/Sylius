@@ -19,7 +19,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class LocaleFixtureConfigurationTest extends \PHPUnit_Framework_TestCase
+final class LocaleFixtureTest extends \PHPUnit_Framework_TestCase
 {
     use ConfigurationTestCaseTrait;
 

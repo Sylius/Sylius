@@ -38,102 +38,115 @@
         </service>
 
         <service id="sylius.fixture.payment_method" class="Sylius\Bundle\CoreBundle\Fixture\PaymentMethodFixture">
-            <argument type="service" id="sylius.factory.payment_method" />
             <argument type="service" id="sylius.manager.payment_method" />
-            <argument type="service" id="sylius.repository.locale" />
+            <argument type="service" id="sylius.fixture.example_factory.payment_method" />
             <tag name="sylius_fixtures.fixture" />
         </service>
 
         <service id="sylius.fixture.shipping_category" class="Sylius\Bundle\CoreBundle\Fixture\ShippingCategoryFixture">
-            <argument type="service" id="sylius.factory.shipping_category" />
             <argument type="service" id="sylius.manager.shipping_category" />
+            <argument type="service" id="sylius.fixture.example_factory.shipping_category" />
             <tag name="sylius_fixtures.fixture" />
         </service>
 
         <service id="sylius.fixture.shipping_method" class="Sylius\Bundle\CoreBundle\Fixture\ShippingMethodFixture">
-            <argument type="service" id="sylius.factory.shipping_method" />
             <argument type="service" id="sylius.manager.shipping_method" />
-            <argument type="service" id="sylius.repository.zone" />
-            <argument type="service" id="sylius.repository.shipping_category" />
-            <argument type="service" id="sylius.repository.locale" />
+            <argument type="service" id="sylius.fixture.example_factory.shipping_method" />
             <tag name="sylius_fixtures.fixture" />
         </service>
 
         <service id="sylius.fixture.channel" class="Sylius\Bundle\CoreBundle\Fixture\ChannelFixture">
-            <argument type="service" id="sylius.factory.channel" />
             <argument type="service" id="sylius.manager.channel" />
-            <argument type="service" id="sylius.repository.locale" />
-            <argument type="service" id="sylius.repository.currency" />
-            <argument type="service" id="sylius.repository.payment_method" />
-            <argument type="service" id="sylius.repository.shipping_method" />
+            <argument type="service" id="sylius.fixture.example_factory.channel" />
             <tag name="sylius_fixtures.fixture" />
         </service>
 
         <service id="sylius.fixture.user" class="Sylius\Bundle\CoreBundle\Fixture\UserFixture">
-            <argument type="service" id="sylius.factory.user" />
             <argument type="service" id="sylius.manager.user" />
-            <argument type="service" id="sylius.factory.customer" />
-            <argument type="service" id="sylius.repository.currency" />
+            <argument type="service" id="sylius.fixture.example_factory.user" />
             <tag name="sylius_fixtures.fixture" />
         </service>
 
         <service id="sylius.fixture.product_option" class="Sylius\Bundle\CoreBundle\Fixture\ProductOptionFixture">
-            <argument type="service" id="sylius.factory.product_option" />
             <argument type="service" id="sylius.manager.product_option" />
-            <argument type="service" id="sylius.factory.product_option_value" />
-            <argument type="service" id="sylius.repository.locale" />
+            <argument type="service" id="sylius.fixture.example_factory.product_option" />
             <tag name="sylius_fixtures.fixture" />
         </service>
 
         <service id="sylius.fixture.product_attribute" class="Sylius\Bundle\CoreBundle\Fixture\ProductAttributeFixture">
-            <argument type="service" id="sylius.factory.product_attribute" />
             <argument type="service" id="sylius.manager.product_attribute" />
-            <argument type="service" id="sylius.repository.locale" />
+            <argument type="service" id="sylius.fixture.example_factory.product_attribute" />
             <argument>%sylius.attribute.attribute_types%</argument>
             <tag name="sylius_fixtures.fixture" />
         </service>
 
         <service id="sylius.fixture.product_archetype" class="Sylius\Bundle\CoreBundle\Fixture\ProductArchetypeFixture">
-            <argument type="service" id="sylius.factory.product_archetype" />
             <argument type="service" id="sylius.manager.product_archetype" />
-            <argument type="service" id="sylius.repository.product_option" />
-            <argument type="service" id="sylius.repository.product_attribute" />
-            <argument type="service" id="sylius.repository.locale" />
+            <argument type="service" id="sylius.fixture.example_factory.product_archetype" />
             <tag name="sylius_fixtures.fixture" />
         </service>
 
         <service id="sylius.fixture.tax_category" class="Sylius\Bundle\CoreBundle\Fixture\TaxCategoryFixture">
-            <argument type="service" id="sylius.factory.tax_category" />
             <argument type="service" id="sylius.manager.tax_category" />
+            <argument type="service" id="sylius.fixture.example_factory.tax_category" />
             <tag name="sylius_fixtures.fixture" />
         </service>
 
         <service id="sylius.fixture.tax_rate" class="Sylius\Bundle\CoreBundle\Fixture\TaxRateFixture">
-            <argument type="service" id="sylius.factory.tax_rate" />
             <argument type="service" id="sylius.manager.tax_rate" />
-            <argument type="service" id="sylius.repository.zone" />
-            <argument type="service" id="sylius.repository.tax_category" />
+            <argument type="service" id="sylius.fixture.example_factory.tax_rate" />
             <tag name="sylius_fixtures.fixture" />
         </service>
 
         <service id="sylius.fixture.taxon" class="Sylius\Bundle\CoreBundle\Fixture\TaxonFixture">
-            <argument type="service" id="sylius.factory.taxon" />
             <argument type="service" id="sylius.manager.taxon" />
-            <argument type="service" id="sylius.repository.taxon" />
-            <argument type="service" id="sylius.repository.locale" />
+            <argument type="service" id="sylius.fixture.example_factory.taxon" />
             <tag name="sylius_fixtures.fixture" />
         </service>
 
         <service id="sylius.fixture.product" class="Sylius\Bundle\CoreBundle\Fixture\ProductFixture">
-            <argument type="service" id="sylius.factory.product" />
             <argument type="service" id="sylius.manager.product" />
-            <argument type="service" id="sylius.generator.variant" />
-            <argument type="service" id="sylius.factory.product_attribute_value" />
+            <argument type="service" id="sylius.fixture.example_factory.product" />
+            <tag name="sylius_fixtures.fixture" />
+        </service>
+
+        <service id="sylius.fixture.mug_product" class="Sylius\Bundle\CoreBundle\Fixture\MugProductFixture">
+            <argument type="service" id="sylius.fixture.taxon" />
             <argument type="service" id="sylius.repository.taxon" />
-            <argument type="service" id="sylius.repository.product_archetype" />
-            <argument type="service" id="sylius.repository.shipping_category" />
-            <argument type="service" id="sylius.repository.channel" />
-            <argument type="service" id="sylius.repository.locale" />
+            <argument type="service" id="sylius.fixture.product_attribute" />
+            <argument type="service" id="sylius.fixture.product_option" />
+            <argument type="service" id="sylius.fixture.product_archetype" />
+            <argument type="service" id="sylius.fixture.product" />
+            <tag name="sylius_fixtures.fixture" />
+        </service>
+
+        <service id="sylius.fixture.sticker_product" class="Sylius\Bundle\CoreBundle\Fixture\StickerProductFixture">
+            <argument type="service" id="sylius.fixture.taxon" />
+            <argument type="service" id="sylius.repository.taxon" />
+            <argument type="service" id="sylius.fixture.product_attribute" />
+            <argument type="service" id="sylius.fixture.product_option" />
+            <argument type="service" id="sylius.fixture.product_archetype" />
+            <argument type="service" id="sylius.fixture.product" />
+            <tag name="sylius_fixtures.fixture" />
+        </service>
+
+        <service id="sylius.fixture.book_product" class="Sylius\Bundle\CoreBundle\Fixture\BookProductFixture">
+            <argument type="service" id="sylius.fixture.taxon" />
+            <argument type="service" id="sylius.repository.taxon" />
+            <argument type="service" id="sylius.fixture.product_attribute" />
+            <argument type="service" id="sylius.fixture.product_option" />
+            <argument type="service" id="sylius.fixture.product_archetype" />
+            <argument type="service" id="sylius.fixture.product" />
+            <tag name="sylius_fixtures.fixture" />
+        </service>
+
+        <service id="sylius.fixture.tshirt_product" class="Sylius\Bundle\CoreBundle\Fixture\TshirtProductFixture">
+            <argument type="service" id="sylius.fixture.taxon" />
+            <argument type="service" id="sylius.repository.taxon" />
+            <argument type="service" id="sylius.fixture.product_attribute" />
+            <argument type="service" id="sylius.fixture.product_option" />
+            <argument type="service" id="sylius.fixture.product_archetype" />
+            <argument type="service" id="sylius.fixture.product" />
             <tag name="sylius_fixtures.fixture" />
         </service>
     </services>

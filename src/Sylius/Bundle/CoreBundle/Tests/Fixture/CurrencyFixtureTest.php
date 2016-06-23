@@ -19,7 +19,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class CurrencyFixtureConfigurationTest extends \PHPUnit_Framework_TestCase
+final class CurrencyFixtureTest extends \PHPUnit_Framework_TestCase
 {
     use ConfigurationTestCaseTrait;
 
