@@ -72,6 +72,14 @@ sylius_fixtures:
                 user:
                     options:
                         random: 20
+                        custom:
+                            -
+                                email: sylius@example.com
+                                first_name: Administrator
+                                last_name: Sylius
+                                password: sylius
+                                enabled: true
+                                admin: true
 
                 product_option:
                     options:
