@@ -60,7 +60,7 @@ final class ShippingCountryRuleCheckerSpec extends ObjectBehavior
 
         $countryRepository->findOneBy(['code' => 'IE'])->willReturn($country);
 
-        $this->isEligible($subject, ['country' => 'IE'])->shouldReturn(false);
+        $this->isEligible($subject, ['country' => 'NL'])->shouldReturn(false);
     }
 
     function it_should_recognize_subject_as_eligible_if_country_match(
