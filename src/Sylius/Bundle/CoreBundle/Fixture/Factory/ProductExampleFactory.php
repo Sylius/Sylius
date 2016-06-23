@@ -26,6 +26,7 @@ use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Variation\Generator\VariantGeneratorInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
@@ -36,6 +37,11 @@ final class ProductExampleFactory implements ExampleFactoryInterface
      * @var FactoryInterface
      */
     private $productFactory;
+
+    /**
+     * @var FactoryInterface
+     */
+    private $productVariantFactory;
 
     /**
      * @var VariantGeneratorInterface
@@ -59,10 +65,12 @@ final class ProductExampleFactory implements ExampleFactoryInterface
 
     /**
      * @param FactoryInterface $productFactory
+     * @param FactoryInterface $productVariantFactory
      * @param VariantGeneratorInterface $variantGenerator
      * @param FactoryInterface $productAttibuteValueFactory
      * @param RepositoryInterface $taxonRepository
      * @param RepositoryInterface $productArchetypeRepository
+     * @param RepositoryInterface $productAttributeRepository
      * @param RepositoryInterface $productOptionRepository
      * @param RepositoryInterface $shippingCategoryRepository
      * @param RepositoryInterface $channelRepository
@@ -70,16 +78,19 @@ final class ProductExampleFactory implements ExampleFactoryInterface
      */
     public function __construct(
         FactoryInterface $productFactory,
+        FactoryInterface $productVariantFactory,
         VariantGeneratorInterface $variantGenerator,
         FactoryInterface $productAttibuteValueFactory,
         RepositoryInterface $taxonRepository,
         RepositoryInterface $productArchetypeRepository,
+        RepositoryInterface $productAttributeRepository,
         RepositoryInterface $productOptionRepository,
         RepositoryInterface $shippingCategoryRepository,
         RepositoryInterface $channelRepository,
         RepositoryInterface $localeRepository
     ) {
         $this->productFactory = $productFactory;
+        $this->productVariantFactory = $productVariantFactory;
         $this->variantGenerator = $variantGenerator;
         $this->localeRepository = $localeRepository;
 
@@ -89,52 +100,76 @@ final class ProductExampleFactory implements ExampleFactoryInterface
                 ->setDefault('name', function (Options $options) {
                     return $this->faker->words(3, true);
                 })
+
                 ->setDefault('code', function (Options $options) {
                     return StringInflector::nameToCode($options['name']);
                 })
+
                 ->setDefault('enabled', function (Options $options) {
                     return $this->faker->boolean(90);
                 })
                 ->setAllowedTypes('enabled', 'bool')
+
                 ->setDefault('short_description', function (Options $options) {
                     return $this->faker->paragraph;
                 })
+
                 ->setDefault('description', function (Options $options) {
                     return $this->faker->paragraphs(3, true);
                 })
-                ->setAllowedTypes('enabled', 'bool')
+
                 ->setDefault('main_taxon', LazyOption::randomOne($taxonRepository))
                 ->setAllowedTypes('main_taxon', ['null', 'string', TaxonInterface::class])
                 ->setNormalizer('main_taxon', LazyOption::findOneBy($taxonRepository, 'code'))
+
                 ->setDefault('product_archetype', LazyOption::randomOne($productArchetypeRepository))
                 ->setAllowedTypes('product_archetype', ['null', 'string', ArchetypeInterface::class])
                 ->setNormalizer('product_archetype', LazyOption::findOneBy($productArchetypeRepository, 'code'))
+
                 ->setDefault('shipping_category', LazyOption::randomOne($shippingCategoryRepository))
                 ->setAllowedTypes('shipping_category', ['null', 'string', ShippingCategoryInterface::class])
                 ->setNormalizer('shipping_category', LazyOption::findOneBy($shippingCategoryRepository, 'code'))
+
                 ->setDefault('taxons', LazyOption::randomOnes($taxonRepository, 3))
                 ->setAllowedTypes('taxons', 'array')
                 ->setNormalizer('taxons', LazyOption::findBy($taxonRepository, 'code'))
+
                 ->setDefault('channels', LazyOption::randomOnes($channelRepository, 3))
                 ->setAllowedTypes('channels', 'array')
                 ->setNormalizer('channels', LazyOption::findBy($channelRepository, 'code'))
+
                 ->setDefault('product_attributes', [])
                 ->setAllowedTypes('product_attributes', 'array')
-                ->setNormalizer('product_attributes', function (Options $options, array $productAttributesValues) use ($productAttibuteValueFactory) {
+                ->setNormalizer('product_attributes', function (Options $options, array $productAttributes) use ($productAttributeRepository, $productAttibuteValueFactory) {
                     /** @var ArchetypeInterface $productArchetype */
                     $productArchetype = $options['product_archetype'];
 
+                    /** @var AttributeInterface $productAttribute */
                     foreach ($productArchetype->getAttributes() as $productAttribute) {
+                        if (array_key_exists($productAttribute->getCode(), $productAttributes)) {
+                            continue;
+                        }
+
+                        $productAttributes[$productAttribute->getCode()] = null;
+                    }
+
+                    $productAttributesValues = [];
+                    foreach ($productAttributes as $code => $value) {
+                        $productAttribute = $productAttributeRepository->findOneBy(['code' => $code]);
+
+                        Assert::notNull($productAttribute);
+
                         /** @var AttributeValueInterface $productAttributeValue */
                         $productAttributeValue = $productAttibuteValueFactory->createNew();
                         $productAttributeValue->setAttribute($productAttribute);
-                        $productAttributeValue->setValue($this->getRandomValueForProductAttribute($productAttribute));
+                        $productAttributeValue->setValue($value ?: $this->getRandomValueForProductAttribute($productAttribute));
 
                         $productAttributesValues[] = $productAttributeValue;
                     }
 
                     return $productAttributesValues;
                 })
+
                 ->setDefault('product_options', [])
                 ->setAllowedTypes('product_options', 'array')
                 ->setNormalizer('product_options', LazyOption::findBy($productOptionRepository, 'code'))
@@ -142,7 +177,7 @@ final class ProductExampleFactory implements ExampleFactoryInterface
                     /** @var ArchetypeInterface $productArchetype */
                     $productArchetype = $options['product_archetype'];
 
-                    return array_merge($productOptions ?: [], $productArchetype->getOptions()->toArray());
+                    return array_merge($productOptions, $productArchetype->getOptions()->toArray());
                 })
         ;
     }
@@ -188,7 +223,14 @@ final class ProductExampleFactory implements ExampleFactoryInterface
             $product->addAttribute($attribute);
         }
 
-        $this->variantGenerator->generate($product);
+        try {
+            $this->variantGenerator->generate($product);
+        } catch (\InvalidArgumentException $exception) {
+            /** @var ProductVariantInterface $productVariant */
+            $productVariant = $this->productVariantFactory->createNew();
+
+            $product->addVariant($productVariant);
+        }
 
         $i = 0;
         /** @var ProductVariantInterface $productVariant */

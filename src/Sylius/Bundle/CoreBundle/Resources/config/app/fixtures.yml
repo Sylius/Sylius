@@ -97,6 +97,18 @@ sylius_fixtures:
                     options:
                         random: 50
 
-                product:
+                mug_product:
                     options:
-                        random: 20
+                        amount: 30
+
+                sticker_product:
+                    options:
+                        amount: 30
+
+                book_product:
+                    options:
+                        amount: 30
+
+                tshirt_product:
+                    options:
+                        amount: 30

@@ -81,10 +81,12 @@
 
         <service id="sylius.fixture.example_factory.product" class="Sylius\Bundle\CoreBundle\Fixture\Factory\ProductExampleFactory">
             <argument type="service" id="sylius.factory.product" />
+            <argument type="service" id="sylius.factory.product_variant" />
             <argument type="service" id="sylius.generator.variant" />
             <argument type="service" id="sylius.factory.product_attribute_value" />
             <argument type="service" id="sylius.repository.taxon" />
             <argument type="service" id="sylius.repository.product_archetype" />
+            <argument type="service" id="sylius.repository.product_attribute" />
             <argument type="service" id="sylius.repository.product_option" />
             <argument type="service" id="sylius.repository.shipping_category" />
             <argument type="service" id="sylius.repository.channel" />
