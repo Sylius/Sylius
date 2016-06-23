@@ -27,6 +27,7 @@ use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Behat\Service\SecurityServiceInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface;
@@ -609,6 +610,28 @@ final class CheckoutContext implements Context
         Assert::true(
             $this->summaryPage->hasItemWithProductAndQuantity($productName, $quantity),
             sprintf('There is no "%s" with quantity %s on order summary page, but it should.', $productName, $quantity)
+        );
+    }
+
+    /**
+     * @Then /^the ("[^"]+" product) should have unit price discounted by ("\$\d+")$/
+     */
+    public function theShouldHaveUnitPriceDiscountedFor(ProductInterface $product, $amount)
+    {
+        Assert::true(
+            $this->summaryPage->hasProductDiscountedUnitPriceBy($product, $amount),
+            sprintf('Product %s should have discounted price by %s, but it does not have.', $product->getName(), $amount)
+        );
+    }
+
+    /**
+     * @Then /^my order total should be ("\$\d+")$/
+     */
+    public function myOrderTotalShouldBe($total)
+    {
+        Assert::true(
+            $this->summaryPage->hasOrderTotal($total),
+            sprintf('Order total should have %s total, but it does not have.', $total)
         );
     }
 

@@ -17,8 +17,16 @@
             {% for item in order.items %}
                 <tr>
                     <td>{{ item.product }}</td>
-                    <td>{{ item.unitPrice|sylius_price }}</td>
-                    <td class="center aligned">{{ item.quantity }}</td>
+                    <td>
+                        {% if item.discountedUnitPrice is not same as (item.unitPrice) %}
+                            <s>{{ item.unitPrice|sylius_price }}</s> {{ item.discountedUnitPrice|sylius_price }}
+                        {% else %}
+                            {{ item.unitPrice|sylius_price }}
+                        {% endif %}
+                    </td>
+                    <td class="center aligned">
+                        {{ item.quantity }}
+                    </td>
                     <td class="right aligned">{{ item.subtotal|sylius_price }}</td>
                 </tr>
             {% endfor %}
@@ -29,7 +37,7 @@
             </tr>
             <tr>
                 <td colspan="4" class="right aligned" style="font-size: 1.5em;">
-                    Total: $110.00
+                    {{ 'sylius.ui.total'|trans }}: {{ order.total|sylius_price }}
                 </td>
             </tr>
             </tbody>

@@ -1,9 +1,9 @@
 <address>
-    {% if address.company is not null %}
+    {% if address.company is defined %}
         <strong>{{ address.company }}</strong><br>
     {% endif %}
     <strong>{{ address.firstName }} {{ address.lastName }}</strong><br>
-    {% if address.phoneNumber is not null %}
+    {% if address.phoneNumber is defined %}
         {{ address.phoneNumber }}<br/>
     {% endif %}
     {{ address.street }}<br/>
