@@ -59,9 +59,8 @@ final class ShippingCountryRuleCheckerSpec extends ObjectBehavior
         $subject->getShippingAddress()->willReturn($address);
 
         $countryRepository->findOneBy(['code' => 'IE'])->willReturn($country);
-        $country->getId()->willReturn(2);
 
-        $this->isEligible($subject, ['country' => 1])->shouldReturn(false);
+        $this->isEligible($subject, ['country' => 'IE'])->shouldReturn(false);
     }
 
     function it_should_recognize_subject_as_eligible_if_country_match(
@@ -74,9 +73,8 @@ final class ShippingCountryRuleCheckerSpec extends ObjectBehavior
         $address->getCountryCode()->willReturn('IE');
         $subject->getShippingAddress()->willReturn($address);
 
-        $country->getId()->willReturn(1);
         $countryRepository->findOneBy(['code' => 'IE'])->willReturn($country);
 
-        $this->isEligible($subject, ['country' => 1])->shouldReturn(true);
+        $this->isEligible($subject, ['country' => 'IE'])->shouldReturn(true);
     }
 }
