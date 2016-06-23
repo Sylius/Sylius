@@ -16,6 +16,7 @@
     <h1><i class="glyphicon glyphicon-pencil"></i> {{ 'sylius.ui.generate_variants'|trans|raw }}</h1>
 </div>
 <form action="{{ path('sylius_backend_product_variant_generate', {'productId': product.id}) }}" method="post" class="form-horizontal" {{ form_enctype(form) }} novalidate>
+    {{ form_errors(form) }}
     <input type="hidden" name="_method" value="PUT">
     {%- for variant in form.variants %}
         <div class="row">
