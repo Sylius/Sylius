@@ -128,18 +128,13 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
      */
     public function findOneForPayment($id)
     {
-        $queryBuilder = $this->createQueryBuilder('o');
-
-        $queryBuilder
+        return $this->createQueryBuilder('o')
             ->leftJoin('o.payments', 'payments')
             ->leftJoin('payments.method', 'paymentMethods')
             ->addSelect('payments')
             ->addSelect('paymentMethods')
-            ->andWhere($queryBuilder->expr()->eq('o.id', ':id'))
+            ->andWhere('o.id', ':id')
             ->setParameter('id', $id)
-        ;
-
-        return $queryBuilder
             ->getQuery()
             ->getOneOrNullResult()
         ;
