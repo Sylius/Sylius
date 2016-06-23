@@ -15,6 +15,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Event\OnFlushEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\UnitOfWork;
+use PhpParser\Node\Arg;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\User\Model\CustomerInterface;
@@ -27,7 +28,7 @@ class DefaultUsernameORMListenerSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\UserBundle\EventListener\DefaultUsernameORMListener');
     }
 
-    function it_sets_username_on_customer_create(
+    function it_sets_usernames_on_customer_create(
         OnFlushEventArgs $onFlushEventArgs,
         EntityManager $entityManager,
         UnitOfWork $unitOfWork,
@@ -42,13 +43,103 @@ class DefaultUsernameORMListenerSpec extends ObjectBehavior
         $unitOfWork->getScheduledEntityUpdates()->willReturn([]);
 
         $user->getUsername()->willReturn(null);
+        $user->getUsernameCanonical()->willReturn(null);
         $customer->getUser()->willReturn($user);
-        $customer->getEmail()->willReturn('customer@email.com');
+        $customer->getEmail()->willReturn('customer+extra@email.com');
+        $customer->getEmailCanonical()->willReturn('customer@email.com');
 
-        $user->setUsername('customer@email.com')->shouldBeCalled();
-        $entityManager->persist($user)->shouldBeCalled();
+        $user->setUsername('customer+extra@email.com')->shouldBeCalled();
+        $user->setUsernameCanonical('customer@email.com')->shouldBeCalled();
+
         $entityManager->getClassMetadata(get_class($user->getWrappedObject()))->willReturn($userMetadata);
         $unitOfWork->recomputeSingleEntityChangeSet($userMetadata, $user)->shouldBeCalled();
+
+        $this->onFlush($onFlushEventArgs);
+    }
+
+    function it_updates_usernames_on_customer_email_change(
+        OnFlushEventArgs $onFlushEventArgs,
+        EntityManager $entityManager,
+        UnitOfWork $unitOfWork,
+        CustomerInterface $customer,
+        UserInterface $user,
+        ClassMetadata $userMetadata
+    ) {
+        $onFlushEventArgs->getEntityManager()->willReturn($entityManager);
+        $entityManager->getUnitOfWork()->willReturn($unitOfWork);
+
+        $unitOfWork->getScheduledEntityInsertions()->willReturn([]);
+        $unitOfWork->getScheduledEntityUpdates()->willReturn([$customer]);
+
+        $user->getUsername()->willReturn('user+extra@email.com');
+        $user->getUsernameCanonical()->willReturn('customer@email.com');
+        $customer->getUser()->willReturn($user);
+        $customer->getEmail()->willReturn('customer+extra@email.com');
+        $customer->getEmailCanonical()->willReturn('customer@email.com');
+
+        $user->setUsername('customer+extra@email.com')->shouldBeCalled();
+        $user->setUsernameCanonical('customer@email.com')->shouldBeCalled();
+
+        $entityManager->getClassMetadata(get_class($user->getWrappedObject()))->willReturn($userMetadata);
+        $unitOfWork->recomputeSingleEntityChangeSet($userMetadata, $user)->shouldBeCalled();
+
+        $this->onFlush($onFlushEventArgs);
+    }
+
+    function it_updates_usernames_on_customer_email_canonical_change(
+        OnFlushEventArgs $onFlushEventArgs,
+        EntityManager $entityManager,
+        UnitOfWork $unitOfWork,
+        CustomerInterface $customer,
+        UserInterface $user,
+        ClassMetadata $userMetadata
+    ) {
+        $onFlushEventArgs->getEntityManager()->willReturn($entityManager);
+        $entityManager->getUnitOfWork()->willReturn($unitOfWork);
+
+        $unitOfWork->getScheduledEntityInsertions()->willReturn([]);
+        $unitOfWork->getScheduledEntityUpdates()->willReturn([$customer]);
+
+        $user->getUsername()->willReturn('customer+extra@email.com');
+        $user->getUsernameCanonical()->willReturn('user@email.com');
+        $customer->getUser()->willReturn($user);
+        $customer->getEmail()->willReturn('customer+extra@email.com');
+        $customer->getEmailCanonical()->willReturn('customer@email.com');
+
+        $user->setUsername('customer+extra@email.com')->shouldBeCalled();
+        $user->setUsernameCanonical('customer@email.com')->shouldBeCalled();
+
+        $entityManager->getClassMetadata(get_class($user->getWrappedObject()))->willReturn($userMetadata);
+        $unitOfWork->recomputeSingleEntityChangeSet($userMetadata, $user)->shouldBeCalled();
+
+        $this->onFlush($onFlushEventArgs);
+    }
+
+    function it_does_not_update_usernames_when_customer_emails_are_the_same(
+        OnFlushEventArgs $onFlushEventArgs,
+        EntityManager $entityManager,
+        UnitOfWork $unitOfWork,
+        CustomerInterface $customer,
+        UserInterface $user,
+        ClassMetadata $userMetadata
+    ) {
+        $onFlushEventArgs->getEntityManager()->willReturn($entityManager);
+        $entityManager->getUnitOfWork()->willReturn($unitOfWork);
+
+        $unitOfWork->getScheduledEntityInsertions()->willReturn([]);
+        $unitOfWork->getScheduledEntityUpdates()->willReturn([$customer]);
+
+        $user->getUsername()->willReturn('customer+extra@email.com');
+        $user->getUsernameCanonical()->willReturn('customer@email.com');
+        $customer->getUser()->willReturn($user);
+        $customer->getEmail()->willReturn('customer+extra@email.com');
+        $customer->getEmailCanonical()->willReturn('customer@email.com');
+
+        $user->setUsername(Argument::any())->shouldNotBeCalled();
+        $user->setUsernameCanonical(Argument::any())->shouldNotBeCalled();
+
+        $unitOfWork->recomputeSingleEntityChangeSet(Argument::cetera())->shouldNotBeCalled();
+
         $this->onFlush($onFlushEventArgs);
     }
 
@@ -65,59 +156,9 @@ class DefaultUsernameORMListenerSpec extends ObjectBehavior
         $unitOfWork->getScheduledEntityUpdates()->willReturn([]);
 
         $customer->getUser()->willReturn(null);
-        $customer->getEmail()->willReturn('customer@email.com');
 
-        $entityManager->persist(Argument::any())->shouldNotBeCalled();
-        $unitOfWork->recomputeSingleEntityChangeSet(Argument::any())->shouldNotBeCalled();
-        $this->onFlush($onFlushEventArgs);
-    }
+        $unitOfWork->recomputeSingleEntityChangeSet(Argument::cetera())->shouldNotBeCalled();
 
-    function it_updates_username_on_customer_email_change(
-        OnFlushEventArgs $onFlushEventArgs,
-        EntityManager $entityManager,
-        UnitOfWork $unitOfWork,
-        CustomerInterface $customer,
-        UserInterface $user,
-        ClassMetadata $userMetadata
-    ) {
-        $onFlushEventArgs->getEntityManager()->willReturn($entityManager);
-        $entityManager->getUnitOfWork()->willReturn($unitOfWork);
-
-        $unitOfWork->getScheduledEntityInsertions()->willReturn([]);
-        $unitOfWork->getScheduledEntityUpdates()->willReturn([$customer]);
-
-        $user->getUsername()->willReturn('user@email.com');
-        $customer->getUser()->willReturn($user);
-        $customer->getEmail()->willReturn('customer@email.com');
-
-        $user->setUsername('customer@email.com')->shouldBeCalled();
-        $entityManager->persist($user)->shouldBeCalled();
-        $entityManager->getClassMetadata(get_class($user->getWrappedObject()))->willReturn($userMetadata);
-        $unitOfWork->recomputeSingleEntityChangeSet($userMetadata, $user)->shouldBeCalled();
-        $this->onFlush($onFlushEventArgs);
-    }
-
-    function it_does_not_update_username_when_customer_email_is_the_same(
-        OnFlushEventArgs $onFlushEventArgs,
-        EntityManager $entityManager,
-        UnitOfWork $unitOfWork,
-        CustomerInterface $customer,
-        UserInterface $user,
-        ClassMetadata $userMetadata
-    ) {
-        $onFlushEventArgs->getEntityManager()->willReturn($entityManager);
-        $entityManager->getUnitOfWork()->willReturn($unitOfWork);
-
-        $unitOfWork->getScheduledEntityInsertions()->willReturn([]);
-        $unitOfWork->getScheduledEntityUpdates()->willReturn([$customer]);
-
-        $user->getUsername()->willReturn('customer@email.com');
-        $customer->getUser()->willReturn($user);
-        $customer->getEmail()->willReturn('customer@email.com');
-
-        $user->setUsername('customer@email.com')->shouldNotBeCalled();
-        $entityManager->persist($user)->shouldNotBeCalled();
-        $unitOfWork->recomputeSingleEntityChangeSet($userMetadata, $user)->shouldNotBeCalled();
         $this->onFlush($onFlushEventArgs);
     }
 
@@ -136,12 +177,12 @@ class DefaultUsernameORMListenerSpec extends ObjectBehavior
         $customer->getUser()->willReturn(null);
         $customer->getEmail()->willReturn('customer@email.com');
 
-        $entityManager->persist(Argument::any())->shouldNotBeCalled();
-        $unitOfWork->recomputeSingleEntityChangeSet(Argument::any())->shouldNotBeCalled();
+        $unitOfWork->recomputeSingleEntityChangeSet(Argument::cetera())->shouldNotBeCalled();
+
         $this->onFlush($onFlushEventArgs);
     }
 
-    function it_does_nothing_when_there_are_no_customers_created(
+    function it_does_nothing_when_there_are_no_objects_scheduled_in_the_unit_of_work(
         OnFlushEventArgs $onFlushEventArgs,
         EntityManager $entityManager,
         UnitOfWork $unitOfWork
@@ -152,8 +193,8 @@ class DefaultUsernameORMListenerSpec extends ObjectBehavior
         $unitOfWork->getScheduledEntityInsertions()->willReturn([]);
         $unitOfWork->getScheduledEntityUpdates()->willReturn([]);
 
-        $entityManager->persist(Argument::any())->shouldNotBeCalled();
-        $unitOfWork->recomputeSingleEntityChangeSet(Argument::any())->shouldNotBeCalled();
+        $unitOfWork->recomputeSingleEntityChangeSet(Argument::cetera())->shouldNotBeCalled();
+
         $this->onFlush($onFlushEventArgs);
     }
 
@@ -170,8 +211,8 @@ class DefaultUsernameORMListenerSpec extends ObjectBehavior
         $unitOfWork->getScheduledEntityInsertions()->willReturn([$stdObject]);
         $unitOfWork->getScheduledEntityUpdates()->willReturn([$stdObject2]);
 
-        $entityManager->persist(Argument::any())->shouldNotBeCalled();
-        $unitOfWork->recomputeSingleEntityChangeSet(Argument::any())->shouldNotBeCalled();
+        $unitOfWork->recomputeSingleEntityChangeSet(Argument::cetera())->shouldNotBeCalled();
+
         $this->onFlush($onFlushEventArgs);
     }
 }
