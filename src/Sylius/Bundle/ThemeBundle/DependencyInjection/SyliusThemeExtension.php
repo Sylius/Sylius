@@ -40,8 +40,19 @@ final class SyliusThemeExtension extends Extension implements PrependExtensionIn
     {
         $config = $this->processConfiguration($this->getConfiguration($config, $container), $config);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config/services'));
-
         $loader->load('services.xml');
+
+        if ($config['assets']['enabled']) {
+            $loader->load('support/assets.xml');
+        }
+
+        if ($config['templating']['enabled']) {
+            $loader->load('support/templating.xml');
+        }
+
+        if ($config['translations']['enabled']) {
+            $loader->load('support/translations.xml');
+        }
 
         $this->resolveConfigurationSources($container, $config);
 
