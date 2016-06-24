@@ -5,8 +5,6 @@ sylius:
     form:
         login:
             username: Потребителско име
-        option:
-            presentation: Презентация
     ui:
         add_coupon: Добавяне на купон
         add_to_cart: Добави в количката
@@ -35,6 +33,7 @@ sylius:
         no_promotion: Нама приложена промоция
         no_shipping_charges: Няма такси за доставка
         no_taxes: Няма такси
+        order_details: Детайлите за вашата поръчка
         quantity: Количество
         save_changes: Запиши промените
         shipping_methods: Начин на доставка

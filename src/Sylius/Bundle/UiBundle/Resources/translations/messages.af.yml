@@ -2,9 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        option:
-            presentation: Weergawe
     ui:
         "no": false
         "yes": true

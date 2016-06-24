@@ -4,7 +4,7 @@
 sylius:
     form:
         variant:
-            presentation: عنوان برای مشتری
+            name: نام
         option:
             name: نام
             values: مقادیر قابل قبول

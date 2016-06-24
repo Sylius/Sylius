@@ -169,6 +169,7 @@ sylius:
         choose_file: Выбрать файл
         city: Город
         code: Код
+        comment: Комментарий
         company: Компания
         completed: Завершен
         configuration: Конфигурация
@@ -435,6 +436,7 @@ sylius:
         province: Регион
         provinces: Области
         quantity: Количество
+        rating: Рейтинг
         recent_customers: Последние клиенты
         recent_orders: Недавние заказы
         recent_users: Последние пользователи

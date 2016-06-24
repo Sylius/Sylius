@@ -5,8 +5,6 @@ sylius:
     form:
         login:
             username: Кросницко име
-        option:
-            presentation: Приказ
     ui:
         add_coupon: Додај купон
         add_to_cart: Додај у корпу
@@ -30,6 +28,7 @@ sylius:
         no_promotion: Ниједна промоција није додата
         no_shipping_charges: Нису додати трошкови поруџбине
         no_taxes: Нису додати порези
+        order_details: Детаљи Ваше наруџбине
         quantity: Количина
         save_changes: Сачувај измене
         shipping_methods: Начини доставе

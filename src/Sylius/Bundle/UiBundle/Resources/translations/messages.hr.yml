@@ -8,7 +8,7 @@ sylius:
             password: Lozinka
             remember_me: Zapamti me
         option:
-            presentation: Prezentacija
+            name: Naziv grupe
     ui:
         about: Ukratko
         actions: Akcije
@@ -68,6 +68,7 @@ sylius:
         no_promotion: Proizvod nema akciju
         no_shipping_charges: Nema troškova dostave
         no_taxes: Bez PDV-a
+        order_details: Detalji vaše narudžbe
         price: Cijena
         quantity: Količina
         ready: Spremno

@@ -8,7 +8,7 @@ sylius:
             password: Heslo
             remember_me: Pamatuj si mě
         option:
-            presentation: Prezentace
+            name: Jméno
     ui:
         actions: Akce
         add_coupon: Přidat kupón
@@ -53,6 +53,7 @@ sylius:
         no_promotion: Nejsou aplikovány žádné akce
         no_shipping_charges: Nejsou aplikovány žádné poplatky za dopravu
         no_taxes: Nejsou aplikovány žádné daně
+        order_details: Podrobnosti vaší objednávky
         price: Cena
         quantity: Množství
         ready: Připraven

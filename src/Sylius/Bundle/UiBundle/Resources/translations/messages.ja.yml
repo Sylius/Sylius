@@ -34,6 +34,7 @@ sylius:
         no_promotion: プロモーションは適用されていません。
         no_shipping_charges: 送料無料
         no_taxes: 税は加算されていません。
+        order_details: sylius.account.order.details
         price: 価格
         quantity: 数量
         save_changes: 保存

@@ -7,10 +7,6 @@ sylius:
             not_blank: Indtast egenskabens systemnavn.
             min_length: 'Egenskabens systemnavn skal være mindst ét tegn langt.|Egenskabens systemnavn skal være mindst {{ limit }} tegn langt.'
             max_length: 'Egenskabens system navn må ikke være længere end 1 tegn.|Egenskabens system navn må ikke være længere end {{ limit }} tegn.'
-        presentation:
-            not_blank: Angiv egenskabens præsentation.
-            min_length: 'Egenskabens systemnavn skal være mindst ét tegn langt.|Egenskabens systemnavn skal være mindst {{ limit }} tegn langt.'
-            max_length: 'Egenskabens systemnavn må ikke være længere end 1 tegn.|Egenskabens navn må ikke være længere end {{ limit }} tegn.'
         values:
             min_count: 'Tilføj venligst mindst {{ limit }} egenskabsværdi. |Tilføj venligst mindst {{ limit }} egenskabsværdier.'
     option_value:

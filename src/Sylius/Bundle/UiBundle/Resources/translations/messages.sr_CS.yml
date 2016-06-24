@@ -5,6 +5,8 @@ sylius:
     form:
         login:
             username: Krosnicko ime
+        option:
+            name: Ime
     ui:
         add_coupon: Dodaj kupon
         add_to_cart: Dodaj u korpu

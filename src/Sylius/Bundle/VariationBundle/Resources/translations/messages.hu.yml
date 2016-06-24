@@ -4,7 +4,7 @@
 sylius:
     form:
         variant:
-            presentation: Bemutató
+            name: Név
         option:
             name: Név
             values: Lehetséges értékek

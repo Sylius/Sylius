@@ -8,7 +8,7 @@ sylius:
             password: Jelszó
             remember_me: Emlékezzen rám
         option:
-            presentation: Bemutató
+            name: Név
     ui:
         about: Információ
         account_credentials: A fiók hitelesítő adatait
@@ -33,6 +33,7 @@ sylius:
         change_address: Cím módosítása
         change_password: Jelszó változtatás
         change_your_password: Jelszó módosítása
+        change_shipping_method: Szállítási mód módosítása
         charges_and_taxes: Díjak és adók
         checkout: Fizetés
         have_an_account_already: Már van egy fiókod
@@ -166,6 +167,7 @@ sylius:
         not_in: Nincs benne
         onhold: Visszatartott
         or: vagy
+        order_details: Az Ön rendelésének részletei
         order_history: Rendelési előzmények
         order_total: Rendelés összesen
         partially_shipped: Részlegesen kiszállítva
@@ -190,7 +192,9 @@ sylius:
         select_taxon: Válassza ki a taxon-t
         shipped: Kiszállítva
         shipping: Szállítás
+        shipping_and_payment_methods: Szállítási és fizetési módszerek
         shipping_methods: Szállítási módok
+        ship_to: Szállítás ide
         show: Megjelenítés
         sign_in: Bejelentkezés
         sign_out: Kijelentkezés

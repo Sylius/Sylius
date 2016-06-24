@@ -141,6 +141,7 @@ sylius:
             ready: Pronto
             returned: Devolvido
             shipped: Enviado
+            checkout: Compra
             pending: Pendente
             onhold: Em espera
             backordered: Devolução
@@ -717,6 +718,7 @@ sylius:
         total_orders: Total de pedidos
         total_qty: Qtde total
         total_registrations: Total de registos
+        tracking_code: Código de rastreamento
         tracking_number: Número de rastreamento
         translations: Traduções
         type: Tipo

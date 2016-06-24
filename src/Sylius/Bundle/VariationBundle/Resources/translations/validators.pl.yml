@@ -10,10 +10,6 @@ sylius:
             not_blank: Proszę wprowadzić nazwę opcji.
             min_length: 'Nazwa opcji powinna być dłuższa niż jeden znak.|Nazwa opcji musi zawierać co najmniej {{ limit }} znaków.'
             max_length: 'Nazwa opcji nie może być dłuższa niż jeden znak. |Nazwa opcji nie może przekraczać {{ limit }} znaków.'
-        presentation:
-            not_blank: Proszę wprowadzić nazwę publiczną.
-            min_length: 'Nazwa publiczna powinna zawierać co najmniej jeden znak. |Nazwa publiczna nie może przekraczać {{ limit }} znaków.'
-            max_length: '{1} Nazwa publiczna nie może być dłuższy niż 1 znak.|{2,3,4} Nazwa publiczna nie może być dłuższa niż {{ limit }} znaki.|[5,Inf[ Nazwa publiczna nie może być dłuższa niż {{ limit }} znaków.'
         values:
             min_count: '{1} Dodaj co najmniej 1 opcję.|{2,3,4} Dodaj co najmniej {{ limit }} opcje.|[5,Inf[ Dodaj co najmniej {{ limit }} opcji.'
     option_value:

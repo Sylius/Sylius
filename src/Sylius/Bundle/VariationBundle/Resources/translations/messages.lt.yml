@@ -4,7 +4,7 @@
 sylius:
     form:
         variant:
-            presentation: Prezentacija
+            name: Pavadinimas
         option:
             name: Pavadinimas
             values: Galimos reikšmės

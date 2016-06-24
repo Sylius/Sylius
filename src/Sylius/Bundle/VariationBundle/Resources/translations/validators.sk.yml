@@ -10,10 +10,6 @@ sylius:
             not_blank: Prosím, zadajte názov voľby.
             min_length: 'Názov voľby musí obsahovať aspoň 1 znak.|Názov voľby musí obsahovať aspoň {{ limit }} znakov.'
             max_length: 'Názov voľby nesmie byť dlhší ako 1 znak.|Názov voľby nesmie byť dlhší ako {{ limit }} znakov.'
-        presentation:
-            not_blank: Prosím, zadajte verejný názov voľby.
-            min_length: 'Prezentáčný názov musí mať aspoň 1 znak. | Prezentáčný názov musí byť dlhý aspoň {{ limit }} znakov.'
-            max_length: 'Prezentáčný názov nesmie byť dlhší ako 1 znak. | Prezentáčný názov nesmie byť dlhší ako {{ limit }} znakov.'
         values:
             min_count: 'Prosím pridajte aspoň {{ limit }} hodnotu pre voľbu. | Prosím pridajte aspoň {{ limit }} hodnôt pre voľby.'
     option_value:

@@ -718,6 +718,7 @@ sylius:
         total_orders: Pedidos
         total_qty: Cant total
         total_registrations: Usuarios
+        tracking_code: Código de rastreo de envío
         tracking_number: Número de seguimiento
         translations: Traducciones
         type: Tipo

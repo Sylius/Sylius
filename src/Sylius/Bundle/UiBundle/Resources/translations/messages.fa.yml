@@ -8,7 +8,7 @@ sylius:
             password: کلمه عبور
             remember_me: مرا به خاطر بسپار
         option:
-            presentation: عنوان برای مشتری
+            name: نام
     ui:
         actions: طریقه اعمال
         add_coupon: ایجاد کد تخفیف
@@ -94,6 +94,7 @@ sylius:
         not_empty: خالی نیست
         not_in: وجود ندارد در
         or: یا
+        order_details: جزئیات سفارش شما
         powered_by: قدرت گرفته از
         price: قیمت
         promotion_configuration: تنظیمات فروش ویژه

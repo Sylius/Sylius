@@ -3,5 +3,7 @@
 
 sylius:
     form:
+        variant:
+            name: Tên
         option:
             name: Tên

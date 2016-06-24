@@ -4,7 +4,7 @@
 sylius:
     form:
         variant:
-            presentation: Sunum
+            name: Ad
         option:
             name: Ad
             values: Olası değerler

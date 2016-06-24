@@ -8,7 +8,7 @@ sylius:
             password: Heslo
             remember_me: Zapamätať si ma
         option:
-            presentation: Verejný názov
+            name: Názov
     ui:
         account_credentials: Prihlasovacie údaje
         actions: Akcie
@@ -119,6 +119,7 @@ sylius:
         not_in: Nie je v
         onhold: Pozastavené
         or: alebo
+        order_details: Detaily Vašej objednávky
         partially_shipped: Čiastočne dodané
         per_customer_usage_limit: Obmedzenie použitia pre zákazníka
         powered_by: Vytvorené v systéme

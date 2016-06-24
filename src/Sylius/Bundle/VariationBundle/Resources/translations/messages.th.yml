@@ -4,7 +4,7 @@
 sylius:
     form:
         variant:
-            presentation: ผู้ใช้มองเห็น
+            name: ชื่อ
         option:
             name: ชื่อ
             values: ค่าที่เป็นไปได้
