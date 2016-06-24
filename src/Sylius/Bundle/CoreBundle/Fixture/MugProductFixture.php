@@ -158,6 +158,7 @@ final class MugProductFixture extends AbstractFixture
                 'product_attributes' => [
                     'MUG-MATERIAL' => $this->faker->randomElement(['Invisible porcelain', 'Banana skin', 'Porcelain', 'Centipede']),
                 ],
+                'images' => [sprintf('%s/../Resources/fixtures/%s', __DIR__, 'mugs.jpg')],
             ];
         }
 
