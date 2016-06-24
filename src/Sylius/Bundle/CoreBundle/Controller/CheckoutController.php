@@ -170,13 +170,16 @@ class CheckoutController extends FOSRestController
 
         if ($request->isMethod('GET')) {
             $form->submit($request);
+            $payments = [];
 
-            $paymentInfo = [
-                'payment' => $order->getLastPayment(),
-                'methods' => $form['paymentMethod']->getConfig()->getOption('choice_list')->getChoices(),
-            ];
+            foreach ($order->getPayments() as $key => $payment) {
+                $payments[] = [
+                    'payment' => $order->getLastPayment(),
+                    'methods' => $form['payments'][$key]['method']->getConfig()->getOption('choice_list')->getChoices(),
+                ];
+            }
 
-            return $this->handleView($this->view($paymentInfo));
+            return $this->handleView($this->view($payments));
         }
 
         if ($form->submit($request)->isValid()) {
@@ -336,7 +339,7 @@ class CheckoutController extends FOSRestController
      */
     private function createCheckoutPaymentForm(OrderInterface $order)
     {
-        return $this->createApiForm('sylius_checkout_payment', $order);
+        return $this->createApiForm('sylius_checkout_payment_step', $order);
     }
 
     /**
