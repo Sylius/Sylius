@@ -4,6 +4,6 @@
 sylius:
     form:
         variant:
-            presentation: Παρουσίαση
+            name: Ονομασία
         option:
             name: Ονομασία

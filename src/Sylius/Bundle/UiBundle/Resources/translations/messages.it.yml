@@ -8,12 +8,13 @@ sylius:
             password: Password
             remember_me: Ricordami
         option:
-            presentation: Presentazione
+            name: Nome
     ui:
         account_credentials: "Credenziali dell'account"
         actions: Azioni
         add_coupon: Aggiungi coupon
         add_to_cart: Aggiungi al carrello
+        addressing: Indirizzamento
         administration_panel_login: Login del pannello di amministrazione
         all: Tutti
         an_error_occurred: Si è verificato un errore
@@ -113,6 +114,7 @@ sylius:
         not_empty: Non è vuoto
         not_in: Non in
         or: oppure
+        order_details: "Dettagli dell'ordine"
         powered_by: Promosso da
         price: Prezzo
         promotion_configuration: Configurazione della promozione

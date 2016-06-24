@@ -4,7 +4,7 @@
 sylius:
     form:
         variant:
-            presentation: Presentación
+            name: Nombre
         option:
             name: Nombre
             values: Valores posibles

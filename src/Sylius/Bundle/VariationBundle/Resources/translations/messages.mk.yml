@@ -3,8 +3,6 @@
 
 sylius:
     form:
-        variant:
-            presentation: Презентација
         option:
             values: Можни вредности
         option_value:

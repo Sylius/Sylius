@@ -3,7 +3,5 @@
 
 sylius:
     form:
-        variant:
-            presentation: 소개
         option:
             values: 예상값

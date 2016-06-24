@@ -8,7 +8,7 @@ sylius:
             password: Пароль
             remember_me: Запомнить меня
         option:
-            presentation: Публичное название
+            name: Название
     ui:
         actions: Действия
         add_coupon: Добавить купон
@@ -54,6 +54,7 @@ sylius:
         no_promotion: Без скидки
         no_shipping_charges: Без оплаты за пересылку
         no_taxes: Без НДС
+        order_details: Детали вашего заказа
         price: Цена
         quantity: Количество
         ready: Готов

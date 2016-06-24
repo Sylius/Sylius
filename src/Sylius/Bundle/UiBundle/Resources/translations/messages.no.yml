@@ -7,7 +7,7 @@ sylius:
             username: Brukernavn
             password: Passord
         option:
-            presentation: Presentasjon
+            name: Navn
     ui:
         actions: Handlinger
         add_coupon: Legg til rabattkupong
@@ -45,6 +45,7 @@ sylius:
         no_promotion: Ingen tilbudskode
         no_shipping_charges: Ingen fraktkostnader lagt til
         no_taxes: Ingen mva lagt til
+        order_details: Nærmere opplysninger om bestillingen
         price: Pris
         quantity: Antall
         ready: Klar

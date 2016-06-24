@@ -7,7 +7,7 @@ sylius:
             username: "Ім'я користувача"
             password: Пароль
         option:
-            presentation: Презентація
+            name: Ім’я
     ui:
         actions: Дії
         add_coupon: Додати купон
@@ -47,6 +47,7 @@ sylius:
         no_promotion: Промо-код не застосовано
         no_shipping_charges: Націнки за доставку не застосовано
         no_taxes: Податки не застосовані
+        order_details: Деталі вашого замовлення
         price: Ціна
         quantity: К-сть
         ready: Готовий

@@ -86,7 +86,6 @@ sylius:
         pending: Väntande
         phone_number: Telefonnummer
         postcode: Postnummer
-        presentation: Presentation
         price: Pris
         pricing: Prissättning
         processing: Behandlar

@@ -1,0 +1,12 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    menu:
+        shop:
+            account:
+                header: Il tuo conto
+                dashboard: Pannello amministrazione
+                personal_information: Informationi personali
+                change_password: Modifica la password
+                order_history: Storico ordini

@@ -5,6 +5,8 @@ sylius:
     form:
         login:
             password: Mật khẩu
+        option:
+            name: Tên
     ui:
         image: Hình ảnh
         qty: Số lượng

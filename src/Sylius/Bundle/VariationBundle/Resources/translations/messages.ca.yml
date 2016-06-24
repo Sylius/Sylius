@@ -4,6 +4,6 @@
 sylius:
     form:
         variant:
-            presentation: Presentació
+            name: Nom
         option:
             name: Nom

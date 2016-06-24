@@ -21,6 +21,7 @@ sylius:
             enabled: Увімкнено
         province:
             name: Ім’я
+            abbreviation: Абревіатура
             select: Виберіть
         zone:
             add_member: Додати члена групи
