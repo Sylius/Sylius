@@ -28,10 +28,12 @@ use Sylius\Behat\Service\SecurityServiceInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
+use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -614,6 +616,17 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Given I should see the shipping total with price :price
+     */
+    public function iShouldSeeTheShippingTotalWithPrice($price)
+    {
+        Assert::true(
+            $this->summaryPage->hasShippingTotal($price),
+            sprintf('The shipping total should be %s, but it is not.',$price)
+        );
+    }
+
+    /**
      * @Then /^the ("[^"]+" product) should have unit price discounted by ("\$\d+")$/
      */
     public function theShouldHaveUnitPriceDiscountedFor(ProductInterface $product, $amount)
@@ -636,6 +649,28 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Given I should see promotion total :promotionTotal
+     */
+    public function iShouldSeeDiscountTotal($promotionTotal)
+    {
+        Assert::true(
+            $this->summaryPage->hasPromotionTotal($promotionTotal),
+            sprintf('The total discount should be %s, but it does not.', $promotionTotal)
+        );
+    }
+
+    /**
+     * @Given I should see promotion :promotionName
+     */
+    public function iShouldSeePromotion($promotionName)
+    {
+        Assert::true(
+            $this->summaryPage->hasPromotion($promotionName),
+            sprintf('The promotion %s should appear on the page, but it does not.', $promotionName)
+        );
+    }
+
+    /**
      * @Given my tax total should be :taxTotal
      */
     public function myTaxTotalShouldBe($taxTotal)
@@ -643,6 +678,28 @@ final class CheckoutContext implements Context
         Assert::true(
             $this->summaryPage->hasTaxTotal($taxTotal),
             sprintf('The tax total should be %s, but it does not.', $taxTotal)
+        );
+    }
+
+    /**
+     * @Then I should see :shippingMethod shipping method
+     */
+    public function iShouldSeeThisShippingMethod(ShippingMethodInterface $shippingMethod)
+    {
+        Assert::true(
+            $this->summaryPage->hasShippingMethod($shippingMethod),
+            sprintf('I should see %s shipping method, but I do not.', $shippingMethod->getName())
+        );
+    }
+
+    /**
+     * @Then I should see :paymentMethod payment method
+     */
+    public function iShouldSeeThisPaymentMethod(PaymentMethodInterface $paymentMethod)
+    {
+        Assert::true(
+            $this->summaryPage->hasPaymentMethod($paymentMethod),
+            sprintf('I should see %s payment method, but i do not.', $paymentMethod->getName())
         );
     }
 

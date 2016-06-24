@@ -30,17 +30,22 @@
                     <td class="right aligned">{{ item.subtotal|sylius_price }}</td>
                 </tr>
             {% endfor %}
+            </tbody>
+            <tfoot>
             <tr>
-                <td colspan="4" class="right aligned" id="tax-total">
-                    {{ 'sylius.ui.tax_total'|trans}} : {{ order.taxTotal|sylius_price(order.currencyCode) }}
-                </td>
+                <th colspan="4" class="right aligned" id="tax-total">
+                    {{ 'sylius.ui.tax'|trans }}: {{ order.taxTotal|sylius_price }}
+                </th>
+            </tr>
+            <tr>
+                {% include '@SyliusShop/Checkout/_promotion.html.twig' with {'order': order} %}
             </tr>
             <tr>
                 <td colspan="4" class="right aligned" style="font-size: 1.5em;">
                     {{ 'sylius.ui.total'|trans }}: {{ order.total|sylius_price }}
                 </td>
             </tr>
-            </tbody>
+            </tfoot>
         </table>
         <div class="ui two column stackable grid" id="addresses">
             <div class="column">
@@ -54,27 +59,33 @@
         </div>
         <h4 class="ui dividing header">Shipping and payment methods</h4>
         <div class="ui two column stackable grid">
-            <div class="column">
-                <div class="ui large icon message">
-                    <i class="truck icon"></i>
-                    <div class="content">
-                        <div class="header">
-                            FedEx Express
+            <div class="column" id="sylius-checkout-summary-shipping-method">
+                {% for shipment in order.shipments %}
+                    <div class="ui large icon message">
+                        <i class="truck icon"></i>
+                        <div class="content">
+                            <div class="header">
+                                {{ shipment.getMethod.name }}
+                            </div>
+                            <p>{{ shipment.getMethod.description }}</p>
                         </div>
-                        <p>Get the best delivery service and get your goods next day.</p>
                     </div>
-                </div>
+                {% endfor %}
             </div>
-            <div class="column">
-                <div class="ui large icon message">
-                    <i class="payment icon"></i>
-                    <div class="content">
-                        <div class="header">
-                            Payment with cash
+            <div class="column" id="sylius-checkout-summary-payment-method">
+                {% for payment in order.payments %}
+                    <div class="ui large icon message">
+                        <i class="payment icon"></i>
+                        <div class="content">
+                            <div class="header">
+                                {{ payment.getMethod.name }}
+                            </div>
+                            <p>{{ payment.getMethod.description }}</p>
                         </div>
-                        <p>Paying with cash on delivery.</p>
                     </div>
-                </div>
+                {% endfor %}
+            <div class="column">
+                {% include '@SyliusShop/Checkout/_shipping.html.twig' with {'order': order} %}
             </div>
         </div>
         <div class="ui hidden divider"></div>
