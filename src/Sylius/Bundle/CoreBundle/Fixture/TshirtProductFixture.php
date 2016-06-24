@@ -108,19 +108,26 @@ final class TshirtProductFixture extends AbstractFixture
     {
         $options = $this->optionsResolver->resolve($options);
 
-        $taxons = [];
-        if (null === $this->taxonRepository->findOneBy(['code' => 'CATEGORY'])) {
-            $taxons[] = ['name' => 'Category', 'code' => 'CATEGORY', 'parent' => null];
-        }
-
-        if (null === $this->taxonRepository->findOneBy(['code' => 'BRAND'])) {
-            $taxons[] = ['name' => 'Brand', 'code' => 'BRAND', 'parent' => null];
-        }
-
-        $this->taxonFixture->load(['custom' => array_merge($taxons, [
-            ['name' => 'T-Shirts', 'code' => 'TSHIRTS', 'parent' => 'CATEGORY'],
-            ['name' => 'Super Tees', 'code' => 'SUPER-TEES', 'parent' => 'BRAND'],
-        ])]);
+        $this->taxonFixture->load(['custom' => [[
+            'code' => 'category',
+            'name' => 'Category',
+            'children' => [
+                [
+                    'code' => 't_shirts',
+                    'name' => 'T-Shirts',
+                    'children' => [
+                        [
+                            'code' => 'mens_t_shirts',
+                            'name' => 'Men',
+                        ],
+                        [
+                            'code' => 'womens_t_shirts',
+                            'name' => 'Women',
+                        ]
+                    ]
+                ]
+            ]
+        ]]]);
 
         $this->productAttributeFixture->load(['custom' => [
             ['name' => 'T-Shirt brand', 'code' => 'TSHIRT-BRAND', 'type' => TextAttributeType::TYPE],
@@ -155,21 +162,23 @@ final class TshirtProductFixture extends AbstractFixture
             [
                 'name' => 'T-Shirt',
                 'code' => 'TSHIRT',
-                'product_attributes' => ['TSHIRT-BRAND', 'TSHIRT-COLLECTION', 'TSHIRT-MATERIAL'],
+                'product_attributes' => ['TSHIRT-brand', 'TSHIRT-COLLECTION', 'TSHIRT-MATERIAL'],
                 'product_options' => ['TSHIRT-COLOR', 'TSHIRT-SIZE'],
             ],
         ]]);
 
         $products = [];
         for ($i = 0; $i < $options['amount']; ++$i) {
+            $categoryTaxonCode = $this->faker->randomElement(['mens_t_shirts', 'womens_t_shirts']);
+
             $products[] = [
                 'name' => sprintf('T-Shirt "%s"', $this->faker->word),
                 'code' => $this->faker->uuid,
-                'main_taxon' => 'TSHIRTS',
+                'main_taxon' => $categoryTaxonCode,
                 'product_archetype' => 'TSHIRT',
-                'taxons' => ['TSHIRTS', 'SUPER-TEES'],
+                'taxons' => [$categoryTaxonCode],
                 'product_attributes' => [
-                    'TSHIRT-BRAND' => $this->faker->randomElement(['Nike', 'Adidas', 'JKM-476 Streetwear', 'Potato', 'Centipede Wear']),
+                    'TSHIRT-brand' => $this->faker->randomElement(['Nike', 'Adidas', 'JKM-476 Streetwear', 'Potato', 'Centipede Wear']),
                     'TSHIRT-COLLECTION' => sprintf('Sylius %s %s', $this->faker->randomElement(['Summer', 'Winter', 'Spring', 'Autumn']), mt_rand(1995, 2012)),
                     'TSHIRT-MATERIAL' => $this->faker->randomElement(['Centipede', 'Wool', 'Centipede 10% / Wool 90%', 'Potato 100%']),
                 ],

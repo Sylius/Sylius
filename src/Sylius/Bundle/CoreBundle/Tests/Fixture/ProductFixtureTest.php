@@ -91,14 +91,6 @@ final class ProductFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function product_shipping_category_is_optional()
-    {
-        $this->assertConfigurationIsValid([['custom' => [['shipping_category' => 'SHP-0']]]], 'custom.*.shipping_category');
-    }
-
-    /**
-     * @test
-     */
     public function product_taxons_are_optional()
     {
         $this->assertConfigurationIsValid([['custom' => [['taxons' => ['TXN-1', 'TXN-2']]]]], 'custom.*.taxons');

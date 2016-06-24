@@ -9,65 +9,53 @@ sylius_fixtures:
                 logger: ~
 
             fixtures:
-                locale:
-                    options:
-                        locales:
-                            en_US: ~
-                            en_GB: ~
-                            es_ES: ~
-                            pl_PL: ~
-
-                currency:
-                    options:
-                        currencies:
-                            EUR: ~
-                            USD: ~
-                            GBP: ~
-                            CHF: ~
+                locale: ~
+                currency: ~
 
                 geographical:
                     options:
-                        provinces:
-                            US:
-                                US-CA: California
-                                US-OR: Oregon
-                                US-WA: Washington
-                                US-AL: Alabama
-                                US-TN: Tennessee
+                        countries:
+                            - US
                         zones:
-                            US-WEST-COAST:
-                                name: "West coast of USA"
-                                provinces:
-                                    - US-CA
-                                    - US-OR
-                                    - US-WA
-                            EUROPE:
-                                name: "European countries"
+                            US:
+                                name: "United States of America"
                                 countries:
-                                    - PL
-                                    - DE
-                                    - FR
-                            YO-DAWG:
-                                name: "Zone in a zone"
-                                zones:
-                                    - US-WEST-COAST
-                                    - EUROPE
+                                    - US
 
                 payment_method:
                     options:
-                        random: 10
-
-                shipping_category:
-                    options:
-                        random: 10
+                        custom:
+                            cash_on_delivery:
+                                name: Cash on delivery
+                            bank_transfer:
+                                name: Bank transfer
 
                 shipping_method:
                     options:
-                        random: 20
+                        custom:
+                            ups:
+                                name: UPS
+                            dhl_express:
+                                name: DHL Express
+                            fedex:
+                                name: FedEx
 
                 channel:
                     options:
-                        random: 3
+                        custom:
+                            us_web_store:
+                                name: US Web Store
+                                locales:
+                                    - "%locale%"
+                                currencies:
+                                    - "%currency%"
+                                shipping_methods:
+                                    - ups
+                                    - dhl_express
+                                    - fedex
+                                payment_methods:
+                                    - cash_on_delivery
+                                    - bank_transfer
 
                 regular_user:
                     name: user
@@ -80,48 +68,50 @@ sylius_fixtures:
                         custom:
                             -
                                 email: sylius@example.com
-                                first_name: Administrator
-                                last_name: Sylius
+                                first_name: John
+                                last_name: Doe
                                 password: sylius
                                 enabled: true
                                 admin: true
 
-                product_option:
-                    options:
-                        random: 10
-
-                product_attribute:
-                    options:
-                        random: 10
-
-                product_archetype:
-                    options:
-                        random: 10
-
                 tax_category:
                     options:
-                        random: 10
+                        custom:
+                            clothing:
+                                name: Clothing
+                            books:
+                                name: Books
+                            other:
+                                name: Other
 
                 tax_rate:
                     options:
-                        random: 10
-
-                taxon:
-                    options:
-                        random: 50
+                        custom:
+                            clothing_tax:
+                                name: Clothing Sales Tax 7%
+                                zone: US
+                                category: clothing
+                            books_tax:
+                                name: Books Sales Tax 2%
+                                zone: US
+                                category: clothing
+                            default_sales_tax:
+                                name: Sales Tax 20%
+                                zone: US
+                                category: other
 
                 mug_product:
                     options:
-                        amount: 30
+                        amount: 15
 
                 sticker_product:
                     options:
-                        amount: 30
+                        amount: 15
 
                 book_product:
                     options:
-                        amount: 30
+                        amount: 15
 
                 tshirt_product:
                     options:
-                        amount: 30
+                        amount: 15

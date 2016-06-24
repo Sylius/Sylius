@@ -40,7 +40,6 @@ final class ProductFixture extends AbstractResourceFixture
                 ->scalarNode('description')->cannotBeEmpty()->end()
                 ->scalarNode('main_taxon')->cannotBeEmpty()->end()
                 ->scalarNode('product_archetype')->cannotBeEmpty()->end()
-                ->scalarNode('shipping_category')->cannotBeEmpty()->end()
                 ->arrayNode('taxons')->prototype('scalar')->end()->end()
                 ->arrayNode('channels')->prototype('scalar')->end()->end()
                 ->arrayNode('product_attributes')->prototype('scalar')->end()->end()

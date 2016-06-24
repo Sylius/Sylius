@@ -12,12 +12,12 @@
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -30,6 +30,11 @@ final class TaxonExampleFactory implements ExampleFactoryInterface
      * @var FactoryInterface
      */
     private $taxonFactory;
+
+    /**
+     * @var TaxonRepositoryInterface
+     */
+    private $taxonRepository;
 
     /**
      * @var RepositoryInterface
@@ -48,17 +53,18 @@ final class TaxonExampleFactory implements ExampleFactoryInterface
 
     /**
      * @param FactoryInterface $taxonFactory
+     * @param TaxonRepositoryInterface $taxonRepository
      * @param ObjectManager $taxonManager
-     * @param RepositoryInterface $taxonRepository
      * @param RepositoryInterface $localeRepository
      */
     public function __construct(
         FactoryInterface $taxonFactory,
+        TaxonRepositoryInterface $taxonRepository,
         ObjectManager $taxonManager,
-        RepositoryInterface $taxonRepository,
         RepositoryInterface $localeRepository
     ) {
         $this->taxonFactory = $taxonFactory;
+        $this->taxonRepository = $taxonRepository;
         $this->localeRepository = $localeRepository;
 
         $this->faker = \Faker\Factory::create();
@@ -73,14 +79,8 @@ final class TaxonExampleFactory implements ExampleFactoryInterface
                 ->setDefault('description', function (Options $options) {
                     return $this->faker->paragraph;
                 })
-                ->setDefault('parent', LazyOption::randomOneOrNull($taxonRepository, 70))
-                ->setAllowedTypes('parent', ['null', 'string', TaxonInterface::class])
-                ->setNormalizer('parent', function (Options $options, $previousValue) use ($taxonManager) {
-                    $taxonManager->flush();
-
-                    return $previousValue;
-                })
-                ->setNormalizer('parent', LazyOption::findOneBy($taxonRepository, 'code'))
+                ->setDefault('children', [])
+                ->setAllowedTypes('children', ['array'])
         ;
     }
 
@@ -92,7 +92,11 @@ final class TaxonExampleFactory implements ExampleFactoryInterface
         $options = $this->optionsResolver->resolve($options);
 
         /** @var TaxonInterface $taxon */
-        $taxon = $this->taxonFactory->createNew();
+        $taxon = $this->taxonRepository->findOneBy(['code' => $options['code']]);
+
+        if (null === $taxon) {
+            $taxon = $this->taxonFactory->createNew();
+        }
 
         $taxon->setCode($options['code']);
 
@@ -100,11 +104,13 @@ final class TaxonExampleFactory implements ExampleFactoryInterface
             $taxon->setCurrentLocale($localeCode);
             $taxon->setFallbackLocale($localeCode);
 
-            $taxon->setName(sprintf('[%s] %s', $localeCode, $options['name']));
-            $taxon->setDescription(sprintf('[%s] %s', $localeCode, $options['description']));
+            $taxon->setName($options['name']);
+            $taxon->setDescription($options['description']);
         }
 
-        $taxon->setParent($options['parent']);
+        foreach ($options['children'] as $childOptions) {
+            $taxon->addChild($this->create($childOptions));
+        }
 
         return $taxon;
     }
