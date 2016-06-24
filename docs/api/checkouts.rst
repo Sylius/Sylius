@@ -128,7 +128,6 @@ The response will contain the updated order information.
         "comments": [],
         "confirmed": true,
         "created_at": "2014-12-15T13:15:22+0000",
-        "currency": "USD",
         "email": "xschaefer@example.com",
         "expires_at": "2014-12-15T16:15:22+0000",
         "id": 52,
@@ -224,7 +223,8 @@ Parameters
 ~~~~~~~~~~
 
 shipments[X][method]
-    The id of the shipping method, where X is the shipment number
+    The id of the shipping method, where X is the shipment number.
+    Leave empty to add new
 
 Response
 ~~~~~~~~
@@ -249,7 +249,6 @@ Response will contain an updated order information.
         "comments": [],
         "confirmed": true,
         "created_at": "2014-12-15T13:15:22+0000",
-        "currency": "USD",
         "email": "xschaefer@example.com",
         "expires_at": "2014-12-15T16:15:22+0000",
         "id": 52,
@@ -410,8 +409,9 @@ With that information, another PUT request with the id of payment method is enou
 Parameters
 ~~~~~~~~~~
 
-paymentMethod
-    The id of the payment method you prefer
+payments[X][method]
+    The id of the payment method, where X is the shipment number.
+    Leave empty to add new
 
 Response
 ~~~~~~~~
@@ -436,7 +436,6 @@ Response will contain the updated order information.
         "comments": [],
         "confirmed": true,
         "created_at": "2014-12-15T13:15:22+0000",
-        "currency": "USD",
         "email": "xschaefer@example.com",
         "expires_at": "2014-12-15T16:15:22+0000",
         "id": 52,
@@ -458,7 +457,6 @@ Response will contain the updated order information.
                 },
                 "amount": 1504750,
                 "created_at": "2014-12-15T15:02:54+0000",
-                "currency": "USD",
                 "id": 51,
                 "method": {
                     "_links": {
@@ -565,12 +563,10 @@ Now your order is fully constructed, you can get its latest snapshot by calling 
             "type": "web",
             "updated_at": "2014-12-03T09:58:29+0000"
         },
-        "checkout_state": "payment",
+        "checkout_state": "payment_selected",
         "comments": [],
-        "confirmed": true,
         "created_at": "2014-12-15T13:15:22+0000",
-        "currency": "USD",
-        "email": "xschaefer@example.com",
+        "updated_at": "2014-12-15T15:02:55+0000",
         "expires_at": "2014-12-15T16:15:22+0000",
         "id": 52,
         "items": [
@@ -681,7 +677,6 @@ Now your order is fully constructed, you can get its latest snapshot by calling 
                 },
                 "amount": 1504750,
                 "created_at": "2014-12-15T15:02:54+0000",
-                "currency": "USD",
                 "id": 51,
                 "method": {
                     "_links": {
@@ -755,21 +750,7 @@ Now your order is fully constructed, you can get its latest snapshot by calling 
             "updated_at": "2014-12-15T13:37:29+0000"
         },
         "state": "cart",
-        "total": 1504750,
-        "updated_at": "2014-12-15T15:02:55+0000",
-        "user": {
-            "credentials_expired": false,
-            "email": "xschaefer@example.com",
-            "email_canonical": "xschaefer@example.com",
-            "enabled": true,
-            "expired": false,
-            "groups": [],
-            "id": 5,
-            "locked": false,
-            "roles": [],
-            "username": "xschaefer@example.com",
-            "username_canonical": "xschaefer@example.com"
-        }
+        "total": 1504750
     }
 
 This is how your final order looks, if you are happy with that response, simply call another PUT to confirm the checkout, which will became a real order and appear in the backend.
@@ -789,7 +770,19 @@ Final response contains the full order information, now you can call the purchas
 
 .. code-block:: json
 
-    {"to": "do"}
+    // Same as above, assuming we selected the offline Payment method, except following:
+    {
+        "number": "000000001",
+        "completed_at": "2016-06-24T10:55:28+0200",
+        "checkout_state": "completed",
+        "state": "new",
+        "shipments": [
+        {
+            "id": 51,
+            "state": "onhold",
+        }
+      ]
+    }
 
 Purchase step
 -------------
