@@ -4,7 +4,7 @@
 sylius:
     form:
         variant:
-            presentation: Weergave
+            name: Naam
         option:
             name: Naam
             values: Mogelijke waarden

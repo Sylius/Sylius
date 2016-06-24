@@ -149,8 +149,13 @@ sylius:
             name: Comentario del pedido
         shipment_confirmation:
             name: Confirmación del envío
+            content: 'Tu orden ha sido enviada.<br/>Gracias por una transacción exitosa.'
         user_confirmation:
             name: Confirmación de usuario
             subject: Bienvenido a nuestra tienda
+            content: 'Bienvenid@ a nuestra tienda<br/><br/>Has sido registrad@.<br/>Gracias {{ user.username }}.'
         password_reset:
             name: Restablecer contraseña
+            content: '<h3>Hola {{ user.username }}</h3>Para restablecer tu contraseña - por favor visita {{ url }}<br/><br/>Atentamente, el Equipo.'
+    shipping_method_resolver:
+        by_zones_and_channel: Por zonas y canal

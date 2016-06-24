@@ -8,7 +8,7 @@ sylius:
             password: Şifre
             remember_me: Beni hatırla
         option:
-            presentation: Sunum
+            name: Ad
     ui:
         actions: Eylemler
         add_coupon: Kupon Ekle
@@ -52,6 +52,7 @@ sylius:
         no_promotion: Uygulanan hiçbir promosyon yoktur
         no_shipping_charges: Uygulanan hiçbir kargo ücreti yoktur
         no_taxes: Vergi uygulanmadı
+        order_details: Sipariş ayrıntıları
         price: Fiyatı
         quantity: Adet
         ready: Hazır

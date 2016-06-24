@@ -4,7 +4,7 @@
 sylius:
     form:
         variant:
-            presentation: Predstavitev
+            name: Ime
         option:
             name: Ime
             values: Možne vrednosti

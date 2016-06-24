@@ -8,7 +8,7 @@ sylius:
             password: Mot de passe
             remember_me: Rester connecté
         option:
-            presentation: Présentation
+            name: Nom
     ui:
         about: À propos
         account_credentials: "Informations d'intentification"
@@ -135,6 +135,7 @@ sylius:
         not_in: Pas dans
         onhold: En attente
         or: ou
+        order_details: Détails de votre commande
         partially_shipped: Partiellement expédiée
         per_customer_usage_limit: "Limite d'utilisation par client"
         powered_by: Propulsé par

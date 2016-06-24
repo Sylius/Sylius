@@ -8,7 +8,7 @@ sylius:
             password: Geslo
             remember_me: Zapomni si me
         option:
-            presentation: Predstavitev
+            name: Ime
     ui:
         actions: Dejanja
         add_coupon: Dodaj kupon
@@ -56,6 +56,7 @@ sylius:
         no_promotion: Uporabljene ni nobene promocije
         no_shipping_charges: Stroški pošiljanja niso uporabljeni
         no_taxes: Davki niso uporabljeni
+        order_details: Podrobnosti vašega naročila
         powered_by: Poganja
         price: Cena
         quantity: Količina

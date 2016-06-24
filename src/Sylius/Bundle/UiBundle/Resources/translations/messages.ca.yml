@@ -7,7 +7,7 @@ sylius:
             username: "Nom d'usuari"
             password: Contrasenya
         option:
-            presentation: Presentació
+            name: Nom
     ui:
         add_to_cart: Afegir a la cistella
         checkout: Realitza la compra
@@ -19,6 +19,7 @@ sylius:
         enabled: Activat
         new: Nou
         "no": false
+        order_details: Detalls de la teva comanda
         price: Preu
         success: Realitzat amb èxit
         "yes": true

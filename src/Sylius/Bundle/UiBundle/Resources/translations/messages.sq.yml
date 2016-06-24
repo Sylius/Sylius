@@ -8,7 +8,7 @@ sylius:
             password: Fjalëkalimi
             remember_me: Më mbaj mend
         option:
-            presentation: Prezantimi
+            name: Emri
     ui:
         account_credentials: Te dhenat e llogarise
         actions: Veprimet
@@ -113,6 +113,7 @@ sylius:
         not_empty: Jo bosh
         not_in: Jo brenda
         or: ose
+        order_details: Hollësi të porosisë tënde
         powered_by: Mundësuar nga
         price: Çmimi
         promotion_configuration: Konfigurimi i promocionit

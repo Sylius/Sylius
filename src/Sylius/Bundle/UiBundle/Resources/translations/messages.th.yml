@@ -8,7 +8,7 @@ sylius:
             password: รหัสผ่าน
             remember_me: จำการการเข้าระบบของฉันไว้
         option:
-            presentation: คำที่ใช้แสดง
+            name: ชื่อ
     ui:
         about: เกี่ยวกับเรา
         account_credentials: ข้อมูลประจำตัวบัญชี
@@ -166,6 +166,7 @@ sylius:
         not_in: ไม่ได้อยู่ใน
         onhold: Onhold
         or: หรือ
+        order_details: รายละเอียดใบสั่งซื้อ
         order_history: ประวัติการสั่งซื้อ
         order_total: คำสั่งซื้อทั้งหมด
         partially_shipped: ส่งบางส่วน

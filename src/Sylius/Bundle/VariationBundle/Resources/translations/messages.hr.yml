@@ -4,7 +4,7 @@
 sylius:
     form:
         variant:
-            presentation: Prezentacija
+            name: Naziv grupe
         option:
             name: Naziv grupe
             values: Moguće vrijednosti

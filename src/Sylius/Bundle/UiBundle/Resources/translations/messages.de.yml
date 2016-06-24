@@ -8,7 +8,7 @@ sylius:
             password: Passwort
             remember_me: Eingeloggt bleiben
         option:
-            presentation: Präsentation
+            name: Name
     ui:
         actions: Aktionen
         add_coupon: Erstellt
@@ -78,6 +78,7 @@ sylius:
         not_empty: Nicht leer
         not_in: Nicht in
         or: oder
+        order_details: Bestelldetails
         powered_by: Powered by
         price: Preis
         quantity: Anzahl

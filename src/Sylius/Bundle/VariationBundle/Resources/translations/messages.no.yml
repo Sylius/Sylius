@@ -4,7 +4,7 @@
 sylius:
     form:
         variant:
-            presentation: Presentasjon
+            name: Navn
         option:
             name: Navn
             values: Mulige verdier

@@ -2,6 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        variant:
-            presentation: Приказ
+    menu:
+        shop:
+            account:
+                dashboard: Panel

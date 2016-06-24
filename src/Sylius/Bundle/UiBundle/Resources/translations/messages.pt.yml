@@ -5,8 +5,6 @@ sylius:
     form:
         login:
             username: Login
-        option:
-            presentation: Apresentação
     ui:
         add_coupon: Adicionar cupom
         add_to_cart: Adicionar ao carrinho
@@ -33,6 +31,7 @@ sylius:
         no_promotion: Sem promoções
         no_shipping_charges: Nenhuma taxa de entrega foi aplicada
         no_taxes: Nenhuma taxa foi aplicada
+        order_details: Detalhes da sua encomenda
         quantity: Quantidade
         save_changes: Salvar modificações
         shipping_methods: Métodos de envio

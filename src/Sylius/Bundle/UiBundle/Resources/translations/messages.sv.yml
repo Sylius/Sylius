@@ -8,7 +8,7 @@ sylius:
             password: Lösenord
             remember_me: Kom ihåg mig
         option:
-            presentation: Presentation
+            name: Namn
     ui:
         about: Om
         account_credentials: Kontouppgifter

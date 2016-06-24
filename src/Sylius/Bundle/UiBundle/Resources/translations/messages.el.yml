@@ -7,7 +7,7 @@ sylius:
             username: Όνομα χρήστη
             password: Κωδικός πρόσβασης
         option:
-            presentation: Παρουσίαση
+            name: Ονομασία
     ui:
         actions: Ενέργειες
         add_to_cart: Προσθήκη στο καλάθι

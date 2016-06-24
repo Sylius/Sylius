@@ -4,7 +4,7 @@
 sylius:
     form:
         variant:
-            presentation: Выгляд
+            name: Імя
         option:
             name: Імя
             values: Магчымыя значэнні

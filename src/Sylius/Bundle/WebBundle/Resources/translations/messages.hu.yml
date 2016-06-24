@@ -188,7 +188,7 @@ sylius:
         adding_new_email: Új email hozzáadása
         adding_new_locale: Új terület hozzáadása
         additional_information: Kiegészítő információ
-        addressing_step: Címzési lépés
+        addressing_step: Cím beállítása
         adjustments: Kiigazítások
         administration: Adminisztráció
         administration_dashboard: Admin felület
@@ -219,7 +219,7 @@ sylius:
         calculator: Számológép
         cancel: Mégse
         cart_locked: Kosár lezárva
-        cart_summary: Kosár összefoglaló
+        cart_summary: Kosár tartalma
         categorization: Kategorizálás
         category: Kategória
         channel: Csatorna

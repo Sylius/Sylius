@@ -7,7 +7,7 @@ sylius:
             username: Brugernavn
             password: Adgangskode
         option:
-            presentation: Præsentation
+            name: Navn
     ui:
         actions: Handlinger
         add_coupon: Tilføj kupon
@@ -44,6 +44,7 @@ sylius:
         no_promotion: Ingen kampagnekode
         no_shipping_charges: Ingen forsendelsesomkostninger
         no_taxes: Ingen afgifter tilføjet
+        order_details: Detaljer for din ordre
         price: Pris
         quantity: Antal
         ready: Klar

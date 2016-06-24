@@ -8,7 +8,7 @@ sylius:
             password: Slaptažodis
             remember_me: Prisiminti mane
         option:
-            presentation: Prezentacija
+            name: Pavadinimas
     ui:
         actions: Veiksmai
         add_coupon: Pridėti kuponą
@@ -52,6 +52,7 @@ sylius:
         no_promotion: Nepritaikyta jokių nuolaidų
         no_shipping_charges: Nepritaikyta jokių pristatymo mokesčių
         no_taxes: Nepritaikyta jokių mokesčių
+        order_details: Jūsų užsakymo detalės
         powered_by: Sukurta
         price: Kaina
         quantity: Kiekis

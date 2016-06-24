@@ -8,7 +8,7 @@ sylius:
             password: 密码
             remember_me: 记住我
         option:
-            presentation: 演示
+            name: 名称
     ui:
         about: 关于
         account_credentials: 帐户凭据
@@ -139,6 +139,7 @@ sylius:
         not_in: 不在
         onhold: 搁置
         or: 或者
+        order_details: 您的订单的详细信息
         partially_shipped: 部分已发货
         per_customer_usage_limit: 每位客户使用限制
         powered_by: 基于

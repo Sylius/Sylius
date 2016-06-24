@@ -2,6 +2,7 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    form:
-        variant:
-            presentation: Weergawe
+    menu:
+        shop:
+            account:
+                dashboard: Paneli
