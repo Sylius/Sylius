@@ -770,18 +770,261 @@ Final response contains the full order information, now you can call the purchas
 
 .. code-block:: json
 
-    // Same as above, assuming we selected the offline Payment method, except following:
     {
+        "adjustments": [
+            {
+                "amount": 0,
+                "created_at": "2014-12-15T13:37:29+0000",
+                "description": "No tax (0%)",
+                "id": 205,
+                "type": "tax",
+                "locked": false,
+                "neutral": false,
+                "updated_at": "2014-12-15T13:37:29+0000"
+            },
+            {
+                "amount": 5000,
+                "created_at": "2014-12-15T14:30:41+0000",
+                "description": "FedEx World Shipping",
+                "id": 207,
+                "type": "shipping",
+                "locked": false,
+                "neutral": false,
+                "updated_at": "2014-12-15T14:30:41+0000"
+            },
+            {
+                "amount": -250,
+                "created_at": "2014-12-15T14:30:41+0000",
+                "description": "Christmas Sale for orders over 100 EUR.",
+                "id": 208,
+                "type": "promotion",
+                "locked": false,
+                "neutral": false,
+                "updated_at": "2014-12-15T14:30:41+0000"
+            }
+        ],
+        "adjustments_total": 4750,
+        "billing_address": {
+            "_links": {
+                "country": {
+                    "href": "/app_dev.php/api/countries/9"
+                }
+            },
+            "city": "New York",
+            "created_at": "2014-12-15T13:37:28+0000",
+            "first_name": "John",
+            "id": 106,
+            "last_name": "Doe",
+            "postcode": "12435",
+            "street": "Test",
+            "updated_at": "2014-12-15T13:37:29+0000"
+        },
+        "channel": {
+            "_links": {
+                "self": {
+                    "href": "/app_dev.php/api/channels/3"
+                }
+            },
+            "code": "WEB-US",
+            "color": "Pink",
+            "created_at": "2014-12-03T09:54:28+0000",
+            "enabled": true,
+            "id": 3,
+            "name": "United States Webstore",
+            "type": "web",
+            "updated_at": "2014-12-03T09:58:29+0000"
+        },
+        "comments": [],
+        "created_at": "2014-12-15T13:15:22+0000",
+        "updated_at": "2014-12-15T15:02:55+0000",
+        "expires_at": "2014-12-15T16:15:22+0000",
+        "id": 52,
+        "items": [
+            {
+                "_links": {
+                    "product": {
+                        "href": "/app_dev.php/api/products/101"
+                    },
+                    "variant": {
+                        "href": "/app_dev.php/api/products/101/variants/779"
+                    }
+                },
+                "adjustments": [],
+                "adjustments_total": 0,
+                "id": 277,
+                "immutable": false,
+                "inventory_units": [
+                    {
+                        "_links": {
+                            "order": {
+                                "href": "/app_dev.php/api/orders/52"
+                            }
+                        },
+                        "created_at": "2014-12-15T13:18:48+0000",
+                        "id": 828,
+                        "inventory_state": "checkout",
+                        "updated_at": "2014-12-15T14:30:41+0000"
+                    },
+                    {
+                        "_links": {
+                            "order": {
+                                "href": "/app_dev.php/api/orders/52"
+                            }
+                        },
+                        "created_at": "2014-12-15T13:18:48+0000",
+                        "id": 829,
+                        "inventory_state": "checkout",
+                        "updated_at": "2014-12-15T14:30:41+0000"
+                    },
+                    {
+                        "_links": {
+                            "order": {
+                                "href": "/app_dev.php/api/orders/52"
+                            }
+                        },
+                        "created_at": "2014-12-15T13:18:48+0000",
+                        "id": 830,
+                        "inventory_state": "checkout",
+                        "updated_at": "2014-12-15T14:30:41+0000"
+                    }
+                ],
+                "quantity": 3,
+                "total": 1500000,
+                "unit_price": 500000,
+                "variant": {
+                    "available_on": "2014-04-01T06:43:02+0000",
+                    "created_at": "2014-12-03T09:54:35+0000",
+                    "id": 779,
+                    "master": true,
+                    "object": {
+                        "attributes": [
+                            {
+                                "id": 238,
+                                "name": "Book author",
+                                "presentation": "Author",
+                                "value": "Marlen Yost"
+                            },
+                            {
+                                "id": 239,
+                                "name": "Book ISBN",
+                                "presentation": "ISBN",
+                                "value": "326ccbc7-92d1-3aec-b3af-df8afdc5651d"
+                            },
+                            {
+                                "id": 240,
+                                "name": "Book pages",
+                                "presentation": "Number of pages",
+                                "value": "149"
+                            }
+                        ],
+                        "created_at": "2014-12-03T09:54:35+0000",
+                        "description": "Et eveniet voluptas ut magni vero temporibus nihil. Omnis possimus accusantium quia corporis culpa. Et recusandae asperiores qui architecto culpa autem sint accusantium. Officiis iusto accusantium perferendis aliquid ducimus.",
+                        "id": 101,
+                        "name": "Book \"Quidem\" by \"Marlen Yost\"",
+                        "options": [],
+                        "short_description": "Distinctio quos est eaque fugit totam repellendus.",
+                        "updated_at": "2014-12-03T09:54:35+0000"
+                    },
+                    "options": [],
+                    "sku": "326ccbc7-92d1-3aec-b3af-df8afdc5651d",
+                    "updated_at": "2014-12-03T09:54:35+0000"
+                }
+            }
+        ],
+        "items_total": 1500000,
+        "payments": [
+            {
+                "_links": {
+                    "order": {
+                        "href": "/app_dev.php/api/orders/52"
+                    },
+                    "payment-method": {
+                        "href": "/app_dev.php/api/payment-methods/1"
+                    },
+                    "self": {
+                        "href": "/app_dev.php/api/payments/51"
+                    }
+                },
+                "amount": 1504750,
+                "created_at": "2014-12-15T15:02:54+0000",
+                "id": 51,
+                "method": {
+                    "_links": {
+                        "self": {
+                            "href": "/app_dev.php/api/payment-methods/1"
+                        }
+                    },
+                    "created_at": "2014-12-03T09:54:28+0000",
+                    "id": 1,
+                    "name": "Dummy",
+                    "updated_at": "2014-12-03T09:54:28+0000"
+                },
+                "state": "new",
+                "updated_at": "2014-12-15T15:02:55+0000"
+            }
+        ],
+        "shipments": [
+            {
+                "_links": {
+                    "method": {
+                        "href": "/app_dev.php/api/shipping-methods/4"
+                    },
+                    "order": {
+                        "href": "/app_dev.php/api/orders/52"
+                    },
+                    "self": {
+                        "href": "/app_dev.php/api/shipments/51"
+                    }
+                },
+                "created_at": "2014-12-15T14:30:40+0000",
+                "id": 51,
+                "method": {
+                    "_links": {
+                        "self": {
+                            "href": "/app_dev.php/api/shipping-methods/4"
+                        },
+                        "zone": {
+                            "href": "/app_dev.php/api/zones/4"
+                        }
+                    },
+                    "calculator": "flexible_rate",
+                    "category_requirement": 1,
+                    "configuration": {
+                        "additional_item_cost": 500,
+                        "additional_item_limit": 10,
+                        "first_item_cost": 4000
+                    },
+                    "created_at": "2014-12-03T09:54:28+0000",
+                    "enabled": true,
+                    "id": 4,
+                    "name": "FedEx World Shipping",
+                    "updated_at": "2014-12-03T09:54:28+0000"
+                },
+                "state": "onhold",
+                "updated_at": "2014-12-15T14:30:41+0000"
+            }
+        ],
+        "shipping_address": {
+            "_links": {
+                "country": {
+                    "href": "/app_dev.php/api/countries/9"
+                }
+            },
+            "city": "New York",
+            "created_at": "2014-12-15T13:37:28+0000",
+            "first_name": "John",
+            "id": 105,
+            "last_name": "Doe",
+            "postcode": "12435",
+            "street": "Test",
+            "updated_at": "2014-12-15T13:37:29+0000"
+        },
+        "total": 1504750
+
+        "state": "new",
         "number": "000000001",
         "completed_at": "2016-06-24T10:55:28+0200",
         "checkout_state": "completed",
-        "state": "new",
-        "shipments": [
-        {
-            "id": 51,
-            "state": "onhold",
-        }
-      ]
     }
 
 Purchase step
