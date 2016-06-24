@@ -16,8 +16,10 @@ use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Order\ShowPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
+use Sylius\Behat\Service\SecurityServiceInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Webmozart\Assert\Assert;
 
@@ -48,21 +50,29 @@ final class ManagingOrdersContext implements Context
     private $notificationChecker;
 
     /**
+     * @var SecurityServiceInterface
+     */
+    private $securityService;
+
+    /**
      * @param SharedStorageInterface $sharedStorage
      * @param IndexPageInterface $indexPage
      * @param ShowPageInterface $showPage
      * @param NotificationCheckerInterface $notificationChecker
+     * @param SecurityServiceInterface $securityService
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         IndexPageInterface $indexPage,
         ShowPageInterface $showPage,
-        NotificationCheckerInterface $notificationChecker
+        NotificationCheckerInterface $notificationChecker,
+        SecurityServiceInterface $securityService
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->indexPage = $indexPage;
         $this->showPage = $showPage;
         $this->notificationChecker = $notificationChecker;
+        $this->securityService = $securityService;
     }
 
     /**
@@ -538,5 +548,16 @@ final class ManagingOrdersContext implements Context
     public function itShouldHaveState($state)
     {
         $this->indexPage->isSingleResourceOnPage(['state' => $state]);
+    }
+
+    /**
+     * @Then /^(the customer service) should know about (this additional note) for (this order made by "[^"]+")$/
+     */
+    public function theCustomerServiceShouldKnowAboutThisAdditionalNotes(UserInterface $user, $note, OrderInterface $order)
+    {
+        $this->securityService->performActionAs($user, function () use ($note, $order) {
+            $this->showPage->open(['id' => $order->getId()]);
+            Assert::true($this->showPage->hasNote($note), sprintf('I should see %s note, but I do not see', $note));
+        });
     }
 }

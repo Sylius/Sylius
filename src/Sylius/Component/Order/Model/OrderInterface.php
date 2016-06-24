@@ -54,6 +54,16 @@ interface OrderInterface extends
     public function setCompletedAt(\DateTime $completedAt = null);
 
     /**
+     * @return string
+     */
+    public function getNotes();
+
+    /**
+     * @param string $notes
+     */
+    public function setNotes($notes);
+
+    /**
      * @return Collection|OrderItemInterface[] An array or collection of OrderItemInterface
      */
     public function getItems();
@@ -135,16 +145,6 @@ interface OrderInterface extends
      * @return Collection|IdentityInterface[]
      */
     public function getIdentities();
-
-    /**
-     * @return string
-     */
-    public function getAdditionalInformation();
-
-    /**
-     * @param string $information
-     */
-    public function setAdditionalInformation($information);
 
     /**
      * @param string|null $type

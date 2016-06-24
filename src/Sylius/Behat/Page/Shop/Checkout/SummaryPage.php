@@ -152,6 +152,14 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     /**
      * {@inheritdoc}
      */
+    public function addNotes($notes)
+    {
+        $this->getElement('extra_notes')->setValue($notes);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function hasPromotionTotal($promotionTotal)
     {
         return false !== strpos($this->getElement('promotion_total')->getText(), $promotionTotal);
@@ -188,6 +196,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'billing_address' => '#addresses div:contains("Billing address") address',
+            'extra_notes' =>'#sylius_checkout_summary_notes',
             'shipping_address' => '#addresses div:contains("Shipping address") address',
             'items_table' => '#items table',
             'shipping_method' => '#sylius-checkout-summary-shipping-method',

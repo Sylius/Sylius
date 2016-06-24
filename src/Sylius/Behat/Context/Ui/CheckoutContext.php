@@ -364,6 +364,15 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @When /^I provide additional note like "([^"]+)"$/
+     */
+    public function iProvideAdditionalNotesLike($notes)
+    {
+        $this->sharedStorage->set('additional_note', $notes);
+        $this->summaryPage->addNotes($notes);
+    }
+
+    /**
      * @Given /^I proceed logging as "([^"]*)" with "([^"]*)" password$/
      */
     public function iProceedLoggingAs($login, $password)

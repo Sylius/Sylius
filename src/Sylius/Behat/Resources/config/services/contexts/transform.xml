@@ -89,6 +89,7 @@
         </service>
 
         <service id="sylius.behat.context.transform.order" class="%sylius.behat.context.transform.order.class%" scope="scenario">
+            <argument type="service" id="sylius.repository.customer" container="symfony" />
             <argument type="service" id="sylius.repository.order" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>

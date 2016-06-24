@@ -1,5 +1,7 @@
 {% extends '@SyliusShop/Checkout/layout.html.twig' %}
 
+{% form_theme form '@SyliusUi/Form/theme.html.twig' %}
+
 {% block content %}
     {% include '@SyliusShop/Checkout/_header.html.twig' %}
     {% include '@SyliusShop/Checkout/_steps.html.twig' with { 'active': 'summary' } %}
@@ -88,7 +90,15 @@
                 {% include '@SyliusShop/Checkout/_shipping.html.twig' with {'order': order} %}
             </div>
         </div>
+        <h4 class="ui dividing header">{{ 'sylius.ui.extra_notes'|trans }}</h4>
+        <div class="ui one column stackable grid">
+        {{ form_start(form, {'action': path('sylius_shop_checkout_summary'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
+            <input type="hidden" name="_method" value="PUT" />
+            {{ form_row(form.notes) }}
+            {{ form_row(form._token) }}
+            <button type="submit" class="ui large primary icon labeled button"><i class="check icon"></i> Place order</button>
+        {{ form_end(form, {'render_rest': false}) }}
+        </div>
         <div class="ui hidden divider"></div>
-        <button type="submit" class="ui large primary icon labeled button"><i class="check icon"></i> Place order</button>
     </div>
 {% endblock %}

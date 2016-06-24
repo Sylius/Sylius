@@ -40,7 +40,7 @@ class Order implements OrderInterface
     /**
      * @var string
      */
-    protected $additionalInformation;
+    protected $notes;
 
     /**
      * @var Collection|OrderItemInterface[]
@@ -148,6 +148,22 @@ class Order implements OrderInterface
     public function setNumber($number)
     {
         $this->number = $number;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getNotes()
+    {
+        return $this->notes;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setNotes($notes)
+    {
+        $this->notes = $notes;
     }
 
     /**
@@ -524,21 +540,5 @@ class Order implements OrderInterface
             $this->adjustmentsTotal -= $adjustment->getAmount();
             $this->recalculateTotal();
         }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAdditionalInformation()
-    {
-        return $this->additionalInformation;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setAdditionalInformation($information)
-    {
-        $this->additionalInformation = $information;
     }
 }

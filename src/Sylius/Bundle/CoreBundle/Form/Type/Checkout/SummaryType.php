@@ -9,30 +9,25 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CartBundle\Form\Type;
+namespace Sylius\Bundle\CoreBundle\Form\Type\Checkout;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Cart form form.
- * It is built from collection of cart items forms.
- *
- * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class CartType extends AbstractResourceType
+class SummaryType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('items', 'collection', [
-                'type' => 'sylius_cart_item',
-            ])
-            ->add('notes')
-        ;
+        $builder->add('notes', 'textarea', [
+            'label' => 'sylius.form.notes',
+            'required' => false,
+        ]);
     }
 
     /**
@@ -40,6 +35,6 @@ class CartType extends AbstractResourceType
      */
     public function getName()
     {
-        return 'sylius_cart';
+        return 'sylius_checkout_summary';
     }
 }

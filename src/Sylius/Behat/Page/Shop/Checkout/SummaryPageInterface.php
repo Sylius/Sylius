@@ -74,6 +74,11 @@ interface SummaryPageInterface extends SymfonyPageInterface
     public function hasOrderTotal($total);
 
     /**
+     * @param string $notes
+     */
+    public function addNotes($notes);
+
+    /**
      * @param string $promotionTotal
      * 
      * @return bool
