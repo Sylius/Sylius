@@ -55,15 +55,7 @@
         <h4 class="ui dividing header">Shipping and payment methods</h4>
         <div class="ui two column stackable grid">
             <div class="column">
-                <div class="ui large icon message">
-                    <i class="truck icon"></i>
-                    <div class="content">
-                        <div class="header">
-                            FedEx Express
-                        </div>
-                        <p>Get the best delivery service and get your goods next day.</p>
-                    </div>
-                </div>
+                {% include '@SyliusShop/Checkout/_shipping.html.twig' with {'order': order} %}
             </div>
             <div class="column">
                 <div class="ui large icon message">
