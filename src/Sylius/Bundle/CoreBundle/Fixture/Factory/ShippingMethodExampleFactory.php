@@ -66,11 +66,14 @@ final class ShippingMethodExampleFactory implements ExampleFactoryInterface
         $this->faker = \Faker\Factory::create();
         $this->optionsResolver =
             (new OptionsResolver())
+                ->setDefault('code', function (Options $options) {
+                    return StringInflector::nameToCode($options['name']);
+                })
                 ->setDefault('name', function (Options $options) {
                     return $this->faker->words(3, true);
                 })
-                ->setDefault('code', function (Options $options) {
-                    return StringInflector::nameToCode($options['name']);
+                ->setDefault('description', function (Options $options) {
+                    return $this->faker->sentence();
                 })
                 ->setDefault('enabled', function (Options $options) {
                     return $this->faker->boolean(90);
@@ -79,11 +82,11 @@ final class ShippingMethodExampleFactory implements ExampleFactoryInterface
                 ->setDefault('zone', LazyOption::randomOne($zoneRepository))
                 ->setAllowedTypes('zone', ['null', 'string', ZoneInterface::class])
                 ->setNormalizer('zone', LazyOption::findOneBy($zoneRepository, 'code'))
-                ->setDefault('shipping_category', LazyOption::randomOne($shippingCategoryRepository))
+                ->setDefined('shipping_category')
                 ->setAllowedTypes('shipping_category', ['null', 'string', ShippingCategoryInterface::class])
                 ->setNormalizer('shipping_category', LazyOption::findOneBy($shippingCategoryRepository, 'code'))
                 ->setDefault('calculator', function (Options $options) {
-                    return ['type' => DefaultCalculators::FLAT_RATE, 'configuration' => ['amount' => 4200]];
+                    return ['type' => DefaultCalculators::FLAT_RATE, 'configuration' => ['amount' => $this->faker->randomNumber(4)]];
                 })
         ;
     }
@@ -100,15 +103,19 @@ final class ShippingMethodExampleFactory implements ExampleFactoryInterface
         $shippingMethod->setCode($options['code']);
         $shippingMethod->setEnabled($options['enabled']);
         $shippingMethod->setZone($options['zone']);
-        $shippingMethod->setCategory($options['shipping_category']);
         $shippingMethod->setCalculator($options['calculator']['type']);
         $shippingMethod->setConfiguration($options['calculator']['configuration']);
+
+        if (array_key_exists('shipping_category', $options)) {
+            $shippingMethod->setCategory($options['shipping_category']);
+        }
 
         foreach ($this->getLocales() as $localeCode) {
             $shippingMethod->setCurrentLocale($localeCode);
             $shippingMethod->setFallbackLocale($localeCode);
 
-            $shippingMethod->setName(sprintf('[%s] %s', $localeCode, $options['name']));
+            $shippingMethod->setName($options['name']);
+            $shippingMethod->setDescription($options['description']);
         }
 
         return $shippingMethod;

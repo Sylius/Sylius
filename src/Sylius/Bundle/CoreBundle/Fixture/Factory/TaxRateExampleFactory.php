@@ -56,14 +56,14 @@ final class TaxRateExampleFactory implements ExampleFactoryInterface
         $this->faker = \Faker\Factory::create();
         $this->optionsResolver =
             (new OptionsResolver())
-                ->setDefault('name', function (Options $options) {
-                    return $this->faker->words(3, true);
-                })
                 ->setDefault('code', function (Options $options) {
                     return StringInflector::nameToCode($options['name']);
                 })
+                ->setDefault('name', function (Options $options) {
+                    return $this->faker->words(3, true);
+                })
                 ->setDefault('amount', function (Options $options) {
-                    return $this->faker->randomFloat(2, 0, 1);
+                    return $this->faker->randomFloat(2, 0, 0.4);
                 })
                 ->setAllowedTypes('amount', 'float')
                 ->setDefault('included_in_price', function (Options $options) {
@@ -74,9 +74,9 @@ final class TaxRateExampleFactory implements ExampleFactoryInterface
                 ->setDefault('zone', LazyOption::randomOne($zoneRepository))
                 ->setAllowedTypes('zone', ['null', 'string', ZoneInterface::class])
                 ->setNormalizer('zone', LazyOption::findOneBy($zoneRepository, 'code'))
-                ->setDefault('tax_category', LazyOption::randomOne($taxCategoryRepository))
-                ->setAllowedTypes('tax_category', ['null', 'string', TaxCategoryInterface::class])
-                ->setNormalizer('tax_category', LazyOption::findOneBy($taxCategoryRepository, 'code'))
+                ->setDefault('category', LazyOption::randomOne($taxCategoryRepository))
+                ->setAllowedTypes('category', ['null', 'string', TaxCategoryInterface::class])
+                ->setNormalizer('category', LazyOption::findOneBy($taxCategoryRepository, 'code'))
         ;
     }
 
@@ -96,7 +96,7 @@ final class TaxRateExampleFactory implements ExampleFactoryInterface
         $taxRate->setIncludedInPrice($options['included_in_price']);
         $taxRate->setCalculator($options['calculator']);
         $taxRate->setZone($options['zone']);
-        $taxRate->setCategory($options['tax_category']);
+        $taxRate->setCategory($options['category']);
 
         return $taxRate;
     }

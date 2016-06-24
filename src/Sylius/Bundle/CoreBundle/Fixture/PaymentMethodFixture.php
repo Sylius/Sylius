@@ -33,8 +33,9 @@ final class PaymentMethodFixture extends AbstractResourceFixture
     {
         $resourceNode
             ->children()
-                ->scalarNode('name')->cannotBeEmpty()->end()
                 ->scalarNode('code')->cannotBeEmpty()->end()
+                ->scalarNode('name')->cannotBeEmpty()->end()
+                ->scalarNode('description')->cannotBeEmpty()->end()
                 ->scalarNode('gateway')->cannotBeEmpty()->end()
                 ->booleanNode('enabled')->end()
         ;

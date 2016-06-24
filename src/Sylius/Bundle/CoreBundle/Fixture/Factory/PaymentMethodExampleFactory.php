@@ -62,6 +62,9 @@ final class PaymentMethodExampleFactory implements ExampleFactoryInterface
                 ->setDefault('code', function (Options $options) {
                     return StringInflector::nameToCode($options['name']);
                 })
+                ->setDefault('description', function (Options $options) {
+                    return $this->faker->sentence();
+                })
                 ->setDefault('gateway', 'offline')
                 ->setDefault('enabled', function (Options $options) {
                     return $this->faker->boolean(90);
@@ -87,7 +90,8 @@ final class PaymentMethodExampleFactory implements ExampleFactoryInterface
             $paymentMethod->setCurrentLocale($localeCode);
             $paymentMethod->setFallbackLocale($localeCode);
 
-            $paymentMethod->setName(sprintf('[%s] %s', $localeCode, $options['name']));
+            $paymentMethod->setName($options['name']);
+            $paymentMethod->setDescription($options['description']);
         }
 
         return $paymentMethod;

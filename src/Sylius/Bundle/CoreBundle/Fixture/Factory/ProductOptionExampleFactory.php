@@ -105,7 +105,7 @@ final class ProductOptionExampleFactory implements ExampleFactoryInterface
             $productOption->setCurrentLocale($localeCode);
             $productOption->setFallbackLocale($localeCode);
 
-            $productOption->setName(sprintf('[%s] %s', $localeCode, $options['name']));
+            $productOption->setName($options['name']);
         }
 
         foreach ($options['values'] as $code => $value) {
@@ -117,7 +117,7 @@ final class ProductOptionExampleFactory implements ExampleFactoryInterface
                 $productOptionValue->setCurrentLocale($localeCode);
                 $productOptionValue->setFallbackLocale($localeCode);
 
-                $productOptionValue->setValue(sprintf('[%s] %s', $localeCode, $value));
+                $productOptionValue->setValue($value);
 
             }
 

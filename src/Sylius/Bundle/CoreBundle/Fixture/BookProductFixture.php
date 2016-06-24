@@ -109,19 +109,16 @@ final class BookProductFixture extends AbstractFixture
     {
         $options = $this->optionsResolver->resolve($options);
 
-        $taxons = [];
-        if (null === $this->taxonRepository->findOneBy(['code' => 'CATEGORY'])) {
-            $taxons[] = ['name' => 'Category', 'code' => 'CATEGORY', 'parent' => null];
-        }
-
-        if (null === $this->taxonRepository->findOneBy(['code' => 'BRAND'])) {
-            $taxons[] = ['name' => 'Brand', 'code' => 'BRAND', 'parent' => null];
-        }
-
-        $this->taxonFixture->load(['custom' => array_merge($taxons, [
-            ['name' => 'Books', 'code' => 'BOOKS', 'parent' => 'CATEGORY'],
-            ['name' => 'BookMania', 'code' => 'BOOKMANIA', 'parent' => 'BRAND'],
-        ])]);
+        $this->taxonFixture->load(['custom' => [[
+            'code' => 'category',
+            'name' => 'Category',
+            'children' => [
+                [
+                    'code' => 'books',
+                    'name' => 'Books',
+                ]
+            ]
+        ]]]);
 
         $this->productAttributeFixture->load(['custom' => [
             ['name' => 'Book author', 'code' => 'BOOK-AUTHOR', 'type' => TextAttributeType::TYPE],
@@ -145,9 +142,9 @@ final class BookProductFixture extends AbstractFixture
             $products[] = [
                 'name' => sprintf('Book "%s" by %s', $this->faker->word, $name),
                 'code' => $this->faker->uuid,
-                'main_taxon' => 'BOOKS',
+                'main_taxon' => 'books',
                 'product_archetype' => 'BOOK',
-                'taxons' => ['BOOKS', 'BOOKMANIA'],
+                'taxons' => ['books'],
                 'product_attributes' => [
                     'BOOK-AUTHOR' => $name,
                     'BOOK-ISBN' => $this->faker->isbn13,
