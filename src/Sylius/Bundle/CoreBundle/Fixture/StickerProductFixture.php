@@ -160,6 +160,7 @@ final class StickerProductFixture extends AbstractFixture
                     'STICKER-PAPER' => sprintf('Paper from tree %s', $this->faker->randomElement(['Wung', 'Tanajno', 'Lemon-San', 'Me-Gusta'])),
                     'STICKER-RESOLUTION' => $this->faker->randomElement(['JKM XD', '476DPI', 'FULL HD', '200DPI']),
                 ],
+                'images' => [sprintf('%s/../Resources/fixtures/%s', __DIR__, 'stickers.jpg')],
             ];
         }
 

@@ -84,6 +84,8 @@
             <argument type="service" id="sylius.factory.product_variant" />
             <argument type="service" id="sylius.generator.variant" />
             <argument type="service" id="sylius.factory.product_attribute_value" />
+            <argument type="service" id="sylius.factory.product_variant_image" />
+            <argument type="service" id="sylius.image_uploader" />
             <argument type="service" id="sylius.repository.taxon" />
             <argument type="service" id="sylius.repository.product_archetype" />
             <argument type="service" id="sylius.repository.product_attribute" />
