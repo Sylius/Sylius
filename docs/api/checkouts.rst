@@ -333,9 +333,9 @@ To obtain a list of available payment methods for this order, simply call a GET 
                         "href": "/app_dev.php/api/payment-methods/1"
                     }
                 },
-                "created_at": "2014-12-03T09:54:28+0000",
                 "id": 1,
-                "name": "Dummy",
+                "code": "dummy",
+                "created_at": "2014-12-03T09:54:28+0000",
                 "updated_at": "2014-12-03T09:54:28+0000"
             },
             "2": {
@@ -344,9 +344,9 @@ To obtain a list of available payment methods for this order, simply call a GET 
                         "href": "/app_dev.php/api/payment-methods/2"
                     }
                 },
-                "created_at": "2014-12-03T09:54:28+0000",
                 "id": 2,
-                "name": "Paypal Express Checkout",
+                "code": "paypal_express_checkout",
+                "created_at": "2014-12-03T09:54:28+0000",
                 "updated_at": "2014-12-03T09:54:28+0000"
             },
             "3": {
@@ -355,9 +355,9 @@ To obtain a list of available payment methods for this order, simply call a GET 
                         "href": "/app_dev.php/api/payment-methods/3"
                     }
                 },
-                "created_at": "2014-12-03T09:54:28+0000",
                 "id": 3,
-                "name": "Stripe",
+                "code": "stripe",
+                "created_at": "2014-12-03T09:54:28+0000",
                 "updated_at": "2014-12-03T09:54:28+0000"
             },
             "4": {
@@ -366,9 +366,9 @@ To obtain a list of available payment methods for this order, simply call a GET 
                         "href": "/app_dev.php/api/payment-methods/4"
                     }
                 },
-                "created_at": "2014-12-03T09:54:28+0000",
                 "id": 4,
-                "name": "Be2bill",
+                "code": "be_2_bill",
+                "created_at": "2014-12-03T09:54:28+0000",
                 "updated_at": "2014-12-03T09:54:28+0000"
             },
             "5": {
@@ -377,21 +377,25 @@ To obtain a list of available payment methods for this order, simply call a GET 
                         "href": "/app_dev.php/api/payment-methods/5"
                     }
                 },
-                "created_at": "2014-12-03T09:54:28+0000",
                 "id": 5,
-                "name": "Stripe Checkout",
+                "code": "stripe_checkout",
+                "created_at": "2014-12-03T09:54:28+0000",
                 "updated_at": "2014-12-03T09:54:28+0000"
             }
         },
         "payment": {
             "_links": {
+                "self": {
+                  "href": "/app_dev.php/api/payments/2"
+                },
                 "order": {
                     "href": "/app_dev.php/api/orders/52"
                 }
             },
+            "id": 2,
             "amount": 1504750,
             "created_at": "2014-12-15T14:57:28+0000",
-            "currency": "USD",
+            "updated_at": "2014-12-15T14:57:28+0000",
             "state": "new"
         }
     }
