@@ -137,29 +137,30 @@ Registering scenario
 In order for this to work, we need to register `SyliusScenario` and tag it as ``sylius.process.scenario``:
 
 .. code-block:: xml
-<services>
-    <service id="sylius.scenario.flow" class="Acme\DemoBundle\Process\SyliusScenario">
-        <call method="setContainer">
-            <argument type="service" id="service_container" />
-        </call>
-        <tag name="sylius.process.scenario" alias="acme_flow" />
-    </service>
-</services>
-    
+
+    <services>
+        <service id="sylius.scenario.flow" class="Acme\DemoBundle\Process\SyliusScenario">
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+            <tag name="sylius.process.scenario" alias="acme_flow" />
+        </service>
+    </services>
+
 
 or 
 
 
 .. code-block:: yml
 
-services:
-    sylius.scenario.flow:
-        class: Acme\DemoBundle\Process\SyliusScenario
-        calls:
-            - [setContainer, ['@service_container']]
-        tags:
-            - { name: sylius.process.scenario, alias: acme_flow }
-            
+    services:
+        sylius.scenario.flow:
+            class: Acme\DemoBundle\Process\SyliusScenario
+            calls:
+                - [setContainer, ['@service_container']]
+            tags:
+                - { name: sylius.process.scenario, alias: acme_flow }
+                
 
 
 The configured alias will be used later in the route parameters to identify the scenario as you can have more then one.
