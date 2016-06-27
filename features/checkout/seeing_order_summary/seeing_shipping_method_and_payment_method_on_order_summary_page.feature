@@ -17,5 +17,5 @@ Feature: Seeing an order shipping method and payment method details on summary p
         When I specified the shipping address as "Ankh Morpork", "Frost Alley", "90210", "France" for "Jon Snow"
         And I proceed order with "Cash on delivery" shipping method and "Offline" payment
         Then I should be on the checkout summary step
-        And I should see "Cash on delivery" shipping method
-        And I should see "offline" payment method
+        And my order's shipping method should be "Cash on delivery"
+        And my order's payment method should be "Offline"

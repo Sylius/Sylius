@@ -21,6 +21,6 @@ Feature: Seeing order promotion total on order summary page
         When I specified the shipping address as "Ankh Morpork", "Frost Alley", "90210", "France" for "Jon Snow"
         And I proceed order with "Free" shipping method and "Offline" payment
         Then I should be on the checkout summary step
-        And I should see promotion total "-€9.00"
-        And I should see promotion "Holiday promotion"
-        And I should see promotion "All year promotion"
+        And my order promotion total should be "-€9.00"
+        And "Holiday promotion" should be applied to my order
+        And "All year promotion" should be applied to my order

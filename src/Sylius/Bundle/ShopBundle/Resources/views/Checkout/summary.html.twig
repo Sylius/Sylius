@@ -36,7 +36,7 @@
             <tfoot>
             <tr>
                 <th colspan="4" class="right aligned" id="tax-total">
-                    {{ 'sylius.ui.tax'|trans }}: {{ order.taxTotal|sylius_price }}
+                    {{ 'sylius.ui.tax'|trans }}: {{ order.taxTotal|sylius_price(order.currencyCode) }}
                 </th>
             </tr>
             <tr>

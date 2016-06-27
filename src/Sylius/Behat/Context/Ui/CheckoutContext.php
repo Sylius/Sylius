@@ -625,9 +625,9 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Given I should see the shipping total with price :price
+     * @Then my order shipping should be :price
      */
-    public function iShouldSeeTheShippingTotalWithPrice($price)
+    public function myOrderShippingShouldBe($price)
     {
         Assert::true(
             $this->summaryPage->hasShippingTotal($price),
@@ -658,9 +658,9 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Given I should see promotion total :promotionTotal
+     * @Then my order promotion total should be :promotionTotal
      */
-    public function iShouldSeeDiscountTotal($promotionTotal)
+    public function myOrderPromotionTotalShouldBe($promotionTotal)
     {
         Assert::true(
             $this->summaryPage->hasPromotionTotal($promotionTotal),
@@ -669,9 +669,9 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Given I should see promotion :promotionName
+     * @Then :promotionName should be applied to my order
      */
-    public function iShouldSeePromotion($promotionName)
+    public function shouldBeAppliedToMyOrder($promotionName)
     {
         Assert::true(
             $this->summaryPage->hasPromotion($promotionName),
@@ -691,9 +691,9 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Then I should see :shippingMethod shipping method
+     * @Then my order's shipping method should be :shippingMethod
      */
-    public function iShouldSeeThisShippingMethod(ShippingMethodInterface $shippingMethod)
+    public function myOrderSShippingMethodShouldBe(ShippingMethodInterface $shippingMethod)
     {
         Assert::true(
             $this->summaryPage->hasShippingMethod($shippingMethod),
@@ -702,9 +702,9 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Then I should see :paymentMethod payment method
+     * @Then my order's payment method should be :paymentMethod
      */
-    public function iShouldSeeThisPaymentMethod(PaymentMethodInterface $paymentMethod)
+    public function myOrderSPaymentMethodShouldBe(PaymentMethodInterface $paymentMethod)
     {
         Assert::true(
             $this->summaryPage->hasPaymentMethod($paymentMethod),
