@@ -53,6 +53,6 @@ interface TaxonInterface extends VariableTaxonInterface
     /**
      * @param TaxonImageInterface $image
      */
-    public function addImagae(TaxonImageInterface $image);
+    public function addImage(TaxonImageInterface $image);
 
 }
