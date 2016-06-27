@@ -172,6 +172,14 @@ final class ManagingPaymentMethodsContext implements Context
     }
 
     /**
+     * @Given I set its instruction as :instructions in :language
+     */
+    public function iSetItsInstructionAsIn($instructions, $language)
+    {
+        $this->createPage->setInstructions($instructions, $language);
+    }
+
+    /**
      * @When I add it
      * @When I try to add it
      */
@@ -295,6 +303,23 @@ final class ManagingPaymentMethodsContext implements Context
         Assert::false(
             $this->updatePage->isPaymentMethodEnabled(),
             'Payment method should be disabled'
+        );
+    }
+
+    /**
+     * @Given the payment method :paymentMethod should have instructions :instructions in :language
+     */
+    public function thePaymentMethodShouldHaveInstructionsIn(
+        PaymentMethodInterface $paymentMethod,
+        $instructions,
+        $language
+    ) {
+        $this->iWantToModifyAPaymentMethod($paymentMethod);
+
+        Assert::same(
+            $this->updatePage->getPaymentMethodInstructions($language),
+            $instructions,
+            'Instructions of payment method are invalid'
         );
     }
 

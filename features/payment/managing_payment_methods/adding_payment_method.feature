@@ -28,3 +28,15 @@ Feature: Adding a new payment method
         And I add it
         Then I should be notified that it has been successfully created
         And the payment method "Paypal Express Checkout" should appear in the registry
+
+    @ui
+    Scenario: Adding a new payment method with instructions
+        Given I want to create a new payment method
+        When I name it "Offline" in "English (United States)"
+        And I specify its code as "PEC"
+        And I choose "Offline" gateway
+        And I set its instruction as "Bank account: 0000 1111 2222 3333" in "English (United States)"
+        And I add it
+        Then I should be notified that it has been successfully created
+        And the payment method "Offline" should appear in the registry
+        And the payment method "Offline" should have instructions "Bank account: 0000 1111 2222 3333" in "English (United States)"

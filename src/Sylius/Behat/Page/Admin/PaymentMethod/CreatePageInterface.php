@@ -44,6 +44,12 @@ interface CreatePageInterface extends BaseCreatePageInterface
     public function describeIt($description, $languageCode);
 
     /**
+     * @param string $instructions
+     * @param string $languageCode
+     */
+    public function setInstructions($instructions, $languageCode);
+
+    /**
      * @return bool
      */
     public function isCodeDisabled();
