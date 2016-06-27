@@ -14,6 +14,7 @@ namespace Sylius\Bundle\CoreBundle\StateMachineCallback;
 use SM\Factory\FactoryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Core\OrderProcessing\PaymentProcessorInterface;
 use Sylius\Component\Order\OrderTransitions;
 
 /**
@@ -27,11 +28,18 @@ class OrderPaymentCallback
     protected $factory;
 
     /**
-     * @param FactoryInterface $factory
+     * @var PaymentProcessorInterface
      */
-    public function __construct(FactoryInterface $factory)
+    protected $paymentProcessor;
+
+    /**
+     * @param FactoryInterface $factory
+     * @param PaymentProcessorInterface $paymentProcessor
+     */
+    public function __construct(FactoryInterface $factory, PaymentProcessorInterface $paymentProcessor)
     {
         $this->factory = $factory;
+        $this->paymentProcessor = $paymentProcessor;
     }
 
     public function updateOrderOnPayment(PaymentInterface $payment)
@@ -60,5 +68,10 @@ class OrderPaymentCallback
         if ($total >= $order->getTotal()) {
             $this->factory->get($order, OrderTransitions::GRAPH)->apply(OrderTransitions::SYLIUS_CONFIRM, true);
         }
+    }
+
+    public function processOrderPayments(PaymentInterface $payment)
+    {
+        $this->paymentProcessor->processOrderPayments($payment->getOrder());
     }
 }
