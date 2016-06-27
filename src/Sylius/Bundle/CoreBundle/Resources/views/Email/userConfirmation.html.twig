@@ -3,5 +3,5 @@
 {% endblock %}
 
 {% block body %}
-    {{ 'sylius.email.user_confirmation.content'|trans }}
+    {{ 'sylius.email.user_confirmation.content'|trans({'%username%': user.username}) }}
 {% endblock %}
