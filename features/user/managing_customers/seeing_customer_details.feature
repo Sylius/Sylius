@@ -5,10 +5,9 @@ Feature: Seeing customer's details
     I want to be able to show specific customer's page
 
     Background:
-        Given the store has customer "f.baggins@example.com" since "2011-01-10 21:00:00"
-        And his name is "Frodo Baggins"
-        And customer "f.baggins@shire.me" has shipping address "Hobbiton", "Bag End", "1", "Shire" for "Frodo Baggins"
-        And customer "f.baggins@shire.me" has billing address "Rivendell", "The Last Homely House", "7", "Eriador" for "Bilbo Baggins"
+        Given the store has customer "f.baggins@example.com" with name "Frodo Baggins" since "2011-01-10 21:00:00"
+        And he has shipping address as "Hobbiton", "Bag End", "1", "Shire" for "Frodo Baggins"
+        And he has billing address as "Rivendell", "The Last Homely House", "7", "Eriador" for "Bilbo Baggins"
         And I am logged in as an administrator
 
     @todo

@@ -47,7 +47,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
      */
     public function getRouteName()
     {
-        return 'sylius_backend_customer_show';
+        return 'sylius_admin_customer_show';
     }
 
     /**
