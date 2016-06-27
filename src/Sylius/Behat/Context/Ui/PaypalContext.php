@@ -88,7 +88,7 @@ final class PaypalContext implements Context
     }
 
     /**
-     * @Then I should be redirected to PayPal Express Checkout page
+     * @Then I should be redirected back to PayPal Express Checkout page
      */
     public function iShouldBeRedirectedToPaypalExpressCheckoutPage()
     {
