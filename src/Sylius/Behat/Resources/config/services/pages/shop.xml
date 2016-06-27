@@ -24,15 +24,11 @@
         <parameter key="sylius.behat.page.shop.cart_summary.class">Sylius\Behat\Page\Shop\Cart\SummaryPage</parameter>
         <parameter key="sylius.behat.page.shop.home.class">Sylius\Behat\Page\Shop\HomePage</parameter>
         <parameter key="sylius.behat.page.shop.legacy_home.class">Sylius\Behat\Page\Shop\LegacyHomePage</parameter>
-        <parameter key="sylius.behat.page.shop.order.order_payments.class">Sylius\Behat\Page\Shop\Order\OrderPaymentsPage</parameter>
     </parameters>
 
     <services>
         <service id="sylius.behat.page.shop.cart_summary" class="%sylius.behat.page.shop.cart_summary.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
         <service id="sylius.behat.page.shop.home" class="%sylius.behat.page.shop.home.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
         <service id="sylius.behat.page.shop.legacy_home" class="%sylius.behat.page.shop.legacy_home.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false" />
-        <service id="sylius.behat.page.shop.order.order_payments" class="%sylius.behat.page.shop.order.order_payments.class%" parent="sylius.behat.symfony_page" scope="scenario" public="false">
-            <argument type="service" id="sylius.behat.table_accessor" />
-        </service>
     </services>
 </container>
