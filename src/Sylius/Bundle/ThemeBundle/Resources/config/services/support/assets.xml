@@ -12,16 +12,8 @@
 -->
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-    <parameters>
-        <parameter key="sylius.theme.asset.assets_installer.class">Sylius\Bundle\ThemeBundle\Asset\Installer\OutputAwareAssetsInstaller</parameter>
-        <parameter key="sylius.theme.asset.path_resolver.class">Sylius\Bundle\ThemeBundle\Asset\PathResolver</parameter>
-
-        <!-- Overridden services -->
-        <parameter key="sylius.assets.path_package.class">Sylius\Bundle\ThemeBundle\Asset\Package\PathPackage</parameter>
-    </parameters>
-
     <services>
-        <service id="sylius.theme.asset.assets_installer" class="%sylius.theme.asset.assets_installer.class%">
+        <service id="sylius.theme.asset.assets_installer" class="Sylius\Bundle\ThemeBundle\Asset\Installer\OutputAwareAssetsInstaller">
             <argument type="service" id="filesystem" />
             <argument type="service" id="kernel" />
             <argument type="service" id="sylius.repository.theme" />
@@ -29,10 +21,10 @@
             <argument type="service" id="sylius.theme.asset.path_resolver" />
         </service>
 
-        <service id="sylius.theme.asset.path_resolver" class="%sylius.theme.asset.path_resolver.class%" public="false" />
+        <service id="sylius.theme.asset.path_resolver" class="Sylius\Bundle\ThemeBundle\Asset\PathResolver" public="false" />
 
         <!-- Overridden services -->
-        <service id="assets.path_package" class="%sylius.assets.path_package.class%" abstract="true">
+        <service id="assets.path_package" class="Sylius\Bundle\ThemeBundle\Asset\Package\PathPackage" abstract="true">
             <argument /> <!-- base path -->
             <argument type="service" /> <!-- version strategy -->
             <argument type="service" id="sylius.context.theme" />

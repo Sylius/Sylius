@@ -15,8 +15,10 @@ use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ArchetypeInterface;
 use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Component\Core\Model\ProductVariantImageInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
+use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Product\Model\AttributeInterface;
 use Sylius\Component\Product\Model\AttributeValueInterface;
@@ -24,6 +26,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Variation\Generator\VariantGeneratorInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Webmozart\Assert\Assert;
@@ -49,6 +52,16 @@ final class ProductExampleFactory implements ExampleFactoryInterface
     private $variantGenerator;
 
     /**
+     * @var FactoryInterface
+     */
+    private $productVariantImageFactory;
+
+    /**
+     * @var ImageUploaderInterface
+     */
+    private $imageUploader;
+
+    /**
      * @var RepositoryInterface
      */
     private $localeRepository;
@@ -68,6 +81,8 @@ final class ProductExampleFactory implements ExampleFactoryInterface
      * @param FactoryInterface $productVariantFactory
      * @param VariantGeneratorInterface $variantGenerator
      * @param FactoryInterface $productAttibuteValueFactory
+     * @param FactoryInterface $productVariantImageFactory
+     * @param ImageUploaderInterface $imageUploader
      * @param RepositoryInterface $taxonRepository
      * @param RepositoryInterface $productArchetypeRepository
      * @param RepositoryInterface $productAttributeRepository
@@ -81,6 +96,8 @@ final class ProductExampleFactory implements ExampleFactoryInterface
         FactoryInterface $productVariantFactory,
         VariantGeneratorInterface $variantGenerator,
         FactoryInterface $productAttibuteValueFactory,
+        FactoryInterface $productVariantImageFactory,
+        ImageUploaderInterface $imageUploader,
         RepositoryInterface $taxonRepository,
         RepositoryInterface $productArchetypeRepository,
         RepositoryInterface $productAttributeRepository,
@@ -92,6 +109,8 @@ final class ProductExampleFactory implements ExampleFactoryInterface
         $this->productFactory = $productFactory;
         $this->productVariantFactory = $productVariantFactory;
         $this->variantGenerator = $variantGenerator;
+        $this->productVariantImageFactory = $productVariantImageFactory;
+        $this->imageUploader = $imageUploader;
         $this->localeRepository = $localeRepository;
 
         $this->faker = \Faker\Factory::create();
@@ -179,6 +198,9 @@ final class ProductExampleFactory implements ExampleFactoryInterface
 
                     return array_merge($productOptions, $productArchetype->getOptions()->toArray());
                 })
+
+                ->setDefault('images', [])
+                ->setAllowedTypes('images', 'array')
         ;
     }
 
@@ -239,6 +261,16 @@ final class ProductExampleFactory implements ExampleFactoryInterface
             $productVariant->setPrice($this->faker->randomNumber(4));
             $productVariant->setCode(sprintf('%s-variant#%d', $options['code'], $i));
             $productVariant->setOnHand($this->faker->randomNumber(1));
+
+            foreach ($options['images'] as $imagePath) {
+                /** @var ProductVariantImageInterface $productVariantImage */
+                $productVariantImage = $this->productVariantImageFactory->createNew();
+                $productVariantImage->setFile(new UploadedFile($imagePath, basename($imagePath)));
+
+                $this->imageUploader->upload($productVariantImage);
+
+                $productVariant->addImage($productVariantImage);
+            }
 
             ++$i;
         }

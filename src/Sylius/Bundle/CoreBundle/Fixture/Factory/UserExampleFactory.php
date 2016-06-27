@@ -80,9 +80,7 @@ final class UserExampleFactory implements ExampleFactoryInterface
                     return $this->faker->boolean(90);
                 })
                 ->setAllowedTypes('enabled', 'bool')
-                ->setDefault('admin', function (Options $options) {
-                    return $this->faker->boolean(10);
-                })
+                ->setDefault('admin', false)
                 ->setAllowedTypes('admin', 'bool')
                 ->setDefault('password', function (Options $options) {
                     return $this->faker->password;

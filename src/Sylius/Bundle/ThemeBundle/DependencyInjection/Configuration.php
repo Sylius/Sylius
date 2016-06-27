@@ -44,7 +44,22 @@ final class Configuration implements ConfigurationInterface
 
         $this->addSourcesConfiguration($rootNode);
 
-        $rootNode->children()->scalarNode('context')->defaultValue('sylius.theme.context.settable')->cannotBeEmpty();
+        $rootNode
+            ->children()
+                ->arrayNode('assets')
+                    ->canBeDisabled()
+                ->end()
+                ->arrayNode('templating')
+                    ->canBeDisabled()
+                ->end()
+                ->arrayNode('translations')
+                    ->canBeDisabled()
+                ->end()
+                ->scalarNode('context')
+                    ->defaultValue('sylius.theme.context.settable')
+                    ->cannotBeEmpty()
+                ->end()
+        ;
 
         return $treeBuilder;
     }

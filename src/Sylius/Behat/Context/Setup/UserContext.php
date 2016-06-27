@@ -133,6 +133,28 @@ final class UserContext implements Context
     }
 
     /**
+     * @Given his account was deleted
+     */
+    public function hisAccountWasDeleted()
+    {
+        $user = $this->sharedStorage->get('user');
+
+        $this->userRepository->remove($user);
+    }
+
+    /**
+     * @Given there is an administrator identified by :email
+     */
+    public function theStoreHasCustomerServiceAccountIdentifiedBy($email)
+    {
+        $administrator = $this->userFactory->createDefaultAdmin();
+        $administrator->setEmail($email);
+
+        $this->sharedStorage->set('customer_service', $administrator);
+        $this->userRepository->add($administrator);
+    }
+
+    /**
      * @param string $firstName
      * @param string $lastName
      * @param string $country
@@ -159,15 +181,5 @@ final class UserContext implements Context
         $address->setCountryCode($this->countryCodeConverter->convertToCode($country));
 
         return $address;
-    }
-
-    /**
-     * @Given his account was deleted
-     */
-    public function hisAccountWasDeleted()
-    {
-        $user = $this->sharedStorage->get('user');
-
-        $this->userRepository->remove($user);
     }
 }

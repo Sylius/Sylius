@@ -1,0 +1,8 @@
+{% if order.notes is not null %}
+    <h4 class="ui top attached styled header">
+        {{ 'sylius.ui.notes'|trans }}
+    </h4>
+    <div class="ui attached segment" id="sylius-order-notes">
+        {{ order.notes }}
+    </div>
+{% endif %}

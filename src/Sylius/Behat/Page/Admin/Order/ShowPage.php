@@ -332,6 +332,16 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
+    public function hasNote($note)
+    {
+        $orderNotesElement = $this->getElement('order_notes');
+
+        return $orderNotesElement->getText() === $note;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getRouteName()
     {
         return 'sylius_admin_order_show';
@@ -358,6 +368,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'taxes' => '#taxes',
             'total' => '#total',
             'order_state' => 'div.sub.header > span.ui.label',
+            'order_notes' => '#sylius-order-notes',
         ]);
     }
 

@@ -87,6 +87,7 @@ final class PaymentContext implements Context
         $channel = $this->sharedStorage->get('channel');
         $channel->addPaymentMethod($paymentMethod);
 
+        $this->sharedStorage->set('payment_method', $paymentMethod);
         $this->paymentMethodRepository->add($paymentMethod);
     }
 
