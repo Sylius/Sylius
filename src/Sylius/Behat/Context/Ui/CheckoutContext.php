@@ -895,6 +895,16 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @When /^I complete addressing step with email "([^"]+)" and ("([^"]+)" as shipping country)$/
+     */
+    public function iCompleteAddressingStepWithEmail($email, AddressInterface $address)
+    {
+        $this->iSpecifiedTheShippingAddress($address);
+        $this->iSpecifyTheEmail($email);
+        $this->iCompleteTheAddressingStep();
+    }
+
+    /**
      * @param string $type
      * @param string $element
      * @param string $expectedMessage

@@ -45,6 +45,7 @@ final class AddressingContext implements Context
 
     /**
      * @Transform /^to "([^"]+)"$/
+     * @Transform /^"([^"]+)" as shipping country$/
      */
     public function createNewAddress($countryName)
     {
@@ -56,6 +57,7 @@ final class AddressingContext implements Context
     /**
      * @Transform /^address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)"$/
      * @Transform /^address is "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)"$/
+     * @Transform /^address "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)"$/
      */
     public function createNewAddressWith($cityName, $street, $postcode, $countryName, $customerName)
     {

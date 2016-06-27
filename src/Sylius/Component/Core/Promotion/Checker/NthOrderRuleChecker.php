@@ -17,6 +17,8 @@ use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Promotion\Checker\RuleCheckerInterface;
 use Sylius\Component\Promotion\Exception\UnsupportedTypeException;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
+use Sylius\Component\Storage\StorageInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -57,7 +59,12 @@ class NthOrderRuleChecker implements RuleCheckerInterface
             return false;
         }
 
-        return $this->orderRepository->countByCustomerAndPaymentState($customer, PaymentInterface::STATE_COMPLETED) === ($configuration['nth'] - 1);
+        //eligible if it is first order of guest and the promotion is on first order
+        if (null === $customer->getId()) {
+            return 1 === $configuration['nth'];
+        }
+
+        return $this->orderRepository->countByCustomer($customer) === ($configuration['nth'] - 1);
     }
 
     /**
