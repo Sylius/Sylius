@@ -151,10 +151,10 @@ sylius:
         user_confirmation:
             name: User confirmation
             subject: Welcome to our store
-            content: Welcome to our store<br/><br/>You have just been registered.<br/>Thank you {{ user.username }}.
+            content: Welcome to our store<br/><br/>You have just been registered.<br/>Thank you %username%.
         password_reset:
             name: Password reset
-            content: <h3>Hello {{ user.username }}</h3>To reset your password - please visit {{ url }} <br/><br/>Regards, the Team.
+            content: <h3>Hello %username%</h3>To reset your password - please visit %url% <br/><br/>Regards, the Team.
 
     shipping_method_resolver:
         by_zones_and_channel: By zones and channel
