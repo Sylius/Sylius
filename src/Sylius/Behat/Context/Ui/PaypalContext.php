@@ -12,11 +12,11 @@
 namespace Sylius\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Page\Shop\Checkout\CanceledPaymentPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\FinalizeStepInterface;
 use Sylius\Behat\Page\External\PaypalExpressCheckoutPageInterface;
-use Sylius\Behat\Page\Shop\Order\OrderPaymentsPageInterface;
 use Sylius\Behat\Service\Mocker\PaypalApiMocker;
-use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Behat\Service\Mocker\PaypalApiMockerInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 
@@ -31,11 +31,6 @@ final class PaypalContext implements Context
     private $sharedStorage;
 
     /**
-     * @var OrderPaymentsPageInterface
-     */
-    private $orderPaymentsPage;
-
-    /**
      * @var PaypalExpressCheckoutPageInterface
      */
     private $paypalExpressCheckoutPage;
@@ -46,7 +41,12 @@ final class PaypalContext implements Context
     private $checkoutFinalizeStep;
 
     /**
-     * @var PaypalApiMocker
+     * @var CanceledPaymentPageInterface
+     */
+    private $canceledPaymentPage;
+
+    /**
+     * @var PaypalApiMockerInterface
      */
     private $paypalApiMocker;
 
@@ -57,24 +57,24 @@ final class PaypalContext implements Context
 
     /**
      * @param SharedStorageInterface $sharedStorage
-     * @param OrderPaymentsPageInterface $orderPaymentsPage
      * @param PaypalExpressCheckoutPageInterface $paypalExpressCheckoutPage
      * @param FinalizeStepInterface $checkoutFinalizeStep
+     * @param CanceledPaymentPageInterface $canceledPaymentPage
      * @param PaypalApiMocker $paypalApiMocker
      * @param OrderRepositoryInterface $orderRepository
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
-        OrderPaymentsPageInterface $orderPaymentsPage,
         PaypalExpressCheckoutPageInterface $paypalExpressCheckoutPage,
         FinalizeStepInterface $checkoutFinalizeStep,
+        CanceledPaymentPageInterface $canceledPaymentPage,
         PaypalApiMocker $paypalApiMocker,
         OrderRepositoryInterface $orderRepository
     ) {
         $this->sharedStorage = $sharedStorage;
-        $this->orderPaymentsPage = $orderPaymentsPage;
         $this->paypalExpressCheckoutPage = $paypalExpressCheckoutPage;
         $this->checkoutFinalizeStep = $checkoutFinalizeStep;
+        $this->canceledPaymentPage = $canceledPaymentPage;
         $this->paypalApiMocker = $paypalApiMocker;
         $this->orderRepository = $orderRepository;
     }
@@ -89,7 +89,7 @@ final class PaypalContext implements Context
     }
 
     /**
-     * @Then I should be redirected to PayPal Express Checkout page
+     * @Then I should be redirected back to PayPal Express Checkout page
      */
     public function iShouldBeRedirectedToPaypalExpressCheckoutPage()
     {
@@ -118,27 +118,7 @@ final class PaypalContext implements Context
      */
     public function iTryToPayAgain()
     {
-        $order = $this->getLastOrder();
-        $payment = $order->getLastPayment();
         $this->paypalApiMocker->mockApiPaymentInitializeResponse();
-        $this->orderPaymentsPage->clickPayButtonForGivenPayment($payment);
-    }
-
-    /**
-     * @return OrderInterface
-     *
-     * @throws \RuntimeException
-     */
-    private function getLastOrder()
-    {
-        $customer = $this->sharedStorage->get('user')->getCustomer();
-        $orders = $this->orderRepository->findByCustomer($customer);
-        $lastOrder = end($orders);
-
-        if (false === $lastOrder) {
-            throw new \RuntimeException(sprintf('There is no last order for %s', $customer->getFullName()));
-        }
-
-        return $lastOrder;
+        $this->canceledPaymentPage->clickPayButton();
     }
 }

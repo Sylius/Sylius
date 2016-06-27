@@ -15,6 +15,7 @@ use Sylius\Behat\Page\SymfonyPage;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 class ThankYouPage extends SymfonyPage implements ThankYouPageInterface
 {
@@ -43,7 +44,7 @@ class ThankYouPage extends SymfonyPage implements ThankYouPageInterface
      */
     public function getRouteName()
     {
-        return 'sylius_checkout_thank_you';
+        return 'sylius_shop_checkout_thank_you';
     }
 
     /**
