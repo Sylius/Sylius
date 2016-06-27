@@ -19,6 +19,11 @@ class TaxonImage extends Image implements TaxonImageInterface
     protected $taxon;
 
     /**
+     * @var string
+     */
+    protected $code;
+
+    /**
      * {@inheritdoc}
      */
     public function getTaxon()
@@ -33,4 +38,22 @@ class TaxonImage extends Image implements TaxonImageInterface
     {
         $this->taxon = $taxon;
     }
+
+    /**
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * @param string $code
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+    }
+
+
 }
