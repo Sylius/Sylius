@@ -1,4 +1,6 @@
 * :doc:`/book/introduction`
+* :doc:`/book/requirements`
+* :doc:`/book/environments`
 * :doc:`/book/installation`
 * :doc:`/book/architecture`
 * :doc:`/book/state_machine`
