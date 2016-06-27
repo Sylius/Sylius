@@ -551,7 +551,7 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then /^(the customer service) should know about (this additional note) for (this order made by "[^"]+")$/
+     * @Then /^(the administrator) should know about (this additional note) for (this order made by "[^"]+")$/
      */
     public function theCustomerServiceShouldKnowAboutThisAdditionalNotes(UserInterface $user, $note, OrderInterface $order)
     {

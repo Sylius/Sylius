@@ -17,7 +17,7 @@ Feature: Seeing order shipping total on order summary page
         When I specified the shipping address as "Ankh Morpork", "Frost Alley", "90210", "France" for "Jon Snow"
         And I proceed order with "UPS" shipping method and "Offline" payment
         Then I should be on the checkout summary step
-        And I should see the shipping total with price "€20.00"
+        And my order shipping should be "€20.00"
 
     @ui
     Scenario: Seeing the shipping total on order summary with discounted price
@@ -27,4 +27,4 @@ Feature: Seeing order shipping total on order summary page
         When I specified the shipping address as "Ankh Morpork", "Frost Alley", "90210", "France" for "Jon Snow"
         And I proceed order with "UPS" shipping method and "Offline" payment
         Then I should be on the checkout summary step
-        And I should see the shipping total with price "€10.00"
+        And my order shipping should be "€10.00"

@@ -145,12 +145,12 @@ final class UserContext implements Context
     /**
      * @Given there is an administrator identified by :email
      */
-    public function theStoreHasCustomerServiceAccountIdentifiedBy($email)
+    public function thereIsAnAdministratorIdentifiedBy($email)
     {
         $administrator = $this->userFactory->createDefaultAdmin();
         $administrator->setEmail($email);
 
-        $this->sharedStorage->set('customer_service', $administrator);
+        $this->sharedStorage->set('administrator', $administrator);
         $this->userRepository->add($administrator);
     }
 

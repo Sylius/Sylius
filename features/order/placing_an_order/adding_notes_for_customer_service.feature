@@ -20,4 +20,4 @@ Feature: Adding a note to order
         And I proceed order with "Free" shipping method and "Offline" payment
         When I provide additional note like "Code to the front gateway is #44*"
         And I confirm my order
-        Then the customer service should know about this additional note for this order made by "customer@example.com"
+        Then the administrator should know about this additional note for this order made by "customer@example.com"
