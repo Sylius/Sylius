@@ -94,6 +94,6 @@ final class Configuration implements ConfigurationInterface
         $optionsNode = $attributesNodeBuilder->arrayNode('options');
         $optionsNode->addDefaultChildrenIfNoneSet();
         $optionsNode->beforeNormalization()->always(function ($value) { return [$value]; });
-        $optionsNode->prototype('variable');
+        $optionsNode->prototype('array')->ignoreExtraKeys(false);
     }
 }

@@ -169,6 +169,46 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @test
+     */
+    public function fixtures_options_are_an_array()
+    {
+        $this->assertPartialConfigurationIsInvalid(
+            [['suites' => ['suite' => ['fixtures' => ['fixture' => [
+                'options' => 42,
+            ]]]]]],
+            'suites.*.fixtures'
+        );
+
+        $this->assertPartialConfigurationIsInvalid(
+            [['suites' => ['suite' => ['fixtures' => ['fixture' => [
+                'options' => 'string string',
+            ]]]]]],
+            'suites.*.fixtures'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function listeners_options_are_an_array()
+    {
+        $this->assertPartialConfigurationIsInvalid(
+            [['suites' => ['suite' => ['listeners' => ['listener' => [
+                'options' => 42,
+            ]]]]]],
+            'suites.*.listeners'
+        );
+
+        $this->assertPartialConfigurationIsInvalid(
+            [['suites' => ['suite' => ['listeners' => ['listener' => [
+                'options' => 'string string',
+            ]]]]]],
+            'suites.*.listeners'
+        );
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function getConfiguration()
