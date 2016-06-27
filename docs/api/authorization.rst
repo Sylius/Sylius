@@ -89,7 +89,7 @@ Example
     In a developer environment there is a default API user and client data. To use this credentials you have to load `API`__ data fixtures.
     Otherwise you have to use your user data and replace client id and client secret with data generated in a previous step.
 
-__ https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/FixturesBundle/DataFixtures/ORM/LoadApiData.php
+__ https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/CoreBundle/DataFixtures/ORM/LoadApiData.php
 
 Example Response
 ................
