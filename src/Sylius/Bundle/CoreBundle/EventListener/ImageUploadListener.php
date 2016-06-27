@@ -74,12 +74,24 @@ class ImageUploadListener
         $subject = $event->getSubject();
         Assert::isInstanceOf($subject, TaxonInterface::class);
 
-        if ($subject->hasImage()) {
-            $this->uploader->upload($subject->getImage());
+        $this->uploadTaxonImages($subject);
+    }
+
+
+    /**
+     * @param TaxonInterface $taxon
+     */
+    private function uploadTaxonImages(TaxonInterface $taxon)
+    {
+        $images = $taxon->getImages();
+        foreach ($images as $image) {
+            if ($image->hasFile()) {
+                $this->uploader->upload($image);
+            }
 
             // Upload failed? Let's remove that image.
-            if (null === $subject->getImage()->getPath()) {
-                $subject->removeImage();
+            if (null === $image->getPath()) {
+                $images->removeElement($image);
             }
         }
     }

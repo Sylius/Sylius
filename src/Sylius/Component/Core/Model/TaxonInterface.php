@@ -32,18 +32,27 @@ interface TaxonInterface extends VariableTaxonInterface
     /**
      * @return bool
      */
-    public function hasImage();
+    public function hasImages();
     
     /**
-     * @return ImageInterface
+     * @return Collection|TaxonImageInterface[]
      */
-    public function getImage();
-
-    public function removeImage();
+    public function getImages();
 
     /**
-     * @param ImageInterface $image
+     * @param $code
+     * @return TaxonImageInterface|null;
      */
-    public function setImage(ImageInterface $image);
+    public function getImageByCode($code);
+
+    /**
+     * @param TaxonImageInterface $image
+     */
+    public function removeImage(TaxonImageInterface $image);
+
+    /**
+     * @param TaxonImageInterface $image
+     */
+    public function addImagae(TaxonImageInterface $image);
 
 }
