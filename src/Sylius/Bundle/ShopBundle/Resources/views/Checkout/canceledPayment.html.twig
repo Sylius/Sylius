@@ -1,0 +1,18 @@
+{% extends '@SyliusShop/layout.html.twig' %}
+
+{% block content %}
+    <div class="ui grid">
+        <div class="center aligned sixteen wide column">
+            <h1 class="ui icon header">
+                <i class="circular payment icon"></i>
+                <div class="content">
+                    {{ 'sylius.ui.canceled_payment'|trans }}
+                    <div class="sub header">{{ 'sylius.ui.pay_again'|trans }}</div>
+                    <button id="pay" class="ui primary button">
+                        <a href="{{ path('sylius_shop_order_pay', {'orderId': order.id}) }}">{{ 'sylius.ui.pay'|trans }}</a>
+                    </button>
+                </div>
+            </h1>
+        </div>
+    </div>
+{% endblock %}

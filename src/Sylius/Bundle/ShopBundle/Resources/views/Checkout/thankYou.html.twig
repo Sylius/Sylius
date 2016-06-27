@@ -1,0 +1,15 @@
+{% extends '@SyliusShop/layout.html.twig' %}
+
+{% block content %}
+    <div class="ui grid">
+        <div class="center aligned sixteen wide column">
+            <h1 class="ui icon header">
+                <i class="circular rocket icon"></i>
+                <div class="content">
+                    {{ 'sylius.ui.thank_you'|trans }}
+                    <div class="sub header">{{ 'sylius.ui.placed_an_order'|trans }}</div>
+                </div>
+            </h1>
+        </div>
+    </div>
+{% endblock %}

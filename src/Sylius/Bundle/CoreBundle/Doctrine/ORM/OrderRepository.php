@@ -133,7 +133,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
             ->leftJoin('payments.method', 'paymentMethods')
             ->addSelect('payments')
             ->addSelect('paymentMethods')
-            ->andWhere('o.id', ':id')
+            ->andWhere('o.id = :id')
             ->setParameter('id', $id)
             ->getQuery()
             ->getOneOrNullResult()

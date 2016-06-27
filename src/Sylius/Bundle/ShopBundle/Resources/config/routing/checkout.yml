@@ -63,3 +63,19 @@ sylius_shop_checkout_payment:
                 graph: sylius_order_checkout
                 transition: select_payment
             redirect: sylius_shop_homepage
+
+sylius_shop_checkout_thank_you:
+    path: /thank-you
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.order:thankYouAction
+        _sylius:
+            template: SyliusShopBundle:Checkout:thankYou.html.twig
+
+sylius_shop_checkout_canceled_payment:
+    path: /canceled-payment
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.order:afterCancelAction
+        _sylius:
+            template: SyliusShopBundle:Checkout:canceledPayment.html.twig

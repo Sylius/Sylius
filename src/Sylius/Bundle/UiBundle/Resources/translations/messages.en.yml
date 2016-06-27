@@ -54,6 +54,7 @@ sylius:
         create_a_new_customer_account: Create a new customer account
         if_you_have_an_account_sign_in_with_your_email_address: If you have an account, sign in with your e-mail address
         access_your_store_account_or_create_a_new_one: Access your store account or create a new one
+        canceled_payment: Your payment was not successful.
         color: Color
         configurable_product: Configurable product
         configure_channels_available_in_your_store: Configure channels available in your store
@@ -168,7 +169,10 @@ sylius:
         order_history: Order history
         order_total: Order total
         partially_shipped: Partially shipped
+        pay: Pay
+        pay_again: In order to try again please click Pay.
         per_customer_usage_limit: Per customer usage limit
+        placed_an_order: You have successfully placed na order.
         powered_by: Powered by
         price: Price
         privacy_policy: Privacy Policy
@@ -204,6 +208,7 @@ sylius:
         taxonomy: Taxonomy
         tax_categories: Tax categories
         terms_and_conditions: Terms and Conditions
+        thank_you: Thank you!
         total_records: Total records
         unlimited: Unlimited
         usage: Usage
