@@ -11,7 +11,10 @@
 
 namespace Sylius\Bundle\UserBundle\EventListener;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\OnFlushEventArgs;
+use Doctrine\ORM\Mapping\ClassMetadata;
+use Doctrine\ORM\UnitOfWork;
 use Sylius\Component\User\Model\CustomerInterface;
 
 /**
@@ -19,7 +22,7 @@ use Sylius\Component\User\Model\CustomerInterface;
  *
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class DefaultUsernameORMListener
+final class DefaultUsernameORMListener
 {
     /**
      * @param OnFlushEventArgs $onFlushEventArgs
@@ -29,23 +32,36 @@ class DefaultUsernameORMListener
         $entityManager = $onFlushEventArgs->getEntityManager();
         $unitOfWork = $entityManager->getUnitOfWork();
 
-        $entities = array_merge(
-            $unitOfWork->getScheduledEntityInsertions(),
-            $unitOfWork->getScheduledEntityUpdates()
-        );
+        $this->processEntities($unitOfWork->getScheduledEntityInsertions(), $entityManager, $unitOfWork);
+        $this->processEntities($unitOfWork->getScheduledEntityUpdates(), $entityManager, $unitOfWork);
+    }
 
-        foreach ($entities as $entity) {
-            if (!$entity instanceof CustomerInterface) {
+    /**
+     * @param array $entities
+     * @param EntityManagerInterface $entityManager
+     */
+    private function processEntities($entities, EntityManagerInterface $entityManager, UnitOfWork $unitOfWork)
+    {
+        foreach ($entities as $customer) {
+            if (!$customer instanceof CustomerInterface) {
                 continue;
             }
 
-            $user = $entity->getUser();
-            if (null !== $user && $entity->getEmail() !== $user->getUsername()) {
-                $user->setUsername($entity->getEmail());
-                $entityManager->persist($user);
-                $userMetadata = $entityManager->getClassMetadata(get_class($user));
-                $unitOfWork->recomputeSingleEntityChangeSet($userMetadata, $user);
+            $user = $customer->getUser();
+            if (null === $user) {
+                continue;
             }
+
+            if ($customer->getEmail() === $user->getUsername() && $customer->getEmailCanonical() === $user->getUsernameCanonical()) {
+                continue;
+            }
+
+            $user->setUsername($customer->getEmail());
+            $user->setUsernameCanonical($customer->getEmailCanonical());
+
+            /** @var ClassMetadata $userMetadata */
+            $userMetadata = $entityManager->getClassMetadata(get_class($user));
+            $unitOfWork->recomputeSingleEntityChangeSet($userMetadata, $user);
         }
     }
 }

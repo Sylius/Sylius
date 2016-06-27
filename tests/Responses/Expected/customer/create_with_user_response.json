@@ -3,6 +3,7 @@
     "user": {
         "id": @integer@,
         "username": "john.diggle@yahoo.com",
+        "username_canonical": "john.diggle@yahoo.com",
         "roles": [
             "ROLE_USER"
         ],
