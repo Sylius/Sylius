@@ -19,7 +19,7 @@
     <mapped-superclass name="Sylius\Component\Core\Model\TaxonImage" table="sylius_taxon_image">
 
         <unique-constraints>
-            <unique-constraint columns="id,code" name="code_idx" />
+            <unique-constraint columns="taxon_id,code" name="code_idx" />
         </unique-constraints>
 
         <field name="code" column="code" type="string" unique="false" />

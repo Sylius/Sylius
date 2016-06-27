@@ -26,9 +26,9 @@ class Taxon extends BaseTaxon implements TaxonInterface
     protected $products;
 
     /**
-     * @var ImageInterface
+     * @var ArrayCollection
      */
-    protected $image;
+    protected $images;
 
     public function __construct()
     {
@@ -36,38 +36,52 @@ class Taxon extends BaseTaxon implements TaxonInterface
 
         $this->createdAt = new \DateTime();
         $this->products = new ArrayCollection();
+        $this->images = new ArrayCollection();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function hasImage()
+    public function hasImages()
     {
-        return null !== $this->image;
+        return !$this->images->isEmpty();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getImage()
+    public function getImages()
     {
-        return $this->image;
+        return $this->images;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setImage(ImageInterface $image)
+    public function getImageByCode($code)
+    {
+        foreach ($this->images as $image) {
+            if($image->getCode() === $code) {
+                return $image;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addImage(TaxonImageInterface $image)
     {
         $image->setTaxon($this);
-        $this->image = $image;
+        $this->images->add($image);
     }
 
-    public function removeImage()
+    public function removeImage(TaxonImageInterface $image)
     {
-        if($this->hasImage()) {
-            $this->image->setTaxon(null);
-            $this->image = null;
+        if($this->images->contains($image)) {
+            $image->setTaxon(null);
+            $this->images->remove($image);
         }
     }
 
