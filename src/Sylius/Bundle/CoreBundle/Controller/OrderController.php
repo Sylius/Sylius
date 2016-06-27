@@ -22,6 +22,7 @@ use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\OrderProcessing\PaymentProcessorInterface;
 use Sylius\Component\Core\OrderProcessing\StateResolverInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Order\OrderTransitions;
@@ -30,6 +31,7 @@ use Sylius\Component\Resource\ResourceActions;
 use Sylius\Component\User\Repository\CustomerRepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
@@ -135,7 +137,7 @@ class OrderController extends ResourceController
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
-        $order = $this->getOrderRepository()->findOneForPayment($orderId);
+        $order = $this->repository->findOneForPayment($orderId);
 
         $this->checkAccessToOrder($order);
 
@@ -177,11 +179,51 @@ class OrderController extends ResourceController
         $orderStateResolver->resolvePaymentState($order);
         $orderStateResolver->resolveShippingState($order);
 
+        if ($status->isCanceled() || $status->isFailed()) {
+            return $this->redirectToRoute($configuration->getParameters()->get('canceled'));
+        }
+
         $this->getOrderManager()->flush();
 
         return $this->redirectToRoute(
             $configuration->getParameters()->get('redirect[route]', null, true),
             $configuration->getParameters()->get('redirect[parameters]', [], true)
+        );
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function thankYouAction(Request $request)
+    {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+
+        $orderId = $this->getSession()->get('sylius_order_id');
+        $order = $this->repository->findOneForPayment($orderId);
+
+        return $this->render(
+            $configuration->getParameters()->get('template'),
+            ['order' => $order]
+        );
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function afterCancelAction(Request $request)
+    {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+
+        $orderId = $this->getSession()->get('sylius_order_id');
+        $order = $this->repository->findOneForPayment($orderId);
+
+        return $this->render(
+            $configuration->getParameters()->get('template'),
+            ['order' => $order]
         );
     }
 
@@ -211,6 +253,14 @@ class OrderController extends ResourceController
     }
 
     /**
+     * @return SessionInterface
+     */
+    private function getSession()
+    {
+        return $this->get('session');
+    }
+
+    /**
      * @return null|CustomerInterface
      */
     private function getCustomer()
@@ -230,14 +280,6 @@ class OrderController extends ResourceController
         }
 
         return null;
-    }
-
-    /**
-     * @return OrderRepositoryInterface
-     */
-    private function getOrderRepository()
-    {
-        return $this->get('sylius.repository.order');
     }
 
     /**

@@ -113,6 +113,14 @@ sylius_shop_checkout_reselecting_payment:
                 route: sylius_shop_checkout_payment
                 parameters: []
 
+sylius_shop_checkout_canceled_payment:
+    path: /canceled-payment
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.order:afterCancelAction
+        _sylius:
+            template: SyliusShopBundle:Checkout:canceledPayment.html.twig
+
 sylius_shop_checkout_summary:
     path: /summary
     methods: [GET, PUT]
@@ -129,3 +137,12 @@ sylius_shop_checkout_summary:
             redirect: sylius_shop_homepage
             form:
                 type: sylius_checkout_summary
+
+sylius_shop_checkout_thank_you:
+    path: /thank-you
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.order:thankYouAction
+        _sylius:
+            template: SyliusShopBundle:Checkout:thankYou.html.twig
+
