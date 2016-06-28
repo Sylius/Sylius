@@ -7,7 +7,7 @@ Feature: Deleting a text product attribute
     Background:
         Given I am logged in as an administrator
 
-    @ui
+    @todo
     Scenario: Deleting a text product attribute from the registry
         Given the store has a text product attribute "T-shirt cotton brand"
         When I delete this product attribute

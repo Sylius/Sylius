@@ -9,7 +9,7 @@ Feature: Registering an account again after it has been deleted
         And there was account of "ted@example.com" with password "pswd"
         But his account was deleted
 
-    @ui
+    @todo
     Scenario: Registering again after my account deletion
         When I try to register again with email "ted@example.com"
         Then I should be successfully registered

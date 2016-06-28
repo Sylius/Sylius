@@ -18,7 +18,7 @@ Feature: Apply correct shipping fee on order
         Then my cart total should be "€110.00"
         And my cart shipping total should be "€10.00"
 
-    @ui
+    @todo
     Scenario: Changing shipping fee after shipping method change
         Given I have product "PHP T-Shirt" in the cart
         And I chose "DHL" shipping method

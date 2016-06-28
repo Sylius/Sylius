@@ -41,7 +41,7 @@ class ShippingPage extends SymfonyPage implements ShippingPageInterface
         }
 
         $shippingMethodElement = $this->getElement('shipping_method');
-        $shippingMethodValue = $this->getElement('shipping_method_option', ['%shipping_method%' => $shippingMethod])->getValue();
+        $shippingMethodValue = $this->getElement('shipping_method_option', ['%shipping_method%' => $shippingMethod])->getAttribute('value');
 
         $shippingMethodElement->selectOption($shippingMethodValue);
     }

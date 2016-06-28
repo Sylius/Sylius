@@ -11,7 +11,7 @@ Feature: Paying with paypal during checkout
         And the store ships everywhere for free
         And the store allows paying "PayPal Express Checkout"
 
-    @ui
+    @todo
     Scenario: Successful payment
         Given I am logged in as "john@example.com"
         And I added product "PHP T-Shirt" to the cart
@@ -21,7 +21,7 @@ Feature: Paying with paypal during checkout
         And I sign in to PayPal and pay successfully
         Then I should be redirected back to the thank you page
 
-    @ui
+    @todo
     Scenario: Cancelling the payment
         Given I am logged in as "john@example.com"
         And I added product "PHP T-Shirt" to the cart
@@ -31,7 +31,7 @@ Feature: Paying with paypal during checkout
         And I cancel my PayPal payment
         Then I should be able to pay again
 
-    @ui
+    @todo
     Scenario: Retrying the payment with success
         Given I am logged in as "john@example.com"
         And I added product "PHP T-Shirt" to the cart
@@ -43,7 +43,7 @@ Feature: Paying with paypal during checkout
         And I sign in to PayPal and pay successfully
         Then I should be redirected back to the thank you page
 
-    @ui
+    @todo
     Scenario: Retrying the payment and failing
         Given I am logged in as "john@example.com"
         And I added product "PHP T-Shirt" to the cart

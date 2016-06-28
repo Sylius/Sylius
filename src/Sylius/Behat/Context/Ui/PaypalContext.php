@@ -12,8 +12,8 @@
 namespace Sylius\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\Page\Shop\Checkout\FinalizeStepInterface;
 use Sylius\Behat\Page\External\PaypalExpressCheckoutPageInterface;
+use Sylius\Behat\Page\Shop\Checkout\SummaryPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\ThankYouPageInterface;
 use Sylius\Behat\Service\Mocker\PaypalApiMocker;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
@@ -40,9 +40,9 @@ final class PaypalContext implements Context
     private $thankYouPage;
     
     /**
-     * @var FinalizeStepInterface
+     * @var SummaryPageInterface
      */
-    private $checkoutFinalizeStep;
+    private $summaryPage;
 
     /**
      * @var PaypalApiMocker
@@ -58,7 +58,7 @@ final class PaypalContext implements Context
      * @param SharedStorageInterface $sharedStorage
      * @param PaypalExpressCheckoutPageInterface $paypalExpressCheckoutPage
      * @param ThankYouPageInterface $thankYouPage
-     * @param FinalizeStepInterface $checkoutFinalizeStep
+     * @param SummaryPageInterface $summaryPage
      * @param PaypalApiMocker $paypalApiMocker
      * @param OrderRepositoryInterface $orderRepository
      */
@@ -66,20 +66,29 @@ final class PaypalContext implements Context
         SharedStorageInterface $sharedStorage,
         PaypalExpressCheckoutPageInterface $paypalExpressCheckoutPage,
         ThankYouPageInterface $thankYouPage,
-        FinalizeStepInterface $checkoutFinalizeStep,
+        SummaryPageInterface $summaryPage,
         PaypalApiMocker $paypalApiMocker,
         OrderRepositoryInterface $orderRepository
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->paypalExpressCheckoutPage = $paypalExpressCheckoutPage;
         $this->thankYouPage = $thankYouPage;
-        $this->checkoutFinalizeStep = $checkoutFinalizeStep;
+        $this->summaryPage = $summaryPage;
         $this->paypalApiMocker = $paypalApiMocker;
         $this->orderRepository = $orderRepository;
     }
 
     /**
-     * @Then I should be redirected back to PayPal Express Checkout page
+     * @Given /^I confirm my order with paypal payment$/
+     */
+    public function iConfirmMyOrderWithPaypalPayment()
+    {
+        $this->paypalApiMocker->mockApiPaymentInitializeResponse();
+        $this->summaryPage->confirmOrder();
+    }
+
+    /**
+     * @Then I should be redirected to PayPal Express Checkout page
      */
     public function iShouldBeRedirectedToPaypalExpressCheckoutPage()
     {

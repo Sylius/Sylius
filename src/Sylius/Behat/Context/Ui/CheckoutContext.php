@@ -17,12 +17,8 @@ use Sylius\Behat\Page\Shop\Checkout\PaymentPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\ShippingPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SummaryPageInterface;
 use Sylius\Behat\Page\Shop\HomePageInterface;
-use Sylius\Behat\Page\Shop\Checkout\AddressingStepInterface;
-use Sylius\Behat\Page\Shop\Checkout\FinalizeStepInterface;
-use Sylius\Behat\Page\Shop\Checkout\PaymentStepInterface;
-use Sylius\Behat\Page\Shop\Checkout\SecurityStepInterface;
-use Sylius\Behat\Page\Shop\Checkout\ShippingStepInterface;
 use Sylius\Behat\Page\Shop\Checkout\ThankYouPageInterface;
+use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Behat\Page\UnexpectedPageException;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Behat\Service\SecurityServiceInterface;
@@ -33,6 +29,7 @@ use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -51,39 +48,14 @@ final class CheckoutContext implements Context
     private $homePage;
 
     /**
-     * @var SecurityStepInterface
-     */
-    private $checkoutSecurityStep;
-
-    /**
-     * @var AddressingStepInterface
-     */
-    private $checkoutAddressingStep;
-
-    /**
      * @var AddressingPageInterface
      */
     private $addressingPage;
 
     /**
-     * @var ShippingStepInterface
-     */
-    private $checkoutShippingStep;
-
-    /**
-     * @var PaymentStepInterface
-     */
-    private $checkoutPaymentStep;
-
-    /**
      * @var PaymentPageInterface
      */
     private $paymentPage;
-
-    /**
-     * @var FinalizeStepInterface
-     */
-    private $checkoutFinalizeStep;
 
     /**
      * @var ThankYouPageInterface
@@ -111,51 +83,44 @@ final class CheckoutContext implements Context
     private $securityService;
 
     /**
+     * @var FactoryInterface
+     */
+    private $addressFactory;
+
+    /**
      * @param SharedStorageInterface $sharedStorage
      * @param HomePageInterface $homePage
-     * @param SecurityStepInterface $checkoutSecurityStep
-     * @param AddressingStepInterface $checkoutAddressingStep
      * @param AddressingPageInterface $addressingPage
-     * @param ShippingStepInterface $checkoutShippingStep
-     * @param ShippingPageInterface $shippingPage
-     * @param PaymentStepInterface $checkoutPaymentStep
      * @param PaymentPageInterface $paymentPage
-     * @param SummaryPageInterface $summaryPage
-     * @param FinalizeStepInterface $checkoutFinalizeStep
      * @param ThankYouPageInterface $thankYouPage
+     * @param ShippingPageInterface $shippingPage
+     * @param SummaryPageInterface $summaryPage
      * @param OrderRepositoryInterface $orderRepository
      * @param SecurityServiceInterface $securityService
+     * @param FactoryInterface $addressFactory
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         HomePageInterface $homePage,
-        SecurityStepInterface $checkoutSecurityStep,
-        AddressingStepInterface $checkoutAddressingStep,
         AddressingPageInterface $addressingPage,
-        ShippingStepInterface $checkoutShippingStep,
-        ShippingPageInterface $shippingPage,
-        PaymentStepInterface $checkoutPaymentStep,
         PaymentPageInterface $paymentPage,
-        SummaryPageInterface $summaryPage,
-        FinalizeStepInterface $checkoutFinalizeStep,
         ThankYouPageInterface $thankYouPage,
+        ShippingPageInterface $shippingPage,
+        SummaryPageInterface $summaryPage,
         OrderRepositoryInterface $orderRepository,
-        SecurityServiceInterface $securityService
+        SecurityServiceInterface $securityService,
+        FactoryInterface $addressFactory
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->homePage = $homePage;
-        $this->checkoutSecurityStep = $checkoutSecurityStep;
-        $this->checkoutAddressingStep = $checkoutAddressingStep;
         $this->addressingPage = $addressingPage;
-        $this->checkoutShippingStep = $checkoutShippingStep;
-        $this->shippingPage = $shippingPage;
-        $this->checkoutPaymentStep = $checkoutPaymentStep;
         $this->paymentPage = $paymentPage;
-        $this->summaryPage = $summaryPage;
-        $this->checkoutFinalizeStep = $checkoutFinalizeStep;
         $this->thankYouPage = $thankYouPage;
+        $this->shippingPage = $shippingPage;
+        $this->summaryPage = $summaryPage;
         $this->orderRepository = $orderRepository;
         $this->securityService = $securityService;
+        $this->addressFactory = $addressFactory;
     }
 
     /**
@@ -163,8 +128,8 @@ final class CheckoutContext implements Context
      */
     public function iProceedWithoutSelectingShippingAddress()
     {
-        $this->checkoutAddressingStep->open();
-        $this->checkoutAddressingStep->continueCheckout();
+        $this->addressingPage->open();
+        $this->addressingPage->nextStep();
     }
 
     /**
@@ -381,32 +346,27 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @When /^I proceed selecting "([^"]*)" as shipping country$/
+     * @When /^I proceed selecting ("[^"]+" as shipping country)$/
      */
-    public function iProceedSelectingShippingCountry($shippingCountry)
+    public function iProceedSelectingShippingCountry(CountryInterface $shippingCountry = null)
     {
-        $this->checkoutAddressingStep->open();
-        $this->checkoutAddressingStep->fillAddressingDetails([
-            'firstName' => 'John',
-            'lastName' => 'Doe',
-            'country' => $shippingCountry ?: 'France',
-            'street' => '0635 Myron Hollow Apt. 711',
-            'city' => 'North Bridget',
-            'postcode' => '93-554',
-            'phoneNumber' => '321123456',
-        ]);
-        $this->checkoutAddressingStep->continueCheckout();
+        $this->addressingPage->open();
+        $shippingAddress = $this->createDefaultAddress();
+        !$shippingCountry ?: $shippingAddress->setCountryCode($shippingCountry->getCode());
+
+        $this->addressingPage->specifyShippingAddress($shippingAddress);
+        $this->addressingPage->nextStep();
     }
 
     /**
-     * @When /^I proceed selecting "([^"]*)" as shipping country with "([^"]*)" method$/
+     * @When /^I proceed selecting ("[^"]+" as shipping country) with "([^"]+)" method$/
      */
-    public function iProceedSelectingShippingCountryAndShippingMethod($shippingCountry, $shippingMethodName)
+    public function iProceedSelectingShippingCountryAndShippingMethod(CountryInterface $shippingCountry = null, $shippingMethodName)
     {
         $this->iProceedSelectingShippingCountry($shippingCountry);
 
-        $this->checkoutShippingStep->selectShippingMethod($shippingMethodName ?: 'Free');
-        $this->checkoutShippingStep->continueCheckout();
+        $this->shippingPage->selectShippingMethod($shippingMethodName ?: 'Free');
+        $this->shippingPage->nextStep();
     }
 
     /**
@@ -423,9 +383,8 @@ final class CheckoutContext implements Context
      */
     public function iChoosePaymentMethod($paymentMethodName)
     {
-        $this->checkoutPaymentStep->verify([]);
-        $this->checkoutPaymentStep->selectPaymentMethod($paymentMethodName ?: 'Offline');
-        $this->checkoutPaymentStep->continueCheckout();
+        $this->paymentPage->selectPaymentMethod($paymentMethodName ?: 'Offline');
+        $this->paymentPage->nextStep();
     }
 
     /**
@@ -452,9 +411,9 @@ final class CheckoutContext implements Context
      */
     public function iChangeShippingMethod($shippingMethodName)
     {
-        $this->checkoutShippingStep->open();
-        $this->checkoutShippingStep->selectShippingMethod($shippingMethodName);
-        $this->checkoutShippingStep->continueCheckout();
+        $this->shippingPage->open();
+        $this->shippingPage->selectShippingMethod($shippingMethodName);
+        $this->shippingPage->nextStep();
     }
 
     /**
@@ -478,14 +437,17 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @When /^I proceed as guest "([^"]*)" with "([^"]*)" as shipping country$/
+     * @When /^I proceed as guest "([^"]*)" with ("[^"]+" as shipping country)$/
      */
-    public function iProceedLoggingAsGuestWithAsShippingCountry($email, $shippingCountry)
+    public function iProceedLoggingAsGuestWithAsShippingCountry($email, CountryInterface $shippingCountry = null)
     {
-        $this->checkoutSecurityStep->open();
-        $this->checkoutSecurityStep->proceedAsGuest($email);
+        $this->addressingPage->open();
+        $this->addressingPage->specifyEmail($email);
+        $shippingAddress = $this->createDefaultAddress();
+        !$shippingCountry ?: $shippingAddress->setCountryCode($shippingCountry->getCode());
 
-        $this->iProceedSelectingShippingCountry($shippingCountry);
+        $this->addressingPage->specifyShippingAddress($shippingAddress);
+        $this->addressingPage->nextStep();
     }
 
     /**
@@ -494,7 +456,7 @@ final class CheckoutContext implements Context
      */
     public function iConfirmMyOrder()
     {
-        $this->checkoutFinalizeStep->confirmOrder();
+        $this->summaryPage->confirmOrder();
     }
 
     /**
@@ -908,6 +870,24 @@ final class CheckoutContext implements Context
         $this->iSpecifiedTheShippingAddress($address);
         $this->iSpecifyTheEmail($email);
         $this->iCompleteTheAddressingStep();
+    }
+
+    /**
+     * @return AddressInterface
+     */
+    private function createDefaultAddress()
+    {
+        /** @var AddressInterface $address */
+        $address = $this->addressFactory->createNew();
+        $address->setFirstName('John');
+        $address->setLastName('Doe');
+        $address->setCountryCode('FR');
+        $address->setCity('North Bridget');
+        $address->setPostcode('93-554');
+        $address->setStreet('0635 Myron Hollow Apt. 711');
+        $address->setPhoneNumber('321123456');
+
+        return $address;
     }
 
     /**

@@ -111,4 +111,6 @@ interface SummaryPageInterface extends SymfonyPageInterface
     public function changeShippingMethod();
 
     public function changePaymentMethod();
+
+    public function confirmOrder();
 }

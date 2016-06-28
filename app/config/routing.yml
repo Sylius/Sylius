@@ -12,6 +12,6 @@ sylius_admin:
 sylius_shop:
     resource: "@SyliusShopBundle/Resources/config/routing.yml"
     prefix: /shop
-    
+
 sylius_web:
     resource: "@SyliusWebBundle/Resources/config/routing/main.yml"

@@ -205,18 +205,14 @@
         <service id="sylius.behat.context.ui.checkout" class="Sylius\Behat\Context\Ui\CheckoutContext" scope="scenario">
             <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
             <argument type="service" id="sylius.behat.page.shop.home" />
-            <argument type="service" id="sylius.behat.page.shop.checkout.security_step" />
-            <argument type="service" id="sylius.behat.page.shop.checkout.addressing_step" />
             <argument type="service" id="sylius.behat.page.shop.checkout.addressing" />
-            <argument type="service" id="sylius.behat.page.shop.checkout.shipping_step" />
-            <argument type="service" id="sylius.behat.page.shop.checkout.shipping" />
-            <argument type="service" id="sylius.behat.page.shop.checkout.payment_step" />
             <argument type="service" id="sylius.behat.page.shop.checkout.payment" />
-            <argument type="service" id="sylius.behat.page.shop.checkout.summary" />
-            <argument type="service" id="sylius.behat.page.shop.checkout.finalize_step" />
             <argument type="service" id="sylius.behat.page.shop.checkout.thank_you" />
+            <argument type="service" id="sylius.behat.page.shop.checkout.shipping" />
+            <argument type="service" id="sylius.behat.page.shop.checkout.summary" />
             <argument type="service" id="sylius.repository.order" container="symfony" />
             <argument type="service" id="sylius.behat.security" />
+            <argument type="service" id="sylius.factory.address" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>
 
@@ -230,7 +226,7 @@
             <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
             <argument type="service" id="sylius.behat.page.external.paypal_checkout_express" />
             <argument type="service" id="sylius.behat.page.shop.checkout.thank_you" />
-            <argument type="service" id="sylius.behat.page.shop.checkout.finalize_step" />
+            <argument type="service" id="sylius.behat.page.shop.checkout.summary" />
             <argument type="service" id="sylius.behat.paypal_api_mocker" />
             <argument type="service" id="sylius.repository.order" container="symfony" />
             <tag name="sylius.behat.context" />
