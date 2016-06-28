@@ -45,6 +45,30 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
+    public function getCustomerEmail()
+    {
+        return $this->getElement('customer_email')->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCustomerName()
+    {
+        return $this->getElement('customer_name')->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRegistrationDate()
+    {
+        return $this->getElement('registration_date')->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getRouteName()
     {
         return 'sylius_admin_customer_show';
@@ -56,7 +80,10 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
+            'customer_email' => '#info .content.extra > a',
+            'customer_name' => '#info .content > a',
             'delete account button' => '.delete-action-form',
+            'registration_date' => '#info .content .date',
         ]);
     }
 }

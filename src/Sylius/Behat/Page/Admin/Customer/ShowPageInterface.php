@@ -33,4 +33,19 @@ interface ShowPageInterface extends PageInterface
      * @throws ElementNotFoundException If there is no delete account button on the page
      */
     public function deleteAccount();
+
+    /**
+     * @return string
+     */
+    public function getCustomerEmail();
+
+    /**
+     * @return string
+     */
+    public function getCustomerName();
+
+    /**
+     * @return string
+     */
+    public function getRegistrationDate();
 }

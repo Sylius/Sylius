@@ -1,0 +1,34 @@
+{% extends 'SyliusAdminBundle::layout.html.twig' %}
+
+{% import '@SyliusUi/Macro/labels.html.twig' as label %}
+
+{% block title %}{{ parent() }} {{ 'sylius.ui.customer'|trans ~' '~ customer.email }}{% endblock %}
+
+{% block content %}
+    <div class="ui stackable two column grid">
+        <div class="column">
+            {% include '@SyliusAdmin/Customer/Show/_header.html.twig' %}
+        </div>
+    </div>
+    <div class="ui divider"></div>
+
+    {% include '@SyliusAdmin/Customer/Breadcrumb/_show.html.twig' %}
+
+    <div class="ui stackable grid">
+        <div class="five wide column" id="info">
+            <div class="ui fluid card">
+                <div class="content">
+                    <a href="{{ path('sylius_admin_customer_update', {'id': customer.id}) }}" class="header">{{ customer.fullName }}</a>
+                    <div class="meta">
+                        <span class="date">{{ 'sylius.ui.customer_since'|trans }} {{ customer.createdAt|date }}.</span>
+                    </div>
+                </div>
+                <div class="extra content">
+                    <a href="mailto: {{ customer.email }}">
+                        <i class="envelope icon"></i> {{ customer.email }}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

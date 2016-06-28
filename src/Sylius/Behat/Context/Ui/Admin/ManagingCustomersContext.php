@@ -412,4 +412,40 @@ final class ManagingCustomersContext implements Context
     {
         $this->showPage->open(['id' => $customer->getId()]);
     }
+
+    /**
+     * @Then his name should be :name
+     */
+    public function hisNameShouldBe($name)
+    {
+        Assert::same(
+            $name,
+            $this->showPage->getCustomerName(),
+            sprintf('Customer name should be "%s", but it is not.', $name)
+        );
+    }
+
+    /**
+     * @Given his registration date should be :registrationDate
+     */
+    public function hisRegistrationDateShouldBe($registrationDate)
+    {
+        Assert::same(
+            sprintf('Customer since %s.', $registrationDate),
+            $this->showPage->getRegistrationDate(),
+            sprintf('Customer registration date should be "%s", but it is not.', $registrationDate)
+        );
+    }
+
+    /**
+     * @Given his email should be :email
+     */
+    public function hisEmailShouldBe($email)
+    {
+        Assert::same(
+            $email,
+            $this->showPage->getCustomerEmail(),
+            sprintf('Customer email should be "%s", but it is not', $email)
+        );
+    }
 }

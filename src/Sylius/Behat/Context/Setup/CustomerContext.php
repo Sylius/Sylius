@@ -112,7 +112,7 @@ final class CustomerContext implements Context
     public function theStoreHasCustomerWithNameAndRegistrationDate($email, $fullName, $since)
     {
         $names = explode(' ', $fullName);
-        $this->createCustomer($email, $names[0], $names[1], $since);
+        $this->createCustomer($email, $names[0], $names[1], new \DateTime($since));
     }
 
     /**
@@ -171,7 +171,7 @@ final class CustomerContext implements Context
      * @param string|null $lastName
      * @param \DateTime|null $createdAt
      */
-    private function createCustomer($email, $firstName = null, $lastName = null, $createdAt = null)
+    private function createCustomer($email, $firstName = null, $lastName = null, \DateTime $createdAt = null)
     {
         /** @var CustomerInterface $customer */
         $customer = $this->customerFactory->createNew();
