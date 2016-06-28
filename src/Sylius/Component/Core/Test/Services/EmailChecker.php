@@ -9,10 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Behat\Service\Accessor;
+namespace Sylius\Component\Core\Test\Services;
 
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -40,7 +41,7 @@ class EmailChecker implements EmailCheckerInterface
     {
         $messages = $this->getMessages($this->spoolDirectory);
         foreach ($messages as $message) {
-            if (false !== strpos($message, $recipient)) {
+            if (array_key_exists($recipient, $message->getTo())) {
                 return true;
             }
         }
@@ -51,20 +52,21 @@ class EmailChecker implements EmailCheckerInterface
     /**
      * @param string $directory
      *
-     * @return array
+     * @return \Swift_Message[]
      */
     private function getMessages($directory)
     {
         $finder = new Finder();
         $finder->files()->name('*.message')->in($directory);
-        $spools = [];
+        Assert::notEq($finder->count(), 0, sprintf('No message files found in %s.', $directory));
+        $messages = [];
 
         /** @var SplFileInfo $file */
         foreach($finder as $file) {
-            $spools[] = $file->getContents();
+            $messages[] = unserialize($file->getContents());
             unlink($file->getRealPath());
         }
 
-        return $spools;
+        return $messages;
     }
 }
