@@ -1,11 +1,7 @@
 <h1 class="ui header">
     <i class="circular user icon"></i>
     <div class="content">
-        {% if customer.fullName is not empty %}
-            {{ customer.fullName }}
-        {% else %}
-            {{ 'sylius.ui.guest_customer'|trans }}
-        {% endif %}
+        {{ customer.fullName|default('sylius.ui.guest_customer'|trans) }}
         <div class="sub header">
             {{ customer.email }}
         </div>

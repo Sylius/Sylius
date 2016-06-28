@@ -24,9 +24,9 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
      */
     public function isRegistered()
     {
-        $username = $this->getDocument()->find('css', '#username')->getText();
+        $username = $this->getDocument()->find('css', '#username');
 
-        return '' !== $username;
+        return null !== $username;
     }
 
     /**
@@ -34,12 +34,12 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
      */
     public function deleteAccount()
     {
-        $deleteButton = $this->getElement('delete account button');
+        $deleteButton = $this->getElement('delete_account_button');
         $deleteButton->press();
 
-        $confirmationModal = $this->getDocument()->find('css', '#confirmation-modal-confirm');
-        $this->waitForModalToAppear($confirmationModal);
-        $confirmationModal->find('css', 'a:contains("Delete")')->press();
+        $confirmationModal = $this->getDocument()->find('css', '#confirmation-modal');
+        $this->waitForModalToAppear($confirmationModal, 'visible');
+        $confirmationModal->find('css', '#confirmation-button')->press();
     }
 
     /**
@@ -63,7 +63,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
      */
     public function getRegistrationDate()
     {
-        return $this->getElement('registration_date')->getText();
+        return new \DateTime(str_replace('Customer since ', '', $this->getElement('registration_date')->getText()));
     }
 
     /**
@@ -99,7 +99,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'billing_address' => '#billingAddress address',
             'customer_email' => '#info .content.extra > a',
             'customer_name' => '#info .content > a',
-            'delete account button' => '.delete-action-form',
+            'delete_account_button' => '#actions button',
             'registration_date' => '#info .content .date',
             'shipping_address' => '#shippingAddress address',
         ]);

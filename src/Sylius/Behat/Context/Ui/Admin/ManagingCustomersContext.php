@@ -426,12 +426,12 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Given his registration date should be :registrationDate
+     * @Given he should be registered since :registrationDate
      */
     public function hisRegistrationDateShouldBe($registrationDate)
     {
-        Assert::same(
-            sprintf('Customer since %s.', $registrationDate),
+        Assert::eq(
+            new \DateTime($registrationDate),
             $this->showPage->getRegistrationDate(),
             sprintf('Customer registration date should be "%s", but it is not.', $registrationDate)
         );

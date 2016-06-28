@@ -1,6 +1,7 @@
 {% extends 'SyliusAdminBundle::layout.html.twig' %}
 
 {% import '@SyliusUi/Macro/labels.html.twig' as label %}
+{% import '@SyliusUi/Macro/buttons.html.twig' as buttons %}
 
 {% block title %}{{ parent() }} {{ 'sylius.ui.customer'|trans ~' '~ customer.email }}{% endblock %}
 
@@ -9,6 +10,11 @@
         <div class="column">
             {% include '@SyliusAdmin/Customer/Show/_header.html.twig' %}
         </div>
+        {% if customer.user is not null and customer.user.id is not same as(app.user.id) %}
+        <div class="right aligned column" id="actions">
+            {{ buttons.delete(path('sylius_admin_customer_delete', {'id': customer.id})) }}
+        </div>
+        {% endif %}
     </div>
     <div class="ui divider"></div>
 
@@ -18,9 +24,11 @@
         <div class="five wide column" id="info">
             <div class="ui fluid card">
                 <div class="content">
-                    <a href="{{ path('sylius_admin_customer_update', {'id': customer.id}) }}" class="header">{{ customer.fullName }}</a>
+                    <a href="{{ path('sylius_admin_customer_update', {'id': customer.id}) }}" class="header">
+                        {{ customer.fullName|default('sylius.ui.guest_customer'|trans) }}
+                    </a>
                     <div class="meta">
-                        <span class="date">{{ 'sylius.ui.customer_since'|trans }} {{ customer.createdAt|date }}.</span>
+                        <span class="date">{{ 'sylius.ui.customer_since'|trans }} {{ customer.createdAt|date }}</span>
                     </div>
                 </div>
                 <div class="extra content">

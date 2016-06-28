@@ -45,7 +45,7 @@ interface ShowPageInterface extends PageInterface
     public function getCustomerName();
 
     /**
-     * @return string
+     * @return \DateTime
      */
     public function getRegistrationDate();
 
