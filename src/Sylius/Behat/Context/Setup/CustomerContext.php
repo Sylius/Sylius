@@ -150,7 +150,6 @@ final class CustomerContext implements Context
     public function heHasShippingAddress(CustomerInterface $customer, AddressInterface $address)
     {
         $customer->setShippingAddress($address);
-        $customer->setBillingAddress($address);
 
         $this->customerManager->flush($customer);
     }

@@ -69,6 +69,22 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
+    public function getShippingAddress()
+    {
+        return $this->getElement('shipping_address')->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBillingAddress()
+    {
+        return $this->getElement('billing_address')->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getRouteName()
     {
         return 'sylius_admin_customer_show';
@@ -80,10 +96,12 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
+            'billing_address' => '#billingAddress address',
             'customer_email' => '#info .content.extra > a',
             'customer_name' => '#info .content > a',
             'delete account button' => '.delete-action-form',
             'registration_date' => '#info .content .date',
+            'shipping_address' => '#shippingAddress address',
         ]);
     }
 }

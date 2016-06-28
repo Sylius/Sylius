@@ -48,4 +48,14 @@ interface ShowPageInterface extends PageInterface
      * @return string
      */
     public function getRegistrationDate();
+
+    /**
+     * @return string
+     */
+    public function getShippingAddress();
+
+    /**
+     * @return string
+     */
+    public function getBillingAddress();
 }

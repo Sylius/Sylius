@@ -17,8 +17,8 @@ Feature: Seeing customer's details
         And his registration date should be "January 10, 2011 21:00"
         And his email should be "f.baggins@shire.me"
 
-    @todo
+    @ui
     Scenario: Seeing customer's addresses
         When I view details of the customer "f.baggins@shire.me"
-        Then his shipping address should be "Hobbiton", "Bag End", "1", "New Zealand" for "Frodo Baggins"
-        And his billing address should be "Rivendell", "The Last Homely House", "7", "New Zealand" for "Bilbo Baggins"
+        Then his shipping address should be "Frodo Baggins, Bag End, Hobbiton, NEW ZEALAND 1"
+        And his billing address should be "Bilbo Baggins, The Last Homely House, Rivendell, NEW ZEALAND 7"

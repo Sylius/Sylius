@@ -448,4 +448,28 @@ final class ManagingCustomersContext implements Context
             sprintf('Customer email should be "%s", but it is not', $email)
         );
     }
+
+    /**
+     * @Then his shipping address should be :shippingAddress
+     */
+    public function hisShippingAddressShouldBe($shippingAddress)
+    {
+        Assert::same(
+            str_replace(',', '', $shippingAddress),
+            $this->showPage->getShippingAddress(),
+            sprintf('Customer shipping address should be "%s", but it is not.', $shippingAddress)
+        );
+    }
+
+    /**
+     * @Then his billing address should be :billingAddress
+     */
+    public function hisBillingAddressShouldBe($billingAddress)
+    {
+        Assert::same(
+            str_replace(',', '', $billingAddress),
+            $this->showPage->getBillingAddress(),
+            sprintf('Customer billing address should be "%s", but it is not.', $billingAddress)
+        );
+    }
 }
