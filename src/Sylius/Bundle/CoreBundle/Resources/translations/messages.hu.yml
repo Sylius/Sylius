@@ -153,9 +153,7 @@ sylius:
         user_confirmation:
             name: Felhasználói megerősítés
             subject: Üdvözöljük áruházunkban
-            content: 'Üdvözlünk áruházunkban!<br/><br/>Sikeresen regisztráltál.<br/>Köszönjük {{ user.username }}.'
         password_reset:
             name: Jelszó visszaállítás
-            content: '<h3>Szia {{ user.username }}</h3>A jelszavad megváltoztatásához, kérlek látogass ide {{ url }}<br/><br/>Üdvözlettel, a csapat.'
     shipping_method_resolver:
         by_zones_and_channel: Zóna és csatorna szerint

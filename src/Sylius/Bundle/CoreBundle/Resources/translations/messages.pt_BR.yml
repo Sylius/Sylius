@@ -153,9 +153,7 @@ sylius:
         user_confirmation:
             name: Confirmação do usuário
             subject: Bem-vindo à nossa loja
-            content: 'Bem-vindo(a) à nossa loja <br/> <br/> você acaba de ser registrado(a). <br/> Obrigado {{ user.username }}.'
         password_reset:
             name: Redefinir a senha
-            content: '<h3>Olá {{ user.username }}</h3> Para redefinir sua senha - por favor, acesse {{ url }} <br/> <br/> Atenciosamente, equipe.'
     shipping_method_resolver:
         by_zones_and_channel: Por zonas e canal
