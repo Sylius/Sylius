@@ -56,3 +56,20 @@ winzou_state_machine:
                     on: "create"
                     do: ["@sylius.sequence.doctrine_number_listener", "enableEntity"]
                     args: ["object"]
+
+    sylius_order_payment:
+        class: "%sylius.model.order.class%"
+        property_path: payment_state
+        graph: sylius_order_payment
+        state_machine_class: "%sylius.state_machine.class%"
+        states:
+            new: ~
+            pending: ~
+            completed: ~
+        transitions:
+            wait:
+                from: [new]
+                to: pending
+            complete:
+                from: [new, pending]
+                to: completed

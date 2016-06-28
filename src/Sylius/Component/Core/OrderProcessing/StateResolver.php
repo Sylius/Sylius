@@ -15,46 +15,53 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderShippingStates;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
+use SM\Factory\Factory;
+use Sylius\Component\Order\OrderTransitions;
+use Sylius\Component\Core\OrderCheckoutStates;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class StateResolver implements StateResolverInterface
 {
+    private $smFactory;
+
+    public function __construct(Factory $smFactory)
+    {
+        $this->smFactory = $smFactory;
+    }
+
     /**
      * {@inheritdoc}
      */
     public function resolvePaymentState(OrderInterface $order)
     {
-        $paymentState = PaymentInterface::STATE_NEW;
-
-        if ($order->hasPayments()) {
-            $payments = $order->getPayments();
-            $completedPaymentTotal = 0;
-
-            foreach ($payments as $payment) {
-                if (PaymentInterface::STATE_COMPLETED === $payment->getState()) {
-                    $completedPaymentTotal += $payment->getAmount();
-                }
-            }
-
-            if ($completedPaymentTotal >= $order->getTotal()) {
-                // Payment is completed if we have received full amount.
-                $paymentState = PaymentInterface::STATE_COMPLETED;
-            } else {
-                // Payment is processing if one of the payment is.
-                if ($payments->exists(function ($key, $payment) {
-                    return in_array($payment->getState(), [
-                        PaymentInterface::STATE_PROCESSING,
-                        PaymentInterface::STATE_PENDING,
-                    ]);
-                })) {
-                    $paymentState = PaymentInterface::STATE_PROCESSING;
-                }
-            }
+        // do not recalculate payment state. althoguh the payment may have been
+        // refunded, the payment WAS completed for this order.
+        if ($order->getPaymentState() === OrderInterface::STATE_PAYMENT_COMPLETED) {
+            return;
         }
 
-        $order->setPaymentState($paymentState);
+        // do not calculate payment state when checkout has not been completed
+        if ($order->getCheckoutState() === OrderCheckoutStates::STATE_COMPLETED) {
+            return;
+        }
+
+        // order has no payments yet, leave in default state.
+        if (!$order->hasPayments()) {
+            return;
+        }
+
+        $stateMachine = $this->smFactory->get($order, 'sylius_order_payment');
+
+        if ($this->isPaymentCompleted($order)) {
+            $stateMachine->apply(OrderTransitions::SYLIUS_PAYMENT_COMPLETE);
+            return;
+        }
+
+        if ($this->hasPendingPayments($order)) {
+            $stateMachine->apply(OrderTransitions::SYLIUS_PAYMENT_WAIT);
+        }
     }
 
     /**
@@ -102,5 +109,37 @@ class StateResolver implements StateResolverInterface
         }
 
         return OrderShippingStates::PARTIALLY_SHIPPED;
+    }
+
+    private function isPaymentCompleted(OrderInterface $order)
+    {
+        $payments = $order->getPayments();
+        $completedTotal = 0;
+
+        foreach ($payments as $payment) {
+            if (PaymentInterface::STATE_COMPLETED === $payment->getState()) {
+                continue;
+            }
+
+            $completedTotal += $payment->getAmount();
+        }
+
+        if ($completedTotal >= $order->getTotal()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    private function hasPendingPayments(OrderInterface $order)
+    {
+        $payments = $order->getPayments();
+
+        return $payments->exists(function ($key, $payment) {
+            return in_array($payment->getState(), [
+                PaymentInterface::STATE_PROCESSING,
+                PaymentInterface::STATE_PENDING,
+            ]);
+        });
     }
 }
