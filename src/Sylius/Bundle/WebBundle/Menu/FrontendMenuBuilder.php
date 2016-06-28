@@ -260,8 +260,8 @@ class FrontendMenuBuilder extends MenuBuilder
         foreach ($taxons as $taxon) {
             $child = $menu->addChild($taxon->getName(), $childOptions);
 
-            if ($taxon->hasImage()) {
-                $child->setLabelAttribute('data-image', $taxon->getImage()->getPath());
+            if ($taxon->hasImages()) {
+                $child->setLabelAttribute('data-image', $taxon->getImages()->first()->getPath());
             }
 
             $this->createTaxonsMenuNode($child, $taxon);
@@ -371,8 +371,8 @@ class FrontendMenuBuilder extends MenuBuilder
                 'route' => $child,
                 'labelAttributes' => ['icon' => 'icon-angle-right'],
             ]);
-            if ($child->hasImage()) {
-                $childMenu->setLabelAttribute('data-image', $child->getImage()->getPath());
+            if ($child->hasImages()) {
+                $childMenu->setLabelAttribute('data-image', $child->getImages()->first()->getPath());
             }
 
             $this->createTaxonsMenuNode($childMenu, $child);
