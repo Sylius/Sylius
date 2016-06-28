@@ -9,6 +9,7 @@ sylius:
             remember_me: Emlékezzen rám
         option:
             name: Név
+        notes: További megjegyzések
     ui:
         about: Információ
         account_credentials: A fiók hitelesítő adatait
@@ -51,6 +52,7 @@ sylius:
         clear_cart: Kosár ürítése
         update_cart: Kosár frissítése
         apply_coupon: Kupon használata
+        extra_notes: További megjegyzések
         edit_your_items_apply_coupon_or_proceed_to_the_checkout: Módosítsd a tételeid, használj fel kupont vagy haladj tovább a fizetéshez
         create_an_account: Fiók létrehozása
         summary: Összefoglaló
