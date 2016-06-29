@@ -4,7 +4,7 @@
         <url>
             <loc>{{ url.localization }}</loc>
             {% if url.lastModification is defined %}
-                <lastmod>{{ url.lastModification|format_date("c") }}</lastmod>
+                <lastmod>{{ url.lastModification|format_date("Y-M-d'T'H:m:sZZZZZ") }}</lastmod>
             {% endif %}
             {% if url.changeFrequency is defined %}
                 <changefreq>{{ url.changeFrequency }}</changefreq>
