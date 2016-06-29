@@ -24,6 +24,7 @@ use Sylius\Behat\Page\Shop\Checkout\PaymentStepInterface;
 use Sylius\Behat\Page\Shop\Checkout\SecurityStepInterface;
 use Sylius\Behat\Page\Shop\Checkout\ShippingStepInterface;
 use Sylius\Behat\Page\Shop\Checkout\ThankYouPageInterface;
+use Sylius\Behat\Page\UnexpectedPageException;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Behat\Service\SecurityServiceInterface;
 use Sylius\Component\Core\Model\AddressInterface;
@@ -327,11 +328,23 @@ final class CheckoutContext implements Context
     {
         if ($this->shippingPage->isOpen()) {
             $this->shippingPage->changeAddressByStepLabel();
+
+            return;
         }
 
         if ($this->paymentPage->isOpen()) {
             $this->paymentPage->changeAddressByStepLabel();
+
+            return;
         }
+
+        if ($this->summaryPage->isOpen()) {
+            $this->summaryPage->changeAddress();
+
+            return;
+        }
+
+        throw new UnexpectedPageException('It is impossible to go to addressing step from current page.');
     }
 
     /**
@@ -339,7 +352,27 @@ final class CheckoutContext implements Context
      */
     public function iGoToTheShippingStep()
     {
-        $this->paymentPage->changeShippingMethodByStepLabel();
+        if ($this->paymentPage->isOpen()) {
+            $this->paymentPage->changeShippingMethodByStepLabel();
+
+            return;
+        }
+
+        if ($this->summaryPage->isOpen()) {
+            $this->summaryPage->changeShippingMethod();
+
+            return;
+        }
+
+        throw new UnexpectedPageException('It is impossible to go to shipping step from current page.');
+    }
+
+    /**
+     * @When I go to the payment step
+     */
+    public function iGoToThePaymentStep()
+    {
+        $this->summaryPage->changePaymentMethod();
     }
 
     /**
@@ -823,6 +856,30 @@ final class CheckoutContext implements Context
         Assert::true(
             $this->paymentPage->isOpen(),
             'Checkout payment step should be opened, but it is not.'
+        );
+    }
+
+    /**
+     * @Then I should be redirected to the payment step
+     */
+    public function iShouldBeRedirectedToThePaymentStep()
+    {
+        Assert::true(
+            $this->paymentPage->isOpen(),
+            'Checkout payment step should be opened, but it is not.'
+        );
+    }
+
+    /**
+     * @Given I should be able to go to the summary page again
+     */
+    public function iShouldBeAbleToGoToTheSummaryPageAgain()
+    {
+        $this->paymentPage->nextStep();
+
+        Assert::true(
+            $this->summaryPage->isOpen(),
+            'Checkout summary page should be opened, but it is not.'
         );
     }
 
