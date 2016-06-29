@@ -25,24 +25,9 @@
                 {{ form_row(form._token) }}
                 {{ form_end(form, {'render_rest': false}) }}
             </div>
-            <form id="sylius_shop_checkout_readdressing" action="{{ path('sylius_shop_checkout_readdressing') }}" method="post">
-                <input type="hidden" name="_method" value="PUT" />
-            </form>
         </div>
         <div class="five wide column">
             {% include '@SyliusShop/Checkout/_summary.html.twig' with { 'order': order } %}
         </div>
     </div>
-{% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-    <script>
-        $(document).ready(function() {
-            $('button[data-remote-form]').on('click', function(e){
-                e.preventDefault();
-                $("#" + $(this).attr('data-remote-form')).submit();
-            });
-        });
-    </script>
 {% endblock %}

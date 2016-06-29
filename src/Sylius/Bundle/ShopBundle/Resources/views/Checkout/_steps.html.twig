@@ -9,7 +9,7 @@
 {% endif %}
 
 <div class="ui four steps">
-    <a class="{{ steps['addressing'] }} step" href="#">
+    <a data-remote-form="sylius_shop_checkout_readdressing" class="{{ steps['addressing'] }} step" href="#">
         <i class="map icon"></i>
         <div class="content">
             <div class="title">{{ 'sylius.ui.addressing'|trans }}</div>
@@ -34,3 +34,7 @@
         </div>
     </div>
 </div>
+
+<form id="sylius_shop_checkout_readdressing" action="{{ path('sylius_shop_checkout_readdressing') }}" method="post">
+    <input type="hidden" name="_method" value="PUT" />
+</form>

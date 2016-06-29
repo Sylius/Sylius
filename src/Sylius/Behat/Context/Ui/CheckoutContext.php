@@ -305,11 +305,19 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Given I decide to change my address
+     * @When I decide to change my address
      */
     public function iDecideToChangeMyAddress()
     {
         $this->shippingPage->changeAddress();
+    }
+
+    /**
+     * @When I go to the addressing step
+     */
+    public function iGoToTheAddressingStep()
+    {
+        $this->shippingPage->changeAddressByStepLabel();
     }
 
     /**

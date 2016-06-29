@@ -76,12 +76,18 @@ class ShippingPage extends SymfonyPage implements ShippingPageInterface
         $this->getDocument()->pressButton('Change address');
     }
 
+    public function changeAddressByStepLabel()
+    {
+        $this->getElement('addressing_step_label')->click();
+    }
+    
     /**
      * {@inheritdoc}
      */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
+            'addressing_step_label' => '.steps a:contains("Addressing")',
             'order_cannot_be_shipped_message' => '#sylius-order-cannot-be-shipped',
             'shipping_method' => '[name="sylius_shop_checkout_shipping[shipments][0][method]"]',
             'shipping_method_option' => '.item:contains("%shipping_method%") input',

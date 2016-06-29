@@ -38,4 +38,6 @@ interface ShippingPageInterface extends SymfonyPageInterface
     public function nextStep();
 
     public function changeAddress();
+
+    public function changeAddressByStepLabel();
 }
