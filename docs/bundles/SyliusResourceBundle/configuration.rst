@@ -16,7 +16,7 @@ In your class, you need to implement a simple interface:
 
     namespace AppBundle\Entity;
 
-    use Sylius\Component\Resource\Model\ResourceInterface;
+    use Sylius\Resource\Model\ResourceInterface;
 
     class Book implements ResourceInterface
     {

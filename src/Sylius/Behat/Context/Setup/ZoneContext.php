@@ -13,16 +13,16 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\AddressingBundle\Factory\ZoneFactoryInterface;
-use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
-use Sylius\Component\Addressing\Model\CountryInterface;
-use Sylius\Component\Addressing\Model\ProvinceInterface;
-use Sylius\Component\Addressing\Model\ZoneInterface;
-use Sylius\Component\Addressing\Model\ZoneMemberInterface;
-use Sylius\Component\Addressing\Repository\ZoneRepositoryInterface;
-use Sylius\Component\Core\Test\Services\SharedStorageInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Model\CodeAwareInterface;
+use Sylius\AddressingBundle\Factory\ZoneFactoryInterface;
+use Sylius\SettingsBundle\Manager\SettingsManagerInterface;
+use Sylius\Addressing\Model\CountryInterface;
+use Sylius\Addressing\Model\ProvinceInterface;
+use Sylius\Addressing\Model\ZoneInterface;
+use Sylius\Addressing\Model\ZoneMemberInterface;
+use Sylius\Addressing\Repository\ZoneRepositoryInterface;
+use Sylius\Core\Test\Services\SharedStorageInterface;
+use Sylius\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Model\CodeAwareInterface;
 use Symfony\Component\Intl\Intl;
 
 /**

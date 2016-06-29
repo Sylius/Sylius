@@ -17,7 +17,7 @@ By extending resource controller, you also get access to several handy methods. 
 
     namespace Acme\ShopBundle\Controller;
 
-    use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+    use Sylius\ResourceBundle\Controller\ResourceController;
     use Symfony\Component\HttpFoundation\Request;
 
     class ProductController extends ResourceController

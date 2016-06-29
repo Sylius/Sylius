@@ -13,10 +13,10 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\Test\Services\SharedStorageInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Core\Model\ProductInterface;
+use Sylius\Core\Test\Services\SharedStorageInterface;
+use Sylius\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>

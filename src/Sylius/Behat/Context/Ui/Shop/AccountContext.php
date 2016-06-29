@@ -20,8 +20,8 @@ use Sylius\Behat\Page\Shop\Account\Order\IndexPageInterface;
 use Sylius\Behat\Page\Shop\Account\Order\ShowPageInterface;
 use Sylius\Behat\Page\Shop\Account\ProfileUpdatePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
-use Sylius\Component\Core\Formatter\StringInflector;
-use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Core\Formatter\StringInflector;
+use Sylius\Core\Model\OrderInterface;
 use Webmozart\Assert\Assert;
 
 /**

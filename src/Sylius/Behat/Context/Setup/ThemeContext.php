@@ -13,13 +13,13 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\ThemeBundle\Configuration\Test\TestThemeConfigurationManagerInterface;
-use Sylius\Bundle\ThemeBundle\Factory\ThemeFactoryInterface;
-use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
-use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
-use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
-use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Test\Services\SharedStorageInterface;
+use Sylius\ThemeBundle\Configuration\Test\TestThemeConfigurationManagerInterface;
+use Sylius\ThemeBundle\Factory\ThemeFactoryInterface;
+use Sylius\ThemeBundle\Model\ThemeInterface;
+use Sylius\ThemeBundle\Repository\ThemeRepositoryInterface;
+use Sylius\Channel\Repository\ChannelRepositoryInterface;
+use Sylius\Core\Model\ChannelInterface;
+use Sylius\Core\Test\Services\SharedStorageInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>

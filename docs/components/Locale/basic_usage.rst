@@ -10,7 +10,7 @@ The **LocaleContext** allows you to manage the currently used locale.
 
     <?php
 
-    use Sylius\Component\Storage\StorageInterface;
+    use Sylius\Storage\StorageInterface;
 
     class Storage implements StorageInterface
     {
@@ -51,8 +51,8 @@ The **LocaleContext** allows you to manage the currently used locale.
 
     <?php
 
-    use Sylius\Component\Locale\Context\LocaleContext;
-    use Sylius\Component\Resource\Repository\InMemoryRepository;
+    use Sylius\Locale\Context\LocaleContext;
+    use Sylius\Resource\Repository\InMemoryRepository;
 
     $storage = new Storage();
 
@@ -76,7 +76,7 @@ The **LocaleProvider** allows you to get all available locales.
 
     <?php
 
-    use Sylius\Component\Locale\Provider\LocaleProvider;
+    use Sylius\Locale\Provider\LocaleProvider;
 
     $locales = new InMemoryRepository();
 

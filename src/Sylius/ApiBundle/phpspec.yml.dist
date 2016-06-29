@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: Sylius\ApiBundle
+        psr4_prefix: Sylius\ApiBundle
+        src_path: .

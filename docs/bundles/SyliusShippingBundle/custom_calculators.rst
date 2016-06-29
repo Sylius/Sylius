@@ -17,8 +17,8 @@ All shipping cost calculators implement ``CalculatorInterface``. In our example 
     namespace Acme\ShopBundle\Shipping;
 
     use Acme\ShopBundle\Shipping\DHLService;
-    use Sylius\Bundle\ShippingBundle\Calculator\Calculator;
-    use Sylius\Bundle\ShippingBundle\Model\ShippingSubjectInterface;
+    use Sylius\ShippingBundle\Calculator\Calculator;
+    use Sylius\ShippingBundle\Model\ShippingSubjectInterface;
 
     class DHLCalculator extends Calculator
     {
@@ -73,8 +73,8 @@ First step is to define the configuration options, using the Symfony **OptionsRe
     namespace Acme\ShopBundle\Shipping;
 
     use Acme\ShopBundle\Shipping\DHLService;
-    use Sylius\Bundle\ShippingBundle\Calculator\Calculator;
-    use Sylius\Bundle\ShippingBundle\Model\ShippingSubjectInterface;
+    use Sylius\ShippingBundle\Calculator\Calculator;
+    use Sylius\ShippingBundle\Model\ShippingSubjectInterface;
     use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
     class DHLCalculator extends Calculator
@@ -191,8 +191,8 @@ Finally, configure the calculator to use the form, by implementing simple ``getC
     namespace Acme\ShopBundle\Shipping;
 
     use Acme\ShopBundle\Shipping\DHLService;
-    use Sylius\Bundle\ShippingBundle\Calculator\Calculator;
-    use Sylius\Bundle\ShippingBundle\Model\ShippingSubjectInterface;
+    use Sylius\ShippingBundle\Calculator\Calculator;
+    use Sylius\ShippingBundle\Model\ShippingSubjectInterface;
     use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
     class DHLCalculator extends Calculator
@@ -246,8 +246,8 @@ Perfect, now we're able to use the configuration inside the ``calculate`` method
     namespace Acme\ShopBundle\Shipping;
 
     use Acme\ShopBundle\Shipping\DHLService;
-    use Sylius\Bundle\ShippingBundle\Calculator\Calculator;
-    use Sylius\Bundle\ShippingBundle\Model\ShippingSubjectInterface;
+    use Sylius\ShippingBundle\Calculator\Calculator;
+    use Sylius\ShippingBundle\Model\ShippingSubjectInterface;
     use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
     class DHLCalculator extends Calculator

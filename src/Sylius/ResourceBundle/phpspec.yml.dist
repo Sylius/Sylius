@@ -1,0 +1,8 @@
+suites:
+    main:
+        namespace: Sylius\ResourceBundle
+        psr4_prefix: Sylius\ResourceBundle
+        src_path: .
+
+extensions:
+    - Akeneo\SkipExampleExtension

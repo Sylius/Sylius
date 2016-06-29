@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.form.type.order_state_choice.class">Sylius\OrderBundle\Form\Type\OrderStateChoiceType</parameter>
+
+        <parameter key="sylius.callback.complete_order.class">Sylius\OrderBundle\StateMachineCallback\CompleteOrderCallback</parameter>
+
+        <parameter key="sylius.originator.class">Sylius\Originator\Originator\Originator</parameter>
+
+        <parameter key="sylius.order_item_quantity_modifier.class">Sylius\Order\Modifier\OrderItemQuantityModifier</parameter>
+        <parameter key="sylius.form.data_mapper.property_path.class">Symfony\Component\Form\Extension\Core\DataMapper\PropertyPathMapper</parameter>
+        <parameter key="sylius.form.data_mapper.order_item_quantity.class">Sylius\OrderBundle\Form\DataMapper\OrderItemQuantityDataMapper</parameter>
+
+        <parameter key="sylius.adjustments_aggregator.class">Sylius\Order\Aggregator\AdjustmentsByLabelAggregator</parameter>
+
+        <parameter key="sylius.custom_factory.adjustment.class">Sylius\Order\Factory\AdjustmentFactory</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.form.type.order_state_choice" class="%sylius.form.type.order_state_choice.class%">
+            <tag name="form.type" alias="sylius_order_state_choice" />
+        </service>
+
+        <service id="sylius.originator" class="%sylius.originator.class%">
+            <argument type="service" id="doctrine" />
+        </service>
+
+        <service id="sylius.callback.complete_order" class="%sylius.callback.complete_order.class%" />
+
+        <service id="sylius.order_item_quantity_modifier" class="%sylius.order_item_quantity_modifier.class%">
+            <argument type="service" id="sylius.factory.order_item_unit" />
+        </service>
+        <service id="sylius.form.data_mapper.property_path" class="%sylius.form.data_mapper.property_path.class%">
+            <argument type="service" id="property_accessor" />
+        </service>
+        <service id="sylius.form.data_mapper.order_item_quantity" class="%sylius.form.data_mapper.order_item_quantity.class%">
+            <argument type="service" id="sylius.order_item_quantity_modifier" />
+            <argument type="service" id="sylius.form.data_mapper.property_path" />
+        </service>
+
+        <service id="sylius.adjustments_aggregator" class="%sylius.adjustments_aggregator.class%" />
+
+        <service id="sylius.custom_factory.adjustment" class="%sylius.custom_factory.adjustment.class%" decorates="sylius.factory.adjustment" public="false">
+            <argument type="service" id="sylius.custom_factory.adjustment.inner" />
+        </service>
+    </services>
+</container>

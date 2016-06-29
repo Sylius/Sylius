@@ -39,9 +39,9 @@ Don't worry, everything was automatically installed via Composer.
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
 
-            new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
-            new Sylius\Bundle\MoneyBundle\SyliusMoneyBundle(),
-            new Sylius\Bundle\OrderBundle\SyliusOrderBundle(),
+            new Sylius\ResourceBundle\SyliusResourceBundle(),
+            new Sylius\MoneyBundle\SyliusMoneyBundle(),
+            new Sylius\OrderBundle\SyliusOrderBundle(),
 
             // Other bundles...
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
@@ -66,7 +66,7 @@ let's assume you have your ``AppBundle`` registered under ``App\Bundle\AppBundle
     // src/App/AppBundle/Entity/Order.php
     namespace App\AppBundle\Entity;
 
-    use Sylius\Component\Order\Model\Order as BaseOrder;
+    use Sylius\Order\Model\Order as BaseOrder;
 
     class Order extends BaseOrder
     {
@@ -88,13 +88,13 @@ You should create a mapping file in your ``AppBundle``, put it inside the doctri
             <id name="id" column="id" type="integer">
                 <generator strategy="AUTO" />
             </id>
-            <one-to-many field="items" target-entity="Sylius\Component\Order\Model\OrderItemInterface" mapped-by="order" orphan-removal="true">
+            <one-to-many field="items" target-entity="Sylius\Order\Model\OrderItemInterface" mapped-by="order" orphan-removal="true">
                 <cascade>
                     <cascade-all/>
                 </cascade>
             </one-to-many>
 
-            <one-to-many field="adjustments" target-entity="Sylius\Component\Order\Model\AdjustmentInterface" mapped-by="order" orphan-removal="true">
+            <one-to-many field="adjustments" target-entity="Sylius\Order\Model\AdjustmentInterface" mapped-by="order" orphan-removal="true">
                 <cascade>
                     <cascade-all/>
                 </cascade>
@@ -122,7 +122,7 @@ All you need to do is making your *Product* entity to implement ``ProductInterfa
     // src/App/AppBundle/Entity/Product.php
     namespace App\AppBundle\Entity;
 
-    use Sylius\Component\Product\Model\ProductInterface;
+    use Sylius\Product\Model\ProductInterface;
 
     class Product implements ProductInterface
     {

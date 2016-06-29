@@ -16,8 +16,8 @@ A tax rate has two basic amounts - the *amount* and the *amount as percentage* (
 
     <?php
 
-    use Sylius\Component\Taxation\Model\TaxRate;
-    use Sylius\Component\Taxation\Model\TaxCategory;
+    use Sylius\Taxation\Model\TaxRate;
+    use Sylius\Taxation\Model\TaxCategory;
 
     $taxRate = new TaxRate();
     $taxCategory = new TaxCategory();
@@ -76,8 +76,8 @@ the ``getRates()`` method. To add or remove tax rates, you can use the ``addRate
 
     <?php
 
-    use Sylius\Component\Taxation\Model\TaxRate;
-    use Sylius\Component\Taxation\Model\TaxCategory;
+    use Sylius\Taxation\Model\TaxRate;
+    use Sylius\Taxation\Model\TaxCategory;
 
     $taxCategory = new TaxCategory();
 
@@ -109,8 +109,8 @@ Default Calculator
 
     <?php
 
-    use Sylius\Component\Taxation\Model\TaxRate;
-    use Sylius\Component\Taxation\Calculator\DefaultCalculator;
+    use Sylius\Taxation\Model\TaxRate;
+    use Sylius\Taxation\Calculator\DefaultCalculator;
 
     $taxRate = new TaxRate();
     $taxRate->setAmount(0.2);
@@ -133,11 +133,11 @@ instance based on a type defined in an instance of **TaxRate** class.
 
     <?php
 
-    use Sylius\Component\Taxation\Model\TaxRate;
-    use Sylius\Component\Taxation\Calculator\DefaultCalculator;
-    use Sylius\Component\Registry\ServiceRegistry;
-    use Sylius\Component\Taxation\Calculator\DelegatingCalculator;
-    use Sylius\Component\Taxation\Calculator\CalculatorInterface;
+    use Sylius\Taxation\Model\TaxRate;
+    use Sylius\Taxation\Calculator\DefaultCalculator;
+    use Sylius\Registry\ServiceRegistry;
+    use Sylius\Taxation\Calculator\DelegatingCalculator;
+    use Sylius\Taxation\Calculator\CalculatorInterface;
 
     $taxRate = new TaxRate();
     $taxRate->setAmount(0.2);
@@ -162,8 +162,8 @@ The criteria describes tax rate object.
 
     <?php
 
-    use Sylius\Component\Taxation\Resolver\TaxRateResolver;
-    use Sylius\Component\Taxation\Model\TaxCategory;
+    use Sylius\Taxation\Resolver\TaxRateResolver;
+    use Sylius\Taxation\Model\TaxCategory;
 
     $taxRepository = new InMemoryTaxRepository(); // class which implements RepositoryInterface
     $taxRateResolver= new TaxRateResolver($taxRepository);

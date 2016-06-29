@@ -1,0 +1,83 @@
+{
+    "name": "sylius/core",
+    "type": "library",
+    "description": "Sylius e-commerce core. It integrates all components.",
+    "keywords": ["shop", "ecommerce", "core", "store", "sylius"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paweł Jędrzejewski",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name": "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name": "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php": "^5.6|^7.0",
+
+        "knplabs/gaufrette": "0.2.*@dev",
+        "sylius/addressing": "^0.19",
+        "sylius/archetype": "^0.19",
+        "sylius/attribute": "^0.19",
+        "sylius/cart": "^0.19",
+        "sylius/channel": "^0.19",
+        "sylius/contact": "^0.19",
+        "sylius/currency": "^0.19",
+        "sylius/inventory": "^0.19",
+        "sylius/locale": "^0.19",
+        "sylius/order": "^0.19",
+        "sylius/originator": "^0.19",
+        "sylius/payment": "^0.19",
+        "sylius/pricing": "^0.19",
+        "sylius/product": "^0.19",
+        "sylius/promotion": "^0.19",
+        "sylius/rbac": "^0.19",
+        "sylius/registry": "^0.19",
+        "sylius/resource": "^0.19",
+        "sylius/sequence": "^0.19",
+        "sylius/shipping": "^0.19",
+        "sylius/storage": "^0.19",
+        "sylius/taxation": "^0.19",
+        "sylius/taxonomy": "^0.19",
+        "sylius/user": "^0.19",
+        "sylius/variation": "^0.19",
+        "sylius/association": "^0.19",
+        "sylius/review": "^0.19",
+        "sylius/metadata": "^0.19",
+        "webmozart/assert": "^1.0",
+        "zendframework/zend-stdlib": "^2.0|^3.0"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "^2.4",
+        "symfony/property-access": "^2.8"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": { "Sylius\\Core\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Core\\spec\\": "spec/" }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../*/*"
+        }
+    ],
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.19-dev"
+        }
+    }
+}

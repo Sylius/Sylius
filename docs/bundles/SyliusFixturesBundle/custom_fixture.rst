@@ -11,8 +11,8 @@ to skip the configuration part for now:
 
     namespace AppBundle\Fixture;
 
-    use Sylius\Bundle\FixturesBundle\Fixture\AbstractFixture;
-    use Sylius\Bundle\FixturesBundle\Fixture\FixtureInterface;
+    use Sylius\FixturesBundle\Fixture\AbstractFixture;
+    use Sylius\FixturesBundle\Fixture\FixtureInterface;
 
     final class CountryFixture extends AbstractFixture implements FixtureInterface
     {

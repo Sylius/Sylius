@@ -1,0 +1,3 @@
+Sylius\Product\Model\Variant:
+    exclusion_policy: ALL
+    xml_root_name: variant

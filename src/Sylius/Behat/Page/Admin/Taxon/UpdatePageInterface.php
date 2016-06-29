@@ -12,7 +12,7 @@
 namespace Sylius\Behat\Page\Admin\Taxon;
 
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface as BaseUpdatePageInterface;
-use Sylius\Component\Core\Model\TaxonInterface;
+use Sylius\Core\Model\TaxonInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>

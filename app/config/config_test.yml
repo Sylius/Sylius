@@ -21,7 +21,7 @@ framework:
 doctrine:
     dbal:
         dbname: "%database_name%_test"
-        driver_class: Sylius\Bundle\CoreBundle\Test\MySqlDriver
+        driver_class: Sylius\CoreBundle\Test\MySqlDriver
 
 doctrine_cache:
     providers:
@@ -71,4 +71,4 @@ sylius_theme:
         test: ~
 
 twig:
-    exception_controller: "Sylius\\Bundle\\CoreBundle\\Controller\\VerboseExceptionController::showAction"
+    exception_controller: "Sylius\\CoreBundle\\Controller\\VerboseExceptionController::showAction"

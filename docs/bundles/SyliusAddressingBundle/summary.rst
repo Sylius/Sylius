@@ -12,90 +12,90 @@ Configuration Reference
         resources:
             address:
                 classes:
-                    model: Sylius\Component\Addressing\Model\Address
-                    interface: Sylius\Component\Addressing\Model\Addressinterface
-                    controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                    model: Sylius\Addressing\Model\Address
+                    interface: Sylius\Addressing\Model\Addressinterface
+                    controller: Sylius\ResourceBundle\Controller\ResourceController
                     repository: ~
-                    factory: Sylius\Component\Resource\Factory\Factory
+                    factory: Sylius\Resource\Factory\Factory
                     form:
-                        default: Sylius\Bundle\AddressingBundle\Form\Type\AddressType
+                        default: Sylius\AddressingBundle\Form\Type\AddressType
                 validation_groups:
                     default: [ sylius ]
             country:
                 classes:
-                    model: Sylius\Component\Addressing\Model\Country
-                    interface: Sylius\Component\Addressing\Model\CountryInterface
-                    controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                    model: Sylius\Addressing\Model\Country
+                    interface: Sylius\Addressing\Model\CountryInterface
+                    controller: Sylius\ResourceBundle\Controller\ResourceController
                     repository: ~
-                    factory: Sylius\Component\Resource\Factory\Factory
+                    factory: Sylius\Resource\Factory\Factory
                     form:
-                        default: Sylius\Bundle\AddressingBundle\Form\Type\CountryType
-                        choice: Sylius\Bundle\AddressingBundle\Form\Type\CountryChoiceType
+                        default: Sylius\AddressingBundle\Form\Type\CountryType
+                        choice: Sylius\AddressingBundle\Form\Type\CountryChoiceType
                 validation_groups:
                     default: [ sylius ]
             province:
                 classes:
-                    model: Sylius\Component\Addressing\Model\Province
-                    interface: Sylius\Component\Addressing\Model\ProvinceInterface
-                    controller: Sylius\Bundle\AddressingBundle\Controller\ProvinceController
+                    model: Sylius\Addressing\Model\Province
+                    interface: Sylius\Addressing\Model\ProvinceInterface
+                    controller: Sylius\AddressingBundle\Controller\ProvinceController
                     repository: ~
-                    factory: Sylius\Component\Resource\Factory\Factory
+                    factory: Sylius\Resource\Factory\Factory
                     form:
-                        default: Sylius\Bundle\AddressingBundle\Form\Type\ProvinceType
-                        choice: Sylius\Bundle\AddressingBundle\Form\Type\ProvinceChoiceType
+                        default: Sylius\AddressingBundle\Form\Type\ProvinceType
+                        choice: Sylius\AddressingBundle\Form\Type\ProvinceChoiceType
                 validation_groups:
                     default: [ sylius ]
             zone:
                 classes:
-                    model: Sylius\Component\Addressing\Model\Zone
-                    interface: Sylius\Component\Addressing\Model\ZoneInterface
-                    controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                    model: Sylius\Addressing\Model\Zone
+                    interface: Sylius\Addressing\Model\ZoneInterface
+                    controller: Sylius\ResourceBundle\Controller\ResourceController
                     repository: ~
-                    factory: Sylius\Component\Resource\Factory\Factory
+                    factory: Sylius\Resource\Factory\Factory
                     form:
-                        default: Sylius\Bundle\AddressingBundle\Form\Type\ZoneType
-                        choice: Sylius\Bundle\resourceBundle\Form\type\ResourceChoiceType
+                        default: Sylius\AddressingBundle\Form\Type\ZoneType
+                        choice: Sylius\resourceBundle\Form\type\ResourceChoiceType
                 validation_groups:
                     default: [ sylius ]
             zone_member:
                 classes:
-                    model: Sylius\Component\Addressing\Model\ZoneMember
-                    interface: Sylius\Component\Addressing\Model\ZoneMemberInterface
-                    controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                    model: Sylius\Addressing\Model\ZoneMember
+                    interface: Sylius\Addressing\Model\ZoneMemberInterface
+                    controller: Sylius\ResourceBundle\Controller\ResourceController
                     repository: ~
-                    factory: Sylius\Component\Resource\Factory\Factory
+                    factory: Sylius\Resource\Factory\Factory
                     form:
-                        default: Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberType
+                        default: Sylius\AddressingBundle\Form\Type\ZoneMemberType
                 validation_groups:
                     default: [ sylius ]
             zone_member_country:
                 classes:
-                    model: Sylius\Component\Addressing\Model\ZoneMemberCountry
-                    controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                    model: Sylius\Addressing\Model\ZoneMemberCountry
+                    controller: Sylius\ResourceBundle\Controller\ResourceController
                     repository: ~
-                    factory: Sylius\Component\Resource\Factory\Factory
+                    factory: Sylius\Resource\Factory\Factory
                     form:
-                        default: Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberCountryType
+                        default: Sylius\AddressingBundle\Form\Type\ZoneMemberCountryType
                 validation_groups:
                     default: [ sylius ]
             zone_member_province:
                 classes:
-                    model: Sylius\Component\Addressing\Model\ZoneMemberProvince
-                    controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                    model: Sylius\Addressing\Model\ZoneMemberProvince
+                    controller: Sylius\ResourceBundle\Controller\ResourceController
                     repository: ~
-                    factory: Sylius\Component\Resource\Factory\Factory
+                    factory: Sylius\Resource\Factory\Factory
                     form:
-                        default: Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberProvinceType
+                        default: Sylius\AddressingBundle\Form\Type\ZoneMemberProvinceType
                 validation_groups:
                     default: [ sylius ]
             zone_member_zone:
                 classes:
-                    model: Sylius\Component\Addressing\Model\ZoneMemberZone
-                    controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                    model: Sylius\Addressing\Model\ZoneMemberZone
+                    controller: Sylius\ResourceBundle\Controller\ResourceController
                     repository: ~
-                    factory: Sylius\Component\Resource\Factory\Factory
+                    factory: Sylius\Resource\Factory\Factory
                     form:
-                        default: Sylius\Bundle\AddressingBundle\Form\Type\ZoneMemberZoneType
+                        default: Sylius\AddressingBundle\Form\Type\ZoneMemberZoneType
                 validation_groups:
                     default: [ sylius ]
 

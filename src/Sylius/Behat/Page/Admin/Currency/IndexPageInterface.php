@@ -12,7 +12,7 @@
 namespace Sylius\Behat\Page\Admin\Currency;
 
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface as BaseIndexPageInterface;
-use Sylius\Component\Currency\Model\CurrencyInterface;
+use Sylius\Currency\Model\CurrencyInterface;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>

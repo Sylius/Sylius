@@ -41,8 +41,8 @@ To add or remove items, you can simply use the ``addItem`` and ``removeItem`` me
 
     <?php
 
-    use Sylius\Component\Order\Model\Order;
-    use Sylius\Component\Order\Model\OrderItem;
+    use Sylius\Order\Model\Order;
+    use Sylius\Order\Model\OrderItem;
 
     $order = new Order();
 
@@ -74,7 +74,7 @@ Each item also can calculate its total, using the quantity (``->getQuantity()``)
 
     <?php
 
-    use Sylius\Component\Order\Model\OrderItem;
+    use Sylius\Order\Model\OrderItem;
 
     $item = new OrderItem();
     $item->setUnitPrice(2000);
@@ -92,8 +92,8 @@ An OrderItem can also hold adjustments.
 
     <?php
 
-    use Sylius\Component\Order\Model\OrderItem;
-    use Sylius\Component\Order\Model\Adjustment;
+    use Sylius\Order\Model\OrderItem;
+    use Sylius\Order\Model\Adjustment;
 
     $adjustment = new Adjustment();
     $adjustment->setAmount(1200);
@@ -122,9 +122,9 @@ Every **Adjustment** instance has the ``neutral`` property, which indicates if i
 
     <?php
 
-    use Sylius\Component\Order\Order;
-    use Sylius\Component\Order\OrderItem;
-    use Sylius\Component\Order\Adjustment;
+    use Sylius\Order\Order;
+    use Sylius\Order\OrderItem;
+    use Sylius\Order\Adjustment;
 
     $order = new Order();
     $tshirt = new OrderItem();
@@ -154,9 +154,9 @@ Let's add a 5$ discount to the previous example.
 
     <?php
 
-    use Sylius\Component\Order\Order;
-    use Sylius\Component\Order\OrderItem;
-    use Sylius\Component\Order\Adjustment;
+    use Sylius\Order\Order;
+    use Sylius\Order\OrderItem;
+    use Sylius\Order\Adjustment;
 
     $order = new Order();
     $tshirt = new OrderItem();
@@ -188,9 +188,9 @@ You can also lock an adjustment, this will ensure that it won't be deleted from 
 
     <?php
 
-    use Sylius\Component\Order\Order;
-    use Sylius\Component\Order\OrderItem;
-    use Sylius\Component\Order\Adjustment;
+    use Sylius\Order\Order;
+    use Sylius\Order\OrderItem;
+    use Sylius\Order\Adjustment;
 
     $order = new Order();
     $tshirt = new OrderItem();

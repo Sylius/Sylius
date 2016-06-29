@@ -11,8 +11,8 @@ To add a new filter, we need to create appropriate class and form type.
 
     namespace App\Grid\Filter;
 
-    use Sylius\Component\Grid\Data\DataSourceInterface;
-    use Sylius\Component\Grid\Filter\FilterInterface;
+    use Sylius\Grid\Data\DataSourceInterface;
+    use Sylius\Grid\Filter\FilterInterface;
     use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
     class TournamentStatisticsFilter implements FilterInterface
@@ -49,8 +49,8 @@ And the form type:
 
     namespace AppBundle\Form\Type\Filterh;
 
-    use Sylius\Component\Grid\Data\DataSourceInterface;
-    use Sylius\Component\Grid\Filter\FilterInterface;
+    use Sylius\Grid\Data\DataSourceInterface;
+    use Sylius\Grid\Filter\FilterInterface;
     use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
     class TournamentStatisticsFilterType extends AbstractType

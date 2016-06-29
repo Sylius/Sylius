@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+                                      http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
+                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
+
+    <mapped-superclass name="Sylius\Core\Model\Order" table="sylius_order">
+        <field name="currencyCode" column="currency_code" length="3">
+            <gedmo:versioned />
+        </field>
+
+        <field name="exchangeRate" column="exchange_rate" type="decimal" precision="10" scale="5" />
+        <field type="string" name="checkoutState" column="checkout_state" />
+        <field type="string" name="paymentState" column="payment_state" />
+        <field type="string" name="shippingState" column="shipping_state" />
+
+        <many-to-one field="channel" target-entity="Sylius\Channel\Model\ChannelInterface">
+            <join-column name="channel_id" referenced-column-name="id" nullable="true" />
+        </many-to-one>
+
+        <one-to-one field="shippingAddress" target-entity="Sylius\Addressing\Model\AddressInterface">
+            <cascade>
+                <cascade-persist/>
+                <cascade-remove/>
+            </cascade>
+            <join-column name="shipping_address_id" referenced-column-name="id" nullable="true" />
+        </one-to-one>
+
+        <one-to-one field="billingAddress" target-entity="Sylius\Addressing\Model\AddressInterface">
+            <cascade>
+                <cascade-persist/>
+                <cascade-remove/>
+            </cascade>
+            <join-column name="billing_address_id" referenced-column-name="id" nullable="true" />
+        </one-to-one>
+
+        <many-to-one field="promotionCoupon" target-entity="Sylius\Promotion\Model\CouponInterface">
+            <join-column name="promotion_coupon_id" />
+            <cascade>
+                <cascade-persist />
+            </cascade>
+        </many-to-one>
+
+        <one-to-many field="payments" target-entity="Sylius\Payment\Model\PaymentInterface" mapped-by="order" orphan-removal="true">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </one-to-many>
+
+        <one-to-many field="shipments" target-entity="Sylius\Shipping\Model\ShipmentInterface" mapped-by="order" orphan-removal="true">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </one-to-many>
+
+        <many-to-one field="customer" target-entity="Sylius\User\Model\CustomerInterface" inversed-by="orders">
+            <join-column name="customer_id" referenced-column-name="id" nullable="true" />
+            <cascade>
+                <cascade-persist />
+            </cascade>
+        </many-to-one>
+
+        <many-to-many field="promotions" target-entity="Sylius\Promotion\Model\PromotionInterface">
+            <join-table name="sylius_promotion_order">
+                <join-columns>
+                    <join-column name="order_id" referenced-column-name="id" on-delete="CASCADE" />
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="promotion_id" referenced-column-name="id" />
+                </inverse-join-columns>
+            </join-table>
+            <cascade>
+                <cascade-persist />
+            </cascade>
+            <gedmo:versioned />
+        </many-to-many>
+
+        <gedmo:loggable />
+    </mapped-superclass>
+
+</doctrine-mapping>

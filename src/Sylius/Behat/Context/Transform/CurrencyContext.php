@@ -12,8 +12,8 @@
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
-use Sylius\Component\Currency\Converter\CurrencyNameConverterInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Currency\Converter\CurrencyNameConverterInterface;
+use Sylius\Resource\Repository\RepositoryInterface;
 use Webmozart\Assert\Assert;
 
 /**

@@ -22,15 +22,15 @@ Configuration reference
         resources:
             inventory_unit:
                 classes:
-                    model:      Sylius\Component\Inventory\Model\InventoryUnit
-                    interface:  Sylius\Component\Inventory\Model\InventoryUnitInterface
-                    controller: Sylius\Bundle\InventoryBundle\Controller\InventoryUnitController
+                    model:      Sylius\Inventory\Model\InventoryUnit
+                    interface:  Sylius\Inventory\Model\InventoryUnitInterface
+                    controller: Sylius\InventoryBundle\Controller\InventoryUnitController
                     repository: ~ # You can override the repository class here.
-                    factory:    Sylius\Component\Resource\Factory\Factory
+                    factory:    Sylius\Resource\Factory\Factory
             stockable:
                 classes:
                     model: ~ # The stockable model class.
-                    controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                    controller: Sylius\ResourceBundle\Controller\ResourceController
 
 `phpspec2 <http://phpspec.net>`_ examples
 -----------------------------------------

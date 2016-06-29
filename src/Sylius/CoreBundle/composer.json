@@ -1,0 +1,104 @@
+{
+    "name": "sylius/core-bundle",
+    "type": "symfony-bundle",
+    "description": "Sylius core bundle. It integrates all other bundles into full stack Symfony2 ecommerce solution.",
+    "keywords": ["shop", "ecommerce", "store", "webshop", "sylius"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paweł Jędrzejewski",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name": "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name": "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php": "^5.6|^7.0",
+
+        "fzaninotto/faker": "^1.0",
+        "jms/serializer-bundle": "^0.13|^1.0",
+        "jms/translation-bundle": "^1.1",
+        "knplabs/knp-gaufrette-bundle": "~0.1",
+        "mathiasverraes/money": "~1.2",
+        "sylius/core": "^0.19",
+        "sylius/addressing-bundle": "^0.19",
+        "sylius/api-bundle": "^0.19",
+        "sylius/attribute-bundle": "^0.19",
+        "sylius/cart-bundle": "^0.19",
+        "sylius/contact-bundle": "^0.19",
+        "sylius/content-bundle": "^0.19",
+        "sylius/currency-bundle": "^0.19",
+        "sylius/flow-bundle": "^0.19",
+        "sylius/fixtures-bundle": "^0.19",
+        "sylius/inventory-bundle": "^0.19",
+        "sylius/locale-bundle": "^0.19",
+        "sylius/money-bundle": "^0.19",
+        "sylius/order-bundle": "^0.19",
+        "sylius/payment-bundle": "^0.19",
+        "sylius/payum-bundle": "^0.19",
+        "sylius/pricing-bundle": "^0.19",
+        "sylius/product-bundle": "^0.19",
+        "sylius/promotion-bundle": "^0.19",
+        "sylius/rbac-bundle": "^0.19",
+        "sylius/report-bundle": "^0.19",
+        "sylius/resource-bundle": "^0.19",
+        "sylius/settings-bundle": "^0.19",
+        "sylius/shipping-bundle": "^0.19",
+        "sylius/taxation-bundle": "^0.19",
+        "sylius/taxonomy-bundle": "^0.19",
+        "sylius/theme-bundle": "^0.19",
+        "sylius/user-bundle": "^0.19",
+        "sylius/variation-bundle": "^0.19",
+        "sylius/association-bundle": "^0.19",
+        "sylius/review-bundle": "^0.19",
+        "sylius/metadata-bundle": "^0.19",
+        "symfony/framework-bundle": "^2.8",
+        "symfony-cmf/routing-bundle": "~1.2",
+        "swiftmailer/swiftmailer": "~5.0",
+        "winzou/state-machine-bundle": "~0.2"
+    },
+    "require-dev": {
+        "hwi/oauth-bundle": "~0.3",
+        "matthiasnoback/symfony-config-test": "dev-partially-test-below-prototypes as v1.4.0",
+        "matthiasnoback/symfony-dependency-injection-test": "^0.7",
+        "phpspec/phpspec": "^2.4",
+        "phpunit/phpunit": "^4.8"
+    },
+    "suggest": {
+        "sylius/web-bundle": "Provides default web interface",
+        "sylius/fixtures-bundle": "Provides default Sylius fixtures"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": { "Sylius\\CoreBundle\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Sylius\\CoreBundle\\spec\\": "spec/" }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/pamil/SymfonyConfigTest.git"
+        },
+        {
+            "type": "path",
+            "url": "../../*/*"
+        }
+    ],
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.19-dev"
+        }
+    }
+}

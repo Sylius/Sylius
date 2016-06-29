@@ -15,10 +15,10 @@ use Behat\Mink\Session;
 use Behat\Mink\Element\NodeElement;
 use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
-use Sylius\Component\Core\Model\AddressInterface;
-use Sylius\Component\Core\Model\ShippingMethodInterface;
-use Sylius\Component\Payment\Model\PaymentMethodInterface;
-use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Core\Model\AddressInterface;
+use Sylius\Core\Model\ShippingMethodInterface;
+use Sylius\Payment\Model\PaymentMethodInterface;
+use Sylius\Core\Model\ProductInterface;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\Routing\RouterInterface;
 

@@ -162,7 +162,7 @@ the `PriceUpdater` class.
 
 .. code-block:: bash
 
-    $ bin/phpspec desc "Sylius\Bundle\CoreBundle\Pricing\PriceUpdater"
+    $ bin/phpspec desc "Sylius\CoreBundle\Pricing\PriceUpdater"
     Specification for PriceUpdater created in spec.
 
 What have we just done? **PHPSpec** has created the spec for us. You can
@@ -172,7 +172,7 @@ navigate to the spec folder and see the spec there:
 
     <?php
 
-    namespace spec\Sylius\Bundle\CoreBundle\Pricing;
+    namespace spec\Sylius\CoreBundle\Pricing;
 
     use PhpSpec\ObjectBehavior;
     use Prophecy\Argument;
@@ -181,7 +181,7 @@ navigate to the spec folder and see the spec there:
     {
         function it_is_initializable()
         {
-            $this->shouldHaveType('Sylius\Bundle\CoreBundle\Pricing\PriceUpdater');
+            $this->shouldHaveType('Sylius\CoreBundle\Pricing\PriceUpdater');
         }
     }
 
@@ -199,12 +199,12 @@ Now, let's write first example which will update the products price:
 
     <?php
 
-    namespace spec\Sylius\Bundle\CoreBundle\Pricing;
+    namespace spec\Sylius\CoreBundle\Pricing;
 
     use Acme\ApiClient;
     use PhpSpec\ObjectBehavior;
     use Prophecy\Argument;
-    use Sylius\Bundle\CoreBundle\Model\ProductInterface;
+    use Sylius\CoreBundle\Model\ProductInterface;
 
     class PriceUpdaterSpec extends ObjectBehavior
     {
@@ -231,7 +231,7 @@ Try running the example by using the following command:
 
     $ bin/phpspec run 
 
-    > spec\Sylius\Bundle\CoreBundle\Pricing\PriceUpdater
+    > spec\Sylius\CoreBundle\Pricing\PriceUpdater
 
       ✘ it updates product price through api
           Class PriceUpdater does not exists.
@@ -245,9 +245,9 @@ Start implementing the very initial version of the price updater.
 
     <?php
 
-    namespace Sylius\Bundle\CoreBundle\Pricing;
+    namespace Sylius\CoreBundle\Pricing;
 
-    use Sylius\Bundle\CoreBundle\Model\ProductInterface;
+    use Sylius\CoreBundle\Model\ProductInterface;
     use Acme\ApiClient;
 
     class PriceUpdater
@@ -272,7 +272,7 @@ Done! If you run PHPSpec again, you should see the following output:
 
     $ bin/phpspec run 
     
-    > spec\Sylius\Bundle\CoreBundle\Pricing\PriceUpdater
+    > spec\Sylius\CoreBundle\Pricing\PriceUpdater
     
       ✔ it updates product price through api
     

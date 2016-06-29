@@ -20,8 +20,8 @@ letters. Example usage:
     // directory, relative to this file
     require_once __DIR__.'/../vendor/autoload.php';
 
-    use Sylius\Component\User\Model\Customer;
-    use Sylius\Component\Canonicalizer\Canonicalizer;
+    use Sylius\User\Model\Customer;
+    use Sylius\Canonicalizer\Canonicalizer;
 
     $canonicalizer = new Canonicalizer();
 

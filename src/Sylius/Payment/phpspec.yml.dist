@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: Sylius\Payment
+        psr4_prefix: Sylius\Payment
+        src_path: .

@@ -12,8 +12,8 @@
 namespace Sylius\Behat\Service;
 
 use Sylius\Behat\Service\Setter\CookieSetterInterface;
-use Sylius\Component\Core\Model\UserInterface;
-use Sylius\Component\User\Repository\UserRepositoryInterface;
+use Sylius\Core\Model\UserInterface;
+use Sylius\User\Repository\UserRepositoryInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 

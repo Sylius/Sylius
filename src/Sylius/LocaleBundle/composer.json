@@ -1,0 +1,55 @@
+{
+    "name": "sylius/locale-bundle",
+    "type": "symfony-bundle",
+    "description": "Locales management for Symfony2 projects.",
+    "keywords": ["language", "localization", "locale", "i18n", "internationalization"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paweł Jędrzejewski",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name": "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name": "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php": "^5.6|^7.0",
+
+        "sylius/locale": "^0.19",
+        "sylius/resource-bundle": "^0.19",
+        "symfony/framework-bundle": "^2.8"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "^2.4",
+        "twig/twig": "^1.0"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": { "Sylius\\LocaleBundle\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Sylius\\LocaleBundle\\spec\\": "spec/" }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../*/*"
+        }
+    ],
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.19-dev"
+        }
+    }
+}

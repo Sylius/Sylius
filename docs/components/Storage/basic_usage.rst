@@ -63,7 +63,7 @@ to be set in the storage before making any operations on it.
 
    <?php
 
-   use Sylius\Component\Storage\CookieStorage;
+   use Sylius\Storage\CookieStorage;
    use Symfony\Component\HttpFoundation\Request;
 
    $request = // The request which cookies' data you would like to manage.
@@ -90,7 +90,7 @@ objects implementing the Doctrine's `Cache`_ interface.
    <?php
 
    use Doctrine\Common\Cache\Cache;
-   use Sylius\Component\Storage\DoctrineCacheStorage;
+   use Sylius\Storage\DoctrineCacheStorage;
 
    $cache = // Your doctrine's cache.
 
@@ -112,7 +112,7 @@ Session Storage
 
    <?php
 
-   use Sylius\Component\Storage\SessionStorage;
+   use Sylius\Storage\SessionStorage;
    use Symfony\Component\HttpFoundation\Session\Session;
 
    $session = new Session();

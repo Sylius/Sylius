@@ -12,7 +12,7 @@ It requires only one method - ``getConfigurations()`` which receives no argument
 
 .. code-block:: php
 
-    use Sylius\Bundle\ThemeBundle\Configuration\ConfigurationProviderInterface;
+    use Sylius\ThemeBundle\Configuration\ConfigurationProviderInterface;
 
     final class CustomConfigurationProvider implements ConfigurationProviderInterface
     {
@@ -41,7 +41,7 @@ provider is constructed.
 
 .. code-block:: php
 
-    use Sylius\Bundle\ThemeBundle\Configuration\ConfigurationSourceFactoryInterface;
+    use Sylius\ThemeBundle\Configuration\ConfigurationSourceFactoryInterface;
     use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
     use Symfony\Component\DependencyInjection\ContainerBuilder;
     use Symfony\Component\DependencyInjection\Definition;
@@ -86,7 +86,7 @@ The last step is to tell ThemeBundle to use the source factory defined before. I
 
 .. code-block:: php
 
-    use Sylius\Bundle\ThemeBundle\DependencyInjection\SyliusThemeExtension;
+    use Sylius\ThemeBundle\DependencyInjection\SyliusThemeExtension;
     use Symfony\Component\DependencyInjection\ContainerBuilder;
     use Symfony\Component\HttpKernel\Bundle\Bundle;
 

@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: Sylius\CurrencyBundle
+        psr4_prefix: Sylius\CurrencyBundle
+        src_path: .

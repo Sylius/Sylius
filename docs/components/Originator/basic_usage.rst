@@ -52,7 +52,7 @@ and:
 
    namespace Example\Model;
 
-   use Sylius\Component\Originator\Model\OriginAwareInterface;
+   use Sylius\Originator\Model\OriginAwareInterface;
 
    class OriginAware implements OriginAwareInterface
    {
@@ -77,7 +77,7 @@ the requested object's identifier property name (the default setting is 'id'):
 
    <?php
 
-   use Sylius\Component\Originator\Originator\Originator;
+   use Sylius\Originator\Originator\Originator;
    use //the ManagerRegistry service, here: $registry
 
    $originator = new Originator($registry); //using the default field name
@@ -92,7 +92,7 @@ Setting the origin of an object is really simple:
 
    <?php
 
-   use Sylius\Component\Originator\Originator\Originator;
+   use Sylius\Originator\Originator\Originator;
    use Example\Model\Ancestor;
    use Example\Model\OriginAware;
    use //the ManagerRegistry service, here: $registry

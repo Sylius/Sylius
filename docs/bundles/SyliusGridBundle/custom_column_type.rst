@@ -11,7 +11,7 @@ All you need to do is implement your own class implementing ColumnTypeInterface 
 
     namespace App\Grid\ColumnType;
 
-    use Sylius\Component\Grid\ColumnType\ColumnTypeInterface;
+    use Sylius\Grid\ColumnType\ColumnTypeInterface;
     use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
     class TournamentMonitorType implements ColumnTypeInterface

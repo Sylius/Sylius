@@ -13,8 +13,8 @@ of fee set at the ``amount`` key in the configuration array.
 
    <?php
 
-   use Sylius\Component\Payment\Calculator\FixedFeeCalculator;
-   use Sylius\Component\Payment\Model\Payment;
+   use Sylius\Payment\Calculator\FixedFeeCalculator;
+   use Sylius\Payment\Model\Payment;
 
    $fixedFeeCalculator = new FixedFeeCalculator();
 
@@ -41,8 +41,8 @@ configuration array in order to calculate a payment's fee.
 
    <?php
 
-   use Sylius\Component\Payment\Calculator\PercentFeeCalculator;
-   use Sylius\Component\Payment\Model\Payment;
+   use Sylius\Payment\Calculator\PercentFeeCalculator;
+   use Sylius\Payment\Model\Payment;
 
    $percentFeeCalculator = new PercentFeeCalculator();
 
@@ -68,12 +68,12 @@ a specified calculator to do the work and just returns the result.
 
    <?php
 
-   use Sylius\Component\Payment\Model\Payment;
-   use Sylius\Component\Payment\Model\PaymentMethod;
-   use Sylius\Component\Payment\Calculator\DelegatingFeeCalculator;
-   use Sylius\Component\Registry\ServiceRegistry;
+   use Sylius\Payment\Model\Payment;
+   use Sylius\Payment\Model\PaymentMethod;
+   use Sylius\Payment\Calculator\DelegatingFeeCalculator;
+   use Sylius\Registry\ServiceRegistry;
 
-   $registry = new ServiceRegistry('Sylius\Component\Payment\Calculator\FeeCalculatorInterface');
+   $registry = new ServiceRegistry('Sylius\Payment\Calculator\FeeCalculatorInterface');
 
    $registry->register(DefaultFeeCalculators::FIXED, new FixedFeeCalculator());
    $registry->register(DefaultFeeCalculators::PERCENT, new PercentFeeCalculator());

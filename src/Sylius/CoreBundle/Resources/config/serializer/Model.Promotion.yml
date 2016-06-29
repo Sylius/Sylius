@@ -1,0 +1,2 @@
+Sylius\Core\Model\Promotion:
+    exclusion_policy: ALL

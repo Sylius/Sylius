@@ -1,4 +1,4 @@
-Sylius\Component\Core\Model\ProductVariant:
+Sylius\Core\Model\ProductVariant:
     productVariant1:
         code: MUG_1
         setPrice: [20]
@@ -9,7 +9,7 @@ Sylius\Component\Core\Model\ProductVariant:
         code: MUG_3
         setPrice: [20]
 
-Sylius\Component\Core\Model\Product:
+Sylius\Core\Model\Product:
     product1:
         updatedAt: 2015-10-10
         currentLocale: en_US
@@ -29,7 +29,7 @@ Sylius\Component\Core\Model\Product:
         variants: [@productVariant3]
         code: MUG_BB
 
-Sylius\Component\Core\Model\ProductTranslation:
+Sylius\Core\Model\ProductTranslation:
     productTranslation1:
         slug: mug-star-wars
         locale: en_US

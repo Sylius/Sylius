@@ -12,25 +12,25 @@ Configuration reference
         resources:
             product:
                 classes:
-                    model:      Sylius\Component\Product\Model\Product
-                    interface:  Sylius\Component\Product\Model\ProductInterface
-                    controller: Sylius\Bundle\ProductBundle\Controller\ProductController
+                    model:      Sylius\Product\Model\Product
+                    interface:  Sylius\Product\Model\ProductInterface
+                    controller: Sylius\ProductBundle\Controller\ProductController
                     repository: ~
-                    factory:    Sylius\Component\Resource\Factory\Factory
+                    factory:    Sylius\Resource\Factory\Factory
                     form:
-                        default: Sylius\Bundle\ProductBundle\Form\Type\ProductType
-                        choice:  Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType
+                        default: Sylius\ProductBundle\Form\Type\ProductType
+                        choice:  Sylius\ResourceBundle\Form\Type\ResourceChoiceType
                 validation_groups:
                     default: [ sylius ]
                 translation:
                     classes:
-                        model:      Sylius\Component\Product\Model\ProductTranslation
-                        interface:  Sylius\Component\Product\Model\ProductTranslationInterface
-                        controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                        model:      Sylius\Product\Model\ProductTranslation
+                        interface:  Sylius\Product\Model\ProductTranslationInterface
+                        controller: Sylius\ResourceBundle\Controller\ResourceController
                         repository: ~
-                        factory:    Sylius\Component\Resource\Factory\Factory
+                        factory:    Sylius\Resource\Factory\Factory
                         form:
-                            default: Sylius\Bundle\ProductBundle\Form\Type\Product\TranslationType
+                            default: Sylius\ProductBundle\Form\Type\Product\TranslationType
                     validation_groups:
                         default: [ sylius ]
 

@@ -13,7 +13,7 @@ namespace Sylius\Migrations;
 
 use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
-use Sylius\Component\Order\Model\OrderInterface;
+use Sylius\Order\Model\OrderInterface;
 
 /**
  * Auto-generated Migration: Please modify to your needs!

@@ -12,11 +12,11 @@
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
-use Sylius\Component\Addressing\Converter\CountryNameConverterInterface;
-use Sylius\Component\Addressing\Model\ProvinceInterface;
-use Sylius\Component\Addressing\Model\ZoneInterface;
-use Sylius\Component\Addressing\Model\ZoneMemberInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Addressing\Converter\CountryNameConverterInterface;
+use Sylius\Addressing\Model\ProvinceInterface;
+use Sylius\Addressing\Model\ZoneInterface;
+use Sylius\Addressing\Model\ZoneMemberInterface;
+use Sylius\Resource\Repository\RepositoryInterface;
 use Webmozart\Assert\Assert;
 
 /**

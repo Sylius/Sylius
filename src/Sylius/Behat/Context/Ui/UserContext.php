@@ -16,8 +16,8 @@ use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\Admin\Customer\ShowPageInterface;
 use Sylius\Behat\Page\Shop\Account\LoginPageInterface;
 use Sylius\Behat\Page\Shop\User\RegisterPageInterface;
-use Sylius\Component\Core\Test\Services\SharedStorageInterface;
-use Sylius\Component\User\Repository\UserRepositoryInterface;
+use Sylius\Core\Test\Services\SharedStorageInterface;
+use Sylius\User\Repository\UserRepositoryInterface;
 
 /**
  * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>

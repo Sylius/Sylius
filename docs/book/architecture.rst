@@ -29,7 +29,7 @@ For every resource you have four essential services available:
 * Repository
 * Controller
 
-Let us take the "product" resource as an example. By default, it is represented by an object of a class that implements the ``Sylius\Component\Core\Model\ProductInterface``.
+Let us take the "product" resource as an example. By default, it is represented by an object of a class that implements the ``Sylius\Core\Model\ProductInterface``.
 
 Factory
 '''''''

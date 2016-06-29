@@ -18,9 +18,9 @@ use Sylius\Behat\Page\Admin\ProductVariant\CreatePageInterface;
 use Sylius\Behat\Page\Admin\ProductVariant\UpdatePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
-use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Core\Test\Services\SharedStorageInterface;
+use Sylius\Core\Model\ProductInterface;
+use Sylius\Core\Model\ProductVariantInterface;
+use Sylius\Core\Test\Services\SharedStorageInterface;
 use Webmozart\Assert\Assert;
 
 /**

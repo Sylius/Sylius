@@ -18,14 +18,14 @@ Configuration reference
         resources:
             cart:
                 classes:
-                    controller: Sylius\Bundle\CartBundle\Controller\CartController
-                    form:       Sylius\Bundle\CartBundle\Form\Type\CartType
+                    controller: Sylius\CartBundle\Controller\CartController
+                    form:       Sylius\CartBundle\Form\Type\CartType
                 validation_groups:
                     default: [ sylius ]
             cart_item:
                 classes:
-                    controller: Sylius\Bundle\CartBundle\Controller\CartItemController
-                    form:       Sylius\Bundle\CartBundle\Form\Type\CartItemType
+                    controller: Sylius\CartBundle\Controller\CartItemController
+                    form:       Sylius\CartBundle\Form\Type\CartItemType
                 validation_groups:
                     default: [ sylius ]
 

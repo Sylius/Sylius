@@ -12,68 +12,68 @@ Configuration Reference
         classes:
             shipment:
                 classes:
-                    model:      Sylius\Component\Shipping\Model\Shipment
-                    interface:      Sylius\Component\Shipping\Model\ShipmentInterface
-                    controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                    model:      Sylius\Shipping\Model\Shipment
+                    interface:      Sylius\Shipping\Model\ShipmentInterface
+                    controller: Sylius\ResourceBundle\Controller\ResourceController
                     repository: ~
-                    factory:    Sylius\Component\Resource\Factory\Factory
+                    factory:    Sylius\Resource\Factory\Factory
                     form:
-                        default: Sylius\Bundle\ShippingBundle\Form\Type\ShipmentType
+                        default: Sylius\ShippingBundle\Form\Type\ShipmentType
                 validation_groups:
                     default: [ sylius ]
             shipment_item:
                 classes:
-                    model:      Sylius\Component\Shipping\Model\ShipmentItem
-                    interface:      Sylius\Component\Shipping\Model\ShipmentItemInterface
-                    controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                    model:      Sylius\Shipping\Model\ShipmentItem
+                    interface:      Sylius\Shipping\Model\ShipmentItemInterface
+                    controller: Sylius\ResourceBundle\Controller\ResourceController
                     repository: ~
-                    factory:    Sylius\Component\Resource\Factory\Factory
+                    factory:    Sylius\Resource\Factory\Factory
                     form:
-                        default: Sylius\Bundle\ShippingBundle\Form\Type\ShipmentItemType
+                        default: Sylius\ShippingBundle\Form\Type\ShipmentItemType
             shipping_method:
                 classes:
-                    model:      Sylius\Component\Shipping\Model\ShippingMethod
-                    interface:      Sylius\Component\Shipping\Model\ShippingMethodInterface
-                    controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                    model:      Sylius\Shipping\Model\ShippingMethod
+                    interface:      Sylius\Shipping\Model\ShippingMethodInterface
+                    controller: Sylius\ResourceBundle\Controller\ResourceController
                     repository: ~
-                    factory:    Sylius\Component\Resource\Factory\Factory
+                    factory:    Sylius\Resource\Factory\Factory
                     form:
-                        default: Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodType
-                        choice:  Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType
+                        default: Sylius\ShippingBundle\Form\Type\ShippingMethodType
+                        choice:  Sylius\ResourceBundle\Form\Type\ResourceChoiceType
                 validation_groups:
                     default: [ sylius ]
                 translation:
                     classes:
-                        model:      Sylius\Component\Shipping\Model\ShippingMethodTranslation
-                        interface:  Sylius\Component\Shipping\Model\ShippingMethodTranslationInterface
-                        controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                        model:      Sylius\Shipping\Model\ShippingMethodTranslation
+                        interface:  Sylius\Shipping\Model\ShippingMethodTranslationInterface
+                        controller: Sylius\ResourceBundle\Controller\ResourceController
                         repository: ~
-                        factory:    Sylius\Component\Resource\Factory\Factory
+                        factory:    Sylius\Resource\Factory\Factory
                         form:
-                            default: Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodTranslationType
+                            default: Sylius\ShippingBundle\Form\Type\ShippingMethodTranslationType
                     validation_groups:
                         default: [ sylius ]
             shipping_category:
                 classes:
-                    model:      Sylius\Component\Shipping\Model\ShippingCategory
-                    interface:  Sylius\Component\Shipping\Model\ShippingCategoryInterface
-                    controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                    model:      Sylius\Shipping\Model\ShippingCategory
+                    interface:  Sylius\Shipping\Model\ShippingCategoryInterface
+                    controller: Sylius\ResourceBundle\Controller\ResourceController
                     repository: ~
-                    factory:    Sylius\Component\Resource\Factory\Factory
+                    factory:    Sylius\Resource\Factory\Factory
                     form:
-                        default: Sylius\Bundle\ShippingBundle\Form\Type\ShippingCategoryType
-                        choice:  Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType
+                        default: Sylius\ShippingBundle\Form\Type\ShippingCategoryType
+                        choice:  Sylius\ResourceBundle\Form\Type\ResourceChoiceType
                 validation_groups:
                     default: [ sylius ]
             shipping_method_rule:
                 classes:
-                    model:      Sylius\Component\Shipping\Model\Rule
-                    interface:  Sylius\Component\Shipping\Model\RuleInterface
-                    controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                    model:      Sylius\Shipping\Model\Rule
+                    interface:  Sylius\Shipping\Model\RuleInterface
+                    controller: Sylius\ResourceBundle\Controller\ResourceController
                     repository: ~
-                    factory:    Sylius\Component\Resource\Factory\Factory
+                    factory:    Sylius\Resource\Factory\Factory
                     form:
-                        default: Sylius\Bundle\ShippingBundle\Form\Type\RuleType
+                        default: Sylius\ShippingBundle\Form\Type\RuleType
                 validation_groups:
                     default: [ sylius ]
 

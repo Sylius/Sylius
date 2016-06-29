@@ -14,11 +14,11 @@ Configuration reference
                     classes:
                         model:      ~ # Required: The variant model class implementing `VariantInterface`
                         interface:  ~
-                        controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                        controller: Sylius\ResourceBundle\Controller\ResourceController
                         repository: ~ # Required: The repository class for the variant
-                        factory:    Sylius\Component\Resource\Factory\Factory
+                        factory:    Sylius\Resource\Factory\Factory
                         form:
-                            default: Sylius\Bundle\VariationBundle\Form\Type\VariantType
+                            default: Sylius\VariationBundle\Form\Type\VariantType
                     validation_groups:
                         default: [ sylius ]
                 option:
@@ -26,22 +26,22 @@ Configuration reference
                         model:      ~ # Required: The option model class implementing `OptionInterface`
                         interface:  ~
                         repository: ~ # Required: The repository class for the option
-                        controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
-                        factory:    Sylius\Component\Resource\Factory\Factory
+                        controller: Sylius\ResourceBundle\Controller\ResourceController
+                        factory:    Sylius\Resource\Factory\Factory
                         form:
-                            default: Sylius\Bundle\VariationBundle\Form\Type\OptionType
+                            default: Sylius\VariationBundle\Form\Type\OptionType
                             choice:
                     validation_groups:
                         default: [ sylius ]
                     translation:
                         classes:
-                            model:      Sylius\Component\Variation\Model\OptionTranslation
-                            interface:  Sylius\Component\Variation\Model\OptionTranslationInterface
-                            controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                            model:      Sylius\Variation\Model\OptionTranslation
+                            interface:  Sylius\Variation\Model\OptionTranslationInterface
+                            controller: Sylius\ResourceBundle\Controller\ResourceController
                             repository: ~ # Required: The repository class for the option
-                            factory:    Sylius\Component\Resource\Factory\Factory
+                            factory:    Sylius\Resource\Factory\Factory
                             form:
-                                default: Sylius\Bundle\VariationBundle\Form\Type\OptionTranslationType
+                                default: Sylius\VariationBundle\Form\Type\OptionTranslationType
                         validation_groups:
                             default: [ sylius ]
                         fields:
@@ -49,8 +49,8 @@ Configuration reference
                 option_value:
                     model:      ~ # Required: The option value model class implementing `OptionValueInterface`
                     interface:  ~
-                    controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                    controller: Sylius\ResourceBundle\Controller\ResourceController
                     repository: ~ # Required: The repository class for the option value
-                    factory:    Sylius\Component\Resource\Factory\Factory
+                    factory:    Sylius\Resource\Factory\Factory
                     form:
-                        default: Sylius\Bundle\VariationBundle\Form\Type\OptionValueType
+                        default: Sylius\VariationBundle\Form\Type\OptionValueType

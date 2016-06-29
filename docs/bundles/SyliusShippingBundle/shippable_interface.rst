@@ -14,8 +14,8 @@ First step is to implement the simple interface, which contains few simple metho
 
     namespace Acme\Bundle\ShopBundle\Entity;
 
-    use Sylius\Component\Shipping\Model\ShippableInterface;
-    use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
+    use Sylius\Shipping\Model\ShippableInterface;
+    use Sylius\Shipping\Model\ShippingCategoryInterface;
 
     class Book implements ShippableInterface
     {
@@ -68,7 +68,7 @@ Second and last task is to define the relation inside ``Resources/config/doctrin
         <entity name="Acme\ShopBundle\Entity\Book" table="acme_book">
             <!-- your mappings... -->
 
-            <many-to-one field="shippingCategory" target-entity="Sylius\Bundle\ShippingBundle\Model\ShippingCategoryInterface">
+            <many-to-one field="shippingCategory" target-entity="Sylius\ShippingBundle\Model\ShippingCategoryInterface">
                 <join-column name="shipping_category_id" referenced-column-name="id" nullable="false" />
             </many-to-one>
         </entity>

@@ -12,25 +12,25 @@ Configuration Reference
         resources:
             tax_category:
                 classes:
-                    model: Sylius\Component\Taxation\Model\TaxCategory
-                    interface: Sylius\Component\Taxation\Model\TaxCategoryInterface
-                    controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                    model: Sylius\Taxation\Model\TaxCategory
+                    interface: Sylius\Taxation\Model\TaxCategoryInterface
+                    controller: Sylius\ResourceBundle\Controller\ResourceController
                     repository: ~
-                    factory:    Sylius\Component\Resource\Factory\Factory
+                    factory:    Sylius\Resource\Factory\Factory
                     form:
-                        default: Sylius\Bundle\TaxationBundle\Form\Type\TaxCategoryType
-                        choice: Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType
+                        default: Sylius\TaxationBundle\Form\Type\TaxCategoryType
+                        choice: Sylius\ResourceBundle\Form\Type\ResourceChoiceType
                 validation_groups:
                     default: [ sylius ]
             tax_rate:
                 classes:
-                    model: Sylius\Component\Taxation\Model\TaxRate
-                    interface: Sylius\Component\Taxation\Model\TaxRateInterface
-                    controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                    model: Sylius\Taxation\Model\TaxRate
+                    interface: Sylius\Taxation\Model\TaxRateInterface
+                    controller: Sylius\ResourceBundle\Controller\ResourceController
                     repository: ~
-                    factory:    Sylius\Component\Resource\Factory\Factory
+                    factory:    Sylius\Resource\Factory\Factory
                     form:
-                        default: Sylius\Bundle\TaxationBundle\Form\Type\TaxRateType
+                        default: Sylius\TaxationBundle\Form\Type\TaxRateType
                 validation_groups:
                     default: [ sylius ]
 

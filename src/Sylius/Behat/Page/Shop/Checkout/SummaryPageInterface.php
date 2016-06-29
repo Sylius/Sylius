@@ -12,10 +12,10 @@
 namespace Sylius\Behat\Page\Shop\Checkout;
 
 use Sylius\Behat\Page\SymfonyPageInterface;
-use Sylius\Component\Core\Model\AddressInterface;
-use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\Model\ShippingMethodInterface;
-use Sylius\Component\Payment\Model\PaymentMethodInterface;
+use Sylius\Core\Model\AddressInterface;
+use Sylius\Core\Model\ProductInterface;
+use Sylius\Core\Model\ShippingMethodInterface;
+use Sylius\Payment\Model\PaymentMethodInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>

@@ -17,7 +17,7 @@ UPGRADE
 
 ### Variation and VariationBundle
 
-* Removed concept of master variant (removed ``$master`` flag from ``Sylius\Component\Variation\Model\Variant``), all usages of **master** variant has been, for now, replaced with **first** variant;
+* Removed concept of master variant (removed ``$master`` flag from ``Sylius\Variation\Model\Variant``), all usages of **master** variant has been, for now, replaced with **first** variant;
 * Renamed `presentation` to `name` (`VariantInterface`, `OptionValueInterface`) 
 
 ### Payment
@@ -116,7 +116,7 @@ oauth:
 
 ### Resource and SyliusResourceBundle
 
- * All resources must implement ``Sylius\Component\Resource\Model\ResourceInterface``;
+ * All resources must implement ``Sylius\Resource\Model\ResourceInterface``;
  * ResourceController has been rewritten from scratch but should maintain 100% of previous functionality;
  * ``$this->config`` is no longer available and you should create it manually in every action;
 
@@ -127,7 +127,7 @@ Before:
 
 namespace AppBundle\Controller;
 
-use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\ResourceBundle\Controller\ResourceController;
 
 class BookController extends ResourceController
 {
@@ -145,7 +145,7 @@ After:
 
 namespace AppBundle\Controller;
 
-use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\ResourceBundle\Controller\ResourceController;
 
 class BookController extends ResourceController
 {
@@ -167,7 +167,7 @@ Before:
 
 namespace AppBundle\Controller;
 
-use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\ResourceBundle\Controller\ResourceController;
 
 class BookController extends ResourceController
 {
@@ -186,7 +186,7 @@ After:
 namespace AppBundle\Controller;
 
 use FOS\RestBundle\View\View;
-use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\ResourceBundle\Controller\ResourceController;
 
 class BookController extends ResourceController
 {
@@ -208,7 +208,7 @@ Before:
 
 namespace AppBundle\Controller;
 
-use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\ResourceBundle\Controller\ResourceController;
 
 class BookController extends ResourceController
 {
@@ -230,7 +230,7 @@ After:
 
 namespace AppBundle\Controller;
 
-use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\ResourceBundle\Controller\ResourceController;
 
 class BookController extends ResourceController
 {
@@ -254,7 +254,7 @@ Before:
 
 namespace AppBundle\Controller;
 
-use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\ResourceBundle\Controller\ResourceController;
 
 class BookController extends ResourceController
 {
@@ -274,7 +274,7 @@ After:
 
 namespace AppBundle\Controller;
 
-use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\ResourceBundle\Controller\ResourceController;
 
 class BookController extends ResourceController
 {
@@ -298,7 +298,7 @@ Before:
 
 namespace AppBundle\Controller;
 
-use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\ResourceBundle\Controller\ResourceController;
 
 class BookController extends ResourceController
 {
@@ -316,7 +316,7 @@ After:
 
 namespace AppBundle\Controller;
 
-use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\ResourceBundle\Controller\ResourceController;
 
 class BookController extends ResourceController
 {
@@ -391,18 +391,18 @@ After:
 
 set -ex
 
-app/console doctrine:phpcr:document:migrate-class "Symfony\Cmf\Bundle\ContentBundle\Doctrine\Phpcr\StaticContent" "Sylius\Bundle\ContentBundle\Document\StaticContent"
-app/console doctrine:phpcr:document:migrate-class "Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\Route" "Sylius\Bundle\ContentBundle\Document\Route"
-app/console doctrine:phpcr:document:migrate-class "Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\RedirectRoute" "Sylius\Bundle\ContentBundle\Document\RedirectRoute"
-app/console doctrine:phpcr:document:migrate-class "Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\Menu" "Sylius\Bundle\ContentBundle\Document\Menu"
-app/console doctrine:phpcr:document:migrate-class "Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode" "Sylius\Bundle\ContentBundle\Document\MenuNode"
-app/console doctrine:phpcr:document:migrate-class "Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\SlideshowBlock" "Sylius\Bundle\ContentBundle\Document\SlideshowBlock"
-app/console doctrine:phpcr:document:migrate-class "Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ImagineBlock" "Sylius\Bundle\ContentBundle\Document\ImagineBlock"
-app/console doctrine:phpcr:document:migrate-class "Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ActionBlock" "Sylius\Bundle\ContentBundle\Document\ActionBlock"
-app/console doctrine:phpcr:document:migrate-class "Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\MenuBlock" "Sylius\Bundle\ContentBundle\Document\MenuBlock"
-app/console doctrine:phpcr:document:migrate-class "Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ReferenceBlock" "Sylius\Bundle\ContentBundle\Document\ReferenceBlock"
-app/console doctrine:phpcr:document:migrate-class "Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\SimpleBlock" "Sylius\Bundle\ContentBundle\Document\SimpleBlock"
-app/console doctrine:phpcr:document:migrate-class "Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\StringBlock" "Sylius\Bundle\ContentBundle\Document\StringBlock"
+app/console doctrine:phpcr:document:migrate-class "Symfony\Cmf\Bundle\ContentBundle\Doctrine\Phpcr\StaticContent" "Sylius\ContentBundle\Document\StaticContent"
+app/console doctrine:phpcr:document:migrate-class "Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\Route" "Sylius\ContentBundle\Document\Route"
+app/console doctrine:phpcr:document:migrate-class "Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\RedirectRoute" "Sylius\ContentBundle\Document\RedirectRoute"
+app/console doctrine:phpcr:document:migrate-class "Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\Menu" "Sylius\ContentBundle\Document\Menu"
+app/console doctrine:phpcr:document:migrate-class "Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode" "Sylius\ContentBundle\Document\MenuNode"
+app/console doctrine:phpcr:document:migrate-class "Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\SlideshowBlock" "Sylius\ContentBundle\Document\SlideshowBlock"
+app/console doctrine:phpcr:document:migrate-class "Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ImagineBlock" "Sylius\ContentBundle\Document\ImagineBlock"
+app/console doctrine:phpcr:document:migrate-class "Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ActionBlock" "Sylius\ContentBundle\Document\ActionBlock"
+app/console doctrine:phpcr:document:migrate-class "Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\MenuBlock" "Sylius\ContentBundle\Document\MenuBlock"
+app/console doctrine:phpcr:document:migrate-class "Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ReferenceBlock" "Sylius\ContentBundle\Document\ReferenceBlock"
+app/console doctrine:phpcr:document:migrate-class "Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\SimpleBlock" "Sylius\ContentBundle\Document\SimpleBlock"
+app/console doctrine:phpcr:document:migrate-class "Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\StringBlock" "Sylius\ContentBundle\Document\StringBlock"
 ```
 
 ## From 0.15.0 to 0.16.x
@@ -548,21 +548,21 @@ The signature of `PaymentInterface::setDetails` method was changed. Now it allow
 
 ### Addressing
 
-Model classes and ZoneMatcher services have been moved to ``Sylius\Component\Addressing`` namespace.
+Model classes and ZoneMatcher services have been moved to ``Sylius\Addressing`` namespace.
 
 ```bash
-$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\AddressingBundle\\Model/Sylius\\Component\\Addressing\\Model/g' {} \;
-$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\AddressingBundle\\ZoneMatcher/Sylius\\Component\\Addressing\\ZoneMatcher/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\AddressingBundle\\Model/Sylius\\Addressing\\Model/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\AddressingBundle\\ZoneMatcher/Sylius\\Addressing\\ZoneMatcher/g' {} \;
 ```
 
 ### Cart
 
-Model classes and several services have been moved to ``Sylius\Component\Cart`` namespace.
+Model classes and several services have been moved to ``Sylius\Cart`` namespace.
 
 ```bash
-$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\CartBundle\\Model/Sylius\\Component\\Cart\\Model/g' {} \;
-$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\CartBundle\\Provider\\CartProviderInterface/Sylius\\Component\\Cart\\Provider\\CartProviderInterface/g' {} \;
-$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\CartBundle\\Storage\\CartStorageInterface/Sylius\\Component\\Cart\\Storage\\CartStorageInterface/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\CartBundle\\Model/Sylius\\Cart\\Model/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\CartBundle\\Provider\\CartProviderInterface/Sylius\\Cart\\Provider\\CartProviderInterface/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\CartBundle\\Storage\\CartStorageInterface/Sylius\\Cart\\Storage\\CartStorageInterface/g' {} \;
 ```
 
 Twig extension class name & service were changed:
@@ -572,16 +572,16 @@ Twig extension class name & service were changed:
 
 ### Core
 
-All Symfony independent code has been moved to ``Sylius\Component\Core`` namespace.
+All Symfony independent code has been moved to ``Sylius\Core`` namespace.
 Variant model has been renamed to ProductVariant and VariantImage to ProductVariantImage.
 
 ```bash
-$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\CoreBundle\\Model\\Variant/Sylius\\Component\\Core\\Model\\ProductVariant/g' {} \;
-$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\CoreBundle\\Model/Sylius\\Component\\Core\\Model/g' {} \;
-$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\CoreBundle\\Calculator/Sylius\\Component\\Core\\Calculator/g' {} \;
-$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\CoreBundle\\OrderProcessing/Sylius\\Component\\Core\\OrderProcessing/g' {} \;
-$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\CoreBundle\\Promotion/Sylius\\Component\\Core\\Promotion/g' {} \;
-$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\CoreBundle\\Uploader/Sylius\\Component\\Core\\Uploader/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\CoreBundle\\Model\\Variant/Sylius\\Core\\Model\\ProductVariant/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\CoreBundle\\Model/Sylius\\Core\\Model/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\CoreBundle\\Calculator/Sylius\\Core\\Calculator/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\CoreBundle\\OrderProcessing/Sylius\\Core\\OrderProcessing/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\CoreBundle\\Promotion/Sylius\\Core\\Promotion/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\CoreBundle\\Uploader/Sylius\\Core\\Uploader/g' {} \;
 ```
 
 Twig extension class name & service were changed:
@@ -592,13 +592,13 @@ Twig extension class name & service were changed:
 
 ### Inventory
 
-Model classes and all Symfony-agnostic services have been moved to ``Sylius\Component\Inventory`` namespace.
+Model classes and all Symfony-agnostic services have been moved to ``Sylius\Inventory`` namespace.
 
 ```bash
-$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\InventoryBundle\\Model/Sylius\\Component\\Inventory\\Model/g' {} \;
-$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\InventoryBundle\\Checker/Sylius\\Component\\Inventory\\Checker/g' {} \;
-$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\InventoryBundle\\Factory/Sylius\\Component\\Inventory\\Factory/g' {} \;
-$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\InventoryBundle\\Operator/Sylius\\Component\\Inventory\\Operator/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\InventoryBundle\\Model/Sylius\\Inventory\\Model/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\InventoryBundle\\Checker/Sylius\\Inventory\\Checker/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\InventoryBundle\\Factory/Sylius\\Inventory\\Factory/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\InventoryBundle\\Operator/Sylius\\Inventory\\Operator/g' {} \;
 ```
 
 Twig extension class name & service were changed:
@@ -608,12 +608,12 @@ Twig extension class name & service were changed:
 
 ### Money
 
-Model classes and interfaces have been moved to ``Sylius\Component\Money`` namespace.
+Model classes and interfaces have been moved to ``Sylius\Money`` namespace.
 
 ```bash
-$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\MoneyBundle\\Model/Sylius\\Component\\Money\\Model/g' {} \;
-$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\MoneyBundle\\Converter/Sylius\\Component\\Money\\Converter/g' {} \;
-$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\MoneyBundle\\Context\\CurrencyContextInterface/Sylius\\Component\\Money\\Context\\CurrencyContextInterface/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\MoneyBundle\\Model/Sylius\\Money\\Model/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\MoneyBundle\\Converter/Sylius\\Money\\Converter/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\MoneyBundle\\Context\\CurrencyContextInterface/Sylius\\Money\\Context\\CurrencyContextInterface/g' {} \;
 ```
 
 Twig extension class name & service were changed:
@@ -623,21 +623,21 @@ Twig extension class name & service were changed:
 
 ### Order
 
-Model classes and repository interfaces have been moved to ``Sylius\Component\Order`` namespace.
+Model classes and repository interfaces have been moved to ``Sylius\Order`` namespace.
 
 ```bash
-$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\OrderBundle\\Model/Sylius\\Component\\Order\\Model/g' {} \;
-$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\OrderBundle\\Generator/Sylius\\Component\\Order\\Generator/g' {} \;
-$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\OrderBundle\\Repository/Sylius\\Component\\Order\\Repository/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\OrderBundle\\Model/Sylius\\Order\\Model/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\OrderBundle\\Generator/Sylius\\Order\\Generator/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\OrderBundle\\Repository/Sylius\\Order\\Repository/g' {} \;
 ```
 
 ### Payment
 
 PaymentsBundle has been renamed to PaymentBundle.
-Model classes interfaces have been moved to ``Sylius\Component\Order`` namespace.
+Model classes interfaces have been moved to ``Sylius\Order`` namespace.
 
 ```bash
-$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\PaymentsBundle\\Model/Sylius\\Component\\Payment\\Model/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\PaymentsBundle\\Model/Sylius\\Payment\\Model/g' {} \;
 $ find ./src -type f -exec sed -i 's/PaymentsBundle/PaymentBundle/g' {} \;
 ```
 
@@ -672,7 +672,7 @@ Attributes can be attached to any object and can be configured under ``sylius_at
 The product bundle configures its attributes automatically.
 
 ```bash
-$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\VariableProductBundle\\Model/Sylius\\Component\\Product\\Model/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\VariableProductBundle\\Model/Sylius\\Product\\Model/g' {} \;
 $ find ./src -type f -exec sed -i 's/sylius.repository.option/sylius.repository.product_option/g' {} \;
 $ find ./src -type f -exec sed -i 's/sylius.repository.option_value/sylius.repository.product_option_value/g' {} \;
 $ find ./src -type f -exec sed -i 's/sylius.repository.product_property/sylius.repository.product_attribute_value/g' {} \;
@@ -698,15 +698,15 @@ product_variant.object
 ### Promotion
 
 PromotionsBundle has been renamed to PromotionBundle.
-Model classes interfaces have been moved to ``Sylius\Component\Promotion`` namespace.
+Model classes interfaces have been moved to ``Sylius\Promotion`` namespace.
 
 ```bash
 $ find ./src -type f -exec sed -i 's/PromotionsBundle/PromotionBundle/g' {} \;
-$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\PromotionBundle\\Model/Sylius\\Component\\Promotion\\Model/g' {} \;
-$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\PromotionBundle\\Action/Sylius\\Component\\Promotion\\Action/g' {} \;
-$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\PromotionBundle\\Checker/Sylius\\Component\\Promotion\\Checker/g' {} \;
-$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\PromotionBundle\\Generator/Sylius\\Component\\Promotion\\Generator/g' {} \;
-$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\PromotionBundle\\Processor/Sylius\\Component\\Promotion\\Processor/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\PromotionBundle\\Model/Sylius\\Promotion\\Model/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\PromotionBundle\\Action/Sylius\\Promotion\\Action/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\PromotionBundle\\Checker/Sylius\\Promotion\\Checker/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\PromotionBundle\\Generator/Sylius\\Promotion\\Generator/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\PromotionBundle\\Processor/Sylius\\Promotion\\Processor/g' {} \;
 ```
 
 Configuration root node has been adjusted as well.
@@ -727,12 +727,12 @@ sylius_promotion:
 
 ### Resource
 
-ResourceBundle model interfaces have been moved to ``Sylius\Component\Resource`` namespace.
+ResourceBundle model interfaces have been moved to ``Sylius\Resource`` namespace.
 ``RepositoryInterface`` has been moved to ``Repository`` namespace under the component.
 
 ```bash
-$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\ResourceBundle\\Model/Sylius\\Component\\Resource\\Model/g' {} \;
-$ find ./src -type f -exec sed -i 's/Sylius\\Component\\Resource\\Model\\RepositoryInterface/Sylius\\Component\\Resource\\Repository\\RepositoryInterface/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\ResourceBundle\\Model/Sylius\\Resource\\Model/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\Resource\\Model\\RepositoryInterface/Sylius\\Resource\\Repository\\RepositoryInterface/g' {} \;
 ```
 
 Twig extension class name & service were changed:
@@ -749,34 +749,34 @@ Twig extension class name & service were changed:
 
 ### Shipping
 
-Model classes and Symfony agnostic services & interfaces have been moved to ``Sylius\Component\Shipping`` namespace.
+Model classes and Symfony agnostic services & interfaces have been moved to ``Sylius\Shipping`` namespace.
 
 ```bash
-$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\ShippingBundle\\Model/Sylius\\Component\\Shipping\\Model/g' {} \;
-$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\ShippingBundle\\Calculator/Sylius\\Component\\Shipping\\Calculator/g' {} \;
-$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\ShippingBundle\\Checker/Sylius\\Component\\Shipping\\Checker/g' {} \;
-$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\ShippingBundle\\Resolver/Sylius\\Component\\Shipping\\Resolver/g' {} \;
-$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\ShippingBundle\\Processor/Sylius\\Component\\Shipping\\Processor/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\ShippingBundle\\Model/Sylius\\Shipping\\Model/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\ShippingBundle\\Calculator/Sylius\\Shipping\\Calculator/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\ShippingBundle\\Checker/Sylius\\Shipping\\Checker/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\ShippingBundle\\Resolver/Sylius\\Shipping\\Resolver/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\ShippingBundle\\Processor/Sylius\\Shipping\\Processor/g' {} \;
 ```
 
 ### Taxation
 
-Model classes and Symfony agnostic services have been moved to ``Sylius\Component\Taxation`` namespace.
+Model classes and Symfony agnostic services have been moved to ``Sylius\Taxation`` namespace.
 
 ```bash
-$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\TaxationBundle\\Model/Sylius\\Component\\Taxation\\Model/g' {} \;
-$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\TaxationBundle\\Calculator/Sylius\\Component\\Taxation\\Calculator/g' {} \;
-$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\TaxationBundle\\Resolver/Sylius\\Component\\Taxation\\Resolver/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\TaxationBundle\\Model/Sylius\\Taxation\\Model/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\TaxationBundle\\Calculator/Sylius\\Taxation\\Calculator/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\TaxationBundle\\Resolver/Sylius\\Taxation\\Resolver/g' {} \;
 ```
 
 ### Taxonomy
 
 TaxonomiesBundle has been renamed to TaxonomyBundle.
-Model classes interfaces have been moved to ``Sylius\Component\Taxonomy`` namespace.
+Model classes interfaces have been moved to ``Sylius\Taxonomy`` namespace.
 
 ```bash
 $ find ./src -type f -exec sed -i 's/TaxonomiesBundle/TaxonomyBundle/g' {} \;
-$ find ./src -type f -exec sed -i 's/Sylius\\Bundle\\TaxonomyBundle\\Model/Sylius\\Component\\Taxonomy\\Model/g' {} \;
+$ find ./src -type f -exec sed -i 's/Sylius\\TaxonomyBundle\\Model/Sylius\\Taxonomy\\Model/g' {} \;
 ```
 
 Configuration root node has been adjusted as well.

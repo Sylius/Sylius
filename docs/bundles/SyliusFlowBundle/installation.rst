@@ -33,7 +33,7 @@ Don't worry, everything was automatically installed via Composer.
     public function registerBundles()
     {
         $bundles = array(
-            new Sylius\Bundle\FlowBundle\SyliusFlowBundle(),
+            new Sylius\FlowBundle\SyliusFlowBundle(),
 
             // Other bundles...
         );
@@ -52,8 +52,8 @@ Lets create a few simple steps:
 
     namespace Acme\DemoBundle\Process\Step;
 
-    use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
-    use Sylius\Bundle\FlowBundle\Process\Step\AbstractControllerStep;
+    use Sylius\FlowBundle\Process\Context\ProcessContextInterface;
+    use Sylius\FlowBundle\Process\Step\AbstractControllerStep;
 
     class FirstStep extends AbstractControllerStep
     {
@@ -75,8 +75,8 @@ Lets create a few simple steps:
 
     namespace Acme\DemoBundle\Process\Step;
 
-    use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
-    use Sylius\Bundle\FlowBundle\Process\Step\AbstractControllerStep;
+    use Sylius\FlowBundle\Process\Context\ProcessContextInterface;
+    use Sylius\FlowBundle\Process\Step\AbstractControllerStep;
 
     class SecondStep extends AbstractControllerStep
     {
@@ -108,8 +108,8 @@ To group steps into the wizard, we will implement *ProcessScenarioInterface*:
 
     namespace Acme\DemoBundle\Process;
 
-    use Sylius\Bundle\FlowBundle\Process\Builder\ProcessBuilderInterface;
-    use Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface;
+    use Sylius\FlowBundle\Process\Builder\ProcessBuilderInterface;
+    use Sylius\FlowBundle\Process\Scenario\ProcessScenarioInterface;
     use Symfony\Component\DependencyInjection\ContainerAware;
     use Acme\DemoBundle\Process\Step;
 

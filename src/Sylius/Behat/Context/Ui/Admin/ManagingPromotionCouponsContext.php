@@ -19,8 +19,8 @@ use Sylius\Behat\Page\Admin\PromotionCoupon\GeneratePageInterface;
 use Sylius\Behat\Page\Admin\PromotionCoupon\UpdatePageInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
-use Sylius\Component\Core\Model\CouponInterface;
-use Sylius\Component\Promotion\Model\PromotionInterface;
+use Sylius\Core\Model\CouponInterface;
+use Sylius\Promotion\Model\PromotionInterface;
 use Webmozart\Assert\Assert;
 
 /**

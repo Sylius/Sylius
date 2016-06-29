@@ -4,7 +4,7 @@ The Report
 Retrieving reports
 -------------------
 
-Retrieving a report from the database should always happen via repository, which always implements ``Sylius\Bundle\ResourceBundle\Model\RepositoryInterface``.
+Retrieving a report from the database should always happen via repository, which always implements ``Sylius\ResourceBundle\Model\RepositoryInterface``.
 If you are using Doctrine, you're already familiar with this concept, as it extends the native Doctrine ``ObjectRepository`` interface.
 
 Your report repository is always accessible via the ``sylius.repository.report`` service.

@@ -12,11 +12,11 @@
 namespace Sylius\Behat\Context\Domain;
 
 use Behat\Behat\Context\Context;
-use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\Repository\OrderRepositoryInterface;
-use Sylius\Component\Core\Test\Services\SharedStorageInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Core\Model\OrderInterface;
+use Sylius\Core\Model\ProductInterface;
+use Sylius\Core\Repository\OrderRepositoryInterface;
+use Sylius\Core\Test\Services\SharedStorageInterface;
+use Sylius\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>

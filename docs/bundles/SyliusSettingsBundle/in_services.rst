@@ -14,7 +14,7 @@ Loading the settings
 
     namespace Acme\ShopBundle\Taxation;
 
-    use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
+    use Sylius\SettingsBundle\Manager\SettingsManagerInterface;
 
     class TaxApplicator
     {

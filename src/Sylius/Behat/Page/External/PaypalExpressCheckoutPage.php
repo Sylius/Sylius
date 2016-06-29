@@ -15,7 +15,7 @@ use Behat\Mink\Session;
 use Payum\Core\Security\TokenInterface;
 use Sylius\Behat\Page\Page;
 use Sylius\Behat\Page\UnexpectedPageException;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>

@@ -35,7 +35,7 @@ You need to enable the bundle inside the kernel, usually at the end of bundle li
             new Symfony\Bundle\TwigBundle\TwigBundle(),
 
             // Other bundles...
-            new Sylius\Bundle\ThemeBundle\SyliusThemeBundle(),
+            new Sylius\ThemeBundle\SyliusThemeBundle(),
         );
     }
 

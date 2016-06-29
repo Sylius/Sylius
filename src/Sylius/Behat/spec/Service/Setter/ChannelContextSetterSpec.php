@@ -16,7 +16,7 @@ use Prophecy\Argument;
 use Sylius\Behat\Service\Setter\ChannelContextSetter;
 use Sylius\Behat\Service\Setter\ChannelContextSetterInterface;
 use Sylius\Behat\Service\Setter\CookieSetterInterface;
-use Sylius\Component\Channel\Model\ChannelInterface;
+use Sylius\Channel\Model\ChannelInterface;
 
 /**
  * @mixin ChannelContextSetter

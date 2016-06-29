@@ -12,11 +12,11 @@
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
-use Sylius\Component\Core\Test\Services\SharedStorageInterface;
-use Sylius\Component\Currency\Converter\CurrencyNameConverterInterface;
-use Sylius\Component\Currency\Model\CurrencyInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Core\Test\Services\SharedStorageInterface;
+use Sylius\Currency\Converter\CurrencyNameConverterInterface;
+use Sylius\Currency\Model\CurrencyInterface;
+use Sylius\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>

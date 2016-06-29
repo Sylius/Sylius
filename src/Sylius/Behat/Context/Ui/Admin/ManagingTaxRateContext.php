@@ -16,7 +16,7 @@ use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\TaxRate\UpdatePageInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Page\Admin\TaxRate\CreatePageInterface;
-use Sylius\Component\Core\Model\TaxRateInterface;
+use Sylius\Core\Model\TaxRateInterface;
 use Webmozart\Assert\Assert;
 
 /**

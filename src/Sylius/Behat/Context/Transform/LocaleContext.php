@@ -12,7 +12,7 @@
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
-use Sylius\Component\Locale\Converter\LocaleNameConverterInterface;
+use Sylius\Locale\Converter\LocaleNameConverterInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>

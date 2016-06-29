@@ -106,10 +106,10 @@ The **InventoryOperator** provides basic operations on your inventory.
 
     <?php
 
-    use Sylius\Component\Inventory\Operator\InventoryOperator;
-    use Sylius\Component\Inventory\Checker\AvailabilityChecker;
-    use Sylius\Component\Inventory\Operator\BackordersHandler;
-    use Sylius\Component\Resource\Repository\InMemoryRepository;
+    use Sylius\Inventory\Operator\InventoryOperator;
+    use Sylius\Inventory\Checker\AvailabilityChecker;
+    use Sylius\Inventory\Operator\BackordersHandler;
+    use Sylius\Resource\Repository\InMemoryRepository;
 
     $inMemoryRepository = new InMemoryRepository(); // Repository model.
     $product = new Product(); // Stockable model.
@@ -140,12 +140,12 @@ This specific case will be more complicated. It uses backordersHandler to :ref:`
 
     <?php
 
-    use Sylius\Component\Inventory\Operator\InventoryOperator;
-    use Sylius\Component\Inventory\Checker\AvailabilityChecker;
-    use Sylius\Component\Inventory\Operator\BackordersHandler;
+    use Sylius\Inventory\Operator\InventoryOperator;
+    use Sylius\Inventory\Checker\AvailabilityChecker;
+    use Sylius\Inventory\Operator\BackordersHandler;
     use Doctrine\Common\Collections\ArrayCollection;
-    use Sylius\Component\Inventory\Model\InventoryUnit;
-    use Sylius\Component\Inventory\Model\InventoryUnitInterface;
+    use Sylius\Inventory\Model\InventoryUnit;
+    use Sylius\Inventory\Model\InventoryUnitInterface;
 
     $inventoryUnitRepository; // Repository model.
     $product = new Product(); // Stockable model.
@@ -224,10 +224,10 @@ This method will change the inventory unit state to ``backordered`` if the quant
 
     <?php
 
-    use Sylius\Component\Inventory\Operator\BackordersHandler;
+    use Sylius\Inventory\Operator\BackordersHandler;
     use Doctrine\Common\Collections\ArrayCollection;
-    use Sylius\Component\Inventory\Model\InventoryUnit;
-    use Sylius\Component\Inventory\Model\InventoryUnitInterface;
+    use Sylius\Inventory\Model\InventoryUnit;
+    use Sylius\Inventory\Model\InventoryUnitInterface;
 
     $inventoryUnitRepository; // Repository model.
     $product = new Product(); // Stockable model.
@@ -262,7 +262,7 @@ This method will change inventory unit state to ``sold``.
 
     <?php
 
-    use Sylius\Component\Inventory\Operator\BackordersHandler;
+    use Sylius\Inventory\Operator\BackordersHandler;
 
     $inventoryUnitRepository; // Repository model.
     $product = new Product(); // Stockable model.
@@ -295,7 +295,7 @@ Second parameter of the ``->isStockSufficient()`` method gives a possibility to 
 
     <?php
 
-    use Sylius\Component\Inventory\Checker\AvailabilityChecker;
+    use Sylius\Inventory\Checker\AvailabilityChecker;
 
     $product = new Product(); // Stockable model.
     $product->isAvailableOnDemand(); // Output will be false.
@@ -316,7 +316,7 @@ exceeds a stockable's capacity to supply it.
 
     <?php
 
-    use Sylius\Component\Inventory\Checker\AvailabilityChecker;
+    use Sylius\Inventory\Checker\AvailabilityChecker;
 
     $product = new Product(); // Stockable model.
 
@@ -331,7 +331,7 @@ Available On Demand
 
     <?php
 
-    use Sylius\Component\Inventory\Checker\AvailabilityChecker;
+    use Sylius\Inventory\Checker\AvailabilityChecker;
 
     $product = new Product(); // Stockable model.
     $product->isAvailableOnDemand(); // Output will be true.
@@ -359,8 +359,8 @@ The **InventoryUnitFactory** creates a collection of new inventory units.
 
     <?php
 
-    use Sylius\Component\Inventory\Factory\InventoryUnitFactory;
-    use Sylius\Component\Inventory\Model\InventoryUnitInterface;
+    use Sylius\Inventory\Factory\InventoryUnitFactory;
+    use Sylius\Inventory\Model\InventoryUnitInterface;
 
     $inventoryUnitRepository; // Repository model.
     $product = new Product(); // Stockable model.

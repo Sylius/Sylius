@@ -12,8 +12,8 @@ For purpose of this tutorial, let's define the page metadata settings.
 
     namespace Acme\ShopBundle\Settings;
 
-    use Sylius\Bundle\SettingsBundle\Schema\SchemaInterface;
-    use Sylius\Bundle\SettingsBundle\Schema\SettingsBuilderInterface;
+    use Sylius\SettingsBundle\Schema\SchemaInterface;
+    use Sylius\SettingsBundle\Schema\SettingsBuilderInterface;
     use Symfony\Component\Form\FormBuilderInterface;
 
     class MetaSettingsSchema implements SchemaInterface

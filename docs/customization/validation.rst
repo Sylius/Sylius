@@ -14,13 +14,13 @@ What if you'd want to have at least 10 characters?
 1. Create the ``AppBundle\Resources\config\validation.yml``.
 
 In this file you need to overwrite the whole validation of your field that you are willing to modify.
-Take this configuration from the ``Sylius\Bundle\ProductBundle\Resources\config\validation.xml`` - you can choose format ``xml`` or ``yaml``.
+Take this configuration from the ``Sylius\ProductBundle\Resources\config\validation.xml`` - you can choose format ``xml`` or ``yaml``.
 
 Give it a new, custom validation group - ``[app_product]``.
 
 .. code-block:: yaml
 
-    Sylius\Component\Product\Model\ProductTranslation:
+    Sylius\Product\Model\ProductTranslation:
         properties:
             name:
                 - NotBlank:

@@ -13,8 +13,8 @@ Every Identity can have multiple roles, which inherits all permissions from thei
 
     <?php
 
-    use Sylius\Component\Rbac\Model\Role;
-    use Sylius\Component\Rbac\Model\Permission;
+    use Sylius\Rbac\Model\Role;
+    use Sylius\Rbac\Model\Permission;
 
     // Assume that in your application you want to have two roles and some permissions to manage customer.
 
@@ -66,13 +66,13 @@ The **AuthorizationChecker** checks whether current identity has permission.
 
     <?php
 
-    use Sylius\Component\Rbac\Authorization\AuthorizationChecker;
-    use Sylius\Component\Rbac\Provider\CurrentIdentityProviderInterface;
-    use Sylius\Component\Resource\Repository\InMemoryRepository;
-    use Sylius\Component\Rbac\Authorization\PermissionMap;
-    use Sylius\Component\Rbac\Provider\PermissionProvider;
-    use Sylius\Component\Rbac\Resolver\PermissionsResolver;
-    use Sylius\Component\Rbac\Resolver\RolesResolver;
+    use Sylius\Rbac\Authorization\AuthorizationChecker;
+    use Sylius\Rbac\Provider\CurrentIdentityProviderInterface;
+    use Sylius\Resource\Repository\InMemoryRepository;
+    use Sylius\Rbac\Authorization\PermissionMap;
+    use Sylius\Rbac\Provider\PermissionProvider;
+    use Sylius\Rbac\Resolver\PermissionsResolver;
+    use Sylius\Rbac\Resolver\RolesResolver;
 
     class CurrentIdentityProvider implements CurrentIdentityProviderInterface
     {
@@ -109,12 +109,12 @@ The **PermissionMap** allows you to get permissions from given role.
 
     <?php
 
-    use Sylius\Component\Resource\Repository\InMemoryRepository;
-    use Sylius\Component\Rbac\Authorization\PermissionMap;
-    use Sylius\Component\Rbac\Provider\PermissionProvider;
-    use Sylius\Component\Rbac\Resolver\PermissionsResolver;
-    use Sylius\Component\Rbac\Model\Role;
-    use Sylius\Component\Rbac\Model\Permission;
+    use Sylius\Resource\Repository\InMemoryRepository;
+    use Sylius\Rbac\Authorization\PermissionMap;
+    use Sylius\Rbac\Provider\PermissionProvider;
+    use Sylius\Rbac\Resolver\PermissionsResolver;
+    use Sylius\Rbac\Model\Role;
+    use Sylius\Rbac\Model\Permission;
 
     $manageCustomer = new Permission();
     $manageCustomer->setCode('sylius.manage.customer');
@@ -157,8 +157,8 @@ PermissionProvider
 
     <?php
 
-    use Sylius\Component\Rbac\Provider\PermissionProvider;
-    use Sylius\Component\Resource\Repository\InMemoryRepository;
+    use Sylius\Rbac\Provider\PermissionProvider;
+    use Sylius\Resource\Repository\InMemoryRepository;
 
     $permissions = new InMemoryRepository();
 
@@ -176,13 +176,13 @@ Permissions and roles are in tree model so basically resolvers and iterators hav
 
     <?php
 
-    use Sylius\Component\Resource\Repository\InMemoryRepository;
-    use Sylius\Component\Rbac\Model\Role;
-    use Sylius\Component\Rbac\Model\Permission;
-    use Sylius\Component\Rbac\Resolver\NestedSetPermissionsResolver;
-    use Sylius\Component\Rbac\Resolver\NestedSetRolesResolver;
-    use Sylius\Component\Rbac\Model\IdentityInterface;
-    use Sylius\Component\Rbac\Model\RoleInterface;
+    use Sylius\Resource\Repository\InMemoryRepository;
+    use Sylius\Rbac\Model\Role;
+    use Sylius\Rbac\Model\Permission;
+    use Sylius\Rbac\Resolver\NestedSetPermissionsResolver;
+    use Sylius\Rbac\Resolver\NestedSetRolesResolver;
+    use Sylius\Rbac\Model\IdentityInterface;
+    use Sylius\Rbac\Model\RoleInterface;
 
     class User implements IdentityInterface
     {

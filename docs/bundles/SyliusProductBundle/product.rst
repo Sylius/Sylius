@@ -4,7 +4,7 @@ The Product
 Retrieving products
 -------------------
 
-Retrieving a product from the database should always happen via repository, which always implements ``Sylius\Bundle\ResourceBundle\Model\RepositoryInterface``.
+Retrieving a product from the database should always happen via repository, which always implements ``Sylius\ResourceBundle\Model\RepositoryInterface``.
 If you are using Doctrine, you're already familiar with this concept, as it extends the native Doctrine ``ObjectRepository`` interface.
 
 Your product repository is always accessible via the ``sylius.repository.product`` service.

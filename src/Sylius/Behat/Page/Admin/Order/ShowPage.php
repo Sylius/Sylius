@@ -15,7 +15,7 @@ use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Session;
 use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
-use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Core\Model\OrderInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 /**

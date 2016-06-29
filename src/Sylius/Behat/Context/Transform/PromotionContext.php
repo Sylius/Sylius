@@ -12,7 +12,7 @@
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
-use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
+use Sylius\Promotion\Repository\PromotionRepositoryInterface;
 
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>

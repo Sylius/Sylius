@@ -35,7 +35,7 @@ First, you need to enable the bundle inside the kernel.
             new FOS\RestBundle\FOSRestBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle($this),
 
-            new Sylius\Bundle\OmnipayBundle\SyliusOmnipayBundle()
+            new Sylius\OmnipayBundle\SyliusOmnipayBundle()
         );
     }
 

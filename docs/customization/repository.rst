@@ -29,7 +29,7 @@ For the ``ProductRepository`` run:
 
     $ php app/console debug:container sylius.repository.product
 
-As a result you will get the ``Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepository`` - this is the class that you need to be extending.
+As a result you will get the ``Sylius\CoreBundle\Doctrine\ORM\ProductRepository`` - this is the class that you need to be extending.
 
 .. code-block:: php
 
@@ -37,7 +37,7 @@ As a result you will get the ``Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepo
 
     namespace AppBundle\Repository;
 
-    use Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
+    use Sylius\CoreBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
 
     class ProductRepository extends BaseProductRepository
     {

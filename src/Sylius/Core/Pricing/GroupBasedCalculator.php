@@ -1,0 +1,44 @@
+<?php
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Sylius\Core\Pricing;
+
+use Sylius\User\Model\GroupInterface;
+
+/**
+ * @author Paweł Jędrzejewski <pawel@sylius.org>
+ */
+class GroupBasedCalculator extends AbstractCalculator
+{
+    /**
+     * {@inheritdoc}
+     */
+    public function getType()
+    {
+        return Calculators::GROUP_BASED;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getParameterName()
+    {
+        return 'groups';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getClassName()
+    {
+        return GroupInterface::class;
+    }
+}

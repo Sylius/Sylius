@@ -5,17 +5,17 @@ default:
     suites:
         legacy_search:
             contexts:
-                - Sylius\Bundle\SearchBundle\Behat\SearchContext
-                - Sylius\Bundle\CoreBundle\Behat\HookContext
+                - Sylius\SearchBundle\Behat\SearchContext
+                - Sylius\CoreBundle\Behat\HookContext
                 - Behat\MinkExtension\Context\MinkContext
-                - Sylius\Bundle\AddressingBundle\Behat\AddressingContext
-                - Sylius\Bundle\CoreBundle\Behat\CoreContext
-                - Sylius\Bundle\ProductBundle\Behat\ProductContext
-                - Sylius\Bundle\ResourceBundle\Behat\FixtureContext
-                - Sylius\Bundle\ShippingBundle\Behat\ShippingContext
-                - Sylius\Bundle\WebBundle\Behat\WebContext
-                - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
-                - Sylius\Bundle\TaxonomyBundle\Behat\TaxonomyContext
-                - Sylius\Bundle\ChannelBundle\Behat\ChannelContext
+                - Sylius\AddressingBundle\Behat\AddressingContext
+                - Sylius\CoreBundle\Behat\CoreContext
+                - Sylius\ProductBundle\Behat\ProductContext
+                - Sylius\ResourceBundle\Behat\FixtureContext
+                - Sylius\ShippingBundle\Behat\ShippingContext
+                - Sylius\WebBundle\Behat\WebContext
+                - Sylius\MoneyBundle\Behat\MoneyContext
+                - Sylius\TaxonomyBundle\Behat\TaxonomyContext
+                - Sylius\ChannelBundle\Behat\ChannelContext
             filters:
                 tags: "@legacy && @search"

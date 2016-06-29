@@ -9,7 +9,7 @@ They are however compatible with the GedmoDoctrineExtensions when using Doctrine
 Retrieving resources
 --------------------
 
-Retrieving any resource from database always happens via the repository, which implements ``Sylius\Bundle\ResourceBundle\Model\RepositoryInterface``.
+Retrieving any resource from database always happens via the repository, which implements ``Sylius\ResourceBundle\Model\RepositoryInterface``.
 If you have been using Doctrine, you should already be familiar with this concept, as it extends the default Doctrine ``ObjectRepository`` interface.
 
 Let's assume you want to load a product from database. Your product repository is always accessible via the ``sylius.repository.product`` service.

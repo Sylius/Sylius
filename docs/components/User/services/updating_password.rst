@@ -22,9 +22,9 @@ Example usage:
     // directory, relative to this file
     require_once __DIR__.'/../vendor/autoload.php';
 
-    use Sylius\Component\User\Model\User;
-    use Sylius\Component\User\Security\PasswordUpdater;
-    use Sylius\Component\User\Security\UserPbkdf2PasswordEncoder;
+    use Sylius\User\Model\User;
+    use Sylius\User\Security\PasswordUpdater;
+    use Sylius\User\Security\UserPbkdf2PasswordEncoder;
 
     $user = new User();
     $user->setPlainPassword('secretPassword');

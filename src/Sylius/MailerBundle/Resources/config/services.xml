@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="sylius.form.type.email_template_choice.class">Sylius\MailerBundle\Form\Type\EmailTemplateChoiceType</parameter>
+        <parameter key="sylius.email_sender.class">Sylius\Mailer\Sender\Sender</parameter>
+        <parameter key="sylius.email_provider.class">Sylius\Mailer\Provider\EmailProvider</parameter>
+        <parameter key="sylius.mailer.default_settings_provider.class">Sylius\Mailer\Provider\DefaultSettingsProvider</parameter>
+
+        <parameter key="sylius.email_renderer.adapter.abstract.class">Sylius\Mailer\Renderer\Adapter\AbstractAdapter</parameter>
+        <parameter key="sylius.email_renderer.adapter.twig.class">Sylius\MailerBundle\Renderer\Adapter\TwigAdapter</parameter>
+
+        <parameter key="sylius.email_sender.adapter.abstract.class">Sylius\Mailer\Sender\Adapter\AbstractAdapter</parameter>
+        <parameter key="sylius.email_sender.adapter.swiftmailer.class">Sylius\MailerBundle\Sender\Adapter\SwiftMailerAdapter</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.form.type.email_template_choice" class="%sylius.form.type.email_template_choice.class%">
+            <argument>%sylius.mailer.templates%</argument>
+            <tag name="form.type" alias="sylius_email_template_choice" />
+        </service>
+        <service id="sylius.email_provider" class="%sylius.email_provider.class%">
+            <argument type="service" id="sylius.factory.email" />
+            <argument type="service" id="sylius.repository.email" />
+            <argument>%sylius.mailer.emails%</argument>
+        </service>
+        <service id="sylius.email_sender" class="%sylius.email_sender.class%">
+            <argument type="service" id="sylius.email_renderer.adapter" />
+            <argument type="service" id="sylius.email_sender.adapter" />
+            <argument type="service" id="sylius.email_provider" />
+            <argument type="service" id="sylius.mailer.default_settings_provider" />
+        </service>
+
+        <service id="sylius.mailer.default_settings_provider" class="%sylius.mailer.default_settings_provider.class%">
+            <argument>%sylius.mailer.sender_name%</argument>
+            <argument>%sylius.mailer.sender_address%</argument>
+        </service>
+
+        <service id="sylius.email_renderer.adapter.abstract" class="%sylius.email_renderer.adapter.abstract.class%" abstract="true">
+            <call method="setEventDispatcher">
+                <argument type="service" id="event_dispatcher" />
+            </call>
+        </service>
+        <service id="sylius.email_renderer.adapter.twig" class="%sylius.email_renderer.adapter.twig.class%" parent="sylius.email_renderer.adapter.abstract">
+            <argument type="service" id="twig" />
+        </service>
+
+        <service id="sylius.email_sender.adapter.abstract" class="%sylius.email_sender.adapter.abstract.class%" abstract="true">
+            <call method="setEventDispatcher">
+                <argument type="service" id="event_dispatcher" />
+            </call>
+        </service>
+        <service id="sylius.email_sender.adapter.swiftmailer" class="%sylius.email_sender.adapter.swiftmailer.class%" parent="sylius.email_sender.adapter.abstract">
+            <argument type="service" id="mailer" />
+        </service>
+    </services>
+</container>

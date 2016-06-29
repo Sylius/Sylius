@@ -21,8 +21,8 @@ PHP 5
 
     <?php // app/themes/AcmeTheme/Settings.php
 
-    use Sylius\Bundle\SettingsBundle\Schema\CallbackSchema;
-    use Sylius\Bundle\SettingsBundle\Schema\SettingsBuilderInterface;
+    use Sylius\SettingsBundle\Schema\CallbackSchema;
+    use Sylius\SettingsBundle\Schema\SettingsBuilderInterface;
     use Symfony\Component\Form\FormBuilderInterface;
 
     return new CallbackSchema(
@@ -47,8 +47,8 @@ PHP 7
 
     <?php // app/themes/AcmeTheme/Settings.php
 
-    use Sylius\Bundle\SettingsBundle\Schema\SchemaInterface;
-    use Sylius\Bundle\SettingsBundle\Schema\SettingsBuilderInterface;
+    use Sylius\SettingsBundle\Schema\SchemaInterface;
+    use Sylius\SettingsBundle\Schema\SettingsBuilderInterface;
     use Symfony\Component\Form\FormBuilderInterface;
 
     return new class implements SchemaInterface {

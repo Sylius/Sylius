@@ -82,7 +82,7 @@ Listener example:
     namespace App\AppBundle\Controller;
 
     use App\Event\MovieCreatedEvent;
-    use Sylius\Component\Mailer\Sender\SenderInterface;
+    use Sylius\Mailer\Sender\SenderInterface;
 
     class MovieNotificationListener
     {

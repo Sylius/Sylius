@@ -1,4 +1,4 @@
-Sylius\Component\Currency\Model\Currency:
+Sylius\Currency\Model\Currency:
     currency_1:
         code: USD
         exchangeRate: 1.00000

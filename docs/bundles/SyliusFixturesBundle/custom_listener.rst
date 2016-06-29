@@ -10,9 +10,9 @@ Let's create a listener that removes the directory before loading the fixtures.
 
     namespace AppBundle\Listener;
 
-    use Sylius\Bundle\FixturesBundle\Listener\AbstractListener;
-    use Sylius\Bundle\FixturesBundle\Listener\BeforeSuiteListenerInterface;
-    use Sylius\Bundle\FixturesBundle\Listener\SuiteEvent;
+    use Sylius\FixturesBundle\Listener\AbstractListener;
+    use Sylius\FixturesBundle\Listener\BeforeSuiteListenerInterface;
+    use Sylius\FixturesBundle\Listener\SuiteEvent;
     use Symfony\Component\Filesystem\Filesystem;
 
     final class DirectoryPurgerListener extends AbstractListener implements ListenerInterface

@@ -23,17 +23,17 @@ This class checks if shipping method rules are capable of shipping given subject
 
     <?php
 
-    use Sylius\Component\Shipping\Model\Rule;
-    use Sylius\Component\Shipping\Model\ShippingMethod;
-    use Sylius\Component\Shipping\Model\ShippingCategory;
-    use Sylius\Component\Shipping\Model\Shipment;
-    use Sylius\Component\Shipping\Model\ShipmentItem;
-    use Sylius\Component\Shipping\Model\ShippingMethodTranslation;
-    use Sylius\Component\Shipping\Model\RuleInterface;
-    use Sylius\Component\Shipping\Checker\ItemCountRuleChecker;
-    use Sylius\Component\Shipping\Checker\ShippingMethodEligibilityChecker;
-    use Sylius\Component\Shipping\Checker\RuleCheckerInterface;
-    use Sylius\Component\Registry\ServiceRegistry;
+    use Sylius\Shipping\Model\Rule;
+    use Sylius\Shipping\Model\ShippingMethod;
+    use Sylius\Shipping\Model\ShippingCategory;
+    use Sylius\Shipping\Model\Shipment;
+    use Sylius\Shipping\Model\ShipmentItem;
+    use Sylius\Shipping\Model\ShippingMethodTranslation;
+    use Sylius\Shipping\Model\RuleInterface;
+    use Sylius\Shipping\Checker\ItemCountRuleChecker;
+    use Sylius\Shipping\Checker\ShippingMethodEligibilityChecker;
+    use Sylius\Shipping\Checker\RuleCheckerInterface;
+    use Sylius\Registry\ServiceRegistry;
 
     $rule = new Rule();
     $rule->setConfiguration(array('count' => 0, 'equal' => true));

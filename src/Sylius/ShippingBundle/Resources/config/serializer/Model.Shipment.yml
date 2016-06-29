@@ -1,0 +1,34 @@
+Sylius\Shipping\Model\Shipment:
+    exclusion_policy: ALL
+    xml_root_name: shipment
+    properties:
+        id:
+            expose: true
+            type: integer
+            xml_attribute: true
+        state:
+            expose: true
+            type: string
+        method:
+            expose: true
+        createdAt:
+            expose: true
+            type: DateTime
+        updatedAt:
+            expose: true
+            type: DateTime
+    relations:
+        - rel: self
+          exclusion:
+                exclude_if: expr(!object.getId())
+          href:
+                route: sylius_api_shipment_show
+                parameters:
+                    id: expr(object.getId())
+        - rel: method
+          exclusion:
+                exclude_if: expr(!object.getMethod())
+          href:
+                route: sylius_api_shipping_method_show
+                parameters:
+                    id: expr(object.getMethod().getId())

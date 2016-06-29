@@ -1,5 +1,0 @@
-suites:
-    main:
-        namespace: Sylius\Component\Payment
-        psr4_prefix: Sylius\Component\Payment
-        src_path: .

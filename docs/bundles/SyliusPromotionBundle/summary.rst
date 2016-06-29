@@ -12,47 +12,47 @@ Summary
                     model: ~
             promotion:
                 classes:
-                    model:      Sylius\Component\Promotion\Model\Promotion
-                    interface:  Sylius\Component\Promotion\Model\PromotionInterface
-                    controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                    model:      Sylius\Promotion\Model\Promotion
+                    interface:  Sylius\Promotion\Model\PromotionInterface
+                    controller: Sylius\ResourceBundle\Controller\ResourceController
                     repository: ~
-                    factory:    Sylius\Component\Resource\Factory\Factory
+                    factory:    Sylius\Resource\Factory\Factory
                     form:
-                        default: Sylius\Bundle\PromotionBundle\Form\Type\PromotionType
-                        choice:  Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType
+                        default: Sylius\PromotionBundle\Form\Type\PromotionType
+                        choice:  Sylius\ResourceBundle\Form\Type\ResourceChoiceType
                 validation_groups:
                     default: [ sylius ]
             promotion_rule:
                 classes:
-                    model:      Sylius\Component\Promotion\Model\Rule
-                    interface:  Sylius\Component\Promotion\Model\RuleInterface
-                    controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                    model:      Sylius\Promotion\Model\Rule
+                    interface:  Sylius\Promotion\Model\RuleInterface
+                    controller: Sylius\ResourceBundle\Controller\ResourceController
                     repository: ~
-                    factory:    Sylius\Component\Resource\Factory\Factory
+                    factory:    Sylius\Resource\Factory\Factory
                     form:
-                        default: Sylius\Bundle\PromotionBundle\Form\Type\RuleType
+                        default: Sylius\PromotionBundle\Form\Type\RuleType
                 validation_groups:
                     default: [ sylius ]
             promotion_action:
                 classes:
-                    model:      Sylius\Component\Promotion\Model\Action
-                    interface:  Sylius\Component\Promotion\Model\ActionInterface
-                    controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                    model:      Sylius\Promotion\Model\Action
+                    interface:  Sylius\Promotion\Model\ActionInterface
+                    controller: Sylius\ResourceBundle\Controller\ResourceController
                     repository: ~
-                    factory:    Sylius\Component\Resource\Factory\Factory
+                    factory:    Sylius\Resource\Factory\Factory
                     form:
-                        default: Sylius\Bundle\PromotionBundle\Form\Type\ActionType
+                        default: Sylius\PromotionBundle\Form\Type\ActionType
                 validation_groups:
                     default: [ sylius ]
             promotion_coupon:
                 classes:
-                    model:      Sylius\Component\Promotion\Model\Coupon
-                    interface:  Sylius\Component\Promotion\Model\CouponInterface
-                    controller: Sylius\Bundle\PromotionBundle\Controller\CouponController
+                    model:      Sylius\Promotion\Model\Coupon
+                    interface:  Sylius\Promotion\Model\CouponInterface
+                    controller: Sylius\PromotionBundle\Controller\CouponController
                     repository: ~
-                    factory:    Sylius\Component\Resource\Factory\Factory
+                    factory:    Sylius\Resource\Factory\Factory
                     form:
-                        default: Sylius\Bundle\PromotionsBundle\Form\Type\CouponType
+                        default: Sylius\PromotionsBundle\Form\Type\CouponType
                 validation_groups:
                     default: [ sylius ]
 

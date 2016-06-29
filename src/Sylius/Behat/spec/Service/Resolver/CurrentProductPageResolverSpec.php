@@ -17,7 +17,7 @@ use Sylius\Behat\Page\Admin\Product\UpdateSimpleProductPageInterface;
 use Sylius\Behat\Page\SymfonyPageInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\Resolver\CurrentProductPageResolver;
-use Sylius\Component\Core\Model\ProductInterface;
+use Sylius\Core\Model\ProductInterface;
 
 /**
  * @mixin CurrentProductPageResolver

@@ -1,0 +1,2 @@
+Sylius\Core\Model\User:
+    exclusion_policy: ALL

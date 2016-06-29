@@ -9,8 +9,8 @@ In all examples is used an exemplary class implementing **ShippableInterface**, 
 
     <?php
 
-    use Sylius\Component\Shipping\Model\ShippableInterface;
-    use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
+    use Sylius\Shipping\Model\ShippableInterface;
+    use Sylius\Shipping\Model\ShippingCategoryInterface;
 
     class Wardrobe implements ShippableInterface
     {
@@ -143,9 +143,9 @@ Every shipping method can have shipping category. You can simply set or unset it
 
     <?php
 
-    use Sylius\Component\Shipping\Model\ShippingMethod;
-    use Sylius\Component\Shipping\Model\ShippingCategory;
-    use Sylius\Component\Shipping\Model\ShippingMethodInterface;
+    use Sylius\Shipping\Model\ShippingMethod;
+    use Sylius\Shipping\Model\ShippingCategory;
+    use Sylius\Shipping\Model\ShippingMethodInterface;
 
     $shippingCategory = new ShippingCategory();
     $shippingCategory->setName('Regular'); // Regular weight items
@@ -166,8 +166,8 @@ only one **ShippingItem**), then the **ShippingMethod** having this rule cannot 
 
     <?php
 
-    use Sylius\Component\Shipping\Model\Rule;
-    use Sylius\Component\Shipping\Model\ShippingMethod;
+    use Sylius\Shipping\Model\Rule;
+    use Sylius\Shipping\Model\ShippingMethod;
 
     $shippingMethod = new ShippingMethod();
     $rule = new Rule();
@@ -194,9 +194,9 @@ if it has to be delivered in a way described by this **ShippingMethod**.
 
     <?php
 
-    use Sylius\Component\Shipping\Model\Rule;
-    use Sylius\Component\Shipping\Model\ShippingMethod;
-    use Sylius\Component\Shipping\Model\RuleInterface;
+    use Sylius\Shipping\Model\Rule;
+    use Sylius\Shipping\Model\ShippingMethod;
+    use Sylius\Shipping\Model\RuleInterface;
 
     $shippingMethod = new ShippingMethod();
     $rule = new Rule();
@@ -215,9 +215,9 @@ Note that a **ShippingItem** can exist without a **Shipment** assigned.
 
     <?php
 
-    use Sylius\Component\Shipping\Model\Shipment;
-    use Sylius\Component\Shipping\Model\ShipmentItem;
-    use Sylius\Component\Shipping\Model\ShipmentInterface;
+    use Sylius\Shipping\Model\Shipment;
+    use Sylius\Shipping\Model\ShipmentItem;
+    use Sylius\Shipping\Model\ShipmentInterface;
 
     $shipment = new Shipment();
     $wardrobe = new Wardrobe();
@@ -243,9 +243,9 @@ which describe the way of delivery.
 
     <?php
 
-    use Sylius\Component\Shipping\Model\ShippingMethod;
-    use Sylius\Component\Shipping\Model\Shipment;
-    use Sylius\Component\Shipping\Model\ShipmentInterface;
+    use Sylius\Shipping\Model\ShippingMethod;
+    use Sylius\Shipping\Model\Shipment;
+    use Sylius\Shipping\Model\ShipmentInterface;
 
     $shippingMethod = new ShippingMethod();
 
@@ -265,8 +265,8 @@ You can add many shipment items to shipment, which connect shipment with shippab
 
     <?php
 
-    use Sylius\Component\Shipping\Model\Shipment;
-    use Sylius\Component\Shipping\Model\ShipmentItem;
+    use Sylius\Shipping\Model\Shipment;
+    use Sylius\Shipping\Model\ShipmentItem;
 
     $shipmentItem = new ShipmentItem();
     $shipment = new Shipment();
@@ -286,7 +286,7 @@ You can also define tracking code for your shipment:
 
     <?php
 
-    use Sylius\Component\Shipping\Model\Shipment;
+    use Sylius\Shipping\Model\Shipment;
 
     $shipment->isTracked();// returns false
     $shipment->setTracking('5346172074');
@@ -304,10 +304,10 @@ This example shows how use an exemplary class implementing **RuleCheckerInterfac
 
     <?php
 
-    use Sylius\Component\Shipping\Model\Shipment;
-    use Sylius\Component\Shipping\Model\ShipmentItem;
-    use Sylius\Component\Shipping\Model\Rule;
-    use Sylius\Component\Shipping\Checker\ItemCountRuleChecker;
+    use Sylius\Shipping\Model\Shipment;
+    use Sylius\Shipping\Model\ShipmentItem;
+    use Sylius\Shipping\Model\Rule;
+    use Sylius\Shipping\Checker\ItemCountRuleChecker;
 
     $rule = new Rule();
     $rule->setConfiguration(array('count' => 5, 'equal' => true));
@@ -338,14 +338,14 @@ container. The calculators are retrieved by name.
 
     <?php
 
-    use Sylius\Component\Shipping\Model\ShippingMethod;
-    use Sylius\Component\Shipping\Calculator\DefaultCalculators;
-    use Sylius\Component\Shipping\Calculator\PerItemRateCalculator;
-    use Sylius\Component\Shipping\Calculator\FlexibleRateCalculator;
-    use Sylius\Component\Shipping\Model\Shipment;
-    use Sylius\Component\Shipping\Model\ShipmentItem;
-    use Sylius\Component\Shipping\Calculator\DelegatingCalculator;
-    use Sylius\Component\Registry\ServiceRegistry;
+    use Sylius\Shipping\Model\ShippingMethod;
+    use Sylius\Shipping\Calculator\DefaultCalculators;
+    use Sylius\Shipping\Calculator\PerItemRateCalculator;
+    use Sylius\Shipping\Calculator\FlexibleRateCalculator;
+    use Sylius\Shipping\Model\Shipment;
+    use Sylius\Shipping\Model\ShipmentItem;
+    use Sylius\Shipping\Calculator\DelegatingCalculator;
+    use Sylius\Registry\ServiceRegistry;
 
     $configuration = array(
         'first_item_cost'       => 1000,
@@ -408,7 +408,7 @@ First you need to create a few instances of **ShippingCategory** class:
 
     <?php
 
-    use Sylius\Component\Shipping\Model\ShippingCategory;
+    use Sylius\Shipping\Model\ShippingCategory;
 
     $shippingCategory = new ShippingCategory();
     $shippingCategory->setName('Regular');
@@ -442,14 +442,14 @@ Finally you can create a method resolver:
 
     <?php
 
-    use Sylius\Component\Shipping\Model\ShippingCategory;
-    use Sylius\Component\Shipping\Model\Shipment;
-    use Sylius\Component\Shipping\Model\ShipmentItem;
-    use Sylius\Component\Shipping\Model\RuleInterface;
-    use Sylius\Component\Shipping\Checker\Registry\RuleCheckerRegistry;
-    use Sylius\Component\Shipping\Checker\ItemCountRuleChecker;
-    use Sylius\Component\Shipping\Resolver\MethodsResolver;
-    use Sylius\Component\Shipping\Checker\ShippingMethodEligibilityChecker;
+    use Sylius\Shipping\Model\ShippingCategory;
+    use Sylius\Shipping\Model\Shipment;
+    use Sylius\Shipping\Model\ShipmentItem;
+    use Sylius\Shipping\Model\RuleInterface;
+    use Sylius\Shipping\Checker\Registry\RuleCheckerRegistry;
+    use Sylius\Shipping\Checker\ItemCountRuleChecker;
+    use Sylius\Shipping\Resolver\MethodsResolver;
+    use Sylius\Shipping\Checker\ShippingMethodEligibilityChecker;
 
     $ruleCheckerRegistry = new RuleCheckerRegistry();
     $methodEligibilityChecker = new shippingMethodEligibilityChecker($ruleCheckerRegistry);

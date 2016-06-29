@@ -1,10 +1,10 @@
-Sylius\Component\Addressing\Model\Country:
+Sylius\Addressing\Model\Country:
     country_NL:
         code: NL
     country_BE:
         code: BE
 
-Sylius\Component\Addressing\Model\Province:
+Sylius\Addressing\Model\Province:
     province_BE_limburg:
         name: Limburg
         abbreviation: lim

@@ -6,7 +6,7 @@ Every form type in Sylius holds its class name in a specific parameter. This all
 Extending base Forms
 --------------------
 
-All Sylius form types live in ``Sylius\Bundle\XyzBundle\Form\Type`` namespace.
+All Sylius form types live in ``Sylius\XyzBundle\Form\Type`` namespace.
 
 Let's assume you want to add "phone" and remove "company" fields to the Sylius address form.
 
@@ -16,7 +16,7 @@ You have to create your own ``AddressType`` class, which will extend the base fo
 
     namespace Acme\Bundle\ShopBundle\Form\Type;
 
-    use Sylius\Bundle\AddressingBundle\Form\Type\AddressType as BaseAddressType;
+    use Sylius\AddressingBundle\Form\Type\AddressType as BaseAddressType;
     use Symfony\Component\Form\FormBuilderInterface;
 
     class AddressType extends BaseAddressType

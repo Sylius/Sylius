@@ -4,7 +4,7 @@ Taxonomy and Taxons
 Retrieving taxonomies and taxons
 --------------------------------
 
-Retrieving taxonomy from database should always happen via repository, which implements ``Sylius\Bundle\ResourceBundle\Model\RepositoryInterface``.
+Retrieving taxonomy from database should always happen via repository, which implements ``Sylius\ResourceBundle\Model\RepositoryInterface``.
 If you are using Doctrine, you're already familiar with this concept, as it extends the native Doctrine ``ObjectRepository`` interface.
 
 Your taxonomy repository is always accessible via ``sylius.repository.taxonomy`` service.

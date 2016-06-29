@@ -8,34 +8,34 @@ Configuration reference
           resources:
               contact_request:
                   classes:
-                      model:      Sylius\Component\Contact\Model\Request
-                      interface:  Sylius\Component\Contact\Model\RequestInterface
-                      controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                      model:      Sylius\Contact\Model\Request
+                      interface:  Sylius\Contact\Model\RequestInterface
+                      controller: Sylius\ResourceBundle\Controller\ResourceController
                       repository: ~
-                      factory:    Sylius\Component\Resource\Factory\Factory
+                      factory:    Sylius\Resource\Factory\Factory
                       form:
-                          default: Sylius\Bundle\ContactBundle\Form\Type\RequestType
+                          default: Sylius\ContactBundle\Form\Type\RequestType
                   validation_groups:
                       default: [ sylius ]
               contact_topic:
                   classes:
-                      model:      Sylius\Component\Contact\Model\Topic
-                      interface:  Sylius\Component\Contact\Model\TopicInterface
-                      controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                      model:      Sylius\Contact\Model\Topic
+                      interface:  Sylius\Contact\Model\TopicInterface
+                      controller: Sylius\ResourceBundle\Controller\ResourceController
                       repository: ~
-                      factory:    Sylius\Component\Resource\Factory\Factory
+                      factory:    Sylius\Resource\Factory\Factory
                       form:
-                          default: Sylius\Bundle\ContactBundle\Form\Type\TopicType
+                          default: Sylius\ContactBundle\Form\Type\TopicType
                   validation_groups:
                       default: [ sylius ]
                   translation:
                       classes:
-                          model:      Sylius\Component\Contact\Model\TopicTranslation
-                          interface:  Sylius\Component\Contact\Model\TopicTranslationInterface
-                          controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                          model:      Sylius\Contact\Model\TopicTranslation
+                          interface:  Sylius\Contact\Model\TopicTranslationInterface
+                          controller: Sylius\ResourceBundle\Controller\ResourceController
                           repository: ~
-                          factory:    Sylius\Component\Resource\Factory\Factory
+                          factory:    Sylius\Resource\Factory\Factory
                           form:
-                              default: Sylius\Bundle\ContactBundle\Form\Type\TopicTranslationType
+                              default: Sylius\ContactBundle\Form\Type\TopicTranslationType
                       validation_groups:
                           default: [ sylius ]

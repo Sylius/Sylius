@@ -26,7 +26,7 @@ It will be automatically replaced with the configured model, enabling much great
                                           http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
         <entity name="Acme\ShopBundle\Entity\Product" table="sylius_product">
-            <many-to-one field="taxCategory" target-entity="Sylius\Bundle\TaxationBundle\Model\TaxCategoryInterface">
+            <many-to-one field="taxCategory" target-entity="Sylius\TaxationBundle\Model\TaxCategoryInterface">
                <join-column name="tax_category_id" referenced-column-name="id" nullable="true" />
             </many-to-one>
         </entity>

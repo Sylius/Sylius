@@ -13,11 +13,11 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Component\Core\Test\Services\SharedStorageInterface;
-use Sylius\Component\Product\Model\OptionInterface;
-use Sylius\Component\Product\Model\OptionValueInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Variation\Repository\OptionRepositoryInterface;
+use Sylius\Core\Test\Services\SharedStorageInterface;
+use Sylius\Product\Model\OptionInterface;
+use Sylius\Product\Model\OptionValueInterface;
+use Sylius\Resource\Factory\FactoryInterface;
+use Sylius\Variation\Repository\OptionRepositoryInterface;
 
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>

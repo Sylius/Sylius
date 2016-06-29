@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: Sylius\Inventory
+        psr4_prefix: Sylius\Inventory
+        src_path: .

@@ -1,0 +1,55 @@
+{
+    "name": "sylius/installer-bundle",
+    "type": "symfony-bundle",
+    "description": "Web and command line installer for Sylius.",
+    "keywords": ["shop", "ecommerce", "installer", "install"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paweł Jędrzejewski",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name": "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name": "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php": "^5.6|^7.0",
+
+        "sylius/core-bundle": "^0.19",
+        "symfony/framework-bundle": "^2.8"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "^2.4",
+        "symfony/form": "^2.8",
+        "symfony/validator": "^2.8"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": { "Sylius\\InstallerBundle\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Sylius\\InstallerBundle\\spec\\": "spec/" }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../*/*"
+        }
+    ],
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.19-dev"
+        }
+    }
+}

@@ -35,8 +35,8 @@ Don't worry, everything was automatically installed via Composer.
         $bundles = array(
             // ...
             new FOS\RestBundle\FOSRestBundle(),
-            new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
-            new Sylius\Bundle\InventoryBundle\SyliusInventoryBundle(),
+            new Sylius\ResourceBundle\SyliusResourceBundle(),
+            new Sylius\InventoryBundle\SyliusInventoryBundle(),
         );
     }
 
@@ -58,7 +58,7 @@ We will create `Book` entity.
     // src/App/AppBundle/Entity/Book.php
     namespace App\AppBundle\Entity;
 
-    use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
+    use Sylius\InventoryBundle\Model\StockableInterface;
     use Doctrine\ORM\Mapping as ORM;
 
     /**
@@ -181,7 +181,7 @@ The next step requires the creating of the `InventoryUnit` entity, let’s do th
     // src/App/AppBundle/Entity/InventoryUnit.php
     namespace App\AppBundle\Entity;
 
-    use Sylius\Bundle\InventoryBundle\Entity\InventoryUnit as BaseInventoryUnit;
+    use Sylius\InventoryBundle\Entity\InventoryUnit as BaseInventoryUnit;
     use Doctrine\ORM\Mapping as ORM;
 
     /**

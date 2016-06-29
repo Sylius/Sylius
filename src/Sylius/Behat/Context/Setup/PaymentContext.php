@@ -13,11 +13,11 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\CoreBundle\Test\Services\PaymentMethodNameToGatewayConverterInterface;
-use Sylius\Component\Core\Test\Services\SharedStorageInterface;
-use Sylius\Component\Payment\Model\PaymentMethodInterface;
-use Sylius\Component\Payment\Repository\PaymentMethodRepositoryInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\CoreBundle\Test\Services\PaymentMethodNameToGatewayConverterInterface;
+use Sylius\Core\Test\Services\SharedStorageInterface;
+use Sylius\Payment\Model\PaymentMethodInterface;
+use Sylius\Payment\Repository\PaymentMethodRepositoryInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>

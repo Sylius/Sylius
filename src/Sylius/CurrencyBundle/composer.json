@@ -1,0 +1,58 @@
+{
+    "name": "sylius/currency-bundle",
+    "type": "symfony-bundle",
+    "description": "Currencies processing for Symfony2.",
+    "keywords": ["cash", "currency", "money", "currencies"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paweł Jędrzejewski",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name": "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name": "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php": "^5.6|^7.0",
+
+        "sylius/currency": "^0.19",
+        "sylius/money-bundle": "^0.19",
+        "sylius/resource-bundle": "^0.19",
+        "symfony/framework-bundle": "^2.8"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "^2.4",
+        "symfony/form": "^2.8",
+        "twig/twig": "^1.0",
+        "doctrine/orm": "^2.4.8,<2.5"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": { "Sylius\\CurrencyBundle\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Sylius\\CurrencyBundle\\spec\\": "spec/" }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../*/*"
+        }
+    ],
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.19-dev"
+        }
+    }
+}

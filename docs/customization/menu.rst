@@ -3,7 +3,7 @@ Customizing Menus
 
 Adding new positions in your menu is done **via events**.
 
-You have got the ``Sylius\Bundle\WebBundle\Event\MenuBuilderEvent`` with ``FactoryInterface`` and ``ItemInterface`` of `KnpMenu`_. So you can manipulate the whole menu.
+You have got the ``Sylius\WebBundle\Event\MenuBuilderEvent`` with ``FactoryInterface`` and ``ItemInterface`` of `KnpMenu`_. So you can manipulate the whole menu.
 
 You've got such events that you should be subscribing to:
 
@@ -29,8 +29,8 @@ In the example below we are adding a one new item to the Admin panel menu and a 
 
     namespace AppBundle\EventListener;
 
-    use Sylius\Bundle\UiBundle\Menu\Event\MenuBuilderEvent;
-    use Sylius\Bundle\WebBundle\Event\MenuBuilderEvent as FrontendMenuBuilderEvent;
+    use Sylius\UiBundle\Menu\Event\MenuBuilderEvent;
+    use Sylius\WebBundle\Event\MenuBuilderEvent as FrontendMenuBuilderEvent;
 
     class MenuBuilderListener
     {

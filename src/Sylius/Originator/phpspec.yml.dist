@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: Sylius\Originator
+        psr4_prefix: Sylius\Originator
+        src_path: .

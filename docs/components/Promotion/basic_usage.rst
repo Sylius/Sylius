@@ -15,9 +15,9 @@ for promotion application purposes.
 
     use Doctrine\Common\Collections\Collection;
     use Doctrine\Common\Collections\ArrayCollection;
-    use Sylius\Component\Promotion\Model\PromotionCountableSubjectInterface;
-    use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
-    use Sylius\Component\Promotion\Model\PromotionInterface;
+    use Sylius\Promotion\Model\PromotionCountableSubjectInterface;
+    use Sylius\Promotion\Model\PromotionSubjectInterface;
+    use Sylius\Promotion\Model\PromotionInterface;
 
     class Ticket implements PromotionCountableSubjectInterface
     {
@@ -147,7 +147,7 @@ and applies configured actions if rules are eligible.
 
     <?php
 
-    use Sylius\Component\Promotion\Processor\PromotionProcessor;
+    use Sylius\Promotion\Processor\PromotionProcessor;
     use AppBundle\Entity\Ticket;
 
     /**
@@ -180,15 +180,15 @@ Below you can see how it works:
 
     <?php
 
-    use Sylius\Component\Promotion\Model\Promotion;
-    use Sylius\Component\Promotion\Model\Rule;
-    use Sylius\Component\Promotion\Model\Action;
-    use Sylius\Component\Promotion\Checker\PromotionEligibilityChecker;
+    use Sylius\Promotion\Model\Promotion;
+    use Sylius\Promotion\Model\Rule;
+    use Sylius\Promotion\Model\Action;
+    use Sylius\Promotion\Checker\PromotionEligibilityChecker;
     use AppBundle\Entity\Ticket;
 
-    $checkerRegistry = new ServiceRegistry('Sylius\Component\Promotion\Checker\RuleCheckerInterface');
-    $ruleRegistry = new ServiceRegistry('Sylius\Component\Promotion\Model\RuleInterface');
-    $actionRegistry = new ServiceRegistry('Sylius\Component\Promotion\Model\ActionInterface');
+    $checkerRegistry = new ServiceRegistry('Sylius\Promotion\Checker\RuleCheckerInterface');
+    $ruleRegistry = new ServiceRegistry('Sylius\Promotion\Model\RuleInterface');
+    $actionRegistry = new ServiceRegistry('Sylius\Promotion\Model\ActionInterface');
 
     $dispatcher = new EventDispatcher();
 
@@ -250,13 +250,13 @@ which is able to apply and revert single promotions on a subject implementing th
 
     <?php
 
-    use Sylius\Component\Promotion\Action\PromotionApplicator;
-    use Sylius\Component\Promotion\Model\Promotion;
-    use Sylius\Component\Registry\ServiceRegistry;
+    use Sylius\Promotion\Action\PromotionApplicator;
+    use Sylius\Promotion\Model\Promotion;
+    use Sylius\Registry\ServiceRegistry;
     use AppBundle\Entity\Ticket;
 
     // In order for the applicator to work properly you need to have your actions created and registered before.
-    $registry = new ServiceRegistry('Sylius\Component\Promotion\Model\ActionInterface');
+    $registry = new ServiceRegistry('Sylius\Promotion\Model\ActionInterface');
     $promotionApplicator = new PromotionApplicator($registry);
 
     $promotion = new Promotion();
@@ -283,9 +283,9 @@ In order to automate the process of coupon generation the component provides us 
 
     <?php
 
-    use Sylius\Component\Promotion\Model\Promotion;
-    use Sylius\Component\Promotion\Generator\Instruction;
-    use Sylius\Component\Promotion\Generator\CouponGenerator;
+    use Sylius\Promotion\Model\Promotion;
+    use Sylius\Promotion\Generator\Instruction;
+    use Sylius\Promotion\Generator\CouponGenerator;
 
     $promotion = new Promotion();
 

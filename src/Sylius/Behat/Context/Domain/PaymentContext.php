@@ -12,8 +12,8 @@
 namespace Sylius\Behat\Context\Domain;
 
 use Behat\Behat\Context\Context;
-use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
-use Sylius\Component\Payment\Model\PaymentMethodInterface;
+use Sylius\Core\Repository\PaymentRepositoryInterface;
+use Sylius\Payment\Model\PaymentMethodInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>

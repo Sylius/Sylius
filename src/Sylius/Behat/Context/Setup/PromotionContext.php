@@ -13,17 +13,17 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Component\Core\Factory\ActionFactoryInterface;
-use Sylius\Component\Core\Factory\RuleFactoryInterface;
-use Sylius\Component\Core\Model\PromotionInterface;
-use Sylius\Component\Core\Model\TaxonInterface;
-use Sylius\Component\Core\Test\Factory\TestPromotionFactoryInterface;
-use Sylius\Component\Core\Test\Services\SharedStorageInterface;
-use Sylius\Component\Promotion\Factory\CouponFactoryInterface;
-use Sylius\Component\Promotion\Model\ActionInterface;
-use Sylius\Component\Promotion\Model\CouponInterface;
-use Sylius\Component\Promotion\Model\RuleInterface;
-use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
+use Sylius\Core\Factory\ActionFactoryInterface;
+use Sylius\Core\Factory\RuleFactoryInterface;
+use Sylius\Core\Model\PromotionInterface;
+use Sylius\Core\Model\TaxonInterface;
+use Sylius\Core\Test\Factory\TestPromotionFactoryInterface;
+use Sylius\Core\Test\Services\SharedStorageInterface;
+use Sylius\Promotion\Factory\CouponFactoryInterface;
+use Sylius\Promotion\Model\ActionInterface;
+use Sylius\Promotion\Model\CouponInterface;
+use Sylius\Promotion\Model\RuleInterface;
+use Sylius\Promotion\Repository\PromotionRepositoryInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>

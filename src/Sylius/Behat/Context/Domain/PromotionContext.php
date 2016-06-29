@@ -13,9 +13,9 @@ namespace Sylius\Behat\Context\Domain;
 
 use Behat\Behat\Context\Context;
 use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
-use Sylius\Component\Core\Test\Services\SharedStorageInterface;
-use Sylius\Component\Promotion\Model\PromotionInterface;
-use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
+use Sylius\Core\Test\Services\SharedStorageInterface;
+use Sylius\Promotion\Model\PromotionInterface;
+use Sylius\Promotion\Repository\PromotionRepositoryInterface;
 
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>

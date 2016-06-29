@@ -12,8 +12,8 @@
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
-use Sylius\Component\Addressing\Model\ZoneInterface;
-use Sylius\Component\Addressing\Repository\ZoneRepositoryInterface;
+use Sylius\Addressing\Model\ZoneInterface;
+use Sylius\Addressing\Repository\ZoneRepositoryInterface;
 use Webmozart\Assert\Assert;
 
 /**

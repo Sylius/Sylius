@@ -59,7 +59,7 @@ There are two ways to enable your theme:
 Custom theme context
 ~~~~~~~~~~~~~~~~~~~~
 
-Implement ``Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface``, register it as a service and replace the default
+Implement ``Sylius\ThemeBundle\Context\ThemeContextInterface``, register it as a service and replace the default
 theme context with the new one by changing ThemeBundle configuration:
 
 .. code-block:: yaml
@@ -74,8 +74,8 @@ Create an event listener and register it as listening for ``kernel.request`` eve
 
 .. code-block:: php
 
-    use Sylius\Bundle\ThemeBundle\Context\SettableThemeContext;
-    use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
+    use Sylius\ThemeBundle\Context\SettableThemeContext;
+    use Sylius\ThemeBundle\Repository\ThemeRepositoryInterface;
     use Symfony\Component\HttpKernel\Event\GetResponseEvent;
     use Symfony\Component\HttpKernel\HttpKernelInterface;
 

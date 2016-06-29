@@ -12,7 +12,7 @@
 namespace Sylius\Behat\Page\Admin\Country;
 
 use Sylius\Behat\Page\Admin\Crud\IndexPage as BaseIndexPage;
-use Sylius\Component\Addressing\Model\CountryInterface;
+use Sylius\Addressing\Model\CountryInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>

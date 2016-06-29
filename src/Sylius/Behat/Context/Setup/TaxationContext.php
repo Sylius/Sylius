@@ -12,15 +12,15 @@
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
-use Sylius\Component\Addressing\Model\ZoneInterface;
-use Sylius\Component\Addressing\Repository\ZoneRepositoryInterface;
-use Sylius\Component\Core\Formatter\StringInflector;
-use Sylius\Component\Core\Model\TaxRateInterface;
-use Sylius\Component\Core\Test\Services\SharedStorageInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Sylius\Component\Taxation\Model\TaxCategoryInterface;
-use Sylius\Component\Taxation\Repository\TaxCategoryRepositoryInterface;
+use Sylius\Addressing\Model\ZoneInterface;
+use Sylius\Addressing\Repository\ZoneRepositoryInterface;
+use Sylius\Core\Formatter\StringInflector;
+use Sylius\Core\Model\TaxRateInterface;
+use Sylius\Core\Test\Services\SharedStorageInterface;
+use Sylius\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Repository\RepositoryInterface;
+use Sylius\Taxation\Model\TaxCategoryInterface;
+use Sylius\Taxation\Repository\TaxCategoryRepositoryInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>

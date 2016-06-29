@@ -10,9 +10,9 @@ FlatRateCalculator
 
     <?php
 
-    use Sylius\Component\Shipping\Model\Shipment;
-    use Sylius\Component\Shipping\Calculator\FlatRateCalculator;
-    use Sylius\Component\Shipping\Model\ShipmentItem;
+    use Sylius\Shipping\Model\Shipment;
+    use Sylius\Shipping\Calculator\FlatRateCalculator;
+    use Sylius\Shipping\Model\ShipmentItem;
 
     $shipmentItem = new ShipmentItem();
     $shipment = new Shipment();
@@ -35,8 +35,8 @@ FlexibleRateCalculator
 
     <?php
 
-    use Sylius\Component\Shipping\Model\Shipment;
-    use Sylius\Component\Shipping\Calculator\FlexibleRateCalculator;
+    use Sylius\Shipping\Model\Shipment;
+    use Sylius\Shipping\Calculator\FlexibleRateCalculator;
 
     $shipment = new Shipment();
     $shipmentItem = new ShipmentItem();
@@ -73,9 +73,9 @@ PerItemRateCalculator
 
     <?php
 
-    use Sylius\Component\Shipping\Model\Shipment;
-    use Sylius\Component\Shipping\Model\ShipmentItem;
-    use Sylius\Component\Shipping\Calculator\PerItemRateCalculator;
+    use Sylius\Shipping\Model\Shipment;
+    use Sylius\Shipping\Model\ShipmentItem;
+    use Sylius\Shipping\Calculator\PerItemRateCalculator;
 
     // this configuration should be defined in shipping method allowed for shipment
     $configuration = array('amount' => 200);
@@ -103,9 +103,9 @@ VolumeRateCalculator
 
     <?
 
-    use Sylius\Component\Shipping\Model\Shipment;
-    use Sylius\Component\Shipping\Model\ShipmentItem;
-    use Sylius\Component\Shipping\Calculator\VolumeRateCalculator;
+    use Sylius\Shipping\Model\Shipment;
+    use Sylius\Shipping\Model\ShipmentItem;
+    use Sylius\Shipping\Calculator\VolumeRateCalculator;
 
     $wardrobe = new Wardrobe();
 
@@ -137,9 +137,9 @@ WeightRateCalculator
 
     <?php
 
-    use Sylius\Component\Shipping\Model\Shipment;
-    use Sylius\Component\Shipping\Model\ShipmentItem;
-    use Sylius\Component\Shipping\Calculator\WeightRateCalculator;
+    use Sylius\Shipping\Model\Shipment;
+    use Sylius\Shipping\Model\ShipmentItem;
+    use Sylius\Shipping\Calculator\WeightRateCalculator;
 
     $configuration = array('fixed' => 200, 'variable' => 500, 'division' => 5);
     // this configuration should be defined in shipping method allowed for shipment

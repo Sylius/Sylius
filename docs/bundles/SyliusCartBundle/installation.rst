@@ -46,10 +46,10 @@ Don't worry, everything was automatically installed via Composer.
     public function registerBundles()
     {
         $bundles = array(
-            new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
-            new Sylius\Bundle\MoneyBundle\SyliusMoneyBundle(),
-            new Sylius\Bundle\OrderBundle\SyliusOrderBundle(),
-            new Sylius\Bundle\CartBundle\SyliusCartBundle(),
+            new Sylius\ResourceBundle\SyliusResourceBundle(),
+            new Sylius\MoneyBundle\SyliusMoneyBundle(),
+            new Sylius\OrderBundle\SyliusOrderBundle(),
+            new Sylius\CartBundle\SyliusCartBundle(),
 
             // Other bundles...
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
@@ -63,7 +63,7 @@ Creating your entities
 
 This is no longer a required step in the latest version of the
 `SyliusCartBundle`, and if you are happy with the default implementation (which
-is ``Sylius\Bundle\CartBundle\Model\CartItem``), you can just skip to the next
+is ``Sylius\CartBundle\Model\CartItem``), you can just skip to the next
 section.
 
 You can create your **CartItem** entity, living inside your application code.
@@ -77,7 +77,7 @@ let's assume you have your ``AppBundle`` registered under ``App\AppBundle`` name
     // src/App/AppBundle/Entity/CartItem.php
     namespace App\AppBundle\Entity;
 
-    use Sylius\Component\Cart\Model\CartItem as BaseCartItem;
+    use Sylius\Cart\Model\CartItem as BaseCartItem;
 
     class CartItem extends BaseCartItem
     {
@@ -101,7 +101,7 @@ You should create a mapping file in your ``AppBundle``, put it inside the doctri
     </doctrine-mapping>
 
 You do **not** have to map the *ID* field because it is already mapped in the
-``Sylius\Component\Cart\Model\CartItem`` class, together with the relation
+``Sylius\Cart\Model\CartItem`` class, together with the relation
 between **Cart** and **CartItem**.
 
 Let's assume you have a *Product* entity, which represents your main merchandise within your webshop.
@@ -119,7 +119,7 @@ We need to modify the *CartItem* entity and its mapping a bit, so it allows us t
     // src/App/AppBundle/Entity/CartItem.php
     namespace App\AppBundle\Entity;
 
-    use Sylius\Component\Cart\Model\CartItem as BaseCartItem;
+    use Sylius\Cart\Model\CartItem as BaseCartItem;
 
     class CartItem extends BaseCartItem
     {
@@ -157,7 +157,7 @@ We have to also map the *Product* to *CartItem*, let's create this relation in m
     </doctrine-mapping>
 
 Similarly, you can create a custom entity for orders. The class that you need
-to extend is ``Sylius\Component\Cart\Model\Cart``. Carts and Orders in
+to extend is ``Sylius\Cart\Model\Cart``. Carts and Orders in
 Sylius are in fact the same thing. Do not forget to create the mapping file.
 But, again, do not put a mapping for the *ID* field — it is already mapped in
 the parent class.
@@ -168,7 +168,7 @@ Creating ItemResolver service
 -----------------------------
 
 The **ItemResolver** will be used by the controller to resolve the new cart item - based on a user request information.
-Its only requirement is to implement ``Sylius\Component\Cart\Resolver\ItemResolverInterface``.
+Its only requirement is to implement ``Sylius\Cart\Resolver\ItemResolverInterface``.
 
 .. code-block:: php
 
@@ -177,8 +177,8 @@ Its only requirement is to implement ``Sylius\Component\Cart\Resolver\ItemResolv
     // src/App/AppBundle/Cart/ItemResolver.php
     namespace App\AppBundle\Cart;
 
-    use Sylius\Component\Cart\Model\CartItemInterface;
-    use Sylius\Component\Cart\Resolver\ItemResolverInterface;
+    use Sylius\Cart\Model\CartItemInterface;
+    use Sylius\Cart\Resolver\ItemResolverInterface;
 
     class ItemResolver implements ItemResolverInterface
     {
@@ -200,8 +200,8 @@ inject the entity manager into our resolver service.
     // src/App/AppBundle/Cart/ItemResolver.php
     namespace App\AppBundle\Cart;
 
-    use Sylius\Component\Cart\Model\CartItemInterface;
-    use Sylius\Component\Cart\Resolver\ItemResolverInterface;
+    use Sylius\Cart\Model\CartItemInterface;
+    use Sylius\Cart\Resolver\ItemResolverInterface;
     use Doctrine\ORM\EntityManager;
 
     class ItemResolver implements ItemResolverInterface
@@ -235,9 +235,9 @@ This can be done in various ways, but to keep the example simple - we'll use a q
     // src/App/AppBundle/Cart/ItemResolver.php
     namespace App\AppBundle\Cart;
 
-    use Sylius\Component\Cart\Model\CartItemInterface;
-    use Sylius\Component\Cart\Resolver\ItemResolverInterface;
-    use Sylius\Component\Cart\Resolver\ItemResolvingException;
+    use Sylius\Cart\Model\CartItemInterface;
+    use Sylius\Cart\Resolver\ItemResolverInterface;
+    use Sylius\Cart\Resolver\ItemResolvingException;
     use Doctrine\ORM\EntityManager;
 
     class ItemResolver implements ItemResolverInterface

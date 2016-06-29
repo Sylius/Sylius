@@ -1,5 +1,0 @@
-suites:
-    main:
-        namespace: Sylius\Bundle\LocaleBundle
-        psr4_prefix: Sylius\Bundle\LocaleBundle
-        src_path: .

@@ -12,11 +12,11 @@ Configuration Reference
         resources:
             parameter:
                 classes:
-                    model: Sylius\Bundle\SettingsBundle\Model\Parameter
-                    interface: Sylius\Bundle\SettingsBundle\Model\ParameterInterface
-                    controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                    model: Sylius\SettingsBundle\Model\Parameter
+                    interface: Sylius\SettingsBundle\Model\ParameterInterface
+                    controller: Sylius\ResourceBundle\Controller\ResourceController
                     repository: ~
-                    factory:    Sylius\Component\Resource\Factory\Factory
+                    factory:    Sylius\Resource\Factory\Factory
 
 Tests
 -----

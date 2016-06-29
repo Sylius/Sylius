@@ -15,9 +15,9 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Channel\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Channel\UpdatePageInterface;
 use Sylius\Behat\Page\Shop\LegacyHomePageInterface;
-use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
-use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Test\Services\SharedStorageInterface;
+use Sylius\ThemeBundle\Model\ThemeInterface;
+use Sylius\Core\Model\ChannelInterface;
+use Sylius\Core\Test\Services\SharedStorageInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>

@@ -13,15 +13,15 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Component\Addressing\Model\ZoneInterface;
-use Sylius\Component\Addressing\Repository\ZoneRepositoryInterface;
-use Sylius\Component\Core\Model\ShippingMethodInterface;
-use Sylius\Component\Core\Test\Services\SharedStorageInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Sylius\Component\Shipping\Calculator\DefaultCalculators;
-use Sylius\Component\Shipping\Repository\ShippingMethodRepositoryInterface;
-use Sylius\Component\Taxation\Model\TaxCategoryInterface;
+use Sylius\Addressing\Model\ZoneInterface;
+use Sylius\Addressing\Repository\ZoneRepositoryInterface;
+use Sylius\Core\Model\ShippingMethodInterface;
+use Sylius\Core\Test\Services\SharedStorageInterface;
+use Sylius\Resource\Factory\FactoryInterface;
+use Sylius\Resource\Repository\RepositoryInterface;
+use Sylius\Shipping\Calculator\DefaultCalculators;
+use Sylius\Shipping\Repository\ShippingMethodRepositoryInterface;
+use Sylius\Taxation\Model\TaxCategoryInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>

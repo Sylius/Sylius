@@ -17,10 +17,10 @@ use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Order\ShowPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\SecurityServiceInterface;
-use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\UserInterface;
-use Sylius\Component\Core\Test\Services\SharedStorageInterface;
+use Sylius\Core\Model\CustomerInterface;
+use Sylius\Core\Model\OrderInterface;
+use Sylius\Core\Model\UserInterface;
+use Sylius\Core\Test\Services\SharedStorageInterface;
 use Webmozart\Assert\Assert;
 
 /**

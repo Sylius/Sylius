@@ -13,8 +13,8 @@ All calculators implement the **TaxCalculatorInterface**. First, you need to cre
 
     namespace Acme\Bundle\ShopBundle\TaxCalculator;
 
-    use Sylius\Bundle\TaxationBundle\Calculator\TaxCalculatorInterface;
-    use Sylius\Bundle\TaxationBundle\Model\TaxRateInterface;
+    use Sylius\TaxationBundle\Calculator\TaxCalculatorInterface;
+    use Sylius\TaxationBundle\Model\TaxRateInterface;
 
     class FeeCalculator implements TaxCalculatorInterface
     {
