@@ -30,6 +30,23 @@ sylius_shop_checkout_addressing:
                 route: sylius_shop_checkout_shipping
                 parameters: []
 
+sylius_shop_checkout_readdressing:
+    path: /readdress
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.order:applyStateMachineTransitionAction
+        _sylius:
+            repository:
+                method: find
+                arguments: [expr:service('sylius.cart_provider').getCart()]
+            state_machine:
+                graph: sylius_order_checkout
+                transition: readdress
+            redirect:
+                route: sylius_shop_checkout_addressing
+                parameters: []
+            permission: false
+
 sylius_shop_checkout_shipping:
     path: /shipping
     methods: [GET, PUT]

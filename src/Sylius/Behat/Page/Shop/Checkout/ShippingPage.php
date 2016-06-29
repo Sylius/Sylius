@@ -71,6 +71,11 @@ class ShippingPage extends SymfonyPage implements ShippingPageInterface
         $this->getDocument()->pressButton('Next');
     }
 
+    public function changeAddress()
+    {
+        $this->getDocument()->pressButton('Change address');
+    }
+
     /**
      * {@inheritdoc}
      */

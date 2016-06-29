@@ -305,6 +305,14 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Given I decide to change my address
+     */
+    public function iDecideToChangeMyAddress()
+    {
+        $this->shippingPage->changeAddress();
+    }
+
+    /**
      * @When /^I proceed selecting "([^"]*)" as shipping country$/
      */
     public function iProceedSelectingShippingCountry($shippingCountry)
@@ -737,6 +745,30 @@ final class CheckoutContext implements Context
         Assert::true(
             $this->homePage->isOpen(),
             'Shop homepage should be opened, but it is not.'
+        );
+    }
+
+    /**
+     * @Then I should be redirected to the addressing step
+     */
+    public function iShouldBeRedirectedToTheAddressingStep()
+    {
+        Assert::true(
+            $this->addressingPage->isOpen(),
+            'Checkout addressing step should be opened, but it is not.'
+        );
+    }
+
+    /**
+     * @Given I should be able to go to the shipping step again
+     */
+    public function iShouldBeAbleToGoToTheShippingStepAgain()
+    {
+        $this->addressingPage->nextStep();
+
+        Assert::true(
+            $this->shippingPage->isOpen(),
+            'Checkout shipping step should be opened, but it is not.'
         );
     }
 

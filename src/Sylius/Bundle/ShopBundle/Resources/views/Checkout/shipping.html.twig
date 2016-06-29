@@ -5,7 +5,6 @@
 {% block content %}
     {% include '@SyliusShop/Checkout/_header.html.twig' %}
     {% include '@SyliusShop/Checkout/_steps.html.twig' with {'active': 'shipping'} %}
-
     <div class="ui stackable grid">
         <div class="eleven wide column">
             <div class="ui padded segment" id="shipping_methods">
@@ -17,7 +16,7 @@
                 <div class="ui hidden divider"></div>
                 <div class="ui two column grid">
                     <div class="column">
-                        <a href="#" class="ui large icon labeled button"><i class="arrow left icon"></i> {{ 'sylius.ui.change_address'|trans }}</a>
+                        <button data-remote-form="sylius_shop_checkout_readdressing" class="ui large icon labeled button"><i class="arrow left icon"></i> {{ 'sylius.ui.change_address'|trans }}</button>
                     </div>
                     <div class="right aligned column">
                         <button type="submit" class="ui large primary icon labeled button"><i class="arrow right icon"></i> {{ 'sylius.ui.next'|trans }}</button>
@@ -26,9 +25,24 @@
                 {{ form_row(form._token) }}
                 {{ form_end(form, {'render_rest': false}) }}
             </div>
+            <form id="sylius_shop_checkout_readdressing" action="{{ path('sylius_shop_checkout_readdressing') }}" method="post">
+                <input type="hidden" name="_method" value="PUT" />
+            </form>
         </div>
         <div class="five wide column">
             {% include '@SyliusShop/Checkout/_summary.html.twig' with { 'order': order } %}
         </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script>
+        $(document).ready(function() {
+            $('button[data-remote-form]').on('click', function(e){
+                e.preventDefault();
+                $("#" + $(this).attr('data-remote-form')).submit();
+            });
+        });
+    </script>
 {% endblock %}
