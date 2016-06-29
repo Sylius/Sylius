@@ -17,7 +17,7 @@ finalize
 purchase
     You provide Sylius with payment information and order is paid
 
-Sylius API endpoint is `/api/orders`.
+Sylius API endpoint is ``/api/checkouts``.
 
 Addressing step
 ---------------
