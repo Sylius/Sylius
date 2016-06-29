@@ -151,7 +151,7 @@ In order for this to work, we need to register `SyliusScenario` and tag it as ``
 or 
 
 
-.. code-block:: yml
+.. code-block:: yaml
 
     services:
         sylius.scenario.flow:
