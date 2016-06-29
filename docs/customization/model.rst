@@ -23,7 +23,7 @@ Let's now see how you should perform such customizations.
 How to customize a Model?
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Let's take the ``Sylius\Component\Addressing\Country`` as an example. This one is not extended in Core.
+Let's take the ``Sylius\Addressing\Country`` as an example. This one is not extended in Core.
 How can you check that?
 
 For the ``Country`` run:
@@ -32,7 +32,7 @@ For the ``Country`` run:
 
     $ php app/console debug:container --parameter=sylius.model.country.class
 
-As a result you will get the ``Sylius\Component\Addressing\Model\Country`` - this is the class that you need to be extending.
+As a result you will get the ``Sylius\Addressing\Model\Country`` - this is the class that you need to be extending.
 
 Assuming that you would want to add another field on the model - for instance a ``flag``.
 
@@ -44,7 +44,7 @@ Assuming that you would want to add another field on the model - for instance a 
 
     namespace AppBundle\Entity;
 
-    use Sylius\Component\Addressing\Model\Country as BaseCountry;
+    use Sylius\Addressing\Model\Country as BaseCountry;
 
     class Country extends BaseCountry
     {
@@ -104,6 +104,6 @@ What happens while overriding Models?
 * ``sylius.repository.country`` represents Doctrine repository for your new class.
 * ``sylius.manager.country`` represents Doctrine object manager for your new class.
 * ``sylius.controller.country`` represents the controller for your new class.
-* All Doctrine relations to ``Sylius\\Component\\Adressing\\Model\\Country`` are using your new class as *target-entity*, you do not need to update any mappings.
+* All Doctrine relations to ``Sylius\\Adressing\\Model\\Country`` are using your new class as *target-entity*, you do not need to update any mappings.
 * ``CountryType`` form type is using your model as ``data_class``.
-* ``Sylius\\Component\\Addressing\\Model\\Country`` is automatically turned into Doctrine Mapped Superclass.
+* ``Sylius\\Addressing\\Model\\Country`` is automatically turned into Doctrine Mapped Superclass.

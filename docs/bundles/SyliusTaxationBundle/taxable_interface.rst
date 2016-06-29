@@ -16,8 +16,8 @@ First step is to implement the simple interface.
 
     namespace AcmeBundle\Entity;
 
-    use Sylius\Component\Taxation\Model\TaxCategoryInterface;
-    use Sylius\Component\Taxation\Model\TaxableInterface;
+    use Sylius\Taxation\Model\TaxCategoryInterface;
+    use Sylius\Taxation\Model\TaxableInterface;
 
     class Server implements TaxableInterface
     {
@@ -59,7 +59,7 @@ Second and last task is to define the relation inside ``Resources/config/doctrin
         <entity name="AcmeBundle\Entity\Server" table="acme_server">
             <!-- your mappings... -->
 
-            <many-to-one field="taxCategory" target-entity="Sylius\Component\Taxation\Model\TaxCategoryInterface">
+            <many-to-one field="taxCategory" target-entity="Sylius\Taxation\Model\TaxCategoryInterface">
                 <join-column name="tax_category_id" referenced-column-name="id" nullable="false" />
             </many-to-one>
         </entity>

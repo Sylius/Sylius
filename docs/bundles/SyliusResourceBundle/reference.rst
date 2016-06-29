@@ -10,9 +10,9 @@ Configuration Reference
                 classes:
                     model: # Required!
                     interface: ~
-                    controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                    controller: Sylius\ResourceBundle\Controller\ResourceController
                     repository: ~
-                    factory: Sylius\Component\Resource\Factory\Factory
+                    factory: Sylius\Resource\Factory\Factory
                     form:
                         default: ~
                         choice: ~
@@ -26,9 +26,9 @@ Configuration Reference
                     classes:
                         model: ~
                         interface: ~
-                        controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                        controller: Sylius\ResourceBundle\Controller\ResourceController
                         repository: ~
-                        factory: Sylius\Component\Resource\Factory\Factory
+                        factory: Sylius\Resource\Factory\Factory
                         form:
                             default: ~
                             choice: ~

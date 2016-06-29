@@ -38,8 +38,8 @@ Don't worry, everything was automatically installed via Composer.
             new JMS\SerializerBundle\JMSSerializerBundle($this),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
-            new Sylius\Bundle\ReportBundle\SyliusReportBundle(),
-            new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
+            new Sylius\ReportBundle\SyliusReportBundle(),
+            new Sylius\ResourceBundle\SyliusResourceBundle(),
 
             // Other bundles...
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),

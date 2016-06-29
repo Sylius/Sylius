@@ -13,7 +13,7 @@ namespace Sylius\Behat\Page\Shop\Product;
 
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\PageInterface;
-use Sylius\Component\Product\Model\OptionInterface;
+use Sylius\Product\Model\OptionInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>

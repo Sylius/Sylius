@@ -18,7 +18,7 @@ use Sylius\Behat\Page\Admin\Channel\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Channel\UpdatePageInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
-use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Core\Model\ChannelInterface;
 use Webmozart\Assert\Assert;
 
 /**

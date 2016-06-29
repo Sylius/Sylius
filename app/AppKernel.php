@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-use Sylius\Bundle\CoreBundle\Application\Kernel;
+use Sylius\CoreBundle\Application\Kernel;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>

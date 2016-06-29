@@ -13,8 +13,8 @@ of the :ref:`component_attribute_model_attribute-subject-interface`.
 
    namespace Example\Model;
 
-   use Sylius\Component\Attribute\Model\AttributeSubjectInterface;
-   use Sylius\Component\Attribute\Model\AttributeValueInterface;
+   use Sylius\Attribute\Model\AttributeSubjectInterface;
+   use Sylius\Attribute\Model\AttributeValueInterface;
    use Doctrine\Common\Collections\Collection;
 
    class Shirt implements AttributeSubjectInterface
@@ -131,10 +131,10 @@ Once we have our class we can characterize it with attributes.
    <?php
 
    use Example\Model\Shirt;
-   use Sylius\Component\Attribute\Model\Attribute;
-   use Sylius\Component\Attribute\Model\AttributeValue;
-   use Sylius\Component\Attribute\AttributeType\TextAttributeType;
-   use Sylius\Component\Attribute\Model\AttributeValueInterface;
+   use Sylius\Attribute\Model\Attribute;
+   use Sylius\Attribute\Model\AttributeValue;
+   use Sylius\Attribute\AttributeType\TextAttributeType;
+   use Sylius\Attribute\Model\AttributeValueInterface;
 
    $attribute = new Attribute();
    $attribute->setName('Size');

@@ -19,9 +19,9 @@ from the :doc:`Payment </components/Payment/index>` component.
 
    <?php
 
-   use Sylius\Component\Registry\ServiceRegistry;
+   use Sylius\Registry\ServiceRegistry;
 
-   $registry = new ServiceRegistry('Sylius\Component\Payment\Calculator\FeeCalculatorInterface');
+   $registry = new ServiceRegistry('Sylius\Payment\Calculator\FeeCalculatorInterface');
 
 Once you've done that you can manage any object with the corresponding interface.
 
@@ -31,8 +31,8 @@ So for starters, lets add some services:
 
    <?php
 
-   use Sylius\Component\Payment\Calculator\FixedFeeCalculator;
-   use Sylius\Component\Payment\Calculator\PercentFeeCalculator;
+   use Sylius\Payment\Calculator\FixedFeeCalculator;
+   use Sylius\Payment\Calculator\PercentFeeCalculator;
 
    $registry->register('fixed', new FixedFeeCalculator());
    $registry->register('percent', new PercentFeeCalculator());

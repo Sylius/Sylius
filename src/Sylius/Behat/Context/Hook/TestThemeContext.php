@@ -12,7 +12,7 @@
 namespace Sylius\Behat\Context\Hook;
 
 use Behat\Behat\Context\Context;
-use Sylius\Bundle\ThemeBundle\Configuration\Test\TestThemeConfigurationManagerInterface;
+use Sylius\ThemeBundle\Configuration\Test\TestThemeConfigurationManagerInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>

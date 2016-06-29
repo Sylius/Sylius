@@ -28,8 +28,8 @@ By default, it compares the ids, but for our example we would prefer to check th
     // src/App/AppBundle/Entity/CartItem.php
     namespace App/AppBundle/Entity;
 
-    use Sylius\Bundle\Component\Cart\CartItem as BaseCartItem;
-    use Sylius\Bundle\Component\Cart\CartItemInterface;
+    use Sylius\Component\Cart\CartItem as BaseCartItem;
+    use Sylius\Component\Cart\CartItemInterface;
 
     class CartItem extends BaseCartItem
     {

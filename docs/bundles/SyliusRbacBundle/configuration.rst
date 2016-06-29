@@ -34,25 +34,25 @@ Configuration reference
           resources:
               role:
                   classes:
-                      model:      Sylius\Component\Rbac\Model\Role
-                      interface:  Sylius\Component\Rbac\Model\RoleInterface
-                      controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                      model:      Sylius\Rbac\Model\Role
+                      interface:  Sylius\Rbac\Model\RoleInterface
+                      controller: Sylius\ResourceBundle\Controller\ResourceController
                       repository: ~
-                      factory:    Sylius\Component\Resource\Factory\Factory
+                      factory:    Sylius\Resource\Factory\Factory
                       form:
-                            default: Sylius\Bundle\RbacBundle\Form\Type\RoleType
-                            choice:  Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType
+                            default: Sylius\RbacBundle\Form\Type\RoleType
+                            choice:  Sylius\ResourceBundle\Form\Type\ResourceChoiceType
                   validation_groups:
                     default: [ sylius ]
               permission:
                   classes:
-                      model:      Sylius\Component\Rbac\Model\Permission
-                      interface:  Sylius\Component\Rbac\Model\PermissionInterface
+                      model:      Sylius\Rbac\Model\Permission
+                      interface:  Sylius\Rbac\Model\PermissionInterface
                       repository: ~
-                      controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
-                      factory:    Sylius\Component\Resource\Factory\Factory
+                      controller: Sylius\ResourceBundle\Controller\ResourceController
+                      factory:    Sylius\Resource\Factory\Factory
                       form:
-                            default: Sylius\Bundle\RbacBundle\Form\Type\PermissionType
-                            choice:  Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType
+                            default: Sylius\RbacBundle\Form\Type\PermissionType
+                            choice:  Sylius\ResourceBundle\Form\Type\ResourceChoiceType
                   validation_groups:
                     default: [ sylius ]

@@ -12,8 +12,8 @@ By default, flow bundle will use session for data storage. Here is simple exampl
 
     namespace Acme\DemoBundle\Process\Step;
 
-    use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
-    use Sylius\Bundle\FlowBundle\Process\Step\ControllerStep;
+    use Sylius\FlowBundle\Process\Context\ProcessContextInterface;
+    use Sylius\FlowBundle\Process\Step\ControllerStep;
 
     class FirstStep extends ControllerStep
     {
@@ -40,4 +40,4 @@ By default, flow bundle will use session for data storage. Here is simple exampl
 
 You can later get data with ``$context->getStorage()->get('my_data')``.
 
-For more details about storage, check **Sylius\Bundle\FlowBundle\Storage\StorageInterface** class.
+For more details about storage, check **Sylius\FlowBundle\Storage\StorageInterface** class.

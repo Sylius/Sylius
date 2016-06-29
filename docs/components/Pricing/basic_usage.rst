@@ -7,7 +7,7 @@ In all examples we use an exemplary class implementing **PriceableInterface**, w
 
     <?php
 
-    use Sylius\Component\Pricing\Model\PriceableInterface;
+    use Sylius\Pricing\Model\PriceableInterface;
 
     class Book implements PriceableInterface
     {
@@ -85,7 +85,7 @@ Standard Calculator
 
     <?php
 
-    use Sylius\Component\Pricing\Calculator\StandardCalculator;
+    use Sylius\Pricing\Calculator\StandardCalculator;
 
     $standardCalculator = new StandardCalculator();
     $book = new Book();
@@ -102,7 +102,7 @@ Volume Based Calculator
 
     <?php
 
-    use Sylius\Component\Pricing\Calculator\VolumeBasedCalculator;
+    use Sylius\Pricing\Calculator\VolumeBasedCalculator;
 
     $volumeCalculator = new VolumeBasedCalculator();
     $configuration = array(
@@ -139,11 +139,11 @@ instance, based on the type defined on the subject.
 
     <?php
 
-    use Sylius\Component\Pricing\Calculator\StandardCalculator;
-    use Sylius\Component\Pricing\Calculator\VolumeBasedCalculator;
-    use Sylius\Component\Pricing\Calculator\DelegatingCalculator;
-    use Sylius\Component\Pricing\Calculator\CalculatorInterface;
-    use Sylius\Component\Registry\ServiceRegistry;
+    use Sylius\Pricing\Calculator\StandardCalculator;
+    use Sylius\Pricing\Calculator\VolumeBasedCalculator;
+    use Sylius\Pricing\Calculator\DelegatingCalculator;
+    use Sylius\Pricing\Calculator\CalculatorInterface;
+    use Sylius\Registry\ServiceRegistry;
 
     $standardCalculator = new StandardCalculator();
     $volumeBasedCalculator = new VolumeBasedCalculator();

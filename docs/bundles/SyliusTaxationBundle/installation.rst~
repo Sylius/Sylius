@@ -35,9 +35,9 @@ Don't worry, everything was automatically installed via Composer.
         $bundles = array(
             new FOS\RestBundle\FOSRestBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle($this),
-            new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
+            new Sylius\ResourceBundle\SyliusResourceBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
-            new Sylius\Bundle\ProductBundle\SyliusProductBundle(),
+            new Sylius\ProductBundle\SyliusProductBundle(),
 
             // Other bundles...
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
@@ -62,7 +62,7 @@ let's assume you have your ``ShopBundle`` registered under ``Acme\ShopBundle`` n
     // src/Acme/ShopBundle/Entity/Product.php
     namespace Acme\ShopBundle\Entity;
 
-    use Sylius\Bundle\ProductBundle\Model\Product as BaseProduct;
+    use Sylius\ProductBundle\Model\Product as BaseProduct;
     use Doctrine\ORM\Mapping as ORM;
 
     class Product extends BaseProduct
@@ -84,7 +84,7 @@ Now define the entity mapping inside ``Resources/config/doctrine/Product.orm.xml
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
-        <one-to-many field="properties" target-entity="Sylius\Bundle\ProductBundle\Model\ProductPropertyInterface" mapped-by="product">
+        <one-to-many field="properties" target-entity="Sylius\ProductBundle\Model\ProductPropertyInterface" mapped-by="product">
             <cascade>
                 <cascade-all />
             </cascade>

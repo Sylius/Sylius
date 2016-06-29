@@ -13,11 +13,11 @@ namespace Sylius\Behat\Context\Domain;
 
 use Behat\Behat\Context\Context;
 use Doctrine\DBAL\DBALException;
-use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
-use Sylius\Component\Core\Test\Services\SharedStorageInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Core\Model\ProductInterface;
+use Sylius\Core\Model\ProductVariantInterface;
+use Sylius\Core\Repository\ProductVariantRepositoryInterface;
+use Sylius\Core\Test\Services\SharedStorageInterface;
+use Sylius\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>

@@ -14,7 +14,7 @@ namespace Sylius\Behat\Page\Admin\Product;
 use Behat\Mink\Driver\Selenium2Driver;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
-use Sylius\Component\Core\Model\TaxonInterface;
+use Sylius\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
 /**

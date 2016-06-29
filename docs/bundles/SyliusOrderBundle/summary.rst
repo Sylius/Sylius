@@ -16,57 +16,57 @@ Configuration reference
         resources:
             order:
                 classes:
-                    model:      Sylius\Component\Order\Model\Order
-                    interface:  Sylius\Component\Order\Model\OrderInterface
-                    controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                    model:      Sylius\Order\Model\Order
+                    interface:  Sylius\Order\Model\OrderInterface
+                    controller: Sylius\ResourceBundle\Controller\ResourceController
                     repository: ~
-                    factory:    Sylius\Component\Resource\Factory\Factory
+                    factory:    Sylius\Resource\Factory\Factory
                     form:
-                        default: Sylius\Bundle\OrderBundle\Form\Type\OrderType
+                        default: Sylius\OrderBundle\Form\Type\OrderType
                 validation_groups:
                      default: [ sylius ]
             order_item:
                 classes:
-                    model:      Sylius\Component\Order\Model\OrderItem
-                    interface:  Sylius\Component\Order\Model\OrderItemInterface
-                    controller: Sylius\Bundle\OrderBundle\Controller\OrderItemController
+                    model:      Sylius\Order\Model\OrderItem
+                    interface:  Sylius\Order\Model\OrderItemInterface
+                    controller: Sylius\OrderBundle\Controller\OrderItemController
                     repository: ~
-                    factory:    Sylius\Component\Resource\Factory\Factory
+                    factory:    Sylius\Resource\Factory\Factory
                     form:
-                        default: Sylius\Bundle\OrderBundle\Form\Type\OrderItemType
+                        default: Sylius\OrderBundle\Form\Type\OrderItemType
                 validation_groups:
                      default: [ sylius ]
             order_item_unit:
                 classes:
-                    model:      Sylius\Component\Order\Model\OrderItemUnit
-                    interface:  Sylius\Component\Order\Model\OrderItemUnit\Interface
+                    model:      Sylius\Order\Model\OrderItemUnit
+                    interface:  Sylius\Order\Model\OrderItemUnit\Interface
                     repository: ~
-                    factory:    Sylius\Bundle\OrderBundle\Factory\OrderItemUnitFactory
+                    factory:    Sylius\OrderBundle\Factory\OrderItemUnitFactory
             order_identity:
                 classes:
-                    model:     Sylius\Component\Order\Model\Identity
-                    interface: Sylius\Component\Order\Model\IdentityInterface
-                    factory:   Sylius\Component\Resource\Factory\Factory
+                    model:     Sylius\Order\Model\Identity
+                    interface: Sylius\Order\Model\IdentityInterface
+                    factory:   Sylius\Resource\Factory\Factory
             adjustment:
                 classes
-                    model:      Sylius\Component\Order\Model\Adjustment
-                    interface:  Sylius\Component\Order\Model\AdjustmentInterface
-                    controller: Sylius\Bundle\OrderBundle\Controller\AdjustmentController
+                    model:      Sylius\Order\Model\Adjustment
+                    interface:  Sylius\Order\Model\AdjustmentInterface
+                    controller: Sylius\OrderBundle\Controller\AdjustmentController
                     repository: ~
-                    factory:    Sylius\Component\Resource\Factory\Factory
+                    factory:    Sylius\Resource\Factory\Factory
                     form:
-                        default: Sylius\Bundle\OrderBundle\Form\Type\AdjustmentType
+                        default: Sylius\OrderBundle\Form\Type\AdjustmentType
                 validation_groups:
                      default: [ sylius ]
             comment:
                 classes:
-                    model:      Sylius\Component\Order\Model\Comment
-                    interface:  Sylius\Component\Order\Model\CommentInterface
-                    controller: Sylius\Bundle\OrderBundle\Controller\CommentController
+                    model:      Sylius\Order\Model\Comment
+                    interface:  Sylius\Order\Model\CommentInterface
+                    controller: Sylius\OrderBundle\Controller\CommentController
                     repository: ~
-                    factory:    Sylius\Component\Resource\Factory\Factory
+                    factory:    Sylius\Resource\Factory\Factory
                     form:
-                        default: Sylius\Bundle\OrderBundle\Form\Type\CommentType
+                        default: Sylius\OrderBundle\Form\Type\CommentType
                 validation_groups:
                      default: [ sylius ]
 

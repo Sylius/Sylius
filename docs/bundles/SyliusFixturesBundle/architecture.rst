@@ -34,7 +34,7 @@ persist some entities in the database, upload some files, dispatch some events o
                         priority: 0 # The higher priority is, the sooner the fixture will be executed
                         options: ~ # Fixture options
 
-They implement the ``Sylius\Bundle\FixturesBundle\Fixture\FixtureInterface`` and need to be registered under
+They implement the ``Sylius\FixturesBundle\Fixture\FixtureInterface`` and need to be registered under
 the ``sylius_fixtures.fixture`` tag in order to be used in suite configuration.
 
 .. note::
@@ -60,10 +60,10 @@ Listeners allow you to execute code at some point of fixtures loading.
 
 They implement at least one of four interfaces:
 
-     - ``Sylius\Bundle\FixturesBundle\Listener\BeforeSuiteListenerInterface`` - receives ``Sylius\Bundle\FixturesBundle\Listener\SuiteEvent`` as an arugment
-     - ``Sylius\Bundle\FixturesBundle\Listener\BeforeFixtureListenerInterface``  - receives ``Sylius\Bundle\FixturesBundle\Listener\FixtureEvent`` as an arugment
-     - ``Sylius\Bundle\FixturesBundle\Listener\AfterFixtureListenerInterface`` - receives ``Sylius\Bundle\FixturesBundle\Listener\FixtureEvent`` as an arugment
-     - ``Sylius\Bundle\FixturesBundle\Listener\AfterSuiteListenerInterface``  - receives ``Sylius\Bundle\FixturesBundle\Listener\SuiteEvent`` as an arugment
+     - ``Sylius\FixturesBundle\Listener\BeforeSuiteListenerInterface`` - receives ``Sylius\FixturesBundle\Listener\SuiteEvent`` as an arugment
+     - ``Sylius\FixturesBundle\Listener\BeforeFixtureListenerInterface``  - receives ``Sylius\FixturesBundle\Listener\FixtureEvent`` as an arugment
+     - ``Sylius\FixturesBundle\Listener\AfterFixtureListenerInterface`` - receives ``Sylius\FixturesBundle\Listener\FixtureEvent`` as an arugment
+     - ``Sylius\FixturesBundle\Listener\AfterSuiteListenerInterface``  - receives ``Sylius\FixturesBundle\Listener\SuiteEvent`` as an arugment
 
 .. note::
 

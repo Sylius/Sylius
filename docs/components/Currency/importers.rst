@@ -39,8 +39,8 @@ The source of **EuropeanCentralBankImporter**'s data is the `European Central Ba
 
    <?php
 
-   use Sylius\Component\Currency\Importer\EuropeanCentralBankImporter;
-   use Sylius\Component\Resource\Repository\InMemoryRepository;
+   use Sylius\Currency\Importer\EuropeanCentralBankImporter;
+   use Sylius\Resource\Repository\InMemoryRepository;
    // Also use a class implementing the Doctrine's ObjectManager interface.
 
    $manager = // Your ObjectManager instance.
@@ -73,8 +73,8 @@ The **OpenExchangeRatesImporter** gets it's data from `Open Exchange Rates`_.
 
 .. code-block:: php
 
-   use Sylius\Component\Currency\Importer\OpenExchangeRatesImporter;
-   use Sylius\Component\Resource\Repository\InMemoryRepository;
+   use Sylius\Currency\Importer\OpenExchangeRatesImporter;
+   use Sylius\Resource\Repository\InMemoryRepository;
    // Also use a class implementing the Doctrine's ObjectManager interface.
 
    $manager = // Your ObjectManager instance.

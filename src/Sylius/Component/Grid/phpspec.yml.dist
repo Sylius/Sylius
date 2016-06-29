@@ -1,5 +1,0 @@
-suites:
-    main:
-        namespace: Sylius\Component\Grid
-        psr4_prefix: Sylius\Component\Grid
-        src_path: .

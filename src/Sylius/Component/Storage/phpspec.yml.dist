@@ -1,5 +1,0 @@
-suites:
-    main:
-        namespace: Sylius\Component\Storage
-        psr4_prefix: Sylius\Component\Storage
-        src_path: .

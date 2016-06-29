@@ -4,7 +4,7 @@
 Users and Groups
 ================
 
-Retrieving users and groups from the database should always happen via repository, which implements ``Sylius\Bundle\ResourceBundle\Model\RepositoryInterface``.
+Retrieving users and groups from the database should always happen via repository, which implements ``Sylius\ResourceBundle\Model\RepositoryInterface``.
 If you are using Doctrine, you're already familiar with this concept, as it extends the native Doctrine ``ObjectRepository`` interface.
 
 Your user repository is always accessible via ``sylius.repository.user`` service.

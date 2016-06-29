@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services
+                               http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="sylius.form.type.zone_type_choice.class">Sylius\AddressingBundle\Form\Type\ZoneTypeChoiceType</parameter>
+        <parameter key="sylius.form.type.country_code_choice.class">Sylius\AddressingBundle\Form\Type\CountryCodeChoiceType</parameter>
+        <parameter key="sylius.form.type.zone_code_choice.class">Sylius\AddressingBundle\Form\Type\ZoneCodeChoiceType</parameter>
+        <parameter key="sylius.form.type.province_code_choice.class">Sylius\AddressingBundle\Form\Type\ProvinceCodeChoiceType</parameter>
+
+        <parameter key="sylius.form.listener.address.class">Sylius\AddressingBundle\Form\EventListener\BuildAddressFormSubscriber</parameter>
+
+        <parameter key="sylius.province_naming_provider.class">Sylius\Addressing\Provider\ProvinceNamingProvider</parameter>
+        <parameter key="sylius.zone_matcher.class">Sylius\Addressing\Matcher\ZoneMatcher</parameter>
+        <parameter key="sylius.converter.country_name.class">Sylius\Addressing\Converter\CountryNameConverter</parameter>
+
+        <parameter key="sylius.validator.shippable_address.class">Sylius\AddressingBundle\Validator\Constraints\ShippableAddressConstraintValidator</parameter>
+        <parameter key="sylius.validator.valid_province_address.class">Sylius\AddressingBundle\Validator\Constraints\ProvinceAddressConstraintValidator</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.form.type.zone_type_choice" class="%sylius.form.type.zone_type_choice.class%">
+            <tag name="form.type" alias="sylius_zone_type_choice" />
+        </service>
+        <service id="sylius.form.type.country_code_choice" class="%sylius.form.type.country_code_choice.class%">
+            <argument type="service" id="sylius.repository.country" />
+            <tag name="form.type" alias="sylius_country_code_choice" />
+        </service>
+        <service id="sylius.form.type.zone_code_choice" class="%sylius.form.type.zone_code_choice.class%">
+            <argument type="service" id="sylius.repository.zone" />
+            <tag name="form.type" alias="sylius_zone_code_choice" />
+        </service>
+        <service id="sylius.form.type.province_code_choice" class="%sylius.form.type.province_code_choice.class%">
+            <argument type="service" id="sylius.repository.province" />
+            <tag name="form.type" alias="sylius_province_code_choice" />
+        </service>
+
+        <service id="sylius.form.listener.address" class="%sylius.form.listener.address.class%">
+            <argument type="service" id="sylius.repository.country" />
+            <argument type="service" id="form.factory" />
+        </service>
+
+        <service id="sylius.province_naming_provider" class="%sylius.province_naming_provider.class%" lazy="true">
+            <argument type="service" id="sylius.repository.province" />
+        </service>
+        <service id="sylius.zone_matcher" class="%sylius.zone_matcher.class%">
+            <argument type="service" id="sylius.repository.zone" />
+        </service>
+        <service id="sylius.converter.country_name" class="%sylius.converter.country_name.class%" />
+
+        <service id="sylius.validator.shippable_address" class="%sylius.validator.shippable_address.class%">
+            <tag name="validator.constraint_validator" alias="sylius_shippable_address_validator" />
+        </service>
+        <service id="sylius.validator.valid_province_address" class="%sylius.validator.valid_province_address.class%">
+            <argument type="service" id="sylius.repository.country" />
+            <argument type="service" id="sylius.repository.province" />
+            <tag name="validator.constraint_validator" alias="sylius_province_address_validator" />
+        </service>
+    </services>
+
+</container>

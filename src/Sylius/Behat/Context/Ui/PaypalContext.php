@@ -16,9 +16,9 @@ use Sylius\Behat\Page\Shop\Checkout\FinalizeStepInterface;
 use Sylius\Behat\Page\External\PaypalExpressCheckoutPageInterface;
 use Sylius\Behat\Page\Shop\Order\OrderPaymentsPageInterface;
 use Sylius\Behat\Service\Mocker\PaypalApiMocker;
-use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Repository\OrderRepositoryInterface;
-use Sylius\Component\Core\Test\Services\SharedStorageInterface;
+use Sylius\Core\Model\OrderInterface;
+use Sylius\Core\Repository\OrderRepositoryInterface;
+use Sylius\Core\Test\Services\SharedStorageInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>

@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: Sylius\CartBundle
+        psr4_prefix: Sylius\CartBundle
+        src_path: .

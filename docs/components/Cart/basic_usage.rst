@@ -18,8 +18,8 @@ set and retrieve current cart identifier based on storage.
 
     <?php
 
-    use Sylius\Component\Cart\Context\CartContext;
-    use Sylius\Component\Cart;
+    use Sylius\Cart\Context\CartContext;
+    use Sylius\Cart;
 
     $context = new CartContext();
     $cart = new Cart();

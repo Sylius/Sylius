@@ -12,8 +12,8 @@
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
-use Sylius\Component\Addressing\Converter\CountryNameConverterInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Addressing\Converter\CountryNameConverterInterface;
+use Sylius\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>

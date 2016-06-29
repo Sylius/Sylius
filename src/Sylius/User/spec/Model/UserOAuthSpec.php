@@ -1,0 +1,31 @@
+<?php
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace spec\Sylius\User\Model;
+
+use PhpSpec\ObjectBehavior;
+use Sylius\User\Model\UserOAuthInterface;
+
+/**
+ * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
+ */
+class UserOAuthSpec extends ObjectBehavior
+{
+    function it_is_initializable()
+    {
+        $this->shouldHaveType('Sylius\User\Model\UserOAuth');
+    }
+
+    function it_implements_user_oauth_interface()
+    {
+        $this->shouldImplement(UserOAuthInterface::class);
+    }
+}

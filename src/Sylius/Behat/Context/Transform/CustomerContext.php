@@ -12,9 +12,9 @@
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
-use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\User\Repository\CustomerRepositoryInterface;
+use Sylius\Core\Model\CustomerInterface;
+use Sylius\Resource\Factory\FactoryInterface;
+use Sylius\User\Repository\CustomerRepositoryInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>

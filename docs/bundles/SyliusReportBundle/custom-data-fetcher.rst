@@ -6,17 +6,17 @@ SyliusReportBundle has some default data fetchers implemented, however, obviousl
 Create custom data fetcher class
 --------------------------------
 
-First step is creation of our new data fetcher class. It should provide proper logic and has to implement ``Sylius\Component\Report\DataFetcher\DataFetcherInterface``. Because of implementation, data fetcher class must provide two methods:
+First step is creation of our new data fetcher class. It should provide proper logic and has to implement ``Sylius\Report\DataFetcher\DataFetcherInterface``. Because of implementation, data fetcher class must provide two methods:
     - ``fetch(array $configuration)``, which fetches data
     - ``getType``, which returns unique name of data fetcher
 
 .. note::
 
-   It is highly recommended to place all data fetchers types as constants. Default data fetchers have their types included in ``Sylius\Component\Report\Renderer\DefaultDataFetchers``
+   It is highly recommended to place all data fetchers types as constants. Default data fetchers have their types included in ``Sylius\Report\Renderer\DefaultDataFetchers``
 
 .. caution::
 
-    Data fetcher has to return Data class(``Sylius\Component\Report\DataFetcher\Data``), which is part of Report component
+    Data fetcher has to return Data class(``Sylius\Report\DataFetcher\Data``), which is part of Report component
 
 .. code-block:: php
 
@@ -24,8 +24,8 @@ First step is creation of our new data fetcher class. It should provide proper l
 
     namespace Acme\DemoBundle\DataFetchers\CustomDataFetcher;
 
-    use Sylius\Component\Report\DataFetcher\DataFetcherInterface;
-    use Sylius\Component\Report\DataFetcher\Data;
+    use Sylius\Report\DataFetcher\DataFetcherInterface;
+    use Sylius\Report\DataFetcher\Data;
     use Acme\Component\DataFetcher\DefaultRenderers;
 
     class CustomDataFetcher implements DataFetcherInterface

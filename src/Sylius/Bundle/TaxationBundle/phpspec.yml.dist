@@ -1,5 +1,0 @@
-suites:
-    main:
-        namespace: Sylius\Bundle\TaxationBundle
-        psr4_prefix: Sylius\Bundle\TaxationBundle
-        src_path: .

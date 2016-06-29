@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: Sylius\Shipping
+        psr4_prefix: Sylius\Shipping
+        src_path: .

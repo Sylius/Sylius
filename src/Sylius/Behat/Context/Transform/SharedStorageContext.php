@@ -12,8 +12,8 @@
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
-use Sylius\Component\Core\Formatter\StringInflector;
-use Sylius\Component\Core\Test\Services\SharedStorageInterface;
+use Sylius\Core\Formatter\StringInflector;
+use Sylius\Core\Test\Services\SharedStorageInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>

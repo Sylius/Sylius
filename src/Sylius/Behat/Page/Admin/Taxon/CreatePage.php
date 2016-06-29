@@ -15,7 +15,7 @@ use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Behaviour\SpecifiesItsCode;
 use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
-use Sylius\Component\Core\Model\TaxonInterface;
+use Sylius\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
 /**

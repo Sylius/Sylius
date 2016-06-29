@@ -15,9 +15,9 @@ This is an abstraction layer that allows you to create your own logic of sending
 
     <?php
 
-    use Sylius\Component\Mailer\Sender\Adapter\AbstractAdapter as BaseSenderAdapter;
-    use Sylius\Component\Mailer\Model\EmailInterface;
-    use Sylius\Component\Mailer\Model\Email;
+    use Sylius\Mailer\Sender\Adapter\AbstractAdapter as BaseSenderAdapter;
+    use Sylius\Mailer\Model\EmailInterface;
+    use Sylius\Mailer\Model\Email;
 
     class SenderAdapter extends BaseSenderAdapter
     {
@@ -62,9 +62,9 @@ This service collects those two adapters **SenderAdapter**, **RendererAdapter** 
 
     <?php
 
-    use Sylius\Component\Mailer\Provider\DefaultSettingsProvider;
-    use Sylius\Component\Mailer\Provider\EmailProvider;
-    use Sylius\Component\Mailer\Sender\Sender;
+    use Sylius\Mailer\Provider\DefaultSettingsProvider;
+    use Sylius\Mailer\Provider\EmailProvider;
+    use Sylius\Mailer\Sender\Sender;
 
     $sender = new Sender($rendererAdapter, $senderAdapter, $emailProvider, $defaultSettingsProvider);
 
@@ -85,9 +85,9 @@ This is an abstraction layer that allows you to create your own logic of renderi
 
     <?php
 
-    use Sylius\Component\Mailer\Renderer\Adapter\AbstractAdapter as BaseRendererAdapter;
-    use Sylius\Component\Mailer\Model\EmailInterface;
-    use Sylius\Component\Mailer\Model\Email;
+    use Sylius\Mailer\Renderer\Adapter\AbstractAdapter as BaseRendererAdapter;
+    use Sylius\Mailer\Model\EmailInterface;
+    use Sylius\Mailer\Model\Email;
 
     class RendererAdapter extends BaseRendererAdapter
     {
@@ -138,7 +138,7 @@ The **DefaultSettingsProvider** is service which provides you with default sende
 
     <?php
 
-    use Sylius\Component\Mailer\Provider\DefaultSettingsProvider;
+    use Sylius\Mailer\Provider\DefaultSettingsProvider;
 
     $defaultSettingsProvider = new DefaultSettingsProvider('Mike Ehrmantraut', 'mike.ehrmantraut@gmail.com');
 
@@ -156,8 +156,8 @@ The **EmailProvider** allows you to get specific email from storage.
 
     <?php
 
-    use Sylius\Component\Mailer\Provider\EmailProvider;
-    use Sylius\Component\Resource\Repository\InMemoryRepository;
+    use Sylius\Mailer\Provider\EmailProvider;
+    use Sylius\Resource\Repository\InMemoryRepository;
 
     $inMemoryRepository = new InMemoryRepository();
 

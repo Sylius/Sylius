@@ -10,14 +10,14 @@ Configuration reference
           resources:
               email:
                   classes:
-                      model:      Sylius\Component\Mailer\Model\Email
-                      interface:  Sylius\Component\Mailer\Model\EmailInterface
-                      controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                      model:      Sylius\Mailer\Model\Email
+                      interface:  Sylius\Mailer\Model\EmailInterface
+                      controller: Sylius\ResourceBundle\Controller\ResourceController
                       repository: ~
-                      factory:    Sylius\Component\Resource\Factory\Factory
+                      factory:    Sylius\Resource\Factory\Factory
                       form:
-                          default: Sylius\Bundle\MailerBundle\Form\Type\EmailType
-                          choice:  Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType
+                          default: Sylius\MailerBundle\Form\Type\EmailType
+                          choice:  Sylius\ResourceBundle\Form\Type\ResourceChoiceType
                   validation_groups:
                       default: [ sylius ]
           sender:

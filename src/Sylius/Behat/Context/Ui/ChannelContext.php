@@ -15,9 +15,9 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Channel\CreatePageInterface;
 use Sylius\Behat\Page\Shop\LegacyHomePageInterface;
 use Sylius\Behat\Service\Setter\ChannelContextSetterInterface;
-use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
-use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Test\Services\SharedStorageInterface;
+use Sylius\Channel\Repository\ChannelRepositoryInterface;
+use Sylius\Core\Model\ChannelInterface;
+use Sylius\Core\Test\Services\SharedStorageInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>

@@ -13,9 +13,9 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Service\SecurityServiceInterface;
-use Sylius\Component\Core\Test\Factory\TestUserFactoryInterface;
-use Sylius\Component\Core\Test\Services\SharedStorageInterface;
-use Sylius\Component\User\Repository\UserRepositoryInterface;
+use Sylius\Core\Test\Factory\TestUserFactoryInterface;
+use Sylius\Core\Test\Services\SharedStorageInterface;
+use Sylius\User\Repository\UserRepositoryInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>

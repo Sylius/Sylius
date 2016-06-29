@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: Sylius\ReviewBundle
+        psr4_prefix: Sylius\ReviewBundle
+        src_path: .

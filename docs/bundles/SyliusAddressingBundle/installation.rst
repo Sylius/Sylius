@@ -39,9 +39,9 @@ Don't worry, everything was automatically installed via Composer.
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
 
-            new Sylius\Bundle\TranslationBundle\SyliusTranslationBundle(),
-            new Sylius\Bundle\AddressingBundle\SyliusAddressingBundle(),
-            new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
+            new Sylius\TranslationBundle\SyliusTranslationBundle(),
+            new Sylius\AddressingBundle\SyliusAddressingBundle(),
+            new Sylius\ResourceBundle\SyliusResourceBundle(),
 
             // Other bundles...
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),

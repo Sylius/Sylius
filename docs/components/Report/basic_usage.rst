@@ -19,7 +19,7 @@ Your data fetcher class should implement `DataFetcherInterface`_.
 
     <?php
 
-    use Sylius\Component\Report\DataFetcher\DataFetcherInterface;
+    use Sylius\Report\DataFetcher\DataFetcherInterface;
 
     /**
      * Sales total data fetcher
@@ -49,14 +49,14 @@ Your data fetcher class should implement `DataFetcherInterface`_.
 
     <?php
 
-    use Sylius\Component\Report\DataFetcher\Data;
-    use Sylius\Component\Report\DataFetcher\DefaultDataFetchers;
-    use Sylius\Component\Report\Renderer\DefaultRenderers;
-    use Sylius\Component\Report\DataFetcher\DelegatingDataFetcher;
-    use Sylius\Component\Registry\ServiceRegistry;
-    use Sylius\Component\Report\Model\Report;
-    use Sylius\Component\Report\Renderer\RendererInterface;
-    use Sylius\Component\Report\Model\ReportInterface;
+    use Sylius\Report\DataFetcher\Data;
+    use Sylius\Report\DataFetcher\DefaultDataFetchers;
+    use Sylius\Report\Renderer\DefaultRenderers;
+    use Sylius\Report\DataFetcher\DelegatingDataFetcher;
+    use Sylius\Registry\ServiceRegistry;
+    use Sylius\Report\Model\Report;
+    use Sylius\Report\Renderer\RendererInterface;
+    use Sylius\Report\Model\ReportInterface;
 
 
 
@@ -87,7 +87,7 @@ Your renderer should implement `RendererInterface`_.
 
     <?php
 
-    use Sylius\Component\Report\Renderer\RendererInterface;
+    use Sylius\Report\Renderer\RendererInterface;
 
     class TableRenderer implements RendererInterface
     {
@@ -114,13 +114,13 @@ Your renderer should implement `RendererInterface`_.
 
     <?php
 
-    use Sylius\Component\Report\DataFetcher\Data;
-    use Sylius\Component\Report\Renderer\DelegatingRenderer;
-    use Sylius\Component\Report\DataFetcher\DefaultDataFetchers;
-    use Sylius\Component\Report\Renderer\DefaultRenderers;
-    use Sylius\Component\Registry\ServiceRegistry;
-    use Sylius\Component\Report\Model\Report;
-    use Sylius\Component\Report\Model\ReportInterface;
+    use Sylius\Report\DataFetcher\Data;
+    use Sylius\Report\Renderer\DelegatingRenderer;
+    use Sylius\Report\DataFetcher\DefaultDataFetchers;
+    use Sylius\Report\Renderer\DefaultRenderers;
+    use Sylius\Registry\ServiceRegistry;
+    use Sylius\Report\Model\Report;
+    use Sylius\Report\Model\ReportInterface;
 
     $tableRenderer = new TableRenderer();
 

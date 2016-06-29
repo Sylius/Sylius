@@ -1,5 +1,0 @@
-suites:
-    main:
-        namespace: Sylius\Component\Mailer
-        psr4_prefix: Sylius\Component\Mailer
-        src_path: .

@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: Sylius\SearchBundle
+        psr4_prefix: Sylius\SearchBundle
+        src_path: .

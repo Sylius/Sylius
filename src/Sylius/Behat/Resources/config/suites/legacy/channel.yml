@@ -6,16 +6,16 @@ default:
         legacy_channel:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
-                - Sylius\Bundle\CoreBundle\Behat\HookContext
-                - Sylius\Bundle\CoreBundle\Behat\CoreContext
-                - Sylius\Bundle\ResourceBundle\Behat\FixtureContext
-                - Sylius\Bundle\AddressingBundle\Behat\AddressingContext
-                - Sylius\Bundle\PromotionBundle\Behat\PromotionContext
-                - Sylius\Bundle\ShippingBundle\Behat\ShippingContext
-                - Sylius\Bundle\TaxonomyBundle\Behat\TaxonomyContext
-                - Sylius\Bundle\PaymentBundle\Behat\PaymentContext
-                - Sylius\Bundle\WebBundle\Behat\WebContext
-                - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
-                - Sylius\Bundle\ChannelBundle\Behat\ChannelContext
+                - Sylius\CoreBundle\Behat\HookContext
+                - Sylius\CoreBundle\Behat\CoreContext
+                - Sylius\ResourceBundle\Behat\FixtureContext
+                - Sylius\AddressingBundle\Behat\AddressingContext
+                - Sylius\PromotionBundle\Behat\PromotionContext
+                - Sylius\ShippingBundle\Behat\ShippingContext
+                - Sylius\TaxonomyBundle\Behat\TaxonomyContext
+                - Sylius\PaymentBundle\Behat\PaymentContext
+                - Sylius\WebBundle\Behat\WebContext
+                - Sylius\MoneyBundle\Behat\MoneyContext
+                - Sylius\ChannelBundle\Behat\ChannelContext
             filters:
                 tags: "@legacy && @channel"

@@ -11,13 +11,13 @@ Configuration reference
         resources:
             report:
                 classes:
-                    model: Sylius\Component\Report\Model\Report
-                    interface: Sylius\Component\Report\Model\ReportInterface
-                    costroller: Sylius\Bundle\ReportBundle\Controller\ReportController
+                    model: Sylius\Report\Model\Report
+                    interface: Sylius\Report\Model\ReportInterface
+                    costroller: Sylius\ReportBundle\Controller\ReportController
                     repository: ~
-                    factory:    Sylius\Component\Resource\Factory\Factory
+                    factory:    Sylius\Resource\Factory\Factory
                     form:
-                        default: Sylius\Bundle\ReportBundle\Form\Type\ReportType
+                        default: Sylius\ReportBundle\Form\Type\ReportType
                 validation_groups:
                     default: [ sylius ]
 

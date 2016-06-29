@@ -1,4 +1,4 @@
-Sylius\Component\Core\Model\User:
+Sylius\Core\Model\User:
     user_{Oliver, Roy, Thea}:
         plainPassword: <password()>
         roles: [ROLE_USER]
@@ -7,7 +7,7 @@ Sylius\Component\Core\Model\User:
         username: <current()>@doe.com
         usernameCanonical: <current()>@doe.com
 
-Sylius\Component\Core\Model\Customer:
+Sylius\Core\Model\Customer:
     customer_{Oliver, Roy, Thea, Barry, Joe}:
         firstName: <current()>
         lastName: Doe

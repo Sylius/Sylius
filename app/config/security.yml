@@ -6,7 +6,7 @@ security:
         sylius_user_provider:
             id: sylius.user_provider.name_or_email
     encoders:
-        Sylius\Component\User\Model\UserInterface: sha512
+        Sylius\User\Model\UserInterface: sha512
     firewalls:
         admin:
             switch_user: true

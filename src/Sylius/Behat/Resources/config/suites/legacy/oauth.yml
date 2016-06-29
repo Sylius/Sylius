@@ -6,11 +6,11 @@ default:
         legacy_oauth:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
-                - Sylius\Bundle\CoreBundle\Behat\CoreContext
-                - Sylius\Bundle\CoreBundle\Behat\HookContext
-                - Sylius\Bundle\UserBundle\Behat\OAuthContext
-                - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
-                - Sylius\Bundle\ChannelBundle\Behat\ChannelContext
-                - Sylius\Bundle\WebBundle\Behat\WebContext
+                - Sylius\CoreBundle\Behat\CoreContext
+                - Sylius\CoreBundle\Behat\HookContext
+                - Sylius\UserBundle\Behat\OAuthContext
+                - Sylius\MoneyBundle\Behat\MoneyContext
+                - Sylius\ChannelBundle\Behat\ChannelContext
+                - Sylius\WebBundle\Behat\WebContext
             filters:
                 tags: "@legacy && @oauth"

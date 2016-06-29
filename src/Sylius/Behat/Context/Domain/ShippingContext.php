@@ -12,8 +12,8 @@
 namespace Sylius\Behat\Context\Domain;
 
 use Behat\Behat\Context\Context;
-use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
-use Sylius\Component\Shipping\Model\ShippingMethodInterface;
+use Sylius\Core\Repository\ShipmentRepositoryInterface;
+use Sylius\Shipping\Model\ShippingMethodInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>

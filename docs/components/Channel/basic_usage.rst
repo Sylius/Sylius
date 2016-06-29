@@ -12,8 +12,8 @@ The **ChannelContext** allows you to manage the currently used sale channel.
 
    <?php
 
-   use Sylius\Component\Channel\Context\ChannelContext;
-   use Sylius\Component\Channel\Model\Channel;
+   use Sylius\Channel\Context\ChannelContext;
+   use Sylius\Channel\Model\Channel;
 
    $channel = new Channel();
    $channelContext = new ChannelContext();

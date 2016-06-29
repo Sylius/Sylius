@@ -12,9 +12,9 @@
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
-use Sylius\Component\Addressing\Converter\CountryNameConverterInterface;
-use Sylius\Component\Core\Model\AddressInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Addressing\Converter\CountryNameConverterInterface;
+use Sylius\Core\Model\AddressInterface;
+use Sylius\Resource\Factory\FactoryInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>

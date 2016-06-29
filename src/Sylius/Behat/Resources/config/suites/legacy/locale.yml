@@ -6,12 +6,12 @@ default:
         legacy_locale:
             contexts:
                 - Behat\MinkExtension\Context\MinkContext
-                - Sylius\Bundle\CoreBundle\Behat\HookContext
-                - Sylius\Bundle\CoreBundle\Behat\CoreContext
-                - Sylius\Bundle\ResourceBundle\Behat\FixtureContext
-                - Sylius\Bundle\WebBundle\Behat\WebContext
-                - Sylius\Bundle\MoneyBundle\Behat\MoneyContext
-                - Sylius\Bundle\ChannelBundle\Behat\ChannelContext
-                - Sylius\Bundle\LocaleBundle\Behat\LocaleContext
+                - Sylius\CoreBundle\Behat\HookContext
+                - Sylius\CoreBundle\Behat\CoreContext
+                - Sylius\ResourceBundle\Behat\FixtureContext
+                - Sylius\WebBundle\Behat\WebContext
+                - Sylius\MoneyBundle\Behat\MoneyContext
+                - Sylius\ChannelBundle\Behat\ChannelContext
+                - Sylius\LocaleBundle\Behat\LocaleContext
             filters:
                 tags: "@legacy && @locale"

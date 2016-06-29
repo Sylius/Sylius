@@ -14,20 +14,20 @@ namespace Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Component\Attribute\Factory\AttributeFactoryInterface;
-use Sylius\Component\Core\Formatter\StringInflector;
-use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Core\Repository\ProductRepositoryInterface;
-use Sylius\Component\Core\Test\Services\SharedStorageInterface;
-use Sylius\Component\Product\Factory\ProductFactoryInterface;
-use Sylius\Component\Product\Model\AttributeInterface;
-use Sylius\Component\Product\Model\AttributeValueInterface;
-use Sylius\Component\Product\Model\OptionInterface;
-use Sylius\Component\Product\Model\OptionValueInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Taxation\Model\TaxCategoryInterface;
+use Sylius\Attribute\Factory\AttributeFactoryInterface;
+use Sylius\Core\Formatter\StringInflector;
+use Sylius\Core\Model\ChannelInterface;
+use Sylius\Core\Model\ProductInterface;
+use Sylius\Core\Model\ProductVariantInterface;
+use Sylius\Core\Repository\ProductRepositoryInterface;
+use Sylius\Core\Test\Services\SharedStorageInterface;
+use Sylius\Product\Factory\ProductFactoryInterface;
+use Sylius\Product\Model\AttributeInterface;
+use Sylius\Product\Model\AttributeValueInterface;
+use Sylius\Product\Model\OptionInterface;
+use Sylius\Product\Model\OptionValueInterface;
+use Sylius\Resource\Factory\FactoryInterface;
+use Sylius\Taxation\Model\TaxCategoryInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>

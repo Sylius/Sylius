@@ -1,7 +1,7 @@
 How actions are applied ?
 =========================
 
-Everything related to this subject is located in ``Sylius\Bundle\PromotionBundle\Action``.
+Everything related to this subject is located in ``Sylius\PromotionBundle\Action``.
 
 Actions
 -------
@@ -14,14 +14,14 @@ As ``SyliusPromotionBundle`` is totally independent, it does not provide some ac
 
 .. note::
 
-    ``Sylius\Bundle\CoreBundle\Promotion\Action\FixedDiscountAction`` from ``Sylius/Standard-Edition`` is an example of action for a fixed amount discount. The related service is called ``sylius.promotion_action.fixed_discount``.
+    ``Sylius\CoreBundle\Promotion\Action\FixedDiscountAction`` from ``Sylius/Standard-Edition`` is an example of action for a fixed amount discount. The related service is called ``sylius.promotion_action.fixed_discount``.
     
 .. note::
 
-    ``Sylius\Bundle\CoreBundle\Promotion\Action\PercentageDiscountAction`` from ``Sylius/Standard-Edition`` is an example of action for a discount based on percentage. The related service is called  ``sylius.promotion_action.percentage_discount``.
+    ``Sylius\CoreBundle\Promotion\Action\PercentageDiscountAction`` from ``Sylius/Standard-Edition`` is an example of action for a discount based on percentage. The related service is called  ``sylius.promotion_action.percentage_discount``.
 
 
-All actions that you have defined as services will be automatically registered thanks to ``Sylius\Bundle\PromotionBundle\Action\Registry\PromotionActionRegistry``.
+All actions that you have defined as services will be automatically registered thanks to ``Sylius\PromotionBundle\Action\Registry\PromotionActionRegistry``.
 
 
 Applying actions to promotions

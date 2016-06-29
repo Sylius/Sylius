@@ -1,7 +1,7 @@
 Customizing Controllers
 =======================
 
-All **Sylius** resources are using the `` Sylius\Bundle\ResourceBundle\Controller\ResourceController`` as default, but some of them have been already extended in Bundles.
+All **Sylius** resources are using the `` Sylius\ResourceBundle\Controller\ResourceController`` as default, but some of them have been already extended in Bundles.
 If you want to override some controller action, check which controller you should be extending.
 
 .. note::
@@ -36,7 +36,7 @@ For the ``ProductController`` run:
 
     $ php app/console debug:container sylius.controller.product
 
-As a result you will get the ``Sylius\Bundle\CoreBundle\Controller\ProductController`` - this is the class that you need to be extending.
+As a result you will get the ``Sylius\CoreBundle\Controller\ProductController`` - this is the class that you need to be extending.
 
 Now you have to create the controller that will have a generic action that is basically the ``showAction`` from the ``ResourceController`` extended by
 getting a list of recommended product from your external api.
@@ -50,8 +50,8 @@ getting a list of recommended product from your external api.
     use FOS\RestBundle\View\View;
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\Response;
-    use Sylius\Bundle\CoreBundle\Controller\ProductController as BaseProductController;
-    use Sylius\Component\Resource\ResourceActions;
+    use Sylius\CoreBundle\Controller\ProductController as BaseProductController;
+    use Sylius\Resource\ResourceActions;
 
     class ProductController extends BaseProductController
     {
@@ -120,8 +120,8 @@ Your class needs to be extending this base class.
 
     namespace AppBundle\Controller\Frontend;
 
-    use Sylius\Bundle\WebBundle\Controller\Frontend\Account\OrderController as BaseOrderController;
-    use Sylius\Bundle\PayumBundle\Request\GetStatus;
+    use Sylius\WebBundle\Controller\Frontend\Account\OrderController as BaseOrderController;
+    use Sylius\PayumBundle\Request\GetStatus;
     use Symfony\Component\HttpFoundation\Request;
     use Symfony\Component\HttpFoundation\Response;
 

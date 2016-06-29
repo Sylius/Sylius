@@ -11,7 +11,7 @@
 
 namespace Sylius\Behat\Page\Shop\Order;
 
-use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Core\Model\PaymentInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>

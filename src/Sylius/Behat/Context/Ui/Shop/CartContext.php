@@ -18,10 +18,10 @@ use Sylius\Behat\Page\Shop\Cart\SummaryPageInterface;
 use Sylius\Behat\Page\Shop\Product\ShowPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\SecurityServiceInterface;
-use Sylius\Component\Core\Model\UserInterface;
-use Sylius\Component\Core\Test\Services\SharedStorageInterface;
-use Sylius\Component\Product\Model\OptionInterface;
-use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Core\Model\UserInterface;
+use Sylius\Core\Test\Services\SharedStorageInterface;
+use Sylius\Product\Model\OptionInterface;
+use Sylius\Product\Model\ProductInterface;
 use Webmozart\Assert\Assert;
 
 /**

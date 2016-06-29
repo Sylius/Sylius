@@ -14,9 +14,9 @@ Archetype
     <?php
 
     use Doctrine\Common\Collections\ArrayCollection;
-    use Sylius\Component\Attribute\Model\Attribute;
-    use Sylius\Component\Archetype\Model\Archetype;
-    use Sylius\Component\Archetype\Builder\ArchetypeBuilder;
+    use Sylius\Attribute\Model\Attribute;
+    use Sylius\Archetype\Model\Archetype;
+    use Sylius\Archetype\Builder\ArchetypeBuilder;
 
     $archetype = new Archetype();
 

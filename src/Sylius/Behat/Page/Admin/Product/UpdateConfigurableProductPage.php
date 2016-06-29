@@ -14,7 +14,7 @@ namespace Sylius\Behat\Page\Admin\Product;
 use Behat\Mink\Driver\Selenium2Driver;
 use Sylius\Behat\Behaviour\ChecksCodeImmutability;
 use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
-use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Sylius\Taxonomy\Model\TaxonInterface;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Templating\Tests\Storage\FileStorageTest;
 use Webmozart\Assert\Assert;

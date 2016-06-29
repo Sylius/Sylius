@@ -8,7 +8,7 @@ Creating a product
 
    <?php
 
-   use Sylius\Component\Product\Model\Product;
+   use Sylius\Product\Model\Product;
 
    $product = new Product();
 
@@ -22,8 +22,8 @@ Setting the archetype
 
    <?php
 
-   use Sylius\Component\Product\Model\Archetype;
-   use Sylius\Component\Product\Model\AttributeValue;
+   use Sylius\Product\Model\Archetype;
+   use Sylius\Product\Model\AttributeValue;
 
    $smallSize = new AttributeValue();
    $smallSize->setValue('Small');
@@ -45,7 +45,7 @@ Product attributes management
 
    <?php
 
-   use Sylius\Component\Product\Model\Attribute;
+   use Sylius\Product\Model\Attribute;
    use Doctrine\Common\Collections\ArrayCollection;
 
    $attribute = new Attribute();
@@ -91,7 +91,7 @@ Product variants management
 
    <?php
 
-   use Sylius\Component\Product\Model\Variant;
+   use Sylius\Product\Model\Variant;
 
    $variant = new Variant();
    $availableVariant = new Variant();
@@ -131,7 +131,7 @@ Product options management
 
    <?php
 
-   use Sylius\Component\Product\Model\Option;
+   use Sylius\Product\Model\Option;
 
    $firstOption = new Option();
    $secondOption = new Option();

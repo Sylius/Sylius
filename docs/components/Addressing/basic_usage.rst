@@ -23,11 +23,11 @@ First lets make some preparations.
 
    <?php
 
-   use Sylius\Component\Addressing\Model\Address;
-   use Sylius\Component\Addressing\Model\Zone;
-   use Sylius\Component\Addressing\Model\ZoneInterface;
-   use Sylius\Component\Addressing\Model\ZoneMember;
-   use Sylius\Component\Resource\Repository\InMemoryRepository;
+   use Sylius\Addressing\Model\Address;
+   use Sylius\Addressing\Model\Zone;
+   use Sylius\Addressing\Model\ZoneInterface;
+   use Sylius\Addressing\Model\ZoneMember;
+   use Sylius\Resource\Repository\InMemoryRepository;
 
    $zoneRepository = new InMemoryRepository(ZoneInterface::class);
    $zone = new Zone();
@@ -49,7 +49,7 @@ Now that we have all the needed parts lets match something.
 
    <?php
 
-   use Sylius\Component\Addressing\Matcher\ZoneMatcher;
+   use Sylius\Addressing\Matcher\ZoneMatcher;
 
    $zoneMatcher = new ZoneMatcher($zoneRepository);
 

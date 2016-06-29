@@ -5,8 +5,8 @@ Basic Usage
 
     <?php
 
-    use Sylius\Component\Taxonomy\Model\Taxon;
-    use Sylius\Component\Taxonomy\Model\Taxonomy;
+    use Sylius\Taxonomy\Model\Taxon;
+    use Sylius\Taxonomy\Model\Taxonomy;
 
     // Let's assume we want to begin creating new taxonomy in our system
     // therefore we think of a new taxon that will be a root for us.

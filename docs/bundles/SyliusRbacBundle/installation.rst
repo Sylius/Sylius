@@ -40,8 +40,8 @@ This bundle also uses `DoctrineCacheBundle`. Don't worry, everything was automat
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
             new Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle(),
 
-            new Sylius\Bundle\RbacBundle\SyliusRbacBundle(),
-            new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
+            new Sylius\RbacBundle\SyliusRbacBundle(),
+            new Sylius\ResourceBundle\SyliusResourceBundle(),
 
             // Other bundles...
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
@@ -74,7 +74,7 @@ And configure doctrine extensions which are used by the bundle.
 Implement IdentityInterface
 ---------------------------
 
-Your ``User`` class needs to implement ``Sylius\Component\Rbac\Model\IdentityInterface`` and define associated roles.
+Your ``User`` class needs to implement ``Sylius\Rbac\Model\IdentityInterface`` and define associated roles.
 
 .. code-block:: php
 
@@ -84,8 +84,8 @@ Your ``User`` class needs to implement ``Sylius\Component\Rbac\Model\IdentityInt
     namespace App\AppBundle\Entity;
 
     use Doctrine\Common\Collections\ArrayCollection;
-    use Sylius\Component\Rbac\Model\IdentityInterface;
-    use Sylius\Component\Rbac\Model\RoleInterface;
+    use Sylius\Rbac\Model\IdentityInterface;
+    use Sylius\Rbac\Model\RoleInterface;
 
     class User implements IdentityInterface
     {

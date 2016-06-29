@@ -2702,7 +2702,7 @@
 - [#34](https://github.com/Sylius/Sylius/pull/34) Added some layout blocks (@umpirsky)
 - [#8](https://github.com/Sylius/Sylius/pull/8) Credit card form branch (@Eponymi)
 - [#64](https://github.com/Sylius/Sylius/pull/64) Fix flashes call (@winzou)
-- [#59](https://github.com/Sylius/Sylius/pull/59) Sylius\Bundle\CoreBundle\Entity\VariantImage was invalid according to the Symfony profiler (@jjanvier)
+- [#59](https://github.com/Sylius/Sylius/pull/59) Sylius\CoreBundle\Entity\VariantImage was invalid according to the Symfony profiler (@jjanvier)
 - [#41](https://github.com/Sylius/Sylius/pull/41) fix use statement (@piotrantosik)
 - [#56](https://github.com/Sylius/Sylius/pull/56) Decouple Variant and VariantImage entities (@winzou)
 - [#39](https://github.com/Sylius/Sylius/pull/39) Fix english translations after merge of #38 (@winzou)

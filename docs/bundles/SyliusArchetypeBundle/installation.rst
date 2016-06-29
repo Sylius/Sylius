@@ -40,10 +40,10 @@ Don't worry, everything was automatically installed via Composer.
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
 
-            new Sylius\Bundle\AttributeBundle\SyliusAttributeBundle(),
-            new Sylius\Bundle\VariationBundle\SyliusVariationBundle(),
-            new Sylius\Bundle\ArchetypeBundle\SyliusArchetypeBundle(),
-            new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
+            new Sylius\AttributeBundle\SyliusAttributeBundle(),
+            new Sylius\VariationBundle\SyliusVariationBundle(),
+            new Sylius\ArchetypeBundle\SyliusArchetypeBundle(),
+            new Sylius\ResourceBundle\SyliusResourceBundle(),
 
             // Other bundles...
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),

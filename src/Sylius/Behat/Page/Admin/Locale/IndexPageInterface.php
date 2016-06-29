@@ -12,7 +12,7 @@
 namespace Sylius\Behat\Page\Admin\Locale;
 
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface as BaseIndexPageInterface;
-use Sylius\Component\Locale\Model\LocaleInterface;
+use Sylius\Locale\Model\LocaleInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>

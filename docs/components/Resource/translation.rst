@@ -14,7 +14,7 @@ First let's create a class which will keep our translatable properties:
 
    namespace Example\Model;
 
-   use Sylius\Component\Resource\Model\AbstractTranslation;
+   use Sylius\Resource\Model\AbstractTranslation;
 
    class BookTranslation extends AbstractTranslation
    {
@@ -53,8 +53,8 @@ Now the following class will be actually capable of translating the **title**:
 
    namespace Example\Model;
 
-   use Sylius\Component\Resource\Model\TranslatableInterface;
-   use Sylius\Component\Resource\Model\TranslatableTrait;
+   use Sylius\Resource\Model\TranslatableInterface;
+   use Sylius\Resource\Model\TranslatableTrait;
 
    class Book implements TranslatableInterface
    {
@@ -172,7 +172,7 @@ class which uses the :ref:`component_resource_translations_translatable-trait`:
    <?php
 
    use Example\Model\Book;
-   use Sylius\Component\Resource\Provider\LocaleProvider;
+   use Sylius\Resource\Provider\LocaleProvider;
 
    $provider = new LocaleProvider('de', 'en');
 
@@ -192,7 +192,7 @@ class such as the exemplary `BookTranslation` it goes:
    <?php
 
    use Example\Model\BookTranslation;
-   use Sylius\Component\Resource\Provider\LocaleProvider;
+   use Sylius\Resource\Provider\LocaleProvider;
 
    $provider = new LocaleProvider('de', 'en');
 

@@ -16,7 +16,7 @@ Let's see how an exemplary class implementing **SequenceSubjectInterface** shoul
 
     namespace AppBundle\Entity\Order;
 
-    use Sylius\Component\Sequence\Model\SequenceSubjectInterface;
+    use Sylius\Sequence\Model\SequenceSubjectInterface;
 
     class Order implements SequenceSubjectInterface
     {
@@ -60,8 +60,8 @@ Let's now see how we can use an exemplary generator:
 
     <?php
 
-    use Sylius\Component\Sequence\Model\Sequence;
-    use Sylius\Component\Sequence\Number\SequentialGenerator;
+    use Sylius\Sequence\Model\Sequence;
+    use Sylius\Sequence\Number\SequentialGenerator;
     use AppBundle\Entity\Order;
 
     // Prepare an object for the sequence you are going to generate, that will store its type.

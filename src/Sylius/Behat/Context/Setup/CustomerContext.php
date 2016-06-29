@@ -12,13 +12,13 @@
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
-use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Component\Core\Test\Services\SharedStorageInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
-use Sylius\Component\User\Repository\CustomerRepositoryInterface;
-use Sylius\Component\User\Repository\UserRepositoryInterface;
-use Sylius\Component\User\Security\PasswordUpdaterInterface;
+use Sylius\Core\Model\CustomerInterface;
+use Sylius\Core\Test\Services\SharedStorageInterface;
+use Sylius\Resource\Factory\FactoryInterface;
+use Sylius\User\Canonicalizer\CanonicalizerInterface;
+use Sylius\User\Repository\CustomerRepositoryInterface;
+use Sylius\User\Repository\UserRepositoryInterface;
+use Sylius\User\Security\PasswordUpdaterInterface;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>

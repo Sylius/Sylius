@@ -14,8 +14,8 @@ namespace Sylius\Behat\Context\Ui\Shop;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Shop\Product\ShowPageInterface;
 use Sylius\Behat\Page\SymfonyPageInterface;
-use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\Model\TaxonInterface;
+use Sylius\Core\Model\ProductInterface;
+use Sylius\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
 
 /**

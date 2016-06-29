@@ -12,8 +12,8 @@
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
-use Sylius\Component\Core\Repository\ProductRepositoryInterface;
-use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
+use Sylius\Core\Repository\ProductRepositoryInterface;
+use Sylius\Core\Repository\ProductVariantRepositoryInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>

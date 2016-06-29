@@ -18,7 +18,7 @@ Firstly, you need to create your own repository class
 
     namespace Acme\ShopBundle\Repository;
 
-    use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+    use Sylius\ResourceBundle\Doctrine\ORM\EntityRepository;
 
     class OrderRepository extends EntityRepository
     {

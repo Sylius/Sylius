@@ -12,49 +12,49 @@ Configuration Reference
         resources:
             taxonomy:
                 classes:
-                    model:      Sylius\Component\Taxonomy\Model\Taxonomy
-                    interface:  Sylius\Component\Taxonomy\Model\TaxonomyInterface
-                    controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                    model:      Sylius\Taxonomy\Model\Taxonomy
+                    interface:  Sylius\Taxonomy\Model\TaxonomyInterface
+                    controller: Sylius\ResourceBundle\Controller\ResourceController
                     repository: ~
-                    factory:    Sylius\Component\Resource\Factory\Factory
+                    factory:    Sylius\Resource\Factory\Factory
                     form:
-                        default: Sylius\Bundle\TaxonomiesBundle\Form\Type\TaxonomyType
-                        choice:  Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType
+                        default: Sylius\TaxonomiesBundle\Form\Type\TaxonomyType
+                        choice:  Sylius\ResourceBundle\Form\Type\ResourceChoiceType
                 validation_groups:
                     default: [ sylius ]
                 translation:
                     classes:
-                        model:      Sylius\Component\Taxonomy\Model\TaxonomyTranslation
-                        interface:  Sylius\Component\Taxonomy\Model\TaxonomyTranslationInterface
-                        controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                        model:      Sylius\Taxonomy\Model\TaxonomyTranslation
+                        interface:  Sylius\Taxonomy\Model\TaxonomyTranslationInterface
+                        controller: Sylius\ResourceBundle\Controller\ResourceController
                         repository: ~
-                        factory:    Sylius\Component\Resource\Factory\Factory
+                        factory:    Sylius\Resource\Factory\Factory
                         form:
-                            default: Sylius\Bundle\TaxonomiesBundle\Form\Type\TaxonomyTranslationType
+                            default: Sylius\TaxonomiesBundle\Form\Type\TaxonomyTranslationType
                     validation_groups:
                         default: [ sylius ]
                     fields:
                         default: [ name ]
             taxon:
                 classes:
-                    model:      Sylius\Component\Taxonomy\Model\Taxon
-                    interface:  Sylius\Component\Taxonomy\Model\TaxonInterface
-                    controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                    model:      Sylius\Taxonomy\Model\Taxon
+                    interface:  Sylius\Taxonomy\Model\TaxonInterface
+                    controller: Sylius\ResourceBundle\Controller\ResourceController
                     repository: ~
-                    factory:    Sylius\Component\Resource\Factory\Factory
+                    factory:    Sylius\Resource\Factory\Factory
                     form:
-                        default: Sylius\Bundle\TaxonomiesBundle\Form\Type\TaxonType
+                        default: Sylius\TaxonomiesBundle\Form\Type\TaxonType
                 validation_groups:
                     default: [ sylius ]
                 translation:
                     classes:
-                        model:      Sylius\Component\Taxonomy\Model\TaxonTranslation
-                        interface:  Sylius\Component\Taxonomy\Model\TaxonTranslationInterface
-                        controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+                        model:      Sylius\Taxonomy\Model\TaxonTranslation
+                        interface:  Sylius\Taxonomy\Model\TaxonTranslationInterface
+                        controller: Sylius\ResourceBundle\Controller\ResourceController
                         repository: ~
-                        factory:    Sylius\Component\Resource\Factory\Factory
+                        factory:    Sylius\Resource\Factory\Factory
                         form:
-                            default: Sylius\Bundle\TaxonomiesBundle\Form\Type\TaxonTranslationType
+                            default: Sylius\TaxonomiesBundle\Form\Type\TaxonTranslationType
                     validation_groups:
                         default: [ sylius ]
                     fields:

@@ -12,7 +12,7 @@
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
-use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
+use Sylius\ThemeBundle\Repository\ThemeRepositoryInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>

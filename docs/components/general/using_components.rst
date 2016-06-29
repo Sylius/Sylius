@@ -54,8 +54,8 @@ immediately. Open your favorite code editor and start coding:
 
     require_once __DIR__.'/vendor/autoload.php';
 
-    use Sylius\Component\Taxation\Calculator\DefaultCalculator;
-    use Sylius\Component\Taxation\Model\TaxRate;
+    use Sylius\Taxation\Calculator\DefaultCalculator;
+    use Sylius\Taxation\Model\TaxRate;
 
     $calculator = new DefaultCalculator();
 

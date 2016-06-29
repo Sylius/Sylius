@@ -11,7 +11,7 @@
 
 namespace Sylius\Behat\Page\Shop\Product;
 
-use Sylius\Component\Product\Model\OptionInterface;
+use Sylius\Product\Model\OptionInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Sylius\Behat\Page\SymfonyPage;

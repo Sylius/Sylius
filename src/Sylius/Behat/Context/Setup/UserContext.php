@@ -13,12 +13,12 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Component\Addressing\Converter\CountryNameConverterInterface;
-use Sylius\Component\Addressing\Model\AddressInterface;
-use Sylius\Component\Core\Test\Factory\TestUserFactoryInterface;
-use Sylius\Component\Core\Test\Services\SharedStorageInterface;
-use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\User\Repository\UserRepositoryInterface;
+use Sylius\Addressing\Converter\CountryNameConverterInterface;
+use Sylius\Addressing\Model\AddressInterface;
+use Sylius\Core\Test\Factory\TestUserFactoryInterface;
+use Sylius\Core\Test\Services\SharedStorageInterface;
+use Sylius\Resource\Factory\FactoryInterface;
+use Sylius\User\Repository\UserRepositoryInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>

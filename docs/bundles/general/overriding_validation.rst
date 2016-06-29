@@ -17,7 +17,7 @@ You can configure your own validation for Sylius models. If the defaults do not 
                         xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
                                             http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
 
-        <class name="Sylius\Bundle\TaxationBundle\Model\TaxCategory">
+        <class name="Sylius\TaxationBundle\Model\TaxCategory">
             <property name="name">
                 <constraint name="NotBlank">
                     <option name="message">Fill me in!</option>

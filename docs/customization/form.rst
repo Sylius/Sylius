@@ -46,7 +46,7 @@ For the ``AddressType`` run:
 
     $ php app/console debug:container sylius.form.type.address
 
-As a result you will get the ``Sylius\Bundle\AddressingBundle\Form\Type\AddressType`` - this is the class that you need to be extending.
+As a result you will get the ``Sylius\AddressingBundle\Form\Type\AddressType`` - this is the class that you need to be extending.
 
 .. code-block:: php
 
@@ -54,7 +54,7 @@ As a result you will get the ``Sylius\Bundle\AddressingBundle\Form\Type\AddressT
 
     namespace Acme\Bundle\ShopBundle\Form\Type;
 
-    use Sylius\Bundle\AddressingBundle\Form\Type\AddressType as BaseAddressType;
+    use Sylius\AddressingBundle\Form\Type\AddressType as BaseAddressType;
     use Symfony\Component\Form\FormBuilderInterface;
 
     class AddressType extends BaseAddressType

@@ -12,7 +12,7 @@
 namespace Sylius\Behat\Page\Admin\Promotion;
 
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface as BaseIndexPageInterface;
-use Sylius\Component\Promotion\Model\PromotionInterface;
+use Sylius\Promotion\Model\PromotionInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>

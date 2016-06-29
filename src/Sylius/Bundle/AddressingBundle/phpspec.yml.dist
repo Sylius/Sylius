@@ -1,5 +1,0 @@
-suites:
-    main:
-        namespace: Sylius\Bundle\AddressingBundle
-        psr4_prefix: Sylius\Bundle\AddressingBundle
-        src_path: .

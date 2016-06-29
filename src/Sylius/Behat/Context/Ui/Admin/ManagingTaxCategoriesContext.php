@@ -16,7 +16,7 @@ use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\TaxCategory\UpdatePageInterface;
 use Sylius\Behat\Page\Admin\TaxCategory\CreatePageInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
-use Sylius\Component\Taxation\Model\TaxCategoryInterface;
+use Sylius\Taxation\Model\TaxCategoryInterface;
 use Webmozart\Assert\Assert;
 
 /**

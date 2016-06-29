@@ -16,8 +16,8 @@ Create your adapter class and add your custom logic for sending:
 
     namespace App\Mailer\Adapter;
 
-    use Sylius\Component\Mailer\Sender\AdapterInterface;
-    use Sylius\Component\Mailer\Model\EmailInterface
+    use Sylius\Mailer\Sender\AdapterInterface;
+    use Sylius\Mailer\Model\EmailInterface
 
     class CustomAdapter implements AdapterInterface
     {

@@ -20,8 +20,8 @@ Resolving rate and using calculator
     namespace Acme\ShopBundle\Taxation
 
     use Acme\ShopBundle\Entity\Order;
-    use Sylius\Bundle\TaxationBundle\Calculator\CalculatorInterface;
-    use Sylius\Bundle\TaxationBundle\Resolver\TaxRateResolverInterface;
+    use Sylius\TaxationBundle\Calculator\CalculatorInterface;
+    use Sylius\TaxationBundle\Resolver\TaxRateResolverInterface;
 
     class TaxApplicator
     {

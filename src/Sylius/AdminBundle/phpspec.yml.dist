@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: Sylius\AdminBundle
+        psr4_prefix: Sylius\AdminBundle
+        src_path: .

@@ -1,0 +1,61 @@
+{
+    "name": "sylius/product-bundle",
+    "type": "symfony-bundle",
+    "description": "Product catalog for your Symfony2 applications.",
+    "keywords": ["shop", "ecommerce", "products", "product", "assortment"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paweł Jędrzejewski",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name": "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name": "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php": "^5.6|^7.0",
+
+        "stof/doctrine-extensions-bundle": "~1.1",
+        "sylius/product": "^0.19",
+        "sylius/archetype-bundle": "^0.19",
+        "sylius/attribute-bundle": "^0.19",
+        "sylius/association-bundle": "^0.19",
+        "sylius/variation-bundle": "^0.19",
+        "sylius/resource-bundle": "^0.19",
+        "symfony/framework-bundle": "^2.8"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "^2.4",
+        "symfony/form": "^2.8",
+        "symfony/validator": "^2.8"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": { "Sylius\\ProductBundle\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Sylius\\ProductBundle\\spec\\": "spec/" }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../*/*"
+        }
+    ],
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.19-dev"
+        }
+    }
+}

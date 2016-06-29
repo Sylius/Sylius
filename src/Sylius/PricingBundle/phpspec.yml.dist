@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: Sylius\PricingBundle
+        psr4_prefix: Sylius\PricingBundle
+        src_path: .

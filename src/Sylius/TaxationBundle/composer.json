@@ -1,0 +1,58 @@
+{
+    "name": "sylius/taxation-bundle",
+    "type": "symfony-bundle",
+    "description": "Flexible taxation system for Symfony2 ecommerce applications.",
+    "keywords": ["tax", "taxes", "taxation", "shop", "webshop", "ecommerce"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paweł Jędrzejewski",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name": "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name": "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php": "^5.6|^7.0",
+
+        "stof/doctrine-extensions-bundle": "~1.1",
+        "sylius/registry": "^0.19",
+        "sylius/taxation": "^0.19",
+        "sylius/resource-bundle": "^0.19",
+        "symfony/framework-bundle": "^2.8"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "^2.4",
+        "doctrine/orm": "^2.4.8,<2.5",
+        "symfony/form": "^2.8"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": { "Sylius\\TaxationBundle\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Sylius\\TaxationBundle\\spec\\": "spec/" }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../*/*"
+        }
+    ],
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.19-dev"
+        }
+    }
+}

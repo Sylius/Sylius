@@ -18,8 +18,8 @@ use Sylius\Behat\Page\Admin\ShippingMethod\UpdatePageInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\NotificationType;
-use Sylius\Component\Core\Model\ShippingMethodInterface;
-use Sylius\Component\Core\Test\Services\SharedStorageInterface;
+use Sylius\Core\Model\ShippingMethodInterface;
+use Sylius\Core\Test\Services\SharedStorageInterface;
 use Webmozart\Assert\Assert;
 
 /**

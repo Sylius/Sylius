@@ -1,0 +1,2 @@
+Sylius\Core\Model\Coupon:
+    exclusion_policy: ALL

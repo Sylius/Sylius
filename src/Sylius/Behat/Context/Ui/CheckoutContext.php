@@ -23,17 +23,17 @@ use Sylius\Behat\Page\Shop\Checkout\PaymentStepInterface;
 use Sylius\Behat\Page\Shop\Checkout\SecurityStepInterface;
 use Sylius\Behat\Page\Shop\Checkout\ShippingStepInterface;
 use Sylius\Behat\Page\Shop\Checkout\ThankYouPageInterface;
-use Sylius\Component\Core\Formatter\StringInflector;
+use Sylius\Core\Formatter\StringInflector;
 use Sylius\Behat\Service\SecurityServiceInterface;
-use Sylius\Component\Core\Model\AddressInterface;
-use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\ProductInterface;
-use Sylius\Component\Core\Model\ShippingMethodInterface;
-use Sylius\Component\Core\Model\UserInterface;
-use Sylius\Component\Core\Test\Services\SharedStorageInterface;
-use Sylius\Component\Order\Repository\OrderRepositoryInterface;
-use Sylius\Component\Payment\Model\PaymentInterface;
-use Sylius\Component\Payment\Model\PaymentMethodInterface;
+use Sylius\Core\Model\AddressInterface;
+use Sylius\Core\Model\OrderInterface;
+use Sylius\Core\Model\ProductInterface;
+use Sylius\Core\Model\ShippingMethodInterface;
+use Sylius\Core\Model\UserInterface;
+use Sylius\Core\Test\Services\SharedStorageInterface;
+use Sylius\Order\Repository\OrderRepositoryInterface;
+use Sylius\Payment\Model\PaymentInterface;
+use Sylius\Payment\Model\PaymentMethodInterface;
 use Webmozart\Assert\Assert;
 
 /**

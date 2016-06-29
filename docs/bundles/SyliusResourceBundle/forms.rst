@@ -16,7 +16,7 @@ You need to create a simple class:
 
     namespace AppBundle\Form\Type;
 
-    use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+    use Sylius\ResourceBundle\Form\Type\AbstractResourceType;
     use Symfony\Component\Form\FormBuilderInterface;
 
     class BookType extends AbstractResourceType

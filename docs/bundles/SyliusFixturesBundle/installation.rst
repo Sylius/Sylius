@@ -32,6 +32,6 @@ You need to enable the bundle inside the kernel, usually at the end of bundle li
     {
         $bundles = array(
             // Other bundles...
-            new Sylius\Bundle\FixturesBundle\SyliusFixturesBundle(),
+            new Sylius\FixturesBundle\SyliusFixturesBundle(),
         );
     }

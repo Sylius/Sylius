@@ -10,7 +10,7 @@ Getting a Currency name
 
    <?php
 
-   use Sylius\Component\Currency\Model\Currency;
+   use Sylius\Currency\Model\Currency;
 
    $currency = new Currency();
    $currency->setCode('USD');
@@ -40,8 +40,8 @@ In this example let's use the default :ref:`component_storage_session-storage`.
 
    <?php
 
-   use Sylius\Component\Currency\Context\CurrencyContext;
-   use Sylius\Component\Storage\SessionStorage;
+   use Sylius\Currency\Context\CurrencyContext;
+   use Sylius\Storage\SessionStorage;
    use Symfony\Component\HttpFoundation\Session\Session;
 
    $session = new Session();
@@ -78,9 +78,9 @@ The **CurrencyConverter** allows you to convert a value accordingly to the excha
 
    <?php
 
-   use Sylius\Component\Currency\Converter\CurrencyConverter;
-   use Sylius\Component\Currency\Model\Currency;
-   use Sylius\Component\Resource\Repository\InMemoryRepository;
+   use Sylius\Currency\Converter\CurrencyConverter;
+   use Sylius\Currency\Model\Currency;
+   use Sylius\Resource\Repository\InMemoryRepository;
 
    $currency = new Currency();
    $currency->setCode('USD');
@@ -113,8 +113,8 @@ The **CurrencyProvider** allows you to get all available currencies.
 
    <?php
 
-   use Sylius\Component\Currency\Provider\CurrencyProvider;
-   use Sylius\Component\Resource\Repository\InMemoryRepository;
+   use Sylius\Currency\Provider\CurrencyProvider;
+   use Sylius\Resource\Repository\InMemoryRepository;
 
    $currencyRepository = new InMemoryRepository();
    $currencyProvider = new CurrencyProvider($currencyRepository);

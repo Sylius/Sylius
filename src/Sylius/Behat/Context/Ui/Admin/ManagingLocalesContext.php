@@ -15,7 +15,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Locale\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Locale\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Locale\UpdatePageInterface;
-use Sylius\Component\Locale\Model\LocaleInterface;
+use Sylius\Locale\Model\LocaleInterface;
 use Webmozart\Assert\Assert;
 
 /**

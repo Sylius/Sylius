@@ -12,7 +12,7 @@
 namespace Sylius\Behat\Page\Admin\Order;
 
 use Sylius\Behat\Page\SymfonyPageInterface;
-use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Core\Model\OrderInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>

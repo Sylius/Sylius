@@ -14,7 +14,7 @@ namespace Sylius\Behat\Service\Resolver;
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface;
 use Sylius\Behat\Page\Admin\Product\UpdateConfigurableProductPageInterface;
 use Sylius\Behat\Page\Admin\Product\UpdateSimpleProductPageInterface;
-use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Product\Model\ProductInterface;
 use Webmozart\Assert\Assert;
 
 /**

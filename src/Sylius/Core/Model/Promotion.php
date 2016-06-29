@@ -1,0 +1,79 @@
+<?php
+
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
+namespace Sylius\Core\Model;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Sylius\Channel\Model\ChannelInterface as BaseChannelInterface;
+use Sylius\Promotion\Model\Promotion as BasePromotion;
+
+/**
+ * @author Kristian Loevstroem <kristian@loevstroem.dk>
+ */
+class Promotion extends BasePromotion implements PromotionInterface
+{
+    /**
+     * @var ChannelInterface[]|Collection
+     */
+    protected $channels;
+
+    public function __construct()
+    {
+        parent::__construct();
+        
+        $this->channels = new ArrayCollection();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getChannels()
+    {
+        return $this->channels;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setChannels(Collection $channels)
+    {
+        $this->channels = $channels;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addChannel(BaseChannelInterface $channel)
+    {
+        if (!$this->hasChannel($channel)) {
+            $this->channels->add($channel);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeChannel(BaseChannelInterface $channel)
+    {
+        if ($this->hasChannel($channel)) {
+            $this->channels->removeElement($channel);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasChannel(BaseChannelInterface $channel)
+    {
+        return $this->channels->contains($channel);
+    }
+}

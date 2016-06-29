@@ -14,7 +14,7 @@ namespace Sylius\Behat\Page\Shop\Order;
 use Behat\Mink\Session;
 use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
-use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Core\Model\PaymentInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
