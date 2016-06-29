@@ -313,11 +313,33 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @When I decide to change order shipping method
+     */
+    public function iDecideToChangeMyShippingMethod()
+    {
+        $this->paymentPage->changeShippingMethod();
+    }
+
+    /**
      * @When I go to the addressing step
      */
     public function iGoToTheAddressingStep()
     {
-        $this->shippingPage->changeAddressByStepLabel();
+        if ($this->shippingPage->isOpen()) {
+            $this->shippingPage->changeAddressByStepLabel();
+        }
+
+        if ($this->paymentPage->isOpen()) {
+            $this->paymentPage->changeAddressByStepLabel();
+        }
+    }
+
+    /**
+     * @When I go to the shipping step
+     */
+    public function iGoToTheShippingStep()
+    {
+        $this->paymentPage->changeShippingMethodByStepLabel();
     }
 
     /**
@@ -777,6 +799,30 @@ final class CheckoutContext implements Context
         Assert::true(
             $this->shippingPage->isOpen(),
             'Checkout shipping step should be opened, but it is not.'
+        );
+    }
+
+    /**
+     * @Then I should be redirected to the shipping step
+     */
+    public function iShouldBeRedirectedToTheShippingStep()
+    {
+        Assert::true(
+            $this->shippingPage->isOpen(),
+            'Checkout shipping step should be opened, but it is not.'
+        );
+    }
+
+    /**
+     * @Given I should be able to go to the payment step again
+     */
+    public function iShouldBeAbleToGoToThePaymentStepAgain()
+    {
+        $this->shippingPage->nextStep();
+
+        Assert::true(
+            $this->paymentPage->isOpen(),
+            'Checkout payment step should be opened, but it is not.'
         );
     }
 

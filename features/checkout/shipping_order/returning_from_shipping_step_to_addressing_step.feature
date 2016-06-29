@@ -1,6 +1,6 @@
 @checkout
 Feature: Returning from shipping step to addressing step
-    In order to return to readdress already addressed order
+    In order to readdress already addressed order
     As a Customer
     I want to be able to go back to addressing step from shipping step
 

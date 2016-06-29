@@ -15,12 +15,12 @@
             <div class="title">{{ 'sylius.ui.addressing'|trans }}</div>
         </div>
     </a>
-    <div class="{{ steps['shipping'] }} step">
+    <a data-remote-form="sylius_shop_checkout_reselecting_shipping" class="{{ steps['shipping'] }} step" href="#">
         <i class="truck icon"></i>
         <div class="content">
             <div class="title">{{ 'sylius.ui.shipping'|trans }}</div>
         </div>
-    </div>
+    </a>
     <div class="{{ steps['payment'] }} step">
         <i class="payment icon"></i>
         <div class="content">
@@ -36,5 +36,9 @@
 </div>
 
 <form id="sylius_shop_checkout_readdressing" action="{{ path('sylius_shop_checkout_readdressing') }}" method="post">
+    <input type="hidden" name="_method" value="PUT" />
+</form>
+
+<form id="sylius_shop_checkout_reselecting_shipping" action="{{ path('sylius_shop_checkout_reselecting_shipping') }}" method="post">
     <input type="hidden" name="_method" value="PUT" />
 </form>

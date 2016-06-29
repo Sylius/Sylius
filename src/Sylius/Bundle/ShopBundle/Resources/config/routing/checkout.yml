@@ -66,6 +66,23 @@ sylius_shop_checkout_shipping:
                 route: sylius_shop_checkout_payment
                 parameters: []
 
+sylius_shop_checkout_reselecting_shipping:
+    path: /reselect-shipping
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.order:applyStateMachineTransitionAction
+        _sylius:
+            repository:
+                method: find
+                arguments: [expr:service('sylius.cart_provider').getCart()]
+            state_machine:
+                graph: sylius_order_checkout
+                transition: reselect_shipping
+            redirect:
+                route: sylius_shop_checkout_shipping
+                parameters: []
+            permission: false
+
 sylius_shop_checkout_payment:
     path: /payment
     methods: [GET, PUT]
