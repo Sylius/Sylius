@@ -3,7 +3,7 @@
 
 <div class="row well well-sm" id="information">
     <div class="col-md-6">
-        <strong>{{ 'sylius.ui.placed_at'|trans }} {{ order.createdAt|date() }}</strong><br><br>
+        <strong>{{ 'sylius.ui.placed_at'|trans }} {{ order.createdAt|format_date() }}</strong><br><br>
         {#{{ 'sylius.ui.shipment_mode'|trans }} <strong>TODO</strong><br>#}
         {#{{ 'sylius.ui.payment_mode'|trans }} <strong>TODO</strong><br>#}
     </div>

@@ -30,8 +30,8 @@
                 <img class="img-polaroid" src="{{ variant.images.offsetGet(0).path|imagine_filter('sylius_small') }}" />
             {% endif %}
             </td>
-            <td><span class="label label-{{ variant.available ? 'success' : 'important' }}">{{ variant.availableOn|date }}</span></td>
-            <td>{{ product.updatedAt|date }}</td>
+            <td><span class="label label-{{ variant.available ? 'success' : 'important' }}">{{ variant.availableOn|format_date }}</span></td>
+            <td>{{ product.updatedAt|format_date }}</td>
             <td>
                 <ul>
                 {% for option in variant.options %}

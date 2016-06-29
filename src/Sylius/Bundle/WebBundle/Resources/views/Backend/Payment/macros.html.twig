@@ -34,7 +34,7 @@
                 {{ payment.amount|sylius_price(payment.currencyCode) }}
             </td>
             <td>{{ misc.state_label(payment.state, 'payment') }}</td>
-            <td>{{ payment.createdAt|date }}</td>
+            <td>{{ payment.createdAt|format_date }}</td>
             <td>
                 <div class="pull-right">
                     {{ buttons.edit(path('sylius_backend_payment_update', {'id': payment.id})) }}

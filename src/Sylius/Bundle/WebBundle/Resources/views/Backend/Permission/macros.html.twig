@@ -21,7 +21,7 @@
                     <strong>{{ permission.description }}</strong> <i>({{ permission.code }})</i>
                     </span>
                 </td>
-                <td>{{ permission.updatedAt|date }}</td>
+                <td>{{ permission.updatedAt|format_date }}</td>
                 <td>
                     <div class="pull-right">
                     {{ buttons.edit(path('sylius_backend_permission_update', {'id': permission.id})) }}

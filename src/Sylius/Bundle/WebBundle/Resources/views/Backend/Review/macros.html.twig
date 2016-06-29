@@ -36,7 +36,7 @@
                 <td><label class="label label-{{ review_macros.moderation_label(review) }}">{{ review.status }}</label></td>
                 <td><label class="label label-default">{{ review.rating }}</label></td>
                 <td><a href="{{ path('sylius_backend_customer_show', { 'id': review.author.id }) }}">{{ review.author.email }}</a></td>
-                <td>{{ review.createdAt|date }}</td>
+                <td>{{ review.createdAt|format_date }}</td>
                 <td>
                     <div class="pull-right">
                         {{ buttons.show(path('sylius_backend_product_review_show', {'id': review.id})) }}

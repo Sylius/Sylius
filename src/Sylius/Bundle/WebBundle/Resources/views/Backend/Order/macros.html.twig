@@ -26,7 +26,7 @@
         {% for order in orders %}
         <tr id="{{ order.id }}">
             <td class="center-text"><input type="checkbox" value="{{ order.id }}" /></td>
-            <td>{{ order.createdAt|date }}</td>
+            <td>{{ order.createdAt|format_date }}</td>
             <td>
                 <span {%- if order.channel.color -%} style="color: {{ order.channel.color }};"{%- endif -%}>{{ order.channel.code }}</span>
             </td>

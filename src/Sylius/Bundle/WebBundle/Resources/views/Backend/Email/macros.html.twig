@@ -23,7 +23,7 @@
                 <td>
                     {{ misc.state_label(email.enabled) }}
                 </td>
-                <td>{{ email.updatedAt|date }}</td>
+                <td>{{ email.updatedAt|format_date }}</td>
                 <td>
                     <div class="pull-right">
                     {{ buttons.edit(path('sylius_backend_email_update', {'id': email.id})) }}

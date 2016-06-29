@@ -3,7 +3,7 @@
     <div class="content">
         {{ 'sylius.ui.order'|trans }} #{{ order.number }}
         <div class="sub header">
-            {{ order.completedAt|date }}
+            {{ order.completedAt|format_date }}
 
             {{ label.default(('sylius.ui.'~order.state)|trans) }}
 

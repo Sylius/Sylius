@@ -22,7 +22,7 @@
                 <td>{{ attribute.code }}</td>
                 <td>{{ attribute.name }}</td>
                 <td><span class="label label-primary">{{ attribute.type|upper }}</span></td>
-                <td>{{ attribute.updatedAt|date }}</td>
+                <td>{{ attribute.updatedAt|format_date }}</td>
                 <td>
                     <div class="pull-right">
                     {{ buttons.edit(path('sylius_backend_product_attribute_update', {'id': attribute.id})) }}

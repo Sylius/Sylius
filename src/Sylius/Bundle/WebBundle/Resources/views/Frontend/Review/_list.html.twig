@@ -3,7 +3,7 @@
         <div class="panel-heading">
             <b>{{ review.title }}</b>
             <div class="pull-right">
-                {{ review.createdAt|date('Y-m-d H:i') }}
+                {{ review.createdAt|format_date('Y-m-d H:i') }}
             </div>
         </div>
         <div class="panel-body">
