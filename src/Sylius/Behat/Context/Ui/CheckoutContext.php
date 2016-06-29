@@ -16,6 +16,7 @@ use Sylius\Behat\Page\Shop\Checkout\AddressingPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\PaymentPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\ShippingPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SummaryPageInterface;
+use Sylius\Behat\Page\Shop\HomePageInterface;
 use Sylius\Behat\Page\Shop\Order\OrderPaymentsPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\AddressingStepInterface;
 use Sylius\Behat\Page\Shop\Checkout\FinalizeStepInterface;
@@ -45,6 +46,11 @@ final class CheckoutContext implements Context
      * @var SharedStorageInterface
      */
     private $sharedStorage;
+
+    /**
+     * @var HomePageInterface
+     */
+    private $homePage;
 
     /**
      * @var SecurityStepInterface
@@ -113,6 +119,7 @@ final class CheckoutContext implements Context
 
     /**
      * @param SharedStorageInterface $sharedStorage
+     * @param HomePageInterface $homePage
      * @param SecurityStepInterface $checkoutSecurityStep
      * @param AddressingStepInterface $checkoutAddressingStep
      * @param AddressingPageInterface $addressingPage
@@ -129,6 +136,7 @@ final class CheckoutContext implements Context
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
+        HomePageInterface $homePage,
         SecurityStepInterface $checkoutSecurityStep,
         AddressingStepInterface $checkoutAddressingStep,
         AddressingPageInterface $addressingPage,
@@ -144,6 +152,7 @@ final class CheckoutContext implements Context
         SecurityServiceInterface $securityService
     ) {
         $this->sharedStorage = $sharedStorage;
+        $this->homePage = $homePage;
         $this->checkoutSecurityStep = $checkoutSecurityStep;
         $this->checkoutAddressingStep = $checkoutAddressingStep;
         $this->addressingPage = $addressingPage;
@@ -277,6 +286,14 @@ final class CheckoutContext implements Context
     public function iCompleteTheAddressingStep()
     {
         $this->addressingPage->nextStep();
+    }
+
+    /**
+     * @When I go back to store
+     */
+    public function iGoBackToStore()
+    {
+        $this->addressingPage->backToStore();
     }
 
     /**
@@ -709,6 +726,17 @@ final class CheckoutContext implements Context
         Assert::true(
             $this->summaryPage->hasPaymentMethod($paymentMethod),
             sprintf('I should see %s payment method, but i do not.', $paymentMethod->getName())
+        );
+    }
+
+    /**
+     * @Then I should be redirected to the homepage
+     */
+    public function iShouldBeRedirectedToTheHomepage()
+    {
+        Assert::true(
+            $this->homePage->isOpen(),
+            'Shop homepage should be opened, but it is not.'
         );
     }
 

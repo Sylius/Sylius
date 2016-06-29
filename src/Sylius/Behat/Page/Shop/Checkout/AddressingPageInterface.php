@@ -65,4 +65,6 @@ interface AddressingPageInterface extends SymfonyPageInterface
     public function specifyPassword($password);
 
     public function nextStep();
+
+    public function backToStore();
 }
