@@ -19,12 +19,14 @@
     <div class="column">
         <div class="ui segment">
             <h4 class="ui dividing header">{{ 'sylius.ui.account_credentials'|trans }}</h4>
+            {% if customer.user is empty %}
             <div class="field">
                 <div class="ui toggle checkbox">
-                    <input type="checkbox" id="sylius_customer_create_user" {% if customer.user is not empty %}checked="checked"{% endif %}>
+                    <input type="checkbox" id="sylius_customer_create_user">
                     <label for="sylius_customer_create_user">{{ 'sylius.ui.customer_can_login_to_the_store'|trans }}?</label>
                 </div>
             </div>
+            {% endif %}
             {% if form.user is defined %}
                 <div id="user-form" {% if form.user.vars.data.id is not defined %} style="display: none" {% endif %}>
                     {{ form_row(form.user.plainPassword) }}
