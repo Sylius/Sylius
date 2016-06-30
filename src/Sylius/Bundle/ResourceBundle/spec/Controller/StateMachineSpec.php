@@ -42,7 +42,17 @@ class StateMachineSpec extends ObjectBehavior
         $this->shouldImplement(ResourceStateMachineInterface::class);
     }
 
-    function it_throws_an_exception_if_transition_is_not_defined(RequestConfiguration $requestConfiguration, ResourceInterface $resource)
+    function it_throws_an_exception_if_transition_is_not_defined_during_can(RequestConfiguration $requestConfiguration, ResourceInterface $resource)
+    {
+        $requestConfiguration->hasStateMachine()->willReturn(false);
+
+        $this
+            ->shouldThrow(new \InvalidArgumentException('State machine must be configured to apply transition, check your routing.'))
+            ->during('can', [$requestConfiguration, $resource])
+        ;
+    }
+
+    function it_throws_an_exception_if_transition_is_not_defined_during_apply(RequestConfiguration $requestConfiguration, ResourceInterface $resource)
     {
         $requestConfiguration->hasStateMachine()->willReturn(false);
 
@@ -50,6 +60,22 @@ class StateMachineSpec extends ObjectBehavior
             ->shouldThrow(new \InvalidArgumentException('State machine must be configured to apply transition, check your routing.'))
             ->during('apply', [$requestConfiguration, $resource])
         ;
+    }
+
+    function it_returns_if_configured_state_machine_can_transition(
+        RequestConfiguration $requestConfiguration,
+        ResourceInterface $resource,
+        FactoryInterface $stateMachineFactory,
+        StateMachineInterface $stateMachine
+    ) {
+        $requestConfiguration->hasStateMachine()->willReturn(true);
+        $requestConfiguration->getStateMachineGraph()->willReturn('sylius_product_review_state');
+        $requestConfiguration->getStateMachineTransition()->willReturn('reject');
+
+        $stateMachineFactory->get($resource, 'sylius_product_review_state')->willReturn($stateMachine);
+        $stateMachine->can('reject')->willReturn(true);
+
+        $this->can($requestConfiguration, $resource)->shouldReturn(true);
     }
 
     function it_applies_configured_state_machine_transition(
