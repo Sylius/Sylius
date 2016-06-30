@@ -434,6 +434,16 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
+     * @When I select the :taxZone as default tax zone
+     */
+    public function iSelectDefaultTaxZone($taxZone)
+    {
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+
+        $currentPage->chooseDefaultTaxZone($taxZone);
+    }
+
+    /**
      * @Then the :paymentMethodName payment method should be available for the :channel channel
      */
     public function thePaymentMethodShouldBeAvailableForTheChannel($paymentMethodName, ChannelInterface $channel)
@@ -443,6 +453,19 @@ final class ManagingChannelsContext implements Context
         Assert::true(
             $this->updatePage->isPaymentMethodChosen($paymentMethodName),
             sprintf('Payment method %s should be selected but it is not', $paymentMethodName)
+        );
+    }
+
+    /**
+     * @Then :taxZone should be default tax zone for the :channel channel
+     */
+    public function theShouldBeDefaultTaxZoneForTheChannel($taxZone, ChannelInterface $channel)
+    {
+        $this->updatePage->open(['id' => $channel->getId()]);
+
+        Assert::true(
+            $this->updatePage->isDefaultTaxZoneChosen($taxZone),
+            sprintf('Default tax zone %s should be selected but it is not', $taxZone)
         );
     }
 

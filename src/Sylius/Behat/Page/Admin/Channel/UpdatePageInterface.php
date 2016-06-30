@@ -80,9 +80,21 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function choosePaymentMethod($paymentMethod);
 
     /**
+     * @param string $taxZone
+     */
+    public function chooseDefaultTaxZone($taxZone);
+
+    /**
      * @param string $paymentMethod
      *
      * @return bool
      */
     public function isPaymentMethodChosen($paymentMethod);
+
+    /**
+     * @param string $taxZone
+     *
+     * @return bool
+     */
+    public function isDefaultTaxZoneChosen($taxZone);
 }
