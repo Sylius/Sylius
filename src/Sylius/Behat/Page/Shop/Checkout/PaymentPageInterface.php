@@ -29,4 +29,10 @@ interface PaymentPageInterface
     public function hasPaymentMethod($paymentMethodName);
 
     public function nextStep();
+
+    public function changeShippingMethod();
+
+    public function changeShippingMethodByStepLabel();
+
+    public function changeAddressByStepLabel();
 }

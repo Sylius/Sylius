@@ -105,4 +105,10 @@ interface SummaryPageInterface extends SymfonyPageInterface
      * @return bool
      */
     public function hasShippingTotal($price);
+
+    public function changeAddress();
+
+    public function changeShippingMethod();
+
+    public function changePaymentMethod();
 }

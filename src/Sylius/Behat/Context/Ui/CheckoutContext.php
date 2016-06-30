@@ -16,6 +16,7 @@ use Sylius\Behat\Page\Shop\Checkout\AddressingPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\PaymentPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\ShippingPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SummaryPageInterface;
+use Sylius\Behat\Page\Shop\HomePageInterface;
 use Sylius\Behat\Page\Shop\Order\OrderPaymentsPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\AddressingStepInterface;
 use Sylius\Behat\Page\Shop\Checkout\FinalizeStepInterface;
@@ -23,6 +24,7 @@ use Sylius\Behat\Page\Shop\Checkout\PaymentStepInterface;
 use Sylius\Behat\Page\Shop\Checkout\SecurityStepInterface;
 use Sylius\Behat\Page\Shop\Checkout\ShippingStepInterface;
 use Sylius\Behat\Page\Shop\Checkout\ThankYouPageInterface;
+use Sylius\Behat\Page\UnexpectedPageException;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Behat\Service\SecurityServiceInterface;
 use Sylius\Component\Core\Model\AddressInterface;
@@ -45,6 +47,11 @@ final class CheckoutContext implements Context
      * @var SharedStorageInterface
      */
     private $sharedStorage;
+
+    /**
+     * @var HomePageInterface
+     */
+    private $homePage;
 
     /**
      * @var SecurityStepInterface
@@ -113,6 +120,7 @@ final class CheckoutContext implements Context
 
     /**
      * @param SharedStorageInterface $sharedStorage
+     * @param HomePageInterface $homePage
      * @param SecurityStepInterface $checkoutSecurityStep
      * @param AddressingStepInterface $checkoutAddressingStep
      * @param AddressingPageInterface $addressingPage
@@ -129,6 +137,7 @@ final class CheckoutContext implements Context
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
+        HomePageInterface $homePage,
         SecurityStepInterface $checkoutSecurityStep,
         AddressingStepInterface $checkoutAddressingStep,
         AddressingPageInterface $addressingPage,
@@ -144,6 +153,7 @@ final class CheckoutContext implements Context
         SecurityServiceInterface $securityService
     ) {
         $this->sharedStorage = $sharedStorage;
+        $this->homePage = $homePage;
         $this->checkoutSecurityStep = $checkoutSecurityStep;
         $this->checkoutAddressingStep = $checkoutAddressingStep;
         $this->addressingPage = $addressingPage;
@@ -280,11 +290,89 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @When I go back to store
+     */
+    public function iGoBackToStore()
+    {
+        $this->addressingPage->backToStore();
+    }
+
+    /**
      * @When I complete the shipping step
      */
     public function iCompleteTheShippingStep()
     {
         $this->shippingPage->nextStep();
+    }
+
+    /**
+     * @When I decide to change my address
+     */
+    public function iDecideToChangeMyAddress()
+    {
+        $this->shippingPage->changeAddress();
+    }
+
+    /**
+     * @When I decide to change order shipping method
+     */
+    public function iDecideToChangeMyShippingMethod()
+    {
+        $this->paymentPage->changeShippingMethod();
+    }
+
+    /**
+     * @When I go to the addressing step
+     */
+    public function iGoToTheAddressingStep()
+    {
+        if ($this->shippingPage->isOpen()) {
+            $this->shippingPage->changeAddressByStepLabel();
+
+            return;
+        }
+
+        if ($this->paymentPage->isOpen()) {
+            $this->paymentPage->changeAddressByStepLabel();
+
+            return;
+        }
+
+        if ($this->summaryPage->isOpen()) {
+            $this->summaryPage->changeAddress();
+
+            return;
+        }
+
+        throw new UnexpectedPageException('It is impossible to go to addressing step from current page.');
+    }
+
+    /**
+     * @When I go to the shipping step
+     */
+    public function iGoToTheShippingStep()
+    {
+        if ($this->paymentPage->isOpen()) {
+            $this->paymentPage->changeShippingMethodByStepLabel();
+
+            return;
+        }
+
+        if ($this->summaryPage->isOpen()) {
+            $this->summaryPage->changeShippingMethod();
+
+            return;
+        }
+
+        throw new UnexpectedPageException('It is impossible to go to shipping step from current page.');
+    }
+
+    /**
+     * @When I go to the payment step
+     */
+    public function iGoToThePaymentStep()
+    {
+        $this->summaryPage->changePaymentMethod();
     }
 
     /**
@@ -709,6 +797,89 @@ final class CheckoutContext implements Context
         Assert::true(
             $this->summaryPage->hasPaymentMethod($paymentMethod),
             sprintf('I should see %s payment method, but i do not.', $paymentMethod->getName())
+        );
+    }
+
+    /**
+     * @Then I should be redirected to the homepage
+     */
+    public function iShouldBeRedirectedToTheHomepage()
+    {
+        Assert::true(
+            $this->homePage->isOpen(),
+            'Shop homepage should be opened, but it is not.'
+        );
+    }
+
+    /**
+     * @Then I should be redirected to the addressing step
+     */
+    public function iShouldBeRedirectedToTheAddressingStep()
+    {
+        Assert::true(
+            $this->addressingPage->isOpen(),
+            'Checkout addressing step should be opened, but it is not.'
+        );
+    }
+
+    /**
+     * @Given I should be able to go to the shipping step again
+     */
+    public function iShouldBeAbleToGoToTheShippingStepAgain()
+    {
+        $this->addressingPage->nextStep();
+
+        Assert::true(
+            $this->shippingPage->isOpen(),
+            'Checkout shipping step should be opened, but it is not.'
+        );
+    }
+
+    /**
+     * @Then I should be redirected to the shipping step
+     */
+    public function iShouldBeRedirectedToTheShippingStep()
+    {
+        Assert::true(
+            $this->shippingPage->isOpen(),
+            'Checkout shipping step should be opened, but it is not.'
+        );
+    }
+
+    /**
+     * @Given I should be able to go to the payment step again
+     */
+    public function iShouldBeAbleToGoToThePaymentStepAgain()
+    {
+        $this->shippingPage->nextStep();
+
+        Assert::true(
+            $this->paymentPage->isOpen(),
+            'Checkout payment step should be opened, but it is not.'
+        );
+    }
+
+    /**
+     * @Then I should be redirected to the payment step
+     */
+    public function iShouldBeRedirectedToThePaymentStep()
+    {
+        Assert::true(
+            $this->paymentPage->isOpen(),
+            'Checkout payment step should be opened, but it is not.'
+        );
+    }
+
+    /**
+     * @Given I should be able to go to the summary page again
+     */
+    public function iShouldBeAbleToGoToTheSummaryPageAgain()
+    {
+        $this->paymentPage->nextStep();
+
+        Assert::true(
+            $this->summaryPage->isOpen(),
+            'Checkout summary page should be opened, but it is not.'
         );
     }
 

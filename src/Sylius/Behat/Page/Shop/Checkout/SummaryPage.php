@@ -189,24 +189,42 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
         return false !== strpos($this->getElement('shipping_total')->getText(), $price);
     }
 
+    public function changeAddress()
+    {
+        $this->getElement('addressing_step_label')->click();
+    }
+
+    public function changeShippingMethod()
+    {
+        $this->getElement('shipping_step_label')->click();
+    }
+
+    public function changePaymentMethod()
+    {
+        $this->getElement('payment_step_label')->click();
+    }
+
     /**
      * {@inheritdoc}
      */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
+            'addressing_step_label' => '.steps a:contains("Addressing")',
             'billing_address' => '#addresses div:contains("Billing address") address',
             'extra_notes' =>'#sylius_checkout_summary_notes',
-            'shipping_address' => '#addresses div:contains("Shipping address") address',
             'items_table' => '#items table',
-            'shipping_method' => '#sylius-checkout-summary-shipping-method',
-            'payment_method' => '#sylius-checkout-summary-payment-method',
-            'product_row' => 'tbody tr:contains("%name%")',
             'order_total' => 'td:contains("Total")',
-            'promotion_total' => '#promotion-total',
+            'payment_method' => '#sylius-checkout-summary-payment-method',
+            'payment_step_label' => '.steps a:contains("Payment")',
+            'product_row' => 'tbody tr:contains("%name%")',
             'promotion_discounts' => '#promotion-discounts',
-            'tax_total' => '#tax-total',
+            'promotion_total' => '#promotion-total',
+            'shipping_address' => '#addresses div:contains("Shipping address") address',
+            'shipping_method' => '#sylius-checkout-summary-shipping-method',
+            'shipping_step_label' => '.steps a:contains("Shipping")',
             'shipping_total' => '#shipping-total',
+            'tax_total' => '#tax-total',
         ]);
     }
 

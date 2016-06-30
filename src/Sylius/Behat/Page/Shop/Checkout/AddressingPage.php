@@ -156,6 +156,11 @@ class AddressingPage extends SymfonyPage implements AddressingPageInterface
         $this->getDocument()->pressButton('Next');
     }
 
+    public function backToStore()
+    {
+        $this->getDocument()->clickLink('Back to store');
+    }
+
     /**
      * {@inheritdoc}
      */

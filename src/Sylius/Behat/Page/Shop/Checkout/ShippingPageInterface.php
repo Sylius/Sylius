@@ -36,4 +36,8 @@ interface ShippingPageInterface extends SymfonyPageInterface
     public function hasNoShippingMethodsMessage();
 
     public function nextStep();
+
+    public function changeAddress();
+
+    public function changeAddressByStepLabel();
 }
