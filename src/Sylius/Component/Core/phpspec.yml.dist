@@ -3,3 +3,6 @@ suites:
         namespace: Sylius\Component\Core
         psr4_prefix: Sylius\Component\Core
         src_path: .
+
+extensions:
+    - Pamil\PhpSpecGeneratorExtension\Extension

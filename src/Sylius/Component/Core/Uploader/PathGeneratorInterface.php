@@ -11,15 +11,15 @@
 
 namespace Sylius\Component\Core\Uploader;
 
-use Sylius\Component\Core\Model\ImageInterface;
-
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-interface ImageUploaderInterface
+interface PathGeneratorInterface
 {
     /**
-     * @param ImageInterface $image
+     * @param \SplFileInfo $file
+     *
+     * @return \Generator
      */
-    public function upload(ImageInterface $image);
+    public function generate(\SplFileInfo $file);
 }

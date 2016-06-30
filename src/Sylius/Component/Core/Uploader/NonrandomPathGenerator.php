@@ -11,15 +11,18 @@
 
 namespace Sylius\Component\Core\Uploader;
 
-use Sylius\Component\Core\Model\ImageInterface;
-
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-interface ImageUploaderInterface
+final class NonrandomPathGenerator implements PathGeneratorInterface
 {
     /**
-     * @param ImageInterface $image
+     * {@inheritdoc}
      */
-    public function upload(ImageInterface $image);
+    public function generate(\SplFileInfo $file)
+    {
+        for ($i = 0; true; ++$i) {
+            yield md5(sprintf('%s.%s.%d', $file->getFilename(), $file->getMTime(), $i)) . '.' . $file->getExtension();
+        }
+    }
 }

@@ -55,7 +55,9 @@
         "zendframework/zend-stdlib": "^2.0|^3.0"
     },
     "require-dev": {
+        "pamil/phpspec-generator-extension": "^0.1",
         "phpspec/phpspec": "^2.4",
+        "phpspec/prophecy": "^1.6",
         "symfony/property-access": "^2.8"
     },
     "config": {

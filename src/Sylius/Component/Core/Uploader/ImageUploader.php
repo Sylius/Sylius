@@ -14,19 +14,29 @@ namespace Sylius\Component\Core\Uploader;
 use Gaufrette\Filesystem;
 use Sylius\Component\Core\Model\ImageInterface;
 
-class ImageUploader implements ImageUploaderInterface
+/**
+ * @author Kamil Kokot <kamil.kokot@lakion.com>
+ */
+final class ImageUploader implements ImageUploaderInterface
 {
     /**
      * @var Filesystem
      */
-    protected $filesystem;
+    private $filesystem;
+
+    /**
+     * @var PathProviderInterface
+     */
+    private $pathProvider;
 
     /**
      * @param Filesystem $filesystem
+     * @param PathProviderInterface $pathProvider
      */
-    public function __construct(Filesystem $filesystem)
+    public function __construct(Filesystem $filesystem, PathProviderInterface $pathProvider)
     {
         $this->filesystem = $filesystem;
+        $this->pathProvider = $pathProvider;
     }
 
     /**
@@ -38,43 +48,23 @@ class ImageUploader implements ImageUploaderInterface
             return;
         }
 
-        if (null !== $image->getPath()) {
-            $this->remove($image->getPath());
+        $newFilePath = $this->pathProvider->provide($this->filesystem, $image->getFile());
+
+        $openedFile = $image->getFile()->openFile();
+        $this->filesystem->write($newFilePath, $openedFile->fread($openedFile->getSize()));
+
+        $this->deleteOverwrittenImageIfExists($image);
+        $image->setPath($newFilePath);
+    }
+
+    /**
+     * @param ImageInterface $image
+     */
+    private function deleteOverwrittenImageIfExists(ImageInterface $image)
+    {
+        $oldFilePath = $image->getPath();
+        if (null !== $oldFilePath) {
+            $this->filesystem->delete($oldFilePath);
         }
-
-        do {
-            $hash = md5(uniqid(mt_rand(), true));
-            $path = $this->expandPath($hash.'.'.$image->getFile()->guessExtension());
-        } while ($this->filesystem->has($path));
-
-        $image->setPath($path);
-
-        $this->filesystem->write(
-            $image->getPath(),
-            file_get_contents($image->getFile()->getPathname())
-        );
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function remove($path)
-    {
-        return $this->filesystem->delete($path);
-    }
-
-    /**
-     * @param string $path
-     *
-     * @return string
-     */
-    private function expandPath($path)
-    {
-        return sprintf(
-            '%s/%s/%s',
-            substr($path, 0, 2),
-            substr($path, 2, 2),
-            substr($path, 4)
-        );
     }
 }
