@@ -10,21 +10,21 @@ Feature: Selecting default tax calculation strategy for a channel
     @ui
     Scenario: Adding a new channel with implicitly selected default tax calculation strategy
         Given I want to create a new channel
-        When I specify its code as MOBILE
+        When I specify its code as "MOBILE"
         And I name it "Mobile store"
         And I add it
         Then I should be notified that it has been successfully created
-        And "Order items based" should be default tax calculation strategy for the "Mobile store" channel
+        And the default tax calculation strategy for the "Mobile store" channel should be "Order items based"
 
     @ui
     Scenario: Adding a new channel with default tax calculation strategy
         Given I want to create a new channel
-        When I specify its code as MOBILE
+        When I specify its code as "MOBILE"
         And I select the "Order item units based" as default tax calculation strategy
         And I name it "Mobile store"
         And I add it
         Then I should be notified that it has been successfully created
-        And "Order item units based" should be default tax calculation strategy for the "Mobile store" channel
+        And the default tax calculation strategy for the "Mobile store" channel should be "Order item units based"
 
     @ui
     Scenario: Changing default tax calculation strategy of existing channel
@@ -33,4 +33,4 @@ Feature: Selecting default tax calculation strategy for a channel
         When I select the "Order item units based" as default tax calculation strategy
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And "Order item units based" should be default tax calculation strategy for the "Web store" channel
+        And the default tax calculation strategy for the "Web store" channel should be "Order item units based"

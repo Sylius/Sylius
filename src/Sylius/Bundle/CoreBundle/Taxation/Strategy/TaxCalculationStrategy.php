@@ -23,27 +23,10 @@ use Sylius\Component\Core\Taxation\Strategy\AbstractTaxCalculationStrategy;
 class TaxCalculationStrategy extends AbstractTaxCalculationStrategy
 {
     /**
-     * @var SettingsInterface
-     */
-    protected $settings;
-
-    /**
-     * @param string $type
-     * @param OrderTaxesApplicatorInterface[] $applicators
-     * @param SettingsInterface $settings
-     */
-    public function __construct($type, array $applicators, SettingsInterface $settings)
-    {
-        parent::__construct($type, $applicators);
-
-        $this->settings = $settings;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function supports(OrderInterface $order, ZoneInterface $zone)
     {
-        return $this->settings->get('default_tax_calculation_strategy') === $this->type;
+        return $order->getChannel()->getDefaultTaxCalculationStrategy() === $this->type;
     }
 }

@@ -14,6 +14,7 @@ namespace Sylius\Bundle\TaxationBundle\Behat;
 use Behat\Gherkin\Node\TableNode;
 use Sylius\Bundle\ResourceBundle\Behat\DefaultContext;
 use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 
 class TaxationContext extends DefaultContext
 {
@@ -54,11 +55,10 @@ class TaxationContext extends DefaultContext
      */
     public function theDefaultTaxZoneIs($zone)
     {
-        /* @var $settingsManager SettingsManagerInterface */
-        $settingsManager = $this->getService('sylius.settings.manager');
-        $settings = $settingsManager->load('sylius_taxation');
-        $settings->set('default_tax_zone', $this->findOneByName('zone', $zone));
+        /** @var ChannelInterface $channel */
+        $channel = $this->getService('sylius.context.channel')->getChannel();
+        $channel->setDefaultTaxZone($this->findOneByName('zone', $zone));
 
-        $settingsManager->save($settings);
+        $this->getService('sylius.manager.channel')->flush();
     }
 }

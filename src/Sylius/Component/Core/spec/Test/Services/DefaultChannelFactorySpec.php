@@ -45,6 +45,7 @@ class DefaultChannelFactorySpec extends ObjectBehavior
         $channelFactory->createNamed('Default')->willReturn($channel);
 
         $channel->setCode('DEFAULT')->shouldBeCalled();
+        $channel->setDefaultTaxCalculationStrategy('order_items_based')->shouldBeCalled();
         $channelRepository->add($channel)->shouldBeCalled();
 
         $this->create()->shouldReturn(['channel' => $channel]);

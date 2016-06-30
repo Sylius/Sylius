@@ -467,9 +467,9 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
-     * @Then :taxZone should be default tax zone for the :channel channel
+     * @Then the default tax zone for the :channel channel should be :taxZone
      */
-    public function theShouldBeDefaultTaxZoneForTheChannel($taxZone, ChannelInterface $channel)
+    public function theDefaultTaxZoneForTheChannelShouldBe(ChannelInterface $channel, $taxZone)
     {
         $this->updatePage->open(['id' => $channel->getId()]);
 
@@ -480,9 +480,9 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
-     * @Then :taxCalculationStrategy should be default tax calculation strategy for the :channel channel
+     * @Then the default tax calculation strategy for the :channel channel should be :taxCalculationStrategy
      */
-    public function shouldBeDefaultTaxCalculationStrategyForTheChannel($taxCalculationStrategy, ChannelInterface $channel)
+    public function rheDefaultTaxCalculationStrategyForTheChannelShouldBe(ChannelInterface $channel, $taxCalculationStrategy)
     {
         $this->updatePage->open(['id' => $channel->getId()]);
 

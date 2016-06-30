@@ -45,10 +45,6 @@ class LoadZonesData extends DataFixture
         $manager->persist($this->createZone('RoW', 'Rest of World', ZoneInterface::TYPE_COUNTRY, $restOfWorldCountries));
 
         $manager->flush();
-
-        $settingsManager = $this->get('sylius.settings.manager');
-        $settings = $settingsManager->load('sylius_taxation');
-        $settingsManager->save($settings);
     }
 
     /**

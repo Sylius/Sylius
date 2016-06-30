@@ -74,6 +74,8 @@ final class ChannelExampleFactory implements ExampleFactoryInterface
                     return $this->faker->boolean(90);
                 })
                 ->setAllowedTypes('enabled', 'bool')
+                ->setDefault('default_tax_calculation_strategy', 'order_items_based')
+                ->setAllowedTypes('default_tax_calculation_strategy', 'string')
                 ->setDefault('locales', LazyOption::all($localeRepository))
                 ->setAllowedTypes('locales', 'array')
                 ->setNormalizer('locales', LazyOption::findBy($localeRepository, 'code'))
@@ -102,6 +104,7 @@ final class ChannelExampleFactory implements ExampleFactoryInterface
         $channel->setHostname($options['hostname']);
         $channel->setEnabled($options['enabled']);
         $channel->setColor($options['color']);
+        $channel->setDefaultTaxCalculationStrategy($options['default_tax_calculation_strategy']);
 
         foreach ($options['locales'] as $locale) {
             $channel->addLocale($locale);

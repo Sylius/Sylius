@@ -461,13 +461,6 @@ class BackendMenuBuilder extends MenuBuilder
             ])->setLabel($this->translate(sprintf('sylius.backend.menu.%s.currencies', $section)));
         }
 
-        if ($this->rbacAuthorizationChecker->isGranted('sylius.settings.sylius_taxation')) {
-            $child->addChild('taxation_settings', [
-                'route' => 'sylius_backend_taxation_settings',
-                'labelAttributes' => ['icon' => 'glyphicon glyphicon-cog'],
-            ])->setLabel($this->translate(sprintf('sylius.backend.menu.%s.taxation_settings', $section)));
-        }
-
         if ($this->rbacAuthorizationChecker->isGranted('sylius.tax_category.index')) {
             $child->addChild('tax_categories', [
                 'route' => 'sylius_backend_tax_category_index',

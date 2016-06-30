@@ -75,6 +75,7 @@ class CoreContext extends DefaultContext
         $channel->setDefaultCurrency($currency);
         $channel->addLocale($locale);
         $channel->setDefaultLocale($locale);
+        $channel->setDefaultTaxCalculationStrategy('order_items_based');
         $manager->persist($channel);
 
         $manager->flush();
