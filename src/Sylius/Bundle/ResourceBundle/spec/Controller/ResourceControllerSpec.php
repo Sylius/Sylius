@@ -41,6 +41,7 @@ use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
@@ -1346,6 +1347,51 @@ class ResourceControllerSpec extends ObjectBehavior
         ;
     }
 
+    function it_does_not_apply_state_machine_transition_on_resource_if_not_applicable_and_returns_400_bad_request(
+        MetadataInterface $metadata,
+        RequestConfigurationFactoryInterface $requestConfigurationFactory,
+        RequestConfiguration $configuration,
+        AuthorizationCheckerInterface $authorizationChecker,
+        RepositoryInterface $repository,
+        ObjectManager $objectManager,
+        StateMachineInterface $stateMachine,
+        SingleResourceProviderInterface $singleResourceProvider,
+        ResourceInterface $resource,
+        FlashHelperInterface $flashHelper,
+        EventDispatcherInterface $eventDispatcher,
+        ResourceControllerEvent $event,
+        Request $request
+    ) {
+        $metadata->getApplicationName()->willReturn('sylius');
+        $metadata->getName()->willReturn('product');
+
+        $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
+        $configuration->hasPermission()->willReturn(true);
+        $configuration->getPermission(ResourceActions::UPDATE)->willReturn('sylius.product.update');
+
+        $authorizationChecker->isGranted($configuration, 'sylius.product.update')->willReturn(true);
+        $singleResourceProvider->get($configuration, $repository)->willReturn($resource);
+
+        $configuration->isHtmlRequest()->willReturn(true);
+
+        $eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($event);
+        $event->isStopped()->willReturn(false);
+
+        $stateMachine->can($configuration, $resource)->willReturn(false);
+
+        $stateMachine->apply($configuration, $resource)->shouldNotBeCalled();
+        $objectManager->flush()->shouldNotBeCalled();
+
+        $eventDispatcher->dispatchPostEvent(Argument::any())->shouldNotBeCalled();
+        $flashHelper->addSuccessFlash(Argument::any())->shouldNotBeCalled();
+        $flashHelper->addFlashFromEvent(Argument::any())->shouldNotBeCalled();
+
+        $this
+            ->shouldThrow(new BadRequestHttpException())
+            ->during('applyStateMachineTransitionAction', [$request])
+        ;
+    }
+
     function it_applies_state_machine_transition_to_resource_and_redirects_for_html_request(
         MetadataInterface $metadata,
         RequestConfigurationFactoryInterface $requestConfigurationFactory,
@@ -1378,6 +1424,7 @@ class ResourceControllerSpec extends ObjectBehavior
         $eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($event);
         $event->isStopped()->willReturn(false);
 
+        $stateMachine->can($configuration, $resource)->willReturn(true);
         $stateMachine->apply($configuration, $resource)->shouldBeCalled();
         $manager->flush()->shouldBeCalled();
 
@@ -1464,6 +1511,7 @@ class ResourceControllerSpec extends ObjectBehavior
         $eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource)->willReturn($event);
         $event->isStopped()->willReturn(false);
 
+        $stateMachine->can($configuration, $resource)->willReturn(true);
         $stateMachine->apply($configuration, $resource)->shouldBeCalled();
         $manager->flush()->shouldBeCalled();
 

@@ -21,6 +21,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
@@ -396,6 +397,10 @@ class ResourceController extends Controller
             $this->flashHelper->addFlashFromEvent($configuration, $event);
 
             return $this->redirectHandler->redirectToResource($configuration, $resource);
+        }
+
+        if (!$this->stateMachine->can($configuration, $resource)) {
+            throw new BadRequestHttpException();
         }
 
         $this->stateMachine->apply($configuration, $resource);
