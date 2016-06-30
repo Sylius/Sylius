@@ -110,11 +110,14 @@ To group steps into the wizard, we will implement *ProcessScenarioInterface*:
 
     use Sylius\Bundle\FlowBundle\Process\Builder\ProcessBuilderInterface;
     use Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface;
-    use Symfony\Component\DependencyInjection\ContainerAware;
+    use Symfony\Component\DependencyInjection\ContainerAwareTrait;
     use Acme\DemoBundle\Process\Step;
 
-    class SyliusScenario extends ContainerAware implements ProcessScenarioInterface
+    class SyliusScenario implements ProcessScenarioInterface
     {
+        
+        use ContainerAwareTrait;
+    
         public function build(ProcessBuilderInterface $builder)
         {
             $builder
@@ -135,12 +138,30 @@ In order for this to work, we need to register `SyliusScenario` and tag it as ``
 
 .. code-block:: xml
 
-    <service id="sylius.scenario.flow" class="Acme\DemoBundle\Process\SyliusScenario">
-        <call method="setContainer">
-            <argument type="service" id="service_container" />
-        </call>
-        <tag name="sylius.process.scenario" alias="acme_flow" />
-    </service>
+    <services>
+        <service id="sylius.scenario.flow" class="Acme\DemoBundle\Process\SyliusScenario">
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+            <tag name="sylius.process.scenario" alias="acme_flow" />
+        </service>
+    </services>
+
+
+or 
+
+
+.. code-block:: yaml
+
+    services:
+        sylius.scenario.flow:
+            class: Acme\DemoBundle\Process\SyliusScenario
+            calls:
+                - [setContainer, ['@service_container']]
+            tags:
+                - { name: sylius.process.scenario, alias: acme_flow }
+                
+
 
 The configured alias will be used later in the route parameters to identify the scenario as you can have more then one.
 
