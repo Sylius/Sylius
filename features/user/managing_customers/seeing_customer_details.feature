@@ -7,8 +7,6 @@ Feature: Seeing customer's details
     Background:
         Given I am logged in as an administrator
         And the store has customer "f.baggins@shire.me" with name "Frodo Baggins" since "2011-01-10 21:00"
-        And he has shipping address as "Hobbiton", "Bag End", "1", "New Zealand" for "Frodo Baggins"
-        And he has billing address as "Rivendell", "The Last Homely House", "7", "New Zealand" for "Bilbo Baggins"
 
     @ui
     Scenario: Seeing customer's basic information
@@ -19,6 +17,8 @@ Feature: Seeing customer's details
 
     @ui
     Scenario: Seeing customer's addresses
+        Given his shipping address is "Hobbiton", "Bag End", "1", "New Zealand" for "Frodo Baggins"
+        And his billing address is "Rivendell", "The Last Homely House", "7", "New Zealand" for "Bilbo Baggins"
         When I view details of the customer "f.baggins@shire.me"
         Then his shipping address should be "Frodo Baggins, Bag End, Hobbiton, NEW ZEALAND 1"
         And his billing address should be "Bilbo Baggins, The Last Homely House, Rivendell, NEW ZEALAND 7"

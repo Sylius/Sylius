@@ -145,23 +145,23 @@ final class CustomerContext implements Context
     }
 
     /**
-     * @Given /^(he) has shipping (address as "(?:[^"]+)", "(?:[^"]+)", "(?:[^"]+)", "(?:[^"]+)" for "(?:[^"]+)")$/
+     * @Given /^(his) shipping (address is "(?:[^"]+)", "(?:[^"]+)", "(?:[^"]+)", "(?:[^"]+)" for "(?:[^"]+)")$/
      */
     public function heHasShippingAddress(CustomerInterface $customer, AddressInterface $address)
     {
         $customer->setShippingAddress($address);
 
-        $this->customerManager->flush($customer);
+        $this->customerManager->flush();
     }
 
     /**
-     * @Given /^(he) has billing (address as "(?:[^"]+)", "(?:[^"]+)", "(?:[^"]+)", "(?:[^"]+)" for "(?:[^"]+)")$/
+     * @Given /^(his) billing (address is "(?:[^"]+)", "(?:[^"]+)", "(?:[^"]+)", "(?:[^"]+)" for "(?:[^"]+)")$/
      */
     public function heHasBillingAddress(CustomerInterface $customer, AddressInterface $address)
     {
         $customer->setBillingAddress($address);
 
-        $this->customerManager->flush($customer);
+        $this->customerManager->flush();
     }
 
     /**
