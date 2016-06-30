@@ -68,7 +68,7 @@ class OrderTaxesProcessor implements OrderTaxesProcessorInterface
             return;
         }
 
-        $zone = $this->getTaxZone($order->getShippingAddress());
+        $zone = $this->getTaxZone($order);
 
         if (null === $zone) {
             return;
@@ -86,18 +86,20 @@ class OrderTaxesProcessor implements OrderTaxesProcessorInterface
     }
 
     /**
-     * @param AddressInterface|null $shippingAddress
+     * @param OrderInterface $order
      *
      * @return ZoneInterface|null
      */
-    private function getTaxZone(AddressInterface $shippingAddress = null)
+    private function getTaxZone(OrderInterface $order)
     {
+        $shippingAddress = $order->getShippingAddress();
         $zone = null;
+
         if (null !== $shippingAddress) {
             $zone = $this->zoneMatcher->match($shippingAddress);
         }
 
-        return $zone ?: $this->defaultTaxZoneProvider->getZone();
+        return $zone ?: $this->defaultTaxZoneProvider->getZone($order);
     }
 
     /**

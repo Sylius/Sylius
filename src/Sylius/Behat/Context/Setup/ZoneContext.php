@@ -14,12 +14,12 @@ namespace Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\AddressingBundle\Factory\ZoneFactoryInterface;
-use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Sylius\Component\Addressing\Repository\ZoneRepositoryInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
@@ -50,11 +50,6 @@ final class ZoneContext implements Context
     private $zoneRepository;
 
     /**
-     * @var SettingsManagerInterface
-     */
-    private $settingsManager;
-
-    /**
      * @var ObjectManager
      */
     private $objectManager;
@@ -72,7 +67,6 @@ final class ZoneContext implements Context
     /**
      * @param SharedStorageInterface $sharedStorage
      * @param ZoneRepositoryInterface $zoneRepository
-     * @param SettingsManagerInterface $settingsManager
      * @param ObjectManager $objectManager
      * @param ZoneFactoryInterface $zoneFactory
      * @param FactoryInterface $zoneMemberFactory
@@ -80,14 +74,12 @@ final class ZoneContext implements Context
     public function __construct(
         SharedStorageInterface $sharedStorage,
         ZoneRepositoryInterface $zoneRepository,
-        SettingsManagerInterface $settingsManager,
         ObjectManager $objectManager,
         ZoneFactoryInterface $zoneFactory,
         FactoryInterface $zoneMemberFactory
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->zoneRepository = $zoneRepository;
-        $this->settingsManager = $settingsManager;
         $this->objectManager = $objectManager;
         $this->zoneFactory = $zoneFactory;
         $this->zoneMemberFactory = $zoneMemberFactory;
@@ -130,9 +122,11 @@ final class ZoneContext implements Context
      */
     public function defaultTaxZoneIs(ZoneInterface $zone)
     {
-        $settings = $this->settingsManager->load('sylius_taxation');
-        $settings->set('default_tax_zone', $zone);
-        $this->settingsManager->save($settings);
+        /** @var ChannelInterface $channel */
+        $channel = $this->sharedStorage->get('channel');
+        $channel->setDefaultTaxZone($zone);
+
+        $this->objectManager->flush();
     }
 
     /**

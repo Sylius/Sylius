@@ -132,7 +132,7 @@ class Channel extends BaseChannel implements ChannelInterface
     }
 
     /**
-     * @return ZoneInterface
+     * {@inheritdoc}
      */
     public function getDefaultTaxZone()
     {
@@ -140,9 +140,9 @@ class Channel extends BaseChannel implements ChannelInterface
     }
 
     /**
-     * @param ZoneInterface $defaultTaxZone
+     * {@inheritdoc}
      */
-    public function setDefaultTaxZone($defaultTaxZone)
+    public function setDefaultTaxZone(ZoneInterface $defaultTaxZone)
     {
         $this->defaultTaxZone = $defaultTaxZone;
     }

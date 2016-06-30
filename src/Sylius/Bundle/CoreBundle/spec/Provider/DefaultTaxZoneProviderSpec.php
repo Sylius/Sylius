@@ -14,6 +14,8 @@ namespace spec\Sylius\Bundle\CoreBundle\Provider;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\SettingsBundle\Model\SettingsInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Provider\ZoneProviderInterface;
 
 /**
@@ -21,11 +23,6 @@ use Sylius\Component\Core\Provider\ZoneProviderInterface;
  */
 class DefaultTaxZoneProviderSpec extends ObjectBehavior
 {
-    function let(SettingsInterface $settings)
-    {
-        $this->beConstructedWith($settings);
-    }
-
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\Provider\DefaultTaxZoneProvider');
@@ -36,17 +33,14 @@ class DefaultTaxZoneProviderSpec extends ObjectBehavior
         $this->shouldImplement(ZoneProviderInterface::class);
     }
 
-    function it_provides_default_tax_zone_from_settings($settings, ZoneInterface $defaultTaxZone)
-    {
-        $settings->get('default_tax_zone')->willReturn($defaultTaxZone);
+    function it_provides_default_tax_zone_from_order_channel(
+        ChannelInterface $channel,
+        OrderInterface $order,
+        ZoneInterface $defaultTaxZone
+    ) {
+        $order->getChannel()->willReturn($channel);
+        $channel->getDefaultTaxZone()->willReturn($defaultTaxZone);
 
-        $this->getZone()->shouldReturn($defaultTaxZone);
-    }
-
-    function it_returns_null_if_there_is_no_default_tax_zone_configured($settings)
-    {
-        $settings->get('default_tax_zone')->willReturn(null);
-
-        $this->getZone()->shouldReturn(null);
+        $this->getZone($order)->shouldReturn($defaultTaxZone);
     }
 }

@@ -221,17 +221,7 @@
             <tag name="sylius.process.step" alias="sylius_checkout_finalize" />
         </service>
 
-        <service id="sylius.provider.default_zone_provider" class="%sylius.provider.default_zone_provider.class%">
-            <argument type="service">
-                <service
-                        factory-service="sylius.settings.manager"
-                        factory-method="load"
-                        class="Sylius\Bundle\SettingsBundle\Model\Settings"
-                        >
-                    <argument>sylius_taxation</argument>
-                </service>
-            </argument>
-        </service>
+        <service id="sylius.provider.default_zone_provider" class="%sylius.provider.default_zone_provider.class%" />
         <service id="sylius.integer_distributor" class="%sylius.integer_distributor.class%" />
         <service id="sylius.proportional_integer_distributor" class="%sylius.proportional_integer_distributor.class%" />
 

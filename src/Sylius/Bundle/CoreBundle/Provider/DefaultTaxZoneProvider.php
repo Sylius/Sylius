@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Provider;
 
-use Sylius\Bundle\SettingsBundle\Model\SettingsInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Provider\ZoneProviderInterface;
 
 /**
@@ -20,23 +20,10 @@ use Sylius\Component\Core\Provider\ZoneProviderInterface;
 class DefaultTaxZoneProvider implements ZoneProviderInterface
 {
     /**
-     * @var SettingsInterface
-     */
-    private $settings;
-
-    /**
-     * @param SettingsInterface $settings
-     */
-    public function __construct(SettingsInterface $settings)
-    {
-        $this->settings = $settings;
-    }
-
-    /**
      * {@inheritdoc}
      */
-    public function getZone()
+    public function getZone(OrderInterface $order)
     {
-        return $this->settings->get('default_tax_zone');
+        return $order->getChannel()->getDefaultTaxZone();
     }
 }
