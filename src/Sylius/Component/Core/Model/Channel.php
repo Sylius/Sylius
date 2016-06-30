@@ -14,6 +14,7 @@ namespace Sylius\Component\Core\Model;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
+use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Model\Channel as BaseChannel;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
@@ -35,6 +36,11 @@ class Channel extends BaseChannel implements ChannelInterface
      * @var LocaleInterface
      */
     protected $defaultLocale;
+
+    /**
+     * @var ZoneInterface
+     */
+    protected $defaultTaxZone;
 
     /**
      * @var CurrencyInterface[]|Collection
@@ -123,6 +129,22 @@ class Channel extends BaseChannel implements ChannelInterface
     public function setDefaultLocale(LocaleInterface $defaultLocale)
     {
         $this->defaultLocale = $defaultLocale;
+    }
+
+    /**
+     * @return ZoneInterface
+     */
+    public function getDefaultTaxZone()
+    {
+        return $this->defaultTaxZone;
+    }
+
+    /**
+     * @param ZoneInterface $defaultTaxZone
+     */
+    public function setDefaultTaxZone($defaultTaxZone)
+    {
+        $this->defaultTaxZone = $defaultTaxZone;
     }
 
     /**

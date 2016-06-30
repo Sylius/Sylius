@@ -45,6 +45,10 @@ class ChannelType extends BaseChannelType
             ->add('defaultCurrency', 'sylius_currency_choice', [
                 'label' => 'sylius.form.channel.currency_default',
             ])
+            ->add('default_tax_zone', 'sylius_zone_choice', [
+                'required' => false,
+                'label' => 'sylius.form.settings.taxation.default_tax_zone',
+            ])
             ->add('themeName', 'sylius_theme_name_choice', [
                 'label' => 'sylius.form.channel.theme',
                 'required' => false,
