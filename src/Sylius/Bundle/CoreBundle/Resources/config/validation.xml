@@ -24,6 +24,12 @@
         </property>
     </class>
 
+    <class name="Sylius\Component\Core\Model\Channel">
+        <property name="defaultTaxCalculationStrategy">
+            <constraint name="NotBlank" />
+        </property>
+    </class>
+
     <class name="Sylius\Component\Core\Model\Order">
         <property name="shippingAddress">
             <constraint name="Valid" />

@@ -444,6 +444,16 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
+     * @When I select the :taxCalculationStrategy as default tax calculation strategy
+     */
+    public function iSelectDefaultTaxCalculationStrategy($taxCalculationStrategy)
+    {
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+
+        $currentPage->chooseDefaultTaxCalculationStrategy($taxCalculationStrategy);
+    }
+
+    /**
      * @Then the :paymentMethodName payment method should be available for the :channel channel
      */
     public function thePaymentMethodShouldBeAvailableForTheChannel($paymentMethodName, ChannelInterface $channel)
@@ -452,7 +462,7 @@ final class ManagingChannelsContext implements Context
 
         Assert::true(
             $this->updatePage->isPaymentMethodChosen($paymentMethodName),
-            sprintf('Payment method %s should be selected but it is not', $paymentMethodName)
+            sprintf('Payment method %s should be selected, but it is not', $paymentMethodName)
         );
     }
 
@@ -465,7 +475,20 @@ final class ManagingChannelsContext implements Context
 
         Assert::true(
             $this->updatePage->isDefaultTaxZoneChosen($taxZone),
-            sprintf('Default tax zone %s should be selected but it is not', $taxZone)
+            sprintf('Default tax zone %s should be selected, but it is not', $taxZone)
+        );
+    }
+
+    /**
+     * @Then :taxCalculationStrategy should be default tax calculation strategy for the :channel channel
+     */
+    public function shouldBeDefaultTaxCalculationStrategyForTheChannel($taxCalculationStrategy, ChannelInterface $channel)
+    {
+        $this->updatePage->open(['id' => $channel->getId()]);
+
+        Assert::true(
+            $this->updatePage->isDefaultTaxCalculationStrategyChosen($taxCalculationStrategy),
+            sprintf('Default tax calculation strategy %s should be selected, but it is not', $taxCalculationStrategy)
         );
     }
 

@@ -85,6 +85,11 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function chooseDefaultTaxZone($taxZone);
 
     /**
+     * @param string $taxCalculationStrategy
+     */
+    public function chooseDefaultTaxCalculationStrategy($taxCalculationStrategy);
+
+    /**
      * @param string $paymentMethod
      *
      * @return bool
@@ -97,4 +102,11 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
      * @return bool
      */
     public function isDefaultTaxZoneChosen($taxZone);
+
+    /**
+     * @param string $taxCalculationStrategy
+     *
+     * @return bool
+     */
+    public function isDefaultTaxCalculationStrategyChosen($taxCalculationStrategy);
 }

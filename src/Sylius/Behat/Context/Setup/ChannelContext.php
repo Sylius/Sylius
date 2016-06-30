@@ -106,6 +106,7 @@ final class ChannelContext implements Context
     {
         $channel = $this->channelFactory->createNamed($channelIdentifier);
         $channel->setCode($channelIdentifier);
+        $channel->setDefaultTaxCalculationStrategy('Order items based');
 
         $this->channelRepository->add($channel);
         $this->sharedStorage->set('channel', $channel);

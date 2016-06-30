@@ -16,6 +16,7 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Model\Channel as BaseChannel;
+use Sylius\Component\Core\Taxation\Strategy\TaxCalculationStrategyInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
@@ -41,6 +42,11 @@ class Channel extends BaseChannel implements ChannelInterface
      * @var ZoneInterface
      */
     protected $defaultTaxZone;
+
+    /**
+     * @var string
+     */
+    protected $defaultTaxCalculationStrategy;
 
     /**
      * @var CurrencyInterface[]|Collection
@@ -145,6 +151,22 @@ class Channel extends BaseChannel implements ChannelInterface
     public function setDefaultTaxZone(ZoneInterface $defaultTaxZone)
     {
         $this->defaultTaxZone = $defaultTaxZone;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDefaultTaxCalculationStrategy()
+    {
+        return $this->defaultTaxCalculationStrategy;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDefaultTaxCalculationStrategy($taxCalculationStrategy)
+    {
+        $this->defaultTaxCalculationStrategy = $taxCalculationStrategy;
     }
 
     /**
