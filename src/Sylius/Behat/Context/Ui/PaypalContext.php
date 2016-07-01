@@ -15,6 +15,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Shop\Checkout\CanceledPaymentPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\FinalizeStepInterface;
 use Sylius\Behat\Page\External\PaypalExpressCheckoutPageInterface;
+use Sylius\Behat\Page\Shop\Checkout\SummaryPageInterface;
 use Sylius\Behat\Service\Mocker\PaypalApiMocker;
 use Sylius\Behat\Service\Mocker\PaypalApiMockerInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
@@ -54,6 +55,7 @@ final class PaypalContext implements Context
      * @var OrderRepositoryInterface
      */
     private $orderRepository;
+
 
     /**
      * @param SharedStorageInterface $sharedStorage
@@ -106,7 +108,7 @@ final class PaypalContext implements Context
     }
 
     /**
-     * @When I cancel my PayPal payment
+     * @Given I cancel my PayPal payment
      */
     public function iCancelMyPaypalPayment()
     {
