@@ -411,7 +411,7 @@ final class CheckoutContext implements Context
      */
     public function iChangeShippingMethod($shippingMethodName)
     {
-        $this->shippingPage->open();
+        $this->paymentPage->changeShippingMethod();
         $this->shippingPage->selectShippingMethod($shippingMethodName);
         $this->shippingPage->nextStep();
     }
@@ -423,17 +423,6 @@ final class CheckoutContext implements Context
     {
         $this->sharedStorage->set('additional_note', $notes);
         $this->summaryPage->addNotes($notes);
-    }
-
-    /**
-     * @Given /^I proceed logging as "([^"]*)" with "([^"]*)" password$/
-     */
-    public function iProceedLoggingAs($login, $password)
-    {
-        $this->checkoutSecurityStep->open();
-        $this->checkoutSecurityStep->logInAsExistingUser($login, $password);
-
-        $this->checkoutAddressingStep->continueCheckout();
     }
 
     /**
