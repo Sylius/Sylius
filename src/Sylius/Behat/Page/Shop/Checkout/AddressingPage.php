@@ -11,6 +11,7 @@
 
 namespace Sylius\Behat\Page\Shop\Checkout;
 
+use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\SymfonyPage;
@@ -36,6 +37,13 @@ class AddressingPage extends SymfonyPage implements AddressingPageInterface
      */
     public function chooseDifferentBillingAddress()
     {
+        $driver = $this->getDriver();
+        if ($driver instanceof Selenium2Driver) {
+            $this->getElement('different_billing_address_label')->click();
+
+q            return;
+        }
+
         $billingAddressSwitch = $this->getElement('different_billing_address');
         Assert::false(
             $billingAddressSwitch->isChecked(),
@@ -98,6 +106,15 @@ class AddressingPage extends SymfonyPage implements AddressingPageInterface
     /**
      * {@inheritdoc}
      */
+    public function specifyShippingAddressProvince($province)
+    {
+        $this->waitForShippingProvinceSelector();
+        $this->getElement('shipping_country_province')->selectOption($province);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function specifyBillingAddress(AddressInterface $billingAddress)
     {
         $this->getElement('billing_first_name')->setValue($billingAddress->getFirstName());
@@ -106,6 +123,15 @@ class AddressingPage extends SymfonyPage implements AddressingPageInterface
         $this->getElement('billing_country')->selectOption($this->getCountryNameOrDefault($billingAddress->getCountryCode()));
         $this->getElement('billing_city')->setValue($billingAddress->getCity());
         $this->getElement('billing_postcode')->setValue($billingAddress->getPostcode());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function specifyBillingAddressProvince($province)
+    {
+        $this->waitForBillingProvinceSelector();
+        $this->getElement('billing_country_province')->selectOption($province);
     }
 
     /**
@@ -171,14 +197,17 @@ class AddressingPage extends SymfonyPage implements AddressingPageInterface
             'billing_last_name' => '#sylius_shop_checkout_addressing_billingAddress_lastName',
             'billing_street' => '#sylius_shop_checkout_addressing_billingAddress_street',
             'billing_country' => '#sylius_shop_checkout_addressing_billingAddress_countryCode',
+            'billing_country_province' => '[name="sylius_shop_checkout_addressing[billingAddress][provinceCode]"]',
             'billing_city' => '#sylius_shop_checkout_addressing_billingAddress_city',
             'billing_postcode' => '#sylius_shop_checkout_addressing_billingAddress_postcode',
             'customer_email' => '#sylius_shop_checkout_addressing_customer_email',
             'different_billing_address' => '#sylius_shop_checkout_addressing_differentBillingAddress',
+            'different_billing_address_label' => '#sylius_shop_checkout_addressing_differentBillingAddress ~ label',
             'shipping_first_name' => '#sylius_shop_checkout_addressing_shippingAddress_firstName',
             'shipping_last_name' => '#sylius_shop_checkout_addressing_shippingAddress_lastName',
             'shipping_street' => '#sylius_shop_checkout_addressing_shippingAddress_street',
             'shipping_country' => '#sylius_shop_checkout_addressing_shippingAddress_countryCode',
+            'shipping_country_province' => '[name="sylius_shop_checkout_addressing[shippingAddress][provinceCode]"]',
             'shipping_city' => '#sylius_shop_checkout_addressing_shippingAddress_city',
             'shipping_postcode' => '#sylius_shop_checkout_addressing_shippingAddress_postcode',
             'login_password' => 'input[type=\'password\']',
@@ -229,6 +258,20 @@ class AddressingPage extends SymfonyPage implements AddressingPageInterface
     {
         $this->getDocument()->waitFor(5, function () {
             return !$this->hasElement('login_password');
+        });
+    }
+
+    private function waitForShippingProvinceSelector()
+    {
+        return $this->getDocument()->waitFor(5, function () {
+            return $this->hasElement('shipping_country_province');
+        });
+    }
+
+    private function waitForBillingProvinceSelector()
+    {
+        return $this->getDocument()->waitFor(5, function () {
+            return $this->hasElement('billing_country_province');
         });
     }
 }
