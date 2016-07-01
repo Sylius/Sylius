@@ -130,6 +130,29 @@ final class ShippingContext implements Context
     }
 
     /**
+     * @Given /^the store has "([^"]+)" shipping method with ("[^"]+") fee per unit$/
+     */
+    public function theStoreHasShippingMethodWithFeePerUnit($shippingMethodName, $fee)
+    {
+        $this->createShippingMethod($shippingMethodName, null, null, 'en', ['amount' => $fee], DefaultCalculators::PER_UNIT_RATE);
+    }
+
+    /**
+     * @Given /^the store has "([^"]+)" shipping method with ("[^"]+") fee on fist unit and ("[^"]+") on next (\d+)$/
+     */
+    public function theStoreHasShippingMethodWithFeeOnFistUnitAndOnNext($shippingMethodName, $fee, $perUnitFee, $limit)
+    {
+        $this->createShippingMethod(
+            $shippingMethodName, 
+            null, 
+            null, 
+            'en', 
+            ['first_unit_cost' => $fee, 'additional_unit_cost' => $perUnitFee, 'additional_unit_limit' => $limit], 
+            DefaultCalculators::FLEXIBLE_RATE
+        );
+    }
+    
+    /**
      * @Given /^the store has "([^"]+)" shipping method with ("[^"]+") fee not assigned to any channel$/
      */
     public function storeHasShippingMethodWithFeeNotAssignedToAnyChannel($shippingMethodName, $fee)
@@ -172,6 +195,7 @@ final class ShippingContext implements Context
      * @param array $configuration
      * @param string $calculator
      * @param bool $enabled
+     * @param bool $addForCurrentChannel
      */
     private function createShippingMethod(
         $name,

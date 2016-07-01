@@ -884,6 +884,17 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Given I should see shipping method :shippingMethodName with fee :fee
+     */
+    public function iShouldSeeShippingFee($shippingMethodName, $fee)
+    {
+        Assert::true(
+            $this->shippingPage->hasShippingMethodFee($shippingMethodName, $fee), 
+            sprintf('The shipping fee should be %s, but it does not.', $fee)
+        );
+    }
+
+    /**
      * @param string $type
      * @param string $element
      * @param string $expectedMessage
