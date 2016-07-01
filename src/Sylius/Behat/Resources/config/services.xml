@@ -17,69 +17,54 @@
         <import resource="services/pages.xml" />
     </imports>
 
-    <parameters>
-        <parameter key="sylius.behat.cookie_setter.class">Sylius\Behat\Service\Setter\CookieSetter</parameter>
-        <parameter key="sylius.behat.channel_context_setter.class">Sylius\Behat\Service\Setter\ChannelContextSetter</parameter>
-        <parameter key="sylius.behat.email_checker.class">Sylius\Behat\Service\Accessor\EmailChecker</parameter>
-        <parameter key="sylius.behat.security.class">Sylius\Behat\Service\SecurityService</parameter>
-        <parameter key="sylius.behat.table_accessor.class">Sylius\Behat\Service\Accessor\TableAccessor</parameter>
-        <parameter key="sylius.behat.paypal_api_mocker.class">Sylius\Behat\Service\Mocker\PaypalApiMocker</parameter>
-        <parameter key="sylius.behat.mocker.class">Sylius\Behat\Service\Mocker\Mocker</parameter>
-        <parameter key="sylius.behat.response_loader.class">Sylius\Behat\Service\ResponseLoader</parameter>
-        <parameter key="sylius.behat.notification_accessor.class">Sylius\Behat\Service\Accessor\NotificationAccessor</parameter>
-        <parameter key="sylius.behat.notification_checker.class">Sylius\Behat\Service\NotificationChecker</parameter>
-        <parameter key="sylius.behat.current_page_resolver.class">Sylius\Behat\Service\Resolver\CurrentPageResolver</parameter>
-        <parameter key="sylius.behat.current_product_page_resolver.class">Sylius\Behat\Service\Resolver\CurrentProductPageResolver</parameter>
-    </parameters>
-
     <services>
         <service id="mink.default_session" class="Behat\Mink\Session" lazy="true" scope="scenario" public="false">
             <factory service="mink" method="getSession" />
         </service>
 
-        <service id="sylius.behat.cookie_setter" class="%sylius.behat.cookie_setter.class%" scope="scenario" public="false">
+        <service id="sylius.behat.cookie_setter" class="Sylius\Behat\Service\Setter\CookieSetter" scope="scenario" public="false">
             <argument type="service" id="mink.default_session" />
             <argument>%mink.parameters%</argument>
         </service>
 
-        <service id="sylius.behat.channel_context_setter" class="%sylius.behat.channel_context_setter.class%" scope="scenario" public="false">
+        <service id="sylius.behat.channel_context_setter" class="Sylius\Behat\Service\Setter\ChannelContextSetter" scope="scenario" public="false">
             <argument type="service" id="sylius.behat.cookie_setter" />
         </service>
 
-        <service id="sylius.behat.email_checker" class="%sylius.behat.email_checker.class%" scope="scenario" public="false">
+        <service id="sylius.behat.email_checker" class="Sylius\Behat\Service\Accessor\EmailChecker" scope="scenario" public="false">
             <argument type="service" id="profiler" container="symfony" />
             <argument type="service" id="mink.default_session" />
         </service>
 
-        <service id="sylius.behat.security" class="%sylius.behat.security.class%" scope="scenario" public="false">
+        <service id="sylius.behat.security" class="Sylius\Behat\Service\SecurityService" scope="scenario" public="false">
             <argument type="service" id="sylius.repository.user" container="symfony" />
             <argument type="service" id="session" container="symfony" />
             <argument type="service" id="sylius.behat.cookie_setter" />
             <argument>user</argument>
         </service>
 
-        <service id="sylius.behat.table_accessor" class="%sylius.behat.table_accessor.class%" public="false" />
+        <service id="sylius.behat.table_accessor" class="Sylius\Behat\Service\Accessor\TableAccessor" public="false" />
 
-        <service id="sylius.behat.paypal_api_mocker" class="%sylius.behat.paypal_api_mocker.class%" scope="scenario" public="false">
+        <service id="sylius.behat.paypal_api_mocker" class="Sylius\Behat\Service\Mocker\PaypalApiMocker" scope="scenario" public="false">
             <argument type="service" id="sylius.behat.mocker" />
             <argument type="service" id="sylius.behat.response_loader" />
         </service>
-        <service id="sylius.behat.mocker" class="%sylius.behat.mocker.class%" scope="scenario" public="false">
+        <service id="sylius.behat.mocker" class="Sylius\Behat\Service\Mocker\Mocker" scope="scenario" public="false">
             <argument type="service" id="service_container" container="symfony" />
         </service>
-        <service id="sylius.behat.response_loader" class="%sylius.behat.response_loader.class%" scope="scenario" public="false" />
+        <service id="sylius.behat.response_loader" class="Sylius\Behat\Service\ResponseLoader" scope="scenario" public="false" />
 
-        <service id="sylius.behat.notification_accessor" class="%sylius.behat.notification_accessor.class%" scope="scenario" public="false">
+        <service id="sylius.behat.notification_accessor" class="Sylius\Behat\Service\Accessor\NotificationAccessor" scope="scenario" public="false">
             <argument type="service" id="mink.default_session" />
         </service>
-        <service id="sylius.behat.notification_checker" class="%sylius.behat.notification_checker.class%" scope="scenario" public="false">
+        <service id="sylius.behat.notification_checker" class="Sylius\Behat\Service\NotificationChecker" scope="scenario" public="false">
             <argument type="service" id="sylius.behat.notification_accessor" />
         </service>
-        <service id="sylius.behat.current_page_resolver" class="%sylius.behat.current_page_resolver.class%" scope="scenario" public="false">
+        <service id="sylius.behat.current_page_resolver" class="Sylius\Behat\Service\Resolver\CurrentPageResolver" scope="scenario" public="false">
             <argument type="service" id="mink.default_session" />
             <argument type="service" id="router" container="symfony" />
         </service>
-        <service id="sylius.behat.current_product_page_resolver" class="%sylius.behat.current_product_page_resolver.class%" scope="scenario" public="false">
+        <service id="sylius.behat.current_product_page_resolver" class="Sylius\Behat\Service\Resolver\CurrentProductPageResolver" scope="scenario" public="false">
             <argument type="service" id="sylius.behat.current_page_resolver" />
         </service>
     </services>
