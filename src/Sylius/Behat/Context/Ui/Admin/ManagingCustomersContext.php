@@ -15,6 +15,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Customer\CreatePageInterface;
+use Sylius\Behat\Page\Admin\Customer\ShowPageInterface;
 use Sylius\Component\User\Model\CustomerInterface;
 use Webmozart\Assert\Assert;
 
@@ -39,18 +40,26 @@ final class ManagingCustomersContext implements Context
     private $updatePage;
 
     /**
+     * @var ShowPageInterface
+     */
+    private $showPage;
+
+    /**
      * @param CreatePageInterface $createPage
      * @param IndexPageInterface $indexPage
      * @param UpdatePageInterface $updatePage
+     * @param ShowPageInterface $showPage
      */
     public function __construct(
         CreatePageInterface $createPage,
         IndexPageInterface $indexPage,
-        UpdatePageInterface $updatePage
+        UpdatePageInterface $updatePage,
+        ShowPageInterface $showPage
     ) {
         $this->createPage = $createPage;
         $this->indexPage = $indexPage;
         $this->updatePage = $updatePage;
+        $this->showPage = $showPage;
     }
 
     /**
@@ -393,6 +402,74 @@ final class ManagingCustomersContext implements Context
         Assert::notNull(
             $customer->getUser()->getPassword(),
             'Customer should have an account, but they do not.'
+        );
+    }
+
+    /**
+     * @When I view details of the customer :customer
+     */
+    public function iViewDetailsOfTheCustomer(CustomerInterface $customer)
+    {
+        $this->showPage->open(['id' => $customer->getId()]);
+    }
+
+    /**
+     * @Then his name should be :name
+     */
+    public function hisNameShouldBe($name)
+    {
+        Assert::same(
+            $name,
+            $this->showPage->getCustomerName(),
+            'Customer name should be "'.$name.'", but it is not.'
+        );
+    }
+
+    /**
+     * @Given he should be registered since :registrationDate
+     */
+    public function hisRegistrationDateShouldBe($registrationDate)
+    {
+        Assert::eq(
+            new \DateTime($registrationDate),
+            $this->showPage->getRegistrationDate(),
+            'Customer registration date should be "'.$registrationDate.'", but it is not.'
+        );
+    }
+
+    /**
+     * @Given his email should be :email
+     */
+    public function hisEmailShouldBe($email)
+    {
+        Assert::same(
+            $email,
+            $this->showPage->getCustomerEmail(),
+            'Customer email should be "'.$email.'", but it is not'
+        );
+    }
+
+    /**
+     * @Then his shipping address should be :shippingAddress
+     */
+    public function hisShippingAddressShouldBe($shippingAddress)
+    {
+        Assert::same(
+            str_replace(',', '', $shippingAddress),
+            $this->showPage->getShippingAddress(),
+            'Customer shipping address should be "'.$shippingAddress.'", but it is not.'
+        );
+    }
+
+    /**
+     * @Then his billing address should be :billingAddress
+     */
+    public function hisBillingAddressShouldBe($billingAddress)
+    {
+        Assert::same(
+            str_replace(',', '', $billingAddress),
+            $this->showPage->getBillingAddress(),
+            'Customer billing address should be "'.$billingAddress.'", but it is not.'
         );
     }
 }

@@ -84,6 +84,7 @@
             <argument type="service" id="sylius.behat.page.admin.customer.create" />
             <argument type="service" id="sylius.behat.page.admin.customer.index" />
             <argument type="service" id="sylius.behat.page.admin.customer.update" />
+            <argument type="service" id="sylius.behat.page.admin.customer.show" />
             <tag name="sylius.behat.context" />
         </service>
 

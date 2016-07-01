@@ -58,13 +58,14 @@ abstract class SymfonyPage extends Page implements SymfonyPageInterface
 
     /**
      * @param NodeElement $modalContainer
+     * @param string $appearClass
      *
      * @todo it really shouldn't be here :)
      */
-    protected function waitForModalToAppear(NodeElement $modalContainer)
+    protected function waitForModalToAppear(NodeElement $modalContainer, $appearClass = 'in')
     {
-        $this->getDocument()->waitFor(1, function () use ($modalContainer) {
-            return false !== strpos($modalContainer->getAttribute('class'), 'in');
+        $this->getDocument()->waitFor(1, function () use ($modalContainer, $appearClass) {
+            return false !== strpos($modalContainer->getAttribute('class'), $appearClass);
         });
     }
 
