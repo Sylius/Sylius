@@ -444,13 +444,13 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
-     * @When I select the :taxCalculationStrategy as default tax calculation strategy
+     * @When I select the :taxCalculationStrategy as tax calculation strategy
      */
-    public function iSelectDefaultTaxCalculationStrategy($taxCalculationStrategy)
+    public function iSelectTaxCalculationStrategy($taxCalculationStrategy)
     {
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
-        $currentPage->chooseDefaultTaxCalculationStrategy($taxCalculationStrategy);
+        $currentPage->chooseTaxCalculationStrategy($taxCalculationStrategy);
     }
 
     /**
@@ -480,15 +480,15 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
-     * @Then the default tax calculation strategy for the :channel channel should be :taxCalculationStrategy
+     * @Then the tax calculation strategy for the :channel channel should be :taxCalculationStrategy
      */
-    public function rheDefaultTaxCalculationStrategyForTheChannelShouldBe(ChannelInterface $channel, $taxCalculationStrategy)
+    public function theTaxCalculationStrategyForTheChannelShouldBe(ChannelInterface $channel, $taxCalculationStrategy)
     {
         $this->updatePage->open(['id' => $channel->getId()]);
 
         Assert::true(
-            $this->updatePage->isDefaultTaxCalculationStrategyChosen($taxCalculationStrategy),
-            sprintf('Default tax calculation strategy %s should be selected, but it is not', $taxCalculationStrategy)
+            $this->updatePage->isTaxCalculationStrategyChosen($taxCalculationStrategy),
+            sprintf('Tax calculation strategy %s should be selected, but it is not', $taxCalculationStrategy)
         );
     }
 

@@ -82,12 +82,12 @@ interface ChannelInterface extends
     public function setDefaultTaxZone(ZoneInterface $defaultTaxZone);
 
     /**
-     * @return TaxCalculationStrategyInterface
+     * @return string
      */
-    public function getDefaultTaxCalculationStrategy();
+    public function getTaxCalculationStrategy();
 
     /**
      * @param string $taxCalculationStrategy
      */
-    public function setDefaultTaxCalculationStrategy($taxCalculationStrategy);
+    public function setTaxCalculationStrategy($taxCalculationStrategy);
 }

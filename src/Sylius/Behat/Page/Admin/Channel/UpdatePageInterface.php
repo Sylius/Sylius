@@ -87,7 +87,7 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     /**
      * @param string $taxCalculationStrategy
      */
-    public function chooseDefaultTaxCalculationStrategy($taxCalculationStrategy);
+    public function chooseTaxCalculationStrategy($taxCalculationStrategy);
 
     /**
      * @param string $paymentMethod
@@ -108,5 +108,5 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
      *
      * @return bool
      */
-    public function isDefaultTaxCalculationStrategyChosen($taxCalculationStrategy);
+    public function isTaxCalculationStrategyChosen($taxCalculationStrategy);
 }

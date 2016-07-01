@@ -124,7 +124,7 @@
         <parameter key="sylius.purger.orm_purger.doctrine.class">Doctrine\Common\DataFixtures\Purger\ORMPurger</parameter>
         <parameter key="sylius.purger.orm_purger.class">Sylius\Bundle\CoreBundle\Purger\ORMPurger</parameter>
 
-        <parameter key="sylius.provider.default_zone_provider.class">Sylius\Bundle\CoreBundle\Provider\DefaultTaxZoneProvider</parameter>
+        <parameter key="sylius.provider.channel_based_default_zone_provider.class">Sylius\Bundle\CoreBundle\Provider\ChannelBasedDefaultTaxZoneProvider</parameter>
 
         <parameter key="sylius.integer_distributor.class">Sylius\Component\Core\Distributor\IntegerDistributor</parameter>
         <parameter key="sylius.proportional_integer_distributor.class">Sylius\Component\Core\Distributor\ProportionalIntegerDistributor</parameter>
@@ -217,7 +217,7 @@
             <tag name="sylius.process.step" alias="sylius_checkout_finalize" />
         </service>
 
-        <service id="sylius.provider.default_zone_provider" class="%sylius.provider.default_zone_provider.class%" />
+        <service id="sylius.provider.channel_based_default_zone_provider" class="%sylius.provider.channel_based_default_zone_provider.class%" />
         <service id="sylius.integer_distributor" class="%sylius.integer_distributor.class%" />
         <service id="sylius.proportional_integer_distributor" class="%sylius.proportional_integer_distributor.class%" />
 
@@ -257,7 +257,7 @@
         </service>
 
         <service id="sylius.taxation.order_taxes_processor" class="%sylius.taxation.order_taxes_processor.class%">
-            <argument type="service" id="sylius.provider.default_zone_provider" />
+            <argument type="service" id="sylius.provider.channel_based_default_zone_provider" />
             <argument type="service" id="sylius.zone_matcher" />
             <argument type="service" id="sylius.registry.tax_calculation_strategy" />
         </service>

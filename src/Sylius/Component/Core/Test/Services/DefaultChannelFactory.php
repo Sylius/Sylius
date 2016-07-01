@@ -49,7 +49,7 @@ class DefaultChannelFactory implements DefaultChannelFactoryInterface
     {
         $channel = $this->channelFactory->createNamed(self::DEFAULT_CHANNEL_NAME);
         $channel->setCode(self::DEFAULT_CHANNEL_CODE);
-        $channel->setDefaultTaxCalculationStrategy('order_items_based');
+        $channel->setTaxCalculationStrategy('order_items_based');
 
         $this->channelRepository->add($channel);
 

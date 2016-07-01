@@ -97,7 +97,7 @@ class DefaultFranceChannelFactorySpec extends ObjectBehavior
         $zoneFactory->createNew()->willReturn($zone);
 
         $channel->setCode('WEB-FR')->shouldBeCalled();
-        $channel->setDefaultTaxCalculationStrategy('order_items_based')->shouldBeCalled();
+        $channel->setTaxCalculationStrategy('order_items_based')->shouldBeCalled();
 
         $zoneMember->setCode('FR')->shouldBeCalled();
         $zone->setCode('FR')->shouldBeCalled();

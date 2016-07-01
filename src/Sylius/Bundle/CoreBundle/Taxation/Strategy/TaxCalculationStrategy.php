@@ -27,6 +27,6 @@ class TaxCalculationStrategy extends AbstractTaxCalculationStrategy
      */
     public function supports(OrderInterface $order, ZoneInterface $zone)
     {
-        return $order->getChannel()->getDefaultTaxCalculationStrategy() === $this->type;
+        return $order->getChannel()->getTaxCalculationStrategy() === $this->type;
     }
 }

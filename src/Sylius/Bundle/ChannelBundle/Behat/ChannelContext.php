@@ -153,7 +153,7 @@ class ChannelContext extends DefaultContext
         $channel->setCode($code);
         $channel->setName($name);
         $channel->setHostname($url);
-        $channel->setDefaultTaxCalculationStrategy('order_items_based');
+        $channel->setTaxCalculationStrategy('order_items_based');
 
         $this->configureChannel($channel, $locales, $currencies, $shippingMethods, $paymentMethods);
 

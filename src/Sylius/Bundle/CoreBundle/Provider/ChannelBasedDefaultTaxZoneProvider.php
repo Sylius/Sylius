@@ -17,7 +17,7 @@ use Sylius\Component\Core\Provider\ZoneProviderInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class DefaultTaxZoneProvider implements ZoneProviderInterface
+class ChannelBasedDefaultTaxZoneProvider implements ZoneProviderInterface
 {
     /**
      * {@inheritdoc}

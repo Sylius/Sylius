@@ -67,24 +67,24 @@ class TaxCalculationStrategySpec extends ObjectBehavior
         $this->shouldThrow(\InvalidArgumentException::class)->duringInstantiation();
     }
 
-    function it_can_be_supported_when_the_default_tax_calculation_strategy_from_order_channel_matches_the_strategy_type(
+    function it_can_be_supported_when_the_tax_calculation_strategy_from_order_channel_matches_the_strategy_type(
         ChannelInterface $channel,
         OrderInterface $order,
         ZoneInterface $zone
     ) {
         $order->getChannel()->willReturn($channel);
-        $channel->getDefaultTaxCalculationStrategy()->willReturn('order_items_based');
+        $channel->getTaxCalculationStrategy()->willReturn('order_items_based');
 
         $this->supports($order, $zone)->shouldReturn(true);
     }
 
-    function it_cannot_be_supported_when_the_default_tax_calculation_strategy_from_order_channel_does_not_match_the_strategy_type(
+    function it_cannot_be_supported_when_the_tax_calculation_strategy_from_order_channel_does_not_match_the_strategy_type(
         ChannelInterface $channel,
         OrderInterface $order,
         ZoneInterface $zone
     ) {
         $order->getChannel()->willReturn($channel);
-        $channel->getDefaultTaxCalculationStrategy()->willReturn('order_item_units_based');
+        $channel->getTaxCalculationStrategy()->willReturn('order_item_units_based');
 
         $this->supports($order, $zone)->shouldReturn(false);
     }

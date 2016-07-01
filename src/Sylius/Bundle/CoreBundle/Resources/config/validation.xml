@@ -25,7 +25,7 @@
     </class>
 
     <class name="Sylius\Component\Core\Model\Channel">
-        <property name="defaultTaxCalculationStrategy">
+        <property name="taxCalculationStrategy">
             <constraint name="NotBlank" />
         </property>
     </class>

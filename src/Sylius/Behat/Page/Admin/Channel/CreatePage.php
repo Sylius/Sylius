@@ -86,9 +86,9 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function chooseDefaultTaxCalculationStrategy($taxZone)
+    public function chooseTaxCalculationStrategy($taxZone)
     {
-        $this->getDocument()->selectFieldOption('Default tax calculation strategy', $taxZone);
+        $this->getDocument()->selectFieldOption('Tax calculation strategy', $taxZone);
     }
 
     /**

@@ -21,11 +21,11 @@ use Sylius\Component\Core\Provider\ZoneProviderInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class DefaultTaxZoneProviderSpec extends ObjectBehavior
+class ChannelBasedDefaultTaxZoneProviderSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Provider\DefaultTaxZoneProvider');
+        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Provider\ChannelBasedDefaultTaxZoneProvider');
     }
 
     function it_implements_default_tax_zone_provider_interface()

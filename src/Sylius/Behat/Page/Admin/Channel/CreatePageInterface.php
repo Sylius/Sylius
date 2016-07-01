@@ -75,5 +75,5 @@ interface CreatePageInterface extends BaseCreatePageInterface
     /**
      * @param string $taxCalculationStrategy
      */
-    public function chooseDefaultTaxCalculationStrategy($taxCalculationStrategy);
+    public function chooseTaxCalculationStrategy($taxCalculationStrategy);
 }
