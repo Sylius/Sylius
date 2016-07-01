@@ -1,5 +1,5 @@
 @checkout
-Feature: Choosing province for country with provinces
+Feature: Choosing province for country
     In order to address an order properly
     As a Customer
     I want to be able to fill addressing details choosing country with provinces

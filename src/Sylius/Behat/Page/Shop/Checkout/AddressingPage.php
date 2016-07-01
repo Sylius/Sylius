@@ -41,7 +41,7 @@ class AddressingPage extends SymfonyPage implements AddressingPageInterface
         if ($driver instanceof Selenium2Driver) {
             $this->getElement('different_billing_address_label')->click();
 
-q            return;
+            return;
         }
 
         $billingAddressSwitch = $this->getElement('different_billing_address');
