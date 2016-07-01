@@ -775,7 +775,7 @@ Final response contains the full order information, now you can call the purchas
             {
                 "amount": 0,
                 "created_at": "2014-12-15T13:37:29+0000",
-                "description": "No tax (0%)",
+                "label": "No tax (0%)",
                 "id": 205,
                 "type": "tax",
                 "locked": false,
@@ -785,7 +785,7 @@ Final response contains the full order information, now you can call the purchas
             {
                 "amount": 5000,
                 "created_at": "2014-12-15T14:30:41+0000",
-                "description": "FedEx World Shipping",
+                "label": "FedEx World Shipping",
                 "id": 207,
                 "type": "shipping",
                 "locked": false,
@@ -797,7 +797,7 @@ Final response contains the full order information, now you can call the purchas
                 "created_at": "2014-12-15T14:30:41+0000",
                 "description": "Christmas Sale for orders over 100 EUR.",
                 "id": 208,
-                "type": "promotion",
+                "type": "order_promotion",
                 "locked": false,
                 "neutral": false,
                 "updated_at": "2014-12-15T14:30:41+0000"
@@ -1019,8 +1019,7 @@ Final response contains the full order information, now you can call the purchas
             "street": "Test",
             "updated_at": "2014-12-15T13:37:29+0000"
         },
-        "total": 1504750
-
+        "total": 1504750,
         "state": "new",
         "number": "000000001",
         "completed_at": "2016-06-24T10:55:28+0200",
