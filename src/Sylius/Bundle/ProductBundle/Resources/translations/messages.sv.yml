@@ -6,9 +6,21 @@ sylius:
         product:
             name: Namn
             description: Beskrivning
+            attributes: Attribut
+            options: Alternativ
             meta_keywords: Metasökord
             meta_description: Metabeskrivning
+            taxons: Taxa
+        product_variant:
+            available_on: Tillgänglig på
+            available_until: Tillgänglig till
         product_archetype:
             name: Namn
+            parent: Förälder
+            attributes: Attribut
+            options: Alternativ
         association_type:
             name: Namn
+        association:
+            type: Associationstyp
+            product: Tillhörande produkt

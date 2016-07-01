@@ -9,6 +9,7 @@ sylius:
             remember_me: Recordarme
         option:
             name: Nombre
+        notes: Notas adicionales
     ui:
         about: Sobre
         account_credentials: Credenciales de la cuenta
@@ -51,6 +52,7 @@ sylius:
         clear_cart: Vaciar carrito
         update_cart: Actualizar carrito
         apply_coupon: Aplicar cupón
+        extra_notes: Notas adicionales
         edit_your_items_apply_coupon_or_proceed_to_the_checkout: Editar sus artículos, aplicar cupón o proceder con el pago
         create_an_account: Crear una cuenta
         summary: Resumen

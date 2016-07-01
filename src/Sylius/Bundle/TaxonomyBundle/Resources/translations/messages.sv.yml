@@ -6,5 +6,7 @@ sylius:
         taxon:
             description: Beskrivning
             name: Namn
+            parent: Förälder
+            permalink: Permalänk
         taxonomy:
             name: Namn
