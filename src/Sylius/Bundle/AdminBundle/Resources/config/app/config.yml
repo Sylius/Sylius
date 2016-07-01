@@ -13,12 +13,16 @@ imports:
     - { resource: "@SyliusAdminBundle/Resources/config/grids/promotion.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/promotion_coupon.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/shipping_method.yml" }
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/static_content.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/tax_category.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/tax_rate.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/taxon.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/zone.yml" }
 
 sylius_grid:
+    drivers:
+        - doctrine/orm
+        - doctrine/phpcr-odm
     templates:
         action:
             manage_coupons: "SyliusAdminBundle:Promotion/Action:manageCoupons.html.twig"
