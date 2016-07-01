@@ -410,7 +410,7 @@ Parameters
 ~~~~~~~~~~
 
 payments[X][method]
-    The id of the payment method, where X is the shipment number.
+    The id of the payment method, where X is the payment number.
     Leave empty to add new
 
 Response
