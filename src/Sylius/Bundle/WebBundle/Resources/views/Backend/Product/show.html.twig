@@ -78,12 +78,12 @@
                 </tr>
                 <tr>
                     <td>{{ 'sylius.ui.available_on'|trans }}</td>
-                    <td><span class="label label-{{ product.available ? 'success' : 'danger' }}">{{ product.availableOn|date }}</span></td>
+                    <td><span class="label label-{{ product.available ? 'success' : 'danger' }}">{{ product.availableOn|format_date }}</span></td>
                 </tr>
                 {% if product.availableUntil %}
                 <tr>
                     <td>{{ 'sylius.ui.available_until'|trans }}</td>
-                    <td><span class="label label-{{ product.available ? 'success' : 'danger' }}">{{ product.availableUntil|date }}</span></td>
+                    <td><span class="label label-{{ product.available ? 'success' : 'danger' }}">{{ product.availableUntil|format_date }}</span></td>
                 </tr>
                 {% endif %}
                 <tr>
@@ -158,7 +158,7 @@
                 <tr>
                     <td><strong>{{ attribute.name }}</strong></td>
                     {% if attribute.value.timestamp is defined %}
-                        <td>{{ attribute.value|date('Y/m/d H:i:s') }}</td>
+                        <td>{{ attribute.value|format_date('Y/m/d H:i:s') }}</td>
                     {% else %}
                         <td>{{ attribute.value }}</td>
                     {% endif %}

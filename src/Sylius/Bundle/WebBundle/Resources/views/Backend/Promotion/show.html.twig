@@ -57,11 +57,11 @@
                 </tr>
                 <tr>
                     <td><strong>{{ 'sylius.ui.starts_at'|trans }}</strong></td>
-                    <td>{{ promotion.startsAt is empty ? '-' : promotion.startsAt|date }}</td>
+                    <td>{{ promotion.startsAt is empty ? '-' : promotion.startsAt|format_date }}</td>
                 </tr>
                 <tr>
                     <td><strong>{{ 'sylius.ui.ends_at'|trans }}</strong></td>
-                    <td>{{ promotion.endsAt is empty ? '-' : promotion.endsAt|date }}</td>
+                    <td>{{ promotion.endsAt is empty ? '-' : promotion.endsAt|format_date }}</td>
                 </tr>
                 <tr>
                     <td><strong>{{ 'sylius.ui.usage_limit'|trans }}</strong></td>

@@ -22,7 +22,7 @@
             <td>{{ tax_category.code }}</td>
             <td>{{ tax_category.name }}</td>
             <td>{{ tax_category.description|default('sylius.ui.no_description'|trans) }}</td>
-            <td>{{ tax_category.updatedAt|date }}</td>
+            <td>{{ tax_category.updatedAt|format_date }}</td>
             <td>
                 <div class="pull-right">
                     {{ buttons.edit(path('sylius_backend_tax_category_update', {'id': tax_category.id})) }}

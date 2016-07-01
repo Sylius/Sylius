@@ -7,7 +7,7 @@
     </h1>
     <div class="ui padded segment" id="items">
         <div class="ui list">
-            <div class="item"><strong>{{ 'sylius.ui.placed_at'|trans }} {{ order.createdAt|date() }}</strong></div>
+            <div class="item"><strong>{{ 'sylius.ui.placed_at'|trans }} {{ order.createdAt|format_date() }}</strong></div>
             <div class="ui hidden divider"></div>
             <div class="item" id="number">{{ 'sylius.ui.number'|trans }} <strong>#{{ order.number }}</strong></div>
             <div class="item">{{ 'sylius.ui.state'|trans }} <strong>{{ label.default(('sylius.ui.'~order.state)|trans) }}</strong></div>

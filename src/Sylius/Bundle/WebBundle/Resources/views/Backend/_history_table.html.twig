@@ -1,6 +1,6 @@
 {% macro formatValue(key, value) %}
 {% if value.timestamp is defined %}
-    {{ value|date() }}
+    {{ value|format_date() }}
 {% elseif key == 'price' or key == 'unitPrice' %}
     {{ value|sylius_price() }}
 {% elseif value is empty %}
@@ -27,7 +27,7 @@
     {% for log in logs %}
         <tr>
             <td><span class="label label-{{ log.action == 'danger' ? 'warning' : (log.action == 'update' ? 'success' : 'primary') }}">{{ log.action|upper }}</span></td>
-            <td>{{ log.loggedAt|date }} (#{{ log.version }})</td>
+            <td>{{ log.loggedAt|format_date }} (#{{ log.version }})</td>
             <td>
                 {% if log.data is not empty %}
                 <ul>

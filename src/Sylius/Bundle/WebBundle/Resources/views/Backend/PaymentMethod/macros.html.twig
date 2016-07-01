@@ -31,7 +31,7 @@
                     {{ payment_method.enabled ? 'sylius.ui.yes'|trans : 'sylius.ui.no'|trans }}
                 </span>
             </td>
-            <td>{{ payment_method.updatedAt|date }}</td>
+            <td>{{ payment_method.updatedAt|format_date }}</td>
             <td>
                 <div class="pull-right">
                 {{ buttons.edit(path('sylius_backend_payment_method_update', {'id': payment_method.id})) }}

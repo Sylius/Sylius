@@ -33,7 +33,7 @@
                 {{ misc.state_label(tax_rate.includedInPrice) }}
             </td>
             <td><span class="label label-primary">{{ tax_rate.calculator|humanize|upper }}</span></td>
-            <td>{{ tax_rate.updatedAt|date }}</td>
+            <td>{{ tax_rate.updatedAt|format_date }}</td>
             <td>
                 <div class="pull-right">
                 {{ buttons.show(path('sylius_backend_tax_rate_show', {'id': tax_rate.id})) }}

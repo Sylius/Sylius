@@ -13,7 +13,7 @@
                 <th>{{ sylius_resource_sort('publishable', 'sylius.page.publishable'|trans) }}</th>
                 <th>{{ sylius_resource_sort('publishStartDate', 'sylius.ui.start_date'|trans) }}</th>
                 <th>{{ sylius_resource_sort('publishEndDate', 'sylius.ui.end_date'|trans) }}</th>
-                <th>{{ sylius_resource_sort('routes', 'sylius.ui.routes'|trans) }}</th>                
+                <th>{{ sylius_resource_sort('routes', 'sylius.ui.routes'|trans) }}</th>
                 <th></th>
             </tr>
         </thead>
@@ -27,8 +27,8 @@
                         {{ page.publishable ? 'sylius.ui.yes'|trans : 'sylius.ui.no'|trans }}
                     </span>
                 </td>
-                <td>{{ page.publishStartDate is empty ? '-' : page.publishStartDate|date }}</td>
-                <td>{{ page.publishStartDate is empty ? '-' : page.publishStartDate|date }}</td>
+                <td>{{ page.publishStartDate is empty ? '-' : page.publishStartDate|format_date }}</td>
+                <td>{{ page.publishStartDate is empty ? '-' : page.publishStartDate|format_date }}</td>
                 <td>
                     {% if page.routes is not empty %}
                         <ul>

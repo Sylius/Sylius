@@ -80,7 +80,7 @@
             {% endif %}
 
             <td class="updated-at">
-                {{ product.updatedAt|date('Y/m/d') }}
+                {{ product.updatedAt|format_date('Y/m/d') }}
             </td>
             <td class="center-text">
                 <a href="{{ path('sylius_backend_metadata_container_customize', { 'id': product.metadataIdentifier }) }}" class="btn btn-default">

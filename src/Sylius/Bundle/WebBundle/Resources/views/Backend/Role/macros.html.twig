@@ -25,7 +25,7 @@
                 <td>
                     {{ role.description }}
                 </td>
-                <td>{{ role.updatedAt|date }}</td>
+                <td>{{ role.updatedAt|format_date }}</td>
                 <td>
                     <div class="pull-right">
                     {{ buttons.edit(path('sylius_backend_role_update', {'id': role.id})) }}

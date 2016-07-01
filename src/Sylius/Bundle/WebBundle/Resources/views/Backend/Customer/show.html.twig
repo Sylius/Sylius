@@ -80,7 +80,7 @@
             {% if customer.user is not null and customer.user.lastLogin %}
                 <tr>
                     <td><strong>{{ 'sylius.ui.last_login'|trans }}</strong></td>
-                    <td>{{ customer.user.lastLogin|date }}</td>
+                    <td>{{ customer.user.lastLogin|format_date }}</td>
                 </tr>
             {% endif %}
             <tr>

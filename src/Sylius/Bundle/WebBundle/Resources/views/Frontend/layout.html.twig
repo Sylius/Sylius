@@ -138,7 +138,7 @@
         {% block footer %}
             <div class="footer">
                 <p class="text-muted">
-                    &copy; Sylius, 2011 - {{ 'now'|date('Y') }}.
+                    &copy; Sylius, 2011 - {{ 'now'|format_date('Y') }}.
                 </p>
                 {{ knp_menu_render('sylius.frontend.social', {'template': 'SyliusWebBundle:Frontend:menu.html.twig'}) }}
             </div>

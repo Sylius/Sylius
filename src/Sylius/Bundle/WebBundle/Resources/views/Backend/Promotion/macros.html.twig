@@ -52,8 +52,8 @@
                     </span>
                 </td>
                 <td>{{ promotion.priority }}</td>
-                <td>{{ promotion.startsAt is empty ? '-' : promotion.startsAt|date }}</td>
-                <td>{{ promotion.endsAt is empty ? '-' : promotion.endsAt|date }}</td>
+                <td>{{ promotion.startsAt is empty ? '-' : promotion.startsAt|format_date }}</td>
+                <td>{{ promotion.endsAt is empty ? '-' : promotion.endsAt|format_date }}</td>
                 <td>
                     <div class="pull-right">
                         {{ buttons.move(path('sylius_backend_promotion_move_up', {'id': promotion.id}), 'up', loop.first and not promotions.hasPreviousPage, loop.last and not promotions.hasNextPage) }}
