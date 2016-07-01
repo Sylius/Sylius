@@ -7,7 +7,6 @@ sylius_shop_partial_product_index_latest:
     defaults:
         _controller: sylius.controller.product:indexAction
         _sylius:
-            permission: false
             template: $template
             repository:
                 method: findLatestByChannel
@@ -21,7 +20,6 @@ sylius_shop_partial_product_index_by_taxon_code:
     defaults:
         _controller: sylius.controller.product:indexAction
         _sylius:
-            permission: false
             template: $template
             repository:
                 method: findEnabledByTaxonCodeAndChannel
