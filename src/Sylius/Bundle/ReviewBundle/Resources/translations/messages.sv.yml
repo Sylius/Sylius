@@ -4,6 +4,14 @@
 sylius:
     form:
         review:
+            header: Lägg till en recension
+            rating: Betyg
             title: Titel
+            comment: Kommentar
+            author: Författare
             status:
+                label: Status
                 new: Ny
+                approved: Godkänd
+                rejected: Avslagen
+            submit: Spara

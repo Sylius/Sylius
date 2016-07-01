@@ -59,6 +59,7 @@ sylius:
             shipping_category: Kategori
             short_description: Kort beskrivning
             variant_selection_method: Metod för val av variant
+            main_taxon: Huvudsaklig taxon
             channels: Kanaler
             enabled: Aktiverad
         product_filter:
@@ -147,9 +148,13 @@ sylius:
             name: Orderkommentar
         shipment_confirmation:
             name: Leveransbekräftelse
+            content: 'Din beställning har skickats.<br/>Tack för din beställning.'
         user_confirmation:
             name: Användarbekräftelse
+            subject: Välkommen till vår butik
+            content: 'Välkommen till vår butik<br/><br/>du har precis registrerats.<br/>Tack %username%.'
         password_reset:
             name: Återställ lösenord
+            content: '<h3>Hej %username%</h3>För att återställa ditt lösenord - var god besök %url% <br/><br/>Hälsningar, the Team.'
     shipping_method_resolver:
         by_zones_and_channel: Genom zoner och kanaler

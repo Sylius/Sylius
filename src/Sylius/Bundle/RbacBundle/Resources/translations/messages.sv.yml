@@ -7,6 +7,9 @@ sylius:
             code: Kod
             name: Namn
             description: Beskrivning
+            permissions: Rättigheter
+            parent: Förälder
         permission:
             code: Kod
             description: Beskrivning
+            parent: Förälder
