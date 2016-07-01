@@ -421,7 +421,7 @@ final class ManagingCustomersContext implements Context
         Assert::same(
             $name,
             $this->showPage->getCustomerName(),
-            'Customer name should be "'.$name.'", but it is not.'
+            'Customer name should be "%s", but it is not.'
         );
     }
 
@@ -433,7 +433,7 @@ final class ManagingCustomersContext implements Context
         Assert::eq(
             new \DateTime($registrationDate),
             $this->showPage->getRegistrationDate(),
-            'Customer registration date should be "'.$registrationDate.'", but it is not.'
+            'Customer registration date should be "%s", but it is not.'
         );
     }
 
@@ -445,7 +445,7 @@ final class ManagingCustomersContext implements Context
         Assert::same(
             $email,
             $this->showPage->getCustomerEmail(),
-            'Customer email should be "'.$email.'", but it is not'
+            'Customer email should be "%s", but it is not'
         );
     }
 
@@ -457,7 +457,7 @@ final class ManagingCustomersContext implements Context
         Assert::same(
             str_replace(',', '', $shippingAddress),
             $this->showPage->getShippingAddress(),
-            'Customer shipping address should be "'.$shippingAddress.'", but it is not.'
+            'Customer shipping address should be "%s", but it is not.'
         );
     }
 
@@ -469,7 +469,7 @@ final class ManagingCustomersContext implements Context
         Assert::same(
             str_replace(',', '', $billingAddress),
             $this->showPage->getBillingAddress(),
-            'Customer billing address should be "'.$billingAddress.'", but it is not.'
+            'Customer billing address should be "%s", but it is not.'
         );
     }
 }
