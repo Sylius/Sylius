@@ -155,23 +155,4 @@ class UserRepository extends EntityRepository implements UserRepositoryInterface
             ->getOneOrNullResult()
         ;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function findOneByToken($token)
-    {
-        $queryBuilder = $this->createQueryBuilder('o');
-
-        $queryBuilder
-            ->orWhere($queryBuilder->expr()->eq('o.passwordResetToken', ':token'))
-            ->orWhere($queryBuilder->expr()->eq('o.emailVerificationToken', ':token'))
-            ->setParameter('token', $token)
-        ;
-
-        return $queryBuilder
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
 }

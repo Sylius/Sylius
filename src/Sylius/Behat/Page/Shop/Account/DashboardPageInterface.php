@@ -40,7 +40,7 @@ interface DashboardPageInterface extends PageInterface
     /**
      * @return bool
      */
-    public function hasVerificationButton();
+    public function hasResendVerificationEmailButton();
 
-    public function pressVerify();
+    public function pressResendVerificationEmail();
 }

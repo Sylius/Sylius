@@ -128,14 +128,14 @@ interface UserInterface extends
     public function isVerified();
 
     /**
-     * @return null|\DateTime
+     * @return \DateTime|null
      */
     public function getVerifiedAt();
 
     /**
-     * @param null|\DateTime $verifiedAt
+     * @param \DateTime|null $verifiedAt
      */
-    public function setVerifiedAt(\DateTime $verifiedAt);
+    public function setVerifiedAt(\DateTime $verifiedAt = null);
 
     /**
      * @param \DateTime $date

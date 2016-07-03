@@ -3,6 +3,5 @@
 {% endblock %}
 
 {% block body %}
-    {{ 'sylius.email.verification.content'|trans }}
-    {{ url('sylius_user_verification', { 'email': user.email, 'token': user.emailVerificationToken }) }}
+    {{ 'sylius.email.verification.content'|trans({'%url%': url('sylius_shop_user_verification', { 'token': user.emailVerificationToken})})|raw }}
 {% endblock %}

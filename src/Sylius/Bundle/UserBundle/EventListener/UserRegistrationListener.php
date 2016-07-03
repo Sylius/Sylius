@@ -13,12 +13,12 @@ namespace Sylius\Bundle\UserBundle\EventListener;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\UserBundle\UserEvents;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\User\Model\CustomerInterface;
 use Sylius\Component\User\Model\UserInterface;
-use Sylius\Component\User\Security\TokenProviderInterface;
+use Sylius\Component\User\Security\Generator\GeneratorInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
@@ -31,9 +31,9 @@ class UserRegistrationListener
     protected $userManager;
 
     /**
-     * @var TokenProviderInterface
+     * @var GeneratorInterface
      */
-    protected $tokenProvider;
+    protected $tokenGenerator;
 
     /**
      * @var EventDispatcherInterface
@@ -42,16 +42,16 @@ class UserRegistrationListener
 
     /**
      * @param ObjectManager $userManager
-     * @param TokenProviderInterface $tokenProvider
+     * @param GeneratorInterface $tokenGenerator
      * @param EventDispatcherInterface $eventDispatcher
      */
     public function __construct(
         ObjectManager $userManager,
-        TokenProviderInterface $tokenProvider,
+        GeneratorInterface $tokenGenerator,
         EventDispatcherInterface $eventDispatcher
     ) {
         $this->userManager = $userManager;
-        $this->tokenProvider = $tokenProvider;
+        $this->tokenGenerator = $tokenGenerator;
         $this->eventDispatcher = $eventDispatcher;
     }
 
@@ -61,18 +61,10 @@ class UserRegistrationListener
     public function sendVerificationEmail(GenericEvent $event)
     {
         $customer = $event->getSubject();
-        if (!$customer instanceof CustomerInterface) {
-            throw new UnexpectedTypeException(
-                $customer,
-                CustomerInterface::class
-            );
-        }
-        if (null === $user = $customer->getUser()) {
-            return;
-        }
-        if (!$user->isEnabled()) {
-            return;
-        }
+        Assert::isInstanceOf($customer, CustomerInterface::class);
+
+        $user = $customer->getUser();
+        Assert::notNull($user);
 
         $this->handleUserVerificationToken($user);
     }
@@ -82,7 +74,7 @@ class UserRegistrationListener
      */
     protected function handleUserVerificationToken(UserInterface $user)
     {
-        $token = $this->tokenProvider->generateUniqueToken();
+        $token = $this->tokenGenerator->generate();
         $user->setEmailVerificationToken($token);
 
         $this->userManager->persist($user);

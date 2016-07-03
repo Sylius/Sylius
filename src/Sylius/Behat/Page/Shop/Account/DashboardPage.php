@@ -53,7 +53,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasVerificationButton()
+    public function hasResendVerificationEmailButton()
     {
         return $this->getDocument()->hasButton('Verify');
     }
@@ -61,7 +61,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     /**
      * {@inheritdoc}
      */
-    public function pressVerify()
+    public function pressResendVerificationEmail()
     {
         $this->getDocument()->pressButton('Verify');
     }

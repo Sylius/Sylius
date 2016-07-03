@@ -20,6 +20,8 @@ use Sylius\Behat\Page\Shop\HomePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Behat\Service\SecurityServiceInterface;
+use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Core\Test\Services\EmailCheckerInterface;
 use Webmozart\Assert\Assert;
 
@@ -59,6 +61,11 @@ class RegistrationContext implements Context
     private $verificationPage;
 
     /**
+     * @var SecurityServiceInterface
+     */
+    private $securityService;
+
+    /**
      * @var EmailCheckerInterface
      */
     private $emailChecker;
@@ -75,6 +82,7 @@ class RegistrationContext implements Context
      * @param NotificationCheckerInterface $notificationChecker
      * @param RegisterPageInterface $registerPage
      * @param VerificationPageInterface $verificationPage
+     * @param SecurityServiceInterface $securityService
      * @param EmailCheckerInterface $emailChecker
      * @param SharedStorageInterface $sharedStorage
      */
@@ -85,6 +93,7 @@ class RegistrationContext implements Context
         NotificationCheckerInterface $notificationChecker,
         RegisterPageInterface $registerPage,
         VerificationPageInterface $verificationPage,
+        SecurityServiceInterface $securityService,
         EmailCheckerInterface $emailChecker,
         SharedStorageInterface $sharedStorage
     ) {
@@ -94,6 +103,7 @@ class RegistrationContext implements Context
         $this->notificationChecker = $notificationChecker;
         $this->registerPage = $registerPage;
         $this->verificationPage = $verificationPage;
+        $this->securityService = $securityService;
         $this->emailChecker = $emailChecker;
         $this->sharedStorage = $sharedStorage;
     }
@@ -249,15 +259,6 @@ class RegistrationContext implements Context
     }
 
     /**
-     * @Then I should be logged in as :email
-     */
-    public function iShouldBeLoggedInAs($email)
-    {
-        $this->iShouldBeLoggedIn();
-        $this->myEmailShouldBe($email);
-    }
-
-    /**
      * @When I register with email :email and password :password
      */
     public function iRegisterWithEmailAndPassword($email, $password)
@@ -268,29 +269,28 @@ class RegistrationContext implements Context
         $this->registerPage->verifyPassword($password);
         $this->registerPage->specifyFirstName('Carrot');
         $this->registerPage->specifyLastName('Ironfoundersson');
-        $this->registerPage->specifyPhoneNumber(424242420);
         $this->registerPage->register();
     }
 
     /**
-     * @Then my account should be verified
+     * @Then /^(my) account should be verified$/
      */
-    public function myAccountShouldBeVerified()
+    public function myAccountShouldBeVerified(UserInterface $user)
     {
+        $this->securityService->logIn($user->getEmail());
+
         Assert::true(
             $this->dashboardPage->isVerified(),
-            'You should be verified.'
+            'My account should be verified.'
         );
     }
 
     /**
-     * @When I use it to verify
+     * @When /^(I) try to verify my account using the link from this email$/
      */
-    public function iUseItToVerify()
+    public function iUseItToVerify(UserInterface $user)
     {
-        $user = $this->sharedStorage->get('user');
-
-        $this->verificationPage->verifyAccount($user->getEmail(), $user->getEmailVerificationToken());
+        $this->verificationPage->verifyAccount($user->getEmailVerificationToken());
     }
 
     /**
@@ -299,30 +299,29 @@ class RegistrationContext implements Context
     public function iResendVerificationEmail()
     {
         $this->dashboardPage->open();
-        $this->dashboardPage->pressVerify();
+        $this->dashboardPage->pressResendVerificationEmail();
     }
 
     /**
-     * @When I use the first email to verify
+     * @When I use the verification link from the first email to verify
      */
-    public function iVerifyWithFirstEmail()
+    public function iUseVerificationLinkFromFirstEmailToVerify()
     {
-        $user = $this->sharedStorage->get('user');
         $token = $this->sharedStorage->get('verification_token');
 
-        $this->verificationPage->verifyAccount($user->getEmail(), $token);
+        $this->verificationPage->verifyAccount($token);
     }
 
     /**
-     * @When I try to verify using email :email and token :token
+     * @When I (try to )verify using :token token
      */
-    public function iTryToVerifyUsing($email, $token)
+    public function iTryToVerifyUsing($token)
     {
-        $this->verificationPage->verifyAccount($email, $token);
+        $this->verificationPage->verifyAccount($token);
     }
 
     /**
-     * @Then my account should not be verified (yet)
+     * @Then /^(?:my|his|her) account should not be verified$/
      */
     public function myAccountShouldNotBeVerified()
     {
@@ -330,7 +329,7 @@ class RegistrationContext implements Context
 
         Assert::false(
             $this->dashboardPage->isVerified(),
-            'You should not be verified.'
+            'Account should not be verified.'
         );
     }
 
@@ -342,7 +341,7 @@ class RegistrationContext implements Context
         $this->dashboardPage->open();
 
         Assert::false(
-            $this->dashboardPage->hasVerificationButton(),
+            $this->dashboardPage->hasResendVerificationEmailButton(),
             'You should not be able to resend the verification email.'
         );
     }
@@ -356,9 +355,9 @@ class RegistrationContext implements Context
     }
 
     /**
-     * @Then I should be notified that the verification was not successful
+     * @Then I should be notified that the verification token is invalid
      */
-    public function iShouldBeNotifiedThatTheVerificationWasNotSuccessful()
+    public function iShouldBeNotifiedThatTheVerificationTokenIsInvalid()
     {
         $this->notificationChecker->checkNotification('The verification token is invalid.', NotificationType::failure());
     }
@@ -375,8 +374,7 @@ class RegistrationContext implements Context
     }
 
     /**
-     * @Then the verification email should be sent to :email
-     * @Then an email should be sent to :email
+     * @Then the (verification) email should be sent to :email
      */
     public function verificationEmailShouldBeSentTo($email)
     {

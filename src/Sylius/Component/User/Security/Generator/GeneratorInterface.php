@@ -13,13 +13,12 @@ namespace Sylius\Component\User\Security\Generator;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ * @author Jan Góralski <jan.goralski@lakion.com>
  */
 interface GeneratorInterface
 {
     /**
-     * @param int $length determines length of a generated string
-     *
-     * @return string
+     * @return mixed
      */
-    public function generate($length);
+    public function generate();
 }

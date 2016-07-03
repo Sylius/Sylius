@@ -32,8 +32,9 @@ final class UserEvents
      */
     const REQUEST_RESET_PASSWORD_PIN = 'sylius.user.password_reset.request.pin';
 
+    const REQUEST_VERIFICATION_TOKEN = 'email_verification.token';
 
-    const REQUEST_VERIFICATION_TOKEN = 'sylius.user.email_verification.token';
+    const EMAIL_VERIFICATION = 'email_verification';
 
     /**
      * The PRE_PASSWORD_RESET event occurs right before the user changes are flushed.

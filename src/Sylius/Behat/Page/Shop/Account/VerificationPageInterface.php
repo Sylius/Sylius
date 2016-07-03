@@ -20,8 +20,7 @@ use Sylius\Component\User\Model\UserInterface;
 interface VerificationPageInterface extends SymfonyPageInterface
 {
     /**
-     * @param string $email
      * @param string $token
      */
-    public function verifyAccount($email, $token);
+    public function verifyAccount($token);
 }

@@ -56,7 +56,7 @@ class MailerListener
     /**
      * @param GenericEvent $event
      */
-    public function sendValidationTokenEmail(GenericEvent $event)
+    public function sendVerificationTokenEmail(GenericEvent $event)
     {
         $this->sendEmail($event->getSubject(), Emails::EMAIL_VERIFICATION_TOKEN);
     }

@@ -9,15 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\User\Security;
+namespace Sylius\Component\User\Security\Checker;
 
 /**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ * @author Jan Góralski <jan.goralski@lakion.com>
  */
-interface TokenProviderInterface
+interface UniquenessCheckerInterface
 {
     /**
-     * Generates unique token for user request password reset
+     * @param string $token
+     *
+     * @return bool
      */
-    public function generateUniqueToken();
+    public function isUnique($token);
 }

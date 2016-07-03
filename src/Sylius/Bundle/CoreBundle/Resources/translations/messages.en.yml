@@ -159,7 +159,7 @@ sylius:
             content: <h3>Hello %username%</h3>To reset your password - please visit %url% <br/><br/>Regards, the Team.
         verification:
             name: Email address verification
-            content: To verify your email address please visit
+            content: To verify your email address - please visit %url%
 
     payum_gateway:
         cash_on_delivery: Cash on delivery

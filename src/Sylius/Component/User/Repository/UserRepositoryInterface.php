@@ -58,11 +58,4 @@ interface UserRepositoryInterface extends RepositoryInterface
      * @return UserInterface|null
      */
     public function findOneByEmail($email);
-
-    /**
-     * @param string $token
-     *
-     * @return UserInterface|null
-     */
-    public function findOneByToken($token);
 }

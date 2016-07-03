@@ -21,9 +21,9 @@ class VerificationPage extends SymfonyPage implements VerificationPageInterface
     /**
      * {@inheritdoc}
      */
-    public function verifyAccount($email, $token)
+    public function verifyAccount($token)
     {
-        $this->tryToOpen(['email' => $email, 'token' => $token,]);
+        $this->tryToOpen(['token' => $token]);
     }
 
     /**
@@ -31,6 +31,6 @@ class VerificationPage extends SymfonyPage implements VerificationPageInterface
      */
     public function getRouteName()
     {
-        return 'sylius_user_verification';
+        return 'sylius_shop_user_verification';
     }
 }

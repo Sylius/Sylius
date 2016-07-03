@@ -85,6 +85,7 @@ final class UserContext implements Context
      * @Given there is user :email identified by :password
      * @Given there was account of :email with password :password
      * @Given there is a user :email
+     * @Given there is a :email user
      */
     public function thereIsUserIdentifiedBy($email, $password = 'sylius')
     {
@@ -156,31 +157,28 @@ final class UserContext implements Context
     }
 
     /**
-     * @Given his account is not verified
-     * @Given I have not verified my account yet
+     * @Given /^(this user) is not verified$/
+     * @Given /^(I) have not verified my account (?:yet)$/
      */
-    public function accountIsNotVerified()
+    public function accountIsNotVerified(UserInterface $user)
     {
-        $user = $this->sharedStorage->get('user');
         $user->setVerifiedAt(null);
 
         $this->userManager->flush();
     }
 
     /**
-     * @Given I have already received the verification email
+     * @Given /^(?:(I) have|(this user) has) already received a verification email$/
      */
-    public function iHaveReceivedVerificationEmail()
+    public function iHaveReceivedVerificationEmail(UserInterface $user)
     {
-        $user = $this->sharedStorage->get('user');
-
         $this->prepareUserVerification($user);
     }
 
     /**
-     * @Given the verification email has already been sent to :email
+     * @Given a verification email has already been sent to :email
      */
-    public function theVerificationEmailHasBeenSentTo($email)
+    public function aVerificationEmailHasBeenSentTo($email)
     {
         $user = $this->userRepository->findOneByEmail($email);
 
@@ -188,11 +186,10 @@ final class UserContext implements Context
     }
 
     /**
-     * @Given I have already verified my account
+     * @Given /^(I) have already verified my account$/
      */
-    public function iHaveAlreadyVerifiedMyAccount()
+    public function iHaveAlreadyVerifiedMyAccount(UserInterface $user)
     {
-        $user = $this->sharedStorage->get('user');
         $user->setVerifiedAt(new \DateTime());
 
         $this->userManager->flush();
