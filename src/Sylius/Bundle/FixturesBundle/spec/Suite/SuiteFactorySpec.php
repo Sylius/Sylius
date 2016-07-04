@@ -64,12 +64,30 @@ final class SuiteFactorySpec extends ObjectBehavior
         $optionsProcessor->processConfiguration($secondFixture, [[]])->willReturn([]);
 
         $suite = $this->createSuite('suite_name', ['listeners' => [], 'fixtures' => [
-            'first_fixture' => ['options' => [[]]],
-            'second_fixture' => ['options' => [[]]],
+            'first_fixture' => ['name' => 'first_fixture', 'options' => [[]]],
+            'second_fixture' => ['name' => 'second_fixture', 'options' => [[]]],
         ]]);
 
         $suite->getName()->shouldReturn('suite_name');
         $suite->getFixtures()->shouldGenerateKeys($firstFixture, $secondFixture);
+    }
+
+    function it_creates_a_new_suite_with_fixtures_based_on_its_name_rather_than_alias(
+        FixtureRegistryInterface $fixtureRegistry,
+        Processor $optionsProcessor,
+        FixtureInterface $fixture
+    ) {
+        $fixtureRegistry->getFixture('fixture_name')->shouldBeCalled()->willReturn($fixture);
+        $fixtureRegistry->getFixture('fixture_alias')->shouldNotBeCalled();
+
+        $optionsProcessor->processConfiguration($fixture, [[]])->willReturn([]);
+
+        $suite = $this->createSuite('suite_name', ['listeners' => [], 'fixtures' => [
+            'fixture_alias' => ['name' => 'fixture_name', 'options' => [[]]],
+        ]]);
+
+        $suite->getName()->shouldReturn('suite_name');
+        $suite->getFixtures()->shouldGenerateKeys($fixture);
     }
 
     function it_creates_a_new_suite_with_prioritized_fixtures(
@@ -85,8 +103,8 @@ final class SuiteFactorySpec extends ObjectBehavior
         $optionsProcessor->processConfiguration($higherPriorityFixture, [[]])->willReturn([]);
 
         $suite = $this->createSuite('suite_name', ['listeners' => [], 'fixtures' => [
-            'fixture' => ['priority' => 5, 'options' => [[]]],
-            'higher_priority_fixture' => ['priority' => 10, 'options' => [[]]],
+            'fixture' => ['name' => 'fixture', 'priority' => 5, 'options' => [[]]],
+            'higher_priority_fixture' => ['name' => 'higher_priority_fixture', 'priority' => 10, 'options' => [[]]],
         ]]);
 
         $suite->getName()->shouldReturn('suite_name');
@@ -103,7 +121,7 @@ final class SuiteFactorySpec extends ObjectBehavior
         $optionsProcessor->processConfiguration($fixture, [['fixture_option' => 'fixture_value']])->willReturn(['fixture_option' => 'fixture_value']);
 
         $suite = $this->createSuite('suite_name', ['listeners' => [], 'fixtures' => [
-            'fixture' => ['options' => [['fixture_option' => 'fixture_value']]],
+            'fixture' => ['name' => 'fixture', 'options' => [['fixture_option' => 'fixture_value']]],
         ]]);
 
         $suite->getName()->shouldReturn('suite_name');
@@ -182,7 +200,14 @@ final class SuiteFactorySpec extends ObjectBehavior
     function it_throws_an_exception_if_fixture_does_not_have_options_defined()
     {
         $this->shouldThrow(\InvalidArgumentException::class)->during('createSuite', ['suite_name', ['listeners' => [], 'fixtures' => [
-            'fixture' => [],
+            'fixture' => ['name' => 'fixture'],
+        ]]]);
+    }
+
+    function it_throws_an_exception_if_fixture_does_not_have_name_defined()
+    {
+        $this->shouldThrow(\InvalidArgumentException::class)->during('createSuite', ['suite_name', ['listeners' => [], 'fixtures' => [
+            'fixture' => ['options' => []],
         ]]]);
     }
 
