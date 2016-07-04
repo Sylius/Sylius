@@ -59,7 +59,7 @@ class CustomerController extends ResourceController
             $this->eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $customer);
 
             if (!$configuration->isHtmlRequest()) {
-                return $this->viewHandler->handle(View::create($customer, 204));
+                return $this->viewHandler->handle($configuration, View::create($customer, 204));
             }
 
             $this->flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $customer);
@@ -68,7 +68,7 @@ class CustomerController extends ResourceController
         }
 
         if (!$configuration->isHtmlRequest()) {
-            return $this->viewHandler->handle(View::create($form, 400));
+            return $this->viewHandler->handle($configuration, View::create($form, 400));
         }
 
         return $this->container->get('templating')->renderResponse(
