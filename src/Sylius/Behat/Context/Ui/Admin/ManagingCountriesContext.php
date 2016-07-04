@@ -297,7 +297,7 @@ final class ManagingCountriesContext implements Context
      */
     public function iShouldBeNotifiedThatElementIsRequired($element)
     {
-        $this->assertFieldValidationMessage($element, sprintf('Please enter province %s.', $element));
+        Assert::same($this->updatePage->getValidationMessage($element), sprintf('Please enter province %s.', $element));
     }
 
     /**
@@ -309,25 +309,10 @@ final class ManagingCountriesContext implements Context
     }
 
     /**
-     * @param string $element
-     * @param string $expectedMessage
-     */
-    private function assertFieldValidationMessage($element, $expectedMessage)
-    {
-        Assert::true(
-            $this->updatePage->checkValidationMessageFor($element, $expectedMessage),
-            sprintf('Province %s should be required.', $element)
-        );
-    }
-
-    /**
      * @Then /^I should be notified that province code must be unique$/
      */
     public function iShouldBeNotifiedThatProvinceCodeMustBeUnique()
     {
-        Assert::true(
-            $this->updatePage->checkValidationMessageFor('code', 'Province code must be unique.'),
-            'Unique code violation message should appear on page, but it does not.'
-        );
+        Assert::same($this->updatePage->getValidationMessage('code'), 'Province code must be unique.');
     }
 }

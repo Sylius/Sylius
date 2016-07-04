@@ -237,12 +237,10 @@ final class ManagingZonesContext implements Context
      */
     public function iShouldBeNotifiedThatZoneWithThisCodeAlreadyExists()
     {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
-        Assert::true(
-            $currentPage->checkValidationMessageFor('code', 'Zone code must be unique.'),
-            'Unique code violation message should appear on page, but it does not.'
-        );
+        Assert::same($currentPage->getValidationMessage('code'), 'Zone code must be unique.');
     }
 
     /**
@@ -263,12 +261,10 @@ final class ManagingZonesContext implements Context
      */
     public function iShouldBeNotifiedThatIsRequired($element)
     {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
-        Assert::true(
-            $currentPage->checkValidationMessageFor($element, sprintf('Please enter zone %s.', $element)),
-            sprintf('I should be notified that zone %s should be required.', $element)
-        );
+        Assert::same($currentPage->getValidationMessage($element), sprintf('Please enter zone %s.', $element));
     }
 
     /**

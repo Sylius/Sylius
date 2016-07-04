@@ -55,7 +55,8 @@ final class ManagingProductOptionsContext implements Context
         CreatePageInterface $createPage,
         UpdatePageInterface $updatePage,
         CurrentPageResolverInterface $currentPageResolver
-    ) {
+    )
+    {
         $this->indexPage = $indexPage;
         $this->createPage = $createPage;
         $this->updatePage = $updatePage;
@@ -175,10 +176,7 @@ final class ManagingProductOptionsContext implements Context
      */
     public function iShouldBeNotifiedThatProductOptionWithThisCodeAlreadyExists()
     {
-        Assert::true(
-            $this->createPage->checkValidationMessageFor('code', 'The option with given code already exists.'),
-            'Unique code violation message should appear on page, but it does not.'
-        );
+        Assert::same($this->createPage->getValidationMessage('code'), 'The option with given code already exists.');
     }
 
     /**
@@ -199,7 +197,7 @@ final class ManagingProductOptionsContext implements Context
      */
     public function iShouldBeNotifiedThatElementIsRequired($element)
     {
-        $this->assertFieldValidationMessage($element, sprintf('Please enter option %s.', $element));
+        Assert::same($this->createPage->getValidationMessage($element), sprintf('Please enter option %s.', $element));
     }
 
     /**
@@ -299,18 +297,6 @@ final class ManagingProductOptionsContext implements Context
         Assert::false(
             $this->updatePage->isThereOptionValue($optionValue),
             sprintf('%s is a value of this product option, but it should not.', $optionValue)
-        );
-    }
-
-    /**
-     * @param string $element
-     * @param string $expectedMessage
-     */
-    private function assertFieldValidationMessage($element, $expectedMessage)
-    {
-        Assert::true(
-            $this->createPage->checkValidationMessageFor($element, $expectedMessage),
-            sprintf('Product option %s should be required.', $element)
         );
     }
 }

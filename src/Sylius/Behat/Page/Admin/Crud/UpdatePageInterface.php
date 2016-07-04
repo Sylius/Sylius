@@ -11,6 +11,7 @@
 
 namespace Sylius\Behat\Page\Admin\Crud;
 
+use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\SymfonyPageInterface;
 
 /**
@@ -20,11 +21,12 @@ interface UpdatePageInterface extends SymfonyPageInterface
 {
     /**
      * @param string $element
-     * @param string $message
      *
-     * @return bool
+     * @return string
+     *
+     * @throws ElementNotFoundException
      */
-    public function checkValidationMessageFor($element, $message);
+    public function getValidationMessage($element);
 
     /**
      * @param array $parameters where keys are some of arbitrary elements defined by user and values are expected values

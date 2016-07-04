@@ -178,12 +178,10 @@ final class ManagingChannelsContext implements Context
      */
     public function iShouldBeNotifiedThatAtLeastOneChannelHasToBeDefinedIsRequired()
     {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
-        Assert::true(
-            $currentPage->checkValidationMessageFor('enabled', 'Must have at least one enabled entity'),
-            sprintf('Channels enabled field should be required.')
-        );
+        Assert::same($currentPage->getValidationMessage('enabled'), 'Must have at least one enabled entity');
     }
 
     /**
@@ -204,12 +202,10 @@ final class ManagingChannelsContext implements Context
      */
     public function iShouldBeNotifiedThatIsRequired($element)
     {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
-        Assert::true(
-            $currentPage->checkValidationMessageFor($element, sprintf('Please enter channel %s.', $element)),
-            sprintf('Tax category %s should be required.', $element)
-        );
+        Assert::same($currentPage->getValidationMessage($element), sprintf('Please enter channel %s.', $element));
     }
 
     /**
@@ -254,10 +250,7 @@ final class ManagingChannelsContext implements Context
      */
     public function iShouldBeNotifiedThatChannelWithThisCodeAlreadyExists()
     {
-        Assert::true(
-            $this->createPage->checkValidationMessageFor('code', 'Channel code has to be unique.'),
-            'Unique code violation message should appear on page, but it does not.'
-        );
+        Assert::same($this->createPage->getValidationMessage('code'), 'Channel code has to be unique.');
     }
 
     /**
@@ -349,7 +342,7 @@ final class ManagingChannelsContext implements Context
     public function iShouldBeNotifiedThatItCannotBeDeleted()
     {
         $this->notificationChecker->checkNotification(
-            "The channel cannot be deleted. At least one enabled channel is required.", 
+            "The channel cannot be deleted. At least one enabled channel is required.",
             NotificationType::failure()
         );
     }
