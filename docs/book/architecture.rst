@@ -11,6 +11,42 @@ All bundles share the same conventions for naming things and the way of data per
 
 For deeper understanding of how Doctrine works, please refer to the `excellent documentation on their official website <http://doctrine-orm.readthedocs.org/en/latest/>`_.
 
+Fullstack Symfony
+-----------------
+
+.. image:: ../_images/symfonyfs.png
+    :scale: 15%
+    :align: center
+
+**Sylius** is based on Symfony2, which is a leading PHP framework to create web applications. Using Symfony allows
+developers to work better and faster by providing them with certainty of developing an application that is fully compatible
+with the business rules, that is structured, maintainable and upgradable, but also it allows to save time by providing generic re-usable modules.
+
+`Learn more about Symfony <http://symfony.com/what-is-symfony>`_.
+
+Doctrine
+--------
+
+.. image:: ../_images/doctrine.png
+    :align: center
+
+**Doctrine** is a family of PHP libraries focused on providing data persistence layer.
+The most important are the object-relational mapper (ORM) and the database abstraction layer (DBAL).
+One of Doctrine's key features is the possibility to write database queries in Doctrine Query Language (DQL) - an object-oriented dialect of SQL.
+
+To learn more about Doctrine - see `their documentation <http://www.doctrine-project.org/about.html>`_.
+
+Twig
+----
+
+.. image:: ../_images/twig.png
+    :scale: 30%
+    :align: center
+
+**Twig** is a modern template engine for PHP that is really fast, secure and flexible. Twig is being used by Symfony.
+
+To read more about Twig, `go here <http://twig.sensiolabs.org/>`_.
+
 Resource Layer
 --------------
 
