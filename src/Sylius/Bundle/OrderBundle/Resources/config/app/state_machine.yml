@@ -11,7 +11,6 @@ winzou_state_machine:
             new: ~
             cart: ~
             cart_locked: ~
-            pending: ~
             released: ~
             confirmed: ~
             shipped: ~
@@ -29,19 +28,19 @@ winzou_state_machine:
                 from: [cart]
                 to: new
             release:
-                from: [pending]
+                from: [new]
                 to: released
             confirm:
-                from: [cart, pending, released]
+                from: [cart, new, released]
                 to: confirmed
             ship:
                 from: [confirmed]
                 to: shipped
             abandon:
-                from: [cart, pending]
+                from: [cart, new]
                 to: abandoned
             cancel:
-                from: [confirmed]
+                from: [new, confirmed]
                 to: cancelled
             return:
                 from: [shipped]
