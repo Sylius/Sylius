@@ -26,7 +26,6 @@ sylius_shop_register:
             form: sylius_customer_registration
             event: register
             template: SyliusShopBundle::register.html.twig
-            permission: false
             redirect:
                 route: sylius_shop_account_dashboard
 
@@ -50,5 +49,4 @@ sylius_shop_user_check_action:
                 method: findOneByEmail
                 arguments:
                     email: $email
-            permission: false
             serialization_groups: [Secured]
