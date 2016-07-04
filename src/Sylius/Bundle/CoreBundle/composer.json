@@ -67,8 +67,8 @@
     },
     "require-dev": {
         "hwi/oauth-bundle": "~0.3",
-        "matthiasnoback/symfony-config-test": "dev-partially-test-below-prototypes as v1.4.0",
-        "matthiasnoback/symfony-dependency-injection-test": "^0.7",
+        "matthiasnoback/symfony-config-test": "^2.0",
+        "matthiasnoback/symfony-dependency-injection-test": "^1.0",
         "phpspec/phpspec": "^2.4",
         "phpunit/phpunit": "^4.8"
     },
@@ -88,10 +88,6 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "repositories": [
-        {
-            "type": "git",
-            "url": "https://github.com/pamil/SymfonyConfigTest.git"
-        },
         {
             "type": "path",
             "url": "../../*/*"
