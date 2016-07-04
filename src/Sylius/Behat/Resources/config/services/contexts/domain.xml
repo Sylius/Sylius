@@ -12,23 +12,12 @@
 -->
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-    <parameters>
-        <parameter key="sylius.behat.context.domain.notification.class">Sylius\Behat\Context\Domain\NotificationContext</parameter>
-        <parameter key="sylius.behat.context.domain.order.class">Sylius\Behat\Context\Domain\OrderContext</parameter>
-        <parameter key="sylius.behat.context.domain.payment.class">Sylius\Behat\Context\Domain\PaymentContext</parameter>
-        <parameter key="sylius.behat.context.domain.product.class">Sylius\Behat\Context\Domain\ProductContext</parameter>
-        <parameter key="sylius.behat.context.domain.promotion.class">Sylius\Behat\Context\Domain\PromotionContext</parameter>
-        <parameter key="sylius.behat.context.domain.promotion_coupon.class">Sylius\Behat\Context\Domain\PromotionCouponContext</parameter>
-        <parameter key="sylius.behat.context.domain.security.class">Sylius\Behat\Context\Domain\SecurityContext</parameter>
-        <parameter key="sylius.behat.context.domain.shipment.class">Sylius\Behat\Context\Domain\ShippingContext</parameter>
-    </parameters>
-
     <services>
-        <service id="sylius.behat.context.domain.notification" class="%sylius.behat.context.domain.notification.class%" scope="scenario">
+        <service id="sylius.behat.context.domain.notification" class="Sylius\Behat\Context\Domain\NotificationContext" scope="scenario">
             <tag name="sylius.behat.context" />
         </service>
 
-        <service id="sylius.behat.context.domain.order" class="%sylius.behat.context.domain.order.class%" scope="scenario">
+        <service id="sylius.behat.context.domain.order" class="Sylius\Behat\Context\Domain\OrderContext" scope="scenario">
             <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
             <argument type="service" id="sylius.repository.order" container="symfony"/>
             <argument type="service" id="sylius.repository.order_item" container="symfony"/>
@@ -37,12 +26,12 @@
             <tag name="sylius.behat.context" />
         </service>
 
-        <service id="sylius.behat.context.domain.payment" class="%sylius.behat.context.domain.payment.class%" scope="scenario">
+        <service id="sylius.behat.context.domain.payment" class="Sylius\Behat\Context\Domain\PaymentContext" scope="scenario">
             <argument type="service" id="sylius.repository.payment" container="symfony"/>
             <tag name="sylius.behat.context" />
         </service>
 
-        <service id="sylius.behat.context.domain.product" class="%sylius.behat.context.domain.product.class%" scope="scenario">
+        <service id="sylius.behat.context.domain.product" class="Sylius\Behat\Context\Domain\ProductContext" scope="scenario">
             <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
             <argument type="service" id="sylius.repository.product" container="symfony" />
             <argument type="service" id="sylius.repository.product_variant" container="symfony" />
@@ -50,23 +39,23 @@
             <tag name="sylius.behat.context" />
         </service>
 
-        <service id="sylius.behat.context.domain.promotion" class="%sylius.behat.context.domain.promotion.class%" scope="scenario">
+        <service id="sylius.behat.context.domain.promotion" class="Sylius\Behat\Context\Domain\PromotionContext" scope="scenario">
             <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
             <argument type="service" id="sylius.repository.promotion" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>
 
-        <service id="sylius.behat.context.domain.promotion_coupon" class="%sylius.behat.context.domain.promotion_coupon.class%" scope="scenario">
+        <service id="sylius.behat.context.domain.promotion_coupon" class="Sylius\Behat\Context\Domain\PromotionCouponContext" scope="scenario">
             <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
             <argument type="service" id="sylius.repository.promotion_coupon" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>
 
-        <service id="sylius.behat.context.domain.security" class="%sylius.behat.context.domain.security.class%" scope="scenario">
+        <service id="sylius.behat.context.domain.security" class="Sylius\Behat\Context\Domain\SecurityContext" scope="scenario">
             <tag name="sylius.behat.context" />
         </service>
 
-        <service id="sylius.behat.context.domain.shipment" class="%sylius.behat.context.domain.shipment.class%" scope="scenario">
+        <service id="sylius.behat.context.domain.shipment" class="Sylius\Behat\Context\Domain\ShippingContext" scope="scenario">
             <argument type="service" id="sylius.repository.shipment" container="symfony"/>
             <tag name="sylius.behat.context" />
         </service>
