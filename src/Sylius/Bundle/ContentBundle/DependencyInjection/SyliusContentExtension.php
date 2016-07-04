@@ -34,13 +34,7 @@ class SyliusContentExtension extends AbstractResourceExtension
 
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
-        $configFiles = [
-            // ...
-        ];
-
-        foreach ($configFiles as $configFile) {
-            $loader->load($configFile);
-        }
+        $loader->load('services.xml');
 
         $imagineBlock = $container->getDefinition('sylius.form.type.imagine_block');
         $imagineBlock->addArgument(new Reference('liip_imagine.filter.configuration'));

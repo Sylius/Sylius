@@ -1,0 +1,20 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+default:
+    suites:
+        ui_managing_static_contents:
+            contexts_as_services:
+                - sylius.behat.context.hook.doctrine_orm
+                - sylius.behat.context.hook.phpcr
+
+                - sylius.behat.context.transform.shared_storage
+
+                - sylius.behat.context.setup.security
+                - sylius.behat.context.setup.static_content
+
+                - sylius.behat.context.ui.admin.managing_static_contents
+                - sylius.behat.context.ui.admin.notification
+
+            filters:
+                tags: "@managing_static_contents && @ui"

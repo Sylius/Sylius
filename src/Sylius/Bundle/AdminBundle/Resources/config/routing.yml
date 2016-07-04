@@ -21,7 +21,7 @@ sylius_admin_currency:
 
 sylius_admin_customer:
     resource: "@SyliusAdminBundle/Resources/config/routing/customer.yml"
-    
+
 sylius_admin_locale:
     resource: "@SyliusAdminBundle/Resources/config/routing/locale.yml"
 
@@ -56,6 +56,9 @@ sylius_admin_security:
 
 sylius_admin_shipping_method:
     resource: "@SyliusAdminBundle/Resources/config/routing/shipping_method.yml"
+
+sylius_admin_static_content:
+    resource: "@SyliusAdminBundle/Resources/config/routing/static_content.yml"
 
 sylius_admin_taxon:
     resource: "@SyliusAdminBundle/Resources/config/routing/taxon.yml"
