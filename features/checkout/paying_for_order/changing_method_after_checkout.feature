@@ -1,5 +1,5 @@
 @paying_for_order
-Feature: Changing the method on the order payment page
+Feature: Changing the method after checkout
     In order to try different payment methods
     As a Customer
     I want to be able to change the method after checking out
@@ -10,7 +10,7 @@ Feature: Changing the method on the order payment page
         And there is user "john@example.com" identified by "password123"
         And the store has a product "PHP T-Shirt" priced at "$19.99"
         And the store allows paying "PayPal Express Checkout"
-        And it also allows offline payment
+        And the store allows paying "Offline"
         And I am logged in as "john@example.com"
 
     @todo

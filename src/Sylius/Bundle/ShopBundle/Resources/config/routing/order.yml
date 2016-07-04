@@ -18,6 +18,5 @@ sylius_shop_order_after_pay:
     defaults:
         _controller: sylius.controller.order:afterPayAction
         _sylius:
-            canceled: sylius_shop_checkout_canceled_payment
             redirect:
                 route: sylius_shop_checkout_thank_you
