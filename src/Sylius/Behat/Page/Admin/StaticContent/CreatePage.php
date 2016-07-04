@@ -41,4 +41,16 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     {
         $this->getSession()->getPage()->fillField('Body', $body);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getDefinedElements()
+    {
+        return array_merge(parent::getDefinedElements(), [
+            'title' => '#sylius_static_content_title',
+            'name' => '#sylius_static_content_name',
+            'body' => '#sylius_static_content_body',
+        ]);
+    }
 }

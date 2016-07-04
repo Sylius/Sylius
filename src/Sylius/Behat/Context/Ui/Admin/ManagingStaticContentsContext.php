@@ -103,6 +103,17 @@ final class ManagingStaticContentsContext implements Context
     }
 
     /**
+     * @Then /^I should be notified that (body|name|title) is required$/
+     */
+    public function iShouldBeNotifiedThatElementIsRequired($element)
+    {
+        Assert::same(
+            $this->createPage->getValidationMessage($element),
+            'This value should not be blank.'
+        );
+    }
+
+    /**
      * @Then the static content :title should appear in the store
      * @Then I should see the static content :title in the list
      */
@@ -127,6 +138,21 @@ final class ManagingStaticContentsContext implements Context
             (int) $amount,
             $this->indexPage->countItems(),
             'Amount of currencies should be equal %s, but was %2$s.'
+        );
+    }
+
+    /**
+     * @Then the static content :title should not be added
+     */
+    public function theCurrencyShouldNotBeAdded($title)
+    {
+        if (!$this->indexPage->isOpen()) {
+            $this->indexPage->open();
+        }
+
+        Assert::false(
+            $this->indexPage->isSingleResourceOnPage(['title' => $title]),
+            sprintf('Static content with title %s was created, but it should not.', $title)
         );
     }
 }
