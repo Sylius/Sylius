@@ -16,6 +16,7 @@ use Sylius\Behat\Page\Shop\Checkout\CanceledPaymentPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\FinalizeStepInterface;
 use Sylius\Behat\Page\External\PaypalExpressCheckoutPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SummaryPageInterface;
+use Sylius\Behat\Page\Shop\Checkout\ThankYouPageInterface;
 use Sylius\Behat\Service\Mocker\PaypalApiMocker;
 use Sylius\Behat\Service\Mocker\PaypalApiMockerInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
@@ -37,14 +38,14 @@ final class PaypalContext implements Context
     private $paypalExpressCheckoutPage;
 
     /**
+     * @var ThankYouPageInterface
+     */
+    private $thankYouPage;
+    
+    /**
      * @var FinalizeStepInterface
      */
     private $checkoutFinalizeStep;
-
-    /**
-     * @var CanceledPaymentPageInterface
-     */
-    private $canceledPaymentPage;
 
     /**
      * @var PaypalApiMockerInterface
@@ -56,38 +57,28 @@ final class PaypalContext implements Context
      */
     private $orderRepository;
 
-
     /**
      * @param SharedStorageInterface $sharedStorage
      * @param PaypalExpressCheckoutPageInterface $paypalExpressCheckoutPage
+     * @param ThankYouPageInterface $thankYouPage
      * @param FinalizeStepInterface $checkoutFinalizeStep
-     * @param CanceledPaymentPageInterface $canceledPaymentPage
      * @param PaypalApiMocker $paypalApiMocker
      * @param OrderRepositoryInterface $orderRepository
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         PaypalExpressCheckoutPageInterface $paypalExpressCheckoutPage,
+        ThankYouPageInterface $thankYouPage,
         FinalizeStepInterface $checkoutFinalizeStep,
-        CanceledPaymentPageInterface $canceledPaymentPage,
         PaypalApiMocker $paypalApiMocker,
         OrderRepositoryInterface $orderRepository
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->paypalExpressCheckoutPage = $paypalExpressCheckoutPage;
+        $this->thankYouPage = $thankYouPage;
         $this->checkoutFinalizeStep = $checkoutFinalizeStep;
-        $this->canceledPaymentPage = $canceledPaymentPage;
         $this->paypalApiMocker = $paypalApiMocker;
         $this->orderRepository = $orderRepository;
-    }
-
-    /**
-     * @Given /^I confirm my order with paypal payment$/
-     */
-    public function iConfirmMyOrderWithPaypalPayment()
-    {
-        $this->paypalApiMocker->mockApiPaymentInitializeResponse();
-        $this->checkoutFinalizeStep->confirmOrder();
     }
 
     /**
@@ -116,11 +107,11 @@ final class PaypalContext implements Context
     }
 
     /**
-     * @When I try to pay again
+     * @When /^I try to pay(?: again|)$/
      */
     public function iTryToPayAgain()
     {
         $this->paypalApiMocker->mockApiPaymentInitializeResponse();
-        $this->canceledPaymentPage->clickPayButton();
+        $this->thankYouPage->pay();
     }
 }

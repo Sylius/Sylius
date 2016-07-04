@@ -23,7 +23,6 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderProcessing\StateResolverInterface;
 use Sylius\Component\Order\OrderTransitions;
-use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\User\Repository\CustomerRepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -137,10 +136,6 @@ class OrderController extends ResourceController
 
         $this->checkAccessToOrder($order);
 
-        if (PaymentInterface::STATE_COMPLETED === $order->getPaymentState()) {
-            return $this->redirectToRoute($configuration->getParameters()->get('redirect'));
-        }
-
         $payment = $order->getLastPayment();
         $captureToken = $this->getTokenFactory()->createCaptureToken(
             $payment->getMethod()->getGateway(),
@@ -176,10 +171,6 @@ class OrderController extends ResourceController
         $orderStateResolver->resolveShippingState($order);
 
         $this->getOrderManager()->flush();
-        if ($status->isCanceled() || $status->isFailed()) {
-            return $this->redirectToRoute($configuration->getParameters()->get('canceled'));
-        }
-
 
         return $this->redirectToRoute(
             $configuration->getParameters()->get('redirect[route]', null, true),
@@ -193,24 +184,6 @@ class OrderController extends ResourceController
      * @return Response
      */
     public function thankYouAction(Request $request)
-    {
-        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
-
-        $orderId = $this->getSession()->get('sylius_order_id');
-        $order = $this->repository->findOneForPayment($orderId);
-
-        return $this->render(
-            $configuration->getParameters()->get('template'),
-            ['order' => $order]
-        );
-    }
-
-    /**
-     * @param Request $request
-     *
-     * @return Response
-     */
-    public function afterCancelAction(Request $request)
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 

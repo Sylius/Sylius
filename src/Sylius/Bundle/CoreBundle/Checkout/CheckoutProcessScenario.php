@@ -47,10 +47,7 @@ class CheckoutProcessScenario implements ProcessScenarioInterface
             ->add('finalize', 'sylius_checkout_finalize')
             ->setDisplayRoute('sylius_checkout_display')
             ->setForwardRoute('sylius_checkout_forward')
-            ->setRedirect('sylius_shop_order_pay')
-            ->setRedirectParams([
-                'orderId' => $this->getCurrentCart()->getId(),
-            ])
+            ->setRedirect('sylius_shop_checkout_thank_you')
             ->validate(function () {
                 return !$this->getCurrentCart()->isEmpty();
             })

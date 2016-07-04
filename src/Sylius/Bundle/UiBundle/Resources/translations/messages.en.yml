@@ -528,6 +528,7 @@ sylius:
         payment_method: 'Payment method'
         payment_methods: 'Payment Methods'
         payment_mode: 'Payment mode'
+        payment_ready_to_pay: Your payment is ready to pay
         payment_state: 'Payment state'
         payments: Payments
         pay: Pay

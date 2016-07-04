@@ -215,7 +215,6 @@
             <argument type="service" id="sylius.behat.page.shop.checkout.summary" />
             <argument type="service" id="sylius.behat.page.shop.checkout.finalize_step" />
             <argument type="service" id="sylius.behat.page.shop.checkout.thank_you" />
-            <argument type="service" id="sylius.behat.page.shop.checkout.canceled_payment" />
             <argument type="service" id="sylius.repository.order" container="symfony" />
             <argument type="service" id="sylius.behat.security" />
             <tag name="sylius.behat.context" />
@@ -230,8 +229,8 @@
         <service id="sylius.behat.context.ui.paypal" class="Sylius\Behat\Context\Ui\PaypalContext" scope="scenario">
             <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
             <argument type="service" id="sylius.behat.page.external.paypal_checkout_express" />
+            <argument type="service" id="sylius.behat.page.shop.checkout.thank_you" />
             <argument type="service" id="sylius.behat.page.shop.checkout.finalize_step" />
-            <argument type="service" id="sylius.behat.page.shop.checkout.canceled_payment" />
             <argument type="service" id="sylius.behat.paypal_api_mocker" />
             <argument type="service" id="sylius.repository.order" container="symfony" />
             <tag name="sylius.behat.context" />

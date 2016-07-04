@@ -26,15 +26,12 @@ use Sylius\Behat\Page\Shop\Checkout\ThankYouPageInterface;
 use Sylius\Behat\Page\UnexpectedPageException;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Behat\Service\SecurityServiceInterface;
-use Sylius\Behat\Page\Shop\Checkout\CanceledPaymentPageInterface;
 use Sylius\Component\Core\Model\AddressInterface;
-use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface;
-use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Webmozart\Assert\Assert;
 
@@ -91,7 +88,7 @@ final class CheckoutContext implements Context
     /**
      * @var ThankYouPageInterface
      */
-    private $checkoutThankYouPage;
+    private $thankYouPage;
 
     /**
      * @var ShippingPageInterface
@@ -102,11 +99,6 @@ final class CheckoutContext implements Context
      * @var SummaryPageInterface
      */
     private $summaryPage;
-
-    /**
-     * @var CanceledPaymentPageInterface
-     */
-    private $canceledPaymentPage;
 
     /**
      * @var OrderRepositoryInterface
@@ -130,8 +122,7 @@ final class CheckoutContext implements Context
      * @param PaymentPageInterface $paymentPage
      * @param SummaryPageInterface $summaryPage
      * @param FinalizeStepInterface $checkoutFinalizeStep
-     * @param ThankYouPageInterface $checkoutThankYouPage
-     * @param CanceledPaymentPageInterface $canceledPaymentPage
+     * @param ThankYouPageInterface $thankYouPage
      * @param OrderRepositoryInterface $orderRepository
      * @param SecurityServiceInterface $securityService
      */
@@ -147,8 +138,7 @@ final class CheckoutContext implements Context
         PaymentPageInterface $paymentPage,
         SummaryPageInterface $summaryPage,
         FinalizeStepInterface $checkoutFinalizeStep,
-        ThankYouPageInterface $checkoutThankYouPage,
-        CanceledPaymentPageInterface $canceledPaymentPage,
+        ThankYouPageInterface $thankYouPage,
         OrderRepositoryInterface $orderRepository,
         SecurityServiceInterface $securityService
     ) {
@@ -163,8 +153,7 @@ final class CheckoutContext implements Context
         $this->paymentPage = $paymentPage;
         $this->summaryPage = $summaryPage;
         $this->checkoutFinalizeStep = $checkoutFinalizeStep;
-        $this->checkoutThankYouPage = $checkoutThankYouPage;
-        $this->canceledPaymentPage = $canceledPaymentPage;
+        $this->thankYouPage = $thankYouPage;
         $this->orderRepository = $orderRepository;
         $this->securityService = $securityService;
     }
@@ -527,11 +516,10 @@ final class CheckoutContext implements Context
      */
     public function iShouldSeeTheThankYouPage()
     {
-        /** @var UserInterface $user */
-        $user = $this->sharedStorage->get('user');
-        $customer = $user->getCustomer();
-
-        expect($this->checkoutThankYouPage->hasThankYouMessageFor($customer->getFullName()))->toBe(true);
+        Assert::true(
+            $this->thankYouPage->hasThankYouMessage(),
+            'I should see thank you message, but i do not'
+        );
     }
 
     /**
@@ -539,19 +527,9 @@ final class CheckoutContext implements Context
      */
     public function iShouldBeRedirectedBackToTheThankYouPage()
     {
-        $this->checkoutThankYouPage->waitForResponse(5);
+        $this->thankYouPage->waitForResponse(5);
 
-        expect($this->checkoutThankYouPage->isOpen())->toBe(true);
-    }
-
-    /**
-     * @Then I should be redirected back to the canceled payment page
-     */
-    public function iShouldBeRedirectedBackToTheCanceledPaymentPage()
-    {
-        $this->canceledPaymentPage->waitForResponse(5);
-
-        expect($this->canceledPaymentPage->isOpen())->toBe(true);
+        expect($this->thankYouPage->isOpen())->toBe(true);
     }
 
     /**
@@ -850,6 +828,22 @@ final class CheckoutContext implements Context
         Assert::true(
             $this->shippingPage->isOpen(),
             'Checkout shipping step should be opened, but it is not.'
+        );
+    }
+
+    /**
+     * @Then I should be able to pay again
+     */
+    public function iShouldBeAbleToPayAgain()
+    {
+        Assert::true(
+            $this->thankYouPage->isOpen(),
+            'I should be on thank you page, but i am not.'
+        );
+
+        Assert::true(
+            $this->thankYouPage->hasPayAction(),
+            'I should be able to pay, but I am not.'
         );
     }
 
