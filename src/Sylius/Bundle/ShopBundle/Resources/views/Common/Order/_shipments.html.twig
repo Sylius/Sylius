@@ -1,0 +1,10 @@
+{% for shipment in order.shipments %}
+    <div class="ui large icon message">
+        <i class="truck icon"></i>
+        <div class="content">
+            <div class="header">
+                {{ shipment.method }}
+            </div>
+        </div>
+    </div>
+{% endfor %}

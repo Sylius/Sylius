@@ -1,0 +1,26 @@
+<tr>
+    <th colspan="4" class="right aligned" id="subtotal">
+        {{ 'sylius.ui.subtotal'|trans }}: {{ order.itemsTotal|sylius_price(order.currencyCode) }}
+    </th>
+</tr>
+<tr>
+    <td colspan="4" class="right aligned">
+        {{ 'sylius.ui.shipping_total'|trans }}: {{ order.shippingTotal|sylius_price(order.currencyCode) }}
+    </td>
+</tr>
+<tr>
+    <td colspan="4" class="right aligned">
+        {{ 'sylius.ui.tax_total'|trans }}: {{ order.taxTotal|sylius_price(order.currencyCode) }}
+    </td>
+</tr>
+<tr>
+    <td colspan="4" class="right aligned">
+        {% set orderDiscount = order.orderPromotionTotal %}
+        {{ 'sylius.ui.promotion_total'|trans }}: {% if not orderDiscount == 0 %}-{% endif %}{{ (-1 * orderDiscount)|sylius_price(order.currencyCode) }}
+    </td>
+</tr>
+<tr>
+    <td colspan="4" class="right aligned" style="font-size: 1.5em;" id="total">
+        {{ 'sylius.ui.total'|trans }}: {{ order.total|sylius_price(order.currencyCode) }}
+    </td>
+</tr>
