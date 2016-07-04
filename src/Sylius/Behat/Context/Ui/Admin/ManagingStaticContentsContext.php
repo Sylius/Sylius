@@ -15,6 +15,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\StaticContent\CreatePageInterface;
 use Sylius\Behat\Page\Admin\StaticContent\UpdatePageInterface;
+use Sylius\Bundle\ContentBundle\Document\StaticContent;
 use Webmozart\Assert\Assert;
 
 /**
@@ -154,5 +155,40 @@ final class ManagingStaticContentsContext implements Context
             $this->indexPage->isSingleResourceOnPage(['title' => $title]),
             sprintf('Static content with title %s was created, but it should not.', $title)
         );
+    }
+
+    /**
+     * @Given /^I want to edit (this static content)$/
+     */
+    public function iWantToEditThisStaticContent(StaticContent $staticContent)
+    {
+        $this->updatePage->open(['id' => $staticContent->getId()]);
+    }
+
+    /**
+     * @When I change its body to :body
+     */
+    public function iChangeItsBodyTo($body)
+    {
+        $this->updatePage->changeBodyTo($body);
+    }
+
+    /**
+     * @When I save my changes
+     * @When I try to save my changes
+     */
+    public function iSaveMyChanges()
+    {
+        $this->updatePage->saveChanges();
+    }
+
+    /**
+     * @Given /^(this static content) should have body "([^"]+)"$/
+     */
+    public function thisStaticContentShouldHaveBody(StaticContent $staticContent, $body)
+    {
+        $this->updatePage->open(['id' => $staticContent->getId()]);
+
+        Assert::same($this->updatePage->getBody(), $body);
     }
 }

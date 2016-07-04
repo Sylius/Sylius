@@ -20,6 +20,7 @@ sylius_admin_static_content_update:
     defaults:
         _controller: sylius.controller.static_content:updateAction
         _sylius:
+            section: admin
             permission: true
             template: SyliusAdminBundle:Crud:update.html.twig
             vars:

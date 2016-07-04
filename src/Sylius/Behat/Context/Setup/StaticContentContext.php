@@ -60,6 +60,8 @@ final class StaticContentContext implements Context
 
         $this->staticContentManager->persist($staticContent);
         $this->staticContentManager->flush();
+
+        $this->sharedStorage->set('static_content', $staticContent);
     }
 
     /**
@@ -69,5 +71,18 @@ final class StaticContentContext implements Context
     {
         $this->theStoreHasStaticContent($firstTitle);
         $this->theStoreHasStaticContent($secondTitle);
+    }
+
+    /**
+     * @Given the store has static content :title with body :body
+     */
+    public function theStoreHasStaticContentWithBody($title, $body)
+    {
+        $staticContent = $this->staticContentExampleFactory->create(['title' => $title, 'body' => $body]);
+
+        $this->staticContentManager->persist($staticContent);
+        $this->staticContentManager->flush();
+
+        $this->sharedStorage->set('static_content', $staticContent);
     }
 }
