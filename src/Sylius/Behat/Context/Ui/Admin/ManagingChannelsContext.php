@@ -434,6 +434,26 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
+     * @When I select the :taxZone as default tax zone
+     */
+    public function iSelectDefaultTaxZone($taxZone)
+    {
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+
+        $currentPage->chooseDefaultTaxZone($taxZone);
+    }
+
+    /**
+     * @When I select the :taxCalculationStrategy as tax calculation strategy
+     */
+    public function iSelectTaxCalculationStrategy($taxCalculationStrategy)
+    {
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+
+        $currentPage->chooseTaxCalculationStrategy($taxCalculationStrategy);
+    }
+
+    /**
      * @Then the :paymentMethodName payment method should be available for the :channel channel
      */
     public function thePaymentMethodShouldBeAvailableForTheChannel($paymentMethodName, ChannelInterface $channel)
@@ -442,7 +462,33 @@ final class ManagingChannelsContext implements Context
 
         Assert::true(
             $this->updatePage->isPaymentMethodChosen($paymentMethodName),
-            sprintf('Payment method %s should be selected but it is not', $paymentMethodName)
+            sprintf('Payment method %s should be selected, but it is not', $paymentMethodName)
+        );
+    }
+
+    /**
+     * @Then the default tax zone for the :channel channel should be :taxZone
+     */
+    public function theDefaultTaxZoneForTheChannelShouldBe(ChannelInterface $channel, $taxZone)
+    {
+        $this->updatePage->open(['id' => $channel->getId()]);
+
+        Assert::true(
+            $this->updatePage->isDefaultTaxZoneChosen($taxZone),
+            sprintf('Default tax zone %s should be selected, but it is not', $taxZone)
+        );
+    }
+
+    /**
+     * @Then the tax calculation strategy for the :channel channel should be :taxCalculationStrategy
+     */
+    public function theTaxCalculationStrategyForTheChannelShouldBe(ChannelInterface $channel, $taxCalculationStrategy)
+    {
+        $this->updatePage->open(['id' => $channel->getId()]);
+
+        Assert::true(
+            $this->updatePage->isTaxCalculationStrategyChosen($taxCalculationStrategy),
+            sprintf('Tax calculation strategy %s should be selected, but it is not', $taxCalculationStrategy)
         );
     }
 

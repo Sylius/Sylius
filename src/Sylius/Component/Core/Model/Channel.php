@@ -13,7 +13,7 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
+use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Model\Channel as BaseChannel;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
@@ -35,6 +35,16 @@ class Channel extends BaseChannel implements ChannelInterface
      * @var LocaleInterface
      */
     protected $defaultLocale;
+
+    /**
+     * @var ZoneInterface
+     */
+    protected $defaultTaxZone;
+
+    /**
+     * @var string
+     */
+    protected $taxCalculationStrategy;
 
     /**
      * @var CurrencyInterface[]|Collection
@@ -123,6 +133,38 @@ class Channel extends BaseChannel implements ChannelInterface
     public function setDefaultLocale(LocaleInterface $defaultLocale)
     {
         $this->defaultLocale = $defaultLocale;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDefaultTaxZone()
+    {
+        return $this->defaultTaxZone;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setDefaultTaxZone(ZoneInterface $defaultTaxZone)
+    {
+        $this->defaultTaxZone = $defaultTaxZone;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getTaxCalculationStrategy()
+    {
+        return $this->taxCalculationStrategy;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setTaxCalculationStrategy($taxCalculationStrategy)
+    {
+        $this->taxCalculationStrategy = $taxCalculationStrategy;
     }
 
     /**

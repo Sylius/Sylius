@@ -9,20 +9,21 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Core\Provider;
+namespace Sylius\Bundle\CoreBundle\Provider;
 
-use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Provider\ZoneProviderInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-interface ZoneProviderInterface
+class ChannelBasedDefaultTaxZoneProvider implements ZoneProviderInterface
 {
     /**
-     * @param OrderInterface $order
-     *
-     * @return ZoneInterface|null
+     * {@inheritdoc}
      */
-    public function getZone(OrderInterface $order);
+    public function getZone(OrderInterface $order)
+    {
+        return $order->getChannel()->getDefaultTaxZone();
+    }
 }

@@ -124,7 +124,7 @@
         <parameter key="sylius.purger.orm_purger.doctrine.class">Doctrine\Common\DataFixtures\Purger\ORMPurger</parameter>
         <parameter key="sylius.purger.orm_purger.class">Sylius\Bundle\CoreBundle\Purger\ORMPurger</parameter>
 
-        <parameter key="sylius.provider.default_zone_provider.class">Sylius\Bundle\CoreBundle\Provider\DefaultTaxZoneProvider</parameter>
+        <parameter key="sylius.provider.channel_based_default_zone_provider.class">Sylius\Bundle\CoreBundle\Provider\ChannelBasedDefaultTaxZoneProvider</parameter>
 
         <parameter key="sylius.integer_distributor.class">Sylius\Component\Core\Distributor\IntegerDistributor</parameter>
         <parameter key="sylius.proportional_integer_distributor.class">Sylius\Component\Core\Distributor\ProportionalIntegerDistributor</parameter>
@@ -155,10 +155,6 @@
                 <argument key="locale">%locale%</argument>
             </argument>
             <tag name="sylius.settings_schema" alias="sylius_general" />
-        </service>
-        <service id="sylius.settings_schema.taxation" class="%sylius.settings_schema.taxation.class%">
-            <argument type="service" id="sylius.repository.zone" />
-            <tag name="sylius.settings_schema" alias="sylius_taxation" />
         </service>
         <service id="sylius.settings_schema.security" class="%sylius.settings_schema.security.class%">
             <tag name="sylius.settings_schema" alias="sylius_security" />
@@ -221,17 +217,7 @@
             <tag name="sylius.process.step" alias="sylius_checkout_finalize" />
         </service>
 
-        <service id="sylius.provider.default_zone_provider" class="%sylius.provider.default_zone_provider.class%">
-            <argument type="service">
-                <service
-                        factory-service="sylius.settings.manager"
-                        factory-method="load"
-                        class="Sylius\Bundle\SettingsBundle\Model\Settings"
-                        >
-                    <argument>sylius_taxation</argument>
-                </service>
-            </argument>
-        </service>
+        <service id="sylius.provider.channel_based_default_zone_provider" class="%sylius.provider.channel_based_default_zone_provider.class%" />
         <service id="sylius.integer_distributor" class="%sylius.integer_distributor.class%" />
         <service id="sylius.proportional_integer_distributor" class="%sylius.proportional_integer_distributor.class%" />
 
@@ -271,7 +257,7 @@
         </service>
 
         <service id="sylius.taxation.order_taxes_processor" class="%sylius.taxation.order_taxes_processor.class%">
-            <argument type="service" id="sylius.provider.default_zone_provider" />
+            <argument type="service" id="sylius.provider.channel_based_default_zone_provider" />
             <argument type="service" id="sylius.zone_matcher" />
             <argument type="service" id="sylius.registry.tax_calculation_strategy" />
         </service>
@@ -282,15 +268,6 @@
                 <argument type="service" id="sylius.taxation.order_items_taxes_applicator" />
                 <argument type="service" id="sylius.taxation.order_shipment_taxes_applicator" />
             </argument>
-            <argument type="service">
-                <service
-                        factory-service="sylius.settings.manager"
-                        factory-method="load"
-                        class="Sylius\Bundle\SettingsBundle\Model\Settings"
-                >
-                    <argument>sylius_taxation</argument>
-                </service>
-            </argument>
             <tag name="sylius.taxation.calculation_strategy" type="order_items_based" label="Order items based" />
         </service>
 
@@ -299,15 +276,6 @@
             <argument type="collection">
                 <argument type="service" id="sylius.taxation.order_item_units_taxes_applicator" />
                 <argument type="service" id="sylius.taxation.order_shipment_taxes_applicator" />
-            </argument>
-            <argument type="service">
-                <service
-                        factory-service="sylius.settings.manager"
-                        factory-method="load"
-                        class="Sylius\Bundle\SettingsBundle\Model\Settings"
-                >
-                    <argument>sylius_taxation</argument>
-                </service>
             </argument>
             <tag name="sylius.taxation.calculation_strategy" type="order_item_units_based" label="Order item units based" />
         </service>

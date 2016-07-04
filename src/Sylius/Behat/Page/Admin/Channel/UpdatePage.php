@@ -99,9 +99,45 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function chooseDefaultTaxZone($taxZone)
+    {
+        $this->getDocument()->selectFieldOption('Default tax zone', $taxZone);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function chooseTaxCalculationStrategy($taxZone)
+    {
+        $this->getDocument()->selectFieldOption('Tax calculation strategy', $taxZone);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function isPaymentMethodChosen($paymentMethod)
     {
         return $this->getElement('payment_methods')->find('named', array('option', $paymentMethod))->hasAttribute('selected');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isDefaultTaxZoneChosen($taxZone)
+    {
+        return $this->getElement('default_tax_zone')->find('named', array('option', $taxZone))->hasAttribute('selected');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isTaxCalculationStrategyChosen($taxCalculationStrategy)
+    {
+        return $this
+            ->getElement('tax_calculation_strategy')
+            ->find('named', array('option', $taxCalculationStrategy))
+            ->hasAttribute('selected')
+        ;
     }
 
     /**
@@ -127,12 +163,14 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_channel_code',
+            'currencies' => '#sylius_channel_currencies',
+            'tax_calculation_strategy' => '#sylius_channel_taxCalculationStrategy',
+            'default_tax_zone' => '#sylius_channel_defaultTaxZone',
             'enabled' => '#sylius_channel_enabled',
             'locales' => '#sylius_channel_locales',
-            'currencies' => '#sylius_channel_currencies',
-            'shipping_methods' => '#sylius_channel_shippingMethods',
-            'payment_methods' => '#sylius_channel_paymentMethods',
             'name' => '#sylius_channel_name',
+            'payment_methods' => '#sylius_channel_paymentMethods',
+            'shipping_methods' => '#sylius_channel_shippingMethods',
         ]);
     }
 }

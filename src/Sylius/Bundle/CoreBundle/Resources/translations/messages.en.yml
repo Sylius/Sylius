@@ -33,6 +33,8 @@ sylius:
             currencies: Currencies
             shipping_methods: Shipping Methods
             payment_methods: Payment Methods
+            tax_calculation_strategy: Tax calculation strategy
+            tax_zone_default: Default tax zone
             theme: Theme
             hostname: Hostname
         image:

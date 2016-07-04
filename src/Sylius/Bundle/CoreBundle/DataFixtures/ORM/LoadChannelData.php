@@ -61,6 +61,7 @@ class LoadChannelData extends DataFixture
         $channel->setCode($code);
         $channel->setName($name);
         $channel->setColor($this->faker->randomElement(['Red', 'Green', 'Blue', 'Orange', 'Pink']));
+        $channel->setTaxCalculationStrategy('order_items_based');
 
         $this->setReference('Sylius.Channel.'.$code, $channel);
 

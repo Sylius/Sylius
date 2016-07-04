@@ -18,12 +18,16 @@
 
     <mapped-superclass name="Sylius\Component\Core\Model\Channel" table="sylius_channel">
         <field name="themeName" column="theme_name" type="string" nullable="true" />
+        <field name="taxCalculationStrategy" column="tax_calculation_strategy" type="string" />
 
         <many-to-one field="defaultLocale" target-entity="Sylius\Component\Locale\Model\LocaleInterface">
             <join-column name="default_locale_id" referenced-column-name="id" nullable="true" on-delete="SET NULL"/>
         </many-to-one>
         <many-to-one field="defaultCurrency" target-entity="Sylius\Component\Currency\Model\CurrencyInterface">
             <join-column name="default_currency_id" referenced-column-name="id" nullable="true" on-delete="SET NULL"/>
+        </many-to-one>
+        <many-to-one field="defaultTaxZone" target-entity="Sylius\Component\Addressing\Model\ZoneInterface">
+            <join-column name="default_tax_zone_id" referenced-column-name="id" nullable="true" on-delete="SET NULL"/>
         </many-to-one>
         <many-to-many field="currencies" target-entity="Sylius\Component\Currency\Model\CurrencyInterface">
             <join-table name="sylius_channel_currencies">
