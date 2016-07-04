@@ -183,12 +183,32 @@ final class ManagingStaticContentsContext implements Context
     }
 
     /**
-     * @Given /^(this static content) should have body "([^"]+)"$/
+     * @When I delete static content :title
+     */
+    public function iDeleteStaticContent($title)
+    {
+        $this->indexPage->open();
+        $this->indexPage->deleteResourceOnPage(['title' => $title]);
+    }
+
+    /**
+     * @Then /^(this static content) should have body "([^"]+)"$/
      */
     public function thisStaticContentShouldHaveBody(StaticContent $staticContent, $body)
     {
         $this->updatePage->open(['id' => $staticContent->getId()]);
 
         Assert::same($this->updatePage->getBody(), $body);
+    }
+
+    /**
+     * @Then the static content :title should no longer exist in the registry
+     */
+    public function theStaticContentShouldNoLongerExistInTheRegistry($title)
+    {
+        Assert::false(
+            $this->indexPage->isSingleResourceOnPage(['title' => $title]),
+            sprintf('Static content with title %s exists, but should not.', $title)
+        );
     }
 }

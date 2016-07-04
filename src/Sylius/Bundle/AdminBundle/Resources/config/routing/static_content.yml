@@ -35,6 +35,7 @@ sylius_admin_static_content_delete:
     defaults:
         _controller: sylius.controller.static_content:deleteAction
         _sylius:
+            section: admin
             permission: true
     requirements:
         id: ".+"
