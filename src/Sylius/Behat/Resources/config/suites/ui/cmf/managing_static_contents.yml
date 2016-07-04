@@ -6,6 +6,7 @@ default:
         ui_managing_static_contents:
             contexts_as_services:
                 - sylius.behat.context.hook.doctrine_orm
+                - sylius.behat.context.hook.phpcr
 
                 - sylius.behat.context.transform.shared_storage
 
