@@ -69,9 +69,14 @@ sylius_fixtures:
                     options:
                         random: 3
 
-                user:
+                regular_user:
+                    name: user
                     options:
                         random: 20
+
+                admin_user:
+                    name: user
+                    options:
                         custom:
                             -
                                 email: sylius@example.com
