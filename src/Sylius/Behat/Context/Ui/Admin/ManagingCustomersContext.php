@@ -202,10 +202,7 @@ final class ManagingCustomersContext implements Context
      */
     public function iShouldBeNotifiedThatFirstNameIsRequired($elementName)
     {
-        Assert::true(
-            $this->createPage->checkValidationMessageFor($elementName, sprintf('Please enter your %s.', $elementName)),
-            sprintf('Customer %s should be required.', $elementName)
-        );
+        Assert::same($this->createPage->getValidationMessage($elementName), sprintf('Please enter your %s.', $elementName));
     }
 
     /**
@@ -213,12 +210,9 @@ final class ManagingCustomersContext implements Context
      */
     public function iShouldBeNotifiedThatTheElementShouldBe($elementName, $validationMessage)
     {
-        Assert::true(
-            $this->updatePage->checkValidationMessageFor(
-                $elementName,
-                sprintf('%s must be %s.', ucfirst($elementName), $validationMessage)
-            ),
-            sprintf('Customer %s should be %s.', $elementName, $validationMessage)
+        Assert::same(
+            $this->updatePage->getValidationMessage($elementName),
+            sprintf('%s must be %s.', ucfirst($elementName), $validationMessage)
         );
     }
 
@@ -294,10 +288,7 @@ final class ManagingCustomersContext implements Context
      */
     public function iShouldBeNotifiedThatEmailIsNotValid()
     {
-        Assert::true(
-            $this->createPage->checkValidationMessageFor('email', 'This email is invalid.'),
-            sprintf('Customer should have required form of email.')
-        );
+        Assert::same($this->createPage->getValidationMessage('email'), 'This email is invalid.');
     }
 
     /**
@@ -305,10 +296,7 @@ final class ManagingCustomersContext implements Context
      */
     public function iShouldBeNotifiedThatEmailMustBeUnique()
     {
-        Assert::true(
-            $this->createPage->checkValidationMessageFor('email', 'This email is already used.'),
-            sprintf('Unique email violation message should appear on page, but it does not.')
-        );
+        Assert::same($this->createPage->getValidationMessage('email'), 'This email is already used.');
     }
 
     /**

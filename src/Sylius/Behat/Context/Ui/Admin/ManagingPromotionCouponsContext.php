@@ -316,12 +316,10 @@ final class ManagingPromotionCouponsContext implements Context
      */
     public function iShouldBeNotifiedThatCouponWithThisCodeAlreadyExists()
     {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
-        Assert::true(
-            $currentPage->checkValidationMessageFor('code', 'This coupon already exists.'),
-            'Unique code violation message should appear on page, but it does not.'
-        );
+        Assert::same($currentPage->getValidationMessage('code'), 'This coupon already exists.');
     }
 
     /**
@@ -329,12 +327,10 @@ final class ManagingPromotionCouponsContext implements Context
      */
     public function iShouldBeNotifiedThatIsRequired($element)
     {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
-        Assert::true(
-            $currentPage->checkValidationMessageFor($element, sprintf('Please enter coupon %s.', $element)),
-            sprintf('I should be notified that coupon %s should be required.', $element)
-        );
+        Assert::same($currentPage->getValidationMessage($element), sprintf('Please enter coupon %s.', $element));
     }
 
     /**
@@ -377,12 +373,10 @@ final class ManagingPromotionCouponsContext implements Context
      */
     public function iShouldBeNotifiedThatCouponUsageLimitMustBeAtLeast()
     {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
-        Assert::true(
-            $currentPage->checkValidationMessageFor('usage_limit', 'Coupon usage limit must be at least 1.'),
-            'Min usage limit violation message should appear on page, but it did not.'
-        );
+        Assert::same($currentPage->getValidationMessage('usage_limit'), 'Coupon usage limit must be at least 1.');
     }
 
     /**

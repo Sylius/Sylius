@@ -461,7 +461,7 @@ final class ManagingProductsContext implements Context
             $this->updateSimpleProductPage,
             $this->updateConfigurableProductPage,
         ], $this->sharedStorage->get('product'));
-        
+
         $currentPage->selectMainTaxon($taxon);
     }
 
@@ -477,7 +477,7 @@ final class ManagingProductsContext implements Context
         ], $this->sharedStorage->get('product'));
 
         $currentPage->open(['id' => $product->getId()]);
-        
+
         Assert::true(
             $this->updateConfigurableProductPage->isMainTaxonChosen($taxonName),
             sprintf('The main taxon %s should be chosen, but it does not.', $taxonName)
@@ -514,6 +514,7 @@ final class ManagingProductsContext implements Context
     {
         $product = $this->sharedStorage->has('product') ? $this->sharedStorage->get('product') : null;
 
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([
             $this->createSimpleProductPage,
             $this->createConfigurableProductPage,
@@ -521,9 +522,6 @@ final class ManagingProductsContext implements Context
             $this->updateConfigurableProductPage,
         ], $product);
 
-        Assert::true(
-            $currentPage->checkValidationMessageFor($element, $message),
-            sprintf('Product %s should be required.', $element)
-        );
+        Assert::same($currentPage->getValidationMessage($element), $message);
     }
 }
