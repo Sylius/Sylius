@@ -29,16 +29,16 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
-    public function setInternalName($internalName)
+    public function setName($name)
     {
-        $this->getSession()->getPage()->fillField('Internal name', $internalName);
+        $this->getSession()->getPage()->fillField('Internal name', $name);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setContent($content)
+    public function setBody($body)
     {
-        $this->getSession()->getPage()->fillField('Body', $content);
+        $this->getSession()->getPage()->fillField('Body', $body);
     }
 }

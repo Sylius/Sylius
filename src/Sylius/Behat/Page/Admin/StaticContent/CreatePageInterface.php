@@ -24,12 +24,12 @@ interface CreatePageInterface extends BaseCreatePageInterface
     public function setTitle($title);
 
     /**
-     * @param string $internalName
+     * @param string $name
      */
-    public function setInternalName($internalName);
+    public function setName($name);
     
     /**
-     * @param string $content
+     * @param string $body
      */
-    public function setContent($content);
+    public function setBody($body);
 }

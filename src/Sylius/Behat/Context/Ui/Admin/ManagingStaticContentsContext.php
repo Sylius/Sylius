@@ -62,6 +62,14 @@ final class ManagingStaticContentsContext implements Context
     }
 
     /**
+     * @When I want to browse static contents of the store
+     */
+    public function iWantToBrowseStaticContentsOfTheStore()
+    {
+        $this->indexPage->open();
+    }
+
+    /**
      * @When I set its title to :title
      */
     public function iSetItsTitleTo($title)
@@ -70,23 +78,24 @@ final class ManagingStaticContentsContext implements Context
     }
 
     /**
-     * @When I set its internal name to :internalName
+     * @When I set its name to :name
      */
-    public function iSetItsInternalNameTo($internalName)
+    public function iSetItsNameTo($name)
     {
-        $this->createPage->setInternalName($internalName);
+        $this->createPage->setName($name);
     }
 
     /**
-     * @When I set its content to :content
+     * @When I set its body to :body
      */
-    public function iSetItsContentTo($content)
+    public function iSetItsBodyTo($body)
     {
-        $this->createPage->setContent($content);
+        $this->createPage->setBody($body);
     }
 
     /**
      * @When I add it
+     * @When I try to add it
      */
     public function iAddIt()
     {
@@ -95,12 +104,29 @@ final class ManagingStaticContentsContext implements Context
 
     /**
      * @Then the static content :title should appear in the store
+     * @Then I should see the static content :title in the list
      */
     public function theStaticContentShouldAppearInTheStore($title)
     {
+        if (!$this->indexPage->isOpen()) {
+            $this->indexPage->open();
+        }
+
         Assert::true(
             $this->indexPage->isSingleResourceOnPage(['title' => $title]),
             sprintf('Could not find static content with title "%s"!', $title)
+        );
+    }
+
+    /**
+     * @Then I should see :amount static contents in the list
+     */
+    public function iShouldSeeThatManyStaticContentsInTheList($amount)
+    {
+        Assert::same(
+            (int) $amount,
+            $this->indexPage->countItems(),
+            'Amount of currencies should be equal %s, but was %2$s.'
         );
     }
 }
