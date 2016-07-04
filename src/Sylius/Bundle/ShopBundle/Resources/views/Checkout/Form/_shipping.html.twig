@@ -2,28 +2,28 @@
 {% for shipment in order.shipments %}
     <div class="ui segment">
         <div class="ui dividing header">{{ 'sylius.ui.shipment'|trans }} #{{ loop.index }}</div>
-        <div class="ui fluid stackable items">
+        <div class="ui fluid divided stackable items">
             {% set shipment_form = form.shipments[loop.index0] %}
             {{ form_errors(shipment_form.method) }}
             {% for shipping_method_choice in shipment_form.method %}
-            <div class="ui two column stackable grid item">
-                <div class="column item">
+                <div class="item">
                     <div class="field">
                         <div class="ui radio checkbox">
                             {{ form_widget(shipping_method_choice) }}
                         </div>
+                    </div>
+                    <div class="content">
                         <a class="header">{{ form_label(shipping_method_choice) }}</a>
-                        {% if shipping_method_choice.parent.vars.choices[loop.index0].data.description is not null %}
-                            <div class="description">
-                                <p>{{ shipping_method_choice.parent.vars.choices[loop.index0].data.description }}</p>
-                            </div>
-                        {% endif %}
+                        <div class="description">
+                            <p>{{ shipping_method_choice.parent.vars.choices[loop.index0].data.description|default('') }}</p>
+                        </div>
+                    </div>
+                    <div class="extra">
+                        <div class="ui right floated label">
+                            {{ shipping_method_choice.parent.vars.shipping_costs[shipping_method_choice.parent.vars.choices[loop.index0].data.id]|sylius_price }}
+                        </div>
                     </div>
                 </div>
-                <div class="column fee">
-                    {{ shipping_method_choice.parent.vars.shipping_costs[shipping_method_choice.parent.vars.choices[loop.index0].data.id]|sylius_price }}
-                </div>
-            </div>
             {% else %}
                 <div class="ui icon message" id="sylius-order-cannot-be-shipped">
                     <i class="warning sign icon"></i>

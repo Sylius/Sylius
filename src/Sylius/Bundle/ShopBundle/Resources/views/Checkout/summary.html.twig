@@ -5,78 +5,18 @@
 {% block content %}
     {% include '@SyliusShop/Checkout/_header.html.twig' %}
     {% include '@SyliusShop/Checkout/_steps.html.twig' with { 'active': 'summary' } %}
-    <div class="ui padded segment" id="items">
-        <table class="ui celled table">
-            <thead>
-            <tr>
-                <th>{{ 'sylius.ui.item'|trans }}</th>
-                <th>{{ 'sylius.ui.price'|trans }}</th>
-                <th>{{ 'sylius.ui.qty'|trans }}</th>
-                <th>{{ 'sylius.ui.subtotal'|trans }}</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for item in order.items %}
-                <tr>
-                    <td>{{ item.product }}</td>
-                    <td>
-                        {% if item.discountedUnitPrice is not same as (item.unitPrice) %}
-                            <s>{{ item.unitPrice|sylius_price(order.currencyCode, order.exchangeRate) }}</s> {{ item.discountedUnitPrice|sylius_price(order.currencyCode, order.exchangeRate) }}
-                        {% else %}
-                            {{ item.unitPrice|sylius_price(order.currencyCode, order.exchangeRate) }}
-                        {% endif %}
-                    </td>
-                    <td class="center aligned">
-                        {{ item.quantity }}
-                    </td>
-                    <td class="right aligned">{{ item.subtotal|sylius_price(order.currencyCode, order.exchangeRate) }}</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-            <tfoot>
-            <tr>
-                <th colspan="4" class="right aligned" id="tax-total">
-                    {{ 'sylius.ui.tax'|trans }}: {{ order.taxTotal|sylius_price(order.currencyCode, order.exchangeRate) }}
-                </th>
-            </tr>
-            <tr>
-                {% include '@SyliusShop/Checkout/_promotion.html.twig' with {'order': order} %}
-            </tr>
-            <tr>
-                <td colspan="4" class="right aligned" style="font-size: 1.5em;">
-                    {{ 'sylius.ui.total'|trans }}: {{ order.total|sylius_price(order.currencyCode, order.exchangeRate) }}
-                </td>
-            </tr>
-            </tfoot>
-        </table>
-        <div class="ui two column stackable grid" id="addresses">
-            <div class="column">
-                <h4 class="ui dividing header">{{ 'sylius.ui.shipping_address'|trans }}</h4>
-                {% include '@SyliusShop/Checkout/_address.html.twig' with {'address': order.shippingAddress} %}
-            </div>
-            <div class="column">
-                <h4 class="ui dividing header">{{ 'sylius.ui.billing_address'|trans }}</h4>
-                {% include '@SyliusShop/Checkout/_address.html.twig' with {'address': order.billingAddress} %}
-            </div>
-        </div>
-        <h4 class="ui dividing header">Shipping and payment methods</h4>
-        <div class="ui two column stackable grid">
-            <div class="column" id="sylius-checkout-summary-shipping-method">
-                {% include '@SyliusShop/Checkout/_shipping.html.twig' with {'order': order} %}
-            </div>
-            <div class="column" id="sylius-checkout-summary-payment-method">
-                {% include '@SyliusShop/Checkout/_payment.html.twig' with {'order': order} %}
-            </div>
-        </div>
-        <h4 class="ui dividing header">{{ 'sylius.ui.extra_notes'|trans }}</h4>
-        <div class="ui one column stackable grid">
+    <div class="ui padded segment">
         {{ form_start(form, {'action': path('sylius_shop_checkout_summary'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
             <input type="hidden" name="_method" value="PUT" />
-            {{ form_row(form.notes) }}
+
+            {% include 'SyliusShopBundle:Common/Order:_summary.html.twig' %}
+
+            <div class="ui hidden divider"></div>
+            {% include '@SyliusShop/Checkout/Form/_summary.html.twig' %}
+
+            <button type="submit" class="ui huge primary fluid icon labeled button"><i class="check icon"></i> {{ 'sylius.ui.place_order'|trans }}</button>
+
             {{ form_row(form._token) }}
-            <button type="submit" class="ui large primary icon labeled button"><i class="check icon"></i> {{ 'sylius.ui.place_order'|trans }} </button>
         {{ form_end(form, {'render_rest': false}) }}
-        </div>
-        <div class="ui hidden divider"></div>
     </div>
 {% endblock %}
