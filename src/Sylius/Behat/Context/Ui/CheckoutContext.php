@@ -214,6 +214,22 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @When I specify shipping country province as :province
+     */
+    public function iSpecifyShippingCountryProvinceAs($province)
+    {
+        $this->addressingPage->specifyShippingAddressProvince($province);
+    }
+
+    /**
+     * @When I specify billing country province as :province
+     */
+    public function iSpecifyBillingCountryProvinceAs($province)
+    {
+        $this->addressingPage->specifyBillingAddressProvince($province);
+    }
+
+    /**
      * @When /^I specify the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
      * @When /^I (do not specify any billing address) information$/
      */

@@ -30,3 +30,10 @@ sylius_shop_account:
 sylius_shop_partial:
     resource: "@SyliusShopBundle/Resources/config/routing/partial.yml"
     prefix: /_partial
+
+sylius_shop_partial_provinces:
+    path: /provinces
+    defaults:
+        _controller: sylius.controller.province:choiceFormAction
+        _sylius:
+            template: SyliusShopBundle:Checkout:_provinces.html.twig

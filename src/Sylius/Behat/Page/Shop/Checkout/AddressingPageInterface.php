@@ -43,9 +43,19 @@ interface AddressingPageInterface extends SymfonyPageInterface
     public function specifyBillingAddress(AddressInterface $billingAddress);
 
     /**
+     * @param string $province
+     */
+    public function specifyBillingAddressProvince($province);
+
+    /**
      * @param AddressInterface $shippingAddress
      */
     public function specifyShippingAddress(AddressInterface $shippingAddress);
+
+    /**
+     * @param string $province
+     */
+    public function specifyShippingAddressProvince($province);
 
     /**
      * @return bool
