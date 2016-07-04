@@ -28,8 +28,8 @@
     "require-dev": {
         "sylius/settings-bundle": "^0.19",
 
-        "matthiasnoback/symfony-config-test": "^1.4.0",
-        "matthiasnoback/symfony-dependency-injection-test": "^0.7.6",
+        "matthiasnoback/symfony-config-test": "^2.0",
+        "matthiasnoback/symfony-dependency-injection-test": "^1.0",
         "mikey179/vfsStream": "^1.6",
         "phpspec/phpspec": "^2.4",
         "phpunit/phpunit": "^4.1"
