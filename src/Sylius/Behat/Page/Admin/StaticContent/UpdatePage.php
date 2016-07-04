@@ -43,5 +43,4 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
             'body' => '#sylius_static_content_body',
         ]);
     }
-
 }

@@ -12,4 +12,4 @@ Feature: Deleting a static content
         Given the store has static content "Krzysztof Krawczyk"
         When I delete static content "Krzysztof Krawczyk"
         Then I should be notified that it has been successfully deleted
-        And the static content "Krzysztof Krawczyk" should no longer exist in the registry
+        And the static content "Krzysztof Krawczyk" should no longer exist in the store

@@ -138,14 +138,14 @@ final class ManagingStaticContentsContext implements Context
         Assert::same(
             (int) $amount,
             $this->indexPage->countItems(),
-            'Amount of currencies should be equal %s, but was %2$s.'
+            'Amount of static contents should be equal %s, but was %2$s.'
         );
     }
 
     /**
      * @Then the static content :title should not be added
      */
-    public function theCurrencyShouldNotBeAdded($title)
+    public function theStaticContentShouldNotBeAdded($title)
     {
         if (!$this->indexPage->isOpen()) {
             $this->indexPage->open();
@@ -202,9 +202,9 @@ final class ManagingStaticContentsContext implements Context
     }
 
     /**
-     * @Then the static content :title should no longer exist in the registry
+     * @Then the static content :title should no longer exist in the store
      */
-    public function theStaticContentShouldNoLongerExistInTheRegistry($title)
+    public function theStaticContentShouldNoLongerExistInTheStore($title)
     {
         Assert::false(
             $this->indexPage->isSingleResourceOnPage(['title' => $title]),
