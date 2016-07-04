@@ -19,15 +19,11 @@ use Payum\Core\Security\GenericTokenFactoryInterface;
 use Payum\Core\Security\HttpRequestVerifierInterface;
 use Sylius\Bundle\PayumBundle\Request\GetStatus;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
-use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\OrderProcessing\PaymentProcessorInterface;
 use Sylius\Component\Core\OrderProcessing\StateResolverInterface;
-use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Order\OrderTransitions;
 use Sylius\Component\Payment\Model\PaymentInterface;
-use Sylius\Component\Resource\ResourceActions;
 use Sylius\Component\User\Repository\CustomerRepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -179,11 +175,11 @@ class OrderController extends ResourceController
         $orderStateResolver->resolvePaymentState($order);
         $orderStateResolver->resolveShippingState($order);
 
+        $this->getOrderManager()->flush();
         if ($status->isCanceled() || $status->isFailed()) {
             return $this->redirectToRoute($configuration->getParameters()->get('canceled'));
         }
 
-        $this->getOrderManager()->flush();
 
         return $this->redirectToRoute(
             $configuration->getParameters()->get('redirect[route]', null, true),
