@@ -46,6 +46,7 @@ imports:
     - suites/ui/addressing/managing_zones.yml
     - suites/ui/admin/dashboard.yml
     - suites/ui/cart/shopping_cart.yml
+    - suites/ui/cmf/managing_routes.yml
     - suites/ui/cmf/managing_static_contents.yml
     - suites/ui/channel/managing_channels.yml
     - suites/ui/channel/products_accessibility_in_multiple_channels.yml

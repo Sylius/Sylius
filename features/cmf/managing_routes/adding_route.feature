@@ -8,8 +8,8 @@ Feature: Adding a new route
         Given the store has static content "Krzysztof Krawczyk"
         And I am logged in as an administrator
 
-    @ui @todo
-    Scenario: Adding route
+    @ui
+    Scenario: Adding a route
         Given I want to add a new route
         When I set its name to "krzysztof-krawczyk"
         And I choose "Krzysztof Krawczyk" as its content
