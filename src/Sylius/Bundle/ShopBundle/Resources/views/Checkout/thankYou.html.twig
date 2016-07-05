@@ -28,6 +28,11 @@
                         </a>
                     </div>
                 {% endif %}
+                {% if order.lastPayment.method.instructions is not null %}
+                    <div id="instructions" class="sub header">
+                        {{ order.lastPayment.method.instructions }}
+                    </div>
+                {% endif %}
             </h1>
         </div>
     </div>

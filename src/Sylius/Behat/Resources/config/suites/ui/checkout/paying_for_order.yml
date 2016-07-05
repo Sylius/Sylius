@@ -9,7 +9,9 @@ default:
 
                 - sylius.behat.context.transform.addressing
                 - sylius.behat.context.transform.lexical
+                - sylius.behat.context.transform.payment_method
                 - sylius.behat.context.transform.product
+                - sylius.behat.context.transform.shared_storage
 
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.geographical

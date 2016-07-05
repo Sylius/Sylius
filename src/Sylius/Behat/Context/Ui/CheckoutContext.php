@@ -484,6 +484,18 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Given I should be informed with :paymentMethod payment method instructions
+     */
+    public function iShouldBeInformedWithPaymentMethodInstructions(PaymentMethodInterface $paymentMethod)
+    {
+        Assert::same(
+            $this->thankYouPage->getInstructions(),
+            $paymentMethod->getInstructions(),
+            sprintf('Instructions of payment method "%s" are not visible.', $paymentMethod->getName())
+        );
+    }
+
+    /**
      * @Then /^I should be redirected (?:|back )to the thank you page$/
      */
     public function iShouldBeRedirectedBackToTheThankYouPage()

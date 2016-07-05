@@ -11,7 +11,6 @@
 
 namespace Sylius\Behat\Page\Shop\Checkout;
 
-use Behat\Mink\Driver\Selenium2Driver;
 use Sylius\Behat\Page\SymfonyPage;
 
 /**
@@ -28,6 +27,14 @@ class ThankYouPage extends SymfonyPage implements ThankYouPageInterface
         $thankYouMessage = $this->getElement('thank_you')->getText();
 
         return false !== strpos($thankYouMessage, 'Thank you!');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getInstructions()
+    {
+        return $this->getElement('instructions')->getText();
     }
 
     /**
@@ -84,9 +91,10 @@ class ThankYouPage extends SymfonyPage implements ThankYouPageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'thank_you' => '#sylius-thank-you',
+            'instructions' => '#instructions',
             'pay_link' => '#sylius-pay-link',
             'payment_method' => '.item:contains("%name%") input',
+            'thank_you' => '#sylius-thank-you',
         ]);
     }
 }
