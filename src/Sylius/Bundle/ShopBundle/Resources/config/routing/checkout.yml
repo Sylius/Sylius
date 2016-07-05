@@ -13,6 +13,7 @@ sylius_shop_checkout_addressing:
     defaults:
         _controller: sylius.controller.order:updateAction
         _sylius:
+            event: addressing
             template: SyliusShopBundle:Checkout:addressing.html.twig
             form:
                 type: sylius_shop_checkout_addressing
@@ -51,6 +52,7 @@ sylius_shop_checkout_shipping:
     defaults:
         _controller: sylius.controller.order:updateAction
         _sylius:
+            event: shipping
             template: SyliusShopBundle:Checkout:shipping.html.twig
             form: sylius_shop_checkout_shipping
             repository:
@@ -85,6 +87,7 @@ sylius_shop_checkout_payment:
     defaults:
         _controller: sylius.controller.order:updateAction
         _sylius:
+            event: payment
             template: SyliusShopBundle:Checkout:payment.html.twig
             form: sylius_checkout_payment_step
             repository:
@@ -119,6 +122,7 @@ sylius_shop_checkout_summary:
     defaults:
         _controller: sylius.controller.order:updateAction
         _sylius:
+            event: summary
             template: SyliusShopBundle:Checkout:summary.html.twig
             repository:
                 method: find
@@ -126,7 +130,7 @@ sylius_shop_checkout_summary:
             state_machine:
                 graph: sylius_order_checkout
                 transition: complete
-            redirect: sylius_shop_homepage
+            redirect: sylius_shop_checkout_thank_you
             form:
                 type: sylius_checkout_summary
 

@@ -75,6 +75,7 @@
         <parameter key="sylius.listener.customer_reviews_delete.class">Sylius\Bundle\CoreBundle\EventListener\CustomerReviewsDeleteListener</parameter>
         <parameter key="sylius.listener.order_recalculation.class">Sylius\Bundle\CoreBundle\EventListener\OrderRecalculationListener</parameter>
         <parameter key="sylius.listener.user_cart_recalculation.class">Sylius\Bundle\CoreBundle\EventListener\UserCartRecalculationListener</parameter>
+        <parameter key="sylius.listener.store_order_id.class">Sylius\Bundle\CoreBundle\EventListener\StoreOrderIdListener</parameter>
 
         <parameter key="sylius.active_promotions_by_channel_provider.class">Sylius\Component\Core\Provider\ActivePromotionsByChannelProvider</parameter>
 
@@ -411,6 +412,10 @@
             <argument type="service" id="sylius.order_processing.order_recalculator" />
             <tag name="kernel.event_listener" event="sylius.user.security.implicit_login" method="recalculateCartWhileLogin" />
             <tag name="kernel.event_listener" event="security.interactive_login" method="recalculateCartWhileLogin" />
+        </service>
+        <service id="sylius.listener.store_order_id" class="%sylius.listener.store_order_id.class%">
+            <argument type="service" id="session" />
+            <tag name="kernel.event_listener" event="sylius.order.post_summary" method="setOrderId" />
         </service>
 
         <service id="sylius.active_promotions_by_channel_provider" class="%sylius.active_promotions_by_channel_provider.class%">

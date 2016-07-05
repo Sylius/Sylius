@@ -31,6 +31,9 @@ sylius_shop_account:
     resource: "@SyliusShopBundle/Resources/config/routing/account.yml"
     prefix: /account
 
+sylius_shop_payum:
+    resource: "@SyliusShopBundle/Resources/config/routing/payum.yml"
+
 sylius_shop_partial:
     resource: "@SyliusShopBundle/Resources/config/routing/partial.yml"
     prefix: /_partial
