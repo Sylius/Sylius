@@ -257,17 +257,10 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function countByCustomerAndPaymentState(CustomerInterface $customer, $state)
+    public function countByCustomer(CustomerInterface $customer)
     {
-        $queryBuilder = $this->createByCustomerQueryBuilder($customer);
-
-        $queryBuilder
+       return (int) $this->createByCustomerQueryBuilder($customer)
             ->select('count(o.id)')
-            ->andWhere('o.paymentState = :state')
-            ->setParameter('state', $state)
-        ;
-
-        return (int) $queryBuilder
             ->getQuery()
             ->getSingleScalarResult()
         ;

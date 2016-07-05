@@ -50,11 +50,10 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
 
     /**
      * @param CustomerInterface $customer
-     * @param string $state
      *
      * @return int
      */
-    public function countByCustomerAndPaymentState(CustomerInterface $customer, $state);
+    public function countByCustomer(CustomerInterface $customer);
 
     /**
      * @param array $configuration

@@ -14,7 +14,6 @@ namespace spec\Sylius\Component\Core\Promotion\Checker;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Promotion\Checker\NthOrderRuleChecker;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Promotion\Checker\RuleCheckerInterface;
@@ -57,8 +56,9 @@ class NthOrderRuleCheckerSpec extends ObjectBehavior
         OrderRepositoryInterface $ordersRepository
     ) {
         $subject->getCustomer()->willReturn($customer);
+        $customer->getId()->willReturn(1);
 
-        $ordersRepository->countByCustomerAndPaymentState($customer, PaymentInterface::STATE_COMPLETED)->willReturn(0);
+        $ordersRepository->countByCustomer($customer)->willReturn(0);
 
         $this->isEligible($subject, ['nth' => 10])->shouldReturn(false);
     }
@@ -69,8 +69,9 @@ class NthOrderRuleCheckerSpec extends ObjectBehavior
         OrderRepositoryInterface $ordersRepository
     ) {
         $subject->getCustomer()->willReturn($customer);
+        $customer->getId()->willReturn(1);
 
-        $ordersRepository->countByCustomerAndPaymentState($customer, PaymentInterface::STATE_COMPLETED)->willReturn(5);
+        $ordersRepository->countByCustomer($customer)->willReturn(5);
 
         $this->isEligible($subject, ['nth' => 10])->shouldReturn(false);
     }
@@ -81,8 +82,9 @@ class NthOrderRuleCheckerSpec extends ObjectBehavior
         OrderRepositoryInterface $ordersRepository
     ) {
         $subject->getCustomer()->willReturn($customer);
+        $customer->getId()->willReturn(1);
 
-        $ordersRepository->countByCustomerAndPaymentState($customer, PaymentInterface::STATE_COMPLETED)->willReturn(12);
+        $ordersRepository->countByCustomer($customer)->willReturn(12);
 
         $this->isEligible($subject, ['nth' => 10])->shouldReturn(false);
     }
@@ -93,10 +95,32 @@ class NthOrderRuleCheckerSpec extends ObjectBehavior
         OrderRepositoryInterface $ordersRepository
     ) {
         $subject->getCustomer()->willReturn($customer);
+        $customer->getId()->willReturn(1);
 
-        $ordersRepository->countByCustomerAndPaymentState($customer, PaymentInterface::STATE_COMPLETED)->willReturn(9);
+        $ordersRepository->countByCustomer($customer)->willReturn(9);
 
         $this->isEligible($subject, ['nth' => 10])->shouldReturn(true);
+    }
+
+    function it_recognizes_subject_as_eligible_if_nth_order_is_one_and_customer_is_not_in_database(
+        CustomerInterface $customer,
+        OrderInterface $subject
+    ) {
+        $subject->getCustomer()->willReturn($customer);
+        $customer->getId()->willReturn(null);
+
+
+        $this->isEligible($subject, ['nth' => 1])->shouldReturn(true);
+    }
+
+    function it_recognizes_subject_as_not_eligible_if_it_is_first_order_of_new_customer_and_promotion_is_for_more_than_one_order(
+        CustomerInterface $customer,
+        OrderInterface $subject
+    ) {
+        $subject->getCustomer()->willReturn($customer);
+        $customer->getId()->willReturn(null);
+
+        $this->isEligible($subject, ['nth' => 10])->shouldReturn(false);
     }
 
     function it_recognizes_subject_as_not_eligible_if_configuration_is_invalid(OrderInterface $subject)

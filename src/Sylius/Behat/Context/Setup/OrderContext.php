@@ -149,6 +149,7 @@ final class OrderContext implements Context
      * @Given there is a customer :customer that placed an order :orderNumber
      * @Given there is another customer :customer that placed an order :orderNumber
      * @Given a customer :customer placed an order :orderNumber
+     * @Given the customer :customer has already placed an order :orderNumber
      */
     public function thereIsCustomerThatPlacedOrder(CustomerInterface $customer, $orderNumber)
     {
