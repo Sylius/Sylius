@@ -5,7 +5,7 @@
         <div class="center aligned sixteen wide column">
             <h1 class="ui icon header">
                 {% set lastPayment = order.payments.last() %}
-                {% if order.paymentState is same as('completed') %}
+                {% if order.paymentState is same as('completed') or lastPayment.getMethod.getGateway is same as('offline') %}
                     <i class="circular rocket icon"></i>
                     <div class="content" id="sylius-thank-you">
                         {{ 'sylius.ui.thank_you'|trans }}
@@ -28,9 +28,9 @@
                         </a>
                     </div>
                 {% endif %}
-                {% if order.lastPayment.method.instructions is not null %}
+                {% if lastPayment.method.instructions is not null %}
                     <div id="instructions" class="sub header">
-                        {{ order.lastPayment.method.instructions }}
+                        {{ lastPayment.method.instructions }}
                     </div>
                 {% endif %}
             </h1>
