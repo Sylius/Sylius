@@ -121,4 +121,24 @@ final class ManagingRoutesContext implements Context
             'Amount of routes should be equal %s, but was %2$s.'
         );
     }
+
+    /**
+     * @When I delete route :name
+     */
+    public function iDeleteRoute($name)
+    {
+        $this->indexPage->open();
+        $this->indexPage->deleteResourceOnPage(['name' => $name]);
+    }
+
+    /**
+     * @Given the route :name should no longer exist in the store
+     */
+    public function theRouteShouldNoLongerExistInTheStore($name)
+    {
+        Assert::false(
+            $this->indexPage->isSingleResourceOnPage(['name' => $name]),
+            sprintf('Route with name "%s" exists, but should not.', $name)
+        );
+    }
 }
