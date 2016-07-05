@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Fixture\OptionsResolver;
 
+use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Webmozart\Assert\Assert;
@@ -45,6 +46,10 @@ final class LazyOption
         return function (Options $options) use ($repository) {
             $objects = $repository->findAll();
 
+            if ($objects instanceof Collection) {
+                $objects = $objects->toArray();
+            }
+
             Assert::notEmpty($objects);
 
             return $objects[array_rand($objects)];
@@ -66,6 +71,10 @@ final class LazyOption
 
             $objects = $repository->findAll();
 
+            if ($objects instanceof Collection) {
+                $objects = $objects->toArray();
+            }
+
             return 0 === count($objects) ? null : $objects[array_rand($objects)];
         };
     }
@@ -80,6 +89,10 @@ final class LazyOption
     {
         return function (Options $options) use ($repository, $amount) {
             $objects = $repository->findAll();
+
+            if ($objects instanceof Collection) {
+                $objects = $objects->toArray();
+            }
 
             $selectedObjects = [];
             for (; $amount > 0 && count($objects) > 0; --$amount) {

@@ -129,6 +129,14 @@
             <tag name="sylius.behat.context" />
         </service>
 
+        <service id="sylius.behat.context.setup.route" class="Sylius\Behat\Context\Setup\RouteContext" scope="scenario">
+            <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
+            <argument type="service" id="sylius.fixture.example_factory.route" container="symfony" />
+            <argument type="service" id="sylius.manager.route" container="symfony" />
+            <argument type="service" id="sylius.repository.static_content" container="symfony" />
+            <tag name="sylius.behat.context" />
+        </service>
+
         <service id="sylius.behat.context.setup.security" class="Sylius\Behat\Context\Setup\SecurityContext" scope="scenario">
             <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
             <argument type="service" id="sylius.behat.security" />

@@ -1,0 +1,32 @@
+sylius_grid:
+    grids:
+        sylius_admin_route:
+            driver:
+                name: doctrine/phpcr-odm
+                options:
+                    class: "%sylius.model.route.class%"
+            fields:
+                id:
+                    type: string
+                    label: sylius.ui.id
+                name:
+                    type: string
+                    label: sylius.ui.name
+                content:
+                    type: twig
+                    label: sylius.ui.content
+                    options:
+                        template: SyliusAdminBundle:Route/Field:content.html.twig
+            filters:
+                name:
+                    type: string
+                    label: sylius.ui.name
+            actions:
+                main:
+                    create:
+                        type: create
+                item:
+                    update:
+                        type: update
+                    delete:
+                        type: delete

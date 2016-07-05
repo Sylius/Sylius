@@ -18,5 +18,11 @@
             <argument type="service" id="doctrine_phpcr.odm.document_manager" />
             <argument>%cmf_content.persistence.phpcr.content_basepath%</argument>
         </service>
+
+        <service id="sylius.factory.route.parent_path" class="Sylius\Bundle\ContentBundle\Factory\RouteFactory" decorates="sylius.factory.route">
+            <argument type="service" id="sylius.factory.route.parent_path.inner" />
+            <argument type="service" id="doctrine_phpcr.odm.document_manager" />
+            <argument>%cmf_routing.dynamic.persistence.phpcr.route_basepath%</argument>
+        </service>
     </services>
 </container>

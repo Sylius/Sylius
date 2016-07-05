@@ -19,7 +19,7 @@ use Sylius\Bundle\ContentBundle\Document\StaticContent;
 use Webmozart\Assert\Assert;
 
 /**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class ManagingStaticContentsContext implements Context
 {
