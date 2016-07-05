@@ -182,4 +182,30 @@ final class ManagingRoutesContext implements Context
             sprintf('Cannot find route with name "%s" and content "%s" assigned.', $route->getName(), $contentTitle)
         );
     }
+
+    /**
+     * @Then I should be notified that name is required
+     */
+    public function iShouldBeNotifiedThatElementIsRequired()
+    {
+        Assert::same(
+            $this->createPage->getValidationMessage('name'),
+            'This value should not be blank.'
+        );
+    }
+
+    /**
+     * @Then the route with content :title should not be added
+     */
+    public function theRouteWithContentShouldNotBeAdded($title)
+    {
+        if (!$this->indexPage->isOpen()) {
+            $this->indexPage->open();
+        }
+
+        Assert::false(
+            $this->indexPage->isSingleResourceOnPage(['content' => $title]),
+            sprintf('Found route with content "%s" assigned, but expected not to.', $title)
+        );
+    }
 }
