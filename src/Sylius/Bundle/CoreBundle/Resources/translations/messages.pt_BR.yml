@@ -35,6 +35,7 @@ sylius:
             currencies: Moedas
             shipping_methods: Métodos de envio
             payment_methods: Meios de pagamentos
+            tax_zone_default: Zona de imposto do padrão
             theme:  Tema
             hostname: Nome do host
         image:

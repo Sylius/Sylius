@@ -35,6 +35,7 @@ sylius:
             currencies: Monedhat
             shipping_methods: Mënyrat e dërgesës
             payment_methods: Mënyrat e pagesës
+            tax_zone_default: Zona e paracakruar e taksimit
             theme: Tema
             hostname: Emri i hostit
         image:

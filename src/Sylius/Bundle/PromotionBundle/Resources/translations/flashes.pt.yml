@@ -1,0 +1,7 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    promotion_coupon:
+        eligible: O seu código promocional foi adicionado ao carrinho.
+        not_eligible: Seu carrinho não é elegível para este código de promoção.

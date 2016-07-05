@@ -13,6 +13,7 @@ sylius:
             currency_default: デフォルトの通貨
             shipping_methods: sylius.breadcrumb.shipping_method.index
             payment_methods: sylius.breadcrumb.payment_method.index
+            tax_zone_default: デフォルトの課税地域
         image:
             file: 画像
         order_filter:

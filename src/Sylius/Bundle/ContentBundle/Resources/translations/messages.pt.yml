@@ -3,12 +3,20 @@
 
 sylius:
     form:
+        action_block:
+            id: Id
         imagine_block:
             filter: Filtrar
             internal_name: Nome interno
+        menu_block:
+            id: Id
         menu_node_block:
             content: Conteúdo
             internal_name: Nome interno
+        redirect_route:
+            id: Id
+        reference_block:
+            id: Id
         route:
             content: Conteúdo
         simple_block:
@@ -16,4 +24,5 @@ sylius:
         slideshow_block:
             internal_name: Nome interno
         static_content:
+            id: Id
             internal_name: Nome interno

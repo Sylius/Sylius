@@ -78,6 +78,7 @@ sylius:
         filter: Filter
         go: Pokračovať
         generate_coupons: Vygenerovať kupóny
+        guest_customer: Návšetvník
         in: V
         info: Info
         item: Položka

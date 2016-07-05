@@ -41,6 +41,7 @@ sylius:
         expires_at: Končí v
         filter: Filtr
         generate_coupons: Generovat kupóny
+        guest_customer: Neregistrovaný náštěvník
         item: Položka
         inventory: Sklad
         list_coupons: Seznam kupónů

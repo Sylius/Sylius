@@ -42,6 +42,7 @@ sylius:
         expires_at: Истекает
         filter: Фильтр
         generate_coupons: Генерировать купоны
+        guest_customer: Гость
         item: Товар
         inventory: Запасы
         list_coupons: Список купонов

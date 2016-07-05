@@ -72,6 +72,7 @@ sylius:
         extra_information: Dodatkowe informacje
         filter: Filtruj
         generate_coupons: Wygeneruj kupony promocyjne
+        guest_customer: Gość
         info: Info
         item: Element
         inventory: Zapasy

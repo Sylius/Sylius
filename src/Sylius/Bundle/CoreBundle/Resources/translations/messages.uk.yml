@@ -30,6 +30,7 @@ sylius:
             currency_default: Валюта за замовчуванням
             shipping_methods: Методи доставки
             payment_methods: Способи оплати
+            tax_zone_default: Податкова зона за замовчуванням
         image:
             file: Зображення
         locale:

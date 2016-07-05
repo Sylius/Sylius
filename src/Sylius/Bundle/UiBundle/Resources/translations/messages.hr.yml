@@ -51,6 +51,7 @@ sylius:
         faqs: Česta pitanja
         filter: Filter
         generate_coupons: Generirajte kod za popust
+        guest_customer: Neregistrirani kupac
         info: Info
         item: sylius.order_item.product
         inventory: Skladište

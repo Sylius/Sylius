@@ -66,6 +66,7 @@ sylius:
         expires_at: انقضا در تاریخ
         filter: فیلتر
         generate_coupons: ایجاد کد تخفیف
+        guest_customer: مشتری مهمان
         in: در
         info: اطلاعات
         item: کالا

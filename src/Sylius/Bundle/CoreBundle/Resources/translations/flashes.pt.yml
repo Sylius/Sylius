@@ -1,0 +1,8 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    checkout:
+        restricted_zone: Este produto não está disponível no seu país.
+        success: Obrigado pela sua encomenda!
+        canceled: O seu pagamento foi cancelado.

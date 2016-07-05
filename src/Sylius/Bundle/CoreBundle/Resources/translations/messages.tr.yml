@@ -34,6 +34,7 @@ sylius:
             currencies: Para birimi
             shipping_methods: Kargolama Yöntemleri
             payment_methods: Ödeme Yöntemleri
+            tax_zone_default: Varsayılan vergi bölgesi
         image:
             file: Resim
         locale:

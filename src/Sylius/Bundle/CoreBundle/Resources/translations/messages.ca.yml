@@ -24,6 +24,7 @@ sylius:
             roles: Rols
         channel:
             currency_default: Moneda predeterminada
+            tax_zone_default: "Zona d'impostos per defecte"
         image:
             file: Imatge
         locale:

@@ -35,6 +35,8 @@ sylius:
             currencies: Pénznemek
             shipping_methods: Szállítási módok
             payment_methods: Fizetési módok
+            tax_calculation_strategy: Adó számítási stratégia
+            tax_zone_default: Alapértelmezett adósáv
             theme: Téma
             hostname: Hoszt neve
         image:

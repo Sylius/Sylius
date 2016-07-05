@@ -1,0 +1,7 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    currency:
+        code:
+            unique: Código da moeda deve ser único.

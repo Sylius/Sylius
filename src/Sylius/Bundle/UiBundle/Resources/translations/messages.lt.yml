@@ -40,6 +40,7 @@ sylius:
         expires_at: Nustoja galioti
         filter: Filtruoti
         generate_coupons: Generuoti kuponus
+        guest_customer: Svečias klientas
         item: Produktas
         inventory: Atsargos
         list_coupons: Kuponų sąrašas

@@ -35,6 +35,7 @@ sylius:
             currencies: Währungen
             shipping_methods: Versandmethoden
             payment_methods: Zahlungsmethoden
+            tax_zone_default: Standard Steuerzone
             theme: Template
             hostname: Server-Name
         image:

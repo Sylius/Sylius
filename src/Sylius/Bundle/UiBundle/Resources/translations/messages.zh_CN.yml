@@ -91,6 +91,7 @@ sylius:
         filter: 筛选器
         go: 前往
         generate_coupons: 生成优惠券
+        guest_customer: 来宾客户
         in: 在
         info: 信息
         item: 项

@@ -3,8 +3,18 @@
 
 sylius:
     form:
+        action:
+            add_product_configuration:
+                quantity: Quantidade
+                variant: Variante
+        promotion:
+            channels: Canais
+        channel:
+            locales: Linguagens
         order_filter:
             payment_state: Situação do pagamento
+        product:
+            channels: Canais
         product_variant:
             tax_category: Categoria de imposto
         guest:

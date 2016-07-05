@@ -1,0 +1,7 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    customer:
+        currency_code:
+            not_valid: O código de moeda que você inseriu é inválido.

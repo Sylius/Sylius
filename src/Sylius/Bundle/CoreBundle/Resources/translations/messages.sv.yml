@@ -35,6 +35,7 @@ sylius:
             currencies: Valutor
             shipping_methods: Leveransmetoder
             payment_methods: Betalningsmetoder
+            tax_zone_default: Standardmomszon
             theme: Tema
             hostname: Värdnamn
         image:

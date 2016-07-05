@@ -40,6 +40,7 @@ sylius:
         expires_at: Süre sonu: 
         filter: Filtrele
         generate_coupons: Kuponlar oluşturmak
+        guest_customer: Konuk müşteri
         item: Öğe
         inventory: Stok
         list_coupons: Kupon Listeleri

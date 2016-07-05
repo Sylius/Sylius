@@ -2,6 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    group:
+        name:
+            min: 'Nome do grupo deve ser pelo menos {{ limit }} caracteres.'
     user:
         email:
             not_blank: Por favor insira o seu e-mail.

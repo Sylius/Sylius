@@ -76,6 +76,7 @@ sylius:
         filter: Filtri
         go: Vai
         generate_coupons: Genera coupon
+        guest_customer: Cliente ospite
         in: In
         info: Info
         item: Articolo

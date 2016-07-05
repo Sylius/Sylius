@@ -35,6 +35,7 @@ sylius:
             currencies: Meny
             shipping_methods: Spôsoby doručenia
             payment_methods: Spôsoby platby
+            tax_zone_default: Predvolené daňové pásmo
             theme: Téma
             hostname: Hostname
         image:

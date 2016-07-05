@@ -1,0 +1,7 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    channel:
+        code:
+            unique: Código do canal deve ser exclusivo.

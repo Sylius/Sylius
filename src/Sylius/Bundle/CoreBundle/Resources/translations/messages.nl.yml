@@ -35,6 +35,7 @@ sylius:
             currencies: "Valuta's"
             shipping_methods: Verzendmethodes
             payment_methods: Betaalmethodes
+            tax_zone_default: Standaard belastingzone
             theme: Thema
             hostname: Hostnaam
         image:

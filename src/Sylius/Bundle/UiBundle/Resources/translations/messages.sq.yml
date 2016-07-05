@@ -75,6 +75,7 @@ sylius:
         filter: Filtri
         go: Shko
         generate_coupons: Gjenero kupona
+        guest_customer: Blerës i ftuar
         in: Brenda
         info: Info
         item: Po ashtu

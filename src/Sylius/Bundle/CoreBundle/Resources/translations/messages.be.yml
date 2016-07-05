@@ -28,6 +28,7 @@ sylius:
             currency_default: Галоўная валюта
             shipping_methods: Метады дастаўкі
             payment_methods: Метады аплаты
+            tax_zone_default: Галоўная падатковая зона
         image:
             file: малюнак
         locale:

@@ -5,3 +5,5 @@ sylius:
     form:
         attribute:
             add: Adicionar
+            add_attributes: Adicionar atributos
+            type: Tipo

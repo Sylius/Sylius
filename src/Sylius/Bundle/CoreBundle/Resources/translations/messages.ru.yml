@@ -35,6 +35,7 @@ sylius:
             currencies: Валюты
             shipping_methods: Список способов доставки
             payment_methods: Список методов оплаты
+            tax_zone_default: Налоговая зона по умолчанию
         image:
             file: Изображение
         locale:

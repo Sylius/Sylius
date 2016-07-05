@@ -35,6 +35,7 @@ sylius:
             currencies: สกุลเงิน
             shipping_methods: วิธีการจัดส่ง
             payment_methods: วิธีการชำระเงิน
+            tax_zone_default: เขตภาษีเริ่มต้น
             theme: ธีม
             hostname: Hostname
         image:

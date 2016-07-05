@@ -1,0 +1,7 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    review:
+        title:
+            min_length: Revisão de título deve ter pelo menos 2 caracteres

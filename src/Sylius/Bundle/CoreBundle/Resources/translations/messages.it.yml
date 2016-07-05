@@ -35,6 +35,7 @@ sylius:
             currencies: Monete
             shipping_methods: Metodi di spedizione
             payment_methods: Metodi di pagamento
+            tax_zone_default: Aliquota predefinita
             theme: Tema
             hostname: Hostname
         image:

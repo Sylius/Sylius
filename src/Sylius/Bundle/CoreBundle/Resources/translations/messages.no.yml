@@ -28,6 +28,7 @@ sylius:
             currency_default: Standard valuta
             shipping_methods: Fraktalternativ
             payment_methods: Betalingsmetoder
+            tax_zone_default: Standard skattesone
         image:
             file: Bilde
         locale:
