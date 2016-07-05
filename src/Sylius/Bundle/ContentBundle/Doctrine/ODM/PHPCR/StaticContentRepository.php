@@ -14,8 +14,6 @@ namespace Sylius\Bundle\ContentBundle\Doctrine\ODM\PHPCR;
 use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository;
 
 /**
- * Static content repository.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class StaticContentRepository extends DocumentRepository

@@ -50,4 +50,24 @@ final class RouteContext implements Context
         $this->routeExampleFactory = $routeExampleFactory;
         $this->routeManager = $routeManager;
     }
+
+    /**
+     * @Given the store has route :name
+     */
+    public function theStoreHasRoute($name)
+    {
+        $route = $this->routeExampleFactory->create(['name' => $name]);
+
+        $this->routeManager->persist($route);
+        $this->routeManager->flush();
+    }
+
+    /**
+     * @Given the store has routes :firstName and :secondName
+     */
+    public function theStoreHasRoutes($firstName, $secondName)
+    {
+        $this->theStoreHasRoute($firstName);
+        $this->theStoreHasRoute($secondName);
+    }
 }

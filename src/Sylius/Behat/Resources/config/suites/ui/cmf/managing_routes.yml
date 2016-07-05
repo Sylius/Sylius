@@ -10,6 +10,7 @@ default:
 
                 - sylius.behat.context.transform.shared_storage
 
+                - sylius.behat.context.setup.route
                 - sylius.behat.context.setup.security
                 - sylius.behat.context.setup.static_content
 

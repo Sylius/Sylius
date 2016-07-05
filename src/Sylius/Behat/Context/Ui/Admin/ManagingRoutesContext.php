@@ -109,4 +109,16 @@ final class ManagingRoutesContext implements Context
             sprintf('Could not find route with name "%s"!', $name)
         );
     }
+
+    /**
+     * @Then I should see :amount routes in the list
+     */
+    public function iShouldSeeThatManyRoutesInTheList($amount)
+    {
+        Assert::same(
+            (int) $amount,
+            $this->indexPage->countItems(),
+            'Amount of routes should be equal %s, but was %2$s.'
+        );
+    }
 }

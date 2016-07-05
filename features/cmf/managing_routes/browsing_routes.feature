@@ -9,7 +9,7 @@ Feature: Browsing routes
         And the store has routes "krzysztof-krawczyk" and "the-best-musician"
         And I am logged in as an administrator
 
-    @ui @todo
+    @ui
     Scenario: Browsing routes in store
         When I want to browse routes of the store
         Then I should see 2 routes in the list
