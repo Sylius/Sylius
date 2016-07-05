@@ -12,13 +12,10 @@
 namespace Sylius\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\Page\Shop\Checkout\CanceledPaymentPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\FinalizeStepInterface;
 use Sylius\Behat\Page\External\PaypalExpressCheckoutPageInterface;
-use Sylius\Behat\Page\Shop\Checkout\SummaryPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\ThankYouPageInterface;
 use Sylius\Behat\Service\Mocker\PaypalApiMocker;
-use Sylius\Behat\Service\Mocker\PaypalApiMockerInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 
@@ -48,7 +45,7 @@ final class PaypalContext implements Context
     private $checkoutFinalizeStep;
 
     /**
-     * @var PaypalApiMockerInterface
+     * @var PaypalApiMocker
      */
     private $paypalApiMocker;
 
@@ -99,7 +96,8 @@ final class PaypalContext implements Context
     }
 
     /**
-     * @Given I cancel my PayPal payment
+     * @Given /^I have cancelled (?:|my )PayPal payment$/
+     * @When /^I cancel (?:|my )PayPal payment$/
      */
     public function iCancelMyPaypalPayment()
     {
@@ -107,7 +105,8 @@ final class PaypalContext implements Context
     }
 
     /**
-     * @When /^I try to pay(?: again|)$/
+     * @Given /^I tried to pay(?:| again)$/
+     * @When /^I try to pay(?:| again)$/
      */
     public function iTryToPayAgain()
     {

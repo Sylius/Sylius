@@ -33,7 +33,6 @@
 
         <service id="sylius.callback.order_payment" class="%sylius.callback.order_payment.class%">
             <argument type="service" id="sm.factory" />
-            <argument type="service" id="sylius.order_processing.payment_processor" />
         </service>
 
         <service id="sylius.callback.coupon_usage" class="%sylius.callback.coupon_usage.class%" />

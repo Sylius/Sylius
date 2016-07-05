@@ -203,7 +203,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     {
         $this->getElement('payment_step_label')->click();
     }
-    
+
     /**
      * {@inheritdoc}
      */

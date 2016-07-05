@@ -29,6 +29,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Webmozart\Assert\Assert;
 
 class OrderController extends ResourceController
 {
@@ -188,12 +189,18 @@ class OrderController extends ResourceController
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
         $orderId = $this->getSession()->get('sylius_order_id');
+        Assert::notNull($orderId);
         $order = $this->repository->findOneForPayment($orderId);
+        Assert::notNull($order);
 
-        return $this->render(
-            $configuration->getParameters()->get('template'),
-            ['order' => $order]
-        );
+        $this->checkAccessToOrder($order);
+
+        $payment = $order->getLastPayment();
+        if (null !== $payment && $payment->getMethod()->getGateway() === 'offline') {
+            return $this->redirectToRoute('sylius_shop_order_pay', ['orderId' => $orderId]);
+        }
+
+        return $this->render($configuration->getParameters()->get('template'), ['order' => $order]);
     }
 
     /**

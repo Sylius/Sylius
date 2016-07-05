@@ -439,6 +439,7 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Given I have proceeded selecting :paymentMethodName payment method
      * @When I proceed selecting :paymentMethodName payment method
      */
     public function iProceedSelectingOfflinePaymentMethod($paymentMethodName = 'Offline')
@@ -488,6 +489,7 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Given I have confirmed my order
      * @When I confirm my order
      */
     public function iConfirmMyOrder()
@@ -518,7 +520,7 @@ final class CheckoutContext implements Context
     {
         Assert::true(
             $this->thankYouPage->hasThankYouMessage(),
-            'I should see thank you message, but i do not'
+            'I should see thank you message, but I do not'
         );
     }
 
@@ -529,7 +531,10 @@ final class CheckoutContext implements Context
     {
         $this->thankYouPage->waitForResponse(5);
 
-        expect($this->thankYouPage->isOpen())->toBe(true);
+        Assert::true(
+            $this->thankYouPage->isOpen(),
+            'I should be on thank you page, but I am not.'
+        );
     }
 
     /**
@@ -838,12 +843,12 @@ final class CheckoutContext implements Context
     {
         Assert::true(
             $this->thankYouPage->isOpen(),
-            'I should be on thank you page, but i am not.'
+            'I should be on thank you page, but I am not.'
         );
 
         Assert::true(
             $this->thankYouPage->hasPayAction(),
-            'I should be able to pay, but I am not.'
+            'I should be able to pay, but I am not able to.'
         );
     }
 
