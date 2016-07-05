@@ -37,14 +37,18 @@ winzou_state_machine:
                 to: completed
         callbacks:
             after:
-                process_order:
+                sylius_process_cart:
                     on: ["address", "select_shipping"]
                     do: ["@sylius.order_processing.order_processor", "process"]
                     args: ["object"]
-                recalculate_order:
+                sylius_recalculate_cart:
                     on: ["address", "readdress", "select_shipping", "reselect_shipping", "select_payment", "reselect_payment"]
                     do: ["@sylius.order_processing.order_recalculator", "recalculate"]
                     args: ["object"]
+                sylius_create_order:
+                    on: ["complete"]
+                    do: ["@sm.callback.cascade_transition", "apply"]
+                    args: ["object", "event", "'create'", "'sylius_order'"]
 
     sylius_order_shipping:
         class: "%sylius.model.order.class%"
