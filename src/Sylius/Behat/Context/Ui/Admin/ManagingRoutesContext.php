@@ -15,6 +15,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Route\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Route\UpdatePageInterface;
+use Sylius\Bundle\ContentBundle\Document\Route;
 use Webmozart\Assert\Assert;
 
 /**
@@ -139,6 +140,46 @@ final class ManagingRoutesContext implements Context
         Assert::false(
             $this->indexPage->isSingleResourceOnPage(['name' => $name]),
             sprintf('Route with name "%s" exists, but should not.', $name)
+        );
+    }
+
+    /**
+     * @Given /^I want to edit (this route)$/
+     */
+    public function iWantToEditThisRoute(Route $route)
+    {
+        $this->updatePage->open(['id' => $route->getId()]);
+    }
+
+    /**
+     * @When I choose :title as its new content
+     */
+    public function iChooseNewContent($title)
+    {
+        $this->updatePage->chooseNewContent($title);
+    }
+
+    /**
+     * @When I save my changes
+     * @When I try to save my changes
+     */
+    public function iSaveMyChanges()
+    {
+        $this->updatePage->saveChanges();
+    }
+
+    /**
+     * @Then /^(this route) should have assigned "([^"]+)" content$/
+     */
+    public function thisRouteShouldHaveAssignedContent(Route $route, $contentTitle)
+    {
+        if (!$this->indexPage->isOpen()) {
+            $this->indexPage->open();
+        }
+
+        Assert::true(
+            $this->indexPage->isSingleResourceOnPage(['name' => $route->getName(), 'content' => $contentTitle]),
+            sprintf('Cannot find route with name "%s" and content "%s" assigned.', $route->getName(), $contentTitle)
         );
     }
 }

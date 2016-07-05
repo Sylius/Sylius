@@ -15,6 +15,7 @@ use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
@@ -37,18 +38,26 @@ final class RouteContext implements Context
     private $routeManager;
 
     /**
+     * @var RepositoryInterface
+     */
+    private $staticContentRepository;
+
+    /**
      * @param SharedStorageInterface $sharedStorage
      * @param ExampleFactoryInterface $routeExampleFactory
      * @param ObjectManager $routeManager
+     * @param RepositoryInterface $staticContentRepository
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         ExampleFactoryInterface $routeExampleFactory,
-        ObjectManager $routeManager
+        ObjectManager $routeManager,
+        RepositoryInterface $staticContentRepository
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->routeExampleFactory = $routeExampleFactory;
         $this->routeManager = $routeManager;
+        $this->staticContentRepository = $staticContentRepository;
     }
 
     /**
@@ -60,6 +69,8 @@ final class RouteContext implements Context
 
         $this->routeManager->persist($route);
         $this->routeManager->flush();
+
+        $this->sharedStorage->set('route', $route);
     }
 
     /**
@@ -69,5 +80,20 @@ final class RouteContext implements Context
     {
         $this->theStoreHasRoute($firstName);
         $this->theStoreHasRoute($secondName);
+    }
+
+    /**
+     * @Given the store has route :name with :contentTitle as its content
+     */
+    public function theStoreHasRouteWithAsItsContent($name, $contentTitle)
+    {
+        $content = $this->staticContentRepository->findOneBy(['title' => $contentTitle]);
+
+        $route = $this->routeExampleFactory->create(['name' => $name, 'content' => $content]);
+
+        $this->routeManager->persist($route);
+        $this->routeManager->flush();
+
+        $this->sharedStorage->set('route', $route);
     }
 }

@@ -12,6 +12,11 @@ sylius_grid:
                 name:
                     type: string
                     label: sylius.ui.name
+                content:
+                    type: twig
+                    label: sylius.ui.content
+                    options:
+                        template: SyliusAdminBundle:Route/Field:content.html.twig
             filters:
                 name:
                     type: string

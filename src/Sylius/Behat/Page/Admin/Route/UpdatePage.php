@@ -18,5 +18,11 @@ use Sylius\Behat\Page\Admin\Crud\UpdatePage as BaseUpdatePage;
  */
 class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
 {
-    
+    /**
+     * {@inheritdoc}
+     */
+    public function chooseNewContent($title)
+    {
+        $this->getSession()->getPage()->selectFieldOption('Content', $title);
+    }
 }

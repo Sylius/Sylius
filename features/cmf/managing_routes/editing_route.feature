@@ -8,11 +8,11 @@ Feature: Editing a route
         Given the store has static contents "Krzysztof Krawczyk" and "Ryszard Rynkowski"
         And I am logged in as an administrator
 
-    @ui @todo
+    @ui
     Scenario: Change title of a route
         Given the store has route "krzysztof-krawczyk" with "Ryszard Rynkowski" as its content
         And I want to edit this route
-        When I change its content to "Krzysztof Krawczyk"
+        When I choose "Krzysztof Krawczyk" as its new content
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this route should have assigned "Krzysztof Krawczyk" content
