@@ -53,6 +53,12 @@ class PaymentMethodTranslationTypeSpec extends ObjectBehavior
             ->shouldBeCalled()
         ;
 
+        $builder
+            ->add('instructions', 'textarea', Argument::type('array'))
+            ->willReturn($builder)
+            ->shouldBeCalled()
+        ;
+
         $this->buildForm($builder, []);
     }
 

@@ -74,6 +74,12 @@ class PaymentMethodSpec extends ObjectBehavior
         $this->getDescription()->shouldReturn('Pay by check.');
     }
 
+    function its_instructions_is_mutable()
+    {
+        $this->setInstructions('Pay on account: 1100012312');
+        $this->getInstructions()->shouldReturn('Pay on account: 1100012312');
+    }
+
     function it_has_no_gateway_by_default()
     {
         $this->getGateway()->shouldReturn(null);
