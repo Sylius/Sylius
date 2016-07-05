@@ -42,6 +42,30 @@ the ``sylius_fixtures.fixture`` tag in order to be used in suite configuration.
     The former interface extends the ``ConfigurationInterface``, which is widely known from ``Configuration`` classes
     placed under ``DependencyInjection`` directory in Symfony bundles.
 
+Using a fixture multiple times in a single suite
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In order to use the same fixture multiple times in a single suite, it is needed to alias them:
+
+.. code-block:: yaml
+
+    sylius_fixtures:
+        suites:
+            my_suite_name:
+                regular_user: # Fixture alias as a key
+                    name: user # Fixture name
+                    options:
+                        admin: false
+                        amount: 10
+
+                admin_user: # Fixture alias as a key
+                    name: user # Fixture name
+                    options:
+                        admin: true
+                        amount: 2
+
+Both ``regular_user`` and ``admin_user`` are the aliases for ``user`` fixture. They will run the same fixture, but with
+different options being submitted.
 
 Listeners
 ---------
