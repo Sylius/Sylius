@@ -20,7 +20,7 @@ use Sylius\Behat\Service\ResponseLoaderInterface;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class PaypalApiMocker implements PaypalApiMockerInterface
+class PaypalApiMocker
 {
     /**
      * @var MockerInterface
@@ -78,14 +78,6 @@ class PaypalApiMocker implements PaypalApiMockerInterface
             ->twice()
             ->andReturn($setExpressCheckoutResponse, $getExpressCheckoutDetailsResponse)
         ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function unmockAllServices()
-    {
-        $this->mocker->unmockAllServices();
     }
 
     /**
