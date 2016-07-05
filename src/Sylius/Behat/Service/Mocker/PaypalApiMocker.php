@@ -20,7 +20,7 @@ use Sylius\Behat\Service\ResponseLoaderInterface;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class PaypalApiMocker implements PaypalApiMockerInterface
+class PaypalApiMocker
 {
     /**
      * @var MockerInterface
@@ -41,10 +41,7 @@ class PaypalApiMocker implements PaypalApiMockerInterface
         $this->mocker = $mocker;
         $this->responseLoader = $responseLoader;
     }
-
-    /**
-     * {@inheritdoc}
-     */
+   
     public function mockApiSuccessfulPaymentResponse()
     {
         $mockedResponse = $this->responseLoader->getMockedResponse('Paypal/paypal_api_successful_payment.json');
@@ -66,10 +63,7 @@ class PaypalApiMocker implements PaypalApiMockerInterface
             ->andReturn($firstGetExpressCheckoutDetailsResponse, $doExpressCheckoutPaymentResponse, $secondGetExpressCheckoutDetailsResponse, $getTransactionDetailsResponse)
         ;
     }
-
-    /**
-     * {@inheritdoc}
-     */
+    
     public function mockApiPaymentInitializeResponse()
     {
         $mockedResponse = $this->responseLoader->getMockedResponse('Paypal/paypal_api_initialize_payment.json');
@@ -84,14 +78,6 @@ class PaypalApiMocker implements PaypalApiMockerInterface
             ->twice()
             ->andReturn($setExpressCheckoutResponse, $getExpressCheckoutDetailsResponse)
         ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function unmockAllServices()
-    {
-        $this->mocker->unmockAllServices();
     }
 
     /**
