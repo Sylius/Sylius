@@ -24,6 +24,7 @@ sylius:
             roles: Peran
         channel:
             currency_default: Mata uang default
+            tax_zone_default: Standar Zona Pajak
         image:
             file: Gambar
         locale:

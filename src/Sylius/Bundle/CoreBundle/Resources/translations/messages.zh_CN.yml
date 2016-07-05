@@ -35,6 +35,7 @@ sylius:
             currencies: 货币
             shipping_methods: 发货方式
             payment_methods: 支付方式
+            tax_zone_default: 默认税区
             theme: 主题
             hostname: 主机名
         image:

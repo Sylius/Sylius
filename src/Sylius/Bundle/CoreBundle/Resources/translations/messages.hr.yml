@@ -30,6 +30,7 @@ sylius:
             currency_default: Zadana valuta
             shipping_methods: Načini slanja
             payment_methods: Načini plaćanja
+            tax_zone_default: Zadana porezna zona
         image:
             file: Fotografija
         locale:

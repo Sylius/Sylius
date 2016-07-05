@@ -75,6 +75,7 @@ sylius:
         filter: Filter
         go: Ga
         generate_coupons: Coupons genereren
+        guest_customer: Gast klant
         in: In
         info: Info
         item: Artikel

@@ -114,6 +114,7 @@ sylius:
         filter: Filtrar
         go: Prosseguir
         generate_coupons: Gerar cupons
+        guest_customer: Usuário visitante
         hello: Olá
         manage_your_personal_information_and_preferences: Gerenciar suas informações pessoais e preferências
         latest_products: Produtos recentes

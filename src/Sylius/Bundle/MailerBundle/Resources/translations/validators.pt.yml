@@ -1,0 +1,7 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    email:
+        code:
+            unique: Código de e-mail deve ser único.

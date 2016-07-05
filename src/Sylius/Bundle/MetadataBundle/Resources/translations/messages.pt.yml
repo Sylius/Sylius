@@ -3,6 +3,8 @@
 
 sylius:
     metadata:
+        type:
+            twitter_summary_card: Sumário
         page:
             description: Descrição
         twitter:

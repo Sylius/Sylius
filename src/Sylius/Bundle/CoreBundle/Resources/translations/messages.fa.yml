@@ -35,6 +35,7 @@ sylius:
             currencies: واحدهای پول
             shipping_methods: شیوه های ارسال
             payment_methods: روش‌های پرداخت
+            tax_zone_default: منطقه مالیاتی پیش فرض
             theme: قالب
             hostname: نام میزبان
         image:

@@ -44,6 +44,7 @@ sylius:
         expires_at: Poteče dne
         filter: Filter
         generate_coupons: Generirajte kupone
+        guest_customer: Kupec gost
         item: Izdelek
         inventory: Inventar
         list_coupons: Seznam kuponov

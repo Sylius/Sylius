@@ -113,6 +113,7 @@ sylius:
         filter: กรองข้อมูล
         go: Go
         generate_coupons: สร้างคูปอง
+        guest_customer: ลูกค้าบุคคลทั่วไป
         hello: สวัสดี!
         manage_your_personal_information_and_preferences: จัดการข้อมูลส่วนบุคคลและการตั้งค่าของคุณ
         latest_products: สินค้าใหม่ล่าสุด

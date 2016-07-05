@@ -5,6 +5,7 @@ sylius:
     form:
         login:
             username: Login
+            password: Palavra passe
     ui:
         add_coupon: Adicionar cupom
         add_to_cart: Adicionar ao carrinho
@@ -14,6 +15,7 @@ sylius:
         your_cart_is_empty: Seu carrinho está vazio
         qty: Quantidade
         clear_cart: Esvaziar carrinho
+        summary: Sumário
         countries: Países
         create: Criar
         home: Home
@@ -24,6 +26,7 @@ sylius:
         filter: Filtrar
         generate_coupons: Gerar cupons
         list_coupons: Cupons
+        locales: Linguagens
         new: Novo
         new_country: Novo país
         new_tax_category: Nova categoria de imposto

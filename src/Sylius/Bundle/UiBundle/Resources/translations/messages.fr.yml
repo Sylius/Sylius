@@ -9,6 +9,7 @@ sylius:
             remember_me: Rester connecté
         option:
             name: Nom
+        notes: Notes supplémentaires
     ui:
         about: À propos
         account_credentials: "Informations d'intentification"
@@ -20,8 +21,10 @@ sylius:
         an_error_occurred: "Une erreur s'est produite"
         are_your_sure_you_want_to_perform_this_action: Êtes-vous sûr de vouloir effectuer cette action ?
         available_for_channels: Disponible pour le canal
+        reserved: Réservé
         average_order_value: Panier moyen
         backordered: Rupture de stock
+        back_to_store: Retour à la boutique
         cancel: Annuler
         cancelled: Annulé
         category_requirements: Exigences de la catégorie
@@ -35,6 +38,7 @@ sylius:
         image: Image
         qty: Quantité
         clear_cart: Vider le panier
+        extra_notes: Notes supplémentaires
         summary: Résumé
         color: Couleur
         configurable_product: Produit configurable
@@ -89,6 +93,7 @@ sylius:
         filter: Filtrer
         go: Envoyer
         generate_coupons: Générer des coupons
+        guest_customer: Client invité
         in: Dans
         info: Info
         item: Élément

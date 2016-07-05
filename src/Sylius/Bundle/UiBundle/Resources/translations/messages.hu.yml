@@ -116,6 +116,7 @@ sylius:
         filter: Szűrő
         go: Mehet
         generate_coupons: Kuponok generálása
+        guest_customer: Vendég ügyfél
         hello: Üdvözlünk
         manage_your_personal_information_and_preferences: Személyes adatok és a beállítások kezelése
         latest_products: Legújabb termékeink

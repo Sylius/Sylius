@@ -3,6 +3,8 @@
 
 sylius:
     form:
+        group:
+            roles: Perfis
         user:
             email: Endereço de email
         customer:

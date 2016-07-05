@@ -56,6 +56,7 @@ sylius:
         expires_at: Verfällt am
         filter: Filtern
         generate_coupons: Generieren
+        guest_customer: Gast Kunde
         in: In
         info: Info
         item: Produkt

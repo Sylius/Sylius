@@ -3,6 +3,7 @@
 
 sylius:
     extensions:
+        apc: APC
         "off": false
         "on": true
     settings:

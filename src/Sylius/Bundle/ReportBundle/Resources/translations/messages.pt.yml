@@ -5,3 +5,5 @@ sylius:
     form:
         report:
             description: Descrição
+            chart:
+                type: Tipo
