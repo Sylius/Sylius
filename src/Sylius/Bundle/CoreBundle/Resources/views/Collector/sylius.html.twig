@@ -13,15 +13,15 @@
         </div>
         <div class="sf-toolbar-info-piece">
             <b>Channel</b>
-            <span class="sf-toolbar-status">{{ collector.channelCode }}</span>
+            <span class="sf-toolbar-status">{{ collector.channelCode|default('Undefined') }}</span>
         </div>
         <div class="sf-toolbar-info-piece">
             <b>Currency</b>
-            <span class="sf-toolbar-status">{{ collector.currencyCode }}</span>
+            <span class="sf-toolbar-status">{{ collector.currencyCode|default('Undefined') }}</span>
         </div>
         <div class="sf-toolbar-info-piece">
             <b>Locale</b>
-            <span class="sf-toolbar-status">{{ collector.localeCode }}</span>
+            <span class="sf-toolbar-status">{{ collector.localeCode|default('Undefined') }}</span>
         </div>
         <div class="sf-toolbar-info-piece">
             <b>Customer</b>

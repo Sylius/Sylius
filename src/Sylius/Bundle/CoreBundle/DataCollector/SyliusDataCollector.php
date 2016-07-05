@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\DataCollector;
 
 use Sylius\Bundle\CoreBundle\Application\Kernel;
+use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Context\ShopperContextInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -104,9 +105,17 @@ class SyliusDataCollector extends DataCollector
     {
         $this->version = Kernel::VERSION;
 
-        $this->channelCode = $this->shopperContext->getChannel()->getCode();
-        $this->currencyCode = $this->shopperContext->getCurrencyCode();
-        $this->localeCode = $this->shopperContext->getLocaleCode();
+        try {
+            $this->channelCode = $this->shopperContext->getChannel()->getCode();
+        } catch (ChannelNotFoundException $exception) {}
+
+        try {
+            $this->currencyCode = $this->shopperContext->getCurrencyCode();
+        } catch (ChannelNotFoundException $exception) {}
+
+        try {
+            $this->localeCode = $this->shopperContext->getLocaleCode();
+        } catch (ChannelNotFoundException $exception) {}
 
         $customer = $this->shopperContext->getCustomer();
 
