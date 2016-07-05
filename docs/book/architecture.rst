@@ -47,6 +47,59 @@ Twig
 
 To read more about Twig, `go here <http://twig.sensiolabs.org/>`_.
 
+Division into Components, Bundles, Platform
+-------------------------------------------
+
+Components
+''''''''''
+
+Every single component of Sylius can be used standalone. Taking the ``Taxation`` component as an example,
+it's only responsibility is to calculate taxes,it does not matter whether these will be taxes for products or anything else, it is fully decoupled.
+In order to let the Taxation component operate on your objects you need to have them implementing the ``TaxableInterface``.
+Since then they can have taxes calculated.
+Such approach is true for every component of Sylius.
+Besides components that are strictly connected to the e-commerce needs, we have plenty of components that are more general. For instance Attribute, Mailer, Locale etc.
+
+All the components are packages, available via `Packagist <https://packagist.org/>`_.
+
+Bundles
+'''''''
+
+These are the Symfony Bundles - therefore if you are a Symfony Developer, and you would like to use the Taxation component in your system,
+but you do not want to spend time on configuring forms or services in the container. You can include the ``TaxationBundle`` in your application
+with minimal or even no configuration to have access to all the services, models, configure tax rates, tax categories and use that for any taxes you will need.
+
+Platform
+''''''''
+
+This is a fullstack Symfony Application, based on Symfony Standard. Sylius Platform gives you the classic, quite feature rich webshop.
+Before you start using Sylius you will need to decide whether you will need a full platform with all the features we provide, or maybe you will use decoupled bundles and components
+to build something very custom, maybe smaller, with different features.
+But of course the platform is highly customizable to fit different bussiness models.
+
+Division into Core, Admin, Shop, Api
+------------------------------------
+
+Core
+''''
+
+...
+
+Admin
+'''''
+
+...
+
+Shop
+''''
+
+...
+
+Api
+'''
+
+...
+
 Resource Layer
 --------------
 
