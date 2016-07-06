@@ -528,14 +528,18 @@ sylius:
         payment_method: 'Payment method'
         payment_methods: 'Payment Methods'
         payment_mode: 'Payment mode'
+        payment_ready_to_pay: You can now make your payment
         payment_state: 'Payment state'
         payments: Payments
+        pay: Pay
+        pay_again: Click pay to try again
         pending: Pending
         per_customer_usage_limit: Per customer usage limit
         permissions: Permissions
         personal_information: Personal information
         phone_number: 'Phone number'
         place_order: 'Place order'
+        placed_an_order: You have successfully placed na order.
         placed_at: 'Placed at'
         postcode: Postcode
         powered_by: Powered by
@@ -687,6 +691,7 @@ sylius:
         taxonomy: Taxonomy
         taxons: Taxons
         terms_and_conditions: Terms and Conditions
+        thank_you: Thank you!
         thank_you_for_your_order: 'Thank you for your order'
         theme: Theme
         there_are_no_archetypes_defined: 'There are no archetypes defined'

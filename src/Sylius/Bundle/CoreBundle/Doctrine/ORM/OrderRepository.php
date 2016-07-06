@@ -126,6 +126,23 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
     /**
      * {@inheritdoc}
      */
+    public function findOneForPayment($id)
+    {
+        return $this->createQueryBuilder('o')
+            ->leftJoin('o.payments', 'payments')
+            ->leftJoin('payments.method', 'paymentMethods')
+            ->addSelect('payments')
+            ->addSelect('paymentMethods')
+            ->andWhere('o.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function createFilterPaginator(array $criteria = null, array $sorting = null)
     {
         $queryBuilder = $this->createQueryBuilder('o');

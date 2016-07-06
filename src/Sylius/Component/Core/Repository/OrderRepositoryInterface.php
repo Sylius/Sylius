@@ -91,6 +91,13 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
      * @return OrderInterface|null
      */
     public function findForDetailsPage($id);
+    
+    /**
+     * @param int $id
+     *
+     * @return OrderInterface|null
+     */
+    public function findOneForPayment($id);
 
     /**
      * @param array $criteria

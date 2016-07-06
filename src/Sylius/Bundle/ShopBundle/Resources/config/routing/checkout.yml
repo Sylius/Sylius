@@ -129,3 +129,12 @@ sylius_shop_checkout_summary:
             redirect: sylius_shop_homepage
             form:
                 type: sylius_checkout_summary
+
+sylius_shop_checkout_thank_you:
+    path: /thank-you
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.order:thankYouAction
+        _sylius:
+            template: SyliusShopBundle:Checkout:thankYou.html.twig
+

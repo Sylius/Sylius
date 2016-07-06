@@ -14,9 +14,8 @@ namespace Sylius\Behat\Context\Ui;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Shop\Checkout\FinalizeStepInterface;
 use Sylius\Behat\Page\External\PaypalExpressCheckoutPageInterface;
-use Sylius\Behat\Page\Shop\Order\OrderPaymentsPageInterface;
+use Sylius\Behat\Page\Shop\Checkout\ThankYouPageInterface;
 use Sylius\Behat\Service\Mocker\PaypalApiMocker;
-use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 
@@ -31,15 +30,15 @@ final class PaypalContext implements Context
     private $sharedStorage;
 
     /**
-     * @var OrderPaymentsPageInterface
-     */
-    private $orderPaymentsPage;
-
-    /**
      * @var PaypalExpressCheckoutPageInterface
      */
     private $paypalExpressCheckoutPage;
 
+    /**
+     * @var ThankYouPageInterface
+     */
+    private $thankYouPage;
+    
     /**
      * @var FinalizeStepInterface
      */
@@ -57,39 +56,30 @@ final class PaypalContext implements Context
 
     /**
      * @param SharedStorageInterface $sharedStorage
-     * @param OrderPaymentsPageInterface $orderPaymentsPage
      * @param PaypalExpressCheckoutPageInterface $paypalExpressCheckoutPage
+     * @param ThankYouPageInterface $thankYouPage
      * @param FinalizeStepInterface $checkoutFinalizeStep
      * @param PaypalApiMocker $paypalApiMocker
      * @param OrderRepositoryInterface $orderRepository
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
-        OrderPaymentsPageInterface $orderPaymentsPage,
         PaypalExpressCheckoutPageInterface $paypalExpressCheckoutPage,
+        ThankYouPageInterface $thankYouPage,
         FinalizeStepInterface $checkoutFinalizeStep,
         PaypalApiMocker $paypalApiMocker,
         OrderRepositoryInterface $orderRepository
     ) {
         $this->sharedStorage = $sharedStorage;
-        $this->orderPaymentsPage = $orderPaymentsPage;
         $this->paypalExpressCheckoutPage = $paypalExpressCheckoutPage;
+        $this->thankYouPage = $thankYouPage;
         $this->checkoutFinalizeStep = $checkoutFinalizeStep;
         $this->paypalApiMocker = $paypalApiMocker;
         $this->orderRepository = $orderRepository;
     }
 
     /**
-     * @Given /^I confirm my order with paypal payment$/
-     */
-    public function iConfirmMyOrderWithPaypalPayment()
-    {
-        $this->paypalApiMocker->mockApiPaymentInitializeResponse();
-        $this->checkoutFinalizeStep->confirmOrder();
-    }
-
-    /**
-     * @Then I should be redirected to PayPal Express Checkout page
+     * @Then I should be redirected back to PayPal Express Checkout page
      */
     public function iShouldBeRedirectedToPaypalExpressCheckoutPage()
     {
@@ -106,7 +96,8 @@ final class PaypalContext implements Context
     }
 
     /**
-     * @When I cancel my PayPal payment
+     * @Given /^I have cancelled (?:|my )PayPal payment$/
+     * @When /^I cancel (?:|my )PayPal payment$/
      */
     public function iCancelMyPaypalPayment()
     {
@@ -114,31 +105,12 @@ final class PaypalContext implements Context
     }
 
     /**
-     * @When I try to pay again
+     * @Given /^I tried to pay(?:| again)$/
+     * @When /^I try to pay(?:| again)$/
      */
     public function iTryToPayAgain()
     {
-        $order = $this->getLastOrder();
-        $payment = $order->getLastPayment();
         $this->paypalApiMocker->mockApiPaymentInitializeResponse();
-        $this->orderPaymentsPage->clickPayButtonForGivenPayment($payment);
-    }
-
-    /**
-     * @return OrderInterface
-     *
-     * @throws \RuntimeException
-     */
-    private function getLastOrder()
-    {
-        $customer = $this->sharedStorage->get('user')->getCustomer();
-        $orders = $this->orderRepository->findByCustomer($customer);
-        $lastOrder = end($orders);
-
-        if (false === $lastOrder) {
-            throw new \RuntimeException(sprintf('There is no last order for %s', $customer->getFullName()));
-        }
-
-        return $lastOrder;
+        $this->thankYouPage->pay();
     }
 }

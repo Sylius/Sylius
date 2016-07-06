@@ -15,17 +15,34 @@ use Sylius\Behat\Page\SymfonyPage;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 class ThankYouPage extends SymfonyPage implements ThankYouPageInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function hasThankYouMessageFor($name)
+    public function hasThankYouMessage()
     {
-        $thankYouMessage = $this->getElement('thank you message')->getText();
+        $thankYouMessage = $this->getElement('thank_you')->getText();
 
-        return false !== strpos($thankYouMessage, sprintf('Thank you %s', $name));
+        return false !== strpos($thankYouMessage, 'Thank you!');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasPayAction()
+    {
+        return $this->hasElement('pay_link');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function pay()
+    {
+        $this->getElement('pay_link')->click();
     }
 
     /**
@@ -43,7 +60,7 @@ class ThankYouPage extends SymfonyPage implements ThankYouPageInterface
      */
     public function getRouteName()
     {
-        return 'sylius_checkout_thank_you';
+        return 'sylius_shop_checkout_thank_you';
     }
 
     /**
@@ -52,7 +69,8 @@ class ThankYouPage extends SymfonyPage implements ThankYouPageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'thank you message' => '#thanks',
+            'thank_you' => '#sylius-thank-you',
+            'pay_link' => '#sylius-pay-link',
         ]);
     }
 }

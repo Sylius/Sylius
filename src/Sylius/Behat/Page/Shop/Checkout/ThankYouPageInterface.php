@@ -19,11 +19,16 @@ use Sylius\Behat\Page\PageInterface;
 interface ThankYouPageInterface extends PageInterface
 {
     /**
-     * @param string $name
-     *
      * @return bool
      */
-    public function hasThankYouMessageFor($name);
+    public function hasThankYouMessage();
+
+    /**
+     * @return bool
+     */
+    public function hasPayAction();
+    
+    public function pay();
 
     /**
      * @param int $timeout

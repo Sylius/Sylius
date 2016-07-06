@@ -23,6 +23,10 @@ sylius_shop_checkout:
     resource: "@SyliusShopBundle/Resources/config/routing/checkout.yml"
     prefix: /checkout
 
+sylius_shop_order:
+    resource: "@SyliusShopBundle/Resources/config/routing/order.yml"
+    prefix: /order
+
 sylius_shop_account:
     resource: "@SyliusShopBundle/Resources/config/routing/account.yml"
     prefix: /account

@@ -17,7 +17,6 @@ use Sylius\Behat\Page\Shop\Checkout\PaymentPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\ShippingPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SummaryPageInterface;
 use Sylius\Behat\Page\Shop\HomePageInterface;
-use Sylius\Behat\Page\Shop\Order\OrderPaymentsPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\AddressingStepInterface;
 use Sylius\Behat\Page\Shop\Checkout\FinalizeStepInterface;
 use Sylius\Behat\Page\Shop\Checkout\PaymentStepInterface;
@@ -28,13 +27,11 @@ use Sylius\Behat\Page\UnexpectedPageException;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Behat\Service\SecurityServiceInterface;
 use Sylius\Component\Core\Model\AddressInterface;
-use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface;
-use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Webmozart\Assert\Assert;
 
@@ -91,12 +88,7 @@ final class CheckoutContext implements Context
     /**
      * @var ThankYouPageInterface
      */
-    private $checkoutThankYouPage;
-
-    /**
-     * @var OrderPaymentsPageInterface
-     */
-    private $orderPaymentsPage;
+    private $thankYouPage;
 
     /**
      * @var ShippingPageInterface
@@ -130,8 +122,7 @@ final class CheckoutContext implements Context
      * @param PaymentPageInterface $paymentPage
      * @param SummaryPageInterface $summaryPage
      * @param FinalizeStepInterface $checkoutFinalizeStep
-     * @param ThankYouPageInterface $checkoutThankYouPage
-     * @param OrderPaymentsPageInterface $orderPaymentsPage
+     * @param ThankYouPageInterface $thankYouPage
      * @param OrderRepositoryInterface $orderRepository
      * @param SecurityServiceInterface $securityService
      */
@@ -147,8 +138,7 @@ final class CheckoutContext implements Context
         PaymentPageInterface $paymentPage,
         SummaryPageInterface $summaryPage,
         FinalizeStepInterface $checkoutFinalizeStep,
-        ThankYouPageInterface $checkoutThankYouPage,
-        OrderPaymentsPageInterface $orderPaymentsPage,
+        ThankYouPageInterface $thankYouPage,
         OrderRepositoryInterface $orderRepository,
         SecurityServiceInterface $securityService
     ) {
@@ -163,8 +153,7 @@ final class CheckoutContext implements Context
         $this->paymentPage = $paymentPage;
         $this->summaryPage = $summaryPage;
         $this->checkoutFinalizeStep = $checkoutFinalizeStep;
-        $this->checkoutThankYouPage = $checkoutThankYouPage;
-        $this->orderPaymentsPage = $orderPaymentsPage;
+        $this->thankYouPage = $thankYouPage;
         $this->orderRepository = $orderRepository;
         $this->securityService = $securityService;
     }
@@ -450,6 +439,7 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Given I have proceeded selecting :paymentMethodName payment method
      * @When I proceed selecting :paymentMethodName payment method
      */
     public function iProceedSelectingOfflinePaymentMethod($paymentMethodName = 'Offline')
@@ -499,6 +489,7 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Given I have confirmed my order
      * @When I confirm my order
      */
     public function iConfirmMyOrder()
@@ -527,11 +518,10 @@ final class CheckoutContext implements Context
      */
     public function iShouldSeeTheThankYouPage()
     {
-        /** @var UserInterface $user */
-        $user = $this->sharedStorage->get('user');
-        $customer = $user->getCustomer();
-
-        expect($this->checkoutThankYouPage->hasThankYouMessageFor($customer->getFullName()))->toBe(true);
+        Assert::true(
+            $this->thankYouPage->hasThankYouMessage(),
+            'I should see thank you message, but I do not'
+        );
     }
 
     /**
@@ -539,19 +529,12 @@ final class CheckoutContext implements Context
      */
     public function iShouldBeRedirectedBackToTheThankYouPage()
     {
-        $this->checkoutThankYouPage->waitForResponse(5);
+        $this->thankYouPage->waitForResponse(5);
 
-        expect($this->checkoutThankYouPage->isOpen())->toBe(true);
-    }
-
-    /**
-     * @Then I should be redirected back to the order payment page
-     */
-    public function iShouldBeRedirectedBackToTheOrderPaymentPage()
-    {
-        $this->orderPaymentsPage->waitForResponse(5, ['number' => $this->getLastOrder()->getNumber()]);
-
-        expect($this->orderPaymentsPage->isOpen(['number' => $this->getLastOrder()->getNumber()]))->toBe(true);
+        Assert::true(
+            $this->thankYouPage->isOpen(),
+            'I should be on thank you page, but I am not.'
+        );
     }
 
     /**
@@ -574,15 +557,6 @@ final class CheckoutContext implements Context
             $this->summaryPage->isOpen(),
             'Checkout summary page should be opened, but it is not.'
         );
-    }
-
-    /**
-     * @Then I should see two cancelled payments and new one ready to be paid
-     */
-    public function iShouldSeeTwoCancelledPaymentsAndNewOneReadyToBePaid()
-    {
-        expect($this->orderPaymentsPage->countPaymentWithSpecificState(PaymentInterface::STATE_CANCELLED))->toBe(2);
-        expect($this->orderPaymentsPage->countPaymentWithSpecificState(PaymentInterface::STATE_NEW))->toBe(1);
     }
 
     /**
@@ -863,6 +837,22 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Then I should be able to pay again
+     */
+    public function iShouldBeAbleToPayAgain()
+    {
+        Assert::true(
+            $this->thankYouPage->isOpen(),
+            'I should be on thank you page, but I am not.'
+        );
+
+        Assert::true(
+            $this->thankYouPage->hasPayAction(),
+            'I should be able to pay, but I am not able to.'
+        );
+    }
+
+    /**
      * @Given I should be able to go to the payment step again
      */
     public function iShouldBeAbleToGoToThePaymentStepAgain()
@@ -934,23 +924,5 @@ final class CheckoutContext implements Context
             $this->addressingPage->checkValidationMessageFor($element, $expectedMessage),
             sprintf('The %s should be required.', $element)
         );
-    }
-
-    /**
-     * @return OrderInterface
-     *
-     * @throws \RuntimeException
-     */
-    private function getLastOrder()
-    {
-        $customer = $this->sharedStorage->get('user')->getCustomer();
-        $orders = $this->orderRepository->findByCustomer($customer);
-        $lastOrder = end($orders);
-
-        if (false === $lastOrder) {
-            throw new \RuntimeException(sprintf('There is no last order for %s', $customer->getFullName()));
-        }
-
-        return $lastOrder;
     }
 }
