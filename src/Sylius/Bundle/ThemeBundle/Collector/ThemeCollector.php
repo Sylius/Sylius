@@ -17,12 +17,12 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\DataCollector\DataCollectorInterface;
+use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ThemeDataCollector implements DataCollectorInterface, \Serializable
+class ThemeCollector extends DataCollector
 {
     /**
      * @var ThemeRepositoryInterface
@@ -38,21 +38,6 @@ class ThemeDataCollector implements DataCollectorInterface, \Serializable
      * @var ThemeHierarchyProviderInterface
      */
     private $themeHierarchyProvider;
-
-    /**
-     * @var ThemeInterface
-     */
-    private $usedTheme;
-
-    /**
-     * @var ThemeInterface[]
-     */
-    private $themeHierarchy;
-
-    /**
-     * @var ThemeInterface[]
-     */
-    private $allThemes;
 
     /**
      * @param ThemeRepositoryInterface $themeRepository
@@ -74,23 +59,23 @@ class ThemeDataCollector implements DataCollectorInterface, \Serializable
      */
     public function getUsedTheme()
     {
-        return $this->usedTheme;
+        return $this->data['used_theme'];
     }
 
     /**
      * @return ThemeInterface[]
      */
-    public function getThemeHierarchy()
+    public function getUsedThemes()
     {
-        return $this->themeHierarchy;
+        return $this->data['used_themes'];
     }
 
     /**
      * @return ThemeInterface[]
      */
-    public function getAllThemes()
+    public function getThemes()
     {
-        return $this->allThemes;
+        return $this->data['themes'];
     }
 
     /**
@@ -98,25 +83,9 @@ class ThemeDataCollector implements DataCollectorInterface, \Serializable
      */
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
-        $this->usedTheme = $this->themeContext->getTheme();
-        $this->themeHierarchy = $this->themeHierarchyProvider->getThemeHierarchy($this->themeContext->getTheme());
-        $this->allThemes = $this->themeRepository->findAll();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function serialize()
-    {
-        return serialize([$this->usedTheme, $this->themeHierarchy, $this->allThemes]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function unserialize($serialized)
-    {
-        list($this->usedTheme, $this->themeHierarchy, $this->allThemes) = unserialize($serialized);
+        $this->data['used_theme'] = $this->themeContext->getTheme();
+        $this->data['used_themes'] = $this->themeHierarchyProvider->getThemeHierarchy($this->themeContext->getTheme());
+        $this->data['themes'] = $this->themeRepository->findAll();
     }
 
     /**
