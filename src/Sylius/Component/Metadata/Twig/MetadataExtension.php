@@ -12,10 +12,14 @@
 namespace Sylius\Component\Metadata\Twig;
 
 use Sylius\Component\Metadata\Accessor\MetadataAccessorInterface;
+use Sylius\Component\Metadata\Model\Custom\Page;
+use Sylius\Component\Metadata\Model\Custom\PageMetadata;
 use Sylius\Component\Metadata\Model\MetadataSubjectInterface;
 use Sylius\Component\Metadata\Renderer\MetadataRendererInterface;
 
 /**
+ * TODO: This file should be in Bundle/ not Component/
+ *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class MetadataExtension extends \Twig_Extension
@@ -46,21 +50,23 @@ final class MetadataExtension extends \Twig_Extension
     public function getFunctions()
     {
         return [
-            new \Twig_SimpleFunction('sylius_metadata_get', [$this, 'getProperty']),
-            new \Twig_SimpleFunction('sylius_metadata_render', [$this, 'renderProperty']),
+            new \Twig_SimpleFunction('sylius_metadata_get', [$this, 'getProperty'], ['is_safe' => ['html']]),
+            new \Twig_SimpleFunction('sylius_metadata_render', [$this, 'renderProperty'], ['is_safe' => ['html']]),
+            new \Twig_SimpleFunction('sylius_metadata_render_page', [$this, 'renderPage'], ['is_safe' => ['html']]),
         ];
     }
 
     /**
      * @param MetadataSubjectInterface $metadataSubject
+     * @param string $type
      * @param string|null $propertyPath
      * @param mixed|null $defaultValue
      *
      * @return mixed
      */
-    public function getProperty(MetadataSubjectInterface $metadataSubject, $propertyPath = null, $defaultValue = null)
+    public function getProperty(MetadataSubjectInterface $metadataSubject, $type, $propertyPath = null, $defaultValue = null)
     {
-        return $this->metadataAccessor->getProperty($metadataSubject, $propertyPath) ?: $defaultValue;
+        return $this->metadataAccessor->getProperty($metadataSubject, $type, $propertyPath) ?: $defaultValue;
     }
 
     /**
@@ -70,12 +76,38 @@ final class MetadataExtension extends \Twig_Extension
      *
      * @return string
      */
-    public function renderProperty(MetadataSubjectInterface $metadataSubject, $propertyPath = null, array $options = [])
+    public function renderProperty(MetadataSubjectInterface $metadataSubject, $type, $propertyPath = null, array $options = [])
     {
-        $metadataProperty = $this->metadataAccessor->getProperty($metadataSubject, $propertyPath);
+        $metadataProperty = $this->metadataAccessor->getProperty($metadataSubject, $type, $propertyPath);
 
         if (null === $metadataProperty) {
             return null;
+        }
+
+        return $this->metadataRenderer->render($metadataProperty, $options);
+    }
+
+    /**
+     * @param MetadataSubjectInterface|null $metadataSubject
+     * @param array $options
+     *
+     * @return null|string
+     */
+    public function renderPage(MetadataSubjectInterface $metadataSubject = null, array $options = [])
+    {
+        if (!$metadataSubject) {
+            $metadataSubject = new Page();
+        }
+
+        $metadataProperty = $this->metadataAccessor->getProperty($metadataSubject, 'page');
+        
+        if (null === $metadataProperty) {
+            if (!isset($options['values'])) {
+                return null;
+            }
+
+            // Allow for the edge-case of no metadata defined at all but still passing values to render a page with
+            $metadataProperty = new PageMetadata();
         }
 
         return $this->metadataRenderer->render($metadataProperty, $options);

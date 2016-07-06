@@ -15,6 +15,7 @@ use Sylius\Component\Core\Model\ArchetypeInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Metadata\HierarchyProvider\MetadataHierarchyProviderInterface;
+use Sylius\Component\Metadata\Model\Custom\PageInterface;
 use Sylius\Component\Metadata\Model\MetadataSubjectInterface;
 
 /**
@@ -49,7 +50,7 @@ class ProductVariantHierarchyProvider implements MetadataHierarchyProviderInterf
         }
 
         $hierarchy[] = $product->getMetadataClassIdentifier();
-        $hierarchy[] = 'DefaultPage';
+        $hierarchy[] = PageInterface::METADATA_CLASS_IDENTIFIER;
 
         return $hierarchy;
     }

@@ -12,11 +12,16 @@
 namespace Sylius\Bundle\MetadataBundle\DependencyInjection;
 
 use Sylius\Bundle\MetadataBundle\Controller\MetadataController;
-use Sylius\Bundle\MetadataBundle\Model\MetadataContainer;
+use Sylius\Bundle\MetadataBundle\Doctrine\ORM\MetadataContainerRepository;
+use Sylius\Bundle\MetadataBundle\Form\Type\MetadataContainerTranslationType;
 use Sylius\Bundle\MetadataBundle\Form\Type\MetadataContainerType;
+use Sylius\Bundle\MetadataBundle\Model\MetadataContainer;
+use Sylius\Bundle\MetadataBundle\Model\MetadataContainerTranslation;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Metadata\Factory\MetadataContainerFactory;
 use Sylius\Component\Metadata\Model\MetadataContainerInterface;
+use Sylius\Component\Metadata\Model\MetadataContainerTranslationInterface;
+use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -74,7 +79,7 @@ class Configuration implements ConfigurationInterface
                             ->scalarNode('model')->defaultValue(MetadataContainer::class)->cannotBeEmpty()->end()
                             ->scalarNode('interface')->defaultValue(MetadataContainerInterface::class)->cannotBeEmpty()->end()
                             ->scalarNode('controller')->defaultValue(MetadataController::class)->cannotBeEmpty()->end()
-                            ->scalarNode('repository')->cannotBeEmpty()->end()
+                            ->scalarNode('repository')->defaultValue(MetadataContainerRepository::class)->cannotBeEmpty()->end()
                             ->scalarNode('factory')->defaultValue(MetadataContainerFactory::class)->end()
                             ->arrayNode('form')
                                 ->addDefaultsIfNotSet()
@@ -90,6 +95,38 @@ class Configuration implements ConfigurationInterface
                             ->arrayNode('default')
                                 ->prototype('scalar')->end()
                                 ->defaultValue(['sylius'])
+                            ->end()
+                        ->end()
+                    ->end()
+                    ->arrayNode('translation')
+                        ->addDefaultsIfNotSet()
+                        ->children()
+                            ->variableNode('options')->end()
+                            ->arrayNode('classes')
+                                ->addDefaultsIfNotSet()
+                                ->children()
+                                    ->scalarNode('model')->defaultValue(MetadataContainerTranslation::class)->cannotBeEmpty()->end()
+                                    ->scalarNode('interface')->defaultValue(MetadataContainerTranslationInterface::class)->cannotBeEmpty()->end()
+                                    ->scalarNode('controller')->defaultValue(MetadataController::class)->cannotBeEmpty()->end()
+                                    ->scalarNode('repository')->cannotBeEmpty()->end()
+                                    ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                    ->arrayNode('form')
+                                        ->addDefaultsIfNotSet()
+                                        ->children()
+                                            ->scalarNode('default')->defaultValue(MetadataContainerTranslationType::class)->cannotBeEmpty()->end()
+                                        ->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                            ->arrayNode('validation_groups')
+                                ->addDefaultsIfNotSet()
+                                ->children()
+                                    ->arrayNode('default')
+                                        ->prototype('scalar')->end()
+                                        ->defaultValue(['sylius'])
+                                        ->cannotBeEmpty()
+                                    ->end()
+                                ->end()
                             ->end()
                         ->end()
                     ->end()

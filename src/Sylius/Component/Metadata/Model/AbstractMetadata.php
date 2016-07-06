@@ -24,13 +24,9 @@ abstract class AbstractMetadata implements MetadataInterface
     public function merge(MetadataInterface $metadata)
     {
         if (!$metadata instanceof $this || !$this instanceof $metadata) {
-            throw new \InvalidArgumentException(
-                sprintf(
-                    'You can only merge instances of the same classes. Tried to merge "%s" with "%s".',
-                    get_class($this),
-                    get_class($metadata)
-                )
-            );
+            // Because this merging is recursive, there could be child subjects of different types
+            // If they're incompatible just return to allow merging to continue throughout other levels
+            return;
         }
 
         $inheritedVariables = get_object_vars($metadata);
@@ -74,5 +70,39 @@ abstract class AbstractMetadata implements MetadataInterface
         foreach (get_object_vars($this) as $key => $value) {
             $this->$key = $callable($value);
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isEmpty()
+    {
+        $inheritedVariables = get_object_vars($this);
+
+        foreach ($inheritedVariables as $inheritedKey => $inheritedValue) {
+            if ($this->{$inheritedKey} instanceof MetadataInterface) {
+                if (!$this->{$inheritedKey}->isEmpty()) {
+                    return false;
+                }
+
+                continue;
+            }
+
+            if (!empty($inheritedValue)) {
+                // If we have a value, is it the same as the class default? If so consider this as empty,
+                // it's not a customised value (e.g. UTF-8 on charset)
+                if (!isset($reflectionClass)) {
+                    $reflectionClass = new \ReflectionClass($this);
+                    $defaultProperties = $reflectionClass->getDefaultProperties();
+                }
+                if (isset($defaultProperties[$inheritedKey]) && $defaultProperties[$inheritedKey] == $inheritedValue) {
+                    continue;
+                }
+
+                return false;
+            }
+        }
+
+        return true;
     }
 }

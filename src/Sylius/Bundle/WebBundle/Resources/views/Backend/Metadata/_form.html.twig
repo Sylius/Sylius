@@ -5,16 +5,15 @@
 <fieldset id="metadata-form">
     <div class="row">
         <div class="col-md-6">
-            {{ form_row(form.id) }}
-            <hr/>
-            {{ form_row(form.metadata.title) }}
-            {{ form_row(form.metadata.description) }}
-            {{ form_row(form.metadata.keywords) }}
-        </div>
-        <div class="col-md-6">
-            {{ form_row(form.metadata.twitter) }}
+            {{ form_row(form.type) }}
+            {{ form_row(form.code) }}
         </div>
     </div>
+
+    <hr/>
+
+    {{ form_row(form.translations) }}
+
 </fieldset>
 <hr>
 {{ form_widget(form._token) }}

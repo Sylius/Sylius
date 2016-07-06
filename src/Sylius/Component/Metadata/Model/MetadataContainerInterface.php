@@ -12,11 +12,12 @@
 namespace Sylius\Component\Metadata\Model;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Component\Resource\Model\TranslatableInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-interface MetadataContainerInterface extends ResourceInterface
+interface MetadataContainerInterface extends ResourceInterface, TranslatableInterface
 {
     /**
      * @return string
@@ -27,6 +28,26 @@ interface MetadataContainerInterface extends ResourceInterface
      * @param string $id
      */
     public function setId($id);
+
+    /**
+     * @return string
+     */
+    public function getCode();
+
+    /**
+     * @param string $code
+     */
+    public function setCode($code);
+
+    /**
+     * @return string
+     */
+    public function getType();
+
+    /**
+     * @param string $type
+     */
+    public function setType($type);
 
     /**
      * @return MetadataInterface

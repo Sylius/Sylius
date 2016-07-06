@@ -12,16 +12,11 @@
 -->
 
 <doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
-    <mapped-superclass name="Sylius\Bundle\MetadataBundle\Model\MetadataContainer" table="sylius_metadata">
+    <mapped-superclass name="Sylius\Bundle\MetadataBundle\Model\MetadataContainerTranslation" table="sylius_metadata_translation">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>
 
-        <field name="code" column="code" type="string" />
-        <field name="type" column="type" type="string" />
-
-        <unique-constraints>
-            <unique-constraint columns="type,code" name="type_code_idx" />
-        </unique-constraints>
+        <field name="metadata" column="metadata" type="text" />
     </mapped-superclass>
 </doctrine-mapping>

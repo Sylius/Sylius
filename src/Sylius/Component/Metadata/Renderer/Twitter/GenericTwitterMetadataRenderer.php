@@ -24,7 +24,7 @@ final class GenericTwitterMetadataRenderer implements MetadataRendererInterface
     /**
      * @var string[]
      */
-    private $keysToNames = [
+    private static $keysToNames = [
         'type' => 'twitter:card',
         'site' => 'twitter:site',
         'siteId' => 'twitter:site:id',
@@ -87,7 +87,7 @@ final class GenericTwitterMetadataRenderer implements MetadataRendererInterface
      */
     private function ensurePropertyIsKnown(MetadataInterface $metadata, $propertyKey)
     {
-        if (!isset($this->keysToNames[$propertyKey])) {
+        if (!isset(self::$keysToNames[$propertyKey])) {
             throw new \InvalidArgumentException(sprintf(
                 'Unsupported property %s::%s',
                 get_class($metadata),
@@ -105,8 +105,8 @@ final class GenericTwitterMetadataRenderer implements MetadataRendererInterface
     private function renderProperties(MetadataInterface $metadata, array $options)
     {
         $properties = array_replace_recursive(
-            $options['defaults'],
-            array_filter($metadata->toArray(), function ($item) { return null !== $item; })
+            array_filter($metadata->toArray(), function ($item) { return null !== $item; }),
+            $options['values']
         );
 
         $renderedProperties = [];
@@ -119,7 +119,7 @@ final class GenericTwitterMetadataRenderer implements MetadataRendererInterface
 
             $renderedProperties[] = sprintf(
                 '<meta name="%s" content="%s" />',
-                $this->keysToNames[$propertyKey],
+                self::$keysToNames[$propertyKey],
                 htmlentities($propertyValue, \ENT_COMPAT)
             );
         }
@@ -136,11 +136,11 @@ final class GenericTwitterMetadataRenderer implements MetadataRendererInterface
     {
         $optionsResolver->setDefaults([
             'group' => 'head',
-            'defaults' => [],
+            'values' => [],
         ]);
 
         $optionsResolver->setAllowedValues('group', ['head']);
-        $optionsResolver->setAllowedTypes('defaults', 'array');
+        $optionsResolver->setAllowedTypes('values', 'array');
 
         return $optionsResolver;
     }

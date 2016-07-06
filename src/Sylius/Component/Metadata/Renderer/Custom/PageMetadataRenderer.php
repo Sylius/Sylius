@@ -126,7 +126,7 @@ final class PageMetadataRenderer implements MetadataRendererInterface
      */
     private function renderProperties(MetadataInterface $metadata, array $options)
     {
-        $this->setDefaultValuesOnMetadata($metadata, $options['defaults']);
+        $this->overrideValuesOnMetadata($metadata, $options['values']);
 
         $renderedProperties = [];
         foreach (array_keys($metadata->toArray()) as $propertyKey) {
@@ -153,11 +153,11 @@ final class PageMetadataRenderer implements MetadataRendererInterface
     {
         $optionsResolver->setDefaults([
             'group' => 'head',
-            'defaults' => [],
+            'values' => [],
         ]);
 
         $optionsResolver->setAllowedValues('group', ['head']);
-        $optionsResolver->setAllowedTypes('defaults', 'array');
+        $optionsResolver->setAllowedTypes('values', 'array');
 
         return $optionsResolver;
     }
@@ -187,17 +187,13 @@ final class PageMetadataRenderer implements MetadataRendererInterface
 
     /**
      * @param MetadataInterface $metadata
-     * @param array $defaultValues
+     * @param array $values
      *
      * @return MetadataInterface
      */
-    private function setDefaultValuesOnMetadata(MetadataInterface $metadata, array $defaultValues)
+    private function overrideValuesOnMetadata(MetadataInterface $metadata, array $values)
     {
-        foreach ($defaultValues as $propertyPath => $value) {
-            if (null !== $this->propertyAccessor->getValue($metadata, $propertyPath)) {
-                continue;
-            }
-
+        foreach ($values as $propertyPath => $value) {
             $this->propertyAccessor->setValue($metadata, $propertyPath, $value);
         }
     }

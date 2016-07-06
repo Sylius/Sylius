@@ -11,20 +11,36 @@
 
 namespace Sylius\Component\Metadata\Model;
 
+use Sylius\Component\Resource\Model\TranslatableTrait;
+
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 class MetadataContainer implements MetadataContainerInterface
 {
+    use TranslatableTrait {
+        __construct as private initializeTranslationsCollection;
+    }
+
     /**
      * @var string
      */
     protected $id;
 
     /**
-     * @var MetadataInterface
+     * @var string
      */
-    protected $metadata;
+    protected $code;
+
+    /**
+     * @var string
+     */
+    protected $type;
+
+    public function __construct()
+    {
+        $this->initializeTranslationsCollection();
+    }
 
     /**
      * {@inheritdoc}
@@ -45,9 +61,41 @@ class MetadataContainer implements MetadataContainerInterface
     /**
      * {@inheritdoc}
      */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getMetadata()
     {
-        return $this->metadata;
+        return $this->translate()->getMetadata();
     }
 
     /**
@@ -55,6 +103,6 @@ class MetadataContainer implements MetadataContainerInterface
      */
     public function setMetadata(MetadataInterface $metadata)
     {
-        $this->metadata = $metadata;
+        $this->translate()->setMetadata($metadata);
     }
 }

@@ -428,6 +428,7 @@ sylius:
         lastname: 'Last name'
         latest_orders: 'Latest orders'
         links: Links
+        locale: Locale
         locales: Locales
         lock: Lock
         locked: Locked

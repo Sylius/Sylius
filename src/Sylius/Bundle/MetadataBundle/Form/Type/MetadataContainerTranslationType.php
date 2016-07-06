@@ -16,26 +16,16 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Pete Ward <peter.ward@reiss.com>
  */
-class MetadataContainerType extends AbstractResourceType
+class MetadataContainerTranslationType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('code', 'text', ['read_only' => true])
-            ->add('type', 'text', ['read_only' => true])
-            ->add('translations', 'sylius_translations', [
-                'type' => 'sylius_metadata_container_translation',
-                'options' => [
-                    'metadata_form' => $options['metadata_form'],
-                ],
-                'label' => 'sylius.form.translations',
-            ])
-        ;
+        $builder->add('metadata', $options['metadata_form'], ['label' => false]);
     }
 
     /**
@@ -53,6 +43,6 @@ class MetadataContainerType extends AbstractResourceType
      */
     public function getName()
     {
-        return 'sylius_metadata_container';
+        return 'sylius_metadata_container_translation';
     }
 }

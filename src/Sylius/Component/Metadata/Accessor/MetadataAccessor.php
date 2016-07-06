@@ -18,7 +18,7 @@ use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class MetadataAccessor implements MetadataAccessorInterface
+class MetadataAccessor implements MetadataAccessorInterface
 {
     /**
      * @var MetadataProviderInterface
@@ -43,9 +43,9 @@ final class MetadataAccessor implements MetadataAccessorInterface
     /**
      * {@inheritdoc}
      */
-    public function getProperty(MetadataSubjectInterface $metadataSubject, $propertyPath = null)
+    public function getProperty(MetadataSubjectInterface $metadataSubject, $type, $propertyPath = null)
     {
-        $metadata = $this->metadataProvider->findMetadataBySubject($metadataSubject);
+        $metadata = $this->metadataProvider->findMetadataBySubject($metadataSubject, $type);
 
         if (null === $propertyPath) {
             return $metadata;

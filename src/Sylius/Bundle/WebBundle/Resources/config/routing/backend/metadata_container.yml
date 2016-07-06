@@ -15,14 +15,19 @@ sylius_backend_metadata_container_index:
             permission: true
 
 sylius_backend_metadata_container_customize:
-    path: /customize/{id}
+    path: /customize/{type}/{code}
     methods: [GET, POST, PUT]
     defaults:
         _controller: sylius.controller.metadata_container:customizeAction
         _sylius:
+            form:
+                type: sylius_metadata_container
             factory:
                 method: createIdentifiedBy
-                arguments: [$id]
+                arguments: [$type, $code]
+            repository:
+                method: findOneByTypeAndCode
+                arguments: [$type, $code]
             template: SyliusWebBundle:Backend/Metadata:customize.html.twig
             redirect: sylius_backend_metadata_container_show
             permission: true
