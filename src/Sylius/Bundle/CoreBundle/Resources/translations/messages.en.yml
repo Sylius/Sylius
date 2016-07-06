@@ -156,5 +156,10 @@ sylius:
             name: Password reset
             content: <h3>Hello %username%</h3>To reset your password - please visit %url% <br/><br/>Regards, the Team.
 
+    payum_gateway:
+        cash_on_delivery: Cash on delivery
+        offline: Offline
+        paypal_express_checkout: Paypal Express Checkout
+
     shipping_method_resolver:
         by_zones_and_channel: By zones and channel
