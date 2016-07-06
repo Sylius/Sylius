@@ -313,9 +313,9 @@ final class AccountContext implements Context
     }
 
     /**
-     * @Then I should see :customerName, :street, :postcode, :city, :countryName as shiping address
+     * @Then I should see :customerName, :street, :postcode, :city, :countryName as shipping address
      */
-    public function iShouldSeeAsShipingAddress($customerName, $street, $postcode, $city, $countryName)
+    public function iShouldSeeAsShippingAddress($customerName, $street, $postcode, $city, $countryName)
     {
         Assert::true(
             $this->orderShowPage->hasShippingAddress($customerName, $street, $postcode, $city, $countryName),
