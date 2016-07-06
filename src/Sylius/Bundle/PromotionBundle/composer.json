@@ -24,10 +24,10 @@
 
         "jms/translation-bundle": "^1.1",
         "stof/doctrine-extensions-bundle": "~1.1",
-        "sylius/promotion": "^0.19",
-        "sylius/registry": "^0.19",
-        "sylius/money-bundle": "^0.19",
-        "sylius/resource-bundle": "^0.19",
+        "sylius/promotion": "^1.0",
+        "sylius/registry": "^1.0",
+        "sylius/money-bundle": "^1.0",
+        "sylius/resource-bundle": "^1.0",
         "symfony/framework-bundle": "^2.8"
     },
     "require-dev": {
@@ -55,7 +55,7 @@
     ],
     "extra": {
         "branch-alias": {
-            "dev-master": "0.19-dev"
+            "dev-master": "1.0-dev"
         }
     }
 }

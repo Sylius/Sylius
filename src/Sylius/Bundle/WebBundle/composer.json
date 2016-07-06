@@ -26,7 +26,7 @@
         "knplabs/knp-menu-bundle": "1.1.*",
         "knplabs/knp-snappy-bundle": "^1.0",
         "liip/imagine-bundle": "~1.0",
-        "sylius/core-bundle": "^0.19",
+        "sylius/core-bundle": "^1.0",
         "symfony/framework-bundle": "^2.8"
     },
     "config": {
@@ -45,7 +45,7 @@
     ],
     "extra": {
         "branch-alias": {
-            "dev-master": "0.19-dev"
+            "dev-master": "1.0-dev"
         }
     }
 }

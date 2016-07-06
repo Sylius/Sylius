@@ -31,8 +31,8 @@
         "php": "^5.6|^7.0",
 
         "doctrine/orm": "^2.4.8,<2.5",
-        "sylius/resource": "^0.19",
-        "sylius/storage": "^0.19",
+        "sylius/resource": "^1.0",
+        "sylius/storage": "^1.0",
         "symfony/security": "^2.8",
         "symfony/polyfill-mbstring": "~1.0"
     },
@@ -61,7 +61,7 @@
     ],
     "extra": {
         "branch-alias": {
-            "dev-master": "0.19-dev"
+            "dev-master": "1.0-dev"
         }
     }
 }

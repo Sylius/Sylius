@@ -22,8 +22,8 @@
     "require": {
         "php": "^5.6|^7.0",
 
-        "sylius/ui-bundle": "^0.19",
-        "sylius/core-bundle": "^0.19",
+        "sylius/ui-bundle": "^1.0",
+        "sylius/core-bundle": "^1.0",
         "symfony/framework-bundle": "^2.8"
     },
     "require-dev": {
@@ -45,7 +45,7 @@
     ],
     "extra": {
         "branch-alias": {
-            "dev-master": "0.19-dev"
+            "dev-master": "1.0-dev"
         }
     }
 }
