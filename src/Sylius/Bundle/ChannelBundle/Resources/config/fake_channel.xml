@@ -37,7 +37,7 @@
         <service id="sylius.context.channel.fake_channel.collector" class="%sylius.context.channel.fake_channel.collector.class%" public="false">
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="sylius.context.channel" />
-            <tag name="data_collector" template="SyliusChannelBundle:FakeChannelCollector:layout.html.twig" id="sylius.context.channel.fake_channel.collector" />
+            <tag name="data_collector" template="SyliusChannelBundle:Collector:channel.html.twig" id="sylius.context.channel.fake_channel.collector" />
         </service>
     </services>
 </container>

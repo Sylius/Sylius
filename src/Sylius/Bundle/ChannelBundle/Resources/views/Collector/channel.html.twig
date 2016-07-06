@@ -1,0 +1,21 @@
+{% extends '@WebProfiler/Profiler/layout.html.twig' %}
+
+{% block toolbar %}
+    {% set status_color = collector.currentChannel is null ? 'red' : '' %}
+
+    {% set icon %}
+        {{ include('@SyliusChannel/Collector/Icon/channel.svg') }}
+        <span class="sf-toolbar-value">{{ collector.currentChannel.name|default('Undefined') }}</span>
+    {% endset %}
+
+    {% set text %}
+        {% for channel in collector.channels %}
+            <div class="sf-toolbar-info-piece">
+                <b>{{ channel.name }}</b>
+                <span>{{ channel.hostname }} (<a href="?_channel_code={{ channel.code }}">change</a>)</span>
+            </div>
+        {% endfor %}
+    {% endset %}
+
+    {{ include('@WebProfiler/Profiler/toolbar_item.html.twig', { link: false, status: status_color }) }}
+{% endblock %}
