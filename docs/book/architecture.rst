@@ -51,54 +51,64 @@ Division into Components, Bundles, Platform
 -------------------------------------------
 
 Components
-''''''''''
+~~~~~~~~~~
 
 Every single component of Sylius can be used standalone. Taking the ``Taxation`` component as an example,
-it's only responsibility is to calculate taxes,it does not matter whether these will be taxes for products or anything else, it is fully decoupled.
+it's only responsibility is to calculate taxes, it does not matter whether these will be taxes for products or anything else, it is fully decoupled.
 In order to let the Taxation component operate on your objects you need to have them implementing the ``TaxableInterface``.
 Since then they can have taxes calculated.
 Such approach is true for every component of Sylius.
 Besides components that are strictly connected to the e-commerce needs, we have plenty of components that are more general. For instance Attribute, Mailer, Locale etc.
 
-All the components are packages, available via `Packagist <https://packagist.org/>`_.
+All the components are packages available via `Packagist <https://packagist.org/>`_.
+
+:doc:`Read more about the Components </components/index>`.
 
 Bundles
-'''''''
+~~~~~~~
 
 These are the Symfony Bundles - therefore if you are a Symfony Developer, and you would like to use the Taxation component in your system,
 but you do not want to spend time on configuring forms or services in the container. You can include the ``TaxationBundle`` in your application
 with minimal or even no configuration to have access to all the services, models, configure tax rates, tax categories and use that for any taxes you will need.
 
+:doc:`Read more about the Bundles </bundles/index>`.
+
 Platform
-''''''''
+~~~~~~~~
 
 This is a fullstack Symfony Application, based on Symfony Standard. Sylius Platform gives you the classic, quite feature rich webshop.
 Before you start using Sylius you will need to decide whether you will need a full platform with all the features we provide, or maybe you will use decoupled bundles and components
 to build something very custom, maybe smaller, with different features.
-But of course the platform is highly customizable to fit different bussiness models.
+But of course the platform itself is highly flexible and can be easily customized to meet all business requirements you may have.
 
 Division into Core, Admin, Shop, Api
 ------------------------------------
 
 Core
-''''
+~~~~
 
-...
+The Core is another component that integrates all the other components. This is the place where for example the ``ProductVariant`` finally learns that it has a ``TaxCategory``.
+The Core component is where the ``ProductVariant`` implements the ``TaxableInterface`` and other interfaces that are useful for its operation.
+As each e-commerce Sylius has here a fully integrated concept of everything that is needed to run a webshop.
+To get to know more about concepts applied in Sylius - keep on reading :doc:`The Book </book/index>`.
 
 Admin
-'''''
+~~~~~
 
-...
+Every system with the security layer the functionalities of system administration need to be restricted to only some users with a certain role - Administrator.
+This is our ``AdminBundle`` that if you do not need, you can turn it off. Views have been built using the `SemanticUI <http://semantic-ui.com/>`_.
 
 Shop
-''''
+~~~~
 
-...
+Our ``ShopBundle`` is basically the user interface for everything that happens in the system. Also here views have been built using the `SemanticUI <http://semantic-ui.com/>`_.
 
 Api
-'''
+~~~
 
-...
+Since our controllers are format agnostic they have become reusable in the API. Therefore if you request products in the shop frontend you are using exactly the same action as when you are
+placing the api request.
+Read more about our API in the :doc:`Sylius API Guide </api/index>`.
 
 Resource Layer
 --------------
@@ -114,7 +124,7 @@ There are two types of resources in **Sylius**:
 Sylius resource management system lives in the **SyliusResourceBundle** and can be used in any Symfony2 project.
 
 Services
-````````
+~~~~~~~~
 
 For every resource you have four essential services available:
 
@@ -126,7 +136,7 @@ For every resource you have four essential services available:
 Let us take the "product" resource as an example. By default, it is represented by an object of a class that implements the ``Sylius\Component\Core\Model\ProductInterface``.
 
 Factory
-'''''''
+~~~~~~~
 
 The factory service gives you an ability to create new default objects. It can be accessed via the *sylius.factory.product* id (for the Product resource of course).
 
@@ -147,7 +157,7 @@ The factory service gives you an ability to create new default objects. It can b
     Creating resources via this factory method makes the code more testable, and allows you to change the model class easily.
 
 Manager
-'''''''
+~~~~~~~
 
 The manager service is just an alias to appropriate Doctrine's `ObjectManager`_ and can be accessed via the *sylius.manager.product* id.
 API is exactly the same and you are probably already familiar with it:
@@ -173,7 +183,7 @@ API is exactly the same and you are probably already familiar with it:
     }
 
 Repository
-''''''''''
+~~~~~~~~~~
 
 Repository is defined as a service for every resource and shares the API with standard Doctrine *ObjectRepository*. It contains two additional methods for creating a new object instance and a paginator provider.
 
@@ -227,7 +237,7 @@ Paginator can be created for a specific criteria and with desired sorting.
     }
 
 Controller
-''''''''''
+~~~~~~~~~~
 
 This service is the most important for every resource and provides a format agnostic CRUD controller with the following actions:
 
@@ -282,16 +292,6 @@ Creating a product using custom form and a redirection method:
                     parameters: [$store]
 
 All other methods have the same level of flexibility and are documented in the :doc:`Resource Bundle Guide </bundles/SyliusResourceBundle/index>`.
-
-Core, Admin and Ui
-------------------
-
-Main application is constructed from four main bundles:
-
-**SyliusCoreBundle**, which is the glue for all other bundles. It is the integration layer of Core component - the heart of Sylius, providing the whole e-commerce framework.
-**SyliusUiBundle**, which contains the default web interface, assets, templates and menu builders.
-**SyliusAdminBundle**, which contains the default administration of the whole system, that is easily extensible.
-**SyliusShopBundle**, that takes care of the things visible for the customer like the customer account or the cart.
 
 Third Party Libraries
 ---------------------
