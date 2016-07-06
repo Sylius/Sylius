@@ -18,6 +18,9 @@ sylius_admin_route_update:
             section: admin
             permission: true
             template: SyliusAdminBundle:Crud:update.html.twig
+            vars:
+                templates:
+                    breadcrumb: SyliusAdminBundle:Route/Breadcrumb:_update.html.twig
     requirements:
         id: ".+"
 

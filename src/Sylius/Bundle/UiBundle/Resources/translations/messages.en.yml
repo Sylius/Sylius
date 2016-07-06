@@ -240,6 +240,7 @@ sylius:
         edit_promotion: Edit promotion
         edit_promotion_coupon: Edit promotion coupon
         edit_report: 'Edit report'
+        edit_route: 'Edit route'
         edit_shipping_method: Edit shipping method
         edit_static_content: 'Edit static content'
         edit_tax_category: Edit tax category
@@ -459,6 +460,7 @@ sylius:
         new_promotion_coupon: New promotion coupon
         new_review: 'New review'
         new_role: 'New role'
+        new_route: 'New route'
         new_shipping_category: 'New shipping category'
         new_shipping_method: 'New shipping method'
         new_static_content: 'New static content'
