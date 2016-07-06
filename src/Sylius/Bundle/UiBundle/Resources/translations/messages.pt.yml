@@ -7,36 +7,233 @@ sylius:
             username: Login
             password: Palavra passe
     ui:
+        add: Adicionar
+        add_action: Adicionar ação
+        add_attributes: Adicionar atributos
         add_coupon: Adicionar cupom
+        add_image: Adicionar imagem
+        add_member: Adicionar membro
+        add_province: Adicionar estado
+        add_rule: Adicionar regra
         add_to_cart: Adicionar ao carrinho
+        addressing_step: Endereço
+        assortment: Ordenação
+        availability: Disponibilidade
+        available_on: Disponível em
+        back: Voltar
+        balance_due: Saldo devedor
+        blocks: Blocos
         cancel: Cancelar
         cancelled: Cancelado
+        categorization: Categorização
+        channels: Canais
         checkout: Finalizar compra
-        your_cart_is_empty: Seu carrinho está vazio
-        qty: Quantidade
+        choose_file: Escolha um arquivo
+        city: Cidade
         clear_cart: Esvaziar carrinho
-        summary: Sumário
+        company: Empresa
+        completed: Concluído
+        content: Conteúdo
         countries: Países
+        country_details: Detalhes do país
         create: Criar
-        home: Home
+        create_a_new_address: Criar nova morada
+        create_country: Criar país
+        create_new_coupon: Criar novo cupom
+        create_order: Criar pedido
+        create_payment: Criar pagamento
+        create_payment_method: Criar meio de pagamento
+        create_product: Criar produto
+        create_promotion: Criar promoção
+        create_shipping_category: Criar categoria de envio
+        create_shipping_method: Criar método de envio
+        create_tax_category: Criar categoria de imposto
+        create_tax_rate: Criar imposto
+        create_taxon: Criar táxon
+        create_variant: Criar variação
+        create_zone: Criar zona
+        created_at: Data de criação
+        creation_time: Data de criação
+        current_orders: Encomendas atuais
+        current_promotions: Promoções existentes
+        customer: Cliente
+        customers: Clientes
         dashboard: Painel de Instrumentos
         delete: Apagar
+        delete_image: Deletar imagem
         description: Descrição
         edit: Editar
+        editing_country: Editando país
+        editing_coupon: Editando cupom
+        editing_order: Editar pedido
+        editing_payment: Editando pagamento
+        editing_payment_method: Editando meio de pagamento
+        editing_product: Editando produto
+        editing_promotion: Editando promoção
+        editing_shipping_category: Editando categoria de envio
+        editing_shipping_method: Editando método de envio
+        editing_tax_category: Editando categoria de imposto
+        editing_taxon: Editando táxon
+        editing_variant: Editando variação
+        editing_zone: Editando zona
+        email: Endereço de email
+        emails: Emails
+        error: Erro
+        existing_customer: Cliente cadastrado
+        failed: Falhado
         filter: Filtrar
+        general_info: Informações gerais
+        general_settings: Configurações gerais
+        generate: Gerar
         generate_coupons: Gerar cupons
+        generate_variants: Gerar variações
+        generating_coupons: Gerando cupons
+        grand_total: Total
+        home: Home
+        index_metadata: Metadados
+        information: Info
+        inventory_here_you_can_see_current_stock_levels: 'Estoque <small>Aqui você pode ver os nível do estoque atual</small>'
+        inventory_state: Situação do estoque
+        inventory_tracking: Controle de estoque
+        invoice: Fatura
+        items_total: Total de itens
+        last_login: Último login
+        last_update: Data de atualização
+        latest_orders: Últimas Encomendas
         list_coupons: Cupons
         locales: Linguagens
+        login: Login
+        login_button: Login
+        logout: Sair
+        manage: Gerenciar
+        manage_countries: Gerenciar países
+        manage_options: Gerir opções
+        manage_orders: Gerenciar pedidos
+        manage_products: Gerenciar produtos
+        manage_promotions: Gerenciar promoções
+        manage_shipments: Gerenciar envios
+        manage_shipping_categories: Gerenciar categorias de envio
+        manage_shipping_methods: Gerenciar métodos de envio
+        manage_tax_categories: Gerenciar categorias de impostos
+        manage_tax_rates: Gerenciar impostos
+        manage_zones: Gerenciar zonas
+        marketing: Marketing
+        members: Membros
+        menus: Menus
+        message: Mensagem
+        metadata_index: Metadados
+        method: meio
+        modified: Data de modificação
         new: Novo
         new_country: Novo país
+        new_order: Novo pedido
+        new_payment: Novo pagamento
+        new_payment_method: Novo meio de pagamento
+        new_product: Novo produto
+        new_product_variant: Nova variação de produto
+        new_promotion: Nova promoção
+        new_shipping_category: Nova categoria de envio
+        new_shipping_method: Novo método de envio
         new_tax_category: Nova categoria de imposto
+        new_tax_rate: Novo imposto
+        new_taxon: Novo táxon
+        new_zone: Nova zona
+        newest_products: Novos produtos
         "no": false
+        no_description: Sem descrição
         no_promotion: Sem promoções
         no_shipping_charges: Nenhuma taxa de entrega foi aplicada
+        no_short_description: '<i>Sem resumo</i>'
+        no_sku: '<i>Sem SKU</i>'
+        no_tax_category: Nenhuma categoria de imposto
         no_taxes: Nenhuma taxa foi aplicada
+        number_of_orders: Número de encomendas
+        order: Pedido
         order_details: Detalhes da sua encomenda
+        order_summary: Dados da compra
+        order_value: Valor da encomenda
+        orders: Encomendas
+        out_of_stock: Fora de estoque
+        pages: Páginas
+        payment_method: Método de pagamento
+        payment_state: Situação do pagamento
+        payments: Pagamentos
+        pending: Pendente
+        permissions: Permissões
+        phone_number: Número de Telefone
+        place_order: Fazer pedido
+        postcode: Código postal
+        presentation: Apresentação
+        pricing: Preços
+        processing: Em processamento
+        product: Produto
+        product_archetypes: Protótipos
+        product_details_viewing_product_product: 'Detalhes de produto <small>Visualizando produto "<strong>%product%</strong>"</small>'
+        product_reviews: Críticas do produto
+        products: Produtos
+        products_categorized_under_taxon_taxon: 'Produtos <small>Categorizado na táxon "%taxon%"</small>'
+        products_index_of_all_products_in_your_store: 'Produtos <small>Lista de todos os produtos em sua loja</small>'
+        promotion_details: Detalhes da promoção
+        promotion_total: Total de promoção
+        promotions: Promoções
+        province: Distrito
+        provinces: Distritos
+        qty: Quantidade
         quantity: Quantidade
+        rating: Avaliação
+        refunded: Reembolsado
+        reports: Relatórios
+        retail_price: Preço de venda
+        reviews: Críticas
+        sales: Vendas
+        sales_this_month: Vendas
+        save: Salvar
         save_changes: Salvar modificações
+        shipment_details: Detalhes do envio
+        shipment_state: Situação do envio
+        shipments: Envios
+        shipping_categories: Categorias de envio
+        shipping_charges: Taxas de envio
+        shipping_method: Método de envio
+        shipping_method_details: Detalhes de métodos de envio
         shipping_methods: Métodos de envio
+        shipping_state: Situação do envio
+        shipping_total: Valor do envio
+        shop_by: Comprar por
+        sign_in_to_the_store_or_create_new_account: 'Cadastre-se na loja <small>ou crie uma nova conta</small>'
+        state: Estado
+        street: Rua
+        subject: Assunto
         success: Sucesso
+        summary: Sumário
+        tax_category: Categoria de imposto
+        tax_rate_details: Detalhes de imposto
+        tax_rates: Impostos
+        tax_total: Totais de taxas
+        taxation_categories: Categorias de tributação
+        taxation_settings: Configurações de taxas
+        taxes: Taxas
+        there_are_no_images_for_this_product: Não há imagens para este produto
+        there_are_no_options_for_this_product: Não há opções para este produto
+        there_are_no_taxons_for_this_product: Sem táxons
+        topic: Assunto
+        total_orders: Total de encomendas
+        total_registrations: Total de registos
+        tracking_number: Número de Tracking
+        type: Tipo
+        unknown: Desconhecido
+        updating_tax_rate: Atualizar imposto
+        used: Utilizado
+        user_details: Detalhes do usuários
+        username: Login
+        users_list_of_all_users_registered_in_store: 'Usuários <small>Lista de todos os usuários cadastros na loja</small>'
+        variant: Variante
+        view_more: Ver mais
+        void: Vazio
+        warning: Aviso
         "yes": true
+        you_have_no_new_orders: Você não possui pedidos
+        your_cart_is_empty: Seu carrinho está vazio
+        your_products: Seus produtos
+        zone_details: Detalhes de zona
+        zones: Zonas

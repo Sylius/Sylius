@@ -10,133 +10,691 @@ sylius:
         option:
             name: Naam
     ui:
+        abandoned: Verlaten
+        access_token: Toegangstoken
         account_credentials: Logingegevens
+        account_panel_outline: Geniet van alle functies die beschikbaar zijn in uw persoonlijke ruimte om al uw gegevens te bekijken, bij te houden en te beheren
+        action: Actie
         actions: Acties
+        add: Toevoegen
+        add_action: Actie toevoegen
+        add_association: Relatie toevoegen
+        add_attribute: Attribuut toevoegen
+        add_attributes: Attributen toevoegen
+        add_channel: Kanaal toevoegen
+        add_choice: Keuze toevoegen
         add_coupon: Nieuwe coupon
+        add_image: Afbeelding toevoegen
+        add_member: Lid toevoegen
+        add_menu_element: Menu element toevoegen
+        add_new_email: Toevoegen van nieuwe E-mail
+        add_new_permission: Toevoegen van nieuwe machtiging
+        add_new_role: Nieuwe rol toevoegen
+        add_province: Provincie toevoegen
+        add_rule: Regel toevoegen
         add_to_cart: In winkelwagen
+        add_value: Waarde toevoegen
+        adding_new_customer_groups: Nieuwe klantgroepen toevoegen
+        adding_new_email: Toevoegen van nieuwe E-mail
+        adding_new_locale: Nieuwe locatie toevoegen
+        additional_information: Aanvullende informatie
+        addressing_step: Adresgegevens
+        adjustments: Aanpassingen
+        administration: Beheer
+        administration_dashboard: Beheer Dashboard
         administration_panel_login: Beheer
         all: Alles
+        all_your_addresses: Al uw adressen
+        amount: Hoeveelheid
         an_error_occurred: Er deed zich een fout voor
+        archetype: Prototype
+        archetypes: Prototypes
         are_your_sure_you_want_to_perform_this_action: Weet u zeker dat u deze actie wilt uitvoeren?
+        association: Relatie
+        association_types: Relatietypes
+        associations: Relaties
+        assortment: Assortiment
+        attributes: Attributen
+        author: Auteur
+        availability: Beschikbaarheid
         available_for_channels: Beschikbaar voor kanalen
+        available_on: Beschikbaar vanaf
+        available_on_demand: Beschikbaar op aanvraag
+        available_until: Beschikbaar tot
+        back: Terug
+        backorder: Backorder
+        balance_due: Nog te betalen
+        bill_to: Factureer naar
+        billing_address: Factuuradres
+        blocks: Blokken
+        body: Inhoud
+        browse_products: Bekijk producten
+        build: Bouwen
+        building_product_from_archetype: Nieuw product van prototype
+        calculator: Calculator
         cancel: Annuleren
         cancelled: Geannuleerd
+        cart_locked: Winkelwagen vergrendeld
+        cart_summary: Winkelwagen overzicht
+        categorization: Categorisering
+        category: Categorie
         category_requirements: Categorie vereisten
         change_your_password: Verander uw wachtwoord
+        channel: Kanalen
+        channels: Kanalen
         charges_and_taxes: Heffingen en belastingen
         checkout: Afrekenen
-        forgot_password: Wachtwoord vergeten
-        your_cart_is_empty: Uw winkelwagen is leeg
-        clear_filters: Wis filters
-        image: Afbeelding
-        qty: Hoeveelheid
+        choose_file: Kies bestand
+        city: Stad
         clear_cart: Winkelwagen leeg maken
-        summary: Samenvatting
+        clear_filters: Wis filters
+        code: Code
         color: Kleur
+        comment: Commentaar
+        company: Bedrijf
+        completed: Voltooid
+        configuration: Configuratie
         configure_channels_available_in_your_store: Configureer beschikbare kanalen in uw winkel
         confirm_your_action: Bevestigen uw actie
+        confirmation: Bevestiging
+        confirmation_title: Bevestiging
+        confirmed: Bevestigd
+        contact_request_details: Details contact verzoek
+        contact_request_show: Contact verzoek
+        contact_requests: Contact verzoeken
+        contact_topics: Contact onderwerpen
+        contain_variants: Bevat Varianten
         contains: Bevat
+        content: Inhoud
         countries: Landen
+        country: Land
+        country_details: Land details
+        coupon: Coupon
         coupon_based: Coupon gebaseerd
         coupons: Coupons
         create: Creëer
+        create_a_new_address: Voeg nieuw adres toe
+        create_archetype: Nieuw prototype
+        create_association_type: Nieuw relatietype
+        create_contact_request: Contact verzoek aanmaken
+        create_contact_topic: Contact thema aanmaken
+        create_country: Nieuw land
+        create_currency: Valuta maken
+        create_customer: Nieuwe klant
+        create_group: Nieuwe groep
+        create_imagine_block: Nieuw afbeeldingsblok
+        create_locale: Nieuwe locatie
+        create_menu: Menu aanmaken
+        create_menu_node: Menu node aanmaken
+        create_new_coupon: Nieuwe coupon toevoegen
+        create_new_page: Nieuwe pagina
+        create_new_report: Nieuw rapport maken
+        create_option: Optie aanmaken
+        create_order: Nieuwe bestelling
+        create_payment: Nieuwe betaling
+        create_payment_method: Nieuwe betaalmethode
+        create_product: Nieuw product
+        create_product_association: Nieuw productrelatie
+        create_product_association_type: Nieuw productrelatie type
+        create_product_attribute: Productattribuut aanmaken
+        create_promotion: Nieuwe promotie
+        create_redirect_route: Redirect route aanmaken
+        create_report: Nieuw rapport
+        create_route: Route aanmaken
+        create_shipping_category: Nieuwe verzendcategorie
+        create_shipping_method: Nieuwe verzendmethode
+        create_simple_block: Aanmaken eenvoudige blok
+        create_slideshow_block: Aanmaken slideshow blok
+        create_string_block: String blok maken
+        create_tax_category: Nieuwe belastingcategorie
+        create_tax_rate: Nieuw belastingtarief
+        create_taxon: Nieuwe taxon
+        create_user: Nieuwe gebruiker
+        create_variant: Nieuwe variant
+        create_zone: Nieuwe zone
+        created_at: Aangemaakt op
+        creating_a_new_imagine_block: Nieuw afbeeldingsblolk
+        creating_a_new_simple_block: Creëren van een nieuw eenvoudige blok
+        creating_a_new_slideshow_block: Creëren van een nieuw slideshow blok
+        creating_a_new_string_block: Nieuw tekstblok
+        creating_menu: Menu maken
+        creating_menu_node: Nieuw menu node
+        creating_new_page: Nieuwe pagina aanmaken
+        creating_redirect_route: Redirect-route creëren
+        creating_route: Route creëren
+        creation_date: Aangemaakt op
+        creation_time: Aanmaakdatum
         currencies: "Valuta's"
+        currency: Valuta
+        current_orders: Huidige bestellingen
+        current_password: Huidig wachtwoord
+        current_promotions: Huidige promoties
+        current_stock: Huidige voorraad
+        customer: Klant
         customer_can_login_to_the_store: Klant kan inloggen op de winkel
-        my_account: Mijn account
-        home: Home
+        customer_details: Klantgegevens
+        customer_id: Klantnummer
+        customer_not_notified: Klant is niet geïnformeerd
+        customer_notified: Klant op de hoogte gesteld
+        customer_orders: Klantorders
+        customer_since: Klant sinds
+        customers: Klanten
+        customers_list_of_all_customers_in_store: 'Klanten een <small>lijst van alle klanten in de winkel</small>'
+        customize_default_metadata: Aanpassen van de standaard metadata
+        customize_metadata: Aanpassen van metagegevens
+        customize_products_metadata: Aanpassen van producten metagegevens
+        customizing_metadata: Aanpassen van metagegevens
         dashboard: Dashboard
+        data: Gegevens
         date: Datum
+        default_billing_address: Standaard factuuradres
         default_currency: Standaard valuta
         default_locale: Standaardlandinstelling
+        default_shipping_address: Standaard verzendadres
         delete: Verwijderen
+        delete_image: Verwijder Afbeelding
+        deleted: Verwijderd
         description: Omschrijving
+        details: Details
+        disable: Uitschakelen
         disabled: Inactief
         edit: Bewerken
+        edit_association_type: Bewerk relatietype
         edit_channel: Bewerk kanaal
         edit_country: Land bewerken
         edit_currency: Bewerk valuta
         edit_customer: Bewerk klant
+        edit_group: Bewerk groep
+        edit_locale: Bewerk locatie
+        edit_my_address: Bewerk mijn adres
         edit_payment_method: Bewerk betaalmethode
         edit_product_attribute: Productattribuut bewerken
         edit_product_option: Bewerk product-optie
         edit_promotion: Bewerk promotie
+        edit_report: Rapport bewerken
         edit_shipping_method: Verzendmethode bewerken
         edit_tax_category: Bewerk belasting categorie
         edit_tax_rate: Bewerk belastingtarief
         edit_taxon: Taxon bewerken
+        edit_your_personal_information: Bewerk uw persoonlijke informatie
         edit_zone: Zone bewerken
+        editing_archetype: Bewerk prototype
+        editing_attribute: Bewerk attribuut
+        editing_channel: Kanaal bewerken
+        editing_contact_request: Contact verzoek bewerken
+        editing_contact_topic: Contact thema bewerken
+        editing_country: Land bewerken
+        editing_coupon: Coupon bewerken
+        editing_currency: Valuta bewerken
+        editing_customer: Klant bewerken
+        editing_email: E-mail bewerken
+        editing_imagine_block: Bewerk afbeeldingsblok
+        editing_menu: Menu bewerken
+        editing_menu_node: Bewerk menu node
+        editing_option: Optie bewerken
+        editing_order: Bestelling bewerken
+        editing_page: Pagina bewerken
+        editing_payment: Bewerk betaling
+        editing_payment_method: Betaalmethode bewerken
+        editing_permission: Machtiging bewerken
+        editing_product: Product bewerken
+        editing_promotion: Promotie bewerken
+        editing_redirect_route: Redirect route bewerken
+        editing_review: Bewerk beoordeling
+        editing_role: Rol bewerken
+        editing_route: Route bewerken
+        editing_shipment: Verzending bewerken
+        editing_shipping_category: Bewerk verzendcategorie
+        editing_shipping_method: Bewerk verzendmethode
+        editing_simple_block: Bewerk eenvoudige blok
+        editing_slideshow_block: Slideshow blok bewerken
+        editing_string_block: Bewerk tekstblok
+        editing_tax_category: Bewerk belastingcategorie
+        editing_taxon: Taxon bewerken
+        editing_user: Gebruiker bewerken
+        editing_variant: Variant bewerken
+        editing_zone: Zone bewerken
+        email: E-mail
+        email_templates: E-mailsjablonen
+        emails: E-mails
         empty: Leeg
+        enable: Inschakelen
         enabled: Toegestaan
+        end_date: Einddatum
+        ends_at: Eindigt op
         ends_with: Eindigt met
+        enjoy_all_the_features_that_are_available_on_your_personal_space_to_view_track_and_manage_all_your_data: Geniet van alle functies die beschikbaar zijn in uw persoonlijke ruimte om al uw gegevens te bekijken, bij te houden en te beheren
         equal: Gelijk
+        error: Fout
+        exchange_rate: Wisselkoers
         exclusive: Exclusief
+        existing_customer: Bestaande klant
         expires_at: Verloopt op
         extra_information: Extra informatie
+        failed: Mislukt
+        female: Vrouw
         filter: Filter
-        go: Ga
+        first_name: Voornaam
+        firstname: Voornaam
+        forgot_password: Wachtwoord vergeten
+        fulfill: Vervullen
+        gateway: Gateway
+        general_info: Algemene Info
+        general_settings: Algemene instellingen
+        generate: Genereren
         generate_coupons: Coupons genereren
+        generate_variants: Genereer varianten
+        generating_coupons: Genereer coupons
+        go: Ga
+        go_to_dashboard: Ga naar dashboard
+        grand_total: Totaal
+        groups: Groepen
+        guest: Gast
         guest_customer: Gast klant
+        hello_name: 'Hallo <b>%name%</b>'
+        hide_deleted: Verberg verwijderd
+        home: Home
+        hostname: Hostnaam
+        id: ID
+        identifier: Identificatie
+        image: Afbeelding
+        images: Afbeeldingen
+        imagine_blocks: Afbeeldingsblokken
         in: In
+        included_in_price: Inbegrepen in de prijs
+        index_metadata: Metagegevens
+        index_of_all_configured_locales: Index van alle ingestelde locaties
         info: Info
-        item: Artikel
+        information: Informatie
         inventory: Locaties
+        inventory_here_you_can_see_current_stock_levels: 'Voorraad<small>Hier kunt u de huidige voorraadniveaus zien</small>'
+        inventory_index: Locaties
+        inventory_state: Voorraadstatus
+        inventory_tracking: Voorraadbeheer
+        invoice: Factuur
+        is_enabled: Is ingeschakeld
+        item: Artikel
+        items: Items
+        items_total: Artikelen Totaal
         jump_to_page: Ga naar pagina
+        label: Label
+        last_login: Laatst ingelogd
+        last_name: Achternaam
+        last_update: Laatst bijgewerkt
         last_updated: Laatst bijgewerkt
+        last_week_orders: Bestellingen van vorige week
+        last_week_revenue: Omzet van vorige week
+        lastname: Achternaam
+        latest_orders: Laatste bestellingen
+        links: Links
         list_coupons: Lijst van coupons
         locales: "Talen/Regio's"
+        lock: Vergrendelen
+        locked: Vergrendeld
+        logged_in_as: 'Ingelogd als %username%'
+        login: Inloggen
+        login_button: Inloggen
+        login_sylius_store: 'Login <small>Sylius store</small>'
+        logout: Uitloggen
+        main_taxon: Hoofdcategorie
+        male: Man
+        manage: Beheer
+        manage_adjustments: Aanpassingen beheren
+        manage_attributes: Beheer attributen
         manage_attributes_of_your_products: Beheer kenmerken van uw producten
         manage_categorization_of_your_products: Beheer categorisering van uw producten
+        manage_channels: Kanalen beheren
         manage_configuration_options_of_your_products: Beheer configuratie-opties van uw producten
+        manage_countries: Beheer landen
         manage_currencies_available_in_the_store: "Beheer beschikbare valuta's in de winkel"
+        manage_customers: Klanten beheren
         manage_discounts_and_promotional_campaigns: Beheer kortingen en promotionele campagnes
+        manage_emails: E-mails beheren
         manage_geographical_zones: Beheer geografische zones
         manage_languages_available_in_the_store: Beheren van beschikbare talen voor de winkel
+        manage_metadata: Beheer metagegevens
+        manage_options: Productopties
+        manage_orders: Bestellingen beheren
         manage_payment_methods_available_to_your_customers: Beheer beschikbare betalingsmethoden voor uw klanten
+        manage_payments: Betalingen beheren
+        manage_products: Beheer producten
+        manage_promotions: Promoties beheren
+        manage_reviews: Beheer van beoordelingen
+        manage_shipments: Verzendingen beheren
+        manage_shipping_categories: Beheer verzendcategorieën
         manage_shipping_destinations: Beheer van bestemmingen voor verzending
+        manage_shipping_methods: Beheer verzendmethodes
         manage_shipping_methods_for_your_store: Beheer verzendmethoden voor uw winkel
+        manage_tax_categories: Belastingcategorieën beheren
+        manage_tax_rates: Belastingtarieven beheren
         manage_taxation_of_your_products: Beheren van belastingen van uw producten
+        manage_users: Beheer gebruikers
         manage_your_customers: Klanten beheren
+        manage_zones: Zones beheren
+        marketing: Marketing
+        members: Leden
+        menu_nodes: Menu items
+        menus: "Menu 's"
+        message: Bericht
+        metadata_index: Metagegevens
+        method: Methode
+        modified: Aangepast
+        move_down: Naar beneden
+        move_up: Naar omhoog
+        my_account: Mijn account
+        n_a: N/B
+        name: Naam
         new: Nieuw
+        new_archetype: Nieuw prototype
         new_channel: Nieuw kanaal
+        new_comment_posted_on_order: Nieuwe commentaar gepost op bestelling
+        new_contact_request: Nieuwe contact verzoek
+        new_contact_topic: Nieuw contact thema
         new_country: NIeuw land toevoegen
         new_currency: Nieuwe valuta
+        new_customer: Nieuwe klant
         new_locale: Nieuwe landinstelling
+        new_order: Nieuwe bestelling toevoegen
+        new_password: Nieuw wachtwoord
+        new_payment: Nieuwe betaling toevoegen
+        new_payment_method: Nieuwe betaalmethode toevoegen
+        new_permission: Nieuwe machtiging
+        new_product: Nieuw product
+        new_product_attribute: Nieuw productattribuut
+        new_product_option: Nieuwe product optie
+        new_product_variant: Nieuwe productvariant
+        new_promotion: Nieuwe promotie toevoegen
+        new_review: Nieuwe recensie
+        new_role: Nieuwe rol
+        new_shipping_category: Nieuwe verzendcategorie toevoegen
+        new_shipping_method: Nieuwe verzendmethode toevoegen
         new_tax_category: Nieuwe belastingcategorie toevoegen
+        new_tax_rate: Nieuw belastingtarief aanmaken
+        new_taxon: Taxon toevoegen
+        new_user: Nieuwe gebruiker toevoegen
+        new_zone: Nieuwe zone toevoegen
+        newest_products: Nieuwste producten
+        next: Volgende
         "no": false
         no_account: geen account
+        no_association_types_to_display: Er zijn geen relatie typen gedefinieerd
+        no_comment: Geen commentaar
+        no_default_billing_address: Geen standaard factuuradres
+        no_default_shipping_address: Geen standaard verzendadres
+        no_description: Geen omschrijving
+        no_pricing_configuration: Geen prijsstelling geconfigureerd
         no_promotion: Geen promotie toegepast
         no_requirement: Geen vereiste
+        no_results: Geen resultaten
         no_results_to_display: Er zijn geen resultaten om weer te geven
+        no_shipping_category: Geen verzendcategorie
         no_shipping_charges: Geen verzendkosten
+        no_short_description: '<i>Geen korte omschrijving</i>'
+        no_sku: '<i>Geen SKU</i>'
+        no_tax_category: Geen belasting categorie
         no_taxes: Geen belasting toegepast
         no_theme: Geen thema
+        not_available_in_your_country: Niet beschikbaar in uw land
         not_contains: Bevat niet
         not_empty: Niet leeg
         not_in: Niet in
+        notify_customer: Klant informeren
+        number: Nummer
+        number_of_orders: Aantal bestellingen
+        oauth_provider: OAuth Provider
+        on_hold: In de wacht
+        options: Opties
         or: of
+        order: Bestelling
+        order_comment_name: Order Opmerkingen
+        order_comments: Order Opmerkingen
+        order_confirmation_name: Order bevestiging
         order_details: Details van uw bestelling
+        order_item_product: Artikel
+        order_state: Bestel status
+        order_summary: Bestellingsoverzicht
+        order_value: Bestellingswaarde
+        ordered: Besteld
+        orders: Bestellingen
+        original_price: Oorspronkelijke prijs
+        out_of_stock: Geen voorraad
+        overview_of_your_store: Overzicht van uw winkel
+        page: Pagina
+        pages: "Pagina's"
+        parent: Ouder
+        password: Wachtwoord
+        payment: Betaling
+        payment_details: Betalingsgegevens
+        payment_method: Betaalmethode
+        payment_methods: Betaalmethodes
+        payment_mode: Betalingswijze
+        payment_state: Betaalstatus
+        payments: Betalingen
+        pending: In behandeling
+        permissions: Machtigingen
+        phone_number: Telefoonnummer
+        place_order: Plaats bestelling
+        placed_at: Geplaatst op
+        postcode: Postcode
         powered_by: Mogelijk gemaakt door
+        presentation: Weergave
+        previous: Vorige
         price: Prijs
+        pricing: Prijsstelling
+        priority: Prioriteit
+        processing: Verwerken
+        product: Product
+        product_archetypes: Product prototypes
+        product_association_index: Relatie
+        product_association_type_index: Associatietype
+        product_association_types: Product relatietypes
+        product_associations: Product relaties
+        product_attributes: Productattributen
+        product_details_viewing_product_product: 'Product details <small>"<strong>%product%</strong>"</small>'
+        product_options: Productopties
+        product_review: Productbeoordeling
+        product_reviews: Productbeoordelingen
+        products: Producten
+        products_categorized_as_name: 'Producten in "%name%"'
+        products_categorized_under_taxon_taxon: 'Producten<small>Gecategoriseerd onder "%taxon%" taxon</small>'
+        products_index_of_all_products_in_your_store: 'Producten <small>Index van alle producten in uw winkel</small>'
+        profile: Profiel
         promotion_configuration: Promotie configuratie
+        promotion_coupons: Coupons
+        promotion_details: Promotie details
         promotion_information: Promotie informatie
+        promotion_total: Korting totaal
+        promotions: Promoties
+        province: Provincie
+        provinces: Provincies
+        qty: Hoeveelheid
+        qty_max: Maximum aantal
+        qty_min: Minimum aantal
         quantity: Hoeveelheid
+        rating: Beoordeling
         ready: Klaar
+        recent_customers: Recente klanten
+        recent_orders: Recente bestellingen
+        recent_users: Recente gebruikers
+        redirect_routes: Redirect routes
+        refunded: Terugbetaald
+        register: Registreren
+        register_button: Registreren
+        registration_create_an_account_in_store: 'Registratie <small>Creëer een account in de winkel</small>'
+        registration_date: Aanmelddatum
+        release_inventory: Voorraad vrijgeven
+        remember_me: Onthoud mijn gegevens
+        remove_attribute: Attribuut verwijderen
+        report_details: Rapport details
+        reports: Rapporten
+        reset: Reset
+        reset_button: Reset
+        reset_password: Reset wachtwoord
+        restore: Terugzetten
+        retail_price: Retail prijs
+        return: Retourneren
         returned: Geretourneerd
+        revert: Terugkeren
+        review_details: Beoordelingsdetails
+        reviews: Beoordelingen
+        roles: Rollen
+        routes: Routes
+        rules: Regels
+        sales: Verkoop
+        sales_this_month: Verkoop
+        save: Opslaan
         save_changes: Aanpassingen opslaan
+        scope: Bereik
+        search: Zoeken
+        security_settings: Beveiligingsinstellingen
+        set_as_default_billing_address: Instellen als standaard factuuradres
+        set_as_default_shipping_address: Instellen als standaard verzendadres
+        ship: Verzend
+        shipment_confirmation_name: Bevestiging van de verzending
+        shipment_details: Verzending details
+        shipment_mode: Verzendmethode
+        shipment_state: Verzendstatus
+        shipments: Verzendingen
         shipped: Verzonden
+        shipping_address: Bezorgadres
+        shipping_categories: Verzendcategorieën
+        shipping_category: Verzend categorie
+        shipping_charges: Verzendkosten
+        shipping_method: Verzendmethode
+        shipping_method_details: Verzendmethode details
         shipping_methods: Verzendmethoden
+        shipping_state: Verzendstatus
+        shipping_total: Verzendkosten totaal
+        shop_by: Filter op
         show: Toon
+        show_all: Toon alles
+        show_deleted: Toon verwijderd
+        show_in_store: Toon in winkel
+        show_metadata: Toon metadata
         sign_in: Aanmelden
+        sign_in_to_the_store_or_create_new_account: 'Inloggen <small>of maak een nieuw account</small>'
         sign_out: Afmelden
+        simple_blocks: Eenvoudige blokken
+        sku: SKU
+        slideshow: Slideshow
+        slideshow_blocks: Slideshow blokken
+        start_date: Begindatum
+        starts_at: Start op
         starts_with: Begint met
+        state: Status
         status: Status
+        street: Straat
+        string_blocks: Tekstblokken
+        subject: Onderwerp
         success: Succes
+        summary: Samenvatting
+        support: Helpdesk
+        sylius_logo: Sylius
         tax_categories: Belastingscategorieën
+        tax_category: Belasting categorie
+        tax_rate_details: Belastingtarief details
+        tax_rates: Belasting Tarieven
+        tax_total: Belasting totaal
+        taxation_categories: BTW-groepen
+        taxation_settings: Belasting Instellingen
+        taxes: Belastingen
+        taxons: Taxons
+        thank_you_for_your_order: Bedankt voor uw bestelling
+        theme: Thema
+        there_are_no_archetypes_defined: Er zijn geen prototypes gedefinieerd
+        there_are_no_attributes_configured: Er zijn geen attributen geconfigureerd
+        there_are_no_blocks_to_display: Er zijn geen blokken weer te geven
+        there_are_no_channels_configured: Er zijn geen kanalen geconfigureerd
+        there_are_no_contact_requests_to_display: Er zijn geen contact verzoeken om weer te geven
+        there_are_no_contact_topics_to_display: Er zijn geen contact onderwerpen weer te geven
+        there_are_no_countries_configured: Er zijn geen landen geconfigureerd
+        there_are_no_coupon_to_display: Er zijn geen coupons om weer te geven
+        there_are_no_currencies_to_display: "Er zijn geen valuta's om weer te geven"
+        there_are_no_customers_to_display: Zijn er geen klanten om weer te geven
+        there_are_no_emails_configured: Er zijn geen e-mails geconfigureerd
+        there_are_no_groups_to_display: Er zijn geen groepen om weer te geven
+        there_are_no_images_for_this_product: Er zijn geen afbeeldingen voor dit product
+        there_are_no_inventory_items_to_display: Er zijn geen voorraadgegevens om weer te geven
+        there_are_no_inventory_units_to_display: Er zijn geen inventaris eenheden om weer te geven
+        there_are_no_locales_configured: Er zijn geen taalinstellingen geconfigureerd
+        there_are_no_logged_events_to_display: Er zijn geen geregistreerde events om weer te geven
+        there_are_no_menu_nodes_to_display: Er zijn geen menu nodes om weer te geven
+        there_are_no_menus_to_display: "Er zijn geen menu's om weer te geven"
+        there_are_no_options_configured: Er zijn geen opties geconfigureerd
+        there_are_no_options_for_this_product: Er zijn geen opties voor dit product
+        there_are_no_orders_for_this_customer_to_display: Er zijn geen orders voor deze klant om weer te geven
+        there_are_no_pages_to_display: "Er zijn geen pagina's om weer te geven"
+        there_are_no_payment_methods_configured: Er zijn geen betaalmethoden geconfigureerd
+        there_are_no_payments_configured: Er zijn geen betaalmethoden geconfigureerd
+        there_are_no_permissions_defined: Er zijn geen machtigingen gedefinieerd
+        there_are_no_products_to_display: Er zijn geen producten om weer te geven
+        there_are_no_promotions_configured: Er zijn geen promoties geconfigureerd
+        there_are_no_redirect_routes_to_display: Er zijn geen routes om weer te geven
+        there_are_no_reports_created: Er zijn geen rapporten gemaakt
+        there_are_no_roles_defined: Er zijn geen rollen gedefinieerd
+        there_are_no_routes_to_display: Er zijn geen routes om weer te geven
+        there_are_no_shipments_to_display: Er zijn geen verzendingen om weer te geven
+        there_are_no_shipping_categories_configured: Er zijn geen verzendcategorieën geconfigureerd
+        there_are_no_shipping_methods_configured: Er zijn geen verzendmethodes geconfigureerd
+        there_are_no_tax_categories_configured: Er zijn geen belastingcategorieën geconfigureerd
+        there_are_no_tax_rates_configured: Er zijn geen belastingtarieven geconfigureerd
+        there_are_no_taxons_for_this_product: Er zijn geen taxons voor dit product
+        there_are_no_taxons_to_display: Er zijn geen taxons gevonden
+        there_are_no_users_to_display: Er zijn geen gebruikers om weer te geven
+        there_are_no_variants_to_display: Er zijn geen varianten om weer te geven
+        there_are_no_zones_configured: Er zijn geen zones geconfigureerd
+        there_is_no_main_taxon_for_this_product: Er is geen categorie voor dit product
+        this_months_statistics: Statistieken van deze maand
+        this_product_has_no_attributes_defined: Dit product heeft geen kenmerken
+        title: Titel
+        topic: Onderwerp
+        total: Totaal
+        total_orders: Aantal bestellingen
+        total_qty: Totale Hoeveelheid
         total_records: Aantal records
+        total_registrations: Aantal registraties
+        tracking_number: Tracking code
+        translations: Vertalingen
+        type: Type
+        unavailable: Onbeschikbaar
+        unit_price: Stukprijs
+        unknown: Onbekend
         unlimited: Onbeperkt
+        unlock: Ontgrendelen
+        update: Bewerken
+        update_product_association_type: Update van product koppelingstype
+        updating_tax_rate: Belastingtarief bewerken
         usage: Gebruik
+        usage_limit: Gebruikslimiet
+        used: Gebruikt
+        user_confirmation_name: Bevestiging van de gebruiker
+        user_details: Gebruikersdetails
+        username: Gebruikersnaam
+        users_list_of_all_users_registered_in_store: 'Gebruikers <small>Lijst van alle gebruikers in de winkel</small>'
         values: Waarden
+        variant: Variant
+        variant_selection_method: Variant selectie methode
+        variants: Varianten
+        view: Weergave
+        view_more: Bekijk details
+        view_product_details: 'Bekijk %product% details'
+        void: Leeg
+        volume_based_pricing: Volume gebaseerde prijzen
+        warning: Waarschuwing
+        welcome: Welkom
+        welcome_to_our_store: Welkom in jouw winkel
+        welcome_to_your_space: Welkom in uw account
         "yes": true
+        you_are_customer_since: U bent klant sinds
+        you_have_no_addresses_defined: U heeft geen adressen gedefinieerd
+        you_have_no_new_orders: U heeft geen nieuwe bestellingen
+        your_cart_is_empty: Uw winkelwagen is leeg
+        your_last_5_orders: Uw laatste 5 bestellingen
+        your_order_has_been_shipped: Uw bestelling is verzonden
+        your_products: Uw producten
+        zone: Zone
         zone_consisting_of_countries: Zone bestaande uit landen
         zone_consisting_of_other_zones: Zone bestaande uit andere zones
         zone_consisting_of_provinces: Zone bestaande uit provincies
+        zone_details: Zone details
+        zones: Zones

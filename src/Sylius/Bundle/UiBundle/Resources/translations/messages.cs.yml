@@ -10,57 +10,479 @@ sylius:
         option:
             name: Jméno
     ui:
+        access_token: Přístupový token
+        action: Akce
         actions: Akce
+        add: Přidat
+        add_action: Přidat akci
+        add_attribute: Přidat atribut
+        add_attributes: Přidat atribut
+        add_channel: Přidat kanál
+        add_choice: Přidat výběr
         add_coupon: Přidat kupón
+        add_image: Přidat obrázek
+        add_member: Přidat člena
+        add_menu_element: Přidat prvek menu
+        add_new_email: Přidat nový E-mail
+        add_new_permission: Přidat nové oprávnění
+        add_new_role: Přidat novou roli
+        add_province: Přidat provincii
+        add_rule: Přidat pravidlo
         add_to_cart: Přidat do košíku
+        add_value: Přidání hodnoty
+        adding_new_customer_groups: Přidání nové skupiny zákazníků
+        adding_new_email: Přidání nového e-mailu
+        adding_new_locale: Přidání nového národního prostředí (locale)
+        addressing_step: Krok řešení
+        adjustments: Úpravy
+        administration: Administrace
+        administration_dashboard: Nástěnka administrace
+        all_your_addresses: Všechny adresy
+        amount: Částka
+        archetype: Prototyp
+        assortment: Sortiment
+        attributes: Atributy
+        author: Autor
+        availability: Dostupnost
+        available_on: Dostupný od
+        available_on_demand: K dispozici na požádání
+        back: Zpět
+        backorder: Doobjednání
+        balance_due: Nedoplatek
+        billing_address: Fakturační adresa
+        blocks: Bloky
+        body: Tělo
+        browse_products: Procházet produkty
+        build: Sestavit
+        calculator: Kalkulačka
         cancel: Zrušit
         cancelled: Zrušeno
+        categorization: Kategorizace
+        category: Kategorie
         change_your_password: Změnit heslo
+        channel: Kanál
+        channels: Kanály
         checkout: Objednat
-        your_cart_is_empty: Váš košík je prázdný
-        image: Obrázek
-        qty: Množství
+        choose_file: Vyberte soubor
+        city: Město
         clear_cart: Vyprázdnit košík
+        code: Kód
         color: Barva
+        comment: Komentář
+        company: Firma
+        completed: Dokončeno
+        configuration: Konfigurace
+        confirmation: Potvrzení
+        confirmation_title: Potvrzení
+        contact_request_details: Detaily požadavku kontaktu
+        contact_request_show: Žádost kontaktu
+        contact_requests: Žádosti kontaktu
+        contact_topics: Témata kontaktu
+        contain_variants: Obsahuje varianty
+        content: Obsah
         countries: Země
+        country: Země
+        country_details: Podrobnosti země
+        coupon: Kupón
         coupon_based: Kupón na bázi
         coupons: Kupóny
         create: Vytvořit
+        create_a_new_address: Vytvořit novou adresu
+        create_contact_request: Vytvořit požadavek kontaktu
+        create_contact_topic: Vytvořit téma kontaktu
+        create_country: Vytvořit zemi
+        create_currency: Vytvořit měnu
+        create_group: Vytvořit skupinu
+        create_imagine_block: Vytvořit imagine blok
+        create_locale: Vytvořit národní prostředí (locale)
+        create_menu: Vytvořit menu
+        create_menu_node: Vytvořit položku menu
+        create_new_coupon: Vytvořit nový kupón
+        create_new_page: Vytvořit novou stránku
+        create_option: Vytvořit volbu
+        create_order: Vytvořit objednávku
+        create_payment: Vytvořit platbu
+        create_payment_method: Vytvořit platební metodu
+        create_product: Vytvořit produkt
+        create_product_attribute: Vytvoření produktového atributu
+        create_promotion: Vytvořit akci
+        create_redirect_route: Vytvořit přesměrování
+        create_route: Vytvořit URL směrování
+        create_shipping_category: Vytvořit přepravní kategorie
+        create_shipping_method: Vytvořit způsob dopravy
+        create_simple_block: Vytvořit jednoduchý blok
+        create_slideshow_block: Vytvořit prezentační blok
+        create_string_block: Vytvořit řetězcový blok
+        create_tax_category: Vytvořit kategorii daně
+        create_tax_rate: Vytvořit daňovou sazbu
+        create_taxon: Vytvořit taxon
+        create_variant: Vytvořit variantu
+        create_zone: Vytvořit zónu
+        created_at: Vytvořeno
+        creating_a_new_imagine_block: Vytvoření nového imagine bloku
+        creating_a_new_simple_block: Vytvořit nový jednoduchý blok
+        creating_a_new_slideshow_block: Vytvoření nového prezentačního bloku
+        creating_a_new_string_block: Vytvoření nového řetězcového bloku
+        creating_menu: Vytvoření menu
+        creating_menu_node: Vytvoření položky menu
+        creating_new_page: Vytvoření nové stránky
+        creating_redirect_route: Vytvoření přesměrování
+        creating_route: Vytvoření URL směrování
+        creation_time: Čas vytvoření
         currencies: Měny
-        my_account: Účet
-        home: Domů
+        currency: Měna
+        current_orders: Aktuální objednávky
+        current_password: Současné heslo
+        current_promotions: Aktuální akce
+        current_stock: Aktuálně skladem
+        customer: Zákazník
+        customer_not_notified: Zákazník nebyl upozorněn
+        customer_notified: Zákazník upozorněn
+        customers: Zákazníci
         dashboard: Nástěnka
+        data: Údaje
         date: Datum
+        default_billing_address: Výchozí fakturační adresa
         default_currency: Výchozí měna
+        default_shipping_address: Výchozí dodací adresa
         delete: Odstranit
+        delete_image: Odstranit obrázek
+        deleted: Odstraněno
         description: Popis
+        disable: Zakázat
         edit: Úpravy
+        edit_group: Upravit skupinu
+        edit_locale: Upravit národní prostředí (locale)
+        edit_my_address: Upravit adresu
+        edit_your_personal_information: Upravit osobní údaje
+        editing_attribute: Úprava atributu
+        editing_channel: Editace kanálu
+        editing_contact_request: Editace požadavku kontaktu
+        editing_contact_topic: Editace témata kontaktu
+        editing_country: Editace země
+        editing_coupon: Úprava kupónu
+        editing_currency: Editace měny
+        editing_email: Úprava e-mailu
+        editing_imagine_block: Editace imagine bloku
+        editing_menu: Editace menu
+        editing_menu_node: Editace položky menu
+        editing_option: Editace volby
+        editing_order: Editace objednávky
+        editing_page: Editace stránky
+        editing_payment: Úprava platby
+        editing_payment_method: Úprava způsobu platby
+        editing_permission: Úpravy oprávnění
+        editing_product: Úprava produktu
+        editing_promotion: Konec akce
+        editing_redirect_route: Editace přesměrování
+        editing_role: Editace role
+        editing_route: Úprava směrování
+        editing_shipment: Editace dodávky
+        editing_shipping_category: Úprava přepravní kategorie
+        editing_shipping_method: Editace přepravní metody
+        editing_simple_block: Editace jednoduchého bloku
+        editing_slideshow_block: Editace prezentačního bloku
+        editing_string_block: Editace řetězcového bloku
+        editing_tax_category: Úpravy kategorie daně
+        editing_taxon: Editace taxonu
+        editing_user: Editace uživatele
+        editing_variant: Editace variant
+        editing_zone: Editace zóny
+        email: Email
+        email_templates: Šablony e-mailů
+        emails: E-maily
         empty: Prázdné
+        enable: Povolit
         enabled: Povoleno
+        end_date: Datum ukončení
+        ends_at: Končí
+        error: Chyba
+        exchange_rate: Směnný kurz
         exclusive: Exkluzivní
+        existing_customer: Stávající zákazník
         expires_at: Končí v
+        failed: Neúspěšné
+        female: Žena
         filter: Filtr
+        first_name: Křestní Jméno
+        firstname: Křestní Jméno
+        fulfill: Splnit
+        gateway: Brána
+        general_info: Obecné informace
+        general_settings: Obecné nastavení
+        generate: Generovat
         generate_coupons: Generovat kupóny
+        generate_variants: Generovat varianty
+        generating_coupons: Generování kupónů
+        go_to_dashboard: Přejít na dashboard
+        grand_total: Celkem
+        groups: Skupiny
+        guest: Neregistrovaný náštěvník
         guest_customer: Neregistrovaný náštěvník
-        item: Položka
+        hide_deleted: Skrýt odstraněné
+        home: Domů
+        id: ID
+        image: Obrázek
+        images: Obrázky
+        imagine_blocks: Imagine bloky
+        index_of_all_configured_locales: Seznam všech národních prostředí (locales)
+        information: Informace
         inventory: Sklad
+        inventory_here_you_can_see_current_stock_levels: 'Zásoby <small>zde vidíte aktuální stav zásob</small>'
+        inventory_index: Sklad
+        inventory_state: Stav zásob
+        inventory_tracking: Sledování zásob
+        invoice: Faktura
+        item: Položka
+        items: Položky
+        items_total: Celkem položek
+        label: Popisek
+        last_login: Poslední přihlášení
+        last_name: Příjmení
+        last_update: Poslední aktualizace
+        last_week_orders: Objednávky za poslední týden
+        last_week_revenue: Příjmy za poslední týden
+        lastname: Příjmení
+        latest_orders: Poslední objednávky
+        links: Odkazy
         list_coupons: Seznam kupónů
         locales: Lokalizace
+        lock: Zamknout
+        login: Přihlásit
+        login_button: Přihlásit
+        logout: Odhlásit
+        male: Muž
+        manage: Správa
+        manage_adjustments: Správa nastavení
+        manage_attributes: Správa atributů
+        manage_channels: Správa kanálů
+        manage_countries: Správa zemí
+        manage_emails: Správa e-mailů
+        manage_options: Spravovat nastavení
+        manage_orders: Správa objednávek
+        manage_payments: Správa plateb
+        manage_products: Spravovat produkty
+        manage_promotions: Správa akcí
+        manage_shipments: Správa zásilek
+        manage_shipping_categories: Spravovat přepravní kategorie
+        manage_shipping_methods: Správa přepravní metody
+        manage_tax_categories: Spravovat kategorie daně
+        manage_tax_rates: Správa daňových sazeb
+        manage_zones: Správa zón
+        marketing: Marketing
+        members: Členové
+        menu_nodes: Nabídka uzlů
+        menus: Menu
+        message: Zpráva
+        method: Metoda
+        modified: Změněno
+        my_account: Účet
+        n_a: Není k dispozici
+        name: Jméno
         new: Nový
+        new_comment_posted_on_order: Nové komentáře k objednávce
+        new_contact_request: Nový požadavek kontaktu
+        new_contact_topic: Nové téma kontaktu
         new_country: Nové země
         new_currency: Nová měna
+        new_order: Nová objednávka
+        new_password: Nové heslo
+        new_payment: Nová platba
+        new_payment_method: Nový platební způsob
+        new_permission: Nové oprávnění
+        new_product: Nový produkt
+        new_product_attribute: Nový produktový atribut
+        new_product_option: Nová volba produktu
+        new_product_variant: Nová varianta produktu
+        new_promotion: Nová akce
+        new_role: Nová role
+        new_shipping_category: Nová přepravní kategorie
+        new_shipping_method: Nový způsob dopravy
         new_tax_category: Nová kategorie daně
+        new_tax_rate: Nová daňová sazba
+        new_taxon: Nový taxon
+        new_user: Nový uživatel
+        new_zone: Nová zóna
+        newest_products: Nejnovější produkty
+        next: Další
         "no": false
+        no_comment: Žádné komentáře
+        no_default_billing_address: Žádná výchozí fakturační adresa
+        no_default_shipping_address: Žádná výchozí dodací adresu
+        no_description: Žádný popis
         no_promotion: Nejsou aplikovány žádné akce
+        no_results: Žádné výsledky
+        no_shipping_category: Žádná přepravní kategorie
         no_shipping_charges: Nejsou aplikovány žádné poplatky za dopravu
+        no_short_description: '<i>Žádný krátký popis</i>'
+        no_sku: Žádná balení
+        no_tax_category: Žádná kategorie daně
         no_taxes: Nejsou aplikovány žádné daně
+        not_available_in_your_country: Není k dispozici ve vaší zemi
+        number: Číslo
+        number_of_orders: Počet objednávek
+        options: Možnosti
+        order: Objednávka
+        order_comment_name: Poznámka k objednávce
+        order_comments: Poznámky k objednávce
+        order_confirmation_name: Potvrzení objednávky
         order_details: Podrobnosti vaší objednávky
+        order_item_product: Položka
+        order_state: Stav objednávky
+        order_summary: Shrnutí objednávky
+        order_value: Hodnota objednávky
+        orders: Objednávky
+        out_of_stock: Není skladam
+        overview_of_your_store: Přehled obchodu
+        page: Strana
+        pages: Stránky
+        parent: Rodič
+        password: Heslo
+        payment: Platba
+        payment_details: Detaily platby
+        payment_method: Způsob platby
+        payment_methods: Způsoby platby
+        payment_state: Stav platby
+        payments: Platby
+        pending: Čekající
+        permissions: Oprávnění
+        phone_number: Telefonní číslo
+        place_order: Dokončit objednávku
+        placed_at: Umístěno
+        postcode: PSČ
+        presentation: Prezentace
+        previous: Předchozí
         price: Cena
+        pricing: Ceník
+        priority: Priorita
+        processing: Zpracovává se
+        product: Produkt
+        product_archetypes: Prototypy produktů
+        product_attributes: Atributy produktu
+        product_details_viewing_product_product: 'Podrobnosti produktu <small>zobrazení produktu "<strong>%product%</strong>"</small>'
+        product_options: Volby produktů
+        products: Produkty
+        products_categorized_as_name: 'Produkty zařazené jako "%name%"'
+        products_categorized_under_taxon_taxon: 'Produkty <small>kategorizovány pod taxonem "%taxon%"</small>'
+        products_index_of_all_products_in_your_store: 'Produkty <small>seznam všech produktů v obchodě</small>'
+        promotion_coupons: Kupóny
+        promotion_details: Podrobnosti akce
+        promotion_total: Akce celkem
+        promotions: Akce
+        province: Provincie
+        provinces: Provincie
+        qty: Množství
+        qty_max: Množství max
+        qty_min: Množství min
         quantity: Množství
         ready: Připraven
+        recent_orders: Poslední objednávky
+        recent_users: Poslední uživatelé
+        redirect_routes: Přesměrovávací pravidla
+        refunded: Platba vrácena
+        register: Registrace
+        register_button: Registrace
+        registration_create_an_account_in_store: 'Registrace, <small>Vytvořit účet v obchodě</small>'
+        registration_date: Datum registrace
+        release_inventory: Uvolnění zásob
+        remember_me: Pamatuj si mě
+        remove_attribute: Odstranit atribut
+        reports: Reporty
+        retail_price: Maloobchodní cena
+        return: Vrátit
         returned: Vráceno
+        revert: Vrátit
+        roles: Role
+        routes: Cesty
+        rules: Pravidla
+        sales: Prodeje
+        sales_this_month: Prodeje
+        save: Uložit
         save_changes: Uložit změny
+        scope: Rozsah
+        search: Hledat
+        security_settings: Nastavení zabezpečení
+        set_as_default_billing_address: Nastavit jako výchozí fakturační adresu
+        set_as_default_shipping_address: Nastavit jako výchozí dodací adresu
+        ship: Dodat
+        shipment_confirmation_name: Potvrzení odeslání
+        shipment_details: Detaily dodávky
+        shipment_state: Stav dodávky
+        shipments: Zásilky
         shipped: Dodáno
+        shipping_address: Doručovací adresa
+        shipping_categories: Přepravní kategorie
+        shipping_category: Typ dopravy
+        shipping_charges: Přepravní poplatky
+        shipping_method: Způsob dopravy
+        shipping_method_details: Podrobnosti způsobu dopravy
         shipping_methods: Způsoby dopravy
+        shipping_state: Stav dodávky
+        shipping_total: Poštovné celkem
+        shop_by: Nakupovat podle
+        show_all: Zobrazit vše
+        show_deleted: Zobrazit odstraněné
+        sign_in_to_the_store_or_create_new_account: 'Přihlášení do obchodu <small>nebo vytvoření nového účtu</small>'
+        simple_blocks: Jednoduché bloky
+        sku: SKU
+        slideshow: Prezentace
+        slideshow_blocks: Prezentační bloky
+        start_date: Datum zahájení
+        starts_at: Začíná
+        state: Stát
+        street: Ulice
+        string_blocks: Řetězcové bloky
+        subject: Předmět
         success: Úspěch
+        support: Podpora
+        tax_category: Typ daně
+        tax_rate_details: Detaily daňové sazby
+        tax_rates: Daňové sazby
+        tax_total: Daně celkem
+        taxation_categories: Typy zdanění
+        taxation_settings: Nastavení zdanění
+        taxes: DPH
+        taxons: Taxony
+        there_are_no_images_for_this_product: Pro tento produkt nejsou žádné obrázky
+        there_are_no_options_for_this_product: Pro tento produkt nejsou žádné nastavení
+        there_are_no_taxons_for_this_product: Tento produkt nemá žádné taxony
+        this_months_statistics: Statistiky za tento měsíc
+        this_product_has_no_attributes_defined: Tento produkt nemá definovány žádné atributy
+        title: Název
+        topic: Téma
+        total: Celkem
+        total_orders: Celkem objednávek
+        total_qty: Celkové množství
+        total_registrations: Celkem registrací
+        tracking_number: Číslo zásilky
+        translations: Překlady
+        type: Typ
+        unavailable: Nedostupné
+        unit_price: Jednotná cena
+        unknown: Neznámý
+        unlock: Odemknout
+        updating_tax_rate: Aktualizace daňové sazby
+        usage_limit: Omezení použití
+        used: Použito
+        user_confirmation_name: Potvrzení uživatele
+        user_details: Údaje o uživateli
+        username: Uživatelské jméno
+        users_list_of_all_users_registered_in_store: 'Uživatelé <small>seznam všech uživatelů registrovaných v obchodě</small>'
+        variant: Varianta
+        variant_selection_method: Metoda výběru varianty
+        variants: Varianty
+        view: Pohled
+        view_more: Zobrazit více
+        void: Neplatné
+        volume_based_pricing: Cena na základě objemu
+        warning: Varování
+        welcome_to_your_space: Vítejte ve Vašem prostoru
         "yes": true
+        you_are_customer_since: Zákazníkem jste od
+        you_have_no_new_orders: Nemáte žádné nové objednávky
+        your_cart_is_empty: Váš košík je prázdný
+        your_last_5_orders: Vašich posledních 5 objednávek
+        your_products: Produkty
+        zone: Oblast
+        zone_details: Podrobnosti zóny
+        zones: Oblasti

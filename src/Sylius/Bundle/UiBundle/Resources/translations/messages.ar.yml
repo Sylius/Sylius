@@ -8,8 +8,34 @@ sylius:
         option:
             name: الاسم
     ui:
+        add: اضافة
+        add_province: اضافة جهة/مقاطعة
+        city: المدينة
         color: اللون
+        company: الشركة
         countries: البلدان
+        email: البريد الإلكتروني
+        exchange_rate: سعر الصرف
+        first_name: الاسم الأول
+        firstname: الاسم الأول
+        label: ملصق
+        last_name: اسم العائلة
+        lastname: اسم العائلة
+        members: الأعضاء
+        menu_nodes: عقدة القائمة
+        message: الرسالة
+        name: الاسم
         new: جديد
         "no": false
+        pages: الصفحات
+        password: كلمة السر
+        phone_number: رقم الهاتف
+        postcode: الرقم البريدي
+        presentation: تقديم
+        province: مقاطعة
+        provinces: المقاطعات
+        routes: طرق
+        scope: نطاق
+        street: الشارع
+        topic: الموضوع
         "yes": true

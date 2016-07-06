@@ -12,70 +12,87 @@ sylius:
         notes: Extra anteckningar
     ui:
         about: Om
+        access_your_store_account_or_create_a_new_one: Använd ditt butikskonto eller skapa ett nytt
         account_credentials: Kontouppgifter
         actions: Åtgärder
+        add: Lägg tilll
+        add_action: Lägg till åtgärd
+        add_attributes: Lägg till attribut
         add_coupon: Lägg till kupong
+        add_member: Lägg till medlem
+        add_province: Lägg till provins
+        add_rule: Lägg till regel
         add_to_cart: Lägg i varukorg
+        add_value: Lägg till värde
         addressing: Adressering
+        administration: Administration
         administration_panel_login: 'Administrationspanel - inloggning'
         all: Alla
+        amount: Belopp
         an_error_occurred: Ett fel uppstod
+        apply_coupon: Använd kupong
         are_your_sure_you_want_to_perform_this_action: Är du säker på att du vill utföra den här åtgärden?
+        assortment: Sortiment
+        attributes: Attribut
+        author: Författare
         available_for_channels: Tillgänglig för kanaler
+        available_on: Tillgänglig på
+        available_on_demand: Tillgänglig på begäran
         available_on_hand: Tillgänglig på begäran
-        reserved: Reserverad
+        available_until: Tillgänglig till
         average_order_value: Genomsnittsligt ordervärde
-        backordered: Restnoterad
         back_to_store: Tillbaka till butik
-        complete: Slutförd
+        backordered: Restnoterad
+        billing_address: Faktureringsadress
+        blocks: Block
+        body: Brödtext
+        calculator: Kalkylator
         cancel: Avbryt
         cancelled: Avbruten
+        categorization: Kategorisering
+        category: Kategori
         category_requirements: Kategorikrav
         change_address: Ändra adress
         change_password: Byt lösenord
-        change_your_password: Ändra ditt lösenord
         change_shipping_method: Ändra leveranssätt
+        change_your_password: Ändra ditt lösenord
+        channels: Kanaler
         charges_and_taxes: Avgifter och skatter
-        checkout: Kassa
-        have_an_account_already: Har redan ett konto
-        sign_in_here: Logga in här
         checking_out_as: Kolla in som
-        you_may_also_like: Du kanske även gillar
-        forgot_password: Glömt lösenordet
-        your_shopping_cart: Din varukorg
-        your_cart_is_empty: Din varukorg är tom
-        clear_filters: Rensa filter
-        enter_your_code: Ange din kod
-        filters: Filter
-        image: Bild
-        qty: Antal
+        checkout: Kassa
+        city: Ort
         clear_cart: Töm varukorg
-        update_cart: Uppdatera varukorgen
-        apply_coupon: Använd kupong
-        extra_notes: Extra anteckningar
-        edit_your_items_apply_coupon_or_proceed_to_the_checkout: Redigera dina varor, använd kupong eller gå vidare till kassan
-        create_an_account: Skapa ett konto
-        summary: Sammanfattning
-        create_a_new_customer_account: Skapa ett nytt kundkonto
-        if_you_have_an_account_sign_in_with_your_email_address: Om du har ett konto, logga in med din e-postadress
-        access_your_store_account_or_create_a_new_one: Använd ditt butikskonto eller skapa ett nytt
+        clear_filters: Rensa filter
+        code: Kod
         color: Färg
+        comment: Kommentar
+        company: Företag
+        complete: Slutförd
+        completed: Slutförd
         configurable_product: Konfigurerbar produkt
+        configuration: Konfiguration
         configure_channels_available_in_your_store: Konfigurera kanaler som är tillgängliga i din butik
         confirm_your_action: Bekräfta din åtgärd
         contact_us: Kontakta oss
         contains: Innehåller
+        content: Innehåll
         countries: Länder
+        country: Land
+        coupon: Rabattkupong
         coupon_based: Kupongbaserad
         coupons: Kuponger
         create: Skapa
+        create_a_new_customer_account: Skapa ett nytt kundkonto
+        create_an_account: Skapa ett konto
         currencies: Valutor
+        current_orders: Aktuella ordrar
+        current_password: Nuvarande lösenord
+        current_stock: I lager
+        customer: Kund
         customer_can_login_to_the_store: Kund kan logga in i butiken
-        set_a_new_password_for_your_account: Välj ett nytt lösenord för ditt konto
-        my_account: Mitt konto
-        home: Hem
         customer_care: Kundtjänst
         customer_login: Kundinloggning
+        customers: Kunder
         dashboard: Kontrollpanel
         date: Datum
         default_currency: Standardvaluta
@@ -100,33 +117,64 @@ sylius:
         edit_promotion_coupon: Redigera kampanjkupong
         edit_shipping_method: Redigera leveransmetod
         edit_tax_category: Redigera skattekategori
-        shop_by_brand: Handla efter märke
         edit_tax_rate: Redigera skattesats
         edit_taxon: Redigera taxon
+        edit_your_items_apply_coupon_or_proceed_to_the_checkout: Redigera dina varor, använd kupong eller gå vidare till kassan
         edit_zone: Redigera zon
+        email: E-post
+        emails: E-post
         empty: Tom
         enabled: Aktiverad
+        end_date: Slutdatum
+        ends_at: Slutar vid
         ends_with: Slutar med
+        enter_your_code: Ange din kod
         equal: Lika
+        exchange_rate: Växlingskurs
         exclusive: Exklusiv
         expiration_and_usage_limits: Förfallodag och användningsgränser
         expires_at: Förfaller den
         extra_information: Extra information
+        extra_notes: Extra anteckningar
+        failed: Misslyckad
         faqs: FAQs
+        female: Kvinna
         filter: Filter
+        filters: Filter
+        first_name: Förnamn
+        firstname: Förnamn
+        forgot_password: Glömt lösenordet
+        gateway: Portal
         generate_coupons: Generera kuponger
+        groups: Grupper
+        have_an_account_already: Har redan ett konto
         hello: Hej
-        manage_your_personal_information_and_preferences: Hantera dina personuppgifter och inställningar
-        latest_products: Senaste produkterna
-        view_and_edit_cart: Visa och redigera varukorg
+        home: Hem
+        hostname: Värdnamn
+        id: ID
+        if_you_have_an_account_sign_in_with_your_email_address: Om du har ett konto, logga in med din e-postadress
+        image: Bild
+        images: Bilder
+        index_metadata: Metadata
         info: Info
-        item: Artikel
         inventory: Lager
+        inventory_index: Lager
+        item: Artikel
         jump_to_page: Hoppa till sida
+        label: Etikett
+        last_name: Efternamn
         last_updated: Senast uppdaterad
+        lastname: Efternamn
+        latest_products: Senaste produkterna
+        links: Länkar
         list_coupons: Lista kuponger
         list_variants: Lista varianter
         locales: Språk
+        login: Inloggning
+        login_button: Inloggning
+        logout: Logga ut
+        main_taxon: Huvudsaklig taxon
+        male: Man
         manage_attributes_of_your_products: Hantera attribut för dina produkter
         manage_categorization_of_your_products: Hantera kategorisering av dina produkter
         manage_configuration_options_of_your_products: Hantera konfigurationsalternativ för dina produkter
@@ -135,24 +183,35 @@ sylius:
         manage_discounts_and_promotional_campaigns: Hantera rabatter och kampanjer
         manage_geographical_zones: Hantera geografiska zoner
         manage_languages_available_in_the_store: Hantera språk som finns tillgängliga i butiken
+        manage_options: Hantera alternativ
         manage_payment_methods_available_to_your_customers: Hantera betalningsmetoder som är tillgängliga för dina kunder
         manage_shipping_destinations: Hantera leveransdestinationer
         manage_shipping_methods_for_your_store: Hantera leveransmetoder för din butik
         manage_taxation_of_your_products: Hantera beskattning av dina produkter
         manage_variants: Hantera varianter
         manage_your_customers: Hantera dina kunder
+        manage_your_personal_information_and_preferences: Hantera dina personuppgifter och inställningar
         manage_your_product_catalog: Hantera din produktkatalog
+        marketing: Marknadsföring
         media: Media
+        members: Medlemmar
+        menu_nodes: Menynoder
+        menus: Menyer
+        message: Meddelande
+        metadata_index: Metadata
+        my_account: Mitt konto
+        name: Namn
         new: Ny
         new_channel: Ny kanal
         new_country: Nytt land
         new_coupon: Ny kupong
         new_currency: Ny valuta
+        new_customers: Nya kunder
         new_locale: Nytt språk
+        new_orders: Nya ordrar
+        new_password: Nytt lösenord
         new_promotion_coupon: Ny kampanjkupong
         new_tax_category: Ny skattekategori
-        new_orders: Nya ordrar
-        new_customers: Nya kunder
         "no": false
         no_account: inget konto
         no_promotion: Ingen kampanj applicerad
@@ -163,54 +222,136 @@ sylius:
         not_contains: Innehåller inte
         not_empty: Inte tom
         not_in: Inte i
+        number: Nummer
         onhold: Väntande
+        options: Alternativ
         or: eller
+        order_comment_name: Orderkommentar
+        order_confirmation_name: Orderbekräftelse
         order_details: Detaljer om din beställning
         order_history: Orderhistorik
+        order_item_product: Artikel
         order_total: Ordersumma
+        orders: Ordrar
+        original_price: Ursprungligt pris
+        pages: Sidor
+        parent: Förälder
         partially_shipped: Delvis levererad
+        password: Lösenord
+        payment_method: Betalningsmetod
+        payment_methods: Betalningsmetoder
+        payment_state: Betalningsstatus
+        payments: Betalningar
+        pending: Väntande
         per_customer_usage_limit: Användningsbegränsning per kund
+        permissions: Behörigheter
+        personal_information: Personuppgifter
+        phone_number: Telefonnummer
+        postcode: Postnummer
         powered_by: Drivs av
         price: Pris
+        pricing: Prissättning
         privacy_policy: Integritetspolicy
         process_your_orders: Behandla dina ordrar
+        processing: Behandlar
+        product_association_type_index: Associationstyp
+        product_reviews: Produktrecensioner
         product_variants: Produktvarianter
+        products: Produkter
         promotion_configuration: Kampanjkonfiguration
+        promotion_coupons: Kuponger
         promotion_information: Kampanjinformation
+        promotions: Kampanjer
+        province: Län
+        provinces: Län
         purchased_from: Köpt från
-        personal_information: Personuppgifter
+        qty: Antal
+        rating: Betyg
         ready: Redo
+        refunded: Återbetald
+        register: Registrera
+        register_button: Registrera
+        register_in_the_store: Registrera i butiken
+        registered_customers: Registrerade kunder
+        remember_me: Kom ihåg mig
         repeat_new_password: Upprepa nytt lösenord
+        reports: Rapporter
+        reserved: Reserverad
         returned: Returnerad
         returns_policy: Returpolicy
-        registered_customers: Registrerade kunder
-        register_in_the_store: Registrera i butiken
+        reviews: Recensioner
+        roles: Roller
+        routes: Rutter
+        rules: Regler
+        sales: Försäljning
+        sales_this_month: Försäljning
         save_changes: Spara ändringar
+        scope: Omfattning
+        search: Sök
         select_taxon: Välj taxon
+        set_a_new_password_for_your_account: Välj ett nytt lösenord för ditt konto
+        ship_to: Leverera till
+        shipment: Leverans
+        shipment_confirmation_name: Leveransbekräftelse
+        shipments: Leveranser
         shipped: Skickad
         shipping: Leverans
+        shipping_address: Leveransadress
         shipping_and_payment_methods: 'Leverans- och betalningsmetoder'
+        shipping_category: Kategori
         shipping_methods: Leveransmetoder
-        ship_to: Leverera till
+        shop_by_brand: Handla efter märke
         show: Visa
         sign_in: Logga in
+        sign_in_here: Logga in här
         sign_out: Logga ut
         simple_product: Enkel produkt
+        sku: SKU
+        slideshow: Bildspel
+        starts_at: Startar vid
         starts_with: Börjar med
+        state: Status
         status: Status
+        street: Gatuadress
+        subject: Ämne
         subtotal: Delsumma
-        shipment: Leverans
+        summary: Sammanfattning
+        support: Support
         tax: Skatt
-        taxonomy: Taxonomi
         tax_categories: Skattekategorier
+        tax_category: Momskategori
+        taxation_categories: Skattekategorier
+        taxonomy: Taxonomi
+        taxons: Taxa
         terms_and_conditions: Allmänna villkor
+        theme: Tema
+        title: Titel
+        topic: Ämne
         total_records: Totalt antal poster
+        translations: Översättningar
+        type: Typ
+        unit_price: Enhetspris
+        unknown: Okänd
         unlimited: Obegränsat
+        update_cart: Uppdatera varukorgen
         usage: Användning
+        usage_limit: Användningsbegränsning
+        user_confirmation_name: Användarbekräftelse
+        username: Användarnanm
         values: Värden
+        variant: Variant
+        variant_selection_method: Metod för val av variant
+        view_and_edit_cart: Visa och redigera varukorg
+        void: Tom
+        welcome_to_our_store: Välkommen till vår butik
         "yes": true
+        you_may_also_like: Du kanske även gillar
+        your_cart_is_empty: Din varukorg är tom
         your_profile: Din profil
+        your_shopping_cart: Din varukorg
         your_store: Din butik
+        zone: Zon
         zone_consisting_of_countries: Zon som består av länder
         zone_consisting_of_other_zones: Zon som består av andra zoner
         zone_consisting_of_provinces: Zon som består av provinser
+        zones: Zoner

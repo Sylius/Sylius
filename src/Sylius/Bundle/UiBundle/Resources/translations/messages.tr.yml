@@ -10,56 +10,496 @@ sylius:
         option:
             name: Ad
     ui:
+        action: Eylem
         actions: Eylemler
+        add: Ekle
+        add_action: Eylem Ekle
+        add_attribute: Öznitelik Ekle
+        add_channel: Kanal ekle
+        add_choice: Seçim Ekle
         add_coupon: Kupon Ekle
+        add_image: Resim ekleme
+        add_member: Üye ekle
+        add_menu_element: Menü öğesi Ekle
+        add_new_email: Yeni e-posta Ekle
+        add_new_permission: Yeni izin ekle
+        add_new_role: Yeni rol ekle
+        add_province: Bölge ekleme
+        add_rule: Kural ekle
         add_to_cart: Sepete ekle
+        add_value: Değer ekle
+        adding_new_customer_groups: Yeni müşteri grupları ekleme
+        adding_new_email: Yeni e-posta ekleme
+        adding_new_locale: Yeni dil ekleme
+        addressing_step: Teslimat adresi
+        adjustments: Ayarlamalar
+        administration: Yönetim
+        administration_dashboard: Yönetim kontrol paneli
+        all_your_addresses: Tüm adresleriniz
+        amount: Miktar
+        archetype: Arketipi
+        assortment: Çeşitlilik
+        attributes: Nitelikler
+        author: Hazırlayan
+        availability: Uygunluk
+        available_on: Mevcut üzerine
+        available_on_demand: İsteğe bağlı olarak mevcuttur
+        back: Geri
+        backorder: Stokta yok
+        balance_due: Bakiye durumu
+        bill_to: Fatura Adresi
+        billing_address: Fatura adresi
+        blocks: Bloklar
+        body: İçerik
+        browse_products: Ürünlere göz atın
+        build: Oluştur
+        building_product_from_archetype: Güzel örneği yapı ürün
+        calculator: Hesaplayıcı
         cancel: İptal
         cancelled: İptal Edildi
+        categorization: Sınıflandırma
+        category: Kategori
         change_your_password: Parolanızı değiştirin
+        channel: Kanal
+        channels: Kanallar
         checkout: 'Ödeme  yap'
-        your_cart_is_empty: Sepetiniz boş
-        image: Resim
-        qty: Adet
+        choose_file: Dosya seç
+        city: Şehir
         clear_cart: Sepeti boşalt
+        code: Kod
         color: Renk
+        comment: Yorum
+        company: Şirket
+        completed: Tamamlandı
+        configuration: Ayarlar
+        confirmation: Doğrulama
+        confirmation_title: Doğrulama
+        contact_request_details: İletişim isteği ayrıntıları
+        contact_request_show: İletişim isteği
+        contact_requests: İletişim istekleri
+        contact_topics: İletişim konuları
+        contain_variants: Varyasyonlar içerir
+        content: İçerik
         countries: Ülkeler
+        country: Ülke
+        country_details: Ülke bilgileri
+        coupon: Kupon
         coupon_based: Kupona dayalı
         coupons: Kuponlar
         create: Oluştur
+        create_a_new_address: Yeni bir adres oluşturun
+        create_archetype: Arketipi oluştur
+        create_contact_request: Yeni iletişim oluştur
+        create_contact_topic: İletişim konusu oluştur
+        create_country: Ülke ekle
+        create_currency: Para birimi oluştur
+        create_group: Grup oluştur
+        create_imagine_block: Oluşturma bloğu hayal
+        create_locale: Dil oluştur
+        create_menu: Menü Oluştur
+        create_menu_node: Menü düğümü oluştur
+        create_new_coupon: Yeni kupon oluşturmak
+        create_new_page: Yeni sayfa oluştur
+        create_new_report: Yeni rapor oluştur
+        create_option: Seçenek oluştur
+        create_order: Sipariş oluştur
+        create_payment: Ödeme oluştur
+        create_payment_method: Ödeme yöntemi oluştur
+        create_product: Ürün oluştur
+        create_product_attribute: Ürün özniteliğini oluştur
+        create_promotion: Promosyon oluşturmak
+        create_redirect_route: Yeniden yönlendirme yol oluşturma
+        create_report: Rapor Oluştur
+        create_route: Rota Oluştur
+        create_shipping_category: Nakliye Kategori oluşturma
+        create_shipping_method: Kargo yöntemi oluştur
+        create_simple_block: Basit blok oluştur
+        create_slideshow_block: Slayt gösterisi Bloğu Oluştur
+        create_string_block: Dize Bloğu Oluştur
+        create_tax_category: Vergi kategorisi oluştur
+        create_tax_rate: Vergi oranı oluştur
+        create_taxon: Sınıf oluştur
+        create_variant: Değişken oluşturmak
+        create_zone: Bölge oluşturma
+        created_at: Oluşturulma tarihi
+        creating_a_new_imagine_block: Yeni bir hayal engeli oluşturma
+        creating_a_new_simple_block: Yeni bir basit blok oluşturma
+        creating_a_new_slideshow_block: Yeni Slayt gösterisi bloğu oluşturma
+        creating_a_new_string_block: Yeni dize bloğu oluşturma
+        creating_menu: Menü oluşturuluyor
+        creating_menu_node: Menü düğümü oluşturma
+        creating_new_page: Yeni sayfa oluşturma
+        creating_redirect_route: Yeniden yönlendirme yol oluşturma
+        creating_route: Rota oluşturma
+        creation_date: Oluşturma tarihi
+        creation_time: Oluşturma zamanı
         currencies: Para birimi
-        my_account: Hesabım
-        home: Ana Sayfa
+        currency: Kur
+        current_orders: Şimdiki Sipariş
+        current_password: Geçerli parola
+        current_promotions: Mevcut promosyonlar
+        current_stock: Mevcut stok
+        customer: Müşteri
+        customer_details: Müşteri detayları
+        customer_not_notified: Müşteri haberdar değil
+        customer_notified: Müşteri bildirim
+        customer_orders: Müşteri siparişleri
+        customers: Müşteriler
+        customers_list_of_all_customers_in_store: 'Müşteriler <small>Mağazanın tüm müşterilerinin listesi</small>'
         dashboard: Kontrol Paneli
+        data: Veri Merkezi
+        default_billing_address: Varsayılan fatura adresi
         default_currency: Varsayılan para birimi
+        default_shipping_address: Varsayılan teslim adresi
         delete: Sil
+        delete_image: Resim silmek
+        deleted: Silindi
         description: Açıklama
+        disable: Devre dışı
         edit: Düzenle
+        edit_group: Grubu düzenle
+        edit_locale: Dil düzenle
+        edit_my_address: Adresi düzenle
+        edit_report: Raporu Düzenle
+        edit_your_personal_information: Kişisel bilgilerinizi düzenleyin
+        editing_archetype: Arketipi düzenleme
+        editing_attribute: Öznitelik düzenleme
+        editing_channel: Kanal düzenleme
+        editing_contact_request: İletişim isteğini düzenleme
+        editing_contact_topic: İletişim konusu düzenleme
+        editing_country: Ülke düzenleme
+        editing_coupon: Kupon düzenleme
+        editing_currency: Para birimi düzenleme
+        editing_customer: Müşteri düzenleme
+        editing_email: E-posta düzenleme
+        editing_imagine_block: Düzenleme hayal blok
+        editing_menu: Menü düzenleme
+        editing_menu_node: Menü düğümü düzenleme
+        editing_option: Seçenek düzenle
+        editing_order: Sipariş düzenleme
+        editing_page: Sayfa düzenleme
+        editing_payment: Ödeme düzenle
+        editing_payment_method: Ödeme yöntemi düzenle
+        editing_permission: İzne düzenleme
+        editing_product: Ürün Düzenleme
+        editing_promotion: Promosyon düzenleme
+        editing_redirect_route: Yönlendirilen rotayı düzenleme
+        editing_role: Rol düzenleme
+        editing_route: Rotayı düzenleme
+        editing_shipment: Kargo düzenle
+        editing_shipping_category: Nakliye Kategori düzenleme
+        editing_shipping_method: Kargo yöntemi düzenle
+        editing_simple_block: Basit blok düzenleme
+        editing_slideshow_block: Slayt gösterisi bloğu düzenleme
+        editing_string_block: Dize bloğu düzenleme
+        editing_tax_category: Vergi kategorisi düzenle
+        editing_taxon: Sınıf düzenle
+        editing_user: Kullanıcı düzenleme
+        editing_variant: Değişken düzenleme
+        editing_zone: Bölge düzenleme
+        email: E-posta
+        email_templates: E-posta şablonları
+        emails: E-postalar
         empty: Boş
+        enable: Etkin
         enabled: Etkin
+        end_date: Bitiş Tarihi
+        ends_at: Sona erdi
+        error: Hata
+        exchange_rate: Döviz Kuru
         exclusive: Özel
+        existing_customer: Varolan Müşteri
         expires_at: Süre sonu: 
+        failed: Başarısız oldu
+        female: Bayan
         filter: Filtrele
+        first_name: Ad
+        firstname: Ad
+        fulfill: Stokta
+        gateway: Ağ Geçidi
+        general_info: Genel Bilgi
+        general_settings: Genel Ayarlar
+        generate: Oluştur
         generate_coupons: Kuponlar oluşturmak
+        generate_variants: Varyasyon oluştur
+        generating_coupons: Kuponlar oluşturmak
+        go_to_dashboard: Arayüze git
+        grand_total: Toplam
+        groups: Gruplar
+        guest: Konuk
         guest_customer: Konuk müşteri
-        item: Öğe
+        hide_deleted: Silineni gizle
+        home: Ana Sayfa
+        id: ID
+        identifier: Tanımlayıcı
+        image: Resim
+        images: Resimleri
+        imagine_blocks: Blok hayal
+        index_of_all_configured_locales: Tüm yapılandırılmış diller
+        information: Bilgilendirme
         inventory: Stok
+        inventory_here_you_can_see_current_stock_levels: 'Stok <small>burada güncel stok değerlerini görebilirsiniz</small>'
+        inventory_index: Stok
+        inventory_state: Stok durumu
+        inventory_tracking: Stok takibi
+        invoice: Fatura
+        item: Öğe
+        items: Öğeler
+        items_total: Toplam tutar
+        label: Etiket
+        last_login: Son oturum açma tarihi
+        last_name: Soyad
+        last_update: Son gücelleme
+        last_week_orders: Geçen hafta siparişleri
+        last_week_revenue: Geçen hafta gelir
+        lastname: Soyad
+        latest_orders: Son siparişler
+        links: Linkler
         list_coupons: Kupon Listeleri
         locales: Diller
+        lock: Kiliti
+        login: Giriş
+        login_button: Giriş
+        login_sylius_store: 'Oturum açma <small>Sylius saklamak</small>'
+        logout: Çıkış yap
+        male: Bay
+        manage: Yönet
+        manage_adjustments: Ayarları yönet
+        manage_attributes: Özellikleri yönet
+        manage_channels: Kanallarını yönet
+        manage_countries: Ülkeleri yönetme
+        manage_emails: E-postaları yönet
+        manage_options: Seçeneklerini yönet
+        manage_orders: Siparişleri yönet
+        manage_payments: Ödemeleri yönet
+        manage_products: Ürünleri yönet
+        manage_promotions: 'Promosyonları  yönetmek'
+        manage_shipments: Kargoları yönetme
+        manage_shipping_categories: Nakliye kategorilerini Yönet
+        manage_shipping_methods: Kargo yöntemlerini yönet
+        manage_tax_categories: Vergi kategorilerini yönet
+        manage_tax_rates: Vergi oranlarını yönet
+        manage_zones: Bölgeleri yönetme
+        marketing: Pazarlama
+        members: Üyeler
+        menu_nodes: Menü düğümleri
+        menus: Menü
+        message: Mesaj
+        method: Yöntem
+        modified: Değiştirildi
+        my_account: Hesabım
+        n_a: Veri yok
+        name: Ad
         new: Yeni
+        new_archetype: Yeni arketipi
+        new_comment_posted_on_order: Yeni yorum sipariş yayınlanmıştır
+        new_contact_request: Yeni iletişim isteği
+        new_contact_topic: Yeni iletişim konusu
         new_country: Yeni ülke
         new_currency: Yeni para birimi
+        new_order: Yeni sipariş
+        new_password: Yeni parola
+        new_payment: Yeni ödeme
+        new_payment_method: Yeni ödeme yöntemi
+        new_permission: Yeni izin
+        new_product: Yeni ürün
+        new_product_attribute: Yeni ürün özniteliği
+        new_product_option: Yeni ürün seçeneği
+        new_product_variant: Yeni ürün değişik
+        new_promotion: Yeni promosyon
+        new_role: Yeni rol
+        new_shipping_category: Yeni nakliye Kategori
+        new_shipping_method: Yeni kargo yöntemi
         new_tax_category: Yeni vergi kategorisi
+        new_tax_rate: Yeni vergi oranı
+        new_taxon: Yeni sınıf
+        new_user: Yeni Kullanıcı
+        new_zone: Yeni bölge
+        newest_products: Yeni Ürünler
+        next: Sonraki
         "no": false
+        no_comment: Yorum yok
+        no_default_billing_address: Hiçbir varsayılan fatura adresi ayarlanmadı
+        no_default_shipping_address: Hiçbir varsayılan teslim adresi ayarlanmadı
+        no_description: Açıklama yok
         no_promotion: Uygulanan hiçbir promosyon yoktur
+        no_results: Sonuç bulunamadı
+        no_shipping_category: Kargo kategorisi yok
         no_shipping_charges: Uygulanan hiçbir kargo ücreti yoktur
+        no_short_description: '<i>Kısa açıklama yok</i>'
+        no_sku: SKU yok
+        no_tax_category: Vergi kategorisi yok
         no_taxes: Vergi uygulanmadı
+        not_available_in_your_country: 'sylius -> ürün_sizin bölgenizde mevcut değil'
+        number: Sayı
+        number_of_orders: Toplam sipariş
+        oauth_provider: OAuth sağlayıcı
+        options: Ayarlar
+        order: Sipariş
+        order_comment_name: Sipariş yorumu
+        order_comments: Sipariş yorumları
+        order_confirmation_name: Sipariş Onayı
         order_details: Sipariş ayrıntıları
+        order_item_product: Öğe
+        order_state: Sipariş durumu
+        order_summary: Sepetiniz
+        order_value: Sipariş değeri
+        orders: Siparişler
+        out_of_stock: Stokta yok
+        overview_of_your_store: Mağaza genel bakış
+        page: Sayfa
+        pages: Sayfalar
+        parent: Üst
+        password: Şifre
+        payment: Ödeme
+        payment_details: Ödeme detayları
+        payment_method: Ödeme tipi
+        payment_methods: Ödeme Yöntemleri
+        payment_state: Ödeme durumu
+        payments: Ödemeler
+        pending: Beklemede
+        permissions: İzinler
+        phone_number: Telefon numarası
+        place_order: Siparişi ver
+        placed_at: tarihinde sipariş verildi
+        postcode: Posta kodu
+        presentation: Sunum
+        previous: Önceki
         price: Fiyatı
+        pricing: Fiyatlandırma
+        priority: Öncelik
+        processing: İşlem Yapılıyor
+        product: Ürün
+        product_archetypes: Ürün arketipler
+        product_association_types: Ürün ilişki türleri
+        product_attributes: Ürün Öznitelikleri
+        product_details_viewing_product_product: 'Ürün ayrıntıları <small>Gösterilen ürün "<strong>%product%</strong>"</small>'
+        product_options: Ürün seçenekleri
+        product_reviews: Ürün Yorumları
+        products: Ürünler
+        products_categorized_as_name: 'Ürünler  "%name%" olarak kategorilendirildi'
+        products_categorized_under_taxon_taxon: 'Ürünler <small>"%taxon%" sınıfının altında kategorilendirilmiş</small>'
+        products_index_of_all_products_in_your_store: 'Ürünler <small>Mağazada bulunan tüm ürünlerin dizini</small>'
+        promotion_coupons: Kuponlar
+        promotion_details: Promosyon detayları
+        promotion_total: Promosyon toplamı
+        promotions: Promosyonlar
+        province: Eyalet
+        provinces: İller
+        qty: Adet
+        qty_max: Maks miktar
+        qty_min: Min miktar
         quantity: Adet
         ready: Hazır
+        recent_customers: Son müşteriler
+        recent_orders: Son siparişler
+        recent_users: Son kullanıcılar
+        redirect_routes: Yönlendirme yolları
+        refunded: İade Edildi
+        register: Üye ol
+        register_button: Üye ol
+        registration_create_an_account_in_store: 'Kayıt <small>Mağazada bir hesap oluştur</small>'
+        registration_date: Kayıt tarihi
+        release_inventory: Stoğa girdi
+        remember_me: Beni hatırla
+        remove_attribute: Özniteliğini kaldır
+        report_details: Rapor ayrıntıları
+        reports: Raporlar
+        retail_price: Perakende fiyatı
+        return: İade
         returned: İade Edildi
+        revert: Döndür
+        reviews: Yorumlar
+        roles: Roller
+        routes: Rotalar
+        rules: Kurallar
+        sales: Satışlar
+        sales_this_month: Satışlar
+        save: Kaydet
         save_changes: Değişiklikleri kaydet
+        scope: Kapsam
+        search: Arama
+        security_settings: Güvenlik ayarları
+        set_as_default_billing_address: Fatura adresini varsayılan olarak ayarla
+        set_as_default_shipping_address: Teslim adresini varsayılan olarak ayarla
+        ship: Kargo
+        shipment_confirmation_name: Sevk İrsaliyesi onay
+        shipment_details: Kargo ayrıntıları
+        shipment_state: Teslimat durumu
+        shipments: Kargo İşlemleri
         shipped: Kargolandı
+        shipping_address: Teslimat adresi
+        shipping_categories: Kargo Kategorileri
+        shipping_category: Teslimat kategorisi
+        shipping_charges: Kargo ücretleri
+        shipping_method: Gönderim metodu
+        shipping_method_details: Kargo yöntemi ayrıntıları
         shipping_methods: Gönderim metodları
+        shipping_state: İl
+        shipping_total: Toplam kargo ücreti
+        shop_by: benim alışveriş
+        show_all: Hepsini göster
+        show_deleted: Silineni göster
+        sign_in_to_the_store_or_create_new_account: 'Mağazaya giriş yapın <small>veya kayıt olun</small>'
+        simple_blocks: Basit bloklar
+        sku: Stok Kodu
+        slideshow: Slayt gösterisi
+        slideshow_blocks: Slayt gösterisi blokları
+        start_date: Başlangıç Tarihi
+        starts_at: "' Dan başlar"
+        state: Durum
+        street: Sokak
+        string_blocks: Dize blokları
+        subject: Konu
         success: Başarılı
+        support: DESTEK
+        tax_category: Vergi kategorisi
+        tax_rate_details: Vergi oranı ayrıntıları
+        tax_rates: Vergi Oranları
+        tax_total: Toplam KDV
+        taxation_categories: Vergi kategorileri
+        taxation_settings: Vergilendirme Ayarları
+        taxes: Vergiler
+        taxons: Kategoriler
+        there_are_no_images_for_this_product: Bu ürün için hiçbir resim yok
+        there_are_no_options_for_this_product: Bu ürün için hiçbir seçenek yok
+        there_are_no_taxons_for_this_product: Bu ürün için bir sınıf yok
+        this_months_statistics: Bu ayki istatistikler
+        this_product_has_no_attributes_defined: Bu ürün tanımlanan öznitelikleri yoktur
+        title: Başlık
+        topic: Konu
+        total: Toplam
+        total_orders: Toplam siparişler
+        total_qty: Toplam miktar
+        total_registrations: Toplam kayıtlar
+        tracking_number: Kargo takip numarası
+        type: Türü
+        unavailable: 'sylius -> ürün -> kullanılamıyor'
+        unit_price: Birim fiyatı
+        unknown: Bilinmiyor
+        unlock: Kilidini Aç
+        updating_tax_rate: Vergi oranı güncelleme
+        usage_limit: Kullanım sınırı
+        used: kullanılmış
+        user_confirmation_name: Kullanıcı onayı
+        user_details: Kullanıcı detayları
+        username: Kullanıcı adı
+        users_list_of_all_users_registered_in_store: '<small>Tüm kullanıcıların listesini deposunda kayıtlı</small> kullanıcılar'
+        variant: Çeşit
+        variant_selection_method: Varyant seçme yöntemi
+        variants: Türevleri
+        view: Görüntüle
+        view_more: Detayları göster
+        void: Boş
+        volume_based_pricing: Temel birim fiyat
+        warning: Dikkat
+        welcome_to_your_space: Alanınıza hoş geldiniz
         "yes": true
+        you_are_customer_since: den beri müşterisiniz
+        you_have_no_new_orders: Yeni bir spiariş yoktur
+        your_cart_is_empty: Sepetiniz boş
+        your_last_5_orders: Son 5 Siparişiniz
+        your_products: Ürünleriniz
+        zone: Bölge
+        zone_details: Bölge ayrıntıları
+        zones: Bölgeler

@@ -10,61 +10,463 @@ sylius:
         option:
             name: Название
     ui:
+        account_panel_outline: Воспользуйтесь всеми возможными преимуществами для просмотра, отслеживания и управления своих данных
+        action: Действие
         actions: Действия
+        add: Добавить
+        add_action: Добавить действие
+        add_attributes: Добавить атрибуты
+        add_channel: Добавить канал
         add_coupon: Добавить купон
+        add_image: Добавить изображение
+        add_member: Добавить
+        add_new_email: Добавить новый адрес электронной почты
+        add_province: Добавить регион
+        add_rule: Добавить правило
         add_to_cart: Добавить в корзину
+        add_value: Добавить значение
+        adding_new_email: Добавление новых сообщений электронной почты
+        adding_new_locale: Добавление нового языка
+        additional_information: Дополнительная информация
+        addressing_step: Адрес
+        adjustments: Корректировки
+        administration: Управление
+        administration_dashboard: Административная панель
+        all_your_addresses: sylius.account.address.list
+        amount: Сумма
+        archetypes: Прототипы
+        association: Взаимосвязи
+        association_types: Типы взаимосвязей
+        assortment: Ассортимент
+        attributes: Атрибуты
+        author: Автор
+        availability: Доступность
+        available_on: Доступен с
+        available_on_demand: Доступно по запросу
+        available_until: Доступно до
+        back: Назад
+        backorder: Не выполнен
+        balance_due: Сумма к оплате
+        bill_to: Адрес для оформления счета
+        billing_address: Адрес для выставления счета
+        blocks: Блоки
+        body: Содержание
+        browse_products: Обзор продукции
+        build: Построить
+        building_product_from_archetype: Построить продукт из архетипа
+        calculator: Калькулятор
         cancel: Отмена
         cancelled: Отменён
+        categorization: Каталоги
+        category: Категория
         change_your_password: Change my password
+        channel: Канал
+        channels: Каналы
         checkout: Сверка
-        your_cart_is_empty: Ваша корзина пуста
-        image: Изображение
-        qty: Количество
+        choose_file: Выбрать файл
+        city: Город
         clear_cart: Очистка корзины
-        summary: Резюме
+        code: Код
         color: Цвет
+        comment: Комментарий
+        company: Компания
+        completed: Завершен
+        configuration: Конфигурация
+        confirmation: Подтверждение
+        confirmation_title: Подтверждение
+        contact_request_details: Детали контактного запроса
+        contact_request_show: Запрос контактов
+        contact_requests: Запросы контактов
+        contact_topics: Темы обращений
+        contain_variants: Содержит варианты
+        content: Контент
         countries: Страны
+        country: Страна
+        country_details: Информация о стране
+        coupon: Купон
         coupon_based: Основана на купонах
         coupons: sylius.breadcrumb.promotion_coupon.index
         create: Добавить
+        create_a_new_address: sylius.account.address.create
+        create_archetype: Создать архетип
+        create_association_type: Создать тип взаимосвязи
+        create_contact_request: Создать контактный запрос
+        create_contact_topic: Создать тему контакта
+        create_country: Добавить поселок, село
+        create_currency: Добавить валюту
+        create_customer: Создание клиента
+        create_group: Создать группу
+        create_imagine_block: Создать блок-изображение
+        create_locale: Добавить язык
+        create_menu_node: Создание пункта меню
+        create_new_coupon: Создать новый купон
+        create_new_page: Создать новую страницу
+        create_order: Заказать
+        create_payment: Создать платеж
+        create_payment_method: Создать метод оплаты
+        create_product: Создать товар
+        create_promotion: Создать акцию
+        create_shipping_category: Создать категорию доставки
+        create_shipping_method: Создать способ доставки
+        create_simple_block: Создать простой блок
+        create_slideshow_block: Создать слайд-шоу блок
+        create_string_block: Создать строковой блок
+        create_tax_category: Создать налоговую категорию
+        create_tax_rate: Создать налоговую ставку
+        create_taxon: Создать категорию
+        create_variant: Создать вариант
+        create_zone: Создать новую зону
+        created_at: created at
+        creating_a_new_imagine_block: Создание нового блока-изображения
+        creating_a_new_simple_block: Создание нового простого блока
+        creating_a_new_slideshow_block: Создание нового слайд-шоу блока
+        creating_a_new_string_block: Создание нового стрового блока
+        creation_date: По дате создания
+        creation_time: Дата заказа
         currencies: Валюты
-        my_account: Моя учетная запись
-        home: Домой
+        currency: Валюта
+        current_orders: Текущие заказы
+        current_password: Текущий пароль
+        current_promotions: Список рекламных акций
+        current_stock: Количество на складе
+        customer: Клиент
+        customer_details: Информация о клиенте
+        customers: Клиенты
+        customers_list_of_all_customers_in_store: 'Клиенты <small>список всех клиентов магазина</small>'
         dashboard: Приборная панель
+        data: Данные
         date: Дата
+        default_billing_address: sylius.account.address.default.billing
         default_currency: Валюта по умолчанию
         default_locale: Локаль по умолчанию
+        default_shipping_address: sylius.account.address.default.shipping
         delete: sylius.account.address.action.delete
+        delete_image: Удалить товар
+        deleted: ﻿Удалено
         description: Описание
         edit: Редактировать
+        edit_association_type: Редактировать тип взаимосвязи
+        edit_group: Редактировать группу
+        edit_locale: Редактировать язык
+        edit_my_address: sylius.account.address.update
+        edit_your_personal_information: Edit my personal information
+        editing_archetype: Редактировать прототип
+        editing_channel: Редактировать каналы
+        editing_contact_request: Редактировать контактный запрос
+        editing_contact_topic: Редактирование темы контакта
+        editing_country: Редактировать страну
+        editing_coupon: Редактирование купона
+        editing_currency: Изменение валюты
+        editing_imagine_block: Редактирование блока изображения
+        editing_order: Редактирование заказа
+        editing_payment: Редактирование платежа
+        editing_payment_method: Изменение способа метода оплаты
+        editing_product: Редактирование товара
+        editing_promotion: Редактирование акции
+        editing_shipment: Редактирование отгрузки
+        editing_shipping_category: Редактировать категорию доставки
+        editing_shipping_method: Редактировать способ доставки
+        editing_simple_block: Редактирование простого блока
+        editing_slideshow_block: Редактирование слайд-шоу блока
+        editing_string_block: Редактирование строкового блока
+        editing_tax_category: Редактирование налоговой категории
+        editing_taxon: Редактировать подкатегорию
+        editing_user: Редактировать пользователя
+        editing_variant: Редактирование вариантов
+        editing_zone: Редактирование зоны
+        email: Email
+        email_templates: Шаблоны электронной почты
+        emails: Emails
         enabled: Активен
+        end_date: Дата окончания
+        ends_at: Конец
+        enjoy_all_the_features_that_are_available_on_your_personal_space_to_view_track_and_manage_all_your_data: Воспользуйтесь всеми возможными преимуществами для просмотра, отслеживания и управления своих данных
+        error: Ошибка
+        exchange_rate: Обменный курс
         exclusive: Эксклюзив
+        existing_customer: Существующий клиент
         expires_at: Истекает
+        failed: Провален
         filter: Фильтр
+        first_name: Имя
+        firstname: Имя
+        fulfill: Завершён
+        gateway: Терминал
+        general_info: Общая информация
+        general_settings: Общие настройки
+        generate: Сгенерировать
         generate_coupons: Генерировать купоны
+        generate_variants: Генерировать варианты
+        generating_coupons: Генерирование купонов
+        go_to_dashboard: Перейти в панель управления
+        grand_total: Всего в корзине
+        groups: Группы
+        guest: Гость
         guest_customer: Гость
-        item: Товар
+        hello_name: 'Здравствуйте, <b>%name%</b>'
+        hide_deleted: Скрыть удаленные
+        home: Домой
+        id: ID
+        image: Изображение
+        images: Изображения
+        imagine_blocks: Блоки изображений
+        index_metadata: Метаданные
+        index_of_all_configured_locales: Список всех настроенных языков
+        information: Информация
         inventory: Запасы
+        inventory_here_you_can_see_current_stock_levels: 'Склад <small>Здесь вы можете увидеть уровень запасов</small>'
+        inventory_index: Запасы
+        inventory_state: inventory state
+        inventory_tracking: Отслеживание продаж
+        invoice: Счет-фактура
+        item: Товар
+        items_total: Всего товаров
+        label: Заголовок
+        last_login: Последний вход
+        last_name: Фамилия
+        last_update: Последнее изменение
+        last_week_orders: Заказы прошлой недели
+        last_week_revenue: Доход прошлой недели
+        lastname: Фамилия
+        latest_orders: Заказы
+        links: Ссылки
         list_coupons: Список купонов
         locales: Языки
+        login: Вход
+        login_button: Вход
+        login_sylius_store: 'Вход в <small>магазин Sylius</small>'
+        logout: Выход
+        main_taxon: Основной таксон
+        male: Мужской
+        manage: Управление
+        manage_channels: Управление каналами
+        manage_countries: Управление странами
+        manage_customers: Управление клиентами
+        manage_options: Настройка опций
+        manage_orders: Управление заказами
+        manage_payments: Платежи
+        manage_products: Редактировать товары
+        manage_promotions: Управление рекламными акциями
+        manage_shipments: Управление посылками
+        manage_shipping_categories: Редактировать категорию доставки
+        manage_shipping_methods: Редактировать способы доставки
+        manage_tax_categories: Редактировать налоговые категории
+        manage_tax_rates: Налоговые ставки
+        manage_zones: Редактирование зон
+        marketing: Маркетинг
+        members: Области
+        menu_nodes: Узлы меню
+        menus: Элементы меню
+        message: Сообщение
+        metadata_index: Метаданные
+        method: Способ
+        modified: modified
+        my_account: Моя учетная запись
+        n_a: Н/Д
+        name: Название
         new: Новый
+        new_archetype: Новый архетип
+        new_comment_posted_on_order: Новый комментарий, добавленный к заказу
+        new_contact_request: Новый контактный запрос
+        new_contact_topic: Новая тема контакта
         new_country: Добавить страну
         new_currency: Новая валюта
+        new_order: Новый заказ
+        new_password: Новый пароль
+        new_payment: Новый платеж
+        new_payment_method: Новый метод оплаты
+        new_product: Добавить товар
+        new_product_variant: Новый вариант продукта
+        new_promotion: Новая акция
+        new_shipping_category: Новая категория доставки
+        new_shipping_method: Новый способ доставки
         new_tax_category: Создать налоговую категорию
+        new_tax_rate: Создание налоговой ставки
+        new_taxon: Новая категория
+        new_user: Новый пользователь
+        new_zone: Новая зона
+        newest_products: Новейшие продукты
+        next: Следующее
         "no": false
+        no_default_billing_address: sylius.account.address.default.no_billing
+        no_default_shipping_address: sylius.account.address.default.no_shipping
+        no_description: Нет описания
         no_promotion: Без скидки
+        no_shipping_category: Нет категории доставки
         no_shipping_charges: Без оплаты за пересылку
+        no_short_description: '<i>Нет краткого описания</i>'
+        no_sku: '<i>Без ИПТ</i>'
+        no_tax_category: Нет налоговой категории
         no_taxes: Без НДС
+        not_available_in_your_country: Недоступно в вашей стране
+        number: Номер
+        number_of_orders: Количество заказов
+        options: Список опций
+        order: заказ
+        order_comment_name: Комментарий к заказу
+        order_confirmation_name: Подтверждение заказа
         order_details: Детали вашего заказа
+        order_item_product: Товар
+        order_summary: Ваш заказ
+        order_value: Стоимость заказа
+        orders: Заказы
+        original_price: Исходная цена
+        out_of_stock: Нет на складе
+        overview_of_your_store: Обзор вашего магазина
+        pages: Страницы
+        parent: Родитель
+        password: Пароль
+        payment: Оплата
+        payment_details: Детали платежа
+        payment_method: Метод платежа
+        payment_methods: Список методов оплаты
+        payment_mode: Способ оплаты
+        payment_state: Статус платежа
+        payments: Платежи
+        pending: Ожидает
+        permissions: Права доступа
+        phone_number: Контактный телефон
+        place_order: Заказать
+        placed_at: Создан
+        postcode: Индекс
+        presentation: Публичное название
+        previous: Предыдущее
         price: Цена
+        pricing: ценообразование
+        processing: Обрабатывается
+        product: Товар
+        product_archetypes: Прототипы продукта
+        product_association_index: Взаимосвязи
+        product_association_type_index: Типы взаимосвязи
+        product_association_types: Типы взаимосвязей продуктов
+        product_details_viewing_product_product: 'Детали товара <small>Просмотр товара "<strong>%product%</strong>"</small>'
+        products: Товары
+        products_categorized_as_name: 'Товары категории «%name%»'
+        products_categorized_under_taxon_taxon: 'Товары <small>категории "%taxon%"</small>'
+        products_index_of_all_products_in_your_store: 'Товары <small>Список всех товаров в вашем магазине</small>'
+        promotion_coupons: sylius.breadcrumb.promotion_coupon.index
+        promotion_details: Детали акции
+        promotion_total: Сумма скидки
+        promotions: Рекламные акции
+        province: Район
+        provinces: Области
+        qty: Количество
         quantity: Количество
+        rating: Рейтинг
         ready: Готов
+        recent_customers: Последние клиенты
+        recent_orders: Недавние заказы
+        recent_users: Последние пользователи
+        redirect_routes: Перенаправление маршрутов
+        refunded: Возвращено
+        register: Регистрация
+        register_button: Регистрация
+        registration_date: Дата регистрации
+        release_inventory: Инвентаризация выпуска
+        remember_me: Запомнить меня
+        reports: Отчеты
+        retail_price: Розничная цена
+        return: Возврат
         returned: Возвращено
+        roles: Роли
+        routes: Маршруты
+        rules: Правила
+        sales: Продажи
+        sales_this_month: Продажи
+        save: Сохранить
         save_changes: Сохранить изменения
+        scope: Область
+        search: Поиск
+        security_settings: Настройки безопасности
+        set_as_default_billing_address: Сделать адресом для выставления счёта по-умолчанию
+        set_as_default_shipping_address: Сделать адресом доставки по-умолчанию
+        ship: Доставка
+        shipment_confirmation_name: Подтверждение посылки
+        shipment_details: Детали посылки
+        shipment_mode: Способ доставки
+        shipment_state: Статус доставки
+        shipments: Посылки
         shipped: Доставлено
+        shipping_address: Адрес доставки
+        shipping_categories: Список категорий доставки
+        shipping_category: Категория доставки
+        shipping_charges: Затраты на доставку
+        shipping_method: Способ доставки
+        shipping_method_details: Детали способа доставки
         shipping_methods: Методы доставки
+        shipping_state: Статус доставки
+        shipping_total: Стоимость доставки
+        shop_by: Каталог товаров
+        show_all: Показать все
+        show_deleted: Показать удаленные
         sign_in: Войти
+        sign_in_to_the_store_or_create_new_account: 'Войти <small>или зарегистрироваться</small>'
         sign_out: Выйти
+        simple_blocks: Простые блок
+        sku: Идентификатор товарной позиции
+        slideshow: Слайд-шоу
+        slideshow_blocks: Слайд-шоу блоки
+        start_date: Дата начала
+        starts_at: Старт
+        state: Cтатус
         status: Статус
+        street: Улица
+        string_blocks: Текстовые блоки
         success: Успешно
+        summary: Резюме
+        support: Поддержка
+        tax_category: Категория налогов
+        tax_rate_details: Детали налоговой ставки
+        tax_rates: sylius.breadcrumb.tax_rate.index
+        tax_total: Сумма налогов
+        taxation_categories: Налоговые категории
+        taxation_settings: Настройки налогооблажения
+        taxes: Налоги
+        taxons: Налоги
+        there_are_no_archetypes_defined: Не опреленно ни одного архетипа
+        there_are_no_blocks_to_display: Нет блоков для отображения
+        there_are_no_channels_configured: Нет настроенных каналов
+        there_are_no_contact_requests_to_display: Нет контактных запросов для отображения
+        there_are_no_contact_topics_to_display: Нет тем контактов для отображения
+        there_are_no_countries_configured: Ни одна страна не была настроена
+        there_are_no_currencies_to_display: Нет валюты для отображения
+        there_are_no_images_for_this_product: Нет изображений для данного товара
+        there_are_no_options_for_this_product: Нет опций для данного товара
+        there_are_no_taxons_for_this_product: У этого товара не заданы категории
+        this_months_statistics: Статистика за этот месяц
+        title: Название
+        topic: Тема
+        total: Итого
+        total_orders: Заказов в этом месяце
+        total_qty: Общее количество
+        total_registrations: Регистраций в этом месяце
+        tracking_number: Номер для отслеживания
+        translations: ﻿Переводы
+        type: Тип
+        unavailable: Недоступен
+        unit_price: Цена
+        unknown: Неизвестен
+        update: Обновить
+        updating_tax_rate: Редактирование налоговой ставки
+        usage_limit: Предел использования
+        used: Использован
+        user_confirmation_name: Подтверждение пользователя
+        user_details: Детали пользователя
+        username: Логин
+        users_list_of_all_users_registered_in_store: 'Пользователи <small>список всех пользователей зарегистрированных в магазине</small>'
+        variant: Вариант
+        variant_selection_method: Метод выбора вариантов
+        view_more: Посмотреть больше
+        void: Пустой
+        warning: Предупреждение
+        welcome_to_your_space: Добро пожаловать в ваш кабинет
         "yes": true
+        you_are_customer_since: Вы являетесь клиентом с
+        you_have_no_addresses_defined: Вы не указали ни одного адреса
+        you_have_no_new_orders: У вас нет новых заказов
+        your_cart_is_empty: Ваша корзина пуста
+        your_last_5_orders: 5 последних заказов
+        your_products: Товары
+        zone: Зона
+        zone_details: Информация о зоне
+        zones: Зоны
