@@ -48,4 +48,18 @@ final class StaticContentContext implements Context
     {
         $this->staticContentPage->assertPageHasContent($staticContent);
     }
+
+    /**
+     * @Then /^(that static content) should not be found there$/
+     */
+    public function thatPageShouldNotBeFound(StaticContent $staticContent)
+    {
+        try {
+            $this->iShouldSeeThatStaticContent($staticContent);
+        } catch (\Exception $exception) {
+            return;
+        }
+
+        throw new \Exception(sprintf('Static content "%s" was found but it should not!', $staticContent->getTitle()));
+    }
 }

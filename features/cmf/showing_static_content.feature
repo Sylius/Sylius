@@ -12,3 +12,10 @@ Feature: Showing static content
         Given the store has static content "Krzysztof Krawczyk" with name "krzysztof-krawczyk"
         When I access static content with name "krzysztof-krawczyk"
         Then I should see that static content
+
+    @ui
+    Scenario: Preventing from showing unpublished static content
+        Given the store has static content "Krzysztof Krawczyk" with name "krzysztof-krawczyk"
+        And it is not published yet
+        When I access static content with name "krzysztof-krawczyk"
+        Then that static content should not be found there
