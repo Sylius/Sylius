@@ -49,9 +49,6 @@ swiftmailer:
     disable_delivery: true
     logging: true
 
-sylius_channel:
-    fake_channel_support: true
-
 sylius_payment:
     gateways:
         cc: Credit Card

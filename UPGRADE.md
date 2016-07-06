@@ -1,6 +1,12 @@
 UPGRADE
 =======
 
+## From 0.19 to 1.0.0-alpha
+
+### ChannelBundle
+
+* Renamed configuration option `sylius_channel.fake_channel_support` to `syliuc_channel.debug`
+
 ## From 0.18 to 0.19.x
 
 ### Core and CoreBundle

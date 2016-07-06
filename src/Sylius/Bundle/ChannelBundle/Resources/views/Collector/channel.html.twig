@@ -12,7 +12,7 @@
         {% for channel in collector.channels %}
             <div class="sf-toolbar-info-piece">
                 <b>{{ channel.name }}</b>
-                <span>{{ channel.hostname }} (<a href="?_channel_code={{ channel.code }}">change</a>)</span>
+                <span>{{ channel.hostname }}{% if collector.isChannelChangeSupported %} (<a href="?_channel_code={{ channel.code }}">change</a>){% endif %}</span>
             </div>
         {% endfor %}
     {% endset %}
