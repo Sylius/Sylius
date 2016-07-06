@@ -19,6 +19,9 @@ sylius:
             min_length: 'Kod CVV karty kredytowej musi zawierać przynajmniej {{ limit }} cyfr.'
         expiry_year:
             not_blank: Proszę wybrać rok wygaśnięcia.
+    payment:
+        currency_code:
+            not_valid: Wprowadzony kod waluty jest nieprawidłowy.
     payment_method:
         gateway:
             not_blank: Proszę wybrać bramkę płatności.

@@ -8,17 +8,85 @@ sylius:
         option:
             name: Tên
     ui:
-        image: Hình ảnh
-        qty: Số lượng
+        add_province: Thêm tỉnh
+        channels: Kênh
+        city: Thành phố
+        code: Mã
+        company: Công ty
+        confirmation: Xác nhận
+        confirmation_title: Xác nhận
         countries: Quốc gia
+        coupon: Phiếu giảm giá
         create: Tạo
+        create_country: Tạo quốc gia
+        created_at: Được tạo vào lúc
+        current_orders: Đơn đặt hàng hiện tại
+        customer: Khách hàng
+        customers: Khách hàng
         dashboard: Bảng tin
+        deleted: Đã bị xoá
+        error: Lỗi
+        existing_customer: Khách hàng hiện tại
+        general_settings: Cài đặt chung
+        generate: Tạo
+        groups: Nhóm
+        id: ID
+        image: Hình ảnh
+        images: Hình ảnh
+        information: Thông tin
         inventory: Hàng tồn kho
+        inventory_index: Hàng tồn kho
+        last_update: Cập nhật lần cuối
+        last_week_orders: Đơn đặt hàng tuần trước
+        last_week_revenue: Doanh thu tuần trước
+        links: Liên kết
         locales: Miền địa phương
+        login: Đăng nhập
+        login_button: Đăng nhập
+        logout: Đăng xuất
+        manage: Quản lý
+        manage_countries: Quản lý quốc gia
+        marketing: Tiếp thị
+        members: Thành viên
+        menus: Menu
+        name: Tên
         new_country: Tạo quốc gia mới
+        newest_products: Sản phẩm mới nhất
         "no": false
+        number_of_orders: Số lượng đơn đặt hàng
+        options: Tùy chọn
+        order_value: Giá trị đơn đặt hàng
+        orders: Đơn đặt hàng
+        pages: Trang
+        password: Mật khẩu
+        payment_methods: Phương thức thanh toán
+        payments: Thanh toán
+        place_order: Đặt hàng
+        postcode: Mã bưu chính
         price: Giá
+        products: Sản phẩm
+        promotions: Chương trình khuyến mãi
+        province: Tỉnh
+        provinces: Tỉnh
+        qty: Số lượng
         quantity: Số lượng
+        register: Đăng ký
+        register_button: Đăng ký
+        reports: Báo cáo
+        roles: Vai trò
+        save: Lưu lại
+        scope: Phạm vi
+        search: Tìm kiếm
+        shipments: Vận chuyển
+        shipping_categories: Thể loại
+        shipping_method: Phương pháp vận chuyển
         shipping_methods: Phương thức vận chuyển
+        sign_in_to_the_store_or_create_new_account: 'Đăng nhập vào <small>hoặc tạo tài khoản mới</small>'
+        sku: MÃ SẢN PHẨM
+        street: Đường Phố
         success: Thành công
+        taxes: Thuế
+        title: Tiêu đề
+        total: Tổng cộng
+        warning: Cảnh báo
         "yes": true

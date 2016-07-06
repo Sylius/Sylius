@@ -9,50 +9,341 @@ sylius:
         option:
             name: Nume
     ui:
+        action: Acţiune
         actions: Acțiuni
+        add: Adăugați
+        add_action: Adaugă acţiune
         add_coupon: Adaugă cod promoțional
+        add_image: Adaugă imagine
+        add_member: Adaugă membru
+        add_province: Adăugare județ
+        add_rule: Adaugă regulă
         add_to_cart: Adaugă în coș
+        add_value: Adaugă valoare
+        adding_new_locale: Adăugare localizare nouă
+        addressing_step: Adrese
+        administration: Administrare
+        administration_dashboard: Panou de administrare
+        all_your_addresses: Toate adresele
+        amount: Valoare
+        assortment: Sortiment
+        attributes: Atribute
+        author: Autor
+        availability: Disponibilitate
+        available_on: Disponibil din
+        available_on_demand: Disponibil la comandă
+        back: Înapoi
+        balance_due: Sold datorat
+        billing_address: Adresa de facturare
+        blocks: Block-uri
+        body: Corp
+        browse_products: Frunzărește produse
+        build: Generare
+        calculator: Calculator
         cancel: Anulează
         cancelled: Anulată
+        categorization: Categorizare
+        category: Categorie
         change_your_password: Modificare parolă
         checkout: Trimite comanda
-        your_cart_is_empty: Coșul este gol
-        image: Imagine
-        qty: Cantitate
+        choose_file: Alege fișier
+        city: Oraș
         clear_cart: Golește coșul
+        code: Cod
         color: Culoare
+        company: Firmă
+        completed: Finalizată
+        configuration: Configurare
+        confirmation: Confirmare
+        confirmation_title: Confirmare
+        contain_variants: Conţine variante
+        content: Conţinut
         countries: Țări
+        country: Țară
+        country_details: Detalii țară
+        coupon: Cod promoțional
         coupon_based: Bazat pe cod promoțional
         coupons: Coduri promoționale
         create: Creează
-        my_account: Contul meu
-        home: Pagina principală
+        create_a_new_address: Creeare adresă nouă
+        create_country: Adăugare țară
+        create_group: Creează grup
+        create_locale: Creeare localizare
+        create_new_coupon: Creeare cod promoțional
+        create_new_page: Creeare pagină nouă
+        create_order: Creeare comandă
+        create_payment: Creeare plată
+        create_payment_method: Creeare metodă de plată
+        create_product: Creează produs
+        create_promotion: Creeare promoție
+        create_shipping_category: Creeare categorie de livrare
+        create_shipping_method: Creeare metodă de livrare
+        create_tax_category: Creeare categorie de taxă
+        create_tax_rate: Creeare taxă
+        create_taxon: Creeare categorie
+        create_variant: Creeare variantă de produs
+        create_zone: Creeare zonă
+        created_at: Creat la
+        creation_time: Data creării
+        currency: Monedă
+        current_orders: Comenzi curente
+        current_password: Parola actuală
+        current_promotions: Promoţii actuale
+        current_stock: Stoc curent
         dashboard: Panou de administrare
+        data: Date
+        default_billing_address: Adresă de facturare implicită
         default_currency: Moneda implicită
+        default_shipping_address: Adresă de livrare implicită
         delete: Șterge
+        delete_image: Șterge imagine
+        deleted: Șters
         description: Descriere
         edit: Editare
+        edit_group: Editare grup
+        edit_locale: Editare setări localizare
+        edit_my_address: Modificare adresă
+        edit_your_personal_information: Editaţi informaţiile personale
+        editing_country: Modificare țară
+        editing_coupon: Editare cod promoțional
+        editing_order: Modificare comandă
+        editing_payment: Editare plată
+        editing_payment_method: Editare metodă de plată
+        editing_product: Editare produs
+        editing_promotion: Editare promoție
+        editing_shipment: Editare livrare
+        editing_shipping_category: Editare categorie de livrare
+        editing_shipping_method: Editare metodă de livrare
+        editing_tax_category: Editare categorie de taxă
+        editing_taxon: Editare categorie
+        editing_user: Editare utilizator
+        editing_variant: Editare variantă
+        editing_zone: Editare zonă
+        email: Adresă e-mail
         enabled: Activat
+        ends_at: Se termină la
+        error: Eroare
+        exchange_rate: Cursul de schimb
+        existing_customer: Client existent
+        failed: Eșuată
         filter: Filtrează
+        first_name: Prenume
+        firstname: Prenume
+        fulfill: Vânzare
+        gateway: Gateway
+        general_info: Informaţii generale
+        general_settings: Setări generale
+        generate: Generează
         generate_coupons: Generare coduri promoționale
-        item: Produs
+        generate_variants: Generează variante
+        generating_coupons: Generare coduri promoționale
+        grand_total: Total
+        groups: Grupuri
+        hide_deleted: Ascunde cele şterse
+        home: Pagina principală
+        id: Id
+        image: Imagine
+        images: Imagini
+        index_of_all_configured_locales: Indicele tuturor localizărilor configurate
+        information: Informație
         inventory: Inventar
+        inventory_here_you_can_see_current_stock_levels: 'Inventar <small>Aici puteţi vedea stocul actual</small>'
+        inventory_index: Inventar
+        inventory_state: Stare inventar
+        inventory_tracking: Urmărire inventar
+        invoice: Factură
+        item: Produs
+        items_total: Produse
+        label: Label
+        last_login: Ultima autentificare
+        last_name: Nume
+        last_update: Data modificării
+        last_week_orders: Comenzile de săptămâna trecută
+        last_week_revenue: Veniturile de săptămâna trecută
+        lastname: Nume
+        latest_orders: Ultimele comenzi
         list_coupons: Listare coduri promoționale
         locales: Setări regionale
+        login: Conectaţi-vă
+        login_button: Conectaţi-vă
+        logout: Deconectare
+        manage: Gestionare
+        manage_countries: Gestionare ţări
+        manage_options: Gestionare opţiuni
+        manage_orders: Gestionare comenzi
+        manage_payments: Gestionare plăţi
+        manage_products: Gestionare produse
+        manage_promotions: Gestionare promoții
+        manage_shipments: Gestionare livrări
+        manage_shipping_categories: Gestionare categorii de livrare
+        manage_shipping_methods: Gestionare metode de livrare
+        manage_tax_categories: Gestionare categorii de taxe
+        manage_tax_rates: Gestionare taxe
+        manage_zones: Gestionarea zonelor
+        members: Membri
+        menu_nodes: Noduri meniu
+        message: Mesaj
+        method: Metodă de livrare
+        modified: Modificat
+        my_account: Contul meu
+        name: Nume
         new: Nouă
         new_country: Țară nouă
+        new_order: Comandă nouă
+        new_password: Parolă nouă
+        new_payment: Plată nouă
+        new_payment_method: Metodă nouă de plată
+        new_product: Produs nou
+        new_product_variant: Variantă de produs nouă
+        new_promotion: Promoție nouă
+        new_shipping_category: Categorie nouă de livrare
+        new_shipping_method: Metodă de livrare nouă
         new_tax_category: Categorie de taxă nouă
+        new_tax_rate: Taxă nouă
+        new_taxon: Categorie nouă
+        new_user: Utilizator nou
+        new_zone: Zonă nouă
+        newest_products: Produse noi
+        next: Pasul următor
         "no": false
+        no_default_billing_address: Nu există adresă de facturare implicită
+        no_default_shipping_address: Nu există adresă de livrare implicită
+        no_description: Fără descriere
         no_promotion: Fără reduceri
+        no_shipping_category: Nici o categorie de livrare
         no_shipping_charges: Nu se aplică taxe pentru livrare
+        no_short_description: '<i>Fără descriere scurtă</i>'
+        no_sku: Fără SKU
+        no_tax_category: Nici o categorie de taxă
         no_taxes: Nu se aplică taxe
+        not_available_in_your_country: Indisponibil în ţara dumneavoastră
+        number: Număr
+        number_of_orders: Număr comenzi
+        options: Opţiuni
+        order: Detalii comandă
         order_details: Detaliile comenzii dumneavoastră
+        order_item_product: Produs
+        order_summary: Sumar comandă
+        order_value: Valoarea comenzii
+        orders: Comenzi
+        out_of_stock: Nu este pe stoc
+        overview_of_your_store: Privire de ansamblu asupra magazinului dumneavoastră
+        pages: Pagini
+        parent: Părinte
+        password: Parolă
+        payment: Plată
+        payment_method: Modul de plată
+        payment_methods: Metode de plată
+        payment_state: Status plată
+        payments: Plăți
+        pending: În așteptare
+        phone_number: Număr de telefon
+        place_order: Plasare comandă
+        placed_at: Plasată la
+        postcode: Cod poștal
+        presentation: Prezentare
+        previous: Pasul precedent
         price: Preț
+        pricing: Calculator
+        processing: În curs de procesare
+        product: Produs
+        product_details_viewing_product_product: 'Detalii produs <small>Vizualizează produs "<strong>%product%</strong>"</small>'
+        products: Produse
+        products_categorized_as_name: 'Produse categorizate ca "%name%"'
+        products_categorized_under_taxon_taxon: 'Produse <small>din categoria "%taxon%"</small>'
+        products_index_of_all_products_in_your_store: 'Produse <small>Lista tuturor produselor din magazin</small>'
+        promotion_coupons: Coduri promoționale
+        promotion_details: Detalii promoție
+        promotion_total: Total promoții
+        promotions: Promoţii
+        province: Județ
+        provinces: Județe
+        qty: Cantitate
         quantity: Cantitate
         ready: Gata
+        recent_orders: Comenzi recente
+        recent_users: Utilizatori recenți
+        refunded: Rambursată
+        register: Creează cont nou
+        register_button: Creează cont nou
+        registration_date: Data înregistrării
+        release_inventory: Golește stocurile
+        retail_price: Preţ
+        return: Returnare
         returned: Returnată
+        roles: Roluri
+        routes: Rute
+        rules: Reguli
+        sales: Vânzări
+        sales_this_month: Vânzări
+        save: Salvează
         save_changes: Salvează modificările
+        scope: Domeniul de aplicare
+        search: Căutare
+        set_as_default_billing_address: Setare ca adresă de facturare implicită
+        set_as_default_shipping_address: Setare ca adresă de livrare implicită
+        ship: Expediere
+        shipment_details: Detalii livrare
+        shipment_state: Status livrare
+        shipments: Livrări
         shipped: Expediată
+        shipping_address: Adresa de livrare
+        shipping_categories: Categorii de livrare
+        shipping_category: Categoria de livrare
+        shipping_charges: Cost livrare
+        shipping_method: Metoda de livrare
+        shipping_method_details: Detalii metodă de livrare
         shipping_methods: Metode de livrare
+        shipping_state: Status livrare
+        shipping_total: Total livrare
+        shop_by: Filtrează după
+        show_all: Afişare toate
+        show_deleted: Arată cele şterse
+        sign_in_to_the_store_or_create_new_account: 'Logați-vă <small>sau creați-vă cont nou</small>'
+        sku: SKU
+        slideshow: Slideshow
+        starts_at: Începe la
+        state: Status
+        street: Adresă
         success: Succes
+        tax_category: Categoria de taxă
+        tax_rate_details: Detalii taxă
+        tax_rates: Impozite si taxe
+        tax_total: Total taxe
+        taxation_categories: Categorii de taxe
+        taxation_settings: Setări taxe
+        taxes: Taxe
+        taxons: Categorii
+        there_are_no_images_for_this_product: Nu există imagini pentru acest produs
+        there_are_no_options_for_this_product: Nu există opțiuni pentru acest produs
+        there_are_no_taxons_for_this_product: Fără categorie
+        title: Titlu
+        topic: Subiect
+        total_orders: Număr comenzi
+        total_qty: Cantitate totală
+        total_registrations: Total înregistrări
+        tracking_number: Număr de urmărire
+        type: Tip
+        unavailable: Indisponibil
+        unit_price: Preț unitar
+        unknown: Necunoscută
+        updating_tax_rate: Editare taxă
+        usage_limit: Limita de utilizare
+        used: Folosită
+        user_details: Detalii utilizator
+        username: Nume de utilizator
+        users_list_of_all_users_registered_in_store: 'Utilizatori <small>Lista tuturor utilizatorilor înregistraţi</small>'
+        variant: Variantă
+        variant_selection_method: Metoda de selectare a variantei
+        view_more: Detalii
+        void: Nulă
+        warning: Atenție
+        welcome_to_your_space: Bine ați venit
         "yes": true
+        you_are_customer_since: Sunt client din
+        you_have_no_new_orders: Nu aveți nici o comandă nouă
+        your_cart_is_empty: Coșul este gol
+        your_products: Produsele dumneavoastră
+        zone: Zonă
+        zone_details: Detalii zonă
+        zones: Zone

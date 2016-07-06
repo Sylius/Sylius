@@ -8,27 +8,208 @@ sylius:
         option:
             name: Ime
     ui:
+        add_action: Dodajte akciju
         add_coupon: Dodaj kupon
+        add_image: Dodaj sliku
+        add_member: Dodajte člana
+        add_province: Dodaj provinciju
+        add_rule: Dodajte pravilo
         add_to_cart: Dodaj u korpu
+        addressing_step: Adresa
+        administration: Administracija
+        administration_dashboard: Administrativna tabla
+        all_your_addresses: Sve vaše adrese
+        assortment: Asortiman
+        availability: Dostupnost
+        available_on: Dostupno
+        back: Nazad
+        balance_due: Dugovni saldo
         cancel: Otkaži
-        your_cart_is_empty: Korpa je prazna
-        qty: Količina
+        categorization: Kategorizacija
+        choose_file: Fajl
+        city: Grad
         clear_cart: Izpraznite korpu
+        company: Kompanija
+        confirmation: Potvrda
+        confirmation_title: Potvrda
         countries: Zemlje
+        country_details: Detalji zemlje
         create: Kreiraj
+        create_a_new_address: Kreiraj novu adresu
+        create_country: Dodaj zemlju
+        create_new_coupon: Novi kupon
+        create_order: Kreirajte narudžbinu
+        create_payment: Kreiraj plaćanje
+        create_payment_method: Kreirajte metod plaćanja
+        create_product: Kreiraj proizvod
+        create_promotion: Kreirajte promociju
+        create_shipping_category: Nova kategorija slanja
+        create_shipping_method: Novi način dostave
+        create_tax_category: Kreirajte kategoriju poreza
+        create_tax_rate: Kreirajte porez
+        create_taxon: Kreiraj kategoriju
+        create_variant: Kreiraj varijantu
+        create_zone: Kreirajte zonu
+        created_at: napravljeno
+        creation_time: Kreirano
+        current_orders: Trenutne narudžbine
+        current_promotions: Trenutne promocije
         dashboard: Komandna Tabla
+        default_billing_address: Podrazumevana adresa plaćanja
+        default_shipping_address: Podrazumevana adresa isporuke
         delete: Obrisati
+        delete_image: Izbrišite sliku
+        deleted: Obrisano
         edit: Izmeniti
+        edit_my_address: Izmeni moju adresu
+        editing_country: Izmenite zemlju
+        editing_coupon: Ažuriranje kupona
+        editing_order: Ažuriranje narudžbine
+        editing_payment: Ažuriranje plaćanja
+        editing_payment_method: Ažuriranje metoda plaćanja
+        editing_product: Ažuriranje proizvoda
+        editing_promotion: Ažuriranje promocije
+        editing_shipping_category: Ažuriranje kategorije slanja
+        editing_shipping_method: Ažuriranje načina dostave
+        editing_tax_category: Ažuriranje kategorije poreza
+        editing_taxon: Ažuriranje kategorizacije
+        editing_variant: Ažuriranje varijante
+        editing_zone: Ažuriranje zone
+        error: Greška
+        existing_customer: Postojeća mušterija
+        general_info: Opste informacije
+        general_settings: Generalna podešavanja
+        generate: Generiši
         generate_coupons: Generiši kupone
+        generate_variants: Generiši varijante
+        generating_coupons: Generisanje kupona
+        grand_total: Sveukupno
+        id: ID
+        information: Obaveštenje
+        inventory_here_you_can_see_current_stock_levels: 'Lager <small>Pregled stanja zaliha</small>'
+        inventory_state: stanje zaliha
+        inventory_tracking: Pracenje zaliha
+        invoice: Faktura
+        items_total: Ukupno proizvoda
+        last_login: Poslednje prijavljivanje
+        last_update: poslednja izmena
+        last_week_orders: Prošlonedeljne porudžbine
+        last_week_revenue: Prošlonedeljna zarada
         list_coupons: Lista kupona
+        login: Prijavi se
+        login_button: Prijavi se
+        logout: Odjavi se
+        manage: Upravljajte
+        manage_countries: Upravljaj zemljama
+        manage_options: Upravljaj opcijama
+        manage_orders: Upravljajte narudžbinama
+        manage_products: Upravljajte proizvodima
+        manage_promotions: Upravljajte promocijama
+        manage_shipments: Upravljajte pošiljkama
+        manage_shipping_categories: Upravljajte kategorijama slanja
+        manage_shipping_methods: Upravljajte načinima dostave
+        manage_tax_categories: Upravljajte kategorijama poreza
+        manage_tax_rates: Upravljajte poreskim stopama
+        manage_zones: Upravljajte zonama
+        members: Članovi
+        method: metod
+        modified: izmenjeno
+        name: Ime
         new_country: Nova zemlja
+        new_order: Nova narudžbina
+        new_payment: Novo plaćanje
+        new_payment_method: Novi metod plaćanja
+        new_product: Novi proizvod
+        new_product_variant: Nova varijanta proizvoda
+        new_promotion: Nova promocija
+        new_shipping_category: Nova kategorija slanja
+        new_shipping_method: Novi način dostave
         new_tax_category: Nova kategorija poreza
+        new_tax_rate: Novi porez
+        new_taxon: Nova kategorija
+        new_zone: Nova zona
+        newest_products: Najnoviji proizvodi
+        next: Sledeća
         "no": false
+        no_default_billing_address: Nema podrazumevane adrese plaćanja
+        no_default_shipping_address: Nema podrazumevane adrese isporuke
+        no_description: Nema opisa
         no_promotion: Nijedna promocija nije dodata
         no_shipping_charges: Nisu dodati troškovi porudžbine
+        no_short_description: '<i>Nema kratkog opisa</i>'
+        no_sku: '<i>Nema SKU</i>'
+        no_tax_category: Nema kategorije poreza
         no_taxes: Nisu dodati porezi
+        number_of_orders: Broj narudžbina
+        order: narudžbina
+        order_summary: Rezime narudžbine
+        order_value: Vrednost narudžbine
+        orders: Narudžbine
+        out_of_stock: Nema na lageru
+        overview_of_your_store: Pregled prodavnice
+        payment_state: Stanje plaćanja
+        payments: Plaćanja
+        phone_number: Broj telefona
+        place_order: Kreirajte narudžbinu
+        postcode: Poštanski broj
+        previous: Predhodna
+        product: Proizvod
+        product_details_viewing_product_product: 'Detalji proizvoda <small>Pregled proizvoda "<strong>%product%</strong>"</small>'
+        products: Poroizvodi
+        products_categorized_under_taxon_taxon: 'Proizvodi <small>Kategorisani u "%taxon%"</small>'
+        products_index_of_all_products_in_your_store: 'Proizvodi <small>Svi proizvodi u prodavnici</small>'
+        promotion_details: Detalji promocije
+        promotion_total: Ukupno promocije
+        promotions: Promocije
+        province: Pokrajina
+        provinces: Provincije
+        qty: Količina
         quantity: Količina
+        recent_orders: Poslednje narudžbine
+        recent_users: Poslednji korisnici
+        register: Registracija
+        register_button: Registracija
+        retail_price: Prodajna cena
+        save: Sačuvaj
         save_changes: Sačuvaj izmene
+        scope: Adresa isporuke
+        set_as_default_billing_address: Postaviti kao podrazumevanu adresu plaćanja
+        set_as_default_shipping_address: Postaviti kao podrazumevanu adresu isporuke
+        shipment_details: Detalji pošiljke
+        shipment_state: Stanje pošiljke
+        shipments: Pošiljke
+        shipping_categories: Kategorije slanja
+        shipping_charges: Cena isporuke
+        shipping_method: Način dostave
+        shipping_method_details: Detalji nalina dostave
         shipping_methods: Načini dostave
+        shipping_state: Stanje pošiljke
+        shipping_total: Ukupno isporuka
+        shop_by: Kupujte po
+        sign_in_to_the_store_or_create_new_account: 'Ulogujete se <small>ili napravite novi nalog</small>'
+        slideshow: Galerija
+        street: Ulica
         success: Uspeh
+        tax_category: Kategorija proizvoda
+        tax_rate_details: Detalji poreza
+        tax_rates: Poreske stope
+        tax_total: Ukupno porezi
+        taxation_categories: Kategorije poreza
+        taxation_settings: Podešavanja poreza
+        taxes: Porezi
+        there_are_no_images_for_this_product: Nema slika za ovaj proizvod
+        there_are_no_options_for_this_product: Nema opcija za ovaj proizvod
+        there_are_no_taxons_for_this_product: sylius.product.no_taxons
+        total: Ukupno
+        updating_tax_rate: Ažuriranje poreske stope
+        used: Korišćeno
+        user_details: Detalji korisnika
+        username: Krosnicko ime
+        users_list_of_all_users_registered_in_store: 'Korisnici <small>Lista svih registrovanih korisnika</small>'
+        view_more: Više
+        warning: Upozorenje
         "yes": true
+        you_have_no_new_orders: Nema novih narudžbina
+        your_cart_is_empty: Korpa je prazna
+        zone_details: Detalji zone
+        zones: Zone

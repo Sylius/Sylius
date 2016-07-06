@@ -6,8 +6,43 @@ sylius:
         option:
             name: Name
     ui:
-        image: Bild
+        add_member: Mitglied hinzufügen
+        add_province: Bundesland/Kanton hinzufügen
+        billing_address: Rechnungsadresse
+        body: Body
+        city: Stadt
+        code: Code
+        company: Firma
+        coupon: Gutschein
         default_currency: Standardwährung
+        email: E-Mail
         enabled: Aktiviert
+        first_name: Vorname
+        firstname: Vorname
+        id: ID
+        image: Bild
+        label: Bezeichnung
+        members: Mitglieder
+        message: Nachricht
+        name: Name
         "no": false
+        number: Nummer
+        payment_state: Zahlungsstatus
+        phone_number: Telefonnummber
+        postcode: Postleitzahl
+        presentation: Präsentation
+        province: Kanton
+        provinces: Kantone
+        roles: Rollen
+        scope: Umfang
+        shipping_category: Versandkategorie
+        sku: Bestandseinheit
+        street: Strasse / Nr.
+        tax_category: Steuerkategorie
+        title: Titel
+        topic: Betreff
+        unit_price: Stückpreis
+        variant: Variante
+        variant_selection_method: Varianten
         "yes": true
+        zone: Zone

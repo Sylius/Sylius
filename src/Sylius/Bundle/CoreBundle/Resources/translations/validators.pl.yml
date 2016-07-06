@@ -5,6 +5,12 @@ sylius:
     checkout:
         shipping_method:
             not_blank: Proszę wybrać metodę dostawy.
+    customer:
+        currency_code:
+            not_valid: Wprowadzony kod waluty jest nieprawidłowy.
+    order:
+        currency_code:
+            not_valid: Wprowadzony kod waluty jest nieprawidłowy.
     locale:
         code:
             not_blank: Proszę podać kod ISO języka.
