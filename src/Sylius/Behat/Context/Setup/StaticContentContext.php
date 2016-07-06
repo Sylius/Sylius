@@ -85,4 +85,17 @@ final class StaticContentContext implements Context
 
         $this->sharedStorage->set('static_content', $staticContent);
     }
+
+    /**
+     * @Given the store has static content :title with name :name
+     */
+    public function theStoreHasStaticContentWithName($title, $name)
+    {
+        $staticContent = $this->staticContentExampleFactory->create(['title' => $title, 'name' => $name]);
+
+        $this->staticContentManager->persist($staticContent);
+        $this->staticContentManager->flush();
+
+        $this->sharedStorage->set('static_content', $staticContent);
+    }
 }

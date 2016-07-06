@@ -11,15 +11,38 @@
 
 namespace Sylius\Bundle\ContentBundle\Doctrine\ODM\PHPCR;
 
+use Doctrine\ODM\PHPCR\DocumentManagerInterface;
+use Doctrine\ODM\PHPCR\Mapping\ClassMetadata;
+use Sylius\Bundle\ContentBundle\Repository\StaticContentRepositoryInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class StaticContentRepository extends DocumentRepository
+class StaticContentRepository extends DocumentRepository implements StaticContentRepositoryInterface
 {
-    public function findStaticContent($id)
+    /**
+     * @var string
+     */
+    private $staticContentPath;
+
+    /**
+     * @param DocumentManagerInterface $dm
+     * @param ClassMetadata $class
+     * @param string $staticContentPath
+     */
+    public function __construct(DocumentManagerInterface $dm, ClassMetadata $class, $staticContentPath)
     {
-        return $this->find('/cms/pages/'.$id);
+        parent::__construct($dm, $class);
+
+        $this->staticContentPath = $staticContentPath;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findOneByName($name)
+    {
+        return $this->find($this->staticContentPath . '/' . $name);
     }
 }

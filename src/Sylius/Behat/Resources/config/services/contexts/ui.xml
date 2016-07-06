@@ -302,5 +302,10 @@
             <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>
+
+        <service id="sylius.behat.context.ui.shop.static_content" class="Sylius\Behat\Context\Ui\Shop\StaticContentContext" scope="scenario">
+            <argument type="service" id="sylius.behat.page.shop.static_content.show" />
+            <tag name="sylius.behat.context" />
+        </service>
     </services>
 </container>

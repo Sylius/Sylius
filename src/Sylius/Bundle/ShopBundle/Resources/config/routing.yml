@@ -41,3 +41,7 @@ sylius_shop_partial_provinces:
         _controller: sylius.controller.province:choiceFormAction
         _sylius:
             template: SyliusShopBundle:Checkout:_provinces.html.twig
+
+# Have to be the last one!
+sylius_shop_static_content:
+    resource: "@SyliusShopBundle/Resources/config/routing/static_content.yml"
