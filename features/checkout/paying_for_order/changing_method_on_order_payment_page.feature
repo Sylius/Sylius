@@ -17,7 +17,11 @@ Feature: Changing the method on the order payment page
     Scenario: Retrying the payment with offline payment
         Given I added product "PHP T-Shirt" to the cart
         And I confirmed my order selecting PayPal Checkout Express payment method
-        But I failed to pay
-        And I am redirected back to the order payment page
-        When I try to pay again with offline method
-        Then I should be redirected back to the thank you page
+        And I am on the thank you page
+        And I go to Paypal to pay for order
+        And I cancel my PayPal payment
+        And I am redirected back to the thank you page
+        And I am notify about cancelling payment
+        When I choose payment method "Offline"
+        And try to pay again
+        Then I should be redirected to the thank you page
