@@ -21,7 +21,6 @@ cmf_content:
         phpcr:
             content_basepath: /cms/pages
             document_class: "%sylius.model.static_content.class%"
-    default_template: "SyliusWebBundle:Frontend/StaticContent:show.html.twig"
 
 cmf_core:
     publish_workflow: true
@@ -53,14 +52,13 @@ cmf_routing:
         routers_by_id:
             router.default: 100
             sylius.dynamic_router: 50
-            cmf_routing.dynamic_router: 20
     dynamic:
-        generic_controller: "cmf_content.controller:indexAction"
         persistence:
             phpcr:
                 enabled: true
                 enable_initializer: true
-                route_basepath: /cms/routes
+                route_basepaths:
+                    - /cms/routes
 
 doctrine_cache:
     providers:
