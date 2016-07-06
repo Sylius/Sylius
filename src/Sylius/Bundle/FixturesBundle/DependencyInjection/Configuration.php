@@ -46,6 +46,24 @@ final class Configuration implements ConfigurationInterface
                     ->prototype('array')
         ;
 
+        $suitesNode
+            ->validate()
+                ->ifArray()
+                ->then(function (array $value) {
+                    if (!isset($value['fixtures'])) {
+                        return $value;
+                    }
+
+                    foreach ($value['fixtures'] as $fixtureKey => &$fixtureValue) {
+                        if (!isset($fixtureValue['name'])) {
+                            $fixtureValue['name'] = $fixtureKey;
+                        }
+                    }
+
+                    return $value;
+                })
+        ;
+
         $this->buildFixturesNode($suitesNode);
         $this->buildListenersNode($suitesNode);
     }
@@ -59,9 +77,11 @@ final class Configuration implements ConfigurationInterface
         $fixturesNode = $suitesNode
             ->children()
                 ->arrayNode('fixtures')
-                    ->useAttributeAsKey('name')
+                    ->useAttributeAsKey('alias')
                     ->prototype('array')
         ;
+
+        $fixturesNode->children()->scalarNode('name')->cannotBeEmpty();
 
         $this->buildAttributesNode($fixturesNode);
     }
