@@ -241,6 +241,7 @@ sylius:
         edit_promotion_coupon: Edit promotion coupon
         edit_report: 'Edit report'
         edit_shipping_method: Edit shipping method
+        edit_static_content: 'Edit static content'
         edit_tax_category: Edit tax category
         edit_tax_rate: Edit tax rate
         edit_taxon: Edit taxon
@@ -460,6 +461,7 @@ sylius:
         new_role: 'New role'
         new_shipping_category: 'New shipping category'
         new_shipping_method: 'New shipping method'
+        new_static_content: 'New static content'
         new_tax_category: 'New tax category'
         new_tax_category: New tax category
         new_tax_rate: 'New tax rate'
@@ -665,6 +667,7 @@ sylius:
         starts_at: 'Starts at'
         starts_with: Starts with
         state: State
+        static_contents: 'Static contents'
         status: Status
         street: Street
         string_blocks: 'String blocks'

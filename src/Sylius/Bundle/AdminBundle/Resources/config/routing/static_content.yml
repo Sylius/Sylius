@@ -26,6 +26,7 @@ sylius_admin_static_content_update:
             vars:
                 templates:
                     form: SyliusAdminBundle:StaticContent:_form.html.twig
+                    breadcrumb: SyliusAdminBundle:StaticContent/Breadcrumb:_update.html.twig
     requirements:
         id: ".+"
 
