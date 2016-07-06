@@ -16,6 +16,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CouponInterface;
+use Sylius\Component\Core\OrderCheckoutTransitions;
 use Sylius\Component\Core\OrderProcessing\OrderRecalculatorInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Core\Model\AddressInterface;
@@ -196,6 +197,8 @@ final class OrderContext implements Context
 
         $order->setBillingAddress($address);
 
+        $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->apply(OrderCheckoutTransitions::TRANSITION_ADDRESS);
+
         $this->objectManager->flush();
     }
 
@@ -210,18 +213,21 @@ final class OrderContext implements Context
         /** @var OrderInterface $order */
         $order = $this->sharedStorage->get('order');
 
-        $this->orderShipmentFactory->processOrderShipment($order);
-        $order->getShipments()->first()->setMethod($shippingMethod);
-
-        $payment = $this->paymentFactory->createWithAmountAndCurrencyCode($order->getTotal(), $order->getCurrencyCode());
-        $payment->setMethod($paymentMethod);
-
-        $order->addPayment($payment);
-
         $order->setShippingAddress($address);
         $order->setBillingAddress($address);
 
-        $this->orderRecalculator->recalculate($order);
+        $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->apply(OrderCheckoutTransitions::TRANSITION_ADDRESS);
+
+        $this->orderShipmentFactory->processOrderShipment($order);
+        $order->getShipments()->first()->setMethod($shippingMethod);
+
+        $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->apply(OrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING);
+
+        $payment = $this->paymentFactory->createWithAmountAndCurrencyCode($order->getTotal(), $order->getCurrencyCode());
+        $payment->setMethod($paymentMethod);
+        $order->addPayment($payment);
+
+        $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->apply(OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT);
 
         $this->objectManager->flush();
     }
@@ -239,14 +245,15 @@ final class OrderContext implements Context
 
         $this->orderShipmentFactory->processOrderShipment($order);
         $order->getShipments()->first()->setMethod($shippingMethod);
-
-        $this->orderRecalculator->recalculate($order);
+        
+        $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->apply(OrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING);
 
         $payment = $this->paymentFactory->createWithAmountAndCurrencyCode($order->getTotal(), $order->getCurrencyCode());
         $payment->setMethod($paymentMethod);
-
         $order->addPayment($payment);
 
+        $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->apply(OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT);
+        
         $this->objectManager->flush();
     }
 
