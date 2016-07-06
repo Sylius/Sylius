@@ -12,10 +12,10 @@ Feature: Viewing details of an order
         And the store allows paying with "Cash on Delivery"
         And I am a logged in customer
         And I placed an order "#00000666"
+        And I bought an "Angel T-Shirt" and an "Angel Mug"
         And I addressed it to "Lucifer Morningstar", "Seaside Fwy", "90802" "Los Angeles" in the "United States"
         And for the billing address of "Mazikeen Lilim" in the "Pacific Coast Hwy", "90806" "Los Angeles", "United States"
         And I chose "Free" shipping method with "Cash on Delivery" payment
-        And I bought an "Angel T-Shirt" and an "Angel Mug"
 
     @ui @javascript
     Scenario: Viewing basic information about an order

@@ -17,7 +17,6 @@ use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CouponInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
-use Sylius\Component\Core\OrderProcessing\OrderRecalculatorInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -90,11 +89,6 @@ final class OrderContext implements Context
     private $customerRepository;
 
     /**
-     * @var OrderRecalculatorInterface
-     */
-    private $orderRecalculator;
-
-    /**
      * @var ObjectManager
      */
     private $objectManager;
@@ -114,7 +108,6 @@ final class OrderContext implements Context
      * @param OrderItemQuantityModifierInterface $itemQuantityModifier
      * @param FactoryInterface $customerFactory
      * @param RepositoryInterface $customerRepository
-     * @param OrderRecalculatorInterface $orderRecalculator
      * @param ObjectManager $objectManager
      * @param StateMachineFactoryInterface $stateMachineFactory
      */
@@ -128,7 +121,6 @@ final class OrderContext implements Context
         OrderItemQuantityModifierInterface $itemQuantityModifier,
         FactoryInterface $customerFactory,
         RepositoryInterface $customerRepository,
-        OrderRecalculatorInterface $orderRecalculator,
         ObjectManager $objectManager,
         StateMachineFactoryInterface $stateMachineFactory
     ) {
@@ -141,7 +133,6 @@ final class OrderContext implements Context
         $this->itemQuantityModifier = $itemQuantityModifier;
         $this->customerFactory = $customerFactory;
         $this->customerRepository = $customerRepository;
-        $this->orderRecalculator = $orderRecalculator;
         $this->objectManager = $objectManager;
         $this->stateMachineFactory = $stateMachineFactory;
     }
@@ -228,6 +219,7 @@ final class OrderContext implements Context
         $order->addPayment($payment);
 
         $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->apply(OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT);
+        $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->apply(OrderCheckoutTransitions::TRANSITION_COMPLETE);
 
         $this->objectManager->flush();
     }
@@ -245,7 +237,7 @@ final class OrderContext implements Context
 
         $this->orderShipmentFactory->processOrderShipment($order);
         $order->getShipments()->first()->setMethod($shippingMethod);
-        
+
         $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->apply(OrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING);
 
         $payment = $this->paymentFactory->createWithAmountAndCurrencyCode($order->getTotal(), $order->getCurrencyCode());
@@ -253,7 +245,8 @@ final class OrderContext implements Context
         $order->addPayment($payment);
 
         $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->apply(OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT);
-        
+        $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->apply(OrderCheckoutTransitions::TRANSITION_COMPLETE);
+
         $this->objectManager->flush();
     }
 
@@ -305,8 +298,6 @@ final class OrderContext implements Context
     {
         $order = $this->addProductVariantToOrder($product->getFirstVariant(), $product->getPrice());
         $order->setPromotionCoupon($coupon);
-
-        $this->orderRecalculator->recalculate($order);
 
         $this->objectManager->flush();
     }
@@ -412,7 +403,7 @@ final class OrderContext implements Context
     public function theCustomerConfirmedThisOrder(OrderInterface $order)
     {
         $this->stateMachineFactory->get($order, OrderTransitions::GRAPH)->apply(OrderTransitions::SYLIUS_CONFIRM);
-       
+
         $this->objectManager->flush();
     }
 
@@ -466,8 +457,6 @@ final class OrderContext implements Context
         $this->itemQuantityModifier->modify($item, $quantity);
 
         $order->addItem($item);
-
-        $this->orderRecalculator->recalculate($order);
 
         return $order;
     }

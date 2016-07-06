@@ -12,8 +12,8 @@ Feature: Prevent deletion of promotions applied to order
         And there is a promotion "Christmas sale"
         And it gives "€3.00" discount to every order
         And there is a customer "john.doe@gmail.com" that placed an order "#00000022"
-        And the customer chose "Free" shipping method to "France" with "Cash on Delivery" payment
         And the customer bought a single "PHP Mug"
+        And the customer chose "Free" shipping method to "France" with "Cash on Delivery" payment
         And I am logged in as an administrator
 
     @domain @ui
