@@ -23,12 +23,12 @@
         "php": "^5.6|^7.0",
 
         "stof/doctrine-extensions-bundle": "~1.1",
-        "sylius/product": "^0.19",
-        "sylius/archetype-bundle": "^0.19",
-        "sylius/attribute-bundle": "^0.19",
-        "sylius/association-bundle": "^0.19",
-        "sylius/variation-bundle": "^0.19",
-        "sylius/resource-bundle": "^0.19",
+        "sylius/product": "^1.0",
+        "sylius/archetype-bundle": "^1.0",
+        "sylius/attribute-bundle": "^1.0",
+        "sylius/association-bundle": "^1.0",
+        "sylius/variation-bundle": "^1.0",
+        "sylius/resource-bundle": "^1.0",
         "symfony/framework-bundle": "^2.8"
     },
     "require-dev": {
@@ -55,7 +55,7 @@
     ],
     "extra": {
         "branch-alias": {
-            "dev-master": "0.19-dev"
+            "dev-master": "1.0-dev"
         }
     }
 }

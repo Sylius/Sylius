@@ -26,7 +26,7 @@
         "zendframework/zend-hydrator": "^1.0|^2.0"
     },
     "require-dev": {
-        "sylius/settings-bundle": "^0.19",
+        "sylius/settings-bundle": "^1.0",
 
         "matthiasnoback/symfony-config-test": "^2.0",
         "matthiasnoback/symfony-dependency-injection-test": "^1.0",
@@ -56,7 +56,7 @@
     ],
     "extra": {
         "branch-alias": {
-            "dev-master": "0.19-dev"
+            "dev-master": "1.0-dev"
         }
     }
 }
