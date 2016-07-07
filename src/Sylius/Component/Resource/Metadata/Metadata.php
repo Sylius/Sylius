@@ -151,6 +151,14 @@ class Metadata implements MetadataInterface
     /**
      * {@inheritdoc}
      */
+    public function getParameters()
+    {
+        return $this->parameters;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getClass($name)
     {
         if (!$this->hasClass($name)) {

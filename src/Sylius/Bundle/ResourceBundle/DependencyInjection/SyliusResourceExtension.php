@@ -42,6 +42,7 @@ class SyliusResourceExtension extends Extension
             'storage.xml',
             'routing.xml',
             'twig.xml',
+            'console.xml',
         ];
 
         foreach ($configFiles as $configFile) {
