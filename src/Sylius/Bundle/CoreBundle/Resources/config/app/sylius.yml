@@ -174,9 +174,6 @@ sylius_payment:
         payment_method:
             classes:
                 repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\PaymentMethodRepository
-    gateways:
-        offline: Offline
-        paypal_express_checkout: Paypal Express Checkout
 
 sylius_pricing:
     forms:
