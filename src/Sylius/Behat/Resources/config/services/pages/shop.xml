@@ -17,6 +17,7 @@
         <import resource="shop/checkout.xml" />
         <import resource="shop/user.xml" />
         <import resource="shop/product.xml" />
+        <import resource="shop/static_content.xml" />
         <import resource="shop/taxon.xml" />
     </imports>
 

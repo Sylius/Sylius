@@ -15,11 +15,10 @@ use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceE
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Parameter;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * Content extension.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class SyliusContentExtension extends AbstractResourceExtension
@@ -38,5 +37,8 @@ class SyliusContentExtension extends AbstractResourceExtension
 
         $imagineBlock = $container->getDefinition('sylius.form.type.imagine_block');
         $imagineBlock->addArgument(new Reference('liip_imagine.filter.configuration'));
+
+        $staticContentRepository = $container->getDefinition('sylius.repository.static_content');
+        $staticContentRepository->addArgument(new Parameter('cmf_content.persistence.phpcr.content_basepath'));
     }
 }

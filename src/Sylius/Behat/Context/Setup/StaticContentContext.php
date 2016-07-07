@@ -13,6 +13,7 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Bundle\ContentBundle\Document\StaticContent;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 
@@ -84,5 +85,28 @@ final class StaticContentContext implements Context
         $this->staticContentManager->flush();
 
         $this->sharedStorage->set('static_content', $staticContent);
+    }
+
+    /**
+     * @Given the store has static content :title with name :name
+     */
+    public function theStoreHasStaticContentWithName($title, $name)
+    {
+        $staticContent = $this->staticContentExampleFactory->create(['title' => $title, 'name' => $name]);
+
+        $this->staticContentManager->persist($staticContent);
+        $this->staticContentManager->flush();
+
+        $this->sharedStorage->set('static_content', $staticContent);
+    }
+
+    /**
+     * @Given /^(it) is not published yet$/
+     */
+    public function itIsNotPublishedYet(StaticContent $staticContent)
+    {
+        $staticContent->setPublishable(false);
+
+        $this->staticContentManager->flush();
     }
 }

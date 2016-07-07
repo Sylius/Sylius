@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ContentBundle\DependencyInjection;
 
+use Sylius\Bundle\ContentBundle\Doctrine\ODM\PHPCR\StaticContentRepository;
 use Sylius\Bundle\ContentBundle\Document\ActionBlock;
 use Sylius\Bundle\ContentBundle\Document\ImagineBlock;
 use Sylius\Bundle\ContentBundle\Document\Menu;
@@ -414,7 +415,7 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->scalarNode('model')->defaultValue(StaticContent::class)->cannotBeEmpty()->end()
                                         ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->cannotBeEmpty(StaticContentRepository::class)->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                         ->arrayNode('form')
                                             ->addDefaultsIfNotSet()

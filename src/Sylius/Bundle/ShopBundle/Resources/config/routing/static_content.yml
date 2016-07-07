@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_shop_static_content_show:
+    path: /{name}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.static_content:showAction
+        _sylius:
+            template: SyliusShopBundle:StaticContent:show.html.twig
+            repository:
+                method: findPublishedOneByName
+                arguments: [$name]
