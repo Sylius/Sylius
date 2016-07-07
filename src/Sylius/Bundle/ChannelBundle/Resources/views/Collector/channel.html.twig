@@ -9,6 +9,11 @@
     {% endset %}
 
     {% set text %}
+        <div class="sf-toolbar-info-piece">
+            <b>Channels</b>
+            <span class="sf-toolbar-status {% if collector.channels is empty %}sf-toolbar-status-red{% endif %}">{{ collector.channels|length }}</span>
+        </div>
+
         {% for channel in collector.channels %}
             <div class="sf-toolbar-info-piece">
                 <b>{{ channel.name }}</b>
