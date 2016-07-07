@@ -67,6 +67,7 @@ suites:
     SequenceBundle: { namespace: Sylius\Bundle\SequenceBundle, psr4_prefix: Sylius\Bundle\SequenceBundle, spec_path: src/Sylius/Bundle/SequenceBundle, src_path: src/Sylius/Bundle/SequenceBundle }
     SettingsBundle: { namespace: Sylius\Bundle\SettingsBundle, psr4_prefix: Sylius\Bundle\SettingsBundle, spec_path: src/Sylius/Bundle/SettingsBundle, src_path: src/Sylius/Bundle/SettingsBundle }
     ShippingBundle: { namespace: Sylius\Bundle\ShippingBundle, psr4_prefix: Sylius\Bundle\ShippingBundle, spec_path: src/Sylius/Bundle/ShippingBundle, src_path: src/Sylius/Bundle/ShippingBundle }
+    ShopBundle: { namespace: Sylius\Bundle\ShopBundle, psr4_prefix: Sylius\Bundle\ShopBundle, spec_path: src/Sylius/Bundle/ShopBundle, src_path: src/Sylius/Bundle/ShopBundle }
     TaxationBundle: { namespace: Sylius\Bundle\TaxationBundle, psr4_prefix: Sylius\Bundle\TaxationBundle, spec_path: src/Sylius/Bundle/TaxationBundle, src_path: src/Sylius/Bundle/TaxationBundle }
     TaxonomyBundle: { namespace: Sylius\Bundle\TaxonomyBundle, psr4_prefix: Sylius\Bundle\TaxonomyBundle, spec_path: src/Sylius/Bundle/TaxonomyBundle, src_path: src/Sylius/Bundle/TaxonomyBundle }
     ThemeBundle: { namespace: Sylius\Bundle\ThemeBundle, psr4_prefix: Sylius\Bundle\ThemeBundle , spec_path: src/Sylius/Bundle/ThemeBundle, src_path: src/Sylius/Bundle/ThemeBundle }

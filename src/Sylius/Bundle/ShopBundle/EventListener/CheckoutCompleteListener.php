@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\EventListener;
+namespace Sylius\Bundle\ShopBundle\EventListener;
 
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -19,7 +19,7 @@ use Webmozart\Assert\Assert;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class StoreOrderIdListener
+class CheckoutCompleteListener
 {
     /**
      * @var SessionInterface
@@ -35,14 +35,14 @@ class StoreOrderIdListener
     }
 
     /**
-     * @param GenericEvent $event
+     * {@inheritdoc}
      */
-    public function setOrderId(GenericEvent $event)
+    public function onCheckoutComplete(GenericEvent $event)
     {
         /** @var OrderInterface $order */
         $order = $event->getSubject();
         Assert::isInstanceOf($order, OrderInterface::class);
-        
+
         $this->session->set('sylius_order_id', $order->getId());
     }
 }
