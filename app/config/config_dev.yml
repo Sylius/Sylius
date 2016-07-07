@@ -28,9 +28,6 @@ monolog:
 swiftmailer:
     disable_delivery: true
 
-sylius_channel:
-    fake_channel_support: true
-
 web_profiler:
     toolbar: true
     intercept_redirects: false
