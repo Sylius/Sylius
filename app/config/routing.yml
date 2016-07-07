@@ -1,17 +1,13 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-sylius_api:
-    resource: "@SyliusApiBundle/Resources/config/routing/main.yml"
-    prefix: /api
+sylius_shop:
+    resource: "@SyliusShopBundle/Resources/config/routing.yml"
 
 sylius_admin:
     resource: "@SyliusAdminBundle/Resources/config/routing.yml"
     prefix: /admin
 
-sylius_shop:
-    resource: "@SyliusShopBundle/Resources/config/routing.yml"
-    prefix: /shop
-    
-sylius_web:
-    resource: "@SyliusWebBundle/Resources/config/routing/main.yml"
+sylius_api:
+    resource: "@SyliusApiBundle/Resources/config/routing/main.yml"
+    prefix: /api

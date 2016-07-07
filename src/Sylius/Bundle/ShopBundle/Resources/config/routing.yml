@@ -49,6 +49,18 @@ sylius_shop_verification:
     prefix: /verify
     resource: "@SyliusShopBundle/Resources/config/routing/verification.yml"
 
+sylius_sitemap:
+    path: /sitemap.{_format}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.sitemap:showAction
+        _format: xml
+    requirements:
+        _format: xml
+
 # Have to be the last one!
 sylius_shop_static_content:
     resource: "@SyliusShopBundle/Resources/config/routing/static_content.yml"
+
+_liip_imagine:
+    resource: "@LiipImagineBundle/Resources/config/routing.xml"

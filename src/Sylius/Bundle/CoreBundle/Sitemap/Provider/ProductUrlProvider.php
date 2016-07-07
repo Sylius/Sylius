@@ -13,7 +13,6 @@ namespace Sylius\Bundle\CoreBundle\Sitemap\Provider;
 
 use Sylius\Bundle\CoreBundle\Sitemap\Factory\SitemapUrlFactoryInterface;
 use Sylius\Bundle\CoreBundle\Sitemap\Model\ChangeFrequency;
-use Sylius\Bundle\CoreBundle\Sitemap\Model\SitemapUrlInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Routing\RouterInterface;
 

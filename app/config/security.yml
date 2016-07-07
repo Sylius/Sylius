@@ -25,23 +25,6 @@ security:
                 target: sylius_admin_login
             anonymous: true
 
-        administration:
-            switch_user: true
-            context:     user
-            pattern:     /administration/.*
-            form_login:
-                provider:     sylius_user_provider
-                login_path:   /administration/login
-                check_path:   /administration/login-check
-                failure_path: /administration/login
-                default_target_path: /administration/dashboard
-                use_forward:  false
-                use_referer:  true
-            logout:
-                path:   /logout
-                target: /administration/login
-            anonymous: true
-
         api:
             pattern:    ^/api
             fos_oauth:  true
@@ -51,7 +34,7 @@ security:
         shop:
             switch_user: { role: ROLE_ALLOWED_TO_SWITCH }
             context: user
-            pattern: /shop/.*
+            pattern: /.*
             form_login:
                 success_handler: sylius.authenticaiton.success_handler
                 failure_handler: sylius.authentication.failure_handler
@@ -73,27 +56,6 @@ security:
                 target: sylius_shop_login
             anonymous: true
 
-        main:
-            switch_user: { role: ROLE_ALLOWED_TO_SWITCH }
-            context:     user
-            pattern:     /.*
-            form_login:
-                provider: sylius_user_provider
-                login_path: /login
-                check_path: /login_check
-                failure_path: /login
-                default_target_path: /
-                use_forward:  false
-                use_referer: true
-            remember_me:
-                key: %secret%
-                name: APP_REMEMBER_ME
-                lifetime: 31536000
-                always_remember_me: true
-                remember_me_parameter: _remember_me
-            logout: true
-            anonymous: true
-
         oauth_token:
             pattern:  ^/oauth/v2/token
             security: false
@@ -104,19 +66,9 @@ security:
 
     access_control:
         - { path: ^/login.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/connect.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/verify, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: "^/account.*", role: ROLE_USER }
-
-        - { path: ^/shop/login.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/shop/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: "/shop/account.*", role: ROLE_USER }
-
-        - { path: ^/administration/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/administration/login-check, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: "^/administration.*", role: ROLE_ADMINISTRATION_ACCESS }
+        - { path: "/account.*", role: ROLE_USER }
 
         - { path: ^/admin/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/login-check, role: IS_AUTHENTICATED_ANONYMOUSLY }

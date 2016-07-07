@@ -110,7 +110,6 @@
         <parameter key="sylius.price_calculator.group_based.class">Sylius\Component\Core\Pricing\GroupBasedCalculator</parameter>
         <parameter key="sylius.price_calculator.zone_based.class">Sylius\Component\Core\Pricing\ZoneBasedCalculator</parameter>
         <parameter key="sylius.collector.core.class">Sylius\Bundle\CoreBundle\Collector\SyliusCollector</parameter>
-        <parameter key="sylius.dynamic_router.class">Symfony\Cmf\Component\Routing\DynamicRouter</parameter>
         <parameter key="sylius.generator.class">Sylius\Bundle\CoreBundle\Routing\SyliusAwareGenerator</parameter>
         <parameter key="sylius.route_provider.class">Sylius\Bundle\CoreBundle\Routing\RouteProvider</parameter>
 
@@ -548,51 +547,6 @@
             <argument>%currency%</argument>
             <argument>%locale%</argument>
             <tag name="data_collector" template="SyliusCoreBundle:Collector:sylius.html.twig" id="sylius_core" priority="-512" />
-        </service>
-
-        <service id="sylius.dynamic_router" class="%sylius.dynamic_router.class%">
-            <argument type="service" id="router.request_context"/>
-            <argument type="service" id="sylius.nested_matcher" />
-            <argument type="service" id="sylius.route_generator" />
-            <argument>%sylius.route_uri_filter_regexp%</argument>
-            <argument type="service" id="event_dispatcher" on-invalid="ignore"/>
-            <argument type="service" id="sylius.route_provider"/>
-            <call method="addRouteEnhancer">
-                <argument type="service" id="sylius.enhancer.controllers_by_class"/>
-                <argument>100</argument>
-            </call>
-            <call method="addRouteEnhancer">
-                <argument type="service" id="sylius.enhancer.sylius_by_class"/>
-                <argument>100</argument>
-            </call>
-        </service>
-        <service id="sylius.nested_matcher" class="%cmf_routing.nested_matcher.class%">
-            <argument type="service" id="sylius.route_provider" />
-            <argument type="service" id="cmf_routing.final_matcher"/>
-        </service>
-        <service id="sylius.route_generator" class="%sylius.generator.class%">
-            <argument type="service" id="sylius.route_provider" />
-            <argument type="service" id="logger" on-invalid="ignore" />
-            <call method="setRouteConfig">
-                <argument>%sylius.route_classes%</argument>
-            </call>
-        </service>
-        <service id="sylius.route_provider" class="%sylius.route_provider.class%">
-            <argument type="service" id="service_container"/>
-            <argument type="service" id="doctrine"/>
-            <argument>%sylius.route_classes%</argument>
-            <call method="setRouteCollectionLimit"><argument>%sylius.route_collection_limit%</argument></call>
-        </service>
-
-        <service id="sylius.enhancer.controllers_by_class" class="%cmf_routing.enhancer.field_by_class.class%">
-            <argument>_sylius_entity</argument>
-            <argument>_controller</argument>
-            <argument>%sylius.controller_by_classes%</argument>
-        </service>
-        <service id="sylius.enhancer.sylius_by_class" class="%cmf_routing.enhancer.field_by_class.class%">
-            <argument>_sylius_entity</argument>
-            <argument>_sylius</argument>
-            <argument>%sylius.sylius_by_classes%</argument>
         </service>
 
         <service id="sylius.sql_logger.purger" class="%sylius.sql_logger.purger.class%" public="false" />
