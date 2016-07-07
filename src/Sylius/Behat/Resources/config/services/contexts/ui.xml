@@ -59,7 +59,7 @@
         </service>
 
         <service id="sylius.behat.context.ui.admin.managing_orders" class="Sylius\Behat\Context\Ui\Admin\ManagingOrdersContext" scope="scenario">
-            <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
+            <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.page.admin.order.index" />
             <argument type="service" id="sylius.behat.page.admin.order.show" />
             <argument type="service" id="sylius.behat.notification_checker" />
@@ -76,7 +76,7 @@
         </service>
 
         <service id="sylius.behat.context.ui.admin.managing_products" class="Sylius\Behat\Context\Ui\Admin\ManagingProductsContext" scope="scenario">
-            <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
+            <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.page.admin.product.create_simple" />
             <argument type="service" id="sylius.behat.page.admin.product.create_configurable" />
             <argument type="service" id="sylius.behat.page.admin.product.index" />
@@ -104,7 +104,7 @@
         </service>
 
         <service id="sylius.behat.context.ui.admin.managing_product_variants" class="Sylius\Behat\Context\Ui\Admin\ManagingProductVariantsContext" scope="scenario">
-            <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
+            <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.page.admin.product_variant.create" />
             <argument type="service" id="sylius.behat.page.admin.product_variant.index" />
             <argument type="service" id="sylius.behat.page.admin.product_variant.update" />
@@ -114,7 +114,7 @@
         </service>
 
         <service id="sylius.behat.context.ui.admin.managing_promotions" class="Sylius\Behat\Context\Ui\Admin\ManagingPromotionsContext" scope="scenario">
-            <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
+            <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.page.admin.promotion.index" />
             <argument type="service" id="sylius.behat.page.admin.promotion.create" />
             <argument type="service" id="sylius.behat.page.admin.promotion.update" />
@@ -140,7 +140,7 @@
         </service>
 
         <service id="sylius.behat.context.ui.admin.managing_shipping_methods" class="Sylius\Behat\Context\Ui\Admin\ManagingShippingMethodsContext" scope="scenario">
-            <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
+            <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.page.admin.shipping_method.index" />
             <argument type="service" id="sylius.behat.page.admin.shipping_method.create" />
             <argument type="service" id="sylius.behat.page.admin.shipping_method.update" />
@@ -194,7 +194,7 @@
         </service>
 
         <service id="sylius.behat.context.ui.channel" class="Sylius\Behat\Context\Ui\ChannelContext" scope="scenario">
-            <argument type="service" id="sylius.behat.shared_storage" container="symfony"/>
+            <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.channel_context_setter" />
             <argument type="service" id="sylius.repository.channel" container="symfony"/>
             <argument type="service" id="sylius.behat.page.admin.channel.create" />
@@ -203,7 +203,7 @@
         </service>
 
         <service id="sylius.behat.context.ui.checkout" class="Sylius\Behat\Context\Ui\CheckoutContext" scope="scenario">
-            <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
+            <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.page.shop.home" />
             <argument type="service" id="sylius.behat.page.shop.checkout.security_step" />
             <argument type="service" id="sylius.behat.page.shop.checkout.addressing_step" />
@@ -221,13 +221,13 @@
         </service>
 
         <service id="sylius.behat.context.ui.customer" class="Sylius\Behat\Context\Ui\CustomerContext" scope="scenario">
-            <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
+            <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.page.admin.customer.show" />
             <tag name="sylius.behat.context" />
         </service>
 
         <service id="sylius.behat.context.ui.paypal" class="Sylius\Behat\Context\Ui\PaypalContext" scope="scenario">
-            <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
+            <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.page.external.paypal_checkout_express" />
             <argument type="service" id="sylius.behat.page.shop.checkout.thank_you" />
             <argument type="service" id="sylius.behat.page.shop.checkout.finalize_step" />
@@ -237,7 +237,7 @@
         </service>
 
         <service id="sylius.behat.context.ui.theme" class="Sylius\Behat\Context\Ui\ThemeContext" scope="scenario">
-            <argument type="service" id="sylius.behat.shared_storage" container="symfony"/>
+            <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.page.admin.channel.index" />
             <argument type="service" id="sylius.behat.page.admin.channel.update" />
             <argument type="service" id="sylius.behat.page.shop.legacy_home" />
@@ -245,7 +245,7 @@
         </service>
 
         <service id="sylius.behat.context.ui.user" class="Sylius\Behat\Context\Ui\UserContext" scope="scenario">
-            <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
+            <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.repository.user" container="symfony" />
             <argument type="service" id="sylius.behat.page.admin.customer.show" />
             <argument type="service" id="sylius.behat.page.shop.account.login" />
@@ -264,7 +264,7 @@
         </service>
 
         <service id="sylius.behat.context.ui.shop.cart" class="Sylius\Behat\Context\Ui\Shop\CartContext" scope="scenario">
-            <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
+            <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.page.shop.cart_summary" />
             <argument type="service" id="sylius.behat.page.shop.product.show" />
             <argument type="service" id="sylius.behat.notification_checker" />
@@ -299,7 +299,7 @@
             <argument type="service" id="sylius.behat.page.shop.home" />
             <argument type="service" id="sylius.behat.notification_checker" />
             <argument type="service" id="sylius.behat.page.shop.account.register" />
-            <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
+            <argument type="service" id="sylius.behat.shared_storage" />
             <tag name="sylius.behat.context" />
         </service>
     </services>

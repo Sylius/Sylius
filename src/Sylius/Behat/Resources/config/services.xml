@@ -67,5 +67,7 @@
         <service id="sylius.behat.current_product_page_resolver" class="Sylius\Behat\Service\Resolver\CurrentProductPageResolver" scope="scenario" public="false">
             <argument type="service" id="sylius.behat.current_page_resolver" />
         </service>
+
+        <service id="sylius.behat.shared_storage" class="Sylius\Behat\Service\SharedStorage" scope="scenario" public="false"/>
     </services>
 </container>

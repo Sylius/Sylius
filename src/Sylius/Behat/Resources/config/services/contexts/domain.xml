@@ -18,7 +18,7 @@
         </service>
 
         <service id="sylius.behat.context.domain.order" class="Sylius\Behat\Context\Domain\OrderContext" scope="scenario">
-            <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
+            <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.repository.order" container="symfony"/>
             <argument type="service" id="sylius.repository.order_item" container="symfony"/>
             <argument type="service" id="sylius.repository.address" container="symfony"/>
@@ -32,7 +32,7 @@
         </service>
 
         <service id="sylius.behat.context.domain.product" class="Sylius\Behat\Context\Domain\ProductContext" scope="scenario">
-            <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
+            <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.repository.product" container="symfony" />
             <argument type="service" id="sylius.repository.product_variant" container="symfony" />
             <argument type="service" id="sylius.repository.product_review" container="symfony" />
@@ -40,13 +40,13 @@
         </service>
 
         <service id="sylius.behat.context.domain.promotion" class="Sylius\Behat\Context\Domain\PromotionContext" scope="scenario">
-            <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
+            <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.repository.promotion" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>
 
         <service id="sylius.behat.context.domain.promotion_coupon" class="Sylius\Behat\Context\Domain\PromotionCouponContext" scope="scenario">
-            <argument type="service" id="sylius.behat.shared_storage" container="symfony" />
+            <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.repository.promotion_coupon" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>
