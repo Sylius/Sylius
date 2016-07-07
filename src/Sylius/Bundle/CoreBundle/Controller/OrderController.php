@@ -21,7 +21,6 @@ use Sylius\Bundle\PayumBundle\Request\GetStatus;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\OrderProcessing\PaymentProcessorInterface;
 use Sylius\Component\Core\OrderProcessing\StateResolverInterface;
 use Sylius\Component\Order\OrderTransitions;
 use Symfony\Component\HttpFoundation\Request;
@@ -133,6 +132,7 @@ class OrderController extends ResourceController
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
         $order = $this->repository->findOneForPayment($orderId);
+        Assert::notNull($order);
 
         $payment = $order->getLastPayment();
         $captureToken = $this->getTokenFactory()->createCaptureToken(

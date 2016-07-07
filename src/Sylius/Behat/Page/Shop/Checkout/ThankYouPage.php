@@ -91,7 +91,7 @@ class ThankYouPage extends SymfonyPage implements ThankYouPageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'instructions' => '#instructions',
+            'instructions' => '#sylius-payment-method-instructions',
             'pay_link' => '#sylius-pay-link',
             'payment_method' => '.item:contains("%name%") input',
             'thank_you' => '#sylius-thank-you',

@@ -490,8 +490,7 @@ final class CheckoutContext implements Context
     {
         Assert::same(
             $this->thankYouPage->getInstructions(),
-            $paymentMethod->getInstructions(),
-            sprintf('Instructions of payment method "%s" are not visible.', $paymentMethod->getName())
+            $paymentMethod->getInstructions()
         );
     }
 

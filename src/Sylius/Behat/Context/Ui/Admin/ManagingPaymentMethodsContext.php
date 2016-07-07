@@ -318,8 +318,7 @@ final class ManagingPaymentMethodsContext implements Context
 
         Assert::same(
             $this->updatePage->getPaymentMethodInstructions($language),
-            $instructions,
-            'Instructions of payment method are invalid'
+            $instructions
         );
     }
 
