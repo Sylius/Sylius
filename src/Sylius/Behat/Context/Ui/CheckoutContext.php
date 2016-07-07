@@ -856,8 +856,9 @@ final class CheckoutContext implements Context
      */
     public function iCompleteAddressingStepWithEmail($email, AddressInterface $address)
     {
-        $this->iSpecifiedTheShippingAddress($address);
+        $this->addressingPage->open();
         $this->iSpecifyTheEmail($email);
+        $this->iSpecifyTheShippingAddressAs($address);
         $this->iCompleteTheAddressingStep();
     }
 
