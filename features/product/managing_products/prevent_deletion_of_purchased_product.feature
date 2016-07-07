@@ -10,8 +10,8 @@ Feature: Prevent deletion of purchased product
         And the store allows paying with "Cash on Delivery"
         And the store has a product "Toyota GT86 model"
         And there is a customer "john.doe@gmail.com" that placed an order "#00000027"
-        And the customer chose "Free" shipping method to "France" with "Cash on Delivery" payment
         And the customer bought a single "Toyota GT86 model"
+        And the customer chose "Free" shipping method to "France" with "Cash on Delivery" payment
         And I am logged in as an administrator
 
     @domain @ui

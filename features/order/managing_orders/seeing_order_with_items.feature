@@ -11,8 +11,8 @@ Feature: Seeing an order with its items
         And the store ships everywhere for free
         And the store allows paying with "Cash on Delivery"
         And there is a customer "lucy@teamlucifer.com" that placed an order "#00000666"
-        And the customer chose "Free" shipping method to "United States" with "Cash on Delivery" payment
         And the customer bought an "Angel T-Shirt" and an "Angel Mug"
+        And the customer chose "Free" shipping method to "United States" with "Cash on Delivery" payment
         And I am logged in as an administrator
 
     @ui

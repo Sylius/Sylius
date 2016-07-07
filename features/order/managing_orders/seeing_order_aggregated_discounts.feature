@@ -10,16 +10,16 @@ Feature: Seeing aggregated discounts of an order
         And the store has a product "Bastard sword" priced at "€200.00"
         And the store has "DHL" shipping method with "€10.00" fee
         And the store allows paying with "Cash on Delivery"
-        And there is a customer "robin.hood@sherwood.com" that placed an order "#00000006"
-        And the customer chose "DHL" shipping method to "United States" with "Cash on Delivery" payment
         And there is a promotion "Eagle eye promotion"
         And it gives "€20.00" discount to every order
         And it gives "50%" discount on shipping to every order
+        And there is a customer "robin.hood@sherwood.com" that placed an order "#00000006"
         And I am logged in as an administrator
 
     @ui
     Scenario: Seeing promotion discount on shipping is not aggregated in summary
         Given the customer bought 2 "Longbow" products
+        And the customer chose "DHL" shipping method to "United States" with "Cash on Delivery" payment
         When I view the summary of the order "#00000006"
         Then the order's items total should be "€280.00"
         And the order's promotion discount should be "Eagle eye promotion -€20.00"
@@ -34,6 +34,7 @@ Feature: Seeing aggregated discounts of an order
         And it gives "€50.00" discount to every order with quantity at least 3
         And the customer bought 2 "Longbow" products
         And the customer bought 3 "Bastard sword" products
+        And the customer chose "DHL" shipping method to "United States" with "Cash on Delivery" payment
         When I view the summary of the order "#00000006"
         Then the order's items total should be "€830.00"
         And the order's promotion discount should be "Eagle eye promotion -€20.00"

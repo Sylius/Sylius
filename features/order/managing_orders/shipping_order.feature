@@ -10,10 +10,9 @@ Feature: Shipping an order
         And the store ships everywhere for free
         And the store allows paying with "Cash on Delivery"
         And there is a customer "lucy@teamlucifer.com" that placed an order "#00000666"
-        And the customer "Lucifer Morningstar" addressed it to "Seaside Fwy", "90802" "Los Angeles" in the "United States"
-        And for the billing address of "Mazikeen Lilim" in the "Pacific Coast Hwy", "90806" "Los Angeles", "United States"
-        And the customer chose "Free" shipping method with "Cash on Delivery" payment
         And the customer bought a single "Angel T-Shirt"
+        And the customer "Lucifer Morningstar" addressed it to "Seaside Fwy", "90802" "Los Angeles" in the "United States" with identical billing address
+        And the customer chose "Free" shipping method with "Cash on Delivery" payment
         And I am logged in as an administrator
 
     @ui

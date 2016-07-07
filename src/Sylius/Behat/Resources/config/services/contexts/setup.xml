@@ -62,12 +62,10 @@
             <argument type="service" id="sylius.repository.order" container="symfony" />
             <argument type="service" id="sylius.factory.order" container="symfony" />
             <argument type="service" id="sylius.order_processing.shipment_processor" container="symfony" />
-            <argument type="service" id="sylius.factory.payment" container="symfony" />
             <argument type="service" id="sylius.factory.order_item" container="symfony" />
             <argument type="service" id="sylius.order_item_quantity_modifier" container="symfony" />
             <argument type="service" id="sylius.factory.customer" container="symfony" />
             <argument type="service" id="sylius.repository.customer" container="symfony" />
-            <argument type="service" id="sylius.order_processing.order_recalculator" container="symfony" />
             <argument type="service" id="doctrine.orm.entity_manager" container="symfony" />
             <argument type="service" id="sm.factory" container="symfony" />
             <tag name="sylius.behat.context" />
