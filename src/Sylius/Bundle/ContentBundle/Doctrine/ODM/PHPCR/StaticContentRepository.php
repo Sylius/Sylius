@@ -13,6 +13,7 @@ namespace Sylius\Bundle\ContentBundle\Doctrine\ODM\PHPCR;
 
 use Doctrine\ODM\PHPCR\DocumentManagerInterface;
 use Doctrine\ODM\PHPCR\Mapping\ClassMetadata;
+use Sylius\Bundle\ContentBundle\Document\StaticContent;
 use Sylius\Bundle\ContentBundle\Repository\StaticContentRepositoryInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ODM\PHPCR\DocumentRepository;
 
@@ -41,8 +42,15 @@ class StaticContentRepository extends DocumentRepository implements StaticConten
     /**
      * {@inheritdoc}
      */
-    public function findOneByName($name)
+    public function findPublishedOneByName($name)
     {
-        return $this->find($this->staticContentPath . '/' . $name);
+        /** @var StaticContent|null $staticContent */
+        $staticContent = $this->find($this->staticContentPath . '/' . $name);
+
+        if (null === $staticContent || !$staticContent->isPublishable()) {
+            return null;
+        }
+
+        return $staticContent;
     }
 }

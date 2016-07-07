@@ -9,5 +9,5 @@ sylius_shop_static_content_show:
         _sylius:
             template: SyliusShopBundle:StaticContent:show.html.twig
             repository:
-                method: findOneByName
+                method: findPublishedOneByName
                 arguments: [$name]

@@ -23,5 +23,5 @@ interface StaticContentRepositoryInterface
      *
      * @return StaticContent|null
      */
-    public function findOneByName($name);
+    public function findPublishedOneByName($name);
 }
