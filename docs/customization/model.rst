@@ -86,6 +86,8 @@ The file should be placed in ``AppBundle/Resources/config/doctrine/Country.orm.y
 
 3. Finally you'll need to override the model's class in the ``app/config/config.yml``.
 
+Under the ``sylius_*`` where ``*`` is the name of the bundle of the model you are customizing, in our case it will be the ``SyliusAddressingBundle`` -> ``sylius_addressing``.
+
 .. code-block:: yaml
 
     sylius_addressing:
@@ -94,7 +96,28 @@ The file should be placed in ``AppBundle/Resources/config/doctrine/Country.orm.y
                 classes:
                     model: AppBundle\Entity\Country
 
-4. Additionally if you want to give the administrator an ability to add a ``flag`` to any of Countries,
+4. Update the database. There are two ways to do it:
+
+* via direct database schema update:
+
+.. code-block:: bash
+
+    $ php app/console doctrine:schema:update --force
+
+* via migrations:
+
+Which we strongly recommend over updating the schema.
+
+.. code-block:: bash
+
+    $ php app/console doctrine:migrations:diff
+    $ php app/console doctrine:migrations:migrate
+
+.. tip::
+
+    Read more about the database modifications and migrations in the `Symfony documentation here <http://symfony.com/doc/current/book/doctrine.html#creating-the-database-tables-schema>`_.
+
+5. Additionally if you want to give the administrator an ability to add the ``flag`` to any of countries,
 you'll need to update its form type. Check how to do it :doc:`here </customization/form>`.
 
 What happens while overriding Models?
