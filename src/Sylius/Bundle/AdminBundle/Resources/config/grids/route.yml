@@ -6,9 +6,6 @@ sylius_grid:
                 options:
                     class: "%sylius.model.route.class%"
             fields:
-                id:
-                    type: string
-                    label: sylius.ui.id
                 name:
                     type: string
                     label: sylius.ui.name

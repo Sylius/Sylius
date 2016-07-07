@@ -1,12 +1,14 @@
-{% import 'SyliusWebBundle:Backend/Content/Form:forms.html.twig' as forms %}
+{{ form_errors(form) }}
 
-<fieldset>
-    {{ form_row(form.publishable) }}
-    {{ form_row(form.publishStartDate) }}
-    {{ form_row(form.publishEndDate) }}
-
-    {{ form_row(form.name) }}
-    {{ form_row(form.title) }}
-    {{ form_row(form.body) }}
-</fieldset>
-{{ form_widget(form._token) }}
+<div class="ui stackable grid">
+    <div class="three wide column">
+        {{ form_row(form.publishable) }}
+        {{ form_row(form.publishStartDate) }}
+        {{ form_row(form.publishEndDate) }}
+    </div>
+    <div class="thirteen wide column">
+        {{ form_row(form.name) }}
+        {{ form_row(form.title) }}
+        {{ form_row(form.body) }}
+    </div>
+</div>
