@@ -28,7 +28,6 @@ use Sylius\Component\Core\OrderProcessing\OrderShipmentProcessorInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Core\Test\Services\SharedStorageInterface;
 use Sylius\Component\Order\OrderTransitions;
-use Sylius\Component\Payment\Factory\PaymentFactoryInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\PaymentTransitions;
@@ -62,11 +61,6 @@ final class OrderContext implements Context
      * @var OrderShipmentProcessorInterface
      */
     private $orderShipmentFactory;
-
-    /**
-     * @var PaymentFactoryInterface
-     */
-    private $paymentFactory;
 
     /**
      * @var FactoryInterface
@@ -103,7 +97,6 @@ final class OrderContext implements Context
      * @param OrderRepositoryInterface $orderRepository
      * @param FactoryInterface $orderFactory
      * @param OrderShipmentProcessorInterface $orderShipmentFactory
-     * @param PaymentFactoryInterface $paymentFactory
      * @param FactoryInterface $orderItemFactory
      * @param OrderItemQuantityModifierInterface $itemQuantityModifier
      * @param FactoryInterface $customerFactory
@@ -116,7 +109,6 @@ final class OrderContext implements Context
         OrderRepositoryInterface $orderRepository,
         FactoryInterface $orderFactory,
         OrderShipmentProcessorInterface $orderShipmentFactory,
-        PaymentFactoryInterface $paymentFactory,
         FactoryInterface $orderItemFactory,
         OrderItemQuantityModifierInterface $itemQuantityModifier,
         FactoryInterface $customerFactory,
@@ -128,7 +120,6 @@ final class OrderContext implements Context
         $this->orderRepository = $orderRepository;
         $this->orderFactory = $orderFactory;
         $this->orderShipmentFactory = $orderShipmentFactory;
-        $this->paymentFactory = $paymentFactory;
         $this->orderItemFactory = $orderItemFactory;
         $this->itemQuantityModifier = $itemQuantityModifier;
         $this->customerFactory = $customerFactory;
@@ -188,9 +179,19 @@ final class OrderContext implements Context
 
         $order->setBillingAddress($address);
 
-        $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->apply(OrderCheckoutTransitions::TRANSITION_ADDRESS);
+        $this->applyTransitionOnOrderCheckout($order, OrderCheckoutTransitions::TRANSITION_ADDRESS);
 
         $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^the customer ("[^"]+" addressed it to "[^"]+", "[^"]+" "[^"]+" in the "[^"]+") with identical billing address$/
+     * @Given /^I (addressed it to "[^"]+", "[^"]+", "[^"]+" "[^"]+" in the "[^"]+") with identical billing address$/
+     */
+    public function theCustomerAddressedItToWithIdenticalBillingAddress(AddressInterface $address)
+    {
+        $this->theCustomerAddressedItTo($address);
+        $this->forTheBillingAddressOf($address);
     }
 
     /**
@@ -207,19 +208,18 @@ final class OrderContext implements Context
         $order->setShippingAddress($address);
         $order->setBillingAddress($address);
 
-        $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->apply(OrderCheckoutTransitions::TRANSITION_ADDRESS);
+        $this->applyTransitionOnOrderCheckout($order, OrderCheckoutTransitions::TRANSITION_ADDRESS);
 
         $this->orderShipmentFactory->processOrderShipment($order);
         $order->getShipments()->first()->setMethod($shippingMethod);
 
-        $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->apply(OrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING);
+        $this->applyTransitionOnOrderCheckout($order, OrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING);
 
-        $payment = $this->paymentFactory->createWithAmountAndCurrencyCode($order->getTotal(), $order->getCurrencyCode());
+        $payment = $order->getLastPayment();
         $payment->setMethod($paymentMethod);
-        $order->addPayment($payment);
 
-        $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->apply(OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT);
-        $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->apply(OrderCheckoutTransitions::TRANSITION_COMPLETE);
+        $this->applyTransitionOnOrderCheckout($order, OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT);
+        $this->applyTransitionOnOrderCheckout($order, OrderCheckoutTransitions::TRANSITION_COMPLETE);
 
         $this->objectManager->flush();
     }
@@ -238,14 +238,13 @@ final class OrderContext implements Context
         $this->orderShipmentFactory->processOrderShipment($order);
         $order->getShipments()->first()->setMethod($shippingMethod);
 
-        $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->apply(OrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING);
+        $this->applyTransitionOnOrderCheckout($order, OrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING);
 
-        $payment = $this->paymentFactory->createWithAmountAndCurrencyCode($order->getTotal(), $order->getCurrencyCode());
+        $payment = $order->getLastPayment();
         $payment->setMethod($paymentMethod);
-        $order->addPayment($payment);
 
-        $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->apply(OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT);
-        $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->apply(OrderCheckoutTransitions::TRANSITION_COMPLETE);
+        $this->applyTransitionOnOrderCheckout($order, OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT);
+        $this->applyTransitionOnOrderCheckout($order, OrderCheckoutTransitions::TRANSITION_COMPLETE);
 
         $this->objectManager->flush();
     }
@@ -436,6 +435,15 @@ final class OrderContext implements Context
     {
         $shipment = $order->getShipments()->first();
         $this->stateMachineFactory->get($shipment, ShipmentTransitions::GRAPH)->apply($transition);
+    }
+
+    /**
+     * @param OrderInterface $order
+     * @param string $transition
+     */
+    private function applyTransitionOnOrderCheckout(OrderInterface $order, $transition)
+    {
+        $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->apply($transition);
     }
 
     /**

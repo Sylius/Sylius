@@ -62,7 +62,6 @@
             <argument type="service" id="sylius.repository.order" container="symfony" />
             <argument type="service" id="sylius.factory.order" container="symfony" />
             <argument type="service" id="sylius.order_processing.shipment_processor" container="symfony" />
-            <argument type="service" id="sylius.factory.payment" container="symfony" />
             <argument type="service" id="sylius.factory.order_item" container="symfony" />
             <argument type="service" id="sylius.order_item_quantity_modifier" container="symfony" />
             <argument type="service" id="sylius.factory.customer" container="symfony" />
