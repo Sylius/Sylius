@@ -91,7 +91,7 @@
     </div>
 {% endblock %}
 
-{% macro render_table(messages) %}
+{% macro render_table(themes) %}
     <table>
         <thead>
             <tr>
@@ -101,7 +101,7 @@
             </tr>
         </thead>
         <tbody>
-        {% for message in messages %}
+        {% for theme in themes %}
             <tr>
                 <td class="font-normal text-small text-bold">{{ theme.name }}</td>
                 <td class="font-normal text-small">{{ theme.path }}</td>
