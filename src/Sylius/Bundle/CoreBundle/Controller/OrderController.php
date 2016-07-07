@@ -23,12 +23,10 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderProcessing\StateResolverInterface;
 use Sylius\Component\Order\OrderTransitions;
-use Sylius\Component\User\Repository\CustomerRepositoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Webmozart\Assert\Assert;
 
 class OrderController extends ResourceController
@@ -135,8 +133,6 @@ class OrderController extends ResourceController
 
         $order = $this->repository->findOneForPayment($orderId);
 
-        $this->checkAccessToOrder($order);
-
         $payment = $order->getLastPayment();
         $captureToken = $this->getTokenFactory()->createCaptureToken(
             $payment->getMethod()->getGateway(),
@@ -165,8 +161,6 @@ class OrderController extends ResourceController
         $payment = $status->getFirstModel();
         $order = $payment->getOrder();
 
-        $this->checkAccessToOrder($order);
-
         $orderStateResolver = $this->getOrderStateResolver();
         $orderStateResolver->resolvePaymentState($order);
         $orderStateResolver->resolveShippingState($order);
@@ -193,31 +187,12 @@ class OrderController extends ResourceController
         $order = $this->repository->findOneForPayment($orderId);
         Assert::notNull($order);
 
-        $this->checkAccessToOrder($order);
-
         $payment = $order->getLastPayment();
         if (null !== $payment && $payment->getMethod()->getGateway() === 'offline') {
             return $this->redirectToRoute('sylius_shop_order_pay', ['orderId' => $orderId]);
         }
 
         return $this->render($configuration->getParameters()->get('template'), ['order' => $order]);
-    }
-
-    /**
-     * @param OrderInterface $order
-     *
-     * @throws AccessDeniedException
-     */
-    private function checkAccessToOrder(OrderInterface $order)
-    {
-        $customerGuest = $this->getCustomerGuest();
-
-        $loggedInCustomer = $this->getCustomer();
-        $expectedCustomer = $order->getCustomer();
-
-        if ($expectedCustomer !== $customerGuest && $expectedCustomer !== $loggedInCustomer) {
-            throw $this->createAccessDeniedException();
-        }
     }
 
     /**
@@ -234,36 +209,6 @@ class OrderController extends ResourceController
     private function getSession()
     {
         return $this->get('session');
-    }
-
-    /**
-     * @return null|CustomerInterface
-     */
-    private function getCustomer()
-    {
-        return $this->get('sylius.context.customer')->getCustomer();
-    }
-
-    /**
-     * @return null|CustomerInterface
-     */
-    private function getCustomerGuest()
-    {
-        $customerGuestId = $this->get('session')->get('sylius_customer_guest_id');
-
-        if (null !== $customerGuestId) {
-            return $this->getCustomerRepository()->find($customerGuestId);
-        }
-
-        return null;
-    }
-
-    /**
-     * @return CustomerRepositoryInterface
-     */
-    private function getCustomerRepository()
-    {
-        return $this->get('sylius.repository.customer');
     }
 
     /**

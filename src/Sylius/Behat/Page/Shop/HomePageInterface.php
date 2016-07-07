@@ -19,6 +19,11 @@ use Sylius\Behat\Page\SymfonyPageInterface;
 interface HomePageInterface extends SymfonyPageInterface
 {
     /**
+     * @return string
+     */
+    public function getContents();
+
+    /**
      * @return bool
      */
     public function hasLogoutButton();

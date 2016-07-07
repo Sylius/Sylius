@@ -188,6 +188,11 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     {
         return false !== strpos($this->getElement('shipping_total')->getText(), $price);
     }
+    
+    public function confirmOrder()
+    {
+        $this->getDocument()->pressButton('Place order');
+    }
 
     public function changeAddress()
     {

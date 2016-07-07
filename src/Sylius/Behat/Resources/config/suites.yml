@@ -76,4 +76,3 @@ imports:
     - suites/ui/taxonomy/managing_taxons.yml
     - suites/ui/user/managing_customers.yml
     - suites/ui/user/managing_users.yml
-    - suites/ui/user/registering.yml

@@ -21,7 +21,7 @@ Feature: Reapplying promotion on cart change
         And there should be no shipping fee
         And there should be no discount
 
-    @ui
+    @ui @javascript
     Scenario: Receiving discount on shipping after shipping method change
         Given the store has "DHL" shipping method with "€10.00" fee
         And the store has "FedEx" shipping method with "€30.00" fee

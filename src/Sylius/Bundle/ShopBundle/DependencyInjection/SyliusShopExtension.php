@@ -29,6 +29,7 @@ class SyliusShopExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
         $loader->load('controller.xml');
+        $loader->load('listeners.xml');
         $loader->load('menu.xml');
     }
 }

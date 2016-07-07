@@ -29,6 +29,14 @@ class HomePage extends SymfonyPage implements HomePageInterface
     /**
      * {@inheritdoc}
      */
+    public function getContents()
+    {
+        return $this->getDocument()->getContent();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function hasLogoutButton()
     {
         return $this->hasElement('logout_button');
