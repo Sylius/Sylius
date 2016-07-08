@@ -24,6 +24,11 @@ interface ThankYouPageInterface extends PageInterface
     public function hasThankYouMessage();
 
     /**
+     * @return string
+     */
+    public function getInstructions();
+
+    /**
      * @return bool
      */
     public function hasPayAction();

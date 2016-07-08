@@ -113,6 +113,16 @@ final class PaymentContext implements Context
     }
 
     /**
+     * @Given /^(it) has instructions "([^"]+)"$/
+     */
+    public function itHasInstructions(PaymentMethodInterface $paymentMethod, $instructions)
+    {
+        $paymentMethod->setInstructions($instructions);
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @param string $name
      * @param string $code
      *

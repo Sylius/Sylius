@@ -16,25 +16,24 @@ use Sylius\Component\Resource\Model\AbstractTranslation;
 class PaymentMethodTranslation extends AbstractTranslation implements PaymentMethodTranslationInterface
 {
     /**
-     * Payments method identifier.
-     *
      * @var mixed
      */
     protected $id;
 
     /**
-     * Name.
-     *
      * @var string
      */
     protected $name;
 
     /**
-     * Description.
-     *
      * @var string
      */
     protected $description;
+
+    /**
+     * @var string
+     */
+    protected $instructions;
 
     /**
      * {@inheritdoc}
@@ -66,8 +65,6 @@ class PaymentMethodTranslation extends AbstractTranslation implements PaymentMet
     public function setName($name)
     {
         $this->name = $name;
-
-        return $this;
     }
 
     /**
@@ -84,7 +81,21 @@ class PaymentMethodTranslation extends AbstractTranslation implements PaymentMet
     public function setDescription($description)
     {
         $this->description = $description;
+    }
 
-        return $this;
+    /**
+     * {@inheritdoc}
+     */
+    public function getInstructions()
+    {
+        return $this->instructions;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setInstructions($instructions)
+    {
+        $this->instructions = $instructions;
     }
 }

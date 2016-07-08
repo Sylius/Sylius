@@ -132,6 +132,7 @@ class OrderController extends ResourceController
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
         $order = $this->repository->findOneForPayment($orderId);
+        Assert::notNull($order);
 
         $payment = $order->getLastPayment();
         $captureToken = $this->getTokenFactory()->createCaptureToken(

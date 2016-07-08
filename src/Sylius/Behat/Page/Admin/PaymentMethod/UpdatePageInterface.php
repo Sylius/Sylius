@@ -22,6 +22,12 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function disable();
 
     /**
+     * @param string $name
+     * @param string $languageCode
+     */
+    public function nameIt($name, $languageCode);
+
+    /**
      * @param string $gateway
      */
     public function chooseGateway($gateway);
@@ -37,8 +43,9 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function isPaymentMethodEnabled();
 
     /**
-     * @param string $name
-     * @param string $languageCode
+     * @param string $language
+     *
+     * @return string
      */
-    public function nameIt($name, $languageCode);
+    public function getPaymentMethodInstructions($language);
 }

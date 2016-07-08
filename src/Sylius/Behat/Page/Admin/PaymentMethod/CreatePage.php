@@ -58,6 +58,16 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function setInstructions($instructions, $languageCode)
+    {
+        $this->getDocument()->fillField(
+            sprintf('sylius_payment_method_translations_%s_instructions', $languageCode), $instructions
+        );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function isPaymentMethodEnabled()
     {
         return (bool) $this->getToggleableElement()->getValue();
@@ -86,9 +96,9 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_payment_method_code',
-            'name' => '#sylius_payment_method_translations_en_US_name',
-            'gateway' => '#sylius_payment_method_gateway',
             'enabled' => '#sylius_payment_method_enabled',
+            'gateway' => '#sylius_payment_method_gateway',
+            'name' => '#sylius_payment_method_translations_en_US_name',
         ]);
     }
 }
