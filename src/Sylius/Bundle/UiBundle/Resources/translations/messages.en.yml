@@ -89,6 +89,7 @@ sylius:
         category_requirements: Category requirements
         change_address: Change address
         change_password: Change password
+        change_payment_method: Change payment method
         change_shipping_method: Change shipping method
         change_your_password: Change your password
         channel: Channel

@@ -146,7 +146,7 @@ final class CheckoutContext implements Context
     public function thisUserBought(UserInterface $user)
     {
         $this->securityService->performActionAs($user, function () {
-            $this->iProceedSelectingOfflinePaymentMethod();
+            $this->iProceedSelectingPaymentMethod();
             $this->iConfirmMyOrder();
         });
     }
@@ -388,6 +388,14 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @When I change payment method to :paymentMethodName
+     */
+    public function iChangePaymentMethodTo($paymentMethodName)
+    {
+        $this->thankYouPage->choosePaymentMethod($paymentMethodName);
+    }
+
+    /**
      * @When /^I proceed selecting "([^"]*)" as shipping country with "([^"]*)" payment method$/
      */
     public function iProceedSelectingShippingCountryAndPaymentMethod($shippingCountry, $paymentMethodName)
@@ -399,9 +407,9 @@ final class CheckoutContext implements Context
 
     /**
      * @Given I have proceeded selecting :paymentMethodName payment method
-     * @When I proceed selecting :paymentMethodName payment method
+     * @When /^I (?:proceed|proceeded) selecting "([^"]+)" payment method$/
      */
-    public function iProceedSelectingOfflinePaymentMethod($paymentMethodName = 'Offline')
+    public function iProceedSelectingPaymentMethod($paymentMethodName = 'Offline')
     {
         $this->iProceedSelectingShippingCountryAndPaymentMethod(null, $paymentMethodName);
     }
@@ -476,7 +484,7 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Then I should be redirected back to the thank you page
+     * @Then /^I should be redirected (?:|back )to the thank you page$/
      */
     public function iShouldBeRedirectedBackToTheThankYouPage()
     {
@@ -878,6 +886,14 @@ final class CheckoutContext implements Context
         $address->setPhoneNumber('321123456');
 
         return $address;
+    }
+
+    /**
+     * @Given I confirm my changes
+     */
+    public function iConfirmMyChanges()
+    {
+        $this->thankYouPage->saveChanges();
     }
 
     /**

@@ -37,4 +37,11 @@ interface ThankYouPageInterface extends PageInterface
      * @throws \InvalidArgumentException
      */
     public function waitForResponse($timeout, array $parameters = []);
+
+    /**
+     * @param string $paymentMethodName
+     */
+    public function choosePaymentMethod($paymentMethodName);
+
+    public function saveChanges();
 }

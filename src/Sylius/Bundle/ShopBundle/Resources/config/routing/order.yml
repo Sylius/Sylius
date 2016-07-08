@@ -20,3 +20,18 @@ sylius_shop_order_after_pay:
         _sylius:
             redirect:
                 route: sylius_shop_checkout_thank_you
+
+sylius_shop_order_payment_method_update:
+    path: /{orderId}/payment-method/edit
+    methods: [GET, PUT]
+    defaults:
+        _controller: sylius.controller.order:updateAction
+        _sylius:
+            permission: false
+            template: SyliusShopBundle:Order:payment.html.twig
+            form: sylius_checkout_payment_step
+            repository:
+                method: find
+                arguments: [$orderId]
+            redirect:
+                route: sylius_shop_checkout_thank_you
