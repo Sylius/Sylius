@@ -3,7 +3,7 @@
 ### v0.19.0 2016-07-06
 - [#5443](https://github.com/Sylius/Sylius/pull/5443) [Composer] Lock doctrine/data-fixtures at 1.1.* (@pamil)
 - [#5441](https://github.com/Sylius/Sylius/pull/5441) Move sylius.ui.* translations and from WebBundle to UiBundle (@pamil)
-- [#5435](https://github.com/Sylius/Sylius/pull/5435) [CRITICAL] Prevent SyliusDataCollector from breaking the whole app if channel cannot be found (@pamil)
+- [#5435](https://github.com/Sylius/Sylius/pull/5435) [CRITICAL] Prevent SyliusCollector from breaking the whole app if channel cannot be found (@pamil)
 - [#5423](https://github.com/Sylius/Sylius/pull/5423) [Admin] Support for CMF routes (@pamil)
 - [#5363](https://github.com/Sylius/Sylius/pull/5363) [Promotion] Apply promotion on nth order for a Guest (@tuka217)
 - [#5416](https://github.com/Sylius/Sylius/pull/5416) [Core] Fix Order's state machine (@michalmarcinkowski)
@@ -2150,7 +2150,7 @@
 - [#1432](https://github.com/Sylius/Sylius/pull/1432) CS fixer (@umpirsky)
 - [#1431](https://github.com/Sylius/Sylius/pull/1431) Move migrations configuration to prevent problems with configuration loaded when bundle was skipped (@stloyd)
 - [#1433](https://github.com/Sylius/Sylius/pull/1433) [Pricing] Fixed undefined variable (@hason)
-- [#1430](https://github.com/Sylius/Sylius/pull/1430) Fix SyliusDataCollector (@winzou)
+- [#1430](https://github.com/Sylius/Sylius/pull/1430) Fix SyliusCollector (@winzou)
 - [#149](https://github.com/Sylius/Sylius/pull/149) Update bdd.rst (@tvlooy)
 - [#1421](https://github.com/Sylius/Sylius/pull/1421) Fix confirmation modal tests (@umpirsky)
 - [#1419](https://github.com/Sylius/Sylius/pull/1419) Allow to override label bootstrap col class attribute in templates (@exu)

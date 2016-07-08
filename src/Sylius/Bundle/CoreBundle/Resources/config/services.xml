@@ -109,7 +109,7 @@
         <parameter key="sylius.price_calculator.channel_based.class">Sylius\Component\Core\Pricing\ChannelBasedCalculator</parameter>
         <parameter key="sylius.price_calculator.group_based.class">Sylius\Component\Core\Pricing\GroupBasedCalculator</parameter>
         <parameter key="sylius.price_calculator.zone_based.class">Sylius\Component\Core\Pricing\ZoneBasedCalculator</parameter>
-        <parameter key="sylius.data_collector.class">Sylius\Bundle\CoreBundle\DataCollector\SyliusDataCollector</parameter>
+        <parameter key="sylius.collector.core.class">Sylius\Bundle\CoreBundle\Collector\SyliusCollector</parameter>
         <parameter key="sylius.dynamic_router.class">Symfony\Cmf\Component\Routing\DynamicRouter</parameter>
         <parameter key="sylius.generator.class">Sylius\Bundle\CoreBundle\Routing\SyliusAwareGenerator</parameter>
         <parameter key="sylius.route_provider.class">Sylius\Bundle\CoreBundle\Routing\RouteProvider</parameter>
@@ -542,9 +542,12 @@
             <argument>%locale%</argument>
         </service>
 
-        <service id="sylius.data_collector" class="%sylius.data_collector.class%" public="false">
+        <service id="sylius.collector.core" class="%sylius.collector.core.class%" public="false">
             <argument type="service" id="sylius.context.shopper" />
-            <tag name="data_collector" template="SyliusCoreBundle:Collector:sylius" id="sylius_core" priority="255" />
+            <argument>%kernel.bundles%</argument>
+            <argument>%currency%</argument>
+            <argument>%locale%</argument>
+            <tag name="data_collector" template="SyliusCoreBundle:Collector:sylius.html.twig" id="sylius_core" priority="-512" />
         </service>
 
         <service id="sylius.dynamic_router" class="%sylius.dynamic_router.class%">
