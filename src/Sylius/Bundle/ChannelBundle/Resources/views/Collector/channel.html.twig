@@ -1,11 +1,11 @@
 {% extends '@WebProfiler/Profiler/layout.html.twig' %}
 
 {% block toolbar %}
-    {% set status_color = collector.currentChannel is null ? 'red' : '' %}
+    {% set status_color = collector.channel is null ? 'red' : '' %}
 
     {% set icon %}
         {{ include('@SyliusChannel/Collector/Icon/channel.svg') }}
-        <span class="sf-toolbar-value">{{ collector.currentChannel.name|default('Undefined') }}</span>
+        <span class="sf-toolbar-value">{{ collector.channel.name|default('Undefined') }}</span>
     {% endset %}
 
     {% set text %}
