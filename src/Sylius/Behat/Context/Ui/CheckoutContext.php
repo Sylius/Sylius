@@ -352,7 +352,9 @@ final class CheckoutContext implements Context
     {
         $this->addressingPage->open();
         $shippingAddress = $this->createDefaultAddress();
-        !$shippingCountry ?: $shippingAddress->setCountryCode($shippingCountry->getCode());
+        if (null !== $shippingCountry) {
+            $shippingAddress->setCountryCode($shippingCountry->getCode());
+        }
 
         $this->addressingPage->specifyShippingAddress($shippingAddress);
         $this->addressingPage->nextStep();
@@ -433,7 +435,9 @@ final class CheckoutContext implements Context
         $this->addressingPage->open();
         $this->addressingPage->specifyEmail($email);
         $shippingAddress = $this->createDefaultAddress();
-        !$shippingCountry ?: $shippingAddress->setCountryCode($shippingCountry->getCode());
+        if (null !== $shippingCountry) {
+            $shippingAddress->setCountryCode($shippingCountry->getCode());
+        }
 
         $this->addressingPage->specifyShippingAddress($shippingAddress);
         $this->addressingPage->nextStep();
