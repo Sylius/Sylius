@@ -31,3 +31,6 @@ sylius:
                 sales:
                     header: Försäljning
                     orders: Ordrar
+                content:
+                    header: Innehåll
+                    routes: Rutter

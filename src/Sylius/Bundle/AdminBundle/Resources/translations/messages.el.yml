@@ -18,3 +18,5 @@ sylius:
                     promotions: Προσφορές
                 sales:
                     orders: Παραγγελίες
+                content:
+                    header: Περιεχόμενο

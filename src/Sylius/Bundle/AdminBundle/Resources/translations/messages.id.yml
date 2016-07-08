@@ -5,7 +5,5 @@ sylius:
     menu:
         admin:
             main:
-                configuration:
-                    countries: البلدان
                 content:
-                    routes: طرق
+                    routes: Rute

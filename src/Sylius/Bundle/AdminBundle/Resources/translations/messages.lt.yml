@@ -28,3 +28,6 @@ sylius:
                 sales:
                     header: Pardavimai
                     orders: Užsakymai
+                content:
+                    header: Turinys
+                    routes: Maršrutai

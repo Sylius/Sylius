@@ -25,3 +25,5 @@ sylius:
                 sales:
                     header: Vendas
                     orders: Encomendas
+                content:
+                    header: Conteúdo

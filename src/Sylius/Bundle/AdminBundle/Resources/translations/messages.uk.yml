@@ -28,3 +28,6 @@ sylius:
                 sales:
                     header: Продажі
                     orders: Замовлення
+                content:
+                    header: Зміст
+                    routes: Маршрути

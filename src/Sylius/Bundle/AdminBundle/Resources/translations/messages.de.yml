@@ -31,3 +31,6 @@ sylius:
                 sales:
                     header: Verkäufe
                     orders: Aufträge
+                content:
+                    header: Inhalt
+                    routes: Pfade
