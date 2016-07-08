@@ -119,6 +119,7 @@ sylius_mailer:
         sylius.email.shipment_confirmation.name: "SyliusCoreBundle:Email:shipmentConfirmation.html.twig"
         sylius.email.user_confirmation.name: "SyliusCoreBundle:Email:userConfirmation.html.twig"
         sylius.email.password_reset.name: "SyliusCoreBundle:Email:passwordReset.html.twig"
+        sylius.email.verification_token.name: "SyliusCoreBundle:Email:verification.html.twig"
     emails:
         order_confirmation:
             subject: sylius.emails.order_confirmation.subject
@@ -141,6 +142,9 @@ sylius_mailer:
         reset_password_pin:
             subject: sylius.emails.user.password_reset.subject
             template: "SyliusCoreBundle:Email:passwordReset.html.twig"
+        verification_token:
+            subject: sylius.emails.user.verification_token.subject
+            template: "SyliusCoreBundle:Email:verification.html.twig"
 
 sylius_money:
     currency: "%currency%"

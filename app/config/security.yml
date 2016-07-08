@@ -107,6 +107,7 @@ security:
         - { path: ^/connect.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/verify, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: "^/account.*", role: ROLE_USER }
 
         - { path: ^/shop/login.*, role: IS_AUTHENTICATED_ANONYMOUSLY }

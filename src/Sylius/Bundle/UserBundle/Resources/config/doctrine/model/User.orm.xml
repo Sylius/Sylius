@@ -29,8 +29,10 @@
         <field name="password" column="password" type="string" nullable="false" />
 
         <field name="lastLogin" column="last_login" type="datetime" nullable="true" />
-        <field name="confirmationToken" column="confirmation_token" type="string" nullable="true" />
+        <field name="passwordResetToken" column="password_reset_token" type="string" nullable="true" />
         <field name="passwordRequestedAt" column="password_requested_at" type="datetime" nullable="true" />
+        <field name="emailVerificationToken" column="email_verification_token" type="string" nullable="true" />
+        <field name="verifiedAt" column="verified_at" type="datetime" nullable="true" />
 
         <field name="locked" column="locked" type="boolean" nullable="false" />
         <field name="expiresAt" column="expires_at" type="datetime" nullable="true" />

@@ -33,7 +33,7 @@ class UserContext implements Context
     }
 
     /**
-     * @Transform I
+     * @Transform /^(I|my|he|his|she|her|"this user")$/
      */
     public function getLoggedUser()
     {

@@ -10,11 +10,6 @@ parameters:
 framework:
     test: ~
     default_locale: "en"
-    profiler:
-        matcher:
-            path: ^/shop/forgotten-password
-        only_exceptions: false
-        collect: true
     session:
         storage_id: session.storage.mock_file
 
@@ -48,6 +43,9 @@ payum:
 swiftmailer:
     disable_delivery: true
     logging: true
+    spool:
+        type: file
+        path: "%kernel.cache_dir%/spool"
 
 sylius_payment:
     gateways:

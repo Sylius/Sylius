@@ -18,6 +18,7 @@ use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Core\Test\Factory\TestUserFactoryInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 
 /**
@@ -84,6 +85,7 @@ final class UserContext implements Context
      * @Given there is user :email identified by :password
      * @Given there was account of :email with password :password
      * @Given there is a user :email
+     * @Given there is a :email user
      */
     public function thereIsUserIdentifiedBy($email, $password = 'sylius')
     {
@@ -155,6 +157,45 @@ final class UserContext implements Context
     }
 
     /**
+     * @Given /^(this user) is not verified$/
+     * @Given /^(I) have not verified my account (?:yet)$/
+     */
+    public function accountIsNotVerified(UserInterface $user)
+    {
+        $user->setVerifiedAt(null);
+
+        $this->userManager->flush();
+    }
+
+    /**
+     * @Given /^(?:(I) have|(this user) has) already received a verification email$/
+     */
+    public function iHaveReceivedVerificationEmail(UserInterface $user)
+    {
+        $this->prepareUserVerification($user);
+    }
+
+    /**
+     * @Given a verification email has already been sent to :email
+     */
+    public function aVerificationEmailHasBeenSentTo($email)
+    {
+        $user = $this->userRepository->findOneByEmail($email);
+
+        $this->prepareUserVerification($user);
+    }
+
+    /**
+     * @Given /^(I) have already verified my account$/
+     */
+    public function iHaveAlreadyVerifiedMyAccount(UserInterface $user)
+    {
+        $user->setVerifiedAt(new \DateTime());
+
+        $this->userManager->flush();
+    }
+
+    /**
      * @param string $firstName
      * @param string $lastName
      * @param string $country
@@ -181,5 +222,18 @@ final class UserContext implements Context
         $address->setCountryCode($this->countryCodeConverter->convertToCode($country));
 
         return $address;
+    }
+
+    /**
+     * @param UserInterface $user
+     */
+    private function prepareUserVerification(UserInterface $user)
+    {
+        $token = 'marryhadalittlelamb';
+        $this->sharedStorage->set('verification_token', $token);
+
+        $user->setEmailVerificationToken($token);
+
+        $this->userManager->flush();
     }
 }

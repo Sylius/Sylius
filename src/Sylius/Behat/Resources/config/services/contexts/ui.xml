@@ -277,7 +277,7 @@
             <argument type="service" id="sylius.behat.page.shop.account.login" />
             <argument type="service" id="sylius.behat.page.shop.account.reset_password" />
             <argument type="service" id="sylius.behat.current_page_resolver" />
-            <argument type="service" id="sylius.behat.email_checker" />
+            <argument type="service" id="sylius.behat.email_checker" container="symfony"/>
             <argument type="service" id="sylius.behat.notification_checker" />
             <tag name="sylius.behat.context" />
         </service>
@@ -294,6 +294,9 @@
             <argument type="service" id="sylius.behat.page.shop.home" />
             <argument type="service" id="sylius.behat.notification_checker" />
             <argument type="service" id="sylius.behat.page.shop.account.register" />
+            <argument type="service" id="sylius.behat.page.shop.account.verify" />
+            <argument type="service" id="sylius.behat.security" />
+            <argument type="service" id="sylius.behat.email_checker" container="symfony" />
             <argument type="service" id="sylius.behat.shared_storage" />
             <tag name="sylius.behat.context" />
         </service>

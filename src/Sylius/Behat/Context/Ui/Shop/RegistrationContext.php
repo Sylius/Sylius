@@ -14,11 +14,15 @@ namespace Sylius\Behat\Context\Ui\Shop;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Shop\Account\DashboardPageInterface;
+use Sylius\Behat\Page\Shop\Account\VerificationPageInterface;
 use Sylius\Behat\Page\Shop\Account\RegisterPageInterface;
 use Sylius\Behat\Page\Shop\HomePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Behat\Service\SecurityServiceInterface;
+use Sylius\Component\Core\Model\UserInterface;
+use Sylius\Component\Core\Test\Services\EmailCheckerInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -52,6 +56,21 @@ class RegistrationContext implements Context
     private $registerPage;
 
     /**
+     * @var VerificationPageInterface
+     */
+    private $verificationPage;
+
+    /**
+     * @var SecurityServiceInterface
+     */
+    private $securityService;
+
+    /**
+     * @var EmailCheckerInterface
+     */
+    private $emailChecker;
+
+    /**
      * @var SharedStorageInterface
      */
     private $sharedStorage;
@@ -62,6 +81,9 @@ class RegistrationContext implements Context
      * @param HomePageInterface $homePage
      * @param NotificationCheckerInterface $notificationChecker
      * @param RegisterPageInterface $registerPage
+     * @param VerificationPageInterface $verificationPage
+     * @param SecurityServiceInterface $securityService
+     * @param EmailCheckerInterface $emailChecker
      * @param SharedStorageInterface $sharedStorage
      */
     public function __construct(
@@ -70,6 +92,9 @@ class RegistrationContext implements Context
         HomePageInterface $homePage,
         NotificationCheckerInterface $notificationChecker,
         RegisterPageInterface $registerPage,
+        VerificationPageInterface $verificationPage,
+        SecurityServiceInterface $securityService,
+        EmailCheckerInterface $emailChecker,
         SharedStorageInterface $sharedStorage
     ) {
         $this->currentPageResolver = $currentPageResolver;
@@ -77,6 +102,9 @@ class RegistrationContext implements Context
         $this->homePage = $homePage;
         $this->notificationChecker = $notificationChecker;
         $this->registerPage = $registerPage;
+        $this->verificationPage = $verificationPage;
+        $this->securityService = $securityService;
+        $this->emailChecker = $emailChecker;
         $this->sharedStorage = $sharedStorage;
     }
 
@@ -144,7 +172,7 @@ class RegistrationContext implements Context
     /**
      * @When I specify the phone number as :phoneNumber
      */
-    public function iSpecifyThePhoneNumberAS($phoneNumber)
+    public function iSpecifyThePhoneNumberAs($phoneNumber)
     {
         $this->registerPage->specifyPhoneNumber($phoneNumber);
     }
@@ -198,10 +226,14 @@ class RegistrationContext implements Context
 
     /**
      * @Then I should be notified that new account has been successfully created
+     * @Then I should be notified that my account has been created and the verification email has been sent
      */
     public function iShouldBeNotifiedThatNewAccountHasBeenSuccessfullyCreated()
     {
-        $this->notificationChecker->checkNotification('Customer has been successfully created.', NotificationType::success());
+        $this->notificationChecker->checkNotification(
+            'Thank you for registering, check your email to verify your account.',
+            NotificationType::success()
+        );
     }
 
     /**
@@ -223,6 +255,132 @@ class RegistrationContext implements Context
         Assert::false(
             $this->homePage->hasLogoutButton(),
             'I should not be logged in.'
+        );
+    }
+
+    /**
+     * @When I register with email :email and password :password
+     */
+    public function iRegisterWithEmailAndPassword($email, $password)
+    {
+        $this->registerPage->open();
+        $this->registerPage->specifyEmail($email);
+        $this->registerPage->specifyPassword($password);
+        $this->registerPage->verifyPassword($password);
+        $this->registerPage->specifyFirstName('Carrot');
+        $this->registerPage->specifyLastName('Ironfoundersson');
+        $this->registerPage->register();
+    }
+
+    /**
+     * @Then /^(my) account should be verified$/
+     */
+    public function myAccountShouldBeVerified(UserInterface $user)
+    {
+        $this->securityService->logIn($user->getEmail());
+
+        Assert::true(
+            $this->dashboardPage->isVerified(),
+            'My account should be verified.'
+        );
+    }
+
+    /**
+     * @When /^(I) try to verify my account using the link from this email$/
+     */
+    public function iUseItToVerify(UserInterface $user)
+    {
+        $this->verificationPage->verifyAccount($user->getEmailVerificationToken());
+    }
+
+    /**
+     * @When I resend the verification email
+     */
+    public function iResendVerificationEmail()
+    {
+        $this->dashboardPage->open();
+        $this->dashboardPage->pressResendVerificationEmail();
+    }
+
+    /**
+     * @When I use the verification link from the first email to verify
+     */
+    public function iUseVerificationLinkFromFirstEmailToVerify()
+    {
+        $token = $this->sharedStorage->get('verification_token');
+
+        $this->verificationPage->verifyAccount($token);
+    }
+
+    /**
+     * @When I (try to )verify using :token token
+     */
+    public function iTryToVerifyUsing($token)
+    {
+        $this->verificationPage->verifyAccount($token);
+    }
+
+    /**
+     * @Then /^(?:my|his|her) account should not be verified$/
+     */
+    public function myAccountShouldNotBeVerified()
+    {
+        $this->dashboardPage->open();
+
+        Assert::false(
+            $this->dashboardPage->isVerified(),
+            'Account should not be verified.'
+        );
+    }
+
+    /**
+     * @Then I should be unable to resend the verification email
+     */
+    public function iShouldBeUnableToResendVerificationEmail()
+    {
+        $this->dashboardPage->open();
+
+        Assert::false(
+            $this->dashboardPage->hasResendVerificationEmailButton(),
+            'You should not be able to resend the verification email.'
+        );
+    }
+
+    /**
+     * @Then I should be notified that the verification was successful
+     */
+    public function iShouldBeNotifiedThatTheVerificationWasSuccessful()
+    {
+        $this->notificationChecker->checkNotification('has been successfully verified.', NotificationType::success());
+    }
+
+    /**
+     * @Then I should be notified that the verification token is invalid
+     */
+    public function iShouldBeNotifiedThatTheVerificationTokenIsInvalid()
+    {
+        $this->notificationChecker->checkNotification('The verification token is invalid.', NotificationType::failure());
+    }
+
+    /**
+     * @Then I should be notified that the verification email has been sent
+     */
+    public function iShouldBeNotifiedThatTheVerificationEmailHasBeenSent()
+    {
+        $this->notificationChecker->checkNotification(
+            'An email with the verification link has been sent to your email address.',
+            NotificationType::success()
+        );
+    }
+
+    /**
+     * @Then the (verification) email should be sent to :email
+     */
+    public function verificationEmailShouldBeSentTo($email)
+    {
+        Assert::true(
+            $this->emailChecker->hasRecipient($email),
+            'The verification email should have been sent.'
         );
     }
 

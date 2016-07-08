@@ -16,9 +16,9 @@ use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Shop\Account\LoginPageInterface;
 use Sylius\Behat\Page\Shop\Account\ResetPasswordPageInterface;
 use Sylius\Behat\Page\Shop\HomePageInterface;
-use Sylius\Behat\Service\Accessor\EmailCheckerInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
+use Sylius\Component\Core\Test\Services\EmailCheckerInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -187,7 +187,7 @@ class LoginContext implements Context
     {
         Assert::true(
             $this->emailChecker->hasRecipient($email),
-            sprintf('Email should be send to %s, but it does not', $email)
+            sprintf('Email should have been sent to %s.', $email)
         );
     }
 

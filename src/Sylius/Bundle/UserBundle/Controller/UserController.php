@@ -19,7 +19,7 @@ use Sylius\Bundle\UserBundle\Form\Model\PasswordReset;
 use Sylius\Bundle\UserBundle\Form\Model\PasswordResetRequest;
 use Sylius\Bundle\UserBundle\UserEvents;
 use Sylius\Component\User\Model\UserInterface;
-use Sylius\Component\User\Security\TokenProviderInterface;
+use Sylius\Component\User\Security\Generator\GeneratorInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,6 +29,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ * @author Jan Góralski <jan.goralski@lakion.com>
  */
 class UserController extends ResourceController
 {
@@ -62,14 +63,14 @@ class UserController extends ResourceController
 
     public function requestPasswordResetTokenAction(Request $request)
     {
-        $generator = $this->container->get('sylius.user.token_provider');
+        $generator = $this->container->get('sylius.user.generator.password_reset_token');
 
         return $this->prepareResetPasswordRequest($request, $generator, UserEvents::REQUEST_RESET_PASSWORD_TOKEN);
     }
 
     public function requestPasswordResetPinAction(Request $request)
     {
-        $generator = $this->container->get('sylius.user.pin_provider');
+        $generator = $this->container->get('sylius.user.generator.password_reset_pin');
 
         return $this->prepareResetPasswordRequest($request, $generator, UserEvents::REQUEST_RESET_PASSWORD_PIN);
     }
@@ -77,7 +78,11 @@ class UserController extends ResourceController
     public function resetPasswordAction(Request $request, $token)
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
-        $user = $this->findUserByToken($token);
+        /** @var UserInterface $user */
+        $user = $this->repository->findOneBy(['passwordResetToken' => $token]);
+        if (null === $user) {
+            throw new NotFoundHttpException('Token not found.');
+        }
 
         $lifetime = new \DateInterval($this->container->getParameter('sylius.user.resetting.token_ttl'));
         if (!$user->isPasswordRequestNonExpired($lifetime)) {
@@ -105,7 +110,89 @@ class UserController extends ResourceController
         );
     }
 
-    protected function prepareResetPasswordRequest(Request $request, TokenProviderInterface $generator, $senderEvent)
+    /**
+     * @param Request $request
+     * @param string $token
+     *
+     * @return Response
+     */
+    public function verifyAction(Request $request, $token)
+    {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+        $redirectRoute = $request->attributes->get('_sylius[redirect]', null, true);
+
+        $response = $this->redirectToRoute($redirectRoute);
+
+        /** @var UserInterface $user */
+        $user = $this->repository->findOneBy(['emailVerificationToken' => $token]);
+        if (null === $user) {
+            if (!$configuration->isHtmlRequest()) {
+                return $this->viewHandler->handle($configuration, View::create($configuration, Response::HTTP_BAD_REQUEST));
+            }
+
+            $this->addFlash('error', 'sylius.user.verification.error');
+
+            return $this->redirectToRoute($redirectRoute);
+        }
+
+        $this->eventDispatcher->dispatchPreEvent(UserEvents::EMAIL_VERIFICATION, $configuration, $user);
+
+        $user->setVerifiedAt(new \DateTime());
+        $user->setEmailVerificationToken(null);
+
+        $this->manager->flush();
+
+        $this->eventDispatcher->dispatchPostEvent(UserEvents::EMAIL_VERIFICATION, $configuration, $user);
+
+        if (!$configuration->isHtmlRequest()) {
+            return $this->viewHandler->handle($configuration, View::create($user));
+        }
+
+        $flashMessage = $request->attributes->get('_sylius[flash]', 'sylius.user.verification.success');
+        $this->addFlash('success', $flashMessage);
+
+        return $response;
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function requestVerificationTokenAction(Request $request)
+    {
+        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
+        $redirectRoute = $request->attributes->get('_sylius[redirect]', 'referer', true);
+
+        /** @var UserInterface $user */
+        $user = $this->container->get('sylius.context.customer')->getCustomer()->getUser();
+        if (null !== $user->getVerifiedAt()) {
+            if (!$configuration->isHtmlRequest()) {
+                return $this->viewHandler->handle($configuration, View::create($configuration, Response::HTTP_BAD_REQUEST));
+            }
+
+            $this->addFlash('notice', 'sylius.user.verification.notice.verified');
+
+            return $this->redirectHandler->redirectToRoute($configuration, $redirectRoute);
+        }
+
+        $tokenGenerator = $this->container->get('sylius.user.generator.email_verification_token');
+        $user->setEmailVerificationToken($tokenGenerator->generate());
+
+        $this->manager->flush();
+
+        $this->eventDispatcher->dispatch(UserEvents::REQUEST_VERIFICATION_TOKEN, $configuration, $user);
+
+        if (!$configuration->isHtmlRequest()) {
+            return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
+        }
+
+        $this->addFlash('success', 'sylius.user.verification.request.success');
+
+        return $this->redirectHandler->redirectToRoute($configuration, $redirectRoute);
+    }
+
+    protected function prepareResetPasswordRequest(Request $request, GeneratorInterface $generator, $senderEvent)
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
@@ -126,7 +213,6 @@ class UserController extends ResourceController
 
             $this->addFlash('success', 'sylius.user.reset_password.requested');
             $redirectRouteName = $request->attributes->get('_sylius[redirect]', 'sylius_user_security_login', true);
-
 
             return new RedirectResponse($this->container->get('router')->generate($redirectRouteName));
         }
@@ -167,7 +253,7 @@ class UserController extends ResourceController
      */
     protected function handleExpiredToken(RequestConfiguration $configuration, $token, UserInterface $user)
     {
-        $user->setConfirmationToken(null);
+        $user->setPasswordResetToken(null);
         $user->setPasswordRequestedAt(null);
 
         $this->manager->flush();
@@ -184,15 +270,15 @@ class UserController extends ResourceController
     }
 
     /**
-     * @param TokenProviderInterface $generator
+     * @param GeneratorInterface $generator
      * @param UserInterface $user
      * @param string $senderEvent
      *
      * @return Response
      */
-    protected function handleResetPasswordRequest(TokenProviderInterface $generator, UserInterface $user, $senderEvent)
+    protected function handleResetPasswordRequest(GeneratorInterface $generator, UserInterface $user, $senderEvent)
     {
-        $user->setConfirmationToken($generator->generateUniqueToken());
+        $user->setPasswordResetToken($generator->generate());
         $user->setPasswordRequestedAt(new \DateTime());
 
         /* I have to use doctrine manager directly, because domain manager functions add a flash messages. I can't get rid of them.*/
@@ -215,7 +301,7 @@ class UserController extends ResourceController
     protected function handleResetPassword(Request $request, RequestConfiguration $configuration, UserInterface $user, $newPassword)
     {
         $user->setPlainPassword($newPassword);
-        $user->setConfirmationToken(null);
+        $user->setPasswordResetToken(null);
         $user->setPasswordRequestedAt(null);
 
         $dispatcher = $this->container->get('event_dispatcher');
@@ -262,23 +348,6 @@ class UserController extends ResourceController
         $redirectRouteName = $request->attributes->get('_sylius[redirect]', 'sylius_account_profile_show', true);
 
         return new RedirectResponse($this->container->get('router')->generate($redirectRouteName));
-    }
-
-    /**
-     * @param string $token
-     *
-     * @throws NotFoundHttpException
-     *
-     * @return UserInterface
-     */
-    protected function findUserByToken($token)
-    {
-        $user = $this->repository->findOneBy(['confirmationToken' => $token]);
-        if (null === $user) {
-            throw new NotFoundHttpException('This token does not exist');
-        }
-
-        return $user;
     }
 
     /**

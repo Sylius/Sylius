@@ -41,6 +41,7 @@ class SyliusUserExtension extends AbstractResourceExtension implements PrependEx
         $container->setParameter('sylius.user.resetting.token_ttl', $config['resetting']['token']['ttl']);
         $container->setParameter('sylius.user.resetting.token_length', $config['resetting']['token']['length']);
         $container->setParameter('sylius.user.resetting.pin_length', $config['resetting']['pin']['length']);
+        $container->setParameter('sylius.user.verification.token_length', $config['verification']['token']['length']);
 
         $container
             ->getDefinition('sylius.form.type.customer_registration')

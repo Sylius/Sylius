@@ -28,6 +28,7 @@ sylius_shop_register:
             template: SyliusShopBundle::register.html.twig
             redirect:
                 route: sylius_shop_account_dashboard
+            flash: sylius.customer.register
 
 sylius_shop_request_password_reset_token:
     path: /forgotten-password

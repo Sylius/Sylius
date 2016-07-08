@@ -9,16 +9,18 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\User\Security\Generator;
+namespace Sylius\Behat\Page\Shop\Account;
+
+use Sylius\Behat\Page\SymfonyPageInterface;
+use Sylius\Component\User\Model\UserInterface;
 
 /**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-interface GeneratorInterface
+interface VerificationPageInterface extends SymfonyPageInterface
 {
     /**
-     * @return mixed
+     * @param string $token
      */
-    public function generate();
+    public function verifyAccount($token);
 }

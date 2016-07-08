@@ -42,6 +42,7 @@ imports:
     - suites/ui/account/customer.yml
     - suites/ui/account/login.yml
     - suites/ui/account/registration.yml
+    - suites/ui/account/verification.yml
     - suites/ui/addressing/managing_countries.yml
     - suites/ui/addressing/managing_zones.yml
     - suites/ui/admin/dashboard.yml

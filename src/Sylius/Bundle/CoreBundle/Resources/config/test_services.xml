@@ -22,6 +22,7 @@
         <parameter key="sylius.random_invoice_number_generator.class">Sylius\Component\Core\Test\Services\RandomInvoiceNumberGenerator</parameter>
         <parameter key="sylius.behat.factory.default_france_channel.class">Sylius\Component\Core\Test\Services\DefaultFranceChannelFactory</parameter>
         <parameter key="sylius.behat.factory.default_channel.class">Sylius\Component\Core\Test\Services\DefaultChannelFactory</parameter>
+        <parameter key="sylius.behat.email_checker.class">Sylius\Component\Core\Test\Services\EmailChecker</parameter>
 
         <parameter key="sylius.test.factory.promotion.class">Sylius\Component\Core\Test\Factory\TestPromotionFactory</parameter>
     </parameters>
@@ -36,6 +37,10 @@
         <service id="sylius.invoice_number_generator" class="%sylius.random_invoice_number_generator.class%" />
         <service id="sylius.payment_method_name_to_gateway_converter" class="%sylius.payment_method_name_to_gateway_converter.class%">
             <argument type="service" id="payum" />
+        </service>
+
+        <service id="sylius.behat.email_checker" class="%sylius.behat.email_checker.class%">
+            <argument>%kernel.cache_dir%/spool</argument>
         </service>
 
         <!--Default Store Data-->

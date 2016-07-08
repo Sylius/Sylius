@@ -78,12 +78,24 @@ class User implements UserInterface
      *
      * @var string
      */
-    protected $confirmationToken;
+    protected $emailVerificationToken;
+
+    /**
+     * Random string sent to the user email address in order to verify the password resetting request
+     *
+     * @var string
+     */
+    protected $passwordResetToken;
 
     /**
      * @var \DateTime
      */
     protected $passwordRequestedAt;
+
+    /**
+     * @var \DateTime
+     */
+    protected $verifiedAt;
 
     /**
      * @var bool
@@ -272,17 +284,33 @@ class User implements UserInterface
     /**
      * {@inheritdoc}
      */
-    public function getConfirmationToken()
+    public function getEmailVerificationToken()
     {
-        return $this->confirmationToken;
+        return $this->emailVerificationToken;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setConfirmationToken($confirmationToken)
+    public function setEmailVerificationToken($verificationToken)
     {
-        $this->confirmationToken = $confirmationToken;
+        $this->emailVerificationToken = $verificationToken;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPasswordResetToken()
+    {
+        return $this->passwordResetToken;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setPasswordResetToken($passwordResetToken)
+    {
+        $this->passwordResetToken = $passwordResetToken;
     }
 
     /**
@@ -423,6 +451,30 @@ class User implements UserInterface
     public function setPasswordRequestedAt(\DateTime $date = null)
     {
         $this->passwordRequestedAt = $date;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isVerified()
+    {
+        return null !== $this->verifiedAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getVerifiedAt()
+    {
+        return $this->verifiedAt;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setVerifiedAt(\DateTime $verifiedAt = null)
+    {
+        $this->verifiedAt = $verifiedAt;
     }
 
     /**
