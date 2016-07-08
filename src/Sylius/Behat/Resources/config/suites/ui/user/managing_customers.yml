@@ -11,11 +11,14 @@ default:
                 - sylius.behat.context.transform.customer
                 - sylius.behat.context.transform.shared_storage
 
-                - sylius.behat.context.setup.security
+                - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.customer
+                - sylius.behat.context.setup.security
                 - sylius.behat.context.setup.user
 
+                - sylius.behat.context.ui.admin.dashboard
                 - sylius.behat.context.ui.admin.managing_customers
                 - sylius.behat.context.ui.admin.notification
+                - sylius.behat.context.ui.shop.login
             filters:
                 tags: "@managing_customers && @ui"

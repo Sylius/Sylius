@@ -12,10 +12,10 @@
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
-use Sylius\Behat\Page\Admin\Crud\UpdatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Customer\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Customer\ShowPageInterface;
+use Sylius\Behat\Page\Admin\Customer\UpdatePageInterface;
 use Sylius\Component\User\Model\CustomerInterface;
 use Webmozart\Assert\Assert;
 
@@ -137,6 +137,7 @@ final class ManagingCustomersContext implements Context
     /**
      * @Given /^I want to edit (this customer)$/
      * @Given I want to edit the customer :customer
+     * @Given /^I want to edit (the customer of my account)$/
      */
     public function iWantToEditThisCustomer(CustomerInterface $customer)
     {
@@ -371,6 +372,14 @@ final class ManagingCustomersContext implements Context
     public function iSpecifyItsPasswordAs($password)
     {
         $this->createPage->specifyPassword($password);
+    }
+
+    /**
+     * @When I change my password to :password
+     */
+    public function iSpecifyMyPasswordAs($password)
+    {
+        $this->updatePage->changePassword($password);
     }
 
     /**

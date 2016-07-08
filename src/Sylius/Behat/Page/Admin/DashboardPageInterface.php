@@ -47,4 +47,6 @@ interface DashboardPageInterface extends SymfonyPageInterface
      * @return int
      */
     public function getAverageOrderValue();
+    
+    public function logOut();
 }

@@ -42,6 +42,14 @@ final class DashboardContext implements Context
     }
 
     /**
+     * @Then I should be on the administration dashboard
+     */
+    public function iShouldBeOnAdministrationDashboard()
+    {
+        Assert::true($this->dashboardPage->isOpen());
+    }
+
+    /**
      * @Then I should see :number new orders
      */
     public function iShouldSeeNewOrders($number)
@@ -87,5 +95,14 @@ final class DashboardContext implements Context
     public function iShouldSeeNewOrdersInTheList($number)
     {
         Assert::same($this->dashboardPage->getNumberOfNewOrdersInTheList(), $number);
+    }
+
+    /**
+     * @When I log out
+     */
+    public function iLogOut()
+    {
+        $this->dashboardPage->open();
+        $this->dashboardPage->logOut();
     }
 }

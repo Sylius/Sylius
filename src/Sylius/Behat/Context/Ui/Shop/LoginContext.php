@@ -140,6 +140,16 @@ class LoginContext implements Context
     }
 
     /**
+     * @When I log in to the admin panel with email :email and password :password
+     */
+    public function iLogInToTheAdminPanelWithEmailAndPassword($email, $password)
+    {
+        $this->iSpecifyTheUserName($email);
+        $this->iSpecifyThePasswordAs($password);
+        $this->iLogIn();
+    }
+
+    /**
      * @Then I should be logged in
      */
     public function iShouldBeLoggedIn()

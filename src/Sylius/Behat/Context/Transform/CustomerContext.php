@@ -70,7 +70,7 @@ final class CustomerContext implements Context
     }
 
     /**
-     * @Transform /^(he|his|she|her)$/
+     * @Transform /^(he|his|she|her|the customer of my account)$/
      */
     public function getLastCustomer()
     {
