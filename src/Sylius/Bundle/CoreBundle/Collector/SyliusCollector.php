@@ -45,7 +45,9 @@ final class SyliusCollector extends DataCollector
         $this->data = [
             'version' => Kernel::VERSION,
             'default_currency_code' => $defaultCurrencyCode,
+            'currency_code' => null,
             'default_locale_code' => $defaultLocaleCode,
+            'locale_code' => null,
             'extensions' => [
                 'SyliusApiBundle' => ['name' => 'API', 'enabled' => false],
                 'SyliusAdminBundle' => ['name' => 'Admin', 'enabled' => false],
