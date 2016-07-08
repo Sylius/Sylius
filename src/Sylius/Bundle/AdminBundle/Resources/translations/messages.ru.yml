@@ -30,3 +30,6 @@ sylius:
                 sales:
                     header: Продажи
                     orders: Заказы
+                content:
+                    header: Контент
+                    routes: Маршруты

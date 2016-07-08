@@ -31,3 +31,6 @@ sylius:
                 sales:
                     header: Predaj
                     orders: Objednávky
+                content:
+                    header: Obsah
+                    routes: URL cesty

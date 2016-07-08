@@ -22,3 +22,5 @@ sylius:
                 sales:
                     header: Salg
                     orders: Ordrer
+                content:
+                    header: Indhold

@@ -31,3 +31,6 @@ sylius:
                 sales:
                     header: Vendite
                     orders: Ordini
+                content:
+                    header: Contenuto
+                    routes: Rotte

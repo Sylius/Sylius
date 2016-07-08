@@ -31,3 +31,6 @@ sylius:
                 sales:
                     header: میزان فروش ماه جاری
                     orders: سفارش‌ها
+                content:
+                    header: آیتم های محتوایی
+                    routes: آدرس های داخلی

@@ -31,3 +31,6 @@ sylius:
                 sales:
                     header: ยอดขาย
                     orders: ใบสั่งซื้อ
+                content:
+                    header: เนื้อหา
+                    routes: เส้นทาง
