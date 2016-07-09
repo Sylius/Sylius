@@ -14,9 +14,10 @@ namespace spec\Sylius\Component\Variation\Generator;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Variation\Checker\VariantsParityCheckerInterface;
 use Sylius\Component\Variation\Generator\VariantGeneratorInterface;
 use Sylius\Component\Variation\Model\OptionInterface;
-use Sylius\Component\Variation\Model\OptionValue;
+use Sylius\Component\Variation\Model\OptionValueInterface;
 use Sylius\Component\Variation\Model\VariableInterface;
 use Sylius\Component\Variation\Model\VariantInterface;
 use Sylius\Component\Variation\SetBuilder\SetBuilderInterface;
@@ -26,9 +27,12 @@ use Sylius\Component\Variation\SetBuilder\SetBuilderInterface;
  */
 class VariantGeneratorSpec extends ObjectBehavior
 {
-    function let(FactoryInterface $variantFactory, SetBuilderInterface $setBuilder)
-    {
-        $this->beConstructedWith($variantFactory, $setBuilder);
+    function let(
+        FactoryInterface $variantFactory,
+        SetBuilderInterface $setBuilder,
+        VariantsParityCheckerInterface $variantsParityChecker
+    ) {
+        $this->beConstructedWith($variantFactory, $setBuilder, $variantsParityChecker);
     }
 
     function it_is_initializable()
@@ -51,12 +55,13 @@ class VariantGeneratorSpec extends ObjectBehavior
     function it_generates_variants_for_every_value_of_an_objects_single_option(
         FactoryInterface $variantFactory,
         OptionInterface $colorOption,
-        OptionValue $blackColor,
-        OptionValue $redColor,
-        OptionValue $whiteColor,
+        OptionValueInterface $blackColor,
+        OptionValueInterface $redColor,
+        OptionValueInterface $whiteColor,
         SetBuilderInterface $setBuilder,
         VariableInterface $productVariable,
-        VariantInterface $permutationVariant
+        VariantInterface $permutationVariant,
+        VariantsParityCheckerInterface $variantsParityChecker
     ) {
         $productVariable->hasOptions()->willReturn(true);
 
@@ -64,21 +69,52 @@ class VariantGeneratorSpec extends ObjectBehavior
 
         $colorOption->getValues()->willReturn([$blackColor, $whiteColor, $redColor]);
 
-        // Stubbing `OptionValue` instead of `OptionValueInterface` in order to stub `getId` method.
         $blackColor->getId()->willReturn('black1');
         $whiteColor->getId()->willReturn('white2');
         $redColor->getId()->willReturn('red3');
 
-        $setBuilder->build([
-            ['black1', 'white2', 'red3'],
-        ])->willReturn([
-            ['black1', 'white2', 'red3'],
-        ]);
+        $setBuilder->build([['black1', 'white2', 'red3']])->willReturn([['black1', 'white2', 'red3']]);
+
+        $variantsParityChecker->checkParity($permutationVariant, $productVariable)->willReturn(false);
 
         $variantFactory->createNew()->willReturn($permutationVariant);
         $permutationVariant->setObject($productVariable)->shouldBeCalled();
-        $permutationVariant->addOption(Argument::type('Sylius\Component\Variation\Model\OptionValue'))->shouldBeCalled();
+        $permutationVariant->addOption(Argument::type(OptionValueInterface::class))->shouldBeCalled();
         $productVariable->addVariant($permutationVariant)->shouldBeCalled();
+
+        $this->generate($productVariable);
+    }
+
+    function it_does_not_generate_variant_if_given_variant_exist(
+        FactoryInterface $variantFactory,
+        OptionInterface $colorOption,
+        OptionValueInterface $blackColor,
+        OptionValueInterface $redColor,
+        OptionValueInterface $whiteColor,
+        SetBuilderInterface $setBuilder,
+        VariableInterface $productVariable,
+        VariantInterface $permutationVariant,
+        VariantsParityCheckerInterface $variantsParityChecker
+    ) {
+        $productVariable->hasOptions()->willReturn(true);
+
+        $productVariable->getOptions()->willReturn([$colorOption]);
+
+        $colorOption->getValues()->willReturn([$blackColor, $whiteColor, $redColor]);
+
+        $blackColor->getId()->willReturn('black1');
+        $whiteColor->getId()->willReturn('white2');
+        $redColor->getId()->willReturn('red3');
+
+        $setBuilder->build([['black1', 'white2', 'red3']])->willReturn([['black1', 'white2', 'red3']]);
+
+        $variantsParityChecker->checkParity($permutationVariant, $productVariable)->willReturn(true);
+
+        $variantFactory->createNew()->willReturn($permutationVariant);
+        $permutationVariant->setObject($productVariable)->shouldBeCalled();
+        $permutationVariant->addOption(Argument::type(OptionValueInterface::class))->shouldBeCalled();
+
+        $productVariable->addVariant($permutationVariant)->shouldNotBeCalled();
 
         $this->generate($productVariable);
     }
@@ -87,15 +123,16 @@ class VariantGeneratorSpec extends ObjectBehavior
         FactoryInterface $variantFactory,
         OptionInterface $colorOption,
         OptionInterface $sizeOption,
-        OptionValue $blackColor,
-        OptionValue $largeSize,
-        OptionValue $mediumSize,
-        OptionValue $redColor,
-        OptionValue $smallSize,
-        OptionValue $whiteColor,
+        OptionValueInterface $blackColor,
+        OptionValueInterface $largeSize,
+        OptionValueInterface $mediumSize,
+        OptionValueInterface $redColor,
+        OptionValueInterface $smallSize,
+        OptionValueInterface $whiteColor,
         SetBuilderInterface $setBuilder,
         VariableInterface $productVariable,
-        VariantInterface $permutationVariant
+        VariantInterface $permutationVariant,
+        VariantsParityCheckerInterface $variantsParityChecker
     ) {
         $productVariable->hasOptions()->willReturn(true);
 
@@ -126,9 +163,11 @@ class VariantGeneratorSpec extends ObjectBehavior
             ['red3', 'large6'],
         ]);
 
+        $variantsParityChecker->checkParity($permutationVariant, $productVariable)->willReturn(false);
+
         $variantFactory->createNew()->willReturn($permutationVariant);
         $permutationVariant->setObject($productVariable)->shouldBeCalled();
-        $permutationVariant->addOption(Argument::type('Sylius\Component\Variation\Model\OptionValue'))->shouldBeCalled();
+        $permutationVariant->addOption(Argument::type(OptionValueInterface::class))->shouldBeCalled();
         $productVariable->addVariant($permutationVariant)->shouldBeCalled();
 
         $this->generate($productVariable);

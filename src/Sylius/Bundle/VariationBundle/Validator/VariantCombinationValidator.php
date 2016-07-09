@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\VariationBundle\Validator;
 
-use Sylius\Component\Variation\Model\VariableInterface;
+use Sylius\Component\Variation\Checker\VariantsParityCheckerInterface;
 use Sylius\Component\Variation\Model\VariantInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -22,6 +22,19 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
  */
 class VariantCombinationValidator extends ConstraintValidator
 {
+    /**
+     * @var VariantsParityCheckerInterface
+     */
+    private $variantsParityChecker;
+
+    /**
+     * @param VariantsParityCheckerInterface $variantsParityChecker
+     */
+    public function __construct(VariantsParityCheckerInterface $variantsParityChecker)
+    {
+        $this->variantsParityChecker = $variantsParityChecker;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -36,41 +49,8 @@ class VariantCombinationValidator extends ConstraintValidator
             return;
         }
 
-        if ($this->matches($value, $variable)) {
+        if ($this->variantsParityChecker->checkParity($value, $variable)) {
             $this->context->addViolation($constraint->message);
         }
-    }
-
-    /**
-     * @param VariantInterface  $variant
-     * @param VariableInterface $variable
-     *
-     * @return bool
-     */
-    private function matches(VariantInterface $variant, VariableInterface $variable)
-    {
-        foreach ($variable->getVariants() as $existingVariant) {
-            if ($variant === $existingVariant) {
-                continue;
-            }
-
-            $matches = true;
-
-            if (!$variant->getOptions()->count()) {
-                continue;
-            }
-
-            foreach ($variant->getOptions() as $option) {
-                if (!$existingVariant->hasOption($option)) {
-                    $matches = false;
-                }
-            }
-
-            if ($matches) {
-                return true;
-            }
-        }
-
-        return false;
     }
 }

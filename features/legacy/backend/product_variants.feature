@@ -80,6 +80,23 @@ Feature: Product variants
         And I should see "Product has been successfully updated."
         And I should see 3 variants in the list
 
+    Scenario: Generating only missing variants of product with multiple options
+        Given I am creating variant of "Black T-Shirt"
+        When I fill in "Price" with "19.99"
+        And I fill in "Code" with "T_SHIRT_LARGE"
+        And I select "L" from "T-Shirt size"
+        And I press "Create"
+        And I follow "Generate variants"
+        And I fill in the following:
+            | sylius_product_variant_generation_variants_1_code  | T_SHIRT_S |
+            | sylius_product_variant_generation_variants_2_code  | T_SHIRT_M |
+            | sylius_product_variant_generation_variants_1_price | 100.00    |
+            | sylius_product_variant_generation_variants_2_price | 150.00    |
+        And I press "Save changes"
+        Then I should still be on the page of product "Black T-Shirt"
+        And I should see "Product has been successfully updated."
+        And I should see 3 variants in the list
+
     Scenario: Creating a product variant by selecting option
         Given I am creating variant of "Black T-Shirt"
         When I fill in "Price" with "19.99"
