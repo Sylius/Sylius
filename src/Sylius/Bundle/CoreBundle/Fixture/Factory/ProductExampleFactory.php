@@ -212,6 +212,8 @@ final class ProductExampleFactory implements ExampleFactoryInterface
         $product->setMainTaxon($options['main_taxon']);
         $product->setArchetype($options['product_archetype']);
 
+        $product->setCreatedAt($this->faker->dateTimeBetween('-1 week', 'now'));
+
         foreach ($this->getLocales() as $localeCode) {
             $product->setCurrentLocale($localeCode);
             $product->setFallbackLocale($localeCode);
