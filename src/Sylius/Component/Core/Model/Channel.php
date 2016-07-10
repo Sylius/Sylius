@@ -146,7 +146,7 @@ class Channel extends BaseChannel implements ChannelInterface
     /**
      * {@inheritdoc}
      */
-    public function setDefaultTaxZone(ZoneInterface $defaultTaxZone)
+    public function setDefaultTaxZone(ZoneInterface $defaultTaxZone = null)
     {
         $this->defaultTaxZone = $defaultTaxZone;
     }

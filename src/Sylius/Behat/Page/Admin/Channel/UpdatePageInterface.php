@@ -104,6 +104,11 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
     public function isDefaultTaxZoneChosen($taxZone);
 
     /**
+     * @return bool
+     */
+    public function isAnyDefaultTaxZoneChosen();
+
+    /**
      * @param string $taxCalculationStrategy
      *
      * @return bool

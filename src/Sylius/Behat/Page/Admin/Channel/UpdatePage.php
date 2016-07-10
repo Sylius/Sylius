@@ -101,7 +101,7 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
      */
     public function chooseDefaultTaxZone($taxZone)
     {
-        $this->getDocument()->selectFieldOption('Default tax zone', $taxZone);
+        $this->getDocument()->selectFieldOption('Default tax zone', (null === $taxZone) ? '' : $taxZone);
     }
 
     /**
@@ -126,6 +126,14 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     public function isDefaultTaxZoneChosen($taxZone)
     {
         return $this->getElement('default_tax_zone')->find('named', array('option', $taxZone))->hasAttribute('selected');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isAnyDefaultTaxZoneChosen()
+    {
+        return null !== $this->getElement('default_tax_zone')->find('css', '[selected]');
     }
 
     /**
