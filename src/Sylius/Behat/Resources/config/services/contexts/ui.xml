@@ -44,6 +44,7 @@
         </service>
 
         <service id="sylius.behat.context.ui.admin.managing_customers" class="Sylius\Behat\Context\Ui\Admin\ManagingCustomersContext" scope="scenario">
+            <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.page.admin.customer.create" />
             <argument type="service" id="sylius.behat.page.admin.customer.index" />
             <argument type="service" id="sylius.behat.page.admin.customer.update" />

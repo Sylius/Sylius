@@ -82,9 +82,9 @@ final class DashboardContext implements Context
     }
 
     /**
-     * @Then I should see :number customers in the list
+     * @Then I should see :number new customers in the list
      */
-    public function iShouldSeeCustomersInTheList2($number)
+    public function iShouldSeeNewCustomersInTheList($number)
     {
         Assert::same($this->dashboardPage->getNumberOfNewCustomersInTheList(), $number);
     }

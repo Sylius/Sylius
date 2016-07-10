@@ -11,7 +11,7 @@ Feature: Editing an administrator
 
     @ui @javascript
     Scenario: Changing password and signing again
-        Given I want to edit the customer of my account
+        Given I want to change my password
         When I change my password to "abcd"
         And I save my changes
         And I should be notified that it has been successfully edited
