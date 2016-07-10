@@ -217,7 +217,7 @@ class CoreContext extends DefaultContext
                 $data['email'],
                 isset($data['password']) ? $data['password'] : $this->faker->word(),
                 'ROLE_USER',
-                isset($data['enabled']) ? $data['enabled'] : true,
+                isset($data['enabled']) ? $data['enabled'] : 'yes',
                 isset($data['address']) && !empty($data['address']) ? $data['address'] : null,
                 isset($data['groups']) && !empty($data['groups']) ? explode(',', $data['groups']) : [],
                 false,
