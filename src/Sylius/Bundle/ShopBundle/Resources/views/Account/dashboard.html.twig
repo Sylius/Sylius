@@ -21,9 +21,9 @@
             <strong>
                 {{ customer.email }}
                 {% if customer.user.verified %}
-                    <i title="{{ 'sylius.ui.not_verified'|trans }}" class="red remove icon"></i>
-                {% else %}
                     <i title="{{ 'sylius.ui.verified'|trans }}" class="green checkmark icon"></i>
+                {% else %}
+                    <i title="{{ 'sylius.ui.not_verified'|trans }}" class="red remove icon"></i>
                 {% endif %}
             </strong>
         </div>
@@ -31,7 +31,7 @@
     <div class="ui text menu">
         <a href="{{ path('sylius_shop_account_profile_update') }}" class="item"><i class="pencil icon"></i> {{ 'sylius.ui.edit'|trans }}</a>
         <a href="{{ path('sylius_shop_account_change_password') }}" class="item"><i class="lock icon"></i> {{ 'sylius.ui.change_password'|trans }}</a>
-        {% if customer.user.verifiedAt is null %}
+        {% if not customer.user.verified %}
             <form class="item" id="verification-form" action="{{ path('sylius_shop_user_request_verification_token') }}" method="post">
                 <button type="submit" class="ui green basic button labeled icon mini">
                     <i class="checkmark icon"></i> {{ 'sylius.ui.verify'|trans }}

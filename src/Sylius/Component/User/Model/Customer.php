@@ -150,7 +150,7 @@ class Customer implements CustomerInterface, GroupableInterface
      */
     public function getFullName()
     {
-        return sprintf('%s %s', $this->firstName, $this->lastName);
+        return trim(sprintf('%s %s', $this->firstName, $this->lastName));
     }
 
     /**
