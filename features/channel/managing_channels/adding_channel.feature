@@ -17,7 +17,7 @@ Feature: Adding a new channel
         And the channel "Mobile channel" should appear in the registry
 
     @ui
-    Scenario: Adding a new channel with addtional fields
+    Scenario: Adding a new channel with additional fields
         Given I want to create a new channel
         When I specify its code as "MOBILE"
         And I name it "Mobile channel"
