@@ -13,15 +13,17 @@ namespace spec\Sylius\Bundle\ResourceBundle\Event;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Resource\Event\ResourceEvent;
+use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class ResourceControllerEventSpec extends ObjectBehavior
 {
-    function let()
-    {
-        $this->beConstructedWith('message');
+    function let(
+        RequestConfiguration $requestConfiguration
+    ) {
+        $this->beConstructedWith('message', $requestConfiguration);
     }
 
     function it_is_initializable()
@@ -76,5 +78,11 @@ final class ResourceControllerEventSpec extends ObjectBehavior
     {
         $this->setMessageParameters(['parameters']);
         $this->getMessageParameters()->shouldReturn(['parameters']);
+    }
+
+    function it_should_return_the_request_configuration(
+        RequestConfiguration $requestConfiguration
+    ) {
+        $this->getRequestConfiguration()->shouldReturn($requestConfiguration);
     }
 }

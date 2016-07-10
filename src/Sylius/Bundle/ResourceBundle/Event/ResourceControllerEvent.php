@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ResourceBundle\Event;
 
 use Symfony\Component\EventDispatcher\GenericEvent;
+use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 
 /**
  * @author Jérémy Leherpeur <jeremy@leherpeur.net>
@@ -42,6 +43,21 @@ class ResourceControllerEvent extends GenericEvent
      * @var int
      */
     protected $errorCode = 500;
+
+    /**
+     * @var RequestConfiguration
+     */
+    protected $requestConfiguration;
+
+    /**
+     * @param mixed $subject
+     * @param RequestConfiguration $requestConfiguration
+     */
+    public function __construct($subject, RequestConfiguration $requestConfiguration)
+    {
+        parent::__construct($subject);
+        $this->requestConfiguration = $requestConfiguration;
+    }
 
     /**
      * Stop event propagation
@@ -156,5 +172,15 @@ class ResourceControllerEvent extends GenericEvent
     public function setErrorCode($errorCode)
     {
         $this->errorCode = $errorCode;
+    }
+
+    /**
+     * Return the request configuration.
+     *
+     * @return RequestConfiguration
+     */
+    public function getRequestConfiguration()
+    {
+        return $this->requestConfiguration;
     }
 }

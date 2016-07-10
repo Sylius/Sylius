@@ -21,6 +21,7 @@ use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Sylius\Bundle\ResourceBundle\ResourceControllerEvents;
 
 /**
  * @mixin EventDispatcher
@@ -56,8 +57,9 @@ final class EventDispatcherSpec extends ObjectBehavior
         $metadata->getName()->willReturn('product');
 
         $eventDispatcher->dispatch('sylius.product.show', Argument::type(ResourceControllerEvent::class))->shouldBeCalled();
+        $eventDispatcher->dispatch(ResourceControllerEvents::SHOW, Argument::type(ResourceControllerEvent::class))->shouldBeCalled();
 
-        $this->dispatch(ResourceActions::SHOW, $requestConfiguration, $resource)->shouldHaveType(ResourceControllerEvent::class);
+        $this->dispatch(ResourceControllerEvents::SHOW, $requestConfiguration, $resource)->shouldHaveType(ResourceControllerEvent::class);
     }
 
     function it_dispatches_appropriate_custom_event_for_a_resource(
@@ -71,12 +73,13 @@ final class EventDispatcherSpec extends ObjectBehavior
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 
-        $eventDispatcher->dispatch('sylius.product.register', Argument::type(ResourceControllerEvent::class))->shouldBeCalled();
+        $eventDispatcher->dispatch('sylius.product.post_register', Argument::type(ResourceControllerEvent::class))->shouldBeCalled();
+        $eventDispatcher->dispatch(ResourceControllerEvents::POST_CREATE, Argument::type(ResourceControllerEvent::class))->shouldBeCalled();
 
-        $this->dispatch(ResourceActions::CREATE, $requestConfiguration, $resource)->shouldHaveType(ResourceControllerEvent::class);
+        $this->dispatch(ResourceControllerEvents::POST_CREATE, $requestConfiguration, $resource)->shouldHaveType(ResourceControllerEvent::class);
     }
 
-    function it_dispatches_appropriate_pre_event_for_a_resource(
+    function it_dispatches_appropriate_prefixed_event_for_a_resource(
         RequestConfiguration $requestConfiguration,
         MetadataInterface $metadata,
         EventDispatcherInterface $eventDispatcher,
@@ -88,55 +91,28 @@ final class EventDispatcherSpec extends ObjectBehavior
         $metadata->getName()->willReturn('product');
 
         $eventDispatcher->dispatch('sylius.product.pre_create', Argument::type(ResourceControllerEvent::class))->shouldBeCalled();
+        $eventDispatcher->dispatch(ResourceControllerEvents::PRE_CREATE, Argument::type(ResourceControllerEvent::class))->shouldBeCalled();
 
-        $this->dispatchPreEvent(ResourceActions::CREATE, $requestConfiguration, $resource);
+        $this->dispatch(ResourceControllerEvents::PRE_CREATE, $requestConfiguration, $resource);
     }
 
-    function it_dispatches_appropriate_custom_pre_event_for_a_resource(
+    function it_throws_an_exception_for_an_unknown_event(
         RequestConfiguration $requestConfiguration,
         MetadataInterface $metadata,
         EventDispatcherInterface $eventDispatcher,
         ResourceInterface $resource
     ) {
+
         $requestConfiguration->getEvent()->willReturn('register');
         $requestConfiguration->getMetadata()->willReturn($metadata);
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 
-        $eventDispatcher->dispatch('sylius.product.pre_register', Argument::type(ResourceControllerEvent::class))->shouldBeCalled();
-
-        $this->dispatchPreEvent(ResourceActions::CREATE, $requestConfiguration, $resource);
-    }
-
-    function it_dispatches_appropriate_post_event_for_a_resource(
-        RequestConfiguration $requestConfiguration,
-        MetadataInterface $metadata,
-        EventDispatcherInterface $eventDispatcher,
-        ResourceInterface $resource
-    ) {
-        $requestConfiguration->getEvent()->willReturn(null);
-        $requestConfiguration->getMetadata()->willReturn($metadata);
-        $metadata->getApplicationName()->willReturn('sylius');
-        $metadata->getName()->willReturn('product');
-
-        $eventDispatcher->dispatch('sylius.product.post_create', Argument::type(ResourceControllerEvent::class))->shouldBeCalled();
-
-        $this->dispatchPostEvent(ResourceActions::CREATE, $requestConfiguration, $resource);
-    }
-
-    function it_dispatches_appropriate_custom_post_event_for_a_resource(
-        RequestConfiguration $requestConfiguration,
-        MetadataInterface $metadata,
-        EventDispatcherInterface $eventDispatcher,
-        ResourceInterface $resource
-    ) {
-        $requestConfiguration->getEvent()->willReturn('register');
-        $requestConfiguration->getMetadata()->willReturn($metadata);
-        $metadata->getApplicationName()->willReturn('sylius');
-        $metadata->getName()->willReturn('product');
-
-        $eventDispatcher->dispatch('sylius.product.post_register', Argument::type(ResourceControllerEvent::class))->shouldBeCalled();
-
-        $this->dispatchPostEvent(ResourceActions::CREATE, $requestConfiguration, $resource)->shouldHaveType(ResourceControllerEvent::class);
+        $this->shouldThrow(new \RuntimeException('Do not know how to dispatch resource event "this_is_an_unknown_event"'))->during(
+            'dispatch', [
+                'this_is_an_unknown_event', 
+                $requestConfiguration, 
+                $resource
+            ]);
     }
 }
