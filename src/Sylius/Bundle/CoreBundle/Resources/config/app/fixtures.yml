@@ -29,12 +29,14 @@ sylius_fixtures:
                                 name: Cash on delivery
                             bank_transfer:
                                 name: Bank transfer
+                                enabled: true
 
                 shipping_method:
                     options:
                         custom:
                             ups:
                                 name: UPS
+                                enabled: true
                             dhl_express:
                                 name: DHL Express
                             fedex:
@@ -62,6 +64,7 @@ sylius_fixtures:
                     options:
                         random: 20
 
+                rbac: ~
                 admin_user:
                     name: user
                     options:
@@ -115,3 +118,7 @@ sylius_fixtures:
                 tshirt_product:
                     options:
                         amount: 15
+
+                order:
+                    options:
+                        amount: 20
