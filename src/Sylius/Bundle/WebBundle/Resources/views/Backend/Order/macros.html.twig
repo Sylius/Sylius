@@ -28,7 +28,7 @@
             <td class="center-text"><input type="checkbox" value="{{ order.id }}" /></td>
             <td>{{ order.createdAt|format_date }}</td>
             <td>
-                <span {%- if order.channel.color %} style="color: {{ order.channel.color }};"{%- endif -%}>{{ order.channel.code }}</span>
+                <span {% if order.channel.color %}style="color: {{ order.channel.color }};"{% endif %}>{{ order.channel.code }}</span>
             </td>
             <td>
                 <a href="{{ path('sylius_backend_order_show', {'id': order.id}) }}">
