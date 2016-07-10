@@ -25,21 +25,32 @@ use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 final class ChannelCollector extends DataCollector
 {
     /**
+     * @var ChannelContextInterface
+     */
+    private $channelContext;
+
+    /**
      * @param ChannelRepositoryInterface $channelRepository
      * @param ChannelContextInterface $channelContext
      * @param bool $channelChangeSupport
      */
     public function __construct(ChannelRepositoryInterface $channelRepository, ChannelContextInterface $channelContext, $channelChangeSupport = false)
     {
-        $this->data['channels'] = $channelRepository->findAll();
+        $this->channelContext = $channelContext;
 
-        try {
-            $this->data['current_channel'] = $channelContext->getChannel();
-        } catch (ChannelNotFoundException $exception) {
-            $this->data['current_channel'] = null;
-        }
+        $this->data = [
+            'channel' => null,
+            'channels' => $channelRepository->findAll(),
+            'channel_change_support' => $channelChangeSupport,
+        ];
+    }
 
-        $this->data['channel_change_support'] = $channelChangeSupport;
+    /**
+     * @return ChannelInterface
+     */
+    public function getChannel()
+    {
+        return $this->data['channel'];
     }
 
     /**
@@ -48,14 +59,6 @@ final class ChannelCollector extends DataCollector
     public function getChannels()
     {
         return $this->data['channels'];
-    }
-
-    /**
-     * @return ChannelInterface
-     */
-    public function getCurrentChannel()
-    {
-        return $this->data['current_channel'];
     }
 
     /**
@@ -71,6 +74,9 @@ final class ChannelCollector extends DataCollector
      */
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
+        try {
+            $this->data['current_channel'] = $this->channelContext->getChannel();
+        } catch (ChannelNotFoundException $exception) {}
     }
 
     /**
