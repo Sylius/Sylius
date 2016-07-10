@@ -27,3 +27,13 @@ Feature: Selecting default tax zone for a channel
         And I save my changes
         Then I should be notified that it has been successfully edited
         And the default tax zone for the "Web store" channel should be "European Union"
+
+    @ui
+    Scenario: Removing existing channel default tax zone
+        Given the store operates on a channel named "Web store"
+        And its default tax zone is zone "EU"
+        When I want to modify this channel
+        And I remove its default tax zone
+        And I save my changes
+        Then I should be notified that it has been successfully edited
+        And channel "Web store" should not have default tax zone

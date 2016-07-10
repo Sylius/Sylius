@@ -13,6 +13,7 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Factory\ChannelFactoryInterface;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
@@ -127,7 +128,16 @@ final class ChannelContext implements Context
     {
         $this->changeChannelState($channel, false);
     }
-    
+
+    /**
+     * @Given /^(its) default tax zone is (zone "([^"]+)")$/
+     */
+    public function itsDefaultTaxRateIs(ChannelInterface $channel, ZoneInterface $defaultTaxZone)
+    {
+        $channel->setDefaultTaxZone($defaultTaxZone);
+        $this->channelManager->flush();
+    }
+
     /**
      * @param ChannelInterface $channel
      * @param bool $state

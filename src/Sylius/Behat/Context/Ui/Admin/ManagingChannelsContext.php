@@ -437,6 +437,14 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
+     * @Given I remove its default tax zone
+     */
+    public function iRemoveItsDefaultTaxZone()
+    {
+        $this->updatePage->chooseDefaultTaxZone(null);
+    }
+
+    /**
      * @When I select the :taxCalculationStrategy as tax calculation strategy
      */
     public function iSelectTaxCalculationStrategy($taxCalculationStrategy)
@@ -469,6 +477,19 @@ final class ManagingChannelsContext implements Context
         Assert::true(
             $this->updatePage->isDefaultTaxZoneChosen($taxZone),
             sprintf('Default tax zone %s should be selected, but it is not', $taxZone)
+        );
+    }
+
+    /**
+     * @Given channel :channel should not have default tax zone
+     */
+    public function channelShouldNotHaveDefaultTaxZone(ChannelInterface $channel)
+    {
+        $this->updatePage->open(['id' => $channel->getId()]);
+
+        Assert::false(
+            $this->updatePage->isAnyDefaultTaxZoneChosen(),
+            'Channel should not have default tax zone, but it has.'
         );
     }
 
