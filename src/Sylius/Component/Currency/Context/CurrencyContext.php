@@ -13,8 +13,10 @@ namespace Sylius\Component\Currency\Context;
 
 use Sylius\Component\Storage\StorageInterface;
 
-class CurrencyContext implements CurrencyContextInterface
+final class CurrencyContext implements CurrencyContextInterface
 {
+    const STORAGE_KEY = '_sylius_currency';
+
     /**
      * @var string
      */

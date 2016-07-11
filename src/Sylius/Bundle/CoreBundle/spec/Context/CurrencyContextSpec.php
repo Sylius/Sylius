@@ -14,29 +14,26 @@ namespace spec\Sylius\Bundle\CoreBundle\Context;
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Context\CurrencyContext;
-use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
-use Sylius\Bundle\SettingsBundle\Model\SettingsInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Channel\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Component\Currency\Context\CurrencyContext as SyliusCurrencyContext;
+use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Storage\StorageInterface;
 use Sylius\Component\User\Context\CustomerContextInterface;
 
+/**
+ * @mixin CurrencyContext
+ */
 class CurrencyContextSpec extends ObjectBehavior
 {
     function let(
         StorageInterface $storage,
         CustomerContextInterface $customerContext,
-        SettingsManagerInterface $settingsManager,
         ObjectManager $customerManager,
-        SettingsInterface $settings,
         ChannelContextInterface $channelContext
     ) {
-        $settingsManager->load('sylius_general')->willReturn($settings);
-        $settings->get('currency')->willReturn('EUR');
-
-        $this->beConstructedWith($storage, $customerContext, $settingsManager, $customerManager, $channelContext);
+        $this->beConstructedWith($storage, $customerContext, $customerManager, $channelContext, 'EUR');
     }
 
     function it_is_initializable()
@@ -44,9 +41,9 @@ class CurrencyContextSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\Context\CurrencyContext');
     }
 
-    function it_extends_Sylius_currency_context()
+    function it_implements_currency_context_interface()
     {
-        $this->shouldHaveType(SyliusCurrencyContext::class);
+        $this->shouldImplement(CurrencyContextInterface::class);
     }
 
     function it_gets_default_currency_code()
@@ -55,10 +52,10 @@ class CurrencyContextSpec extends ObjectBehavior
     }
 
     function it_gets_currency_code_from_session_if_there_is_no_customer(
-        $customerContext,
-        $storage,
-        ChannelInterface $channel,
-        $channelContext
+        StorageInterface $storage,
+        CustomerContextInterface $customerContext,
+        ChannelContextInterface $channelContext,
+        ChannelInterface $channel
     ) {
         $customerContext->getCustomer()->willReturn(null);
 
@@ -70,9 +67,23 @@ class CurrencyContextSpec extends ObjectBehavior
         $this->getCurrencyCode()->shouldReturn('RSD');
     }
 
+    function it_gets_currency_code_from_session_if_there_is_no_customer_and_no_channel(
+        StorageInterface $storage,
+        CustomerContextInterface $customerContext,
+        ChannelContextInterface $channelContext
+    ) {
+        $customerContext->getCustomer()->willReturn(null);
+
+        $channelContext->getChannel()->willThrow(ChannelNotFoundException::class);
+
+        $storage->getData(sprintf(CurrencyContext::STORAGE_KEY, '__DEFAULT__'), 'EUR')->willReturn('RSD');
+
+        $this->getCurrencyCode()->shouldReturn('RSD');
+    }
+
     function it_gets_currency_code_from_customer(
-        CustomerInterface $customer,
-        $customerContext
+        CustomerContextInterface $customerContext,
+        CustomerInterface $customer
     ) {
         $customerContext->getCustomer()->willReturn($customer);
         $customer->getCurrencyCode()->willReturn('PLN');
@@ -81,10 +92,10 @@ class CurrencyContextSpec extends ObjectBehavior
     }
 
     function it_sets_currency_code_to_session_if_there_is_no_customer(
-        $customerContext,
-        $storage,
-        ChannelInterface $channel,
-        $channelContext
+        StorageInterface $storage,
+        CustomerContextInterface $customerContext,
+        ChannelContextInterface $channelContext,
+        ChannelInterface $channel
     ) {
         $customerContext->getCustomer()->willReturn(null);
 
@@ -96,11 +107,25 @@ class CurrencyContextSpec extends ObjectBehavior
         $this->setCurrencyCode('PLN');
     }
 
+    function it_sets_currency_code_to_session_if_there_is_no_customer_and_no_channel(
+        StorageInterface $storage,
+        CustomerContextInterface $customerContext,
+        ChannelContextInterface $channelContext
+    ) {
+        $customerContext->getCustomer()->willReturn(null);
+
+        $channelContext->getChannel()->willThrow(ChannelNotFoundException::class);
+
+        $storage->setData(sprintf(CurrencyContext::STORAGE_KEY, '__DEFAULT__'), 'PLN')->shouldBeCalled();
+
+        $this->setCurrencyCode('PLN');
+    }
+
     function it_sets_currency_code_to_customer(
-        CustomerInterface $customer,
-        $customerContext,
+        CustomerContextInterface $customerContext,
+        ChannelContextInterface $channelContext,
         ChannelInterface $channel,
-        $channelContext
+        CustomerInterface $customer
     ) {
         $customerContext->getCustomer()->willReturn($customer);
         $customer->setCurrencyCode('PLN')->shouldBeCalled();

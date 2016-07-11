@@ -527,9 +527,9 @@
         <service id="sylius.context.currency" class="%sylius.context.currency.class%">
             <argument /> <!-- Storage service name comes from config -->
             <argument type="service" id="sylius.context.customer" />
-            <argument type="service" id="sylius.settings.manager" />
             <argument type="service" id="sylius.manager.customer" />
             <argument type="service" id="sylius.context.channel" />
+            <argument>%sylius.money.currency%</argument>
         </service>
 
         <service id="sylius.currency_provider" class="%sylius.currency_provider.class%">
