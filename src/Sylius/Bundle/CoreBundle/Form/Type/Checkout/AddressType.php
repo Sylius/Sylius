@@ -21,7 +21,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class AddressingType extends AbstractResourceType
+class AddressType extends AbstractResourceType
 {
     /**
      * {@inheritdoc}
@@ -61,6 +61,6 @@ class AddressingType extends AbstractResourceType
      */
     public function getName()
     {
-        return 'sylius_shop_checkout_addressing';
+        return 'sylius_checkout_address';
     }
 }
