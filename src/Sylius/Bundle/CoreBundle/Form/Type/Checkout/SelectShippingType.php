@@ -11,26 +11,24 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Checkout;
 
-use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ShippingStepType extends AbstractResourceType
+class SelectShippingType extends AbstractType
 {
     /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-            ->add('shipments', 'collection', [
-                'type' => 'sylius_checkout_shipment',
-            ])
-        ;
+        $builder->add('shipments', 'collection', [
+            'type' => 'sylius_checkout_shipment',
+            'label' => false,
+        ]);
     }
 
     /**
@@ -38,6 +36,6 @@ class ShippingStepType extends AbstractResourceType
      */
     public function getName()
     {
-        return 'sylius_checkout_shipping';
+        return 'sylius_checkout_select_shipping';
     }
 }

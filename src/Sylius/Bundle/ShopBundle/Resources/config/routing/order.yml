@@ -21,8 +21,8 @@ sylius_shop_order_after_pay:
             redirect:
                 route: sylius_shop_checkout_thank_you
 
-sylius_shop_order_payment_method_update:
-    path: /{orderId}/payment-method/edit
+sylius_shop_order_change_payment_method:
+    path: /{orderId}/change-payment-method
     methods: [GET, PUT]
     defaults:
         _controller: sylius.controller.order:updateAction

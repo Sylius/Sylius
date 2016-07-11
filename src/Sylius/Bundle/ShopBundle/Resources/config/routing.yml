@@ -6,6 +6,9 @@ sylius_shop_homepage:
     defaults:
         _controller: sylius.controller.shop.homepage:indexAction
 
+sylius_shop_security:
+    resource: "@SyliusShopBundle/Resources/config/routing/security.yml"
+
 sylius_shop_taxon:
     resource: "@SyliusShopBundle/Resources/config/routing/taxon.yml"
 
@@ -15,9 +18,6 @@ sylius_shop_product:
 sylius_shop_cart:
     resource: "@SyliusShopBundle/Resources/config/routing/cart.yml"
     prefix: /cart
-
-sylius_shop_security:
-    resource: "@SyliusShopBundle/Resources/config/routing/security.yml"
 
 sylius_shop_checkout:
     resource: "@SyliusShopBundle/Resources/config/routing/checkout.yml"
@@ -47,13 +47,6 @@ sylius_shop_switch_locale:
 sylius_shop_partial:
     resource: "@SyliusShopBundle/Resources/config/routing/partial.yml"
     prefix: /_partial
-
-sylius_shop_partial_provinces:
-    path: /provinces
-    defaults:
-        _controller: sylius.controller.province:choiceFormAction
-        _sylius:
-            template: SyliusShopBundle:Checkout:_provinces.html.twig
 
 sylius_shop_verification:
     prefix: /verify

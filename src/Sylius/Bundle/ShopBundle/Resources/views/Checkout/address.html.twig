@@ -8,10 +8,10 @@
     <div class="ui stackable grid">
         <div class="eleven wide column">
             <div class="ui segment">
-                {{ form_start(form, {'action': path('sylius_shop_checkout_addressing'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
+                {{ form_start(form, {'action': path('sylius_shop_checkout_address'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
                 <input type="hidden" name="_method" value="PUT" />
 
-                {% include '@SyliusShop/Checkout/Form/_addressing.html.twig' %}
+                {% include '@SyliusShop/Checkout/Address/_form.html.twig' %}
 
                 <div class="ui hidden divider"></div>
                 <div class="ui two column grid">
