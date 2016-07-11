@@ -16,6 +16,7 @@ use Sylius\Bundle\GridBundle\DependencyInjection\Compiler\RegisterFieldTypesPass
 use Sylius\Bundle\GridBundle\DependencyInjection\Compiler\RegisterFiltersPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
+use Sylius\Component\Registry\DependencyInjection\Compiler\AliasedServicePass;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -29,8 +30,21 @@ class SyliusGridBundle extends Bundle
     {
         parent::build($container);
 
-        $container->addCompilerPass(new RegisterDriversPass());
-        $container->addCompilerPass(new RegisterFiltersPass());
-        $container->addCompilerPass(new RegisterFieldTypesPass());
+        $container->addCompilerPass(new AliasedServicePass(
+            'sylius.registry.grid_driver',
+            'sylius.grid_driver'
+        ));
+
+        $container->addCompilerPass(new AliasedServicePass(
+            'sylius.registry.grid_field',
+            'sylius.grid_field',
+            'type'
+        ));
+
+        $container->addCompilerPass(new AliasedServicePass(
+            'sylius.registry.grid_filter',
+            'sylius.grid_filter',
+            'type'
+        ));
     }
 }
