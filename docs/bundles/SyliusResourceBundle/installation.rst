@@ -36,6 +36,7 @@ You need to enable the bundle and its dependencies in the kernel:
             new Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
             new WhiteOctober\PagerfantaBundle\WhiteOctoberPagerfantaBundle(),
             new Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
+            new winzou\Bundle\StateMachineBundle\winzouStateMachineBundle(),
         );
     }
 
