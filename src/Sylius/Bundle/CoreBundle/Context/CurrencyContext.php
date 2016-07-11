@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\CoreBundle\Context;
 
 use Doctrine\Common\Persistence\ObjectManager;
-use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -55,23 +54,22 @@ final class CurrencyContext implements CurrencyContextInterface
     /**
      * @param StorageInterface $storage
      * @param CustomerContextInterface $customerContext
-     * @param SettingsManagerInterface $settingsManager
      * @param ObjectManager $customerManager
      * @param ChannelContextInterface $channelContext
+     * @param string $defaultCurrencyCode
      */
     public function __construct(
         StorageInterface $storage,
         CustomerContextInterface $customerContext,
-        SettingsManagerInterface $settingsManager,
         ObjectManager $customerManager,
-        ChannelContextInterface $channelContext
+        ChannelContextInterface $channelContext,
+        $defaultCurrencyCode
     ) {
         $this->storage = $storage;
         $this->customerContext = $customerContext;
         $this->customerManager = $customerManager;
         $this->channelContext = $channelContext;
-
-        $this->defaultCurrencyCode = $settingsManager->load('sylius_general')->get('currency');
+        $this->defaultCurrencyCode = $defaultCurrencyCode;
     }
 
     /**

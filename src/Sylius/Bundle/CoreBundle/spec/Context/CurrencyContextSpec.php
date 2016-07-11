@@ -14,8 +14,6 @@ namespace spec\Sylius\Bundle\CoreBundle\Context;
 use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Context\CurrencyContext;
-use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
-use Sylius\Bundle\SettingsBundle\Model\SettingsInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Channel\Model\ChannelInterface;
@@ -32,15 +30,10 @@ class CurrencyContextSpec extends ObjectBehavior
     function let(
         StorageInterface $storage,
         CustomerContextInterface $customerContext,
-        SettingsManagerInterface $settingsManager,
         ObjectManager $customerManager,
-        ChannelContextInterface $channelContext,
-        SettingsInterface $settings
+        ChannelContextInterface $channelContext
     ) {
-        $settingsManager->load('sylius_general')->willReturn($settings);
-        $settings->get('currency')->willReturn('EUR');
-
-        $this->beConstructedWith($storage, $customerContext, $settingsManager, $customerManager, $channelContext);
+        $this->beConstructedWith($storage, $customerContext, $customerManager, $channelContext, 'EUR');
     }
 
     function it_is_initializable()
