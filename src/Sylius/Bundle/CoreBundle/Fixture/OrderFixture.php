@@ -84,7 +84,6 @@ final class OrderFixture extends AbstractFixture
     private $faker;
 
     /**
-     * OrderFixture constructor.
      * @param FactoryInterface $orderFactory
      * @param FactoryInterface $orderItemFactory
      * @param OrderItemQuantityModifierInterface $orderItemQuantityModifier
@@ -137,13 +136,11 @@ final class OrderFixture extends AbstractFixture
             $countryCode = $this->faker->randomElement($countries)->getCode();
 
             $currencyCode = $this->faker->randomElement($channel->getCurrencies()->toArray())->getCode();
-            $localeCode = $this->faker->randomElement($channel->getLocales()->toArray())->getCode();
 
             $order = $this->orderFactory->createNew();
             $order->setChannel($channel);
             $order->setCustomer($customer);
             $order->setCurrencyCode($currencyCode);
-            // $order->setLocaleCode($localeCode);
 
             $this->generateItems($order);
 
@@ -220,7 +217,7 @@ final class OrderFixture extends AbstractFixture
         $order->setShippingAddress($address);
         $order->setBillingAddress($address);
 
-        $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->apply(OrderCheckoutTransitions::TRANSITION_ADDRESS);
+        $this->applyCheckoutStateTransition($order, OrderCheckoutTransitions::TRANSITION_ADDRESS);
     }
 
     /**
@@ -236,7 +233,7 @@ final class OrderFixture extends AbstractFixture
             $shipment->setMethod($shippingMethod);
         }
 
-        $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->apply(OrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING);
+        $this->applyCheckoutStateTransition($order, OrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING);
     }
 
     /**
@@ -248,11 +245,11 @@ final class OrderFixture extends AbstractFixture
 
         Assert::notNull($paymentMethod);
 
-        foreach ($order->getPayments() as $shipment) {
-            $shipment->setMethod($paymentMethod);
+        foreach ($order->getPayments() as $payment) {
+            $payment->setMethod($paymentMethod);
         }
 
-        $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->apply(OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT);
+        $this->applyCheckoutStateTransition($order, OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT);
     }
 
     /**
@@ -264,6 +261,15 @@ final class OrderFixture extends AbstractFixture
             $order->setNotes($this->faker->sentence);
         }
 
-        $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->apply(OrderCheckoutTransitions::TRANSITION_COMPLETE);
+        $this->applyCheckoutStateTransition($order, OrderCheckoutTransitions::TRANSITION_COMPLETE);
+    }
+
+    /**
+     * @param OrderInterface $order
+     * @param string $transition
+     */
+    private function applyCheckoutStateTransition(OrderInterface $order, $transition)
+    {
+        $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)->apply($transition);
     }
 }
