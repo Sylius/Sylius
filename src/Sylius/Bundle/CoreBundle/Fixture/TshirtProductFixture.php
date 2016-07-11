@@ -123,10 +123,10 @@ final class TshirtProductFixture extends AbstractFixture
                         [
                             'code' => 'womens_t_shirts',
                             'name' => 'Women',
-                        ]
-                    ]
-                ]
-            ]
+                        ],
+                    ],
+                ],
+            ],
         ]]]);
 
         $this->productAttributeFixture->load(['custom' => [
