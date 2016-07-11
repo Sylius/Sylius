@@ -204,6 +204,7 @@ EOT
         $channel = $channelFactory->createNew();
         $channel->setCode('default');
         $channel->setName('Default');
+        $channel->setTaxCalculationStrategy('order_items_based');
 
         $channel->addCurrency($this->currency);
         $channel->addLocale($this->locale);
