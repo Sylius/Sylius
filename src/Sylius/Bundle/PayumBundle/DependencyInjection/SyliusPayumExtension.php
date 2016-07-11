@@ -58,8 +58,10 @@ class SyliusPayumExtension extends AbstractResourceExtension implements PrependE
 
         $config = $container->getExtensionConfig('payum');
         $gateways = [];
-        foreach (array_keys($config[0]['gateways']) as $gatewayKey) {
-            $gateways[$gatewayKey] = 'sylius.payum_gateway.'.$gatewayKey;
+
+        foreach ($config[0]['gateways'] as $gatewayKey=>$config) {
+            $gateways[$gatewayKey]['gateway_key'] = 'sylius.payum_gateway.'.$gatewayKey;
+            $gateways[$gatewayKey]['factory'] = $config['factory'];
         }
 
         $container->prependExtensionConfig('sylius_payment', ['gateways' => $gateways]);

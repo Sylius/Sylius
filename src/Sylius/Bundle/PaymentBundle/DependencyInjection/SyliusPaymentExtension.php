@@ -42,12 +42,31 @@ class SyliusPaymentExtension extends AbstractResourceExtension
             $loader->load($configFile);
         }
 
-        $container->setParameter('sylius.payment_gateways', $config['gateways']);
+
+        $this->loadGatewatConfiguration($config['gateways'], $container);
 
         $factoryDefinition = new Definition(Factory::class, [new Parameter('sylius.model.payment.class')]);
         $paymentFactoryClass = $container->getParameter('sylius.factory.payment.class');
         $decoratedPaymentFactoryDefinition = new Definition($paymentFactoryClass, [$factoryDefinition]);
 
         $container->setDefinition('sylius.factory.payment', $decoratedPaymentFactoryDefinition);
+    }
+
+    /**
+     * @param array $gatewayConfigs
+     * @param ContainerBuilder $container
+     */
+    protected function loadGatewatConfiguration(array $gatewayConfigs, ContainerBuilder $container)
+    {
+        $defaultGateways = [];
+
+        $gateways = [];
+        foreach ($gatewayConfigs as $gatewayKey => $config) {
+            $defaultGateways[] = $config['factory'];
+            $gateways[$gatewayKey] = $config['gateway_key'];
+        }
+
+        $container->setParameter('sylius.payment_gateways', $gateways);
+        $container->setParameter('sylius.default_gateways', array_unique($defaultGateways));
     }
 }

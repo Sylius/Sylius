@@ -1,7 +1,17 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Sylius\Bundle\CoreBundle\Form\Type;
 
+use Sylius\Component\Payment\Model\PaymentMethod;
 use Symfony\Component\Form\Extension\Core\Type\FormType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodType as BasePaymentMethodType;
@@ -15,6 +25,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Payum\Core\Registry\GatewayFactoryRegistryInterface;
 use Symfony\Component\Translation\TranslatorInterface;
+use Payum\Core\Exception\InvalidArgumentException;
 
 /**
  * @author   Vidy Videni   <videni@foxmail.com>
@@ -56,13 +67,13 @@ class PaymentMethodType extends BasePaymentMethodType
      * @param TranslatorInterface $translator
      * @param array $defaultGateways
      */
-    public function __construct($paymentMethodClass, array $validationGroups = [], GatewayFactoryRegistryInterface $registry, StorageInterface $gatewayConfigStore,TranslatorInterface $translator, array $defaultGateways = [])
+    public function __construct($paymentMethodClass, array $validationGroups = [], GatewayFactoryRegistryInterface $registry, StorageInterface $gatewayConfigStore, TranslatorInterface $translator, array $defaultGateways = [])
     {
         parent::__construct($paymentMethodClass, $validationGroups);
         $this->registry = $registry;
         $this->gatewayConfigStore = $gatewayConfigStore;
         $this->defaultGateways = $defaultGateways;
-        $this->translator=$translator;
+        $this->translator = $translator;
 
         $this->initializeGatewayConfigs();
     }
@@ -75,16 +86,15 @@ class PaymentMethodType extends BasePaymentMethodType
     {
         parent::buildForm($builder, $options);
 
-        $this->buildGatewayConfigForm($builder, $options);
+        $this->buildGatewayConfigForm($builder);
 
-        $builder->addEventListener(FormEvents::POST_SUBMIT, array($this,'processGatewayConfig'));
+        $builder->addEventListener(FormEvents::POST_SUBMIT, array($this, 'processGatewayConfig'));
     }
 
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
      */
-    protected function buildGatewayConfigForm(FormBuilderInterface $builder, array $options)
+    protected function buildGatewayConfigForm(FormBuilderInterface $builder)
     {
         foreach ($this->gatewayConfigs as $factoryName => $config) {
 
@@ -97,10 +107,8 @@ class PaymentMethodType extends BasePaymentMethodType
                 $gatewayConfig = array_shift($gatewayConfigs);
             }
 
-
             $configForm = $builder->create($factoryName, FormType::class, array(
                 'mapped' => false,
-                'csrf_protection' => false,
                 'data' => $gatewayConfig ? $gatewayConfig->getConfig() : null
             ));
 
@@ -122,7 +130,7 @@ class PaymentMethodType extends BasePaymentMethodType
     /**
      * @param FormEvent $event
      */
-    public  function processGatewayConfig(FormEvent $event)
+    public function processGatewayConfig(FormEvent $event)
     {
         /**
          * @var  $paymentMethod \Sylius\Component\Payment\Model\PaymentMethod
@@ -151,13 +159,9 @@ class PaymentMethodType extends BasePaymentMethodType
             }
         }
 
-        if ($form->isValid())  //now we are sure the payment method data will be saved  , so we also save gateway config
+        if ($form->isValid())  //now we are sure the payment method can be saved , so we also save gateway config
         {
-            $gatewayConfig = $this->gatewayConfigStore->create();
-            $gatewayConfig->setGatewayName($paymentMethod->getGateway());
-            $gatewayConfig->setFactoryName($paymentMethod->getGateway());
-            $gatewayConfig->setConfig($data);
-            $this->gatewayConfigStore->update($gatewayConfig);
+            $this->saveGatewayConfig($factoryName, $paymentMethod, $data);
         }
     }
 
@@ -171,13 +175,45 @@ class PaymentMethodType extends BasePaymentMethodType
 
     protected function initializeGatewayConfigs()
     {
-        foreach ($this->defaultGateways as $name => $factory) {
-            $gatewayFactory = $this->registry->getGatewayFactory($name);
+        foreach ($this->defaultGateways as $name ) {
+            try{
+                $gatewayFactory = $this->registry->getGatewayFactory($name);
+            }catch (InvalidArgumentException $exceptiopn)
+            {
+                continue;
+            }
+
             $config = $gatewayFactory->createConfig();
 
             if (empty($config['payum.default_options']))
                 continue;
             $this->gatewayConfigs[$name] = $config;
         }
+    }
+
+    /**
+     * @param string $factoryName
+     * @param PaymentMethod  $paymentMethod
+     * @param array $data array
+     */
+    protected function saveGatewayConfig($factoryName,PaymentMethod $paymentMethod, array $data)
+    {
+        /**
+         * @var  $gatewayConfig \Sylius\Bundle\PayumBundle\Model\GatewayConfig
+         */
+        $gatewayConfig = null;
+
+        if ($gatewayConfigs = $this->gatewayConfigStore->findBy(array('gatewayName' => $factoryName))) {
+            $gatewayConfig = array_shift($gatewayConfigs);
+        }
+
+        if (!$gatewayConfig) {
+            $gatewayConfig = $this->gatewayConfigStore->create();
+        }
+        $gatewayConfig->setGatewayName($paymentMethod->getGateway());
+        $gatewayConfig->setFactoryName($paymentMethod->getGateway());
+        $gatewayConfig->setConfig($data);
+
+        $this->gatewayConfigStore->update($gatewayConfig);
     }
 }

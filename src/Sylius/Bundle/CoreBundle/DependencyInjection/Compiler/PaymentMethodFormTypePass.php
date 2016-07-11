@@ -19,7 +19,7 @@ class PaymentMethodFormTypePass implements CompilerPassInterface
             $definition->addArgument(new Reference('payum'));
             $definition->addArgument(new Reference('payum.dynamic_gateways.config_storage'));
             $definition->addArgument(new Reference('translator'));
-            $definition->addArgument($container->getParameter('sylius.payment_gateways'));
+            $definition->addArgument($container->getParameter('sylius.default_gateways'));
         }
     }
 }
