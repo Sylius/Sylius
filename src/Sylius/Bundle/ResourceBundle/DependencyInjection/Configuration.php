@@ -188,7 +188,7 @@ class Configuration implements ConfigurationInterface
 
             // we use the parent directory name in addition to the filename to
             // determine the name of the driver (e.g. doctrine/orm)
-            $validDrivers[] = substr($file->getPathname(), 1 + strlen($driverDir), -4);
+            $validDrivers[] = str_replace('\\','/',substr($file->getPathname(), 1 + strlen($driverDir), -4));
         }
 
         $node
