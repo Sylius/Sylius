@@ -60,10 +60,10 @@ class Configuration implements ConfigurationInterface
                     ->beforeNormalization()
                         ->always()
                         ->then(function ($v) {
-                            foreach($v  as $gatewayKey=>&$config)
-                            {
-                                if(!isset($config['gateway_key']))
-                                    $config['gateway_key']='sylius.payum_gateway.'.$gatewayKey;
+                            foreach ($v  as $gatewayKey => &$config) {
+                                if (!isset($config['gateway_key'])) {
+                                    $config['gateway_key'] = 'sylius.payum_gateway.'.$gatewayKey;
+                                }
                             }
                             return $v; }
                         )
@@ -71,8 +71,8 @@ class Configuration implements ConfigurationInterface
                     ->useAttributeAsKey('name')
                     ->prototype('array')
                     ->children()
-                            ->scalarNode('factory')->cannotBeEmpty()->end()
-                            ->scalarNode('gateway_key')->end()
+                        ->scalarNode('factory')->cannotBeEmpty()->end()
+                        ->scalarNode('gateway_key')->end()
                     ->end()
                 ->end()
             ->end()

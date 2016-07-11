@@ -102,7 +102,11 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         ]);
     }
 
-    public function specifyField($field,$value)
+
+    /**
+     * {@inheritdoc}
+     */
+    public function specifyField($field, $value)
     {
         $this->getDocument()->fillField($field, $value);
     }

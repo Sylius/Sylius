@@ -33,6 +33,12 @@ interface CreatePageInterface extends BaseCreatePageInterface
     public function specifyCode($code);
 
     /**
+     * @param string $field
+     * @param string $value
+     */
+    public function specifyField($field, $value);
+
+    /**
      * @param string $gateway
      */
     public function chooseGateway($gateway);
