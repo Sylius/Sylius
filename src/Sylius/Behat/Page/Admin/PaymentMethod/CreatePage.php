@@ -101,4 +101,10 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             'name' => '#sylius_payment_method_translations_en_US_name',
         ]);
     }
+
+    public function specifyField($field,$value)
+    {
+        $this->getDocument()->fillField($field, $value);
+    }
+
 }
