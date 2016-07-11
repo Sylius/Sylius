@@ -12,9 +12,13 @@
 namespace spec\Sylius\Component\Currency\Context;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Currency\Context\CurrencyContext;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Storage\StorageInterface;
 
+/**
+ * @mixin CurrencyContext
+ */
 class CurrencyContextSpec extends ObjectBehavior
 {
     function let(StorageInterface $storage)
@@ -37,16 +41,16 @@ class CurrencyContextSpec extends ObjectBehavior
         $this->getDefaultCurrencyCode()->shouldReturn('EUR');
     }
 
-    function it_gets_currency_code_from_session($storage)
+    function it_gets_currency_code_from_session(StorageInterface $storage)
     {
-        $storage->getData(CurrencyContextInterface::STORAGE_KEY, 'EUR')->willReturn('RSD');
+        $storage->getData(CurrencyContext::STORAGE_KEY, 'EUR')->willReturn('RSD');
 
         $this->getCurrencyCode()->shouldReturn('RSD');
     }
 
-    function it_sets_currency_code_to_session($storage)
+    function it_sets_currency_code_to_session(StorageInterface $storage)
     {
-        $storage->setData(CurrencyContextInterface::STORAGE_KEY, 'PLN')->shouldBeCalled();
+        $storage->setData(CurrencyContext::STORAGE_KEY, 'PLN')->shouldBeCalled();
 
         $this->setCurrencyCode('PLN');
     }

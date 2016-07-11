@@ -14,36 +14,43 @@ namespace Sylius\Bundle\CoreBundle\Context;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
-use Sylius\Component\Currency\Context\CurrencyContext as BaseCurrencyContext;
+use Sylius\Component\Channel\Context\ChannelNotFoundException;
+use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Storage\StorageInterface;
 use Sylius\Component\User\Context\CustomerContextInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class CurrencyContext extends BaseCurrencyContext
+final class CurrencyContext implements CurrencyContextInterface
 {
     const STORAGE_KEY = '_sylius_currency_%s';
 
     /**
-     * @var CustomerContextInterface
+     * @var StorageInterface
      */
-    protected $customerContext;
+    private $storage;
 
     /**
-     * @var SettingsManagerInterface
+     * @var CustomerContextInterface
      */
-    protected $settingsManager;
+    private $customerContext;
 
     /**
      * @var ObjectManager
      */
-    protected $customerManager;
+    private $customerManager;
 
     /**
      * @var ChannelContextInterface
      */
-    protected $channelContext;
+    private $channelContext;
+
+    /**
+     * @var string
+     */
+    private $defaultCurrencyCode;
 
     /**
      * @param StorageInterface $storage
@@ -59,12 +66,12 @@ class CurrencyContext extends BaseCurrencyContext
         ObjectManager $customerManager,
         ChannelContextInterface $channelContext
     ) {
+        $this->storage = $storage;
         $this->customerContext = $customerContext;
-        $this->settingsManager = $settingsManager;
         $this->customerManager = $customerManager;
         $this->channelContext = $channelContext;
 
-        parent::__construct($storage, $this->getDefaultCurrencyCode());
+        $this->defaultCurrencyCode = $settingsManager->load('sylius_general')->get('currency');
     }
 
     /**
@@ -72,7 +79,7 @@ class CurrencyContext extends BaseCurrencyContext
      */
     public function getDefaultCurrencyCode()
     {
-        return $this->settingsManager->load('sylius_general')->get('currency');
+        return $this->defaultCurrencyCode;
     }
 
     /**
@@ -80,13 +87,13 @@ class CurrencyContext extends BaseCurrencyContext
      */
     public function getCurrencyCode()
     {
-        if ((null !== $customer = $this->customerContext->getCustomer()) && null !== $customer->getCurrencyCode()) {
+        /** @var CustomerInterface|null $customer */
+        $customer = $this->customerContext->getCustomer();
+        if (null !== $customer && null !== $customer->getCurrencyCode()) {
             return $customer->getCurrencyCode();
         }
 
-        $channel = $this->channelContext->getChannel();
-
-        return $this->storage->getData($this->getStorageKey($channel->getCode()), $this->defaultCurrencyCode);
+        return $this->storage->getData($this->getStorageKey(), $this->defaultCurrencyCode);
     }
 
     /**
@@ -94,10 +101,12 @@ class CurrencyContext extends BaseCurrencyContext
      */
     public function setCurrencyCode($currencyCode)
     {
-        if (null === $customer = $this->customerContext->getCustomer()) {
-            $channel = $this->channelContext->getChannel();
+        /** @var CustomerInterface|null $customer */
+        $customer = $this->customerContext->getCustomer();
+        if (null === $customer) {
+            $this->storage->setData($this->getStorageKey(), $currencyCode);
 
-            return $this->storage->setData($this->getStorageKey($channel->getCode()), $currencyCode);
+            return;
         }
 
         $customer->setCurrencyCode($currencyCode);
@@ -107,12 +116,14 @@ class CurrencyContext extends BaseCurrencyContext
     }
 
     /**
-     * @param string $channelCode
-     *
      * @return string
      */
-    private function getStorageKey($channelCode)
+    private function getStorageKey()
     {
-        return sprintf(self::STORAGE_KEY, $channelCode);
+        try {
+            return sprintf(self::STORAGE_KEY, $this->channelContext->getChannel()->getCode());
+        } catch (ChannelNotFoundException $exception) {
+            return sprintf(self::STORAGE_KEY, '__DEFAULT__');
+        }
     }
 }
