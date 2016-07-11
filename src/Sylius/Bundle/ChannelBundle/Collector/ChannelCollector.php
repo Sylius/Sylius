@@ -75,7 +75,7 @@ final class ChannelCollector extends DataCollector
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
         try {
-            $this->data['current_channel'] = $this->channelContext->getChannel();
+            $this->data['channel'] = $this->channelContext->getChannel();
         } catch (ChannelNotFoundException $exception) {}
     }
 
