@@ -17,9 +17,9 @@ The recommended operating systems for running Sylius are the Unix systems - **Li
 Web server and configuration
 ----------------------------
 
-We do recommend using Apache web server ≥ 2.2.
-The recommended way to work with your Symfony application is to use PHP's built-in web server.
-Although if you are using an older PHP version or when running the application in the production environment, you'll need to use a fully-featured web server.
+In the production environment we do recommend using Apache web server ≥ 2.2.
+
+While developing the recommended way to work with your Symfony application is to use PHP's built-in web server.
 
 `Go there <http://symfony.com/doc/current/cookbook/configuration/web_server_configuration.html>`_ to see the full reference to the web server configuration.
 
@@ -34,15 +34,15 @@ PHP required modules and configuration
 
 **PHP extensions**:
 
-+----------------------------------------------------––----+---------------------------+
-| `gd <http://php.net/manual/en/book.fileinfo.php>`_       | No specific configuration |
-+----------------------------------------------------––----+---------------------------+
-| `exif <http://php.net/manual/en/book.exif.php>`_         | No specific configuration |
-+---------------------------------------------------––-----+---------------------------+
-| `fileinfo <http://php.net/manual/en/book.fileinfo.php>`_ | No specific configuration |
-+---------------------------------------------------––-----+---------------------------+
-| `intl <http://php.net/manual/en/book.intl.php>`_         | No specific configuration |
-+---------------------------------------------------––-----+---------------------------+
++-------------+---------------------------+
+| `gd`_       | No specific configuration |
++-------------+---------------------------+
+| `exif`_     | No specific configuration |
++-------------+---------------------------+
+| `fileinfo`_ | No specific configuration |
++-------------+---------------------------+
+| `intl`_     | No specific configuration |
++-------------+---------------------------+
 
 **PHP configuration settings**:
 
@@ -79,3 +79,8 @@ Most of the application folders and files require only read access, but a few fo
 * web/media
 
 You can read how to set these permissions in the `Symfony - setting up permissions <http://symfony.com/doc/current/book/installation.html#book-installation-permissions>`_ section.
+
+.. _`gd`: http://php.net/manual/en/book.fileinfo.php
+.. _`exif`: http://php.net/manual/en/book.exif.php
+.. _`fileinfo`: http://php.net/manual/en/book.fileinfo.php
+.. _`intl`: http://php.net/manual/en/book.intl.php
