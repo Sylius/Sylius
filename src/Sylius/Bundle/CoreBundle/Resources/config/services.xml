@@ -149,7 +149,6 @@
         <!-- settings schemas -->
         <service id="sylius.settings_schema.general" class="%sylius.settings_schema.general.class%">
             <argument type="collection">
-                <argument key="currency">%currency%</argument>
                 <argument key="locale">%locale%</argument>
             </argument>
             <tag name="sylius.settings_schema" alias="sylius_general" />

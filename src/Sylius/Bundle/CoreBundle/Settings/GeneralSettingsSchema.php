@@ -14,7 +14,6 @@ namespace Sylius\Bundle\CoreBundle\Settings;
 use Sylius\Bundle\SettingsBundle\Schema\SchemaInterface;
 use Sylius\Bundle\SettingsBundle\Schema\SettingsBuilderInterface;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Validator\Constraints\Currency;
 use Symfony\Component\Validator\Constraints\Locale;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
@@ -47,14 +46,12 @@ class GeneralSettingsSchema implements SchemaInterface
                 'meta_keywords' => 'symfony, sylius, ecommerce, webshop, shopping cart',
                 'meta_description' => 'Sylius is modern ecommerce solution for PHP. Based on the Symfony2 framework.',
                 'locale' => 'en',
-                'currency' => 'USD',
                 'tracking_code' => '',
             ], $this->defaults))
             ->setAllowedTypes('title', 'string')
             ->setAllowedTypes('meta_keywords', 'string')
             ->setAllowedTypes('meta_description', 'string')
             ->setAllowedTypes('locale', 'string')
-            ->setAllowedTypes('currency', 'string')
             ->setAllowedTypes('tracking_code', ['null', 'string'])
         ;
     }
@@ -88,13 +85,6 @@ class GeneralSettingsSchema implements SchemaInterface
                 'constraints' => [
                     new NotBlank(),
                     new Locale(),
-                ],
-            ])
-            ->add('currency', 'sylius_currency_code_choice', [
-                'label' => 'sylius.form.settings.general.currency',
-                'constraints' => [
-                    new NotBlank(),
-                    new Currency(),
                 ],
             ])
             ->add('tracking_code', 'textarea', [
