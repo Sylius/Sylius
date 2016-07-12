@@ -17,6 +17,11 @@ Resource Layer
 We created an abstraction on top of Doctrine, in order to have a consistent and flexible way to manage all the resources. By "resource" we understand every model in the application.
 Simplest examples of Sylius resources are "product", "order", "tax_category", "promotion", "user", "shipping_method" and so on...
 
+There are two types of resources in **Sylius**:
+
+* registered by default - their names begin with ``sylius.*`` for example: ``sylius.product``
+* custom resources, from your application which have a separate convention. We place them under ``sylius_resource:`` ``resource_name:`` in the ``config.yml``. For these we reccomend using the naming convenion of ``app.*`` for instance ``app.my_entity``.
+
 Sylius resource management system lives in the **SyliusResourceBundle** and can be used in any Symfony2 project.
 
 Services
