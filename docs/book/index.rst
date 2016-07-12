@@ -5,6 +5,7 @@ The Book
     :hidden:
 
     introduction
+    requirements
     environments
     installation
     architecture
