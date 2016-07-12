@@ -74,7 +74,7 @@ class ExpressionBuilder implements ExpressionBuilderInterface
      */
     public function equals($field, $value)
     {
-        $this->queryBuilder->setParameter($field, $value);
+        $this->setParameter($field, $value);
 
         return $this->queryBuilder->expr()->eq($this->getFieldName($field), ':'.$field);
     }
@@ -84,7 +84,7 @@ class ExpressionBuilder implements ExpressionBuilderInterface
      */
     public function notEquals($field, $value)
     {
-        $this->queryBuilder->setParameter($field, $value);
+        $this->setParameter($field, $value);
 
         return $this->queryBuilder->expr()->neq($this->getFieldName($field), ':'.$field);
     }
@@ -94,7 +94,9 @@ class ExpressionBuilder implements ExpressionBuilderInterface
      */
     public function lessThan($field, $value)
     {
-        $this->queryBuilder->andWhere($this->getFieldName($field).' < :'.$field)->setParameter($field, $value);
+        $this->setParameter($field, $value);
+
+        $this->queryBuilder->andWhere($this->getFieldName($field).' < :'.$field);
     }
 
     /**
@@ -102,7 +104,9 @@ class ExpressionBuilder implements ExpressionBuilderInterface
      */
     public function lessThanOrEqual($field, $value)
     {
-        $this->queryBuilder->andWhere($this->getFieldName($field).' =< :'.$field)->setParameter($field, $value);
+        $this->setParameter($field, $value);
+
+        $this->queryBuilder->andWhere($this->getFieldName($field).' =< :'.$field);
     }
 
     /**
@@ -110,7 +114,9 @@ class ExpressionBuilder implements ExpressionBuilderInterface
      */
     public function greaterThan($field, $value)
     {
-        $this->queryBuilder->andWhere($this->getFieldName($field).' > :'.$field)->setParameter($field, $value);
+        $this->setParameter($field, $value);
+
+        $this->queryBuilder->andWhere($this->getFieldName($field).' > :'.$field);
     }
 
     /**
@@ -118,7 +124,9 @@ class ExpressionBuilder implements ExpressionBuilderInterface
      */
     public function greaterThanOrEqual($field, $value)
     {
-        $this->queryBuilder->andWhere($this->getFieldName($field).' => :%s'.$field)->setParameter($field, $value);
+        $this->setParameter($field, $value);
+
+        $this->queryBuilder->andWhere($this->getFieldName($field).' => :%s'.$field);
     }
 
     /**
@@ -195,5 +203,15 @@ class ExpressionBuilder implements ExpressionBuilderInterface
         }
 
         return $field;
+    }
+
+    /**
+     * @param string $field
+     * @param mixed $value
+     */
+    private function setParameter($field, $value)
+    {
+        $parameterName = str_replace('.', '_', $field);
+        $this->queryBuilder->setParameter($parameterName, $value);
     }
 }
