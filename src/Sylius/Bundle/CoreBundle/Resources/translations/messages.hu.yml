@@ -159,5 +159,12 @@ sylius:
         password_reset:
             name: Jelszó visszaállítás
             content: '<h3>Szia %username%</h3>A jelszavad megváltoztatásához, kérlek látogass ide %url%<br/><br/>Üdvözlettel, a csapat.'
+        verification:
+            name: Email cím hitelesítése
+            content: 'Email címed megerősítéséhez kérlek látogass ide: %url%'
+    payum_gateway:
+        cash_on_delivery: Utánvétel
+        offline: Nem elérhető
+        paypal_express_checkout: PayPal Express Checkout
     shipping_method_resolver:
         by_zones_and_channel: Zóna és csatorna szerint

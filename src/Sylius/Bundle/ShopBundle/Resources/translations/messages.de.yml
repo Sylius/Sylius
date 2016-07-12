@@ -5,4 +5,5 @@ sylius:
     menu:
         shop:
             account:
+                header: Ihr Konto
                 dashboard: Dashboard
