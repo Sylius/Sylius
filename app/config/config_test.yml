@@ -5,6 +5,9 @@ imports:
     - { resource: "config.yml" }
 
 parameters:
+    currency: EUR
+    locale: en_US
+
     sylius.order.allow_guest_order: true
 
 framework:
@@ -56,10 +59,6 @@ sylius_payment:
 
 sylius_rbac:
     authorization_checker: sylius.authorization_checker.toggleable
-
-sylius_money:
-    currency: EUR
-    locale: en_US
 
 sylius_theme:
     sources:

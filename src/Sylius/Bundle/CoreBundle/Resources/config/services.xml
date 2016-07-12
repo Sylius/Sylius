@@ -149,7 +149,7 @@
         <!-- settings schemas -->
         <service id="sylius.settings_schema.general" class="%sylius.settings_schema.general.class%">
             <argument type="collection">
-                <argument key="currency">%sylius.money.currency%</argument>
+                <argument key="currency">%currency%</argument>
                 <argument key="locale">%locale%</argument>
             </argument>
             <tag name="sylius.settings_schema" alias="sylius_general" />
@@ -511,7 +511,7 @@
             <argument type="service" id="sylius.context.customer" />
             <argument type="service" id="sylius.manager.customer" />
             <argument type="service" id="sylius.context.channel" />
-            <argument>%sylius.money.currency%</argument>
+            <argument>%currency%</argument>
         </service>
 
         <service id="sylius.currency_provider" class="%sylius.currency_provider.class%">

@@ -41,7 +41,7 @@
 
         <service id="sylius.context.currency" class="%sylius.context.currency.class%">
             <argument /> <!-- Storage service name comes from config -->
-            <argument>%sylius.money.currency%</argument>
+            <argument>%currency%</argument>
         </service>
 
         <service id="sylius.currency_converter" class="%sylius.currency_converter.class%">
