@@ -11,7 +11,7 @@
 
 namespace Sylius\Tests\Controller;
 
-use Lakion\ApiTestCase\JsonApiTestCase;
+
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -20,21 +20,6 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class LocaleApiTest extends JsonApiTestCase
 {
-    /**
-     * @var array
-     */
-    private static $authorizedHeaderWithContentType = [
-        'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
-        'CONTENT_TYPE' => 'application/json',
-    ];
-
-    /**
-     * @var array
-     */
-    private static $authorizedHeaderWithAccept = [
-        'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
-        'ACCEPT' => 'application/json',
-    ];
 
     public function testLocaleAccessDeniedResponse()
     {
@@ -50,7 +35,7 @@ class LocaleApiTest extends JsonApiTestCase
         $this->loadFixturesFromFile('resources/locales.yml');
 
         $this->client->request('GET', '/api/locales/', [], [], [
-            'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
+            'HTTP_Authorization' => self::HTTP_AUTHORIZATION,
         ]);
 
         $response = $this->client->getResponse();
@@ -62,7 +47,7 @@ class LocaleApiTest extends JsonApiTestCase
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $locales = $this->loadFixturesFromFile('resources/locales.yml');
 
-        $this->client->request('GET', '/api/locales/'.$locales['locale_en']->getId(), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', '/api/locales/'.$locales['locale_en']->getId(), [], [], self::AUTHORIZATION_HEADER_WITH_ACCEPT);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'locale/show_response', Response::HTTP_OK);
@@ -72,7 +57,7 @@ class LocaleApiTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
-        $this->client->request('POST', '/api/locales/', [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('POST', '/api/locales/', [], [], self::AUTHORIZATION_HEADER_WITH_CONTENT_TYPE);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'locale/create_validation_fail_response', Response::HTTP_BAD_REQUEST);
@@ -90,7 +75,7 @@ class LocaleApiTest extends JsonApiTestCase
         }
 EOT;
 
-        $this->client->request('POST', '/api/locales/', [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('POST', '/api/locales/', [], [], self::AUTHORIZATION_HEADER_WITH_CONTENT_TYPE, $data);
 
         $response = $this->client->getResponse();
 
@@ -109,7 +94,7 @@ EOT;
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
-        $this->client->request('GET', '/api/locales/-1', [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', '/api/locales/-1', [], [], self::AUTHORIZATION_HEADER_WITH_ACCEPT);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
@@ -119,7 +104,7 @@ EOT;
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
-        $this->client->request('DELETE', '/api/locales/-1', [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('DELETE', '/api/locales/-1', [], [], self::AUTHORIZATION_HEADER_WITH_ACCEPT);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
@@ -130,12 +115,12 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $locales = $this->loadFixturesFromFile('resources/locales.yml');
 
-        $this->client->request('DELETE', '/api/locales/'.$locales['locale_en']->getId(), [], [], static::$authorizedHeaderWithContentType, []);
+        $this->client->request('DELETE', '/api/locales/'.$locales['locale_en']->getId(), [], [], self::AUTHORIZATION_HEADER_WITH_CONTENT_TYPE, []);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
 
-        $this->client->request('GET', '/api/locales/'.$locales['locale_en']->getId(), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', '/api/locales/'.$locales['locale_en']->getId(), [], [], self::AUTHORIZATION_HEADER_WITH_ACCEPT);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);

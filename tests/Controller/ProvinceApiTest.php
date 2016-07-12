@@ -11,7 +11,7 @@
 
 namespace Sylius\Tests\Controller;
 
-use Lakion\ApiTestCase\JsonApiTestCase;
+
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -19,13 +19,6 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class ProvinceApiTest extends JsonApiTestCase
 {
-    /**
-     * @var array
-     */
-    private static $authorizedHeaderWithContentType = [
-        'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
-        'CONTENT_TYPE' => 'application/json',
-    ];
 
     public function testGetProvinceAccessDeniedResponse()
     {
@@ -40,7 +33,7 @@ class ProvinceApiTest extends JsonApiTestCase
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $countryData = $this->loadFixturesFromFile('resources/countries.yml');
 
-        $this->client->request('GET', '/api/countries/'.$countryData['country_BE']->getId().'/provinces/'.$countryData['province_BE_limburg']->getId(), [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('GET', '/api/countries/'.$countryData['country_BE']->getId().'/provinces/'.$countryData['province_BE_limburg']->getId(), [], [], self::AUTHORIZATION_HEADER_WITH_CONTENT_TYPE);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'province/show_response', Response::HTTP_OK);
@@ -51,12 +44,12 @@ class ProvinceApiTest extends JsonApiTestCase
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $countryData = $this->loadFixturesFromFile('resources/countries.yml');
 
-        $this->client->request('DELETE', '/api/countries/'.$countryData['country_BE']->getId().'/provinces/'.$countryData['province_BE_limburg']->getId(), [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('DELETE', '/api/countries/'.$countryData['country_BE']->getId().'/provinces/'.$countryData['province_BE_limburg']->getId(), [], [], self::AUTHORIZATION_HEADER_WITH_CONTENT_TYPE);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
 
-        $this->client->request('GET', '/api/countries/'.$countryData['country_BE']->getId().'/provinces/'.$countryData['province_BE_limburg']->getId(), [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('GET', '/api/countries/'.$countryData['country_BE']->getId().'/provinces/'.$countryData['province_BE_limburg']->getId(), [], [], self::AUTHORIZATION_HEADER_WITH_CONTENT_TYPE);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
