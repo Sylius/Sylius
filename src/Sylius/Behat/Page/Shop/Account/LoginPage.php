@@ -42,9 +42,9 @@ class LoginPage extends SymfonyPage implements LoginPageInterface
     /**
      * {@inheritdoc}
      */
-    public function specifyUserName($userName)
+    public function specifyUsername($username)
     {
-        $this->getDocument()->fillField('Username', $userName);
+        $this->getDocument()->fillField('Username', $username);
     }
 
     /**

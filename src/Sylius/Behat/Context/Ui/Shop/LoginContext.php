@@ -97,12 +97,12 @@ class LoginContext implements Context
     }
 
     /**
-     * @When I specify the user name as :userName
+     * @When I specify the username as :username
      * @When I do not specify the user name
      */
-    public function iSpecifyTheUserName($userName = null)
+    public function iSpecifyTheUsername($username = null)
     {
-        $this->loginPage->specifyUserName($userName);
+        $this->loginPage->specifyUsername($username);
     }
 
     /**

@@ -69,7 +69,7 @@ final class UserContext implements Context
     public function iLogInAsWithPassword($email, $password)
     {
         $this->loginPage->open();
-        $this->loginPage->specifyUserName($email);
+        $this->loginPage->specifyUsername($email);
         $this->loginPage->specifyPassword($password);
         $this->loginPage->logIn();
     }
