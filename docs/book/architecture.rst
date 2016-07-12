@@ -245,11 +245,11 @@ Third Party Libraries
 
 Sylius uses a lot of libraries for various tasks:
 
-* [SymfonyCMF] for content management
-* [Gaufrette] for filesystem abstraction (store images locally, Amazon S3 or external server)
-* [Imagine] for images processing, generating thumbnails and cropping
-* [Snappy] for generating PDF files
-* [HWIOAuthBundle] for facebook/amazon/google logins
-* [Pagerfanta] for pagination
+* [`SymfonyCMF <http://cmf.symfony.com/>`_] for content management
+* [`Gaufrette <https://github.com/KnpLabs/Gaufrette>`_] for filesystem abstraction (store images locally, Amazon S3 or external server)
+* [`Imagine <https://github.com/liip/LiipImagineBundle>`_] for images processing, generating thumbnails and cropping
+* [`Snappy <https://github.com/KnpLabs/snappy>`_] for generating PDF files
+* [`Pagerfanta <https://github.com/whiteoctober/Pagerfanta>`_] for pagination
+* [`Payum <https://github.com/Payum/Payum>`_] for payments
 
 .. _`ObjectManager`: http://www.doctrine-project.org/api/common/2.4/class-Doctrine.Common.Persistence.ObjectManager.html
