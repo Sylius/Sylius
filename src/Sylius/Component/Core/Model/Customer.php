@@ -21,11 +21,6 @@ use Webmozart\Assert\Assert;
 class Customer extends BaseCustomer implements CustomerInterface, ProductReviewerInterface
 {
     /**
-     * @var string
-     */
-    protected $currencyCode;
-
-    /**
      * @var ArrayCollection
      */
     protected $orders;
@@ -51,24 +46,6 @@ class Customer extends BaseCustomer implements CustomerInterface, ProductReviewe
 
         $this->orders = new ArrayCollection();
         $this->addresses = new ArrayCollection();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCurrencyCode($currencyCode)
-    {
-        Assert::string($currencyCode);
-        
-        $this->currencyCode = $currencyCode;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCurrencyCode()
-    {
-        return $this->currencyCode;
     }
 
     /**

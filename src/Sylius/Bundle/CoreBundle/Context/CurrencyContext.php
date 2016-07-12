@@ -11,13 +11,10 @@
 
 namespace Sylius\Bundle\CoreBundle\Context;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
-use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Storage\StorageInterface;
-use Sylius\Component\User\Context\CustomerContextInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -32,16 +29,6 @@ final class CurrencyContext implements CurrencyContextInterface
     private $storage;
 
     /**
-     * @var CustomerContextInterface
-     */
-    private $customerContext;
-
-    /**
-     * @var ObjectManager
-     */
-    private $customerManager;
-
-    /**
      * @var ChannelContextInterface
      */
     private $channelContext;
@@ -53,21 +40,12 @@ final class CurrencyContext implements CurrencyContextInterface
 
     /**
      * @param StorageInterface $storage
-     * @param CustomerContextInterface $customerContext
-     * @param ObjectManager $customerManager
      * @param ChannelContextInterface $channelContext
      * @param string $defaultCurrencyCode
      */
-    public function __construct(
-        StorageInterface $storage,
-        CustomerContextInterface $customerContext,
-        ObjectManager $customerManager,
-        ChannelContextInterface $channelContext,
-        $defaultCurrencyCode
-    ) {
+    public function __construct(StorageInterface $storage, ChannelContextInterface $channelContext, $defaultCurrencyCode)
+    {
         $this->storage = $storage;
-        $this->customerContext = $customerContext;
-        $this->customerManager = $customerManager;
         $this->channelContext = $channelContext;
         $this->defaultCurrencyCode = $defaultCurrencyCode;
     }
@@ -85,12 +63,6 @@ final class CurrencyContext implements CurrencyContextInterface
      */
     public function getCurrencyCode()
     {
-        /** @var CustomerInterface|null $customer */
-        $customer = $this->customerContext->getCustomer();
-        if (null !== $customer && null !== $customer->getCurrencyCode()) {
-            return $customer->getCurrencyCode();
-        }
-
         return $this->storage->getData($this->getStorageKey(), $this->defaultCurrencyCode);
     }
 
@@ -99,18 +71,7 @@ final class CurrencyContext implements CurrencyContextInterface
      */
     public function setCurrencyCode($currencyCode)
     {
-        /** @var CustomerInterface|null $customer */
-        $customer = $this->customerContext->getCustomer();
-        if (null === $customer) {
-            $this->storage->setData($this->getStorageKey(), $currencyCode);
-
-            return;
-        }
-
-        $customer->setCurrencyCode($currencyCode);
-
-        $this->customerManager->persist($customer);
-        $this->customerManager->flush();
+        $this->storage->setData($this->getStorageKey(), $currencyCode);
     }
 
     /**

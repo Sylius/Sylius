@@ -11,10 +11,9 @@
 
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
-use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\UserInterface;
-use Sylius\Component\Currency\Model\CurrencyInterface;
+use Sylius\Component\Rbac\Model\RoleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
@@ -53,13 +52,12 @@ final class UserExampleFactory implements ExampleFactoryInterface
     /**
      * @param FactoryInterface $userFactory
      * @param FactoryInterface $customerFactory
-     * @param RepositoryInterface $currencyRepository
+     * @param RepositoryInterface $roleRepository
      */
     public function __construct(
         FactoryInterface $userFactory,
         FactoryInterface $customerFactory,
-        RepositoryInterface $roleRepository,
-        RepositoryInterface $currencyRepository
+        RepositoryInterface $roleRepository
     ) {
         $this->userFactory = $userFactory;
         $this->customerFactory = $customerFactory;
@@ -76,12 +74,6 @@ final class UserExampleFactory implements ExampleFactoryInterface
                 })
                 ->setDefault('last_name', function (Options $options) {
                     return $this->faker->lastName;
-                })
-                ->setDefault('currency_code', LazyOption::randomOne($currencyRepository))
-                ->setAllowedTypes('currency_code', ['null', 'string', CurrencyInterface::class])
-                ->setNormalizer('currency_code', LazyOption::findOneBy($currencyRepository, 'code'))
-                ->setNormalizer('currency_code', function (Options $options, CurrencyInterface $currency) {
-                    return $currency->getCode();
                 })
                 ->setDefault('enabled', function (Options $options) {
                     return $this->faker->boolean(90);
@@ -105,7 +97,6 @@ final class UserExampleFactory implements ExampleFactoryInterface
         $customer->setEmail($options['email']);
         $customer->setFirstName($options['first_name']);
         $customer->setLastName($options['last_name']);
-        $customer->setCurrencyCode($options['currency_code']);
 
         /** @var UserInterface $user */
         $user = $this->userFactory->createNew();
@@ -116,6 +107,7 @@ final class UserExampleFactory implements ExampleFactoryInterface
         if ($options['admin']) {
             $user->addRole('ROLE_ADMINISTRATION_ACCESS');
 
+            /** @var RoleInterface $adminRole */
             $adminRole = $this->roleRepository->findOneBy(['code' => 'administrator']);
 
             if (null !== $adminRole) {

@@ -36,7 +36,6 @@ final class UserFixture extends AbstractResourceFixture
                 ->scalarNode('email')->cannotBeEmpty()->end()
                 ->scalarNode('first_name')->cannotBeEmpty()->end()
                 ->scalarNode('last_name')->cannotBeEmpty()->end()
-                ->scalarNode('currency_code')->cannotBeEmpty()->end()
                 ->booleanNode('enabled')->end()
                 ->booleanNode('admin')->end()
                 ->scalarNode('password')->cannotBeEmpty()->end()
