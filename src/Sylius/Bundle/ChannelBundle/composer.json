@@ -22,8 +22,8 @@
     "require": {
         "php": "^5.6|^7.0",
 
-        "sylius/channel": "^0.19",
-        "sylius/resource-bundle": "^0.19",
+        "sylius/channel": "^1.0",
+        "sylius/resource-bundle": "^1.0",
         "symfony/framework-bundle": "^2.8"
     },
     "require-dev": {
@@ -52,7 +52,7 @@
     ],
     "extra": {
         "branch-alias": {
-            "dev-master": "0.19-dev"
+            "dev-master": "1.0-dev"
         }
     }
 }
