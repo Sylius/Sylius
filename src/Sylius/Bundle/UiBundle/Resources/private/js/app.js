@@ -53,6 +53,7 @@
 
     $('.ui.checkbox').checkbox();
     $('.ui.accordion').accordion();
+    $('.ui.menu .dropdown').dropdown({action: 'hide'});
     $('.link.ui.dropdown').dropdown({action: 'hide'});
     $('.button.ui.dropdown').dropdown({action: 'hide'});
     $('.ui.fluid.search.selection.ui.dropdown').dropdown();

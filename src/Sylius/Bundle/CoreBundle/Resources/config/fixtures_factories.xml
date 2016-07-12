@@ -40,6 +40,7 @@
         <service id="sylius.fixture.example_factory.user" class="Sylius\Bundle\CoreBundle\Fixture\Factory\UserExampleFactory">
             <argument type="service" id="sylius.factory.user" />
             <argument type="service" id="sylius.factory.customer" />
+            <argument type="service" id="sylius.repository.role" />
             <argument type="service" id="sylius.repository.currency" />
         </service>
 
@@ -74,8 +75,8 @@
 
         <service id="sylius.fixture.example_factory.taxon" class="Sylius\Bundle\CoreBundle\Fixture\Factory\TaxonExampleFactory">
             <argument type="service" id="sylius.factory.taxon" />
-            <argument type="service" id="sylius.manager.taxon" />
             <argument type="service" id="sylius.repository.taxon" />
+            <argument type="service" id="sylius.manager.taxon" />
             <argument type="service" id="sylius.repository.locale" />
         </service>
 
@@ -90,7 +91,6 @@
             <argument type="service" id="sylius.repository.product_archetype" />
             <argument type="service" id="sylius.repository.product_attribute" />
             <argument type="service" id="sylius.repository.product_option" />
-            <argument type="service" id="sylius.repository.shipping_category" />
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="sylius.repository.locale" />
         </service>

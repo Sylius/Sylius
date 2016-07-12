@@ -36,6 +36,11 @@ final class UserExampleFactory implements ExampleFactoryInterface
     private $customerFactory;
 
     /**
+     * @var RepositoryInterface
+     */
+    private $roleRepository;
+
+    /**
      * @var \Faker\Generator
      */
     private $faker;
@@ -53,10 +58,12 @@ final class UserExampleFactory implements ExampleFactoryInterface
     public function __construct(
         FactoryInterface $userFactory,
         FactoryInterface $customerFactory,
+        RepositoryInterface $roleRepository,
         RepositoryInterface $currencyRepository
     ) {
         $this->userFactory = $userFactory;
         $this->customerFactory = $customerFactory;
+        $this->roleRepository = $roleRepository;
 
         $this->faker = \Faker\Factory::create();
         $this->optionsResolver =
@@ -82,9 +89,7 @@ final class UserExampleFactory implements ExampleFactoryInterface
                 ->setAllowedTypes('enabled', 'bool')
                 ->setDefault('admin', false)
                 ->setAllowedTypes('admin', 'bool')
-                ->setDefault('password', function (Options $options) {
-                    return $this->faker->password;
-                })
+                ->setDefault('password', 'password123')
         ;
     }
 
@@ -110,6 +115,12 @@ final class UserExampleFactory implements ExampleFactoryInterface
 
         if ($options['admin']) {
             $user->addRole('ROLE_ADMINISTRATION_ACCESS');
+
+            $adminRole = $this->roleRepository->findOneBy(['code' => 'administrator']);
+
+            if (null !== $adminRole) {
+                $user->addAuthorizationRole($adminRole);
+            }
         }
 
         $user->setCustomer($customer);

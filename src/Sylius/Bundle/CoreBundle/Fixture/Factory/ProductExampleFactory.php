@@ -24,7 +24,6 @@ use Sylius\Component\Product\Model\AttributeInterface;
 use Sylius\Component\Product\Model\AttributeValueInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 use Sylius\Component\Variation\Generator\VariantGeneratorInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\OptionsResolver\Options;
@@ -87,7 +86,6 @@ final class ProductExampleFactory implements ExampleFactoryInterface
      * @param RepositoryInterface $productArchetypeRepository
      * @param RepositoryInterface $productAttributeRepository
      * @param RepositoryInterface $productOptionRepository
-     * @param RepositoryInterface $shippingCategoryRepository
      * @param RepositoryInterface $channelRepository
      * @param RepositoryInterface $localeRepository
      */
@@ -102,7 +100,6 @@ final class ProductExampleFactory implements ExampleFactoryInterface
         RepositoryInterface $productArchetypeRepository,
         RepositoryInterface $productAttributeRepository,
         RepositoryInterface $productOptionRepository,
-        RepositoryInterface $shippingCategoryRepository,
         RepositoryInterface $channelRepository,
         RepositoryInterface $localeRepository
     ) {
@@ -144,10 +141,6 @@ final class ProductExampleFactory implements ExampleFactoryInterface
                 ->setDefault('product_archetype', LazyOption::randomOne($productArchetypeRepository))
                 ->setAllowedTypes('product_archetype', ['null', 'string', ArchetypeInterface::class])
                 ->setNormalizer('product_archetype', LazyOption::findOneBy($productArchetypeRepository, 'code'))
-
-                ->setDefault('shipping_category', LazyOption::randomOne($shippingCategoryRepository))
-                ->setAllowedTypes('shipping_category', ['null', 'string', ShippingCategoryInterface::class])
-                ->setNormalizer('shipping_category', LazyOption::findOneBy($shippingCategoryRepository, 'code'))
 
                 ->setDefault('taxons', LazyOption::randomOnes($taxonRepository, 3))
                 ->setAllowedTypes('taxons', 'array')
@@ -218,15 +211,16 @@ final class ProductExampleFactory implements ExampleFactoryInterface
         $product->setEnabled($options['enabled']);
         $product->setMainTaxon($options['main_taxon']);
         $product->setArchetype($options['product_archetype']);
-        $product->setShippingCategory($options['shipping_category']);
+
+        $product->setCreatedAt($this->faker->dateTimeBetween('-1 week', 'now'));
 
         foreach ($this->getLocales() as $localeCode) {
             $product->setCurrentLocale($localeCode);
             $product->setFallbackLocale($localeCode);
 
-            $product->setName(sprintf('[%s] %s', $localeCode, $options['name']));
-            $product->setShortDescription(sprintf('[%s] %s', $localeCode, $options['short_description']));
-            $product->setDescription(sprintf('[%s] %s', $localeCode, $options['description']));
+            $product->setName($options['name']);
+            $product->setShortDescription($options['short_description']);
+            $product->setDescription($options['description']);
         }
 
         foreach ($options['taxons'] as $taxon) {

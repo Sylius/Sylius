@@ -108,19 +108,16 @@ final class MugProductFixture extends AbstractFixture
     {
         $options = $this->optionsResolver->resolve($options);
 
-        $taxons = [];
-        if (null === $this->taxonRepository->findOneBy(['code' => 'CATEGORY'])) {
-            $taxons[] = ['name' => 'Category', 'code' => 'CATEGORY', 'parent' => null];
-        }
-
-        if (null === $this->taxonRepository->findOneBy(['code' => 'BRAND'])) {
-            $taxons[] = ['name' => 'Brand', 'code' => 'BRAND', 'parent' => null];
-        }
-
-        $this->taxonFixture->load(['custom' => array_merge($taxons, [
-            ['name' => 'Mugs', 'code' => 'MUGS', 'parent' => 'CATEGORY'],
-            ['name' => 'Mugland', 'code' => 'MUGLAND', 'parent' => 'BRAND'],
-        ])]);
+        $this->taxonFixture->load(['custom' => [[
+            'code' => 'category',
+            'name' => 'Category',
+            'children' => [
+                [
+                    'code' => 'mugs',
+                    'name' => 'Mugs',
+                ]
+            ]
+        ]]]);
 
         $this->productAttributeFixture->load(['custom' => [
             ['name' => 'Mug material', 'code' => 'MUG-MATERIAL', 'type' => TextAttributeType::TYPE],
@@ -152,9 +149,9 @@ final class MugProductFixture extends AbstractFixture
             $products[] = [
                 'name' => sprintf('Mug "%s"', $this->faker->word),
                 'code' => $this->faker->uuid,
-                'main_taxon' => 'MUGS',
+                'main_taxon' => 'mugs',
                 'product_archetype' => 'MUG',
-                'taxons' => ['MUGS', 'MUGLAND'],
+                'taxons' => ['mugs'],
                 'product_attributes' => [
                     'MUG-MATERIAL' => $this->faker->randomElement(['Invisible porcelain', 'Banana skin', 'Porcelain', 'Centipede']),
                 ],
