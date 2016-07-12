@@ -90,6 +90,7 @@ sylius:
         category_requirements: Kategória követelmények
         change_address: Cím módosítása
         change_password: Jelszó változtatás
+        change_payment_method: Fizetési mód változtatása
         change_shipping_method: Szállítási mód módosítása
         change_your_password: Jelszó módosítása
         channel: Csatorna
@@ -239,7 +240,9 @@ sylius:
         edit_promotion: Promóció módosítása
         edit_promotion_coupon: Promóciós kupon módosítása
         edit_report: Jelentés módosítása
+        edit_route: Útvonal módosítása
         edit_shipping_method: Szállítási módszer módosítása
+        edit_static_content: Állandó tartalom szerkesztése
         edit_tax_category: Adó-kategória módosítása
         edit_tax_rate: Adókulcs módosítása
         edit_taxon: Taxon módosítása
@@ -453,8 +456,10 @@ sylius:
         new_promotion_coupon: Új promóciós kupon
         new_review: Új értékelés
         new_role: Új szerepkör
+        new_route: Új útvonal
         new_shipping_category: Új szállítási kategória
         new_shipping_method: Új szállítási mód
+        new_static_content: Új állandó tartalom
         new_tax_category: Új adókategória
         new_tax_rate: Új adókulcs
         new_taxon: Új taxon
@@ -486,6 +491,7 @@ sylius:
         not_contains: Nem tartalmaz
         not_empty: Nem üres
         not_in: Nincs benne
+        not_verified: Nincs megerősítve
         notify_customer: Ügyfél értesítése
         number: Szám
         number_of_orders: Rendelések száma
@@ -520,14 +526,18 @@ sylius:
         payment_method: Fizetési mód
         payment_methods: Fizetési módok
         payment_mode: Fizetési mód
+        payment_ready_to_pay: Most már fizethetsz
         payment_state: Fizetés állapota
         payments: Fizetések
+        pay: Fizetés
+        pay_again: Kattints a fietésre az újrapróbálkozáshoz
         pending: Függőben
         per_customer_usage_limit: Vásárlónkénti felhasználási limit
         permissions: Engedélyek
         personal_information: Személyes információk
         phone_number: Telefonszám
         place_order: Megrendelés
+        placed_an_order: Rendelésed sikeresen leadtad.
         placed_at: Elhelyezve
         postcode: Irányítószám
         powered_by: Működteti
@@ -654,6 +664,7 @@ sylius:
         starts_at: Kezdődik
         starts_with: Ezzel kezdődik
         state: Állapot
+        static_contents: Állandó tartalom
         status: Állapot
         street: Utca
         string_blocks: Szöveges blokkok
@@ -675,6 +686,7 @@ sylius:
         taxonomy: Taxonómia
         taxons: Taxonok
         terms_and_conditions: Felhasználási feltételek
+        thank_you: Köszönjük!
         thank_you_for_your_order: Köszönjük a rendelését
         theme: Téma
         there_are_no_archetypes_defined: Nincs őstípus meghatározva
@@ -753,6 +765,8 @@ sylius:
         variant: Változat
         variant_selection_method: Változat kiválasztási módszer
         variants: Változatok
+        verified: Megerősítve
+        verify: Megerősítés
         view: Megtekintés
         view_and_edit_cart: Kosár megtekintése és módosítása
         view_more: Bővebben...
