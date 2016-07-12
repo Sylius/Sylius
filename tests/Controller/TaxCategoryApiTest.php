@@ -11,7 +11,7 @@
 
 namespace Sylius\Tests\Controller;
 
-use Lakion\ApiTestCase\JsonApiTestCase;
+
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -33,7 +33,7 @@ class TaxCategoryApiTest extends JsonApiTestCase
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
         $this->client->request('POST', '/api/tax-categories/', [], [], [
-            'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
+            'HTTP_Authorization' => self::HTTP_AUTHORIZATION,
             'CONTENT_TYPE' => 'application/json',
         ]);
 
@@ -55,7 +55,7 @@ class TaxCategoryApiTest extends JsonApiTestCase
 EOT;
 
         $this->client->request('POST', '/api/tax-categories/', [], [], [
-            'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
+            'HTTP_Authorization' => self::HTTP_AUTHORIZATION,
             'CONTENT_TYPE' => 'application/json',
         ], $data);
 
@@ -77,7 +77,7 @@ EOT;
         $this->loadFixturesFromFile('resources/tax_categories.yml');
 
         $this->client->request('GET', '/api/tax-categories/', [], [], [
-            'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
+            'HTTP_Authorization' => self::HTTP_AUTHORIZATION,
         ]);
 
         $response = $this->client->getResponse();
@@ -90,7 +90,7 @@ EOT;
         $this->loadFixturesFromFile('resources/tax_categories.yml');
 
         $this->client->request('GET', '/api/tax-categories/', ['sorting' => ['name' => 'asc']], [], [
-            'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
+            'HTTP_Authorization' => self::HTTP_AUTHORIZATION,
         ]);
 
         $response = $this->client->getResponse();
@@ -103,7 +103,7 @@ EOT;
         $this->loadFixturesFromFile('resources/tax_categories_for_filtering.yml');
 
         $this->client->request('GET', '/api/tax-categories/', ['criteria' => ['name' => 'clothing']], [], [
-            'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
+            'HTTP_Authorization' => self::HTTP_AUTHORIZATION,
         ]);
 
         $response = $this->client->getResponse();
@@ -116,7 +116,7 @@ EOT;
         $this->loadFixturesFromFile('resources/tax_categories_for_filtering.yml');
 
         $this->client->request('GET', '/api/tax-categories/', ['criteria' => ['code' => 'TC1']], [], [
-            'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
+            'HTTP_Authorization' => self::HTTP_AUTHORIZATION,
         ]);
 
         $response = $this->client->getResponse();
@@ -136,7 +136,7 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
         $this->client->request('GET', '/api/tax-categories/-1', [], [], [
-            'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
+            'HTTP_Authorization' => self::HTTP_AUTHORIZATION,
             'ACCEPT' => 'application/json',
         ]);
 
@@ -150,7 +150,7 @@ EOT;
         $taxCategories = $this->loadFixturesFromFile('resources/tax_categories.yml');
 
         $this->client->request('GET', '/api/tax-categories/'.$taxCategories['tax_category_1']->getId(), [], [], [
-            'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
+            'HTTP_Authorization' => self::HTTP_AUTHORIZATION,
             'ACCEPT' => 'application/json',
         ]);
 
@@ -171,7 +171,7 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
         $this->client->request('PUT', '/api/tax-categories/-1', [], [], [
-            'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
+            'HTTP_Authorization' => self::HTTP_AUTHORIZATION,
             'ACCEPT' => 'application/json',
         ]);
 
@@ -185,7 +185,7 @@ EOT;
         $taxCategories = $this->loadFixturesFromFile('resources/tax_categories.yml');
 
         $this->client->request('PUT', '/api/tax-categories/'.$taxCategories['tax_category_1']->getId(), [], [], [
-            'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
+            'HTTP_Authorization' => self::HTTP_AUTHORIZATION,
             'CONTENT_TYPE' => 'application/json',
         ]);
 
@@ -207,7 +207,7 @@ EOT;
 EOT;
 
         $this->client->request('PUT', '/api/tax-categories/'.$taxCategories['tax_category_1']->getId(), [], [], [
-            'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
+            'HTTP_Authorization' => self::HTTP_AUTHORIZATION,
             'CONTENT_TYPE' => 'application/json',
         ], $data);
 
@@ -215,7 +215,7 @@ EOT;
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
 
         $this->client->request('GET', '/api/tax-categories/'.$taxCategories['tax_category_1']->getId(), [], [], [
-            'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
+            'HTTP_Authorization' => self::HTTP_AUTHORIZATION,
             'ACCEPT' => 'application/json',
         ]);
 
@@ -228,7 +228,7 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
         $this->client->request('PATCH', '/api/tax-categories/-1', [], [], [
-            'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
+            'HTTP_Authorization' => self::HTTP_AUTHORIZATION,
             'ACCEPT' => 'application/json',
         ]);
 
@@ -249,7 +249,7 @@ EOT;
 EOT;
 
         $this->client->request('PATCH', '/api/tax-categories/'.$taxCategories['tax_category_1']->getId(), [], [], [
-            'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
+            'HTTP_Authorization' => self::HTTP_AUTHORIZATION,
             'CONTENT_TYPE' => 'application/json',
         ], $data);
 
@@ -257,7 +257,7 @@ EOT;
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
 
         $this->client->request('GET', '/api/tax-categories/'.$taxCategories['tax_category_1']->getId(), [], [], [
-            'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
+            'HTTP_Authorization' => self::HTTP_AUTHORIZATION,
             'ACCEPT' => 'application/json',
         ]);
 
@@ -270,7 +270,7 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
         $this->client->request('DELETE', '/api/tax-categories/-1', [], [], [
-            'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
+            'HTTP_Authorization' => self::HTTP_AUTHORIZATION,
             'ACCEPT' => 'application/json',
         ]);
 
@@ -284,7 +284,7 @@ EOT;
         $taxCategories = $this->loadFixturesFromFile('resources/tax_categories.yml');
 
         $this->client->request('DELETE', '/api/tax-categories/'.$taxCategories['tax_category_1']->getId(), [], [], [
-            'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
+            'HTTP_Authorization' => self::HTTP_AUTHORIZATION,
             'CONTENT_TYPE' => 'application/json',
         ], []);
 
@@ -292,7 +292,7 @@ EOT;
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
 
         $this->client->request('GET', '/api/tax-categories/'.$taxCategories['tax_category_1']->getId(), [], [], [
-            'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
+            'HTTP_Authorization' => self::HTTP_AUTHORIZATION,
             'ACCEPT' => 'application/json',
         ]);
 
