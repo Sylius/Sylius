@@ -33,7 +33,7 @@ interface LoginPageInterface extends SymfonyPageInterface
     public function specifyPassword($password);
 
     /**
-     * @param string $userName
+     * @param string $username
      */
-    public function specifyUserName($userName);
+    public function specifyUsername($username);
 }

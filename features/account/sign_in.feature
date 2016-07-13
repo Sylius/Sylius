@@ -11,7 +11,7 @@ Feature: Sign in to the store
     @ui
     Scenario: Sign in with email and password
         Given I want to log in
-        When I specify the user name as "ted@example.com"
+        When I specify the username as "ted@example.com"
         And I specify the password as "bear"
         And I log in
         Then I should be logged in
@@ -19,7 +19,7 @@ Feature: Sign in to the store
     @ui
     Scenario: Sign in with bad credentials
         Given I want to log in
-        When I specify the user name as "bear@example.com"
+        When I specify the username as "bear@example.com"
         And I specify the password as "pswd"
         And I log in
         Then I should be notified about bad credentials
