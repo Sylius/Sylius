@@ -1,41 +1,52 @@
 {% extends '@SyliusShop/layout.html.twig' %}
 
 {% block content %}
-    <div class="ui grid">
+    <div class="ui one column centered grid">
         <div class="center aligned nine wide column">
-            <div class="ui segment">
-                <h1 class="ui icon header">
-                    {% for payment in order.payments %}
-                        {% if payment.state is same as('new') or payment.state is same as('pending') %}
+            <h1 class="ui icon header">
+                <div class="ui segment">
+                    {% for payment in order.payments if payment.state is not same as('cancelled') %}
+                        {% if payment.state is same as('new') %}
                             <i class="circular payment icon"></i>
-                                <div class="ui two column very relaxed grid">
-                                    <div class="column">
+                            <div class="ui basic segment">
+                                <div class="ui two column middle aligned very relaxed stackable grid">
+                                    <div class="column left aligned">
                                         {{ render(url('sylius_shop_order_payment_method_update', {'orderId': order.id} )) }}
                                     </div>
                                     <div class="ui vertical divider">
                                         or
                                     </div>
-                                    {% if payment.state is same as('new')  %}
-                                    <div class="center aligned column">
+                                    <div class="column">
                                         <div class="sub header">{{ 'sylius.ui.payment_ready_to_pay'|trans }} </div>
                                         <div class="ui hidden divider"></div>
-                                        <div class="ui hidden divider"></div>
-                                        <a href="{{ path('sylius_shop_order_pay', {'orderId': order.id}) }}" id="sylius-pay-link" class="massive ui primary button">
+                                        <a href="{{ path('sylius_shop_order_pay', {'orderId': order.id}) }}" id="sylius-pay-link" class="huge ui primary button">
                                             {{ 'sylius.ui.pay'|trans }}
                                         </a>
                                     </div>
-                                    {% endif %}
                                 </div>
-                        {% else %}
+                            </div>
+                        {% elseif payment.state is same as('pending') %}
+                            <i class="circular rocket icon"></i>
+                                <div class="ui centered grid">
+                                    <div class="left aligned column">
+                                    {{ render(url('sylius_shop_order_payment_method_update', {'orderId': order.id})) }}
+                                    </div>
+                                </div>
+                            <div class="ui hidden divider"></div>
+                        {% elseif payment.state is same as('processing') or payment.state is same as('completed') %}
                             <i class="circular rocket icon"></i>
                             <div class="content" id="sylius-thank-you">
                                 {{ 'sylius.ui.thank_you'|trans }}
                                 <div class="sub header">{{ 'sylius.ui.placed_an_order'|trans }}</div>
                             </div>
+                            <div class="ui hidden divider"></div>
+                        {% endif %}
+                        {% if payment.method.instructions is not null %}
+                                <div id="sylius-payment-method-instructions" class="sub header"> {{ payment.method.instructions }} </div>
                         {% endif %}
                     {% endfor %}
-                </h1>
-            </div>
+                </div>
+            </h1>
         </div>
     </div>
 {% endblock %}

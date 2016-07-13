@@ -89,7 +89,7 @@ sylius:
         category_requirements: Category requirements
         change_address: Change address
         change_password: Change password
-        change_payment_method: Change payment method
+        change_payment_method: You can change payment method
         change_shipping_method: Change shipping method
         change_your_password: Change your password
         channel: Channel
@@ -529,7 +529,7 @@ sylius:
         payment_method: 'Payment method'
         payment_methods: 'Payment Methods'
         payment_mode: 'Payment mode'
-        payment_ready_to_pay: You can now make your payment
+        payment_ready_to_pay: You can make your payment
         payment_state: 'Payment state'
         payments: Payments
         pay: Pay
