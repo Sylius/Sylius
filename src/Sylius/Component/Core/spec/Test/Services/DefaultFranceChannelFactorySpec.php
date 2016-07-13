@@ -111,7 +111,6 @@ class DefaultFranceChannelFactorySpec extends ObjectBehavior
         $currencyFactory->createNew()->willReturn($euro);
         $euro->setCode('EUR')->shouldBeCalled();
         $euro->setExchangeRate(1.00)->shouldBeCalled();
-        $euro->setBase(true)->shouldBeCalled();
 
         $channel->setDefaultCurrency($euro)->shouldBeCalled();
         $channel->setDefaultLocale($locale)->shouldBeCalled();

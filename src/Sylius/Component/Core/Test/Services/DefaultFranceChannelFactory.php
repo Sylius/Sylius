@@ -196,7 +196,6 @@ class DefaultFranceChannelFactory implements DefaultChannelFactoryInterface
         $currency = $this->currencyFactory->createNew();
         $currency->setCode(self::DEFAULT_CURRENCY_CODE);
         $currency->setExchangeRate(1.00);
-        $currency->setBase(true);
 
         return $currency;
     }

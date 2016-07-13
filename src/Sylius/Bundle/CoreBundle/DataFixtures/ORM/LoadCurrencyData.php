@@ -22,8 +22,6 @@ use Sylius\Component\Currency\Model\CurrencyInterface;
  */
 class LoadCurrencyData extends DataFixture
 {
-    const BASE_CURRENCY = 'EUR';
-
     /**
      * @var array
      */
@@ -46,9 +44,6 @@ class LoadCurrencyData extends DataFixture
             $currency->setCode($code);
             $currency->setExchangeRate($rate);
             $currency->setEnabled(true);
-            if (self::BASE_CURRENCY === $code) {
-                $currency->setBase(true);
-            }
 
             $this->setReference('Sylius.Currency.'.$code, $currency);
 

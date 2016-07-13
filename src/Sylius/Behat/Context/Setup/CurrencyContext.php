@@ -74,7 +74,6 @@ final class CurrencyContext implements Context
     {
         $currency = $this->createCurrency($currencyCode);
         $currency->setEnabled(true);
-        $currency->setBase(true);
 
         $this->saveCurrency($currency);
     }

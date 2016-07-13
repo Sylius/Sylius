@@ -64,7 +64,7 @@ final class CurrencyFixture extends AbstractFixture
             $currency->setEnabled($enabled);
 
             if ($currencyCode === $this->baseCurrencyCode) {
-                $currency->setBase(true);
+                $currency->setExchangeRate(1.00);
             } else {
                 $currency->setExchangeRate(mt_rand(0, 200) / 100);
             }
