@@ -560,4 +560,15 @@ final class ManagingOrdersContext implements Context
             Assert::true($this->showPage->hasNote($note), sprintf('I should see %s note, but I do not see', $note));
         });
     }
+
+    /**
+     * @Then I should see an order with :orderNumber number
+     */
+    public function iShouldSeeOrderWithNumber($orderNumber)
+    {
+        Assert::true(
+            $this->indexPage->isSingleResourceOnPage(['number' => $orderNumber]),
+            sprintf('Cannot find order with "%s" number in the list.', $orderNumber)
+        );
+    }
 }
