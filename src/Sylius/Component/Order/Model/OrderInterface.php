@@ -14,7 +14,6 @@ namespace Sylius\Component\Order\Model;
 use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
-use Sylius\Component\Sequence\Model\SequenceSubjectInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -23,7 +22,6 @@ interface OrderInterface extends
     AdjustableInterface,
     CommentAwareInterface,
     ResourceInterface,
-    SequenceSubjectInterface,
     TimestampableInterface
 {
     const STATE_NEW = 'new';

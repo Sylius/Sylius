@@ -148,8 +148,6 @@
         "sylius/resource": "self.version",
         "sylius/resource-bundle": "self.version",
         "sylius/search-bundle": "self.version",
-        "sylius/sequence": "self.version",
-        "sylius/sequence-bundle": "self.version",
         "sylius/settings-bundle": "self.version",
         "sylius/shipping": "self.version",
         "sylius/shipping-bundle": "self.version",

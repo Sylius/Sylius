@@ -24,7 +24,6 @@ suites:
     Report: { namespace: Sylius\Component\Report, psr4_prefix: Sylius\Component\Report, spec_path: src/Sylius/Component/Report, src_path: src/Sylius/Component/Report }
     Resource: { namespace: Sylius\Component\Resource, psr4_prefix: Sylius\Component\Resource, spec_path: src/Sylius/Component/Resource, src_path: src/Sylius/Component/Resource }
     Review: { namespace: Sylius\Component\Review, psr4_prefix: Sylius\Component\Review, spec_path: src/Sylius/Component/Review, src_path: src/Sylius/Component/Review }
-    Sequence: { namespace: Sylius\Component\Sequence, psr4_prefix: Sylius\Component\Sequence, spec_path: src/Sylius/Component/Sequence, src_path: src/Sylius/Component/Sequence }
     Shipping: { namespace: Sylius\Component\Shipping, psr4_prefix: Sylius\Component\Shipping, spec_path: src/Sylius/Component/Shipping, src_path: src/Sylius/Component/Shipping }
     Storage: { namespace: Sylius\Component\Storage, psr4_prefix: Sylius\Component\Storage, spec_path: src/Sylius/Component/Storage, src_path: src/Sylius/Component/Storage }
     Taxation: { namespace: Sylius\Component\Taxation, psr4_prefix: Sylius\Component\Taxation, spec_path: src/Sylius/Component/Taxation, src_path: src/Sylius/Component/Taxation }
@@ -64,7 +63,6 @@ suites:
     ResourceBundle: { namespace: Sylius\Bundle\ResourceBundle, psr4_prefix: Sylius\Bundle\ResourceBundle, spec_path: src/Sylius/Bundle/ResourceBundle, src_path: src/Sylius/Bundle/ResourceBundle }
     ReviewBundle: { namespace: Sylius\Bundle\ReviewBundle, psr4_prefix: Sylius\Bundle\ReviewBundle, spec_path: src/Sylius/Bundle/ReviewBundle, src_path: src/Sylius/Bundle/ReviewBundle }
     SearchBundle: { namespace: Sylius\Bundle\SearchBundle, psr4_prefix: Sylius\Bundle\SearchBundle, spec_path: src/Sylius/Bundle/SearchBundle, src_path: src/Sylius/Bundle/SearchBundle }
-    SequenceBundle: { namespace: Sylius\Bundle\SequenceBundle, psr4_prefix: Sylius\Bundle\SequenceBundle, spec_path: src/Sylius/Bundle/SequenceBundle, src_path: src/Sylius/Bundle/SequenceBundle }
     SettingsBundle: { namespace: Sylius\Bundle\SettingsBundle, psr4_prefix: Sylius\Bundle\SettingsBundle, spec_path: src/Sylius/Bundle/SettingsBundle, src_path: src/Sylius/Bundle/SettingsBundle }
     ShippingBundle: { namespace: Sylius\Bundle\ShippingBundle, psr4_prefix: Sylius\Bundle\ShippingBundle, spec_path: src/Sylius/Bundle/ShippingBundle, src_path: src/Sylius/Bundle/ShippingBundle }
     ShopBundle: { namespace: Sylius\Bundle\ShopBundle, psr4_prefix: Sylius\Bundle\ShopBundle, spec_path: src/Sylius/Bundle/ShopBundle, src_path: src/Sylius/Bundle/ShopBundle }

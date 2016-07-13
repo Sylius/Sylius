@@ -7,6 +7,15 @@ UPGRADE
 
 * Renamed configuration option `sylius_channel.fake_channel_support` to `sylius_channel.debug`
 
+### Order and OrderBundle
+
+* Added ``OrderSequence`` model to keep current order index
+* Added ``OrderNumberGenerator`` to generate number for new orders
+
+### Sequence and SequenceBundle
+
+* Removed ``Sequence`` component and ``SequenceBundle``
+
 ## From 0.18 to 0.19.x
 
 ### Core and CoreBundle
