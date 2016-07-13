@@ -27,7 +27,7 @@ The following states are defined:
 
 .. tip::
     Please keep in mind that these states are just default, you can define and use your own.
-    If you use this component with :doc:`/bundles/SyliusInventoryBundle/index` and Symfony2, you will have full state machine configuration at your disposal.
+    If you use this component with :doc:`/bundles/SyliusInventoryBundle/index` and Symfony, you will have full state machine configuration at your disposal.
 
 .. _component_inventory_inventory-unit-transitions:
 

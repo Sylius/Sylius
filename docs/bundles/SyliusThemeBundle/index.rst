@@ -1,7 +1,7 @@
 SyliusThemeBundle
 =================
 
-Flexible theming system for Symfony2 applications.
+Flexible theming system for Symfony applications.
 
 .. toctree::
     :numbered:

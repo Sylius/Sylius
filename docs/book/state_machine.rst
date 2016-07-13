@@ -15,15 +15,59 @@ States
 
 States of a state machine are defined as constants on the model of an entity that the state machine is controlling.
 
+How to configure states? Let's see on the example from **Checkout** state machine.
+
+.. code-block:: yaml
+
+   # CoreBundle/Resources/config/app/state_machine.yml
+   winzou_state_machine:
+       sylius_order_checkout:
+           # list of all possible states:
+           states:
+               cart: ~
+               addressed: ~
+               shipping_selected: ~
+               payment_selected: ~
+               completed: ~
+
 Transitions
 -----------
 
 On the graph it would be the connection between two states, defining that you can move from one state to another subsequently.
 
+How to configure transitions? Let's see on the example of our **Checkout** state machine.
+Having states configured we can have a transition between the ``cart`` state to the ``addressed`` state.
+
+.. code-block:: yaml
+
+   # CoreBundle/Resources/config/app/state_machine.yml
+   winzou_state_machine:
+       sylius_order_checkout:
+           transitions:
+               address:
+                   from: [cart]  # here you specify which state is the initial
+                   to: addressed # there you specify which state is final for that transition
+
 Callbacks
 ---------
 
-Callbacks are used to execute some code before or after applying transitions. Winzou StateMachineBundle adds the ability to use Symfony2 services in the callbacks.
+Callbacks are used to execute some code before or after applying transitions. Winzou StateMachineBundle adds the ability to use Symfony services in the callbacks.
+
+How to configure callbacks?
+Having a configured transition, you can attach a callback to it either before or after the transition. Callback is simply a method of a service you want to be executed.
+
+.. code-block:: yaml
+
+   # CoreBundle/Resources/config/app/state_machine.yml
+   winzou_state_machine:
+        sylius_order_checkout:
+             callbacks:
+                  # callbacks may be called before or after specified transitions, in the checkout state machine we've got callbacks only after transitions
+                  after:
+                       sylius_process_cart:
+                            on: ["address", "select_shipping"]
+                            do: ["@sylius.order_processing.order_processor", "process"]
+                            args: ["object"]
 
 Configuration
 -------------
@@ -40,7 +84,6 @@ would become ``shipping_selected``.
 .. code-block:: yaml
 
    # CoreBundle/Resources/config/app/state_machine.yml
-
    winzou_state_machine:
        sylius_order_checkout:
            class: "%sylius.model.order.class%" # class of the domain object - in our case Order

@@ -22,7 +22,7 @@ Developers channel
 **sylius-dev** is the channel where you'll most likely meet Sylius core team and contributors. It is the right place to discuss about Pull Requests, ideas and architecture.
 It will be perfect starting point if you want to contribute to the project or chat about concept you'd like to introduce at Sylius.
 
-Now the best part! You do not need to be a Symfony2 guru to help! There is plenty of work which can be done by people starting with Symfony, and to us, every contribution is invaluable!
+Now the best part! You do not need to be a Symfony guru to help! There is plenty of work which can be done by people starting with Symfony, and to us, every contribution is invaluable!
 
 How to connect
 ~~~~~~~~~~~~~~

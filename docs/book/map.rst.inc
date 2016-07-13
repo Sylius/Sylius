@@ -3,6 +3,7 @@
 * :doc:`/book/environments`
 * :doc:`/book/installation`
 * :doc:`/book/architecture`
+* :doc:`/book/resource_layer`
 * :doc:`/book/state_machine`
 * :doc:`/book/channels`
 * :doc:`/book/products`

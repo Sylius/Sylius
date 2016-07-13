@@ -5,11 +5,11 @@ Sylius Documentation
    :alt:   Sylius Welcome Page
 
 `Sylius`_ is a modern e-commerce solution for PHP, based on
-`Symfony2 Framework`_.
+`Symfony Framework`_.
 
 .. note::
 
-    This documentation assumes you have a working knowledge of the Symfony2
+    This documentation assumes you have a working knowledge of the Symfony
     Framework. If you haven't, please start by reading the `Quick Tour`_ from
     the Symfony documentation.
 
@@ -108,5 +108,5 @@ A guide to contribute to Sylius.
 .. include:: /contributing/map.rst.inc
 
 .. _Sylius: http://sylius.org
-.. _`Symfony2 Framework`: http://symfony.com
+.. _`Symfony Framework`: http://symfony.com
 .. _`Quick Tour`: http://symfony.com/doc/current/quick_tour

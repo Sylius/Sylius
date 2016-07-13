@@ -1,4 +1,4 @@
-Symfony2 Bundles
+Symfony Bundles
 ================
 
 .. toctree::

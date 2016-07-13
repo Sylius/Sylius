@@ -1,7 +1,7 @@
 SyliusGridBundle
 ================
 
-Displaying a grid with sorting and filtering options is a common task for many web applications. This bundle integrates the Sylius Grid component with Symfony2 framework and allows you to display grids really easily.
+Displaying a grid with sorting and filtering options is a common task for many web applications. This bundle integrates the Sylius Grid component with the Symfony framework and allows you to display grids really easily.
 
 Some of the features worth mentioning:
 

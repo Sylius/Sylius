@@ -22,9 +22,9 @@ For purpose of this tutorial, let's define the page metadata settings.
         {
             $builder
                 ->setDefaults(array(
-                    'title'            => 'Sylius - Modern ecommerce for Symfony2',
+                    'title'            => 'Sylius - Modern ecommerce for Symfony',
                     'meta_keywords'    => 'symfony, sylius, ecommerce, webshop, shopping cart',
-                    'meta_description' => 'Sylius is modern ecommerce solution for PHP. Based on the Symfony2 framework.',
+                    'meta_description' => 'Sylius is modern ecommerce solution for PHP. Based on the Symfony framework.',
                 ))
                 ->setAllowedTypes(array(
                     'title'            => array('string'),
