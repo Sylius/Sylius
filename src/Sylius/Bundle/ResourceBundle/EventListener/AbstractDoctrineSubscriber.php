@@ -13,6 +13,7 @@ namespace Sylius\Bundle\ResourceBundle\EventListener;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
+use Doctrine\Common\Persistence\Mapping\RuntimeReflectionService;
 use Sylius\Component\Resource\Metadata\RegistryInterface;
 use Sylius\Component\Resource\Model\ResourceInterface;
 
@@ -25,6 +26,8 @@ abstract class AbstractDoctrineSubscriber implements EventSubscriber
      * @var RegistryInterface
      */
     protected $resourceRegistry;
+
+    private $reflectionService;
 
     /**
      * @param RegistryInterface $resourceRegistry
@@ -39,12 +42,21 @@ abstract class AbstractDoctrineSubscriber implements EventSubscriber
      *
      * @return bool
      */
-    protected function isSyliusClass(ClassMetadata $metadata)
+    protected function isResource(ClassMetadata $metadata)
     {
         if (!$reflClass = $metadata->getReflectionClass()) {
             return false;
         }
 
         return $reflClass->implementsInterface(ResourceInterface::class);
+    }
+
+    protected function getReflectionService()
+    {
+        if ($this->reflectionService === null) {
+            $this->reflectionService = new RuntimeReflectionService();
+        }
+
+        return $this->reflectionService;
     }
 }
