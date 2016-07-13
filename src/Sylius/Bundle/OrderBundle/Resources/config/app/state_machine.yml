@@ -51,7 +51,7 @@ winzou_state_machine:
                     on: "create"
                     do: ["@sylius.callback.complete_order", "completeOrder"]
                     args: ["object"]
-                sylius_number:
+                sylius_generate_number:
                     on: "create"
-                    do: ["@sylius.sequence.doctrine_number_listener", "enableEntity"]
+                    do: ["@sylius.order_number_generator", "generate"]
                     args: ["object"]
