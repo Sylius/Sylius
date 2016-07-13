@@ -9,15 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\OrderBundle\NumberGenerator;
+namespace Sylius\Bundle\OrderBundle\NumberAssigner;
+
+use Sylius\Component\Order\Model\OrderInterface;
 
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-interface OrderNumberGeneratorInterface
+interface OrderNumberAssignerInterface
 {
     /**
-     * @return string
+     * @param OrderInterface $order
      */
-    public function generate();
+    public function assignNumber(OrderInterface $order);
 }

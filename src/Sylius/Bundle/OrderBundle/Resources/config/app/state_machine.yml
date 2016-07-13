@@ -53,5 +53,5 @@ winzou_state_machine:
                     args: ["object"]
                 sylius_generate_number:
                     on: "create"
-                    do: ["@sylius.order_number_generator", "generate"]
+                    do: ["@sylius.order_number_assigner", "assignNumber"]
                     args: ["object"]

@@ -48,17 +48,13 @@ class OrderNumberGeneratorSpec extends ObjectBehavior
 
     function it_generates_order_number(
         EntityRepository $sequenceRepository,
-        OrderInterface $order,
         OrderSequenceInterface $sequence
     ) {
         $sequence->getIndex()->willReturn(6);
         $sequenceRepository->findOneBy([])->willReturn($sequence);
 
-        $order->getNumber()->willReturn(null);
-
-        $order->setNumber('00000007')->shouldBeCalled();
         $sequence->incrementIndex()->shouldBeCalled();
 
-        $this->generate($order);
+        $this->generate()->shouldReturn('000000007');
     }
 }

@@ -71,17 +71,14 @@ class OrderNumberGenerator implements OrderNumberGeneratorInterface
     /**
      * {@inheritdoc}
      */
-    public function generate(OrderInterface $order)
+    public function generate()
     {
         $sequence = $this->getSequence();
-
-        if (null !== $order->getNumber()) {
-            return;
-        }
-
-        $order->setNumber($this->generateNumber($sequence->getIndex()));
-
+        
+        $number = $this->generateNumber($sequence->getIndex());
         $sequence->incrementIndex();
+        
+        return $number;
     }
 
     /**

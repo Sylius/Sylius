@@ -54,6 +54,16 @@ interface OrderInterface extends
     /**
      * @return string
      */
+    public function getNumber();
+
+    /**
+     * @param string
+     */
+    public function setNumber($number);
+
+    /**
+     * @return string
+     */
     public function getNotes();
 
     /**
