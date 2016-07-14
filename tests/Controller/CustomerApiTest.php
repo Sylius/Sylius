@@ -11,7 +11,7 @@
 
 namespace Sylius\Tests\Controller;
 
-use Lakion\ApiTestCase\JsonApiTestCase;
+
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -19,21 +19,6 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class CustomerApiTest extends JsonApiTestCase
 {
-    /**
-     * @var array
-     */
-    private static $authorizedHeaderWithContentType = [
-        'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
-        'CONTENT_TYPE' => 'application/json',
-    ];
-
-    /**
-     * @var array
-     */
-    private static $authorizedHeaderWithAccept = [
-        'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
-        'ACCEPT' => 'application/json',
-    ];
 
     /**
      * @test
@@ -53,7 +38,7 @@ class CustomerApiTest extends JsonApiTestCase
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
-        $this->client->request('POST', '/api/customers/', [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('POST', '/api/customers/', [], [], self::AUTHORIZATION_HEADER_WITH_CONTENT_TYPE);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'customer/create_validation_fail_response', Response::HTTP_BAD_REQUEST);
@@ -75,7 +60,7 @@ class CustomerApiTest extends JsonApiTestCase
         }
 EOT;
 
-        $this->client->request('POST', '/api/customers/', [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('POST', '/api/customers/', [], [], self::AUTHORIZATION_HEADER_WITH_CONTENT_TYPE, $data);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'customer/create_with_user_validation_fail_response', Response::HTTP_BAD_REQUEST);
@@ -98,7 +83,7 @@ EOT;
         }
 EOT;
 
-        $this->client->request('POST', '/api/customers/', [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('POST', '/api/customers/', [], [], self::AUTHORIZATION_HEADER_WITH_CONTENT_TYPE, $data);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'customer/create_response', Response::HTTP_CREATED);
@@ -124,7 +109,7 @@ EOT;
         }
 EOT;
 
-        $this->client->request('POST', '/api/customers/', [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('POST', '/api/customers/', [], [], self::AUTHORIZATION_HEADER_WITH_CONTENT_TYPE, $data);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'customer/create_with_user_response', Response::HTTP_CREATED);
@@ -149,7 +134,7 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/customers.yml');
 
-        $this->client->request('GET', '/api/customers/', [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', '/api/customers/', [], [], self::AUTHORIZATION_HEADER_WITH_ACCEPT);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'customer/index_response', Response::HTTP_OK);
@@ -173,7 +158,7 @@ EOT;
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
-        $this->client->request('GET', '/api/customers/-1', [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', '/api/customers/-1', [], [], self::AUTHORIZATION_HEADER_WITH_ACCEPT);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
@@ -187,7 +172,7 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $customers = $this->loadFixturesFromFile('resources/customers.yml');
 
-        $this->client->request('GET', '/api/customers/'.$customers['customer_Barry']->getId(), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', '/api/customers/'.$customers['customer_Barry']->getId(), [], [], self::AUTHORIZATION_HEADER_WITH_ACCEPT);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'customer/show_response', Response::HTTP_OK);
@@ -201,7 +186,7 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $customers = $this->loadFixturesFromFile('resources/customers.yml');
 
-        $this->client->request('GET', '/api/customers/'.$customers['customer_Roy']->getId(), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', '/api/customers/'.$customers['customer_Roy']->getId(), [], [], self::AUTHORIZATION_HEADER_WITH_ACCEPT);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'customer/show_with_user_response', Response::HTTP_OK);
@@ -225,7 +210,7 @@ EOT;
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
-        $this->client->request('PUT', '/api/customers/-1', [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('PUT', '/api/customers/-1', [], [], self::AUTHORIZATION_HEADER_WITH_ACCEPT);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
@@ -239,7 +224,7 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $customers = $this->loadFixturesFromFile('resources/customers.yml');
 
-        $this->client->request('PUT', '/api/customers/'.$customers['customer_Oliver']->getId(), [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('PUT', '/api/customers/'.$customers['customer_Oliver']->getId(), [], [], self::AUTHORIZATION_HEADER_WITH_CONTENT_TYPE);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'customer/update_validation_fail_response', Response::HTTP_BAD_REQUEST);
@@ -263,12 +248,12 @@ EOT;
         }
 EOT;
 
-        $this->client->request('PUT', '/api/customers/'.$customers['customer_Oliver']->getId(), [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('PUT', '/api/customers/'.$customers['customer_Oliver']->getId(), [], [], self::AUTHORIZATION_HEADER_WITH_CONTENT_TYPE, $data);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
 
-        $this->client->request('GET', '/api/customers/'.$customers['customer_Oliver']->getId(), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', '/api/customers/'.$customers['customer_Oliver']->getId(), [], [], self::AUTHORIZATION_HEADER_WITH_ACCEPT);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'customer/update_response', Response::HTTP_OK);
@@ -281,7 +266,7 @@ EOT;
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
-        $this->client->request('PATCH', '/api/customers/-1', [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('PATCH', '/api/customers/-1', [], [], self::AUTHORIZATION_HEADER_WITH_ACCEPT);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
@@ -303,12 +288,12 @@ EOT;
         }
 EOT;
 
-        $this->client->request('PATCH', '/api/customers/'.$customers['customer_Oliver']->getId(), [], [], static::$authorizedHeaderWithContentType, $data);
+        $this->client->request('PATCH', '/api/customers/'.$customers['customer_Oliver']->getId(), [], [], self::AUTHORIZATION_HEADER_WITH_CONTENT_TYPE, $data);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
 
-        $this->client->request('GET', '/api/customers/'.$customers['customer_Oliver']->getId(), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', '/api/customers/'.$customers['customer_Oliver']->getId(), [], [], self::AUTHORIZATION_HEADER_WITH_ACCEPT);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'customer/partial_update_response', Response::HTTP_OK);
@@ -332,7 +317,7 @@ EOT;
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
-        $this->client->request('DELETE', '/api/customers/-1', [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('DELETE', '/api/customers/-1', [], [], self::AUTHORIZATION_HEADER_WITH_ACCEPT);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
@@ -346,12 +331,12 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $customers = $this->loadFixturesFromFile('resources/customers.yml');
 
-        $this->client->request('DELETE', '/api/customers/'.$customers['customer_Oliver']->getId(), [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('DELETE', '/api/customers/'.$customers['customer_Oliver']->getId(), [], [], self::AUTHORIZATION_HEADER_WITH_CONTENT_TYPE);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
 
-        $this->client->request('GET', '/api/customers/'.$customers['customer_Oliver']->getId(), [], [], static::$authorizedHeaderWithAccept);
+        $this->client->request('GET', '/api/customers/'.$customers['customer_Oliver']->getId(), [], [], self::AUTHORIZATION_HEADER_WITH_ACCEPT);
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);

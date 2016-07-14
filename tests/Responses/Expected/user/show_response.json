@@ -1,0 +1,10 @@
+{
+  "enabled": true,
+  "id": "@integer@",
+  "locked": false,
+  "roles": "@array@",
+  "username": "@string@",
+  "username_canonical": "@string@",
+  "customer": "@array@",
+  "last_login": "@string@.isDateTime()"
+}

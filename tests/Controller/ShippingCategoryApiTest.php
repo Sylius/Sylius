@@ -11,7 +11,7 @@
 
 namespace Sylius\Tests\Controller;
 
-use Lakion\ApiTestCase\JsonApiTestCase;
+
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -32,7 +32,7 @@ class ShippingCategoryApiTest extends JsonApiTestCase
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
         $this->client->request('POST', '/api/shipping-categories/', [], [], [
-            'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
+            'HTTP_Authorization' => self::HTTP_AUTHORIZATION,
             'CONTENT_TYPE' => 'application/json',
         ]);
 
@@ -54,7 +54,7 @@ class ShippingCategoryApiTest extends JsonApiTestCase
 EOT;
 
         $this->client->request('POST', '/api/shipping-categories/', [], [], [
-            'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
+            'HTTP_Authorization' => self::HTTP_AUTHORIZATION,
             'CONTENT_TYPE' => 'application/json',
         ], $data);
 
@@ -76,7 +76,7 @@ EOT;
         $this->loadFixturesFromFile('resources/shipping_categories.yml');
 
         $this->client->request('GET', '/api/shipping-categories/', [], [], [
-            'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
+            'HTTP_Authorization' => self::HTTP_AUTHORIZATION,
         ]);
 
         $response = $this->client->getResponse();
@@ -96,7 +96,7 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
         $this->client->request('GET', '/api/shipping-categories/-1', [], [], [
-            'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
+            'HTTP_Authorization' => self::HTTP_AUTHORIZATION,
             'ACCEPT' => 'application/json',
         ]);
 
@@ -110,7 +110,7 @@ EOT;
         $shippingCategories = $this->loadFixturesFromFile('resources/shipping_categories.yml');
 
         $this->client->request('GET', '/api/shipping-categories/'.$shippingCategories['shipping_category_1']->getId(), [], [], [
-            'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
+            'HTTP_Authorization' => self::HTTP_AUTHORIZATION,
             'ACCEPT' => 'application/json',
         ]);
 
@@ -131,7 +131,7 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
         $this->client->request('PUT', '/api/shipping-categories/-1', [], [], [
-            'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
+            'HTTP_Authorization' => self::HTTP_AUTHORIZATION,
             'ACCEPT' => 'application/json',
         ]);
 
@@ -145,7 +145,7 @@ EOT;
         $shippingCategories = $this->loadFixturesFromFile('resources/shipping_categories.yml');
 
         $this->client->request('PUT', '/api/shipping-categories/'.$shippingCategories['shipping_category_1']->getId(), [], [], [
-            'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
+            'HTTP_Authorization' => self::HTTP_AUTHORIZATION,
             'CONTENT_TYPE' => 'application/json',
         ]);
 
@@ -167,7 +167,7 @@ EOT;
 EOT;
 
         $this->client->request('PUT', '/api/shipping-categories/'.$shippingCategories['shipping_category_1']->getId(), [], [], [
-            'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
+            'HTTP_Authorization' => self::HTTP_AUTHORIZATION,
             'CONTENT_TYPE' => 'application/json',
         ], $data);
 
@@ -175,7 +175,7 @@ EOT;
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
 
         $this->client->request('GET', '/api/shipping-categories/'.$shippingCategories['shipping_category_1']->getId(), [], [], [
-            'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
+            'HTTP_Authorization' => self::HTTP_AUTHORIZATION,
             'ACCEPT' => 'application/json',
         ]);
 
@@ -188,7 +188,7 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
         $this->client->request('PATCH', '/api/shipping-categories/-1', [], [], [
-            'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
+            'HTTP_Authorization' => self::HTTP_AUTHORIZATION,
             'ACCEPT' => 'application/json',
         ]);
 
@@ -210,7 +210,7 @@ EOT;
 EOT;
 
         $this->client->request('PATCH', '/api/shipping-categories/'.$shippingCategories['shipping_category_1']->getId(), [], [], [
-            'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
+            'HTTP_Authorization' => self::HTTP_AUTHORIZATION,
             'CONTENT_TYPE' => 'application/json',
         ], $data);
 
@@ -218,7 +218,7 @@ EOT;
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
 
         $this->client->request('GET', '/api/shipping-categories/'.$shippingCategories['shipping_category_1']->getId(), [], [], [
-            'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
+            'HTTP_Authorization' => self::HTTP_AUTHORIZATION,
             'ACCEPT' => 'application/json',
         ]);
 
@@ -231,7 +231,7 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
         $this->client->request('DELETE', '/api/shipping-categories/-1', [], [], [
-            'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
+            'HTTP_Authorization' => self::HTTP_AUTHORIZATION,
             'ACCEPT' => 'application/json',
         ]);
 
@@ -245,7 +245,7 @@ EOT;
         $shippingCategories = $this->loadFixturesFromFile('resources/shipping_categories.yml');
 
         $this->client->request('DELETE', '/api/shipping-categories/'.$shippingCategories['shipping_category_1']->getId(), [], [], [
-            'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
+            'HTTP_Authorization' => self::HTTP_AUTHORIZATION,
             'CONTENT_TYPE' => 'application/json',
         ], []);
 
@@ -253,7 +253,7 @@ EOT;
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
 
         $this->client->request('GET', '/api/shipping-categories/'.$shippingCategories['shipping_category_1']->getId(), [], [], [
-            'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
+            'HTTP_Authorization' => self::HTTP_AUTHORIZATION,
             'ACCEPT' => 'application/json',
         ]);
 
