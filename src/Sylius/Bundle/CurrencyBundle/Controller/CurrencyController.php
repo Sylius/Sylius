@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\CurrencyBundle\Controller;
 
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
-use Sylius\Component\Currency\Context\CurrencyContext;
+use Sylius\Component\Currency\Context\ImmutableCurrencyContext;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -37,7 +37,7 @@ class CurrencyController extends ResourceController
     }
 
     /**
-     * @return CurrencyContext
+     * @return ImmutableCurrencyContext
      */
     protected function getCurrencyContext()
     {

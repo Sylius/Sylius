@@ -16,6 +16,7 @@ use Sylius\Bundle\CurrencyBundle\Templating\Helper\MoneyHelper;
 use Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatterInterface;
 use Sylius\Bundle\MoneyBundle\Templating\Helper\MoneyHelperInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
+use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 
 /**
@@ -46,10 +47,13 @@ class MoneyHelperSpec extends ObjectBehavior
     function it_formats_money_using_default_currency_and_locale_if_only_amount_is_given(
         LocaleContextInterface $localeContext,
         CurrencyContextInterface $currencyContext,
-        MoneyFormatterInterface $moneyFormatter
+        MoneyFormatterInterface $moneyFormatter,
+        CurrencyInterface $currency
     ) {
         $localeContext->getDefaultLocale()->willReturn('fr_FR');
-        $currencyContext->getCurrencyCode()->willReturn('EUR');
+        $currencyContext->getCurrency()->willReturn($currency);
+        $currency->getCode()->willReturn('EUR');
+        
         $moneyFormatter->format(500, 'EUR', 'fr_FR')->willReturn('€5.00');
 
         $this->formatAmount(500)->shouldReturn('€5.00');

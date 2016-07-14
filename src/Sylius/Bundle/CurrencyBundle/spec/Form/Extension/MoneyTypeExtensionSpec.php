@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\CurrencyBundle\Form\Extension;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
+use Sylius\Component\Currency\Model\CurrencyInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
@@ -30,9 +31,14 @@ class MoneyTypeExtensionSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\CurrencyBundle\Form\Extension\MoneyTypeExtension');
     }
 
-    function it_has_options($currencyContext, OptionsResolver $resolver)
-    {
-        $currencyContext->getCurrencyCode()->shouldBeCalled()->willReturn('EUR');
+    function it_has_options(
+        CurrencyContextInterface $currencyContext,
+        CurrencyInterface $currency,
+        OptionsResolver $resolver
+    ) {
+        $currencyContext->getCurrency()->willReturn($currency);
+        $currency->getCode()->willReturn('EUR');
+        
         $resolver->setDefaults(['currency' => 'EUR'])->shouldBeCalled();
 
         $this->configureOptions($resolver);

@@ -55,32 +55,36 @@ class CurrencyHelperSpec extends ObjectBehavior
 
     function it_allows_to_convert_prices_in_different_currencies(
         CurrencyContextInterface $currencyContext,
+        CurrencyInterface $currency,
         CurrencyConverterInterface $converter
     ) {
-        $currencyContext->getCurrencyCode()->willReturn('PLN');
+        $currencyContext->getCurrency()->willReturn($currency);
+        $currency->getCode()->willReturn('PLN');
 
         $converter->convertFromBase(15, 'USD')->willReturn(19);
         $converter->convertFromBase(2500, 'USD')->willReturn(1913);
-        $converter->convertFromBase(312, 'PLN')->willReturn(407);
-        $converter->convertFromBase(500, 'PLN')->willReturn(653);
+        $converter->convertFromBase(407, 'PLN')->willReturn(407);
+        $converter->convertFromBase(653, 'PLN')->willReturn(653);
 
         $this->convertAmount(15, 'USD')->shouldReturn(19);
         $this->convertAmount(2500, 'USD')->shouldReturn(1913);
-        $this->convertAmount(312, 'PLN')->shouldReturn(407);
-        $this->convertAmount(500)->shouldReturn(653);
+        $this->convertAmount(407, 'PLN')->shouldReturn(407);
+        $this->convertAmount(653)->shouldReturn(653);
     }
 
     function it_allows_to_convert_and_format_prices_in_different_currencies(
         CurrencyContextInterface $currencyContext,
+        CurrencyInterface $currency,
         CurrencyConverterInterface $converter,
         MoneyFormatterInterface $moneyFormatter
     ) {
-        $currencyContext->getCurrencyCode()->willReturn('PLN');
+        $currencyContext->getCurrency()->willReturn($currency);
+        $currency->getCode()->willReturn('PLN');
 
         $converter->convertFromBase(15, 'USD')->willReturn(19);
         $converter->convertFromBase(2500, 'USD')->willReturn(1913);
-        $converter->convertFromBase(312, 'PLN')->willReturn(407);
-        $converter->convertFromBase(500, 'PLN')->willReturn(653);
+        $converter->convertFromBase(407, 'PLN')->willReturn(407);
+        $converter->convertFromBase(653, 'PLN')->willReturn(653);
 
         $moneyFormatter->format(19, 'USD')->willReturn('$0.19');
         $moneyFormatter->format(1913, 'USD')->willReturn('$19.13');
@@ -89,8 +93,8 @@ class CurrencyHelperSpec extends ObjectBehavior
 
         $this->convertAndFormatAmount(15, 'USD')->shouldReturn('$0.19');
         $this->convertAndFormatAmount(2500, 'USD')->shouldReturn('$19.13');
-        $this->convertAndFormatAmount(312, 'PLN')->shouldReturn('4.07 zł');
-        $this->convertAndFormatAmount(500)->shouldReturn('6.53 zł');
+        $this->convertAndFormatAmount(407, 'PLN')->shouldReturn('4.07 zł');
+        $this->convertAndFormatAmount(653)->shouldReturn('6.53 zł');
     }
 
     function it_provides_current_currency(CurrencyProviderInterface $currencyProvider, CurrencyInterface $currency)

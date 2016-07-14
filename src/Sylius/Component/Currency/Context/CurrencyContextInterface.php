@@ -11,23 +11,15 @@
 
 namespace Sylius\Component\Currency\Context;
 
+use Sylius\Component\Currency\Model\CurrencyInterface;
+
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface CurrencyContextInterface
 {
     /**
-     * @return string
+     * @return CurrencyInterface
      */
-    public function getDefaultCurrencyCode();
-
-    /**
-     * @return string
-     */
-    public function getCurrencyCode();
-
-    /**
-     * @param string $currencyCode
-     */
-    public function setCurrencyCode($currencyCode);
+    public function getCurrency();
 }

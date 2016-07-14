@@ -16,22 +16,16 @@ use Symfony\Component\Form\AbstractTypeExtension;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Sylius money form extension.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class MoneyTypeExtension extends AbstractTypeExtension
 {
     /**
-     * Currency context.
-     *
      * @var CurrencyContextInterface
      */
     protected $currencyContext;
 
     /**
-     * Constructor.
-     *
      * @param CurrencyContextInterface $currencyContext
      */
     public function __construct(CurrencyContextInterface $currencyContext)
@@ -46,7 +40,7 @@ class MoneyTypeExtension extends AbstractTypeExtension
     {
         $resolver
             ->setDefaults([
-                'currency' => $this->currencyContext->getCurrencyCode(),
+                'currency' => $this->currencyContext->getCurrency()->getCode(),
             ])
         ;
     }
