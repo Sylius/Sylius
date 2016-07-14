@@ -34,7 +34,6 @@ class Configuration implements ConfigurationInterface
             ->addDefaultsIfNotSet()
             ->children()
                 ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
-                ->scalarNode('currency_storage')->defaultValue('sylius.storage.session')->end()
             ->end()
         ;
 

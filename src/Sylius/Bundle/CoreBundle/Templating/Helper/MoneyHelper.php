@@ -11,44 +11,35 @@
 
 namespace Sylius\Bundle\CoreBundle\Templating\Helper;
 
-use Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatterInterface;
 use Sylius\Bundle\MoneyBundle\Templating\Helper\MoneyHelperInterface;
-use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
+use Symfony\Component\Templating\Helper\Helper;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class MoneyHelper implements MoneyHelperInterface
+class MoneyHelper extends Helper implements MoneyHelperInterface
 {
+    /**
+     * @var MoneyHelperInterface
+     */
+    private $decoratedHelper;
+
     /**
      * @var LocaleContextInterface
      */
-    protected $localeContext;
+    private $localeContext;
 
     /**
-     * @var CurrencyContextInterface
-     */
-    private $currencyContext;
-
-    /**
-     * @var MoneyFormatterInterface
-     */
-    private $moneyFormatter;
-
-    /**
+     * @param MoneyHelperInterface $decoratedHelper
      * @param LocaleContextInterface $localeContext
-     * @param CurrencyContextInterface $currencyContext
-     * @param MoneyFormatterInterface $moneyFormatter
      */
     public function __construct(
-        LocaleContextInterface $localeContext,
-        CurrencyContextInterface $currencyContext,
-        MoneyFormatterInterface $moneyFormatter
+        MoneyHelperInterface $decoratedHelper,
+        LocaleContextInterface $localeContext
     ) {
+        $this->decoratedHelper = $decoratedHelper;
         $this->localeContext = $localeContext;
-        $this->currencyContext = $currencyContext;
-        $this->moneyFormatter = $moneyFormatter;
     }
 
     /**
@@ -56,9 +47,16 @@ class MoneyHelper implements MoneyHelperInterface
      */
     public function formatAmount($amount, $currencyCode = null, $locale = null)
     {
-        $locale = $locale ?: $this->localeContext->getDefaultLocale();
-        $currencyCode = $currencyCode ?: $this->currencyContext->getCurrency()->getCode();
+        $locale = $locale ?: $this->localeContext->getCurrentLocale();
 
-        return $this->moneyFormatter->format($amount, $currencyCode, $locale);
+        return $this->decoratedHelper->formatAmount($amount, $currencyCode, $locale);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'sylius_money';
     }
 }

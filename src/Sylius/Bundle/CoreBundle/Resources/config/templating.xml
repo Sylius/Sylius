@@ -11,27 +11,19 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="http://symfony.com/schema/dic/services
-                               http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <parameters>
-        <parameter key="sylius.templating.helper.money.class">Sylius\Bundle\CoreBundle\Templating\Helper\MoneyHelper</parameter>
-        <parameter key="sylius.templating.helper.regular_price.class">Sylius\Bundle\CoreBundle\Templating\Helper\RegularPriceHelper</parameter>
-    </parameters>
-
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="sylius.templating.helper.money" class="%sylius.templating.helper.money.class%" lazy="true">
+        <service id="sylius.templating.helper.money.core" class="Sylius\Bundle\CoreBundle\Templating\Helper\MoneyHelper" decorates="sylius.templating.helper.money" lazy="true">
+            <argument type="service" id="sylius.templating.helper.money.core.inner" />
             <argument type="service" id="sylius.context.locale" />
-            <argument type="service" id="sylius.context.currency" />
-            <argument type="service" id="sylius.formatter.money" />
             <tag name="templating.helper" alias="sylius_money" />
         </service>
 
-        <service id="sylius.templating.helper.regular_price" class="%sylius.templating.helper.regular_price.class%" lazy="true">
-            <tag name="templating.helper" alias="sylius_regular_price" />
+        <service id="sylius.templating.helper.price.core" class="Sylius\Bundle\CoreBundle\Templating\Helper\PriceHelper" decorates="sylius.templating.helper.price" lazy="true">
+            <argument type="service" id="sylius.templating.helper.price.core.inner" />
+            <argument type="service" id="sylius.context.currency" />
+            <tag name="templating.helper" alias="sylius_price" />
         </service>
     </services>
-
 </container>

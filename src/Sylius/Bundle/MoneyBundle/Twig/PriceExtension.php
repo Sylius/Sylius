@@ -9,24 +9,24 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CurrencyBundle\Twig;
+namespace Sylius\Bundle\MoneyBundle\Twig;
 
-use Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelperInterface;
+use Sylius\Bundle\MoneyBundle\Templating\Helper\PriceHelperInterface;
 
 /**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class CurrencyExtension extends \Twig_Extension
+final class PriceExtension extends \Twig_Extension
 {
     /**
-     * @var CurrencyHelperInterface
+     * @var PriceHelperInterface
      */
     private $helper;
 
     /**
-     * @param CurrencyHelperInterface $helper
+     * @param PriceHelperInterface $helper
      */
-    public function __construct(CurrencyHelperInterface $helper)
+    public function __construct(PriceHelperInterface $helper)
     {
         $this->helper = $helper;
     }
@@ -37,7 +37,7 @@ final class CurrencyExtension extends \Twig_Extension
     public function getFilters()
     {
         return [
-            new \Twig_SimpleFilter('sylius_currency_symbol', [$this->helper, 'convertCurrencyCodeToSymbol']),
+            new \Twig_SimpleFilter('sylius_price', [$this->helper, 'convertAndFormatAmount']),
         ];
     }
 
@@ -46,6 +46,6 @@ final class CurrencyExtension extends \Twig_Extension
      */
     public function getName()
     {
-        return 'sylius_currency';
+        return 'sylius_price';
     }
 }

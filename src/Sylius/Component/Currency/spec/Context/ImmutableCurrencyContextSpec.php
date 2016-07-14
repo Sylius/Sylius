@@ -12,11 +12,10 @@
 namespace spec\Sylius\Component\Currency\Context;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Currency\Context\ImmutableCurrencyContext;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
+use Sylius\Component\Currency\Context\ImmutableCurrencyContext;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Sylius\Component\Storage\StorageInterface;
 
 /**
  * @mixin ImmutableCurrencyContext

@@ -23,11 +23,11 @@ use Symfony\Component\Templating\Helper\Helper;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class MoneyHelperSpec extends ObjectBehavior
+final class MoneyHelperSpec extends ObjectBehavior
 {
     function let(MoneyFormatterInterface $moneyFormatter)
     {
-        $this->beConstructedWith('EUR', 'en_US', $moneyFormatter);
+        $this->beConstructedWith($moneyFormatter, 'EUR', 'en_US');
     }
 
     function it_is_initializable()
@@ -35,7 +35,7 @@ class MoneyHelperSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\MoneyBundle\Templating\Helper\MoneyHelper');
     }
 
-    function it_is_a_Twig_extension()
+    function it_is_a_templating_helper()
     {
         $this->shouldHaveType(Helper::class);
     }

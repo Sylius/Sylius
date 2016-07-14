@@ -13,7 +13,7 @@ namespace Sylius\Bundle\WebBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
 use Knp\Menu\ItemInterface;
-use Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelperInterface;
+use Sylius\Bundle\MoneyBundle\Templating\Helper\PriceHelperInterface;
 use Sylius\Bundle\WebBundle\Event\MenuBuilderEvent;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
@@ -58,9 +58,9 @@ class FrontendMenuBuilder extends MenuBuilder
     /**
      * Currency converter helper.
      *
-     * @var CurrencyHelperInterface
+     * @var PriceHelperInterface
      */
-    protected $currencyHelper;
+    protected $priceHelper;
 
     /**
      * @var ChannelContextInterface
@@ -81,7 +81,7 @@ class FrontendMenuBuilder extends MenuBuilder
      * @param CurrencyProviderInterface $currencyProvider
      * @param TaxonRepositoryInterface $taxonRepository
      * @param CartProviderInterface $cartProvider
-     * @param CurrencyHelperInterface $currencyHelper
+     * @param PriceHelperInterface $priceHelper
      * @param ChannelContextInterface $channelContext
      * @param TokenStorageInterface $tokenStorage
      */
@@ -94,7 +94,7 @@ class FrontendMenuBuilder extends MenuBuilder
         CurrencyProviderInterface $currencyProvider,
         TaxonRepositoryInterface $taxonRepository,
         CartProviderInterface $cartProvider,
-        CurrencyHelperInterface $currencyHelper,
+        PriceHelperInterface $priceHelper,
         ChannelContextInterface $channelContext,
         TokenStorageInterface $tokenStorage
     ) {
@@ -103,7 +103,7 @@ class FrontendMenuBuilder extends MenuBuilder
         $this->currencyProvider = $currencyProvider;
         $this->taxonRepository = $taxonRepository;
         $this->cartProvider = $cartProvider;
-        $this->currencyHelper = $currencyHelper;
+        $this->priceHelper = $priceHelper;
         $this->channelContext = $channelContext;
         $this->tokenStorage = $tokenStorage;
     }
@@ -133,12 +133,12 @@ class FrontendMenuBuilder extends MenuBuilder
             'route' => 'sylius_cart_summary',
             'linkAttributes' => ['title' => $this->translate('sylius.frontend.menu.main.cart', [
                 '%items%' => $cartTotals['items'],
-                '%total%' => $this->currencyHelper->convertAndFormatAmount($cartTotals['total']),
+                '%total%' => $this->priceHelper->convertAndFormatAmount($cartTotals['total']),
             ])],
             'labelAttributes' => ['icon' => 'icon-shopping-cart icon-large'],
         ])->setLabel($this->translate('sylius.frontend.menu.main.cart', [
             '%items%' => $cartTotals['items'],
-            '%total%' => $this->currencyHelper->convertAndFormatAmount($cartTotals['total']),
+            '%total%' => $this->priceHelper->convertAndFormatAmount($cartTotals['total']),
         ]));
 
         if ($this->authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED')) {

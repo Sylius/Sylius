@@ -26,10 +26,6 @@
         <parameter key="sylius.settings_schema.taxation.class">Sylius\Bundle\CoreBundle\Settings\TaxationSettingsSchema</parameter>
         <parameter key="sylius.settings_schema.security.class">Sylius\Bundle\CoreBundle\Settings\SecuritySettingsSchema</parameter>
 
-        <parameter key="sylius.context.currency.class">Sylius\Bundle\CoreBundle\Context\CurrencyContext</parameter>
-        <parameter key="sylius.context.channel.cached.class">Sylius\Component\Channel\Context\CachedPerRequestChannelContext</parameter>
-        <parameter key="sylius.theme.context.channel_based.class">Sylius\Bundle\CoreBundle\Theme\ChannelBasedThemeContext</parameter>
-
         <parameter key="sylius.checkout_scenario.class">Sylius\Bundle\CoreBundle\Checkout\CheckoutProcessScenario</parameter>
         <parameter key="sylius.checkout_step.security.class">Sylius\Bundle\CoreBundle\Checkout\Step\SecurityStep</parameter>
         <parameter key="sylius.checkout_step.addressing.class">Sylius\Bundle\CoreBundle\Checkout\Step\AddressingStep</parameter>
@@ -101,8 +97,6 @@
         <parameter key="sylius.order.purger.class">Sylius\Bundle\CoreBundle\Purger\ExpiredOrdersPurger</parameter>
         <parameter key="sylius.order.releaser.class">Sylius\Bundle\CoreBundle\Releaser\ExpiredOrdersReleaser</parameter>
         <parameter key="sylius.image_uploader.class">Sylius\Component\Core\Uploader\ImageUploader</parameter>
-        <parameter key="sylius.currency_context.class">Sylius\Bundle\CoreBundle\Context\CurrencyContext</parameter>
-        <parameter key="sylius.currency_provider.class">Sylius\Component\Core\Currency\ChannelAwareCurrencyProvider</parameter>
         <parameter key="sylius.locale_provider.channel_aware.class">Sylius\Bundle\CoreBundle\Locale\ChannelAwareLocaleProvider</parameter>
         <parameter key="sylius.cart_item_resolver.default.class">Sylius\Bundle\CoreBundle\Cart\ItemResolver</parameter>
         <parameter key="sylius.price_calculator.channel_based.class">Sylius\Component\Core\Pricing\ChannelBasedCalculator</parameter>
@@ -155,16 +149,6 @@
         </service>
         <service id="sylius.settings_schema.security" class="%sylius.settings_schema.security.class%">
             <tag name="sylius.settings_schema" alias="sylius_security" />
-        </service>
-
-        <service id="sylius.context.channel.cached" class="%sylius.context.channel.cached.class%" decorates="sylius.context.channel" public="false">
-            <argument type="service" id="sylius.context.channel.cached.inner" />
-            <argument type="service" id="request_stack" />
-        </service>
-
-        <service id="sylius.theme.context.channel_based" class="%sylius.theme.context.channel_based.class%" public="false">
-            <argument type="service" id="sylius.context.channel" />
-            <argument type="service" id="sylius.repository.theme" />
         </service>
 
         <!-- cart -->
@@ -505,17 +489,6 @@
         </service>
 
         <!-- money -->
-        <service id="sylius.context.currency" class="%sylius.context.currency.class%">
-            <argument /> <!-- Storage service name comes from config -->
-            <argument type="service" id="sylius.context.channel" />
-            <argument>%currency%</argument>
-        </service>
-
-        <service id="sylius.currency_provider" class="%sylius.currency_provider.class%">
-            <argument type="service" id="sylius.context.channel" />
-            <argument type="service" id="sylius.repository.currency" />
-        </service>
-
         <service id="sylius.locale_provider.channel_aware" class="%sylius.locale_provider.channel_aware.class%" decorates="sylius.locale_provider">
             <argument type="service" id="sylius.context.channel" />
             <argument>%locale%</argument>

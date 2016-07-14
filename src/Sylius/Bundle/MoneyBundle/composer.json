@@ -28,6 +28,7 @@
         "webmozart/assert": "^1.0"
     },
     "require-dev": {
+        "sylius/currency-bundle": "^1.0",
         "phpspec/phpspec": "^2.4",
         "symfony/form": "^2.8",
         "twig/twig": "^1.0"

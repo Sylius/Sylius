@@ -9,17 +9,21 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CurrencyBundle\Templating\Helper;
+namespace Sylius\Bundle\MoneyBundle\Templating\Helper;
 
 /**
  * @author Axel Vankrunkelsven <axel@digilabs.be>
  */
-interface CurrencyHelperInterface
+interface PriceHelperInterface
 {
     /**
-     * @param string $code
+     * @param int $amount
+     * @param string|null $currencyCode
+     * @param string|null $locale
      *
      * @return string
+     *
+     * @throws \InvalidArgumentException
      */
-    public function convertCurrencyCodeToSymbol($code);
+    public function convertAndFormatAmount($amount, $currencyCode = null, $locale = null);
 }

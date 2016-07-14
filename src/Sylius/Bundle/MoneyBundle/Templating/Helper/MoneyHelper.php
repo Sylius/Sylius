@@ -17,6 +17,11 @@ use Symfony\Component\Templating\Helper\Helper;
 class MoneyHelper extends Helper implements MoneyHelperInterface
 {
     /**
+     * @var MoneyFormatterInterface
+     */
+    private $moneyFormatter;
+
+    /**
      * @var string
      */
     private $defaultCurrencyCode;
@@ -27,20 +32,15 @@ class MoneyHelper extends Helper implements MoneyHelperInterface
     private $defaultLocale;
 
     /**
-     * @var MoneyFormatterInterface
-     */
-    private $moneyFormatter;
-
-    /**
+     * @param MoneyFormatterInterface $moneyFormatter
      * @param string $defaultCurrencyCode
      * @param string $defaultLocale
-     * @param MoneyFormatterInterface $moneyFormatter
      */
-    public function __construct($defaultCurrencyCode, $defaultLocale, MoneyFormatterInterface $moneyFormatter)
+    public function __construct(MoneyFormatterInterface $moneyFormatter, $defaultCurrencyCode, $defaultLocale)
     {
+        $this->moneyFormatter = $moneyFormatter;
         $this->defaultCurrencyCode = $defaultCurrencyCode;
         $this->defaultLocale = $defaultLocale;
-        $this->moneyFormatter = $moneyFormatter;
     }
 
     /**

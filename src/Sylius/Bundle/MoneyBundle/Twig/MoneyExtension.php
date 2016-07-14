@@ -14,16 +14,14 @@ namespace Sylius\Bundle\MoneyBundle\Twig;
 use Sylius\Bundle\MoneyBundle\Templating\Helper\MoneyHelperInterface;
 
 /**
- * Sylius money Twig helper.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class MoneyExtension extends \Twig_Extension
+final class MoneyExtension extends \Twig_Extension
 {
     /**
      * @var MoneyHelperInterface
      */
-    protected $helper;
+    private $helper;
 
     /**
      * @param MoneyHelperInterface $helper

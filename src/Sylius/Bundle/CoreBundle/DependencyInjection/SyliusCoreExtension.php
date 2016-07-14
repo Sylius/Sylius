@@ -19,13 +19,12 @@ use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Parameter;
-use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class SyliusCoreExtension extends AbstractResourceExtension implements PrependExtensionInterface
+final class SyliusCoreExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {
     /**
      * @var array
@@ -73,7 +72,6 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
             'form.xml',
             'api_form.xml',
             'templating.xml',
-            'twig.xml',
             'reports.xml',
             'state_machine.xml',
             'email.xml',
@@ -90,9 +88,6 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
         foreach ($configFiles as $configFile) {
             $loader->load($configFile);
         }
-
-        $definition = $container->findDefinition('sylius.context.currency');
-        $definition->replaceArgument(0, new Reference($config['currency_storage']));
 
         $this->overwriteRuleFactory($container);
     }

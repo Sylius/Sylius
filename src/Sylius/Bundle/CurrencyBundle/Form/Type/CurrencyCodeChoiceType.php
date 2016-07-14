@@ -11,28 +11,27 @@
 
 namespace Sylius\Bundle\CurrencyBundle\Form\Type;
 
-use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
+use Sylius\Component\Currency\Model\CurrencyInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Sylius currency choices type.
- *
  * @author Liverbool <nukboon@gmail.com>
  */
-class CurrencyCodeChoiceType extends AbstractType
+final class CurrencyCodeChoiceType extends AbstractType
 {
     /**
-     * @var CurrencyProviderInterface
+     * @var RepositoryInterface
      */
-    protected $currencyProvider;
+    private $currencyRepository;
 
     /**
-     * @param CurrencyProviderInterface $currencyProvider
+     * @param RepositoryInterface $currencyRepository
      */
-    public function __construct(CurrencyProviderInterface $currencyProvider)
+    public function __construct(RepositoryInterface $currencyRepository)
     {
-        $this->currencyProvider = $currencyProvider;
+        $this->currencyRepository = $currencyRepository;
     }
 
     /**
@@ -40,9 +39,11 @@ class CurrencyCodeChoiceType extends AbstractType
      */
     public function configureOptions(OptionsResolver $resolver)
     {
-        $choices = null;
+        $choices = [];
 
-        foreach ($this->currencyProvider->getAvailableCurrencies() as $currency) {
+        /** @var CurrencyInterface[] $currencies */
+        $currencies = $this->currencyRepository->findBy(['enabled' => true]);
+        foreach ($currencies as $currency) {
             $choices[$currency->getCode()] = sprintf('%s - %s', $currency->getCode(), $currency->getName());
         }
 

@@ -71,7 +71,7 @@
             <argument type="service" id="sylius.currency_provider" />
             <argument type="service" id="sylius.repository.taxon" />
             <argument type="service" id="sylius.cart_provider" />
-            <argument type="service" id="sylius.templating.helper.currency" />
+            <argument type="service" id="sylius.templating.helper.price" />
             <argument type="service" id="sylius.context.channel" />
             <argument type="service" id="security.token_storage" />
             <call method="setRequest">
