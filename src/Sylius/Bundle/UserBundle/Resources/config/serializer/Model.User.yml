@@ -22,3 +22,15 @@ Sylius\Component\User\Model\User:
             expose: true
             type: array
             groups: [Detailed]
+        locked:
+            expose: true
+            type: boolean
+            groups: [Detailed]
+        customer:
+            expose: true
+            type: Sylius\Component\User\Model\Customer
+            groups: [Detailed]
+        lastLogin:
+            expose: true
+            type: DateTime
+            groups: [Detailed]
