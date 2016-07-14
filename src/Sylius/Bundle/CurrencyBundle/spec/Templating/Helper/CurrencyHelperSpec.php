@@ -97,11 +97,11 @@ class CurrencyHelperSpec extends ObjectBehavior
         $this->convertAndFormatAmount(653)->shouldReturn('6.53 zł');
     }
 
-    function it_provides_current_currency(CurrencyProviderInterface $currencyProvider, CurrencyInterface $currency)
+    function it_provides_default_currency_code(CurrencyProviderInterface $currencyProvider, CurrencyInterface $currency)
     {
-        $currencyProvider->getBaseCurrency()->willReturn($currency);
+        $currencyProvider->getDefaultCurrency()->willReturn($currency);
         $currency->getCode()->willReturn('PLN');
 
-        $this->getBaseCurrencySymbol()->shouldReturn('PLN');
+        $this->getDefaultCurrencyCode()->shouldReturn('PLN');
     }
 }

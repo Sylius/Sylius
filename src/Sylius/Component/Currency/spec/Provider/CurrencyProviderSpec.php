@@ -13,17 +13,20 @@ namespace spec\Sylius\Component\Currency\Provider;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Currency\Model\CurrencyInterface;
+use Sylius\Component\Currency\Provider\CurrencyProvider;
 use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
+ * @mixin CurrencyProvider
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class CurrencyProviderSpec extends ObjectBehavior
+final class CurrencyProviderSpec extends ObjectBehavior
 {
     function let(RepositoryInterface $currencyRepository)
     {
-        $this->beConstructedWith($currencyRepository);
+        $this->beConstructedWith($currencyRepository, 'EUR');
     }
 
     function it_is_initializable()
@@ -31,15 +34,22 @@ class CurrencyProviderSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Component\Currency\Provider\CurrencyProvider');
     }
 
-    function it_implements_Sylius_currency_provider_interface()
+    function it_is_a_currency_provider_interface()
     {
         $this->shouldImplement(CurrencyProviderInterface::class);
     }
 
-    function it_returns_all_enabled_currencies(CurrencyInterface $currency, $currencyRepository)
+    function it_returns_all_enabled_currencies(RepositoryInterface $currencyRepository, CurrencyInterface $currency)
     {
         $currencyRepository->findBy(['enabled' => true])->shouldBeCalled()->willReturn([$currency]);
 
         $this->getAvailableCurrencies()->shouldReturn([$currency]);
+    }
+
+    function it_returns_the_default_currency(RepositoryInterface $currencyRepository, CurrencyInterface $currency)
+    {
+        $currencyRepository->findOneBy(['code' => 'EUR'])->willReturn($currency);
+
+        $this->getDefaultCurrency()->shouldReturn($currency);
     }
 }

@@ -40,10 +40,10 @@ interface CurrencyHelperInterface
     /**
      * @return string
      */
-    public function getBaseCurrencySymbol();
+    public function getDefaultCurrencySymbol();
 
     /**
      * @return string
      */
-    public function getBaseCurrencyCode();
+    public function getDefaultCurrencyCode();
 }

@@ -85,17 +85,17 @@ class CurrencyHelper extends Helper implements CurrencyHelperInterface
     /**
      * @return string
      */
-    public function getBaseCurrencySymbol()
+    public function getDefaultCurrencySymbol()
     {
-        return Intl::getCurrencyBundle()->getCurrencySymbol($this->currencyProvider->getBaseCurrency()->getCode());
+        return Intl::getCurrencyBundle()->getCurrencySymbol($this->currencyProvider->getDefaultCurrency()->getCode());
     }
 
     /**
      * @return string
      */
-    public function getBaseCurrencyCode()
+    public function getDefaultCurrencyCode()
     {
-        return $this->currencyProvider->getBaseCurrency()->getCode();
+        return $this->currencyProvider->getDefaultCurrency()->getCode();
     }
 
     /**

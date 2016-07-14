@@ -27,5 +27,5 @@ interface CurrencyProviderInterface
     /**
      * @return CurrencyInterface
      */
-    public function getBaseCurrency();
+    public function getDefaultCurrency();
 }
