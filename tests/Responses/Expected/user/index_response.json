@@ -1,0 +1,60 @@
+{
+  "page": 1,
+  "limit": 10,
+  "pages": 1,
+  "total": 4,
+  "_links": {
+    "self": {
+      "href": "\/api\/users\/?page=1&limit=10"
+    },
+    "first": {
+      "href": "\/api\/users\/?page=1&limit=10"
+    },
+    "last": {
+      "href": "\/api\/users\/?page=1&limit=10"
+    }
+  },
+  "_embedded": {
+    "items": [
+      {
+        "enabled": true,
+        "id": "@integer@",
+        "locked": false,
+        "roles": "@array@",
+        "username": "@string@",
+        "username_canonical": "@string@",
+        "customer": "@array@",
+        "last_login": "@string@.isDateTime()"
+      },
+      {
+        "enabled": true,
+        "id": "@integer@",
+        "locked": false,
+        "roles": "@array@",
+        "username": "@string@",
+        "username_canonical": "@string@",
+        "customer": "@array@",
+        "last_login": "@string@.isDateTime()"
+      },
+      {
+        "enabled": true,
+        "id": "@integer@",
+        "locked": false,
+        "roles": "@array@",
+        "username": "@string@",
+        "username_canonical": "@string@",
+        "customer": "@array@",
+        "last_login": "@string@.isDateTime()"
+      },
+      {
+        "enabled": true,
+        "id": "@integer@",
+        "locked": false,
+        "roles": "@array@",
+        "username": "@string@",
+        "username_canonical": "@string@",
+        "customer": "@array@"
+      }
+    ]
+  }
+}

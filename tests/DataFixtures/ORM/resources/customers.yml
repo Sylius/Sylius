@@ -6,6 +6,7 @@ Sylius\Component\Core\Model\User:
         customer: @customer_<current()>
         username: <current()>@doe.com
         usernameCanonical: <current()>@doe.com
+        lastLogin: <date("Y-m-d H:i:s")>
 
 Sylius\Component\Core\Model\Customer:
     customer_{Oliver, Roy, Thea, Barry, Joe}:
