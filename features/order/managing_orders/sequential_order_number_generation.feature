@@ -6,7 +6,7 @@ Feature: Sequential order number generation
 
     Background:
         Given the store operates on a single channel in "France"
-        And the store has "Green Arrow" and "Red Suit" products
+        And the store has a product "Green Arrow"
         And the store ships everywhere for free
         And the store allows paying offline
         And there is a customer "oliver@teamarrow.com" that placed an order

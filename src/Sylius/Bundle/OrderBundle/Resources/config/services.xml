@@ -29,8 +29,8 @@
 
         <parameter key="sylius.custom_factory.adjustment.class">Sylius\Component\Order\Factory\AdjustmentFactory</parameter>
 
-        <parameter key="sylius.order_number_generator.class">Sylius\Bundle\OrderBundle\NumberGenerator\OrderNumberGenerator</parameter>
         <parameter key="sylius.order_number_assigner.class">Sylius\Bundle\OrderBundle\NumberAssigner\OrderNumberAssigner</parameter>
+        <parameter key="sylius.sequential_order_number_generator.class">Sylius\Bundle\OrderBundle\NumberGenerator\SequentialOrderNumberGenerator</parameter>
     </parameters>
 
     <services>
@@ -57,14 +57,13 @@
             <argument type="service" id="sylius.custom_factory.adjustment.inner" />
         </service>
 
-        <service id="sylius.order_number_generator" class="%sylius.order_number_generator.class%">
+        <service id="sylius.sequential_order_number_generator" class="%sylius.sequential_order_number_generator.class%">
             <argument type="service" id="sylius.repository.order_sequence" />
             <argument type="service" id="sylius.factory.order_sequence" />
-            <argument type="service" id="sylius.manager.order_sequence" />
         </service>
 
         <service id="sylius.order_number_assigner" class="%sylius.order_number_assigner.class%">
-            <argument type="service" id="sylius.order_number_generator" />
+            <argument type="service" id="sylius.sequential_order_number_generator" />
         </service>
     </services>
 </container>

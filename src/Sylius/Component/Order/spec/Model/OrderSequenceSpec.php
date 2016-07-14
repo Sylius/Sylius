@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sylius package.
+ * This file is a part of the Sylius package.
  *
  * (c) Paweł Jędrzejewski
  *
@@ -24,7 +24,7 @@ use Sylius\Component\Order\Model\OrderSequenceInterface;
  *
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-class OrderSequenceSpec extends ObjectBehavior
+final class OrderSequenceSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
@@ -36,7 +36,7 @@ class OrderSequenceSpec extends ObjectBehavior
         $this->shouldImplement(OrderSequenceInterface::class);
     }
 
-    function it_has_correct_index_after_initialized()
+    function it_has_zero_index_after_initialized()
     {
         $this->getIndex()->shouldReturn(0);
     }

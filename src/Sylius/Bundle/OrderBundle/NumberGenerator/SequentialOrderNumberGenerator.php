@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is a part of the Lakion package.
+ * This file is a part of the Sylius package.
  *
- * (c) Lakion
+ * (c) Paweł Jędrzejewski
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,32 +11,25 @@
 
 namespace Sylius\Bundle\OrderBundle\NumberGenerator;
 
-use Doctrine\ORM\EntityManager;
-use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderSequenceInterface;
-use Sylius\Component\Resource\Factory\Factory;
+use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-class OrderNumberGenerator implements OrderNumberGeneratorInterface
+final class SequentialOrderNumberGenerator implements SequentialOrderNumberGeneratorInterface
 {
     /**
-     * @var EntityRepository
+     * @var RepositoryInterface
      */
     private $sequenceRepository;
 
     /**
-     * @var Factory
+     * @var FactoryInterface
      */
     private $sequenceFactory;
 
-    /**
-     * @var EntityManager
-     */
-    private $entityManager;
-    
     /**
      * @var int
      */
@@ -48,22 +41,19 @@ class OrderNumberGenerator implements OrderNumberGeneratorInterface
     private $numberLength;
 
     /**
-     * @param EntityRepository $sequenceRepository
-     * @param Factory $sequenceFactory
-     * @param EntityManager $entityManager
+     * @param RepositoryInterface $sequenceRepository
+     * @param FactoryInterface $sequenceFactory
      * @param int $startNumber
      * @param int $numberLength
      */
     public function __construct(
-        EntityRepository $sequenceRepository,
-        Factory $sequenceFactory,
-        EntityManager $entityManager,
+        RepositoryInterface $sequenceRepository,
+        FactoryInterface $sequenceFactory,
         $startNumber = 1,
         $numberLength = 9
     ) {
         $this->sequenceRepository = $sequenceRepository;
         $this->sequenceFactory = $sequenceFactory;
-        $this->entityManager = $entityManager;
         $this->startNumber = $startNumber;
         $this->numberLength = $numberLength;
     }
@@ -102,7 +92,7 @@ class OrderNumberGenerator implements OrderNumberGeneratorInterface
 
         if (null === $sequence) {
             $sequence = $this->sequenceFactory->createNew();
-            $this->entityManager->persist($sequence);
+            $this->sequenceRepository->add($sequence);
         }
 
         return $sequence;

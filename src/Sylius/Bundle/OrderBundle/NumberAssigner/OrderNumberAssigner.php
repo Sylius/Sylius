@@ -1,9 +1,9 @@
 <?php
 
 /*
- * This file is a part of the Lakion package.
+ * This file is a part of the Sylius package.
  *
- * (c) Lakion
+ * (c) Paweł Jędrzejewski
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\OrderBundle\NumberAssigner;
 
-use Sylius\Bundle\OrderBundle\NumberGenerator\OrderNumberGeneratorInterface;
+use Sylius\Bundle\OrderBundle\NumberGenerator\SequentialOrderNumberGeneratorInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 
 /**
@@ -20,14 +20,14 @@ use Sylius\Component\Order\Model\OrderInterface;
 final class OrderNumberAssigner implements OrderNumberAssignerInterface
 {
     /**
-     * @var OrderNumberGeneratorInterface
+     * @var SequentialOrderNumberGeneratorInterface
      */
     private $numberGenerator;
 
     /**
-     * @param OrderNumberGeneratorInterface $numberGenerator
+     * @param SequentialOrderNumberGeneratorInterface $numberGenerator
      */
-    public function __construct(OrderNumberGeneratorInterface $numberGenerator)
+    public function __construct(SequentialOrderNumberGeneratorInterface $numberGenerator)
     {
         $this->numberGenerator = $numberGenerator;
     }
