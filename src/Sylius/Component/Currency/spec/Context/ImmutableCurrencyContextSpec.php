@@ -19,8 +19,10 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @mixin ImmutableCurrencyContext
+ *
+ * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ImmutableCurrencyContextSpec extends ObjectBehavior
+final class ImmutableCurrencyContextSpec extends ObjectBehavior
 {
     function let(RepositoryInterface $currencyRepository)
     {

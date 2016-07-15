@@ -39,6 +39,13 @@ interface OrderItemInterface extends CartItemInterface
     public function getTaxTotal();
 
     /**
+     * Regular total = total - discounts
+     *
+     * @return int
+     */
+    public function getRegularTotal();
+
+    /**
      * @return int
      */
     public function getDiscountedUnitPrice();

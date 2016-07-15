@@ -41,10 +41,10 @@
     <td class="right aligned">
         {# Todo: Fix this mess... #}
         {% if 0 != item.getAdjustmentsTotalRecursively('order_unit_promotion') %}
-            <span class="sylius-total" style="text-decoration: line-through">{{ item.taxTotal|sylius_price }}</span>
+            <span class="sylius-total" style="text-decoration: line-through">{{ item.regularTotal|sylius_price }}</span>
             <span class="sylius-discounted-total">{{ item.total|sylius_price }}</span>
         {% else %}
-            <span class="sylius-total">{{ item.taxTotal|sylius_price }}</span>
+            <span class="sylius-total">{{ item.regularTotal|sylius_price }}</span>
         {% endif %}
     </td>
 </tr>

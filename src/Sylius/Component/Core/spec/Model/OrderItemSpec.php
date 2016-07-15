@@ -2,6 +2,7 @@
 
 namespace spec\Sylius\Component\Core\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Model\AdjustmentInterface;
@@ -107,5 +108,57 @@ class OrderItemSpec extends ObjectBehavior
         $this->addUnit($secondUnit);
 
         $this->getSubtotal()->shouldReturn(19000);
+    }
+
+    function it_returns_regular_total_which_is_total_if_there_are_no_discounts_applied(
+        OrderItemUnitInterface $firstUnit,
+        OrderItemUnitInterface $secondUnit
+    ) {
+        $firstUnit->getOrderItem()->willReturn($this);
+        $firstUnit->getTotal()->willReturn(10000);
+        $firstUnit->getAdjustments(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)->willReturn(new ArrayCollection());
+
+        $secondUnit->getOrderItem()->willReturn($this);
+        $secondUnit->getTotal()->willReturn(5000);
+        $secondUnit->getAdjustments(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)->willReturn(new ArrayCollection());
+
+        $this->addUnit($firstUnit);
+        $this->addUnit($secondUnit);
+
+        $this->recalculateUnitsTotal();
+
+        $this->getRegularTotal()->shouldReturn(15000);
+    }
+
+    function it_returns_regular_total_which_is_a_total_minus_discounts(
+        OrderItemUnitInterface $firstUnit,
+        OrderItemUnitInterface $secondUnit,
+        AdjustmentInterface $firstAdjustment,
+        AdjustmentInterface $secondAdjustment
+    ) {
+        $firstAdjustment->getAmount()->willReturn(-1000);
+        $firstAdjustment->isNeutral()->willReturn(false);
+
+        $firstUnit->getOrderItem()->willReturn($this);
+        $firstUnit->getTotal()->willReturn(10000);
+        $firstUnit->getAdjustments(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)->willReturn(
+            new ArrayCollection([$firstAdjustment->getWrappedObject()])
+        );
+
+        $secondAdjustment->getAmount()->willReturn(-2000);
+        $secondAdjustment->isNeutral()->willReturn(false);
+
+        $secondUnit->getOrderItem()->willReturn($this);
+        $secondUnit->getTotal()->willReturn(5000);
+        $secondUnit->getAdjustments(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)->willReturn(
+            new ArrayCollection([$secondAdjustment->getWrappedObject()])
+        );
+
+        $this->addUnit($firstUnit);
+        $this->addUnit($secondUnit);
+
+        $this->recalculateUnitsTotal();
+
+        $this->getRegularTotal()->shouldReturn(18000);
     }
 }

@@ -79,6 +79,14 @@ class OrderItem extends CartItem implements OrderItemInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getRegularTotal()
+    {
+        return $this->total - $this->getAdjustmentsTotalRecursively(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT);
+    }
+
+    /**
      * Returns single unit price lowered by order unit promotions (each unit must have the same unit promotion discount)
      *
      * {@inheritdoc}

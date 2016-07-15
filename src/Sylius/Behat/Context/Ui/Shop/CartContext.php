@@ -211,7 +211,7 @@ final class CartContext implements Context
         Assert::same(
             $discountedTotal,
             ($total - $amount),
-            'Price after discount should be %2$s, but it is %s.'
+            'Price after discount should be %s, but it is %2$s.'
         );
     }
 

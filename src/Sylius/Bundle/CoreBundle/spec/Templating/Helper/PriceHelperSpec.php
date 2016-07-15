@@ -21,7 +21,7 @@ use Symfony\Component\Templating\Helper\HelperInterface;
 /**
  * @mixin PriceHelper
  *
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class PriceHelperSpec extends ObjectBehavior
 {

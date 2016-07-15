@@ -14,6 +14,9 @@ namespace Sylius\Component\Currency\Context;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
+/**
+ * @author Kamil Kokot <kamil.kokot@lakion.com>
+ */
 final class ImmutableCurrencyContext implements CurrencyContextInterface
 {
     /**
