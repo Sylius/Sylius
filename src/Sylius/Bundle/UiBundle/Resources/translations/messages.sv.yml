@@ -85,7 +85,7 @@ sylius:
         create_a_new_customer_account: Skapa ett nytt kundkonto
         create_an_account: Skapa ett konto
         currencies: Valutor
-        current_orders: Aktuella ordrar
+        current_orders: Aktuella order
         current_password: Nuvarande lösenord
         current_stock: I lager
         customer: Kund
@@ -208,7 +208,7 @@ sylius:
         new_currency: Ny valuta
         new_customers: Nya kunder
         new_locale: Nytt språk
-        new_orders: Nya ordrar
+        new_orders: Nya order
         new_password: Nytt lösenord
         new_promotion_coupon: Ny kampanjkupong
         new_tax_category: Ny skattekategori
@@ -232,7 +232,7 @@ sylius:
         order_history: Orderhistorik
         order_item_product: Artikel
         order_total: Ordersumma
-        orders: Ordrar
+        orders: Order
         original_price: Ursprungligt pris
         pages: Sidor
         parent: Förälder
@@ -252,7 +252,7 @@ sylius:
         price: Pris
         pricing: Prissättning
         privacy_policy: Integritetspolicy
-        process_your_orders: Behandla dina ordrar
+        process_your_orders: Behandla dina order
         processing: Behandlar
         product_association_type_index: Associationstyp
         product_reviews: Produktrecensioner

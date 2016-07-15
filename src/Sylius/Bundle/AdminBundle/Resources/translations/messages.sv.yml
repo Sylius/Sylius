@@ -30,7 +30,7 @@ sylius:
                     header: Kunder
                 sales:
                     header: Försäljning
-                    orders: Ordrar
+                    orders: Order
                 content:
                     header: Innehåll
                     routes: Rutter

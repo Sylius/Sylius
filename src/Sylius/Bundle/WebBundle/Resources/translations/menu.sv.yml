@@ -29,7 +29,7 @@ sylius:
                 new_order: Lägg till en ny order
                 new_promotion: Lägg till en ny kampanj
                 options: Hantera produktalternativ
-                orders: Aktuella ordrar
+                orders: Aktuella order
                 pages: Sidor
                 payment_methods: Betalningsmetoder
                 payments: Betalningar
@@ -39,7 +39,7 @@ sylius:
                 report: Rapporter
                 roles: Roller
                 routes: Rutter
-                sales: Ordrar
+                sales: Order
                 security_settings: Säkerhetsinställningar
                 shipments: Leveranser
                 shipping_categories: Leveranskategorier
@@ -78,7 +78,7 @@ sylius:
                 new_order: Lägg till en ny order
                 new_promotion: Lägg till en ny kampanj
                 options: Hantera alternativ
-                orders: Aktuella ordrar
+                orders: Aktuella order
                 pages: Sidor
                 payment_methods: Betalningsmetoder
                 payments: Betalningar
@@ -91,7 +91,7 @@ sylius:
                 roles: Roller
                 routes: Rutter
                 review: Recensioner
-                sales: Ordrar
+                sales: Order
                 security_settings: Säkerhetsinställningar
                 shipments: Leveranser
                 shipping_categories: Leveranskategorier
@@ -109,7 +109,7 @@ sylius:
             account:
                 addresses: Min adressbok
                 homepage: Hem
-                orders: Mina ordrar/mina fakturor
+                orders: Mina order/mina fakturor
                 password: Mitt lösenord
                 profile: Mina personliga uppgifter
                 shop: Tillbaka till butiken

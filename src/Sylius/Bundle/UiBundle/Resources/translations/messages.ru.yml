@@ -302,6 +302,7 @@ sylius:
         number: Номер
         number_of_orders: Количество заказов
         options: Список опций
+        or: или
         order: заказ
         order_comment_name: Комментарий к заказу
         order_confirmation_name: Подтверждение заказа
