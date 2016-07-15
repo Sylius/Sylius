@@ -11,6 +11,8 @@ The Book
     architecture
     state_machine
     channels
+    locales
+    currencies
     products
     addresses
     inventory
@@ -21,8 +23,6 @@ The Book
     pricing
     promotions
     users_and_groups
-    currencies
-    locales
     content
     emails
     settings
