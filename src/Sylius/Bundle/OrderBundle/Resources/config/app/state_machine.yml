@@ -8,43 +8,20 @@ winzou_state_machine:
         graph: sylius_order
         state_machine_class: "%sylius.state_machine.class%"
         states:
-            new: ~
             cart: ~
-            cart_locked: ~
-            released: ~
-            confirmed: ~
-            shipped: ~
-            abandoned: ~
+            new: ~
             cancelled: ~
-            returned: ~
+            fulfilled: ~
         transitions:
-            lock_cart:
-                from: [cart]
-                to: cart_locked
-            unlock_cart:
-                from: [cart_locked]
-                to: cart
             create:
                 from: [cart]
                 to: new
-            release:
-                from: [new]
-                to: released
-            confirm:
-                from: [cart, new, released]
-                to: confirmed
-            ship:
-                from: [confirmed]
-                to: shipped
-            abandon:
-                from: [cart, new]
-                to: abandoned
             cancel:
-                from: [new, confirmed]
+                from: [new]
                 to: cancelled
-            return:
-                from: [shipped]
-                to: returned
+            fulfill:
+                from: [new]
+                to: fulfilled
         callbacks:
             after:
                 sylius_complete:

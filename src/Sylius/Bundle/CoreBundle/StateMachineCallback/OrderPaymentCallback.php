@@ -58,7 +58,7 @@ class OrderPaymentCallback
         }
 
         if ($total >= $order->getTotal()) {
-            $this->factory->get($order, OrderTransitions::GRAPH)->apply(OrderTransitions::SYLIUS_CONFIRM, true);
+            $this->factory->get($order, OrderTransitions::GRAPH)->apply(OrderTransitions::SYLIUS_FULFILL, true);
         }
     }
 }

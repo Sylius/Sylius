@@ -48,7 +48,7 @@ class OrderPaymentCallbackSpec extends ObjectBehavior
         $order->setPaymentState(PaymentInterface::STATE_CANCELLED)->shouldBeCalled();
 
         $factory->get($order, OrderTransitions::GRAPH)->willReturn($sm);
-        $sm->apply(OrderTransitions::SYLIUS_CONFIRM, true)->shouldBeCalled();
+        $sm->apply(OrderTransitions::SYLIUS_FULFILL, true)->shouldBeCalled();
 
         $this->updateOrderOnPayment($payment);
     }
@@ -75,7 +75,7 @@ class OrderPaymentCallbackSpec extends ObjectBehavior
         $filteredPayments->count()->willReturn(1);
 
         $factory->get($order, OrderTransitions::GRAPH)->willReturn($sm);
-        $sm->apply(OrderTransitions::SYLIUS_CONFIRM, true)->shouldBeCalled();
+        $sm->apply(OrderTransitions::SYLIUS_FULFILL, true)->shouldBeCalled();
 
         $this->updateOrderOnPayment($payment);
     }

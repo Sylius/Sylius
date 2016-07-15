@@ -16,10 +16,6 @@ class OrderTransitions
     const GRAPH = 'sylius_order';
 
     const SYLIUS_CREATE = 'create';
-    const SYLIUS_RELEASE = 'release';
-    const SYLIUS_CONFIRM = 'confirm';
-    const SYLIUS_SHIP = 'ship';
-    const SYLIUS_ABANDON = 'abandon';
     const SYLIUS_CANCEL = 'cancel';
-    const SYLIUS_RETURN = 'return';
+    const SYLIUS_FULFILL = 'fulfill';
 }

@@ -89,7 +89,7 @@ class ExpiredOrdersPurger implements PurgerInterface
      */
     protected function purgeOrder(OrderInterface $order)
     {
-        $this->factory->get($order, OrderTransitions::GRAPH)->apply(OrderTransitions::SYLIUS_ABANDON);
+        $this->factory->get($order, OrderTransitions::GRAPH)->apply(OrderTransitions::SYLIUS_CANCEL);
         $this->manager->persist($order);
     }
 }
