@@ -208,7 +208,7 @@ class UserController extends ResourceController
             }
 
             if (!$configuration->isHtmlRequest()) {
-                return $this->viewHandler->handle($configuration, View::create($user, Response::HTTP_NO_CONTENT));
+                return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
             }
 
             $this->addFlash('success', 'sylius.user.reset_password.requested');
@@ -313,7 +313,7 @@ class UserController extends ResourceController
         $dispatcher->dispatch(UserEvents::POST_PASSWORD_RESET, new GenericEvent($user));
 
         if (!$configuration->isHtmlRequest()) {
-            return $this->viewHandler->handle($configuration, View::create($user, Response::HTTP_NO_CONTENT));
+            return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
         }
 
         $redirectRouteName = $request->attributes->get('_sylius[redirect]', 'sylius_user_security_login', true);
@@ -342,7 +342,7 @@ class UserController extends ResourceController
         $dispatcher->dispatch(UserEvents::POST_PASSWORD_CHANGE, new GenericEvent($user));
 
         if (!$configuration->isHtmlRequest()) {
-            return $this->viewHandler->handle($configuration, View::create($user, Response::HTTP_NO_CONTENT));
+            return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
         }
 
         $redirectRouteName = $request->attributes->get('_sylius[redirect]', 'sylius_account_profile_show', true);

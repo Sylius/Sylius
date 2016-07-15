@@ -59,7 +59,7 @@ class CustomerController extends ResourceController
             $this->eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $customer);
 
             if (!$configuration->isHtmlRequest()) {
-                return $this->viewHandler->handle($configuration, View::create($customer, Response::HTTP_NO_CONTENT));
+                return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
             }
 
             $this->flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $customer);
