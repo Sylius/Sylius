@@ -23,7 +23,7 @@
             <argument type="service" id="sylius.repository.theme" />
         </service>
 
-        <service id="sylius.context.shopper" class="Sylius\Component\Core\Context\ShopperContext">
+        <service id="sylius.context.shopper" class="Sylius\Component\Core\Context\ShopperContext" lazy="true">
             <argument type="service" id="sylius.context.channel" />
             <argument type="service" id="sylius.context.currency" />
             <argument type="service" id="sylius.context.locale" />
