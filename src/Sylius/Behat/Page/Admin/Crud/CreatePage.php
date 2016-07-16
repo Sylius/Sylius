@@ -24,7 +24,7 @@ class CreatePage extends SymfonyPage implements CreatePageInterface
     /**
      * @var string
      */
-    private $resourceName;
+    protected $resourceName;
 
     /**
      * @param Session $session

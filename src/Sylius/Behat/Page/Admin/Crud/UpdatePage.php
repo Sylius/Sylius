@@ -24,7 +24,7 @@ class UpdatePage extends SymfonyPage implements UpdatePageInterface
     /**
      * @var string
      */
-    private $resourceName;
+    protected $resourceName;
 
     /**
      * @param Session $session

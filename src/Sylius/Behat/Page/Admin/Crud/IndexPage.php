@@ -25,12 +25,12 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * @var TableAccessorInterface
      */
-    private $tableAccessor;
+    protected $tableAccessor;
 
     /**
      * @var string
      */
-    private $resourceName;
+    protected $resourceName;
 
     /**
      * @param Session $session
