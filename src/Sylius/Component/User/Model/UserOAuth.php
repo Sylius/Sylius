@@ -38,6 +38,11 @@ class UserOAuth implements UserOAuthInterface
     protected $accessToken;
 
     /**
+     * @var string
+     */
+    protected  $refreshToken;
+
+    /**
      * @var UserInterface
      */
     protected $user;
@@ -112,5 +117,21 @@ class UserOAuth implements UserOAuthInterface
     public function setUser(UserInterface $user = null)
     {
         $this->user = $user;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRefreshToken()
+    {
+        return $this->refreshToken;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setRefreshToken($refreshToken)
+    {
+        $this->refreshToken = $refreshToken;
     }
 }

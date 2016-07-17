@@ -70,12 +70,14 @@ class UserProviderSpec extends ObjectBehavior
         $response->getUsername()->willReturn('username');
         $response->getResourceOwner()->willReturn($resourceOwner);
         $response->getAccessToken()->willReturn('access_token');
+        $response->getRefreshToken()->willReturn('refresh_token');
 
         $oauthFactory->createNew()->willReturn($oauth);
 
         $oauth->setIdentifier('username');
         $oauth->setProvider('google');
         $oauth->setAccessToken('access_token');
+        $oauth->setRefreshToken('refresh_token');
 
         $user->addOAuthAccount($oauth)->shouldBeCalled();
 
@@ -119,6 +121,7 @@ class UserProviderSpec extends ObjectBehavior
         $response->getUsername()->willReturn('username');
         $response->getResourceOwner()->willReturn($resourceOwner);
         $response->getAccessToken()->willReturn('access_token');
+        $response->getRefreshToken()->willReturn('refresh_token');
 
         $oauthRepository->findOneBy(['provider' => 'google', 'identifier' => 'username'])->willReturn(null);
         $oauthFactory->createNew()->willReturn($oauth);
@@ -128,6 +131,7 @@ class UserProviderSpec extends ObjectBehavior
         $oauth->setIdentifier('username');
         $oauth->setProvider('google');
         $oauth->setAccessToken('access_token');
+        $oauth->setRefreshToken('refresh_token');
 
         $user->addOAuthAccount($oauth)->shouldBeCalled();
 
@@ -157,6 +161,7 @@ class UserProviderSpec extends ObjectBehavior
         $response->getRealName()->willReturn('Name');
         $response->getResourceOwner()->willReturn($resourceOwner);
         $response->getAccessToken()->willReturn('access_token');
+        $response->getRefreshToken()->willReturn('refresh_token');
 
         $oauthRepository->findOneBy(['provider' => 'google', 'identifier' => 'username'])->willReturn(null);
         $oauthFactory->createNew()->willReturn($oauth);
@@ -168,6 +173,7 @@ class UserProviderSpec extends ObjectBehavior
         $oauth->setIdentifier('username');
         $oauth->setProvider('google');
         $oauth->setAccessToken('access_token');
+        $oauth->setRefreshToken('refresh_token');
 
         $user->setCustomer($customer)->shouldBeCalled();
         $user->getUsername()->willReturn(null);
