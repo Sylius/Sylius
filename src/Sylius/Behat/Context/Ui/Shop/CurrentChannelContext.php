@@ -34,10 +34,11 @@ final class CurrentChannelContext implements Context
     }
 
     /**
-     * @Given /^I am browsing (channel "([^"]*)")$/
-     * @When /^I browse (that channel)$/
+     * @When /^I (?:am browsing|start browsing|try to browse|browse) (that channel)$/
+     * @When /^I (?:am browsing|start browsing|try to browse|browse) (?:|the )("[^"]+" channel)$/
+     * @When /^I (?:am browsing|start browsing|try to browse|browse) (?:|the )(channel "[^"]+")$/
      */
-    public function iBrowseChannel(ChannelInterface $channel)
+    public function iBrowseChannel($channel)
     {
         $this->channelContextSetter->setChannel($channel);
     }

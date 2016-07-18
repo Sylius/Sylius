@@ -34,20 +34,21 @@ final class CurrencyContext implements Context
     }
 
     /**
-     * @When I switch the current currency to the :currencyCode currency
+     * @When I switch to the :currencyCode currency
      */
-    public function iSwitchTheCurrentCurrencyToTheCurrency($currencyCode)
+    public function iSwitchTheCurrencyToTheCurrency($currencyCode)
     {
         $this->homePage->open();
         $this->homePage->switchCurrency($currencyCode);
     }
 
     /**
-     * @Then I should shop using the :currencyCode currency
+     * @Then I should (still) shop using the :currencyCode currency
      */
     public function iShouldShopUsingTheCurrency($currencyCode)
     {
         $this->homePage->open();
+
         Assert::same($currencyCode, $this->homePage->getActiveCurrency());
     }
 
@@ -57,6 +58,33 @@ final class CurrencyContext implements Context
     public function iShouldBeAbleToShopUsingTheCurrency($currencyCode)
     {
         $this->homePage->open();
+
         Assert::oneOf($currencyCode, $this->homePage->getAvailableCurrencies());
+    }
+
+    /**
+     * @Then I should not be able to shop using the :currencyCode currency
+     */
+    public function iShouldNotBeAbleToShopUsingTheCurrency($currencyCode)
+    {
+        $this->homePage->open();
+
+        if (in_array($currencyCode, $this->homePage->getAvailableCurrencies(), true)) {
+            throw new \InvalidArgumentException(sprintf(
+                'Expected "%s" not to be in "%s"',
+                $currencyCode,
+                implode('", "', $this->homePage->getAvailableCurrencies())
+            ));
+        }
+    }
+
+    /**
+     * @Then I should not be able to shop
+     */
+    public function iShouldNotBeAbleToShop()
+    {
+        $this->homePage->tryToOpen();
+
+        Assert::false($this->homePage->isOpen(), 'Homepage should not be opened!');
     }
 }

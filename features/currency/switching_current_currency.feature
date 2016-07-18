@@ -22,6 +22,6 @@ Feature: Switching the current currency
     @ui
     Scenario: Switching the current currency
         When I browse that channel
-        And I switch the current currency to the "USD" currency
+        And I switch to the "USD" currency
         Then I should shop using the "USD" currency
         And I should be able to shop using the "EUR" currency

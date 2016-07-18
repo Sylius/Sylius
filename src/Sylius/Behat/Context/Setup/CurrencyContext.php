@@ -119,10 +119,12 @@ final class CurrencyContext implements Context
 
     /**
      * @Given the store has disabled currency :currencyCode
+     * @Given the currency :currencyCode is disabled (as well)
+     * @Given the currency :currencyCode gets disabled
      */
     public function theStoreHasDisabledCurrency($currencyCode)
     {
-        $currency = $this->createCurrency($currencyCode);
+        $currency = $this->provideCurrency($currencyCode);
         $currency->setEnabled(false);
 
         $this->saveCurrency($currency);
@@ -140,14 +142,27 @@ final class CurrencyContext implements Context
     }
 
     /**
+     * @Given /^(that channel) allows to shop using the "([^"]+)" currency$/
      * @Given /^(that channel) allows to shop using "([^"]+)" and "([^"]+)" currencies$/
+     * @Given /^(that channel) allows to shop using "([^"]+)", "([^"]+)" and "([^"]+)" currencies$/
      */
-    public function thatChannelAllowsToShopUsingAndCurrencies(ChannelInterface $channel, $firstCurrencyCode, $secondCurrencyCode)
-    {
-        $channel->setCurrencies(new ArrayCollection([
-            $this->provideCurrency($firstCurrencyCode),
-            $this->provideCurrency($secondCurrencyCode),
-        ]));
+    public function thatChannelAllowsToShopUsingAndCurrencies(
+        ChannelInterface $channel,
+        $firstCurrencyCode,
+        $secondCurrencyCode = null,
+        $thirdCurrencyCode = null
+    ) {
+        $currencies = new ArrayCollection();
+
+        foreach ([$firstCurrencyCode, $secondCurrencyCode, $thirdCurrencyCode] as $currencyCode) {
+            if (null === $currencyCode) {
+                break;
+            }
+
+            $currencies[] = $this->provideCurrency($currencyCode);
+        }
+
+        $channel->setCurrencies($currencies);
 
         $this->channelManager->flush();
     }

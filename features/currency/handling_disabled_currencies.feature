@@ -10,17 +10,21 @@ Feature: Handling disabled currencies
         And it uses the "EUR" currency by default
         But the currency "GBP" is disabled
 
+    @ui
     Scenario: Not showing the disabled currency
         When I browse that channel
         Then I should not be able to shop using the "GBP" currency
 
+    @ui
     Scenario: Failing to browse channel with disabled default currency
         Given the currency "EUR" is disabled as well
         When I try to browse that channel
-        Then I should receive an error
+        Then I should not be able to shop
 
+    @ui
     Scenario: Browsing a channel with the default currency disabled while using the other one
-        Given the currency "EUR" is disabled as well
-        When I browse that channel while using the "USD" currency
-        Then I should shop using the "USD" currency
+        Given I am browsing that channel
+        And I switch to the "USD" currency
+        When the currency "EUR" gets disabled
+        Then I should still shop using the "USD" currency
         And I should not be able to shop using the "EUR" currency

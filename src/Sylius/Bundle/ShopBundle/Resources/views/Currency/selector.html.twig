@@ -1,0 +1,11 @@
+<div class="ui pointing dropdown link item" id="currency-selector">
+    <span class="text active-currency">{{ activeCurrency }}</span>
+    <i class="dropdown icon"></i>
+    <div class="menu">
+        {% for availableCurrency in availableCurrencies %}
+            {% if availableCurrency is not sameas(activeCurrency) %}
+                <a href="#" class="item available-currency">{{ availableCurrency }}</a>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>

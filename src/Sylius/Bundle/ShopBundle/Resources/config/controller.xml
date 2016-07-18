@@ -18,11 +18,18 @@
 
     <parameters>
         <parameter key="sylius.controller.shop.homepage.class">Sylius\Bundle\ShopBundle\Controller\HomepageController</parameter>
+        <parameter key="sylius.controller.shop.currency.class">Sylius\Bundle\ShopBundle\Controller\CurrencyController</parameter>
     </parameters>
 
     <services>
         <service id="sylius.controller.shop.homepage" class="%sylius.controller.shop.homepage.class%">
             <argument type="service" id="templating" />
+        </service>
+
+        <service id="sylius.controller.shop.currency" class="%sylius.controller.shop.currency.class%">
+            <argument type="service" id="templating" />
+            <argument type="service" id="sylius.context.currency" />
+            <argument type="service" id="sylius.currency_provider" />
         </service>
     </services>
 
