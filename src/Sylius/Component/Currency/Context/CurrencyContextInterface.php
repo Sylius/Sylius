@@ -20,6 +20,8 @@ interface CurrencyContextInterface
 {
     /**
      * @return CurrencyInterface
+     *
+     * @throws CurrencyNotFoundException
      */
     public function getCurrency();
 }

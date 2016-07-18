@@ -33,5 +33,9 @@
         <service id="sylius.currency_provider.channel_aware" class="Sylius\Component\Core\Provider\ChannelAwareCurrencyProvider" decorates="sylius.currency_provider">
             <argument type="service" id="sylius.context.channel" />
         </service>
+
+        <service id="sylius.context.currency.channel_aware_default" class="Sylius\Component\Core\Context\ChannelAwareDefaultCurrencyContext" decorates="sylius.context.currency">
+            <argument type="service" id="sylius.context.channel" />
+        </service>
     </services>
 </container>
