@@ -24,19 +24,20 @@ final class CurrentChannelContext implements Context
      * @var ChannelContextSetterInterface
      */
     private $channelContextSetter;
-    
+
     /**
      * @param ChannelContextSetterInterface $channelContextSetter
      */
-    public function __construct(ChannelContextSetterInterface $channelContextSetter) 
+    public function __construct(ChannelContextSetterInterface $channelContextSetter)
     {
         $this->channelContextSetter = $channelContextSetter;
     }
-    
+
     /**
      * @Given /^I am browsing (channel "([^"]*)")$/
+     * @When /^I browse (that channel)$/
      */
-    public function iAmBrowsingChannel(ChannelInterface $channel)
+    public function iBrowseChannel(ChannelInterface $channel)
     {
         $this->channelContextSetter->setChannel($channel);
     }

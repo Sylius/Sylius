@@ -12,7 +12,10 @@
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Currency\Converter\CurrencyNameConverterInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -39,18 +42,34 @@ final class CurrencyContext implements Context
     private $currencyFactory;
 
     /**
+     * @var ObjectManager
+     */
+    private $currencyManager;
+
+    /**
+     * @var ObjectManager
+     */
+    private $channelManager;
+
+    /**
      * @param SharedStorageInterface $sharedStorage
      * @param RepositoryInterface $currencyRepository
      * @param FactoryInterface $currencyFactory
+     * @param ObjectManager $currencyManager
+     * @param ObjectManager $channelManager
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         RepositoryInterface $currencyRepository,
-        FactoryInterface $currencyFactory
+        FactoryInterface $currencyFactory,
+        ObjectManager $currencyManager,
+        ObjectManager $channelManager
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->currencyRepository = $currencyRepository;
         $this->currencyFactory = $currencyFactory;
+        $this->currencyManager = $currencyManager;
+        $this->channelManager = $channelManager;
     }
 
     /**
@@ -121,6 +140,34 @@ final class CurrencyContext implements Context
     }
 
     /**
+     * @Given /^(that channel) allows to shop using "([^"]+)" and "([^"]+)" currencies$/
+     */
+    public function thatChannelAllowsToShopUsingAndCurrencies(ChannelInterface $channel, $firstCurrencyCode, $secondCurrencyCode)
+    {
+        $channel->setCurrencies(new ArrayCollection([
+            $this->provideCurrency($firstCurrencyCode),
+            $this->provideCurrency($secondCurrencyCode),
+        ]));
+
+        $this->channelManager->flush();
+    }
+
+    /**
+     * @Given /^(it) uses the "([^"]+)" currency by default$/
+     */
+    public function itUsesTheCurrencyByDefault(ChannelInterface $channel, $currencyCode)
+    {
+        $currency = $this->provideCurrency($currencyCode);
+        $currency->setExchangeRate(1.0);
+
+        $this->currencyManager->flush();
+
+        $channel->setDefaultCurrency($currency);
+
+        $this->channelManager->flush();
+    }
+
+    /**
      * @param CurrencyInterface $currency
      */
     private function saveCurrency(CurrencyInterface $currency)
@@ -137,9 +184,28 @@ final class CurrencyContext implements Context
      */
     private function createCurrency($currencyCode, $exchangeRate = 1.0)
     {
+        /** @var CurrencyInterface $currency */
         $currency = $this->currencyFactory->createNew();
         $currency->setCode($currencyCode);
         $currency->setExchangeRate($exchangeRate);
+
+        return $currency;
+    }
+
+    /**
+     * @param string $currencyCode
+     *
+     * @return CurrencyInterface
+     */
+    private function provideCurrency($currencyCode)
+    {
+        $currency = $this->currencyRepository->findOneBy(['code' => $currencyCode]);
+        if (null === $currency) {
+            /** @var CurrencyInterface $currency */
+            $currency = $this->createCurrency($currencyCode, mt_rand(0, 200) / 100);
+
+            $this->currencyRepository->add($currency);
+        }
 
         return $currency;
     }

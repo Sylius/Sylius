@@ -6,19 +6,22 @@ Feature: Switching the current currency
 
     Background:
         Given the store operates on a channel named "Web"
-        And that channel allows for "EUR" and "USD" currencies
-        And it uses "EUR" currency by default
+        And that channel allows to shop using "EUR" and "USD" currencies
+        And it uses the "EUR" currency by default
 
+    @ui
     Scenario: Showing the current currency
         When I browse that channel
-        Then I should shop using "EUR" currency
+        Then I should shop using the "EUR" currency
 
-    Scenario: Showing the available currencies
+    @ui
+    Scenario: Showing available currencies
         When I browse that channel
-        Then I should be able to shop using "USD" currency
+        Then I should be able to shop using the "USD" currency
 
+    @ui
     Scenario: Switching the current currency
         When I browse that channel
-        And I switch the current currency to "USD" currency
-        Then I should shop using "USD" currency
-        And I should be able to shop using "EUR" currency
+        And I switch the current currency to the "USD" currency
+        Then I should shop using the "USD" currency
+        And I should be able to shop using the "EUR" currency

@@ -27,4 +27,16 @@ interface HomePageInterface extends SymfonyPageInterface
      * @return bool
      */
     public function hasLogoutButton();
+
+    /**
+     * @return string
+     */
+    public function getActiveCurrency();
+
+    /**
+     * @return array
+     */
+    public function getAvailableCurrencies();
+
+    public function switchCurrency($currencyCode);
 }
