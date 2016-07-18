@@ -14,6 +14,7 @@ namespace Sylius\Bundle\ResourceBundle\EventListener;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\Persistence\Mapping\ClassMetadata;
 use Sylius\Component\Resource\Metadata\RegistryInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * @author Ben Davies <ben.davies@gmail.com>
@@ -40,6 +41,10 @@ abstract class AbstractDoctrineSubscriber implements EventSubscriber
      */
     protected function isSyliusClass(ClassMetadata $metadata)
     {
-        return 0 === strpos($metadata->getName(), 'Sylius\\');
+        if (!$reflClass = $metadata->getReflectionClass()) {
+            return false;
+        }
+
+        return $reflClass->implementsInterface(ResourceInterface::class);
     }
 }
