@@ -34,8 +34,27 @@
             <argument type="service" id="sylius.context.channel" />
         </service>
 
-        <service id="sylius.context.currency.channel_aware_default" class="Sylius\Component\Core\Context\ChannelAwareDefaultCurrencyContext" decorates="sylius.context.currency">
-            <argument type="service" id="sylius.context.channel" />
+        <service id="sylius.storage.currency" class="Sylius\Component\Core\Currency\CurrencyStorage">
+            <argument type="service" id="sylius.storage.session" />
+        </service>
+
+        <service id="sylius.context.currency.core" class="Sylius\Component\Currency\Context\CompositeCurrencyContext" decorates="sylius.context.currency">
+            <call method="addContext">
+                <argument type="service">
+                    <service class="Sylius\Component\Core\Context\StorageBasedCurrencyContext">
+                        <argument type="service" id="sylius.context.channel" />
+                        <argument type="service" id="sylius.storage.currency" />
+                        <argument type="service" id="sylius.currency_provider" />
+                    </service>
+                </argument>
+            </call>
+            <call method="addContext">
+                <argument type="service">
+                    <service class="Sylius\Component\Currency\Context\ProviderBasedCurrencyContext">
+                        <argument type="service" id="sylius.currency_provider" />
+                    </service>
+                </argument>
+            </call>
         </service>
     </services>
 </container>

@@ -36,50 +36,48 @@ class CompositeCurrencyContextSpec extends ObjectBehavior
 
     function it_throws_a_currency_not_found_exception_if_there_are_no_nested_currency_contexts_defined()
     {
-        $this->shouldThrow(CurrencyNotFoundException::class)->during('getCurrency');
+        $this->shouldThrow(CurrencyNotFoundException::class)->during('getCurrencyCode');
     }
 
     function it_throws_a_currency_not_found_exception_if_none_of_nested_currency_contexts_returned_a_currency(
         CurrencyContextInterface $currencyContext
     ) {
-        $currencyContext->getCurrency()->willThrow(CurrencyNotFoundException::class);
+        $currencyContext->getCurrencyCode()->willThrow(CurrencyNotFoundException::class);
 
         $this->addContext($currencyContext);
 
-        $this->shouldThrow(CurrencyNotFoundException::class)->during('getCurrency');
+        $this->shouldThrow(CurrencyNotFoundException::class)->during('getCurrencyCode');
     }
 
     function it_returns_first_result_returned_by_nested_request_resolvers(
         CurrencyContextInterface $firstCurrencyContext,
         CurrencyContextInterface $secondCurrencyContext,
-        CurrencyContextInterface $thirdCurrencyContext,
-        CurrencyInterface $currency
+        CurrencyContextInterface $thirdCurrencyContext
     ) {
-        $firstCurrencyContext->getCurrency()->willThrow(CurrencyNotFoundException::class);
-        $secondCurrencyContext->getCurrency()->willReturn($currency);
-        $thirdCurrencyContext->getCurrency()->shouldNotBeCalled();
+        $firstCurrencyContext->getCurrencyCode()->willThrow(CurrencyNotFoundException::class);
+        $secondCurrencyContext->getCurrencyCode()->willReturn('BTC');
+        $thirdCurrencyContext->getCurrencyCode()->shouldNotBeCalled();
 
         $this->addContext($firstCurrencyContext);
         $this->addContext($secondCurrencyContext);
         $this->addContext($thirdCurrencyContext);
 
-        $this->getCurrency()->shouldReturn($currency);
+        $this->getCurrencyCode()->shouldReturn('BTC');
     }
 
     function its_nested_request_resolvers_can_have_priority(
         CurrencyContextInterface $firstCurrencyContext,
         CurrencyContextInterface $secondCurrencyContext,
-        CurrencyContextInterface $thirdCurrencyContext,
-        CurrencyInterface $currency
+        CurrencyContextInterface $thirdCurrencyContext
     ) {
-        $firstCurrencyContext->getCurrency()->shouldNotBeCalled();
-        $secondCurrencyContext->getCurrency()->willReturn($currency);
-        $thirdCurrencyContext->getCurrency()->willThrow(CurrencyNotFoundException::class);
+        $firstCurrencyContext->getCurrencyCode()->shouldNotBeCalled();
+        $secondCurrencyContext->getCurrencyCode()->willReturn('BTC');
+        $thirdCurrencyContext->getCurrencyCode()->willThrow(CurrencyNotFoundException::class);
 
         $this->addContext($firstCurrencyContext, -5);
         $this->addContext($secondCurrencyContext, 0);
         $this->addContext($thirdCurrencyContext, 5);
 
-        $this->getCurrency()->shouldReturn($currency);
+        $this->getCurrencyCode()->shouldReturn('BTC');
     }
 }

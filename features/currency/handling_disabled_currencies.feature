@@ -22,6 +22,14 @@ Feature: Handling disabled currencies
         Then I should not be able to shop
 
     @ui
+    Scenario: Falling back to the default currency if selected one is not available
+        Given I am browsing that channel
+        And I switch to the "USD" currency
+        When the currency "USD" gets disabled
+        Then I should shop using the "EUR" currency
+        And I should not be able to shop using the "USD" currency
+
+    @ui
     Scenario: Browsing a channel with the default currency disabled while using the other one
         Given I am browsing that channel
         And I switch to the "USD" currency

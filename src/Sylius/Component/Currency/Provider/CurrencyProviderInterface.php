@@ -11,21 +11,26 @@
 
 namespace Sylius\Component\Currency\Provider;
 
-use Sylius\Component\Currency\Model\CurrencyInterface;
+use Sylius\Component\Currency\Context\CurrencyNotFoundException;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Fernando Caraballo Ortiz <caraballo.ortiz@gmail.com>
+ * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 interface CurrencyProviderInterface
 {
     /**
-     * @return CurrencyInterface[]
+     * @return string
+     *
+     * @throws CurrencyNotFoundException
      */
-    public function getAvailableCurrencies();
+    public function getAvailableCurrenciesCodes();
 
     /**
-     * @return CurrencyInterface
+     * @return string
+     *
+     * @throws CurrencyNotFoundException
      */
-    public function getDefaultCurrency();
+    public function getDefaultCurrencyCode();
 }

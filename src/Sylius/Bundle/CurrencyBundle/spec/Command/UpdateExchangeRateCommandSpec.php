@@ -56,7 +56,7 @@ class UpdateExchangeRateCommandSpec extends ObjectBehavior
 
         $input->hasOption('all')->shouldBeCalled()->willreturn(false);
         $container->get('sylius.currency_provider')->shouldBeCalled()->willreturn($currencyProvider);
-        $currencyProvider->getAvailableCurrencies()->shouldBeCalled()->willreturn([$currency]);
+        $currencyProvider->getAvailableCurrenciesCodes()->shouldBeCalled()->willreturn([$currency]);
 
         $input->getArgument('importer')->shouldBeCalled()->willreturn('importer');
         $container->get('sylius.currency_importer.importer')->shouldBeCalled()->willreturn($importer);

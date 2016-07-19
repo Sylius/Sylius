@@ -214,7 +214,7 @@ class FrontendMenuBuilder extends MenuBuilder
             ],
         ]);
 
-        $currencies = $this->currencyProvider->getAvailableCurrencies();
+        $currencies = $this->currencyProvider->getAvailableCurrenciesCodes();
         if (1 === count($currencies)) {
             $menu->setDisplay(false);
 

@@ -52,6 +52,6 @@ class OrderCurrencyListener
             );
         }
 
-        $order->setCurrencyCode($this->currencyContext->getCurrency()->getCode());
+        $order->setCurrencyCode($this->currencyContext->getCurrencyCode());
     }
 }

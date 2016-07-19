@@ -43,13 +43,13 @@ final class CurrencyProviderSpec extends ObjectBehavior
     {
         $currencyRepository->findBy(['enabled' => true])->shouldBeCalled()->willReturn([$currency]);
 
-        $this->getAvailableCurrencies()->shouldReturn([$currency]);
+        $this->getAvailableCurrenciesCodes()->shouldReturn([$currency]);
     }
 
     function it_returns_the_default_currency(RepositoryInterface $currencyRepository, CurrencyInterface $currency)
     {
-        $currencyRepository->findOneBy(['code' => 'EUR'])->willReturn($currency);
+        $currencyRepository->findOneBy(['code' => 'EUR', 'enabled' => true])->willReturn($currency);
 
-        $this->getDefaultCurrency()->shouldReturn($currency);
+        $this->getDefaultCurrencyCode()->shouldReturn($currency);
     }
 }

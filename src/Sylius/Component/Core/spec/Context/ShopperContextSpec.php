@@ -56,12 +56,9 @@ class ShopperContextSpec extends ObjectBehavior
         $this->getChannel()->shouldReturn($channel);
     }
 
-    function it_gets_current_currency_code_from_context(
-        CurrencyContextInterface $currencyContext,
-        CurrencyInterface $currency
-    ) {
-        $currencyContext->getCurrency()->willReturn($currency);
-        $currency->getCode()->willReturn('USD');
+    function it_gets_current_currency_code_from_context(CurrencyContextInterface $currencyContext)
+    {
+        $currencyContext->getCurrencyCode()->willReturn('USD');
 
         $this->getCurrencyCode()->shouldReturn('USD');
     }

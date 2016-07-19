@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Currency\Provider;
 
+use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -42,16 +43,21 @@ final class CurrencyProvider implements CurrencyProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function getAvailableCurrencies()
+    public function getAvailableCurrenciesCodes()
     {
-        return $this->currencyRepository->findBy(['enabled' => true]);
+        $currencies = $this->currencyRepository->findBy(['enabled' => true]);
+
+        return array_map(
+            function (CurrencyInterface $currency) { return $currency->getCode(); },
+            $currencies
+        );
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getDefaultCurrency()
+    public function getDefaultCurrencyCode()
     {
-        return $this->currencyRepository->findOneBy(['code' => $this->defaultCurrencyCode]);
+        return $this->defaultCurrencyCode;
     }
 }

@@ -39,11 +39,11 @@ final class CompositeCurrencyContext implements CurrencyContextInterface
     /**
      * {@inheritdoc}
      */
-    public function getCurrency()
+    public function getCurrencyCode()
     {
         foreach ($this->currencyContexts as $currencyContext) {
             try {
-                return $currencyContext->getCurrency();
+                return $currencyContext->getCurrencyCode();
             } catch (CurrencyNotFoundException $exception) {
                 continue;
             }

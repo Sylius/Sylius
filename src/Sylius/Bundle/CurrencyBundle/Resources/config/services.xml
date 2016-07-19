@@ -19,7 +19,6 @@
         </service>
 
         <service id="sylius.context.currency" class="Sylius\Component\Currency\Context\ImmutableCurrencyContext">
-            <argument type="service" id="sylius.repository.currency" />
             <argument>%sylius_currency.currency%</argument>
         </service>
 

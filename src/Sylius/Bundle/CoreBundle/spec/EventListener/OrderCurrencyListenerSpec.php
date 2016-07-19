@@ -15,7 +15,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\EventListener\OrderCurrencyListener;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
-use Sylius\Component\Currency\Model\CurrencyInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
@@ -45,14 +44,12 @@ final class OrderCurrencyListenerSpec extends ObjectBehavior
 
     function it_sets_currency_code_on_order(
         CurrencyContextInterface $currencyContext,
-        CurrencyInterface $currency,
         GenericEvent $event,
         OrderInterface $order
     ) {
         $event->getSubject()->willReturn($order);
 
-        $currencyContext->getCurrency()->willReturn($currency);
-        $currency->getCode()->willReturn('EUR');
+        $currencyContext->getCurrencyCode()->willReturn('EUR');
 
         $order->setCurrencyCode('EUR')->shouldBeCalled();
 

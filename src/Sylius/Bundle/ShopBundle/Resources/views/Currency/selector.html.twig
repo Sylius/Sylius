@@ -1,10 +1,12 @@
 <div class="ui pointing dropdown link item" id="currency-selector">
-    <span class="text active-currency">{{ activeCurrency }}</span>
+    <span class="text active-currency">{{ activeCurrencyCode }}</span>
     <i class="dropdown icon"></i>
     <div class="menu">
-        {% for availableCurrency in availableCurrencies %}
-            {% if availableCurrency is not sameas(activeCurrency) %}
-                <a href="#" class="item available-currency">{{ availableCurrency }}</a>
+        {% for availableCurrencyCode in availableCurrenciesCodes %}
+            {% if availableCurrencyCode is not sameas(activeCurrencyCode) %}
+                <a href="{{ path('sylius_shop_switch_currency', {'code': availableCurrencyCode}) }}" class="item available-currency">
+                    {{ availableCurrencyCode }}
+                </a>
             {% endif %}
         {% endfor %}
     </div>

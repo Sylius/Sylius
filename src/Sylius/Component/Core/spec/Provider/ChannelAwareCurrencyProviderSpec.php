@@ -59,7 +59,9 @@ final class ChannelAwareCurrencyProviderSpec extends ObjectBehavior
         $enabledCurrency->isEnabled()->willReturn(true);
         $disabledCurrency->isEnabled()->willReturn(false);
 
-        $this->getAvailableCurrencies()->shouldReturn([$enabledCurrency]);
+        $enabledCurrency->getCode()->willReturn('BTC');
+
+        $this->getAvailableCurrenciesCodes()->shouldReturn(['BTC']);
     }
 
     function it_returns_channels_default_currency(
@@ -71,15 +73,17 @@ final class ChannelAwareCurrencyProviderSpec extends ObjectBehavior
 
         $channel->getDefaultCurrency()->willReturn($currency);
 
-        $this->getDefaultCurrency()->shouldReturn($currency);
+        $currency->getCode()->willReturn('BTC');
+
+        $this->getDefaultCurrencyCode()->shouldReturn('BTC');
     }
 
-    function it_throws_an_currency_not_found_exception_if_channel_cannot_be_determined(
+    function it_throws_a_currency_not_found_exception_if_channel_cannot_be_determined(
         ChannelContextInterface $channelContext
     ) {
         $channelContext->getChannel()->willThrow(ChannelNotFoundException::class);
 
-        $this->shouldThrow(CurrencyNotFoundException::class)->during('getAvailableCurrencies');
-        $this->shouldThrow(CurrencyNotFoundException::class)->during('getDefaultCurrency');
+        $this->shouldThrow(CurrencyNotFoundException::class)->during('getAvailableCurrenciesCodes');
+        $this->shouldThrow(CurrencyNotFoundException::class)->during('getDefaultCurrencyCode');
     }
 }

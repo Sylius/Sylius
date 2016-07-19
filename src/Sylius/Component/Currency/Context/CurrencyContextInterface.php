@@ -11,17 +11,15 @@
 
 namespace Sylius\Component\Currency\Context;
 
-use Sylius\Component\Currency\Model\CurrencyInterface;
-
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface CurrencyContextInterface
 {
     /**
-     * @return CurrencyInterface
+     * @return string
      *
      * @throws CurrencyNotFoundException
      */
-    public function getCurrency();
+    public function getCurrencyCode();
 }

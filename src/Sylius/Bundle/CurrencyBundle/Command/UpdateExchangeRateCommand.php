@@ -54,7 +54,7 @@ class UpdateExchangeRateCommand extends ContainerAwareCommand
 
         /* @var $currencies CurrencyInterface[] */
         if (!$input->hasOption('all')) {
-            $currencies = $container->get('sylius.currency_provider')->getAvailableCurrencies();
+            $currencies = $container->get('sylius.currency_provider')->getAvailableCurrenciesCodes();
         } else {
             $currencies = $container->get('sylius.repository.currency')->findAll();
         }

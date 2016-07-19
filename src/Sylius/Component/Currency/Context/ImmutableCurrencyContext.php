@@ -11,54 +11,29 @@
 
 namespace Sylius\Component\Currency\Context;
 
-use Sylius\Component\Currency\Model\CurrencyInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
-
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class ImmutableCurrencyContext implements CurrencyContextInterface
 {
     /**
-     * @var RepositoryInterface
-     */
-    private $currencyRepository;
-
-    /**
      * @var string
      */
     private $currencyCode;
 
     /**
-     * @var CurrencyInterface
-     */
-    private $currency;
-
-    /**
-     * @var bool
-     */
-    private $initialized = false;
-
-    /**
-     * @param RepositoryInterface $currencyRepository
      * @param string $currencyCode
      */
-    public function __construct(RepositoryInterface $currencyRepository, $currencyCode)
+    public function __construct($currencyCode)
     {
-        $this->currencyRepository = $currencyRepository;
         $this->currencyCode = $currencyCode;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getCurrency()
+    public function getCurrencyCode()
     {
-        if (!$this->initialized) {
-            $this->currency = $this->currencyRepository->findOneBy(['code' => $this->currencyCode]);
-            $this->initialized = true;
-        }
-
-        return $this->currency;
+        return $this->currencyCode;
     }
 }

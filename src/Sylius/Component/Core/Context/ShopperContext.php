@@ -74,12 +74,7 @@ use Sylius\Component\User\Context\CustomerContextInterface;
      */
     public function getCurrencyCode()
     {
-        $currency = $this->currencyContext->getCurrency();
-        if (null === $currency) {
-            return null;
-        }
-
-        return $currency->getCode();
+        return $this->currencyContext->getCurrencyCode();
     }
 
     /**

@@ -15,7 +15,6 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Templating\Helper\PriceHelper;
 use Sylius\Bundle\MoneyBundle\Templating\Helper\PriceHelperInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
-use Sylius\Component\Currency\Model\CurrencyInterface;
 use Symfony\Component\Templating\Helper\HelperInterface;
 
 /**
@@ -49,7 +48,7 @@ final class PriceHelperSpec extends ObjectBehavior
         PriceHelperInterface $decoratedHelper,
         CurrencyContextInterface $currencyContext
     ) {
-        $currencyContext->getCurrency()->shouldNotBeCalled();
+        $currencyContext->getCurrencyCode()->shouldNotBeCalled();
 
         $decoratedHelper->convertAndFormatAmount(42, 'USD', null)->willReturn('$0.42');
 
@@ -60,7 +59,7 @@ final class PriceHelperSpec extends ObjectBehavior
         PriceHelperInterface $decoratedHelper,
         CurrencyContextInterface $currencyContext
     ) {
-        $currencyContext->getCurrency()->willReturn(null);
+        $currencyContext->getCurrencyCode()->willReturn(null);
 
         $decoratedHelper->convertAndFormatAmount(42, 'USD', null)->willReturn('$0.42');
 
@@ -69,11 +68,9 @@ final class PriceHelperSpec extends ObjectBehavior
 
     function it_decorates_the_helper_with_current_currency_if_it_is_not_passed(
         PriceHelperInterface $decoratedHelper,
-        CurrencyContextInterface $currencyContext,
-        CurrencyInterface $currency
+        CurrencyContextInterface $currencyContext
     ) {
-        $currencyContext->getCurrency()->willReturn($currency);
-        $currency->getCode()->willReturn('EUR');
+        $currencyContext->getCurrencyCode()->willReturn('EUR');
 
         $decoratedHelper->convertAndFormatAmount(42, 'EUR', null)->willReturn('€0.42');
 

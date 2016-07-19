@@ -39,37 +39,39 @@ final class ChannelAwareCurrencyProvider implements CurrencyProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function getAvailableCurrencies()
+    public function getAvailableCurrenciesCodes()
     {
         try {
             /** @var ChannelInterface $channel */
             $channel = $this->channelContext->getChannel();
 
-            return $channel
+            $currencies = $channel
                 ->getCurrencies()
                 ->filter(function (CurrencyInterface $currency) {
                     return $currency->isEnabled();
                 })
                 ->toArray()
             ;
-        } catch (ChannelNotFoundException $exception) {
-            throw new CurrencyNotFoundException(
-                'Available currencies cannot be found because there channel cannot be determined!',
-                $exception
+
+            return array_map(
+                function (CurrencyInterface $currency) { return $currency->getCode(); },
+                $currencies
             );
+        } catch (ChannelNotFoundException $exception) {
+            throw new CurrencyNotFoundException(null, $exception);
         }
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getDefaultCurrency()
+    public function getDefaultCurrencyCode()
     {
         try {
             /** @var ChannelInterface $channel */
             $channel = $this->channelContext->getChannel();
 
-            return $channel->getDefaultCurrency();
+            return $channel->getDefaultCurrency()->getCode();
         } catch (ChannelNotFoundException $exception) {
             throw new CurrencyNotFoundException(null, $exception);
         }
