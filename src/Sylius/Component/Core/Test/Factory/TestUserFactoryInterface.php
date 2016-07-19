@@ -34,9 +34,4 @@ interface TestUserFactoryInterface
      * @return UserInterface
      */
     public function createDefault();
-
-    /**
-     * @return UserInterface
-     */
-    public function createDefaultAdmin();
 }

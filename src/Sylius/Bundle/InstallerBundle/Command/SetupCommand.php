@@ -72,9 +72,9 @@ EOT
     {
         $output->writeln('Create your administrator account.');
 
-        $userManager = $this->get('sylius.manager.user');
-        $userRepository = $this->get('sylius.repository.user');
-        $userFactory = $this->get('sylius.factory.user');
+        $userManager = $this->get('sylius.manager.shop_user');
+        $userRepository = $this->get('sylius.repository.shop_user');
+        $userFactory = $this->get('sylius.factory.shop_user');
         $customerFactory = $this->get('sylius.factory.customer');
 
         $rbacInitializer = $this->get('sylius.rbac.initializer');

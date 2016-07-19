@@ -24,7 +24,7 @@
 
     <services>
         <service id="sylius.report.data_fetcher.user_registration" class="%sylius.report.data_fetcher.user_registration.class%">
-            <argument type="service" id="sylius.repository.user" />
+            <argument type="service" id="sylius.repository.shop_user" />
             <tag name="sylius.report.data_fetcher" fetcher="sylius_data_fetcher_user_registration" label="User registration" />
         </service>
 

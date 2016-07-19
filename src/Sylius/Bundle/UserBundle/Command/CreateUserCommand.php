@@ -173,7 +173,7 @@ EOT
      */
     protected function getUserFactory()
     {
-        return $this->getContainer()->get('sylius.factory.user');
+        return $this->getContainer()->get('sylius.factory.shop_user');
     }
 
     /**

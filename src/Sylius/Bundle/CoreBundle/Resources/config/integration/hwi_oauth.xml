@@ -20,11 +20,11 @@
         <service id="sylius.oauth.user_provider" class="%sylius.oauth.user_provider.class%" lazy="true">
             <argument type="service" id="sylius.factory.customer" />
             <argument type="service" id="sylius.repository.customer" />
-            <argument type="service" id="sylius.factory.user" />
-            <argument type="service" id="sylius.repository.user" />
-            <argument type="service" id="sylius.factory.user_oauth" />
-            <argument type="service" id="sylius.repository.user_oauth" />
-            <argument type="service" id="sylius.manager.user" />
+            <argument type="service" id="sylius.factory.shop_user" />
+            <argument type="service" id="sylius.repository.shop_user" />
+            <argument type="service" id="sylius.factory.shop_user_oauth" />
+            <argument type="service" id="sylius.repository.shop_user_oauth" />
+            <argument type="service" id="sylius.manager.shop_user" />
             <argument type="service" id="sylius.user.canonicalizer" />
         </service>
     </services>

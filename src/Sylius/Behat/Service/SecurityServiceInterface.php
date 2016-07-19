@@ -19,11 +19,11 @@ use Sylius\Component\User\Model\UserInterface;
 interface SecurityServiceInterface
 {
     /**
-     * @param string $email
+     * @param UserInterface $user
      *
      * @throws \InvalidArgumentException
      */
-    public function logIn($email);
+    public function logUserIn(UserInterface $user);
     
     public function logOut();
 

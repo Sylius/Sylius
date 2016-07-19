@@ -3,7 +3,9 @@
 
 sylius_user:
     resources:
-        user:
-            templates: "SyliusWebBundle:Frontend/User"
-        customer:
-            templates: "SyliusWebBundle:Frontend/Customer"
+        admin:
+            user:
+                templates: "SyliusWebBundle:Frontend/User"
+        shop:
+            user:
+                templates: "SyliusWebBundle:Frontend/Customer"

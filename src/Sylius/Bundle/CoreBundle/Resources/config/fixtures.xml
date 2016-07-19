@@ -62,7 +62,7 @@
         </service>
 
         <service id="sylius.fixture.user" class="Sylius\Bundle\CoreBundle\Fixture\UserFixture">
-            <argument type="service" id="sylius.manager.user" />
+            <argument type="service" id="sylius.manager.shop_user" />
             <argument type="service" id="sylius.fixture.example_factory.user" />
             <tag name="sylius_fixtures.fixture" />
         </service>

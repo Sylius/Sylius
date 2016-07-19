@@ -15,7 +15,7 @@ sylius_api:
     resources:
         api_user:
             classes:
-                model: "%sylius.model.user.class%"
+                model: "%sylius.model.admin_user.class%"
 
 sylius_archetype:
     resources:
@@ -738,12 +738,32 @@ sylius_taxonomy:
 
 sylius_user:
     resources:
-        user:
-            classes:
-                model: Sylius\Component\Core\Model\User
-                repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\UserRepository
-                form:
-                    default: Sylius\Bundle\UserBundle\Form\Type\UserType
+        admin:
+            user:
+                classes:
+                    model: Sylius\Component\Core\Model\User
+                    repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\UserRepository
+                    form:
+                        default: Sylius\Bundle\UserBundle\Form\Type\UserType
+        shop:
+            user:
+                classes:
+                    model: Sylius\Component\Core\Model\User
+                    repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\UserRepository
+                    form:
+                        default: Sylius\Bundle\UserBundle\Form\Type\UserType
+        admin_oauth:
+            user:
+                classes:
+                    model: Sylius\Component\User\Model\UserOAuth
+                    interface: Sylius\Component\User\Model\UserOAuthInterface
+                    controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
+        shop_oauth:
+            user:
+                classes:
+                    model: Sylius\Component\User\Model\UserOAuth
+                    interface: Sylius\Component\User\Model\UserOAuthInterface
+                    controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
 
 sylius_customer:
     resources:

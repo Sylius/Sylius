@@ -13,7 +13,6 @@ namespace Sylius\Behat\Service;
 
 use Sylius\Behat\Service\Setter\CookieSetterInterface;
 use Sylius\Component\User\Model\UserInterface;
-use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
@@ -23,11 +22,6 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
  */
 final class SecurityService implements SecurityServiceInterface
 {
-    /**
-     * @var UserRepositoryInterface
-     */
-    private $userRepository;
-
     /**
      * @var SessionInterface
      */
@@ -44,18 +38,15 @@ final class SecurityService implements SecurityServiceInterface
     private $sessionTokenVariable;
 
     /**
-     * @param UserRepositoryInterface $userRepository
      * @param SessionInterface $session
      * @param CookieSetterInterface $cookieSetter
      * @param string $contextKey
      */
     public function __construct(
-        UserRepositoryInterface $userRepository,
         SessionInterface $session,
         CookieSetterInterface $cookieSetter,
         $contextKey
     ) {
-        $this->userRepository = $userRepository;
         $this->session = $session;
         $this->cookieSetter = $cookieSetter;
         $this->sessionTokenVariable = sprintf('_security_%s', $contextKey);
@@ -64,15 +55,14 @@ final class SecurityService implements SecurityServiceInterface
     /**
      * {@inheritdoc}
      */
-    public function logIn($email)
+    public function logUserIn(UserInterface $user)
     {
-        /** @var UserInterface $user */
-        $user = $this->userRepository->findOneBy(['username' => $email]);
-        if (null === $user) {
-            throw new \InvalidArgumentException(sprintf('There is no user with email %s', $email));
-        }
+        $token = new UsernamePasswordToken($user, $user->getPassword(), 'randomstringbutnotnull', $user->getRoles());
+        $serializedToken = serialize($token);
 
-        $this->logUserIn($user);
+        $this->setSerializedToken($serializedToken);
+
+        $this->cookieSetter->setCookie($this->session->getName(), $this->session->getId());
     }
 
     public function logOut()
@@ -98,19 +88,6 @@ final class SecurityService implements SecurityServiceInterface
         }
 
         $this->logOut();
-    }
-
-    /**
-     * @param UserInterface $user
-     */
-    private function logUserIn(UserInterface $user)
-    {
-        $token = new UsernamePasswordToken($user, $user->getPassword(), 'randomstringbutnotnull', $user->getRoles());
-        $serializedToken = serialize($token);
-
-        $this->setSerializedToken($serializedToken);
-
-        $this->cookieSetter->setCookie($this->session->getName(), $this->session->getId());
     }
 
     /**

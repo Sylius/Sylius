@@ -381,8 +381,8 @@
             <tag name="doctrine.event_listener" event="preUpdate" />
         </service>
         <service id="sylius.listener.user_registration" class="%sylius.listener.user_registration.class%">
-            <argument type="service" id="sylius.manager.user" />
-            <argument type="service" id="sylius.user.generator.email_verification_token" />
+            <argument type="service" id="sylius.manager.shop_user" />
+            <argument type="service" id="sylius.shop_user.generator.email_verification_token" />
             <argument type="service" id="event_dispatcher" />
             <tag name="kernel.event_listener" event="sylius.customer.post_register" method="sendVerificationEmail" />
         </service>

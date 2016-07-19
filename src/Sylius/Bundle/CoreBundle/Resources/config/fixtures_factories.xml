@@ -38,7 +38,7 @@
         </service>
 
         <service id="sylius.fixture.example_factory.user" class="Sylius\Bundle\CoreBundle\Fixture\Factory\UserExampleFactory">
-            <argument type="service" id="sylius.factory.user" />
+            <argument type="service" id="sylius.factory.shop_user" />
             <argument type="service" id="sylius.factory.customer" />
             <argument type="service" id="sylius.repository.role" />
             <argument type="service" id="sylius.repository.currency" />

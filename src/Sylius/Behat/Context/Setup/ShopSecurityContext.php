@@ -13,14 +13,15 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Service\SecurityServiceInterface;
-use Sylius\Component\Core\Test\Factory\TestUserFactoryInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Component\User\Repository\UserRepositoryInterface;
+use Sylius\Component\Core\Repository\UserRepositoryInterface;
+use Sylius\Component\Core\Test\Factory\TestUserFactoryInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-final class SecurityContext implements Context
+final class ShopSecurityContext implements Context
 {
     /**
      * @var SharedStorageInterface
@@ -35,37 +36,40 @@ final class SecurityContext implements Context
     /**
      * @var TestUserFactoryInterface
      */
-    private $testUserFactory;
+    private $testShopUserFactory;
 
     /**
      * @var UserRepositoryInterface
      */
-    private $userRepository;
+    private $shopUserRepository;
 
     /**
      * @param SharedStorageInterface $sharedStorage
      * @param SecurityServiceInterface $securityService
-     * @param TestUserFactoryInterface $testUserFactory
-     * @param UserRepositoryInterface $userRepository
+     * @param TestUserFactoryInterface $testAdminUserFactory
+     * @param UserRepositoryInterface $shopUserRepository
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         SecurityServiceInterface $securityService,
-        TestUserFactoryInterface $testUserFactory,
-        UserRepositoryInterface $userRepository
+        TestUserFactoryInterface $testAdminUserFactory,
+        UserRepositoryInterface $shopUserRepository
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->securityService = $securityService;
-        $this->testUserFactory = $testUserFactory;
-        $this->userRepository = $userRepository;
+        $this->testShopUserFactory = $testAdminUserFactory;
+        $this->shopUserRepository = $shopUserRepository;
     }
 
     /**
-     * @Given /^I am logged in as "([^""]*)"$/
+     * @Given /^I am logged in as "([^""]+)"$/
      */
     public function iAmLoggedInAs($email)
     {
-        $this->securityService->logIn($email);
+        $shopUser = $this->shopUserRepository->findOneByEmail($email);
+        Assert::notNull($shopUser);
+
+        $this->securityService->logUserIn($shopUser);
     }
 
     /**
@@ -73,24 +77,11 @@ final class SecurityContext implements Context
      */
     public function iAmLoggedInCustomer()
     {
-        $user = $this->testUserFactory->createDefault();
-        $this->userRepository->add($user);
+        $shopUser = $this->testShopUserFactory->createDefault();
+        $this->shopUserRepository->add($shopUser);
 
-        $this->securityService->logIn($user->getEmail());
+        $this->securityService->logUserIn($shopUser);
 
-        $this->sharedStorage->set('user', $user);
-    }
-
-    /**
-     * @Given I am logged in as an administrator
-     */
-    public function iAmLoggedInAsAnAdministrator()
-    {
-        $admin = $this->testUserFactory->createDefaultAdmin();
-        $this->userRepository->add($admin);
-
-        $this->securityService->logIn($admin->getEmail());
-
-        $this->sharedStorage->set('admin', $admin);
+        $this->sharedStorage->set('user', $shopUser);
     }
 }
