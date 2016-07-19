@@ -9,6 +9,7 @@ sylius:
             not_blank: Vui lòng điền tên thành phố.
         country:
             not_blank: Vui lòng chọn quốc gia.
+            disabled: Quốc gia được chọn đang không có hiệu lực. Vui lòng chọn quốc gia khác.
         first_name:
             max_length: Tên (không bao gồm họ) không thể dài quá 255 ký tự|Tên (không bao gồm họ) không thể dài quá 255 ký tự.
             min_length: Tên (không bao gồm họ) phải có ít nhất 2 ký tự|Tên (không bao gồm họ) phải có ít nhất 2 ký tự.
@@ -28,14 +29,32 @@ sylius:
             min_length: Địa chỉ đường phải có ít nhất 2 ký tự|Địa chỉ đường phải có ít nhất 2 ký tự.
             not_blank: Vui lòng nhập địa chỉ (số nhà và tên đường).
         not_shippable: Địa chỉ này không phải là một điểm đến vận chuyển hợp lệ.
+    country:
+        code:
+            not_blank: Vui lòng nhập mã ISO quốc gia.
+            unique: Mã ISO quốc gia phải là duy nhất.
     province:
+        code:
+            min_length: Mã tỉnh phải có ít nhất 2 ký tự|Mã tỉnh phải có ít nhất 2 ký tự.
+            not_blank: Vui lòng nhập mã tỉnh.
+            regex: 'Mã tỉnh cần phải có định dạng sau XX-XX (ví dụ: U.S.-FL).'
+            unique: Mã tỉnh phải là duy nhất.
         name:
             max_length: Tên tỉnh không được dài hơn 255 ký tự|Tên tỉnh không được dài hơn 255 ký tự.
             min_length: Tên tỉnh phải có ít nhất 2 ký tự|Tên tỉnh phải có ít nhất 2 ký tự.
             not_blank: Vui lòng nhập tên tỉnh.
+            unique: Tên tỉnh phải là duy nhất.
     zone:
+        code:
+            not_blank: Vui lòng nhập mã khu vực.
+            unique: Mã khu vực phải là duy nhất.
         members:
             min_count: 'Vui lòng thêm tối thiểu {{ limit }} thành viên cho khu vực này.'
         name:
             max_length: Tên của Khu vực không được dài hơn 255 ký tự|Tên của Khu vực không được dài hơn 255 ký tự.
+            min_length: Tên khu vực phải ít nhất 2 ký tự.|Tên khu vực phải ít nhất 2 ký tự.
             not_blank: Xin vui lòng điền tên Khu vực.
+    zone_member:
+        code:
+            not_blank: Vui lòng chọn thành viên.
+        unique: Thành viên được chọn đã nằm trong khu vực này.

@@ -30,4 +30,5 @@ sylius:
             description: Description
             enabled: Activé ?
             gateway: Passerelle
+            instructions: Instructions
             name: Nom
