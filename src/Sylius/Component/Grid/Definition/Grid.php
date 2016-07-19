@@ -1,6 +1,6 @@
 <?php
 /*
- * This file is part of the Sylius package.
+ * This file is a part of the Sylius package.
  *
  * (c) Paweł Jędrzejewski
  *
