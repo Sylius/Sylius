@@ -502,7 +502,6 @@
         <service id="sylius.promotion.units_promotion_adjustments_applicator" class="%sylius.promotion.units_promotion_adjustments_applicator.class%">
             <argument type="service" id="sylius.factory.adjustment" />
             <argument type="service" id="sylius.integer_distributor" />
-            <argument type="service" id="sylius.originator" />
         </service>
 
         <service id="sylius.price_calculator.channel_based" class="%sylius.price_calculator.channel_based.class%" lazy="true">
