@@ -23,7 +23,7 @@ use Symfony\Component\Routing\Matcher\UrlMatcherInterface;
  *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class CurrentPageResolverSpec extends ObjectBehavior
+final class CurrentPageResolverSpec extends ObjectBehavior
 {
     function let(Session $session, UrlMatcherInterface $urlMatcher)
     {

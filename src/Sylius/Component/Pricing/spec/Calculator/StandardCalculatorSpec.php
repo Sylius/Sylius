@@ -19,7 +19,7 @@ use Sylius\Component\Pricing\Model\PriceableInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class StandardCalculatorSpec extends ObjectBehavior
+final class StandardCalculatorSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

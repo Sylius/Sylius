@@ -24,7 +24,7 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class SecurityServiceSpec extends ObjectBehavior
+final class SecurityServiceSpec extends ObjectBehavior
 {
     function let(
         UserRepositoryInterface $userRepository,

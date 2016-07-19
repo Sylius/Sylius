@@ -20,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Dylan Johnson <eponymi.dev@gmail.com>
  */
-class CreditCardTypeSpec extends ObjectBehavior
+final class CreditCardTypeSpec extends ObjectBehavior
 {
     function let()
     {

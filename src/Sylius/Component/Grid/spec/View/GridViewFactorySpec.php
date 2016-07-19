@@ -25,7 +25,7 @@ use Sylius\Component\Grid\View\GridViewFactoryInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class GridViewFactorySpec extends ObjectBehavior
+final class GridViewFactorySpec extends ObjectBehavior
 {
     function let(DataProviderInterface $dataProvider)
     {
@@ -48,9 +48,9 @@ class GridViewFactorySpec extends ObjectBehavior
         Parameters $parameters
     ) {
         $expectedGridView = new GridView(['foo', 'bar'], $grid->getWrappedObject(), $parameters->getWrappedObject());
-        
+
         $dataProvider->getData($grid, $parameters)->willReturn(['foo', 'bar']);
-        
+
         $this->create($grid, $parameters)->shouldBeSameGridViewAs($expectedGridView);
     }
 

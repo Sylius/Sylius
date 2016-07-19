@@ -23,7 +23,7 @@ use Sylius\Bundle\CoreBundle\Purger\QueryLoggerInterface;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ORMPurgerSpec extends ObjectBehavior
+final class ORMPurgerSpec extends ObjectBehavior
 {
     function let(PurgerInterface $purger, EntityManagerInterface $entityManager, QueryLoggerInterface $queryLogger)
     {

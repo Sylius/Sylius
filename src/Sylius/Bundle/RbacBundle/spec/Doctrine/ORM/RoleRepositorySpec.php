@@ -23,7 +23,7 @@ use Sylius\Component\Rbac\Model\RoleInterface;
 /**
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-class RoleRepositorySpec extends ObjectBehavior
+final class RoleRepositorySpec extends ObjectBehavior
 {
     function let(EntityManager $em, ClassMetadata $classMetadata)
     {

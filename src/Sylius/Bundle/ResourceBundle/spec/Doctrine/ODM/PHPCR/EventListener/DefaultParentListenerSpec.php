@@ -25,7 +25,7 @@ use PHPCR\SessionInterface;
 /**
  * @author Daniel Leech <daniel@dantleech.com>
  */
-class DefaultParentListenerSpec extends ObjectBehavior
+final class DefaultParentListenerSpec extends ObjectBehavior
 {
     function let(
         DocumentManagerInterface $documentManager

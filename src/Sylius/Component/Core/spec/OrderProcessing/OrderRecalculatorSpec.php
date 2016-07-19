@@ -26,7 +26,7 @@ use Sylius\Component\Promotion\Processor\PromotionProcessorInterface;
  *
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class OrderRecalculatorSpec extends ObjectBehavior
+final class OrderRecalculatorSpec extends ObjectBehavior
 {
     function let(
         AdjustmentsRemoverInterface $adjustmentsRemover,

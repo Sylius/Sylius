@@ -18,7 +18,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-class PaymentGatewayChoiceTypeSpec extends ObjectBehavior
+final class PaymentGatewayChoiceTypeSpec extends ObjectBehavior
 {
     function let()
     {

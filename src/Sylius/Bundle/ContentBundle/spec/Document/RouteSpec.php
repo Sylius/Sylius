@@ -18,7 +18,7 @@ use Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\Route;
 /**
  * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
  */
-class RouteSpec extends ObjectBehavior
+final class RouteSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

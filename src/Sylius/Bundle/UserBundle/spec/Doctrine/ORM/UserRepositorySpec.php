@@ -23,7 +23,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
-class UserRepositorySpec extends ObjectBehavior
+final class UserRepositorySpec extends ObjectBehavior
 {
     public function let(EntityManager $em, ClassMetadata $classMetadata)
     {

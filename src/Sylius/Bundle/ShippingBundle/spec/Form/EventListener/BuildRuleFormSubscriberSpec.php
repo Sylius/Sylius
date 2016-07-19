@@ -21,7 +21,7 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 
-class BuildRuleFormSubscriberSpec extends ObjectBehavior
+final class BuildRuleFormSubscriberSpec extends ObjectBehavior
 {
     function let(ServiceRegistryInterface $checkerRegistry, FormFactoryInterface $factory)
     {

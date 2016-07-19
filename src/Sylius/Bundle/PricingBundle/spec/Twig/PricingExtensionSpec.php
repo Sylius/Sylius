@@ -17,7 +17,7 @@ use Sylius\Bundle\PricingBundle\Templating\Helper\PricingHelper;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class PricingExtensionSpec extends ObjectBehavior
+final class PricingExtensionSpec extends ObjectBehavior
 {
     function let(PricingHelper $helper)
     {

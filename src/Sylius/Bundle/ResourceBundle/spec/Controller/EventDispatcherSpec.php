@@ -27,7 +27,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class EventDispatcherSpec extends ObjectBehavior
+final class EventDispatcherSpec extends ObjectBehavior
 {
     function let(EventDispatcherInterface $eventDispatcher)
     {

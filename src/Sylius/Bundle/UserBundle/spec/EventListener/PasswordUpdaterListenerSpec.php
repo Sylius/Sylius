@@ -21,7 +21,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class PasswordUpdaterListenerSpec extends ObjectBehavior
+final class PasswordUpdaterListenerSpec extends ObjectBehavior
 {
     function let(PasswordUpdaterInterface $passwordUpdater)
     {

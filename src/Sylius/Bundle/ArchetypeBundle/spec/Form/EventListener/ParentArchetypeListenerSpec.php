@@ -21,7 +21,7 @@ use Symfony\Component\Form\FormEvents;
 /**
  * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
  */
-class ParentArchetypeListenerSpec extends ObjectBehavior
+final class ParentArchetypeListenerSpec extends ObjectBehavior
 {
     function let()
     {

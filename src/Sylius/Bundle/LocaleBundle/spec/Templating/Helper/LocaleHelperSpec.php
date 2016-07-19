@@ -19,10 +19,10 @@ use Symfony\Component\Templating\Helper\Helper;
 
 /**
  * @mixin LocaleHelper
- * 
+ *
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-class LocaleHelperSpec extends ObjectBehavior
+final class LocaleHelperSpec extends ObjectBehavior
 {
     function let(LocaleContextInterface $localeContext)
     {

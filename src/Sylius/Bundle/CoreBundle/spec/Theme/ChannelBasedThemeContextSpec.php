@@ -26,7 +26,7 @@ use Sylius\Component\Core\Model\ChannelInterface;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ChannelBasedThemeContextSpec extends ObjectBehavior
+final class ChannelBasedThemeContextSpec extends ObjectBehavior
 {
     function let(ChannelContextInterface $channelContext, ThemeRepositoryInterface $themeRepository)
     {

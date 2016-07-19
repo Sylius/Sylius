@@ -19,7 +19,7 @@ use Sylius\Component\Metadata\Model\Twitter\CardInterface;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class PageMetadataSpec extends ObjectBehavior
+final class PageMetadataSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

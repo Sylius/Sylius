@@ -21,7 +21,7 @@ use Sylius\Component\Metadata\Model\MetadataInterface;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class MetadataContainerSpec extends ObjectBehavior
+final class MetadataContainerSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

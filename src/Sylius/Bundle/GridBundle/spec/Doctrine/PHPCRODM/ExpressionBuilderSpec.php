@@ -18,7 +18,7 @@ use Sylius\Bundle\GridBundle\Doctrine\PHPCRODM\ExpressionBuilder;
 use Doctrine\Common\Collections\Expr\Comparison;
 use Sylius\Bundle\GridBundle\Doctrine\PHPCRODM\ExtraComparison;
 
-class ExpressionBuilderSpec extends ObjectBehavior
+final class ExpressionBuilderSpec extends ObjectBehavior
 {
     function let(CollectionsExpressionBuilder $expressionBuilder)
     {

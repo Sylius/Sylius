@@ -18,7 +18,7 @@ use Sylius\Component\Order\Model\AdjustmentInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class AdjustmentsByLabelAggregatorSpec extends ObjectBehavior
+final class AdjustmentsByLabelAggregatorSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

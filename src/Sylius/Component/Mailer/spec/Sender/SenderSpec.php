@@ -23,7 +23,7 @@ use Sylius\Component\Mailer\Sender\Adapter\AdapterInterface as SenderAdapterInte
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SenderSpec extends ObjectBehavior
+final class SenderSpec extends ObjectBehavior
 {
     function let(
         RendererAdapterInterface $rendererAdapter,

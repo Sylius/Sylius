@@ -20,7 +20,7 @@ use Sylius\Component\Attribute\Model\AttributeValueInterface;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class AttributeValueSpec extends ObjectBehavior
+final class AttributeValueSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

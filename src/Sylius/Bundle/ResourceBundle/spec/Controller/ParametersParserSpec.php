@@ -20,13 +20,13 @@ use Symfony\Component\HttpFoundation\Request;
  * @author Arnaud Langade <arn0d.dev@gmail.com>
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ParametersParserSpec extends ObjectBehavior
+final class ParametersParserSpec extends ObjectBehavior
 {
     function let(ExpressionLanguage $expression)
     {
         $this->beConstructedWith($expression);
     }
-    
+
     function it_implements_parameters_parser_interface()
     {
         $this->shouldImplement(ParametersParserInterface::class);

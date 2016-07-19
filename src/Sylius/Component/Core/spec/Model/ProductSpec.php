@@ -27,7 +27,7 @@ use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class ProductSpec extends ObjectBehavior
+final class ProductSpec extends ObjectBehavior
 {
     function let(VariantInterface $variant)
     {

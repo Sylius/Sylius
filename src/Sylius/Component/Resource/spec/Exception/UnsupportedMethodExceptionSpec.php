@@ -16,7 +16,7 @@ use PhpSpec\ObjectBehavior;
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class UnsupportedMethodExceptionSpec extends ObjectBehavior
+final class UnsupportedMethodExceptionSpec extends ObjectBehavior
 {
     function let()
     {

@@ -21,7 +21,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class CartItemTypeSpec extends ObjectBehavior
+final class CartItemTypeSpec extends ObjectBehavior
 {
     function let(DataMapperInterface $orderItemQuantityDataMapper)
     {

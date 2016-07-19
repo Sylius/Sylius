@@ -21,7 +21,7 @@ use Symfony\Component\Form\FormEvent;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class AddUserFormSubscriberSpec extends ObjectBehavior
+final class AddUserFormSubscriberSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

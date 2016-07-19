@@ -17,7 +17,7 @@ use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class TaxCategorySpec extends ObjectBehavior
+final class TaxCategorySpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

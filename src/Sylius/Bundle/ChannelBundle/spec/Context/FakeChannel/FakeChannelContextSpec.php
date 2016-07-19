@@ -26,7 +26,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class FakeChannelContextSpec extends ObjectBehavior
+final class FakeChannelContextSpec extends ObjectBehavior
 {
     function let(
         FakeChannelCodeProviderInterface $fakeChannelCodeProvider,

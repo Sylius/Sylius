@@ -20,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class OrderTypeSpec extends ObjectBehavior
+final class OrderTypeSpec extends ObjectBehavior
 {
     function let()
     {

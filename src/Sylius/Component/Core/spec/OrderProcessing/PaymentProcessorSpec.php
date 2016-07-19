@@ -21,7 +21,7 @@ use Sylius\Component\Payment\Model\PaymentMethodInterface;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class PaymentProcessorSpec extends ObjectBehavior
+final class PaymentProcessorSpec extends ObjectBehavior
 {
     function let(PaymentFactoryInterface $paymentFactory)
     {

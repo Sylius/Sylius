@@ -17,7 +17,7 @@ use Sylius\Component\Addressing\Provider\ProvinceNamingProviderInterface;
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class ProvinceNamingExtensionSpec extends ObjectBehavior
+final class ProvinceNamingExtensionSpec extends ObjectBehavior
 {
     function let(ProvinceNamingProviderInterface $provinceNamingProvider)
     {

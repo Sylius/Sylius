@@ -23,7 +23,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class UserAutoLoginListenerSpec extends ObjectBehavior
+final class UserAutoLoginListenerSpec extends ObjectBehavior
 {
     function let(UserLoginInterface $loginManager)
     {

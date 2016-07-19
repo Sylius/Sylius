@@ -22,7 +22,7 @@ use Prophecy\Argument;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class GridViewSpec extends ObjectBehavior
+final class GridViewSpec extends ObjectBehavior
 {
     function let(Grid $gridDefinition, Parameters $parameters)
     {

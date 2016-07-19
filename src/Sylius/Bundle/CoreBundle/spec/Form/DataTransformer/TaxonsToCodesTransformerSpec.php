@@ -23,7 +23,7 @@ use Symfony\Component\Form\DataTransformerInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class TaxonsToCodesTransformerSpec extends ObjectBehavior
+final class TaxonsToCodesTransformerSpec extends ObjectBehavior
 {
     function let(TaxonRepositoryInterface $taxonRepository)
     {
@@ -62,7 +62,7 @@ class TaxonsToCodesTransformerSpec extends ObjectBehavior
 
         $this->transform(['taxons' => ['bows', 'swords']])->shouldBeCollection($taxons);
     }
-    
+
     function it_transforms_empty_array_into_empty_collection()
     {
         $this->transform([])->shouldBeCollection(new ArrayCollection([]));

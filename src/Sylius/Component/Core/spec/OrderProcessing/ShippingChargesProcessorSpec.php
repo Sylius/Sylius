@@ -26,7 +26,7 @@ use Sylius\Component\Shipping\Model\ShippingMethodInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ShippingChargesProcessorSpec extends ObjectBehavior
+final class ShippingChargesProcessorSpec extends ObjectBehavior
 {
     function let(FactoryInterface $adjustmentFactory, DelegatingCalculatorInterface $calculator)
     {

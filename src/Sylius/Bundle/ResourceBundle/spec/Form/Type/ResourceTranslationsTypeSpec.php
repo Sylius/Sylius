@@ -22,7 +22,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class ResourceTranslationsTypeSpec extends ObjectBehavior
+final class ResourceTranslationsTypeSpec extends ObjectBehavior
 {
     function let(LocaleProviderInterface $localeProvider, AvailableLocalesProviderInterface $availableLocalesProvider)
     {

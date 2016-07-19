@@ -28,7 +28,7 @@ use Sylius\Component\User\Context\CustomerContextInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ShopperContextSpec extends ObjectBehavior
+final class ShopperContextSpec extends ObjectBehavior
 {
     function let(
         ChannelContextInterface $channelContext,

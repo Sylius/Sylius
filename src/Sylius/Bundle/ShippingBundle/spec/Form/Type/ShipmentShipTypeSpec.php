@@ -22,7 +22,7 @@ use Symfony\Component\Form\FormBuilderInterface;
  *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class ShipmentShipTypeSpec extends ObjectBehavior
+final class ShipmentShipTypeSpec extends ObjectBehavior
 {
     function let()
     {

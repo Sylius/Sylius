@@ -28,7 +28,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  * @author Joseph Bielawski <stloyd@gmail.com>
  * @author Fran Moreno <franmomu@gmail.com>
  */
-class CartSubscriberSpec extends ObjectBehavior
+final class CartSubscriberSpec extends ObjectBehavior
 {
     function let(ObjectManager $manager, ValidatorInterface $validator, CartProviderInterface $provider, OrderItemQuantityModifierInterface $orderItemQuantityModifier)
     {

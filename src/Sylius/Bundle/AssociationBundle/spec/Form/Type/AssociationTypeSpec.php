@@ -20,7 +20,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class AssociationTypeSpec extends ObjectBehavior
+final class AssociationTypeSpec extends ObjectBehavior
 {
     function let()
     {

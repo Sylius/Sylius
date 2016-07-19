@@ -24,7 +24,7 @@ use Sylius\Behat\Service\NotificationCheckerInterface;
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class NotificationCheckerSpec extends ObjectBehavior
+final class NotificationCheckerSpec extends ObjectBehavior
 {
     function let(NotificationAccessorInterface $notificationAccessor)
     {

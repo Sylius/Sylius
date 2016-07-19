@@ -20,7 +20,7 @@ use Sylius\Component\Report\Model\ReportInterface;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class DelegatingDataFetcherSpec extends ObjectBehavior
+final class DelegatingDataFetcherSpec extends ObjectBehavior
 {
     public function let(ServiceRegistryInterface $serviceRegistryInterface)
     {

@@ -25,7 +25,7 @@ use Symfony\Component\Form\FormInterface;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class ResourceTranslationsSubscriberSpec extends ObjectBehavior
+final class ResourceTranslationsSubscriberSpec extends ObjectBehavior
 {
     function let()
     {

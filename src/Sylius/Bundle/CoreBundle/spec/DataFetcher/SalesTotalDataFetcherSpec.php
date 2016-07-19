@@ -22,7 +22,7 @@ use Sylius\Component\Report\DataFetcher\DefaultDataFetchers;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class SalesTotalDataFetcherSpec extends ObjectBehavior
+final class SalesTotalDataFetcherSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {

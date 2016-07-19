@@ -21,7 +21,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class ShippingCountryRuleCheckerSpec extends ObjectBehavior
+final class ShippingCountryRuleCheckerSpec extends ObjectBehavior
 {
     function let(RepositoryInterface $countryRepository)
     {

@@ -20,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Arnaud Langlade <arn0d.dev@gamil.com>
  */
-class VolumeRateConfigurationTypeSpec extends ObjectBehavior
+final class VolumeRateConfigurationTypeSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

@@ -18,7 +18,7 @@ use PhpSpec\ObjectBehavior;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ArchetypeSpec extends ObjectBehavior
+final class ArchetypeSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

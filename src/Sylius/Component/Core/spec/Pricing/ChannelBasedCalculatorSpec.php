@@ -20,7 +20,7 @@ use Sylius\Component\Pricing\Model\PriceableInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ChannelBasedCalculatorSpec extends ObjectBehavior
+final class ChannelBasedCalculatorSpec extends ObjectBehavior
 {
     function let(ChannelContextInterface $channelContext)
     {

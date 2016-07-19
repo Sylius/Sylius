@@ -15,7 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonType;
 use Symfony\Component\Form\FormTypeInterface;
 
-class TaxonTypeSpec extends ObjectBehavior
+final class TaxonTypeSpec extends ObjectBehavior
 {
     function let()
     {

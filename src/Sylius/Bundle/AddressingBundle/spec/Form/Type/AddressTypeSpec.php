@@ -20,7 +20,7 @@ use Symfony\Component\Form\FormTypeInterface;
 /**
  * @author Julien Janvier <j.janvier@gmail.com>
  */
-class AddressTypeSpec extends ObjectBehavior
+final class AddressTypeSpec extends ObjectBehavior
 {
     function let(EventSubscriberInterface $eventListener)
     {

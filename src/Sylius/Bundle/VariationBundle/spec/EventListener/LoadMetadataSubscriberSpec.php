@@ -20,7 +20,7 @@ use Prophecy\Argument;
 /**
  * @author Adam Elsodaney <adam.elso@gmail.com>
  */
-class LoadMetadataSubscriberSpec extends ObjectBehavior
+final class LoadMetadataSubscriberSpec extends ObjectBehavior
 {
     function let()
     {

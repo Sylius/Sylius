@@ -23,7 +23,7 @@ use Sylius\Component\Core\Remover\AdjustmentsRemoverInterface;
  *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class AdjustmentsRemoverSpec extends ObjectBehavior
+final class AdjustmentsRemoverSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

@@ -22,7 +22,7 @@ use Symfony\Component\DependencyInjection\Parameter;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class RegisterChannelFactoryPassSpec extends ObjectBehavior
+final class RegisterChannelFactoryPassSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

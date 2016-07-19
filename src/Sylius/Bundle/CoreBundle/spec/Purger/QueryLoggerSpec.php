@@ -20,7 +20,7 @@ use Sylius\Bundle\CoreBundle\Purger\QueryLoggerInterface;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class QueryLoggerSpec extends ObjectBehavior
+final class QueryLoggerSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

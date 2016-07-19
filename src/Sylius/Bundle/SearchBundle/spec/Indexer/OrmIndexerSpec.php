@@ -18,7 +18,7 @@ use Sylius\Bundle\SearchBundle\Indexer\IndexerInterface;
 /**
  * @author Argyrios Gounaris <agounaris@gmail.com>
  */
-class OrmIndexerSpec extends ObjectBehavior
+final class OrmIndexerSpec extends ObjectBehavior
 {
     function let(
         $config,

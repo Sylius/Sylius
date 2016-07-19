@@ -17,7 +17,7 @@ use Sylius\Component\Variation\Model\OptionInterface;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class OptionValueChoiceTypeSpec extends ObjectBehavior
+final class OptionValueChoiceTypeSpec extends ObjectBehavior
 {
     function let()
     {

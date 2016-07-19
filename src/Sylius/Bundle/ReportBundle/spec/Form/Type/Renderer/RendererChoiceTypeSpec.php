@@ -18,7 +18,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class RendererChoiceTypeSpec extends ObjectBehavior
+final class RendererChoiceTypeSpec extends ObjectBehavior
 {
     function let()
     {

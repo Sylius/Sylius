@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
- 
+
 namespace spec\Sylius\Bundle\CoreBundle\Sitemap\Factory;
- 
+
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Sitemap\Factory\SitemapFactoryInterface;
 use Sylius\Bundle\CoreBundle\Sitemap\Model\SitemapInterface;
@@ -18,7 +18,7 @@ use Sylius\Bundle\CoreBundle\Sitemap\Model\SitemapInterface;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class SitemapFactorySpec extends ObjectBehavior
+final class SitemapFactorySpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

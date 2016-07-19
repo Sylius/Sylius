@@ -25,7 +25,7 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
  * @author Joseph Bielawski <stloyd@gmail.com>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class TaxonRuleCheckerSpec extends ObjectBehavior
+final class TaxonRuleCheckerSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

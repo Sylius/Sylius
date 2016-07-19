@@ -23,13 +23,13 @@ use Symfony\Component\Form\FormInterface;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class SetCustomerFormSubscriberSpec extends ObjectBehavior
+final class SetCustomerFormSubscriberSpec extends ObjectBehavior
 {
     function let(RepositoryInterface $customerRepository)
     {
         $this->beConstructedWith($customerRepository);
     }
-    
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\UserBundle\Form\EventSubscriber\SetCustomerFormSubscriber');
@@ -46,14 +46,14 @@ class SetCustomerFormSubscriberSpec extends ObjectBehavior
     }
 
     function it_adds_customer_from_database(
-        FormEvent $event, 
-        RepositoryInterface $customerRepository, 
+        FormEvent $event,
+        RepositoryInterface $customerRepository,
         CustomerInterface $customer, FormInterface $form
     ) {
         $event->getData()->willReturn(['email' => 'imno@example.com']);
         $customerRepository->findOneBy(['email' => 'imno@example.com'])->willReturn($customer);
         $customer->getUser()->willReturn(null);
-        
+
         $event->getForm()->willReturn($form);
 
         $form->setData($customer)->shouldBeCalled();
@@ -62,13 +62,13 @@ class SetCustomerFormSubscriberSpec extends ObjectBehavior
     }
 
     function it_does_not_add_customer_if_they_not_exist(
-        FormEvent $event, 
-        RepositoryInterface $customerRepository, 
+        FormEvent $event,
+        RepositoryInterface $customerRepository,
         FormInterface $form
     ) {
         $event->getData()->willReturn(['email' => 'imno@example.com']);
         $customerRepository->findOneBy(['email' => 'imno@example.com'])->willReturn(null);
-        
+
         $form->setData(null)->shouldNotBeCalled();
 
         $this->preSubmit($event);

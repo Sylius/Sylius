@@ -19,7 +19,7 @@ use Symfony\Component\Validator\Constraint;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class EnabledSpec extends ObjectBehavior
+final class EnabledSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

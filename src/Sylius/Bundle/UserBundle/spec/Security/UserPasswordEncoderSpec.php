@@ -20,7 +20,7 @@ use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class UserPasswordEncoderSpec extends ObjectBehavior
+final class UserPasswordEncoderSpec extends ObjectBehavior
 {
     function let(EncoderFactoryInterface $encoderFactory)
     {

@@ -18,7 +18,7 @@ use Sylius\Component\Product\Model\AttributeInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class AttributeSpec extends ObjectBehavior
+final class AttributeSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

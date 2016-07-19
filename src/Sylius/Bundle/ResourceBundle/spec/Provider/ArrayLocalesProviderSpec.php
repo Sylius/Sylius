@@ -16,7 +16,7 @@ use PhpSpec\ObjectBehavior;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class ArrayLocalesProviderSpec extends ObjectBehavior
+final class ArrayLocalesProviderSpec extends ObjectBehavior
 {
     function let()
     {

@@ -17,7 +17,7 @@ use Sylius\Component\User\Model\UserOAuthInterface;
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class UserOAuthSpec extends ObjectBehavior
+final class UserOAuthSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

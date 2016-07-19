@@ -16,7 +16,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Model\Shipment;
 
-class ShipmentSpec extends ObjectBehavior
+final class ShipmentSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

@@ -24,7 +24,7 @@ use Sylius\Component\Variation\Model\VariantInterface;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
  */
-class ProductFactorySpec extends ObjectBehavior
+final class ProductFactorySpec extends ObjectBehavior
 {
     function let(
         FactoryInterface $factory,

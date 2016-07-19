@@ -19,7 +19,7 @@ use Sylius\Component\Rbac\Model\RoleInterface;
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class UserSpec extends ObjectBehavior
+final class UserSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

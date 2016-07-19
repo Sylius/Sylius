@@ -18,7 +18,7 @@ use Sylius\Component\Contact\Model\TopicInterface;
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
-class TopicSpec extends ObjectBehavior
+final class TopicSpec extends ObjectBehavior
 {
     public function let()
     {

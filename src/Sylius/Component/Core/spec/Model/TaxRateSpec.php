@@ -19,7 +19,7 @@ use Sylius\Component\Taxation\Model\TaxRate;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class TaxRateSpec extends ObjectBehavior
+final class TaxRateSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

@@ -27,7 +27,7 @@ use Sylius\Component\Shipping\Model\ShipmentUnitInterface;
  *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class OrderItemUnitSpec extends ObjectBehavior
+final class OrderItemUnitSpec extends ObjectBehavior
 {
     function let(OrderItemInterface $orderItem)
     {

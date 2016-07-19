@@ -19,7 +19,7 @@ use Sylius\Component\Shipping\Model\ShippableInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ShipmentUnitSpec extends ObjectBehavior
+final class ShipmentUnitSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

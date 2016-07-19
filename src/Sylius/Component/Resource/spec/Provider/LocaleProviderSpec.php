@@ -17,7 +17,7 @@ use Sylius\Component\Resource\Provider\LocaleProviderInterface;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class LocaleProviderSpec extends  ObjectBehavior
+final class LocaleProviderSpec extends  ObjectBehavior
 {
     function let()
     {

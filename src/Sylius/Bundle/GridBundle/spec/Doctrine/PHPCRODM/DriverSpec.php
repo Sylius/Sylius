@@ -23,7 +23,7 @@ use Sylius\Bundle\GridBundle\Doctrine\PHPCRODM\DataSource;
 /**
  * @mixin Driver
  */
-class DriverSpec extends ObjectBehavior
+final class DriverSpec extends ObjectBehavior
 {
     function let(DocumentManagerInterface $documentManager)
     {
@@ -56,7 +56,7 @@ class DriverSpec extends ObjectBehavior
     ) {
         $documentManager->getRepository('App:Book')->willReturn($documentRepository);
         $documentRepository->createQueryBuilder('o')->willReturn($queryBuilder);
-        
+
         $this->getDataSource(['class' => 'App:Book'], $parameters)->shouldHaveType(DataSource::class);
     }
 }

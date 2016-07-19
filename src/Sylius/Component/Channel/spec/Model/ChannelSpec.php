@@ -14,7 +14,7 @@ namespace spec\Sylius\Component\Channel\Model;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Channel\Model\ChannelInterface;
 
-class ChannelSpec extends ObjectBehavior
+final class ChannelSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

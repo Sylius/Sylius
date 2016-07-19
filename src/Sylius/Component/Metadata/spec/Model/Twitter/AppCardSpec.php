@@ -20,7 +20,7 @@ use Sylius\Component\Metadata\Model\Twitter\AppCard;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class AppCardSpec extends ObjectBehavior
+final class AppCardSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

@@ -25,7 +25,7 @@ use Symfony\Component\Templating\TemplateReferenceInterface;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class CachedTemplateLocatorSpec extends ObjectBehavior
+final class CachedTemplateLocatorSpec extends ObjectBehavior
 {
     function let(TemplateLocatorInterface $decoratedTemplateLocator, Cache $cache)
     {

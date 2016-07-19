@@ -18,7 +18,7 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class ItemTotalRuleCheckerSpec extends ObjectBehavior
+final class ItemTotalRuleCheckerSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

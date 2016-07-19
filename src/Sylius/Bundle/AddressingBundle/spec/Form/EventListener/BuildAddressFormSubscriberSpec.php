@@ -26,7 +26,7 @@ use Symfony\Component\Form\FormInterface;
 /**
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-class BuildAddressFormSubscriberSpec extends ObjectBehavior
+final class BuildAddressFormSubscriberSpec extends ObjectBehavior
 {
     function let(ObjectRepository $countryRepository, FormFactoryInterface $formFactory)
     {

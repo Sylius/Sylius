@@ -21,7 +21,7 @@ use Sylius\Component\Storage\StorageInterface;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class LocaleContextSpec extends ObjectBehavior
+final class LocaleContextSpec extends ObjectBehavior
 {
     function let(StorageInterface $storage)
     {

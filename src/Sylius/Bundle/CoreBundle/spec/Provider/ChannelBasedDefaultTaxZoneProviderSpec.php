@@ -21,7 +21,7 @@ use Sylius\Component\Core\Provider\ZoneProviderInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ChannelBasedDefaultTaxZoneProviderSpec extends ObjectBehavior
+final class ChannelBasedDefaultTaxZoneProviderSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

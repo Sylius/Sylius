@@ -24,10 +24,10 @@ use Symfony\Component\Form\FormInterface;
 
 /**
  * @mixin AddCustomerGuestTypeFormSubscriber
- * 
+ *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class AddCustomerGuestTypeFormSubscriberSpec extends ObjectBehavior
+final class AddCustomerGuestTypeFormSubscriberSpec extends ObjectBehavior
 {
     function let()
     {

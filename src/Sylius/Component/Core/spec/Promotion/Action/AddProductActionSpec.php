@@ -25,7 +25,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class AddProductActionSpec extends ObjectBehavior
+final class AddProductActionSpec extends ObjectBehavior
 {
     function let(FactoryInterface $itemFactory, RepositoryInterface $variantRepository, OrderItemQuantityModifierInterface $orderItemQuantityModifier)
     {

@@ -20,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Arnaud Langlade <arn0d.dev@gamil.com>
  */
-class PerUnitRateConfigurationTypeSpec extends ObjectBehavior
+final class PerUnitRateConfigurationTypeSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

@@ -20,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class ProvinceCodeChoiceTypeSpec extends ObjectBehavior
+final class ProvinceCodeChoiceTypeSpec extends ObjectBehavior
 {
     function let(RepositoryInterface $repository)
     {

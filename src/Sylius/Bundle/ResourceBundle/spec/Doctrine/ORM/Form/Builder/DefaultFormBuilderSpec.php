@@ -26,7 +26,7 @@ use Symfony\Component\Form\FormBuilderInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class DefaultFormBuilderSpec extends ObjectBehavior
+final class DefaultFormBuilderSpec extends ObjectBehavior
 {
     function let(EntityManagerInterface $entityManager)
     {

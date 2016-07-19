@@ -22,7 +22,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 /**
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-class ShippableAddressConstraintValidatorSpec extends ObjectBehavior
+final class ShippableAddressConstraintValidatorSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

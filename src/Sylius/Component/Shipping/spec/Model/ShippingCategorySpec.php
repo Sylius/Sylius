@@ -17,7 +17,7 @@ use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ShippingCategorySpec extends ObjectBehavior
+final class ShippingCategorySpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

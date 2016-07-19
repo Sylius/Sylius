@@ -18,7 +18,7 @@ use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\SimpleBlock;
 /**
  * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
  */
-class SimpleBlockSpec extends ObjectBehavior
+final class SimpleBlockSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

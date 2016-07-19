@@ -14,7 +14,7 @@ namespace spec\Sylius\Bundle\CoreBundle\Form\Type;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\Form\FormTypeInterface;
 
-class ListTypeSpec extends ObjectBehavior
+final class ListTypeSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

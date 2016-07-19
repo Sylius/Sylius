@@ -17,7 +17,7 @@ use Sylius\Component\Currency\Converter\CurrencyNameConverterInterface;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class CurrencyNameConverterSpec extends ObjectBehavior
+final class CurrencyNameConverterSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

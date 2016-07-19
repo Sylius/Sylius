@@ -17,7 +17,7 @@ use Sylius\Bundle\InventoryBundle\Templating\Helper\InventoryHelper;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class InventoryExtensionSpec extends ObjectBehavior
+final class InventoryExtensionSpec extends ObjectBehavior
 {
     function let(InventoryHelper $helper)
     {

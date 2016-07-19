@@ -22,7 +22,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class PaymentMethodTypeSpec extends ObjectBehavior
+final class PaymentMethodTypeSpec extends ObjectBehavior
 {
     function let()
     {

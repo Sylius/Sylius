@@ -21,7 +21,7 @@ use Twig_Environment;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class TwigMetadataProcessorSpec extends ObjectBehavior
+final class TwigMetadataProcessorSpec extends ObjectBehavior
 {
     function let(Twig_Environment $twig)
     {

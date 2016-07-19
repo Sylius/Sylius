@@ -15,7 +15,7 @@ use Doctrine\Common\Cache\Cache;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Storage\StorageInterface;
 
-class DoctrineCacheStorageSpec extends ObjectBehavior
+final class DoctrineCacheStorageSpec extends ObjectBehavior
 {
     function let(Cache $cache)
     {

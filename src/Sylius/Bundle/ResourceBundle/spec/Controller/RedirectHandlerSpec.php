@@ -29,7 +29,7 @@ use Symfony\Component\Routing\RouterInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class RedirectHandlerSpec extends ObjectBehavior
+final class RedirectHandlerSpec extends ObjectBehavior
 {
     function let(RouterInterface $router, RouteCollection $routes)
     {

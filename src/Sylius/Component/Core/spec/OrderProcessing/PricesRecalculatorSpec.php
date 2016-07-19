@@ -28,7 +28,7 @@ use Sylius\Component\User\Model\GroupableInterface;
  *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class PricesRecalculatorSpec extends ObjectBehavior
+final class PricesRecalculatorSpec extends ObjectBehavior
 {
     function let(DelegatingCalculatorInterface $priceCalculator)
     {

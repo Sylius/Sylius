@@ -22,7 +22,7 @@ use Sylius\Component\User\Security\Checker\UniquenessCheckerInterface;
  *
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class TokenUniquenessCheckerSpec extends ObjectBehavior
+final class TokenUniquenessCheckerSpec extends ObjectBehavior
 {
     function let(RepositoryInterface $repository)
     {

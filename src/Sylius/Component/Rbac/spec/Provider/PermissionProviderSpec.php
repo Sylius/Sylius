@@ -20,7 +20,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class PermissionProviderSpec extends ObjectBehavior
+final class PermissionProviderSpec extends ObjectBehavior
 {
     function let(RepositoryInterface $permissionRepository)
     {

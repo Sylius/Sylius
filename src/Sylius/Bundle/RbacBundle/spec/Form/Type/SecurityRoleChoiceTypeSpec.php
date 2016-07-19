@@ -18,7 +18,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-class SecurityRoleChoiceTypeSpec extends ObjectBehavior
+final class SecurityRoleChoiceTypeSpec extends ObjectBehavior
 {
     function let()
     {

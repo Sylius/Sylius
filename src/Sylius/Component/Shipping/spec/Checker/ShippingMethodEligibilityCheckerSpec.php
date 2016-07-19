@@ -24,7 +24,7 @@ use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class ShippingMethodEligibilityCheckerSpec extends ObjectBehavior
+final class ShippingMethodEligibilityCheckerSpec extends ObjectBehavior
 {
     function let(ServiceRegistryInterface $registry)
     {

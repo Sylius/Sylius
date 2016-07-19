@@ -17,7 +17,7 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
 /**
  * @author agounaris <agounaris@gmail.com>
  */
-class TaxonQuerySpec extends ObjectBehavior
+final class TaxonQuerySpec extends ObjectBehavior
 {
     function let(TaxonInterface $taxon)
     {

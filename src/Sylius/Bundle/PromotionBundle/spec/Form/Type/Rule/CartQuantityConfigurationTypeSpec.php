@@ -19,7 +19,7 @@ use Symfony\Component\Form\FormBuilder;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class CartQuantityConfigurationTypeSpec extends ObjectBehavior
+final class CartQuantityConfigurationTypeSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

@@ -26,7 +26,7 @@ require_once __DIR__.'/../Fixtures/SampleResourceInterface.php';
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class InMemoryRepositorySpec extends ObjectBehavior
+final class InMemoryRepositorySpec extends ObjectBehavior
 {
     function let()
     {

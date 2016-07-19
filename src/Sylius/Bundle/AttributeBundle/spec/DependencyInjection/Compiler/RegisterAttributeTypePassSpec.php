@@ -20,7 +20,7 @@ use Symfony\Component\DependencyInjection\Reference;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class RegisterAttributeTypePassSpec extends ObjectBehavior
+final class RegisterAttributeTypePassSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

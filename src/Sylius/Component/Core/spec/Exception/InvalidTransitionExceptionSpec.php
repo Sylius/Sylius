@@ -18,13 +18,13 @@ use SM\StateMachine\StateMachineInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class InvalidTransitionExceptionSpec extends ObjectBehavior
+final class InvalidTransitionExceptionSpec extends ObjectBehavior
 {
     function let(StateMachineInterface $stateMachine)
     {
         $stateMachine->getGraph()->willReturn('checkout_state_machine');
         $stateMachine->getPossibleTransitions()->willReturn(['start', 'abandon']);
-        
+
         $this->beConstructedWith('start_checkout', $stateMachine);
     }
 

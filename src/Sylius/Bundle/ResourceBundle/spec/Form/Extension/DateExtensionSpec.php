@@ -18,7 +18,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class DateExtensionSpec extends ObjectBehavior
+final class DateExtensionSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

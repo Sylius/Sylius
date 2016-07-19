@@ -18,7 +18,7 @@ use Symfony\Component\Form\AbstractType;
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class CountryChoiceTypeSpec extends ObjectBehavior
+final class CountryChoiceTypeSpec extends ObjectBehavior
 {
     function let(RepositoryInterface $repository)
     {

@@ -23,7 +23,7 @@ use Sylius\Component\Shipping\Resolver\MethodsResolverInterface;
  *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class CompositeMethodsResolverSpec extends ObjectBehavior
+final class CompositeMethodsResolverSpec extends ObjectBehavior
 {
     function let(PrioritizedServiceRegistryInterface $resolversRegistry)
     {

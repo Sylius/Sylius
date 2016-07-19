@@ -22,7 +22,7 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class PromotionApplicatorSpec extends ObjectBehavior
+final class PromotionApplicatorSpec extends ObjectBehavior
 {
     function let(ServiceRegistryInterface $registry)
     {

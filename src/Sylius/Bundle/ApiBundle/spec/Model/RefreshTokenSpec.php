@@ -14,7 +14,7 @@ namespace spec\Sylius\Bundle\ApiBundle\Model;
 use FOS\OAuthServerBundle\Entity\RefreshToken;
 use PhpSpec\ObjectBehavior;
 
-class RefreshTokenSpec extends ObjectBehavior
+final class RefreshTokenSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

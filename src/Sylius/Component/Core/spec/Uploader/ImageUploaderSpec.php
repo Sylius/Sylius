@@ -18,7 +18,7 @@ use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Symfony\Component\HttpFoundation\File\File;
 
-class ImageUploaderSpec extends ObjectBehavior
+final class ImageUploaderSpec extends ObjectBehavior
 {
     function let(Filesystem $filesystem, ImageInterface $image)
     {

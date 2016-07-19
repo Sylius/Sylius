@@ -26,7 +26,7 @@ use Symfony\Component\Translation\TranslatorInterface;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ThemeAwareTranslatorSpec extends ObjectBehavior
+final class ThemeAwareTranslatorSpec extends ObjectBehavior
 {
     function let(TranslatorInterface $translator, ThemeContextInterface $themeContext) {
         $translator->implement(TranslatorBagInterface::class);

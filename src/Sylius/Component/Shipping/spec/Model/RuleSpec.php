@@ -18,7 +18,7 @@ use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class RuleSpec extends ObjectBehavior
+final class RuleSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

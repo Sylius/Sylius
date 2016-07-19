@@ -23,7 +23,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class OrderSpec extends ObjectBehavior
+final class OrderSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

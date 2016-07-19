@@ -21,7 +21,7 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 
-class BuildVariantFormSubscriberSpec extends ObjectBehavior
+final class BuildVariantFormSubscriberSpec extends ObjectBehavior
 {
     function let(FormFactoryInterface $factory)
     {

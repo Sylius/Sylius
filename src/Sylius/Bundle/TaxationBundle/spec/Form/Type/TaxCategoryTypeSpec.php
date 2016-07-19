@@ -21,7 +21,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Julien Janvier <j.janvier@gmail.com>
  */
-class TaxCategoryTypeSpec extends ObjectBehavior
+final class TaxCategoryTypeSpec extends ObjectBehavior
 {
     function let()
     {

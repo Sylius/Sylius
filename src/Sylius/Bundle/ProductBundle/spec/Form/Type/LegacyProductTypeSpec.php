@@ -22,7 +22,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class LegacyProductTypeSpec extends ObjectBehavior
+final class LegacyProductTypeSpec extends ObjectBehavior
 {
     function let()
     {

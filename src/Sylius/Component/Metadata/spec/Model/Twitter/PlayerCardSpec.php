@@ -20,7 +20,7 @@ use Sylius\Component\Metadata\Model\Twitter\PlayerCard;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class PlayerCardSpec extends ObjectBehavior
+final class PlayerCardSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

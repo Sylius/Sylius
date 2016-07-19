@@ -22,7 +22,7 @@ use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class DelegatingCalculatorSpec extends ObjectBehavior
+final class DelegatingCalculatorSpec extends ObjectBehavior
 {
     function let(ServiceRegistryInterface $registry)
     {

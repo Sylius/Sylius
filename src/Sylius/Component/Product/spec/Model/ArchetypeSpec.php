@@ -19,7 +19,7 @@ use Sylius\Component\Product\Model\AttributeInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ArchetypeSpec extends ObjectBehavior
+final class ArchetypeSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

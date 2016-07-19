@@ -21,7 +21,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class TestPromotionFactorySpec extends ObjectBehavior
+final class TestPromotionFactorySpec extends ObjectBehavior
 {
     function let(FactoryInterface $promotionFactory)
     {

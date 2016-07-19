@@ -19,7 +19,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class VariantChoiceTypeSpec extends ObjectBehavior
+final class VariantChoiceTypeSpec extends ObjectBehavior
 {
     function let()
     {

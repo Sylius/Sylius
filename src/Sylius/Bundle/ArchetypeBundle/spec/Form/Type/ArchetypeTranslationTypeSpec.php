@@ -16,7 +16,7 @@ use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class ArchetypeTranslationTypeSpec extends ObjectBehavior
+final class ArchetypeTranslationTypeSpec extends ObjectBehavior
 {
     function let()
     {

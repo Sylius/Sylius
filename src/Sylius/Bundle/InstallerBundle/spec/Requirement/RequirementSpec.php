@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\InstallerBundle\Requirement;
 
 use PhpSpec\ObjectBehavior;
 
-class RequirementSpec extends ObjectBehavior
+final class RequirementSpec extends ObjectBehavior
 {
     function let()
     {

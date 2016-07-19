@@ -22,7 +22,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class EmailProviderSpec extends ObjectBehavior
+final class EmailProviderSpec extends ObjectBehavior
 {
     function let(FactoryInterface $factory, RepositoryInterface $repository)
     {

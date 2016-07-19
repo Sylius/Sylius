@@ -21,7 +21,7 @@ use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ProductVariantSpec extends ObjectBehavior
+final class ProductVariantSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
@@ -79,7 +79,7 @@ class ProductVariantSpec extends ObjectBehavior
     {
         $this->setPrice(410);
         $this->getPrice()->shouldBeInteger();
-        
+
         $this->shouldThrow('\InvalidArgumentException')->duringSetPrice(4.1 * 100);
         $this->shouldThrow('\InvalidArgumentException')->duringSetPrice('410');
         $this->shouldThrow('\InvalidArgumentException')->duringSetPrice(round(4.1 * 100));

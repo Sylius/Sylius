@@ -19,7 +19,7 @@ use Sylius\Component\Promotion\Model\RuleInterface;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class RuleSpec extends ObjectBehavior
+final class RuleSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

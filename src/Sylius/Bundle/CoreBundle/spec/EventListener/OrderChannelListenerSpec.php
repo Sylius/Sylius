@@ -21,7 +21,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 /**
  * @author Manuel Gonalez <mgonyan@gmail.com>
  */
-class OrderChannelListenerSpec extends ObjectBehavior
+final class OrderChannelListenerSpec extends ObjectBehavior
 {
     function let(ChannelContextInterface $channelContext)
     {

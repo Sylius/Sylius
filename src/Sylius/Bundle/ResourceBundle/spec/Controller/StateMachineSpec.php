@@ -25,7 +25,7 @@ use Sylius\Component\Resource\Model\ResourceInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class StateMachineSpec extends ObjectBehavior
+final class StateMachineSpec extends ObjectBehavior
 {
     function let(FactoryInterface $stateMachineFactory)
     {

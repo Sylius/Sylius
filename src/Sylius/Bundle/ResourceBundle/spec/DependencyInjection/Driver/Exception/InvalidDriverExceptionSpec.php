@@ -16,7 +16,7 @@ use PhpSpec\ObjectBehavior;
 /**
  * @author Arnaud Langlade <aRn0D.dev@gmail.com>
  */
-class InvalidDriverExceptionSpec extends ObjectBehavior
+final class InvalidDriverExceptionSpec extends ObjectBehavior
 {
     function let()
     {

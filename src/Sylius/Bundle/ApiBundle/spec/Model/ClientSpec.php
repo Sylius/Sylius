@@ -15,7 +15,7 @@ use FOS\OAuthServerBundle\Entity\Client;
 use FOS\OAuthServerBundle\Model\ClientInterface;
 use PhpSpec\ObjectBehavior;
 
-class ClientSpec extends ObjectBehavior
+final class ClientSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

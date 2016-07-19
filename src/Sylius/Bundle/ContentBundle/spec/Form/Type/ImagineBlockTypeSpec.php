@@ -19,7 +19,7 @@ use Symfony\Component\Form\Test\FormBuilderInterface;
 /**
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-class ImagineBlockTypeSpec extends ObjectBehavior
+final class ImagineBlockTypeSpec extends ObjectBehavior
 {
     function let(FilterConfiguration $filterConfiguration)
     {

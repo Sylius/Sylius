@@ -17,7 +17,7 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
-class RegisterCalculatorsPassSpec extends ObjectBehavior
+final class RegisterCalculatorsPassSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

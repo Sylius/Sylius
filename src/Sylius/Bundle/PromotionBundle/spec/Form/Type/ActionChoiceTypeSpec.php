@@ -18,7 +18,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class ActionChoiceTypeSpec extends ObjectBehavior
+final class ActionChoiceTypeSpec extends ObjectBehavior
 {
     function let()
     {

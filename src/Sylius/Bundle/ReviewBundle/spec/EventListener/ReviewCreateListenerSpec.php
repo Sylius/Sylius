@@ -21,7 +21,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ReviewCreateListenerSpec extends ObjectBehavior
+final class ReviewCreateListenerSpec extends ObjectBehavior
 {
     function let(CustomerContextInterface $customerContext)
     {

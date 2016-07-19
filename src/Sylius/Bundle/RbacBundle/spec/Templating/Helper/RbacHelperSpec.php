@@ -18,7 +18,7 @@ use Symfony\Component\Templating\Helper\Helper;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class RbacHelperSpec extends ObjectBehavior
+final class RbacHelperSpec extends ObjectBehavior
 {
     function let(AuthorizationCheckerInterface $authorizationChecker)
     {

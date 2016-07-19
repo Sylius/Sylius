@@ -32,7 +32,7 @@ use Zend\Hydrator\HydrationInterface;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ThemeLoaderSpec extends ObjectBehavior
+final class ThemeLoaderSpec extends ObjectBehavior
 {
     function let(
         ConfigurationProviderInterface $configurationProvider,

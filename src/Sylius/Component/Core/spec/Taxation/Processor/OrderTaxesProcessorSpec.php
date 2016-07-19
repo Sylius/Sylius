@@ -35,7 +35,7 @@ use Zend\Stdlib\PriorityQueue;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Mark McKelvie <mark.mckelvie@reiss.com>
  */
-class OrderTaxesProcessorSpec extends ObjectBehavior
+final class OrderTaxesProcessorSpec extends ObjectBehavior
 {
     function let(
         ZoneProviderInterface $defaultTaxZoneProvider,

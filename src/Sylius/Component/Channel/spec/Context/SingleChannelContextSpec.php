@@ -23,7 +23,7 @@ use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class SingleChannelContextSpec extends ObjectBehavior
+final class SingleChannelContextSpec extends ObjectBehavior
 {
     function let(ChannelRepositoryInterface $channelRepository)
     {

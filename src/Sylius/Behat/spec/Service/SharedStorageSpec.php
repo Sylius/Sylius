@@ -22,7 +22,7 @@ use Sylius\Behat\Service\SharedStorageInterface;
  *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class SharedStorageSpec extends ObjectBehavior
+final class SharedStorageSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

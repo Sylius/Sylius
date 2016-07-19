@@ -23,13 +23,13 @@ use Sylius\Component\Grid\Filtering\FilterInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class BooleanFilterSpec extends ObjectBehavior
+final class BooleanFilterSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Grid\Filter\BooleanFilter');
     }
-    
+
     function it_implements_filter_interface()
     {
         $this->shouldImplement(FilterInterface::class);
@@ -43,7 +43,7 @@ class BooleanFilterSpec extends ObjectBehavior
 
         $expressionBuilder->equals('enabled', true)->willReturn('EXPR');
         $dataSource->restrict('EXPR')->shouldBeCalled();
-        
+
         $this->apply($dataSource, 'enabled', BooleanFilter::TRUE, []);
     }
 

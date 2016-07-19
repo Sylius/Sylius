@@ -24,7 +24,7 @@ use Sylius\Component\Variation\SetBuilder\SetBuilderInterface;
 /**
  * @author Adam Elsodaney <adam.elso@gmail.com>
  */
-class VariantGeneratorSpec extends ObjectBehavior
+final class VariantGeneratorSpec extends ObjectBehavior
 {
     function let(FactoryInterface $variantFactory, SetBuilderInterface $setBuilder)
     {

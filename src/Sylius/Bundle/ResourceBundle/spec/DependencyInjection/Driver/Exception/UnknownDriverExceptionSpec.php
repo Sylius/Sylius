@@ -16,7 +16,7 @@ use PhpSpec\ObjectBehavior;
 /**
  * @author Arnaud Langlade <aRn0D.dev@gmail.com>
  */
-class UnknownDriverExceptionSpec extends ObjectBehavior
+final class UnknownDriverExceptionSpec extends ObjectBehavior
 {
     function let()
     {

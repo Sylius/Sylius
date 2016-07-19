@@ -21,7 +21,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
  */
-class TestUserFactorySpec extends ObjectBehavior
+final class TestUserFactorySpec extends ObjectBehavior
 {
     function let(FactoryInterface $customerFactory, FactoryInterface $userFactory)
     {

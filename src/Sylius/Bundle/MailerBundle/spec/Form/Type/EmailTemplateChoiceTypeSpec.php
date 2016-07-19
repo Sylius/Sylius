@@ -14,7 +14,7 @@ namespace spec\Sylius\Bundle\MailerBundle\Form\Type;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class EmailTemplateChoiceTypeSpec extends ObjectBehavior
+final class EmailTemplateChoiceTypeSpec extends ObjectBehavior
 {
     function let()
     {

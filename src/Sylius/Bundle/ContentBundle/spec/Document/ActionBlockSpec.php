@@ -18,7 +18,7 @@ use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ActionBlock;
 /**
  * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
  */
-class ActionBlockSpec extends ObjectBehavior
+final class ActionBlockSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

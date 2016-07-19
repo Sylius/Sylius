@@ -26,10 +26,10 @@ use Sylius\Component\Shipping\Resolver\MethodsResolverInterface;
 
 /**
  * @mixin ShippingMethodsByZonesAndChannelResolver
- * 
+ *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ShippingMethodsByZonesAndChannelResolverSpec extends ObjectBehavior
+final class ShippingMethodsByZonesAndChannelResolverSpec extends ObjectBehavior
 {
     function let(
         ShippingMethodRepositoryInterface $shippingMethodRepository,

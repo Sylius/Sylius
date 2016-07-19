@@ -23,7 +23,7 @@ use Sylius\Component\Rbac\Model\PermissionInterface;
 /**
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-class PermissionRepositorySpec extends ObjectBehavior
+final class PermissionRepositorySpec extends ObjectBehavior
 {
     function let(EntityManager $em, ClassMetadata $classMetadata)
     {

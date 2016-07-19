@@ -16,7 +16,7 @@ use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
 use Sylius\Bundle\FlowBundle\Validator\ProcessValidatorInterface;
 
-class ProcessValidatorSpec extends ObjectBehavior
+final class ProcessValidatorSpec extends ObjectBehavior
 {
     function let()
     {

@@ -17,7 +17,7 @@ use Sylius\Component\Core\Distributor\IntegerDistributorInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class IntegerDistributorSpec extends ObjectBehavior
+final class IntegerDistributorSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

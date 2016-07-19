@@ -17,7 +17,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ZoneCodeChoiceTypeSpec extends ObjectBehavior
+final class ZoneCodeChoiceTypeSpec extends ObjectBehavior
 {
     function let(RepositoryInterface $repository)
     {

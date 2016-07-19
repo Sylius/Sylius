@@ -21,7 +21,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class RequestLocaleProviderSpec extends ObjectBehavior
+final class RequestLocaleProviderSpec extends ObjectBehavior
 {
     function let(RepositoryInterface $localeRepository)
     {

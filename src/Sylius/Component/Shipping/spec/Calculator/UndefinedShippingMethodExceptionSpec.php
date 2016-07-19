@@ -16,7 +16,7 @@ use PhpSpec\ObjectBehavior;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class UndefinedShippingMethodExceptionSpec extends ObjectBehavior
+final class UndefinedShippingMethodExceptionSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

@@ -17,7 +17,7 @@ use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Bundle\FlowBundle\Process\Coordinator\CoordinatorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
-class CoordinatorSpec extends ObjectBehavior
+final class CoordinatorSpec extends ObjectBehavior
 {
     function let(RouterInterface $router, ProcessBuilderInterface $builder, ProcessContextInterface $context)
     {

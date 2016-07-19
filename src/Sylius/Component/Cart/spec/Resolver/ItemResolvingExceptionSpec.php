@@ -16,7 +16,7 @@ use PhpSpec\ObjectBehavior;
 /**
  * @author Julien Janvier <j.janvier@gmail.com>
  */
-class ItemResolvingExceptionSpec  extends ObjectBehavior
+final class ItemResolvingExceptionSpec  extends ObjectBehavior
 {
     function it_is_initializable()
     {

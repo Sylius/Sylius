@@ -20,7 +20,7 @@ use Sylius\Component\Core\Model\Taxon;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
-class ImageUploadListenerSpec extends ObjectBehavior
+final class ImageUploadListenerSpec extends ObjectBehavior
 {
     function let(ImageUploaderInterface $uploader)
     {

@@ -19,7 +19,7 @@ use Sylius\Component\Rbac\Authorization\AuthorizationCheckerInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class RbacAuthorizationCheckerSpec extends ObjectBehavior
+final class RbacAuthorizationCheckerSpec extends ObjectBehavior
 {
     function let(AuthorizationCheckerInterface $rbacAuthorizationChecker)
     {

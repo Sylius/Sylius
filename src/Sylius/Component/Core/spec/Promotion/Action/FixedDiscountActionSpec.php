@@ -31,7 +31,7 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class FixedDiscountActionSpec extends ObjectBehavior
+final class FixedDiscountActionSpec extends ObjectBehavior
 {
     function let(
         ProportionalIntegerDistributorInterface $proportionalIntegerDistributor,

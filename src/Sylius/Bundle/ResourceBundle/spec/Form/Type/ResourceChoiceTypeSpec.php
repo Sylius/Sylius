@@ -22,7 +22,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class ResourceChoiceTypeSpec extends ObjectBehavior
+final class ResourceChoiceTypeSpec extends ObjectBehavior
 {
     function let(MetadataInterface $metadata)
     {

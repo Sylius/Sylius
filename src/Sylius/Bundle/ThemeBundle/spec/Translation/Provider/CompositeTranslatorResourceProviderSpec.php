@@ -22,7 +22,7 @@ use Sylius\Bundle\ThemeBundle\Translation\Provider\TranslatorResourceProviderInt
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class CompositeTranslatorResourceProviderSpec extends ObjectBehavior
+final class CompositeTranslatorResourceProviderSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

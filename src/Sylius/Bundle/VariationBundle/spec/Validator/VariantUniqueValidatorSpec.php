@@ -22,7 +22,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class VariantUniqueValidatorSpec extends ObjectBehavior
+final class VariantUniqueValidatorSpec extends ObjectBehavior
 {
     function let(
         RepositoryInterface $variantRepository,

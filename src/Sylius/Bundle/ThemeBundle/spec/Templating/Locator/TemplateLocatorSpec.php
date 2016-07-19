@@ -24,7 +24,7 @@ use Symfony\Component\Templating\TemplateReferenceInterface;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class TemplateLocatorSpec extends ObjectBehavior
+final class TemplateLocatorSpec extends ObjectBehavior
 {
     function let(ResourceLocatorInterface $resourceLocator)
     {

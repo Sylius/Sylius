@@ -25,7 +25,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 /**
  * @author Manuel Gonzalez <mgonyan@gmail.com>
  */
-class InsufficientStockExceptionListenerSpec extends ObjectBehavior
+final class InsufficientStockExceptionListenerSpec extends ObjectBehavior
 {
     function let(
         UrlGeneratorInterface $router,

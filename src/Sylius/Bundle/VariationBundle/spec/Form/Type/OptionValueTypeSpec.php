@@ -21,7 +21,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class OptionValueTypeSpec extends ObjectBehavior
+final class OptionValueTypeSpec extends ObjectBehavior
 {
     function let()
     {

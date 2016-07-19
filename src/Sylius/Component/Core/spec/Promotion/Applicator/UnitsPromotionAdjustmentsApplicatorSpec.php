@@ -29,7 +29,7 @@ use Sylius\Component\Promotion\Model\PromotionInterface;
  *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
+final class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
 {
     function let(
         AdjustmentFactoryInterface $adjustmentFactory,

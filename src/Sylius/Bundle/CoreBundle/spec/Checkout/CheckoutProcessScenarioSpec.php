@@ -23,7 +23,7 @@ use Sylius\Component\Core\Model\PaymentInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class CheckoutProcessScenarioSpec extends ObjectBehavior
+final class CheckoutProcessScenarioSpec extends ObjectBehavior
 {
     function let(CartProviderInterface $cartProvider, OrderInterface $cart)
     {

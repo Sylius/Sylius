@@ -17,7 +17,7 @@ use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class DateAttributeTypeSpec extends ObjectBehavior
+final class DateAttributeTypeSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

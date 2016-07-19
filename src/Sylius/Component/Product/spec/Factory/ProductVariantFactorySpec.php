@@ -21,7 +21,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ProductVariantFactorySpec extends ObjectBehavior
+final class ProductVariantFactorySpec extends ObjectBehavior
 {
     function let(FactoryInterface $factory, RepositoryInterface $productRepository)
     {

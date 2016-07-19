@@ -23,7 +23,7 @@ use Sylius\Component\Core\OrderProcessing\StateResolverInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class StateResolverSpec extends ObjectBehavior
+final class StateResolverSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * @author agounaris <agounaris@gmail.com>
  */
-class SearchStringQuerySpec extends ObjectBehavior
+final class SearchStringQuerySpec extends ObjectBehavior
 {
     function let()
     {

@@ -22,7 +22,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  *
  * @author Liverbool <nukboon@gmail.com>
  */
-class CheckoutAddressingListenerSpec extends ObjectBehavior
+final class CheckoutAddressingListenerSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

@@ -16,7 +16,7 @@ use Sylius\Component\User\Model\CustomerInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class GenderTypeSpec extends ObjectBehavior
+final class GenderTypeSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

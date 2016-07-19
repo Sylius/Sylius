@@ -15,7 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\TaxationBundle\Form\Type\TaxRateType;
 use Symfony\Component\Form\FormTypeInterface;
 
-class TaxRateTypeSpec extends ObjectBehavior
+final class TaxRateTypeSpec extends ObjectBehavior
 {
     function let()
     {

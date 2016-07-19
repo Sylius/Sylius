@@ -23,7 +23,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class AttributeValueTypeSpec extends ObjectBehavior
+final class AttributeValueTypeSpec extends ObjectBehavior
 {
     function let(EntityRepository $attributeRepository)
     {

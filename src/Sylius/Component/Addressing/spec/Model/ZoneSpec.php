@@ -20,7 +20,7 @@ use Sylius\Component\Addressing\Model\ZoneMemberInterface;
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class ZoneSpec extends ObjectBehavior
+final class ZoneSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

@@ -23,7 +23,7 @@ use Symfony\Component\EventDispatcher\EventDispatcher;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class InventoryOperatorSpec extends ObjectBehavior
+final class InventoryOperatorSpec extends ObjectBehavior
 {
     function let(
         BackordersHandlerInterface $backordersHandler,

@@ -17,7 +17,7 @@ use Sylius\Component\Payment\Model\PaymentMethodInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class PaymentMethodSpec extends ObjectBehavior
+final class PaymentMethodSpec extends ObjectBehavior
 {
     public function let()
     {

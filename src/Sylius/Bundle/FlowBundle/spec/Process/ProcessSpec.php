@@ -16,7 +16,7 @@ use Sylius\Bundle\FlowBundle\Process\ProcessInterface;
 use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
 use Sylius\Bundle\FlowBundle\Validator\ProcessValidatorInterface;
 
-class ProcessSpec extends ObjectBehavior
+final class ProcessSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

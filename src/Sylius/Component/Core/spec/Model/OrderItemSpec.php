@@ -11,7 +11,7 @@ use Sylius\Component\Core\Model\OrderItemUnitInterface;
 /**
  * @mixin \Sylius\Component\Core\Model\OrderItem
  */
-class OrderItemSpec extends ObjectBehavior
+final class OrderItemSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

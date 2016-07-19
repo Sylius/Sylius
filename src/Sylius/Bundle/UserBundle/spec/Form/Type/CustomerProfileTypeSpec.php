@@ -16,7 +16,7 @@ use Prophecy\Argument;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class CustomerProfileTypeSpec extends ObjectBehavior
+final class CustomerProfileTypeSpec extends ObjectBehavior
 {
     function let()
     {

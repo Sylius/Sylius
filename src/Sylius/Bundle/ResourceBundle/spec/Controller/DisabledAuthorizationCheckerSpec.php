@@ -18,7 +18,7 @@ use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class DisabledAuthorizationCheckerSpec extends ObjectBehavior
+final class DisabledAuthorizationCheckerSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

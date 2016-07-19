@@ -22,7 +22,7 @@ use PHPCR\NodeInterface;
 /**
  * @author Daniel Leech <daniel@dantleech.com>
  */
-class NameResolverListenerSpec extends ObjectBehavior
+final class NameResolverListenerSpec extends ObjectBehavior
 {
     function let(
         DocumentManagerInterface $documentManager

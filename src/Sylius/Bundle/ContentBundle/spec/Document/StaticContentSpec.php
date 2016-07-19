@@ -18,7 +18,7 @@ use Symfony\Cmf\Bundle\ContentBundle\Doctrine\Phpcr\StaticContent;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class StaticContentSpec extends ObjectBehavior
+final class StaticContentSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

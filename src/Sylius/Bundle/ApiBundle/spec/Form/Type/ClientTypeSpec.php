@@ -16,7 +16,7 @@ use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class ClientTypeSpec extends ObjectBehavior
+final class ClientTypeSpec extends ObjectBehavior
 {
     function let()
     {

@@ -23,7 +23,7 @@ use Sylius\Component\Metadata\Renderer\MetadataRendererInterface;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class MetadataExtensionSpec extends ObjectBehavior
+final class MetadataExtensionSpec extends ObjectBehavior
 {
     function let(MetadataAccessorInterface $metadataAccessor, MetadataRendererInterface $metadataRenderer)
     {

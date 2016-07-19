@@ -18,7 +18,7 @@ use Sylius\Component\Contact\Model\TopicInterface;
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class RequestSpec extends ObjectBehavior
+final class RequestSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

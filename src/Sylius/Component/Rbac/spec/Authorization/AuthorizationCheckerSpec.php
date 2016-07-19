@@ -23,7 +23,7 @@ use Sylius\Component\Rbac\Resolver\RolesResolverInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class AuthorizationCheckerSpec extends ObjectBehavior
+final class AuthorizationCheckerSpec extends ObjectBehavior
 {
     function let(
         CurrentIdentityProviderInterface $currentIdentityProvider,

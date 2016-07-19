@@ -23,7 +23,7 @@ use Sylius\Component\Metadata\Provider\MetadataProviderInterface;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ProcessedMetadataProviderSpec extends ObjectBehavior
+final class ProcessedMetadataProviderSpec extends ObjectBehavior
 {
     function let(MetadataProviderInterface $metadataProvider, MetadataProcessorInterface $metadataProcessor)
     {

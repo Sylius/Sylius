@@ -17,7 +17,7 @@ use Sylius\Component\Inventory\Model\StockableInterface;
 /**
  * @author Julien Janvier <j.janvier@gmail.com>
  */
-class InsufficientStockExceptionSpec extends ObjectBehavior
+final class InsufficientStockExceptionSpec extends ObjectBehavior
 {
     function let(StockableInterface $stockable)
     {

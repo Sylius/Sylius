@@ -24,7 +24,7 @@ use Sylius\Component\Channel\Context\ChannelContextInterface;
 /**
  * @author Argyrios Gounaris <agounaris@gmail.com>
  */
-class OrmFinderSpec extends ObjectBehavior
+final class OrmFinderSpec extends ObjectBehavior
 {
     function let(
         SearchIndexRepository $searchRepository,

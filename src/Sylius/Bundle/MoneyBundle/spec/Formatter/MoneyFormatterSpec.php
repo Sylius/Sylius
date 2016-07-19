@@ -17,10 +17,10 @@ use Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatterInterface;
 
 /**
  * @mixin MoneyFormatter
- * 
+ *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class MoneyFormatterSpec extends ObjectBehavior
+final class MoneyFormatterSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

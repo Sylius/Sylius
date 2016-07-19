@@ -26,13 +26,13 @@ use Sylius\Component\Grid\Definition\Grid;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ArrayToDefinitionConverterSpec extends ObjectBehavior
+final class ArrayToDefinitionConverterSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Grid\Definition\ArrayToDefinitionConverter');
     }
-    
+
     function it_implements_array_to_definition_converter()
     {
         $this->shouldImplement(ArrayToDefinitionConverterInterface::class);
@@ -101,7 +101,7 @@ class ArrayToDefinitionConverterSpec extends ObjectBehavior
                 ]
             ]
         ];
-        
+
         $this->convert('sylius_admin_tax_category', $definitionArray)->shouldBeSameGridAs($grid);
     }
 

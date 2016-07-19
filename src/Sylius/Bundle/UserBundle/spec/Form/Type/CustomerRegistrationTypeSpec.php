@@ -20,7 +20,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\Test\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CustomerRegistrationTypeSpec extends ObjectBehavior
+final class CustomerRegistrationTypeSpec extends ObjectBehavior
 {
     function let(RepositoryInterface $customerRepository)
     {

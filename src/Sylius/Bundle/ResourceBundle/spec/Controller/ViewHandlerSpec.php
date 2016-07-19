@@ -25,7 +25,7 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ViewHandlerSpec extends ObjectBehavior
+final class ViewHandlerSpec extends ObjectBehavior
 {
     function let(RestViewHandler $restViewHandler)
     {

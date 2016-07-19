@@ -31,7 +31,7 @@ use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class CartBlamerListenerSpec extends ObjectBehavior
+final class CartBlamerListenerSpec extends ObjectBehavior
 {
     function let(ObjectManager $cartManager, CartProviderInterface $cartProvider)
     {

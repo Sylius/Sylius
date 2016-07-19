@@ -24,7 +24,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-class ActionCollectionTypeSpec extends ObjectBehavior
+final class ActionCollectionTypeSpec extends ObjectBehavior
 {
     function let(ServiceRegistryInterface $registry)
     {

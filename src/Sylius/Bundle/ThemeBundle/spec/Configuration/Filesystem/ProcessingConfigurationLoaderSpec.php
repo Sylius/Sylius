@@ -21,7 +21,7 @@ use Sylius\Bundle\ThemeBundle\Configuration\Filesystem\ProcessingConfigurationLo
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ProcessingConfigurationLoaderSpec extends ObjectBehavior
+final class ProcessingConfigurationLoaderSpec extends ObjectBehavior
 {
     function let(ConfigurationLoaderInterface $decoratedLoader, ConfigurationProcessorInterface $configurationProcessor)
     {

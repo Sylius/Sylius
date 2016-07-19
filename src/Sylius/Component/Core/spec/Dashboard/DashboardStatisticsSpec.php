@@ -20,7 +20,7 @@ use Prophecy\Argument;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class DashboardStatisticsSpec extends ObjectBehavior
+final class DashboardStatisticsSpec extends ObjectBehavior
 {
     function let()
     {
@@ -41,22 +41,22 @@ class DashboardStatisticsSpec extends ObjectBehavior
             ->duringInstantiation()
         ;
     }
-    
+
     function it_has_total_sales_stat()
     {
         $this->getTotalSales()->shouldReturn(2564);
     }
-    
+
     function it_has_new_orders_stat()
     {
         $this->getNumberOfNewOrders()->shouldReturn(24);
     }
-    
+
     function ith_has_new_customers_stat()
     {
         $this->getNumberOfNewCustomers()->shouldReturn(10);
     }
-    
+
     function it_calculates_average_order_value()
     {
         $this->getAverageOrderValue()->shouldReturn(107);

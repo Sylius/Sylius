@@ -23,7 +23,7 @@ use Symfony\Component\Form\FormInterface;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class AddPaymentMethodsFormSubscriberSpec extends ObjectBehavior
+final class AddPaymentMethodsFormSubscriberSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
@@ -50,8 +50,8 @@ class AddPaymentMethodsFormSubscriberSpec extends ObjectBehavior
 
         $form
             ->add('method', Argument::type('string'), [
-                'label' => 'sylius.form.checkout.payment_method', 
-                'subject' => $payment, 
+                'label' => 'sylius.form.checkout.payment_method',
+                'subject' => $payment,
                 'expanded' => true,
             ])
             ->shouldBeCalled()

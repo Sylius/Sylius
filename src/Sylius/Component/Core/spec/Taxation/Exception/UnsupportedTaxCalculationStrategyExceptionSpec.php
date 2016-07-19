@@ -20,7 +20,7 @@ use Sylius\Component\Core\Taxation\Exception\UnsupportedTaxCalculationStrategyEx
  *
  * @author Mark McKelvie <mark.mckelvie@reiss.com>
  */
-class UnsupportedTaxCalculationStrategyExceptionSpec extends ObjectBehavior
+final class UnsupportedTaxCalculationStrategyExceptionSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

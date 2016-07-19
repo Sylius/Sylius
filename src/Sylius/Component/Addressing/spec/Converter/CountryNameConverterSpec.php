@@ -17,7 +17,7 @@ use Sylius\Component\Addressing\Converter\CountryNameConverterInterface;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class CountryNameConverterSpec extends ObjectBehavior
+final class CountryNameConverterSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

@@ -23,7 +23,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-class PromotionTypeSpec extends ObjectBehavior
+final class PromotionTypeSpec extends ObjectBehavior
 {
     function let(
         ServiceRegistryInterface $checkerRegistry,

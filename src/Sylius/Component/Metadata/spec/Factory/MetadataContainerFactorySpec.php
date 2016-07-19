@@ -22,7 +22,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class MetadataContainerFactorySpec extends ObjectBehavior
+final class MetadataContainerFactorySpec extends ObjectBehavior
 {
     function let()
     {

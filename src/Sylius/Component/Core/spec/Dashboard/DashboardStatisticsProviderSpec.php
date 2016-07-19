@@ -24,7 +24,7 @@ use Sylius\Component\User\Repository\CustomerRepositoryInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class DashboardStatisticsProviderSpec extends ObjectBehavior
+final class DashboardStatisticsProviderSpec extends ObjectBehavior
 {
     function let(OrderRepositoryInterface $orderRepository, CustomerRepositoryInterface $customerRepository)
     {
@@ -35,7 +35,7 @@ class DashboardStatisticsProviderSpec extends ObjectBehavior
     {
         $this->shouldHaveType('Sylius\Component\Core\Dashboard\DashboardStatisticsProvider');
     }
-    
+
     function it_implements_dashboard_statistics_provider_interface()
     {
         $this->shouldImplement(DashboardStatisticsProviderInterface::class);
@@ -46,11 +46,11 @@ class DashboardStatisticsProviderSpec extends ObjectBehavior
         CustomerRepositoryInterface $customerRepository
     ) {
         $expectedStats = new DashboardStatistics(450, 2, 6);
-       
+
         $orderRepository->getTotalSales()->willReturn(450);
         $orderRepository->count()->willReturn(2);
         $customerRepository->count()->willReturn(6);
-        
+
         $this->getStatistics()->shouldBeLike($expectedStats);
     }
 }

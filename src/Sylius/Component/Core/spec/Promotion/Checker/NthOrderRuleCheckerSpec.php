@@ -26,7 +26,7 @@ use Sylius\Component\Resource\Exception\UnexpectedTypeException;
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class NthOrderRuleCheckerSpec extends ObjectBehavior
+final class NthOrderRuleCheckerSpec extends ObjectBehavior
 {
     public function let(OrderRepositoryInterface $ordersRepository)
     {

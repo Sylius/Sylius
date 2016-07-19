@@ -20,7 +20,7 @@ use Symfony\Component\Validator\ObjectInitializerInterface;
 /**
  * @author Steffen Brem <steffenbrem@gmail.com>
  */
-class CustomerInitializerSpec extends ObjectBehavior
+final class CustomerInitializerSpec extends ObjectBehavior
 {
     function let(CanonicalizerInterface $canonicalizer)
     {

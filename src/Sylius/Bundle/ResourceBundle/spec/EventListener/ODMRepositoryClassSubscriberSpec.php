@@ -27,7 +27,7 @@ use Sylius\Component\Resource\Metadata\RegistryInterface;
  *
  * @require Doctrine\ODM\MongoDB\Events
  */
-class ODMRepositoryClassSubscriberSpec extends ObjectBehavior
+final class ODMRepositoryClassSubscriberSpec extends ObjectBehavior
 {
     function let(RegistryInterface $registry, LoadClassMetadataEventArgs $event, ClassMetadata $classMetadata)
     {

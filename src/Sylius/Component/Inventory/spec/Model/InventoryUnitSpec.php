@@ -18,7 +18,7 @@ use Sylius\Component\Inventory\Model\StockableInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class InventoryUnitSpec extends ObjectBehavior
+final class InventoryUnitSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

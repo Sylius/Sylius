@@ -23,7 +23,7 @@ use Sylius\Component\Resource\Model\ToggleableInterface;
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
-class CountrySpec extends ObjectBehavior
+final class CountrySpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

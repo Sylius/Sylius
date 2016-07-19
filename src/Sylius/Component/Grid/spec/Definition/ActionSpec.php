@@ -20,7 +20,7 @@ use Prophecy\Argument;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ActionSpec extends ObjectBehavior
+final class ActionSpec extends ObjectBehavior
 {
     function let()
     {
@@ -36,7 +36,7 @@ class ActionSpec extends ObjectBehavior
     {
         $this->getName()->shouldReturn('view');
     }
-    
+
     function it_has_type()
     {
         $this->getType()->shouldReturn('link');
@@ -45,7 +45,7 @@ class ActionSpec extends ObjectBehavior
     function it_has_label_which_defaults_to_name()
     {
         $this->getLabel()->shouldReturn('view');
-        
+
         $this->setLabel('Read book');
         $this->getLabel()->shouldReturn('Read book');
     }

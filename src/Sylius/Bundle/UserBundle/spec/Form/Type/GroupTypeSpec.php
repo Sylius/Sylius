@@ -16,7 +16,7 @@ use Prophecy\Argument;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class GroupTypeSpec extends ObjectBehavior
+final class GroupTypeSpec extends ObjectBehavior
 {
     function let()
     {

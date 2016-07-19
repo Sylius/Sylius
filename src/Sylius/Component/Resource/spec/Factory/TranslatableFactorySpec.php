@@ -27,7 +27,7 @@ require_once __DIR__.'/../Fixtures/SampleNonTranslatableResource.php';
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class TranslatableFactorySpec extends ObjectBehavior
+final class TranslatableFactorySpec extends ObjectBehavior
 {
     function let(FactoryInterface $factory, LocaleProviderInterface $localeProvider)
     {

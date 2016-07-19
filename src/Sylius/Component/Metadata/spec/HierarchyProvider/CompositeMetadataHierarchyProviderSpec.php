@@ -20,7 +20,7 @@ use Sylius\Component\Metadata\Model\MetadataSubjectInterface;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class CompositeMetadataHierarchyProviderSpec extends ObjectBehavior
+final class CompositeMetadataHierarchyProviderSpec extends ObjectBehavior
 {
     function let(MetadataHierarchyProviderInterface $firstHierarchyProvider, MetadataHierarchyProviderInterface $secondHierarchyProvider)
     {

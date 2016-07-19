@@ -14,7 +14,7 @@ namespace spec\Sylius\Bundle\ApiBundle\Model;
 use FOS\OAuthServerBundle\Entity\AuthCode;
 use PhpSpec\ObjectBehavior;
 
-class AuthCodeSpec extends ObjectBehavior
+final class AuthCodeSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

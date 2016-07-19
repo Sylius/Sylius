@@ -26,7 +26,7 @@ use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Model\UserOAuthInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 
-class UserProviderSpec extends ObjectBehavior
+final class UserProviderSpec extends ObjectBehavior
 {
     function let(
         FactoryInterface $customerFactory,

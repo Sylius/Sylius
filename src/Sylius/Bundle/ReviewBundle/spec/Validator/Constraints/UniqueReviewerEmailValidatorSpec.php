@@ -26,7 +26,7 @@ use Symfony\Component\Validator\ExecutionContext;
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-class UniqueReviewerEmailValidatorSpec extends ObjectBehavior
+final class UniqueReviewerEmailValidatorSpec extends ObjectBehavior
 {
     function let(
         UserRepository $userRepository,

@@ -19,7 +19,7 @@ use Sylius\Component\Resource\Model\CodeAwareInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ProvinceSpec extends ObjectBehavior
+final class ProvinceSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

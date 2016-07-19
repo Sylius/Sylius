@@ -20,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
-class TopicTranslationTypeSpec extends ObjectBehavior
+final class TopicTranslationTypeSpec extends ObjectBehavior
 {
     function let()
     {

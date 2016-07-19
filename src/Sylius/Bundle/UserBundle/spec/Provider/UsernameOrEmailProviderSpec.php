@@ -23,7 +23,7 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class UsernameOrEmailProviderSpec extends ObjectBehavior
+final class UsernameOrEmailProviderSpec extends ObjectBehavior
 {
     function let(UserRepositoryInterface $userRepository, CanonicalizerInterface $canonicalizer)
     {

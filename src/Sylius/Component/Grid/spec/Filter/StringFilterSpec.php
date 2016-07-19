@@ -23,13 +23,13 @@ use Sylius\Component\Grid\Filtering\FilterInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class StringFilterSpec extends ObjectBehavior
+final class StringFilterSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Grid\Filter\StringFilter');
     }
-    
+
     function it_implements_filter_interface()
     {
         $this->shouldImplement(FilterInterface::class);
@@ -43,7 +43,7 @@ class StringFilterSpec extends ObjectBehavior
 
         $expressionBuilder->like('firstName', '%John%')->willReturn('EXPR');
         $dataSource->restrict('EXPR')->shouldBeCalled();
-        
+
         $this->apply($dataSource, 'firstName', 'John', []);
     }
 
@@ -171,8 +171,8 @@ class StringFilterSpec extends ObjectBehavior
 
         $this->apply($dataSource, 'name', 'John', ['fields' => ['firstName', 'lastName']]);
     }
-    
-    function it_filters_translation_fields( 
+
+    function it_filters_translation_fields(
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
     ) {

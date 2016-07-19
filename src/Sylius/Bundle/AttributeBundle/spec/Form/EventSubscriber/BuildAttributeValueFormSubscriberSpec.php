@@ -30,7 +30,7 @@ use Symfony\Component\Form\FormEvents;
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class BuildAttributeValueFormSubscriberSpec extends ObjectBehavior
+final class BuildAttributeValueFormSubscriberSpec extends ObjectBehavior
 {
     function let(RepositoryInterface $attributeRepository)
     {

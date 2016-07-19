@@ -18,7 +18,7 @@ use Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\RedirectRoute;
 /**
  * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
  */
-class RedirectRouteSpec extends ObjectBehavior
+final class RedirectRouteSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
