@@ -17,30 +17,12 @@ namespace Sylius\Component\Originator\Model;
 interface OriginAwareInterface
 {
     /**
-     * Return origin identifier.
-     *
      * @return int
      */
-    public function getOriginId();
+    public function getOriginCode();
 
     /**
-     * Set origin identifier.
-     *
-     * @param int $originId
+     * @param int $originCode
      */
-    public function setOriginId($originId);
-
-    /**
-     * Return origin type info.
-     *
-     * @return string
-     */
-    public function getOriginType();
-
-    /**
-     * Set origin type info.
-     *
-     * @param string $originType
-     */
-    public function setOriginType($originType);
+    public function setOriginCode($originCode);
 }
