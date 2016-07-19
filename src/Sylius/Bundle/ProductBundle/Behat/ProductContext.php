@@ -206,9 +206,8 @@ class ProductContext extends DefaultContext
         $code = (null === $code) ? strtolower(str_replace(' ', '_', $name)) : $code;
         $storageType = (CheckboxAttributeType::TYPE === $type) ? 'boolean' : $type;
 
-        $attribute = $this->getFactory('product_attribute')->createNew();
+        $attribute = $this->getFactory('product_attribute')->createTyped($type);
         $attribute->setName($name);
-        $attribute->setType($type);
         $attribute->setCode($code);
         $attribute->setStorageType($storageType);
 
