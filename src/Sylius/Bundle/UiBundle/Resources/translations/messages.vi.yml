@@ -8,6 +8,7 @@ sylius:
         option:
             name: Tên
     ui:
+        add_member: Thêm thành viên
         add_province: Thêm tỉnh
         channels: Kênh
         city: Thành phố
@@ -61,6 +62,7 @@ sylius:
         password: Mật khẩu
         payment_methods: Phương thức thanh toán
         payments: Thanh toán
+        phone_number: Số điện thoại
         place_order: Đặt hàng
         postcode: Mã bưu chính
         price: Giá

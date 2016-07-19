@@ -35,6 +35,7 @@ sylius:
             currencies: Devises
             shipping_methods: Modes de livraison
             payment_methods: Moyens de paiement
+            tax_calculation_strategy: Stratégie de cacul des taxes
             tax_zone_default: Zone de taxe par défaut
             theme: Thème
             hostname: "Nom d'hôte"
@@ -158,5 +159,12 @@ sylius:
         password_reset:
             name: Réinitialiser le mot de passe
             content: "<h3>Bonjour %username%</h3>Pour réinitialiser votre mot de passe - Merci de visiter %url%<br/><br/>Cordialement, l'équipe."
+        verification:
+            name: "Vérification de l'adresse e-mail"
+            content: 'Pour vérifier votre adresse email, visitez %url%'
+    payum_gateway:
+        cash_on_delivery: Paiement à réception
+        offline: Hors ligne
+        paypal_express_checkout: Paiement Express via PayPal
     shipping_method_resolver:
         by_zones_and_channel: Par zones et canal

@@ -15,3 +15,7 @@ sylius:
                 success: Votre mot de passe a été mis à jour avec succès !
         reset_password:
             requested: "Si l'email que vous avez spécifié existe dans notre système, vous recevrez un message avec les instructions pour réinitialiser votre mot de passe."
+        verification:
+            error: Le jeton de vérification est invalide.
+            notice:
+                verified: Votre e-mail a déjà été vérifié.

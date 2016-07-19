@@ -11,6 +11,7 @@ sylius:
                 label: Mật khẩu
         customer:
             groups: Nhóm
+            phone_number: Số điện thoại
         user_filter:
             query: Tìm kiếm
         user_change_password:

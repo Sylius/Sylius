@@ -6,6 +6,7 @@ sylius:
         admin:
             main:
                 catalog:
+                    attributes: Thuộc tính
                     options: Tùy chọn
                     products: Sản phẩm
                 configuration:

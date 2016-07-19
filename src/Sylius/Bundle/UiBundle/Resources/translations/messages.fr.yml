@@ -14,6 +14,7 @@ sylius:
         abandoned: Abandonné
         about: À propos
         access_token: "Jeton d'accès"
+        access_your_store_account_or_create_a_new_one: Se connecter ou créer un nouveau compte
         account_credentials: "Informations d'intentification"
         account_panel_outline: Profitez de toutes les fonctionnalités qui sont disponibles sur votre espace personnel pour visualiser, suivre et gérer toutes vos données
         action: Action
@@ -49,6 +50,7 @@ sylius:
         all_your_addresses: Toutes vos adresses
         amount: Montant
         an_error_occurred: "Une erreur s'est produite"
+        apply_coupon: Coupon de réduction
         archetype: Prototype
         archetypes: Prototype
         are_your_sure_you_want_to_perform_this_action: Êtes-vous sûr de vouloir effectuer cette action ?
@@ -84,7 +86,10 @@ sylius:
         categorization: Catégorisation
         category: Catégorie
         category_requirements: Exigences de la catégorie
+        change_address: "Modifier l'adresse"
         change_password: Changer votre mot de passe
+        change_payment_method: Modifier le mode de paiement
+        change_shipping_method: Modifier le mode de livraison
         change_your_password: Modifier votre mot de passe
         channel: Canal
         channels: Canaux
@@ -98,6 +103,7 @@ sylius:
         color: Couleur
         comment: Commentaire
         company: Société
+        complete: Terminer
         completed: Complété
         configurable_product: Produit configurable
         configuration: Configuration
@@ -122,6 +128,8 @@ sylius:
         coupons: Coupons de réduction
         create: Créer
         create_a_new_address: Créer une nouvelle adresse
+        create_a_new_customer_account: Créer un nouveau compte
+        create_an_account: Créer un compte
         create_archetype: Créer un prototype
         create_association_type: "Créer un type d'association"
         create_contact_request: Créer une demande de contact
@@ -183,6 +191,7 @@ sylius:
         customer_care: Service clients
         customer_details: Informations sur le client
         customer_id: ID Client
+        customer_login: Connexion
         customer_not_notified: Client non informé
         customer_notified: Client informé
         customer_orders: Commandes clients
@@ -224,10 +233,13 @@ sylius:
         edit_product: Modifier un produit
         edit_product_attribute: Mettre à jour les attributs du produit
         edit_product_option: "Modifier l'option de produit"
+        edit_product_variant: Éditer la déclinaison
         edit_promotion: Modifier la promotion
         edit_promotion_coupon: Modifier le coupon de promotion
         edit_report: Modifier le rapport
+        edit_route: Éditer la route
         edit_shipping_method: Mettre à jour la méthode de livraison
+        edit_static_content: Éditer le contenu statique
         edit_tax_category: Éditer la catégorie de taxe
         edit_tax_rate: Modifier le taux de taxe
         edit_taxon: Modification d’un taxon
