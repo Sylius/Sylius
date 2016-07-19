@@ -28,19 +28,6 @@ use Webmozart\Assert\Assert;
 abstract class DiscountAction implements PromotionActionInterface
 {
     /**
-     * @var OriginatorInterface
-     */
-    protected $originator;
-
-    /**
-     * @param OriginatorInterface $originator
-     */
-    public function __construct(OriginatorInterface $originator)
-    {
-        $this->originator = $originator;
-    }
-
-    /**
      * @param array $configuration
      */
     abstract protected function isConfigurationValid(array $configuration);
@@ -80,7 +67,7 @@ abstract class DiscountAction implements PromotionActionInterface
     private function removeUnitOrderPromotionAdjustmentsByOrigin(OrderItemUnitInterface $unit, PromotionInterface $promotion)
     {
         foreach ($unit->getAdjustments(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT) as $adjustment) {
-            if ($promotion === $this->originator->getOrigin($adjustment)) {
+            if ($promotion->getCode() === $adjustment->getOriginCode()) {
                 $unit->removeAdjustment($adjustment);
             }
         }

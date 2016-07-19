@@ -20,11 +20,9 @@ use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Core\Promotion\Action\FixedDiscountAction;
 use Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicatorInterface;
-use Sylius\Component\Originator\Originator\OriginatorInterface;
 use Sylius\Component\Promotion\Action\PromotionActionInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
 /**
  * @mixin FixedDiscountAction
@@ -36,15 +34,10 @@ use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 class FixedDiscountActionSpec extends ObjectBehavior
 {
     function let(
-        OriginatorInterface $originator,
         ProportionalIntegerDistributorInterface $proportionalIntegerDistributor,
         UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
     ) {
-        $this->beConstructedWith(
-            $originator,
-            $proportionalIntegerDistributor,
-            $unitsPromotionAdjustmentsApplicator
-        );
+        $this->beConstructedWith($proportionalIntegerDistributor, $unitsPromotionAdjustmentsApplicator);
     }
 
     function it_is_initializable()
@@ -168,8 +161,6 @@ class FixedDiscountActionSpec extends ObjectBehavior
         OrderInterface $order,
         OrderItemInterface $item,
         OrderItemUnitInterface $unit,
-        OriginatorInterface $originator,
-        PromotionInterface $otherPromotion,
         PromotionInterface $promotion
     ) {
         $order->countItems()->willReturn(1);
@@ -182,8 +173,10 @@ class FixedDiscountActionSpec extends ObjectBehavior
             ->willReturn(new \ArrayIterator([$firstAdjustment->getWrappedObject(), $secondAdjustment->getWrappedObject()]))
         ;
 
-        $originator->getOrigin($firstAdjustment)->willReturn($promotion);
-        $originator->getOrigin($secondAdjustment)->willReturn($otherPromotion);
+        $firstAdjustment->getOriginCode()->willReturn('PROMOTION');
+        $secondAdjustment->getOriginCode()->willReturn('OTHER_PROMOTION');
+
+        $promotion->getCode()->willReturn('PROMOTION');
 
         $unit->removeAdjustment($firstAdjustment)->shouldBeCalled();
         $unit->removeAdjustment($secondAdjustment)->shouldNotBeCalled();

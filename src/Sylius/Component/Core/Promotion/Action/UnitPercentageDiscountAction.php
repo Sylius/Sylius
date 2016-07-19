@@ -11,11 +11,9 @@
 
 namespace Sylius\Component\Core\Promotion\Action;
 
-use Sylius\Component\Core\Distributor\IntegerDistributorInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Promotion\Filter\FilterInterface;
-use Sylius\Component\Originator\Originator\OriginatorInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
@@ -40,17 +38,15 @@ class UnitPercentageDiscountAction extends UnitDiscountAction
 
     /**
      * @param FactoryInterface $adjustmentFactory
-     * @param OriginatorInterface $originator
      * @param FilterInterface $priceRangeFilter
      * @param FilterInterface $taxonFilter
      */
     public function __construct(
         FactoryInterface $adjustmentFactory,
-        OriginatorInterface $originator,
         FilterInterface $priceRangeFilter,
         FilterInterface $taxonFilter
     ) {
-        parent::__construct($adjustmentFactory, $originator);
+        parent::__construct($adjustmentFactory);
 
         $this->priceRangeFilter = $priceRangeFilter;
         $this->taxonFilter = $taxonFilter;
