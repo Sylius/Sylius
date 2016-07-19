@@ -177,6 +177,7 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
         $oauth->setIdentifier($response->getUsername());
         $oauth->setProvider($response->getResourceOwner()->getName());
         $oauth->setAccessToken($response->getAccessToken());
+        $oauth->setRefreshToken($response->getRefreshToken());
 
         /* @var $user SyliusUserInterface */
         $user->addOAuthAccount($oauth);
