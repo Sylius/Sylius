@@ -21,8 +21,6 @@
 
         <parameter key="sylius.callback.complete_order.class">Sylius\Bundle\OrderBundle\StateMachineCallback\CompleteOrderCallback</parameter>
 
-        <parameter key="sylius.originator.class">Sylius\Component\Originator\Originator\Originator</parameter>
-
         <parameter key="sylius.order_item_quantity_modifier.class">Sylius\Component\Order\Modifier\OrderItemQuantityModifier</parameter>
         <parameter key="sylius.form.data_mapper.property_path.class">Symfony\Component\Form\Extension\Core\DataMapper\PropertyPathMapper</parameter>
         <parameter key="sylius.form.data_mapper.order_item_quantity.class">Sylius\Bundle\OrderBundle\Form\DataMapper\OrderItemQuantityDataMapper</parameter>
@@ -35,10 +33,6 @@
     <services>
         <service id="sylius.form.type.order_state_choice" class="%sylius.form.type.order_state_choice.class%">
             <tag name="form.type" alias="sylius_order_state_choice" />
-        </service>
-
-        <service id="sylius.originator" class="%sylius.originator.class%">
-            <argument type="service" id="doctrine" />
         </service>
 
         <service id="sylius.callback.complete_order" class="%sylius.callback.complete_order.class%" />

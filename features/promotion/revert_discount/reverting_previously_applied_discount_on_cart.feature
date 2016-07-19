@@ -1,4 +1,4 @@
-@receiving_discount
+@applying_promotion_rules
 Feature: Reverting previously applied discount on cart
     In order to get discount only on specific case
     As a Customer
@@ -9,12 +9,12 @@ Feature: Reverting previously applied discount on cart
         And the store has a product "PHP T-Shirt" priced at "€100.00"
         And the store has a product "PHP Mug" priced at "€20.00"
         And there is a promotion "Christmas promotion"
-        And the promotion gives "€10.00" off on every product priced between "€15.00" and "€50.00"
+        And the promotion gives "€10.00" discount to every order with quantity at least 2
 
     @ui
-    Scenario: Receiving fixed discount on a single item fulfilling minimum price criteria
+    Scenario: Reverting discount applied from quantity based promotion
         Given I have product "PHP Mug" in the cart
-        When I add product "PHP T-Shirt" to the cart
-        Then its price should not be decreased
-        And product "PHP Mug" price should not be decreased
-        And my cart total should be "€120.00"
+        And I have product "PHP T-Shirt" in the cart
+        When I remove product "PHP T-Shirt" from the cart
+        Then my cart total should be "€20.00"
+        And there should be no discount
