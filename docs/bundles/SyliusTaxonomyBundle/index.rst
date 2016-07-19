@@ -1,7 +1,7 @@
 SyliusTaxonomiesBundle
 ======================
 
-Flexible categorization system for Symfony2 applications.
+Flexible categorization system for Symfony applications.
 
 .. toctree::
    :numbered:

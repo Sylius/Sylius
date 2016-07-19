@@ -3,7 +3,7 @@ Contributing
 
 .. note::
 
-    This section is based on the great `Symfony2 documentation <http://symfony.com/doc/current>`_.
+    This section is based on the great `Symfony documentation <http://symfony.com/doc/current>`_.
 
 Install to Contribute
 ---------------------

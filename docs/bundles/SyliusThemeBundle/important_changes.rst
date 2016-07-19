@@ -1,7 +1,7 @@
 Important changes
 =================
 
-``SyliusThemeBundle`` changes the way vanilla Symfony2 works a lot. Templates and translations will never behave
+``SyliusThemeBundle`` changes the way vanilla Symfony works a lot. Templates and translations will never behave
 the same as they were.
 
 Templates

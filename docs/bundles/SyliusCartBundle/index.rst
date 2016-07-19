@@ -1,7 +1,7 @@
 SyliusCartBundle
 ================
 
-A generic solution for a cart system inside a Symfony2 application.
+A generic solution for a cart system inside a Symfony application.
 
 It doesn't matter if you are starting a new project or you need to implement this feature for an existing system - this bundle should be helpful.
 Currently only the Doctrine ORM driver is implemented, so we'll use it here as an example.

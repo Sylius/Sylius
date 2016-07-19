@@ -1,7 +1,7 @@
 SyliusInventoryBundle
 =====================
 
-Flexible inventory management for Symfony2 applications.
+Flexible inventory management for Symfony applications.
 
 With minimal configuration you can implement inventory tracking in your project.
 

@@ -9,6 +9,7 @@ The Book
     environments
     installation
     architecture
+    resource_layer
     state_machine
     channels
     products

@@ -1,7 +1,7 @@
 SyliusPromotionBundle
 =====================
 
-Promotions system for Symfony2 applications.
+Promotions system for Symfony applications.
 
 With minimal configuration you can introduce promotions and coupons into your project. The following types of promotions are available and **totally mixable**:
 

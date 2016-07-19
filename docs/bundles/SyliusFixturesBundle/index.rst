@@ -1,7 +1,7 @@
 SyliusFixturesBundle
 ====================
 
-Configurable fixtures management for Symfony2 applications.
+Configurable fixtures management for Symfony applications.
 
 .. toctree::
     :numbered:
