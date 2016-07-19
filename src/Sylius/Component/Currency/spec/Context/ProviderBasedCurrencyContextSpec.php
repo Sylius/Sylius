@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Currency\Context;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Currency\Context\CurrencyNotFoundException;
 use Sylius\Component\Currency\Context\ProviderBasedCurrencyContext;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
@@ -39,12 +40,20 @@ final class ProviderBasedCurrencyContextSpec extends ObjectBehavior
         $this->shouldImplement(CurrencyContextInterface::class);
     }
 
-    function it_returns_the_channels_default_currency(
-        CurrencyProviderInterface $currencyProvider,
-        CurrencyInterface $currency
-    ) {
-        $currencyProvider->getDefaultCurrencyCode()->willReturn($currency);
+    function it_returns_the_channels_default_currency(CurrencyProviderInterface $currencyProvider)
+    {
+        $currencyProvider->getAvailableCurrenciesCodes()->willReturn(['EUR', 'PLN']);
+        $currencyProvider->getDefaultCurrencyCode()->willReturn('EUR');
 
-        $this->getCurrencyCode()->shouldReturn($currency);
+        $this->getCurrencyCode()->shouldReturn('EUR');
+    }
+
+    function it_throws_a_currency_not_found_exception_if_default_currency_is_not_available(
+        CurrencyProviderInterface $currencyProvider
+    ) {
+        $currencyProvider->getAvailableCurrenciesCodes()->willReturn(['GBP', 'PLN']);
+        $currencyProvider->getDefaultCurrencyCode()->willReturn('EUR');
+
+        $this->shouldThrow(CurrencyNotFoundException::class)->during('getCurrencyCode');
     }
 }
