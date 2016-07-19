@@ -13,6 +13,7 @@ namespace Sylius\Bundle\CartBundle\EventListener;
 
 use Sylius\Component\Cart\Context\CartContextInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
@@ -60,10 +61,10 @@ final class SessionCartSubscriber implements EventSubscriberInterface
             return;
         }
 
+        /** @var Request $request */
         $request = $event->getRequest();
-
         // Hacky hack. Until there is a better solution.
-        if ('html' !== $request->getRequestFormat()) {
+        if (!$this->isHtmlRequest($request)) {
             return;
         }
 
@@ -72,5 +73,15 @@ final class SessionCartSubscriber implements EventSubscriberInterface
         if (null !== $cart && null !== $cart->getId()) {
             $request->getSession()->set($this->sessionKeyName, $cart->getId());
         }
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return bool
+     */
+    private function isHtmlRequest(Request $request)
+    {
+        return 'html' === $request->getRequestFormat();
     }
 }

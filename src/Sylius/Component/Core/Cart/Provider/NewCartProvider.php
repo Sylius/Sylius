@@ -11,7 +11,9 @@
 
 namespace Sylius\Component\Core\Cart\Provider;
 
+use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
+use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Context\ShopperContextInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
@@ -61,10 +63,13 @@ class NewCartProvider implements CartProviderInterface
             throw new \LogicException('Decorated cart provider must return a cart instance, null given.');
         }
 
-        $cart->setChannel($this->shopperContext->getChannel());
+        try {
+            $cart->setChannel($this->shopperContext->getChannel());
+        } catch (ChannelNotFoundException $exception) {
+            $cart->setChannel();
+        }
         $cart->setCustomer($this->shopperContext->getCustomer());
         $cart->setCurrencyCode($this->shopperContext->getCurrencyCode());
-        // Soon... $cart->setLocaleCode($this->shopperContext->getLocaleCode());
 
         $this->cart = $cart;
 

@@ -14,6 +14,7 @@ namespace spec\Sylius\Component\Core\Cart\Provider;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
+use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Cart\Provider\NewCartProvider;
 use Sylius\Component\Core\Context\ShopperContextInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -79,7 +80,6 @@ class NewCartProviderSpec extends ObjectBehavior
 
         $cart->setChannel($channel)->shouldBeCalled();
         $cart->setCurrencyCode('PLN')->shouldBeCalled();
-        //$cart->setLocale('pl_PL')->shouldBeCalled();
         $cart->setCustomer(null)->shouldBeCalled();
         
         $this->getCart()->shouldReturn($cart);
@@ -93,5 +93,24 @@ class NewCartProviderSpec extends ObjectBehavior
             ->shouldThrow(\LogicException::class)
             ->during('getCart')
         ;
+    }
+
+    function it_does_not_assign_the_channel_if_undefined(
+        CartProviderInterface $decoratedCartProvider,
+        OrderInterface $cart,
+        ShopperContextInterface $shopperContext
+    ) {
+        $decoratedCartProvider->getCart()->willReturn($cart);
+
+        $shopperContext->getChannel()->willThrow(ChannelNotFoundException::class);
+        $shopperContext->getCurrencyCode()->willReturn('PLN');
+        $shopperContext->getLocaleCode()->willReturn('pl_PL');
+        $shopperContext->getCustomer()->willReturn(null);
+
+        $cart->setChannel()->shouldBeCalled();
+        $cart->setCurrencyCode('PLN')->shouldBeCalled();
+        $cart->setCustomer(null)->shouldBeCalled();
+
+        $this->getCart()->shouldReturn($cart);
     }
 }
