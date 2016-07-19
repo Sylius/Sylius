@@ -75,6 +75,14 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function changePassword($password)
+    {
+        $this->getDocument()->fillField('Password', $password);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getPassword()
     {
         return $this->getElement('password');

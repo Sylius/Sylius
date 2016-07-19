@@ -814,7 +814,7 @@ sylius_user:
             classes:
                 model: Sylius\Component\Core\Model\User
                 form:
-                    default: Sylius\Bundle\CoreBundle\Form\Type\UserType
+                    default: Sylius\Bundle\UserBundle\Form\Type\UserType
         customer:
             classes:
                 model: Sylius\Component\Core\Model\Customer

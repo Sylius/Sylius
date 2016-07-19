@@ -37,5 +37,5 @@ Feature: Statistics dashboard
         Given 2 customers have placed 3 orders for total of "€340.00"
         And 2 customers have added products to the cart for total of "€424.00"
         When I open administration dashboard
-        Then I should see 5 customers in the list
+        Then I should see 5 new customers in the list
         And I should see 3 new orders in the list

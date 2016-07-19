@@ -17,10 +17,7 @@ use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\User\Repository\CustomerRepositoryInterface;
-use Sylius\Component\User\Repository\UserRepositoryInterface;
-use Sylius\Component\User\Security\PasswordUpdaterInterface;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
@@ -145,6 +142,18 @@ final class CustomerContext implements Context
     }
 
     /**
+     * @Given there is an administrator :name identified by an email :email and a password :password
+     */
+    public function thereIsAdministratorIdentifiedByEmailAndPassword($name, $email, $password)
+    {
+        $names = explode(' ', $name);
+        $firstName = $names[0];
+        $lastName = count($names) > 1 ? $names[1] : null;
+
+        $this->createCustomerWithUserAccount($email, $password, true, $firstName, $lastName, 'ROLE_ADMINISTRATION_ACCESS');
+    }
+
+    /**
      * @Given /^(his) shipping (address is "(?:[^"]+)", "(?:[^"]+)", "(?:[^"]+)", "(?:[^"]+)" for "(?:[^"]+)")$/
      */
     public function heHasShippingAddress(CustomerInterface $customer, AddressInterface $address)
@@ -192,13 +201,15 @@ final class CustomerContext implements Context
      * @param bool $enabled
      * @param string|null $firstName
      * @param string|null $lastName
+     * @param string|null $role
      */
     private function createCustomerWithUserAccount(
         $email,
         $password,
         $enabled = true,
         $firstName = null,
-        $lastName = null
+        $lastName = null,
+        $role = null
     ) {
         $user = $this->userFactory->createNew();
         /** @var CustomerInterface $customer */
@@ -211,6 +222,7 @@ final class CustomerContext implements Context
         $user->setUsername($email);
         $user->setPlainPassword($password);
         $user->setEnabled($enabled);
+        $user->addRole($role);
 
         $customer->setUser($user);
 

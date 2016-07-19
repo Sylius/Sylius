@@ -91,6 +91,15 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     /**
      * {@inheritdoc}
      */
+    public function logOut()
+    {
+        $this->getElement('dropdown')->press();
+        $this->getElement('logout')->press();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getRouteName()
     {
         return 'sylius_admin_dashboard';
@@ -102,6 +111,8 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
+            'dropdown' => 'i.dropdown',
+            'logout' => '#sylius-logout-button',
             'total_sales' => '#total-sales',
             'new_orders' => '#new-orders',
             'new_customers' => '#new-customers',
