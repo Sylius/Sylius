@@ -38,7 +38,7 @@ sylius_shop_checkout_readdressing:
         _sylius:
             repository:
                 method: find
-                arguments: [expr:service('sylius.cart_provider').getCart()]
+                arguments: [expr:service('sylius.context.cart').getCart()]
             state_machine:
                 graph: sylius_order_checkout
                 transition: readdress
@@ -73,7 +73,7 @@ sylius_shop_checkout_reselecting_shipping:
         _sylius:
             repository:
                 method: find
-                arguments: [expr:service('sylius.cart_provider').getCart()]
+                arguments: [expr:service('sylius.context.cart').getCart()]
             state_machine:
                 graph: sylius_order_checkout
                 transition: reselect_shipping
@@ -108,7 +108,7 @@ sylius_shop_checkout_reselecting_payment:
         _sylius:
             repository:
                 method: find
-                arguments: [expr:service('sylius.cart_provider').getCart()]
+                arguments: [expr:service('sylius.context.cart').getCart()]
             state_machine:
                 graph: sylius_order_checkout
                 transition: reselect_payment
