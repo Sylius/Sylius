@@ -76,5 +76,5 @@ suites:
     Behat: { namespace: Sylius\Behat, psr4_prefix: Sylius\Behat, spec_path: src/Sylius/Behat, src_path: src/Sylius/Behat }
 
 extensions:
-    - Akeneo\SkipExampleExtension
-    - Pamil\PhpSpecGeneratorExtension\Extension
+    Akeneo\SkipExampleExtension: ~
+    Pamil\PhpSpecGeneratorExtension\Extension: ~

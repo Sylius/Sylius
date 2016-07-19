@@ -34,7 +34,7 @@
     },
     "require-dev": {
         "liip/imagine-bundle": "^1.0",
-        "phpspec/phpspec": "^2.4",
+        "phpspec/phpspec": "^3.0",
         "symfony/form": "^2.8"
     },
     "config": {

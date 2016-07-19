@@ -32,8 +32,8 @@
     "require-dev": {
         "matthiasnoback/symfony-config-test": "^2.0",
         "matthiasnoback/symfony-dependency-injection-test": "^1.0",
-        "pamil/phpspec-generator-extension": "^0.3",
-        "phpspec/phpspec": "^2.5",
+        "pamil/phpspec-generator-extension": "^0.4",
+        "phpspec/phpspec": "^3.0",
         "phpunit/phpunit": "^5.3"
     },
     "config": {

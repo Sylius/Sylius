@@ -26,7 +26,7 @@
         "sylius/storage": "^1.0"
     },
     "require-dev": {
-        "phpspec/phpspec": "^2.4"
+        "phpspec/phpspec": "^3.0"
     },
     "config": {
         "bin-dir": "bin"
