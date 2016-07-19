@@ -28,7 +28,6 @@ Sylius\Component\User\Model\User:
             groups: [Detailed]
         customer:
             expose: true
-            type: Sylius\Component\User\Model\Customer
             groups: [Detailed]
         lastLogin:
             expose: true
