@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Sylius\Component\Cart\Provider\CartProviderInterface;
+use Sylius\Component\Cart\Context\CartContextInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderProcessing\OrderRecalculatorInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
@@ -23,9 +23,9 @@ use Symfony\Component\EventDispatcher\Event;
 class UserCartRecalculationListener
 {
     /**
-     * @var CartProviderInterface
+     * @var CartContextInterface
      */
-    private $cartProvider;
+    private $cartContext;
 
     /**
      * @var OrderRecalculatorInterface
@@ -33,12 +33,12 @@ class UserCartRecalculationListener
     private $orderRecalculator;
 
     /**
-     * @param CartProviderInterface $cartProvider
+     * @param CartContextInterface $cartContext
      * @param OrderRecalculatorInterface $orderRecalculator
      */
-    public function __construct(CartProviderInterface $cartProvider, OrderRecalculatorInterface $orderRecalculator)
+    public function __construct(CartContextInterface $cartContext, OrderRecalculatorInterface $orderRecalculator)
     {
-        $this->cartProvider = $cartProvider;
+        $this->cartContext = $cartContext;
         $this->orderRecalculator = $orderRecalculator;
     }
 
@@ -49,11 +49,7 @@ class UserCartRecalculationListener
      */
     public function recalculateCartWhileLogin(Event $event)
     {
-        if (!$this->cartProvider->hasCart()) {
-            return;
-        }
-
-        $cart = $this->cartProvider->getCart();
+        $cart = $this->cartContext->getCart();
 
         if (!$cart instanceof OrderInterface) {
             throw new UnexpectedTypeException($cart, OrderInterface::class);

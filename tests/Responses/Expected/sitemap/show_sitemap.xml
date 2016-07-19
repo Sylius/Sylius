@@ -2,19 +2,19 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>http://localhost/p/mug-star-wars</loc>
-    <lastmod>2015-10-10T00:00:00+00:00</lastmod>
+    <lastmod>@string@.isDateTime()</lastmod>
     <changefreq>always</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://localhost/p/mug-lotr</loc>
-    <lastmod>2015-10-04T00:00:00+00:00</lastmod>
+    <lastmod>@string@.isDateTime()</lastmod>
     <changefreq>always</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>http://localhost/p/mug-breaking-bad</loc>
-    <lastmod>2015-10-05T00:00:00+00:00</lastmod>
+    <lastmod>@string@.isDateTime()</lastmod>
     <changefreq>always</changefreq>
     <priority>0.5</priority>
   </url>

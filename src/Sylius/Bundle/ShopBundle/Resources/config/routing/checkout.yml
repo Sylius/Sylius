@@ -22,7 +22,7 @@ sylius_shop_checkout_addressing:
             flash: false
             repository:
                 method: find
-                arguments: [expr:service('sylius.cart_provider').getCart()]
+                arguments: [expr:service('sylius.context.cart').getCart()]
             state_machine:
                 graph: sylius_order_checkout
                 transition: address
@@ -57,7 +57,7 @@ sylius_shop_checkout_shipping:
             form: sylius_shop_checkout_shipping
             repository:
                 method: find
-                arguments: [expr:service('sylius.cart_provider').getCart()]
+                arguments: [expr:service('sylius.context.cart').getCart()]
             state_machine:
                 graph: sylius_order_checkout
                 transition: select_shipping
@@ -92,7 +92,7 @@ sylius_shop_checkout_payment:
             form: sylius_checkout_payment_step
             repository:
                 method: find
-                arguments: [expr:service('sylius.cart_provider').getCart()]
+                arguments: [expr:service('sylius.context.cart').getCart()]
             state_machine:
                 graph: sylius_order_checkout
                 transition: select_payment
@@ -126,7 +126,7 @@ sylius_shop_checkout_summary:
             template: SyliusShopBundle:Checkout:summary.html.twig
             repository:
                 method: find
-                arguments: [expr:service('sylius.cart_provider').getCart()]
+                arguments: [expr:service('sylius.context.cart').getCart()]
             state_machine:
                 graph: sylius_order_checkout
                 transition: complete

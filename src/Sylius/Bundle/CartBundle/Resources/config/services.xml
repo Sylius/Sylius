@@ -18,32 +18,33 @@
 
     <parameters>
         <parameter key="sylius.context.cart.class">Sylius\Component\Cart\Context\CartContext</parameter>
-
-        <parameter key="sylius.cart_provider.default.class">Sylius\Bundle\CartBundle\Provider\CartProvider</parameter>
+        <parameter key="sylius.registry.cart_provider.class">Sylius\Component\Registry\PrioritizedServiceRegistry</parameter>
 
         <parameter key="sylius.listener.cart.class">Sylius\Bundle\CartBundle\EventListener\CartSubscriber</parameter>
         <parameter key="sylius.listener.cart_flash.class">Sylius\Bundle\CartBundle\EventListener\FlashSubscriber</parameter>
+        <parameter key="sylius.listener.session_cart.class">Sylius\Bundle\CartBundle\EventListener\SessionCartSubscriber</parameter>
 
         <parameter key="sylius.cart.purger.class">Sylius\Bundle\CartBundle\Purger\ExpiredCartsPurger</parameter>
     </parameters>
 
     <services>
+        <service id="sylius.registry.cart_provider" class="%sylius.registry.cart_provider.class%">
+            <argument>Sylius\Component\Cart\Provider\CartProviderInterface</argument>
+        </service>
         <service id="sylius.context.cart" class="%sylius.context.cart.class%">
-            <argument /> <!-- Storage service name comes from config -->
+            <argument type="service" id="sylius.registry.cart_provider" />
         </service>
 
-        <service id="sylius.cart_provider.default" class="%sylius.cart_provider.default.class%">
+        <service id="sylius.listener.session_cart" class="%sylius.listener.session_cart.class%">
             <argument type="service" id="sylius.context.cart" />
-            <argument type="service" id="sylius.factory.cart" />
-            <argument type="service" id="sylius.repository.cart" />
-            <argument type="service" id="event_dispatcher" />
+            <argument>_sylius.cart</argument>
+            <tag name="kernel.event_subscriber" />
         </service>
 
         <service id="sylius.listener.cart" class="%sylius.listener.cart.class%">
             <tag name="kernel.event_subscriber" />
             <argument type="service" id="sylius.manager.cart" />
             <argument type="service" id="validator" />
-            <argument type="service" id="sylius.cart_provider" />
             <argument type="service" id="sylius.order_item_quantity_modifier" />
         </service>
 

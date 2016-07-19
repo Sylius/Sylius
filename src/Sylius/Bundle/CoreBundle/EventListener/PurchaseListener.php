@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Bundle\CoreBundle\Event\PurchaseCompleteEvent;
-use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -21,11 +20,6 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class PurchaseListener
 {
-    /**
-     * @var CartProviderInterface
-     */
-    protected $cartProvider;
-
     /**
      * @var UrlGeneratorInterface
      */
@@ -47,20 +41,17 @@ class PurchaseListener
     protected $redirectTo;
 
     /**
-     * @param CartProviderInterface $cartProvider
      * @param UrlGeneratorInterface $router
      * @param SessionInterface $session
      * @param TranslatorInterface $translator
      * @param string $redirectTo
      */
     public function __construct(
-        CartProviderInterface $cartProvider,
         UrlGeneratorInterface $router,
         SessionInterface $session,
         TranslatorInterface $translator,
         $redirectTo
     ) {
-        $this->cartProvider = $cartProvider;
         $this->router = $router;
         $this->session = $session;
         $this->translator = $translator;
@@ -73,8 +64,6 @@ class PurchaseListener
     public function abandonCart(PurchaseCompleteEvent $event)
     {
         if (in_array($event->getSubject()->getState(), [PaymentInterface::STATE_PENDING, PaymentInterface::STATE_PROCESSING, PaymentInterface::STATE_COMPLETED])) {
-            $this->cartProvider->abandonCart();
-
             return;
         }
 

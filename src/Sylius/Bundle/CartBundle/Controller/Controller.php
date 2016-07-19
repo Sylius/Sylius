@@ -58,19 +58,19 @@ abstract class Controller extends ResourceController
     protected function getCurrentCart()
     {
         return $this
-            ->getProvider()
+            ->getContext()
             ->getCart()
         ;
     }
 
     /**
-     * Get cart provider.
+     * Get cart context.
      *
-     * @return CartProviderInterface
+     * @return CartContextInterface
      */
-    protected function getProvider()
+    protected function getContext()
     {
-        return $this->container->get('sylius.cart_provider');
+        return $this->container->get('sylius.context.cart');
     }
 
     /**
