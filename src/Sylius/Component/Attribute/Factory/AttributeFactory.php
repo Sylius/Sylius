@@ -56,9 +56,8 @@ class AttributeFactory implements AttributeFactoryInterface
      */
     public function createNew()
     {
-        $attribute = $this->factory->createNew();
-        $attribute->setStorageType($this->attributeTypesRegistry->get($attribute->getType())->getStorageType());
-
-        return $attribute;
+        throw new \BadMethodCallException(
+            'Method "createNew()" is not supported for attribute factory. Use "createTyped($type)" instead.'
+        );
     }
 }
