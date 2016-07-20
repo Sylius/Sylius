@@ -11,7 +11,7 @@
 
 namespace Sylius\Behat\Service;
 
-use Sylius\Component\Core\Model\UserInterface;
+use Sylius\Component\User\Model\UserInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
