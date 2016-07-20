@@ -14,7 +14,10 @@ default:
 
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.product
+                - sylius.behat.context.setup.user
 
                 - sylius.behat.context.ui.shop.cart
+                - sylius.behat.context.ui.shop.registration
+                - sylius.behat.context.ui.user
             filters:
                 tags: "@shopping_cart && @ui"
