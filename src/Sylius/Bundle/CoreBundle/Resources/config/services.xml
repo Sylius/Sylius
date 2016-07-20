@@ -66,7 +66,6 @@
         <parameter key="sylius.listener.order_channel.class">Sylius\Bundle\CoreBundle\EventListener\OrderChannelListener</parameter>
         <parameter key="sylius.listener.order_promotion.class">Sylius\Bundle\CoreBundle\EventListener\OrderPromotionListener</parameter>
         <parameter key="sylius.listener.order_shipping.class">Sylius\Bundle\CoreBundle\EventListener\OrderShippingListener</parameter>
-        <parameter key="sylius.listener.purchase.class">Sylius\Bundle\CoreBundle\EventListener\PurchaseListener</parameter>
         <parameter key="sylius.listener.checkout_addressing.class">Sylius\Bundle\CoreBundle\EventListener\CheckoutAddressingListener</parameter>
         <parameter key="sylius.listener.insufficient_stock_exception.class">Sylius\Bundle\CoreBundle\EventListener\InsufficientStockExceptionListener</parameter>
         <parameter key="sylius.listener.image_upload.class">Sylius\Bundle\CoreBundle\EventListener\ImageUploadListener</parameter>
@@ -335,7 +334,6 @@
         <service id="sylius.listener.order_state" class="%sylius.listener.order_state.class%">
             <argument type="service" id="sylius.order_processing.state_resolver" />
             <tag name="kernel.event_listener" event="sylius.checkout.finalize.pre_complete" method="resolveOrderStates" priority="-100" />
-            <tag name="kernel.event_listener" event="sylius.checkout.purchase.pre_complete" method="resolveOrderStates" priority="-100" />
             <tag name="kernel.event_listener" event="winzou.state_machine.post_transition" method="resolveOrderStatesOnTransition" priority="-100" />
         </service>
         <service id="sylius.listener.order_shipping" class="%sylius.listener.order_shipping.class%">
@@ -368,15 +366,6 @@
             <argument type="service" id="sylius.context.customer" />
             <tag name="kernel.event_listener" event="sylius.checkout.security.pre_complete" method="setCustomer" priority="100" />
             <tag name="kernel.event_listener" event="sylius.cart.initialize" method="setCustomer" />
-        </service>
-        <service id="sylius.listener.purchase" class="%sylius.listener.purchase.class%">
-            <argument type="service" id="sylius.cart_provider" />
-            <argument type="service" id="router" />
-            <argument type="service" id="session" />
-            <argument type="service" id="translator" />
-            <argument>sylius_checkout_payment</argument>
-            <tag name="kernel.event_listener" event="sylius.checkout.purchase.complete" method="abandonCart" />
-            <tag name="kernel.event_listener" event="sylius.checkout.purchase.complete" method="addFlash" />
         </service>
         <service id="sylius.listener.checkout_addressing" class="%sylius.listener.checkout_addressing.class%">
             <tag name="kernel.event_listener" event="sylius.checkout.addressing.pre_complete" method="setCustomerAddressing" />
