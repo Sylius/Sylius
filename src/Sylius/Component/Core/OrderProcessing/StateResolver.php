@@ -79,12 +79,6 @@ class StateResolver implements StateResolverInterface
      */
     public function resolveShippingState(OrderInterface $order)
     {
-        if ($order->isBackorder()) {
-            $order->setShippingState(OrderShippingStates::BACKORDER);
-
-            return;
-        }
-
         $order->setShippingState($this->getShippingState($order));
     }
 
@@ -104,6 +98,7 @@ class StateResolver implements StateResolverInterface
         $states = array_unique($states);
 
         $acceptableStates = [
+            ShipmentInterface::STATE_CART => OrderShippingStates::CART,
             ShipmentInterface::STATE_READY => OrderShippingStates::READY,
             ShipmentInterface::STATE_SHIPPED => OrderShippingStates::SHIPPED,
             ShipmentInterface::STATE_CANCELLED => OrderShippingStates::CANCELLED,
@@ -114,8 +109,6 @@ class StateResolver implements StateResolverInterface
                 return $orderState;
             }
         }
-
-        return OrderShippingStates::PARTIALLY_SHIPPED;
     }
 
     /**

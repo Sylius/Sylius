@@ -576,7 +576,7 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Given it should have shipment in state :shipmentState
+     * @Then it should have shipment in state :shipmentState
      */
     public function itShouldHaveShipmentState($shipmentState)
     {
@@ -584,6 +584,14 @@ final class ManagingOrdersContext implements Context
             $this->showPage->hasShipment($shipmentState),
             sprintf('It should have shipment with %s state', $shipmentState)
         );
+    }
+
+    /**
+     * @Then this order shipment state should be :shippingState
+     */
+    public function thisOrderShipmentStateShouldBe($shippingState)
+    {
+        $this->indexPage->isSingleResourceOnPage(['Shipping state' => $shippingState]);
     }
 
     /**

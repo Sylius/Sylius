@@ -11,7 +11,6 @@
 
 namespace spec\Sylius\Component\Core\Model;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Channel\Model\ChannelInterface;
@@ -251,9 +250,9 @@ final class OrderSpec extends ObjectBehavior
         $this->getExchangeRate()->shouldReturn(1.25);
     }
 
-    function it_has_checkout_shipping_state_by_default()
+    function it_has_cart_shipping_state_by_default()
     {
-        $this->getShippingState()->shouldReturn(OrderShippingStates::CHECKOUT);
+        $this->getShippingState()->shouldReturn(OrderShippingStates::CART);
     }
 
     function its_shipping_state_is_mutable()

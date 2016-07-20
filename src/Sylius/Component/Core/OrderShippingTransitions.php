@@ -17,5 +17,6 @@ class OrderShippingTransitions extends ShipmentTransitions
 {
     const GRAPH = 'sylius_order_shipping';
 
-    const SYLIUS_PARTIALLY_SHIP = 'partially_ship';
+    const TRANSITION_REQUEST_SHIPPING = 'request_shipping';
+    const TRANSITION_PARTIALLY_SHIP = 'partially_ship';
 }

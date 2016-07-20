@@ -49,6 +49,14 @@ winzou_state_machine:
                     on: ["complete"]
                     do: ["@sm.callback.cascade_transition", "apply"]
                     args: ["object", "event", "'create'", "'sylius_order'"]
+                sylius_create_payment:
+                    on: ["complete"]
+                    do: ["@sm.callback.cascade_transition", "apply"]
+                    args: ["object.getPayments()", "event", "'create'", "'sylius_payment'"]
+                sylius_request_shipping:
+                    on: ["complete"]
+                    do: ["@sm.callback.cascade_transition", "apply"]
+                    args: ["object", "event", "'request_shipping'", "'sylius_order_shipping'"]
 
     sylius_order_shipping:
         class: "%sylius.model.order.class%"
@@ -56,33 +64,24 @@ winzou_state_machine:
         graph: sylius_order_shipping
         state_machine_class: "%sylius.state_machine.class%"
         states:
-            checkout: ~
-            onhold: ~
+            cart: ~
             ready: ~
-            backordered: ~
+            cancelled: ~
             partially_shipped: ~
             shipped: ~
-            cancelled: ~
-            returned: ~
         transitions:
-            hold:
-                from: [checkout]
-                to: onhold
-            create:
-                from: [checkout, onhold]
+            request_shipping:
+                from: [cart]
                 to: ready
+            cancel:
+                from: [ready]
+                to: cancelled
+            partially_ship:
+                from: [ready]
+                to: partially_shipped
             ship:
                 from: [ready, partially_shipped]
                 to: shipped
-            ship_partially:
-                from: [ready, partially_shipped]
-                to: partially_shipped
-            return:
-                from: [partially_shipped, shipped]
-                to: returned
-            cancel:
-                from: [checkout, onhold, ready, backordered]
-                to: cancelled
 
     sylius_order_payment:
         class: "%sylius.model.order.class%"

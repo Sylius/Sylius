@@ -45,41 +45,17 @@ final class StateResolverSpec extends ObjectBehavior
         $this->shouldImplement(StateResolverInterface::class);
     }
 
-    function it_marks_order_as_a_backorders_if_it_contains_backordered_units(OrderInterface $order)
-    {
-        $order->isBackorder()->shouldBeCalled()->willReturn(true);
-
-        $order->setShippingState(OrderShippingStates::BACKORDER)->shouldBeCalled();
-        $this->resolveShippingState($order);
-    }
-
     function it_marks_order_as_shipped_if_all_shipments_delivered(
         OrderInterface $order,
         ShipmentInterface $shipment1,
         ShipmentInterface $shipment2
     ) {
-        $order->isBackorder()->shouldBeCalled()->willReturn(false);
         $order->getShipments()->willReturn([$shipment1, $shipment2]);
 
         $shipment1->getState()->willReturn(ShipmentInterface::STATE_SHIPPED);
         $shipment2->getState()->willReturn(ShipmentInterface::STATE_SHIPPED);
 
         $order->setShippingState(OrderShippingStates::SHIPPED)->shouldBeCalled();
-        $this->resolveShippingState($order);
-    }
-
-    function it_marks_order_as_partially_shipped_if_not_all_shipments_delivered(
-        OrderInterface $order,
-        ShipmentInterface $shipment1,
-        ShipmentInterface $shipment2
-    ) {
-        $order->isBackorder()->shouldBeCalled()->willReturn(false);
-        $order->getShipments()->willReturn([$shipment1, $shipment2]);
-
-        $shipment1->getState()->willReturn(ShipmentInterface::STATE_SHIPPED);
-        $shipment2->getState()->willReturn(ShipmentInterface::STATE_READY);
-
-        $order->setShippingState(OrderShippingStates::PARTIALLY_SHIPPED)->shouldBeCalled();
         $this->resolveShippingState($order);
     }
 

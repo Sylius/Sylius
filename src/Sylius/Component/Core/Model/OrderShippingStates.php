@@ -16,12 +16,9 @@ namespace Sylius\Component\Core\Model;
  */
 class OrderShippingStates
 {
-    const BACKORDER = 'backorder';
-    const CANCELLED = 'cancelled';
-    const CHECKOUT = 'checkout';
-    const ONHOLD = 'onhold';
-    const PARTIALLY_SHIPPED = 'partially_shipped';
+    const CART = 'cart';
     const READY = 'ready';
-    const RETURNED = 'returned';
+    const CANCELLED = 'cancelled';
+    const PARTIALLY_SHIPPED = 'partially_shipped';
     const SHIPPED = 'shipped';
 }
