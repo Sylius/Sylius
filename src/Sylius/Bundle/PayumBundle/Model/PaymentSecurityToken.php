@@ -14,8 +14,11 @@ namespace Sylius\Bundle\PayumBundle\Model;
 use Payum\Core\Security\TokenInterface;
 use Payum\Core\Security\Util\Random;
 use Payum\Core\Storage\IdentityInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 
-class PaymentSecurityToken implements TokenInterface
+class PaymentSecurityToken implements
+    ResourceInterface,
+    TokenInterface
 {
     /**
      * @var string
@@ -45,6 +48,14 @@ class PaymentSecurityToken implements TokenInterface
     public function __construct()
     {
         $this->hash = Random::generateToken();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getId()
+    {
+        return $this->hash;
     }
 
     /**

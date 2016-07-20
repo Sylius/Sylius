@@ -76,17 +76,25 @@ class ODMMappedSuperClassSubscriber extends AbstractDoctrineSubscriber
     private function setAssociationMappings(ClassMetadataInfo $metadata, $configuration)
     {
         foreach (class_parents($metadata->getName()) as $parent) {
-            $parentMetadata = new ClassMetadata($parent);
-
-            if (false === $this->isSyliusClass($parentMetadata)) {
-                continue;
-            }
-
             if (false === in_array($parent, $configuration->getMetadataDriverImpl()->getAllClassNames())) {
                 continue;
             }
 
+            $parentMetadata = new ClassMetadata(
+                $parent,
+                $configuration->getNamingStrategy()
+            );
+
+            // Wakeup Reflection
+            $parentMetadata->wakeupReflection($this->getReflectionService());
+
+            // Load Metadata
             $configuration->getMetadataDriverImpl()->loadMetadataForClass($parent, $parentMetadata);
+
+            if (false === $this->isResource($parentMetadata)) {
+                continue;
+            }
+
             if ($parentMetadata->isMappedSuperclass) {
                 foreach ($parentMetadata->associationMappings as $key => $value) {
                     if ($this->hasRelation($value['association'])) {
@@ -103,7 +111,7 @@ class ODMMappedSuperClassSubscriber extends AbstractDoctrineSubscriber
      */
     private function unsetAssociationMappings(ClassMetadataInfo $metadata)
     {
-        if (false === $this->isSyliusClass($metadata)) {
+        if (false === $this->isResource($metadata)) {
             return;
         }
 

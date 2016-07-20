@@ -12,11 +12,12 @@
 namespace AppBundle\Entity;
 
 use Sylius\Component\Resource\Model\AbstractTranslation;
+use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class BookTranslation extends AbstractTranslation
+class BookTranslation extends AbstractTranslation implements ResourceInterface
 {
     /**
      * @var mixed
@@ -52,4 +53,3 @@ class BookTranslation extends AbstractTranslation
         $this->title = $title;
     }
 }
-
