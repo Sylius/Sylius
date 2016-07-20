@@ -87,7 +87,9 @@ final class ChannelContext implements Context
     public function storeOperatesOnASingleChannelInFrance()
     {
         $defaultData = $this->franceChannelFactory->create();
+
         $this->sharedStorage->setClipboard($defaultData);
+        $this->sharedStorage->set('channel', $defaultData['channel']);
     }
 
     /**
@@ -96,7 +98,9 @@ final class ChannelContext implements Context
     public function storeOperatesOnASingleChannel()
     {
         $defaultData = $this->defaultChannelFactory->create();
+
         $this->sharedStorage->setClipboard($defaultData);
+        $this->sharedStorage->set('channel', $defaultData['channel']);
     }
 
     /**
@@ -105,12 +109,10 @@ final class ChannelContext implements Context
      */
     public function theStoreOperatesOnAChannelNamed($channelIdentifier)
     {
-        $channel = $this->channelFactory->createNamed($channelIdentifier);
-        $channel->setCode($channelIdentifier);
-        $channel->setTaxCalculationStrategy('order_items_based');
+        $defaultData = $this->defaultChannelFactory->create($channelIdentifier, $channelIdentifier);
 
-        $this->channelRepository->add($channel);
-        $this->sharedStorage->set('channel', $channel);
+        $this->sharedStorage->setClipboard($defaultData);
+        $this->sharedStorage->set('channel', $defaultData['channel']);
     }
 
     /**

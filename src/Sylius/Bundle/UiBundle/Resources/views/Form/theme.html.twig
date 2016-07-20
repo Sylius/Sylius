@@ -40,7 +40,7 @@
 
 {% block money_widget -%}
     <div class="ui labeled input">
-        <div class="ui label">{{ shopperContext.currencyCode|sylius_currency_symbol }}</div>
+        <div class="ui label">{{ currency|sylius_currency_symbol }}</div>
         {{- form_widget(form) -}}
     </div>
 {%- endblock money_widget %}

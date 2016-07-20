@@ -86,6 +86,9 @@ final class DefaultChannelFactorySpec extends ObjectBehavior
         $channel->addLocale($locale)->shouldBeCalled();
         $channel->setDefaultLocale($locale)->shouldBeCalled();
 
+        $currencyRepository->findOneBy(['code' => 'EUR'])->willReturn(null);
+        $localeRepository->findOneBy(['code' => 'en_US'])->willReturn(null);
+
         $currencyRepository->add($currency)->shouldBeCalled();
         $localeRepository->add($locale)->shouldBeCalled();
         $channelRepository->add($channel)->shouldBeCalled();

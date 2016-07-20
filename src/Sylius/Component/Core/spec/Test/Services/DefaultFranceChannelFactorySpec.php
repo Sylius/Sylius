@@ -123,13 +123,16 @@ final class DefaultFranceChannelFactorySpec extends ObjectBehavior
         $channel->setDefaultLocale($locale)->shouldBeCalled();
         $channel->addLocale($locale)->shouldBeCalled();
 
-        $currencyRepository->add($currency)->shouldBeCalled();
-        $countryRepository->add($france)->shouldBeCalled();
+        $currencyRepository->findOneBy(['code' => 'EUR'])->willReturn(null);
+        $localeRepository->findOneBy(['code' => 'en_US'])->willReturn(null);
 
+        $currencyRepository->add($currency)->shouldBeCalled();
+        $localeRepository->add($locale)->shouldBeCalled();
+
+        $countryRepository->add($france)->shouldBeCalled();
         $channelRepository->add($channel)->shouldBeCalled();
         $zoneRepository->add($zone)->shouldBeCalled();
         $zoneMemberRepository->add($zoneMember)->shouldBeCalled();
-        $localeRepository->add($locale)->shouldBeCalled();
 
         $this->create();
     }

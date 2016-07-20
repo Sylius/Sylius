@@ -73,31 +73,6 @@ final class CurrencyContext implements Context
     }
 
     /**
-     * @Given default currency is :currencyCode
-     */
-    public function defaultCurrencyIs($currencyCode)
-    {
-        $currency = $this->createCurrency($currencyCode);
-        $currency->setEnabled(true);
-
-        $channel = $this->sharedStorage->get('channel');
-        $channel->setDefaultCurrency($currency);
-
-        $this->saveCurrency($currency);
-    }
-
-    /**
-     * @Given the store has a base currency :currencyCode
-     */
-    public function theStoreHasBasedCurrency($currencyCode)
-    {
-        $currency = $this->createCurrency($currencyCode);
-        $currency->setEnabled(true);
-
-        $this->saveCurrency($currency);
-    }
-
-    /**
      * @Given the store has currency :currencyCode
      */
     public function theStoreHasCurrency($currencyCode)
@@ -177,6 +152,7 @@ final class CurrencyContext implements Context
 
         $this->currencyManager->flush();
 
+        $channel->addCurrency($currency);
         $channel->setDefaultCurrency($currency);
 
         $this->channelManager->flush();

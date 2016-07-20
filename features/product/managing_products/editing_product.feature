@@ -6,7 +6,6 @@ Feature: Editing a product
 
     Background:
         Given the store is available in "English (United States)"
-        And the store has a base currency "US Dollar"
         And the store has a product "Dice Brewing"
         And I am logged in as an administrator
 

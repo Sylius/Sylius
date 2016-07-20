@@ -6,7 +6,6 @@ Feature: Multi-channel support
 
     Background:
         Given the store operates on a channel named "Poland"
-        And default currency is "EUR"
         And there is product "Onion" available in this channel
         And the store operates on another channel named "France"
         And there is product "Banana" available in that channel
