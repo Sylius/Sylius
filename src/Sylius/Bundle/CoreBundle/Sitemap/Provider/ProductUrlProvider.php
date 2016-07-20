@@ -65,7 +65,7 @@ class ProductUrlProvider implements UrlProviderInterface
 
         foreach ($products as $product) {
             $productUrl = $this->sitemapUrlFactory->createNew();
-            $localization = $this->router->generate($product, [], true);
+            $localization = $this->router->generate('sylius_shop_product_show', ['slug' => $product->getSlug()], true);
 
             $productUrl->setLastModification($product->getUpdatedAt());
             $productUrl->setLocalization($localization);
