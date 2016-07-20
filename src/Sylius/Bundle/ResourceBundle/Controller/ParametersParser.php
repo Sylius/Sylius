@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Dosena Ishmael <nukboon@gmail.com>
  */
 class ParametersParser implements ParametersParserInterface
 {
@@ -48,7 +49,17 @@ class ParametersParser implements ParametersParserInterface
             }
 
             if (is_string($value) && 0 === strpos($value, 'expr:')) {
-                $parameters[$key] = $this->expression->evaluate(substr($value, 5));
+                $service = substr($value, 5);
+
+                if (preg_match_all('/(\$\w+)\W/', $service, $match)) {
+                    foreach ($match[1] as $parameterName) {
+                        $parameter = $request->get(substr(trim($parameterName), 1));
+                        $parameter = is_string($parameter) ? sprintf('"%s"', $parameter) : $parameter;
+                        $service = str_replace($parameterName, $parameter, $service);
+                    }
+                }
+
+                $parameters[$key] = $this->expression->evaluate($service);
             }
         }
 
