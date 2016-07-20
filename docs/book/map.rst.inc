@@ -8,6 +8,7 @@
 * :doc:`/book/channels`
 * :doc:`/book/locales`
 * :doc:`/book/currencies`
+* :doc:`/book/countries`
 * :doc:`/book/zones`
 * :doc:`/book/products`
 * :doc:`/book/addresses`
