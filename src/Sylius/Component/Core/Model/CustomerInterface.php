@@ -12,7 +12,7 @@
 namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\User\Model\CustomerInterface as BaseCustomerInterface;
+use Sylius\Component\Customer\Model\CustomerInterface as BaseCustomerInterface;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>

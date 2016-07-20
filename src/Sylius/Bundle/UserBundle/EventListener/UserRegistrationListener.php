@@ -13,7 +13,7 @@ namespace Sylius\Bundle\UserBundle\EventListener;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\UserBundle\UserEvents;
-use Sylius\Component\User\Model\CustomerInterface;
+use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Security\Generator\GeneratorInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;

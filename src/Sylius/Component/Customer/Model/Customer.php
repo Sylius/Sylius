@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\User\Model;
+namespace Sylius\Component\Customer\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -26,11 +26,6 @@ class Customer implements CustomerInterface, GroupableInterface
      * @var mixed
      */
     protected $id;
-
-    /**
-     * @var UserInterface
-     */
-    protected $user;
 
     /**
      * @var string
@@ -84,33 +79,6 @@ class Customer implements CustomerInterface, GroupableInterface
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setUser(UserInterface $user = null)
-    {
-        if ($this->user !== $user) {
-            $this->user = $user;
-            $this->assignCustomer($user);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasUser()
-    {
-        return null !== $this->user;
     }
 
     /**
@@ -300,16 +268,6 @@ class Customer implements CustomerInterface, GroupableInterface
 
     public function __toString()
     {
-        return (string) $this->getEmail();
-    }
-
-    /**
-     * @param UserInterface $user
-     */
-    protected function assignCustomer(UserInterface $user = null)
-    {
-        if (null !== $user) {
-            $user->setCustomer($this);
-        }
+        return $this->getEmail();
     }
 }

@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Core\Pricing;
 
-use Sylius\Component\User\Model\GroupInterface;
+use Sylius\Component\Customer\Model\GroupInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>

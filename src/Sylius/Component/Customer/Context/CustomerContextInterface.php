@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\User\Context;
+namespace Sylius\Component\Customer\Context;
 
-use Sylius\Component\User\Model\CustomerInterface;
+use Sylius\Component\Customer\Model\CustomerInterface;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>

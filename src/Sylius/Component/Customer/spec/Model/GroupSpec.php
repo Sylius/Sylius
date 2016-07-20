@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\User\Model;
+namespace spec\Sylius\Component\Customer\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\User\Model\GroupInterface;
+use Sylius\Component\Customer\Model\GroupInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -21,7 +21,7 @@ final class GroupSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\User\Model\Group');
+        $this->shouldHaveType('Sylius\Component\Customer\Model\Group');
     }
 
     function it_implements_Sylius_group_interface()

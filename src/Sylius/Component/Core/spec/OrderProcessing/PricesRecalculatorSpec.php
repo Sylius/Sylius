@@ -21,7 +21,7 @@ use Sylius\Component\Core\OrderProcessing\PricesRecalculator;
 use Sylius\Component\Core\OrderProcessing\PricesRecalculatorInterface;
 use Sylius\Component\Pricing\Calculator\DelegatingCalculatorInterface;
 use Sylius\Component\Pricing\Model\PriceableInterface;
-use Sylius\Component\User\Model\GroupableInterface;
+use Sylius\Component\Customer\Model\GroupableInterface;
 
 /**
  * @mixin PricesRecalculator

@@ -14,9 +14,9 @@ namespace spec\Sylius\Bundle\UserBundle\EventListener;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\UserBundle\EventListener\CustomerAwareListener;
-use Sylius\Component\User\Context\CustomerContextInterface;
-use Sylius\Component\User\Model\CustomerAwareInterface;
-use Sylius\Component\User\Model\CustomerInterface;
+use Sylius\Component\Customer\Context\CustomerContextInterface;
+use Sylius\Component\Customer\Model\CustomerAwareInterface;
+use Sylius\Component\Customer\Model\CustomerInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**

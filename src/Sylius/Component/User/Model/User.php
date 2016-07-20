@@ -31,11 +31,6 @@ class User implements UserInterface
     protected $id;
 
     /**
-     * @var CustomerInterface
-     */
-    protected $customer;
-
-    /**
      * @var string
      */
     protected $username;
@@ -141,26 +136,7 @@ class User implements UserInterface
     {
         return $this->id;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCustomer()
-    {
-        return $this->customer;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCustomer(CustomerInterface $customer = null)
-    {
-        if ($this->customer !== $customer) {
-            $this->customer = $customer;
-            $this->assignUser($customer);
-        }
-    }
-
+    
     /**
      * {@inheritdoc}
      */
@@ -398,38 +374,6 @@ class User implements UserInterface
     /**
      * {@inheritdoc}
      */
-    public function getEmail()
-    {
-        return $this->customer->getEmail();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setEmail($email)
-    {
-        $this->customer->setEmail($email);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getEmailCanonical()
-    {
-        return $this->customer->getEmailCanonical();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setEmailCanonical($emailCanonical)
-    {
-        $this->customer->setEmailCanonical($emailCanonical);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function isPasswordRequestNonExpired(\DateInterval $ttl)
     {
         return null !== $this->passwordRequestedAt && new \DateTime() <= $this->passwordRequestedAt->add($ttl);
@@ -571,16 +515,6 @@ class User implements UserInterface
             $this->enabled,
             $this->id
         ) = $data;
-    }
-
-    /**
-     * @param CustomerInterface $customer
-     */
-    protected function assignUser(CustomerInterface $customer = null)
-    {
-        if (null !== $customer) {
-            $customer->setUser($this);
-        }
     }
 
     /**

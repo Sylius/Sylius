@@ -12,7 +12,7 @@
 namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Sylius\Component\User\Model\Customer as BaseCustomer;
+use Sylius\Component\Customer\Model\Customer as BaseCustomer;
 use Webmozart\Assert\Assert;
 
 /**

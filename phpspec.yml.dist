@@ -8,6 +8,7 @@ suites:
     Contact: { namespace: Sylius\Component\Contact, psr4_prefix: Sylius\Component\Contact, spec_path: src/Sylius/Component/Contact, src_path: src/Sylius/Component/Contact }
     Core: { namespace: Sylius\Component\Core, psr4_prefix: Sylius\Component\Core, spec_path: src/Sylius/Component/Core, src_path: src/Sylius/Component/Core }
     Currency: { namespace: Sylius\Component\Currency, psr4_prefix: Sylius\Component\Currency, spec_path: src/Sylius/Component/Currency, src_path: src/Sylius/Component/Currency }
+    Customer: { namespace: Sylius\Component\Customer, psr4_prefix: Sylius\Component\Customer, spec_path: src/Sylius/Component/Customer, src_path: src/Sylius/Component/Customer }
     Grid: { namespace: Sylius\Component\Grid, psr4_prefix: Sylius\Component\Grid, spec_path: src/Sylius/Component/Grid, src_path: src/Sylius/Component/Grid }
     Inventory: { namespace: Sylius\Component\Inventory, psr4_prefix: Sylius\Component\Inventory, spec_path: src/Sylius/Component/Inventory, src_path: src/Sylius/Component/Inventory }
     Locale: { namespace: Sylius\Component\Locale, psr4_prefix: Sylius\Component\Locale, spec_path: src/Sylius/Component/Locale, src_path: src/Sylius/Component/Locale }

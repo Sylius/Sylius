@@ -21,7 +21,7 @@ use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
-use Sylius\Component\User\Context\CustomerContextInterface;
+use Sylius\Component\Customer\Context\CustomerContextInterface;
 
 /**
  * @mixin ShopperContext

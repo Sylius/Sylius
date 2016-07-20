@@ -27,7 +27,7 @@ use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Order\Model\Order;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Promotion\Model\CouponInterface;
-use Sylius\Component\User\Model\CustomerInterface;
+use Sylius\Component\Customer\Model\CustomerInterface;
 
 /**
  * @mixin \Sylius\Component\Core\Model\Order

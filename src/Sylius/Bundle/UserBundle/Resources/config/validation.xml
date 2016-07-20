@@ -16,7 +16,7 @@
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
                                         http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
 
-    <class name="Sylius\Component\User\Model\Customer">
+    <class name="Sylius\Component\Customer\Model\Customer">
         <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
             <option name="message">sylius.customer.email.unique</option>
             <option name="fields">emailCanonical</option>
@@ -172,7 +172,7 @@
         </property>
     </class>
 
-    <class name="Sylius\Component\User\Model\Group">
+    <class name="Sylius\Component\Customer\Model\Group">
         <property name="name">
             <constraint name="NotBlank">
                 <option name="message">sylius.group.name.not_blank</option>

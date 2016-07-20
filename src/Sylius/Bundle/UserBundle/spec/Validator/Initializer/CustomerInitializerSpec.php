@@ -14,7 +14,7 @@ namespace spec\Sylius\Bundle\UserBundle\Validator\Initializer;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
-use Sylius\Component\User\Model\CustomerInterface;
+use Sylius\Component\Customer\Model\CustomerInterface;
 use Symfony\Component\Validator\ObjectInitializerInterface;
 
 /**

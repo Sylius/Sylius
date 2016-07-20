@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\User\Model;
+namespace spec\Sylius\Component\Customer\Model;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\User\Model\CustomerInterface;
+use Sylius\Component\Customer\Model\CustomerInterface;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
@@ -21,7 +21,7 @@ final class CustomerSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\User\Model\Customer');
+        $this->shouldHaveType('Sylius\Component\Customer\Model\Customer');
     }
 
     function it_implements_customer_interface()
@@ -29,14 +29,9 @@ final class CustomerSpec extends ObjectBehavior
         $this->shouldImplement(CustomerInterface::class);
     }
 
-    function it_implements_user_aware_interface()
-    {
-        $this->shouldImplement('Sylius\Component\User\Model\UserAwareInterface');
-    }
-
     function it_implements_groupable_interface()
     {
-        $this->shouldImplement('Sylius\Component\User\Model\GroupableInterface');
+        $this->shouldImplement('Sylius\Component\Customer\Model\GroupableInterface');
     }
 
     function it_sets_email()

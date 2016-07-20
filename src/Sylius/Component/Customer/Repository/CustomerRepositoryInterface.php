@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\User\Repository;
+namespace Sylius\Component\Customer\Repository;
 
 use Pagerfanta\Pagerfanta;
 use Sylius\Component\Core\Model\CustomerInterface;

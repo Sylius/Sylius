@@ -12,7 +12,7 @@
 namespace spec\Sylius\Bundle\UserBundle\Context;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\User\Model\CustomerInterface;
+use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;

@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\UserBundle\Form\EventSubscriber;
 
-use Sylius\Component\User\Model\CustomerAwareInterface;
+use Sylius\Component\Customer\Model\CustomerAwareInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;

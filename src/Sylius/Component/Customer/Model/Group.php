@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\User\Model;
+namespace Sylius\Component\Customer\Model;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>

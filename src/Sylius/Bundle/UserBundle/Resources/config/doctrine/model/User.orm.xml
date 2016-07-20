@@ -46,7 +46,7 @@
             <gedmo:timestampable on="update"/>
         </field>
 
-        <one-to-one field="customer" target-entity="Sylius\Component\User\Model\CustomerInterface" inversed-by="user">
+        <one-to-one field="customer" target-entity="Sylius\Component\Customer\Model\CustomerInterface" inversed-by="user">
             <cascade>
                 <cascade-persist/>
             </cascade>

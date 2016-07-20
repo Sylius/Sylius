@@ -121,6 +121,7 @@
         "sylius/core-bundle": "self.version",
         "sylius/currency": "self.version",
         "sylius/currency-bundle": "self.version",
+        "sylius/customer": "self.version",
         "sylius/fixtures-bundle": "self.version",
         "sylius/flow-bundle": "self.version",
         "sylius/installer-bundle": "self.version",

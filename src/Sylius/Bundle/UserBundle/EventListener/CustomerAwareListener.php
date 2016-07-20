@@ -12,8 +12,8 @@
 namespace Sylius\Bundle\UserBundle\EventListener;
 
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
-use Sylius\Component\User\Context\CustomerContextInterface;
-use Sylius\Component\User\Model\CustomerAwareInterface;
+use Sylius\Component\Customer\Context\CustomerContextInterface;
+use Sylius\Component\Customer\Model\CustomerAwareInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 class CustomerAwareListener

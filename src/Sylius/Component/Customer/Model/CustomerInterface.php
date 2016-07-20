@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\User\Model;
+namespace Sylius\Component\Customer\Model;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
 use Sylius\Component\Resource\Model\TimestampableInterface;
@@ -18,19 +18,13 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
 interface CustomerInterface extends
-    UserAwareInterface,
     TimestampableInterface,
     ResourceInterface
 {
     const UNKNOWN_GENDER = 'u';
     const MALE_GENDER = 'm';
     const FEMALE_GENDER = 'f';
-
-    /**
-     * @return bool
-     */
-    public function hasUser();
-
+    
     /**
      * @return string
      */

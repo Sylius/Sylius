@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\UserBundle\Doctrine\ORM;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Sylius\Component\User\Repository\GroupRepositoryInterface;
+use Sylius\Component\Customer\Repository\GroupRepositoryInterface;
 
 /**
  * @author Antonio Perić <antonio@locastic.com>

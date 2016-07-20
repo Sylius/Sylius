@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\User\Model;
+namespace Sylius\Component\Customer\Model;
 
 use Sylius\Component\Resource\Model\ResourceInterface;
 
