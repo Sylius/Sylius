@@ -30,21 +30,18 @@
         {% endif %}
     </td>
     <td class="right aligned">
-        <span class="sylius-unit-price">{{ item.unitPrice|sylius_price(cart.currencyCode) }}</span>
+        {% if item.unitPrice != item.discountedUnitPrice %}
+            <span class="sylius-regular-unit-price">{{ item.unitPrice|sylius_price(cart.currencyCode) }}</span>
+        {% endif %}
+        <span class="sylius-unit-price">{{ item.discountedUnitPrice|sylius_price(cart.currencyCode) }}</span>
     </td>
     <td class="center aligned">
-        {{ form_widget(item_form.quantity) }}
+        <span class="sylius-quantity">{{ form_widget(item_form.quantity) }}</span>
     </td>
     <td class="center aligned">
         <a href="{{ path('sylius_shop_cart_item_remove', {'id': item.id}) }}" class="ui circular icon button sylius-cart-remove-button"><i class="remove icon"></i></a>
     </td>
     <td class="right aligned">
-        {# Todo: Fix this mess... #}
-        {% if 0 != item.getAdjustmentsTotalRecursively('order_unit_promotion') %}
-            <span class="sylius-total" style="text-decoration: line-through">{{ item.regularTotal|sylius_price }}</span>
-            <span class="sylius-discounted-total">{{ item.total|sylius_price }}</span>
-        {% else %}
-            <span class="sylius-total">{{ item.regularTotal|sylius_price }}</span>
-        {% endif %}
+        <span class="sylius-total">{{ item.total|sylius_price(cart.currencyCode) }}</span>
     </td>
 </tr>

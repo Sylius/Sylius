@@ -205,12 +205,13 @@ final class CartContext implements Context
     {
         $this->summaryPage->open();
 
-        $discountedTotal = $this->summaryPage->getItemDiscountedTotal($product->getName());
-        $total = $this->summaryPage->getItemTotal($product->getName());
+        $quantity = $this->summaryPage->getQuantity($product->getName());
+        $unitPrice = $this->summaryPage->getItemUnitPrice($product->getName());
+        $regularUnitPrice = $this->summaryPage->getItemUnitRegularPrice($product->getName());
 
         Assert::same(
-            $discountedTotal,
-            ($total - $amount),
+            $quantity * $unitPrice,
+            ($quantity * $regularUnitPrice) - $amount,
             'Price after discount should be %s, but it is %2$s.'
         );
     }
