@@ -14,7 +14,7 @@ Feature: Seeing order items on order summary page
         And I am a logged in customer
 
     @ui
-    Scenario: Seeing order items and theirs quantuty on the order summary page
+    Scenario: Seeing order items and theirs quantity on the order summary page
         Given I have 4 products "Lannister Coat" in the cart
         Given I have 2 products "Targaryen Jacket" in the cart
         Given I have 3 products "Stark T-Shirt" in the cart
