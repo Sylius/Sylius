@@ -12,11 +12,6 @@ sylius_grid:
                 title:
                     type: string
                     label: sylius.ui.title
-                body:
-                    type: twig
-                    label: sylius.ui.body
-                    options:
-                        template: SyliusAdminBundle:Grid/Field:truncate.html.twig
             filters:
                 title:
                     type: string

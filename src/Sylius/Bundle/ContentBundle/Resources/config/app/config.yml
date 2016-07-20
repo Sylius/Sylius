@@ -51,7 +51,6 @@ cmf_routing:
     chain:
         routers_by_id:
             router.default: 100
-            sylius.dynamic_router: 50
     dynamic:
         persistence:
             phpcr:

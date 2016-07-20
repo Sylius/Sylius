@@ -10,6 +10,6 @@ Feature: Viewing a product details using permalink
     @ui
     Scenario: Access to detailed product page using permalink
         Given the store has a product "T-shirt banana"
-        When I open page "shop/products/t-shirt-banana"
+        When I open page "products/t-shirt-banana"
         Then I should be on "T-shirt banana" product detailed page
         And I should see the product name "T-shirt banana"

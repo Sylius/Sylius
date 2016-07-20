@@ -11,7 +11,7 @@
     'use strict';
 
     $.fn.api.settings.api = {
-        'user check': '/shop/user-check',
-        'login check': '/shop/login-check'
+        'user check': '/user-check',
+        'login check': '/login-check'
     };
 })(jQuery);

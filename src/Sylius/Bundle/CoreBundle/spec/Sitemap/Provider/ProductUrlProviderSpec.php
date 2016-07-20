@@ -60,10 +60,13 @@ class ProductUrlProviderSpec extends ObjectBehavior
         $iterator->current()->willReturn($product);
         $product->getUpdatedAt()->willReturn($now);
 
-        $router->generate($product, [], true)->willReturn('http://sylius.org/t-shirt');
+        $product->getSlug()->willReturn('t-shirt');
+
+        $router->generate('sylius_shop_product_show', ['slug' => 't-shirt'], true)->willReturn('http://sylius.org/products/t-shirt');
+        $router->generate($product, [], true)->willReturn('http://sylius.org/products/t-shirt');
         $sitemapUrlFactory->createNew()->willReturn($sitemapUrl);
 
-        $sitemapUrl->setLocalization('http://sylius.org/t-shirt')->shouldBeCalled();
+        $sitemapUrl->setLocalization('http://sylius.org/products/t-shirt')->shouldBeCalled();
         $sitemapUrl->setLastModification($now)->shouldBeCalled();
         $sitemapUrl->setChangeFrequency(ChangeFrequency::always())->shouldBeCalled();
         $sitemapUrl->setPriority(0.5)->shouldBeCalled();

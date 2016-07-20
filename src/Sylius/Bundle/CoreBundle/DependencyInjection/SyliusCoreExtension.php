@@ -46,7 +46,6 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
         'sylius_promotion',
         'sylius_review',
         'sylius_report',
-        'sylius_search',
         'sylius_sequence',
         'sylius_settings',
         'sylius_shipping',
@@ -93,8 +92,6 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
             $loader->load($configFile);
         }
 
-        $this->loadCheckoutConfiguration($config['checkout'], $container);
-
         $definition = $container->findDefinition('sylius.context.currency');
         $definition->replaceArgument(0, new Reference($config['currency_storage']));
 
@@ -114,39 +111,10 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
             }
         }
 
-        $routeClasses = $controllerByClasses = $repositoryByClasses = $syliusByClasses = [];
-
-        foreach ($config['routing'] as $className => $routeConfig) {
-            $routeClasses[$className] = [
-                'field' => $routeConfig['field'],
-                'prefix' => $routeConfig['prefix'],
-            ];
-            $controllerByClasses[$className] = $routeConfig['defaults']['controller'];
-            $repositoryByClasses[$className] = $routeConfig['defaults']['repository'];
-            $syliusByClasses[$className] = $routeConfig['defaults']['sylius'];
-        }
-
         $container->prependExtensionConfig('sylius_theme', ['context' => 'sylius.theme.context.channel_based']);
 
-        $container->setParameter('sylius.route_classes', $routeClasses);
-        $container->setParameter('sylius.controller_by_classes', $controllerByClasses);
-        $container->setParameter('sylius.repository_by_classes', $repositoryByClasses);
-        $container->setParameter('sylius.sylius_by_classes', $syliusByClasses);
-        $container->setParameter('sylius.route_collection_limit', $config['route_collection_limit']);
-        $container->setParameter('sylius.route_uri_filter_regexp', $config['route_uri_filter_regexp']);
         $container->setParameter('sylius.sitemap', $config['sitemap']);
         $container->setParameter('sylius.sitemap_template', $config['sitemap']['template']);
-    }
-
-    /**
-     * @param array $config
-     * @param ContainerBuilder $container
-     */
-    protected function loadCheckoutConfiguration(array $config, ContainerBuilder $container)
-    {
-        foreach ($config['steps'] as $name => $step) {
-            $container->setParameter(sprintf('sylius.checkout.step.%s.template', $name), $step['template']);
-        }
     }
 
     /**

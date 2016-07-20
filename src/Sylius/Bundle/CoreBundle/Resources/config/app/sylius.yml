@@ -73,26 +73,6 @@ sylius_content:
                     choice: Sylius\Bundle\ContentBundle\Form\Type\StaticContentChoiceType
 
 sylius_core:
-    routing:
-        "%sylius.model.product.class%":
-            field: slug
-            prefix: /p
-            defaults:
-                controller: "sylius.controller.product:detailsAction"
-                repository: sylius.repository.product
-                sylius:
-                    template: "SyliusWebBundle:Frontend/Product:show.html.twig"
-                    criteria: {slug: $slug}
-                    permission: false
-        "%sylius.model.taxon.class%":
-            field: permalink
-            prefix: /t
-            defaults:
-                controller: "sylius.controller.product:indexByTaxonAction"
-                repository: sylius.repository.taxon
-                sylius:
-                    template: "SyliusWebBundle:Frontend/Product:indexByTaxon.html.twig"
-                    permission: false
     sitemap: ~
 
 sylius_inventory:
@@ -725,56 +705,6 @@ sylius_review:
             reviewer:
                 classes:
                     model: "%sylius.model.customer.class%"
-
-sylius_search:
-    search_form_template: "SyliusSearchBundle::search_form.html.twig"
-    engine: orm
-    resources:
-        search:
-            classes:
-                model: Sylius\Bundle\SearchBundle\Model\SearchIndex
-        log:
-            classes:
-                model: Sylius\Bundle\SearchBundle\Model\SearchLog
-    orm_indexes:
-        product:
-            class: "%sylius.model.product.class%"
-            mappings:
-                id: ~
-                name: ~
-                description: ~
-    custom_accessor: Sylius\Component\Core\Accessor\ProductAccessor
-    filters:
-        pre_search_filter:
-            enabled: true
-            taxon: category
-        facet_groups:
-            search_set:
-                values: [taxons, price, made_of, color]
-            categories_set:
-                values: [price, made_of, color]
-            all_set:
-                values: [taxons, price, made_of]
-        facets:
-            taxons:
-                display_name: "Basic categories"
-                type: terms
-                value: ~
-            price:
-                display_name: "Available prices"
-                type: range
-                values:
-                    - { from: 0, to: 2000}
-                    - { from: 2001, to: 5000}
-                    - { from: 5001, to: 10000}
-            made_of:
-                display_name: "Material"
-                type: terms
-                value: ~
-            color:
-                display_name: "Available colors"
-                type: terms
-                value: ~
 
 sylius_shipping:
     resources:
