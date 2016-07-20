@@ -73,6 +73,11 @@ interface SummaryPageInterface extends PageInterface
     public function changeQuantity($productName, $quantity);
 
     /**
+     * @param string $couponCode
+     */
+    public function applyCoupon($couponCode);
+
+    /**
      * @return bool
      */
     public function isSingleItemOnPage();
