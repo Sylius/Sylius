@@ -5,7 +5,6 @@ Channels
 ========
 
 In the modern world of e-commerce your website is no longer the only point of sale for your goods.
-Sylius supports multiple-channels and in this guide you will understand them from a technical point of view.
 
 **Channel** model represents a single sales channel, which can be one of the following things:
 
@@ -15,42 +14,37 @@ Sylius supports multiple-channels and in this guide you will understand them fro
 
 Or pretty much any other channel type you can imagine.
 
-The default model has the following basic properties:
+**What may differ between channels?** Particularly anything from your shop configuration: - products, - currencies, - locales (language), - themes.
+In order to make the system more convenient for the administrator - there is just one, shared admin panel. Also users are shared among the channels.
 
-code
-    An unique code identifying this channel
-name
-    The human readable name of the channel
-description
-    Short description
-color:
-    Color representation
-url:
-    The url pattern used to identify the channel
-enabled:
-    Is the channel currently enabled?
-createdAt
-    Date of creation
-updateAt
-    Timestamp of the most recent update
+.. tip::
 
-Channel configuration also allows you to configure several important aspects:
+   In the dev environment you can easily check what channel you are currently on in the Symfony debug toolbar.
 
-locales
-    You can select one or more locales available in this particular store
-currencies
-    Every channel operates only on selected currencies
-paymentMethods
-    You can define which payment methods are available in this channel
-shippingMethods
-    Channel must have shipping methods configured
+   .. image:: ../_images/channel_toolbar.png
+         :align: center
 
-Final Thoughts
---------------
+**How to get the current channel?**
 
-...
+You can get the current channel from the channel context.
+
+.. code-block:: php
+
+   $channel = $this->container->get('sylius.context.channel')->getChannel();
+
+.. note::
+
+   The channel is by default determined basing on the hostname, but you can customize that behaviour.
+   To do that you have to implement the ``Sylius\Component\Channel\Context\ChannelContextInterface``
+   and register it as a service under the ``sylius.context.channel`` tag. Optionally you can add a ``priority="-64"``
+   since the default ChannelContext has a ``priority="-128"``, and by default a ``priority="0"`` is assigned.
+
+.. note::
+
+   Moreover if the channel depends mainly on the request you can implement the ``Sylius\Component\Channel\Context\RequestBased\RequestResolverInterface``
+   with its ``findChannel(Request $request)`` method and register it under the ``sylius.context.channel.request_based.resolver`` tag.
 
 Learn more
 ----------
 
-* ...
+* :doc:`Channel - Component Documentation </components/Channel/index>`.
