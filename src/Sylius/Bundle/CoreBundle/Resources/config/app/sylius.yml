@@ -83,12 +83,6 @@ sylius_inventory:
             classes:
                 model: "%sylius.model.order_item_unit.class%"
 
-sylius_locale:
-    resources:
-        locale:
-            classes:
-                controller: Sylius\Bundle\CoreBundle\Controller\LocaleController
-
 sylius_mailer:
     sender:
         name: Example.com

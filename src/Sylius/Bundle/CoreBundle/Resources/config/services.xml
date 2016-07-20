@@ -103,7 +103,7 @@
         <parameter key="sylius.image_uploader.class">Sylius\Component\Core\Uploader\ImageUploader</parameter>
         <parameter key="sylius.currency_context.class">Sylius\Bundle\CoreBundle\Context\CurrencyContext</parameter>
         <parameter key="sylius.currency_provider.class">Sylius\Component\Core\Currency\ChannelAwareCurrencyProvider</parameter>
-        <parameter key="sylius.channel_aware_locale_provider.class">Sylius\Bundle\CoreBundle\Locale\ChannelAwareLocaleProvider</parameter>
+        <parameter key="sylius.locale_provider.channel_aware.class">Sylius\Bundle\CoreBundle\Locale\ChannelAwareLocaleProvider</parameter>
         <parameter key="sylius.cart_item_resolver.default.class">Sylius\Bundle\CoreBundle\Cart\ItemResolver</parameter>
         <parameter key="sylius.price_calculator.channel_based.class">Sylius\Component\Core\Pricing\ChannelBasedCalculator</parameter>
         <parameter key="sylius.price_calculator.group_based.class">Sylius\Component\Core\Pricing\GroupBasedCalculator</parameter>
@@ -519,7 +519,7 @@
             <argument type="service" id="sylius.repository.currency" />
         </service>
 
-        <service id="sylius.channel_aware_locale_provider" class="%sylius.channel_aware_locale_provider.class%">
+        <service id="sylius.locale_provider.channel_aware" class="%sylius.locale_provider.channel_aware.class%" decorates="sylius.locale_provider">
             <argument type="service" id="sylius.context.channel" />
             <argument>%locale%</argument>
         </service>
