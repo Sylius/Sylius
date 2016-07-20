@@ -383,4 +383,34 @@ final class CartContext implements Context
             'The quantity of product should be %2$s, but it is %s'
         );
     }
+
+    /**
+     * @Given I use coupon with code :couponCode
+     */
+    public function iUseCouponWithCode($couponCode)
+    {
+        $this->summaryPage->applyCoupon($couponCode);
+    }
+
+    /**
+     * @Then I should be notified that promotion coupon has been added to the cart
+     */
+    public function iShouldBeNotifiedThatPromotionCouponHasBeenAddedToTheCart()
+    {
+        $this->notificationChecker->checkNotification(
+            'Your promotion coupon has been added to the cart.',
+            NotificationType::success()
+        );
+    }
+
+    /**
+     * @Then I should be notified that promotion coupon is not valid
+     */
+    public function iShouldBeNotifiedThatPromotionCouponIsNotValid()
+    {
+        $this->notificationChecker->checkNotification(
+            'Your promotion coupon is not valid.',
+            NotificationType::failure()
+        );
+    }
 }

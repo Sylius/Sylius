@@ -109,6 +109,15 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     /**
      * {@inheritdoc}
      */
+    public function applyCoupon($couponCode)
+    {
+        $this->getElement('coupon_field')->setValue($couponCode);
+        $this->getElement('apply_coupon_button')->press();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function changeQuantity($productName, $quantity)
     {
         $itemElement = $this->getElement('product_row', ['%name%' => $productName]);
@@ -189,16 +198,18 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'grand_total' => '#sylius-cart-grand-total',
-            'promotion_total' => '#sylius-cart-promotion-total',
-            'shipping_total' => '#sylius-cart-shipping-total',
-            'tax_total' => '#sylius-cart-tax-total',
-            'product_row' => '#sylius-cart-items tbody tr:contains("%name%")',
-            'product_total' => '#sylius-cart-items tr:contains("%name%") .sylius-total',
-            'product_discounted_total' => '#sylius-cart-items tr:contains("%name%") .sylius-discounted-total',
+            'apply_coupon_button' => 'button:contains("Apply coupon")',
             'cart_items' => '#sylius-cart-items',
             'clear_button' => '#sylius-cart-clear',
+            'coupon_field' => '#sylius_cart_promotionCoupon',
+            'grand_total' => '#sylius-cart-grand-total',
+            'product_discounted_total' => '#sylius-cart-items tr:contains("%name%") .sylius-discounted-total',
+            'product_row' => '#sylius-cart-items tbody tr:contains("%name%")',
+            'product_total' => '#sylius-cart-items tr:contains("%name%") .sylius-total',
+            'promotion_total' => '#sylius-cart-promotion-total',
             'save_button' => '#sylius-save',
+            'shipping_total' => '#sylius-cart-shipping-total',
+            'tax_total' => '#sylius-cart-tax-total',
         ]);
     }
 
