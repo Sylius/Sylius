@@ -19,7 +19,6 @@
     <parameters>
         <parameter key="sylius.authentication.success_handler.class">Sylius\Bundle\UserBundle\Authentication\AuthenticationSuccessHandler</parameter>
         <parameter key="sylius.authentication.failure_handler.class">Sylius\Bundle\UserBundle\Authentication\AuthenticationFailureHandler</parameter>
-        <parameter key="sylius.context.customer.class">Sylius\Bundle\UserBundle\Context\CustomerContext</parameter>
 
         <parameter key="sylius.user.canonicalizer.class">Sylius\Component\User\Canonicalizer\Canonicalizer</parameter>
         <parameter key="sylius.user.password_encoder.class">Sylius\Bundle\UserBundle\Security\UserPasswordEncoder</parameter>
@@ -68,12 +67,6 @@
     <services>
         <service id="sylius.authenticaiton.success_handler" class="%sylius.authentication.success_handler.class%" parent="security.authentication.success_handler" public="false" />
         <service id="sylius.authentication.failure_handler" class="%sylius.authentication.failure_handler.class%" parent="security.authentication.failure_handler" public="false" />
-
-        <!-- Customer context -->
-        <service id="sylius.context.customer" class="%sylius.context.customer.class%">
-            <argument type="service" id="security.token_storage" />
-            <argument type="service" id="security.authorization_checker" />
-        </service>
 
         <!-- Controllers -->
         <service id="sylius.controller.user_security" class="%sylius.controller.user_security.class%">

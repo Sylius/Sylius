@@ -13,7 +13,7 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Component\Customer\Model\Customer as BaseCustomer;
-use Webmozart\Assert\Assert;
+use Sylius\Component\User\Model\UserInterface as BaseUserInterface;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
@@ -39,6 +39,11 @@ class Customer extends BaseCustomer implements CustomerInterface, ProductReviewe
      * @var ArrayCollection
      */
     protected $addresses;
+
+    /**
+     * @var UserInterface
+     */
+    protected $user;
 
     public function __construct()
     {
@@ -130,5 +135,42 @@ class Customer extends BaseCustomer implements CustomerInterface, ProductReviewe
     public function getAddresses()
     {
         return $this->addresses;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasUser()
+    {
+        return null !== $this->user;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function setUser(BaseUserInterface $user = null)
+    {
+        if ($this->user !== $user) {
+            $this->user = $user;
+            $this->assignCustomer($user);
+        }
+    }
+
+    /**
+     * @param UserInterface $user
+     */
+    protected function assignCustomer(UserInterface $user = null)
+    {
+        if (null !== $user) {
+            $user->setCustomer($this);
+        }
     }
 }

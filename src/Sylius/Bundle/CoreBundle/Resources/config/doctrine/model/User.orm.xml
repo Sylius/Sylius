@@ -18,6 +18,13 @@
 
     <mapped-superclass name="Sylius\Component\Core\Model\User" table="sylius_user">
 
+        <one-to-one field="customer" target-entity="Sylius\Component\Customer\Model\CustomerInterface" inversed-by="user">
+            <cascade>
+                <cascade-persist/>
+            </cascade>
+            <join-column name="customer_id" referenced-column-name="id" nullable="false" />
+        </one-to-one>
+
         <many-to-many field="authorizationRoles" target-entity="Sylius\Component\Rbac\Model\RoleInterface">
             <join-table name="sylius_user_role">
                 <join-columns>

@@ -116,6 +116,8 @@
 
         <parameter key="sylius.shipping_methods_resolver.by_zones_and_channel.class">Sylius\Component\Core\Resolver\ShippingMethodsByZonesAndChannelResolver</parameter>
 
+        <parameter key="sylius.context.customer.class">Sylius\Bundle\CoreBundle\Context\CustomerContext</parameter>
+
         <!-- Data fetchers -->
         <parameter key="sylius.form.type.data_fetcher.number_of_orders.class">Sylius\Bundle\CoreBundle\Form\Type\DataFetcher\NumberOfOrdersType</parameter>
         <parameter key="sylius.form.type.data_fetcher.sales_total.class">Sylius\Bundle\CoreBundle\Form\Type\DataFetcher\SalesTotalType</parameter>
@@ -489,6 +491,12 @@
             <argument type="service" id="sylius.repository.shipping_method" />
             <argument type="service" id="sylius.zone_matcher" />
             <tag name="sylius.shipping_method_resolver" type="by_zones_and_channel" label="sylius.shipping_methods_resolver.by_zones_and_channel" priority="1" />
+        </service>
+
+        <!-- Customer context -->
+        <service id="sylius.context.customer" class="%sylius.context.customer.class%">
+            <argument type="service" id="security.token_storage" />
+            <argument type="service" id="security.authorization_checker" />
         </service>
 
         <!-- Data fetchers -->

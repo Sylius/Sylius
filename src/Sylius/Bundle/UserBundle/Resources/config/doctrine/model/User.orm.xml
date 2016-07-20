@@ -46,13 +46,6 @@
             <gedmo:timestampable on="update"/>
         </field>
 
-        <one-to-one field="customer" target-entity="Sylius\Component\Customer\Model\CustomerInterface" inversed-by="user">
-            <cascade>
-                <cascade-persist/>
-            </cascade>
-            <join-column name="customer_id" referenced-column-name="id" nullable="false" />
-        </one-to-one>
-
         <one-to-many field="oauthAccounts" target-entity="Sylius\Component\User\Model\UserOAuthInterface" mapped-by="user">
             <cascade>
                 <cascade-all />

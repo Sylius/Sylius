@@ -31,7 +31,34 @@ interface UserInterface extends
     ToggleableInterface
 {
     const DEFAULT_ROLE = 'ROLE_USER';
-    
+
+    /**
+     * @return string
+     */
+    public function getEmail();
+
+    /**
+     * @param string $email
+     */
+    public function setEmail($email);
+
+    /**
+     * Gets normalized email (should be used in search and sort queries).
+     *
+     * @return string
+     */
+    public function getEmailCanonical();
+
+    /**
+     * @param string $emailCanonical
+     */
+    public function setEmailCanonical($emailCanonical);
+
+    /**
+     * @param string $username
+     */
+    public function setUsername($username);
+
     /**
      * Gets normalized username (should be used in search and sort queries).
      *

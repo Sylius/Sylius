@@ -41,12 +41,6 @@
             <gedmo:timestampable on="update"/>
         </field>
 
-        <one-to-one field="user" target-entity="Sylius\Component\User\Model\UserInterface" mapped-by="customer">
-                <cascade>
-                    <cascade-all/>
-                </cascade>
-        </one-to-one>
-
         <many-to-many field="groups" target-entity="Sylius\Component\User\Model\GroupInterface">
             <cascade>
                 <cascade-all />

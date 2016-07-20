@@ -119,6 +119,16 @@ class User implements UserInterface
      */
     protected $oauthAccounts;
 
+    /**
+     * @var string 
+     */
+    protected $email;
+
+    /**
+     * @var string 
+     */
+    protected $emailCanonical;
+
     public function __construct()
     {
         $this->salt = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
@@ -135,6 +145,38 @@ class User implements UserInterface
     public function getId()
     {
         return $this->id;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getEmailCanonical()
+    {
+        return $this->emailCanonical;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function setEmailCanonical($emailCanonical)
+    {
+        $this->emailCanonical;
     }
     
     /**

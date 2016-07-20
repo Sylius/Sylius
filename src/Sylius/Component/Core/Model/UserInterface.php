@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Core\Model;
 
+use Sylius\Component\Customer\Model\CustomerAwareInterface;
 use Sylius\Component\Rbac\Model\IdentityInterface;
 use Sylius\Component\Rbac\Model\RoleInterface;
 use Sylius\Component\User\Model\UserInterface as BaseUserInterface;
@@ -18,7 +19,7 @@ use Sylius\Component\User\Model\UserInterface as BaseUserInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface UserInterface extends BaseUserInterface, IdentityInterface
+interface UserInterface extends BaseUserInterface, IdentityInterface, CustomerAwareInterface
 {
     /**
      * @param RoleInterface $role
@@ -36,4 +37,14 @@ interface UserInterface extends BaseUserInterface, IdentityInterface
      * @return bool
      */
     public function hasAuthorizationRole(RoleInterface $role);
+    
+    /**
+     * @return CustomerInterface
+     */
+    public function getCustomer();
+    
+    /**
+     * @param CustomerInterface $customer
+     */
+    public function setCustomer(CustomerInterface $customer = null);
 }
