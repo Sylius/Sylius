@@ -13,6 +13,7 @@ namespace Sylius\Component\Core\Test\Services;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
+ * @author Jan Góralski <jan.goralski@lakion.com>
  */
 interface EmailCheckerInterface
 {
@@ -22,4 +23,14 @@ interface EmailCheckerInterface
      * @return bool
      */
     public function hasRecipient($recipient);
+
+    /**
+     * @return int
+     */
+    public function getMessagesCount();
+
+    /**
+     * @return string
+     */
+    public function getSpoolDirectory();
 }

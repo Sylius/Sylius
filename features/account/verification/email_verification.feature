@@ -21,14 +21,14 @@ Feature: Verifying account's email address
         When I try to verify using "twinklelittlestar" token
         Then I should be notified that the verification token is invalid
 
-    @ui
+    @ui @email
     Scenario: Resending the verification email as a logged in user
         Given I am logged in as "valkyrie@cain.com"
         When I resend the verification email
         Then I should be notified that the verification email has been sent
-        And the email should be sent to "valkyrie@cain.com"
+        And it should be sent to "valkyrie@cain.com"
 
-    @ui
+    @ui @email
     Scenario: Being unable to verify using old verification links
         Given I am logged in as "valkyrie@cain.com"
         And I have already received a verification email
@@ -44,10 +44,10 @@ Feature: Verifying account's email address
         And I have already verified my account
         Then I should be unable to resend the verification email
 
-    @ui
+    @ui @email
     Scenario: Receiving account verification email after registration
         When I register with email "ghastly@bespoke.com" and password "suitsarelife"
         Then I should be logged in
         And I should be notified that my account has been created and the verification email has been sent
-        And the verification email should be sent to "ghastly@bespoke.com"
+        And 2 emails should be sent to "ghastly@bespoke.com"
         But my account should not be verified

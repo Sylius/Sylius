@@ -6,6 +6,7 @@ default:
         ui_customer_account:
             contexts_as_services:
                 - sylius.behat.context.hook.doctrine_orm
+                - sylius.behat.context.hook.email_spool
 
                 - sylius.behat.context.transform.addressing
                 - sylius.behat.context.transform.customer

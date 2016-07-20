@@ -28,5 +28,11 @@
             <argument type="service" id="sylius.theme.test_theme_configuration_manager" container="symfony_shared" />
             <tag name="sylius.behat.context" />
         </service>
+
+        <service id="sylius.behat.context.hook.email_spool" class="Sylius\Behat\Context\Hook\EmailSpoolContext">
+            <argument type="service" id="sylius.behat.email_checker" container="symfony"/>
+            <argument type="service" id="filesystem" container="symfony" />
+            <tag name="sylius.behat.context" />
+        </service>
     </services>
 </container>

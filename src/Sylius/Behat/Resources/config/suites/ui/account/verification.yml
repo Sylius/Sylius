@@ -6,6 +6,7 @@ default:
         ui_email_verification:
             contexts_as_services:
                 - sylius.behat.context.hook.doctrine_orm
+                - sylius.behat.context.hook.email_spool
 
                 - sylius.behat.context.transform.shared_storage
                 - sylius.behat.context.transform.user
