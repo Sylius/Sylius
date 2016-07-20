@@ -14,6 +14,7 @@ The Book
     channels
     locales
     currencies
+    zones
     products
     addresses
     inventory
