@@ -21,7 +21,6 @@ use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Promotion\Action\UnitDiscountAction;
 use Sylius\Component\Core\Promotion\Filter\FilterInterface;
-use Sylius\Component\Originator\Originator\OriginatorInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -33,11 +32,10 @@ class UnitFixedDiscountActionSpec extends ObjectBehavior
 {
     function let(
         FactoryInterface $adjustmentFactory,
-        OriginatorInterface $originator,
         FilterInterface $priceRangeFilter,
         FilterInterface $taxonFilter
     ) {
-        $this->beConstructedWith($adjustmentFactory, $originator, $priceRangeFilter, $taxonFilter);
+        $this->beConstructedWith($adjustmentFactory, $priceRangeFilter, $taxonFilter);
     }
 
     function it_is_initializable()
@@ -52,7 +50,6 @@ class UnitFixedDiscountActionSpec extends ObjectBehavior
 
     function it_applies_fixed_discount_on_every_unit_in_order(
         $adjustmentFactory,
-        $originator,
         $priceRangeFilter,
         $taxonFilter,
         AdjustmentInterface $promotionAdjustment1,
@@ -84,6 +81,7 @@ class UnitFixedDiscountActionSpec extends ObjectBehavior
         $units->getIterator()->willReturn(new \ArrayIterator([$unit1->getWrappedObject(), $unit2->getWrappedObject()]));
 
         $promotion->getName()->willReturn('Test promotion');
+        $promotion->getCode()->willReturn('TEST_PROMOTION');
 
         $adjustmentFactory->createNew()->willReturn($promotionAdjustment1, $promotionAdjustment2);
 
@@ -92,14 +90,14 @@ class UnitFixedDiscountActionSpec extends ObjectBehavior
         $promotionAdjustment1->setLabel('Test promotion')->shouldBeCalled();
         $promotionAdjustment1->setAmount(-500)->shouldBeCalled();
 
-        $originator->setOrigin($promotionAdjustment1, $promotion)->shouldBeCalled();
+        $promotionAdjustment1->setOriginCode('TEST_PROMOTION')->shouldBeCalled();
 
         $unit2->getTotal()->willReturn(1000);
         $promotionAdjustment2->setType(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)->shouldBeCalled();
         $promotionAdjustment2->setLabel('Test promotion')->shouldBeCalled();
         $promotionAdjustment2->setAmount(-500)->shouldBeCalled();
 
-        $originator->setOrigin($promotionAdjustment2, $promotion)->shouldBeCalled();
+        $promotionAdjustment2->setOriginCode('TEST_PROMOTION')->shouldBeCalled();
 
         $unit1->addAdjustment($promotionAdjustment1)->shouldBeCalled();
         $unit2->addAdjustment($promotionAdjustment2)->shouldBeCalled();
@@ -124,7 +122,6 @@ class UnitFixedDiscountActionSpec extends ObjectBehavior
 
     function it_does_not_apply_bigger_promotions_than_unit_total(
         $adjustmentFactory,
-        $originator,
         $priceRangeFilter,
         $taxonFilter,
         AdjustmentInterface $promotionAdjustment1,
@@ -156,6 +153,7 @@ class UnitFixedDiscountActionSpec extends ObjectBehavior
         $units->getIterator()->willReturn(new \ArrayIterator([$unit1->getWrappedObject(), $unit2->getWrappedObject()]));
 
         $promotion->getName()->willReturn('Test promotion');
+        $promotion->getCode()->willReturn('TEST_PROMOTION');
 
         $adjustmentFactory->createNew()->willReturn($promotionAdjustment1, $promotionAdjustment2);
 
@@ -164,14 +162,14 @@ class UnitFixedDiscountActionSpec extends ObjectBehavior
         $promotionAdjustment1->setLabel('Test promotion')->shouldBeCalled();
         $promotionAdjustment1->setAmount(-300)->shouldBeCalled();
 
-        $originator->setOrigin($promotionAdjustment1, $promotion)->shouldBeCalled();
+        $promotionAdjustment1->setOriginCode('TEST_PROMOTION')->shouldBeCalled();
 
         $unit2->getTotal()->willReturn(200);
         $promotionAdjustment2->setType(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)->shouldBeCalled();
         $promotionAdjustment2->setLabel('Test promotion')->shouldBeCalled();
         $promotionAdjustment2->setAmount(-200)->shouldBeCalled();
 
-        $originator->setOrigin($promotionAdjustment2, $promotion)->shouldBeCalled();
+        $promotionAdjustment2->setOriginCode('TEST_PROMOTION')->shouldBeCalled();
 
         $unit1->addAdjustment($promotionAdjustment1)->shouldBeCalled();
         $unit2->addAdjustment($promotionAdjustment2)->shouldBeCalled();
@@ -190,7 +188,6 @@ class UnitFixedDiscountActionSpec extends ObjectBehavior
     }
 
     function it_revert_proper_promotion_adjustment_from_all_units(
-        $originator,
         AdjustmentInterface $promotionAdjustment1,
         AdjustmentInterface $promotionAdjustment2,
         Collection $items,
@@ -199,8 +196,7 @@ class UnitFixedDiscountActionSpec extends ObjectBehavior
         OrderInterface $order,
         OrderItemInterface $orderItem,
         OrderItemUnitInterface $unit,
-        PromotionInterface $promotion,
-        PromotionInterface $someOtherPromotion
+        PromotionInterface $promotion
     ) {
         $order->getItems()->willReturn($items);
         $items->getIterator()->willReturn(new \ArrayIterator([$orderItem->getWrappedObject()]));
@@ -214,10 +210,12 @@ class UnitFixedDiscountActionSpec extends ObjectBehavior
             ->willReturn(new \ArrayIterator([$promotionAdjustment1->getWrappedObject(), $promotionAdjustment2->getWrappedObject()]))
         ;
 
-        $originator->getOrigin($promotionAdjustment1)->willReturn($promotion);
+        $promotion->getCode()->willReturn('PROMOTION');
+
+        $promotionAdjustment1->getOriginCode()->willReturn('PROMOTION');
         $unit->removeAdjustment($promotionAdjustment1)->shouldBeCalled();
 
-        $originator->getOrigin($promotionAdjustment2)->willReturn($someOtherPromotion);
+        $promotionAdjustment2->getOriginCode()->willReturn('OTHER_PROMOTION');
         $unit->removeAdjustment($promotionAdjustment2)->shouldNotBeCalled();
 
         $this->revert($order, ['amount' => 1000], $promotion);

@@ -22,7 +22,6 @@ use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicator;
 use Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicatorInterface;
 use Sylius\Component\Order\Factory\AdjustmentFactoryInterface;
-use Sylius\Component\Originator\Originator\OriginatorInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 
 /**
@@ -34,10 +33,9 @@ class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
 {
     function let(
         AdjustmentFactoryInterface $adjustmentFactory,
-        IntegerDistributorInterface $distributor,
-        OriginatorInterface $originator
+        IntegerDistributorInterface $distributor
     ) {
-        $this->beConstructedWith($adjustmentFactory, $distributor, $originator);
+        $this->beConstructedWith($adjustmentFactory, $distributor);
     }
 
     function it_is_initializable()
@@ -62,7 +60,6 @@ class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
         OrderItemUnitInterface $firstColtUnit,
         OrderItemUnitInterface $magnumUnit,
         OrderItemUnitInterface $secondColtUnit,
-        OriginatorInterface $originator,
         PromotionInterface $promotion
     ) {
         $order->countItems()->willReturn(2);
@@ -88,6 +85,7 @@ class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
         ;
 
         $promotion->getName()->willReturn('Winter guns promotion!');
+        $promotion->getCode()->willReturn('WINTER_GUNS_PROMOTION');
 
         $adjustmentFactory
             ->createWithData(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT, 'Winter guns promotion!', 500)
@@ -98,9 +96,9 @@ class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
             ->willReturn($thirdAdjustment)
         ;
 
-        $originator->setOrigin($firstAdjustment, $promotion)->shouldBeCalled();
-        $originator->setOrigin($secondAdjustment, $promotion)->shouldBeCalled();
-        $originator->setOrigin($thirdAdjustment, $promotion)->shouldBeCalled();
+        $firstAdjustment->setOriginCode('WINTER_GUNS_PROMOTION')->shouldBeCalled();
+        $secondAdjustment->setOriginCode('WINTER_GUNS_PROMOTION')->shouldBeCalled();
+        $thirdAdjustment->setOriginCode('WINTER_GUNS_PROMOTION')->shouldBeCalled();
 
         $firstColtUnit->addAdjustment($firstAdjustment)->shouldBeCalled();
         $secondColtUnit->addAdjustment($secondAdjustment)->shouldBeCalled();
@@ -118,7 +116,6 @@ class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
         OrderItemInterface $magnumItem,
         OrderItemUnitInterface $coltUnit,
         OrderItemUnitInterface $magnumUnit,
-        OriginatorInterface $originator,
         PromotionInterface $promotion
     ) {
         $order->countItems()->willReturn(2);
@@ -143,13 +140,14 @@ class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
         ;
 
         $promotion->getName()->willReturn('Winter guns promotion!');
+        $promotion->getCode()->willReturn('WINTER_GUNS_PROMOTION');
 
         $adjustmentFactory
             ->createWithData(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT, 'Winter guns promotion!', 1)
             ->willReturn($adjustment)
         ;
 
-        $originator->setOrigin($adjustment, $promotion)->shouldBeCalled();
+        $adjustment->setOriginCode('WINTER_GUNS_PROMOTION')->shouldBeCalled();
 
         $coltUnit->addAdjustment($adjustment)->shouldBeCalled();
         $magnumUnit->addAdjustment(Argument::any())->shouldNotBeCalled();
@@ -169,7 +167,6 @@ class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
         OrderItemUnitInterface $coltUnit,
         OrderItemUnitInterface $magnumUnit,
         OrderItemUnitInterface $winchesterUnit,
-        OriginatorInterface $originator,
         PromotionInterface $promotion
     ) {
         $order->countItems()->willReturn(3);
@@ -203,14 +200,15 @@ class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
         ;
 
         $promotion->getName()->willReturn('Winter guns promotion!');
+        $promotion->getCode()->willReturn('WINTER_GUNS_PROMOTION');
 
         $adjustmentFactory
             ->createWithData(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT, 'Winter guns promotion!', 1)
             ->willReturn($firstAdjustment, $secondAdjustment)
         ;
 
-        $originator->setOrigin($firstAdjustment, $promotion)->shouldBeCalled();
-        $originator->setOrigin($secondAdjustment, $promotion)->shouldBeCalled();
+        $firstAdjustment->setOriginCode('WINTER_GUNS_PROMOTION')->shouldBeCalled();
+        $secondAdjustment->setOriginCode('WINTER_GUNS_PROMOTION')->shouldBeCalled();
 
         $coltUnit->addAdjustment($firstAdjustment)->shouldBeCalled();
         $magnumUnit->addAdjustment(Argument::any())->shouldNotBeCalled();
@@ -229,7 +227,6 @@ class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
         OrderItemUnitInterface $firstColtUnit,
         OrderItemUnitInterface $secondColtUnit,
         OrderItemUnitInterface $thirdColtUnit,
-        OriginatorInterface $originator,
         PromotionInterface $promotion
     ) {
         $order->countItems()->willReturn(1);
@@ -253,14 +250,15 @@ class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
         ;
 
         $promotion->getName()->willReturn('Winter guns promotion!');
+        $promotion->getCode()->willReturn('WINTER_GUNS_PROMOTION');
 
         $adjustmentFactory
             ->createWithData(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT, 'Winter guns promotion!', 1)
             ->willReturn($firstAdjustment, $secondAdjustment)
         ;
 
-        $originator->setOrigin($firstAdjustment, $promotion)->shouldBeCalled();
-        $originator->setOrigin($secondAdjustment, $promotion)->shouldBeCalled();
+        $firstAdjustment->setOriginCode('WINTER_GUNS_PROMOTION')->shouldBeCalled();
+        $secondAdjustment->setOriginCode('WINTER_GUNS_PROMOTION')->shouldBeCalled();
 
         $firstColtUnit->addAdjustment($firstAdjustment)->shouldBeCalled();
         $secondColtUnit->addAdjustment(Argument::any())->shouldNotBeCalled();
@@ -277,7 +275,6 @@ class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
         OrderItemInterface $coltItem,
         OrderItemUnitInterface $firstColtUnit,
         OrderItemUnitInterface $secondColtUnit,
-        OriginatorInterface $originator,
         PromotionInterface $promotion
     ) {
         $order->countItems()->willReturn(1);
@@ -297,13 +294,14 @@ class UnitsPromotionAdjustmentsApplicatorSpec extends ObjectBehavior
         ;
 
         $promotion->getName()->willReturn('Winter guns promotion!');
+        $promotion->getCode()->willReturn('WINTER_GUNS_PROMOTION');
 
         $adjustmentFactory
             ->createWithData(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT, 'Winter guns promotion!', 1)
             ->willReturn($adjustment)
         ;
 
-        $originator->setOrigin($adjustment, $promotion)->shouldBeCalled();
+        $adjustment->setOriginCode('WINTER_GUNS_PROMOTION')->shouldBeCalled();
 
         $firstColtUnit->addAdjustment($adjustment)->shouldBeCalled();
         $secondColtUnit->addAdjustment(Argument::any())->shouldNotBeCalled();

@@ -216,7 +216,8 @@ final class CartContext implements Context
     }
 
     /**
-     * @Given /^(product "[^"]+") price should not be decreased$/
+     * @Then /^(product "[^"]+") price should not be decreased$/
+     * @Then /^(its|theirs) price should not be decreased$/
      */
     public function productPriceShouldNotBeDecreased(ProductInterface $product)
     {

@@ -20,11 +20,9 @@ use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Core\Promotion\Action\PercentageDiscountAction;
 use Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicatorInterface;
-use Sylius\Component\Originator\Originator\OriginatorInterface;
 use Sylius\Component\Promotion\Action\PromotionActionInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 
 /**
  * @mixin PercentageDiscountAction
@@ -36,15 +34,10 @@ use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 class PercentageDiscountActionSpec extends ObjectBehavior
 {
     function let(
-        OriginatorInterface $originator,
         IntegerDistributorInterface $integerDistributor,
         UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
     ) {
-        $this->beConstructedWith(
-            $originator,
-            $integerDistributor,
-            $unitsPromotionAdjustmentsApplicator
-        );
+        $this->beConstructedWith($integerDistributor, $unitsPromotionAdjustmentsApplicator);
     }
 
     function it_is_initializable()
@@ -129,8 +122,6 @@ class PercentageDiscountActionSpec extends ObjectBehavior
         OrderInterface $order,
         OrderItemInterface $item,
         OrderItemUnitInterface $unit,
-        OriginatorInterface $originator,
-        PromotionInterface $otherPromotion,
         PromotionInterface $promotion
     ) {
         $order->countItems()->willReturn(1);
@@ -143,8 +134,10 @@ class PercentageDiscountActionSpec extends ObjectBehavior
             ->willReturn(new \ArrayIterator([$firstAdjustment->getWrappedObject(), $secondAdjustment->getWrappedObject()]))
         ;
 
-        $originator->getOrigin($firstAdjustment)->willReturn($promotion);
-        $originator->getOrigin($secondAdjustment)->willReturn($otherPromotion);
+        $promotion->getCode()->willReturn('PROMOTION');
+
+        $firstAdjustment->getOriginCode()->willReturn('PROMOTION');
+        $secondAdjustment->getOriginCode()->willReturn('OTHER_PROMOTION');
 
         $unit->removeAdjustment($firstAdjustment)->shouldBeCalled();
         $unit->removeAdjustment($secondAdjustment)->shouldNotBeCalled();

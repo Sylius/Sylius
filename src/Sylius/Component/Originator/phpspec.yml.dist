@@ -1,5 +1,0 @@
-suites:
-    main:
-        namespace: Sylius\Component\Originator
-        psr4_prefix: Sylius\Component\Originator
-        src_path: .

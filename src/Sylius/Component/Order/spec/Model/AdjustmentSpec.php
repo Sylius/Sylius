@@ -225,6 +225,12 @@ class AdjustmentSpec extends ObjectBehavior
         $this->shouldNotBeCredit();
     }
 
+    function its_origin_code_is_mutable()
+    {
+        $this->setOriginCode('TEST_PROMOTION');
+        $this->getOriginCode()->shouldReturn('TEST_PROMOTION');
+    }
+
     function it_initializes_creation_date_by_default()
     {
         $this->getCreatedAt()->shouldHaveType('DateTime');

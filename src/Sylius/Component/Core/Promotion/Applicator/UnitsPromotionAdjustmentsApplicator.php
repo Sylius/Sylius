@@ -17,7 +17,6 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Order\Factory\AdjustmentFactoryInterface;
 use Sylius\Component\Order\Model\OrderItemUnitInterface;
-use Sylius\Component\Originator\Originator\OriginatorInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Webmozart\Assert\Assert;
 
@@ -37,23 +36,15 @@ class UnitsPromotionAdjustmentsApplicator implements UnitsPromotionAdjustmentsAp
     private $distributor;
 
     /**
-     * @var OriginatorInterface
-     */
-    private $originator;
-
-    /**
      * @param AdjustmentFactoryInterface $adjustmentFactory
      * @param IntegerDistributorInterface $distributor
-     * @param OriginatorInterface $originator
      */
     public function __construct(
         AdjustmentFactoryInterface $adjustmentFactory,
-        IntegerDistributorInterface $distributor,
-        OriginatorInterface $originator
+        IntegerDistributorInterface $distributor
     ) {
         $this->adjustmentFactory = $adjustmentFactory;
         $this->distributor = $distributor;
-        $this->originator = $originator;
     }
 
     /**
@@ -104,8 +95,7 @@ class UnitsPromotionAdjustmentsApplicator implements UnitsPromotionAdjustmentsAp
         $adjustment = $this->adjustmentFactory
             ->createWithData(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT, $promotion->getName(), $amount)
         ;
-
-        $this->originator->setOrigin($adjustment, $promotion);
+        $adjustment->setOriginCode($promotion->getCode());
 
         $unit->addAdjustment($adjustment);
     }

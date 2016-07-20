@@ -14,11 +14,9 @@ namespace Sylius\Component\Core\Promotion\Action;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
-use Sylius\Component\Originator\Originator\OriginatorInterface;
 use Sylius\Component\Promotion\Action\PromotionActionInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
-use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Webmozart\Assert\Assert;
 
 /**
@@ -27,19 +25,6 @@ use Webmozart\Assert\Assert;
  */
 abstract class DiscountAction implements PromotionActionInterface
 {
-    /**
-     * @var OriginatorInterface
-     */
-    protected $originator;
-
-    /**
-     * @param OriginatorInterface $originator
-     */
-    public function __construct(OriginatorInterface $originator)
-    {
-        $this->originator = $originator;
-    }
-
     /**
      * @param array $configuration
      */
@@ -80,7 +65,7 @@ abstract class DiscountAction implements PromotionActionInterface
     private function removeUnitOrderPromotionAdjustmentsByOrigin(OrderItemUnitInterface $unit, PromotionInterface $promotion)
     {
         foreach ($unit->getAdjustments(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT) as $adjustment) {
-            if ($promotion === $this->originator->getOrigin($adjustment)) {
+            if ($promotion->getCode() === $adjustment->getOriginCode()) {
                 $unit->removeAdjustment($adjustment);
             }
         }

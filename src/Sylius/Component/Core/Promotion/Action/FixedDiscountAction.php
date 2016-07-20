@@ -13,7 +13,6 @@ namespace Sylius\Component\Core\Promotion\Action;
 
 use Sylius\Component\Core\Distributor\ProportionalIntegerDistributorInterface;
 use Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicatorInterface;
-use Sylius\Component\Originator\Originator\OriginatorInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 use Webmozart\Assert\Assert;
@@ -38,18 +37,13 @@ class FixedDiscountAction extends DiscountAction
     private $unitsPromotionAdjustmentsApplicator;
 
     /**
-     * {@inheritdoc}
-     *
      * @param ProportionalIntegerDistributorInterface $proportionalIntegerDistributor
      * @param UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
      */
     public function __construct(
-        OriginatorInterface $originator,
         ProportionalIntegerDistributorInterface $proportionalIntegerDistributor,
         UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
     ) {
-        parent::__construct($originator);
-
         $this->proportionalDistributor = $proportionalIntegerDistributor;
         $this->unitsPromotionAdjustmentsApplicator = $unitsPromotionAdjustmentsApplicator;
     }
