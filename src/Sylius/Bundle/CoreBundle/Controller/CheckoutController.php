@@ -85,11 +85,11 @@ class CheckoutController extends FOSRestController
     public function addressingAction(Request $request, OrderInterface $order)
     {
         if ($order->isEmpty()) {
-            return new Response('Order cannot be empty!', 400);
+            return new Response('Order cannot be empty!', Response::HTTP_BAD_REQUEST);
         }
 
         if ($request->isMethod('GET')) {
-            return new Response('Method not allowed!', 405);
+            return new Response('Method not allowed!', Response::HTTP_METHOD_NOT_ALLOWED);
         }
 
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::ADDRESSING_INITIALIZE, $order);
@@ -110,7 +110,7 @@ class CheckoutController extends FOSRestController
             return $this->handleView($this->view($order));
         }
 
-        return $this->handleView($this->view($form, 400));
+        return $this->handleView($this->view($form, Response::HTTP_BAD_REQUEST));
     }
 
     /**
@@ -153,7 +153,7 @@ class CheckoutController extends FOSRestController
             return $this->handleView($this->view($order));
         }
 
-        return $this->handleView($this->view($form, 400));
+        return $this->handleView($this->view($form, Response::HTTP_BAD_REQUEST));
     }
 
     /**
@@ -196,7 +196,7 @@ class CheckoutController extends FOSRestController
             return $this->handleView($this->view($order));
         }
 
-        return $this->handleView($this->view($form, 400));
+        return $this->handleView($this->view($form, Response::HTTP_BAD_REQUEST));
     }
 
     /**

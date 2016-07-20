@@ -128,7 +128,7 @@ class OrderController extends FOSRestController
 
         return new Response(
             $generator->getOutputFromHtml($html),
-            200,
+            Response::HTTP_OK,
             [
                 'Content-Type' => 'application/pdf',
                 'Content-Disposition' => 'attachment; filename="'.$order->getNumber().'.pdf"',
