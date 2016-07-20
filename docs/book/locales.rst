@@ -4,20 +4,27 @@
 Locales
 =======
 
-To support multiple site languages, we use *Locale* model with the following set of fields:
+To support multiple languages we are using **Locales** in **Sylius**. Locales are language codes standardized by the ISO 15897.
 
-* id
-* code
-* enabled
-* createdAt
-* updatedAt
+.. tip::
+
+    In the dev environment you can easily check what locale you are currently using in the Symfony debug toolbar:
+
+    .. image:: ../_images/toolbar.png
+        :align: center
+
+Base Locale
+-----------
+
+During the :doc:`installation </book/installation>` you provided a default base locale. This is the language in which everything
+in your system will be saved in the database - all the product names, texts on website, e-mails etc.
 
 Locale Context
 --------------
 
 With the default configuration, customers are able to change the store language in the frontend.
 
-To manage the currently used language, we use **LocaleContext**. You can always access it through ``sylius.context.locale`` id.
+To manage the currently used language, we use the **LocaleContext**. You can always access it with the ID ``sylius.context.locale`` in the container.
 
 .. code-block:: php
 
@@ -26,11 +33,9 @@ To manage the currently used language, we use **LocaleContext**. You can always 
     public function fooAction()
     {
         $locale = $this->get('sylius.context.locale')->getLocale();
-
-        echo $locale; // pl_PL
     }
 
-To change the locale, you can simply use the ``setLocale()`` method of the context service.
+To change the locale use the ``setLocale()`` method of the context service.
 
 .. code-block:: php
 
@@ -38,16 +43,16 @@ To change the locale, you can simply use the ``setLocale()`` method of the conte
 
     public function fooAction()
     {
-        $this->get('sylius.context.locale')->setLocale('de_DE'); // Store will be displayed in German.
+        $this->get('sylius.context.locale')->setLocale('pl_PL'); // Store will be displayed in Polish.
     }
 
-The locale context can be injected into your custom service and give you access to currently used locale.
+The locale context can be injected into any of your services and give you access to the currently used locale.
 
 Available Locales Provider
 --------------------------
 
-Service ``sylius.locale_provider`` is responsible for returning all languages available to the current user. By default, it filters out all disabled locales.
-You can easily modify this logic by overriding this component.
+The Locale Provider service (``sylius.locale_provider``) is responsible for returning all languages available for the current user. By default, it filters out all disabled locales.
+You can easily modify this logic by overriding this service.
 
 .. code-block:: php
 
@@ -62,7 +67,7 @@ You can easily modify this logic by overriding this component.
         }
     }
 
-To get all languages configured in the store, including the disabled ones, you can simply use the repository.
+To get all languages configured in the store, including the disabled ones, use the locales repository:
 
 .. code-block:: php
 
@@ -70,12 +75,7 @@ To get all languages configured in the store, including the disabled ones, you c
 
     $locales = $this->get('sylius.repository.locale')->findAll();
 
-Final Thoughts
---------------
-
-...
-
 Learn more
 ----------
 
-* ...
+* :doc:`Locale - Component Documentation </components/Locale/index>`.

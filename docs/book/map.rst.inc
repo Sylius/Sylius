@@ -6,6 +6,8 @@
 * :doc:`/book/resource_layer`
 * :doc:`/book/state_machine`
 * :doc:`/book/channels`
+* :doc:`/book/locales`
+* :doc:`/book/currencies`
 * :doc:`/book/products`
 * :doc:`/book/addresses`
 * :doc:`/book/inventory`
@@ -16,8 +18,6 @@
 * :doc:`/book/pricing`
 * :doc:`/book/promotions`
 * :doc:`/book/users_and_groups`
-* :doc:`/book/currencies`
-* :doc:`/book/locales`
 * :doc:`/book/content`
 * :doc:`/book/emails`
 * :doc:`/book/settings`
