@@ -70,14 +70,14 @@ final class OrderContext implements Context
     }
 
     /**
-     * @When I delete the order :orderNumber
+     * @When I delete the order :order
      */
-    public function iDeleteTheOrder($orderNumber)
+    public function iDeleteTheOrder(OrderInterface $order)
     {
         /** @var OrderInterface $order */
-        $order = $this->orderRepository->findOneBy(['number' => $orderNumber]);
+        $order = $this->orderRepository->findOneBy(['number' => $order->getNumber()]);
         if (null === $order) {
-            throw new \InvalidArgumentException(sprintf('Order with %s number was not found in an order repository', $orderNumber));
+            throw new \InvalidArgumentException(sprintf('Order with %s number was not found in an order repository', $order->getNumber()));
         }
 
         $adjustmentsId = [];

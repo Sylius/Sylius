@@ -40,7 +40,6 @@
         "sylius/rbac": "^1.0",
         "sylius/registry": "^1.0",
         "sylius/resource": "^1.0",
-        "sylius/sequence": "^1.0",
         "sylius/shipping": "^1.0",
         "sylius/storage": "^1.0",
         "sylius/taxation": "^1.0",

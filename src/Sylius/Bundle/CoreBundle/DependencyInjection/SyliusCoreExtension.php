@@ -46,7 +46,6 @@ class SyliusCoreExtension extends AbstractResourceExtension implements PrependEx
         'sylius_promotion',
         'sylius_review',
         'sylius_report',
-        'sylius_sequence',
         'sylius_settings',
         'sylius_shipping',
         'sylius_mailer',

@@ -16,8 +16,7 @@ This interface should be implemented by model representing a single Order.
 
 .. note::
     This interface extends :ref:`component_resource_model_timestampable-interface`, :ref:`component_resource_model_timestampable-interface`,
-    :ref:`component_order_model_adjustable-interface`, :ref:`component_order_model_comment-aware-interface`
-    and :ref:`component_sequence_model_sequence-subject-interface`.
+    :ref:`component_order_model_adjustable-interface` and :ref:`component_order_model_comment-aware-interface`
 
     For more detailed information go to `Sylius API OrderInterface`_.
 
@@ -148,8 +147,7 @@ In order to decouple from storage that provides recently completed orders or che
 you should create repository class which implements this interface.
 
 .. note::
-    This interface extends the :ref:`component_resource_repository_repository-interface` and
-    the :ref:`component_sequence_repository_hash-subject-repository-interface`.
+    This interface extends the :ref:`component_resource_repository_repository-interface`.
 
     For more detailed information about the interface go to `Sylius API OrderRepositoryInterface`_.
 

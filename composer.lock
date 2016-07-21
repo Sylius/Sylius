@@ -4,8 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "3933e4fcbb56494b6df69eee8a0022b2",
-    "content-hash": "66eedeb56cc54d23081335ddf8ca3b7c",
+    "hash": "4b3521f709bb0a1eabbc87d7c3f8c0b4",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1839,7 +1838,6 @@
                 "rest",
                 "web service"
             ],
-            "abandoned": "guzzlehttp/guzzle",
             "time": "2015-03-18 18:23:50"
         },
         {
@@ -6082,9 +6080,9 @@
             ],
             "authors": [
                 {
-                    "name": "Johannes Schmitt",
+                    "name": "Johannes M. Schmitt",
                     "email": "schmittjoh@gmail.com",
-                    "homepage": "https://github.com/schmittjoh",
+                    "homepage": "http://jmsyst.com",
                     "role": "Developer of wrapped JMSSerializerBundle"
                 }
             ],
@@ -8759,7 +8757,7 @@
             ],
             "authors": [
                 {
-                    "name": "William Durand",
+                    "name": "William DURAND",
                     "email": "william.durand1@gmail.com",
                     "homepage": "http://www.willdurand.fr"
                 }
@@ -10076,7 +10074,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Lakion/ApiTestCase/zipball/c4d37eccbaa49f06a317d22198649517627ed599",
+                "url": "https://api.github.com/repos/Lakion/ApiTestCase/zipball/171e6b7c00bc0d5b56edfc68f1a1d91f48c60850",
                 "reference": "c4d37eccbaa49f06a317d22198649517627ed599",
                 "shasum": ""
             },
@@ -10668,8 +10666,7 @@
             "authors": [
                 {
                     "name": "Chris Boulton",
-                    "homepage": "http://github.com/chrisboulton",
-                    "role": "Original developer"
+                    "homepage": "http://github.com/chrisboulton"
                 }
             ],
             "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",

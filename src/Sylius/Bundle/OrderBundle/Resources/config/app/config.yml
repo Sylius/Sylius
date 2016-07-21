@@ -10,7 +10,3 @@ jms_serializer:
             sylius-order:
                 namespace_prefix: "Sylius\\Component\\Order"
                 path: "@SyliusOrderBundle/Resources/config/serializer"
-
-sylius_sequence:
-    generators:
-        "%sylius.model.order.class%": sylius.sequence.sequential_number_generator

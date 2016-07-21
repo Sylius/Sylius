@@ -26,7 +26,6 @@
         "sylius/order": "^1.0",
         "sylius/money-bundle": "^1.0",
         "sylius/resource-bundle": "^1.0",
-        "sylius/sequence-bundle": "^1.0",
         "symfony/framework-bundle": "^2.8"
     },
     "require-dev": {

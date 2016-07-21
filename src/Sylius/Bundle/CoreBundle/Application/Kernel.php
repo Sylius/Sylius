@@ -58,7 +58,6 @@ class Kernel extends HttpKernel
             new \Sylius\Bundle\TaxonomyBundle\SyliusTaxonomyBundle(),
             new \Sylius\Bundle\FlowBundle\SyliusFlowBundle(),
             new \Sylius\Bundle\PricingBundle\SyliusPricingBundle(),
-            new \Sylius\Bundle\SequenceBundle\SyliusSequenceBundle(),
             new \Sylius\Bundle\ContentBundle\SyliusContentBundle(),
             new \Sylius\Bundle\RbacBundle\SyliusRbacBundle(),
             new \Sylius\Bundle\UserBundle\SyliusUserBundle(),
