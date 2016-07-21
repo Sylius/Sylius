@@ -11,13 +11,17 @@
 
 namespace Sylius\Bundle\OrderBundle\NumberGenerator;
 
+use Sylius\Component\Order\Model\OrderInterface;
+
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-interface SequentialOrderNumberGeneratorInterface
+interface OrderNumberGeneratorInterface
 {
     /**
+     * @param OrderInterface $order
+     *
      * @return string
      */
-    public function generate();
+    public function generate(OrderInterface $order);
 }
