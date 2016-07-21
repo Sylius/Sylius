@@ -13,8 +13,9 @@ namespace spec\Sylius\Bundle\OrderBundle\NumberGenerator;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\OrderBundle\NumberGenerator\SequentialOrderNumberGenerator;
-use Sylius\Bundle\OrderBundle\NumberGenerator\SequentialOrderNumberGeneratorInterface;
+use Sylius\Bundle\OrderBundle\NumberGenerator\OrderNumberGeneratorInterface;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderSequenceInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
@@ -37,23 +38,27 @@ final class SequentialOrderNumberGeneratorSpec extends ObjectBehavior
 
     function it_implements_order_number_generator_interface()
     {
-        $this->shouldImplement(SequentialOrderNumberGeneratorInterface::class);
+        $this->shouldImplement(OrderNumberGeneratorInterface::class);
     }
 
-    function it_generates_order_number(EntityRepository $sequenceRepository, OrderSequenceInterface $sequence)
-    {
+    function it_generates_order_number(
+        EntityRepository $sequenceRepository,
+        OrderSequenceInterface $sequence,
+        OrderInterface $order
+    ) {
         $sequence->getIndex()->willReturn(6);
         $sequenceRepository->findOneBy([])->willReturn($sequence);
 
         $sequence->incrementIndex()->shouldBeCalled();
 
-        $this->generate()->shouldReturn('000000007');
+        $this->generate($order)->shouldReturn('000000007');
     }
 
     function it_generates_order_number_when_sequence_is_null(
         EntityRepository $sequenceRepository,
         FactoryInterface $sequenceFactory,
-        OrderSequenceInterface $sequence
+        OrderSequenceInterface $sequence,
+        OrderInterface $order
     ) {
         $sequence->getIndex()->willReturn(0);
 
@@ -64,6 +69,6 @@ final class SequentialOrderNumberGeneratorSpec extends ObjectBehavior
 
         $sequence->incrementIndex()->shouldBeCalled();
 
-        $this->generate()->shouldReturn('000000001');
+        $this->generate($order)->shouldReturn('000000001');
     }
 }

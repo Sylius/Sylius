@@ -15,7 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\OrderBundle\NumberAssigner\OrderNumberAssigner;
 use Sylius\Bundle\OrderBundle\NumberAssigner\OrderNumberAssignerInterface;
-use Sylius\Bundle\OrderBundle\NumberGenerator\SequentialOrderNumberGeneratorInterface;
+use Sylius\Bundle\OrderBundle\NumberGenerator\OrderNumberGeneratorInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 
 /**
@@ -25,7 +25,7 @@ use Sylius\Component\Order\Model\OrderInterface;
  */
 final class OrderNumberAssignerSpec extends ObjectBehavior
 {
-    function let(SequentialOrderNumberGeneratorInterface $numberGenerator)
+    function let(OrderNumberGeneratorInterface $numberGenerator)
     {
         $this->beConstructedWith($numberGenerator);
     }
@@ -42,11 +42,11 @@ final class OrderNumberAssignerSpec extends ObjectBehavior
 
     function it_assigns_number_to_order(
         OrderInterface $order,
-        SequentialOrderNumberGeneratorInterface $numberGenerator
+        OrderNumberGeneratorInterface $numberGenerator
     ) {
         $order->getNumber()->willReturn(null);
 
-        $numberGenerator->generate()->willReturn('00000007');
+        $numberGenerator->generate($order)->willReturn('00000007');
         $order->setNumber('00000007')->shouldBeCalled();
 
         $this->assignNumber($order);
@@ -54,11 +54,11 @@ final class OrderNumberAssignerSpec extends ObjectBehavior
 
     function it_does_not_assign_number_to_order_with_number(
         OrderInterface $order,
-        SequentialOrderNumberGeneratorInterface $numberGenerator
+        OrderNumberGeneratorInterface $numberGenerator
     ) {
         $order->getNumber()->willReturn('00000007');
 
-        $numberGenerator->generate()->shouldNotBeCalled();
+        $numberGenerator->generate($order)->shouldNotBeCalled();
         $order->setNumber(Argument::any())->shouldNotBeCalled();
 
         $this->assignNumber($order);
