@@ -176,7 +176,13 @@ final class ManagingCountriesContext implements Context
      */
     public function iShouldNotBeAbleToChoose($name)
     {
-        expect($this->createPage)->toThrow(ElementNotFoundException::class)->during('chooseName', [$name]);
+        try {
+            $this->createPage->chooseName($name);
+        } catch (ElementNotFoundException $exception) {
+            return;
+        }
+
+        throw new \DomainException('Choose name should throw an exception!');
     }
 
     /**

@@ -18,6 +18,7 @@ use Sylius\Behat\Page\Shop\HomePageInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
@@ -92,7 +93,7 @@ final class ThemeContext implements Context
     {
         $this->channelIndexPage->open();
 
-        expect($this->channelIndexPage->getUsedThemeName($channel->getCode()))->toBe('');
+        Assert::same($this->channelIndexPage->getUsedThemeName($channel->getCode()), '');
     }
 
     /**
@@ -102,7 +103,7 @@ final class ThemeContext implements Context
     {
         $this->channelIndexPage->open();
 
-        expect($this->channelIndexPage->getUsedThemeName($channel->getCode()))->toBe($theme->getName());
+        Assert::same($this->channelIndexPage->getUsedThemeName($channel->getCode()), $theme->getName());
     }
 
     /**
@@ -112,7 +113,7 @@ final class ThemeContext implements Context
     {
         $content = file_get_contents(rtrim($theme->getPath(), '/') . '/SyliusShopBundle/views/Homepage/index.html.twig');
 
-        expect($this->homePage->getContents())->toBe($content);
+        Assert::same($this->homePage->getContents(), $content);
     }
 
     /**
@@ -122,6 +123,6 @@ final class ThemeContext implements Context
     {
         $content = file_get_contents(rtrim($theme->getPath(), '/') . '/SyliusShopBundle/views/Homepage/index.html.twig');
 
-        expect($this->homePage->getContents())->notToBe($content);
+        Assert::notSame($this->homePage->getContents(), $content);
     }
 }

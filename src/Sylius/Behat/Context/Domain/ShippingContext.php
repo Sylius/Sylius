@@ -14,6 +14,7 @@ namespace Sylius\Behat\Context\Domain;
 use Behat\Behat\Context\Context;
 use Sylius\Component\Core\Repository\ShipmentRepositoryInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -40,6 +41,6 @@ final class ShippingContext implements Context
     {
         $shippings = $this->shipmentRepository->findBy(['method' => $shippingMethod]);
 
-        expect($shippings)->toBe([]);
+        Assert::same($shippings, []);
     }
 }

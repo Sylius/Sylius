@@ -85,9 +85,7 @@ final class PromotionCouponContext implements Context
      */
     public function iShouldBeNotifiedOfFailure()
     {
-        expect($this->sharedStorage->get('last_exception'))
-            ->toBeAnInstanceOf(ForeignKeyConstraintViolationException::class)
-        ;
+        Assert::isInstanceOf($this->sharedStorage->get('last_exception'), ForeignKeyConstraintViolationException::class);
     }
 
     /**

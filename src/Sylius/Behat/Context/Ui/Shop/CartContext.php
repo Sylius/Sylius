@@ -184,7 +184,13 @@ final class CartContext implements Context
     {
         $this->summaryPage->open();
 
-        expect($this->summaryPage)->toThrow(ElementNotFoundException::class)->during('getShippingTotal', []);
+        try {
+            $this->summaryPage->getShippingTotal();
+        } catch (ElementNotFoundException $exception) {
+            return;
+        }
+
+        throw new \DomainException('Get shipping total should throw an exception!');
     }
 
     /**
@@ -194,7 +200,13 @@ final class CartContext implements Context
     {
         $this->summaryPage->open();
 
-        expect($this->summaryPage)->toThrow(ElementNotFoundException::class)->during('getPromotionTotal', []);
+        try {
+            $this->summaryPage->getPromotionTotal();
+        } catch (ElementNotFoundException $exception) {
+            return;
+        }
+
+        throw new \DomainException('Get promotion total should throw an exception!');
     }
 
     /**

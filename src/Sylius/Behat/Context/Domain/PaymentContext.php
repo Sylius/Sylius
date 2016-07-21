@@ -14,6 +14,7 @@ namespace Sylius\Behat\Context\Domain;
 use Behat\Behat\Context\Context;
 use Sylius\Component\Core\Repository\PaymentRepositoryInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -40,6 +41,6 @@ final class PaymentContext implements Context
     {
         $payments = $this->paymentRepository->findBy(['method' => $paymentMethod]);
 
-        expect($payments)->toBe([]);
+        Assert::same($payments, []);
     }
 }
