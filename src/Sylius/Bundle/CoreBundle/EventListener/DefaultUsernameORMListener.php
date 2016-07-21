@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\UserBundle\EventListener;
+namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\OnFlushEventArgs;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\UnitOfWork;
-use Sylius\Component\Customer\Model\CustomerInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 
 /**
  * Keeps user's username synchronized with email.

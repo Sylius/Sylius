@@ -25,7 +25,7 @@ final class AddUserFormSubscriberSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\UserBundle\Form\EventSubscriber\AddUserFormSubscriber');
+        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddUserFormSubscriber');
     }
 
     function it_is_event_subscriber_instance()
