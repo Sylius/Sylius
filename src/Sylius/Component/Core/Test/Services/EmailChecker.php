@@ -50,6 +50,22 @@ class EmailChecker implements EmailCheckerInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function getMessagesCount()
+    {
+        return count($this->getMessages($this->spoolDirectory));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSpoolDirectory()
+    {
+        return $this->spoolDirectory;
+    }
+
+    /**
      * @param string $directory
      *
      * @return \Swift_Message[]
@@ -64,7 +80,6 @@ class EmailChecker implements EmailCheckerInterface
         /** @var SplFileInfo $file */
         foreach($finder as $file) {
             $messages[] = unserialize($file->getContents());
-            unlink($file->getRealPath());
         }
 
         return $messages;

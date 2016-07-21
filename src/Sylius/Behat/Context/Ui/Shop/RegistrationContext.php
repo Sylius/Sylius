@@ -374,13 +374,34 @@ class RegistrationContext implements Context
     }
 
     /**
-     * @Then the (verification) email should be sent to :email
+     * @Then it should be sent to :email
      */
     public function verificationEmailShouldBeSentTo($email)
     {
         Assert::true(
             $this->emailChecker->hasRecipient($email),
             'The verification email should have been sent.'
+        );
+    }
+
+    /**
+     * @Then :count email(s) should be sent to :email
+     */
+    public function numberOfEmailsShouldBeSentTo($count, $email)
+    {
+        Assert::true(
+            $this->emailChecker->hasRecipient($email),
+            sprintf('At least 1 email should have been sent to %s.', $email)
+        );
+
+        Assert::eq(
+            $this->emailChecker->getMessagesCount(),
+            $count,
+            sprintf(
+                '%d messages were sent, while there should be %d.',
+                $this->emailChecker->getMessagesCount(),
+                $count
+            )
         );
     }
 

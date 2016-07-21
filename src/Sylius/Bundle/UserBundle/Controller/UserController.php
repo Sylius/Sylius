@@ -135,14 +135,15 @@ class UserController extends ResourceController
             return $this->redirectToRoute($redirectRoute);
         }
 
-        $this->eventDispatcher->dispatchPreEvent(UserEvents::EMAIL_VERIFICATION, $configuration, $user);
+        $eventDispatcher = $this->container->get('event_dispatcher');
+        $eventDispatcher->dispatch(UserEvents::PRE_EMAIL_VERIFICATION, new GenericEvent($user));
 
         $user->setVerifiedAt(new \DateTime());
         $user->setEmailVerificationToken(null);
 
         $this->manager->flush();
 
-        $this->eventDispatcher->dispatchPostEvent(UserEvents::EMAIL_VERIFICATION, $configuration, $user);
+        $eventDispatcher->dispatch(UserEvents::POST_EMAIL_VERIFICATION, new GenericEvent($user));
 
         if (!$configuration->isHtmlRequest()) {
             return $this->viewHandler->handle($configuration, View::create($user));
@@ -181,7 +182,8 @@ class UserController extends ResourceController
 
         $this->manager->flush();
 
-        $this->eventDispatcher->dispatch(UserEvents::REQUEST_VERIFICATION_TOKEN, $configuration, $user);
+        $eventDispatcher = $this->container->get('event_dispatcher');
+        $eventDispatcher->dispatch(UserEvents::REQUEST_VERIFICATION_TOKEN, new GenericEvent($user));
 
         if (!$configuration->isHtmlRequest()) {
             return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
