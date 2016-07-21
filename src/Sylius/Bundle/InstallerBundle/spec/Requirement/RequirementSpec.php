@@ -17,7 +17,7 @@ class RequirementSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('PHP version', true, '5.4', '5.5', true, 'Please upgrade.');
+        $this->beConstructedWith('PHP version', true, true, 'Please upgrade.');
     }
 
     function it_gets_label()
@@ -28,16 +28,6 @@ class RequirementSpec extends ObjectBehavior
     function it_gets_fulfilled()
     {
         $this->isFulfilled()->shouldReturn(true);
-    }
-
-    function it_gets_expected()
-    {
-        $this->getExpected()->shouldReturn('5.4');
-    }
-
-    function it_gets_actual()
-    {
-        $this->getActual()->shouldReturn('5.5');
     }
 
     function it_gets_required()
