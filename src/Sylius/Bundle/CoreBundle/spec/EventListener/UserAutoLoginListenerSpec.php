@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\UserBundle\EventListener;
+namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\UserBundle\Security\UserLoginInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
-use Sylius\Component\Customer\Model\CustomerInterface;
-use Sylius\Component\User\Model\UserInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Model\UserInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
@@ -32,7 +32,7 @@ final class UserAutoLoginListenerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\UserBundle\EventListener\UserAutoLoginListener');
+        $this->shouldHaveType('Sylius\Bundle\CoreBundle\EventListener\UserAutoLoginListener');
     }
 
     function it_logs_user_in($loginManager, GenericEvent $event, CustomerInterface $customer, UserInterface $user)
