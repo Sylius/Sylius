@@ -86,11 +86,8 @@ class StateResolver implements StateResolverInterface
         $states = array_unique($states);
 
         $acceptableStates = [
-            ShipmentInterface::STATE_CHECKOUT => OrderShippingStates::CHECKOUT,
-            ShipmentInterface::STATE_ONHOLD => OrderShippingStates::ONHOLD,
             ShipmentInterface::STATE_READY => OrderShippingStates::READY,
             ShipmentInterface::STATE_SHIPPED => OrderShippingStates::SHIPPED,
-            ShipmentInterface::STATE_RETURNED => OrderShippingStates::RETURNED,
             ShipmentInterface::STATE_CANCELLED => OrderShippingStates::CANCELLED,
         ];
 

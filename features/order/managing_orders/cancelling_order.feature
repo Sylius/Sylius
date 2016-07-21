@@ -21,6 +21,7 @@ Feature: Cancelling orders
         Then I should be notified that it has been successfully updated
         And its state should be "Cancelled"
         And it should have payment state "Cancelled"
+        And it should have shipment state "Cancelled"
 
     @ui
     Scenario: Cannot cancel an order, which is already cancelled

@@ -36,7 +36,7 @@ class OrderItemUnit extends BaseOrderItemUnit implements OrderItemUnitInterface
     /**
      * @var string BaseShipmentInterface::STATE_*
      */
-    protected $shippingState = BaseShipmentInterface::STATE_CHECKOUT;
+    protected $shippingState = BaseShipmentInterface::STATE_CART;
 
     /**
      * @param OrderItemInterface $orderItem
