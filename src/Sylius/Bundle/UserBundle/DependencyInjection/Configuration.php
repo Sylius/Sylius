@@ -136,7 +136,6 @@ class Configuration implements ConfigurationInterface
                                                 ->scalarNode('profile')->defaultValue(CustomerProfileType::class)->cannotBeEmpty()->end()
                                                 ->scalarNode('registration')->defaultValue(CustomerRegistrationType::class)->cannotBeEmpty()->end()
                                                 ->scalarNode('simple_registration')->defaultValue(CustomerSimpleRegistrationType::class)->cannotBeEmpty()->end()
-                                                ->scalarNode('guest')->defaultValue(CustomerGuestType::class)->cannotBeEmpty()->end()
                                                 ->scalarNode('choice')->defaultValue(ResourceChoiceType::class)->cannotBeEmpty()->end()
                                             ->end()
                                         ->end()

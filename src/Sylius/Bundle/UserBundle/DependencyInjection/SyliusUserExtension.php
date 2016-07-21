@@ -55,11 +55,6 @@ class SyliusUserExtension extends AbstractResourceExtension implements PrependEx
             ->getDefinition('sylius.form.type.customer')
             ->addArgument(new Reference('sylius.form.event_subscriber.add_user_type'))
         ;
-        
-        $container
-            ->getDefinition('sylius.form.type.customer_guest')
-            ->addArgument(new Reference('sylius.form.event_subscriber.set_customer'))
-        ;
     }
 
     /**

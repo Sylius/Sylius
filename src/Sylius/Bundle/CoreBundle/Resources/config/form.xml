@@ -55,6 +55,7 @@
         <parameter key="sylius.form.type.promotion_action.add_product_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Action\AddProductConfigurationType</parameter>
 
         <parameter key="sylius.form.type.data_transformer.taxons_to_codes.class">Sylius\Bundle\CoreBundle\Form\DataTransformer\TaxonsToCodesTransformer</parameter>
+        <parameter key="sylius.form.type.customer_guest.class">Sylius\Bundle\CoreBundle\Form\Type\CustomerGuestType</parameter>
     </parameters>
 
     <services>
@@ -199,6 +200,11 @@
 
         <service id="sylius.form.type.data_transformer.taxons_to_codes" class="%sylius.form.type.data_transformer.taxons_to_codes.class%">
             <argument type="service" id="sylius.repository.taxon" />
+        </service>
+
+        <!-- customer -->
+        <service id="sylius.form.type.customer_guest" class="%sylius.form.type.customer_guest.class%">
+            <argument type="service" id="sylius.form.event_subscriber.set_customer" />
         </service>
     </services>
 

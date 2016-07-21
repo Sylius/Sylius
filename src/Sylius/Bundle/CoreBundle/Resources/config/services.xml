@@ -499,6 +499,11 @@
             <argument type="service" id="security.authorization_checker" />
         </service>
 
+        <!-- Form event subscribers-->
+        <service id="sylius.form.event_subscriber.set_customer" class="%sylius.form.event_subscriber.set_customer_type.class%">
+            <argument type="service" id="sylius.repository.customer" />
+        </service>
+
         <!-- Data fetchers -->
         <service id="sylius.form.type.data_fetcher.user_registration" class="%sylius.form.type.data_fetcher.user_registration.class%">
             <tag name="form.type" alias="sylius_data_fetcher_user_registration" />

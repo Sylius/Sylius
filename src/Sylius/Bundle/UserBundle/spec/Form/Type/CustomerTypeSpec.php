@@ -14,7 +14,7 @@ namespace spec\Sylius\Bundle\UserBundle\Form\Type;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Component\User\Model\Customer;
+use Sylius\Component\Customer\Model\Customer;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
