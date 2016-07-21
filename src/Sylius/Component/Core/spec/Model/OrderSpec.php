@@ -298,7 +298,7 @@ class OrderSpec extends ObjectBehavior
 
     function it_adds_and_removes_payments(PaymentInterface $payment)
     {
-        $payment->getState()->willReturn(PaymentInterface::STATE_PENDING);
+        $payment->getState()->willReturn(PaymentInterface::STATE_NEW);
         $payment->setOrder($this)->shouldBeCalled();
 
         $this->addPayment($payment);

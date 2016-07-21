@@ -381,7 +381,7 @@ final class OrderContext implements Context
     public function thisOrderIsAlreadyPaid(OrderInterface $order)
     {
         $payment = $order->getLastPayment();
-        $this->stateMachineFactory->get($payment, PaymentTransitions::GRAPH)->apply(PaymentTransitions::SYLIUS_COMPLETE);
+        $this->stateMachineFactory->get($payment, PaymentTransitions::GRAPH)->apply(PaymentTransitions::TRANSITION_COMPLETE);
 
         $this->objectManager->flush();
     }

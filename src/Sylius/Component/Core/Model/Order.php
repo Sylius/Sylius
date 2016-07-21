@@ -82,7 +82,7 @@ class Order extends Cart implements OrderInterface
     /**
      * @var string
      */
-    protected $paymentState = BasePaymentInterface::STATE_NEW;
+    protected $paymentState = BasePaymentInterface::STATE_CART;
 
     /**
      * It depends on the status of all order shipments.

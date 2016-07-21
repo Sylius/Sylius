@@ -15,7 +15,7 @@ Feature: Checking payment state of a placed order
         And the customer chose "Free" shipping method with "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @todo
+    @ui
     Scenario: Checking payment state of a placed order
         Given I view the summary of the order "#00000666"
         Then it should have new payment state

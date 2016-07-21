@@ -15,7 +15,7 @@ Feature: Checking payment state of a cancelled order
         And the customer confirmed this order
         And I am logged in as an administrator
 
-    @todo
+    @ui
     Scenario: Checking payment state of a placed order
         When I view the summary of the order "#00000022"
         And I cancel this order
