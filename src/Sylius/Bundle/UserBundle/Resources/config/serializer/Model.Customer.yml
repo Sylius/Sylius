@@ -1,4 +1,4 @@
-Sylius\Component\User\Model\Customer:
+Sylius\Component\Customer\Model\Customer:
     exclusion_policy: ALL
     xml_root_name: sylius_customer
     properties:
@@ -21,9 +21,6 @@ Sylius\Component\User\Model\Customer:
         lastName:
             expose: true
             type: string
-            groups: [Default, Detailed]
-        user:
-            expose: true
             groups: [Default, Detailed]
         gender:
             expose: true
