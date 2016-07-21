@@ -28,9 +28,6 @@
             <tag name="form.type" alias="sylius_gender" />
         </service>
 
-        <!-- Form event subscribers-->
-        <service id="sylius.form.event_subscriber.add_user_type" class="%sylius.form.event_subscriber.add_user_type.class%" />
-
         <!-- Validators -->
         <service id="sylius.user.validator.customer_initializer" class="%sylius.user.validator.customer_initializer.class%">
             <argument type="service" id="sylius.user.canonicalizer" />

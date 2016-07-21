@@ -14,11 +14,13 @@ namespace Sylius\Bundle\CoreBundle\DependencyInjection;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Parameter;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -36,6 +38,7 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         'sylius_channel',
         'sylius_contact',
         'sylius_currency',
+        'sylius_customer',
         'sylius_inventory',
         'sylius_locale',
         'sylius_order',
@@ -89,6 +92,19 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         }
 
         $this->overwriteRuleFactory($container);
+
+        $container
+            ->getDefinition('sylius.form.type.customer_registration')
+            ->addArgument(new Reference('sylius.repository.customer'))
+        ;
+        $container
+            ->getDefinition('sylius.form.type.customer_simple_registration')
+            ->addArgument(new Reference('sylius.repository.customer'))
+        ;
+        $container
+            ->getDefinition('sylius.form.type.customer')
+            ->addArgument(new Reference('sylius.form.event_subscriber.add_user_type'))
+        ;
     }
 
     /**
@@ -106,6 +122,9 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
 
         $container->prependExtensionConfig('sylius_theme', ['context' => 'sylius.theme.context.channel_based']);
 
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $this->prependHwiOauth($container, $loader);
+
         $container->setParameter('sylius.sitemap', $config['sitemap']);
         $container->setParameter('sylius.sitemap_template', $config['sitemap']['template']);
     }
@@ -120,5 +139,18 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         $decoratedPromotionRuleFactoryDefinition = new Definition($promotionRuleFactoryClass, [$baseFactoryDefinition]);
 
         $container->setDefinition('sylius.factory.promotion_rule', $decoratedPromotionRuleFactoryDefinition);
+    }
+
+    /**
+     * @param ContainerBuilder $container
+     * @param LoaderInterface $loader
+     */
+    private function prependHwiOauth(ContainerBuilder $container, LoaderInterface $loader)
+    {
+        if (!$container->hasExtension('hwi_oauth')) {
+            return;
+        }
+
+        $loader->load('integration/hwi_oauth.xml');
     }
 }

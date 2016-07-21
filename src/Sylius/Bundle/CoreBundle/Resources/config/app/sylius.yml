@@ -740,11 +740,16 @@ sylius_user:
                 model: Sylius\Component\Core\Model\User
                 form:
                     default: Sylius\Bundle\UserBundle\Form\Type\UserType
+
+sylius_customer:
+    resources:
         customer:
             classes:
                 model: Sylius\Component\Core\Model\Customer
                 repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\CustomerRepository
                 controller: Sylius\Bundle\CoreBundle\Controller\CustomerController
+                form:
+                    default: Sylius\Bundle\CoreBundle\Form\Type\CustomerType
 
 sylius_variation:
     resources:
