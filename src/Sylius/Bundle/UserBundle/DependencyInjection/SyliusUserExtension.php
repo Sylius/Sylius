@@ -22,7 +22,7 @@ use Symfony\Component\DependencyInjection\Reference;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class SyliusUserExtension extends AbstractResourceExtension implements PrependExtensionInterface
+class SyliusUserExtension extends AbstractResourceExtension
 {
     /**
      * {@inheritdoc}
@@ -42,41 +42,5 @@ class SyliusUserExtension extends AbstractResourceExtension implements PrependEx
         $container->setParameter('sylius.user.resetting.token_length', $config['resetting']['token']['length']);
         $container->setParameter('sylius.user.resetting.pin_length', $config['resetting']['pin']['length']);
         $container->setParameter('sylius.user.verification.token_length', $config['verification']['token']['length']);
-
-        $container
-            ->getDefinition('sylius.form.type.customer_registration')
-            ->addArgument(new Reference('sylius.repository.customer'))
-        ;
-        $container
-            ->getDefinition('sylius.form.type.customer_simple_registration')
-            ->addArgument(new Reference('sylius.repository.customer'))
-        ;
-        $container
-            ->getDefinition('sylius.form.type.customer')
-            ->addArgument(new Reference('sylius.form.event_subscriber.add_user_type'))
-        ;
-    }
-
-    /**
-     * @param ContainerBuilder $container
-     */
-    public function prepend(ContainerBuilder $container)
-    {
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-
-        $this->prependHwiOauth($container, $loader);
-    }
-
-    /**
-     * @param ContainerBuilder $container
-     * @param LoaderInterface $loader
-     */
-    private function prependHwiOauth(ContainerBuilder $container, LoaderInterface $loader)
-    {
-        if (!$container->hasExtension('hwi_oauth')) {
-            return;
-        }
-
-        $loader->load('integration/hwi_oauth.xml');
     }
 }

@@ -17,7 +17,6 @@ use HWI\Bundle\OAuthBundle\OAuth\ResourceOwnerInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\UserBundle\Doctrine\ORM\CustomerRepository;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
@@ -30,7 +29,6 @@ final class UserProviderSpec extends ObjectBehavior
 {
     function let(
         FactoryInterface $customerFactory,
-        CustomerRepository $customerRepository,
         FactoryInterface $userFactory,
         UserRepositoryInterface $userRepository,
         FactoryInterface $oauthFactory,
@@ -38,7 +36,7 @@ final class UserProviderSpec extends ObjectBehavior
         ObjectManager $userManager,
         CanonicalizerInterface $canonicalizer
     ) {
-        $this->beConstructedWith($customerFactory, $customerRepository, $userFactory, $userRepository, $oauthFactory, $oauthRepository, $userManager, $canonicalizer);
+        $this->beConstructedWith($customerFactory, $userFactory, $userRepository, $oauthFactory, $oauthRepository, $userManager, $canonicalizer);
     }
 
     function it_is_initializable()

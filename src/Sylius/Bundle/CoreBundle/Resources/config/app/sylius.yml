@@ -743,6 +743,7 @@ sylius_user:
         customer:
             classes:
                 model: Sylius\Component\Core\Model\Customer
+                repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\CustomerRepository
                 controller: Sylius\Bundle\CoreBundle\Controller\CustomerController
 
 sylius_variation:

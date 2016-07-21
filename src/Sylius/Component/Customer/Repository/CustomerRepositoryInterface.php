@@ -11,7 +11,6 @@
 
 namespace Sylius\Component\Customer\Repository;
 
-use Pagerfanta\Pagerfanta;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -38,12 +37,4 @@ interface CustomerRepositoryInterface extends RepositoryInterface
      * @return null|CustomerInterface
      */
     public function findForDetailsPage($id);
-
-    /**
-     * @param array $criteria
-     * @param array $sorting
-     *
-     * @return Pagerfanta
-     */
-    public function createFilterPaginator(array $criteria = null, array $sorting = null);
 }

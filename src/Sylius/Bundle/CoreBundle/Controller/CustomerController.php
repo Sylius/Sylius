@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Controller;
 
-use Sylius\Bundle\UserBundle\Controller\CustomerController as BaseCustomerController;
+use Sylius\Bundle\CustomerBundle\Controller\CustomerController as BaseCustomerController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
