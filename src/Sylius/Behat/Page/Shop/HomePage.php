@@ -48,7 +48,7 @@ class HomePage extends SymfonyPage implements HomePageInterface
      */
     public function getActiveCurrency()
     {
-        return $this->getElement('currency_selector')->find('css', '.active-currency')->getText();
+        return $this->getElement('currency_selector')->find('css', '.sylius-active-currency')->getText();
     }
 
     /**
@@ -58,7 +58,7 @@ class HomePage extends SymfonyPage implements HomePageInterface
     {
         return array_map(
             function (NodeElement $element) { return $element->getText(); },
-            $this->getElement('currency_selector')->findAll('css', '.available-currency')
+            $this->getElement('currency_selector')->findAll('css', '.sylius-available-currency')
         );
     }
 
@@ -76,7 +76,7 @@ class HomePage extends SymfonyPage implements HomePageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'currency_selector' => '#currency-selector',
+            'currency_selector' => '#sylius-currency-selector',
             'logout_button' => '.sylius-logout-button',
         ]);
     }

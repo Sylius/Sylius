@@ -59,6 +59,6 @@ final class CurrencyStorage implements CurrencyStorageInterface
      */
     private function provideKey(ChannelInterface $channel)
     {
-        return sprintf('_currency_%s', $channel->getCode());
+        return '_currency_' . $channel->getCode();
     }
 }

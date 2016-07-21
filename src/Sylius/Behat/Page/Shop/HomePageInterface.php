@@ -38,5 +38,8 @@ interface HomePageInterface extends SymfonyPageInterface
      */
     public function getAvailableCurrencies();
 
+    /**
+     * @param string $currencyCode
+     */
     public function switchCurrency($currencyCode);
 }
