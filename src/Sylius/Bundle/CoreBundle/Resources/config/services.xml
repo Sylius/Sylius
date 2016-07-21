@@ -114,8 +114,6 @@
 
         <parameter key="sylius.validator.has_enabled_entity.class">Sylius\Bundle\CoreBundle\Validator\Constraints\HasEnabledEntityValidator</parameter>
 
-        <parameter key="sylius.callback.complete_order.class">Sylius\Bundle\CoreBundle\StateMachineCallback\CompleteOrderCallback</parameter>
-
         <parameter key="sylius.sql_logger.purger.purge_mode" type="constant">Doctrine\Common\DataFixtures\Purger\ORMPurger::PURGE_MODE_DELETE</parameter>
         <parameter key="sylius.sql_logger.purger.class">Sylius\Bundle\CoreBundle\Purger\QueryLogger</parameter>
 

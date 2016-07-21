@@ -396,7 +396,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function findExpired(\DateTime $expiresAt, $state = OrderInterface::STATE_PENDING)
+    public function findExpired(\DateTime $expiresAt, $state = OrderInterface::STATE_NEW)
     {
         $queryBuilder = $this->createQueryBuilder('o')
             ->leftJoin('o.items', 'item')

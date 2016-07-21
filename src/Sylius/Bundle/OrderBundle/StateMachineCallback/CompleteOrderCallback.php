@@ -14,15 +14,11 @@ namespace Sylius\Bundle\OrderBundle\StateMachineCallback;
 use Sylius\Component\Order\Model\OrderInterface;
 
 /**
- * Set an Order as completed
- *
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
 class CompleteOrderCallback
 {
     /**
-     * Set an Order as completed
-     *
      * @param OrderInterface $order
      */
     public function completeOrder(OrderInterface $order)

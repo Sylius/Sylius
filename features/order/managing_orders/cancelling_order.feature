@@ -12,7 +12,6 @@ Feature: Cancelling orders
         And there is a customer "john.doe@gmail.com" that placed an order "#00000022"
         And the customer bought a single "PHP T-Shirt"
         And the customer chose "Free" shipping method to "France" with "Cash on Delivery" payment
-        And the customer confirmed this order
         And I am logged in as an administrator
 
     @ui

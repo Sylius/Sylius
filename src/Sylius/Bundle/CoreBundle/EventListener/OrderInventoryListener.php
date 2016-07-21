@@ -33,8 +33,8 @@ class OrderInventoryListener
      * @var array
      */
     private static $orderStateToInventoryUnitState = [
-        OrderInterface::STATE_PENDING => InventoryUnitInterface::STATE_ONHOLD,
-        OrderInterface::STATE_SHIPPED => InventoryUnitInterface::STATE_SOLD,
+        OrderInterface::STATE_NEW => InventoryUnitInterface::STATE_ONHOLD,
+        OrderInterface::STATE_FULFILLED => InventoryUnitInterface::STATE_SOLD,
     ];
 
     /**

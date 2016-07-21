@@ -33,13 +33,8 @@ class OrderStateChoiceTypeSpec extends ObjectBehavior
         $resolver->setDefaults([
             'choices' => [
                 OrderInterface::STATE_CART => 'sylius.order.state.checkout',
-                OrderInterface::STATE_CART_LOCKED => 'sylius.order.state.cart_locked',
-                OrderInterface::STATE_PENDING => 'sylius.order.state.ordered',
-                OrderInterface::STATE_CONFIRMED => 'sylius.order.state.order_confirmed',
-                OrderInterface::STATE_SHIPPED => 'sylius.order.state.shipped',
-                OrderInterface::STATE_ABANDONED => 'sylius.order.state.abandoned',
                 OrderInterface::STATE_CANCELLED => 'sylius.order.state.cancelled',
-                OrderInterface::STATE_RETURNED => 'sylius.order.state.returned',
+                OrderInterface::STATE_FULFILLED => 'sylius.order.state.fulfilled',
             ],
         ])->shouldBeCalled();
 

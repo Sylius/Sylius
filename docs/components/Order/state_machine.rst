@@ -16,19 +16,11 @@ The following states are defined:
 +===================+=============+===============================================+
 | STATE_CART        | cart        | Unconfirmed order, ready to add/remove items  |
 +-------------------+-------------+-----------------------------------------------+
-| STATE_CART_LOCKED | cart_locked | Cart which should not be removed when expired |
-+-------------------+-------------+-----------------------------------------------+
-| STATE_PENDING     | pending     | Order waiting for confirmation                |
-+-------------------+-------------+-----------------------------------------------+
-| STATE_CONFIRMED   | confirmed   | Confirmed and completed order                 |
-+-------------------+-------------+-----------------------------------------------+
-| STATE_SHIPPED     | shipped     | Order has been shipped to the customer        |
-+-------------------+-------------+-----------------------------------------------+
-| STATE_ABANDONED   | abandoned   | Been waiting too long for confirmation        |
+| STATE_NEW         | new         | Confirmed order                               |
 +-------------------+-------------+-----------------------------------------------+
 | STATE_CANCELLED   | cancelled   | Cancelled by customer or manager              |
 +-------------------+-------------+-----------------------------------------------+
-| STATE_RETURNED    | returned    | Order has been returned and refunded          |
+| STATE_FULFILLED   | fulfilled   | Order has been fulfilled                      |
 +-------------------+-------------+-----------------------------------------------+
 
 .. tip::
@@ -47,17 +39,9 @@ There are following order's transitions by default:
 +==================+============+
 | SYLIUS_CREATE    | create     |
 +------------------+------------+
-| SYLIUS_RELEASE   | release    |
-+------------------+------------+
-| SYLIUS_CONFIRM   | confirm    |
-+------------------+------------+
-| SYLIUS_SHIP      | ship       |
-+------------------+------------+
-| SYLIUS_ABANDON   | abandon    |
-+------------------+------------+
 | SYLIUS_CANCEL    | cancel     |
 +------------------+------------+
-| SYLIUS_RETURN    | return     |
+| SYLIUS_FULFILL   | fulfill    |
 +------------------+------------+
 
 There is also the default graph name included:

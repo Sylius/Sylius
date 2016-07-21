@@ -216,7 +216,7 @@ class CheckoutController extends FOSRestController
         $this->dispatchCheckoutEvent(SyliusOrderEvents::PRE_CREATE, $order);
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::FINALIZE_PRE_COMPLETE, $order);
 
-        $this->get('sm.factory')->get($order, OrderTransitions::GRAPH)->apply(OrderTransitions::SYLIUS_CREATE, true);
+        $this->get('sm.factory')->get($order, OrderTransitions::GRAPH)->apply(OrderTransitions::TRANSITION_CREATE, true);
 
         $stateMachine = $this->get('sm.factory')->get($order, OrderCheckoutTransitions::GRAPH);
         $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_COMPLETE);

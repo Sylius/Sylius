@@ -36,7 +36,7 @@ class DashboardController extends Controller
             'customers' => $customerRepository->findBy([], ['id' => 'desc'], 5),
             'registrations_count' => $userRepository->countBetweenDates(new \DateTime('1 month ago'), new \DateTime()),
             'sales' => $orderRepository->revenueBetweenDates(new \DateTime('1 month ago'), new \DateTime()),
-            'sales_confirmed' => $orderRepository->revenueBetweenDates(new \DateTime('1 month ago'), new \DateTime(), OrderInterface::STATE_CONFIRMED),
+            'sales_confirmed' => $orderRepository->revenueBetweenDates(new \DateTime('1 month ago'), new \DateTime(), OrderInterface::STATE_FULFILLED),
         ]);
     }
 }

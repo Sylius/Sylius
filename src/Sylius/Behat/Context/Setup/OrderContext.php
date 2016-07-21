@@ -391,17 +391,17 @@ final class OrderContext implements Context
      */
     public function theCustomerCanceledThisOrder(OrderInterface $order)
     {
-        $this->stateMachineFactory->get($order, OrderTransitions::GRAPH)->apply(OrderTransitions::SYLIUS_CANCEL);
+        $this->stateMachineFactory->get($order, OrderTransitions::GRAPH)->apply(OrderTransitions::TRANSITION_CANCEL);
         
         $this->objectManager->flush();
     }
 
     /**
-     * @Given /^the customer confirmed (this order)$/
+     * @Given /^the customer fulfilled (this order)$/
      */
-    public function theCustomerConfirmedThisOrder(OrderInterface $order)
+    public function theCustomerFulfilledThisOrder(OrderInterface $order)
     {
-        $this->stateMachineFactory->get($order, OrderTransitions::GRAPH)->apply(OrderTransitions::SYLIUS_CONFIRM);
+        $this->stateMachineFactory->get($order, OrderTransitions::GRAPH)->apply(OrderTransitions::TRANSITION_FULFILL);
 
         $this->objectManager->flush();
     }
