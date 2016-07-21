@@ -22,4 +22,7 @@ class OrderTransitions
     const SYLIUS_ABANDON = 'abandon';
     const SYLIUS_CANCEL = 'cancel';
     const SYLIUS_RETURN = 'return';
+
+    const SYLIUS_PAYMENT_COMPLETE = 'complete';
+    const SYLIUS_PAYMENT_WAIT = 'wait';
 }

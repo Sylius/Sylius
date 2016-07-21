@@ -34,6 +34,9 @@ interface OrderInterface extends
     const STATE_CANCELLED = 'cancelled';
     const STATE_RETURNED = 'returned';
 
+    const STATE_PAYMENT_COMPLETED = 'completed';
+    const STATE_PAYMENT_PENDING = 'pending';
+
     /**
      * @return bool
      */
