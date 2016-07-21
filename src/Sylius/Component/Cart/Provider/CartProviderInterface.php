@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Cart\Provider;
 
+use Sylius\Component\Cart\Context\CartNotFoundException;
 use Sylius\Component\Cart\Model\CartInterface;
 
 /**
@@ -21,7 +22,9 @@ use Sylius\Component\Cart\Model\CartInterface;
 interface CartProviderInterface
 {
     /**
-     * @return null|CartInterface
+     * @return CartInterface
+     *
+     * @throws CartNotFoundException
      */
     public function getCart();
 }

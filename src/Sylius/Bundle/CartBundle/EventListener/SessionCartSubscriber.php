@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CartBundle\EventListener;
 
 use Sylius\Component\Cart\Context\CartContextInterface;
+use Sylius\Component\Cart\Context\CartNotFoundException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
@@ -68,7 +69,11 @@ final class SessionCartSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $cart = $this->cartContext->getCart();
+        try {
+            $cart = $this->cartContext->getCart();
+        } catch (CartNotFoundException $exception) {
+            return;
+        }
 
         if (null !== $cart && null !== $cart->getId()) {
             $request->getSession()->set($this->sessionKeyName, $cart->getId());

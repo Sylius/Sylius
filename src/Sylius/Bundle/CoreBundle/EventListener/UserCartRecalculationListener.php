@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Component\Cart\Context\CartContextInterface;
+use Sylius\Component\Cart\Context\CartNotFoundException;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderProcessing\OrderRecalculatorInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
@@ -49,7 +50,11 @@ class UserCartRecalculationListener
      */
     public function recalculateCartWhileLogin(Event $event)
     {
-        $cart = $this->cartContext->getCart();
+        try {
+            $cart = $this->cartContext->getCart();
+        } catch (CartNotFoundException $exception) {
+            return;
+        }
 
         if (!$cart instanceof OrderInterface) {
             throw new UnexpectedTypeException($cart, OrderInterface::class);

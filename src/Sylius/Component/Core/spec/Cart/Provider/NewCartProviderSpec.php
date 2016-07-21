@@ -13,6 +13,7 @@ namespace spec\Sylius\Component\Core\Cart\Provider;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Component\Cart\Context\CartNotFoundException;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Cart\Provider\NewCartProvider;
@@ -95,22 +96,17 @@ class NewCartProviderSpec extends ObjectBehavior
         ;
     }
 
-    function it_does_not_assign_the_channel_if_undefined(
+    function it_throws_cart_not_found_exception_if_channel_is_undefined(
         CartProviderInterface $decoratedCartProvider,
         OrderInterface $cart,
         ShopperContextInterface $shopperContext
     ) {
         $decoratedCartProvider->getCart()->willReturn($cart);
-
         $shopperContext->getChannel()->willThrow(ChannelNotFoundException::class);
-        $shopperContext->getCurrencyCode()->willReturn('PLN');
-        $shopperContext->getLocaleCode()->willReturn('pl_PL');
-        $shopperContext->getCustomer()->willReturn(null);
 
-        $cart->setChannel()->shouldBeCalled();
-        $cart->setCurrencyCode('PLN')->shouldBeCalled();
-        $cart->setCustomer(null)->shouldBeCalled();
-
-        $this->getCart()->shouldReturn($cart);
+        $this
+            ->shouldThrow(CartNotFoundException::class)
+            ->during('getCart')
+        ;
     }
 }

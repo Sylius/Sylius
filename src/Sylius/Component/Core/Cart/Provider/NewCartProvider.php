@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Core\Cart\Provider;
 
+use Sylius\Component\Cart\Context\CartNotFoundException;
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
@@ -66,7 +67,7 @@ class NewCartProvider implements CartProviderInterface
         try {
             $cart->setChannel($this->shopperContext->getChannel());
         } catch (ChannelNotFoundException $exception) {
-            $cart->setChannel();
+            throw new CartNotFoundException($exception);
         }
         $cart->setCustomer($this->shopperContext->getCustomer());
         $cart->setCurrencyCode($this->shopperContext->getCurrencyCode());
