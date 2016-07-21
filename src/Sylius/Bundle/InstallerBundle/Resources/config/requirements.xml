@@ -16,28 +16,21 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services
     http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <parameters>
-        <parameter key="sylius.requirements.class">Sylius\Bundle\InstallerBundle\Requirement\SyliusRequirements</parameter>
-        <parameter key="sylius.requirements.settings.class">Sylius\Bundle\InstallerBundle\Requirement\SettingsRequirements</parameter>
-        <parameter key="sylius.requirements.extensions.class">Sylius\Bundle\InstallerBundle\Requirement\ExtensionsRequirements</parameter>
-        <parameter key="sylius.requirements.filesystem.class">Sylius\Bundle\InstallerBundle\Requirement\FilesystemRequirements</parameter>
-    </parameters>
-
     <services>
-        <service id="sylius.requirements" class="%sylius.requirements.class%">
+        <service id="sylius.requirements" class="Sylius\Bundle\InstallerBundle\Requirement\SyliusRequirements">
             <argument type="collection">
                 <argument type="service">
-                    <service class="%sylius.requirements.settings.class%">
+                    <service class="Sylius\Bundle\InstallerBundle\Requirement\SettingsRequirements">
                         <argument type="service" id="translator" />
                     </service>
                 </argument>
                 <argument type="service">
-                    <service class="%sylius.requirements.extensions.class%">
+                    <service class="Sylius\Bundle\InstallerBundle\Requirement\ExtensionsRequirements">
                         <argument type="service" id="translator" />
                     </service>
                 </argument>
                 <argument type="service">
-                    <service class="%sylius.requirements.filesystem.class%">
+                    <service class="Sylius\Bundle\InstallerBundle\Requirement\FilesystemRequirements">
                         <argument type="service" id="translator" />
                         <argument>%kernel.root_dir%</argument>
                         <argument>%kernel.cache_dir%</argument>

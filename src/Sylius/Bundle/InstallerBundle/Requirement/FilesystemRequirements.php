@@ -17,41 +17,28 @@ class FilesystemRequirements extends RequirementCollection
 {
     public function __construct(TranslatorInterface $translator, $root, $cacheDir, $logDir)
     {
-        parent::__construct($translator->trans('sylius.filesystem', [], 'requirements'));
-
-        $exists = $translator->trans('sylius.filesystem.exists', [], 'requirements');
-        $notExists = $translator->trans('sylius.filesystem.not_exists', [], 'requirements');
-        $writable = $translator->trans('sylius.filesystem.writable', [], 'requirements');
-        $notWritable = $translator->trans('sylius.filesystem.not_writable', [], 'requirements');
+        parent::__construct($translator->trans('sylius.filesystem.header', [], 'requirements'));
 
         $this
             ->add(new Requirement(
                 $translator->trans('sylius.filesystem.vendors', [], 'requirements'),
-                $status = is_dir($root.'/../vendor'),
-                $exists,
-                $status ? $exists : $notExists
+                is_dir($root.'/../vendor')
             ))
             ->add(new Requirement(
-                $translator->trans('sylius.filesystem.cache', [], 'requirements'),
-                $status = is_writable($cacheDir),
-                $translator->trans('sylius.filesystem.writable', [], 'requirements'),
-                $status ? $translator->trans('sylius.filesystem.writable', [], 'requirements') : $translator->trans('sylius.filesystem.not_writable', [], 'requirements'),
+                $translator->trans('sylius.filesystem.cache.header', [], 'requirements'),
+                is_writable($cacheDir),
                 true,
                 $translator->trans('sylius.filesystem.cache.help', ['%path%' => $cacheDir], 'requirements')
             ))
             ->add(new Requirement(
-                $translator->trans('sylius.filesystem.logs', [], 'requirements'),
-                $status = is_writable($logDir),
-                $writable,
-                $status ? $writable : $notWritable,
+                $translator->trans('sylius.filesystem.logs.header', [], 'requirements'),
+                is_writable($logDir),
                 true,
                 $translator->trans('sylius.filesystem.logs.help', ['%path%' => $logDir], 'requirements')
             ))
             ->add(new Requirement(
-                $translator->trans('sylius.filesystem.parameters', [], 'requirements'),
-                $status = is_writable($root.'/config/parameters.yml'),
-                $writable,
-                $status ? $writable : $notWritable,
+                $translator->trans('sylius.filesystem.parameters.header', [], 'requirements'),
+                is_writable($root.'/config/parameters.yml'),
                 true,
                 $translator->trans('sylius.filesystem.parameters.help', ['%path%' => $root.'/config/parameters.yml'], 'requirements')
             ))
