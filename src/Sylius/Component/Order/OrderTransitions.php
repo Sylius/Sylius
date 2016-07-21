@@ -15,7 +15,7 @@ class OrderTransitions
 {
     const GRAPH = 'sylius_order';
 
-    const SYLIUS_CREATE = 'create';
-    const SYLIUS_CANCEL = 'cancel';
-    const SYLIUS_FULFILL = 'fulfill';
+    const TRANSITION_CREATE = 'create';
+    const TRANSITION_CANCEL = 'cancel';
+    const TRANSITION_FULFILL = 'fulfill';
 }

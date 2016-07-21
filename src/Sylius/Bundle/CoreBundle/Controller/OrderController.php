@@ -77,7 +77,7 @@ class OrderController extends ResourceController
 
         $this->container->get('sm.factory')
             ->get($order, OrderTransitions::GRAPH)
-            ->apply(OrderTransitions::SYLIUS_RELEASE)
+            ->apply(OrderTransitions::TRANSITION_RELEASE)
         ;
 
         $this->manager->flush();

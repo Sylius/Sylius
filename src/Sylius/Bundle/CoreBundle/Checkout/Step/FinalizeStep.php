@@ -74,7 +74,7 @@ class FinalizeStep extends CheckoutStep
         $this->dispatchCheckoutEvent(SyliusCheckoutEvents::FINALIZE_PRE_COMPLETE, $order);
 
         $this->applyTransition(OrderCheckoutTransitions::TRANSITION_COMPLETE, $order);
-        $this->get('sm.factory')->get($order, OrderTransitions::GRAPH)->apply(OrderTransitions::SYLIUS_CREATE, true);
+        $this->get('sm.factory')->get($order, OrderTransitions::GRAPH)->apply(OrderTransitions::TRANSITION_CREATE, true);
 
         $currencyRepository = $this->get('sylius.repository.currency');
         $currency = $currencyRepository->findOneBy(['code' => $order->getCurrencyCode()]);

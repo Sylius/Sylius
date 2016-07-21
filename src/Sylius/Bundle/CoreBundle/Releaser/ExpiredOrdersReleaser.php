@@ -56,7 +56,7 @@ class ExpiredOrdersReleaser implements ReleaserInterface
         $orders = $this->repository->findExpired($expiresAt);
 
         foreach ($orders as $order) {
-            $this->factory->get($order, OrderTransitions::GRAPH)->apply(OrderTransitions::SYLIUS_RELEASE, true);
+            $this->factory->get($order, OrderTransitions::GRAPH)->apply(OrderTransitions::TRANSITION_RELEASE, true);
         }
 
         $this->manager->flush();
