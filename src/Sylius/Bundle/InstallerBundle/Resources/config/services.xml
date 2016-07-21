@@ -16,12 +16,8 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services
     http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <parameters>
-        <parameter key="sylius.installer.checker.command_directory.class">Sylius\Bundle\InstallerBundle\Checker\CommandDirectoryChecker</parameter>
-    </parameters>
-
     <services>
-        <service id="sylius.installer.checker.command_directory" class="%sylius.installer.checker.command_directory.class%">
+        <service id="sylius.installer.checker.command_directory" class="Sylius\Bundle\InstallerBundle\Checker\CommandDirectoryChecker">
             <argument type="service" id="filesystem" />
         </service>
     </services>
