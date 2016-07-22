@@ -15,14 +15,11 @@ use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceE
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * Currency extension.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SyliusCurrencyExtension extends AbstractResourceExtension
+final class SyliusCurrencyExtension extends AbstractResourceExtension
 {
     /**
      * {@inheritdoc}
@@ -34,17 +31,8 @@ class SyliusCurrencyExtension extends AbstractResourceExtension
 
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
-        $configFiles = [
-            'services.xml',
-            'templating.xml',
-            'twig.xml',
-        ];
+        $loader->load('services.xml');
 
-        foreach ($configFiles as $configFile) {
-            $loader->load($configFile);
-        }
-
-        $definition = $container->findDefinition('sylius.context.currency');
-        $definition->replaceArgument(0, new Reference($config['storage']));
+        $container->setParameter('sylius_currency.currency', $config['currency']);
     }
 }

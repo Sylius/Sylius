@@ -17,17 +17,17 @@ use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Sylius\Component\Channel\Factory\ChannelFactoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
+use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class DefaultFranceChannelFactory implements DefaultChannelFactoryInterface
+final class DefaultFranceChannelFactory implements DefaultChannelFactoryInterface
 {
     const DEFAULT_CHANNEL_CODE = 'WEB-FR';
     const DEFAULT_COUNTRY_CODE = 'FR';
-    const DEFAULT_CURRENCY_CODE = 'EUR';
     const DEFAULT_ZONE_CODE = 'FR';
     const DEFAULT_ZONE_NAME = 'France';
 
@@ -92,6 +92,16 @@ class DefaultFranceChannelFactory implements DefaultChannelFactoryInterface
     private $zoneFactory;
 
     /**
+     * @var string
+     */
+    private $defaultCurrencyCode;
+
+    /**
+     * @var string
+     */
+    private $defaultLocaleCode;
+
+    /**
      * @param RepositoryInterface $channelRepository
      * @param RepositoryInterface $countryRepository
      * @param RepositoryInterface $currencyRepository
@@ -104,6 +114,8 @@ class DefaultFranceChannelFactory implements DefaultChannelFactoryInterface
      * @param FactoryInterface $localeFactory
      * @param FactoryInterface $zoneFactory
      * @param FactoryInterface $zoneMemberFactory
+     * @param string $defaultCurrencyCode
+     * @param string $defaultLocaleCode
      */
     public function __construct(
         RepositoryInterface $channelRepository,
@@ -117,7 +129,9 @@ class DefaultFranceChannelFactory implements DefaultChannelFactoryInterface
         FactoryInterface $currencyFactory,
         FactoryInterface $localeFactory,
         FactoryInterface $zoneFactory,
-        FactoryInterface $zoneMemberFactory
+        FactoryInterface $zoneMemberFactory,
+        $defaultCurrencyCode,
+        $defaultLocaleCode
     ) {
         $this->channelRepository = $channelRepository;
         $this->countryRepository = $countryRepository;
@@ -131,19 +145,20 @@ class DefaultFranceChannelFactory implements DefaultChannelFactoryInterface
         $this->localeFactory = $localeFactory;
         $this->zoneMemberFactory = $zoneMemberFactory;
         $this->zoneFactory = $zoneFactory;
+        $this->defaultCurrencyCode = $defaultCurrencyCode;
+        $this->defaultLocaleCode = $defaultLocaleCode;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function create()
+    public function create($code = null, $name = null)
     {
-        $currency = $this->createCurrency();
-        $locale = $this->localeFactory->createNew();
+        $currency = $this->provideCurrency();
+        $locale = $this->provideLocale();
 
-        $locale->setCode('en_US');
-
-        $channel = $this->createChannel();
+        $channel = $this->createChannel($code ?: self::DEFAULT_CHANNEL_CODE, $name ?: 'France');
+        $channel->addCurrency($currency);
         $channel->setDefaultCurrency($currency);
         $channel->addLocale($locale);
         $channel->setDefaultLocale($locale);
@@ -156,8 +171,6 @@ class DefaultFranceChannelFactory implements DefaultChannelFactoryInterface
         $defaultData['zone_member'] = $this->createZoneMember();
         $defaultData['zone'] = $this->createZone($defaultData['zone_member']);
 
-        $this->currencyRepository->add($currency);
-        $this->localeRepository->add($locale);
         $this->channelRepository->add($channel);
         $this->countryRepository->add($defaultData['country']);
         $this->zoneRepository->add($defaultData['zone']);
@@ -169,10 +182,10 @@ class DefaultFranceChannelFactory implements DefaultChannelFactoryInterface
     /**
      * @return ChannelInterface
      */
-    private function createChannel()
+    private function createChannel($code, $name)
     {
-        $channel = $this->channelFactory->createNamed('France');
-        $channel->setCode(self::DEFAULT_CHANNEL_CODE);
+        $channel = $this->channelFactory->createNamed($name);
+        $channel->setCode($code);
 
         return $channel;
     }
@@ -182,6 +195,7 @@ class DefaultFranceChannelFactory implements DefaultChannelFactoryInterface
      */
     private function createCountry()
     {
+        /** @var CountryInterface $country */
         $country = $this->countryFactory->createNew();
         $country->setCode(self::DEFAULT_COUNTRY_CODE);
 
@@ -191,14 +205,38 @@ class DefaultFranceChannelFactory implements DefaultChannelFactoryInterface
     /**
      * @return CurrencyInterface
      */
-    private function createCurrency()
+    private function provideCurrency()
     {
-        $currency = $this->currencyFactory->createNew();
-        $currency->setCode(self::DEFAULT_CURRENCY_CODE);
-        $currency->setExchangeRate(1.00);
-        $currency->setBase(true);
+        /** @var CurrencyInterface $currency */
+        $currency = $this->currencyRepository->findOneBy(['code' => $this->defaultCurrencyCode]);
+
+        if (null === $currency) {
+            $currency = $this->currencyFactory->createNew();
+            $currency->setCode($this->defaultCurrencyCode);
+            $currency->setExchangeRate(1.00);
+
+            $this->currencyRepository->add($currency);
+        }
 
         return $currency;
+    }
+
+    /**
+     * @return LocaleInterface
+     */
+    private function provideLocale()
+    {
+        /** @var LocaleInterface $locale */
+        $locale = $this->localeRepository->findOneBy(['code' => $this->defaultLocaleCode]);
+
+        if (null === $locale) {
+            $locale = $this->localeFactory->createNew();
+            $locale->setCode($this->defaultLocaleCode);
+
+            $this->localeRepository->add($locale);
+        }
+
+        return $locale;
     }
 
     /**
@@ -206,6 +244,7 @@ class DefaultFranceChannelFactory implements DefaultChannelFactoryInterface
      */
     private function createZoneMember()
     {
+        /** @var ZoneMemberInterface $zoneMember */
         $zoneMember = $this->zoneMemberFactory->createNew();
         $zoneMember->setCode(self::DEFAULT_ZONE_CODE);
 
@@ -219,6 +258,7 @@ class DefaultFranceChannelFactory implements DefaultChannelFactoryInterface
      */
     private function createZone(ZoneMemberInterface $zoneMember)
     {
+        /** @var ZoneInterface $zone */
         $zone = $this->zoneFactory->createNew();
         $zone->setCode(self::DEFAULT_ZONE_CODE);
         $zone->setName(self::DEFAULT_ZONE_NAME);

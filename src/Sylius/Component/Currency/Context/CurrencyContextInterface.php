@@ -18,16 +18,8 @@ interface CurrencyContextInterface
 {
     /**
      * @return string
-     */
-    public function getDefaultCurrencyCode();
-
-    /**
-     * @return string
+     *
+     * @throws CurrencyNotFoundException
      */
     public function getCurrencyCode();
-
-    /**
-     * @param string $currencyCode
-     */
-    public function setCurrencyCode($currencyCode);
 }

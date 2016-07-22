@@ -14,16 +14,14 @@ namespace Sylius\Bundle\CurrencyBundle\Twig;
 use Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelperInterface;
 
 /**
- * Sylius currency Twig helper.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class CurrencyExtension extends \Twig_Extension
+final class CurrencyExtension extends \Twig_Extension
 {
     /**
      * @var CurrencyHelperInterface
      */
-    protected $helper;
+    private $helper;
 
     /**
      * @param CurrencyHelperInterface $helper
@@ -36,22 +34,10 @@ class CurrencyExtension extends \Twig_Extension
     /**
      * {@inheritdoc}
      */
-    public function getFunctions()
-    {
-        return [
-            new \Twig_SimpleFunction('sylius_currency_symbol', [$this->helper, 'getBaseCurrencySymbol']),
-            new \Twig_SimpleFunction('sylius_base_currency_code', [$this->helper, 'getBaseCurrencyCode']),
-        ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getFilters()
     {
         return [
-            new \Twig_SimpleFilter('sylius_currency', [$this->helper, 'convertAmount']),
-            new \Twig_SimpleFilter('sylius_price', [$this->helper, 'convertAndFormatAmount']),
+            new \Twig_SimpleFilter('sylius_currency_symbol', [$this->helper, 'convertCurrencyCodeToSymbol']),
         ];
     }
 

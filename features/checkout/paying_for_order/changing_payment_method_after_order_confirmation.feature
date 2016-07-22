@@ -6,7 +6,6 @@ Feature: Changing the method after order confirmation
 
     Background:
         Given the store operates on a single channel in "France"
-        And default currency is USD
         And there is user "john@example.com" identified by "password123"
         And the store has a product "PHP T-Shirt" priced at "$19.99"
         And the store ships everywhere for free

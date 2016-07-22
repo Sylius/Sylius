@@ -20,6 +20,7 @@
 <body class="pushable">
 <div class="pusher">
     <div id="menu" class="ui large sticky inverted stackable menu">
+        {% render(controller('sylius.controller.shop.currency:renderSelectorAction')) %}
         {% include '@SyliusShop/Homepage/Menu/_security.html.twig' %}
     </div>
 

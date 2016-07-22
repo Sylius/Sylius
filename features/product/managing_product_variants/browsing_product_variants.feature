@@ -6,7 +6,6 @@ Feature: Browsing product variants
 
     Background:
         Given the store is available in "English (United States)"
-        And the store has a base currency "US Dollar"
         And the store has a "Wyborowa Vodka" configurable product
         And the product "Wyborowa Vodka" has "Wyborowa Vodka Exquisite" variant priced at "€40.00"
         And I am logged in as an administrator

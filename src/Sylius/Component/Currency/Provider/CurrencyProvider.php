@@ -11,40 +11,53 @@
 
 namespace Sylius\Component\Currency\Provider;
 
+use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Fernando Caraballo Ortiz <caraballo.ortiz@gmail.com>
  */
-class CurrencyProvider implements CurrencyProviderInterface
+final class CurrencyProvider implements CurrencyProviderInterface
 {
     /**
      * @var RepositoryInterface
      */
-    protected $currencyRepository;
+    private $currencyRepository;
+
+    /**
+     * @var string
+     */
+    private $defaultCurrencyCode;
 
     /**
      * @param RepositoryInterface $currencyRepository
+     * @param string $defaultCurrencyCode
      */
-    public function __construct(RepositoryInterface $currencyRepository)
+    public function __construct(RepositoryInterface $currencyRepository, $defaultCurrencyCode)
     {
         $this->currencyRepository = $currencyRepository;
+        $this->defaultCurrencyCode = $defaultCurrencyCode;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getAvailableCurrencies()
+    public function getAvailableCurrenciesCodes()
     {
-        return $this->currencyRepository->findBy(['enabled' => true]);
+        $currencies = $this->currencyRepository->findBy(['enabled' => true]);
+
+        return array_map(
+            function (CurrencyInterface $currency) { return $currency->getCode(); },
+            $currencies
+        );
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getBaseCurrency()
+    public function getDefaultCurrencyCode()
     {
-        return $this->currencyRepository->findOneBy(['base' => true]);
+        return $this->defaultCurrencyCode;
     }
 }

@@ -52,7 +52,14 @@ interface SummaryPageInterface extends PageInterface
      *
      * @return string
      */
-    public function getItemDiscountedTotal($productName);
+    public function getItemUnitRegularPrice($productName);
+
+    /**
+     * @param string $productName
+     *
+     * @return string
+     */
+    public function getItemUnitPrice($productName);
 
     /**
      * @param string $productName

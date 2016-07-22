@@ -16,14 +16,6 @@
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
                                         http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
 
-    <class name="Sylius\Component\Core\Model\Customer">
-        <property name="currencyCode">
-            <constraint name="Currency">
-                <option name="message">sylius.customer.currency_code.not_valid</option>
-            </constraint>
-        </property>
-    </class>
-
     <class name="Sylius\Component\Core\Model\Channel">
         <property name="taxCalculationStrategy">
             <constraint name="NotBlank" />
@@ -95,7 +87,7 @@
                 <option name="groups">sylius</option>
             </constraint>
         </property>
-    </class>    
+    </class>
     <class name="Sylius\Component\Cart\Model\CartItem">
         <constraint name="Sylius\Bundle\InventoryBundle\Validator\Constraints\InStock">
             <option name="stockablePath">variant</option>

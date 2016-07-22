@@ -6,7 +6,6 @@ Feature: Shipping method flat rate per shipment calculator validation
 
     Background:
         Given the store is available in "English (United States)"
-        And the store has a base currency "Euro"
         And there is a zone "EU" containing all members of the European Union
         Given I am logged in as an administrator
 

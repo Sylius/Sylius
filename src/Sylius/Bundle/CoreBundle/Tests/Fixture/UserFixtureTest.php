@@ -59,14 +59,6 @@ final class UserFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function user_currency_code_is_optional()
-    {
-        $this->assertConfigurationIsValid([['custom' => [['currency_code' => 'USD']]]], 'custom.*.currency_code');
-    }
-
-    /**
-     * @test
-     */
     public function user_may_be_toggled()
     {
         $this->assertConfigurationIsValid([['custom' => [['enabled' => false]]]], 'custom.*.enabled');

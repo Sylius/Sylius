@@ -18,15 +18,18 @@ use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Sylius\Component\Channel\Factory\ChannelFactoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Test\Services\DefaultChannelFactoryInterface;
+use Sylius\Component\Core\Test\Services\DefaultFranceChannelFactory;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
+ * @mixin DefaultFranceChannelFactory
+ *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class DefaultFranceChannelFactorySpec extends ObjectBehavior
+final class DefaultFranceChannelFactorySpec extends ObjectBehavior
 {
     function let(
         RepositoryInterface $channelRepository,
@@ -54,7 +57,9 @@ class DefaultFranceChannelFactorySpec extends ObjectBehavior
             $currencyFactory,
             $localeFactory,
             $zoneFactory,
-            $zoneMemberFactory
+            $zoneMemberFactory,
+            'EUR',
+            'en_US'
         );
     }
 
@@ -69,29 +74,30 @@ class DefaultFranceChannelFactorySpec extends ObjectBehavior
     }
 
     function it_creates_default_france_channel_with_country_zone_and_eur_as_default_currency(
-        $channelRepository,
-        $countryRepository,
-        $currencyRepository,
-        $localeRepository,
-        $zoneMemberRepository,
-        $zoneRepository,
-        $channelFactory,
-        $countryFactory,
-        $localeFactory,
-        $currencyFactory,
-        $zoneMemberFactory,
-        $zoneFactory,
+        RepositoryInterface $channelRepository,
+        RepositoryInterface $countryRepository,
+        RepositoryInterface $currencyRepository,
+        RepositoryInterface $localeRepository,
+        RepositoryInterface $zoneMemberRepository,
+        RepositoryInterface $zoneRepository,
+        ChannelFactoryInterface $channelFactory,
+        FactoryInterface $countryFactory,
+        FactoryInterface $currencyFactory,
+        FactoryInterface $localeFactory,
+        FactoryInterface $zoneFactory,
+        FactoryInterface $zoneMemberFactory,
         ZoneMemberInterface $zoneMember,
         ZoneInterface $zone,
         ChannelInterface $channel,
         CountryInterface $france,
-        CurrencyInterface $euro,
+        CurrencyInterface $currency,
         LocaleInterface $locale
     ) {
         $channel->getName()->willReturn('France');
         $channelFactory->createNamed('France')->willReturn($channel);
 
         $localeFactory->createNew()->willReturn($locale);
+        $locale->setCode('en_US')->shouldBeCalled();
 
         $zoneMemberFactory->createNew()->willReturn($zoneMember);
         $zoneFactory->createNew()->willReturn($zone);
@@ -108,22 +114,25 @@ class DefaultFranceChannelFactorySpec extends ObjectBehavior
         $countryFactory->createNew()->willReturn($france);
         $france->setCode('FR')->shouldBeCalled();
 
-        $currencyFactory->createNew()->willReturn($euro);
-        $euro->setCode('EUR')->shouldBeCalled();
-        $euro->setExchangeRate(1.00)->shouldBeCalled();
-        $euro->setBase(true)->shouldBeCalled();
+        $currencyFactory->createNew()->willReturn($currency);
+        $currency->setCode('EUR')->shouldBeCalled();
+        $currency->setExchangeRate(1.00)->shouldBeCalled();
 
-        $channel->setDefaultCurrency($euro)->shouldBeCalled();
+        $channel->setDefaultCurrency($currency)->shouldBeCalled();
+        $channel->addCurrency($currency)->shouldBeCalled();
         $channel->setDefaultLocale($locale)->shouldBeCalled();
         $channel->addLocale($locale)->shouldBeCalled();
 
-        $currencyRepository->add($euro)->shouldBeCalled();
-        $countryRepository->add($france)->shouldBeCalled();
+        $currencyRepository->findOneBy(['code' => 'EUR'])->willReturn(null);
+        $localeRepository->findOneBy(['code' => 'en_US'])->willReturn(null);
 
+        $currencyRepository->add($currency)->shouldBeCalled();
+        $localeRepository->add($locale)->shouldBeCalled();
+
+        $countryRepository->add($france)->shouldBeCalled();
         $channelRepository->add($channel)->shouldBeCalled();
         $zoneRepository->add($zone)->shouldBeCalled();
         $zoneMemberRepository->add($zoneMember)->shouldBeCalled();
-        $localeRepository->add($locale)->shouldBeCalled();
 
         $this->create();
     }

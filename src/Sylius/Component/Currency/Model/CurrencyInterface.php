@@ -41,14 +41,4 @@ interface CurrencyInterface extends
      * @param float $rate
      */
     public function setExchangeRate($rate);
-
-    /**
-     * @return bool
-     */
-    public function isBase();
-
-    /**
-     * @param bool $base
-     */
-    public function setBase($base);
 }

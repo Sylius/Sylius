@@ -11,22 +11,25 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="http://symfony.com/schema/dic/services
-                               http://symfony.com/schema/dic/services/services-1.0.xsd">
-
-    <parameters>
-        <parameter key="sylius.form.type.money.class">Sylius\Bundle\MoneyBundle\Form\Type\MoneyType</parameter>
-        <parameter key="sylius.formatter.money.class">Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatter</parameter>
-    </parameters>
-
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="sylius.form.type.money" class="%sylius.form.type.money.class%">
-            <argument>%sylius.money.currency%</argument>
+        <service id="sylius.form.type.money" class="Sylius\Bundle\MoneyBundle\Form\Type\MoneyType">
+            <argument>%sylius_money.currency%</argument>
             <tag name="form.type" alias="sylius_money" />
         </service>
-        <service id="sylius.formatter.money" class="%sylius.formatter.money.class%" />
-    </services>
 
+        <service id="sylius.formatter.money" class="Sylius\Bundle\MoneyBundle\Formatter\MoneyFormatter" />
+
+        <service id="sylius.templating.helper.money" class="Sylius\Bundle\MoneyBundle\Templating\Helper\MoneyHelper" lazy="true">
+            <argument type="service" id="sylius.formatter.money" />
+            <argument>%sylius_money.currency%</argument>
+            <argument>%sylius_money.locale%</argument>
+            <tag name="templating.helper" alias="sylius_money" />
+        </service>
+
+        <service id="sylius.twig.extension.money" class="Sylius\Bundle\MoneyBundle\Twig\MoneyExtension" public="false">
+            <argument type="service" id="sylius.templating.helper.money" />
+            <tag name="twig.extension" />
+        </service>
+    </services>
 </container>

@@ -14,17 +14,38 @@ namespace spec\Sylius\Component\Core\Test\Services;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Channel\Factory\ChannelFactoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Core\Test\Services\DefaultChannelFactory;
 use Sylius\Component\Core\Test\Services\DefaultChannelFactoryInterface;
+use Sylius\Component\Currency\Model\CurrencyInterface;
+use Sylius\Component\Locale\Model\LocaleInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
+ * @mixin DefaultChannelFactory
+ *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class DefaultChannelFactorySpec extends ObjectBehavior
+final class DefaultChannelFactorySpec extends ObjectBehavior
 {
-    function let(ChannelFactoryInterface $channelFactory, RepositoryInterface $channelRepository)
-    {
-        $this->beConstructedWith($channelFactory, $channelRepository);
+    function let(
+        ChannelFactoryInterface $channelFactory,
+        FactoryInterface $currencyFactory,
+        FactoryInterface $localeFactory,
+        RepositoryInterface $channelRepository,
+        RepositoryInterface $currencyRepository,
+        RepositoryInterface $localeRepository
+    ) {
+        $this->beConstructedWith(
+            $channelFactory,
+            $currencyFactory,
+            $localeFactory,
+            $channelRepository,
+            $currencyRepository,
+            $localeRepository,
+            'EUR',
+            'en_US'
+        );
     }
 
     function it_is_initializable()
@@ -38,16 +59,40 @@ class DefaultChannelFactorySpec extends ObjectBehavior
     }
 
     function it_creates_default_channel_and_persist_it(
-        $channelFactory,
-        $channelRepository,
-        ChannelInterface $channel
+        ChannelFactoryInterface $channelFactory,
+        FactoryInterface $currencyFactory,
+        FactoryInterface $localeFactory,
+        RepositoryInterface $channelRepository,
+        RepositoryInterface $currencyRepository,
+        RepositoryInterface $localeRepository,
+        ChannelInterface $channel,
+        CurrencyInterface $currency,
+        LocaleInterface $locale
     ) {
+        $localeFactory->createNew()->willReturn($locale);
+        $locale->setCode('en_US')->shouldBeCalled();
+
+        $currencyFactory->createNew()->willReturn($currency);
+        $currency->setCode('EUR')->shouldBeCalled();
+        $currency->setExchangeRate(1.00)->shouldBeCalled();
+
         $channelFactory->createNamed('Default')->willReturn($channel);
 
         $channel->setCode('DEFAULT')->shouldBeCalled();
         $channel->setTaxCalculationStrategy('order_items_based')->shouldBeCalled();
+
+        $channel->addCurrency($currency)->shouldBeCalled();
+        $channel->setDefaultCurrency($currency)->shouldBeCalled();
+        $channel->addLocale($locale)->shouldBeCalled();
+        $channel->setDefaultLocale($locale)->shouldBeCalled();
+
+        $currencyRepository->findOneBy(['code' => 'EUR'])->willReturn(null);
+        $localeRepository->findOneBy(['code' => 'en_US'])->willReturn(null);
+
+        $currencyRepository->add($currency)->shouldBeCalled();
+        $localeRepository->add($locale)->shouldBeCalled();
         $channelRepository->add($channel)->shouldBeCalled();
 
-        $this->create()->shouldReturn(['channel' => $channel]);
+        $this->create()->shouldReturn(['channel' => $channel, 'currency' => $currency, 'locale' => $locale]);
     }
 }

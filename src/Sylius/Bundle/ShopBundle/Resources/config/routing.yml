@@ -34,6 +34,11 @@ sylius_shop_account:
 sylius_shop_payum:
     resource: "@SyliusShopBundle/Resources/config/routing/payum.yml"
 
+sylius_shop_switch_currency:
+    path: /switch-currency/{code}
+    defaults:
+        _controller: sylius.controller.shop.currency:switchCurrencyAction
+
 sylius_shop_partial:
     resource: "@SyliusShopBundle/Resources/config/routing/partial.yml"
     prefix: /_partial

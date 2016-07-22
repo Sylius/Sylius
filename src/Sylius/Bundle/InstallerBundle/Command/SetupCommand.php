@@ -157,7 +157,6 @@ EOT
      */
     protected function setupCurrency(InputInterface $input, OutputInterface $output)
     {
-        $currencyRepository = $this->get('sylius.repository.currency');
         $currencyManager = $this->get('sylius.manager.currency');
         $currencyFactory = $this->get('sylius.factory.currency');
 
@@ -165,22 +164,9 @@ EOT
         $name = Intl::getCurrencyBundle()->getCurrencyName($code);
         $output->writeln(sprintf('Adding <info>%s</info> currency.', $name));
 
-        if (null !== $existingCurrency = $currencyRepository->findOneBy(['code' => $code])) {
-            $this->currency = $existingCurrency;
-            $existingCurrency->setBase(true);
-
-            $currencyManager->flush();
-
-            return;
-        }
-
         $currency = $currencyFactory->createNew();
-
-        $currency->setExchangeRate(1);
-        $currency->setBase(true);
+        $currency->setExchangeRate(1.00);
         $currency->setCode($code);
-
-        $this->currency = $currency;
 
         $currencyManager->persist($currency);
         $currencyManager->flush();

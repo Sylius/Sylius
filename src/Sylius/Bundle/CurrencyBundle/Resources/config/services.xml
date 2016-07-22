@@ -11,48 +11,35 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="http://symfony.com/schema/dic/services
-                               http://symfony.com/schema/dic/services/services-1.0.xsd">
-
-    <parameters>
-        <parameter key="sylius.context.currency.class">Sylius\Component\Currency\Context\CurrencyContext</parameter>
-
-        <parameter key="sylius.currency_converter.class">Sylius\Component\Currency\Converter\CurrencyConverter</parameter>
-        <parameter key="sylius.converter.currency_name.class">Sylius\Component\Currency\Converter\CurrencyNameConverter</parameter>
-        <parameter key="sylius.currency_provider.class">Sylius\Component\Currency\Provider\CurrencyProvider</parameter>
-
-        <parameter key="sylius.form.type_extension.money.class">Sylius\Bundle\CurrencyBundle\Form\Extension\MoneyTypeExtension</parameter>
-        <parameter key="sylius.form.type.currency_code_choice.class">Sylius\Bundle\CurrencyBundle\Form\Type\CurrencyCodeChoiceType</parameter>
-        <parameter key="sylius.form.type.currency_choice.class">Sylius\Bundle\CurrencyBundle\Form\Type\CurrencyChoiceType</parameter>
-    </parameters>
-
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="sylius.form.type.currency_code_choice" class="%sylius.form.type.currency_code_choice.class%">
-            <argument type="service" id="sylius.currency_provider" />
+        <service id="sylius.form.type.currency_code_choice" class="Sylius\Bundle\CurrencyBundle\Form\Type\CurrencyCodeChoiceType">
+            <argument type="service" id="sylius.repository.currency" />
             <tag name="form.type" alias="sylius_currency_code_choice" />
         </service>
 
-        <service id="sylius.form.type_extension.money" class="%sylius.form.type_extension.money.class%">
-            <argument type="service" id="sylius.context.currency" />
-            <tag name="form.type_extension" />
+        <service id="sylius.context.currency" class="Sylius\Component\Currency\Context\ImmutableCurrencyContext">
+            <argument>%sylius_currency.currency%</argument>
         </service>
 
-        <service id="sylius.context.currency" class="%sylius.context.currency.class%">
-            <argument /> <!-- Storage service name comes from config -->
-            <argument>%sylius.money.currency%</argument>
-        </service>
-
-        <service id="sylius.currency_converter" class="%sylius.currency_converter.class%">
+        <service id="sylius.currency_converter" class="Sylius\Component\Currency\Converter\CurrencyConverter">
             <argument type="service" id="sylius.repository.currency" />
         </service>
 
-        <service id="sylius.converter.currency_name" class="%sylius.converter.currency_name.class%" />
+        <service id="sylius.converter.currency_name" class="Sylius\Component\Currency\Converter\CurrencyNameConverter" />
 
-        <service id="sylius.currency_provider" class="%sylius.currency_provider.class%">
+        <service id="sylius.currency_provider" class="Sylius\Component\Currency\Provider\CurrencyProvider">
             <argument type="service" id="sylius.repository.currency" />
+            <argument>%sylius_currency.currency%</argument>
+        </service>
+
+        <service id="sylius.templating.helper.currency" class="Sylius\Bundle\CurrencyBundle\Templating\Helper\CurrencyHelper" lazy="true">
+            <tag name="templating.helper" alias="sylius_currency" />
+        </service>
+
+        <service id="sylius.twig.extension.currency" class="Sylius\Bundle\CurrencyBundle\Twig\CurrencyExtension" public="false">
+            <argument type="service" id="sylius.templating.helper.currency" />
+            <tag name="twig.extension" />
         </service>
     </services>
-
 </container>

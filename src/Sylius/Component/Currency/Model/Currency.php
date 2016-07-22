@@ -37,11 +37,6 @@ class Currency implements CurrencyInterface
      */
     protected $exchangeRate;
 
-    /**
-     * @var bool
-     */
-    protected $base = false;
-
     public function __construct()
     {
         $this->createdAt = new \DateTime();
@@ -100,55 +95,6 @@ class Currency implements CurrencyInterface
      */
     public function setExchangeRate($rate)
     {
-        if ($this->isBase()) {
-            throw new \LogicException('You cannot change the exchange rate of the base currency!');
-        }
-
         $this->exchangeRate = $rate;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setEnabled($enabled)
-    {
-        if ($this->isBase() && !$enabled) {
-            throw new \LogicException('You cannot change the enabled status of the base currency!');
-        }
-
-        $this->enabled = (bool) $enabled;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function disable()
-    {
-        if ($this->isBase()) {
-            throw new \LogicException('You cannot change the enabled status of the base currency!');
-        }
-
-        $this->enabled = false;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isBase()
-    {
-        return $this->base;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setBase($base)
-    {
-        $this->base = $base;
-
-        if ($base) {
-            $this->enabled = true;
-            $this->exchangeRate = 1;
-        }
     }
 }

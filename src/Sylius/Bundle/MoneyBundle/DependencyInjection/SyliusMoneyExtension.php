@@ -11,18 +11,16 @@
 
 namespace Sylius\Bundle\MoneyBundle\DependencyInjection;
 
-use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
- * Money extension.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SyliusMoneyExtension extends Extension
+final class SyliusMoneyExtension extends Extension implements PrependExtensionInterface
 {
     /**
      * {@inheritdoc}
@@ -32,11 +30,27 @@ class SyliusMoneyExtension extends Extension
         $config = $this->processConfiguration($this->getConfiguration($config, $container), $config);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        $container->setParameter('sylius.money.locale', $config['locale']);
-        $container->setParameter('sylius.money.currency', $config['currency']);
+        $container->setParameter('sylius_money.locale', $config['locale']);
+        $container->setParameter('sylius_money.currency', $config['currency']);
 
         $loader->load('services.xml');
-        $loader->load('templating.xml');
-        $loader->load('twig.xml');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function prepend(ContainerBuilder $container)
+    {
+        if (!$container->hasExtension('sylius_currency')) {
+            return;
+        }
+
+        $config = $container->getExtensionConfig($this->getAlias());
+        $config = $this->processConfiguration($this->getConfiguration($config, $container), $config);
+
+        $container->prependExtensionConfig('sylius_currency', ['currency' => $config['currency']]);
+
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader->load('integrations/currency.xml');
     }
 }

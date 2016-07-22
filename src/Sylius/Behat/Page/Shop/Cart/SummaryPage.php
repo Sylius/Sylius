@@ -82,11 +82,21 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     /**
      * {@inheritdoc}
      */
-    public function getItemDiscountedTotal($productName)
+    public function getItemUnitRegularPrice($productName)
     {
-        $discountedItemTotalElement = $this->getElement('product_discounted_total', ['%name%' => $productName]);
+        $regularUnitPrice = $this->getElement('product_unit_regular_price', ['%name%' => $productName]);
 
-        return $this->getPriceFromString(trim($discountedItemTotalElement->getText()));
+        return $this->getPriceFromString(trim($regularUnitPrice->getText()));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getItemUnitPrice($productName)
+    {
+        $unitPrice = $this->getElement('product_unit_price', ['%name%' => $productName]);
+
+        return $this->getPriceFromString(trim($unitPrice->getText()));
     }
 
     /**
@@ -94,7 +104,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
      */
     public function isItemDiscounted($productName)
     {
-        return $this->hasElement('product_discounted_total', ['%name%' => $productName]);
+        return $this->hasElement('product_unit_regular_price', ['%name%' => $productName]);
     }
 
     /**
@@ -206,6 +216,8 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
             'product_discounted_total' => '#sylius-cart-items tr:contains("%name%") .sylius-discounted-total',
             'product_row' => '#sylius-cart-items tbody tr:contains("%name%")',
             'product_total' => '#sylius-cart-items tr:contains("%name%") .sylius-total',
+            'product_unit_price' => '#sylius-cart-items tr:contains("%name%") .sylius-unit-price',
+            'product_unit_regular_price' => '#sylius-cart-items tr:contains("%name%") .sylius-regular-unit-price',
             'promotion_total' => '#sylius-cart-promotion-total',
             'save_button' => '#sylius-save',
             'shipping_total' => '#sylius-cart-shipping-total',

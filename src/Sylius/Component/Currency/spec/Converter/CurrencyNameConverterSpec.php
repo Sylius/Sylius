@@ -12,7 +12,6 @@
 namespace spec\Sylius\Component\Currency\Converter;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Currency\Converter\CurrencyNameConverterInterface;
 
 /**

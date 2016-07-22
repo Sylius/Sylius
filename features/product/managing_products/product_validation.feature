@@ -6,7 +6,6 @@ Feature: Products validation
 
     Background:
         Given the store is available in "English (United States)"
-        And the store has a base currency "US Dollar"
         And I am logged in as an administrator
 
     @ui

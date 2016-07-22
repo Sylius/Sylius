@@ -9,7 +9,6 @@ Feature: Apply correct taxes for products with different tax rates for different
         And the store ships to "Australia" and "France"
         And there is a zone "EU" containing all members of the European Union
         And there is a zone "The Rest of the World" containing all other countries
-        And default currency is "EUR"
         And default tax zone is "EU"
         And the store ships everywhere for free
         And the store has "EU VAT" tax rate of 23% for "Clothes" within "EU" zone

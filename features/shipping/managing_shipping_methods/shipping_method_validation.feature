@@ -6,7 +6,6 @@ Feature: Shipping method validation
 
     Background:
         Given the store is available in "English (United States)"
-        And the store has a base currency "Euro"
         And there is a zone "EU" containing all members of the European Union
         And I am logged in as an administrator
 
