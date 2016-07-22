@@ -113,7 +113,18 @@ final class Configuration implements ConfigurationInterface
         /** @var ArrayNodeDefinition $optionsNode */
         $optionsNode = $attributesNodeBuilder->arrayNode('options');
         $optionsNode->addDefaultChildrenIfNoneSet();
-        $optionsNode->beforeNormalization()->always(function ($value) { return [$value]; });
-        $optionsNode->prototype('array')->ignoreExtraKeys(false);
+
+        $optionsNode
+            ->validate()
+                ->ifTrue(function ($value) { return !is_array($value); })
+                ->thenInvalid('Options have to be an array!')
+        ;
+
+        $optionsNode
+            ->beforeNormalization()
+                ->always(function ($value) { return is_array($value) ? [$value] : $value; })
+        ;
+
+        $optionsNode->prototype('variable')->cannotBeEmpty()->defaultValue([]);
     }
 }
