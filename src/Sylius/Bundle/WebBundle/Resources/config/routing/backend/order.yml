@@ -60,12 +60,6 @@ sylius_backend_order_by_customer:
             sorting: { updatedAt: desc }
             permission: true
 
-sylius_backend_order_release_inventory:
-    path: /release-inventory/{id}
-    methods: [PUT]
-    defaults:
-        _controller: sylius.controller.order:releaseInventoryAction
-
 sylius_backend_order_comment_create:
     path: /{id}/comment/new
     methods: [GET, POST]

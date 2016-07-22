@@ -17,8 +17,6 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius.form.type.order_state_choice.class">Sylius\Bundle\OrderBundle\Form\Type\OrderStateChoiceType</parameter>
-
         <parameter key="sylius.callback.complete_order.class">Sylius\Bundle\OrderBundle\StateMachineCallback\CompleteOrderCallback</parameter>
 
         <parameter key="sylius.order_item_quantity_modifier.class">Sylius\Component\Order\Modifier\OrderItemQuantityModifier</parameter>
@@ -34,10 +32,6 @@
     </parameters>
 
     <services>
-        <service id="sylius.form.type.order_state_choice" class="%sylius.form.type.order_state_choice.class%">
-            <tag name="form.type" alias="sylius_order_state_choice" />
-        </service>
-
         <service id="sylius.callback.complete_order" class="%sylius.callback.complete_order.class%" />
 
         <service id="sylius.order_item_quantity_modifier" class="%sylius.order_item_quantity_modifier.class%">

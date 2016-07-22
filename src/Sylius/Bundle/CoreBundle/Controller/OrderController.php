@@ -70,28 +70,6 @@ class OrderController extends ResourceController
      *
      * @throws NotFoundHttpException
      */
-    public function releaseInventoryAction(Request $request)
-    {
-        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
-        $order = $this->findOr404($configuration);
-
-        $this->container->get('sm.factory')
-            ->get($order, OrderTransitions::GRAPH)
-            ->apply(OrderTransitions::TRANSITION_RELEASE)
-        ;
-
-        $this->manager->flush();
-
-        return $this->redirectHandler->redirectToReferer($configuration);
-    }
-
-    /**
-     * @param Request $request
-     *
-     * @return Response
-     *
-     * @throws NotFoundHttpException
-     */
     public function historyAction(Request $request)
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);

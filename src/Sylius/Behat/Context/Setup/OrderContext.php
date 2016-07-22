@@ -397,16 +397,6 @@ final class OrderContext implements Context
     }
 
     /**
-     * @Given /^the customer fulfilled (this order)$/
-     */
-    public function theCustomerFulfilledThisOrder(OrderInterface $order)
-    {
-        $this->stateMachineFactory->get($order, OrderTransitions::GRAPH)->apply(OrderTransitions::TRANSITION_FULFILL);
-
-        $this->objectManager->flush();
-    }
-
-    /**
      * @Given /^(this order) is ready to ship$/
      */
     public function thisOrderIsReadyToShip(OrderInterface $order)
