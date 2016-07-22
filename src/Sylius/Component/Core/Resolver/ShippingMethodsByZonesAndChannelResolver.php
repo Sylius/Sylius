@@ -16,8 +16,9 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
-use Sylius\Component\Shipping\Repository\ShippingMethodRepositoryInterface;
+use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
 use Sylius\Component\Shipping\Resolver\MethodsResolverInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -51,42 +52,17 @@ class ShippingMethodsByZonesAndChannelResolver implements MethodsResolverInterfa
      */
     public function getSupportedMethods(ShippingSubjectInterface $subject)
     {
-        $zones = $this->getZonesIdsForAddress($subject->getOrder());
+        /** @var ShipmentInterface $subject */
+        Assert::true($this->supports($subject));
+        /** @var OrderInterface $order */
+        $order = $subject->getOrder();
+
+        $zones = $this->zoneMatcher->matchAll($order->getShippingAddress());
         if (empty($zones)) {
             return [];
         }
 
-        /** @var ChannelInterface $channel */
-        $channel = $subject->getOrder()->getChannel();
-
-        $methods = [];
-        foreach ($this->shippingMethodRepository->findBy(['enabled' => true, 'zone' => $zones]) as $method) {
-            if ($channel->hasShippingMethod($method)) {
-                $methods[] = $method;
-            }
-        }
-
-        return $methods;
-    }
-
-    /**
-     * @param OrderInterface $order
-     *
-     * @return array
-     */
-    private function getZonesIdsForAddress(OrderInterface $order)
-    {
-        $matchedZones = $this->zoneMatcher->matchAll($order->getShippingAddress());
-        if (empty($matchedZones)) {
-            return [];
-        }
-
-        $zones = [];
-        foreach ($matchedZones as $zone) {
-            $zones[] = $zone->getId();
-        }
-
-        return $zones;
+        return $this->shippingMethodRepository->findEnabledForZonesAndChannel($zones, $order->getChannel());
     }
 
     /**
@@ -96,7 +72,8 @@ class ShippingMethodsByZonesAndChannelResolver implements MethodsResolverInterfa
     {
         return $subject instanceof ShipmentInterface &&
             null !== $subject->getOrder() &&
-            null !== $subject->getOrder()->getShippingAddress()
+            null !== $subject->getOrder()->getShippingAddress() &&
+            null !== $subject->getOrder()->getChannel()
         ;
     }
 }

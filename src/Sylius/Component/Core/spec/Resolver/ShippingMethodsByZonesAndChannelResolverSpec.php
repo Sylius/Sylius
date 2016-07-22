@@ -21,7 +21,7 @@ use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
 use Sylius\Component\Core\Resolver\ShippingMethodsByZonesAndChannelResolver;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
-use Sylius\Component\Shipping\Repository\ShippingMethodRepositoryInterface;
+use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
 use Sylius\Component\Shipping\Resolver\MethodsResolverInterface;
 
 /**
@@ -55,7 +55,6 @@ class ShippingMethodsByZonesAndChannelResolverSpec extends ObjectBehavior
         ShipmentInterface $shipment,
         ShippingMethodInterface $firstShippingMethod,
         ShippingMethodInterface $secondShippingMethod,
-        ShippingMethodInterface $thirdShippingMethod,
         ShippingMethodRepositoryInterface $shippingMethodRepository,
         ZoneInterface $firstZone,
         ZoneInterface $secondZone,
@@ -67,29 +66,24 @@ class ShippingMethodsByZonesAndChannelResolverSpec extends ObjectBehavior
 
         $zoneMatcher->matchAll($address)->willReturn([$firstZone, $secondZone]);
 
-        $firstZone->getId()->willReturn(1);
-        $secondZone->getId()->willReturn(4);
-
         $shippingMethodRepository
-            ->findBy(['enabled' => true, 'zone' => [1, 4]])
-            ->willReturn([$firstShippingMethod, $secondShippingMethod, $thirdShippingMethod])
+            ->findEnabledForZonesAndChannel([$firstZone, $secondZone], $channel)
+            ->willReturn([$firstShippingMethod, $secondShippingMethod])
         ;
-
-        $channel->hasShippingMethod($firstShippingMethod)->willReturn(true);
-        $channel->hasShippingMethod($secondShippingMethod)->willReturn(true);
-        $channel->hasShippingMethod($thirdShippingMethod)->willReturn(false);
 
         $this->getSupportedMethods($shipment)->shouldReturn([$firstShippingMethod, $secondShippingMethod]);
     }
 
     function it_returns_empty_array_if_zone_matcher_could_not_match_any_zone(
-        AddressInterface $address,
         OrderInterface $order,
+        AddressInterface $address,
+        ChannelInterface $channel,
         ShipmentInterface $shipment,
         ZoneMatcherInterface $zoneMatcher
     ) {
         $shipment->getOrder()->willReturn($order);
         $order->getShippingAddress()->willReturn($address);
+        $order->getChannel()->willReturn($channel);
 
         $zoneMatcher->matchAll($address)->willReturn([]);
 
@@ -97,22 +91,38 @@ class ShippingMethodsByZonesAndChannelResolverSpec extends ObjectBehavior
     }
 
     function it_supports_shipments_with_order_and_its_shipping_address_defined(
-        AddressInterface $address,
         OrderInterface $order,
+        AddressInterface $address,
+        ChannelInterface $channel,
         ShipmentInterface $shipment
     ) {
         $shipment->getOrder()->willReturn($order);
         $order->getShippingAddress()->willReturn($address);
+        $order->getChannel()->willReturn($channel);
 
         $this->supports($shipment)->shouldReturn(true);
     }
 
     function it_does_not_support_shipments_which_order_has_no_shipping_address_defined(
         OrderInterface $order,
+        ChannelInterface $channel,
         ShipmentInterface $shipment
     ) {
         $shipment->getOrder()->willReturn($order);
         $order->getShippingAddress()->willReturn(null);
+        $order->getChannel()->willReturn($channel);
+
+        $this->supports($shipment)->shouldReturn(false);
+    }
+
+    function it_does_not_support_shipments_for_order_with_not_assigned_channel(
+        OrderInterface $order,
+        AddressInterface $address,
+        ShipmentInterface $shipment
+    ) {
+        $shipment->getOrder()->willReturn($order);
+        $order->getShippingAddress()->willReturn($address);
+        $order->getChannel()->willReturn(null);
 
         $this->supports($shipment)->shouldReturn(false);
     }
