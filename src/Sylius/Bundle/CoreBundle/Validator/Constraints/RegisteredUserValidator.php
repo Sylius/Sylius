@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\UserBundle\Validator\Constraints;
+namespace Sylius\Bundle\CoreBundle\Validator\Constraints;
 
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Validator\Constraint;

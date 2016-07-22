@@ -17,7 +17,7 @@
                                         http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
 
     <class name="Sylius\Component\Core\Model\Customer">
-        <constraint name="Sylius\Bundle\UserBundle\Validator\Constraints\RegisteredUser">
+        <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\RegisteredUser">
             <option name="message">sylius.customer.email.registered</option>
             <option name="groups">sylius_customer_guest</option>
         </constraint>
