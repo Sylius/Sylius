@@ -6,7 +6,6 @@ sylius:
         header: extensii
         accelerator:
             header: Accelerator
-            help: Instalaţi şi activaţi un PHP accelerator ca APC (recomandat).
         apc: APC
         ctype: Ctype
         gd: GD
@@ -28,13 +27,9 @@ sylius:
         header: file system
         cache:
             header: cache
-            help:
-                To set permissions run: "sudo setfacl -R -m u:www-date: rwX -m u: 'whoami': rwX %path% & sudo setfacl -dR -m u:www-date: rwx -m u: 'whoami': rwx %path%"
         exists: există
         logs:
             header: logs
-            help:
-                To set permissions run: "sudo setfacl -R -m u:www-date: rwX -m u: 'whoami': rwX %path% & sudo setfacl -dR -m u:www-date: rwx -m u: 'whoami': rwx %path%"
         not_exists: nu există
         not_writable: nu sunt drepturi de scriere
         parameters:
@@ -60,4 +55,3 @@ sylius:
             header: Fus orar învechit
             help: 'Fusul orar %timezone% este învechit. Corectează fişierul php.ini (lista fusuri orere învechite http://php.net/manual/en/timezones.others.php).'
         version: Versiunea PHP
-        version_recommanded: Versiunea PHP recomandată

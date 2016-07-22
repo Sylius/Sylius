@@ -6,7 +6,6 @@ sylius:
         header: Eklentiler
         accelerator:
             header: Hızlandırıcı
-            help: APC veya başka bir PHP hızlandırıcısını yükleyin ve aktif edin. (Önemle tavsiye edilir).
         apc: APC
         ctype: Ctype
         gd: GD
@@ -29,13 +28,9 @@ sylius:
         header: dosya sistemi
         cache:
             header: önbellek
-            help:
-                To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
         exists: mevcut
         logs:
             header: loglar
-            help:
-                To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
         not_exists: mevcut değil
         not_writable: yazılabilir değil
         parameters:
@@ -61,4 +56,3 @@ sylius:
             header: Kullanılmayan Zaman Dilimi
             help: '%timezone% zaman dilimi kaldırılmıştır. php.ini dosyanızda gerekli düzenlemeyi yapın. (Kaldırılan tüm zaman dilimleri http://php.net/manual/en/timezones.others.php).'
         version: PHP versiyon
-        version_recommanded: Önerilen PHP sürümü

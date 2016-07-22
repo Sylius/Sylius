@@ -6,7 +6,6 @@ sylius:
         header: plėtiniai
         accelerator:
             header: Greitintuvas
-            help: Įdiekite ir įjunkite PHP greitintuvą, pvz. APC (labai rekomenduojama).
         apc: APC
         ctype: Ctype
         gd: GD
@@ -28,13 +27,9 @@ sylius:
         header: failų sistema
         cache:
             header: podėlis
-            help:
-                To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
         exists: egzistuoja
         logs:
             header: audito įrašai
-            help:
-                To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
         not_exists: neegzistuoja
         not_writable: be galimybės įrašyti
         parameters:
@@ -60,4 +55,3 @@ sylius:
             header: Pasenusi laiko juosta
             help: 'Laiko juosta %timezone% yra pasenusi. Pataisykite savo php.ini failą (pasenusių laiko juostų sąrašas http://php.net/manual/en/timezones.others.php).'
         version: PHP versija
-        version_recommanded: Rekomenduojama PHP versija

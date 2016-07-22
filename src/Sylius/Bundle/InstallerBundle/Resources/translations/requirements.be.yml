@@ -3,8 +3,6 @@
 
 sylius:
     extensions:
-        accelerator:
-            help: Усталюйце і ўключыце PHP паскаральнік, напрыклад APC (вельмі пажадана).
         apc: APC
         ctype: Ctype
         gd: GD
@@ -23,13 +21,7 @@ sylius:
         simplexml_import_dom: SimpleXML
         token_get_all: Tokenizer
     filesystem:
-        cache:
-            help:
-                To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
         exists: існуе
-        logs:
-            help:
-                To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
         not_exists: не існуе
         not_writable: адсутнасць мажлівасці запісу
         parameters:
@@ -52,4 +44,3 @@ sylius:
         timezone_deprecated:
             help: 'Гадзінны пояс %timezone% састарэў. Папраўце Ваш файл php.ini (спіс састарэлых гадзінных паясоў можна знайсці на http://php.net/manual/en/timezones.others.p).'
         version: Версія PHP
-        version_recommanded: Рэкамендуемая версія PHP

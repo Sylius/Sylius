@@ -6,7 +6,6 @@ sylius:
         header: Utvidelser
         accelerator:
             header: Akselerator
-            help: Installere og aktivere en PHP-akselerator som APC (anbefales).
         apc: APC
         ctype: Ctype
         gd: GD
@@ -28,13 +27,9 @@ sylius:
         header: filsystem
         cache:
             header: mellomlagring/cache
-            help:
-                To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
         exists: finnes
         logs:
             header: logger
-            help:
-                To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
         not_exists: finnes ikke
         not_writable: ikke skrivbar
         parameters:
@@ -60,4 +55,3 @@ sylius:
             header: Utgått tidssone
             help: 'Tidssonen %timezone% er avskrevet. Du må redigere din php.ini-fil (liste over avskrevene tidssoner http://php.net/manual/en/timezones.others.php).'
         version: PHP-versjon
-        version_recommanded: Anbefalt PHP-versjon

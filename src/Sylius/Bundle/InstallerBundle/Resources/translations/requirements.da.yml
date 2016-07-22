@@ -3,8 +3,6 @@
 
 sylius:
     extensions:
-        accelerator:
-            help: Installer og aktiver en PHP accelerator ligesom APC (stærkt anbefalet).
         apc: APC
         ctype: Ctype
         gd: GD
@@ -30,4 +28,3 @@ sylius:
         "on": true
         timezone: tidszone
         version: PHP version
-        version_recommanded: Anbefalet PHP version

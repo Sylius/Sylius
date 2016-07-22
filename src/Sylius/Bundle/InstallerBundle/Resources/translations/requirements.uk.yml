@@ -6,7 +6,6 @@ sylius:
         header: Розширення
         accelerator:
             header: Прискорювач
-            help: Встановити й увімкнути PHP-прискорювач типу APC (рекомендується).
         apc: APC
         ctype: Ctype
         gd: GD
@@ -28,13 +27,9 @@ sylius:
         header: Файлова система
         cache:
             header: кеш
-            help:
-                To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
         exists: Існує
         logs:
             header: Логи
-            help:
-                To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
         not_exists: Не існує
         not_writable: відсутня можливість запису
         parameters:
@@ -60,4 +55,3 @@ sylius:
             header: Застарілий часовий пояс
             help: 'Часовий пояс %timezone% тепер вважається застарілим. Виправте ваш файл PHP.ini (список із застарілими часовими поясами можна знайти на http://php.net/manual/en/timezones.others.php).'
         version: PHP версія
-        version_recommanded: Рекомендований PHP версія
