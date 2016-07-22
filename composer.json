@@ -78,7 +78,8 @@
         "winzou/state-machine-bundle": "~0.2",
         "zendframework/zend-hydrator": "^1.0|^2.0",
         "zendframework/zend-stdlib": "^2.0|^3.0",
-        "sonata-project/intl-bundle": "^2.2"
+        "sonata-project/intl-bundle": "^2.2",
+        "guzzlehttp/guzzle": "^6.2.1"
     },
     "require-dev": {
         "akeneo/phpspec-skip-example-extension": "^2.0",
