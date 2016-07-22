@@ -12,24 +12,21 @@
 namespace spec\Sylius\Component\Cart\Context;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Cart\Context\CartContext;
 use Sylius\Component\Cart\Context\CartContextInterface;
-use Sylius\Component\Cart\Context\CartNotFoundException;
 use Sylius\Component\Cart\Model\CartInterface;
-use Sylius\Component\Cart\Provider\CartProviderInterface;
-use Sylius\Component\Registry\PrioritizedServiceRegistryInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @mixin CartContext
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class CartContextSpec extends ObjectBehavior
+final class CartContextSpec extends ObjectBehavior
 {
-    function let(PrioritizedServiceRegistryInterface $providersRegistry)
+    function let(FactoryInterface $cartFactory)
     {
-        $this->beConstructedWith($providersRegistry);
+        $this->beConstructedWith($cartFactory);
     }
 
     function it_is_initializable()
@@ -42,31 +39,10 @@ class CartContextSpec extends ObjectBehavior
         $this->shouldImplement(CartContextInterface::class);
     }
 
-    function it_uses_prioritized_service_registry_and_returns_first_obtained_cart(
-        PrioritizedServiceRegistryInterface $providersRegistry,
-        CartProviderInterface $firstProvider,
-        CartProviderInterface $secondProvider,
-        CartInterface $cart
-    ) {
-        $providersRegistry->all()->willReturn([$firstProvider, $secondProvider]);
-        $firstProvider->getCart()->willReturn(null);
-        $secondProvider->getCart()->willReturn($cart);
-        
+    function it_always_returns_a_new_cart(FactoryInterface $cartFactory, CartInterface $cart)
+    {
+        $cartFactory->createNew()->willReturn($cart);
+
         $this->getCart()->shouldReturn($cart);
-    }
-
-    function it_throws_an_exception_if_none_of_the_providers_is_able_to_get_the_cart(
-        PrioritizedServiceRegistryInterface $providersRegistry,
-        CartProviderInterface $firstProvider,
-        CartProviderInterface $secondProvider
-    ) {
-        $providersRegistry->all()->willReturn([$firstProvider, $secondProvider]);
-        $firstProvider->getCart()->willReturn(null);
-        $secondProvider->getCart()->willReturn(null);
-
-        $this
-            ->shouldThrow(new CartNotFoundException())
-            ->during('getCart')
-        ;
     }
 }

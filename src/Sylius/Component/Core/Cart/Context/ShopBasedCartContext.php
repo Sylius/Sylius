@@ -9,24 +9,25 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Core\Cart\Provider;
+namespace Sylius\Component\Core\Cart\Context;
 
+use Sylius\Component\Cart\Context\CartContextInterface;
 use Sylius\Component\Cart\Context\CartNotFoundException;
 use Sylius\Component\Cart\Model\CartInterface;
-use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Context\ShopperContextInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class NewCartProvider implements CartProviderInterface
+final class ShopBasedCartContext implements CartContextInterface
 {
     /**
-     * @var CartProviderInterface
+     * @var FactoryInterface
      */
-    private $decoratedCartProvider;
+    private $cartFactory;
 
     /**
      * @var ShopperContextInterface
@@ -39,12 +40,12 @@ class NewCartProvider implements CartProviderInterface
     private $cart;
 
     /**
-     * @param CartProviderInterface $decoratedCartProvider
+     * @param FactoryInterface $cartFactory
      * @param ShopperContextInterface $shopperContext
      */
-    public function __construct(CartProviderInterface $decoratedCartProvider, ShopperContextInterface $shopperContext)
+    public function __construct(FactoryInterface $cartFactory, ShopperContextInterface $shopperContext)
     {
-        $this->decoratedCartProvider = $decoratedCartProvider;
+        $this->cartFactory = $cartFactory;
         $this->shopperContext = $shopperContext;
     }
 
@@ -58,7 +59,7 @@ class NewCartProvider implements CartProviderInterface
         }
 
         /** @var OrderInterface $cart */
-        $cart = $this->decoratedCartProvider->getCart();
+        $cart = $this->cartFactory->createNew();
 
         if (null === $cart) {
             throw new \LogicException('Decorated cart provider must return a cart instance, null given.');

@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CartBundle;
 
-use Sylius\Bundle\CartBundle\DependencyInjection\Compiler\RegisterCartProvidersPass;
+use Sylius\Bundle\CartBundle\DependencyInjection\Compiler\RegisterCartContextsPass;
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -38,7 +38,7 @@ class SyliusCartBundle extends AbstractResourceBundle
     {
         parent::build($container);
 
-        $container->addCompilerPass(new RegisterCartProvidersPass());
+        $container->addCompilerPass(new RegisterCartContextsPass());
     }
 
     /**

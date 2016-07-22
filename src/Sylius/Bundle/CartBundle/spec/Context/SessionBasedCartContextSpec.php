@@ -9,22 +9,18 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CartBundle\Provider;
+namespace spec\Sylius\Bundle\CartBundle\Context;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use Sylius\Bundle\CartBundle\Provider\SessionCartProvider;
+use Sylius\Component\Cart\Context\CartContextInterface;
 use Sylius\Component\Cart\Model\CartInterface;
-use Sylius\Component\Cart\Provider\CartProviderInterface;
 use Sylius\Component\Cart\Repository\CartRepositoryInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
- * @mixin SessionCartProvider
- *
- * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class SessionCartProviderSpec extends ObjectBehavior
+final class SessionBasedCartContextSpec extends ObjectBehavior
 {
     function let(SessionInterface $session, CartRepositoryInterface $cartRepository)
     {
@@ -33,12 +29,12 @@ class SessionCartProviderSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CartBundle\Provider\SessionCartProvider');
+        $this->shouldHaveType('Sylius\Bundle\CartBundle\Context\SessionBasedCartContext');
     }
 
-    function it_implements_cart_provider_interface()
+    function it_implements_cart_context_interface()
     {
-        $this->shouldImplement(CartProviderInterface::class);
+        $this->shouldImplement(CartContextInterface::class);
     }
 
     function it_returns_cart_based_on_id_stored_in_session(
@@ -49,14 +45,14 @@ class SessionCartProviderSpec extends ObjectBehavior
         $session->has('session_key_name')->willReturn(true);
         $session->get('session_key_name')->willReturn(12345);
         $cartRepository->findCartById(12345)->willReturn($cart);
-        
+
         $this->getCart()->shouldReturn($cart);
     }
 
     function it_returns_null_when_there_is_not_id_stored_in_session(SessionInterface $session)
     {
         $session->has('session_key_name')->willReturn(false);
-        
+
         $this->getCart()->shouldReturn(null);
     }
 

@@ -78,7 +78,6 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
             'metadata.xml',
             'sitemap.xml',
             'dashboard.xml',
-            'cart_providers.xml',
         ];
 
         $env = $container->getParameter('kernel.environment');

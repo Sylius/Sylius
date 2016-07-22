@@ -11,24 +11,24 @@
 
 namespace Sylius\Component\Cart\Context;
 
-use Sylius\Component\Registry\PrioritizedServiceRegistryInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class CartContext implements CartContextInterface
+final class CartContext implements CartContextInterface
 {
     /**
-     * @var PrioritizedServiceRegistryInterface
+     * @var FactoryInterface
      */
-    private $providersRegistry;
+    private $cartFactory;
 
     /**
-     * @param PrioritizedServiceRegistryInterface $providersRegistry
+     * @param FactoryInterface $cartFactory
      */
-    public function __construct(PrioritizedServiceRegistryInterface $providersRegistry)
+    public function __construct(FactoryInterface $cartFactory)
     {
-        $this->providersRegistry = $providersRegistry;
+        $this->cartFactory = $cartFactory;
     }
 
     /**
@@ -36,14 +36,6 @@ class CartContext implements CartContextInterface
      */
     public function getCart()
     {
-        foreach ($this->providersRegistry->all() as $cartProvider) {
-            $cart = $cartProvider->getCart();
-
-            if (null !== $cart) {
-                return $cart;
-            }
-        }
-
-        throw new CartNotFoundException();
+        return $this->cartFactory->createNew();
     }
 }

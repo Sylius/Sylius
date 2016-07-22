@@ -9,16 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CartBundle\Provider;
+namespace Sylius\Bundle\CartBundle\Context;
 
-use Sylius\Component\Cart\Provider\CartProviderInterface;
+use Sylius\Component\Cart\Context\CartContextInterface;
 use Sylius\Component\Cart\Repository\CartRepositoryInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class SessionCartProvider implements CartProviderInterface
+final class SessionBasedCartContext implements CartContextInterface
 {
     /**
      * @var SessionInterface
@@ -40,11 +40,8 @@ class SessionCartProvider implements CartProviderInterface
      * @param string $sessionKeyName
      * @param CartRepositoryInterface $cartRepository
      */
-    public function __construct(
-        SessionInterface $session,
-        $sessionKeyName,
-        CartRepositoryInterface $cartRepository
-    ) {
+    public function __construct(SessionInterface $session, $sessionKeyName, CartRepositoryInterface $cartRepository)
+    {
         $this->session = $session;
         $this->sessionKeyName = $sessionKeyName;
         $this->cartRepository = $cartRepository;
