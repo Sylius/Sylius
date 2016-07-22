@@ -22,20 +22,6 @@ class PaymentMethodRepository extends EntityRepository implements PaymentMethodR
     /**
      * {@inheritdoc}
      */
-    public function getQueryBuilderForChoiceType(array $options)
-    {
-        $queryBuilder = $this->createQueryBuilder('o');
-
-        if (isset($options['disabled']) && !$options['disabled']) {
-            $queryBuilder->where('o.enabled = true');
-        }
-
-        return $queryBuilder;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function findByName(array $names)
     {
         return $this->createQueryBuilder('o')
