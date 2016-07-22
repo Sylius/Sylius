@@ -57,6 +57,18 @@ final class TaxonFixtureTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @test
+     */
+    public function taxon_children_may_contain_nested_array()
+    {
+        $this->assertProcessedConfigurationEquals(
+            [['custom' => [['children' => [['nested' => ['key' => 'value']]]]]]],
+            ['custom' => [['children' => [['nested' => ['key' => 'value']]]]]],
+            'custom.*.children'
+        );
+    }
+
+    /**
      * {@inheritdoc}
      */
     protected function getConfiguration()
