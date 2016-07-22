@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\UserBundle\Form\EventSubscriber;
+namespace Sylius\Bundle\CoreBundle\Form\EventSubscriber;
 
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;

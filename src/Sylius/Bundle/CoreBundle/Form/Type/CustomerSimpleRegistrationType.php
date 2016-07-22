@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CustomerBundle\Form\Type;
+namespace Sylius\Bundle\CoreBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Bundle\CustomerBundle\Form\EventSubscriber\CustomerRegistrationFormSubscriber;
-use Sylius\Bundle\UserBundle\Form\EventSubscriber\UserRegistrationFormSubscriber;
+use Sylius\Bundle\CoreBundle\Form\EventSubscriber\CustomerRegistrationFormSubscriber;
+use Sylius\Bundle\CoreBundle\Form\EventSubscriber\UserRegistrationFormSubscriber;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
