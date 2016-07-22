@@ -49,6 +49,8 @@ default:
 
         Sylius\Behat\Extension\SymfonyExtension: ~
 
+        FriendsOfBehat\PerformanceExtension: ~
+
     gherkin:
         filters:
             tags: "~@todo && ~@cli" # CLI is excluded as it registers an error handler that mutes fatal errors
