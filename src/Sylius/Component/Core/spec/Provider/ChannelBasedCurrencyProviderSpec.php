@@ -16,17 +16,17 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Provider\ChannelAwareCurrencyProvider;
+use Sylius\Component\Core\Provider\ChannelBasedCurrencyProvider;
 use Sylius\Component\Currency\Context\CurrencyNotFoundException;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
 
 /**
- * @mixin ChannelAwareCurrencyProvider
+ * @mixin ChannelBasedCurrencyProvider
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class ChannelAwareCurrencyProviderSpec extends ObjectBehavior
+final class ChannelBasedCurrencyProviderSpec extends ObjectBehavior
 {
     function let(ChannelContextInterface $channelContext)
     {
@@ -35,7 +35,7 @@ final class ChannelAwareCurrencyProviderSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Provider\ChannelAwareCurrencyProvider');
+        $this->shouldHaveType('Sylius\Component\Core\Provider\ChannelBasedCurrencyProvider');
     }
 
     function it_is_a_currency_provider()

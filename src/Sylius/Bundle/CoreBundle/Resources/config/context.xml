@@ -30,7 +30,7 @@
             <argument type="service" id="sylius.context.customer" />
         </service>
 
-        <service id="sylius.currency_provider.channel_aware" class="Sylius\Component\Core\Provider\ChannelAwareCurrencyProvider" decorates="sylius.currency_provider">
+        <service id="sylius.currency_provider.channel_based" class="Sylius\Component\Core\Provider\ChannelBasedCurrencyProvider" decorates="sylius.currency_provider">
             <argument type="service" id="sylius.context.channel" />
         </service>
 
