@@ -21,7 +21,7 @@ use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class ChannelAwareCurrencyProvider implements CurrencyProviderInterface
+final class ChannelBasedCurrencyProvider implements CurrencyProviderInterface
 {
     /**
      * @var ChannelContextInterface

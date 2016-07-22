@@ -21,7 +21,7 @@ use Sylius\Component\Currency\Context\CurrencyNotFoundException;
 interface CurrencyProviderInterface
 {
     /**
-     * @return string
+     * @return array
      *
      * @throws CurrencyNotFoundException
      */
