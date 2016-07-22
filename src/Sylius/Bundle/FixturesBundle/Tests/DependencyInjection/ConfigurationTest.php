@@ -211,6 +211,39 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function fixtures_options_may_contain_nested_arrays()
+    {
+        $this->assertProcessedConfigurationEquals(
+            [['suites' => ['suite' => ['fixtures' => ['fixture' => [
+                'options' => ['nested' => ['key' => 'value']],
+            ]]]]]],
+            ['suites' => ['suite' => ['fixtures' => ['fixture' => [
+                'options' => [['nested' => ['key' => 'value']]],
+                'name' => 'fixture', // FIXME: something is wrong inside the test library and it's not excluded
+            ]]]]],
+            'suites.*.fixtures.*.options'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function listeners_options_may_contain_nested_arrays()
+    {
+        $this->assertProcessedConfigurationEquals(
+            [['suites' => ['suite' => ['listeners' => ['listener' => [
+                'options' => ['nested' => ['key' => 'value']],
+            ]]]]]],
+            ['suites' => ['suite' => ['listeners' => ['listener' => [
+                'options' => [['nested' => ['key' => 'value']]],
+            ]]]]],
+            'suites.*.listeners.*.options'
+        );
+    }
+
+    /**
+     * @test
+     */
     public function fixtures_can_be_aliased_with_different_names()
     {
         $this->assertProcessedConfigurationEquals(
