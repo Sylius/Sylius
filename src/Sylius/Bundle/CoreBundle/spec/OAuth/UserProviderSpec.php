@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\UserBundle\OAuth;
+namespace spec\Sylius\Bundle\CoreBundle\OAuth;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use HWI\Bundle\OAuthBundle\Connect\AccountConnectorInterface;
@@ -20,8 +20,8 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
-use Sylius\Component\Customer\Model\CustomerInterface;
-use Sylius\Component\User\Model\UserInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\User\Model\UserOAuthInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 
@@ -41,7 +41,7 @@ final class UserProviderSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\UserBundle\OAuth\UserProvider');
+        $this->shouldHaveType('Sylius\Bundle\CoreBundle\OAuth\UserProvider');
     }
 
     function it_implements_Hwi_oauth_aware_user_provider_interface()

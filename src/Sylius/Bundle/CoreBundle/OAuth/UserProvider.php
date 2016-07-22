@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\UserBundle\OAuth;
+namespace Sylius\Bundle\CoreBundle\OAuth;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use HWI\Bundle\OAuthBundle\Connect\AccountConnectorInterface;
@@ -19,8 +19,8 @@ use Sylius\Bundle\UserBundle\Provider\UsernameOrEmailProvider as BaseUserProvide
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
-use Sylius\Component\Customer\Model\CustomerInterface;
-use Sylius\Component\User\Model\UserInterface as SyliusUserInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Model\UserInterface as SyliusUserInterface;
 use Sylius\Component\User\Model\UserOAuthInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -79,7 +79,7 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
     ) {
         parent::__construct($userRepository, $canonicalizer);
 
-        $this->customerRepository = $customerRepository;
+        $this->customerFactory = $customerFactory;
         $this->oauthFactory = $oauthFactory;
         $this->oauthRepository = $oauthRepository;
         $this->userFactory = $userFactory;
