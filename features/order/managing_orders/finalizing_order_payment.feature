@@ -20,7 +20,7 @@ Feature: Finalizing order payment
         Given I view the summary of the order "#00000666"
         When I mark this order as a paid
         Then I should be notified that the order's payment has been successfully completed
-        And it should have completed payment state
+        And it should have payment state "Completed"
 
     @ui
     Scenario: Unable to finalize completed order's payment

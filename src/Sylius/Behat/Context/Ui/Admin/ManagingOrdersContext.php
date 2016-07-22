@@ -449,7 +449,7 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then it should have :paymentState payment state
+     * @Then it should have payment state :paymentState
      */
     public function itShouldHavePaymentState($paymentState)
     {

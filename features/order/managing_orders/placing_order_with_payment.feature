@@ -1,8 +1,8 @@
 @managing_orders
-Feature: Checking payment state of a placed order
-    In order to check payment state after placing an order
+Feature: Payments are in the state "new" after checkout
+    In order to correctly process customer's payments
     As an Administrator
-    I want to payment has proper state
+    I want to have new payments after my customer's checkout
 
     Background:
         Given the store operates on a single channel in "France"
@@ -17,5 +17,5 @@ Feature: Checking payment state of a placed order
 
     @ui
     Scenario: Checking payment state of a placed order
-        Given I view the summary of the order "#00000666"
-        Then it should have new payment state
+        When I view the summary of the order "#00000666"
+        Then it should have payment state "New"
