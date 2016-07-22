@@ -87,7 +87,7 @@ class ParametersParserSpec extends ObjectBehavior
                 'factory' => [
                     'method' => 'createByParameter',
                     'arguments' => [
-                        'expr:service("demo_service")'
+                        'expr:service("demo_service")',
                     ],
                 ],
             ],
@@ -97,7 +97,7 @@ class ParametersParserSpec extends ObjectBehavior
                 'factory' => [
                     'method' => 'createByParameter',
                     'arguments' => [
-                        'demo_object'
+                        'demo_object',
                     ],
                 ],
             ]
@@ -110,7 +110,7 @@ class ParametersParserSpec extends ObjectBehavior
                 'factory' => [
                     'method' => 'createByParameter',
                     'arguments' => [
-                        'expr:service("demo_service")->getWith($foo)'
+                        'expr:service("demo_service")->getWith($foo)',
                     ],
                 ],
             ],
@@ -120,7 +120,7 @@ class ParametersParserSpec extends ObjectBehavior
                 'factory' => [
                     'method' => 'createByParameter',
                     'arguments' => [
-                        'demo_object->getWith("bar")'
+                        'demo_object->getWith("bar")',
                     ],
                 ],
             ]
@@ -133,7 +133,7 @@ class ParametersParserSpec extends ObjectBehavior
                 'factory' => [
                     'method' => 'createByParameter',
                     'arguments' => [
-                        'expr:service("demo_service")->getWith($foo, $baz)'
+                        'expr:service("demo_service")->getWith($foo, $baz)',
                     ],
                 ],
             ],
@@ -143,7 +143,7 @@ class ParametersParserSpec extends ObjectBehavior
                 'factory' => [
                     'method' => 'createByParameter',
                     'arguments' => [
-                        'demo_object->getWith("bar", 1)'
+                        'demo_object->getWith("bar", 1)',
                     ],
                 ],
             ]
@@ -156,7 +156,7 @@ class ParametersParserSpec extends ObjectBehavior
                 'factory' => [
                     'method' => 'createByParameter',
                     'arguments' => [
-                        'expr:service("demo_service")->getWith($foo)->andGet($baz)'
+                        'expr:service("demo_service")->getWith($foo)->andGet($baz)',
                     ],
                 ],
             ],
@@ -166,7 +166,7 @@ class ParametersParserSpec extends ObjectBehavior
                 'factory' => [
                     'method' => 'createByParameter',
                     'arguments' => [
-                        'demo_object->getWith("bar")->andGet(1)'
+                        'demo_object->getWith("bar")->andGet(1)',
                     ],
                 ],
             ]
