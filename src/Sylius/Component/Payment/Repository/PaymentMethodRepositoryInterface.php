@@ -20,13 +20,6 @@ use Sylius\Component\Payment\Model\PaymentMethodInterface;
 interface PaymentMethodRepositoryInterface
 {
     /**
-     * @param array $options
-     *
-     * @return QueryBuilder
-     */
-    public function getQueryBuilderForChoiceType(array $options);
-
-    /**
      * @param array $names
      *
      * @return PaymentMethodInterface[]
