@@ -4,7 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4b3521f709bb0a1eabbc87d7c3f8c0b4",
+    "hash": "1af0f45966f5c01519c310335cf70979",
+    "content-hash": "184121a26fd2e43c8d56df2a82449a93",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1838,6 +1839,7 @@
                 "rest",
                 "web service"
             ],
+            "abandoned": "guzzlehttp/guzzle",
             "time": "2015-03-18 18:23:50"
         },
         {
@@ -9816,7 +9818,46 @@
                 }
             ],
             "description": "A tool to automatically fix PHP code style",
+            "abandoned": "friendsofphp/php-cs-fixer",
             "time": "2016-02-26 07:37:29"
+        },
+        {
+            "name": "friends-of-behat/performance-extension",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/FriendsOfBehat/PerformanceExtension.git",
+                "reference": "f1e6ff7d4da95cbaebb54ea2f32e89cf10062560"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/FriendsOfBehat/PerformanceExtension/zipball/f1e6ff7d4da95cbaebb54ea2f32e89cf10062560",
+                "reference": "f1e6ff7d4da95cbaebb54ea2f32e89cf10062560",
+                "shasum": ""
+            },
+            "require": {
+                "behat/behat": "^3.0",
+                "php": "^5.6|^7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "FriendsOfBehat\\PerformanceExtension\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Kamil Kokot",
+                    "email": "kamil@kokot.me",
+                    "homepage": "http://kamil.kokot.me"
+                }
+            ],
+            "description": "Accelerates Behat using features available only for newer PHP versions.",
+            "time": "2016-07-22 19:35:49"
         },
         {
             "name": "hwi/oauth-bundle",
@@ -10074,7 +10115,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Lakion/ApiTestCase/zipball/171e6b7c00bc0d5b56edfc68f1a1d91f48c60850",
+                "url": "https://api.github.com/repos/Lakion/ApiTestCase/zipball/c4d37eccbaa49f06a317d22198649517627ed599",
                 "reference": "c4d37eccbaa49f06a317d22198649517627ed599",
                 "shasum": ""
             },
@@ -10666,7 +10707,8 @@
             "authors": [
                 {
                     "name": "Chris Boulton",
-                    "homepage": "http://github.com/chrisboulton"
+                    "homepage": "http://github.com/chrisboulton",
+                    "role": "Original developer"
                 }
             ],
             "description": "A comprehensive library for generating differences between two hashable objects (strings or arrays).",

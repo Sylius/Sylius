@@ -101,7 +101,8 @@
         "pamil/phpspec-generator-extension": "^0.3",
         "phpspec/phpspec": "^2.4",
         "phpunit/phpunit": "~4.1",
-        "se/selenium-server-standalone": "^2.52"
+        "se/selenium-server-standalone": "^2.52",
+        "friends-of-behat/performance-extension": "^1.0"
     },
     "replace": {
         "sylius/addressing": "self.version",
