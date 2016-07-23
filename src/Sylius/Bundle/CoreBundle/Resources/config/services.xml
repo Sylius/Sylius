@@ -95,7 +95,6 @@
         <parameter key="sylius.promotion.units_promotion_adjustments_applicator.class">Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicator</parameter>
 
         <parameter key="sylius.order.purger.class">Sylius\Bundle\CoreBundle\Purger\ExpiredOrdersPurger</parameter>
-        <parameter key="sylius.order.releaser.class">Sylius\Bundle\CoreBundle\Releaser\ExpiredOrdersReleaser</parameter>
         <parameter key="sylius.image_uploader.class">Sylius\Component\Core\Uploader\ImageUploader</parameter>
         <parameter key="sylius.locale_provider.channel_aware.class">Sylius\Bundle\CoreBundle\Locale\ChannelAwareLocaleProvider</parameter>
         <parameter key="sylius.cart_item_resolver.default.class">Sylius\Bundle\CoreBundle\Cart\ItemResolver</parameter>
@@ -280,12 +279,6 @@
         </service>
 
         <service id="sylius.order.purger" class="%sylius.order.purger.class%">
-            <argument type="service" id="sylius.manager.order" />
-            <argument type="service" id="sylius.repository.order" />
-            <argument type="service" id="sm.factory" />
-        </service>
-
-        <service id="sylius.order.releaser" class="%sylius.order.releaser.class%">
             <argument type="service" id="sylius.manager.order" />
             <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="sm.factory" />
