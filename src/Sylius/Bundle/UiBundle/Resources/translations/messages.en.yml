@@ -545,7 +545,7 @@ sylius:
         personal_information: Personal information
         phone_number: 'Phone number'
         place_order: 'Place order'
-        placed_an_order: You have successfully placed na order.
+        placed_an_order: You have successfully placed an order.
         placed_at: 'Placed at'
         postcode: Postcode
         powered_by: Powered by
