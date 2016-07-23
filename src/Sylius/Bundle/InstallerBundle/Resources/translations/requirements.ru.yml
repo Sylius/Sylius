@@ -6,7 +6,6 @@ sylius:
         header: расширения
         accelerator:
             header: Ускоритель
-            help: Установите и включите PHP-ускоритель, например APC (настоятельно рекомендуется).
         apc: APC
         ctype: CType
         gd: GD
@@ -30,13 +29,9 @@ sylius:
         header: файловая система
         cache:
             header: кеш
-            help:
-                To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
         exists: существует
         logs:
             header: журналы
-            help:
-                To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
         not_exists: не существует
         not_writable: не доступно для записи
         parameters:
@@ -62,4 +57,3 @@ sylius:
             header: Устаревший часовой пояс
             help: 'Часовой пояс %timezone% является устаревшим. Исправьте файл php.ini (список устаревших часовых поясов http://php.net/manual/en/timezones.others.php).'
         version: Версия PHP
-        version_recommanded: Рекомендуемая версия PHP

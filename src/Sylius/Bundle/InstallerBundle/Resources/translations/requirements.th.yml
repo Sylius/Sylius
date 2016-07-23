@@ -6,7 +6,6 @@ sylius:
         header: ส่วนขยาย
         accelerator:
             header: ตัวเร่ง
-            help: ติดตั้ง และเปิดใช้งาน PHP Accelerator เช่น APC (แนะนำ)
         apc: APC
         ctype: Ctype
         gd: GD
@@ -30,13 +29,9 @@ sylius:
         header: ระบบแฟ้ม
         cache:
             header: แคช
-            help:
-                To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
         exists: exists
         logs:
             header: บันทึก
-            help:
-                To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
         not_exists: not exists
         not_writable: not writable
         parameters:
@@ -62,4 +57,3 @@ sylius:
             header: เขตเวลาที่เลิกใช้งาน
             help: 'Timezone %timezone% is deprecated. Fix your php.ini file (list of deprecated timezones http://php.net/manual/en/timezones.others.php).'
         version: PHP เวอร์ชัน
-        version_recommanded: PHP เวอร์ชันที่แนะนำ

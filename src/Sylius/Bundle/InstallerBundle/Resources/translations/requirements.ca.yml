@@ -3,8 +3,6 @@
 
 sylius:
     extensions:
-        accelerator:
-            help: Instal·lar i permetre un accelerador PHP com APC (altament recomanat).
         apc: APC
         ctype: Ctype
         gd: GD
@@ -23,13 +21,7 @@ sylius:
         simplexml_import_dom: SimpleXML
         token_get_all: Tokenizer
     filesystem:
-        cache:
-            help:
-                To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
         exists: existeix
-        logs:
-            help:
-                To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
         not_exists: no existeix
         not_writable: Sense permís d`escriptura
         parameters:
@@ -52,4 +44,3 @@ sylius:
         timezone_deprecated:
             help: 'El fus horari %timezone% és obsolet. Cal corregir el fitxer php. ini (llista de zones horàries obsolet http://php.net/manual/en/timezones.others.php).'
         version: Versió PHP
-        version_recommanded: Versió de PHP recomanada

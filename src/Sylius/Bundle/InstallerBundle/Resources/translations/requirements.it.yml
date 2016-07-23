@@ -6,7 +6,6 @@ sylius:
         header: estensioni
         accelerator:
             header: Accelerator
-            help: Installa e attiva un acceleratore PHP come APC (altamente consigliato).
         apc: APC
         ctype: CType
         gd: GD
@@ -30,13 +29,9 @@ sylius:
         header: file system
         cache:
             header: cache
-            help:
-                To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
         exists: esiste
         logs:
             header: logs
-            help:
-                To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
         not_exists: non esiste
         not_writable: non scrivibile
         parameters:
@@ -62,4 +57,3 @@ sylius:
             header: Timezone deprecato
             help: 'Il timezone %timezone% è deprecato. Correggi il tuo file php.ini (lista di timezone deprecati http://php.net/manual/en/timezones.others.php).'
         version: Versione PHP
-        version_recommanded: Versione PHP raccomandata
