@@ -99,8 +99,8 @@ Learn more
 
 * ...
 
-Troubleshoooting
-================
+Troubleshooting
+===============
 
 Sylius stores payment output inside the **details** column of the **sylius_payment** table. It can provide valuable info when debugging the payment process.
 
