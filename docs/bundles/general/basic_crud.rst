@@ -75,7 +75,7 @@ Paginator can be created for a specific criteria and with desired sorting.
 Creating a new resource object
 ------------------------------
 
-To create a new resource instance, you can simply call the ``createNew()`` method on the repository.
+To create a new resource instance, you can simply call the ``createNew()`` method on the factory.
 
 Now let's try something else than product, we'll create a new TaxRate model.
 
@@ -85,8 +85,8 @@ Now let's try something else than product, we'll create a new TaxRate model.
 
     public function myAction()
     {
-        $repository = $this->container->get('sylius.repository.tax_rate');
-        $taxRate = $repository->createNew();
+        $factory = $this->container->get('sylius.factory.tax_rate');
+        $taxRate = $factory->createNew();
     }
 
 .. note::
