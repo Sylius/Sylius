@@ -42,4 +42,19 @@ interface HomePageInterface extends SymfonyPageInterface
      * @param string $currencyCode
      */
     public function switchCurrency($currencyCode);
+
+    /**
+     * @return string
+     */
+    public function getActiveLocale();
+
+    /**
+     * @return array
+     */
+    public function getAvailableLocales();
+
+    /**
+     * @param string $localeCode
+     */
+    public function switchLocale($localeCode);
 }
