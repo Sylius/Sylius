@@ -38,7 +38,7 @@ final class LocaleHelper extends Helper implements LocaleHelperInterface
      */
     public function getCurrentLocale()
     {
-        return $this->localeContext->getCurrentLocale();
+        return $this->localeContext->getLocaleCode();
     }
 
     /**

@@ -19,7 +19,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class TranslationLocaleProvider implements LocaleProviderInterface
+final class TranslationLocaleProvider implements LocaleProviderInterface
 {
     /**
      * @var LocaleContextInterface
@@ -39,7 +39,7 @@ class TranslationLocaleProvider implements LocaleProviderInterface
      */
     public function getCurrentLocale()
     {
-        return $this->localeContext->getCurrentLocale();
+        return $this->localeContext->getLocaleCode();
     }
 
     /**
@@ -47,7 +47,7 @@ class TranslationLocaleProvider implements LocaleProviderInterface
      */
     public function getFallbackLocale()
     {
-        return $this->localeContext->getDefaultLocale();
+        return $this->localeContext->getLocaleCode();
     }
 
     /**
@@ -55,6 +55,6 @@ class TranslationLocaleProvider implements LocaleProviderInterface
      */
     public function getDefaultLocale()
     {
-        return $this->localeContext->getDefaultLocale();
+        return $this->localeContext->getLocaleCode();
     }
 }

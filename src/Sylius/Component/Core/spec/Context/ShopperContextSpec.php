@@ -65,7 +65,7 @@ final class ShopperContextSpec extends ObjectBehavior
 
     function it_gets_current_locale_code_from_context(LocaleContextInterface $localeContext)
     {
-        $localeContext->getCurrentLocale()->willReturn('en_US');
+        $localeContext->getLocaleCode()->willReturn('en_US');
 
         $this->getLocaleCode()->shouldReturn('en_US');
     }

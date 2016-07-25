@@ -60,7 +60,7 @@ You can easily modify this logic by overriding this service.
 
     public function fooAction()
     {
-        $locales = $this->get('sylius.locale_provider')->getAvailableLocales();
+        $locales = $this->get('sylius.locale_provider')->getAvailableLocalesCodes();
 
         foreach ($locales as $locale) {
             echo $locale->getCode();

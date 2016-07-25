@@ -31,7 +31,7 @@ final class LocaleHelperSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\LocaleBundle\Templating\Helper\LocaleHelper');
+        $this->shouldHaveType(LocaleHelper::class);
     }
 
     function it_is_a_helper()
@@ -46,14 +46,14 @@ final class LocaleHelperSpec extends ObjectBehavior
 
     function it_has_locale(LocaleContextInterface $localeContext)
     {
-        $localeContext->getCurrentLocale()->shouldBeCalled()->willReturn('fr_FR');
+        $localeContext->getLocaleCode()->willReturn('fr_FR');
 
         $this->getCurrentLocale()->shouldReturn('fr_FR');
     }
 
     function it_converts_locales_code_to_name(LocaleContextInterface $localeContext)
     {
-        $localeContext->getCurrentLocale()->shouldBeCalled()->willReturn('en_US');
+        $localeContext->getLocaleCode()->willReturn('en_US');
 
         $this->convertToName('fr_FR')->shouldReturn('French (France)');
     }
