@@ -83,6 +83,9 @@ sylius_inventory:
             classes:
                 model: "%sylius.model.order_item_unit.class%"
 
+sylius_locale:
+    locale: "%locale%"
+
 sylius_mailer:
     sender:
         name: Example.com

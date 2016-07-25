@@ -11,35 +11,27 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="http://symfony.com/schema/dic/services
-                               http://symfony.com/schema/dic/services/services-1.0.xsd">
-
-    <parameters>
-        <parameter key="sylius.locale_provider.class">Sylius\Component\Locale\Provider\LocaleProvider</parameter>
-        <parameter key="sylius.event_subscriber.locale.class">Sylius\Bundle\LocaleBundle\EventListener\LocaleSubscriber</parameter>
-        <parameter key="sylius.context.locale.class">Sylius\Component\Locale\Context\LocaleContext</parameter>
-        <parameter key="sylius.converter.locale_name.class">Sylius\Component\Locale\Converter\LocaleNameConverter</parameter>
-    </parameters>
-
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="sylius.context.locale" class="%sylius.context.locale.class%">
-            <argument /> <!-- Storage service name comes from config -->
-            <argument>%locale%</argument>
+        <service id="sylius.context.locale" class="Sylius\Component\Locale\Context\ImmutableLocaleContext">
+            <argument>%sylius_locale.locale%</argument>
         </service>
 
-        <service id="sylius.locale_provider" class="%sylius.locale_provider.class%">
+        <service id="sylius.locale_provider" class="Sylius\Component\Locale\Provider\LocaleProvider">
             <argument type="service" id="sylius.repository.locale" />
+            <argument>%sylius_locale.locale%</argument>
         </service>
 
-        <service id="sylius.event_subscriber.locale" class="%sylius.event_subscriber.locale.class%">
-            <argument type="service" id="sylius.context.locale" />
+        <service id="sylius.converter.locale" class="Sylius\Component\Locale\Converter\LocaleConverter" />
 
-            <tag name="kernel.event_subscriber" />
+        <service id="sylius.templating.helper.locale" class="Sylius\Bundle\LocaleBundle\Templating\Helper\LocaleHelper">
+            <argument type="service" id="sylius.converter.locale" />
+            <tag name="templating.helper" alias="sylius_locale" />
         </service>
 
-        <service id="sylius.converter.locale_name" class="%sylius.converter.locale_name.class%" />
+        <service id="sylius.twig.extension.locale" class="Sylius\Bundle\LocaleBundle\Twig\LocaleExtension" public="false">
+            <argument type="service" id="sylius.templating.helper.locale" />
+            <tag name="twig.extension" />
+        </service>
     </services>
-
 </container>

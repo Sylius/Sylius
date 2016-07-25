@@ -32,15 +32,9 @@ final class SyliusLocaleExtension extends AbstractResourceExtension
 
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
-        $configFiles = [
-            'services.xml',
-            'templating.xml',
-            'twig.xml',
-        ];
+        $loader->load('services.xml');
 
-        foreach ($configFiles as $configFile) {
-            $loader->load($configFile);
-        }
+        $container->setParameter('sylius_locale.locale', $config['locale']);
 
         $container
             ->getDefinition('sylius.form.type.locale_choice')

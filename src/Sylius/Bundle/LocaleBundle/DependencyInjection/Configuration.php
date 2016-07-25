@@ -43,7 +43,7 @@ final class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
-                ->scalarNode('storage')->defaultValue('sylius.storage.session')->end()
+                ->scalarNode('locale')->defaultValue('en')->cannotBeEmpty()->end()
             ->end()
         ;
 
