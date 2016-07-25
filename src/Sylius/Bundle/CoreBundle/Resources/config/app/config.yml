@@ -15,7 +15,6 @@ imports:
     - { resource: "@SyliusPaymentBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusProductBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusPromotionBundle/Resources/config/app/config.yml" }
-    - { resource: "@SyliusResourceBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusShippingBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusTaxationBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusTaxonomyBundle/Resources/config/app/config.yml" }
@@ -26,12 +25,6 @@ imports:
     - { resource: "sylius.yml" }
     - { resource: "state_machine.yml" }
     - { resource: "fixtures.yml" }
-
-assetic:
-    debug: "%kernel.debug%"
-    use_controller: false
-    filters:
-        cssrewrite: ~
 
 doctrine:
     orm:
