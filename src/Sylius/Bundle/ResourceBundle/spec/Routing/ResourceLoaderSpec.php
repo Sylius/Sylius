@@ -26,7 +26,7 @@ use Symfony\Component\Routing\RouteCollection;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ResourceLoaderSpec extends ObjectBehavior
+final class ResourceLoaderSpec extends ObjectBehavior
 {
     function let(RegistryInterface $resourceRegistry, RouteFactoryInterface $routeFactory)
     {

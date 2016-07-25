@@ -23,7 +23,7 @@ use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ActivePromotionsByChannelProviderSpec extends ObjectBehavior
+final class ActivePromotionsByChannelProviderSpec extends ObjectBehavior
 {
     function let(PromotionRepositoryInterface $promotionRepository)
     {

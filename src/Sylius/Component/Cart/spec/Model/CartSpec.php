@@ -18,7 +18,7 @@ use Sylius\Component\Order\Model\Order;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class CartSpec extends ObjectBehavior
+final class CartSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

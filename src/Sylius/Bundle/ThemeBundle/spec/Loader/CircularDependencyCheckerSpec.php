@@ -23,7 +23,7 @@ use Sylius\Bundle\ThemeBundle\Loader\CircularDependencyFoundException;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class CircularDependencyCheckerSpec extends ObjectBehavior
+final class CircularDependencyCheckerSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

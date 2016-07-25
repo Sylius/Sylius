@@ -22,7 +22,7 @@ use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class OrderItemQuantityModifierSpec extends ObjectBehavior
+final class OrderItemQuantityModifierSpec extends ObjectBehavior
 {
     function let(OrderItemUnitFactoryInterface $orderItemUnitFactory)
     {

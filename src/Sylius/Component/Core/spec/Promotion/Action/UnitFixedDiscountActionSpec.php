@@ -28,7 +28,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class UnitFixedDiscountActionSpec extends ObjectBehavior
+final class UnitFixedDiscountActionSpec extends ObjectBehavior
 {
     function let(
         FactoryInterface $adjustmentFactory,

@@ -20,7 +20,7 @@ use Symfony\Component\Form\Exception\UnexpectedTypeException;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class CouponToCodeTransformerSpec extends ObjectBehavior
+final class CouponToCodeTransformerSpec extends ObjectBehavior
 {
     function let(
         ObjectRepository $couponRepository,

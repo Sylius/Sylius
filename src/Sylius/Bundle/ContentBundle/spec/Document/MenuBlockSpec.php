@@ -18,7 +18,7 @@ use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\MenuBlock;
 /**
  * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
  */
-class MenuBlockSpec extends ObjectBehavior
+final class MenuBlockSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

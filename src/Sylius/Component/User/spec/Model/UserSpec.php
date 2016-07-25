@@ -21,7 +21,7 @@ use Sylius\Component\User\Model\UserInterface;
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  * @author Bartosz Siejka <bartosz.siejka@lakion.com>
  */
-class UserSpec extends ObjectBehavior
+final class UserSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

@@ -18,7 +18,7 @@ use Sylius\Component\User\Security\UserPasswordEncoderInterface;
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class UserPbkdf2PasswordEncoderSpec extends ObjectBehavior
+final class UserPbkdf2PasswordEncoderSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

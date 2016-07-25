@@ -22,7 +22,7 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ServiceRegistrySpec extends ObjectBehavior
+final class ServiceRegistrySpec extends ObjectBehavior
 {
     function let()
     {

@@ -22,7 +22,7 @@ use Sylius\Component\User\Security\Generator\UniqueTokenGenerator;
  *
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class UniqueTokenGeneratorSpec extends ObjectBehavior
+final class UniqueTokenGeneratorSpec extends ObjectBehavior
 {
     function let(UniquenessCheckerInterface $checker)
     {

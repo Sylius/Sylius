@@ -22,7 +22,7 @@ use Symfony\Component\Finder\Finder;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class TranslationFilesFinderSpec extends ObjectBehavior
+final class TranslationFilesFinderSpec extends ObjectBehavior
 {
     function let(FinderFactoryInterface $finderFactory)
     {

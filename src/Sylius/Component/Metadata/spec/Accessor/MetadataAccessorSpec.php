@@ -22,7 +22,7 @@ use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class MetadataAccessorSpec extends ObjectBehavior
+final class MetadataAccessorSpec extends ObjectBehavior
 {
     function let(MetadataProviderInterface $metadataProvider, PropertyAccessorInterface $propertyAccessor)
     {

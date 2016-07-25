@@ -21,7 +21,7 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ThemeFactorySpec extends ObjectBehavior
+final class ThemeFactorySpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

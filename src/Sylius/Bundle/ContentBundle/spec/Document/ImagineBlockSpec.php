@@ -18,7 +18,7 @@ use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ImagineBlock;
 /**
  * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
  */
-class ImagineBlockSpec extends ObjectBehavior
+final class ImagineBlockSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

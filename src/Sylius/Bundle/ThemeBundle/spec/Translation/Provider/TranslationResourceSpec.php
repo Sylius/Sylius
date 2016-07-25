@@ -21,7 +21,7 @@ use Sylius\Bundle\ThemeBundle\Translation\Provider\TranslationResourceInterface;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class TranslationResourceSpec extends ObjectBehavior
+final class TranslationResourceSpec extends ObjectBehavior
 {
     function let()
     {

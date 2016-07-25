@@ -23,7 +23,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class HostnameBasedRequestResolverSpec extends ObjectBehavior
+final class HostnameBasedRequestResolverSpec extends ObjectBehavior
 {
     function let(ChannelRepositoryInterface $channelRepository)
     {

@@ -18,7 +18,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-class MenuTypeSpec extends ObjectBehavior
+final class MenuTypeSpec extends ObjectBehavior
 {
     function let()
     {

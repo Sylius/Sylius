@@ -21,7 +21,7 @@ use Sylius\Component\Variation\Model\OptionInterface;
  * @author Adam Elsodaney <adam.elso@gmail.com>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class ArchetypeSpec extends ObjectBehavior
+final class ArchetypeSpec extends ObjectBehavior
 {
     function let()
     {

@@ -24,7 +24,7 @@ use Sylius\Component\Grid\View\GridView;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class GridExtensionSpec extends ObjectBehavior
+final class GridExtensionSpec extends ObjectBehavior
 {
     function let(GridHelper $gridHelper)
     {
@@ -49,7 +49,7 @@ class GridExtensionSpec extends ObjectBehavior
     function it_delegates_grid_rendering_to_the_helper(GridHelper $gridHelper, GridView $gridView)
     {
         $gridHelper->renderGrid($gridView, null)->willReturn('<html>Grid!</html>');
-        
+
         $this->renderGrid($gridView)->shouldReturn('<html>Grid!</html>');
     }
 

@@ -19,7 +19,7 @@ use Sylius\Component\Variation\Model\VariantInterface;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
-class VariantToCombinationTransformerSpec extends ObjectBehavior
+final class VariantToCombinationTransformerSpec extends ObjectBehavior
 {
     function let(VariableInterface $variable)
     {

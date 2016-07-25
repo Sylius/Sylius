@@ -23,7 +23,7 @@ use Sylius\Component\Grid\FieldTypes\StringFieldType;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class StringFieldTypeSpec extends ObjectBehavior
+final class StringFieldTypeSpec extends ObjectBehavior
 {
     function let(DataExtractorInterface $dataExtractor)
     {
@@ -34,7 +34,7 @@ class StringFieldTypeSpec extends ObjectBehavior
     {
         $this->shouldHaveType('Sylius\Component\Grid\FieldTypes\StringFieldType');
     }
-    
+
     function it_is_a_grid_field_type()
     {
         $this->shouldImplement(FieldTypeInterface::class);

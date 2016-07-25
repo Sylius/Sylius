@@ -21,7 +21,7 @@ use Prophecy\Argument;
 use Sylius\Component\User\Model\CustomerInterface;
 use Sylius\Component\User\Model\UserInterface;
 
-class DefaultUsernameORMListenerSpec extends ObjectBehavior
+final class DefaultUsernameORMListenerSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

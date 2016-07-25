@@ -17,7 +17,7 @@ use Sylius\Component\Rbac\Model\PermissionInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class PermissionSpec extends ObjectBehavior
+final class PermissionSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

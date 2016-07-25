@@ -30,7 +30,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class ShippingMethodTypeSpec extends ObjectBehavior
+final class ShippingMethodTypeSpec extends ObjectBehavior
 {
     function let(
         ServiceRegistryInterface $calculatorRegistry,

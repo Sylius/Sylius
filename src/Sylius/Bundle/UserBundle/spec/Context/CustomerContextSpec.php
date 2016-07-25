@@ -21,7 +21,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class CustomerContextSpec extends ObjectBehavior
+final class CustomerContextSpec extends ObjectBehavior
 {
     function let(TokenStorageInterface $tokenStorage, AuthorizationCheckerInterface $authorizationChecker)
     {

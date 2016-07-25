@@ -15,7 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Shipping\Calculator\CalculatorInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 
-class VolumeRateCalculatorSpec extends ObjectBehavior
+final class VolumeRateCalculatorSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

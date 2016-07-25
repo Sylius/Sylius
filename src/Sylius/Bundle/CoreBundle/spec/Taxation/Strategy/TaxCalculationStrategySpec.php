@@ -27,7 +27,7 @@ use Sylius\Component\Core\Taxation\Strategy\TaxCalculationStrategyInterface;
  *
  * @author Mark McKelvie <mark.mckelvie@reiss.com>
  */
-class TaxCalculationStrategySpec extends ObjectBehavior
+final class TaxCalculationStrategySpec extends ObjectBehavior
 {
     function let(
         OrderTaxesApplicatorInterface $applicatorOne,

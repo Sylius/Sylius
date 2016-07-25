@@ -29,7 +29,7 @@
     },
     "require-dev": {
         "pamil/prophecy-common": "^0.1",
-        "phpspec/phpspec": "^2.4"
+        "phpspec/phpspec": "^3.0"
     },
     "config": {
         "bin-dir": "bin"

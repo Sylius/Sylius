@@ -22,7 +22,7 @@ use Symfony\Component\Validator\ExecutionContext;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ProductUniqueValidatorSpec extends ObjectBehavior
+final class ProductUniqueValidatorSpec extends ObjectBehavior
 {
     function let(ObjectRepository $productRepository, ExecutionContext $context)
     {

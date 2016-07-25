@@ -18,7 +18,7 @@ use Symfony\Component\Templating\Helper\Helper;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class PricingHelperSpec extends ObjectBehavior
+final class PricingHelperSpec extends ObjectBehavior
 {
     function let(DelegatingCalculatorInterface $calculator)
     {

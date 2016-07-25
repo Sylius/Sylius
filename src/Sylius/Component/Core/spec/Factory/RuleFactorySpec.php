@@ -25,7 +25,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class RuleFactorySpec extends ObjectBehavior
+final class RuleFactorySpec extends ObjectBehavior
 {
     function let(FactoryInterface $decoratedFactory)
     {

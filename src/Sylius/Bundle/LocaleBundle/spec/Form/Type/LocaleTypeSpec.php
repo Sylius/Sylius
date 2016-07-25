@@ -19,7 +19,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class LocaleTypeSpec extends ObjectBehavior
+final class LocaleTypeSpec extends ObjectBehavior
 {
     function let()
     {

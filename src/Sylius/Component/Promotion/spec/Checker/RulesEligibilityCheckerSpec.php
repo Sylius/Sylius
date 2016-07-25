@@ -24,7 +24,7 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class RulesEligibilityCheckerSpec extends ObjectBehavior
+final class RulesEligibilityCheckerSpec extends ObjectBehavior
 {
     function let(ServiceRegistryInterface $rulesRegistry)
     {

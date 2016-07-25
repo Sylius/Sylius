@@ -19,7 +19,7 @@ use Symfony\Component\Templating\Helper\Helper;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class AdjustmentsHelperSpec extends ObjectBehavior
+final class AdjustmentsHelperSpec extends ObjectBehavior
 {
     function let(AdjustmentsAggregatorInterface $adjustmentsAggregator)
     {

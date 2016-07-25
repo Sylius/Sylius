@@ -22,7 +22,7 @@ use Symfony\Component\Config\Resource\ResourceInterface;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class FilesystemConfigurationProviderSpec extends ObjectBehavior
+final class FilesystemConfigurationProviderSpec extends ObjectBehavior
 {
     function let(FileLocatorInterface $fileLocator, ConfigurationLoaderInterface $loader)
     {

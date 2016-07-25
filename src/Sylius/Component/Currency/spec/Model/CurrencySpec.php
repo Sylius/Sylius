@@ -15,7 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Resource\Model\ToggleableInterface;
 
-class CurrencySpec extends ObjectBehavior
+final class CurrencySpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

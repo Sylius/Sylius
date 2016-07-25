@@ -18,7 +18,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-class CollectionExtensionSpec extends ObjectBehavior
+final class CollectionExtensionSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

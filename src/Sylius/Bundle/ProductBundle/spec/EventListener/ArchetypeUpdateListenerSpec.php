@@ -24,7 +24,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 /**
  * @author Adam Elsodaney <adam.elso@gmail.com>
  */
-class ArchetypeUpdateListenerSpec extends ObjectBehavior
+final class ArchetypeUpdateListenerSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

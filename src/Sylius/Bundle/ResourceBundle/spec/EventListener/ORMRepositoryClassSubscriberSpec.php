@@ -25,7 +25,7 @@ use Sylius\Component\Resource\Metadata\RegistryInterface;
  * @author Ben Davies <ben.davies@gmail.com>
  * @mixin ORMRepositoryClassSubscriber
  */
-class ORMRepositoryClassSubscriberSpec extends ObjectBehavior
+final class ORMRepositoryClassSubscriberSpec extends ObjectBehavior
 {
     function let(RegistryInterface $registry, LoadClassMetadataEventArgs $event, ClassMetadata $classMetadata)
     {

@@ -18,7 +18,7 @@ use Sylius\Component\Promotion\Model\PromotionInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class DatesEligibilityCheckerSpec extends ObjectBehavior
+final class DatesEligibilityCheckerSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

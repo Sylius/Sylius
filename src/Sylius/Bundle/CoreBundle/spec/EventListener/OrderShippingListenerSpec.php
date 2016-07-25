@@ -20,7 +20,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class OrderShippingListenerSpec extends ObjectBehavior
+final class OrderShippingListenerSpec extends ObjectBehavior
 {
     function let(
         OrderShipmentProcessorInterface $orderShipmentProcessor,

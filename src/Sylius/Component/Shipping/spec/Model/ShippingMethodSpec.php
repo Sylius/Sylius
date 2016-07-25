@@ -19,7 +19,7 @@ use Sylius\Component\Shipping\Model\ShippingMethodInterface;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class ShippingMethodSpec extends ObjectBehavior
+final class ShippingMethodSpec extends ObjectBehavior
 {
     public function let()
     {

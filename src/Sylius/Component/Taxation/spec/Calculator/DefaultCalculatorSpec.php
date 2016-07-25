@@ -19,7 +19,7 @@ use Sylius\Component\Taxation\Model\TaxRateInterface;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class DefaultCalculatorSpec extends ObjectBehavior
+final class DefaultCalculatorSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

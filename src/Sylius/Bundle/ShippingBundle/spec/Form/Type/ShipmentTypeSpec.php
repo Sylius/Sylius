@@ -19,7 +19,7 @@ use Symfony\Component\Form\Test\FormBuilderInterface;
 /**
  * @author Arnaud Langlade <arn0d.dev@gamil.com>
  */
-class ShipmentTypeSpec extends ObjectBehavior
+final class ShipmentTypeSpec extends ObjectBehavior
 {
     function let()
     {

@@ -17,7 +17,7 @@ use Sylius\Component\Product\Model\ArchetypeTranslationInterface;
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class ArchetypeTranslationSpec extends ObjectBehavior
+final class ArchetypeTranslationSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

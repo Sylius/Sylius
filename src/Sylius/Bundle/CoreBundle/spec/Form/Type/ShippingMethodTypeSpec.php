@@ -25,7 +25,7 @@ use Symfony\Component\Form\FormTypeInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ShippingMethodTypeSpec extends ObjectBehavior
+final class ShippingMethodTypeSpec extends ObjectBehavior
 {
     function let(ServiceRegistryInterface $calculatorRegistry, ServiceRegistryInterface $checkerRegistry, FormRegistryInterface $formRegistry)
     {

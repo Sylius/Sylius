@@ -16,7 +16,7 @@ use PhpSpec\ObjectBehavior;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class NonExistingServiceExceptionSpec extends ObjectBehavior
+final class NonExistingServiceExceptionSpec extends ObjectBehavior
 {
     function let()
     {

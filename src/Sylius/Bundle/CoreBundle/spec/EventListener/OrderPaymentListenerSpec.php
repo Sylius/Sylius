@@ -21,7 +21,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 /**
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
-class OrderPaymentListenerSpec extends ObjectBehavior
+final class OrderPaymentListenerSpec extends ObjectBehavior
 {
     function let(PaymentProcessorInterface $processor)
     {

@@ -18,7 +18,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class PurgeCartsCommandSpec extends ObjectBehavior
+final class PurgeCartsCommandSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

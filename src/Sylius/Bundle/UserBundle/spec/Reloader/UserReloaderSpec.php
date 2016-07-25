@@ -19,7 +19,7 @@ use Sylius\Component\User\Model\UserInterface;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class UserReloaderSpec extends ObjectBehavior
+final class UserReloaderSpec extends ObjectBehavior
 {
     function let(ObjectManager $objectManager)
     {

@@ -17,7 +17,7 @@ use Sylius\Component\Contact\Model\TopicTranslationInterface;
 /**
  * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
-class TopicTranslationSpec extends ObjectBehavior
+final class TopicTranslationSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

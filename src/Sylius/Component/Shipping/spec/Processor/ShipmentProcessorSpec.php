@@ -23,7 +23,7 @@ use Sylius\Component\Shipping\ShipmentUnitTransitions;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class ShipmentProcessorSpec extends ObjectBehavior
+final class ShipmentProcessorSpec extends ObjectBehavior
 {
     function let(FactoryInterface $factory)
     {

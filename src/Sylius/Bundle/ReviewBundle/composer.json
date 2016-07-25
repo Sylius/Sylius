@@ -41,7 +41,7 @@
         "sylius/resource-bundle": "^1.0"
     },
     "require-dev": {
-        "phpspec/phpspec": "^2.4",
+        "phpspec/phpspec": "^3.0",
         "symfony/form": "^2.8",
         "symfony/validator": "^2.8"
     },

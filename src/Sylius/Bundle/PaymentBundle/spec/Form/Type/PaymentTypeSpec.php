@@ -19,7 +19,7 @@ use Symfony\Component\Form\FormTypeInterface;
 /**
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-class PaymentTypeSpec extends ObjectBehavior
+final class PaymentTypeSpec extends ObjectBehavior
 {
     function let()
     {

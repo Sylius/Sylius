@@ -23,7 +23,7 @@ use Symfony\Component\Form\FormInterface;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class AddParentFormSubscriberSpec extends ObjectBehavior
+final class AddParentFormSubscriberSpec extends ObjectBehavior
 {
     function let()
     {

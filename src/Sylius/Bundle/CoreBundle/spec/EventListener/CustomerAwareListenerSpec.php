@@ -22,7 +22,7 @@ use Sylius\Component\User\Model\CustomerInterface;
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class CustomerAwareListenerSpec extends ObjectBehavior
+final class CustomerAwareListenerSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

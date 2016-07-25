@@ -24,7 +24,7 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class DashboardControllerSpec extends ObjectBehavior
+final class DashboardControllerSpec extends ObjectBehavior
 {
     function let(DashboardStatisticsProviderInterface $dashboardStatsProvider, EngineInterface $templatingEngine)
     {

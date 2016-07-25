@@ -21,13 +21,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class PaymentStepTypeSpec extends ObjectBehavior
+final class PaymentStepTypeSpec extends ObjectBehavior
 {
     function let()
     {
         $this->beConstructedWith(['sylius', 'checkout']);
     }
-    
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\Form\Type\Checkout\PaymentStepType');

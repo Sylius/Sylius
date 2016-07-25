@@ -22,7 +22,7 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class EmailProviderSpec extends ObjectBehavior
+final class EmailProviderSpec extends ObjectBehavior
 {
     function let(UserRepositoryInterface $userRepository, CanonicalizerInterface $canonicalizer)
     {

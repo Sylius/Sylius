@@ -25,7 +25,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class BuildReportRendererFormSubscriberSpec extends ObjectBehavior
+final class BuildReportRendererFormSubscriberSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

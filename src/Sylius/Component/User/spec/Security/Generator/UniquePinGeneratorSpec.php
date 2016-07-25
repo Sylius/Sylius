@@ -22,7 +22,7 @@ use Sylius\Component\User\Security\Generator\UniquePinGenerator;
  *
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class UniquePinGeneratorSpec extends ObjectBehavior
+final class UniquePinGeneratorSpec extends ObjectBehavior
 {
     function let(UniquenessCheckerInterface $checker)
     {

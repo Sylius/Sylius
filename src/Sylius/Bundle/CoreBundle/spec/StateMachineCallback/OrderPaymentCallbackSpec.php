@@ -23,7 +23,7 @@ use Sylius\Component\Resource\StateMachine\StateMachineInterface;
 /**
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
  */
-class OrderPaymentCallbackSpec extends ObjectBehavior
+final class OrderPaymentCallbackSpec extends ObjectBehavior
 {
     function let(FactoryInterface $factory)
     {

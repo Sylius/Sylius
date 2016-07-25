@@ -19,7 +19,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class CustomerLoyaltyRuleCheckerSpec extends ObjectBehavior
+final class CustomerLoyaltyRuleCheckerSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

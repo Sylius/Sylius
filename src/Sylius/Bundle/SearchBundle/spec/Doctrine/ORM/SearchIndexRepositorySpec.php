@@ -15,7 +15,7 @@ use Doctrine\ORM\EntityManager;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository as BaseProductRepository;
 
-class SearchIndexRepositorySpec extends ObjectBehavior
+final class SearchIndexRepositorySpec extends ObjectBehavior
 {
     function let(
         EntityManager $em,

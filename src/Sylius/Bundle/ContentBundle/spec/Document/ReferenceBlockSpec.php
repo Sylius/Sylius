@@ -18,7 +18,7 @@ use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\ReferenceBlock;
 /**
  * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
  */
-class ReferenceBlockSpec extends ObjectBehavior
+final class ReferenceBlockSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

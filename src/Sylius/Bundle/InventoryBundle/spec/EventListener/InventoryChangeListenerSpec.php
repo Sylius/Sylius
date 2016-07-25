@@ -20,7 +20,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class InventoryChangeListenerSpec extends ObjectBehavior
+final class InventoryChangeListenerSpec extends ObjectBehavior
 {
     function let(BackordersHandlerInterface $backordersHandler)
     {

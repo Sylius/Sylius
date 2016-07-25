@@ -19,7 +19,7 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
 
-class BuildTaxonFormSubscriberSpec extends ObjectBehavior
+final class BuildTaxonFormSubscriberSpec extends ObjectBehavior
 {
     function let(FormFactoryInterface $factory)
     {

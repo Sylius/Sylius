@@ -24,7 +24,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ShippingTypeSpec extends ObjectBehavior
+final class ShippingTypeSpec extends ObjectBehavior
 {
     function let()
     {

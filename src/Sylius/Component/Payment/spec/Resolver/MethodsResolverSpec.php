@@ -21,7 +21,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class MethodsResolverSpec extends ObjectBehavior
+final class MethodsResolverSpec extends ObjectBehavior
 {
     function let(RepositoryInterface $methodRepository)
     {

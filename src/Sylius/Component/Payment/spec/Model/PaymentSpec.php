@@ -19,7 +19,7 @@ use Sylius\Component\Payment\Model\PaymentMethodInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class PaymentSpec extends ObjectBehavior
+final class PaymentSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

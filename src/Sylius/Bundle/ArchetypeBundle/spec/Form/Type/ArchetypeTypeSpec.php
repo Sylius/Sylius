@@ -22,7 +22,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Adam Elsodaney <adam.elso@gmail.com>
  */
-class ArchetypeTypeSpec extends ObjectBehavior
+final class ArchetypeTypeSpec extends ObjectBehavior
 {
     function let()
     {

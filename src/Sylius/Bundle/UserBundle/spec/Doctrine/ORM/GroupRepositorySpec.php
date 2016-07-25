@@ -18,7 +18,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 
-class GroupRepositorySpec extends ObjectBehavior
+final class GroupRepositorySpec extends ObjectBehavior
 {
     public function let(EntityManager $em, ClassMetadata $classMetadata)
     {

@@ -28,7 +28,7 @@
         "symfony/validator": "^2.8"
     },
     "require-dev": {
-        "phpspec/phpspec": "^2.4",
+        "phpspec/phpspec": "^3.0",
         "twig/twig": "^1.0"
     },
     "config": {

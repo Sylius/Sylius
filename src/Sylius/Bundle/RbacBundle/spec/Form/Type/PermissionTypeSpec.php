@@ -22,7 +22,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class PermissionTypeSpec extends ObjectBehavior
+final class PermissionTypeSpec extends ObjectBehavior
 {
     function let()
     {

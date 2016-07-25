@@ -29,7 +29,7 @@
     },
     "require-dev": {
         "sylius/currency-bundle": "^1.0",
-        "phpspec/phpspec": "^2.4",
+        "phpspec/phpspec": "^3.0",
         "symfony/form": "^2.8",
         "twig/twig": "^1.0"
     },

@@ -18,7 +18,7 @@ use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class UnitCountRuleCheckerSpec extends ObjectBehavior
+final class UnitCountRuleCheckerSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

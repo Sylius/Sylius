@@ -25,7 +25,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class MetadataProviderSpec extends ObjectBehavior
+final class MetadataProviderSpec extends ObjectBehavior
 {
     function let(
         RepositoryInterface $metadataContainerRepository,

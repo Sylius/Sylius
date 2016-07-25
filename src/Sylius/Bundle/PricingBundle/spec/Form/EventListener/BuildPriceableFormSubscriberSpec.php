@@ -25,7 +25,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class BuildPriceableFormSubscriberSpec extends ObjectBehavior
+final class BuildPriceableFormSubscriberSpec extends ObjectBehavior
 {
     function let(
         ServiceRegistryInterface $calculatorRegistry,

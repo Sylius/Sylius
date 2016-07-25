@@ -22,7 +22,7 @@ use Symfony\Component\Templating\EngineInterface;
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class TableRendererSpec extends ObjectBehavior
+final class TableRendererSpec extends ObjectBehavior
 {
     function let(EngineInterface $templating)
     {

@@ -22,7 +22,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 /**
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
-class FlashSubscriberSpec extends ObjectBehavior
+final class FlashSubscriberSpec extends ObjectBehavior
 {
     function let(SessionInterface $session, TranslatorInterface $translator)
     {

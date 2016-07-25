@@ -22,7 +22,7 @@ use Sylius\Bundle\ThemeBundle\Translation\Provider\TranslationResourceInterface;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ThemeTranslationResourceSpec extends ObjectBehavior
+final class ThemeTranslationResourceSpec extends ObjectBehavior
 {
     function let(ThemeInterface $theme)
     {

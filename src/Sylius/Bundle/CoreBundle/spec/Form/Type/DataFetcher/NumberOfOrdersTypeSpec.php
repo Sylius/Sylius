@@ -19,7 +19,7 @@ use Symfony\Component\Form\FormBuilder;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class NumberOfOrdersTypeSpec extends ObjectBehavior
+final class NumberOfOrdersTypeSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

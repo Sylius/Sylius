@@ -22,7 +22,7 @@ use Symfony\Component\Translation\Loader\LoaderInterface;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class TranslatorLoaderProviderSpec extends ObjectBehavior
+final class TranslatorLoaderProviderSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

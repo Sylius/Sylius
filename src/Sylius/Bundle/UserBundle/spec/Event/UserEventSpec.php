@@ -14,7 +14,7 @@ namespace spec\Sylius\Bundle\UserBundle\Event;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\User\Model\UserInterface;
 
-class UserEventSpec extends ObjectBehavior
+final class UserEventSpec extends ObjectBehavior
 {
     function let(UserInterface $user)
     {

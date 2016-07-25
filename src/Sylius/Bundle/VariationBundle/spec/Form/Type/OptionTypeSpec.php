@@ -22,7 +22,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class OptionTypeSpec extends ObjectBehavior
+final class OptionTypeSpec extends ObjectBehavior
 {
     function let()
     {

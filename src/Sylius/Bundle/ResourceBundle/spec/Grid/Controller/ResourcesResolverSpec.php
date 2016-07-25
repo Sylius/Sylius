@@ -33,7 +33,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ResourcesResolverSpec extends ObjectBehavior
+final class ResourcesResolverSpec extends ObjectBehavior
 {
     function let(
         ResourcesResolverInterface $decoratedResolver,
@@ -47,7 +47,7 @@ class ResourcesResolverSpec extends ObjectBehavior
     {
         $this->shouldHaveType('Sylius\Bundle\ResourceBundle\Grid\Controller\ResourcesResolver');
     }
-    
+
     function it_implements_resources_resolver_interface()
     {
         $this->shouldImplement(ResourcesResolverInterface::class);
@@ -82,7 +82,7 @@ class ResourcesResolverSpec extends ObjectBehavior
         $requestConfiguration->getMetadata()->willReturn($metadata);
         $requestConfiguration->isHtmlRequest()->willReturn(true);
         $requestConfiguration->getRequest()->willReturn($request);
-        
+
         $request->query = $queryParameters;
         $queryParameters->all()->willReturn(['foo' => 'bar']);
 

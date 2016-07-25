@@ -23,7 +23,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Arnaud Langlade <arn0d.dev@gamil.com>
  */
-class ShippingMethodChoiceTypeSpec extends ObjectBehavior
+final class ShippingMethodChoiceTypeSpec extends ObjectBehavior
 {
     function let(
         MethodsResolverInterface $methodsResolver,

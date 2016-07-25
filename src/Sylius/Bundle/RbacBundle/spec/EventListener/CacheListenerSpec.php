@@ -20,7 +20,7 @@ use Sylius\Component\Rbac\Model\RoleInterface;
 /**
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-class CacheListenerSpec extends ObjectBehavior
+final class CacheListenerSpec extends ObjectBehavior
 {
     function let(ClearableCache $cache)
     {

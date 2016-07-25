@@ -22,7 +22,7 @@ use Sylius\Component\Rbac\Resolver\PermissionsResolverInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class PermissionMapSpec extends ObjectBehavior
+final class PermissionMapSpec extends ObjectBehavior
 {
     function let(PermissionProviderInterface $permissionProvider, PermissionsResolverInterface $permissionResolver)
     {

@@ -19,7 +19,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class PaymentFactorySpec extends ObjectBehavior
+final class PaymentFactorySpec extends ObjectBehavior
 {
     function let(FactoryInterface $paymentFactory)
     {

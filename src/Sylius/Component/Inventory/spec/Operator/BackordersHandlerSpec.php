@@ -22,7 +22,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class BackordersHandlerSpec extends ObjectBehavior
+final class BackordersHandlerSpec extends ObjectBehavior
 {
     function let(RepositoryInterface $repository)
     {

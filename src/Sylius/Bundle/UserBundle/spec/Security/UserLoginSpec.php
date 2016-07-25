@@ -29,7 +29,7 @@ use Symfony\Component\Security\Core\User\UserCheckerInterface;
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class UserLoginSpec extends ObjectBehavior
+final class UserLoginSpec extends ObjectBehavior
 {
     function let(TokenStorageInterface $tokenStorage, UserCheckerInterface $userChecker, EventDispatcherInterface $eventDispatcher)
     {

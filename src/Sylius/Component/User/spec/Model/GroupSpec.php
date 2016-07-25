@@ -17,7 +17,7 @@ use Sylius\Component\User\Model\GroupInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class GroupSpec extends ObjectBehavior
+final class GroupSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

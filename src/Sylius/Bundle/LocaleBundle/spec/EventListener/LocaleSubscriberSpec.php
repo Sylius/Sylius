@@ -18,7 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 
-class LocaleSubscriberSpec extends ObjectBehavior
+final class LocaleSubscriberSpec extends ObjectBehavior
 {
     function let(LocaleContextInterface $localeContext)
     {

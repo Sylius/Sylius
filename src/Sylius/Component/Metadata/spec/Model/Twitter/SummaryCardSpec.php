@@ -20,7 +20,7 @@ use Sylius\Component\Metadata\Model\Twitter\SummaryCard;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class SummaryCardSpec extends ObjectBehavior
+final class SummaryCardSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

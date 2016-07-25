@@ -81,14 +81,13 @@
         "sonata-project/intl-bundle": "^2.2"
     },
     "require-dev": {
-        "akeneo/phpspec-skip-example-extension": "~1.2",
+        "akeneo/phpspec-skip-example-extension": "^2.0",
         "behat/behat": "~3.0",
         "behat/mink": "~1.6",
         "behat/mink-browserkit-driver": "~1.2",
         "behat/mink-extension": "~2.0",
         "behat/mink-selenium2-driver": "~1.2",
         "behat/symfony2-extension": "~2.0",
-        "bossa/phpspec2-expect": "^1.0",
         "fabpot/php-cs-fixer": "^1.11",
         "hwi/oauth-bundle": "~0.3",
         "lakion/api-test-case": "^1.0@dev",
@@ -98,8 +97,8 @@
         "matthiasnoback/symfony-dependency-injection-test": "^1.0",
         "mikey179/vfsStream": "^1.6",
         "pamil/prophecy-common": "^0.1",
-        "pamil/phpspec-generator-extension": "^0.3",
-        "phpspec/phpspec": "^2.4",
+        "pamil/phpspec-generator-extension": "^0.4",
+        "phpspec/phpspec": "^3.0",
         "phpunit/phpunit": "~4.1",
         "se/selenium-server-standalone": "^2.52",
         "friends-of-behat/performance-extension": "^1.0"

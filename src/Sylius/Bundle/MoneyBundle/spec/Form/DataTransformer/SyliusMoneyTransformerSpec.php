@@ -17,7 +17,7 @@ use Symfony\Component\Form\Extension\Core\DataTransformer\MoneyToLocalizedString
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class SyliusMoneyTransformerSpec extends ObjectBehavior
+final class SyliusMoneyTransformerSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

@@ -27,7 +27,7 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class FiltersApplicatorSpec extends ObjectBehavior
+final class FiltersApplicatorSpec extends ObjectBehavior
 {
     function let(ServiceRegistryInterface $filtersRegistry)
     {
@@ -38,7 +38,7 @@ class FiltersApplicatorSpec extends ObjectBehavior
     {
         $this->shouldHaveType('Sylius\Component\Grid\Filtering\FiltersApplicator');
     }
-    
+
     function it_implements_filters_applicator_interface()
     {
         $this->shouldImplement(FiltersApplicatorInterface::class);
@@ -57,11 +57,11 @@ class FiltersApplicatorSpec extends ObjectBehavior
 
         $grid->hasFilter('keywords')->willReturn(true);
         $grid->hasFilter('enabled')->willReturn(false);
-        
+
         $grid->getFilter('keywords')->willReturn($filter);
         $filter->getType()->willReturn('string');
         $filter->getOptions()->willReturn(['fields' => ['firstName', 'lastName']]);
-        
+
         $filtersRegistry->get('string')->willReturn($stringFilter);
 
         $stringFilter->apply($dataSource, 'keywords', 'Banana', ['fields' => ['firstName', 'lastName']])->shouldBeCalled();

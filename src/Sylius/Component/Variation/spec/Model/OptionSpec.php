@@ -19,7 +19,7 @@ use Sylius\Component\Variation\Model\OptionValueInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class OptionSpec extends ObjectBehavior
+final class OptionSpec extends ObjectBehavior
 {
     public function let()
     {

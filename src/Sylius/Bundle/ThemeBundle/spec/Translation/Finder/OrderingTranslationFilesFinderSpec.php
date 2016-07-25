@@ -20,7 +20,7 @@ use Sylius\Bundle\ThemeBundle\Translation\Finder\TranslationFilesFinderInterface
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class OrderingTranslationFilesFinderSpec extends ObjectBehavior
+final class OrderingTranslationFilesFinderSpec extends ObjectBehavior
 {
     function let(TranslationFilesFinderInterface $translationFilesFinder)
     {

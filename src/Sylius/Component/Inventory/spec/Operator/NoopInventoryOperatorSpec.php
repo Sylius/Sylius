@@ -17,7 +17,7 @@ use Sylius\Component\Inventory\Operator\InventoryOperatorInterface;
 /**
  * @author Daniel Richter <nexyz9@gmail.com>
  */
-class NoopInventoryOperatorSpec extends ObjectBehavior
+final class NoopInventoryOperatorSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

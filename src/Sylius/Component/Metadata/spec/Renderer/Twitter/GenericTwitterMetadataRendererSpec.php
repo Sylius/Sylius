@@ -22,7 +22,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class GenericTwitterMetadataRendererSpec extends ObjectBehavior
+final class GenericTwitterMetadataRendererSpec extends ObjectBehavior
 {
     private $defaultOptions = ['group' => 'head', 'defaults' => []];
 

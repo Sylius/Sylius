@@ -20,7 +20,7 @@ use Prophecy\Argument;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class FieldSpec extends ObjectBehavior
+final class FieldSpec extends ObjectBehavior
 {
     function let()
     {
@@ -36,24 +36,24 @@ class FieldSpec extends ObjectBehavior
     {
         $this->getName()->shouldReturn('enabled');
     }
-    
+
     function it_has_type()
     {
         $this->getType()->shouldReturn('boolean');
     }
-    
+
     function it_has_path_which_defaults_to_name()
     {
         $this->getPath()->shouldReturn('enabled');
-        
+
         $this->setPath('method.enabled');
         $this->getPath()->shouldReturn('method.enabled');
     }
-    
+
     function it_has_label_which_defaults_to_name()
     {
         $this->getLabel()->shouldReturn('enabled');
-        
+
         $this->setLabel('Is enabled?');
         $this->getLabel()->shouldReturn('Is enabled?');
     }

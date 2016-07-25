@@ -37,7 +37,7 @@
         "symfony/polyfill-mbstring": "~1.0"
     },
     "require-dev": {
-        "phpspec/phpspec": "^2.4"
+        "phpspec/phpspec": "^3.0"
     },
     "suggest": {
         "ext-mbstring": "For better performance than using Symfony Polyfill Component"

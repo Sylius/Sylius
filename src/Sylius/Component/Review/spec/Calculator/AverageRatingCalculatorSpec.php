@@ -20,7 +20,7 @@ use Sylius\Component\Review\Model\ReviewInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class AverageRatingCalculatorSpec extends ObjectBehavior
+final class AverageRatingCalculatorSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

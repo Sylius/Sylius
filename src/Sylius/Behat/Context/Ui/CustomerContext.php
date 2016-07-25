@@ -15,6 +15,7 @@ use Behat\Behat\Context\Context;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\Admin\Customer\ShowPageInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
@@ -52,7 +53,14 @@ final class CustomerContext implements Context
 
         $this->customerShowPage->open(['id' => $customer->getId()]);
 
-        expect($this->customerShowPage)->toThrow(ElementNotFoundException::class)->during('deleteAccount');
+
+        try {
+            $this->customerShowPage->deleteAccount();
+        } catch (ElementNotFoundException $exception) {
+            return;
+        }
+
+        throw new \DomainException('Delete account should throw an exception!');
     }
 
     /**
@@ -64,6 +72,6 @@ final class CustomerContext implements Context
 
         $this->customerShowPage->open(['id' => $deletedUser->getCustomer()->getId()]);
 
-        expect($this->customerShowPage->isRegistered())->toBe(false);
+        Assert::false($this->customerShowPage->isRegistered());
     }
 }

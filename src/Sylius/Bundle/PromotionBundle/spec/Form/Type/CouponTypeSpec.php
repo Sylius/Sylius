@@ -21,7 +21,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class CouponTypeSpec extends ObjectBehavior
+final class CouponTypeSpec extends ObjectBehavior
 {
     function let()
     {

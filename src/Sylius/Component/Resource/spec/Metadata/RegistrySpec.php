@@ -18,7 +18,7 @@ use Sylius\Component\Resource\Metadata\RegistryInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class RegistrySpec extends ObjectBehavior
+final class RegistrySpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

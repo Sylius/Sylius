@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
- 
+
 namespace spec\Sylius\Bundle\CoreBundle\Sitemap\Provider;
- 
+
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepository;
@@ -24,7 +24,7 @@ use Symfony\Component\Routing\RouterInterface;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class ProductUrlProviderSpec extends ObjectBehavior
+final class ProductUrlProviderSpec extends ObjectBehavior
 {
     function let(ProductRepository $repository, RouterInterface $router, SitemapUrlFactoryInterface $sitemapUrlFactory)
     {

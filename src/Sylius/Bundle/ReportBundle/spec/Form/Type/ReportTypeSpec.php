@@ -31,7 +31,7 @@ use Symfony\Component\Form\FormView;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ReportTypeSpec extends ObjectBehavior
+final class ReportTypeSpec extends ObjectBehavior
 {
     function let(ServiceRegistryInterface $rendererRegistry, ServiceRegistryInterface $dataFetcherRegistry)
     {

@@ -18,7 +18,7 @@ use Sylius\Bundle\FlowBundle\Process\Step\StepInterface;
 use Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface;
 use Prophecy\Argument;
 
-class ProcessBuilderSpec extends ObjectBehavior
+final class ProcessBuilderSpec extends ObjectBehavior
 {
     function let(ContainerInterface $container)
     {

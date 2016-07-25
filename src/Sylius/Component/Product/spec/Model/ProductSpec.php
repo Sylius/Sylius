@@ -28,7 +28,7 @@ use Sylius\Component\Resource\Model\ToggleableInterface;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class ProductSpec extends ObjectBehavior
+final class ProductSpec extends ObjectBehavior
 {
     public function let()
     {

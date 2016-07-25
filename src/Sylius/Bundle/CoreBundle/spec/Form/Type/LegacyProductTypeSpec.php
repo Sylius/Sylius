@@ -23,7 +23,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class LegacyProductTypeSpec extends ObjectBehavior
+final class LegacyProductTypeSpec extends ObjectBehavior
 {
     function let(CanonicalizerInterface $canonicalizer)
     {
@@ -87,13 +87,13 @@ class LegacyProductTypeSpec extends ObjectBehavior
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
-        
+
         $builder
             ->addEventSubscriber(Argument::type(AddCodeFormSubscriber::class))
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
-        
+
         $this->buildForm($builder, []);
     }
 }

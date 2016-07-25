@@ -33,7 +33,7 @@
         "doctrine/phpcr-odm": "^1.3.0",
         "matthiasnoback/symfony-config-test": "^2.0",
         "matthiasnoback/symfony-dependency-injection-test": "^1.0",
-        "phpspec/phpspec": "^2.4",
+        "phpspec/phpspec": "^3.0",
         "phpunit/phpunit": "^4.8",
         "twig/twig": "~1.11",
         "pagerfanta/pagerfanta": "^1.0"

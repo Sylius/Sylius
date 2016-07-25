@@ -28,7 +28,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class OrderRecalculationListenerSpec extends ObjectBehavior
+final class OrderRecalculationListenerSpec extends ObjectBehavior
 {
     function let(OrderRecalculatorInterface $orderRecalculator)
     {

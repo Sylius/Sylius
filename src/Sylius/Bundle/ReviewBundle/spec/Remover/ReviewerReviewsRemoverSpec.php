@@ -23,7 +23,7 @@ use Sylius\Component\Review\Model\ReviewInterface;
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-class ReviewerReviewsRemoverSpec extends ObjectBehavior
+final class ReviewerReviewsRemoverSpec extends ObjectBehavior
 {
     function let(
         EntityRepository $reviewRepository,

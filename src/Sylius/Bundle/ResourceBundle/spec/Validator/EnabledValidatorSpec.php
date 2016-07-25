@@ -23,7 +23,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class EnabledValidatorSpec extends ObjectBehavior
+final class EnabledValidatorSpec extends ObjectBehavior
 {
     function let(ExecutionContextInterface $context)
     {

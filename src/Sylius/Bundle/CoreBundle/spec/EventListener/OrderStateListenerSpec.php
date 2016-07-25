@@ -21,7 +21,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class OrderStateListenerSpec extends ObjectBehavior
+final class OrderStateListenerSpec extends ObjectBehavior
 {
     function let(StateResolverInterface $stateResolver)
     {

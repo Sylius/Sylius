@@ -16,6 +16,7 @@ use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
@@ -72,7 +73,7 @@ final class PromotionContext implements Context
      */
     public function promotionShouldNotExistInTheRegistry(PromotionInterface $promotion)
     {
-        expect($this->promotionRepository->findOneBy(['code' => $promotion->getCode()]))->toBe(null);
+        Assert::null($this->promotionRepository->findOneBy(['code' => $promotion->getCode()]));
     }
 
     /**
@@ -80,7 +81,7 @@ final class PromotionContext implements Context
      */
     public function promotionShouldStillExistInTheRegistry(PromotionInterface $promotion)
     {
-        expect($this->promotionRepository->find($promotion->getId()))->toNotBe(null);
+        Assert::notNull($this->promotionRepository->find($promotion->getId()));
     }
 
     /**
@@ -88,8 +89,6 @@ final class PromotionContext implements Context
      */
     public function iShouldBeNotifiedOfFailure()
     {
-        expect($this->sharedStorage->get('last_exception'))
-            ->toBeAnInstanceOf(ForeignKeyConstraintViolationException::class)
-        ;
+        Assert::isInstanceOf($this->sharedStorage->get('last_exception'), ForeignKeyConstraintViolationException::class);
     }
 }

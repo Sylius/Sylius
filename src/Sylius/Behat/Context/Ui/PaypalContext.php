@@ -18,6 +18,7 @@ use Sylius\Behat\Page\Shop\Checkout\ThankYouPageInterface;
 use Sylius\Behat\Service\Mocker\PaypalApiMocker;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -38,7 +39,7 @@ final class PaypalContext implements Context
      * @var ThankYouPageInterface
      */
     private $thankYouPage;
-    
+
     /**
      * @var SummaryPageInterface
      */
@@ -92,7 +93,7 @@ final class PaypalContext implements Context
      */
     public function iShouldBeRedirectedToPaypalExpressCheckoutPage()
     {
-        expect($this->paypalExpressCheckoutPage->isOpen())->toBe(true);
+        Assert::true($this->paypalExpressCheckoutPage->isOpen());
     }
 
     /**

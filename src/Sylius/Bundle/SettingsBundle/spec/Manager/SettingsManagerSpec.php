@@ -21,7 +21,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SettingsManagerSpec extends ObjectBehavior
+final class SettingsManagerSpec extends ObjectBehavior
 {
     function let(
         ServiceRegistryInterface $schemaRegistry,

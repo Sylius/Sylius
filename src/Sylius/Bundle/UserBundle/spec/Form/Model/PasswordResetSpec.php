@@ -16,7 +16,7 @@ use PhpSpec\ObjectBehavior;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class PasswordResetSpec extends ObjectBehavior
+final class PasswordResetSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
- 
+
 namespace spec\Sylius\Bundle\CoreBundle\Sitemap\Renderer;
- 
+
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Sitemap\Model\SitemapInterface;
 use Sylius\Bundle\CoreBundle\Sitemap\Renderer\RendererAdapterInterface;
@@ -19,7 +19,7 @@ use Sylius\Bundle\CoreBundle\Sitemap\Renderer\SitemapRendererInterface;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class SitemapRendererSpec extends ObjectBehavior
+final class SitemapRendererSpec extends ObjectBehavior
 {
     function let(RendererAdapterInterface $adapter)
     {

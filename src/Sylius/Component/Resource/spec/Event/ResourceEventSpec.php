@@ -14,7 +14,7 @@ namespace spec\Sylius\Component\Resource\Event;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Resource\Event\ResourceEvent;
 
-class ResourceEventSpec extends ObjectBehavior
+final class ResourceEventSpec extends ObjectBehavior
 {
     function let()
     {

@@ -20,7 +20,7 @@ use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ActivePromotionsProviderSpec extends ObjectBehavior
+final class ActivePromotionsProviderSpec extends ObjectBehavior
 {
     function let(PromotionRepositoryInterface $promotionRepository)
     {

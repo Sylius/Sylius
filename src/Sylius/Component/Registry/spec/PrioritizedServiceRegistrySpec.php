@@ -26,7 +26,7 @@ use Zend\Stdlib\PriorityQueue;
  *
  * @author Mark McKelvie <mark.mckelvie@reiss.com>
  */
-class PrioritizedServiceRegistrySpec extends ObjectBehavior
+final class PrioritizedServiceRegistrySpec extends ObjectBehavior
 {
     function let()
     {

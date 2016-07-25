@@ -22,13 +22,13 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class CompositeMethodsResolverSpec extends ObjectBehavior
+final class CompositeMethodsResolverSpec extends ObjectBehavior
 {
     function let(PrioritizedServiceRegistryInterface $resolversRegistry)
     {
         $this->beConstructedWith($resolversRegistry);
     }
-    
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Payment\Resolver\CompositeMethodsResolver');

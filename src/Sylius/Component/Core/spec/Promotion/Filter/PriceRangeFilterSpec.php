@@ -19,7 +19,7 @@ use Sylius\Component\Core\Promotion\Filter\FilterInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class PriceRangeFilterSpec extends ObjectBehavior
+final class PriceRangeFilterSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

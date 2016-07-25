@@ -18,7 +18,7 @@ use Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\Menu;
 /**
  * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
  */
-class MenuSpec extends ObjectBehavior
+final class MenuSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

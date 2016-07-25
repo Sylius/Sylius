@@ -30,7 +30,7 @@
         "symfony/polyfill-iconv": "~1.0"
     },
     "require-dev": {
-        "phpspec/phpspec": "^2.4"
+        "phpspec/phpspec": "^3.0"
     },
     "suggest": {
         "ext-iconv": "For better performance than using Symfony Polyfill Component"

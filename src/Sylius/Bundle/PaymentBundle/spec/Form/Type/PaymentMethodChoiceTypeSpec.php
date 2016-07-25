@@ -24,18 +24,18 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class PaymentMethodChoiceTypeSpec extends ObjectBehavior
+final class PaymentMethodChoiceTypeSpec extends ObjectBehavior
 {
     function let(MethodsResolverInterface $compositeMethodsResolver, RepositoryInterface $paymentMethodRepository)
     {
         $this->beConstructedWith($compositeMethodsResolver, $paymentMethodRepository);
     }
-    
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodChoiceType');
     }
-    
+
     function it_is_an_abstract_type()
     {
         $this->shouldHaveType(AbstractType::class);
@@ -47,13 +47,13 @@ class PaymentMethodChoiceTypeSpec extends ObjectBehavior
 
         $this->buildForm($builder, ['multiple' => true]);
     }
-    
-    public function it_configures_options(OptionsResolver $resolver) 
+
+    public function it_configures_options(OptionsResolver $resolver)
     {
         $resolver->setDefaults(Argument::withKey('choice_list'))->shouldBeCalled()->willReturn($resolver);
         $resolver->setDefined(Argument::type('array'))->shouldBeCalled()->willReturn($resolver);
         $resolver->setAllowedTypes('subject', PaymentInterface::class)->shouldBeCalled()->willReturn($resolver);
-        
+
         $this->configureOptions($resolver);
     }
 

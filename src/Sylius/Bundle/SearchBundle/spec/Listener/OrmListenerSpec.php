@@ -18,7 +18,7 @@ use Sylius\Bundle\SearchBundle\Indexer\OrmIndexer;
 /**
  * @author Argyrios Gounaris <agounaris@gmail.com>
  */
-class OrmListenerSpec extends ObjectBehavior
+final class OrmListenerSpec extends ObjectBehavior
 {
     function let(OrmIndexer $ormIndexer)
     {

@@ -20,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class RequestTypeSpec extends ObjectBehavior
+final class RequestTypeSpec extends ObjectBehavior
 {
     function let()
     {

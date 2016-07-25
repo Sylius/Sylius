@@ -17,7 +17,7 @@ use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class CanonicalizerSpec extends ObjectBehavior
+final class CanonicalizerSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

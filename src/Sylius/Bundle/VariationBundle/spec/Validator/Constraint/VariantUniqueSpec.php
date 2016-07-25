@@ -17,7 +17,7 @@ use Symfony\Component\Validator\Constraint;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class VariantUniqueSpec extends ObjectBehavior
+final class VariantUniqueSpec extends ObjectBehavior
 {
     function let()
     {

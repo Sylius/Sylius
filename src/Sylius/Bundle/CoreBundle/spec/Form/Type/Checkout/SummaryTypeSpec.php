@@ -19,10 +19,10 @@ use Symfony\Component\Form\FormBuilderInterface;
 
 /**
  * @mixin SummaryType
- * 
+ *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class SummaryTypeSpec extends ObjectBehavior
+final class SummaryTypeSpec extends ObjectBehavior
 {
     function let()
     {

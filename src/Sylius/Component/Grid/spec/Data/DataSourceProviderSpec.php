@@ -26,7 +26,7 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class DataSourceProviderSpec extends ObjectBehavior
+final class DataSourceProviderSpec extends ObjectBehavior
 {
     function let(ServiceRegistryInterface $driversRegistry)
     {
@@ -37,7 +37,7 @@ class DataSourceProviderSpec extends ObjectBehavior
     {
         $this->shouldHaveType('Sylius\Component\Grid\Data\DataSourceProvider');
     }
-    
+
     function it_implements_grid_data_provider_interface()
     {
         $this->shouldImplement(DataSourceProviderInterface::class);
@@ -63,7 +63,7 @@ class DataSourceProviderSpec extends ObjectBehavior
     {
         $grid->getDriver()->willReturn('doctrine/banana');
         $driversRegistry->has('doctrine/banana')->willReturn(false);
-        
+
         $this
             ->shouldThrow(new UnsupportedDriverException('doctrine/banana'))
             ->during('getDataSource', [$grid, $parameters])

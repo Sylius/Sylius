@@ -14,7 +14,7 @@ namespace spec\Sylius\Component\Mailer\Model;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Mailer\Model\EmailInterface;
 
-class EmailSpec extends ObjectBehavior
+final class EmailSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

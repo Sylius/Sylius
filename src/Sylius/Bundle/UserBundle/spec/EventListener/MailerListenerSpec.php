@@ -20,7 +20,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class MailerListenerSpec extends ObjectBehavior
+final class MailerListenerSpec extends ObjectBehavior
 {
     function let(SenderInterface $sender)
     {

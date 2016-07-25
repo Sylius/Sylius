@@ -18,7 +18,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-class RedirectRouteTypeSpec extends ObjectBehavior
+final class RedirectRouteTypeSpec extends ObjectBehavior
 {
     function let()
     {

@@ -20,7 +20,7 @@ use Sylius\Component\Locale\Converter\LocaleNameConverterInterface;
  *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class LocaleNameConverterSpec extends ObjectBehavior
+final class LocaleNameConverterSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

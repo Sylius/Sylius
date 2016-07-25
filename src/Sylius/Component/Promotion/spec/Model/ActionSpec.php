@@ -18,7 +18,7 @@ use Sylius\Component\Promotion\Model\PromotionInterface;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class ActionSpec extends ObjectBehavior
+final class ActionSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

@@ -17,7 +17,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class OptionValueCollectionTypeSpec extends ObjectBehavior
+final class OptionValueCollectionTypeSpec extends ObjectBehavior
 {
     function let()
     {

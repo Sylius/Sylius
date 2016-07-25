@@ -14,7 +14,7 @@ namespace spec\Sylius\Component\Core\Model;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ImageInterface;
 
-class ImageSpec extends ObjectBehavior
+final class ImageSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

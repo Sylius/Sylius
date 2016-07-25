@@ -27,7 +27,7 @@ use Symfony\Component\Form\FormInterface;
  *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class AddAuthorGuestTypeFormSubscriberSpec extends ObjectBehavior
+final class AddAuthorGuestTypeFormSubscriberSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

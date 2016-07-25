@@ -20,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class ShippingMethodTranslationTypeSpec extends ObjectBehavior
+final class ShippingMethodTranslationTypeSpec extends ObjectBehavior
 {
     function let()
     {

@@ -27,7 +27,7 @@ use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
  *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ContainsTaxonRuleCheckerSpec extends ObjectBehavior
+final class ContainsTaxonRuleCheckerSpec extends ObjectBehavior
 {
     function let(TaxonRepositoryInterface $taxonRepository)
     {

@@ -17,6 +17,7 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -102,7 +103,7 @@ final class OrderContext implements Context
         /** @var OrderInterface $order */
         $order = $this->orderRepository->findOneBy(['number' => $order->getNumber()]);
 
-        expect($order)->toBe(null);
+        Assert::null($order);
     }
 
     /**
@@ -112,7 +113,7 @@ final class OrderContext implements Context
     {
         $orderItems = $this->orderItemRepository->findBy(['variant' => $product->getFirstVariant()]);
 
-        expect($orderItems)->toBe([]);
+        Assert::same($orderItems, []);
     }
 
     /**
@@ -124,7 +125,7 @@ final class OrderContext implements Context
 
         $addresses = $this->addressRepository->findBy(['id' => $addresses]);
 
-        expect($addresses)->toBe([]);
+        Assert::same($addresses, []);
     }
 
     /**
@@ -135,6 +136,7 @@ final class OrderContext implements Context
         $adjustments = $this->sharedStorage->get('deleted_adjustments');
 
         $adjustments = $this->adjustmentRepository->findBy(['id' => $adjustments]);
-        expect($adjustments)->toBe([]);
+
+        Assert::same($adjustments, []);
     }
 }

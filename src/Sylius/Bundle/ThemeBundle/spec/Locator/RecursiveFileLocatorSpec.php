@@ -23,7 +23,7 @@ use Symfony\Component\Finder\SplFileInfo;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class RecursiveFileLocatorSpec extends ObjectBehavior
+final class RecursiveFileLocatorSpec extends ObjectBehavior
 {
     function let(FinderFactoryInterface $finderFactory)
     {

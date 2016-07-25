@@ -18,7 +18,7 @@ use Sylius\Component\Inventory\Model\StockableInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class AvailabilityCheckerSpec extends ObjectBehavior
+final class AvailabilityCheckerSpec extends ObjectBehavior
 {
     function let()
     {

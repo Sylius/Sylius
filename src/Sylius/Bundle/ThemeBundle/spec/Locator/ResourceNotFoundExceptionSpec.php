@@ -20,7 +20,7 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ResourceNotFoundExceptionSpec extends ObjectBehavior
+final class ResourceNotFoundExceptionSpec extends ObjectBehavior
 {
     function let(ThemeInterface $theme)
     {

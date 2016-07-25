@@ -21,7 +21,7 @@ use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class TaxRateResolverSpec extends ObjectBehavior
+final class TaxRateResolverSpec extends ObjectBehavior
 {
     function let(RepositoryInterface $taxRateRepository)
     {

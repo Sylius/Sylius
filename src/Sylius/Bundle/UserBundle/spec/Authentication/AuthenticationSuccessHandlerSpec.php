@@ -24,7 +24,7 @@ use Symfony\Component\Security\Http\HttpUtils;
  *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class AuthenticationSuccessHandlerSpec extends ObjectBehavior
+final class AuthenticationSuccessHandlerSpec extends ObjectBehavior
 {
     function let(HttpUtils $httpUtils)
     {

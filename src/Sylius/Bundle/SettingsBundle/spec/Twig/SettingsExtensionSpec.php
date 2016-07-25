@@ -17,10 +17,10 @@ use Sylius\Bundle\SettingsBundle\Twig\SettingsExtension;
 
 /**
  * @mixin SettingsExtension
- * 
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SettingsExtensionSpec extends ObjectBehavior
+final class SettingsExtensionSpec extends ObjectBehavior
 {
     function let(SettingsHelperInterface $helper)
     {

@@ -8,16 +8,16 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
- 
+
 namespace spec\Sylius\Bundle\CoreBundle\Sitemap\Exception;
- 
+
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Sitemap\Model\SitemapUrlInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class SitemapUrlNotFoundExceptionSpec extends ObjectBehavior
+final class SitemapUrlNotFoundExceptionSpec extends ObjectBehavior
 {
     function let(SitemapUrlInterface $sitemapUrl)
     {

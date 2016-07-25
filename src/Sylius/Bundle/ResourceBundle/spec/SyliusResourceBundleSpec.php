@@ -19,7 +19,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SyliusResourceBundleSpec extends ObjectBehavior
+final class SyliusResourceBundleSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

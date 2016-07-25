@@ -25,7 +25,7 @@ use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class PageMetadataRendererSpec extends ObjectBehavior
+final class PageMetadataRendererSpec extends ObjectBehavior
 {
     private $defaultOptions = ['group' => 'head', 'defaults' => []];
 

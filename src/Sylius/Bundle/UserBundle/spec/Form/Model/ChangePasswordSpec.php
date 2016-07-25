@@ -16,7 +16,7 @@ use PhpSpec\ObjectBehavior;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class ChangePasswordSpec extends ObjectBehavior
+final class ChangePasswordSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

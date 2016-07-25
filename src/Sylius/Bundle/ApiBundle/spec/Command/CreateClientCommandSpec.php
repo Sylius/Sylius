@@ -20,7 +20,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class CreateClientCommandSpec extends ObjectBehavior
+final class CreateClientCommandSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {

@@ -16,7 +16,7 @@ use PhpSpec\ObjectBehavior;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class DataSpec extends ObjectBehavior
+final class DataSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {

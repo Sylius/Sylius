@@ -21,7 +21,7 @@ use Sylius\Component\Grid\Definition\Action;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ActionGroupSpec extends ObjectBehavior
+final class ActionGroupSpec extends ObjectBehavior
 {
     function let()
     {
@@ -46,7 +46,7 @@ class ActionGroupSpec extends ObjectBehavior
     function it_can_have_action_definitions(Action $action)
     {
         $action->getName()->willReturn('display_summary');
-        
+
         $this->addAction($action);
         $this->getAction('display_summary')->shouldReturn($action);
         $this->getActions()->shouldReturn(['display_summary' => $action]);
@@ -64,12 +64,12 @@ class ActionGroupSpec extends ObjectBehavior
             ->during('addAction', [$secondAction])
         ;
     }
-    
+
     function it_knows_if_action_with_given_name_already_exists(Action $action)
     {
         $action->getName()->willReturn('read_book');
         $this->addAction($action);
-        
+
         $this->hasAction('read_book')->shouldReturn(true);
         $this->hasAction('delete_book')->shouldReturn(false);
     }

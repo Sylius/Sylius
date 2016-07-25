@@ -20,7 +20,7 @@ use Sylius\Component\Promotion\Generator\InstructionInterface;
  *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class FailedGenerationExceptionSpec extends ObjectBehavior
+final class FailedGenerationExceptionSpec extends ObjectBehavior
 {
     function let(InstructionInterface $instruction, \InvalidArgumentException $previousException)
     {

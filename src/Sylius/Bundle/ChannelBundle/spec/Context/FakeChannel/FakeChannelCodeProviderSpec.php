@@ -22,7 +22,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class FakeChannelCodeProviderSpec extends ObjectBehavior
+final class FakeChannelCodeProviderSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

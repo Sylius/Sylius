@@ -21,7 +21,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class CustomerTypeSpec extends ObjectBehavior
+final class CustomerTypeSpec extends ObjectBehavior
 {
     function let(EventSubscriberInterface $addUserTypeSubscriber)
     {

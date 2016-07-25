@@ -17,7 +17,7 @@ use Sylius\Component\User\Model\CustomerInterface;
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class CustomerSpec extends ObjectBehavior
+final class CustomerSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

@@ -21,7 +21,7 @@ use Sylius\Component\Metadata\Renderer\MetadataRendererInterface;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class CompositeMetadataRendererSpec extends ObjectBehavior
+final class CompositeMetadataRendererSpec extends ObjectBehavior
 {
     function let(MetadataRendererInterface $firstRenderer, MetadataRendererInterface $secondRenderer)
     {

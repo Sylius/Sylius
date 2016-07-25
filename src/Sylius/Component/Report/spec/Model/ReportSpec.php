@@ -18,7 +18,7 @@ use Sylius\Component\Report\Model\ReportInterface;
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ReportSpec extends ObjectBehavior
+final class ReportSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {

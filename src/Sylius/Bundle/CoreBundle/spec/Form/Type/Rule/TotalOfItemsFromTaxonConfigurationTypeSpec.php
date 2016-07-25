@@ -20,7 +20,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class TotalOfItemsFromTaxonConfigurationTypeSpec extends ObjectBehavior
+final class TotalOfItemsFromTaxonConfigurationTypeSpec extends ObjectBehavior
 {
     function let(TaxonRepositoryInterface $taxonRepository)
     {

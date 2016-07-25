@@ -29,7 +29,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class TwigGridRendererSpec extends ObjectBehavior
+final class TwigGridRendererSpec extends ObjectBehavior
 {
     function let(\Twig_Environment $twig, ServiceRegistryInterface $fieldsRegistry, FormFactoryInterface $formFactory)
     {
@@ -48,12 +48,12 @@ class TwigGridRendererSpec extends ObjectBehavior
     {
         $this->shouldHaveType('Sylius\Bundle\GridBundle\Renderer\TwigGridRenderer');
     }
-    
+
     function it_is_a_grid_renderer()
     {
         $this->shouldImplement(GridRendererInterface::class);
     }
-    
+
     function it_uses_Twig_to_render_the_grid_view(\Twig_Environment $twig, GridView $gridView)
     {
         $twig->render('SyliusGridBundle:default.html.twig', ['grid' => $gridView])->willReturn('<html>Grid!</html>');

@@ -22,7 +22,7 @@ use Sylius\Component\Report\Renderer\RendererInterface;
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class DelegatingRendererSpec extends ObjectBehavior
+final class DelegatingRendererSpec extends ObjectBehavior
 {
     public function let(ServiceRegistryInterface $serviceRegistryInterface)
     {

@@ -21,7 +21,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-class PermissionEntityTypeSpec extends ObjectBehavior
+final class PermissionEntityTypeSpec extends ObjectBehavior
 {
     function let(MetadataInterface $metadata)
     {

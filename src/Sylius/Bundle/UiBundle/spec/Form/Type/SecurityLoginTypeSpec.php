@@ -23,7 +23,7 @@ use Symfony\Component\Form\FormTypeInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SecurityLoginTypeSpec extends ObjectBehavior
+final class SecurityLoginTypeSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

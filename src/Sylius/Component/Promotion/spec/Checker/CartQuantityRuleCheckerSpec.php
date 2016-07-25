@@ -18,7 +18,7 @@ use Sylius\Component\Promotion\Model\PromotionCountableSubjectInterface;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class CartQuantityRuleCheckerSpec extends ObjectBehavior
+final class CartQuantityRuleCheckerSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

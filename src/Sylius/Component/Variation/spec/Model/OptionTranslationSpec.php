@@ -17,7 +17,7 @@ use Sylius\Component\Variation\Model\OptionTranslationInterface;
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class OptionTranslationSpec extends ObjectBehavior
+final class OptionTranslationSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

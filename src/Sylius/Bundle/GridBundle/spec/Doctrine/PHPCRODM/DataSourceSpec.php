@@ -31,7 +31,7 @@ use Doctrine\ODM\PHPCR\Query\Builder\Ordering;
 /**
  * @mixin Driver
  */
-class DataSourceSpec extends ObjectBehavior
+final class DataSourceSpec extends ObjectBehavior
 {
     function let(QueryBuilder $queryBuilder, ExpressionBuilder $expressionBuilder)
     {

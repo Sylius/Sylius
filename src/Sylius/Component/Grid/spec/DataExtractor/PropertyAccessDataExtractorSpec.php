@@ -23,7 +23,7 @@ use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class PropertyAccessDataExtractorSpec extends ObjectBehavior
+final class PropertyAccessDataExtractorSpec extends ObjectBehavior
 {
     function let(PropertyAccessorInterface $propertyAccessor)
     {
@@ -39,12 +39,12 @@ class PropertyAccessDataExtractorSpec extends ObjectBehavior
     {
         $this->shouldImplement(DataExtractorInterface::class);
     }
-    
+
     function it_uses_property_accessor_to_extract_the_data(PropertyAccessorInterface $propertyAccessor, Field $field)
     {
         $field->getPath()->willReturn('foo');
         $propertyAccessor->getValue(['foo' => 'bar'], 'foo')->willReturn('Value');
-        
+
         $this->get($field, ['foo' => 'bar'])->shouldReturn('Value');
     }
 }

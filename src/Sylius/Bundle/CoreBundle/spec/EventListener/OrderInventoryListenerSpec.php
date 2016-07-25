@@ -17,7 +17,7 @@ use Sylius\Component\Core\OrderProcessing\InventoryHandlerInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class OrderInventoryListenerSpec extends ObjectBehavior
+final class OrderInventoryListenerSpec extends ObjectBehavior
 {
     function let(InventoryHandlerInterface $inventoryHandler)
     {

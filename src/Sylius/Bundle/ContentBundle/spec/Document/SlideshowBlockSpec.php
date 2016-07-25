@@ -18,7 +18,7 @@ use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\SlideshowBlock;
 /**
  * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
  */
-class SlideshowBlockSpec extends ObjectBehavior
+final class SlideshowBlockSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

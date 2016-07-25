@@ -22,7 +22,7 @@ use Symfony\Component\HttpKernel\CacheClearer\CacheClearerInterface;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class TemplatePathsCacheClearerSpec extends ObjectBehavior
+final class TemplatePathsCacheClearerSpec extends ObjectBehavior
 {
     function let(Cache $cache)
     {

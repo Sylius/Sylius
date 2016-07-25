@@ -21,7 +21,7 @@ use Sylius\Component\Core\Promotion\Filter\FilterInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class TaxonFilterSpec extends ObjectBehavior
+final class TaxonFilterSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

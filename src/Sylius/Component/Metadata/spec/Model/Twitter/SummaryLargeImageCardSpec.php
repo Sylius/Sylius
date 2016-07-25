@@ -20,7 +20,7 @@ use Sylius\Component\Metadata\Model\Twitter\SummaryLargeImageCard;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class SummaryLargeImageCardSpec extends ObjectBehavior
+final class SummaryLargeImageCardSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

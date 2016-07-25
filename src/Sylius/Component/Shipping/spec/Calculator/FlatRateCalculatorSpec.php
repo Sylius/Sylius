@@ -18,7 +18,7 @@ use Sylius\Component\Shipping\Model\ShipmentInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class FlatRateCalculatorSpec extends ObjectBehavior
+final class FlatRateCalculatorSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

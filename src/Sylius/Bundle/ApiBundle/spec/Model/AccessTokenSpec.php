@@ -14,7 +14,7 @@ namespace spec\Sylius\Bundle\ApiBundle\Model;
 use FOS\OAuthServerBundle\Entity\AccessToken;
 use PhpSpec\ObjectBehavior;
 
-class AccessTokenSpec extends ObjectBehavior
+final class AccessTokenSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

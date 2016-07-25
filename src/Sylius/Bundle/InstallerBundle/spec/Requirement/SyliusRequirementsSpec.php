@@ -15,7 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\InstallerBundle\Requirement\RequirementCollection;
 use Sylius\Bundle\InstallerBundle\Requirement\SyliusRequirements;
 
-class SyliusRequirementsSpec extends ObjectBehavior
+final class SyliusRequirementsSpec extends ObjectBehavior
 {
     function let(RequirementCollection $requirementCollection)
     {

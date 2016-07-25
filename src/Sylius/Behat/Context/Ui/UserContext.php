@@ -18,6 +18,7 @@ use Sylius\Behat\Page\Shop\Account\LoginPageInterface;
 use Sylius\Behat\Page\Shop\User\RegisterPageInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
@@ -102,7 +103,13 @@ final class UserContext implements Context
      */
     public function iShouldNotBeAbleToDeleteMyOwnAccount()
     {
-        expect($this->customerShowPage)->toThrow(ElementNotFoundException::class)->during('deleteAccount');
+        try {
+            $this->customerShowPage->deleteAccount();
+        } catch (ElementNotFoundException $exception) {
+            return;
+        }
+
+        throw new \DomainException('Delete account should throw an exception!');
     }
 
     /**
@@ -114,6 +121,6 @@ final class UserContext implements Context
 
         $this->customerShowPage->open(['id' => $deletedUser->getCustomer()->getId()]);
 
-        expect($this->customerShowPage->isRegistered())->toBe(false);
+        Assert::false($this->customerShowPage->isRegistered());
     }
 }

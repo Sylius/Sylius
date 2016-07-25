@@ -23,7 +23,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class LocaleProviderSpec extends ObjectBehavior
+final class LocaleProviderSpec extends ObjectBehavior
 {
     function let(RepositoryInterface $localeRepository)
     {

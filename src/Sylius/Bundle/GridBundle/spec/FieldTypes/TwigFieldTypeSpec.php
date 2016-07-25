@@ -24,7 +24,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class TwigFieldTypeSpec extends ObjectBehavior
+final class TwigFieldTypeSpec extends ObjectBehavior
 {
     function let(DataExtractorInterface $dataExtractor, \Twig_Environment $twig)
     {
@@ -55,7 +55,7 @@ class TwigFieldTypeSpec extends ObjectBehavior
             'template' => 'foo.html.twig',
         ])->shouldReturn('<html>Value</html>');
     }
-    
+
     function it_uses_data_directly_if_dot_is_configured_as_path(
         \Twig_Environment $twig,
         Field $field

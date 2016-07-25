@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
- 
+
 namespace spec\Sylius\Bundle\CoreBundle\Test\Services;
- 
+
 use Payum\Core\GatewayInterface;
 use Payum\Core\Registry\RegistryInterface;
 use PhpSpec\ObjectBehavior;
@@ -19,7 +19,7 @@ use Sylius\Bundle\CoreBundle\Test\Services\PaymentMethodNameToGatewayConverterIn
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class PaymentMethodNameToGatewayConverterSpec extends ObjectBehavior
+final class PaymentMethodNameToGatewayConverterSpec extends ObjectBehavior
 {
     function let(RegistryInterface $payum)
     {

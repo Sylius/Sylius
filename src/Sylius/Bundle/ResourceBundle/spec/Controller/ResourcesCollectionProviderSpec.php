@@ -31,7 +31,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ResourcesCollectionProviderSpec extends ObjectBehavior
+final class ResourcesCollectionProviderSpec extends ObjectBehavior
 {
     function let(ResourcesResolverInterface $resourcesResolver, PagerfantaFactory $pagerfantaRepresentationFactory)
     {
@@ -72,7 +72,7 @@ class ResourcesCollectionProviderSpec extends ObjectBehavior
     ) {
         $requestConfiguration->isHtmlRequest()->willReturn(true);
         $requestConfiguration->getPaginationMaxPerPage()->willReturn(5);
-        
+
         $resourcesResolver->getResources($requestConfiguration, $repository)->willReturn($paginator);
 
         $requestConfiguration->getRequest()->willReturn($request);

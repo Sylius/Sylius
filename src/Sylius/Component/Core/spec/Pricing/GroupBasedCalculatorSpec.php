@@ -19,7 +19,7 @@ use Sylius\Component\User\Model\GroupInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class GroupBasedCalculatorSpec extends ObjectBehavior
+final class GroupBasedCalculatorSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

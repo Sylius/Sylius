@@ -21,7 +21,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class TaxonTranslationTypeSpec extends ObjectBehavior
+final class TaxonTranslationTypeSpec extends ObjectBehavior
 {
     function let()
     {

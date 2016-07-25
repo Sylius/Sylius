@@ -18,7 +18,7 @@ use Symfony\Component\Form\FormTypeInterface;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class LocaleChoiceTypeSpec extends ObjectBehavior
+final class LocaleChoiceTypeSpec extends ObjectBehavior
 {
     function let(RepositoryInterface $localeRepository)
     {

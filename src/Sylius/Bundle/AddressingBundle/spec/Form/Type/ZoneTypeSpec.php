@@ -24,7 +24,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class ZoneTypeSpec extends ObjectBehavior
+final class ZoneTypeSpec extends ObjectBehavior
 {
     function let()
     {

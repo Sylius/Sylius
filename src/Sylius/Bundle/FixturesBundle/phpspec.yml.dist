@@ -5,4 +5,4 @@ suites:
         src_path: .
 
 extensions:
-    - Pamil\PhpSpecGeneratorExtension\Extension
+    Pamil\PhpSpecGeneratorExtension\Extension: ~

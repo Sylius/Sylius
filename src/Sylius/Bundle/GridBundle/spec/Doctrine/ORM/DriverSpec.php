@@ -26,7 +26,7 @@ use Sylius\Component\Grid\Parameters;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class DriverSpec extends ObjectBehavior
+final class DriverSpec extends ObjectBehavior
 {
     function let(EntityManagerInterface $entityManager)
     {
@@ -59,7 +59,7 @@ class DriverSpec extends ObjectBehavior
     ) {
         $entityManager->getRepository('App:Book')->willReturn($entityRepository);
         $entityRepository->createQueryBuilder('o')->willReturn($queryBuilder);
-        
+
         $this->getDataSource(['class' => 'App:Book'], $parameters)->shouldHaveType(DataSource::class);
     }
 }

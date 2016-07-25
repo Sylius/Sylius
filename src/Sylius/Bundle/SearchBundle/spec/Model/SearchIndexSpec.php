@@ -17,7 +17,7 @@ use Sylius\Component\Core\Model\Product;
 /**
  * @author agounaris <agounaris@gmail.com>
  */
-class SearchIndexSpec extends ObjectBehavior
+final class SearchIndexSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

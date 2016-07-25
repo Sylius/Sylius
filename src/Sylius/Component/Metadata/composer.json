@@ -28,7 +28,7 @@
         "twig/twig": "~1.11"
     },
     "require-dev": {
-        "phpspec/phpspec": "^2.4",
+        "phpspec/phpspec": "^3.0",
         "phpunit/phpunit": "^4.1"
     },
     "config": {

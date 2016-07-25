@@ -26,7 +26,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-class RuleTypeSpec extends ObjectBehavior
+final class RuleTypeSpec extends ObjectBehavior
 {
     function let(ServiceRegistryInterface $checkerRegistry)
     {

@@ -24,7 +24,7 @@ use Sylius\Behat\Service\Setter\CookieSetterInterface;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class CookieSetterSpec extends ObjectBehavior
+final class CookieSetterSpec extends ObjectBehavior
 {
     function let(Session $minkSession)
     {

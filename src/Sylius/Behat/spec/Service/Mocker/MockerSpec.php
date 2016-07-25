@@ -20,7 +20,7 @@ use Sylius\Behat\Service\Mocker\MockerInterface;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class MockerSpec extends ObjectBehavior
+final class MockerSpec extends ObjectBehavior
 {
     function let(MockerContainer $container)
     {

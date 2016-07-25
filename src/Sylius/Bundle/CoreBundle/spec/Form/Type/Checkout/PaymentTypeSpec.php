@@ -22,7 +22,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class PaymentTypeSpec extends ObjectBehavior
+final class PaymentTypeSpec extends ObjectBehavior
 {
     function let()
     {
@@ -33,7 +33,7 @@ class PaymentTypeSpec extends ObjectBehavior
     {
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\Form\Type\Checkout\PaymentType');
     }
-    
+
     function it_is_an_abstract_type()
     {
         $this->shouldHaveType(AbstractType::class);

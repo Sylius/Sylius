@@ -21,7 +21,7 @@ use Sylius\Component\Resource\Model\ToggleableInterface;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class LocaleSpec extends ObjectBehavior
+final class LocaleSpec extends ObjectBehavior
 {
     function let()
     {

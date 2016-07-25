@@ -18,7 +18,7 @@ use Symfony\Component\Form\Exception\UnexpectedTypeException;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ArrayToStringTransformerSpec extends ObjectBehavior
+final class ArrayToStringTransformerSpec extends ObjectBehavior
 {
     function let()
     {

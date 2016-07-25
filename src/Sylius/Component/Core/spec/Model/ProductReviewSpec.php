@@ -17,7 +17,7 @@ use Sylius\Component\Review\Model\Review;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ProductReviewSpec extends ObjectBehavior
+final class ProductReviewSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

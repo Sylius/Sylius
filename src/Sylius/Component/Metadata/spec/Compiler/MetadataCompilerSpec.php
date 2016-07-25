@@ -19,7 +19,7 @@ use Sylius\Component\Metadata\Model\MetadataInterface;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class MetadataCompilerSpec extends ObjectBehavior
+final class MetadataCompilerSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

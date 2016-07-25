@@ -25,7 +25,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 /**
  * @author Manuel Gonzalez <mgonyan@gmail.com>
  */
-class MailerListenerSpec extends ObjectBehavior
+final class MailerListenerSpec extends ObjectBehavior
 {
     function let(SenderInterface $emailSender)
     {

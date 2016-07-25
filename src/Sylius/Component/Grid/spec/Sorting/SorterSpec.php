@@ -25,22 +25,22 @@ use Prophecy\Argument;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SorterSpec extends ObjectBehavior
+final class SorterSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Grid\Sorting\Sorter');
     }
-    
+
     function it_implements_grid_data_source_sorter_interface()
     {
         $this->shouldImplement(SorterInterface::class);
     }
-    
+
     function it_sorts_the_data_source_via_expression_builder_based_on_the_grid_definition(
-        Grid $grid, 
-        Parameters $parameters, 
-        DataSourceInterface $dataSource, 
+        Grid $grid,
+        Parameters $parameters,
+        DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
     ) {
         $parameters->has('sorting')->willReturn(false);

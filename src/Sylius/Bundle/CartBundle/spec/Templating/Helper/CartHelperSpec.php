@@ -22,7 +22,7 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Templating\Helper\Helper;
 
-class CartHelperSpec extends ObjectBehavior
+final class CartHelperSpec extends ObjectBehavior
 {
     function let(
         CartProviderInterface $cartProvider,

@@ -16,7 +16,7 @@ use PhpSpec\ObjectBehavior;
 /**
  * @author agounaris <agounaris@gmail.com>
  */
-class SearchLogSpec extends ObjectBehavior
+final class SearchLogSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

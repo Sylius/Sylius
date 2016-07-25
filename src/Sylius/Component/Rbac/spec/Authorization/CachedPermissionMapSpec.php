@@ -20,7 +20,7 @@ use Sylius\Component\Rbac\Model\RoleInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class CachedPermissionMapSpec extends ObjectBehavior
+final class CachedPermissionMapSpec extends ObjectBehavior
 {
     function let(PermissionMapInterface $map, Cache $cache)
     {

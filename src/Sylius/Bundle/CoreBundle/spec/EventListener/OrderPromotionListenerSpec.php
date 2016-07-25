@@ -26,7 +26,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 /**
  * @author Piotr Walków <walkow.piotr@gmail.com>
  */
-class OrderPromotionListenerSpec extends ObjectBehavior
+final class OrderPromotionListenerSpec extends ObjectBehavior
 {
     function let(SessionInterface $session, TranslatorInterface $translator)
     {

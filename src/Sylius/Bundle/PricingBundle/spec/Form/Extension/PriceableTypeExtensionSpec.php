@@ -21,7 +21,7 @@ use Symfony\Component\Form\FormConfigInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 
-class PriceableTypeExtensionSpec extends ObjectBehavior
+final class PriceableTypeExtensionSpec extends ObjectBehavior
 {
     function let(ServiceRegistryInterface $calculatorRegistry, EventSubscriberInterface $subscriber)
     {

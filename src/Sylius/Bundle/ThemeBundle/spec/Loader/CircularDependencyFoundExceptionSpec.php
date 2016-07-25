@@ -21,7 +21,7 @@ use Sylius\Bundle\ThemeBundle\Loader\CircularDependencyFoundException;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class CircularDependencyFoundExceptionSpec extends ObjectBehavior
+final class CircularDependencyFoundExceptionSpec extends ObjectBehavior
 {
     function let()
     {

@@ -19,7 +19,7 @@ use Sylius\Component\Rbac\Model\RoleInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class RoleSpec extends ObjectBehavior
+final class RoleSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

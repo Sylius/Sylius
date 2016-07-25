@@ -24,7 +24,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
  *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class CheckoutCompleteListenerSpec extends ObjectBehavior
+final class CheckoutCompleteListenerSpec extends ObjectBehavior
 {
     function let(SessionInterface $session)
     {

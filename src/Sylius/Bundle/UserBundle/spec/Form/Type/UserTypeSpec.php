@@ -21,7 +21,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class UserTypeSpec extends ObjectBehavior
+final class UserTypeSpec extends ObjectBehavior
 {
     function let(CanonicalizerInterface $canonicalizer)
     {

@@ -23,7 +23,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class ResourceToHiddenIdentifierTypeSpec extends ObjectBehavior
+final class ResourceToHiddenIdentifierTypeSpec extends ObjectBehavior
 {
     function let(RepositoryInterface $repository, MetadataInterface $metadata)
     {

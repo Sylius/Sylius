@@ -22,7 +22,7 @@ use Sylius\Component\Channel\Model\ChannelInterface;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class CompositeChannelContextSpec extends ObjectBehavior
+final class CompositeChannelContextSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

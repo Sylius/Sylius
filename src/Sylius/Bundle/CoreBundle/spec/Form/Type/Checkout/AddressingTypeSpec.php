@@ -25,7 +25,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class AddressingTypeSpec extends ObjectBehavior
+final class AddressingTypeSpec extends ObjectBehavior
 {
     function let()
     {

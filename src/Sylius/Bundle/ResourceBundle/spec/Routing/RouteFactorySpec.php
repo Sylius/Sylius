@@ -22,7 +22,7 @@ use Symfony\Component\Routing\RouteCollection;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class RouteFactorySpec extends ObjectBehavior
+final class RouteFactorySpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

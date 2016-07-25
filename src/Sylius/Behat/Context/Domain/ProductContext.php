@@ -18,6 +18,7 @@ use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -101,7 +102,7 @@ final class ProductContext implements Context
      */
     public function iShouldBeNotifiedThatThisProductVariantIsInUseAndCannotBeDeleted()
     {
-        expect($this->sharedStorage->get('last_exception'))->toHaveType(DBALException::class);
+        Assert::isInstanceOf($this->sharedStorage->get('last_exception'), DBALException::class);
     }
 
     /**
@@ -112,7 +113,7 @@ final class ProductContext implements Context
         $productVariantId = $this->sharedStorage->get('product_variant_id');
         $productVariant = $this->productVariantRepository->find($productVariantId);
 
-        expect($productVariant)->toBe(null);
+        Assert::null($productVariant);
     }
 
     /**
@@ -122,7 +123,7 @@ final class ProductContext implements Context
     {
         $productVariant = $this->productVariantRepository->find($productVariant->getId());
 
-        expect($productVariant)->toNotBe(null);
+        Assert::notNull($productVariant);
     }
 
     /**
@@ -132,7 +133,7 @@ final class ProductContext implements Context
     {
         $product = $this->productRepository->find($product->getId());
 
-        expect($product)->toNotBe(null);
+        Assert::notNull($product);
     }
 
     /**
@@ -153,7 +154,9 @@ final class ProductContext implements Context
      */
     public function thereAreNoProductReviews(ProductInterface $product)
     {
-        expect($this->productReviewRepository->findBy(['reviewSubject' => $product]))->toBe([]);
+        $reviews = $this->productReviewRepository->findBy(['reviewSubject' => $product]);
+
+        Assert::same($reviews, []);
     }
 
     /**
@@ -161,6 +164,8 @@ final class ProductContext implements Context
      */
     public function thereAreNoVariants(ProductInterface $product)
     {
-        expect($this->productVariantRepository->findBy(['object' => $product]))->toBe([]);
+        $variants = $this->productVariantRepository->findBy(['object' => $product]);
+        
+        Assert::same($variants, []);
     }
 }

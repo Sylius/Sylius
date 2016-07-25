@@ -20,7 +20,7 @@ use Sylius\Component\Channel\Context\ChannelContextInterface;
 /**
  * @author Argyrios Gounaris <agounaris@gmail.com>
  */
-class ElasticsearchFinderSpec extends ObjectBehavior
+final class ElasticsearchFinderSpec extends ObjectBehavior
 {
     function let(
         SearchIndexRepository $searchRepository,

@@ -16,7 +16,7 @@ use PhpSpec\ObjectBehavior;
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class ExistingResourceExceptionSpec extends ObjectBehavior
+final class ExistingResourceExceptionSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

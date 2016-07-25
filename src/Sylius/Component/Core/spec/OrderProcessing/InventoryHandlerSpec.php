@@ -29,7 +29,7 @@ use Sylius\Component\Resource\StateMachine\StateMachineInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class InventoryHandlerSpec extends ObjectBehavior
+final class InventoryHandlerSpec extends ObjectBehavior
 {
     function let(
         InventoryOperatorInterface $inventoryOperator,

@@ -20,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Myke Hines <myke@webhines.com>
  */
-class CommentTypeSpec extends ObjectBehavior
+final class CommentTypeSpec extends ObjectBehavior
 {
     public function let()
     {

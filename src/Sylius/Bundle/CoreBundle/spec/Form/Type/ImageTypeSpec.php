@@ -14,7 +14,7 @@ namespace spec\Sylius\Bundle\CoreBundle\Form\Type;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\Form\FormTypeInterface;
 
-class ImageTypeSpec extends ObjectBehavior
+final class ImageTypeSpec extends ObjectBehavior
 {
     function let()
     {

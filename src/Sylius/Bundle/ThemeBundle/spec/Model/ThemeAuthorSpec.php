@@ -20,7 +20,7 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeAuthor;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ThemeAuthorSpec extends ObjectBehavior
+final class ThemeAuthorSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

@@ -22,7 +22,7 @@ require_once __DIR__.'/../Fixtures/SampleResource.php';
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class FactorySpec extends ObjectBehavior
+final class FactorySpec extends ObjectBehavior
 {
     function let()
     {

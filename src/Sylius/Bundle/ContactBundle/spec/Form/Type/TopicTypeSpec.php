@@ -21,7 +21,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
-class TopicTypeSpec extends ObjectBehavior
+final class TopicTypeSpec extends ObjectBehavior
 {
     function let()
     {

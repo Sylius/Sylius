@@ -26,7 +26,7 @@ use Sylius\Bundle\ThemeBundle\Translation\Provider\TranslatorResourceProviderInt
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ThemeTranslatorResourceProviderSpec extends ObjectBehavior
+final class ThemeTranslatorResourceProviderSpec extends ObjectBehavior
 {
     function let(
         TranslationFilesFinderInterface $translationFilesFinder,

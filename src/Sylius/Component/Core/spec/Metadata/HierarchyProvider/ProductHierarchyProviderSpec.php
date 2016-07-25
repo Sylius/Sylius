@@ -23,7 +23,7 @@ use Sylius\Component\Metadata\Model\MetadataSubjectInterface;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ProductHierarchyProviderSpec extends ObjectBehavior
+final class ProductHierarchyProviderSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

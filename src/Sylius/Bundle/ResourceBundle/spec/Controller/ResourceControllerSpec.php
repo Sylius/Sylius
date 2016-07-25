@@ -51,7 +51,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ResourceControllerSpec extends ObjectBehavior
+final class ResourceControllerSpec extends ObjectBehavior
 {
     function let(
         MetadataInterface $metadata,

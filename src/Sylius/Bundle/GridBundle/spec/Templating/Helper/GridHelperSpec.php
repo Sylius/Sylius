@@ -26,7 +26,7 @@ use Symfony\Component\Templating\Helper\HelperInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class GridHelperSpec extends ObjectBehavior
+final class GridHelperSpec extends ObjectBehavior
 {
     function let(GridRendererInterface $gridRenderer)
     {
@@ -42,7 +42,7 @@ class GridHelperSpec extends ObjectBehavior
     {
         $this->shouldImplement(HelperInterface::class);
     }
-    
+
     function it_extends_base_Symfony_Templating_helper()
     {
         $this->shouldHaveType(Helper::class);
@@ -53,13 +53,13 @@ class GridHelperSpec extends ObjectBehavior
         $gridRenderer->render($gridView, null)->willReturn('<html>Grid!</html>');
         $this->renderGrid($gridView, null)->shouldReturn('<html>Grid!</html>');
     }
-    
+
     function it_uses_grid_renderer_to_render_field(GridRendererInterface $gridRenderer, GridView $gridView, Field $field)
     {
         $gridRenderer->renderField($gridView, $field, 'foo')->willReturn('Value');
         $this->renderField($gridView, $field, 'foo')->shouldReturn('Value');
     }
-    
+
     function it_uses_grid_renderer_to_render_action(GridRendererInterface $gridRenderer, GridView $gridView, Action $action)
     {
         $gridRenderer->renderAction($gridView, $action, null)->willReturn('<a href="#">Go go Gadget arms!</a>');

@@ -21,7 +21,7 @@ use Sylius\Component\Shipping\Resolver\MethodsResolverInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class MethodsResolverSpec extends ObjectBehavior
+final class MethodsResolverSpec extends ObjectBehavior
 {
     function let(
         ObjectRepository $methodRepository,

@@ -14,7 +14,7 @@ namespace spec\Sylius\Bundle\OrderBundle\StateMachineCallback;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Order\Model\OrderInterface;
 
-class CompleteOrderCallbackSpec extends ObjectBehavior
+final class CompleteOrderCallbackSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

@@ -20,7 +20,7 @@ use Sylius\Component\Core\OrderProcessing\PaymentProcessorInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class OrderProcessorSpec extends ObjectBehavior
+final class OrderProcessorSpec extends ObjectBehavior
 {
     function let(
         OrderShipmentProcessorInterface $orderShipmentProcessor,

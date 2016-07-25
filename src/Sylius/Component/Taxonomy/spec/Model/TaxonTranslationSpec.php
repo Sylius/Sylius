@@ -17,7 +17,7 @@ use Sylius\Component\Taxonomy\Model\TaxonTranslationInterface;
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class TaxonTranslationSpec extends ObjectBehavior
+final class TaxonTranslationSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

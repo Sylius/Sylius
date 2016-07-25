@@ -26,7 +26,7 @@ use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class OrderShipmentProcessorSpec extends ObjectBehavior
+final class OrderShipmentProcessorSpec extends ObjectBehavior
 {
     function let(
         DefaultShippingMethodResolverInterface $defaultShippingMethodResolver,

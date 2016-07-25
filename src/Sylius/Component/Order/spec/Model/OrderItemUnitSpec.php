@@ -21,7 +21,7 @@ use Sylius\Component\Order\Model\OrderItemUnitInterface;
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class OrderItemUnitSpec extends ObjectBehavior
+final class OrderItemUnitSpec extends ObjectBehavior
 {
     function let(OrderItemInterface $orderItem)
     {

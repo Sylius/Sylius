@@ -15,7 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\Image;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 
-class ProductVariantImageSpec extends ObjectBehavior
+final class ProductVariantImageSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

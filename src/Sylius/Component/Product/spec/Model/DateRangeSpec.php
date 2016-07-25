@@ -13,7 +13,7 @@ namespace spec\Sylius\Component\Product\Model;
 
 use PhpSpec\ObjectBehavior;
 
-class DateRangeSpec extends ObjectBehavior
+final class DateRangeSpec extends ObjectBehavior
 {
     function let(\DateTime $start, \DateTime $end)
     {

@@ -25,7 +25,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class CachedPerRequestChannelContextSpec extends ObjectBehavior
+final class CachedPerRequestChannelContextSpec extends ObjectBehavior
 {
     function let(ChannelContextInterface $decoratedChannelContext, RequestStack $requestStack)
     {

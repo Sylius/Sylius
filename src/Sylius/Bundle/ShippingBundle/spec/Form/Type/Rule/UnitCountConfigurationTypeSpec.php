@@ -19,7 +19,7 @@ use Symfony\Component\Form\Test\FormBuilderInterface;
 /**
  * @author Arnaud Langlade <arn0d.dev@gamil.com>
  */
-class UnitCountConfigurationTypeSpec extends ObjectBehavior
+final class UnitCountConfigurationTypeSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

@@ -19,7 +19,7 @@ use Sylius\Component\Order\Model\AdjustmentInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class AggregateAdjustmentsExtensionSpec extends ObjectBehavior
+final class AggregateAdjustmentsExtensionSpec extends ObjectBehavior
 {
     function let(AdjustmentsHelper $adjustmentsHelper)
     {

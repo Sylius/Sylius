@@ -26,7 +26,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class CartProviderSpec extends ObjectBehavior
+final class CartProviderSpec extends ObjectBehavior
 {
     function let(
         CartContextInterface $cartContext,

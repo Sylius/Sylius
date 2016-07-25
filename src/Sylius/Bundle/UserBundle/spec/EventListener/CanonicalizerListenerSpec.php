@@ -21,7 +21,7 @@ use Sylius\Component\User\Model\UserInterface;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class CanonicalizerListenerSpec extends ObjectBehavior
+final class CanonicalizerListenerSpec extends ObjectBehavior
 {
     function let(CanonicalizerInterface $canonicalizer)
     {

@@ -22,7 +22,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class BuildAttributeFormSubscriberSpec extends ObjectBehavior
+final class BuildAttributeFormSubscriberSpec extends ObjectBehavior
 {
     function let(FormFactoryInterface $formFactory)
     {
