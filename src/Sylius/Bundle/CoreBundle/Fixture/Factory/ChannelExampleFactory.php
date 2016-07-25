@@ -15,6 +15,8 @@ use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Channel\Factory\ChannelFactoryInterface;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Component\Currency\Model\CurrencyInterface;
+use Sylius\Component\Locale\Model\LocaleInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -76,9 +78,19 @@ final class ChannelExampleFactory implements ExampleFactoryInterface
                 ->setAllowedTypes('enabled', 'bool')
                 ->setDefault('tax_calculation_strategy', 'order_items_based')
                 ->setAllowedTypes('tax_calculation_strategy', 'string')
+                ->setDefault('default_locale', function (Options $options) {
+                    return $this->faker->randomElement($options['locales']);
+                })
+                ->setAllowedTypes('default_locale', LocaleInterface::class)
+                ->setNormalizer('default_locale', LazyOption::findOneBy($localeRepository, 'code'))
                 ->setDefault('locales', LazyOption::all($localeRepository))
                 ->setAllowedTypes('locales', 'array')
                 ->setNormalizer('locales', LazyOption::findBy($localeRepository, 'code'))
+                ->setDefault('default_currency', function (Options $options) {
+                    return $this->faker->randomElement($options['currencies']);
+                })
+                ->setAllowedTypes('default_currency', CurrencyInterface::class)
+                ->setNormalizer('default_currency', LazyOption::findOneBy($currencyRepository, 'code'))
                 ->setDefault('currencies', LazyOption::all($currencyRepository))
                 ->setAllowedTypes('currencies', 'array')
                 ->setNormalizer('currencies', LazyOption::findBy($currencyRepository, 'code'))
@@ -106,10 +118,12 @@ final class ChannelExampleFactory implements ExampleFactoryInterface
         $channel->setColor($options['color']);
         $channel->setTaxCalculationStrategy($options['tax_calculation_strategy']);
 
+        $channel->setDefaultLocale($options['default_locale']);
         foreach ($options['locales'] as $locale) {
             $channel->addLocale($locale);
         }
 
+        $channel->setDefaultCurrency($options['default_currency']);
         foreach ($options['currencies'] as $currency) {
             $channel->addCurrency($currency);
         }
