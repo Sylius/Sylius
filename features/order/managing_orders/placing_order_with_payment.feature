@@ -1,8 +1,8 @@
 @managing_orders
-Feature: Finalizing order payment
-    In order to mark order's payment state as complete
+Feature: Payments are in the state "new" after checkout
+    In order to correctly process customer's payments
     As an Administrator
-    I want to be able to finalize payment
+    I want to have new payments after my customer's checkout
 
     Background:
         Given the store operates on a single channel in "France"
@@ -16,14 +16,6 @@ Feature: Finalizing order payment
         And I am logged in as an administrator
 
     @ui
-    Scenario: Finalizing order's payment
-        Given I view the summary of the order "#00000666"
-        When I mark this order as a paid
-        Then I should be notified that the order's payment has been successfully completed
-        And it should have payment state "Completed"
-
-    @ui
-    Scenario: Unable to finalize completed order's payment
-        Given this order is already paid
+    Scenario: Checking payment state of a placed order
         When I view the summary of the order "#00000666"
-        Then I should not be able to mark this order as paid again
+        Then it should have payment state "New"

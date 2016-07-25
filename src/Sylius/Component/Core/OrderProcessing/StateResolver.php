@@ -46,7 +46,6 @@ class StateResolver implements StateResolverInterface
                 if ($payments->exists(function ($key, $payment) {
                     return in_array($payment->getState(), [
                         PaymentInterface::STATE_PROCESSING,
-                        PaymentInterface::STATE_PENDING,
                     ]);
                 })) {
                     $paymentState = PaymentInterface::STATE_PROCESSING;

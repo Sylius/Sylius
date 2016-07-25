@@ -449,13 +449,13 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then it should have completed payment state
+     * @Then it should have payment state :paymentState
      */
-    public function itShouldHaveCompletedPaymentState()
+    public function itShouldHavePaymentState($paymentState)
     {
         Assert::true(
-            $this->showPage->hasPayment('Completed'),
-            'It should have payment with completed state.'
+            $this->showPage->hasPayment($paymentState),
+            sprintf('It should have payment with %s state', $paymentState)
         );
     }
 

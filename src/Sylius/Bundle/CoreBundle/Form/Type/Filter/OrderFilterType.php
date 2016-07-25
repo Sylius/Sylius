@@ -70,7 +70,6 @@ class OrderFilterType extends AbstractType
                 'empty_value' => 'sylius.form.order_filter.payment_state',
                 'choices' => [
                     PaymentInterface::STATE_NEW => 'sylius.payment.state.new',
-                    PaymentInterface::STATE_PENDING => 'sylius.payment.state.pending',
                     PaymentInterface::STATE_PROCESSING => 'sylius.payment.state.processing',
                     PaymentInterface::STATE_COMPLETED => 'sylius.payment.state.completed',
                     PaymentInterface::STATE_FAILED => 'sylius.payment.state.failed',
