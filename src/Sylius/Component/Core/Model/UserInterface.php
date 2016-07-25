@@ -37,14 +37,4 @@ interface UserInterface extends BaseUserInterface, IdentityInterface, CustomerAw
      * @return bool
      */
     public function hasAuthorizationRole(RoleInterface $role);
-    
-    /**
-     * @return CustomerInterface
-     */
-    public function getCustomer();
-    
-    /**
-     * @param CustomerInterface $customer
-     */
-    public function setCustomer(CustomerInterface $customer = null);
 }
