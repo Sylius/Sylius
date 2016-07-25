@@ -82,9 +82,9 @@ final class ShippingMethodExampleFactory implements ExampleFactoryInterface
                 ->setDefault('zone', LazyOption::randomOne($zoneRepository))
                 ->setAllowedTypes('zone', ['null', 'string', ZoneInterface::class])
                 ->setNormalizer('zone', LazyOption::findOneBy($zoneRepository, 'code'))
-                ->setDefined('shipping_category')
-                ->setAllowedTypes('shipping_category', ['null', 'string', ShippingCategoryInterface::class])
-                ->setNormalizer('shipping_category', LazyOption::findOneBy($shippingCategoryRepository, 'code'))
+                ->setDefined('category')
+                ->setAllowedTypes('category', ['null', 'string', ShippingCategoryInterface::class])
+                ->setNormalizer('category', LazyOption::findOneBy($shippingCategoryRepository, 'code'))
                 ->setDefault('calculator', function (Options $options) {
                     return ['type' => DefaultCalculators::FLAT_RATE, 'configuration' => ['amount' => $this->faker->randomNumber(4)]];
                 })
@@ -106,8 +106,8 @@ final class ShippingMethodExampleFactory implements ExampleFactoryInterface
         $shippingMethod->setCalculator($options['calculator']['type']);
         $shippingMethod->setConfiguration($options['calculator']['configuration']);
 
-        if (array_key_exists('shipping_category', $options)) {
-            $shippingMethod->setCategory($options['shipping_category']);
+        if (array_key_exists('category', $options)) {
+            $shippingMethod->setCategory($options['category']);
         }
 
         foreach ($this->getLocales() as $localeCode) {
