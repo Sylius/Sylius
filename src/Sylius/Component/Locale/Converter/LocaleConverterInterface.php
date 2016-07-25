@@ -14,7 +14,7 @@ namespace Sylius\Component\Locale\Converter;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-interface LocaleNameConverterInterface
+interface LocaleConverterInterface
 {
     /**
      * @param string $name
@@ -24,5 +24,15 @@ interface LocaleNameConverterInterface
      *
      * @throws \InvalidArgumentException
      */
-    public function convertToCode($name, $locale = 'en');
+    public function convertNameToCode($name, $locale = 'en');
+
+    /**
+     * @param string $code
+     * @param string $locale
+     *
+     * @return string
+     *
+     * @throws \InvalidArgumentException
+     */
+    public function convertCodeToName($code, $locale = 'en');
 }
