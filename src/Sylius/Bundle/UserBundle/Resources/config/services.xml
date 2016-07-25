@@ -52,6 +52,8 @@
         <parameter key="sylius.controller.user_security.class">Sylius\Bundle\UserBundle\Controller\SecurityController</parameter>
 
         <parameter key="sylius.form.model.change_password.class">Sylius\Bundle\UserBundle\Form\Model\ChangePassword</parameter>
+
+        <parameter key="sylius.form.event_subscriber.add_user_type.class">Sylius\Bundle\UserBundle\Form\EventSubscriber\AddUserFormSubscriber</parameter>
     </parameters>
 
     <services>
@@ -145,6 +147,9 @@
             <argument type="service" id="event_dispatcher" />
             <tag name="kernel.event_listener" event="sylius.customer.post_register" method="sendVerificationEmail" />
         </service>
+
+        <!-- Event Subscribers -->
+        <service id="sylius.form.event_subscriber.add_user_type" class="%sylius.form.event_subscriber.add_user_type.class%" />
 
         <!-- User Providers -->
         <service id="sylius.user_provider.email" class="%sylius.user_provider.email.class%">

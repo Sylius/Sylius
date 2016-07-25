@@ -124,7 +124,6 @@
 
         <!-- Form subscriber -->
         <parameter key="sylius.form.event_subscriber.set_customer_type.class">Sylius\Bundle\CoreBundle\Form\EventSubscriber\SetCustomerFormSubscriber</parameter>
-        <parameter key="sylius.form.event_subscriber.add_user_type.class">Sylius\Bundle\UserBundle\Form\EventSubscriber\CoreUserFormSubscriber</parameter>
 
         <!-- Data fetchers -->
         <parameter key="sylius.form.type.data_fetcher.number_of_orders.class">Sylius\Bundle\CoreBundle\Form\Type\DataFetcher\NumberOfOrdersType</parameter>
@@ -518,7 +517,6 @@
         <service id="sylius.form.event_subscriber.set_customer" class="%sylius.form.event_subscriber.set_customer_type.class%">
             <argument type="service" id="sylius.repository.customer" />
         </service>
-        <service id="sylius.form.event_subscriber.add_user_type" class="%sylius.form.event_subscriber.add_user_type.class%" />
 
         <!-- Data fetchers -->
         <service id="sylius.form.type.data_fetcher.user_registration" class="%sylius.form.type.data_fetcher.user_registration.class%">
