@@ -101,6 +101,15 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
+     * @When I choose :currency as a default currency
+     * @When I do not choose default currency
+     */
+    public function iChooseAsADefaultCurrency($currency = null)
+    {
+        $this->createPage->chooseDefaultCurrency($currency);
+    }
+
+    /**
      * @When I add it
      * @When I try to add it
      */
@@ -174,7 +183,7 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
-     * @Then I should be notified that at least one channel has to be defined is required
+     * @Then I should be notified that at least one channel has to be defined
      */
     public function iShouldBeNotifiedThatAtLeastOneChannelHasToBeDefinedIsRequired()
     {
@@ -198,14 +207,17 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
-     * @Then I should be notified that :element is required
+     * @Then /^I should be notified that ([^"]+) is required$/
      */
     public function iShouldBeNotifiedThatIsRequired($element)
     {
         /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
-        Assert::same($currentPage->getValidationMessage($element), sprintf('Please enter channel %s.', $element));
+        Assert::same(
+            $currentPage->getValidationMessage($this->getNormalizedElementName($element)),
+            sprintf('Please enter channel %s.', $element)
+        );
     }
 
     /**
@@ -522,5 +534,15 @@ final class ManagingChannelsContext implements Context
                 ]
             ), sprintf('Channel with name %s and state %s has not been found.', $channel->getName(), $state)
         );
+    }
+
+    /**
+     * @param string $elementName
+     *
+     * @return string
+     */
+    private function getNormalizedElementName($elementName)
+    {
+        return str_replace(' ', '_', $elementName);
     }
 }

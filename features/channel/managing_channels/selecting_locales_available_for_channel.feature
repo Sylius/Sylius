@@ -6,6 +6,7 @@ Feature: Selecting available locales for a channel
 
     Background:
         Given the store has locale "Norwegian (Norway)"
+        And the store has currency "Euro"
         And I am logged in as an administrator
 
     @ui
@@ -14,6 +15,7 @@ Feature: Selecting available locales for a channel
         When I specify its code as "MOBILE"
         And I name it "Mobile channel"
         And I make it available in "Norwegian (Norway)"
+        And I choose "Euro" as a default currency
         And I add it
         Then I should be notified that it has been successfully created
         And the channel "Mobile channel" should be available in "Norwegian (Norway)"
