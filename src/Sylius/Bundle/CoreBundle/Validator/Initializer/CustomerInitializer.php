@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CustomerBundle\Validator\Initializer;
+namespace Sylius\Bundle\CoreBundle\Validator\Initializer;
 
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
-use Sylius\Component\Customer\Model\CustomerInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
 use Symfony\Component\Validator\ObjectInitializerInterface;
 
 /**

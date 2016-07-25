@@ -17,21 +17,12 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius.form.type.gender.class">Sylius\Bundle\UserBundle\Form\Type\GenderType</parameter>
-        <parameter key="sylius.listener.customer_aware.class">Sylius\Bundle\UserBundle\EventListener\CustomerAwareListener</parameter>
-        <parameter key="sylius.form.event_subscriber.set_customer_type.class">Sylius\Bundle\UserBundle\Form\EventSubscriber\SetCustomerFormSubscriber</parameter>
-        <parameter key="sylius.user.validator.customer_initializer.class">Sylius\Bundle\UserBundle\Validator\Initializer\CustomerInitializer</parameter>
+        <parameter key="sylius.form.type.gender.class">Sylius\Bundle\CustomerBundle\Form\Type\GenderType</parameter>
     </parameters>
 
     <services>
         <service id="sylius.form.type.gender" class="%sylius.form.type.gender.class%">
             <tag name="form.type" alias="sylius_gender" />
-        </service>
-
-        <!-- Validators -->
-        <service id="sylius.user.validator.customer_initializer" class="%sylius.user.validator.customer_initializer.class%">
-            <argument type="service" id="sylius.user.canonicalizer" />
-            <tag name="validator.initializer" />
         </service>
     </services>
 
