@@ -34,45 +34,45 @@ final class LocaleContext implements Context
     }
 
     /**
-     * @When I switch to the :localeCode locale
+     * @When I switch to the :localeName locale
      */
-    public function iSwitchTheLocaleToTheLocale($localeCode)
+    public function iSwitchTheLocaleToTheLocale($localeName)
     {
         $this->homePage->open();
-        $this->homePage->switchLocale($localeCode);
+        $this->homePage->switchLocale($localeName);
     }
 
     /**
-     * @Then I should (still) shop using the :localeCode locale
+     * @Then I should (still) shop using the :localeName locale
      */
-    public function iShouldShopUsingTheLocale($localeCode)
+    public function iShouldShopUsingTheLocale($localeName)
     {
         $this->homePage->open();
 
-        Assert::same($localeCode, $this->homePage->getActiveLocale());
+        Assert::same($localeName, $this->homePage->getActiveLocale());
     }
 
     /**
-     * @Then I should be able to shop using the :localeCode locale
+     * @Then I should be able to shop using the :localeName locale
      */
-    public function iShouldBeAbleToShopUsingTheLocale($localeCode)
+    public function iShouldBeAbleToShopUsingTheLocale($localeName)
     {
         $this->homePage->open();
 
-        Assert::oneOf($localeCode, $this->homePage->getAvailableLocales());
+        Assert::oneOf($localeName, $this->homePage->getAvailableLocales());
     }
 
     /**
-     * @Then I should not be able to shop using the :localeCode locale
+     * @Then I should not be able to shop using the :localeName locale
      */
-    public function iShouldNotBeAbleToShopUsingTheLocale($localeCode)
+    public function iShouldNotBeAbleToShopUsingTheLocale($localeName)
     {
         $this->homePage->open();
 
-        if (in_array($localeCode, $this->homePage->getAvailableLocales(), true)) {
+        if (in_array($localeName, $this->homePage->getAvailableLocales(), true)) {
             throw new \InvalidArgumentException(sprintf(
                 'Expected "%s" not to be in "%s"',
-                $localeCode,
+                $localeName,
                 implode('", "', $this->homePage->getAvailableLocales())
             ));
         }

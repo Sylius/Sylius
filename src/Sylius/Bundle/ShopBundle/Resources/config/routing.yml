@@ -39,6 +39,11 @@ sylius_shop_switch_currency:
     defaults:
         _controller: sylius.controller.shop.currency:switchCurrencyAction
 
+sylius_shop_switch_locale:
+    path: /switch-locale/{code}
+    defaults:
+        _controller: sylius.controller.shop.locale:switchLocaleAction
+
 sylius_shop_partial:
     resource: "@SyliusShopBundle/Resources/config/routing/partial.yml"
     prefix: /_partial

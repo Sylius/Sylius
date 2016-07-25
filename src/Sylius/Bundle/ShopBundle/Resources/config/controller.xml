@@ -19,6 +19,7 @@
     <parameters>
         <parameter key="sylius.controller.shop.homepage.class">Sylius\Bundle\ShopBundle\Controller\HomepageController</parameter>
         <parameter key="sylius.controller.shop.currency.class">Sylius\Bundle\ShopBundle\Controller\CurrencyController</parameter>
+        <parameter key="sylius.controller.shop.locale.class">Sylius\Bundle\ShopBundle\Controller\LocaleController</parameter>
     </parameters>
 
     <services>
@@ -32,6 +33,14 @@
             <argument type="service" id="sylius.currency_provider" />
             <argument type="service" id="sylius.context.channel" />
             <argument type="service" id="sylius.storage.currency" />
+        </service>
+
+        <service id="sylius.controller.shop.locale" class="%sylius.controller.shop.locale.class%">
+            <argument type="service" id="templating" />
+            <argument type="service" id="sylius.context.locale" />
+            <argument type="service" id="sylius.locale_provider" />
+            <argument type="service" id="sylius.context.channel" />
+            <!--<argument type="service" id="sylius.storage.locale" />-->
         </service>
     </services>
 
