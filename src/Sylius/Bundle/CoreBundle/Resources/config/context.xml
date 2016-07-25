@@ -62,5 +62,9 @@
                 </argument>
             </call>
         </service>
+
+        <service id="sylius.storage.locale" class="Sylius\Component\Core\Currency\LocaleStorage">
+            <argument type="service" id="sylius.storage.session" />
+        </service>
     </services>
 </container>
