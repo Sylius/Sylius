@@ -186,6 +186,6 @@ class ORMTranslatableListener extends AbstractTranslatableListener implements Ev
         }
 
         $entity->setCurrentLocale($this->localeProvider->getCurrentLocale());
-        $entity->setFallbackLocale($this->localeProvider->getFallbackLocale());
+        $entity->setFallbackLocale($this->localeProvider->getDefaultLocale());
     }
 }

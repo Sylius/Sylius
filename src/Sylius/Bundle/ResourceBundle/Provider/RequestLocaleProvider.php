@@ -66,18 +66,10 @@ class RequestLocaleProvider implements LocaleProviderInterface, EventSubscriberI
     public function getCurrentLocale()
     {
         if (null === $this->request) {
-            return $this->getFallbackLocale();
+            return $this->getDefaultLocale();
         }
 
         return $this->request->getLocale();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getFallbackLocale()
-    {
-        return $this->defaultLocale;
     }
 
     /**

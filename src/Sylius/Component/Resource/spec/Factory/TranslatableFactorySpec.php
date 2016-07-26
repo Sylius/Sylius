@@ -56,13 +56,12 @@ final class TranslatableFactorySpec extends ObjectBehavior
 
     function it_creates_translatable_and_sets_locales(FactoryInterface $factory, LocaleProviderInterface $localeProvider, SampleTranslatableResource $resource)
     {
-        $localeProvider->getCurrentLocale()->willReturn('pl_PL');
-        $localeProvider->getFallbackLocale()->willReturn('en_GB');
+        $localeProvider->getDefaultLocale()->willReturn('pl_PL');
 
         $factory->createNew()->willReturn($resource);
 
         $resource->setCurrentLocale('pl_PL')->shouldBeCalled();
-        $resource->setFallbackLocale('en_GB')->shouldBeCalled();
+        $resource->setFallbackLocale('pl_PL')->shouldBeCalled();
 
         $this->createNew()->shouldReturn($resource);
     }

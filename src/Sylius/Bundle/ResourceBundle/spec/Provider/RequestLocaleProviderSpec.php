@@ -38,11 +38,6 @@ final class RequestLocaleProviderSpec extends ObjectBehavior
         $this->getSubscribedEvents()->shouldReturn([KernelEvents::REQUEST => [['onKernelRequest', 34]]]);
     }
 
-    function it_returns_fallback_locale()
-    {
-        $this->getFallbackLocale()->shouldReturn('en_US');
-    }
-
     function it_returns_default_locale()
     {
         $this->getDefaultLocale()->shouldReturn('en_US');

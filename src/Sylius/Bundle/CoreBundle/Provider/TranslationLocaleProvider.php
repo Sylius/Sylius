@@ -45,14 +45,6 @@ final class TranslationLocaleProvider implements LocaleProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function getFallbackLocale()
-    {
-        return $this->localeContext->getLocaleCode();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getDefaultLocale()
     {
         return $this->localeContext->getLocaleCode();

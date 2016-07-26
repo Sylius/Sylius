@@ -51,8 +51,8 @@ class TranslatableFactory implements TranslatableFactoryInterface
             throw new UnexpectedTypeException($resource, TranslatableInterface::class);
         }
 
-        $resource->setCurrentLocale($this->localeProvider->getCurrentLocale());
-        $resource->setFallbackLocale($this->localeProvider->getFallbackLocale());
+        $resource->setCurrentLocale($this->localeProvider->getDefaultLocale());
+        $resource->setFallbackLocale($this->localeProvider->getDefaultLocale());
 
         return $resource;
     }
