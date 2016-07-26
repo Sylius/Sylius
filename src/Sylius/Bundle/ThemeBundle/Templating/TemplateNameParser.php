@@ -60,11 +60,17 @@ final class TemplateNameParser implements TemplateNameParserInterface
             return $this->cache[$name];
         }
 
-        if (!preg_match('/^@([^\/]*)(?:\/(.+))?\/(.+)\.([^\.]+)\.([^\.]+)$/', $name, $matches)) {
+        if (!preg_match('/^(?:@([^\/]*)|)(?:\/(.+))?\/(.+)\.([^\.]+)\.([^\.]+)$/', $name, $matches)) {
             return $this->decoratedParser->parse($name);
         }
 
-        $template = new TemplateReference($matches[1] . 'Bundle', $matches[2], $matches[3], $matches[4], $matches[5]);
+        $template = new TemplateReference(
+            $matches[1] ? $matches[1] . 'Bundle' : '',
+            $matches[2],
+            $matches[3],
+            $matches[4],
+            $matches[5]
+        );
 
         if ($template->get('bundle')) {
             try {

@@ -37,15 +37,22 @@ final class TemplateNameParserSpec extends ObjectBehavior
         $this->parse($templateReference)->shouldReturn($templateReference);
     }
 
-    function it_delegates_not_namespaced_paths_to_decorated_parser(
+    function it_delegates_logical_paths_to_decorated_parser(
         TemplateNameParserInterface $decoratedParser,
         TemplateReferenceInterface $templateReference
     ) {
         $decoratedParser->parse('Bundle:Not:namespaced.html.twig')->willReturn($templateReference);
-        $decoratedParser->parse('/Not/namespaced.html.twig')->willReturn($templateReference);
 
         $this->parse('Bundle:Not:namespaced.html.twig')->shouldReturn($templateReference);
-        $this->parse('/Not/namespaced.html.twig')->shouldReturn($templateReference);
+    }
+
+    function it_delegates_unknown_paths_to_decorated_parser(
+        TemplateNameParserInterface $decoratedParser,
+        TemplateReferenceInterface $templateReference
+    ) {
+        $decoratedParser->parse('Bundle/Not/namespaced.html.twig')->willReturn($templateReference);
+
+        $this->parse('Bundle/Not/namespaced.html.twig')->shouldReturn($templateReference);
     }
 
     function it_generates_template_references_from_namespaced_paths(KernelInterface $kernel)
@@ -64,5 +71,13 @@ final class TemplateNameParserSpec extends ObjectBehavior
         $kernel->getBundle('AcmeBundle')->willThrow(\Exception::class);
 
         $this->shouldThrow(\InvalidArgumentException::class)->during('parse', ['@Acme/app.html.twig']);
+    }
+
+    function it_generates_template_references_from_root_namespaced_paths()
+    {
+        $this->parse('/app.html.twig')->shouldBeLike(new TemplateReference('', '', 'app', 'html', 'twig'));
+        $this->parse('/Directory/app.html.twig')->shouldBeLike(new TemplateReference('', 'Directory', 'app', 'html', 'twig'));
+        $this->parse('/Nested/Directory/app.html.twig')->shouldBeLike(new TemplateReference('', 'Nested/Directory', 'app', 'html', 'twig'));
+        $this->parse('/Directory.WithDot/app.html.twig')->shouldBeLike(new TemplateReference('', 'Directory.WithDot', 'app', 'html', 'twig'));
     }
 }
