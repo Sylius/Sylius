@@ -11,6 +11,7 @@
 * :doc:`/book/countries`
 * :doc:`/book/zones`
 * :doc:`/book/products`
+* :doc:`/book/attributes`
 * :doc:`/book/addresses`
 * :doc:`/book/inventory`
 * :doc:`/book/orders`

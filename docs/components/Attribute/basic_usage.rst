@@ -11,7 +11,7 @@ of the :ref:`component_attribute_model_attribute-subject-interface`.
 
    <?php
 
-   namespace Example\Model;
+   namespace App\Model;
 
    use Sylius\Component\Attribute\Model\AttributeSubjectInterface;
    use Sylius\Component\Attribute\Model\AttributeValueInterface;
@@ -130,7 +130,7 @@ Once we have our class we can characterize it with attributes.
 
    <?php
 
-   use Example\Model\Shirt;
+   use App\Model\Shirt;
    use Sylius\Component\Attribute\Model\Attribute;
    use Sylius\Component\Attribute\Model\AttributeValue;
    use Sylius\Component\Attribute\AttributeType\TextAttributeType;
