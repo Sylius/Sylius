@@ -65,6 +65,7 @@ sylius:
         available_on_hand: Available on hand
         available_until: 'Available until'
         average_order_value: Average order value
+        awaiting_payment: Awaiting payment
         back: Back
         back_to_store: Back to store
         backorder: Backorder
@@ -515,7 +516,9 @@ sylius:
         overview_of_your_store: 'Overview of your store'
         page: Page
         pages: Pages
+        paid: Paid
         parent: Parent
+        partially_paid: Partially paid
         partially_shipped: Partially shipped
         password: Password
         payment: Payment

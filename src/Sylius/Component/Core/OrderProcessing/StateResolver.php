@@ -15,6 +15,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderShippingStates;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
+use Sylius\Component\Core\OrderPaymentStates;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -26,8 +27,6 @@ class StateResolver implements StateResolverInterface
      */
     public function resolvePaymentState(OrderInterface $order)
     {
-        $paymentState = PaymentInterface::STATE_NEW;
-
         if ($order->hasPayments()) {
             $payments = $order->getPayments();
             $completedPaymentTotal = 0;
@@ -38,22 +37,26 @@ class StateResolver implements StateResolverInterface
                 }
             }
 
-            if ($completedPaymentTotal >= $order->getTotal()) {
-                // Payment is completed if we have received full amount.
-                $paymentState = PaymentInterface::STATE_COMPLETED;
-            } else {
-                // Payment is processing if one of the payment is.
-                if ($payments->exists(function ($key, $payment) {
-                    return in_array($payment->getState(), [
-                        PaymentInterface::STATE_PROCESSING,
-                    ]);
-                })) {
-                    $paymentState = PaymentInterface::STATE_PROCESSING;
-                }
+            if (OrderInterface::STATE_CANCELLED === $order->getState()) {
+                $order->setPaymentState(OrderPaymentStates::STATE_CANCELLED);
+
+                return;
+            }
+
+            if (OrderInterface::STATE_FULFILLED === $order->getState() && $completedPaymentTotal >= $order->getTotal()) {
+                $order->setPaymentState(OrderPaymentStates::STATE_PAID);
+
+                return;
+            }
+
+            if ($completedPaymentTotal < $order->getTotal() && 0 < $completedPaymentTotal) {
+                $order->setPaymentState(OrderPaymentStates::STATE_PARTIALLY_PAID);
+
+                return;
             }
         }
 
-        $order->setPaymentState($paymentState);
+        $order->setPaymentState(OrderPaymentStates::STATE_AWAITING_PAYMENT);
     }
 
     /**

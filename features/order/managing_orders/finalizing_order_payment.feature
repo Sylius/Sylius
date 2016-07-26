@@ -28,7 +28,7 @@ Feature: Finalizing order payment
         When I view the summary of the order "#00000666"
         Then I should not be able to mark this order as paid again
 
-    @todo
+    @ui
     Scenario: Checking order payment state of a completed order
         Given I view the summary of the order "#00000666"
         And I mark this order as a paid

@@ -53,6 +53,10 @@ winzou_state_machine:
                     on: ["complete"]
                     do: ["@sm.callback.cascade_transition", "apply"]
                     args: ["object.getPayments()", "event", "'create'", "'sylius_payment'"]
+                sylius_create_payment:
+                    on: ["complete"]
+                    do: ["@sm.callback.cascade_transition", "apply"]
+                    args: ["object.getPayments()", "event", "'request_payment'", "'sylius_order_payment'"]
 
     sylius_order_shipping:
         class: "%sylius.model.order.class%"
@@ -94,33 +98,24 @@ winzou_state_machine:
         graph: sylius_order_payment
         state_machine_class: "%sylius.state_machine.class%"
         states:
-            new: ~
-            pending: ~
-            processing: ~
-            completed: ~
-            void: ~
-            failed: ~
+            cart: ~
+            awaiting_payment: ~
+            partially_paid: ~
             cancelled: ~
-            refunded: ~
+            paid: ~
         transitions:
-            create:
-                from: [new]
-                to: pending
-            process:
-                from: [new, pending]
-                to: processing
-            complete:
-                from: [pending, processing]
-                to: completed
-            fail:
-                from: [pending, processing]
-                to: failed
+            request_payment:
+                from: [cart]
+                to: awaiting_payment
+            partially_pay:
+                from: [awaiting_payment]
+                to: partially_paid
             cancel:
-                from: [new, pending, processing]
+                from: [awaiting_payment]
                 to: cancelled
-            refund:
-                from: [completed]
-                to: refunded
+            pay:
+                from: [awaiting_payment, partially_paid]
+                to: paid
 
     sylius_payment:
         callbacks:

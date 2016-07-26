@@ -11,9 +11,15 @@
 
 namespace Sylius\Component\Core;
 
-use Sylius\Component\Payment\PaymentTransitions;
-
-class OrderPaymentTransitions extends PaymentTransitions
+/**
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
+ */
+final class OrderPaymentTransitions
 {
     const GRAPH = 'sylius_order_payment';
+
+    const TRANSITION_REQUEST_PAYMENT = 'request_payment';
+    const TRANSITION_PARTIALLY_PAY = 'partially_pay';
+    const TRANSITION_CANCEL = 'cancel';
+    const TRANSITION_PAY = 'pay';
 }

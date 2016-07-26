@@ -585,4 +585,15 @@ final class ManagingOrdersContext implements Context
             sprintf('It should have shipment with %s state', $shipmentState)
         );
     }
+
+    /**
+     * @Then this order should have order payment state :orderPaymentState
+     */
+    public function thisOrderShouldHavePaymentState($orderPaymentState)
+    {
+        Assert::true(
+            $this->indexPage->isSingleResourceOnPage(['payment state' => $orderPaymentState]),
+            sprintf('Cannot find order with "%s" order payment state in the list.', $orderPaymentState)
+        );
+    }
 }
