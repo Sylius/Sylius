@@ -294,6 +294,15 @@ final class CartContext implements Context
     }
 
     /**
+     * @When /^I add (\d+) of (them) to (the|my) cart$/
+     */
+    public function iAddQuantityOfProductsToTheCart($quantity, ProductInterface $product)
+    {
+        $this->productShowPage->open(['slug' => $product->getSlug()]);
+        $this->productShowPage->addToCartWithQuantity($quantity);
+    }
+
+    /**
      * @Given I have :quantity products :product in the cart
      * @When I add :quantity products :product to the cart
      */

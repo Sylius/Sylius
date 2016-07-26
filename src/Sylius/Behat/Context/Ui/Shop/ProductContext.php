@@ -163,4 +163,26 @@ final class ProductContext implements Context
             'There should appear information about empty list of products, but it does not.'
         );
     }
+
+    /**
+     * @Then I should see that it is out of stock
+     */
+    public function iShouldSeeItIsOutOfStock()
+    {
+        Assert::true(
+            $this->showPage->isOutOfStock(),
+            'Out of stock label should be visible.'
+        );
+    }
+
+    /**
+     * @Then I should be unable to add it to the cart
+     */
+    public function iShouldBeUnableToAddItToTheCart()
+    {
+        Assert::false(
+            $this->showPage->hasAddToCartButton(),
+            'Add to cart button should not be visible.'
+        );
+    }
 }

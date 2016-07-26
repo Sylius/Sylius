@@ -321,6 +321,24 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Given /^there (?:is|are) (\d+) item(?:s) of (product "([^"]+)") available in the inventory$/
+     */
+    public function thereIsQuantityOfProducts($quantity, ProductInterface $product)
+    {
+        $this->setProductsQuantity($product, $quantity);
+    }
+
+    /**
+     * @Given /^the (product "([^"]+)") is not available at the moment$/
+     */
+    public function theProductIsNotAvailable(ProductInterface $product)
+    {
+        $product->getFirstVariant()->setAvailableOnDemand(false);
+
+        $this->setProductsQuantity($product, 0);
+    }
+
+    /**
      * @Given /^(this product) is available in "([^"]+)" size priced at ("[^"]+")$/
      */
     public function thisProductIsAvailableInSize(ProductInterface $product, $optionValueName, $price)
@@ -412,6 +430,17 @@ final class ProductContext implements Context
         $product->getFirstVariant()->setCode($product->getCode());
 
         return $product;
+    }
+
+    /**
+     * @param ProductInterface $product
+     * @param int $quantity
+     */
+    private function setProductsQuantity(ProductInterface $product, $quantity)
+    {
+        $product->getFirstVariant()->setOnHand($quantity);
+
+        $this->saveProduct($product);
     }
 
     /**

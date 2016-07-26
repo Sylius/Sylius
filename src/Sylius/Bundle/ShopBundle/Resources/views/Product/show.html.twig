@@ -21,7 +21,9 @@
         <div class="ui basic segment">
             <p>{{ product.shortDescription }}</p>
         </div>
-        {% include '@SyliusShop/Product/Show/_addToCart.html.twig' %}
+        <div class="ui segment">
+            {% include '@SyliusShop/Product/Show/_inventory.html.twig' %}
+        </div>
         <div class="ui hidden divider"></div>
     </div>
 </div>
