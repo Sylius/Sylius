@@ -69,6 +69,7 @@ final class SyliusThemeExtension extends Extension implements PrependExtensionIn
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config/services'));
 
         $this->prependSyliusSettings($container, $loader);
+        $this->prependTwig($container, $loader);
     }
 
     /**
@@ -104,6 +105,19 @@ final class SyliusThemeExtension extends Extension implements PrependExtensionIn
         }
 
         $loader->load('integration/settings.xml');
+    }
+
+    /**
+     * @param ContainerBuilder $container
+     * @param LoaderInterface $loader
+     */
+    private function prependTwig(ContainerBuilder $container, LoaderInterface $loader)
+    {
+        if (!$container->hasExtension('twig')) {
+            return;
+        }
+
+        $loader->load('integration/twig.xml');
     }
 
     /**
