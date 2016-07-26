@@ -21,4 +21,8 @@ final class OrderPaymentStates
     const STATE_PARTIALLY_PAID = 'partially_paid';
     const STATE_CANCELLED = 'cancelled';
     const STATE_PAID = 'paid';
+
+    private function __construct()
+    {
+    }
 }

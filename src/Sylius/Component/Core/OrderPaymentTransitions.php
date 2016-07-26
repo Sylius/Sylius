@@ -22,4 +22,8 @@ final class OrderPaymentTransitions
     const TRANSITION_PARTIALLY_PAY = 'partially_pay';
     const TRANSITION_CANCEL = 'cancel';
     const TRANSITION_PAY = 'pay';
+
+    private function __construct()
+    {
+    }
 }
