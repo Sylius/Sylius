@@ -4,6 +4,13 @@ Sylius\Component\Core\Model\Channel:
         name: "Web Channel"
         hostname: "localhost"
         description: "Lorem ipsum"
+        defaultCurrency: "@currency"
         color: "black"
         enabled: true
         taxCalculationStrategy: "order_items_based"
+
+Sylius\Component\Currency\Model\Currency:
+    currency:
+        code: EUR
+        exchangeRate: 1
+        enabled: true
