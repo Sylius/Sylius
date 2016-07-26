@@ -11,19 +11,27 @@
 
 namespace Sylius\Component\Core\Repository;
 
-use Pagerfanta\Pagerfanta;
-use Sylius\Component\Customer\Repository\CustomerRepositoryInterface as BaseCustomerRepositoryInterface;
+use Pagerfanta\PagerfantaInterface;
+use Sylius\Component\Core\Model\UserInterface;
+use Sylius\Component\User\Repository\UserRepositoryInterface as BaseUserRepositoryInterface;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-interface CustomerRepositoryInterface extends BaseCustomerRepositoryInterface
+interface UserRepositoryInterface extends BaseUserRepositoryInterface
 {
     /**
      * @param array $criteria
      * @param array $sorting
      *
-     * @return Pagerfanta
+     * @return PagerfantaInterface
      */
     public function createFilterPaginator(array $criteria = null, array $sorting = null);
+
+    /**
+     * @param mixed $id
+     *
+     * @return UserInterface|null
+     */
+    public function findForDetailsPage($id);
 }

@@ -738,6 +738,7 @@ sylius_user:
         user:
             classes:
                 model: Sylius\Component\Core\Model\User
+                repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\UserRepository
                 form:
                     default: Sylius\Bundle\UserBundle\Form\Type\UserType
 
