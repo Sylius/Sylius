@@ -29,11 +29,18 @@ final class ChannelBasedLocaleProvider implements LocaleProviderInterface
     private $channelContext;
 
     /**
-     * @param ChannelContextInterface $channelContext
+     * @var string
      */
-    public function __construct(ChannelContextInterface $channelContext)
+    private $defaultLocaleCode;
+
+    /**
+     * @param ChannelContextInterface $channelContext
+     * @param string $defaultLocaleCode
+     */
+    public function __construct(ChannelContextInterface $channelContext, $defaultLocaleCode)
     {
         $this->channelContext = $channelContext;
+        $this->defaultLocaleCode = $defaultLocaleCode;
     }
 
     /**
@@ -45,20 +52,18 @@ final class ChannelBasedLocaleProvider implements LocaleProviderInterface
             /** @var ChannelInterface $channel */
             $channel = $this->channelContext->getChannel();
 
-            $locales = $channel
+            return $channel
                 ->getLocales()
                 ->filter(function (LocaleInterface $locale) {
                     return $locale->isEnabled();
                 })
+                ->map(function (LocaleInterface $locale) {
+                    return $locale->getCode();
+                })
                 ->toArray()
             ;
-
-            return array_map(
-                function (LocaleInterface $locale) { return $locale->getCode(); },
-                $locales
-            );
         } catch (ChannelNotFoundException $exception) {
-            throw new LocaleNotFoundException(null, $exception);
+            return [$this->defaultLocaleCode];
         }
     }
 
@@ -73,7 +78,7 @@ final class ChannelBasedLocaleProvider implements LocaleProviderInterface
 
             return $channel->getDefaultLocale()->getCode();
         } catch (ChannelNotFoundException $exception) {
-            throw new LocaleNotFoundException(null, $exception);
+            return $this->defaultLocaleCode;
         }
     }
 }

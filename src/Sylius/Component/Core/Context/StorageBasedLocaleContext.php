@@ -12,6 +12,7 @@
 namespace Sylius\Component\Core\Context;
 
 use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Locale\LocaleStorageInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
@@ -58,7 +59,12 @@ final class StorageBasedLocaleContext implements LocaleContextInterface
     public function getLocaleCode()
     {
         $availableLocalesCodes = $this->localeProvider->getAvailableLocalesCodes();
-        $localeCode = $this->localeStorage->get($this->channelContext->getChannel());
+
+        try {
+            $localeCode = $this->localeStorage->get($this->channelContext->getChannel());
+        } catch (ChannelNotFoundException $exception) {
+            throw new LocaleNotFoundException(null, $exception);
+        }
 
         if (!in_array($localeCode, $availableLocalesCodes, true)) {
             throw LocaleNotFoundException::notAvailable($localeCode, $availableLocalesCodes);

@@ -30,7 +30,7 @@ final class ChannelBasedLocaleProviderSpec extends ObjectBehavior
 {
     function let(ChannelContextInterface $channelContext)
     {
-        $this->beConstructedWith($channelContext);
+        $this->beConstructedWith($channelContext, 'pl_PL');
     }
 
     function it_is_initializable()
@@ -59,9 +59,17 @@ final class ChannelBasedLocaleProviderSpec extends ObjectBehavior
         $enabledLocale->isEnabled()->willReturn(true);
         $disabledLocale->isEnabled()->willReturn(false);
 
-        $enabledLocale->getCode()->willReturn('BTC');
+        $enabledLocale->getCode()->willReturn('en_US');
 
-        $this->getAvailableLocalesCodes()->shouldReturn(['BTC']);
+        $this->getAvailableLocalesCodes()->shouldReturn(['en_US']);
+    }
+
+    function it_returns_the_default_locale_as_the_available_one_if_channel_cannot_be_determined(
+        ChannelContextInterface $channelContext
+    ) {
+        $channelContext->getChannel()->willThrow(ChannelNotFoundException::class);
+
+        $this->getAvailableLocalesCodes()->shouldReturn(['pl_PL']);
     }
 
     function it_returns_channels_default_locale(
@@ -73,17 +81,16 @@ final class ChannelBasedLocaleProviderSpec extends ObjectBehavior
 
         $channel->getDefaultLocale()->willReturn($locale);
 
-        $locale->getCode()->willReturn('BTC');
+        $locale->getCode()->willReturn('en_US');
 
-        $this->getDefaultLocaleCode()->shouldReturn('BTC');
+        $this->getDefaultLocaleCode()->shouldReturn('en_US');
     }
 
-    function it_throws_a_locale_not_found_exception_if_channel_cannot_be_determined(
+    function it_returns_the_default_locale_if_channel_cannot_be_determined(
         ChannelContextInterface $channelContext
     ) {
         $channelContext->getChannel()->willThrow(ChannelNotFoundException::class);
 
-        $this->shouldThrow(LocaleNotFoundException::class)->during('getAvailableLocalesCodes');
-        $this->shouldThrow(LocaleNotFoundException::class)->during('getDefaultLocaleCode');
+        $this->getDefaultLocaleCode()->shouldReturn('pl_PL');
     }
 }

@@ -686,10 +686,7 @@ sylius_rbac:
         it: [security_auditor, developer]
 
 sylius_resource:
-    translation:
-        default_locale: "%locale%"
-        locale_provider: sylius.translation.locale_provider.contextual
-        available_locales_provider: sylius.translation.locales_provider
+    translation: true
 
 sylius_review:
     resources:

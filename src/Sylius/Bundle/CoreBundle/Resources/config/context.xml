@@ -65,6 +65,7 @@
 
         <service id="sylius.locale_provider.channel_based" class="Sylius\Component\Core\Provider\ChannelBasedLocaleProvider" decorates="sylius.locale_provider">
             <argument type="service" id="sylius.context.channel" />
+            <argument>%locale%</argument>
         </service>
 
         <service id="sylius.storage.locale" class="Sylius\Component\Core\Locale\LocaleStorage">
