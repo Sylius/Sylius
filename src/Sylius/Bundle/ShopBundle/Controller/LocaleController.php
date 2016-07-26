@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class LocaleController
 {
@@ -45,30 +45,30 @@ final class LocaleController
      */
     private $channelContext;
 
-//    /**
-//     * @var LocaleStorageInterface
-//     */
-//    private $localeStorage;
+    /**
+     * @var LocaleStorageInterface
+     */
+    private $localeStorage;
 
     /**
      * @param EngineInterface $templatingEngine
      * @param LocaleContextInterface $localeContext
      * @param LocaleProviderInterface $localeProvider
      * @param ChannelContextInterface $channelContext
-//     * @param LocaleStorageInterface $localeStorage
+     * @param LocaleStorageInterface $localeStorage
      */
     public function __construct(
         EngineInterface $templatingEngine,
         LocaleContextInterface $localeContext,
         LocaleProviderInterface $localeProvider,
-        ChannelContextInterface $channelContext
-//        LocaleStorageInterface $localeStorage
+        ChannelContextInterface $channelContext,
+        LocaleStorageInterface $localeStorage
     ) {
         $this->templatingEngine = $templatingEngine;
         $this->localeContext = $localeContext;
         $this->localeProvider = $localeProvider;
         $this->channelContext = $channelContext;
-//        $this->localeStorage = $localeStorage;
+        $this->localeStorage = $localeStorage;
     }
 
     /**
@@ -90,7 +90,7 @@ final class LocaleController
      */
     public function switchLocaleAction(Request $request, $code)
     {
-//        $this->localeStorage->set($this->channelContext->getChannel(), $code);
+        $this->localeStorage->set($this->channelContext->getChannel(), $code);
 
         return new RedirectResponse($request->headers->get('referer'));
     }

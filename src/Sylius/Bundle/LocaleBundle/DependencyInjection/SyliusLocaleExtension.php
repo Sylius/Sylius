@@ -40,5 +40,7 @@ final class SyliusLocaleExtension extends AbstractResourceExtension
             ->getDefinition('sylius.form.type.locale_choice')
             ->setArguments([new Reference('sylius.repository.locale')])
         ;
+
+        $container->findDefinition('sylius.repository.locale')->setLazy(true);
     }
 }

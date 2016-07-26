@@ -63,8 +63,27 @@
             </call>
         </service>
 
-        <service id="sylius.storage.locale" class="Sylius\Component\Core\Currency\LocaleStorage">
+        <service id="sylius.storage.locale" class="Sylius\Component\Core\Locale\LocaleStorage">
             <argument type="service" id="sylius.storage.session" />
+        </service>
+
+        <service id="sylius.context.locale.core" class="Sylius\Component\Locale\Context\CompositeLocaleContext" decorates="sylius.context.locale">
+            <call method="addContext">
+                <argument type="service">
+                    <service class="Sylius\Component\Core\Context\StorageBasedLocaleContext">
+                        <argument type="service" id="sylius.context.channel" />
+                        <argument type="service" id="sylius.storage.locale" />
+                        <argument type="service" id="sylius.locale_provider" />
+                    </service>
+                </argument>
+            </call>
+            <!--<call method="addContext">-->
+                <!--<argument type="service">-->
+                    <!--<service class="Sylius\Component\Locale\Context\ProviderBasedLocaleContext">-->
+                        <!--<argument type="service" id="sylius.locale_provider" />-->
+                    <!--</service>-->
+                <!--</argument>-->
+            <!--</call>-->
         </service>
     </services>
 </container>
