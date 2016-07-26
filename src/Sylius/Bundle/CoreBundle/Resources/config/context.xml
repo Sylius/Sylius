@@ -77,13 +77,13 @@
                     </service>
                 </argument>
             </call>
-            <!--<call method="addContext">-->
-                <!--<argument type="service">-->
-                    <!--<service class="Sylius\Component\Locale\Context\ProviderBasedLocaleContext">-->
-                        <!--<argument type="service" id="sylius.locale_provider" />-->
-                    <!--</service>-->
-                <!--</argument>-->
-            <!--</call>-->
+            <call method="addContext">
+                <argument type="service">
+                    <service class="Sylius\Component\Locale\Context\ProviderBasedLocaleContext">
+                        <argument type="service" id="sylius.locale_provider" />
+                    </service>
+                </argument>
+            </call>
         </service>
     </services>
 </container>
