@@ -164,6 +164,9 @@ class ResourceLoader implements LoaderInterface
         if (isset($configuration['redirect']) && in_array($actionName, ['create', 'update'])) {
             $defaults['_sylius']['redirect'] = $this->getRouteName($metadata, $configuration, $configuration['redirect']);
         }
+        if (isset($configuration['permission'])) {
+            $defaults['_sylius']['permission'] = $configuration['permission'];
+        }
         if (isset($configuration['vars']['all'])) {
             $defaults['_sylius']['vars'] = $configuration['vars']['all'];
         }

@@ -36,7 +36,7 @@ class Configuration implements ConfigurationInterface
                 ->scalarNode('redirect')->cannotBeEmpty()->end()
                 ->scalarNode('templates')->cannotBeEmpty()->end()
                 ->scalarNode('grid')->cannotBeEmpty()->end()
-                ->scalarNode('permission')->defaultValue(false)->end()
+                ->booleanNode('permission')->defaultValue(false)->end()
                 ->arrayNode('except')
                     ->prototype('scalar')->end()
                 ->end()
