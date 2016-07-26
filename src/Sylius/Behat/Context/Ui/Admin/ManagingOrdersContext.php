@@ -573,7 +573,7 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Given it should have shipment state :shipmentState
+     * @Given it should have shipment in state :shipmentState
      */
     public function itShouldHaveShipmentState($shipmentState)
     {

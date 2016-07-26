@@ -1,8 +1,8 @@
 @managing_orders
-Feature: Payments are in the state "new" after checkout
-    In order to correctly process customer's payments
+Feature: Shipments are in the state "ready" after checkout
+    In order to correctly process customer's shipments
     As an Administrator
-    I want to have new payments after my customer's checkout
+    I want to have new shipments after my customer's checkout
 
     Background:
         Given the store operates on a single channel in "France"
@@ -16,6 +16,6 @@ Feature: Payments are in the state "new" after checkout
         And I am logged in as an administrator
 
     @ui
-    Scenario: Checking payment state of a placed order
+    Scenario: Checking shipment state of a placed order
         When I view the summary of the order "#00000666"
-        Then it should have shipment state "Ready"
+        Then it should have shipment in state "Ready"
