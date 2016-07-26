@@ -7,6 +7,7 @@ Feature: Selecting available shipping methods for a channel
     Background:
         Given there is a zone "EU" containing all members of the European Union
         And the store allows shipping with "UPS Carrier" identified by "UPS_CARRIER"
+        And the store has currency "Euro"
         And I am logged in as an administrator
 
     @ui
@@ -15,6 +16,7 @@ Feature: Selecting available shipping methods for a channel
         When I specify its code as MOBILE
         And I name it "Mobile store"
         And I select the "UPS Carrier" shipping method
+        And I choose "Euro" as a default currency
         And I add it
         Then I should be notified that it has been successfully created
         And the "UPS Carrier" shipping method should be available for the "Mobile store" channel

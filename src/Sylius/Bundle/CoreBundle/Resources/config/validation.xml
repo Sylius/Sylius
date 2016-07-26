@@ -99,6 +99,12 @@
         <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\HasEnabledEntity">
             <option name="groups">sylius</option>
         </constraint>
+        <property name="defaultCurrency">
+            <constraint name="NotBlank">
+                <option name="message">sylius.channel.default_currency.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
     </class>
 
 </constraint-mapping>

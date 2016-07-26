@@ -7,6 +7,7 @@ Feature: Selecting default tax zone for a channel
     Background:
         Given there is a zone "EU" containing all members of the European Union
         And there is a zone "The Rest of the World" containing all other countries
+        And the store has currency "Euro"
         And I am logged in as an administrator
 
     @ui
@@ -15,6 +16,7 @@ Feature: Selecting default tax zone for a channel
         When I specify its code as "MOBILE"
         And I name it "Mobile store"
         And I select the "European Union" as default tax zone
+        And I choose "Euro" as a default currency
         And I add it
         Then I should be notified that it has been successfully created
         And the default tax zone for the "Mobile store" channel should be "European Union"
