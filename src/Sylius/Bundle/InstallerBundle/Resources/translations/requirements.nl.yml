@@ -6,6 +6,7 @@ sylius:
         header: extensies
         accelerator:
             header: Accelerator
+            help: Activeer Zend OpCache (sterk aangeraden).
         apc: APC
         ctype: Ctype
         gd: GD
@@ -29,9 +30,13 @@ sylius:
         header: bestandssysteem
         cache:
             header: cache
+            help:
+                To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
         exists: bestaat
         logs:
             header: logs
+            help:
+                To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
         not_exists: niet bestaand
         not_writable: niet schrijfbaar
         parameters:
@@ -57,3 +62,4 @@ sylius:
             header: Verouderde tijdzone
             help: 'Tijdzone %timezone% is verouderd. Fix je php.ini bestand (lijst met verouderde tijdzones http://php.net/manual/en/timezones.others.php).'
         version: PHP versie
+        version_recommended: Aanbevolen PHP versie

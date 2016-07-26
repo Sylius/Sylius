@@ -35,6 +35,7 @@ sylius:
             currencies: Valutor
             shipping_methods: Leveransmetoder
             payment_methods: Betalningsmetoder
+            tax_calculation_strategy: Skatteberäkningsstrategi
             tax_zone_default: Standardmomszon
             theme: Tema
             hostname: Värdnamn
@@ -157,5 +158,12 @@ sylius:
         password_reset:
             name: Återställ lösenord
             content: '<h3>Hej %username%</h3>För att återställa ditt lösenord - var god besök %url% <br/><br/>Hälsningar, the Team.'
+        verification:
+            name: E-postadress verifikation
+            content: 'För att verifiera din e-postadress - var god besök %url%'
+    payum_gateway:
+        cash_on_delivery: Postförskott
+        offline: Offline
+        paypal_express_checkout: PayPal Express Checkout
     shipping_method_resolver:
         by_zones_and_channel: Genom zoner och kanaler

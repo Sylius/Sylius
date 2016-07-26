@@ -14,7 +14,7 @@ sylius:
         abandoned: Abandonné
         about: À propos
         access_token: "Jeton d'accès"
-        access_your_store_account_or_create_a_new_one: Se connecter ou créer un nouveau compte
+        access_your_store_account_or_create_a_new_one: Connectez-vous ou créez un nouveau compte
         account_credentials: "Informations d'intentification"
         account_panel_outline: Profitez de toutes les fonctionnalités qui sont disponibles sur votre espace personnel pour visualiser, suivre et gérer toutes vos données
         action: Action
@@ -321,6 +321,7 @@ sylius:
         groups: Groupes
         guest: Invité
         guest_customer: Client invité
+        hello: Bonjour
         hello_name: 'Bonjour <b>%name%</b>'
         hide_deleted: Cacher les supprimés
         home: Accueil
@@ -356,6 +357,7 @@ sylius:
         last_week_revenue: Ventes de la semaine dernière
         lastname: Nom
         latest_orders: Dernières commandes
+        latest_products: Derniers produits
         links: Liens
         list_coupons: Liste des coupons
         locales: Locales
@@ -509,6 +511,7 @@ sylius:
         payment_mode: Modes de paiement
         payment_state: Etat du paiement
         payments: Paiements
+        pay: Payer
         pending: En attente
         per_customer_usage_limit: "Limite d'utilisation par client"
         permissions: "Droits d'accès"
@@ -726,6 +729,7 @@ sylius:
         variant: Variante
         variant_selection_method: Méthode de sélection de variante
         variants: Variantes
+        verified: Vérifié
         view: Vue
         view_more: En savoir plus
         view_product_details: 'Voir les détails %product%'

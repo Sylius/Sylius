@@ -5,4 +5,8 @@ sylius:
     menu:
         shop:
             account:
+                header: Je account
                 dashboard: Dashboard
+                personal_information: Persoonlijke gegevens
+                change_password: Wachtwoord wijzigen
+                order_history: Bestelgeschiedenis

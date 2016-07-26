@@ -6,7 +6,7 @@ sylius:
         order:
             details: Détails de votre commande
             download_invoice: Télécharger la facture
-            empty: "Vous n'avez passé aucune commande"
+            empty: "Vous n'avez pas encore passé de commande"
             list: Toutes vos commandes
             placed_at: 'Commandé le %at%'
             shipment:
@@ -24,7 +24,7 @@ sylius:
     block:
         imagine:
             index: Blocs de type imagine
-            publishable: Publiée
+            publishable: Publié
         simple:
             index: Blocs simples
             publishable: Publié
@@ -63,7 +63,7 @@ sylius:
             registered: Voir les clients enregistrés
             unconfirmed: Voir les comptes non confirmés
         general_info: 'Informations du client "%fullName%"'
-        no_groups: "Il n'y a pas de groupes pour ce client"
+        no_groups: "Il n'y a pas de groupes pour ce client à afficher"
     history:
         logged_at: Connecté à (version)
     homepage:
@@ -84,7 +84,7 @@ sylius:
         comment:
             notify: Notification
         guest: Client invité
-        immutable_warning: Les commandes déjà expédiés ne sont pas modifiables
+        immutable_warning: Les commandes déjà expédiées ne sont pas modifiables
         no_items: Cette commande ne contient aucun article
         no_promotion: Aucun coupons ont été utilisés
         no_shipments: Aucune expédition pour cette commande

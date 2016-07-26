@@ -35,6 +35,7 @@ sylius:
             currencies: Waluty
             shipping_methods: Metody wysyłki
             payment_methods: Metody płatności
+            tax_calculation_strategy: Strategia obliczania podatku
             tax_zone_default: Domyślna strefa podatkowa
             theme: Motyw
             hostname: Nazwa hosta
@@ -150,7 +151,19 @@ sylius:
             name: Uwagi dotyczące zamówienia
         shipment_confirmation:
             name: Potwierdzenie dostawy
+            content: 'Twoje zamówienie zostało wysłane. <br/> Dziękujemy za udane zakupy.'
         user_confirmation:
             name: Potwierdzenia przez użytkownika
+            subject: Zapraszamy do naszego sklepu
+            content: 'Zapraszamy do naszego sklepu <br/> <br/> Twoja rejestracja przebiegła pomyślnie. <br/> Dziękujemy %username%.'
         password_reset:
             name: Resetowanie hasła
+            content: '<h3>Witaj %username%</h3> Aby ustawić nowe hasło, odwiedź %url% <br/> <br/> Pozdrawiamy, zespół.'
+        verification:
+            name: Weryfikacja adresu e-mail
+            content: 'Aby zweryfikować swój adres e-mail - proszę odwiedzić %url%'
+    payum_gateway:
+        cash_on_delivery: Opłata za pobraniem
+        paypal_express_checkout: Płatności PayPal Express
+    shipping_method_resolver:
+        by_zones_and_channel: Za pomocą stref i kanału

@@ -67,6 +67,7 @@ sylius:
         calculator: Kalkulator
         cancel: Anuluj
         cancelled: Anulowane
+        cart_locked: Koszyk zablokowany
         categorization: Kategoria
         category: Kategoria
         category_requirements: Wymagania kategorii
@@ -93,6 +94,7 @@ sylius:
         confirm_your_action: Potwierdź akcję
         confirmation: Potwierdzenie
         confirmation_title: Potwierdzenie
+        confirmed: Potwierdzony
         contact_request_details: Szczegóły prośby o kontakt
         contact_request_show: Prośba o kontakt
         contact_requests: Prośby o kontakt
@@ -109,6 +111,8 @@ sylius:
         coupons: Kupony
         create: Utwórz
         create_a_new_address: Dodaj nowy adres
+        create_a_new_customer_account: Utwórz nowe konto klienta
+        create_an_account: Utwórz konto
         create_archetype: Stwórz archetyp
         create_contact_request: Utwórz prośbę o kontakt
         create_country: Dodaj kraj
@@ -136,6 +140,7 @@ sylius:
         create_tax_category: Dodaj kategorię podatkową
         create_tax_rate: Dodaj stawkę podatkową
         create_taxon: Dodaj taksonomie
+        create_user: Utwórz użytkownika
         create_variant: Dodaj wariant
         create_zone: Dodaj strefę
         created_at: data utworzenia
@@ -175,7 +180,9 @@ sylius:
         deleted: Usunięto
         delivery_and_shipping: Dostawy i wysyłki
         description: Opis
+        details: Szczegóły
         disable: Wyłącz
+        disabled: Nieaktywny
         discount: Zniżka
         edit: Edytuj
         edit_channel: Edytuj kanał
@@ -193,6 +200,7 @@ sylius:
         edit_product_variant: Edytuj wariant produktu
         edit_promotion: Edytuj promocję
         edit_promotion_coupon: Edytuj kupon promocyjny
+        edit_report: Edytuj raport
         edit_shipping_method: Edytuj metodę wysyłki
         edit_tax_category: Edytuj kategorię podatkową
         edit_tax_rate: Edytuj stawkę podatkową
@@ -594,6 +602,7 @@ sylius:
         view_more: Zobacz więcej
         void: Nieważna
         warning: Ostrzeżenie
+        welcome_to_our_store: Zapraszamy do naszego sklepu
         welcome_to_your_space: Witaj w swoim panelu
         "yes": true
         you_are_customer_since: Jesteś naszym klientem od
