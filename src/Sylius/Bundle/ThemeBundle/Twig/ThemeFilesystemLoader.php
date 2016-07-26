@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of the Sylius package.
+ *
+ * (c) Paweł Jędrzejewski
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Sylius\Bundle\ThemeBundle\Twig;
 
 use Symfony\Component\Config\FileLocatorInterface;
@@ -9,42 +18,85 @@ use Symfony\Component\Templating\TemplateReferenceInterface;
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class ThemeFilesystemLoader extends \Twig_Loader_Filesystem
+final class ThemeFilesystemLoader implements \Twig_LoaderInterface
 {
+    /**
+     * @var \Twig_LoaderInterface
+     */
+    private $decoratedLoader;
+
     /**
      * @var FileLocatorInterface
      */
-    private $locator;
+    private $templateLocator;
 
     /**
      * @var TemplateNameParserInterface
      */
-    private $parser;
+    private $templateNameParser;
 
     /**
-     * @param FileLocatorInterface $locator
-     * @param TemplateNameParserInterface $parser
+     * @var array
      */
-    public function __construct(FileLocatorInterface $locator, TemplateNameParserInterface $parser)
-    {
-        parent::__construct([]);
+    private $cache = [];
 
-        $this->locator = $locator;
-        $this->parser = $parser;
+    /**
+     * @param \Twig_LoaderInterface $decoratedLoader
+     * @param FileLocatorInterface $templateLocator
+     * @param TemplateNameParserInterface $templateNameParser
+     */
+    public function __construct(
+        \Twig_LoaderInterface $decoratedLoader,
+        FileLocatorInterface $templateLocator,
+        TemplateNameParserInterface $templateNameParser
+    ) {
+        $this->decoratedLoader = $decoratedLoader;
+        $this->templateLocator = $templateLocator;
+        $this->templateNameParser = $templateNameParser;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function exists($name)
+    public function getSource($name)
     {
-        return parent::exists((string) $name);
+        try {
+            return file_get_contents($this->findTemplate($name));
+        } catch (\Exception $exception) {
+            return $this->decoratedLoader->getSource($name);
+        }
     }
 
     /**
      * {@inheritdoc}
      */
-    protected function findTemplate($template, $throw = true)
+    public function getCacheKey($name)
+    {
+        try {
+            return $this->findTemplate($name);
+        } catch (\Exception $exception) {
+            return $this->decoratedLoader->getCacheKey($name);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isFresh($name, $time)
+    {
+        try {
+            return filemtime($this->findTemplate($name)) <= $time;
+        } catch (\Exception $exception) {
+            return $this->decoratedLoader->isFresh($name, $time);
+        }
+    }
+
+    /**
+     * @param TemplateReferenceInterface|string $template
+     *
+     * @return string
+     */
+    private function findTemplate($template)
     {
         $logicalName = (string) $template;
 
@@ -52,8 +104,8 @@ final class ThemeFilesystemLoader extends \Twig_Loader_Filesystem
             return $this->cache[$logicalName];
         }
 
-        $template = $this->parser->parse($template);
-        $file = $this->locator->locate($template);
+        $template = $this->templateNameParser->parse($template);
+        $file = $this->templateLocator->locate($template);
 
         return $this->cache[$logicalName] = $file;
     }

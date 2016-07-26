@@ -14,6 +14,7 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service id="sylius.theme.twig.loader" class="Sylius\Bundle\ThemeBundle\Twig\ThemeFilesystemLoader" decorates="twig.loader" public="false">
+            <argument type="service" id="sylius.theme.twig.loader.inner" />
             <argument type="service" id="templating.locator" />
             <argument type="service" id="templating.name_parser" />
         </service>
