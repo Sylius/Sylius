@@ -113,17 +113,13 @@
         </service>
         <service id="sylius.form.type.country" class="%sylius.form.type.country.class%">
             <argument>%sylius.model.country.class%</argument>
-            <argument type="collection">
-                <argument>sylius</argument>
-            </argument>
+            <argument>%sylius.validation_groups.country%</argument>
             <argument type="service" id="sylius.repository.country" />
             <tag name="form.type" alias="sylius_country" />
         </service>
         <service id="sylius.form.type.locale" class="%sylius.form.type.locale.class%">
             <argument>%sylius.model.locale.class%</argument>
-            <argument type="collection">
-                <argument>sylius</argument>
-            </argument>
+            <argument>%sylius.validation_groups.locale%</argument>
             <argument type="service" id="sylius.repository.locale" />
             <tag name="form.type" alias="sylius_locale" />
         </service>
