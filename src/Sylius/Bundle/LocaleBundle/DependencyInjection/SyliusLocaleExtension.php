@@ -20,7 +20,7 @@ use Symfony\Component\DependencyInjection\Reference;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SyliusLocaleExtension extends AbstractResourceExtension
+final class SyliusLocaleExtension extends AbstractResourceExtension
 {
     /**
      * {@inheritdoc}
@@ -32,18 +32,9 @@ class SyliusLocaleExtension extends AbstractResourceExtension
 
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
-        $configFiles = [
-            'services.xml',
-            'templating.xml',
-            'twig.xml',
-        ];
+        $loader->load('services.xml');
 
-        foreach ($configFiles as $configFile) {
-            $loader->load($configFile);
-        }
-
-        $definition = $container->findDefinition('sylius.context.locale');
-        $definition->replaceArgument(0, new Reference($config['storage']));
+        $container->setParameter('sylius_locale.locale', $config['locale']);
 
         $container
             ->getDefinition('sylius.form.type.locale_choice')

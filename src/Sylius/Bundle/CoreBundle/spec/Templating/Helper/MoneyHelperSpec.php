@@ -31,7 +31,7 @@ final class MoneyHelperSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Templating\Helper\MoneyHelper');
+        $this->shouldHaveType(MoneyHelper::class);
     }
 
     function it_is_a_templating_helper()
@@ -48,7 +48,7 @@ final class MoneyHelperSpec extends ObjectBehavior
         MoneyHelperInterface $decoratedHelper,
         LocaleContextInterface $localeContext
     ) {
-        $localeContext->getCurrentLocale()->shouldNotBeCalled();
+        $localeContext->getLocaleCode()->shouldNotBeCalled();
 
         $decoratedHelper->formatAmount(42, null, 'en_US')->willReturn('Formatted 42 in en_US');
 
@@ -59,7 +59,7 @@ final class MoneyHelperSpec extends ObjectBehavior
         MoneyHelperInterface $decoratedHelper,
         LocaleContextInterface $localeContext
     ) {
-        $localeContext->getCurrentLocale()->willReturn('fr_FR');
+        $localeContext->getLocaleCode()->willReturn('fr_FR');
 
         $decoratedHelper->formatAmount(42, null, 'fr_FR')->willReturn('Formatted 42 in fr_FR');
 

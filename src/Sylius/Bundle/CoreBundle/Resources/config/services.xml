@@ -96,7 +96,6 @@
 
         <parameter key="sylius.order.purger.class">Sylius\Bundle\CoreBundle\Purger\ExpiredOrdersPurger</parameter>
         <parameter key="sylius.image_uploader.class">Sylius\Component\Core\Uploader\ImageUploader</parameter>
-        <parameter key="sylius.locale_provider.channel_aware.class">Sylius\Bundle\CoreBundle\Locale\ChannelAwareLocaleProvider</parameter>
         <parameter key="sylius.cart_item_resolver.default.class">Sylius\Bundle\CoreBundle\Cart\ItemResolver</parameter>
         <parameter key="sylius.price_calculator.channel_based.class">Sylius\Component\Core\Pricing\ChannelBasedCalculator</parameter>
         <parameter key="sylius.price_calculator.group_based.class">Sylius\Component\Core\Pricing\GroupBasedCalculator</parameter>
@@ -477,12 +476,6 @@
 
         <service id="sylius.price_calculator.zone_based" class="%sylius.price_calculator.zone_based.class%">
             <tag name="sylius.price_calculator" type="zone_based" label="Customer zone based" />
-        </service>
-
-        <!-- money -->
-        <service id="sylius.locale_provider.channel_aware" class="%sylius.locale_provider.channel_aware.class%" decorates="sylius.locale_provider">
-            <argument type="service" id="sylius.context.channel" />
-            <argument>%locale%</argument>
         </service>
 
         <service id="sylius.collector.core" class="%sylius.collector.core.class%" public="false">

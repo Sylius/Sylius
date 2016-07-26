@@ -11,20 +11,24 @@
 
 namespace Sylius\Component\Locale\Provider;
 
+use Sylius\Component\Locale\Context\LocaleNotFoundException;
+
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface LocaleProviderInterface
 {
     /**
-     * @return string[]
+     * @return string
+     *
+     * @throws LocaleNotFoundException
      */
-    public function getAvailableLocales();
+    public function getDefaultLocaleCode();
 
     /**
-     * @param string $locale
+     * @return string[]
      *
-     * @return bool
+     * @throws LocaleNotFoundException
      */
-    public function isLocaleAvailable($locale);
+    public function getAvailableLocalesCodes();
 }

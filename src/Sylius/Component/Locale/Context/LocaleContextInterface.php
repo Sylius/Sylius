@@ -12,25 +12,14 @@
 namespace Sylius\Component\Locale\Context;
 
 /**
- * Interface to be implemented by the service providing the currently used
- * locale.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface LocaleContextInterface
 {
     /**
      * @return string
+     *
+     * @throws LocaleNotFoundException
      */
-    public function getDefaultLocale();
-
-    /**
-     * @return string
-     */
-    public function getCurrentLocale();
-
-    /**
-     * @param string $locale
-     */
-    public function setCurrentLocale($locale);
+    public function getLocaleCode();
 }

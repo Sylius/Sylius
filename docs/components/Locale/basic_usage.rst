@@ -82,7 +82,7 @@ The **LocaleProvider** allows you to get all available locales.
 
     $localeProvider = new LocaleProvider($locales);
 
-    $localeProvider->getAvailableLocales() //Output will be a collection of all enabled locales
+    $localeProvider->getAvailableLocalesCodes() //Output will be a collection of all enabled locales
     $localeProvider->isLocaleAvailable('en') //It will check if that locale is enabled
 
 .. note::
