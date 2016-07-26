@@ -12,13 +12,11 @@
 namespace spec\Sylius\Component\Resource\Factory;
 
 use PhpSpec\ObjectBehavior;
-use spec\Sylius\Component\Resource\Fixtures\SampleResource;
+use Sylius\Component\Resource\Factory\Factory;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
-require_once __DIR__.'/../Fixtures/SampleResource.php';
-
 /**
- * @mixin \Sylius\Component\Resource\Factory\Factory
+ * @mixin Factory
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
@@ -26,12 +24,12 @@ final class FactorySpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('spec\Sylius\Component\Resource\Fixtures\SampleResource');
+        $this->beConstructedWith(\stdClass::class);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Resource\Factory\Factory');
+        $this->shouldHaveType(Factory::class);
     }
 
     function it_implements_factory_interface()
@@ -41,6 +39,6 @@ final class FactorySpec extends ObjectBehavior
 
     function it_creates_a_new_instance_of_a_resource()
     {
-        $this->createNew()->shouldHaveType(SampleResource::class);
+        $this->createNew()->shouldHaveType(\stdClass::class);
     }
 }

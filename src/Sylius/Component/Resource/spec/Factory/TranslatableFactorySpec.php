@@ -12,18 +12,15 @@
 namespace spec\Sylius\Component\Resource\Factory;
 
 use PhpSpec\ObjectBehavior;
-use spec\Sylius\Component\Resource\Fixtures\SampleNonTranslatableResource;
-use spec\Sylius\Component\Resource\Fixtures\SampleTranslatableResource;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Resource\Factory\TranslatableFactory;
 use Sylius\Component\Resource\Factory\TranslatableFactoryInterface;
+use Sylius\Component\Resource\Model\TranslatableInterface;
 use Sylius\Component\Resource\Provider\LocaleProviderInterface;
 
-require_once __DIR__.'/../Fixtures/SampleTranslatableResource.php';
-require_once __DIR__.'/../Fixtures/SampleNonTranslatableResource.php';
-
 /**
- * @mixin \Sylius\Component\Resource\Factory\TranslatableFactory
+ * @mixin TranslatableFactory
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
@@ -36,7 +33,7 @@ final class TranslatableFactorySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Resource\Factory\TranslatableFactory');
+        $this->shouldHaveType(TranslatableFactory::class);
     }
 
     function it_implements_translatable_factory_interface()
@@ -44,7 +41,7 @@ final class TranslatableFactorySpec extends ObjectBehavior
         $this->shouldImplement(TranslatableFactoryInterface::class);
     }
 
-    function it_throws_an_exception_if_resource_is_not_translatable(FactoryInterface $factory, SampleNonTranslatableResource $resource)
+    function it_throws_an_exception_if_resource_is_not_translatable(FactoryInterface $factory, \stdClass $resource)
     {
         $factory->createNew()->willReturn($resource);
 
@@ -54,7 +51,7 @@ final class TranslatableFactorySpec extends ObjectBehavior
         ;
     }
 
-    function it_creates_translatable_and_sets_locales(FactoryInterface $factory, LocaleProviderInterface $localeProvider, SampleTranslatableResource $resource)
+    function it_creates_translatable_and_sets_locales(FactoryInterface $factory, LocaleProviderInterface $localeProvider, TranslatableInterface $resource)
     {
         $localeProvider->getDefaultLocale()->willReturn('pl_PL');
 
