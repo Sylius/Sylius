@@ -12,12 +12,12 @@
 namespace spec\Sylius\Component\Resource\Factory;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Factory\TranslatableFactory;
 use Sylius\Component\Resource\Factory\TranslatableFactoryInterface;
 use Sylius\Component\Resource\Model\TranslatableInterface;
-use Sylius\Component\Resource\Provider\LocaleProviderInterface;
 
 /**
  * @mixin TranslatableFactory
@@ -53,7 +53,7 @@ final class TranslatableFactorySpec extends ObjectBehavior
 
     function it_creates_translatable_and_sets_locales(FactoryInterface $factory, LocaleProviderInterface $localeProvider, TranslatableInterface $resource)
     {
-        $localeProvider->getDefaultLocale()->willReturn('pl_PL');
+        $localeProvider->getDefaultLocaleCode()->willReturn('pl_PL');
 
         $factory->createNew()->willReturn($resource);
 

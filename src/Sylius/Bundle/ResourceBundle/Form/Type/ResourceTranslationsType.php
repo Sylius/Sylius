@@ -11,36 +11,27 @@
 
 namespace Sylius\Bundle\ResourceBundle\Form\Type;
 
-use Sylius\Component\Resource\Provider\AvailableLocalesProviderInterface;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\ResourceTranslationsSubscriber;
-use Sylius\Component\Resource\Provider\LocaleProviderInterface;
+use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class ResourceTranslationsType extends AbstractType
+final class ResourceTranslationsType extends AbstractType
 {
     /**
      * @var LocaleProviderInterface
      */
-    protected $localeProvider;
-
-    /**
-     * @var AvailableLocalesProviderInterface
-     */
-    protected $availableLocalesProvider;
+    private $localeProvider;
 
     /**
      * @param LocaleProviderInterface $localeProvider
-     * @param AvailableLocalesProviderInterface $availableLocalesProvider
      */
-    public function __construct(LocaleProviderInterface $localeProvider, AvailableLocalesProviderInterface $availableLocalesProvider)
+    public function __construct(LocaleProviderInterface $localeProvider)
     {
         $this->localeProvider = $localeProvider;
-        $this->availableLocalesProvider = $availableLocalesProvider;
     }
 
     /**
@@ -48,12 +39,12 @@ class ResourceTranslationsType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $locales = $this->availableLocalesProvider->getAvailableLocales();
+        $locales = $this->localeProvider->getAvailableLocalesCodes();
         $localesWithRequirement = [];
 
         foreach ($locales as $locale) {
             $localesWithRequirement[$locale] = false;
-            if ($this->localeProvider->getDefaultLocale() === $locale) {
+            if ($this->localeProvider->getDefaultLocaleCode() === $locale) {
                 $localesWithRequirement[$locale] = true;
                 $localesWithRequirement = array_reverse($localesWithRequirement, true);
             }

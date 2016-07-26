@@ -11,9 +11,9 @@
 
 namespace Sylius\Component\Resource\Factory;
 
+use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Resource\Model\TranslatableInterface;
-use Sylius\Component\Resource\Provider\LocaleProviderInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -51,8 +51,8 @@ class TranslatableFactory implements TranslatableFactoryInterface
             throw new UnexpectedTypeException($resource, TranslatableInterface::class);
         }
 
-        $resource->setCurrentLocale($this->localeProvider->getDefaultLocale());
-        $resource->setFallbackLocale($this->localeProvider->getDefaultLocale());
+        $resource->setCurrentLocale($this->localeProvider->getDefaultLocaleCode());
+        $resource->setFallbackLocale($this->localeProvider->getDefaultLocaleCode());
 
         return $resource;
     }
