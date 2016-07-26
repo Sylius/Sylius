@@ -97,7 +97,7 @@ Response
         "updated_at": "2014-11-26T23:00:20+0000"
     }
 
-Creating an product
+Creating a product
 -------------------
 
 To create a new product, you can execute the following request:
