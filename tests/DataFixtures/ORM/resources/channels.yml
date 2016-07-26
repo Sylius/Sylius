@@ -1,0 +1,9 @@
+Sylius\Component\Core\Model\Channel:
+    channel-web:
+        code: "WEB"
+        name: "Web Channel"
+        hostname: "localhost"
+        description: "Lorem ipsum"
+        color: "black"
+        enabled: true
+        taxCalculationStrategy: "order_items_based"

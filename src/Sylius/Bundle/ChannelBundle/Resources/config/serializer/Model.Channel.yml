@@ -9,21 +9,21 @@ Sylius\Component\Channel\Model\Channel:
         code:
             expose: true
             type: string
-        color:
-            expose: true
-            type: string
         name:
             expose: true
             type: string
-        description:
-            expose: true
-            type: string
-        url:
+        hostname:
             expose: true
             type: string
         enabled:
             expose: true
             type: boolean
+        description:
+            expose: true
+            type: string
+        color:
+            expose: true
+            type: string
         createdAt:
             expose: true
             type: DateTime
