@@ -7,6 +7,7 @@ sylius:
             main:
                 catalog:
                     attributes: Атрибуты
+                    header: Каталог
                     options: Список опций
                     products: Товары
                     taxons: Налоги
@@ -32,4 +33,5 @@ sylius:
                     orders: Заказы
                 content:
                     header: Контент
+                    static_contents: Статический контент
                     routes: Маршруты

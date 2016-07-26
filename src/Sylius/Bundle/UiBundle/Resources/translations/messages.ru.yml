@@ -206,6 +206,7 @@ sylius:
         hello_name: 'Здравствуйте, <b>%name%</b>'
         hide_deleted: Скрыть удаленные
         home: Домой
+        hostname: Хост
         id: ID
         image: Изображение
         images: Изображения
@@ -424,6 +425,7 @@ sylius:
         taxation_settings: Настройки налогооблажения
         taxes: Налоги
         taxons: Налоги
+        theme: Тема оформления
         there_are_no_archetypes_defined: Не опреленно ни одного архетипа
         there_are_no_blocks_to_display: Нет блоков для отображения
         there_are_no_channels_configured: Нет настроенных каналов
@@ -460,6 +462,7 @@ sylius:
         view_more: Посмотреть больше
         void: Пустой
         warning: Предупреждение
+        welcome_to_our_store: Добро пожаловать в наш магазин
         welcome_to_your_space: Добро пожаловать в ваш кабинет
         "yes": true
         you_are_customer_since: Вы являетесь клиентом с

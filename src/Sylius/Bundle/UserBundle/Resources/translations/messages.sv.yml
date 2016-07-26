@@ -28,9 +28,11 @@ sylius:
         user_filter:
             query: Sök
         user_change_password:
+            confirmation: Bekräftelse
             current: Nuvarande lösenord
             new: Nytt lösenord
         user_reset_password:
+            confirmation: Bekräftelse
             new: Nytt lösenord
     gender:
         unknown: Okänd

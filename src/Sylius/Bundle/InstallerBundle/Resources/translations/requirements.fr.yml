@@ -12,7 +12,7 @@ sylius:
         help: "Installer et activer l'extension %extension%."
         iconv: Iconv
         exif: EXIF
-        fileinfo: FileInfo
+        fileinfo: Information sur le fichier
         icu: ICU
         intl: Intl
         json_encode: JSON
@@ -29,9 +29,13 @@ sylius:
         header: Système de fichiers
         cache:
             header: Cache
+            help:
+                To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
         exists: Existe
         logs:
             header: logs
+            help:
+                To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
         not_exists: "N'existe pas"
         not_writable: pas accessible en écriture
         parameters:
@@ -57,3 +61,4 @@ sylius:
             header: Fuseau horaire obsolète
             help: 'Le fuseau horaire %timezone% est déconseillé. Corrigez votre fichier php.ini (liste des fuseaux horaires obsolètes http://php.net/manual/fr/timezones.others.php).'
         version: Version de PHP
+        version_recommended: Version de PHP recommandée

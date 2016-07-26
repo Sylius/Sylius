@@ -35,6 +35,7 @@ sylius:
             currencies: "Valuta's"
             shipping_methods: Verzendmethodes
             payment_methods: Betaalmethodes
+            tax_calculation_strategy: Strategie voor berekening van de BTW
             tax_zone_default: Standaard belastingzone
             theme: Thema
             hostname: Hostnaam
@@ -150,8 +151,20 @@ sylius:
             name: Order Opmerkingen
         shipment_confirmation:
             name: Bevestiging van de verzending
+            content: 'Je bestelling werd verstuurd.<br/>Bedankt voor een geslaagde transactie.'
         user_confirmation:
             name: Bevestiging van de gebruiker
             subject: Welkom in jouw winkel
+            content: 'Wekom bij onze winkel<br/><br/>Je bent zonet geregistreerd.<br/>Bedankt %username%.'
         password_reset:
             name: Wachtwoord opnieuw instellen
+            content: '<h3>Dag %username%</h3>Bezoek %url% om je wachtwoord opnieuw in te stellen.<br/><br/>Met vriendelijke groeten, het Team.'
+        verification:
+            name: E-mail adres verificatie
+            content: 'Bezoek %url% om je email adres te bevestigen'
+    payum_gateway:
+        cash_on_delivery: Onder rembours
+        offline: Offline
+        paypal_express_checkout: Paypal Express Checkout
+    shipping_method_resolver:
+        by_zones_and_channel: Per zones en kanalen

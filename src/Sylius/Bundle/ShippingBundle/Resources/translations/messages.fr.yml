@@ -20,7 +20,7 @@ sylius:
             tracking_code: Code de suivi
         shipping_calculator:
             flat_rate_configuration:
-                label: Taux fixe par envoi
+                label: Prix fixe par envoi
                 amount: Montant
             flexible_rate_configuration:
                 label: Taux variable

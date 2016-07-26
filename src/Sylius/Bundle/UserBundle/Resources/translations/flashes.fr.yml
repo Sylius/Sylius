@@ -8,7 +8,7 @@ sylius:
         password:
             invalid: Le mot de passe actuel est invalide.
             request:
-                success: Nous vous envoyons un e-mail avec les instructions pour réinitialiser votre mot de passe!
+                success: Nous vous avons envoyé un e-mail avec les instructions pour réinitialiser votre mot de passe!
             reset:
                 success: Votre mot de passe a été réinitialisé avec succès !
             change:
@@ -18,4 +18,4 @@ sylius:
         verification:
             error: Le jeton de vérification est invalide.
             notice:
-                verified: Votre e-mail a déjà été vérifié.
+                verified: Votre email est déjà vérifié.

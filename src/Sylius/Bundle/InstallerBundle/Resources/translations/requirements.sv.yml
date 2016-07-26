@@ -6,6 +6,7 @@ sylius:
         header: tillägg
         accelerator:
             header: Accelerator
+            help: Aktivera Zend OpCache (rekommenderas starkt).
         apc: APC
         ctype: Ctype
         gd: GD
@@ -29,9 +30,13 @@ sylius:
         header: filsystem
         cache:
             header: cache
+            help:
+                To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
         exists: tillgängligt
         logs:
             header: loggar
+            help:
+                To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
         not_exists: ej tillgängligt
         not_writable: ej skrivbart
         parameters:
@@ -56,3 +61,4 @@ sylius:
             header: Utgången tidzon
             help: 'Tidszonen %timezone% är utgången. Åtgärda din php.ini fil (lista med utgångna tidzoner http://php.net/manual/en/timezones.others.php).'
         version: PHP-version
+        version_recommended: Rekommenderad PHP-version

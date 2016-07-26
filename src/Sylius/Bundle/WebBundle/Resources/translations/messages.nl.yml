@@ -13,6 +13,7 @@ sylius:
                 ready: 'Gereed sinds %at%'
                 returned: 'Geretourneerd op %at%'
                 shipped: 'Verzonden op %at%'
+                checkout: 'Afgerekend %at%'
                 pending: 'Hangende %at%'
                 onhold: 'Wachtstand sinds %at%'
                 backordered: 'Bijbesteld sinds %at%'
@@ -140,6 +141,7 @@ sylius:
             ready: Klaar
             returned: Geretourneerd
             shipped: Verzonden
+            checkout: Afgerekend
             pending: In behandeling
             onhold: In de wacht
             backordered: Bijbesteld

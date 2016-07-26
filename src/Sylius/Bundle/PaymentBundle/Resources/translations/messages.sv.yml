@@ -30,4 +30,5 @@ sylius:
             description: Beskrivning
             enabled: Aktiverad?
             gateway: Portal
+            instructions: Instruktioner
             name: Namn

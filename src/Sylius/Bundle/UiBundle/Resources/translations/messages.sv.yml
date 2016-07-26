@@ -73,6 +73,8 @@ sylius:
         configuration: Konfiguration
         configure_channels_available_in_your_store: Konfigurera kanaler som är tillgängliga i din butik
         confirm_your_action: Bekräfta din åtgärd
+        confirmation: Bekräftelse
+        confirmation_title: Bekräftelse
         contact_us: Kontakta oss
         contains: Innehåller
         content: Innehåll

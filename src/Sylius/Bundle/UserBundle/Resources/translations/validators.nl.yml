@@ -29,7 +29,7 @@ sylius:
             min: 'Achternaam moet ten minste {{ limit }} karakters lang zijn.'
             not_blank: Vul uw achternaam in.
         gender:
-            not_blank: Kies uw geslacht.
+            not_blank: Kies je geslacht.
         email:
             already_used: Dit e-mailadres is al in gebruik, gelieve in te loggen of wachtwoord vergeten gebruiken.
             max: 'E-mail mag niet meer dan {{ limit }} karakters zijn.'
