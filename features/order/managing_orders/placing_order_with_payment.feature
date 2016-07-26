@@ -19,3 +19,8 @@ Feature: Payments are in the state "new" after checkout
     Scenario: Checking payment state of a placed order
         When I view the summary of the order "#00000666"
         Then it should have payment state "New"
+
+    @todo
+    Scenario: Checking order payment state of a placed order
+        Given I browse orders
+        Then this order should have order payment state "Awaiting payment"

@@ -28,3 +28,10 @@ Feature: Cancelling orders
         Given the customer canceled this order
         When I view the summary of the order "#00000022"
         Then I should not be able to cancel this order
+
+    @todo
+    Scenario: Checking order payment state of a cancelled order
+        Given I view the summary of the order "#00000022"
+        And I cancel this order
+        When I browse orders
+        Then this order should have order payment state "Cancelled"
