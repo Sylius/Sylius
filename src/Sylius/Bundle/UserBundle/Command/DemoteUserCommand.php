@@ -28,7 +28,7 @@ class DemoteUserCommand extends AbstractRoleCommand
     {
         $this
             ->setName('sylius:user:demote')
-            ->setDescription('Promotes a user by adding a role.')
+            ->setDescription('Demotes a user by removing a role.')
             ->setDefinition(array(
                 new InputArgument('email', InputArgument::REQUIRED, 'Email'),
                 new InputArgument('roles', InputArgument::IS_ARRAY, 'RBAC roles'),
