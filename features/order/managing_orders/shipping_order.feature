@@ -21,7 +21,7 @@ Feature: Shipping an order
         When specify its tracking code as "#00044"
         And I ship this order
         Then I should be notified that the order's shipment has been successfully shipped
-        And its shipment state should be "shipped"
+        And it should have shipment in state shipped
 
     @ui
     Scenario: Unable to finalize shipped order's shipment
