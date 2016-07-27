@@ -266,8 +266,6 @@ class Order extends Cart implements OrderInterface
         if (!$this->hasPayment($payment)) {
             $this->payments->add($payment);
             $payment->setOrder($this);
-
-            $this->setPaymentState($payment->getState());
         }
     }
 

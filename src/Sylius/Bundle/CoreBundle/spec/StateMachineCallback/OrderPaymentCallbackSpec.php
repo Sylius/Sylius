@@ -11,9 +11,8 @@
 
 namespace spec\Sylius\Bundle\CoreBundle\StateMachineCallback;
 
-use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use SM\Factory\FactoryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
@@ -22,12 +21,13 @@ use Sylius\Component\Resource\StateMachine\StateMachineInterface;
 
 /**
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 final class OrderPaymentCallbackSpec extends ObjectBehavior
 {
-    function let(FactoryInterface $factory)
+    function let(FactoryInterface $stateMachineFactory)
     {
-        $this->beConstructedWith($factory);
+        $this->beConstructedWith($stateMachineFactory);
     }
 
     function it_is_initializable()
@@ -36,46 +36,21 @@ final class OrderPaymentCallbackSpec extends ObjectBehavior
     }
 
     function it_dispatches_event_on_payment_update_and_will_update_order_state(
-        $factory,
+        FactoryInterface $stateMachineFactory,
+        StateMachineInterface $stateMachine,
         PaymentInterface $payment,
-        OrderInterface $order,
-        StateMachineInterface $sm
-    ) {
-        $payment->getOrder()->willReturn($order);
-        $payment->getState()->willReturn(PaymentInterface::STATE_CANCELLED);
-
-        $order->getTotal()->willReturn(0);
-        $order->setPaymentState(PaymentInterface::STATE_CANCELLED)->shouldBeCalled();
-
-        $factory->get($order, OrderTransitions::GRAPH)->willReturn($sm);
-        $sm->apply(OrderTransitions::TRANSITION_FULFILL, true)->shouldBeCalled();
-
-        $this->updateOrderOnPayment($payment);
-    }
-
-    function it_dispatches_event_on_payment_update(
-        $factory,
-        PaymentInterface $payment,
-        OrderInterface $order,
-        StateMachineInterface $sm,
-        Collection $payments,
-        Collection $filteredPayments
+        OrderInterface $order
     ) {
         $payment->getOrder()->willReturn($order);
         $payment->getState()->willReturn(PaymentInterface::STATE_COMPLETED);
-        $payment->getAmount()->willReturn(1000);
+        $payment->getAmount()->willReturn(100);
+        $payments = new ArrayCollection([$payment->getWrappedObject()]);
 
         $order->getPayments()->willReturn($payments);
-        $order->getTotal()->willReturn(1000);
-        $order->setPaymentState(PaymentInterface::STATE_COMPLETED)->shouldBeCalled();
+        $order->getTotal()->willReturn(100);
 
-        $payments->filter(Argument::any())->willReturn($filteredPayments);
-        $payments->count()->willReturn(1);
-
-        $filteredPayments->count()->willReturn(1);
-
-        $factory->get($order, OrderTransitions::GRAPH)->willReturn($sm);
-        $sm->apply(OrderTransitions::TRANSITION_FULFILL, true)->shouldBeCalled();
+        $stateMachineFactory->get($order, OrderTransitions::GRAPH)->willReturn($stateMachine);
+        $stateMachine->apply(OrderTransitions::TRANSITION_FULFILL, true)->shouldBeCalled();
 
         $this->updateOrderOnPayment($payment);
     }

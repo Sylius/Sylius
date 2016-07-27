@@ -202,7 +202,9 @@
             <argument type="service" id="sylius.factory.order_item_unit" />
             <argument type="service" id="sm.factory" />
         </service>
-        <service id="sylius.order_processing.state_resolver" class="%sylius.order_processing.state_resolver.class%" />
+        <service id="sylius.order_processing.state_resolver" class="%sylius.order_processing.state_resolver.class%">
+            <argument type="service" id="sm.factory" />
+        </service>
         <service id="sylius.order_processing.shipment_processor" class="%sylius.order_processing.shipment_processor.class%">
             <argument type="service" id="sylius.resolver.default_shipping_method" />
             <argument type="service" id="sylius.factory.shipment" />

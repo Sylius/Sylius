@@ -11,22 +11,40 @@
 
 namespace Sylius\Component\Core\OrderProcessing;
 
+use SM\Factory\FactoryInterface;
+use SM\StateMachine\StateMachineInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderShippingStates;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
-use Sylius\Component\Core\OrderPaymentStates;
+use Sylius\Component\Core\OrderPaymentTransitions;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 class StateResolver implements StateResolverInterface
 {
+    /**
+     * @var FactoryInterface
+     */
+    private $stateMachineFactory;
+
+    /**
+     * @param FactoryInterface $stateMachineFactory
+     */
+    public function __construct(FactoryInterface $stateMachineFactory)
+    {
+        $this->stateMachineFactory = $stateMachineFactory;
+    }
+
     /**
      * {@inheritdoc}
      */
     public function resolvePaymentState(OrderInterface $order)
     {
+        $stateMachine = $this->stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH);
+
         if ($order->hasPayments()) {
             $payments = $order->getPayments();
             $completedPaymentTotal = 0;
@@ -38,25 +56,25 @@ class StateResolver implements StateResolverInterface
             }
 
             if (OrderInterface::STATE_CANCELLED === $order->getState()) {
-                $order->setPaymentState(OrderPaymentStates::STATE_CANCELLED);
+                $this->applyTransition($stateMachine, OrderPaymentTransitions::TRANSITION_CANCEL);
 
                 return;
             }
 
             if (OrderInterface::STATE_FULFILLED === $order->getState() && $completedPaymentTotal >= $order->getTotal()) {
-                $order->setPaymentState(OrderPaymentStates::STATE_PAID);
+                $this->applyTransition($stateMachine, OrderPaymentTransitions::TRANSITION_PAY);
 
                 return;
             }
 
             if ($completedPaymentTotal < $order->getTotal() && 0 < $completedPaymentTotal) {
-                $order->setPaymentState(OrderPaymentStates::STATE_PARTIALLY_PAID);
+                $this->applyTransition($stateMachine, OrderPaymentTransitions::TRANSITION_PARTIALLY_PAY);
 
                 return;
             }
         }
 
-        $order->setPaymentState(OrderPaymentStates::STATE_AWAITING_PAYMENT);
+        $this->applyTransition($stateMachine, OrderPaymentTransitions::TRANSITION_REQUEST_PAYMENT);
     }
 
     /**
@@ -101,5 +119,16 @@ class StateResolver implements StateResolverInterface
         }
 
         return OrderShippingStates::PARTIALLY_SHIPPED;
+    }
+
+    /**
+     * @param StateMachineInterface $stateMachine
+     * @param string $transition
+     */
+    private function applyTransition(StateMachineInterface $stateMachine, $transition)
+    {
+        if ($stateMachine->can($transition)) {
+            $stateMachine->apply($transition);
+        }
     }
 }

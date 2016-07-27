@@ -18,6 +18,7 @@ use Sylius\Component\Order\OrderTransitions;
 
 /**
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 class OrderPaymentCallback
 {
@@ -42,22 +43,16 @@ class OrderPaymentCallback
             throw new \RuntimeException(sprintf('Cannot retrieve Order from Payment with id %s', $payment->getId()));
         }
 
-        $total = 0;
-        if (PaymentInterface::STATE_COMPLETED === $payment->getState()) {
-            $payments = $order->getPayments()->filter(function (PaymentInterface $payment) {
-                return PaymentInterface::STATE_COMPLETED === $payment->getState();
-            });
+        $payments = $order->getPayments()->filter(function (PaymentInterface $payment) {
+            return PaymentInterface::STATE_COMPLETED === $payment->getState();
+        });
 
-            if ($payments->count() === $order->getPayments()->count()) {
-                $order->setPaymentState(PaymentInterface::STATE_COMPLETED);
-            }
-
-            $total += $payment->getAmount();
-        } else {
-            $order->setPaymentState($payment->getState());
+        $completedPaymentTotal = 0;
+        foreach ($payments as $payment) {
+            $completedPaymentTotal += $payment->getAmount();
         }
 
-        if ($total >= $order->getTotal()) {
+        if ($completedPaymentTotal >= $order->getTotal()) {
             $this->factory->get($order, OrderTransitions::GRAPH)->apply(OrderTransitions::TRANSITION_FULFILL, true);
         }
     }

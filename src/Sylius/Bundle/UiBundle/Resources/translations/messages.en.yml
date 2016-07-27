@@ -81,6 +81,7 @@ sylius:
         calculator: Calculator
         cancel: Cancel
         cancelled: Cancelled
+        cart: Cart
         cart_locked: 'Cart locked'
         cart_summary: 'Cart summary'
         categorization: Categorization
@@ -311,6 +312,7 @@ sylius:
         first_name: 'First name'
         forgot_password: 'Forgot password'
         fulfill: Fulfill
+        fulfilled: Fulfilled
         gateway: Gateway
         general_info: 'General Info'
         general_settings: 'General Settings'

@@ -13,18 +13,28 @@ namespace spec\Sylius\Component\Core\OrderProcessing;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
+use SM\Factory\FactoryInterface;
+use SM\StateMachine\StateMachineInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderShippingStates;
 use Sylius\Component\Core\Model\Payment;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
+use Sylius\Component\Core\OrderPaymentStates;
+use Sylius\Component\Core\OrderPaymentTransitions;
 use Sylius\Component\Core\OrderProcessing\StateResolverInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 final class StateResolverSpec extends ObjectBehavior
 {
+    function let(FactoryInterface $stateMachineFactory)
+    {
+        $this->beConstructedWith($stateMachineFactory);
+    }
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Core\OrderProcessing\StateResolver');
@@ -74,73 +84,92 @@ final class StateResolverSpec extends ObjectBehavior
     }
 
     function it_marks_order_as_completed_if_fully_paid(
-        OrderInterface $order
+        FactoryInterface $stateMachineFactory,
+        StateMachineInterface $stateMachine,
+        OrderInterface $order,
+        PaymentInterface $payment
     ) {
-        $payment1 = new Payment();
-        $payment1->setAmount(10000);
-        $payment1->setState(PaymentInterface::STATE_COMPLETED);
-        $payments = new ArrayCollection([$payment1]);
+        $payment->getAmount()->willReturn(10000);
+        $payment->getState()->willReturn(PaymentInterface::STATE_COMPLETED);
 
         $order->hasPayments()->willReturn(true);
-        $order->getPayments()->willReturn($payments);
-
+        $order->getPayments()->willReturn([$payment]);
+        $order->getState()->willReturn(OrderInterface::STATE_FULFILLED);
         $order->getTotal()->willReturn(10000);
-        $order->setPaymentState(PaymentInterface::STATE_COMPLETED)->shouldBeCalled();
+
+        $stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH)->willReturn($stateMachine);
+        $stateMachine->can(OrderPaymentTransitions::TRANSITION_PAY)->willReturn(true);
+        $stateMachine->apply(OrderPaymentTransitions::TRANSITION_PAY)->shouldBeCalled();
+
         $this->resolvePaymentState($order);
     }
 
     function it_marks_order_as_completed_if_fully_paid_multiple_payments(
-        OrderInterface $order
+        FactoryInterface $stateMachineFactory,
+        StateMachineInterface $stateMachine,
+        OrderInterface $order,
+        PaymentInterface $payment1,
+        PaymentInterface $payment2
     ) {
-        $payment1 = new Payment();
-        $payment1->setAmount(6000);
-        $payment1->setState(PaymentInterface::STATE_COMPLETED);
-        $payment2 = new Payment();
-        $payment2->setAmount(4000);
-        $payment2->setState(PaymentInterface::STATE_COMPLETED);
-        $payments = new ArrayCollection([$payment1, $payment2]);
+        $payment1->getAmount()->willReturn(6000);
+        $payment1->getState()->willReturn(PaymentInterface::STATE_COMPLETED);
+        $payment2->getAmount()->willReturn(4000);
+        $payment2->getState()->willReturn(PaymentInterface::STATE_COMPLETED);
 
         $order->hasPayments()->willReturn(true);
-        $order->getPayments()->willReturn($payments);
-
+        $order->getPayments()->willReturn([$payment1, $payment2]);
+        $order->getState()->willReturn(OrderInterface::STATE_FULFILLED);
         $order->getTotal()->willReturn(10000);
-        $order->setPaymentState(PaymentInterface::STATE_COMPLETED)->shouldBeCalled();
+
+        $stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH)->willReturn($stateMachine);
+        $stateMachine->can(OrderPaymentTransitions::TRANSITION_PAY)->willReturn(true);
+        $stateMachine->apply(OrderPaymentTransitions::TRANSITION_PAY)->shouldBeCalled();
+
         $this->resolvePaymentState($order);
     }
 
-    function it_marks_order_as_processing_if_one_of_the_payment_is_processing(OrderInterface $order)
-    {
-        $payment1 = new Payment();
-        $payment1->setAmount(6000);
-        $payment1->setState(PaymentInterface::STATE_PROCESSING);
-        $payment2 = new Payment();
-        $payment2->setAmount(4000);
-        $payment2->setState(PaymentInterface::STATE_NEW);
-        $payments = new ArrayCollection([$payment1, $payment2]);
+    function it_marks_order_as_partially_paid_if_one_of_the_payment_is_processing(
+        FactoryInterface $stateMachineFactory,
+        StateMachineInterface $stateMachine,
+        OrderInterface $order,
+        PaymentInterface $payment1,
+        PaymentInterface $payment2
+    ) {
+        $payment1->getAmount()->willReturn(6000);
+        $payment1->getState()->willReturn(PaymentInterface::STATE_PROCESSING);
+        $payment2->getAmount()->willReturn(4000);
+        $payment2->getState()->willReturn(PaymentInterface::STATE_COMPLETED);
 
         $order->hasPayments()->willReturn(true);
-        $order->getPayments()->willReturn($payments);
-
+        $order->getPayments()->willReturn([$payment1, $payment2]);
+        $order->getState()->willReturn(OrderInterface::STATE_NEW);
         $order->getTotal()->willReturn(10000);
-        $order->setPaymentState(PaymentInterface::STATE_PROCESSING)->shouldBeCalled();
+
+        $stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH)->willReturn($stateMachine);
+        $stateMachine->can(OrderPaymentTransitions::TRANSITION_PARTIALLY_PAY)->willReturn(true);
+        $stateMachine->apply(OrderPaymentTransitions::TRANSITION_PARTIALLY_PAY)->shouldBeCalled();
+
         $this->resolvePaymentState($order);
     }
 
-    function it_marks_order_as_new_if_no_payment_is_in_process(OrderInterface $order)
-    {
-        $payment1 = new Payment();
-        $payment1->setAmount(6000);
-        $payment1->setState(PaymentInterface::STATE_NEW);
-        $payment2 = new Payment();
-        $payment2->setAmount(4000);
-        $payment2->setState(PaymentInterface::STATE_NEW);
-        $payments = new ArrayCollection([$payment1, $payment2]);
+    function it_marks_order_as_awaiting_payment_if_no_payment_is_in_process(
+        FactoryInterface $stateMachineFactory,
+        StateMachineInterface $stateMachine,
+        OrderInterface $order,
+        PaymentInterface $payment
+    ) {
+        $payment->getAmount()->willReturn(6000);
+        $payment->getState()->willReturn(PaymentInterface::STATE_NEW);
 
         $order->hasPayments()->willReturn(true);
-        $order->getPayments()->willReturn($payments);
-
+        $order->getPayments()->willReturn([$payment]);
+        $order->getState()->willReturn(OrderInterface::STATE_NEW);
         $order->getTotal()->willReturn(10000);
-        $order->setPaymentState(PaymentInterface::STATE_NEW)->shouldBeCalled();
+
+        $stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH)->willReturn($stateMachine);
+        $stateMachine->can(OrderPaymentTransitions::TRANSITION_REQUEST_PAYMENT)->willReturn(true);
+        $stateMachine->apply(OrderPaymentTransitions::TRANSITION_REQUEST_PAYMENT)->shouldBeCalled();
+
         $this->resolvePaymentState($order);
     }
 }
