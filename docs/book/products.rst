@@ -4,24 +4,89 @@
 Products
 ========
 
-**Product** model represents unique products in your Sylius store. Every product can have different variations or attributes and has following values:
+**Product** model represents unique products in your Sylius store.
+Every product can have different variations and attributes.
 
-* *name* - The full name of the product
-* *slug* - Urlized version of the name
-* *description* - Description of the product
-* *shortDescription* - Simple description of the product for lists and banners
-* *metaDescription* - Description for search engines
-* *metaKeywords* - SEO keywords
-* *createdAt* - Date of creation
-* *updateAt* - Timestamp of the most recent update
+.. warning::
+
+   Each product has to have at least one variant to be sold in the shop.
+
+How to create a Product?
+------------------------
+
+Before we learn how to create products that can be sold, let's see how to create a product without its complex dependencies.
+
+.. code-block:: php
+
+     /** @var ProductFactoryInterface $productFactory **/
+     $productFactory = $this->get('sylius.factory.product');
+
+     /** @var ProductInterface $product */
+     $product = $productFactory->createNew();
+
+Creating an empty product is not enough to save it in the database. It needs to have a ``name`` and ``code``.
+
+.. code-block:: php
+
+     $product->setName('T-Shirt');
+     $product->setCode('00001');
+
+     /** @var RepositoryInterface $productRepository */
+     $productRepository = $this->get('sylius.repository.product');
+
+     $productRepository->add($product);
+
+After being added via the repository, your product will be in the system. But the customers won't be able to buy it.
+
+Variants
+========
+
+**ProductVariant** represents a unique kind of product and can have its own pricing configuration, inventory tracking etc.
+
+Variants may be created out of Options of the product, but you are also able to use product variations system without the options at all.
+
+How to create a Product with a Variant?
+---------------------------------------
+
+You may need to sell product in different Variants - for instance you may need to have books both in hardcover and in paperback.
+Just like before, use a factory, create the product, save it in the Repository.
+And then using the ProductVariantFactory create a variant for your product.
+
+.. code-block:: php
+
+     /** @var ProductVariantFactoryInterface $productvariantFactory **/
+     $productVariantFactory = $this->get('sylius.factory.product_variant');
+
+     /** @var ProductVariantInterface $product */
+     $variant = $productVariantFactory->createNew();
+
+Having Variant created give it a desired name and attach it to your Product.
+
+.. code-block:: php
+
+     $variant->setName('Hardcover');
+     $variant->setProduct($product);
+
+Finally save your Variant in the database using a repository.
+
+.. code-block:: php
+
+     /** @var RepositoryInterface $productVariantRepository */
+     $productVariantRepository = $this->get('sylius.repository.product_variant');
+
+     $productVariantRepository->add($variant);
 
 Options
--------
+=======
 
-In many cases, you will have product with different variations. The simplest example would be a T-Shirt available in different sizes and colors.
+In many cases, you will want to have product with different variations.
+The simplest example would be a piece of clothing, like a T-Shirt available in different sizes and colors
+or a glass available in different shapes or colors.
 In order to automatically generate appropriate variants, you need to define options.
 
 Every option type is represented by **ProductOption** and references multiple **ProductOptionValue** entities.
+
+For example you can have two options - Size and Color. Each of them will have their own values.
 
 * Size
     * S
@@ -29,44 +94,71 @@ Every option type is represented by **ProductOption** and references multiple **
     * L
     * XL
     * XXL
+
 * Color
     * Red
     * Green
     * Blue
 
-Variants
---------
+After defining possible options for a product let's move on to **Variants** which are in fact combinations of options.
 
-**ProductVariant** represents a unique combination of product options and can have its own pricing configuration, inventory tracking etc.
+How to create a Product with Options and Variants?
+--------------------------------------------------
 
-You are also able to use product variations system without the options at all.
+Firstly let's learn how to prepare an exemplary Option and its values.
 
-Master Variant
-``````````````
+.. code-block:: php
 
-Each product has a master variant, which tracks the same information as any other variant. It exists to simplify the internal Sylius logic. Whenever a product is created, a master variant for that product will be created too.
+     /* @var $option OptionInterface */
+     $option = $this->get('sylius.factory.product_option')->createNew();
+     $option->setCode('t_shirt_color');
 
-Attributes
-----------
+     $option->setName('T-Shirt Color');
 
-Attributes allow you to define product specific values.
+     // Prepare an array with values for your option, with codes, locale code and option values.
+     $valuesData = [
+         'OV1' => ['en_US' => 'Red'],
+         'OV2' => ['en_US' => 'Blue'],
+         'OV3' => ['en_US' => 'Green'],
+     ];
 
-Prototypes
-----------
+     foreach ($valuesData as $code => $values) {
+         /* @var $values OptionValueInterface */
+         $optionValue = $this->get('sylius.factory.product_option_value')->createNew();
+         $optionValue->setCode($code);
 
-...
+         foreach ($values as $locale => $value) {
+             $optionValue->setFallbackLocale($locale);
+             $optionValue->setCurrentLocale($locale);
+             $optionValue->setValue($value);
+         }
 
-Images
-------
+         $option->addValue($optionValue);
+     }
 
-...
+After you have an Option created and you keep it as ``$option`` variable let's add it to the Product and generate **Variants**.
 
-Final Thoughts
---------------
+.. code-block:: php
 
-...
+     // Assuming that you have a basic product let's add the previously created option to it.
+     $product->addOption($option);
 
-Learn more
-----------
+     // Having option of a product you can generate variants. Sylius has a service for that operation.
+     /** @var VariantGeneratorInterface $variantGenerator */
+     $variantGenerator = $this->get('sylius.generator.variant');
 
-* ...
+     $variantGenerator->generate($product);
+
+     // And finally add the product, with its newly generated variants to the repository.
+     /** @var RepositoryInterface $productRepository */
+     $productRepository = $this->get('sylius.repository.product');
+
+     $productRepository->add($product);
+
+Learn more:
+-----------
+
+* :doc:`Product - Bundle Documentation </bundles/SyliusProductBundle/index>`
+* :doc:`Product - Component Documentation </components/Product/index>`
+* :doc:`Variation- Bundle Documentation </bundles/SyliusVariationBundle/index>`
+* :doc:`Variation - Component Documentation </components/Variation/index>`
