@@ -1,5 +1,5 @@
 sylius_resource:
-    translation: true
+#    translation: true
     resources:
         app.book:
             classes:

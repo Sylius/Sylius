@@ -53,13 +53,15 @@
         "phpunit/phpunit": "^4.8",
         "sensio/generator-bundle": "^3.0",
         "sylius/grid-bundle": "^1.0",
+        "sylius/locale": "^1.0",
         "twig/twig": "~1.11"
     },
     "suggest": {
         "doctrine/mongodb-odm": "1.0.*@dev",
         "doctrine/orm": "^2.4.8,<2.5",
         "doctrine/phpcr-bundle": "~1.1",
-        "sylius/rbac-bundle": "^1.0"
+        "sylius/rbac-bundle": "^1.0",
+        "sylius/locale": "^1.0"
     },
     "scripts": {
         "post-install-cmd": [

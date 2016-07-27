@@ -126,7 +126,7 @@ abstract class AbstractDriver implements DriverInterface
             $decoratedDefinition = new Definition(Factory::class);
             $decoratedDefinition->setArguments([$modelClass]);
 
-            $definition->setArguments([$decoratedDefinition, new Reference('sylius.locale_provider')]);
+            $definition->setArguments([$decoratedDefinition, new Reference('sylius_resource.translation.locale_provider')]);
 
             $container->setDefinition($metadata->getServiceId('factory'), $definition);
 
