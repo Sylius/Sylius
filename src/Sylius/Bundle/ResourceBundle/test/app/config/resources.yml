@@ -1,5 +1,7 @@
 sylius_resource:
-#    translation: true
+    translation:
+        locale_provider: "test.locale_provider"
+        locale_context: "test.locale_context"
     resources:
         app.book:
             classes:

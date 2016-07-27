@@ -40,3 +40,15 @@ fos_rest:
     format_listener:
         rules:
             - { path: '^/', priorities: ['json'], fallback_format: json, prefer_extension: true }
+
+services:
+    test.locale_provider:
+        class: Sylius\Component\Locale\Provider\ImmutableLocaleProvider
+        arguments:
+            - ["pl_PL", "en_US", "de_DE"]
+            - "en_US"
+
+    test.locale_context:
+        class: Sylius\Component\Locale\Context\ImmutableLocaleContext
+        arguments:
+            - "en_US"
