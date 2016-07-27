@@ -571,4 +571,15 @@ final class ManagingOrdersContext implements Context
             sprintf('Cannot find order with "%s" number in the list.', $orderNumber)
         );
     }
+
+    /**
+     * @Given it should have shipment in state :shipmentState
+     */
+    public function itShouldHaveShipmentState($shipmentState)
+    {
+        Assert::true(
+            $this->showPage->hasShipment($shipmentState),
+            sprintf('It should have shipment with %s state', $shipmentState)
+        );
+    }
 }

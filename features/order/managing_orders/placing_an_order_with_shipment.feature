@@ -1,8 +1,8 @@
 @managing_orders
-Feature: Shipping an order
-    In order to confirm shipping of an order
+Feature: Shipments are in the state "ready" after checkout
+    In order to correctly process customer's shipments
     As an Administrator
-    I want to be able to ship a shipment
+    I want to have new shipments after my customer's checkout
 
     Background:
         Given the store operates on a single channel in "France"
@@ -16,15 +16,6 @@ Feature: Shipping an order
         And I am logged in as an administrator
 
     @ui
-    Scenario: Finalizing order's shipment
-        Given I view the summary of the order "#00000666"
-        When specify its tracking code as "#00044"
-        And I ship this order
-        Then I should be notified that the order's shipment has been successfully shipped
-        And its shipment state should be "shipped"
-
-    @ui
-    Scenario: Unable to finalize shipped order's shipment
-        Given this order has already been shipped
+    Scenario: Checking shipment state of a placed order
         When I view the summary of the order "#00000666"
-        Then I should not be able to ship this order
+        Then it should have shipment in state "Ready"

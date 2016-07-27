@@ -38,7 +38,7 @@ final class ShipmentSpec extends ObjectBehavior
 
     function it_has_ready_state_by_default()
     {
-        $this->getState()->shouldReturn(ShipmentInterface::STATE_CHECKOUT);
+        $this->getState()->shouldReturn(ShipmentInterface::STATE_CART);
     }
 
     function its_state_is_mutable()

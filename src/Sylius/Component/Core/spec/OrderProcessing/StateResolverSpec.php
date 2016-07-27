@@ -73,21 +73,6 @@ final class StateResolverSpec extends ObjectBehavior
         $this->resolveShippingState($order);
     }
 
-    function it_marks_order_as_returned_if_all_shipments_were_returned(
-        OrderInterface $order,
-        ShipmentInterface $shipment1,
-        ShipmentInterface $shipment2
-    ) {
-        $order->isBackorder()->shouldBeCalled()->willReturn(false);
-        $order->getShipments()->willReturn([$shipment1, $shipment2]);
-
-        $shipment1->getState()->willReturn(ShipmentInterface::STATE_RETURNED);
-        $shipment2->getState()->willReturn(ShipmentInterface::STATE_RETURNED);
-
-        $order->setShippingState(OrderShippingStates::RETURNED)->shouldBeCalled();
-        $this->resolveShippingState($order);
-    }
-
     function it_marks_order_as_completed_if_fully_paid(
         OrderInterface $order
     ) {

@@ -145,6 +145,14 @@ winzou_state_machine:
                     on: ["cancel"]
                     do: ["@sm.callback.cascade_transition", "apply"]
                     args: ["object.getPayments()", "event", "'cancel'", "'sylius_payment'"]
+                sylius_create_shipment:
+                    on: ["create"]
+                    do: ["@sm.callback.cascade_transition", "apply"]
+                    args: ["object.getShipments()", "event", "'create'", "'sylius_shipment'"]
+                sylius_cancel_shipment:
+                    on: ["cancel"]
+                    do: ["@sm.callback.cascade_transition", "apply"]
+                    args: ["object.getShipments()", "event", "'cancel'", "'sylius_shipment'"]
 
     sylius_inventory_unit:
         callbacks:

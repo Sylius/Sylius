@@ -397,22 +397,11 @@ final class OrderContext implements Context
     }
 
     /**
-     * @Given /^(this order) is ready to ship$/
-     */
-    public function thisOrderIsReadyToShip(OrderInterface $order)
-    {
-        $this->applyShipmentTransitionOnOrder($order, ShipmentTransitions::SYLIUS_PREPARE);
-
-        $this->objectManager->flush();
-    }
-
-    /**
      * @Given /^(this order) has already been shipped$/
      */
     public function thisOrderHasAlreadyBeenShipped(OrderInterface $order)
     {
-        $this->applyShipmentTransitionOnOrder($order, ShipmentTransitions::SYLIUS_PREPARE);
-        $this->applyShipmentTransitionOnOrder($order, ShipmentTransitions::SYLIUS_SHIP);
+        $this->applyShipmentTransitionOnOrder($order, ShipmentTransitions::TRANSITION_SHIP);
 
         $this->objectManager->flush();
     }
