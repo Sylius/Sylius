@@ -40,14 +40,10 @@ final class CompositeCartContextSpec extends ObjectBehavior
     }
 
     function it_throws_cart_not_found_exception_if_there_are_no_nested_cart_contexts_defined(
-        PrioritizedServiceRegistryInterface $prioritizedServiceRegistry,
-        PriorityQueue $priorityQueue,
-        SplPriorityQueue $splPriorityQueue
+        PrioritizedServiceRegistryInterface $prioritizedServiceRegistry
     ) {
+        $priorityQueue = new PriorityQueue();
         $prioritizedServiceRegistry->all()->willReturn($priorityQueue);
-
-        $priorityQueue->getIterator()->willReturn($splPriorityQueue);
-        $splPriorityQueue->valid(false);
 
         $this->shouldThrow(CartNotFoundException::class)->during('getCart');
     }
@@ -56,17 +52,13 @@ final class CompositeCartContextSpec extends ObjectBehavior
         PrioritizedServiceRegistryInterface $prioritizedServiceRegistry,
         CartContextInterface $firstCartContext,
         CartContextInterface $secondCartContext,
-        CartInterface $cart,
-        PriorityQueue $priorityQueue,
-        SplPriorityQueue $splPriorityQueue
+        CartInterface $cart
     ) {
-        $prioritizedServiceRegistry->all()->willReturn($priorityQueue);
-        $priorityQueue->getIterator()->willReturn($splPriorityQueue);
+        $priorityQueue = new PriorityQueue();
+        $priorityQueue->insert($firstCartContext->getWrappedObject());
+        $priorityQueue->insert($secondCartContext->getWrappedObject());
 
-        $splPriorityQueue->valid()->willReturn(true, true, false);
-        $splPriorityQueue->current()->willReturn($firstCartContext, $secondCartContext);
-        $splPriorityQueue->next()->shouldBeCalled();
-        $splPriorityQueue->rewind()->shouldBeCalled();
+        $prioritizedServiceRegistry->all()->willReturn($priorityQueue);
 
         $firstCartContext->getCart()->willThrow(CartNotFoundException::class);
         $secondCartContext->getCart()->willReturn($cart);

@@ -13,7 +13,7 @@ namespace Sylius\Bundle\CoreBundle\Checkout;
 
 use Sylius\Bundle\FlowBundle\Process\Builder\ProcessBuilderInterface;
 use Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface;
-use Sylius\Component\Cart\Provider\CartProviderInterface;
+use Sylius\Component\Cart\Context\CartContextInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 
 /**
@@ -22,16 +22,16 @@ use Sylius\Component\Core\Model\OrderInterface;
 class CheckoutProcessScenario implements ProcessScenarioInterface
 {
     /**
-     * @var CartProviderInterface
+     * @var CartContextInterface
      */
-    protected $cartProvider;
+    protected $cartContext;
 
     /**
-     * @param CartProviderInterface $cartProvider
+     * @param CartContextInterface $cartContext
      */
-    public function __construct(CartProviderInterface $cartProvider)
+    public function __construct(CartContextInterface $cartContext)
     {
-        $this->cartProvider = $cartProvider;
+        $this->cartContext = $cartContext;
     }
 
     /**
@@ -59,6 +59,6 @@ class CheckoutProcessScenario implements ProcessScenarioInterface
      */
     protected function getCurrentCart()
     {
-        return $this->cartProvider->getCart();
+        return $this->cartContext->getCart();
     }
 }

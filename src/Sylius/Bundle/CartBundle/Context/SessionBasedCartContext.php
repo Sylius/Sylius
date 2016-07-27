@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\CartBundle\Context;
 
 use Sylius\Component\Cart\Context\CartContextInterface;
+use Sylius\Component\Cart\Context\CartNotFoundException;
 use Sylius\Component\Cart\Repository\CartRepositoryInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
@@ -53,13 +54,15 @@ final class SessionBasedCartContext implements CartContextInterface
     public function getCart()
     {
         if (!$this->session->has($this->sessionKeyName)) {
-            return null;
+            throw new CartNotFoundException();
         }
 
         $cart = $this->cartRepository->findCartById($this->session->get($this->sessionKeyName));
 
         if (null === $cart) {
             $this->session->remove($this->sessionKeyName);
+
+            throw new CartNotFoundException();
         }
 
         return $cart;

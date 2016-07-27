@@ -37,7 +37,7 @@
             <argument type="service" id="session" />
             <argument>_sylius.cart</argument>
             <argument type="service" id="sylius.repository.cart" />
-            <tag name="sylius.cart_context" priority="-888" />
+            <tag name="sylius.cart_context" priority="-777" />
         </service>
         <service id="sylius.context.cart" class="Sylius\Component\Cart\Context\CompositeCartContext">
             <argument type="service" id="sylius.registry.cart_context" />

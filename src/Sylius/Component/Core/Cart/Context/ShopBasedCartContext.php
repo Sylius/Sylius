@@ -61,17 +61,13 @@ final class ShopBasedCartContext implements CartContextInterface
         /** @var OrderInterface $cart */
         $cart = $this->cartFactory->createNew();
 
-        if (null === $cart) {
-            throw new \LogicException('Decorated cart provider must return a cart instance, null given.');
-        }
-
         try {
             $cart->setChannel($this->shopperContext->getChannel());
+            $cart->setCurrencyCode($this->shopperContext->getCurrencyCode());
         } catch (ChannelNotFoundException $exception) {
             throw new CartNotFoundException($exception);
         }
         $cart->setCustomer($this->shopperContext->getCustomer());
-        $cart->setCurrencyCode($this->shopperContext->getCurrencyCode());
 
         $this->cart = $cart;
 

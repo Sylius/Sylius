@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\CartBundle\Context;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Cart\Context\CartContextInterface;
+use Sylius\Component\Cart\Context\CartNotFoundException;
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Cart\Repository\CartRepositoryInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -49,14 +50,14 @@ final class SessionBasedCartContextSpec extends ObjectBehavior
         $this->getCart()->shouldReturn($cart);
     }
 
-    function it_returns_null_when_there_is_not_id_stored_in_session(SessionInterface $session)
+    function it_throws_cart_not_found_exception_if_session_key_does_not_exist(SessionInterface $session)
     {
         $session->has('session_key_name')->willReturn(false);
 
-        $this->getCart()->shouldReturn(null);
+        $this->shouldThrow(CartNotFoundException::class)->during('getCart');
     }
 
-    function it_returns_null_and_removes_id_from_session_when_cart_is_not_found(
+    function it_throws_cart_not_found_exception_and_removes_id_from_session_when_cart_is_not_found(
         SessionInterface $session,
         CartRepositoryInterface $cartRepository
     ) {
@@ -66,6 +67,6 @@ final class SessionBasedCartContextSpec extends ObjectBehavior
 
         $session->remove('session_key_name')->shouldBeCalled();
 
-        $this->getCart()->shouldReturn(null);
+        $this->shouldThrow(CartNotFoundException::class)->during('getCart');
     }
 }

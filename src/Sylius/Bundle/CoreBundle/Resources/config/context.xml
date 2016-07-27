@@ -33,7 +33,7 @@
         <service id="sylius.context.cart_shop_based" class="Sylius\Component\Core\Cart\Context\ShopBasedCartContext">
             <argument type="service" id="sylius.factory.cart" />
             <argument type="service" id="sylius.context.shopper" />
-            <tag name="sylius.cart_context" priority="-777" />
+            <tag name="sylius.cart_context" priority="-888" />
         </service>
 
         <service id="sylius.currency_provider.channel_based" class="Sylius\Component\Core\Provider\ChannelBasedCurrencyProvider" decorates="sylius.currency_provider">

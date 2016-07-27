@@ -61,16 +61,6 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
         $this->getCart()->shouldReturn($cart);
     }
 
-    function it_throws_an_exception_if_cart_factory_returns_null(FactoryInterface $cartFactory)
-    {
-        $cartFactory->createNew()->willReturn(null);
-
-        $this
-            ->shouldThrow(\LogicException::class)
-            ->during('getCart')
-        ;
-    }
-
     function it_throws_cart_not_found_exception_if_channel_is_undefined(
         FactoryInterface $cartFactory,
         ShopperContextInterface $shopperContext,
@@ -78,6 +68,22 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
     ) {
         $cartFactory->createNew()->willReturn($cart);
         $shopperContext->getChannel()->willThrow(ChannelNotFoundException::class);
+
+        $this
+            ->shouldThrow(CartNotFoundException::class)
+            ->during('getCart')
+        ;
+    }
+
+    function it_throws_cart_not_found_exception_if_currency_code_is_undefined(
+        FactoryInterface $cartFactory,
+        ShopperContextInterface $shopperContext,
+        ChannelInterface $channel,
+        OrderInterface $cart
+    ) {
+        $cartFactory->createNew()->willReturn($cart);
+        $shopperContext->getChannel()->willReturn($channel);
+        $shopperContext->getCurrencyCode()->willThrow(ChannelNotFoundException::class);
 
         $this
             ->shouldThrow(CartNotFoundException::class)
