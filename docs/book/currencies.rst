@@ -7,36 +7,25 @@ Currencies
 Sylius supports multiple currencies per store and makes it very easy to manage them.
 
 There are several approaches to processing several currencies, but we decided to use the simplest solution
-we store all money values in the default currency and convert them to different currency with current rates or specific rates.
+we are storing all money values in the **base currency** and convert them to other currencies with current rates or specific rates.
 
-Every currency is represented by *Currency* entity and holds basic information:
+.. note::
 
-* id
-* code
-* exchangeRate
-* enabled
-* createdAt
-* updatedAt
+    The **base currency** is set during the installation of Sylius and it has the **exchange rate** equal to "1.000".
 
-The default currency has exchange rate of "1.000".
+.. tip::
+
+    In the dev environment you can easily check the base currency in the Symfony debug toolbar:
+
+    .. image:: ../_images/toolbar.png
+        :align: center
 
 Currency Context
 ----------------
 
-By default, user can switch his current currency in the frontend of the store.
+By default, user can switch the current currency in the frontend of the store.
 
-To manage the currently used currency, we use **CurrencyContext**. You can always access it through ``sylius.context.currency`` id.
-
-.. code-block:: php
-
-    <?php
-
-    public function fooAction()
-    {
-        $currency = $this->get('sylius.context.currency')->getCurrencyCode();
-    }
-
-To change the currently used currency, you can simply use the ``setCurrencyCode()`` method of context service.
+To manage the currently used currency, we use the **CurrencyContext**. You can always access it through the ``sylius.context.currency`` id.
 
 .. code-block:: php
 
@@ -44,20 +33,33 @@ To change the currently used currency, you can simply use the ``setCurrencyCode(
 
     public function fooAction()
     {
-        $this->get('sylius.context.currency')->setCurrencyCode('PLN');
+        $currency = $this->get('sylius.context.currency')->getCurrency();
     }
 
-The currency context can be injected into your custom service and give you access to currently used currency.
+Currency Converter
+------------------
 
-Product Prices
---------------
+The **Sylius\Component\Currency\Converter\CurrencyConverter** is a service available under the ``sylius.currency_converter`` id.
 
-...
+It lets you to convert money values from the base currency to all the other currencies and backwards.
+
+.. code-block:: php
+
+    <?php
+
+    public function fooAction()
+    {
+        // convert 100 of the base currency (for instance 100$ if USD is your base) to PLN.
+        $this->get('sylius.currency_converter')->convertFromBase(100, 'PLN');
+
+        // or the other way - convert 100 PLN to amount in the base currency
+        $this->get('sylius.currency_converter')->convertToBase(100, 'PLN');
+    }
 
 Available Currencies Provider
 -----------------------------
 
-The default menu for selecting currency is using a special service called ``sylius.currency_provider``, which returns all enabled currencies.
+The default menu for selecting currency is using a service - **CurrencyProvider** - with the ``sylius.currency_provider`` id, which returns all enabled currencies.
 This is your entry point if you would like override this logic and return different currencies for various scenarios.
 
 .. code-block:: php
@@ -67,18 +69,20 @@ This is your entry point if you would like override this logic and return differ
     public function fooAction()
     {
         $currencies = $this->get('sylius.currency_provider')->getAvailableCurrencies();
-
-        foreach ($currencies as $currency) {
-            echo $currency->getCode();
-        }
     }
 
-Final Thoughts
---------------
+Switching Currency of a Channel
+-------------------------------
 
-...
+We may of course change the currency used by a channel. For that we have the ``sylius.storage.currency`` service, which implements
+the ``Sylius\Component\Core\Currency\CurrencyStorageInterface`` with methods
+``->set(ChannelInterface $channel, $currencyCode)`` and ``->get(ChannelInterface $channel)``.
+
+.. code-block:: php
+
+    $container->get('sylius.storage.currency')->set($channel, 'PLN');
 
 Learn more
 ----------
 
-* ...
+* :doc:`Currency - Component Documentation </components/Currency/index>`
