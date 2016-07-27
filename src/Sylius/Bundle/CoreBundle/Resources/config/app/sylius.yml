@@ -76,7 +76,6 @@ sylius_core:
     sitemap: ~
 
 sylius_inventory:
-    backorders: true
     track_inventory: true
     resources:
         inventory_unit:
