@@ -12,7 +12,7 @@
 namespace spec\Sylius\Bundle\UserBundle\Form\EventSubscriber;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Model\UserInterface;
+use Sylius\Component\User\Model\UserInterface;
 use Sylius\Component\User\Model\UserAwareInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\Form;

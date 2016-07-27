@@ -42,7 +42,6 @@
         <parameter key="sylius.form.type.user_change_password.class">Sylius\Bundle\UserBundle\Form\Type\UserChangePasswordType</parameter>
 
         <parameter key="sylius.listener.user_delete.class">Sylius\Bundle\UserBundle\EventListener\UserDeleteListener</parameter>
-        <parameter key="sylius.listener.canonicalizer.class">Sylius\Bundle\UserBundle\EventListener\CanonicalizerListener</parameter>
         <parameter key="sylius.listener.password_updater.class">Sylius\Bundle\UserBundle\EventListener\PasswordUpdaterListener</parameter>
         <parameter key="sylius.listener.user_last_login.class">Sylius\Bundle\UserBundle\EventListener\UserLastLoginSubscriber</parameter>
         <parameter key="sylius.listener.user_reloader.class">Sylius\Bundle\UserBundle\EventListener\UserReloaderListener</parameter>
@@ -116,11 +115,6 @@
             <argument type="service" id="sylius.user.user_reloader" />
             <tag name="kernel.event_listener" event="sylius.user.post_create" method="reloadUser" />
             <tag name="kernel.event_listener" event="sylius.user.post_update" method="reloadUser" />
-        </service>
-        <service id="sylius.listener.canonicalizer" class="%sylius.listener.canonicalizer.class%">
-            <argument type="service" id="sylius.user.canonicalizer" />
-            <tag name="doctrine.event_listener" event="prePersist" />
-            <tag name="doctrine.event_listener" event="preUpdate" />
         </service>
         <service id="sylius.listener.password_updater" class="%sylius.listener.password_updater.class%">
             <argument type="service" id="sylius.user.password_updater" />

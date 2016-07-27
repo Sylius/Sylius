@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\UserBundle\EventListener;
+namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
-use Sylius\Component\Customer\Model\CustomerInterface;
-use Sylius\Component\User\Model\UserInterface;
+use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Core\Model\UserInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -30,7 +30,7 @@ final class CanonicalizerListenerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\UserBundle\EventListener\CanonicalizerListener');
+        $this->shouldHaveType('Sylius\Bundle\CoreBundle\EventListener\CanonicalizerListener');
     }
 
     function it_canonicalize_user_username_on_pre_persist_doctrine_event($canonicalizer, LifecycleEventArgs $event, UserInterface $user)

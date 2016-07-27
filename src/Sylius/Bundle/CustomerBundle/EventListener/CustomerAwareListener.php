@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\UserBundle\EventListener;
+namespace Sylius\Bundle\CustomerBundle\EventListener;
 
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Customer\Context\CustomerContextInterface;

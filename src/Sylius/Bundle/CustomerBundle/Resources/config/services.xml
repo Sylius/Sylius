@@ -18,6 +18,7 @@
 
     <parameters>
         <parameter key="sylius.form.type.gender.class">Sylius\Bundle\CustomerBundle\Form\Type\GenderType</parameter>
+        <parameter key="sylius.listener.customer_aware.class">Sylius\Bundle\CustomerBundle\EventListener\CustomerAwareListener</parameter>
     </parameters>
 
     <services>

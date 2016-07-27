@@ -69,6 +69,7 @@
         <parameter key="sylius.listener.user_cart_recalculation.class">Sylius\Bundle\CoreBundle\EventListener\UserCartRecalculationListener</parameter>
         <parameter key="sylius.listener.default_username.class">Sylius\Bundle\CoreBundle\EventListener\DefaultUsernameORMListener</parameter>
         <parameter key="sylius.listener.user_auto_login.class">Sylius\Bundle\CoreBundle\EventListener\UserAutoLoginListener</parameter>
+        <parameter key="sylius.listener.canonicalizer.class">Sylius\Bundle\CoreBundle\EventListener\CanonicalizerListener</parameter>
 
         <parameter key="sylius.active_promotions_by_channel_provider.class">Sylius\Component\Core\Provider\ActivePromotionsByChannelProvider</parameter>
 
@@ -372,6 +373,11 @@
         <service id="sylius.listener.user_auto_login" class="%sylius.listener.user_auto_login.class%">
             <argument type="service" id="sylius.security.user_login" />
             <tag name="kernel.event_listener" event="sylius.customer.post_register" method="login" />
+        </service>
+        <service id="sylius.listener.canonicalizer" class="%sylius.listener.canonicalizer.class%">
+            <argument type="service" id="sylius.user.canonicalizer" />
+            <tag name="doctrine.event_listener" event="prePersist" />
+            <tag name="doctrine.event_listener" event="preUpdate" />
         </service>
 
         <service id="sylius.active_promotions_by_channel_provider" class="%sylius.active_promotions_by_channel_provider.class%">

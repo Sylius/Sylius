@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\UserBundle\EventListener;
+namespace spec\Sylius\Bundle\CustomerBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\UserBundle\EventListener\CustomerAwareListener;
+use Sylius\Bundle\CustomerBundle\EventListener\CustomerAwareListener;
 use Sylius\Component\Customer\Context\CustomerContextInterface;
 use Sylius\Component\Customer\Model\CustomerAwareInterface;
 use Sylius\Component\Customer\Model\CustomerInterface;
