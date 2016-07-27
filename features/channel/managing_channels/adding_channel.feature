@@ -6,6 +6,7 @@ Feature: Adding a new channel
 
     Background:
         Given the store has currency "Euro"
+        And the store has locale "English (United States)"
         And I am logged in as an administrator
 
     @ui
@@ -14,6 +15,7 @@ Feature: Adding a new channel
         When I specify its code as "MOBILE"
         And I name it "Mobile channel"
         And I choose "Euro" as a default currency
+        And I choose "English (United States)" as a default locale
         And I add it
         Then I should be notified that it has been successfully created
         And the channel "Mobile channel" should appear in the registry
@@ -27,6 +29,7 @@ Feature: Adding a new channel
         And I set its hostname as "m.avengers-gear.com"
         And I define its color as "blue"
         And I choose "Euro" as a default currency
+        And I choose "English (United States)" as a default locale
         And I add it
         Then I should be notified that it has been successfully created
         And the channel "Mobile channel" should appear in the registry

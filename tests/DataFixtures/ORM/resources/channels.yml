@@ -5,6 +5,7 @@ Sylius\Component\Core\Model\Channel:
         hostname: "localhost"
         description: "Lorem ipsum"
         defaultCurrency: "@currency"
+        defaultLocale: "@locale"
         color: "black"
         enabled: true
         taxCalculationStrategy: "order_items_based"
@@ -13,4 +14,9 @@ Sylius\Component\Currency\Model\Currency:
     currency:
         code: EUR
         exchangeRate: 1
+        enabled: true
+
+Sylius\Component\Locale\Model\Locale:
+    locale:
+        code: en_US
         enabled: true
