@@ -11,48 +11,31 @@
 
 namespace Sylius\Component\Cart\Context;
 
-use Sylius\Component\Cart\Model\CartInterface;
-use Sylius\Component\Storage\StorageInterface;
+use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
- * @author Joseph Bielawski <stloyd@gmail.com>
  */
-class CartContext implements CartContextInterface
+final class CartContext implements CartContextInterface
 {
     /**
-     * Cart storage.
-     *
-     * @var StorageInterface
+     * @var FactoryInterface
      */
-    protected $storage;
+    private $cartFactory;
 
-    public function __construct(StorageInterface $storage)
+    /**
+     * @param FactoryInterface $cartFactory
+     */
+    public function __construct(FactoryInterface $cartFactory)
     {
-        $this->storage = $storage;
+        $this->cartFactory = $cartFactory;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getCurrentCartIdentifier()
+    public function getCart()
     {
-        return $this->storage->getData(self::STORAGE_KEY);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCurrentCartIdentifier(CartInterface $cart)
-    {
-        $this->storage->setData(self::STORAGE_KEY, $cart->getIdentifier());
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function resetCurrentCartIdentifier()
-    {
-        $this->storage->removeData(self::STORAGE_KEY);
+        return $this->cartFactory->createNew();
     }
 }

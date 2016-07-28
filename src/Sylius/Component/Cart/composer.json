@@ -23,6 +23,7 @@
         "php": "^5.6|^7.0",
 
         "sylius/order": "^1.0",
+        "sylius/registry": "^1.0",
         "sylius/storage": "^1.0"
     },
     "require-dev": {

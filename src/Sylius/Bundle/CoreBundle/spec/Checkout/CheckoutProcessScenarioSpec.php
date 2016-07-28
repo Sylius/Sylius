@@ -15,8 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\FlowBundle\Process\Builder\ProcessBuilderInterface;
 use Sylius\Bundle\FlowBundle\Process\Scenario\ProcessScenarioInterface;
-use Sylius\Component\Cart\Model\CartInterface;
-use Sylius\Component\Cart\Provider\CartProviderInterface;
+use Sylius\Component\Cart\Context\CartContextInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 
@@ -25,11 +24,11 @@ use Sylius\Component\Core\Model\PaymentInterface;
  */
 final class CheckoutProcessScenarioSpec extends ObjectBehavior
 {
-    function let(CartProviderInterface $cartProvider, OrderInterface $cart)
+    function let(CartContextInterface $cartContext, OrderInterface $cart)
     {
-        $cartProvider->getCart()->willReturn($cart);
+        $cartContext->getCart()->willReturn($cart);
 
-        $this->beConstructedWith($cartProvider);
+        $this->beConstructedWith($cartContext);
     }
 
     function it_is_initializable()

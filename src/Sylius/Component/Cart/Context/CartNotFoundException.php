@@ -11,20 +11,16 @@
 
 namespace Sylius\Component\Cart\Context;
 
-use Sylius\Component\Cart\Model\CartInterface;
-
 /**
- * Interface to be implemented by the service providing the currently used
- * cart.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface CartContextInterface
+class CartNotFoundException extends \RuntimeException
 {
     /**
-     * @return CartInterface
-     *
-     * @throws CartNotFoundException
+     * {@inheritdoc}
      */
-    public function getCart();
+    public function __construct(\Exception $previousException = null)
+    {
+        parent::__construct('Sylius was not able to figure out the current cart.', 0, $previousException);
+    }
 }
