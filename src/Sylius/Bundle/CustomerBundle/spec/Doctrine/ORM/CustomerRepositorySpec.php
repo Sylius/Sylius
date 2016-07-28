@@ -20,18 +20,23 @@ use Doctrine\ORM\QueryBuilder;
 use Pagerfanta\Pagerfanta;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\CustomerBundle\Doctrine\ORM\CustomerRepository;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\Customer\Repository\CustomerRepositoryInterface;
 
-class CustomerRepositorySpec extends ObjectBehavior
+/**
+ * @author Anna Walasek <anna.walasek@lakion.com>
+ */
+final class CustomerRepositorySpec extends ObjectBehavior
 {
-    public function let(EntityManager $em, ClassMetadata $classMetadata)
+    public function let(EntityManager $entityManager, ClassMetadata $classMetadata)
     {
-        $this->beConstructedWith($em, $classMetadata);
+        $this->beConstructedWith($entityManager, $classMetadata);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CustomerBundle\Doctrine\ORM\CustomerRepository');
+        $this->shouldHaveType(CustomerRepository::class);
     }
 
     function it_is_a_repository()
@@ -39,19 +44,21 @@ class CustomerRepositorySpec extends ObjectBehavior
         $this->shouldHaveType(EntityRepository::class);
     }
 
-    function it_finds_details($em, QueryBuilder $builder, Expr $expr, AbstractQuery $query)
+    function it_implements_customer_repository_interface()
     {
-        $builder->expr()->shouldBeCalled()->willReturn($expr);
-        $expr->eq('o.id', ':id')->shouldBeCalled()->willReturn($expr);
+        $this->shouldImplement(CustomerRepositoryInterface::class);
+    }
 
-        $em->createQueryBuilder()->shouldBeCalled()->willReturn($builder);
-        $builder->select('o')->shouldBeCalled()->willReturn($builder);
+    function it_count_customers(EntityManager $entityManager, QueryBuilder $builder, AbstractQuery $query)
+    {
+        $entityManager->createQueryBuilder()->shouldBeCalled()->willReturn($builder);
         $builder->from(Argument::any(), 'o', Argument::cetera())->shouldBeCalled()->willReturn($builder);
-        $builder->andWhere($expr)->shouldBeCalled()->willReturn($builder);
-        $builder->setParameter('id', 1)->shouldBeCalled()->willReturn($builder);
+        $builder->select('o')->shouldBeCalled()->willReturn($builder);
+        $builder->select('COUNT(o.id)')->shouldBeCalled()->willReturn($builder);
         $builder->getQuery()->shouldBeCalled()->willReturn($query);
-        $query->getOneOrNullResult()->shouldBeCalled();
+        
+        $query->getSingleScalarResult()->shouldBeCalled();
 
-        $this->findForDetailsPage(1);
+        $this->count();
     }
 }

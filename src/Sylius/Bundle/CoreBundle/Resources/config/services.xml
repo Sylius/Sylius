@@ -70,6 +70,8 @@
         <parameter key="sylius.listener.default_username.class">Sylius\Bundle\CoreBundle\EventListener\DefaultUsernameORMListener</parameter>
         <parameter key="sylius.listener.user_auto_login.class">Sylius\Bundle\CoreBundle\EventListener\UserAutoLoginListener</parameter>
         <parameter key="sylius.listener.canonicalizer.class">Sylius\Bundle\CoreBundle\EventListener\CanonicalizerListener</parameter>
+        <parameter key="sylius.listener.user_registration.class">Sylius\Bundle\CoreBundle\EventListener\UserRegistrationListener</parameter>
+
 
         <parameter key="sylius.active_promotions_by_channel_provider.class">Sylius\Component\Core\Provider\ActivePromotionsByChannelProvider</parameter>
 
@@ -376,6 +378,20 @@
         </service>
         <service id="sylius.listener.canonicalizer" class="%sylius.listener.canonicalizer.class%">
             <argument type="service" id="sylius.user.canonicalizer" />
+            <tag name="doctrine.event_listener" event="prePersist" />
+            <tag name="doctrine.event_listener" event="preUpdate" />
+        </service>
+        <service id="sylius.listener.user_registration" class="%sylius.listener.user_registration.class%">
+            <argument type="service" id="sylius.manager.user" />
+            <argument type="service" id="sylius.user.generator.email_verification_token" />
+            <argument type="service" id="event_dispatcher" />
+            <tag name="kernel.event_listener" event="sylius.customer.post_register" method="sendVerificationEmail" />
+        </service>
+        <service id="sylius.listener.password_updater" class="%sylius.listener.password_updater.class%">
+            <argument type="service" id="sylius.user.password_updater" />
+            <tag name="kernel.event_listener" event="sylius.user.pre_password_reset" method="genericEventUpdater" />
+            <tag name="kernel.event_listener" event="sylius.user.pre_password_change" method="genericEventUpdater" />
+            <tag name="kernel.event_listener" event="sylius.customer.pre_update" method="customerUpdateEvent" />
             <tag name="doctrine.event_listener" event="prePersist" />
             <tag name="doctrine.event_listener" event="preUpdate" />
         </service>

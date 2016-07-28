@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\CoreBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\CoreBundle\Form\Type\CustomerGuestType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\AbstractType;
@@ -33,7 +34,7 @@ class CustomerGuestTypeSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Form\Type\CustomerGuestTypeSpec');
+        $this->shouldHaveType(CustomerGuestType::class);
     }
 
     function it_is_a_form()
@@ -45,7 +46,7 @@ class CustomerGuestTypeSpec extends ObjectBehavior
     {
         $builder->add('email', 'email', Argument::type('array'))->shouldbeCalled()->willReturn($builder);
         $builder->addEventSubscriber($setCustomerFormSubscriber)->shouldbeCalled()->willReturn($builder);
-        $builder->getDataLocked(Argument::type('bool'))->shouldBeCalled()->willReturn($builder);
+        $builder->setDataLocked(Argument::type('bool'))->shouldBeCalled()->willReturn($builder);
 
         $this->buildForm($builder);
     }

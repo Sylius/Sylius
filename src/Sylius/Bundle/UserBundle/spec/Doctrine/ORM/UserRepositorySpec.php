@@ -26,9 +26,9 @@ use Sylius\Component\User\Repository\UserRepositoryInterface;
 
 final class UserRepositorySpec extends ObjectBehavior
 {
-    public function let(EntityManager $em, ClassMetadata $classMetadata)
+    public function let(EntityManager $entityManager, ClassMetadata $classMetadata)
     {
-        $this->beConstructedWith($em, $classMetadata);
+        $this->beConstructedWith($entityManager, $classMetadata);
     }
 
     function it_is_initializable()
@@ -47,14 +47,14 @@ final class UserRepositorySpec extends ObjectBehavior
     }
 
     function it_counts_user_user_repository(
-        $em,
+        EntityManager $entityManager,
         QueryBuilder $builder,
         \DateTime $from,
         \DateTime $to,
         AbstractQuery $query,
         Expr $expr
     ) {
-        $em->createQueryBuilder()->shouldBeCalled()->willReturn($builder);
+        $entityManager->createQueryBuilder()->shouldBeCalled()->willReturn($builder);
 
         $builder->expr()->shouldBeCalled()->willReturn($expr);
         $expr->gte(Argument::any(), Argument::any())->shouldBeCalled()->willReturn($expr);
@@ -76,12 +76,12 @@ final class UserRepositorySpec extends ObjectBehavior
     }
 
     function it_finds_one_by_email(
-        $em,
+        EntityManager $entityManager,
         QueryBuilder $builder,
         Expr $expr,
         AbstractQuery $query
     ) {
-        $em->createQueryBuilder()->shouldBeCalled()->willReturn($builder);
+        $entityManager->createQueryBuilder()->shouldBeCalled()->willReturn($builder);
         $builder->select('o')->shouldBeCalled()->willReturn($builder);
         $builder->from(Argument::any(), 'o', Argument::cetera())->shouldBeCalled()->willReturn($builder);
 

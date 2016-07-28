@@ -23,18 +23,4 @@ interface CustomerRepositoryInterface extends RepositoryInterface
      * @return int
      */
     public function count();
-
-    /**
-     * @param int $count
-     *
-     * @return CustomerInterface[]
-     */
-    public function findLatest($count);
-
-    /**
-     * @param mixed $id
-     *
-     * @return null|CustomerInterface
-     */
-    public function findForDetailsPage($id);
 }

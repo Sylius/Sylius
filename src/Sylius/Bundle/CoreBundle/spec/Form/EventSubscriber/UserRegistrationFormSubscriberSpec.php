@@ -34,7 +34,7 @@ class UserRegistrationFormSubscriberSpec extends ObjectBehavior
         $this->shouldImplement(EventSubscriberInterface::class);
     }
 
-    function it_listens_on_pre_submit()
+    function it_listens_on_submit()
     {
         $this->getSubscribedEvents()->shouldReturn([FormEvents::SUBMIT => 'submit']);
     }

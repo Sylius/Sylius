@@ -102,5 +102,4 @@ class CustomerRegistrationFormSubscriberSpec extends ObjectBehavior
 
         $this->preSubmit($event);
     }
-
 }

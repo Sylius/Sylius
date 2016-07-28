@@ -46,7 +46,6 @@
         <parameter key="sylius.listener.user_last_login.class">Sylius\Bundle\UserBundle\EventListener\UserLastLoginSubscriber</parameter>
         <parameter key="sylius.listener.user_reloader.class">Sylius\Bundle\UserBundle\EventListener\UserReloaderListener</parameter>
         <parameter key="sylius.listener.user_mailer_listener.class">Sylius\Bundle\UserBundle\EventListener\MailerListener</parameter>
-        <parameter key="sylius.listener.user_registration.class">Sylius\Bundle\UserBundle\EventListener\UserRegistrationListener</parameter>
 
         <parameter key="sylius.controller.user_security.class">Sylius\Bundle\UserBundle\Controller\SecurityController</parameter>
 
@@ -134,12 +133,6 @@
             <argument type="service" id="security.token_storage" />
             <argument type="service" id="session" />
             <tag name="kernel.event_listener" event="sylius.user.pre_delete" method="deleteUser" />
-        </service>
-        <service id="sylius.listener.user_registration" class="%sylius.listener.user_registration.class%">
-            <argument type="service" id="sylius.manager.user" />
-            <argument type="service" id="sylius.user.generator.email_verification_token" />
-            <argument type="service" id="event_dispatcher" />
-            <tag name="kernel.event_listener" event="sylius.customer.post_register" method="sendVerificationEmail" />
         </service>
 
         <!-- Event Subscribers -->

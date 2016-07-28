@@ -20,7 +20,7 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ * @author Anna Walasek <anna.walasek@lakion.com>
  */
 class SyliusCustomerExtension extends AbstractResourceExtension
 {
@@ -29,13 +29,7 @@ class SyliusCustomerExtension extends AbstractResourceExtension
      */
     public function load(array $config, ContainerBuilder $container)
     {
-        $config = $this->processConfiguration($this->getConfiguration($config, $container), $config);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-
-        $loader->load(sprintf('driver/%s.xml', $config['driver']));
-
-        $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
-
         $loader->load('services.xml');
     }
 }

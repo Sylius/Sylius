@@ -30,36 +30,4 @@ class CustomerRepository extends EntityRepository implements CustomerRepositoryI
             ->getSingleScalarResult()
         ;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function findLatest($count)
-    {
-        return $this->createQueryBuilder('o')
-            ->addOrderBy('o.createdAt', 'desc')
-            ->setMaxResults($count)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function findForDetailsPage($id)
-    {
-        $queryBuilder = $this->createQueryBuilder('o');
-        $queryBuilder
-            ->andWhere($queryBuilder->expr()->eq('o.id', ':id'))
-            ->setParameter('id', $id)
-        ;
-
-        $result = $queryBuilder
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-
-        return $result;
-    }
 }

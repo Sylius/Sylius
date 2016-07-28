@@ -67,25 +67,6 @@ class PasswordUpdaterListener
     }
 
     /**
-     * @param GenericEvent $event
-     */
-    public function customerUpdateEvent(GenericEvent $event)
-    {
-        $customer = $event->getSubject();
-
-        if (!$customer instanceof CustomerInterface) {
-            throw new UnexpectedTypeException(
-                $customer,
-                'Sylius\Component\Customer\Model\CustomerInterface'
-            );
-        }
-
-        if (null !== $user = $customer->getUser()) {
-            $this->updateUserPassword($user);
-        }
-    }
-
-    /**
      * @param LifecycleEventArgs $event
      */
     public function prePersist(LifecycleEventArgs $event)

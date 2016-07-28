@@ -146,7 +146,7 @@ class User implements UserInterface
     {
         return $this->id;
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -154,7 +154,7 @@ class User implements UserInterface
     {
         return $this->email;
     }
-    
+
     /**
      * {@inheritdoc}
      */

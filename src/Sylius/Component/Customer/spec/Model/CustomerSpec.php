@@ -13,6 +13,7 @@ namespace spec\Sylius\Component\Customer\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Customer\Model\CustomerInterface;
+use Sylius\Component\Customer\Model\GroupableInterface;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
@@ -31,7 +32,7 @@ final class CustomerSpec extends ObjectBehavior
 
     function it_implements_groupable_interface()
     {
-        $this->shouldImplement('Sylius\Component\Customer\Model\GroupableInterface');
+        $this->shouldImplement(GroupableInterface::class);
     }
 
     function it_sets_email()
