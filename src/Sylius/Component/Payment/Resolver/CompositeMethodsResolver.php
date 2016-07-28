@@ -37,6 +37,7 @@ class CompositeMethodsResolver implements MethodsResolverInterface
      */
     public function getSupportedMethods(PaymentInterface $payment)
     {
+        /** @var MethodsResolverInterface $resolver */
         foreach ($this->resolversRegistry->all() as $resolver) {
             if ($resolver->supports($payment)) {
                 return $resolver->getSupportedMethods($payment);
@@ -51,9 +52,9 @@ class CompositeMethodsResolver implements MethodsResolverInterface
      */
     public function supports(PaymentInterface $payment)
     {
+        /** @var MethodsResolverInterface $resolver */
         foreach ($this->resolversRegistry->all() as $resolver) {
             if ($resolver->supports($payment)) {
-                
                 return true;
             }
         }

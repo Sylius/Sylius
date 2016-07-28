@@ -30,6 +30,7 @@ final class CompositeCartContext implements CartContextInterface
 
     /**
      * @param CartContextInterface $cartContext
+     * @param int $priority
      */
     public function addContext(CartContextInterface $cartContext, $priority = 0)
     {

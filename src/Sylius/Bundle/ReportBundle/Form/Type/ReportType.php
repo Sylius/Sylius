@@ -16,6 +16,8 @@ use Sylius\Bundle\ReportBundle\Form\EventListener\BuildReportRendererFormSubscri
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Registry\ServiceRegistryInterface;
+use Sylius\Component\Report\DataFetcher\DataFetcherInterface;
+use Sylius\Component\Report\Renderer\RendererInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
@@ -82,6 +84,7 @@ class ReportType extends AbstractResourceType
             'dataFetchers' => [],
         ];
 
+        /** @var RendererInterface $renderer */
         foreach ($this->rendererRegistry->all() as $type => $renderer) {
             $formType = $renderer->getType();
 
@@ -96,6 +99,7 @@ class ReportType extends AbstractResourceType
             }
         }
 
+        /** @var DataFetcherInterface $dataFetcher */
         foreach ($this->dataFetcherRegistry->all() as $type => $dataFetcher) {
             $formType = $dataFetcher->getType();
 
