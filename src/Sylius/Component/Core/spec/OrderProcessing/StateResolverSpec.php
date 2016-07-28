@@ -92,9 +92,11 @@ final class StateResolverSpec extends ObjectBehavior
         $payment->getAmount()->willReturn(10000);
         $payment->getState()->willReturn(PaymentInterface::STATE_COMPLETED);
 
+        $payments = new ArrayCollection([$payment->getWrappedObject()]);
+
         $order->hasPayments()->willReturn(true);
-        $order->getPayments()->willReturn([$payment]);
-        $order->getState()->willReturn(OrderInterface::STATE_FULFILLED);
+        $order->getPayments()->willReturn($payments);
+        $order->getPaymentState()->willReturn(OrderPaymentStates::STATE_AWAITING_PAYMENT);
         $order->getTotal()->willReturn(10000);
 
         $stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH)->willReturn($stateMachine);
@@ -116,9 +118,11 @@ final class StateResolverSpec extends ObjectBehavior
         $payment2->getAmount()->willReturn(4000);
         $payment2->getState()->willReturn(PaymentInterface::STATE_COMPLETED);
 
+        $payments = new ArrayCollection([$payment1->getWrappedObject(), $payment2->getWrappedObject()]);
+
         $order->hasPayments()->willReturn(true);
-        $order->getPayments()->willReturn([$payment1, $payment2]);
-        $order->getState()->willReturn(OrderInterface::STATE_FULFILLED);
+        $order->getPayments()->willReturn($payments);
+        $order->getPaymentState()->willReturn(OrderPaymentStates::STATE_AWAITING_PAYMENT);
         $order->getTotal()->willReturn(10000);
 
         $stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH)->willReturn($stateMachine);
@@ -140,35 +144,16 @@ final class StateResolverSpec extends ObjectBehavior
         $payment2->getAmount()->willReturn(4000);
         $payment2->getState()->willReturn(PaymentInterface::STATE_COMPLETED);
 
+        $payments = new ArrayCollection([$payment1->getWrappedObject(), $payment2->getWrappedObject()]);
+
         $order->hasPayments()->willReturn(true);
-        $order->getPayments()->willReturn([$payment1, $payment2]);
-        $order->getState()->willReturn(OrderInterface::STATE_NEW);
+        $order->getPayments()->willReturn($payments);
+        $order->getPaymentState()->willReturn(OrderPaymentStates::STATE_AWAITING_PAYMENT);
         $order->getTotal()->willReturn(10000);
 
         $stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH)->willReturn($stateMachine);
         $stateMachine->can(OrderPaymentTransitions::TRANSITION_PARTIALLY_PAY)->willReturn(true);
         $stateMachine->apply(OrderPaymentTransitions::TRANSITION_PARTIALLY_PAY)->shouldBeCalled();
-
-        $this->resolvePaymentState($order);
-    }
-
-    function it_marks_order_as_awaiting_payment_if_no_payment_is_in_process(
-        FactoryInterface $stateMachineFactory,
-        StateMachineInterface $stateMachine,
-        OrderInterface $order,
-        PaymentInterface $payment
-    ) {
-        $payment->getAmount()->willReturn(6000);
-        $payment->getState()->willReturn(PaymentInterface::STATE_NEW);
-
-        $order->hasPayments()->willReturn(true);
-        $order->getPayments()->willReturn([$payment]);
-        $order->getState()->willReturn(OrderInterface::STATE_NEW);
-        $order->getTotal()->willReturn(10000);
-
-        $stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH)->willReturn($stateMachine);
-        $stateMachine->can(OrderPaymentTransitions::TRANSITION_REQUEST_PAYMENT)->willReturn(true);
-        $stateMachine->apply(OrderPaymentTransitions::TRANSITION_REQUEST_PAYMENT)->shouldBeCalled();
 
         $this->resolvePaymentState($order);
     }

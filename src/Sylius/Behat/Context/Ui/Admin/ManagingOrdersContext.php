@@ -587,9 +587,10 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then this order should have order payment state :orderPaymentState
+     * @Then the order :order should have order payment state :orderPaymentState
+     * @Then /^(this order) should have order payment state "([^"]+)"$/
      */
-    public function thisOrderShouldHavePaymentState($orderPaymentState)
+    public function theOrderShouldHavePaymentState(OrderInterface $order, $orderPaymentState)
     {
         Assert::true(
             $this->indexPage->isSingleResourceOnPage(['payment state' => $orderPaymentState]),

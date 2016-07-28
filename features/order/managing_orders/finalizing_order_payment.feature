@@ -30,7 +30,6 @@ Feature: Finalizing order payment
 
     @ui
     Scenario: Checking order payment state of a completed order
-        Given I view the summary of the order "#00000666"
-        And I mark this order as a paid
+        Given this order is already paid
         When I browse orders
         Then this order should have order payment state "Paid"

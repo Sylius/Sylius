@@ -22,5 +22,5 @@ Feature: Payments are in the state "new" after checkout
 
     @ui
     Scenario: Checking order payment state of a placed order
-        Given I browse orders
-        Then this order should have order payment state "Awaiting payment"
+        When I browse orders
+        Then the order "#00000666" should have order payment state "Awaiting payment"

@@ -31,7 +31,6 @@ Feature: Cancelling orders
 
     @ui
     Scenario: Checking order payment state of a cancelled order
-        Given I view the summary of the order "#00000022"
-        And I cancel this order
+        Given this order was canceled
         When I browse orders
         Then this order should have order payment state "Cancelled"

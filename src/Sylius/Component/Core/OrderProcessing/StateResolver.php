@@ -17,6 +17,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderShippingStates;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
+use Sylius\Component\Core\OrderPaymentStates;
 use Sylius\Component\Core\OrderPaymentTransitions;
 
 /**
@@ -45,23 +46,21 @@ class StateResolver implements StateResolverInterface
     {
         $stateMachine = $this->stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH);
 
+        if (OrderPaymentStates::STATE_PAID === $order->getPaymentState()) {
+            return;
+        }
+
         if ($order->hasPayments()) {
-            $payments = $order->getPayments();
             $completedPaymentTotal = 0;
+            $payments = $order->getPayments()->filter(function (PaymentInterface $payment) {
+                return PaymentInterface::STATE_COMPLETED === $payment->getState();
+            });
 
             foreach ($payments as $payment) {
-                if (PaymentInterface::STATE_COMPLETED === $payment->getState()) {
-                    $completedPaymentTotal += $payment->getAmount();
-                }
+                $completedPaymentTotal += $payment->getAmount();
             }
 
-            if (OrderInterface::STATE_CANCELLED === $order->getState()) {
-                $this->applyTransition($stateMachine, OrderPaymentTransitions::TRANSITION_CANCEL);
-
-                return;
-            }
-
-            if (OrderInterface::STATE_FULFILLED === $order->getState() && $completedPaymentTotal >= $order->getTotal()) {
+            if (0 < $payments->count() && $completedPaymentTotal >= $order->getTotal()) {
                 $this->applyTransition($stateMachine, OrderPaymentTransitions::TRANSITION_PAY);
 
                 return;
@@ -73,8 +72,6 @@ class StateResolver implements StateResolverInterface
                 return;
             }
         }
-
-        $this->applyTransition($stateMachine, OrderPaymentTransitions::TRANSITION_REQUEST_PAYMENT);
     }
 
     /**
