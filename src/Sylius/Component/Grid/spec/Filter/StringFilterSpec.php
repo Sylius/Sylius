@@ -165,7 +165,7 @@ final class StringFilterSpec extends ObjectBehavior
 
         $expressionBuilder->like('firstName', '%John%')->willReturn('EXPR1');
         $expressionBuilder->like('lastName', '%John%')->willReturn('EXPR2');
-        $expressionBuilder->orX(['EXPR1', 'EXPR2'])->willReturn('EXPR');
+        $expressionBuilder->orX('EXPR1', 'EXPR2')->willReturn('EXPR');
 
         $dataSource->restrict('EXPR')->shouldBeCalled();
 
