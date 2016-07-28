@@ -73,7 +73,6 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
             'api_form.xml',
             'templating.xml',
             'reports.xml',
-            'state_machine.xml',
             'email.xml',
             'metadata.xml',
             'sitemap.xml',
