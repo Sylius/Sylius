@@ -19,6 +19,7 @@ use Sylius\Component\Core\Context\ShopperContextInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Currency\Context\CurrencyNotFoundException;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
@@ -83,7 +84,7 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
     ) {
         $cartFactory->createNew()->willReturn($cart);
         $shopperContext->getChannel()->willReturn($channel);
-        $shopperContext->getCurrencyCode()->willThrow(ChannelNotFoundException::class);
+        $shopperContext->getCurrencyCode()->willThrow(CurrencyNotFoundException::class);
 
         $this
             ->shouldThrow(CartNotFoundException::class)
