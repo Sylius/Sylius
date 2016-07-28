@@ -547,7 +547,10 @@ final class ManagingOrdersContext implements Context
      */
     public function itShouldHaveState($state)
     {
-        $this->indexPage->isSingleResourceOnPage(['state' => $state]);
+        Assert::true(
+            $this->indexPage->isSingleResourceOnPage(['state' => $state]),
+            sprintf('Cannot find order with "%s" state in the list.', $state)
+        );
     }
 
     /**
