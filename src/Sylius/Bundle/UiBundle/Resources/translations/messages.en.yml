@@ -481,6 +481,7 @@ sylius:
         no_default_billing_address: 'No default billing address'
         no_default_shipping_address: 'No default shipping address'
         no_description: 'No description'
+        no_payment_methods_available: There are currently no payment methods available for your order
         no_pricing_configuration: 'No pricing configuration'
         no_promotion: No promotion applied
         no_requirement: No requirement
