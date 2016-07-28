@@ -105,6 +105,10 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
             ->getDefinition('sylius.form.type.customer')
             ->addArgument(new Reference('sylius.form.event_subscriber.add_user_type'))
         ;
+
+        $container
+            ->getDefinition('sylius.listener.password_updater')
+            ->setClass('Sylius\Bundle\CoreBundle\EventListener\PasswordUpdaterListener');
     }
 
     /**

@@ -11,10 +11,10 @@
 
 namespace Sylius\Bundle\CustomerBundle\DependencyInjection;
 
+use Sylius\Bundle\CustomerBundle\Doctrine\ORM\CustomerRepository;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Bundle\CustomerBundle\Controller\CustomerController;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceFromIdentifierType;
 use Sylius\Bundle\CustomerBundle\Form\Type\CustomerProfileType;
 use Sylius\Bundle\CustomerBundle\Form\Type\CustomerType;
@@ -77,8 +77,8 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->scalarNode('model')->defaultValue(Customer::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(CustomerInterface::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('controller')->defaultValue(CustomerController::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->defaultValue(CustomerRepository::class)->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                         ->arrayNode('form')
                                             ->addDefaultsIfNotSet()

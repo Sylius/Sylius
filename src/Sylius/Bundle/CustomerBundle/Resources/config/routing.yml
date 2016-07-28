@@ -1,6 +1,0 @@
-sylius_register:
-    resource: @SyliusCustomerBundle/Resources/config/routing/registration.yml
-
-sylius_account:
-    resource: @SyliusCustomerBundle/Resources/config/routing/account.yml
-    prefix: /account
