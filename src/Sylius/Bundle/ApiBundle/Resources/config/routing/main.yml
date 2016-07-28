@@ -1,5 +1,7 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
+fos_oauth_server_token:
+  resource: "@FOSOAuthServerBundle/Resources/config/routing/token.xml"
 
 sylius_api_product:
     resource: @SyliusApiBundle/Resources/config/routing/product.yml
