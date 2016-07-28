@@ -28,6 +28,7 @@ use Sylius\Component\Product\Model\OptionInterface;
 use Sylius\Component\Product\Model\OptionValueInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
+use Sylius\Component\Variation\Resolver\VariantResolverInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -82,6 +83,11 @@ final class ProductContext implements Context
     private $objectManager;
 
     /**
+     * @var VariantResolverInterface
+     */
+    private $defaultVariantResolver;
+
+    /**
      * @param SharedStorageInterface $sharedStorage
      * @param ProductRepositoryInterface $productRepository
      * @param ProductFactoryInterface $productFactory
@@ -91,6 +97,7 @@ final class ProductContext implements Context
      * @param FactoryInterface $productOptionFactory
      * @param FactoryInterface $productOptionValueFactory
      * @param ObjectManager $objectManager
+     * @param VariantResolverInterface $defaultVariantResolver
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -101,7 +108,8 @@ final class ProductContext implements Context
         FactoryInterface $productVariantFactory,
         FactoryInterface $productOptionFactory,
         FactoryInterface $productOptionValueFactory,
-        ObjectManager $objectManager
+        ObjectManager $objectManager,
+        VariantResolverInterface $defaultVariantResolver
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->productRepository = $productRepository;
@@ -112,6 +120,7 @@ final class ProductContext implements Context
         $this->productOptionFactory = $productOptionFactory;
         $this->productOptionValueFactory = $productOptionValueFactory;
         $this->objectManager = $objectManager;
+        $this->defaultVariantResolver = $defaultVariantResolver;
     }
 
     /**
@@ -195,7 +204,8 @@ final class ProductContext implements Context
      */
     public function productBelongsToTaxCategory(ProductInterface $product, TaxCategoryInterface $taxCategory)
     {
-        $product->getFirstVariant()->setTaxCategory($taxCategory);
+        $variant = $this->defaultVariantResolver->getVariant($product);
+        $variant->setTaxCategory($taxCategory);
         $this->objectManager->flush();
     }
 
@@ -425,9 +435,11 @@ final class ProductContext implements Context
         $product = $this->productFactory->createWithVariant();
 
         $product->setName($productName);
-        $product->getFirstVariant()->setPrice($price);
         $product->setCode($this->convertToCode($productName));
-        $product->getFirstVariant()->setCode($product->getCode());
+
+        $variant = $this->defaultVariantResolver->getVariant($product);
+        $variant->setPrice($price);
+        $variant->setCode($product->getCode());
 
         return $product;
     }

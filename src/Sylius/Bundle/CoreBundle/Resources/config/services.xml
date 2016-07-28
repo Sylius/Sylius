@@ -162,6 +162,7 @@
             <argument type="service" id="sylius.availability_checker" />
             <argument type="service" id="sylius.price_calculator" />
             <argument type="service" id="sylius.context.channel" />
+            <argument type="service" id="sylius.variant_resolver.default" />
         </service>
 
         <!-- checkout -->
@@ -351,6 +352,7 @@
         </service>
         <service id="sylius.listener.image_upload" class="%sylius.listener.image_upload.class%">
             <argument type="service" id="sylius.image_uploader" />
+            <argument type="service" id="sylius.variant_resolver.default" />
             <tag name="kernel.event_listener" event="sylius.product.pre_create" method="uploadProductImage" />
             <tag name="kernel.event_listener" event="sylius.product.pre_update" method="uploadProductImage" />
             <tag name="kernel.event_listener" event="sylius.product_variant.pre_create" method="uploadProductVariantImage" />

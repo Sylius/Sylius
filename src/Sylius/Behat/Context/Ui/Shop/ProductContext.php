@@ -185,4 +185,16 @@ final class ProductContext implements Context
             'Add to cart button should not be visible.'
         );
     }
+
+    /**
+     * @Then I should see the product price :price
+     */
+    public function iShouldSeeTheProductPrice($price)
+    {
+        Assert::same(
+            $price,
+            $this->showPage->getPrice(),
+            'Product should have price %2$s, but it has %s'
+        );
+    }
 }

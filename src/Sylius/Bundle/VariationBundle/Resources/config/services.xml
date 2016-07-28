@@ -24,7 +24,7 @@
 
         <parameter key="sylius.generator.variant.class">Sylius\Component\Variation\Generator\VariantGenerator</parameter>
 
-        <parameter key="sylius.resolver.default_variant.class">Sylius\Component\Variation\Resolver\DefaultVariantResolver</parameter>
+        <parameter key="sylius.variant_resolver.default.class">Sylius\Component\Variation\Resolver\DefaultVariantResolver</parameter>
     </parameters>
 
     <services>
@@ -46,7 +46,9 @@
             <argument type="service" id="sylius.set_builder.cartesian" />
         </service>
 
-        <service id="sylius.resolver.default_variant" class="%sylius.resolver.default_variant.class%"/>
+        <service id="sylius.variant_resolver.default" class="%sylius.variant_resolver.default.class%">
+            <tag name="sylius.variant_resolver.default" type="default" />
+        </service>
     </services>
 
 </container>
