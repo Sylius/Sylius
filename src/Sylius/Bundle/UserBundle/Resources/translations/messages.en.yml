@@ -1,8 +1,5 @@
 sylius:
     form:
-        group:
-            name: Name
-            roles: Roles
         user:
             email: Email
             enabled: Enabled
@@ -11,17 +8,6 @@ sylius:
                 confirmation: Verification
             remember_me: Remember me
             shipping_address: Shipping address
-        customer:
-            first_name: First name
-            groups: Groups
-            last_name: Last name
-            email: Email
-            phone_number: Phone number
-            gender: Gender
-            birthday: Birthday
-            billing_address: Billing address
-            different_billing_address: Use different address for billing?
-            only_customer_registration: Create account?
         user_filter:
             query: Search
         user_change_password:
@@ -31,7 +17,3 @@ sylius:
         user_reset_password:
             confirmation: Confirmation
             new: New password
-    gender:
-        unknown: Unknown
-        male: Male
-        female: Female
