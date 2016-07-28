@@ -141,7 +141,7 @@ class AssetsInstaller implements AssetsInstallerInterface
             $targetFile = $targetDir.'/'.$originFile->getRelativePathname();
             $targetFile = $this->pathResolver->resolve($targetFile, $theme);
 
-            if (file_exists($targetFile)) {
+            if (file_exists($targetFile) && AssetsInstallerInterface::HARD_COPY !== $symlinkMask) {
                 continue;
             }
 
