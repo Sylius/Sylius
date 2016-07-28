@@ -40,6 +40,5 @@
             <argument type="service" id="sylius_resource.translation.locale_provider"/>
             <tag name="form.type" alias="sylius_translations" />
         </service>
-
     </services>
 </container>

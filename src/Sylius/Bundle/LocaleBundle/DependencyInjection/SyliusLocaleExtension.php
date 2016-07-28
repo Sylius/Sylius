@@ -14,13 +14,14 @@ namespace Sylius\Bundle\LocaleBundle\DependencyInjection;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-final class SyliusLocaleExtension extends AbstractResourceExtension
+final class SyliusLocaleExtension extends AbstractResourceExtension implements PrependExtensionInterface
 {
     /**
      * {@inheritdoc}
@@ -42,5 +43,18 @@ final class SyliusLocaleExtension extends AbstractResourceExtension
         ;
 
         $container->findDefinition('sylius.repository.locale')->setLazy(true);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function prepend(ContainerBuilder $container)
+    {
+        $container->prependExtensionConfig('sylius_resource', [
+            'translation' => [
+                'locale_provider' => 'sylius.locale_provider',
+                'locale_context' => 'sylius.context.locale',
+            ],
+        ]);
     }
 }
