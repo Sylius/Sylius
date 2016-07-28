@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Cart\Context;
 
-use Sylius\Component\Registry\PrioritizedServiceRegistryInterface;
+use Zend\Stdlib\PriorityQueue;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -19,16 +19,21 @@ use Sylius\Component\Registry\PrioritizedServiceRegistryInterface;
 final class CompositeCartContext implements CartContextInterface
 {
     /**
-     * @var PrioritizedServiceRegistryInterface
+     * @var PriorityQueue|CartContextInterface[]
      */
-    private $cartContextsRegistry;
+    private $cartContexts;
+
+    public function __construct()
+    {
+        $this->cartContexts = new PriorityQueue();
+    }
 
     /**
-     * {@inheritdoc}
+     * @param CartContextInterface $cartContext
      */
-    public function __construct(PrioritizedServiceRegistryInterface $cartContextsRegistry)
+    public function addContext(CartContextInterface $cartContext, $priority = 0)
     {
-        $this->cartContextsRegistry = $cartContextsRegistry;
+        $this->cartContexts->insert($cartContext, $priority);
     }
 
     /**
@@ -36,8 +41,7 @@ final class CompositeCartContext implements CartContextInterface
      */
     public function getCart()
     {
-        $cartContexts = $this->cartContextsRegistry->all();
-        foreach ($cartContexts as $cartContext) {
+        foreach ($this->cartContexts as $cartContext) {
             try {
                 return $cartContext->getCart();
             } catch (CartNotFoundException $exception) {

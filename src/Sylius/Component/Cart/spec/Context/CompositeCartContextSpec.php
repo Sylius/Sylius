@@ -16,8 +16,6 @@ use Sylius\Component\Cart\Context\CartContextInterface;
 use Sylius\Component\Cart\Context\CartNotFoundException;
 use Sylius\Component\Cart\Context\CompositeCartContext;
 use Sylius\Component\Cart\Model\CartInterface;
-use Sylius\Component\Registry\PrioritizedServiceRegistryInterface;
-use Zend\Stdlib\PriorityQueue;
 
 /**
  * @mixin CompositeCartContext
@@ -26,11 +24,6 @@ use Zend\Stdlib\PriorityQueue;
  */
 final class CompositeCartContextSpec extends ObjectBehavior
 {
-    function let(PrioritizedServiceRegistryInterface $prioritizedServiceRegistry)
-    {
-        $this->beConstructedWith($prioritizedServiceRegistry);
-    }
-
     function it_is_initializable()
     {
         $this->shouldHaveType(CompositeCartContext::class);
@@ -41,29 +34,44 @@ final class CompositeCartContextSpec extends ObjectBehavior
         $this->shouldImplement(CartContextInterface::class);
     }
 
-    function it_throws_cart_not_found_exception_if_there_are_no_nested_cart_contexts_defined(
-        PrioritizedServiceRegistryInterface $prioritizedServiceRegistry
+    function it_throws_cart_not_found_exception_if_there_are_no_nested_cart_contexts_defined()
+    {
+        $this->shouldThrow(CartNotFoundException::class)->during('getCart');
+    }
+
+    function it_throws_cart_not_found_exception_if_none_of_nested_cart_context_returned_a_cart(
+        CartContextInterface $cartContext
     ) {
-        $priorityQueue = new PriorityQueue();
-        $prioritizedServiceRegistry->all()->willReturn($priorityQueue);
+        $cartContext->getCart()->willThrow(CartNotFoundException::class);
+        $this->addContext($cartContext);
 
         $this->shouldThrow(CartNotFoundException::class)->during('getCart');
     }
 
     function it_returns_cart_from_first_available_context(
-        PrioritizedServiceRegistryInterface $prioritizedServiceRegistry,
         CartContextInterface $firstCartContext,
         CartContextInterface $secondCartContext,
         CartInterface $cart
     ) {
-        $priorityQueue = new PriorityQueue();
-        $priorityQueue->insert($firstCartContext->getWrappedObject());
-        $priorityQueue->insert($secondCartContext->getWrappedObject());
-
-        $prioritizedServiceRegistry->all()->willReturn($priorityQueue);
-
         $firstCartContext->getCart()->willThrow(CartNotFoundException::class);
         $secondCartContext->getCart()->willReturn($cart);
+
+        $this->addContext($firstCartContext);
+        $this->addContext($secondCartContext);
+
+        $this->getCart()->shouldReturn($cart);
+    }
+
+    function its_cart_contexts_can_have_priority(
+        CartContextInterface $firstCartContext,
+        CartContextInterface $secondCartContext,
+        CartInterface $cart
+    ) {
+        $firstCartContext->getCart()->shouldNotBeCalled();
+        $secondCartContext->getCart()->willReturn($cart);
+
+        $this->addContext($firstCartContext, -1);
+        $this->addContext($secondCartContext, 0);
 
         $this->getCart()->shouldReturn($cart);
     }
