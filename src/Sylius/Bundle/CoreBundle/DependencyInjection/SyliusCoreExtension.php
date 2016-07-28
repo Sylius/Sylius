@@ -94,14 +94,6 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         $this->overwriteRuleFactory($container);
 
         $container
-            ->getDefinition('sylius.form.type.customer_registration')
-            ->addArgument(new Reference('sylius.repository.customer'))
-        ;
-        $container
-            ->getDefinition('sylius.form.type.customer_simple_registration')
-            ->addArgument(new Reference('sylius.repository.customer'))
-        ;
-        $container
             ->getDefinition('sylius.form.type.customer')
             ->addArgument(new Reference('sylius.form.event_subscriber.add_user_type'))
         ;
