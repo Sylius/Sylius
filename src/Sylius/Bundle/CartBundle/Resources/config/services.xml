@@ -31,7 +31,7 @@
 
         <service id="sylius.context.cart_new" class="Sylius\Component\Cart\Context\CartContext">
             <argument type="service" id="sylius.factory.cart" />
-            <tag name="sylius.cart_context" priority="-999" />
+            <tag name="sylius.cart_context" />
         </service>
         <service id="sylius.context.cart_session_based" class="Sylius\Bundle\CartBundle\Context\SessionBasedCartContext">
             <argument type="service" id="session" />

@@ -21,7 +21,6 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Currency\Context\CurrencyNotFoundException;
-use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @mixin ShopBasedCartContext
@@ -30,9 +29,9 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
  */
 final class ShopBasedCartContextSpec extends ObjectBehavior
 {
-    function let(FactoryInterface $cartFactory, ShopperContextInterface $shopperContext)
+    function let(CartContextInterface $cartContext, ShopperContextInterface $shopperContext)
     {
-        $this->beConstructedWith($cartFactory, $shopperContext);
+        $this->beConstructedWith($cartContext, $shopperContext);
     }
 
     function it_is_initializable()
@@ -46,13 +45,13 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
     }
 
     function it_creates_cart_if_does_not_exist_with_shop_basic_configuration(
-        FactoryInterface $cartFactory,
+        CartContextInterface $cartContext,
         ShopperContextInterface $shopperContext,
         OrderInterface $cart,
         ChannelInterface $channel,
         CustomerInterface $customer
     ) {
-        $cartFactory->createNew()->willReturn($cart);
+        $cartContext->getCart()->willReturn($cart);
 
         $shopperContext->getChannel()->willReturn($channel);
         $shopperContext->getCurrencyCode()->willReturn('PLN');
@@ -66,11 +65,11 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
     }
 
     function it_throws_cart_not_found_exception_if_channel_is_undefined(
-        FactoryInterface $cartFactory,
+        CartContextInterface $cartContext,
         ShopperContextInterface $shopperContext,
         OrderInterface $cart
     ) {
-        $cartFactory->createNew()->willReturn($cart);
+        $cartContext->getCart()->willReturn($cart);
         $shopperContext->getChannel()->willThrow(ChannelNotFoundException::class);
 
         $this
@@ -80,12 +79,12 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
     }
 
     function it_throws_cart_not_found_exception_if_currency_code_is_undefined(
-        FactoryInterface $cartFactory,
+        CartContextInterface $cartContext,
         ShopperContextInterface $shopperContext,
         ChannelInterface $channel,
         OrderInterface $cart
     ) {
-        $cartFactory->createNew()->willReturn($cart);
+        $cartContext->getCart()->willReturn($cart);
         $shopperContext->getChannel()->willReturn($channel);
         $shopperContext->getCurrencyCode()->willThrow(CurrencyNotFoundException::class);
 
