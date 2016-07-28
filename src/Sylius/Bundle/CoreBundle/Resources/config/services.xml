@@ -123,8 +123,6 @@
         <parameter key="sylius.form.type.data_fetcher.user_registration.class">Sylius\Bundle\CoreBundle\Form\Type\DataFetcher\UserRegistrationType</parameter>
 
         <parameter key="sylius.authorization_checker.toggleable.class">Sylius\Bundle\CoreBundle\Authorization\ToggleableAuthorizationChecker</parameter>
-        <parameter key="sylius.translation.locale_provider.contextual.class">Sylius\Bundle\CoreBundle\Provider\TranslationLocaleProvider</parameter>
-        <parameter key="sylius.translation.locales_provider.class">Sylius\Bundle\CoreBundle\Provider\AvailableLocalesProvider</parameter>
         <parameter key="sylius.based_on_id_invoice_number_generator.class" >Sylius\Component\Core\Payment\IdBasedInvoiceNumberGenerator</parameter>
 
         <!-- Should be deleted after old backend deletion -->
@@ -513,14 +511,6 @@
         <service id="sylius.authorization_checker.toggleable" class="%sylius.authorization_checker.toggleable.class%">
             <argument type="service" id="sylius.authorization_checker.default" />
             <argument type="service" id="sylius.settings.manager" />
-        </service>
-
-        <service id="sylius.translation.locales_provider" class="%sylius.translation.locales_provider.class%">
-            <argument type="service" id="sylius.repository.locale" />
-        </service>
-
-        <service id="sylius.translation.locale_provider.contextual" class="%sylius.translation.locale_provider.contextual.class%">
-            <argument type="service" id="sylius.context.locale" />
         </service>
 
         <service id="sylius.validator.has_enabled_entity" class="%sylius.validator.has_enabled_entity.class%">

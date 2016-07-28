@@ -26,7 +26,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class Configuration implements ConfigurationInterface
+final class Configuration implements ConfigurationInterface
 {
     /**
      * {@inheritdoc}
@@ -162,11 +162,8 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('translation')
                     ->canBeEnabled()
                     ->children()
-                        ->scalarNode('default_locale')->cannotBeEmpty()->end()
-                        ->scalarNode('locale_provider')->defaultValue('sylius.translation.locale_provider.request')->cannotBeEmpty()->end()
-                        ->scalarNode('available_locales_provider')->defaultValue('sylius.translation.locales_provider.array')->cannotBeEmpty()->end()
-                        ->arrayNode('available_locales') ->prototype('scalar')->end()
-                    ->end()
+                        ->scalarNode('locale_provider')->isRequired()->end()
+                        ->scalarNode('locale_context')->isRequired()->end()
                 ->end()
             ->end()
         ;

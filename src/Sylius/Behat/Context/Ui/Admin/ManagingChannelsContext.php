@@ -110,6 +110,15 @@ final class ManagingChannelsContext implements Context
     }
 
     /**
+     * @When I choose :locale as a default locale
+     * @When I do not choose default locale
+     */
+    public function iChooseAsADefaultLocale($locale = null)
+    {
+        $this->createPage->chooseDefaultLocale($locale);
+    }
+
+    /**
      * @When I add it
      * @When I try to add it
      */

@@ -16,7 +16,7 @@ use Sylius\Component\Resource\Model\ResourceInterface;
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-interface SampleResourceInterface extends ResourceInterface
+interface SampleBookResourceInterface extends ResourceInterface
 {
     /**
      * @return string

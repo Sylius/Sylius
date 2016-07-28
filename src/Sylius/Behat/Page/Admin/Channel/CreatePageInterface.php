@@ -73,6 +73,11 @@ interface CreatePageInterface extends BaseCreatePageInterface
     public function chooseDefaultTaxZone($taxZone);
 
     /**
+     * @param string $locale
+     */
+    public function chooseDefaultLocale($locale);
+
+    /**
      * @param string $currency
      */
     public function chooseDefaultCurrency($currency);
