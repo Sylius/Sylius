@@ -72,7 +72,7 @@ class StringFilter implements FilterInterface
      * @param string $type
      * @param string $field
      * @param mixed  $value
-     * 
+     *
      * @return ExpressionBuilderInterface
      */
     private function getExpression(ExpressionBuilderInterface $expressionBuilder, $type, $field, $value)
@@ -80,31 +80,22 @@ class StringFilter implements FilterInterface
         switch ($type) {
             case self::TYPE_EQUAL:
                 return $expressionBuilder->equals($field, $value);
-                break;
             case self::TYPE_EMPTY:
                 return $expressionBuilder->isNull($field);
-                break;
             case self::TYPE_NOT_EMPTY:
                 return $expressionBuilder->isNotNull($field);
-                break;
             case self::TYPE_CONTAINS:
                 return $expressionBuilder->like($field, '%'.$value.'%');
-                break;
             case self::TYPE_NOT_CONTAINS:
                 return $expressionBuilder->notLike($field, '%'.$value.'%');
-                break;
             case self::TYPE_STARTS_WITH:
                 return $expressionBuilder->like($field, $value.'%');
-                break;
             case self::TYPE_ENDS_WITH:
                 return $expressionBuilder->like($field, '%'.$value);
-                break;
             case self::TYPE_IN:
                 return $expressionBuilder->in($field, array_map('trim', explode(',', $value)));
-                break;
             case self::TYPE_NOT_IN:
                 return $expressionBuilder->notIn($field, array_map('trim', explode(',', $value)));
-                break;
         }
     }
 }
