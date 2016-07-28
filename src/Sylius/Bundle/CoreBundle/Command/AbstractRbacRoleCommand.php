@@ -12,8 +12,9 @@
 namespace Sylius\Bundle\CoreBundle\Command;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Component\Rbac\Model\RoleInterface;
 use Sylius\Component\Rbac\Repository\RoleRepositoryInterface;
-use Sylius\Component\User\Model\UserInterface;
+use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputInterface;
@@ -22,7 +23,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-abstract class AbstractRoleCommand extends ContainerAwareCommand
+abstract class AbstractRbacRoleCommand extends ContainerAwareCommand
 {
     /**
      * {@inheritdoc}
@@ -64,6 +65,11 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
     {
         $email = $input->getArgument('email');
         $roles = $input->getArgument('roles');
+        $superAdmin = $input->getOption('super-admin');
+
+        if ($superAdmin) {
+            $roles[] = 'administrator';
+        }
 
         /** @var UserInterface $user */
         $user = $this->findUserByEmail($email);
@@ -86,6 +92,26 @@ abstract class AbstractRoleCommand extends ContainerAwareCommand
         }
 
         return $user;
+    }
+
+    /**
+     * @param string $role
+     *
+     * @return RoleRepositoryInterface
+     */
+    protected function findAuthorizationRole($role)
+    {
+        $roleRepository = $this->getContainer()->get('sylius.repository.role');
+        /** @var RoleInterface $role */
+        $authorizationRole = $roleRepository->findOneBy(array('code' => $role));
+
+        if (null === $authorizationRole) {
+            throw new \InvalidArgumentException(
+                sprintf('No role with code `%s` does not exist.', $role)
+            );
+        }
+
+        return $authorizationRole;
     }
 
     /**

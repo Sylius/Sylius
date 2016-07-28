@@ -19,7 +19,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Loïc Frémont <loic@mobizel.com>
  */
-class PromoteUserCommand extends AbstractRoleCommand
+class RbacDemoteUserCommand extends AbstractRbacRoleCommand
 {
     /**
      * {@inheritdoc}
@@ -27,17 +27,17 @@ class PromoteUserCommand extends AbstractRoleCommand
     protected function configure()
     {
         $this
-            ->setName('sylius:user:rbac-promote')
-            ->setDescription('Promotes a user by adding rbac roles.')
+            ->setName('sylius:user:rbac-demote')
+            ->setDescription('Demotes a user by removing rbac roles.')
             ->setDefinition(array(
                 new InputArgument('email', InputArgument::REQUIRED, 'Email'),
                 new InputArgument('roles', InputArgument::IS_ARRAY, 'RBAC roles'),
                 new InputOption('super-admin', null, InputOption::VALUE_NONE, 'Set the user as a super admin'),
             ))
             ->setHelp(<<<EOT
-The <info>sylius:user:rbac-promote</info> command promotes a user by adding RBAC roles
+The <info>%command.name%</info> command demotes a user by removing RBAC roles
 
-  <info>php app/console sylius:user:promote matthieu@email.com</info>
+  <info>php app/console %command.name% matthieu@email.com</info>
 EOT
             );
     }
@@ -49,15 +49,17 @@ EOT
     {
         $error = false;
 
-        foreach ($roles as $role) {
-            if ($user->hasAuthorizationRole($role)) {
-                $output->writeln(sprintf('<error>User "%s" did already have "%s" RBAC role.</error>', (string)$user, $role));
+        foreach ($roles as $code) {
+            $role = $this->findAuthorizationRole($code);
+
+            if (!$user->hasAuthorizationRole($role)) {
+                $output->writeln(sprintf('<error>User "%s" didn\'t have "%s" RBAC role.</error>', (string)$user, $role));
                 $error = true;
                 continue;
             }
 
-            $user->addAuthorizationRole($role);
-            $output->writeln(sprintf('RBAC role <comment>%s</comment> has been added to user <comment>%s</comment>', $role, (string)$user));
+            $user->removeAuthorizationRole($role);
+            $output->writeln(sprintf('RBAC role <comment>%s</comment> has been removed from user <comment>%s</comment>', $role, (string)$user));
         }
 
         if (!$error) {
