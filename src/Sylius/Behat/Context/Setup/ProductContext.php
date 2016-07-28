@@ -329,7 +329,7 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Given /^the (product "([^"]+)") is not available at the moment$/
+     * @Given /^the (product "([^"]+)") is out of stock$/
      */
     public function theProductIsNotAvailable(ProductInterface $product)
     {

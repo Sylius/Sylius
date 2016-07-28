@@ -16,18 +16,14 @@ use Sylius\Component\Inventory\Model\StockableInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class AvailabilityChecker implements AvailabilityCheckerInterface
+final class AvailabilityChecker implements AvailabilityCheckerInterface
 {
     /**
      * {@inheritdoc}
      */
     public function isStockAvailable(StockableInterface $stockable)
     {
-        if ($stockable->isAvailableOnDemand()) {
-            return true;
-        }
-
-        return 0 < ($stockable->getOnHand() - $stockable->getOnHold());
+        return $this->isStockSufficient($stockable, 1);
     }
 
     /**

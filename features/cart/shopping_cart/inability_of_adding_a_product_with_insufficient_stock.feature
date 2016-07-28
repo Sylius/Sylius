@@ -10,7 +10,7 @@ Feature: Inability to add a specific product to the cart when it is out of stock
 
     @ui
     Scenario: Not being able to add a product to the cart when it is out of stock
-        Given the product "T-shirt banana" is not available at the moment
+        Given the product "T-shirt banana" is out of stock
         When I check this product's details
         Then I should see that it is out of stock
         And I should be unable to add it to the cart

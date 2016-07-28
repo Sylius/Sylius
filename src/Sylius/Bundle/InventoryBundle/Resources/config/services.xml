@@ -35,7 +35,7 @@
 
         <service id="sylius.inventory_operator.noop" class="%sylius.inventory_operator.noop.class%" />
 
-        <service id="sylius.availability_checker.default" class="%sylius.availability_checker.default.class%"/>
+        <service id="sylius.availability_checker.default" class="%sylius.availability_checker.default.class%" />
 
         <service id="sylius.backorders_handler" class="%sylius.backorders_handler.class%">
             <argument type="service" id="sylius.repository.inventory_unit" />
