@@ -71,6 +71,7 @@ class ResourceLoader implements LoaderInterface
 
         $isApi = $type === 'sylius.resource_api';
 
+        /** @var MetadataInterface $metadata */
         $metadata = $this->resourceRegistry->get($configuration['alias']);
         $routes = $this->routeFactory->createRouteCollection();
 

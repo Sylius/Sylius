@@ -13,6 +13,7 @@ namespace Sylius\Bundle\ReportBundle\Form\EventListener;
 
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Report\Model\ReportInterface;
+use Sylius\Component\Report\Renderer\RendererInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
@@ -87,6 +88,7 @@ class BuildReportRendererFormSubscriber implements EventSubscriberInterface
      */
     public function addConfigurationFields(FormInterface $form, $rendererType, array $data = [])
     {
+        /** @var RendererInterface $renderer */
         $renderer = $this->rendererRegistry->get($rendererType);
         $formType = $renderer->getType();
 

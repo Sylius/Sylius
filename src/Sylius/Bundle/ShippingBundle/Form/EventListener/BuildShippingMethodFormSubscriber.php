@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ShippingBundle\Form\EventListener;
 
 use Sylius\Component\Registry\ServiceRegistryInterface;
+use Sylius\Component\Shipping\Calculator\CalculatorInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -110,6 +111,7 @@ class BuildShippingMethodFormSubscriber implements EventSubscriberInterface
      */
     protected function addConfigurationFields(FormInterface $form, $calculatorName, array $data = [])
     {
+        /** @var CalculatorInterface $calculator */
         $calculator = $this->calculatorRegistry->get($calculatorName);
 
         $calculatorTypeName = sprintf('sylius_shipping_calculator_%s', $calculator->getType());

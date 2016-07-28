@@ -37,6 +37,7 @@ class DelegatingCalculator implements CalculatorInterface
      */
     public function calculate($base, TaxRateInterface $rate)
     {
+        /** @var CalculatorInterface $calculator */
         $calculator = $this->calculatorsRegistry->get($rate->getCalculator());
 
         return $calculator->calculate($base, $rate);

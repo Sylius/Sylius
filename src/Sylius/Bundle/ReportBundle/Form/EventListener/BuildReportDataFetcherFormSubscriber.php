@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ReportBundle\Form\EventListener;
 
 use Sylius\Component\Registry\ServiceRegistryInterface;
+use Sylius\Component\Report\DataFetcher\DataFetcherInterface;
 use Sylius\Component\Report\Model\ReportInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -90,6 +91,7 @@ class BuildReportDataFetcherFormSubscriber implements EventSubscriberInterface
      */
     protected function addConfigurationFields(FormInterface $form, $dataFetcherType, array $config = [])
     {
+        /** @var DataFetcherInterface $dataFetcher */
         $dataFetcher = $this->dataFetcherRegistry->get($dataFetcherType);
         $formType = $dataFetcher->getType();
 

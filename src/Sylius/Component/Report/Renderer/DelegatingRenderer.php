@@ -46,6 +46,7 @@ class DelegatingRenderer implements DelegatingRendererInterface
             throw new \InvalidArgumentException('Cannot render data for ReportInterface instance without renderer defined.');
         }
 
+        /** @var RendererInterface $renderer */
         $renderer = $this->registry->get($type);
 
         return $renderer->render($subject, $data);

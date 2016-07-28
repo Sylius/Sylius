@@ -15,6 +15,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Event\OnFlushEventArgs;
 use Sylius\Bundle\SettingsBundle\Model\SettingsInterface;
+use Sylius\Bundle\SettingsBundle\Schema\SchemaInterface;
 use Sylius\Bundle\SettingsBundle\Schema\SettingsBuilder;
 use Sylius\Bundle\SettingsBundle\Transformer\ParameterTransformerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -39,6 +40,7 @@ final class ParameterTransformerListener
      */
     public function __construct(ContainerInterface $container)
     {
+        // FIXME: Do not inject the container!
         $this->container = $container;
     }
 
@@ -130,6 +132,8 @@ final class ParameterTransformerListener
     protected function getTransformers(SettingsInterface $settings)
     {
         $registry = $this->container->get('sylius.registry.settings_schema');
+
+        /** @var SchemaInterface $schema */
         $schema = $registry->get($settings->getSchemaAlias());
 
         $settingsBuilder = new SettingsBuilder();
