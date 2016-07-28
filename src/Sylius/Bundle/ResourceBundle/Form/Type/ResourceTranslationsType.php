@@ -49,7 +49,13 @@ class ResourceTranslationsType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $locales = $this->availableLocalesProvider->getAvailableLocales();
+        $defaultLocale = $this->localeProvider->getDefaultLocale();
         $localesWithRequirement = [];
+
+        if(!in_array($defaultLocale, $locales))
+        {
+            $locales[] = $defaultLocale;
+        }
 
         foreach ($locales as $locale) {
             $localesWithRequirement[$locale] = false;
