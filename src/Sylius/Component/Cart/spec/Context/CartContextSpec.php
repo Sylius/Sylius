@@ -31,7 +31,7 @@ final class CartContextSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Cart\Context\CartContext');
+        $this->shouldHaveType(CartContext::class);
     }
     
     function it_implements_cart_context_interface()

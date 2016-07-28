@@ -14,12 +14,14 @@ namespace spec\Sylius\Component\Cart\Context;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Cart\Context\CartContextInterface;
 use Sylius\Component\Cart\Context\CartNotFoundException;
+use Sylius\Component\Cart\Context\CompositeCartContext;
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Registry\PrioritizedServiceRegistryInterface;
 use Zend\Stdlib\PriorityQueue;
-use Zend\Stdlib\SplPriorityQueue;
 
 /**
+ * @mixin CompositeCartContext
+ *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 final class CompositeCartContextSpec extends ObjectBehavior
@@ -31,7 +33,7 @@ final class CompositeCartContextSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Cart\Context\CompositeCartContext');
+        $this->shouldHaveType(CompositeCartContext::class);
     }
 
     function it_implements_cart_context_interface()

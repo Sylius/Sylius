@@ -15,6 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Cart\Context\CartContextInterface;
 use Sylius\Component\Cart\Context\CartNotFoundException;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
+use Sylius\Component\Core\Cart\Context\ShopBasedCartContext;
 use Sylius\Component\Core\Context\ShopperContextInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -23,6 +24,8 @@ use Sylius\Component\Currency\Context\CurrencyNotFoundException;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
+ * @mixin ShopBasedCartContext
+ *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 final class ShopBasedCartContextSpec extends ObjectBehavior
@@ -34,7 +37,7 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Cart\Context\ShopBasedCartContext');
+        $this->shouldHaveType(ShopBasedCartContext::class);
     }
 
     function it_implements_cart_context_interface()

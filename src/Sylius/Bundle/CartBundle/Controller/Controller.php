@@ -20,8 +20,6 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
- * Base controller for cart system controllers.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 abstract class Controller extends ResourceController
@@ -41,8 +39,6 @@ abstract class Controller extends ResourceController
     }
 
     /**
-     * Cart summary page route.
-     *
      * @return string
      */
     protected function getCartSummaryRoute()
@@ -51,21 +47,14 @@ abstract class Controller extends ResourceController
     }
 
     /**
-     * Get current cart using the provider service.
-     *
      * @return CartInterface
      */
     protected function getCurrentCart()
     {
-        return $this
-            ->getContext()
-            ->getCart()
-        ;
+        return $this->getContext()->getCart();
     }
 
     /**
-     * Get cart context.
-     *
      * @return CartContextInterface
      */
     protected function getContext()
@@ -74,9 +63,6 @@ abstract class Controller extends ResourceController
     }
 
     /**
-     * Get cart item resolver.
-     * This service is used to build the new cart item instance.
-     *
      * @return ItemResolverInterface
      */
     protected function getResolver()
@@ -85,8 +71,6 @@ abstract class Controller extends ResourceController
     }
 
     /**
-     * Get event dispatcher.
-     *
      * @return EventDispatcherInterface
      */
     protected function getEventDispatcher()

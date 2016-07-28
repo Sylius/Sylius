@@ -36,7 +36,7 @@ final class ShopBasedCartContext implements CartContextInterface
     private $shopperContext;
 
     /**
-     * @var CartInterface
+     * @var CartInterface|null
      */
     private $cart;
 

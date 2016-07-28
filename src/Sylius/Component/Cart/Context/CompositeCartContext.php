@@ -16,7 +16,7 @@ use Sylius\Component\Registry\PrioritizedServiceRegistryInterface;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class CompositeCartContext implements CartContextInterface
+final class CompositeCartContext implements CartContextInterface
 {
     /**
      * @var PrioritizedServiceRegistryInterface

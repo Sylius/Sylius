@@ -18,7 +18,7 @@ use Symfony\Component\DependencyInjection\Reference;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class RegisterCartContextsPass implements CompilerPassInterface
+final class RegisterCartContextsPass implements CompilerPassInterface
 {
     /**
      * {@inheritdoc}
