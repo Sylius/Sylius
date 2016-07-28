@@ -198,4 +198,31 @@ final class StringFilterSpec extends ObjectBehavior
             [],
         ]);
     }
+
+    function it_ignores_filter_if_its_value_is_empty_and_the_filter_depends_on_it(
+        DataSourceInterface $dataSource,
+        ExpressionBuilderInterface $expressionBuilder
+    ) {
+        $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
+
+        $this->apply($dataSource, 'firstName', ['type' => StringFilter::TYPE_CONTAINS, 'value' => ''], []);
+        $this->apply($dataSource, 'firstName', ['type' => StringFilter::TYPE_ENDS_WITH, 'value' => ''], []);
+        $this->apply($dataSource, 'firstName', ['type' => StringFilter::TYPE_EQUAL, 'value' => ''], []);
+        $this->apply($dataSource, 'firstName', ['type' => StringFilter::TYPE_IN, 'value' => ''], []);
+        $this->apply($dataSource, 'firstName', ['type' => StringFilter::TYPE_NOT_CONTAINS, 'value' => ''], []);
+        $this->apply($dataSource, 'firstName', ['type' => StringFilter::TYPE_NOT_IN, 'value' => ''], []);
+        $this->apply($dataSource, 'firstName', ['type' => StringFilter::TYPE_STARTS_WITH, 'value' => ''], []);
+    }
+
+    function it_does_not_ignore_filter_if_its_value_is_zero(
+        DataSourceInterface $dataSource,
+        ExpressionBuilderInterface $expressionBuilder
+    ) {
+        $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
+
+        $expressionBuilder->like('firstName', '%0%')->willReturn('EXPR');
+        $dataSource->restrict('EXPR')->shouldBeCalled();
+
+        $this->apply($dataSource, 'firstName', ['type' => StringFilter::TYPE_CONTAINS, 'value' => '0'], []);
+    }
 }
