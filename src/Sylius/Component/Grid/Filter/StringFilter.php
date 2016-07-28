@@ -53,18 +53,17 @@ class StringFilter implements FilterInterface
         }
 
         if (1 === count($fields)) {
-            $expression = $this->getExpression($expressionBuilder, $type, $fields[0], $value);
-        } else {
-            $expressions = [];
+            $dataSource->restrict($this->getExpression($expressionBuilder, $type, current($fields), $value));
 
-            foreach ($fields as $field) {
-                $expressions[] = $this->getExpression($expressionBuilder, $type, $field, $value);
-            }
-
-            $expression = $expressionBuilder->orX(...$expressions);
+            return;
         }
 
-        $dataSource->restrict($expression);
+        $expressions = [];
+        foreach ($fields as $field) {
+            $expressions[] = $this->getExpression($expressionBuilder, $type, $field, $value);
+        }
+
+        $dataSource->restrict($expressionBuilder->orX(...$expressions));
     }
 
     /**
