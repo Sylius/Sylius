@@ -65,7 +65,7 @@ final class ShopBasedCartContext implements CartContextInterface
         try {
             $cart->setChannel($this->shopperContext->getChannel());
         } catch (ChannelNotFoundException $exception) {
-            throw new CartNotFoundException($exception);
+            throw new CartNotFoundException('Sylius was not able to prepare the cart properly', $exception);
         }
 
         try {
