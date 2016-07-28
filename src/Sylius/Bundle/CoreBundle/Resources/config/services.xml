@@ -54,7 +54,6 @@
         <parameter key="sylius.taxation.tax_calculation_strategy.class">Sylius\Bundle\CoreBundle\Taxation\Strategy\TaxCalculationStrategy</parameter>
 
         <parameter key="sylius.listener.cart_blamer.class">Sylius\Bundle\CoreBundle\EventListener\CartBlamerListener</parameter>
-        <parameter key="sylius.listener.order_currency.class">Sylius\Bundle\CoreBundle\EventListener\OrderCurrencyListener</parameter>
         <parameter key="sylius.listener.order_inventory.class">Sylius\Bundle\CoreBundle\EventListener\OrderInventoryListener</parameter>
         <parameter key="sylius.listener.order_item_inventory.class">Sylius\Bundle\CoreBundle\EventListener\OrderItemInventoryListener</parameter>
         <parameter key="sylius.listener.order_state.class">Sylius\Bundle\CoreBundle\EventListener\OrderStateListener</parameter>
@@ -324,10 +323,6 @@
             <tag name="kernel.event_listener" event="sylius.promotion.coupon_invalid" method="handleCouponPromotion" />
             <tag name="kernel.event_listener" event="sylius.promotion.coupon_eligible" method="handleCouponPromotion" />
             <tag name="kernel.event_listener" event="sylius.promotion.coupon_not_eligible" method="handleCouponPromotion" />
-        </service>
-        <service id="sylius.listener.order_currency" class="%sylius.listener.order_currency.class%">
-            <argument type="service" id="sylius.context.currency" />
-            <tag name="kernel.event_listener" event="sylius.cart.initialize" method="processOrderCurrency" />
         </service>
         <service id="sylius.listener.customer_aware" class="%sylius.listener.customer_aware.class%">
             <argument type="service" id="sylius.context.customer" />
