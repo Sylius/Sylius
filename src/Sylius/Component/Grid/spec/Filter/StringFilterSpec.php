@@ -184,4 +184,18 @@ final class StringFilterSpec extends ObjectBehavior
 
         $this->apply($dataSource, 'name', 'John', ['fields' => ['translation.name']]);
     }
+
+    function it_throws_an_exception_if_type_is_unknown(
+        DataSourceInterface $dataSource,
+        ExpressionBuilderInterface $expressionBuilder
+    ) {
+        $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
+
+        $this->shouldThrow(\InvalidArgumentException::class)->during('apply', [
+            $dataSource,
+            'firstName',
+            ['type' => 'UNKNOWN_TYPE', 'value' => 'John'],
+            [],
+        ]);
+    }
 }
