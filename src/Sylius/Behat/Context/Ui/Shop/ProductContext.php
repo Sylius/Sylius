@@ -13,6 +13,7 @@ namespace Sylius\Behat\Context\Ui\Shop;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Shop\Product\ShowPageInterface;
+use Sylius\Behat\Page\Shop\Taxon\ShowPageInterface as TaxonShowPageInterface;
 use Sylius\Behat\Page\SymfonyPageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
@@ -31,17 +32,17 @@ final class ProductContext implements Context
     private $showPage;
 
     /**
-     * @var SymfonyPageInterface
+     * @var TaxonShowPageInterface
      */
     private $taxonShowPage;
 
     /**
      * @param ShowPageInterface $showPage
-     * @param SymfonyPageInterface $taxonShowPage
+     * @param TaxonShowPageInterface $taxonShowPage
      */
     public function __construct(
         ShowPageInterface $showPage,
-        SymfonyPageInterface $taxonShowPage
+        TaxonShowPageInterface $taxonShowPage
     ) {
         $this->showPage = $showPage;
         $this->taxonShowPage = $taxonShowPage;
@@ -137,7 +138,7 @@ final class ProductContext implements Context
     public function iShouldSeeProduct($productName)
     {
         Assert::true(
-            $this->taxonShowPage->isProductInList($productName),
+            $this->taxonShowPage->isProductOnList($productName),
             sprintf("The product %s should appear on page, but it does not.", $productName)
         );
     }
@@ -148,7 +149,7 @@ final class ProductContext implements Context
     public function iShouldNotSeeProduct($productName)
     {
         Assert::false(
-            $this->taxonShowPage->isProductInList($productName),
+            $this->taxonShowPage->isProductOnList($productName),
             sprintf("The product %s should not appear on page, but it does.", $productName)
         );
     }
@@ -195,6 +196,17 @@ final class ProductContext implements Context
             $price,
             $this->showPage->getPrice(),
             'Product should have price %2$s, but it has %s'
+        );
+    }
+
+    /**
+     * @Then I should see the product :productName with price :productPrice
+     */
+    public function iShouldSeeTheProductWithPrice($productName, $productPrice)
+    {
+        Assert::true(
+            $this->taxonShowPage->isProductWithPriceOnList($productName, $productPrice),
+            sprintf("The product %s with price %s should appear on page, but it does not.", $productName, $productPrice)
         );
     }
 }

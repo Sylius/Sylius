@@ -35,6 +35,7 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * Product catalog extension.
@@ -66,7 +67,7 @@ class SyliusProductExtension extends AbstractResourceExtension implements Prepen
         $formDefinition = $container->getDefinition('sylius.form.type.product_variant_generation');
         $formDefinition->addArgument($container->getDefinition('sylius.form.listener.product_variant_generator'));
         
-        $container->getDefinition('sylius.form.type.product')->addArgument($container->getDefinition('sylius.variant_resolver.default'));
+        $container->getDefinition('sylius.form.type.product')->addArgument(new Reference('sylius.variant_resolver.default'));
     }
 
     /**
