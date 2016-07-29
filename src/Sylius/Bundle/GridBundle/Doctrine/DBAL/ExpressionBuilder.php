@@ -35,29 +35,17 @@ class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function andX($expressions)
+    public function andX(...$expressions)
     {
-        $expr = $this->queryBuilder->expr();
-
-        if (is_array($expressions)) {
-            return call_user_func_array([$expr, 'andX'], $expressions);
-        }
-
-        return $this->queryBuilder->expr()->andX(func_get_args());
+        return $this->queryBuilder->expr()->andX(...$expressions);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function orX($expressions)
+    public function orX(...$expressions)
     {
-        $expr = $this->queryBuilder->expr();
-
-        if (is_array($expressions)) {
-            return call_user_func_array([$expr, 'orX'], $expressions);
-        }
-
-        return $this->queryBuilder->expr()->orX(func_get_args());
+        return $this->queryBuilder->expr()->orX(...$expressions);
     }
 
     /**
