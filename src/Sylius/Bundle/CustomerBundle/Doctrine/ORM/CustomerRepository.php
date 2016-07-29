@@ -30,4 +30,17 @@ class CustomerRepository extends EntityRepository implements CustomerRepositoryI
             ->getSingleScalarResult()
         ;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findLatest($count)
+    {
+        return $this->createQueryBuilder('o')
+            ->addOrderBy('o.createdAt', 'desc')
+            ->setMaxResults($count)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

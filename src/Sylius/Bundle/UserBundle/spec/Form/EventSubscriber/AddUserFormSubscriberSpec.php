@@ -124,7 +124,7 @@ final class AddUserFormSubscriberSpec extends ObjectBehavior
         $this->preSubmit($event);
     }
     
-    function it_throws_invalid_argument_exception_when_normData_does_not_implements_user_aware_interface(
+    function it_throws_invalid_argument_exception_when_forms_normalized_data_does_not_implement_user_aware_interface(
         FormEvent $event,
         Form $form,
         UserInterface $user
