@@ -1,7 +1,0 @@
-sylius_contact:
-    path: /
-    defaults:
-        _controller: sylius.controller.contact_request:createAction
-        _sylius:
-            template: SyliusWebBundle:Frontend:contact.html.twig
-            redirect: sylius_contact

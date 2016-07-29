@@ -1,8 +1,6 @@
 {% macro list(labels, fields, values) %}
 
 {% import 'SyliusResourceBundle:Macros:buttons.html.twig' as buttons %}
-{% import 'SyliusWebBundle:Backend/Macros:alerts.html.twig' as alerts %}
-{% import 'SyliusWebBundle:Backend/Macros:misc.html.twig' as misc %}
 
 {% if values|length > 0 %}
     <table id="results" class="table table-bordered table-condensed">
@@ -25,7 +23,7 @@
         </tbody>
     </table>
 {% else %}
-{{ alerts.info('sylius.ui.there_are_no_reports_created'|trans) }}
+    <span>{{ 'sylius.ui.there_are_no_reports_created'|trans }}</span>
 {% endif %}
 
 {% endmacro %}
