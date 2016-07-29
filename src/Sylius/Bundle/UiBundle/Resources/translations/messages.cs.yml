@@ -205,7 +205,6 @@ sylius:
         female: Žena
         filter: Filtr
         first_name: Křestní Jméno
-        firstname: Křestní Jméno
         fulfill: Splnit
         gateway: Brána
         general_info: Obecné informace

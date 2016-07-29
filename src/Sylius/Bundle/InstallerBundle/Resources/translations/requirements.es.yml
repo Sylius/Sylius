@@ -3,9 +3,10 @@
 
 sylius:
     extensions:
-        header: Extensiones
+        header: extensiones
         accelerator:
             header: Acelerador
+            help: Activa Zend OpCache (muy recomendado).
         apc: APC
         ctype: Ctype
         gd: GD
@@ -29,9 +30,13 @@ sylius:
         header: Sistema de archivos
         cache:
             header: caché
+            help:
+                To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
         exists: Existe
         logs:
             header: registros
+            help:
+                To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% && sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
         not_exists: No existe
         not_writable: Sin permisos de escritura
         parameters:
@@ -57,3 +62,4 @@ sylius:
             header: Zona horaria obsoleta
             help: 'La zona horaria %timezone% está obsoleta. Arregla tu fichero php.ini (Lista de zonas horarias obsoletas http://php.net/manual/en/timezones.others.php).'
         version: Versión de PHP
+        version_recommended: Versión de PHP recomendada

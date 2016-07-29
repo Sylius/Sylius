@@ -18,7 +18,6 @@ sylius:
         email: E-Mail
         enabled: Aktiviert
         first_name: Vorname
-        firstname: Vorname
         id: ID
         image: Bild
         label: Bezeichnung

@@ -128,7 +128,6 @@ sylius:
         failed: Eșuată
         filter: Filtrează
         first_name: Prenume
-        firstname: Prenume
         fulfill: Vânzare
         gateway: Gateway
         general_info: Informaţii generale

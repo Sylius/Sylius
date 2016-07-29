@@ -305,7 +305,6 @@ sylius:
         filter: กรองข้อมูล
         filters: กรองข้อมูล
         first_name: ชื่อ
-        firstname: ชื่อ
         forgot_password: ลืมรหัสผ่าน
         fulfill: Fulfill
         gateway: ช่องทางการชำระเงิน
@@ -488,7 +487,6 @@ sylius:
         number_of_orders: จำนวนใบสั่งซื้อ
         oauth_provider: ผู้ให้บริการการใช้ OAuth
         on_hold: On hold
-        onhold: Onhold
         options: ตัวเลือก
         or: หรือ
         order: ใบสั่งซื้อ
@@ -661,7 +659,6 @@ sylius:
         support: สนับสนุน
         sylius_logo: ツ Sylius
         tax: ภาษี
-        tax_categories: ประเภทภาษี
         tax_category: ประเภทภาษี
         tax_rate_details: รายละเอียดอัตราภาษี
         tax_rates: อัตราภาษี

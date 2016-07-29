@@ -126,7 +126,6 @@ sylius:
         failed: Mislyktes
         filter: Filtrer
         first_name: Fornavn
-        firstname: Fornavn
         fulfill: Oppfylle
         gateway: Rute
         general_info: Generell info
@@ -292,7 +291,7 @@ sylius:
         shipping_charges: Fraktkostnader
         shipping_method: Fraktalternativ
         shipping_method_details: Fraktmetodedetaljer
-        shipping_methods: Leveringsmetoder
+        shipping_methods: Fraktalternativ
         shipping_state: Fraktstatus
         shipping_total: Frakt totalt
         shop_by: Butikk av

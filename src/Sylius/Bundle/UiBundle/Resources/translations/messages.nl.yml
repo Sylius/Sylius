@@ -311,7 +311,6 @@ sylius:
         filter: Filter
         filters: Filters
         first_name: Voornaam
-        firstname: Voornaam
         forgot_password: Wachtwoord vergeten
         fulfill: Vervullen
         gateway: Gateway
@@ -497,7 +496,6 @@ sylius:
         number_of_orders: Aantal bestellingen
         oauth_provider: OAuth Provider
         on_hold: In de wacht
-        onhold: Onhold
         options: Opties
         or: of
         order: Bestelling
@@ -640,7 +638,7 @@ sylius:
         shipping_charges: Verzendkosten
         shipping_method: Verzendmethode
         shipping_method_details: Verzendmethode details
-        shipping_methods: Verzendmethoden
+        shipping_methods: Verzendmethodes
         shipping_state: Verzendstatus
         shipping_total: Verzendkosten totaal
         shop_by: Filter op
@@ -674,7 +672,6 @@ sylius:
         support: Helpdesk
         sylius_logo: Sylius
         tax: BTW
-        tax_categories: Belastingscategorieën
         tax_category: Belasting categorie
         tax_rate_details: Belastingtarief details
         tax_rates: Belasting Tarieven

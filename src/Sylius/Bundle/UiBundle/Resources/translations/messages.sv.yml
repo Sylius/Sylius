@@ -144,7 +144,6 @@ sylius:
         filter: Filter
         filters: Filter
         first_name: Förnamn
-        firstname: Förnamn
         forgot_password: Glömt lösenordet
         gateway: Portal
         generate_coupons: Generera kuponger
@@ -225,7 +224,6 @@ sylius:
         not_empty: Inte tom
         not_in: Inte i
         number: Nummer
-        onhold: Väntande
         options: Alternativ
         or: eller
         order_comment_name: Orderkommentar
@@ -320,7 +318,6 @@ sylius:
         summary: Sammanfattning
         support: Support
         tax: Skatt
-        tax_categories: Skattekategorier
         tax_category: Momskategori
         taxation_categories: Skattekategorier
         taxonomy: Taxonomi

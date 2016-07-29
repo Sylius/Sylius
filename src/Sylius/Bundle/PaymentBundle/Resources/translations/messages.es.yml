@@ -30,4 +30,5 @@ sylius:
             description: Descripción
             enabled: Activado?
             gateway: Puerta de Enlace
+            instructions: Instrucciones
             name: Nombre

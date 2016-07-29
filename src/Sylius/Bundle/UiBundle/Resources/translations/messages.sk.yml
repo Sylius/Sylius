@@ -279,7 +279,6 @@ sylius:
         female: Žena
         filter: Filter
         first_name: Meno
-        firstname: Meno
         forgot_password: Zabudli ste heslo
         fulfill: Vybaviť
         gateway: Brána
@@ -449,7 +448,6 @@ sylius:
         number_of_orders: Počet objednávok
         oauth_provider: OAuth poskytovateľ
         on_hold: Rezerované
-        onhold: Pozastavené
         options: Voľby
         or: alebo
         order: Objednávka
@@ -603,7 +601,6 @@ sylius:
         support: Podpora
         sylius_logo: Sylius
         tax: Daň
-        tax_categories: Daňové kategórie
         tax_category: Daňová kategória
         tax_rate_details: Podrobnosti sadzby dane
         tax_rates: Sadzby dane

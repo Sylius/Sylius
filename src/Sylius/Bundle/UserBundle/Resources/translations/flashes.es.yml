@@ -15,3 +15,12 @@ sylius:
                 success: ¡Tu contraseña ha sido cambiada exitosamente!
         reset_password:
             requested: Si el correo electrónico que ha especificado existe en nuestro sistema, le hemos enviado las instrucciones para restablecer su contraseña.
+        verification:
+            error: El token de verificación no es válido.
+            notice:
+                verified: Tu correo electrónico ya ha sido verificado.
+            success: Tu correo electrónico ha sido correctamente verificado.
+            request:
+                success: Se ha enviado un correo electrónico con el enlace de verificación a tu dirección de correo electrónico.
+    customer:
+        register: Gracias por registrarse, consulta tu correo electrónico para verificar tu cuenta.

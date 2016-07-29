@@ -126,7 +126,6 @@ sylius:
         failed: Памылка
         filter: Фільтр
         first_name: Імя
-        firstname: Імя
         fulfill: Выканаць
         gateway: Шлюз
         general_info: Агульная інфармацыя

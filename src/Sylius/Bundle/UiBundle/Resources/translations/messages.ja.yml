@@ -85,7 +85,6 @@ sylius:
         existing_customer: 登録済の顧客
         filter: F絞り込む
         first_name: 名
-        firstname: 名
         general_info: sylius.promotion.general_info
         general_settings: sylius.breadcrumb.general_settings
         generate: sylius.breadcrumb.generate
@@ -211,7 +210,7 @@ sylius:
         shipping_charges: 送料
         shipping_method: 発送方法
         shipping_method_details: 配送方法詳細
-        shipping_methods: 配送方法管理
+        shipping_methods: sylius.breadcrumb.shipping_method.index
         shipping_state: 出荷ステータス
         shipping_total: 送料合計
         shop_by: 商品検索

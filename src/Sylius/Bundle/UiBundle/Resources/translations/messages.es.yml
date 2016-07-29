@@ -4,7 +4,7 @@
 sylius:
     form:
         login:
-            username: Nombre Usuario
+            username: Nombre usuario
             password: Contraseña
             remember_me: Recordarme
         option:
@@ -90,6 +90,7 @@ sylius:
         category_requirements: Requisitos de la categoría
         change_address: Cambiar dirección
         change_password: Cambiar contraseña
+        change_payment_method: Cambiar modo de pago
         change_shipping_method: Cambiar método de envío
         change_your_password: Cambiar mi contraseña
         channel: Canal
@@ -117,7 +118,7 @@ sylius:
         contact_request_details: Detalles de la solicitud de contacto
         contact_request_show: Solicitudes de contacto
         contact_requests: Solicitud de contacto
-        contact_topics: Topicos de contacto
+        contact_topics: Asuntos de contacto
         contact_us: Contacta con nosotros
         contain_variants: Contiene Variantes
         contains: Contiene
@@ -135,7 +136,7 @@ sylius:
         create_archetype: Crear prototipo
         create_association_type: Crear un tipo de asociación
         create_contact_request: Crear solicitud de contacto
-        create_contact_topic: Crear tema de contacto
+        create_contact_topic: Crear asunto de contacto
         create_country: Nuevo país
         create_currency: Crear moneda
         create_customer: Crear cliente
@@ -239,7 +240,9 @@ sylius:
         edit_promotion: Editar promoción
         edit_promotion_coupon: Editar el cupón de la promoción
         edit_report: Editar reporte
+        edit_route: Editar ruta
         edit_shipping_method: Editar método de envío
+        edit_static_content: Editar contenido estático
         edit_tax_category: Editar categoría de impuesto
         edit_tax_rate: Editar tasa impositiva
         edit_taxon: Editar taxonomía
@@ -250,7 +253,7 @@ sylius:
         editing_attribute: Editando atributo
         editing_channel: Editando canal
         editing_contact_request: Editando solicitudes de contacto
-        editing_contact_topic: Editando tema de contacto
+        editing_contact_topic: Editando asunto de contacto
         editing_country: Editar país
         editing_coupon: Editar cupón
         editing_currency: Editando moneda
@@ -308,7 +311,6 @@ sylius:
         filter: Filtrar
         filters: Filtros
         first_name: Nombre
-        firstname: Nombre
         forgot_password: Contraseña olvidada
         fulfill: Completo
         gateway: Puerta de Enlace
@@ -432,7 +434,7 @@ sylius:
         new_channel: Nuevo canal
         new_comment_posted_on_order: Nuevo comentario publicado en el pedido
         new_contact_request: Nueva solicitud de contacto
-        new_contact_topic: Nuevo tema de contacto
+        new_contact_topic: Nuevo asunto de contacto
         new_country: Nuevo país
         new_coupon: Nuevo cupón
         new_currency: Nueva moneda
@@ -453,8 +455,10 @@ sylius:
         new_promotion_coupon: Nuevo cupón de promoción
         new_review: Nueva reseña
         new_role: Nuevo rol
+        new_route: Nueva ruta
         new_shipping_category: Nueva categoría de envio
         new_shipping_method: Nuevo método de envio
+        new_static_content: Nuevo contenido estático
         new_tax_category: Nueva categoría de impuesto
         new_tax_rate: Nueva tasa de impuesto
         new_taxon: Nuevo taxon
@@ -486,12 +490,12 @@ sylius:
         not_contains: No contiene
         not_empty: No está vacío
         not_in: No en
+        not_verified: No verificada
         notify_customer: Notificar al cliente
         number: Número
         number_of_orders: Número de pedidos
         oauth_provider: Proveedor de OAuth
         on_hold: En espera
-        onhold: En espera
         options: Opciones de producto
         or: o
         order: Orden
@@ -520,21 +524,25 @@ sylius:
         payment_method: Modo de pago
         payment_methods: Métodos de pago
         payment_mode: Modo de pago
+        payment_ready_to_pay: Ahora puede hacer el pago
         payment_state: Estado del pago
         payments: Pagos
+        pay: Pagar
+        pay_again: Haga clic en pagar para intentarlo de nuevo
         pending: Pendiente
         per_customer_usage_limit: Límite de uso por cliente
         permissions: Permisos
         personal_information: Datos personales
         phone_number: Teléfono
         place_order: Realizar pedido
+        placed_an_order: Ha realizado correctamente un pedido.
         placed_at: Hecho el
         postcode: Código postal
         powered_by: Funciona con
         presentation: Presentación
         previous: Anterior
         price: Precio
-        pricing: Fijación de precios
+        pricing: Precios
         priority: Prioridad
         privacy_policy: Política de privacidad
         process_your_orders: Tramitar tus pedidos
@@ -654,6 +662,7 @@ sylius:
         starts_at: Empieza el
         starts_with: Comienza con
         state: Estado
+        static_contents: Contenidos estáticos
         status: Estado
         street: Calle
         string_blocks: Bloques de texto
@@ -664,7 +673,6 @@ sylius:
         support: Soporte
         sylius_logo: Sylius
         tax: Impuestos
-        tax_categories: Categorías de impuestos
         tax_category: Categoría de impuestos
         tax_rate_details: Mostrar
         tax_rates: Impuestos
@@ -675,6 +683,7 @@ sylius:
         taxonomy: Taxonomía
         taxons: Taxonomías
         terms_and_conditions: Términos y Condiciones
+        thank_you: ¡Gracias!
         thank_you_for_your_order: Gracias por su pedido
         theme: Tema
         there_are_no_archetypes_defined: No hay prototipos definidos
@@ -682,7 +691,7 @@ sylius:
         there_are_no_blocks_to_display: No hay bloques para mostrar
         there_are_no_channels_configured: No hay ningún canal configurado
         there_are_no_contact_requests_to_display: No hay solicitudes de contacto para mostrar
-        there_are_no_contact_topics_to_display: No hay temas de contacto para mostrar
+        there_are_no_contact_topics_to_display: No hay asuntos de contacto para mostrar
         there_are_no_countries_configured: No hay países configurados
         there_are_no_coupon_to_display: No hay cupones
         there_are_no_currencies_to_display: No hay monedas para mostrar
@@ -747,12 +756,14 @@ sylius:
         used: promoción utilizado
         user_confirmation_name: Confirmación de usuario
         user_details: Mostrar
-        username: Nombre Usuario
+        username: Nombre usuario
         users_list_of_all_users_registered_in_store: Lista de todos los usuarios registrados en la tienda
         values: Valores
         variant: Variante
         variant_selection_method: Método de selección variante
         variants: Variantes
+        verified: Verificado
+        verify: Verificar
         view: Ver
         view_and_edit_cart: Ver y editar su carrito
         view_more: Ver más

@@ -275,7 +275,6 @@ sylius:
         female: Femmina
         filter: Filtri
         first_name: Nome
-        firstname: Nome
         forgot_password: Hai dimenticato la password
         fulfill: Completato
         gateway: Gateway
@@ -590,7 +589,6 @@ sylius:
         summary: Riepilogo
         support: Assistenza
         sylius_logo: Sylius
-        tax_categories: Categorie di tassazione
         tax_category: Categoria fiscale
         tax_rate_details: Dettaglio aliquota fiscale
         tax_rates: Imposte

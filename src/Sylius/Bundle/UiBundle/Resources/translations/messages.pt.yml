@@ -196,7 +196,6 @@ sylius:
         shipping_charges: Taxas de envio
         shipping_method: Método de envio
         shipping_method_details: Detalhes de métodos de envio
-        shipping_methods: Métodos de envio
         shipping_state: Situação do envio
         shipping_total: Valor do envio
         shop_by: Comprar por

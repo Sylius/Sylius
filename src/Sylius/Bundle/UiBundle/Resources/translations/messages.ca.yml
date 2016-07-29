@@ -36,7 +36,6 @@ sylius:
         enabled: Activat
         failed: "S'ha produït un error"
         first_name: Nom
-        firstname: Nom
         gateway: Pasarel·la
         groups: Grups
         id: ID

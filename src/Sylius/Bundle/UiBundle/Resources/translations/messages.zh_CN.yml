@@ -291,7 +291,6 @@ sylius:
         female: 女士
         filter: 筛选器
         first_name: 名字
-        firstname: 名字
         forgot_password: 忘记密码
         fulfill: 完成
         gateway: 网关
@@ -468,7 +467,6 @@ sylius:
         number_of_orders: 订单数
         oauth_provider: OAuth 提供器
         on_hold: 搁置
-        onhold: 搁置
         options: 选项
         or: 或者
         order: 订单
@@ -627,7 +625,6 @@ sylius:
         support: 支持
         sylius_logo: Sylius
         tax: 税收
-        tax_categories: 税类别
         tax_category: 税类别
         tax_rate_details: 税务率详细
         tax_rates: 税率

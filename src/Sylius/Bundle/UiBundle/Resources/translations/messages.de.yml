@@ -256,7 +256,6 @@ sylius:
         female: Frau
         filter: Filtern
         first_name: Vorname
-        firstname: Vorname
         forgot_password: Passwort vergessen
         fulfill: Zu erfüllen
         gateway: Schnittstelle
@@ -551,7 +550,6 @@ sylius:
         summary: Zusammenfassung
         support: Support
         sylius_logo: Sylius
-        tax_categories: Steuerkategorien
         tax_category: Steuerkategorie
         tax_rate_details: Steuersätze
         tax_rates: Steuersätze
