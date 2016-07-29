@@ -25,6 +25,10 @@ security:
                 target: sylius_admin_login
             anonymous: true
 
+        oauth_token:
+            pattern:  ^/api/oauth/v2/token
+            security: false
+
         api:
             pattern:    ^/api
             fos_oauth:  true
@@ -55,10 +59,6 @@ security:
                 path: sylius_shop_logout
                 target: sylius_shop_login
             anonymous: true
-
-        oauth_token:
-            pattern:  ^/oauth/v2/token
-            security: false
 
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/

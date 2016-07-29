@@ -52,7 +52,7 @@ Definition
 
 .. code-block:: text
 
-    GET /oauth/v2/token
+    GET /api/oauth/v2/token
 
 +---------------+----------------+--------------------------------------------------------------------------------------------------+
 | Parameter     | Parameter type | Description                                                                                      |
@@ -77,7 +77,7 @@ Example
 
 .. code-block:: bash
 
-    curl http://sylius.dev/oauth/v2/token
+    curl http://sylius.dev/api/oauth/v2/token
         -d "client_id"=demo_client
         -d "client_secret"=secret_demo_client
         -d "grant_type"=password
@@ -137,7 +137,7 @@ Definition
 
 .. code-block:: text
 
-    GET /oauth/v2/token
+    GET /api/oauth/v2/token
 
 +---------------+----------------+---------------------------------------------------+
 | Parameter     | Parameter type |  Description                                      |
@@ -156,7 +156,7 @@ Example
 
 .. code-block:: bash
 
-    curl http://sylius.dev/oauth/v2/token
+    curl http://sylius.dev/api/oauth/v2/token
         -d "client_id"=demo_client
         -d "client_secret"=secret_demo_client
         -d "grant_type"=refresh_token
