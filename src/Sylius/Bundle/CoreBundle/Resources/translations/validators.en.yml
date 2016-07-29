@@ -2,6 +2,8 @@ sylius:
     channel:
         default_currency:
             not_blank: Please enter channel default currency.
+        default_locale:
+            not_blank: Please enter channel default locale.
     checkout:
         shipping_method:
             not_blank: Please select shipping method.
