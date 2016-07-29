@@ -490,6 +490,7 @@ sylius:
         not_empty: Not empty
         not_in: Not in
         not_verified: Not verified
+        notes: Notes
         notify_customer: 'Notify Customer'
         number: Number
         number_of_orders: 'Number of orders'
