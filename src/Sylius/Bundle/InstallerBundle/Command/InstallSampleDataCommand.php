@@ -66,7 +66,6 @@ EOT
 
         $commands = [
             'sylius:fixtures:load' => ['--no-interaction' => true],
-            'doctrine:phpcr:fixtures:load' => ['--no-interaction' => true],
         ];
 
         $this->runCommands($commands, $input, $output);
