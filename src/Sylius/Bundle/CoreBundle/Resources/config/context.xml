@@ -75,6 +75,14 @@
         <service id="sylius.context.locale.core" class="Sylius\Component\Locale\Context\CompositeLocaleContext" decorates="sylius.context.locale">
             <call method="addContext">
                 <argument type="service">
+                    <service class="Sylius\Bundle\LocaleBundle\Context\RequestBasedLocaleContext">
+                        <argument type="service" id="request_stack" />
+                        <argument type="service" id="sylius.locale_provider" />
+                    </service>
+                </argument>
+            </call>
+            <call method="addContext">
+                <argument type="service">
                     <service class="Sylius\Component\Core\Context\StorageBasedLocaleContext">
                         <argument type="service" id="sylius.context.channel" />
                         <argument type="service" id="sylius.storage.locale" />
