@@ -14,7 +14,6 @@ namespace Sylius\Bundle\TaxonomyBundle\Doctrine\ORM;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
-use Webmozart\Assert\Assert;
 
 /**
  * @author Aram Alipoor <aram.alipoor@gmail.com>
