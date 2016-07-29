@@ -90,7 +90,7 @@ class Order extends Cart implements OrderInterface
      *
      * @var string
      */
-    protected $shippingState = OrderShippingStates::CART;
+    protected $shippingState = OrderShippingStates::STATE_CART;
 
     /**
      * @var Collection|BasePromotionInterface[]

@@ -576,7 +576,7 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then this order shipment state should be :shippingState
+     * @Then order :orderNumber should have shipment state :shippingState
      */
     public function thisOrderShipmentStateShouldBe($shippingState)
     {

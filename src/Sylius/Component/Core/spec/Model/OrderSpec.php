@@ -252,13 +252,13 @@ final class OrderSpec extends ObjectBehavior
 
     function it_has_cart_shipping_state_by_default()
     {
-        $this->getShippingState()->shouldReturn(OrderShippingStates::CART);
+        $this->getShippingState()->shouldReturn(OrderShippingStates::STATE_CART);
     }
 
     function its_shipping_state_is_mutable()
     {
-        $this->setShippingState(OrderShippingStates::SHIPPED);
-        $this->getShippingState()->shouldReturn(OrderShippingStates::SHIPPED);
+        $this->setShippingState(OrderShippingStates::STATE_SHIPPED);
+        $this->getShippingState()->shouldReturn(OrderShippingStates::STATE_SHIPPED);
     }
 
     function it_is_a_backorder_if_contains_at_least_one_backordered_unit(

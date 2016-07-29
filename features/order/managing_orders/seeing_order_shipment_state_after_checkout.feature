@@ -17,17 +17,17 @@ Feature: Seeing shipping states of an order after checkout steps
 
     @ui
     Scenario: Seeing ready order shipping state
-        Given I browse orders
-        Then this order shipment state should be ready
+        When I browse orders
+        Then order "#00000666" should have shipment state ready
 
     @ui
     Scenario: Seeing shipped order shipping state
         Given this order has already been shipped
-        And I browse orders
-        Then this order shipment state should be shipped
+        When I browse orders
+        Then order "#00000666" should have shipment state shipped
 
     @ui
     Scenario: Seeing cancelled order shipping state
         Given the customer canceled this order
-        And I browse orders
-        Then this order shipment state should be cancelled
+        When I browse orders
+        Then order "#00000666" should have shipment state cancelled

@@ -147,6 +147,10 @@ winzou_state_machine:
                     on: ["cancel"]
                     do: ["@sm.callback.cascade_transition", "apply"]
                     args: ["object", "event", "'cancel'", "'sylius_order_payment'"]
+                sylius_cancel_order_shipment:
+                    on: ["cancel"]
+                    do: ["@sm.callback.cascade_transition", "apply"]
+                    args: ["object", "event", "'cancel'", "'sylius_order_shipping'"]
 
     sylius_inventory_unit:
         callbacks:
