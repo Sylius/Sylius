@@ -12,17 +12,20 @@
 namespace spec\Sylius\Component\Inventory\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Inventory\Model\InventoryUnit;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
 
 /**
+ * @mixin InventoryUnit
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class InventoryUnitSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Inventory\Model\InventoryUnit');
+        $this->shouldHaveType(InventoryUnit::class);
     }
 
     function it_implements_Sylius_inventory_unit_interface()
@@ -53,8 +56,8 @@ final class InventoryUnitSpec extends ObjectBehavior
 
     function its_state_is_mutable()
     {
-        $this->setInventoryState(InventoryUnitInterface::STATE_BACKORDERED);
-        $this->getInventoryState()->shouldReturn(InventoryUnitInterface::STATE_BACKORDERED);
+        $this->setInventoryState(InventoryUnitInterface::STATE_ONHOLD);
+        $this->getInventoryState()->shouldReturn(InventoryUnitInterface::STATE_ONHOLD);
     }
 
     function it_is_sold_if_its_state_says_so()
@@ -62,12 +65,6 @@ final class InventoryUnitSpec extends ObjectBehavior
         $this->setInventoryState(InventoryUnitInterface::STATE_SOLD);
 
         $this->shouldBeSold();
-    }
-
-    function it_is_backordered_if_its_state_says_so()
-    {
-        $this->setInventoryState(InventoryUnitInterface::STATE_BACKORDERED);
-        $this->shouldBeBackordered();
     }
 
     function it_returns_its_stockable_name(StockableInterface $stockable)

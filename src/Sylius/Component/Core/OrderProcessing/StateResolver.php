@@ -84,7 +84,7 @@ class StateResolver implements StateResolverInterface
         if (OrderShippingStates::STATE_SHIPPED === $order->getShippingState()) {
             return;
         }
-        /** @var StateMachine $stateMachine */
+        /** @var StateMachineInterface $stateMachine */
         $stateMachine = $this->stateMachineFactory->get($order, OrderShippingTransitions::GRAPH);
 
         if ($this->allShipmentsInStateButOrderStateNotUpdated($order, ShipmentInterface::STATE_SHIPPED, OrderShippingStates::STATE_SHIPPED)) {

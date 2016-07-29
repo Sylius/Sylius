@@ -24,7 +24,6 @@ interface InventoryUnitInterface extends TimestampableInterface
     const STATE_CHECKOUT = 'checkout';
     const STATE_ONHOLD = 'onhold';
     const STATE_SOLD = 'sold';
-    const STATE_BACKORDERED = 'backordered';
     const STATE_RETURNED = 'returned';
 
     /**
@@ -51,9 +50,4 @@ interface InventoryUnitInterface extends TimestampableInterface
      * @return bool
      */
     public function isSold();
-
-    /**
-     * @return bool
-     */
-    public function isBackordered();
 }

@@ -31,10 +31,6 @@ final class AvailabilityChecker implements AvailabilityCheckerInterface
      */
     public function isStockSufficient(StockableInterface $stockable, $quantity)
     {
-        if ($stockable->isAvailableOnDemand()) {
-            return true;
-        }
-
         return $quantity <= ($stockable->getOnHand() - $stockable->getOnHold());
     }
 }

@@ -16,7 +16,6 @@ class InventoryUnitTransitions
     const GRAPH = 'sylius_inventory_unit';
 
     const SYLIUS_HOLD = 'hold';
-    const SYLIUS_BACKORDER = 'backorder';
     const SYLIUS_SELL = 'sell';
     const SYLIUS_RELEASE = 'release';
     const SYLIUS_RETURN = 'return';

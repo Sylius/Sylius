@@ -89,15 +89,9 @@ We will create `Book` entity.
          */
         protected $onHand;
 
-        /**
-         * @ORM\Column(type="boolean")
-         */
-        protected $availableOnDemand;
-
         public function __construct()
         {
             $this->onHand = 1;
-            $this->availableOnDemand = true;
         }
 
         public function getId()
@@ -138,16 +132,6 @@ We will create `Book` entity.
         public function isInStock()
         {
             return 0 < $this->onHand;
-        }
-
-        public function isAvailableOnDemand()
-        {
-            return $this->availableOnDemand;
-        }
-
-        public function setAvailableOnDemand($availableOnDemand)
-        {
-            $this->availableOnDemand = (Boolean) $availableOnDemand;
         }
 
         public function getOnHand()
@@ -211,7 +195,6 @@ Put this configuration inside your ``app/config/config.yml``.
 
     sylius_inventory:
         driver: doctrine/orm
-        backorders: true
         classes:
             inventory_unit:
                 model: App\AppBundle\Entity\InventoryUnit

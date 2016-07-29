@@ -37,14 +37,6 @@ class SampleStockable implements StockableInterface
     /**
      * {@inheritdoc}
      */
-    public function isAvailableOnDemand()
-    {
-        return false;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getOnHold()
     {
         return 15;

@@ -95,12 +95,4 @@ class InventoryUnit implements InventoryUnitInterface
     {
         return InventoryUnitInterface::STATE_SOLD === $this->inventoryState;
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isBackordered()
-    {
-        return InventoryUnitInterface::STATE_BACKORDERED === $this->inventoryState;
-    }
 }

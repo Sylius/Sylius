@@ -12,51 +12,49 @@
 namespace spec\Sylius\Component\Inventory\Checker;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Inventory\Checker\AvailabilityChecker;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
 
 /**
+ * @mixin AvailabilityChecker
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class AvailabilityCheckerSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Inventory\Checker\AvailabilityChecker');
+        $this->shouldHaveType(AvailabilityChecker::class);
     }
 
-    function it_implements_Sylius_inventory_availability_checker_interface()
+    function it_is_an_inventory_availability_checker()
     {
         $this->shouldImplement(AvailabilityCheckerInterface::class);
     }
 
-    function it_recognizes_any_stockable_as_available_if_its_on_demand(
-        StockableInterface $stockable
-    ) {
-        $stockable->isAvailableOnDemand()->willReturn(true);
-
-        $this->isStockAvailable($stockable)->shouldReturn(true);
-    }
-
-    function it_recognizes_any_stockable_as_available_if_its_on_demand_and_the_on_hand_quantity_is_insufficient(
-        StockableInterface $stockable
-    ) {
-        $stockable->isAvailableOnDemand()->willReturn(true);
-        $stockable->getOnHand()->willReturn(0);
-
-        $this->isStockAvailable($stockable)->shouldReturn(true);
-
-        $stockable->isAvailableOnDemand()->willReturn(true);
-        $stockable->getOnHand()->willReturn(-5);
-
-        $this->isStockAvailable($stockable)->shouldReturn(true);
-    }
-
     function it_recognizes_stockable_as_available_if_on_hand_quantity_is_greater_than_0(StockableInterface $stockable)
     {
-        $stockable->isAvailableOnDemand()->willReturn(false);
         $stockable->getOnHand()->willReturn(5);
         $stockable->getOnHold()->willReturn(0);
+
+        $this->isStockAvailable($stockable)->shouldReturn(true);
+    }
+
+    function it_recognizes_stockable_as_not_available_if_on_hand_quantity_is_equal_to_0(
+        StockableInterface $stockable
+    ) {
+        $stockable->getOnHand()->willReturn(0);
+        $stockable->getOnHold()->willReturn(0);
+
+        $this->isStockAvailable($stockable)->shouldReturn(false);
+    }
+
+    function it_recognizes_stockable_as_available_if_on_hold_quantity_is_less_than_on_hand(
+        StockableInterface $stockable
+    ) {
+        $stockable->getOnHand()->willReturn(5);
+        $stockable->getOnHold()->willReturn(4);
 
         $this->isStockAvailable($stockable)->shouldReturn(true);
     }
@@ -64,58 +62,27 @@ final class AvailabilityCheckerSpec extends ObjectBehavior
     function it_recognizes_stockable_as_not_available_if_on_hold_quantity_is_same_as_on_hand(
         StockableInterface $stockable
     ) {
-        $stockable->isAvailableOnDemand()->willReturn(false);
         $stockable->getOnHand()->willReturn(5);
         $stockable->getOnHold()->willReturn(5);
 
         $this->isStockAvailable($stockable)->shouldReturn(false);
     }
 
-    function it_recognizes_stockable_as_available_if_on_hold_quantity_is_less_then_on_hand(
+    function it_recognizes_stockable_as_sufficient_if_on_hand_minus_on_hold_quantity_is_greater_than_the_required_quantity(
         StockableInterface $stockable
     ) {
-        $stockable->isAvailableOnDemand()->willReturn(false);
-        $stockable->getOnHand()->willReturn(5);
-        $stockable->getOnHold()->willReturn(4);
-
-        $this->isStockAvailable($stockable)->shouldReturn(true);
-    }
-
-    function it_recognizes_stockable_as_not_available_if_on_hand_quantity_is_lesser_than_or_equal_to_0(
-        StockableInterface $stockable
-    ) {
-        $stockable->isAvailableOnDemand()->willReturn(false);
-
-        $stockable->getOnHand()->willReturn(0);
-        $stockable->getOnHold()->willReturn(0);
-        $this->isStockAvailable($stockable)->shouldReturn(false);
-
-        $stockable->getOnHand()->willReturn(-5);
-        $this->isStockAvailable($stockable)->shouldReturn(false);
-    }
-
-    function it_recognizes_stockable_stock_sufficient_if_on_hand_quantity_is_greater_than_required_quantity(
-        StockableInterface $stockable
-    ) {
-        $stockable->isAvailableOnDemand()->willReturn(false);
-
         $stockable->getOnHand()->willReturn(10);
-        $stockable->getOnHold()->willReturn(0);
-        $this->isStockSufficient($stockable, 5)->shouldReturn(true);
+        $stockable->getOnHold()->willReturn(3);
 
-        $stockable->getOnHand()->willReturn(15);
-        $this->isStockSufficient($stockable, 15)->shouldReturn(true);
+        $this->isStockSufficient($stockable, 5)->shouldReturn(true);
     }
 
-    function it_recognizes_stock_sufficient_if_its_available_on_demand(
+    function it_recognizes_stockable_as_sufficient_if_on_hand_minus_on_hold_quantity_is_equal_to_the_required_quantity(
         StockableInterface $stockable
     ) {
-        $stockable->isAvailableOnDemand()->willReturn(true);
+        $stockable->getOnHand()->willReturn(10);
+        $stockable->getOnHold()->willReturn(5);
 
-        $stockable->getOnHand()->willReturn(0);
-        $this->isStockSufficient($stockable, 999)->shouldReturn(true);
-
-        $stockable->getOnHand()->willReturn(-5);
-        $this->isStockSufficient($stockable, 3)->shouldReturn(true);
+        $this->isStockSufficient($stockable, 5)->shouldReturn(true);
     }
 }

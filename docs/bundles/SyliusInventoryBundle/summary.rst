@@ -9,8 +9,6 @@ Configuration reference
     sylius_inventory:
         # The driver used for persistence layer.
         driver: ~
-        # Enable/disable backorders.
-        backorders: true
         # Enable or disbale tracking inventory
         track_inventory: true
         # The availability checker service id.

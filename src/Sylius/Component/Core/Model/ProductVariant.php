@@ -59,11 +59,6 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     protected $sold = 0;
 
     /**
-     * @var bool
-     */
-    protected $availableOnDemand = true;
-
-    /**
      * @var Collection|ProductVariantImageInterface[]
      */
     protected $images;
@@ -270,22 +265,6 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     public function getInventoryName()
     {
         return $this->getProduct()->getName();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isAvailableOnDemand()
-    {
-        return $this->availableOnDemand;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setAvailableOnDemand($availableOnDemand)
-    {
-        $this->availableOnDemand = (bool) $availableOnDemand;
     }
 
     /**

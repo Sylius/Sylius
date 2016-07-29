@@ -151,11 +151,6 @@ interface OrderInterface extends
     public function setShippingState($state);
 
     /**
-     * @return bool
-     */
-    public function isBackorder();
-
-    /**
      * @return ShipmentInterface
      */
     public function getLastShipment();

@@ -43,23 +43,21 @@ class Configuration implements ConfigurationInterface
             ->addDefaultsIfNotSet()
             ->children()
                 ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
-                ->booleanNode('backorders')->defaultTrue()->end()
                 ->booleanNode('track_inventory')->defaultTrue()->end()
                 ->scalarNode('checker')->defaultValue('sylius.availability_checker.default')->cannotBeEmpty()->end()
                 ->scalarNode('operator')->cannotBeEmpty()->end()
-                ->arrayNode('events')->prototype('scalar')->end()
             ->end()
-        ->end()
-        ->validate()
-            ->ifTrue(function ($array) {
-                return !isset($array['operator']);
-            })
-            ->then(function ($array) {
-                $array['operator'] = 'sylius.inventory_operator.'.($array['track_inventory'] ? 'default' : 'noop');
+            ->validate()
+                ->ifTrue(function ($array) {
+                    return !isset($array['operator']);
+                })
+                ->then(function ($array) {
+                    $array['operator'] = 'sylius.inventory_operator.'.($array['track_inventory'] ? 'default' : 'noop');
 
-                return $array;
-            })
-        ->end();
+                    return $array;
+                })
+            ->end()
+        ;
 
         $this->addResourcesSection($rootNode);
 

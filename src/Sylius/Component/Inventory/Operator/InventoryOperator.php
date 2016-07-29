@@ -20,44 +20,27 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
- * Default inventory operator.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class InventoryOperator implements InventoryOperatorInterface
+final class InventoryOperator implements InventoryOperatorInterface
 {
     /**
-     * Backorders handler.
-     *
-     * @var BackordersHandlerInterface
-     */
-    protected $backordersHandler;
-
-    /**
-     * Availability checker.
-     *
      * @var AvailabilityCheckerInterface
      */
     protected $availabilityChecker;
 
     /**
-     * Event dispatcher.
-     *
      * @var EventDispatcherInterface
      */
     protected $eventDispatcher;
 
     /**
-     * Constructor.
-     *
-     * @param BackordersHandlerInterface   $backordersHandler
      * @param AvailabilityCheckerInterface $availabilityChecker
      * @param EventDispatcherInterface     $eventDispatcher
      */
-    public function __construct(BackordersHandlerInterface $backordersHandler, AvailabilityCheckerInterface $availabilityChecker, EventDispatcherInterface $eventDispatcher)
+    public function __construct(AvailabilityCheckerInterface $availabilityChecker, EventDispatcherInterface $eventDispatcher)
     {
-        $this->backordersHandler = $backordersHandler;
         $this->availabilityChecker = $availabilityChecker;
         $this->eventDispatcher = $eventDispatcher;
     }
@@ -125,6 +108,7 @@ class InventoryOperator implements InventoryOperatorInterface
             throw new \InvalidArgumentException('Quantity of units must be greater than 0.');
         }
 
+
         if ($inventoryUnits instanceof Collection) {
             $stockable = $inventoryUnits->first()->getStockable();
         } else {
@@ -136,8 +120,6 @@ class InventoryOperator implements InventoryOperatorInterface
         }
 
         $this->eventDispatcher->dispatch(SyliusStockableEvents::PRE_DECREASE, new GenericEvent($stockable));
-
-        $this->backordersHandler->processBackorders($inventoryUnits);
 
         $onHand = $stockable->getOnHand();
 

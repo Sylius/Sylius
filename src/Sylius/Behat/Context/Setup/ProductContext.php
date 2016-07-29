@@ -343,7 +343,7 @@ final class ProductContext implements Context
      */
     public function theProductIsNotAvailable(ProductInterface $product)
     {
-        $product->getFirstVariant()->setAvailableOnDemand(false);
+        $product->getFirstVariant()->setTracked(true);
 
         $this->setProductsQuantity($product, 0);
     }

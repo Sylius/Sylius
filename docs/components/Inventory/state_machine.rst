@@ -20,8 +20,6 @@ The following states are defined:
 +-------------------+-------------+-----------------------------------------------------------------+
 | STATE_SOLD        | sold        | Item has been sold and is no longer in the warehouse            |
 +-------------------+-------------+-----------------------------------------------------------------+
-| STATE_BACKORDERED | backordered | Item has been sold, but is not in stock and waiting for supply  |
-+-------------------+-------------+-----------------------------------------------------------------+
 | STATE_RETURNED    | returned    | Item has been sold, but returned and is in stock                |
 +-------------------+-------------+-----------------------------------------------------------------+
 
@@ -40,8 +38,6 @@ There are the following order's transitions by default:
 | Related constant | Transition |
 +==================+============+
 | SYLIUS_HOLD      | hold       |
-+------------------+------------+
-| SYLIUS_BACKORDER | backorder  |
 +------------------+------------+
 | SYLIUS_SELL      | sell       |
 +------------------+------------+
