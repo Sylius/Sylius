@@ -28,19 +28,19 @@ class RegisterCartContextsPassTest extends AbstractCompilerPassTestCase
      */
     public function it_registers_defined_cart_contexts()
     {
-        $this->setDefinition('sylius.registry.cart_context', new Definition());
+        $this->setDefinition('sylius.context.cart', new Definition());
 
         $cartContextDefinition = new Definition();
         $cartContextDefinition->addTag('sylius.cart_context');
-        $this->setDefinition('sylius.context.cart', $cartContextDefinition);
+        $this->setDefinition('sylius.context.cart_new', $cartContextDefinition);
 
         $this->compile();
 
         $this->assertContainerBuilderHasServiceDefinitionWithMethodCall(
-            'sylius.registry.cart_context',
-            'register',
+            'sylius.context.cart',
+            'addContext',
             [
-                new Reference('sylius.context.cart'),
+                new Reference('sylius.context.cart_new'),
                 0
             ]
         );
@@ -51,13 +51,13 @@ class RegisterCartContextsPassTest extends AbstractCompilerPassTestCase
      */
     public function it_does_not_register_cart_contexts_if_there_is_no_cart_contexts()
     {
-        $this->setDefinition('sylius.registry.cart_context', new Definition());
+        $this->setDefinition('sylius.context.cart', new Definition());
 
         $this->compile();
 
         $this->assertContainerBuilderDoesNotHaveServiceDefinitionWithMethodCall(
-            'sylius.registry.cart_context',
-            'register'
+            'sylius.context.cart',
+            'addContext'
         );
     }
 

@@ -66,7 +66,7 @@ final class CartSubscriberSpec extends ObjectBehavior
     }
 
     function it_merges_cart_items_if_equal(
-        $orderItemQuantityModifier,
+        OrderItemQuantityModifierInterface $orderItemQuantityModifier,
         CartItemEvent $event,
         CartInterface $cart,
         CartItemInterface $cartItem,
@@ -111,7 +111,7 @@ final class CartSubscriberSpec extends ObjectBehavior
         $this->clearCart($event);
     }
 
-    function it_should_save_a_valid_cart($manager, CartEvent $event, CartInterface $cart)
+    function it_should_save_a_valid_cart(ObjectManager $manager, CartEvent $event, CartInterface $cart)
     {
         $event->getCart()->willReturn($cart);
         $manager->persist($cart)->shouldBeCalled();
@@ -121,8 +121,8 @@ final class CartSubscriberSpec extends ObjectBehavior
     }
 
     function it_should_not_save_an_invalid_cart(
-        $manager,
-        $validator,
+        ObjectManager $manager,
+        ValidatorInterface $validator,
         CartEvent $event,
         CartInterface $cart,
         ConstraintViolationListInterface $constraintList

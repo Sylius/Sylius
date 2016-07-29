@@ -18,23 +18,23 @@ use Symfony\Component\DependencyInjection\Reference;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class RegisterCartContextsPass implements CompilerPassInterface
+final class RegisterCartContextsPass implements CompilerPassInterface
 {
     /**
      * {@inheritdoc}
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->has('sylius.registry.cart_context')) {
+        if (!$container->has('sylius.context.cart')) {
             return;
         }
 
-        $registry = $container->findDefinition('sylius.registry.cart_context');
+        $cartContext = $container->findDefinition('sylius.context.cart');
 
         foreach ($container->findTaggedServiceIds('sylius.cart_context') as $id => $attributes) {
             $priority = isset($attributes[0]['priority']) ? (int) $attributes[0]['priority'] : 0;
 
-            $registry->addMethodCall('register', [new Reference($id), $priority]);
+            $cartContext->addMethodCall('addContext', [new Reference($id), $priority]);
         }
     }
 }

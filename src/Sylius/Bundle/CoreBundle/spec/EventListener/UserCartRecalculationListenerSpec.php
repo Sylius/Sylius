@@ -41,9 +41,9 @@ final class UserCartRecalculationListenerSpec extends ObjectBehavior
 
     function it_recalculates_cart_for_logged_in_user(
         CartContextInterface $cartContext,
+        OrderRecalculatorInterface $orderRecalculator,
         Event $event,
-        OrderInterface $order,
-        OrderRecalculatorInterface $orderRecalculator
+        OrderInterface $order
     ) {
         $cartContext->getCart()->willReturn($order);
         $orderRecalculator->recalculate($order)->shouldBeCalled();
@@ -52,10 +52,10 @@ final class UserCartRecalculationListenerSpec extends ObjectBehavior
     }
 
     function it_throws_exception_if_provided_cart_is_not_order(
-        CartInterface $cart,
         CartContextInterface $cartContext,
-        Event $event,
-        OrderRecalculatorInterface $orderRecalculator
+        OrderRecalculatorInterface $orderRecalculator,
+        CartInterface $cart,
+        Event $event
     ) {
         $cartContext->getCart()->willReturn($cart);
         $orderRecalculator->recalculate($cart)->shouldNotBeCalled();
@@ -68,8 +68,8 @@ final class UserCartRecalculationListenerSpec extends ObjectBehavior
 
     function it_does_nothing_if_cannot_find_cart(
         CartContextInterface $cartContext,
-        Event $event,
-        OrderRecalculatorInterface $orderRecalculator
+        OrderRecalculatorInterface $orderRecalculator,
+        Event $event
     ) {
         $cartContext->getCart()->willThrow(CartNotFoundException::class);
         $orderRecalculator->recalculate(Argument::any())->shouldNotBeCalled();

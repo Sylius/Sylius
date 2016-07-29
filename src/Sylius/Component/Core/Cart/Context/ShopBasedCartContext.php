@@ -18,7 +18,6 @@ use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Context\ShopperContextInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Currency\Context\CurrencyNotFoundException;
-use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -26,9 +25,9 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 final class ShopBasedCartContext implements CartContextInterface
 {
     /**
-     * @var FactoryInterface
+     * @var CartContextInterface
      */
-    private $cartFactory;
+    private $cartContext;
 
     /**
      * @var ShopperContextInterface
@@ -36,17 +35,17 @@ final class ShopBasedCartContext implements CartContextInterface
     private $shopperContext;
 
     /**
-     * @var CartInterface
+     * @var CartInterface|null
      */
     private $cart;
 
     /**
-     * @param FactoryInterface $cartFactory
+     * @param CartContextInterface $cartContext
      * @param ShopperContextInterface $shopperContext
      */
-    public function __construct(FactoryInterface $cartFactory, ShopperContextInterface $shopperContext)
+    public function __construct(CartContextInterface $cartContext, ShopperContextInterface $shopperContext)
     {
-        $this->cartFactory = $cartFactory;
+        $this->cartContext = $cartContext;
         $this->shopperContext = $shopperContext;
     }
 
@@ -60,12 +59,12 @@ final class ShopBasedCartContext implements CartContextInterface
         }
 
         /** @var OrderInterface $cart */
-        $cart = $this->cartFactory->createNew();
+        $cart = $this->cartContext->getCart();
 
         try {
             $cart->setChannel($this->shopperContext->getChannel());
         } catch (ChannelNotFoundException $exception) {
-            throw new CartNotFoundException($exception);
+            throw new CartNotFoundException('Sylius was not able to prepare the cart properly', $exception);
         }
 
         try {

@@ -60,20 +60,20 @@ class ItemResolver implements ItemResolverInterface
     protected $channelContext;
 
     /**
-     * @param CartContextInterface          $cartContext
-     * @param RepositoryInterface            $productRepository
-     * @param FormFactoryInterface           $formFactory
-     * @param AvailabilityCheckerInterface   $availabilityChecker
-     * @param DelegatingCalculatorInterface  $priceCalculator
-     * @param ChannelContextInterface        $channelContext
+     * @param CartContextInterface $cartContext
+     * @param RepositoryInterface $productRepository
+     * @param FormFactoryInterface $formFactory
+     * @param AvailabilityCheckerInterface $availabilityChecker
+     * @param DelegatingCalculatorInterface $priceCalculator
+     * @param ChannelContextInterface $channelContext
      */
     public function __construct(
-        CartContextInterface          $cartContext,
-        RepositoryInterface            $productRepository,
-        FormFactoryInterface           $formFactory,
-        AvailabilityCheckerInterface   $availabilityChecker,
-        DelegatingCalculatorInterface  $priceCalculator,
-        ChannelContextInterface        $channelContext
+        CartContextInterface $cartContext,
+        RepositoryInterface $productRepository,
+        FormFactoryInterface $formFactory,
+        AvailabilityCheckerInterface $availabilityChecker,
+        DelegatingCalculatorInterface $priceCalculator,
+        ChannelContextInterface $channelContext
     ) {
         $this->cartContext = $cartContext;
         $this->productRepository = $productRepository;

@@ -54,7 +54,7 @@ final class SessionBasedCartContext implements CartContextInterface
     public function getCart()
     {
         if (!$this->session->has($this->sessionKeyName)) {
-            throw new CartNotFoundException();
+            throw new CartNotFoundException('Sylius was not able to find the cart in session');
         }
 
         $cart = $this->cartRepository->findCartById($this->session->get($this->sessionKeyName));
@@ -62,7 +62,7 @@ final class SessionBasedCartContext implements CartContextInterface
         if (null === $cart) {
             $this->session->remove($this->sessionKeyName);
 
-            throw new CartNotFoundException();
+            throw new CartNotFoundException('Sylius was not able to find the cart in session');
         }
 
         return $cart;
