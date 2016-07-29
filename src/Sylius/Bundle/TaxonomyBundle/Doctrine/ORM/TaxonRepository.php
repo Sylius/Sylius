@@ -65,6 +65,7 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
      */
     public function findChildrenByRootCode($code)
     {
+        /** @var TaxonInterface|null $root */
         $root = $this->findOneBy(['code' => $code]);
 
         if (null === $root) {
@@ -79,6 +80,7 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
      */
     public function findChildrenAsTreeByRootCode($code)
     {
+        /** @var TaxonInterface|null $root */
         $root = $this->findOneBy(['code' => $code]);
 
         if (null === $root) {
