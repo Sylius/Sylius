@@ -13,7 +13,7 @@ sylius:
                 ready: 'Preparado desde %at%'
                 returned: 'Devuelto el %at%'
                 shipped: 'Enviado el %at%'
-                checkout: 'Extraído de %at%'
+                checkout: 'Registrado el %at%'
                 pending: 'Pendiente %at%'
                 onhold: 'En espera desde %at%'
                 backordered: 'Pendientes desde %at%'
@@ -39,7 +39,7 @@ sylius:
         summary:
             clear: Vaciar carrito
             quantity: Cant.
-        total_items: Total de articulos
+        total_items: '1 artículo |%count% artículos'
     checkout:
         finalize:
             order:
@@ -86,9 +86,9 @@ sylius:
         guest: Cliente invitado
         immutable_warning: Los pedidos enviados ya no pueden ser modificados
         no_items: Este pedido no contiene productos
-        no_promotion: No fueron utilizados cupones
+        no_promotion: No se utilizaron cupones
         no_shipments: No hay envíos para este pedido
-        no_shipping_charges: Sin cargos de envío aplicados
+        no_shipping_charges: Gastos de envío no aplicados
         no_taxes: Sin impuestos
         state:
             order_confirmed: Pedido confirmado
@@ -151,7 +151,7 @@ sylius:
             backorder: en espera
             cancel: cancelar
             prepare: preparar
-            release: lanzamiento
+            release: liberar
             return: devolver
             ship: enviar
         update: Editar
@@ -159,9 +159,9 @@ sylius:
         on_hand: Nivel de existencias
     taxon:
         image: Elige una imagen
-        no_image: No hay imagen para esta taxon
+        no_image: No hay imagen para este taxón
     user:
-        general_info: Info General
+        general_info: 'Información general para usuario "%username%"'
         impersonate: Inicar sesión como este usuario
         oauth:
             none: Sin cuentas de OAuth conectadas

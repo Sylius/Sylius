@@ -35,7 +35,7 @@ sylius:
             currencies: Devises
             shipping_methods: Modes de livraison
             payment_methods: Moyens de paiement
-            tax_calculation_strategy: Stratégie de cacul des taxes
+            tax_calculation_strategy: Stratégie de calcul des taxes
             tax_zone_default: Zone de taxe par défaut
             theme: Thème
             hostname: "Nom d'hôte"
@@ -153,9 +153,9 @@ sylius:
             name: "Confirmation d'expédition"
             content: 'Votre commande a été envoyée. <br/> Merci pour cette transaction réussie.'
         user_confirmation:
-            name: Utilisateur confirmé
+            name: "Confirmation d'utilisateur"
             subject: Bienvenue dans notre boutique
-            content: 'Bienvenue sur notre boutique<br/><br/>Vous avez été enregistré<br/>Merci %username%.'
+            content: 'Bienvenue sur notre boutique<br/><br/>Votre compte a bien été enregistré.<br/>Merci %username%.'
         password_reset:
             name: Réinitialiser le mot de passe
             content: "<h3>Bonjour %username%</h3>Pour réinitialiser votre mot de passe - Merci de visiter %url%<br/><br/>Cordialement, l'équipe."
@@ -164,7 +164,7 @@ sylius:
             content: 'Pour vérifier votre adresse email, visitez %url%'
     payum_gateway:
         cash_on_delivery: Paiement à réception
-        offline: Hors ligne
-        paypal_express_checkout: Paiement Express via PayPal
+        offline: Hors-ligne
+        paypal_express_checkout: Paiement via PayPal Express
     shipping_method_resolver:
         by_zones_and_channel: Par zones et canal

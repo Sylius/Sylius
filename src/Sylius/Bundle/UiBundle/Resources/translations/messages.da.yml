@@ -123,7 +123,6 @@ sylius:
         failed: Mislykkedes
         filter: Filter
         first_name: Fornavn
-        firstname: Fornavn
         fulfill: Udfør
         gateway: Gateway
         general_info: Generel info

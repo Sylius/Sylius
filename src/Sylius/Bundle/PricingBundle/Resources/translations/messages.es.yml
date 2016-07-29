@@ -5,7 +5,7 @@ sylius:
     form:
         priceable:
             price: Precio
-            calculator: Fijación de precios
+            calculator: Precios
             configuration: Configuración
         pricing:
             volume_based:

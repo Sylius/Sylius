@@ -54,7 +54,6 @@ sylius:
         existing_customer: Υφιστάμενος Πελάτης
         filter: Φίλτρο
         first_name: Όνομα
-        firstname: Όνομα
         gateway: Πύλη
         general_settings: Γενικές ρυθμίσεις
         generate: Δημιουργία

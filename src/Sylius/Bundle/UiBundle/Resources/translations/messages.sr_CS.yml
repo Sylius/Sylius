@@ -182,7 +182,6 @@ sylius:
         shipping_charges: Cena isporuke
         shipping_method: Način dostave
         shipping_method_details: Detalji nalina dostave
-        shipping_methods: Načini dostave
         shipping_state: Stanje pošiljke
         shipping_total: Ukupno isporuka
         shop_by: Kupujte po

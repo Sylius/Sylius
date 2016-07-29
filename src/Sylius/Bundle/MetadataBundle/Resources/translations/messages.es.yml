@@ -4,7 +4,7 @@
 sylius:
     metadata:
         type:
-            none: ' -NINGUNO- '
+            none: ' - NINGUNO - '
             twitter_summary_card: Resumen
             twitter_summary_large_image_card: Resumen con imágenes grandes
             twitter_player_card: Reproductor

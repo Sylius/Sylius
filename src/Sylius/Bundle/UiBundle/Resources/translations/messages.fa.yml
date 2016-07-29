@@ -266,7 +266,6 @@ sylius:
         female: خانم
         filter: فیلتر
         first_name: نام
-        firstname: نام
         forgot_password: فراموشی کلمه عبور
         fulfill: ارسال
         gateway: درگاه پرداخت
@@ -569,7 +568,6 @@ sylius:
         summary: خلاصه
         support: پشتیبانی
         sylius_logo: Sylius
-        tax_categories: شاخه های مالیات
         tax_category: نوع مالیات
         tax_rate_details: جزئیات نرخ مالیات
         tax_rates: نرخ های مالیات

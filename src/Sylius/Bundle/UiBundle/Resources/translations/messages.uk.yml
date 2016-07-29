@@ -134,7 +134,6 @@ sylius:
         failed: Помилка
         filter: Фільтр
         first_name: Iм’я
-        firstname: Iм’я
         fulfill: Виконано
         gateway: Шлюз
         general_info: Основна інформація

@@ -189,7 +189,6 @@ sylius:
         failed: Провален
         filter: Фильтр
         first_name: Имя
-        firstname: Имя
         fulfill: Завершён
         gateway: Терминал
         general_info: Общая информация
@@ -395,7 +394,7 @@ sylius:
         shipping_charges: Затраты на доставку
         shipping_method: Способ доставки
         shipping_method_details: Детали способа доставки
-        shipping_methods: Методы доставки
+        shipping_methods: Список способов доставки
         shipping_state: Статус доставки
         shipping_total: Стоимость доставки
         shop_by: Каталог товаров

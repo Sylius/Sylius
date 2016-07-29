@@ -82,7 +82,6 @@ sylius:
         shipments: Vận chuyển
         shipping_categories: Thể loại
         shipping_method: Phương pháp vận chuyển
-        shipping_methods: Phương thức vận chuyển
         sign_in_to_the_store_or_create_new_account: 'Đăng nhập vào <small>hoặc tạo tài khoản mới</small>'
         sku: MÃ SẢN PHẨM
         street: Đường Phố

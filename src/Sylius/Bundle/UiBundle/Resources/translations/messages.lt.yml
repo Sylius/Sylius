@@ -199,7 +199,6 @@ sylius:
         failed: Nepavyko
         filter: Filtruoti
         first_name: Vardas
-        firstname: Vardas
         fulfill: Išpildyti
         gateway: Apmokėjimo kanalas
         general_info: Bendroji informacija

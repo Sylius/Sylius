@@ -306,7 +306,6 @@ sylius:
         filter: Filtrar
         filters: Filtros
         first_name: Nome
-        firstname: Nome
         forgot_password: Esqueceu a senha
         fulfill: Completar
         gateway: Gateway
@@ -489,7 +488,6 @@ sylius:
         number_of_orders: Número de pedidos
         oauth_provider: Provedor OAuth
         on_hold: Em espera
-        onhold: Em espera
         options: Opções
         or: Ou
         order: Pedido
@@ -662,7 +660,6 @@ sylius:
         support: Suporte
         sylius_logo: Sylius
         tax: Taxa
-        tax_categories: Categorias de imposto
         tax_category: Categoria de imposto
         tax_rate_details: Detalhes de imposto
         tax_rates: Taxas de imposto

@@ -118,7 +118,10 @@ sylius:
             partially_shipped: Częściowo wysłane
         transition:
             cancel: anuluj
+            ship: wyślij
         update: Edytuj
+    stockable:
+        on_hand: W magazynie
     taxon:
         image: Wybierz zdjęcie
         no_image: Brak zdjęcia

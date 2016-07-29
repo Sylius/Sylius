@@ -4,7 +4,7 @@
 sylius:
     imagine_block:
         name:
-            not_blank: Por favor ingrese el nombre del bloque de imagen.
+            not_blank: Por favor introduce el nombre del bloque de imagen.
         label:
             not_blank: Por favor ingrese la etiqueta del bloque de imagen.
         filter:

@@ -311,7 +311,6 @@ sylius:
         filter: Szűrő
         filters: Szűrők
         first_name: Keresztnév
-        firstname: Keresztnév
         forgot_password: Elfelejtett jelszó
         fulfill: Teljesítés
         gateway: Átjáró
@@ -497,7 +496,6 @@ sylius:
         number_of_orders: Rendelések száma
         oauth_provider: OAuth Kiszolgáló
         on_hold: Tartva
-        onhold: Visszatartott
         options: Beállítások
         or: vagy
         order: Rendelés
@@ -675,7 +673,6 @@ sylius:
         support: Támogatás
         sylius_logo: Sylius
         tax: Adó
-        tax_categories: Adó kategóriák
         tax_category: ÁFA-kategória
         tax_rate_details: Adó mérték részletei
         tax_rates: Adókulcsok

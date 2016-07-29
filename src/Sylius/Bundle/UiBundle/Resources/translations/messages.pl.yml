@@ -11,6 +11,7 @@ sylius:
             name: Nazwa
         notes: Dodatkowe uwagi
     ui:
+        abandoned: Porzucony
         access_token: Token dostępowy
         action: Akcja
         actions: Akcje
@@ -31,6 +32,7 @@ sylius:
         add_rule: Dodaj regułę
         add_to_cart: Dodaj do koszyka
         add_value: Dodaj wartość
+        adding_new_customer_groups: Dodawanie nowych grup użytkowników
         adding_new_locale: Dodaj nowe ustawienia regionalne
         additional_information: Dodatkowe informacje
         addressing_step: Adres
@@ -260,7 +262,6 @@ sylius:
         female: Kobieta
         filter: Filtruj
         first_name: Imię
-        firstname: Imię
         forgot_password: Nie pamiętasz hasła
         fulfill: Uzupełnij
         gateway: Bramka
@@ -413,7 +414,6 @@ sylius:
         not_in: Nie w
         number: Numer
         number_of_orders: Liczba zamówień
-        onhold: Oczekujące
         options: Warianty
         or: lub
         order: zamówienie
@@ -553,7 +553,6 @@ sylius:
         summary: Podsumowanie
         support: Wsparcie techniczne
         tax: Podatek
-        tax_categories: Kategorie podatkowe
         tax_category: Kategoria podatkowa
         tax_rate_details: Szczegóły stawki podatkowej
         tax_rates: Stawki podatkowe

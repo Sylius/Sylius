@@ -247,7 +247,6 @@ sylius:
         filter: Filter
         filters: Filteri
         first_name: Ime
-        firstname: Ime
         forgot_password: Zaboravljena lozinka
         fulfill: Ispunjeno
         gateway: Gateway

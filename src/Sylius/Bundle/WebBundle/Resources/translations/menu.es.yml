@@ -14,7 +14,7 @@ sylius:
                 channels: Canales
                 configuration: Configuración
                 contact_requests: Solicitudes de contacto
-                contact_topics: Configurar temas
+                contact_topics: Configurar asuntos
                 content: Contenido
                 countries: Países
                 currencies: Monedas
@@ -64,7 +64,7 @@ sylius:
                 channels: Canales
                 configuration: Configuración
                 contact_requests: Solicitudes
-                contact_topics: Configurar temas
+                contact_topics: Configurar asuntos
                 content: Contenido
                 countries: Países
                 currencies: Monedas

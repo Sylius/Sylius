@@ -17,7 +17,6 @@ sylius:
         email: البريد الإلكتروني
         exchange_rate: سعر الصرف
         first_name: الاسم الأول
-        firstname: الاسم الأول
         label: ملصق
         last_name: اسم العائلة
         lastname: اسم العائلة

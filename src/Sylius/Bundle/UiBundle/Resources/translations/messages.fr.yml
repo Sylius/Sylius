@@ -305,7 +305,6 @@ sylius:
         female: Femme
         filter: Filtrer
         first_name: Prénom
-        firstname: Prénom
         forgot_password: Mot de passe oublié
         fulfill: Remplir
         gateway: Passerelle
@@ -482,7 +481,6 @@ sylius:
         number_of_orders: Nombre de commandes
         oauth_provider: Fournisseur OAuth
         on_hold: En attente
-        onhold: En attente
         options: Options
         or: ou
         order: Commande
@@ -642,7 +640,6 @@ sylius:
         support: Support
         sylius_logo: Sylius
         tax: TVA
-        tax_categories: Catégories de taxes
         tax_category: Catégorie de taxe
         tax_rate_details: Détails du taux
         tax_rates: Taux de taxe
@@ -721,7 +718,7 @@ sylius:
         usage: Utilisation
         usage_limit: "Limite d'utilisation"
         used: Utilisé
-        user_confirmation_name: Utilisateur confirmé
+        user_confirmation_name: "Confirmation d'utilisateur"
         user_details: "Détails d'un utilisateur"
         username: Identifiant
         users_list_of_all_users_registered_in_store: Utilisateurs
