@@ -2,17 +2,15 @@
 
 {% form_theme form 'SyliusUiBundle:Form:theme.html.twig' %}
 
-<div class="ui segment">
-    {{ form_start(form, {'action': path('sylius_shop_cart_item_add', {'id': product.id}), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
-    {% if not product.simple %}
-        {% if product.variantSelectionMethodChoice %}
-            {% include '@SyliusShop/Product/Show/_variants.html.twig' %}
-        {% else %}
-            {% include '@SyliusShop/Product/Show/_options.html.twig' %}
-        {% endif %}
+{{ form_start(form, {'action': path('sylius_shop_cart_item_add', {'id': product.id}), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
+{% if not product.simple %}
+    {% if product.variantSelectionMethodChoice %}
+        {% include '@SyliusShop/Product/Show/_variants.html.twig' %}
+    {% else %}
+        {% include '@SyliusShop/Product/Show/_options.html.twig' %}
     {% endif %}
-    {{ form_row(form.quantity) }}
-    <button type="submit" class="ui huge primary icon labeled button"><i class="cart icon"></i> {{ 'sylius.ui.add_to_cart'|trans }}</button>
-    {{ form_row(form._token) }}
-    {{ form_end(form, {'render_rest': false}) }}
-</div>
+{% endif %}
+{{ form_row(form.quantity) }}
+<button type="submit" class="ui huge primary icon labeled button"><i class="cart icon"></i> {{ 'sylius.ui.add_to_cart'|trans }}</button>
+{{ form_row(form._token) }}
+{{ form_end(form, {'render_rest': false}) }}

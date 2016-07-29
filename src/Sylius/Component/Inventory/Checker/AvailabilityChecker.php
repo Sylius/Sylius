@@ -14,39 +14,16 @@ namespace Sylius\Component\Inventory\Checker;
 use Sylius\Component\Inventory\Model\StockableInterface;
 
 /**
- * Checks availability for given stockable object.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class AvailabilityChecker implements AvailabilityCheckerInterface
+final class AvailabilityChecker implements AvailabilityCheckerInterface
 {
-    /**
-     * Are backorders enabled?
-     *
-     * @var bool
-     */
-    protected $backorders;
-
-    /**
-     * Constructor.
-     *
-     * @param bool $backorders
-     */
-    public function __construct($backorders)
-    {
-        $this->backorders = (bool) $backorders;
-    }
-
     /**
      * {@inheritdoc}
      */
     public function isStockAvailable(StockableInterface $stockable)
     {
-        if ($this->backorders || $stockable->isAvailableOnDemand()) {
-            return true;
-        }
-
-        return 0 < ($stockable->getOnHand() - $stockable->getOnHold());
+        return $this->isStockSufficient($stockable, 1);
     }
 
     /**
@@ -54,7 +31,7 @@ class AvailabilityChecker implements AvailabilityCheckerInterface
      */
     public function isStockSufficient(StockableInterface $stockable, $quantity)
     {
-        if ($this->backorders || $stockable->isAvailableOnDemand()) {
+        if ($stockable->isAvailableOnDemand()) {
             return true;
         }
 

@@ -102,6 +102,22 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
+    public function isOutOfStock()
+    {
+        return $this->hasElement('out-of-stock');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasAddToCartButton()
+    {
+        return $this->getDocument()->hasButton('Add to cart');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getRouteName()
     {
         return 'sylius_shop_product_show';
@@ -114,7 +130,8 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     {
         return array_merge(parent::getDefinedElements(), [
             'name' => '#sylius-product-name',
-            'attributes' => '#sylius-product-attributes'
+            'attributes' => '#sylius-product-attributes',
+            'out-of-stock' => '#sylius-product-out-of-stock',
         ]);
     }
 }
