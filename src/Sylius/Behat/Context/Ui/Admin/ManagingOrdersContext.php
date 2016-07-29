@@ -479,17 +479,6 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then its shipment state should be :shipmentState
-     */
-    public function itsShipmentStateShouldBe($shipmentState)
-    {
-        Assert::true(
-            $this->showPage->hasShipment($shipmentState),
-            sprintf('It should have shipment with %s state', $shipmentState)
-        );
-    }
-
-    /**
      * @Then /^I should not be able to ship (this order)$/
      */
     public function iShouldNotBeAbleToShipThisOrder(OrderInterface $order)
@@ -576,13 +565,24 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Given it should have shipment in state :shipmentState
+     * @Then it should have shipment in state :shipmentState
      */
     public function itShouldHaveShipmentState($shipmentState)
     {
         Assert::true(
             $this->showPage->hasShipment($shipmentState),
             sprintf('It should have shipment with %s state', $shipmentState)
+        );
+    }
+
+    /**
+     * @Then order :orderNumber should have shipment state :shippingState
+     */
+    public function thisOrderShipmentStateShouldBe($shippingState)
+    {
+        Assert::true(
+            $this->indexPage->isSingleResourceOnPage(['Shipping state' => $shippingState]),
+            sprintf('Order should have %s shipping state', $shippingState)
         );
     }
 

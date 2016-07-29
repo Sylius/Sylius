@@ -19,9 +19,11 @@ use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\OrderPaymentStates;
 use Sylius\Component\Core\OrderPaymentTransitions;
+use Sylius\Component\Core\OrderShippingTransitions;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 class StateResolver implements StateResolverInterface
@@ -79,43 +81,69 @@ class StateResolver implements StateResolverInterface
      */
     public function resolveShippingState(OrderInterface $order)
     {
-        if ($order->isBackorder()) {
-            $order->setShippingState(OrderShippingStates::BACKORDER);
-
+        if (OrderShippingStates::STATE_SHIPPED === $order->getShippingState()) {
             return;
         }
+        /** @var StateMachine $stateMachine */
+        $stateMachine = $this->stateMachineFactory->get($order, OrderShippingTransitions::GRAPH);
 
-        $order->setShippingState($this->getShippingState($order));
+        if ($this->allShipmentsInStateButOrderStateNotUpdated($order, ShipmentInterface::STATE_SHIPPED, OrderShippingStates::STATE_SHIPPED)) {
+            $stateMachine->apply(OrderShippingTransitions::TRANSITION_SHIP);
+        }
+
+        if ($this->isPartiallyShippedButOrderStateNotUpdated($order)) {
+            $stateMachine->apply(OrderShippingTransitions::TRANSITION_PARTIALLY_SHIP);
+        }
+    }
+
+    /**
+     * @param OrderInterface $order
+     * @param string $shipmentState
+     *
+     * @return int
+     */
+    private function countOrderShipmentsInState(OrderInterface $order, $shipmentState)
+    {
+        $shipments = $order->getShipments();
+
+        return $shipments
+            ->filter(function (ShipmentInterface $shipment) use ($shipmentState) {
+                return $shipment->getState() === $shipmentState;
+            })
+            ->count()
+        ;
+    }
+
+    /**
+     * @param OrderInterface $order
+     * @param string $shipmentState
+     * @param string $orderShippingState
+     *
+     * @return bool
+     */
+    private function allShipmentsInStateButOrderStateNotUpdated(OrderInterface $order, $shipmentState, $orderShippingState)
+    {
+        $shipmentInStateAmount = $this->countOrderShipmentsInState($order, $shipmentState);
+        $shipmentAmount = $order->getShipments()->count();
+
+        return $shipmentAmount === $shipmentInStateAmount && $orderShippingState !== $order->getShippingState();
     }
 
     /**
      * @param OrderInterface $order
      *
-     * @return string
+     * @return bool
      */
-    protected function getShippingState(OrderInterface $order)
+    private function isPartiallyShippedButOrderStateNotUpdated(OrderInterface $order)
     {
-        $states = [];
+        $shipmentInShippedStateAmount = $this->countOrderShipmentsInState($order, ShipmentInterface::STATE_SHIPPED);
+        $shipmentAmount = $order->getShipments()->count();
 
-        foreach ($order->getShipments() as $shipment) {
-            $states[] = $shipment->getState();
-        }
-
-        $states = array_unique($states);
-
-        $acceptableStates = [
-            ShipmentInterface::STATE_READY => OrderShippingStates::READY,
-            ShipmentInterface::STATE_SHIPPED => OrderShippingStates::SHIPPED,
-            ShipmentInterface::STATE_CANCELLED => OrderShippingStates::CANCELLED,
-        ];
-
-        foreach ($acceptableStates as $shipmentState => $orderState) {
-            if ([$shipmentState] == $states) {
-                return $orderState;
-            }
-        }
-
-        return OrderShippingStates::PARTIALLY_SHIPPED;
+        return
+            1 <= $shipmentInShippedStateAmount &&
+            $shipmentInShippedStateAmount < $shipmentAmount &&
+            OrderShippingStates::STATE_PARTIALLY_SHIPPED !== $order->getShippingState()
+        ;
     }
 
     /**

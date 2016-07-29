@@ -1,8 +1,8 @@
 @managing_orders
-Feature: Shipping an order
-    In order to confirm shipping of an order
+Feature: Seeing shipping states of an order after checkout steps
+    In order to get to know the state of shipping
     As an Administrator
-    I want to be able to ship a shipment
+    I want to be able to see shipping states
 
     Background:
         Given the store operates on a single channel in "France"
@@ -16,15 +16,18 @@ Feature: Shipping an order
         And I am logged in as an administrator
 
     @ui
-    Scenario: Finalizing order's shipment
-        Given I view the summary of the order "#00000666"
-        When specify its tracking code as "#00044"
-        And I ship this order
-        Then I should be notified that the order's shipment has been successfully shipped
-        And it should have shipment in state shipped
+    Scenario: Seeing ready order shipping state
+        When I browse orders
+        Then order "#00000666" should have shipment state ready
 
     @ui
-    Scenario: Unable to finalize shipped order's shipment
+    Scenario: Seeing shipped order shipping state
         Given this order has already been shipped
-        When I view the summary of the order "#00000666"
-        Then I should not be able to ship this order
+        When I browse orders
+        Then order "#00000666" should have shipment state shipped
+
+    @ui
+    Scenario: Seeing cancelled order shipping state
+        Given the customer canceled this order
+        When I browse orders
+        Then order "#00000666" should have shipment state cancelled

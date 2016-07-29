@@ -14,14 +14,15 @@ namespace Sylius\Component\Core\Model;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class OrderShippingStates
+final class OrderShippingStates
 {
-    const BACKORDER = 'backorder';
-    const CANCELLED = 'cancelled';
-    const CHECKOUT = 'checkout';
-    const ONHOLD = 'onhold';
-    const PARTIALLY_SHIPPED = 'partially_shipped';
-    const READY = 'ready';
-    const RETURNED = 'returned';
-    const SHIPPED = 'shipped';
+    const STATE_CART = 'cart';
+    const STATE_READY = 'ready';
+    const STATE_CANCELLED = 'cancelled';
+    const STATE_PARTIALLY_SHIPPED = 'partially_shipped';
+    const STATE_SHIPPED = 'shipped';
+
+    private function __construct()
+    {
+    }
 }
