@@ -1,0 +1,25 @@
+sylius:
+    group:
+        name:
+            max: Group name must not be longer than {{ limit }} characters.
+            min: Group name must be at least {{ limit }} characters long.
+            not_blank: Please enter group name.
+    customer:
+        first_name:
+            max: First name must not be longer than {{ limit }} characters.
+            min: First name must be at least {{ limit }} characters long.
+            not_blank: Please enter your first name.
+        last_name:
+            max: Last name must not be longer than {{ limit }} characters.
+            min: Last name must be at least {{ limit }} characters long.
+            not_blank: Please enter your last name.
+        gender:
+            not_blank: Please choose your gender.
+        email:
+            already_used: This email is already used, please login or use forgotten password.
+            max: Email must not be longer than {{ limit }} characters.
+            min: Email must be at least {{ limit }} characters long.
+            not_blank: Please enter your email.
+            invalid: This email is invalid.
+            unique: This email is already used.
+            registered: This email is already registered, please login or use forgotten password.

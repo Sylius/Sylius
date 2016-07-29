@@ -11,9 +11,11 @@
 
 namespace Sylius\Bundle\UserBundle\Form\EventSubscriber;
 
+use Sylius\Component\User\Model\UserAwareInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -53,6 +55,8 @@ class AddUserFormSubscriber implements EventSubscriberInterface
 
             return;
         }
+        
+        Assert::isInstanceOf($normData, UserAwareInterface::class);
 
         if ($this->isUserDataEmpty($data) && null === $normData->getUser()) {
             unset($data['user']);

@@ -22,12 +22,13 @@ use Pagerfanta\Pagerfanta;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
+use Sylius\Component\User\Repository\UserRepositoryInterface;
 
 final class UserRepositorySpec extends ObjectBehavior
 {
-    public function let(EntityManager $em, ClassMetadata $classMetadata)
+    public function let(EntityManager $entityManager, ClassMetadata $classMetadata)
     {
-        $this->beConstructedWith($em, $classMetadata);
+        $this->beConstructedWith($entityManager, $classMetadata);
     }
 
     function it_is_initializable()
@@ -40,73 +41,20 @@ final class UserRepositorySpec extends ObjectBehavior
         $this->shouldHaveType(EntityRepository::class);
     }
 
-    function it_create_paginator(
-        $em,
-        QueryBuilder $builder,
-        Expr $expr,
-        AbstractQuery $query
-    ) {
-        $em->createQueryBuilder()->shouldBeCalled()->willReturn($builder);
-        $builder->select('o')->shouldBeCalled()->willReturn($builder);
-        $builder->from(Argument::any(), 'o', Argument::cetera())->shouldBeCalled()->willReturn($builder);
-
-        $builder->expr()->willReturn($expr);
-        $expr->like(Argument::any(), Argument::any())->willReturn($expr);
-        $expr->eq(Argument::any(), Argument::any())->willReturn($expr);
-
-        // enable
-        $builder->andWhere('o.enabled = :enabled')->shouldBeCalled()->willReturn($builder);
-        $builder->setParameter('enabled', true)->shouldBeCalled()->willReturn($builder);
-
-        // Query
-        $builder->leftJoin('o.customer', 'customer')->shouldBeCalled()->willReturn($builder);
-        $builder->where('customer.emailCanonical LIKE :query')->shouldBeCalled()->willReturn($builder);
-        $builder->orWhere('customer.firstName LIKE :query')->shouldBeCalled()->willReturn($builder);
-        $builder->orWhere('customer.lastName LIKE :query')->shouldBeCalled()->willReturn($builder);
-        $builder->orWhere('o.username LIKE :query')->shouldBeCalled()->willReturn($builder);
-        $builder->setParameter('query', '%arnaud%')->shouldBeCalled()->willReturn($builder);
-
-        // Sort
-        $builder->addOrderBy('o.name', 'asc')->shouldBeCalled();
-        $builder->getQuery()->shouldBeCalled()->willReturn($query);
-
-        $this->createFilterPaginator(
-            [
-                'enabled' => true,
-                'query' => 'arnaud',
-            ],
-            ['name' => 'asc']
-        )->shouldHaveType(Pagerfanta::class);
-    }
-
-    function it_finds_details($em, QueryBuilder $builder, Expr $expr, AbstractQuery $query)
+    function it_implements_user_repository_interface()
     {
-        $builder->expr()->shouldBeCalled()->willReturn($expr);
-        $expr->eq('o.id', ':id')->shouldBeCalled()->willReturn($expr);
-
-        $em->createQueryBuilder()->shouldBeCalled()->willReturn($builder);
-        $builder->select('o')->shouldBeCalled()->willReturn($builder);
-        $builder->from(Argument::any(), 'o', Argument::cetera())->shouldBeCalled()->willReturn($builder);
-        $builder->leftJoin('o.customer', 'customer')->shouldBeCalled()->willReturn($builder);
-        $builder->addSelect('customer')->shouldBeCalled()->willReturn($builder);
-        $builder->where($expr)->shouldBeCalled()->willReturn($builder);
-        $builder->setParameter('id', 10)->shouldBeCalled()->willReturn($builder);
-
-        $builder->getQuery()->shouldBeCalled()->willReturn($query);
-        $query->getOneOrNullResult()->shouldBeCalled();
-
-        $this->findForDetailsPage(10);
+        $this->shouldImplement(UserRepositoryInterface::class);
     }
 
     function it_counts_user_user_repository(
-        $em,
+        EntityManager $entityManager,
         QueryBuilder $builder,
         \DateTime $from,
         \DateTime $to,
         AbstractQuery $query,
         Expr $expr
     ) {
-        $em->createQueryBuilder()->shouldBeCalled()->willReturn($builder);
+        $entityManager->createQueryBuilder()->shouldBeCalled()->willReturn($builder);
 
         $builder->expr()->shouldBeCalled()->willReturn($expr);
         $expr->gte(Argument::any(), Argument::any())->shouldBeCalled()->willReturn($expr);
@@ -128,27 +76,24 @@ final class UserRepositorySpec extends ObjectBehavior
     }
 
     function it_finds_one_by_email(
-        $em,
+        EntityManager $entityManager,
         QueryBuilder $builder,
         Expr $expr,
         AbstractQuery $query
     ) {
-        $em->createQueryBuilder()->shouldBeCalled()->willReturn($builder);
+        $entityManager->createQueryBuilder()->shouldBeCalled()->willReturn($builder);
         $builder->select('o')->shouldBeCalled()->willReturn($builder);
         $builder->from(Argument::any(), 'o', Argument::cetera())->shouldBeCalled()->willReturn($builder);
 
-        $builder->leftJoin('o.customer', 'customer')->shouldBeCalled()->willReturn($builder);
-        $builder->addSelect('customer')->shouldBeCalled()->willReturn($builder);
-
         $builder->expr()->shouldBeCalled()->willReturn($expr);
-        $expr->eq('o.id', ':id')->shouldBeCalled()->willReturn($expr);
+        $expr->eq('o.emailCanonical', ':email')->shouldBeCalled()->willReturn($expr);
+        $builder->andWhere($expr)->shouldBeCalled()->willReturn($builder);
 
-        $builder->where($expr)->shouldBeCalled()->willReturn($builder);
-        $builder->setParameter('id', 10)->shouldBeCalled()->willReturn($builder);
+        $builder->setParameter('email', 'sylius@example.com')->shouldBeCalled()->willReturn($builder);
 
         $builder->getQuery()->shouldBeCalled()->willReturn($query);
         $query->getOneOrNullResult()->shouldBeCalled();
 
-        $this->findForDetailsPage(10);
+        $this->findOneByEmail('sylius@example.com');
     }
 }

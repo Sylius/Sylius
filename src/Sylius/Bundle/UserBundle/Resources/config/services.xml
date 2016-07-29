@@ -19,7 +19,6 @@
     <parameters>
         <parameter key="sylius.authentication.success_handler.class">Sylius\Bundle\UserBundle\Authentication\AuthenticationSuccessHandler</parameter>
         <parameter key="sylius.authentication.failure_handler.class">Sylius\Bundle\UserBundle\Authentication\AuthenticationFailureHandler</parameter>
-        <parameter key="sylius.context.customer.class">Sylius\Bundle\UserBundle\Context\CustomerContext</parameter>
 
         <parameter key="sylius.user.canonicalizer.class">Sylius\Component\User\Canonicalizer\Canonicalizer</parameter>
         <parameter key="sylius.user.password_encoder.class">Sylius\Bundle\UserBundle\Security\UserPasswordEncoder</parameter>
@@ -41,39 +40,23 @@
         <parameter key="sylius.form.type.user_request_password_reset.class">Sylius\Bundle\UserBundle\Form\Type\UserRequestPasswordResetType</parameter>
         <parameter key="sylius.form.type.user_reset_password.class">Sylius\Bundle\UserBundle\Form\Type\UserResetPasswordType</parameter>
         <parameter key="sylius.form.type.user_change_password.class">Sylius\Bundle\UserBundle\Form\Type\UserChangePasswordType</parameter>
-        <parameter key="sylius.form.type.gender.class">Sylius\Bundle\UserBundle\Form\Type\GenderType</parameter>
 
-        <parameter key="sylius.listener.default_username.class">Sylius\Bundle\UserBundle\EventListener\DefaultUsernameORMListener</parameter>
-        <parameter key="sylius.listener.customer_aware.class">Sylius\Bundle\UserBundle\EventListener\CustomerAwareListener</parameter>
         <parameter key="sylius.listener.user_delete.class">Sylius\Bundle\UserBundle\EventListener\UserDeleteListener</parameter>
-        <parameter key="sylius.listener.canonicalizer.class">Sylius\Bundle\UserBundle\EventListener\CanonicalizerListener</parameter>
         <parameter key="sylius.listener.password_updater.class">Sylius\Bundle\UserBundle\EventListener\PasswordUpdaterListener</parameter>
         <parameter key="sylius.listener.user_last_login.class">Sylius\Bundle\UserBundle\EventListener\UserLastLoginSubscriber</parameter>
-        <parameter key="sylius.listener.user_auto_login.class">Sylius\Bundle\UserBundle\EventListener\UserAutoLoginListener</parameter>
         <parameter key="sylius.listener.user_reloader.class">Sylius\Bundle\UserBundle\EventListener\UserReloaderListener</parameter>
         <parameter key="sylius.listener.user_mailer_listener.class">Sylius\Bundle\UserBundle\EventListener\MailerListener</parameter>
-        <parameter key="sylius.listener.user_registration.class">Sylius\Bundle\UserBundle\EventListener\UserRegistrationListener</parameter>
-
-        <parameter key="sylius.form.event_subscriber.add_user_type.class">Sylius\Bundle\UserBundle\Form\EventSubscriber\AddUserFormSubscriber</parameter>
-        <parameter key="sylius.form.event_subscriber.set_customer_type.class">Sylius\Bundle\UserBundle\Form\EventSubscriber\SetCustomerFormSubscriber</parameter>
 
         <parameter key="sylius.controller.user_security.class">Sylius\Bundle\UserBundle\Controller\SecurityController</parameter>
 
-        <parameter key="sylius.user.validator.unique_registered_user.class">Sylius\Bundle\UserBundle\Validator\Constraints\RegisteredUserValidator</parameter>
-        <parameter key="sylius.user.validator.customer_initializer.class">Sylius\Bundle\UserBundle\Validator\Initializer\CustomerInitializer</parameter>
-
         <parameter key="sylius.form.model.change_password.class">Sylius\Bundle\UserBundle\Form\Model\ChangePassword</parameter>
+
+        <parameter key="sylius.form.event_subscriber.add_user_type.class">Sylius\Bundle\UserBundle\Form\EventSubscriber\AddUserFormSubscriber</parameter>
     </parameters>
 
     <services>
         <service id="sylius.authenticaiton.success_handler" class="%sylius.authentication.success_handler.class%" parent="security.authentication.success_handler" public="false" />
         <service id="sylius.authentication.failure_handler" class="%sylius.authentication.failure_handler.class%" parent="security.authentication.failure_handler" public="false" />
-
-        <!-- Customer context -->
-        <service id="sylius.context.customer" class="%sylius.context.customer.class%">
-            <argument type="service" id="security.token_storage" />
-            <argument type="service" id="security.authorization_checker" />
-        </service>
 
         <!-- Controllers -->
         <service id="sylius.controller.user_security" class="%sylius.controller.user_security.class%">
@@ -127,22 +110,10 @@
             <argument type="service" id="sylius.manager.user" />
             <tag name="kernel.event_subscriber" />
         </service>
-        <service id="sylius.listener.default_username" class="%sylius.listener.default_username.class%">
-            <tag name="doctrine.event_listener" event="onFlush" />
-        </service>
-        <service id="sylius.listener.user_auto_login" class="%sylius.listener.user_auto_login.class%">
-            <argument type="service" id="sylius.security.user_login" />
-            <tag name="kernel.event_listener" event="sylius.customer.post_register" method="login" />
-        </service>
         <service id="sylius.listener.user_reloader" class="%sylius.listener.user_reloader.class%">
             <argument type="service" id="sylius.user.user_reloader" />
             <tag name="kernel.event_listener" event="sylius.user.post_create" method="reloadUser" />
             <tag name="kernel.event_listener" event="sylius.user.post_update" method="reloadUser" />
-        </service>
-        <service id="sylius.listener.canonicalizer" class="%sylius.listener.canonicalizer.class%">
-            <argument type="service" id="sylius.user.canonicalizer" />
-            <tag name="doctrine.event_listener" event="prePersist" />
-            <tag name="doctrine.event_listener" event="preUpdate" />
         </service>
         <service id="sylius.listener.password_updater" class="%sylius.listener.password_updater.class%">
             <argument type="service" id="sylius.user.password_updater" />
@@ -163,12 +134,9 @@
             <argument type="service" id="session" />
             <tag name="kernel.event_listener" event="sylius.user.pre_delete" method="deleteUser" />
         </service>
-        <service id="sylius.listener.user_registration" class="%sylius.listener.user_registration.class%">
-            <argument type="service" id="sylius.manager.user" />
-            <argument type="service" id="sylius.user.generator.email_verification_token" />
-            <argument type="service" id="event_dispatcher" />
-            <tag name="kernel.event_listener" event="sylius.customer.post_register" method="sendVerificationEmail" />
-        </service>
+
+        <!-- Event Subscribers -->
+        <service id="sylius.form.event_subscriber.add_user_type" class="%sylius.form.event_subscriber.add_user_type.class%" />
 
         <!-- User Providers -->
         <service id="sylius.user_provider.email" class="%sylius.user_provider.email.class%">
@@ -203,23 +171,6 @@
         </service>
         <service id="sylius.form.type.gender" class="%sylius.form.type.gender.class%">
             <tag name="form.type" alias="sylius_gender" />
-        </service>
-
-        <!-- Form event subscribers-->
-        <service id="sylius.form.event_subscriber.add_user_type" class="%sylius.form.event_subscriber.add_user_type.class%" />
-        <service id="sylius.form.event_subscriber.set_customer" class="%sylius.form.event_subscriber.set_customer_type.class%">
-            <argument type="service" id="sylius.repository.customer" />
-        </service>
-
-        <!-- Validators -->
-        <service id="validator.unique.registered_user" class="%sylius.user.validator.unique_registered_user.class%">
-            <argument type="service" id="sylius.repository.customer" />
-            <tag name="validator.constraint_validator" alias="registered_user_validator" />
-        </service>
-
-        <service id="sylius.user.validator.customer_initializer" class="%sylius.user.validator.customer_initializer.class%">
-            <argument type="service" id="sylius.user.canonicalizer" />
-            <tag name="validator.initializer" />
         </service>
     </services>
 

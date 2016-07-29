@@ -12,6 +12,7 @@
 namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Sylius\Component\Customer\Model\CustomerInterface as BaseCustomerInterface;
 use Sylius\Component\Rbac\Model\RoleInterface;
 use Sylius\Component\User\Model\User as BaseUser;
 
@@ -25,6 +26,11 @@ class User extends BaseUser implements UserInterface
      * @var ArrayCollection
      */
     protected $authorizationRoles;
+
+    /**
+     * @var CustomerInterface
+     */
+    protected $customer;
 
     public function __construct()
     {
@@ -80,5 +86,63 @@ class User extends BaseUser implements UserInterface
         }
 
         return $roles;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCustomer()
+    {
+        return $this->customer;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCustomer(BaseCustomerInterface $customer = null)
+    {
+        if ($this->customer !== $customer) {
+            $this->customer = $customer;
+            $this->assignUser($customer);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getEmail()
+    {
+        return $this->customer->getEmail();
+    }
+    /**
+     * {@inheritdoc}
+     */
+    public function setEmail($email)
+    {
+        $this->customer->setEmail($email);
+    }
+    /**
+     * {@inheritdoc}
+     */
+    public function getEmailCanonical()
+    {
+        return $this->customer->getEmailCanonical();
+    }
+    /**
+     * {@inheritdoc}
+     */
+    public function setEmailCanonical($emailCanonical)
+    {
+        $this->customer->setEmailCanonical($emailCanonical);
+    }
+
+    /**
+     * @param CustomerInterface $customer
+     */
+    protected function assignUser(CustomerInterface $customer = null)
+    {
+        if (null !== $customer) {
+            $customer->setUser($this);
+        }
     }
 }

@@ -12,12 +12,13 @@
 namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\User\Model\CustomerInterface as BaseCustomerInterface;
+use Sylius\Component\Customer\Model\CustomerInterface as BaseCustomerInterface;
+use Sylius\Component\User\Model\UserAwareInterface;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-interface CustomerInterface extends BaseCustomerInterface
+interface CustomerInterface extends BaseCustomerInterface, UserAwareInterface
 {
     /**
      * @return Collection|OrderInterface[]
@@ -65,4 +66,9 @@ interface CustomerInterface extends BaseCustomerInterface
      * @return Collection|AddressInterface[]
      */
     public function getAddresses();
+    
+    /**
+     * @return bool
+     */
+    public function hasUser();
 }

@@ -11,6 +11,6 @@ Sylius\Component\Core\Model\Customer:
     customer_{Oliver, Roy, Thea, Barry, Joe}:
         firstName: <current()>
         lastName: Doe
-        email (unique): <current()>@doe.com
+        email: <current()>@doe.com
         emailCanonical: <current()>@doe.com
         birthday: <date()>

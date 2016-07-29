@@ -8,6 +8,7 @@ suites:
     Contact: { namespace: Sylius\Component\Contact, psr4_prefix: Sylius\Component\Contact, spec_path: src/Sylius/Component/Contact, src_path: src/Sylius/Component/Contact }
     Core: { namespace: Sylius\Component\Core, psr4_prefix: Sylius\Component\Core, spec_path: src/Sylius/Component/Core, src_path: src/Sylius/Component/Core }
     Currency: { namespace: Sylius\Component\Currency, psr4_prefix: Sylius\Component\Currency, spec_path: src/Sylius/Component/Currency, src_path: src/Sylius/Component/Currency }
+    Customer: { namespace: Sylius\Component\Customer, psr4_prefix: Sylius\Component\Customer, spec_path: src/Sylius/Component/Customer, src_path: src/Sylius/Component/Customer }
     Grid: { namespace: Sylius\Component\Grid, psr4_prefix: Sylius\Component\Grid, spec_path: src/Sylius/Component/Grid, src_path: src/Sylius/Component/Grid }
     Inventory: { namespace: Sylius\Component\Inventory, psr4_prefix: Sylius\Component\Inventory, spec_path: src/Sylius/Component/Inventory, src_path: src/Sylius/Component/Inventory }
     Locale: { namespace: Sylius\Component\Locale, psr4_prefix: Sylius\Component\Locale, spec_path: src/Sylius/Component/Locale, src_path: src/Sylius/Component/Locale }
@@ -43,6 +44,7 @@ suites:
     ContentBundle: { namespace: Sylius\Bundle\ContentBundle, psr4_prefix: Sylius\Bundle\ContentBundle, spec_path: src/Sylius/Bundle/ContentBundle, src_path: src/Sylius/Bundle/ContentBundle }
     CoreBundle: { namespace: Sylius\Bundle\CoreBundle, psr4_prefix: Sylius\Bundle\CoreBundle, spec_path: src/Sylius/Bundle/CoreBundle, src_path: src/Sylius/Bundle/CoreBundle }
     CurrencyBundle: { namespace: Sylius\Bundle\CurrencyBundle, psr4_prefix: Sylius\Bundle\CurrencyBundle, spec_path: src/Sylius/Bundle/CurrencyBundle, src_path: src/Sylius/Bundle/CurrencyBundle }
+    CustomerBundle: { namespace: Sylius\Bundle\CustomerBundle, psr4_prefix: Sylius\Bundle\CustomerBundle, spec_path: src/Sylius/Bundle/CustomerBundle, src_path: src/Sylius/Bundle/CustomerBundle }
     FlowBundle: { namespace: Sylius\Bundle\FlowBundle, psr4_prefix: Sylius\Bundle\FlowBundle, spec_path: src/Sylius/Bundle/FlowBundle, src_path: src/Sylius/Bundle/FlowBundle }
     FixturesBundle: { namespace: Sylius\Bundle\FixturesBundle, psr4_prefix: Sylius\Bundle\FixturesBundle, spec_path: src/Sylius/Bundle/FixturesBundle, src_path: src/Sylius/Bundle/FixturesBundle }
     GridBundle: { namespace: Sylius\Bundle\GridBundle, psr4_prefix: Sylius\Bundle\GridBundle, spec_path: src/Sylius/Bundle/GridBundle, src_path: src/Sylius/Bundle/GridBundle }

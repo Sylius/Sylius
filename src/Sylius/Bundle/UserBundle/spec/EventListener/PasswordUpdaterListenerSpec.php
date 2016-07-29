@@ -44,7 +44,7 @@ final class PasswordUpdaterListenerSpec extends ObjectBehavior
         $this->genericEventUpdater($event);
     }
 
-    function it_allows_to_update_password_for_generic_event_for_user_interface_implementation_only($passwordUpdater, GenericEvent $event, UserInterface $user)
+    function it_allows_to_update_password_for_generic_event_for_user_interface_implementation_only(GenericEvent $event, UserInterface $user)
     {
         $user = '';
         $event->getSubject()->willReturn($user);

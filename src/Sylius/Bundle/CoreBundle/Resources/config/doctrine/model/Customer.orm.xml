@@ -30,6 +30,12 @@
             </cascade>
         </one-to-one>
 
+        <one-to-one field="user" target-entity="Sylius\Component\User\Model\UserInterface" mapped-by="customer">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </one-to-one>
+
         <one-to-many field="orders" target-entity="Sylius\Component\Order\Model\OrderInterface" mapped-by="customer">
             <cascade>
                 <cascade-all />

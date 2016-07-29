@@ -55,16 +55,6 @@ interface UserInterface extends
     public function setEmailCanonical($emailCanonical);
 
     /**
-     * @return CustomerInterface
-     */
-    public function getCustomer();
-
-    /**
-     * @param CustomerInterface $customer
-     */
-    public function setCustomer(CustomerInterface $customer = null);
-
-    /**
      * @param string $username
      */
     public function setUsername($username);

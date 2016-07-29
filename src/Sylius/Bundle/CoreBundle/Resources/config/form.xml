@@ -55,6 +55,26 @@
         <parameter key="sylius.form.type.promotion_action.add_product_configuration.class">Sylius\Bundle\CoreBundle\Form\Type\Action\AddProductConfigurationType</parameter>
 
         <parameter key="sylius.form.type.data_transformer.taxons_to_codes.class">Sylius\Bundle\CoreBundle\Form\DataTransformer\TaxonsToCodesTransformer</parameter>
+
+        <parameter key="sylius.form.type.customer_guest.class">Sylius\Bundle\CoreBundle\Form\Type\CustomerGuestType</parameter>
+        <parameter key="sylius.form.type.customer_registration.class">Sylius\Bundle\CoreBundle\Form\Type\CustomerRegistrationType</parameter>
+        <parameter key="sylius.form.type.customer_simple_registration.class">Sylius\Bundle\CoreBundle\Form\Type\CustomerSimpleRegistrationType</parameter>
+
+        <parameter key="sylius.validation_groups.customer" type="collection">
+            <parameter>sylius</parameter>
+        </parameter>
+        <parameter key="sylius.validation_groups.customer_guest" type="collection">
+            <parameter>sylius_customer_guest</parameter>
+        </parameter>
+        <parameter key="sylius.validation_groups.customer_simple_registration" type="collection">
+            <parameter>sylius</parameter>
+            <parameter>sylius_user_registration</parameter>
+        </parameter>
+        <parameter key="sylius.validation_groups.customer_registration" type="collection">
+            <parameter>sylius</parameter>
+            <parameter>sylius_customer_profile</parameter>
+            <parameter>sylius_user_registration</parameter>
+        </parameter>
     </parameters>
 
     <services>
@@ -200,6 +220,31 @@
         <service id="sylius.form.type.data_transformer.taxons_to_codes" class="%sylius.form.type.data_transformer.taxons_to_codes.class%">
             <argument type="service" id="sylius.repository.taxon" />
         </service>
-    </services>
 
+        <!-- customer -->
+        <service id="sylius.form.type.customer" class="%sylius.form.type.customer.class%">
+            <argument>%sylius.model.customer.class%</argument>
+            <argument>%sylius.validation_groups.customer%</argument>
+            <argument type="service" id="sylius.form.event_subscriber.add_user_type" />
+            <tag name="form.type" alias="sylius_customer" />
+        </service>
+        <service id="sylius.form.type.customer_guest" class="%sylius.form.type.customer_guest.class%">
+            <argument>%sylius.model.customer.class%</argument>
+            <argument>%sylius.validation_groups.customer_guest%</argument>
+            <argument type="service" id="sylius.form.event_subscriber.set_customer" />
+            <tag name="form.type" alias="sylius_customer_guest" />
+        </service>
+        <service id="sylius.form.type.customer_simple_registration" class="%sylius.form.type.customer_simple_registration.class%">
+            <argument>%sylius.model.customer.class%</argument>
+            <argument>%sylius.validation_groups.customer_simple_registration%</argument>
+            <argument type="service" id="sylius.repository.customer" />
+            <tag name="form.type" alias="sylius_customer_simple_registration" />
+        </service>
+        <service id="sylius.form.type.customer_registration" class="%sylius.form.type.customer_registration.class%">
+            <argument>%sylius.model.customer.class%</argument>
+            <argument>%sylius.validation_groups.customer_registration%</argument>
+            <argument type="service" id="sylius.repository.customer" />
+            <tag name="form.type" alias="sylius_customer_registration" />
+        </service>
+    </services>
 </container>

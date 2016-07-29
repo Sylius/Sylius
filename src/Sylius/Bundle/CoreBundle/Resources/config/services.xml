@@ -67,6 +67,11 @@
         <parameter key="sylius.listener.customer_reviews_delete.class">Sylius\Bundle\CoreBundle\EventListener\CustomerReviewsDeleteListener</parameter>
         <parameter key="sylius.listener.order_recalculation.class">Sylius\Bundle\CoreBundle\EventListener\OrderRecalculationListener</parameter>
         <parameter key="sylius.listener.user_cart_recalculation.class">Sylius\Bundle\CoreBundle\EventListener\UserCartRecalculationListener</parameter>
+        <parameter key="sylius.listener.default_username.class">Sylius\Bundle\CoreBundle\EventListener\DefaultUsernameORMListener</parameter>
+        <parameter key="sylius.listener.user_auto_login.class">Sylius\Bundle\CoreBundle\EventListener\UserAutoLoginListener</parameter>
+        <parameter key="sylius.listener.canonicalizer.class">Sylius\Bundle\CoreBundle\EventListener\CanonicalizerListener</parameter>
+        <parameter key="sylius.listener.user_registration.class">Sylius\Bundle\CoreBundle\EventListener\UserRegistrationListener</parameter>
+
 
         <parameter key="sylius.active_promotions_by_channel_provider.class">Sylius\Component\Core\Provider\ActivePromotionsByChannelProvider</parameter>
 
@@ -102,6 +107,8 @@
         <parameter key="sylius.route_provider.class">Sylius\Bundle\CoreBundle\Routing\RouteProvider</parameter>
 
         <parameter key="sylius.validator.has_enabled_entity.class">Sylius\Bundle\CoreBundle\Validator\Constraints\HasEnabledEntityValidator</parameter>
+        <parameter key="sylius.validator.customer_initializer.class">Sylius\Bundle\CoreBundle\Validator\Initializer\CustomerInitializer</parameter>
+        <parameter key="sylius.user.validator.unique_registered_user.class">Sylius\Bundle\CoreBundle\Validator\Constraints\RegisteredUserValidator</parameter>
 
         <parameter key="sylius.sql_logger.purger.purge_mode" type="constant">Doctrine\Common\DataFixtures\Purger\ORMPurger::PURGE_MODE_DELETE</parameter>
         <parameter key="sylius.sql_logger.purger.class">Sylius\Bundle\CoreBundle\Purger\QueryLogger</parameter>
@@ -115,6 +122,11 @@
         <parameter key="sylius.proportional_integer_distributor.class">Sylius\Component\Core\Distributor\ProportionalIntegerDistributor</parameter>
 
         <parameter key="sylius.shipping_methods_resolver.by_zones_and_channel.class">Sylius\Component\Core\Resolver\ShippingMethodsByZonesAndChannelResolver</parameter>
+
+        <parameter key="sylius.context.customer.class">Sylius\Bundle\CoreBundle\Context\CustomerContext</parameter>
+
+        <!-- Form subscriber -->
+        <parameter key="sylius.form.event_subscriber.set_customer_type.class">Sylius\Bundle\CoreBundle\Form\EventSubscriber\SetCustomerFormSubscriber</parameter>
 
         <!-- Data fetchers -->
         <parameter key="sylius.form.type.data_fetcher.number_of_orders.class">Sylius\Bundle\CoreBundle\Form\Type\DataFetcher\NumberOfOrdersType</parameter>
@@ -357,6 +369,32 @@
             <tag name="kernel.event_listener" event="sylius.user.security.implicit_login" method="recalculateCartWhileLogin" />
             <tag name="kernel.event_listener" event="security.interactive_login" method="recalculateCartWhileLogin" />
         </service>
+        <service id="sylius.listener.default_username" class="%sylius.listener.default_username.class%">
+            <tag name="doctrine.event_listener" event="onFlush" />
+        </service>
+        <service id="sylius.listener.user_auto_login" class="%sylius.listener.user_auto_login.class%">
+            <argument type="service" id="sylius.security.user_login" />
+            <tag name="kernel.event_listener" event="sylius.customer.post_register" method="login" />
+        </service>
+        <service id="sylius.listener.canonicalizer" class="%sylius.listener.canonicalizer.class%">
+            <argument type="service" id="sylius.user.canonicalizer" />
+            <tag name="doctrine.event_listener" event="prePersist" />
+            <tag name="doctrine.event_listener" event="preUpdate" />
+        </service>
+        <service id="sylius.listener.user_registration" class="%sylius.listener.user_registration.class%">
+            <argument type="service" id="sylius.manager.user" />
+            <argument type="service" id="sylius.user.generator.email_verification_token" />
+            <argument type="service" id="event_dispatcher" />
+            <tag name="kernel.event_listener" event="sylius.customer.post_register" method="sendVerificationEmail" />
+        </service>
+        <service id="sylius.listener.password_updater" class="%sylius.listener.password_updater.class%">
+            <argument type="service" id="sylius.user.password_updater" />
+            <tag name="kernel.event_listener" event="sylius.user.pre_password_reset" method="genericEventUpdater" />
+            <tag name="kernel.event_listener" event="sylius.user.pre_password_change" method="genericEventUpdater" />
+            <tag name="kernel.event_listener" event="sylius.customer.pre_update" method="customerUpdateEvent" />
+            <tag name="doctrine.event_listener" event="prePersist" />
+            <tag name="doctrine.event_listener" event="preUpdate" />
+        </service>
 
         <service id="sylius.active_promotions_by_channel_provider" class="%sylius.active_promotions_by_channel_provider.class%">
             <argument type="service" id="sylius.repository.promotion" />
@@ -491,6 +529,17 @@
             <tag name="sylius.shipping_method_resolver" type="by_zones_and_channel" label="sylius.shipping_methods_resolver.by_zones_and_channel" priority="1" />
         </service>
 
+        <!-- Customer context -->
+        <service id="sylius.context.customer" class="%sylius.context.customer.class%">
+            <argument type="service" id="security.token_storage" />
+            <argument type="service" id="security.authorization_checker" />
+        </service>
+
+        <!-- Form event subscribers-->
+        <service id="sylius.form.event_subscriber.set_customer" class="%sylius.form.event_subscriber.set_customer_type.class%">
+            <argument type="service" id="sylius.repository.customer" />
+        </service>
+
         <!-- Data fetchers -->
         <service id="sylius.form.type.data_fetcher.user_registration" class="%sylius.form.type.data_fetcher.user_registration.class%">
             <tag name="form.type" alias="sylius_data_fetcher_user_registration" />
@@ -512,6 +561,14 @@
         <service id="sylius.validator.has_enabled_entity" class="%sylius.validator.has_enabled_entity.class%">
             <argument type="service" id="doctrine" />
             <tag name="validator.constraint_validator" alias="sylius_has_enabled_entity" />
+        </service>
+        <service id="sylius.validator.customer_initializer" class="%sylius.validator.customer_initializer.class%">
+            <argument type="service" id="sylius.user.canonicalizer" />
+            <tag name="validator.initializer" />
+        </service>
+        <service id="validator.unique.registered_user" class="%sylius.user.validator.unique_registered_user.class%">
+            <argument type="service" id="sylius.repository.customer" />
+            <tag name="validator.constraint_validator" alias="registered_user_validator" />
         </service>
     </services>
 

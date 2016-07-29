@@ -31,11 +31,6 @@ class User implements UserInterface
     protected $id;
 
     /**
-     * @var CustomerInterface
-     */
-    protected $customer;
-
-    /**
      * @var string
      */
     protected $username;
@@ -124,6 +119,16 @@ class User implements UserInterface
      */
     protected $oauthAccounts;
 
+    /**
+     * @var string 
+     */
+    protected $email;
+
+    /**
+     * @var string 
+     */
+    protected $emailCanonical;
+
     public function __construct()
     {
         $this->salt = base_convert(sha1(uniqid(mt_rand(), true)), 16, 36);
@@ -145,22 +150,35 @@ class User implements UserInterface
     /**
      * {@inheritdoc}
      */
-    public function getCustomer()
+    public function getEmail()
     {
-        return $this->customer;
+        return $this->email;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setCustomer(CustomerInterface $customer = null)
+    public function setEmail($email)
     {
-        if ($this->customer !== $customer) {
-            $this->customer = $customer;
-            $this->assignUser($customer);
-        }
+        $this->email = $email;
     }
-
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function getEmailCanonical()
+    {
+        return $this->emailCanonical;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function setEmailCanonical($emailCanonical)
+    {
+        $this->emailCanonical;
+    }
+    
     /**
      * {@inheritdoc}
      */
@@ -398,38 +416,6 @@ class User implements UserInterface
     /**
      * {@inheritdoc}
      */
-    public function getEmail()
-    {
-        return $this->customer->getEmail();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setEmail($email)
-    {
-        $this->customer->setEmail($email);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getEmailCanonical()
-    {
-        return $this->customer->getEmailCanonical();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setEmailCanonical($emailCanonical)
-    {
-        $this->customer->setEmailCanonical($emailCanonical);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function isPasswordRequestNonExpired(\DateInterval $ttl)
     {
         return null !== $this->passwordRequestedAt && new \DateTime() <= $this->passwordRequestedAt->add($ttl);
@@ -571,16 +557,6 @@ class User implements UserInterface
             $this->enabled,
             $this->id
         ) = $data;
-    }
-
-    /**
-     * @param CustomerInterface $customer
-     */
-    protected function assignUser(CustomerInterface $customer = null)
-    {
-        if (null !== $customer) {
-            $customer->setUser($this);
-        }
     }
 
     /**

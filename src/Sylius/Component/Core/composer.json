@@ -30,6 +30,7 @@
         "sylius/channel": "^1.0",
         "sylius/contact": "^1.0",
         "sylius/currency": "^1.0",
+        "sylius/customer": "^1.0",
         "sylius/inventory": "^1.0",
         "sylius/locale": "^1.0",
         "sylius/order": "^1.0",

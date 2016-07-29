@@ -14,7 +14,7 @@ namespace spec\Sylius\Component\Core\Pricing;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Pricing\Calculator\CalculatorInterface;
 use Sylius\Component\Pricing\Model\PriceableInterface;
-use Sylius\Component\User\Model\GroupInterface;
+use Sylius\Component\Customer\Model\GroupInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>

@@ -35,6 +35,7 @@
         "sylius/contact-bundle": "^1.0",
         "sylius/content-bundle": "^1.0",
         "sylius/currency-bundle": "^1.0",
+        "sylius/customer-bundle": "^1.0",
         "sylius/flow-bundle": "^1.0",
         "sylius/fixtures-bundle": "^1.0",
         "sylius/inventory-bundle": "^1.0",
