@@ -4,117 +4,103 @@
 Orders
 ======
 
-*Order* model is one of the most important in Sylius, it represents the order placed via your store! It has a very consistent and clear API, which allows you to easily manipulate and process orders.
+**Order** model is one of the most important in Sylius, where many concepts of e-commerce meet.
+It represents an order that can be either placed or in progress (cart).
 
-Customer Reference
-------------------
+**Order** holds a collection of **OrderItem** instances, which represent products from the shop,
+as its physical copies, with chosen variants and quantities.
 
-*Order* holds a reference to specific *User*, which is available through ``getUser()`` method:
+Each Order is **assigned to the channel** in which it has been created. Moreover the **language** the customer was using
+and the **currency with its exchange rate** at the moment of creation are saved.
 
-.. code-block:: php
+How to create an Order programmatically?
+----------------------------------------
 
-    echo $order->getUser()->getEmail(); // john@example.com
-
-When creating order programatically, you can define the user yourself:
-
-.. code-block:: php
-
-    $order = $this->get('sylius.repository.order')->createNew();
-    $john = $this->get('sylius.repository.user')->find(3);
-
-    $order->setUser($john);
-
-*Order* may not have reference to *User* in case when *Order* was created by guest.
-
-Billing and Shipping Address
-----------------------------
-
-By default, every order has its own *billing* and *shipping* address, which are heavily used through whole process. Both of them are represented by *Address* model.
+To programmatically create an Order you will of course need a factory.
 
 .. code-block:: php
 
-    $shippingAddress = $order->getShippingAddress();
+    /** @var FactoryInterface $order */
+    $orderFactory = $this->get('sylius.factory.order');
 
-    echo 'Shipped to: '.$shippingAddress->getCountry();
+    /** @var OrderInterface $order */
+    $order = $orderFactory->createNew();
 
-Order Contents
---------------
+Then get a channel to which you would like to add your Order. You can get it from the context or from the repository by code for example.
 
-*Order* holds a collection of  *OrderItem* instances.
+.. code-block:: php
 
-**OrderItem** model has the attributes listed below:
+    /** @var ChannelInterface $channel */
+    $channel = $this->container->get('sylius.context.channel')->getChannel();
 
-+------------------+-----------------------------+
-| Attribute        | Description                 |
-+==================+=============================+
-| id               | Unique id of the item       |
-+------------------+-----------------------------+
-| order            | Reference to an Order       |
-+------------------+-----------------------------+
-| variant          | Reference to Variant        |
-+------------------+-----------------------------+
-| product          | Product loaded via Variant  |
-+------------------+-----------------------------+
-| unitPrice        | The price of a single unit  |
-+------------------+-----------------------------+
-| quantity         | Quantity of sold item       |
-+------------------+-----------------------------+
-| adjustments      | Collection of Adjustments   |
-+------------------+-----------------------------+
-| adjustmentsTotal | Total value of adjustments  |
-+------------------+-----------------------------+
-| total            | Order grand total           |
-+------------------+-----------------------------+
-| createdAt        | Date when order was created |
-+------------------+-----------------------------+
-| updatedAt        | Date of last change         |
-+------------------+-----------------------------+
+    $order->setChannel($channel);
 
-Taxes and Shipping Fees as Adjustments
---------------------------------------
+What is more the proper Order instance should also have the **Customer** assigned.
+You can get it from the repository by email.
 
-...
+.. code-block:: php
 
-Shipments
----------
+    /** @var CustomerInterface $customer */
+    $customer = $this->container->get('sylius.repository.customer')->findOneBy(['email' => 'shop@example.com']);
 
-...
+    $order->setCustomer($customer);
 
-Shipping State
-~~~~~~~~~~~~~~
+A very important part of creating an Order is adding **OrderItems** to it.
+Assuming that you have a **Product** with a **ProductVariant** assigned already in the system:
 
-...
+.. code-block:: php
 
-Payments
---------
+    /** @var ProductInterface $product */
+    $product = $this->container->get('sylius.repository.product')->findOneBy([]);
 
-...
+    $variant = $product->getFirstVariant();
+    // there are different ways of getting product variants.
+    // Instead of getting first variant from the collection you can get one from the repository by code
+    // or use the **VariantResolver** service - either default or your own implementation.
 
-Payment State
-~~~~~~~~~~~~~
+    /** @var OrderItemInterface $orderItem */
+    $orderItem = $this->container->get('sylius.factory.order_item')->createNew();
+    $orderItem->setVariant($variant);
 
-...
+In order to change the amount of items use the **OrderItemQuantityModifier**.
+
+.. code-block:: php
+
+    $this->container->get('sylius.order_item_quantity_modifier')->modify($orderItem, 3);
+
+Add the item to the order. And then call the **CompositeOrderProcessor** on the order to have everything recalculated.
+
+.. code-block:: php
+
+    $order->addItem($orderItem);
+
+    $this->container->get('sylius.order_processing.order_processor')->process($order);
+
+Finally you have to save your order using the repository.
+
+.. code-block:: php
+
+    /** @var OrderRepositoryInterface $orderRepository */
+    $orderRepository = $this->get('sylius.repository.order');
+
+    $orderRepository->add($order);
 
 The Order State Machine
 -----------------------
 
-Order has also its general state, which can have the following values:
+Order has also its own state, which can have the following values:
 
-* cart
-* pending
-* released
-* confirmed
-* shipped
-* abandoned
-* cancelled
-* returned
+* ``cart`` - before the checkout is completed,
+* ``new`` - when checkout is completed the cart is transformed into a ``new`` order,
+* ``fulfilled`` - when the order payments and shipments are completed,
+* ``cancelled`` - when the order was cancelled.
 
-Final Thoughts
---------------
+.. tip::
 
-...
+    The state machine of order is an obvious extension to the :doc:`state machine of checkout </book/checkout>`.
 
 Learn more
 ----------
 
-* ...
+* :doc:`Order - Component Documentation </components/Order/index>`
+* :doc:`Order - Bundle Documentation </bundles/SyliusOrderBundle/index>`
