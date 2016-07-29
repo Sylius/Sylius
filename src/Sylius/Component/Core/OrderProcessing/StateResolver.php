@@ -11,49 +11,67 @@
 
 namespace Sylius\Component\Core\OrderProcessing;
 
+use SM\Factory\FactoryInterface;
+use SM\StateMachine\StateMachineInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderShippingStates;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
+use Sylius\Component\Core\OrderPaymentStates;
+use Sylius\Component\Core\OrderPaymentTransitions;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 class StateResolver implements StateResolverInterface
 {
+    /**
+     * @var FactoryInterface
+     */
+    private $stateMachineFactory;
+
+    /**
+     * @param FactoryInterface $stateMachineFactory
+     */
+    public function __construct(FactoryInterface $stateMachineFactory)
+    {
+        $this->stateMachineFactory = $stateMachineFactory;
+    }
+
     /**
      * {@inheritdoc}
      */
     public function resolvePaymentState(OrderInterface $order)
     {
-        $paymentState = PaymentInterface::STATE_NEW;
+        $stateMachine = $this->stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH);
 
-        if ($order->hasPayments()) {
-            $payments = $order->getPayments();
-            $completedPaymentTotal = 0;
-
-            foreach ($payments as $payment) {
-                if (PaymentInterface::STATE_COMPLETED === $payment->getState()) {
-                    $completedPaymentTotal += $payment->getAmount();
-                }
-            }
-
-            if ($completedPaymentTotal >= $order->getTotal()) {
-                // Payment is completed if we have received full amount.
-                $paymentState = PaymentInterface::STATE_COMPLETED;
-            } else {
-                // Payment is processing if one of the payment is.
-                if ($payments->exists(function ($key, $payment) {
-                    return in_array($payment->getState(), [
-                        PaymentInterface::STATE_PROCESSING,
-                    ]);
-                })) {
-                    $paymentState = PaymentInterface::STATE_PROCESSING;
-                }
-            }
+        if (OrderPaymentStates::STATE_PAID === $order->getPaymentState()) {
+            return;
         }
 
-        $order->setPaymentState($paymentState);
+        if ($order->hasPayments()) {
+            $completedPaymentTotal = 0;
+            $payments = $order->getPayments()->filter(function (PaymentInterface $payment) {
+                return PaymentInterface::STATE_COMPLETED === $payment->getState();
+            });
+
+            foreach ($payments as $payment) {
+                $completedPaymentTotal += $payment->getAmount();
+            }
+
+            if (0 < $payments->count() && $completedPaymentTotal >= $order->getTotal()) {
+                $this->applyTransition($stateMachine, OrderPaymentTransitions::TRANSITION_PAY);
+
+                return;
+            }
+
+            if ($completedPaymentTotal < $order->getTotal() && 0 < $completedPaymentTotal) {
+                $this->applyTransition($stateMachine, OrderPaymentTransitions::TRANSITION_PARTIALLY_PAY);
+
+                return;
+            }
+        }
     }
 
     /**
@@ -98,5 +116,16 @@ class StateResolver implements StateResolverInterface
         }
 
         return OrderShippingStates::PARTIALLY_SHIPPED;
+    }
+
+    /**
+     * @param StateMachineInterface $stateMachine
+     * @param string $transition
+     */
+    private function applyTransition(StateMachineInterface $stateMachine, $transition)
+    {
+        if ($stateMachine->can($transition)) {
+            $stateMachine->apply($transition);
+        }
     }
 }

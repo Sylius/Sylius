@@ -388,6 +388,7 @@ final class OrderContext implements Context
 
     /**
      * @Given /^the customer canceled (this order)$/
+     * @Given /^(this order) was canceled$/
      */
     public function theCustomerCanceledThisOrder(OrderInterface $order)
     {

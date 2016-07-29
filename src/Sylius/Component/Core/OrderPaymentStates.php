@@ -1,7 +1,7 @@
 <?php
 
 /*
- * This file is part of the Sylius package.
+ * This file is a part of the Sylius package.
  *
  * (c) Paweł Jędrzejewski
  *
@@ -14,14 +14,13 @@ namespace Sylius\Component\Core;
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-final class OrderPaymentTransitions
+final class OrderPaymentStates
 {
-    const GRAPH = 'sylius_order_payment';
-
-    const TRANSITION_REQUEST_PAYMENT = 'request_payment';
-    const TRANSITION_PARTIALLY_PAY = 'partially_pay';
-    const TRANSITION_CANCEL = 'cancel';
-    const TRANSITION_PAY = 'pay';
+    const STATE_CART = 'cart';
+    const STATE_AWAITING_PAYMENT = 'awaiting_payment';
+    const STATE_PARTIALLY_PAID = 'partially_paid';
+    const STATE_CANCELLED = 'cancelled';
+    const STATE_PAID = 'paid';
 
     private function __construct()
     {
