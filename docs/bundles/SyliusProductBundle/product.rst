@@ -70,7 +70,7 @@ The paginator also can be created for specific criteria and with desired sorting
 Creating new product object
 ---------------------------
 
-To create new product instance, you can simply call ``createNew()`` method on the repository.
+To create new product instance, you can simply call ``createNew()`` method on the factory.
 
 .. code-block:: php
 
@@ -78,8 +78,8 @@ To create new product instance, you can simply call ``createNew()`` method on th
 
     public function myAction(Request $request)
     {
-        $repository = $this->container->get('sylius.repository.product');
-        $product = $repository->createNew();
+        $factory = $this->container->get('sylius.factory.product');
+        $product = $factory->createNew();
     }
 
 .. note::
@@ -98,10 +98,10 @@ But it's also perfectly fine if you use ``doctrine.orm.entity_manager`` or other
 
     public function myAction(Request $request)
     {
-        $repository = $this->container->get('sylius.repository.product');
+        $factory = $this->container->get('sylius.factory.product');
         $manager = $this->container->get('sylius.manager.product'); // Alias for appropriate doctrine manager service.
 
-        $product = $repository->createNew();
+        $product = $factory->createNew();
 
         $product
             ->setName('Foo')
