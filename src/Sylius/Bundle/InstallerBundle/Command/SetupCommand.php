@@ -157,10 +157,17 @@ EOT
      */
     protected function setupCurrency(InputInterface $input, OutputInterface $output)
     {
+        $currencyRepository = $this->get('sylius.repository.currency');
         $currencyManager = $this->get('sylius.manager.currency');
         $currencyFactory = $this->get('sylius.factory.currency');
 
         $code = trim($this->getContainer()->getParameter('currency'));
+        $this->currency = $currencyRepository->findOneByCode($code);
+
+        if(null !== $this->currency) {
+            return;
+        }
+
         $name = Intl::getCurrencyBundle()->getCurrencyName($code);
         $output->writeln(sprintf('Adding <info>%s</info> currency.', $name));
 
@@ -192,6 +199,7 @@ EOT
         $channel->setName('Default');
         $channel->setTaxCalculationStrategy('order_items_based');
 
+        $channel->setDefaultCurrency($this->currency);
         $channel->addCurrency($this->currency);
         $channel->addLocale($this->locale);
 
