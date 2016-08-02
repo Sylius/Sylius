@@ -19,7 +19,7 @@ There is one additional scope, ``scenario``, which ensures, that no service shar
 the one that is only available in specific scenario. Every service retrieved from ``symfony`` container has this scope.
 
 Usually, most of contexts and pages are defined in ``scenario`` scope as it's the most safe decision. You would need a
-really got reason not to follow this convention.
+really good reason not to follow this convention.
 
 Right now, you can only inject services from foreign containers into the default containers. To do so, use ``container``
 option within ``argument`` element:

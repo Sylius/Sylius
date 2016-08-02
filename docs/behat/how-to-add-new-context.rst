@@ -1,7 +1,7 @@
 How to add a new context?
 =========================
 
-To add a new context it is needed to add an service in Behat container in ``etc/behat/services/contexts.xml`` file:
+To add a new context it is needed to add a service in Behat container in ``etc/behat/services/contexts.xml`` file:
 
 .. code-block:: xml
 
