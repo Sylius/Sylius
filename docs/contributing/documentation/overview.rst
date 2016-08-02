@@ -42,7 +42,7 @@ Create a dedicated branch for your changes (for organization):
     $ git checkout -b docs/improving_foo_and_bar
 
 You can now make your changes directly to this branch and commit them.
-Remember to name you commits descriptively, keep them possibly small, with just unitary changes (such that change something only in one part of the docs, not everywhere).
+Remember to name your commits descriptively, keep them possibly small, with just unitary changes (such that change something only in one part of the docs, not everywhere).
 
 When you're done, push this branch to *your* GitHub fork and initiate a pull request.
 
@@ -75,7 +75,7 @@ Creating a Pull Request
 ~~~~~~~~~~~~~~~~~~~~~~~
 
 Following the example, the pull request will be from your
-``improving_foo_and_bar`` branch to the ``Sylius`` ``master`` branch by deafult.
+``improving_foo_and_bar`` branch to the ``Sylius`` ``master`` branch by default.
 
 GitHub covers the topic of `pull requests`_ in detail.
 
