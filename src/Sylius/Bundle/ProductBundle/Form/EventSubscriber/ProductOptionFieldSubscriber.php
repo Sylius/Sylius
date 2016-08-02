@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ProductBundle\Form\EventSubscriber;
 
 use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\Variation\Resolver\VariantResolverInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -22,6 +23,19 @@ use Webmozart\Assert\Assert;
  */
 class ProductOptionFieldSubscriber implements EventSubscriberInterface
 {
+    /**
+     * @var VariantResolverInterface
+     */
+    private $variantResolver;
+
+    /**
+     * @param VariantResolverInterface $variantResolver
+     */
+    public function __construct(VariantResolverInterface $variantResolver)
+    {
+        $this->variantResolver = $variantResolver;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -45,7 +59,7 @@ class ProductOptionFieldSubscriber implements EventSubscriberInterface
         $form = $event->getForm();
 
         /** Options should be disabled for configurable product if it has at least one defined variant */
-        $disableOptions = (null !== $product->getFirstVariant()) && (false === $product->hasVariants());
+        $disableOptions = (null !== $this->variantResolver->getVariant($product)) && (false === $product->hasVariants());
 
         $form->add(
             'options', 

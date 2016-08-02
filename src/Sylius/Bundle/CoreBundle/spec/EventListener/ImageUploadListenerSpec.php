@@ -18,13 +18,14 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\Taxon;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
+use Sylius\Component\Variation\Resolver\VariantResolverInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 final class ImageUploadListenerSpec extends ObjectBehavior
 {
-    function let(ImageUploaderInterface $uploader)
+    function let(ImageUploaderInterface $uploader, VariantResolverInterface $variantResolver)
     {
-        $this->beConstructedWith($uploader);
+        $this->beConstructedWith($uploader, $variantResolver);
     }
 
     function it_is_initializable()
@@ -52,11 +53,12 @@ final class ImageUploadListenerSpec extends ObjectBehavior
         ProductInterface $product,
         ProductVariantInterface $variant,
         ImageInterface $image,
-        ImageUploaderInterface $uploader
+        ImageUploaderInterface $uploader,
+        VariantResolverInterface $variantResolver
     ) {
         $event->getSubject()->willReturn($product);
         $product->isSimple()->willReturn(true);
-        $product->getFirstVariant()->willReturn($variant);
+        $variantResolver->getVariant($product)->willReturn($variant);
         $variant->getImages()->willReturn([$image]);
         $image->hasFile()->willReturn(true);
         $image->getPath()->willReturn('some_path');

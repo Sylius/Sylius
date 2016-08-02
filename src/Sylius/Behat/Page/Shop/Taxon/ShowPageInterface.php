@@ -21,10 +21,18 @@ interface ShowPageInterface
      *
      * @return bool
      */
-    public function isProductInList($productName);
+    public function isProductOnList($productName);
 
     /**
      * @return bool
      */
     public function isEmpty();
+
+    /**
+     * @param string $productName
+     * @param string $productPrice
+     * 
+     * @return bool
+     */
+    public function isProductWithPriceOnList($productName, $productPrice);
 }

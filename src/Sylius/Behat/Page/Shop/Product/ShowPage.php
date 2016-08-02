@@ -102,6 +102,14 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
+    public function getPrice()
+    {
+        return $this->getElement('product_price')->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function isOutOfStock()
     {
         return $this->hasElement('out-of-stock');
@@ -129,9 +137,10 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'name' => '#sylius-product-name',
             'attributes' => '#sylius-product-attributes',
+            'name' => '#sylius-product-name',
             'out-of-stock' => '#sylius-product-out-of-stock',
+            'product_price' => '#product-price'
         ]);
     }
 }

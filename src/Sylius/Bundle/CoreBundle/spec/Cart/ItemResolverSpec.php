@@ -20,6 +20,7 @@ use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Sylius\Component\Pricing\Calculator\DelegatingCalculatorInterface;
+use Sylius\Component\Variation\Resolver\VariantResolverInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -34,7 +35,8 @@ final class ItemResolverSpec extends ObjectBehavior
         FormFactoryInterface $formFactory,
         AvailabilityCheckerInterface $availabilityChecker,
         DelegatingCalculatorInterface $priceCalculator,
-        ChannelContextInterface $channelContext
+        ChannelContextInterface $channelContext,
+        VariantResolverInterface $variantResolver
     ) {
         $this->beConstructedWith(
             $cartContext,
@@ -42,7 +44,8 @@ final class ItemResolverSpec extends ObjectBehavior
             $formFactory,
             $availabilityChecker,
             $priceCalculator,
-            $channelContext
+            $channelContext,
+            $variantResolver
         );
     }
 

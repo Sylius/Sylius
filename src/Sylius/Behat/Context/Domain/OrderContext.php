@@ -17,6 +17,7 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Variation\Resolver\VariantResolverInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -50,24 +51,32 @@ final class OrderContext implements Context
     private $adjustmentRepository;
 
     /**
+     * @var VariantResolverInterface
+     */
+    private $variantResolver;
+
+    /**
      * @param SharedStorageInterface $sharedStorage
      * @param OrderRepositoryInterface $orderRepository
      * @param RepositoryInterface $orderItemRepository
      * @param RepositoryInterface $addressRepository
      * @param RepositoryInterface $adjustmentRepository
+     * @param VariantResolverInterface $variantResolver
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         OrderRepositoryInterface $orderRepository,
         RepositoryInterface $orderItemRepository,
         RepositoryInterface $addressRepository,
-        RepositoryInterface $adjustmentRepository
+        RepositoryInterface $adjustmentRepository,
+        VariantResolverInterface $variantResolver
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->orderRepository = $orderRepository;
         $this->orderItemRepository = $orderItemRepository;
         $this->addressRepository = $addressRepository;
         $this->adjustmentRepository = $adjustmentRepository;
+        $this->variantResolver = $variantResolver;
     }
 
     /**
@@ -111,7 +120,7 @@ final class OrderContext implements Context
      */
     public function orderItemShouldNotExistInTheRegistry(ProductInterface $product)
     {
-        $orderItems = $this->orderItemRepository->findBy(['variant' => $product->getFirstVariant()]);
+        $orderItems = $this->orderItemRepository->findBy(['variant' => $this->variantResolver->getVariant($product)]);
 
         Assert::same($orderItems, []);
     }

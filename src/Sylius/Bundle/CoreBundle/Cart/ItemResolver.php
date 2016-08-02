@@ -20,6 +20,7 @@ use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Sylius\Component\Pricing\Calculator\DelegatingCalculatorInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Sylius\Component\Variation\Resolver\VariantResolverInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -60,12 +61,18 @@ class ItemResolver implements ItemResolverInterface
     protected $channelContext;
 
     /**
+     * @var VariantResolverInterface
+     */
+    protected $variantResolver;
+
+    /**
      * @param CartContextInterface $cartContext
      * @param RepositoryInterface $productRepository
      * @param FormFactoryInterface $formFactory
      * @param AvailabilityCheckerInterface $availabilityChecker
      * @param DelegatingCalculatorInterface $priceCalculator
      * @param ChannelContextInterface $channelContext
+     * @param VariantResolverInterface $variantResolver
      */
     public function __construct(
         CartContextInterface $cartContext,
@@ -73,7 +80,8 @@ class ItemResolver implements ItemResolverInterface
         FormFactoryInterface $formFactory,
         AvailabilityCheckerInterface $availabilityChecker,
         DelegatingCalculatorInterface $priceCalculator,
-        ChannelContextInterface $channelContext
+        ChannelContextInterface $channelContext,
+        VariantResolverInterface $variantResolver
     ) {
         $this->cartContext = $cartContext;
         $this->productRepository = $productRepository;
@@ -81,6 +89,7 @@ class ItemResolver implements ItemResolverInterface
         $this->availabilityChecker = $availabilityChecker;
         $this->priceCalculator = $priceCalculator;
         $this->channelContext = $channelContext;
+        $this->variantResolver = $variantResolver;
     }
 
     /**
@@ -101,7 +110,7 @@ class ItemResolver implements ItemResolverInterface
 
         // If our product has no variants, we simply set the master variant of it.
         if (null === $item->getVariant() && 1 === $product->getVariants()->count()) {
-            $item->setVariant($product->getFirstVariant());
+            $item->setVariant($this->variantResolver->getVariant($product));
         }
 
         if (null === $item->getVariant() && 1 > $product->getVariants()->count()) {
