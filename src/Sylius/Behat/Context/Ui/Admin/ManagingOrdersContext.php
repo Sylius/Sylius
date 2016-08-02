@@ -260,6 +260,19 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @Then the order's payment should (also) be :paymentCost
+     */
+    public function theOrdersPaymentShouldBe($paymentCost)
+    {
+        $actualPaymentCost = $this->showPage->getPaymentPrice();
+
+        Assert::true(
+            $this->showPage->hasPaymentPrice($paymentCost),
+            sprintf('Order\'s payment should be %s, but is %s', $paymentCost, $actualPaymentCost)
+        );
+    }
+
+    /**
      * @Then the order should have tax :tax
      */
     public function theOrderShouldHaveTax($tax)

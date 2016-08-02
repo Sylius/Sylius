@@ -113,6 +113,26 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
+    public function hasPaymentPrice($price)
+    {
+        $payments = $this->getElement('payments')->getText();
+
+        return false !== strpos($payments, $price);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPaymentPrice()
+    {
+        $paymentsPrice = $this->getElement('payments')->find('css', 'p');
+
+        return $paymentsPrice->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function isProductInTheList($name)
     {
         try {
@@ -140,6 +160,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'shipping_address' => '#shipping-address',
             'subtotal' => '#subtotal',
             'total' => '#total',
+            'payments' => '#payments',
         ]);
     }
 

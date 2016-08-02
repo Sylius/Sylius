@@ -196,6 +196,18 @@ interface ShowPageInterface extends SymfonyPageInterface
      * @return string
      */
     public function getItemTotal($itemName);
+
+    /**
+     * @param string $price
+     *
+     * @return bool
+     */
+    public function hasPaymentPrice($price);
+
+    /**
+     * @return string
+     */
+    public function getPaymentPrice();
     
     /**
      * @return bool

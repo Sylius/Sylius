@@ -39,7 +39,9 @@ class PaymentProcessor implements PaymentProcessorInterface
      */
     public function processOrderPayments(OrderInterface $order)
     {
-        if ($order->getLastPayment(PaymentInterface::STATE_NEW)) {
+        if ($payment = $order->getLastPayment(PaymentInterface::STATE_NEW)) {
+            $payment->setAmount($order->getTotal());
+
             return;
         }
 

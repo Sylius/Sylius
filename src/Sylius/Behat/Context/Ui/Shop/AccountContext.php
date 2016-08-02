@@ -359,6 +359,19 @@ final class AccountContext implements Context
     }
 
     /**
+     * @Then I should see :paymentCost as payment's cost
+     */
+    public function iShouldSeeAsPaymentsCost($paymentCost)
+    {
+        $actualCost = $this->orderShowPage->getPaymentPrice();
+
+        Assert::true(
+            $this->orderShowPage->hasPaymentPrice($paymentCost),
+            sprintf('The payment\'s cost should be %s, but is %s.', $paymentCost, $actualCost)
+        );
+    }
+
+    /**
      * @Then I should see :numberOfItems items in the list
      */
     public function iShouldSeeItemsInTheList($numberOfItems)

@@ -3,7 +3,7 @@
 <div class="column">
     <div class="ui large icon message">
         <i class="payment icon"></i>
-        <div class="content">
+        <div class="content" id="payments">
             {% for payment in order.payments %}
                 <div class="header">
                     {{ payment.method }}

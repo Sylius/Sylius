@@ -234,9 +234,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     }
 
     /**
-     * @param string $itemName
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getItemUnitPrice($itemName)
     {
@@ -244,9 +242,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     }
 
     /**
-     * @param string $itemName
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getItemDiscountedUnitPrice($itemName)
     {
@@ -254,9 +250,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     }
 
     /**
-     * @param string $itemName
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getItemQuantity($itemName)
     {
@@ -264,9 +258,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     }
 
     /**
-     * @param string $itemName
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getItemSubtotal($itemName)
     {
@@ -274,9 +266,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     }
 
     /**
-     * @param string $itemName
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getItemDiscount($itemName)
     {
@@ -284,9 +274,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     }
 
     /**
-     * @param string $itemName
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getItemTax($itemName)
     {
@@ -294,15 +282,33 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     }
 
     /**
-     * @param string $itemName
-     *
-     * @return string
+     * {@inheritdoc}
      */
     public function getItemTotal($itemName)
     {
         return $this->getItemProperty($itemName, 'total');
     }
-    
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasPaymentPrice($price)
+    {
+        $payments = $this->getElement('payments')->getText();
+
+        return false !== strpos($payments, $price);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPaymentPrice()
+    {
+        $paymentsPrice = $this->getElement('payments')->find('css', '.description');
+
+        return $paymentsPrice->getText();
+    }
+
     /**
      * {@inheritdoc}
      */
