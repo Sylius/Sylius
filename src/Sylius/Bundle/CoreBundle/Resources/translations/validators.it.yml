@@ -5,6 +5,12 @@ sylius:
     checkout:
         shipping_method:
             not_blank: Si prega di scegliere un metodo di spedizione.
+    customer:
+        currency_code:
+            not_valid: Il codice valuta inserito non è valido.
+    order:
+        currency_code:
+            not_valid: Il codice valuta inserito non è valido.
     locale:
         code:
             not_blank: Per favore inserisci il CAP.

@@ -307,7 +307,6 @@ sylius:
         extra_notes: Extra opmerkingen
         failed: Mislukt
         faqs: FAQs
-        female: Vrouw
         filter: Filter
         filters: Filters
         first_name: Voornaam
@@ -377,7 +376,6 @@ sylius:
         login_sylius_store: 'Login <small>Sylius store</small>'
         logout: Uitloggen
         main_taxon: Hoofdcategorie
-        male: Man
         manage: Beheer
         manage_adjustments: Aanpassingen beheren
         manage_attributes: Beheer attributen

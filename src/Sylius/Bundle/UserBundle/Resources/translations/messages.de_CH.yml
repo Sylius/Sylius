@@ -3,15 +3,6 @@
 
 sylius:
     form:
-        group:
-            name: Name
-            roles: Rollen
         user:
             email: E-Mail
             enabled: Aktiviert
-        customer:
-            first_name: Vorname
-            email: E-Mail
-            phone_number: Telefonnummber
-            billing_address: Rechnungsadresse
-            different_billing_address: Eine andere Rechnungsadresse benutzen?

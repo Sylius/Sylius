@@ -211,7 +211,6 @@ sylius:
         existing_customer: Varolan Müşteri
         expires_at: Süre sonu: 
         failed: Başarısız oldu
-        female: Bayan
         filter: Filtrele
         first_name: Ad
         fulfill: Stokta
@@ -261,7 +260,6 @@ sylius:
         login_button: Giriş
         login_sylius_store: 'Oturum açma <small>Sylius saklamak</small>'
         logout: Çıkış yap
-        male: Bay
         manage: Yönet
         manage_adjustments: Ayarları yönet
         manage_attributes: Özellikleri yönet

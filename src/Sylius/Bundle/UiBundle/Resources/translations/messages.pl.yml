@@ -259,7 +259,6 @@ sylius:
         extra_information: Dodatkowe informacje
         extra_notes: Dodatkowe uwagi
         failed: Nieudane
-        female: Kobieta
         filter: Filtruj
         first_name: Imię
         forgot_password: Nie pamiętasz hasła
@@ -318,7 +317,6 @@ sylius:
         login_button: Zaloguj
         logout: Wyloguj
         main_taxon: Główne grupy
-        male: Mężczyzna
         manage: Zarządzaj
         manage_attributes_of_your_products: Zarządzaj cechami produktów
         manage_categorization_of_your_products: Zarządzaj kategoryzacją produktów

@@ -253,7 +253,6 @@ sylius:
         existing_customer: Existierender Benutzer
         expires_at: Verfällt am
         failed: Fehlgeschlagen
-        female: Frau
         filter: Filtern
         first_name: Vorname
         forgot_password: Passwort vergessen
@@ -315,7 +314,6 @@ sylius:
         login_sylius_store: 'Login <small>Sylius Webshop</small>'
         logout: Abmelden
         main_taxon: Haupt-Taxonomie
-        male: Mann
         manage: Verwaltung
         manage_adjustments: Verwalten von Anpassungen
         manage_attributes: Attribute verwalten

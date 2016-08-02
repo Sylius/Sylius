@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        group:
+            name: Tên
+            roles: Vai trò
+        customer:
+            groups: Nhóm
+            phone_number: Số điện thoại

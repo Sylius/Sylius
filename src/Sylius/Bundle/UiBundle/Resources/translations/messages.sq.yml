@@ -270,7 +270,6 @@ sylius:
         expires_at: Skadon më
         extra_information: Informacione shtese
         failed: Nuk u krye
-        female: Femër
         filter: Filtri
         first_name: Emri
         forgot_password: Harruat fjalëkalimin
@@ -334,7 +333,6 @@ sylius:
         login_sylius_store: 'Futu <small>Sylius arkiv </small>'
         logout: Dil
         main_taxon: Tipologjia kryesore
-        male: Mashkull
         manage: Kontrollo
         manage_adjustments: Kontrollo parametrat
         manage_attributes: Kontrollo atributet

@@ -6,6 +6,7 @@ sylius:
         header: estensioni
         accelerator:
             header: Accelerator
+            help: Attivare Zend OpCache (altamente consigliato).
         apc: APC
         ctype: CType
         gd: GD
@@ -57,3 +58,4 @@ sylius:
             header: Timezone deprecato
             help: 'Il timezone %timezone% è deprecato. Correggi il tuo file php.ini (lista di timezone deprecati http://php.net/manual/en/timezones.others.php).'
         version: Versione PHP
+        version_recommended: Versione PHP raccomandata

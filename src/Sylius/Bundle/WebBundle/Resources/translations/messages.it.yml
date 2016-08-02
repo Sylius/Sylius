@@ -13,6 +13,11 @@ sylius:
                 ready: 'Pronto dal %at%'
                 returned: 'Ritornato il %at%'
                 shipped: 'Inviato il %at%'
+                checkout: 'Check-out %at%'
+                pending: '%at% in sospeso'
+                onhold: 'In attesa dal %at%'
+                backordered: 'Arretrato dal %at%'
+                cancelled: '%at% annullata'
         title: Il mio account
     archetype:
         build: Costruire archetipo
@@ -85,6 +90,8 @@ sylius:
         no_shipments: Non ci sono spedizioni per questo ordine
         no_shipping_charges: Nessuna spesa di spedizione applicata
         no_taxes: Nessuna tassa applicata
+        state:
+            order_confirmed: Ordine confermato
     order_item:
         quantity: Q.tà
         sellable: Prodotto
@@ -135,9 +142,12 @@ sylius:
             ready: Pronto
             returned: Restituito
             shipped: Spedito
+            checkout: Check out eseguito
             pending: In attesa
             onhold: In attesa
+            backordered: Ordine arretrato
             cancelled: Annullato
+            partially_shipped: Parzialmente spedito
         transition:
             backorder: backorder
             cancel: annulla

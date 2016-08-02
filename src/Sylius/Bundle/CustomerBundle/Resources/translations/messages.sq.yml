@@ -1,0 +1,18 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        group:
+            name: Emri
+            roles: Funksionet
+        customer:
+            first_name: Emri
+            groups: Grupet
+            last_name: Mbiemri
+            email: Email
+            phone_number: Numri i telefonit
+            billing_address: Adresa e faturimit
+            different_billing_address: Përdor adresë tjetër për faturën?
+    gender:
+        unknown: E panjohur

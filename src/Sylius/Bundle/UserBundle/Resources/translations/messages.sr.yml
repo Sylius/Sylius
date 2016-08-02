@@ -3,8 +3,6 @@
 
 sylius:
     form:
-        customer:
-            phone_number: Број телефона
         user_change_password:
             current: Тренутна лозинка
             new: Нова лозинка

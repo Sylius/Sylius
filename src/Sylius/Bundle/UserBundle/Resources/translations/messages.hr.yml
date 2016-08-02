@@ -3,9 +3,6 @@
 
 sylius:
     form:
-        group:
-            name: Naziv grupe
-            roles: Role (korisnička prava)
         user:
             email: E-mail
             enabled: Omogući
@@ -14,17 +11,6 @@ sylius:
                 confirmation: Verifikacija
             remember_me: Zapamti me
             shipping_address: Adresa za dostavu
-        customer:
-            first_name: Ime
-            groups: Grupe
-            last_name: Prezime
-            email: E-mail
-            phone_number: Kontakt telefon
-            gender: Spol
-            birthday: Datum rođenja
-            billing_address: Adresa za dostavu
-            different_billing_address: Želim koristiti drugu adresu za račun.
-            only_customer_registration: Napravite račun
         user_filter:
             query: Pretraga
         user_change_password:
@@ -34,7 +20,3 @@ sylius:
         user_reset_password:
             confirmation: Potvrda
             new: Nova lozinka
-    gender:
-        unknown: Nepoznato
-        male: Muški
-        female: Ženski

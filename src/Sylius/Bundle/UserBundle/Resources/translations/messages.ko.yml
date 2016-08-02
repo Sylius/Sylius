@@ -3,9 +3,6 @@
 
 sylius:
     form:
-        group:
-            name: 이름
-            roles: 역할
         user:
             email: 이메일
             enabled: 활성
@@ -13,16 +10,6 @@ sylius:
                 label: 비밀번호
                 confirmation: 인증
             remember_me: 아이디/암호 저장
-        customer:
-            first_name: 이름
-            groups: 그룹
-            last_name: 성
-            email: 이메일
-            phone_number: 전화번호
-            gender: '성별:'
-            birthday: 생년월일
-            billing_address: 청구지 주소
-            only_customer_registration: 계정 등록
         user_filter:
             query: 검색
         user_change_password:

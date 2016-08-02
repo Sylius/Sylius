@@ -41,6 +41,7 @@ sylius:
         adding_new_email: "Email en cours d'ajout"
         adding_new_locale: Ajout de nouveaux paramètres régionaux
         additional_information: Information supplémentaire
+        addressing: Adressage
         addressing_step: Adresse de livraison
         adjustments: Ajustements
         administration: Administration
@@ -64,8 +65,10 @@ sylius:
         available_for_channels: Disponible pour le canal
         available_on: Disponible le
         available_on_demand: Disponible sur demande
+        available_on_hand: Disponible sous la main
         available_until: "Disponible jusqu'au"
         average_order_value: Panier moyen
+        awaiting_payment: En attente de règlement
         back: Retour
         back_to_store: Retour à la boutique
         backorder: Rupture de stock
@@ -81,6 +84,7 @@ sylius:
         calculator: Calculateur
         cancel: Annuler
         cancelled: Annulé
+        cart: Panier
         cart_locked: Panier verrouillé
         cart_summary: Détail du panier
         categorization: Catégorisation
@@ -94,6 +98,7 @@ sylius:
         channel: Canal
         channels: Canaux
         charges_and_taxes: Taxes et frais
+        checking_out_as: Payer en tant que
         checkout: Paiement
         choose_file: Choisir un fichier
         city: Ville
@@ -111,10 +116,10 @@ sylius:
         confirm_your_action: Confirmez votre action
         confirmation: Confirmation
         confirmation_title: Confirmation
-        confirmed: Validé
+        confirmed: Confirmé
         contact_request_details: Détails de la demande de contact
-        contact_request_show: Demande
-        contact_requests: Demandes
+        contact_request_show: Demande de contact
+        contact_requests: Demandes de contact
         contact_topics: Catégorie de contact
         contact_us: Nous contacter
         contain_variants: Contient des variantes
@@ -243,6 +248,7 @@ sylius:
         edit_tax_category: Éditer la catégorie de taxe
         edit_tax_rate: Modifier le taux de taxe
         edit_taxon: Modification d’un taxon
+        edit_your_items_apply_coupon_or_proceed_to_the_checkout: Modifier vos objets, ajouter un code promotionnel ou procéder au paiement
         edit_your_personal_information: Modifier vos informations personnelles
         edit_zone: Editer la zone
         editing_archetype: Modifier prototype
@@ -291,6 +297,7 @@ sylius:
         ends_at: Se termine le
         ends_with: Se termine par
         enjoy_all_the_features_that_are_available_on_your_personal_space_to_view_track_and_manage_all_your_data: Profitez de toutes les fonctionnalités qui sont disponibles sur votre espace personnel pour visualiser, suivre et gérer toutes vos données
+        enter_your_code: Entrez votre code
         equal: Egal
         error: Erreur
         exchange_rate: Taux de change
@@ -302,8 +309,8 @@ sylius:
         extra_notes: Notes supplémentaires
         failed: Échoué
         faqs: FAQs
-        female: Femme
         filter: Filtrer
+        filters: Filtres
         first_name: Prénom
         forgot_password: Mot de passe oublié
         fulfill: Remplir
@@ -320,6 +327,7 @@ sylius:
         groups: Groupes
         guest: Invité
         guest_customer: Client invité
+        have_an_account_already: "J'ai déjà un compte"
         hello: Bonjour
         hello_name: 'Bonjour <b>%name%</b>'
         hide_deleted: Cacher les supprimés
@@ -327,6 +335,7 @@ sylius:
         hostname: "Nom d'hôte"
         id: ID
         identifier: Identifiant
+        if_you_have_an_account_sign_in_with_your_email_address: "Si vous possédez déjà un compte, connectez-vous à l'aide de votre adresse email"
         image: Image
         images: Images
         imagine_blocks: Blocs de type imagine
@@ -359,6 +368,7 @@ sylius:
         latest_products: Derniers produits
         links: Liens
         list_coupons: Liste des coupons
+        list_variants: Liste des variantes
         locales: Locales
         lock: Vérouiller
         locked: Verrouillé
@@ -368,7 +378,6 @@ sylius:
         login_sylius_store: 'Connexion <small>Boutique Sylius</small>'
         logout: Déconnexion
         main_taxon: Taxinomie principale
-        male: Homme
         manage: Gérer
         manage_adjustments: Gérer les ajustements
         manage_attributes: Gérer les propriétés
@@ -401,7 +410,9 @@ sylius:
         manage_tax_rates: Gérer les taux
         manage_taxation_of_your_products: Gérer la fiscalité de vos produits
         manage_users: Gérer les utilisateurs
+        manage_variants: Gérer les variantes
         manage_your_customers: Gérez vos clients
+        manage_your_personal_information_and_preferences: Gérer vos informations personnelles et préférences
         manage_your_product_catalog: Gérer votre catalogue de produits
         manage_zones: Gérer les zones
         marketing: Marketing
@@ -444,8 +455,10 @@ sylius:
         new_promotion_coupon: Nouveau coupon de promotion
         new_review: Nouvel avis
         new_role: Nouveau rôle
+        new_route: Nouvelle route
         new_shipping_category: "Nouvelle catégorie d'expédition"
         new_shipping_method: Nouveau mode de livraison
+        new_static_content: Nouveau contenu statique
         new_tax_category: Nouvelle catégorie de taxe
         new_tax_rate: Nouveau taux
         new_taxon: Nouveau taxon
@@ -460,6 +473,7 @@ sylius:
         no_default_billing_address: Aucune adresse de facturation par défaut
         no_default_shipping_address: Aucune adresse de livraison par défaut
         no_description: Aucune description
+        no_payment_methods_available: Il n’y a actuellement aucune méthode de paiement disponible pour votre commande
         no_pricing_configuration: Aucune configuration des prix
         no_promotion: Aucune remise appliquée
         no_requirement: Pas de prérequis
@@ -467,6 +481,7 @@ sylius:
         no_results_to_display: "Il n'y a aucun résultat à afficher"
         no_shipping_category: "Aucune catégorie d'expédition"
         no_shipping_charges: Aucun frais de port
+        no_shipping_methods_available: Il n’y a actuellement aucune méthode d’expédition disponible pour votre adresse de livraison
         no_short_description: '<i>Aucune description saisie</i>'
         no_sku: Aucune référence saisie
         no_tax_category: Aucune catégorie de taxe
@@ -476,6 +491,7 @@ sylius:
         not_contains: Ne contient pas
         not_empty: Non vide
         not_in: Pas dans
+        notes: Notes
         notify_customer: Informer le client
         number: Numéro
         number_of_orders: Nombre de commandes
@@ -491,6 +507,7 @@ sylius:
         order_item_product: Élément
         order_state: Statut de la commande
         order_summary: Récapitulatif de la commande
+        order_total: Total de la commande
         order_value: Valeur de la commande
         ordered: Commandé
         orders: Commandes
@@ -499,7 +516,9 @@ sylius:
         overview_of_your_store: "Vue d'ensemble de votre magasin"
         page: Page
         pages: Pages
+        paid: Payée
         parent: Parent
+        partially_paid: Partiellement payée
         partially_shipped: Partiellement expédiée
         password: Mot de passe
         payment: Paiement
@@ -507,14 +526,18 @@ sylius:
         payment_method: Moyen de paiement
         payment_methods: Moyens de paiement
         payment_mode: Modes de paiement
+        payment_ready_to_pay: Vous pouvez maintenant procéder au paiement
         payment_state: Etat du paiement
         payments: Paiements
         pay: Payer
+        pay_again: Cliquez sur « Payer » pour essayer à nouveau
         pending: En attente
         per_customer_usage_limit: "Limite d'utilisation par client"
         permissions: "Droits d'accès"
+        personal_information: Informations personnelles
         phone_number: Téléphone
         place_order: Commander
+        placed_an_order: Votre commande a bien été prise en compte.
         placed_at: Effectuée le
         postcode: Code postal
         powered_by: Propulsé par
@@ -537,6 +560,7 @@ sylius:
         product_options: Options de produit
         product_review: Avis produit
         product_reviews: Avis produit
+        product_variants: Variantes de produit
         products: Produits
         products_categorized_as_name: 'Produits classés en tant que « %name% »'
         products_categorized_under_taxon_taxon: 'Produits <small>catégorisés sous le taxon "%taxon%"</small>'
@@ -564,6 +588,8 @@ sylius:
         refunded: Remboursé
         register: Créer un compte
         register_button: Créer un compte
+        register_in_the_store: "S'inscrire sur le site"
+        registered_customers: Clients enregistrés
         registration_create_an_account_in_store: 'Enregistrement <small>Créer un compte sur la boutique</small>'
         registration_date: "Date d'enregistrement"
         release_inventory: Relâcher les unités de stock
@@ -594,16 +620,22 @@ sylius:
         scope: "Champ d'application"
         search: Rechercher
         security_settings: Paramètres de Sécurité
+        select_taxon: Sélectionnez un taxon
+        set_a_new_password_for_your_account: Réinitialiser le mot de passe de votre compte
         set_as_default_billing_address: Définir comme adresse de facturation par défaut
         set_as_default_shipping_address: Définir comme adresse de livraison par défaut
         ship: Livrer
+        ship_to: Expédier à
+        shipment: Envoi
         shipment_confirmation_name: "Confirmation d'expédition"
         shipment_details: "Détails de l'expédition"
         shipment_mode: Mode de livraison
         shipment_state: "Statut d'expédition"
         shipments: Expéditions
         shipped: Expédié
+        shipping: Expédition
         shipping_address: Adresse de livraison
+        shipping_and_payment_methods: Méthodes d’expédition et de paiement
         shipping_categories: "Catégories d'expédition"
         shipping_category: Catégorie de livraison
         shipping_charges: Frais de port
@@ -613,12 +645,14 @@ sylius:
         shipping_state: Statut de la livraison
         shipping_total: Total des frais de port
         shop_by: Accès par
+        shop_by_brand: Parcourir les produits par marque
         show: Lister
         show_all: Afficher tout
         show_deleted: Voir les supprimés
         show_in_store: Afficher dans le magasin
         show_metadata: Afficher les méta-données
         sign_in: Connection
+        sign_in_here: Connectez-vous ici
         sign_in_to_the_store_or_create_new_account: 'Connectez-vous <small>ou créez un compte</small>'
         sign_out: Déconnection
         simple_blocks: Blocs simples
@@ -630,6 +664,7 @@ sylius:
         starts_at: Commence le
         starts_with: Commence par
         state: État
+        static_contents: Contenus statiques
         status: Statut
         street: Adresse
         string_blocks: Blocs de type chaine
@@ -640,6 +675,7 @@ sylius:
         support: Support
         sylius_logo: Sylius
         tax: TVA
+        tax_categories: Catégories de taxe
         tax_category: Catégorie de taxe
         tax_rate_details: Détails du taux
         tax_rates: Taux de taxe
@@ -650,6 +686,7 @@ sylius:
         taxonomy: Taxinomie
         taxons: Famille de tags
         terms_and_conditions: Conditions générales de vente
+        thank_you: Merci !
         thank_you_for_your_order: Merci pour votre commande
         theme: Thème
         there_are_no_archetypes_defined: "Il n'y a aucun prototype défini"
@@ -704,6 +741,7 @@ sylius:
         total_qty: Qté totale
         total_records: Enregistrements totaux
         total_registrations: "Nombre total d'inscriptions"
+        tracking_code: Code de suivi
         tracking_number: Numéro de suivi
         translations: Traductions
         type: Type
@@ -713,6 +751,7 @@ sylius:
         unlimited: Illimité
         unlock: Dévérrouiller
         update: Mise à jour
+        update_cart: Mettre à jour le panier
         update_product_association_type: "Mise à jour d'un type d'association de produit"
         updating_tax_rate: Modification du taux
         usage: Utilisation
@@ -727,7 +766,9 @@ sylius:
         variant_selection_method: Méthode de sélection de variante
         variants: Variantes
         verified: Vérifié
+        verify: Vérifier
         view: Vue
+        view_and_edit_cart: Afficher et modifier le panier
         view_more: En savoir plus
         view_product_details: 'Voir les détails %product%'
         void: Nul
@@ -740,10 +781,13 @@ sylius:
         you_are_customer_since: Vous êtes client depuis
         you_have_no_addresses_defined: "Vous n'avez défini aucune adresse"
         you_have_no_new_orders: "Vous n'avez aucune nouvelle commande"
+        you_may_also_like: Vous pourriez aussi aimer
         your_cart_is_empty: Votre panier est vide
         your_last_5_orders: Vos 5 dernières commandes
         your_order_has_been_shipped: Votre commande a été expédiée
         your_products: Vos produits
+        your_profile: Votre profil
+        your_shopping_cart: Votre panier
         your_store: Votre boutique
         zone: Zone
         zone_consisting_of_countries: Zone composée de pays

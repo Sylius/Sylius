@@ -19,3 +19,8 @@ sylius:
             error: Le jeton de vérification est invalide.
             notice:
                 verified: Votre email est déjà vérifié.
+            success: Votre adresse email a été vérifiée avec succès.
+            request:
+                success: Un email contenant le lien de vérification a été envoyé à votre adresse email.
+    customer:
+        register: Merci de votre inscription, vous allez recevoir un mail pour vérifier votre compte.

@@ -1,0 +1,18 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        group:
+            name: نام
+            roles: نقش ها
+        customer:
+            first_name: نام
+            groups: گروه ها
+            last_name: نام خانوادگی
+            email: ایمیل
+            phone_number: شماره تلفن
+            billing_address: مشخصات پرداخت کننده
+            different_billing_address: آدرس گیرنده با خریدار متفاوت است؟
+    gender:
+        unknown: پرداخت نامعلوم

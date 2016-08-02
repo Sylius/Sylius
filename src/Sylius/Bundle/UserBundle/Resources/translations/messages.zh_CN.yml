@@ -3,9 +3,6 @@
 
 sylius:
     form:
-        group:
-            name: 名称
-            roles: 角色
         user:
             email: 电子邮件
             enabled: 已启用
@@ -14,17 +11,6 @@ sylius:
                 confirmation: 验证
             remember_me: 记住我
             shipping_address: 送货地址
-        customer:
-            first_name: 名字
-            groups: 团体
-            last_name: 姓氏
-            email: 电子邮件
-            phone_number: 电话
-            gender: 性别
-            birthday: 出生日期
-            billing_address: 账单地址
-            different_billing_address: 使用不同地址的帐单吗？
-            only_customer_registration: 创造帐户？
         user_filter:
             query: 搜索
         user_change_password:
@@ -34,7 +20,3 @@ sylius:
         user_reset_password:
             confirmation: 确认
             new: 新密码
-    gender:
-        unknown: 未知
-        male: 男士
-        female: 女士

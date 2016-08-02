@@ -68,6 +68,7 @@ sylius:
         available_on_hand: Disponibles a la mano
         available_until: Disponible hasta
         average_order_value: Valor de la orden promedio
+        awaiting_payment: Esperando pago
         back: Volver
         back_to_store: Devolver a la tienda
         backorder: En espera
@@ -83,6 +84,7 @@ sylius:
         calculator: Calculadora
         cancel: Cancelar
         cancelled: Cancelado/a
+        cart: Carrito
         cart_locked: Carrito bloqueado
         cart_summary: Resumen del carrito
         categorization: Categorización
@@ -313,6 +315,7 @@ sylius:
         first_name: Nombre
         forgot_password: Contraseña olvidada
         fulfill: Completo
+        fulfilled: Completado
         gateway: Puerta de Enlace
         general_info: sylius.promotion.general_info
         general_settings: Configuración general
@@ -473,6 +476,7 @@ sylius:
         no_default_billing_address: sylius.account.address.default.no_billing
         no_default_shipping_address: sylius.account.address.default.no_shipping
         no_description: No descripción
+        no_payment_methods_available: Actualmente no existen métodos de pago disponibles para su pedido
         no_pricing_configuration: No configuración de precios
         no_promotion: No se han aplicado promociones
         no_requirement: No necesario
@@ -491,6 +495,7 @@ sylius:
         not_empty: No está vacío
         not_in: No en
         not_verified: No verificada
+        notes: Notas
         notify_customer: Notificar al cliente
         number: Número
         number_of_orders: Número de pedidos
@@ -516,7 +521,9 @@ sylius:
         overview_of_your_store: Resumen de tu tienda
         page: Página
         pages: Páginas
+        paid: Pagado
         parent: Padre
+        partially_paid: Parcialmente pagado
         partially_shipped: Enviado parcialmente
         password: Contraseña
         payment: Pago
@@ -673,6 +680,7 @@ sylius:
         support: Soporte
         sylius_logo: Sylius
         tax: Impuestos
+        tax_categories: Categorías de impuestos
         tax_category: Categoría de impuestos
         tax_rate_details: Mostrar
         tax_rates: Impuestos

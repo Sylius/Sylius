@@ -238,7 +238,6 @@ sylius:
         existing_customer: Obstoječa stranka
         expires_at: Poteče dne
         failed: Ni uspelo
-        female: Ženska
         filter: Filter
         forgot_password: Pozabljeno geslo
         fulfill: Izpolnitev
@@ -294,7 +293,6 @@ sylius:
         login_sylius_store: 'Prijava <small>trgovina Sylius</small>'
         logout: Odjava
         main_taxon: Glavni takson
-        male: Moški
         manage: Upravljanje
         manage_adjustments: Upravljanje prilagoditev
         manage_attributes: Upravljaljanje atributov

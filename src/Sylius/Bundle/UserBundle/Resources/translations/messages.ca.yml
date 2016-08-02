@@ -3,24 +3,11 @@
 
 sylius:
     form:
-        group:
-            name: Nom
-            roles: Rols
         user:
             email: Correu electrònic
             enabled: Activat
             password:
                 label: Contrasenya
             shipping_address: "Adreça d'enviament"
-        customer:
-            first_name: Nom
-            groups: Grups
-            last_name: Cognoms
-            email: Correu electrònic
-            phone_number: Telèfon
-            billing_address: Adreça de facturació
-            different_billing_address: Utilitzar diferent adreça de facturació?
         user_filter:
             query: Cerca
-    gender:
-        unknown: Desconegut

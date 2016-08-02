@@ -29,3 +29,7 @@ sylius:
             not_blank: Inserisci la quantità di coupon da generare.
         usage_limit:
             min: 'Il limite di utilizzo dei coupon generati deve essere minimo {{ limit }}.'
+        code_length:
+            min: 'Codice coupon dovrebbe contenere almeno {{ limit }} caratteri.'
+            max: 'Codice coupon dovrebbe contenere più di {{ limit }} caratteri.'
+            not_blank: Inserisci la lunghezza del codice coupon.

@@ -5,10 +5,3 @@ sylius:
     user:
         email:
             not_blank: Kirjoita sähköpostiosoitteesi.
-    customer:
-        first_name:
-            not_blank: Kirjoita etunimesi.
-        last_name:
-            not_blank: Kirjoita sukunimesi.
-        email:
-            not_blank: Kirjoita sähköpostiosoitteesi.

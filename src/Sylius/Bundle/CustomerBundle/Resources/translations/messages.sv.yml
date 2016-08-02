@@ -1,0 +1,18 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        group:
+            name: Namn
+            roles: Roller
+        customer:
+            first_name: Förnamn
+            groups: Grupper
+            last_name: Efternamn
+            email: E-post
+            phone_number: Telefonnummer
+            billing_address: Faktureringsadress
+            different_billing_address: Använda annan adress för fakturering?
+    gender:
+        unknown: Okänd

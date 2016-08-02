@@ -1,0 +1,15 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        group:
+            name: Ime
+            roles: Vloge
+        customer:
+            groups: Skupine
+            email: E-pošta
+            phone_number: Telefonska številka
+            different_billing_address: Uporabimo drug naslov za dostavo?
+    gender:
+        unknown: Ni znano

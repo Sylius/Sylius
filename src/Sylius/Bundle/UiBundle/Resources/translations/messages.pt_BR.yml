@@ -302,7 +302,6 @@ sylius:
         extra_information: Informações extras
         failed: Falhou
         faqs: Perguntas freqüentes
-        female: Feminino
         filter: Filtrar
         filters: Filtros
         first_name: Nome
@@ -372,7 +371,6 @@ sylius:
         login_sylius_store: 'Logon <small>Sylius armazenar</small>'
         logout: Sair
         main_taxon: Táxon principal
-        male: Masculino
         manage: Gerenciar
         manage_adjustments: Gerenciar ajustes
         manage_attributes: Gerenciar Atributos

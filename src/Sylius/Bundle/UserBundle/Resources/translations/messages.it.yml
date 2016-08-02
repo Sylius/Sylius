@@ -3,9 +3,6 @@
 
 sylius:
     form:
-        group:
-            name: Nome
-            roles: Regole
         user:
             email: Email
             enabled: Abilitato
@@ -14,17 +11,6 @@ sylius:
                 confirmation: Verifica
             remember_me: Ricordami
             shipping_address: Indirizzo di spedizione
-        customer:
-            first_name: Nome
-            groups: Gruppi
-            last_name: Cognome
-            email: Email
-            phone_number: Numero di telefono
-            gender: Genere
-            birthday: 'Compleanno	'
-            billing_address: Indirizzo di fatturazione
-            different_billing_address: Vuoi usare un indirizzo diverso per la fatturazione?
-            only_customer_registration: Creare un account?
         user_filter:
             query: Ricerca
         user_change_password:
@@ -34,7 +20,3 @@ sylius:
         user_reset_password:
             confirmation: Conferma
             new: Nuova password
-    gender:
-        unknown: Sconosciuto
-        male: Maschio
-        female: Femmina

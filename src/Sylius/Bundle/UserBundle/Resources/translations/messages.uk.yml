@@ -3,23 +3,12 @@
 
 sylius:
     form:
-        group:
-            name: Ім’я
-            roles: Ролі
         user:
             email: Email
             enabled: Увімкнено
             password:
                 label: Пароль
             shipping_address: Адреса доставки
-        customer:
-            first_name: Iм’я
-            groups: Групи
-            last_name: Прізвище
-            email: Email
-            phone_number: Номер Телефону
-            billing_address: Платіжна адреса
-            different_billing_address: Використовувати іншу платіжну адресу?
         user_filter:
             query: Пошук
         user_change_password:
@@ -29,5 +18,3 @@ sylius:
         user_reset_password:
             confirmation: Підтвердження
             new: Новий пароль
-    gender:
-        unknown: Не вказаний

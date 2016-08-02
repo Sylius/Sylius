@@ -1,0 +1,18 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        group:
+            name: Ім’я
+            roles: Ролі
+        customer:
+            first_name: Iм’я
+            groups: Групи
+            last_name: Прізвище
+            email: Email
+            phone_number: Номер Телефону
+            billing_address: Платіжна адреса
+            different_billing_address: Використовувати іншу платіжну адресу?
+    gender:
+        unknown: Не вказаний
