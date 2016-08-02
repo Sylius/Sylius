@@ -301,7 +301,6 @@ sylius:
         extra_information: ข้อมูลเพิ่มเติม
         failed: ล้มเหลว
         faqs: ถาม-ตอบ
-        female: ผู้หญิง
         filter: กรองข้อมูล
         filters: กรองข้อมูล
         first_name: ชื่อ
@@ -371,7 +370,6 @@ sylius:
         login_sylius_store: 'เข้าสู่ระบบ <small>Sylius store</small>'
         logout: ออกจากระบบ
         main_taxon: หมวดหมู่หลัก
-        male: ผู้ชาย
         manage: จัดการ
         manage_adjustments: จัดการการปรับปรุง
         manage_attributes: การจัดการคุณลักษณะ (Attribute)

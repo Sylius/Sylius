@@ -307,7 +307,6 @@ sylius:
         extra_notes: További megjegyzések
         failed: Sikertelen
         faqs: GYIK
-        female: Nő
         filter: Szűrő
         filters: Szűrők
         first_name: Keresztnév
@@ -377,7 +376,6 @@ sylius:
         login_sylius_store: 'Bejelentkezés a <small>Sylius webáruházba</small>'
         logout: Kilépés
         main_taxon: Fő taxonómia
-        male: Férfi
         manage: Kezelés
         manage_adjustments: Korrekciók kezelése
         manage_attributes: Attribútumok kezelése

@@ -276,7 +276,6 @@ sylius:
         expires_at: Platnosť do
         extra_information: Ďalšie informácie
         failed: Neúspešná
-        female: Žena
         filter: Filter
         first_name: Meno
         forgot_password: Zabudli ste heslo
@@ -340,7 +339,6 @@ sylius:
         login_sylius_store: 'Prihlásenie do <small>Sylius obchodu</small>'
         logout: Odhlásiť
         main_taxon: Hlavná kategória
-        male: Muž
         manage: Správa
         manage_adjustments: Spravovať úpravy
         manage_attributes: Správa vlastnosti

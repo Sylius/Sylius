@@ -3,9 +3,6 @@
 
 sylius:
     form:
-        group:
-            name: Namn
-            roles: Roller
         user:
             email: E-post
             enabled: Aktiverad
@@ -14,17 +11,6 @@ sylius:
                 confirmation: Verifikation
             remember_me: Kom ihåg mig
             shipping_address: Leveransadress
-        customer:
-            first_name: Förnamn
-            groups: Grupper
-            last_name: Efternamn
-            email: E-post
-            phone_number: Telefonnummer
-            gender: Kön
-            birthday: Födelsedag
-            billing_address: Faktureringsadress
-            different_billing_address: Använda annan adress för fakturering?
-            only_customer_registration: Skapa konto?
         user_filter:
             query: Sök
         user_change_password:
@@ -34,7 +20,3 @@ sylius:
         user_reset_password:
             confirmation: Bekräftelse
             new: Nytt lösenord
-    gender:
-        unknown: Okänd
-        male: Man
-        female: Kvinna

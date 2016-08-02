@@ -5,9 +5,6 @@ sylius:
     form:
         user:
             email: Имейл
-        customer:
-            email: Имейл
-            phone_number: Телефонен номер
         user_change_password:
             confirmation: Потвърждение
             current: Текуща парола

@@ -3,9 +3,6 @@
 
 sylius:
     form:
-        group:
-            name: Pavadinimas
-            roles: Rolės
         user:
             email: El. paštas
             enabled: Įjungta
@@ -14,15 +11,6 @@ sylius:
                 confirmation: Patikrinimas
             remember_me: Prisiminti mane
             shipping_address: Pristatymo adresas
-        customer:
-            first_name: Vardas
-            groups: Grupės
-            last_name: Pavardė
-            email: El. paštas
-            phone_number: Telefono numeris
-            birthday: Gimimo diena
-            billing_address: Mokėtojo adresas
-            different_billing_address: Naudoti kitą adresą apmokėjimui?
         user_filter:
             query: Ieškoti
         user_change_password:
@@ -32,5 +20,3 @@ sylius:
         user_reset_password:
             confirmation: Patvirtinimas
             new: Naujas slaptažodis
-    gender:
-        unknown: Nežinoma

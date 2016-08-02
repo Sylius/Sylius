@@ -202,7 +202,6 @@ sylius:
         existing_customer: Stávající zákazník
         expires_at: Končí v
         failed: Neúspěšné
-        female: Žena
         filter: Filtr
         first_name: Křestní Jméno
         fulfill: Splnit
@@ -250,7 +249,6 @@ sylius:
         login: Přihlásit
         login_button: Přihlásit
         logout: Odhlásit
-        male: Muž
         manage: Správa
         manage_adjustments: Správa nastavení
         manage_attributes: Správa atributů

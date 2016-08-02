@@ -3,14 +3,7 @@
 
 sylius:
     form:
-        group:
-            name: الاسم
         user:
             email: البريد الإلكتروني
             password:
                 label: كلمة السر
-        customer:
-            first_name: الاسم الأول
-            last_name: اسم العائلة
-            email: البريد الإلكتروني
-            phone_number: رقم الهاتف

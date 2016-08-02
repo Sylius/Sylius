@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    customer:
+        first_name:
+            not_blank: Įveskite savo vardą.
+        last_name:
+            not_blank: Įveskite savo pavardę.
+        email:
+            not_blank: Įveskite savo elektroninio pašto adresą.
+            invalid: Šis adresas yra neteisingas.
+            registered: Šis adresas jau naudojamas, prašome prisijungti arba naudoti „pamiršau slaptažodį“.

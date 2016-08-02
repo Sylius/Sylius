@@ -3,23 +3,12 @@
 
 sylius:
     form:
-        group:
-            name: Navn
-            roles: Roller
         user:
             email: E-post
             enabled: Aktivert
             password:
                 label: Passord
             shipping_address: Leveringsadresse
-        customer:
-            first_name: Fornavn
-            groups: Grupper
-            last_name: Etternavn
-            email: E-post
-            phone_number: Telefonnummer
-            billing_address: Fakturaadresse
-            different_billing_address: Bruk annen adresse for fakturering?
         user_filter:
             query: Søk
         user_change_password:
@@ -29,5 +18,3 @@ sylius:
         user_reset_password:
             confirmation: Bekreft
             new: Nytt Passord
-    gender:
-        unknown: Ukjent

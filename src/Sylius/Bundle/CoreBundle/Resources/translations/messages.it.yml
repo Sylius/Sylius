@@ -153,5 +153,16 @@ sylius:
         user_confirmation:
             name: "Conferma dell'utente"
             subject: Benvenuto nel nostro negozio
+            content: 'Benvenuto nel nostro negozio <br/> <br/> Sei appena stato registrato. <br/> Grazie %username%.'
         password_reset:
             name: Reimpostazione password
+            content: '<h3>Ciao %username%</h3> Per reimpostare la password - si prega di visitare %url% <br/> <br/> Cordiali saluti, il Team.'
+        verification:
+            name: "Verifica dell'indirizzo di posta elettronica"
+            content: 'Per verificare il tuo indirizzo email - ti preghiamo di visitare %url%'
+    payum_gateway:
+        cash_on_delivery: Contanti alla cosegna
+        offline: Disconnesso
+        paypal_express_checkout: PayPal Express Checkout
+    shipping_method_resolver:
+        by_zones_and_channel: A seconda della zona e modalità

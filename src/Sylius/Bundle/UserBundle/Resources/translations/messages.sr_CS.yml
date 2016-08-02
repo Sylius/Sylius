@@ -3,10 +3,6 @@
 
 sylius:
     form:
-        group:
-            name: Ime
-        customer:
-            phone_number: Broj telefona
         user_change_password:
             confirmation: Potvrda
         user_reset_password:

@@ -263,7 +263,6 @@ sylius:
         existing_customer: از قبل عضو هستم
         expires_at: انقضا در تاریخ
         failed: پرداخت ناموفق
-        female: خانم
         filter: فیلتر
         first_name: نام
         forgot_password: فراموشی کلمه عبور
@@ -325,7 +324,6 @@ sylius:
         login_sylius_store: 'ورود <small> فروشگاه سایلیوس </small>'
         logout: خروج
         main_taxon: رده اصلی
-        male: آقا
         manage: مدیریت
         manage_adjustments: مدیریت سایر هزینه ها
         manage_attributes: مدیریت قابلیت ها

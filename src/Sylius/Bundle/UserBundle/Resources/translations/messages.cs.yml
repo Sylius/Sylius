@@ -3,9 +3,6 @@
 
 sylius:
     form:
-        group:
-            name: Jméno
-            roles: Role
         user:
             email: Email
             enabled: Povoleno
@@ -14,15 +11,6 @@ sylius:
                 confirmation: Ověření
             remember_me: Pamatuj si mě
             shipping_address: Doručovací adresa
-        customer:
-            first_name: Křestní Jméno
-            groups: Skupiny
-            last_name: Příjmení
-            email: Email
-            phone_number: Telefonní číslo
-            birthday: Narozeniny
-            billing_address: Fakturační adresa
-            different_billing_address: Použít jinou adresu pro fakturaci?
         user_filter:
             query: Hledat
         user_change_password:
@@ -32,7 +20,3 @@ sylius:
         user_reset_password:
             confirmation: Potvrzení
             new: Nové heslo
-    gender:
-        unknown: Neznámý
-        male: Muž
-        female: Žena

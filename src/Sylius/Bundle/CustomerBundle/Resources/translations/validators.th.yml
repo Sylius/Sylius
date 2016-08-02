@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    customer:
+        first_name:
+            not_blank: กรุณาระบุชื่อ
+        last_name:
+            not_blank: กรุณาระบุนามสกุลของคุณ
+        email:
+            not_blank: กรุณาระบุอีเมลของคุณ
+            invalid: อีเมลนี้ไม่ถูกต้อง
+            registered: อีเมลนี้มีการลงทะเบียนแล้ว กรุณาเข้าสู่ระบบ หรือ ลืมรหัสผ่าน

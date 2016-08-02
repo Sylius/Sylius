@@ -288,7 +288,6 @@ sylius:
         extra_information: 额外信息
         failed: 失败
         faqs: 常见问题
-        female: 女士
         filter: 筛选器
         first_name: 名字
         forgot_password: 忘记密码
@@ -353,7 +352,6 @@ sylius:
         login_sylius_store: '登录 <small>Sylius 店铺</small>'
         logout: 注销
         main_taxon: 主分类
-        male: 男士
         manage: 管理
         manage_adjustments: 管理调价
         manage_attributes: 管理属性

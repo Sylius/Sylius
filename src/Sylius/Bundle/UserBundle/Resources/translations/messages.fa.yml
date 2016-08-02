@@ -3,9 +3,6 @@
 
 sylius:
     form:
-        group:
-            name: نام
-            roles: نقش ها
         user:
             email: ایمیل
             enabled: فعال
@@ -14,17 +11,6 @@ sylius:
                 confirmation: تکرار کلمه عبور
             remember_me: مرا به خاطر بسپار
             shipping_address: آدرس تحویل سفارش
-        customer:
-            first_name: نام
-            groups: گروه ها
-            last_name: نام خانوادگی
-            email: ایمیل
-            phone_number: شماره تلفن
-            gender: جنسیت
-            birthday: تاریخ تولد
-            billing_address: مشخصات پرداخت کننده
-            different_billing_address: آدرس گیرنده با خریدار متفاوت است؟
-            only_customer_registration: ایجاد حساب?
         user_filter:
             query: جستجو
         user_change_password:
@@ -34,7 +20,3 @@ sylius:
         user_reset_password:
             confirmation: تایید
             new: کلمه عبور جدید
-    gender:
-        unknown: پرداخت نامعلوم
-        male: آقا
-        female: خانم

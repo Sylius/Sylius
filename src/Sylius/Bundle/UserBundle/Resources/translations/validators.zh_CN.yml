@@ -2,11 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    group:
-        name:
-            max: '组名不能超过 {{ limit }} 个字符。'
-            min: '姓氏必须至少 {{limit}} 个字符长。'
-            not_blank: 请输入组名称。
     user:
         email:
             not_blank: 请输入您的电子邮件。
@@ -19,22 +14,3 @@ sylius:
         password:
             min: '密码必须至少 {{ limit }} 个字符长。'
             max: '密码不能超过 {{ limit }} 个字符。'
-    customer:
-        first_name:
-            max: '名字的长度不能超过 {{limit}} 字符。'
-            min: '名字必须至少 {{limit}} 个字符长。'
-            not_blank: 请输入您的名字。
-        last_name:
-            max: '姓氏长度不能超过 {{limit}} 字符。'
-            min: '姓氏必须至少 {{limit}} 个字符长。'
-            not_blank: 请输入您的姓氏。
-        gender:
-            not_blank: 请选择你的性别。
-        email:
-            already_used: 该电子邮件已被使用，请登录或找回密码。
-            max: '电子邮件必须不能超过 {{ limit }} 个字符。'
-            min: '电子邮件必须至少 {{ limit }} 个字符长。'
-            not_blank: 请输入您的电子邮件。
-            invalid: 电子邮件无效。
-            unique: 该电邮地址已被使用
-            registered: 该电子邮件已被使用，请登录或找回密码。

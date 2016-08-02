@@ -3,9 +3,6 @@
 
 sylius:
     form:
-        group:
-            name: Ime
-            roles: Vloge
         user:
             email: E-pošta
             enabled: Omogočeno
@@ -14,13 +11,6 @@ sylius:
                 confirmation: Preverjanje
             remember_me: Zapomni si me
             shipping_address: Naslov za dostavo
-        customer:
-            groups: Skupine
-            email: E-pošta
-            phone_number: Telefonska številka
-            gender: Spol
-            birthday: Rojstni dan
-            different_billing_address: Uporabimo drug naslov za dostavo?
         user_filter:
             query: Iskanje
         user_change_password:
@@ -30,7 +20,3 @@ sylius:
         user_reset_password:
             confirmation: Potrditev
             new: Novo geslo
-    gender:
-        unknown: Ni znano
-        male: Moški
-        female: Ženska

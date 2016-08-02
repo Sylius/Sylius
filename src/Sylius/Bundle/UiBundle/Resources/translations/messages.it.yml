@@ -9,9 +9,12 @@ sylius:
             remember_me: Ricordami
         option:
             name: Nome
+        notes: Note extra
     ui:
         abandoned: Abbandonato
+        about: Informazioni
         access_token: Accedere al Token
+        access_your_store_account_or_create_a_new_one: Accedi al tuo account o crea uno nuovo
         account_credentials: "Credenziali dell'account"
         account_panel_outline: Godetevi tutte le funzionalità che sono disponibili sul tuo spazio personale per visualizzare, tenere traccia e gestire tutti i dati
         action: Azione
@@ -48,6 +51,7 @@ sylius:
         all_your_addresses: Tutti i tuoi indirizzi
         amount: Valore
         an_error_occurred: Si è verificato un errore
+        apply_coupon: Applica coupon
         archetype: Archetipo
         archetypes: Archetipi
         are_your_sure_you_want_to_perform_this_action: Sei sicuro di voler eseguire questa azione?
@@ -62,8 +66,12 @@ sylius:
         available_on: Disponibile
         available_on_demand: Disponibile su richiesta
         available_until: Disponibile fino al
+        average_order_value: Valore medio degli ordini
+        awaiting_payment: In attesa del pagamento
         back: Indietro
+        back_to_store: Torna al negozio
         backorder: Preordine
+        backordered: Ordine arretrato
         balance_due: Saldo dovuto
         bill_to: Fatturare a
         billing_address: Indirizzo di fatturazione
@@ -75,15 +83,21 @@ sylius:
         calculator: Calcolatore
         cancel: Annulla
         cancelled: Annullato
+        cart: Carrello
         cart_locked: Carrello bloccato
         cart_summary: Riepilogo carrello
         categorization: Categorizzazione
         category: Categoria
         category_requirements: Requisiti della categoria
+        change_address: Cambia indirizzo
+        change_password: Cambia la password
+        change_payment_method: Cambia il metodo di pagamento
+        change_shipping_method: Cambia il metodo di spedizione
         change_your_password: Modifica la password
         channel: Canale
         channels: Canali
         charges_and_taxes: Spese e tasse
+        checking_out_as: Effetuando il check-out come
         checkout: Checkout
         choose_file: Scegli file
         city: Città
@@ -93,7 +107,9 @@ sylius:
         color: Colore
         comment: Commento
         company: Azienda
+        complete: Completato
         completed: Completato
+        configurable_product: Prodotto configurabile
         configuration: Configurazione
         configure_channels_available_in_your_store: Configura i canali disponibili nel tuo negozio
         confirm_your_action: "Confermare l'azione"
@@ -104,6 +120,7 @@ sylius:
         contact_request_show: Richiesta di contatto
         contact_requests: Richieste di contatto
         contact_topics: Argomenti di contatto
+        contact_us: Contattaci
         contain_variants: Contiene varianti
         contains: Contiene
         content: Contenuto
@@ -115,6 +132,8 @@ sylius:
         coupons: Codici promozionali
         create: Crea
         create_a_new_address: Crea un nuovo indirizzo
+        create_a_new_customer_account: Crea un nuovo account cliente
+        create_an_account: Crea un account
         create_archetype: Creare archetipo
         create_association_type: Crea tipo associazione
         create_contact_request: Creare la richiesta di contatto
@@ -173,11 +192,14 @@ sylius:
         current_stock: Disponibilità attuale
         customer: Cliente
         customer_can_login_to_the_store: "Cliente può accedere all'archivio"
+        customer_care: Servizio Clienti
         customer_details: Dettagli del cliente
         customer_id: ID Cliente
+        customer_login: Accesso clienti
         customer_not_notified: Cliente non notificato
         customer_notified: Cliente notificato
         customer_orders: Ordini dei clienti
+        customer_since: Cliente dal
         customers: Clienti
         customers_list_of_all_customers_in_store: 'I clienti di <small>elenco di tutti i clienti nel negozio</small>'
         customize_default_metadata: Personalizzare i metadati predefiniti
@@ -194,28 +216,38 @@ sylius:
         delete: Cancella
         delete_image: Cancella immagine
         deleted: Eliminato
+        delivery_and_shipping: Consegna e Spedizione
         description: Descrizione
         details: Dettagli
         disable: Disattiva
         disabled: Disattivato
+        discount: Sconto
+        discounted_unit_price: Prezzo unitario scontato
         edit: Modifica
         edit_association_type: Modifica tipo associazione
         edit_channel: Modifica il canale
         edit_country: Modifica il paese
+        edit_coupon: Modifica coupon
         edit_currency: Modifica valuta
         edit_customer: Modifica cliente
         edit_group: Modifica il gruppo
         edit_locale: Modifica localizzazione
         edit_my_address: Modifica il mio indirizzo
         edit_payment_method: Modifica il metodo di pagamento
+        edit_product: Modifica prodotto
         edit_product_attribute: "Modificare l'attributo di prodotto"
         edit_product_option: "Modificare l'opzione del prodotto"
+        edit_product_variant: Modifica la variante di prodotto
         edit_promotion: Modifica promozione
+        edit_promotion_coupon: Modifica i coupon promozione
         edit_report: Modifica rapporto
+        edit_route: Modifica itinerario
         edit_shipping_method: Modifica metodo di spedizione
+        edit_static_content: Modifica contenuto statico
         edit_tax_category: Modificare la categoria fiscale
         edit_tax_rate: Modifica aliquota fiscale
         edit_taxon: Modificare la tipologia
+        edit_your_items_apply_coupon_or_proceed_to_the_checkout: Modifica i tuoi articoli, applica coupon o procedi al pagamento
         edit_your_personal_information: Modifica le impostazioni personali
         edit_zone: Modifica zona
         editing_archetype: Modifica archetipo
@@ -264,16 +296,21 @@ sylius:
         ends_at: Termina il
         ends_with: Finisce con
         enjoy_all_the_features_that_are_available_on_your_personal_space_to_view_track_and_manage_all_your_data: Godetevi tutte le funzionalità che sono disponibili sul tuo spazio personale per visualizzare, tenere traccia e gestire tutti i dati
+        enter_your_code: Inserisci il tuo codice
         equal: Uguale
         error: Errore
         exchange_rate: Tasso di cambio
         exclusive: Esclusivo
         existing_customer: Cliente esistente
+        expiration_and_usage_limits: Scadenza e limiti di utilizzo
         expires_at: Scadenza il
         extra_information: Informazioni aggiuntive
+        extra_notes: Note extra
         failed: Fallimento
-        female: Femmina
+        faqs: Domande frequenti
+        female: Femminile
         filter: Filtri
+        filters: Filtri
         first_name: Nome
         forgot_password: Hai dimenticato la password
         fulfill: Completato
@@ -290,12 +327,15 @@ sylius:
         groups: Gruppi
         guest: Ospite
         guest_customer: Cliente ospite
+        have_an_account_already: Hai già un account
+        hello: Ciao
         hello_name: 'Ciao <b>%name%</b>'
         hide_deleted: Nascondi eliminati
         home: Home
         hostname: Hostname
         id: ID
         identifier: Identificatore
+        if_you_have_an_account_sign_in_with_your_email_address: Se hai un account, accedi con il tuo indirizzo di posta elettronica
         image: Immagine
         images: Immagini
         imagine_blocks: Blocchi immagini
@@ -325,8 +365,10 @@ sylius:
         last_week_revenue: Entrate della settimana scorsa
         lastname: Cognome
         latest_orders: Ultimi ordini
+        latest_products: Ultimi prodotti
         links: Link
         list_coupons: Lista coupon
+        list_variants: Elenco varianti
         locales: Localizzazioni
         lock: Blocca
         locked: Bloccato
@@ -336,7 +378,7 @@ sylius:
         login_sylius_store: 'Login <small>Sylius memorizzare</small>'
         logout: Logout
         main_taxon: Taxon principale
-        male: Maschio
+        male: Maschile
         manage: Gestisci
         manage_adjustments: Il gestore di regolazioni
         manage_attributes: Gestire gli attributi
@@ -345,6 +387,7 @@ sylius:
         manage_channels: Gestione dei canali
         manage_configuration_options_of_your_products: Gestisci le opzioni di configurazione dei tuoi prodotti
         manage_countries: Amministra paesi
+        manage_coupons: Gestione Coupons
         manage_currencies_available_in_the_store: "Gestisci le valute disponibili nell'archivio"
         manage_customers: Gestire i clienti
         manage_discounts_and_promotional_campaigns: Gestisci sconti e campagne promozionali
@@ -368,9 +411,13 @@ sylius:
         manage_tax_rates: Gestisci aliquote fiscali
         manage_taxation_of_your_products: Gestire la tassazione dei vostri prodotti
         manage_users: Gestire gli utenti
+        manage_variants: Gestione varianti
         manage_your_customers: Gestisci i tuoi clienti
+        manage_your_personal_information_and_preferences: Gestire le informazioni personali e preferenze
+        manage_your_product_catalog: Gestisci il tuo catalogo prodotti
         manage_zones: Gestisci zone
         marketing: Marketing
+        media: Media
         members: Membri
         menu_nodes: Nodi menu
         menus: Menù
@@ -390,10 +437,13 @@ sylius:
         new_contact_request: Nuova richiesta di contatto
         new_contact_topic: Nuovo argomento di contatto
         new_country: Nuovo paese
+        new_coupon: Nuovo coupon
         new_currency: Nuova valuta
         new_customer: Nuovo cliente
+        new_customers: Nuovi clienti
         new_locale: Nuovo locale
         new_order: Nuovo ordine
+        new_orders: Nuovi ordini
         new_password: Nuova password
         new_payment: Nuovo pagamento
         new_payment_method: Nuovo metodo di pagamento
@@ -403,10 +453,13 @@ sylius:
         new_product_option: Nuova opzione prodotto
         new_product_variant: Nuova variante prodotto
         new_promotion: Nuova promozione
+        new_promotion_coupon: Nuovo coupon promozione
         new_review: Nuova recensione
         new_role: Nuovo ruolo
+        new_route: Nuovo percorso
         new_shipping_category: Nuova categoria di spedizione
         new_shipping_method: Nuovo metodo di spedizione
+        new_static_content: Nuovo contenuto statico
         new_tax_category: Nuova categoria fiscale
         new_tax_rate: Nuova categoria fiscale
         new_taxon: Nuova categoria
@@ -421,6 +474,7 @@ sylius:
         no_default_billing_address: Nessun indirizzo di fatturazione predefinito
         no_default_shipping_address: Nessun indirizzo di spedizione predefinito
         no_description: Nessuna descrizione
+        no_payment_methods_available: Attualmente non ci sono metodi di pagamento disponibili per il tuo ordine
         no_pricing_configuration: Nessuna configurazione dei prezzi
         no_promotion: Nessuna promozione applicata
         no_requirement: Nessun requisito
@@ -428,6 +482,7 @@ sylius:
         no_results_to_display: Non ci sono risultati da visualizzare
         no_shipping_category: Nessuna categoria di spedizione
         no_shipping_charges: Nessuna maggiorazione di spedizione applicata
+        no_shipping_methods_available: "Attualmente non ci sono metodi di spedizione disponibili per l'indirizzo di spedizione"
         no_short_description: '<i>Nessuna descrizione breve</i>'
         no_sku: '<i>Nessuno SKU</i>'
         no_tax_category: Nessuna categoria di tasse
@@ -437,6 +492,8 @@ sylius:
         not_contains: Non contiene
         not_empty: Non è vuoto
         not_in: Non in
+        not_verified: Non verificato
+        notes: Note
         notify_customer: Notificare al cliente
         number: Numero
         number_of_orders: Numero di ordini
@@ -449,6 +506,7 @@ sylius:
         order_comments: "Commento dell'ordine"
         order_confirmation_name: "Conferma dell'ordine"
         order_details: "Dettagli dell'ordine"
+        order_history: Cronologia ordini
         order_item_product: Articolo
         order_state: "Stato dell'ordine"
         order_summary: Riepilogo ordine
@@ -461,18 +519,25 @@ sylius:
         page: Pagina
         pages: Pagine
         parent: Genitore
+        partially_paid: Parzialmente pagato
+        partially_shipped: Parzialmente spedito
         password: Password
         payment: Pagamento
         payment_details: Dettagli del pagamento
         payment_method: Metodo di pagamento
         payment_methods: Metodi di pagamento
         payment_mode: Metodo di pagamento
+        payment_ready_to_pay: Ora puoi effettuare il tuo pagamento
         payment_state: Stato pagamento
         payments: Pagamenti
+        pay: Pagare
+        pay_again: Fare clic su pagare per riprovare
         pending: In attesa
         permissions: Autorizzazioni
+        personal_information: Informazioni personali
         phone_number: Numero di telefono
         place_order: Ordina
+        placed_an_order: "L' ordine è stato effetuato con successo."
         placed_at: Ordinato il
         postcode: CAP
         powered_by: Promosso da
@@ -481,6 +546,7 @@ sylius:
         price: Prezzo
         pricing: Stabilire prezzi di vendita
         priority: Priorità
+        privacy_policy: Privacy Policy
         processing: In elaborazione
         product: Prodotto
         product_archetypes: Modelli di prodotto
@@ -493,6 +559,7 @@ sylius:
         product_options: Opzioni prodotto
         product_review: Recensione del prodotto
         product_reviews: Recensioni del prodotto
+        product_variants: Varianti di prodotto
         products: Prodotti
         products_categorized_as_name: 'Prodotti classificati come "%name%"'
         products_categorized_under_taxon_taxon: 'Prodotti <small>Categorizzati sotto "%taxon%" taxon</small>'
@@ -506,6 +573,7 @@ sylius:
         promotions: Promozioni
         province: Provincia
         provinces: Provincia
+        purchased_from: Acquistato da
         qty: Q.tà
         qty_max: Max Qty
         qty_min: Min qty
@@ -519,13 +587,16 @@ sylius:
         refunded: Rimborsato
         register: Registrati
         register_button: Registrati
+        registered_customers: Clienti registrati
         registration_create_an_account_in_store: 'Registrazione di <small>creare un account nel negozio</small>'
         registration_date: Data di registrazione
         release_inventory: Inventario delle uscite
         remember_me: Ricordami
         remove_attribute: "Rimuovere l'attributo"
+        repeat_new_password: Ripetere la nuova password
         report_details: Dettagli del repporto
         reports: Rapporti
+        reserved: Riservato
         reset: Ripristinare
         reset_button: Ripristinare
         reset_password: Ripristinare Password
@@ -533,6 +604,7 @@ sylius:
         retail_price: Prezzo al dettaglio
         return: Ritorno
         returned: Restituito
+        returns_policy: Termini di revoca
         revert: Ripristina
         review_details: Esaminare i dettagli
         reviews: Recensioni
@@ -546,16 +618,21 @@ sylius:
         scope: Ambito
         search: Ricerca
         security_settings: Impostazioni di sicurezza
+        set_a_new_password_for_your_account: "Imposta una nuova password per l'account"
         set_as_default_billing_address: Imposta come indirizzo di fatturazione predefinito
         set_as_default_shipping_address: Imposta come indirizzo di spedizione predefinito
         ship: Nave
+        ship_to: Spedire a
+        shipment: Spedizione
         shipment_confirmation_name: Informazioni di spedizione
         shipment_details: Dettagli spedizione
         shipment_mode: Metodo di spedizione
         shipment_state: Stato spedizione
         shipments: Spedizioni
         shipped: Spedito
+        shipping: Spese di spedizione
         shipping_address: Indirizzo di spedizione
+        shipping_and_payment_methods: Metodi di spedizione e pagamento
         shipping_categories: Categorie di spedizione
         shipping_category: Categoria di spedizione
         shipping_charges: Spese di spedizione
@@ -565,15 +642,18 @@ sylius:
         shipping_state: Stato spedizione
         shipping_total: Totale spedizione
         shop_by: eshop by
+        shop_by_brand: Acquista per marca
         show: Mostra
         show_all: Mostra tutto
         show_deleted: Visualizza eliminati
         show_in_store: Mostra nel negozio
         show_metadata: Visualizza metadati
         sign_in: Accedi
+        sign_in_here: Accedi qui
         sign_in_to_the_store_or_create_new_account: 'Accedi allo store <small>o crea un nuovo account</small>'
         sign_out: Esci
         simple_blocks: Blocchi semplici
+        simple_product: Prodotto semplice
         sku: SKU
         slideshow: Slideshow
         slideshow_blocks: Blocchi slideshow
@@ -581,6 +661,7 @@ sylius:
         starts_at: Inizia il
         starts_with: Inizia con
         state: Stato
+        static_contents: Contenuti statici
         status: Stato
         street: Indirizzo
         string_blocks: Blocchi stringhe
@@ -589,6 +670,7 @@ sylius:
         summary: Riepilogo
         support: Assistenza
         sylius_logo: Sylius
+        tax: Tasse
         tax_category: Categoria fiscale
         tax_rate_details: Dettaglio aliquota fiscale
         tax_rates: Imposte
@@ -596,7 +678,10 @@ sylius:
         taxation_categories: Categorie di tassazione
         taxation_settings: Impostazioni tassazione
         taxes: Tasse
+        taxonomy: Tassonomia
         taxons: Taxons
+        terms_and_conditions: Termini e condizioni
+        thank_you: Grazie!
         thank_you_for_your_order: Grazie per il tuo ordine
         theme: Tema
         there_are_no_archetypes_defined: Non ci sono archetipi definiti
@@ -651,6 +736,7 @@ sylius:
         total_qty: Q. tà totale
         total_records: Totale record
         total_registrations: Registrazioni totali
+        tracking_code: Codice di tracciamento
         tracking_number: Numero di tracking
         translations: Traduzioni
         type: Tipo
@@ -674,6 +760,7 @@ sylius:
         variant_selection_method: Metodo di selezione delle varianti
         variants: Varianti
         view: Vista
+        view_and_edit_cart: Visualizzare e modificare il carrello
         view_more: Dettaglio
         view_product_details: 'Mostra dettagli %product%'
         void: Nullo
@@ -686,10 +773,14 @@ sylius:
         you_are_customer_since: Sei cliente dal
         you_have_no_addresses_defined: Non hai nessun indirizzo impostato
         you_have_no_new_orders: Non hai nuovi ordini
+        you_may_also_like: Potrebbe anche piacerti
         your_cart_is_empty: Il tuo carrello è vuoto
         your_last_5_orders: I tuoi ultimi 5 ordini
         your_order_has_been_shipped: Il tuo ordine è stato spedito
         your_products: I tuoi prodotti
+        your_profile: Profilo
+        your_shopping_cart: Il tuo carrello
+        your_store: Il tuo negozio
         zone: Zona
         zone_consisting_of_countries: Zona costituita da paesi
         zone_consisting_of_other_zones: Zona costituita da altre zone

@@ -3,12 +3,5 @@
 
 sylius:
     form:
-        group:
-            roles: Perfis
         user:
             email: Endereço de email
-        customer:
-            email: Endereço de email
-            phone_number: Número de Telefone
-    gender:
-        unknown: Desconhecido

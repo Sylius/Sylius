@@ -1,0 +1,13 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    customer:
+        first_name:
+            not_blank: Kérjük adja meg keresztnevét!
+        last_name:
+            not_blank: Kérjük adja meg vezetéknevét!
+        email:
+            not_blank: Kérjük adja meg e-mail címét!
+            invalid: Ez az e-mail cím érvénytelen.
+            registered: Ez az e-mail már regisztrálva van. Kérjük, jelentkezzen be vagy igényeljen új jelszót.

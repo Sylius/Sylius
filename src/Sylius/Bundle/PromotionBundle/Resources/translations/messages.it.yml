@@ -44,6 +44,7 @@ sylius:
             amount: Valore
             usage_limit: Limite di utilizzo
             expires_at: Scadenza il
+            code_length: Lunghezza del codice
         promotion:
             actions: Azioni
             add_action: Aggiungi azione

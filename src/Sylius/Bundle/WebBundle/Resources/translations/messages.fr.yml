@@ -135,7 +135,7 @@ sylius:
         login:
             info: |-
                 Veuillez vous connecter à l'aide de l'email <b>"sylius@example.com"</b> et <b>"sylius"</b> comme mot de passe. <small>Votre guide, M. Sylius</small>
-            no_account: "Vous n'avez encore pas de compte"
+            no_account: "Vous n'avez pas encore de compte"
     shipment:
         no_items: "Il n'y a aucun élément à afficher"
         state:
@@ -166,6 +166,6 @@ sylius:
             Informations générales sur l'utilisateur "%username%"
         impersonate: Connectez-vous en tant que cet utilisateur
         oauth:
-            none: Aucun compte de OAuth connecté
+            none: Aucun compte OAuth connecté
     variant:
         stock: Stock disponible

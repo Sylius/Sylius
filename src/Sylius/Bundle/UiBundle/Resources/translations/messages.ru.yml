@@ -237,7 +237,6 @@ sylius:
         login_sylius_store: 'Вход в <small>магазин Sylius</small>'
         logout: Выход
         main_taxon: Основной таксон
-        male: Мужской
         manage: Управление
         manage_channels: Управление каналами
         manage_countries: Управление странами
