@@ -15,7 +15,7 @@
 
     <mapped-superclass name="Sylius\Component\Core\Model\Address" table="sylius_address">
         <many-to-one field="customer" target-entity="Sylius\Component\Customer\Model\CustomerInterface" inversed-by="addresses">
-            <join-column name="customer_id" referenced-column-name="id" nullable="true" on-delete="SET NULL"/>
+            <join-column name="customer_id" referenced-column-name="id" nullable="true" on-delete="CASCADE"/>
         </many-to-one>
     </mapped-superclass>
 
