@@ -45,7 +45,7 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
         $queryBuilder = $this->createQueryBuilder('o');
         $queryBuilder
             ->innerJoin('o.taxons', 'taxon')
-            ->andWhere($queryBuilder->expr()->eq('o.root', ':root'))
+            ->andWhere($queryBuilder->expr()->eq('taxon.root', ':root'))
             ->andWhere($queryBuilder->expr()->orX(
                 'taxon = :taxon',
                 ':left < taxon.left AND taxon.right < :right'
