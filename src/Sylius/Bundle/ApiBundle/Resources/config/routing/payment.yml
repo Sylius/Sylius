@@ -33,4 +33,4 @@ sylius_api_payment_show:
     path: /{id}
     methods: [GET]
     defaults:
-        _controller: sylius.controller.payment:deleteAction
+        _controller: sylius.controller.payment:showAction
