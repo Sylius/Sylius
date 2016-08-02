@@ -75,4 +75,9 @@ interface ShowPageInterface extends PageInterface
      * @return bool
      */
     public function hasAddToCartButton();
+
+    /**
+     * @return string
+     */
+    public function getPrice();
 }

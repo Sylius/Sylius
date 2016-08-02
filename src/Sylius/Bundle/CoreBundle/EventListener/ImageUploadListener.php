@@ -15,6 +15,7 @@ use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
+use Sylius\Component\Variation\Resolver\VariantResolverInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Webmozart\Assert\Assert;
 
@@ -26,11 +27,18 @@ class ImageUploadListener
     protected $uploader;
 
     /**
-     * @param ImageUploaderInterface $uploader
+     * @var VariantResolverInterface
      */
-    public function __construct(ImageUploaderInterface $uploader)
+    protected $variantResolver;
+
+    /**
+     * @param ImageUploaderInterface $uploader
+     * @param VariantResolverInterface $variantResolver
+     */
+    public function __construct(ImageUploaderInterface $uploader, VariantResolverInterface $variantResolver)
     {
         $this->uploader = $uploader;
+        $this->variantResolver = $variantResolver;
     }
 
     /**
@@ -53,7 +61,8 @@ class ImageUploadListener
         Assert::isInstanceOf($subject, ProductInterface::class);
 
         if ($subject->isSimple()) {
-            $this->uploadProductVariantImages($subject->getFirstVariant());
+            $variant = $this->variantResolver->getVariant($subject);
+            $this->uploadProductVariantImages($variant);
         }
     }
 

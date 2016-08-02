@@ -15,6 +15,7 @@ use Sylius\Bundle\ProductBundle\Form\EventSubscriber\ProductOptionFieldSubscribe
 use Sylius\Bundle\ProductBundle\Form\EventSubscriber\SimpleProductSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Component\Variation\Resolver\VariantResolverInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -24,13 +25,30 @@ use Symfony\Component\Form\FormBuilderInterface;
 class ProductType extends AbstractResourceType
 {
     /**
+     * @var VariantResolverInterface
+     */
+    private $variantResolver;
+
+    /**
+     * @param string $dataClass FQCN
+     * @param string[] $validationGroups
+     * @param VariantResolverInterface $variantResolver
+     */
+    public function __construct($dataClass, $validationGroups, VariantResolverInterface $variantResolver)
+    {
+        parent::__construct($dataClass, $validationGroups);
+
+        $this->variantResolver = $variantResolver;
+    }
+    
+    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->addEventSubscriber(new AddCodeFormSubscriber())
-            ->addEventSubscriber(new ProductOptionFieldSubscriber())
+            ->addEventSubscriber(new ProductOptionFieldSubscriber($this->variantResolver))
             ->addEventSubscriber(new SimpleProductSubscriber())
             ->add('enabled', 'checkbox', [
                 'required' => false,

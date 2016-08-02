@@ -36,6 +36,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Shipping\ShipmentTransitions;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\User\Model\UserInterface;
+use Sylius\Component\Variation\Resolver\VariantResolverInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -93,6 +94,11 @@ final class OrderContext implements Context
     private $stateMachineFactory;
 
     /**
+     * @var VariantResolverInterface
+     */
+    private $variantResolver;
+
+    /**
      * @param SharedStorageInterface $sharedStorage
      * @param OrderRepositoryInterface $orderRepository
      * @param FactoryInterface $orderFactory
@@ -103,6 +109,7 @@ final class OrderContext implements Context
      * @param RepositoryInterface $customerRepository
      * @param ObjectManager $objectManager
      * @param StateMachineFactoryInterface $stateMachineFactory
+     * @param VariantResolverInterface $variantResolver
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -114,7 +121,8 @@ final class OrderContext implements Context
         FactoryInterface $customerFactory,
         RepositoryInterface $customerRepository,
         ObjectManager $objectManager,
-        StateMachineFactoryInterface $stateMachineFactory
+        StateMachineFactoryInterface $stateMachineFactory,
+        VariantResolverInterface $variantResolver
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->orderRepository = $orderRepository;
@@ -126,6 +134,7 @@ final class OrderContext implements Context
         $this->customerRepository = $customerRepository;
         $this->objectManager = $objectManager;
         $this->stateMachineFactory = $stateMachineFactory;
+        $this->variantResolver = $variantResolver;
     }
 
     /**
@@ -255,7 +264,7 @@ final class OrderContext implements Context
      */
     public function theCustomerBoughtSingleProduct(ProductInterface $product)
     {
-        $this->addProductVariantToOrder($product->getFirstVariant(), $product->getPrice(), 1);
+        $this->addProductVariantToOrder($this->variantResolver->getVariant($product), $product->getPrice(), 1);
 
         $this->objectManager->flush();
     }
@@ -275,7 +284,7 @@ final class OrderContext implements Context
      */
     public function theCustomerBoughtSeveralProducts($quantity, ProductInterface $product)
     {
-        $this->addProductVariantToOrder($product->getFirstVariant(), $product->getPrice(), $quantity);
+        $this->addProductVariantToOrder($this->variantResolver->getVariant($product), $product->getPrice(), $quantity);
 
         $this->objectManager->flush();
     }
@@ -295,7 +304,7 @@ final class OrderContext implements Context
      */
     public function theCustomerBoughtSingleUsing(ProductInterface $product, CouponInterface $coupon)
     {
-        $order = $this->addProductVariantToOrder($product->getFirstVariant(), $product->getPrice());
+        $order = $this->addProductVariantToOrder($this->variantResolver->getVariant($product), $product->getPrice());
         $order->setPromotionCoupon($coupon);
 
         $this->objectManager->flush();
