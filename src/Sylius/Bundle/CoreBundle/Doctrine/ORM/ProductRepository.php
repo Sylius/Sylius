@@ -40,13 +40,17 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
      */
     public function createByTaxonPaginator(TaxonInterface $taxon, array $criteria = [])
     {
+        $root = $taxon->isRoot() ? $taxon : $taxon->getRoot();
+
         $queryBuilder = $this->createQueryBuilder('o');
         $queryBuilder
             ->innerJoin('o.taxons', 'taxon')
+            ->andWhere($queryBuilder->expr()->eq('o.root', ':root'))
             ->andWhere($queryBuilder->expr()->orX(
                 'taxon = :taxon',
                 ':left < taxon.left AND taxon.right < :right'
             ))
+            ->setParameter('root', $root)
             ->setParameter('taxon', $taxon)
             ->setParameter('left', $taxon->getLeft())
             ->setParameter('right', $taxon->getRight())
