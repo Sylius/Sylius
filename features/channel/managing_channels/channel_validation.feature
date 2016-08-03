@@ -35,6 +35,15 @@ Feature: Channel validation
         And channel with code "MOBILE" should not be added
 
     @ui
+    Scenario: Trying to add a new channel without default locale
+        Given I want to create a new channel
+        When I specify its code as "MOBILE"
+        But I do not choose default locale
+        And I try to add it
+        Then I should be notified that default locale is required
+        And channel with code "MOBILE" should not be added
+
+    @ui
     Scenario: Trying to remove name from existing channel
         Given the store operates on a channel named "Web Channel"
         And I want to modify this channel

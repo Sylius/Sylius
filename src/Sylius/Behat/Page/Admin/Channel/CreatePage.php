@@ -89,6 +89,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     public function chooseDefaultLocale($locale)
     {
         if (null !== $locale) {
+            $this->getElement('locales')->selectOption($locale);
             $this->getElement('default_locale')->selectOption($locale);
         }
     }
@@ -132,6 +133,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
             'default_currency' => '#sylius_channel_defaultCurrency',
             'currencies' => '#sylius_channel_currencies',
             'default_locale' => '#sylius_channel_defaultLocale',
+            'locales' => '#sylius_channel_locales',
         ]);
     }
 }
