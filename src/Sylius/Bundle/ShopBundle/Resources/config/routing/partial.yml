@@ -1,6 +1,10 @@
 # This file is part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
+sylius_shop_partial_cart:
+    resource: "@SyliusShopBundle/Resources/config/routing/partial/cart.yml"
+    prefix: /cart
+
 sylius_shop_partial_product:
     resource: "@SyliusShopBundle/Resources/config/routing/partial/product.yml"
     prefix: /products
