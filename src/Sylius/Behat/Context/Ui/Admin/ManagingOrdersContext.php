@@ -602,12 +602,27 @@ final class ManagingOrdersContext implements Context
     /**
      * @Then the order :order should have order payment state :orderPaymentState
      * @Then /^(this order) should have order payment state "([^"]+)"$/
+     * @Then /^(its) payment state should be "([^"]+)"$/
      */
     public function theOrderShouldHavePaymentState(OrderInterface $order, $orderPaymentState)
     {
         Assert::true(
             $this->indexPage->isSingleResourceOnPage(['payment state' => $orderPaymentState]),
             sprintf('Cannot find order with "%s" order payment state in the list.', $orderPaymentState)
+        );
+    }
+
+    /**
+     * @Then /^there should be(?:| only) (\d+) payment(?:|s)$/
+     */
+    public function theOrderShouldHaveNumberOfPayments($number)
+    {
+        $actualNumberOfPayments = $this->showPage->getPaymentsCount();
+
+        Assert::eq(
+            $number,
+            $actualNumberOfPayments,
+            sprintf('Payments count should equal "%d", but equals "%d" instead.', $number, $actualNumberOfPayments)
         );
     }
 }

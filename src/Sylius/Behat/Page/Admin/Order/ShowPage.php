@@ -312,6 +312,16 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
+    public function getPaymentsCount()
+    {
+        $payments = $this->getElement('payments')->findAll('css', '.item');
+
+        return count($payments);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function hasCancelButton()
     {
         return $this->getDocument()->hasButton('Cancel');

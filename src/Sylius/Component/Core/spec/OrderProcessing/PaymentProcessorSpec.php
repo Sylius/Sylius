@@ -13,12 +13,15 @@ namespace spec\Sylius\Component\Core\OrderProcessing;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\OrderProcessing\PaymentProcessor;
 use Sylius\Component\Core\OrderProcessing\PaymentProcessorInterface;
 use Sylius\Component\Payment\Factory\PaymentFactoryInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 
 /**
+ * @mixin PaymentProcessor
+ *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
 final class PaymentProcessorSpec extends ObjectBehavior
@@ -43,6 +46,7 @@ final class PaymentProcessorSpec extends ObjectBehavior
         PaymentInterface $payment,
         OrderInterface $order
     ) {
+        $order->getState()->willReturn(OrderInterface::STATE_NEW);
         $order->getTotal()->willReturn(1234);
         $order->getCurrencyCode()->willReturn('EUR');
         $order->getLastPayment(PaymentInterface::STATE_CANCELLED)->willReturn(null);
@@ -63,6 +67,7 @@ final class PaymentProcessorSpec extends ObjectBehavior
         OrderInterface $order,
         PaymentMethodInterface $paymentMethodFromLastCancelledPayment
     ) {
+        $order->getState()->willReturn(OrderInterface::STATE_NEW);
         $order->getTotal()->willReturn(1234);
         $order->getCurrencyCode()->willReturn('EUR');
         $order->getLastPayment(PaymentInterface::STATE_CANCELLED)->willReturn($cancelledPayment);
@@ -82,6 +87,7 @@ final class PaymentProcessorSpec extends ObjectBehavior
         PaymentInterface $payment,
         OrderInterface $order
     ) {
+        $order->getState()->willReturn(OrderInterface::STATE_NEW);
         $order->getTotal()->willReturn(1234);
         $order->getCurrencyCode()->willReturn('EUR');
         $paymentFactory->createWithAmountAndCurrencyCode(1234, 'EUR')->willReturn($payment);
@@ -101,6 +107,7 @@ final class PaymentProcessorSpec extends ObjectBehavior
         OrderInterface $order,
         PaymentMethodInterface $paymentMethodFromLastFailedPayment
     ) {
+        $order->getState()->willReturn(OrderInterface::STATE_NEW);
         $order->getTotal()->willReturn(1234);
         $order->getCurrencyCode()->willReturn('EUR');
         $order->getLastPayment(PaymentInterface::STATE_CANCELLED)->willReturn(null);
@@ -121,6 +128,7 @@ final class PaymentProcessorSpec extends ObjectBehavior
         PaymentInterface $payment,
         OrderInterface $order
     ) {
+        $order->getState()->willReturn(OrderInterface::STATE_NEW);
         $order->getTotal()->willReturn(1234);
         $order->getCurrencyCode()->willReturn('EUR');
         $paymentFactory->createWithAmountAndCurrencyCode(1234, 'EUR')->willReturn($payment);
@@ -140,6 +148,7 @@ final class PaymentProcessorSpec extends ObjectBehavior
         PaymentInterface $payment,
         OrderInterface $order
     ) {
+        $order->getState()->willReturn(OrderInterface::STATE_NEW);
         $order->getTotal()->willReturn(1234);
         $order->getCurrencyCode()->willReturn('EUR');
         $order->getLastPayment(PaymentInterface::STATE_CANCELLED)->willReturn($cancelledPayment);
@@ -149,6 +158,26 @@ final class PaymentProcessorSpec extends ObjectBehavior
         $paymentFactory->createWithAmountAndCurrencyCode(1234, 'EUR')->willReturn($payment);
         $payment->setMethod($cancelledPayment)->shouldNotBeCalled();
         $order->addPayment($payment)->shouldNotBeCalled();
+
+        $this->processOrderPayments($order);
+    }
+
+    function it_sets_orders_total_on_payment_amount_when_payment_is_new(OrderInterface $order, PaymentInterface $payment)
+    {
+        $order->getState()->willReturn(OrderInterface::STATE_NEW);
+        $order->getTotal()->willReturn(123);
+
+        $payment->getState()->willReturn(PaymentInterface::STATE_NEW);
+        $order->getLastPayment(PaymentInterface::STATE_NEW)->willReturn($payment);
+
+        $payment->setAmount(123)->shouldBeCalled();
+
+        $this->processOrderPayments($order);
+    }
+
+    function it_does_not_add_payment_if_the_order_is_cancelled(OrderInterface $order)
+    {
+        $order->getState()->willReturn(OrderInterface::STATE_CANCELLED);
 
         $this->processOrderPayments($order);
     }

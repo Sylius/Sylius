@@ -22,6 +22,7 @@ Feature: Cancelling orders
         And its state should be "Cancelled"
         And it should have payment state "Cancelled"
         And it should have shipment in state "Cancelled"
+        And there should be only 1 payment
 
     @ui
     Scenario: Cannot cancel an order, which is already cancelled

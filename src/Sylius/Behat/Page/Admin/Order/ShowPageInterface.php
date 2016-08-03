@@ -208,6 +208,11 @@ interface ShowPageInterface extends SymfonyPageInterface
      * @return string
      */
     public function getPaymentPrice();
+
+    /**
+     * @return int
+     */
+    public function getPaymentsCount();
     
     /**
      * @return bool
