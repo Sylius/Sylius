@@ -10,7 +10,7 @@ imports:
     - { resource: "security.yml" }
 
 framework:
-    translator: { fallback: "%locale%" }
+    translator: { fallbacks: ["%locale%"] }
     secret: "%secret%"
     router:
         resource: "%kernel.root_dir%/config/routing.yml"

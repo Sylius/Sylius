@@ -36,7 +36,7 @@ final class ThemeAwareTranslatorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Translation\ThemeAwareTranslator');
+        $this->shouldHaveType(ThemeAwareTranslator::class);
     }
 
     function it_implements_translator_interface()
@@ -104,7 +104,7 @@ final class ThemeAwareTranslatorSpec extends ObjectBehavior
         $theme->getName()->willReturn('theme/name');
 
         $translator->getLocale()->willReturn('defaultlocale');
-        $translator->trans('id', ['param'], 'domain', 'defaultlocale_theme-name')->willReturn('translated string');
+        $translator->trans('id', ['param'], 'domain', 'defaultlocale@theme-name')->willReturn('translated string');
 
         $this->trans('id', ['param'], 'domain')->shouldReturn('translated string');
     }
@@ -117,7 +117,7 @@ final class ThemeAwareTranslatorSpec extends ObjectBehavior
         $themeContext->getTheme()->willReturn($theme);
         $theme->getName()->willReturn('theme/name');
 
-        $translator->trans('id', ['param'], 'domain', 'customlocale_theme-name')->willReturn('translated string');
+        $translator->trans('id', ['param'], 'domain', 'customlocale@theme-name')->willReturn('translated string');
 
         $this->trans('id', ['param'], 'domain', 'customlocale')->shouldReturn('translated string');
     }
@@ -149,7 +149,7 @@ final class ThemeAwareTranslatorSpec extends ObjectBehavior
         $theme->getName()->willReturn('theme/name');
 
         $translator->getLocale()->willReturn('defaultlocale');
-        $translator->transChoice('id', 2, ['param'], 'domain', 'defaultlocale_theme-name')->willReturn('translated string');
+        $translator->transChoice('id', 2, ['param'], 'domain', 'defaultlocale@theme-name')->willReturn('translated string');
 
         $this->transChoice('id', 2, ['param'], 'domain')->shouldReturn('translated string');
     }
@@ -162,7 +162,7 @@ final class ThemeAwareTranslatorSpec extends ObjectBehavior
         $themeContext->getTheme()->willReturn($theme);
         $theme->getName()->willReturn('theme/name');
 
-        $translator->transChoice('id', 2, ['param'], 'domain', 'customlocale_theme-name')->willReturn('translated string');
+        $translator->transChoice('id', 2, ['param'], 'domain', 'customlocale@theme-name')->willReturn('translated string');
 
         $this->transChoice('id', 2, ['param'], 'domain', 'customlocale')->shouldReturn('translated string');
     }
