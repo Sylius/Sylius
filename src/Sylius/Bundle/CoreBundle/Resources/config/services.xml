@@ -137,6 +137,8 @@
         <parameter key="sylius.form.type.product_legacy.class">Sylius\Bundle\CoreBundle\Form\Type\LegacyProductType</parameter>
 
         <parameter key="sylius.generator.product_variant.class">Sylius\Bundle\CoreBundle\Generator\ProductVariantGenerator</parameter>
+
+        <parameter key="sylius.custom_factory.cart_item.class">Sylius\Component\Core\Factory\CartItemFactory</parameter>
     </parameters>
 
     <services>
@@ -557,6 +559,12 @@
         <service id="validator.unique.registered_user" class="%sylius.user.validator.unique_registered_user.class%">
             <argument type="service" id="sylius.repository.customer" />
             <tag name="validator.constraint_validator" alias="registered_user_validator" />
+        </service>
+
+        <service id="sylius.custom_factory.cart_item" class="%sylius.custom_factory.cart_item.class%" decorates="sylius.factory.cart_item">
+            <argument type="service" id="sylius.custom_factory.cart_item.inner" />
+            <argument type="service" id="sylius.repository.product" />
+            <argument type="service" id="sylius.variant_resolver.default" />
         </service>
     </services>
 
