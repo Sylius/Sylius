@@ -60,6 +60,7 @@ class RulesEligibilityChecker implements PromotionSubjectEligibilityCheckerInter
      */
     protected function isEligibleToRule(PromotionSubjectInterface $subject, RuleInterface $rule)
     {
+        /** @var RuleCheckerInterface $checker */
         $checker = $this->ruleRegistry->get($rule->getType());
 
         return $checker->isEligible($subject, $rule->getConfiguration());

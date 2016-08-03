@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ShippingBundle\Form\EventListener;
 
 use Sylius\Component\Registry\ServiceRegistryInterface;
+use Sylius\Component\Shipping\Checker\RuleCheckerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -94,6 +95,7 @@ class BuildRuleFormSubscriber implements EventSubscriberInterface
      */
     protected function addConfigurationFields(FormInterface $form, $ruleType, array $data = [])
     {
+        /** @var RuleCheckerInterface $checker */
         $checker = $this->checkerRegistry->get($ruleType);
         $configurationField = $this->factory->createNamed('configuration', $checker->getConfigurationFormType(), $data, ['auto_initialize' => false]);
 

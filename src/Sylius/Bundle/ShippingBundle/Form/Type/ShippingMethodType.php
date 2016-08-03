@@ -15,6 +15,8 @@ use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Bundle\ShippingBundle\Form\EventListener\BuildShippingMethodFormSubscriber;
 use Sylius\Component\Registry\ServiceRegistryInterface;
+use Sylius\Component\Shipping\Calculator\CalculatorInterface;
+use Sylius\Component\Shipping\Checker\RuleCheckerInterface;
 use Sylius\Component\Shipping\Model\ShippingMethod;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
@@ -90,12 +92,17 @@ class ShippingMethodType extends AbstractResourceType
             ])
         ;
 
-        $prototypes = [];
-        $prototypes['rules'] = [];
+        $prototypes = [
+            'rules' => [],
+            'calculators' => [],
+        ];
+
+        /** @var RuleCheckerInterface $checker */
         foreach ($this->checkerRegistry->all() as $type => $checker) {
             $prototypes['rules'][$type] = $builder->create('__name__', $checker->getConfigurationFormType())->getForm();
         }
-        $prototypes['calculators'] = [];
+
+        /** @var CalculatorInterface $calculator */
         foreach ($this->calculatorRegistry->all() as $name => $calculator) {
             $calculatorTypeName = sprintf('sylius_shipping_calculator_%s', $calculator->getType());
 

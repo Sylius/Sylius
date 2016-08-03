@@ -20,6 +20,7 @@ use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Context\LocaleNotFoundException;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
+use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\Metadata\RegistryInterface;
 use Sylius\Component\Resource\Model\TranslatableInterface;
 use Sylius\Component\Resource\Model\TranslationInterface;
@@ -133,6 +134,7 @@ class ORMTranslatableListener implements EventSubscriber
             return;
         }
 
+        /** @var MetadataInterface $translationResourceMetadata */
         $translationResourceMetadata = $this->resourceMetadataRegistry->get($resourceMetadata->getAlias().'_translation');
 
         $metadata->mapOneToMany([
@@ -161,6 +163,7 @@ class ORMTranslatableListener implements EventSubscriber
             return;
         }
 
+        /** @var MetadataInterface $translatableResourceMetadata */
         $translatableResourceMetadata = $this->resourceMetadataRegistry->get(str_replace('_translation', '', $resourceMetadata->getAlias()));
 
         $metadata->mapManyToOne([

@@ -37,6 +37,7 @@ class CompositeMethodsResolver implements MethodsResolverInterface
      */
     public function getSupportedMethods(ShippingSubjectInterface $shippingSubject)
     {
+        /** @var MethodsResolverInterface $resolver */
         foreach ($this->resolversRegistry->all() as $resolver) {
             if ($resolver->supports($shippingSubject)) {
                 return $resolver->getSupportedMethods($shippingSubject);
@@ -51,6 +52,7 @@ class CompositeMethodsResolver implements MethodsResolverInterface
      */
     public function supports(ShippingSubjectInterface $subject)
     {
+        /** @var MethodsResolverInterface $resolver */
         foreach ($this->resolversRegistry->all() as $resolver) {
             if ($resolver->supports($subject)) {
                 return true;

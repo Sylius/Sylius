@@ -48,6 +48,7 @@ class DelegatingCalculator implements DelegatingCalculatorInterface
             throw new \InvalidArgumentException('Cannot calculate the price for PriceableInterface instance without calculator defined.');
         }
 
+        /** @var CalculatorInterface $calculator */
         $calculator = $this->registry->get($type);
 
         return $calculator->calculate($subject, $subject->getPricingConfiguration(), $context);
