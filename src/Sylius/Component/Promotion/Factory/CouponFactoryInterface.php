@@ -12,6 +12,7 @@
 namespace Sylius\Component\Promotion\Factory;
 
 use Sylius\Component\Promotion\Model\CouponInterface;
+use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
@@ -20,11 +21,11 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 interface CouponFactoryInterface extends FactoryInterface
 {
     /**
-     * @param mixed $promotionId
+     * @param PromotionInterface $promotionId
      *
      * @return CouponInterface
      *
      * @throws \InvalidArgumentException
      */
-    public function createForPromotion($promotionId);
+    public function createForPromotion(PromotionInterface $promotionId);
 }
