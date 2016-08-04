@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Promotion\Factory;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Promotion\Factory\CouponFactory;
 use Sylius\Component\Promotion\Factory\CouponFactoryInterface;
 use Sylius\Component\Promotion\Model\CouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
@@ -19,18 +20,20 @@ use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
+ * @mixin CouponFactory
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class CouponFactorySpec extends ObjectBehavior
 {
-    function let(FactoryInterface $factory, PromotionRepositoryInterface $promotionRepository)
+    function let(FactoryInterface $factory)
     {
-        $this->beConstructedWith($factory, $promotionRepository);
+        $this->beConstructedWith($factory);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Promotion\Factory\CouponFactory');
+        $this->shouldHaveType(CouponFactory::class);
     }
 
     function it_is_a_resource_factory()
@@ -50,42 +53,28 @@ final class CouponFactorySpec extends ObjectBehavior
         $this->createNew()->shouldReturn($coupon);
     }
 
-    function it_throws_an_exception_when_promotion_is_not_found(PromotionRepositoryInterface $promotionRepository)
-    {
-        $promotionRepository->find(15)->willReturn(null);
-
-        $this
-            ->shouldThrow(\InvalidArgumentException::class)
-            ->during('createForPromotion', [15])
-        ;
-    }
-
     function it_throws_invalid_argument_exception_when_promotion_is_not_coupon_based(
-        PromotionRepositoryInterface $promotionRepository,
         PromotionInterface $promotion
     ) {
-        $promotionRepository->find(13)->willReturn($promotion);
         $promotion->getName()->willReturn('Christmas sale');
         $promotion->isCouponBased()->willReturn(false);
 
         $this
             ->shouldThrow(\InvalidArgumentException::class)
-            ->during('createForPromotion', [13])
+            ->during('createForPromotion', [$promotion])
         ;
     }
 
     function it_creates_a_coupon_and_assigns_a_promotion_to_id(
         FactoryInterface $factory,
-        PromotionRepositoryInterface $promotionRepository,
         PromotionInterface $promotion,
         CouponInterface $coupon
     ) {
         $factory->createNew()->willReturn($coupon);
-        $promotionRepository->find(13)->willReturn($promotion);
         $promotion->getName()->willReturn('Christmas sale');
         $promotion->isCouponBased()->willReturn(true);
         $coupon->setPromotion($promotion)->shouldBeCalled();
 
-        $this->createForPromotion(13)->shouldReturn($coupon);
+        $this->createForPromotion($promotion)->shouldReturn($coupon);
     }
 }
