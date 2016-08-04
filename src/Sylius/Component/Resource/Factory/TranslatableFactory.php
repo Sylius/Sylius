@@ -52,7 +52,7 @@ class TranslatableFactory implements TranslatableFactoryInterface
         }
 
         $resource->setCurrentLocale($this->localeProvider->getDefaultLocaleCode());
-        $resource->setFallbackLocale($this->localeProvider->getDefaultLocaleCode());
+        $resource->setFallbackLocale($this->localeProvider->getFallbackLocaleCode());
 
         return $resource;
     }
