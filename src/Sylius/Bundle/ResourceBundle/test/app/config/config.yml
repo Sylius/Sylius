@@ -47,6 +47,7 @@ services:
         arguments:
             - ["pl_PL", "en_US", "de_DE"]
             - "en_US"
+            - "en_US"
 
     test.locale_context:
         class: Sylius\Component\Locale\Context\ImmutableLocaleContext

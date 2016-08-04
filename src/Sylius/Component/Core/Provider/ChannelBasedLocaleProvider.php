@@ -31,16 +31,16 @@ final class ChannelBasedLocaleProvider implements LocaleProviderInterface
     /**
      * @var string
      */
-    private $defaultLocaleCode;
+    private $fallbackLocaleCode;
 
     /**
      * @param ChannelContextInterface $channelContext
-     * @param string $defaultLocaleCode
+     * @param string $fallbackLocaleCode
      */
-    public function __construct(ChannelContextInterface $channelContext, $defaultLocaleCode)
+    public function __construct(ChannelContextInterface $channelContext, $fallbackLocaleCode)
     {
         $this->channelContext = $channelContext;
-        $this->defaultLocaleCode = $defaultLocaleCode;
+        $this->fallbackLocaleCode = $fallbackLocaleCode;
     }
 
     /**
@@ -63,7 +63,7 @@ final class ChannelBasedLocaleProvider implements LocaleProviderInterface
                 ->toArray()
             ;
         } catch (ChannelNotFoundException $exception) {
-            return [$this->defaultLocaleCode];
+            return [$this->fallbackLocaleCode];
         }
     }
 
@@ -78,7 +78,15 @@ final class ChannelBasedLocaleProvider implements LocaleProviderInterface
 
             return $channel->getDefaultLocale()->getCode();
         } catch (ChannelNotFoundException $exception) {
-            return $this->defaultLocaleCode;
+            return $this->fallbackLocaleCode;
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFallbackLocaleCode()
+    {
+        return $this->fallbackLocaleCode;
     }
 }

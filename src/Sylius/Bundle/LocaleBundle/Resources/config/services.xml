@@ -20,6 +20,7 @@
         <service id="sylius.locale_provider" class="Sylius\Component\Locale\Provider\LocaleProvider">
             <argument type="service" id="sylius.repository.locale" />
             <argument>%sylius_locale.locale%</argument>
+            <argument>%sylius_locale.locale%</argument>
         </service>
 
         <service id="sylius.converter.locale" class="Sylius\Component\Locale\Converter\LocaleConverter" />

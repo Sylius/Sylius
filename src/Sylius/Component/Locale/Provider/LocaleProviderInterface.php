@@ -25,4 +25,9 @@ interface LocaleProviderInterface
      * @return string
      */
     public function getDefaultLocaleCode();
+
+    /**
+     * @return string
+     */
+    public function getFallbackLocaleCode();
 }
