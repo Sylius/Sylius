@@ -64,7 +64,7 @@ class CartItemController extends Controller
             // Write flash message
             $eventDispatcher->dispatch(SyliusCartEvents::ITEM_ADD_ERROR, new FlashEvent($exception->getMessage()));
 
-            return $this->redirectAfterAdd($configuration);
+            return $this->redirectAfterError($configuration);
         }
 
         $event = new CartItemEvent($cart, $item);
@@ -81,7 +81,7 @@ class CartItemController extends Controller
     }
 
     /**
-     * Redirect to specific URL or to cart.
+     * Redirect to specific URL or to cart after an item is added to the cart.
      *
      * @param Request $request
      *
@@ -96,6 +96,24 @@ class CartItemController extends Controller
         }
 
         return $this->redirectToCartSummary($configuration);
+    }
+
+    /**
+     * Redirect to specific URL or to cart after an error occurs.
+     *
+     * @param Request $request
+     *
+     * @return RedirectResponse
+     */
+    private function redirectAfterError(RequestConfiguration $configuration)
+    {
+        $request = $configuration->getRequest();
+
+        if ($request->query->has('_error_redirect_to')) {
+            return $this->redirectHandler->redirect($configuration, $request->query->get('_error_redirect_to'));
+        }
+
+        return $this->redirectAfterAdd($configuration);
     }
 
     /**
