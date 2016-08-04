@@ -15,7 +15,6 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Inventory\Model\StockableInterface;
 
 /**
- * Stock operator interface.
  * Manage stock levels and inventory units.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -27,7 +26,7 @@ interface InventoryOperatorInterface
      * Increase stock on hand for given stockable by quantity.
      *
      * @param StockableInterface $stockable
-     * @param int            $quantity
+     * @param int $quantity
      */
     public function increase(StockableInterface $stockable, $quantity);
 
@@ -35,7 +34,7 @@ interface InventoryOperatorInterface
      * Hold stock for given stockable by quantity.
      *
      * @param StockableInterface $stockable
-     * @param int            $quantity
+     * @param int $quantity
      */
     public function hold(StockableInterface $stockable, $quantity);
 
@@ -43,7 +42,7 @@ interface InventoryOperatorInterface
      * Release stock for given stockable by quantity.
      *
      * @param StockableInterface $stockable
-     * @param int            $quantity
+     * @param int $quantity
      */
     public function release(StockableInterface $stockable, $quantity);
 

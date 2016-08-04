@@ -77,7 +77,6 @@ sylius_core:
     sitemap: ~
 
 sylius_inventory:
-    track_inventory: true
     resources:
         inventory_unit:
             classes:

@@ -28,16 +28,16 @@ final class InventoryOperator implements InventoryOperatorInterface
     /**
      * @var AvailabilityCheckerInterface
      */
-    protected $availabilityChecker;
+    private $availabilityChecker;
 
     /**
      * @var EventDispatcherInterface
      */
-    protected $eventDispatcher;
+    private $eventDispatcher;
 
     /**
      * @param AvailabilityCheckerInterface $availabilityChecker
-     * @param EventDispatcherInterface     $eventDispatcher
+     * @param EventDispatcherInterface $eventDispatcher
      */
     public function __construct(AvailabilityCheckerInterface $availabilityChecker, EventDispatcherInterface $eventDispatcher)
     {
@@ -107,7 +107,6 @@ final class InventoryOperator implements InventoryOperatorInterface
         if ($quantity < 1) {
             throw new \InvalidArgumentException('Quantity of units must be greater than 0.');
         }
-
 
         if ($inventoryUnits instanceof Collection) {
             $stockable = $inventoryUnits->first()->getStockable();

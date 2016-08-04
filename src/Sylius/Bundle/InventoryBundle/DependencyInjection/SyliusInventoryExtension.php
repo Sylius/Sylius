@@ -20,7 +20,7 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class SyliusInventoryExtension extends AbstractResourceExtension
+final class SyliusInventoryExtension extends AbstractResourceExtension
 {
     /**
      * {@inheritdoc}
@@ -32,15 +32,7 @@ class SyliusInventoryExtension extends AbstractResourceExtension
 
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
-        $configFiles = [
-            'twig.xml',
-            'templating.xml',
-            'services.xml',
-        ];
-
-        foreach ($configFiles as $configFile) {
-            $loader->load($configFile);
-        }
+        $loader->load('services.xml');
 
         $container->setAlias('sylius.availability_checker', $config['checker']);
         $container->setAlias('sylius.inventory_operator', $config['operator']);

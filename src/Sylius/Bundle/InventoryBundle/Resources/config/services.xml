@@ -11,33 +11,30 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="http://symfony.com/schema/dic/services
-                               http://symfony.com/schema/dic/services/services-1.0.xsd"
->
-
-    <parameters>
-        <parameter key="sylius.availability_checker.default.class">Sylius\Component\Inventory\Checker\AvailabilityChecker</parameter>
-        <parameter key="sylius.inventory_operator.noop.class">Sylius\Component\Inventory\Operator\NoopInventoryOperator</parameter>
-        <parameter key="sylius.inventory_operator.default.class">Sylius\Component\Inventory\Operator\InventoryOperator</parameter>
-        <parameter key="sylius.validator.in_stock.class">Sylius\Bundle\InventoryBundle\Validator\Constraints\InStockValidator</parameter>
-    </parameters>
-
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="sylius.inventory_operator.default" class="%sylius.inventory_operator.default.class%">
+        <service id="sylius.inventory_operator.default" class="Sylius\Component\Inventory\Operator\InventoryOperator">
             <argument type="service" id="sylius.availability_checker" />
             <argument type="service" id="event_dispatcher" />
         </service>
 
-        <service id="sylius.inventory_operator.noop" class="%sylius.inventory_operator.noop.class%" />
+        <service id="sylius.inventory_operator.noop" class="Sylius\Component\Inventory\Operator\NoopInventoryOperator" />
 
-        <service id="sylius.availability_checker.default" class="%sylius.availability_checker.default.class%" />
+        <service id="sylius.availability_checker.default" class="Sylius\Component\Inventory\Checker\AvailabilityChecker" />
 
-        <service id="sylius.validator.in_stock" class="%sylius.validator.in_stock.class%">
+        <service id="sylius.validator.in_stock" class="Sylius\Bundle\InventoryBundle\Validator\Constraints\InStockValidator">
             <argument type="service" id="sylius.availability_checker" />
             <tag name="validator.constraint_validator" alias="sylius_in_stock" />
         </service>
-    </services>
 
+        <service id="sylius.templating.helper.inventory" class="Sylius\Bundle\InventoryBundle\Templating\Helper\InventoryHelper">
+            <argument type="service" id="sylius.availability_checker" />
+            <tag name="templating.helper" alias="sylius_inventory" />
+        </service>
+
+        <service id="sylius.twig.extension.inventory" class="Sylius\Bundle\InventoryBundle\Twig\InventoryExtension" public="false">
+            <argument type="service" id="sylius.templating.helper.inventory" />
+            <tag name="twig.extension" />
+        </service>
+    </services>
 </container>

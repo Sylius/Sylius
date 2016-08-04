@@ -13,8 +13,11 @@ namespace spec\Sylius\Component\Inventory\Operator;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Inventory\Model\StockableInterface;
+use Sylius\Component\Inventory\Operator\InsufficientStockException;
 
 /**
+ * @mixin InsufficientStockException
+ *
  * @author Julien Janvier <j.janvier@gmail.com>
  */
 final class InsufficientStockExceptionSpec extends ObjectBehavior
@@ -26,7 +29,7 @@ final class InsufficientStockExceptionSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Inventory\Operator\InsufficientStockException');
+        $this->shouldHaveType(InsufficientStockException::class);
     }
 
     function it_is_an_underflow_exception()
@@ -34,8 +37,8 @@ final class InsufficientStockExceptionSpec extends ObjectBehavior
         $this->shouldHaveType(\UnderflowException::class);
     }
 
-    function it_returns_its_stockable()
+    function it_returns_its_stockable(StockableInterface $stockable)
     {
-        $this->getStockable()->shouldHaveType('Sylius\Component\Inventory\Model\StockableInterface');
+        $this->getStockable()->shouldReturn($stockable);
     }
 }

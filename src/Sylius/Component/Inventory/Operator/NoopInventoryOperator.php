@@ -18,7 +18,7 @@ use Sylius\Component\Inventory\Model\StockableInterface;
  *
  * @author Daniel Richter <nexyz9@gmail.com>
  */
-class NoopInventoryOperator implements InventoryOperatorInterface
+final class NoopInventoryOperator implements InventoryOperatorInterface
 {
     /**
      * {@inheritdoc}
