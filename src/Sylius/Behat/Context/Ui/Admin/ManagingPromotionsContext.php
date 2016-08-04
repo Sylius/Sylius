@@ -142,11 +142,11 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @Given I add the "Contains taxon" rule configured with :count :taxonName
+     * @Given I add the "Contains number of items from taxon" rule configured with :count :taxonName
      */
     public function iAddTheContainsTaxonRuleConfiguredWith($count, $taxonName)
     {
-        $this->createPage->addRule('Contains taxon');
+        $this->createPage->addRule('Contains number of items from taxon');
         $this->createPage->selectRuleOption('Taxon', $taxonName);
         $this->createPage->fillRuleOption('Count', $count);
     }
@@ -166,11 +166,11 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @Given I add the "Total of items from taxon" rule configured with :count :taxonName
+     * @Given I add the "Total price of items from taxon" rule configured with :count :taxonName
      */
     public function iAddTheRuleConfiguredWith($count, $taxonName)
     {
-        $this->createPage->addRule('Total of items from taxon');
+        $this->createPage->addRule('Total price of items from taxon');
         $this->createPage->selectRuleOption('Taxon', $taxonName);
         $this->createPage->fillRuleOption('Amount', $count);
     }
