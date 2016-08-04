@@ -45,11 +45,4 @@ interface InventoryOperatorInterface
      * @param int $quantity
      */
     public function release(StockableInterface $stockable, $quantity);
-
-    /**
-     * Decrease stock by count of given inventory units.
-     *
-     * @param StockableInterface[]|Collection $inventoryUnits
-     */
-    public function decrease($inventoryUnits);
 }

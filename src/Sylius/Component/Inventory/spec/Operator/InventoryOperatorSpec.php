@@ -49,24 +49,4 @@ final class InventoryOperatorSpec extends ObjectBehavior
 
         $this->increase($stockable, 5);
     }
-
-    function it_decreases_stockable_on_hand_by_count_of_sold_units(
-        AvailabilityCheckerInterface $availabilityChecker,
-        StockableInterface $stockable,
-        InventoryUnitInterface $inventoryUnit1,
-        InventoryUnitInterface $inventoryUnit2
-    ) {
-        $inventoryUnit1->getStockable()->willReturn($stockable);
-        $inventoryUnit2->getStockable()->willReturn($stockable);
-
-        $availabilityChecker->isStockSufficient($stockable, 2)->shouldBeCalled()->willReturn(true);
-
-        $inventoryUnit1->getInventoryState()->shouldBeCalled()->willReturn(InventoryUnitInterface::STATE_SOLD);
-        $inventoryUnit2->getInventoryState()->shouldBeCalled()->willReturn(InventoryUnitInterface::STATE_SOLD);
-
-        $stockable->getOnHand()->shouldBeCalled()->willReturn(7);
-        $stockable->setOnHand(5)->shouldBeCalled();
-
-        $this->decrease([$inventoryUnit1, $inventoryUnit2]);
-    }
 }
