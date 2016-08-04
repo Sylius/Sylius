@@ -11,6 +11,9 @@ Sylius\Component\Core\Model\ProductVariant:
         onHold:
             expose: true
             type: integer
+        tracked:
+            expose: true
+            type: boolean
         width:
             expose: true
             type: float

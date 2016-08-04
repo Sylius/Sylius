@@ -34,6 +34,9 @@ class ProductVariantType extends BaseVariantType
                 'required' => false,
                 'label' => 'sylius.form.variant.original_price',
             ])
+            ->add('tracked', 'checkbox', [
+                'label' => 'sylius.form.variant.tracked',
+            ])
             ->add('onHand', 'integer', [
                 'label' => 'sylius.form.variant.on_hand',
             ])
