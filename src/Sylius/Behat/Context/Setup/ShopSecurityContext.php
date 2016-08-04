@@ -69,7 +69,7 @@ final class ShopSecurityContext implements Context
         $shopUser = $this->shopUserRepository->findOneByEmail($email);
         Assert::notNull($shopUser);
 
-        $this->securityService->logUserIn($shopUser);
+        $this->securityService->logShopUserIn($shopUser);
     }
 
     /**
@@ -80,7 +80,7 @@ final class ShopSecurityContext implements Context
         $shopUser = $this->testShopUserFactory->createDefault();
         $this->shopUserRepository->add($shopUser);
 
-        $this->securityService->logUserIn($shopUser);
+        $this->securityService->logShopUserIn($shopUser);
 
         $this->sharedStorage->set('user', $shopUser);
     }

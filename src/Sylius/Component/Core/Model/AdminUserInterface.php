@@ -11,11 +11,11 @@
 
 namespace Sylius\Component\Core\Model;
 
-use Sylius\Component\User\Model\User;
+use Sylius\Component\User\Model\UserInterface as BaseUserInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class AdminUser extends User implements AdminUserInterface
+interface AdminUserInterface extends BaseUserInterface
 {
 }

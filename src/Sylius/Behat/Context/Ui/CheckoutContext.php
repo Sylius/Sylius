@@ -145,7 +145,7 @@ final class CheckoutContext implements Context
      */
     public function thisUserBought(UserInterface $user)
     {
-        $this->securityService->performActionAs($user, function () {
+        $this->securityService->performActionAsShopUser($user, function () {
             $this->iProceedSelectingPaymentMethod();
             $this->iConfirmMyOrder();
         });

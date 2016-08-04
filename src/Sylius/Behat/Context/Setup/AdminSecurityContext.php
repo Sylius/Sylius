@@ -68,7 +68,7 @@ final class AdminSecurityContext implements Context
         $adminUser = $this->testAdminUserFactory->createDefault();
         $this->adminUserRepository->add($adminUser);
 
-        $this->securityService->logUserIn($adminUser);
+        $this->securityService->logAdminUserIn($adminUser);
 
         $this->sharedStorage->set('admin', $adminUser);
     }

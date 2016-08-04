@@ -557,7 +557,7 @@ final class ManagingOrdersContext implements Context
      */
     public function theCustomerServiceShouldKnowAboutThisAdditionalNotes(UserInterface $user, $note, OrderInterface $order)
     {
-        $this->securityService->performActionAs($user, function () use ($note, $order) {
+        $this->securityService->performActionAsAdminUser($user, function () use ($note, $order) {
             $this->showPage->open(['id' => $order->getId()]);
             Assert::true($this->showPage->hasNote($note), sprintf('I should see %s note, but I do not see', $note));
         });

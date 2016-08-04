@@ -12,7 +12,7 @@ security:
     firewalls:
         admin:
             switch_user: true
-            context: user
+            context: admin
             pattern: /admin/.*
             form_login:
                 provider: sylius_admin_user_provider
@@ -39,7 +39,7 @@ security:
 
         shop:
             switch_user: { role: ROLE_ALLOWED_TO_SWITCH }
-            context: user
+            context: shop
             pattern: /.*
             form_login:
                 success_handler: sylius.authenticaiton.success_handler

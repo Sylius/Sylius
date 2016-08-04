@@ -11,7 +11,8 @@
 
 namespace Sylius\Behat\Service;
 
-use Sylius\Component\User\Model\UserInterface;
+use Sylius\Component\Core\Model\AdminUserInterface;
+use Sylius\Component\Core\Model\UserInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -19,17 +20,30 @@ use Sylius\Component\User\Model\UserInterface;
 interface SecurityServiceInterface
 {
     /**
-     * @param UserInterface $user
+     * @param UserInterface $shopUser
      *
      * @throws \InvalidArgumentException
      */
-    public function logUserIn(UserInterface $user);
-    
-    public function logOut();
+    public function logShopUserIn(UserInterface $shopUser);
+
+    public function logShopUserOut();
 
     /**
-     * @param UserInterface $user
+     * @param AdminUserInterface $adminUser
+     */
+    public function logAdminUserIn(AdminUserInterface $adminUser);
+
+    public function logAdminUserOut();
+
+    /**
+     * @param UserInterface $shopUser
      * @param callable $action
      */
-    public function performActionAs(UserInterface $user, callable $action);
+    public function performActionAsShopUser(UserInterface $shopUser, callable $action);
+
+    /**
+     * @param AdminUserInterface $adminUser
+     * @param callable $action
+     */
+    public function performActionAsAdminUser(AdminUserInterface $adminUser, callable $action);
 }

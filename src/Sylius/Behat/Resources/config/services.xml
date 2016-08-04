@@ -34,7 +34,6 @@
         <service id="sylius.behat.security" class="Sylius\Behat\Service\SecurityService" scope="scenario" public="false">
             <argument type="service" id="session" container="symfony" />
             <argument type="service" id="sylius.behat.cookie_setter" />
-            <argument>user</argument>
         </service>
 
         <service id="sylius.behat.table_accessor" class="Sylius\Behat\Service\Accessor\TableAccessor" public="false" />
