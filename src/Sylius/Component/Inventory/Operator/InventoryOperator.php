@@ -26,39 +26,16 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 final class InventoryOperator implements InventoryOperatorInterface
 {
     /**
-     * @var AvailabilityCheckerInterface
-     */
-    private $availabilityChecker;
-
-    /**
      * @var EventDispatcherInterface
      */
     private $eventDispatcher;
 
     /**
-     * @param AvailabilityCheckerInterface $availabilityChecker
      * @param EventDispatcherInterface $eventDispatcher
      */
-    public function __construct(AvailabilityCheckerInterface $availabilityChecker, EventDispatcherInterface $eventDispatcher)
+    public function __construct(EventDispatcherInterface $eventDispatcher)
     {
-        $this->availabilityChecker = $availabilityChecker;
         $this->eventDispatcher = $eventDispatcher;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function increase(StockableInterface $stockable, $quantity)
-    {
-        if ($quantity < 0) {
-            throw new \InvalidArgumentException('Quantity of units must be greater than 0.');
-        }
-
-        $this->eventDispatcher->dispatch(SyliusStockableEvents::PRE_INCREASE, new GenericEvent($stockable));
-
-        $stockable->setOnHand($stockable->getOnHand() + $quantity);
-
-        $this->eventDispatcher->dispatch(SyliusStockableEvents::POST_INCREASE, new GenericEvent($stockable));
     }
 
     /**

@@ -13,9 +13,6 @@ namespace Sylius\Component\Inventory;
 
 class SyliusStockableEvents
 {
-    const PRE_INCREASE = 'sylius.stockable.pre_increase';
-    const POST_INCREASE = 'sylius.stockable.post_increase';
-
     const PRE_HOLD = 'sylius.stockable.pre_hold';
     const POST_HOLD = 'sylius.stockable.post_hold';
 

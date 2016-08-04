@@ -23,14 +23,6 @@ final class NoopInventoryOperator implements InventoryOperatorInterface
     /**
      * {@inheritdoc}
      */
-    public function increase(StockableInterface $stockable, $quantity)
-    {
-        // nothing happens.
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function hold(StockableInterface $stockable, $quantity)
     {
         // nothing happens
