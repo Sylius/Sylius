@@ -24,8 +24,9 @@ sylius_admin_product_variant_create:
         _controller: sylius.controller.product_variant:createAction
         _sylius:
             factory:
-                method: createForProductWithId
-                arguments: [$productId]
+                method: createForProduct
+                arguments: 
+                  - expr:service('sylius.repository.product').find($productId)
             template: SyliusAdminBundle:Crud:create.html.twig
             grid: sylius_admin_product_variant
             section: admin
