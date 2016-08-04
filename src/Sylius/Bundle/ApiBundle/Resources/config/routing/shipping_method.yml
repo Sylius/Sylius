@@ -10,7 +10,7 @@ sylius_api_shipping_method_index:
             paginate: $limit
             sortable: true
             sorting:
-                code: desc
+                id: desc
 
 sylius_api_shipping_method_create:
     path: /
