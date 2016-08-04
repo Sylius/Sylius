@@ -16,12 +16,12 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Shipping\Checker\ShippingMethodEligibilityCheckerInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
-use Sylius\Component\Shipping\Resolver\MethodsResolverInterface;
+use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-final class MethodsResolverSpec extends ObjectBehavior
+final class ShippingMethodsResolverSpec extends ObjectBehavior
 {
     function let(
         ObjectRepository $methodRepository,
@@ -32,12 +32,12 @@ final class MethodsResolverSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Shipping\Resolver\MethodsResolver');
+        $this->shouldHaveType('Sylius\Component\Shipping\Resolver\ShippingMethodsResolver');
     }
 
     function it_implements_Sylius_shipping_methods_resolver_interface()
     {
-        $this->shouldImplement(MethodsResolverInterface::class);
+        $this->shouldImplement(ShippingMethodsResolverInterface::class);
     }
 
     function it_returns_all_methods_eligible_for_given_subject(

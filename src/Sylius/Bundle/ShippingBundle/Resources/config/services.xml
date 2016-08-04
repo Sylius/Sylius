@@ -22,7 +22,7 @@
         <parameter key="sylius.form.type.shipping_rule_unit_count_configuration.class">Sylius\Bundle\ShippingBundle\Form\Type\Rule\UnitCountConfigurationType</parameter>
 
         <parameter key="sylius.composite_shipping_methods_resolver.class">Sylius\Component\Shipping\Resolver\CompositeMethodsResolver</parameter>
-        <parameter key="sylius.shipping_methods_resolver.class">Sylius\Component\Shipping\Resolver\MethodsResolver</parameter>
+        <parameter key="sylius.shipping_methods_resolver.class">Sylius\Component\Shipping\Resolver\ShippingMethodsResolver</parameter>
 
         <parameter key="sylius.resolver.default_shipping_method.class">Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolver</parameter>
 
@@ -32,7 +32,7 @@
         <parameter key="sylius.registry.shipping_rule_checker.class">Sylius\Component\Registry\ServiceRegistry</parameter>
 
         <parameter key="sylius.registry.shipping_methods_resolver.class">Sylius\Component\Registry\PrioritizedServiceRegistry</parameter>
-        <parameter key="sylius.shipping_methods_resolver.interface">Sylius\Component\Shipping\Resolver\MethodsResolverInterface</parameter>
+        <parameter key="sylius.shipping_methods_resolver.interface">Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface</parameter>
 
         <parameter key="sylius.shipping_eligibility_checker.class">Sylius\Component\Shipping\Checker\ShippingMethodEligibilityChecker</parameter>
         <parameter key="sylius.shipping_rule_checker.unit_count.class">Sylius\Component\Shipping\Checker\UnitCountRuleChecker</parameter>

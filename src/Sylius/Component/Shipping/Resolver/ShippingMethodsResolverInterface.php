@@ -17,7 +17,7 @@ use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface MethodsResolverInterface
+interface ShippingMethodsResolverInterface
 {
     /**
      * @param ShippingSubjectInterface $subject

@@ -17,7 +17,7 @@ use Sylius\Component\Payment\Model\PaymentMethodInterface;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-interface MethodsResolverInterface
+interface PaymentMethodsResolverInterface
 {
     /**
      * @param PaymentInterface $subject

@@ -15,7 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Sylius\Component\Shipping\Resolver\MethodsResolverInterface;
+use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
 use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -26,7 +26,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 final class ShippingMethodChoiceTypeSpec extends ObjectBehavior
 {
     function let(
-        MethodsResolverInterface $methodsResolver,
+        ShippingMethodsResolverInterface $methodsResolver,
         ServiceRegistryInterface $calculators,
         RepositoryInterface $repository
     ) {

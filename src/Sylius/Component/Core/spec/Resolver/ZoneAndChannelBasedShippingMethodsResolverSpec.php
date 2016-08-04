@@ -19,17 +19,17 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
-use Sylius\Component\Core\Resolver\ShippingMethodsByZonesAndChannelResolver;
+use Sylius\Component\Core\Resolver\ZoneAndChannelBasedShippingMethodsResolver;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 use Sylius\Component\Core\Repository\ShippingMethodRepositoryInterface;
-use Sylius\Component\Shipping\Resolver\MethodsResolverInterface;
+use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
 
 /**
- * @mixin ShippingMethodsByZonesAndChannelResolver
+ * @mixin ZoneAndChannelBasedShippingMethodsResolver
  *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class ShippingMethodsByZonesAndChannelResolverSpec extends ObjectBehavior
+final class ZoneAndChannelBasedShippingMethodsResolverSpec extends ObjectBehavior
 {
     function let(
         ShippingMethodRepositoryInterface $shippingMethodRepository,
@@ -40,12 +40,12 @@ final class ShippingMethodsByZonesAndChannelResolverSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Resolver\ShippingMethodsByZonesAndChannelResolver');
+        $this->shouldHaveType('Sylius\Component\Core\Resolver\ZoneAndChannelBasedShippingMethodsResolver');
     }
 
     function it_implements_shipping_methods_by_zones_and_channel_resolver_interface()
     {
-        $this->shouldImplement(MethodsResolverInterface::class);
+        $this->shouldImplement(ShippingMethodsResolverInterface::class);
     }
 
     function it_returns_shipping_methods_matched_for_shipment_order_shipping_address_and_order_channel(

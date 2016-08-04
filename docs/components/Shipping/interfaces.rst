@@ -205,13 +205,13 @@ This interface should be implemented by an object, which updates shipments and s
 Resolver Interfaces
 -------------------
 
-MethodsResolverInterface
-~~~~~~~~~~~~~~~~~~~~~~~~
+ShippingMethodsResolverInterface
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This interface should be used to create object, which provides information about all allowed shipping methods
 for given shipping subject.
 
 .. note::
-    For more detailed information go to `Sylius API MethodsResolverInterface`_.
+    For more detailed information go to `Sylius API ShippingMethodsResolverInterface`_.
 
-.. _Sylius API MethodsResolverInterface: http://api.sylius.org/Sylius/Component/Shipping/Resolver/MethodsResolverInterface.html
+.. _Sylius API ShippingMethodsResolverInterface: http://api.sylius.org/Sylius/Component/Shipping/Resolver/ShippingMethodsResolverInterface.html
