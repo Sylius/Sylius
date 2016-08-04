@@ -63,4 +63,19 @@ class SampleStockable implements StockableInterface
     public function setOnHand($onHand)
     {
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setTracked($tracked)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isTracked()
+    {
+        return true;
+    }
 }

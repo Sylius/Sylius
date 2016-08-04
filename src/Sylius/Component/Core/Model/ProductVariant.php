@@ -17,6 +17,7 @@ use Sylius\Component\Core\Pricing\Calculators;
 use Sylius\Component\Product\Model\Variant as BaseVariant;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Component\Variation\Model\VariantInterface as BaseVariantInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -57,6 +58,11 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
      * @var int
      */
     protected $sold = 0;
+
+    /**
+     * @var bool
+     */
+    protected $tracked = false;
 
     /**
      * @var Collection|ProductVariantImageInterface[]
@@ -257,6 +263,24 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     public function setSold($sold)
     {
         $this->sold = (int) $sold;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setTracked($tracked)
+    {
+        Assert::boolean($tracked);
+
+        $this->tracked = $tracked;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isTracked()
+    {
+        return $this->tracked;
     }
 
     /**

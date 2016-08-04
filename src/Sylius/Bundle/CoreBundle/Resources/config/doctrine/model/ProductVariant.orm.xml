@@ -25,6 +25,7 @@
         <field name="onHold" column="on_hold" type="integer" />
         <field name="onHand" column="on_hand" type="integer" />
         <field name="sold" column="sold" type="integer" />
+        <field name="tracked" type="boolean" />
         <field name="price" column="price" type="integer">
             <gedmo:versioned />
         </field>
