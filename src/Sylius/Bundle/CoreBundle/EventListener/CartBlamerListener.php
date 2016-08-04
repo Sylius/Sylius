@@ -16,8 +16,8 @@ use Sylius\Bundle\UserBundle\Event\UserEvent;
 use Sylius\Component\Cart\Context\CartContextInterface;
 use Sylius\Component\Cart\Context\CartNotFoundException;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\UserInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
-use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 /**
@@ -50,7 +50,12 @@ final class CartBlamerListener
      */
     public function onImplicitLogin(UserEvent $userEvent)
     {
-        $this->blame($userEvent->getUser());
+        $user = $userEvent->getUser();
+        if (!$user instanceof UserInterface) {
+            return;
+        }
+
+        $this->blame($user);
     }
 
     /**

@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Test\Factory;
 
+use Sylius\Component\Core\Model\AdminUser;
 use Sylius\Component\Core\Test\Factory\TestUserFactoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
@@ -28,11 +29,6 @@ final class TestAdminUserFactory implements TestUserFactoryInterface
     /**
      * @var FactoryInterface
      */
-    private $customerFactory;
-
-    /**
-     * @var FactoryInterface
-     */
     private $adminUserFactory;
 
     /**
@@ -41,7 +37,6 @@ final class TestAdminUserFactory implements TestUserFactoryInterface
      */
     public function __construct(FactoryInterface $customerFactory, FactoryInterface $adminUserFactory)
     {
-        $this->customerFactory = $customerFactory;
         $this->adminUserFactory = $adminUserFactory;
     }
 
@@ -50,14 +45,9 @@ final class TestAdminUserFactory implements TestUserFactoryInterface
      */
     public function create($email, $password, $firstName = self::DEFAULT_FIRST_NAME, $lastName = self::DEFAULT_LAST_NAME, $role = self::DEFAULT_ROLE)
     {
-        $customer = $this->customerFactory->createNew();
-
-        $customer->setFirstName($firstName);
-        $customer->setLastName($lastName);
-
+        /** @var AdminUser $user */
         $user = $this->adminUserFactory->createNew();
 
-        $user->setCustomer($customer);
         $user->setUsername($email);
         $user->setEmail($email);
         $user->setPlainPassword($password);

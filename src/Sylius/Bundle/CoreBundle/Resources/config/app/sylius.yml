@@ -742,7 +742,7 @@ sylius_user:
             user:
                 classes:
                     model: Sylius\Component\Core\Model\AdminUser
-                    repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\UserRepository
+                    repository: Sylius\Bundle\UserBundle\Doctrine\ORM\UserRepository
                     form:
                         default: Sylius\Bundle\UserBundle\Form\Type\UserType
         shop:

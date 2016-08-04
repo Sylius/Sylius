@@ -14,7 +14,7 @@ namespace Sylius\Bundle\CoreBundle\EventListener;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Component\Core\Model\UserInterface;
+use Sylius\Component\User\Model\UserInterface;
 
 /**
  * User update listener.
