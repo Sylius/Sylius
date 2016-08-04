@@ -741,14 +741,14 @@ sylius_user:
         admin:
             user:
                 classes:
-                    model: Sylius\Component\Core\Model\User
+                    model: Sylius\Component\Core\Model\ShopUser
                     repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\UserRepository
                     form:
                         default: Sylius\Bundle\UserBundle\Form\Type\UserType
         shop:
             user:
                 classes:
-                    model: Sylius\Component\Core\Model\User
+                    model: Sylius\Component\Core\Model\ShopUser
                     repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\UserRepository
                     form:
                         default: Sylius\Bundle\UserBundle\Form\Type\UserType
