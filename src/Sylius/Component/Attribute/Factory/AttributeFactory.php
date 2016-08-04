@@ -18,7 +18,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class AttributeFactory implements AttributeFactoryInterface
+final class AttributeFactory implements AttributeFactoryInterface
 {
     /**
      * @var FactoryInterface

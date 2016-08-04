@@ -17,7 +17,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ProductVariantFactory implements ProductVariantFactoryInterface
+final class ProductVariantFactory implements ProductVariantFactoryInterface
 {
     /**
      * @var FactoryInterface

@@ -20,7 +20,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
  */
-class ProductFactory implements ProductFactoryInterface
+final class ProductFactory implements ProductFactoryInterface
 {
     /**
      * @var FactoryInterface

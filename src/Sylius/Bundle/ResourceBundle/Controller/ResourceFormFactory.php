@@ -17,7 +17,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ResourceFormFactory implements ResourceFormFactoryInterface
+final class ResourceFormFactory implements ResourceFormFactoryInterface
 {
     /**
      * @var FormFactoryInterface

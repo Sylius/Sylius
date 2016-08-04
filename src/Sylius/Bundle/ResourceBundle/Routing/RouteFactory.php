@@ -17,7 +17,7 @@ use Symfony\Component\Routing\RouteCollection;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class RouteFactory implements RouteFactoryInterface
+final class RouteFactory implements RouteFactoryInterface
 {
     /**
      * {@inheritdoc}

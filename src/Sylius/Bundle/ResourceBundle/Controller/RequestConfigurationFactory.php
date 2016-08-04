@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class RequestConfigurationFactory implements RequestConfigurationFactoryInterface
+final class RequestConfigurationFactory implements RequestConfigurationFactoryInterface
 {
     const API_VERSION_HEADER = 'Accept';
     const API_GROUPS_HEADER = 'Accept';

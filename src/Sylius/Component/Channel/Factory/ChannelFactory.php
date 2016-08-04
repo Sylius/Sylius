@@ -16,7 +16,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class ChannelFactory implements ChannelFactoryInterface
+final class ChannelFactory implements ChannelFactoryInterface
 {
     private $defaultFactory;
 
