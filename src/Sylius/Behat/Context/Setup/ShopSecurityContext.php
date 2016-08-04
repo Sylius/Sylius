@@ -14,8 +14,8 @@ namespace Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Service\SecurityServiceInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Component\Core\Repository\UserRepositoryInterface;
 use Sylius\Component\Core\Test\Factory\TestUserFactoryInterface;
+use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Webmozart\Assert\Assert;
 
 /**

@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\UserBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
+use Sylius\Bundle\UserBundle\Controller\UserPasswordController;
 use Sylius\Bundle\UserBundle\EventListener\UserLastLoginSubscriber;
 use Sylius\Bundle\UserBundle\EventListener\UserReloaderListener;
 use Sylius\Bundle\UserBundle\Provider\AbstractUserProvider;
@@ -19,6 +20,7 @@ use Sylius\Bundle\UserBundle\Provider\EmailProvider;
 use Sylius\Bundle\UserBundle\Provider\UsernameOrEmailProvider;
 use Sylius\Bundle\UserBundle\Provider\UsernameProvider;
 use Sylius\Bundle\UserBundle\Reloader\UserReloader;
+use Sylius\Component\Resource\Metadata\Metadata;
 use Sylius\Component\User\Security\Checker\TokenUniquenessChecker;
 use Sylius\Component\User\Security\Generator\UniquePinGenerator;
 use Sylius\Component\User\Security\Generator\UniqueTokenGenerator;
@@ -92,6 +94,7 @@ class SyliusUserExtension extends AbstractResourceExtension
             $this->createReloaders($userType, $container);
             $this->createLastLoginListeners($userType, $container);
             $this->createProviders($userType, $container);
+//            $this->createPasswordControllers($userType, $config['user'], $container);
         }
     }
 
@@ -234,5 +237,35 @@ class SyliusUserExtension extends AbstractResourceExtension
         $providerEmailOrNameBasedDefinition = new DefinitionDecorator($abstractProviderServiceId);
         $providerEmailOrNameBasedDefinition->setClass(UsernameOrEmailProvider::class);
         $container->setDefinition($providerEmailOrNameBasedServiceId, $providerEmailOrNameBasedDefinition);
+    }
+
+    /**
+     * @param string $userType
+     * @param array $config
+     * @param ContainerBuilder $container
+     */
+    private function createPasswordControllers($userType, array $config, ContainerBuilder $container)
+    {
+        $passwordControllerId = sprintf('sylius.controller.%s_user_password', $userType);
+        $repositoryServiceId = sprintf('sylius.repository.%s_user', $userType);
+        $managerServiceId = sprintf('sylius.manager.%s_user', $userType);
+
+        $passwordControllerDefinition = new Definition(UserPasswordController::class);
+        $passwordControllerDefinition->addArgument(new Reference('security.authorization_checker'));
+        $passwordControllerDefinition->addArgument(new Reference('security.token_storage'));
+        $passwordControllerDefinition->addArgument(new Reference('sylius.resource_controller.view_handler'));
+        $passwordControllerDefinition->addArgument(new Reference('form.factory'));
+        $passwordControllerDefinition->addArgument(new Reference('translator'));
+        $passwordControllerDefinition->addArgument(new Reference($repositoryServiceId));
+        $passwordControllerDefinition->addArgument(new Reference($managerServiceId));
+        $passwordControllerDefinition->addArgument(new Reference('event_dispatcher'));
+        $passwordControllerDefinition->addArgument(Metadata::fromAliasAndConfiguration('sylius.user_'.$userType, $config));
+        $passwordControllerDefinition->addArgument(new Reference('sylius.resource_controller.request_configuration_factory'));
+        $passwordControllerDefinition->addArgument(new Reference('router'));
+        $passwordControllerDefinition->addArgument(new Reference(sprintf('sylius.%s_user.generator.password_reset_token', $userType)));
+        $passwordControllerDefinition->addArgument(new Reference(sprintf('sylius.%s_user.generator.password_reset_pin', $userType)));
+        $passwordControllerDefinition->addArgument($config['resetting']['token']['ttl']);
+
+        $container->setDefinition($passwordControllerId, $passwordControllerDefinition);
     }
 }
