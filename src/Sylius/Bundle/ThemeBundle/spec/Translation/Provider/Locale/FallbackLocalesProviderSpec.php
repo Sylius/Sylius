@@ -12,9 +12,8 @@
 namespace spec\Sylius\Bundle\ThemeBundle\Translation;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use Sylius\Bundle\ThemeBundle\Translation\FallbackLocalesProvider;
-use Sylius\Bundle\ThemeBundle\Translation\FallbackLocalesProviderInterface;
+use Sylius\Bundle\ThemeBundle\Translation\Provider\Locale\FallbackLocalesProvider;
+use Sylius\Bundle\ThemeBundle\Translation\Provider\Locale\FallbackLocalesProviderInterface;
 
 /**
  * @mixin FallbackLocalesProvider

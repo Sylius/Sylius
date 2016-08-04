@@ -9,12 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ThemeBundle\Translation\Provider;
+namespace Sylius\Bundle\ThemeBundle\Translation\Resource;
+
+use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class TranslationResource implements TranslationResourceInterface
+final class ThemeTranslationResource implements TranslationResourceInterface
 {
     /**
      * @var string
@@ -37,9 +39,10 @@ final class TranslationResource implements TranslationResourceInterface
     private $domain;
 
     /**
+     * @param ThemeInterface $theme
      * @param string $filepath
      */
-    public function __construct($filepath)
+    public function __construct(ThemeInterface $theme, $filepath)
     {
         $this->name = $filepath;
 
@@ -52,7 +55,7 @@ final class TranslationResource implements TranslationResourceInterface
         }
 
         $this->domain = $parts[0];
-        $this->locale = $parts[1];
+        $this->locale = $parts[1] . '@' . str_replace('/', '-', $theme->getName());
         $this->format = $parts[2];
     }
 

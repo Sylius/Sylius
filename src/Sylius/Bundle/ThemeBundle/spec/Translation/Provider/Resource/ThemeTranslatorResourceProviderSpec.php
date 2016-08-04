@@ -12,14 +12,13 @@
 namespace spec\Sylius\Bundle\ThemeBundle\Translation\Provider;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\ThemeBundle\HierarchyProvider\ThemeHierarchyProviderInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 use Sylius\Bundle\ThemeBundle\Translation\Finder\TranslationFilesFinderInterface;
-use Sylius\Bundle\ThemeBundle\Translation\Provider\ThemeTranslationResource;
-use Sylius\Bundle\ThemeBundle\Translation\Provider\ThemeTranslatorResourceProvider;
-use Sylius\Bundle\ThemeBundle\Translation\Provider\TranslatorResourceProviderInterface;
+use Sylius\Bundle\ThemeBundle\Translation\Provider\Resource\ThemeTranslatorResourceProvider;
+use Sylius\Bundle\ThemeBundle\Translation\Provider\Resource\TranslatorResourceProviderInterface;
+use Sylius\Bundle\ThemeBundle\Translation\Resource\ThemeTranslationResource;
 
 /**
  * @mixin ThemeTranslatorResourceProvider

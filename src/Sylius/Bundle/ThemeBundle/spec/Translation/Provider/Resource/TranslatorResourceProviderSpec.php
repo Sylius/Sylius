@@ -12,10 +12,9 @@
 namespace spec\Sylius\Bundle\ThemeBundle\Translation\Provider;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use Sylius\Bundle\ThemeBundle\Translation\Provider\TranslationResource;
-use Sylius\Bundle\ThemeBundle\Translation\Provider\TranslatorResourceProvider;
-use Sylius\Bundle\ThemeBundle\Translation\Provider\TranslatorResourceProviderInterface;
+use Sylius\Bundle\ThemeBundle\Translation\Provider\Resource\TranslatorResourceProvider;
+use Sylius\Bundle\ThemeBundle\Translation\Provider\Resource\TranslatorResourceProviderInterface;
+use Sylius\Bundle\ThemeBundle\Translation\Resource\TranslationResource;
 
 /**
  * @mixin TranslatorResourceProvider
@@ -26,7 +25,7 @@ final class TranslatorResourceProviderSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Translation\Provider\TranslatorResourceProvider');
+        $this->shouldHaveType(TranslatorResourceProvider::class);
     }
 
     function it_implements_translation_resource_provider_interface()

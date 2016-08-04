@@ -30,22 +30,22 @@
             <argument type="service" id="sylius.context.theme" />
         </service>
 
-        <service id="sylius.theme.translation.loader_provider" class="Sylius\Bundle\ThemeBundle\Translation\Provider\TranslatorLoaderProvider" public="false">
+        <service id="sylius.theme.translation.loader_provider" class="Sylius\Bundle\ThemeBundle\Translation\Provider\Loader\TranslatorLoaderProvider" public="false">
             <argument type="collection" /> <!-- loaders -->
         </service>
 
-        <service id="sylius.theme.translation.resource_provider" class="Sylius\Bundle\ThemeBundle\Translation\Provider\CompositeTranslatorResourceProvider" public="false">
+        <service id="sylius.theme.translation.resource_provider" class="Sylius\Bundle\ThemeBundle\Translation\Provider\Resource\CompositeTranslatorResourceProvider" public="false">
             <argument type="collection">
                 <argument type="service" id="sylius.theme.translation.resource_provider.default" />
                 <argument type="service" id="sylius.theme.translation.resource_provider.theme_aware" />
             </argument>
         </service>
 
-        <service id="sylius.theme.translation.resource_provider.default" class="Sylius\Bundle\ThemeBundle\Translation\Provider\TranslatorResourceProvider" public="false">
+        <service id="sylius.theme.translation.resource_provider.default" class="Sylius\Bundle\ThemeBundle\Translation\Provider\Resource\TranslatorResourceProvider" public="false">
             <argument type="collection" /> <!-- resources filepaths -->
         </service>
 
-        <service id="sylius.theme.translation.resource_provider.theme_aware" class="Sylius\Bundle\ThemeBundle\Translation\Provider\ThemeTranslatorResourceProvider" public="false">
+        <service id="sylius.theme.translation.resource_provider.theme_aware" class="Sylius\Bundle\ThemeBundle\Translation\Provider\Resource\ThemeTranslatorResourceProvider" public="false">
             <argument type="service" id="sylius.theme.translation.files_finder" />
             <argument type="service" id="sylius.repository.theme" />
             <argument type="service" id="sylius.theme.hierarchy_provider" />
@@ -59,6 +59,6 @@
             <argument type="service" id="sylius.theme.translation.ordering_files_finder.inner" />
         </service>
 
-        <service id="sylius.theme.translation.fallback_locales_provider" class="Sylius\Bundle\ThemeBundle\Translation\FallbackLocalesProvider" public="false" />
+        <service id="sylius.theme.translation.fallback_locales_provider" class="Sylius\Bundle\ThemeBundle\Translation\Provider\Locale\FallbackLocalesProvider" public="false" />
     </services>
 </container>

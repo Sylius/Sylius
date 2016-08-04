@@ -9,20 +9,18 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ThemeBundle\Translation\Provider;
+namespace Sylius\Bundle\ThemeBundle\Translation\Provider\Locale;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-interface TranslatorResourceProviderInterface
+interface FallbackLocalesProviderInterface
 {
     /**
-     * @return TranslationResourceInterface[]
-     */
-    public function getResources();
-
-    /**
+     * @param string $locale
+     * @param array $baseFallbackLocales
+     *
      * @return array
      */
-    public function getResourcesLocales();
+    public function computeFallbackLocales($locale, array $baseFallbackLocales);
 }

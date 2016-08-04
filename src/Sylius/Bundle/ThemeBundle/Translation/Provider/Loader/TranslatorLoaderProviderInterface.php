@@ -9,18 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ThemeBundle\Translation;
+namespace Sylius\Bundle\ThemeBundle\Translation\Provider\Loader;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-interface FallbackLocalesProviderInterface
+interface TranslatorLoaderProviderInterface
 {
     /**
-     * @param string $locale
-     * @param array $baseFallbackLocales
-     *
-     * @return array
+     * @return array Format => Loader
      */
-    public function computeFallbackLocales($locale, array $baseFallbackLocales);
+    public function getLoaders();
 }

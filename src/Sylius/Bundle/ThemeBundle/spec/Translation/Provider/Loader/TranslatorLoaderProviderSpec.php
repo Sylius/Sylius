@@ -12,9 +12,8 @@
 namespace spec\Sylius\Bundle\ThemeBundle\Translation\Provider;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use Sylius\Bundle\ThemeBundle\Translation\Provider\TranslatorLoaderProvider;
-use Sylius\Bundle\ThemeBundle\Translation\Provider\TranslatorLoaderProviderInterface;
+use Sylius\Bundle\ThemeBundle\Translation\Provider\Loader\TranslatorLoaderProvider;
+use Sylius\Bundle\ThemeBundle\Translation\Provider\Loader\TranslatorLoaderProviderInterface;
 use Symfony\Component\Translation\Loader\LoaderInterface;
 
 /**
@@ -26,7 +25,7 @@ final class TranslatorLoaderProviderSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Translation\Provider\TranslatorLoaderProvider');
+        $this->shouldHaveType(TranslatorLoaderProvider::class);
     }
 
     function it_implements_translation_loader_provider_interface()

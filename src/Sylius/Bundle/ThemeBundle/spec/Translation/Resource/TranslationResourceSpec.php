@@ -12,28 +12,24 @@
 namespace spec\Sylius\Bundle\ThemeBundle\Translation\Provider;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
-use Sylius\Bundle\ThemeBundle\Translation\Provider\ThemeTranslationResource;
-use Sylius\Bundle\ThemeBundle\Translation\Provider\TranslationResourceInterface;
+use Sylius\Bundle\ThemeBundle\Translation\Resource\TranslationResource;
+use Sylius\Bundle\ThemeBundle\Translation\Resource\TranslationResourceInterface;
 
 /**
- * @mixin ThemeTranslationResource
+ * @mixin TranslationResource
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class ThemeTranslationResourceSpec extends ObjectBehavior
+final class TranslationResourceSpec extends ObjectBehavior
 {
-    function let(ThemeInterface $theme)
+    function let()
     {
-        $theme->getName()->willReturn('theme/name');
-
-        $this->beConstructedWith($theme, 'my-domain.my-locale.my-format');
+        $this->beConstructedWith('my-domain.my-locale.my-format');
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(ThemeTranslationResource::class);
+        $this->shouldHaveType(TranslationResource::class);
     }
 
     function it_implements_translation_resource_interface()
@@ -45,15 +41,13 @@ final class ThemeTranslationResourceSpec extends ObjectBehavior
     {
         $this->getName()->shouldReturn('my-domain.my-locale.my-format');
         $this->getDomain()->shouldReturn('my-domain');
-        $this->getLocale()->shouldReturn('my-locale@theme-name');
+        $this->getLocale()->shouldReturn('my-locale');
         $this->getFormat()->shouldReturn('my-format');
     }
 
-    function it_throws_an_invalid_argument_exception_if_failed_to_instantiate_with_given_filepath(ThemeInterface $theme)
+    function it_throws_an_invalid_argument_exception_if_failed_to_instantiate_with_given_filepath()
     {
-        $theme->getName()->willReturn('theme/name');
-
-        $this->beConstructedWith($theme, 'one.dot');
+        $this->beConstructedWith('one.dot');
 
         $this->shouldThrow(\InvalidArgumentException::class)->duringInstantiation();
     }
