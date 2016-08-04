@@ -292,17 +292,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasPaymentPrice($price)
-    {
-        $payments = $this->getElement('payments')->getText();
-
-        return false !== strpos($payments, $price);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getPaymentPrice()
+    public function getPaymentAmount()
     {
         $paymentsPrice = $this->getElement('payments')->find('css', '.description');
 

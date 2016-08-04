@@ -1,8 +1,8 @@
 @customer_account
-Feature: Viewing payment's cost on my account panel
+Feature: Viewing payment's amount on my account panel
     In order to know how much I have to pay for my order
     As a Customer
-    I want to see the payment cost of my order with all fees
+    I want to see the payment amount of my order with all fees
 
     Background:
         Given the store operates on a single channel in "France"
@@ -21,4 +21,4 @@ Feature: Viewing payment's cost on my account panel
     Scenario: Seeing total payment
         When I view the summary of the order "#00000666"
         Then I should see "€66.60" as order's total
-        And I should see "€66.60" as payment's cost
+        And I should see that I have to pay "€66.60" for this order

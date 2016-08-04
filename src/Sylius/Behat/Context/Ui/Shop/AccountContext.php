@@ -359,16 +359,13 @@ final class AccountContext implements Context
     }
 
     /**
-     * @Then I should see :paymentCost as payment's cost
+     * @Then I should see that I have to pay :paymentAmount for this order
      */
-    public function iShouldSeeAsPaymentsCost($paymentCost)
+    public function iShouldSeeIHaveToPayForThisOrder($paymentAmount)
     {
-        $actualCost = $this->orderShowPage->getPaymentPrice();
+        $actualAmount = $this->orderShowPage->getPaymentPrice();
 
-        Assert::true(
-            $this->orderShowPage->hasPaymentPrice($paymentCost),
-            sprintf('The payment\'s cost should be %s, but is %s.', $paymentCost, $actualCost)
-        );
+        Assert::eq($paymentAmount, $actualAmount);
     }
 
     /**

@@ -12,6 +12,7 @@
 namespace spec\Sylius\Component\Core\OrderProcessing;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderProcessing\PaymentProcessor;
 use Sylius\Component\Core\OrderProcessing\PaymentProcessorInterface;
@@ -175,9 +176,10 @@ final class PaymentProcessorSpec extends ObjectBehavior
         $this->processOrderPayments($order);
     }
 
-    function it_does_not_add_payment_if_the_order_is_cancelled(OrderInterface $order)
+    function it_does_not_add_a_new_payment_if_the_order_is_cancelled(OrderInterface $order)
     {
         $order->getState()->willReturn(OrderInterface::STATE_CANCELLED);
+        $order->addPayment(Argument::any())->shouldNotBeCalled();
 
         $this->processOrderPayments($order);
     }

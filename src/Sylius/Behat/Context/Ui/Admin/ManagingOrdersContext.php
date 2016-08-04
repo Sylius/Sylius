@@ -260,16 +260,13 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then the order's payment should (also) be :paymentCost
+     * @Then the order's payment should (also) be :paymentAmount
      */
-    public function theOrdersPaymentShouldBe($paymentCost)
+    public function theOrdersPaymentShouldBe($paymentAmount)
     {
-        $actualPaymentCost = $this->showPage->getPaymentPrice();
+        $actualPaymentAmount = $this->showPage->getPaymentAmount();
 
-        Assert::true(
-            $this->showPage->hasPaymentPrice($paymentCost),
-            sprintf('Order\'s payment should be %s, but is %s', $paymentCost, $actualPaymentCost)
-        );
+        Assert::eq($paymentAmount, $actualPaymentAmount);
     }
 
     /**
@@ -613,16 +610,12 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then /^there should be(?:| only) (\d+) payment(?:|s)$/
+     * @Then /^there should be(?:| only) (\d+) payments?$/
      */
     public function theOrderShouldHaveNumberOfPayments($number)
     {
         $actualNumberOfPayments = $this->showPage->getPaymentsCount();
 
-        Assert::eq(
-            $number,
-            $actualNumberOfPayments,
-            sprintf('Payments count should equal "%d", but equals "%d" instead.', $number, $actualNumberOfPayments)
-        );
+        Assert::eq($number, $actualNumberOfPayments);
     }
 }

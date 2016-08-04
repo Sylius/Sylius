@@ -1,8 +1,8 @@
 @managing_orders
-Feature: Seeing payment's cost of an order including all fees
-    In order to see how much a customer actually has to pay
+Feature: Seeing order's payment amount including all fees
+    In order to see how much a customer has to pay for his order
     As an Administrator
-    I want to see the exact payment cost including all additional fees
+    I want to see the exact payment amount including all additional fees
 
     Background:
         Given the store operates on a single channel in "France"
