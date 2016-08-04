@@ -5,10 +5,10 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/../../../../bash/common.li
 run_behat() {
     local code=0
 
-    print_header "Testing (Behat - brand new, regular scenarios; ~@javascript && ~@legacy && ~@todo && ~@cli)" "Sylius"
-    run_command "bin/behat --strict -f progress -p cached --tags=\"~@javascript && ~@legacy && ~@todo && ~@cli\"" || code=$?
+    print_header "Testing (Behat - brand new, regular scenarios; ~@javascript && ~@todo && ~@cli)" "Sylius"
+    run_command "bin/behat --strict -f progress -p cached --tags=\"~@javascript && ~@todo && ~@cli\"" || code=$?
     if [[ ${code} = 1 ]]; then
-        run_command "bin/behat --strict -f progress -p cached --tags=\"~@javascript && ~@legacy && ~@todo && ~@cli\" --rerun" ; code=$?
+        run_command "bin/behat --strict -f progress -p cached --tags=\"~@javascript && ~@todo && ~@cli\" --rerun" ; code=$?
     fi
 
     return ${code}
