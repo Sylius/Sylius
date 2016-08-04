@@ -21,3 +21,17 @@ Feature: Adding a new tax rate
         And I add it
         Then I should be notified that it has been successfully created
         And the tax rate "European Union Sales Tax" should appear in the registry
+
+    @todo
+    Scenario: Adding a new tax rate wich will be included in product price
+        Given I want to create a new tax rate
+        When I specify its code as "EUROPEAN_UNION_SALES_TAX"
+        And I name it "European Union Sales Tax"
+        And I define it for the "European Union" zone
+        And I make it applicable for the "Food and Beverage" tax category
+        And I specify its amount as 20%
+        And I choose the default tax calculator
+        And I choose "Included in price" option
+        And I add it
+        Then I should be notified that it has been successfully created
+        And the tax rate "European Union Sales Tax" should appear in the registry
