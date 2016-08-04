@@ -11,15 +11,11 @@
 
 namespace Sylius\Component\Inventory\Model;
 
-use Sylius\Component\Resource\Model\TimestampableTrait;
-
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class InventoryUnit implements InventoryUnitInterface
 {
-    use TimestampableTrait;
-
     /**
      * @var mixed
      */
@@ -34,11 +30,6 @@ class InventoryUnit implements InventoryUnitInterface
      * @var string
      */
     protected $inventoryState = InventoryUnitInterface::STATE_CHECKOUT;
-
-    public function __construct()
-    {
-        $this->createdAt = new \DateTime();
-    }
 
     /**
      * {@inheritdoc}
