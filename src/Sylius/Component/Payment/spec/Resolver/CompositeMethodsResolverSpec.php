@@ -15,7 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
-use Sylius\Component\Payment\Resolver\MethodsResolverInterface;
+use Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface;
 use Sylius\Component\Registry\PrioritizedServiceRegistryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -36,12 +36,12 @@ final class CompositeMethodsResolverSpec extends ObjectBehavior
 
     function it_implements_Sylius_payment_methods_resolver_interface()
     {
-        $this->shouldImplement(MethodsResolverInterface::class);
+        $this->shouldImplement(PaymentMethodsResolverInterface::class);
     }
 
     function it_uses_registry_to_provide_payment_methods_for_payment(
-        MethodsResolverInterface $firstMethodsResolver,
-        MethodsResolverInterface $secondMethodsResolver,
+        PaymentMethodsResolverInterface $firstMethodsResolver,
+        PaymentMethodsResolverInterface $secondMethodsResolver,
         PrioritizedServiceRegistryInterface $resolversRegistry,
         PaymentMethodInterface $paymentMethod,
         PaymentInterface $payment
@@ -57,8 +57,8 @@ final class CompositeMethodsResolverSpec extends ObjectBehavior
     }
 
     function it_returns_empty_array_if_none_of_registered_resolvers_support_passed_payment(
-        MethodsResolverInterface $firstMethodsResolver,
-        MethodsResolverInterface $secondMethodsResolver,
+        PaymentMethodsResolverInterface $firstMethodsResolver,
+        PaymentMethodsResolverInterface $secondMethodsResolver,
         PrioritizedServiceRegistryInterface $resolversRegistry,
         PaymentInterface $payment
     ) {
@@ -71,8 +71,8 @@ final class CompositeMethodsResolverSpec extends ObjectBehavior
     }
 
     function it_supports_payment_if_at_least_one_registered_resolver_supports_it(
-        MethodsResolverInterface $firstMethodsResolver,
-        MethodsResolverInterface $secondMethodsResolver,
+        PaymentMethodsResolverInterface $firstMethodsResolver,
+        PaymentMethodsResolverInterface $secondMethodsResolver,
         PrioritizedServiceRegistryInterface $resolversRegistry,
         PaymentInterface $payment
     ) {
@@ -85,8 +85,8 @@ final class CompositeMethodsResolverSpec extends ObjectBehavior
     }
 
     function it_does_not_support_payment_if_none_of_registered_resolvers_supports_it(
-        MethodsResolverInterface $firstMethodsResolver,
-        MethodsResolverInterface $secondMethodsResolver,
+        PaymentMethodsResolverInterface $firstMethodsResolver,
+        PaymentMethodsResolverInterface $secondMethodsResolver,
         PrioritizedServiceRegistryInterface $resolversRegistry,
         PaymentInterface $payment
     ) {

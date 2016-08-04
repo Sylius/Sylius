@@ -17,7 +17,7 @@ use Sylius\Component\Registry\PrioritizedServiceRegistryInterface;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class CompositeMethodsResolver implements MethodsResolverInterface
+class CompositeMethodsResolver implements PaymentMethodsResolverInterface
 {
     /**
      * @var PrioritizedServiceRegistryInterface
@@ -37,7 +37,7 @@ class CompositeMethodsResolver implements MethodsResolverInterface
      */
     public function getSupportedMethods(PaymentInterface $payment)
     {
-        /** @var MethodsResolverInterface $resolver */
+        /** @var PaymentMethodsResolverInterface $resolver */
         foreach ($this->resolversRegistry->all() as $resolver) {
             if ($resolver->supports($payment)) {
                 return $resolver->getSupportedMethods($payment);
@@ -52,7 +52,7 @@ class CompositeMethodsResolver implements MethodsResolverInterface
      */
     public function supports(PaymentInterface $payment)
     {
-        /** @var MethodsResolverInterface $resolver */
+        /** @var PaymentMethodsResolverInterface $resolver */
         foreach ($this->resolversRegistry->all() as $resolver) {
             if ($resolver->supports($payment)) {
                 return true;

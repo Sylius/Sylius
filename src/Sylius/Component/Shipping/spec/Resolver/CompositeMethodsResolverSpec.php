@@ -16,7 +16,7 @@ use Sylius\Component\Registry\PrioritizedServiceRegistryInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 use Sylius\Component\Shipping\Resolver\CompositeMethodsResolver;
-use Sylius\Component\Shipping\Resolver\MethodsResolverInterface;
+use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
 
 /**
  * @mixin CompositeMethodsResolver
@@ -37,12 +37,12 @@ final class CompositeMethodsResolverSpec extends ObjectBehavior
 
     function it_implements_methods_resolver_interface()
     {
-        $this->shouldImplement(MethodsResolverInterface::class);
+        $this->shouldImplement(ShippingMethodsResolverInterface::class);
     }
     
     function it_uses_registry_to_provide_shipping_methods_for_shipping_subject(
-        MethodsResolverInterface $firstMethodsResolver,
-        MethodsResolverInterface $secondMethodsResolver,
+        ShippingMethodsResolverInterface $firstMethodsResolver,
+        ShippingMethodsResolverInterface $secondMethodsResolver,
         PrioritizedServiceRegistryInterface $resolversRegistry,
         ShippingMethodInterface $shippingMethod,
         ShippingSubjectInterface $shippingSubject
@@ -58,8 +58,8 @@ final class CompositeMethodsResolverSpec extends ObjectBehavior
     }
 
     function it_returns_empty_array_if_none_of_registered_resolvers_support_passed_shipping_subject(
-        MethodsResolverInterface $firstMethodsResolver,
-        MethodsResolverInterface $secondMethodsResolver,
+        ShippingMethodsResolverInterface $firstMethodsResolver,
+        ShippingMethodsResolverInterface $secondMethodsResolver,
         PrioritizedServiceRegistryInterface $resolversRegistry,
         ShippingSubjectInterface $shippingSubject
     ) {
@@ -72,8 +72,8 @@ final class CompositeMethodsResolverSpec extends ObjectBehavior
     }
 
     function it_supports_subject_if_any_resolver_from_registry_supports_it(
-        MethodsResolverInterface $firstMethodsResolver,
-        MethodsResolverInterface $secondMethodsResolver,
+        ShippingMethodsResolverInterface $firstMethodsResolver,
+        ShippingMethodsResolverInterface $secondMethodsResolver,
         PrioritizedServiceRegistryInterface $resolversRegistry,
         ShippingSubjectInterface $shippingSubject
     ) {
@@ -86,8 +86,8 @@ final class CompositeMethodsResolverSpec extends ObjectBehavior
     }
 
     function it_does_not_support_subject_if_none_of_resolvers_from_registry_supports_it(
-        MethodsResolverInterface $firstMethodsResolver,
-        MethodsResolverInterface $secondMethodsResolver,
+        ShippingMethodsResolverInterface $firstMethodsResolver,
+        ShippingMethodsResolverInterface $secondMethodsResolver,
         PrioritizedServiceRegistryInterface $resolversRegistry,
         ShippingSubjectInterface $shippingSubject
     ) {

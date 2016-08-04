@@ -15,13 +15,13 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
-use Sylius\Component\Payment\Resolver\MethodsResolverInterface;
+use Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-final class MethodsResolverSpec extends ObjectBehavior
+final class PaymentMethodsResolverSpec extends ObjectBehavior
 {
     function let(RepositoryInterface $methodRepository)
     {
@@ -30,12 +30,12 @@ final class MethodsResolverSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Payment\Resolver\MethodsResolver');
+        $this->shouldHaveType('Sylius\Component\Payment\Resolver\PaymentMethodsResolver');
     }
 
     function it_implements_methods_resolver_interface()
     {
-        $this->shouldImplement(MethodsResolverInterface::class);
+        $this->shouldImplement(PaymentMethodsResolverInterface::class);
     }
 
     function it_returns_all_methods_enabled_for_given_payment(

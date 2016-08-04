@@ -17,7 +17,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class MethodsResolver implements MethodsResolverInterface
+class PaymentMethodsResolver implements PaymentMethodsResolverInterface
 {
     /**
      * @var RepositoryInterface

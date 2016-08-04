@@ -395,12 +395,12 @@ Resolvers
 
 .. _method-resolver:
 
-MethodsResolver
-~~~~~~~~~~~~~~~
+ShippingMethodsResolver
+~~~~~~~~~~~~~~~~~~~~~~~
 
 Sylius has flexible system for displaying the shipping methods available for given shippables (subjects which implement
 **ShippableInterface**), which is base on **ShippingCategory** objects and category requirements. The requirements are constant
-default defined in **ShippingMethodInterface**. To provide information about the number of allowed methods it use **MethodResolver**.
+default defined in **ShippingMethodInterface**. To provide information about the number of allowed methods it use **ShippingMethodResolver**.
 
 First you need to create a few instances of **ShippingCategory** class:
 
@@ -448,7 +448,7 @@ Finally you can create a method resolver:
     use Sylius\Component\Shipping\Model\RuleInterface;
     use Sylius\Component\Shipping\Checker\Registry\RuleCheckerRegistry;
     use Sylius\Component\Shipping\Checker\ItemCountRuleChecker;
-    use Sylius\Component\Shipping\Resolver\MethodsResolver;
+    use Sylius\Component\Shipping\Resolver\ShippingMethodsResolver;
     use Sylius\Component\Shipping\Checker\ShippingMethodEligibilityChecker;
 
     $ruleCheckerRegistry = new RuleCheckerRegistry();
@@ -470,7 +470,7 @@ Finally you can create a method resolver:
     $shipment->addItem($shipmentItem);
     $shipment->addItem($shipmentItem2);
 
-    $methodResolver = new MethodsResolver($shippingRepository, $methodEligibilityChecker);
+    $methodResolver = new ShippingMethodsResolver($shippingRepository, $methodEligibilityChecker);
     $methodResolver->getSupportedMethods($shipment);
 
 The ``->getSupportedMethods($shipment)`` method return the number of methods allowed for shipment object.
