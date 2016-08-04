@@ -76,6 +76,17 @@ sylius_fixtures:
                                 password: sylius
                                 enabled: true
                                 admin: true
+                api_admin_user:
+                    name: user
+                    options:
+                        custom:
+                            -
+                                email: api@example.com
+                                first_name: Luke
+                                last_name: Brushwood
+                                password: sylius-api
+                                enabled: true
+                                api: true
 
                 tax_category:
                     options:
