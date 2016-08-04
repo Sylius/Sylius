@@ -11,8 +11,9 @@
 
 namespace Sylius\Bundle\ThemeBundle\Translation;
 
-use Sylius\Bundle\ThemeBundle\Translation\Provider\TranslatorLoaderProviderInterface;
-use Sylius\Bundle\ThemeBundle\Translation\Provider\TranslatorResourceProviderInterface;
+use Sylius\Bundle\ThemeBundle\Translation\Provider\Loader\TranslatorLoaderProviderInterface;
+use Sylius\Bundle\ThemeBundle\Translation\Provider\Locale\FallbackLocalesProviderInterface;
+use Sylius\Bundle\ThemeBundle\Translation\Provider\Resource\TranslatorResourceProviderInterface;
 use Symfony\Component\HttpKernel\CacheWarmer\WarmableInterface;
 use Symfony\Component\Translation\MessageSelector;
 use Symfony\Component\Translation\Translator as BaseTranslator;
@@ -41,6 +42,11 @@ final class Translator extends BaseTranslator implements WarmableInterface
     private $resourceProvider;
 
     /**
+     * @var FallbackLocalesProviderInterface
+     */
+    private $fallbackLocalesProvider;
+
+    /**
      * @var bool
      */
     private $resourcesLoaded = false;
@@ -48,6 +54,7 @@ final class Translator extends BaseTranslator implements WarmableInterface
     /**
      * @param TranslatorLoaderProviderInterface $loaderProvider
      * @param TranslatorResourceProviderInterface $resourceProvider
+     * @param FallbackLocalesProviderInterface $fallbackLocalesProvider
      * @param MessageSelector $messageSelector
      * @param string $locale
      * @param array $options
@@ -55,6 +62,7 @@ final class Translator extends BaseTranslator implements WarmableInterface
     public function __construct(
         TranslatorLoaderProviderInterface $loaderProvider,
         TranslatorResourceProviderInterface $resourceProvider,
+        FallbackLocalesProviderInterface $fallbackLocalesProvider,
         MessageSelector $messageSelector,
         $locale,
         array $options = []
@@ -63,6 +71,7 @@ final class Translator extends BaseTranslator implements WarmableInterface
 
         $this->loaderProvider = $loaderProvider;
         $this->resourceProvider = $resourceProvider;
+        $this->fallbackLocalesProvider = $fallbackLocalesProvider;
 
         $this->options = array_merge($this->options, $options);
         if (null !== $this->options['cache_dir'] && $this->options['debug']) {
@@ -112,15 +121,7 @@ final class Translator extends BaseTranslator implements WarmableInterface
      */
     protected function computeFallbackLocales($locale)
     {
-        $locales = parent::computeFallbackLocales($locale);
-
-        while (strrchr($locale, '_') !== false) {
-            $locale = substr($locale, 0, -strlen(strrchr($locale, '_')));
-
-            array_unshift($locales, $locale);
-        }
-
-        return array_unique($locales);
+        return $this->fallbackLocalesProvider->computeFallbackLocales($locale, $this->getFallbackLocales());
     }
 
     private function initialize()

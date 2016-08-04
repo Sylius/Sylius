@@ -12,14 +12,13 @@
 namespace spec\Sylius\Bundle\ThemeBundle\Translation\Provider;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\ThemeBundle\HierarchyProvider\ThemeHierarchyProviderInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 use Sylius\Bundle\ThemeBundle\Translation\Finder\TranslationFilesFinderInterface;
-use Sylius\Bundle\ThemeBundle\Translation\Provider\ThemeTranslationResource;
-use Sylius\Bundle\ThemeBundle\Translation\Provider\ThemeTranslatorResourceProvider;
-use Sylius\Bundle\ThemeBundle\Translation\Provider\TranslatorResourceProviderInterface;
+use Sylius\Bundle\ThemeBundle\Translation\Provider\Resource\ThemeTranslatorResourceProvider;
+use Sylius\Bundle\ThemeBundle\Translation\Provider\Resource\TranslatorResourceProviderInterface;
+use Sylius\Bundle\ThemeBundle\Translation\Resource\ThemeTranslationResource;
 
 /**
  * @mixin ThemeTranslatorResourceProvider
@@ -38,7 +37,7 @@ final class ThemeTranslatorResourceProviderSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ThemeBundle\Translation\Provider\ThemeTranslatorResourceProvider');
+        $this->shouldHaveType(ThemeTranslatorResourceProvider::class);
     }
 
     function it_implements_translator_resource_provider_interface()
@@ -131,7 +130,7 @@ final class ThemeTranslatorResourceProviderSpec extends ObjectBehavior
 
         $translationFilesFinder->findTranslationFiles('/theme/path')->willReturn(['/theme/path/messages.en.yml']);
 
-        $this->getResourcesLocales()->shouldReturn(['en_theme-name']);
+        $this->getResourcesLocales()->shouldReturn(['en@theme-name']);
     }
 
     function it_returns_resources_locales_while_using_one_nested_theme(
@@ -153,7 +152,7 @@ final class ThemeTranslatorResourceProviderSpec extends ObjectBehavior
         $translationFilesFinder->findTranslationFiles('/main/theme/path')->willReturn(['/main/theme/path/messages.en.yml']);
         $translationFilesFinder->findTranslationFiles('/parent/theme/path')->willReturn(['/parent/theme/path/messages.en.yml']);
 
-        $this->getResourcesLocales()->shouldReturn(['en_main-theme-name']);
+        $this->getResourcesLocales()->shouldReturn(['en@main-theme-name']);
     }
 
     function it_returns_resources_locales_while_using_more_than_one_theme(
@@ -176,6 +175,6 @@ final class ThemeTranslatorResourceProviderSpec extends ObjectBehavior
         $translationFilesFinder->findTranslationFiles('/main/theme/path')->willReturn(['/main/theme/path/messages.en.yml']);
         $translationFilesFinder->findTranslationFiles('/parent/theme/path')->willReturn(['/parent/theme/path/messages.en.yml']);
 
-        $this->getResourcesLocales()->shouldReturn(['en_main-theme-name', 'en_parent-theme-name']);
+        $this->getResourcesLocales()->shouldReturn(['en@main-theme-name', 'en@parent-theme-name']);
     }
 }

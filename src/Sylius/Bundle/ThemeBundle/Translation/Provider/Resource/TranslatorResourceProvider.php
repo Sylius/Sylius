@@ -9,7 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ThemeBundle\Translation\Provider;
+namespace Sylius\Bundle\ThemeBundle\Translation\Provider\Resource;
+
+use Sylius\Bundle\ThemeBundle\Translation\Resource\TranslationResource;
+use Sylius\Bundle\ThemeBundle\Translation\Resource\TranslationResourceInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>

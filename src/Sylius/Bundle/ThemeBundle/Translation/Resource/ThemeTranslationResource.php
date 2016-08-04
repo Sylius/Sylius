@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ThemeBundle\Translation\Provider;
+namespace Sylius\Bundle\ThemeBundle\Translation\Resource;
 
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 
@@ -55,7 +55,7 @@ final class ThemeTranslationResource implements TranslationResourceInterface
         }
 
         $this->domain = $parts[0];
-        $this->locale = $parts[1] . '_' . str_replace('/', '-', $theme->getName());
+        $this->locale = $parts[1] . '@' . str_replace('/', '-', $theme->getName());
         $this->format = $parts[2];
     }
 

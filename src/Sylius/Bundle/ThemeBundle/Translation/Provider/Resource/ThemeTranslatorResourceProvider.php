@@ -9,12 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ThemeBundle\Translation\Provider;
+namespace Sylius\Bundle\ThemeBundle\Translation\Provider\Resource;
 
 use Sylius\Bundle\ThemeBundle\HierarchyProvider\ThemeHierarchyProviderInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Bundle\ThemeBundle\Repository\ThemeRepositoryInterface;
 use Sylius\Bundle\ThemeBundle\Translation\Finder\TranslationFilesFinderInterface;
+use Sylius\Bundle\ThemeBundle\Translation\Resource\ThemeTranslationResource;
+use Sylius\Bundle\ThemeBundle\Translation\Resource\TranslationResourceInterface;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>

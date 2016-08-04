@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\ThemeBundle\Translation\Provider;
+namespace Sylius\Bundle\ThemeBundle\Translation\Provider\Loader;
 
 use Symfony\Component\Translation\Loader\LoaderInterface;
 
