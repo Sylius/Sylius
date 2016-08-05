@@ -311,6 +311,7 @@ sylius:
         filters: Filters
         first_name: 'First name'
         forgot_password: 'Forgot password'
+        fulfilled: Fulfilled
         fulfill: Fulfill
         fulfilled: Fulfilled
         gateway: Gateway
