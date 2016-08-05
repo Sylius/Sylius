@@ -12,7 +12,12 @@ sylius:
             last_name: Efternamn
             email: E-post
             phone_number: Telefonnummer
+            gender: Kön
+            birthday: Födelsedag
             billing_address: Faktureringsadress
             different_billing_address: Använda annan adress för fakturering?
+            only_customer_registration: Skapa konto?
     gender:
         unknown: Okänd
+        male: Man
+        female: Kvinna

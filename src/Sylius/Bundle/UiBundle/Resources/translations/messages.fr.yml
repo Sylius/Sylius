@@ -491,6 +491,7 @@ sylius:
         not_contains: Ne contient pas
         not_empty: Non vide
         not_in: Pas dans
+        not_verified: Non vérifié
         notes: Notes
         notify_customer: Informer le client
         number: Numéro
@@ -504,6 +505,7 @@ sylius:
         order_comments: Commentaires sur la commande
         order_confirmation_name: Confirmation de commande
         order_details: Détails de votre commande
+        order_history: Historique des commandes
         order_item_product: Élément
         order_state: Statut de la commande
         order_summary: Récapitulatif de la commande
