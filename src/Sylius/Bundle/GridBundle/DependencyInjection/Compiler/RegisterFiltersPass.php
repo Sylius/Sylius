@@ -20,25 +20,29 @@ use Symfony\Component\DependencyInjection\Reference;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class RegisterFiltersPass implements CompilerPassInterface
+class RegisterFiltersPass extends AbstractRegisterServicePass
 {
     /**
      * {@inheritdoc}
      */
-    public function process(ContainerBuilder $container)
+    protected function getRegistryIdentifier()
     {
-        if (!$container->hasDefinition('sylius.registry.grid_filter')) {
-            return;
-        }
+        return 'sylius.registry.grid_filter';
+    }
 
-        $registry = $container->getDefinition('sylius.registry.grid_filter');
+    /**
+     * {@inheritdoc}
+     */
+    protected function getTagName()
+    {
+        return 'sylius.grid_filter';
+    }
 
-        foreach ($container->findTaggedServiceIds('sylius.grid_filter') as $id => $attributes) {
-            if (!isset($attributes[0]['type']))  {
-                throw new \InvalidArgumentException('Tagged grid filters needs to have `type` attribute.');
-            }
-
-            $registry->addMethodCall('register', array($attributes[0]['type'], new Reference($id)));
-        }
+    /**
+     * {@inheritdoc}
+     */
+    protected function getIdentifierAttribute()
+    {
+        return 'type';
     }
 }
