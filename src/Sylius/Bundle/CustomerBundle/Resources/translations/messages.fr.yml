@@ -12,7 +12,12 @@ sylius:
             last_name: Nom
             email: E-mail
             phone_number: Téléphone
+            gender: Sexe 
+            birthday: Date d’anniversaire
             billing_address: Adresse de facturation
             different_billing_address: Utiliser une adresse différente pour la facturation ?
+            only_customer_registration: Créer un compte?
     gender:
         unknown: Inconnu
+        male: Homme
+        female: Femme
