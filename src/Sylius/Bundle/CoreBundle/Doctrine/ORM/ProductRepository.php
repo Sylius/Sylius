@@ -218,7 +218,7 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
             ->andWhere('taxon.code = :code')
             ->innerJoin('o.channels', 'channel')
             ->andWhere('channel = :channel')
-            ->andWhere('o.enabled = 1')
+            ->andWhere('o.enabled = true')
             ->setParameter('code', $code)
             ->setParameter('channel', $channel)
             ->getQuery()
