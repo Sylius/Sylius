@@ -138,6 +138,7 @@ class ItemResolver implements ItemResolverInterface
         foreach ($cart->getItems() as $cartItem) {
             if ($cartItem->equals($item)) {
                 $quantity += $cartItem->getQuantity();
+                $item = $cartItem;
                 break;
             }
         }
