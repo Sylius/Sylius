@@ -113,4 +113,42 @@ EOT;
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'zone/index_response', Response::HTTP_OK);
     }
+
+    /**
+     * @test
+     */
+    public function it_denies_access_to_zone_details_for_not_authenticated_users()
+    {
+        $this->client->request('GET', '/api/zones/1');
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
+    }
+
+    /**
+     * @test
+     */
+    public function it_returns_not_found_response_when_requesting_details_of_a_zone_which_does_not_exist()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+
+        $this->client->request('GET', '/api/zones/-1', [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
+    }
+
+    /**
+     * @test
+     */
+    public function it_shows_zone_details()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $zones = $this->loadFixturesFromFile('resources/zones.yml');
+
+        $this->client->request('GET', '/api/zones/'.$zones['zone_eu']->getId(), [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'zone/show_response', Response::HTTP_OK);
+    }
 }
