@@ -80,6 +80,7 @@ final class UserExampleFactory implements ExampleFactoryInterface
                 })
                 ->setAllowedTypes('enabled', 'bool')
                 ->setDefault('admin', false)
+                ->setDefault('api', false)
                 ->setAllowedTypes('admin', 'bool')
                 ->setDefault('password', 'password123')
         ;
@@ -105,18 +106,32 @@ final class UserExampleFactory implements ExampleFactoryInterface
         $user->addRole('ROLE_USER');
 
         if ($options['admin']) {
-            $user->addRole('ROLE_ADMINISTRATION_ACCESS');
+            $this->addUserRole($user, 'ROLE_ADMINISTRATION_ACCESS', 'administrator');
+        }
 
-            /** @var RoleInterface $adminRole */
-            $adminRole = $this->roleRepository->findOneBy(['code' => 'administrator']);
-
-            if (null !== $adminRole) {
-                $user->addAuthorizationRole($adminRole);
-            }
+        if ($options['api']) {
+            $this->addUserRole($user, 'ROLE_API_ACCESS', 'api_administrator');
         }
 
         $user->setCustomer($customer);
 
         return $user;
+    }
+
+    /**
+     * @param UserInterface $user
+     * @param string $role
+     * @param string $authorizationRole
+     */
+    private function addUserRole(UserInterface $user, $role, $authorizationRole)
+    {
+        $user->addRole($role);
+
+        /** @var RoleInterface $adminRole */
+        $adminRole = $this->roleRepository->findOneBy(['code' => $authorizationRole]);
+
+        if (null !== $adminRole) {
+            $user->addAuthorizationRole($adminRole);
+        }
     }
 }
