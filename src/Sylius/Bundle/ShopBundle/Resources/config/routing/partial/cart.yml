@@ -8,8 +8,8 @@ sylius_shop_partial_cart_item_create:
         _controller: sylius.controller.cart_item:createAction
         _sylius:
             factory:
-                method: createForProductWithId
-                arguments: [$productId]
+                method: createForProduct
+                arguments: [expr:service('sylius.repository.product').find($productId)]
             form:
                 type: sylius_cart_item
                 options:
