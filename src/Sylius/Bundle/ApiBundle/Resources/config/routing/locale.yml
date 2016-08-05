@@ -8,9 +8,9 @@ sylius_api_locale_index:
         _controller: sylius.controller.locale:indexAction
         _sylius:
             serialization_groups: [Default]
-            paginate:   $limit
+            paginate: $limit
             filterable: true
-            sortable:   true
+            sortable: true
             sorting:
                 createdAt: desc
 

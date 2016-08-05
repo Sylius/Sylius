@@ -10,7 +10,7 @@ sylius_api_payment_method_index:
             paginate: $limit
             sortable: true
             sorting:
-                name: desc
+                id: desc
 
 sylius_api_payment_method_create:
     path: /
