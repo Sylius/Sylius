@@ -112,7 +112,7 @@ class ORMTranslatableListener implements EventSubscriber
         } catch (LocaleNotFoundException $exception) {
             $entity->setCurrentLocale($this->localeProvider->getDefaultLocaleCode());
         }
-        $entity->setFallbackLocale($this->localeProvider->getDefaultLocaleCode());
+        $entity->setFallbackLocale($this->localeProvider->getFallbackLocaleCode());
     }
 
     /**

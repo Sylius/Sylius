@@ -26,7 +26,7 @@ final class LocaleProviderSpec extends ObjectBehavior
 {
     function let(RepositoryInterface $localeRepository)
     {
-        $this->beConstructedWith($localeRepository, 'pl_PL');
+        $this->beConstructedWith($localeRepository, 'pl_PL', 'en_US');
     }
 
     function it_is_initializable()
@@ -39,7 +39,7 @@ final class LocaleProviderSpec extends ObjectBehavior
         $this->shouldImplement(LocaleProviderInterface::class);
     }
 
-    function it_returns_all_enabled_locales(RepositoryInterface $localeRepository, LocaleInterface $locale)
+    function it_returns_all_enabled_locales_codes(RepositoryInterface $localeRepository, LocaleInterface $locale)
     {
         $localeRepository->findBy(['enabled' => true])->willReturn([$locale]);
         $locale->getCode()->willReturn('en_US');
@@ -47,8 +47,13 @@ final class LocaleProviderSpec extends ObjectBehavior
         $this->getAvailableLocalesCodes()->shouldReturn(['en_US']);
     }
 
-    function it_returns_the_default_locale()
+    function it_returns_the_default_locale_code()
     {
         $this->getDefaultLocaleCode()->shouldReturn('pl_PL');
+    }
+
+    function it_returns_the_fallback_locale_code()
+    {
+        $this->getFallbackLocaleCode()->shouldReturn('en_US');
     }
 }

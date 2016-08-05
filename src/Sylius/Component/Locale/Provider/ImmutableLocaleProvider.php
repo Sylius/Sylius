@@ -27,13 +27,20 @@ final class ImmutableLocaleProvider implements LocaleProviderInterface
     private $defaultLocaleCode;
 
     /**
+     * @var string
+     */
+    private $fallbackLocaleCode;
+
+    /**
      * @param array $availableLocalesCodes
      * @param string $defaultLocaleCode
+     * @param string $fallbackLocaleCode
      */
-    public function __construct(array $availableLocalesCodes, $defaultLocaleCode)
+    public function __construct(array $availableLocalesCodes, $defaultLocaleCode, $fallbackLocaleCode)
     {
         $this->availableLocalesCodes = $availableLocalesCodes;
         $this->defaultLocaleCode = $defaultLocaleCode;
+        $this->fallbackLocaleCode = $fallbackLocaleCode;
     }
 
     /**
@@ -50,5 +57,13 @@ final class ImmutableLocaleProvider implements LocaleProviderInterface
     public function getDefaultLocaleCode()
     {
         return $this->defaultLocaleCode;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getFallbackLocaleCode()
+    {
+        return $this->fallbackLocaleCode;
     }
 }

@@ -24,7 +24,7 @@ final class ImmutableLocaleProviderSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith(['pl_PL', 'en_US'], 'pl_PL');
+        $this->beConstructedWith(['pl_PL', 'en_US'], 'pl_PL', 'en_US');
     }
 
     function it_is_initializable()
@@ -45,5 +45,10 @@ final class ImmutableLocaleProviderSpec extends ObjectBehavior
     function it_returns_the_default_locale_code()
     {
         $this->getDefaultLocaleCode()->shouldReturn('pl_PL');
+    }
+
+    function it_returns_the_fallback_locale_code()
+    {
+        $this->getFallbackLocaleCode()->shouldReturn('en_US');
     }
 }

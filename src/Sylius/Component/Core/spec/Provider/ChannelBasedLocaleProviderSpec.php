@@ -30,7 +30,7 @@ final class ChannelBasedLocaleProviderSpec extends ObjectBehavior
 {
     function let(ChannelContextInterface $channelContext)
     {
-        $this->beConstructedWith($channelContext, 'pl_PL');
+        $this->beConstructedWith($channelContext, 'es_ES');
     }
 
     function it_is_initializable()
@@ -43,7 +43,7 @@ final class ChannelBasedLocaleProviderSpec extends ObjectBehavior
         $this->shouldImplement(LocaleProviderInterface::class);
     }
 
-    function it_returns_only_channels_enabled_locales_as_available_ones(
+    function it_returns_only_channels_enabled_locales_codes_as_available_ones(
         ChannelContextInterface $channelContext,
         ChannelInterface $channel,
         LocaleInterface $enabledLocale,
@@ -64,15 +64,15 @@ final class ChannelBasedLocaleProviderSpec extends ObjectBehavior
         $this->getAvailableLocalesCodes()->shouldReturn(['en_US']);
     }
 
-    function it_returns_the_default_locale_as_the_available_one_if_channel_cannot_be_determined(
+    function it_returns_the_fallback_locale_code_as_the_available_one_if_channel_cannot_be_determined(
         ChannelContextInterface $channelContext
     ) {
         $channelContext->getChannel()->willThrow(ChannelNotFoundException::class);
 
-        $this->getAvailableLocalesCodes()->shouldReturn(['pl_PL']);
+        $this->getAvailableLocalesCodes()->shouldReturn(['es_ES']);
     }
 
-    function it_returns_channels_default_locale(
+    function it_returns_channels_default_locale_code(
         ChannelContextInterface $channelContext,
         ChannelInterface $channel,
         LocaleInterface $locale
@@ -86,11 +86,16 @@ final class ChannelBasedLocaleProviderSpec extends ObjectBehavior
         $this->getDefaultLocaleCode()->shouldReturn('en_US');
     }
 
-    function it_returns_the_default_locale_if_channel_cannot_be_determined(
+    function it_returns_the_fallback_locale_code_if_channel_cannot_be_determined(
         ChannelContextInterface $channelContext
     ) {
         $channelContext->getChannel()->willThrow(ChannelNotFoundException::class);
 
-        $this->getDefaultLocaleCode()->shouldReturn('pl_PL');
+        $this->getDefaultLocaleCode()->shouldReturn('es_ES');
+    }
+
+    function it_returns_the_fallback_locale_code()
+    {
+        $this->getFallbackLocaleCode()->shouldReturn('es_ES');
     }
 }
