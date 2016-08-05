@@ -16,6 +16,7 @@
 * :doc:`/book/addresses`
 * :doc:`/book/inventory`
 * :doc:`/book/orders`
+* :doc:`/book/checkout`
 * :doc:`/book/shipments`
 * :doc:`/book/payments`
 * :doc:`/book/taxation`
