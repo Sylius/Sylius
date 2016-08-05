@@ -38,7 +38,7 @@ Normally, inventory units are created automatically by Sylius and you do not nee
     use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 
     $variant = // Get variant from product.
-    $inventoryUnits = $this->get('sylius.inventory_unit_factory')->create($variant, 6, InventoryUnitInterface::STATE_RETURNED);
+    $inventoryUnits = $this->get('sylius.inventory_unit_factory')->create($variant, 6, InventoryUnitInterface::STATE_ONHOLD);
 
 ``$inventoryUnits`` is now ArrayCollection with 6 instances of InventoryUnit, referencing the *ProductVariant* and with state `returned`.
 

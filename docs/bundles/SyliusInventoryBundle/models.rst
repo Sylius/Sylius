@@ -7,7 +7,7 @@ InventoryUnit
 -------------
 
 Each unit holds a reference to a stockable object and its state, which can be **sold** or **returned**.
-It also provides some handy shortcut methods like `isSold` and `getSku`.
+It also provides some handy shortcut methods like `isSold`.
 
 Stockable
 ---------
