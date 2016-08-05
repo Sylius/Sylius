@@ -1,0 +1,5 @@
+Sylius\Component\Addressing\Model\Zone:
+    zone_eu:
+        code: EU
+        name: European Union
+        type: zone

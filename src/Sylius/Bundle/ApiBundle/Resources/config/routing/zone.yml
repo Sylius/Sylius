@@ -10,6 +10,12 @@ sylius_api_zone_index:
             paginate: $limit
             sortable: true
 
+sylius_api_zone_create:
+    path: /{type}
+    methods: [POST]
+    defaults:
+        _controller: sylius.controller.zone:createAction
+
 sylius_api_zone_delete:
     path: /{id}
     methods: [DELETE]
