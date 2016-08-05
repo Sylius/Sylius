@@ -174,6 +174,19 @@ final class PromotionContext implements Context
     }
 
     /**
+     * @Given /^([^"]+) gives ("[^"]+%") off on every product when the item total is at least ("(?:€|£|\$)[^"]+")$/
+     */
+    public function itGivesOffOnEveryItemWhenItemTotalExceeds(
+        PromotionInterface $promotion,
+        $discount,
+        $targetAmount
+    ) {
+        $rule = $this->ruleFactory->createItemTotal($targetAmount);
+
+        $this->createUnitPercentagePromotion($promotion, $discount, [], $rule);
+    }
+
+    /**
      * @Given /^([^"]+) gives ("[^"]+%") discount on shipping to every order$/
      */
     public function itGivesPercentageDiscountOnShippingToEveryOrder(PromotionInterface $promotion, $discount)
