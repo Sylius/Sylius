@@ -272,4 +272,47 @@ EOT;
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'zone/update_response', Response::HTTP_OK);
     }
+
+    /**
+     * @test
+     */
+    public function it_denies_zone_delete_for_not_authenticated_users()
+    {
+        $this->client->request('DELETE', '/api/zones/1');
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
+    }
+
+    /**
+     * @test
+     */
+    public function it_returns_not_found_response_when_requesting_delete_of_a_zone_which_does_not_exist()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+
+        $this->client->request('DELETE', '/api/zones/-1', [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
+    }
+
+    /**
+     * @test
+     */
+    function it_allows_to_delete_zone()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $zones = $this->loadFixturesFromFile('resources/zones.yml');
+
+        $this->client->request('DELETE', '/api/zones/'.$zones['zone_eu']->getId(), [], [], static::$authorizedHeaderWithContentType);
+
+        $response = $this->client->getResponse();
+        $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
+
+        $this->client->request('GET', '/api/zones/'.$zones['zone_eu']->getId(), [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
+        $this->assertResponseCode($response, Response::HTTP_NOT_FOUND);
+    }
 }
