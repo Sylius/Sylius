@@ -151,4 +151,125 @@ EOT;
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'zone/show_response', Response::HTTP_OK);
     }
+
+    /**
+     * @test
+     */
+    public function it_denies_zone_full_update_for_not_authenticated_users()
+    {
+        $this->client->request('PUT', '/api/zones/1');
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
+    }
+
+    /**
+     * @test
+     */
+    public function it_returns_not_found_response_when_requesting_full_update_of_a_zone_which_does_not_exist()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+
+        $this->client->request('PUT', '/api/zones/-1', [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
+    }
+
+    /**
+     * @test
+     */
+    public function it_does_not_allow_to_update_zone_fully_without_specifying_required_data()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $zones = $this->loadFixturesFromFile('resources/zones.yml');
+
+        $this->client->request('PUT', '/api/zones/'.$zones['zone_eu']->getId(), [], [], static::$authorizedHeaderWithContentType);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'zone/update_validation_fail_response', Response::HTTP_BAD_REQUEST);
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_to_update_zone_fully()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/countries.yml');
+        $zones = $this->loadFixturesFromFile('resources/zones.yml');
+
+        $data =
+<<<EOT
+        {
+            "name": "European Union +",
+            "members": [
+                {
+                    "code": "PL"
+                }
+            ]
+        }
+EOT;
+
+        $this->client->request('PUT', '/api/zones/'.$zones['zone_eu']->getId(), [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+        $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
+
+        $this->client->request('GET', '/api/zones/'.$zones['zone_eu']->getId(), [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'zone/update_response', Response::HTTP_OK);
+    }
+
+    /**
+     * @test
+     */
+    public function it_denies_zone_partial_update_for_not_authenticated_users()
+    {
+        $this->client->request('PATCH', '/api/zones/1');
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
+    }
+
+    /**
+     * @test
+     */
+    public function it_returns_not_found_response_when_requesting_partial_update_of_a_zone_which_does_not_exist()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+
+        $this->client->request('PATCH', '/api/zones/-1', [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'error/not_found_response', Response::HTTP_NOT_FOUND);
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_to_update_zone_partially()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/countries.yml');
+        $zones = $this->loadFixturesFromFile('resources/zones.yml');
+
+        $data =
+<<<EOT
+        {
+            "name": "European Union +"
+        }
+EOT;
+
+        $this->client->request('PATCH', '/api/zones/'.$zones['zone_eu']->getId(), [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+        $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
+
+        $this->client->request('GET', '/api/zones/'.$zones['zone_eu']->getId(), [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'zone/update_response', Response::HTTP_OK);
+    }
 }

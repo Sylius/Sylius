@@ -21,6 +21,12 @@ sylius_api_zone_create:
                 arguments:
                     type: $type
 
+sylius_api_zone_update:
+    path: /{id}
+    methods: [PUT, PATCH]
+    defaults:
+        _controller: sylius.controller.zone:updateAction
+
 sylius_api_zone_delete:
     path: /{id}
     methods: [DELETE]
