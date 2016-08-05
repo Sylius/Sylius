@@ -114,6 +114,8 @@
         "sylius/attribute-bundle": "self.version",
         "sylius/cart": "self.version",
         "sylius/cart-bundle": "self.version",
+        "sylius/channel": "self.version",
+        "sylius/channel-bundle": "self.version",
         "sylius/contact": "self.version",
         "sylius/contact-bundle": "self.version",
         "sylius/content-bundle": "self.version",
@@ -130,9 +132,12 @@
         "sylius/inventory-bundle": "self.version",
         "sylius/locale": "self.version",
         "sylius/locale-bundle": "self.version",
+        "sylius/mailer": "self.version",
+        "sylius/mailer-bundle": "self.version",
         "sylius/money-bundle": "self.version",
         "sylius/order": "self.version",
         "sylius/order-bundle": "self.version",
+        "sylius/originator": "self.version",
         "sylius/payment": "self.version",
         "sylius/payment-bundle": "self.version",
         "sylius/payum-bundle": "self.version",
@@ -172,26 +177,30 @@
         "ext-mbstring": "For better performance than using Symfony Polyfill Component"
     },
     "scripts": {
-        "travis-build": [
+        "build": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Symfony\\Cmf\\Bundle\\CreateBundle\\Composer\\ScriptHandler::downloadCreateAndCkeditor"
         ],
-        "post-install-cmd": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+        
+        "install": [
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-            "Symfony\\Cmf\\Bundle\\CreateBundle\\Composer\\ScriptHandler::downloadCreateAndCkeditor",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
         ],
+        
+        "travis-build": [
+            "@build"
+        ],
+        
+        "post-install-cmd": [
+            "@build",
+            "@install"
+        ],
+        
         "post-update-cmd": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-            "Symfony\\Cmf\\Bundle\\CreateBundle\\Composer\\ScriptHandler::downloadCreateAndCkeditor",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
+            "@build",
+            "@install"
         ]
     },
     "autoload": {
