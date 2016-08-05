@@ -359,6 +359,16 @@ final class AccountContext implements Context
     }
 
     /**
+     * @Then I should see that I have to pay :paymentAmount for this order
+     */
+    public function iShouldSeeIHaveToPayForThisOrder($paymentAmount)
+    {
+        $actualAmount = $this->orderShowPage->getPaymentPrice();
+
+        Assert::eq($paymentAmount, $actualAmount);
+    }
+
+    /**
      * @Then I should see :numberOfItems items in the list
      */
     public function iShouldSeeItemsInTheList($numberOfItems)
