@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Checkout;
 
+use Sylius\Bundle\CoreBundle\Form\EventListener\AddressingStepFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -68,6 +69,8 @@ class AddressingStepType extends AbstractResourceType
                 'required' => false,
                 'label' => 'sylius.form.checkout.addressing.different_billing_address',
             ])
+            ->addEventSubscriber(new AddressingStepFormSubscriber())
+            ->setDataLocked(false)
         ;
     }
 
