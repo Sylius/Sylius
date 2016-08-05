@@ -1,0 +1,8 @@
+{
+  "name": "sylius/geo-theme",
+  "extra": {
+    "sylius-theme": {
+      "title": "Sylius Geo Theme"
+    }
+  }
+}
