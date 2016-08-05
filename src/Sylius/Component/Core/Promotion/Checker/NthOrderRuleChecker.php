@@ -55,7 +55,8 @@ class NthOrderRuleChecker implements RuleCheckerInterface
         }
 
         $customer = $subject->getCustomer();
-        if (null === $customer) {
+
+        if (null === $customer || null === $customer->getId()) {
             return false;
         }
 
