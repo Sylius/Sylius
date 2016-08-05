@@ -36,7 +36,7 @@
         </field>
 
         <many-to-one field="order" target-entity="Sylius\Component\Order\Model\OrderInterface" inversed-by="comments">
-            <join-column name="order_id" referenced-column-name="id" nullable="false" />
+            <join-column name="order_id" referenced-column-name="id" nullable="false" on-delete="CASCADE"/>
         </many-to-one>
     </mapped-superclass>
 
