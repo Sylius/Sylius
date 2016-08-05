@@ -35,7 +35,10 @@ class ZoneApiTest extends JsonApiTestCase
         'ACCEPT' => 'application/json',
     ];
 
-    public function testCreateZoneAccessDeniedResponse()
+    /**
+     * @test
+     */
+    public function it_denies_zone_creation_for_non_authenticated_user()
     {
         $this->client->request('POST', '/api/zones/country');
 
@@ -43,7 +46,10 @@ class ZoneApiTest extends JsonApiTestCase
         $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
     }
 
-    public function testCreateZoneValidationFailResponse()
+    /**
+     * @test
+     */
+    public function it_does_not_allow_to_create_zone_without_specifying_required_data()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
@@ -53,7 +59,10 @@ class ZoneApiTest extends JsonApiTestCase
         $this->assertResponse($response, 'zone/create_validation_fail_response', Response::HTTP_BAD_REQUEST);
     }
 
-    public function testCreateZoneResponse()
+    /**
+     * @test
+     */
+    public function it_allows_to_create_zone_with_members()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/countries.yml');
@@ -80,7 +89,21 @@ EOT;
         $this->assertResponse($response, 'zone/create_response', Response::HTTP_CREATED);
     }
 
-    public function testGetZonesListResponse()
+    /**
+     * @test
+     */
+    public function it_denies_access_to_zones_list_for_not_authenticated_users()
+    {
+        $this->client->request('GET', '/api/zones/');
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_to_get_zones_list()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/zones.yml');
