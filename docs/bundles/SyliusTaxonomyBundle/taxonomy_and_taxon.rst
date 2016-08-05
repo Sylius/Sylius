@@ -72,7 +72,7 @@ Paginator also can be created for specific criteria and with desired sorting.
 Creating new taxonomy object
 ----------------------------
 
-To create new taxonomy instance, you can simply call ``createNew()`` method on the repository.
+To create new taxonomy instance, you can simply call ``createNew()`` method on the factory.
 
 .. code-block:: php
 
@@ -80,8 +80,8 @@ To create new taxonomy instance, you can simply call ``createNew()`` method on t
 
     public function myAction(Request $request)
     {
-        $repository = $this->container->get('sylius.repository.taxonomy');
-        $taxonomy = $repository->createNew();
+        $factory = $this->container->get('sylius.factory.taxonomy');
+        $taxonomy = $factory->createNew();
     }
 
 .. note::
