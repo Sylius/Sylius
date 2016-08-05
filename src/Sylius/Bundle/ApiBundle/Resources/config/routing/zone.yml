@@ -15,6 +15,11 @@ sylius_api_zone_create:
     methods: [POST]
     defaults:
         _controller: sylius.controller.zone:createAction
+        _sylius:
+            factory:
+                method: createTyped
+                arguments:
+                    type: $type
 
 sylius_api_zone_delete:
     path: /{id}
