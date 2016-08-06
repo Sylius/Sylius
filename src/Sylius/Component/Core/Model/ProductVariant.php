@@ -61,7 +61,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * @var bool
      */
-    protected $availableOnDemand = true;
+    protected $availableOnDemand = false;
 
     /**
      * @var Collection|ProductVariantImageInterface[]
