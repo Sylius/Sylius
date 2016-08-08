@@ -11,6 +11,7 @@ commands=(
     test-fixtures
     test-behat-without-javascript
     test-behat-with-javascript
+    test-behat-with-cli
 )
 
 for command in ${commands[@]}; do
