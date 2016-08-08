@@ -8,9 +8,6 @@ framework:
     router: { resource: "%kernel.root_dir%/config/routing_dev.yml" }
     profiler: { only_exceptions: false }
 
-assetic:
-    use_controller: true
-
 doctrine:
     dbal:
         dbname: "%database_name%_dev"
