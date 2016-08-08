@@ -1,0 +1,24 @@
+{
+  "code": 400,
+  "message": "Validation Failed",
+  "errors": {
+    "errors": [
+      "Please add at least 1 zone member."
+    ],
+    "children": {
+      "name": {
+        "errors": [
+          "Please enter zone name."
+        ]
+      },
+      "type": {},
+      "members": {},
+      "scope": {},
+      "code": {
+        "errors": [
+          "Please enter zone code."
+        ]
+      }
+    }
+  }
+}

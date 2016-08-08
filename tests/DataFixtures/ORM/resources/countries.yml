@@ -3,6 +3,8 @@ Sylius\Component\Addressing\Model\Country:
         code: NL
     country_BE:
         code: BE
+    country_PL:
+        code: PL
 
 Sylius\Component\Addressing\Model\Province:
     province_BE_limburg:
