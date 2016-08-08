@@ -22,3 +22,8 @@ Feature: Seeing customer's details
         When I view details of the customer "f.baggins@shire.me"
         Then his shipping address should be "Frodo Baggins, Bag End, Hobbiton, NEW ZEALAND 1"
         And his billing address should be "Bilbo Baggins, The Last Homely House, Rivendell, NEW ZEALAND 7"
+
+    @ui
+    Scenario: Seeing information about no existing account for a given customer
+        When I view details of the customer "f.baggins@shire.me"
+        Then I should see information about no existing account for this customer

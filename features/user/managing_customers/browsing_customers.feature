@@ -11,7 +11,7 @@ Feature: Browsing customers
         And I am logged in as an administrator
 
     @ui
-    Scenario: Browsing currencies in store
+    Scenario: Browsing customers in store
         When I want to see all customers in store
         Then I should see 4 customers in the list
         And I should see the customer "mr.banana@example.com" in the list

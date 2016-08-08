@@ -24,3 +24,13 @@ Feature: Sign in to the store
         And I log in
         Then I should be notified about bad credentials
         And I should not be logged in
+
+    @ui
+    Scenario: Cannot log in after my account was deleted
+        Given my account "ted@example.com" was deleted
+        And I want to log in
+        When I specify the username as "ted@example.com"
+        And I specify the password as "pswd"
+        And I log in
+        Then I should be notified about bad credentials
+        And I should not be logged in

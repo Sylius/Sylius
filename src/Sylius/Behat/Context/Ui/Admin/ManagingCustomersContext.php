@@ -487,4 +487,15 @@ final class ManagingCustomersContext implements Context
             'Customer billing address should be "%s", but it is not.'
         );
     }
+
+    /**
+     * @Then I should see information about no existing account for this customer
+     */
+    public function iShouldSeeInformationAboutNoExistingAccountForThisCustomer()
+    {
+        Assert::true(
+            $this->showPage->hasAccount(),
+            'There should be information about no account, but there is none.'
+        );
+    }
 }
