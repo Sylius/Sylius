@@ -111,7 +111,6 @@ sylius:
         user_filter:
             query: Search
         variant:
-            available_on_demand: Available on demand
             depth: Depth
             height: Height
             images: Images

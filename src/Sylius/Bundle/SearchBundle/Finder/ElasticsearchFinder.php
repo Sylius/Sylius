@@ -560,9 +560,6 @@ class ElasticsearchFinder extends AbstractFinder
         $availableUntil->setFilter($availableUntilFilter);
         $variantsNestedBool->addMust($availableUntil);
 
-        $availableOnDemand = new QueryTerm(array($nestedProperty . '.availableOnDemand' => true));
-        $variantsNestedBool->addShould($availableOnDemand);
-
         $onHand = new QueryRange($nestedProperty . '.onHand', array('gt' => 0));
         $variantsNestedBool->addShould($onHand);
 

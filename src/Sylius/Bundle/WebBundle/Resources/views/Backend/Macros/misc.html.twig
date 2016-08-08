@@ -43,7 +43,7 @@
         {% set label = 'sylius.shipment.state.'~state %}
         {% if state == 'shipped' %}
             {% set class = 'label-success' %}
-        {% elseif state in ['checkout', 'onhold', 'backordered', 'ready'] %}
+        {% elseif state in ['checkout', 'onhold', 'ready'] %}
             {% set class = 'label-primary' %}
         {% else %}
             {% set class = 'label-danger' %}
@@ -86,7 +86,7 @@
 {% endmacro %}
 
 {% macro shipment_form(shipment, tracking_form = null) %}
-    {% for transition in ['hold', 'release', 'backorder', 'prepare', 'ship', 'cancel', 'return'] if sm_can(shipment, transition, 'sylius_shipment') -%}
+    {% for transition in ['hold', 'release', 'prepare', 'ship', 'cancel', 'return'] if sm_can(shipment, transition, 'sylius_shipment') -%}
         {% if transition == 'ship' %}
             <form action="{{ path('sylius_backend_shipment_ship', {'id': shipment.id}) }}" method="post">
                 {% if tracking_form is defined and tracking_form is not null %}

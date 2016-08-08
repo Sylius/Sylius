@@ -434,20 +434,6 @@ class Order extends Cart implements OrderInterface
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function isBackorder()
-    {
-        foreach ($this->getItemUnits() as $itemUnit) {
-            if (InventoryUnitInterface::STATE_BACKORDERED === $itemUnit->getInventoryState()) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    /**
      * Gets the last updated shipment of the order
      *
      * @return false|ShipmentInterface

@@ -264,7 +264,7 @@
                     <td>{{ unit.createdAt|format_date }}</td>
                     <td>{{ unit.updatedAt|format_date }}</td>
                     <td>
-                        {% for transition in ['backorder', 'sell', 'return'] if sm_can(unit, transition, 'sylius_inventory_unit') %}
+                        {% for transition in ['sell', 'return'] if sm_can(unit, transition, 'sylius_inventory_unit') %}
                             <form action="{{ path('sylius_backend_inventory_unit_update_state', {'id': unit.id, 'transition': transition}) }}" method="post">
                                 <input type="hidden" name="_method" value="PUT">
                                 <button class="btn btn-default" type="submit">

@@ -15,15 +15,16 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\Model\OrderItemUnit;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
-use Sylius\Component\Order\Model\OrderItemUnit;
+use Sylius\Component\Order\Model\OrderItemUnit as BaseOrderItemUnit;
 use Sylius\Component\Shipping\Model\ShipmentInterface;
 use Sylius\Component\Shipping\Model\ShipmentUnitInterface;
 
 /**
- * @mixin \Sylius\Component\Core\Model\OrderItemUnit
+ * @mixin OrderItemUnit
  *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
@@ -38,7 +39,7 @@ final class OrderItemUnitSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Model\OrderItemUnit');
+        $this->shouldHaveType(OrderItemUnit::class);
     }
 
     function it_implements_order_item_unit_interface()
@@ -56,9 +57,9 @@ final class OrderItemUnitSpec extends ObjectBehavior
         $this->shouldImplement(ShipmentUnitInterface::class);
     }
 
-    function it_is_order_item_unit()
+    function it_is_an_order_item_unit()
     {
-        $this->shouldHaveType(OrderItemUnit::class);
+        $this->shouldHaveType(BaseOrderItemUnit::class);
     }
 
     function its_inventory_state_is_mutable()
@@ -92,14 +93,10 @@ final class OrderItemUnitSpec extends ObjectBehavior
         $this->getStockable()->shouldReturn($variant);
     }
 
-    function it_can_be_sold_or_backorderded()
+    function it_can_be_sold()
     {
         $this->setInventoryState(InventoryUnitInterface::STATE_SOLD);
         $this->shouldBeSold();
-
-        $this->setInventoryState(InventoryUnitInterface::STATE_BACKORDERED);
-        $this->shouldBeBackordered();
-        $this->shouldNotBeSold();
     }
 
     function its_shippable_is_order_item_variant(OrderItemInterface $orderItem, ProductVariantInterface $variant)

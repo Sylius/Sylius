@@ -60,18 +60,6 @@ This interface is implemented by services responsible for creating collection of
 
 .. _Sylius API InventoryUnitFactoryInterface: http://api.sylius.org/Sylius/Component/Inventory/Factory/InventoryUnitFactoryInterface.html
 
-.. _component_inventory_operator_backorders-handler-interface:
-
-BackordersHandlerInterface
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-This interface is implemented by services responsible for changing inventory states.
-
-.. note::
-    For more detailed information go to `Sylius API BackordersHandlerInterface`_.
-
-.. _Sylius API BackordersHandlerInterface: http://api.sylius.org/Sylius/Component/Inventory/Operator/BackordersHandlerInterface.html
-
 .. _component_inventory_operator_inventory-operator-interface:
 
 InventoryOperatorInterface

@@ -13,25 +13,43 @@ namespace Sylius\Bundle\InventoryBundle\Validator\Constraints;
 
 use Sylius\Component\Inventory\Checker\AvailabilityCheckerInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
+use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class InStockValidator extends ConstraintValidator
+final class InStockValidator extends ConstraintValidator
 {
-    protected $availabilityChecker;
-    protected $accessor;
+    /**
+     * @var AvailabilityCheckerInterface
+     */
+    private $availabilityChecker;
 
+    /**
+     * @var PropertyAccessor
+     */
+    private $accessor;
+
+    /**
+     * @param AvailabilityCheckerInterface $availabilityChecker
+     */
     public function __construct(AvailabilityCheckerInterface $availabilityChecker)
     {
         $this->availabilityChecker = $availabilityChecker;
         $this->accessor = PropertyAccess::createPropertyAccessor();
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function validate($value, Constraint $constraint)
     {
+        /** @var InStock $constraint */
+        Assert::isInstanceOf($constraint, InStock::class);
+
         $stockable = $this->accessor->getValue($value, $constraint->stockablePath);
         if (null === $stockable) {
             return;

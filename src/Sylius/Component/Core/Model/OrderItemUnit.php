@@ -91,14 +91,6 @@ class OrderItemUnit extends BaseOrderItemUnit implements OrderItemUnitInterface
     /**
      * {@inheritdoc}
      */
-    public function isBackordered()
-    {
-        return InventoryUnitInterface::STATE_BACKORDERED === $this->inventoryState;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getShipment()
     {
         return $this->shipment;

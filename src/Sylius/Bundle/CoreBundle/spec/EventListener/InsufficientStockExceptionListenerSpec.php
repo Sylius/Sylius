@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\CoreBundle\EventListener\InsufficientStockExceptionListener;
 use Sylius\Component\Inventory\Model\StockableInterface;
 use Sylius\Component\Inventory\Operator\InsufficientStockException;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -23,6 +24,8 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
+ * @mixin InsufficientStockExceptionListener
+ *
  * @author Manuel Gonzalez <mgonyan@gmail.com>
  */
 final class InsufficientStockExceptionListenerSpec extends ObjectBehavior
@@ -37,15 +40,15 @@ final class InsufficientStockExceptionListenerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\EventListener\InsufficientStockExceptionListener');
+        $this->shouldHaveType(InsufficientStockExceptionListener::class);
     }
 
     function its_event_exception_does_not_have_an_instance_of_insufficient_stock_exception_action_must_finish(
         GetResponseForExceptionEvent $event
     ) {
-        $event->getException()->shouldBeCalled()->willReturn(new \RuntimeException());
+        $event->getException()->willReturn(new \RuntimeException());
 
-        $this->onKernelException($event)->shouldReturn(null);
+        $this->onKernelException($event);
     }
 
     function it_performs_kernel_exception_action_successfully(
@@ -53,16 +56,13 @@ final class InsufficientStockExceptionListenerSpec extends ObjectBehavior
         SessionInterface $session,
         TranslatorInterface $translator,
         GetResponseForExceptionEvent $event,
-        InsufficientStockException $exception,
         FlashBagInterface $flashBag,
         StockableInterface $stockable
     ) {
-        $stockable->getOnHand()->shouldBeCalled()->willReturn('30');
-        $stockable->getInventoryName()->shouldBeCalled()->willReturn('Inventory Name');
+        $stockable->getOnHand()->willReturn('30');
+        $stockable->getInventoryName()->willReturn('Inventory Name');
 
-        $exception->getStockable()->shouldBeCalledTimes(2)->willReturn($stockable);
-
-        $event->getException()->shouldBeCalled()->willReturn($exception);
+        $event->getException()->willReturn(new InsufficientStockException($stockable->getWrappedObject(), 42));
         $event->setResponse(Argument::type(RedirectResponse::class))->shouldBeCalled();
 
         $translator->trans(
@@ -72,14 +72,14 @@ final class InsufficientStockExceptionListenerSpec extends ObjectBehavior
                 '%name%' => 'Inventory Name',
             ],
             'flashes'
-        )->shouldBeCalled()->willReturn('message translated');
+        )->willReturn('message translated');
 
         $flashBag->add('notice', 'message translated')->shouldBeCalled();
 
-        $session->getBag('flashes')->shouldBeCalled()->willReturn($flashBag);
+        $session->getBag('flashes')->willReturn($flashBag);
 
-        $router->generate('redirect_to_url')->shouldBeCalled()->willReturn('url');
+        $router->generate('redirect_to_url')->willReturn('url');
 
-        $this->onKernelException($event)->shouldReturn(null);
+        $this->onKernelException($event);
     }
 }

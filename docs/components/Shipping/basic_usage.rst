@@ -231,7 +231,7 @@ Note that a **ShippingItem** can exist without a **Shipment** assigned.
     $shipmentItem->getShippable(); // returns shippable object
 
     $shipmentItem->getShippingState(); // returns const STATE_READY
-    $shipmentItem->setShippingState(ShipmentInterface::STATE_BACKORDERED);
+    $shipmentItem->setShippingState(ShipmentInterface::STATE_SOLD);
 
 Shipment
 --------

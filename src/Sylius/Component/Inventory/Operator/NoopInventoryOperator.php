@@ -18,24 +18,8 @@ use Sylius\Component\Inventory\Model\StockableInterface;
  *
  * @author Daniel Richter <nexyz9@gmail.com>
  */
-class NoopInventoryOperator implements InventoryOperatorInterface
+final class NoopInventoryOperator implements InventoryOperatorInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function increase(StockableInterface $stockable, $quantity)
-    {
-        // nothing happens.
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function decrease($inventoryUnits)
-    {
-        // nothing happens.
-    }
-
     /**
      * {@inheritdoc}
      */

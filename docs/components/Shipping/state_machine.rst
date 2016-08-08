@@ -24,10 +24,6 @@ The following states are defined:
 +-------------------+-------------+-----------------------------------------------------------------+
 | STATE_SHIPPED     | shipped     | Shipment has been sent to the customer                          |
 +-------------------+-------------+-----------------------------------------------------------------+
-| STATE_BACKORDERED | backordered | Shipment has been waiting for new delivery of items             |
-+                   +             +                                                                 +
-|                   |             | (items are temporarily out of stock)                            |
-+-------------------+-------------+-----------------------------------------------------------------+
 | STATE_CANCELLED   | cancelled   | Shipment has been cancelled                                     |
 +-------------------+-------------+-----------------------------------------------------------------+
 | STATE_RETURNED    | returned    | Shipment has been returned                                      |
