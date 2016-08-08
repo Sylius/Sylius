@@ -130,7 +130,7 @@ final class OrderContext implements Context
      */
     public function addressesShouldNotExistInTheRegistry()
     {
-        $addresses = $this->sharedStorage->get('deleted_adjustments');
+        $addresses = $this->sharedStorage->get('deleted_addresses');
 
         $addresses = $this->addressRepository->findBy(['id' => $addresses]);
 
