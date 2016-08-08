@@ -185,24 +185,23 @@ EOT
         $channelManager = $this->get('sylius.manager.channel');
         $channelFactory = $this->get('sylius.factory.channel');
 
-        $channel = $channelRepository->findOneByCode('default');
-
-        if (null !== $channel) {
-            return;
-        }
-
         /** @var ChannelInterface $channel */
-        $channel = $channelFactory->createNew();
-        $channel->setCode('default');
-        $channel->setName('Default');
-        $channel->setTaxCalculationStrategy('order_items_based');
+        $channel = $channelRepository->findOneBy([]);
+
+        if (null === $channel) {
+            $channel = $channelFactory->createNew();
+            $channel->setCode('default');
+            $channel->setName('Default');
+            $channel->setTaxCalculationStrategy('order_items_based');
+
+            $channelManager->persist($channel);
+        }
 
         $channel->addCurrency($this->currency);
         $channel->addLocale($this->locale);
         $channel->setDefaultCurrency($this->currency);
         $channel->setDefaultLocale($this->locale);
 
-        $channelManager->persist($channel);
         $channelManager->flush();
     }
 
