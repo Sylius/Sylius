@@ -3,7 +3,7 @@ sylius_admin_customer:
         alias: sylius.customer
         section: admin
         templates: SyliusAdminBundle:Crud
-        except: ['show']
+        except: ['show', 'delete']
         redirect: update
         grid: sylius_admin_customer
         permission: true

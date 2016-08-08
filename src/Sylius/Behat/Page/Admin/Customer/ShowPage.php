@@ -85,6 +85,14 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
+    public function hasAccount()
+    {
+        return $this->hasElement('no_account');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getRouteName()
     {
         return 'sylius_admin_customer_show';
@@ -100,6 +108,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'customer_email' => '#info .content.extra > a',
             'customer_name' => '#info .content > a',
             'delete_account_button' => '#actions button',
+            'no_account' => '#no-account',
             'registration_date' => '#info .content .date',
             'shipping_address' => '#shippingAddress address',
         ]);

@@ -66,6 +66,9 @@ sylius_admin_static_content:
 sylius_admin_taxon:
     resource: "@SyliusAdminBundle/Resources/config/routing/taxon.yml"
 
+sylius_admin_user:
+    resource: "@SyliusAdminBundle/Resources/config/routing/user.yml"
+
 sylius_admin_tax_category:
     resource: "@SyliusAdminBundle/Resources/config/routing/tax_category.yml"
 

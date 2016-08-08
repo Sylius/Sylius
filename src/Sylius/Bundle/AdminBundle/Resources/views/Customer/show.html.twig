@@ -12,7 +12,13 @@
         </div>
         {% if customer.user is not null and customer.user.id is not same as(app.user.id) %}
         <div class="right aligned column" id="actions">
-            {{ buttons.delete(path('sylius_admin_customer_delete', {'id': customer.id})) }}
+            {{ buttons.delete(path('sylius_admin_user_delete', {'id': customer.user.id })) }}
+        </div>
+        {% elseif customer.user is null %}
+        <div class="right aligned column" id="no-account">
+            <div class="ui teal large label">
+                {{ 'sylius.ui.no_account'|trans }}
+            </div>
         </div>
         {% endif %}
     </div>

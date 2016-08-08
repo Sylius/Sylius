@@ -1,0 +1,8 @@
+sylius_admin_user_delete:
+    path: /{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.user:deleteAction
+        _sylius:
+            redirect: referer
+            permission: true
