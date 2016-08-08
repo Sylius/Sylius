@@ -26,14 +26,6 @@ sylius_shop_cart_clear:
         _sylius:
             redirect: sylius_shop_cart_summary
 
-sylius_shop_cart_item_add:
-    path: /add
-    methods: [POST]
-    defaults:
-        _controller: sylius.controller.cart_item:addAction
-        _sylius:
-            redirect: sylius_shop_cart_summary
-
 sylius_shop_cart_item_remove:
     path: /{id}/remove
     defaults:

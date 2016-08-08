@@ -1,11 +1,11 @@
 # This file is a part of the Sylius package.
 # (c) Paweł Jędrzejewski
 
-sylius_shop_partial_cart_item_create:
-    path: /new
+sylius_shop_partial_cart_item_add:
+    path: /add
     methods: [GET, POST]
     defaults:
-        _controller: sylius.controller.cart_item:createAction
+        _controller: sylius.controller.cart_item:addAction
         _sylius:
             factory:
                 method: createForProduct
@@ -15,3 +15,4 @@ sylius_shop_partial_cart_item_create:
                 options:
                     product: expr:service('sylius.repository.product').find($productId)
             template: $template
+            redirect: sylius_shop_cart_summary
