@@ -137,8 +137,6 @@ EOT
         if (null !== $existingLocale = $localeRepository->findOneBy(['code' => $code])) {
             $this->locale = $existingLocale;
 
-            $localeManager->flush();
-
             return;
         }
 
@@ -157,12 +155,19 @@ EOT
      */
     protected function setupCurrency(InputInterface $input, OutputInterface $output)
     {
+        $currencyRepository = $this->get('sylius.repository.currency');
         $currencyManager = $this->get('sylius.manager.currency');
         $currencyFactory = $this->get('sylius.factory.currency');
 
         $code = trim($this->getContainer()->getParameter('currency'));
         $name = Intl::getCurrencyBundle()->getCurrencyName($code);
         $output->writeln(sprintf('Adding <info>%s</info> currency.', $name));
+
+        if (null !== $existingCurrency = $currencyRepository->findOneBy(['code' => $code])) {
+            $this->currency = $existingCurrency;
+
+            return;
+        }
 
         $currency = $currencyFactory->createNew();
         $currency->setExchangeRate(1.00);
