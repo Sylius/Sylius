@@ -9,7 +9,6 @@ cmf_block:
             simple_document_class: "%sylius.model.simple_block.class%"
             imagine_document_class: "%sylius.model.imagine_block.class%"
             action_document_class: "%sylius.model.action_block.class%"
-            menu_document_class: "%sylius.model.menu_block.class%"
             slideshow_document_class: "%sylius.model.slideshow_block.class%"
 
 cmf_content:

@@ -10,5 +10,4 @@ run_command "app/console doctrine:phpcr:repository:init --env=test_cached --no-d
 
 print_header "Setting the web assets up" "sylius"
 run_command "app/console assets:install --env=test_cached --no-debug -vvv" || exit $?
-run_command "app/console assetic:dump --env=test_cached --no-debug -vvv" || exit $?
 run_command "npm run gulp" || exit $?
