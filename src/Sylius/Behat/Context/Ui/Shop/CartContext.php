@@ -436,4 +436,17 @@ final class CartContext implements Context
             NotificationType::failure()
         );
     }
+
+    /**
+     * @Then total price of :productName item should be :productPrice
+     */
+    public function thisItemPriceShouldBe($productName, $productPrice)
+    {
+        $this->summaryPage->open();
+
+        Assert::same(
+            $this->summaryPage->getItemTotal($productName),
+            $productPrice
+        );
+    }
 }

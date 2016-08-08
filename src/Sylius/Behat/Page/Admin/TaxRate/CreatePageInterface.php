@@ -47,4 +47,6 @@ interface CreatePageInterface extends BaseCreatePageInterface
      * @param string $name
      */
     public function chooseCalculator($name);
+    
+    public function chooseIncludedInPrice();
 }

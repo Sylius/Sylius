@@ -11,7 +11,7 @@ Feature: Deleting a tax rate
         And I am logged in as an administrator
 
     @ui
-    Scenario: Deleted tax category should disappear from the registry
+    Scenario: Deleted tax rate should disappear from the registry
         When I delete tax rate "European Union Sales Tax"
         Then I should be notified that it has been successfully deleted
         Then this tax rate should no longer exist in the registry

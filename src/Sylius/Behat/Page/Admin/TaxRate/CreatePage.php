@@ -55,6 +55,11 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         $this->getDocument()->fillField('Amount', $amount);
     }
 
+    public function chooseIncludedInPrice()
+    {
+        $this->getDocument()->find('css', 'label[for=sylius_tax_rate_includedInPrice]')->click();
+    }
+
     /**
      * {@inheritdoc}
      */

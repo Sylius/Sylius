@@ -329,4 +329,12 @@ final class ManagingTaxRateContext implements Context
 
         Assert::same($currentPage->getValidationMessage($element), $expectedMessage);
     }
+
+    /**
+     * @Given I choose "Included in price" option
+     */
+    public function iChooseOption()
+    {
+        $this->createPage->chooseIncludedInPrice();
+    }
 }
