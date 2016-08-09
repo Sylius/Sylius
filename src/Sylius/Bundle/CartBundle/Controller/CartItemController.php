@@ -15,6 +15,7 @@ use FOS\RestBundle\View\View;
 use Sylius\Component\Cart\Event\CartItemEvent;
 use Sylius\Component\Cart\SyliusCartEvents;
 use Sylius\Component\Resource\Event\FlashEvent;
+use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Request;
@@ -81,7 +82,8 @@ class CartItemController extends Controller
                 }
             }
 
-            $this->flashHelper->addSuccessFlash($configuration, ResourceActions::CREATE, $newResource);
+            $translatedMessage = $this->translateMessage('sylius.cart.item_add_completed', $this->metadata);
+            $this->addFlash('success', $translatedMessage);
 
             $orderRecalculator = $this->get('sylius.order_processing.order_recalculator');
             $orderRecalculator->recalculate($cart);
@@ -149,5 +151,16 @@ class CartItemController extends Controller
         $eventDispatcher->dispatch(SyliusCartEvents::ITEM_REMOVE_COMPLETED, new FlashEvent());
 
         return $this->redirectToCartSummary($configuration);
+    }
+
+    /**
+     * @param string $flashMessage
+     * @param MetadataInterface $metadata
+     *
+     * @return string
+     */
+    private function translateMessage($flashMessage, MetadataInterface $metadata)
+    {
+        return $this->get('translator')->trans($flashMessage, ['%resource%' => ucfirst($metadata->getHumanizedName())], 'flashes');
     }
 }
