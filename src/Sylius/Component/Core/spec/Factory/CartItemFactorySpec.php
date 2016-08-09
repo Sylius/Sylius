@@ -34,7 +34,7 @@ final class CartItemFactorySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Factory\CartItemFactory');
+        $this->shouldHaveType(CartItemFactory::class);
     }
 
     function it_implements_cart_item_factory_interface()

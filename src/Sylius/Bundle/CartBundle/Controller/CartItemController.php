@@ -11,13 +11,15 @@
 
 namespace Sylius\Bundle\CartBundle\Controller;
 
+use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\View\View;
+use Sylius\Component\Cart\CartActions;
 use Sylius\Component\Cart\Event\CartItemEvent;
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Cart\Model\CartItemInterface;
 use Sylius\Component\Cart\SyliusCartEvents;
+use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Resource\Event\FlashEvent;
-use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Request;
@@ -42,8 +44,7 @@ class CartItemController extends Controller
         $this->isGrantedOr403($configuration, ResourceActions::CREATE);
         $newResource = $this->newResourceFactory->create($configuration, $this->factory);
 
-        $itemQuantityModifier = $this->get('sylius.order_item_quantity_modifier');
-        $itemQuantityModifier->modify($newResource, 1);
+        $this->getItemQuantityModifier()->modify($newResource, 1);
 
         $form = $this->resourceFormFactory->create($configuration, $newResource);
 
@@ -70,10 +71,13 @@ class CartItemController extends Controller
                 return $this->viewHandler->handle($configuration, View::create($newResource, Response::HTTP_CREATED));
             }
 
-            $translatedMessage = $this->translateMessage('sylius.cart.item_add_completed', $this->metadata);
-            $this->addFlash('success', $translatedMessage);
+            $this->getEventDispatcher()->dispatch(SyliusCartEvents::CART_CHANGE, new GenericEvent($cart));
 
-            $this->recalculateCart($cart);
+            $cartManager = $this->getCartManager();
+            $cartManager->persist($cart);
+            $cartManager->flush();
+
+            $this->flashHelper->addSuccessFlash($configuration, ResourceActions::CREATE, $newResource);
 
             return $this->redirectHandler->redirectToResource($configuration, $newResource);
         }
@@ -85,12 +89,10 @@ class CartItemController extends Controller
         $view = View::create()
             ->setData([
                 'configuration' => $configuration,
-                'metadata' => $this->metadata,
-                'resource' => $newResource,
                 $this->metadata->getName() => $newResource,
                 'form' => $form->createView(),
             ])
-            ->setTemplate($configuration->getTemplate(ResourceActions::CREATE . '.html'))
+            ->setTemplate($configuration->getTemplate(CartActions::ADD . '.html'))
         ;
 
         return $this->viewHandler->handle($configuration, $view);
@@ -137,30 +139,6 @@ class CartItemController extends Controller
     }
 
     /**
-     * @param string $flashMessage
-     * @param MetadataInterface $metadata
-     *
-     * @return string
-     */
-    private function translateMessage($flashMessage, MetadataInterface $metadata)
-    {
-        return $this->get('translator')->trans($flashMessage, ['%resource%' => ucfirst($metadata->getHumanizedName())], 'flashes');
-    }
-
-    /**
-     * @param CartInterface $cart
-     */
-    private function recalculateCart(CartInterface $cart)
-    {
-        $orderRecalculator = $this->get('sylius.order_processing.order_recalculator');
-        $orderRecalculator->recalculate($cart);
-
-        $cartManager = $this->get('sylius.manager.cart');
-        $cartManager->persist($cart);
-        $cartManager->flush();
-    }
-
-    /**
      * @param CartInterface $cart
      * @param CartItemInterface $item
      */
@@ -168,14 +146,28 @@ class CartItemController extends Controller
     {
         foreach ($cart->getItems() as $existingItem) {
             if ($item->equals($existingItem)) {
-                $itemQuantityModifier = $this->get('sylius.order_item_quantity_modifier');
-                $itemQuantityModifier->modify($existingItem, $existingItem->getQuantity() + $item->getQuantity());
+                $this->getItemQuantityModifier()->modify($existingItem, $existingItem->getQuantity() + $item->getQuantity());
 
                 return;
             }
         }
 
         $cart->addItem($item);
-        $this->repository->add($item);
+    }
+
+    /**
+     * @return OrderItemQuantityModifierInterface
+     */
+    private function getItemQuantityModifier()
+    {
+        return $this->get('sylius.order_item_quantity_modifier');
+    }
+
+    /**
+     * @return EntityManagerInterface
+     */
+    private function getCartManager()
+    {
+        return $this->get('sylius.manager.cart');
     }
 }

@@ -50,3 +50,4 @@ sylius_shop_cart_item_add:
             redirect:
                 route: sylius_shop_cart_summary
                 parameters: {}
+            flash: sylius.cart.item_add_completed
