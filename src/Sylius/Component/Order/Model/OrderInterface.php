@@ -128,28 +128,6 @@ interface OrderInterface extends
     public function setState($state);
 
     /**
-     * Add an identity to this order. Eg. external identity to refer to an ebay order id.
-     *
-     * @param IdentityInterface $identity
-     */
-    public function addIdentity(IdentityInterface $identity);
-
-    /**
-     * @param IdentityInterface $identity
-     */
-    public function removeIdentity(IdentityInterface $identity);
-
-    /**
-     * @param IdentityInterface $identity
-     */
-    public function hasIdentity(IdentityInterface $identity);
-
-    /**
-     * @return Collection|IdentityInterface[]
-     */
-    public function getIdentities();
-
-    /**
      * @param string|null $type
      *
      * @return array
