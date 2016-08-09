@@ -19,12 +19,12 @@ use Sylius\Component\Payment\Factory\PaymentFactoryInterface;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class PaymentProcessor implements PaymentProcessorInterface
+final class OrderPaymentProcessor implements OrderProcessorInterface
 {
     /**
      * @var PaymentFactoryInterface
      */
-    protected $paymentFactory;
+    private $paymentFactory;
 
     /**
      * @param PaymentFactoryInterface $paymentFactory
@@ -37,7 +37,7 @@ class PaymentProcessor implements PaymentProcessorInterface
     /**
      * {@inheritdoc}
      */
-    public function processOrderPayments(OrderInterface $order)
+    public function process(OrderInterface $order)
     {
         if (OrderInterface::STATE_CANCELLED === $order->getState()) {
             return;
@@ -58,7 +58,8 @@ class PaymentProcessor implements PaymentProcessorInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @param OrderInterface $order
+     * @param PaymentInterface $payment
      */
     private function setPaymentMethodIfNeeded(OrderInterface $order, PaymentInterface $payment)
     {
@@ -78,12 +79,6 @@ class PaymentProcessor implements PaymentProcessorInterface
      */
     private function getLastPayment(OrderInterface $order)
     {
-        $lastPayment = $order->getLastPayment(PaymentInterface::STATE_CANCELLED);
-
-        if (null === $lastPayment) {
-            $lastPayment = $order->getLastPayment(PaymentInterface::STATE_FAILED);
-        }
-
-        return $lastPayment;
+        return $order->getLastPayment(PaymentInterface::STATE_CANCELLED) ?: $order->getLastPayment(PaymentInterface::STATE_FAILED);
     }
 }

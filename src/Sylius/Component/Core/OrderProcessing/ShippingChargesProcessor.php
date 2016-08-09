@@ -19,7 +19,7 @@ use Sylius\Component\Shipping\Calculator\DelegatingCalculatorInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ShippingChargesProcessor implements ShippingChargesProcessorInterface
+final class ShippingChargesProcessor implements OrderProcessorInterface
 {
     /**
      * @var FactoryInterface
@@ -44,7 +44,7 @@ class ShippingChargesProcessor implements ShippingChargesProcessorInterface
     /**
      * {@inheritdoc}
      */
-    public function applyShippingCharges(OrderInterface $order)
+    public function process(OrderInterface $order)
     {
         // Remove all shipping adjustments, we recalculate everything from scratch.
         $order->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT);

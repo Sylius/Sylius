@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\OrderProcessing\OrderShipmentProcessorInterface;
+use Sylius\Component\Core\OrderProcessing\OrderProcessorInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Shipping\Processor\ShipmentProcessorInterface;
 use Sylius\Component\Shipping\ShipmentTransitions;
@@ -21,24 +21,24 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class OrderShippingListener
+final class OrderShippingListener
 {
     /**
-     * @var OrderShipmentProcessorInterface
+     * @var OrderProcessorInterface
      */
-    protected $orderShipmentProcessor;
+    private $orderShipmentProcessor;
 
     /**
      * @var ShipmentProcessorInterface
      */
-    protected $shippingProcessor;
+    private $shippingProcessor;
 
     /**
-     * @param OrderShipmentProcessorInterface $orderShipmentProcessor
+     * @param OrderProcessorInterface $orderShipmentProcessor
      * @param ShipmentProcessorInterface $shippingProcessor
      */
     public function __construct(
-        OrderShipmentProcessorInterface $orderShipmentProcessor,
+        OrderProcessorInterface $orderShipmentProcessor,
         ShipmentProcessorInterface $shippingProcessor
     ) {
         $this->orderShipmentProcessor = $orderShipmentProcessor;
@@ -50,7 +50,7 @@ class OrderShippingListener
      */
     public function processOrderShipments(GenericEvent $event)
     {
-        $this->orderShipmentProcessor->processOrderShipment($this->getOrder($event));
+        $this->orderShipmentProcessor->process($this->getOrder($event));
     }
 
     /**
@@ -69,7 +69,7 @@ class OrderShippingListener
      *
      * @return OrderInterface
      */
-    protected function getOrder(GenericEvent $event)
+    private function getOrder(GenericEvent $event)
     {
         $order = $event->getSubject();
 

@@ -17,14 +17,14 @@ use Prophecy\Argument;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
-use Sylius\Component\Core\OrderProcessing\PricesRecalculator;
+use Sylius\Component\Core\OrderProcessing\OrderPricesRecalculator;
 use Sylius\Component\Core\OrderProcessing\PricesRecalculatorInterface;
 use Sylius\Component\Pricing\Calculator\DelegatingCalculatorInterface;
 use Sylius\Component\Pricing\Model\PriceableInterface;
 use Sylius\Component\Customer\Model\GroupableInterface;
 
 /**
- * @mixin PricesRecalculator
+ * @mixin OrderPricesRecalculator
  *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */

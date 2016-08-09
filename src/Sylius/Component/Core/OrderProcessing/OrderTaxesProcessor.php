@@ -9,10 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Core\Taxation\Processor;
+namespace Sylius\Component\Core\OrderProcessing;
 
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
-use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -26,22 +25,22 @@ use Sylius\Component\Registry\PrioritizedServiceRegistryInterface;
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Mark McKelvie <mark.mckelvie@reiss.com>
  */
-class OrderTaxesProcessor implements OrderTaxesProcessorInterface
+final class OrderTaxesProcessor implements OrderProcessorInterface
 {
     /**
      * @var ZoneProviderInterface
      */
-    protected $defaultTaxZoneProvider;
+    private $defaultTaxZoneProvider;
 
     /**
      * @var ZoneMatcherInterface
      */
-    protected $zoneMatcher;
+    private $zoneMatcher;
 
     /**
      * @var PrioritizedServiceRegistryInterface
      */
-    protected $strategyRegistry;
+    private $strategyRegistry;
 
     /**
      * @param ZoneProviderInterface $defaultTaxZoneProvider

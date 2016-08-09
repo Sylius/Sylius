@@ -19,17 +19,17 @@ use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class OrderShipmentProcessor implements OrderShipmentProcessorInterface
+final class OrderShipmentProcessor implements OrderProcessorInterface
 {
     /**
      * @var DefaultShippingMethodResolverInterface
      */
-    protected $defaultShippingMethodResolver;
+    private $defaultShippingMethodResolver;
 
     /**
      * @var FactoryInterface
      */
-    protected $shipmentFactory;
+    private $shipmentFactory;
 
     /**
      * @param DefaultShippingMethodResolverInterface $defaultShippingMethodResolver
@@ -46,7 +46,7 @@ class OrderShipmentProcessor implements OrderShipmentProcessorInterface
     /**
      * {@inheritdoc}
      */
-    public function processOrderShipment(OrderInterface $order)
+    public function process(OrderInterface $order)
     {
         $shipment = $this->getOrderShipment($order);
 
@@ -70,8 +70,10 @@ class OrderShipmentProcessor implements OrderShipmentProcessorInterface
 
         /** @var ShipmentInterface $shipment */
         $shipment = $this->shipmentFactory->createNew();
-        $order->addShipment($shipment);
+        $shipment->setOrder($order);
         $shipment->setMethod($this->defaultShippingMethodResolver->getDefaultShippingMethod($shipment));
+
+        $order->addShipment($shipment);
 
         return $shipment;
     }

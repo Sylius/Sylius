@@ -15,11 +15,11 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
-use Sylius\Component\Core\Remover\AdjustmentsRemover;
+use Sylius\Component\Core\Remover\OrderAdjustmentsClearer;
 use Sylius\Component\Core\Remover\AdjustmentsRemoverInterface;
 
 /**
- * @mixin AdjustmentsRemover
+ * @mixin OrderAdjustmentsClearer
  *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
