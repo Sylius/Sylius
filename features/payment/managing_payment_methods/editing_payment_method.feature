@@ -16,10 +16,13 @@ Feature: Editing payment methods
         Then I should be notified that it has been successfully edited
         And this payment method name should be "Cash on delivery"
 
-    @ui
+    @ui @javascript
     Scenario: Modifying payment method gateway
         Given I want to modify the "Offline" payment method
         When I choose "Paypal Express Checkout" gateway
+        And I specify its "Username" as "test"
+        And I specify its "Password" as "test"
+        And I specify its "Signature" as "test"
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this payment method gateway should be "paypal_express_checkout"

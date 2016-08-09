@@ -6,7 +6,23 @@
             <div class="two fields">
                 {{ form_row(form.code) }}
                 {{ form_row(form.gateway) }}
+
+                {% set currentGateway = '' %}
+                {% for gateway in form.vars.gateways %}
+                    {% set gatewayHtml = form_widget(attribute(form, gateway)) %}
+                    {% if gateway == form.gateway.vars.value %}
+                        {% set currentGateway = gatewayHtml %}
+                    {% endif %}
+                    <input type="hidden" data-form-gateway="{{ gateway }}" value="{{ gatewayHtml|e }}"/>
+                {% endfor %}
+
+                <div data-form-type="gateway">
+                    {% if currentGateway is not empty %}
+                        {{ currentGateway|raw }}
+                    {% endif %}
+                </div>
             </div>
+
             {{ form_row(form.enabled) }}
         </div>
     </div>

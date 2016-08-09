@@ -57,8 +57,23 @@ class Configuration implements ConfigurationInterface
             ->children()
                 ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
                 ->arrayNode('gateways')
+                    ->beforeNormalization()
+                        ->always()
+                        ->then(function ($v) {
+                            foreach ($v  as $gatewayKey => &$config) {
+                                if (!isset($config['gateway_key'])) {
+                                    $config['gateway_key'] = 'sylius.payum_gateway.'.$gatewayKey;
+                                }
+                            }
+                            return $v; }
+                        )
+                    ->end()
                     ->useAttributeAsKey('name')
-                    ->prototype('scalar')
+                    ->prototype('array')
+                    ->children()
+                        ->scalarNode('factory')->cannotBeEmpty()->end()
+                        ->scalarNode('gateway_key')->end()
+                    ->end()
                 ->end()
             ->end()
         ;

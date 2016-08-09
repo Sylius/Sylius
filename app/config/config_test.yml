@@ -51,10 +51,18 @@ swiftmailer:
 
 sylius_payment:
     gateways:
-        cc: Credit Card
-        test: Test
-        stripe: Stripe
-        paypal_express_checkout: Paypal Express Checkout
+        cc:
+          factory: cc
+          gateway_key:  Credit Card
+        test:
+          factory: test
+          gateway_key: Test
+        stripe:
+          factory: stripe
+          gateway_key: Stripe
+        paypal_express_checkout:
+          factory: paypal_express_checkout
+          gateway_key: Paypal Express Checkout
 
 sylius_rbac:
     authorization_checker: sylius.authorization_checker.toggleable

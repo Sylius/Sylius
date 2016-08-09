@@ -353,4 +353,12 @@ final class ManagingPaymentMethodsContext implements Context
             sprintf('Payment method with %s %s cannot be found.', $element, $code)
         );
     }
+
+    /**
+     * @Given /^I specify its "([^"]*)" as "([^"]*)"$/
+     */
+    public function iSpecifyItsAs($field, $value)
+    {
+        $this->createPage->specifyField($field,$value);
+    }
 }

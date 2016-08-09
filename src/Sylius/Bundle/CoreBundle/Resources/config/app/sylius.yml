@@ -154,6 +154,11 @@ sylius_payment:
         payment_method:
             classes:
                 repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\PaymentMethodRepository
+                form:
+                    default: Sylius\Bundle\CoreBundle\Form\Type\PaymentMethodType
+    gateways:
+        paypal_express_checkout:
+            factory: paypal_express_checkout
 
 sylius_pricing:
     forms:
