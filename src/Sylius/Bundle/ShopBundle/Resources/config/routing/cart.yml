@@ -32,3 +32,20 @@ sylius_shop_cart_item_remove:
         _controller: sylius.controller.cart_item:removeAction
         _sylius:
             redirect: sylius_shop_cart_summary
+
+sylius_shop_cart_item_add:
+    path: /add
+    methods: [POST]
+    defaults:
+        _controller: sylius.controller.cart_item:addAction
+        _sylius:
+            factory:
+                method: createForProduct
+                arguments: [expr:service('sylius.repository.product').find($productId)]
+            form:
+                type: sylius_cart_item
+                options:
+                    product: expr:service('sylius.repository.product').find($productId)
+            redirect:
+                route: sylius_shop_cart_summary
+                parameters: {}
