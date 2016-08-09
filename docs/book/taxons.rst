@@ -58,7 +58,6 @@ But if you want to have a tree of categories, create another taxon and add it as
      $childTaxon->setCode('clothes');
      $childTaxon->setName('Clothes');
 
-     $childTaxon->setParent($taxon);
      $taxon->addChild($childTaxon);
 
 Finally **the parent taxon** has to be added to the system using a repository, all its child taxons will be added with it.
@@ -69,6 +68,35 @@ Finally **the parent taxon** has to be added to the system using a repository, a
      $taxonRepository = $this->get('sylius.repository.taxon');
 
      $taxonRepository->add($taxon);
+
+How to assign a Taxon to a Product?
+-----------------------------------
+
+In order to categorize products you will need to assign your taxons to them - via the ``addTaxon()`` method on Product.
+
+.. code-block:: php
+
+    /** @var ProductInterface $product */
+    $product = $this->container->get('sylius.factory.product')->createNew();
+    $product->setCode('product_test');
+    $product->setName('Test');
+
+    /** @var TaxonInterface $taxon */
+    $taxon = $this->container->get('sylius.factory.taxon')->createNew();
+    $taxon->setCode('food');
+    $taxon->setName('Food');
+
+    /** @var RepositoryInterface $taxonRepository */
+    $taxonRepository = $this->container->get('sylius.repository.taxon');
+    $taxonRepository->add($taxon);
+
+    $product->addTaxon($taxon);
+
+    /** @var EntityManagerInterface $productManager */
+    $productManager = $this->container->get('sylius.manager.product');
+
+    $productManager->persist($product);
+    $productManager->flush();
 
 Learn more
 ----------
