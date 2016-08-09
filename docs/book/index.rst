@@ -18,6 +18,7 @@ The Book
     zones
     products
     attributes
+    taxons
     addresses
     inventory
     orders
