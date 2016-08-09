@@ -13,6 +13,7 @@ namespace spec\Sylius\Bundle\UserBundle\Provider;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\UserBundle\Provider\AbstractUserProvider;
+use Sylius\Bundle\UserBundle\Provider\UsernameProvider;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\User\Model\User;
 use Sylius\Component\User\Model\UserInterface;
@@ -26,12 +27,12 @@ final class UsernameProviderSpec extends ObjectBehavior
 {
     function let(UserRepositoryInterface $userRepository, CanonicalizerInterface $canonicalizer)
     {
-        $this->beConstructedWith($userRepository, $canonicalizer);
+        $this->beConstructedWith(User::class, $userRepository, $canonicalizer);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\UserBundle\Provider\UsernameProvider');
+        $this->shouldHaveType(UsernameProvider::class);
     }
 
     function it_implements_symfony_user_provider_interface()
@@ -46,7 +47,7 @@ final class UsernameProviderSpec extends ObjectBehavior
 
     function it_supports_sylius_user_model()
     {
-        $this->supportsClass(UserInterface::class)->shouldReturn(true);
+        $this->supportsClass(User::class)->shouldReturn(true);
     }
 
     function it_loads_user_by_user_name($userRepository, $canonicalizer, User $user)

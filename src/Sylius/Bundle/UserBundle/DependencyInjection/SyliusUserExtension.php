@@ -93,7 +93,7 @@ class SyliusUserExtension extends AbstractResourceExtension
             $this->createTokenGenerators($userType, $config['user'], $container);
             $this->createReloaders($userType, $container);
             $this->createLastLoginListeners($userType, $container);
-            $this->createProviders($userType, $container);
+            $this->createProviders($userType, $config['user']['classes']['model'], $container);
         }
     }
 
@@ -209,9 +209,10 @@ class SyliusUserExtension extends AbstractResourceExtension
 
     /**
      * @param string $userType
+     * @param string $userModel
      * @param ContainerBuilder $container
      */
-    private function createProviders($userType, ContainerBuilder $container)
+    private function createProviders($userType, $userModel, ContainerBuilder $container)
     {
         $repositoryServiceId = sprintf('sylius.repository.%s_user', $userType);
         $abstractProviderServiceId = sprintf('sylius.%s_user.provider', $userType);
@@ -221,6 +222,7 @@ class SyliusUserExtension extends AbstractResourceExtension
 
         $abstractProviderDefinition = new Definition(AbstractUserProvider::class);
         $abstractProviderDefinition->setAbstract(true);
+        $abstractProviderDefinition->addArgument($userModel);
         $abstractProviderDefinition->addArgument(new Reference($repositoryServiceId));
         $abstractProviderDefinition->addArgument(new Reference('sylius.user.canonicalizer'));
         $container->setDefinition($abstractProviderServiceId, $abstractProviderDefinition);
