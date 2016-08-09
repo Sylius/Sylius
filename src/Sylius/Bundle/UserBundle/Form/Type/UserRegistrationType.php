@@ -40,6 +40,6 @@ class UserRegistrationType extends AbstractResourceType
      */
     public function getName()
     {
-        return 'sylius_user_registration';
+        return 'sylius_shop_user_registration';
     }
 }

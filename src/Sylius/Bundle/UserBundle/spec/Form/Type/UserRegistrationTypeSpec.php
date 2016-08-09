@@ -40,7 +40,7 @@ final class UserRegistrationTypeSpec extends ObjectBehavior
 
     function it_has_name()
     {
-        $this->getName()->shouldReturn('sylius_user_registration');
+        $this->getName()->shouldReturn('sylius_shop_user_registration');
     }
 
     function it_builds_form(FormBuilderInterface $builder)
