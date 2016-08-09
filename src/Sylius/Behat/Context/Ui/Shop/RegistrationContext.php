@@ -21,7 +21,7 @@ use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Behat\Service\SecurityServiceInterface;
-use Sylius\Component\Core\Model\UserInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\Test\Services\EmailCheckerInterface;
 use Webmozart\Assert\Assert;
 
@@ -275,7 +275,7 @@ class RegistrationContext implements Context
     /**
      * @Then /^(my) account should be verified$/
      */
-    public function myAccountShouldBeVerified(UserInterface $user)
+    public function myAccountShouldBeVerified(ShopUserInterface $user)
     {
         $this->securityService->logIn($user->getEmail());
 
@@ -288,7 +288,7 @@ class RegistrationContext implements Context
     /**
      * @When /^(I) try to verify my account using the link from this email$/
      */
-    public function iUseItToVerify(UserInterface $user)
+    public function iUseItToVerify(ShopUserInterface $user)
     {
         $this->verificationPage->verifyAccount($user->getEmailVerificationToken());
     }

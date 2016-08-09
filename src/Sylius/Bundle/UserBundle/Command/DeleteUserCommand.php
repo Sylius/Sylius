@@ -13,7 +13,7 @@ namespace Sylius\Bundle\UserBundle\Command;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
-use Sylius\Component\Core\Model\UserInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -50,7 +50,7 @@ EOT
         $email = $input->getArgument('email');
         $manager = $this->getEntityManager();
 
-        /** @var UserInterface $user */
+        /** @var ShopUserInterface $user */
         $user = $this->getUserRepository()->findOneByEmail($email);
 
         if (null === $user) {

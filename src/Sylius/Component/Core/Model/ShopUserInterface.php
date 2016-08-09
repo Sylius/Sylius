@@ -19,7 +19,7 @@ use Sylius\Component\User\Model\UserInterface as BaseUserInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface UserInterface extends BaseUserInterface, IdentityInterface, CustomerAwareInterface
+interface ShopUserInterface extends BaseUserInterface, IdentityInterface, CustomerAwareInterface
 {
     /**
      * @param RoleInterface $role

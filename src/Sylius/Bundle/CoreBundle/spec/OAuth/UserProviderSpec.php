@@ -17,11 +17,12 @@ use HWI\Bundle\OAuthBundle\OAuth\ResourceOwnerInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CoreBundle\OAuth\UserProvider;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Component\Core\Model\UserInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Model\UserOAuthInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 
@@ -41,7 +42,7 @@ final class UserProviderSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\OAuth\UserProvider');
+        $this->shouldHaveType(UserProvider::class);
     }
 
     function it_implements_Hwi_oauth_aware_user_provider_interface()
@@ -57,7 +58,7 @@ final class UserProviderSpec extends ObjectBehavior
     function it_should_connect_oauth_account_with_given_user(
         $userManager,
         FactoryInterface $oauthFactory,
-        UserInterface $user,
+        ShopUserInterface $user,
         UserResponseInterface $response,
         ResourceOwnerInterface $resourceOwner,
         UserOAuthInterface $oauth
@@ -87,7 +88,7 @@ final class UserProviderSpec extends ObjectBehavior
 
     function it_should_return_user_if_relation_exists(
         $oauthRepository,
-        UserInterface $user,
+        ShopUserInterface $user,
         UserOAuthInterface $oauth,
         UserResponseInterface $response,
         ResourceOwnerInterface $resourceOwner
@@ -108,7 +109,7 @@ final class UserProviderSpec extends ObjectBehavior
         $userRepository,
         FactoryInterface $oauthFactory,
         RepositoryInterface $oauthRepository,
-        UserInterface $user,
+        ShopUserInterface $user,
         UserResponseInterface $response,
         ResourceOwnerInterface $resourceOwner,
         UserOAuthInterface $oauth
@@ -146,7 +147,7 @@ final class UserProviderSpec extends ObjectBehavior
         FactoryInterface $oauthFactory,
         RepositoryInterface $oauthRepository,
         CustomerInterface $customer,
-        UserInterface $user,
+        ShopUserInterface $user,
         UserResponseInterface $response,
         ResourceOwnerInterface $resourceOwner,
         UserOAuthInterface $oauth

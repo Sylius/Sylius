@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\CoreBundle\Test\Factory;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Component\Core\Model\UserInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\Test\Factory\TestUserFactoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
@@ -42,7 +42,7 @@ final class TestUserFactorySpec extends ObjectBehavior
         $customerFactory,
         $userFactory,
         CustomerInterface $customer,
-        UserInterface $user
+        ShopUserInterface $user
     ) {
         $customerFactory->createNew()->willReturn($customer);
         $customer->setFirstName('Oliver')->shouldBeCalled();
@@ -64,7 +64,7 @@ final class TestUserFactorySpec extends ObjectBehavior
         $customerFactory,
         $userFactory,
         CustomerInterface $customer,
-        UserInterface $user
+        ShopUserInterface $user
     ) {
         $customerFactory->createNew()->willReturn($customer);
         $customer->setFirstName('John')->shouldBeCalled();
@@ -86,7 +86,7 @@ final class TestUserFactorySpec extends ObjectBehavior
         $customerFactory,
         $userFactory,
         CustomerInterface $customer,
-        UserInterface $admin
+        ShopUserInterface $admin
     ) {
         $customerFactory->createNew()->willReturn($customer);
         $customer->setFirstName('John')->shouldBeCalled();

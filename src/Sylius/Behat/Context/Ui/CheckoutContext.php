@@ -25,7 +25,7 @@ use Sylius\Behat\Service\SecurityServiceInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
-use Sylius\Component\Core\Model\UserInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
@@ -143,7 +143,7 @@ final class CheckoutContext implements Context
     /**
      * @Given /^(this user) bought this product$/
      */
-    public function thisUserBought(UserInterface $user)
+    public function thisUserBought(ShopUserInterface $user)
     {
         $this->securityService->performActionAsShopUser($user, function () {
             $this->iProceedSelectingPaymentMethod();

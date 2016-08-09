@@ -17,7 +17,7 @@ use Sylius\Behat\Service\SecurityService;
 use Sylius\Behat\Service\SecurityServiceInterface;
 use Sylius\Behat\Service\Setter\CookieSetterInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
-use Sylius\Component\Core\Model\UserInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
@@ -48,7 +48,7 @@ final class SecurityServiceSpec extends ObjectBehavior
     function it_logs_shop_user_in(
         SessionInterface $session,
         CookieSetterInterface $cookieSetter,
-        UserInterface $shopUser
+        ShopUserInterface $shopUser
     ) {
         $shopUser->getRoles()->willReturn(['ROLE_USER']);
         $shopUser->getPassword()->willReturn('xyz');

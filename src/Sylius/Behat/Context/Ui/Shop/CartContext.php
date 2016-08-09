@@ -18,7 +18,7 @@ use Sylius\Behat\Page\Shop\Cart\SummaryPageInterface;
 use Sylius\Behat\Page\Shop\Product\ShowPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\SecurityServiceInterface;
-use Sylius\Component\Core\Model\UserInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Product\Model\OptionInterface;
 use Sylius\Component\Product\Model\ProductInterface;
@@ -259,7 +259,7 @@ final class CartContext implements Context
     /**
      * @Given /^(this user) has ("[^"]+" product) in the cart$/
      */
-    public function thisUserHasProductInTheCart(UserInterface $user, ProductInterface $product)
+    public function thisUserHasProductInTheCart(ShopUserInterface $user, ProductInterface $product)
     {
         $this->securityService->performActionAs($user, function () use ($product) {
             $this->iAddProductToTheCart($product);

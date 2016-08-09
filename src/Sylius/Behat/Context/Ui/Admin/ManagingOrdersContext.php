@@ -19,7 +19,7 @@ use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\SecurityServiceInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\UserInterface;
+use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Webmozart\Assert\Assert;
 
@@ -555,7 +555,7 @@ final class ManagingOrdersContext implements Context
     /**
      * @Then /^(the administrator) should know about (this additional note) for (this order made by "[^"]+")$/
      */
-    public function theCustomerServiceShouldKnowAboutThisAdditionalNotes(UserInterface $user, $note, OrderInterface $order)
+    public function theCustomerServiceShouldKnowAboutThisAdditionalNotes(AdminUserInterface $user, $note, OrderInterface $order)
     {
         $this->securityService->performActionAsAdminUser($user, function () use ($note, $order) {
             $this->showPage->open(['id' => $order->getId()]);

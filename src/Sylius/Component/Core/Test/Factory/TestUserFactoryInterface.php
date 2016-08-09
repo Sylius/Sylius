@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Core\Test\Factory;
 
-use Sylius\Component\Core\Model\UserInterface;
+use Sylius\Component\User\Model\UserInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>

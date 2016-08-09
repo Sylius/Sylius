@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\UserBundle\Command;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Sylius\Component\Core\Model\UserInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
@@ -135,14 +135,14 @@ EOT
      * @param bool $enabled
      * @param array $securityRoles
      *
-     * @return UserInterface
+     * @return ShopUserInterface
      */
     protected function createUser($email, $password, $enabled, array $securityRoles = ['ROLE_USER'])
     {
         $canonicalizer = $this->getContainer()->get('sylius.user.canonicalizer');
 
         /*
-         * @var UserInterface
+         * @var ShopUserInterface
          * @var $customer CustomerInterface
          */
         $user = $this->getUserFactory()->createNew();

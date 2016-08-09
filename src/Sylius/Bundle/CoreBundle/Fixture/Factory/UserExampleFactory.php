@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
 use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Component\Core\Model\UserInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Rbac\Model\RoleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -99,7 +99,7 @@ final class UserExampleFactory implements ExampleFactoryInterface
         $customer->setFirstName($options['first_name']);
         $customer->setLastName($options['last_name']);
 
-        /** @var UserInterface $user */
+        /** @var ShopUserInterface $user */
         $user = $this->userFactory->createNew();
         $user->setPlainPassword($options['password']);
         $user->setEnabled($options['enabled']);
@@ -119,11 +119,11 @@ final class UserExampleFactory implements ExampleFactoryInterface
     }
 
     /**
-     * @param UserInterface $user
+     * @param ShopUserInterface $user
      * @param string $role
      * @param string $authorizationRole
      */
-    private function addUserRole(UserInterface $user, $role, $authorizationRole)
+    private function addUserRole(ShopUserInterface $user, $role, $authorizationRole)
     {
         $user->addRole($role);
 
