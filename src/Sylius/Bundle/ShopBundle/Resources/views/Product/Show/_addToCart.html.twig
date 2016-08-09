@@ -7,9 +7,11 @@
     {% if not product.simple %}
         {% if product.variantSelectionMethodChoice %}
             {% include '@SyliusShop/Product/Show/_variants.html.twig' %}
-    {% else %}
-    {% include '@SyliusShop/Product/Show/_options.html.twig' %}
+        {% else %}
+            {% include '@SyliusShop/Product/Show/_options.html.twig' %}
         {% endif %}
+    {% else %}
+        {{ form_row(form.variant) }}
     {% endif %}
     {{ form_row(form.quantity) }}
     <button type="submit" class="ui huge primary icon labeled button"><i class="cart icon"></i> {{ 'sylius.ui.add_to_cart'|trans }}</button>

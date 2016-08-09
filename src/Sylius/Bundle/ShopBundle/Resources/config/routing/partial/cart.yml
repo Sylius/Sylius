@@ -3,7 +3,7 @@
 
 sylius_shop_partial_cart_item_add:
     path: /add
-    methods: [GET, POST]
+    methods: [GET]
     defaults:
         _controller: sylius.controller.cart_item:addAction
         _sylius:
@@ -15,4 +15,6 @@ sylius_shop_partial_cart_item_add:
                 options:
                     product: expr:service('sylius.repository.product').find($productId)
             template: $template
-            redirect: sylius_shop_cart_summary
+            redirect:
+                route: sylius_shop_cart_summary
+                parameters: {}
