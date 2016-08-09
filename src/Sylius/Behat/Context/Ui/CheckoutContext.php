@@ -650,7 +650,18 @@ final class CheckoutContext implements Context
     {
         Assert::false(
             $this->paymentPage->hasPaymentMethod($paymentMethodName),
-            sprintf('Payment method "%s" should not be available but it does.', $paymentMethodName)
+            sprintf('Payment method "%s" should not be available, but it does.', $paymentMethodName)
+        );
+    }
+
+    /**
+     * @Then I should be able to select :paymentMethodName payment method
+     */
+    public function iShouldBeAbleToSelectPaymentMethod($paymentMethodName)
+    {
+        Assert::true(
+            $this->paymentPage->hasPaymentMethod($paymentMethodName),
+            sprintf('Payment method "%s" should be available, but it does not.', $paymentMethodName)
         );
     }
 
@@ -760,7 +771,7 @@ final class CheckoutContext implements Context
     {
         Assert::true(
             $this->summaryPage->hasPaymentMethod($paymentMethod),
-            sprintf('I should see %s payment method, but i do not.', $paymentMethod->getName())
+            sprintf('I should see %s payment method, but I do not.', $paymentMethod->getName())
         );
     }
 
