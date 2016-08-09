@@ -37,7 +37,6 @@ sylius:
         author: Författare
         available_for_channels: Tillgänglig för kanaler
         available_on: Tillgänglig på
-        available_on_demand: Tillgänglig på begäran
         available_on_hand: Tillgänglig på begäran
         available_until: Tillgänglig till
         average_order_value: Genomsnittsligt ordervärde

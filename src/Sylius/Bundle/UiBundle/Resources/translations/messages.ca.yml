@@ -12,7 +12,6 @@ sylius:
         add_to_cart: Afegir a la cistella
         administration_dashboard: Quadre de comandament
         all_your_addresses: Totes les teves adreces
-        available_on_demand: Disponible sota demanda
         back: Enrera
         billing_address: Adreça de facturació
         body: Cos

@@ -114,7 +114,6 @@ sylius:
         user_filter:
             query: Rechercher
         variant:
-            available_on_demand: Disponible sur demande
             depth: Profondeur
             height: Hauteur
             images: Images

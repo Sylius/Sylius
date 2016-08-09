@@ -64,7 +64,6 @@ sylius:
         availability: Beschikbaarheid
         available_for_channels: Beschikbaar voor kanalen
         available_on: Beschikbaar vanaf
-        available_on_demand: Beschikbaar op aanvraag
         available_on_hand: Uit de hand verkrijgbaar
         available_until: Beschikbaar tot
         average_order_value: Gemiddelde bestelwaarde

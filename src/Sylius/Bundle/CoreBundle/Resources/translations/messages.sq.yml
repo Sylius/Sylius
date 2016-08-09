@@ -113,7 +113,6 @@ sylius:
         user_filter:
             query: Kërko
         variant:
-            available_on_demand: E mundshme me porosi
             depth: Thellësia
             height: Lartësia
             images: Imazhet

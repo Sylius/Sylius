@@ -2,6 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    channel:
+        default_currency:
+            not_blank: Proszę podać domyślną walutę kanału.
     checkout:
         shipping_method:
             not_blank: Proszę wybrać metodę dostawy.

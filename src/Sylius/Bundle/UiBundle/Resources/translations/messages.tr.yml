@@ -43,7 +43,6 @@ sylius:
         author: Hazırlayan
         availability: Uygunluk
         available_on: Mevcut üzerine
-        available_on_demand: İsteğe bağlı olarak mevcuttur
         back: Geri
         backorder: Stokta yok
         balance_due: Bakiye durumu

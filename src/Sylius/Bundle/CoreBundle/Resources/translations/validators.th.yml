@@ -2,6 +2,11 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    channel:
+        default_currency:
+            not_blank: กรุณาระบุสกุลเงินเริ่มต้น
+        default_locale:
+            not_blank: กรุณาระบุภาษาเริ่มต้น
     checkout:
         shipping_method:
             not_blank: กรุณาเลือกวิธีการจัดส่ง

@@ -12,7 +12,12 @@ sylius:
             last_name: นามสกุล
             email: อีเมล
             phone_number: หมายเลขโทรศัพท์
+            gender: เพศ
+            birthday: วัน/เดือน/ปี เกิด
             billing_address: ที่อยู่สำหรับออกใบเสร็จ
             different_billing_address: ใช้ที่อยู่อื่นสำหรับเรียกเก็บเงินหรือไม่
+            only_customer_registration: สร้างบัญชี?
     gender:
         unknown: ไม่ทราบสถานะ
+        male: ชาย
+        female: หญิง

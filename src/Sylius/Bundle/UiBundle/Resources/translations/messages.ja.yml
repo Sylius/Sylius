@@ -21,7 +21,6 @@ sylius:
         assortment: 商品管理
         availability: 在庫状況
         available_on: 入荷日
-        available_on_demand: 即納
         back: 戻る
         balance_due: 未入金
         billing_address: ご請求先住所

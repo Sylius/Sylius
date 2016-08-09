@@ -31,7 +31,6 @@ sylius:
         author: Autor
         availability: Disponibilitate
         available_on: Disponibil din
-        available_on_demand: Disponibil la comandă
         back: Înapoi
         balance_due: Sold datorat
         billing_address: Adresa de facturare

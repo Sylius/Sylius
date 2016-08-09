@@ -113,7 +113,6 @@ sylius:
         user_filter:
             query: Suche
         variant:
-            available_on_demand: Auf Nachfrage
             depth: Tiefe
             height: Höhe
             images: Fotos

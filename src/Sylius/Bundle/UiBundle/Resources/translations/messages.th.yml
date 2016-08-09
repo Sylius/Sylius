@@ -9,6 +9,7 @@ sylius:
             remember_me: จำการการเข้าระบบของฉันไว้
         option:
             name: ชื่อ
+        notes: หมายเหตุเพิ่มเติม
     ui:
         abandoned: ถูกละทิ้ง
         about: เกี่ยวกับเรา
@@ -19,7 +20,7 @@ sylius:
         action: การดำเนินการ
         actions: ดำเนินการ
         add: เพิ่ม
-        add_action: เพิ่มการดำเนินการ
+        add_action: เพิ่มการลดราคา
         add_association: เพิ่มการเชื่อมโยง
         add_attribute: เพิ่มคุณลักษณะ
         add_attributes: เพิ่มคุณลักษณะ
@@ -33,7 +34,7 @@ sylius:
         add_new_permission: เพิ่มสิทธิ์ใหม่
         add_new_role: เพิ่ม Role
         add_province: เพิ่มจังหวัด
-        add_rule: เพิ่มกติกา
+        add_rule: เพิ่มเงื่อนไข
         add_to_cart: หยิบใส่รถเข็น
         add_value: เพิ่มค่า
         adding_new_customer_groups: เพิ่มกลุ่มลูกค้าใหม่
@@ -63,10 +64,10 @@ sylius:
         availability: สินค้าเข้าแล้ว
         available_for_channels: มีใน channels
         available_on: พร้อมจำหน่ายเมื่อ
-        available_on_demand: มีสินค้าสำหรับจัดจำหน่าย
         available_on_hand: พร้อมจำหน่าย
         available_until: สิ้นสุดการจำหน่าย
         average_order_value: ค่าเฉลี่ยการสั่งซื้อ
+        awaiting_payment: รอการชำระเงิน
         back: ย้อนกลับ
         back_to_store: กลับไปยังร้านค้า
         backorder: สั่งซื้อเมื่อมีของ
@@ -82,6 +83,7 @@ sylius:
         calculator: การคำนวณราคา
         cancel: ยกเลิก
         cancelled: ถูกยกเลิก
+        cart: รถเข็น
         cart_locked: รถเข็นถูกล็อกไว้
         cart_summary: ตะกร้าสินค้า
         categorization: การจัดประเภท
@@ -89,6 +91,8 @@ sylius:
         category_requirements: ข้อกำหนดสำหรับหมวดหมู่
         change_address: เปลี่ยนที่อยู่
         change_password: เปลี่ยนรหัสผ่าน
+        change_payment_method: แก้ไขวิธีการชำระเงิน
+        change_shipping_method: แก้ไขวิธีการขนส่ง
         change_your_password: เปลี่ยนรหัสผ่านของคุณ
         channel: ช่องทางการจัดจำหน่าย
         channels: ช่องทางการจัดจำหน่าย
@@ -237,7 +241,9 @@ sylius:
         edit_promotion: แก้ไขโปรโมชั่น
         edit_promotion_coupon: แก้ไขคูปองโปรโมชั่น
         edit_report: แก้ไขรายงาน
+        edit_route: แก้ไข route
         edit_shipping_method: แก้ไขวิธีการจัดส่ง
+        edit_static_content: แก้ไข Static content
         edit_tax_category: แก้ไขประเภทภาษี
         edit_tax_rate: แก้ไขอัตราภาษี
         edit_taxon: แก้ไขการจัดหมวดหมู่
@@ -299,13 +305,16 @@ sylius:
         expiration_and_usage_limits: การหมดอายุและการจำกัดการใช้
         expires_at: หมดอายุวันที่
         extra_information: ข้อมูลเพิ่มเติม
+        extra_notes: หมายเหตุเพิ่มเติม
         failed: ล้มเหลว
         faqs: ถาม-ตอบ
+        female: หญิง
         filter: กรองข้อมูล
         filters: กรองข้อมูล
         first_name: ชื่อ
         forgot_password: ลืมรหัสผ่าน
         fulfill: Fulfill
+        fulfilled: ดำเนินการเสร็จสิ้น
         gateway: ช่องทางการชำระเงิน
         general_info: ข้อมูลทั่วไป
         general_settings: ตั้งค่าทั่วไป
@@ -370,6 +379,7 @@ sylius:
         login_sylius_store: 'เข้าสู่ระบบ <small>Sylius store</small>'
         logout: ออกจากระบบ
         main_taxon: หมวดหมู่หลัก
+        male: ชาย
         manage: จัดการ
         manage_adjustments: จัดการการปรับปรุง
         manage_attributes: การจัดการคุณลักษณะ (Attribute)
@@ -447,8 +457,10 @@ sylius:
         new_promotion_coupon: คูปองโปรโมชั่นใหม่
         new_review: เพิ่มรีวิว
         new_role: เพิ่ม Role
+        new_route: เพิ่ม route
         new_shipping_category: เพิ่มประเภทการจัดส่ง
         new_shipping_method: เพิ่มวิธีการจัดส่ง
+        new_static_content: เพิ่ม static content
         new_tax_category: ประเภทภาษีใหม่
         new_tax_rate: เพิ่มอัตราภาษี
         new_taxon: เพิ่มประเภท
@@ -463,6 +475,7 @@ sylius:
         no_default_billing_address: ไม่มีค่าเริ่มต้นที่อยู่สำหรับเรียกเก็บเงิน
         no_default_shipping_address: ไม่มีค่าเริ่มต้นที่อยู่ในการจัดส่ง
         no_description: ไม่มีคำอธิบาย
+        no_payment_methods_available: ยังไม่มีช่องทางการชำระเงินสำหรับรายการสั่งซื้อของคุณ
         no_pricing_configuration: ไม่มีการกำหนดค่าราคา
         no_promotion: ไม่มีการใช้โปรโมชั่น
         no_requirement: ไม่มีข้อกำหนด
@@ -480,6 +493,8 @@ sylius:
         not_contains: ไม่ประกอบด้วย
         not_empty: ไม่ว่างเปล่า
         not_in: ไม่ได้อยู่ใน
+        not_verified: ยังไม่ยืนยัน
+        notes: หมายเหตุ
         notify_customer: แจ้งให้ลูกค้าทราบ
         number: หมายเลข
         number_of_orders: จำนวนใบสั่งซื้อ
@@ -505,7 +520,9 @@ sylius:
         overview_of_your_store: ภาพรวมของร้านค้าของคุณ
         page: หน้า
         pages: หน้า
+        paid: ชำระเงินแล้ว
         parent: หมวดแม่
+        partially_paid: ชำระเงินบางส่วน
         partially_shipped: ส่งบางส่วน
         password: รหัสผ่าน
         payment: การชำระเงิน
@@ -513,14 +530,18 @@ sylius:
         payment_method: วิธีการชำระเงิน
         payment_methods: วิธีการชำระเงิน
         payment_mode: วิธีการชำระเงิน
+        payment_ready_to_pay: คุณสามารถทำการชำระเงินได้
         payment_state: สถานะการชำระเงิน
         payments: การชำระเงิน
+        pay: ชำระ
+        pay_again: 'คลิก "ชำระ (Pay)" อีกครั้ง'
         pending: อยู่ระหว่างดำเนินการ
         per_customer_usage_limit: จำกัดตามการใช้งานของลูกค้า
         permissions: สิทธิ์การเข้าถึง
         personal_information: ข้อมูลส่วนบุคคล
         phone_number: หมายเลขโทรศัพท์
         place_order: สั่งซื้อสินค้า
+        placed_an_order: ทำรายการสั่งซื้อสำเร็จ
         placed_at: วันที่
         postcode: รหัสไปรษณีย์
         powered_by: |
@@ -597,7 +618,7 @@ sylius:
         reviews: รีวิว
         roles: Roles
         routes: เส้นทาง
-        rules: กติกา
+        rules: เงื่อนไข
         sales: ยอดขาย
         sales_this_month: ยอดขาย
         save: บันทึก
@@ -610,6 +631,7 @@ sylius:
         set_as_default_billing_address: ตั้งเป็นค่าเริ่มต้นที่อยู่ในการเรียกเก็บเงิน
         set_as_default_shipping_address: ตั้งเป็นค่าเริ่มต้นที่อยู่ในการจัดส่งสินค้า
         ship: จัดส่ง
+        ship_to: จัดส่งไปยัง
         shipment: การจัดส่ง
         shipment_confirmation_name: ยืนยันการจัดส่ง
         shipment_details: รายละเอียดการจัดส่ง
@@ -619,6 +641,7 @@ sylius:
         shipped: ส่งของแล้ว
         shipping: จัดส่ง
         shipping_address: ที่อยู่สำหรับจัดส่งสินค้า
+        shipping_and_payment_methods: วิธีการจัดส่งและชำระเงิน
         shipping_categories: ประเภทการจัดส่ง
         shipping_category: ประเภทการจัดส่ง
         shipping_charges: ค่าจัดส่ง
@@ -647,6 +670,7 @@ sylius:
         starts_at: เริ่มต้น
         starts_with: เริ่มต้นด้วย
         state: สถานะ
+        static_contents: Static contents
         status: สถานะ
         street: ถนน
         string_blocks: สายบล็อก
@@ -657,6 +681,7 @@ sylius:
         support: สนับสนุน
         sylius_logo: ツ Sylius
         tax: ภาษี
+        tax_categories: ประเภทภาษี
         tax_category: ประเภทภาษี
         tax_rate_details: รายละเอียดอัตราภาษี
         tax_rates: อัตราภาษี
@@ -667,6 +692,7 @@ sylius:
         taxonomy: การจัดประเภท
         taxons: หมวดหมู่
         terms_and_conditions: ข้อกำหนดและเงื่อนไข
+        thank_you: ขอบคุณ!
         thank_you_for_your_order: ขอบคุณสำหรับการสั่งซื้อ
         theme: ธีม
         there_are_no_archetypes_defined: ไม่มีการกำหนดแม่แบบไว้
@@ -735,7 +761,7 @@ sylius:
         update_product_association_type: ปรับปรุงความสัมพันธ์ของประเภทสินค้า
         updating_tax_rate: ปรับปรุงอัตราภาษี
         usage: การใช้งาน
-        usage_limit: ขีดจำกัดการใช้งาน
+        usage_limit: จำกัดการใช้งาน
         used: ใช้
         user_confirmation_name: ยืนยันการสั่งซื้อ
         user_details: รายละเอียดผู้ใช้
@@ -745,6 +771,8 @@ sylius:
         variant: Variant
         variant_selection_method: วิธีการเลือกตัวแปร
         variants: ตัวแปร
+        verified: ยืนยันแล้ว
+        verify: ยืนยัน
         view: มุมมอง
         view_and_edit_cart: ดูและแก้ไขรถเข็น
         view_more: ดูเพิ่มเติม

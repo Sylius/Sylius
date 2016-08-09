@@ -60,7 +60,6 @@ sylius:
         availability: 可用
         available_for_channels: 可用于频道
         available_on: 可用
-        available_on_demand: 可按用户要求
         available_until: 有效期至
         average_order_value: 订单均价
         back: 返回

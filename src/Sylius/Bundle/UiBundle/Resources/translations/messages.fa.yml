@@ -57,7 +57,6 @@ sylius:
         availability: موارد موجود
         available_for_channels: قابل دسترسی برای کانال ها
         available_on: تاریخ فعال شدن
-        available_on_demand: قابل سفارش
         available_until: در دسترس تا
         back: بازگشت
         backorder: پیش خرید

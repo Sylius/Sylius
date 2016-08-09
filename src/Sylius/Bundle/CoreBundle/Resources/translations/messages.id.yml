@@ -86,7 +86,6 @@ sylius:
         user_filter:
             query: Cari
         variant:
-            available_on_demand: Tersedia
             depth: Tebal
             height: Tinggi
             images: Gambar

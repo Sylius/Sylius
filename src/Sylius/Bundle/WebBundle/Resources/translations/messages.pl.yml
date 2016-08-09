@@ -108,7 +108,15 @@ sylius:
     promotion_coupon:
         generate: Wygeneruj kupony promocyjne
         index: Lista kuponów promocyjnych
+    review:
+        no_results: Brak recenzji dla tego produktu.
+        no_reviews: Brak recenzji.
+    security:
+        login:
+            info: |-
+                Proszę zalogować się za pomocą emailu <b>"sylius@example.com"</b> oraz hasła <b>"sylius"</b>. <small>Pan Przewodnik po Demie Sylius'a</small>
     shipment:
+        no_items: Brak przedmiotów do wyświetlenia
         state:
             ready: Gotowe
             returned: Zwrócone

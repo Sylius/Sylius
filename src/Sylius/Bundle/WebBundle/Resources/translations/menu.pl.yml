@@ -87,6 +87,7 @@ sylius:
                 payment_methods: Metody płatności
                 payments: Płatności
                 permissions: Uprawnienia
+                product_review: Recenzje produktu
                 products: Produkty
                 promotions: Promocje
                 redirects: Przekierowania
