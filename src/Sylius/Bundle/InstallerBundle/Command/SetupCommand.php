@@ -137,8 +137,6 @@ EOT
         if (null !== $existingLocale = $localeRepository->findOneBy(['code' => $code])) {
             $this->locale = $existingLocale;
 
-            $localeManager->flush();
-
             return;
         }
 
@@ -157,12 +155,19 @@ EOT
      */
     protected function setupCurrency(InputInterface $input, OutputInterface $output)
     {
+        $currencyRepository = $this->get('sylius.repository.currency');
         $currencyManager = $this->get('sylius.manager.currency');
         $currencyFactory = $this->get('sylius.factory.currency');
 
         $code = trim($this->getContainer()->getParameter('currency'));
         $name = Intl::getCurrencyBundle()->getCurrencyName($code);
         $output->writeln(sprintf('Adding <info>%s</info> currency.', $name));
+
+        if (null !== $existingCurrency = $currencyRepository->findOneBy(['code' => $code])) {
+            $this->currency = $existingCurrency;
+
+            return;
+        }
 
         $currency = $currencyFactory->createNew();
         $currency->setExchangeRate(1.00);
@@ -180,24 +185,23 @@ EOT
         $channelManager = $this->get('sylius.manager.channel');
         $channelFactory = $this->get('sylius.factory.channel');
 
-        $channel = $channelRepository->findOneByCode('default');
-
-        if (null !== $channel) {
-            return;
-        }
-
         /** @var ChannelInterface $channel */
-        $channel = $channelFactory->createNew();
-        $channel->setCode('default');
-        $channel->setName('Default');
-        $channel->setTaxCalculationStrategy('order_items_based');
+        $channel = $channelRepository->findOneBy([]);
+
+        if (null === $channel) {
+            $channel = $channelFactory->createNew();
+            $channel->setCode('default');
+            $channel->setName('Default');
+            $channel->setTaxCalculationStrategy('order_items_based');
+
+            $channelManager->persist($channel);
+        }
 
         $channel->addCurrency($this->currency);
         $channel->addLocale($this->locale);
         $channel->setDefaultCurrency($this->currency);
         $channel->setDefaultLocale($this->locale);
 
-        $channelManager->persist($channel);
         $channelManager->flush();
     }
 
