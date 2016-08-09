@@ -12,7 +12,12 @@ sylius:
             last_name: Nazwisko
             email: Email
             phone_number: Numer telefonu
+            gender: Płeć
+            birthday: Data urodzenia
             billing_address: Adres do rachunku
             different_billing_address: Użyć innego adresu do rozliczeń?
+            only_customer_registration: Utworzyć konto?
     gender:
         unknown: Nieznany
+        male: Mężczyzna
+        female: Kobieta

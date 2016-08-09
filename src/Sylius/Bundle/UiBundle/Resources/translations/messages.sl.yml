@@ -53,7 +53,6 @@ sylius:
         author: Avtor
         availability: Razpoložljivost
         available_on: Na voljo na
-        available_on_demand: Na voljo na zahtevo
         available_until: Na voljo do
         back: Nazaj
         backorder: Prednaročilo

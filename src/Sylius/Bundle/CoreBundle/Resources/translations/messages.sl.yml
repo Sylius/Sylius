@@ -98,7 +98,6 @@ sylius:
         user_filter:
             query: Iskanje
         variant:
-            available_on_demand: Na voljo na zahtevo
             depth: Globina
             height: Višina
             images: Slike

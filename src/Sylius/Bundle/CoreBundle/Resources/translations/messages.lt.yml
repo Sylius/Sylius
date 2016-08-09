@@ -108,7 +108,6 @@ sylius:
         user_filter:
             query: Ieškoti
         variant:
-            available_on_demand: Prieinamas pagal poreikį
             depth: Gylis
             height: Aukštis
             images: Paveikslėliai

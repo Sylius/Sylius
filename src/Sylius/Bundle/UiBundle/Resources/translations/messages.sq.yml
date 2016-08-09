@@ -59,7 +59,6 @@ sylius:
         availability: Disponueshmëria
         available_for_channels: Ne dispozicion per kanale
         available_on: Gati më
-        available_on_demand: E mundshme me porosi
         available_until: Në dispozicion deri në
         back: Ktheu prapa
         backorder: Prenotim porosie

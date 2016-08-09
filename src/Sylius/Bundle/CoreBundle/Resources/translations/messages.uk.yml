@@ -96,7 +96,6 @@ sylius:
         user_filter:
             query: Пошук
         variant:
-            available_on_demand: На вимогу
             depth: Глибина
             height: Висота
             images: Зображення

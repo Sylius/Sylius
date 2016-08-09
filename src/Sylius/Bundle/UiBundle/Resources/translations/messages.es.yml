@@ -64,7 +64,6 @@ sylius:
         availability: Disponibilidad
         available_for_channels: Disponible para canales
         available_on: Disponible el
-        available_on_demand: Disponible bajo demanda
         available_on_hand: Disponibles a la mano
         available_until: Disponible hasta
         average_order_value: Valor de la orden promedio

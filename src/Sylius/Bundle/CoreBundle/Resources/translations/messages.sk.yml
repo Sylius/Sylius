@@ -113,7 +113,6 @@ sylius:
         user_filter:
             query: Vyhľadať
         variant:
-            available_on_demand: Na objednávku
             depth: Hĺbka
             height: Výška
             images: Obrázky

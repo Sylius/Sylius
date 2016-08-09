@@ -42,7 +42,6 @@ sylius:
         author: Автор
         availability: Доступность
         available_on: Доступен с
-        available_on_demand: Доступно по запросу
         available_until: Доступно до
         back: Назад
         backorder: Не выполнен

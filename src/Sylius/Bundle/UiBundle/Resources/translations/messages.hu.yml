@@ -64,7 +64,6 @@ sylius:
         availability: Elérhető
         available_for_channels: Minden csatornán elérhető
         available_on: A rendelkezésre álló
-        available_on_demand: Igény szerint rendelkezésre áll
         available_on_hand: Rendelkezésre álló
         available_until: Elérhető amíg
         average_order_value: Átlagos rendelési érték

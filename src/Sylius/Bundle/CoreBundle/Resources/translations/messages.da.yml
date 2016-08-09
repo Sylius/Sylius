@@ -93,7 +93,6 @@ sylius:
         user_filter:
             query: Søg
         variant:
-            available_on_demand: Tilgængelig for forudbestilling
             depth: Dybde
             height: Højde
             images: Billeder

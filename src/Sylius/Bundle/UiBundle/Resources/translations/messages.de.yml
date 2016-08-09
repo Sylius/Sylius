@@ -57,7 +57,6 @@ sylius:
         author: Autor
         availability: Verfügbarkeit
         available_on: Verfügbar ab
-        available_on_demand: Auf Nachfrage
         available_until: Verfügbar bis
         back: Zurück
         backorder: Lieferrückstand

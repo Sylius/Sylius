@@ -60,7 +60,6 @@ sylius:
         user_filter:
             query: 検索
         variant:
-            available_on_demand: 即納
             images: 画像
             on_hand: 在庫
             price: 価格

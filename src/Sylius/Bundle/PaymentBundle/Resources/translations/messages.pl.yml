@@ -30,4 +30,5 @@ sylius:
             description: Opis
             enabled: Aktywna?
             gateway: Bramka
+            instructions: Instrukcje
             name: Nazwa

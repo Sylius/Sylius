@@ -31,7 +31,6 @@ sylius:
         author: Автор
         availability: Доступність
         available_on: Доступно
-        available_on_demand: На вимогу
         back: Назад
         backorder: Звільняється
         balance_due: Сума до сплати

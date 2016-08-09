@@ -45,7 +45,6 @@ sylius:
         author: Autor
         availability: Dostupnost
         available_on: Dostupný od
-        available_on_demand: K dispozici na požádání
         back: Zpět
         backorder: Doobjednání
         balance_due: Nedoplatek

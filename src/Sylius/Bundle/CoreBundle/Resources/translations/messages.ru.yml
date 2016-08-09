@@ -112,7 +112,6 @@ sylius:
         user_filter:
             query: Поиск
         variant:
-            available_on_demand: Доступно по запросу
             depth: Глубина
             height: Высота
             images: Изображения

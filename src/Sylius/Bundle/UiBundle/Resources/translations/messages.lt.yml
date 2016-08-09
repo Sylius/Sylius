@@ -43,7 +43,6 @@ sylius:
         author: Autorius
         availability: Prieinamumas
         available_on: Prieinamas nuo
-        available_on_demand: Prieinamas pagal poreikį
         back: Atgal
         backorder: Užsakyti į ateitį
         balance_due: Likutis

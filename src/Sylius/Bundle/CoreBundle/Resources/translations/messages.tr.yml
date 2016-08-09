@@ -108,7 +108,6 @@ sylius:
         user_filter:
             query: Arama
         variant:
-            available_on_demand: İsteğe bağlı olarak mevcuttur
             depth: Derinliği
             height: Yüksekliği
             images: Resimleri

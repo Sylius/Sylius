@@ -113,7 +113,6 @@ sylius:
         user_filter:
             query: 搜索
         variant:
-            available_on_demand: 可按用户要求
             depth: 深度
             height: 高度
             images: 图像

@@ -53,7 +53,6 @@ sylius:
         author: Autor
         availability: Dostupnost
         available_on: Dostupno
-        available_on_demand: Dostupno na zahtjev
         back: Povratak
         back_to_store: Povratak u trgovinu
         backorder: Na čekanju

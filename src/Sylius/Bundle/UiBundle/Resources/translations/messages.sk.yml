@@ -59,7 +59,6 @@ sylius:
         availability: Dostupnosť
         available_for_channels: Dostupné pre kanály
         available_on: Dostupný od
-        available_on_demand: Na objednávku
         available_until: Dostupný do
         back: Späť
         backorder: Predobjednať

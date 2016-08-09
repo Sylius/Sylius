@@ -113,7 +113,6 @@ sylius:
         user_filter:
             query: جستجو
         variant:
-            available_on_demand: قابل سفارش
             depth: عمق
             height: طول
             images: عکس ها
