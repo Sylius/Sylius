@@ -44,8 +44,8 @@ To configure your store, use this command and answer all questions:
 
     $ php app/console sylius:install:setup
 
-Installing assets and dumping Assetic
--------------------------------------
+Installing assets
+-----------------
 
 You can reinstall all web assets by simply calling:
 

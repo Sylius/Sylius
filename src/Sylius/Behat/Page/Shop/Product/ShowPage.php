@@ -96,7 +96,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
         $row = $nameTd->getParent();
 
-        return $value === $row->find('css', 'td.sylius-product-attribute-value')->getText();
+        return $value === trim($row->find('css', 'td.sylius-product-attribute-value')->getText());
     }
 
     /**

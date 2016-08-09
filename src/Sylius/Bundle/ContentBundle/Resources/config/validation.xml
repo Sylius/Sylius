@@ -82,33 +82,6 @@
         </property>
     </class>
 
-    <class name="Symfony\Cmf\Bundle\MenuBundle\Doctrine\Phpcr\MenuNode">
-        <property name="name">
-            <constraint name="NotBlank">
-                <option name="message">sylius.menu_node.name.not_blank</option>
-                <option name="groups">sylius</option>
-            </constraint>
-        </property>
-        <property name="label">
-            <constraint name="NotBlank">
-                <option name="message">sylius.menu_node.label.not_blank</option>
-                <option name="groups">sylius</option>
-            </constraint>
-        </property>
-        <property name="publishStartDate">
-            <constraint name="DateTime">
-                <option name="message">sylius.menu_node.start_date.invalid_date</option>
-                <option name="groups">sylius</option>
-            </constraint>
-        </property>
-        <property name="publishEndDate">
-            <constraint name="DateTime">
-                <option name="message">sylius.menu_node.end_date.invalid_date</option>
-                <option name="groups">sylius</option>
-            </constraint>
-        </property>
-    </class>
-
     <class name="Symfony\Cmf\Bundle\RoutingBundle\Doctrine\Phpcr\Route">
         <property name="name">
             <constraint name="NotBlank">
