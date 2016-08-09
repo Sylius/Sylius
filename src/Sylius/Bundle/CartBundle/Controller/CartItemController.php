@@ -13,6 +13,8 @@ namespace Sylius\Bundle\CartBundle\Controller;
 
 use FOS\RestBundle\View\View;
 use Sylius\Component\Cart\Event\CartItemEvent;
+use Sylius\Component\Cart\Model\CartInterface;
+use Sylius\Component\Cart\Model\CartItemInterface;
 use Sylius\Component\Cart\SyliusCartEvents;
 use Sylius\Component\Resource\Event\FlashEvent;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
@@ -60,37 +62,18 @@ class CartItemController extends Controller
             }
 
             $cart = $this->getCurrentCart();
+            $this->resolveCartItem($cart, $newResource);
 
-            $isItemInCart = false;
-            foreach ($cart->getItems() as $item) {
-                if ($newResource->equals($item)) {
-                    $itemQuantityModifier->modify($item, $item->getQuantity() + $newResource->getQuantity());
-                    $isItemInCart = true;
+            $this->eventDispatcher->dispatchPostEvent(ResourceActions::CREATE, $configuration, $newResource);
 
-                    break;
-                }
-            }
-
-            if (!$isItemInCart) {
-                $cart->addItem($newResource);
-                $this->repository->add($newResource);
-
-                $this->eventDispatcher->dispatchPostEvent(ResourceActions::CREATE, $configuration, $newResource);
-
-                if (!$configuration->isHtmlRequest()) {
-                    return $this->viewHandler->handle($configuration, View::create($newResource, Response::HTTP_CREATED));
-                }
+            if (!$configuration->isHtmlRequest()) {
+                return $this->viewHandler->handle($configuration, View::create($newResource, Response::HTTP_CREATED));
             }
 
             $translatedMessage = $this->translateMessage('sylius.cart.item_add_completed', $this->metadata);
             $this->addFlash('success', $translatedMessage);
 
-            $orderRecalculator = $this->get('sylius.order_processing.order_recalculator');
-            $orderRecalculator->recalculate($cart);
-
-            $cartManager = $this->get('sylius.manager.cart');
-            $cartManager->persist($cart);
-            $cartManager->flush();
+            $this->recalculateCart($cart);
 
             return $this->redirectHandler->redirectToResource($configuration, $newResource);
         }
@@ -162,5 +145,37 @@ class CartItemController extends Controller
     private function translateMessage($flashMessage, MetadataInterface $metadata)
     {
         return $this->get('translator')->trans($flashMessage, ['%resource%' => ucfirst($metadata->getHumanizedName())], 'flashes');
+    }
+
+    /**
+     * @param CartInterface $cart
+     */
+    private function recalculateCart(CartInterface $cart)
+    {
+        $orderRecalculator = $this->get('sylius.order_processing.order_recalculator');
+        $orderRecalculator->recalculate($cart);
+
+        $cartManager = $this->get('sylius.manager.cart');
+        $cartManager->persist($cart);
+        $cartManager->flush();
+    }
+
+    /**
+     * @param CartInterface $cart
+     * @param CartItemInterface $item
+     */
+    private function resolveCartItem(CartInterface $cart, CartItemInterface $item)
+    {
+        foreach ($cart->getItems() as $existingItem) {
+            if ($item->equals($existingItem)) {
+                $itemQuantityModifier = $this->get('sylius.order_item_quantity_modifier');
+                $itemQuantityModifier->modify($existingItem, $existingItem->getQuantity() + $item->getQuantity());
+
+                return;
+            }
+        }
+
+        $cart->addItem($item);
+        $this->repository->add($item);
     }
 }
