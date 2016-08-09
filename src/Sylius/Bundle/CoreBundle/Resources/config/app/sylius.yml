@@ -752,6 +752,7 @@ sylius_user:
                     repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\UserRepository
                     form:
                         default: Sylius\Bundle\UserBundle\Form\Type\UserType
+                        registration: Sylius\Bundle\UserBundle\Form\Type\UserType
         admin_oauth:
             user:
                 classes:

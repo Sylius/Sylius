@@ -60,6 +60,7 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
     protected $userManager;
 
     /**
+     * @param string $supportedUserClass
      * @param FactoryInterface $customerFactory
      * @param FactoryInterface $userFactory
      * @param UserRepositoryInterface $userRepository
@@ -69,6 +70,7 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
      * @param CanonicalizerInterface $canonicalizer
      */
     public function __construct(
+        $supportedUserClass,
         FactoryInterface $customerFactory,
         FactoryInterface $userFactory,
         UserRepositoryInterface $userRepository,
@@ -77,7 +79,7 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
         ObjectManager $userManager,
         CanonicalizerInterface $canonicalizer
     ) {
-        parent::__construct($userRepository, $canonicalizer);
+        parent::__construct($supportedUserClass, $userRepository, $canonicalizer);
 
         $this->customerFactory = $customerFactory;
         $this->oauthFactory = $oauthFactory;

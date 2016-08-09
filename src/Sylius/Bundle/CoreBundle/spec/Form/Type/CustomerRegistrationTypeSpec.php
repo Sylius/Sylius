@@ -42,7 +42,7 @@ class CustomerRegistrationTypeSpec extends ObjectBehavior
         $builder->add('firstName', 'text', Argument::type('array'))->shouldbeCalled()->willReturn($builder);
         $builder->add('lastName', 'text', Argument::type('array'))->shouldbeCalled()->willReturn($builder);
         $builder->add('email', 'email', Argument::type('array'))->shouldbeCalled()->willReturn($builder);
-        $builder->add('user', 'sylius_user_registration', Argument::type('array'))->shouldbeCalled()->willReturn($builder);
+        $builder->add('user', 'sylius_shop_user_registration', Argument::type('array'))->shouldbeCalled()->willReturn($builder);
         $builder->add('phoneNumber', 'text', Argument::type('array'))->shouldbeCalled()->willReturn($builder);
         $builder->addEventSubscriber(
             Argument::type(CustomerRegistrationFormSubscriber::class)
