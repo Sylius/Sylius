@@ -187,8 +187,8 @@ class SyliusUserExtension extends AbstractResourceExtension
 
         $userReloaderListenerDefinition = new Definition(UserReloaderListener::class);
         $userReloaderListenerDefinition->addArgument(new Reference($reloaderServiceId));
-        $userReloaderListenerDefinition->addTag('kernel.event_listener', ['event' => 'prePersist', 'method' => 'reloadUser']);
-        $userReloaderListenerDefinition->addTag('kernel.event_listener', ['event' => 'preUpdate', 'method' => 'reloadUser']);
+        $userReloaderListenerDefinition->addTag('kernel.event_listener', ['event' => sprintf('sylius.%s_user.post_create', $userType), 'method' => 'reloadUser']);
+        $userReloaderListenerDefinition->addTag('kernel.event_listener', ['event' => sprintf('sylius.%s_user.post_update', $userType), 'method' => 'reloadUser']);
         $container->setDefinition($reloaderListenerServiceId, $userReloaderListenerDefinition);
     }
 
