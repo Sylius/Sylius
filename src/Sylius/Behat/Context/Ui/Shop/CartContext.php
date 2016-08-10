@@ -261,7 +261,7 @@ final class CartContext implements Context
      */
     public function thisUserHasProductInTheCart(ShopUserInterface $user, ProductInterface $product)
     {
-        $this->securityService->performActionAs($user, function () use ($product) {
+        $this->securityService->performActionAsShopUser($user, function () use ($product) {
             $this->iAddProductToTheCart($product);
         });
     }
