@@ -17,9 +17,6 @@ final class SyliusCartEvents
     const CART_INITIALIZE = 'sylius.cart.initialize';
     const CART_ABANDON = 'sylius.cart.abandon';
 
-    const CART_CLEAR_INITIALIZE = 'sylius.cart_clear.initialize';
-    const CART_CLEAR_COMPLETED = 'sylius.cart_clear.completed';
-
     const CART_SAVE_INITIALIZE = 'sylius.cart_save.initialize';
     const CART_SAVE_COMPLETED = 'sylius.cart_save.completed';
 
