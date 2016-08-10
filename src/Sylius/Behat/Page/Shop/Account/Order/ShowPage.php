@@ -141,6 +141,14 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
+    public function getItemPrice()
+    {
+        return $this->getElement('product_price')->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
@@ -151,6 +159,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'subtotal' => '#subtotal',
             'total' => '#total',
             'payments' => '#payments',
+            'product_price' => '#sylius-customer-order-items td:nth-child(2)'
         ]);
     }
 

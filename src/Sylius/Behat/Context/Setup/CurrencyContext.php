@@ -15,6 +15,7 @@ use Behat\Behat\Context\Context;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Currency\CurrencyStorageInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Currency\Converter\CurrencyNameConverterInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
@@ -52,6 +53,11 @@ final class CurrencyContext implements Context
     private $channelManager;
 
     /**
+     * @var CurrencyStorageInterface
+     */
+    private $currencyStorage;
+
+    /**
      * @param SharedStorageInterface $sharedStorage
      * @param RepositoryInterface $currencyRepository
      * @param FactoryInterface $currencyFactory
@@ -63,13 +69,15 @@ final class CurrencyContext implements Context
         RepositoryInterface $currencyRepository,
         FactoryInterface $currencyFactory,
         ObjectManager $currencyManager,
-        ObjectManager $channelManager
+        ObjectManager $channelManager,
+        CurrencyStorageInterface $currencyStorage
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->currencyRepository = $currencyRepository;
         $this->currencyFactory = $currencyFactory;
         $this->currencyManager = $currencyManager;
         $this->channelManager = $channelManager;
+        $this->currencyStorage = $currencyStorage;
     }
 
     /**
@@ -156,6 +164,14 @@ final class CurrencyContext implements Context
         $channel->setDefaultCurrency($currency);
 
         $this->channelManager->flush();
+    }
+
+    /**
+     * @Given I chose :currencyCode currency
+     */
+    public function iChoseCurrency($currencyCode)
+    {
+        $this->currencyStorage->set($this->sharedStorage->get('channel'), $currencyCode);
     }
 
     /**

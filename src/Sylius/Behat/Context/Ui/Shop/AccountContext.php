@@ -360,12 +360,15 @@ final class AccountContext implements Context
 
     /**
      * @Then I should see that I have to pay :paymentAmount for this order
+     * @Then I should see :paymentTotal as payment total
      */
     public function iShouldSeeIHaveToPayForThisOrder($paymentAmount)
     {
-        $actualAmount = $this->orderShowPage->getPaymentPrice();
-
-        Assert::eq($paymentAmount, $actualAmount);
+        Assert::same(
+            $this->orderShowPage->getPaymentPrice(),
+            $paymentAmount,
+            'Payment total is %s, but should be %s.'
+        );
     }
 
     /**
@@ -388,6 +391,18 @@ final class AccountContext implements Context
         Assert::true(
             $this->orderShowPage->isProductInTheList($productName),
             sprintf('Product %s is not in the item list.', $productName)
+        );
+    }
+
+    /**
+     * @Then I should see :itemPrice as item price
+     */
+    public function iShouldSeeAsItemPrice($itemPrice)
+    {
+        Assert::same(
+            $this->orderShowPage->getItemPrice(),
+            $itemPrice,
+            'Item price is %s, but should be %s.'
         );
     }
 
