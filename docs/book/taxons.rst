@@ -98,6 +98,14 @@ In order to categorize products you will need to assign your taxons to them - vi
     $productManager->persist($product);
     $productManager->flush();
 
+What is the mainTaxon of a Product?
+-----------------------------------
+
+The product entity in Sylius core has a field ``mainTaxon``. On its basis for instance the breadcrumbs are generated.
+But also you can use it for your own logic, like for instance links generation.
+
+To have it on your product you need to use the ``setMainTaxon()`` method.
+
 Learn more
 ----------
 
