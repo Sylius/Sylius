@@ -230,6 +230,7 @@ class SyliusUserExtension extends AbstractResourceExtension
 
         $abstractProviderDefinition = new Definition(AbstractUserProvider::class);
         $abstractProviderDefinition->setAbstract(true);
+        $abstractProviderDefinition->setLazy(true);
         $abstractProviderDefinition->addArgument($userModel);
         $abstractProviderDefinition->addArgument(new Reference($repositoryServiceId));
         $abstractProviderDefinition->addArgument(new Reference('sylius.user.canonicalizer'));
