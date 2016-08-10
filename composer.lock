@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "666ed76b4a5e2342da9b31393754829b",
-    "content-hash": "198e55bc7de8cd0c32927b122a974a5f",
+    "hash": "b72c92222d0bd3f4778e7cd3c12dab98",
+    "content-hash": "5ab81b8226a7f3a084c46c48811248e5",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -9901,16 +9901,16 @@
         },
         {
             "name": "lakion/api-test-case",
-            "version": "dev-master",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Lakion/ApiTestCase.git",
-                "reference": "f5335c28bcaeb4134e1842c64f128b44b44d3fc7"
+                "reference": "80a3247103826528b857e81fd7b23dea1454865b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Lakion/ApiTestCase/zipball/f5335c28bcaeb4134e1842c64f128b44b44d3fc7",
-                "reference": "f5335c28bcaeb4134e1842c64f128b44b44d3fc7",
+                "url": "https://api.github.com/repos/Lakion/ApiTestCase/zipball/80a3247103826528b857e81fd7b23dea1454865b",
+                "reference": "80a3247103826528b857e81fd7b23dea1454865b",
                 "shasum": ""
             },
             "require": {
@@ -9976,7 +9976,7 @@
                 "testcase",
                 "xml"
             ],
-            "time": "2016-07-22 13:31:06"
+            "time": "2016-08-08 09:31:17"
         },
         {
             "name": "lakion/mink-debug-extension",
@@ -11717,9 +11717,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "lakion/api-test-case": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
