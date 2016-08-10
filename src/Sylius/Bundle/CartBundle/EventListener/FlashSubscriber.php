@@ -55,7 +55,6 @@ class FlashSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            SyliusCartEvents::CART_CLEAR_COMPLETED => 'addSuccessFlash',
             SyliusCartEvents::CART_SAVE_COMPLETED => 'addSuccessFlash',
 
             SyliusCartEvents::ITEM_ADD_COMPLETED => 'addSuccessFlash',
@@ -73,7 +72,6 @@ class FlashSubscriber implements EventSubscriberInterface
     {
         $this->messages = [
             SyliusCartEvents::CART_SAVE_COMPLETED => 'sylius.cart.cart_save_completed',
-            SyliusCartEvents::CART_CLEAR_COMPLETED => 'sylius.cart.cart_clear_completed',
 
             SyliusCartEvents::ITEM_ADD_COMPLETED => 'sylius.cart.item_add_completed',
             SyliusCartEvents::ITEM_REMOVE_COMPLETED => 'sylius.cart.item_remove_completed',

@@ -63,6 +63,12 @@ And now you can use gulp for installing views, by just running a simple command:
 
     $ npm run gulp
 
+Although if you have Gulp installed globally then run just:
+
+.. code-block:: bash
+
+    $ gulp
+
 Accessing the Shop
 ------------------
 

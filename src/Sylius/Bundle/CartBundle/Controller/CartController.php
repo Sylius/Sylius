@@ -15,9 +15,11 @@ use FOS\RestBundle\View\View;
 use Sylius\Component\Cart\Event\CartEvent;
 use Sylius\Component\Cart\SyliusCartEvents;
 use Sylius\Component\Resource\Event\FlashEvent;
+use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
  * Default cart controller.
@@ -101,9 +103,6 @@ class CartController extends Controller
     }
 
     /**
-     * Clears the current cart using the operator.
-     * By default it redirects to cart summary page.
-     *
      * @param Request $request
      *
      * @return Response
@@ -112,14 +111,29 @@ class CartController extends Controller
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
-        $eventDispatcher = $this->getEventDispatcher();
+        $this->isGrantedOr403($configuration, ResourceActions::DELETE);
+        $resource = $this->getCurrentCart();
 
-        // Update models
-        $eventDispatcher->dispatch(SyliusCartEvents::CART_CLEAR_INITIALIZE, new CartEvent($this->getCurrentCart()));
+        $event = $this->eventDispatcher->dispatchPreEvent(ResourceActions::DELETE, $configuration, $resource);
 
-        // Write flash message
-        $eventDispatcher->dispatch(SyliusCartEvents::CART_CLEAR_COMPLETED, new FlashEvent());
+        if ($event->isStopped() && !$configuration->isHtmlRequest()) {
+            throw new HttpException($event->getErrorCode(), $event->getMessage());
+        }
+        if ($event->isStopped()) {
+            $this->flashHelper->addFlashFromEvent($configuration, $event);
 
-        return $this->redirectToCartSummary($configuration);
+            return $this->redirectHandler->redirectToIndex($configuration, $resource);
+        }
+
+        $this->repository->remove($resource);
+        $this->eventDispatcher->dispatchPostEvent(ResourceActions::DELETE, $configuration, $resource);
+
+        if (!$configuration->isHtmlRequest()) {
+            return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
+        }
+
+        $this->flashHelper->addSuccessFlash($configuration, ResourceActions::DELETE, $resource);
+
+        return $this->redirectHandler->redirectToIndex($configuration, $resource);
     }
 }

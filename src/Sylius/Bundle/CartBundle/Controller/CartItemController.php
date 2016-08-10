@@ -11,40 +11,28 @@
 
 namespace Sylius\Bundle\CartBundle\Controller;
 
-use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
+use Doctrine\ORM\EntityManagerInterface;
+use FOS\RestBundle\View\View;
+use Sylius\Component\Cart\CartActions;
 use Sylius\Component\Cart\Event\CartItemEvent;
-use Sylius\Component\Cart\Resolver\ItemResolvingException;
+use Sylius\Component\Cart\Model\CartInterface;
+use Sylius\Component\Cart\Model\CartItemInterface;
 use Sylius\Component\Cart\SyliusCartEvents;
+use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Resource\Event\FlashEvent;
+use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\EventDispatcher\GenericEvent;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
- * Cart item controller.
- *
- * It manages the cart item resource, but also it has
- * two handy methods for easy adding and removing items
- * using the services, an operator and resolver.
- *
- * The basic cart operations like: adding, removing items,
- * saving and clearing the cart are done in listeners.
- *
- * The resolver is used to create a new cart item, based
- * on the data from current request.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 class CartItemController extends Controller
 {
     /**
-     * Adds item to cart.
-     * It uses the resolver service so you can populate the new item instance
-     * with proper values based on current request.
-     *
-     * It redirect to cart summary page by default.
-     *
      * @param Request $request
      *
      * @return Response
@@ -53,49 +41,61 @@ class CartItemController extends Controller
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
-        $cart = $this->getCurrentCart();
-        $emptyItem = $this->newResourceFactory->create($configuration, $this->factory);
+        $this->isGrantedOr403($configuration, ResourceActions::CREATE);
+        $newResource = $this->newResourceFactory->create($configuration, $this->factory);
 
-        $eventDispatcher = $this->getEventDispatcher();
+        $this->getItemQuantityModifier()->modify($newResource, 1);
 
-        try {
-            $item = $this->getResolver()->resolve($emptyItem, $request);
-        } catch (ItemResolvingException $exception) {
-            // Write flash message
-            $eventDispatcher->dispatch(SyliusCartEvents::ITEM_ADD_ERROR, new FlashEvent($exception->getMessage()));
+        $form = $this->resourceFormFactory->create($configuration, $newResource);
 
-            return $this->redirectAfterAdd($configuration);
+        if ($request->isMethod('POST') && $form->submit($request)->isValid()) {
+            $newResource = $form->getData();
+
+            $event = $this->eventDispatcher->dispatchPreEvent(ResourceActions::CREATE, $configuration, $newResource);
+
+            if ($event->isStopped() && !$configuration->isHtmlRequest()) {
+                throw new HttpException($event->getErrorCode(), $event->getMessage());
+            }
+            if ($event->isStopped()) {
+                $this->flashHelper->addFlashFromEvent($configuration, $event);
+
+                return $this->redirectHandler->redirectToIndex($configuration, $newResource);
+            }
+
+            $cart = $this->getCurrentCart();
+            $this->resolveCartItem($cart, $newResource);
+
+            $this->eventDispatcher->dispatchPostEvent(ResourceActions::CREATE, $configuration, $newResource);
+
+            if (!$configuration->isHtmlRequest()) {
+                return $this->viewHandler->handle($configuration, View::create($newResource, Response::HTTP_CREATED));
+            }
+
+            $this->getEventDispatcher()->dispatch(SyliusCartEvents::CART_CHANGE, new GenericEvent($cart));
+
+            $cartManager = $this->getCartManager();
+            $cartManager->persist($cart);
+            $cartManager->flush();
+
+            $this->flashHelper->addSuccessFlash($configuration, ResourceActions::CREATE, $newResource);
+
+            return $this->redirectHandler->redirectToResource($configuration, $newResource);
         }
 
-        $event = new CartItemEvent($cart, $item);
-
-        // Update models
-        $eventDispatcher->dispatch(SyliusCartEvents::ITEM_ADD_INITIALIZE, $event);
-        $eventDispatcher->dispatch(SyliusCartEvents::CART_CHANGE, new GenericEvent($cart));
-        $eventDispatcher->dispatch(SyliusCartEvents::CART_SAVE_INITIALIZE, $event);
-
-        // Write flash message
-        $eventDispatcher->dispatch(SyliusCartEvents::ITEM_ADD_COMPLETED, new FlashEvent());
-
-        return $this->redirectAfterAdd($configuration);
-    }
-
-    /**
-     * Redirect to specific URL or to cart.
-     *
-     * @param Request $request
-     *
-     * @return RedirectResponse
-     */
-    private function redirectAfterAdd(RequestConfiguration $configuration)
-    {
-        $request = $configuration->getRequest();
-
-        if ($request->query->has('_redirect_to')) {
-            return $this->redirectHandler->redirect($configuration, $request->query->get('_redirect_to'));
+        if (!$configuration->isHtmlRequest()) {
+            return $this->viewHandler->handle($configuration, View::create($form, Response::HTTP_BAD_REQUEST));
         }
 
-        return $this->redirectToCartSummary($configuration);
+        $view = View::create()
+            ->setData([
+                'configuration' => $configuration,
+                $this->metadata->getName() => $newResource,
+                'form' => $form->createView(),
+            ])
+            ->setTemplate($configuration->getTemplate(CartActions::ADD . '.html'))
+        ;
+
+        return $this->viewHandler->handle($configuration, $view);
     }
 
     /**
@@ -136,5 +136,38 @@ class CartItemController extends Controller
         $eventDispatcher->dispatch(SyliusCartEvents::ITEM_REMOVE_COMPLETED, new FlashEvent());
 
         return $this->redirectToCartSummary($configuration);
+    }
+
+    /**
+     * @param CartInterface $cart
+     * @param CartItemInterface $item
+     */
+    private function resolveCartItem(CartInterface $cart, CartItemInterface $item)
+    {
+        foreach ($cart->getItems() as $existingItem) {
+            if ($item->equals($existingItem)) {
+                $this->getItemQuantityModifier()->modify($existingItem, $existingItem->getQuantity() + $item->getQuantity());
+
+                return;
+            }
+        }
+
+        $cart->addItem($item);
+    }
+
+    /**
+     * @return OrderItemQuantityModifierInterface
+     */
+    private function getItemQuantityModifier()
+    {
+        return $this->get('sylius.order_item_quantity_modifier');
+    }
+
+    /**
+     * @return EntityManagerInterface
+     */
+    private function getCartManager()
+    {
+        return $this->get('sylius.manager.cart');
     }
 }
