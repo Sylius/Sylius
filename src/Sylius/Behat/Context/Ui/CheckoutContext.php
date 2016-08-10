@@ -18,10 +18,10 @@ use Sylius\Behat\Page\Shop\Checkout\ShippingPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\SummaryPageInterface;
 use Sylius\Behat\Page\Shop\HomePageInterface;
 use Sylius\Behat\Page\Shop\Checkout\ThankYouPageInterface;
+use Sylius\Behat\Service\SharedSecurityServiceInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Behat\Page\UnexpectedPageException;
 use Sylius\Component\Core\Formatter\StringInflector;
-use Sylius\Behat\Service\SecurityServiceInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
@@ -78,9 +78,9 @@ final class CheckoutContext implements Context
     private $orderRepository;
 
     /**
-     * @var SecurityServiceInterface
+     * @var SharedSecurityServiceInterface
      */
-    private $securityService;
+    private $sharedSecurityService;
 
     /**
      * @var FactoryInterface
@@ -96,7 +96,7 @@ final class CheckoutContext implements Context
      * @param ShippingPageInterface $shippingPage
      * @param SummaryPageInterface $summaryPage
      * @param OrderRepositoryInterface $orderRepository
-     * @param SecurityServiceInterface $securityService
+     * @param SharedSecurityServiceInterface $sharedSecurityService
      * @param FactoryInterface $addressFactory
      */
     public function __construct(
@@ -108,7 +108,7 @@ final class CheckoutContext implements Context
         ShippingPageInterface $shippingPage,
         SummaryPageInterface $summaryPage,
         OrderRepositoryInterface $orderRepository,
-        SecurityServiceInterface $securityService,
+        SharedSecurityServiceInterface $sharedSecurityService,
         FactoryInterface $addressFactory
     ) {
         $this->sharedStorage = $sharedStorage;
@@ -119,7 +119,7 @@ final class CheckoutContext implements Context
         $this->shippingPage = $shippingPage;
         $this->summaryPage = $summaryPage;
         $this->orderRepository = $orderRepository;
-        $this->securityService = $securityService;
+        $this->sharedSecurityService = $sharedSecurityService;
         $this->addressFactory = $addressFactory;
     }
 
@@ -145,7 +145,7 @@ final class CheckoutContext implements Context
      */
     public function thisUserBought(ShopUserInterface $user)
     {
-        $this->securityService->performActionAsShopUser($user, function () {
+        $this->sharedSecurityService->performActionAsShopUser($user, function () {
             $this->iProceedSelectingPaymentMethod();
             $this->iConfirmMyOrder();
         });
