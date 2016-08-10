@@ -9,10 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\UserBundle\Form\Type;
+namespace spec\Sylius\Bundle\CoreBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\CoreBundle\Form\Type\UserRegistrationType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\User\Model\User;
@@ -30,7 +31,7 @@ final class UserRegistrationTypeSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\UserBundle\Form\Type\UserRegistrationType');
+        $this->shouldHaveType(UserRegistrationType::class);
     }
 
     function it_extends_abstract_resource_type()

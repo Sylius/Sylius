@@ -23,6 +23,11 @@ use Symfony\Component\Form\FormEvent;
  */
 final class AddUserFormSubscriberSpec extends ObjectBehavior
 {
+    function let()
+    {
+        $this->beConstructedWith('admin');
+    }
+
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Bundle\UserBundle\Form\EventSubscriber\AddUserFormSubscriber');
@@ -39,7 +44,7 @@ final class AddUserFormSubscriberSpec extends ObjectBehavior
     ) {
         $event->getForm()->willReturn($form);
 
-        $form->add('user', 'sylius_user')->shouldBeCalled();
+        $form->add('user', 'sylius_admin_user')->shouldBeCalled();
 
         $this->preSetData($event);
     }

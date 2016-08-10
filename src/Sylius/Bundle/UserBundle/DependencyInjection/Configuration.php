@@ -140,7 +140,7 @@ class Configuration implements ConfigurationInterface
                                                 ->addDefaultsIfNotSet()
                                                 ->children()
                                                     ->scalarNode('default')->defaultValue(UserType::class)->cannotBeEmpty()->end()
-                                                    ->scalarNode('registration')->defaultValue(UserRegistrationType::class)->cannotBeEmpty()->end()
+                                                    ->scalarNode('registration')->end()
                                                 ->end()
                                             ->end()
                                         ->end()
