@@ -12,8 +12,15 @@ matrix:
         -
             php: 7.0
             env: SYLIUS_SUITE="application"
+            addons:
+                apt:
+                    sources:
+                      - elasticsearch-1.7
+                    packages:
+                      - elasticsearch
             services:
                 - memcached
+                - elasticsearch
         -
             php: 7.0
             env: SYLIUS_SUITE="docs packages"
@@ -24,8 +31,15 @@ matrix:
         -
             php: 5.6
             env: SYLIUS_SUITE="application"
+            addons:
+                apt:
+                    sources:
+                      - elasticsearch-1.7
+                    packages:
+                      - elasticsearch
             services:
                 - memcached
+                - elasticsearch
         -
             php: 5.6
             env: SYLIUS_SUITE="packages"
