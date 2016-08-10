@@ -11,52 +11,47 @@
 
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
-use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Bundle\CoreBundle\EventListener\OrderRecalculationListener;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\OrderItemInterface;
-use Sylius\Component\Core\OrderProcessing\OrderRecalculatorInterface;
-use Sylius\Component\Core\OrderProcessing\OrderShipmentProcessorInterface;
-use Sylius\Component\Pricing\Calculator\DelegatingCalculatorInterface;
-use Sylius\Component\Pricing\Model\PriceableInterface;
+use Sylius\Component\Core\OrderProcessing\OrderProcessorInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
-use Sylius\Component\User\Model\GroupableInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
+ * @mixin OrderRecalculationListener
+ *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class OrderRecalculationListenerSpec extends ObjectBehavior
 {
-    function let(OrderRecalculatorInterface $orderRecalculator)
+    function let(OrderProcessorInterface $orderProcessor)
     {
-        $this->beConstructedWith($orderRecalculator);
+        $this->beConstructedWith($orderProcessor);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\EventListener\OrderRecalculationListener');
+        $this->shouldHaveType(OrderRecalculationListener::class);
     }
 
-    function it_uses_order_recalculator_to_recalculate_order(
+    function it_uses_order_processor_to_recalculate_order(
+        OrderProcessorInterface $orderProcessor,
         GenericEvent $event,
-        OrderInterface $order,
-        OrderRecalculatorInterface $orderRecalculator
+        OrderInterface $order
     ) {
         $event->getSubject()->willReturn($order);
-        $orderRecalculator->recalculate($order)->shouldBeCalled();
+        $orderProcessor->process($order)->shouldBeCalled();
 
         $this->recalculateOrder($event);
     }
 
     function it_throws_exception_if_event_subject_is_not_order(GenericEvent $event)
     {
-        $event->getSubject()->willReturn('badObject');
+        $event->getSubject()->willReturn(new \stdClass());
 
         $this
-            ->shouldThrow(new UnexpectedTypeException('badObject', OrderInterface::class))
+            ->shouldThrow(UnexpectedTypeException::class)
             ->during('recalculateOrder', [$event])
         ;
     }

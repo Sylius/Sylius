@@ -18,7 +18,7 @@ use Sylius\Component\Cart\Context\CartContextInterface;
 use Sylius\Component\Cart\Context\CartNotFoundException;
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\OrderProcessing\OrderRecalculatorInterface;
+use Sylius\Component\Core\OrderProcessing\OrderProcessorInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\Event;
 
@@ -29,36 +29,36 @@ use Symfony\Component\EventDispatcher\Event;
  */
 final class UserCartRecalculationListenerSpec extends ObjectBehavior
 {
-    function let(CartContextInterface $cartContext, OrderRecalculatorInterface $orderRecalculator)
+    function let(CartContextInterface $cartContext, OrderProcessorInterface $orderProcessor)
     {
-        $this->beConstructedWith($cartContext, $orderRecalculator);
+        $this->beConstructedWith($cartContext, $orderProcessor);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\EventListener\UserCartRecalculationListener');
+        $this->shouldHaveType(UserCartRecalculationListener::class);
     }
 
     function it_recalculates_cart_for_logged_in_user(
         CartContextInterface $cartContext,
-        OrderRecalculatorInterface $orderRecalculator,
+        OrderProcessorInterface $orderProcessor,
         Event $event,
         OrderInterface $order
     ) {
         $cartContext->getCart()->willReturn($order);
-        $orderRecalculator->recalculate($order)->shouldBeCalled();
+        $orderProcessor->process($order)->shouldBeCalled();
 
         $this->recalculateCartWhileLogin($event);
     }
 
     function it_throws_exception_if_provided_cart_is_not_order(
         CartContextInterface $cartContext,
-        OrderRecalculatorInterface $orderRecalculator,
+        OrderProcessorInterface $orderProcessor,
         CartInterface $cart,
         Event $event
     ) {
         $cartContext->getCart()->willReturn($cart);
-        $orderRecalculator->recalculate($cart)->shouldNotBeCalled();
+        $orderProcessor->process($cart)->shouldNotBeCalled();
 
         $this
             ->shouldThrow(new UnexpectedTypeException($cart->getWrappedObject(), OrderInterface::class))
@@ -68,11 +68,11 @@ final class UserCartRecalculationListenerSpec extends ObjectBehavior
 
     function it_does_nothing_if_cannot_find_cart(
         CartContextInterface $cartContext,
-        OrderRecalculatorInterface $orderRecalculator,
+        OrderProcessorInterface $orderProcessor,
         Event $event
     ) {
         $cartContext->getCart()->willThrow(CartNotFoundException::class);
-        $orderRecalculator->recalculate(Argument::any())->shouldNotBeCalled();
+        $orderProcessor->process(Argument::any())->shouldNotBeCalled();
 
         $this->recalculateCartWhileLogin($event);
     }

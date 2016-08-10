@@ -21,7 +21,7 @@ use Symfony\Component\EventDispatcher\Event;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class UserCartRecalculationListener
+final class UserCartRecalculationListener
 {
     /**
      * @var CartContextInterface

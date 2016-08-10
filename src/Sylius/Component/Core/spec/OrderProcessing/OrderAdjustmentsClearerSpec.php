@@ -9,30 +9,29 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Core\Remover;
+namespace spec\Sylius\Component\Core\OrderProcessing;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\OrderItemUnitInterface;
-use Sylius\Component\Core\Remover\OrderAdjustmentsClearer;
-use Sylius\Component\Core\Remover\AdjustmentsRemoverInterface;
+use Sylius\Component\Core\OrderProcessing\OrderAdjustmentsClearer;
+use Sylius\Component\Core\OrderProcessing\OrderProcessorInterface;
 
 /**
  * @mixin OrderAdjustmentsClearer
  *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class AdjustmentsRemoverSpec extends ObjectBehavior
+final class OrderAdjustmentsClearerSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Remover\AdjustmentsRemover');
+        $this->shouldHaveType(OrderAdjustmentsClearer::class);
     }
 
-    function it_implements_adjustments_remover_interface()
+    function it_is_an_order_processor()
     {
-        $this->shouldImplement(AdjustmentsRemoverInterface::class);
+        $this->shouldImplement(OrderProcessorInterface::class);
     }
 
     function it_removes_adjustments_from_order_recursively(OrderInterface $order)
@@ -43,6 +42,6 @@ final class AdjustmentsRemoverSpec extends ObjectBehavior
         $order->removeAdjustmentsRecursively(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT)->shouldBeCalled();
         $order->removeAdjustmentsRecursively(AdjustmentInterface::TAX_ADJUSTMENT)->shouldBeCalled();
 
-        $this->removeFrom($order);
+        $this->process($order);
     }
 }

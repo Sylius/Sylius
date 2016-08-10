@@ -49,7 +49,6 @@
         <parameter key="sylius.listener.order_state.class">Sylius\Bundle\CoreBundle\EventListener\OrderStateListener</parameter>
         <parameter key="sylius.listener.order_payment.class">Sylius\Bundle\CoreBundle\EventListener\OrderPaymentListener</parameter>
         <parameter key="sylius.listener.order_promotion.class">Sylius\Bundle\CoreBundle\EventListener\OrderPromotionListener</parameter>
-        <parameter key="sylius.listener.order_shipping.class">Sylius\Bundle\CoreBundle\EventListener\OrderShippingListener</parameter>
         <parameter key="sylius.listener.checkout_addressing.class">Sylius\Bundle\CoreBundle\EventListener\CheckoutAddressingListener</parameter>
         <parameter key="sylius.listener.insufficient_stock_exception.class">Sylius\Bundle\CoreBundle\EventListener\InsufficientStockExceptionListener</parameter>
         <parameter key="sylius.listener.image_upload.class">Sylius\Bundle\CoreBundle\EventListener\ImageUploadListener</parameter>
@@ -258,15 +257,7 @@
             <tag name="kernel.event_listener" event="sylius.checkout.finalize.pre_complete" method="resolveOrderStates" priority="-100" />
             <tag name="kernel.event_listener" event="winzou.state_machine.post_transition" method="resolveOrderStatesOnTransition" priority="-100" />
         </service>
-        <service id="sylius.listener.order_shipping" class="%sylius.listener.order_shipping.class%">
-            <argument type="service" id="sylius.order_processing.order_processor" />
-            <argument type="service" id="sylius.processor.shipment_processor" />
-            <tag name="kernel.event_listener" event="sylius.checkout.shipping.initialize" method="processOrderShipments" />
-            <tag name="kernel.event_listener" event="sylius.checkout.finalize.pre_complete" method="updateShipmentStatesOnhold" />
-        </service>
         <service id="sylius.listener.order_payment" class="%sylius.listener.order_payment.class%">
-            <argument type="service" id="sylius.order_processing.order_processor" />
-            <tag name="kernel.event_listener" event="sylius.checkout.payment.initialize" method="createOrderPayment" />
             <tag name="kernel.event_listener" event="sylius.checkout.finalize.pre_complete" method="updateOrderPayment" />
         </service>
         <service id="sylius.listener.order_promotion" class="%sylius.listener.order_promotion.class%">

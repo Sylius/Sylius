@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\OrderProcessing\OrderProcessorInterface;
 use Sylius\Component\Payment\Model\PaymentInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -22,27 +21,6 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  */
 final class OrderPaymentListener
 {
-    /**
-     * @var OrderProcessorInterface
-     */
-    private $paymentProcessor;
-
-    /**
-     * @param OrderProcessorInterface $paymentProcessor
-     */
-    public function __construct(OrderProcessorInterface $paymentProcessor)
-    {
-        $this->paymentProcessor = $paymentProcessor;
-    }
-
-    /**
-     * @param GenericEvent $event
-     */
-    public function createOrderPayment(GenericEvent $event)
-    {
-        $this->paymentProcessor->processOrderPayments($this->getOrder($event));
-    }
-
     /**
      * @param GenericEvent $event
      *

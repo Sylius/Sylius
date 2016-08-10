@@ -14,18 +14,18 @@ namespace spec\Sylius\Component\Core\OrderProcessing;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\OrderProcessing\PaymentProcessor;
-use Sylius\Component\Core\OrderProcessing\PaymentProcessorInterface;
-use Sylius\Component\Payment\Factory\PaymentFactoryInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
+use Sylius\Component\Core\OrderProcessing\OrderPaymentProcessor;
+use Sylius\Component\Core\OrderProcessing\OrderProcessorInterface;
+use Sylius\Component\Payment\Factory\PaymentFactoryInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 
 /**
- * @mixin PaymentProcessor
+ * @mixin OrderPaymentProcessor
  *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-final class PaymentProcessorSpec extends ObjectBehavior
+final class OrderPaymentProcessorSpec extends ObjectBehavior
 {
     function let(PaymentFactoryInterface $paymentFactory)
     {
@@ -34,12 +34,12 @@ final class PaymentProcessorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\OrderProcessing\PaymentProcessor');
+        $this->shouldHaveType(OrderPaymentProcessor::class);
     }
 
-    function it_implements_payment_processor_interface()
+    function it_is_an_order_processor()
     {
-        $this->shouldImplement(PaymentProcessorInterface::class);
+        $this->shouldImplement(OrderProcessorInterface::class);
     }
 
     function it_processes_payment_for_given_order(
@@ -58,7 +58,7 @@ final class PaymentProcessorSpec extends ObjectBehavior
 
         $order->addPayment($payment)->shouldBeCalled();
 
-        $this->processOrderPayments($order);
+        $this->process($order);
     }
 
     function it_sets_payment_method_from_last_cancelled_payment_during_processing(
@@ -80,7 +80,7 @@ final class PaymentProcessorSpec extends ObjectBehavior
 
         $order->addPayment($payment)->shouldBeCalled();
 
-        $this->processOrderPayments($order);
+        $this->process($order);
     }
 
     function it_does_not_set_payment_method_from_last_cancelled_payment_during_processing(
@@ -98,7 +98,7 @@ final class PaymentProcessorSpec extends ObjectBehavior
         $payment->setMethod()->shouldNotBeCalled();
         $order->addPayment($payment)->shouldBeCalled();
 
-        $this->processOrderPayments($order);
+        $this->process($order);
     }
 
     function it_sets_payment_method_from_last_failed_payment_during_processing(
@@ -121,7 +121,7 @@ final class PaymentProcessorSpec extends ObjectBehavior
 
         $order->addPayment($payment)->shouldBeCalled();
 
-        $this->processOrderPayments($order);
+        $this->process($order);
     }
 
     function it_does_not_set_payment_method_from_last_failed_payment_during_processing(
@@ -139,7 +139,7 @@ final class PaymentProcessorSpec extends ObjectBehavior
         $payment->setMethod()->shouldNotBeCalled();
         $order->addPayment($payment)->shouldBeCalled();
 
-        $this->processOrderPayments($order);
+        $this->process($order);
     }
 
     function it_does_not_add_payment_during_processing_if_new_payment_already_exists(
@@ -160,7 +160,7 @@ final class PaymentProcessorSpec extends ObjectBehavior
         $payment->setMethod($cancelledPayment)->shouldNotBeCalled();
         $order->addPayment($payment)->shouldNotBeCalled();
 
-        $this->processOrderPayments($order);
+        $this->process($order);
     }
 
     function it_sets_orders_total_on_payment_amount_when_payment_is_new(OrderInterface $order, PaymentInterface $payment)
@@ -173,7 +173,7 @@ final class PaymentProcessorSpec extends ObjectBehavior
 
         $payment->setAmount(123)->shouldBeCalled();
 
-        $this->processOrderPayments($order);
+        $this->process($order);
     }
 
     function it_does_not_add_a_new_payment_if_the_order_is_cancelled(OrderInterface $order)
@@ -181,6 +181,6 @@ final class PaymentProcessorSpec extends ObjectBehavior
         $order->getState()->willReturn(OrderInterface::STATE_CANCELLED);
         $order->addPayment(Argument::any())->shouldNotBeCalled();
 
-        $this->processOrderPayments($order);
+        $this->process($order);
     }
 }
