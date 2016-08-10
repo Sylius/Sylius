@@ -46,7 +46,7 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "jackalope/jackalope": "^1.2",
         "jackalope/jackalope-doctrine-dbal": "^1.2",
-        "lakion/api-test-case": "^1.0@dev",
+        "lakion/api-test-case": "^1.0",
         "matthiasnoback/symfony-dependency-injection-test": "^1.0",
         "mongofill/mongofill": "dev-master",
         "phpspec/phpspec": "^3.0",

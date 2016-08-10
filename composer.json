@@ -87,7 +87,7 @@
         "behat/symfony2-extension": "~2.0",
         "fabpot/php-cs-fixer": "^1.11",
         "hwi/oauth-bundle": "~0.3",
-        "lakion/api-test-case": "^1.0@dev",
+        "lakion/api-test-case": "^1.0",
         "lakion/mink-debug-extension": "^1.0.3",
         "malukenho/kawaii-gherkin": "^0.1",
         "matthiasnoback/symfony-config-test": "^2.0",
