@@ -160,6 +160,12 @@ EOT
         $currencyFactory = $this->get('sylius.factory.currency');
 
         $code = trim($this->getContainer()->getParameter('currency'));
+        $this->currency = $currencyRepository->findOneByCode($code);
+
+        if(null !== $this->currency) {
+            return;
+        }
+
         $name = Intl::getCurrencyBundle()->getCurrencyName($code);
         $output->writeln(sprintf('Adding <info>%s</info> currency.', $name));
 
@@ -197,6 +203,7 @@ EOT
             $channelManager->persist($channel);
         }
 
+        $channel->setDefaultCurrency($this->currency);
         $channel->addCurrency($this->currency);
         $channel->addLocale($this->locale);
         $channel->setDefaultCurrency($this->currency);
