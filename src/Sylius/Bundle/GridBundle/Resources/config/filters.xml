@@ -22,6 +22,7 @@
         <parameter key="sylius.form.type.grid_filter.string.class">Sylius\Bundle\GridBundle\Form\Type\Filter\StringFilterType</parameter>
         <parameter key="sylius.grid_filter.boolean.class">Sylius\Component\Grid\Filter\BooleanFilter</parameter>
         <parameter key="sylius.form.type.grid_filter.boolean.class">Sylius\Bundle\GridBundle\Form\Type\Filter\BooleanFilterType</parameter>
+        <parameter key="sylius.grid_filter.elastica.class">Sylius\Component\Grid\Filter\ElasticaFilter</parameter>
     </parameters>
 
     <services>
@@ -36,6 +37,9 @@
         </service>
         <service id="sylius.form.type.grid_filter.boolean" class="%sylius.form.type.grid_filter.boolean.class%">
             <tag name="form.type" alias="sylius_grid_filter_boolean" />
+        </service>
+        <service id="sylius.form.type.grid_filter.elastica" class="%sylius.grid_filter.elastica.class%">
+            <tag name="sylius.grid_filter" type="elastica" />
         </service>
     </services>
 

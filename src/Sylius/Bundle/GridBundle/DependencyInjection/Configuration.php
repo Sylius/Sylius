@@ -29,11 +29,22 @@ class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder();
         $rootNode = $treeBuilder->root('sylius_grid');
 
+        $this->addFosElastica($rootNode);
         $this->addDriversSection($rootNode);
         $this->addTemplatesSection($rootNode);
         $this->addGridsSection($rootNode);
 
         return $treeBuilder;
+    }
+
+    private function addFosElastica(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->booleanNode('use_fos_elastica')
+                ->defaultFalse()
+            ->end()
+        ;
     }
 
     private function addDriversSection(ArrayNodeDefinition $node)
@@ -56,8 +67,8 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('drivers')
                     ->info('Enable drivers which are distributed with this bundle')
                     ->validate()
-                    ->ifTrue(function ($value) use ($validDrivers) { 
-                        return 0 !== count(array_diff($value, $validDrivers)); 
+                    ->ifTrue(function ($value) use ($validDrivers) {
+                        return 0 !== count(array_diff($value, $validDrivers));
                     })
                         ->thenInvalid(sprintf('Invalid driver specified in %%s, valid drivers: ["%s"]', implode('", "', $validDrivers)))
                     ->end()

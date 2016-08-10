@@ -1,0 +1,16 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_grid:
+    grids:
+        sylius_shop_product:
+            driver:
+                name: elastica
+                options:
+                    type: product
+                    terms:
+                        channels: "expr:service('sylius.context.channel').getChannel()"
+                        taxons: $taxonPermalink
+            filters:
+                _all:
+                    type: elastica

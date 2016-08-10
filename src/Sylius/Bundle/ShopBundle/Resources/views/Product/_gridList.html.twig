@@ -1,8 +1,17 @@
 {% import '@SyliusUi/Macro/messages.html.twig' as messages %}
 
-{% if products|length > 0 %}
+{% if grid is not defined and products|length > 0 %}
 <div class="ui three column stackable grid">
     {% for product in products %}
+        <div class="column">
+            {% include '@SyliusShop/Product/_simpleBox.html.twig' %}
+        </div>
+    {% endfor %}
+</div>
+{% elseif grid is defined and grid.data|length > 0 %}
+<div class="ui three column stackable grid">
+    {% for productData in grid.data %}
+        {% set product = productData.data %}
         <div class="column">
             {% include '@SyliusShop/Product/_simpleBox.html.twig' %}
         </div>

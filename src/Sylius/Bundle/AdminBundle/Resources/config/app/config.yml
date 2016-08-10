@@ -29,6 +29,7 @@ sylius_grid:
     drivers:
         - doctrine/orm
         - doctrine/phpcr-odm
+        - elastica
     templates:
         action:
             manage_coupons: "SyliusAdminBundle:Promotion/Action:manageCoupons.html.twig"

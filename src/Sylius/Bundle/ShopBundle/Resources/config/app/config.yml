@@ -3,6 +3,7 @@
 
 imports:
     - { resource: "@SyliusShopBundle/Resources/config/grids/account/order.yml" }
+    - { resource: "@SyliusShopBundle/Resources/config/grids/product.yml" }
 
 sylius_grid:
     templates:
