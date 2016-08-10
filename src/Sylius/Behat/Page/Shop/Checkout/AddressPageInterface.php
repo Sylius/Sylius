@@ -17,7 +17,7 @@ use Sylius\Component\Core\Model\AddressInterface;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-interface AddressingPageInterface extends SymfonyPageInterface
+interface AddressPageInterface extends SymfonyPageInterface
 {
     /**
      * @throws \RuntimeException

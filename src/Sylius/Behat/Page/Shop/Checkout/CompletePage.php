@@ -25,7 +25,7 @@ use Symfony\Component\Routing\RouterInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class SummaryPage extends SymfonyPage implements SummaryPageInterface
+class CompletePage extends SymfonyPage implements CompletePageInterface
 {
     /**
      * @var TableAccessorInterface
@@ -55,7 +55,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
      */
     public function getRouteName()
     {
-        return 'sylius_shop_checkout_summary';
+        return 'sylius_shop_checkout_complete';
     }
 
     /**

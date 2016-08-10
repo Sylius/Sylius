@@ -20,7 +20,7 @@ use Sylius\Component\Payment\Model\PaymentMethodInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-interface SummaryPageInterface extends SymfonyPageInterface
+interface CompletePageInterface
 {
     /**
      * @param string $productName

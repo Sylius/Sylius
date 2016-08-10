@@ -18,14 +18,14 @@ use Sylius\Behat\Page\SymfonyPage;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ShippingPage extends SymfonyPage implements ShippingPageInterface
+class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterface
 {
     /**
      * {@inheritdoc}
      */
     public function getRouteName()
     {
-        return 'sylius_shop_checkout_shipping';
+        return 'sylius_shop_checkout_select_shipping';
     }
 
     /**
@@ -96,7 +96,7 @@ class ShippingPage extends SymfonyPage implements ShippingPageInterface
 
     public function changeAddressByStepLabel()
     {
-        $this->getElement('addressing_step_label')->click();
+        $this->getElement('address')->click();
     }
     
     /**
@@ -105,11 +105,11 @@ class ShippingPage extends SymfonyPage implements ShippingPageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'addressing_step_label' => '.steps a:contains("Addressing")',
+            'address' => '.steps a:contains("Address")',
             'order_cannot_be_shipped_message' => '#sylius-order-cannot-be-shipped',
-            'shipping_method' => '[name="sylius_shop_checkout_shipping[shipments][0][method]"]',
+            'shipping_method' => '[name="sylius_checkout_select_shipping[shipments][0][method]"]',
             'shipping_method_option' => '.item:contains("%shipping_method%") input',
-            'shipping_method_fee' => '.item:contains("%shipping_method%") > .fee',
+            'shipping_method_fee' => '.item:contains("%shipping_method%") .fee',
         ]);
     }
 }

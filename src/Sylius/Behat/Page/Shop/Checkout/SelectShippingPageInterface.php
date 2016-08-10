@@ -16,7 +16,7 @@ use Sylius\Behat\Page\SymfonyPageInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-interface ShippingPageInterface extends SymfonyPageInterface
+interface SelectShippingPageInterface extends SymfonyPageInterface
 {
     /**
      * @param string $shippingMethod
