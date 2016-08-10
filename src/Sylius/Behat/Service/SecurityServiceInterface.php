@@ -11,8 +11,9 @@
 
 namespace Sylius\Behat\Service;
 
-use Sylius\Component\Core\Model\AdminUserInterface;
-use Sylius\Component\Core\Model\ShopUserInterface;
+use Sylius\Component\User\Model\UserInterface;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -20,30 +21,23 @@ use Sylius\Component\Core\Model\ShopUserInterface;
 interface SecurityServiceInterface
 {
     /**
-     * @param ShopUserInterface $shopUser
+     * @param UserInterface $user
      *
      * @throws \InvalidArgumentException
      */
-    public function logShopUserIn(ShopUserInterface $shopUser);
+    public function logIn(UserInterface $user);
 
-    public function logShopUserOut();
-
-    /**
-     * @param AdminUserInterface $adminUser
-     */
-    public function logAdminUserIn(AdminUserInterface $adminUser);
-
-    public function logAdminUserOut();
+    public function logOut();
 
     /**
-     * @param ShopUserInterface $shopUser
-     * @param callable $action
+     * @return TokenInterface
+     *
+     * @throws TokenNotFoundException
      */
-    public function performActionAsShopUser(ShopUserInterface $shopUser, callable $action);
+    public function getCurrentToken();
 
     /**
-     * @param AdminUserInterface $adminUser
-     * @param callable $action
+     * @param TokenInterface $token
      */
-    public function performActionAsAdminUser(AdminUserInterface $adminUser, callable $action);
+    public function restoreToken(TokenInterface $token);
 }

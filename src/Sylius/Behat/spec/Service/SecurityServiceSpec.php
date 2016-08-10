@@ -16,9 +16,9 @@ use Prophecy\Argument;
 use Sylius\Behat\Service\SecurityService;
 use Sylius\Behat\Service\SecurityServiceInterface;
 use Sylius\Behat\Service\Setter\CookieSetterInterface;
-use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
 /**
  * @mixin SecurityService
@@ -32,7 +32,7 @@ final class SecurityServiceSpec extends ObjectBehavior
         SessionInterface $session,
         CookieSetterInterface $cookieSetter
     ) {
-        $this->beConstructedWith($session, $cookieSetter);
+        $this->beConstructedWith($session, $cookieSetter, 'shop');
     }
 
     function it_is_initializable()
@@ -45,7 +45,7 @@ final class SecurityServiceSpec extends ObjectBehavior
         $this->shouldImplement(SecurityServiceInterface::class);
     }
 
-    function it_logs_shop_user_in(
+    function it_logs_user_in(
         SessionInterface $session,
         CookieSetterInterface $cookieSetter,
         ShopUserInterface $shopUser
@@ -54,58 +54,34 @@ final class SecurityServiceSpec extends ObjectBehavior
         $shopUser->getPassword()->willReturn('xyz');
         $shopUser->serialize()->willReturn('serialized_user');
 
-        $session->set(SecurityService::SHOP_SESSION_VARIABLE, Argument::any())->shouldBeCalled();
+        $session->set('_security_shop', Argument::any())->shouldBeCalled();
         $session->save()->shouldBeCalled();
 
         $session->getName()->willReturn('MOCKEDSID');
         $session->getId()->willReturn('xyzc123');
         $cookieSetter->setCookie('MOCKEDSID', 'xyzc123')->shouldBeCalled();
 
-        $this->logShopUserIn($shopUser);
+        $this->logIn($shopUser);
     }
 
-    function it_logs_admin_user_in(
-        SessionInterface $session,
-        CookieSetterInterface $cookieSetter,
-        AdminUserInterface $adminUser
-    ) {
-        $adminUser->getRoles()->willReturn(['ROLE_USER']);
-        $adminUser->getPassword()->willReturn('xyz');
-        $adminUser->serialize()->willReturn('serialized_user');
-
-        $session->set(SecurityService::ADMIN_SESSION_VARIABLE, Argument::any())->shouldBeCalled();
-        $session->save()->shouldBeCalled();
-
-        $session->getName()->willReturn('MOCKEDSID');
-        $session->getId()->willReturn('xyzc123');
-        $cookieSetter->setCookie('MOCKEDSID', 'xyzc123')->shouldBeCalled();
-
-        $this->logAdminUserIn($adminUser);
-    }
-
-    function it_logs_shop_user_out(
+    function it_logs_user_out(
         SessionInterface $session,
         CookieSetterInterface $cookieSetter
     ) {
-        $session->set(SecurityService::SHOP_SESSION_VARIABLE, null)->shouldBeCalled();
+        $session->set('_security_shop', null)->shouldBeCalled();
         $session->save()->shouldBeCalled();
         $session->getName()->willReturn('MOCKEDSID');
         $session->getId()->willReturn('xyzc123');
         $cookieSetter->setCookie('MOCKEDSID', 'xyzc123')->shouldBeCalled();
 
-        $this->logShopUserOut();
+        $this->logOut();
     }
 
-    function it_logs_admin_user_out(
-        SessionInterface $session,
-        CookieSetterInterface $cookieSetter
+    function it_throws_token_not_found_exception(
+        SessionInterface $session
     ) {
-        $session->set(SecurityService::ADMIN_SESSION_VARIABLE, null)->shouldBeCalled();
-        $session->save()->shouldBeCalled();
-        $session->getName()->willReturn('MOCKEDSID');
-        $session->getId()->willReturn('xyzc123');
-        $cookieSetter->setCookie('MOCKEDSID', 'xyzc123')->shouldBeCalled();
+        $session->get('_security_shop')->willReturn(null);
 
-        $this->logAdminUserOut();
+        $this->shouldThrow(TokenNotFoundException::class)->during('getCurrentToken');
     }
 }

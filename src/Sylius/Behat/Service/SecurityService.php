@@ -12,11 +12,11 @@
 namespace Sylius\Behat\Service;
 
 use Sylius\Behat\Service\Setter\CookieSetterInterface;
-use Sylius\Component\Core\Model\AdminUserInterface;
-use Sylius\Component\Core\Model\ShopUserInterface;
+use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
-use Sylius\Component\User\Model\UserInterface as BaseUserInterface;
+use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -24,11 +24,6 @@ use Sylius\Component\User\Model\UserInterface as BaseUserInterface;
  */
 final class SecurityService implements SecurityServiceInterface
 {
-    const ADMIN_PROVIDER_KEY = 'sylius_admin_user_provider';
-    const ADMIN_SESSION_VARIABLE = '_security_admin';
-    const SHOP_PROVIDER_KEY = 'sylius_shop_user_provider';
-    const SHOP_SESSION_VARIABLE = '_security_shop';
-
     /**
      * @var SessionInterface
      */
@@ -40,124 +35,69 @@ final class SecurityService implements SecurityServiceInterface
     private $cookieSetter;
 
     /**
+     * @var string
+     */
+    private $sessionTokenVariable;
+
+    /**
      * @param SessionInterface $session
      * @param CookieSetterInterface $cookieSetter
+     * @param string $firewallContextName
      */
-    public function __construct(SessionInterface $session, CookieSetterInterface $cookieSetter)
+    public function __construct(SessionInterface $session, CookieSetterInterface $cookieSetter, $firewallContextName)
     {
         $this->session = $session;
         $this->cookieSetter = $cookieSetter;
+        $this->sessionTokenVariable = sprintf('_security_%s', $firewallContextName);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function logShopUserIn(ShopUserInterface $shopUser)
+    public function logIn(UserInterface $user)
     {
-        $this->logUserIn($shopUser, self::SHOP_PROVIDER_KEY, self::SHOP_SESSION_VARIABLE);
+        $token = new UsernamePasswordToken($user, $user->getPassword(), 'randomstringbutnotnull', $user->getRoles());
+        $this->setToken($token);
     }
 
-    public function logShopUserOut()
+    public function logOut()
     {
-        $this->logUserOut(self::SHOP_SESSION_VARIABLE);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function logAdminUserIn(AdminUserInterface $adminUser)
-    {
-        $this->logUserIn($adminUser, self::ADMIN_PROVIDER_KEY, self::ADMIN_SESSION_VARIABLE);
-    }
-
-    public function logAdminUserOut()
-    {
-        $this->logUserOut(self::ADMIN_SESSION_VARIABLE);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function performActionAsShopUser(ShopUserInterface $shopUser, callable $action)
-    {
-        $previousToken = $this->getShopUserToken();
-        $this->logShopUserIn($shopUser);
-        $action();
-        $this->restorePreviousSessionTokenOrLogOut($previousToken, self::SHOP_SESSION_VARIABLE);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function performActionAsAdminUser(AdminUserInterface $adminUser, callable $action)
-    {
-        $previousToken = $this->getAdminUserToken();
-        $this->logAdminUserIn($adminUser);
-        $action();
-        $this->restorePreviousSessionTokenOrLogOut($previousToken, self::ADMIN_SESSION_VARIABLE);
-    }
-
-    /**
-     * @param BaseUserInterface $user
-     * @param string $providerKey
-     * @param string $sessionTokenVariable
-     */
-    private function logUserIn(BaseUserInterface $user, $providerKey, $sessionTokenVariable)
-    {
-        $token = new UsernamePasswordToken($user, $user->getPassword(), $providerKey, $user->getRoles());
-        $serializedToken = serialize($token);
-
-        $this->setSerializedToken($sessionTokenVariable, $serializedToken);
-
-        $this->cookieSetter->setCookie($this->session->getName(), $this->session->getId());
-    }
-
-    private function logUserOut($sessionTokenVariable)
-    {
-        $this->setSerializedToken($sessionTokenVariable, null);
+        $this->session->set($this->sessionTokenVariable, null);
+        $this->session->save();
 
         $this->cookieSetter->setCookie($this->session->getName(), $this->session->getId());
     }
 
     /**
-     * @param string $previousToken
-     * @param string $sessionTokenVariable
+     * {@inheritdoc}
      */
-    private function restorePreviousSessionTokenOrLogOut($previousToken, $sessionTokenVariable)
+    public function getCurrentToken()
     {
-        if (null !== $previousToken) {
-            $this->setSerializedToken($sessionTokenVariable, $previousToken);
-            $this->cookieSetter->setCookie($this->session->getName(), $this->session->getId());
+        $serializedToken = $this->session->get($this->sessionTokenVariable);
 
-            return;
+        if (null === $serializedToken) {
+            throw new TokenNotFoundException();
         }
 
-        $this->logUserOut($sessionTokenVariable);
+        return unserialize($serializedToken);
     }
 
     /**
-     * @param string $sessionTokenVariable
-     * @param string $token
+     * {@inheritdoc}
      */
-    private function setSerializedToken($sessionTokenVariable, $token)
+    public function restoreToken(TokenInterface $token)
     {
-        $this->session->set($sessionTokenVariable, $token);
+        $this->setToken($token);
+    }
+
+    /**
+     * @param TokenInterface $token
+     */
+    private function setToken(TokenInterface $token)
+    {
+        $serializedToken = serialize($token);
+        $this->session->set($this->sessionTokenVariable, $serializedToken);
         $this->session->save();
-    }
-
-    /**
-     * @return string
-     */
-    private function getShopUserToken()
-    {
-        return $this->session->get(self::SHOP_SESSION_VARIABLE);
-    }
-
-    /**
-     * @return string
-     */
-    private function getAdminUserToken()
-    {
-        return $this->session->get(self::ADMIN_SESSION_VARIABLE);
+        $this->cookieSetter->setCookie($this->session->getName(), $this->session->getId());
     }
 }
