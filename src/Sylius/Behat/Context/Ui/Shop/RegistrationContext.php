@@ -277,7 +277,7 @@ class RegistrationContext implements Context
      */
     public function myAccountShouldBeVerified(ShopUserInterface $user)
     {
-        $this->securityService->logIn($user->getEmail());
+        $this->securityService->logShopUserIn($user);
 
         Assert::true(
             $this->dashboardPage->isVerified(),
