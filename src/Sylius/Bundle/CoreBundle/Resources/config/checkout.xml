@@ -21,6 +21,7 @@
         <parameter key="sylius.form.type.checkout_select_shipping.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\SelectShippingType</parameter>
         <parameter key="sylius.form.type.checkout_shipment.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\ShipmentType</parameter>
         <parameter key="sylius.form.type.checkout_select_payment.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\SelectPaymentType</parameter>
+        <parameter key="sylius.form.type.checkout_payment.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\PaymentType</parameter>
         <parameter key="sylius.form.type.checkout_complete.class">Sylius\Bundle\CoreBundle\Form\Type\Checkout\CompleteType</parameter>
     </parameters>
 
@@ -40,6 +41,10 @@
         <service id="sylius.form.type.checkout_select_payment" class="%sylius.form.type.checkout_select_payment.class%">
             <argument>%sylius.model.cart.class%</argument>
             <tag name="form.type" alias="sylius_checkout_select_payment" />
+        </service>
+        <service id="sylius.form.type.checkout_payment" class="%sylius.form.type.checkout_payment.class%">
+            <argument>%sylius.model.payment.class%</argument>
+            <tag name="form.type" alias="sylius_checkout_payment" />
         </service>
         <service id="sylius.form.type.checkout_complete" class="%sylius.form.type.checkout_complete.class%">
             <argument>%sylius.model.cart.class%</argument>

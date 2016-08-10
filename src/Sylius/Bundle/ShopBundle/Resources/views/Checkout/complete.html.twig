@@ -4,15 +4,15 @@
 
 {% block content %}
     {% include '@SyliusShop/Checkout/_header.html.twig' %}
-    {% include '@SyliusShop/Checkout/_steps.html.twig' with { 'active': 'summary' } %}
+    {% include '@SyliusShop/Checkout/_steps.html.twig' with {'active': 'complete'} %}
     <div class="ui padded segment">
-        {{ form_start(form, {'action': path('sylius_shop_checkout_summary'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
+        {{ form_start(form, {'action': path('sylius_shop_checkout_complete'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
             <input type="hidden" name="_method" value="PUT" />
 
             {% include 'SyliusShopBundle:Common/Order:_summary.html.twig' %}
 
             <div class="ui hidden divider"></div>
-            {% include '@SyliusShop/Checkout/Form/_summary.html.twig' %}
+            {% include '@SyliusShop/Checkout/Complete/_form.html.twig' %}
 
             <button type="submit" class="ui huge primary fluid icon labeled button"><i class="check icon"></i> {{ 'sylius.ui.place_order'|trans }}</button>
 

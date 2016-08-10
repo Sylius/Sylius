@@ -85,7 +85,7 @@ sylius_shop_checkout_reselect_shipping:
                 route: sylius_shop_checkout_select_shipping
                 parameters: []
 
-sylius_shop_checkout_select-payment:
+sylius_shop_checkout_select_payment:
     path: /select-payment
     methods: [GET, PUT]
     defaults:
@@ -93,7 +93,7 @@ sylius_shop_checkout_select-payment:
         _sylius:
             event: payment
             flash: false
-            template: SyliusShopBundle:Checkout:payment.html.twig
+            template: SyliusShopBundle:Checkout:selectPayment.html.twig
             form: sylius_checkout_select_payment
             repository:
                 method: find
@@ -102,7 +102,7 @@ sylius_shop_checkout_select-payment:
                 graph: sylius_order_checkout
                 transition: select_payment
             redirect:
-                route: sylius_shop_checkout_summary
+                route: sylius_shop_checkout_complete
                 parameters: []
 
 sylius_shop_checkout_reselect_payment:
@@ -119,7 +119,7 @@ sylius_shop_checkout_reselect_payment:
                 graph: sylius_order_checkout
                 transition: reselect_payment
             redirect:
-                route: sylius_shop_checkout_payment
+                route: sylius_shop_checkout_select_payment
                 parameters: []
 
 sylius_shop_checkout_complete:

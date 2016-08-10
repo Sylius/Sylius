@@ -16,7 +16,7 @@ use Sylius\Behat\Page\SymfonyPageInterface;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-interface PaymentPageInterface extends SymfonyPageInterface
+interface SelectPaymentPageInterface extends SymfonyPageInterface
 {
     /**
      * @param string $paymentMethod

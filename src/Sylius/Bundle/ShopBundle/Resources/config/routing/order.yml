@@ -21,7 +21,7 @@ sylius_shop_order_after_pay:
             redirect:
                 route: sylius_shop_checkout_thank_you
 
-sylius_shop_order_change_payment_method:
+sylius_shop_order_payment_method_update:
     path: /{orderId}/change-payment-method
     methods: [GET, PUT]
     defaults:
@@ -29,7 +29,7 @@ sylius_shop_order_change_payment_method:
         _sylius:
             permission: false
             template: SyliusShopBundle:Order:payment.html.twig
-            form: sylius_checkout_payment_step
+            form: sylius_checkout_select_payment
             repository:
                 method: find
                 arguments: [$orderId]

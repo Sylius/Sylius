@@ -1,48 +1,48 @@
 {% if active is not defined or active == 'address' %}
-    {% set steps = { 'address': 'active', 'shipping': 'disabled', 'payment': 'disabled', 'summary': 'disabled' } %}
-{% elseif active == 'shipping' %}
-    {% set steps = { 'address': 'completed', 'shipping': 'active', 'payment': 'disabled', 'summary': 'disabled' } %}
-{% elseif active == 'payment' %}
-    {% set steps = { 'address': 'completed', 'shipping': 'completed', 'payment': 'active', 'summary': 'disabled' } %}
+    {% set steps = {'address': 'active', 'select_shipping': 'disabled', 'select_payment': 'disabled', 'complete': 'disabled'} %}
+{% elseif active == 'select_shipping' %}
+    {% set steps = {'address': 'completed', 'select_shipping': 'active', 'select_payment': 'disabled', 'complete': 'disabled'} %}
+{% elseif active == 'select_payment' %}
+    {% set steps = {'address': 'completed', 'select_shipping': 'completed', 'select_payment': 'active', 'complete': 'disabled'} %}
 {% else %}
-    {% set steps = { 'address': 'completed', 'shipping': 'completed', 'payment': 'completed', 'summary': 'active' } %}
+    {% set steps = {'address': 'completed', 'select_shipping': 'completed', 'select_payment': 'completed', 'complete': 'active'} %}
 {% endif %}
 
 <div class="ui four steps">
-    <a data-remote-form="sylius_shop_checkout_readdress" class="{{ steps['address'] }} step" href="#">
+    <a data-remote-form="sylius_checkout_readdress" class="{{ steps['address'] }} step" href="#">
         <i class="map icon"></i>
         <div class="content">
             <div class="title">{{ 'sylius.ui.address'|trans }}</div>
         </div>
     </a>
-    <a data-remote-form="sylius_shop_checkout_reselect_shipping" class="{{ steps['shipping'] }} step" href="#">
+    <a data-remote-form="sylius_checkout_reselect_shipping" class="{{ steps['select_shipping'] }} step" href="#">
         <i class="truck icon"></i>
         <div class="content">
             <div class="title">{{ 'sylius.ui.shipping'|trans }}</div>
         </div>
     </a>
-    <a data-remote-form="sylius_shop_checkout_reselect_payment" class="{{ steps['payment'] }} step" href="#">
+    <a data-remote-form="sylius_checkout_reselect_payment" class="{{ steps['select_payment'] }} step" href="#">
         <i class="payment icon"></i>
         <div class="content">
             <div class="title">{{ 'sylius.ui.payment'|trans }}</div>
         </div>
     </a>
-    <div class="{{ steps['summary'] }} step">
+    <div class="{{ steps['complete'] }} step">
         <i class="checkered flag icon"></i>
         <div class="content">
-            <div class="title">{{ 'sylius.ui.summary'|trans }}</div>
+            <div class="title">{{ 'sylius.ui.complete'|trans }}</div>
         </div>
     </div>
 </div>
 
-<form id="sylius_shop_checkout_readdress" action="{{ path('sylius_shop_checkout_readdress') }}" method="post">
+<form id="sylius_checkout_readdress" action="{{ path('sylius_shop_checkout_readdress') }}" method="post">
     <input type="hidden" name="_method" value="PUT" />
 </form>
 
-<form id="sylius_shop_checkout_reselect_shipping" action="{{ path('sylius_shop_checkout_reselect_shipping') }}" method="post">
+<form id="sylius_checkout_reselect_shipping" action="{{ path('sylius_shop_checkout_reselect_shipping') }}" method="post">
     <input type="hidden" name="_method" value="PUT" />
 </form>
 
-<form id="sylius_shop_checkout_reselect_payment" action="{{ path('sylius_shop_checkout_reselect_payment') }}" method="post">
+<form id="sylius_checkout_reselect_payment" action="{{ path('sylius_shop_checkout_reselect_payment') }}" method="post">
     <input type="hidden" name="_method" value="PUT" />
 </form>

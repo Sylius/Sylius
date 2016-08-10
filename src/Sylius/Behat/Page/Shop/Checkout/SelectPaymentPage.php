@@ -18,14 +18,14 @@ use Sylius\Behat\Page\SymfonyPage;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class PaymentPage extends SymfonyPage implements PaymentPageInterface
+class SelectPaymentPage extends SymfonyPage implements SelectPaymentPageInterface
 {
     /**
      * {@inheritdoc}
      */
     public function getRouteName()
     {
-        return 'sylius_shop_checkout_payment';
+        return 'sylius_shop_checkout_select_payment';
     }
 
     /**
@@ -75,7 +75,7 @@ class PaymentPage extends SymfonyPage implements PaymentPageInterface
 
     public function changeAddressByStepLabel()
     {
-        $this->getElement('addressing_step_label')->click();
+        $this->getElement('address_step_label')->click();
     }
 
     /**
@@ -84,11 +84,11 @@ class PaymentPage extends SymfonyPage implements PaymentPageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'addressing_step_label' => '.steps a:contains("Addressing")',
-            'order_cannot_be_paid_message' => '#sylius-order-cannot-be-paid',
-            'payment_method' => '[name="sylius_checkout_payment_step[payments][0][method]"]',
-            'payment_method_option' => '.item:contains("%payment_method%") input',
+            'address_step_label' => '.steps a:contains("Address")',
             'shipping_step_label' => '.steps a:contains("Shipping")',
+            'order_cannot_be_paid_message' => '#sylius-order-cannot-be-paid',
+            'payment_method' => '[name="sylius_checkout_select_payment[payments][0][method]"]',
+            'payment_method_option' => '.item:contains("%payment_method%") input',
         ]);
     }
 }
