@@ -56,3 +56,78 @@ fos_rest:
         rules:
             - { path: '^/api', priorities: ['json', 'xml'], fallback_format: json, prefer_extension: true }
             - { path: '^/', stop: true }
+
+fos_elastica:
+    clients:
+        elasticsearch:
+            servers:
+                - { host: %elastica_host%, port: %elastica_port% }
+    indexes:
+        sylius:
+            client: elasticsearch
+            finder: ~
+            settings:
+                analysis:
+                    analyzer:
+                        sylius_search_analyzer:
+                            type: custom
+                            tokenizer: standard
+                            filter   : [lowercase, asciifolding, synonym]
+                        sylius_index_analyzer:
+                            type: custom
+                            tokenizer: standard
+                            filter   : [lowercase, asciifolding, synonym, sylius_filter]
+                    filter:
+                        sylius_filter:
+                            type: edgeNGram
+                            min_gram: 4
+                            max_gram: 12
+                        synonym:
+                            type: synonym
+                            expand: true
+                            ignore_case: true
+                            synonyms: synonym.txt
+            types:
+                product:
+                    search_analyzer: sylius_search_analyzer
+                    index_analyzer: sylius_index_analyzer
+                    mappings:
+                        id: { type: integer, index: not_analyzed }
+                        name: { type: string, analyzer: sylius_index_analyzer }
+                        description: { type: string }
+                        price: { type: integer }
+                        shortDescription: { type: string }
+                        slug: { type: string, index: not_analyzed }
+                        translations:
+                            type: nested
+                            properties:
+                                locale: { type: string, index: not_analyzed }
+                                name: { type: string }
+                                metaKeywords: { type: string }
+                                metaDescription: { type: string }
+                        variants:
+                            type: nested
+                            properties:
+                                code: { type: string }
+                                availableOn: { type: date, index: not_analyzed }
+                                availableUntil: { type: date }
+                                name: { type: string }
+                                onHand: { type: integer, index: not_analyzed }
+                                onHold: { type: integer, index: not_analyzed }
+                        attributes:
+                            type: nested
+                            properties:
+                                value: { type: string }
+                        channels: { type: string, index: not_analyzed }
+                        taxons: { type: string, index: not_analyzed }
+                        image:
+                            type: nested
+                            properties:
+                                path: { type: string, index: not_analyzed }
+                        enabled: { type: boolean }
+                    persistence:
+                        driver: orm
+                        model: Sylius\Component\Core\Model\Product
+                        provider: ~
+                        listener: ~
+                        finder: ~

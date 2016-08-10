@@ -48,7 +48,8 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
                         'actions' => [],
                     ]
                 ],
-                'drivers' => [ 'doctrine/orm' ]
+                'drivers' => [ 'doctrine/orm' ],
+                'use_fos_elastica' => false
             ]
         );
     }

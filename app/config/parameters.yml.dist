@@ -13,6 +13,9 @@ parameters:
     mailer_user: ~
     mailer_password: ~
 
+    elastica_host: 127.0.0.1
+    elastica_port: 9200
+
     secret: EDITME
     locale: en_US
     currency: USD
