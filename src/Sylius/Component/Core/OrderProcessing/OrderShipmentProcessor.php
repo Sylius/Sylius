@@ -14,6 +14,7 @@ namespace Sylius\Component\Core\OrderProcessing;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Shipping\Exception\UnresolvedDefaultShippingMethodException;
 use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface;
 
 /**
@@ -50,6 +51,10 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
     {
         $shipment = $this->getOrderShipment($order);
 
+        if (null === $shipment) {
+            return;
+        }
+
         foreach ($order->getItemUnits() as $itemUnit) {
             if (null === $itemUnit->getShipment()) {
                 $shipment->addUnit($itemUnit);
@@ -68,13 +73,17 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
             return $order->getShipments()->first();
         }
 
-        /** @var ShipmentInterface $shipment */
-        $shipment = $this->shipmentFactory->createNew();
-        $shipment->setOrder($order);
-        $shipment->setMethod($this->defaultShippingMethodResolver->getDefaultShippingMethod($shipment));
+        try {
+            /** @var ShipmentInterface $shipment */
+            $shipment = $this->shipmentFactory->createNew();
+            $shipment->setOrder($order);
+            $shipment->setMethod($this->defaultShippingMethodResolver->getDefaultShippingMethod($shipment));
 
-        $order->addShipment($shipment);
+            $order->addShipment($shipment);
 
-        return $shipment;
+            return $shipment;
+        } catch (UnresolvedDefaultShippingMethodException $exception) {
+            return null;
+        }
     }
 }

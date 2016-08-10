@@ -15,6 +15,7 @@ use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Shipping\Calculator\DelegatingCalculatorInterface;
+use Sylius\Component\Shipping\Calculator\UndefinedShippingMethodException;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -50,14 +51,16 @@ final class ShippingChargesProcessor implements OrderProcessorInterface
         $order->removeAdjustments(AdjustmentInterface::SHIPPING_ADJUSTMENT);
 
         foreach ($order->getShipments() as $shipment) {
-            $shippingCharge = $this->shippingChargesCalculator->calculate($shipment);
+            try {
+                $shippingCharge = $this->shippingChargesCalculator->calculate($shipment);
 
-            $adjustment = $this->adjustmentFactory->createNew();
-            $adjustment->setType(AdjustmentInterface::SHIPPING_ADJUSTMENT);
-            $adjustment->setAmount($shippingCharge);
-            $adjustment->setLabel($shipment->getMethod()->getName());
+                $adjustment = $this->adjustmentFactory->createNew();
+                $adjustment->setType(AdjustmentInterface::SHIPPING_ADJUSTMENT);
+                $adjustment->setAmount($shippingCharge);
+                $adjustment->setLabel($shipment->getMethod()->getName());
 
-            $order->addAdjustment($adjustment);
+                $order->addAdjustment($adjustment);
+            } catch (UndefinedShippingMethodException $exception) {}
         }
     }
 }
