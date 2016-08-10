@@ -15,9 +15,9 @@ sylius_shop_product_show:
                     - 'expr:service("sylius.context.channel").getChannel()'
 
 sylius_shop_product_index:
-     path: /products
-     defaults:
-         _controller: sylius.controller.product:indexAction
-         _sylius:
-             template: SyliusShopBundle:Product:index.html.twig
-             grid: sylius_shop_product
+    path: /products
+    defaults:
+        _controller: sylius.controller.product:indexAction
+        _sylius:
+            template: SyliusShopBundle:Product:index.html.twig
+            grid: sylius_shop_product

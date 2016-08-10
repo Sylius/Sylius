@@ -61,11 +61,9 @@ class SyliusGridExtension extends Extension implements PrependExtensionInterface
     {
         $config = $this->processConfiguration(new Configuration(), $container->getExtensionConfig($this->getAlias()));
 
-        if (!$container->hasExtension('fos_elastica')) {
-            return;
+        if ($container->hasExtension('fos_elastica')) {
+            $config = array('use_fos_elastica' => true);
+            $container->prependExtensionConfig($this->getAlias(), $config);
         }
-
-        $config['use_fos_elastica'] = true;
-        $container->prependExtensionConfig($this->getAlias(), $config);
     }
 }

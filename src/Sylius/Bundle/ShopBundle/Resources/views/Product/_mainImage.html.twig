@@ -1,3 +1,9 @@
-{% set path = product.image is not null ? product.image.path|imagine_filter(filter|default('sylius_shop_product_thumbnail')) : 'http://placehold.it/200x200' %}
+{% if product.image is not null and product.image is not iterable %}
+    {% set path = product.image.path|imagine_filter(filter|default('sylius_shop_product_thumbnail')) %}
+{% elseif product.image is not null and product.image is iterable %}
+    {% set path = product.image is not empty ? product.image.path|imagine_filter(filter|default('sylius_shop_product_thumbnail')) : 'http://placehold.it/200x200' %}
+{% else %}
+    {% set path = 'http://placehold.it/200x200' %}
+{% endif %}
 
 <img src="{{ path }}" alt="" class="ui bordered image" />

@@ -51,6 +51,7 @@ sylius_grid:
         filter:
             string: "SyliusAdminBundle:Grid/Filter:string.html.twig"
             boolean: "SyliusAdminBundle:Grid/Filter:boolean.html.twig"
+            elastica: "SyliusAdminBundle:Grid/Filter:elastica.html.twig"
 
 liip_imagine:
     filter_sets:
