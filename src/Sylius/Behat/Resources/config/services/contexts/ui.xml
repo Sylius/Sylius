@@ -18,6 +18,12 @@
             <tag name="sylius.behat.context" />
         </service>
 
+        <service id="sylius.behat.context.ui.admin.login" class="Sylius\Behat\Context\Ui\Admin\LoginContext" scope="scenario">
+            <argument type="service" id="sylius.behat.page.admin.dashboard" />
+            <argument type="service" id="sylius.behat.page.admin.login" />
+            <tag name="sylius.behat.context" />
+        </service>
+
         <service id="sylius.behat.context.ui.admin.managing_channels" class="Sylius\Behat\Context\Ui\Admin\ManagingChannelsContext" scope="scenario">
             <argument type="service" id="sylius.behat.page.admin.channel.index" />
             <argument type="service" id="sylius.behat.page.admin.channel.create" />

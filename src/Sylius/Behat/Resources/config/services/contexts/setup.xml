@@ -211,6 +211,13 @@
             <tag name="sylius.behat.context" />
         </service>
 
+        <service id="sylius.behat.context.setup.admin_user" class="Sylius\Behat\Context\Setup\AdminUserContext" scope="scenario">
+            <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="sylius.test.factory.admin_user" container="symfony" />
+            <argument type="service" id="sylius.repository.admin_user" container="symfony" />
+            <tag name="sylius.behat.context" />
+        </service>
+
         <service id="sylius.behat.context.setup.zone" class="Sylius\Behat\Context\Setup\ZoneContext" scope="scenario">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.repository.zone" container="symfony" />

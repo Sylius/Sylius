@@ -146,18 +146,6 @@ final class UserContext implements Context
     }
 
     /**
-     * @Given there is an administrator identified by :email
-     */
-    public function thereIsAnAdministratorIdentifiedBy($email)
-    {
-        $administrator = $this->userFactory->createDefaultAdmin();
-        $administrator->setEmail($email);
-
-        $this->sharedStorage->set('administrator', $administrator);
-        $this->userRepository->add($administrator);
-    }
-
-    /**
      * @Given /^(this user) is not verified$/
      * @Given /^(I) have not verified my account (?:yet)$/
      */
