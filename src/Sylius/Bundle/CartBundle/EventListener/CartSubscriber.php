@@ -61,7 +61,6 @@ class CartSubscriber implements EventSubscriberInterface
     {
         return [
             SyliusCartEvents::ITEM_ADD_INITIALIZE => 'addItem',
-            SyliusCartEvents::ITEM_REMOVE_INITIALIZE => 'removeItem',
             SyliusCartEvents::CART_SAVE_INITIALIZE => 'saveCart',
         ];
     }
@@ -83,15 +82,6 @@ class CartSubscriber implements EventSubscriberInterface
         }
 
         $cart->addItem($item);
-    }
-
-    /**
-     * @param CartItemEvent $event
-     */
-    public function removeItem(CartItemEvent $event)
-    {
-        $cart = $event->getCart();
-        $cart->removeItem($event->getItem());
     }
 
     /**

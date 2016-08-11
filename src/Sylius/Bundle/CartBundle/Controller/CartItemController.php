@@ -14,12 +14,10 @@ namespace Sylius\Bundle\CartBundle\Controller;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\View\View;
 use Sylius\Component\Cart\CartActions;
-use Sylius\Component\Cart\Event\CartItemEvent;
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Cart\Model\CartItemInterface;
 use Sylius\Component\Cart\SyliusCartEvents;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
-use Sylius\Component\Resource\Event\FlashEvent;
 use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Request;
@@ -99,13 +97,7 @@ class CartItemController extends Controller
     }
 
     /**
-     * Removes item from cart.
-     * It takes an item id as an argument.
-     *
-     * If the item is found and the current user cart contains that item,
-     * it will be removed and the cart - refreshed and saved.
-     *
-     * @param mixed $id
+     * @param Request $request
      *
      * @return Response
      */
@@ -113,29 +105,38 @@ class CartItemController extends Controller
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
-        $cart = $this->getCurrentCart();
-        $item = $this->findOr404($configuration);
+        $this->isGrantedOr403($configuration, ResourceActions::DELETE);
+        $resource = $this->findOr404($configuration);
 
-        $eventDispatcher = $this->getEventDispatcher();
+        $event = $this->eventDispatcher->dispatchPreEvent(ResourceActions::DELETE, $configuration, $resource);
 
-        if (!$item || false === $cart->hasItem($item)) {
-            // Write flash message
-            $eventDispatcher->dispatch(SyliusCartEvents::ITEM_REMOVE_ERROR, new FlashEvent());
+        if ($event->isStopped() && !$configuration->isHtmlRequest()) {
+            throw new HttpException($event->getErrorCode(), $event->getMessage());
+        }
+        if ($event->isStopped()) {
+            $this->flashHelper->addFlashFromEvent($configuration, $event);
 
-            return $this->redirectToCartSummary($configuration);
+            return $this->redirectHandler->redirectToIndex($configuration, $resource);
         }
 
-        $event = new CartItemEvent($cart, $item);
+        $cart = $this->getCurrentCart();
+        $cart->removeItem($resource);
+        $this->repository->remove($resource);
+        $this->eventDispatcher->dispatchPostEvent(ResourceActions::DELETE, $configuration, $resource);
 
-        // Update models
-        $eventDispatcher->dispatch(SyliusCartEvents::ITEM_REMOVE_INITIALIZE, $event);
-        $eventDispatcher->dispatch(SyliusCartEvents::CART_CHANGE, new GenericEvent($cart));
-        $eventDispatcher->dispatch(SyliusCartEvents::CART_SAVE_INITIALIZE, $event);
+        if (!$configuration->isHtmlRequest()) {
+            return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
+        }
 
-        // Write flash message
-        $eventDispatcher->dispatch(SyliusCartEvents::ITEM_REMOVE_COMPLETED, new FlashEvent());
+        $this->getEventDispatcher()->dispatch(SyliusCartEvents::CART_CHANGE, new GenericEvent($cart));
 
-        return $this->redirectToCartSummary($configuration);
+        $cartManager = $this->getCartManager();
+        $cartManager->persist($cart);
+        $cartManager->flush();
+
+        $this->flashHelper->addSuccessFlash($configuration, ResourceActions::DELETE, $resource);
+
+        return $this->redirectHandler->redirectToIndex($configuration, $resource);
     }
 
     /**

@@ -93,15 +93,6 @@ final class CartSubscriberSpec extends ObjectBehavior
         $this->addItem($event);
     }
 
-    function it_should_remove_a_item_to_a_cart_from_event(CartItemEvent $event, CartInterface $cart, CartItemInterface $cartItem)
-    {
-        $event->getCart()->willReturn($cart);
-        $event->getItem()->willReturn($cartItem);
-        $cart->removeItem($cartItem)->shouldBeCalled();
-
-        $this->removeItem($event);
-    }
-
     function it_should_save_a_valid_cart(ObjectManager $manager, CartEvent $event, CartInterface $cart)
     {
         $event->getCart()->willReturn($cart);
