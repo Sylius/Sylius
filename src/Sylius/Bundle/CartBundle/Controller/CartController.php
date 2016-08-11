@@ -12,20 +12,20 @@
 namespace Sylius\Bundle\CartBundle\Controller;
 
 use FOS\RestBundle\View\View;
+use Sylius\Component\Cart\SyliusCartEvents;
 use Sylius\Component\Resource\ResourceActions;
+use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 class CartController extends Controller
 {
     /**
-     * Displays current cart summary page.
-     * The parameters includes the form created from `sylius_cart` type.
-     *
      * @param Request $request
      *
      * @return Response
@@ -80,12 +80,14 @@ class CartController extends Controller
                 $this->stateMachine->apply($configuration, $resource);
             }
 
-            $this->manager->flush();
             $this->eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource);
 
             if (!$configuration->isHtmlRequest()) {
                 return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
             }
+
+            $this->getEventDispatcher()->dispatch(SyliusCartEvents::CART_CHANGE, new GenericEvent($resource));
+            $this->manager->flush();
 
             $this->flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource);
 
