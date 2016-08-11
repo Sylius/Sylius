@@ -455,13 +455,6 @@ sylius_rbac:
         sylius.route.update: Edit route
         sylius.route.delete: Delete route
 
-        sylius.manage.menu: Manage menus
-        sylius.menu.show: Show menu
-        sylius.menu.index: List menus
-        sylius.menu.create: Create menu
-        sylius.menu.update: Edit menu
-        sylius.menu.delete: Delete menu
-
         sylius.manage.simple_block: Manage simple blocks
         sylius.simple_block.show: Show simple block
         sylius.simple_block.index: List simple blocks
