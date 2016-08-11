@@ -58,10 +58,8 @@ class FlashSubscriber implements EventSubscriberInterface
             SyliusCartEvents::CART_SAVE_COMPLETED => 'addSuccessFlash',
 
             SyliusCartEvents::ITEM_ADD_COMPLETED => 'addSuccessFlash',
-            SyliusCartEvents::ITEM_REMOVE_COMPLETED => 'addSuccessFlash',
 
             SyliusCartEvents::ITEM_ADD_ERROR => 'addErrorFlash',
-            SyliusCartEvents::ITEM_REMOVE_ERROR => 'addErrorFlash',
         ];
     }
 
@@ -74,10 +72,8 @@ class FlashSubscriber implements EventSubscriberInterface
             SyliusCartEvents::CART_SAVE_COMPLETED => 'sylius.cart.cart_save_completed',
 
             SyliusCartEvents::ITEM_ADD_COMPLETED => 'sylius.cart.item_add_completed',
-            SyliusCartEvents::ITEM_REMOVE_COMPLETED => 'sylius.cart.item_remove_completed',
 
             SyliusCartEvents::ITEM_ADD_ERROR => 'sylius.cart.item_add_error',
-            SyliusCartEvents::ITEM_REMOVE_ERROR => 'sylius.cart.item_remove_error',
         ];
 
         return $this;
