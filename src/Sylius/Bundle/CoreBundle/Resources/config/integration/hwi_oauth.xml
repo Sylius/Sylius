@@ -14,12 +14,12 @@
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
         <service id="sylius.oauth.user_provider" class="Sylius\Bundle\CoreBundle\OAuth\UserProvider" lazy="true">
+            <argument type="string" id="%sylius.model.admin_user.class%" />
             <argument type="service" id="sylius.factory.customer" />
-            <argument type="service" id="sylius.repository.customer" />
             <argument type="service" id="sylius.factory.admin_user" />
             <argument type="service" id="sylius.repository.admin_user" />
-            <argument type="service" id="sylius.factory.admin_user_oauth" />
-            <argument type="service" id="sylius.repository.admin_user_oauth" />
+            <argument type="service" id="sylius.factory.admin_oauth_user" />
+            <argument type="service" id="sylius.repository.admin_oauth_user" />
             <argument type="service" id="sylius.manager.admin_user" />
             <argument type="service" id="sylius.user.canonicalizer" />
         </service>
