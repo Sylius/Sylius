@@ -37,9 +37,12 @@ final class CanonicalizerListenerSpec extends ObjectBehavior
     {
         $event->getEntity()->willReturn($user);
         $user->getUsername()->willReturn('testUser');
+        $user->getEmail()->willReturn('test@email.com');
 
         $user->setUsernameCanonical('testuser')->shouldBeCalled();
+        $user->setEmailCanonical('test@email.com')->shouldBeCalled();
         $canonicalizer->canonicalize('testUser')->willReturn('testuser')->shouldBeCalled();
+        $canonicalizer->canonicalize('test@email.com')->willReturn('test@email.com')->shouldBeCalled();
 
         $this->prePersist($event);
     }
@@ -59,9 +62,12 @@ final class CanonicalizerListenerSpec extends ObjectBehavior
     {
         $event->getEntity()->willReturn($user);
         $user->getUsername()->willReturn('testUser');
+        $user->getEmail()->willReturn('test@email.com');
 
         $user->setUsernameCanonical('testuser')->shouldBeCalled();
+        $user->setEmailCanonical('test@email.com')->shouldBeCalled();
         $canonicalizer->canonicalize('testUser')->willReturn('testuser')->shouldBeCalled();
+        $canonicalizer->canonicalize('test@email.com')->willReturn('test@email.com')->shouldBeCalled();
 
         $this->preUpdate($event);
     }

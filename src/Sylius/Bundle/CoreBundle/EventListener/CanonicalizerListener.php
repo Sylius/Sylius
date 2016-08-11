@@ -47,6 +47,7 @@ class CanonicalizerListener
             $item->setEmailCanonical($this->canonicalizer->canonicalize($item->getEmail()));
         } elseif ($item instanceof UserInterface) {
             $item->setUsernameCanonical($this->canonicalizer->canonicalize($item->getUsername()));
+            $item->setEmailCanonical($this->canonicalizer->canonicalize($item->getEmail()));
         }
     }
 

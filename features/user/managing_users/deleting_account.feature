@@ -5,7 +5,7 @@ Feature: Deleting the user account
     I want to be able to remove customer account details from the system
 
     Background:
-        Given there is user "theodore@example.com" identified by "pswd"
+        Given there is a user "theodore@example.com" identified by "pswd"
         And I am logged in as an administrator
 
     @ui @javascript

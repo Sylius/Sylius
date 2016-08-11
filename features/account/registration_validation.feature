@@ -9,7 +9,7 @@ Feature: Account registration
 
     @ui
     Scenario: Trying to register a new account with email that has been already used
-        Given there is user "goodman@gmail.com" identified by "heisenberg"
+        Given there is a user "goodman@gmail.com" identified by "heisenberg"
         And I want to register a new account
         When I specify the email as "goodman@gmail.com"
         And I try to register this account

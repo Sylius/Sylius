@@ -32,7 +32,6 @@
             <argument type="service" id="sylius.factory.shop_user" />
         </service>
         <service id="sylius.test.factory.admin_user" class="Sylius\Bundle\CoreBundle\Test\Factory\TestAdminUserFactory">
-            <argument type="service" id="sylius.factory.customer" />
             <argument type="service" id="sylius.factory.admin_user" />
         </service>
 

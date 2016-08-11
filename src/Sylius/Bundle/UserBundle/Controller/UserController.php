@@ -70,7 +70,7 @@ class UserController extends ResourceController
 
     public function requestPasswordResetPinAction(Request $request)
     {
-        $generator = $this->container->get(sprintf('sylius.user.generator.password_reset_pin', $this->metadata->getName()));
+        $generator = $this->container->get(sprintf('sylius.%s.generator.password_reset_pin', $this->metadata->getName()));
 
         return $this->prepareResetPasswordRequest($request, $generator, UserEvents::REQUEST_RESET_PASSWORD_PIN);
     }

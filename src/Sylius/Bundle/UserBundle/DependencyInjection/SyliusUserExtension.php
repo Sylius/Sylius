@@ -52,20 +52,12 @@ class SyliusUserExtension extends AbstractResourceExtension
 
         $this->registerResources('sylius', $config['driver'], $this->resolveResources($config['resources'], $container), $container);
 
-        $configFiles = [
-            'services.xml',
-        ];
-
-        foreach ($configFiles as $configFile) {
-            $loader->load($configFile);
-        }
+        $loader->load('services.xml');
 
         $this->createServices($config['resources'], $config['driver'], $container);
     }
 
     /**
-     * Resolve resources for every subject.
-     *
      * @param array $resources
      * @param ContainerBuilder $container
      *
@@ -114,35 +106,52 @@ class SyliusUserExtension extends AbstractResourceExtension
     {
         $this->createUniquenessCheckers($userType, $config, $container);
 
-        $passwordResetTokenGeneratorDefinition = new Definition(UniqueTokenGenerator::class);
-        $passwordResetTokenGeneratorDefinition->addArgument(
-            new Reference(sprintf('sylius.%s_user.checker.token_uniqueness.password_reset', $userType))
-        );
-        $passwordResetTokenGeneratorDefinition->addArgument($config['resetting']['token']['length']);
         $container->setDefinition(
             sprintf('sylius.%s_user.generator.password_reset_token', $userType),
-            $passwordResetTokenGeneratorDefinition
+            $this->createTokenGeneratorDefinition(
+                UniqueTokenGenerator::class,
+                [
+                    new Reference(sprintf('sylius.%s_user.checker.token_uniqueness.password_reset', $userType)),
+                    $config['resetting']['token']['length']
+                ]
+            )
         );
 
-        $passwordResetPinGeneratorDefinition = new Definition(UniquePinGenerator::class);
-        $passwordResetPinGeneratorDefinition->addArgument(
-            new Reference(sprintf('sylius.%s_user.checker.pin_uniqueness.password_reset', $userType))
-        );
-        $passwordResetPinGeneratorDefinition->addArgument($config['resetting']['pin']['length']);
         $container->setDefinition(
             sprintf('sylius.%s_user.generator.password_reset_pin', $userType),
-            $passwordResetPinGeneratorDefinition
+            $this->createTokenGeneratorDefinition(
+                UniquePinGenerator::class,
+                [
+                    new Reference(sprintf('sylius.%s_user.checker.pin_uniqueness.password_reset', $userType)),
+                    $config['resetting']['pin']['length']
+                ]
+            )
         );
 
-        $emailVerificationTokenGeneratorDefinition = new Definition(UniqueTokenGenerator::class);
-        $emailVerificationTokenGeneratorDefinition->addArgument(
-            new Reference(sprintf('sylius.%s_user.checker.token_uniqueness.email_verification', $userType))
-        );
-        $emailVerificationTokenGeneratorDefinition->addArgument($config['verification']['token']['length']);
         $container->setDefinition(
             sprintf('sylius.%s_user.generator.email_verification_token', $userType),
-            $emailVerificationTokenGeneratorDefinition
+            $this->createTokenGeneratorDefinition(
+                UniqueTokenGenerator::class,
+                [
+                    new Reference(sprintf('sylius.%s_user.checker.token_uniqueness.email_verification', $userType)),
+                    $config['verification']['token']['length']
+                ]
+            )
         );
+    }
+
+    /**
+     * @param string $generatorClass
+     * @param array $arguments
+     *
+     * @return Definition
+     */
+    private function createTokenGeneratorDefinition($generatorClass, array $arguments)
+    {
+        $generatorDefinition = new Definition($generatorClass);
+        $generatorDefinition->setArguments($arguments);
+
+        return $generatorDefinition;
     }
 
     /**

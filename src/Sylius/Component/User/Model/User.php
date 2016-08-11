@@ -176,7 +176,7 @@ class User implements UserInterface
      */
     public function setEmailCanonical($emailCanonical)
     {
-        $this->emailCanonical;
+        $this->emailCanonical = $emailCanonical;
     }
     
     /**

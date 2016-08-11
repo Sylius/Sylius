@@ -19,7 +19,7 @@ use Sylius\Component\User\Repository\UserRepositoryInterface;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class AdminUserContext implements Context
+final class AdminUserContext implements Context
 {
     /**
      * @var SharedStorageInterface
@@ -29,26 +29,26 @@ class AdminUserContext implements Context
     /**
      * @var TestUserFactoryInterface
      */
-    private $adminTestUserFactory;
+    private $testUserFactory;
 
     /**
      * @var UserRepositoryInterface
      */
-    private $adminUserRepository;
+    private $userRepository;
 
     /**
      * @param SharedStorageInterface $sharedStorage
-     * @param TestUserFactoryInterface $adminTestUserFactory
-     * @param UserRepositoryInterface $adminUserRepository
+     * @param TestUserFactoryInterface $testUserFactory
+     * @param UserRepositoryInterface $userRepository
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
-        TestUserFactoryInterface $adminTestUserFactory,
-        UserRepositoryInterface $adminUserRepository
+        TestUserFactoryInterface $testUserFactory,
+        UserRepositoryInterface $userRepository
     ) {
         $this->sharedStorage = $sharedStorage;
-        $this->adminTestUserFactory = $adminTestUserFactory;
-        $this->adminUserRepository = $adminUserRepository;
+        $this->testUserFactory = $testUserFactory;
+        $this->userRepository = $userRepository;
     }
 
     /**
@@ -56,8 +56,8 @@ class AdminUserContext implements Context
      */
     public function thereIsAnAdministratorIdentifiedBy($email, $password)
     {
-        $adminUser = $this->adminTestUserFactory->create($email, $password);
-        $this->adminUserRepository->add($adminUser);
+        $adminUser = $this->testUserFactory->create($email, $password);
+        $this->userRepository->add($adminUser);
         $this->sharedStorage->set('administrator', $adminUser);
     }
 }

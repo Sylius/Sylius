@@ -35,29 +35,29 @@ final class AdminSecurityContext implements Context
     /**
      * @var TestUserFactoryInterface
      */
-    private $testAdminUserFactory;
+    private $testUserFactory;
 
     /**
      * @var UserRepositoryInterface
      */
-    private $adminUserRepository;
+    private $userRepository;
 
     /**
      * @param SharedStorageInterface $sharedStorage
      * @param SecurityServiceInterface $securityService
-     * @param TestUserFactoryInterface $testAdminUserFactory
-     * @param UserRepositoryInterface $adminUserRepository
+     * @param TestUserFactoryInterface $testUserFactory
+     * @param UserRepositoryInterface $userRepository
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         SecurityServiceInterface $securityService,
-        TestUserFactoryInterface $testAdminUserFactory,
-        UserRepositoryInterface $adminUserRepository
+        TestUserFactoryInterface $testUserFactory,
+        UserRepositoryInterface $userRepository
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->securityService = $securityService;
-        $this->testAdminUserFactory = $testAdminUserFactory;
-        $this->adminUserRepository = $adminUserRepository;
+        $this->testUserFactory = $testUserFactory;
+        $this->userRepository = $userRepository;
     }
 
     /**
@@ -65,11 +65,11 @@ final class AdminSecurityContext implements Context
      */
     public function iAmLoggedInAsAnAdministrator()
     {
-        $adminUser = $this->testAdminUserFactory->createDefault();
-        $this->adminUserRepository->add($adminUser);
+        $user = $this->testUserFactory->createDefault();
+        $this->userRepository->add($user);
 
-        $this->securityService->logIn($adminUser);
+        $this->securityService->logIn($user);
 
-        $this->sharedStorage->set('admin', $adminUser);
+        $this->sharedStorage->set('admin', $user);
     }
 }

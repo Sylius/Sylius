@@ -6,7 +6,7 @@ Feature: Changing the method after order confirmation
 
     Background:
         Given the store operates on a single channel in "France"
-        And there is user "john@example.com" identified by "password123"
+        And there is a user "john@example.com" identified by "password123"
         And the store has a product "PHP T-Shirt" priced at "$19.99"
         And the store ships everywhere for free
         And the store allows paying "PayPal Express Checkout"

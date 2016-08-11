@@ -6,7 +6,7 @@ Feature: Viewing payment's amount on my account panel
 
     Background:
         Given the store operates on a single channel in "France"
-        And there is user "lucy@teamlucifer.com" identified by "dantesdreams"
+        And there is a user "lucy@teamlucifer.com" identified by "dantesdreams"
         And the store has a product "Angel T-Shirt" priced at "€39.00"
         And the store has a product "Angel Mug" priced at "€19.00"
         But the store has "DHL" shipping method with "€8.60" fee

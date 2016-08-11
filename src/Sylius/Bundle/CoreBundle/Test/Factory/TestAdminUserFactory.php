@@ -29,15 +29,14 @@ final class TestAdminUserFactory implements TestUserFactoryInterface
     /**
      * @var FactoryInterface
      */
-    private $adminUserFactory;
+    private $userFactory;
 
     /**
-     * @param FactoryInterface $customerFactory
-     * @param FactoryInterface $adminUserFactory
+     * @param FactoryInterface $userFactory
      */
-    public function __construct(FactoryInterface $customerFactory, FactoryInterface $adminUserFactory)
+    public function __construct(FactoryInterface $userFactory)
     {
-        $this->adminUserFactory = $adminUserFactory;
+        $this->userFactory = $userFactory;
     }
 
     /**
@@ -46,9 +45,9 @@ final class TestAdminUserFactory implements TestUserFactoryInterface
     public function create($email, $password, $firstName = self::DEFAULT_FIRST_NAME, $lastName = self::DEFAULT_LAST_NAME, $role = self::DEFAULT_ROLE)
     {
         /** @var AdminUser $user */
-        $user = $this->adminUserFactory->createNew();
+        $user = $this->userFactory->createNew();
 
-        $user->setUsername($email);
+        $user->setUsername($firstName.' '.$lastName);
         $user->setEmail($email);
         $user->setPlainPassword($password);
         $user->enable();

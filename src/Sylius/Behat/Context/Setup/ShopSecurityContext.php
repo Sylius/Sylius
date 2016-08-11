@@ -36,52 +36,52 @@ final class ShopSecurityContext implements Context
     /**
      * @var TestUserFactoryInterface
      */
-    private $testShopUserFactory;
+    private $testUserFactory;
 
     /**
      * @var UserRepositoryInterface
      */
-    private $shopUserRepository;
+    private $userRepository;
 
     /**
      * @param SharedStorageInterface $sharedStorage
      * @param SecurityServiceInterface $securityService
-     * @param TestUserFactoryInterface $testAdminUserFactory
-     * @param UserRepositoryInterface $shopUserRepository
+     * @param TestUserFactoryInterface $testUserFactory
+     * @param UserRepositoryInterface $userRepository
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         SecurityServiceInterface $securityService,
-        TestUserFactoryInterface $testAdminUserFactory,
-        UserRepositoryInterface $shopUserRepository
+        TestUserFactoryInterface $testUserFactory,
+        UserRepositoryInterface $userRepository
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->securityService = $securityService;
-        $this->testShopUserFactory = $testAdminUserFactory;
-        $this->shopUserRepository = $shopUserRepository;
+        $this->testUserFactory = $testUserFactory;
+        $this->userRepository = $userRepository;
     }
 
     /**
-     * @Given /^I am logged in as "([^""]+)"$/
+     * @Given I am logged in as :email
      */
     public function iAmLoggedInAs($email)
     {
-        $shopUser = $this->shopUserRepository->findOneByEmail($email);
-        Assert::notNull($shopUser);
+        $user = $this->userRepository->findOneByEmail($email);
+        Assert::notNull($user);
 
-        $this->securityService->logIn($shopUser);
+        $this->securityService->logIn($user);
     }
 
     /**
-     * @Given /^I am a logged in customer$/
+     * @Given I am a logged in customer
      */
     public function iAmLoggedInCustomer()
     {
-        $shopUser = $this->testShopUserFactory->createDefault();
-        $this->shopUserRepository->add($shopUser);
+        $user = $this->testUserFactory->createDefault();
+        $this->userRepository->add($user);
 
-        $this->securityService->logIn($shopUser);
+        $this->securityService->logIn($user);
 
-        $this->sharedStorage->set('user', $shopUser);
+        $this->sharedStorage->set('user', $user);
     }
 }

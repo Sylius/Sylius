@@ -21,4 +21,5 @@ Sylius\Component\Core\Model\AdminUser:
         plainPassword: sylius
         roles: [ROLE_API_ACCESS]
         enabled: true
-        username: api@sylius.com
+        email: api@sylius.com
+        username: sylius

@@ -13,6 +13,7 @@ namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\AdminUser;
+use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\User\Model\User;
 use Sylius\Component\User\Model\UserInterface;
 
@@ -28,13 +29,18 @@ class AdminUserSpec extends ObjectBehavior
         $this->shouldHaveType(AdminUser::class);
     }
 
-    function it_implements_user_interface()
-    {
-        $this->shouldImplement(UserInterface::class);
-    }
-
     function it_extends_base_user_model()
     {
         $this->shouldHaveType(User::class);
+    }
+
+    function it_implements_admin_user_interface()
+    {
+        $this->shouldImplement(AdminUserInterface::class);
+    }
+
+    function it_implements_user_interface()
+    {
+        $this->shouldImplement(UserInterface::class);
     }
 }
