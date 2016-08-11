@@ -12,7 +12,9 @@
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use FOS\RestBundle\View\View;
+use Sylius\Bundle\ResourceBundle\Exception\ResourceConstraintViolationException;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -345,6 +347,8 @@ class ResourceController extends Controller
      * @param Request $request
      *
      * @return Response
+     *
+     * @throws ResourceConstraintViolationException
      */
     public function deleteAction(Request $request)
     {
@@ -364,7 +368,16 @@ class ResourceController extends Controller
             return $this->redirectHandler->redirectToIndex($configuration, $resource);
         }
 
-        $this->repository->remove($resource);
+        try {
+            $this->repository->remove($resource);
+        } catch (ForeignKeyConstraintViolationException $e) {
+            $exception = new ResourceConstraintViolationException($e->getMessage(), $e->getPrevious());
+            $exception->setResource($resource);
+            $exception->setRequestConfiguration($configuration);
+
+            throw $exception;
+        }
+
         $this->eventDispatcher->dispatchPostEvent(ResourceActions::DELETE, $configuration, $resource);
 
         if (!$configuration->isHtmlRequest()) {

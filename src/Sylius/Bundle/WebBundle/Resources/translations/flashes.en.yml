@@ -15,3 +15,6 @@ sylius:
     channel:
         error:
             at_least_one: The channel cannot be deleted, at least one enabled channel is required
+    resource:
+        product:
+            delete_error: Cannot remove "%resource%", product is in use.
