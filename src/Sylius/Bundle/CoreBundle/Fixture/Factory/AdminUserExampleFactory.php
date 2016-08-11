@@ -11,8 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
-use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Component\Core\Model\ShopUserInterface;
+use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Rbac\Model\RoleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -20,19 +19,14 @@ use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-final class UserExampleFactory implements ExampleFactoryInterface
+final class AdminUserExampleFactory implements ExampleFactoryInterface
 {
     /**
      * @var FactoryInterface
      */
     private $userFactory;
-
-    /**
-     * @var FactoryInterface
-     */
-    private $customerFactory;
 
     /**
      * @var RepositoryInterface
@@ -51,16 +45,11 @@ final class UserExampleFactory implements ExampleFactoryInterface
 
     /**
      * @param FactoryInterface $userFactory
-     * @param FactoryInterface $customerFactory
      * @param RepositoryInterface $roleRepository
      */
-    public function __construct(
-        FactoryInterface $userFactory,
-        FactoryInterface $customerFactory,
-        RepositoryInterface $roleRepository
-    ) {
+    public function __construct(FactoryInterface $userFactory, RepositoryInterface $roleRepository)
+    {
         $this->userFactory = $userFactory;
-        $this->customerFactory = $customerFactory;
         $this->roleRepository = $roleRepository;
 
         $this->faker = \Faker\Factory::create();
@@ -69,20 +58,15 @@ final class UserExampleFactory implements ExampleFactoryInterface
                 ->setDefault('email', function (Options $options) {
                     return $this->faker->email;
                 })
-                ->setDefault('first_name', function (Options $options) {
-                    return $this->faker->firstName;
-                })
-                ->setDefault('last_name', function (Options $options) {
-                    return $this->faker->lastName;
+                ->setDefault('username', function (Options $options) {
+                    return $this->faker->firstName.' '.$this->faker->lastName;
                 })
                 ->setDefault('enabled', function (Options $options) {
                     return $this->faker->boolean(90);
                 })
                 ->setAllowedTypes('enabled', 'bool')
-                ->setDefault('admin', false)
-                ->setDefault('api', false)
-                ->setAllowedTypes('admin', 'bool')
                 ->setDefault('password', 'password123')
+                ->setDefault('api', false)
         ;
     }
 
@@ -93,37 +77,28 @@ final class UserExampleFactory implements ExampleFactoryInterface
     {
         $options = $this->optionsResolver->resolve($options);
 
-        /** @var CustomerInterface $customer */
-        $customer = $this->customerFactory->createNew();
-        $customer->setEmail($options['email']);
-        $customer->setFirstName($options['first_name']);
-        $customer->setLastName($options['last_name']);
-
-        /** @var ShopUserInterface $user */
+        /** @var AdminUserInterface $user */
         $user = $this->userFactory->createNew();
+        $user->setEmail($options['email']);
+        $user->setUsername($options['username']);
         $user->setPlainPassword($options['password']);
         $user->setEnabled($options['enabled']);
-        $user->addRole('ROLE_USER');
 
-        if ($options['admin']) {
-            $this->addUserRole($user, 'ROLE_ADMINISTRATION_ACCESS', 'administrator');
-        }
+        $this->addUserRole($user, 'ROLE_ADMINISTRATION_ACCESS', 'administrator');
 
         if ($options['api']) {
             $this->addUserRole($user, 'ROLE_API_ACCESS', 'api_administrator');
         }
 
-        $user->setCustomer($customer);
-
         return $user;
     }
 
     /**
-     * @param ShopUserInterface $user
+     * @param AdminUserInterface $user
      * @param string $role
      * @param string $authorizationRole
      */
-    private function addUserRole(ShopUserInterface $user, $role, $authorizationRole)
+    private function addUserRole(AdminUserInterface $user, $role, $authorizationRole)
     {
         $user->addRole($role);
 

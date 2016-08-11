@@ -14,6 +14,7 @@ namespace spec\Sylius\Component\Core\Model;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\AdminUser;
 use Sylius\Component\Core\Model\AdminUserInterface;
+use Sylius\Component\Rbac\Model\RoleInterface;
 use Sylius\Component\User\Model\User;
 use Sylius\Component\User\Model\UserInterface;
 
@@ -42,5 +43,18 @@ class AdminUserSpec extends ObjectBehavior
     function it_implements_user_interface()
     {
         $this->shouldImplement(UserInterface::class);
+    }
+
+    function its_authorization_roles_are_mutable(RoleInterface $role)
+    {
+        $this->addAuthorizationRole($role);
+        $this->hasAuthorizationRole($role)->shouldReturn(true);
+    }
+
+    function its_authorization_role_can_be_removed(RoleInterface $role)
+    {
+        $this->addAuthorizationRole($role);
+        $this->removeAuthorizationRole($role);
+        $this->hasAuthorizationRole($role)->shouldReturn(false);
     }
 }

@@ -61,9 +61,15 @@
             <tag name="sylius_fixtures.fixture" />
         </service>
 
-        <service id="sylius.fixture.user" class="Sylius\Bundle\CoreBundle\Fixture\UserFixture">
+        <service id="sylius.fixture.shop_user" class="Sylius\Bundle\CoreBundle\Fixture\ShopUserFixture">
             <argument type="service" id="sylius.manager.shop_user" />
-            <argument type="service" id="sylius.fixture.example_factory.user" />
+            <argument type="service" id="sylius.fixture.example_factory.shop_user" />
+            <tag name="sylius_fixtures.fixture" />
+        </service>
+
+        <service id="sylius.fixture.admin_user" class="Sylius\Bundle\CoreBundle\Fixture\AdminUserFixture">
+            <argument type="service" id="sylius.manager.admin_user" />
+            <argument type="service" id="sylius.fixture.example_factory.admin_user" />
             <tag name="sylius_fixtures.fixture" />
         </service>
 
