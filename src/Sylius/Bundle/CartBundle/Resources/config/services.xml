@@ -45,8 +45,6 @@
 
         <service id="sylius.listener.cart" class="%sylius.listener.cart.class%">
             <tag name="kernel.event_subscriber" />
-            <argument type="service" id="sylius.manager.cart" />
-            <argument type="service" id="validator" />
             <argument type="service" id="sylius.order_item_quantity_modifier" />
         </service>
 

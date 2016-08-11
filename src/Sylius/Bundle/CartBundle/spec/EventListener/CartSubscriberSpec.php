@@ -12,17 +12,12 @@
 namespace spec\Sylius\Bundle\CartBundle\EventListener;
 
 use Doctrine\Common\Collections\Collection;
-use Doctrine\Common\Persistence\ObjectManager;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Cart\Context\CartContextInterface;
-use Sylius\Component\Cart\Event\CartEvent;
 use Sylius\Component\Cart\Event\CartItemEvent;
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Cart\Model\CartItemInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
-use Symfony\Component\Validator\ConstraintViolationListInterface;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * @author Joseph Bielawski <stloyd@gmail.com>
@@ -30,9 +25,9 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 final class CartSubscriberSpec extends ObjectBehavior
 {
-    function let(ObjectManager $manager, ValidatorInterface $validator, OrderItemQuantityModifierInterface $orderItemQuantityModifier)
+    function let(OrderItemQuantityModifierInterface $orderItemQuantityModifier)
     {
-        $this->beConstructedWith($manager, $validator, $orderItemQuantityModifier);
+        $this->beConstructedWith($orderItemQuantityModifier);
     }
 
     function it_is_initializable()
@@ -91,31 +86,5 @@ final class CartSubscriberSpec extends ObjectBehavior
         $orderItemQuantityModifier->modify($existingItem, 4)->shouldBeCalled();
 
         $this->addItem($event);
-    }
-
-    function it_should_save_a_valid_cart(ObjectManager $manager, CartEvent $event, CartInterface $cart)
-    {
-        $event->getCart()->willReturn($cart);
-        $manager->persist($cart)->shouldBeCalled();
-        $manager->flush()->shouldBeCalled();
-
-        $this->saveCart($event);
-    }
-
-    function it_should_not_save_an_invalid_cart(
-        ObjectManager $manager,
-        ValidatorInterface $validator,
-        CartEvent $event,
-        CartInterface $cart,
-        ConstraintViolationListInterface $constraintList
-    ) {
-        $constraintList->count()->willReturn(1);
-        $event->getCart()->willReturn($cart);
-        $validator->validate($cart)->shouldBeCalled()->willReturn($constraintList);
-
-        $manager->persist($cart)->shouldNotBeCalled();
-        $manager->flush()->shouldNotBeCalled();
-
-        $this->saveCart($event);
     }
 }

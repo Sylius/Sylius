@@ -12,21 +12,12 @@
 namespace Sylius\Bundle\CartBundle\Controller;
 
 use FOS\RestBundle\View\View;
-use Sylius\Component\Cart\Event\CartEvent;
-use Sylius\Component\Cart\SyliusCartEvents;
-use Sylius\Component\Resource\Event\FlashEvent;
 use Sylius\Component\Resource\ResourceActions;
-use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
- * Default cart controller.
- * It extends the format agnostic resource controller.
- * Resource controller class provides several actions and methods for creating
- * pages and api for your cart system.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class CartController extends Controller
@@ -58,12 +49,6 @@ class CartController extends Controller
     }
 
     /**
-     * This action is used to submit the cart summary form.
-     * If the form and updated cart are valid, it refreshes
-     * the cart data and saves it using the operator.
-     *
-     * If there are any errors, it displays the cart summary page.
-     *
      * @param Request $request
      *
      * @return Response
@@ -72,31 +57,52 @@ class CartController extends Controller
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
-        $cart = $this->getCurrentCart();
-        $form = $this->resourceFormFactory->create($configuration, $cart);
+        $this->isGrantedOr403($configuration, ResourceActions::UPDATE);
+        $resource = $this->getCurrentCart();
 
-        if ($form->handleRequest($request)->isValid()) {
-            $event = new CartEvent($cart);
+        $form = $this->resourceFormFactory->create($configuration, $resource);
 
-            $eventDispatcher = $this->getEventDispatcher();
+        if (in_array($request->getMethod(), ['POST', 'PUT', 'PATCH']) && $form->submit($request, !$request->isMethod('PATCH'))->isValid()) {
+            $resource = $form->getData();
 
-            $eventDispatcher->dispatch(SyliusCartEvents::CART_CHANGE, new GenericEvent($cart));
+            $event = $this->eventDispatcher->dispatchPreEvent(ResourceActions::UPDATE, $configuration, $resource);
 
-            // Update models
-            $eventDispatcher->dispatch(SyliusCartEvents::CART_SAVE_INITIALIZE, $event);
+            if ($event->isStopped() && !$configuration->isHtmlRequest()) {
+                throw new HttpException($event->getErrorCode(), $event->getMessage());
+            }
+            if ($event->isStopped()) {
+                $this->flashHelper->addFlashFromEvent($configuration, $event);
 
-            // Write flash message
-            $eventDispatcher->dispatch(SyliusCartEvents::CART_SAVE_COMPLETED, new FlashEvent());
+                return $this->redirectHandler->redirectToResource($configuration, $resource);
+            }
 
-            return $this->redirectToCartSummary($configuration);
+            if ($configuration->hasStateMachine()) {
+                $this->stateMachine->apply($configuration, $resource);
+            }
+
+            $this->manager->flush();
+            $this->eventDispatcher->dispatchPostEvent(ResourceActions::UPDATE, $configuration, $resource);
+
+            if (!$configuration->isHtmlRequest()) {
+                return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
+            }
+
+            $this->flashHelper->addSuccessFlash($configuration, ResourceActions::UPDATE, $resource);
+
+            return $this->redirectHandler->redirectToResource($configuration, $resource);
+        }
+
+        if (!$configuration->isHtmlRequest()) {
+            return $this->viewHandler->handle($configuration, View::create($form, Response::HTTP_BAD_REQUEST));
         }
 
         $view = View::create()
-            ->setTemplate($configuration->getTemplate('summary.html'))
             ->setData([
-                'cart' => $cart,
+                'configuration' => $configuration,
+                $this->metadata->getName() => $resource,
                 'form' => $form->createView(),
             ])
+            ->setTemplate($configuration->getTemplate(ResourceActions::UPDATE . '.html'))
         ;
 
         return $this->viewHandler->handle($configuration, $view);

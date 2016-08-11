@@ -11,13 +11,10 @@
 
 namespace Sylius\Bundle\CartBundle\EventListener;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
-use Sylius\Component\Cart\Event\CartEvent;
 use Sylius\Component\Cart\Event\CartItemEvent;
 use Sylius\Component\Cart\SyliusCartEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * @author Joseph Bielawski <stloyd@gmail.com>
@@ -25,32 +22,15 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class CartSubscriber implements EventSubscriberInterface
 {
     /**
-     * @var ObjectManager
-     */
-    protected $cartManager;
-
-    /**
-     * @var ValidatorInterface
-     */
-    protected $validator;
-
-    /**
      * @var OrderItemQuantityModifierInterface
      */
     protected $orderItemQuantityModifier;
 
     /**
-     * @param ObjectManager $cartManager
-     * @param ValidatorInterface $validator
      * @param OrderItemQuantityModifierInterface $orderItemQuantityModifier
      */
-    public function __construct(
-        ObjectManager $cartManager,
-        ValidatorInterface $validator,
-        OrderItemQuantityModifierInterface $orderItemQuantityModifier
-    ) {
-        $this->cartManager = $cartManager;
-        $this->validator = $validator;
+    public function __construct(OrderItemQuantityModifierInterface $orderItemQuantityModifier)
+    {
         $this->orderItemQuantityModifier = $orderItemQuantityModifier;
     }
 
@@ -61,7 +41,6 @@ class CartSubscriber implements EventSubscriberInterface
     {
         return [
             SyliusCartEvents::ITEM_ADD_INITIALIZE => 'addItem',
-            SyliusCartEvents::CART_SAVE_INITIALIZE => 'saveCart',
         ];
     }
 
@@ -82,21 +61,5 @@ class CartSubscriber implements EventSubscriberInterface
         }
 
         $cart->addItem($item);
-    }
-
-    /**
-     * @param CartEvent $event
-     */
-    public function saveCart(CartEvent $event)
-    {
-        $cart = $event->getCart();
-
-        $errors = $this->validator->validate($cart);
-        $valid = 0 === count($errors);
-
-        if ($valid) {
-            $this->cartManager->persist($cart);
-            $this->cartManager->flush();
-        }
     }
 }

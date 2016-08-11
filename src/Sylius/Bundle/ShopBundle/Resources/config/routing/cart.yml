@@ -17,6 +17,7 @@ sylius_shop_cart_save:
         _sylius:
             template: SyliusShopBundle:Cart:summary.html.twig
             redirect: sylius_shop_cart_summary
+            flash: sylius.cart.cart_save_completed
 
 sylius_shop_cart_clear:
     path: /
