@@ -7,7 +7,7 @@
         <ul class="ui relaxed list">
             {% for label, amount in orderPromotions %}
                 <li class="item">
-                    {{ label }} {% if not amount == 0 %}-{% endif %}{{ (-1 * amount)|sylius_price(order.currencyCode) }}
+                    {{ label }} {% if not amount == 0 %}-{% endif %}{{ (-1 * amount)|sylius_price(order.currencyCode, order.exchangeRate) }}
                 </li>
             {% endfor %}
         </ul>
@@ -18,5 +18,5 @@
 <td colspan="2" id="promotion-total" class="right aligned">
     <strong>{{ 'sylius.ui.promotion_total'|trans }}</strong>:
     {% set orderDiscount = order.adjustmentsTotalRecursively(orderPromotionAdjustment) %}
-    {% if not orderDiscount == 0 %}-{% endif %}{{ (-1 * orderDiscount)|sylius_price(order.currencyCode) }}
+    {% if not orderDiscount == 0 %}-{% endif %}{{ (-1 * orderDiscount)|sylius_price(order.currencyCode, order.exchangeRate) }}
 </td>
