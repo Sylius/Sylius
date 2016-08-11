@@ -22,7 +22,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ActionFactory implements ActionFactoryInterface
+final class ActionFactory implements ActionFactoryInterface
 {
     /**
      * @var FactoryInterface

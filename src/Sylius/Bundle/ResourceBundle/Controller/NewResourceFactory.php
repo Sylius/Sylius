@@ -16,7 +16,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class NewResourceFactory implements NewResourceFactoryInterface
+final class NewResourceFactory implements NewResourceFactoryInterface
 {
     /**
      * {@inheritdoc}

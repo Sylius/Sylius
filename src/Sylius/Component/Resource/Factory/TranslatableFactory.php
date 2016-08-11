@@ -18,7 +18,7 @@ use Sylius\Component\Resource\Model\TranslatableInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class TranslatableFactory implements TranslatableFactoryInterface
+final class TranslatableFactory implements TranslatableFactoryInterface
 {
     /**
      * @var FactoryInterface

@@ -17,7 +17,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class PaymentFactory implements PaymentFactoryInterface
+final class PaymentFactory implements PaymentFactoryInterface
 {
     /**
      * @var FactoryInterface

@@ -16,7 +16,7 @@ use Sylius\Bundle\CoreBundle\Sitemap\Model\Sitemap;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class SitemapFactory implements SitemapFactoryInterface
+final class SitemapFactory implements SitemapFactoryInterface
 {
     /**
      * {@inheritdoc}

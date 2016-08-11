@@ -18,7 +18,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class TestPromotionFactory implements TestPromotionFactoryInterface
+final class TestPromotionFactory implements TestPromotionFactoryInterface
 {
     /**
      * @var FactoryInterface

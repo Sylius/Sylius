@@ -19,7 +19,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
  */
-class TestUserFactory implements TestUserFactoryInterface
+final class TestUserFactory implements TestUserFactoryInterface
 {
     const DEFAULT_USER_EMAIL = 'john.doe@example.com';
     const DEFAULT_ADMIN_EMAIL = 'admin@example.com';

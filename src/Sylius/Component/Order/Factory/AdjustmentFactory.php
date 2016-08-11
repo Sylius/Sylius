@@ -16,7 +16,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class AdjustmentFactory implements AdjustmentFactoryInterface
+final class AdjustmentFactory implements AdjustmentFactoryInterface
 {
     /**
      * @var FactoryInterface

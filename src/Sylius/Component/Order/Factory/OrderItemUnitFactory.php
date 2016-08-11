@@ -18,7 +18,7 @@ use Sylius\Component\Resource\Exception\UnsupportedMethodException;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class OrderItemUnitFactory implements OrderItemUnitFactoryInterface
+final class OrderItemUnitFactory implements OrderItemUnitFactoryInterface
 {
     /**
      * @var string

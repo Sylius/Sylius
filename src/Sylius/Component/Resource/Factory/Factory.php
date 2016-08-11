@@ -16,7 +16,7 @@ namespace Sylius\Component\Resource\Factory;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class Factory implements FactoryInterface
+final class Factory implements FactoryInterface
 {
     /**
      * @var string
