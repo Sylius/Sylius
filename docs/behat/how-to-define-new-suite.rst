@@ -1,5 +1,5 @@
 How to define a new suite?
 ==========================
 
-To define a new suite it is needed to create a suite configuration file in ``etc/behat/suites``
-directory based on existing files in there and then register that file in ``etc/behat/suites.yml``.
+To define a new suite it is needed to create a suite configuration file in a one of ``cli``/``domain``/``ui`` directory inside  ``src/Sylius/Behat/Resources/config/suites``.
+Then register that file in ``src/Sylius/Behat/Resources/config/suites.yml``.
