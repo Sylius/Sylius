@@ -13,6 +13,7 @@ namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
 use Sylius\Component\Payment\Repository\PaymentMethodRepositoryInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -38,9 +39,11 @@ final class PaymentContext implements Context
     public function getPaymentMethodByName($paymentMethodName)
     {
         $paymentMethod = $this->paymentMethodRepository->findOneByName($paymentMethodName);
-        if (null === $paymentMethod) {
-            throw new \InvalidArgumentException(sprintf('Payment method with name "%s" does not exist.', $paymentMethodName));
-        }
+
+        Assert::notNull(
+            $paymentMethod,
+            sprintf('Payment method with name "%s" does not exist', $paymentMethodName)
+        );
 
         return $paymentMethod;
     }

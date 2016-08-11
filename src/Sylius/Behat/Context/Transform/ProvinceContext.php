@@ -37,12 +37,12 @@ final class ProvinceContext implements Context
      * @Transform /^province "([^"]+)"$/
      * @Transform /^"([^"]+)" province$/
      */
-    public function getProvinceByName($name)
+    public function getProvinceByName($provinceName)
     {
-        $province = $this->provinceRepository->findOneBy(['name' => $name]);
+        $province = $this->provinceRepository->findOneBy(['name' => $provinceName]);
         Assert::notNull(
             $province,
-            sprintf('Cannot find province %s', $name)
+            sprintf('Province with name "%s" does not exist', $provinceName)
         );
 
         return $province;
