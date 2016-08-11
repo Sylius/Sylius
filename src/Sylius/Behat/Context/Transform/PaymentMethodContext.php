@@ -16,6 +16,7 @@ use Sylius\Component\Payment\Repository\PaymentMethodRepositoryInterface;
 use Webmozart\Assert\Assert;
 
 /**
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
 final class PaymentMethodContext implements Context
@@ -34,13 +35,17 @@ final class PaymentMethodContext implements Context
     }
 
     /**
+     * @Transform /^"([^"]+)" payment(s)?$/
      * @Transform :paymentMethod
      */
-    public function getPaymentMethodByName($name)
+    public function getPaymentMethodByName($paymentMethodName)
     {
-        $paymentMethod = $this->paymentMethodRepository->findOneByName($name);
+        $paymentMethod = $this->paymentMethodRepository->findOneByName($paymentMethodName);
 
-        Assert::notNull($paymentMethod, sprintf('Cannot find payment method named %s', $name));
+        Assert::notNull(
+            $paymentMethod,
+            sprintf('Payment method with name "%s" does not exist', $paymentMethodName)
+        );
 
         return $paymentMethod;
     }

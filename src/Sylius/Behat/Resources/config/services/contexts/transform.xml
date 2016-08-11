@@ -67,12 +67,7 @@
             <tag name="sylius.behat.context" />
         </service>
 
-        <service id="sylius.behat.context.transform.payment" class="Sylius\Behat\Context\Transform\PaymentContext" scope="scenario">
-            <argument type="service" id="sylius.repository.payment_method" container="symfony" />
-            <tag name="sylius.behat.context" />
-        </service>
-
-        <service id="sylius.behat.context.transform.payment_method" class="Sylius\Behat\Context\Transform\PaymentMethodContext" scope="scenario">
+        <service id="sylius.behat.context.transform.payment" class="Sylius\Behat\Context\Transform\PaymentMethodContext" scope="scenario">
             <argument type="service" id="sylius.repository.payment_method" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>
