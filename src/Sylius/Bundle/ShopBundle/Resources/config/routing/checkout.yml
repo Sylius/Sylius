@@ -141,4 +141,3 @@ sylius_shop_checkout_thank_you:
         _controller: sylius.controller.order:thankYouAction
         _sylius:
             template: SyliusShopBundle:Checkout:thankYou.html.twig
-

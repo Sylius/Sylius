@@ -50,9 +50,9 @@ final class PriceHelperSpec extends ObjectBehavior
     ) {
         $currencyContext->getCurrencyCode()->shouldNotBeCalled();
 
-        $decoratedHelper->convertAndFormatAmount(42, 'USD', null)->willReturn('$0.42');
+        $decoratedHelper->convertAndFormatAmount(42, 'USD', 1.0, null)->willReturn('$0.42');
 
-        $this->convertAndFormatAmount(42, 'USD')->shouldReturn('$0.42');
+        $this->convertAndFormatAmount(42, 'USD', 1.0)->shouldReturn('$0.42');
     }
 
     function it_does_nothing_if_currency_is_not_passed_and_there_is_no_current_one(
@@ -61,9 +61,9 @@ final class PriceHelperSpec extends ObjectBehavior
     ) {
         $currencyContext->getCurrencyCode()->willReturn(null);
 
-        $decoratedHelper->convertAndFormatAmount(42, 'USD', null)->willReturn('$0.42');
+        $decoratedHelper->convertAndFormatAmount(42, 'USD', 1.0, null)->willReturn('$0.42');
 
-        $this->convertAndFormatAmount(42, 'USD')->shouldReturn('$0.42');
+        $this->convertAndFormatAmount(42, 'USD', 1.0)->shouldReturn('$0.42');
     }
 
     function it_decorates_the_helper_with_current_currency_if_it_is_not_passed(
@@ -72,7 +72,7 @@ final class PriceHelperSpec extends ObjectBehavior
     ) {
         $currencyContext->getCurrencyCode()->willReturn('EUR');
 
-        $decoratedHelper->convertAndFormatAmount(42, 'EUR', null)->willReturn('€0.42');
+        $decoratedHelper->convertAndFormatAmount(42, 'EUR', null, null)->willReturn('€0.42');
 
         $this->convertAndFormatAmount(42)->shouldReturn('€0.42');
     }
