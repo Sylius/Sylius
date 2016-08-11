@@ -4,13 +4,11 @@ data:
         - ../../:/var/www/sylius
 
 nginx:
-    image: nginx
+    build: nginx
     links:
         - php
     volumes_from:
         - data
-    volumes:
-        - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
     ports:
         - 80
 
@@ -26,6 +24,3 @@ php:
     working_dir: /var/www/sylius
     volumes_from:
         - data
-    volumes:
-        - ./php/default.conf:/usr/local/etc/php-fpm.d/www.conf:ro
-        - ./php/php.ini:/usr/local/etc/php/conf.d/php.ini:ro
