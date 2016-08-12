@@ -25,6 +25,11 @@ class ExpressionBuilder implements ExpressionBuilderInterface
     private $query;
 
     /**
+     * @var array
+     */
+    private $sort = [];
+
+    /**
      * @var boolean
      */
     private $filtered = false;
@@ -71,7 +76,7 @@ class ExpressionBuilder implements ExpressionBuilderInterface
      */
     public function equals($field, $value)
     {
-        throw new \BadMethodCallException('Not supported yet.');
+        return $this->computeExpression($field, ['regexp' => [$field => $value]]);
     }
 
     /**
@@ -79,7 +84,7 @@ class ExpressionBuilder implements ExpressionBuilderInterface
      */
     public function notEquals($field, $value)
     {
-        throw new \BadMethodCallException('Not supported yet.');
+        return $this->computeExpression($field, ['not' => $this->equals($field, $value)]);
     }
 
     /**
@@ -119,7 +124,7 @@ class ExpressionBuilder implements ExpressionBuilderInterface
      */
     public function in($field, array $values)
     {
-        throw new \BadMethodCallException('Not supported yet.');
+        return $this->computeExpression($field, ['terms' => [$field => $values]]);
     }
 
     /**
@@ -127,7 +132,7 @@ class ExpressionBuilder implements ExpressionBuilderInterface
      */
     public function notIn($field, array $values)
     {
-        throw new \BadMethodCallException('Not supported yet.');
+        return $this->computeExpression($field, ['not' => $this->in($field, $values)]);
     }
 
     /**
@@ -135,7 +140,7 @@ class ExpressionBuilder implements ExpressionBuilderInterface
      */
     public function isNull($field)
     {
-        throw new \BadMethodCallException('Not supported yet.');
+        return $this->computeExpression($field, ['missing' => ['field' => $field]]);
     }
 
     /**
@@ -143,7 +148,7 @@ class ExpressionBuilder implements ExpressionBuilderInterface
      */
     public function isNotNull($field)
     {
-        throw new \BadMethodCallException('Not supported yet.');
+        return $this->computeExpression($field, ['not' => $this->isNull($field)]);
     }
 
     /**
@@ -151,13 +156,7 @@ class ExpressionBuilder implements ExpressionBuilderInterface
      */
     public function like($field, $pattern)
     {
-        if ($this->isNested($field)) {
-            $properties = explode('.', $field);
-
-            return ['nested' =>  $properties[0], 'expression' => ['term' => [ $field => $pattern ]]];
-        }
-
-        return ['term' => [ $field => $pattern ]];
+        return $this->computeExpression($field, ['regexp' => [ $field => $pattern ]]);
     }
 
     /**
@@ -165,7 +164,7 @@ class ExpressionBuilder implements ExpressionBuilderInterface
      */
     public function notLike($field, $pattern)
     {
-        throw new \BadMethodCallException('Not supported yet.');
+        return $this->computeExpression($field, ['not' => $this->like($field, $pattern)]);
     }
 
     /**
@@ -173,7 +172,7 @@ class ExpressionBuilder implements ExpressionBuilderInterface
      */
     public function orderBy($field, $direction)
     {
-        throw new \BadMethodCallException('Not supported yet.');
+        return [$field => ['order' => $direction ]];
     }
 
     /**
@@ -181,7 +180,7 @@ class ExpressionBuilder implements ExpressionBuilderInterface
      */
     public function addOrderBy($field, $direction)
     {
-        throw new \BadMethodCallException('Not supported yet.');
+        $this->sort[] = $this->orderBy($field, $direction);
     }
 
     /**
@@ -273,5 +272,24 @@ class ExpressionBuilder implements ExpressionBuilderInterface
     private function isNested($field)
     {
         return preg_match('/\./', $field);
+    }
+
+    /**
+     * Compute expression to be elastic compliant
+     *
+     * @param string $field      [description]
+     * @param array $expression [description]
+     *
+     * @return array
+     */
+    private function computeExpression($field, $expression)
+    {
+        if ($this->isNested($field)) {
+            $properties = explode('.', $field);
+
+            return ['nested' =>  $properties[0], 'expression' =>  $expression];
+        }
+
+        return $expression;
     }
 }

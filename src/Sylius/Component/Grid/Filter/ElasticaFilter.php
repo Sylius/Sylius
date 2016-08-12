@@ -23,6 +23,7 @@ class ElasticaFilter implements FilterInterface
     const NAME = 'elastica';
 
     const TYPE_EQUAL = 'equal';
+    const TYPE_NOT_EQUAL = 'not_equal';
     const TYPE_EMPTY = 'empty';
     const TYPE_NOT_EMPTY = 'not_empty';
     const TYPE_CONTAINS = 'contains';
@@ -76,18 +77,20 @@ class ElasticaFilter implements FilterInterface
         switch ($type) {
             case self::TYPE_EQUAL:
                 return $expressionBuilder->equals($field, $value);
+            case self::TYPE_NOT_EQUAL:
+                return $expressionBuilder->notEquals($field, $value);
             case self::TYPE_EMPTY:
                 return $expressionBuilder->isNull($field);
             case self::TYPE_NOT_EMPTY:
                 return $expressionBuilder->isNotNull($field);
             case self::TYPE_CONTAINS:
-                return $expressionBuilder->like($field, $value);
+                return $expressionBuilder->like($field, '.*'.$value.'.*');
             case self::TYPE_NOT_CONTAINS:
-                return $expressionBuilder->notLike($field, $value);
+                return $expressionBuilder->notLike($field, '.*'.$value.'.*');
             case self::TYPE_STARTS_WITH:
-                return $expressionBuilder->like($field, $value);
+                return $expressionBuilder->like($field, $value.'.*');
             case self::TYPE_ENDS_WITH:
-                return $expressionBuilder->like($field, $value);
+                return $expressionBuilder->like($field, '.*'.$value);
             case self::TYPE_IN:
                 return $expressionBuilder->in($field, array_map('trim', explode(',', $value)));
             case self::TYPE_NOT_IN:

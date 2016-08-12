@@ -80,7 +80,7 @@ fos_elastica:
                     filter:
                         sylius_filter:
                             type: edgeNGram
-                            min_gram: 4
+                            min_gram: 1
                             max_gram: 12
                         synonym:
                             type: synonym
@@ -93,6 +93,7 @@ fos_elastica:
                     index_analyzer: sylius_index_analyzer
                     mappings:
                         id: { type: integer, index: not_analyzed }
+                        code: { type: string, analyzer: sylius_index_analyzer }
                         name: { type: string, analyzer: sylius_index_analyzer }
                         description: { type: string }
                         price: { type: integer }
@@ -128,6 +129,7 @@ fos_elastica:
                             properties:
                                 path: { type: string, index: not_analyzed }
                         enabled: { type: boolean }
+                        isSimple: { type: boolean }
                     persistence:
                         driver: orm
                         model: Sylius\Component\Core\Model\Product

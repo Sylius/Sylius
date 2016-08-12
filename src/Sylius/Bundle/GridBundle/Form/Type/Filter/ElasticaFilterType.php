@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\GridBundle\Form\Type\Filter;
 
-use Sylius\Component\Grid\Filter\StringFilter;
+use Sylius\Component\Grid\Filter\ElasticaFilter;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -29,15 +29,16 @@ class ElasticaFilterType extends AbstractType
         $builder
             ->add('type', 'choice', [
                 'choices' => [
-                    StringFilter::TYPE_CONTAINS => 'sylius.ui.contains',
-                    StringFilter::TYPE_NOT_CONTAINS => 'sylius.ui.not_contains',
-                    StringFilter::TYPE_EQUAL => 'sylius.ui.equal',
-                    StringFilter::TYPE_EMPTY => 'sylius.ui.empty',
-                    StringFilter::TYPE_NOT_EMPTY => 'sylius.ui.not_empty',
-                    StringFilter::TYPE_STARTS_WITH => 'sylius.ui.starts_with',
-                    StringFilter::TYPE_ENDS_WITH => 'sylius.ui.ends_with',
-                    StringFilter::TYPE_IN => 'sylius.ui.in',
-                    StringFilter::TYPE_NOT_IN => 'sylius.ui.not_in'
+                    ElasticaFilter::TYPE_CONTAINS => 'sylius.ui.contains',
+                    ElasticaFilter::TYPE_NOT_CONTAINS => 'sylius.ui.not_contains',
+                    ElasticaFilter::TYPE_EQUAL => 'sylius.ui.equal',
+                    ElasticaFilter::TYPE_NOT_EQUAL => 'sylius.ui.not_equal',
+                    ElasticaFilter::TYPE_EMPTY => 'sylius.ui.empty',
+                    ElasticaFilter::TYPE_NOT_EMPTY => 'sylius.ui.not_empty',
+                    ElasticaFilter::TYPE_STARTS_WITH => 'sylius.ui.starts_with',
+                    ElasticaFilter::TYPE_ENDS_WITH => 'sylius.ui.ends_with',
+                    ElasticaFilter::TYPE_IN => 'sylius.ui.in',
+                    ElasticaFilter::TYPE_NOT_IN => 'sylius.ui.not_in'
                 ]
             ])
             ->add('value', 'text', ['required' => false])
