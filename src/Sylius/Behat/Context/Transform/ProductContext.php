@@ -13,6 +13,7 @@ namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -42,9 +43,11 @@ final class ProductContext implements Context
     public function getProductByName($productName)
     {
         $product = $this->productRepository->findOneByName($productName);
-        if (null === $product) {
-            throw new \InvalidArgumentException(sprintf('Product with name "%s" does not exist', $productName));
-        }
+
+        Assert::notNull(
+            $product,
+            sprintf('Product with name "%s" does not exist', $productName)
+        );
 
         return $product;
     }

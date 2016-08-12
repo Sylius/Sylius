@@ -13,6 +13,7 @@ namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
@@ -41,11 +42,11 @@ final class CouponContext implements Context
     public function getCouponByCode($couponCode)
     {
         $coupon = $this->couponRepository->findOneBy(['code' => $couponCode]);
-        if (null === $coupon) {
-            throw new \InvalidArgumentException(
-                sprintf('Coupon with code "%s" does not exist in the coupon repository.', $couponCode)
-            );
-        }
+
+        Assert::notNull(
+            $coupon,
+            sprintf('Coupon with code "%s" does not exist', $couponCode)
+        );
 
         return $coupon;
     }

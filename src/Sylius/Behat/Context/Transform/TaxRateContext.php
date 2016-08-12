@@ -13,6 +13,7 @@ namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -38,9 +39,11 @@ final class TaxRateContext implements Context
     public function getTaxRateByName($taxRateName)
     {
         $taxRate = $this->taxRateRepository->findOneBy(['name' => $taxRateName]);
-        if (null === $taxRate) {
-            throw new \InvalidArgumentException(sprintf('Tax rate with name "%s" does not exist.', $taxRateName));
-        }
+
+        Assert::notNull(
+            $taxRate,
+            sprintf('Tax rate with name "%s" does not exist', $taxRateName)
+        );
 
         return $taxRate;
     }
