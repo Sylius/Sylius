@@ -320,13 +320,6 @@ sylius_rbac:
         sylius.order_item.update: Edit order item
         sylius.order_item.delete: Delete order item
 
-        sylius.manage.adjustment: Manage adjustments
-        sylius.adjustment.show: Show adjustment
-        sylius.adjustment.index: List adjustments
-        sylius.adjustment.create: Create adjustment
-        sylius.adjustment.update: Edit adjustment
-        sylius.adjustment.delete: Delete adjustment
-
         sylius.manage.shipment: Manage shipments
         sylius.shipment.show: Show shipment
         sylius.shipment.index: List shipments
