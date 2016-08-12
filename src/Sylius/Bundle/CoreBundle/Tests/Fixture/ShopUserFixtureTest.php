@@ -14,12 +14,12 @@ namespace Sylius\Bundle\CoreBundle\Tests\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use Matthias\SymfonyConfigTest\PhpUnit\ConfigurationTestCaseTrait;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
-use Sylius\Bundle\CoreBundle\Fixture\UserFixture;
+use Sylius\Bundle\CoreBundle\Fixture\ShopUserFixture;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-final class UserFixtureTest extends \PHPUnit_Framework_TestCase
+final class ShopUserFixtureTest extends \PHPUnit_Framework_TestCase
 {
     use ConfigurationTestCaseTrait;
 
@@ -77,7 +77,7 @@ final class UserFixtureTest extends \PHPUnit_Framework_TestCase
      */
     protected function getConfiguration()
     {
-        return new UserFixture(
+        return new ShopUserFixture(
             $this->getMockBuilder(ObjectManager::class)->getMock(),
             $this->getMockBuilder(ExampleFactoryInterface::class)->getMock()
         );

@@ -39,7 +39,7 @@ class SecurityController extends BaseSecurityController
             throw new AccessDeniedException();
         }
 
-        $user = $this->get('sylius.repository.user')->findOneBy(['usernameCanonical' => $username]);
+        $user = $this->get('sylius.repository.shop_user')->findOneBy(['usernameCanonical' => $username]);
 
         if (!$user) {
             throw new NotFoundHttpException(sprintf('User with username %s does not exist.', $username));

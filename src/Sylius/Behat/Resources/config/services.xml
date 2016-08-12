@@ -31,11 +31,21 @@
             <argument type="service" id="sylius.behat.cookie_setter" />
         </service>
 
-        <service id="sylius.behat.security" class="Sylius\Behat\Service\SecurityService" scope="scenario" public="false">
-            <argument type="service" id="sylius.repository.user" container="symfony" />
+        <service id="sylius.behat.admin_security" class="Sylius\Behat\Service\SecurityService" scope="scenario" public="false">
             <argument type="service" id="session" container="symfony" />
             <argument type="service" id="sylius.behat.cookie_setter" />
-            <argument>user</argument>
+            <argument type="string">admin</argument>
+        </service>
+
+        <service id="sylius.behat.shop_security" class="Sylius\Behat\Service\SecurityService" scope="scenario" public="false">
+            <argument type="service" id="session" container="symfony" />
+            <argument type="service" id="sylius.behat.cookie_setter" />
+            <argument type="string">shop</argument>
+        </service>
+
+        <service id="sylius.behat.shared_security" class="Sylius\Behat\Service\SharedSecurityService" scope="scenario" public="false">
+            <argument type="service" id="sylius.behat.admin_security" />
+            <argument type="service" id="sylius.behat.shop_security" />
         </service>
 
         <service id="sylius.behat.table_accessor" class="Sylius\Behat\Service\Accessor\TableAccessor" public="false" />

@@ -24,7 +24,7 @@ default:
                 - sylius.behat.context.setup.taxation
                 - sylius.behat.context.setup.user
                 - sylius.behat.context.setup.zone
-                - sylius.behat.context.setup.security
+                - sylius.behat.context.setup.shop_security
 
                 - sylius.behat.context.ui.shop.cart
                 - sylius.behat.context.ui.checkout

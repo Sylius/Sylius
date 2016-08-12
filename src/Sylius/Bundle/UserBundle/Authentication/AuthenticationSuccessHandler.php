@@ -19,7 +19,7 @@ use Symfony\Component\Security\Http\Authentication\DefaultAuthenticationSuccessH
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class AuthenticationSuccessHandler extends DefaultAuthenticationSuccessHandler
+final class AuthenticationSuccessHandler extends DefaultAuthenticationSuccessHandler
 {
     /**
      * {@inheritdoc}

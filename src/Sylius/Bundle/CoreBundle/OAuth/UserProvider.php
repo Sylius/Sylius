@@ -20,7 +20,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Component\Core\Model\UserInterface as SyliusUserInterface;
+use Sylius\Component\Core\Model\ShopUserInterface as SyliusUserInterface;
 use Sylius\Component\User\Model\UserOAuthInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -60,6 +60,7 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
     protected $userManager;
 
     /**
+     * @param string $supportedUserClass
      * @param FactoryInterface $customerFactory
      * @param FactoryInterface $userFactory
      * @param UserRepositoryInterface $userRepository
@@ -69,6 +70,7 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
      * @param CanonicalizerInterface $canonicalizer
      */
     public function __construct(
+        $supportedUserClass,
         FactoryInterface $customerFactory,
         FactoryInterface $userFactory,
         UserRepositoryInterface $userRepository,
@@ -77,7 +79,7 @@ class UserProvider extends BaseUserProvider implements AccountConnectorInterface
         ObjectManager $userManager,
         CanonicalizerInterface $canonicalizer
     ) {
-        parent::__construct($userRepository, $canonicalizer);
+        parent::__construct($supportedUserClass, $userRepository, $canonicalizer);
 
         $this->customerFactory = $customerFactory;
         $this->oauthFactory = $oauthFactory;

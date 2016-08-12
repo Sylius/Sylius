@@ -12,7 +12,7 @@ default:
                 - sylius.behat.context.transform.product
                 - sylius.behat.context.transform.product_option
 
-                - sylius.behat.context.setup.security
+                - sylius.behat.context.setup.shop_security
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.product
                 - sylius.behat.context.setup.user

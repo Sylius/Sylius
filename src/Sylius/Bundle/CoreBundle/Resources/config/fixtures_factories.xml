@@ -37,11 +37,14 @@
             <argument type="service" id="sylius.repository.shipping_method" />
         </service>
 
-        <service id="sylius.fixture.example_factory.user" class="Sylius\Bundle\CoreBundle\Fixture\Factory\UserExampleFactory">
-            <argument type="service" id="sylius.factory.user" />
+        <service id="sylius.fixture.example_factory.shop_user" class="Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory">
+            <argument type="service" id="sylius.factory.shop_user" />
             <argument type="service" id="sylius.factory.customer" />
+        </service>
+
+        <service id="sylius.fixture.example_factory.admin_user" class="Sylius\Bundle\CoreBundle\Fixture\Factory\AdminUserExampleFactory">
+            <argument type="service" id="sylius.factory.admin_user" />
             <argument type="service" id="sylius.repository.role" />
-            <argument type="service" id="sylius.repository.currency" />
         </service>
 
         <service id="sylius.fixture.example_factory.product_option" class="Sylius\Bundle\CoreBundle\Fixture\Factory\ProductOptionExampleFactory">

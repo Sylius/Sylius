@@ -15,9 +15,7 @@ use Sylius\Bundle\FlowBundle\Process\Context\ProcessContextInterface;
 use Sylius\Bundle\FlowBundle\Process\Step\ActionResult;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\UserInterface;
-use Sylius\Component\Core\OrderCheckoutStates;
-use Sylius\Component\Core\OrderCheckoutTransitions;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Core\SyliusCheckoutEvents;
 use Sylius\Component\Resource\Event\ResourceEvent;
 use Sylius\Component\Resource\Model\ResourceInterface;
@@ -186,7 +184,7 @@ class SecurityStep extends CheckoutStep
     /**
      * @param FormInterface $registrationForm
      *
-     * @return UserInterface
+     * @return ShopUserInterface
      */
     protected function registerUser(FormInterface $registrationForm)
     {

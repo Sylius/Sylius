@@ -74,46 +74,17 @@
             <argument type="service" id="sylius.user.password_encoder" />
         </service>
 
-        <service id="sylius.user.checker.token_uniqueness.password_reset" class="%sylius.user.checker.token_uniqueness%">
-            <argument type="service" id="sylius.repository.user" />
-            <argument type="string">passwordResetToken</argument>
-        </service>
-        <service id="sylius.user.checker.token_uniqueness.email_verification" class="%sylius.user.checker.token_uniqueness%">
-            <argument type="service" id="sylius.repository.user" />
-            <argument type="string">emailVerificationToken</argument>
-        </service>
-
-        <service id="sylius.user.generator.password_reset_token" class="%sylius.user.generator.unique_token.class%">
-            <argument type="service" id="sylius.user.checker.token_uniqueness.password_reset" />
-            <argument>%sylius.user.resetting.token_length%</argument>
-        </service>
-        <service id="sylius.user.generator.password_reset_pin" class="%sylius.user.generator.unique_pin.class%">
-            <argument type="service" id="sylius.user.checker.token_uniqueness.password_reset" />
-            <argument>%sylius.user.resetting.pin_length%</argument>
-        </service>
-        <service id="sylius.user.generator.email_verification_token" class="%sylius.user.generator.unique_token.class%">
-            <argument type="service" id="sylius.user.checker.token_uniqueness.email_verification" />
-            <argument>%sylius.user.verification.token_length%</argument>
-        </service>
-
         <service id="sylius.security.user_login" class="%sylius.security.user_login.class%">
             <argument type="service" id="security.token_storage" />
             <argument type="service" id="security.user_checker" />
             <argument type="service" id="event_dispatcher" />
         </service>
-        <service id="sylius.user.user_reloader" class="%sylius.user.user_reloader.class%">
-            <argument type="service" id="sylius.manager.user" />
-        </service>
 
         <!-- Listeners -->
-        <service id="sylius.listener.user_last_login" class="%sylius.listener.user_last_login.class%">
-            <argument type="service" id="sylius.manager.user" />
-            <tag name="kernel.event_subscriber" />
-        </service>
-        <service id="sylius.listener.user_reloader" class="%sylius.listener.user_reloader.class%">
-            <argument type="service" id="sylius.user.user_reloader" />
-            <tag name="kernel.event_listener" event="sylius.user.post_create" method="reloadUser" />
-            <tag name="kernel.event_listener" event="sylius.user.post_update" method="reloadUser" />
+        <service id="sylius.listener.canonicalizer" class="%sylius.listener.canonicalizer.class%">
+            <argument type="service" id="sylius.user.canonicalizer" />
+            <tag name="doctrine.event_listener" event="prePersist" />
+            <tag name="doctrine.event_listener" event="preUpdate" />
         </service>
         <service id="sylius.listener.password_updater" class="%sylius.listener.password_updater.class%">
             <argument type="service" id="sylius.user.password_updater" />
@@ -133,23 +104,6 @@
             <argument type="service" id="security.token_storage" />
             <argument type="service" id="session" />
             <tag name="kernel.event_listener" event="sylius.user.pre_delete" method="deleteUser" />
-        </service>
-
-        <!-- Event Subscribers -->
-        <service id="sylius.form.event_subscriber.add_user_type" class="%sylius.form.event_subscriber.add_user_type.class%" />
-
-        <!-- User Providers -->
-        <service id="sylius.user_provider.email" class="%sylius.user_provider.email.class%">
-            <argument type="service" id="sylius.repository.user" />
-            <argument type="service" id="sylius.user.canonicalizer" />
-        </service>
-        <service id="sylius.user_provider.name_or_email" class="%sylius.user_provider.name_or_email.class%" lazy="true">
-            <argument type="service" id="sylius.repository.user" />
-            <argument type="service" id="sylius.user.canonicalizer" />
-        </service>
-        <service id="sylius.user_provider.name" class="%sylius.user_provider.name.class%">
-            <argument type="service" id="sylius.repository.user" />
-            <argument type="service" id="sylius.user.canonicalizer" />
         </service>
 
         <!-- Forms -->

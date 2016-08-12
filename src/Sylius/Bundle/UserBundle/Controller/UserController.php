@@ -63,14 +63,14 @@ class UserController extends ResourceController
 
     public function requestPasswordResetTokenAction(Request $request)
     {
-        $generator = $this->container->get('sylius.user.generator.password_reset_token');
+        $generator = $this->container->get(sprintf('sylius.%s.generator.password_reset_token', $this->metadata->getName()));
 
         return $this->prepareResetPasswordRequest($request, $generator, UserEvents::REQUEST_RESET_PASSWORD_TOKEN);
     }
 
     public function requestPasswordResetPinAction(Request $request)
     {
-        $generator = $this->container->get('sylius.user.generator.password_reset_pin');
+        $generator = $this->container->get(sprintf('sylius.%s.generator.password_reset_pin', $this->metadata->getName()));
 
         return $this->prepareResetPasswordRequest($request, $generator, UserEvents::REQUEST_RESET_PASSWORD_PIN);
     }
@@ -177,7 +177,7 @@ class UserController extends ResourceController
             return $this->redirectHandler->redirectToRoute($configuration, $redirectRoute);
         }
 
-        $tokenGenerator = $this->container->get('sylius.user.generator.email_verification_token');
+        $tokenGenerator = $this->container->get(sprintf('sylius.%s.generator.email_verification_token', $this->metadata->getName()));
         $user->setEmailVerificationToken($tokenGenerator->generate());
 
         $this->manager->flush();

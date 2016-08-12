@@ -12,8 +12,9 @@
 namespace spec\Sylius\Bundle\CoreBundle\Context;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CoreBundle\Context\CustomerContext;
 use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Component\Core\Model\UserInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
@@ -30,11 +31,16 @@ final class CustomerContextSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Context\CustomerContext');
+        $this->shouldHaveType(CustomerContext::class);
     }
 
-    function it_gets_customer_from_currently_logged_user($tokenStorage, $authorizationChecker, TokenInterface $token, UserInterface $user, CustomerInterface $customer)
-    {
+    function it_gets_customer_from_currently_logged_user(
+        TokenStorageInterface $tokenStorage,
+        AuthorizationCheckerInterface $authorizationChecker,
+        TokenInterface $token,
+        ShopUserInterface $user,
+        CustomerInterface $customer
+    ) {
         $tokenStorage->getToken()->willReturn($token);
         $authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED')->willReturn(true);
         $token->getUser()->willReturn($user);

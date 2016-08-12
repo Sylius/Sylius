@@ -9,7 +9,7 @@ Feature: Editing an administrator
         And there is an administrator "Gareth Bale" identified by an email "bale@example.com" and a password "bale11"
         And I am logged in as "bale@example.com"
 
-    @ui @javascript
+    @todo
     Scenario: Changing password and signing again
         Given I want to change my password
         When I change my password to "abcd"

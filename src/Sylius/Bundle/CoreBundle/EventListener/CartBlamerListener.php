@@ -16,8 +16,8 @@ use Sylius\Bundle\UserBundle\Event\UserEvent;
 use Sylius\Component\Cart\Context\CartContextInterface;
 use Sylius\Component\Cart\Context\CartNotFoundException;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
-use Sylius\Component\User\Model\UserInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 /**
@@ -50,7 +50,12 @@ final class CartBlamerListener
      */
     public function onImplicitLogin(UserEvent $userEvent)
     {
-        $this->blame($userEvent->getUser());
+        $user = $userEvent->getUser();
+        if (!$user instanceof ShopUserInterface) {
+            return;
+        }
+
+        $this->blame($user);
     }
 
     /**
@@ -59,7 +64,7 @@ final class CartBlamerListener
     public function onInteractiveLogin(InteractiveLoginEvent $interactiveLoginEvent)
     {
         $user = $interactiveLoginEvent->getAuthenticationToken()->getUser();
-        if (!$user instanceof UserInterface) {
+        if (!$user instanceof ShopUserInterface) {
             return;
         }
 
@@ -67,9 +72,9 @@ final class CartBlamerListener
     }
 
     /**
-     * @param UserInterface $user
+     * @param ShopUserInterface $user
      */
-    private function blame(UserInterface $user)
+    private function blame(ShopUserInterface $user)
     {
         $cart = $this->getCart();
         if (null === $cart) {

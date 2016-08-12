@@ -28,7 +28,7 @@ class DashboardController extends Controller
     {
         $orderRepository = $this->get('sylius.repository.order');
         $customerRepository = $this->get('sylius.repository.customer');
-        $userRepository = $this->get('sylius.repository.user');
+        $userRepository = $this->get('sylius.repository.shop_user');
 
         return $this->render('SyliusWebBundle:Backend/Dashboard:main.html.twig', [
             'orders_count' => $orderRepository->countBetweenDates(new \DateTime('1 month ago'), new \DateTime()),

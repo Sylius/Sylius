@@ -210,7 +210,7 @@
         <service id="sylius.form.type.customer" class="%sylius.form.type.customer.class%">
             <argument>%sylius.model.customer.class%</argument>
             <argument>%sylius.validation_groups.customer%</argument>
-            <argument type="service" id="sylius.form.event_subscriber.add_user_type" />
+            <argument type="service" id="sylius.form.event_subscriber.add_shop_user_type" />
             <tag name="form.type" alias="sylius_customer" />
         </service>
         <service id="sylius.form.type.customer_guest" class="%sylius.form.type.customer_guest.class%">

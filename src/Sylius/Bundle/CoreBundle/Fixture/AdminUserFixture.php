@@ -14,16 +14,16 @@ namespace Sylius\Bundle\CoreBundle\Fixture;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 
 /**
- * @author Kamil Kokot <kamil.kokot@lakion.com>
+ * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-final class UserFixture extends AbstractResourceFixture
+final class AdminUserFixture extends AbstractResourceFixture
 {
     /**
      * {@inheritdoc}
      */
     public function getName()
     {
-        return 'user';
+        return 'admin_user';
     }
 
     /**
@@ -34,10 +34,8 @@ final class UserFixture extends AbstractResourceFixture
         $resourceNode
             ->children()
                 ->scalarNode('email')->cannotBeEmpty()->end()
-                ->scalarNode('first_name')->cannotBeEmpty()->end()
-                ->scalarNode('last_name')->cannotBeEmpty()->end()
+                ->scalarNode('username')->cannotBeEmpty()->end()
                 ->booleanNode('enabled')->end()
-                ->booleanNode('admin')->end()
                 ->booleanNode('api')->end()
                 ->scalarNode('password')->cannotBeEmpty()->end()
         ;

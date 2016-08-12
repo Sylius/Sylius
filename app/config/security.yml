@@ -3,17 +3,19 @@
 
 security:
     providers:
-        sylius_user_provider:
-            id: sylius.user_provider.name_or_email
+        sylius_admin_user_provider:
+            id: sylius.admin_user.provider.email_or_name_based
+        sylius_shop_user_provider:
+            id: sylius.shop_user.provider.email_or_name_based
     encoders:
         Sylius\Component\User\Model\UserInterface: sha512
     firewalls:
         admin:
             switch_user: true
-            context: user
+            context: admin
             pattern: /admin/.*
             form_login:
-                provider: sylius_user_provider
+                provider: sylius_admin_user_provider
                 login_path: sylius_admin_login
                 check_path: sylius_admin_login_check
                 failure_path: sylius_admin_login
@@ -37,12 +39,12 @@ security:
 
         shop:
             switch_user: { role: ROLE_ALLOWED_TO_SWITCH }
-            context: user
+            context: shop
             pattern: /.*
             form_login:
                 success_handler: sylius.authenticaiton.success_handler
                 failure_handler: sylius.authentication.failure_handler
-                provider: sylius_user_provider
+                provider: sylius_shop_user_provider
                 login_path: sylius_shop_login
                 check_path: sylius_shop_login_check
                 failure_path: sylius_shop_login

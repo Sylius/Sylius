@@ -24,7 +24,7 @@ use Webmozart\Assert\Assert;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class LoginContext implements Context
+final class LoginContext implements Context
 {
     /**
      * @var HomePageInterface

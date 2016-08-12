@@ -6,7 +6,7 @@ Feature: Resetting a password
 
     Background:
         Given the store operates on a single channel in "France"
-        And there is user "goodman@example.com" identified by "heisenberg"
+        And there is a user "goodman@example.com" identified by "heisenberg"
 
     @ui @email
     Scenario: Resetting an account password

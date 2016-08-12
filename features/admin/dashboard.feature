@@ -18,7 +18,7 @@ Feature: Statistics dashboard
         And then 2 more customers have placed 2 orders for total of "€459.00"
         When I open administration dashboard
         Then I should see 6 new orders
-        And I should see 6 new customers
+        And I should see 5 new customers
         And there should be total sales of "€9,025.00"
         And the average order value should be "€1,504.17"
 
@@ -28,7 +28,7 @@ Feature: Statistics dashboard
         And 2 customers have added products to the cart for total of "€3450.00"
         When I open administration dashboard
         Then I should see 4 new orders
-        And I should see 7 new customers
+        And I should see 6 new customers
         And there should be total sales of "€5,241.00"
         And the average order value should be "€1,310.25"
 
@@ -37,5 +37,5 @@ Feature: Statistics dashboard
         Given 2 customers have placed 3 orders for total of "€340.00"
         And 2 customers have added products to the cart for total of "€424.00"
         When I open administration dashboard
-        Then I should see 5 new customers in the list
+        Then I should see 4 new customers in the list
         And I should see 3 new orders in the list
