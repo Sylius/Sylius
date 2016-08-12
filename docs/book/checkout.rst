@@ -92,7 +92,8 @@ The typical **Address** consists of: country, city, street and postcode - to ass
      $order->setBillingAddress($address);
 
 Having the **Customer** and the **Address** set you can apply a state transition to your order.
-Get the StateMachine for the Order via the StateMachineFactory with a proper schema, and apply a transition.
+Get the StateMachine for the Order via the StateMachineFactory with a proper schema, and apply a transition
+and of course flush your order after that via the manager.
 
 .. code-block:: php
 
@@ -101,16 +102,21 @@ Get the StateMachine for the Order via the StateMachineFactory with a proper sch
     $stateMachine = $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)
     $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_ADDRESS);
 
+    $this->container->get('sylius.manager.order')->flush();
+
 **What happens with the transition?**
 
 The method ``process($order)`` of the ``Sylius\Component\Core\OrderProcessing\OrderProcessor`` is run.
 It is responsible for creating new **Shipments** for each OrderItemUnit of your order and a new **Payment** if they do not exist yet.
 Therefore this transition is preparing the order for the two next steps of checkout.
+Also the method ``recalculate($order)`` of the ``Sylius\Component\Core\OrderProcessing\OrderRecalculator`` is run,
+that takes care of the **shipping charges** for the default ShippingMethod, **promotions** that depend on the chosen address
+and **taxes** that depend on this address.
 
 Selecting shipping
 ~~~~~~~~~~~~~~~~~~
 
-It is a step where the customer selects the way their order will be shipped to him.
+It is a step where the customer selects the way their order will be shipped to them.
 Basing on the ShippingMethods configured in the system the options for the Customer are provided together with their prices.
 
 +---------------------------------------+--------------------------------------------------+
@@ -118,6 +124,42 @@ Basing on the ShippingMethods configured in the system the options for the Custo
 +---------------------------------------+--------------------------------------------------+
 | ``addressed``-> ``shipping_selected`` | ``SyliusShopBundle:Checkout:shipping.html.twig`` |
 +---------------------------------------+--------------------------------------------------+
+
+How to perform the Selecting shipping Step programmatically?
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+Before approaching this step be sure that you Order is in the ``addressed`` state. In this state your order
+will already have a default ShippingMethod assigned, but in this step you can change it and have everything recalculated automatically.
+
+Firstly either create new (see how in the `Shipments concept </book/shipments`) or retrieve a **ShippingMethod**
+from the repository to assign it to your order's shipment created defaultly in the addressing step.
+
+.. code-block:: php
+
+    // Let's assume you have a method with code 'DHL' that has everything set properly
+    $shippingMethod = $this->container->get('sylius.repository.shipping_method')->findOneByCode('DHL');
+
+    foreach ($order->getShipments() as $shipment) {
+        $shipment->setMethod($shippingMethod);
+    }
+
+After that get the StateMachine for the Order via the StateMachineFactory with a proper schema,
+and apply a proper transition and flush the order via manager.
+
+.. code-block:: php
+
+    $stateMachineFactory = $this->container->get('sm.factory');
+
+    $stateMachine = $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)
+    $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_SELECT_SHIPPING);
+
+    $this->container->get('sylius.manager.order')->flush();
+
+**What happens with the transition?**
+
+The method ``recalculate($order)`` of the ``Sylius\Component\Core\OrderProcessing\OrderRecalculator`` is run.
+This method is responsible for: controlling the **shipping charges** which depend on the chosen ShippingMethod,
+controlling the **promotions** that depend on the shipping method.
 
 Selecting payment
 ~~~~~~~~~~~~~~~~~
