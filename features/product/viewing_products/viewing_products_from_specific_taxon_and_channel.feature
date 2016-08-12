@@ -11,9 +11,11 @@ Feature: Viewing products from a specific taxon and a channel
         And the store classifies its products as "T-Shirts" and "Funny"
         And the store has a product "T-Shirt Banana" available in "Poland" channel
         And this product belongs to "T-Shirts"
+        And there are 10 items of product "T-shirt banana" available in the inventory
         And this product belongs to "Funny"
         And the store has a product "T-Shirt Batman" available in "France" channel
         And this product belongs to "T-Shirts"
+        And there are 10 items of product "T-shirt Batman" available in the inventory
 
     @ui @elasticsearch
     Scenario: Viewing products from a specific taxon in selected channel

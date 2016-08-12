@@ -9,7 +9,7 @@
         {% include '@SyliusShop/Taxon/Show/_children.html.twig' %}
     </div>
     <div class="twelve wide column">
-        {{ render(url('sylius_shop_partial_product_index_by_taxon_code', {'code': taxon.code, 'criteria': {'taxons': {'type': 'contains', 'value': taxon.code}}})) }}
+        {{ render(url('sylius_shop_partial_product_index_by_taxon_code', {'code': taxon.code, 'criteria': {'taxons.code': {'type': 'contains', 'value': taxon.code}}})) }}
     </div>
 </div>
 {% endblock %}

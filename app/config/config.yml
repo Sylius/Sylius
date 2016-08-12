@@ -123,7 +123,14 @@ fos_elastica:
                             type: nested
                             properties:
                                 code: { type: string, index: not_analyzed }
-                        taxons: { type: string, index: not_analyzed }
+                        taxons:
+                            type: nested
+                            properties:
+                                code: { type: string, index: not_analyzed }
+                        mainTaxon:
+                            type: nested
+                            properties:
+                                code: { type: string, index: not_analyzed }
                         image:
                             type: nested
                             properties:
