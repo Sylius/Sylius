@@ -13,22 +13,21 @@ namespace spec\Sylius\Component\Core\OrderProcessing;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
-use Sylius\Component\Core\OrderProcessing\PricesRecalculator;
-use Sylius\Component\Core\OrderProcessing\PricesRecalculatorInterface;
+use Sylius\Component\Core\OrderProcessing\OrderPricesRecalculator;
+use Sylius\Component\Core\OrderProcessing\OrderProcessorInterface;
+use Sylius\Component\Customer\Model\GroupableInterface;
 use Sylius\Component\Pricing\Calculator\DelegatingCalculatorInterface;
 use Sylius\Component\Pricing\Model\PriceableInterface;
-use Sylius\Component\Customer\Model\GroupableInterface;
 
 /**
- * @mixin PricesRecalculator
+ * @mixin OrderPricesRecalculator
  *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class PricesRecalculatorSpec extends ObjectBehavior
+final class OrderPricesRecalculatorSpec extends ObjectBehavior
 {
     function let(DelegatingCalculatorInterface $priceCalculator)
     {
@@ -37,12 +36,12 @@ final class PricesRecalculatorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\OrderProcessing\PricesRecalculator');
+        $this->shouldHaveType(OrderPricesRecalculator::class);
     }
 
-    function it_implements_prices_recalculator_interface()
+    function it_is_an_order_processor()
     {
-        $this->shouldImplement(PricesRecalculatorInterface::class);
+        $this->shouldImplement(OrderProcessorInterface::class);
     }
 
     function it_recalculates_prices_adding_customer_to_the_context(
@@ -70,7 +69,7 @@ final class PricesRecalculatorSpec extends ObjectBehavior
         ;
         $item->setUnitPrice(10)->shouldBeCalled();
 
-        $this->recalculate($order);
+        $this->process($order);
     }
 
     function it_recalculates_prices_adding_channel_to_the_context(
@@ -94,7 +93,7 @@ final class PricesRecalculatorSpec extends ObjectBehavior
         ;
         $item->setUnitPrice(10)->shouldBeCalled();
 
-        $this->recalculate($order);
+        $this->process($order);
     }
 
     function it_recalculates_prices_adding_channel_and_customer_to_the_context(
@@ -131,7 +130,7 @@ final class PricesRecalculatorSpec extends ObjectBehavior
         ;
         $item->setUnitPrice(10)->shouldBeCalled();
 
-        $this->recalculate($order);
+        $this->process($order);
     }
 
     function it_recalculates_prices_without_adding_anything_to_the_context_if_its_not_needed(
@@ -151,6 +150,6 @@ final class PricesRecalculatorSpec extends ObjectBehavior
         $priceCalculator->calculate($variant, ['quantity' => 5])->willReturn(10);
         $item->setUnitPrice(10)->shouldBeCalled();
 
-        $this->recalculate($order);
+        $this->process($order);
     }
 }

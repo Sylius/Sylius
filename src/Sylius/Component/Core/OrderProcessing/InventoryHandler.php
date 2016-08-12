@@ -22,22 +22,22 @@ use Sylius\Component\Inventory\Operator\InventoryOperatorInterface;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class InventoryHandler implements InventoryHandlerInterface
+final class InventoryHandler implements InventoryHandlerInterface
 {
     /**
      * @var InventoryOperatorInterface
      */
-    protected $inventoryOperator;
+    private $inventoryOperator;
 
     /**
      * @var OrderItemUnitFactoryInterface
      */
-    protected $orderItemUnitFactory;
+    private $orderItemUnitFactory;
 
     /**
      * @var StateMachineFactoryInterface
      */
-    protected $stateMachineFactory;
+    private $stateMachineFactory;
 
     /**
      * @param InventoryOperatorInterface $inventoryOperator
@@ -72,7 +72,7 @@ class InventoryHandler implements InventoryHandlerInterface
      *
      * @return int
      */
-    protected function applyTransition(Collection $units, $transition)
+    private function applyTransition(Collection $units, $transition)
     {
         $quantity = 0;
 

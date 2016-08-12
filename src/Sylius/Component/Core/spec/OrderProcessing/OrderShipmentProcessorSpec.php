@@ -16,13 +16,14 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
-use Sylius\Component\Core\OrderProcessing\OrderShipmentProcessorInterface;
+use Sylius\Component\Core\OrderProcessing\OrderProcessorInterface;
+use Sylius\Component\Core\OrderProcessing\OrderShipmentProcessor;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface;
 
 /**
- * @mixin \Sylius\Component\Core\OrderProcessing\OrderShipmentProcessor
+ * @mixin OrderShipmentProcessor
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
@@ -37,12 +38,12 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\OrderProcessing\OrderShipmentProcessor');
+        $this->shouldHaveType(OrderShipmentProcessor::class);
     }
 
-    function it_implements_Sylius_shipment_factory_interface()
+    function it_is_an_order_processor()
     {
-        $this->shouldImplement(OrderShipmentProcessorInterface::class);
+        $this->shouldImplement(OrderProcessorInterface::class);
     }
 
     function it_creates_a_single_shipment_with_default_shipping_method_and_assigns_all_units_to_it(
@@ -61,13 +62,14 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
         $order->hasShipments()->willReturn(false);
         $order->getItemUnits()->willReturn([$itemUnit1, $itemUnit2]);
 
+        $shipment->setOrder($order)->shouldBeCalled();
         $shipment->setMethod($defaultShippingMethod)->shouldBeCalled();
         $shipment->addUnit($itemUnit1)->shouldBeCalled();
         $shipment->addUnit($itemUnit2)->shouldBeCalled();
 
         $order->addShipment($shipment)->shouldBeCalled();
 
-        $this->processOrderShipment($order);
+        $this->process($order);
     }
 
     function it_adds_new_item_units_to_existing_shipment(
@@ -88,6 +90,6 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
         $shipment->addUnit($itemUnitWithoutShipment)->shouldBeCalled();
         $shipment->addUnit($itemUnit)->shouldNotBeCalled();
 
-        $this->processOrderShipment($order);
+        $this->process($order);
     }
 }

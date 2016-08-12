@@ -17,7 +17,7 @@ use Sylius\Component\Pricing\Calculator\DelegatingCalculatorInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class PricesRecalculator implements PricesRecalculatorInterface
+final class OrderPricesRecalculator implements OrderProcessorInterface
 {
     /**
      * @var DelegatingCalculatorInterface
@@ -35,7 +35,7 @@ class PricesRecalculator implements PricesRecalculatorInterface
     /**
      * {@inheritdoc}
      */
-    public function recalculate(OrderInterface $order)
+    public function process(OrderInterface $order)
     {
         $context = [];
         if (null !== $customer = $order->getCustomer()) {

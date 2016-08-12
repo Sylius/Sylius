@@ -14,22 +14,23 @@ namespace Sylius\Component\Core\OrderProcessing;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\Shipping\Exception\UnresolvedDefaultShippingMethodException;
 use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class OrderShipmentProcessor implements OrderShipmentProcessorInterface
+final class OrderShipmentProcessor implements OrderProcessorInterface
 {
     /**
      * @var DefaultShippingMethodResolverInterface
      */
-    protected $defaultShippingMethodResolver;
+    private $defaultShippingMethodResolver;
 
     /**
      * @var FactoryInterface
      */
-    protected $shipmentFactory;
+    private $shipmentFactory;
 
     /**
      * @param DefaultShippingMethodResolverInterface $defaultShippingMethodResolver
@@ -46,9 +47,13 @@ class OrderShipmentProcessor implements OrderShipmentProcessorInterface
     /**
      * {@inheritdoc}
      */
-    public function processOrderShipment(OrderInterface $order)
+    public function process(OrderInterface $order)
     {
         $shipment = $this->getOrderShipment($order);
+
+        if (null === $shipment) {
+            return;
+        }
 
         foreach ($order->getItemUnits() as $itemUnit) {
             if (null === $itemUnit->getShipment()) {
@@ -68,11 +73,17 @@ class OrderShipmentProcessor implements OrderShipmentProcessorInterface
             return $order->getShipments()->first();
         }
 
-        /** @var ShipmentInterface $shipment */
-        $shipment = $this->shipmentFactory->createNew();
-        $order->addShipment($shipment);
-        $shipment->setMethod($this->defaultShippingMethodResolver->getDefaultShippingMethod($shipment));
+        try {
+            /** @var ShipmentInterface $shipment */
+            $shipment = $this->shipmentFactory->createNew();
+            $shipment->setOrder($order);
+            $shipment->setMethod($this->defaultShippingMethodResolver->getDefaultShippingMethod($shipment));
 
-        return $shipment;
+            $order->addShipment($shipment);
+
+            return $shipment;
+        } catch (UnresolvedDefaultShippingMethodException $exception) {
+            return null;
+        }
     }
 }
