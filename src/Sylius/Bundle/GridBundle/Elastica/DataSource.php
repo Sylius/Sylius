@@ -38,10 +38,10 @@ class DataSource implements DataSourceInterface
     /**
      * @param SearchableInterface $type
      */
-    function __construct(SearchableInterface $type)
+    function __construct(SearchableInterface $type, array $query = [])
     {
         $this->type = $type;
-        $this->expressionBuilder = new ExpressionBuilder();
+        $this->expressionBuilder = new ExpressionBuilder($query);
     }
 
     /**
@@ -67,6 +67,7 @@ class DataSource implements DataSourceInterface
      */
     public function getData(Parameters $parameters)
     {
+        // dump($this->expressionBuilder->getQuery());die;
         $query = new Query(new Simple($this->expressionBuilder->getQuery()));
         $paginator = new Pagerfanta(new ElasticaAdapter($this->type, $query));
         $paginator->setNormalizeOutOfRangePages(true);

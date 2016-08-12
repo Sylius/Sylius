@@ -8,9 +8,36 @@ sylius_grid:
                 name: elastica
                 options:
                     type: product
-                    terms:
-                        channels: "expr:service('sylius.context.channel').getChannel()"
-                        taxons: $taxonPermalink
+                    query:
+                        and:
+                            - term:
+                                enabled: true
+                            - nested:
+                                path: variants
+                                query:
+                                    bool:
+                                        minimum_number_should_match: 1
+                                        should:
+                                            range:
+                                                variants.onHand: { gt: 0 }
+                                        must:
+                                            filtered:
+                                                filter:
+                                                    or:
+                                                        - missing: { field: availableOn }
+                                                        - range: { variants.availableOn: { lte: now } }
+                                            filtered:
+                                                filter:
+                                                    or:
+                                                        - missing: { field: availableUntil }
+                                                        - range: { variants.availableUntil: { gte: now } }
+                            - nested:
+                                path: channels
+                                filter:
+                                    bool:
+                                        must:
+                                            term: { 'channels.code': "expr:service('sylius.context.channel').getChannel().getCode()" }
             filters:
                 _all:
                     type: elastica
+

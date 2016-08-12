@@ -45,6 +45,8 @@ class Driver implements DriverInterface
             throw new \InvalidArgumentException('"type" must be configured.');
         }
 
-        return new DataSource($this->index->getType($configuration['type']));
+        $query = (array_key_exists('query', $configuration)) ?  $configuration['query'] : [];
+
+        return new DataSource($this->index->getType($configuration['type']), $query);
     }
 }

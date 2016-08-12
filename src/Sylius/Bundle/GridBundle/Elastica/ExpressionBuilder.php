@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\GridBundle\Elastica;
 
+use Sylius\Component\Grid\Data\DataSourceInterface;
 use Sylius\Component\Grid\Data\ExpressionBuilderInterface;
 
 /**
@@ -31,9 +32,14 @@ class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function __construct()
+    public function __construct($query)
     {
-        $this->query = ['match_all' => []];
+        if (empty($query)) {
+            $this->query = ['match_all' => []];
+        } else {
+            $this->initQueryForFilters();
+            $this->query['filtered']['filter'] = $query;
+        }
     }
 
     /**
@@ -145,6 +151,12 @@ class ExpressionBuilder implements ExpressionBuilderInterface
      */
     public function like($field, $pattern)
     {
+        if ($this->isNested($field)) {
+            $properties = explode('.', $field);
+
+            return ['nested' =>  $properties[0], 'expression' => ['term' => [ $field => $pattern ]]];
+        }
+
         return ['term' => [ $field => $pattern ]];
     }
 
@@ -178,13 +190,64 @@ class ExpressionBuilder implements ExpressionBuilderInterface
      */
     public function addFilter($expression, $condition)
     {
-        $this->query['filtered']['filter'] = $expression;
-        return;
-        if (!isset($this->query['filtered']['filter'][$condition])) {
-            $this->query['filtered']['filter'][$condition] = [];
+        if (isset($expression['nested'])) {
+            $this->addNestedFilter($expression['nested'], $expression['expression'], $condition);
+        } else {
+            if (empty($this->query['filtered']['filter'])) {
+                $this->query['filtered']['filter'] = $expression;
+            } else {
+                if (!isset($this->query['filtered']['filter'][$condition])) {
+                    $this->query['filtered']['filter'] = [$condition => [
+                        $this->query['filtered']['filter'],
+                        $expression,
+                    ]];
+                } else {
+                    $this->query['filtered']['filter'][$condition][] = $expression;
+                }
+            }
         }
+    }
 
-        $this->query['filtered']['filter'][$condition] = $expression;
+    /**
+     * @param string $path
+     * @param array $expression
+     * @param string $condition
+     */
+    public function addNestedFilter($path, $expression, $condition)
+    {
+        if (empty($this->query['filtered']['filter'])) {
+            $this->query['filtered']['filter']['nested'] = [
+                'path' => $path,
+                'filter' => [
+                    'bool' => [
+                        'must' => $expression
+                    ]
+                ],
+            ];
+        } else {
+            if (!isset($this->query['filtered']['filter'][$condition])) {
+                $this->query['filtered']['filter'] = [$condition => [
+                    $this->query['filtered']['filter'],
+                    ['nested' => [
+                        'path' => $path,
+                        'filter' => [
+                            'bool' => [
+                                'must' => $expression
+                            ]
+                        ]
+                    ]],
+                ]];
+            } else {
+                $this->query['filtered']['filter'][$condition][] = ['nested' => [
+                    'path' => $path,
+                    'filter' => [
+                        'bool' => [
+                            'must' => $expression
+                        ]
+                    ]
+                ]];
+            }
+        }
     }
 
     /**
@@ -201,5 +264,14 @@ class ExpressionBuilder implements ExpressionBuilderInterface
             $this->query = ['filtered' => ['filter' => []]];
             $this->filtered = true;
         }
+    }
+
+    /**
+     * @param string $field
+     * @return boolean
+     */
+    private function isNested($field)
+    {
+        return preg_match('/\./', $field);
     }
 }
