@@ -63,7 +63,7 @@ final class ShippingChargesProcessorSpec extends ObjectBehavior
 
     function it_applies_calculated_shipping_charge_for_each_shipment_associated_with_the_order(
         FactoryInterface $adjustmentFactory,
-        DelegatingCalculatorInterface$calculator,
+        DelegatingCalculatorInterface $calculator,
         AdjustmentInterface $adjustment,
         OrderInterface $order,
         ShipmentInterface $shipment,
