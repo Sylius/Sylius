@@ -13,13 +13,13 @@ Feature: Viewing products from a specific taxon
         And the store has a product "Plastic Tomato" available in "Poland" channel
         And this product belongs to "Funny"
 
-    @ui
+    @ui @elasticsearch
     Scenario: Viewing products from a specific taxon
         When I browse products from taxon "T-Shirts"
         Then I should see the product "T-Shirt Banana"
         And I should not see the product "Plastic Tomato"
 
-    @ui
+    @ui @elasticsearch
     Scenario: Viewing information about empty list of products from a given taxon
         When I browse products from taxon "Sad"
         Then I should see empty list of products

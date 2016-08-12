@@ -7,7 +7,7 @@ Feature: Viewing a product price on products list
     Background:
         Given the store operates on a single channel in "France"
 
-    @ui
+    @ui @elasticsearch
     Scenario: Viewing a products with price on list
         Given the store has a product "T-shirt watermelon" priced at "€19.00"
         And the store classifies its products as "T-Shirts"

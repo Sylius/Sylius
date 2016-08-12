@@ -205,6 +205,9 @@ final class ManagingProductsContext implements Context
      */
     public function iWantToBrowseProducts()
     {
+        // Timeout because of elasticsearch update timing, use "curl 'localhost:9200/_cat/pending_tasks'" to check instead
+        sleep(1);
+
         $this->indexPage->open();
     }
 

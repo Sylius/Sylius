@@ -11,7 +11,7 @@ Feature: Deleting a product
         And this product has one review
         And I am logged in as an administrator
 
-    @ui
+    @ui @elasticsearch
     Scenario: Deleted product disappears from the product catalog
         When I delete the "Toyota GT86 model" product
         Then I should be notified that it has been successfully deleted

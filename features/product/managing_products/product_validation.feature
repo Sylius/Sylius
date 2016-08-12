@@ -8,7 +8,7 @@ Feature: Products validation
         Given the store is available in "English (United States)"
         And I am logged in as an administrator
 
-    @ui
+    @ui @elasticsearch
     Scenario: Adding a new simple product without specifying its code
         Given I want to create a new simple product
         When I name it "Dice Brewing" in "English (United States)"
@@ -17,7 +17,7 @@ Feature: Products validation
         Then I should be notified that code is required
         And product with name "Dice Brewing" should not be added
 
-    @ui
+    @ui @elasticsearch
     Scenario: Adding a new simple product without specifying its name
         Given I want to create a new simple product
         When I specify its code as "BOARD_DICE_BREWING"
@@ -26,7 +26,7 @@ Feature: Products validation
         Then I should be notified that name is required
         And product with code "BOARD_DICE_BREWING" should not be added
 
-    @ui
+    @ui @elasticsearch
     Scenario: Adding a new simple product without specifying its price
         Given I want to create a new simple product
         When I specify its code as "BOARD_DICE_BREWING"
@@ -35,7 +35,7 @@ Feature: Products validation
         Then I should be notified that price is required
         And product with code "BOARD_DICE_BREWING" should not be added
 
-    @ui
+    @ui @elasticsearch
     Scenario: Adding a new configurable product without specifying its code
         Given I want to create a new configurable product
         When I name it "Dice Brewing" in "English (United States)"
@@ -43,7 +43,7 @@ Feature: Products validation
         Then I should be notified that code is required
         And product with name "Dice Brewing" should not be added
 
-    @ui
+    @ui @elasticsearch
     Scenario: Adding a new configurable product without specifying its name
         Given I want to create a new configurable product
         When I specify its code as "BOARD_DICE_BREWING"
@@ -51,7 +51,7 @@ Feature: Products validation
         Then I should be notified that name is required
         And product with code "BOARD_DICE_BREWING" should not be added
 
-    @ui
+    @ui @elasticsearch
     Scenario: Trying to remove name from existing simple product
         Given the store has a "Dice Brewing" product
         And I want to modify this product

@@ -8,7 +8,7 @@ Feature: Adding a new product
         Given the store is available in "English (United States)"
         And I am logged in as an administrator
 
-    @ui
+    @ui @elasticsearch
     Scenario: Adding a new simple product
         Given I want to create a new simple product
         When I specify its code as "BOARD_DICE_BREWING"
@@ -18,7 +18,7 @@ Feature: Adding a new product
         Then I should be notified that it has been successfully created
         And the product "Dice Brewing" should appear in the shop
 
-    @ui
+    @ui @elasticsearch
     Scenario: Adding a new configurable product
         Given the store has a product option "Bottle size" with a code "bottle_size"
         And this product option has the "0.7" option value with code "bottle_size_medium"
@@ -31,7 +31,7 @@ Feature: Adding a new product
         Then I should be notified that it has been successfully created
         And the product "Gentleman Jack" should appear in the shop
 
-    @ui
+    @ui @elasticsearch
     Scenario: Adding a new configurable product without options
         Given I want to create a new configurable product
         When I specify its code as "WHISKEY_GENTLEMEN"
