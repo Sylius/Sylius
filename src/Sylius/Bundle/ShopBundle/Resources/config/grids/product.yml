@@ -24,12 +24,10 @@ sylius_grid:
                                             filtered:
                                                 filter:
                                                     or:
-                                                        - missing: { field: availableOn }
+                                                        - missing: { field: variants.availableOn }
                                                         - range: { variants.availableOn: { lte: now } }
-                                            filtered:
-                                                filter:
                                                     or:
-                                                        - missing: { field: availableUntil }
+                                                        - missing: { field: variants.availableUntil }
                                                         - range: { variants.availableUntil: { gte: now } }
                             - nested:
                                 path: channels
@@ -40,4 +38,7 @@ sylius_grid:
             filters:
                 _all:
                     type: elastica
+                taxons:
+                    type: elastica
+
 
