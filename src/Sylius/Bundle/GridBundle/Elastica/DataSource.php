@@ -68,6 +68,9 @@ class DataSource implements DataSourceInterface
     public function getData(Parameters $parameters)
     {
         $query = new Query(new Simple($this->expressionBuilder->getQuery()));
+        if (!empty($this->expressionBuilder->getSort())) {
+            $query->setSort($this->expressionBuilder->getSort());
+        }
         $paginator = new Pagerfanta(new ElasticaAdapter($this->type, $query));
         $paginator->setNormalizeOutOfRangePages(true);
         $paginator->setCurrentPage($parameters->get('page', 1));

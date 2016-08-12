@@ -257,6 +257,14 @@ class ExpressionBuilder implements ExpressionBuilderInterface
         return $this->query;
     }
 
+    /**
+     * @return array Array that represent elastica sort
+     */
+    public function getSort()
+    {
+        return $this->sort;
+    }
+
     public function initQueryForFilters()
     {
         if (!$this->filtered) {

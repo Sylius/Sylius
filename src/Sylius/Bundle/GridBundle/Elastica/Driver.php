@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\GridBundle\Elastica;
 
 use Elastica\Search;
-use Elastica\SearchableInterface;
+use Elastica\Index;
 use Sylius\Component\Grid\Data\DriverInterface;
 use Sylius\Component\Grid\Parameters;
 
@@ -24,14 +24,14 @@ class Driver implements DriverInterface
     const NAME = 'elastica';
 
     /**
-     * @var SearchableInterface
+     * @var Index
      */
     private $index;
 
     /**
-     * @param SearchableInterface $entityManager
+     * @param Index $index
      */
-    public function __construct(SearchableInterface $index)
+    public function __construct(Index $index)
     {
         $this->index = $index;
     }
