@@ -77,5 +77,10 @@
                 </argument>
             </call>
         </service>
+        <service id="sylius.order_processing.order_exchange_rate_and_currency_updater" class="Sylius\Component\Core\OrderProcessing\OrderExchangeRateAndCurrencyUpdater">
+            <argument type="service" id="sylius.storage.currency" />
+            <argument type="service" id="sylius.repository.currency" />
+        </service>
+
     </services>
 </container>
