@@ -188,6 +188,16 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     {
         return false !== strpos($this->getElement('shipping_total')->getText(), $price);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasProductUnitPrice(ProductInterface $product, $price)
+    {
+        $productRowElement = $this->getProductRowElement($product);
+
+        return null !== $productRowElement->find('css', sprintf('td:contains("%s")', $price));
+    }
     
     public function confirmOrder()
     {

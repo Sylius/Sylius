@@ -29,7 +29,6 @@
             <argument type="service" id="sylius.factory.currency" container="symfony" />
             <argument type="service" id="sylius.manager.currency" container="symfony" />
             <argument type="service" id="sylius.manager.channel" container="symfony" />
-            <argument type="service" id="sylius.storage.currency" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>
 

@@ -53,11 +53,6 @@ final class CurrencyContext implements Context
     private $channelManager;
 
     /**
-     * @var CurrencyStorageInterface
-     */
-    private $currencyStorage;
-
-    /**
      * @param SharedStorageInterface $sharedStorage
      * @param RepositoryInterface $currencyRepository
      * @param FactoryInterface $currencyFactory
@@ -69,15 +64,13 @@ final class CurrencyContext implements Context
         RepositoryInterface $currencyRepository,
         FactoryInterface $currencyFactory,
         ObjectManager $currencyManager,
-        ObjectManager $channelManager,
-        CurrencyStorageInterface $currencyStorage
+        ObjectManager $channelManager
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->currencyRepository = $currencyRepository;
         $this->currencyFactory = $currencyFactory;
         $this->currencyManager = $currencyManager;
         $this->channelManager = $channelManager;
-        $this->currencyStorage = $currencyStorage;
     }
 
     /**
@@ -151,6 +144,7 @@ final class CurrencyContext implements Context
     }
 
     /**
+     * @Given /^(that channel) uses the "([^"]+)" currency by default$/
      * @Given /^(it) uses the "([^"]+)" currency by default$/
      */
     public function itUsesTheCurrencyByDefault(ChannelInterface $channel, $currencyCode)
@@ -167,11 +161,24 @@ final class CurrencyContext implements Context
     }
 
     /**
-     * @Given I chose :currencyCode currency
+     * @Given /^(that channel) allows to shop using the "([^"]+)" currency with exchange rate (\d+)\.(\d+)$/
      */
-    public function iChoseCurrency($currencyCode)
+    public function thatChannelAllowsToShopUsingCurrency(ChannelInterface $channel, $currencyCode, $exchangeRate = 1.0)
     {
-        $this->currencyStorage->set($this->sharedStorage->get('channel'), $currencyCode);
+        $currency = $this->createCurrency($currencyCode, $exchangeRate);
+        $channel->addCurrency($currency);
+        $this->saveCurrency($currency);
+
+        $this->channelManager->flush();
+    }
+
+    /**
+     * @Given /^the exchange rate for (currency "([^"]+)") was changed to ((\d+)\.(\d+))$/
+     */
+    public function theExchangeRateForWasChangedTo(CurrencyInterface $currency, $exchangeRate)
+    {
+        $currency->setExchangeRate($exchangeRate);
+        $this->saveCurrency($currency);
     }
 
     /**
@@ -209,7 +216,7 @@ final class CurrencyContext implements Context
         $currency = $this->currencyRepository->findOneBy(['code' => $currencyCode]);
         if (null === $currency) {
             /** @var CurrencyInterface $currency */
-            $currency = $this->createCurrency($currencyCode, mt_rand(0, 200) / 100);
+             $currency = $this->createCurrency($currencyCode, mt_rand(0, 200) / 100);
 
             $this->currencyRepository->add($currency);
         }
