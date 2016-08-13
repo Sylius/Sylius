@@ -49,5 +49,6 @@ imports:
     - suites/ui/taxation/managing_tax_categories.yml
     - suites/ui/taxation/managing_tax_rates.yml
     - suites/ui/taxonomy/managing_taxons.yml
+    - suites/ui/user/managing_administrators.yml
     - suites/ui/user/managing_customers.yml
     - suites/ui/user/managing_users.yml
