@@ -20,6 +20,7 @@ use Sylius\Behat\Page\Admin\Product\CreateConfigurableProductPageInterface;
 use Sylius\Behat\Page\Admin\Product\CreateSimpleProductPageInterface;
 use Sylius\Behat\Page\Admin\Product\UpdateConfigurableProductPageInterface;
 use Sylius\Behat\Page\Admin\Product\UpdateSimpleProductPageInterface;
+use Sylius\Behat\Service\ElasticsearchCheckerInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentProductPageResolverInterface;
 use Sylius\Component\Core\Model\ProductInterface;
@@ -75,6 +76,11 @@ final class ManagingProductsContext implements Context
     private $notificationChecker;
 
     /**
+     * @var ElasticsearchCheckerInterface
+     */
+    private $elasticsearchChecker;
+
+    /**
      * @param SharedStorageInterface $sharedStorage
      * @param CreateSimpleProductPageInterface $createSimpleProductPage
      * @param CreateConfigurableProductPageInterface $createConfigurableProductPage
@@ -92,7 +98,8 @@ final class ManagingProductsContext implements Context
         UpdateSimpleProductPageInterface $updateSimpleProductPage,
         UpdateConfigurableProductPageInterface $updateConfigurableProductPage,
         CurrentProductPageResolverInterface $currentPageResolver,
-        NotificationCheckerInterface $notificationChecker
+        NotificationCheckerInterface $notificationChecker,
+        ElasticsearchCheckerInterface $elasticsearchChecker
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->createSimpleProductPage = $createSimpleProductPage;
@@ -102,6 +109,7 @@ final class ManagingProductsContext implements Context
         $this->updateConfigurableProductPage = $updateConfigurableProductPage;
         $this->currentPageResolver = $currentPageResolver;
         $this->notificationChecker = $notificationChecker;
+        $this->elasticsearchChecker = $elasticsearchChecker;
     }
 
     /**
@@ -175,6 +183,8 @@ final class ManagingProductsContext implements Context
         Assert::isInstanceOf($currentPage, CreatePageInterface::class);
 
         $currentPage->create();
+
+        $this->elasticsearchChecker->waitForPendingRequests();
     }
 
     /**
@@ -205,9 +215,6 @@ final class ManagingProductsContext implements Context
      */
     public function iWantToBrowseProducts()
     {
-        // Timeout because of elasticsearch update timing, use "curl 'localhost:9200/_cat/pending_tasks'" to check instead
-        sleep(1);
-
         $this->indexPage->open();
     }
 

@@ -85,6 +85,7 @@
             <argument type="service" id="sylius.behat.page.admin.product.update_configurable" />
             <argument type="service" id="sylius.behat.current_product_page_resolver" />
             <argument type="service" id="sylius.behat.notification_checker" />
+            <argument type="service" id="sylius.behat.elasticsearch_checker" />
             <tag name="sylius.behat.context" />
         </service>
 

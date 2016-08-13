@@ -15,7 +15,7 @@ Feature: Viewing products from a specific taxon
         And this product belongs to "Funny"
         And there are 10 items of product "Plastic Tomato" available in the inventory
 
-    @ui @elasticsearch @test
+    @ui @elasticsearch
     Scenario: Viewing products from a specific taxon
         When I browse products from taxon "T-Shirts"
         Then I should see the product "T-Shirt Banana"
