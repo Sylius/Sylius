@@ -45,6 +45,12 @@ class UserType extends AbstractResourceType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('username', 'text', [
+                'label' => 'sylius.form.user.username',
+            ])
+            ->add('email', 'email', [
+                'label' => 'sylius.form.user.email',
+            ])
             ->add('plainPassword', 'password', [
                 'label' => 'sylius.form.user.password.label',
             ])
