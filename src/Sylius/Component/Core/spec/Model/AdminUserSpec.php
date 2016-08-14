@@ -14,6 +14,7 @@ namespace spec\Sylius\Component\Core\Model;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\AdminUser;
 use Sylius\Component\Core\Model\AdminUserInterface;
+use Sylius\Component\Core\Model\IdentifiableUserInterface;
 use Sylius\Component\Rbac\Model\RoleInterface;
 use Sylius\Component\User\Model\User;
 use Sylius\Component\User\Model\UserInterface;
@@ -23,7 +24,7 @@ use Sylius\Component\User\Model\UserInterface;
  *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class AdminUserSpec extends ObjectBehavior
+final class AdminUserSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
@@ -43,6 +44,11 @@ class AdminUserSpec extends ObjectBehavior
     function it_implements_user_interface()
     {
         $this->shouldImplement(UserInterface::class);
+    }
+
+    function it_implements_identifiable_user_interface()
+    {
+        $this->shouldImplement(IdentifiableUserInterface::class);
     }
 
     function its_authorization_roles_are_mutable(RoleInterface $role)
