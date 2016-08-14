@@ -13,20 +13,14 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Component\Customer\Model\CustomerInterface as BaseCustomerInterface;
-use Sylius\Component\Rbac\Model\RoleInterface;
-use Sylius\Component\User\Model\User as BaseUser;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
+ * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class ShopUser extends BaseUser implements ShopUserInterface
+class ShopUser extends IdentifiableUser implements ShopUserInterface
 {
-    /**
-     * @var ArrayCollection
-     */
-    protected $authorizationRoles;
-
     /**
      * @var CustomerInterface
      */
@@ -44,48 +38,6 @@ class ShopUser extends BaseUser implements ShopUserInterface
     public function getAuthorizationRoles()
     {
         return $this->authorizationRoles;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addAuthorizationRole(RoleInterface $role)
-    {
-        if (!$this->hasAuthorizationRole($role)) {
-            $this->authorizationRoles->add($role);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removeAuthorizationRole(RoleInterface $role)
-    {
-        if ($this->hasAuthorizationRole($role)) {
-            $this->authorizationRoles->removeElement($role);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasAuthorizationRole(RoleInterface $role)
-    {
-        return $this->authorizationRoles->contains($role);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getRoles()
-    {
-        $roles = parent::getRoles();
-
-        foreach ($this->getAuthorizationRoles() as $role) {
-            $roles = array_merge($roles, $role->getSecurityRoles());
-        }
-
-        return $roles;
     }
 
     /**
