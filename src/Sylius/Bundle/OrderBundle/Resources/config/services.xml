@@ -26,6 +26,7 @@
         <parameter key="sylius.adjustments_aggregator.class">Sylius\Component\Order\Aggregator\AdjustmentsByLabelAggregator</parameter>
 
         <parameter key="sylius.custom_factory.adjustment.class">Sylius\Component\Order\Factory\AdjustmentFactory</parameter>
+        <parameter key="sylius.custom_factory.order_item.class">Sylius\Component\Order\Factory\OrderItemFactory</parameter>
 
         <parameter key="sylius.order_number_assigner.class">Sylius\Bundle\OrderBundle\NumberAssigner\OrderNumberAssigner</parameter>
         <parameter key="sylius.sequential_order_number_generator.class">Sylius\Bundle\OrderBundle\NumberGenerator\SequentialOrderNumberGenerator</parameter>
@@ -49,6 +50,11 @@
 
         <service id="sylius.custom_factory.adjustment" class="%sylius.custom_factory.adjustment.class%" decorates="sylius.factory.adjustment" public="false">
             <argument type="service" id="sylius.custom_factory.adjustment.inner" />
+        </service>
+
+        <service id="sylius.custom_factory.order_item" class="%sylius.custom_factory.order_item.class%" decorates="sylius.factory.order_item" public="false">
+            <argument type="service" id="sylius.custom_factory.order_item.inner" />
+            <argument type="service" id="sylius.repository.order" />
         </service>
 
         <service id="sylius.sequential_order_number_generator" class="%sylius.sequential_order_number_generator.class%">

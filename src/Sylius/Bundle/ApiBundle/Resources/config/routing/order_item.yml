@@ -19,6 +19,10 @@ sylius_api_order_item_create:
         _controller: sylius.controller.order_item:createAction
         _sylius:
             form: sylius_api_order_item
+            factory:
+                method: createForOrderWithId
+                arguments:
+                    type: $orderId
 
 sylius_api_order_item_update:
     path: /{id}

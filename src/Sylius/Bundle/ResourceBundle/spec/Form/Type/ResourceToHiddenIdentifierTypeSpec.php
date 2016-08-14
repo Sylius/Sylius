@@ -37,6 +37,8 @@ final class ResourceToHiddenIdentifierTypeSpec extends ObjectBehavior
 
     function it_builds_a_form(FormBuilderInterface $builder)
     {
+        $builder->resetViewTransformers()->shouldBeCalled();
+
         $builder
             ->addModelTransformer(Argument::type(ResourceToIdentifierTransformer::class))
             ->shouldBeCalled()

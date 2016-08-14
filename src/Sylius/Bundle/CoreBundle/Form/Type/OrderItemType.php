@@ -19,8 +19,6 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Order item type.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class OrderItemType extends BaseOrderItemType
@@ -36,23 +34,11 @@ class OrderItemType extends BaseOrderItemType
             ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) use ($options) {
                 $data = $event->getData();
                 if (isset($data['variant'])) {
-                    $event->getForm()->add('variant', 'entity_hidden', [
-                        'data_class' => $options['variant_data_class'],
+                    $event->getForm()->add('variant', 'sylius_product_variant_from_identifier', [
+                        'class' => ProductVariant::class,
                     ]);
                 }
             })
         ;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        parent::configureOptions($resolver);
-
-        $resolver->setDefaults([
-            'variant_data_class' => ProductVariant::class,
-        ]);
     }
 }
