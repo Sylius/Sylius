@@ -49,10 +49,7 @@ final class ElasticsearchContext implements Context
     }
 
     /**
-     * @BeforeStep
-     *
-     * @TODO Transform to BeforeScenario when #5775 will be closed (missing event to refresh product when nested attributes are updated)
-     * example in scenario "Viewing products from a specific taxon" with Taxon
+     * @BeforeScenario @elasticsearch
      */
     public function resetIndex()
     {

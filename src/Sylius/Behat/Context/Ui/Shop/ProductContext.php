@@ -15,6 +15,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Shop\Product\ShowPageInterface;
 use Sylius\Behat\Page\Shop\Taxon\ShowPageInterface as TaxonShowPageInterface;
 use Sylius\Behat\Page\SymfonyPageInterface;
+use Sylius\Behat\Service\ElasticsearchCheckerInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Webmozart\Assert\Assert;
@@ -37,15 +38,23 @@ final class ProductContext implements Context
     private $taxonShowPage;
 
     /**
+     * @var ElasticsearchCheckerInterface
+     */
+    private $elasticsearchChecker;
+
+    /**
      * @param ShowPageInterface $showPage
      * @param TaxonShowPageInterface $taxonShowPage
+     * @param ElasticsearchCheckerInterface $elasticsearchChecker
      */
     public function __construct(
         ShowPageInterface $showPage,
-        TaxonShowPageInterface $taxonShowPage
+        TaxonShowPageInterface $taxonShowPage,
+        ElasticsearchCheckerInterface $elasticsearchChecker
     ) {
         $this->showPage = $showPage;
         $this->taxonShowPage = $taxonShowPage;
+        $this->elasticsearchChecker = $elasticsearchChecker;
     }
 
     /**
@@ -123,12 +132,14 @@ final class ProductContext implements Context
             sprintf('Product should have attribute %s with value %s, but it does not.', $attributeName, $AttributeValue)
         );
     }
-    
+
     /**
      * @When /^I browse products from (taxon "([^"]+)")$/
      */
     public function iCheckListOfProductsForTaxon(TaxonInterface $taxon)
     {
+        $this->elasticsearchChecker->refreshIndex();
+
         $this->taxonShowPage->open(['permalink' => $taxon->getPermalink()]);
     }
 

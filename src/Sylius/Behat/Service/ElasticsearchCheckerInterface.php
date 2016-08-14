@@ -22,5 +22,5 @@ interface ElasticsearchCheckerInterface
     /**
      * {@inheritdoc}
      */
-    public function waitForPendingRequests($timeout = 5);
+    public function refreshIndex();
 }

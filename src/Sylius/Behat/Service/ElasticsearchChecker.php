@@ -32,18 +32,8 @@ final class ElasticsearchChecker implements ElasticsearchCheckerInterface
     /**
      * {@inheritdoc}
      */
-    public function waitForPendingRequests($timeout = 5)
+    public function refreshIndex()
     {
-        $end = time(true) + $timeout;
-
-        do {
-            $response = $this->client->request('_cat/pending_tasks')->getData();
-
-            if (empty($response)) {
-                break;
-            }
-
-            sleep(1);
-        } while (time(true) < $end);
+        $this->client->request('_refresh');
     }
 }

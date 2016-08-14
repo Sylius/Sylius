@@ -89,6 +89,7 @@ final class ManagingProductsContext implements Context
      * @param UpdateConfigurableProductPageInterface $updateConfigurableProductPage
      * @param CurrentProductPageResolverInterface $currentPageResolver
      * @param NotificationCheckerInterface $notificationChecker
+     * @param ElasticsearchCheckerInterface $elasticsearchChecker
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -183,8 +184,6 @@ final class ManagingProductsContext implements Context
         Assert::isInstanceOf($currentPage, CreatePageInterface::class);
 
         $currentPage->create();
-
-        $this->elasticsearchChecker->waitForPendingRequests();
     }
 
     /**
@@ -215,6 +214,8 @@ final class ManagingProductsContext implements Context
      */
     public function iWantToBrowseProducts()
     {
+        $this->elasticsearchChecker->refreshIndex();
+
         $this->indexPage->open();
     }
 
