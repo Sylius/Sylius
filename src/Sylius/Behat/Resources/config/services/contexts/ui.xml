@@ -170,6 +170,13 @@
             <tag name="sylius.behat.context" />
         </service>
 
+        <service id="sylius.behat.context.ui.admin.managing_slideshow_blocks" class="Sylius\Behat\Context\Ui\Admin\ManagingSlideshowBlocksContext" scope="scenario">
+            <argument type="service" id="sylius.behat.page.admin.slideshow_block.index" />
+            <argument type="service" id="sylius.behat.page.admin.slideshow_block.create" />
+            <argument type="service" id="sylius.behat.page.admin.slideshow_block.update" />
+            <tag name="sylius.behat.context" />
+        </service>
+
         <service id="sylius.behat.context.ui.admin.managing_tax_categories" class="Sylius\Behat\Context\Ui\Admin\ManagingTaxCategoriesContext" scope="scenario">
             <argument type="service" id="sylius.behat.page.admin.tax_category.index" />
             <argument type="service" id="sylius.behat.page.admin.tax_category.create" />

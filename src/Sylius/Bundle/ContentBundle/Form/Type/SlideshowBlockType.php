@@ -52,12 +52,14 @@ class SlideshowBlockType extends AbstractResourceType
             ->add('publishStartDate', 'datetime', [
                 'label' => 'sylius.form.slideshow_block.publish_start_date',
                 'empty_value' => /* @Ignore */ ['year' => '-', 'month' => '-', 'day' => '-'],
-                'time_widget' => 'text',
+                'date_widget' => 'single_text',
+                'time_widget' => 'single_text',
             ])
             ->add('publishEndDate', 'datetime', [
                 'label' => 'sylius.form.slideshow_block.publish_end_date',
                 'empty_value' => /* @Ignore */ ['year' => '-', 'month' => '-', 'day' => '-'],
-                'time_widget' => 'text',
+                'date_widget' => 'single_text',
+                'time_widget' => 'single_text',
             ])
         ;
     }

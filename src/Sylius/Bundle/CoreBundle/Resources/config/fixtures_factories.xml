@@ -102,6 +102,16 @@
             <argument type="service" id="sylius.factory.static_content" />
         </service>
 
+        <service id="sylius.fixture.example_factory.slideshow_block" class="Sylius\Bundle\CoreBundle\Fixture\Factory\SlideShowBlockExampleFactory">
+            <argument type="service" id="sylius.factory.slideshow_block" />
+            <argument type="service" id="doctrine_phpcr.odm.default_document_manager"/>
+        </service>
+
+        <service id="sylius.fixture.example_factory.imagine_block" class="Sylius\Bundle\CoreBundle\Fixture\Factory\ImagineBlockExampleFactory">
+            <argument type="service" id="sylius.factory.imagine_block" />
+            <argument type="service" id="liip_imagine.filter.configuration"/>
+        </service>
+
         <service id="sylius.fixture.example_factory.route" class="Sylius\Bundle\CoreBundle\Fixture\Factory\RouteExampleFactory">
             <argument type="service" id="sylius.factory.route" />
             <argument type="service" id="sylius.repository.static_content" />

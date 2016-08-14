@@ -1,0 +1,42 @@
+sylius_admin_slideshow_block:
+    resource: |
+        alias: sylius.slideshow_block
+        section: admin
+        templates: SyliusAdminBundle:Crud
+        except: ['show', 'update', 'delete']
+        redirect: index
+        grid: sylius_admin_slideshow_block
+        permission: true
+        vars:
+            all:
+                templates:
+                    form: SyliusAdminBundle:SlideshowBlock:_form.html.twig
+
+    type: sylius.resource
+
+sylius_admin_slideshow_block_update:
+    path: /slideshow/{id}/edit
+    methods: [GET, PUT]
+    defaults:
+        _controller: sylius.controller.slideshow_block:updateAction
+        _sylius:
+            section: admin
+            permission: true
+            template: SyliusAdminBundle:Crud:update.html.twig
+            vars:
+                templates:
+                    form: SyliusAdminBundle:SlideshowBlock:_form.html.twig
+                    breadcrumb: SyliusAdminBundle:SlideshowBlock/Breadcrumb:_update.html.twig
+    requirements:
+        id: ".+"
+
+sylius_admin_slideshow_block_delete:
+    path: /slideshow/{id}
+    methods: [DELETE]
+    defaults:
+        _controller: sylius.controller.slideshow_block:deleteAction
+        _sylius:
+            section: admin
+            permission: true
+    requirements:
+        id: ".+"
