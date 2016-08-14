@@ -16,6 +16,7 @@ use Sylius\Behat\Service\SecurityServiceInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -66,6 +67,19 @@ final class AdminSecurityContext implements Context
     {
         $user = $this->userFactory->create();
         $this->userRepository->add($user);
+
+        $this->securityService->logIn($user);
+
+        $this->sharedStorage->set('admin', $user);
+    }
+
+    /**
+     * @Given /^I am logged in as "([^"]+)" administrator$/
+     */
+    public function iAmLoggedInAsAdministrator($email)
+    {
+        $user = $this->userRepository->findOneByEmail($email);
+        Assert::notNull($user);
 
         $this->securityService->logIn($user);
 

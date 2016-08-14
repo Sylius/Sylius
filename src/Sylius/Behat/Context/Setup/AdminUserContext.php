@@ -53,7 +53,7 @@ final class AdminUserContext implements Context
 
     /**
      * @Given there is an administrator :email identified by :password
-     * @Given there is an administrator :email
+     * @Given /^there is(?:| also) an administrator "([^"]+)"$/
      */
     public function thereIsAnAdministratorIdentifiedBy($email, $password = 'sylius')
     {

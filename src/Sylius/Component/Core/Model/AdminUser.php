@@ -25,6 +25,11 @@ class AdminUser extends User implements AdminUserInterface
      */
     protected $authorizationRoles;
 
+    /**
+     * @var array
+     */
+    protected $roles = [AdminUserInterface::DEFAULT_ADMIN_ROLE];
+
     public function __construct()
     {
         parent::__construct();

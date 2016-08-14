@@ -20,6 +20,8 @@ use Sylius\Component\User\Model\UserInterface as BaseUserInterface;
  */
 interface AdminUserInterface extends BaseUserInterface, IdentityInterface
 {
+    const DEFAULT_ADMIN_ROLE = 'ROLE_ADMINISTRATION_ACCESS';
+
     /**
      * @param RoleInterface $role
      */

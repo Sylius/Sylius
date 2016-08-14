@@ -18,6 +18,11 @@ use Sylius\Behat\Page\Admin\Crud\CreatePage as BaseCreatePage;
  */
 class CreatePage extends BaseCreatePage implements CreatePageInterface
 {
+    public function enable()
+    {
+        $this->getElement('enabled')->check();
+    }
+
     /**
      * {@inheritdoc}
      */

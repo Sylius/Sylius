@@ -70,6 +70,14 @@ final class ManagingAdministratorsContext implements Context
     }
 
     /**
+     * @When I want to see all administrators in store
+     */
+    public function iWantToSeeAllAdministratorsInStore()
+    {
+        $this->indexPage->open();
+    }
+
+    /**
      * @When I specify its name as :username
      */
     public function iSpecifyItsNameAs($username)
@@ -118,6 +126,14 @@ final class ManagingAdministratorsContext implements Context
     }
 
     /**
+     * @When I enable it
+     */
+    public function iEnableIt()
+    {
+        $this->createPage->enable();
+    }
+
+    /**
      * @When I add it
      * @When I try to add it
      */
@@ -136,6 +152,7 @@ final class ManagingAdministratorsContext implements Context
 
     /**
      * @Then the administrator :email should appear in the store
+     * @Then I should see the administrator :email in the list
      */
     public function theAdministratorShouldAppearInTheStore($email)
     {
@@ -153,6 +170,18 @@ final class ManagingAdministratorsContext implements Context
         Assert::true(
             $this->indexPage->isSingleResourceOnPage(['username' => $username]),
             sprintf('Administrator with %s username does not exist', $username)
+        );
+    }
+
+    /**
+     * @Then /^I should see (\d+) administrators in the list$/
+     */
+    public function iShouldSeeAdministratorsInTheList($number)
+    {
+        Assert::same(
+            $this->indexPage->countItems(),
+            $number,
+            sprintf('There should be %s administrators, but got %s', $number, $this->indexPage->countItems())
         );
     }
 }
