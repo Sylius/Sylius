@@ -67,4 +67,18 @@ class AdminUser extends User implements AdminUserInterface
     {
         return $this->authorizationRoles->contains($role);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRoles()
+    {
+        $roles = parent::getRoles();
+
+        foreach ($this->getAuthorizationRoles() as $role) {
+            $roles = array_merge($roles, $role->getSecurityRoles());
+        }
+
+        return $roles;
+    }
 }
