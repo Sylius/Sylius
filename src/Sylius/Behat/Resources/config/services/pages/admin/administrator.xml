@@ -11,7 +11,7 @@
         <service id="sylius.behat.page.admin.administrator.index" class="Sylius\Behat\Page\Admin\Crud\IndexPage" parent="sylius.behat.page.admin.crud.index" scope="scenario" public="false">
             <argument type="string">admin_user</argument>
         </service>
-        <service id="sylius.behat.page.admin.administrator.update" class="Sylius\Behat\Page\Admin\Crud\UpdatePage" parent="sylius.behat.page.admin.crud.update" scope="scenario" public="false">
+        <service id="sylius.behat.page.admin.administrator.update" class="Sylius\Behat\Page\Admin\Administrator\UpdatePage" parent="sylius.behat.page.admin.crud.update" scope="scenario" public="false">
             <argument type="string">admin_user</argument>
         </service>
     </services>

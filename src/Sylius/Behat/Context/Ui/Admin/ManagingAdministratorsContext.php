@@ -12,8 +12,10 @@
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Page\Admin\Administrator\UpdatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Administrator\CreatePageInterface;
+use Sylius\Component\Core\Model\AdminUserInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -32,13 +34,23 @@ final class ManagingAdministratorsContext implements Context
     private $indexPage;
 
     /**
+     * @var UpdatePageInterface
+     */
+    private $updatePage;
+
+    /**
      * @param CreatePageInterface $createPage
      * @param IndexPageInterface $indexPage
+     * @param UpdatePageInterface $updatePage
      */
-    public function __construct(CreatePageInterface $createPage, IndexPageInterface $indexPage)
-    {
+    public function __construct(
+        CreatePageInterface $createPage,
+        IndexPageInterface $indexPage,
+        UpdatePageInterface $updatePage
+    ) {
         $this->createPage = $createPage;
         $this->indexPage = $indexPage;
+        $this->updatePage = $updatePage;
     }
 
     /**
@@ -50,11 +62,27 @@ final class ManagingAdministratorsContext implements Context
     }
 
     /**
-     * @Given I specify its name as :username
+     * @Given /^I want to edit (this administrator)$/
+     */
+    public function iWantToEditThisAdministrator(AdminUserInterface $adminUser)
+    {
+        $this->updatePage->open(['id' => $adminUser->getId()]);
+    }
+
+    /**
+     * @When I specify its name as :username
      */
     public function iSpecifyItsNameAs($username)
     {
         $this->createPage->specifyUsername($username);
+    }
+
+    /**
+     * @When I change its name as :username
+     */
+    public function iChangeItsNameAs($username)
+    {
+        $this->updatePage->changeUsername($username);
     }
 
     /**
@@ -66,11 +94,27 @@ final class ManagingAdministratorsContext implements Context
     }
 
     /**
+     * @When I change its email as :email
+     */
+    public function iChangeItsEmailAs($email)
+    {
+        $this->updatePage->changeEmail($email);
+    }
+
+    /**
      * @When I specify its password as :password
      */
     public function iSpecifyItsPasswordAs($password)
     {
         $this->createPage->specifyPassword($password);
+    }
+
+    /**
+     * @When I change its password as :password
+     */
+    public function iChangeItsPasswordAs($password)
+    {
+        $this->updatePage->changePassword($password);
     }
 
     /**
@@ -83,6 +127,14 @@ final class ManagingAdministratorsContext implements Context
     }
 
     /**
+     * @When I save my changes
+     */
+    public function iSaveMyChanges()
+    {
+        $this->updatePage->saveChanges();
+    }
+
+    /**
      * @Then the administrator :email should appear in the store
      */
     public function theAdministratorShouldAppearInTheStore($email)
@@ -90,6 +142,17 @@ final class ManagingAdministratorsContext implements Context
         Assert::true(
             $this->indexPage->isSingleResourceOnPage(['email' => $email]),
             sprintf('Administrator %s does not exist', $email)
+        );
+    }
+
+    /**
+     * @Then this administrator with name :username should appear in the store
+     */
+    public function thisAdministratorWithNameShouldAppearInTheStore($username)
+    {
+        Assert::true(
+            $this->indexPage->isSingleResourceOnPage(['username' => $username]),
+            sprintf('Administrator with %s username does not exist', $username)
         );
     }
 }

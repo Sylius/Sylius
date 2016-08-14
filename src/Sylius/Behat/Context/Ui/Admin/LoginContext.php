@@ -50,6 +50,17 @@ final class LoginContext implements Context
     }
 
     /**
+     * @When I try to log in with email :email and password :password
+     */
+    public function iTryToLogInWithEmailAndPassword($email, $password)
+    {
+        $this->loginPage->open();
+        $this->loginPage->specifyUsername($email);
+        $this->loginPage->specifyPassword($password);
+        $this->loginPage->logIn();
+    }
+
+    /**
      * @When I specify the username as :username
      * @When I do not specify the user name
      */

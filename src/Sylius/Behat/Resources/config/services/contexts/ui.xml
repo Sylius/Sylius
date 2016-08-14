@@ -27,6 +27,7 @@
         <service id="sylius.behat.context.ui.admin.managing_administrators" class="Sylius\Behat\Context\Ui\Admin\ManagingAdministratorsContext" scope="scenario">
             <argument type="service" id="sylius.behat.page.admin.administrator.create" />
             <argument type="service" id="sylius.behat.page.admin.administrator.index" />
+            <argument type="service" id="sylius.behat.page.admin.administrator.update" />
             <tag name="sylius.behat.context" />
         </service>
 
