@@ -61,4 +61,16 @@ final class AdminUserContext implements Context
         $this->userRepository->add($adminUser);
         $this->sharedStorage->set('administrator', $adminUser);
     }
+
+    /**
+     * @Given there is an administrator with name :username
+     */
+    public function thereIsAnAdministratorWithName($username)
+    {
+        $adminUser = $this->testUserFactory->create(sprintf('%s@example.com', preg_replace('/\s+/', '', $username)), 'sylius');
+        $adminUser->setUsername($username);
+
+        $this->userRepository->add($adminUser);
+        $this->sharedStorage->set('administrator', $adminUser);
+    }
 }

@@ -29,3 +29,8 @@ sylius:
     product_translation:
         short_description:
             max: Short description must not be longer then {{ limit }} characters.
+    user:
+        email:
+            unique: This email is already used.
+        username:
+            unique: This username is already used.

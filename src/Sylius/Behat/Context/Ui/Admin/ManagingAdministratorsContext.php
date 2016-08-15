@@ -153,6 +153,7 @@ final class ManagingAdministratorsContext implements Context
     /**
      * @Then the administrator :email should appear in the store
      * @Then I should see the administrator :email in the list
+     * @Then there should still be only one administrator with email :email
      */
     public function theAdministratorShouldAppearInTheStore($email)
     {
@@ -164,6 +165,7 @@ final class ManagingAdministratorsContext implements Context
 
     /**
      * @Then this administrator with name :username should appear in the store
+     * @Then there should still be only one administrator with name :username
      */
     public function thisAdministratorWithNameShouldAppearInTheStore($username)
     {
@@ -183,5 +185,21 @@ final class ManagingAdministratorsContext implements Context
             $number,
             sprintf('There should be %s administrators, but got %s', $number, $this->indexPage->countItems())
         );
+    }
+
+    /**
+     * @Then I should be notified that email must be unique
+     */
+    public function iShouldBeNotifiedThatEmailMustBeUnique()
+    {
+        Assert::same($this->createPage->getValidationMessage('email'), 'This email is already used.');
+    }
+
+    /**
+     * @Then I should be notified that name must be unique
+     */
+    public function iShouldBeNotifiedThatNameMustBeUnique()
+    {
+        Assert::same($this->createPage->getValidationMessage('username'), 'This username is already used.');
     }
 }

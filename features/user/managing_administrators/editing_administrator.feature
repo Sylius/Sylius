@@ -18,14 +18,6 @@ Feature: Editing an administrator
         And this administrator with name "Jon Snow" should appear in the store
 
     @ui
-    Scenario: Changing password of an existing administrator
-        Given there is an administrator "ted@example.com" identified by "bear"
-        And I want to edit this administrator
-        When I change its password as "example"
-        And I save my changes
-        Then I should be notified that it has been successfully edited
-
-    @ui
     Scenario: Changing password of an existing administrator and trying sign in with old password
         Given there is an administrator "ted@example.com" identified by "bear"
         And I want to edit this administrator
