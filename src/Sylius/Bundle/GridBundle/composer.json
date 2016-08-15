@@ -36,7 +36,8 @@
         "phpspec/phpspec": "^3.0",
         "phpunit/phpunit": "^4.8",
         "twig/twig": "~1.11",
-        "pagerfanta/pagerfanta": "^1.0"
+        "pagerfanta/pagerfanta": "^1.0",
+        "friendsofsymfony/elastica-bundle": "^3.0.2"
     },
     "config": {
         "bin-dir": "bin"
