@@ -11,8 +11,11 @@
 
 namespace Sylius\Bundle\CoreBundle\DependencyInjection;
 
+use FOS\ElasticaBundle\DependencyInjection\Configuration as FosElasticaConfiguration;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
+use Sylius\Bundle\CoreBundle\EventListener\ElasticaProductListener;
 use Sylius\Component\Resource\Factory\Factory;
+use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -118,6 +121,8 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
 
         $container->setParameter('sylius.sitemap', $config['sitemap']);
         $container->setParameter('sylius.sitemap_template', $config['sitemap']['template']);
+
+        $this->prependElasticaProductListener($container);
     }
 
     /**
@@ -143,5 +148,29 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         }
 
         $loader->load('integration/hwi_oauth.xml');
+    }
+
+    /**
+     * @param ContainerBuilder $container
+     */
+    private function prependElasticaProductListener(ContainerBuilder $container)
+    {
+        if (!$container->hasExtension('fos_elastica') || !$container->hasExtension('sylius_grid')) {
+            return;
+        }
+
+        $configuration = new FosElasticaConfiguration(false);
+        $processor = new Processor();
+        $elasticaConfig = $processor->processConfiguration($configuration, $container->getExtensionConfig('fos_elastica'));
+
+        foreach ($elasticaConfig['indexes'] as $index => $config) {
+            if (array_key_exists('product', $config['types'])) {
+                $elasticaProductListenerDefinition = new Definition(ElasticaProductListener::class);
+                $elasticaProductListenerDefinition->addArgument(new Reference('fos_elastica.object_persister.' . $index . '.product'));
+                $elasticaProductListenerDefinition->addTag('doctrine.event_subscriber');
+
+                $container->setDefinition('sylius_product.listener.index_' . $index . '.product_update', $elasticaProductListenerDefinition);
+            }
+        }
     }
 }
