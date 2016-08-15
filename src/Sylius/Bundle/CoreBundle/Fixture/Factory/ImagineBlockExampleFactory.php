@@ -15,6 +15,8 @@ use Liip\ImagineBundle\Imagine\Filter\FilterConfiguration;
 use Sylius\Bundle\ContentBundle\Document\ImagineBlock;
 use Sylius\Component\Core\Formatter\StringInflector;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Symfony\Cmf\Bundle\BlockBundle\Model\AbstractBlock;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -42,7 +44,7 @@ final class ImagineBlockExampleFactory implements ExampleFactoryInterface
     /**
      * @param FactoryInterface $imagineBlockFactory
      */
-    public function __construct(FactoryInterface $imagineBlockFactory,FilterConfiguration $filterConfiguration)
+    public function __construct(FactoryInterface $imagineBlockFactory, FilterConfiguration $filterConfiguration)
     {
         $this->imagineBlockFactory = $imagineBlockFactory;
         $this->filterConfiguration = $filterConfiguration;
@@ -63,12 +65,14 @@ final class ImagineBlockExampleFactory implements ExampleFactoryInterface
                     return $this->faker->randomElement($this->filterConfiguration->all());
                 })
                 ->setDefault('publishStartDate', function (Options $options) {
-                    return $this->faker->dateTimeBetween('-30 days','30 days');
-                }) ->setDefault('publishEndDate', function (Options $options) {
-                    return $this->faker->dateTimeBetween('-30 days','30 days');
+                    return $this->faker->dateTimeBetween('-30 days','now');
+                })->setDefault('publishEndDate', function (Options $options) {
+                    return $this->faker->dateTimeBetween('now', '30 days');
                 })
-                ->setRequired('image')
+                ->setRequired(['image', 'parentDocument'])
+                ->setAllowedTypes('parentDocument')
                 ->setAllowedTypes('publishable', 'bool')
+                ->setAllowedTypes('parentDocument', AbstractBlock::class)
         ;
     }
 
@@ -86,7 +90,10 @@ final class ImagineBlockExampleFactory implements ExampleFactoryInterface
         $imagineBlock->setPublishable($options['publishable']);
         $imagineBlock->setPublishStartDate($options['publishStartDate']);
         $imagineBlock->setPublishEndDate($options['publishEndDate']);
+        $imagineBlock->setParentDocument($options['parentDocument']);
 
+        $imagePath = $options['image'];
+        $imagineBlock->setImage(new UploadedFile($imagePath, basename($imagePath)));
 
         return $imagineBlock;
     }

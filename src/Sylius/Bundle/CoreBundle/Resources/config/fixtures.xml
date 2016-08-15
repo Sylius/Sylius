@@ -174,5 +174,12 @@
             <argument type="service" id="sylius.rbac.initializer" />
             <tag name="sylius_fixtures.fixture" />
         </service>
+
+        <service id="sylius.fixture.slideshow_block" class="Sylius\Bundle\CoreBundle\Fixture\SlideshowBlockFixtures">
+            <argument type="service" id="sylius.fixture.example_factory.slideshow_block"/>
+            <argument type="service" id="sylius.fixture.example_factory.imagine_block"/>
+            <argument type="service" id="sylius.repository.slideshow_block"/>
+            <tag name="sylius_fixtures.fixture"/>
+        </service>
     </services>
 </container>

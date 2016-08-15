@@ -70,9 +70,9 @@ final class SlideShowBlockExampleFactory implements ExampleFactoryInterface
                     return '/cms/blocks';
                 })
                 ->setDefault('publishStartDate', function (Options $options) {
-                    return $this->faker->dateTimeBetween('-30 days', '30 days');
+                    return $this->faker->dateTimeBetween('-30 days','now');
                 })->setDefault('publishEndDate', function (Options $options) {
-                    return $this->faker->dateTimeBetween('-30 days', '30 days');
+                    return $this->faker->dateTimeBetween('now', '30 days');
                 })
                 ->setAllowedTypes('publishable', 'bool');
     }

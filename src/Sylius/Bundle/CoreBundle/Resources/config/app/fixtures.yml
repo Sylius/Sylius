@@ -11,6 +11,7 @@ sylius_fixtures:
             fixtures:
                 locale: ~
                 currency: ~
+                slideshow_block: ~
 
                 geographical:
                     options:
