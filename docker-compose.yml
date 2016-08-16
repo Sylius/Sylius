@@ -1,0 +1,40 @@
+version: '2'
+
+volumes:
+    data:
+        driver: local
+    cache:
+        driver: local
+    logs:
+        driver: local
+
+services:
+    sylius:
+        build:
+            context: .
+            dockerfile: ./etc/docker/php/Dockerfile
+        entrypoint: /var/www/etc/docker/php/entrypoint.sh
+        volumes:
+            - .:/var/www
+            - data:/var/www/sylius
+            - cache:/var/www/app/cache
+            - logs:/var/www/app/logs
+        depends_on:
+            - database
+
+    nginx:
+        build:
+            context: .
+            dockerfile: ./etc/docker/nginx/Dockerfile
+        volumes_from:
+            - sylius
+        ports:
+            - 80
+        depends_on:
+            - sylius
+
+    database:
+        image: mariadb
+        environment:
+            MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+            MYSQL_DATABASE: "sylius"

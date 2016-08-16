@@ -1,0 +1,7 @@
+parameters:
+    database_driver: pdo_mysql
+    database_host: database
+    database_port: null
+    database_name: sylius
+    database_user: root
+    database_password: null

@@ -3,6 +3,7 @@
 
 imports:
     - { resource: "config.yml" }
+    - { resource: "parameters_dev.yml" }
 
 framework:
     router: { resource: "%kernel.root_dir%/config/routing_dev.yml" }
@@ -10,7 +11,7 @@ framework:
 
 doctrine:
     dbal:
-        dbname: "%database_name%_dev"
+        dbname: "%database_name%"
 
 monolog:
     handlers:

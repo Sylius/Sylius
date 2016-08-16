@@ -1,5 +1,7 @@
 FROM alpine:latest
 
+RUN addgroup www-data && adduser -S -D -G www-data www-data
+
 RUN echo "http://dl-4.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
  && apk --update add \
         curl \
@@ -26,12 +28,16 @@ RUN echo "http://dl-4.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositor
         php7-openssl \
  && rm -rf /var/cache/apk/*
 
-COPY php.ini /etc/php7/conf.d/50-setting.ini
-COPY php-fpm.conf /etc/php7/php-fpm.conf
+COPY ./etc/docker/php/php.ini /etc/php7/conf.d/50-setting.ini
+COPY ./etc/docker/php/php-fpm.conf /etc/php7/php-fpm.conf
+
+ONBUILD COPY . /var/www
 
 RUN ln -s /usr/bin/php7 /usr/bin/php
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 EXPOSE 9000
 
-CMD ["php-fpm7", "-F"]
+WORKDIR /var/www
+
+ENTRYPOINT [ "php7-fpm", "-F" ]
