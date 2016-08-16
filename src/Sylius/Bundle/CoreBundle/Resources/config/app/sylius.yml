@@ -320,13 +320,6 @@ sylius_rbac:
         sylius.order_item.update: Edit order item
         sylius.order_item.delete: Delete order item
 
-        sylius.manage.adjustment: Manage adjustments
-        sylius.adjustment.show: Show adjustment
-        sylius.adjustment.index: List adjustments
-        sylius.adjustment.create: Create adjustment
-        sylius.adjustment.update: Edit adjustment
-        sylius.adjustment.delete: Delete adjustment
-
         sylius.manage.shipment: Manage shipments
         sylius.shipment.show: Show shipment
         sylius.shipment.index: List shipments
@@ -454,13 +447,6 @@ sylius_rbac:
         sylius.route.create: Create route
         sylius.route.update: Edit route
         sylius.route.delete: Delete route
-
-        sylius.manage.menu: Manage menus
-        sylius.menu.show: Show menu
-        sylius.menu.index: List menus
-        sylius.menu.create: Create menu
-        sylius.menu.update: Edit menu
-        sylius.menu.delete: Delete menu
 
         sylius.manage.simple_block: Manage simple blocks
         sylius.simple_block.show: Show simple block
