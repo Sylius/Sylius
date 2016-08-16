@@ -19,6 +19,12 @@
             <argument>%cmf_content.persistence.phpcr.content_basepath%</argument>
         </service>
 
+        <service id="sylius.factory.slideshow_block.parent_path" class="Sylius\Bundle\ContentBundle\Factory\SlideshowBlockFactory" decorates="sylius.factory.slideshow_block">
+            <argument type="service" id="sylius.factory.slideshow_block.parent_path.inner" />
+            <argument type="service" id="doctrine_phpcr.odm.document_manager" />
+            <argument>%cmf_block.persistence.phpcr.block_basepath%</argument>
+        </service>
+
         <service id="sylius.factory.route.parent_path" class="Sylius\Bundle\ContentBundle\Factory\RouteFactory" decorates="sylius.factory.route">
             <argument type="service" id="sylius.factory.route.parent_path.inner" />
             <argument type="service" id="doctrine_phpcr.odm.document_manager" />

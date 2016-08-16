@@ -1,4 +1,3 @@
-{% import 'SyliusUiBundle:Macro:common.html.twig' as common %}
 
 {{ form_errors(form) }}
 
@@ -9,7 +8,10 @@
         {{ form_row(form.publishable) }}
         {{ form_row(form.publishStartDate) }}
         {{ form_row(form.publishEndDate) }}
-        {{ common.readonly(form.parentDocument,form.parentDocument.vars.value,'/cms/blocks') }}
+
+        <div style="display: none">
+            {{ form_widget(form.parentDocument) }}
+        </div>
     </div>
     <div class="thirteen wide column">
         {{ form_row(form.children) }}

@@ -196,3 +196,18 @@
         {% endfor %}
     </div>
 {%- endblock sylius_translations_row %}
+
+{% block sylius_imagine_block_widget %}
+    {{ form_row(form.name) }}
+    {{ form_row(form.label) }}
+    {{ form_row(form.publishable) }}
+    {{ form_row(form.publishStartDate) }}
+    {{ form_row(form.publishEndDate) }}
+    {{ form_row(form.linkUrl) }}
+    {{ form_row(form.filter) }}
+    {{ form_row(form.image) }}
+
+    <div style="display: none">
+        {{ form_row(form.parentDocument) }}
+    </div>
+{% endblock %}
