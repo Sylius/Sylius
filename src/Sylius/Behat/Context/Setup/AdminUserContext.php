@@ -13,7 +13,7 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Component\Core\Test\Factory\TestUserFactoryInterface;
+use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 
 /**
@@ -27,9 +27,9 @@ final class AdminUserContext implements Context
     private $sharedStorage;
 
     /**
-     * @var TestUserFactoryInterface
+     * @var ExampleFactoryInterface
      */
-    private $testUserFactory;
+    private $userFactory;
 
     /**
      * @var UserRepositoryInterface
@@ -38,16 +38,16 @@ final class AdminUserContext implements Context
 
     /**
      * @param SharedStorageInterface $sharedStorage
-     * @param TestUserFactoryInterface $testUserFactory
+     * @param ExampleFactoryInterface $userFactory
      * @param UserRepositoryInterface $userRepository
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
-        TestUserFactoryInterface $testUserFactory,
+        ExampleFactoryInterface $userFactory,
         UserRepositoryInterface $userRepository
     ) {
         $this->sharedStorage = $sharedStorage;
-        $this->testUserFactory = $testUserFactory;
+        $this->userFactory = $userFactory;
         $this->userRepository = $userRepository;
     }
 
@@ -56,7 +56,7 @@ final class AdminUserContext implements Context
      */
     public function thereIsAnAdministratorIdentifiedBy($email, $password)
     {
-        $adminUser = $this->testUserFactory->create($email, $password);
+        $adminUser = $this->userFactory->create(['email' => $email, 'password' => $password]);
         $this->userRepository->add($adminUser);
         $this->sharedStorage->set('administrator', $adminUser);
     }
