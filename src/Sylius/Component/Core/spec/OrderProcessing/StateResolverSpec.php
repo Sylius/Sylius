@@ -16,13 +16,13 @@ use PhpSpec\ObjectBehavior;
 use SM\Factory\FactoryInterface;
 use SM\StateMachine\StateMachineInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\OrderShippingStates;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\OrderPaymentStates;
 use Sylius\Component\Core\OrderPaymentTransitions;
 use Sylius\Component\Core\OrderProcessing\StateResolver;
 use Sylius\Component\Core\OrderProcessing\StateResolverInterface;
+use Sylius\Component\Core\OrderShippingStates;
 use Sylius\Component\Core\OrderShippingTransitions;
 
 /**
