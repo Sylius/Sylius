@@ -28,7 +28,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
      */
     public function specifyUsername($username)
     {
-        $this->getElement('username')->setValue($username);
+        $this->getElement('name')->setValue($username);
     }
 
     /**
@@ -53,7 +53,7 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'username' => '#sylius_admin_user_username',
+            'name' => '#sylius_admin_user_username',
             'email' => '#sylius_admin_user_email',
             'password' => '#sylius_admin_user_plainPassword',
             'enabled' => '#sylius_admin_user_enabled',

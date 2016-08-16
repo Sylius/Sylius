@@ -79,8 +79,9 @@ final class ManagingAdministratorsContext implements Context
 
     /**
      * @When I specify its name as :username
+     * @When I do not specify its name
      */
-    public function iSpecifyItsNameAs($username)
+    public function iSpecifyItsNameAs($username = null)
     {
         $this->createPage->specifyUsername($username);
     }
@@ -95,8 +96,9 @@ final class ManagingAdministratorsContext implements Context
 
     /**
      * @When I specify its email as :email
+     * @When I do not specify its email
      */
-    public function iSpecifyItsEmailAs($email)
+    public function iSpecifyItsEmailAs($email = null)
     {
         $this->createPage->specifyEmail($email);
     }
@@ -111,8 +113,9 @@ final class ManagingAdministratorsContext implements Context
 
     /**
      * @When I specify its password as :password
+     * @When I do not specify its password
      */
-    public function iSpecifyItsPasswordAs($password)
+    public function iSpecifyItsPasswordAs($password = null)
     {
         $this->createPage->specifyPassword($password);
     }
@@ -200,6 +203,36 @@ final class ManagingAdministratorsContext implements Context
      */
     public function iShouldBeNotifiedThatNameMustBeUnique()
     {
-        Assert::same($this->createPage->getValidationMessage('username'), 'This username is already used.');
+        Assert::same($this->createPage->getValidationMessage('name'), 'This username is already used.');
+    }
+
+    /**
+     * @Then I should be notified that the :elementName is required
+     */
+    public function iShouldBeNotifiedThatFirstNameIsRequired($elementName)
+    {
+        Assert::same($this->createPage->getValidationMessage($elementName), sprintf('Please enter your %s.', $elementName));
+    }
+
+    /**
+     * @Then I should be notified that this email is not valid
+     */
+    public function iShouldBeNotifiedThatEmailIsNotValid()
+    {
+        Assert::same($this->createPage->getValidationMessage('email'), 'This email is invalid.');
+    }
+
+    /**
+     * @Then this administrator should not be added
+     */
+    public function thisAdministratorShouldNotBeAdded()
+    {
+        $this->indexPage->open();
+
+        Assert::same(
+            1,
+            $this->indexPage->countItems(),
+            'There should not be any new administrators'
+        );
     }
 }

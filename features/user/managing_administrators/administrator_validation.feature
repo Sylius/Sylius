@@ -22,7 +22,7 @@ Feature: Administrator validation
         Given I want to create a new administrator
         When I do not specify its password
         And I try to add it
-        Then I should be notified that password must be unique
+        Then I should be notified that the password is required
         And this administrator should not be added
 
     @ui
@@ -30,5 +30,5 @@ Feature: Administrator validation
         Given I want to create a new administrator
         When I specify its email as "Ted"
         And I try to add it
-        Then I should be notified that email is not valid
+        Then I should be notified that this email is not valid
         And this administrator should not be added
