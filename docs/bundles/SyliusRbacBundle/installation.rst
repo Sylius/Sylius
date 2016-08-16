@@ -52,6 +52,17 @@ This bundle also uses `DoctrineCacheBundle`. Don't worry, everything was automat
 
     Please register the bundle before *DoctrineBundle*. This is important as we use listeners which have to be processed first.
 
+Parameters
+----------
+
+If you are not using SyliusCoreBundle, put this parameter inside your ``app/config/parameters.yml``.
+
+.. code-block:: yaml
+
+    parameters:
+        sylius.cache:
+            type: file_system
+
 Container configuration
 -----------------------
 
