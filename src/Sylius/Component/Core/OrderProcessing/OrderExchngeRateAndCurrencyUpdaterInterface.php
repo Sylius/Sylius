@@ -21,5 +21,5 @@ interface OrderExchngeRateAndCurrencyUpdaterInterface
     /**
      * @param OrderInterface $order
      */
-    public function updateExchangeRateAndCurrency(OrderInterface $order);
+    public function update(OrderInterface $order);
 }

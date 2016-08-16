@@ -19,7 +19,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class OrderExchangeRateAndCurrencyUpdater implements OrderExchngeRateAndCurrencyUpdaterInterface
+final class OrderExchangeRateAndCurrencyUpdater implements OrderExchngeRateAndCurrencyUpdaterInterface
 {
     /**
      * @var CurrencyContextInterface
@@ -44,7 +44,7 @@ class OrderExchangeRateAndCurrencyUpdater implements OrderExchngeRateAndCurrency
     /**
      * {@inheritdoc}
      */
-    public function updateExchangeRateAndCurrency(OrderInterface $order)
+    public function update(OrderInterface $order)
     {
         /** @var CurrencyInterface $currency */
         $currency = $this->currencyRepository->findOneBy(['code' => $this->currencyContext->getCurrencyCode()]);

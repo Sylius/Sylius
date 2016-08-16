@@ -13,13 +13,16 @@ namespace spec\Sylius\Component\Core\OrderProcessing;
 
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use PhpSpec\ObjectBehavior; 
+use PhpSpec\ObjectBehavior;
+use Sylius\Component\Core\OrderProcessing\OrderExchangeRateAndCurrencyUpdater;
 use Sylius\Component\Core\OrderProcessing\OrderExchngeRateAndCurrencyUpdaterInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
+ * @mixin OrderExchangeRateAndCurrencyUpdater
+ *
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
 final class OrderExchangeRateAndCurrencyUpdaterSpec extends ObjectBehavior
@@ -31,7 +34,7 @@ final class OrderExchangeRateAndCurrencyUpdaterSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\OrderProcessing\OrderExchangeRateAndCurrencyUpdater');
+        $this->shouldHaveType(OrderExchangeRateAndCurrencyUpdater::class);
     }
 
     function it_implements_order_exchange_rate_and_currency_updater_interface()
@@ -55,6 +58,6 @@ final class OrderExchangeRateAndCurrencyUpdaterSpec extends ObjectBehavior
         $order->setCurrencyCode('GBP')->shouldBeCalled();
         $order->setExchangeRate(3.5)->shouldBeCalled();
 
-        $this->updateExchangeRateAndCurrency($order);
+        $this->update($order);
     }
 }

@@ -43,7 +43,7 @@ winzou_state_machine:
                     args: ["object"]
                 sylius_update_exchange_rate:
                     on: ["select_payment"]
-                    do: ["@sylius.order_processing.order_exchange_rate_and_currency_updater", "updateExchangeRateAndCurrency"]
+                    do: ["@sylius.order_processing.order_exchange_rate_and_currency_updater", "update"]
                     args: ["object"]
                 sylius_create_order:
                     on: ["complete"]
