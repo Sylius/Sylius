@@ -11,12 +11,11 @@
 
 namespace spec\Sylius\Component\Core\OrderProcessing;
 
-use Sylius\Component\Core\Currency\CurrencyStorageInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use PhpSpec\ObjectBehavior; 
-use Prophecy\Argument;
 use Sylius\Component\Core\OrderProcessing\OrderExchngeRateAndCurrencyUpdaterInterface;
+use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -25,9 +24,9 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 final class OrderExchangeRateAndCurrencyUpdaterSpec extends ObjectBehavior
 {
-    function let(CurrencyStorageInterface $currencyStorage, RepositoryInterface $currencyRepository)
+    function let(CurrencyContextInterface $currencyContext, RepositoryInterface $currencyRepository)
     {
-        $this->beConstructedWith($currencyStorage, $currencyRepository);
+        $this->beConstructedWith($currencyContext, $currencyRepository);
     }
 
     function it_is_initializable()
@@ -42,13 +41,13 @@ final class OrderExchangeRateAndCurrencyUpdaterSpec extends ObjectBehavior
 
     function it_updates_order_exchange_rate(
         OrderInterface $order,
-        CurrencyStorageInterface $currencyStorage,
+        CurrencyContextInterface $currencyContext,
         RepositoryInterface $currencyRepository,
         CurrencyInterface $currency,
         ChannelInterface $channel
     ) {
         $order->getChannel()->willReturn($channel);
-        $currencyStorage->get($channel)->willReturn('GBP');
+        $currencyContext->getCurrencyCode()->willReturn('GBP');
         $currencyRepository->findOneBy(['code' => 'GBP'])->willReturn($currency);
         $currency->getExchangeRate()->willReturn(3.5);
         $currency->getCode()->willReturn('GBP');

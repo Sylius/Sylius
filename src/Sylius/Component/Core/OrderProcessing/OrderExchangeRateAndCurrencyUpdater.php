@@ -11,8 +11,8 @@
 
 namespace Sylius\Component\Core\OrderProcessing;
 
-use Sylius\Component\Core\Currency\CurrencyStorageInterface;
 use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
@@ -22,9 +22,9 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 class OrderExchangeRateAndCurrencyUpdater implements OrderExchngeRateAndCurrencyUpdaterInterface
 {
     /**
-     * @var CurrencyStorageInterface
+     * @var CurrencyContextInterface
      */
-    private $currencyStorage;
+    private $currencyContext;
 
     /**
      * @var RepositoryInterface
@@ -32,12 +32,12 @@ class OrderExchangeRateAndCurrencyUpdater implements OrderExchngeRateAndCurrency
     private $currencyRepository;
 
     /**
-     * @param CurrencyStorageInterface $currencyStorage
+     * @param CurrencyContextInterface $currencyContext
      * @param RepositoryInterface $currencyRepository
      */
-    public function __construct(CurrencyStorageInterface $currencyStorage, RepositoryInterface $currencyRepository)
+    public function __construct(CurrencyContextInterface $currencyContext, RepositoryInterface $currencyRepository)
     {
-        $this->currencyStorage = $currencyStorage;
+        $this->currencyContext = $currencyContext;
         $this->currencyRepository = $currencyRepository;
     }
 
@@ -47,7 +47,7 @@ class OrderExchangeRateAndCurrencyUpdater implements OrderExchngeRateAndCurrency
     public function updateExchangeRateAndCurrency(OrderInterface $order)
     {
         /** @var CurrencyInterface $currency */
-        $currency = $this->currencyRepository->findOneBy(['code' => $this->currencyStorage->get($order->getChannel())]);
+        $currency = $this->currencyRepository->findOneBy(['code' => $this->currencyContext->getCurrencyCode()]);
 
         $order->setCurrencyCode($currency->getCode());
         $order->setExchangeRate($currency->getExchangeRate());
