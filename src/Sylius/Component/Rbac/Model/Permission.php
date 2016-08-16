@@ -78,7 +78,7 @@ class Permission implements PermissionInterface
 
     public function __toString()
     {
-        return $this->description;
+        return $this->code;
     }
 
     /**
