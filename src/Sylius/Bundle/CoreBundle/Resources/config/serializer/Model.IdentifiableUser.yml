@@ -1,0 +1,2 @@
+Sylius\Component\Core\Model\IdentifiableUser:
+    exclusion_policy: ALL

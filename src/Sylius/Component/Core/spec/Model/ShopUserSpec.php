@@ -12,9 +12,12 @@
 namespace spec\Sylius\Component\Core\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Core\Model\IdentifiableUserInterface;
 use Sylius\Component\Core\Model\ShopUser;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Rbac\Model\RoleInterface;
+use Sylius\Component\User\Model\User;
+use Sylius\Component\User\Model\UserInterface;
 
 /**
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
@@ -30,6 +33,21 @@ final class ShopUserSpec extends ObjectBehavior
     function it_implements_user_component_interface()
     {
         $this->shouldImplement(ShopUserInterface::class);
+    }
+
+    function it_extends_base_user_model()
+    {
+        $this->shouldHaveType(User::class);
+    }
+
+    function it_implements_user_interface()
+    {
+        $this->shouldImplement(UserInterface::class);
+    }
+
+    function it_implements_identifiable_user_interface()
+    {
+        $this->shouldImplement(IdentifiableUserInterface::class);
     }
 
     function its_authorization_roles_are_mutable(RoleInterface $role)
