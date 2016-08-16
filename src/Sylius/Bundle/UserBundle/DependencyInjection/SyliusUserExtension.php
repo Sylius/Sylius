@@ -12,18 +12,15 @@
 namespace Sylius\Bundle\UserBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
-use Sylius\Bundle\UserBundle\Controller\UserPasswordController;
 use Sylius\Bundle\UserBundle\EventListener\UserLastLoginSubscriber;
 use Sylius\Bundle\UserBundle\EventListener\UserReloaderListener;
 use Sylius\Bundle\UserBundle\Form\EventSubscriber\AddUserFormSubscriber;
-use Sylius\Bundle\UserBundle\Form\Type\UserType;
 use Sylius\Bundle\UserBundle\Provider\AbstractUserProvider;
 use Sylius\Bundle\UserBundle\Provider\EmailProvider;
 use Sylius\Bundle\UserBundle\Provider\UsernameOrEmailProvider;
 use Sylius\Bundle\UserBundle\Provider\UsernameProvider;
 use Sylius\Bundle\UserBundle\Reloader\UserReloader;
 use Sylius\Component\Resource\Metadata\Metadata;
-use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\User\Security\Checker\TokenUniquenessChecker;
 use Sylius\Component\User\Security\Generator\UniquePinGenerator;
 use Sylius\Component\User\Security\Generator\UniqueTokenGenerator;
@@ -87,7 +84,6 @@ class SyliusUserExtension extends AbstractResourceExtension
     private function createServices(array $resources, $driver, ContainerBuilder $container)
     {
         foreach ($resources as $userType => $config) {
-            $config['user']['driver'] = $driver;
             $this->createTokenGenerators($userType, $config['user'], $container);
             $this->createReloaders($userType, $container);
             $this->createLastLoginListeners($userType, $container);
@@ -268,17 +264,16 @@ class SyliusUserExtension extends AbstractResourceExtension
         $formTypeId = sprintf('sylius.form.type.%s_user', $userType);
         $alias = sprintf('sylius.%s_user', $userType);
         $validationGroupsParameterName = sprintf('sylius.validation_groups.%s', $userType);
-        $metadata = Metadata::fromAliasAndConfiguration($alias, $config);
         $validationGroups = new Parameter($validationGroupsParameterName);
-        $userTypeDefinition = new Definition($metadata->getClass('form')['default']);
+        $userTypeDefinition = new Definition($config['classes']['form']['default']);
 
         if (!$container->hasParameter($validationGroupsParameterName)) {
-            $validationGroups = ['Default'];
+            $validationGroups = $config['validation_groups']['default'];
         }
 
-        $userTypeDefinition->addArgument($metadata->getClass('model'));
+        $userTypeDefinition->addArgument($config['classes']['model']);
         $userTypeDefinition->addArgument($validationGroups);
-        $userTypeDefinition->addArgument($this->getMetadataDefinition($metadata));
+        $userTypeDefinition->addArgument($this->getMetadataDefinitionFromAlias($alias));
         $userTypeDefinition->addTag('form.type', ['alias' => sprintf('sylius_%s_user', $userType)]);
         $container->setDefinition($formTypeId, $userTypeDefinition);
     }
@@ -296,16 +291,16 @@ class SyliusUserExtension extends AbstractResourceExtension
     }
 
     /**
-     * @param MetadataInterface $metadata
+     * @param string $alias
      *
      * @return Definition
      */
-    private function getMetadataDefinition(MetadataInterface $metadata)
+    private function getMetadataDefinitionFromAlias($alias)
     {
         $definition = new Definition(Metadata::class);
         $definition
             ->setFactory([new Reference('sylius.resource_registry'), 'get'])
-            ->setArguments([$metadata->getAlias()])
+            ->setArguments([$alias])
         ;
 
         return $definition;
