@@ -44,10 +44,12 @@ sylius:
         administration: Administration
         administration_dashboard: 'Administration dashboard'
         administration_panel_login: Administration panel login
+        admin_users: Administrators
         all: All
         all_your_addresses: 'All your addresses'
         amount: Amount
         an_error_occurred: An error occurred
+        api: Api
         apply_coupon: Apply coupon
         archetype: Archetype
         archetypes: Archetypes
@@ -379,6 +381,7 @@ sylius:
         male: Male
         manage: Manage
         manage_adjustments: 'Manage adjustments'
+        manage_admin_users: 'Manage administrators'
         manage_attributes: 'Manage attributes'
         manage_attributes_of_your_products: Manage attributes of your products
         manage_categorization_of_your_products: Manage categorization of your products
@@ -429,6 +432,7 @@ sylius:
         n_a: N/A
         name: Name
         new: New
+        new_admin_user: 'New administrator'
         new_archetype: 'New archetype'
         new_channel: New channel
         new_comment_posted_on_order: 'New comment posted on order'

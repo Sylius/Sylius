@@ -9,6 +9,7 @@ sylius:
                     products: Products
                     taxons: Taxons
                 configuration:
+                    admin_users: Administrators
                     channels: Channels
                     countries: Countries
                     currencies: Currencies

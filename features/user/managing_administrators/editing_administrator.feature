@@ -24,9 +24,7 @@ Feature: Editing an administrator
         When I change its name as "bear123"
         And I change its password as "example"
         And I save my changes
-        And I log out
-        And I try to log in with email "ted@example.com" and password "bear"
-        Then I should be notified about bad credentials
+        Then I should not be able to log in as "ted@example.com" authenticated by "bear" password
 
     @ui
     Scenario: Changing password of an existing administrator and sign in again
@@ -35,6 +33,4 @@ Feature: Editing an administrator
         When I change its name as "bear123"
         And I change its password as "example"
         And I save my changes
-        And I log out
-        And I try to log in with email "ted@example.com" and password "example"
-        Then I should be on the administration dashboard
+        Then I should be able to log in as "ted@example.com" authenticated by "example" password

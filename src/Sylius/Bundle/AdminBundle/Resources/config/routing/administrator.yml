@@ -9,7 +9,7 @@ sylius_admin_administrator:
         permission: true
         vars:
             all:
-                subheader: sylius.ui.manage_your_administrators
+                subheader: sylius.ui.manage_admin_users
                 templates:
                     form: SyliusAdminBundle:Administrator:_form.html.twig
             index:

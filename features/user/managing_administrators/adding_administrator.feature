@@ -25,6 +25,4 @@ Feature: Adding a new administrator
         And I specify its password as "lightsaber"
         And I enable it
         And I add it
-        And I log out
-        And I try to log in with email "l.skywalker@gmail.com" and password "lightsaber"
-        Then I should be on the administration dashboard
+        Then I should be able to log in as "l.skywalker@gmail.com" authenticated by "lightsaber" password

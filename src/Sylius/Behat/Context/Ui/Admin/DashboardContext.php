@@ -96,13 +96,4 @@ final class DashboardContext implements Context
     {
         Assert::same($this->dashboardPage->getNumberOfNewOrdersInTheList(), $number);
     }
-
-    /**
-     * @When I log out
-     */
-    public function iLogOut()
-    {
-        $this->dashboardPage->open();
-        $this->dashboardPage->logOut();
-    }
 }
