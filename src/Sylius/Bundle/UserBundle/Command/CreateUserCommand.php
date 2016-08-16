@@ -14,6 +14,7 @@ namespace Sylius\Bundle\UserBundle\Command;
 use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Component\User\Model\UserInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -34,10 +35,11 @@ class CreateUserCommand extends ContainerAwareCommand
             ->setName('sylius:user:create')
             ->setDescription('Creates a new user account.')
             ->setDefinition([
+                new InputArgument('type', InputArgument::REQUIRED, 'Type'),
                 new InputArgument('email', InputArgument::REQUIRED, 'Email'),
+                new InputArgument('username', InputArgument::REQUIRED, 'Username'),
                 new InputArgument('password', InputArgument::REQUIRED, 'Password'),
                 new InputArgument('roles', InputArgument::IS_ARRAY, 'Security roles'),
-                new InputOption('super-admin', null, InputOption::VALUE_NONE, 'Set the user as a super admin'),
                 new InputOption('disabled', null, InputOption::VALUE_NONE, 'Set the user as a disabled user'),
             ])
             ->setHelp(<<<EOT
@@ -52,23 +54,22 @@ EOT
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $type = $input->getArgument('type');
         $email = $input->getArgument('email');
+        $username = $input->getArgument('username');
         $password = $input->getArgument('password');
         $roles = $input->getArgument('roles');
-        $superAdmin = $input->getOption('super-admin');
         $disabled = $input->getOption('disabled');
 
-        $securityRoles = ['ROLE_USER'];
-        if ($superAdmin) {
-            $securityRoles[] = 'ROLE_ADMINISTRATION_ACCESS';
-        }
-
+        $securityRoles = ['ROLE_USER', 'ROLE_ADMINISTRATION_ACCESS'];
         foreach ($roles as $role) {
             $securityRoles[] = $role;
         }
 
         $user = $this->createUser(
+            $type,
             $email,
+            $username,
             $password,
             !$disabled,
             $securityRoles
@@ -85,20 +86,59 @@ EOT
      */
     protected function interact(InputInterface $input, OutputInterface $output)
     {
+        $users = $this->getContainer()->getParameter('sylius.user.users');
+        $configuredUsers = [];
+        foreach ($users as $type => $user) {
+            $configuredUsers[] = sprintf('%s_user', $type);
+        }
+
+        $output->writeln(sprintf('There are configured %s user types. [%s]', count($configuredUsers), implode(', ', $configuredUsers)));
+        if (!$input->getArgument('type')) {
+            $type = $this->getHelper('dialog')->askAndValidate(
+                $output,
+                'Please choose user type:',
+                function ($type) use ($configuredUsers) {
+                    if (!in_array($type, $configuredUsers, true)) {
+                        throw new \Exception(sprintf('There is no configured %s. There are only %s', $type, implode(', ', $configuredUsers)));
+                    }
+
+                    return $type;
+                }
+            );
+
+            $input->setArgument('type', $type);
+        }
+
         if (!$input->getArgument('email')) {
             $email = $this->getHelper('dialog')->askAndValidate(
                 $output,
                 'Please enter an email:',
+                function ($email) {
+                    if (empty($email)) {
+                        throw new \Exception('Email can not be empty');
+                    }
+
+                    return $email;
+                }
+            );
+
+            $input->setArgument('email', $email);
+        }
+
+        if (!$input->getArgument('username')) {
+            $username = $this->getHelper('dialog')->askAndValidate(
+                $output,
+                'Please enter an username:',
                 function ($username) {
                     if (empty($username)) {
-                        throw new \Exception('Email can not be empty');
+                        throw new \Exception('Username can not be empty');
                     }
 
                     return $username;
                 }
             );
 
-            $input->setArgument('email', $email);
+            $input->setArgument('username', $username);
         }
 
         if (!$input->getArgument('password')) {
@@ -130,32 +170,24 @@ EOT
     }
 
     /**
+     * @param string $type
      * @param string $email
+     * @param string $username
      * @param string $password
      * @param bool $enabled
      * @param array $securityRoles
      *
      * @return ShopUserInterface
      */
-    protected function createUser($email, $password, $enabled, array $securityRoles = ['ROLE_USER'])
+    protected function createUser($type, $email, $username, $password, $enabled, array $securityRoles)
     {
-        $canonicalizer = $this->getContainer()->get('sylius.user.canonicalizer');
-
-        /*
-         * @var ShopUserInterface
-         * @var $customer CustomerInterface
-         */
-        $user = $this->getUserFactory()->createNew();
-        $customer = $this->getCustomerFactory()->createNew();
-        $user->setCustomer($customer);
-        $user->setUsername($email);
+        /** @var UserInterface $user */
+        $user = $this->getUserFactory($type)->createNew();
+        $user->setUsername($username);
         $user->setEmail($email);
-        $user->setUsernameCanonical($canonicalizer->canonicalize($user->getUsername()));
-        $user->setEmailCanonical($canonicalizer->canonicalize($user->getEmail()));
         $user->setPlainPassword($password);
         $user->setRoles($securityRoles);
         $user->setEnabled($enabled);
-        $this->getContainer()->get('sylius.user.password_updater')->updatePassword($user);
 
         return $user;
     }
@@ -169,18 +201,12 @@ EOT
     }
 
     /**
+     * @param string $type
+     *
      * @return FactoryInterface
      */
-    protected function getUserFactory()
+    protected function getUserFactory($type)
     {
-        return $this->getContainer()->get('sylius.factory.shop_user');
-    }
-
-    /**
-     * @return FactoryInterface
-     */
-    protected function getCustomerFactory()
-    {
-        return $this->getContainer()->get('sylius.factory.customer');
+        return $this->getContainer()->get(sprintf('sylius.factory.%s', $type));
     }
 }
