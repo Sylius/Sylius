@@ -9,7 +9,7 @@ sylius:
             country: Країна
             first_name: Iм’я
             last_name: Прізвище
-            phone_number: Номер Телефону
+            phone_number: Номер телефону
             postcode: Iндекс
             street: Вулиця
             province: Область

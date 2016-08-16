@@ -248,7 +248,7 @@ sylius:
         payments: Платежі
         pending: В очікуванні
         permissions: Дозволи
-        phone_number: Номер Телефону
+        phone_number: Номер телефону
         place_order: Розмістити замовлення
         placed_at: Розміщено
         postcode: Iндекс
