@@ -611,7 +611,7 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Then address to :fullName should be used for both shipping and billing of my order`
+     * @Then address to :fullName should be used for both shipping and billing of my order
      */
     public function iShouldSeeThisShippingAddressAsShippingAndBillingAddress($fullName)
     {
@@ -895,7 +895,7 @@ final class CheckoutContext implements Context
         $this->iSpecifyTheShippingAddressAs($address);
         $this->iCompleteTheAddressingStep();
     }
-    
+
     /**
      * @Given I confirm my changes
      */
@@ -903,14 +903,14 @@ final class CheckoutContext implements Context
     {
         $this->thankYouPage->saveChanges();
     }
-    
+
     /**
      * @Then the :product product should have unit price :price
      */
     public function theProductShouldHaveUnitPrice(ProductInterface $product, $price)
     {
         Assert::true(
-            $this->summaryPage->hasProductUnitPrice($product, $price),
+            $this->completePage->hasProductUnitPrice($product, $price),
             sprintf('Product %s should have unit price %s, but it does not have.', $product->getName(), $price)
         );
     }

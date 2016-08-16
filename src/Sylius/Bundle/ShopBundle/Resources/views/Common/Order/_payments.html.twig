@@ -2,10 +2,10 @@
 <div class="ui large icon message">
     <i class="payment icon"></i>
     <div class="content">
-        <div class="header">
+        <div class="header" id="payment-method">
             {{ payment.method }}
         </div>
-        <p>{{ payment.amount|sylius_money(payment.currencyCode) }}</p>
+        <p>{{ payment.amount|sylius_price(payment.currencyCode, payment.order.exchangeRate) }}</p>
     </div>
 </div>
 {% endfor %}

@@ -123,15 +123,9 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
      */
     public function hasProductDiscountedUnitPriceBy(ProductInterface $product, $amount)
     {
-        $productRowElement = $this->getProductRowElement($product);
-        $discountedPriceElement = $productRowElement->find('css', 'td > s');
-        if (null === $discountedPriceElement) {
-            return false;
-        }
-        $priceElement = $discountedPriceElement->getParent();
-        $prices = explode(' ', $priceElement->getText());
-        $priceWithoutDiscount = $this->getPriceFromString($prices[0]);
-        $priceWithDiscount = $this->getPriceFromString($prices[1]);
+        $columns = $this->getProductRowElement($product)->findAll('css', 'td');
+        $priceWithoutDiscount = $this->getPriceFromString($columns[1]->getText());
+        $priceWithDiscount = $this->getPriceFromString($columns[3]->getText());
         $discount = $priceWithoutDiscount - $priceWithDiscount;
 
         return $discount === $amount;
@@ -198,7 +192,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
 
         return null !== $productRowElement->find('css', sprintf('td:contains("%s")', $price));
     }
-    
+
     public function confirmOrder()
     {
         $this->getDocument()->pressButton('Place order');
@@ -225,18 +219,18 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'addressing_step_label' => '.steps a:contains("Addressing")',
-            'billing_address' => '#addresses div:contains("Billing address") address',
-            'extra_notes' =>'#sylius_checkout_summary_notes',
-            'items_table' => '#items table',
+            'addressing_step_label' => '.steps a:contains("Address")',
+            'billing_address' => '#billing-address',
+            'extra_notes' =>'#sylius_checkout_complete_notes',
+            'items_table' => '#sylius-order',
             'order_total' => 'td:contains("Total")',
-            'payment_method' => '#sylius-checkout-summary-payment-method',
+            'payment_method' => '#payment-method',
             'payment_step_label' => '.steps a:contains("Payment")',
             'product_row' => 'tbody tr:contains("%name%")',
             'promotion_discounts' => '#promotion-discounts',
             'promotion_total' => '#promotion-total',
-            'shipping_address' => '#addresses div:contains("Shipping address") address',
-            'shipping_method' => '#sylius-checkout-summary-shipping-method',
+            'shipping_address' => '#shipping-address',
+            'shipping_method' => '#shipping-method',
             'shipping_step_label' => '.steps a:contains("Shipping")',
             'shipping_total' => '#shipping-total',
             'tax_total' => '#tax-total',
@@ -311,7 +305,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
 
     /**
      * @param string $total
-     * 
+     *
      * @return int
      */
     private function getTotalFromString($total)
