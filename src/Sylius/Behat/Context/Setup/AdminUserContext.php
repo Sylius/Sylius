@@ -67,7 +67,7 @@ final class AdminUserContext implements Context
      */
     public function thereIsAnAdministratorWithName($username)
     {
-        $adminUser = $this->testUserFactory->create(sprintf('%s@example.com', preg_replace('/\s+/', '', $username)), 'sylius');
+        $adminUser = $this->userFactory->create(['username' => $username]);
         $adminUser->setUsername($username);
 
         $this->userRepository->add($adminUser);

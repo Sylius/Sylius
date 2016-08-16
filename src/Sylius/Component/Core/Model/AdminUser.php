@@ -26,6 +26,16 @@ class AdminUser extends User implements AdminUserInterface
     protected $authorizationRoles;
 
     /**
+     * @var string
+     */
+    protected $firstName;
+
+    /**
+     * @var string
+     */
+    protected $lastName;
+
+    /**
      * @var array
      */
     protected $roles = [AdminUserInterface::DEFAULT_ADMIN_ROLE];
@@ -85,5 +95,37 @@ class AdminUser extends User implements AdminUserInterface
         }
 
         return $roles;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * @param string $firstName
+     */
+    public function setFirstName($firstName)
+    {
+        $this->firstName = $firstName;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLastName()
+    {
+        return $this->lastName;
+    }
+
+    /**
+     * @param string $lastName
+     */
+    public function setLastName($lastName)
+    {
+        $this->lastName = $lastName;
     }
 }
