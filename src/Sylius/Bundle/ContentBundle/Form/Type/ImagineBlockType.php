@@ -40,8 +40,8 @@ class ImagineBlockType extends AbstractResourceType
     /**
      * ImagineBlockType constructor.
      *
-     * @param string $dataClass
-     * @param array $validationGroups
+     * @param string              $dataClass
+     * @param array               $validationGroups
      * @param FilterConfiguration $filterConfiguration
      */
     public function __construct(
@@ -61,22 +61,26 @@ class ImagineBlockType extends AbstractResourceType
     {
         $filters = [];
 
-        foreach (array_keys($this->filterConfiguration->all()) as $filter) {
-            $filters[$filter] = sprintf('sylius.form.imagine_block.filter.%s', $filter);
+        foreach ($this->filterConfiguration->all() as $filter => $config) {
+            if (isset($config['data_loader']) && 'cmf_media_doctrine_phpcr' == $config['data_loader']) {
+                $filters[$filter] = sprintf('sylius.form.imagine_block.filter.%s', $filter);
+            }
         }
 
         $builder
             ->add('publishable', null, [
                 'label' => 'sylius.form.imagine_block.publishable',
-                ])
+            ])
             ->add('publishStartDate', 'datetime', [
                 'label' => 'sylius.form.imagine_block.publish_start_date',
-                'empty_value' => /* @Ignore */ ['year' => '-', 'month' => '-', 'day' => '-'],
+                'empty_value' => /* @Ignore */
+                    ['year' => '-', 'month' => '-', 'day' => '-'],
                 'date_widget' => 'single_text',
-                'time_widget' => 'single_text',            ])
+                'time_widget' => 'single_text', ])
             ->add('publishEndDate', 'datetime', [
                 'label' => 'sylius.form.imagine_block.publish_end_date',
-                'empty_value' => /* @Ignore */ ['year' => '-', 'month' => '-', 'day' => '-'],
+                'empty_value' => /* @Ignore */
+                    ['year' => '-', 'month' => '-', 'day' => '-'],
                 'date_widget' => 'single_text',
                 'time_widget' => 'single_text',
             ])
@@ -104,8 +108,7 @@ class ImagineBlockType extends AbstractResourceType
                 'label' => 'sylius.form.imagine_block.image',
                 'attr' => ['class' => 'imagine-thumbnail'],
                 'required' => false,
-            ])
-        ;
+            ]);
     }
 
     /**

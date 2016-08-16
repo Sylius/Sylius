@@ -69,6 +69,7 @@ final class ImagineBlockExampleFactory implements ExampleFactoryInterface
                 })->setDefault('publishEndDate', function (Options $options) {
                     return $this->faker->dateTimeBetween('now', '30 days');
                 })
+                ->setDefault('linkUrl','')
                 ->setRequired(['image', 'parentDocument'])
                 ->setAllowedTypes('parentDocument')
                 ->setAllowedTypes('publishable', 'bool')
@@ -91,6 +92,7 @@ final class ImagineBlockExampleFactory implements ExampleFactoryInterface
         $imagineBlock->setPublishStartDate($options['publishStartDate']);
         $imagineBlock->setPublishEndDate($options['publishEndDate']);
         $imagineBlock->setParentDocument($options['parentDocument']);
+        $imagineBlock->setLinkUrl($options['linkUrl']);
 
         $imagePath = $options['image'];
         $imagineBlock->setImage(new UploadedFile($imagePath, basename($imagePath)));
