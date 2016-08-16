@@ -4,16 +4,18 @@
 Checkout
 ========
 
-**Checkout** is a process that begins when the Customer decides to finish their shopping and transform their **Cart** into an **Order**.
+**Checkout** is a process that begins when the Customer decides to finish their shopping and pay for their order.
+The process of specifying address, payment and a way of shipping transforms the **Cart** into an **Order**.
 
 Checkout State Machine
 ----------------------
 
 The Order Checkout state machine has 5 states available: ``cart``, ``addressed``, ``shipping_selected``, ``payment_selected``, ``completed``
-and a set of defined transitions between them - which are saved as the **checkoutState** of the **Order**.
+and a set of defined transitions between them.
+These states are saved as the **checkoutState** of the **Order**.
 
-Besides the steps of checkout, each of them can be done once more. For instance if the Customer changes their mind
-and after selecting payment he wants to change the shipping address he has already specified, he can of course go back and readdress it.
+Besides the steps of checkout, each of them can be done more than once. For instance if the Customer changes their mind
+and after selecting payment they want to change the shipping address they have already specified, they can of course go back and readdress it.
 
 The transitions on the order checkout state machine are:
 
@@ -46,6 +48,8 @@ Steps of Checkout
 -----------------
 
 Checkout in Sylius is divided into 4 steps. Each of these steps occurs when the Order goes into a certain state.
+See the Checkout state machine in the `state_machine.yml <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/CoreBundle/Resources/config/app/state_machine.yml>`_
+together with the routing file for checkout: `checkout.yml <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/ShopBundle/Resources/config/routing/checkout.yml>`_.
 
 .. note::
 
@@ -67,12 +71,14 @@ How to perform the Addressing Step programmatically?
 
 Firstly if the **Customer** is not yet set on the Order it will be assigned depending on the case:
 
-* An already logged in **User** - the Customer is set for the Order using the ``Sylius\Bundle\CoreBundle\EventListener\CartBlamerListener``, that determines the user basing on the event.
-* An existent **User** that is not logged in - they are redirected to log in before continuing.
+* An already logged in **User** - the Customer is set for the Order using the `CartBlamerListener <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/CoreBundle/EventListener/CartBlamerListener.php>`_, that determines the user basing on the event.
+* An existent **User** that is not logged in - If there is an account in the system registered under the e-mail that has been provided - they are asked for a password to log in before continuing inside the addressing form.
 * A **Customer** that was present in the system before (we've got their e-mail) - the Customer instance is updated via cascade, the order is assigned to it.
 * A new **Customer** with unknown e-mail - a new Customer instance is created and assigned to the order.
 
-Of course the customer data like name and surname is also handled.
+.. hint::
+
+    If you are do not understand how Users and Customers work in Sylius got to :doc:`Users Concept documentation </book/users_and_groups>`.
 
 The typical **Address** consists of: country, city, street and postcode - to assign it to an Order either create it manually or retrieve from the repository.
 
@@ -81,12 +87,12 @@ The typical **Address** consists of: country, city, street and postcode - to ass
      /** @var AddressInterface $address */
      $address = $this->container->get('sylius.factory.address')->createNew();
 
-     $address->setFirstName('Name');
-     $address->setLastName('Surname');
-     $address->setStreet('Street');
-     $address->setCountryCode('PL');
-     $address->setCity('City');
-     $address->setPostcode('11111');
+     $address->setFirstName('Anne');
+     $address->setLastName('Shirley');
+     $address->setStreet('Avonlea');
+     $address->setCountryCode('CA');
+     $address->setCity('Canada');
+     $address->setPostcode('C0A 1N0');
 
      $order->setShippingAddress($address);
      $order->setBillingAddress($address);
@@ -104,14 +110,11 @@ and of course flush your order after that via the manager.
 
     $this->container->get('sylius.manager.order')->flush();
 
-**What happens with the transition?**
+**What happens during the transition?**
 
-The method ``process($order)`` of the ``Sylius\Component\Core\OrderProcessing\OrderProcessor`` is run.
+The method ``process($order)`` of the `CompositeOrderProcessor <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Core/OrderProcessing/CompositeOrderProcessor.php>`_ is run.
 It is responsible for creating new **Shipments** for each OrderItemUnit of your order and a new **Payment** if they do not exist yet.
 Therefore this transition is preparing the order for the two next steps of checkout.
-Also the method ``recalculate($order)`` of the ``Sylius\Component\Core\OrderProcessing\OrderRecalculator`` is run,
-that takes care of the **shipping charges** for the default ShippingMethod, **promotions** that depend on the chosen address
-and **taxes** that depend on this address.
 
 Selecting shipping
 ~~~~~~~~~~~~~~~~~~
@@ -131,7 +134,7 @@ How to perform the Selecting shipping Step programmatically?
 Before approaching this step be sure that your Order is in the ``addressed`` state. In this state your order
 will already have a default ShippingMethod assigned, but in this step you can change it and have everything recalculated automatically.
 
-Firstly either create new (see how in the `Shipments concept </book/shipments`) or retrieve a **ShippingMethod**
+Firstly either create new (see how in the `Shipments concept </book/shipments>`) or retrieve a **ShippingMethod**
 from the repository to assign it to your order's shipment created defaultly in the addressing step.
 
 .. code-block:: php
@@ -156,9 +159,9 @@ and apply a proper transition and flush the order via the manager.
 
     $this->container->get('sylius.manager.order')->flush();
 
-**What happens with the transition?**
+**What happens during the transition?**
 
-The method ``recalculate($order)`` of the ``Sylius\Component\Core\OrderProcessing\OrderRecalculator`` is run.
+The method ``process($order)`` of the `CompositeOrderProcessor <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Core/OrderProcessing/CompositeOrderProcessor.php>`_ is run.
 Here this method is responsible for: controlling the **shipping charges** which depend on the chosen ShippingMethod,
 controlling the **promotions** that depend on the shipping method.
 
@@ -205,15 +208,16 @@ and apply a proper transition and flush the order via the manager.
 
     $this->container->get('sylius.manager.order')->flush();
 
-**What happens with the transition?**
+**What happens during the transition?**
 
-The method ``recalculate($order)`` of the ``Sylius\Component\Core\OrderProcessing\OrderRecalculator`` is run.
-Here this method is responsible for controlling the **promotions** that depend on the payment method.
+The method ``process($order)`` of the `CompositeOrderProcessor <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Core/OrderProcessing/CompositeOrderProcessor.php>`_ is run and checks all the adjustments ont the order.
+The method ``update($order)`` of the `OrderExchangeRateAndCurrencyUpdater <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Core/OrderProcessing/OrderExchangeRateAndCurrencyUpdater.php>`_ is run.
+Here this method is responsible for controlling the **exchangeRate** of the order's currency.
 
 Finalizing
 ~~~~~~~~~~
 
-In this step the customer gets an order summary and is redirected to complete the payment he has selected.
+In this step the customer gets an order summary and is redirected to complete the payment they have selected.
 
 +--------------------------------------+-------------------------------------------------+
 | Transition after step                | Template                                        |
@@ -221,7 +225,37 @@ In this step the customer gets an order summary and is redirected to complete th
 | ``payment_selected``-> ``completed`` | ``SyliusShopBundle:Checkout:summary.html.twig`` |
 +--------------------------------------+-------------------------------------------------+
 
+How to complete Checkout programmatically?
+''''''''''''''''''''''''''''''''''''''''''
+
+Before executing the completing transition you can set some notes to your order.
+
+.. code-block:: php
+
+    $order->setNotes('Thank you dear shop owners! I am allergic to tape so please use something els for packaging.')
+
+After that get the StateMachine for the Order via the StateMachineFactory with a proper schema,
+and apply a proper transition and flush the order via the manager.
+
+.. code-block:: php
+
+    $stateMachineFactory = $this->container->get('sm.factory');
+
+    $stateMachine = $stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH)
+    $stateMachine->apply(OrderCheckoutTransitions::TRANSITION_COMPLETE);
+
+    $this->container->get('sylius.manager.order')->flush();
+
+**What happens during the transition?**
+
+* The Order will have the **checkoutState** - ``completed``,
+* The Order will have the general **state** - ``new`` instead of ``cart`` it has had before the transition,
+* When the Order is transitioned from ``cart`` to ``new`` the **paymentState** is set to ``awaiting_payment`` and the **shippingState** to ``ready``
+
+The Checkout is finished after that.
+
 Learn more
 ----------
 
 * :doc:`State Machine - Documentation </book/state_machine>`
+* :doc:`Orders - Concept Documentation </book/orders>`
