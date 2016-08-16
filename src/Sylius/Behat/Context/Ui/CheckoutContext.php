@@ -710,7 +710,7 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Then /^my order total should be ("\$\d+")$/
+     * @Then /^my order total should be ("(?:\£|\$)\d+")$/
      */
     public function myOrderTotalShouldBe($total)
     {
@@ -895,6 +895,25 @@ final class CheckoutContext implements Context
         $this->iSpecifyTheShippingAddressAs($address);
         $this->iCompleteTheAddressingStep();
     }
+    
+    /**
+     * @Given I confirm my changes
+     */
+    public function iConfirmMyChanges()
+    {
+        $this->thankYouPage->saveChanges();
+    }
+    
+    /**
+     * @Then the :product product should have unit price :price
+     */
+    public function theProductShouldHaveUnitPrice(ProductInterface $product, $price)
+    {
+        Assert::true(
+            $this->summaryPage->hasProductUnitPrice($product, $price),
+            sprintf('Product %s should have unit price %s, but it does not have.', $product->getName(), $price)
+        );
+    }
 
     /**
      * @return AddressInterface
@@ -912,14 +931,6 @@ final class CheckoutContext implements Context
         $address->setPhoneNumber('321123456');
 
         return $address;
-    }
-
-    /**
-     * @Given I confirm my changes
-     */
-    public function iConfirmMyChanges()
-    {
-        $this->thankYouPage->saveChanges();
     }
 
     /**

@@ -77,6 +77,18 @@ final class PriceHelperSpec extends ObjectBehavior
 
         $moneyHelper->formatAmount(250, 'USD', 'fr_FR')->willReturn('$2.50');
 
-        $this->convertAndFormatAmount(500, 'USD', 'fr_FR')->shouldReturn('$2.50');
+        $this->convertAndFormatAmount(500, 'USD', null, 'fr_FR')->shouldReturn('$2.50');
+    }
+
+    function it_converts_money_using_given_currency_and_exchange_rate(
+        CurrencyConverterInterface $currencyConverter,
+        MoneyHelperInterface $moneyHelper
+    ) {
+        $currencyConverter->convertFromBase(Argument::cetera())->shouldNotBeCalled();
+
+        $moneyHelper->formatAmount(300, 'GBP', null)->willReturn('£3.00');
+
+        $this->convertAndFormatAmount(100, 'GBP', 3.0)->shouldReturn('£3.00');
+
     }
 }
