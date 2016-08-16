@@ -14,7 +14,7 @@ namespace Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Service\SecurityServiceInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
-use Sylius\Component\Core\Test\Factory\TestUserFactoryInterface;
+use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 
 /**
@@ -33,9 +33,9 @@ final class AdminSecurityContext implements Context
     private $securityService;
 
     /**
-     * @var TestUserFactoryInterface
+     * @var ExampleFactoryInterface
      */
-    private $testUserFactory;
+    private $userFactory;
 
     /**
      * @var UserRepositoryInterface
@@ -45,18 +45,17 @@ final class AdminSecurityContext implements Context
     /**
      * @param SharedStorageInterface $sharedStorage
      * @param SecurityServiceInterface $securityService
-     * @param TestUserFactoryInterface $testUserFactory
      * @param UserRepositoryInterface $userRepository
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         SecurityServiceInterface $securityService,
-        TestUserFactoryInterface $testUserFactory,
+        ExampleFactoryInterface $userFactory,
         UserRepositoryInterface $userRepository
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->securityService = $securityService;
-        $this->testUserFactory = $testUserFactory;
+        $this->userFactory = $userFactory;
         $this->userRepository = $userRepository;
     }
 
@@ -65,7 +64,7 @@ final class AdminSecurityContext implements Context
      */
     public function iAmLoggedInAsAnAdministrator()
     {
-        $user = $this->testUserFactory->createDefault();
+        $user = $this->userFactory->create();
         $this->userRepository->add($user);
 
         $this->securityService->logIn($user);

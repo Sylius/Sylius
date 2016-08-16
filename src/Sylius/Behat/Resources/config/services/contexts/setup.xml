@@ -145,7 +145,7 @@
         <service id="sylius.behat.context.setup.admin_security" class="Sylius\Behat\Context\Setup\AdminSecurityContext" scope="scenario">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.admin_security" />
-            <argument type="service" id="sylius.test.factory.admin_user" container="symfony" />
+            <argument type="service" id="sylius.fixture.example_factory.admin_user" container="symfony" />
             <argument type="service" id="sylius.repository.admin_user" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>
@@ -153,7 +153,7 @@
         <service id="sylius.behat.context.setup.shop_security" class="Sylius\Behat\Context\Setup\ShopSecurityContext" scope="scenario">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.shop_security" />
-            <argument type="service" id="sylius.test.factory.shop_user" container="symfony" />
+            <argument type="service" id="sylius.fixture.example_factory.shop_user" container="symfony" />
             <argument type="service" id="sylius.repository.shop_user" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>
@@ -204,7 +204,7 @@
         <service id="sylius.behat.context.setup.user" class="Sylius\Behat\Context\Setup\UserContext" scope="scenario">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.repository.shop_user" container="symfony" />
-            <argument type="service" id="sylius.test.factory.shop_user" container="symfony" />
+            <argument type="service" id="sylius.fixture.example_factory.shop_user" container="symfony" />
             <argument type="service" id="sylius.factory.address" container="symfony" />
             <argument type="service" id="sylius.manager.shop_user" container="symfony" />
             <argument type="service" id="sylius.converter.country_name" container="symfony" />
@@ -213,7 +213,7 @@
 
         <service id="sylius.behat.context.setup.admin_user" class="Sylius\Behat\Context\Setup\AdminUserContext" scope="scenario">
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="sylius.test.factory.admin_user" container="symfony" />
+            <argument type="service" id="sylius.fixture.example_factory.admin_user" container="symfony" />
             <argument type="service" id="sylius.repository.admin_user" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>
