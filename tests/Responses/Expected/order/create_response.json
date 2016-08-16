@@ -1,0 +1,17 @@
+{
+    "id": @integer@,
+    "items": [],
+    "items_total": 0,
+    "adjustments": [],
+    "comments": [],
+    "adjustments_total": 0,
+    "total": 0,
+    "state": "cart",
+    "created_at": "@string@.isDateTime()",
+    "updated_at": "@string@.isDateTime()",
+    "expires_at": "@string@.isDateTime()",
+    "channel": @array@,
+    "payments": [],
+    "shipments": [],
+    "checkout_state": "cart"
+}

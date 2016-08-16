@@ -14,6 +14,8 @@ namespace Sylius\Bundle\OrderBundle\Form\Type;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\DataMapperInterface;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Validator\Constraints\NotNull;
+use Symfony\Component\Validator\Constraints\Type;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -45,9 +47,17 @@ class OrderItemType extends AbstractResourceType
         $builder
             ->add('quantity', 'integer', [
                 'label' => 'sylius.form.order_item.quantity',
+                'constraints' => [
+                    new NotNull(),
+                    new Type(['type' => 'numeric']),
+                ],
             ])
             ->add('unitPrice', 'sylius_money', [
                 'label' => 'sylius.form.order_item.unit_price',
+                'constraints' => [
+                    new NotNull(),
+                    new Type(['type' => 'numeric']),
+                ],
             ])
             ->setDataMapper($this->orderItemQuantityDataMapper)
         ;

@@ -13,6 +13,7 @@ namespace Sylius\Bundle\OrderBundle;
 
 use Sylius\Bundle\ResourceBundle\AbstractResourceBundle;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
+use Sylius\Bundle\OrderBundle\DependencyInjection\Compiler\RegisterOrderItemFactoryPass;
 use Sylius\Bundle\OrderBundle\DependencyInjection\Compiler\RegisterProcessorsPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -41,6 +42,7 @@ class SyliusOrderBundle extends AbstractResourceBundle
     {
         parent::build($container);
 
+        $container->addCompilerPass(new RegisterOrderItemFactoryPass());
         $container->addCompilerPass(new RegisterProcessorsPass());
     }
 

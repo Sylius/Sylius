@@ -31,7 +31,7 @@ Configuration reference
                     interface:  Sylius\Component\Order\Model\OrderItemInterface
                     controller: Sylius\Bundle\OrderBundle\Controller\OrderItemController
                     repository: ~
-                    factory:    Sylius\Component\Resource\Factory\Factory
+                    factory:    Sylius\Bundle\OrderBundle\Factory\OrderItemFactory
                     form:
                         default: Sylius\Bundle\OrderBundle\Form\Type\OrderItemType
                 validation_groups:

@@ -61,6 +61,10 @@ class OrderItemQuantityDataMapper implements DataMapperInterface
                 continue;
             }
 
+            if (null === $form->getData()) {
+                continue;
+            }
+
             $formsOtherThanQuantity[] = $form;
         }
 

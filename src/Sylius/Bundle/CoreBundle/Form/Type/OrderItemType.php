@@ -36,8 +36,8 @@ class OrderItemType extends BaseOrderItemType
             ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) use ($options) {
                 $data = $event->getData();
                 if (isset($data['variant'])) {
-                    $event->getForm()->add('variant', 'entity_hidden', [
-                        'data_class' => $options['variant_data_class'],
+                    $event->getForm()->add('variant', 'sylius_product_variant_to_identifier', [
+                        'class' => $options['variant_data_class'],
                     ]);
                 }
             })

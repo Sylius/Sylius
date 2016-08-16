@@ -14,6 +14,7 @@ namespace Sylius\Bundle\OrderBundle\DependencyInjection;
 use Sylius\Bundle\OrderBundle\Controller\AdjustmentController;
 use Sylius\Bundle\OrderBundle\Controller\CommentController;
 use Sylius\Bundle\OrderBundle\Controller\OrderItemController;
+use Sylius\Component\Order\Factory\OrderItemFactory;
 use Sylius\Component\Order\Factory\OrderItemUnitFactory;
 use Sylius\Bundle\OrderBundle\Form\Type\AdjustmentType;
 use Sylius\Bundle\OrderBundle\Form\Type\CommentType;
@@ -118,9 +119,9 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->scalarNode('model')->defaultValue(OrderItem::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(OrderItemInterface::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('controller')->defaultValue(OrderItemController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
-                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
+                                        ->scalarNode('factory')->defaultValue(OrderItemFactory::class)->end()
                                         ->arrayNode('form')
                                             ->addDefaultsIfNotSet()
                                             ->children()
