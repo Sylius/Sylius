@@ -48,36 +48,17 @@ EOT
             ];
 
             $this->runCommands($commands, $input, $output);
+            $output->writeln('');
 
-            return 0;
+            return $this->commandExecutor->runCommand('sylius:install:sample-data', [], $output);
         }
 
-        $dialog = $this->getHelper('dialog');
         $commands = [];
 
         if ($input->getOption('no-interaction')) {
             $commands['doctrine:schema:update'] = ['--force' => true];
         } else {
-            if ($dialog->askConfirmation(
-                $output,
-                '<question>It appears that your database already exists. Would you like to reset it? (y/N)</question> ',
-                false
-            )
-            ) {
-                $commands['doctrine:database:drop'] = ['--force' => true];
-                $commands[] = 'doctrine:database:create';
-                $commands[] = 'doctrine:schema:create';
-            } elseif ($this->isSchemaPresent()) {
-                if ($dialog->askConfirmation(
-                    $output,
-                    '<question>Seems like your database contains schema. Do you want to reset it? (y/N)</question> ',
-                    false
-                )
-                ) {
-                    $commands['doctrine:schema:drop'] = ['--force' => true];
-                    $commands[] = 'doctrine:schema:create';
-                }
-            }
+            $commands = array_merge($commands, $this->setupDatabase($output));
         }
 
         $commands[] = 'cache:clear';
@@ -129,7 +110,7 @@ EOT
     {
         $schemaManager = $this->getSchemaManager();
 
-        return $schemaManager->tablesExist(['sylius_user']);
+        return 0 !== count($schemaManager->listTableNames());
     }
 
     /**
@@ -152,5 +133,37 @@ EOT
     protected function getSchemaManager()
     {
         return $this->get('doctrine')->getManager()->getConnection()->getSchemaManager();
+    }
+
+    /**
+     * @param OutputInterface $output
+     *
+     * @return array
+     */
+    protected function setupDatabase(OutputInterface $output)
+    {
+        $commands = [];
+        $dialog = $this->getHelper('dialog');
+
+        if ($dialog->askConfirmation($output, '<question>It appears that your database already exists. Would you like to reset it? (y/N)</question> ', false)) {
+            $commands['doctrine:database:drop'] = ['--force' => true];
+            $commands[] = 'doctrine:database:create';
+            $commands[] = 'doctrine:schema:create';
+
+            return $commands;
+        }
+
+        if (!$this->isSchemaPresent()) {
+            $commands[] = 'doctrine:schema:create';
+
+            return $commands;
+        }
+
+        if ($dialog->askConfirmation($output, '<question>Seems like your database contains schema. Do you want to reset it? (y/N)</question> ', false)) {
+            $commands['doctrine:schema:drop'] = ['--force' => true];
+            $commands[] = 'doctrine:schema:create';
+        }
+
+        return $commands;
     }
 }
