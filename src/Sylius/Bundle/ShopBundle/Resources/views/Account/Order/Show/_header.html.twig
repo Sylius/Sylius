@@ -1,0 +1,11 @@
+<h1 class="ui header">
+    <i class="circular cart icon"></i>
+    <div class="content">
+        {{ 'sylius.ui.order'|trans }} #{{ order.number }}
+        <div class="sub header">
+            {{ order.completedAt|format_date }}
+
+            {{ label.default(('sylius.ui.'~order.state)|trans) }}
+        </div>
+    </div>
+</h1>

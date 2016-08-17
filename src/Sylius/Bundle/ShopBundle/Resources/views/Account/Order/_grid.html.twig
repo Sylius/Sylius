@@ -16,7 +16,7 @@
                 </th>
             {% endfor %}
             {% if definition.actionGroups.item is defined and definition.getActions('item')|length > 0 %}
-                <th>{{ 'sylius.ui.actions'|trans }}</th>
+                <th></th>
             {% endif %}
         </tr>
         </thead>
@@ -42,4 +42,5 @@
 {% else %}
     {{ messages.info('sylius.ui.no_results_to_display'|trans) }}
 {% endif %}
+
 {{ pagination.render(data) }}

@@ -38,6 +38,7 @@ sylius:
         adding_new_email: 'Adding new Email'
         adding_new_locale: 'Adding new locale'
         additional_information: 'Additional information'
+        address: 'Address'
         addressing: Addressing
         addressing_step: 'Addressing step'
         adjustments: Adjustments
