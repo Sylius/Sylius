@@ -260,6 +260,17 @@ final class OrderSpec extends ObjectBehavior
         $this->getExchangeRate()->shouldReturn(1.25);
     }
 
+    function it_has_no_default_locale_code()
+    {
+        $this->getLocaleCode()->shouldReturn(null);
+    }
+
+    function its_locale_code_is_mutable()
+    {
+        $this->setLocaleCode('en');
+        $this->getLocaleCode()->shouldReturn('en');
+    }
+
     function it_has_cart_shipping_state_by_default()
     {
         $this->getShippingState()->shouldReturn(OrderShippingStates::STATE_CART);

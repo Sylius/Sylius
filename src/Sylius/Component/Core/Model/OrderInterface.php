@@ -138,6 +138,16 @@ interface OrderInterface extends
     public function setExchangeRate($exchangeRate);
 
     /**
+     * @return string
+     */
+    public function getLocaleCode();
+
+    /**
+     * @param string
+     */
+    public function setLocaleCode($localeCode);
+
+    /**
      * @param BaseCouponInterface $coupon
      */
     public function setPromotionCoupon(BaseCouponInterface $coupon = null);
