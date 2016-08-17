@@ -11,7 +11,6 @@
 
 namespace Sylius\Behat\Page\Shop\Checkout;
 
-use Sylius\Behat\Page\SymfonyPageInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ShippingMethodInterface;
@@ -113,6 +112,20 @@ interface CompletePageInterface
      * @return bool
      */
     public function hasProductUnitPrice(ProductInterface $product, $price);
+
+    /**
+     * @param string $localeName
+     *
+     * @return bool
+     */
+    public function hasLocale($localeName);
+
+    /**
+     * @param string $currencyCode
+     *
+     * @return bool
+     */
+    public function hasCurrency($currencyCode);
 
     /**
      * @param ProductInterface $product
