@@ -1,4 +1,4 @@
-@placing_orders
+@managing_orders
 Feature: Placing an order
     In order to know about new orders
     As an Administrator
@@ -13,7 +13,7 @@ Feature: Placing an order
         And I am logged in as an administrator
 
     @ui
-    Scenario: Verifying that order has new state
+    Scenario: Verifying that order has new state right after checkout
         Given this user has "PHP T-Shirt" product in the cart
         And this user bought this product
         When I browse orders

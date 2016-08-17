@@ -31,7 +31,6 @@ imports:
     - suites/ui/currency/managing_currencies.yml
     - suites/ui/locale/locales.yml
     - suites/ui/locale/managing_locales.yml
-    - suites/ui/order/placing_orders.yml
     - suites/ui/order/managing_orders.yml
     - suites/ui/payment/managing_payment_methods.yml
     - suites/ui/product/managing_product_attributes.yml

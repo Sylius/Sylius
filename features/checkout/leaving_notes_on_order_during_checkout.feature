@@ -1,8 +1,8 @@
-@placing_orders
-Feature: Adding a note to order
-    In order to provide some extra information to order
+@checkout
+Feature: Leaving additional request notes on my order during checkout
+    In for the administrators to know about my special requests
     As a Customer
-    I want to be able to provide a note for customer service
+    I want to be able to leave order notes for administrators to see
 
     Background:
         Given the store operates on a single channel in "France"
