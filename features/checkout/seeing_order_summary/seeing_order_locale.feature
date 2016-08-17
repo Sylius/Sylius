@@ -12,7 +12,7 @@ Feature: Seeing order locale on order summary page
         And the store allows paying offline
         And I am a logged in customer
 
-    @todo
+    @ui
     Scenario: Seeing order locale on the order summary page
         Given I have product "Stark T-Shirt" in the cart
         When I specified the shipping address as "Ankh Morpork", "Frost Alley", "90210", "France" for "Jon Snow"

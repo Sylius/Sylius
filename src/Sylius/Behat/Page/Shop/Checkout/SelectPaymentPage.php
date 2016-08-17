@@ -72,7 +72,7 @@ class SelectPaymentPage extends SymfonyPage implements SelectPaymentPageInterfac
 
     public function nextStep()
     {
-        $this->getDocument()->pressButton('Next');
+        $this->getElement('next_step')->press();
     }
 
     public function changeShippingMethod()
@@ -99,6 +99,7 @@ class SelectPaymentPage extends SymfonyPage implements SelectPaymentPageInterfac
             'address_step_label' => '.steps a:contains("Address")',
             'checkout_subtotal' => '#checkout-subtotal',
             'shipping_step_label' => '.steps a:contains("Shipping")',
+            'next_step' => '#next-step',
             'order_cannot_be_paid_message' => '#sylius-order-cannot-be-paid',
             'payment_method' => '[name="sylius_checkout_select_payment[payments][0][method]"]',
             'payment_method_option' => '.item:contains("%payment_method%") input',

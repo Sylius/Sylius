@@ -191,7 +191,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
 
     public function nextStep()
     {
-        $this->getDocument()->pressButton('Next');
+        $this->getElement('next_step')->press();
     }
 
     public function backToStore()
@@ -223,6 +223,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
             'shipping_country_province' => '[name="sylius_checkout_address[shippingAddress][provinceCode]"]',
             'shipping_city' => '#sylius_checkout_address_shippingAddress_city',
             'shipping_postcode' => '#sylius_checkout_address_shippingAddress_postcode',
+            'next_step' => '#next-step',
             'login_password' => 'input[type=\'password\']',
             'login_button' => '#sylius-api-login-submit',
         ]);

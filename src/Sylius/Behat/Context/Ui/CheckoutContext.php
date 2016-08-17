@@ -964,6 +964,28 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Then my order's locale should be :localeName
+     */
+    public function myOrderSLocaleShouldBe($localeName)
+    {
+        Assert::true(
+            $this->summaryPage->hasLocale($localeName),
+            'Order locale code is improper.'
+        );
+    }
+
+    /**
+     * @Then my order's currency should be :currencyCode
+     */
+    public function myOrderSCurrencyShouldBe($currencyCode)
+    {
+        Assert::true(
+            $this->summaryPage->hasCurrency($currencyCode),
+            'Order currency code is improper.'
+        );
+    }
+
+    /**
      * @return AddressInterface
      */
     private function createDefaultAddress()
