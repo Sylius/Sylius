@@ -56,7 +56,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
      */
     public function getNumber()
     {
-        $numberText = $this->getElement('number')->find('css', 'strong')->getText();
+        $numberText = $this->getElement('number')->getText();
         $numberText = str_replace('#', '', $numberText);
 
         return $numberText;
@@ -154,12 +154,12 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
         return array_merge(parent::getDefinedElements(), [
             'billing_address' => '#billing-address',
             'number' => '#number',
-            'order_items' => '#sylius-customer-order-items',
+            'order_items' => '#sylius-order',
             'shipping_address' => '#shipping-address',
             'subtotal' => '#subtotal',
             'total' => '#total',
             'payments' => '#payments',
-            'product_price' => '#sylius-customer-order-items td:nth-child(2)'
+            'product_price' => '#sylius-order td:nth-child(2)'
         ]);
     }
 
