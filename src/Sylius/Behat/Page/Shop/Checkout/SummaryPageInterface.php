@@ -106,6 +106,14 @@ interface SummaryPageInterface extends SymfonyPageInterface
      */
     public function hasShippingTotal($price);
 
+    /**
+     * @param ProductInterface $product
+     * @param string $price
+     *
+     * @return bool
+     */
+    public function hasProductUnitPrice(ProductInterface $product, $price);
+
     public function changeAddress();
 
     public function changeShippingMethod();

@@ -21,22 +21,22 @@
                     <td>{{ item.product }}</td>
                     <td>
                         {% if item.discountedUnitPrice is not same as (item.unitPrice) %}
-                            <s>{{ item.unitPrice|sylius_price }}</s> {{ item.discountedUnitPrice|sylius_price }}
+                            <s>{{ item.unitPrice|sylius_price(order.currencyCode, order.exchangeRate) }}</s> {{ item.discountedUnitPrice|sylius_price(order.currencyCode, order.exchangeRate) }}
                         {% else %}
-                            {{ item.unitPrice|sylius_price }}
+                            {{ item.unitPrice|sylius_price(order.currencyCode, order.exchangeRate) }}
                         {% endif %}
                     </td>
                     <td class="center aligned">
                         {{ item.quantity }}
                     </td>
-                    <td class="right aligned">{{ item.subtotal|sylius_price }}</td>
+                    <td class="right aligned">{{ item.subtotal|sylius_price(order.currencyCode, order.exchangeRate) }}</td>
                 </tr>
             {% endfor %}
             </tbody>
             <tfoot>
             <tr>
                 <th colspan="4" class="right aligned" id="tax-total">
-                    {{ 'sylius.ui.tax'|trans }}: {{ order.taxTotal|sylius_price(order.currencyCode) }}
+                    {{ 'sylius.ui.tax'|trans }}: {{ order.taxTotal|sylius_price(order.currencyCode, order.exchangeRate) }}
                 </th>
             </tr>
             <tr>
@@ -44,7 +44,7 @@
             </tr>
             <tr>
                 <td colspan="4" class="right aligned" style="font-size: 1.5em;">
-                    {{ 'sylius.ui.total'|trans }}: {{ order.total|sylius_price }}
+                    {{ 'sylius.ui.total'|trans }}: {{ order.total|sylius_price(order.currencyCode, order.exchangeRate) }}
                 </td>
             </tr>
             </tfoot>

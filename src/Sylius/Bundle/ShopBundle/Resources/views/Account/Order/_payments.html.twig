@@ -9,7 +9,7 @@
                     {{ payment.method }}
                 </div>
                 <p>
-                    {{ payment.amount|sylius_money(payment.currencyCode) }}
+                    {{ payment.amount|sylius_price(payment.order.currencyCode, payment.order.exchangeRate) }}
                 </p>
             {% endfor %}
         </div>

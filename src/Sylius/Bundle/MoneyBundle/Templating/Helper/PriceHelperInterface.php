@@ -19,11 +19,12 @@ interface PriceHelperInterface
     /**
      * @param int $amount
      * @param string|null $currencyCode
+     * @param float $exchangeRate
      * @param string|null $locale
      *
      * @return string
      *
      * @throws \InvalidArgumentException
      */
-    public function convertAndFormatAmount($amount, $currencyCode = null, $locale = null);
+    public function convertAndFormatAmount($amount, $currencyCode = null, $exchangeRate = null, $locale = null);
 }

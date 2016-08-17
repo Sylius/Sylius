@@ -41,6 +41,10 @@ winzou_state_machine:
                     on: ["address", "readdress", "select_shipping", "reselect_shipping", "select_payment", "reselect_payment"]
                     do: ["@sylius.order_processing.order_processor", "process"]
                     args: ["object"]
+                sylius_update_exchange_rate:
+                    on: ["select_payment"]
+                    do: ["@sylius.order_processing.order_exchange_rate_and_currency_updater", "update"]
+                    args: ["object"]
                 sylius_create_order:
                     on: ["complete"]
                     do: ["@sm.callback.cascade_transition", "apply"]

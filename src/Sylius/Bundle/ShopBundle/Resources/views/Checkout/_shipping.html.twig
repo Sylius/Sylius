@@ -9,4 +9,4 @@
         </div>
     </div>
 {% endfor %}
-<p id="shipping-total" style="font-size: 1.5em;">{{ 'sylius.ui.total'|trans}} : {{ order.getShippingTotal|sylius_price(order.currencyCode) }}</p>
+<p id="shipping-total" style="font-size: 1.5em;">{{ 'sylius.ui.total'|trans}} : {{ order.getShippingTotal|sylius_price(order.currencyCode, order.exchangeRate) }}</p>
