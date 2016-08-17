@@ -174,7 +174,7 @@ final class ManagingAdministratorsContext implements Context
     /**
      * @Then the administrator :email should appear in the store
      * @Then I should see the administrator :email in the list
-     * @Then there should still be only one administrator with email :email
+     * @Then there should still be only one administrator with an email :email
      * @Then there should still be administrator with email :email
      */
     public function theAdministratorShouldAppearInTheStore($email)
@@ -260,7 +260,7 @@ final class ManagingAdministratorsContext implements Context
     }
 
     /**
-     * @Then there should be no :email administrator anymore
+     * @Then there should not be :email administrator anymore
      */
     public function thereShouldBeNoAnymore($email)
     {
