@@ -193,6 +193,22 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
         return null !== $productRowElement->find('css', sprintf('td:contains("%s")', $price));
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function hasLocale($localeName)
+    {
+        return false !== strpos($this->getElement('locale')->getText(), $localeName);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasCurrency($currencyCode)
+    {
+        return false !== strpos($this->getElement('currency')->getText(), $currencyCode);
+    }
+    
     public function confirmOrder()
     {
         $this->getDocument()->pressButton('Place order');
@@ -223,6 +239,8 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
             'billing_address' => '#billing-address',
             'extra_notes' =>'#sylius_checkout_complete_notes',
             'items_table' => '#sylius-order',
+            'currency' => '#currency',
+            'locale' => '#locale',
             'order_total' => 'td:contains("Total")',
             'payment_method' => '#payment-method',
             'payment_step_label' => '.steps a:contains("Payment")',
