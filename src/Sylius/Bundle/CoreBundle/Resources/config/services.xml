@@ -235,6 +235,10 @@
         </service>
 
         <!-- listeners -->
+        <service id="sylius.listener.add_administrator_role" class="Sylius\Bundle\CoreBundle\EventListener\AddAdministratorRoleListener">
+            <argument type="service" id="sylius.repository.role" />
+            <tag name="kernel.event_listener" event="sylius.admin_user.pre_create" method="addAdministrationRole" />
+        </service>
         <service id="sylius.listener.cart_blamer" class="%sylius.listener.cart_blamer.class%">
             <argument type="service" id="sylius.manager.cart" />
             <argument type="service" id="sylius.context.cart" />
