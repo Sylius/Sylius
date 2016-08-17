@@ -9,33 +9,32 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\UserBundle\Form\Type;
+namespace spec\Sylius\Bundle\CoreBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\CoreBundle\Form\Type\ShopUserType;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Sylius\Bundle\UserBundle\Form\Type\UserType;
-use Sylius\Component\Resource\Metadata\Metadata;
-use Sylius\Component\User\Model\User;
+use Sylius\Component\Core\Model\ShopUser;
+use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * @mixin UserType
+ * @mixin ShopUserType
  *
- * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
+ * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-final class UserTypeSpec extends ObjectBehavior
+final class ShopUserTypeSpec extends ObjectBehavior
 {
-    function let()
+    function let(MetadataInterface $metadata)
     {
-        $metadata = Metadata::fromAliasAndConfiguration('sylius.shop_user', ['driver' => null]);
-
-        $this->beConstructedWith(User::class, ['sylius'], $metadata);
+        $this->beConstructedWith(ShopUser::class, ['sylius'], $metadata);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(UserType::class);
+        $this->shouldHaveType(ShopUserType::class);
     }
 
     function it_extends_abstract_resource_type()
@@ -43,9 +42,9 @@ final class UserTypeSpec extends ObjectBehavior
         $this->shouldHaveType(AbstractResourceType::class);
     }
 
-    function it_has_name()
+    function it_extends_base_user_type()
     {
-        $this->getName()->shouldReturn('sylius_shop_user');
+        $this->shouldHaveType(UserType::class);
     }
 
     function it_builds_form(FormBuilderInterface $builder)
@@ -54,6 +53,8 @@ final class UserTypeSpec extends ObjectBehavior
         $builder->add('email', 'email', Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->add('plainPassword', 'password', Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->add('enabled', 'checkbox', Argument::any())->shouldBeCalled()->willReturn($builder);
+        $builder->remove('username')->shouldBeCalled()->willReturn($builder);
+        $builder->remove('email')->shouldBeCalled()->willReturn($builder);
 
         $this->buildForm($builder, []);
     }

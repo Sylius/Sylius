@@ -208,6 +208,13 @@ sylius_rbac:
                 form:
                     choice: Sylius\Bundle\RbacBundle\Form\Type\PermissionEntityType
     permissions:
+        sylius.manage.admin_user: Manage administrators
+        sylius.admin_user.show: Show administrators
+        sylius.admin_user.index: List administrators
+        sylius.admin_user.create: Create administrators
+        sylius.admin_user.update: Update administrators
+        sylius.admin_user.delete: Delete administrators
+
         sylius.manage.customer: Manage customers
         sylius.customer.show: Show customer
         sylius.customer.index: List customers
@@ -541,6 +548,7 @@ sylius_rbac:
         sylius.support: Manage customer support
 
     permissions_hierarchy:
+        sylius.manage.admin_user: [sylius.admin_user.show, sylius.admin_user.index, sylius.admin_user.create, sylius.admin_user.update, sylius.admin_user.delete]
         sylius.manage.metadata_container: [sylius.metadata_container.show, sylius.metadata_container.index, sylius.metadata_container.create, sylius.metadata_container.update, sylius.metadata_container.delete]
         sylius.manage.channel: [sylius.channel.show, sylius.channel.index, sylius.channel.create, sylius.channel.update, sylius.channel.delete]
         sylius.manage.customer: [sylius.customer.show, sylius.customer.index, sylius.customer.create, sylius.customer.update]
@@ -607,7 +615,7 @@ sylius_rbac:
         administrator:
             name: Administrator
             description: Administrator user
-            permissions: [sylius.manage.settings, sylius.manage.locale, sylius.manage.currency, sylius.manage.country, sylius.manage.province, sylius.manage.zone, sylius.manage.payment_method, sylius.manage.channel]
+            permissions: [sylius.manage.settings, sylius.manage.locale, sylius.manage.currency, sylius.manage.country, sylius.manage.province, sylius.manage.zone, sylius.manage.payment_method, sylius.manage.channel, sylius.manage.admin_user]
             security_roles: [ROLE_ADMINISTRATION_ACCESS, ROLE_ALLOWED_TO_SWITCH]
         api_administrator:
             name: API Administrator
@@ -737,7 +745,7 @@ sylius_user:
                     model: Sylius\Component\Core\Model\ShopUser
                     repository: Sylius\Bundle\CoreBundle\Doctrine\ORM\UserRepository
                     form:
-                        default: Sylius\Bundle\UserBundle\Form\Type\UserType
+                        default: Sylius\Bundle\CoreBundle\Form\Type\ShopUserType
                         registration: Sylius\Bundle\CoreBundle\Form\Type\UserRegistrationType
         admin_oauth:
             user:

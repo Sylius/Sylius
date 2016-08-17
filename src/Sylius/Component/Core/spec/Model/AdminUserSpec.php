@@ -57,4 +57,13 @@ class AdminUserSpec extends ObjectBehavior
         $this->removeAuthorizationRole($role);
         $this->hasAuthorizationRole($role)->shouldReturn(false);
     }
+
+    function it_has_first_name_and_last_name()
+    {
+        $this->setFirstName('John');
+        $this->getFirstName()->shouldReturn('John');
+
+        $this->setLastName('Doe');
+        $this->getLastName()->shouldReturn('Doe');
+    }
 }

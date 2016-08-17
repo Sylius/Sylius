@@ -53,10 +53,23 @@ final class AdminUserContext implements Context
 
     /**
      * @Given there is an administrator :email identified by :password
+     * @Given /^there is(?:| also) an administrator "([^"]+)"$/
      */
-    public function thereIsAnAdministratorIdentifiedBy($email, $password)
+    public function thereIsAnAdministratorIdentifiedBy($email, $password = 'sylius')
     {
         $adminUser = $this->userFactory->create(['email' => $email, 'password' => $password]);
+        $this->userRepository->add($adminUser);
+        $this->sharedStorage->set('administrator', $adminUser);
+    }
+
+    /**
+     * @Given there is an administrator with name :username
+     */
+    public function thereIsAnAdministratorWithName($username)
+    {
+        $adminUser = $this->userFactory->create(['username' => $username]);
+        $adminUser->setUsername($username);
+
         $this->userRepository->add($adminUser);
         $this->sharedStorage->set('administrator', $adminUser);
     }

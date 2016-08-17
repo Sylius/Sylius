@@ -27,6 +27,9 @@
                 </inverse-join-columns>
             </join-table>
         </many-to-many>
+
+        <field name="firstName" column="first_name" type="string" nullable="true" />
+        <field name="lastName" column="last_name" type="string" nullable="true" />
     </mapped-superclass>
 
 </doctrine-mapping>

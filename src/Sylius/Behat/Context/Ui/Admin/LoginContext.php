@@ -107,4 +107,48 @@ final class LoginContext implements Context
             'I should see validation error.'
         );
     }
+
+    /**
+     * @Then I should be able to log in as :username authenticated by :password password
+     */
+    public function iShouldBeAbleToLogInAsAuthenticatedByPassword($username, $password)
+    {
+        $this->logInAgain($username, $password);
+
+        Assert::true(
+            $this->dashboardPage->isOpen(),
+            'I should be able to log in.'
+        );
+    }
+
+    /**
+     * @Then I should not be able to log in as :username authenticated by :password password
+     */
+    public function iShouldNotBeAbleToLogInAsAuthenticatedByPassword($username, $password)
+    {
+        $this->logInAgain($username, $password);
+
+        Assert::true(
+            $this->loginPage->hasValidationErrorWith('Error Bad credentials.'),
+            'I should see validation error.'
+        );
+
+        Assert::false(
+            $this->dashboardPage->isOpen(),
+            'I should not be able to log in.'
+        );
+    }
+
+    /**
+     * @param string $username
+     * @param string $password
+     */
+    private function logInAgain($username, $password)
+    {
+        $this->dashboardPage->logOut();
+        $this->loginPage->open();
+        $this->loginPage->specifyUsername($username);
+        $this->loginPage->specifyPassword($password);
+        $this->loginPage->logIn();
+    }
 }

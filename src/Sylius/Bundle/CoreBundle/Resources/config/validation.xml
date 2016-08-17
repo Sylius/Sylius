@@ -16,6 +16,35 @@
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
                                         http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
 
+    <class name="Sylius\Component\Core\Model\AdminUser">
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="fields">email</option>
+            <option name="message">sylius.user.email.unique</option>
+            <option name="groups">sylius</option>
+        </constraint>
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="fields">username</option>
+            <option name="message">sylius.user.username.unique</option>
+            <option name="groups">sylius</option>
+        </constraint>
+        <property name="email">
+            <constraint name="NotBlank">
+                <option name="message">sylius.user.email.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+            <constraint name="Email">
+                <option name="message">sylius.user.email.invalid</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+        <property name="username">
+            <constraint name="NotBlank">
+                <option name="message">sylius.user.username.not_blank</option>
+                <option name="groups">sylius</option>
+            </constraint>
+        </property>
+    </class>
+
     <class name="Sylius\Component\Core\Model\Customer">
         <constraint name="Sylius\Bundle\CoreBundle\Validator\Constraints\RegisteredUser">
             <option name="message">sylius.customer.email.registered</option>
