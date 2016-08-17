@@ -21,6 +21,7 @@ use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Currency\Context\CurrencyNotFoundException;
+use Sylius\Component\Locale\Context\LocaleNotFoundException;
 
 /**
  * @mixin ShopBasedCartContext
@@ -104,6 +105,7 @@ final class ShopBasedCartContextSpec extends ObjectBehavior
     ) {
         $cartContext->getCart()->willReturn($cart);
         $shopperContext->getChannel()->willReturn($channel);
+        $shopperContext->getCurrencyCode()->willReturn('PLN');
         $shopperContext->getLocaleCode()->willThrow(LocaleNotFoundException::class);
 
         $this
