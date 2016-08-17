@@ -99,11 +99,6 @@
             <tag name="kernel.event_listener" event="sylius.user.password_reset.request.token" method="sendResetPasswordTokenEmail" />
             <tag name="kernel.event_listener" event="sylius.user.email_verification.token" method="sendVerificationTokenEmail" />
         </service>
-        <service id="sylius.listener.user_delete" class="%sylius.listener.user_delete.class%">
-            <argument type="service" id="security.token_storage" />
-            <argument type="service" id="session" />
-            <tag name="kernel.event_listener" event="sylius.user.pre_delete" method="deleteUser" />
-        </service>
 
         <!-- Forms -->
         <service id="sylius.form.type.user_login" class="%sylius.form.type.user_login.class%">

@@ -12,9 +12,11 @@
 namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Administrator\UpdatePageInterface;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Administrator\CreatePageInterface;
+use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Core\Model\AdminUserInterface;
 use Webmozart\Assert\Assert;
 
@@ -39,18 +41,26 @@ final class ManagingAdministratorsContext implements Context
     private $updatePage;
 
     /**
+     * @var NotificationCheckerInterface
+     */
+    private $notificationChecker;
+
+    /**
      * @param CreatePageInterface $createPage
      * @param IndexPageInterface $indexPage
      * @param UpdatePageInterface $updatePage
+     * @param NotificationCheckerInterface $notificationChecker
      */
     public function __construct(
         CreatePageInterface $createPage,
         IndexPageInterface $indexPage,
-        UpdatePageInterface $updatePage
+        UpdatePageInterface $updatePage,
+        NotificationCheckerInterface $notificationChecker
     ) {
         $this->createPage = $createPage;
         $this->indexPage = $indexPage;
         $this->updatePage = $updatePage;
+        $this->notificationChecker = $notificationChecker;
     }
 
     /**
@@ -70,9 +80,9 @@ final class ManagingAdministratorsContext implements Context
     }
 
     /**
-     * @When I want to see all administrators in store
+     * @When I want to browse administrators
      */
-    public function iWantToSeeAllAdministratorsInStore()
+    public function iWantToBrowseAdministrators()
     {
         $this->indexPage->open();
     }
@@ -154,12 +164,23 @@ final class ManagingAdministratorsContext implements Context
     }
 
     /**
+     * @When I delete administrator with email :email
+     */
+    public function iDeleteAdministratorWithEmail($email)
+    {
+        $this->indexPage->deleteResourceOnPage(['email' => $email]);
+    }
+
+    /**
      * @Then the administrator :email should appear in the store
      * @Then I should see the administrator :email in the list
      * @Then there should still be only one administrator with email :email
+     * @Then there should still be administrator with email :email
      */
     public function theAdministratorShouldAppearInTheStore($email)
     {
+        $this->indexPage->open();
+
         Assert::true(
             $this->indexPage->isSingleResourceOnPage(['email' => $email]),
             sprintf('Administrator %s does not exist', $email)
@@ -172,6 +193,8 @@ final class ManagingAdministratorsContext implements Context
      */
     public function thisAdministratorWithNameShouldAppearInTheStore($username)
     {
+        $this->indexPage->open();
+
         Assert::true(
             $this->indexPage->isSingleResourceOnPage(['username' => $username]),
             sprintf('Administrator with %s username does not exist', $username)
@@ -179,7 +202,7 @@ final class ManagingAdministratorsContext implements Context
     }
 
     /**
-     * @Then /^I should see (\d+) administrators in the list$/
+     * @Then /^there should be (\d+) administrators in the list$/
      */
     public function iShouldSeeAdministratorsInTheList($number)
     {
@@ -233,6 +256,28 @@ final class ManagingAdministratorsContext implements Context
             1,
             $this->indexPage->countItems(),
             'There should not be any new administrators'
+        );
+    }
+
+    /**
+     * @Then there should be no :email administrator anymore
+     */
+    public function thereShouldBeNoAnymore($email)
+    {
+        Assert::false(
+            $this->indexPage->isSingleResourceOnPage(['email' => $email]),
+            sprintf('Administrator with %s email should be deleted', $email)
+        );
+    }
+
+    /**
+     * @Then I should be notified that it cannot be deleted
+     */
+    public function iShouldBeNotifiedThatItCannotBeDeleted()
+    {
+        $this->notificationChecker->checkNotification(
+            'Cannot remove currently logged in user.',
+            NotificationType::failure()
         );
     }
 }
