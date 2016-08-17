@@ -19,7 +19,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class AddAdministratorRoleListener
+final class AddAdministratorRoleListener
 {
     /**
      * @var RoleRepositoryInterface
@@ -44,17 +44,15 @@ class AddAdministratorRoleListener
         /** @var AdminUserInterface $adminUser */
         $adminUser = $event->getSubject();
 
+        if (!$adminUser instanceof AdminUserInterface) {
+            throw new \RuntimeException(sprintf('Expected %s, got %s', AdminUserInterface::class, get_class($adminUser)));
+        }
+
         /** @var RoleInterface $administratorRole */
         $administratorRole = $this->roleRepository->findOneBy(['code' => 'administrator']);
 
-        if (null === $administratorRole) {
-            throw new \RuntimeException('Cannot add administration role, because cannot find administrator role');
+        if (null !== $administratorRole) {
+            $adminUser->addAuthorizationRole($administratorRole);
         }
-
-        if (!$adminUser instanceof AdminUserInterface) {
-            throw new \RuntimeException('Cannot add administration role, because given subject is not admin user');
-        }
-
-        $adminUser->addAuthorizationRole($administratorRole);
     }
 }

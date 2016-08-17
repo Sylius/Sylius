@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\EventListener\AddAdministratorRoleListener;
 use Sylius\Bundle\RbacBundle\Doctrine\ORM\RoleRepository;
 use Sylius\Component\Core\Model\AdminUserInterface;
@@ -24,7 +25,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
  *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class AddAdministratorRoleListenerSpec extends ObjectBehavior
+final class AddAdministratorRoleListenerSpec extends ObjectBehavior
 {
     function let(RoleRepository $roleRepository)
     {
@@ -61,14 +62,13 @@ class AddAdministratorRoleListenerSpec extends ObjectBehavior
         $this->shouldThrow(\RuntimeException::class)->during('addAdministrationRole', [$event]);
     }
 
-    function it_throws_runtime_exception_if_there_is_no_administration_role_available(
+    function it_does_not_add_administration_role_if_it_does_not_exist(
         RoleRepository $roleRepository,
         AdminUserInterface $user,
         GenericEvent $event
     ) {
         $event->getSubject()->willReturn($user);
         $roleRepository->findOneBy(['code' => 'administrator'])->willReturn(null);
-
-        $this->shouldThrow(\RuntimeException::class)->during('addAdministrationRole', [$event]);
+        $user->addAuthorizationRole(Argument::any())->shouldNotBeCalled();
     }
 }
