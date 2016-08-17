@@ -5,14 +5,15 @@ Feature: Seeing taxes of order items
     I want to see the taxes value of a specific order
 
     Background:
-        Given the store operates on a single channel in "France"
+        Given the store operates on a single channel in "United States"
         And there is a zone "EU" containing all members of the European Union
-        And default tax zone is "EU"
-        And the store has "EU VAT" tax rate of 23% for "Clothes" within "EU" zone
-        And the store has a product "PHP T-Shirt" priced at "€80.00"
-        And the store has a product "Symfony2 T-Shirt" priced at "€140.00"
+        And there is a zone "The Rest of the World" containing all other countries
+        And default tax zone is "RoW"
+        And the store has "VAT" tax rate of 23% for "Clothes" within "RoW" zone
+        And the store has a product "PHP T-Shirt" priced at "$80.00"
+        And the store has a product "Symfony2 T-Shirt" priced at "$140.00"
         And it belongs to "Clothes" tax category
-        And the store ships everything for free within "EU" zone
+        And the store ships everything for free within "RoW" zone
         And the store allows paying offline
         And there is a customer "lucy@teamlucifer.com" that placed an order "#00000666"
         And I am logged in as an administrator
@@ -20,8 +21,8 @@ Feature: Seeing taxes of order items
     @ui
     Scenario: Seeing taxes of order items
         Given the customer bought a "PHP T-Shirt" and a "Symfony2 T-Shirt"
-        And the customer chose "Free" shipping method to "France" with "Offline" payment
+        And the customer chose "Free" shipping method to "United States" with "Offline" payment
         When I view the summary of the order "#00000666"
-        Then the order's shipping total should be "€0.00"
-        And the order's tax total should be "€32.20"
-        And the order's total should be "€252.20"
+        Then the order's shipping total should be "$0.00"
+        And the order's tax total should be "$32.20"
+        And the order's total should be "$252.20"

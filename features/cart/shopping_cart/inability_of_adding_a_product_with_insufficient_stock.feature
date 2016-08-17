@@ -5,8 +5,8 @@ Feature: Inability to add a specific product to the cart when it is out of stock
     I want to be prevented from adding products which are not available in the inventory
 
     Background:
-        Given the store operates on a single channel in "France"
-        And the store has a product "T-shirt banana" priced at "€12.54"
+        Given the store operates on a single channel in "United States"
+        And the store has a product "T-shirt banana" priced at "$12.54"
 
     @ui
     Scenario: Not being able to add a product to the cart when it is out of stock

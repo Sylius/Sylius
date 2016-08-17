@@ -5,7 +5,7 @@ Feature: Zone validation
     I want to be prevented from adding it without specifying required fields
 
     Background:
-        Given the store has country "France"
+        Given the store has country "United States"
         And I am logged in as an administrator
 
     @ui
@@ -40,10 +40,10 @@ Feature: Zone validation
     Scenario: Seeing a disabled type field when adding country type zone
         Given I want to create a new zone consisting of country
         Then the type field should be disabled
-        And it should be country type
+        And it should be of country type
 
     @ui
     Scenario: Seeing a disabled type field when adding province type zone
         Given I want to create a new zone consisting of province
         Then the type field should be disabled
-        And it should be province type
+        And it should be of province type

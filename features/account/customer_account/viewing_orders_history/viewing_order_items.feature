@@ -5,9 +5,9 @@ Feature: Viewing details of an order
     I want to be able to view details of my placed order
 
     Background:
-        Given the store operates on a single channel in "France"
-        And the store has a product "Angel T-Shirt" priced at "€39.00"
-        And the store has a product "Angel Mug" priced at "€19.00"
+        Given the store operates on a single channel in "United States"
+        And the store has a product "Angel T-Shirt" priced at "$39.00"
+        And the store has a product "Angel Mug" priced at "$19.00"
         And the store ships everywhere for free
         And the store allows paying with "Cash on Delivery"
         And I am a logged in customer
@@ -23,5 +23,5 @@ Feature: Viewing details of an order
         And I should see 2 items in the list
         And the product named "Angel T-Shirt" should be in the items list
         And the product named "Angel Mug" should be in the items list
-        And I should see "€58.00" as order's subtotal
-        And I should see "€58.00" as order's total
+        And I should see "$58.00" as order's subtotal
+        And I should see "$58.00" as order's total

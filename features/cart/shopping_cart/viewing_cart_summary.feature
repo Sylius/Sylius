@@ -5,7 +5,7 @@ Feature: Viewing a cart summary
     I want to be able to see my cart summary
 
     Background:
-        Given the store operates on a single channel in "France"
+        Given the store operates on a single channel in "United States"
 
     @ui
     Scenario: Viewing information about empty cart

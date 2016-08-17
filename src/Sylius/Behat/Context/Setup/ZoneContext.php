@@ -106,7 +106,7 @@ final class ZoneContext implements Context
     {
         $restOfWorldCountries = array_diff(
             array_keys(Intl::getRegionBundle()->getCountryNames('en')),
-            array_merge($this->euMembers, ['US'])
+            $this->euMembers
         );
 
         $zone = $this->zoneFactory->createWithMembers($restOfWorldCountries);

@@ -5,16 +5,16 @@ Feature: Sequential order number generation
     I want to have order numbers generated sequentially
 
     Background:
-        Given the store operates on a single channel in "France"
+        Given the store operates on a single channel in "United States"
         And the store has a product "Green Arrow"
         And the store ships everywhere for free
         And the store allows paying offline
         And there is a customer "oliver@teamarrow.com" that placed an order
         And the customer bought a single "Green Arrow"
-        And the customer chose "Free" shipping method to "France" with "Offline" payment
+        And the customer chose "Free" shipping method to "United States" with "Offline" payment
         And there is another customer "barry@teamflash.com" that placed an order
         And the customer bought a single "Green Arrow"
-        And the customer chose "Free" shipping method to "France" with "Offline" payment
+        And the customer chose "Free" shipping method to "United States" with "Offline" payment
         And I am logged in as an administrator
 
     @ui

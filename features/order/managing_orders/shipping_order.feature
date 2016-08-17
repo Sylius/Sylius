@@ -5,7 +5,7 @@ Feature: Shipping an order
     I want to be able to ship a shipment
 
     Background:
-        Given the store operates on a single channel in "France"
+        Given the store operates on a single channel in "United States"
         And the store has a product "Angel T-Shirt"
         And the store ships everywhere for free
         And the store allows paying with "Cash on Delivery"

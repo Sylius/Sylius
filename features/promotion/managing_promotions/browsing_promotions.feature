@@ -5,7 +5,7 @@ Feature: Browsing promotions
     I want to browse existing promotions
 
     Background:
-        Given the store operates on a single channel in "France"
+        Given the store operates on a single channel in "United States"
         And there is a promotion "Basic promotion"
         And I am logged in as an administrator
 

@@ -303,13 +303,13 @@ final class ManagingZonesContext implements Context
     }
 
     /**
-     * @Then it should be :type type
+     * @Then it should be of :type type
      */
-    public function itShouldBeType($type)
+    public function itShouldBeOfType($type)
     {
         Assert::true(
             $this->createPage->hasType($type),
-            sprintf('Zone should be %s type', $type)
+            sprintf('Zone should be of %s type', $type)
         );
     }
 

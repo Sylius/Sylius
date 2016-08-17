@@ -5,14 +5,15 @@ Feature: Seeing taxes of an order
     I want to be able to see taxes in order
 
     Background:
-        Given the store operates on a single channel in "France"
+        Given the store operates on a single channel in "United States"
         And there is a zone "EU" containing all members of the European Union
-        And default tax zone is "EU"
-        And the store has "EU VAT" tax rate of 23% for "Clothes" within "EU" zone
-        And the store has "Shipping EU VAT" tax rate of 23% for "Shipping Services" within "EU" zone
-        And the store has a product "Symfony2 T-Shirt" priced at "€140.00"
+        And there is a zone "The Rest of the World" containing all other countries
+        And default tax zone is "RoW"
+        And the store has "VAT" tax rate of 23% for "Clothes" within "RoW" zone
+        And the store has "Shipping VAT" tax rate of 23% for "Shipping Services" within "RoW" zone
+        And the store has a product "Symfony2 T-Shirt" priced at "$140.00"
         And it belongs to "Clothes" tax category
-        And the store has "DHL" shipping method with "€10.00" fee within "EU" zone
+        And the store has "DHL" shipping method with "$10.00" fee within "RoW" zone
         And shipping method "DHL" belongs to "Shipping Services" tax category
         And the store allows paying offline
         And there is a customer "lucy@teamlucifer.com" that placed an order "#00000666"
@@ -21,10 +22,10 @@ Feature: Seeing taxes of an order
     @ui
     Scenario: Seeing taxes of order items and shipping
         Given the customer bought a single "Symfony2 T-Shirt"
-        And the customer chose "DHL" shipping method to "France" with "Offline" payment
+        And the customer chose "DHL" shipping method to "United States" with "Offline" payment
         When I view the summary of the order "#00000666"
-        Then the order's items total should be "€172.20"
-        And there should be a shipping charge "DHL €10.00"
-        And the order's shipping total should be "€12.30"
-        And the order's tax total should be "€34.50"
-        And the order's total should be "€184.50"
+        Then the order's items total should be "$172.20"
+        And there should be a shipping charge "DHL $10.00"
+        And the order's shipping total should be "$12.30"
+        And the order's tax total should be "$34.50"
+        And the order's total should be "$184.50"

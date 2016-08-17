@@ -5,7 +5,7 @@ Feature: Paying with paypal during checkout
     I want to be able to pay with PayPal Express Checkout
 
     Background:
-        Given the store operates on a single channel in "France"
+        Given the store operates on a single channel in "United States"
         And there is a user "john@example.com" identified by "password123"
         And the store has a product "PHP T-Shirt" priced at "$19.99"
         And the store ships everywhere for free

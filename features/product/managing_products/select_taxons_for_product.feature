@@ -5,7 +5,7 @@ Feature: Select taxon for a product
     I want to be able to select taxons for a product
 
     Background:
-        Given the store operates on a single channel in "France"
+        Given the store operates on a single channel in "United States"
         And the store classifies its products as "T-Shirts", "Accessories", "Funny" and "Sad"
         And the store has a "T-Shirt Banana" configurable product
         And the store has a product "T-Shirt Batman"

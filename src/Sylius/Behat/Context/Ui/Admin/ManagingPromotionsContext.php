@@ -176,7 +176,7 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @Given I add the "Order fixed discount" action configured with €:amount
+     * @Given I add the "Order fixed discount" action configured with $:amount
      */
     public function stepDefinition($amount)
     {

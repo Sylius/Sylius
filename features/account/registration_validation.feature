@@ -5,7 +5,7 @@ Feature: Account registration
     I want to be prevented from creating an account without required fields
 
     Background:
-        Given the store operates on a single channel in "France"
+        Given the store operates on a single channel in "United States"
 
     @ui
     Scenario: Trying to register a new account with email that has been already used

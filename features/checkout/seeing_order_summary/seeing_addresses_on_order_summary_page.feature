@@ -5,7 +5,7 @@ Feature: Seeing order addresses on order summary page
     I want to be able to see addresses on the order summary page
 
     Background:
-        Given the store operates on a single channel in "France"
+        Given the store operates on a single channel in "United States"
         And the store has a product "Lannister Coat" priced at "$19.99"
         And the store ships everywhere for free
         And the store allows paying with "Cash on Delivery"
@@ -14,7 +14,7 @@ Feature: Seeing order addresses on order summary page
     @ui
     Scenario: Seeing the same shipping and billing address on order summary
         Given I have product "Lannister Coat" in the cart
-        And I specified the shipping address as "Ankh Morpork", "Frost Alley", "90210", "France" for "Jon Snow"
+        And I specified the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I proceed order with "Free" shipping method and "Cash on Delivery" payment
         Then I should be on the checkout summary step
         And address to "Jon Snow" should be used for both shipping and billing of my order
@@ -23,8 +23,8 @@ Feature: Seeing order addresses on order summary page
     Scenario: Seeing different shipping and billing address on order summary
         Given I have product "Lannister Coat" in the cart
         And I am at the checkout addressing step
-        When I specify the shipping address as "Ankh Morpork", "Frost Alley", "90210", "France" for "Jon Snow"
-        And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "France" for "Eddard Stark"
+        When I specify the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
+        And I specify the billing address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Eddard Stark"
         And I complete the addressing step
         And I proceed order with "Free" shipping method and "Cash on Delivery" payment
         Then I should be on the checkout summary step

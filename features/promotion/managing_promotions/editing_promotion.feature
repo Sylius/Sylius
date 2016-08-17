@@ -5,7 +5,7 @@ Feature: Editing promotion
     I want to be able to edit a promotion
 
     Background:
-        Given the store operates on a single channel in "France"
+        Given the store operates on a single channel in "United States"
         And there is a promotion "Christmas sale"
         And I am logged in as an administrator
 
@@ -41,10 +41,10 @@ Feature: Editing promotion
     @ui
     Scenario: Editing promotions channels
         Given I want to modify a "Christmas sale" promotion
-        When I make it applicable for the "France" channel
+        When I make it applicable for the "United States" channel
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And the "Christmas sale" promotion should be applicable for the "France" channel
+        And the "Christmas sale" promotion should be applicable for the "United States" channel
 
     @ui
     Scenario: Adding a promotion with start and end date
