@@ -74,7 +74,11 @@ class ORMMappedSuperClassSubscriber extends AbstractDoctrineSubscriber
      */
     private function setAssociationMappings(ClassMetadataInfo $metadata, $configuration)
     {
-        foreach (class_parents($metadata->getName()) as $parent) {
+        $class = $metadata->getName();
+        if (!class_exists($class)) {
+            return;
+        }
+        foreach (class_parents($class) as $parent) {
             if (false === in_array($parent, $configuration->getMetadataDriverImpl()->getAllClassNames())) {
                 continue;
             }
