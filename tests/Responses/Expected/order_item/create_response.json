@@ -1,0 +1,27 @@
+{
+    "id": @integer@,
+    "quantity": 1,
+    "unit_price": 2000,
+    "total": 2000,
+    "immutable": @boolean@,
+    "units": @array@,
+    "units_total": 2000,
+    "adjustments": @array@,
+    "adjustments_total": @integer@,
+    "variant": {
+        "id": @integer@,
+        "options": @array@,
+        "price": 20,
+        "on_hold": @integer@,
+        "tracked": @boolean@,
+        "images": @array@
+    },
+    "_links": {
+        "product": {
+            "href": @string@
+        },
+        "variant": {
+            "href": @string@
+        }
+    }
+}

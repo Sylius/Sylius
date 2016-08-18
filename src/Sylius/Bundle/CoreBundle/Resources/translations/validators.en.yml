@@ -13,6 +13,12 @@ sylius:
     order:
         currency_code:
             not_valid: The currency code you entered is invalid.
+    order_item:
+        unit_price:
+            integer: Unit price must be an integer.
+            not_blank: Please enter unit price.
+        variant:
+            not_blank: Please select product variant.
     locale:
         code:
             not_blank: Please enter locale code.

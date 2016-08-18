@@ -1,0 +1,22 @@
+Sylius\Component\Order\Model\OrderItem:
+    exclusion_policy: ALL
+    xml_root_name: order-item
+    properties:
+        id:
+            expose: true
+        quantity:
+            expose: true
+        unitPrice:
+            expose: true
+        total:
+            expose: true
+        immutable:
+            expose: true
+        units:
+            expose: true
+        unitsTotal:
+            expose: true
+        adjustments:
+            expose: true
+        adjustmentsTotal:
+            expose: true

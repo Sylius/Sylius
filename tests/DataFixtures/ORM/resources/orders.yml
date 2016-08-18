@@ -1,0 +1,4 @@
+Sylius\Component\Core\Model\Order:
+    order1:
+        channel: @channel-web
+        currencyCode: USD

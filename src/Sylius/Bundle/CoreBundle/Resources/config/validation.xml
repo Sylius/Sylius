@@ -46,6 +46,14 @@
         </property>
     </class>
 
+    <class name="Sylius\Component\Core\Model\OrderItem">
+        <property name="variant">
+            <constraint name="NotBlank">
+                <option name="message">sylius.order_item.variant.not_blank</option>
+            </constraint>
+        </property>
+    </class>
+
     <class name="Sylius\Component\Core\Model\ProductVariant">
         <property name="price">
             <constraint name="NotBlank">
