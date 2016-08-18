@@ -54,7 +54,7 @@ This versioning method is same for all **Sylius** bundles and applications.
 MIT License
 -----------
 
-License can be found [here](https://github.com/Sylius/SyliusArchetypeBundle/blob/master/Resources/meta/LICENSE).
+License can be found [here](https://github.com/Sylius/SyliusAssociationBundle/blob/master/Resources/meta/LICENSE).
 
 Authors
 -------

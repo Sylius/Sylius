@@ -59,13 +59,6 @@
             <argument>%sylius.attribute.attribute_types%</argument>
         </service>
 
-        <service id="sylius.fixture.example_factory.product_archetype" class="Sylius\Bundle\CoreBundle\Fixture\Factory\ProductArchetypeExampleFactory">
-            <argument type="service" id="sylius.factory.product_archetype" />
-            <argument type="service" id="sylius.repository.product_option" />
-            <argument type="service" id="sylius.repository.product_attribute" />
-            <argument type="service" id="sylius.repository.locale" />
-        </service>
-
         <service id="sylius.fixture.example_factory.tax_category" class="Sylius\Bundle\CoreBundle\Fixture\Factory\TaxCategoryExampleFactory">
             <argument type="service" id="sylius.factory.tax_category" />
         </service>
@@ -91,7 +84,6 @@
             <argument type="service" id="sylius.factory.product_variant_image" />
             <argument type="service" id="sylius.image_uploader" />
             <argument type="service" id="sylius.repository.taxon" />
-            <argument type="service" id="sylius.repository.product_archetype" />
             <argument type="service" id="sylius.repository.product_attribute" />
             <argument type="service" id="sylius.repository.product_option" />
             <argument type="service" id="sylius.repository.channel" />

@@ -86,12 +86,6 @@
             <tag name="sylius_fixtures.fixture" />
         </service>
 
-        <service id="sylius.fixture.product_archetype" class="Sylius\Bundle\CoreBundle\Fixture\ProductArchetypeFixture">
-            <argument type="service" id="sylius.manager.product_archetype" />
-            <argument type="service" id="sylius.fixture.example_factory.product_archetype" />
-            <tag name="sylius_fixtures.fixture" />
-        </service>
-
         <service id="sylius.fixture.tax_category" class="Sylius\Bundle\CoreBundle\Fixture\TaxCategoryFixture">
             <argument type="service" id="sylius.manager.tax_category" />
             <argument type="service" id="sylius.fixture.example_factory.tax_category" />
@@ -121,7 +115,6 @@
             <argument type="service" id="sylius.repository.taxon" />
             <argument type="service" id="sylius.fixture.product_attribute" />
             <argument type="service" id="sylius.fixture.product_option" />
-            <argument type="service" id="sylius.fixture.product_archetype" />
             <argument type="service" id="sylius.fixture.product" />
             <tag name="sylius_fixtures.fixture" />
         </service>
@@ -131,7 +124,6 @@
             <argument type="service" id="sylius.repository.taxon" />
             <argument type="service" id="sylius.fixture.product_attribute" />
             <argument type="service" id="sylius.fixture.product_option" />
-            <argument type="service" id="sylius.fixture.product_archetype" />
             <argument type="service" id="sylius.fixture.product" />
             <tag name="sylius_fixtures.fixture" />
         </service>
@@ -141,7 +133,6 @@
             <argument type="service" id="sylius.repository.taxon" />
             <argument type="service" id="sylius.fixture.product_attribute" />
             <argument type="service" id="sylius.fixture.product_option" />
-            <argument type="service" id="sylius.fixture.product_archetype" />
             <argument type="service" id="sylius.fixture.product" />
             <tag name="sylius_fixtures.fixture" />
         </service>
@@ -151,7 +142,6 @@
             <argument type="service" id="sylius.repository.taxon" />
             <argument type="service" id="sylius.fixture.product_attribute" />
             <argument type="service" id="sylius.fixture.product_option" />
-            <argument type="service" id="sylius.fixture.product_archetype" />
             <argument type="service" id="sylius.fixture.product" />
             <tag name="sylius_fixtures.fixture" />
         </service>

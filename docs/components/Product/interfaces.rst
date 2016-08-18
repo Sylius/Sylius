@@ -12,8 +12,7 @@ ProductInterface
 This interface should be implemented by models characterizing a product.
 
 .. note::
-   This interface extends :ref:`component_archetype_model_archetype-subject-interface`,
-   :ref:`component_resource_model_slug-aware-interface`,
+   This interface extends :ref:`component_resource_model_slug-aware-interface`,
    :ref:`component_resource_model_timestampable-interface`
    and :ref:`component_product_model_product-translation-interface`.
 

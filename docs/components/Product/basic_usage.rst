@@ -15,29 +15,6 @@ Creating a product
    $product->getCreatedAt(); // Returns the \DateTime when it was created.
    $product->getAvailableOn(); // By default returns the same value as getCreatedAt.
 
-Setting the archetype
----------------------
-
-.. code-block:: php
-
-   <?php
-
-   use Sylius\Component\Product\Model\Archetype;
-   use Sylius\Component\Product\Model\AttributeValue;
-
-   $smallSize = new AttributeValue();
-   $smallSize->setValue('Small');
-
-   $archetype = new Archetype();
-   $archetype->addAttribute($smallSize);
-
-   $product->setArchetype($archetype);
-
-.. note::
-   Doesn't matter if you use **Archetype** from this component,
-   the :doc:`/components/Archetype/index` or your custom.
-   Every model implementing the :ref:`component_archetype_model_archetype-interface` is supported.
-
 Product attributes management
 -----------------------------
 
@@ -150,6 +127,6 @@ Product options management
    $product->getOptions(); // Returns an array containing all inserted options.
 
 .. note::
-   Same as in **Archetype** case, you can use **Option** objects from this component,
+   Doesn't matter if you use **Option** objects from this component,
    the :doc:`/components/Variation/index` or your custom.
    Every model implementing the :ref:`component_variation_model_option-interface` is supported.

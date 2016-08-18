@@ -45,8 +45,6 @@ class ServicesPass implements CompilerPassInterface
         $decoratedProductFactoryDefinition = new Definition($productFactoryClass);
         $decoratedProductFactoryDefinition->setArguments([
             $translatableFactoryDefinition,
-            new Reference('sylius.repository.product_archetype'),
-            new Reference('sylius.builder.product_archetype'),
             new Reference('sylius.factory.product_variant'),
         ]);
 

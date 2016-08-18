@@ -11,10 +11,7 @@
 
 namespace Sylius\Component\Product\Factory;
 
-use Sylius\Component\Archetype\Builder\ArchetypeBuilderInterface;
-use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -28,35 +25,19 @@ class ProductFactory implements ProductFactoryInterface
     private $factory;
 
     /**
-     * @var RepositoryInterface
-     */
-    private $archetypeRepository;
-
-    /**
-     * @var ArchetypeBuilderInterface
-     */
-    private $archetypeBuilder;
-
-    /**
      * @var FactoryInterface
      */
     private $variantFactory;
 
     /**
      * @param FactoryInterface $factory
-     * @param RepositoryInterface $archetypeRepository
-     * @param ArchetypeBuilderInterface $archetypeBuilder
      * @param FactoryInterface $variantFactory
      */
     public function __construct(
         FactoryInterface $factory,
-        RepositoryInterface $archetypeRepository,
-        ArchetypeBuilderInterface $archetypeBuilder,
         FactoryInterface $variantFactory
     ) {
         $this->factory = $factory;
-        $this->archetypeRepository = $archetypeRepository;
-        $this->archetypeBuilder = $archetypeBuilder;
         $this->variantFactory = $variantFactory;
     }
 
@@ -77,22 +58,6 @@ class ProductFactory implements ProductFactoryInterface
 
         $product = $this->factory->createNew();
         $product->addVariant($variant);
-
-        return $product;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function createFromArchetype($archetypeCode)
-    {
-        if (null === $archetype = $this->archetypeRepository->findOneBy(['code' => $archetypeCode])) {
-            throw new \InvalidArgumentException(sprintf('Requested archetype does not exist with code "%s".', $archetypeCode));
-        }
-
-        $product = $this->createNew();
-        $product->setArchetype($archetype);
-        $this->archetypeBuilder->build($product);
 
         return $product;
     }

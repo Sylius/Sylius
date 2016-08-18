@@ -13,15 +13,12 @@ namespace Sylius\Component\Product\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Archetype\Model\ArchetypeInterface as BaseArchetypeInterface;
 use Sylius\Component\Attribute\Model\AttributeValueInterface as BaseAttributeValueInterface;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Resource\Model\ToggleableTrait;
 use Sylius\Component\Resource\Model\TranslatableTrait;
-use Sylius\Component\Resource\Model\TranslationInterface;
 use Sylius\Component\Variation\Model\OptionInterface as BaseOptionInterface;
 use Sylius\Component\Variation\Model\VariantInterface as BaseVariantInterface;
-use Webmozart\Assert\Assert;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -43,11 +40,6 @@ class Product implements ProductInterface
      * @var string
      */
     protected $code;
-
-    /**
-     * @var null|BaseArchetypeInterface
-     */
-    protected $archetype;
 
     /**
      * @var \DateTime
@@ -121,22 +113,6 @@ class Product implements ProductInterface
     public function setCode($code)
     {
         $this->code = $code;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getArchetype()
-    {
-        return $this->archetype;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setArchetype(BaseArchetypeInterface $archetype = null)
-    {
-        $this->archetype = $archetype;
     }
 
     /**

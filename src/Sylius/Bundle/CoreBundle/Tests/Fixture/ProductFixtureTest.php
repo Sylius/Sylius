@@ -83,14 +83,6 @@ final class ProductFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function product_archetype_is_optional()
-    {
-        $this->assertConfigurationIsValid([['custom' => [['product_archetype' => 'ARCHETYPE']]]], 'custom.*.product_archetype');
-    }
-
-    /**
-     * @test
-     */
     public function product_taxons_are_optional()
     {
         $this->assertConfigurationIsValid([['custom' => [['taxons' => ['TXN-1', 'TXN-2']]]]], 'custom.*.taxons');

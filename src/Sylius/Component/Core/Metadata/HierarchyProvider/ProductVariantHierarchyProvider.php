@@ -11,7 +11,6 @@
 
 namespace Sylius\Component\Core\Metadata\HierarchyProvider;
 
-use Sylius\Component\Core\Model\ArchetypeInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Metadata\HierarchyProvider\MetadataHierarchyProviderInterface;
@@ -36,20 +35,9 @@ class ProductVariantHierarchyProvider implements MetadataHierarchyProviderInterf
         $hierarchy = [
             $productVariant->getMetadataIdentifier(),
             $product->getMetadataIdentifier(),
+            $product->getMetadataClassIdentifier(),
+            'DefaultPage',
         ];
-
-        /** @var ArchetypeInterface $productArchetype */
-        $productArchetype = $product->getArchetype();
-        if (null !== $productArchetype) {
-            $hierarchy[] = $productArchetype->getMetadataIdentifier();
-
-            while ($productArchetype = $productArchetype->getParent()) {
-                $hierarchy[] = $productArchetype->getMetadataIdentifier();
-            }
-        }
-
-        $hierarchy[] = $product->getMetadataClassIdentifier();
-        $hierarchy[] = 'DefaultPage';
 
         return $hierarchy;
     }

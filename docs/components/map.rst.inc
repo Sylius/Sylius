@@ -1,6 +1,5 @@
 * :doc:`/components/general/index`
 * :doc:`/components/Addressing/index`
-* :doc:`/components/Archetype/index`
 * :doc:`/components/Attribute/index`
 * :doc:`/components/Cart/index`
 * :doc:`/components/Channel/index`
