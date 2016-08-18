@@ -84,12 +84,6 @@ final class OrderContext implements Context
      */
     public function iDeleteTheOrder(OrderInterface $order)
     {
-        /** @var OrderInterface $order */
-        $order = $this->orderRepository->findOneBy(['number' => $order->getNumber()]);
-        if (null === $order) {
-            throw new \InvalidArgumentException(sprintf('Order with %s number was not found in an order repository', $order->getNumber()));
-        }
-
         $adjustmentsId = [];
         foreach ($order->getAdjustments() as $adjustment) {
             $adjustmentsId[] = $adjustment->getId();
@@ -105,13 +99,10 @@ final class OrderContext implements Context
     }
 
     /**
-     * @Then /^([^"]+) should not exist in the registry$/
+     * @Then /^(this order) should not exist in the registry$/
      */
     public function orderShouldNotExistInTheRegistry(OrderInterface $order)
     {
-        /** @var OrderInterface $order */
-        $order = $this->orderRepository->findOneBy(['number' => $order->getNumber()]);
-
         Assert::null($order);
     }
 
@@ -126,7 +117,7 @@ final class OrderContext implements Context
     }
 
     /**
-     * @Then /^billing and shipping addresses of this order should not exist$/
+     * @Then billing and shipping addresses of this order should not exist
      */
     public function addressesShouldNotExistInTheRegistry()
     {
@@ -138,7 +129,7 @@ final class OrderContext implements Context
     }
 
     /**
-     * @Then /^adjustments of this order should not exist$/
+     * @Then adjustments of this order should not exist
      */
     public function adjustmentShouldNotExistInTheRegistry()
     {
