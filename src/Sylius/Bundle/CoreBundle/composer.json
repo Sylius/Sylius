@@ -58,7 +58,6 @@
         "sylius/variation-bundle": "^1.0",
         "sylius/association-bundle": "^1.0",
         "sylius/review-bundle": "^1.0",
-        "sylius/metadata-bundle": "^1.0",
         "symfony/framework-bundle": "^2.8",
         "symfony-cmf/routing-bundle": "~1.2",
         "swiftmailer/swiftmailer": "~5.0",
