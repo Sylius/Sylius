@@ -44,7 +44,18 @@ class ViewHandler implements ViewHandlerInterface
                 $this->restViewHandler->setExclusionStrategyVersion($version);
             }
 
-            $view->getSerializationContext()->enableMaxDepthChecks();
+            // > 2.0
+            if (method_exists($view, 'getSerializationContext')) {
+                $view->getSerializationContext()->enableMaxDepthChecks();
+            }
+            // 2.0
+            if (method_exists($view, 'getContext') && method_exists($view->getContext(), 'setMaxDepth')) {
+                $view->getContext()->setMaxDepth(PHP_INT_MAX);
+            }
+            // 2.1+
+            if (method_exists($view, 'getContext') && method_exists($view->getContext(), 'enableMaxDepth')) {
+                $view->getContext()->enableMaxDepth();
+            }
         }
 
         return $this->restViewHandler->handle($view);
