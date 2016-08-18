@@ -18,7 +18,6 @@ Symfony Bundles
     SyliusProductBundle/index
     SyliusPromotionBundle/index
     SyliusRbacBundle/index
-    SyliusReportBundle/index
     SyliusResourceBundle/index
     SyliusSettingsBundle/index
     SyliusShippingBundle/index

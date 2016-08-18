@@ -139,7 +139,6 @@
         "sylius/promotion-bundle": "self.version",
         "sylius/registry": "self.version",
         "sylius/report": "self.version",
-        "sylius/report-bundle": "self.version",
         "sylius/resource": "self.version",
         "sylius/resource-bundle": "self.version",
         "sylius/search-bundle": "self.version",

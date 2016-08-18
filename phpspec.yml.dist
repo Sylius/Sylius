@@ -57,7 +57,6 @@ suites:
     PricingBundle: { namespace: Sylius\Bundle\PricingBundle, psr4_prefix: Sylius\Bundle\PricingBundle, spec_path: src/Sylius/Bundle/PricingBundle, src_path: src/Sylius/Bundle/PricingBundle }
     ProductBundle: { namespace: Sylius\Bundle\ProductBundle, psr4_prefix: Sylius\Bundle\ProductBundle, spec_path: src/Sylius/Bundle/ProductBundle, src_path: src/Sylius/Bundle/ProductBundle }
     PromotionBundle: { namespace: Sylius\Bundle\PromotionBundle, psr4_prefix: Sylius\Bundle\PromotionBundle, spec_path: src/Sylius/Bundle/PromotionBundle, src_path: src/Sylius/Bundle/PromotionBundle }
-    ReportBundle: { namespace: Sylius\Bundle\ReportBundle, psr4_prefix: Sylius\Bundle\ReportBundle, spec_path: src/Sylius/Bundle/ReportBundle, src_path: src/Sylius/Bundle/ReportBundle }
     ResourceBundle: { namespace: Sylius\Bundle\ResourceBundle, psr4_prefix: Sylius\Bundle\ResourceBundle, spec_path: src/Sylius/Bundle/ResourceBundle, src_path: src/Sylius/Bundle/ResourceBundle }
     ReviewBundle: { namespace: Sylius\Bundle\ReviewBundle, psr4_prefix: Sylius\Bundle\ReviewBundle, spec_path: src/Sylius/Bundle/ReviewBundle, src_path: src/Sylius/Bundle/ReviewBundle }
     SettingsBundle: { namespace: Sylius\Bundle\SettingsBundle, psr4_prefix: Sylius\Bundle\SettingsBundle, spec_path: src/Sylius/Bundle/SettingsBundle, src_path: src/Sylius/Bundle/SettingsBundle }
