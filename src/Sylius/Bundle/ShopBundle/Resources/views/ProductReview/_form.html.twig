@@ -1,0 +1,19 @@
+{% form_theme form 'SyliusUiBundle:Form:theme.html.twig' %}
+
+<div class="ui segment add-review">
+    <h3>{{ 'sylius.form.review.header'|trans }}</h3>
+    {{ form_start(form, {'action': path('sylius_product_review', {'productId': app.request.attributes.get('productId')}), 'attr': {'class': 'ui form', 'novalidate': 'novalidate', 'id': 'reviewForm'}}) }}
+
+    {{ form_row(form.rating) }}
+
+    {% if form.author is defined %}
+        {{ form_widget(form.author) }}
+    {% endif %}
+
+    {{ form_row(form.title) }}
+    {{ form_row(form.comment) }}
+
+    <button type="submit" class="ui huge primary icon labeled button"><i class="comment outline icon"></i> {{ 'sylius.ui.add_review'|trans }}</button>
+
+    {{ form_end(form, {'render_rest': false}) }}
+</div>

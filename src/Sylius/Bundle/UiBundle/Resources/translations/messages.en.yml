@@ -33,6 +33,7 @@ sylius:
         add_new_permission: 'Add new permission'
         add_new_role: 'Add new role'
         add_province: 'Add province'
+        add_review: 'Add review'
         add_rule: 'Add rule'
         add_to_cart: 'Add to cart'
         add_value: 'Add value'

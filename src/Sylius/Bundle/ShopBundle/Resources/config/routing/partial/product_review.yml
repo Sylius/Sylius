@@ -1,0 +1,28 @@
+sylius_product_reviews:
+    path: /{productId}/reviews/
+    defaults:
+        _controller: sylius.controller.product_review:indexAction
+        _sylius:
+            template: 'SyliusShopBundle:ProductReview:_list.html.twig'
+            repository:
+                method: findAcceptedBySubjectId
+                arguments: [$productId, $limit]
+            permission: false
+
+sylius_product_review_create:
+    path: /{productId}/reviews/new
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.product_review:createAction
+        _sylius:
+            template: 'SyliusShopBundle:ProductReview:_form.html.twig'
+            factory:
+                method: createForSubjectWithReviewer
+                arguments:
+                    subjectId: $productId
+                    reviewer: expr:service('sylius.context.customer').getCustomer()
+            form:
+                type: sylius_product_review
+                options:
+                    author: expr:service('sylius.context.customer').getCustomer()
+            permission: false

@@ -1,0 +1,6 @@
+<div class="ui bottom attached tab segment" data-tab="reviews">
+    <h3>{{ 'sylius.ui.product_reviews'|trans }}</h3>
+    {% render(url('sylius_product_reviews', { 'productId': product.id, limit: 3 })) %}
+    <hr />
+    {% render(url('sylius_product_review_create', { 'productId': product.id })) %}
+</div>
