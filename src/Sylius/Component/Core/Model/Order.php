@@ -346,6 +346,16 @@ class Order extends Cart implements OrderInterface
     /**
      * {@inheritdoc}
      */
+    public function removeShipments()
+    {
+        foreach ($this->getShipments() as $shipment) {
+            $this->removeShipment($shipment);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function hasShipment(ShipmentInterface $shipment)
     {
         return $this->shipments->contains($shipment);

@@ -477,6 +477,16 @@ final class CartContext implements Context
         Assert::false(
             $this->summaryPage->hasProductOutOfStockValidationMessage($product),
             sprintf('I should see validation message for %s product', $product->getName())
+    }
+
+    /**
+     * @Then my cart's total should be :total
+     */
+    public function myCartSTotalShouldBe($total)
+    {
+        Assert::true(
+            $this->summaryPage->hasCartTotal($total),
+            sprintf('Cart total should have %s total, but it does not have.', $total)
         );
     }
 }
