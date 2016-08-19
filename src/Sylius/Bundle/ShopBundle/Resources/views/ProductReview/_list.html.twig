@@ -9,9 +9,9 @@
         <div class="ui bottom attached label">
             {% set author = review.author %}
             {% if author.firstName is not null and author.lastName is not null %}
-                - Author: {{ author.firstName }} {{ author.lastName|first }}.
+                - {{ 'sylius.ui.author'|trans }}: {{ author.firstName }} {{ author.lastName|first }}.
             {% else %}
-                - Author: Guest
+                - {{ 'sylius.ui.author'|trans }}: {{ 'sylius.ui.guest'|trans }}
             {% endif %}
         </div>
     </div>
