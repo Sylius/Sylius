@@ -11,6 +11,7 @@ sylius:
                 confirmation: Verificatie
             remember_me: Onthoud mijn gegevens
             shipping_address: Bezorgadres
+            username: Gebruikersnaam
         user_filter:
             query: Zoeken
         user_change_password:

@@ -11,6 +11,7 @@ sylius:
                 confirmation: Patikrinimas
             remember_me: Prisiminti mane
             shipping_address: Pristatymo adresas
+            username: Vartotojo vardas
         user_filter:
             query: Ieškoti
         user_change_password:

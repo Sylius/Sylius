@@ -27,7 +27,7 @@ sylius:
         simplexml_import_dom: SimpleXML
         token_get_all: Tokenizer
     filesystem:
-        header: Sistema de archivos
+        header: sistema de archivos
         cache:
             header: caché
             help:

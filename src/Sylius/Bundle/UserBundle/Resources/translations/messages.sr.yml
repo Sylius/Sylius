@@ -3,6 +3,8 @@
 
 sylius:
     form:
+        user:
+            username: Кросницко име
         user_change_password:
             current: Тренутна лозинка
             new: Нова лозинка

@@ -30,3 +30,6 @@ sylius:
     product_translation:
         short_description:
             max: 'La description courte ne doit pas dépasser {{ limit }} caractères.'
+    user:
+        email:
+            unique: Cet e-mail est déjà utilisé.

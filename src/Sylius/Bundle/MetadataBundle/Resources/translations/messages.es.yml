@@ -12,7 +12,7 @@ sylius:
         page:
             title: Título
             description: Descripción
-            keywords: Palabras Clave
+            keywords: Palabras clave
             twitter: Twitter Card
         twitter:
             title: Título

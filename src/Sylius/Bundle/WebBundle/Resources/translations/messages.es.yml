@@ -17,13 +17,13 @@ sylius:
                 pending: 'Pendiente %at%'
                 onhold: 'En espera desde %at%'
                 backordered: 'Pendientes desde %at%'
-                cancelled: '%at% cancelado'
+                cancelled: 'Cancelado %at%'
         title: Mi cuenta
     archetype:
         build: Construir prototipo
     block:
         imagine:
-            index: Bloques de imagenes
+            index: Bloques de imágenes
             publishable: Publicado
         simple:
             index: Bloques de texto
@@ -39,7 +39,7 @@ sylius:
         summary:
             clear: Vaciar carrito
             quantity: Cant.
-        total_items: '1 artículo |%count% artículos'
+        total_items: '1 artículo|%count% artículos'
     checkout:
         finalize:
             order:
@@ -69,7 +69,7 @@ sylius:
     homepage:
         splash:
             headline: Bienvenido a Sylius
-            subheadline: ecommerce para Symfony2
+            subheadline: Ecommerce moderno para Symfony2
     menu:
         publishable: Publicado
     meta:
@@ -88,7 +88,7 @@ sylius:
         no_items: Este pedido no contiene productos
         no_promotion: No se utilizaron cupones
         no_shipments: No hay envíos para este pedido
-        no_shipping_charges: Gastos de envío no aplicados
+        no_shipping_charges: No se aplican gastos de envío
         no_taxes: Sin impuestos
         state:
             order_confirmed: Pedido confirmado
@@ -133,7 +133,7 @@ sylius:
         no_reviews: No hay reseñas.
     security:
         login:
-            info: 'Por favor ingrese usando <b>"sylius@example.com"</b> y <b>"sylius"</b> como contraseña'
+            info: 'Por favor inicie sesión usando <b>"sylius@example.com"</b> y <b>"sylius"</b> como contraseña. <small>Mr. Sylius Demo Guide</small>'
             no_account: Sin cuenta todavía
     shipment:
         no_items: No hay elementos para mostrar

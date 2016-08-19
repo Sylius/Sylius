@@ -26,9 +26,9 @@ sylius:
             invalid_date: La fecha fin de publicación no es válida.
     menu_node:
         name:
-            not_blank: Por favor ingrese el nombre del nodo del menu.
+            not_blank: Por favor, introduzca el nombre del nodo del menu.
         label:
-            not_blank: Por favor ingrese la etiqueta del nodo del menu.
+            not_blank: Por favor, introduzca la etiqueta del nodo del menu.
         start_date:
             invalid_date: La fecha de inicio de publicación no es válida.
         end_date:
@@ -37,7 +37,7 @@ sylius:
         name:
             not_blank: Por favor, introduce un nombre de ruta.
         content:
-            not_blank: Por favor, introduce un contenido para la ruta.
+            not_blank: Por favor, introduzca un contenido para la ruta.
         start_date:
             invalid_date: La fecha de inicio de publicación no es válida.
         end_date:
@@ -55,7 +55,7 @@ sylius:
         name:
             not_blank: Por favor introduzca nombre de bloque simple.
         title:
-            not_blank: Por favor ingrese el título de bloque simple.
+            not_blank: Por favor, introduzca el título de bloque simple.
         body:
             not_blank: Por favor ingrese el cuerpo del bloque simple.
         start_date:

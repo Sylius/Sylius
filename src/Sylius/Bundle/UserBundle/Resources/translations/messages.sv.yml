@@ -11,6 +11,7 @@ sylius:
                 confirmation: Verifikation
             remember_me: Kom ihåg mig
             shipping_address: Leveransadress
+            username: Användarnanm
         user_filter:
             query: Sök
         user_change_password:

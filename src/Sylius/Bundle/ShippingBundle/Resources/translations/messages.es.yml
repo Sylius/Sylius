@@ -23,7 +23,7 @@ sylius:
                 label: Tarifa plana por envío
                 amount: Cantidad
             flexible_rate_configuration:
-                label: Tarifa plana
+                label: Tarifa flexible
                 additional_unit_cost: Coste adicional por unidad
                 additional_unit_limit: Límite de artículos adicionales
                 first_unit_cost: Costo del primer artículo
