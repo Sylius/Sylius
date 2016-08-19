@@ -69,7 +69,7 @@ class PromotionProcessor implements PromotionProcessorInterface
         $eligiblePromotions = [];
 
         foreach ($this->preQualifiedPromotionsProvider->getPromotions($subject) as $promotion) {
-            if (!$this->checker->isEligible($subject, $promotion)) {
+            if (!$promotion->isEnabled() || !$this->checker->isEligible($subject, $promotion)) {
                 continue;
             }
 

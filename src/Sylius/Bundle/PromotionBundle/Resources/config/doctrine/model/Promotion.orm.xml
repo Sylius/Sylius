@@ -26,6 +26,7 @@
             <gedmo:sortable-position/>
         </field>
         <field name="exclusive" type="boolean" />
+        <field name="enabled" type="boolean" />
         <field name="usageLimit" column="usage_limit" type="integer" nullable="true" />
         <field name="used" type="integer" />
         <field name="couponBased" column="coupon_based" type="boolean" />

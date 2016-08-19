@@ -50,6 +50,7 @@ sylius:
             add_rule: Add rule
             coupon_based: Coupon based
             exclusive: Exclusive
+            enabled: Enabled
             description: Description
             ends_at: Ends at
             name: Name
