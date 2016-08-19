@@ -3,7 +3,7 @@
         <div class="ui top left attached label">{{ review.title }}</div>
         <div class="ui top right attached label">{{ review.createdAt|format_date('Y-m-d H:i') }}</div>
 
-        <h4>Rating: <div class="ui star rating" data-rating="{{ review.rating }}" data-max-rating="5"></div></h4>
+        <h4>{{ 'sylius.ui.rating'|trans }}: <div class="ui star rating" data-rating="{{ review.rating }}" data-max-rating="5"></div></h4>
         <p>{{ review.comment }}</p>
 
         <div class="ui bottom attached label">
