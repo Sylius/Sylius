@@ -61,9 +61,7 @@
         <service id="sylius.form.type.shipping_rule_unit_count_configuration" class="%sylius.form.type.shipping_rule_unit_count_configuration.class%">
             <tag name="form.type" alias="sylius_shipping_rule_unit_count_configuration" />
         </service>
-        <service id="sylius.shipping_eligibility_checker" class="%sylius.shipping_eligibility_checker.class%">
-            <argument type="service" id="sylius.registry.shipping_rule_checker" />
-        </service>
+        <service id="sylius.shipping_eligibility_checker" class="%sylius.shipping_eligibility_checker.class%" />
         <service id="sylius.shipping_rule_checker.unit_count" class="%sylius.shipping_rule_checker.unit_count.class%">
             <tag name="sylius.shipping_rule_checker" type="unit_count" label="Unit count" />
         </service>
