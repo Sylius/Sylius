@@ -9,6 +9,7 @@ sylius:
             password:
                 label: Passord
             shipping_address: Leveringsadresse
+            username: Brukernavn
         user_filter:
             query: Søk
         user_change_password:

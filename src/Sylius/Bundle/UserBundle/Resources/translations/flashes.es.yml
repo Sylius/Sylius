@@ -12,7 +12,7 @@ sylius:
             reset:
                 success: ¡Tu contraseña se ha restablecido con éxito!
             change:
-                success: ¡Tu contraseña ha sido cambiada exitosamente!
+                success: ¡Tu contraseña ha sido cambiada correctamente!
         reset_password:
             requested: Si el correo electrónico que ha especificado existe en nuestro sistema, le hemos enviado las instrucciones para restablecer su contraseña.
         verification:

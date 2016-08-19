@@ -12,6 +12,7 @@ sylius:
                     products: Productos
                     taxons: Taxonomías
                 configuration:
+                    admin_users: Administradores
                     channels: Canales
                     countries: Países
                     currencies: Monedas
@@ -19,11 +20,11 @@ sylius:
                     locales: Idiomas
                     payment_methods: Modos de pago
                     shipping_methods: Métodos de envío
-                    tax_categories: Categorías de Impuestos
+                    tax_categories: Categorías de impuestos
                     tax_rates: Tasas de impuestos
                     zones: Zonas
                 marketing:
-                    header: Márketing
+                    header: Marketing
                     promotions: Promociones
                 customers:
                     customers: Clientes

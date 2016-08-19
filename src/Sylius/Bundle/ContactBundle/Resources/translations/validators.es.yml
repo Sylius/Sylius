@@ -19,5 +19,5 @@ sylius:
     contact_topic:
         title:
             not_blank: Por favor ingrese el título del tema.
-            min_length: Su título es demasiado corto.
-            max_length: Su título es demasiado largo.
+            min_length: El título es demasiado corto.
+            max_length: El título es demasiado largo.

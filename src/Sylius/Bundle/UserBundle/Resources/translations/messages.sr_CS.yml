@@ -3,6 +3,8 @@
 
 sylius:
     form:
+        user:
+            username: Krosnicko ime
         user_change_password:
             confirmation: Potvrda
         user_reset_password:

@@ -8,6 +8,7 @@ sylius:
             password:
                 label: パスワード
             shipping_address: 配送先住所
+            username: ユーザー名
         user_filter:
             query: 検索
         user_change_password:
