@@ -56,20 +56,6 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
     public function countByCustomer(CustomerInterface $customer);
 
     /**
-     * @param array $configuration
-     *
-     * @return OrderInterface[]
-     */
-    public function revenueBetweenDatesGroupByDate(array $configuration = []);
-
-    /**
-     * @param array $configuration
-     *
-     * @return OrderInterface[]
-     */
-    public function ordersBetweenDatesGroupByDate(array $configuration = []);
-
-    /**
      * @param CustomerInterface $customer
      * @param array $sorting
      *

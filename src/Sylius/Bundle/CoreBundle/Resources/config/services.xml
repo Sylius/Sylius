@@ -113,11 +113,6 @@
         <!-- Form subscriber -->
         <parameter key="sylius.form.event_subscriber.set_customer_type.class">Sylius\Bundle\CoreBundle\Form\EventSubscriber\SetCustomerFormSubscriber</parameter>
 
-        <!-- Data fetchers -->
-        <parameter key="sylius.form.type.data_fetcher.number_of_orders.class">Sylius\Bundle\CoreBundle\Form\Type\DataFetcher\NumberOfOrdersType</parameter>
-        <parameter key="sylius.form.type.data_fetcher.sales_total.class">Sylius\Bundle\CoreBundle\Form\Type\DataFetcher\SalesTotalType</parameter>
-        <parameter key="sylius.form.type.data_fetcher.user_registration.class">Sylius\Bundle\CoreBundle\Form\Type\DataFetcher\UserRegistrationType</parameter>
-
         <parameter key="sylius.authorization_checker.toggleable.class">Sylius\Bundle\CoreBundle\Authorization\ToggleableAuthorizationChecker</parameter>
         <parameter key="sylius.based_on_id_invoice_number_generator.class" >Sylius\Component\Core\Payment\IdBasedInvoiceNumberGenerator</parameter>
 
@@ -460,19 +455,6 @@
         <!-- Form event subscribers-->
         <service id="sylius.form.event_subscriber.set_customer" class="%sylius.form.event_subscriber.set_customer_type.class%">
             <argument type="service" id="sylius.repository.customer" />
-        </service>
-
-        <!-- Data fetchers -->
-        <service id="sylius.form.type.data_fetcher.user_registration" class="%sylius.form.type.data_fetcher.user_registration.class%">
-            <tag name="form.type" alias="sylius_data_fetcher_user_registration" />
-        </service>
-
-        <service id="sylius.form.type.data_fetcher.sales_total" class="%sylius.form.type.data_fetcher.sales_total.class%">
-            <tag name="form.type" alias="sylius_data_fetcher_sales_total" />
-        </service>
-
-        <service id="sylius.form.type.data_fetcher.number_of_orders" class="%sylius.form.type.data_fetcher.number_of_orders.class%">
-            <tag name="form.type" alias="sylius_data_fetcher_number_of_orders" />
         </service>
 
         <service id="sylius.validator.has_enabled_entity" class="%sylius.validator.has_enabled_entity.class%">
