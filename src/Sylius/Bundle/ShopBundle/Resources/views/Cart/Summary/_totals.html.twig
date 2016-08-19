@@ -6,21 +6,21 @@
         <tbody>
         <tr>
             <td>{{ 'sylius.ui.tax'|trans }}:</td>
-            <td id="sylius-cart-tax-total" class="right aligned">{{ cart.taxTotal|sylius_price }}</td>
+            <td id="sylius-cart-tax-total" class="right aligned">{{ cart.taxTotal|sylius_price(cart.currencyCode) }}</td>
         </tr>
         <tr>
             <td>{{ 'sylius.ui.shipping'|trans }}:</td>
-            <td id="sylius-cart-shipping-total" class="right aligned">{{ cart.shippingTotal|sylius_price }}</td>
+            <td id="sylius-cart-shipping-total" class="right aligned">{{ cart.shippingTotal|sylius_price(cart.currencyCode) }}</td>
         </tr>
         {% if promotionTotal %}
         <tr>
             <td>{{ 'sylius.ui.discount'|trans }}:</td>
-            <td id="sylius-cart-promotion-total" class="right aligned">-{{ (-1 * promotionTotal)|sylius_price }}</td>
+            <td id="sylius-cart-promotion-total" class="right aligned">-{{ (-1 * promotionTotal)|sylius_price(cart.currencyCode) }}</td>
         </tr>
         {% endif %}
         <tr style="font-size: 2em;">
             <td>{{ 'sylius.ui.order_total'|trans }}:</td>
-            <td id="sylius-cart-grand-total" class="right aligned">{{ cart.total|sylius_price }}</td>
+            <td id="sylius-cart-grand-total" class="right aligned">{{ cart.total|sylius_price(cart.currencyCode) }}</td>
         </tr>
         </tbody>
     </table>
