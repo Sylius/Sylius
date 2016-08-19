@@ -11,6 +11,26 @@ Feature: Removing cart item from cart
 
     @ui
     Scenario: Removing cart item
-        Given I see the summary of my cart
-        When I remove product "T-shirt banana" from the cart
+        Given I add this product to the cart
+        When I see the summary of my cart
+        And I remove product "T-shirt banana" from the cart
         Then my cart should be empty
+        And my cart's total should be "$0.00"
+
+    @ui
+    Scenario: Removing cart item when the store has defined default shipping method
+        Given the store has "UPS" shipping method with "$20.00" fee
+        And I add this product to the cart
+        When I see the summary of my cart
+        And I remove product "T-shirt banana" from the cart
+        Then my cart should be empty
+        And my cart's total should be "$0.00"
+
+    @ui
+    Scenario: Checking cart's total after removing one item
+        Given I add this product to the cart
+        And the store has a product "T-shirt strawberry" priced at "$17.22"
+        And I add this product to the cart
+        When I see the summary of my cart
+        And I remove product "T-shirt banana" from the cart
+        And my cart's total should be "$17.22"
