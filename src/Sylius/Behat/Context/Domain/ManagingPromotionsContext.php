@@ -21,7 +21,7 @@ use Webmozart\Assert\Assert;
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-final class PromotionContext implements Context
+final class ManagingPromotionsContext implements Context
 {
     /**
      * @var SharedStorageInterface
@@ -46,26 +46,16 @@ final class PromotionContext implements Context
     }
 
     /**
+     * @When /^I delete a ("([^"]+)" promotion)$/
      * @When /^I try to delete a ("([^"]+)" promotion)$/
      */
     public function iTryToDeletePromotion(PromotionInterface $promotion)
     {
         try {
             $this->promotionRepository->remove($promotion);
-
-            throw new \Exception(sprintf('Promotion "%s" has been removed, but it should not.', $promotion->getName()));
         } catch (ForeignKeyConstraintViolationException $exception) {
             $this->sharedStorage->set('last_exception', $exception);
         }
-    }
-
-    /**
-     * @When /^I delete a ("([^"]+)" promotion)$/
-     */
-    public function iDeletePromotion(PromotionInterface $promotion)
-    {
-        $this->sharedStorage->set('promotion', $promotion);
-        $this->promotionRepository->remove($promotion);
     }
 
     /**

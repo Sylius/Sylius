@@ -19,7 +19,7 @@ use Webmozart\Assert\Assert;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-final class PaymentContext implements Context
+final class ManagingPaymentsContext implements Context
 {
     /**
      * @var PaymentRepositoryInterface

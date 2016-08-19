@@ -23,7 +23,7 @@ use Webmozart\Assert\Assert;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-final class OrderContext implements Context
+final class ManagingOrdersContext implements Context
 {
     /**
      * @var SharedStorageInterface
@@ -95,14 +95,18 @@ final class OrderContext implements Context
             $order->getBillingAddress()->getId(),
         ]);
 
+        $this->sharedStorage->set('order_id', $order->getId());
         $this->orderRepository->remove($order);
     }
 
     /**
-     * @Then /^(this order) should not exist in the registry$/
+     * @Then this order should not exist in the registry
      */
-    public function orderShouldNotExistInTheRegistry(OrderInterface $order)
+    public function orderShouldNotExistInTheRegistry()
     {
+        $orderId = $this->sharedStorage->get('order_id');
+        $order = $this->orderRepository->find($orderId);
+
         Assert::null($order);
     }
 
