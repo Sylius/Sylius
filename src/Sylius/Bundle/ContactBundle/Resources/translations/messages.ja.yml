@@ -1,9 +1,0 @@
-# This file is part of the Sylius package.
-# (c) Paweł Jędrzejewski
-
-sylius:
-    form:
-        contact_request:
-            first_name: 名
-            last_name: 姓
-            email: メールアドレス

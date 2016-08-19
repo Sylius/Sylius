@@ -36,7 +36,6 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         'sylius_api',
         'sylius_attribute',
         'sylius_channel',
-        'sylius_contact',
         'sylius_currency',
         'sylius_customer',
         'sylius_inventory',

@@ -9,7 +9,6 @@ Symfony Bundles
     SyliusArchetypeBundle/index
     SyliusAttributeBundle/index
     SyliusCartBundle/index
-    SyliusContactBundle/index
     SyliusFixturesBundle/index
     SyliusFlowBundle/index
     SyliusGridBundle/index
