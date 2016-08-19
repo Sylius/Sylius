@@ -24,6 +24,4 @@ Flexible shipping cost calculation system allows you to create your own calculat
    custom_calculators
    resolving_available_methods
    shipping_requirements
-   default_checkers
-   custom_checkers
    summary
