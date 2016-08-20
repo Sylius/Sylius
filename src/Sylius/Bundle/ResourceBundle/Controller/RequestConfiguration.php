@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\ResourceBundle\Controller;
 
 use Sylius\Component\Resource\Metadata\MetadataInterface;
+use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 
@@ -145,10 +146,21 @@ class RequestConfiguration
         $form = $this->parameters->get('form', sprintf('%s_%s', $this->metadata->getApplicationName(), $this->metadata->getName()));
 
         if (is_array($form) && array_key_exists('options', $form)) {
-            return $form['options'];
+            $formOptions = $form['options'];
+        } else {
+            $formOptions = [];
         }
 
-        return [];
+        $defaultFormOptions = [
+            'action' => $this->request->getRequestUri(),
+            'method' => 'POST',
+        ];
+
+        if (in_array($this->request->getMethod(), [ 'PUT', 'PATCH' ]) && ResourceActions::UPDATE == $this->parameters->get('actionName')) {
+            $defaultFormOptions['method'] = $this->request->getMethod();
+        }
+
+        return array_merge($defaultFormOptions, $formOptions);
     }
 
     /**

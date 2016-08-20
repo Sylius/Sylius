@@ -39,6 +39,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\DependencyInjection\ContainerAware;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormView;
+use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -292,6 +293,8 @@ final class ResourceControllerSpec extends ObjectBehavior
         Request $request,
         AuthorizationCheckerInterface $authorizationChecker
     ) {
+        $request->attributes = new ParameterBag();
+
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
         $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::CREATE)->willReturn('sylius.product.create');
@@ -319,6 +322,8 @@ final class ResourceControllerSpec extends ObjectBehavior
         Request $request,
         Response $response
     ) {
+        $request->attributes = new ParameterBag();
+
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 
@@ -368,6 +373,8 @@ final class ResourceControllerSpec extends ObjectBehavior
         Request $request,
         Response $response
     ) {
+        $request->attributes = new ParameterBag();
+
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 
@@ -418,6 +425,8 @@ final class ResourceControllerSpec extends ObjectBehavior
         Request $request,
         Response $response
     ) {
+        $request->attributes = new ParameterBag();
+
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 
@@ -463,6 +472,8 @@ final class ResourceControllerSpec extends ObjectBehavior
         Request $request,
         Response $redirectResponse
     ) {
+        $request->attributes = new ParameterBag();
+
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 
@@ -516,6 +527,8 @@ final class ResourceControllerSpec extends ObjectBehavior
         Request $request,
         Response $redirectResponse
     ) {
+        $request->attributes = new ParameterBag();
+
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 
@@ -566,6 +579,8 @@ final class ResourceControllerSpec extends ObjectBehavior
         Request $request,
         Response $response
     ) {
+        $request->attributes = new ParameterBag();
+
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 
@@ -617,6 +632,8 @@ final class ResourceControllerSpec extends ObjectBehavior
         Request $request,
         ResourceControllerEvent $event
     ) {
+        $request->attributes = new ParameterBag();
+
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 
@@ -659,6 +676,8 @@ final class ResourceControllerSpec extends ObjectBehavior
         Request $request,
         AuthorizationCheckerInterface $authorizationChecker
     ) {
+        $request->attributes = new ParameterBag();
+
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
         $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::UPDATE)->willReturn('sylius.product.update');
@@ -680,6 +699,8 @@ final class ResourceControllerSpec extends ObjectBehavior
         RepositoryInterface $repository,
         SingleResourceProviderInterface $singleResourceProvider
     ) {
+        $request->attributes = new ParameterBag();
+
         $requestConfigurationFactory->create($metadata, $request)->willReturn($configuration);
         $configuration->hasPermission()->willReturn(true);
         $configuration->getPermission(ResourceActions::UPDATE)->willReturn('sylius.product.update');
@@ -708,6 +729,8 @@ final class ResourceControllerSpec extends ObjectBehavior
         Request $request,
         Response $response
     ) {
+        $request->attributes = new ParameterBag();
+
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 
@@ -761,6 +784,8 @@ final class ResourceControllerSpec extends ObjectBehavior
         Request $request,
         Response $response
     ) {
+        $request->attributes = new ParameterBag();
+
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 
@@ -814,6 +839,8 @@ final class ResourceControllerSpec extends ObjectBehavior
         Request $request,
         Response $response
     ) {
+        $request->attributes = new ParameterBag();
+
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 
@@ -857,6 +884,8 @@ final class ResourceControllerSpec extends ObjectBehavior
         Request $request,
         Response $redirectResponse
     ) {
+        $request->attributes = new ParameterBag();
+
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 
@@ -911,6 +940,8 @@ final class ResourceControllerSpec extends ObjectBehavior
         Request $request,
         Response $redirectResponse
     ) {
+        $request->attributes = new ParameterBag();
+
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 
@@ -965,6 +996,8 @@ final class ResourceControllerSpec extends ObjectBehavior
         Request $request,
         Response $response
     ) {
+        $request->attributes = new ParameterBag();
+
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 
@@ -1014,6 +1047,8 @@ final class ResourceControllerSpec extends ObjectBehavior
         Form $form,
         Request $request
     ) {
+        $request->attributes = new ParameterBag();
+
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 
@@ -1067,6 +1102,8 @@ final class ResourceControllerSpec extends ObjectBehavior
         Request $request,
         Response $redirectResponse
     ) {
+        $request->attributes = new ParameterBag();
+
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 

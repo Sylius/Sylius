@@ -16,6 +16,7 @@ use Prophecy\Argument;
 use Sylius\Bundle\ResourceBundle\Controller\Parameters;
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Component\Resource\Metadata\MetadataInterface;
+use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -91,32 +92,100 @@ final class RequestConfigurationSpec extends ObjectBehavior
         $this->getTemplate('foo.html')->shouldReturn('AppBundle:Product:show.html.twig');
     }
 
-    function it_generates_form_type(MetadataInterface $metadata, Parameters $parameters)
+    function it_generates_form_type(Request $request, MetadataInterface $metadata, Parameters $parameters)
     {
+        $request->getRequestUri()->willReturn('/');
+        $request->getMethod()->willReturn('POST');
+        $request->getRequestFormat()->willReturn('html');
+
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 
         $parameters->get('form', 'sylius_product')->willReturn('sylius_product');
         $this->getFormType()->shouldReturn('sylius_product');
-        $this->getFormOptions()->shouldReturn([]);
+        $this->getFormOptions()->shouldReturn([
+            'action' => '/',
+            'method' => 'POST',
+        ]);
 
         $parameters->get('form', 'sylius_product')->willReturn('sylius_product_pricing');
         $this->getFormType()->shouldReturn('sylius_product_pricing');
-        $this->getFormOptions()->shouldReturn([]);
+        $this->getFormOptions()->shouldReturn([
+            'action' => '/',
+            'method' => 'POST',
+        ]);
+
+        $request->getMethod()->willReturn('PATCH');
+
+        $parameters->get('actionName')->willReturn(ResourceActions::CREATE);
+        $parameters->get('form', 'sylius_product')->willReturn('sylius_product');
+        $this->getFormType()->shouldReturn('sylius_product');
+        $this->getFormOptions()->shouldReturn([
+            'action' => '/',
+            'method' => 'POST',
+        ]);
+
+        $parameters->get('actionName')->willReturn(ResourceActions::UPDATE);
+        $parameters->get('form', 'sylius_product')->willReturn('sylius_product');
+        $this->getFormType()->shouldReturn('sylius_product');
+        $this->getFormOptions()->shouldReturn([
+            'action' => '/',
+            'method' => 'PATCH',
+        ]);
     }
 
-    function it_generates_form_type_with_array_configuration(MetadataInterface $metadata, Parameters $parameters)
+    function it_generates_form_type_with_array_configuration(Request $request, MetadataInterface $metadata, Parameters $parameters)
     {
+        $request->getRequestUri()->willReturn('/');
+        $request->getMethod()->willReturn('POST');
+
         $metadata->getApplicationName()->willReturn('sylius');
         $metadata->getName()->willReturn('product');
 
         $parameters->get('form', 'sylius_product')->willReturn(['type'=> 'sylius_product', 'options' => ['validation_groups' => ['sylius']]]);
         $this->getFormType()->shouldReturn('sylius_product');
-        $this->getFormOptions()->shouldReturn(['validation_groups' => ['sylius']]);
+        $this->getFormOptions()->shouldReturn([
+            'action' => '/',
+            'method' => 'POST',
+            'validation_groups' => ['sylius'],
+        ]);
 
         $parameters->get('form', 'sylius_product')->willReturn(['type'=> 'sylius_product_pricing', 'options' => ['validation_groups' => ['sylius', 'custom_group']]]);
         $this->getFormType()->shouldReturn('sylius_product_pricing');
-        $this->getFormOptions()->shouldReturn(['validation_groups' => ['sylius', 'custom_group']]);
+        $this->getFormOptions()->shouldReturn([
+            'action' => '/',
+            'method' => 'POST',
+            'validation_groups' => ['sylius', 'custom_group'],
+        ]);
+
+        $request->getMethod()->willReturn('PATCH');
+
+        $parameters->get('actionName')->willReturn(ResourceActions::CREATE);
+        $parameters->get('form', 'sylius_product')->willReturn(['type'=> 'sylius_product', 'options' => ['validation_groups' => ['sylius']]]);
+        $this->getFormType()->shouldReturn('sylius_product');
+        $this->getFormOptions()->shouldReturn([
+            'action' => '/',
+            'method' => 'POST',
+            'validation_groups' => ['sylius'],
+        ]);
+
+        $parameters->get('actionName')->willReturn(ResourceActions::UPDATE);
+        $parameters->get('form', 'sylius_product')->willReturn(['type'=> 'sylius_product_pricing', 'options' => ['validation_groups' => ['sylius', 'custom_group']]]);
+        $this->getFormType()->shouldReturn('sylius_product_pricing');
+        $this->getFormOptions()->shouldReturn([
+            'action' => '/',
+            'method' => 'PATCH',
+            'validation_groups' => ['sylius', 'custom_group'],
+        ]);
+
+        $parameters->get('actionName')->willReturn(ResourceActions::UPDATE);
+        $parameters->get('form', 'sylius_product')->willReturn(['type'=> 'sylius_product_pricing', 'options' => ['validation_groups' => ['sylius', 'custom_group'], 'action' => '/test', 'method' => 'PUT']]);
+        $this->getFormType()->shouldReturn('sylius_product_pricing');
+        $this->getFormOptions()->shouldReturn([
+            'action' => '/test',
+            'method' => 'PUT',
+            'validation_groups' => ['sylius', 'custom_group'],
+        ]);
     }
 
     function it_generates_route_names(MetadataInterface $metadata, Parameters $parameters)
