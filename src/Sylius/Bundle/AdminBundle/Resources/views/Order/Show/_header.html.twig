@@ -4,8 +4,7 @@
         {{ 'sylius.ui.order'|trans }} #{{ order.number }}
         <div class="sub header">
             {{ order.completedAt|format_date }}
-
-            {{ label.default(('sylius.ui.'~order.state)|trans) }}
+            {% include [('@SyliusAdmin/Order/Label/State' ~ '/' ~ order.state ~ '.html.twig'), '@SyliusUi/Label/_default.html.twig'] with {'value': ('sylius.ui.' ~ order.state)|trans} %}
 
             {{ 'sylius.ui.purchased_from'|trans }}
             <strong class="ui small header" style="color: {{ order.channel.color }}">{{ order.channel.code }}</strong>
