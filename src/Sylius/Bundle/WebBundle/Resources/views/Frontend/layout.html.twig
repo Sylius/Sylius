@@ -88,7 +88,6 @@
                     {% render controller('sylius.controller.search:formAction', {'request':app.request}) %}
                 </div>
                 <h4>{{ 'sylius.ui.shop_by'|trans }}</h4><br>
-                {% include 'SyliusSearchBundle::filter_form.html.twig' %}<br>
 
                 {{ knp_menu_render('sylius.frontend.taxons', {'template': 'SyliusWebBundle:Frontend:menu.html.twig'}) }}
                 {{ render(url('sylius_partial_product_latest', {'limit': 5, 'template': 'SyliusWebBundle:Frontend/Product:latestSidebar.html.twig'})) }}
