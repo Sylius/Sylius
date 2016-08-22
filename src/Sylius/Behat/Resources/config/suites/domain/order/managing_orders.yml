@@ -24,9 +24,9 @@ default:
                 - sylius.behat.context.domain.notification
                 - sylius.behat.context.domain.security
 
-                - sylius.behat.context.domain.order
-                - sylius.behat.context.domain.payment
-                - sylius.behat.context.domain.shipment
+                - sylius.behat.context.domain.managing_orders
+                - sylius.behat.context.domain.managing_payments
+                - sylius.behat.context.domain.managing_shipments
 
             filters:
                 tags: "@managing_orders && @domain"

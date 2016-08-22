@@ -23,7 +23,7 @@ use Webmozart\Assert\Assert;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-final class OrderContext implements Context
+final class ManagingOrdersContext implements Context
 {
     /**
      * @var SharedStorageInterface
@@ -84,12 +84,6 @@ final class OrderContext implements Context
      */
     public function iDeleteTheOrder(OrderInterface $order)
     {
-        /** @var OrderInterface $order */
-        $order = $this->orderRepository->findOneBy(['number' => $order->getNumber()]);
-        if (null === $order) {
-            throw new \InvalidArgumentException(sprintf('Order with %s number was not found in an order repository', $order->getNumber()));
-        }
-
         $adjustmentsId = [];
         foreach ($order->getAdjustments() as $adjustment) {
             $adjustmentsId[] = $adjustment->getId();
@@ -101,16 +95,17 @@ final class OrderContext implements Context
             $order->getBillingAddress()->getId(),
         ]);
 
+        $this->sharedStorage->set('order_id', $order->getId());
         $this->orderRepository->remove($order);
     }
 
     /**
-     * @Then /^([^"]+) should not exist in the registry$/
+     * @Then this order should not exist in the registry
      */
-    public function orderShouldNotExistInTheRegistry(OrderInterface $order)
+    public function orderShouldNotExistInTheRegistry()
     {
-        /** @var OrderInterface $order */
-        $order = $this->orderRepository->findOneBy(['number' => $order->getNumber()]);
+        $orderId = $this->sharedStorage->get('order_id');
+        $order = $this->orderRepository->find($orderId);
 
         Assert::null($order);
     }
@@ -126,7 +121,7 @@ final class OrderContext implements Context
     }
 
     /**
-     * @Then /^billing and shipping addresses of this order should not exist$/
+     * @Then billing and shipping addresses of this order should not exist
      */
     public function addressesShouldNotExistInTheRegistry()
     {
@@ -138,7 +133,7 @@ final class OrderContext implements Context
     }
 
     /**
-     * @Then /^adjustments of this order should not exist$/
+     * @Then adjustments of this order should not exist
      */
     public function adjustmentShouldNotExistInTheRegistry()
     {

@@ -19,7 +19,7 @@ use Webmozart\Assert\Assert;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-final class ShippingContext implements Context
+final class ManagingShipmentsContext implements Context
 {
     /**
      * @var ShipmentRepositoryInterface
@@ -39,8 +39,8 @@ final class ShippingContext implements Context
      */
     public function shipmentShouldNotExistInTheRegistry(ShippingMethodInterface $shippingMethod)
     {
-        $shippings = $this->shipmentRepository->findBy(['method' => $shippingMethod]);
+        $shipments = $this->shipmentRepository->findBy(['method' => $shippingMethod]);
 
-        Assert::same($shippings, []);
+        Assert::same($shipments, []);
     }
 }

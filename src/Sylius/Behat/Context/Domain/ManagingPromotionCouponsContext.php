@@ -22,7 +22,7 @@ use Webmozart\Assert\Assert;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-final class PromotionCouponContext implements Context
+final class ManagingPromotionCouponsContext implements Context
 {
     /**
      * @var SharedStorageInterface
@@ -45,6 +45,7 @@ final class PromotionCouponContext implements Context
     }
 
     /**
+     * @When /^I delete ("[^"]+" coupon) related to (this promotion)$/
      * @When /^I try to delete ("[^"]+" coupon) related to (this promotion)$/
      */
     public function iTryToDeleteCoupon(CouponInterface $coupon, PromotionInterface $promotion)
@@ -52,21 +53,9 @@ final class PromotionCouponContext implements Context
         try {
             $promotion->removeCoupon($coupon);
             $this->couponRepository->remove($coupon);
-
-            throw new \Exception(sprintf('Coupon "%s" has been removed, but it should not.', $coupon->getCode()));
         } catch(ForeignKeyConstraintViolationException $exception) {
             $this->sharedStorage->set('last_exception', $exception);
         }
-    }
-
-    /**
-     * @When /^I delete ("[^"]+" coupon) related to (this promotion)$/
-     */
-    public function iDeleteCouponRelatedTo(CouponInterface $coupon, PromotionInterface $promotion)
-    {
-        $this->sharedStorage->set('coupon', $coupon);
-        $this->couponRepository->remove($coupon);
-        $promotion->removeCoupon($coupon);
     }
 
     /**

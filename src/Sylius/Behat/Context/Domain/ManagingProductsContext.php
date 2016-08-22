@@ -24,7 +24,7 @@ use Webmozart\Assert\Assert;
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
  */
-final class ProductContext implements Context
+final class ManagingProductsContext implements Context
 {
     /**
      * @var SharedStorageInterface
@@ -66,19 +66,12 @@ final class ProductContext implements Context
 
     /**
      * @When /^I delete the ("[^"]+" variant of product "[^"]+")$/
+     * @When /^I try to delete the ("[^"]+" variant of product "[^"]+")$/
      */
     public function iDeleteTheVariantOfProduct(ProductVariantInterface $productVariant)
     {
-        $this->sharedStorage->set('product_variant_id', $productVariant->getId());
-        $this->productVariantRepository->remove($productVariant);
-    }
-
-    /**
-     * @When /^I try to delete the ("[^"]+" variant of product "[^"]+")$/
-     */
-    public function iTryToDeleteTheVariantOfProduct(ProductVariantInterface $productVariant)
-    {
         try {
+            $this->sharedStorage->set('product_variant_id', $productVariant->getId());
             $this->productVariantRepository->remove($productVariant);
         } catch (DBALException $exception) {
             $this->sharedStorage->set('last_exception', $exception);
@@ -86,11 +79,13 @@ final class ProductContext implements Context
     }
 
     /**
+     * @When /^I delete the ("[^"]+" product)$/
      * @When /^I try to delete the ("([^"]+)" product)$/
      */
-    public function iTryToDeleteTheProduct(ProductInterface $product)
+    public function iDeleteTheProduct(ProductInterface $product)
     {
         try {
+            $this->sharedStorage->set('product_id', $product->getId());
             $this->productRepository->remove($product);
         } catch (DBALException $exception) {
             $this->sharedStorage->set('last_exception', $exception);
@@ -106,7 +101,7 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Then /^this variant should not exist in the product catalog$/
+     * @Then this variant should not exist in the product catalog
      */
     public function productVariantShouldNotExistInTheProductCatalog()
     {
@@ -117,36 +112,25 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Then /^(this variant) should still exist in the product catalog$/
+     * @Then this variant should still exist in the product catalog
      */
-    public function productVariantShouldExistInTheProductCatalog(ProductVariantInterface $productVariant)
+    public function productVariantShouldExistInTheProductCatalog()
     {
-        $productVariant = $this->productVariantRepository->find($productVariant->getId());
+        $productVariantId = $this->sharedStorage->get('product_variant_id');
+        $productVariant = $this->productVariantRepository->find($productVariantId);
 
         Assert::notNull($productVariant);
     }
 
     /**
-     * @Then /^(this product) should still exist in the product catalog$/
+     * @Then this product should still exist in the product catalog
      */
-    public function productShouldExistInTheProductCatalog(ProductInterface $product)
+    public function productShouldExistInTheProductCatalog()
     {
-        $product = $this->productRepository->find($product->getId());
+        $productId = $this->sharedStorage->get('product_id');
+        $product = $this->productRepository->find($productId);
 
         Assert::notNull($product);
-    }
-
-    /**
-     * @When /^I delete the ("[^"]+" product)$/
-     */
-    public function iDeleteTheProduct(ProductInterface $product)
-    {
-        try {
-            $this->sharedStorage->set('deleted_product', $product);
-            $this->productRepository->remove($product);
-        } catch (DBALException $exception) {
-            $this->sharedStorage->set('last_exception', $exception);
-        }
     }
 
     /**
