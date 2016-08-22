@@ -682,7 +682,8 @@ sylius_rbac:
         it: [security_auditor, developer]
 
 sylius_resource:
-    translation: true
+    translation:
+        locale_provider: sylius.locale_provider.admin
 
 sylius_review:
     resources:
