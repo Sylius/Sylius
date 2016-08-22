@@ -19,10 +19,8 @@ use Payum\Core\Security\GenericTokenFactoryInterface;
 use Payum\Core\Security\HttpRequestVerifierInterface;
 use Sylius\Bundle\PayumBundle\Request\GetStatus;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
-use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\OrderProcessing\StateResolverInterface;
-use Sylius\Component\Order\OrderTransitions;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -31,38 +29,6 @@ use Webmozart\Assert\Assert;
 
 class OrderController extends ResourceController
 {
-    /**
-     * @param Request $request
-     * @param int $id
-     *
-     * @return Response
-     *
-     * @throws NotFoundHttpException
-     */
-    public function indexByCustomerAction(Request $request, $id)
-    {
-        $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
-        $customer = $this->container->get('sylius.repository.customer')->findForDetailsPage($id);
-
-        if (!$customer) {
-            throw new NotFoundHttpException('Requested customer does not exist.');
-        }
-
-        $paginator = $this->repository->createPaginatorByCustomer($customer, $configuration->getSorting());
-
-        $paginator->setCurrentPage($request->get('page', 1), true, true);
-        $paginator->setMaxPerPage($configuration->getPaginationMaxPerPage());
-
-        // Fetch and cache deleted orders
-        $paginator->getCurrentPageResults();
-        $paginator->getNbResults();
-
-        return $this->container->get('templating')->renderResponse('SyliusWebBundle:Backend/Order:indexByCustomer.html.twig', [
-            'customer' => $customer,
-            'orders' => $paginator,
-        ]);
-    }
-
     /**
      * @param Request $request
      *
