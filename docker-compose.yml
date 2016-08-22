@@ -16,9 +16,10 @@ services:
         entrypoint: /var/www/etc/docker/php/entrypoint.sh
         volumes:
             - .:/var/www
-            - data:/var/www/sylius
+            - data:/var/www/web/media
             - cache:/var/www/app/cache
             - logs:/var/www/app/logs
+            - ./etc/docker/parameters.yml:/var/www/app/config/parameters.yml
         depends_on:
             - database
 
@@ -37,4 +38,3 @@ services:
         image: mariadb
         environment:
             MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-            MYSQL_DATABASE: "sylius"
