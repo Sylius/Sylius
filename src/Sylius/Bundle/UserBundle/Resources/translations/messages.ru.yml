@@ -11,6 +11,7 @@ sylius:
                 confirmation: Верификация
             remember_me: Запомнить меня
             shipping_address: Адрес доставки
+            username: Логин
         user_filter:
             query: Поиск
         user_change_password:

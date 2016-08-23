@@ -272,7 +272,7 @@ sylius:
         message: Zpráva
         method: Metoda
         modified: Změněno
-        my_account: Účet
+        my_account: Můj účet
         n_a: Není k dispozici
         name: Jméno
         new: Nový

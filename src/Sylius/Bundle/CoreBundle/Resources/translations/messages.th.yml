@@ -21,7 +21,7 @@ sylius:
             payment_method: วิธีการชำระเงิน
             shipping_method: วิธีการจัดส่ง
         promotion:
-            channels: ช่องทางการจัดจำหน่าย
+            channels: ช่องทางจำหน่าย
         coupon:
             per_customer_usage_limit: จำกัดการใช้งานสำหรับลูกค้าแต่ละคน
         group:
@@ -62,7 +62,7 @@ sylius:
             short_description: คำอธิบายโดยย่อ
             variant_selection_method: วิธีการเลือกตัวแปร
             main_taxon: หมวดหมู่หลัก
-            channels: ช่องทางการจัดจำหน่าย
+            channels: ช่องทางจำหน่าย
             enabled: เปิดใช้งานแล้ว
         product_filter:
             name: ชื่อ
