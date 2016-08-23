@@ -77,9 +77,6 @@ EOT
         $userRepository = $this->get('sylius.repository.admin_user');
         $userFactory = $this->get('sylius.factory.admin_user');
 
-        $rbacInitializer = $this->get('sylius.rbac.initializer');
-        $rbacInitializer->initialize();
-
         /** @var AdminUserInterface $user */
         $user = $userFactory->createNew();
 
@@ -107,7 +104,6 @@ EOT
         }
 
         $user->setEnabled(true);
-        $user->addAuthorizationRole($this->get('sylius.repository.role')->findOneBy(['code' => 'administrator']));
 
         $userManager->persist($user);
         $userManager->flush();

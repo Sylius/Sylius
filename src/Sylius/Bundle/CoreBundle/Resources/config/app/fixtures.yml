@@ -70,7 +70,6 @@ sylius_fixtures:
                                 last_name: Doe
                                 password: sylius
 
-                rbac: ~
                 admin_user:
                     name: admin_user
                     options:

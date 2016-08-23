@@ -77,7 +77,7 @@ final class AdminUserExampleFactory implements ExampleFactoryInterface
         $user->addRole('ROLE_ADMINISTRATION_ACCESS');
 
         if ($options['api']) {
-            $this->addUserRole($user, 'ROLE_API_ACCESS', 'api_administrator');
+            $user->addRole('ROLE_API_ACCESS');
         }
 
         return $user;
