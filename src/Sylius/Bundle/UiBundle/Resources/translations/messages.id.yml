@@ -15,6 +15,7 @@ sylius:
         city: Kota
         code: Kode
         company: Perusahaan
+        content: Isi
         coupon: Kupon
         currency: Mata Uang
         current_stock: Stok

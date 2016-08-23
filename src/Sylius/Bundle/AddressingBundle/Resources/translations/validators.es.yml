@@ -57,4 +57,4 @@ sylius:
     zone_member:
         code:
             not_blank: Elija un integrante de la zona.
-        unique: Ese elemento ya está en la zona.
+        unique: El miembro de zona elegido ya está en la zona.

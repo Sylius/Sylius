@@ -14,40 +14,63 @@ sylius:
         about: Om
         access_your_store_account_or_create_a_new_one: Använd ditt butikskonto eller skapa ett nytt
         account_credentials: Kontouppgifter
+        action: Åtgärd
         actions: Åtgärder
         add: Lägg tilll
         add_action: Lägg till åtgärd
+        add_attribute: Lägg till attribut
         add_attributes: Lägg till attribut
+        add_channel: Lägg till kanal
+        add_choice: Lägg till val
         add_coupon: Lägg till kupong
+        add_image: Lägg till bild
         add_member: Lägg till medlem
+        add_menu_element: Lägg till menyelement
+        add_new_email: Lägg till nytt e-postmeddelande
+        add_new_role: Lägg till ny roll
         add_province: Lägg till provins
         add_rule: Lägg till regel
         add_to_cart: Lägg i varukorg
         add_value: Lägg till värde
+        adding_new_customer_groups: Lägger till nya kundgrupper
+        adding_new_email: Lägger till nytt e-postmeddelande
+        address: Adress
         addressing: Adressering
+        adjustments: Justeringar
         administration: Administration
+        administration_dashboard: Administrationspanel
         administration_panel_login: 'Administrationspanel - inloggning'
+        admin_users: Administratörer
         all: Alla
+        all_your_addresses: Alla dina adresser
         amount: Belopp
         an_error_occurred: Ett fel uppstod
+        api: Api
         apply_coupon: Använd kupong
         are_your_sure_you_want_to_perform_this_action: Är du säker på att du vill utföra den här åtgärden?
         assortment: Sortiment
         attributes: Attribut
         author: Författare
+        availability: Tillgänglighet
         available_for_channels: Tillgänglig för kanaler
         available_on: Tillgänglig på
         available_on_hand: Tillgänglig på begäran
         available_until: Tillgänglig till
         average_order_value: Genomsnittsligt ordervärde
+        awaiting_payment: Väntar på betalning
+        back: Tillbaka
         back_to_store: Tillbaka till butik
         backordered: Restnoterad
+        balance_due: Betalning förfaller
+        bill_to: Fakturera till
         billing_address: Faktureringsadress
         blocks: Block
         body: Brödtext
+        browse_products: Bläddra bland produkter
         calculator: Kalkylator
         cancel: Avbryt
         cancelled: Avbruten
+        cart: Varukorg
         categorization: Kategorisering
         category: Kategori
         category_requirements: Kategorikrav
@@ -55,10 +78,12 @@ sylius:
         change_password: Byt lösenord
         change_shipping_method: Ändra leveranssätt
         change_your_password: Ändra ditt lösenord
+        channel: Kanal
         channels: Kanaler
         charges_and_taxes: Avgifter och skatter
         checking_out_as: Kolla in som
         checkout: Kassa
+        choose_file: Välj fil
         city: Ort
         clear_cart: Töm varukorg
         clear_filters: Rensa filter
@@ -74,6 +99,9 @@ sylius:
         confirm_your_action: Bekräfta din åtgärd
         confirmation: Bekräftelse
         confirmation_title: Bekräftelse
+        confirmed: Bekräftad
+        contact_request_show: Kontaktförfrågan
+        contact_requests: Kontaktförfrågningar
         contact_us: Kontakta oss
         contains: Innehåller
         content: Innehåll
@@ -85,24 +113,38 @@ sylius:
         create: Skapa
         create_a_new_customer_account: Skapa ett nytt kundkonto
         create_an_account: Skapa ett konto
+        create_taxon: Skapa taxon
+        create_user: Skapa användare
         currencies: Valutor
+        currency: Valuta
         current_orders: Aktuella order
         current_password: Nuvarande lösenord
+        current_promotions: Aktuella kampanjer
         current_stock: I lager
-        customer: Kund
+        customer: Kunder
         customer_can_login_to_the_store: Kund kan logga in i butiken
         customer_care: Kundtjänst
+        customer_details: Kunduppgifter
         customer_login: Kundinloggning
+        customer_since: Kund sedan
         customers: Kunder
+        customers_list_of_all_customers_in_store: 'Kunder <small>Lista över alla kunder i butiken</small>'
         dashboard: Kontrollpanel
+        data: Data
         date: Datum
+        default_billing_address: Standard faktureringsadress
         default_currency: Standardvaluta
         default_locale: Standardspråk
         delete: Radera
+        delete_image: Ta bort bild
+        deleted: Raderad
         delivery_and_shipping: 'Leverans & frakt'
         description: Beskrivning
+        details: Detaljer
+        disable: Avaktivera
         disabled: Inaktiverad
         discount: Rabatt
+        discounted_unit_price: Rabatterat enhetspris
         edit: Redigera
         edit_channel: Redigera kanal
         edit_country: Redigera land
@@ -241,7 +283,7 @@ sylius:
         payments: Betalningar
         pending: Väntande
         per_customer_usage_limit: Användningsbegränsning per kund
-        permissions: Behörigheter
+        permissions: Rättigheter
         personal_information: Personuppgifter
         phone_number: Telefonnummer
         postcode: Postnummer

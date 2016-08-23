@@ -32,3 +32,6 @@ sylius:
     product_translation:
         short_description:
             max: 'คำอธิบายสั้น ต้องมีความยาวไม่เกิน {{ limit }} ตัวอักษร'
+    user:
+        email:
+            unique: อีเมลนี้ถูกใช้งานแล้ว

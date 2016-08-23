@@ -124,6 +124,7 @@ sylius:
         metadata_index: Metadados
         method: meio
         modified: Data de modificação
+        my_account: A Minha Conta
         new: Novo
         new_country: Novo país
         new_order: Novo pedido

@@ -28,7 +28,7 @@ sylius:
             name: Nombre
             roles: Roles
         channel:
-            taxonomies: Categorización
+            taxonomies: Taxonomías
             locale_default: Configuración regional predeterminada
             locales: Idiomas
             currency_default: Moneda por defecto
@@ -61,7 +61,7 @@ sylius:
             shipping_category: Categoría de envío
             short_description: Descripción breve
             variant_selection_method: Método de selección variante
-            main_taxon: Clasificación principal
+            main_taxon: Taxón principal
             channels: Canales
             enabled: Activado
         product_filter:

@@ -479,7 +479,7 @@ sylius:
         promotion_details: جزئیات فروش ویژه
         promotion_information: اطلاعات فروش ویژه
         promotion_total: جمع تخفیفات
-        promotions: فروش ویژه
+        promotions: فروش های ویژه
         province: استان
         provinces: استان ها
         qty: تعداد
@@ -665,4 +665,4 @@ sylius:
         your_products: محصولات شما
         zone: منطقه
         zone_details: جزئیات منطقه
-        zones: مناطق
+        zones: منطقه‌ها

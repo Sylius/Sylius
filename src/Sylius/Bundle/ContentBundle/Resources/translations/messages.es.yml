@@ -14,7 +14,7 @@ sylius:
             image: Imagen
             internal_name: Nombre interno
             label: Etiqueta
-            link_url: Enlace
+            link_url: Enlace URL
             parent: Padre
             publish_end_date: Publicar la fecha de finalización
             publish_start_date: Publicar la fecha de inicio

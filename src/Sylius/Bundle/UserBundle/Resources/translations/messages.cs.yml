@@ -11,6 +11,7 @@ sylius:
                 confirmation: Ověření
             remember_me: Pamatuj si mě
             shipping_address: Doručovací adresa
+            username: Uživatelské jméno
         user_filter:
             query: Hledat
         user_change_password:

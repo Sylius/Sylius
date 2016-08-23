@@ -95,7 +95,7 @@ sylius:
         change_shipping_method: แก้ไขวิธีการขนส่ง
         change_your_password: เปลี่ยนรหัสผ่านของคุณ
         channel: ช่องทางการจัดจำหน่าย
-        channels: ช่องทางการจัดจำหน่าย
+        channels: ช่องทางจำหน่าย
         charges_and_taxes: ค่าธรรมเนียมและภาษี
         checking_out_as: กำลังชำระเงินด้วย
         checkout: ชำระเงิน
@@ -577,7 +577,7 @@ sylius:
         promotion_details: รายละเอียดโปรโมชั่น
         promotion_information: ข้อมูลโปรโมชั่น
         promotion_total: รวมโปรโมชั่น
-        promotions: ส่งเสริมการขาย
+        promotions: โปรโมชั่น
         province: จังหวัด
         provinces: จังหวัด
         purchased_from: ซื้อจาก

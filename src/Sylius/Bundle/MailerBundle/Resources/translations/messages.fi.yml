@@ -3,6 +3,5 @@
 
 sylius:
     form:
-        user:
-            email: Endereço de email
-            username: Login
+        email:
+            content: Sisältö
