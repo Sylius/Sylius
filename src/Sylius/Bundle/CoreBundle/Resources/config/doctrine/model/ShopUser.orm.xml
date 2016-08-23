@@ -25,17 +25,6 @@
             <join-column name="customer_id" referenced-column-name="id" nullable="false" />
         </one-to-one>
 
-        <many-to-many field="authorizationRoles" target-entity="Sylius\Component\Rbac\Model\RoleInterface">
-            <join-table name="sylius_shop_user_role">
-                <join-columns>
-                    <join-column name="user_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
-                </join-columns>
-                <inverse-join-columns>
-                    <join-column name="role_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
-                </inverse-join-columns>
-            </join-table>
-        </many-to-many>
-
     </mapped-superclass>
 
 </doctrine-mapping>

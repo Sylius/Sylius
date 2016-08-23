@@ -17,17 +17,6 @@
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
     <mapped-superclass name="Sylius\Component\Core\Model\AdminUser" table="sylius_admin_user">
-        <many-to-many field="authorizationRoles" target-entity="Sylius\Component\Rbac\Model\RoleInterface">
-            <join-table name="sylius_admin_user_role">
-                <join-columns>
-                    <join-column name="user_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
-                </join-columns>
-                <inverse-join-columns>
-                    <join-column name="role_id" referenced-column-name="id" nullable="false" on-delete="CASCADE" />
-                </inverse-join-columns>
-            </join-table>
-        </many-to-many>
-
         <field name="firstName" column="first_name" type="string" nullable="true" />
         <field name="lastName" column="last_name" type="string" nullable="true" />
     </mapped-superclass>

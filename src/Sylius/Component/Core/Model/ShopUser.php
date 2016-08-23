@@ -11,9 +11,7 @@
 
 namespace Sylius\Component\Core\Model;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Sylius\Component\Customer\Model\CustomerInterface as BaseCustomerInterface;
-use Sylius\Component\Rbac\Model\RoleInterface;
 use Sylius\Component\User\Model\User as BaseUser;
 
 /**
@@ -23,70 +21,9 @@ use Sylius\Component\User\Model\User as BaseUser;
 class ShopUser extends BaseUser implements ShopUserInterface
 {
     /**
-     * @var ArrayCollection
-     */
-    protected $authorizationRoles;
-
-    /**
      * @var CustomerInterface
      */
     protected $customer;
-
-    public function __construct()
-    {
-        parent::__construct();
-        $this->authorizationRoles = new ArrayCollection();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAuthorizationRoles()
-    {
-        return $this->authorizationRoles;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addAuthorizationRole(RoleInterface $role)
-    {
-        if (!$this->hasAuthorizationRole($role)) {
-            $this->authorizationRoles->add($role);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removeAuthorizationRole(RoleInterface $role)
-    {
-        if ($this->hasAuthorizationRole($role)) {
-            $this->authorizationRoles->removeElement($role);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasAuthorizationRole(RoleInterface $role)
-    {
-        return $this->authorizationRoles->contains($role);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getRoles()
-    {
-        $roles = parent::getRoles();
-
-        foreach ($this->getAuthorizationRoles() as $role) {
-            $roles = array_merge($roles, $role->getSecurityRoles());
-        }
-
-        return $roles;
-    }
 
     /**
      * {@inheritdoc}
@@ -121,6 +58,7 @@ class ShopUser extends BaseUser implements ShopUserInterface
     {
         $this->customer->setEmail($email);
     }
+
     /**
      * {@inheritdoc}
      */
@@ -128,6 +66,7 @@ class ShopUser extends BaseUser implements ShopUserInterface
     {
         return $this->customer->getEmailCanonical();
     }
+
     /**
      * {@inheritdoc}
      */

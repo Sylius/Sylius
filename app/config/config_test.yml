@@ -56,9 +56,6 @@ sylius_payment:
         stripe: Stripe
         paypal_express_checkout: Paypal Express Checkout
 
-sylius_rbac:
-    authorization_checker: sylius.authorization_checker.toggleable
-
 sylius_theme:
     sources:
         test: ~

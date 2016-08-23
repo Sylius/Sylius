@@ -159,10 +159,5 @@
             <argument type="service" id="sm.factory" />
             <tag name="sylius_fixtures.fixture" />
         </service>
-
-        <service id="sylius.fixture.rbac" class="Sylius\Bundle\CoreBundle\Fixture\RbacFixture">
-            <argument type="service" id="sylius.rbac.initializer" />
-            <tag name="sylius_fixtures.fixture" />
-        </service>
     </services>
 </container>

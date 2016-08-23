@@ -46,7 +46,6 @@
         "sylius/pricing-bundle": "^1.0",
         "sylius/product-bundle": "^1.0",
         "sylius/promotion-bundle": "^1.0",
-        "sylius/rbac-bundle": "^1.0",
         "sylius/report-bundle": "^1.0",
         "sylius/resource-bundle": "^1.0",
         "sylius/settings-bundle": "^1.0",
