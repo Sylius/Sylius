@@ -32,13 +32,23 @@ final class OrderExchangeRateAndCurrencyUpdater implements OrderUpdaterInterface
     private $currencyRepository;
 
     /**
+     * @var RepositoryInterface
+     */
+    private $cartRepository;
+
+    /**
      * @param CurrencyContextInterface $currencyContext
      * @param RepositoryInterface $currencyRepository
+     * @param RepositoryInterface $cartRepository
      */
-    public function __construct(CurrencyContextInterface $currencyContext, RepositoryInterface $currencyRepository)
-    {
+    public function __construct(
+        CurrencyContextInterface $currencyContext,
+        RepositoryInterface $currencyRepository,
+        RepositoryInterface $cartRepository
+    ) {
         $this->currencyContext = $currencyContext;
         $this->currencyRepository = $currencyRepository;
+        $this->cartRepository = $cartRepository;
     }
 
     /**
@@ -51,5 +61,7 @@ final class OrderExchangeRateAndCurrencyUpdater implements OrderUpdaterInterface
 
         $order->setCurrencyCode($currency->getCode());
         $order->setExchangeRate($currency->getExchangeRate());
+
+        $this->cartRepository->add($order);
     }
 }

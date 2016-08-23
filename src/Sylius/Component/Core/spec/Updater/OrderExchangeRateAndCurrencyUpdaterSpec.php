@@ -27,9 +27,12 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  */
 final class OrderExchangeRateAndCurrencyUpdaterSpec extends ObjectBehavior
 {
-    function let(CurrencyContextInterface $currencyContext, RepositoryInterface $currencyRepository)
-    {
-        $this->beConstructedWith($currencyContext, $currencyRepository);
+    function let(
+        CurrencyContextInterface $currencyContext,
+        RepositoryInterface $currencyRepository,
+        RepositoryInterface $cartRepository
+    ) {
+        $this->beConstructedWith($currencyContext, $currencyRepository, $cartRepository);
     }
 
     function it_is_initializable()
@@ -46,6 +49,7 @@ final class OrderExchangeRateAndCurrencyUpdaterSpec extends ObjectBehavior
         OrderInterface $order,
         CurrencyContextInterface $currencyContext,
         RepositoryInterface $currencyRepository,
+        RepositoryInterface $cartRepository,
         CurrencyInterface $currency,
         ChannelInterface $channel
     ) {
@@ -57,6 +61,8 @@ final class OrderExchangeRateAndCurrencyUpdaterSpec extends ObjectBehavior
 
         $order->setCurrencyCode('GBP')->shouldBeCalled();
         $order->setExchangeRate(3.5)->shouldBeCalled();
+
+        $cartRepository->add($order)->shouldBeCalled();
 
         $this->update($order);
     }
