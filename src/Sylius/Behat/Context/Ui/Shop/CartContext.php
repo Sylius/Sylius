@@ -289,15 +289,15 @@ final class CartContext implements Context
     }
 
     /**
-     * @Given I added :variant variant of product :product to the cart
-     * @When I add :variant variant of product :product to the cart
-     * @When I have :variant variant of product :product in the cart
+     * @Given I added :variantName variant of product :product to the cart
+     * @When I add :variantName variant of product :product to the cart
+     * @When I have :variantName variant of product :product in the cart
      * @When /^I add "([^"]+)" variant of (this product) to the cart$/
      */
-    public function iAddProductToTheCartSelectingVariant($variant, ProductInterface $product)
+    public function iAddProductToTheCartSelectingVariant($variantName, ProductInterface $product)
     {
         $this->productShowPage->open(['slug' => $product->getSlug()]);
-        $this->productShowPage->addToCartWithVariant($variant);
+        $this->productShowPage->addToCartWithVariant($variantName);
 
         $this->sharedStorage->set('product', $product);
     }

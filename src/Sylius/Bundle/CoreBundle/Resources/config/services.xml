@@ -124,7 +124,7 @@
 
         <parameter key="sylius.generator.product_variant.class">Sylius\Bundle\CoreBundle\Generator\ProductVariantGenerator</parameter>
 
-        <parameter key="sylius.inventory.on_hand_quantity_updater.class">Sylius\Component\Core\Invetory\Updater\OnHandQuantityUpdater</parameter>
+        <parameter key="sylius.inventory.on_hand_quantity_updater.class">Sylius\Component\Core\Inventory\Updater\OnHandQuantityUpdater</parameter>
     </parameters>
 
     <services>

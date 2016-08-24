@@ -112,7 +112,7 @@ winzou_state_machine:
                 sylius_order_paid:
                     on: ["pay"]
                     do: ["@sylius.inventory.on_hand_quantity_updater", "decrease"]
-                    arg: ["object.getItems()"]
+                    args: ["object.getItems()"]
 
     sylius_payment:
         callbacks:
