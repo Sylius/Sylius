@@ -5,7 +5,7 @@ sylius_api_user_index:
     path: /
     methods: [GET]
     defaults:
-        _controller: sylius.controller.user:indexAction
+        _controller: sylius.controller.shop_user:indexAction
         _sylius:
             paginate: $limit
             filterable: true
@@ -17,22 +17,22 @@ sylius_api_user_create:
     path: /
     methods: [POST]
     defaults:
-        _controller: sylius.controller.user:createAction
+        _controller: sylius.controller.shop_user:createAction
 
 sylius_api_user_update:
     path: /{id}
     methods: [PUT, PATCH]
     defaults:
-        _controller: sylius.controller.user:updateAction
+        _controller: sylius.controller.shop_user:updateAction
 
 sylius_api_user_delete:
     path: /{id}
     methods: [DELETE]
     defaults:
-        _controller: sylius.controller.user:deleteAction
+        _controller: sylius.controller.shop_user:deleteAction
 
 sylius_api_user_show:
     path: /{id}
     methods: [GET]
     defaults:
-        _controller: sylius.controller.user:showAction
+        _controller: sylius.controller.shop_user:showAction
