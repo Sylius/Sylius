@@ -46,7 +46,7 @@ gulp.task('admin-js', function () {
 });
 
 gulp.task('admin-css', function() {
-    gulp.src(['node_modules/semantic-ui-css/themes/**/*']).pipe(gulp.dest(adminRootPath + 'css/themes/'));
+    gulp.src(['../../../../node_modules/semantic-ui-css/themes/**/*']).pipe(gulp.dest(adminRootPath + 'css/themes/'));
 
     var cssStream = gulp.src(paths.admin.css)
         .pipe(concat('css-files.css'))

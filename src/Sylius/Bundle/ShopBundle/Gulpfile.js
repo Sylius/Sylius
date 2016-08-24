@@ -44,7 +44,7 @@ gulp.task('shop-js', function () {
 });
 
 gulp.task('shop-css', function() {
-    gulp.src(['node_modules/semantic-ui-css/themes/**/*']).pipe(gulp.dest(shopRootPath + 'css/themes/'));
+    gulp.src(['../../../../node_modules/semantic-ui-css/themes/**/*']).pipe(gulp.dest(shopRootPath + 'css/themes/'));
 
     var cssStream = gulp.src(paths.shop.css)
             .pipe(concat('css-files.css'))
