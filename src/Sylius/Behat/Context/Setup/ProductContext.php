@@ -404,6 +404,17 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Given there are :quantity items of product :product in variant :variant available in the inventory
+     */
+    public function thereAreItemsOfProductInVariantAvailableInTheInventory($quantity, ProductInterface $product, ProductVariantInterface $variant)
+    {
+        $indexOfVariant = $product->getVariants()->indexOf($variant);
+        $product->getVariants()->get($indexOfVariant)->setOnHand($quantity);
+
+        $this->saveProduct($product);
+    }
+    
+    /**
      * @param string $type
      * @param string $name
      * @param string $code

@@ -8,6 +8,7 @@ Feature: Paying with paypal during checkout
         Given the store operates on a single channel in "United States"
         And there is a user "john@example.com" identified by "password123"
         And the store has a product "PHP T-Shirt" priced at "$19.99"
+        And there is 1 item of product "PHP T-Shirt" available in the inventory
         And the store ships everywhere for free
         And the store allows paying "PayPal Express Checkout"
 
