@@ -123,6 +123,8 @@
         <parameter key="sylius.form.type.product_legacy.class">Sylius\Bundle\CoreBundle\Form\Type\LegacyProductType</parameter>
 
         <parameter key="sylius.generator.product_variant.class">Sylius\Bundle\CoreBundle\Generator\ProductVariantGenerator</parameter>
+
+        <parameter key="sylius.inventory.on_hand_quantity_updater.class">Sylius\Component\Core\Invetory\Updater\OnHandQuantityUpdater</parameter>
     </parameters>
 
     <services>
@@ -485,6 +487,8 @@
             <argument type="service" id="sylius.custom_factory.cart_item.inner" />
             <argument type="service" id="sylius.variant_resolver.default" />
         </service>
+
+        <service id="sylius.inventory.on_hand_quantity_updater" class="%sylius.inventory.on_hand_quantity_updater.class%"/>
     </services>
 
 </container>
