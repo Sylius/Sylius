@@ -493,7 +493,7 @@ final class CheckoutContext implements Context
     public function iShouldNotSeeTheThankYouPage()
     {
         Assert::false(
-            $this->thankYouPage->hasThankYouMessage(),
+            $this->thankYouPage->isOpen(),
             'I should not see thank you message, but I do'
         );
     }
@@ -923,6 +923,17 @@ final class CheckoutContext implements Context
         Assert::true(
             $this->completePage->hasProductUnitPrice($product, $price),
             sprintf('Product %s should have unit price %s, but it does not have.', $product->getName(), $price)
+        );
+    }
+
+    /**
+     * @Given /^I should be notified that (this product) does not have sufficient stock$/
+     */
+    public function iShouldBeNotifiedThatThisProductDoesNotHaveSufficientStock(ProductInterface $product)
+    {
+        Assert::true(
+            $this->completePage->hasProductOutOfStockValidationMessage($product),
+            sprintf('I should see validation message for %s product', $product->getName())
         );
     }
 

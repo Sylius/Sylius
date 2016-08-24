@@ -114,6 +114,8 @@ interface CompletePageInterface
      */
     public function hasProductUnitPrice(ProductInterface $product, $price);
 
+    public function hasProductOutOfStockValidationMessage(ProductInterface $product);
+
     public function changeAddress();
 
     public function changeShippingMethod();
