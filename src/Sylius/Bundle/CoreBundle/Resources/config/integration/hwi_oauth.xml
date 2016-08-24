@@ -22,8 +22,8 @@
             <argument type="service" id="sylius.repository.customer" />
             <argument type="service" id="sylius.factory.admin_user" />
             <argument type="service" id="sylius.repository.admin_user" />
-            <argument type="service" id="sylius.factory.admin_user_oauth" />
-            <argument type="service" id="sylius.repository.admin_user_oauth" />
+            <argument type="service" id="sylius.factory.admin_oauth_user" />
+            <argument type="service" id="sylius.repository.admin_oauth_user" />
             <argument type="service" id="sylius.manager.admin_user" />
             <argument type="service" id="sylius.user.canonicalizer" />
         </service>
