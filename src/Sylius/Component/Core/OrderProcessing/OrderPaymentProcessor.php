@@ -51,6 +51,7 @@ final class OrderPaymentProcessor implements OrderProcessorInterface
 
         $newPayment = $order->getLastPayment(PaymentInterface::STATE_NEW);
         if (null !== $newPayment) {
+            $newPayment->setCurrencyCode($order->getCurrencyCode());
             $newPayment->setAmount($order->getTotal());
 
             return;

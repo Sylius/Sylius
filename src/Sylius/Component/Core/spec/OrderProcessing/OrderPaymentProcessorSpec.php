@@ -167,11 +167,13 @@ final class OrderPaymentProcessorSpec extends ObjectBehavior
     {
         $order->getState()->willReturn(OrderInterface::STATE_NEW);
         $order->getTotal()->willReturn(123);
+        $order->getCurrencyCode()->willReturn('EUR');
 
         $payment->getState()->willReturn(PaymentInterface::STATE_NEW);
         $order->getLastPayment(PaymentInterface::STATE_NEW)->willReturn($payment);
 
         $payment->setAmount(123)->shouldBeCalled();
+        $payment->setCurrencyCode('EUR')->shouldBeCalled();
 
         $this->process($order);
     }

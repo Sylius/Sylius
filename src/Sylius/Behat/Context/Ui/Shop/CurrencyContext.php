@@ -36,7 +36,7 @@ final class CurrencyContext implements Context
      * @var SharedStorageInterface
      */
     private $sharedStorage;
-    
+
     /**
      * @param HomePageInterface $homePage
      */
