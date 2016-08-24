@@ -107,6 +107,12 @@ winzou_state_machine:
             pay:
                 from: [awaiting_payment, partially_paid]
                 to: paid
+        callbacks:
+            after:
+                sylius_order_paid:
+                    on: ["pay"]
+                    do: ["@sylius.inventory.on_hand_quantity_updater", "decrease"]
+                    arg: ["object.getItems()"]
 
     sylius_payment:
         callbacks:
@@ -115,6 +121,7 @@ winzou_state_machine:
                     on: ["fail", "cancel"]
                     do: ["@sylius.order_processing.order_processor", "process"]
                     args: ["object.getOrder()"]
+
 
     sylius_order:
         callbacks:
