@@ -441,6 +441,7 @@ final class ProductContext implements Context
         $variant = $this->defaultVariantResolver->getVariant($product);
         $variant->setPrice($price);
         $variant->setCode($product->getCode());
+        $variant->setTracked(true);
 
         return $product;
     }

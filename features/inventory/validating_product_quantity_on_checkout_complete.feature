@@ -31,4 +31,4 @@ Feature: Validating product quantity on checkout complete
         When product "Iron Maiden T-Shirt" quantity is changed to 3
         And I confirm my order
         Then I should not see the thank you page
-        And I should see an validation error
+        And I should be notified that this product does not have sufficient stock
