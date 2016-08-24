@@ -30,6 +30,7 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
     const DEFAULT_COUNTRY_CODE = 'US';
     const DEFAULT_ZONE_CODE = 'US';
     const DEFAULT_ZONE_NAME = 'United States';
+    const DEFAULT_CHANNEL_NAME = 'United States';
 
     /**
      * @var RepositoryInterface
@@ -157,7 +158,7 @@ final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryIn
         $currency = $this->provideCurrency();
         $locale = $this->provideLocale();
 
-        $channel = $this->createChannel($code ?: self::DEFAULT_CHANNEL_CODE, $name ?: self::DEFAULT_ZONE_NAME);
+        $channel = $this->createChannel($code ?: self::DEFAULT_CHANNEL_CODE, $name ?: self::DEFAULT_CHANNEL_NAME);
         $channel->addCurrency($currency);
         $channel->setDefaultCurrency($currency);
         $channel->addLocale($locale);

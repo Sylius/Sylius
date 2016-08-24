@@ -6,13 +6,11 @@ Feature: Seeing included in price taxes of order items
 
     Background:
         Given the store operates on a single channel in "United States"
-        And there is a zone "EU" containing all members of the European Union
-        And there is a zone "The Rest of the World" containing all other countries
-        And default tax zone is "RoW"
-        And the store has included in price "Guns tax" tax rate of 10% for "Guns" within "RoW" zone
+        And the store has included in price "Guns tax" tax rate of 10% for "Guns" within "US" zone
+        And default tax zone is "US"
         And the store has a product "Winchester M1866" priced at "$220.00"
         And it belongs to "Guns" tax category
-        And the store ships everything for free within "RoW" zone
+        And the store ships everywhere for free
         And the store allows paying offline
         And there is a customer "lucy@teamlucifer.com" that placed an order "#00000666"
         And I am logged in as an administrator
@@ -24,6 +22,5 @@ Feature: Seeing included in price taxes of order items
         When I view the summary of the order "#00000666"
         And I check "Winchester M1866" data
         Then its tax should be $40.00
-        And the order's shipping total should be "$0.00"
         And the order's tax total should be "$40.00"
         And the order's total should be "$440.00"

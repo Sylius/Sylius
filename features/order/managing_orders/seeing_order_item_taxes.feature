@@ -6,14 +6,11 @@ Feature: Seeing taxes of order items
 
     Background:
         Given the store operates on a single channel in "United States"
-        And there is a zone "EU" containing all members of the European Union
-        And there is a zone "The Rest of the World" containing all other countries
-        And default tax zone is "RoW"
-        And the store has "VAT" tax rate of 23% for "Clothes" within "RoW" zone
+        And the store has "VAT" tax rate of 23% for "Clothes" within "US" zone
         And the store has a product "PHP T-Shirt" priced at "$80.00"
         And the store has a product "Symfony2 T-Shirt" priced at "$140.00"
         And it belongs to "Clothes" tax category
-        And the store ships everything for free within "RoW" zone
+        And the store ships everything for free within "US" zone
         And the store allows paying offline
         And there is a customer "lucy@teamlucifer.com" that placed an order "#00000666"
         And I am logged in as an administrator

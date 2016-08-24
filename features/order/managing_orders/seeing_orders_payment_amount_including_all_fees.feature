@@ -6,10 +6,7 @@ Feature: Seeing order's payment amount including all fees
 
     Background:
         Given the store operates on a single channel in "United States"
-        And there is a zone "EU" containing all members of the European Union
-        And there is a zone "The Rest of the World" containing all other countries
-        And default tax zone is "RoW"
-        And the store has "VAT" tax rate of 23% for "Clothes" for the rest of the world
+        And the store has "VAT" tax rate of 23% for "Clothes" within "US" zone
         And the store has a product "Angel T-Shirt" priced at "$39.00"
         And it belongs to "Clothes" tax category
         And the store has a product "Angel Mug" priced at "$19.00"

@@ -5,8 +5,8 @@ Feature: Shipping method validation
     I want to be prevented from adding it without specifying required fields
 
     Background:
-        Given the store is available in "English (United States)"
-        And there is a zone "EU" containing all members of the European Union
+        Given the store operates on a single channel in "United States"
+        And the store is available in "English (United States)"
         And I am logged in as an administrator
 
     @ui
@@ -44,4 +44,4 @@ Feature: Shipping method validation
         When I remove its name from "English (United States)" translation
         And I try to save my changes
         Then I should be notified that name is required
-        And this shipping method should still be named "European Union Sales Tax"
+        And this shipping method should still be named "United States Sales Tax"

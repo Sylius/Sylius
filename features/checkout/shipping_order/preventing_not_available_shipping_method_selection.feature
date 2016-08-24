@@ -21,15 +21,14 @@ Feature: Preventing not available shipping method selection
 
     @ui
     Scenario: Not being able to select shipping method not available for my shipping address
-        Given there is a zone "EU" containing all members of the European Union
-        And there is a zone "The Rest of the World" containing all other countries
+        Given there is a zone "The Rest of the World" containing all other countries
         And the store has "Dragon Post" shipping method with "$30.00" fee for the rest of the world
-        And the store has "Raven Post" shipping method with "$10.00" fee within "EU" zone
+        And the store has "Raven Post" shipping method with "$10.00" fee within "US" zone
         And I have product "Targaryen T-Shirt" in the cart
         When I am at the checkout addressing step
         And I specify the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I complete the addressing step
-        Then I should not be able to select "Raven Post" shipping method
+        Then I should not be able to select "Dragon Post" shipping method
 
     @ui
     Scenario: Not being able to select shipping method not available for order channel
@@ -43,9 +42,8 @@ Feature: Preventing not available shipping method selection
 
     @ui
     Scenario: Being alerted about no shipping method available
-        Given there is a zone "EU" containing all members of the European Union
-        And there is a zone "The Rest of the World" containing all other countries
-        And the store has "Dragon Post" shipping method with "$30.00" fee within "EU" zone
+        Given there is a zone "The Rest of the World" containing all other countries
+        And the store has "Dragon Post" shipping method with "$30.00" fee for the rest of the world
         And the store has disabled "Raven Post" shipping method with "$10.00" fee
         And I have product "Targaryen T-Shirt" in the cart
         When I am at the checkout addressing step

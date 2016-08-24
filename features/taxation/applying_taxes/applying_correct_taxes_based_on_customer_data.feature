@@ -5,13 +5,11 @@ Feature: Apply correct taxes based on customer data
     I want to have correct taxes applied to my order
 
     Background:
-        Given the store operates on a single channel
-        And the store ships to "United States" and "Germany"
-        And there is a zone "EU" containing all members of the European Union
+        Given the store operates on a single channel in "United States"
         And there is a zone "The Rest of the World" containing all other countries
-        And default tax zone is "RoW"
+        And the store ships to "Germany"
         And the store ships everywhere for free
-        And the store has "EU VAT" tax rate of 23% for "Clothes" within "EU" zone
+        And the store has "NA VAT" tax rate of 23% for "Clothes" within "US" zone
         And the store has "VAT" tax rate of 10% for "Clothes" for the rest of the world
         And the store has a product "PHP T-Shirt" priced at "$100.00"
         And it belongs to "Clothes" tax category

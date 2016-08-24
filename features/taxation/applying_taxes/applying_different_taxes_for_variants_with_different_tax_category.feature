@@ -7,7 +7,7 @@ Feature: Apply different taxes for variants with different tax category
     Background:
         Given the store operates on a single channel in "United States"
         And default tax zone is "US"
-        And the store has "EU VAT" tax rate of 23% for "Mugs" within "US" zone
+        And the store has "US VAT" tax rate of 23% for "Mugs" within "US" zone
         And the store has "Low VAT" tax rate of 5% for "Cheap Mugs" within "US" zone
         And the store has a product "PHP Mug"
         And it comes in the following variations:

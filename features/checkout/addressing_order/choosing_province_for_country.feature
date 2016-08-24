@@ -6,8 +6,8 @@ Feature: Choosing province for country
 
     Background:
         Given the store operates on a single channel in "United States"
-        And the store operates in "Nepal"
         And country "United States" has the "New York" province with "NY" code
+        And the store ships to "Nepal"
         And the store has a product "The Dark Knight T-Shirt" priced at "$49.99"
         And the store ships everywhere for free
         And I am a logged in customer

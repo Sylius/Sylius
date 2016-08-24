@@ -6,7 +6,6 @@ Feature: Seeing tax total on order summary page
 
     Background:
         Given the store operates on a single channel in "United States"
-        And default tax zone is "US"
         And the store has "VAT" tax rate of 23% for "Clothes" within "US" zone
         And the store has a product "The Sorting Hat" priced at "$100.00"
         And it belongs to "Clothes" tax category
