@@ -12,7 +12,7 @@
         {{ block('list') }}
     </div>
 </div>
-{% else %}
+{% elseif item.level > 1  %}
 <a class="item" href="{{ item.uri }}">
     {{ block('icon') }}
     {{ item.label|trans }}
