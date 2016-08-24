@@ -350,6 +350,17 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Given /^(this product) is tracked by the inventory$/
+     */
+    public function thisProductIsTrackedByTheInventory(ProductInterface $product)
+    {
+        $variant = $this->defaultVariantResolver->getVariant($product);
+        $variant->setTracked(true);
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @Given /^(this product) is available in "([^"]+)" size priced at ("[^"]+")$/
      */
     public function thisProductIsAvailableInSize(ProductInterface $product, $optionValueName, $price)
@@ -441,7 +452,6 @@ final class ProductContext implements Context
         $variant = $this->defaultVariantResolver->getVariant($product);
         $variant->setPrice($price);
         $variant->setCode($product->getCode());
-        $variant->setTracked(true);
 
         return $product;
     }
