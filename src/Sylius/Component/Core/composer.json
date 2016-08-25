@@ -48,7 +48,6 @@
         "sylius/variation": "^1.0",
         "sylius/association": "^1.0",
         "sylius/review": "^1.0",
-        "sylius/metadata": "^1.0",
         "webmozart/assert": "^1.0",
         "zendframework/zend-stdlib": "^2.0|^3.0"
     },
