@@ -482,26 +482,12 @@ sylius_rbac:
         sylius.report.update: Edit report
         sylius.report.delete: Delete report
 
-        sylius.manage.contact_request: Manage contact_requests
-        sylius.contact_request.show: Show contact request
-        sylius.contact_request.index: List contact requests
-        sylius.contact_request.create: Create contact request
-        sylius.contact_request.update: Edit contact request
-        sylius.contact_request.delete: Delete contact request
-
         sylius.manage.product_association_type: Manage association types
         sylius.product_association_type.show: Show association type
         sylius.product_association_type.index: List association types
         sylius.product_association_type.create: Create association type
         sylius.product_association_type.update: Edit association type
         sylius.product_association_type.delete: Delete association type
-
-        sylius.manage.contact_topic: Manage contact topics
-        sylius.contact_topic.show: Show contact topic
-        sylius.contact_topic.index: List contact topics
-        sylius.contact_topic.create: Create contact topic
-        sylius.contact_topic.update: Edit contact topic
-        sylius.contact_topic.delete: Delete contact topic
 
         sylius.manage.settings: Manage settings
         sylius.settings.sylius_general: Manage general settings
@@ -569,8 +555,6 @@ sylius_rbac:
         sylius.manage.email: [sylius.email.show, sylius.email.index, sylius.email.create, sylius.email.update, sylius.email.delete]
         sylius.manage.report: [sylius.report.show, sylius.report.index, sylius.report.create, sylius.report.update, sylius.report.delete]
         sylius.manage.product_review: [sylius.product_review.show, sylius.product_review.index, sylius.product_review.create, sylius.product_review.update, sylius.product_review.delete]
-        sylius.manage.contact_request: [sylius.contact_request.show, sylius.contact_request.index, sylius.contact_request.create, sylius.contact_request.update, sylius.contact_request.delete]
-        sylius.manage.contact_topic: [sylius.contact_topic.show, sylius.contact_topic.index, sylius.contact_topic.create, sylius.contact_topic.update, sylius.contact_topic.delete]
         sylius.manage.settings: [sylius.settings.sylius_general, sylius.settings.sylius_security, sylius.settings.sylius_taxation]
         sylius.manage.product_association_type: [sylius.product_association_type.show, sylius.product_association_type.index, sylius.product_association_type.create, sylius.product_association_type.update, sylius.product_association_type.delete]
         sylius.catalog: [sylius.manage.product, sylius.manage.product_attribute, sylius.manage.product_option, sylius.manage.product_variant, sylius.manage.taxon, sylius.manage.metadata_container, sylius.manage.product_association_type]
@@ -581,7 +565,6 @@ sylius_rbac:
         sylius.security: [sylius.manage.permission, sylius.manage.role, sylius.manage.user, sylius.manage.customer, sylius.manage.group, sylius.accounts]
         sylius.accounts: [sylius.manage.customer, sylius.manage.group, sylius.manage.user]
         sylius.taxes: [sylius.manage.tax_rate, sylius.manage.tax_category]
-        sylius.support: [sylius.manage.contact_request, sylius.manage.contact_topic]
 
     security_roles:
         ROLE_ADMINISTRATION_ACCESS: Can access administration

@@ -18,7 +18,6 @@ We recommend checking out :doc:`/components/general/index`, which will get you s
     Attribute/index
     Cart/index
     Channel/index
-    Contact/index
     Currency/index
     Grid/index
     Inventory/index

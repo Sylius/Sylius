@@ -11,6 +11,10 @@ UPGRADE
 
 * Renamed configuration option `sylius_channel.fake_channel_support` to `sylius_channel.debug`
 
+### Contact and ContactBundle
+
+* Removed ``Contact`` component and ``ContactBundle``
+
 ### Order and OrderBundle
 
 * Added ``OrderSequence`` model to keep current order index

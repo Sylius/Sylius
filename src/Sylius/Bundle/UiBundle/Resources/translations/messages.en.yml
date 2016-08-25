@@ -113,10 +113,6 @@ sylius:
         confirmation: Confirmation
         confirmation_title: Confirmation
         confirmed: Confirmed
-        contact_request_details: 'Contact request details'
-        contact_request_show: 'Contact request'
-        contact_requests: 'Contact requests'
-        contact_topics: 'Contact topics'
         contact_us: Contact us
         contain_variants: 'Contain Variants'
         contains: Contains
@@ -132,8 +128,6 @@ sylius:
         create_a_new_customer_account: Create a new customer account
         create_an_account: Create an account
         create_association_type: 'Create Association type'
-        create_contact_request: 'Create contact request'
-        create_contact_topic: 'Create contact topic'
         create_country: 'Create country'
         create_currency: 'Create currency'
         create_customer: 'Create customer'
@@ -248,8 +242,6 @@ sylius:
         edit_zone: Edit zone
         editing_attribute: 'Editing attribute'
         editing_channel: 'Editing channel'
-        editing_contact_request: 'Editing contact request'
-        editing_contact_topic: 'Editing contact topic'
         editing_country: 'Editing country'
         editing_coupon: 'Editing coupon'
         editing_currency: 'Editing currency'
@@ -431,8 +423,6 @@ sylius:
         new_admin_user: 'New administrator'
         new_channel: New channel
         new_comment_posted_on_order: 'New comment posted on order'
-        new_contact_request: 'New contact request'
-        new_contact_topic: 'New contact topic'
         new_country: 'New country'
         new_coupon: New coupon
         new_currency: 'New currency'
@@ -694,8 +684,6 @@ sylius:
         there_are_no_attributes_configured: 'There are no attributes configured'
         there_are_no_blocks_to_display: 'There are no blocks to display'
         there_are_no_channels_configured: 'There are no channels configured'
-        there_are_no_contact_requests_to_display: 'There are no contact requests to display'
-        there_are_no_contact_topics_to_display: 'There are no contact topics to display'
         there_are_no_countries_configured: 'There are no countries configured'
         there_are_no_coupon_to_display: 'There are no coupon to display'
         there_are_no_currencies_to_display: 'There are no currencies to display'

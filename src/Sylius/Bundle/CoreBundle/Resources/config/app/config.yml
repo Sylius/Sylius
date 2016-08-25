@@ -5,7 +5,6 @@ imports:
     - { resource: "@SyliusAddressingBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusAttributeBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusChannelBundle/Resources/config/app/config.yml" }
-    - { resource: "@SyliusContactBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusContentBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusCurrencyBundle/Resources/config/app/config.yml" }
     - { resource: "@SyliusCustomerBundle/Resources/config/app/config.yml" }
