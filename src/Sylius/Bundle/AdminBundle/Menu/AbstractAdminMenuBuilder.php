@@ -12,8 +12,8 @@
 namespace Sylius\Bundle\AdminBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
+use Sylius\Bundle\ResourceBundle\Controller\AuthorizationCheckerInterface;
 use Sylius\Bundle\UiBundle\Menu\AbstractMenuBuilder;
-use Sylius\Component\Rbac\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**

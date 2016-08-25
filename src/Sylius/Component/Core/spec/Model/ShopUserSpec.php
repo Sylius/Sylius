@@ -31,17 +31,4 @@ final class ShopUserSpec extends ObjectBehavior
     {
         $this->shouldImplement(ShopUserInterface::class);
     }
-
-    function its_authorization_roles_are_mutable(RoleInterface $role)
-    {
-        $this->addAuthorizationRole($role);
-        $this->hasAuthorizationRole($role)->shouldReturn(true);
-    }
-
-    function its_authorization_role_can_be_removed(RoleInterface $role)
-    {
-        $this->addAuthorizationRole($role);
-        $this->removeAuthorizationRole($role);
-        $this->hasAuthorizationRole($role)->shouldReturn(false);
-    }
 }

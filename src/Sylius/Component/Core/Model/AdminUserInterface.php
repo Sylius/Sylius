@@ -11,31 +11,12 @@
 
 namespace Sylius\Component\Core\Model;
 
-use Sylius\Component\Rbac\Model\IdentityInterface;
-use Sylius\Component\Rbac\Model\RoleInterface;
 use Sylius\Component\User\Model\UserInterface as BaseUserInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-interface AdminUserInterface extends BaseUserInterface, IdentityInterface
+interface AdminUserInterface extends BaseUserInterface
 {
     const DEFAULT_ADMIN_ROLE = 'ROLE_ADMINISTRATION_ACCESS';
-
-    /**
-     * @param RoleInterface $role
-     */
-    public function addAuthorizationRole(RoleInterface $role);
-
-    /**
-     * @param RoleInterface $role
-     */
-    public function removeAuthorizationRole(RoleInterface $role);
-
-    /**
-     * @param RoleInterface $role
-     *
-     * @return bool
-     */
-    public function hasAuthorizationRole(RoleInterface $role);
 }
