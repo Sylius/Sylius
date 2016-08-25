@@ -11,6 +11,6 @@ Feature: Browsing administrators
 
     @ui
     Scenario: Browsing administrators in store
-        When I want to see all administrators in store
-        Then I should see 2 administrators in the list
+        When I want to browse administrators
+        Then there should be 2 administrators in the list
         And I should see the administrator "mr.banana@example.com" in the list

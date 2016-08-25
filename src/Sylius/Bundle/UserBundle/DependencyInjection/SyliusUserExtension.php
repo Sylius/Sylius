@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\UserBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
+use Sylius\Bundle\UserBundle\EventListener\UserDeleteListener;
 use Sylius\Bundle\UserBundle\EventListener\UserLastLoginSubscriber;
 use Sylius\Bundle\UserBundle\EventListener\UserReloaderListener;
 use Sylius\Bundle\UserBundle\Form\EventSubscriber\AddUserFormSubscriber;
@@ -90,6 +91,7 @@ class SyliusUserExtension extends AbstractResourceExtension
             $this->createProviders($userType, $config['user']['classes']['model'], $container);
             $this->createFormTypes($userType, $config['user'], $container);
             $this->createAddUserTypeFromSubscribers($userType, $container);
+            $this->createUserDeleteListeners($userType, $container);
         }
     }
 
@@ -218,6 +220,22 @@ class SyliusUserExtension extends AbstractResourceExtension
         $lastLoginListenerDefinition->addArgument(new Reference($managerServiceId));
         $lastLoginListenerDefinition->addTag('kernel.event_subscriber');
         $container->setDefinition($lastLoginListenerServiceId, $lastLoginListenerDefinition);
+    }
+
+    /**
+     * @param string $userType
+     * @param ContainerBuilder $container
+     */
+    public function createUserDeleteListeners($userType, ContainerBuilder $container)
+    {
+        $userDeleteListenerServiceId = sprintf('sylius.listener.%s_user_delete', $userType);
+        $userPreDeleteEventName = sprintf('sylius.%s_user.pre_delete', $userType);
+
+        $userDeleteListenerDefinition = new Definition(UserDeleteListener::class);
+        $userDeleteListenerDefinition->addArgument(new Reference('security.token_storage'));
+        $userDeleteListenerDefinition->addArgument(new Reference('session'));
+        $userDeleteListenerDefinition->addTag('kernel.event_listener', ['event' => $userPreDeleteEventName, 'method' => 'deleteUser']);
+        $container->setDefinition($userDeleteListenerServiceId, $userDeleteListenerDefinition);
     }
 
     /**

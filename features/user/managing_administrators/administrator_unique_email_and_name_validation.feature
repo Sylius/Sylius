@@ -14,8 +14,7 @@ Feature: Administrator unique email and name validation
         When I specify its email as "ted@example.com"
         And I try to add it
         Then I should be notified that email must be unique
-        And I want to see all administrators in store
-        And there should still be only one administrator with email "ted@example.com"
+        And there should still be only one administrator with an email "ted@example.com"
 
     @ui
     Scenario: Trying to add a new administrator with taken name
@@ -24,5 +23,4 @@ Feature: Administrator unique email and name validation
         When I specify its name as "Ted"
         And I try to add it
         Then I should be notified that name must be unique
-        And I want to see all administrators in store
         And there should still be only one administrator with name "Ted"

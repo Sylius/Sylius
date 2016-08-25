@@ -28,6 +28,7 @@
             <argument type="service" id="sylius.behat.page.admin.administrator.create" />
             <argument type="service" id="sylius.behat.page.admin.administrator.index" />
             <argument type="service" id="sylius.behat.page.admin.administrator.update" />
+            <argument type="service" id="sylius.behat.notification_checker" />
             <tag name="sylius.behat.context" />
         </service>
 
