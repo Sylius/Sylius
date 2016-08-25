@@ -5,14 +5,14 @@ Feature: Not being able to delete a coupon which is in use
     I want to be prevented from deleting a used coupon
 
     Background:
-        Given the store operates on a single channel in "France"
+        Given the store operates on a single channel in "United States"
         And the store ships everywhere for free
         And the store has a product "Jacket"
         And the store allows paying with "Cash on Delivery"
         And the store has promotion "Christmas sale" with coupon "SANTA2016"
         And there is a customer "john.doe@gmail.com" that placed an order "#00000022"
         And the customer bought a single "Jacket" using "SANTA2016" coupon
-        And the customer chose "Free" shipping method to "France" with "Cash on Delivery" payment
+        And the customer chose "Free" shipping method to "United States" with "Cash on Delivery" payment
         And I am logged in as an administrator
 
     @domain @ui

@@ -5,7 +5,7 @@ Feature: Resetting a password
     I need to be able to reset my password
 
     Background:
-        Given the store operates on a single channel in "France"
+        Given the store operates on a single channel in "United States"
         And there is a user "goodman@example.com" identified by "heisenberg"
 
     @ui @email

@@ -24,12 +24,13 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-final class DefaultFranceChannelFactory implements DefaultChannelFactoryInterface
+final class DefaultUnitedStatesChannelFactory implements DefaultChannelFactoryInterface
 {
-    const DEFAULT_CHANNEL_CODE = 'WEB-FR';
-    const DEFAULT_COUNTRY_CODE = 'FR';
-    const DEFAULT_ZONE_CODE = 'FR';
-    const DEFAULT_ZONE_NAME = 'France';
+    const DEFAULT_CHANNEL_CODE = 'WEB-US';
+    const DEFAULT_COUNTRY_CODE = 'US';
+    const DEFAULT_ZONE_CODE = 'US';
+    const DEFAULT_ZONE_NAME = 'United States';
+    const DEFAULT_CHANNEL_NAME = 'United States';
 
     /**
      * @var RepositoryInterface
@@ -157,7 +158,7 @@ final class DefaultFranceChannelFactory implements DefaultChannelFactoryInterfac
         $currency = $this->provideCurrency();
         $locale = $this->provideLocale();
 
-        $channel = $this->createChannel($code ?: self::DEFAULT_CHANNEL_CODE, $name ?: 'France');
+        $channel = $this->createChannel($code ?: self::DEFAULT_CHANNEL_CODE, $name ?: self::DEFAULT_CHANNEL_NAME);
         $channel->addCurrency($currency);
         $channel->setDefaultCurrency($currency);
         $channel->addLocale($locale);

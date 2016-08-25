@@ -5,8 +5,8 @@ Feature: Maintaining cart after authorization
     I want to be able to have my cart maintained
 
     Background:
-        Given the store operates on a single channel in "France"
-        And the store has a product "Stark T-shirt" priced at "€12.00"
+        Given the store operates on a single channel in "United States"
+        And the store has a product "Stark T-shirt" priced at "$12.00"
         And there is a user "robb@stark.com" identified by "KingInTheNorth"
 
     @ui

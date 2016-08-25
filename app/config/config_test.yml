@@ -5,7 +5,7 @@ imports:
     - { resource: "config.yml" }
 
 parameters:
-    currency: EUR
+    currency: USD
     locale: en_US
 
     sylius.order.allow_guest_order: true

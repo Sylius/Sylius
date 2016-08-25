@@ -19,7 +19,7 @@
         <parameter key="sylius.payment_method_name_to_gateway_converter.class">Sylius\Bundle\CoreBundle\Test\Services\PaymentMethodNameToGatewayConverter</parameter>
 
         <parameter key="sylius.random_invoice_number_generator.class">Sylius\Component\Core\Test\Services\RandomInvoiceNumberGenerator</parameter>
-        <parameter key="sylius.behat.factory.default_france_channel.class">Sylius\Component\Core\Test\Services\DefaultFranceChannelFactory</parameter>
+        <parameter key="sylius.behat.factory.default_united_states_channel.class">Sylius\Component\Core\Test\Services\DefaultUnitedStatesChannelFactory</parameter>
         <parameter key="sylius.behat.factory.default_channel.class">Sylius\Component\Core\Test\Services\DefaultChannelFactory</parameter>
         <parameter key="sylius.behat.email_checker.class">Sylius\Component\Core\Test\Services\EmailChecker</parameter>
 
@@ -38,7 +38,7 @@
         </service>
 
         <!--Default Store Data-->
-        <service id="sylius.behat.factory.default_france_channel" class="%sylius.behat.factory.default_france_channel.class%">
+        <service id="sylius.behat.factory.default_united_states_channel" class="%sylius.behat.factory.default_united_states_channel.class%">
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="sylius.repository.country" />
             <argument type="service" id="sylius.repository.currency" />

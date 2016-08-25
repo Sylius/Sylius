@@ -924,7 +924,7 @@ final class CheckoutContext implements Context
         $address = $this->addressFactory->createNew();
         $address->setFirstName('John');
         $address->setLastName('Doe');
-        $address->setCountryCode('FR');
+        $address->setCountryCode('US');
         $address->setCity('North Bridget');
         $address->setPostcode('93-554');
         $address->setStreet('0635 Myron Hollow Apt. 711');

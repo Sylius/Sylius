@@ -5,7 +5,7 @@ Feature: Viewing a product details
     I want to be able to view a single product
 
     Background:
-        Given the store operates on a single channel in "France"
+        Given the store operates on a single channel in "United States"
 
     @ui
     Scenario: Viewing a detailed page with product's name

@@ -5,7 +5,7 @@ Feature: Account registration
     I need to be able to create an account in the store
 
     Background:
-        Given the store operates on a single channel in "France"
+        Given the store operates on a single channel in "United States"
 
     @ui
     Scenario: Registering a new account with minimum information

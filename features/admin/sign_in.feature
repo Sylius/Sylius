@@ -5,7 +5,7 @@ Feature: Sign in to the store
     I want to be able to log in to the store
 
     Background:
-        Given the store operates on a single channel in "France"
+        Given the store operates on a single channel in "United States"
         And there is a user "ted@example.com" identified by "bear"
         And there is an administrator "admin@example.com" identified by "sylius"
 

@@ -5,9 +5,9 @@ Feature: Tax rate validation
     I want to be prevented from adding it without specifying required fields
 
     Background:
-        Given there is a zone "EU" containing all members of the European Union
+        Given the store operates on a single channel in "United States"
         And the store has a tax category "Food and Beverage"
-        Given I am logged in as an administrator
+        And I am logged in as an administrator
 
     @ui
     Scenario: Trying to add a new tax rate without specifying its code
@@ -30,11 +30,11 @@ Feature: Tax rate validation
     @ui
     Scenario: Trying to add a new tax rate without specifying its name
         Given I want to create a new tax rate
-        When I specify its code as "EUROPEAN_UNION_SALES_TAX"
+        When I specify its code as "UNITED_STATES_SALES_TAX"
         But I do not name it
         And I try to add it
         Then I should be notified that name is required
-        And tax rate with code "EUROPEAN_UNION_SALES_TAX" should not be added
+        And tax rate with code "UNITED_STATES_SALES_TAX" should not be added
 
     @ui
     Scenario: Trying to add a new tax rate without specifying its zone
@@ -58,7 +58,7 @@ Feature: Tax rate validation
 
     @ui
     Scenario: Trying to remove amount from existing tax rate
-        Given the store has "European Union Sales Tax" tax rate of 20% for "Sports gear" within "EU" zone
+        Given the store has "United States Sales Tax" tax rate of 20% for "Sports gear" within "US" zone
         And I want to modify this tax rate
         When I remove its amount
         And I try to save my changes
@@ -67,9 +67,9 @@ Feature: Tax rate validation
 
     @ui
     Scenario: Trying to remove name from existing tax rate
-        Given the store has "European Union Sales Tax" tax rate of 20% for "Sports gear" within "EU" zone
+        Given the store has "United States Sales Tax" tax rate of 20% for "Sports gear" within "US" zone
         And I want to modify this tax rate
         When I remove its name
         And I try to save my changes
         Then I should be notified that name is required
-        And this tax rate should still be named "European Union Sales Tax"
+        And this tax rate should still be named "United States Sales Tax"

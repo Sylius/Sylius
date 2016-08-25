@@ -5,7 +5,7 @@ Feature: Retrying to pay the order from my account panel
     I want to be able to access the order payment page from my account panel
 
     Background:
-        Given the store operates on a single channel in "France"
+        Given the store operates on a single channel in "United States"
         And there is a user "john@example.com" identified by "password123"
         And the store allows paying "PayPal Express Checkout"
         And the store ships everywhere for free

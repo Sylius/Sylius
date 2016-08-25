@@ -5,9 +5,9 @@ Feature: Selecting available shipping methods for a channel
     I want to be able to select available shipping methods
 
     Background:
-        Given the store has currency "Euro"
+        Given the store operates on a single channel in "United States"
+        And the store has currency "Euro"
         And the store has locale "English (United States)"
-        And there is a zone "EU" containing all members of the European Union
         And the store allows shipping with "UPS Carrier" identified by "UPS_CARRIER"
         And I am logged in as an administrator
 

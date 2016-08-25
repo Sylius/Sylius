@@ -15,7 +15,7 @@
     <services>
         <service id="sylius.behat.context.setup.channel" class="Sylius\Behat\Context\Setup\ChannelContext" scope="scenario">
             <argument type="service" id="sylius.behat.shared_storage" />
-            <argument type="service" id="sylius.behat.factory.default_france_channel" container="symfony" />
+            <argument type="service" id="sylius.behat.factory.default_united_states_channel" container="symfony" />
             <argument type="service" id="sylius.behat.factory.default_channel" container="symfony" />
             <argument type="service" id="sylius.factory.channel" container="symfony" />
             <argument type="service" id="sylius.repository.channel" container="symfony" />

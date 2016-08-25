@@ -5,7 +5,7 @@ Feature: Adding a new promotion with rule
     I want to add a new promotion with rule to the registry
 
     Background:
-        Given the store operates on a single channel in "France"
+        Given the store operates on a single channel in "United States"
         And the store classifies its products as "T-Shirts" and "Mugs"
         And I am logged in as an administrator
 

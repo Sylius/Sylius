@@ -10,7 +10,7 @@ Feature: Adding a new country
     @ui
     Scenario: Adding country
         Given I want to add a new country
-        When I choose "France"
+        When I choose "United States"
         And I add it
         Then I should be notified that it has been successfully created
-        And the country "France" should appear in the store
+        And the country "United States" should appear in the store
