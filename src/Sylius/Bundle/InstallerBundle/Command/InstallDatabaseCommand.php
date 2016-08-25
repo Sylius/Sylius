@@ -63,7 +63,6 @@ EOT
 
         $commands[] = 'cache:clear';
         $commands[] = 'doctrine:phpcr:repository:init';
-        $commands[] = 'sylius:rbac:initialize';
         $commands['doctrine:migrations:version'] = [
             '--add' => true,
             '--all' => true,
