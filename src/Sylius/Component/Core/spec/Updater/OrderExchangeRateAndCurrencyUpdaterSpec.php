@@ -11,6 +11,7 @@
 
 namespace spec\Sylius\Component\Core\OrderProcessing;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use PhpSpec\ObjectBehavior;
@@ -30,9 +31,9 @@ final class OrderExchangeRateAndCurrencyUpdaterSpec extends ObjectBehavior
     function let(
         CurrencyContextInterface $currencyContext,
         RepositoryInterface $currencyRepository,
-        RepositoryInterface $cartRepository
+        EntityManagerInterface $orderManager
     ) {
-        $this->beConstructedWith($currencyContext, $currencyRepository, $cartRepository);
+        $this->beConstructedWith($currencyContext, $currencyRepository, $orderManager);
     }
 
     function it_is_initializable()
@@ -49,7 +50,7 @@ final class OrderExchangeRateAndCurrencyUpdaterSpec extends ObjectBehavior
         OrderInterface $order,
         CurrencyContextInterface $currencyContext,
         RepositoryInterface $currencyRepository,
-        RepositoryInterface $cartRepository,
+        EntityManagerInterface $orderManager,
         CurrencyInterface $currency,
         ChannelInterface $channel
     ) {
@@ -62,7 +63,8 @@ final class OrderExchangeRateAndCurrencyUpdaterSpec extends ObjectBehavior
         $order->setCurrencyCode('GBP')->shouldBeCalled();
         $order->setExchangeRate(3.5)->shouldBeCalled();
 
-        $cartRepository->add($order)->shouldBeCalled();
+        $orderManager->persist($order)->shouldBeCalled();
+        $orderManager->flush()->shouldBeCalled();
 
         $this->update($order);
     }

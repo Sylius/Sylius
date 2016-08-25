@@ -9,12 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Core;
+namespace Sylius\Bundle\CoreBundle\Handler;
 
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class SyliusChannelEvents
+interface CodeChangeHandlerInterface
 {
-    const CURRENCY_CHANGE = 'sylius.channel.currency_change';
+    /**
+     * @param string $code
+     */
+    public function handle($code);
 }

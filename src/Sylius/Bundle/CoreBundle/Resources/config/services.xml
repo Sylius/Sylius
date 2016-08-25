@@ -90,6 +90,8 @@
 
         <parameter key="sylius.context.customer.class">Sylius\Bundle\CoreBundle\Context\CustomerContext</parameter>
 
+        <parameter key="sylius.handler.cart.currency_change.class">Sylius\Bundle\CoreBundle\Handler\CurrencyCodeChangeHandler</parameter>
+
         <!-- Form subscriber -->
         <parameter key="sylius.form.event_subscriber.set_customer_type.class">Sylius\Bundle\CoreBundle\Form\EventSubscriber\SetCustomerFormSubscriber</parameter>
 
@@ -247,12 +249,6 @@
             <tag name="doctrine.event_listener" event="prePersist" />
             <tag name="doctrine.event_listener" event="preUpdate" />
         </service>
-        <service id="sylius.listener.current_currency_change" class="Sylius\Bundle\CoreBundle\EventListener\CurrentCurrencyChangeListener">
-            <argument type="service" id="sylius.context.cart" />
-            <argument type="service" id="sylius.order_processing.order_exchange_rate_and_currency_updater" />
-            <argument type="service" id="event_dispatcher" />
-            <tag name="kernel.event_listener" event="sylius.channel.currency_change" method="updateCart" />
-        </service>
 
         <service id="sylius.image_uploader" class="%sylius.image_uploader.class%">
             <argument type="service">
@@ -294,13 +290,12 @@
             <tag name="sylius.payment_method_resolver" type="channel_based" label="sylius.payment_methods_resolver.channel_based" priority="1" />
         </service>
 
-        <service id="sylius.storage.context_based_currency.default" class="Sylius\Component\Core\Storage\ContextBasedCurrencyStorage">
+        <service id="sylius.handler.cart.currency_change" class="%sylius.handler.cart.currency_change.class%">
+            <argument type="service" id="sylius.context.cart" />
+            <argument type="service" id="sylius.context.channel.composite" />
             <argument type="service" id="sylius.storage.currency" />
-            <argument type="service" id="sylius.context.shopper" />
-        </service>
-        <service id="sylius.storage.context_based_currency" class="Sylius\Bundle\CoreBundle\Storage\ContextBasedCurrencyStorage" decorates="sylius.storage.context_based_currency.default">
-            <argument type="service" id="sylius.storage.context_based_currency.inner" />
             <argument type="service" id="event_dispatcher" />
+            <argument type="service" id="sylius.updater.order.exchange_rate_and_currency" />
         </service>
 
         <service id="sylius.updater.order.exchange_rate" class="%sylius.updater.order.exchange_rate.class%">
@@ -309,6 +304,7 @@
         <service id="sylius.updater.order.exchange_rate_and_currency" class="%sylius.updater.order.exchange_rate_and_currency.class%">
             <argument type="service" id="sylius.context.currency" />
             <argument type="service" id="sylius.repository.currency" />
+            <argument type="service" id="sylius.manager.order" />
         </service>
 
         <!-- Customer context -->

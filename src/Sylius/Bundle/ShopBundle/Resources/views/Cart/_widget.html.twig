@@ -1,6 +1,6 @@
 {% set cart = sylius_cart_get() %}
 
-<div class="ui circular cart button">
+<div id="sylius-cart-button" class="ui circular cart button">
     <i class="cart icon"></i> {{ cart.total|sylius_price(cart.currencyCode) }}{% if not cart.empty %}, {{ cart.items|length }} {{ 'sylius.ui.items'|trans|lower }}{% endif %}
 </div>
 <div class="ui large flowing cart hidden popup">

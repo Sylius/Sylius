@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Core\Updater;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
@@ -32,23 +33,23 @@ final class OrderExchangeRateAndCurrencyUpdater implements OrderUpdaterInterface
     private $currencyRepository;
 
     /**
-     * @var RepositoryInterface
+     * @var EntityManagerInterface
      */
-    private $cartRepository;
+    private $orderManager;
 
     /**
      * @param CurrencyContextInterface $currencyContext
      * @param RepositoryInterface $currencyRepository
-     * @param RepositoryInterface $cartRepository
+     * @param EntityManagerInterface $orderManager
      */
     public function __construct(
         CurrencyContextInterface $currencyContext,
         RepositoryInterface $currencyRepository,
-        RepositoryInterface $cartRepository
+        EntityManagerInterface $orderManager
     ) {
         $this->currencyContext = $currencyContext;
         $this->currencyRepository = $currencyRepository;
-        $this->cartRepository = $cartRepository;
+        $this->orderManager = $orderManager;
     }
 
     /**
@@ -62,6 +63,7 @@ final class OrderExchangeRateAndCurrencyUpdater implements OrderUpdaterInterface
         $order->setCurrencyCode($currency->getCode());
         $order->setExchangeRate($currency->getExchangeRate());
 
-        $this->cartRepository->add($order);
+        $this->orderManager->persist($order);
+        $this->orderManager->flush();
     }
 }
