@@ -51,3 +51,31 @@ sylius_api_checkout_select_shipping:
             state_machine:
                 graph: sylius_order_checkout
                 transition: select_shipping
+
+sylius_api_checkout_select_payment:
+    path: /select-payment/{orderId}
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.order:updateAction
+        _sylius:
+            form: sylius_checkout_select_payment
+            repository:
+                method: find
+                arguments: $orderId
+            state_machine:
+                graph: sylius_order_checkout
+                transition: select_payment
+
+sylius_api_checkout_complete:
+    path: /complete/{orderId}
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.order:updateAction
+        _sylius:
+            form: sylius_checkout_complete
+            repository:
+                method: find
+                arguments: $orderId
+            state_machine:
+                graph: sylius_order_checkout
+                transition: complete
