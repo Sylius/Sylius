@@ -22,6 +22,7 @@ The Book
     addresses
     inventory
     orders
+    checkout
     shipments
     payments
     taxation
