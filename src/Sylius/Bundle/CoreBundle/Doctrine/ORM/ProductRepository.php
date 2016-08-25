@@ -16,7 +16,6 @@ use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository as BaseProductRep
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
-use Sylius\Component\Product\Model\ArchetypeInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -64,24 +63,6 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
     /**
      * {@inheritdoc}
      */
-    public function createByProductArchetypePaginator(ArchetypeInterface $archetype, array $criteria = [])
-    {
-        $queryBuilder = $this->createQueryBuilder('o');
-        $queryBuilder
-            ->innerJoin('o.archetype', 'archetype')
-            ->addSelect('archetype')
-            ->andWhere('archetype = :archetype')
-            ->setParameter('archetype', $archetype)
-        ;
-
-        $this->applyCriteria($queryBuilder, $criteria);
-
-        return $this->getPaginator($queryBuilder);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function createByTaxonAndChannelPaginator(TaxonInterface $taxon, ChannelInterface $channel)
     {
         $queryBuilder = $this->createQueryBuilder('o')
@@ -106,9 +87,6 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
             ->leftJoin('o.translations', 'translation')
             ->addSelect('variant')
             ->leftJoin('o.variants', 'variant')
-            ->addSelect('archetype')
-            ->leftJoin('o.archetype', 'archetype')
-            ->leftJoin('archetype.translations', 'archetype_translation')
         ;
 
         if (!empty($criteria['name'])) {
@@ -222,7 +200,7 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
             ->setParameter('code', $code)
             ->setParameter('channel', $channel)
             ->getQuery()
-            ->getResult();
+            ->getResult()
         ;
     }
 
@@ -240,7 +218,7 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
             ->setParameter('slug', $slug)
             ->setParameter('channel', $channel)
             ->getQuery()
-            ->getOneOrNullResult();
+            ->getOneOrNullResult()
         ;
     }
 

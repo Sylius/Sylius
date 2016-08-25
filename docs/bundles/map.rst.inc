@@ -1,6 +1,5 @@
 * :doc:`/bundles/general/index`
 * :doc:`/bundles/SyliusAddressingBundle/index`
-* :doc:`/bundles/SyliusArchetypeBundle/index`
 * :doc:`/bundles/SyliusAttributeBundle/index`
 * :doc:`/bundles/SyliusCartBundle/index`
 * :doc:`/bundles/SyliusContactBundle/index`

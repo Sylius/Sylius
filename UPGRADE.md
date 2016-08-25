@@ -3,6 +3,10 @@ UPGRADE
 
 ## From 0.19 to 1.0.0-alpha
 
+### Archetype and ArchetypeBundle
+
+* Removed ``Archetype`` component and ``ArchetypeBundle``
+
 ### ChannelBundle
 
 * Renamed configuration option `sylius_channel.fake_channel_support` to `sylius_channel.debug`

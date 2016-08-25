@@ -15,7 +15,6 @@ We recommend checking out :doc:`/components/general/index`, which will get you s
 
     general/index
     Addressing/index
-    Archetype/index
     Attribute/index
     Cart/index
     Channel/index

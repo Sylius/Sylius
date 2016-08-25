@@ -52,8 +52,6 @@ sylius:
         an_error_occurred: An error occurred
         api: Api
         apply_coupon: Apply coupon
-        archetype: Archetype
-        archetypes: Archetypes
         are_your_sure_you_want_to_perform_this_action: Are you sure you want to perform this action?
         association: Association
         association_types: 'Association types'
@@ -79,7 +77,6 @@ sylius:
         body: Body
         browse_products: 'Browse products'
         build: Build
-        building_product_from_archetype: 'Building product from archetype'
         calculator: Calculator
         cancel: Cancel
         cancelled: Cancelled
@@ -134,7 +131,6 @@ sylius:
         create_a_new_address: 'Create a new address'
         create_a_new_customer_account: Create a new customer account
         create_an_account: Create an account
-        create_archetype: 'Create archetype'
         create_association_type: 'Create Association type'
         create_contact_request: 'Create contact request'
         create_contact_topic: 'Create contact topic'
@@ -250,7 +246,6 @@ sylius:
         edit_your_items_apply_coupon_or_proceed_to_the_checkout: Edit your items, apply coupon or proceed to the checkout
         edit_your_personal_information: 'Edit your personal information'
         edit_zone: Edit zone
-        editing_archetype: 'Editing archetype'
         editing_attribute: 'Editing attribute'
         editing_channel: 'Editing channel'
         editing_contact_request: 'Editing contact request'
@@ -434,7 +429,6 @@ sylius:
         name: Name
         new: New
         new_admin_user: 'New administrator'
-        new_archetype: 'New archetype'
         new_channel: New channel
         new_comment_posted_on_order: 'New comment posted on order'
         new_contact_request: 'New contact request'
@@ -557,7 +551,6 @@ sylius:
         process_your_orders: Process your orders
         processing: Processing
         product: Product
-        product_archetypes: 'Product archetypes'
         product_association_index: Association
         product_association_type_index: 'Association type'
         product_association_types: 'Product association types'
@@ -698,7 +691,6 @@ sylius:
         thank_you: Thank you!
         thank_you_for_your_order: 'Thank you for your order'
         theme: Theme
-        there_are_no_archetypes_defined: 'There are no archetypes defined'
         there_are_no_attributes_configured: 'There are no attributes configured'
         there_are_no_blocks_to_display: 'There are no blocks to display'
         there_are_no_channels_configured: 'There are no channels configured'
