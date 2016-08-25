@@ -332,6 +332,7 @@ final class ProductContext implements Context
 
     /**
      * @Given /^there (?:is|are) (\d+) item(?:s) of (product "([^"]+)") available in the inventory$/
+     * @When product :product quantity is changed to :quantity
      */
     public function thereIsQuantityOfProducts($quantity, ProductInterface $product)
     {

@@ -488,6 +488,17 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Then I should not see the thank you page
+     */
+    public function iShouldNotSeeTheThankYouPage()
+    {
+        Assert::false(
+            $this->thankYouPage->hasThankYouMessage(),
+            'I should not see thank you message, but I do'
+        );
+    }
+
+    /**
      * @Given I should be informed with :paymentMethod payment method instructions
      */
     public function iShouldBeInformedWithPaymentMethodInstructions(PaymentMethodInterface $paymentMethod)
