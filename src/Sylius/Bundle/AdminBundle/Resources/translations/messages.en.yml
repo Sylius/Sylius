@@ -33,3 +33,4 @@ sylius:
                     header: Content
                     static_contents: Static contents
                     routes: Routes
+                    slideshow_block: Slideshows

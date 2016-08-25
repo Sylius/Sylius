@@ -32,6 +32,7 @@
         <import resource="admin/route.xml" />
         <import resource="admin/shipping_method.xml" />
         <import resource="admin/static_content.xml" />
+        <import resource="admin/slideshow_block.xml" />
         <import resource="admin/tax_category.xml" />
         <import resource="admin/tax_rate.xml" />
         <import resource="admin/taxon.xml" />

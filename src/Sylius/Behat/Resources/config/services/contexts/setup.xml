@@ -174,6 +174,14 @@
             <tag name="sylius.behat.context" />
         </service>
 
+        <service id="sylius.behat.context.setup.slideshow_block" class="Sylius\Behat\Context\Setup\SlideshowBlockContext" scope="scenario">
+            <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="sylius.fixture.example_factory.slideshow_block" container="symfony" />
+            <argument type="service" id="sylius.fixture.example_factory.imagine_block" container="symfony" />
+            <argument type="service" id="sylius.manager.slideshow_block" container="symfony" />
+            <tag name="sylius.behat.context" />
+        </service>
+
         <service id="sylius.behat.context.setup.taxation" class="Sylius\Behat\Context\Setup\TaxationContext" scope="scenario">
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.factory.tax_rate" container="symfony" />

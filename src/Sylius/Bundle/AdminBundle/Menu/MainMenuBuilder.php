@@ -124,6 +124,11 @@ final class MainMenuBuilder extends AbstractAdminMenuBuilder
             ->setLabel('sylius.menu.admin.main.content.static_contents')
             ->setLabelAttribute('icon', 'file')
         ;
+        $child
+            ->addChild('slideshow_block', ['route' => 'sylius_admin_slideshow_block_index'])
+            ->setLabel('sylius.menu.admin.main.content.slideshow_block')
+            ->setLabelAttribute('icon', 'file')
+        ;
 
         $child
             ->addChild('routes', ['route' => 'sylius_admin_route_index'])

@@ -1,0 +1,30 @@
+sylius_grid:
+    grids:
+        sylius_admin_slideshow_block:
+            driver:
+                name: doctrine/phpcr-odm
+                options:
+                    class: "%sylius.model.slideshow_block.class%"
+            fields:
+                name:
+                    type: string
+                    label: sylius.ui.name
+                title:
+                    type: string
+                    label: sylius.ui.title
+            filters:
+                title:
+                    type: string
+                    label: sylius.ui.title
+                name:
+                    type: string
+                    label: sylius.ui.body
+            actions:
+                main:
+                    create:
+                        type: create
+                item:
+                    update:
+                        type: update
+                    delete:
+                        type: delete

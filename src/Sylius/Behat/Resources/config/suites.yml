@@ -22,6 +22,7 @@ imports:
     - suites/ui/cmf/managing_routes.yml
     - suites/ui/cmf/managing_static_contents.yml
     - suites/ui/cmf/static_content.yml
+    - suites/ui/cmf/managing_slideshow_blocks.yml
     - suites/ui/channel/managing_channels.yml
     - suites/ui/channel/products_accessibility_in_multiple_channels.yml
     - suites/ui/channel/theming.yml
