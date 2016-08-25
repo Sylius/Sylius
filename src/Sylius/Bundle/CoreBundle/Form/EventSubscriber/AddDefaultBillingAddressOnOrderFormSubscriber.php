@@ -37,7 +37,10 @@ class AddDefaultBillingAddressOnOrderFormSubscriber implements EventSubscriberIn
     {
         $orderData = $event->getData();
 
-        if (!isset($orderData['differentBillingAddress']) || false === $orderData['differentBillingAddress']) {
+        if (
+            (!isset($orderData['differentBillingAddress']) || false === $orderData['differentBillingAddress']) &&
+            isset($orderData['shippingAddress'])
+        ) {
             $orderData['billingAddress'] = $orderData['shippingAddress'];
 
             $event->setData($orderData);
