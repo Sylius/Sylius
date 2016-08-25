@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class CheckoutApiTest extends JsonApiTestCase
+class CheckoutAddressingApiTest extends JsonApiTestCase
 {
     /**
      * @var array
