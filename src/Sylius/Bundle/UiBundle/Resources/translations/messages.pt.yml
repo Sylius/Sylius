@@ -168,7 +168,6 @@ sylius:
         pricing: Preços
         processing: Em processamento
         product: Produto
-        product_archetypes: Protótipos
         product_details_viewing_product_product: 'Detalhes de produto <small>Visualizando produto "<strong>%product%</strong>"</small>'
         product_reviews: Críticas do produto
         products: Produtos

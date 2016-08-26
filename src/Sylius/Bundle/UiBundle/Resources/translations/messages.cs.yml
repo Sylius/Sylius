@@ -39,7 +39,6 @@ sylius:
         administration_dashboard: Nástěnka administrace
         all_your_addresses: Všechny adresy
         amount: Částka
-        archetype: Prototyp
         assortment: Sortiment
         attributes: Atributy
         author: Autor
@@ -73,10 +72,6 @@ sylius:
         configuration: Konfigurace
         confirmation: Potvrzení
         confirmation_title: Potvrzení
-        contact_request_details: Detaily požadavku kontaktu
-        contact_request_show: Žádost kontaktu
-        contact_requests: Žádosti kontaktu
-        contact_topics: Témata kontaktu
         contain_variants: Obsahuje varianty
         content: Obsah
         countries: Země
@@ -87,8 +82,6 @@ sylius:
         coupons: Kupóny
         create: Vytvořit
         create_a_new_address: Vytvořit novou adresu
-        create_contact_request: Vytvořit požadavek kontaktu
-        create_contact_topic: Vytvořit téma kontaktu
         create_country: Vytvořit zemi
         create_currency: Vytvořit měnu
         create_group: Vytvořit skupinu
@@ -156,8 +149,6 @@ sylius:
         edit_your_personal_information: Upravit osobní údaje
         editing_attribute: Úprava atributu
         editing_channel: Editace kanálu
-        editing_contact_request: Editace požadavku kontaktu
-        editing_contact_topic: Editace témata kontaktu
         editing_country: Editace země
         editing_coupon: Úprava kupónu
         editing_currency: Editace měny
@@ -277,8 +268,6 @@ sylius:
         name: Jméno
         new: Nový
         new_comment_posted_on_order: Nové komentáře k objednávce
-        new_contact_request: Nový požadavek kontaktu
-        new_contact_topic: Nové téma kontaktu
         new_country: Nové země
         new_currency: Nová měna
         new_order: Nová objednávka
@@ -353,7 +342,6 @@ sylius:
         priority: Priorita
         processing: Zpracovává se
         product: Produkt
-        product_archetypes: Prototypy produktů
         product_attributes: Atributy produktu
         product_details_viewing_product_product: 'Podrobnosti produktu <small>zobrazení produktu "<strong>%product%</strong>"</small>'
         product_options: Volby produktů

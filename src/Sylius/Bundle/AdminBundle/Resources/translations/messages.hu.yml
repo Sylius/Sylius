@@ -12,6 +12,7 @@ sylius:
                     products: Termékek
                     taxons: Taxonok
                 configuration:
+                    admin_users: Adminisztrátorok
                     channels: Csatornák
                     countries: Országok
                     currencies: Pénznemek

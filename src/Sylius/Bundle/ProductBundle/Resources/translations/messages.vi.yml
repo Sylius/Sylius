@@ -6,8 +6,5 @@ sylius:
         product:
             name: Tên
             options: Tùy chọn
-        product_archetype:
-            name: Tên
-            options: Tùy chọn
         association_type:
             name: Tên

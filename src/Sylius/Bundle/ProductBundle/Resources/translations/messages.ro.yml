@@ -13,10 +13,5 @@ sylius:
             taxons: Categorii
         product_variant:
             available_on: Disponibil din
-        product_archetype:
-            name: Nume
-            parent: Părinte
-            attributes: Atribute
-            options: Opţiuni
         association_type:
             name: Nume

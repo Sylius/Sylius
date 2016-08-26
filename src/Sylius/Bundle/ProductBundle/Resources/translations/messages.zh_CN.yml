@@ -14,11 +14,6 @@ sylius:
         product_variant:
             available_on: 可用
             available_until: 有效期至
-        product_archetype:
-            name: 名称
-            parent: 上一级
-            attributes: 属性
-            options: 选项
         association_type:
             name: 名称
         association:

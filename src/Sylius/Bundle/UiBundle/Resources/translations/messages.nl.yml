@@ -52,8 +52,6 @@ sylius:
         amount: Hoeveelheid
         an_error_occurred: Er deed zich een fout voor
         apply_coupon: Coupon toepassen
-        archetype: Prototype
-        archetypes: Prototypes
         are_your_sure_you_want_to_perform_this_action: Weet u zeker dat u deze actie wilt uitvoeren?
         association: Relatie
         association_types: Relatietypes
@@ -78,7 +76,6 @@ sylius:
         body: Inhoud
         browse_products: Bekijk producten
         build: Bouwen
-        building_product_from_archetype: Nieuw product van prototype
         calculator: Calculator
         cancel: Annuleren
         cancelled: Geannuleerd
@@ -114,10 +111,6 @@ sylius:
         confirmation: Bevestiging
         confirmation_title: Bevestiging
         confirmed: Bevestigd
-        contact_request_details: Details contact verzoek
-        contact_request_show: Contact verzoek
-        contact_requests: Contact verzoeken
-        contact_topics: Contact onderwerpen
         contact_us: Contacteer ons
         contain_variants: Bevat Varianten
         contains: Bevat
@@ -132,10 +125,7 @@ sylius:
         create_a_new_address: Voeg nieuw adres toe
         create_a_new_customer_account: Maak een nieuwe klantenaccount
         create_an_account: Een account aanmaken
-        create_archetype: Nieuw prototype
         create_association_type: Nieuw relatietype
-        create_contact_request: Contact verzoek aanmaken
-        create_contact_topic: Contact thema aanmaken
         create_country: Nieuw land
         create_currency: Valuta maken
         create_customer: Nieuwe klant
@@ -248,11 +238,8 @@ sylius:
         edit_your_items_apply_coupon_or_proceed_to_the_checkout: Wijzig je items, pas coupon codes toe of ga naar de kassa
         edit_your_personal_information: Bewerk uw persoonlijke informatie
         edit_zone: Zone bewerken
-        editing_archetype: Bewerk prototype
         editing_attribute: Bewerk attribuut
         editing_channel: Kanaal bewerken
-        editing_contact_request: Contact verzoek bewerken
-        editing_contact_topic: Contact thema bewerken
         editing_country: Land bewerken
         editing_coupon: Coupon bewerken
         editing_currency: Valuta bewerken
@@ -427,11 +414,8 @@ sylius:
         n_a: N/B
         name: Naam
         new: Nieuw
-        new_archetype: Nieuw prototype
         new_channel: Nieuw kanaal
         new_comment_posted_on_order: Nieuwe commentaar gepost op bestelling
-        new_contact_request: Nieuwe contact verzoek
-        new_contact_topic: Nieuw contact thema
         new_country: NIeuw land toevoegen
         new_coupon: Nieuwe coupon
         new_currency: Nieuwe valuta
@@ -544,7 +528,6 @@ sylius:
         process_your_orders: Verwerk je bestellingen
         processing: Verwerken
         product: Product
-        product_archetypes: Product prototypes
         product_association_index: Relatie
         product_association_type_index: Associatietype
         product_association_types: Product relatietypes
@@ -682,12 +665,9 @@ sylius:
         thank_you: Bedankt!
         thank_you_for_your_order: Bedankt voor uw bestelling
         theme: Thema
-        there_are_no_archetypes_defined: Er zijn geen prototypes gedefinieerd
         there_are_no_attributes_configured: Er zijn geen attributen geconfigureerd
         there_are_no_blocks_to_display: Er zijn geen blokken weer te geven
         there_are_no_channels_configured: Er zijn geen kanalen geconfigureerd
-        there_are_no_contact_requests_to_display: Er zijn geen contact verzoeken om weer te geven
-        there_are_no_contact_topics_to_display: Er zijn geen contact onderwerpen weer te geven
         there_are_no_countries_configured: Er zijn geen landen geconfigureerd
         there_are_no_coupon_to_display: Er zijn geen coupons om weer te geven
         there_are_no_currencies_to_display: "Er zijn geen valuta's om weer te geven"

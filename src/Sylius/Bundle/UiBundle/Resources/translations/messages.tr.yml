@@ -37,7 +37,6 @@ sylius:
         administration_dashboard: Yönetim kontrol paneli
         all_your_addresses: Tüm adresleriniz
         amount: Miktar
-        archetype: Arketipi
         assortment: Çeşitlilik
         attributes: Nitelikler
         author: Hazırlayan
@@ -52,7 +51,6 @@ sylius:
         body: İçerik
         browse_products: Ürünlere göz atın
         build: Oluştur
-        building_product_from_archetype: Güzel örneği yapı ürün
         calculator: Hesaplayıcı
         cancel: İptal
         cancelled: İptal Edildi
@@ -73,10 +71,6 @@ sylius:
         configuration: Ayarlar
         confirmation: Doğrulama
         confirmation_title: Doğrulama
-        contact_request_details: İletişim isteği ayrıntıları
-        contact_request_show: İletişim isteği
-        contact_requests: İletişim istekleri
-        contact_topics: İletişim konuları
         contain_variants: Varyasyonlar içerir
         content: İçerik
         countries: Ülkeler
@@ -87,9 +81,6 @@ sylius:
         coupons: Kuponlar
         create: Oluştur
         create_a_new_address: Yeni bir adres oluşturun
-        create_archetype: Arketipi oluştur
-        create_contact_request: Yeni iletişim oluştur
-        create_contact_topic: İletişim konusu oluştur
         create_country: Ülke ekle
         create_currency: Para birimi oluştur
         create_group: Grup oluştur
@@ -161,11 +152,8 @@ sylius:
         edit_my_address: Adresi düzenle
         edit_report: Raporu Düzenle
         edit_your_personal_information: Kişisel bilgilerinizi düzenleyin
-        editing_archetype: Arketipi düzenleme
         editing_attribute: Öznitelik düzenleme
         editing_channel: Kanal düzenleme
-        editing_contact_request: İletişim isteğini düzenleme
-        editing_contact_topic: İletişim konusu düzenleme
         editing_country: Ülke düzenleme
         editing_coupon: Kupon düzenleme
         editing_currency: Para birimi düzenleme
@@ -287,10 +275,7 @@ sylius:
         n_a: Veri yok
         name: Ad
         new: Yeni
-        new_archetype: Yeni arketipi
         new_comment_posted_on_order: Yeni yorum sipariş yayınlanmıştır
-        new_contact_request: Yeni iletişim isteği
-        new_contact_topic: Yeni iletişim konusu
         new_country: Yeni ülke
         new_currency: Yeni para birimi
         new_order: Yeni sipariş
@@ -366,7 +351,6 @@ sylius:
         priority: Öncelik
         processing: İşlem Yapılıyor
         product: Ürün
-        product_archetypes: Ürün arketipler
         product_association_types: Ürün ilişki türleri
         product_attributes: Ürün Öznitelikleri
         product_details_viewing_product_product: 'Ürün ayrıntıları <small>Gösterilen ürün "<strong>%product%</strong>"</small>'

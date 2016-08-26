@@ -14,11 +14,6 @@ sylius:
         product_variant:
             available_on: Dostupný od
             available_until: Dostupný do
-        product_archetype:
-            name: Názov
-            parent: Nadradená kategória
-            attributes: Vlastnosti
-            options: Voľby
         association_type:
             name: Názov
         association:

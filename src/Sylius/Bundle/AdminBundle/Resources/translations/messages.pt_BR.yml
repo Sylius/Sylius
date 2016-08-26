@@ -12,6 +12,7 @@ sylius:
                     products: Produtos
                     taxons: Taxas
                 configuration:
+                    admin_users: Administradores
                     channels: Canais
                     countries: Países
                     currencies: Moedas
@@ -33,4 +34,5 @@ sylius:
                     orders: Pedidos
                 content:
                     header: Conteúdo
+                    static_contents: Conteúdo estático
                     routes: Rotas

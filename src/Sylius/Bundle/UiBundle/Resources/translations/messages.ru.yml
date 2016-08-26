@@ -34,7 +34,6 @@ sylius:
         administration_dashboard: Административная панель
         all_your_addresses: sylius.account.address.list
         amount: Сумма
-        archetypes: Прототипы
         association: Взаимосвязи
         association_types: Типы взаимосвязей
         assortment: Ассортимент
@@ -52,7 +51,6 @@ sylius:
         body: Содержание
         browse_products: Обзор продукции
         build: Построить
-        building_product_from_archetype: Построить продукт из архетипа
         calculator: Калькулятор
         cancel: Отмена
         cancelled: Отменён
@@ -73,10 +71,6 @@ sylius:
         configuration: Конфигурация
         confirmation: Подтверждение
         confirmation_title: Подтверждение
-        contact_request_details: Детали контактного запроса
-        contact_request_show: Запрос контактов
-        contact_requests: Запросы контактов
-        contact_topics: Темы обращений
         contain_variants: Содержит варианты
         content: Контент
         countries: Страны
@@ -87,10 +81,7 @@ sylius:
         coupons: sylius.breadcrumb.promotion_coupon.index
         create: Добавить
         create_a_new_address: sylius.account.address.create
-        create_archetype: Создать архетип
         create_association_type: Создать тип взаимосвязи
-        create_contact_request: Создать контактный запрос
-        create_contact_topic: Создать тему контакта
         create_country: Добавить поселок, село
         create_currency: Добавить валюту
         create_customer: Создание клиента
@@ -149,10 +140,7 @@ sylius:
         edit_locale: Редактировать язык
         edit_my_address: sylius.account.address.update
         edit_your_personal_information: Edit my personal information
-        editing_archetype: Редактировать прототип
         editing_channel: Редактировать каналы
-        editing_contact_request: Редактировать контактный запрос
-        editing_contact_topic: Редактирование темы контакта
         editing_country: Редактировать страну
         editing_coupon: Редактирование купона
         editing_currency: Изменение валюты
@@ -263,10 +251,7 @@ sylius:
         n_a: Н/Д
         name: Название
         new: Новый
-        new_archetype: Новый архетип
         new_comment_posted_on_order: Новый комментарий, добавленный к заказу
-        new_contact_request: Новый контактный запрос
-        new_contact_topic: Новая тема контакта
         new_country: Добавить страну
         new_currency: Новая валюта
         new_order: Новый заказ
@@ -334,7 +319,6 @@ sylius:
         pricing: ценообразование
         processing: Обрабатывается
         product: Товар
-        product_archetypes: Прототипы продукта
         product_association_index: Взаимосвязи
         product_association_type_index: Типы взаимосвязи
         product_association_types: Типы взаимосвязей продуктов
@@ -423,11 +407,8 @@ sylius:
         taxes: Налоги
         taxons: Налоги
         theme: Тема оформления
-        there_are_no_archetypes_defined: Не опреленно ни одного архетипа
         there_are_no_blocks_to_display: Нет блоков для отображения
         there_are_no_channels_configured: Нет настроенных каналов
-        there_are_no_contact_requests_to_display: Нет контактных запросов для отображения
-        there_are_no_contact_topics_to_display: Нет тем контактов для отображения
         there_are_no_countries_configured: Ни одна страна не была настроена
         there_are_no_currencies_to_display: Нет валюты для отображения
         there_are_no_images_for_this_product: Нет изображений для данного товара

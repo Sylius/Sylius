@@ -45,8 +45,6 @@ sylius:
         all_your_addresses: تمامی آدرس های شما
         amount: مبلغ
         an_error_occurred: یک خطا روی داده است
-        archetype: قلم کالا
-        archetypes: اقلام کالا
         are_your_sure_you_want_to_perform_this_action: آیا از اعمال این کار اطمینان دارید؟
         association: ارتباط ها
         association_types: انواع ارتباط ها
@@ -67,7 +65,6 @@ sylius:
         body: متن
         browse_products: نمایش محصولات
         build: ایجاد
-        building_product_from_archetype: ایجاد محصول از روی قلم محصول
         calculator: نوع محاسبه
         cancel: لغو
         cancelled: پرداخت لغو شده
@@ -96,10 +93,6 @@ sylius:
         confirmation: تایید
         confirmation_title: تایید
         confirmed: تایید شده
-        contact_request_details: جزئیات درخواست پشتیبانی
-        contact_request_show: درخواست پشتیبانی
-        contact_requests: درخواست های پشتیبانی
-        contact_topics: موضوعات پشتیبانی
         contain_variants: شامل ترکیبات
         contains: محتویات
         content: آیتم های محتوایی
@@ -111,10 +104,7 @@ sylius:
         coupons: کدهای تخفیف
         create: ایجاد
         create_a_new_address: افزودن آدرس جدید
-        create_archetype: ایجاد قلم محصول
         create_association_type: ایجاد نوع ارتباط
-        create_contact_request: درخواست پشتیبانی
-        create_contact_topic: ایجاد موضوع پشتیبانی
         create_country: ایجاد کشور
         create_currency: ایجاد ارز
         create_customer: ایجاد کاربر
@@ -209,11 +199,8 @@ sylius:
         edit_tax_category: ویرایش شاخه مالیات
         edit_tax_rate: ویرایش نرخ مالیات
         edit_your_personal_information: ویرایش اطلاعات شخصی
-        editing_archetype: ویرایش قلم کالا
         editing_attribute: ویرایش قابلیت
         editing_channel: ویرایش کانال
-        editing_contact_request: ویرایش درخواست پشتیبانی
-        editing_contact_topic: ویرایش موضوع پشتیبانی
         editing_country: ویرایش کشور
         editing_coupon: ویرایش کد تخفیف
         editing_currency: ویرایش ارز
@@ -363,11 +350,8 @@ sylius:
         n_a: نامشخص
         name: نام
         new: پرداخت ثبت شده
-        new_archetype: قلم محصول جدید
         new_channel: کانال جدید
         new_comment_posted_on_order: یادداشت جدیدی روی سفارش ارسال شد
-        new_contact_request: درخواست پشتیبانی جدید
-        new_contact_topic: موضوع پشتیبانی جدید
         new_country: کشور جدید
         new_currency: ارز جدید
         new_locale: منطقه جدید
@@ -459,7 +443,6 @@ sylius:
         priority: درجه ی اهمیت
         processing: پرداخت در حال پردازش
         product: محصول
-        product_archetypes: اقلام محصول
         product_association_index: ارتباط ها
         product_association_type_index: نوع ارتباط
         product_association_types: انواع روابط محصول
@@ -575,12 +558,9 @@ sylius:
         taxons: رده ها
         thank_you_for_your_order: از سفارش شما سپاسگزاریم
         theme: قالب
-        there_are_no_archetypes_defined: قلم کالایی تعریف نشده
         there_are_no_attributes_configured: قابلیتی پیکربندی نشده
         there_are_no_blocks_to_display: هیچ بلاکی برای نمایش وجود ندارد
         there_are_no_channels_configured: هیچ کانالی پیکربندی نشده
-        there_are_no_contact_requests_to_display: هیچ درخواست پشتیبانی برای نمایش وجود ندارد
-        there_are_no_contact_topics_to_display: هیچ موضوع پشتیبانی برای نمایش وجود ندارد
         there_are_no_countries_configured: هیچ کشوری پیکربندی نشده
         there_are_no_coupon_to_display: هیچ کد تخفیفی برای نمایش وجود ندارد
         there_are_no_currencies_to_display: ارزی برای نمایش وجود ندارد

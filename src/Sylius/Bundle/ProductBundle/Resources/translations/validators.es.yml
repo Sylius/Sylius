@@ -17,11 +17,3 @@ sylius:
         sku:
             not_blank: Por favor introduzca el SKU de la variante.
             unique: El SKU de la variante debe ser único.
-    archetype:
-        name:
-            not_blank: Por favor, introduzca nombre prototipo.
-            min_length: 'El nombre del prototipo debe tener al menos 1 carácter.|El nombre del prototipo debe tener al menos {{ limit }} caracteres.'
-            max_length: 'El nombre del prototipo debe tener como máximo 1 carácter.|El nombre del prototipo no debe ser más largo de {{ limit }} caracteres.'
-        code:
-            unique: Ya existe un prototipo con ese código.
-            not_blank: Introduzca nombre prototipo.

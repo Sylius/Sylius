@@ -43,8 +43,6 @@ sylius:
         administration_dashboard: Administracijska nadzorna plošča
         all_your_addresses: Vsi vaši naslovi
         amount: Znesek
-        archetype: Prototip
-        archetypes: Prototipi
         association: Povezave
         association_types: Vrste združenj
         associations: Povezave
@@ -62,7 +60,6 @@ sylius:
         body: Telo
         browse_products: Brskanje izdelkov
         build: Zgradi
-        building_product_from_archetype: Gradnja izdelka iz prototipa
         calculator: Kalkulator
         cancel: Prekliči
         cancelled: Preklicano
@@ -85,10 +82,6 @@ sylius:
         confirmation: Potrditev
         confirmation_title: Potrditev
         confirmed: Potrjeno
-        contact_request_details: Podrobnosti zahteve stika
-        contact_request_show: Zahteva stika
-        contact_requests: Zahteve stikov
-        contact_topics: Teme stika
         contain_variants: Vsebuje variante
         content: Vsebina
         countries: Države
@@ -99,10 +92,7 @@ sylius:
         coupons: Kuponi
         create: Ustvarite
         create_a_new_address: Ustvarite nov naslov
-        create_archetype: Ustvarite prototip
         create_association_type: Ustvarite vrsto združenja
-        create_contact_request: Ustvarite zahtevo stika
-        create_contact_topic: Ustvarite temo stika
         create_country: Ustvarite državo
         create_currency: Ustvarite valuto
         create_customer: Ustvarjanje kupca
@@ -187,11 +177,8 @@ sylius:
         edit_my_address: Uredite svoj naslov
         edit_report: Uredi poročilo
         edit_your_personal_information: Uredite vaše osebne podatke
-        editing_archetype: Urejanje prototipa
         editing_attribute: Urejanje atributa
         editing_channel: Urejanje kanalov
-        editing_contact_request: Urejanje zahteve stika
-        editing_contact_topic: Urejanje teme stika
         editing_country: Urejanje države
         editing_coupon: Urejanje kupona
         editing_currency: Urejanje valut
@@ -326,10 +313,7 @@ sylius:
         n_a: Ni na voljo
         name: Ime
         new: Novo
-        new_archetype: Nov prototip
         new_comment_posted_on_order: Nov komentar objavljen pri naročilu
-        new_contact_request: Nova zahteva stika
-        new_contact_topic: Nova tema stika
         new_country: Nova država
         new_currency: Nova valuta
         new_order: Novo naročilo
@@ -413,7 +397,6 @@ sylius:
         priority: Prednost
         processing: V teku
         product: Izdelek
-        product_archetypes: Prototipi izdelkov
         product_association_index: Povezave
         product_association_type_index: Vrsta združenja
         product_association_types: Vrste združenj izdelkov
@@ -518,12 +501,9 @@ sylius:
         taxons: Taksoni
         thank_you_for_your_order: Hvala za vaše naročilo
         theme: Tema
-        there_are_no_archetypes_defined: Definiranega ni nobenega prototipa
         there_are_no_attributes_configured: Na voljo ni nobenega nastavljenega atributa
         there_are_no_blocks_to_display: Noben blok ni na voljo za prikaz
         there_are_no_channels_configured: Kanali niso nastavljeni
-        there_are_no_contact_requests_to_display: Ni zahtev stikov za prikaz
-        there_are_no_contact_topics_to_display: Za prikaz ni na voljo tem stika
         there_are_no_countries_configured: Nastavljene ni nobene države
         there_are_no_coupon_to_display: Za prikaz ni na voljo kuponov
         there_are_no_currencies_to_display: Nobena valuta ni na voljo za prikaz

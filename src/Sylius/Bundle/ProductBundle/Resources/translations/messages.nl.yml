@@ -14,11 +14,6 @@ sylius:
         product_variant:
             available_on: Beschikbaar vanaf
             available_until: Beschikbaar tot
-        product_archetype:
-            name: Naam
-            parent: Ouder
-            attributes: Attributen
-            options: Opties
         association_type:
             name: Naam
         association:
