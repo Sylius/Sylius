@@ -17,11 +17,3 @@ sylius:
         sku:
             not_blank: Kérjük, írjon be SKU változatot.
             unique: Az SKU változatnak egyedinek kell lennie.
-    archetype:
-        name:
-            not_blank: Kérjük adja meg az őstípus nevét.
-            min_length: 'Az őstípus neve legalább 1 karakter hosszú kell legyen. |A őstípus neve legalább {{ limit }} karakter hosszú kell legyen.'
-            max_length: 'A őstípus neve nem lehet hosszabb, mint 1 karakter. |A őstípus neve nem lehet hosszabb, mint {{ limit }} karakter.'
-        code:
-            unique: Már létezik őstípus ezzel a kóddal.
-            not_blank: Kérjük, adja meg az őstípus kódját.

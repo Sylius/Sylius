@@ -13,10 +13,5 @@ sylius:
             taxons: Kategoriler
         product_variant:
             available_on: Mevcut üzerine
-        product_archetype:
-            name: Ad
-            parent: Üst
-            attributes: Nitelikler
-            options: Ayarlar
         association_type:
             name: Ad

@@ -11,6 +11,7 @@ sylius:
             name: Name
     ui:
         abandoned: Abgebrochen
+        about: Über
         access_token: Zugangs-Schlüssel
         account_panel_outline: Dies ist dein persönlicher Bereich. Hier kannst du alle deine Bestellungen verfolgen, deine persönlichen Daten bearbeiten, sowie neue Adressen hinzufügen
         action: Aktion
@@ -37,6 +38,7 @@ sylius:
         adding_new_email: Neue E-Mail hinzufügen
         adding_new_locale: Neue Gebietsschemata anlegen
         additional_information: Zusätzliche Informationen
+        address: Anschrift
         addressing_step: Lieferadresse
         adjustments: Änderungen
         administration: Administration
@@ -46,8 +48,7 @@ sylius:
         all_your_addresses: Alle Adressen
         amount: Anzahl
         an_error_occurred: Es ist ein Fehler aufgetreten
-        archetype: Vorlage
-        archetypes: Vorlagen
+        api: API
         are_your_sure_you_want_to_perform_this_action: Möchten Sie diese Aktion sicher durchführen?
         association: Verbindung
         association_types: Verbindungstypen
@@ -67,7 +68,6 @@ sylius:
         body: Inhalt
         browse_products: Produkte durchsuchen
         build: Erstellen
-        building_product_from_archetype: Produkt aus Vorlage erstellen
         calculator: Rechner
         cancel: Abbrechen
         cancelled: Abgebrochen
@@ -93,10 +93,6 @@ sylius:
         confirmation: Bestätigung
         confirmation_title: Bestätigung
         confirmed: Bestätigt
-        contact_request_details: Details zur Kontaktanfrage
-        contact_request_show: Kontaktanfrage
-        contact_requests: Kontaktanfragen
-        contact_topics: Supportthemen
         contain_variants: Enthält Varianten
         contains: Enthält
         content: Inhalt
@@ -108,10 +104,7 @@ sylius:
         coupons: Gutscheine
         create: Erstellen
         create_a_new_address: Neue Adresse hinzufügen
-        create_archetype: Vorlage hinzufügen
         create_association_type: Verbindungstyp anlegen
-        create_contact_request: Kontaktanfrage erstellen
-        create_contact_topic: Betreff
         create_country: Land erstellen
         create_currency: Währung erstellen
         create_customer: Kunde erstellen
@@ -199,11 +192,8 @@ sylius:
         edit_tax_category: Steuerkategorien bearbeiten
         edit_tax_rate: Steuersatz bearbeiten
         edit_your_personal_information: Persönliche Informationen bearbeiten
-        editing_archetype: Vorlage bearbeiten
         editing_attribute: Attribute editieren
         editing_channel: Channel editieren
-        editing_contact_request: Kontaktanfrage bearbeiten
-        editing_contact_topic: Thema bearbeiten
         editing_country: Land editieren
         editing_coupon: Gutschein editieren
         editing_currency: Währung editieren
@@ -349,10 +339,7 @@ sylius:
         n_a: Nicht verfügbar
         name: Name
         new: Neu
-        new_archetype: Neue Vorlage
         new_comment_posted_on_order: Neuer Kommentar zu einer Bestellung
-        new_contact_request: Neue Kontaktanfrage
-        new_contact_topic: Neues Thema
         new_country: Neues Land
         new_currency: Neue Währung
         new_locale: Neue Lokalisierung
@@ -443,7 +430,6 @@ sylius:
         priority: Priorität
         processing: Wird verarbeitet
         product: Verkäuflich
-        product_archetypes: Produkt-Vorlagen
         product_association_index: Verbindung
         product_association_type_index: Assoziationstyp
         product_association_types: Produkt-Beziehungsvorlagen
@@ -557,12 +543,9 @@ sylius:
         taxons: Gruppen
         thank_you_for_your_order: Danke für Ihre Bestellung
         theme: Template
-        there_are_no_archetypes_defined: Es wurden noch keine Vorlagen definiert
         there_are_no_attributes_configured: Es wurden noch keine Attribute konfiguriert
         there_are_no_blocks_to_display: Keine Blocks zum anzeigen vorhanden
         there_are_no_channels_configured: Es wurden noch keine Channels konfiguriert
-        there_are_no_contact_requests_to_display: Es gibt keine Kontakt Anfragen anzuzeigen
-        there_are_no_contact_topics_to_display: Es gibt keine Themen anzuzeigen
         there_are_no_countries_configured: Es wurden noch keine Länder angelegt
         there_are_no_coupon_to_display: Es wurden noch keine Gutscheine erstellt
         there_are_no_currencies_to_display: Es wurden noch keine Gutscheine angelegt

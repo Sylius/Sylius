@@ -17,11 +17,3 @@ sylius:
         sku:
             not_blank: Por favor insira a variante SKU.
             unique: SKU variante deve ser único.
-    archetype:
-        name:
-            not_blank: Por favor, digite o nome de arquétipo.
-            min_length: 'Nome de arquétipo deve ser pelo menos 1 caractere longa. | Nome de arquétipo deve ser pelo menos {{ limit }} caracteres.'
-            max_length: 'Nome de arquétipo não deve ter mais de 1 caractere. | Nome de arquétipo não deve ter mais de {{ limit }} caracteres.'
-        code:
-            unique: Arquétipo com determinado código já existe.
-            not_blank: Por favor digite o código do arquétipo.

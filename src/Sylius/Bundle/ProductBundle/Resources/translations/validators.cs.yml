@@ -14,8 +14,3 @@ sylius:
         sku:
             not_blank: Prosím zvolte variantu Jednotky vedení skladu.
             unique: Varianta Jednotky vedení skladu musí být unikátní.
-    archetype:
-        name:
-            not_blank: Zadejte název prototypu.
-            min_length: 'Název prototypu musí mít alespoň 1 znak.|Název prototypu musí mít alespoň {{ limit }} znaků.'
-            max_length: 'Název prototypu nesmí být delší než 1 znak.|Název prototypu nesmí být delší než {{ limit }} znaků.'

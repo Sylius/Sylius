@@ -13,10 +13,5 @@ sylius:
             taxons: Taxony
         product_variant:
             available_on: Dostupný od
-        product_archetype:
-            name: Jméno
-            parent: Rodič
-            attributes: Atributy
-            options: Možnosti
         association_type:
             name: Jméno

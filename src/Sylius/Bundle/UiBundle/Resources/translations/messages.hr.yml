@@ -44,8 +44,6 @@ sylius:
         all: Sve
         all_your_addresses: sylius.account.address.list
         amount: Iznos
-        archetype: Arhetip
-        archetypes: Arhetipovi
         association: Poveznica
         association_types: Tipovi poveznica
         associations: Poveznice
@@ -63,7 +61,6 @@ sylius:
         body: Poruka
         browse_products: Pretraži proizvode
         build: sylius.breadcrumb.build
-        building_product_from_archetype: Izrada proizvoda iz arhetipa
         calculator: Kalkulator
         cancel: Prekini
         cancelled: Otkazano
@@ -88,10 +85,6 @@ sylius:
         confirmation: Potvrda
         confirmation_title: Potvrda
         confirmed: Potvrđeno
-        contact_request_details: Detalji zahtjeva za kontakt
-        contact_request_show: Zahtjev za kontaktom
-        contact_requests: Zahtjevi za kontakt
-        contact_topics: Kontakt teme
         contact_us: Kontaktirajte nas
         contain_variants: Postoje varijante
         content: Sadržaj
@@ -103,10 +96,7 @@ sylius:
         coupons: Kuponi
         create: Kreiraj
         create_a_new_address: sylius.account.address.create
-        create_archetype: Izradite ahretip
         create_association_type: Izradite tip poveznice
-        create_contact_request: Izradite zahtjev za kontakt
-        create_contact_topic: Izradite kontakt temu
         create_country: Dodaj državu
         create_currency: Kreirajte valutu
         create_customer: Kreirajte kupca
@@ -193,11 +183,8 @@ sylius:
         edit_my_address: sylius.account.address.update
         edit_report: Uređivanje izvješća
         edit_your_personal_information: Uredite svoje osobne podatke
-        editing_archetype: Uređivanje arhetipa
         editing_attribute: Uređivanje atributa
         editing_channel: Uređivanje kanala
-        editing_contact_request: Uređivanje zahtjeva za kontakt
-        editing_contact_topic: Ureživanje kontakt teme
         editing_country: Uređivanje države
         editing_coupon: Ažuriranje kupona
         editing_currency: Uređivanje valute
@@ -335,11 +322,8 @@ sylius:
         n_a: Nije dostupno
         name: Naziv grupe
         new: Novo
-        new_archetype: Novi arhetip
         new_channel: Novi kanal
         new_comment_posted_on_order: Novi komentar na narudžbu
-        new_contact_request: Novi zahtjev za kontakt
-        new_contact_topic: Nova kontakt tema
         new_country: Nova država
         new_coupon: Novi kupon
         new_currency: Nova valuta
@@ -426,7 +410,6 @@ sylius:
         priority: Prioritet
         processing: U obradi
         product: Artikal
-        product_archetypes: Arhitipovi proizvoda
         product_association_index: Poveznica
         product_association_types: Tipovi poveznica proizvoda
         product_associations: Poveznice proizvoda
@@ -532,12 +515,9 @@ sylius:
         taxes: Porezi
         taxons: Taksoni
         thank_you_for_your_order: Zahvaljujemo na vašoj narudžbi
-        there_are_no_archetypes_defined: Nema definiranih arhetipova
         there_are_no_attributes_configured: Nema postavljenih atributa
         there_are_no_blocks_to_display: Ne postoje blokovi za prikazati
         there_are_no_channels_configured: Nema postavljenih kanala
-        there_are_no_contact_requests_to_display: Nema kontakt zahtjeva za prikazati
-        there_are_no_contact_topics_to_display: Nema kontakt tema za prikazati
         there_are_no_countries_configured: Nema postavljenih država
         there_are_no_coupon_to_display: Nema kupona za prikazati
         there_are_no_currencies_to_display: Nema valuta za prikazati

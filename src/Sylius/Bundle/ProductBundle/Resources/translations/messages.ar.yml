@@ -5,7 +5,5 @@ sylius:
     form:
         product:
             name: الاسم
-        product_archetype:
-            name: الاسم
         association_type:
             name: الاسم

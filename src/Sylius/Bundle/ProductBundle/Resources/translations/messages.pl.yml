@@ -14,11 +14,6 @@ sylius:
         product_variant:
             available_on: Dostępny od
             available_until: Dostępne do
-        product_archetype:
-            name: Nazwa
-            parent: Rodzic
-            attributes: Cechy
-            options: Warianty
         association_type:
             name: Nazwa
         association:

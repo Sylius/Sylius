@@ -52,8 +52,6 @@ sylius:
         amount: Montant
         an_error_occurred: "Une erreur s'est produite"
         apply_coupon: Coupon de réduction
-        archetype: Prototype
-        archetypes: Prototype
         are_your_sure_you_want_to_perform_this_action: Êtes-vous sûr de vouloir effectuer cette action ?
         association: Association
         association_types: "Types d'associations"
@@ -79,7 +77,6 @@ sylius:
         body: Corps
         browse_products: Parcourir les produits
         build: Construire
-        building_product_from_archetype: Créer un produit depuis un prototype
         calculator: Calculateur
         cancel: Annuler
         cancelled: Annulé
@@ -116,10 +113,6 @@ sylius:
         confirmation: Confirmation
         confirmation_title: Confirmation
         confirmed: Confirmé
-        contact_request_details: Détails de la demande de contact
-        contact_request_show: Demande de contact
-        contact_requests: Demandes de contact
-        contact_topics: Catégorie de contact
         contact_us: Nous contacter
         contain_variants: Contient des variantes
         contains: Contient
@@ -134,10 +127,7 @@ sylius:
         create_a_new_address: Créer une nouvelle adresse
         create_a_new_customer_account: Créer un nouveau compte
         create_an_account: Créer un compte
-        create_archetype: Créer un prototype
         create_association_type: "Créer un type d'association"
-        create_contact_request: Créer une demande de contact
-        create_contact_topic: Créer une rubrique contact
         create_country: Ajouter un pays
         create_currency: Créer une devise
         create_customer: Créer un client
@@ -250,11 +240,8 @@ sylius:
         edit_your_items_apply_coupon_or_proceed_to_the_checkout: Modifier vos objets, ajouter un code promotionnel ou procéder au paiement
         edit_your_personal_information: Modifier vos informations personnelles
         edit_zone: Editer la zone
-        editing_archetype: Modifier prototype
         editing_attribute: Modifier propriété
         editing_channel: "Mise à jour d'un canal"
-        editing_contact_request: "Edition d'une demande de contact"
-        editing_contact_topic: Modification de la rubrique contact
         editing_country: Modification du pays
         editing_coupon: "Edition d'un coupon"
         editing_currency: Modifier devise
@@ -429,11 +416,8 @@ sylius:
         n_a: N/A
         name: Nom
         new: Nouveau
-        new_archetype: Nouveau prototype
         new_channel: Nouveau canal
         new_comment_posted_on_order: Un nouveau commentaire a été laissé sur la commande
-        new_contact_request: Nouvelle demande de contact
-        new_contact_topic: Nouvelle rubrique contact
         new_country: Nouveau pays
         new_coupon: Nouveau coupon
         new_currency: Nouvelle devise
@@ -551,7 +535,6 @@ sylius:
         process_your_orders: Traiter vos commandes
         processing: En cours
         product: Produit
-        product_archetypes: Archétypes de produit
         product_association_index: Association
         product_association_type_index: "Type d'association"
         product_association_types: "Types d'association de produits"
@@ -690,12 +673,9 @@ sylius:
         thank_you: Merci !
         thank_you_for_your_order: Merci pour votre commande
         theme: Thème
-        there_are_no_archetypes_defined: "Il n'y a aucun prototype défini"
         there_are_no_attributes_configured: "Il n'y a pas de propriétés configurées"
         there_are_no_blocks_to_display: "Il n'y a pas de blocs à afficher"
         there_are_no_channels_configured: "Il n'y a pas de canaux de distribution configurés"
-        there_are_no_contact_requests_to_display: "Il n'y a aucune demande de contact à afficher"
-        there_are_no_contact_topics_to_display: "Il n'y a pas de rubrique de contact à afficher"
         there_are_no_countries_configured: "Il n'y a aucun pays configurés"
         there_are_no_coupon_to_display: Aucun coupon
         there_are_no_currencies_to_display: "Il n'y a aucune devise à afficher"

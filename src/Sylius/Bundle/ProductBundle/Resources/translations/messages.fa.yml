@@ -14,11 +14,6 @@ sylius:
         product_variant:
             available_on: تاریخ فعال شدن
             available_until: در دسترس تا
-        product_archetype:
-            name: نام
-            parent: رده پدر
-            attributes: قابلیت ها
-            options: آپشن ها
         association_type:
             name: نام
         association:

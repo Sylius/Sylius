@@ -52,8 +52,6 @@ sylius:
         amount: ยอดรวม
         an_error_occurred: เกิดข้อผิดพลาด
         apply_coupon: ใช้คูปอง
-        archetype: ต้นแบบ
-        archetypes: ต้นแบบ
         are_your_sure_you_want_to_perform_this_action: คุณแน่ใจหรือคุณต้องการดำเนินการนี้?
         association: ความสัมพันธ์
         association_types: ชนิดความสัมพันธ์
@@ -79,7 +77,6 @@ sylius:
         body: Body
         browse_products: ค้นหาผลิตภัณฑ์
         build: สร้าง
-        building_product_from_archetype: สร้างสินค้าจากต้นแบบ
         calculator: การคำนวณราคา
         cancel: ยกเลิก
         cancelled: ถูกยกเลิก
@@ -116,10 +113,6 @@ sylius:
         confirmation: การยืนยัน
         confirmation_title: การยืนยัน
         confirmed: ยืนยันแล้ว
-        contact_request_details: ติดต่อขอรายละเอียด
-        contact_request_show: คำขอติดต่อ
-        contact_requests: คำขอติดต่อ
-        contact_topics: หัวข้อติดต่อ
         contact_us: ติดต่อเรา
         contain_variants: หลากหลายรูปแบบ
         contains: ประกอบด้วย
@@ -134,10 +127,7 @@ sylius:
         create_a_new_address: สร้างที่อยู่ใหม่
         create_a_new_customer_account: สร้างบัญชีลูกค้าใหม่
         create_an_account: สร้างบัญชีผู้ใช้
-        create_archetype: สร้างต้นแบบ
         create_association_type: สร้างชนิดความสัมพันธ์
-        create_contact_request: สร้างการร้องขอติดต่อ
-        create_contact_topic: สร้างหัวข้อติดต่อ
         create_country: สร้างประเทศ
         create_currency: สร้างสกุลเงิน
         create_customer: สร้างลูกค้า
@@ -250,11 +240,8 @@ sylius:
         edit_your_items_apply_coupon_or_proceed_to_the_checkout: แก้ไขรายการสินค้าของคุณ ใช้คูปอง หรือดำเนินการชำระเงิน
         edit_your_personal_information: แก้ไขข้อมูลส่วนบุคคลของคุณ
         edit_zone: แก้ไขโซน
-        editing_archetype: แก้ไขต้นแบบ
         editing_attribute: แก้ไขคุณลักษณะ (Attribute)
         editing_channel: แก้ไขช่องทาง
-        editing_contact_request: ติดต่อขอแก้ไข
-        editing_contact_topic: แก้ไขหัวข้อติดต่อ
         editing_country: แก้ไขประเทศ
         editing_coupon: แก้ไขคูปอง
         editing_currency: แก้ไขสกุลเงิน
@@ -432,11 +419,8 @@ sylius:
         n_a: N/A
         name: ชื่อ
         new: รายการใหม่
-        new_archetype: เพิ่มต้นแบบ
         new_channel: เพิ่มช่องทางจำหน่าย
         new_comment_posted_on_order: เพิ่มความคิดเห็นใหม่บนรายการสั่งซื้อ
-        new_contact_request: เพิ่มการขอติดต่อ
-        new_contact_topic: เพิ่มหัวข้อการติดต่อ
         new_country: ประเทศใหม่
         new_coupon: คูปองใหม่
         new_currency: เพิ่มสกุลเงิน
@@ -556,7 +540,6 @@ sylius:
         process_your_orders: ดำเนินการสั่งซื้อ
         processing: กำลังดำเนินการ
         product: สินค้า
-        product_archetypes: ต้นแบบสินค้า
         product_association_index: ความสัมพันธ์
         product_association_type_index: ชนิดสินค้าที่เกี่ยวข้อง
         product_association_types: ชนิดความสัมพันธ์ของสินค้า
@@ -695,12 +678,9 @@ sylius:
         thank_you: ขอบคุณ!
         thank_you_for_your_order: ขอบคุณสำหรับการสั่งซื้อ
         theme: ธีม
-        there_are_no_archetypes_defined: ไม่มีการกำหนดแม่แบบไว้
         there_are_no_attributes_configured: ไม่มีคุณลักษณะกำหนดค่าไว้
         there_are_no_blocks_to_display: ไม่มีบล็อก
         there_are_no_channels_configured: ไม่มีการกำหนดช่องทางการจัดจำหน่าย
-        there_are_no_contact_requests_to_display: ไม่มีการร้องขอการติดต่อ
-        there_are_no_contact_topics_to_display: ไม่มีรายการหัวข้อการร้องขอ
         there_are_no_countries_configured: ไม่มีการกำหนดค่าของประเทศ
         there_are_no_coupon_to_display: ไม่มีรายการคูปอง
         there_are_no_currencies_to_display: ไม่มีรายการสกุลเงิน
