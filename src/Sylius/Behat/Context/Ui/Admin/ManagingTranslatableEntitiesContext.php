@@ -50,7 +50,7 @@ final class ManagingTranslatableEntitiesContext implements Context
     }
 
     /**
-     * @Given I should not be able to translate it in :localeCode
+     * @Then I should not be able to translate it in :localeCode
      */
     public function iShouldNotBeAbleToTranslateItIn($localeCode)
     {
