@@ -104,6 +104,7 @@ final class ProductContext implements Context
 
     /**
      * @Then I should be on :product product detailed page
+     * @Then I should still be on product :product page
      */
     public function iShouldBeOnProductDetailedPage(ProductInterface $product)
     {
