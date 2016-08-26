@@ -1,0 +1,61 @@
+{
+    "name": "sylius/customer",
+    "type": "library",
+    "description": "Customer handling for PHP applications.",
+    "keywords": ["customer", "groups"],
+    "homepage": "http://sylius.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Paweł Jędrzejewski",
+            "homepage": "http://pjedrzejewski.com"
+        },
+        {
+            "name": "Michał Marcinkowski",
+            "email": "michal.marcinkowski@lakion.com"
+        },
+        {
+            "name": "Łukasz Chruściel",
+            "email": "lukasz.chrusciel@lakion.com"
+        },
+        {
+            "name": "Sylius project",
+            "homepage": "http://sylius.org"
+        },
+        {
+            "name": "Community contributions",
+            "homepage": "http://github.com/Sylius/Sylius/contributors"
+        }
+    ],
+    "require": {
+        "php": "^5.6|^7.0",
+
+        "doctrine/collections": "~1.0",
+        "sylius/resource": "^1.0"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "^2.4"
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "autoload": {
+        "psr-4": { "Sylius\\Component\\Customer\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Sylius\\Component\\Customer\\spec\\": "spec/" }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../*/*"
+        }
+    ],
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}

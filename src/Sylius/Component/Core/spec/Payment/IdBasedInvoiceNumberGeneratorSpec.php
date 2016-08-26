@@ -19,7 +19,7 @@ use Sylius\Component\Payment\Model\PaymentInterface;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class IdBasedInvoiceNumberGeneratorSpec extends ObjectBehavior
+final class IdBasedInvoiceNumberGeneratorSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {

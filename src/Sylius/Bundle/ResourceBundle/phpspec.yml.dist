@@ -5,4 +5,4 @@ suites:
         src_path: .
 
 extensions:
-    - Akeneo\SkipExampleExtension
+    Akeneo\SkipExampleExtension: ~

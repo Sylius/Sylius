@@ -15,7 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Variation\Model\VariableInterface;
 use Sylius\Component\Variation\Model\VariantInterface;
 
-class VariantChoiceListSpec extends ObjectBehavior
+final class VariantChoiceListSpec extends ObjectBehavior
 {
     function let(VariableInterface $variable, VariantInterface $variant)
     {

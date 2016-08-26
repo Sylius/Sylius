@@ -12,7 +12,7 @@
 namespace Sylius\Component\Core\Dashboard;
 
 use Sylius\Component\Order\Repository\OrderRepositoryInterface;
-use Sylius\Component\User\Repository\CustomerRepositoryInterface;
+use Sylius\Component\Customer\Repository\CustomerRepositoryInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>

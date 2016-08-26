@@ -31,7 +31,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
  *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class PromotionEligibilityCheckerSpec extends ObjectBehavior
+final class PromotionEligibilityCheckerSpec extends ObjectBehavior
 {
     function let(
         PromotionEligibilityCheckerInterface $datesEligibilityChecker,

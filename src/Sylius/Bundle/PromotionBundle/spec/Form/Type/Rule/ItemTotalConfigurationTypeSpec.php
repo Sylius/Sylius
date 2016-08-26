@@ -19,7 +19,7 @@ use Symfony\Component\Form\FormBuilder;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class ItemTotalConfigurationTypeSpec extends ObjectBehavior
+final class ItemTotalConfigurationTypeSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

@@ -23,7 +23,7 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 /**
  * @author Piotr Walków <walkow.piotr@gmail.com>
  */
-class ContainsProductRuleCheckerSpec extends ObjectBehavior
+final class ContainsProductRuleCheckerSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

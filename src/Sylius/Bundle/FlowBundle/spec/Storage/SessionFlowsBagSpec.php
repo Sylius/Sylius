@@ -15,7 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\FlowBundle\Storage\SessionFlowsBag;
 use Symfony\Component\HttpFoundation\Session\Attribute\NamespacedAttributeBag;
 
-class SessionFlowsBagSpec extends ObjectBehavior
+final class SessionFlowsBagSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

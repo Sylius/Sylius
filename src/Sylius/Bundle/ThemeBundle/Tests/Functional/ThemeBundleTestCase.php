@@ -39,13 +39,6 @@ class ThemeBundleTestCase extends WebTestCase
      */
     protected function getClient()
     {
-        $client = $this->createClient(['test_case' => self::TEST_CASE, 'root_config' => 'config.yml']);
-        try {
-            $client->insulate();
-        } catch (\RuntimeException $e) {
-            // Don't insulate requests if not possible to do so.
-        }
-
-        return $client;
+        return $this->createClient(['test_case' => self::TEST_CASE, 'root_config' => 'config.yml']);
     }
 }

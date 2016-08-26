@@ -13,7 +13,7 @@ namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
 use Sylius\Component\Core\Formatter\StringInflector;
-use Sylius\Component\Core\Test\Services\SharedStorageInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -34,7 +34,7 @@ final class SharedStorageContext implements Context
     }
 
     /**
-     * @Transform /^(it|its|theirs)$/
+     * @Transform /^(it|its|theirs|them)$/
      */
     public function getLatestResource()
     {

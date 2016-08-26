@@ -15,7 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\ReviewBundle\Validator\Constraints\UniqueReviewerEmail;
 use Sylius\Bundle\UserBundle\Doctrine\ORM\UserRepository;
 use Sylius\Component\Review\Model\ReviewInterface;
-use Sylius\Component\User\Model\CustomerInterface;
+use Sylius\Component\Customer\Model\CustomerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
@@ -26,7 +26,7 @@ use Symfony\Component\Validator\ExecutionContext;
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-class UniqueReviewerEmailValidatorSpec extends ObjectBehavior
+final class UniqueReviewerEmailValidatorSpec extends ObjectBehavior
 {
     function let(
         UserRepository $userRepository,

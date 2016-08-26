@@ -1,4 +1,9 @@
 sylius:
+    channel:
+        default_currency:
+            not_blank: Please enter channel default currency.
+        default_locale:
+            not_blank: Please enter channel default locale.
     checkout:
         shipping_method:
             not_blank: Please select shipping method.
@@ -24,3 +29,9 @@ sylius:
     product_translation:
         short_description:
             max: Short description must not be longer then {{ limit }} characters.
+    user:
+        email:
+            unique: This email is already used.
+        username:
+            unique: This username is already used.
+            not_blank: Please enter your name.

@@ -15,7 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\ExpressionLanguage\ExpressionLanguage;
 
-class ExpressionLanguageSpec extends ObjectBehavior
+final class ExpressionLanguageSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

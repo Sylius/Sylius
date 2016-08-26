@@ -19,6 +19,9 @@ sylius:
             min_length: 'De creditcard CVV-code moet ten hoogste {{ limit }} cijfers lang zijn.'
         expiry_year:
             not_blank: Selecteer het vervaljaar.
+    payment:
+        currency_code:
+            not_valid: De valutacode die je hebt ingevoerd is ongeldig.
     payment_method:
         gateway:
             not_blank: Selecteer een betaalmethode.

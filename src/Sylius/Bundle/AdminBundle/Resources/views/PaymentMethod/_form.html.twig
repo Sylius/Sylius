@@ -20,6 +20,7 @@
                 <div class="content{% if 0 == loop.index0 %} active{% endif %}">
                     {{ form_row(translationForm.name) }}
                     {{ form_row(translationForm.description) }}
+                    {{ form_row(translationForm.instructions) }}
                 </div>
             {% endfor %}
         </div>

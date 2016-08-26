@@ -5,8 +5,4 @@ sylius:
     form:
         user:
             email: Endereço de email
-        customer:
-            email: Endereço de email
-            phone_number: Número de Telefone
-    gender:
-        unknown: Desconhecido
+            username: Login

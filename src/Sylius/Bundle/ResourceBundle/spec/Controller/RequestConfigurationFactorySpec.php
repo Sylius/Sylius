@@ -26,7 +26,7 @@ use Symfony\Component\HttpFoundation\Request;
  * @author Arnaud Langade <arn0d.dev@gmail.com>
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class RequestConfigurationFactorySpec extends ObjectBehavior
+final class RequestConfigurationFactorySpec extends ObjectBehavior
 {
     function let(ParametersParser $parametersParser)
     {

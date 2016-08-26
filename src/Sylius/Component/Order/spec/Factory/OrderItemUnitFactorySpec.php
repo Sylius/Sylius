@@ -21,7 +21,7 @@ use Sylius\Component\Resource\Exception\UnsupportedMethodException;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class OrderItemUnitFactorySpec extends ObjectBehavior
+final class OrderItemUnitFactorySpec extends ObjectBehavior
 {
     function let()
     {

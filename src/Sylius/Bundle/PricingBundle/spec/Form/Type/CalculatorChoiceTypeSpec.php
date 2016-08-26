@@ -15,7 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class CalculatorChoiceTypeSpec extends ObjectBehavior
+final class CalculatorChoiceTypeSpec extends ObjectBehavior
 {
     function let()
     {

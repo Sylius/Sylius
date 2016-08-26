@@ -6,7 +6,6 @@ sylius:
         header: rozšíření
         accelerator:
             header: Akcelerátor
-            help: Nainstalujte a povolte PHP akcelerátor jako APC (výrazně doporučeno).
         apc: APC
         ctype: Ctype
         gd: GD
@@ -29,13 +28,9 @@ sylius:
         header: souborový systém
         cache:
             header: mezipaměť
-            help:
-                To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
         exists: Existuje
         logs:
             header: logy
-            help:
-                To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
         not_exists: neexistuje
         not_writable: nelze zapisovat
         parameters:
@@ -61,4 +56,3 @@ sylius:
             header: Zastaralé časové pásmo
             help: 'Časové pásmo %timezone% je zastaralé. Spravte Váš php.ini soubor (seznam zastaralých časových pásem http://php.net/manual/en/timezones.others.php).'
         version: Verze PHP
-        version_recommanded: Doporučená verze PHP

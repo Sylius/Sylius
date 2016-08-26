@@ -27,7 +27,7 @@ use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
  *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class TotalOfItemsFromTaxonRuleCheckerSpec extends ObjectBehavior
+final class TotalOfItemsFromTaxonRuleCheckerSpec extends ObjectBehavior
 {
     function let(TaxonRepositoryInterface $taxonRepository)
     {

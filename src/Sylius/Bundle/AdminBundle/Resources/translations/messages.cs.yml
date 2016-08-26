@@ -29,3 +29,6 @@ sylius:
                 sales:
                     header: Prodeje
                     orders: Objednávky
+                content:
+                    header: Obsah
+                    routes: Cesty

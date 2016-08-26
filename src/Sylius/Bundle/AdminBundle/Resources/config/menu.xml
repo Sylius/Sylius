@@ -22,7 +22,7 @@
 
     <services>
         <service id="sylius.menu_builder.admin.main" class="%sylius.menu_builder.admin.main.class%" parent="sylius.menu_builder">
-            <argument type="service" id="sylius.authorization_checker" />
+            <argument type="service" id="sylius.resource_controller.authorization_checker" />
         </service>
         <service id="sylius.menu.admin.main" class="Knp\Menu\MenuItem" factory-service="sylius.menu_builder.admin.main" factory-method="createMenu" scope="request">
             <argument type="service" id="request" />

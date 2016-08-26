@@ -21,3 +21,5 @@ sylius:
                 sales:
                     header: Продаје
                     orders: Наруџбине
+                content:
+                    header: Садржај

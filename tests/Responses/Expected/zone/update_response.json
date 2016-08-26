@@ -1,0 +1,11 @@
+{
+    "id": @integer@,
+    "code": "EU",
+    "name": "European Union +",
+    "type": "country",
+    "_links": {
+        "self": {
+            "href": @string@
+        }
+    }
+}

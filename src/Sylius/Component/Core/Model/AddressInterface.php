@@ -12,7 +12,7 @@
 namespace Sylius\Component\Core\Model;
 
 use Sylius\Component\Addressing\Model\AddressInterface as BaseAddressInterface;
-use Sylius\Component\User\Model\CustomerAwareInterface;
+use Sylius\Component\Customer\Model\CustomerAwareInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>

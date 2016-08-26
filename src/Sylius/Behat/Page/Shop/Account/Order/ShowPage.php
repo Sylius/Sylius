@@ -56,7 +56,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
      */
     public function getNumber()
     {
-        $numberText = $this->getElement('number')->find('css', 'strong')->getText();
+        $numberText = $this->getElement('number')->getText();
         $numberText = str_replace('#', '', $numberText);
 
         return $numberText;
@@ -113,6 +113,16 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
+    public function getPaymentPrice()
+    {
+        $paymentsPrice = $this->getElement('payments')->find('css', 'p');
+
+        return $paymentsPrice->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function isProductInTheList($name)
     {
         try {
@@ -131,15 +141,25 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
+    public function getItemPrice()
+    {
+        return $this->getElement('product_price')->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
             'billing_address' => '#billing-address',
             'number' => '#number',
-            'order_items' => '#sylius-customer-order-items',
+            'order_items' => '#sylius-order',
             'shipping_address' => '#shipping-address',
             'subtotal' => '#subtotal',
             'total' => '#total',
+            'payments' => '#payments',
+            'product_price' => '#sylius-order td:nth-child(2)'
         ]);
     }
 

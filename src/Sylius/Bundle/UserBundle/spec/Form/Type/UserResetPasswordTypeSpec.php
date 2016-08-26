@@ -19,7 +19,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class UserResetPasswordTypeSpec extends ObjectBehavior
+final class UserResetPasswordTypeSpec extends ObjectBehavior
 {
     function it_extends_abstract_type()
     {

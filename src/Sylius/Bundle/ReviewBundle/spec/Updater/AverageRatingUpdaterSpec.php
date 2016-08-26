@@ -21,7 +21,7 @@ use Sylius\Component\Review\Model\ReviewInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class AverageRatingUpdaterSpec extends ObjectBehavior
+final class AverageRatingUpdaterSpec extends ObjectBehavior
 {
     function let(ReviewableRatingCalculatorInterface $averageRatingCalculator, ObjectManager $reviewSubjectManager)
     {

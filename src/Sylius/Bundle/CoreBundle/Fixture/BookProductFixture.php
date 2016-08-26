@@ -44,11 +44,6 @@ final class BookProductFixture extends AbstractFixture
     private $productOptionFixture;
 
     /**
-     * @var ProductArchetypeFixture
-     */
-    private $productArchetypeFixture;
-
-    /**
      * @var ProductFixture
      */
     private $productFixture;
@@ -68,7 +63,6 @@ final class BookProductFixture extends AbstractFixture
      * @param RepositoryInterface $taxonRepository
      * @param ProductAttributeFixture $productAttributeFixture
      * @param ProductOptionFixture $productOptionFixture
-     * @param ProductArchetypeFixture $productArchetypeFixture
      * @param ProductFixture $productFixture
      */
     public function __construct(
@@ -76,14 +70,12 @@ final class BookProductFixture extends AbstractFixture
         RepositoryInterface $taxonRepository,
         ProductAttributeFixture $productAttributeFixture,
         ProductOptionFixture $productOptionFixture,
-        ProductArchetypeFixture $productArchetypeFixture,
         ProductFixture $productFixture
     ) {
         $this->taxonFixture = $taxonFixture;
         $this->taxonRepository = $taxonRepository;
         $this->productAttributeFixture = $productAttributeFixture;
         $this->productOptionFixture = $productOptionFixture;
-        $this->productArchetypeFixture = $productArchetypeFixture;
         $this->productFixture = $productFixture;
 
         $this->faker = \Faker\Factory::create();
@@ -109,33 +101,21 @@ final class BookProductFixture extends AbstractFixture
     {
         $options = $this->optionsResolver->resolve($options);
 
-        $taxons = [];
-        if (null === $this->taxonRepository->findOneBy(['code' => 'CATEGORY'])) {
-            $taxons[] = ['name' => 'Category', 'code' => 'CATEGORY', 'parent' => null];
-        }
-
-        if (null === $this->taxonRepository->findOneBy(['code' => 'BRAND'])) {
-            $taxons[] = ['name' => 'Brand', 'code' => 'BRAND', 'parent' => null];
-        }
-
-        $this->taxonFixture->load(['custom' => array_merge($taxons, [
-            ['name' => 'Books', 'code' => 'BOOKS', 'parent' => 'CATEGORY'],
-            ['name' => 'BookMania', 'code' => 'BOOKMANIA', 'parent' => 'BRAND'],
-        ])]);
+        $this->taxonFixture->load(['custom' => [[
+            'code' => 'category',
+            'name' => 'Category',
+            'children' => [
+                [
+                    'code' => 'books',
+                    'name' => 'Books',
+                ]
+            ]
+        ]]]);
 
         $this->productAttributeFixture->load(['custom' => [
             ['name' => 'Book author', 'code' => 'BOOK-AUTHOR', 'type' => TextAttributeType::TYPE],
             ['name' => 'Book ISBN', 'code' => 'BOOK-ISBN', 'type' => TextAttributeType::TYPE],
             ['name' => 'Book pages', 'code' => 'BOOK-PAGES', 'type' => IntegerAttributeType::TYPE],
-        ]]);
-
-        $this->productArchetypeFixture->load(['custom' => [
-            [
-                'name' => 'Book',
-                'code' => 'BOOK',
-                'product_attributes' => ['BOOK-AUTHOR', 'BOOK-ISBN', 'BOOK-PAGES'],
-                'product_options' => [],
-            ],
         ]]);
 
         $products = [];
@@ -145,9 +125,8 @@ final class BookProductFixture extends AbstractFixture
             $products[] = [
                 'name' => sprintf('Book "%s" by %s', $this->faker->word, $name),
                 'code' => $this->faker->uuid,
-                'main_taxon' => 'BOOKS',
-                'product_archetype' => 'BOOK',
-                'taxons' => ['BOOKS', 'BOOKMANIA'],
+                'main_taxon' => 'books',
+                'taxons' => ['books'],
                 'product_attributes' => [
                     'BOOK-AUTHOR' => $name,
                     'BOOK-ISBN' => $this->faker->isbn13,

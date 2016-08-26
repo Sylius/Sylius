@@ -20,7 +20,7 @@ use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
-use Sylius\Component\Core\Test\Services\SharedStorageInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -266,31 +266,13 @@ final class ManagingProductVariantsContext implements Context
 
     /**
      * @param string $element
-     * @param string $value
-     */
-    private function assertElementValue($element, $value)
-    {
-        Assert::true(
-            $this->updatePage->hasResourceValues(
-                [$element => $value]
-            ),
-            sprintf('Product should have %s with %s value.', $element, $value)
-        );
-    }
-
-    /**
-     * @param string $element
+     * @param $message
      */
     private function assertValidationMessage($element, $message)
     {
-        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([
-            $this->createPage,
-            $this->updatePage,
-        ]);
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
-        Assert::true(
-            $currentPage->checkValidationMessageFor($element, $message),
-            sprintf('Product %s should be required.', $element)
-        );
+        Assert::same($currentPage->getValidationMessage($element), $message);
     }
 }

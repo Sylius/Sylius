@@ -1,6 +1,33 @@
 UPGRADE
 =======
 
+## From 0.19 to 1.0.0-alpha
+
+### Archetype and ArchetypeBundle
+
+* Removed ``Archetype`` component and ``ArchetypeBundle``
+
+### ChannelBundle
+
+* Renamed configuration option `sylius_channel.fake_channel_support` to `sylius_channel.debug`
+
+### Contact and ContactBundle
+
+* Removed ``Contact`` component and ``ContactBundle``
+
+### Order and OrderBundle
+
+* Added ``OrderSequence`` model to keep current order index
+* Added ``OrderNumberGenerator`` to generate number for new orders
+
+### Sequence and SequenceBundle
+
+* Removed ``Sequence`` component and ``SequenceBundle``
+
+### SearchBundle
+
+* Removed ``SearchBundle``
+
 ## From 0.18 to 0.19.x
 
 ### Core and CoreBundle
@@ -10,6 +37,7 @@ UPGRADE
 * Introduced ``getDiscountedUnitPrice`` method on ``OrderItem``, which returns single *unit* price lowered by ``ORDER_UNIT_PROMOTION`` adjustments
 * Removed the concept of restricted zone per product
 * Renamed ``currency`` to ``currencyCode`` in variables and methods where the code string is being used (especially in ``Order``, ``Customer`` and ``CurrencyContext``)
+* Use ``Promotion`` codes instead of ``Originator`` in actions
 
 ### PayumBundle
 
@@ -23,6 +51,10 @@ UPGRADE
 ### Payment
 
 * Renamed ``currency`` to ``currencyCode`` in variables and methods where the code string is being used (especially in ``Payment`` and ``PaymentFactory``)
+
+### Originator
+
+* Removed ``Originator`` component
 
 ## From 0.17 to 0.18.x
 

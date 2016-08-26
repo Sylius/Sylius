@@ -43,11 +43,6 @@ final class StickerProductFixture extends AbstractFixture
     private $productOptionFixture;
 
     /**
-     * @var ProductArchetypeFixture
-     */
-    private $productArchetypeFixture;
-
-    /**
      * @var ProductFixture
      */
     private $productFixture;
@@ -67,7 +62,6 @@ final class StickerProductFixture extends AbstractFixture
      * @param RepositoryInterface $taxonRepository
      * @param ProductAttributeFixture $productAttributeFixture
      * @param ProductOptionFixture $productOptionFixture
-     * @param ProductArchetypeFixture $productArchetypeFixture
      * @param ProductFixture $productFixture
      */
     public function __construct(
@@ -75,14 +69,12 @@ final class StickerProductFixture extends AbstractFixture
         RepositoryInterface $taxonRepository,
         ProductAttributeFixture $productAttributeFixture,
         ProductOptionFixture $productOptionFixture,
-        ProductArchetypeFixture $productArchetypeFixture,
         ProductFixture $productFixture
     ) {
         $this->taxonFixture = $taxonFixture;
         $this->taxonRepository = $taxonRepository;
         $this->productAttributeFixture = $productAttributeFixture;
         $this->productOptionFixture = $productOptionFixture;
-        $this->productArchetypeFixture = $productArchetypeFixture;
         $this->productFixture = $productFixture;
 
         $this->faker = \Faker\Factory::create();
@@ -108,19 +100,16 @@ final class StickerProductFixture extends AbstractFixture
     {
         $options = $this->optionsResolver->resolve($options);
 
-        $taxons = [];
-        if (null === $this->taxonRepository->findOneBy(['code' => 'CATEGORY'])) {
-            $taxons[] = ['name' => 'Category', 'code' => 'CATEGORY', 'parent' => null];
-        }
-
-        if (null === $this->taxonRepository->findOneBy(['code' => 'BRAND'])) {
-            $taxons[] = ['name' => 'Brand', 'code' => 'BRAND', 'parent' => null];
-        }
-
-        $this->taxonFixture->load(['custom' => array_merge($taxons, [
-            ['name' => 'Stickers', 'code' => 'STICKERS', 'parent' => 'CATEGORY'],
-            ['name' => 'StickyPicky', 'code' => 'STICKYPICKY', 'parent' => 'BRAND'],
-        ])]);
+        $this->taxonFixture->load(['custom' => [[
+            'code' => 'category',
+            'name' => 'Category',
+            'children' => [
+                [
+                    'code' => 'stickers',
+                    'name' => 'Stickers',
+                ]
+            ]
+        ]]]);
 
         $this->productAttributeFixture->load(['custom' => [
             ['name' => 'Sticker paper', 'code' => 'STICKER-PAPER', 'type' => TextAttributeType::TYPE],
@@ -139,23 +128,13 @@ final class StickerProductFixture extends AbstractFixture
             ],
         ]]);
 
-        $this->productArchetypeFixture->load(['custom' => [
-            [
-                'name' => 'Sticker',
-                'code' => 'STICKER',
-                'product_attributes' => ['STICKER-PAPER', 'STICKER-RESOLUTION'],
-                'product_options' => ['STICKER-SIZE'],
-            ],
-        ]]);
-
         $products = [];
         for ($i = 0; $i < $options['amount']; ++$i) {
             $products[] = [
                 'name' => sprintf('Sticker "%s"', $this->faker->word),
                 'code' => $this->faker->uuid,
-                'main_taxon' => 'STICKERS',
-                'product_archetype' => 'STICKER',
-                'taxons' => ['STICKERS', 'STICKYPICKY'],
+                'main_taxon' => 'stickers',
+                'taxons' => ['stickers'],
                 'product_attributes' => [
                     'STICKER-PAPER' => sprintf('Paper from tree %s', $this->faker->randomElement(['Wung', 'Tanajno', 'Lemon-San', 'Me-Gusta'])),
                     'STICKER-RESOLUTION' => $this->faker->randomElement(['JKM XD', '476DPI', 'FULL HD', '200DPI']),

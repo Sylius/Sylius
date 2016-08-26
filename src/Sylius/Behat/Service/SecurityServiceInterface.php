@@ -11,7 +11,9 @@
 
 namespace Sylius\Behat\Service;
 
-use Sylius\Component\Core\Model\UserInterface;
+use Sylius\Component\User\Model\UserInterface;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -19,17 +21,23 @@ use Sylius\Component\Core\Model\UserInterface;
 interface SecurityServiceInterface
 {
     /**
-     * @param string $email
+     * @param UserInterface $user
      *
      * @throws \InvalidArgumentException
      */
-    public function logIn($email);
-    
+    public function logIn(UserInterface $user);
+
     public function logOut();
 
     /**
-     * @param UserInterface $user
-     * @param callable $action
+     * @return TokenInterface
+     *
+     * @throws TokenNotFoundException
      */
-    public function performActionAs(UserInterface $user, callable $action);
+    public function getCurrentToken();
+
+    /**
+     * @param TokenInterface $token
+     */
+    public function restoreToken(TokenInterface $token);
 }

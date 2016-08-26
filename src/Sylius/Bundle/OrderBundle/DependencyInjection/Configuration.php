@@ -25,14 +25,14 @@ use Sylius\Component\Order\Model\Adjustment;
 use Sylius\Component\Order\Model\AdjustmentInterface;
 use Sylius\Component\Order\Model\Comment;
 use Sylius\Component\Order\Model\CommentInterface;
-use Sylius\Component\Order\Model\Identity;
-use Sylius\Component\Order\Model\IdentityInterface;
 use Sylius\Component\Order\Model\Order;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderItem;
 use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Order\Model\OrderItemUnit;
 use Sylius\Component\Order\Model\OrderItemUnitInterface;
+use Sylius\Component\Order\Model\OrderSequence;
+use Sylius\Component\Order\Model\OrderSequenceInterface;
 use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
@@ -155,21 +155,6 @@ class Configuration implements ConfigurationInterface
                                 ->end()
                             ->end()
                         ->end()
-                        ->arrayNode('order_identity')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->variableNode('options')->end()
-                                ->arrayNode('classes')
-                                    ->addDefaultsIfNotSet()
-                                    ->children()
-                                        ->scalarNode('model')->defaultValue(Identity::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('interface')->defaultValue(IdentityInterface::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
-                                    ->end()
-                                ->end()
-                            ->end()
-                        ->end()
                         ->arrayNode('adjustment')
                             ->addDefaultsIfNotSet()
                             ->children()
@@ -228,6 +213,21 @@ class Configuration implements ConfigurationInterface
                                             ->prototype('scalar')->end()
                                             ->defaultValue(['sylius'])
                                         ->end()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('order_sequence')
+                            ->addDefaultsIfNotSet()
+                            ->children()
+                                ->variableNode('options')->end()
+                                ->arrayNode('classes')
+                                    ->addDefaultsIfNotSet()
+                                    ->children()
+                                        ->scalarNode('model')->defaultValue(OrderSequence::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('interface')->defaultValue(OrderSequenceInterface::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('repository')->cannotBeEmpty()->end()
+                                        ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                     ->end()
                                 ->end()
                             ->end()

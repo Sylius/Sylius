@@ -44,6 +44,7 @@ sylius:
             amount: Hoeveelheid
             usage_limit: Gebruikslimiet
             expires_at: Verloopt op
+            code_length: Lengte van de code
         promotion:
             actions: Acties
             add_action: Actie toevoegen

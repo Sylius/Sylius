@@ -2,6 +2,7 @@
 
 namespace spec\Sylius\Component\Core\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Model\AdjustmentInterface;
@@ -10,7 +11,7 @@ use Sylius\Component\Core\Model\OrderItemUnitInterface;
 /**
  * @mixin \Sylius\Component\Core\Model\OrderItem
  */
-class OrderItemSpec extends ObjectBehavior
+final class OrderItemSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

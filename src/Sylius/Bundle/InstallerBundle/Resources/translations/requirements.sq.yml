@@ -6,7 +6,6 @@ sylius:
         header: Shtesa
         accelerator:
             header: Përshpejtues
-            help: Instalo dhe aktivizo një përshpejtues PHP si APC (i rekomanduar fort).
         apc: APC
         ctype: Ctype
         gd: GD
@@ -30,13 +29,9 @@ sylius:
         header: file system
         cache:
             header: cache
-            help:
-                To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
         exists: Ekziston
         logs:
             header: logs
-            help:
-                To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
         not_exists: Nuk ekziston
         not_writable: I pashkrueshëm
         parameters:
@@ -62,4 +57,3 @@ sylius:
             header: Zonë orare e papranueshme
             help: 'Zona orare %timezone% nuk pranohet. is deprecated. Korrigjo php.ini file (lista e zonave orare të kundërshtuara http://php.net/manual/en/timezones.others.php).'
         version: Versioni PHP
-        version_recommanded: Versioni PHP i rekomanduar

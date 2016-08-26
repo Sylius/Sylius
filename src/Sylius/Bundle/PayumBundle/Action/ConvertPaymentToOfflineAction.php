@@ -32,7 +32,7 @@ class ConvertPaymentToOfflineAction implements ActionInterface
         RequestNotSupportedException::assertSupports($this, $request);
 
         $request->setResult([
-            Constants::FIELD_PAID => true,
+            Constants::FIELD_PAID => false,
         ]);
     }
 

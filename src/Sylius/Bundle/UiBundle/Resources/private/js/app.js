@@ -53,6 +53,7 @@
 
     $('.ui.checkbox').checkbox();
     $('.ui.accordion').accordion();
+    $('.ui.menu .dropdown').dropdown({action: 'hide'});
     $('.link.ui.dropdown').dropdown({action: 'hide'});
     $('.button.ui.dropdown').dropdown({action: 'hide'});
     $('.ui.fluid.search.selection.ui.dropdown').dropdown();
@@ -83,7 +84,7 @@
       on: 'hover'
     });
 
-    var email = $('#sylius_shop_checkout_addressing_customer_email');
+    var email = $('#sylius_checkout_address_customer_email');
     email.apiToggle({
       action: 'user check',
       dataType: 'json',

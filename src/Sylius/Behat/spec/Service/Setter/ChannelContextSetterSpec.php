@@ -23,7 +23,7 @@ use Sylius\Component\Channel\Model\ChannelInterface;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ChannelContextSetterSpec extends ObjectBehavior
+final class ChannelContextSetterSpec extends ObjectBehavior
 {
     function let(CookieSetterInterface $cookieSetter)
     {

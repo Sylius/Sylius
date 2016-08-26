@@ -23,6 +23,8 @@
         <parameter key="sylius.validator.variant.combination.class">Sylius\Bundle\VariationBundle\Validator\VariantCombinationValidator</parameter>
 
         <parameter key="sylius.generator.variant.class">Sylius\Component\Variation\Generator\VariantGenerator</parameter>
+
+        <parameter key="sylius.variant_resolver.default.class">Sylius\Component\Variation\Resolver\DefaultVariantResolver</parameter>
     </parameters>
 
     <services>
@@ -42,6 +44,10 @@
         <service id="sylius.generator.variant" class="%sylius.generator.variant.class%">
             <argument type="service" id="sylius.factory.product_variant" />
             <argument type="service" id="sylius.set_builder.cartesian" />
+        </service>
+
+        <service id="sylius.variant_resolver.default" class="%sylius.variant_resolver.default.class%">
+            <tag name="sylius.variant_resolver.default" type="default" />
         </service>
     </services>
 

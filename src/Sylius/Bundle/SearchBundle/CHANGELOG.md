@@ -1,4 +1,0 @@
-CHANGELOG
-=========
-
-* Initial dev release.

@@ -24,6 +24,7 @@ sylius:
             roles: Peran
         channel:
             currency_default: Mata uang default
+            tax_zone_default: Standar Zona Pajak
         image:
             file: Gambar
         locale:
@@ -85,7 +86,6 @@ sylius:
         user_filter:
             query: Cari
         variant:
-            available_on_demand: Tersedia
             depth: Tebal
             height: Tinggi
             images: Gambar

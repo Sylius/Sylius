@@ -22,3 +22,6 @@ doctrine_phpcr:
 
 twig:
     strict_variables: true
+
+sylius_channel:
+    debug: true

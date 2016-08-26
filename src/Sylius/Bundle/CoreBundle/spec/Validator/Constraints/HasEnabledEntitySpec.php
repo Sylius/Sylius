@@ -17,7 +17,7 @@ use Symfony\Component\Validator\Constraint;
 /**
  * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
-class HasEnabledEntitySpec extends ObjectBehavior
+final class HasEnabledEntitySpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {

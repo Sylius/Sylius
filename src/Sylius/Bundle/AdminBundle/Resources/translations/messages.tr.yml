@@ -29,3 +29,6 @@ sylius:
                 sales:
                     header: Satışlar
                     orders: Siparişler
+                content:
+                    header: İçerik
+                    routes: Rotalar

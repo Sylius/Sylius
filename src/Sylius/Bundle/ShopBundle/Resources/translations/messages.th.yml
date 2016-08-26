@@ -5,6 +5,7 @@ sylius:
     menu:
         shop:
             account:
+                header: บัญชีของคุณ
                 dashboard: แดชบอร์ด
                 personal_information: ข้อมูลส่วนบุคคล
                 change_password: เปลี่ยนรหัสผ่าน

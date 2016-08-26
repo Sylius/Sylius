@@ -38,10 +38,6 @@ final class DoctrineORMContext implements Context
      */
     public function purgeDatabase()
     {
-        if (null === $this->entityManager) {
-            throw new \RuntimeException('Cannot purge database. Entity manager is not set');
-        }
-
         $this->entityManager->getConnection()->getConfiguration()->setSQLLogger(null);
         $purger = new ORMPurger($this->entityManager);
         $purger->purge();

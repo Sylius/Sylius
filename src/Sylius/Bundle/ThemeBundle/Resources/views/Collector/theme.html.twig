@@ -1,0 +1,113 @@
+{% extends '@WebProfiler/Profiler/layout.html.twig' %}
+
+{% import _self as helper %}
+
+{% block toolbar %}
+    {% if collector.themes is not empty %}
+        {% set icon %}
+            {{ include('@SyliusTheme/Collector/Icon/theme.svg') }}
+            <span class="sf-toolbar-value">{{ collector.usedTheme|default(collector.themes|length) }}</span>
+        {% endset %}
+
+        {% set text %}
+            <div class="sf-toolbar-info-piece">
+                <b>All themes</b>
+                <span class="sf-toolbar-status">{{ collector.themes|length }}</span>
+            </div>
+
+            <div class="sf-toolbar-info-piece">
+                <b>Used themes</b>
+                <span class="sf-toolbar-status">{{ collector.usedThemes|length }}</span>
+            </div>
+        {% endset %}
+
+        {{ include('@WebProfiler/Profiler/toolbar_item.html.twig') }}
+    {% endif %}
+{% endblock %}
+
+{% block menu %}
+    <span class="label {% if collector.usedThemes is empty %}disabled{% endif %}">
+        <span class="icon">{{ include('@SyliusTheme/Collector/Icon/theme.svg') }}</span>
+        <strong>Themes</strong>
+        <span class="count">
+            <span>{{ collector.usedThemes|length }}</span>
+        </span>
+    </span>
+{% endblock %}
+
+{% block panel %}
+    <h2>Theme Metrics</h2>
+
+    <div class="metrics">
+        <div class="metric">
+            <span class="value">{{ collector.usedThemes|length }}</span>
+            <span class="label">Used themes</span>
+        </div>
+
+        <div class="metric">
+            <span class="value">{{ collector.themes|length }}</span>
+            <span class="label">All themes</span>
+        </div>
+    </div>
+
+    <h2>Themes List</h2>
+
+    <div class="sf-tabs">
+        <div class="tab">
+            <h3 class="tab-title">Used <span class="badge">{{ collector.usedThemes|length }}</span></h3>
+
+            <div class="tab-content">
+                <p class="help">
+                    These are themes used.
+                </p>
+
+                {% if collector.usedThemes is empty %}
+                    <div class="empty">
+                        <p>No themes were used.</p>
+                    </div>
+                {% else %}
+                    {{ helper.render_table(collector.usedThemes) }}
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="tab">
+            <h3 class="tab-title">All <span class="badge">{{ collector.themes|length }}</span></h3>
+
+            <div class="tab-content">
+                <p class="help">
+                    These are themes found.
+                </p>
+
+                {% if collector.themes is empty %}
+                    <div class="empty">
+                        <p>No themes were found.</p>
+                    </div>
+                {% else %}
+                    {{ helper.render_table(collector.themes) }}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% macro render_table(themes) %}
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Path</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for theme in themes %}
+            <tr>
+                <td class="font-normal text-small text-bold">{{ theme.name }}</td>
+                <td class="font-normal text-small">{{ theme.path }}</td>
+                <td class="font-normal text-small">{{ theme.description }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endmacro %}

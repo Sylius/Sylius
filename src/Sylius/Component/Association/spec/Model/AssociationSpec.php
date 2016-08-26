@@ -20,7 +20,7 @@ use Sylius\Component\Association\Model\AssociationType;
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class AssociationSpec extends ObjectBehavior
+final class AssociationSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

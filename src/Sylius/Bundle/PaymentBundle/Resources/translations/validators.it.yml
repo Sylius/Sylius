@@ -19,6 +19,9 @@ sylius:
             min_length: 'Il codice CVV della carta di credito deve essere lungo al massimo {{ limit }} cifre.'
         expiry_year:
             not_blank: "Si prega di selezionare l'anno di scadenza."
+    payment:
+        currency_code:
+            not_valid: Il codice valuta inserito non è valido.
     payment_method:
         gateway:
             not_blank: Si prega di selezionare il gateway per il metodo di pagamento.

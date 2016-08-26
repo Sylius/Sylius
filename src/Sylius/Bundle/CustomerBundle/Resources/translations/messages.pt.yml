@@ -1,0 +1,10 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        customer:
+            email: Endereço de email
+            phone_number: Número de Telefone
+    gender:
+        unknown: Desconhecido

@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\PricingBundle\Form\EventListener;
 
+use Sylius\Component\Pricing\Calculator\CalculatorInterface;
 use Sylius\Component\Pricing\Calculator\Calculators;
 use Sylius\Component\Pricing\Model\PriceableInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
@@ -118,6 +119,7 @@ class BuildPriceableFormSubscriber implements EventSubscriberInterface
      */
     protected function addConfigurationFields(FormInterface $form, $calculatorType, array $data = [])
     {
+        /** @var CalculatorInterface $calculator */
         $calculator = $this->calculatorRegistry->get($calculatorType);
         $formType = sprintf('sylius_price_calculator_%s', $calculator->getType());
 

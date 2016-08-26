@@ -2,7 +2,7 @@ SyliusProductBundle [![Build status...](https://secure.travis-ci.org/Sylius/Syli
 ===================
 
 Products system for [**Symfony2**](http://symfony.com) applications.
-It supports simple product catalogs, as well as stores with requirement for fully customizable variants, options, properties and handy archetypes.
+It supports simple product catalogs, as well as stores with requirement for fully customizable variants, options and properties.
 
 Its initial version was inspired by [Spree product and variants system](http://guides.spreecommerce.com/products_and_variants.html).
 

@@ -23,7 +23,7 @@ use Symfony\Component\Filesystem\Filesystem;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ApplicationResourceLocatorSpec extends ObjectBehavior
+final class ApplicationResourceLocatorSpec extends ObjectBehavior
 {
     function let(Filesystem $filesystem)
     {

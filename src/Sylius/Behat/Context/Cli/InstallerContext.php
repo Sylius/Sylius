@@ -19,6 +19,7 @@ use Symfony\Component\Console\Helper\DialogHelper;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Symfony\Component\HttpKernel\KernelInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
@@ -108,7 +109,7 @@ final class InstallerContext implements Context
      */
     public function commandSuccess()
     {
-        expect($this->tester->getStatusCode())->toBe(0);
+        Assert::same($this->tester->getStatusCode(), 0);
     }
 
     /**
@@ -116,7 +117,7 @@ final class InstallerContext implements Context
      */
     public function iShouldSeeOutput($text)
     {
-        \PHPUnit_Framework_Assert::assertContains($text, $this->tester->getDisplay());
+        Assert::contains($this->tester->getDisplay(), $text);
     }
 
     /**

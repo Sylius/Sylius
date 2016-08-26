@@ -11,31 +11,19 @@
 
 namespace Sylius\Component\Core\Context;
 
-use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Component\Channel\Context\ChannelContextInterface;
+use Sylius\Component\Currency\Context\CurrencyContextInterface;
+use Sylius\Component\Customer\Context\CustomerContextInterface;
+use Sylius\Component\Locale\Context\LocaleContextInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface ShopperContextInterface
+interface ShopperContextInterface extends
+    ChannelContextInterface,
+    CurrencyContextInterface,
+    LocaleContextInterface,
+    CustomerContextInterface
 {
-    /**
-     * @return ChannelInterface
-     */
-    public function getChannel();
 
-    /**
-     * @return string
-     */
-    public function getCurrencyCode();
-
-    /**
-     * @return string
-     */
-    public function getLocaleCode();
-
-    /**
-     * @return CustomerInterface|null
-     */
-    public function getCustomer();
 }

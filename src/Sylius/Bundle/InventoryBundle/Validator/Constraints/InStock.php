@@ -18,17 +18,23 @@ use Symfony\Component\Validator\Constraint;
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class InStock extends Constraint
+final class InStock extends Constraint
 {
     public $message = '%stockable% does not have sufficient stock.';
     public $stockablePath = 'stockable';
     public $quantityPath = 'quantity';
 
+    /**
+     * {@inheritdoc}
+     */
     public function validatedBy()
     {
         return 'sylius_in_stock';
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getTargets()
     {
         return self::CLASS_CONSTRAINT;

@@ -14,13 +14,13 @@ namespace Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\AddressingBundle\Factory\ZoneFactoryInterface;
-use Sylius\Bundle\SettingsBundle\Manager\SettingsManagerInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Addressing\Model\ProvinceInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Addressing\Model\ZoneMemberInterface;
 use Sylius\Component\Addressing\Repository\ZoneRepositoryInterface;
-use Sylius\Component\Core\Test\Services\SharedStorageInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Model\CodeAwareInterface;
 use Symfony\Component\Intl\Intl;
@@ -31,15 +31,6 @@ use Symfony\Component\Intl\Intl;
 final class ZoneContext implements Context
 {
     /**
-     * @var array
-     */
-    private $euMembers = [
-        'BE', 'BG', 'CZ', 'DK', 'DE', 'EE', 'IE', 'GR', 'ES',
-        'FR', 'IT', 'CY', 'LV', 'LT', 'LU', 'HU', 'MT', 'NL',
-        'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE', 'GB',
-    ];
-
-    /**
      * @var SharedStorageInterface
      */
     private $sharedStorage;
@@ -48,11 +39,6 @@ final class ZoneContext implements Context
      * @var ZoneRepositoryInterface
      */
     private $zoneRepository;
-
-    /**
-     * @var SettingsManagerInterface
-     */
-    private $settingsManager;
 
     /**
      * @var ObjectManager
@@ -72,7 +58,6 @@ final class ZoneContext implements Context
     /**
      * @param SharedStorageInterface $sharedStorage
      * @param ZoneRepositoryInterface $zoneRepository
-     * @param SettingsManagerInterface $settingsManager
      * @param ObjectManager $objectManager
      * @param ZoneFactoryInterface $zoneFactory
      * @param FactoryInterface $zoneMemberFactory
@@ -80,31 +65,15 @@ final class ZoneContext implements Context
     public function __construct(
         SharedStorageInterface $sharedStorage,
         ZoneRepositoryInterface $zoneRepository,
-        SettingsManagerInterface $settingsManager,
         ObjectManager $objectManager,
         ZoneFactoryInterface $zoneFactory,
         FactoryInterface $zoneMemberFactory
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->zoneRepository = $zoneRepository;
-        $this->settingsManager = $settingsManager;
         $this->objectManager = $objectManager;
         $this->zoneFactory = $zoneFactory;
         $this->zoneMemberFactory = $zoneMemberFactory;
-    }
-
-    /**
-     * @Given /^there is a zone "EU" containing all members of the European Union$/
-     */
-    public function thereIsAZoneEUContainingAllMembersOfEuropeanUnion()
-    {
-        $zone = $this->zoneFactory->createWithMembers($this->euMembers);
-        $zone->setType(ZoneInterface::TYPE_COUNTRY);
-        $zone->setCode('EU');
-        $zone->setName('European Union');
-
-        $this->zoneRepository->add($zone);
-        $this->sharedStorage->set('zone', $zone);
     }
 
     /**
@@ -112,12 +81,10 @@ final class ZoneContext implements Context
      */
     public function thereIsAZoneTheRestOfTheWorldContainingAllOtherCountries()
     {
-        $restOfWorldCountries = array_diff(
-            array_keys(Intl::getRegionBundle()->getCountryNames('en')),
-            array_merge($this->euMembers, ['US'])
-        );
+        $restOfWorldCountries = Intl::getRegionBundle()->getCountryNames('en');
+        unset($restOfWorldCountries['US']);
 
-        $zone = $this->zoneFactory->createWithMembers($restOfWorldCountries);
+        $zone = $this->zoneFactory->createWithMembers(array_keys($restOfWorldCountries));
         $zone->setType(ZoneInterface::TYPE_COUNTRY);
         $zone->setCode('RoW');
         $zone->setName('The Rest of the World');
@@ -130,9 +97,11 @@ final class ZoneContext implements Context
      */
     public function defaultTaxZoneIs(ZoneInterface $zone)
     {
-        $settings = $this->settingsManager->load('sylius_taxation');
-        $settings->set('default_tax_zone', $zone);
-        $this->settingsManager->save($settings);
+        /** @var ChannelInterface $channel */
+        $channel = $this->sharedStorage->get('channel');
+        $channel->setDefaultTaxZone($zone);
+
+        $this->objectManager->flush();
     }
 
     /**

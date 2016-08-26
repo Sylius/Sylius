@@ -1,0 +1,18 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        group:
+            name: 名称
+            roles: 角色
+        customer:
+            first_name: 名字
+            groups: 团体
+            last_name: 姓氏
+            email: 电子邮件
+            phone_number: 电话
+            billing_address: 账单地址
+            different_billing_address: 使用不同地址的帐单吗？
+    gender:
+        unknown: 未知

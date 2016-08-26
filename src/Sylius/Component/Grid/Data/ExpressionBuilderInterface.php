@@ -17,18 +17,18 @@ namespace Sylius\Component\Grid\Data;
 interface ExpressionBuilderInterface
 {
     /**
-     * @param mixed $expressions
+     * @param mixed ...$expressions
      *
      * @return self
      */
-    public function andX($expressions);
+    public function andX(...$expressions);
 
     /**
-     * @param mixed $expressions
+     * @param mixed ...$expressions
      *
      * @return self
      */
-    public function orX($expressions);
+    public function orX(...$expressions);
 
     /**
      * @param string $field

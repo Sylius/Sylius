@@ -18,7 +18,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class ChannelFactorySpec extends ObjectBehavior
+final class ChannelFactorySpec extends ObjectBehavior
 {
     function let(
         FactoryInterface $defaultFactory

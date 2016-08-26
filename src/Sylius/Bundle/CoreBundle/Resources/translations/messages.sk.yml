@@ -35,6 +35,7 @@ sylius:
             currencies: Meny
             shipping_methods: Spôsoby doručenia
             payment_methods: Spôsoby platby
+            tax_zone_default: Predvolené daňové pásmo
             theme: Téma
             hostname: Hostname
         image:
@@ -112,7 +113,6 @@ sylius:
         user_filter:
             query: Vyhľadať
         variant:
-            available_on_demand: Na objednávku
             depth: Hĺbka
             height: Výška
             images: Obrázky

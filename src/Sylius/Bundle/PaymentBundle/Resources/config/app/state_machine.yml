@@ -8,9 +8,8 @@ winzou_state_machine:
         graph: sylius_payment
         state_machine_class: "%sylius.state_machine.class%"
         states:
+            cart: ~
             new: ~
-            unknown: ~
-            pending: ~
             processing: ~
             completed: ~
             failed: ~
@@ -19,23 +18,23 @@ winzou_state_machine:
             refunded: ~
         transitions:
             create:
-                from: [new]
-                to: pending
+                from: [cart]
+                to: new
             process:
-                from: [new, pending]
+                from: [new]
                 to: processing
             complete:
-                from: [new, pending, processing]
+                from: [new, processing]
                 to: completed
             fail:
-                from: [new, pending, processing]
+                from: [new, processing]
                 to: failed
             cancel:
-                from: [new, pending, processing]
+                from: [new, processing]
                 to: cancelled
             refund:
                 from: [completed]
                 to: refunded
             void:
-                from: [new, pending]
+                from: [new, processing]
                 to: void

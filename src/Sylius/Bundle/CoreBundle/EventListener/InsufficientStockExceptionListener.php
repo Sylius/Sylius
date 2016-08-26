@@ -21,7 +21,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class InsufficientStockExceptionListener
+final class InsufficientStockExceptionListener
 {
     /**
      * @var UrlGeneratorInterface

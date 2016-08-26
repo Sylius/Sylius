@@ -21,7 +21,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class EmailTypeSpec extends ObjectBehavior
+final class EmailTypeSpec extends ObjectBehavior
 {
     function let()
     {

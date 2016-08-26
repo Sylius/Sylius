@@ -20,7 +20,7 @@ use Sylius\Bundle\FlowBundle\Storage\StorageInterface;
 use Sylius\Bundle\FlowBundle\Validator\ProcessValidatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 
-class ProcessContextSpec extends ObjectBehavior
+final class ProcessContextSpec extends ObjectBehavior
 {
     function let(StorageInterface $storage)
     {

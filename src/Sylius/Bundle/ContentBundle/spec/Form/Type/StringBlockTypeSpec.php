@@ -18,7 +18,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-class StringBlockTypeSpec extends ObjectBehavior
+final class StringBlockTypeSpec extends ObjectBehavior
 {
     function let()
     {

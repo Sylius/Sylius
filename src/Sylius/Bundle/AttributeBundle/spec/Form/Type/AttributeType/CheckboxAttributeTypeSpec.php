@@ -17,7 +17,7 @@ use Symfony\Component\Form\AbstractType;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class CheckboxAttributeTypeSpec extends ObjectBehavior
+final class CheckboxAttributeTypeSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

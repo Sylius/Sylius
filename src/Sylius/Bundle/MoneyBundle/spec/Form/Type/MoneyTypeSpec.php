@@ -18,7 +18,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class MoneyTypeSpec extends ObjectBehavior
+final class MoneyTypeSpec extends ObjectBehavior
 {
     function let()
     {

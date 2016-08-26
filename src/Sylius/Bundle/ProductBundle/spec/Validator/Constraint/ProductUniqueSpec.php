@@ -17,7 +17,7 @@ use Symfony\Component\Validator\Constraint;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ProductUniqueSpec extends ObjectBehavior
+final class ProductUniqueSpec extends ObjectBehavior
 {
     function let()
     {

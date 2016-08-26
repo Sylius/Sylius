@@ -179,10 +179,7 @@ final class ManagingProductAttributesContext implements Context
      */
     public function iShouldBeNotifiedThatProductAttributeWithThisCodeAlreadyExists()
     {
-        Assert::true(
-            $this->updatePage->checkValidationMessageFor('code', 'This code is already in use.'),
-            'Unique code violation message should appear on page, but it does not.'
-        );
+        Assert::same($this->updatePage->getValidationMessage('code'), 'This code is already in use.');
     }
 
     /**
@@ -281,11 +278,9 @@ final class ManagingProductAttributesContext implements Context
      */
     private function assertFieldValidationMessage($element, $expectedMessage)
     {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
-        Assert::true(
-            $currentPage->checkValidationMessageFor($element, $expectedMessage),
-            sprintf('Product attribute %s should be required.', $element)
-        );
+        Assert::same($currentPage->getValidationMessage($element), $expectedMessage);
     }
 }

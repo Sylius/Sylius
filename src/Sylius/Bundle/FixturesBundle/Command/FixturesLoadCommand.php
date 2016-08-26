@@ -31,7 +31,7 @@ final class FixturesLoadCommand extends ContainerAwareCommand
         $this
             ->setName('sylius:fixtures:load')
             ->setDescription('Loads fixtures from given suite')
-            ->addArgument('suite', InputArgument::REQUIRED, 'Suite name')
+            ->addArgument('suite', InputArgument::OPTIONAL, 'Suite name', 'default')
         ;
     }
 

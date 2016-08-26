@@ -36,7 +36,7 @@ class OrderItemUnit extends BaseOrderItemUnit implements OrderItemUnitInterface
     /**
      * @var string BaseShipmentInterface::STATE_*
      */
-    protected $shippingState = BaseShipmentInterface::STATE_CHECKOUT;
+    protected $shippingState = BaseShipmentInterface::STATE_CART;
 
     /**
      * @param OrderItemInterface $orderItem
@@ -86,14 +86,6 @@ class OrderItemUnit extends BaseOrderItemUnit implements OrderItemUnitInterface
     public function isSold()
     {
         return InventoryUnitInterface::STATE_SOLD === $this->inventoryState;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isBackordered()
-    {
-        return InventoryUnitInterface::STATE_BACKORDERED === $this->inventoryState;
     }
 
     /**

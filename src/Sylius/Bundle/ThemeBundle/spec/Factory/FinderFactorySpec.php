@@ -21,7 +21,7 @@ use Symfony\Component\Finder\Finder;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class FinderFactorySpec extends ObjectBehavior
+final class FinderFactorySpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

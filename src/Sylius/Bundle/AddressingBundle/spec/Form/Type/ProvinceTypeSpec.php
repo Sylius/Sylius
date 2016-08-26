@@ -21,7 +21,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Julien Janvier <j.janvier@gmail.com>
  */
-class ProvinceTypeSpec extends ObjectBehavior
+final class ProvinceTypeSpec extends ObjectBehavior
 {
     function let()
     {

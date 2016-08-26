@@ -1,8 +1,0 @@
-{% form_theme form 'SyliusWebBundle:Backend:forms.html.twig' %}
-
-<fieldset>
-    {{ form_row(form.code, {'attr': {'class': 'input-lg'}}) }}
-    {{ form_row(form.name, {'attr': {'class': 'input-lg'}}) }}
-    {{ form_row(form.description, {'attr': {'class': 'input-lg'}, 'rows': 5}) }}
-</fieldset>
-{{ form_widget(form._token) }}

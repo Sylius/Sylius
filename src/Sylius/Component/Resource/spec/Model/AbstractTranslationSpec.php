@@ -17,7 +17,7 @@ use Sylius\Component\Resource\Model\AbstractTranslation;
 use Sylius\Component\Resource\Model\TranslatableInterface;
 use Sylius\Component\Resource\Model\TranslationInterface;
 
-class AbstractTranslationSpec extends ObjectBehavior
+final class AbstractTranslationSpec extends ObjectBehavior
 {
     function let()
     {

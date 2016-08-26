@@ -24,9 +24,9 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
      */
     public function isRegistered()
     {
-        $username = $this->getDocument()->find('css', '#username')->getText();
+        $username = $this->getDocument()->find('css', '#username');
 
-        return '' !== $username;
+        return null !== $username;
     }
 
     /**
@@ -34,12 +34,56 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
      */
     public function deleteAccount()
     {
-        $deleteButton = $this->getElement('delete account button');
-        $deleteButton->press();
+        $deleteButton = $this->getElement('delete_account_button');
+        $deleteButton->pressButton('Delete');
+    }
 
-        $confirmationModal = $this->getDocument()->find('css', '#confirmation-modal-confirm');
-        $this->waitForModalToAppear($confirmationModal);
-        $confirmationModal->find('css', 'a:contains("Delete")')->press();
+    /**
+     * {@inheritdoc}
+     */
+    public function getCustomerEmail()
+    {
+        return $this->getElement('customer_email')->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getCustomerName()
+    {
+        return $this->getElement('customer_name')->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRegistrationDate()
+    {
+        return new \DateTime(str_replace('Customer since ', '', $this->getElement('registration_date')->getText()));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getShippingAddress()
+    {
+        return $this->getElement('shipping_address')->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getBillingAddress()
+    {
+        return $this->getElement('billing_address')->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasAccount()
+    {
+        return $this->hasElement('no_account');
     }
 
     /**
@@ -47,7 +91,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
      */
     public function getRouteName()
     {
-        return 'sylius_backend_customer_show';
+        return 'sylius_admin_customer_show';
     }
 
     /**
@@ -56,7 +100,13 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'delete account button' => '.delete-action-form',
+            'billing_address' => '#billingAddress address',
+            'customer_email' => '#info .content.extra > a',
+            'customer_name' => '#info .content > a',
+            'delete_account_button' => '#actions',
+            'no_account' => '#no-account',
+            'registration_date' => '#info .content .date',
+            'shipping_address' => '#shippingAddress address',
         ]);
     }
 }

@@ -23,7 +23,7 @@ require_once __DIR__ . DIRECTORY_SEPARATOR . 'FakeEntity.php';
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class IdentifierToResourceTransformerSpec extends ObjectBehavior
+final class IdentifierToResourceTransformerSpec extends ObjectBehavior
 {
     function let(RepositoryInterface $repository)
     {

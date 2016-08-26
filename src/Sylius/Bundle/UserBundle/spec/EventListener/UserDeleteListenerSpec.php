@@ -27,7 +27,7 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class UserDeleteListenerSpec extends ObjectBehavior
+final class UserDeleteListenerSpec extends ObjectBehavior
 {
     function let(TokenStorageInterface $tokenStorage, SessionInterface $session, FlashBagInterface $flashBag)
     {

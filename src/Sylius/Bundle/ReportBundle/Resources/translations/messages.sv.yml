@@ -6,5 +6,14 @@ sylius:
         report:
             name: Namn
             description: Beskrivning
+            data_fetcher: Datainsamlare
             renderer:
+                label: Renderare
                 template: Mall
+            chart:
+                type: Typ
+            user_registration:
+                start: Startdatum
+                end: Slutdatum
+                period: Tidsperiod
+                empty_records: Skriva ut tomma poster?

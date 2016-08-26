@@ -14,7 +14,7 @@ namespace spec\Sylius\Bundle\AddressingBundle\Form\Type;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\Form\FormTypeInterface;
 
-class ZoneTypeChoiceTypeSpec extends ObjectBehavior
+final class ZoneTypeChoiceTypeSpec extends ObjectBehavior
 {
     function let()
     {

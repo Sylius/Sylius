@@ -11,35 +11,36 @@
 
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
-use Sylius\Component\Cart\Provider\CartProviderInterface;
+use Sylius\Component\Cart\Context\CartContextInterface;
+use Sylius\Component\Cart\Context\CartNotFoundException;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\OrderProcessing\OrderRecalculatorInterface;
+use Sylius\Component\Core\OrderProcessing\OrderProcessorInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\Event;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class UserCartRecalculationListener
+final class UserCartRecalculationListener
 {
     /**
-     * @var CartProviderInterface
+     * @var CartContextInterface
      */
-    private $cartProvider;
+    private $cartContext;
 
     /**
-     * @var OrderRecalculatorInterface
+     * @var OrderProcessorInterface
      */
-    private $orderRecalculator;
+    private $orderProcessor;
 
     /**
-     * @param CartProviderInterface $cartProvider
-     * @param OrderRecalculatorInterface $orderRecalculator
+     * @param CartContextInterface $cartContext
+     * @param OrderProcessorInterface $orderProcessor
      */
-    public function __construct(CartProviderInterface $cartProvider, OrderRecalculatorInterface $orderRecalculator)
+    public function __construct(CartContextInterface $cartContext, OrderProcessorInterface $orderProcessor)
     {
-        $this->cartProvider = $cartProvider;
-        $this->orderRecalculator = $orderRecalculator;
+        $this->cartContext = $cartContext;
+        $this->orderProcessor = $orderProcessor;
     }
 
     /**
@@ -49,16 +50,16 @@ class UserCartRecalculationListener
      */
     public function recalculateCartWhileLogin(Event $event)
     {
-        if (!$this->cartProvider->hasCart()) {
+        try {
+            $cart = $this->cartContext->getCart();
+        } catch (CartNotFoundException $exception) {
             return;
         }
-
-        $cart = $this->cartProvider->getCart();
 
         if (!$cart instanceof OrderInterface) {
             throw new UnexpectedTypeException($cart, OrderInterface::class);
         }
 
-        $this->orderRecalculator->recalculate($cart);
+        $this->orderProcessor->process($cart);
     }
 }

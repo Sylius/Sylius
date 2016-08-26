@@ -60,11 +60,6 @@ class ShippingMethod implements ShippingMethodInterface
      */
     protected $configuration = [];
 
-    /**
-     * @var Collection|RuleInterface[]
-     */
-    protected $rules;
-
     public function __construct()
     {
         $this->initializeTranslationsCollection();
@@ -207,42 +202,6 @@ class ShippingMethod implements ShippingMethodInterface
     public function setConfiguration(array $configuration)
     {
         $this->configuration = $configuration;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getRules()
-    {
-        return $this->rules;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasRule(RuleInterface $rule)
-    {
-        return $this->rules->contains($rule);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addRule(RuleInterface $rule)
-    {
-        if (!$this->hasRule($rule)) {
-            $rule->setMethod($this);
-            $this->rules->add($rule);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removeRule(RuleInterface $rule)
-    {
-        $rule->setMethod(null);
-        $this->rules->removeElement($rule);
     }
 
     /**

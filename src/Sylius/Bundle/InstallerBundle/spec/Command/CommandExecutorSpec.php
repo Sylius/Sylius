@@ -18,7 +18,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class CommandExecutorSpec extends ObjectBehavior
+final class CommandExecutorSpec extends ObjectBehavior
 {
     function let(InputInterface $input, OutputInterface $output, Application $application)
     {

@@ -1,0 +1,18 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+default:
+    suites:
+        ui_administrator_login:
+            contexts_as_services:
+                - sylius.behat.context.hook.doctrine_orm
+
+                - sylius.behat.context.transform.user
+
+                - sylius.behat.context.setup.channel
+                - sylius.behat.context.setup.admin_user
+                - sylius.behat.context.setup.user
+
+                - sylius.behat.context.ui.admin.login
+            filters:
+                tags: "@administrator_login && @ui"

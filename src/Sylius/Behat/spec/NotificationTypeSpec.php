@@ -16,7 +16,7 @@ use PhpSpec\ObjectBehavior;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class NotificationTypeSpec extends ObjectBehavior
+final class NotificationTypeSpec extends ObjectBehavior
 {
     function it_initialize_with_success_value()
     {

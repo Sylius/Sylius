@@ -14,11 +14,6 @@ sylius:
         product_variant:
             available_on: Gati më
             available_until: Në dispozicion deri në
-        product_archetype:
-            name: Emri
-            parent: Prind
-            attributes: Atributet
-            options: Opsionet
         association_type:
             name: Emri
         association:

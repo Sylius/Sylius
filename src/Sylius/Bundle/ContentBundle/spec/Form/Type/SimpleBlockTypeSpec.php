@@ -18,7 +18,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-class SimpleBlockTypeSpec extends ObjectBehavior
+final class SimpleBlockTypeSpec extends ObjectBehavior
 {
     function let()
     {

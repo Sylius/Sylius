@@ -27,8 +27,6 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class ProvinceController extends ResourceController
 {
     /**
-     * Renders the province select field.
-     *
      * @param Request $request
      *
      * @return JsonResponse
@@ -44,7 +42,7 @@ class ProvinceController extends ResourceController
         }
 
         /* @var CountryInterface $country */
-        if (!$country = $this->getCountryRepository()->findOneBy(['code' => $countryCode])) {
+        if (!$country = $this->get('sylius.repository.country')->findOneBy(['code' => $countryCode])) {
             throw new NotFoundHttpException('Requested country does not exist.');
         }
 
@@ -65,43 +63,6 @@ class ProvinceController extends ResourceController
         return new JsonResponse([
             'content' => $this->viewHandler->handle($configuration, $view)->getContent(),
         ]);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function createNew()
-    {
-        $request = $this->config->getRequest();
-        if (null === $countryId = $request->get('countryId')) {
-            throw new NotFoundHttpException('No country given');
-        }
-
-        $country = $this
-            ->getCountryController()
-            ->findOr404($request, ['id' => $countryId])
-        ;
-
-        $province = parent::createNew();
-        $province->setCountry($country);
-
-        return $province;
-    }
-
-    /**
-     * @return ResourceController
-     */
-    protected function getCountryController()
-    {
-        return $this->get('sylius.controller.country');
-    }
-
-    /**
-     * @return ObjectRepository
-     */
-    protected function getCountryRepository()
-    {
-        return $this->get('sylius.repository.country');
     }
 
     /**

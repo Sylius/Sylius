@@ -209,10 +209,7 @@ final class ManagingCurrenciesContext implements Context
      */
     public function iShouldBeNotifiedThatCurrencyCodeMustBeUnique()
     {
-        Assert::true(
-            $this->createPage->checkValidationMessageFor('code', 'Currency code must be unique.'),
-            'Unique code violation message should appear on page, but it does not.'
-        );
+        Assert::same($this->createPage->getValidationMessage('code'), 'Currency code must be unique.');
     }
 
     /**
@@ -233,12 +230,10 @@ final class ManagingCurrenciesContext implements Context
      */
     public function iShouldBeNotifiedThatExchangeRateIsRequired()
     {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
-        Assert::true(
-            $currentPage->checkValidationMessageFor('exchangeRate', 'Please enter exchange rate.'),
-            'Currency exchange rate should be required.'
-        );
+        Assert::same($currentPage->getValidationMessage('exchangeRate'), 'Please enter exchange rate.');
     }
 
     /**

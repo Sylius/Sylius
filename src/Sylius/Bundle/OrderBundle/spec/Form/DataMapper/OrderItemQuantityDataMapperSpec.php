@@ -20,7 +20,7 @@ use Symfony\Component\Form\FormInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class OrderItemQuantityDataMapperSpec extends ObjectBehavior
+final class OrderItemQuantityDataMapperSpec extends ObjectBehavior
 {
     function let(OrderItemQuantityModifierInterface $orderItemQuantityModifier, DataMapperInterface $propertyPathDataMapper)
     {

@@ -25,7 +25,7 @@ use Symfony\Component\HttpFoundation\Request;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Arnaud Langade <arn0d.dev@gmail.com>
  */
-class RequestConfigurationSpec extends ObjectBehavior
+final class RequestConfigurationSpec extends ObjectBehavior
 {
     function let(MetadataInterface $metadata, Request $request, Parameters $parameters)
     {
@@ -500,7 +500,7 @@ class RequestConfigurationSpec extends ObjectBehavior
 
         $parameters->has('grid')->willReturn(true);
         $parameters->get('grid')->willReturn('sylius_admin_tax_category');
-        
+
         $this->getGrid()->shouldReturn('sylius_admin_tax_category');
     }
 
@@ -513,12 +513,12 @@ class RequestConfigurationSpec extends ObjectBehavior
             ->during('getGrid')
         ;
     }
-    
+
     function it_can_have_state_machine_transition(Parameters $parameters)
     {
         $parameters->has('state_machine')->willReturn(false);
         $this->hasStateMachine()->shouldReturn(false);
-       
+
         $parameters->has('state_machine')->willReturn(true);
         $parameters->get('state_machine[graph]', null, true)->willReturn('sylius_product_review_state');
         $parameters->get('state_machine[transition]', null, true)->willReturn('approve');

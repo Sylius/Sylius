@@ -19,7 +19,7 @@ use Symfony\Component\Form\FormBuilder;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class UserRegistrationTypeSpec extends ObjectBehavior
+final class UserRegistrationTypeSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Attribute\Factory;
 
+use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
 use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
@@ -44,9 +45,12 @@ class AttributeFactory implements AttributeFactoryInterface
      */
     public function createTyped($type)
     {
+        /** @var AttributeTypeInterface $attributeType */
+        $attributeType = $this->attributeTypesRegistry->get($type);
+
         $attribute = $this->factory->createNew();
         $attribute->setType($type);
-        $attribute->setStorageType($this->attributeTypesRegistry->get($type)->getStorageType());
+        $attribute->setStorageType($attributeType->getStorageType());
 
         return $attribute;
     }
@@ -56,9 +60,8 @@ class AttributeFactory implements AttributeFactoryInterface
      */
     public function createNew()
     {
-        $attribute = $this->factory->createNew();
-        $attribute->setStorageType($this->attributeTypesRegistry->get($attribute->getType())->getStorageType());
-
-        return $attribute;
+        throw new \BadMethodCallException(
+            'Method "createNew()" is not supported for attribute factory. Use "createTyped($type)" instead.'
+        );
     }
 }

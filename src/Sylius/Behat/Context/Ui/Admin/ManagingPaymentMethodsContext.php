@@ -172,6 +172,14 @@ final class ManagingPaymentMethodsContext implements Context
     }
 
     /**
+     * @Given I set its instruction as :instructions in :language
+     */
+    public function iSetItsInstructionAsIn($instructions, $language)
+    {
+        $this->createPage->setInstructions($instructions, $language);
+    }
+
+    /**
      * @When I add it
      * @When I try to add it
      */
@@ -259,12 +267,10 @@ final class ManagingPaymentMethodsContext implements Context
      */
     private function assertFieldValidationMessage($element, $expectedMessage)
     {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
-        Assert::true(
-            $currentPage->checkValidationMessageFor($element, $expectedMessage),
-            sprintf('Payment method %s should be required.', $element)
-        );
+        Assert::same($currentPage->getValidationMessage($element), $expectedMessage);
     }
 
     /**
@@ -301,6 +307,22 @@ final class ManagingPaymentMethodsContext implements Context
     }
 
     /**
+     * @Given the payment method :paymentMethod should have instructions :instructions in :language
+     */
+    public function thePaymentMethodShouldHaveInstructionsIn(
+        PaymentMethodInterface $paymentMethod,
+        $instructions,
+        $language
+    ) {
+        $this->iWantToModifyAPaymentMethod($paymentMethod);
+
+        Assert::same(
+            $this->updatePage->getPaymentMethodInstructions($language),
+            $instructions
+        );
+    }
+
+    /**
      * @Then /^(this payment method) should no longer exist in the registry$/
      */
     public function thisPaymentMethodShouldNoLongerExistInTheRegistry(PaymentMethodInterface $paymentMethod)
@@ -316,10 +338,7 @@ final class ManagingPaymentMethodsContext implements Context
      */
     public function iShouldBeNotifiedThatPaymentMethodWithThisCodeAlreadyExists()
     {
-        Assert::true(
-            $this->createPage->checkValidationMessageFor('code', 'The payment method with given code already exists.'),
-            'Unique code violation message should appear on page, but it does not.'
-        );
+        Assert::same($this->createPage->getValidationMessage('code'), 'The payment method with given code already exists.');
     }
 
     /**

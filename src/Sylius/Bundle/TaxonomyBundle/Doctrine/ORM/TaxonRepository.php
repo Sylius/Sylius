@@ -14,7 +14,6 @@ namespace Sylius\Bundle\TaxonomyBundle\Doctrine\ORM;
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
-use Webmozart\Assert\Assert;
 
 /**
  * @author Aram Alipoor <aram.alipoor@gmail.com>
@@ -66,6 +65,7 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
      */
     public function findChildrenByRootCode($code)
     {
+        /** @var TaxonInterface|null $root */
         $root = $this->findOneBy(['code' => $code]);
 
         if (null === $root) {
@@ -80,6 +80,7 @@ class TaxonRepository extends EntityRepository implements TaxonRepositoryInterfa
      */
     public function findChildrenAsTreeByRootCode($code)
     {
+        /** @var TaxonInterface|null $root */
         $root = $this->findOneBy(['code' => $code]);
 
         if (null === $root) {

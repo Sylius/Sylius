@@ -9,6 +9,7 @@ sylius:
                     products: Products
                     taxons: Taxons
                 configuration:
+                    admin_users: Administrators
                     channels: Channels
                     countries: Countries
                     currencies: Currencies
@@ -28,3 +29,7 @@ sylius:
                 sales:
                     header: Sales
                     orders: Orders
+                content:
+                    header: Content
+                    static_contents: Static contents
+                    routes: Routes

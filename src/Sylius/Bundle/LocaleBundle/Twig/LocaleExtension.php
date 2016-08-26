@@ -22,25 +22,14 @@ class LocaleExtension extends \Twig_Extension
     /**
      * @var LocaleHelperInterface
      */
-    protected $localeHelper;
+    private $localeHelper;
 
     /**
      * @param LocaleHelperInterface $localeHelper
      */
-    public function __construct(
-        LocaleHelperInterface $localeHelper
-    ) {
-        $this->localeHelper = $localeHelper;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getFunctions()
+    public function __construct(LocaleHelperInterface $localeHelper)
     {
-        return [
-            new \Twig_SimpleFunction('sylius_locale', [$this->localeHelper, 'getCurrentLocale']),
-        ];
+        $this->localeHelper = $localeHelper;
     }
 
     /**
@@ -49,7 +38,7 @@ class LocaleExtension extends \Twig_Extension
     public function getFilters()
     {
         return [
-            new \Twig_SimpleFilter('sylius_locale_name', [$this->localeHelper, 'convertToName']),
+            new \Twig_SimpleFilter('sylius_locale_name', [$this->localeHelper, 'convertCodeToName']),
         ];
     }
 

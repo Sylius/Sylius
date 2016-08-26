@@ -1,7 +1,7 @@
 Basic Usage
 ===========
 
-To use RBAC without Symfony2, you need to implement your own services.
+To use RBAC without Symfony, you need to implement your own services.
 
 Permissions and Roles
 ---------------------

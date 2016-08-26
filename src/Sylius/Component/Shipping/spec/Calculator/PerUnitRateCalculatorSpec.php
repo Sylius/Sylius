@@ -18,7 +18,7 @@ use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class PerUnitRateCalculatorSpec extends ObjectBehavior
+final class PerUnitRateCalculatorSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

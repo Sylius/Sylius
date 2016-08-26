@@ -27,7 +27,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SecurityControllerSpec extends ObjectBehavior
+final class SecurityControllerSpec extends ObjectBehavior
 {
     function let(AuthenticationUtils $authenticationUtils, FormFactoryInterface $formFactory, EngineInterface $templatingEngine)
     {

@@ -19,7 +19,7 @@ use Sylius\Behat\Page\Admin\Promotion\UpdatePageInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
-use Sylius\Component\Core\Test\Services\SharedStorageInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -142,11 +142,11 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @Given I add the "Contains taxon" rule configured with :count :taxonName
+     * @Given I add the "Contains number of items from taxon" rule configured with :count :taxonName
      */
     public function iAddTheContainsTaxonRuleConfiguredWith($count, $taxonName)
     {
-        $this->createPage->addRule('Contains taxon');
+        $this->createPage->addRule('Contains number of items from taxon');
         $this->createPage->selectRuleOption('Taxon', $taxonName);
         $this->createPage->fillRuleOption('Count', $count);
     }
@@ -166,17 +166,17 @@ final class ManagingPromotionsContext implements Context
     }
 
     /**
-     * @Given I add the "Total of items from taxon" rule configured with :count :taxonName
+     * @Given I add the "Total price of items from taxon" rule configured with :count :taxonName
      */
     public function iAddTheRuleConfiguredWith($count, $taxonName)
     {
-        $this->createPage->addRule('Total of items from taxon');
+        $this->createPage->addRule('Total price of items from taxon');
         $this->createPage->selectRuleOption('Taxon', $taxonName);
         $this->createPage->fillRuleOption('Amount', $count);
     }
 
     /**
-     * @Given I add the "Order fixed discount" action configured with €:amount
+     * @Given I add the "Order fixed discount" action configured with $:amount
      */
     public function stepDefinition($amount)
     {
@@ -231,10 +231,7 @@ final class ManagingPromotionsContext implements Context
      */
     public function iShouldBeNotifiedThatPromotionWithThisCodeAlreadyExists()
     {
-        Assert::true(
-            $this->createPage->checkValidationMessageFor('code', 'The promotion with given code already exists.'),
-            'Unique code violation message should appear on page, but it does not.'
-        );
+        Assert::same($this->createPage->getValidationMessage('code'), 'The promotion with given code already exists.');
     }
 
     /**
@@ -444,12 +441,10 @@ final class ManagingPromotionsContext implements Context
      */
     public function iShouldBeNotifiedThatPromotionCannotEndBeforeItsEvenStart()
     {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
-        Assert::true(
-            $currentPage->checkValidationMessageFor('ends_at', 'End date cannot be set prior start date.'),
-            'Start date was set after ends date, but it should not be possible.'
-        );
+        Assert::same($currentPage->getValidationMessage('ends_at'), 'End date cannot be set prior start date.');
     }
 
     /**
@@ -458,12 +453,10 @@ final class ManagingPromotionsContext implements Context
      */
     private function assertFieldValidationMessage($element, $expectedMessage)
     {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
         $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
 
-        Assert::true(
-            $currentPage->checkValidationMessageFor($element, $expectedMessage),
-            sprintf('Promotion %s should be required.', $element)
-        );
+        Assert::same($currentPage->getValidationMessage($element), $expectedMessage);
     }
 
     /**

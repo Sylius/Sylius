@@ -627,3 +627,20 @@ Example Response
 .. code-block:: text
 
     STATUS: 204 No Content
+
+Index of all customer orders
+----------------------------
+
+To browse all orders for specific customer, you can do the following call:
+
+.. code-block:: text
+
+    GET /api/customers/{id}/orders/
+
+Parameters
+..........
+
+page
+    Number of the page, by default = 1
+limit
+    Number of items to display per page

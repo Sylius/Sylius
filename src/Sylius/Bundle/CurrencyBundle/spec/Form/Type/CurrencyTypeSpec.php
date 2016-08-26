@@ -21,7 +21,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class CurrencyTypeSpec extends ObjectBehavior
+final class CurrencyTypeSpec extends ObjectBehavior
 {
     function let()
     {

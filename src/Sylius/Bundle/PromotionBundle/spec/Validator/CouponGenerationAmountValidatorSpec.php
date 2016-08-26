@@ -25,7 +25,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
  *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class CouponGenerationAmountValidatorSpec extends ObjectBehavior
+final class CouponGenerationAmountValidatorSpec extends ObjectBehavior
 {
     function let(GenerationPolicyInterface $generationPolicy, ExecutionContextInterface $context)
     {

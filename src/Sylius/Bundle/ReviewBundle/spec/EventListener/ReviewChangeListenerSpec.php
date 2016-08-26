@@ -22,7 +22,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ReviewChangeListenerSpec extends ObjectBehavior
+final class ReviewChangeListenerSpec extends ObjectBehavior
 {
     function let(ReviewableRatingUpdaterInterface $averageRatingUpdater)
     {

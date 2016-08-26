@@ -20,7 +20,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class UserReloaderListenerSpec extends ObjectBehavior
+final class UserReloaderListenerSpec extends ObjectBehavior
 {
     function let(UserReloaderInterface $userReloader)
     {

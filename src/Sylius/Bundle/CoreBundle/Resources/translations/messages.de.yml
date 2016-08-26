@@ -35,6 +35,7 @@ sylius:
             currencies: Währungen
             shipping_methods: Versandmethoden
             payment_methods: Zahlungsmethoden
+            tax_zone_default: Standard Steuerzone
             theme: Template
             hostname: Server-Name
         image:
@@ -112,7 +113,6 @@ sylius:
         user_filter:
             query: Suche
         variant:
-            available_on_demand: Auf Nachfrage
             depth: Tiefe
             height: Höhe
             images: Fotos
@@ -150,3 +150,11 @@ sylius:
         user_confirmation:
             name: Bestätigung durch den Benutzer
             subject: Willkommen Sie in unserem Shop
+        password_reset:
+            name: Passwort zurücksetzen
+            content: '<h3>Hallo %username%</h3> Zum Zurücksetzen Ihres Passworts - besuchen Sie bitte %url% <br/> <br/> Grüße, das Team.'
+        verification:
+            content: 'Zum Bestätigen Ihrer E-Mail-Adresse - besuchen Sie bitte %url%'
+    payum_gateway:
+        cash_on_delivery: Nachnahme
+        paypal_express_checkout: PayPal Express

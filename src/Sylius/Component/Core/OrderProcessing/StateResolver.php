@@ -11,50 +11,69 @@
 
 namespace Sylius\Component\Core\OrderProcessing;
 
+use SM\Factory\FactoryInterface;
+use SM\StateMachine\StateMachineInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\OrderShippingStates;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
+use Sylius\Component\Core\OrderPaymentStates;
+use Sylius\Component\Core\OrderPaymentTransitions;
+use Sylius\Component\Core\OrderShippingStates;
+use Sylius\Component\Core\OrderShippingTransitions;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 class StateResolver implements StateResolverInterface
 {
+    /**
+     * @var FactoryInterface
+     */
+    private $stateMachineFactory;
+
+    /**
+     * @param FactoryInterface $stateMachineFactory
+     */
+    public function __construct(FactoryInterface $stateMachineFactory)
+    {
+        $this->stateMachineFactory = $stateMachineFactory;
+    }
+
     /**
      * {@inheritdoc}
      */
     public function resolvePaymentState(OrderInterface $order)
     {
-        $paymentState = PaymentInterface::STATE_NEW;
+        $stateMachine = $this->stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH);
 
-        if ($order->hasPayments()) {
-            $payments = $order->getPayments();
-            $completedPaymentTotal = 0;
-
-            foreach ($payments as $payment) {
-                if (PaymentInterface::STATE_COMPLETED === $payment->getState()) {
-                    $completedPaymentTotal += $payment->getAmount();
-                }
-            }
-
-            if ($completedPaymentTotal >= $order->getTotal()) {
-                // Payment is completed if we have received full amount.
-                $paymentState = PaymentInterface::STATE_COMPLETED;
-            } else {
-                // Payment is processing if one of the payment is.
-                if ($payments->exists(function ($key, $payment) {
-                    return in_array($payment->getState(), [
-                        PaymentInterface::STATE_PROCESSING,
-                        PaymentInterface::STATE_PENDING,
-                    ]);
-                })) {
-                    $paymentState = PaymentInterface::STATE_PROCESSING;
-                }
-            }
+        if (OrderPaymentStates::STATE_PAID === $order->getPaymentState()) {
+            return;
         }
 
-        $order->setPaymentState($paymentState);
+        if ($order->hasPayments()) {
+            $completedPaymentTotal = 0;
+            $payments = $order->getPayments()->filter(function (PaymentInterface $payment) {
+                return PaymentInterface::STATE_COMPLETED === $payment->getState();
+            });
+
+            foreach ($payments as $payment) {
+                $completedPaymentTotal += $payment->getAmount();
+            }
+
+            if (0 < $payments->count() && $completedPaymentTotal >= $order->getTotal()) {
+                $this->applyTransition($stateMachine, OrderPaymentTransitions::TRANSITION_PAY);
+
+                return;
+            }
+
+            if ($completedPaymentTotal < $order->getTotal() && 0 < $completedPaymentTotal) {
+                $this->applyTransition($stateMachine, OrderPaymentTransitions::TRANSITION_PARTIALLY_PAY);
+
+                return;
+            }
+        }
     }
 
     /**
@@ -62,45 +81,79 @@ class StateResolver implements StateResolverInterface
      */
     public function resolveShippingState(OrderInterface $order)
     {
-        if ($order->isBackorder()) {
-            $order->setShippingState(OrderShippingStates::BACKORDER);
-
+        if (OrderShippingStates::STATE_SHIPPED === $order->getShippingState()) {
             return;
         }
+        /** @var StateMachineInterface $stateMachine */
+        $stateMachine = $this->stateMachineFactory->get($order, OrderShippingTransitions::GRAPH);
 
-        $order->setShippingState($this->getShippingState($order));
+        if ($this->allShipmentsInStateButOrderStateNotUpdated($order, ShipmentInterface::STATE_SHIPPED, OrderShippingStates::STATE_SHIPPED)) {
+            $stateMachine->apply(OrderShippingTransitions::TRANSITION_SHIP);
+        }
+
+        if ($this->isPartiallyShippedButOrderStateNotUpdated($order)) {
+            $stateMachine->apply(OrderShippingTransitions::TRANSITION_PARTIALLY_SHIP);
+        }
+    }
+
+    /**
+     * @param OrderInterface $order
+     * @param string $shipmentState
+     *
+     * @return int
+     */
+    private function countOrderShipmentsInState(OrderInterface $order, $shipmentState)
+    {
+        $shipments = $order->getShipments();
+
+        return $shipments
+            ->filter(function (ShipmentInterface $shipment) use ($shipmentState) {
+                return $shipment->getState() === $shipmentState;
+            })
+            ->count()
+        ;
+    }
+
+    /**
+     * @param OrderInterface $order
+     * @param string $shipmentState
+     * @param string $orderShippingState
+     *
+     * @return bool
+     */
+    private function allShipmentsInStateButOrderStateNotUpdated(OrderInterface $order, $shipmentState, $orderShippingState)
+    {
+        $shipmentInStateAmount = $this->countOrderShipmentsInState($order, $shipmentState);
+        $shipmentAmount = $order->getShipments()->count();
+
+        return $shipmentAmount === $shipmentInStateAmount && $orderShippingState !== $order->getShippingState();
     }
 
     /**
      * @param OrderInterface $order
      *
-     * @return string
+     * @return bool
      */
-    protected function getShippingState(OrderInterface $order)
+    private function isPartiallyShippedButOrderStateNotUpdated(OrderInterface $order)
     {
-        $states = [];
+        $shipmentInShippedStateAmount = $this->countOrderShipmentsInState($order, ShipmentInterface::STATE_SHIPPED);
+        $shipmentAmount = $order->getShipments()->count();
 
-        foreach ($order->getShipments() as $shipment) {
-            $states[] = $shipment->getState();
+        return
+            1 <= $shipmentInShippedStateAmount &&
+            $shipmentInShippedStateAmount < $shipmentAmount &&
+            OrderShippingStates::STATE_PARTIALLY_SHIPPED !== $order->getShippingState()
+        ;
+    }
+
+    /**
+     * @param StateMachineInterface $stateMachine
+     * @param string $transition
+     */
+    private function applyTransition(StateMachineInterface $stateMachine, $transition)
+    {
+        if ($stateMachine->can($transition)) {
+            $stateMachine->apply($transition);
         }
-
-        $states = array_unique($states);
-
-        $acceptableStates = [
-            ShipmentInterface::STATE_CHECKOUT => OrderShippingStates::CHECKOUT,
-            ShipmentInterface::STATE_ONHOLD => OrderShippingStates::ONHOLD,
-            ShipmentInterface::STATE_READY => OrderShippingStates::READY,
-            ShipmentInterface::STATE_SHIPPED => OrderShippingStates::SHIPPED,
-            ShipmentInterface::STATE_RETURNED => OrderShippingStates::RETURNED,
-            ShipmentInterface::STATE_CANCELLED => OrderShippingStates::CANCELLED,
-        ];
-
-        foreach ($acceptableStates as $shipmentState => $orderState) {
-            if ([$shipmentState] == $states) {
-                return $orderState;
-            }
-        }
-
-        return OrderShippingStates::PARTIALLY_SHIPPED;
     }
 }

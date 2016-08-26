@@ -61,6 +61,13 @@ interface MetadataInterface
     public function getParameter($name);
 
     /**
+     * Return all the metadata parameters.
+     *
+     * @return array
+     */
+    public function getParameters();
+
+    /**
      * @param $name
      *
      * @return bool

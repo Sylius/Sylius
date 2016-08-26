@@ -16,7 +16,7 @@ use PhpSpec\ObjectBehavior;
 /**
  * @author Arnaud Langade <arn0d.dev@gmail.com>
  */
-class ParametersSpec extends ObjectBehavior
+final class ParametersSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

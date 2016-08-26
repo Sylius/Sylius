@@ -6,6 +6,9 @@ sylius_shop_homepage:
     defaults:
         _controller: sylius.controller.shop.homepage:indexAction
 
+sylius_shop_security:
+    resource: "@SyliusShopBundle/Resources/config/routing/security.yml"
+
 sylius_shop_taxon:
     resource: "@SyliusShopBundle/Resources/config/routing/taxon.yml"
 
@@ -16,17 +19,51 @@ sylius_shop_cart:
     resource: "@SyliusShopBundle/Resources/config/routing/cart.yml"
     prefix: /cart
 
-sylius_shop_security:
-    resource: "@SyliusShopBundle/Resources/config/routing/security.yml"
-
 sylius_shop_checkout:
     resource: "@SyliusShopBundle/Resources/config/routing/checkout.yml"
     prefix: /checkout
+
+sylius_shop_order:
+    resource: "@SyliusShopBundle/Resources/config/routing/order.yml"
+    prefix: /order
 
 sylius_shop_account:
     resource: "@SyliusShopBundle/Resources/config/routing/account.yml"
     prefix: /account
 
+sylius_shop_payum:
+    resource: "@SyliusShopBundle/Resources/config/routing/payum.yml"
+
+sylius_shop_switch_currency:
+    path: /switch-currency/{code}
+    defaults:
+        _controller: sylius.controller.shop.currency:switchCurrencyAction
+
+sylius_shop_switch_locale:
+    path: /switch-locale/{code}
+    defaults:
+        _controller: sylius.controller.shop.locale:switchLocaleAction
+
 sylius_shop_partial:
     resource: "@SyliusShopBundle/Resources/config/routing/partial.yml"
     prefix: /_partial
+
+sylius_shop_verification:
+    prefix: /verify
+    resource: "@SyliusShopBundle/Resources/config/routing/verification.yml"
+
+sylius_sitemap:
+    path: /sitemap.{_format}
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.sitemap:showAction
+        _format: xml
+    requirements:
+        _format: xml
+
+# Have to be the last one!
+sylius_shop_static_content:
+    resource: "@SyliusShopBundle/Resources/config/routing/static_content.yml"
+
+_liip_imagine:
+    resource: "@LiipImagineBundle/Resources/config/routing.xml"

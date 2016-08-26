@@ -12,19 +12,14 @@
 namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Sylius\Component\User\Model\Customer as BaseCustomer;
-use Webmozart\Assert\Assert;
+use Sylius\Component\Customer\Model\Customer as BaseCustomer;
+use Sylius\Component\User\Model\UserInterface as BaseUserInterface;
 
 /**
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
 class Customer extends BaseCustomer implements CustomerInterface, ProductReviewerInterface
 {
-    /**
-     * @var string
-     */
-    protected $currencyCode;
-
     /**
      * @var ArrayCollection
      */
@@ -45,30 +40,17 @@ class Customer extends BaseCustomer implements CustomerInterface, ProductReviewe
      */
     protected $addresses;
 
+    /**
+     * @var ShopUserInterface
+     */
+    protected $user;
+
     public function __construct()
     {
         parent::__construct();
 
         $this->orders = new ArrayCollection();
         $this->addresses = new ArrayCollection();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setCurrencyCode($currencyCode)
-    {
-        Assert::string($currencyCode);
-        
-        $this->currencyCode = $currencyCode;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getCurrencyCode()
-    {
-        return $this->currencyCode;
     }
 
     /**
@@ -153,5 +135,42 @@ class Customer extends BaseCustomer implements CustomerInterface, ProductReviewe
     public function getAddresses()
     {
         return $this->addresses;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasUser()
+    {
+        return null !== $this->user;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function setUser(BaseUserInterface $user = null)
+    {
+        if ($this->user !== $user) {
+            $this->user = $user;
+            $this->assignCustomer($user);
+        }
+    }
+
+    /**
+     * @param ShopUserInterface $user
+     */
+    protected function assignCustomer(ShopUserInterface $user = null)
+    {
+        if (null !== $user) {
+            $user->setCustomer($this);
+        }
     }
 }

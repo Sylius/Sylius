@@ -17,7 +17,7 @@ use Sylius\Component\Addressing\Model\AddressInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class AddressSpec extends ObjectBehavior
+final class AddressSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

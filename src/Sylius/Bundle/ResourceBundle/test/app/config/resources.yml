@@ -1,7 +1,7 @@
 sylius_resource:
     translation:
-        default_locale: en_US
-        available_locales: [en_US, pl_PL, de_DE]
+        locale_provider: "test.locale_provider"
+        locale_context: "test.locale_context"
     resources:
         app.book:
             classes:

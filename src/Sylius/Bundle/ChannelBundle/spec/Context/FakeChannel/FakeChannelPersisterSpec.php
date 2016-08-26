@@ -27,7 +27,7 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class FakeChannelPersisterSpec extends ObjectBehavior
+final class FakeChannelPersisterSpec extends ObjectBehavior
 {
     function let(FakeChannelCodeProviderInterface $fakeHostnameProvider)
     {

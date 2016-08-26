@@ -12,7 +12,7 @@
 namespace Sylius\Behat\Page\Admin\Customer;
 
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface as BaseIndexPageInterface;
-use Sylius\Component\User\Model\CustomerInterface;
+use Sylius\Component\Customer\Model\CustomerInterface;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>

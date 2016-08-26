@@ -18,7 +18,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class CalculatorChoiceTypeSpec extends ObjectBehavior
+final class CalculatorChoiceTypeSpec extends ObjectBehavior
 {
     function let()
     {

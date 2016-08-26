@@ -22,7 +22,7 @@ use Sylius\Component\Promotion\Provider\PreQualifiedPromotionsProviderInterface;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class PromotionProcessorSpec extends ObjectBehavior
+final class PromotionProcessorSpec extends ObjectBehavior
 {
     function let(
         PreQualifiedPromotionsProviderInterface $activePromotionsProvider,

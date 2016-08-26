@@ -35,6 +35,18 @@ class StateMachine implements StateMachineInterface
     /**
      * {@inheritdoc}
      */
+    public function can(RequestConfiguration $configuration, ResourceInterface $resource)
+    {
+        if (!$configuration->hasStateMachine()) {
+            throw new \InvalidArgumentException('State machine must be configured to apply transition, check your routing.');
+        }
+
+        return $this->stateMachineFactory->get($resource, $configuration->getStateMachineGraph())->can($configuration->getStateMachineTransition());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function apply(RequestConfiguration $configuration, ResourceInterface $resource)
     {
         if (!$configuration->hasStateMachine()) {

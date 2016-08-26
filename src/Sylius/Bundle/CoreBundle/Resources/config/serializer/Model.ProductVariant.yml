@@ -11,7 +11,7 @@ Sylius\Component\Core\Model\ProductVariant:
         onHold:
             expose: true
             type: integer
-        availableOnDemand:
+        tracked:
             expose: true
             type: boolean
         width:

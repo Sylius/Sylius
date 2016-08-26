@@ -23,18 +23,17 @@
         "php": "^5.6|^7.0",
 
         "jackalope/jackalope-doctrine-dbal": "^1.1.2",
-        "sylius/resource-bundle": "^0.19",
+        "sylius/resource-bundle": "^1.0",
         "symfony/framework-bundle": "^2.8",
         "symfony-cmf/block-bundle": "~1.2",
         "symfony-cmf/content-bundle": "~1.2",
         "symfony-cmf/create-bundle": "~1.2",
         "symfony-cmf/media-bundle": "~1.2",
-        "symfony-cmf/menu-bundle": "~1.2",
         "symfony-cmf/routing-bundle": "~1.2"
     },
     "require-dev": {
         "liip/imagine-bundle": "^1.0",
-        "phpspec/phpspec": "^2.4",
+        "phpspec/phpspec": "^3.0",
         "symfony/form": "^2.8"
     },
     "config": {
@@ -53,7 +52,7 @@
     ],
     "extra": {
         "branch-alias": {
-            "dev-master": "0.19-dev"
+            "dev-master": "1.0-dev"
         }
     }
 }

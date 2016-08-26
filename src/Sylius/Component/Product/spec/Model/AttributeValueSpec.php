@@ -19,7 +19,7 @@ use Sylius\Component\Product\Model\ProductInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class AttributeValueSpec extends ObjectBehavior
+final class AttributeValueSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
- 
+
 namespace spec\Sylius\Bundle\CoreBundle\Sitemap\Provider;
- 
+
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Doctrine\ORM\ProductRepository;
@@ -24,7 +24,7 @@ use Symfony\Component\Routing\RouterInterface;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class ProductUrlProviderSpec extends ObjectBehavior
+final class ProductUrlProviderSpec extends ObjectBehavior
 {
     function let(ProductRepository $repository, RouterInterface $router, SitemapUrlFactoryInterface $sitemapUrlFactory)
     {
@@ -60,10 +60,13 @@ class ProductUrlProviderSpec extends ObjectBehavior
         $iterator->current()->willReturn($product);
         $product->getUpdatedAt()->willReturn($now);
 
-        $router->generate($product, [], true)->willReturn('http://sylius.org/t-shirt');
+        $product->getSlug()->willReturn('t-shirt');
+
+        $router->generate('sylius_shop_product_show', ['slug' => 't-shirt'], true)->willReturn('http://sylius.org/products/t-shirt');
+        $router->generate($product, [], true)->willReturn('http://sylius.org/products/t-shirt');
         $sitemapUrlFactory->createNew()->willReturn($sitemapUrl);
 
-        $sitemapUrl->setLocalization('http://sylius.org/t-shirt')->shouldBeCalled();
+        $sitemapUrl->setLocalization('http://sylius.org/products/t-shirt')->shouldBeCalled();
         $sitemapUrl->setLastModification($now)->shouldBeCalled();
         $sitemapUrl->setChangeFrequency(ChangeFrequency::always())->shouldBeCalled();
         $sitemapUrl->setPriority(0.5)->shouldBeCalled();

@@ -1,0 +1,36 @@
+Sylius\Component\Customer\Model\Customer:
+    exclusion_policy: ALL
+    xml_root_name: sylius_customer
+    properties:
+        id:
+            expose: true
+            type: integer
+            groups: [Default, Detailed]
+        email:
+            expose: true
+            type: string
+            groups: [Default, Detailed]
+        emailCanonical:
+            expose: true
+            type: string
+            groups: [Detailed]
+        firstName:
+            expose: true
+            type: string
+            groups: [Default, Detailed]
+        lastName:
+            expose: true
+            type: string
+            groups: [Default, Detailed]
+        gender:
+            expose: true
+            type: string
+            groups: [Detailed]
+        birthday:
+            expose: true
+            type: DateTime
+            groups: [Detailed]
+        groups:
+            expose: true
+            type: array
+            groups: [Detailed]

@@ -4,5 +4,6 @@
 sylius:
     form:
         review:
+            rating: Avaliação
             status:
                 new: Novo

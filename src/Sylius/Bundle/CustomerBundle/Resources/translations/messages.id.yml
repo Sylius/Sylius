@@ -1,0 +1,16 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        group:
+            name: Nama
+            roles: Peran
+        customer:
+            first_name: Nama Depan
+            groups: Kelompok
+            last_name: Nama belakang
+            email: Email
+            phone_number: Nomor telepon
+            billing_address: Alamat Penagihan
+            different_billing_address: Menggunakan alamat berbeda untuk penagihan?

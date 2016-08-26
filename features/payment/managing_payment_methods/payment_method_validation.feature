@@ -5,7 +5,7 @@ Feature: Payment method validation
     I want to be prevented from adding it without specifying required fields
 
     Background:
-        Given the store operates on a single channel in "France"
+        Given the store operates on a single channel in "United States"
         And the store has a payment method "Offline" with a code "offline"
         And I am logged in as an administrator
 

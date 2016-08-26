@@ -13,7 +13,7 @@ namespace Sylius\Bundle\ReviewBundle\EventListener;
 
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Sylius\Component\Review\Model\ReviewInterface;
-use Sylius\Component\User\Context\CustomerContextInterface;
+use Sylius\Component\Customer\Context\CustomerContextInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**

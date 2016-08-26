@@ -6,7 +6,6 @@ sylius:
         header: Ekstenzije
         accelerator:
             header: Akcelerator
-            help: Instaliraj i omogući PHP ubrzivač poput APC-a (izrazito preporučeno).
         apc: APC
         ctype: Ctype
         gd: sylius.extensions.gd
@@ -28,13 +27,9 @@ sylius:
         header: 'File system '
         cache:
             header: cache
-            help:
-                To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
         exists: Postoji
         logs:
             header: Logovi
-            help:
-                To set permissions run: 'sudo setfacl -R -m u:www-data:rwX -m u:`whoami`:rwX %path% & sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx %path%'
         not_exists: Ne postoji
         not_writable: Nije moguće pisati
         parameters:
@@ -60,4 +55,3 @@ sylius:
             header: Zastarjela vremenska zona
             help: 'Vremenska zona %timezone% je zastarjela. Ispravite vaš php.ini dokument (popis zastarjelih zona http://php.net/manual/en/timezones.others.php).'
         version: Verzija PHP-a
-        version_recommanded: Preporučena PHP verzija

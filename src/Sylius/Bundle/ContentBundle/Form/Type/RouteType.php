@@ -15,8 +15,6 @@ use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Menu block type.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class RouteType extends AbstractResourceType
@@ -29,9 +27,6 @@ class RouteType extends AbstractResourceType
         $builder
             ->add('name', null, [
                 'label' => 'sylius.form.route.name',
-            ])
-            ->add('parent', null, [
-                'label' => 'sylius.form.route.parent',
             ])
             ->add('content', 'sylius_static_content_choice', [
                 'label' => 'sylius.form.route.content',

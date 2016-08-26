@@ -28,13 +28,15 @@ sylius:
             name: Nombre
             roles: Roles
         channel:
-            taxonomies: Categorización
+            taxonomies: Taxonomías
             locale_default: Configuración regional predeterminada
             locales: Idiomas
             currency_default: Moneda por defecto
             currencies: Monedas
             shipping_methods: Métodos de envío
             payment_methods: Métodos de pago
+            tax_calculation_strategy: Estrategia de cálculo de impuestos
+            tax_zone_default: Zona fiscal por defecto
             theme: Tema
             hostname: Nombre del host
         image:
@@ -59,7 +61,7 @@ sylius:
             shipping_category: Categoría de envío
             short_description: Descripción breve
             variant_selection_method: Método de selección variante
-            main_taxon: Clasificación principal
+            main_taxon: Taxón principal
             channels: Canales
             enabled: Activado
         product_filter:
@@ -75,7 +77,7 @@ sylius:
                 meta_keywords: Meta palabras clave
                 title: Título de la página
                 tracking_code:
-                    Tracking code (for example: Código de Google Analytics
+                    Tracking code (for example: Código de Google Analytics)
             taxation:
                 default_tax_zone: Zona fiscal por defecto
                 default_tax_calculation_strategy: Estrategia de cálculo de impuesto por defecto
@@ -112,7 +114,6 @@ sylius:
         user_filter:
             query: Búsqueda
         variant:
-            available_on_demand: Disponible bajo demanda
             depth: Profundidad
             height: Alto
             images: Imágenes
@@ -153,9 +154,16 @@ sylius:
         user_confirmation:
             name: Confirmación de usuario
             subject: Bienvenido a nuestra tienda
-            content: 'Bienvenid@ a nuestra tienda<br/><br/>Has sido registrad@.<br/>Gracias {{ user.username }}.'
+            content: 'Bienvenido a nuestra tienda<br/><br/>Usted se acaba de registrar.<br/>Gracias %username%.'
         password_reset:
             name: Restablecer contraseña
-            content: '<h3>Hola {{ user.username }}</h3>Para restablecer tu contraseña - por favor visita {{ url }}<br/><br/>Atentamente, el Equipo.'
+            content: '<h3>Hola %username%</h3>Para restablecer su contraseña - visite %url% <br/><br/>Atentamente, el equipo.'
+        verification:
+            name: Verificación de dirección de correo electrónico
+            content: 'Para verificar tu correo electrónico, por favor accede a %url%'
+    payum_gateway:
+        cash_on_delivery: Pago contra reembolso
+        offline: Desconectado
+        paypal_express_checkout: Paypal Express Checkout
     shipping_method_resolver:
         by_zones_and_channel: Por zonas y canal

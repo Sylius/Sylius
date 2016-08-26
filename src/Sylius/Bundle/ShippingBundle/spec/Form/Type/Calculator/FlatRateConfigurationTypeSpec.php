@@ -20,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Arnaud Langlade <arn0d.dev@gamil.com>
  */
-class FlatRateConfigurationTypeSpec extends ObjectBehavior
+final class FlatRateConfigurationTypeSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

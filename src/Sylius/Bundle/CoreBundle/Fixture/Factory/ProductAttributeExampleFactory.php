@@ -88,7 +88,7 @@ final class ProductAttributeExampleFactory implements ExampleFactoryInterface
             $productAttribute->setCurrentLocale($localeCode);
             $productAttribute->setFallbackLocale($localeCode);
 
-            $productAttribute->setName(sprintf('[%s] %s', $localeCode, $options['name']));
+            $productAttribute->setName($options['name']);
         }
 
         return $productAttribute;

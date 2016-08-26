@@ -21,7 +21,7 @@ use Sylius\Bundle\ThemeBundle\Filesystem\FilesystemInterface;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class JsonFileConfigurationLoaderSpec extends ObjectBehavior
+final class JsonFileConfigurationLoaderSpec extends ObjectBehavior
 {
     function let(FilesystemInterface $filesystem)
     {

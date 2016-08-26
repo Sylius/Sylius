@@ -19,7 +19,7 @@ use Symfony\Component\Form\Exception\TransformationFailedException;
 // Since the root namespace "spec" is not in our autoload
 require_once __DIR__.DIRECTORY_SEPARATOR.'FakeEntity.php';
 
-class ResourceToIdentifierTransformerSpec extends ObjectBehavior
+final class ResourceToIdentifierTransformerSpec extends ObjectBehavior
 {
     function let(RepositoryInterface $repository)
     {

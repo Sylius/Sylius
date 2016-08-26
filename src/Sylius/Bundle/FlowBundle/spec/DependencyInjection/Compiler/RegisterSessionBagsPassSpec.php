@@ -17,7 +17,7 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
-class RegisterSessionBagsPassSpec extends ObjectBehavior
+final class RegisterSessionBagsPassSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

@@ -64,5 +64,20 @@ interface ShowPageInterface extends PageInterface
      *
      * @return bool
      */
-     public function hasAttributeWithValue($attributeName, $AttributeValue);
+    public function hasAttributeWithValue($attributeName, $AttributeValue);
+
+    /**
+     * @return bool
+     */
+    public function isOutOfStock();
+
+    /**
+     * @return bool
+     */
+    public function hasAddToCartButton();
+
+    /**
+     * @return string
+     */
+    public function getPrice();
 }

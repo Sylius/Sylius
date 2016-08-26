@@ -17,7 +17,7 @@ use Sylius\Bundle\SettingsBundle\Model\SettingsInterface;
 use Sylius\Bundle\SettingsBundle\Templating\Helper\SettingsHelperInterface;
 use Symfony\Component\Templating\Helper\Helper;
 
-class SettingsHelperSpec extends ObjectBehavior
+final class SettingsHelperSpec extends ObjectBehavior
 {
     function let(SettingsManagerInterface $settingsManager)
     {

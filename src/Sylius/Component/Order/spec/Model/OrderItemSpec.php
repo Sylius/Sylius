@@ -24,7 +24,7 @@ use Sylius\Component\Order\Model\OrderItemUnitInterface;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class OrderItemSpec extends ObjectBehavior
+final class OrderItemSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

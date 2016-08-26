@@ -15,17 +15,42 @@ use Sylius\Behat\Page\SymfonyPage;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 class ThankYouPage extends SymfonyPage implements ThankYouPageInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function hasThankYouMessageFor($name)
+    public function hasThankYouMessage()
     {
-        $thankYouMessage = $this->getElement('thank you message')->getText();
+        $thankYouMessage = $this->getElement('thank_you')->getText();
 
-        return false !== strpos($thankYouMessage, sprintf('Thank you %s', $name));
+        return false !== strpos($thankYouMessage, 'Thank you!');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getInstructions()
+    {
+        return $this->getElement('instructions')->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasPayAction()
+    {
+        return $this->hasElement('pay_link');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function pay()
+    {
+        $this->getElement('pay_link')->click();
     }
 
     /**
@@ -39,11 +64,25 @@ class ThankYouPage extends SymfonyPage implements ThankYouPageInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function choosePaymentMethod($paymentMethodName)
+    {
+        $paymentMethodElement = $this->getElement('payment_method', ['%name%' => $paymentMethodName]);
+        $paymentMethodElement->selectOption($paymentMethodElement->getAttribute('value'));
+    }
+
+    public function saveChanges()
+    {
+        $this->getDocument()->pressButton('Save');
+    }
+    
+    /**
      * @return string
      */
     public function getRouteName()
     {
-        return 'sylius_checkout_thank_you';
+        return 'sylius_shop_checkout_thank_you';
     }
 
     /**
@@ -52,7 +91,10 @@ class ThankYouPage extends SymfonyPage implements ThankYouPageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
-            'thank you message' => '#thanks',
+            'instructions' => '#sylius-payment-method-instructions',
+            'pay_link' => '#sylius-pay-link',
+            'payment_method' => '.item:contains("%name%") input',
+            'thank_you' => '#sylius-thank-you',
         ]);
     }
 }

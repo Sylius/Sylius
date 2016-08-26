@@ -61,8 +61,8 @@ final class SuiteFactory implements SuiteFactoryInterface
 
         $suite = new Suite($name);
 
-        foreach ($configuration['fixtures'] as $fixtureName => $fixtureAttributes) {
-            $this->addFixtureToSuite($suite, $fixtureName, $fixtureAttributes);
+        foreach ($configuration['fixtures'] as $fixtureAlias => $fixtureAttributes) {
+            $this->addFixtureToSuite($suite, $fixtureAlias, $fixtureAttributes);
         }
 
         foreach ($configuration['listeners'] as $listenerName => $listenerAttributes) {
@@ -74,14 +74,15 @@ final class SuiteFactory implements SuiteFactoryInterface
 
     /**
      * @param Suite $suite
-     * @param string $fixtureName
+     * @param string $fixtureAlias
      * @param array $fixtureAttributes
      */
-    private function addFixtureToSuite(Suite $suite, $fixtureName, array $fixtureAttributes)
+    private function addFixtureToSuite(Suite $suite, $fixtureAlias, array $fixtureAttributes)
     {
+        Assert::keyExists($fixtureAttributes, 'name');
         Assert::keyExists($fixtureAttributes, 'options');
 
-        $fixture = $this->fixtureRegistry->getFixture($fixtureName);
+        $fixture = $this->fixtureRegistry->getFixture($fixtureAttributes['name']);
         $fixtureOptions = $this->optionsProcessor->processConfiguration($fixture, $fixtureAttributes['options']);
         $fixturePriority = isset($fixtureAttributes['priority']) ? $fixtureAttributes['priority'] : 0;
 

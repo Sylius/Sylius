@@ -82,7 +82,7 @@ class SettingsController extends FOSRestController
             }
 
             if ($isApiRequest) {
-                return $this->handleView($this->view($settings, 204));
+                return $this->handleView($this->view(null, Response::HTTP_NO_CONTENT));
             }
 
             $request->getSession()->getBag('flashes')->add($messageType, $message);

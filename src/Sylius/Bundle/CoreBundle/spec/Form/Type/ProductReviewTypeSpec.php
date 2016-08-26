@@ -25,7 +25,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class ProductReviewTypeSpec extends ObjectBehavior
+final class ProductReviewTypeSpec extends ObjectBehavior
 {
     function let()
     {

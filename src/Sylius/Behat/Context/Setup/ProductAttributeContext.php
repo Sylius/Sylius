@@ -14,7 +14,7 @@ namespace Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Sylius\Component\Attribute\Factory\AttributeFactoryInterface;
 use Sylius\Component\Attribute\Repository\AttributeRepositoryInterface;
-use Sylius\Component\Core\Test\Services\SharedStorageInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>

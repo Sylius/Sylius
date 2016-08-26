@@ -65,20 +65,8 @@ Configuration Reference
                         choice:  Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType
                 validation_groups:
                     default: [ sylius ]
-            shipping_method_rule:
-                classes:
-                    model:      Sylius\Component\Shipping\Model\Rule
-                    interface:  Sylius\Component\Shipping\Model\RuleInterface
-                    controller: Sylius\Bundle\ResourceBundle\Controller\ResourceController
-                    repository: ~
-                    factory:    Sylius\Component\Resource\Factory\Factory
-                    form:
-                        default: Sylius\Bundle\ShippingBundle\Form\Type\RuleType
-                validation_groups:
-                    default: [ sylius ]
 
         validation_groups:
-            shipping_rule_item_count_configuration: [sylius]
             shipping_calculator_flat_rate_configuration: [sylius]
             shipping_calculator_per_item_rate_configuration: [sylius]
             shipping_calculator_flexible_rate_configuration: [sylius]

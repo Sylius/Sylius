@@ -18,7 +18,7 @@ use Sylius\Component\Product\Model\ProductTranslation;
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class ProductTranslationSpec extends ObjectBehavior
+final class ProductTranslationSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

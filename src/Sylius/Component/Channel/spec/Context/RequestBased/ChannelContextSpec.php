@@ -25,7 +25,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ChannelContextSpec extends ObjectBehavior
+final class ChannelContextSpec extends ObjectBehavior
 {
     function let(RequestResolverInterface $requestResolver, RequestStack $requestStack)
     {

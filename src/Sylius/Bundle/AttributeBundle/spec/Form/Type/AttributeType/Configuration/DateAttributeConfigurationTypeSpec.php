@@ -18,7 +18,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class DateAttributeConfigurationTypeSpec extends ObjectBehavior
+final class DateAttributeConfigurationTypeSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

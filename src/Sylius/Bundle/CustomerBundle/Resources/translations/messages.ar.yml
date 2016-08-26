@@ -1,0 +1,12 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        group:
+            name: الاسم
+        customer:
+            first_name: الاسم الأول
+            last_name: اسم العائلة
+            email: البريد الإلكتروني
+            phone_number: رقم الهاتف

@@ -12,9 +12,5 @@ sylius:
             taxons: Taksonomier
         product_variant:
             available_on: Tilgjengelig
-        product_archetype:
-            name: Navn
-            parent: Forelder
-            options: Instillinger
         association_type:
             name: Navn

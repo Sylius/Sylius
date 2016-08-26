@@ -38,12 +38,15 @@ class DataSourceProvider implements DataSourceProviderInterface
      */
     public function getDataSource(Grid $grid, Parameters $parameters)
     {
-        $driver = $grid->getDriver();
+        $driverName = $grid->getDriver();
 
-        if (!$this->driversRegistry->has($driver)) {
-            throw new UnsupportedDriverException($driver);
+        if (!$this->driversRegistry->has($driverName)) {
+            throw new UnsupportedDriverException($driverName);
         }
 
-        return $this->driversRegistry->get($driver)->getDataSource($grid->getDriverConfiguration(), $parameters);
+        /** @var DriverInterface $driver */
+        $driver = $this->driversRegistry->get($driverName);
+
+        return $driver->getDataSource($grid->getDriverConfiguration(), $parameters);
     }
 }

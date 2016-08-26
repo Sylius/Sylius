@@ -26,9 +26,13 @@
     <div class="column">
         <div class="ui segment">
             {{ form_row(form.locales) }}
+            {{ form_row(form.defaultLocale) }}
             {{ form_row(form.currencies) }}
+            {{ form_row(form.defaultCurrency) }}
             {{ form_row(form.shippingMethods) }}
             {{ form_row(form.paymentMethods) }}
+            {{ form_row(form.defaultTaxZone) }}
+            {{ form_row(form.taxCalculationStrategy) }}
         </div>
     </div>
 </div>

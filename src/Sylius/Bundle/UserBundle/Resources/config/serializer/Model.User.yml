@@ -14,6 +14,14 @@ Sylius\Component\User\Model\User:
             expose: true
             type: string
             groups: [Detailed]
+        email:
+            expose: true
+            type: string
+            groups: [Default, Detailed]
+        emailCanonical:
+            expose: true
+            type: string
+            groups: [Detailed]
         enabled:
             expose: true
             type: boolean

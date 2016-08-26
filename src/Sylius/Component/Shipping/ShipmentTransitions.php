@@ -11,15 +11,18 @@
 
 namespace Sylius\Component\Shipping;
 
-class ShipmentTransitions
+/**
+ * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
+ */
+final class ShipmentTransitions
 {
     const GRAPH = 'sylius_shipment';
 
-    const SYLIUS_HOLD = 'hold';
-    const SYLIUS_RELEASE = 'release';
-    const SYLIUS_BACKORDER = 'backorder';
-    const SYLIUS_PREPARE = 'prepare';
-    const SYLIUS_SHIP = 'ship';
-    const SYLIUS_RETURN = 'return';
-    const SYLIUS_CANCEL = 'cancel';
+    const TRANSITION_CREATE = 'create';
+    const TRANSITION_SHIP = 'ship';
+    const TRANSITION_CANCEL = 'cancel';
+
+    private function __construct()
+    {
+    }
 }

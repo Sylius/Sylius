@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\CurrencyBundle\DependencyInjection;
 
-use Sylius\Bundle\CurrencyBundle\Controller\CurrencyController;
 use Sylius\Bundle\CurrencyBundle\Form\Type\CurrencyType;
+use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
 use Sylius\Component\Currency\Model\Currency;
@@ -38,7 +38,7 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
                 ->scalarNode('driver')->defaultValue(SyliusResourceBundle::DRIVER_DOCTRINE_ORM)->end()
-                ->scalarNode('storage')->defaultValue('sylius.storage.session')->end()
+                ->scalarNode('currency')->defaultValue('EUR')->cannotBeEmpty()->end()
             ->end()
         ;
 
@@ -66,7 +66,7 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->scalarNode('model')->defaultValue(Currency::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(CurrencyInterface::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('controller')->defaultValue(CurrencyController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                         ->arrayNode('form')

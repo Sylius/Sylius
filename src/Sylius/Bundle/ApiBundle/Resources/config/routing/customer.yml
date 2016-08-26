@@ -39,3 +39,15 @@ sylius_api_customer_delete:
     methods: [DELETE]
     defaults:
         _controller: sylius.controller.customer:deleteAction
+
+sylius_api_customer_order_index:
+    path: /{id}/orders/
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.order:indexAction
+        _sylius:
+            paginate: $limit
+            filterable: true
+            criteria: { customer: $id }
+            sortable: true
+            sorting: { updatedAt: desc }

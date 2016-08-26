@@ -5,4 +5,5 @@ sylius:
     menu:
         shop:
             account:
+                header: A sua conta
                 dashboard: Painel de Instrumentos

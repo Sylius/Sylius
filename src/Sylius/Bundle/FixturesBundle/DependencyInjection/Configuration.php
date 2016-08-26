@@ -46,6 +46,24 @@ final class Configuration implements ConfigurationInterface
                     ->prototype('array')
         ;
 
+        $suitesNode
+            ->validate()
+                ->ifArray()
+                ->then(function (array $value) {
+                    if (!isset($value['fixtures'])) {
+                        return $value;
+                    }
+
+                    foreach ($value['fixtures'] as $fixtureKey => &$fixtureValue) {
+                        if (!isset($fixtureValue['name'])) {
+                            $fixtureValue['name'] = $fixtureKey;
+                        }
+                    }
+
+                    return $value;
+                })
+        ;
+
         $this->buildFixturesNode($suitesNode);
         $this->buildListenersNode($suitesNode);
     }
@@ -59,9 +77,11 @@ final class Configuration implements ConfigurationInterface
         $fixturesNode = $suitesNode
             ->children()
                 ->arrayNode('fixtures')
-                    ->useAttributeAsKey('name')
+                    ->useAttributeAsKey('alias')
                     ->prototype('array')
         ;
+
+        $fixturesNode->children()->scalarNode('name')->cannotBeEmpty();
 
         $this->buildAttributesNode($fixturesNode);
     }
@@ -93,7 +113,18 @@ final class Configuration implements ConfigurationInterface
         /** @var ArrayNodeDefinition $optionsNode */
         $optionsNode = $attributesNodeBuilder->arrayNode('options');
         $optionsNode->addDefaultChildrenIfNoneSet();
-        $optionsNode->beforeNormalization()->always(function ($value) { return [$value]; });
-        $optionsNode->prototype('variable');
+
+        $optionsNode
+            ->validate()
+                ->ifTrue(function ($value) { return !is_array($value); })
+                ->thenInvalid('Options have to be an array!')
+        ;
+
+        $optionsNode
+            ->beforeNormalization()
+                ->always(function ($value) { return is_array($value) ? [$value] : $value; })
+        ;
+
+        $optionsNode->prototype('variable')->cannotBeEmpty()->defaultValue([]);
     }
 }

@@ -18,7 +18,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-class SlideshowBlockTypeSpec extends ObjectBehavior
+final class SlideshowBlockTypeSpec extends ObjectBehavior
 {
     function let()
     {

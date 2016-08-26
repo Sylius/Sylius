@@ -18,7 +18,7 @@ use Sylius\Component\Payment\Model\PaymentSourceInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class CreditCardSpec extends ObjectBehavior
+final class CreditCardSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

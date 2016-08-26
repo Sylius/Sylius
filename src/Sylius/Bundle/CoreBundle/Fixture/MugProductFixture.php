@@ -43,11 +43,6 @@ final class MugProductFixture extends AbstractFixture
     private $productOptionFixture;
 
     /**
-     * @var ProductArchetypeFixture
-     */
-    private $productArchetypeFixture;
-
-    /**
      * @var ProductFixture
      */
     private $productFixture;
@@ -67,7 +62,6 @@ final class MugProductFixture extends AbstractFixture
      * @param RepositoryInterface $taxonRepository
      * @param ProductAttributeFixture $productAttributeFixture
      * @param ProductOptionFixture $productOptionFixture
-     * @param ProductArchetypeFixture $productArchetypeFixture
      * @param ProductFixture $productFixture
      */
     public function __construct(
@@ -75,14 +69,12 @@ final class MugProductFixture extends AbstractFixture
         RepositoryInterface $taxonRepository,
         ProductAttributeFixture $productAttributeFixture,
         ProductOptionFixture $productOptionFixture,
-        ProductArchetypeFixture $productArchetypeFixture,
         ProductFixture $productFixture
     ) {
         $this->taxonFixture = $taxonFixture;
         $this->taxonRepository = $taxonRepository;
         $this->productAttributeFixture = $productAttributeFixture;
         $this->productOptionFixture = $productOptionFixture;
-        $this->productArchetypeFixture = $productArchetypeFixture;
         $this->productFixture = $productFixture;
 
         $this->faker = \Faker\Factory::create();
@@ -108,19 +100,16 @@ final class MugProductFixture extends AbstractFixture
     {
         $options = $this->optionsResolver->resolve($options);
 
-        $taxons = [];
-        if (null === $this->taxonRepository->findOneBy(['code' => 'CATEGORY'])) {
-            $taxons[] = ['name' => 'Category', 'code' => 'CATEGORY', 'parent' => null];
-        }
-
-        if (null === $this->taxonRepository->findOneBy(['code' => 'BRAND'])) {
-            $taxons[] = ['name' => 'Brand', 'code' => 'BRAND', 'parent' => null];
-        }
-
-        $this->taxonFixture->load(['custom' => array_merge($taxons, [
-            ['name' => 'Mugs', 'code' => 'MUGS', 'parent' => 'CATEGORY'],
-            ['name' => 'Mugland', 'code' => 'MUGLAND', 'parent' => 'BRAND'],
-        ])]);
+        $this->taxonFixture->load(['custom' => [[
+            'code' => 'category',
+            'name' => 'Category',
+            'children' => [
+                [
+                    'code' => 'mugs',
+                    'name' => 'Mugs',
+                ]
+            ]
+        ]]]);
 
         $this->productAttributeFixture->load(['custom' => [
             ['name' => 'Mug material', 'code' => 'MUG-MATERIAL', 'type' => TextAttributeType::TYPE],
@@ -138,23 +127,13 @@ final class MugProductFixture extends AbstractFixture
             ],
         ]]);
 
-        $this->productArchetypeFixture->load(['custom' => [
-            [
-                'name' => 'Mug',
-                'code' => 'MUG',
-                'product_attributes' => ['MUG-MATERIAL'],
-                'product_options' => ['MUG-TYPE'],
-            ],
-        ]]);
-
         $products = [];
         for ($i = 0; $i < $options['amount']; ++$i) {
             $products[] = [
                 'name' => sprintf('Mug "%s"', $this->faker->word),
                 'code' => $this->faker->uuid,
-                'main_taxon' => 'MUGS',
-                'product_archetype' => 'MUG',
-                'taxons' => ['MUGS', 'MUGLAND'],
+                'main_taxon' => 'mugs',
+                'taxons' => ['mugs'],
                 'product_attributes' => [
                     'MUG-MATERIAL' => $this->faker->randomElement(['Invisible porcelain', 'Banana skin', 'Porcelain', 'Centipede']),
                 ],

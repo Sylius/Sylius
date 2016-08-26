@@ -15,7 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
-class TaxonSpec extends ObjectBehavior
+final class TaxonSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

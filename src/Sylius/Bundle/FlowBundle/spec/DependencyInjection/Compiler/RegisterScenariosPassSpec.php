@@ -17,7 +17,7 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
-class RegisterScenariosPassSpec extends ObjectBehavior
+final class RegisterScenariosPassSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

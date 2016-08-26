@@ -21,10 +21,10 @@
         <parameter key="sylius.form.type.payment_methods_choice.class">Sylius\Bundle\PaymentBundle\Form\Type\PaymentMethodChoiceType</parameter>
 
         <parameter key="sylius.composite_payment_methods_resolver.class">Sylius\Component\Payment\Resolver\CompositeMethodsResolver</parameter>
-        <parameter key="sylius.payment_methods_resolver.class">Sylius\Component\Payment\Resolver\MethodsResolver</parameter>
+        <parameter key="sylius.payment_methods_resolver.class">Sylius\Component\Payment\Resolver\PaymentMethodsResolver</parameter>
 
         <parameter key="sylius.registry.payment_methods_resolver.class">Sylius\Component\Registry\PrioritizedServiceRegistry</parameter>
-        <parameter key="sylius.payment_methods_resolver.interface">Sylius\Component\Payment\Resolver\MethodsResolverInterface</parameter>
+        <parameter key="sylius.payment_methods_resolver.interface">Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface</parameter>
 
     </parameters>
 

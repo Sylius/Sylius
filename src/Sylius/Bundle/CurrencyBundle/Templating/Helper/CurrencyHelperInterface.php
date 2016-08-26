@@ -11,39 +11,15 @@
 
 namespace Sylius\Bundle\CurrencyBundle\Templating\Helper;
 
-use Sylius\Bundle\MoneyBundle\Templating\Helper\MoneyHelperInterface;
-use Sylius\Component\Currency\Context\CurrencyContextInterface;
-use Sylius\Component\Currency\Converter\CurrencyConverterInterface;
-use Symfony\Component\Templating\Helper\Helper;
-
 /**
  * @author Axel Vankrunkelsven <axel@digilabs.be>
  */
 interface CurrencyHelperInterface
 {
     /**
-     * @param int $amount
-     * @param string|null $currency
+     * @param string $code
      *
      * @return string
      */
-    public function convertAmount($amount, $currency = null);
-
-    /**
-     * @param int $amount
-     * @param string|null $currency
-     *
-     * @return string
-     */
-    public function convertAndFormatAmount($amount, $currency = null);
-
-    /**
-     * @return string
-     */
-    public function getBaseCurrencySymbol();
-
-    /**
-     * @return string
-     */
-    public function getBaseCurrencyCode();
+    public function convertCurrencyCodeToSymbol($code);
 }

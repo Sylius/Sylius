@@ -11,5 +11,6 @@
     </a>
     <div class="content">
         <a href="{{ path('sylius_shop_product_show', {'slug': product.slug}) }}" class="header sylius-product-name">{{ product.name }}</a>
+        <div class="sylius-product-price">{{ product.price|sylius_price }}</div>
     </div>
 </div>

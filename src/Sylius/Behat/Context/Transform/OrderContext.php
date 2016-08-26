@@ -12,9 +12,8 @@
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
-use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
-use Sylius\Component\User\Repository\CustomerRepositoryInterface;
+use Sylius\Component\Customer\Repository\CustomerRepositoryInterface;
 use Webmozart\Assert\Assert;
 
 /**

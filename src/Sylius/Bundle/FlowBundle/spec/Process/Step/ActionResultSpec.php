@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\FlowBundle\Process\Step;
 
 use PhpSpec\ObjectBehavior;
 
-class ActionResultSpec extends ObjectBehavior
+final class ActionResultSpec extends ObjectBehavior
 {
     function let()
     {

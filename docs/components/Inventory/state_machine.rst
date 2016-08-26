@@ -20,14 +20,12 @@ The following states are defined:
 +-------------------+-------------+-----------------------------------------------------------------+
 | STATE_SOLD        | sold        | Item has been sold and is no longer in the warehouse            |
 +-------------------+-------------+-----------------------------------------------------------------+
-| STATE_BACKORDERED | backordered | Item has been sold, but is not in stock and waiting for supply  |
-+-------------------+-------------+-----------------------------------------------------------------+
 | STATE_RETURNED    | returned    | Item has been sold, but returned and is in stock                |
 +-------------------+-------------+-----------------------------------------------------------------+
 
 .. tip::
     Please keep in mind that these states are just default, you can define and use your own.
-    If you use this component with :doc:`/bundles/SyliusInventoryBundle/index` and Symfony2, you will have full state machine configuration at your disposal.
+    If you use this component with :doc:`/bundles/SyliusInventoryBundle/index` and Symfony, you will have full state machine configuration at your disposal.
 
 .. _component_inventory_inventory-unit-transitions:
 
@@ -40,8 +38,6 @@ There are the following order's transitions by default:
 | Related constant | Transition |
 +==================+============+
 | SYLIUS_HOLD      | hold       |
-+------------------+------------+
-| SYLIUS_BACKORDER | backorder  |
 +------------------+------------+
 | SYLIUS_SELL      | sell       |
 +------------------+------------+

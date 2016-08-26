@@ -36,12 +36,13 @@
 
         "symfony/framework-bundle": "^2.8",
         "stof/doctrine-extensions-bundle": "~1.1",
-        "sylius/review": "^0.19",
-        "sylius/user-bundle": "^0.19",
-        "sylius/resource-bundle": "^0.19"
+        "sylius/review": "^1.0",
+        "sylius/user-bundle": "^1.0",
+        "sylius/resource-bundle": "^1.0",
+        "sylius/customer-bundle": "^1.0"
     },
     "require-dev": {
-        "phpspec/phpspec": "^2.4",
+        "phpspec/phpspec": "^3.0",
         "symfony/form": "^2.8",
         "symfony/validator": "^2.8"
     },
@@ -64,7 +65,7 @@
     ],
     "extra": {
         "branch-alias": {
-            "dev-master": "0.19-dev"
+            "dev-master": "1.0-dev"
         }
     }
 }

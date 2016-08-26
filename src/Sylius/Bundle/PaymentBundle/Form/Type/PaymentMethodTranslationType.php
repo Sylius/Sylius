@@ -29,6 +29,10 @@ class PaymentMethodTranslationType extends AbstractResourceType
                 'required' => false,
                 'label' => 'sylius.form.payment_method.description',
             ])
+            ->add('instructions', 'textarea', [
+                'required' => false,
+                'label' => 'sylius.form.payment_method.instructions',
+            ])
         ;
     }
 

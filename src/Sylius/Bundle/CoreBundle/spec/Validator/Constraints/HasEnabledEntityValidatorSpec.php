@@ -18,7 +18,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 /**
  * @author Gustavo Perdomo <gperdomor@gmail.com>
  */
-class HasEnabledEntityValidatorSpec extends ObjectBehavior
+final class HasEnabledEntityValidatorSpec extends ObjectBehavior
 {
     public function let(ManagerRegistry $registry)
     {

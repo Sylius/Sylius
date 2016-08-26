@@ -24,7 +24,7 @@ use Sylius\Component\Grid\Provider\UndefinedGridException;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ArrayGridProviderSpec extends ObjectBehavior
+final class ArrayGridProviderSpec extends ObjectBehavior
 {
     function let(ArrayToDefinitionConverterInterface $converter, Grid $firstGrid, Grid $secondGrid, Grid $thirdGrid)
     {
@@ -43,7 +43,7 @@ class ArrayGridProviderSpec extends ObjectBehavior
     {
         $this->shouldHaveType('Sylius\Component\Grid\Provider\ArrayGridProvider');
     }
-    
+
     function it_implements_grid_provider_interface()
     {
         $this->shouldImplement(GridProviderInterface::class);

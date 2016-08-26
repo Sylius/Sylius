@@ -13,7 +13,6 @@ namespace Sylius\Component\Core\Promotion\Action;
 
 use Sylius\Component\Core\Distributor\IntegerDistributorInterface;
 use Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicatorInterface;
-use Sylius\Component\Originator\Originator\OriginatorInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
@@ -37,18 +36,13 @@ class PercentageDiscountAction extends DiscountAction
     private $unitsPromotionAdjustmentsApplicator;
 
     /**
-     * {@inheritdoc}
-     *
      * @param IntegerDistributorInterface $distributor
      * @param UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
      */
     public function __construct(
-        OriginatorInterface $originator,
         IntegerDistributorInterface $distributor,
         UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
     ) {
-        parent::__construct($originator);
-
         $this->distributor = $distributor;
         $this->unitsPromotionAdjustmentsApplicator = $unitsPromotionAdjustmentsApplicator;
     }

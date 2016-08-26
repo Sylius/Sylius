@@ -24,7 +24,7 @@ located in ``composer.json`` file. The only required parameter is ``name``, but 
       "name": "vendor/default-theme"
     }
 
-When adding or removing a theme, it's necessary to rebuild the container (same as adding new translation files in Symfony2) by clearing the cache (``app/console cache:clear``).
+When adding or removing a theme, it's necessary to rebuild the container (same as adding new translation files in Symfony) by clearing the cache (``app/console cache:clear``).
 
 Theme structure
 ---------------

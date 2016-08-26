@@ -21,14 +21,14 @@ sylius:
             not_blank: Por favor seleccione el año de vencimiento.
     payment:
         currency_code:
-            not_valid: El código de la moneda que ingreso no es válido.
+            not_valid: El código de moneda introducido no es válido.
     payment_method:
         gateway:
-            not_blank: Por favor seleccione pasarela de método de pago.
+            not_blank: Por favor, seleccione pasarela de método de pago.
         name:
             max_length: 'El nombre de método de pago debe ser {{ limit }} caracteres o menos.'
             min_length: 'El nombre del método de pago tiene que tener al menos {{ limit }} caracteres.'
-            not_blank: Por favor introduzca el nombre de método de pago.
+            not_blank: Por favor, introduzca el nombre de método de pago.
         fee_calculator_configuration:
             amount:
                 greater_than_or_equal: 'La cuota no puede ser inferior a {{ compared_value }}.'

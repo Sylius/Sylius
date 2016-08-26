@@ -32,7 +32,7 @@ use Sylius\Component\Taxation\Resolver\TaxRateResolverInterface;
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  * @author Mark McKelvie <mark.mckelvie@reiss.com>
  */
-class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
+final class OrderShipmentTaxesApplicatorSpec extends ObjectBehavior
 {
     function let(
         CalculatorInterface $calculator,

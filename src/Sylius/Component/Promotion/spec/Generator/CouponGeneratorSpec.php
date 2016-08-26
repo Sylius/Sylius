@@ -26,7 +26,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class CouponGeneratorSpec extends ObjectBehavior
+final class CouponGeneratorSpec extends ObjectBehavior
 {
     function let(
         FactoryInterface $couponFactory,

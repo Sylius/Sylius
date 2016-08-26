@@ -9,5 +9,3 @@ sylius:
             meta_description: metaタグ(description)
         product_variant:
             available_on: 入荷日
-        product_archetype:
-            options: sylius.breadcrumb.option.index

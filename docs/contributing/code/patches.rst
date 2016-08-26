@@ -10,7 +10,7 @@ Step 1: Setup your Environment
 Install the Software Stack
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Before working on Sylius, setup a Symfony2 friendly environment with the following
+Before working on Sylius, setup a Symfony friendly environment with the following
 software:
 
 * Git

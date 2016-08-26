@@ -21,7 +21,7 @@ use Sylius\Component\Variation\Model\VariantInterface;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
-class VariantCombinationValidatorSpec extends ObjectBehavior
+final class VariantCombinationValidatorSpec extends ObjectBehavior
 {
     function let(ExecutionContextInterface $context)
     {

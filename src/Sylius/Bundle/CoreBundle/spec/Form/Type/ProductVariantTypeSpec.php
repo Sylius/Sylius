@@ -15,7 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\VariationBundle\Form\Type\VariantType;
 use Symfony\Component\Form\FormTypeInterface;
 
-class ProductVariantTypeSpec extends ObjectBehavior
+final class ProductVariantTypeSpec extends ObjectBehavior
 {
     function let()
     {

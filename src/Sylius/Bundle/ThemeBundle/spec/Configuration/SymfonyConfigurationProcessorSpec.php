@@ -22,7 +22,7 @@ use Symfony\Component\Config\Definition\Processor;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class SymfonyConfigurationProcessorSpec extends ObjectBehavior
+final class SymfonyConfigurationProcessorSpec extends ObjectBehavior
 {
     function let(ConfigurationInterface $configuration, Processor $processor)
     {

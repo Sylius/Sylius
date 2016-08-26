@@ -3,8 +3,6 @@
 
 sylius:
     extensions:
-        accelerator:
-            help: Εγκαταστήστε και ενεργοποιήστε έναν επιταχυντή PHP όπως η APC (συνιστάται ιδιαίτερα).
         apc: APC
         ctype: Ctype
         gd: GD
@@ -35,4 +33,3 @@ sylius:
         timezone_deprecated:
             help: 'Η Ζώνη ώρας %timezone% δεν χρησιμοποιείται. Διορθώσετε το αρχείο php.ini σας (λίστα με μη χρησιμοποιούμενες ζώνες ώρας εδώ http://php.net/manual/en/timezones.others.php).'
         version: Έκδοση PHP
-        version_recommanded: Προτεινόμενη έκδοση PHP

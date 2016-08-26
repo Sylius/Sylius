@@ -18,7 +18,7 @@ use Sylius\Component\Promotion\Model\PromotionInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class UsageLimitEligibilityCheckerSpec extends ObjectBehavior
+final class UsageLimitEligibilityCheckerSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

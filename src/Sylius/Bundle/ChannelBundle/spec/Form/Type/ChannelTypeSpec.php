@@ -21,7 +21,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class ChannelTypeSpec extends ObjectBehavior
+final class ChannelTypeSpec extends ObjectBehavior
 {
     function let()
     {

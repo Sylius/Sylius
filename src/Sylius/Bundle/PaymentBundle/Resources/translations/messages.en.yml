@@ -30,4 +30,5 @@ sylius:
             description: Description
             enabled: Enabled?
             gateway: Gateway
+            instructions: Instructions
             name: Name

@@ -8,9 +8,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
- 
+
 namespace spec\Sylius\Bundle\CoreBundle\Sitemap\Renderer;
- 
+
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Sitemap\Model\SitemapInterface;
@@ -21,7 +21,7 @@ use Symfony\Component\Templating\EngineInterface;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class TwigAdapterSpec extends ObjectBehavior
+final class TwigAdapterSpec extends ObjectBehavior
 {
     function let(EngineInterface $twig)
     {

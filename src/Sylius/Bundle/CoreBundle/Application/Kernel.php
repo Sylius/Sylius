@@ -21,10 +21,10 @@ use Symfony\Component\HttpKernel\Kernel as HttpKernel;
  */
 class Kernel extends HttpKernel
 {
-    const VERSION = '0.19.0-dev';
-    const VERSION_ID = '00190';
-    const MAJOR_VERSION = '0';
-    const MINOR_VERSION = '19';
+    const VERSION = '1.0.0-dev';
+    const VERSION_ID = '10000';
+    const MAJOR_VERSION = '1';
+    const MINOR_VERSION = '0';
     const RELEASE_VERSION = '0';
     const EXTRA_VERSION = 'DEV';
 
@@ -38,12 +38,10 @@ class Kernel extends HttpKernel
             new \Sylius\Bundle\OrderBundle\SyliusOrderBundle(),
             new \Sylius\Bundle\MoneyBundle\SyliusMoneyBundle(),
             new \Sylius\Bundle\CurrencyBundle\SyliusCurrencyBundle(),
-            new \Sylius\Bundle\ContactBundle\SyliusContactBundle(),
             new \Sylius\Bundle\LocaleBundle\SyliusLocaleBundle(),
             new \Sylius\Bundle\SettingsBundle\SyliusSettingsBundle(),
             new \Sylius\Bundle\CartBundle\SyliusCartBundle(),
             new \Sylius\Bundle\ProductBundle\SyliusProductBundle(),
-            new \Sylius\Bundle\ArchetypeBundle\SyliusArchetypeBundle(),
             new \Sylius\Bundle\ChannelBundle\SyliusChannelBundle(),
             new \Sylius\Bundle\VariationBundle\SyliusVariationBundle(),
             new \Sylius\Bundle\AttributeBundle\SyliusAttributeBundle(),
@@ -58,23 +56,16 @@ class Kernel extends HttpKernel
             new \Sylius\Bundle\TaxonomyBundle\SyliusTaxonomyBundle(),
             new \Sylius\Bundle\FlowBundle\SyliusFlowBundle(),
             new \Sylius\Bundle\PricingBundle\SyliusPricingBundle(),
-            new \Sylius\Bundle\SequenceBundle\SyliusSequenceBundle(),
             new \Sylius\Bundle\ContentBundle\SyliusContentBundle(),
-            new \Sylius\Bundle\SearchBundle\SyliusSearchBundle(),
-            new \Sylius\Bundle\RbacBundle\SyliusRbacBundle(),
             new \Sylius\Bundle\UserBundle\SyliusUserBundle(),
+            new \Sylius\Bundle\CustomerBundle\SyliusCustomerBundle(),
             new \Sylius\Bundle\UiBundle\SyliusUiBundle(),
-            new \Sylius\Bundle\AdminBundle\SyliusAdminBundle(),
-            new \Sylius\Bundle\ShopBundle\SyliusShopBundle(),
-            new \Sylius\Bundle\MetadataBundle\SyliusMetadataBundle(),
             new \Sylius\Bundle\AssociationBundle\SyliusAssociationBundle(),
             new \Sylius\Bundle\ReviewBundle\SyliusReviewBundle(),
             new \Sylius\Bundle\CoreBundle\SyliusCoreBundle(),
-            new \Sylius\Bundle\WebBundle\SyliusWebBundle(),
             new \Sylius\Bundle\ResourceBundle\SyliusResourceBundle(),
             new \Sylius\Bundle\GridBundle\SyliusGridBundle(),
             new \winzou\Bundle\StateMachineBundle\winzouStateMachineBundle(),
-            new \Sylius\Bundle\ApiBundle\SyliusApiBundle(),
 
             new \Sonata\BlockBundle\SonataBlockBundle(),
             new \Symfony\Cmf\Bundle\CoreBundle\CmfCoreBundle(),
@@ -82,19 +73,18 @@ class Kernel extends HttpKernel
             new \Symfony\Cmf\Bundle\ContentBundle\CmfContentBundle(),
             new \Symfony\Cmf\Bundle\RoutingBundle\CmfRoutingBundle(),
             new \Symfony\Cmf\Bundle\MenuBundle\CmfMenuBundle(),
-            new \Symfony\Cmf\Bundle\CreateBundle\CmfCreateBundle(),
             new \Symfony\Cmf\Bundle\MediaBundle\CmfMediaBundle(),
 
             new \Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new \Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle(),
             new \Doctrine\Bundle\PHPCRBundle\DoctrinePHPCRBundle(),
-            new \Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new \Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new \Symfony\Bundle\MonologBundle\MonologBundle(),
             new \Symfony\Bundle\SecurityBundle\SecurityBundle(),
             new \Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new \Symfony\Bundle\TwigBundle\TwigBundle(),
 
+            new \Sonata\IntlBundle\SonataIntlBundle(),
             new \Bazinga\Bundle\HateoasBundle\BazingaHateoasBundle(),
             new \FOS\OAuthServerBundle\FOSOAuthServerBundle(),
             new \FOS\RestBundle\FOSRestBundle(),

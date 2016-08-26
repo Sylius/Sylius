@@ -27,7 +27,7 @@ use Symfony\Component\Templating\TemplateReferenceInterface;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class TemplateFileLocatorSpec extends ObjectBehavior
+final class TemplateFileLocatorSpec extends ObjectBehavior
 {
     function let(
         FileLocatorInterface $decoratedFileLocator,

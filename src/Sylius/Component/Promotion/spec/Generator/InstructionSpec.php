@@ -20,7 +20,7 @@ use Sylius\Component\Promotion\Generator\InstructionInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class InstructionSpec extends ObjectBehavior
+final class InstructionSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

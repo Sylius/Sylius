@@ -15,3 +15,12 @@ sylius:
                 success: Jelszavát sikeresen megváltoztattuk!
         reset_password:
             requested: Ha az általad megadott email létezik rendszerünkben, akkor küldtünk egy emailt a további instrukciókkal.
+        verification:
+            error: Ez ellenőrzőkód hibás.
+            notice:
+                verified: Az email címed már meg lett erősítve.
+            success: Email címe megerősítése sikeres.
+            request:
+                success: Egy megerősítő link el lett küldve az e-mail címére.
+    customer:
+        register: Köszönjük a regisztrációt, ellenőrizze leveleit hogy megtudja erősíteni fiókját.

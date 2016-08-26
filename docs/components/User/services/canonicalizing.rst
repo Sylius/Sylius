@@ -20,16 +20,16 @@ letters. Example usage:
     // directory, relative to this file
     require_once __DIR__.'/../vendor/autoload.php';
 
-    use Sylius\Component\User\Model\Customer;
+    use Sylius\Component\User\Model\User;
     use Sylius\Component\Canonicalizer\Canonicalizer;
 
     $canonicalizer = new Canonicalizer();
 
-    $customer = new Customer();
-    $customer->setEmail('MyEmail@eXample.Com');
+    $user = new User();
+    $user->setEmail('MyEmail@eXample.Com');
 
-    $canonicalEmail = $canonicalizer->canonicalize($customer->getEmail());
-    $customer->setEmailCanonical($canonicalEmail);
+    $canonicalEmail = $canonicalizer->canonicalize($user->getEmail());
+    $user->setEmailCanonical($canonicalEmail);
 
-    $customer->getEmail() // returns 'MyEmail@eXample.Com'
-    $customer->getEmailCanonical() // returns 'myemail@example.com'
+    $user->getEmail() // returns 'MyEmail@eXample.Com'
+    $user->getEmailCanonical() // returns 'myemail@example.com'

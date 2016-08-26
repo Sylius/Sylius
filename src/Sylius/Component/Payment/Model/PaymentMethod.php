@@ -48,6 +48,11 @@ class PaymentMethod implements PaymentMethodInterface
     /**
      * @var string
      */
+    protected $instructions;
+
+    /**
+     * @var string
+     */
     protected $gateway;
 
     /**
@@ -124,6 +129,22 @@ class PaymentMethod implements PaymentMethodInterface
     public function setDescription($description)
     {
         $this->translate()->setDescription($description);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getInstructions()
+    {
+        return $this->translate()->getInstructions();
+    }
+
+    /**
+     * {@inheritdoc{
+     */
+    public function setInstructions($instructions)
+    {
+        $this->translate()->setInstructions($instructions);
     }
 
     /**

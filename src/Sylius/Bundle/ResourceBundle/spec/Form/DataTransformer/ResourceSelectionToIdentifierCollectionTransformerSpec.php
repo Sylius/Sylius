@@ -18,7 +18,7 @@ use Symfony\Component\Form\Exception\UnexpectedTypeException;
 // Since the root namespace "spec" is not in our autoload
 require_once __DIR__.DIRECTORY_SEPARATOR.'FakeEntity.php';
 
-class ResourceSelectionToIdentifierCollectionTransformerSpec extends ObjectBehavior
+final class ResourceSelectionToIdentifierCollectionTransformerSpec extends ObjectBehavior
 {
     function let()
     {

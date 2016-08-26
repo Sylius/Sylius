@@ -26,7 +26,7 @@ use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class TextAttributeTypeSpec extends ObjectBehavior
+final class TextAttributeTypeSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

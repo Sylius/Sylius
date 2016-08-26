@@ -4,8 +4,8 @@ Resolving available shipping methods
 In many use cases, you want to decide which shipping methods are available for user.
 Sylius has a dedicated service which serves this purpose.
 
-MethodsResolver
----------------
+ShippingMethodsResolver
+-----------------------
 
 This service also works with the ``ShippingSubjectInterface``. To get all shipping methods which support given subject, simply call the ``getSupportedMethods`` function.
 
@@ -56,4 +56,4 @@ It supports two special options, required ``subject`` and optional ``criteria``.
         }
     }
 
-This form type internally calls the **MethodsResolver** service and creates a list of available methods.
+This form type internally calls the **ShippingMethodsResolver** service and creates a list of available methods.

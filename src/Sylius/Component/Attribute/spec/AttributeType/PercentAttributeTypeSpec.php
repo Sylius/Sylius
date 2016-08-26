@@ -17,7 +17,7 @@ use Sylius\Component\Attribute\AttributeType\AttributeTypeInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class PercentAttributeTypeSpec extends ObjectBehavior
+final class PercentAttributeTypeSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

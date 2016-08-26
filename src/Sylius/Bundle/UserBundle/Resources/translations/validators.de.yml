@@ -2,11 +2,6 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
-    group:
-        name:
-            max: 'Gruppenname darf nicht länger als {{ limit }} Zeichen sein.'
-            min: 'Gruppenname muss mindestens {{ limit }} Zeichen lang sein.'
-            not_blank: Bitte geben Sie einen Gruppennamen ein.
     user:
         email:
             not_blank: Bitte geben Sie Ihre E-Mail-Adresse ein.
@@ -19,22 +14,3 @@ sylius:
         password:
             min: 'Das Passwort muss mindestens {{ limit }} Zeichen lang sein.'
             max: 'Passwort darf nicht länger als {{ limit }} sein.'
-    customer:
-        first_name:
-            max: 'Vorname darf nicht länger als {{ limit }} Zeichen sein.'
-            min: 'Vorname muss mindestens {{ limit }} Zeichen lang sein.'
-            not_blank: Bitte geben Sie Ihren Vornamen ein.
-        last_name:
-            max: 'Nachname darf nicht länger als {{ limit }} Zeichen sein.'
-            min: 'Nachname muss mindestens {{ limit }} Zeichen lang sein.'
-            not_blank: Bitte geben Sie Ihren Nachnamen ein.
-        gender:
-            not_blank: Bitte wählen Sie Ihr Geschlecht.
-        email:
-            already_used: Diese E-Mail wird bereits verwendet, haben Sie ihr Passwort vergessen?
-            max: 'E-Mail darf nicht länger als {{ limit }} Zeichen sein.'
-            min: 'E-Mail muss mindestens {{ limit }} Zeichen lang sein.'
-            not_blank: Bitte geben Sie Ihre E-Mail-Adresse ein.
-            invalid: Diese e-Mail ist ungültig.
-            unique: Diese E-Mail-Adresse wird bereits verwendet.
-            registered: Diese E-Mail wird bereits verwendet, haben Sie ihr Passwort vergessen?

@@ -22,7 +22,7 @@ use Sylius\Bundle\ThemeBundle\Model\ThemeScreenshot;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ThemeSpec extends ObjectBehavior
+final class ThemeSpec extends ObjectBehavior
 {
     function let()
     {

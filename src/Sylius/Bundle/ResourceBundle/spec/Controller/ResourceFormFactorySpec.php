@@ -23,7 +23,7 @@ use Symfony\Component\Form\FormInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ResourceFormFactorySpec extends ObjectBehavior
+final class ResourceFormFactorySpec extends ObjectBehavior
 {
     function let(FormFactoryInterface $formFactory)
     {

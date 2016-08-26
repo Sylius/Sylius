@@ -24,8 +24,6 @@ By default it contains the following properties:
 +-----------------+-----------------------------------------------------------------------------+
 | metaDescription | Product's meta description taken from the ``ProductTranslation``            |
 +-----------------+-----------------------------------------------------------------------------+
-| archetype       | An archetype assigned to this product                                       |
-+-----------------+-----------------------------------------------------------------------------+
 | availableOn     | When the product is available                                               |
 +-----------------+-----------------------------------------------------------------------------+
 | attributes      | Attributes assigned to this product                                         |

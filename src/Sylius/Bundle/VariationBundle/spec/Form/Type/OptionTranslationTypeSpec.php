@@ -20,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class OptionTranslationTypeSpec extends ObjectBehavior
+final class OptionTranslationTypeSpec extends ObjectBehavior
 {
     function let()
     {

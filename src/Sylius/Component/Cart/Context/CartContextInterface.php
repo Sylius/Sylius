@@ -21,26 +21,10 @@ use Sylius\Component\Cart\Model\CartInterface;
  */
 interface CartContextInterface
 {
-    // Key used to store the cart in storage.
-    const STORAGE_KEY = '_sylius_cart_id';
-
     /**
-     * Get the currently active cart.
+     * @return CartInterface
      *
-     * @return string
+     * @throws CartNotFoundException
      */
-    public function getCurrentCartIdentifier();
-
-    /**
-     * Set the currently active cart.
-     *
-     * @param CartInterface $cart
-     */
-    public function setCurrentCartIdentifier(CartInterface $cart);
-
-    /**
-     * Resets current cart identifier.
-     * Basically, it means abandoning current cart.
-     */
-    public function resetCurrentCartIdentifier();
+    public function getCart();
 }

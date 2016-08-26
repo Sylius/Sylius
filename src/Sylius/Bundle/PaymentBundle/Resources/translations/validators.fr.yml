@@ -19,6 +19,9 @@ sylius:
             min_length: 'Le code de vérification de la carte de crédit doit contenir au plus {{ limit }} chiffres.'
         expiry_year:
             not_blank: "Veuillez sélectionner l'année d'expiration."
+    payment:
+        currency_code:
+            not_valid: Le code de devise que vous avez entré n’est pas valide.
     payment_method:
         gateway:
             not_blank: Veuillez sélectionner la passerelle du moyen de paiement.

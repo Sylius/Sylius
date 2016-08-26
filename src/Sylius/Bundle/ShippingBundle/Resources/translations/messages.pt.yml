@@ -3,7 +3,11 @@
 
 sylius:
     form:
+        rule:
+            unit_count_configuration:
+                equal: Igual a
         shipment:
+            state: Estado
             states:
                 checkout: Finalizar compra
                 pending: Pendente

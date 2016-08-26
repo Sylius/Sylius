@@ -5,7 +5,7 @@ Feature: Coupon unique code validation
     I want to be prevented from adding two coupons with the same code
 
     Background:
-        Given the store operates on a single channel in "France"
+        Given the store operates on a single channel in "United States"
         And the store has promotion "Christmas sale" with coupon "SANTA2016"
         And I am logged in as an administrator
 

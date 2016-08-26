@@ -14,11 +14,6 @@ sylius:
         product_variant:
             available_on: A rendelkezésre álló
             available_until: Elérhető amíg
-        product_archetype:
-            name: Név
-            parent: Szülő
-            attributes: Tulajdonságok
-            options: Beállítások
         association_type:
             name: Név
         association:

@@ -24,7 +24,7 @@ use Sylius\Component\Core\Model\ProductInterface;
  *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class CurrentProductPageResolverSpec extends ObjectBehavior
+final class CurrentProductPageResolverSpec extends ObjectBehavior
 {
     function let(CurrentPageResolverInterface $currentPageResolver)
     {

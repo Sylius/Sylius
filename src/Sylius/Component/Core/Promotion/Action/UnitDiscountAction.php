@@ -15,7 +15,6 @@ use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
-use Sylius\Component\Originator\Originator\OriginatorInterface;
 use Sylius\Component\Promotion\Action\PromotionActionInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
@@ -33,18 +32,11 @@ abstract class UnitDiscountAction implements PromotionActionInterface
     protected $adjustmentFactory;
 
     /**
-     * @var OriginatorInterface
-     */
-    protected $originator;
-
-    /**
      * @param FactoryInterface $adjustmentFactory
-     * @param OriginatorInterface $originator
      */
-    public function __construct(FactoryInterface $adjustmentFactory, OriginatorInterface $originator)
+    public function __construct(FactoryInterface $adjustmentFactory)
     {
         $this->adjustmentFactory = $adjustmentFactory;
-        $this->originator = $originator;
     }
 
     /**
@@ -79,7 +71,7 @@ abstract class UnitDiscountAction implements PromotionActionInterface
     protected function removeUnitOrderItemAdjustments(OrderItemUnitInterface $unit, PromotionInterface $promotion)
     {
         foreach ($unit->getAdjustments(AdjustmentInterface::ORDER_UNIT_PROMOTION_ADJUSTMENT) as $adjustment) {
-            if ($promotion === $this->originator->getOrigin($adjustment)) {
+            if ($promotion->getCode() === $adjustment->getOriginCode()) {
                 $unit->removeAdjustment($adjustment);
             }
         }
@@ -106,11 +98,11 @@ abstract class UnitDiscountAction implements PromotionActionInterface
      */
     protected function createAdjustment(PromotionInterface $promotion, $type = AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)
     {
+        /** @var AdjustmentInterface $adjustment */
         $adjustment = $this->adjustmentFactory->createNew();
         $adjustment->setType($type);
         $adjustment->setLabel($promotion->getName());
-
-        $this->originator->setOrigin($adjustment, $promotion);
+        $adjustment->setOriginCode($promotion->getCode());
 
         return $adjustment;
     }

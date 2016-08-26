@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
 use Doctrine\ORM\QueryBuilder;
-use Sylius\Bundle\CartBundle\Doctrine\ORM\CartRepository;
+use Sylius\Bundle\CoreBundle\Doctrine\ORM\CartRepository;
 use Sylius\Component\Core\Model\CouponInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -118,6 +118,23 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
         ;
 
         return $queryBuilder
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findOneForPayment($id)
+    {
+        return $this->createQueryBuilder('o')
+            ->leftJoin('o.payments', 'payments')
+            ->leftJoin('payments.method', 'paymentMethods')
+            ->addSelect('payments')
+            ->addSelect('paymentMethods')
+            ->andWhere('o.id = :id')
+            ->setParameter('id', $id)
             ->getQuery()
             ->getOneOrNullResult()
         ;
@@ -257,17 +274,10 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function countByCustomerAndPaymentState(CustomerInterface $customer, $state)
+    public function countByCustomer(CustomerInterface $customer)
     {
-        $queryBuilder = $this->createByCustomerQueryBuilder($customer);
-
-        $queryBuilder
+       return (int) $this->createByCustomerQueryBuilder($customer)
             ->select('count(o.id)')
-            ->andWhere('o.paymentState = :state')
-            ->setParameter('state', $state)
-        ;
-
-        return (int) $queryBuilder
             ->getQuery()
             ->getSingleScalarResult()
         ;
@@ -386,7 +396,7 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function findExpired(\DateTime $expiresAt, $state = OrderInterface::STATE_PENDING)
+    public function findExpired(\DateTime $expiresAt, $state = OrderInterface::STATE_NEW)
     {
         $queryBuilder = $this->createQueryBuilder('o')
             ->leftJoin('o.items', 'item')

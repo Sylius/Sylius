@@ -20,7 +20,7 @@ use Sylius\Component\Attribute\Model\AttributeInterface;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class AttributeSpec extends ObjectBehavior
+final class AttributeSpec extends ObjectBehavior
 {
     public function let()
     {

@@ -13,10 +13,5 @@ sylius:
             taxons: Taksonai
         product_variant:
             available_on: Prieinamas nuo
-        product_archetype:
-            name: Pavadinimas
-            parent: Motininis elementas
-            attributes: Atributai
-            options: Parinktys
         association_type:
             name: Pavadinimas

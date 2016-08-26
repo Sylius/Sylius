@@ -5,7 +5,7 @@ Feature: Managing themes per channel
     I want to be able to set theme per channel
 
     Background:
-        Given the store operates on a channel named "France"
+        Given the store operates on a channel named "United States"
         And the store has "maverick/meerkat" theme
         And I am logged in as an administrator
 
@@ -16,11 +16,11 @@ Feature: Managing themes per channel
 
     @ui
     Scenario: Setting a theme on a channel
-        When I set "France" channel theme to "maverick/meerkat"
+        When I set "United States" channel theme to "maverick/meerkat"
         Then that channel should use that theme
 
     @ui
     Scenario: Unsetting a channel theme
-        Given channel "France" uses "maverick/meerkat" theme
+        Given channel "United States" uses "maverick/meerkat" theme
         When I unset theme on that channel
         Then that channel should not use any theme

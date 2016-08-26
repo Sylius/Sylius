@@ -27,7 +27,7 @@ use Symfony\Component\Templating\TemplateReferenceInterface;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class TemplatePathsCacheWarmerSpec extends ObjectBehavior
+final class TemplatePathsCacheWarmerSpec extends ObjectBehavior
 {
     function let(
         TemplateFinderInterface $templateFinder,

@@ -1,7 +1,7 @@
 SyliusShippingBundle
 ====================
 
-**SyliusShippingBundle** is the shipment management component for Symfony2 e-commerce applications.
+**SyliusShippingBundle** is the shipment management component for Symfony e-commerce applications.
 
 If you need to manage shipments, shipping methods and deal with complex cost calculation, this bundle can
 help you a lot!
@@ -24,6 +24,4 @@ Flexible shipping cost calculation system allows you to create your own calculat
    custom_calculators
    resolving_available_methods
    shipping_requirements
-   default_checkers
-   custom_checkers
    summary

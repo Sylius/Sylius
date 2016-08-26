@@ -17,7 +17,7 @@ use Sylius\Component\Review\Model\ReviewerInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ReviewerSpec extends ObjectBehavior
+final class ReviewerSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

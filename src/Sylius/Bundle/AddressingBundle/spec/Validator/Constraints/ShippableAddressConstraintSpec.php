@@ -16,7 +16,7 @@ use PhpSpec\ObjectBehavior;
 /**
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-class ShippableAddressConstraintSpec extends ObjectBehavior
+final class ShippableAddressConstraintSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

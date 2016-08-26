@@ -1,0 +1,11 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        customer:
+            first_name: 名
+            last_name: 姓
+            email: メールアドレス
+            billing_address: ご請求先住所
+            different_billing_address: 請求先として別の住所を指定する

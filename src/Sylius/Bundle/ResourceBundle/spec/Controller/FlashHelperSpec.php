@@ -27,7 +27,7 @@ use Symfony\Component\Translation\TranslatorInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class FlashHelperSpec extends ObjectBehavior
+final class FlashHelperSpec extends ObjectBehavior
 {
     function let(SessionInterface $session, TranslatorInterface $translator)
     {

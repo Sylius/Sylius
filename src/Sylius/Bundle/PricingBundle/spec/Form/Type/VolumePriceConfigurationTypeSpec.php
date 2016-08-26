@@ -16,7 +16,7 @@ use Prophecy\Argument;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class VolumePriceConfigurationTypeSpec extends ObjectBehavior
+final class VolumePriceConfigurationTypeSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

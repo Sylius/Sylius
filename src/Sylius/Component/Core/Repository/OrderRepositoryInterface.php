@@ -38,7 +38,7 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
      *
      * @return OrderInterface[]
      */
-    public function findExpired(\DateTime $expiresAt, $state = OrderInterface::STATE_PENDING);
+    public function findExpired(\DateTime $expiresAt, $state = OrderInterface::STATE_NEW);
 
     /**
      * @param CustomerInterface $customer
@@ -50,11 +50,10 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
 
     /**
      * @param CustomerInterface $customer
-     * @param string $state
      *
      * @return int
      */
-    public function countByCustomerAndPaymentState(CustomerInterface $customer, $state);
+    public function countByCustomer(CustomerInterface $customer);
 
     /**
      * @param array $configuration
@@ -92,6 +91,13 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
      * @return OrderInterface|null
      */
     public function findForDetailsPage($id);
+    
+    /**
+     * @param int $id
+     *
+     * @return OrderInterface|null
+     */
+    public function findOneForPayment($id);
 
     /**
      * @param array $criteria

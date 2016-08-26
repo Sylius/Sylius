@@ -23,13 +23,13 @@ use Sylius\Component\Grid\Filtering\FilterInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class StringFilterSpec extends ObjectBehavior
+final class StringFilterSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
         $this->shouldHaveType('Sylius\Component\Grid\Filter\StringFilter');
     }
-    
+
     function it_implements_filter_interface()
     {
         $this->shouldImplement(FilterInterface::class);
@@ -43,7 +43,7 @@ class StringFilterSpec extends ObjectBehavior
 
         $expressionBuilder->like('firstName', '%John%')->willReturn('EXPR');
         $dataSource->restrict('EXPR')->shouldBeCalled();
-        
+
         $this->apply($dataSource, 'firstName', 'John', []);
     }
 
@@ -165,14 +165,14 @@ class StringFilterSpec extends ObjectBehavior
 
         $expressionBuilder->like('firstName', '%John%')->willReturn('EXPR1');
         $expressionBuilder->like('lastName', '%John%')->willReturn('EXPR2');
-        $expressionBuilder->orX(['EXPR1', 'EXPR2'])->willReturn('EXPR');
+        $expressionBuilder->orX('EXPR1', 'EXPR2')->willReturn('EXPR');
 
         $dataSource->restrict('EXPR')->shouldBeCalled();
 
         $this->apply($dataSource, 'name', 'John', ['fields' => ['firstName', 'lastName']]);
     }
-    
-    function it_filters_translation_fields( 
+
+    function it_filters_translation_fields(
         DataSourceInterface $dataSource,
         ExpressionBuilderInterface $expressionBuilder
     ) {
@@ -183,5 +183,46 @@ class StringFilterSpec extends ObjectBehavior
         $dataSource->restrict('EXPR')->shouldBeCalled();
 
         $this->apply($dataSource, 'name', 'John', ['fields' => ['translation.name']]);
+    }
+
+    function it_throws_an_exception_if_type_is_unknown(
+        DataSourceInterface $dataSource,
+        ExpressionBuilderInterface $expressionBuilder
+    ) {
+        $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
+
+        $this->shouldThrow(\InvalidArgumentException::class)->during('apply', [
+            $dataSource,
+            'firstName',
+            ['type' => 'UNKNOWN_TYPE', 'value' => 'John'],
+            [],
+        ]);
+    }
+
+    function it_ignores_filter_if_its_value_is_empty_and_the_filter_depends_on_it(
+        DataSourceInterface $dataSource,
+        ExpressionBuilderInterface $expressionBuilder
+    ) {
+        $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
+
+        $this->apply($dataSource, 'firstName', ['type' => StringFilter::TYPE_CONTAINS, 'value' => ''], []);
+        $this->apply($dataSource, 'firstName', ['type' => StringFilter::TYPE_ENDS_WITH, 'value' => ''], []);
+        $this->apply($dataSource, 'firstName', ['type' => StringFilter::TYPE_EQUAL, 'value' => ''], []);
+        $this->apply($dataSource, 'firstName', ['type' => StringFilter::TYPE_IN, 'value' => ''], []);
+        $this->apply($dataSource, 'firstName', ['type' => StringFilter::TYPE_NOT_CONTAINS, 'value' => ''], []);
+        $this->apply($dataSource, 'firstName', ['type' => StringFilter::TYPE_NOT_IN, 'value' => ''], []);
+        $this->apply($dataSource, 'firstName', ['type' => StringFilter::TYPE_STARTS_WITH, 'value' => ''], []);
+    }
+
+    function it_does_not_ignore_filter_if_its_value_is_zero(
+        DataSourceInterface $dataSource,
+        ExpressionBuilderInterface $expressionBuilder
+    ) {
+        $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
+
+        $expressionBuilder->like('firstName', '%0%')->willReturn('EXPR');
+        $dataSource->restrict('EXPR')->shouldBeCalled();
+
+        $this->apply($dataSource, 'firstName', ['type' => StringFilter::TYPE_CONTAINS, 'value' => '0'], []);
     }
 }

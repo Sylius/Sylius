@@ -66,4 +66,24 @@ interface CreatePageInterface extends BaseCreatePageInterface
      * @param string $paymentMethod
      */
     public function choosePaymentMethod($paymentMethod);
+
+    /**
+     * @param string $taxZone
+     */
+    public function chooseDefaultTaxZone($taxZone);
+
+    /**
+     * @param string $locale
+     */
+    public function chooseDefaultLocale($locale);
+
+    /**
+     * @param string $currency
+     */
+    public function chooseDefaultCurrency($currency);
+
+    /**
+     * @param string $taxCalculationStrategy
+     */
+    public function chooseTaxCalculationStrategy($taxCalculationStrategy);
 }

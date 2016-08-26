@@ -25,7 +25,7 @@ use Symfony\Component\HttpKernel\KernelInterface;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class BundleResourceLocatorSpec extends ObjectBehavior
+final class BundleResourceLocatorSpec extends ObjectBehavior
 {
     function let(Filesystem $filesystem, KernelInterface $kernel)
     {

@@ -19,7 +19,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SettingsBuilderSpec extends ObjectBehavior
+final class SettingsBuilderSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

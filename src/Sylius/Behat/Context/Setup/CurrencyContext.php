@@ -12,7 +12,11 @@
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
-use Sylius\Component\Core\Test\Services\SharedStorageInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Currency\CurrencyStorageInterface;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Currency\Converter\CurrencyNameConverterInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -39,44 +43,34 @@ final class CurrencyContext implements Context
     private $currencyFactory;
 
     /**
+     * @var ObjectManager
+     */
+    private $currencyManager;
+
+    /**
+     * @var ObjectManager
+     */
+    private $channelManager;
+
+    /**
      * @param SharedStorageInterface $sharedStorage
      * @param RepositoryInterface $currencyRepository
      * @param FactoryInterface $currencyFactory
+     * @param ObjectManager $currencyManager
+     * @param ObjectManager $channelManager
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         RepositoryInterface $currencyRepository,
-        FactoryInterface $currencyFactory
+        FactoryInterface $currencyFactory,
+        ObjectManager $currencyManager,
+        ObjectManager $channelManager
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->currencyRepository = $currencyRepository;
         $this->currencyFactory = $currencyFactory;
-    }
-
-    /**
-     * @Given default currency is :currencyCode
-     */
-    public function defaultCurrencyIs($currencyCode)
-    {
-        $currency = $this->createCurrency($currencyCode);
-        $currency->setEnabled(true);
-
-        $channel = $this->sharedStorage->get('channel');
-        $channel->setDefaultCurrency($currency);
-
-        $this->saveCurrency($currency);
-    }
-
-    /**
-     * @Given the store has a base currency :currencyCode
-     */
-    public function theStoreHasBasedCurrency($currencyCode)
-    {
-        $currency = $this->createCurrency($currencyCode);
-        $currency->setEnabled(true);
-        $currency->setBase(true);
-
-        $this->saveCurrency($currency);
+        $this->currencyManager = $currencyManager;
+        $this->channelManager = $channelManager;
     }
 
     /**
@@ -101,10 +95,12 @@ final class CurrencyContext implements Context
 
     /**
      * @Given the store has disabled currency :currencyCode
+     * @Given the currency :currencyCode is disabled (as well)
+     * @Given the currency :currencyCode gets disabled
      */
     public function theStoreHasDisabledCurrency($currencyCode)
     {
-        $currency = $this->createCurrency($currencyCode);
+        $currency = $this->provideCurrency($currencyCode);
         $currency->setEnabled(false);
 
         $this->saveCurrency($currency);
@@ -118,6 +114,70 @@ final class CurrencyContext implements Context
         $currency = $this->createCurrency($currencyCode, $exchangeRate);
         $currency->setEnabled(true);
 
+        $this->saveCurrency($currency);
+    }
+
+    /**
+     * @Given /^(that channel) allows to shop using the "([^"]+)" currency$/
+     * @Given /^(that channel) allows to shop using "([^"]+)" and "([^"]+)" currencies$/
+     * @Given /^(that channel) allows to shop using "([^"]+)", "([^"]+)" and "([^"]+)" currencies$/
+     */
+    public function thatChannelAllowsToShopUsingAndCurrencies(
+        ChannelInterface $channel,
+        $firstCurrencyCode,
+        $secondCurrencyCode = null,
+        $thirdCurrencyCode = null
+    ) {
+        $currencies = new ArrayCollection();
+
+        foreach ([$firstCurrencyCode, $secondCurrencyCode, $thirdCurrencyCode] as $currencyCode) {
+            if (null === $currencyCode) {
+                break;
+            }
+
+            $currencies[] = $this->provideCurrency($currencyCode);
+        }
+
+        $channel->setCurrencies($currencies);
+
+        $this->channelManager->flush();
+    }
+
+    /**
+     * @Given /^(that channel) uses the "([^"]+)" currency by default$/
+     * @Given /^(it) uses the "([^"]+)" currency by default$/
+     */
+    public function itUsesTheCurrencyByDefault(ChannelInterface $channel, $currencyCode)
+    {
+        $currency = $this->provideCurrency($currencyCode);
+        $currency->setExchangeRate(1.0);
+
+        $this->currencyManager->flush();
+
+        $channel->addCurrency($currency);
+        $channel->setDefaultCurrency($currency);
+
+        $this->channelManager->flush();
+    }
+
+    /**
+     * @Given /^(that channel) allows to shop using the "([^"]+)" currency with exchange rate (\d+)\.(\d+)$/
+     */
+    public function thatChannelAllowsToShopUsingCurrency(ChannelInterface $channel, $currencyCode, $exchangeRate = 1.0)
+    {
+        $currency = $this->createCurrency($currencyCode, $exchangeRate);
+        $channel->addCurrency($currency);
+        $this->saveCurrency($currency);
+
+        $this->channelManager->flush();
+    }
+
+    /**
+     * @Given /^the exchange rate for (currency "([^"]+)") was changed to ((\d+)\.(\d+))$/
+     */
+    public function theExchangeRateForWasChangedTo(CurrencyInterface $currency, $exchangeRate)
+    {
+        $currency->setExchangeRate($exchangeRate);
         $this->saveCurrency($currency);
     }
 
@@ -138,9 +198,28 @@ final class CurrencyContext implements Context
      */
     private function createCurrency($currencyCode, $exchangeRate = 1.0)
     {
+        /** @var CurrencyInterface $currency */
         $currency = $this->currencyFactory->createNew();
         $currency->setCode($currencyCode);
         $currency->setExchangeRate($exchangeRate);
+
+        return $currency;
+    }
+
+    /**
+     * @param string $currencyCode
+     *
+     * @return CurrencyInterface
+     */
+    private function provideCurrency($currencyCode)
+    {
+        $currency = $this->currencyRepository->findOneBy(['code' => $currencyCode]);
+        if (null === $currency) {
+            /** @var CurrencyInterface $currency */
+            $currency = $this->createCurrency($currencyCode, mt_rand(0, 200) / 100);
+
+            $this->currencyRepository->add($currency);
+        }
 
         return $currency;
     }

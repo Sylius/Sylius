@@ -41,17 +41,17 @@ class ExpressionBuilder implements ExpressionBuilderInterface
     /**
      * {@inheritdoc}
      */
-    public function andX($expressions)
+    public function andX(...$expressions)
     {
-        return $this->expressionBuilder->andX($expressions);
+        return $this->expressionBuilder->andX(...$expressions);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function orX($expressions)
+    public function orX(...$expressions)
     {
-        return $this->expressionBuilder->orX($expressions);
+        return $this->expressionBuilder->orX(...$expressions);
     }
 
     /**

@@ -18,7 +18,7 @@ use Sylius\Component\Taxonomy\Model\TaxonInterface;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class TaxonSpec extends ObjectBehavior
+final class TaxonSpec extends ObjectBehavior
 {
     public function let()
     {

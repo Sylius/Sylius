@@ -12,7 +12,7 @@
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
-use Sylius\Component\Locale\Converter\LocaleNameConverterInterface;
+use Sylius\Component\Locale\Converter\LocaleConverterInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -20,14 +20,14 @@ use Sylius\Component\Locale\Converter\LocaleNameConverterInterface;
 final class LocaleContext implements Context
 {
     /**
-     * @var LocaleNameConverterInterface
+     * @var LocaleConverterInterface
      */
     private $localeNameConverter;
 
     /**
-     * @param LocaleNameConverterInterface $localeNameConverter
+     * @param LocaleConverterInterface $localeNameConverter
      */
-    public function __construct(LocaleNameConverterInterface $localeNameConverter)
+    public function __construct(LocaleConverterInterface $localeNameConverter)
     {
         $this->localeNameConverter = $localeNameConverter;
     }
@@ -36,8 +36,24 @@ final class LocaleContext implements Context
      * @Transform :language
      * @Transform :localeCode
      */
-    public function getLocaleCode($languageName)
+    public function castToLocaleCode($localeName)
     {
-        return $this->localeNameConverter->convertToCode($languageName);
+        try {
+            return $this->localeNameConverter->convertNameToCode($localeName);
+        } catch (\InvalidArgumentException $exception) {
+            return $localeName;
+        }
+    }
+
+    /**
+     * @Transform :localeName
+     */
+    public function castToLocaleName($localeCode)
+    {
+        try {
+            return $this->localeNameConverter->convertCodeToName($localeCode);
+        } catch (\InvalidArgumentException $exception) {
+            return $localeCode;
+        }
     }
 }

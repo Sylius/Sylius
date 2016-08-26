@@ -18,7 +18,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class DataFetcherChoiceTypeSpec extends ObjectBehavior
+final class DataFetcherChoiceTypeSpec extends ObjectBehavior
 {
     function let()
     {

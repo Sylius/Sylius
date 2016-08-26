@@ -1,0 +1,8 @@
+# This file is a part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius_shop_payum_capture:
+    resource: "@PayumBundle/Resources/config/routing/capture.xml"
+
+sylius_shop_payum_notify:
+    resource: "@PayumBundle/Resources/config/routing/notify.xml"

@@ -25,7 +25,7 @@
         "symfony/framework-bundle": "^2.8"
     },
     "require-dev": {
-        "phpspec/phpspec": "^2.4",
+        "phpspec/phpspec": "^3.0",
         "symfony/yaml": "~2.1"
     },
     "config": {
@@ -47,7 +47,7 @@
     ],
     "extra": {
         "branch-alias": {
-            "dev-master": "0.19-dev"
+            "dev-master": "1.0-dev"
         }
     }
 }

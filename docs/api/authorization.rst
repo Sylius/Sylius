@@ -52,7 +52,7 @@ Definition
 
 .. code-block:: text
 
-    GET /oauth/v2/token
+    GET /api/oauth/v2/token
 
 +---------------+----------------+--------------------------------------------------------------------------------------------------+
 | Parameter     | Parameter type | Description                                                                                      |
@@ -77,19 +77,17 @@ Example
 
 .. code-block:: bash
 
-    curl http://sylius.dev/oauth/v2/token
+    curl http://sylius.dev/api/oauth/v2/token
         -d "client_id"=demo_client
         -d "client_secret"=secret_demo_client
         -d "grant_type"=password
         -d "username"=api@example.com
-        -d "password"=api
+        -d "password"=sylius-api
 
 .. tip::
 
-    In a developer environment there is a default API user and client data. To use this credentials you have to load `API`__ data fixtures.
+    In a developer environment there is a default API user and client data. To use this credentials you have to load data fixtures.
     Otherwise you have to use your user data and replace client id and client secret with data generated in a previous step.
-
-__ https://github.com/Sylius/Sylius/blob/master/src/Sylius/Bundle/FixturesBundle/DataFixtures/ORM/LoadApiData.php
 
 Example Response
 ................
@@ -137,7 +135,7 @@ Definition
 
 .. code-block:: text
 
-    GET /oauth/v2/token
+    GET /api/oauth/v2/token
 
 +---------------+----------------+---------------------------------------------------+
 | Parameter     | Parameter type |  Description                                      |
@@ -156,7 +154,7 @@ Example
 
 .. code-block:: bash
 
-    curl http://sylius.dev/oauth/v2/token
+    curl http://sylius.dev/api/oauth/v2/token
         -d "client_id"=demo_client
         -d "client_secret"=secret_demo_client
         -d "grant_type"=refresh_token

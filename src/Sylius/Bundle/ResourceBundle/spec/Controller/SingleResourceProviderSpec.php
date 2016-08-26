@@ -22,7 +22,7 @@ use Symfony\Component\HttpFoundation\Request;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SingleResourceProviderSpec extends ObjectBehavior
+final class SingleResourceProviderSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

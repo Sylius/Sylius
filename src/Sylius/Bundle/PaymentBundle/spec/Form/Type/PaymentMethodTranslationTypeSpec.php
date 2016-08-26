@@ -17,7 +17,7 @@ use Symfony\Component\Form\FormBuilder;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class PaymentMethodTranslationTypeSpec extends ObjectBehavior
+final class PaymentMethodTranslationTypeSpec extends ObjectBehavior
 {
     function let()
     {
@@ -49,6 +49,12 @@ class PaymentMethodTranslationTypeSpec extends ObjectBehavior
 
         $builder
             ->add('description', 'textarea', Argument::type('array'))
+            ->willReturn($builder)
+            ->shouldBeCalled()
+        ;
+
+        $builder
+            ->add('instructions', 'textarea', Argument::type('array'))
             ->willReturn($builder)
             ->shouldBeCalled()
         ;

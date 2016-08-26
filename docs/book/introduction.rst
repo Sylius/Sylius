@@ -4,7 +4,7 @@
 Introduction to Sylius
 ======================
 
-Sylius is a game-changing e-commerce solution for PHP, based on the Symfony2 framework.
+Sylius is a game-changing e-commerce solution for PHP, based on the Symfony framework.
 
 Philosophy
 ----------
@@ -24,20 +24,20 @@ And much more, but we will let you discover it yourself.
 The Three Natures of Sylius
 ---------------------------
 
-Sylius is constructed from fully decoupled and flexible e-commerce components for PHP. It is also a set of Symfony2 bundles, which integrate the components into the full-stack framework.
+Sylius is constructed from fully decoupled and flexible e-commerce components for PHP. It is also a set of Symfony bundles, which integrate the components into the full-stack framework.
 On top of that, Sylius is also a complete e-commerce platform crafted from all these building blocks.
 
-It is your choice how to use Sylius, you can benefit from the components with any framework, integrate selected bundles into existing or new Symfony2 app or built your application on top of Sylius platform.
+It is your choice how to use Sylius, you can benefit from the components with any framework, integrate selected bundles into existing or new Symfony app or built your application on top of Sylius platform.
 
 Sylius Platform
 ---------------
 
 This book is about our **full-stack e-commerce platform**, which is a standard Symfony application providing the most common webshop and a foundation for custom systems.
 
-Leveraging Symfony2 Bundles
+Leveraging Symfony Bundles
 ---------------------------
 
-If you prefer to build your very custom system step by step and from scratch, you can integrate the standalone Symfony2 bundles. For the installation instructions, please refer to the appropriate bundle documentation.
+If you prefer to build your very custom system step by step and from scratch, you can integrate the standalone Symfony bundles. For the installation instructions, please refer to the appropriate bundle documentation.
 
 E-Commerce Components for PHP
 -----------------------------

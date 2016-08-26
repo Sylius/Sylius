@@ -7,3 +7,5 @@ sylius:
             main:
                 configuration:
                     countries: البلدان
+                content:
+                    routes: طرق

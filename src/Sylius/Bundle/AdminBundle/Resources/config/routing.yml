@@ -10,6 +10,9 @@ sylius_admin_dashboard:
     defaults:
         _controller: sylius.controller.admin.dashboard:indexAction
 
+sylius_admin_administrator:
+    resource: "@SyliusAdminBundle/Resources/config/routing/administrator.yml"
+
 sylius_admin_channel:
     resource: "@SyliusAdminBundle/Resources/config/routing/channel.yml"
 
@@ -21,7 +24,7 @@ sylius_admin_currency:
 
 sylius_admin_customer:
     resource: "@SyliusAdminBundle/Resources/config/routing/customer.yml"
-    
+
 sylius_admin_locale:
     resource: "@SyliusAdminBundle/Resources/config/routing/locale.yml"
 
@@ -51,14 +54,23 @@ sylius_admin_promotion_coupon:
     resource: "@SyliusAdminBundle/Resources/config/routing/promotion_coupon.yml"
     prefix: /promotions/{promotionId}/coupons/
 
+sylius_admin_route:
+    resource: "@SyliusAdminBundle/Resources/config/routing/route.yml"
+
 sylius_admin_security:
     resource: "@SyliusAdminBundle/Resources/config/routing/security.yml"
 
 sylius_admin_shipping_method:
     resource: "@SyliusAdminBundle/Resources/config/routing/shipping_method.yml"
 
+sylius_admin_static_content:
+    resource: "@SyliusAdminBundle/Resources/config/routing/static_content.yml"
+
 sylius_admin_taxon:
     resource: "@SyliusAdminBundle/Resources/config/routing/taxon.yml"
+
+sylius_admin_user:
+    resource: "@SyliusAdminBundle/Resources/config/routing/user.yml"
 
 sylius_admin_tax_category:
     resource: "@SyliusAdminBundle/Resources/config/routing/tax_category.yml"

@@ -29,7 +29,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ResourceGridViewFactorySpec extends ObjectBehavior
+final class ResourceGridViewFactorySpec extends ObjectBehavior
 {
     function let(DataProviderInterface $dataProvider, ParametersParserInterface $parametersParser)
     {

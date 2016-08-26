@@ -37,14 +37,26 @@ winzou_state_machine:
                 to: completed
         callbacks:
             after:
-                process_order:
-                    on: ["address", "select_shipping"]
+                sylius_process_cart:
+                    on: ["address", "readdress", "select_shipping", "reselect_shipping", "select_payment", "reselect_payment"]
                     do: ["@sylius.order_processing.order_processor", "process"]
                     args: ["object"]
-                recalculate_order:
-                    on: ["address", "readdress", "select_shipping", "reselect_shipping", "select_payment", "reselect_payment"]
-                    do: ["@sylius.order_processing.order_recalculator", "recalculate"]
+                sylius_update_exchange_rate:
+                    on: ["select_payment"]
+                    do: ["@sylius.order_processing.order_exchange_rate_and_currency_updater", "update"]
                     args: ["object"]
+                sylius_create_order:
+                    on: ["complete"]
+                    do: ["@sm.callback.cascade_transition", "apply"]
+                    args: ["object", "event", "'create'", "'sylius_order'"]
+                sylius_create_payment:
+                    on: ["complete"]
+                    do: ["@sm.callback.cascade_transition", "apply"]
+                    args: ["object.getPayments()", "event", "'create'", "'sylius_payment'"]
+                sylius_request_shipping:
+                    on: ["complete"]
+                    do: ["@sm.callback.cascade_transition", "apply"]
+                    args: ["object", "event", "'request_shipping'", "'sylius_order_shipping'"]
 
     sylius_order_shipping:
         class: "%sylius.model.order.class%"
@@ -52,33 +64,24 @@ winzou_state_machine:
         graph: sylius_order_shipping
         state_machine_class: "%sylius.state_machine.class%"
         states:
-            checkout: ~
-            onhold: ~
+            cart: ~
             ready: ~
-            backordered: ~
+            cancelled: ~
             partially_shipped: ~
             shipped: ~
-            cancelled: ~
-            returned: ~
         transitions:
-            hold:
-                from: [checkout]
-                to: onhold
-            create:
-                from: [checkout, onhold]
+            request_shipping:
+                from: [cart]
                 to: ready
+            cancel:
+                from: [ready]
+                to: cancelled
+            partially_ship:
+                from: [ready]
+                to: partially_shipped
             ship:
                 from: [ready, partially_shipped]
                 to: shipped
-            ship_partially:
-                from: [ready, partially_shipped]
-                to: partially_shipped
-            return:
-                from: [partially_shipped, shipped]
-                to: returned
-            cancel:
-                from: [checkout, onhold, ready, backordered]
-                to: cancelled
 
     sylius_order_payment:
         class: "%sylius.model.order.class%"
@@ -86,89 +89,68 @@ winzou_state_machine:
         graph: sylius_order_payment
         state_machine_class: "%sylius.state_machine.class%"
         states:
-            new: ~
-            pending: ~
-            processing: ~
-            completed: ~
-            void: ~
-            failed: ~
+            cart: ~
+            awaiting_payment: ~
+            partially_paid: ~
             cancelled: ~
-            refunded: ~
+            paid: ~
         transitions:
-            create:
-                from: [new]
-                to: pending
-            process:
-                from: [new, pending]
-                to: processing
-            complete:
-                from: [pending, processing]
-                to: completed
-            fail:
-                from: [pending, processing]
-                to: failed
+            request_payment:
+                from: [cart]
+                to: awaiting_payment
+            partially_pay:
+                from: [awaiting_payment]
+                to: partially_paid
             cancel:
-                from: [new, pending, processing]
+                from: [awaiting_payment]
                 to: cancelled
-            refund:
-                from: [completed]
-                to: refunded
+            pay:
+                from: [awaiting_payment, partially_paid]
+                to: paid
 
     sylius_payment:
         callbacks:
             after:
-                sylius_update_order:
-                    on: "complete"
-                    do: ["@sylius.callback.order_payment", "updateOrderOnPayment"]
-                    args: ["object"]
+                process_order:
+                    on: ["fail", "cancel"]
+                    do: ["@sylius.order_processing.order_processor", "process"]
+                    args: ["object.getOrder()"]
 
     sylius_order:
         callbacks:
             after:
-                sylius_update_inventory:
-                    on: "create"
-                    do: ["@sylius.order_processing.inventory_handler", "updateInventory"]
-                    args: ["object"]
-                sylius_update_shipment:
-                    on: "confirm"
-                    do: ["@sylius.callback.shipment_states", "updateOrderShipmentStates"]
-                    args: ["object"]
-                sylius_increment_coupon:
-                    on: "confirm"
-                    do: ["@sylius.callback.coupon_usage", "incrementCouponUsage"]
-                    args: ["object"]
                 sylius_order_confirmation_email:
-                    on: ["confirm"]
+                    on: ["fulfill"]
                     do: ["@sylius.email_manager.order", "sendConfirmationEmail"]
                     args: ["object"]
-                sylius_release_inventory:
-                    on: "release"
-                    do: ["@sylius.order_processing.inventory_handler", "releaseInventory"]
-                    args: ["object"]
-                sylius_release_shipment:
-                    on: "release"
+                sylius_create_payment:
+                    on: ["create"]
                     do: ["@sm.callback.cascade_transition", "apply"]
-                    args: ["object.getShipments()", "event", "'release'", "'sylius_shipment'"]
-                sylius_void_payment:
-                    on: "release"
+                    args: ["object.getPayments()", "event", "'create'", "'sylius_payment'"]
+                sylius_cancel_payment:
+                    on: ["cancel"]
                     do: ["@sm.callback.cascade_transition", "apply"]
-                    args: ["object.getPayments()", "event", "'void'", "'sylius_payment'"]
-                sylius_increment_sold_variants:
-                    on: "confirm"
-                    do: ["@sylius.callback.complete_order", "increaseSoldVariants"]
-                    args: ["object"]
-                sylius_decrement_sold_variants:
-                    on: "cancel"
-                    do: ["@sylius.callback.complete_order", "decreaseSoldVariants"]
-                    args: ["object"]
-                sylius_increment_promotion:
-                    on: "create"
-                    do: ["@sylius.callback.promotion_usage", "incrementPromotionUsage"]
-                    args: ["object"]
-                sylius_decrement_promotion:
-                    on: ["release", "abandon"]
-                    do: ["@sylius.callback.promotion_usage", "decrementPromotionUsage"]
-                    args: ["object"]
+                    args: ["object.getPayments()", "event", "'cancel'", "'sylius_payment'"]
+                sylius_create_shipment:
+                    on: ["create"]
+                    do: ["@sm.callback.cascade_transition", "apply"]
+                    args: ["object.getShipments()", "event", "'create'", "'sylius_shipment'"]
+                sylius_cancel_shipment:
+                    on: ["cancel"]
+                    do: ["@sm.callback.cascade_transition", "apply"]
+                    args: ["object.getShipments()", "event", "'cancel'", "'sylius_shipment'"]
+                sylius_request_payment:
+                    on: ["create"]
+                    do: ["@sm.callback.cascade_transition", "apply"]
+                    args: ["object", "event", "'request_payment'", "'sylius_order_payment'"]
+                sylius_cancel_order_payment:
+                    on: ["cancel"]
+                    do: ["@sm.callback.cascade_transition", "apply"]
+                    args: ["object", "event", "'cancel'", "'sylius_order_payment'"]
+                sylius_cancel_order_shipment:
+                    on: ["cancel"]
+                    do: ["@sm.callback.cascade_transition", "apply"]
+                    args: ["object", "event", "'cancel'", "'sylius_order_shipping'"]
 
     sylius_inventory_unit:
         callbacks:
@@ -181,10 +163,6 @@ winzou_state_machine:
     sylius_shipment:
         callbacks:
             after:
-                sylius_sync_order_ship:
-                    to: "shipped"
-                    do: ["@sylius.callback.order_shipment", "updateOrderShippingState"]
-                    args: ["object.getOrder()"]
                 sylius_shipping_confirmation_email:
                     to: "shipped"
                     do: ["@sylius.email_manager.shipment", "sendConfirmationEmail"]

@@ -17,7 +17,7 @@ use Sylius\Bundle\CartBundle\Templating\Helper\CartHelper;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class CartExtensionSpec extends ObjectBehavior
+final class CartExtensionSpec extends ObjectBehavior
 {
     function let(CartHelper $helper)
     {

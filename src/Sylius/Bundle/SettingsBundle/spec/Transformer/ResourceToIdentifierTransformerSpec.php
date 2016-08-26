@@ -19,7 +19,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ResourceToIdentifierTransformerSpec extends ObjectBehavior
+final class ResourceToIdentifierTransformerSpec extends ObjectBehavior
 {
     function let(RepositoryInterface $repository)
     {

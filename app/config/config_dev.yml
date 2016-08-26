@@ -8,9 +8,6 @@ framework:
     router: { resource: "%kernel.root_dir%/config/routing_dev.yml" }
     profiler: { only_exceptions: false }
 
-assetic:
-    use_controller: true
-
 doctrine:
     dbal:
         dbname: "%database_name%_dev"
@@ -27,9 +24,6 @@ monolog:
 
 swiftmailer:
     disable_delivery: true
-
-sylius_channel:
-    fake_channel_support: true
 
 web_profiler:
     toolbar: true

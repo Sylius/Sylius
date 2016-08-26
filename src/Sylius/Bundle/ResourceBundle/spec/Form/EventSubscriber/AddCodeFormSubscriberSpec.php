@@ -24,7 +24,7 @@ use Symfony\Component\Form\FormInterface;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class AddCodeFormSubscriberSpec extends ObjectBehavior
+final class AddCodeFormSubscriberSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

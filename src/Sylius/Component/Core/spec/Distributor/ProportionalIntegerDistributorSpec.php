@@ -17,7 +17,7 @@ use Sylius\Component\Core\Distributor\ProportionalIntegerDistributorInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class ProportionalIntegerDistributorSpec extends ObjectBehavior
+final class ProportionalIntegerDistributorSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

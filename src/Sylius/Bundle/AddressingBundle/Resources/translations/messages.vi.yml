@@ -9,6 +9,7 @@ sylius:
             country: Quốc gia
             first_name: Tên
             last_name: Họ
+            phone_number: Số điện thoại
             postcode: Mã bưu chính
             street: Đường Phố
             province: Tỉnh
@@ -17,10 +18,12 @@ sylius:
             name: Tên
             provinces: Tỉnh
             select: Chọn
+            enabled: Đã kích hoạt
         province:
             name: Tên
             select: Chọn
         zone:
+            add_member: Thêm thành viên
             members: Thành viên
             name: Tên
             type: Phân loại

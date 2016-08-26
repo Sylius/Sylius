@@ -11,15 +11,22 @@
 
 namespace Sylius\Component\Payment;
 
-class PaymentTransitions
+/**
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
+ */
+final class PaymentTransitions
 {
     const GRAPH = 'sylius_payment';
 
-    const SYLIUS_CREATE = 'create';
-    const SYLIUS_PROCESS = 'process';
-    const SYLIUS_COMPLETE = 'complete';
-    const SYLIUS_FAIL = 'fail';
-    const SYLIUS_CANCEL = 'cancel';
-    const SYLIUS_REFUND = 'refund';
-    const SYLIUS_VOID = 'void';
+    const TRANSITION_CREATE = 'create';
+    const TRANSITION_PROCESS = 'process';
+    const TRANSITION_COMPLETE = 'complete';
+    const TRANSITION_FAIL = 'fail';
+    const TRANSITION_CANCEL = 'cancel';
+    const TRANSITION_REFUND = 'refund';
+    const TRANSITION_VOID = 'void';
+
+    private function __construct()
+    {
+    }
 }

@@ -15,7 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Storage\StorageInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
-class SessionStorageSpec extends ObjectBehavior
+final class SessionStorageSpec extends ObjectBehavior
 {
     function let(SessionInterface $session)
     {

@@ -15,7 +15,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\OrderBundle\Form\Type\OrderType;
 use Symfony\Component\Form\FormTypeInterface;
 
-class OrderTypeSpec extends ObjectBehavior
+final class OrderTypeSpec extends ObjectBehavior
 {
     function let()
     {

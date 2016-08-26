@@ -5,10 +5,10 @@ Feature: Clearing cart
     I want to be able to clear my cart
 
     Background:
-        Given the store operates on a single channel in "France"
-        And the store has a product "T-shirt banana" priced at "€12.54"
+        Given the store operates on a single channel in "United States"
+        And the store has a product "T-shirt banana" priced at "$12.54"
         And I add this product to the cart
-        And the store has a product "T-shirt Witcher" priced at "€50.54"
+        And the store has a product "T-shirt Witcher" priced at "$50.54"
         And I add this product to the cart
 
     @ui

@@ -18,7 +18,7 @@ use Sylius\Component\Taxonomy\Repository\TaxonRepositoryInterface;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class TaxonChoiceTypeSpec extends ObjectBehavior
+final class TaxonChoiceTypeSpec extends ObjectBehavior
 {
     function let(TaxonRepositoryInterface $taxonRepository)
     {

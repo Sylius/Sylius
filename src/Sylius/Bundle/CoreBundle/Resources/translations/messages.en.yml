@@ -33,6 +33,8 @@ sylius:
             currencies: Currencies
             shipping_methods: Shipping Methods
             payment_methods: Payment Methods
+            tax_calculation_strategy: Tax calculation strategy
+            tax_zone_default: Default tax zone
             theme: Theme
             hostname: Hostname
         image:
@@ -109,7 +111,6 @@ sylius:
         user_filter:
             query: Search
         variant:
-            available_on_demand: Available on demand
             depth: Depth
             height: Height
             images: Images
@@ -151,10 +152,18 @@ sylius:
         user_confirmation:
             name: User confirmation
             subject: Welcome to our store
-            content: Welcome to our store<br/><br/>You have just been registered.<br/>Thank you {{ user.username }}.
+            content: Welcome to our store<br/><br/>You have just been registered.<br/>Thank you %username%.
         password_reset:
             name: Password reset
-            content: <h3>Hello {{ user.username }}</h3>To reset your password - please visit {{ url }} <br/><br/>Regards, the Team.
+            content: <h3>Hello %username%</h3>To reset your password - please visit %url% <br/><br/>Regards, the Team.
+        verification:
+            name: Email address verification
+            content: To verify your email address - please visit %url%
+
+    payum_gateway:
+        cash_on_delivery: Cash on delivery
+        offline: Offline
+        paypal_express_checkout: Paypal Express Checkout
 
     shipping_method_resolver:
         by_zones_and_channel: By zones and channel

@@ -11,17 +11,9 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="http://symfony.com/schema/dic/services
-                               http://symfony.com/schema/dic/services/services-1.0.xsd">
-
-    <parameters>
-        <parameter key="sylius.currency_importer.open_exchange_rates.class">Sylius\Component\Currency\Importer\OpenExchangeRatesImporter</parameter>
-    </parameters>
-
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="sylius.currency_importer.open_exchange_rates" class="%sylius.currency_importer.open_exchange_rates.class%">
+        <service id="sylius.currency_importer.open_exchange_rates" class="Sylius\Component\Currency\Importer\OpenExchangeRatesImporter">
             <argument type="service" id="sylius.manager.currency" />
             <argument type="service" id="sylius.factory.currency" />
             <argument type="collection">
@@ -30,5 +22,4 @@
         </service>
         <service id="sylius.currency_importer.oer" alias="sylius.currency_importer.open_exchange_rates" />
     </services>
-
 </container>

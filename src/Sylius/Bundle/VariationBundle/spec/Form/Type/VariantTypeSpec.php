@@ -18,7 +18,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class VariantTypeSpec extends ObjectBehavior
+final class VariantTypeSpec extends ObjectBehavior
 {
     function let()
     {

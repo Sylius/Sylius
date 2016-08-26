@@ -98,7 +98,6 @@ Response
                         "name": "FedEx World Shipping",
                         "updated_at": "2014-11-26T23:00:15+0000"
                     },
-                    "state": "backordered",
                     "updated_at": "2014-11-26T23:00:34+0000"
                 }
             ]
@@ -159,7 +158,6 @@ Response
             "name": "FedEx World Shipping",
             "updated_at": "2014-11-26T23:00:15+0000"
         },
-        "state": "backordered",
         "updated_at": "2014-11-26T23:00:34+0000"
     }
 

@@ -1,15 +1,13 @@
-Symfony2 Bundles
-================
+Symfony Bundles
+===============
 
 .. toctree::
     :hidden:
 
     general/index
     SyliusAddressingBundle/index
-    SyliusArchetypeBundle/index
     SyliusAttributeBundle/index
     SyliusCartBundle/index
-    SyliusContactBundle/index
     SyliusFixturesBundle/index
     SyliusFlowBundle/index
     SyliusGridBundle/index

@@ -19,7 +19,7 @@ use Sylius\Component\Inventory\Model\StockableInterface;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
 use Symfony\Component\Validator\ConstraintValidator;
 
-class InStockValidatorSpec extends ObjectBehavior
+final class InStockValidatorSpec extends ObjectBehavior
 {
     function let(AvailabilityCheckerInterface $availabilityChecker)
     {

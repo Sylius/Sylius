@@ -24,7 +24,7 @@ use Sylius\Component\Grid\Definition\Grid;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class GridSpec extends ObjectBehavior
+final class GridSpec extends ObjectBehavior
 {
     function let()
     {
@@ -44,7 +44,7 @@ class GridSpec extends ObjectBehavior
     {
         $this->getCode()->shouldReturn('sylius_admin_tax_category');
     }
-    
+
     function it_has_driver()
     {
         $this->getDriver()->shouldReturn('doctrine/orm');
@@ -64,18 +64,18 @@ class GridSpec extends ObjectBehavior
         $this->setDriverConfiguration(['foo' => 'bar']);
         $this->getDriverConfiguration()->shouldReturn(['foo' => 'bar']);
     }
-    
+
     function it_has_empty_sorting_configuration_by_default()
     {
         $this->getSorting()->shouldReturn([]);
     }
-    
+
     function it_can_have_sorting_configuration()
     {
         $this->setSorting(['name' => 'desc']);
         $this->getSorting()->shouldReturn(['name' => 'desc']);
     }
-    
+
     function it_does_not_have_any_fields_by_default()
     {
         $this->getFields()->shouldReturn([]);
@@ -84,7 +84,7 @@ class GridSpec extends ObjectBehavior
     function it_can_have_field_definitions(Field $field)
     {
         $field->getName()->willReturn('description');
-        
+
         $this->addField($field);
         $this->getField('description')->shouldReturn($field);
     }
@@ -101,12 +101,12 @@ class GridSpec extends ObjectBehavior
             ->during('addField', [$secondField])
         ;
     }
-    
+
     function it_knows_if_field_with_given_name_already_exists(Field $field)
     {
         $field->getName()->willReturn('enabled');
         $this->addField($field);
-        
+
         $this->hasField('enabled')->shouldReturn(true);
         $this->hasField('parent')->shouldReturn(false);
     }

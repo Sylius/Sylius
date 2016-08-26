@@ -14,7 +14,7 @@ namespace Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\CoreBundle\Test\Services\PaymentMethodNameToGatewayConverterInterface;
-use Sylius\Component\Core\Test\Services\SharedStorageInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Payment\Model\PaymentMethodInterface;
 use Sylius\Component\Payment\Repository\PaymentMethodRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
@@ -78,17 +78,7 @@ final class PaymentContext implements Context
      */
     public function storeAllowsPaying($paymentMethodName)
     {
-        $paymentMethod = $this->paymentMethodFactory->createNew();
-        $paymentMethod->setCode('PM_'.$paymentMethodName);
-        $paymentMethod->setName(ucfirst($paymentMethodName));
-        $paymentMethod->setGateway($this->paymentMethodNameToGatewayConverter->convert($paymentMethodName));
-        $paymentMethod->setDescription('Payment method');
-
-        $channel = $this->sharedStorage->get('channel');
-        $channel->addPaymentMethod($paymentMethod);
-
-        $this->sharedStorage->set('payment_method', $paymentMethod);
-        $this->paymentMethodRepository->add($paymentMethod);
+        $this->createPaymentMethodFromNameAndCode($paymentMethodName, 'PM_'.$paymentMethodName, 'Payment method');
     }
 
     /**
@@ -96,10 +86,7 @@ final class PaymentContext implements Context
      */
     public function theStoreHasAPaymentMethodWithACode($paymentMethodName, $paymentMethodCode)
     {
-        $paymentMethod = $this->createPaymentMethodFromNameAndCode($paymentMethodName, $paymentMethodCode);
-
-        $this->sharedStorage->set('payment_method', $paymentMethod);
-        $this->paymentMethodRepository->add($paymentMethod);
+        $this->createPaymentMethodFromNameAndCode($paymentMethodName, $paymentMethodCode);
     }
 
     /**
@@ -113,19 +100,44 @@ final class PaymentContext implements Context
     }
 
     /**
+     * @Given /^(it) has instructions "([^"]+)"$/
+     */
+    public function itHasInstructions(PaymentMethodInterface $paymentMethod, $instructions)
+    {
+        $paymentMethod->setInstructions($instructions);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given the store has :paymentMethodName payment method not assigned to any channel
+     */
+    public function theStoreHasPaymentMethodNotAssignedToAnyChannel($paymentMethodName)
+    {
+        $this->createPaymentMethodFromNameAndCode($paymentMethodName, 'PM_'.$paymentMethodName, 'Payment method', false);
+    }
+
+    /**
      * @param string $name
      * @param string $code
-     *
-     * @return PaymentMethodInterface
+     * @param bool $addForCurrentChannel
+     * @param string $description
      */
-    private function createPaymentMethodFromNameAndCode($name, $code)
+    private function createPaymentMethodFromNameAndCode($name, $code, $description = '', $addForCurrentChannel = true)
     {
         /** @var PaymentMethodInterface $paymentMethod */
         $paymentMethod = $this->paymentMethodFactory->createNew();
-        $paymentMethod->setName($name);
+        $paymentMethod->setName(ucfirst($name));
         $paymentMethod->setCode($code);
         $paymentMethod->setGateway($this->paymentMethodNameToGatewayConverter->convert($name));
+        $paymentMethod->setDescription($description);
 
-        return $paymentMethod;
+        if ($addForCurrentChannel && $this->sharedStorage->has('channel')) {
+            $channel = $this->sharedStorage->get('channel');
+            $channel->addPaymentMethod($paymentMethod);
+        }
+
+        $this->sharedStorage->set('payment_method', $paymentMethod);
+        $this->paymentMethodRepository->add($paymentMethod);
     }
 }

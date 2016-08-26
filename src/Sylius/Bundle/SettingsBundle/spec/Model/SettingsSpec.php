@@ -18,7 +18,7 @@ use Sylius\Bundle\SettingsBundle\Model\SettingsInterface;
 /**
  * @author Steffen Brem <steffenbrem@gmail.com>
  */
-class SettingsSpec extends ObjectBehavior
+final class SettingsSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

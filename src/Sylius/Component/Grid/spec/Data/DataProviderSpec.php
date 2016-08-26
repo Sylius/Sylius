@@ -28,7 +28,7 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class DataProviderSpec extends ObjectBehavior
+final class DataProviderSpec extends ObjectBehavior
 {
     function let(DataSourceProviderInterface $dataSourceProvider, FiltersApplicatorInterface $filtersApplicator, SorterInterface $sorter)
     {
@@ -39,7 +39,7 @@ class DataProviderSpec extends ObjectBehavior
     {
         $this->shouldHaveType('Sylius\Component\Grid\Data\DataProvider');
     }
-    
+
     function it_implements_grid_data_provider_interface()
     {
         $this->shouldImplement(DataProviderInterface::class);

@@ -22,7 +22,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * @author Julien Janvier <j.janvier@gmail.com>
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class CountryTypeSpec extends ObjectBehavior
+final class CountryTypeSpec extends ObjectBehavior
 {
     function let()
     {

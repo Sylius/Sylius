@@ -7,9 +7,9 @@ sylius_api_payment_index:
     defaults:
         _controller: sylius.controller.payment:indexAction
         _sylius:
-            paginate:   $limit
+            paginate: $limit
             filterable: true
-            sortable:   true
+            sortable: true
 
 sylius_api_payment_create:
    path: /
@@ -33,4 +33,4 @@ sylius_api_payment_show:
     path: /{id}
     methods: [GET]
     defaults:
-        _controller: sylius.controller.payment:deleteAction
+        _controller: sylius.controller.payment:showAction

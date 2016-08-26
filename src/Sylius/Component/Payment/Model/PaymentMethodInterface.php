@@ -51,6 +51,16 @@ interface PaymentMethodInterface extends
     /**
      * @return string
      */
+    public function getInstructions();
+
+    /**
+     * @param string $instructions
+     */
+    public function setInstructions($instructions);
+
+    /**
+     * @return string
+     */
     public function getGateway();
 
     /**

@@ -18,15 +18,11 @@ use Symfony\Component\Templating\Helper\Helper;
 class InventoryHelper extends Helper
 {
     /**
-     * Availability checker.
-     *
      * @var AvailabilityCheckerInterface
      */
     private $checker;
 
     /**
-     * Constructor.
-     *
      * @param AvailabilityCheckerInterface $checker
      */
     public function __construct(AvailabilityCheckerInterface $checker)
@@ -35,8 +31,6 @@ class InventoryHelper extends Helper
     }
 
     /**
-     * Check whether stockable is in stock or not.
-     *
      * @param StockableInterface $stockable
      *
      * @return bool
@@ -47,11 +41,8 @@ class InventoryHelper extends Helper
     }
 
     /**
-     * Check whether stock is sufficient for given
-     * stockable and quantity.
-     *
      * @param StockableInterface $stockable
-     * @param int            $quantity
+     * @param int $quantity
      *
      * @return bool
      */

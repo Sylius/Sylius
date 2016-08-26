@@ -3,14 +3,9 @@
 
 sylius:
     form:
-        group:
-            name: Tên
-            roles: Vai trò
         user:
             password:
                 label: Mật khẩu
-        customer:
-            groups: Nhóm
         user_filter:
             query: Tìm kiếm
         user_change_password:

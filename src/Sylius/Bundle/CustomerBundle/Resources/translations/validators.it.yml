@@ -1,0 +1,28 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    group:
+        name:
+            max: 'Il nome del gruppo non dovrebbe contenere più di {{ limit }} caratteri.'
+            min: 'Il nome del gruppo deve contenere almeno {{ limit }} caratteri.'
+            not_blank: Inserire il nome del gruppo.
+    customer:
+        first_name:
+            max: 'Il nome non dovrebbe contenere più di {{ limit }} caratteri.'
+            min: 'Il nome deve contenere almeno {{ limit }} caratteri.'
+            not_blank: Per favore inserisci il tuo nome.
+        last_name:
+            max: 'Il cognome non dovrebbe contenere più di {{ limit }} caratteri.'
+            min: 'Il cognome deve contenere almeno {{ limit }} caratteri.'
+            not_blank: Per favore inserisci il tuo cognome.
+        gender:
+            not_blank: Scegli il tuo sesso.
+        email:
+            already_used: Questa e-mail è già utilizzata, effettua il login o utilizza la password dimenticata.
+            max: "L'e-mail non dovrebbe contenere più di {{ limit }} caratteri."
+            min: "L'e-mail dovrebbe contenere almeno {{ limit }} caratteri."
+            not_blank: Inserisci la tua email.
+            invalid: Questa e-mail non è valida.
+            unique: Questa e-mail è già in uso.
+            registered: Questa e-mail è già utilizzata, effettua il login o utilizza la password dimenticata.

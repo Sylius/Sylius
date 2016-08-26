@@ -32,6 +32,7 @@ final class MainMenuBuilder extends AbstractAdminMenuBuilder
         $this->configureSalesMenu($menu);
         $this->configureCustomersSubMenu($menu);
         $this->configureMarketingSubMenu($menu);
+        $this->configureContentMenu($menu);
         $this->configureConfigurationSubMenu($menu);
 
         $this->eventDispatcher->dispatch(self::EVENT_NAME, new MenuBuilderEvent($this->factory, $menu));
@@ -105,6 +106,29 @@ final class MainMenuBuilder extends AbstractAdminMenuBuilder
             ->addChild('promotions', ['route' => 'sylius_admin_promotion_index'])
             ->setLabel('sylius.menu.admin.main.marketing.promotions')
             ->setLabelAttribute('icon', 'in cart')
+        ;
+    }
+
+    /**
+     * @param ItemInterface $menu
+     */
+    private function configureContentMenu(ItemInterface $menu)
+    {
+        $child = $menu
+            ->addChild('content')
+            ->setLabel('sylius.menu.admin.main.content.header')
+        ;
+
+        $child
+            ->addChild('static_contents', ['route' => 'sylius_admin_static_content_index'])
+            ->setLabel('sylius.menu.admin.main.content.static_contents')
+            ->setLabelAttribute('icon', 'file')
+        ;
+
+        $child
+            ->addChild('routes', ['route' => 'sylius_admin_route_index'])
+            ->setLabel('sylius.menu.admin.main.content.routes')
+            ->setLabelAttribute('icon', 'sitemap')
         ;
     }
 
@@ -193,6 +217,12 @@ final class MainMenuBuilder extends AbstractAdminMenuBuilder
             ->addChild('channels', ['route' => 'sylius_admin_channel_index'])
             ->setLabel('sylius.menu.admin.main.configuration.channels')
             ->setLabelAttribute('icon', 'random')
+        ;
+
+        $configurationSubMenu
+            ->addChild('administrators', ['route' => 'sylius_admin_admin_user_index'])
+            ->setLabel('sylius.menu.admin.main.configuration.admin_users')
+            ->setLabelAttribute('icon', 'users')
         ;
     }
 }

@@ -22,7 +22,7 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class HomepageControllerSpec extends ObjectBehavior
+final class HomepageControllerSpec extends ObjectBehavior
 {
     function let(EngineInterface $templatingEngine)
     {

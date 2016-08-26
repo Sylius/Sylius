@@ -18,7 +18,7 @@ use Symfony\Component\Form\FormTypeInterface;
 /**
  * @author Julien Janvier <j.janvier@gmail.com>
  */
-class ProvinceChoiceTypeSpec extends ObjectBehavior
+final class ProvinceChoiceTypeSpec extends ObjectBehavior
 {
     function let(EntityRepository $entityRepository)
     {

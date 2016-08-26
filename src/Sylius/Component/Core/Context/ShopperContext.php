@@ -14,12 +14,14 @@ namespace Sylius\Component\Core\Context;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
-use Sylius\Component\User\Context\CustomerContextInterface;
+use Sylius\Component\Customer\Context\CustomerContextInterface;
 
 /**
+ * Should not be extended, final removed to make this class lazy.
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-final class ShopperContext implements ShopperContextInterface
+/* final */ class ShopperContext implements ShopperContextInterface
 {
     /**
      * @var ChannelContextInterface
@@ -80,7 +82,7 @@ final class ShopperContext implements ShopperContextInterface
      */
     public function getLocaleCode()
     {
-        return $this->localeContext->getCurrentLocale();
+        return $this->localeContext->getLocaleCode();
     }
 
     /**

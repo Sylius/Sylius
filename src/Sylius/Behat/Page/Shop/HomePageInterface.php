@@ -19,7 +19,42 @@ use Sylius\Behat\Page\SymfonyPageInterface;
 interface HomePageInterface extends SymfonyPageInterface
 {
     /**
+     * @return string
+     */
+    public function getContents();
+
+    /**
      * @return bool
      */
     public function hasLogoutButton();
+
+    /**
+     * @return string
+     */
+    public function getActiveCurrency();
+
+    /**
+     * @return array
+     */
+    public function getAvailableCurrencies();
+
+    /**
+     * @param string $currencyCode
+     */
+    public function switchCurrency($currencyCode);
+
+    /**
+     * @return string
+     */
+    public function getActiveLocale();
+
+    /**
+     * @return array
+     */
+    public function getAvailableLocales();
+
+    /**
+     * @param string $localeCode
+     */
+    public function switchLocale($localeCode);
 }

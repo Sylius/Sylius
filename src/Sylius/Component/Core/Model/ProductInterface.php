@@ -11,10 +11,7 @@
 
 namespace Sylius\Component\Core\Model;
 
-use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Channel\Model\ChannelsAwareInterface;
-use Sylius\Component\Metadata\Model\MetadataSubjectInterface;
 use Sylius\Component\Product\Model\ProductInterface as BaseProductInterface;
 use Sylius\Component\Review\Model\ReviewableInterface;
 use Sylius\Component\Shipping\Model\ShippingCategoryInterface;
@@ -28,7 +25,6 @@ interface ProductInterface extends
     BaseProductInterface,
     TaxonsAwareInterface,
     ChannelsAwareInterface,
-    MetadataSubjectInterface,
     ReviewableInterface
 {
     /*

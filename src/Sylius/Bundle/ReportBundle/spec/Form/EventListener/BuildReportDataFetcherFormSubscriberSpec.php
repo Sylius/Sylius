@@ -25,7 +25,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class BuildReportDataFetcherFormSubscriberSpec extends ObjectBehavior
+final class BuildReportDataFetcherFormSubscriberSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

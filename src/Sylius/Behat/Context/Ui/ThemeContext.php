@@ -14,10 +14,11 @@ namespace Sylius\Behat\Context\Ui;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\Page\Admin\Channel\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Channel\UpdatePageInterface;
-use Sylius\Behat\Page\Shop\LegacyHomePageInterface;
+use Sylius\Behat\Page\Shop\HomePageInterface;
 use Sylius\Bundle\ThemeBundle\Model\ThemeInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Core\Test\Services\SharedStorageInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
@@ -40,7 +41,7 @@ final class ThemeContext implements Context
     private $channelUpdatePage;
 
     /**
-     * @var LegacyHomePageInterface
+     * @var HomePageInterface
      */
     private $homePage;
 
@@ -48,13 +49,13 @@ final class ThemeContext implements Context
      * @param SharedStorageInterface $sharedStorage
      * @param IndexPageInterface $channelIndexPage
      * @param UpdatePageInterface $channelUpdatePage
-     * @param LegacyHomePageInterface $homePage
+     * @param HomePageInterface $homePage
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         IndexPageInterface $channelIndexPage,
         UpdatePageInterface $channelUpdatePage,
-        LegacyHomePageInterface $homePage
+        HomePageInterface $homePage
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->channelIndexPage = $channelIndexPage;
@@ -92,7 +93,7 @@ final class ThemeContext implements Context
     {
         $this->channelIndexPage->open();
 
-        expect($this->channelIndexPage->getUsedThemeName($channel->getCode()))->toBe('');
+        Assert::same($this->channelIndexPage->getUsedThemeName($channel->getCode()), '');
     }
 
     /**
@@ -102,7 +103,7 @@ final class ThemeContext implements Context
     {
         $this->channelIndexPage->open();
 
-        expect($this->channelIndexPage->getUsedThemeName($channel->getCode()))->toBe($theme->getName());
+        Assert::same($this->channelIndexPage->getUsedThemeName($channel->getCode()), $theme->getName());
     }
 
     /**
@@ -110,9 +111,9 @@ final class ThemeContext implements Context
      */
     public function iShouldSeeThemedHomepage(ThemeInterface $theme)
     {
-        $content = file_get_contents(rtrim($theme->getPath(), '/') . '/SyliusWebBundle/views/Frontend/Homepage/main.html.twig');
+        $content = file_get_contents(rtrim($theme->getPath(), '/') . '/SyliusShopBundle/views/Homepage/index.html.twig');
 
-        expect($this->homePage->getContents())->toBe($content);
+        Assert::same($this->homePage->getContents(), $content);
     }
 
     /**
@@ -120,8 +121,8 @@ final class ThemeContext implements Context
      */
     public function iShouldNotSeeThemedHomepage(ThemeInterface $theme)
     {
-        $content = file_get_contents(rtrim($theme->getPath(), '/') . '/SyliusWebBundle/views/Frontend/Homepage/main.html.twig');
+        $content = file_get_contents(rtrim($theme->getPath(), '/') . '/SyliusShopBundle/views/Homepage/index.html.twig');
 
-        expect($this->homePage->getContents())->notToBe($content);
+        Assert::notSame($this->homePage->getContents(), $content);
     }
 }

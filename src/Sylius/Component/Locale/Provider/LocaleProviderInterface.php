@@ -19,12 +19,10 @@ interface LocaleProviderInterface
     /**
      * @return string[]
      */
-    public function getAvailableLocales();
+    public function getAvailableLocalesCodes();
 
     /**
-     * @param string $locale
-     *
-     * @return bool
+     * @return string
      */
-    public function isLocaleAvailable($locale);
+    public function getDefaultLocaleCode();
 }

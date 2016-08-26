@@ -23,7 +23,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class DatetimeFieldTypeSpec extends ObjectBehavior
+final class DatetimeFieldTypeSpec extends ObjectBehavior
 {
     function let(DataExtractorInterface $dataExtractor)
     {

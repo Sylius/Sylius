@@ -12,6 +12,7 @@ sylius:
                     products: Produkter
                     taxons: Taxa
                 configuration:
+                    admin_users: Administratörer
                     channels: Kanaler
                     countries: Länder
                     currencies: Valutor
@@ -30,4 +31,8 @@ sylius:
                     header: Kunder
                 sales:
                     header: Försäljning
-                    orders: Ordrar
+                    orders: Order
+                content:
+                    header: Innehåll
+                    static_contents: Statiskt innehåll
+                    routes: Rutter

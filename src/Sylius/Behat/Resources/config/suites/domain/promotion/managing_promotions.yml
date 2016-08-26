@@ -24,10 +24,9 @@ default:
                 - sylius.behat.context.setup.shipping
                 - sylius.behat.context.setup.order
 
+                - sylius.behat.context.domain.managing_promotions
                 - sylius.behat.context.domain.notification
                 - sylius.behat.context.domain.security
-
-                - sylius.behat.context.domain.promotion
 
             filters:
                 tags: "@managing_promotions && @domain"

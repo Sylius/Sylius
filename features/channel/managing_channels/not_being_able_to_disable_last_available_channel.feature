@@ -14,5 +14,5 @@ Feature: Toggling a channel
         And I want to modify this channel
         When I disable it
         And I save my changes
-        Then I should be notified that at least one channel has to be defined is required
+        Then I should be notified that at least one channel has to be defined
         And channel with name "Web Channel" should still be enabled

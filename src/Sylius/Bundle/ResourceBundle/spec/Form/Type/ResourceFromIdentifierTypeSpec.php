@@ -22,7 +22,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class ResourceFromIdentifierTypeSpec extends ObjectBehavior
+final class ResourceFromIdentifierTypeSpec extends ObjectBehavior
 {
     function let(RepositoryInterface $repository, MetadataInterface $metadata)
     {

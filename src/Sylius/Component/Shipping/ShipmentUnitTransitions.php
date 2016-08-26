@@ -15,10 +15,7 @@ class ShipmentUnitTransitions
 {
     const GRAPH = 'sylius_shipment_unit';
 
-    const SYLIUS_HOLD = 'hold';
-    const SYLIUS_RELEASE = 'release';
-    const SYLIUS_BACKORDER = 'backorder';
+    const SYLIUS_CREATE = 'create';
     const SYLIUS_SHIP = 'ship';
-    const SYLIUS_RETURN = 'return';
     const SYLIUS_CANCEL = 'cancel';
 }

@@ -13,18 +13,18 @@ namespace spec\Sylius\Bundle\CurrencyBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Currency\Model\Currency;
-use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-class CurrencyCodeChoiceTypeSpec extends ObjectBehavior
+final class CurrencyCodeChoiceTypeSpec extends ObjectBehavior
 {
-    function let(CurrencyProviderInterface $currencyProvider)
+    function let(RepositoryInterface $currencyRepository)
     {
-        $this->beConstructedWith($currencyProvider);
+        $this->beConstructedWith($currencyRepository);
     }
 
     function it_is_initializable()
@@ -38,11 +38,11 @@ class CurrencyCodeChoiceTypeSpec extends ObjectBehavior
     }
 
     function it_should_define_assigned_data_class_and_validation_groups(
-        $currencyProvider,
+        RepositoryInterface $currencyRepository,
         OptionsResolver $resolver,
         Currency $currency
     ) {
-        $currencyProvider->getAvailableCurrencies()->shouldBeCalled()->willReturn([$currency]);
+        $currencyRepository->findBy(['enabled' => true])->willReturn([$currency]);
         $currency->getCode()->shouldBeCalled()->willReturn('EUR');
         $currency->getName()->shouldBeCalled()->willReturn('Euro');
 

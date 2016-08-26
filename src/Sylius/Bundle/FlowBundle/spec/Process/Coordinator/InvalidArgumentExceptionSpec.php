@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\FlowBundle\Process\Coordinator;
 
 use PhpSpec\ObjectBehavior;
 
-class InvalidArgumentExceptionSpec extends ObjectBehavior
+final class InvalidArgumentExceptionSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

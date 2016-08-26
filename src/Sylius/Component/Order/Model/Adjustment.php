@@ -69,14 +69,9 @@ class Adjustment implements AdjustmentInterface
     protected $locked = false;
 
     /**
-     * @var int
-     */
-    protected $originId;
-
-    /**
      * @var string
      */
-    protected $originType;
+    protected $originCode;
 
     public function __construct()
     {
@@ -255,33 +250,17 @@ class Adjustment implements AdjustmentInterface
     /**
      * {@inheritdoc}
      */
-    public function getOriginId()
+    public function getOriginCode()
     {
-        return $this->originId;
+        return $this->originCode;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setOriginId($originId)
+    public function setOriginCode($originCode)
     {
-        $this->originId = $originId;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getOriginType()
-    {
-        return $this->originType;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setOriginType($originType)
-    {
-        $this->originType = $originType;
+        $this->originCode = $originCode;
     }
 
     private function recalculateAdjustable()

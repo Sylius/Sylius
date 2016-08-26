@@ -50,9 +50,11 @@ class FiltersApplicator implements FiltersApplicatorInterface
                 continue;
             }
 
-            $filter = $grid->getFilter($name);
+            $gridFilter = $grid->getFilter($name);
 
-            $this->filtersRegistry->get($filter->getType())->apply($dataSource, $name, $data, $filter->getOptions());
+            /** @var FilterInterface $filter */
+            $filter = $this->filtersRegistry->get($gridFilter->getType());
+            $filter->apply($dataSource, $name, $data, $gridFilter->getOptions());
         }
     }
 }

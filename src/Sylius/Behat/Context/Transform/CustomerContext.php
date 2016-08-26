@@ -13,8 +13,9 @@ namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
 use Sylius\Component\Core\Model\CustomerInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\User\Repository\CustomerRepositoryInterface;
+use Sylius\Component\Customer\Repository\CustomerRepositoryInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -32,17 +33,28 @@ final class CustomerContext implements Context
     private $customerFactory;
 
     /**
+     * @var SharedStorageInterface
+     */
+    private $sharedStorage;
+
+    /**
      * @param CustomerRepositoryInterface $customerRepository
      * @param FactoryInterface $customerFactory
+     * @param SharedStorageInterface $sharedStorage
      */
-    public function __construct(CustomerRepositoryInterface $customerRepository, FactoryInterface $customerFactory)
-    {
+    public function __construct(
+        CustomerRepositoryInterface $customerRepository,
+        FactoryInterface $customerFactory,
+        SharedStorageInterface $sharedStorage
+    ) {
         $this->customerRepository = $customerRepository;
         $this->customerFactory = $customerFactory;
+        $this->sharedStorage = $sharedStorage;
     }
 
     /**
      * @Transform :customer
+     * @Transform /^customer "([^"]+)"$/
      */
     public function getOrCreateCustomerByEmail($email)
     {
@@ -56,5 +68,13 @@ final class CustomerContext implements Context
         }
 
         return $customer;
+    }
+
+    /**
+     * @Transform /^(he|his|she|her|the customer of my account)$/
+     */
+    public function getLastCustomer()
+    {
+        return $this->sharedStorage->get('customer');
     }
 }

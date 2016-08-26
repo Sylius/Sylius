@@ -34,6 +34,7 @@ sylius:
             currencies: Valiutos
             shipping_methods: Pristatymo būdai
             payment_methods: Mokėjimo būdai
+            tax_zone_default: Numatyta mokesčių zona
         image:
             file: Paveikslėlis
         locale:
@@ -107,7 +108,6 @@ sylius:
         user_filter:
             query: Ieškoti
         variant:
-            available_on_demand: Prieinamas pagal poreikį
             depth: Gylis
             height: Aukštis
             images: Paveikslėliai

@@ -23,7 +23,7 @@ use Sylius\Component\Shipping\Resolver\DefaultShippingMethodResolverInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class DefaultShippingMethodResolverSpec extends ObjectBehavior
+final class DefaultShippingMethodResolverSpec extends ObjectBehavior
 {
     function let(ShippingMethodRepositoryInterface $shippingMethodRepository)
     {

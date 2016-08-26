@@ -21,7 +21,7 @@ use PhpSpec\ObjectBehavior;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class LoadMetadataSubscriberSpec extends ObjectBehavior
+final class LoadMetadataSubscriberSpec extends ObjectBehavior
 {
     function let()
     {

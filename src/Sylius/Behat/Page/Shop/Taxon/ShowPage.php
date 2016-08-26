@@ -29,7 +29,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
-    public function isProductInList($productName)
+    public function isProductOnList($productName)
     {
         return null !== $this->getDocument()->find('css', sprintf('.sylius-product-name:contains("%s")', $productName));
     }
@@ -40,5 +40,15 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     public function isEmpty()
     {
         return false !== strpos($this->getDocument()->find('css', '.message')->getText(), 'There are no results to display');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isProductWithPriceOnList($productName, $productPrice)
+    {
+        $container = $this->getDocument()->find('css', sprintf('.sylius-product-name:contains("%s")', $productName))->getParent();
+
+        return $productPrice === $container->find('css', '.sylius-product-price')->getText();
     }
 }

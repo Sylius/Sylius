@@ -7,14 +7,21 @@ default:
             contexts_as_services:
                 - sylius.behat.context.hook.doctrine_orm
 
+                - sylius.behat.context.transform.channel
                 - sylius.behat.context.transform.lexical
                 - sylius.behat.context.transform.shared_storage
                 - sylius.behat.context.transform.product
                 - sylius.behat.context.transform.product_option
 
+                - sylius.behat.context.setup.shop_security
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.product
+                - sylius.behat.context.setup.user
 
+                - sylius.behat.context.ui.channel
+                - sylius.behat.context.ui.shop.product
                 - sylius.behat.context.ui.shop.cart
+                - sylius.behat.context.ui.shop.registration
+                - sylius.behat.context.ui.user
             filters:
                 tags: "@shopping_cart && @ui"

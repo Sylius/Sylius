@@ -22,7 +22,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class ZoneMemberTypeSpec extends ObjectBehavior
+final class ZoneMemberTypeSpec extends ObjectBehavior
 {
     function let()
     {

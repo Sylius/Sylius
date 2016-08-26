@@ -19,7 +19,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class UserLoginTypeSpec extends ObjectBehavior
+final class UserLoginTypeSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

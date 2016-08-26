@@ -60,4 +60,18 @@ interface UserOAuthInterface extends UserAwareInterface, ResourceInterface
      * @param string $accessToken
      */
     public function setAccessToken($accessToken);
+
+    /**
+     * Get OAuth refresh token.
+     *
+     * @return string
+     */
+   public function getRefreshToken();
+
+   /**
+    * Set OAuth refresh token.
+    *
+    * @param string $refreshToken
+    */
+   public function setRefreshToken($refreshToken);
 }

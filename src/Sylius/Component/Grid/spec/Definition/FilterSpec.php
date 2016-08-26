@@ -20,7 +20,7 @@ use Prophecy\Argument;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class FilterSpec extends ObjectBehavior
+final class FilterSpec extends ObjectBehavior
 {
     function let()
     {
@@ -36,7 +36,7 @@ class FilterSpec extends ObjectBehavior
     {
         $this->getName()->shouldReturn('keywords');
     }
-    
+
     function it_has_type()
     {
         $this->getType()->shouldReturn('string');
@@ -45,11 +45,11 @@ class FilterSpec extends ObjectBehavior
     function it_has_label_which_defaults_to_name()
     {
         $this->getLabel()->shouldReturn('keywords');
-        
+
         $this->setLabel('Search by keyword');
         $this->getLabel()->shouldReturn('Search by keyword');
     }
-    
+
     function it_has_no_options_by_default()
     {
         $this->getOptions()->shouldReturn([]);

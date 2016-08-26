@@ -5,11 +5,11 @@ Feature: Viewing a product details using permalink
     I want to be able to have access to product page by permalink
 
     Background:
-        Given the store operates on a single channel in "France"
+        Given the store operates on a single channel in "United States"
 
     @ui
     Scenario: Access to detailed product page using permalink
         Given the store has a product "T-shirt banana"
-        When I open page "shop/products/t-shirt-banana"
+        When I open page "products/t-shirt-banana"
         Then I should be on "T-shirt banana" product detailed page
         And I should see the product name "T-shirt banana"

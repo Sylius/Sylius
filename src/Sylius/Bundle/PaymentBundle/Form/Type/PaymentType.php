@@ -38,7 +38,6 @@ class PaymentType extends AbstractResourceType
                 'label' => 'sylius.form.payment.state.header',
                 'choices' => [
                     PaymentInterface::STATE_PROCESSING => 'sylius.form.payment.state.processing',
-                    PaymentInterface::STATE_PENDING => 'sylius.form.payment.state.pending',
                     PaymentInterface::STATE_FAILED => 'sylius.form.payment.state.failed',
                     PaymentInterface::STATE_VOID => 'sylius.form.payment.state.void',
                     PaymentInterface::STATE_COMPLETED => 'sylius.form.payment.state.completed',

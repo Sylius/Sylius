@@ -21,7 +21,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ShippingCategoryTypeSpec extends ObjectBehavior
+final class ShippingCategoryTypeSpec extends ObjectBehavior
 {
     function let()
     {

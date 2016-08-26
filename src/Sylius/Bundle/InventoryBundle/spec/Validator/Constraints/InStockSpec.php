@@ -14,7 +14,7 @@ namespace spec\Sylius\Bundle\InventoryBundle\Validator\Constraints;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\Validator\Constraint;
 
-class InStockSpec extends ObjectBehavior
+final class InStockSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

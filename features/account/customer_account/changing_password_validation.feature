@@ -5,7 +5,7 @@ Feature: Customer password validation
     I want to be prevented from entering incorrect password
 
     Background:
-        Given the store operates on a single channel in "France"
+        Given the store operates on a single channel in "United States"
         And there is a customer account "francis@underwood.com" identified by "whitehouse"
         And I am logged in as "francis@underwood.com"
 

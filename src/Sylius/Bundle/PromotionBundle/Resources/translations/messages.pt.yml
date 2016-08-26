@@ -3,9 +3,16 @@
 
 sylius:
     form:
+        action:
+            percentage_discount_configuration:
+                percentage: Porcentagem
+            shipping_discount_configuration:
+                percentage: Porcentagem
+            type: Tipo
         rule:
             contains_product_configuration:
                 variants: Produtos
+            type: Tipo
         promotion:
             add_action: Adicionar ação
             add_rule: Adicionar regra

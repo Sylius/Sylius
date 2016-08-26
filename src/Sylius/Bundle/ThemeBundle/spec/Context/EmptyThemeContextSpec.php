@@ -21,7 +21,7 @@ use Sylius\Bundle\ThemeBundle\Context\ThemeContextInterface;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class EmptyThemeContextSpec extends ObjectBehavior
+final class EmptyThemeContextSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

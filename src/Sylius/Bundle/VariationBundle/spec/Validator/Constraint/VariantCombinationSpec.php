@@ -17,7 +17,7 @@ use Symfony\Component\Validator\Constraint;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class VariantCombinationSpec extends ObjectBehavior
+final class VariantCombinationSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

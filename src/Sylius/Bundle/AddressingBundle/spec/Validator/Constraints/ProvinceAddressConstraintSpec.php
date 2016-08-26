@@ -16,7 +16,7 @@ use PhpSpec\ObjectBehavior;
 /**
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-class ProvinceAddressConstraintSpec extends ObjectBehavior
+final class ProvinceAddressConstraintSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

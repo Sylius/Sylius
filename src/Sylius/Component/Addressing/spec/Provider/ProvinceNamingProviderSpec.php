@@ -19,7 +19,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class ProvinceNamingProviderSpec extends ObjectBehavior
+final class ProvinceNamingProviderSpec extends ObjectBehavior
 {
     function let(RepositoryInterface $provinceRepository)
     {

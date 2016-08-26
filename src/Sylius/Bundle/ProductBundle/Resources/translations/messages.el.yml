@@ -11,8 +11,5 @@ sylius:
             meta_description: Μετα-περιγραφή
         product_variant:
             available_on: Διαθέσιμο την
-        product_archetype:
-            name: Ονομασία
-            options: Επιλογές
         association_type:
             name: Ονομασία

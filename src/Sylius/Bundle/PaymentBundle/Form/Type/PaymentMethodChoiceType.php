@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\PaymentBundle\Form\Type;
 
 use Sylius\Component\Payment\Model\PaymentInterface;
-use Sylius\Component\Payment\Resolver\MethodsResolverInterface;
+use Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
@@ -32,7 +32,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class PaymentMethodChoiceType extends AbstractType
 {
     /**
-     * @var MethodsResolverInterface
+     * @var PaymentMethodsResolverInterface
      */
     protected $paymentMethodsResolver;
 
@@ -42,11 +42,11 @@ class PaymentMethodChoiceType extends AbstractType
     protected $paymentMethodRepository;
 
     /**
-     * @param MethodsResolverInterface $paymentMethodsResolver
+     * @param PaymentMethodsResolverInterface $paymentMethodsResolver
      * @param RepositoryInterface $paymentMethodRepository
      */
     public function __construct(
-        MethodsResolverInterface $paymentMethodsResolver,
+        PaymentMethodsResolverInterface $paymentMethodsResolver,
         RepositoryInterface $paymentMethodRepository
     ) {
         $this->paymentMethodsResolver = $paymentMethodsResolver;

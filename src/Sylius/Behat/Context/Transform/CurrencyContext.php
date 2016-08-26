@@ -60,10 +60,16 @@ final class CurrencyContext implements Context
 
     /**
      * @Transform :currencyCode
+     * @Transform :firstCurrencyCode
      * @Transform :secondCurrencyCode
      */
     public function getCurrencyCodeByName($currencyName)
     {
+        // If it's already a currency code - just return it.
+        if (strlen($currencyName) === 3 && strtoupper($currencyName) === $currencyName) {
+            return $currencyName;
+        }
+
         return $this->currencyNameConverter->convertToCode($currencyName);
     }
 }

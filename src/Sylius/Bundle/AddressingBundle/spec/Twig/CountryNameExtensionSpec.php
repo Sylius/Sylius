@@ -17,7 +17,7 @@ use Sylius\Component\Addressing\Model\CountryInterface;
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class CountryNameExtensionSpec extends ObjectBehavior
+final class CountryNameExtensionSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

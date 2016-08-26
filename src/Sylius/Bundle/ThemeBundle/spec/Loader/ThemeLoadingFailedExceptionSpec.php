@@ -20,7 +20,7 @@ use Sylius\Bundle\ThemeBundle\Loader\ThemeLoadingFailedException;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class ThemeLoadingFailedExceptionSpec extends ObjectBehavior
+final class ThemeLoadingFailedExceptionSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

@@ -24,7 +24,7 @@ use Symfony\Component\Asset\VersionStrategy\VersionStrategyInterface;
  *
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
-class PathPackageSpec extends ObjectBehavior
+final class PathPackageSpec extends ObjectBehavior
 {
     function let(
         VersionStrategyInterface $versionStrategy,

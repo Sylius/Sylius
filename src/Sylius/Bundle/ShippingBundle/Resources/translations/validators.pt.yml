@@ -1,0 +1,7 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    shipping_category:
+        name:
+            min_length: 'Nome da categoria deve ser pelo menos {{ limit }} caracteres.'

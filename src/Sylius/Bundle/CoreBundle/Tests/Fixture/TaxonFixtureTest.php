@@ -51,9 +51,21 @@ final class TaxonFixtureTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
-    public function taxon_parent_is_optional()
+    public function taxon_children_are_optional()
     {
-        $this->assertConfigurationIsValid([['custom' => [['parent' => 'PARENT-TAXON']]]], 'custom.*.parent');
+        $this->assertConfigurationIsValid([['custom' => [['children' => [['name' => 'foo']]]]]], 'custom.*.children');
+    }
+
+    /**
+     * @test
+     */
+    public function taxon_children_may_contain_nested_array()
+    {
+        $this->assertProcessedConfigurationEquals(
+            [['custom' => [['children' => [['nested' => ['key' => 'value']]]]]]],
+            ['custom' => [['children' => [['nested' => ['key' => 'value']]]]]],
+            'custom.*.children'
+        );
     }
 
     /**

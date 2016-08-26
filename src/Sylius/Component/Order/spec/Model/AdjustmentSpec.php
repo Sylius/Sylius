@@ -22,7 +22,7 @@ use Sylius\Component\Order\Model\OrderItemUnitInterface;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class AdjustmentSpec extends ObjectBehavior
+final class AdjustmentSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
@@ -223,6 +223,12 @@ class AdjustmentSpec extends ObjectBehavior
 
         $this->setAmount(-299);
         $this->shouldNotBeCredit();
+    }
+
+    function its_origin_code_is_mutable()
+    {
+        $this->setOriginCode('TEST_PROMOTION');
+        $this->getOriginCode()->shouldReturn('TEST_PROMOTION');
     }
 
     function it_initializes_creation_date_by_default()

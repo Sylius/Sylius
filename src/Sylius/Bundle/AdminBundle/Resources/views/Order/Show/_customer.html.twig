@@ -2,7 +2,7 @@
     <div class="content">
         <a href="{{ path('sylius_admin_customer_update', {'id': customer.id}) }}" class="header">{{ customer.fullName }}</a>
         <div class="meta">
-            <span class="date">{{ 'sylius.ui.customer_since'|trans }} {{ customer.createdAt|date }}.</span>
+            <span class="date">{{ 'sylius.ui.customer_since'|trans }} {{ customer.createdAt|format_date }}.</span>
         </div>
     </div>
     <div class="extra content">

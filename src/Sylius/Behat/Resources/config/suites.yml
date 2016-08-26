@@ -4,56 +4,33 @@
 imports:
     - suites/cli/installer.yml
 
-    - suites/domain/managing_orders.yml
+    - suites/domain/order/managing_orders.yml
     - suites/domain/product/managing_products.yml
     - suites/domain/product/managing_product_variants.yml
     - suites/domain/promotion/managing_promotions.yml
     - suites/domain/promotion/managing_promotion_coupons.yml
 
-    - suites/legacy/account.yml
-    - suites/legacy/addressing.yml
-    - suites/legacy/cart.yml
-    - suites/legacy/channel.yml
-    - suites/legacy/checkout.yml
-    - suites/legacy/currency.yml
-    - suites/legacy/dashboard.yml
-    - suites/legacy/email.yml
-    - suites/legacy/homepage.yml
-    - suites/legacy/i18n.yml
-    - suites/legacy/inventory.yml
-    - suites/legacy/locale.yml
-    - suites/legacy/metadata.yml
-    - suites/legacy/oauth.yml
-    - suites/legacy/order.yml
-    - suites/legacy/payment.yml
-    - suites/legacy/pricing.yml
-    - suites/legacy/product.yml
-    - suites/legacy/promotion.yml
-    - suites/legacy/report.yml
-    - suites/legacy/review.yml
-    - suites/legacy/search.yml
-    - suites/legacy/security.yml
-    - suites/legacy/settings.yml
-    - suites/legacy/shipping.yml
-    - suites/legacy/taxation.yml
-    - suites/legacy/taxonomy.yml
-    - suites/legacy/user.yml
-
     - suites/ui/account/customer.yml
     - suites/ui/account/login.yml
     - suites/ui/account/registration.yml
+    - suites/ui/account/verification.yml
     - suites/ui/addressing/managing_countries.yml
     - suites/ui/addressing/managing_zones.yml
     - suites/ui/admin/dashboard.yml
+    - suites/ui/admin/login.yml
     - suites/ui/cart/shopping_cart.yml
+    - suites/ui/cmf/managing_routes.yml
+    - suites/ui/cmf/managing_static_contents.yml
+    - suites/ui/cmf/static_content.yml
     - suites/ui/channel/managing_channels.yml
     - suites/ui/channel/products_accessibility_in_multiple_channels.yml
     - suites/ui/channel/theming.yml
     - suites/ui/checkout/checkout.yml
     - suites/ui/checkout/paying_for_order.yml
+    - suites/ui/currency/currencies.yml
     - suites/ui/currency/managing_currencies.yml
+    - suites/ui/locale/locales.yml
     - suites/ui/locale/managing_locales.yml
-    - suites/ui/order/placing_orders.yml
     - suites/ui/order/managing_orders.yml
     - suites/ui/payment/managing_payment_methods.yml
     - suites/ui/product/managing_product_attributes.yml
@@ -71,6 +48,6 @@ imports:
     - suites/ui/taxation/managing_tax_categories.yml
     - suites/ui/taxation/managing_tax_rates.yml
     - suites/ui/taxonomy/managing_taxons.yml
+    - suites/ui/user/managing_administrators.yml
     - suites/ui/user/managing_customers.yml
     - suites/ui/user/managing_users.yml
-    - suites/ui/user/registering.yml

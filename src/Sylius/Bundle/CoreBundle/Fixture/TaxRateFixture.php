@@ -33,13 +33,13 @@ final class TaxRateFixture extends AbstractResourceFixture
     {
         $resourceNode
             ->children()
-                ->scalarNode('name')->cannotBeEmpty()->end()
                 ->scalarNode('code')->cannotBeEmpty()->end()
+                ->scalarNode('name')->cannotBeEmpty()->end()
+                ->scalarNode('zone')->cannotBeEmpty()->end()
+                ->scalarNode('category')->cannotBeEmpty()->end()
                 ->floatNode('amount')->cannotBeEmpty()->end()
                 ->booleanNode('included_in_price')->end()
                 ->scalarNode('calculator')->cannotBeEmpty()->end()
-                ->scalarNode('zone')->cannotBeEmpty()->end()
-                ->scalarNode('tax_category')->cannotBeEmpty()->end()
         ;
     }
 }

@@ -33,17 +33,29 @@ class ChannelType extends BaseChannelType
             ])
             ->add('locales', 'sylius_locale_choice', [
                 'label' => 'sylius.form.channel.locales',
+                'required' => true,
                 'multiple' => true,
             ])
             ->add('defaultLocale', 'sylius_locale_choice', [
                 'label' => 'sylius.form.channel.locale_default',
+                'required' => true,
+                'empty_value' => null,
             ])
             ->add('currencies', 'sylius_currency_choice', [
                 'label' => 'sylius.form.channel.currencies',
+                'required' => true,
                 'multiple' => true,
             ])
             ->add('defaultCurrency', 'sylius_currency_choice', [
                 'label' => 'sylius.form.channel.currency_default',
+                'required' => true,
+            ])
+            ->add('defaultTaxZone', 'sylius_zone_choice', [
+                'required' => false,
+                'label' => 'sylius.form.channel.tax_zone_default',
+            ])
+            ->add('taxCalculationStrategy', 'sylius_tax_calculation_strategy_choice', [
+                'label' => 'sylius.form.channel.tax_calculation_strategy',
             ])
             ->add('themeName', 'sylius_theme_name_choice', [
                 'label' => 'sylius.form.channel.theme',

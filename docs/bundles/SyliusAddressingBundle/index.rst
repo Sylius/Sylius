@@ -1,7 +1,7 @@
 SyliusAddressingBundle
 ======================
 
-This bundle integrates the :doc:`/components/Addressing/index` into Symfony2 and Doctrine.
+This bundle integrates the :doc:`/components/Addressing/index` into Symfony and Doctrine.
 
 With minimal configuration you can introduce addresses, countries, provinces and zones management into your project.
 It's fully customizable, but the default setup should be optimal for most use cases.

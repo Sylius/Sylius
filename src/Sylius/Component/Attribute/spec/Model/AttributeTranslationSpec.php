@@ -17,7 +17,7 @@ use Sylius\Component\Attribute\Model\AttributeTranslationInterface;
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class AttributeTranslationSpec extends ObjectBehavior
+final class AttributeTranslationSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

@@ -3,17 +3,19 @@
 
 security:
     providers:
-        sylius_user_provider:
-            id: sylius.user_provider.name_or_email
+        sylius_admin_user_provider:
+            id: sylius.admin_user.provider.email_or_name_based
+        sylius_shop_user_provider:
+            id: sylius.shop_user.provider.email_or_name_based
     encoders:
         Sylius\Component\User\Model\UserInterface: sha512
     firewalls:
         admin:
             switch_user: true
-            context: user
+            context: admin
             pattern: /admin/.*
             form_login:
-                provider: sylius_user_provider
+                provider: sylius_admin_user_provider
                 login_path: sylius_admin_login
                 check_path: sylius_admin_login_check
                 failure_path: sylius_admin_login
@@ -25,22 +27,9 @@ security:
                 target: sylius_admin_login
             anonymous: true
 
-        administration:
-            switch_user: true
-            context:     user
-            pattern:     /administration/.*
-            form_login:
-                provider:     sylius_user_provider
-                login_path:   /administration/login
-                check_path:   /administration/login-check
-                failure_path: /administration/login
-                default_target_path: /administration/dashboard
-                use_forward:  false
-                use_referer:  true
-            logout:
-                path:   /logout
-                target: /administration/login
-            anonymous: true
+        oauth_token:
+            pattern:  ^/api/oauth/v2/token
+            security: false
 
         api:
             pattern:    ^/api
@@ -50,12 +39,12 @@ security:
 
         shop:
             switch_user: { role: ROLE_ALLOWED_TO_SWITCH }
-            context: user
-            pattern: /shop/.*
+            context: shop
+            pattern: /.*
             form_login:
                 success_handler: sylius.authenticaiton.success_handler
                 failure_handler: sylius.authentication.failure_handler
-                provider: sylius_user_provider
+                provider: sylius_shop_user_provider
                 login_path: sylius_shop_login
                 check_path: sylius_shop_login_check
                 failure_path: sylius_shop_login
@@ -73,49 +62,15 @@ security:
                 target: sylius_shop_login
             anonymous: true
 
-        main:
-            switch_user: { role: ROLE_ALLOWED_TO_SWITCH }
-            context:     user
-            pattern:     /.*
-            form_login:
-                provider: sylius_user_provider
-                login_path: /login
-                check_path: /login_check
-                failure_path: /login
-                default_target_path: /
-                use_forward:  false
-                use_referer: true
-            remember_me:
-                key: %secret%
-                name: APP_REMEMBER_ME
-                lifetime: 31536000
-                always_remember_me: true
-                remember_me_parameter: _remember_me
-            logout: true
-            anonymous: true
-
-        oauth_token:
-            pattern:  ^/oauth/v2/token
-            security: false
-
         dev:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
     access_control:
         - { path: ^/login.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/connect.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: "^/account.*", role: ROLE_USER }
-
-        - { path: ^/shop/login.*, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/shop/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: "/shop/account.*", role: ROLE_USER }
-
-        - { path: ^/administration/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/administration/login-check, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: "^/administration.*", role: ROLE_ADMINISTRATION_ACCESS }
+        - { path: ^/verify, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: "/account.*", role: ROLE_USER }
 
         - { path: ^/admin/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/login-check, role: IS_AUTHENTICATED_ANONYMOUSLY }

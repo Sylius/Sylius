@@ -25,7 +25,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ResourcesResolverSpec extends ObjectBehavior
+final class ResourcesResolverSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

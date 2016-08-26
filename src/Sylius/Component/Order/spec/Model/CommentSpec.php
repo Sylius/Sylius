@@ -18,7 +18,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
 /**
  * @author Myke Hines <myke@webhines.com>
  */
-class CommentSpec extends ObjectBehavior
+final class CommentSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

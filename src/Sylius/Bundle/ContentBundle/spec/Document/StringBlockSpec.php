@@ -18,7 +18,7 @@ use Symfony\Cmf\Bundle\BlockBundle\Doctrine\Phpcr\StringBlock;
 /**
  * @author Magdalena Banasiak <magdalena.banasiak@lakion.com>
  */
-class StringBlockSpec extends ObjectBehavior
+final class StringBlockSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

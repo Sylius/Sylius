@@ -17,7 +17,7 @@ use Prophecy\Argument;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-class PercentageExtensionSpec extends ObjectBehavior
+final class PercentageExtensionSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

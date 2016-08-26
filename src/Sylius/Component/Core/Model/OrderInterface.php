@@ -18,7 +18,7 @@ use Sylius\Component\Payment\Model\PaymentsSubjectInterface;
 use Sylius\Component\Promotion\Model\CouponInterface as BaseCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionCountableSubjectInterface;
 use Sylius\Component\Promotion\Model\PromotionCouponAwareSubjectInterface;
-use Sylius\Component\User\Model\CustomerAwareInterface;
+use Sylius\Component\Customer\Model\CustomerAwareInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -149,11 +149,6 @@ interface OrderInterface extends
      * @param string $state
      */
     public function setShippingState($state);
-
-    /**
-     * @return bool
-     */
-    public function isBackorder();
 
     /**
      * @return ShipmentInterface

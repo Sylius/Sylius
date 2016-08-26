@@ -13,48 +13,67 @@ namespace Sylius\Bundle\InstallerBundle\Requirement;
 
 class Requirement
 {
+    /**
+     * @var string
+     */
     protected $label;
+
+    /**
+     * @var bool
+     */
     protected $fulfilled;
-    protected $expected;
-    protected $actual;
-    protected $help;
+
+    /**
+     * @var bool
+     */
     protected $required;
 
-    public function __construct($label, $fulfilled, $expected, $actual, $required = true, $help = null)
+    /**
+     * @var string|null
+     */
+    protected $help;
+
+    /**
+     * @param string $label
+     * @param bool $fulfilled
+     * @param bool $required
+     * @param string|null $help
+     */
+    public function __construct($label, $fulfilled, $required = true, $help = null)
     {
         $this->label = $label;
-        $this->fulfilled = (Boolean) $fulfilled;
-        $this->expected = $expected;
-        $this->actual = $actual;
-        $this->required = (Boolean) $required;
+        $this->fulfilled = (boolean) $fulfilled;
+        $this->required = (boolean) $required;
         $this->help = $help;
     }
 
+    /**
+     * @return string
+     */
     public function getLabel()
     {
         return $this->label;
     }
 
+    /**
+     * @return bool
+     */
     public function isFulfilled()
     {
         return $this->fulfilled;
     }
 
-    public function getExpected()
-    {
-        return $this->expected;
-    }
-
-    public function getActual()
-    {
-        return $this->actual;
-    }
-
+    /**
+     * @return bool
+     */
     public function isRequired()
     {
         return $this->required;
     }
 
+    /**
+     * @return string|null
+     */
     public function getHelp()
     {
         return $this->help;

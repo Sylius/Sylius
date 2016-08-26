@@ -19,11 +19,21 @@ use Sylius\Behat\Page\PageInterface;
 interface ThankYouPageInterface extends PageInterface
 {
     /**
-     * @param string $name
-     *
      * @return bool
      */
-    public function hasThankYouMessageFor($name);
+    public function hasThankYouMessage();
+
+    /**
+     * @return string
+     */
+    public function getInstructions();
+
+    /**
+     * @return bool
+     */
+    public function hasPayAction();
+    
+    public function pay();
 
     /**
      * @param int $timeout
@@ -32,4 +42,11 @@ interface ThankYouPageInterface extends PageInterface
      * @throws \InvalidArgumentException
      */
     public function waitForResponse($timeout, array $parameters = []);
+
+    /**
+     * @param string $paymentMethodName
+     */
+    public function choosePaymentMethod($paymentMethodName);
+
+    public function saveChanges();
 }

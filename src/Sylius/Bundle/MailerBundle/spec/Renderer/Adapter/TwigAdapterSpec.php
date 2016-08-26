@@ -20,7 +20,7 @@ use Sylius\Component\Mailer\Renderer\RenderedEmail;
 use Sylius\Component\Mailer\SyliusMailerEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
-class TwigAdapterSpec extends ObjectBehavior
+final class TwigAdapterSpec extends ObjectBehavior
 {
     function let(\Twig_Environment $twig)
     {

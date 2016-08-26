@@ -23,14 +23,13 @@
         "php": "^5.6|^7.0",
 
         "stof/doctrine-extensions-bundle": "~1.1",
-        "sylius/order": "^0.19",
-        "sylius/money-bundle": "^0.19",
-        "sylius/resource-bundle": "^0.19",
-        "sylius/sequence-bundle": "^0.19",
+        "sylius/order": "^1.0",
+        "sylius/money-bundle": "^1.0",
+        "sylius/resource-bundle": "^1.0",
         "symfony/framework-bundle": "^2.8"
     },
     "require-dev": {
-        "phpspec/phpspec": "^2.4",
+        "phpspec/phpspec": "^3.0",
         "doctrine/orm": "^2.4.8,<2.5",
         "symfony/form": "^2.8",
         "symfony/validator": "^2.8"
@@ -54,7 +53,7 @@
     ],
     "extra": {
         "branch-alias": {
-            "dev-master": "0.19-dev"
+            "dev-master": "1.0-dev"
         }
     }
 }

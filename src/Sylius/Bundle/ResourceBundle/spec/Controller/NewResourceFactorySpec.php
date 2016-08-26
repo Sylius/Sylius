@@ -19,7 +19,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class NewResourceFactorySpec extends ObjectBehavior
+final class NewResourceFactorySpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

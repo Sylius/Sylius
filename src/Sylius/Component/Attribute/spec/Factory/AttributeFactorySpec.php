@@ -21,7 +21,7 @@ use Sylius\Component\Resource\Factory\FactoryInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class AttributeFactorySpec extends ObjectBehavior
+final class AttributeFactorySpec extends ObjectBehavior
 {
     function let(FactoryInterface $factory, ServiceRegistryInterface $attributeTypesRegistry)
     {
@@ -38,17 +38,14 @@ class AttributeFactorySpec extends ObjectBehavior
         $this->shouldImplement(AttributeFactoryInterface::class);
     }
 
-    function it_creates_new_attribute($attributeTypesRegistry, $factory, Attribute $attribute, AttributeTypeInterface $attributeType)
+    function it_does_not_allow_to_create_new_attribute()
     {
-        $factory->createNew()->willReturn($attribute);
-
-        $attributeType->getStorageType()->willReturn('text');
-        $attributeTypesRegistry->get('text')->willReturn($attributeType);
-
-        $attribute->getType()->willReturn('text');
-        $attribute->setStorageType('text')->shouldBeCalled();
-
-        $this->createNew()->shouldReturn($attribute);
+        $this
+            ->shouldThrow(new \BadMethodCallException(
+                'Method "createNew()" is not supported for attribute factory. Use "createTyped($type)" instead.'
+            ))
+            ->during('createNew')
+        ;
     }
 
     function it_creates_typed_attribute($attributeTypesRegistry, $factory, Attribute $typedAttribute, AttributeTypeInterface $attributeType)

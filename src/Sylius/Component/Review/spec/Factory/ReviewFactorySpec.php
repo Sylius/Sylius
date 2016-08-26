@@ -25,7 +25,7 @@ use Sylius\Component\Review\Model\ReviewInterface;
  * 
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-class ReviewFactorySpec extends ObjectBehavior
+final class ReviewFactorySpec extends ObjectBehavior
 {
     function let(FactoryInterface $factory, RepositoryInterface $subjectRepository)
     {

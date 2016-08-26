@@ -25,7 +25,8 @@ sylius_admin_promotion_coupon_create:
         _sylius:
             factory:
                 method: createForPromotion
-                arguments: [$promotionId]
+                arguments:
+                  - expr:service('sylius.repository.promotion').find($promotionId)
             template: SyliusAdminBundle:Crud:create.html.twig
             grid: sylius_admin_promotion_coupon
             section: admin

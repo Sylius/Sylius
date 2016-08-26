@@ -16,15 +16,15 @@ use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Shop\Account\LoginPageInterface;
 use Sylius\Behat\Page\Shop\Account\ResetPasswordPageInterface;
 use Sylius\Behat\Page\Shop\HomePageInterface;
-use Sylius\Behat\Service\Accessor\EmailCheckerInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
+use Sylius\Component\Core\Test\Services\EmailCheckerInterface;
 use Webmozart\Assert\Assert;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class LoginContext implements Context
+final class LoginContext implements Context
 {
     /**
      * @var HomePageInterface
@@ -97,12 +97,12 @@ class LoginContext implements Context
     }
 
     /**
-     * @When I specify the user name as :userName
+     * @When I specify the username as :username
      * @When I do not specify the user name
      */
-    public function iSpecifyTheUserName($userName = null)
+    public function iSpecifyTheUsername($username = null)
     {
-        $this->loginPage->specifyUserName($userName);
+        $this->loginPage->specifyUsername($username);
     }
 
     /**
@@ -137,6 +137,16 @@ class LoginContext implements Context
     public function iResetIt()
     {
         $this->resetPasswordPage->reset();
+    }
+
+    /**
+     * @When I log in to the admin panel with email :email and password :password
+     */
+    public function iLogInToTheAdminPanelWithEmailAndPassword($email, $password)
+    {
+        $this->iSpecifyTheUserName($email);
+        $this->iSpecifyThePasswordAs($password);
+        $this->iLogIn();
     }
 
     /**
@@ -187,7 +197,7 @@ class LoginContext implements Context
     {
         Assert::true(
             $this->emailChecker->hasRecipient($email),
-            sprintf('Email should be send to %s, but it does not', $email)
+            sprintf('Email should have been sent to %s.', $email)
         );
     }
 

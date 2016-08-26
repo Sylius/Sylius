@@ -18,7 +18,7 @@ use Sylius\Component\Variation\SetBuilder\SetBuilderInterface;
 /**
  * @author Adam Elsodaney <adam.elso@gmail.com>
  */
-class CartesianSetBuilderSpec extends ObjectBehavior
+final class CartesianSetBuilderSpec extends ObjectBehavior
 {
     function it_is_a_set_builder()
     {

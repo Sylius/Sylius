@@ -5,6 +5,12 @@ sylius:
     checkout:
         shipping_method:
             not_blank: Gelieve een verzendmethode te kiezen.
+    customer:
+        currency_code:
+            not_valid: De valutacode die je hebt ingevoerd is ongeldig.
+    order:
+        currency_code:
+            not_valid: De valutacode die je hebt ingevoerd is ongeldig.
     locale:
         code:
             not_blank: Voer een locatie code in.

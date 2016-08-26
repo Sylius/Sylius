@@ -35,6 +35,8 @@ sylius:
             currencies: Pénznemek
             shipping_methods: Szállítási módok
             payment_methods: Fizetési módok
+            tax_calculation_strategy: Adó számítási stratégia
+            tax_zone_default: Alapértelmezett adósáv
             theme: Téma
             hostname: Hoszt neve
         image:
@@ -112,7 +114,6 @@ sylius:
         user_filter:
             query: Keresés
         variant:
-            available_on_demand: Igény szerint rendelkezésre áll
             depth: Mélység
             height: Magasság
             images: Képek
@@ -153,9 +154,16 @@ sylius:
         user_confirmation:
             name: Felhasználói megerősítés
             subject: Üdvözöljük áruházunkban
-            content: 'Üdvözlünk áruházunkban!<br/><br/>Sikeresen regisztráltál.<br/>Köszönjük {{ user.username }}.'
+            content: 'Üdvözlünk áruházunkban!<br/><br/>Sikeresen regisztráltál.<br/>Köszönjük %username%.'
         password_reset:
             name: Jelszó visszaállítás
-            content: '<h3>Szia {{ user.username }}</h3>A jelszavad megváltoztatásához, kérlek látogass ide {{ url }}<br/><br/>Üdvözlettel, a csapat.'
+            content: '<h3>Szia %username%</h3>A jelszavad megváltoztatásához, kérlek látogass ide %url%<br/><br/>Üdvözlettel, a csapat.'
+        verification:
+            name: Email cím hitelesítése
+            content: 'Email címed megerősítéséhez kérlek látogass ide: %url%'
+    payum_gateway:
+        cash_on_delivery: Utánvétel
+        offline: Nem elérhető
+        paypal_express_checkout: PayPal Express Checkout
     shipping_method_resolver:
         by_zones_and_channel: Zóna és csatorna szerint

@@ -20,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class RuleChoiceTypeSpec extends ObjectBehavior
+final class RuleChoiceTypeSpec extends ObjectBehavior
 {
     function let()
     {

@@ -26,7 +26,7 @@ use Symfony\Component\Routing\RouterInterface;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-class ResourceExtensionSpec extends ObjectBehavior
+final class ResourceExtensionSpec extends ObjectBehavior
 {
     function let(RouterInterface $router, Parameters $parameters)
     {

@@ -22,7 +22,7 @@ use Sylius\Component\Promotion\Repository\CouponRepositoryInterface;
  *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class PercentageGenerationPolicySpec extends ObjectBehavior
+final class PercentageGenerationPolicySpec extends ObjectBehavior
 {
     function let(CouponRepositoryInterface $couponRepository)
     {

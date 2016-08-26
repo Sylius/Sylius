@@ -30,10 +30,10 @@
         "zendframework/zend-stdlib": "^3.0"
     },
     "require-dev": {
-        "matthiasnoback/symfony-config-test": "dev-partially-test-below-prototypes as v1.4.0",
-        "matthiasnoback/symfony-dependency-injection-test": "^0.7",
-        "pamil/phpspec-generator-extension": "^0.3",
-        "phpspec/phpspec": "^2.5",
+        "matthiasnoback/symfony-config-test": "^2.0",
+        "matthiasnoback/symfony-dependency-injection-test": "^1.0",
+        "pamil/phpspec-generator-extension": "^0.4",
+        "phpspec/phpspec": "^3.0",
         "phpunit/phpunit": "^5.3"
     },
     "config": {
@@ -46,17 +46,13 @@
     "prefer-stable": true,
     "repositories": [
         {
-            "type": "git",
-            "url": "https://github.com/pamil/SymfonyConfigTest.git"
-        },
-        {
             "type": "path",
             "url": "../../*/*"
         }
     ],
     "extra": {
         "branch-alias": {
-            "dev-master": "0.19-dev"
+            "dev-master": "1.0-dev"
         }
     }
 }

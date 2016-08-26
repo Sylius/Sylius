@@ -7,8 +7,8 @@ sylius_api_promotion_coupon_index:
     defaults:
         _controller: sylius.controller.promotion_coupon:indexAction
         _sylius:
-            paginate:   $limit
-            sortable:   true
+            paginate: $limit
+            sortable: true
             filterable: true
             criteria:
                 promotion: $promotionId

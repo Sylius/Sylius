@@ -12,13 +12,12 @@
 namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
+use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Component\Core\Test\Services\SharedStorageInterface;
+use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
-use Sylius\Component\User\Repository\CustomerRepositoryInterface;
-use Sylius\Component\User\Repository\UserRepositoryInterface;
-use Sylius\Component\User\Security\PasswordUpdaterInterface;
+use Sylius\Component\Customer\Repository\CustomerRepositoryInterface;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
@@ -36,6 +35,11 @@ final class CustomerContext implements Context
     private $customerRepository;
 
     /**
+     * @var ObjectManager
+     */
+    private $customerManager;
+
+    /**
      * @var FactoryInterface
      */
     private $customerFactory;
@@ -48,16 +52,20 @@ final class CustomerContext implements Context
     /**
      * @param SharedStorageInterface $sharedStorage
      * @param CustomerRepositoryInterface $customerRepository
+     * @param ObjectManager $customerManager
      * @param FactoryInterface $customerFactory
+     * @param FactoryInterface $userFactory
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
         CustomerRepositoryInterface $customerRepository,
+        ObjectManager $customerManager,
         FactoryInterface $customerFactory,
         FactoryInterface $userFactory
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->customerRepository = $customerRepository;
+        $this->customerManager = $customerManager;
         $this->customerFactory = $customerFactory;
         $this->userFactory = $userFactory;
     }
@@ -96,6 +104,15 @@ final class CustomerContext implements Context
     }
 
     /**
+     * @Given the store has customer :email with name :fullName since :since
+     */
+    public function theStoreHasCustomerWithNameAndRegistrationDate($email, $fullName, $since)
+    {
+        $names = explode(' ', $fullName);
+        $this->createCustomer($email, $names[0], $names[1], new \DateTime($since));
+    }
+
+    /**
      * @Given there is disabled customer account :email with password :password
      */
     public function thereIsDisabledCustomerAccountWithPassword($email, $password)
@@ -125,11 +142,44 @@ final class CustomerContext implements Context
     }
 
     /**
+     * @Given there is an administrator :name identified by an email :email and a password :password
+     */
+    public function thereIsAdministratorIdentifiedByEmailAndPassword($name, $email, $password)
+    {
+        $names = explode(' ', $name);
+        $firstName = $names[0];
+        $lastName = count($names) > 1 ? $names[1] : null;
+
+        $this->createCustomerWithUserAccount($email, $password, true, $firstName, $lastName, 'ROLE_ADMINISTRATION_ACCESS');
+    }
+
+    /**
+     * @Given /^(his) shipping (address is "(?:[^"]+)", "(?:[^"]+)", "(?:[^"]+)", "(?:[^"]+)" for "(?:[^"]+)")$/
+     */
+    public function heHasShippingAddress(CustomerInterface $customer, AddressInterface $address)
+    {
+        $customer->setShippingAddress($address);
+
+        $this->customerManager->flush();
+    }
+
+    /**
+     * @Given /^(his) billing (address is "(?:[^"]+)", "(?:[^"]+)", "(?:[^"]+)", "(?:[^"]+)" for "(?:[^"]+)")$/
+     */
+    public function heHasBillingAddress(CustomerInterface $customer, AddressInterface $address)
+    {
+        $customer->setBillingAddress($address);
+
+        $this->customerManager->flush();
+    }
+
+    /**
      * @param string $email
      * @param string|null $firstName
      * @param string|null $lastName
+     * @param \DateTime|null $createdAt
      */
-    private function createCustomer($email, $firstName = null, $lastName = null)
+    private function createCustomer($email, $firstName = null, $lastName = null, \DateTime $createdAt = null)
     {
         /** @var CustomerInterface $customer */
         $customer = $this->customerFactory->createNew();
@@ -137,6 +187,9 @@ final class CustomerContext implements Context
         $customer->setFirstName($firstName);
         $customer->setLastName($lastName);
         $customer->setEmail($email);
+        if (null !== $createdAt) {
+            $customer->setCreatedAt($createdAt);
+        }
 
         $this->sharedStorage->set('customer', $customer);
         $this->customerRepository->add($customer);
@@ -148,13 +201,15 @@ final class CustomerContext implements Context
      * @param bool $enabled
      * @param string|null $firstName
      * @param string|null $lastName
+     * @param string|null $role
      */
     private function createCustomerWithUserAccount(
         $email,
         $password,
         $enabled = true,
         $firstName = null,
-        $lastName = null
+        $lastName = null,
+        $role = null
     ) {
         $user = $this->userFactory->createNew();
         /** @var CustomerInterface $customer */
@@ -167,6 +222,7 @@ final class CustomerContext implements Context
         $user->setUsername($email);
         $user->setPlainPassword($password);
         $user->setEnabled($enabled);
+        $user->addRole($role);
 
         $customer->setUser($user);
 

@@ -14,7 +14,7 @@ namespace spec\Sylius\Component\Core\Model;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\CouponInterface;
 
-class CouponSpec extends ObjectBehavior
+final class CouponSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {

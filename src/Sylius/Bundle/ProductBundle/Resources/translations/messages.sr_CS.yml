@@ -7,7 +7,5 @@ sylius:
             name: Ime
         product_variant:
             available_on: Dostupno
-        product_archetype:
-            name: Ime
         association_type:
             name: Ime

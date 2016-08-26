@@ -25,7 +25,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class ZoneMatcherSpec extends ObjectBehavior
+final class ZoneMatcherSpec extends ObjectBehavior
 {
     function let(RepositoryInterface $repository)
     {

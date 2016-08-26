@@ -16,7 +16,7 @@ use PhpSpec\ObjectBehavior;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class ChangeFrequencySpec extends ObjectBehavior
+final class ChangeFrequencySpec extends ObjectBehavior
 {
     function it_initialize_with_always_value()
     {

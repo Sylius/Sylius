@@ -19,7 +19,7 @@ use Sylius\Component\Resource\Metadata\MetadataInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class MetadataSpec extends ObjectBehavior
+final class MetadataSpec extends ObjectBehavior
 {
     function let()
     {

@@ -20,7 +20,7 @@ use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\Form\Test\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class VariantMatchTypeSpec extends ObjectBehavior
+final class VariantMatchTypeSpec extends ObjectBehavior
 {
     function let()
     {

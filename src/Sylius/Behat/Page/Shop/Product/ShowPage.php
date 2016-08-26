@@ -96,7 +96,31 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
 
         $row = $nameTd->getParent();
 
-        return $value === $row->find('css', 'td.sylius-product-attribute-value')->getText();
+        return $value === trim($row->find('css', 'td.sylius-product-attribute-value')->getText());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPrice()
+    {
+        return $this->getElement('product_price')->getText();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isOutOfStock()
+    {
+        return $this->hasElement('out-of-stock');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasAddToCartButton()
+    {
+        return $this->getDocument()->hasButton('Add to cart');
     }
 
     /**
@@ -113,8 +137,10 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
+            'attributes' => '#sylius-product-attributes',
             'name' => '#sylius-product-name',
-            'attributes' => '#sylius-product-attributes'
+            'out-of-stock' => '#sylius-product-out-of-stock',
+            'product_price' => '#product-price'
         ]);
     }
 }

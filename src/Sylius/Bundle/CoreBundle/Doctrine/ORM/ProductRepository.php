@@ -16,7 +16,6 @@ use Sylius\Bundle\ProductBundle\Doctrine\ORM\ProductRepository as BaseProductRep
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
-use Sylius\Component\Product\Model\ArchetypeInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -40,34 +39,20 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
      */
     public function createByTaxonPaginator(TaxonInterface $taxon, array $criteria = [])
     {
+        $root = $taxon->isRoot() ? $taxon : $taxon->getRoot();
+
         $queryBuilder = $this->createQueryBuilder('o');
         $queryBuilder
             ->innerJoin('o.taxons', 'taxon')
+            ->andWhere($queryBuilder->expr()->eq('taxon.root', ':root'))
             ->andWhere($queryBuilder->expr()->orX(
                 'taxon = :taxon',
                 ':left < taxon.left AND taxon.right < :right'
             ))
+            ->setParameter('root', $root)
             ->setParameter('taxon', $taxon)
             ->setParameter('left', $taxon->getLeft())
             ->setParameter('right', $taxon->getRight())
-        ;
-
-        $this->applyCriteria($queryBuilder, $criteria);
-
-        return $this->getPaginator($queryBuilder);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function createByProductArchetypePaginator(ArchetypeInterface $archetype, array $criteria = [])
-    {
-        $queryBuilder = $this->createQueryBuilder('o');
-        $queryBuilder
-            ->innerJoin('o.archetype', 'archetype')
-            ->addSelect('archetype')
-            ->andWhere('archetype = :archetype')
-            ->setParameter('archetype', $archetype)
         ;
 
         $this->applyCriteria($queryBuilder, $criteria);
@@ -102,9 +87,6 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
             ->leftJoin('o.translations', 'translation')
             ->addSelect('variant')
             ->leftJoin('o.variants', 'variant')
-            ->addSelect('archetype')
-            ->leftJoin('o.archetype', 'archetype')
-            ->leftJoin('archetype.translations', 'archetype_translation')
         ;
 
         if (!empty($criteria['name'])) {
@@ -214,11 +196,11 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
             ->andWhere('taxon.code = :code')
             ->innerJoin('o.channels', 'channel')
             ->andWhere('channel = :channel')
-            ->andWhere('o.enabled = 1')
+            ->andWhere('o.enabled = true')
             ->setParameter('code', $code)
             ->setParameter('channel', $channel)
             ->getQuery()
-            ->getResult();
+            ->getResult()
         ;
     }
 
@@ -236,7 +218,7 @@ class ProductRepository extends BaseProductRepository implements ProductReposito
             ->setParameter('slug', $slug)
             ->setParameter('channel', $channel)
             ->getQuery()
-            ->getOneOrNullResult();
+            ->getOneOrNullResult()
         ;
     }
 

@@ -17,7 +17,7 @@ use Sylius\Component\Resource\Event\ResourceEvent;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ResourceControllerEventSpec extends ObjectBehavior
+final class ResourceControllerEventSpec extends ObjectBehavior
 {
     function let()
     {

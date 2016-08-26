@@ -1,0 +1,18 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    form:
+        group:
+            name: Ad
+            roles: Roller
+        customer:
+            first_name: Ad
+            groups: Gruplar
+            last_name: Soyad
+            email: E-posta
+            phone_number: Telefon numarası
+            billing_address: Fatura adresi
+            different_billing_address: Fatura için farklı bir adres kullanmak ister misiniz?
+    gender:
+        unknown: Bilinmiyor

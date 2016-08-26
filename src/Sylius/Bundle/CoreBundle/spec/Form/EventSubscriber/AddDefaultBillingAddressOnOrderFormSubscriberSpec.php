@@ -22,7 +22,7 @@ use Symfony\Component\Form\FormEvents;
  *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class AddDefaultBillingAddressOnOrderFormSubscriberSpec extends ObjectBehavior
+final class AddDefaultBillingAddressOnOrderFormSubscriberSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

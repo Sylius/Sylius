@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\ResourceBundle\DependencyInjection\Compiler;
 
+use Sylius\Component\Resource\Model\ResourceInterface;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Exception\InvalidArgumentException;
@@ -35,7 +36,22 @@ class RegisterResourcesPass implements CompilerPassInterface
         }
 
         foreach ($resources as $alias => $configuration) {
+            $this->validateSyliusResource($configuration['classes']['model']);
             $registry->addMethodCall('addFromAliasAndConfiguration', [$alias, $configuration]);
+        }
+    }
+
+    /**
+     * @param string $class
+     */
+    private function validateSyliusResource($class)
+    {
+        if (!in_array(ResourceInterface::class, class_implements($class), true)) {
+            throw new InvalidArgumentException(sprintf(
+                'Class "%s" must implement "%s" to be registered as a Sylius resource.',
+                $class,
+                ResourceInterface::class
+            ));
         }
     }
 }

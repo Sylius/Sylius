@@ -25,7 +25,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class CouponsEligibilityCheckerSpec extends ObjectBehavior
+final class CouponsEligibilityCheckerSpec extends ObjectBehavior
 {
     function let(EventDispatcherInterface $eventDispatcher)
     {

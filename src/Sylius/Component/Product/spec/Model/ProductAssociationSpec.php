@@ -19,7 +19,7 @@ use Sylius\Component\Product\Model\ProductAssociationInterface;
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class ProductAssociationSpec extends ObjectBehavior
+final class ProductAssociationSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

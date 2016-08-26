@@ -11,7 +11,6 @@ winzou_state_machine:
             checkout: ~
             onhold: ~
             sold: ~
-            backordered: ~
             returned: ~
         transitions:
             hold:
@@ -20,12 +19,9 @@ winzou_state_machine:
             release:
                 from: [onhold]
                 to: checkout
-            backorder:
-                from: [checkout, onhold]
-                to: backordered
             sell:
-                from: [checkout, onhold, backordered]
+                from: [checkout, onhold]
                 to: sold
             return:
-                from: [shipped]
+                from: [sold]
                 to: returned

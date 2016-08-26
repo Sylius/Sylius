@@ -25,7 +25,7 @@ use Sylius\Component\Resource\Metadata\MetadataInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class ResourceGridViewSpec extends ObjectBehavior
+final class ResourceGridViewSpec extends ObjectBehavior
 {
     function let(
         Grid $gridDefinition,
@@ -50,7 +50,7 @@ class ResourceGridViewSpec extends ObjectBehavior
     {
         $this->getMetadata()->shouldReturn($resourceMetadata);
     }
-    
+
     function it_has_request_configuration(RequestConfiguration $requestConfiguration)
     {
         $this->getRequestConfiguration()->shouldReturn($requestConfiguration);

@@ -19,7 +19,7 @@ use Symfony\Component\Form\FormBuilder;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class FixedDiscountConfigurationTypeSpec extends ObjectBehavior
+final class FixedDiscountConfigurationTypeSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

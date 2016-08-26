@@ -13,21 +13,34 @@ namespace spec\Sylius\Component\Core\OrderProcessing;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
+use SM\Factory\FactoryInterface;
+use SM\StateMachine\StateMachineInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\OrderShippingStates;
-use Sylius\Component\Core\Model\Payment;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
+use Sylius\Component\Core\OrderPaymentStates;
+use Sylius\Component\Core\OrderPaymentTransitions;
+use Sylius\Component\Core\OrderProcessing\StateResolver;
 use Sylius\Component\Core\OrderProcessing\StateResolverInterface;
+use Sylius\Component\Core\OrderShippingStates;
+use Sylius\Component\Core\OrderShippingTransitions;
 
 /**
+ * @mixin StateResolver
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-class StateResolverSpec extends ObjectBehavior
+final class StateResolverSpec extends ObjectBehavior
 {
+    function let(FactoryInterface $stateMachineFactory)
+    {
+        $this->beConstructedWith($stateMachineFactory);
+    }
+
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\OrderProcessing\StateResolver');
+        $this->shouldHaveType(StateResolver::class);
     }
 
     function it_implements_Sylius_order_state_resolver_interface()
@@ -35,127 +48,147 @@ class StateResolverSpec extends ObjectBehavior
         $this->shouldImplement(StateResolverInterface::class);
     }
 
-    function it_marks_order_as_a_backorders_if_it_contains_backordered_units(OrderInterface $order)
-    {
-        $order->isBackorder()->shouldBeCalled()->willReturn(true);
-
-        $order->setShippingState(OrderShippingStates::BACKORDER)->shouldBeCalled();
-        $this->resolveShippingState($order);
-    }
-
     function it_marks_order_as_shipped_if_all_shipments_delivered(
+        FactoryInterface $stateMachineFactory,
         OrderInterface $order,
         ShipmentInterface $shipment1,
-        ShipmentInterface $shipment2
+        ShipmentInterface $shipment2,
+        StateMachineInterface $orderStateMachine
     ) {
-        $order->isBackorder()->shouldBeCalled()->willReturn(false);
-        $order->getShipments()->willReturn([$shipment1, $shipment2]);
+        $shipments = new ArrayCollection();
+        $shipments->add($shipment1->getWrappedObject());
+        $shipments->add($shipment2->getWrappedObject());
+
+        $order->getShipments()->willReturn($shipments);
+        $order->getShippingState()->willReturn(OrderShippingStates::STATE_READY);
+        $stateMachineFactory->get($order, OrderShippingTransitions::GRAPH)->willReturn($orderStateMachine);
 
         $shipment1->getState()->willReturn(ShipmentInterface::STATE_SHIPPED);
         $shipment2->getState()->willReturn(ShipmentInterface::STATE_SHIPPED);
 
-        $order->setShippingState(OrderShippingStates::SHIPPED)->shouldBeCalled();
+        $orderStateMachine->apply(OrderShippingTransitions::TRANSITION_SHIP)->shouldBeCalled();
+
         $this->resolveShippingState($order);
     }
 
-    function it_marks_order_as_partially_shipped_if_not_all_shipments_delivered(
+    function it_marks_order_as_partially_shipped_if_some_shipments_are_delivered(
+        FactoryInterface $stateMachineFactory,
         OrderInterface $order,
         ShipmentInterface $shipment1,
-        ShipmentInterface $shipment2
+        ShipmentInterface $shipment2,
+        StateMachineInterface $orderStateMachine
     ) {
-        $order->isBackorder()->shouldBeCalled()->willReturn(false);
-        $order->getShipments()->willReturn([$shipment1, $shipment2]);
+        $shipments = new ArrayCollection();
+        $shipments->add($shipment1->getWrappedObject());
+        $shipments->add($shipment2->getWrappedObject());
+
+        $order->getShipments()->willReturn($shipments);
+        $order->getShippingState()->willReturn(OrderShippingStates::STATE_READY);
+        $stateMachineFactory->get($order, OrderShippingTransitions::GRAPH)->willReturn($orderStateMachine);
 
         $shipment1->getState()->willReturn(ShipmentInterface::STATE_SHIPPED);
-        $shipment2->getState()->willReturn(ShipmentInterface::STATE_READY);
+        $shipment2->getState()->willReturn(ShipmentInterface::STATE_CANCELLED);
 
-        $order->setShippingState(OrderShippingStates::PARTIALLY_SHIPPED)->shouldBeCalled();
+        $orderStateMachine->apply(OrderShippingTransitions::TRANSITION_PARTIALLY_SHIP)->shouldBeCalled();
+
         $this->resolveShippingState($order);
     }
 
-    function it_marks_order_as_returned_if_all_shipments_were_returned(
+    function it_does_not_mark_order_if_it_is_already_in_this_shipping_state(
+        FactoryInterface $stateMachineFactory,
         OrderInterface $order,
         ShipmentInterface $shipment1,
-        ShipmentInterface $shipment2
+        ShipmentInterface $shipment2,
+        StateMachineInterface $orderStateMachine
     ) {
-        $order->isBackorder()->shouldBeCalled()->willReturn(false);
-        $order->getShipments()->willReturn([$shipment1, $shipment2]);
+        $shipments = new ArrayCollection();
+        $shipments->add($shipment1->getWrappedObject());
+        $shipments->add($shipment2->getWrappedObject());
 
-        $shipment1->getState()->willReturn(ShipmentInterface::STATE_RETURNED);
-        $shipment2->getState()->willReturn(ShipmentInterface::STATE_RETURNED);
+        $order->getShipments()->willReturn($shipments);
+        $order->getShippingState()->willReturn(OrderShippingStates::STATE_SHIPPED);
+        $stateMachineFactory->get($order, OrderShippingTransitions::GRAPH)->willReturn($orderStateMachine);
 
-        $order->setShippingState(OrderShippingStates::RETURNED)->shouldBeCalled();
+        $shipment1->getState()->willReturn(ShipmentInterface::STATE_SHIPPED);
+        $shipment2->getState()->willReturn(ShipmentInterface::STATE_SHIPPED);
+
+        $orderStateMachine->apply(OrderShippingTransitions::TRANSITION_SHIP)->shouldNotBeCalled();
+
         $this->resolveShippingState($order);
     }
 
     function it_marks_order_as_completed_if_fully_paid(
-        OrderInterface $order
+        FactoryInterface $stateMachineFactory,
+        StateMachineInterface $stateMachine,
+        OrderInterface $order,
+        PaymentInterface $payment
     ) {
-        $payment1 = new Payment();
-        $payment1->setAmount(10000);
-        $payment1->setState(PaymentInterface::STATE_COMPLETED);
-        $payments = new ArrayCollection([$payment1]);
+        $payment->getAmount()->willReturn(10000);
+        $payment->getState()->willReturn(PaymentInterface::STATE_COMPLETED);
+
+        $payments = new ArrayCollection([$payment->getWrappedObject()]);
 
         $order->hasPayments()->willReturn(true);
         $order->getPayments()->willReturn($payments);
-
+        $order->getPaymentState()->willReturn(OrderPaymentStates::STATE_AWAITING_PAYMENT);
         $order->getTotal()->willReturn(10000);
-        $order->setPaymentState(PaymentInterface::STATE_COMPLETED)->shouldBeCalled();
+
+        $stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH)->willReturn($stateMachine);
+        $stateMachine->can(OrderPaymentTransitions::TRANSITION_PAY)->willReturn(true);
+        $stateMachine->apply(OrderPaymentTransitions::TRANSITION_PAY)->shouldBeCalled();
+
         $this->resolvePaymentState($order);
     }
 
     function it_marks_order_as_completed_if_fully_paid_multiple_payments(
-        OrderInterface $order
+        FactoryInterface $stateMachineFactory,
+        StateMachineInterface $stateMachine,
+        OrderInterface $order,
+        PaymentInterface $payment1,
+        PaymentInterface $payment2
     ) {
-        $payment1 = new Payment();
-        $payment1->setAmount(6000);
-        $payment1->setState(PaymentInterface::STATE_COMPLETED);
-        $payment2 = new Payment();
-        $payment2->setAmount(4000);
-        $payment2->setState(PaymentInterface::STATE_COMPLETED);
-        $payments = new ArrayCollection([$payment1, $payment2]);
+        $payment1->getAmount()->willReturn(6000);
+        $payment1->getState()->willReturn(PaymentInterface::STATE_COMPLETED);
+        $payment2->getAmount()->willReturn(4000);
+        $payment2->getState()->willReturn(PaymentInterface::STATE_COMPLETED);
+
+        $payments = new ArrayCollection([$payment1->getWrappedObject(), $payment2->getWrappedObject()]);
 
         $order->hasPayments()->willReturn(true);
         $order->getPayments()->willReturn($payments);
-
+        $order->getPaymentState()->willReturn(OrderPaymentStates::STATE_AWAITING_PAYMENT);
         $order->getTotal()->willReturn(10000);
-        $order->setPaymentState(PaymentInterface::STATE_COMPLETED)->shouldBeCalled();
+
+        $stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH)->willReturn($stateMachine);
+        $stateMachine->can(OrderPaymentTransitions::TRANSITION_PAY)->willReturn(true);
+        $stateMachine->apply(OrderPaymentTransitions::TRANSITION_PAY)->shouldBeCalled();
+
         $this->resolvePaymentState($order);
     }
 
-    function it_marks_order_as_processing_if_one_of_the_payment_is_processing(OrderInterface $order)
-    {
-        $payment1 = new Payment();
-        $payment1->setAmount(6000);
-        $payment1->setState(PaymentInterface::STATE_PROCESSING);
-        $payment2 = new Payment();
-        $payment2->setAmount(4000);
-        $payment2->setState(PaymentInterface::STATE_NEW);
-        $payments = new ArrayCollection([$payment1, $payment2]);
+    function it_marks_order_as_partially_paid_if_one_of_the_payment_is_processing(
+        FactoryInterface $stateMachineFactory,
+        StateMachineInterface $stateMachine,
+        OrderInterface $order,
+        PaymentInterface $payment1,
+        PaymentInterface $payment2
+    ) {
+        $payment1->getAmount()->willReturn(6000);
+        $payment1->getState()->willReturn(PaymentInterface::STATE_PROCESSING);
+        $payment2->getAmount()->willReturn(4000);
+        $payment2->getState()->willReturn(PaymentInterface::STATE_COMPLETED);
+
+        $payments = new ArrayCollection([$payment1->getWrappedObject(), $payment2->getWrappedObject()]);
 
         $order->hasPayments()->willReturn(true);
         $order->getPayments()->willReturn($payments);
-
+        $order->getPaymentState()->willReturn(OrderPaymentStates::STATE_AWAITING_PAYMENT);
         $order->getTotal()->willReturn(10000);
-        $order->setPaymentState(PaymentInterface::STATE_PROCESSING)->shouldBeCalled();
-        $this->resolvePaymentState($order);
-    }
 
-    function it_marks_order_as_new_if_no_payment_is_in_process(OrderInterface $order)
-    {
-        $payment1 = new Payment();
-        $payment1->setAmount(6000);
-        $payment1->setState(PaymentInterface::STATE_NEW);
-        $payment2 = new Payment();
-        $payment2->setAmount(4000);
-        $payment2->setState(PaymentInterface::STATE_NEW);
-        $payments = new ArrayCollection([$payment1, $payment2]);
+        $stateMachineFactory->get($order, OrderPaymentTransitions::GRAPH)->willReturn($stateMachine);
+        $stateMachine->can(OrderPaymentTransitions::TRANSITION_PARTIALLY_PAY)->willReturn(true);
+        $stateMachine->apply(OrderPaymentTransitions::TRANSITION_PARTIALLY_PAY)->shouldBeCalled();
 
-        $order->hasPayments()->willReturn(true);
-        $order->getPayments()->willReturn($payments);
-
-        $order->getTotal()->willReturn(10000);
-        $order->setPaymentState(PaymentInterface::STATE_NEW)->shouldBeCalled();
         $this->resolvePaymentState($order);
     }
 }

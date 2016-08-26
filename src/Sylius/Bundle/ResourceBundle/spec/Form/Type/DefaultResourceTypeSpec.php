@@ -24,7 +24,7 @@ use Symfony\Component\Form\FormTypeInterface;
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class DefaultResourceTypeSpec extends ObjectBehavior
+final class DefaultResourceTypeSpec extends ObjectBehavior
 {
     function let(MetadataInterface $metadata, DefaultFormBuilderInterface $defaultFormBuilder)
     {

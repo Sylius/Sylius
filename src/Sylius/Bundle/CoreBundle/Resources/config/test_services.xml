@@ -16,33 +16,29 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
     <parameters>
-        <parameter key="sylius.behat.shared_storage.class">Sylius\Component\Core\Test\Services\SharedStorage</parameter>
-        <parameter key="sylius.test.factory.user.class">Sylius\Bundle\CoreBundle\Test\Factory\TestUserFactory</parameter>
         <parameter key="sylius.payment_method_name_to_gateway_converter.class">Sylius\Bundle\CoreBundle\Test\Services\PaymentMethodNameToGatewayConverter</parameter>
 
         <parameter key="sylius.random_invoice_number_generator.class">Sylius\Component\Core\Test\Services\RandomInvoiceNumberGenerator</parameter>
-        <parameter key="sylius.behat.factory.default_france_channel.class">Sylius\Component\Core\Test\Services\DefaultFranceChannelFactory</parameter>
+        <parameter key="sylius.behat.factory.default_united_states_channel.class">Sylius\Component\Core\Test\Services\DefaultUnitedStatesChannelFactory</parameter>
         <parameter key="sylius.behat.factory.default_channel.class">Sylius\Component\Core\Test\Services\DefaultChannelFactory</parameter>
+        <parameter key="sylius.behat.email_checker.class">Sylius\Component\Core\Test\Services\EmailChecker</parameter>
 
         <parameter key="sylius.test.factory.promotion.class">Sylius\Component\Core\Test\Factory\TestPromotionFactory</parameter>
     </parameters>
 
     <services>
-        <service id="sylius.behat.shared_storage" class="%sylius.behat.shared_storage.class%" />
-
-        <service id="sylius.test.factory.user" class="%sylius.test.factory.user.class%">
-            <argument type="service" id="sylius.factory.customer" />
-            <argument type="service" id="sylius.factory.user" />
-        </service>
-
         <!--Paypal-->
         <service id="sylius.invoice_number_generator" class="%sylius.random_invoice_number_generator.class%" />
         <service id="sylius.payment_method_name_to_gateway_converter" class="%sylius.payment_method_name_to_gateway_converter.class%">
             <argument type="service" id="payum" />
         </service>
 
+        <service id="sylius.behat.email_checker" class="%sylius.behat.email_checker.class%">
+            <argument>%kernel.cache_dir%/spool</argument>
+        </service>
+
         <!--Default Store Data-->
-        <service id="sylius.behat.factory.default_france_channel" class="%sylius.behat.factory.default_france_channel.class%">
+        <service id="sylius.behat.factory.default_united_states_channel" class="%sylius.behat.factory.default_united_states_channel.class%">
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="sylius.repository.country" />
             <argument type="service" id="sylius.repository.currency" />
@@ -55,10 +51,18 @@
             <argument type="service" id="sylius.factory.locale" />
             <argument type="service" id="sylius.factory.zone" />
             <argument type="service" id="sylius.factory.zone_member" />
+            <argument>%currency%</argument>
+            <argument>%locale%</argument>
         </service>
         <service id="sylius.behat.factory.default_channel" class="%sylius.behat.factory.default_channel.class%">
             <argument type="service" id="sylius.factory.channel" />
+            <argument type="service" id="sylius.factory.currency" />
+            <argument type="service" id="sylius.factory.locale" />
             <argument type="service" id="sylius.repository.channel" />
+            <argument type="service" id="sylius.repository.currency" />
+            <argument type="service" id="sylius.repository.locale" />
+            <argument>%currency%</argument>
+            <argument>%locale%</argument>
         </service>
 
         <service id="sylius.test.factory.promotion" class="%sylius.test.factory.promotion.class%">

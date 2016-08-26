@@ -22,7 +22,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SettingsFormFactorySpec extends ObjectBehavior
+final class SettingsFormFactorySpec extends ObjectBehavior
 {
     function let(
         ServiceRegistryInterface $schemaRegistry,

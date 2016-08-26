@@ -18,7 +18,7 @@ use Sylius\Component\Promotion\Model\PromotionInterface;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class CouponSpec extends ObjectBehavior
+final class CouponSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

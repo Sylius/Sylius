@@ -5,7 +5,7 @@ Feature: Resetting a password validation
     I need to be prevented from making mistakes in my address email
 
     Background:
-        Given the store operates on a single channel in "France"
+        Given the store operates on a single channel in "United States"
 
     @ui
     Scenario: Trying to reset password without specifying email

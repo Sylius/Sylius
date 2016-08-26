@@ -18,7 +18,7 @@ use Sylius\Component\Association\Model\AssociationTypeInterface;
  * @author Leszek Prabucki <leszek.prabucki@gmail.com>
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class AssociationTypeSpec extends ObjectBehavior
+final class AssociationTypeSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

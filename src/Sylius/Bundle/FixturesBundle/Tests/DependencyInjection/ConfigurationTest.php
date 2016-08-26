@@ -61,8 +61,8 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
                 ]],
             ],
             ['suites' => [
-                'first_suite' => ['fixtures' => ['fixture' => ['options' => [[]], 'priority' => 0]]],
-                'second_suite' => ['fixtures' => ['fixture' => ['options' => [[]], 'priority' => 0]]],
+                'first_suite' => ['fixtures' => ['fixture' => ['name' => 'fixture', 'options' => [[]], 'priority' => 0]]],
+                'second_suite' => ['fixtures' => ['fixture' => ['name' => 'fixture', 'options' => [[]], 'priority' => 0]]],
             ]],
             'suites.*.fixtures'
         );
@@ -98,7 +98,7 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
                 ]]]],
             ],
             ['suites' => ['suite' => ['fixtures' => [
-                'first_fixture' => ['options' => [[]], 'priority' => 0],
+                'first_fixture' => ['name' => 'first_fixture', 'options' => [[]], 'priority' => 0],
             ]]]],
             'suites.*.fixtures'
         );
@@ -119,8 +119,8 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
                 ]]]],
             ],
             ['suites' => ['suite' => ['fixtures' => [
-                'first_fixture' => ['options' => [[]], 'priority' => 0],
-                'second_fixture' => ['options' => [[]], 'priority' => 0],
+                'first_fixture' => ['name' => 'first_fixture', 'options' => [[]], 'priority' => 0],
+                'second_fixture' => ['name' => 'second_fixture', 'options' => [[]], 'priority' => 0],
             ]]]],
             'suites.*.fixtures'
         );
@@ -141,7 +141,7 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
                 ]]]],
             ],
             ['suites' => ['suite' => ['fixtures' => [
-                'fixture' => ['options' => [['option' => 4], ['option' => 2]], 'priority' => 0],
+                'fixture' => ['name' => 'fixture', 'options' => [['option' => 4], ['option' => 2]], 'priority' => 0],
             ]]]],
             'suites.*.fixtures'
         );
@@ -162,7 +162,122 @@ final class ConfigurationTest extends \PHPUnit_Framework_TestCase
                 ]]]],
             ],
             ['suites' => ['suite' => ['fixtures' => [
-                'fixture' => ['options' => [['option' => 4]], 'priority' => 0],
+                'fixture' => ['name' => 'fixture', 'options' => [['option' => 4]], 'priority' => 0],
+            ]]]],
+            'suites.*.fixtures'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function fixtures_options_are_an_array()
+    {
+        $this->assertPartialConfigurationIsInvalid(
+            [['suites' => ['suite' => ['fixtures' => ['fixture' => [
+                'options' => 42,
+            ]]]]]],
+            'suites.*.fixtures'
+        );
+
+        $this->assertPartialConfigurationIsInvalid(
+            [['suites' => ['suite' => ['fixtures' => ['fixture' => [
+                'options' => 'string string',
+            ]]]]]],
+            'suites.*.fixtures'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function listeners_options_are_an_array()
+    {
+        $this->assertPartialConfigurationIsInvalid(
+            [['suites' => ['suite' => ['listeners' => ['listener' => [
+                'options' => 42,
+            ]]]]]],
+            'suites.*.listeners'
+        );
+
+        $this->assertPartialConfigurationIsInvalid(
+            [['suites' => ['suite' => ['listeners' => ['listener' => [
+                'options' => 'string string',
+            ]]]]]],
+            'suites.*.listeners'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function fixtures_options_may_contain_nested_arrays()
+    {
+        $this->assertProcessedConfigurationEquals(
+            [['suites' => ['suite' => ['fixtures' => ['fixture' => [
+                'options' => ['nested' => ['key' => 'value']],
+            ]]]]]],
+            ['suites' => ['suite' => ['fixtures' => ['fixture' => [
+                'options' => [['nested' => ['key' => 'value']]],
+                'name' => 'fixture', // FIXME: something is wrong inside the test library and it's not excluded
+            ]]]]],
+            'suites.*.fixtures.*.options'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function listeners_options_may_contain_nested_arrays()
+    {
+        $this->assertProcessedConfigurationEquals(
+            [['suites' => ['suite' => ['listeners' => ['listener' => [
+                'options' => ['nested' => ['key' => 'value']],
+            ]]]]]],
+            ['suites' => ['suite' => ['listeners' => ['listener' => [
+                'options' => [['nested' => ['key' => 'value']]],
+            ]]]]],
+            'suites.*.listeners.*.options'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function fixtures_can_be_aliased_with_different_names()
+    {
+        $this->assertProcessedConfigurationEquals(
+            [
+                ['suites' => ['suite' => ['fixtures' => [
+                    'admin_user' => ['name' => 'user', 'options' => ['admin' => true]],
+                    'regular_user' => ['name' => 'user', 'options' => ['admin' => false]],
+                ]]]],
+            ],
+            ['suites' => ['suite' => ['fixtures' => [
+                'admin_user' => ['name' => 'user', 'options' => [['admin' => true]], 'priority' => 0],
+                'regular_user' => ['name' => 'user', 'options' => [['admin' => false]], 'priority' => 0],
+            ]]]],
+            'suites.*.fixtures'
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function consecutive_configurations_can_add_aliased_fixtures_to_the_suite()
+    {
+        $this->assertProcessedConfigurationEquals(
+            [
+                ['suites' => ['suite' => ['fixtures' => [
+                    'admin_user' => ['name' => 'user', 'options' => ['admin' => true]],
+                ]]]],
+                ['suites' => ['suite' => ['fixtures' => [
+                    'regular_user' => ['name' => 'user', 'options' => ['admin' => false]],
+                ]]]],
+            ],
+            ['suites' => ['suite' => ['fixtures' => [
+                'admin_user' => ['name' => 'user', 'options' => [['admin' => true]], 'priority' => 0],
+                'regular_user' => ['name' => 'user', 'options' => [['admin' => false]], 'priority' => 0],
             ]]]],
             'suites.*.fixtures'
         );

@@ -34,7 +34,7 @@
 
         <!--Validators-->
         <service id="sylius.review.validator.unique_reviewer_email" class="%sylius.review.validator.unique_reviewer_email.class%">
-            <argument type="service" id="sylius.repository.user" />
+            <argument type="service" id="sylius.repository.shop_user" />
             <argument type="service" id="security.token_storage" />
             <argument type="service" id="security.authorization_checker" />
             <tag name="validator.constraint_validator" alias="sylius_unique_reviewer_email_validator" />

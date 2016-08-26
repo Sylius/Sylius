@@ -20,7 +20,7 @@ use Sylius\Component\Variation\Model\VariantInterface;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class VariantSpec extends ObjectBehavior
+final class VariantSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {

@@ -23,6 +23,7 @@ sylius:
             roles: Ρόλοι
         channel:
             currency_default: Προεπιλεγμένο νόμισμα
+            tax_zone_default: Προεπιλεγμένη φορολογική ζώνη
         image:
             file: Εικόνα
         locale:

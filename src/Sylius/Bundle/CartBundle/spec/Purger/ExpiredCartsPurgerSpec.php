@@ -16,7 +16,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Cart\Repository\CartRepositoryInterface;
 
-class ExpiredCartsPurgerSpec extends ObjectBehavior
+final class ExpiredCartsPurgerSpec extends ObjectBehavior
 {
     function let(ObjectManager $manager, CartRepositoryInterface $repository)
     {

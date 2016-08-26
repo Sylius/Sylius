@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type\Rule;
 
-use Sylius\Bundle\UserBundle\Doctrine\ORM\GroupRepository;
+use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
@@ -23,14 +23,14 @@ use Symfony\Component\Validator\Constraints\Type;
 class CustomerGroupType extends AbstractType
 {
     /**
-     * @var GroupRepository
+     * @var RepositoryInterface
      */
     protected $groupRepository;
 
     /**
-     * @param GroupRepository $groupRepository
+     * @param RepositoryInterface $groupRepository
      */
-    public function __construct(GroupRepository $groupRepository)
+    public function __construct(RepositoryInterface $groupRepository)
     {
         $this->groupRepository = $groupRepository;
     }

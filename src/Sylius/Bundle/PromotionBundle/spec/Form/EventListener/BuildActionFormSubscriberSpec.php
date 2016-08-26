@@ -26,7 +26,7 @@ use Symfony\Component\Form\FormFactoryInterface;
 /**
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
  */
-class BuildActionFormSubscriberSpec extends ObjectBehavior
+final class BuildActionFormSubscriberSpec extends ObjectBehavior
 {
     function let(
         ServiceRegistryInterface $registry,

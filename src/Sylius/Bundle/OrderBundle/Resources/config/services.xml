@@ -17,11 +17,7 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="sylius.form.type.order_state_choice.class">Sylius\Bundle\OrderBundle\Form\Type\OrderStateChoiceType</parameter>
-
         <parameter key="sylius.callback.complete_order.class">Sylius\Bundle\OrderBundle\StateMachineCallback\CompleteOrderCallback</parameter>
-
-        <parameter key="sylius.originator.class">Sylius\Component\Originator\Originator\Originator</parameter>
 
         <parameter key="sylius.order_item_quantity_modifier.class">Sylius\Component\Order\Modifier\OrderItemQuantityModifier</parameter>
         <parameter key="sylius.form.data_mapper.property_path.class">Symfony\Component\Form\Extension\Core\DataMapper\PropertyPathMapper</parameter>
@@ -30,17 +26,12 @@
         <parameter key="sylius.adjustments_aggregator.class">Sylius\Component\Order\Aggregator\AdjustmentsByLabelAggregator</parameter>
 
         <parameter key="sylius.custom_factory.adjustment.class">Sylius\Component\Order\Factory\AdjustmentFactory</parameter>
+
+        <parameter key="sylius.order_number_assigner.class">Sylius\Bundle\OrderBundle\NumberAssigner\OrderNumberAssigner</parameter>
+        <parameter key="sylius.sequential_order_number_generator.class">Sylius\Bundle\OrderBundle\NumberGenerator\SequentialOrderNumberGenerator</parameter>
     </parameters>
 
     <services>
-        <service id="sylius.form.type.order_state_choice" class="%sylius.form.type.order_state_choice.class%">
-            <tag name="form.type" alias="sylius_order_state_choice" />
-        </service>
-
-        <service id="sylius.originator" class="%sylius.originator.class%">
-            <argument type="service" id="doctrine" />
-        </service>
-
         <service id="sylius.callback.complete_order" class="%sylius.callback.complete_order.class%" />
 
         <service id="sylius.order_item_quantity_modifier" class="%sylius.order_item_quantity_modifier.class%">
@@ -58,6 +49,15 @@
 
         <service id="sylius.custom_factory.adjustment" class="%sylius.custom_factory.adjustment.class%" decorates="sylius.factory.adjustment" public="false">
             <argument type="service" id="sylius.custom_factory.adjustment.inner" />
+        </service>
+
+        <service id="sylius.sequential_order_number_generator" class="%sylius.sequential_order_number_generator.class%">
+            <argument type="service" id="sylius.repository.order_sequence" />
+            <argument type="service" id="sylius.factory.order_sequence" />
+        </service>
+
+        <service id="sylius.order_number_assigner" class="%sylius.order_number_assigner.class%">
+            <argument type="service" id="sylius.sequential_order_number_generator" />
         </service>
     </services>
 </container>
