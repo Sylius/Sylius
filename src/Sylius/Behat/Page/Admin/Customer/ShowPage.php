@@ -35,11 +35,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     public function deleteAccount()
     {
         $deleteButton = $this->getElement('delete_account_button');
-        $deleteButton->press();
-
-        $confirmationModal = $this->getDocument()->find('css', '#confirmation-modal');
-        $this->waitForModalToAppear($confirmationModal, 'visible');
-        $confirmationModal->find('css', '#confirmation-button')->press();
+        $deleteButton->pressButton('Delete');
     }
 
     /**
@@ -107,7 +103,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'billing_address' => '#billingAddress address',
             'customer_email' => '#info .content.extra > a',
             'customer_name' => '#info .content > a',
-            'delete_account_button' => '#actions button',
+            'delete_account_button' => '#actions',
             'no_account' => '#no-account',
             'registration_date' => '#info .content .date',
             'shipping_address' => '#shippingAddress address',
