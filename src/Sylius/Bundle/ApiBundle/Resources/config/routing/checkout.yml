@@ -38,6 +38,19 @@ sylius_api_checkout_addressing:
                 graph: sylius_order_checkout
                 transition: address
 
+sylius_api_checkout_readdress:
+    path: /readdress/{orderId}
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.order:applyStateMachineTransitionAction
+        _sylius:
+            repository:
+                method: find
+                arguments: [$orderId]
+            state_machine:
+                graph: sylius_order_checkout
+                transition: readdress
+
 sylius_api_checkout_select_shipping:
     path: /select-shipping/{orderId}
     methods: [PUT]
@@ -52,6 +65,19 @@ sylius_api_checkout_select_shipping:
                 graph: sylius_order_checkout
                 transition: select_shipping
 
+sylius_api_checkout_reselect_shipping:
+    path: /reselect-shipping/{orderId}
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.order:applyStateMachineTransitionAction
+        _sylius:
+            repository:
+                method: find
+                arguments: [$orderId]
+            state_machine:
+                graph: sylius_order_checkout
+                transition: reselect_shipping
+
 sylius_api_checkout_select_payment:
     path: /select-payment/{orderId}
     methods: [PUT]
@@ -65,6 +91,19 @@ sylius_api_checkout_select_payment:
             state_machine:
                 graph: sylius_order_checkout
                 transition: select_payment
+
+sylius_api_checkout_reselect_payment:
+    path: /reselect-payment/{orderId}
+    methods: [PUT]
+    defaults:
+        _controller: sylius.controller.order:applyStateMachineTransitionAction
+        _sylius:
+            repository:
+                method: find
+                arguments: [$orderId]
+            state_machine:
+                graph: sylius_order_checkout
+                transition: reselect_payment
 
 sylius_api_checkout_complete:
     path: /complete/{orderId}
