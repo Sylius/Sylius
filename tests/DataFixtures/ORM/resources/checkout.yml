@@ -28,6 +28,7 @@ Sylius\Component\Core\Model\Channel:
         taxCalculationStrategy: "order_items_based"
         currencies: [@currency]
         shippingMethods: [@ups]
+        paymentMethods: [@cash_on_delivery]
 
 Sylius\Component\Core\Model\Product:
     product1:
@@ -81,6 +82,20 @@ Sylius\Component\Shipping\Model\ShippingMethodTranslation:
         name: 'UPS'
         locale: 'en_US'
         translatable: @ups
+
+Sylius\Component\Payment\Model\PaymentMethod:
+    cash_on_delivery:
+        code: cod
+        enabled: true
+        gateway: 'offline'
+        currentLocale: en_US
+        currentTranslation: @cash_on_delivery_translation1
+
+Sylius\Component\Payment\Model\PaymentMethodTranslation:
+    cash_on_delivery_translation1:
+        name: 'Cach on delivery'
+        locale: 'en_US'
+        translatable: @cash_on_delivery
 
 Sylius\Component\Currency\Model\Currency:
     currency:
