@@ -303,10 +303,10 @@ final class CartContext implements Context
     }
 
     /**
-     * @Given I have :quantity products :product in the cart
-     * @When I add :quantity products :product to the cart
+     * @Given /^I have(?:| added) (\d+) (products "([^"]+)") (?:to|in) the cart$/
+     * @When /^I add(?:|ed) (\d+) (products "([^"]+)") to the cart$/
      */
-    public function iAddProductsToTheCart(ProductInterface $product, $quantity)
+    public function iAddProductsToTheCart($quantity, ProductInterface $product)
     {
         $this->productShowPage->open(['slug' => $product->getSlug()]);
         $this->productShowPage->addToCartWithQuantity($quantity);

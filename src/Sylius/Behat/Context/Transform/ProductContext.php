@@ -34,9 +34,8 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Transform /^product "([^"]+)"$/
-     * @Transform /^"([^"]+)" product$/
-     * @Transform /^"([^"]+)" products$/
+     * @Transform /^product(?:|s) "([^"]+)"$/
+     * @Transform /^"([^"]+)" product(?:|s)$/
      * @Transform /^(?:a|an) "([^"]+)"$/
      * @Transform :product
      */
