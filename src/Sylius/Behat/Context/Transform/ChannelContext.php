@@ -36,6 +36,7 @@ final class ChannelContext implements Context
     /**
      * @Transform /^channel "([^"]+)"$/
      * @Transform /^"([^"]+)" channel/
+     * @Transform /^channel to "([^"]+)"$/
      * @Transform :channel
      */
     public function getChannelByName($channelName)
