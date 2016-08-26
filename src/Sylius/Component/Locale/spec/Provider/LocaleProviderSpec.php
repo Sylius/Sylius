@@ -47,6 +47,14 @@ final class LocaleProviderSpec extends ObjectBehavior
         $this->getAvailableLocalesCodes()->shouldReturn(['en_US']);
     }
 
+    function it_returns_all_defined_locales(RepositoryInterface $localeRepository, LocaleInterface $locale)
+    {
+        $localeRepository->findAll()->willReturn([$locale]);
+        $locale->getCode()->willReturn('en_US');
+
+        $this->getDefinedLocalesCodes()->shouldReturn(['en_US']);
+    }
+
     function it_returns_the_default_locale()
     {
         $this->getDefaultLocaleCode()->shouldReturn('pl_PL');

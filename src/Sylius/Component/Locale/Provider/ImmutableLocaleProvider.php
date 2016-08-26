@@ -19,7 +19,7 @@ final class ImmutableLocaleProvider implements LocaleProviderInterface
     /**
      * @var array
      */
-    private $availableLocalesCodes;
+    private $definedLocalesCodes;
 
     /**
      * @var string
@@ -27,12 +27,12 @@ final class ImmutableLocaleProvider implements LocaleProviderInterface
     private $defaultLocaleCode;
 
     /**
-     * @param array $availableLocalesCodes
+     * @param array $definedLocalesCodes
      * @param string $defaultLocaleCode
      */
-    public function __construct(array $availableLocalesCodes, $defaultLocaleCode)
+    public function __construct(array $definedLocalesCodes, $defaultLocaleCode)
     {
-        $this->availableLocalesCodes = $availableLocalesCodes;
+        $this->definedLocalesCodes = $definedLocalesCodes;
         $this->defaultLocaleCode = $defaultLocaleCode;
     }
 
@@ -41,7 +41,21 @@ final class ImmutableLocaleProvider implements LocaleProviderInterface
      */
     public function getAvailableLocalesCodes()
     {
-        return $this->availableLocalesCodes;
+        return array_keys(
+            array_filter(
+                $this->definedLocalesCodes,
+                function ($locale) {
+                    return $locale;
+                })
+        );
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDefinedLocalesCodes()
+    {
+        return array_keys($this->definedLocalesCodes);
     }
 
     /**

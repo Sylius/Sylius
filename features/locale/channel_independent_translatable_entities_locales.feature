@@ -22,4 +22,4 @@ Feature: Channel independent translatable entities locales
         Given the store has disabled locale "Polish (Poland)"
         When I want to create a new translatable entity
         Then I should be able to translate it in "English (United States)"
-        But I should not be able to translate it in "Polish (Poland)"
+        Then I should be able to translate it in "Polish (Poland)"

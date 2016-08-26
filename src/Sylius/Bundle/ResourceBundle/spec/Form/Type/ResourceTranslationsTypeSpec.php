@@ -47,7 +47,7 @@ final class ResourceTranslationsTypeSpec extends ObjectBehavior
 
     function it_builds_form(LocaleProviderInterface $localeProvider, FormBuilderInterface $builder)
     {
-        $localeProvider->getAvailableLocalesCodes()->willReturn(['pl_PL', 'en_EN', 'en_GB']);
+        $localeProvider->getDefinedLocalesCodes()->willReturn(['pl_PL', 'en_EN', 'en_GB']);
         $localeProvider->getDefaultLocaleCode()->willReturn('en_EN');
 
         $builder
