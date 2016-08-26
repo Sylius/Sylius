@@ -1,4 +1,4 @@
-@inventory
+@checkout_inventory
 Feature: Being unable to buy products that are out of stock
     In order to be sure that products I buy are available
     As a Customer

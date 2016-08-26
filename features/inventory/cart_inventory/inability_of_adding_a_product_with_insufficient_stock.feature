@@ -1,4 +1,4 @@
-@inventory
+@cart_inventory
 Feature: Inability to add a specific product to the cart when it is out of stock
     In order to buy only available products
     As a Visitor

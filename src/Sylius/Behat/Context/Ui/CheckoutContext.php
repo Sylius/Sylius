@@ -986,6 +986,17 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Given /^I should not be notified that (this product) does not have sufficient stock$/
+     */
+    public function iShouldNotBeNotifiedThatThisProductDoesNotHaveSufficientStock(ProductInterface $product)
+    {
+        Assert::false(
+            $this->completePage->hasProductOutOfStockValidationMessage($product),
+            sprintf('I should see validation message for %s product', $product->getName())
+        );
+    }
+
+    /**
      * @return AddressInterface
      */
     private function createDefaultAddress()
