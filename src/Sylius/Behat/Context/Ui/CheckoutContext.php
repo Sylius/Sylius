@@ -483,7 +483,7 @@ final class CheckoutContext implements Context
     {
         Assert::true(
             $this->thankYouPage->hasThankYouMessage(),
-            'I should see thank you message, but I do not'
+            'I should see thank you message, but I do not.'
         );
     }
 
@@ -494,7 +494,7 @@ final class CheckoutContext implements Context
     {
         Assert::false(
             $this->thankYouPage->isOpen(),
-            'I should not see thank you message, but I do'
+            'I should not see thank you message, but I do.'
         );
     }
 

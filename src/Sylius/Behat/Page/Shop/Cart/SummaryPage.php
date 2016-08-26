@@ -187,7 +187,11 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     {
         $message = sprintf('%s does not have sufficient stock.', $product->getName());
 
-        return $this->getElement('validation_errors')->getText() === $message;
+        try {
+            return $this->getElement('validation_errors')->getText() === $message;
+        } catch (ElementNotFoundException $exception) {
+            return false;
+        }
     }
 
     /**

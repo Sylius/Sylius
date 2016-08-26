@@ -468,4 +468,15 @@ final class CartContext implements Context
             sprintf('I should see validation message for %s product', $product->getName())
         );
     }
+
+    /**
+     * @Then /^I should not be notified that (this product) cannot be updated$/
+     */
+    public function iShouldNotBeNotifiedThatThisProductCannotBeUpdated(ProductInterface $product)
+    {
+        Assert::false(
+            $this->summaryPage->hasProductOutOfStockValidationMessage($product),
+            sprintf('I should see validation message for %s product', $product->getName())
+        );
+    }
 }
