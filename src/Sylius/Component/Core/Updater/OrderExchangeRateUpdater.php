@@ -9,35 +9,28 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Core\OrderProcessing;
+namespace Sylius\Component\Core\Updater;
 
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Webmozart\Assert\Assert;
 
 /**
- * @author Anna Walasek <anna.walasek@lakion.com>
+ * @author Jan Góralski <jan.goralski@lakion.com>
  */
-final class OrderExchangeRateAndCurrencyUpdater implements OrderExchngeRateAndCurrencyUpdaterInterface
+final class OrderExchangeRateUpdater implements OrderUpdaterInterface
 {
-    /**
-     * @var CurrencyContextInterface
-     */
-    private $currencyContext;
-
     /**
      * @var RepositoryInterface
      */
     private $currencyRepository;
 
     /**
-     * @param CurrencyContextInterface $currencyContext
      * @param RepositoryInterface $currencyRepository
      */
-    public function __construct(CurrencyContextInterface $currencyContext, RepositoryInterface $currencyRepository)
+    public function __construct(RepositoryInterface $currencyRepository)
     {
-        $this->currencyContext = $currencyContext;
         $this->currencyRepository = $currencyRepository;
     }
 
@@ -46,10 +39,12 @@ final class OrderExchangeRateAndCurrencyUpdater implements OrderExchngeRateAndCu
      */
     public function update(OrderInterface $order)
     {
+        $currencyCode = $order->getCurrencyCode();
         /** @var CurrencyInterface $currency */
-        $currency = $this->currencyRepository->findOneBy(['code' => $this->currencyContext->getCurrencyCode()]);
+        $currency = $this->currencyRepository->findOneBy(['code' => $currencyCode]);
 
-        $order->setCurrencyCode($currency->getCode());
+        Assert::notNull($currency);
+
         $order->setExchangeRate($currency->getExchangeRate());
     }
 }

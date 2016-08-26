@@ -78,6 +78,7 @@ final class CartContext implements Context
     }
 
     /**
+     * @Given I am at the summary of my cart
      * @When I see the summary of my cart
      */
     public function iOpenCartSummaryPage()

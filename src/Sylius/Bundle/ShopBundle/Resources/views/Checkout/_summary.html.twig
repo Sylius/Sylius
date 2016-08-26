@@ -1,5 +1,5 @@
 <div class="ui segment">
-    <table class="ui very basic table">
+    <table class="ui very basic table" id="checkout-subtotal">
         <thead>
         <tr>
             <th>{{ 'sylius.ui.item'|trans }}</th>
@@ -14,7 +14,7 @@
                 <td class="center aligned">
                     {{ item.quantity }}
                 </td>
-                <td>{{ item.subtotal|sylius_price }}</td>
+                <td id="item-{{ item.getVariant.product.slug }}-subtotal">{{ item.subtotal|sylius_price }}</td>
             </tr>
         {% endfor %}
         </tbody>

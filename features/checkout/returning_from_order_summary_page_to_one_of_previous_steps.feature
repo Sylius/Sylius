@@ -16,7 +16,7 @@ Feature: Returning from order summary page to one of previous steps
         Given I have product "Stark Robe" in the cart
         And I specified the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I proceed order with "Free" shipping method and "Cash on Delivery" payment
-        When I go to the payment step
+        When I decide to change the payment method
         Then I should be redirected to the payment step
         And I should be able to go to the summary page again
 

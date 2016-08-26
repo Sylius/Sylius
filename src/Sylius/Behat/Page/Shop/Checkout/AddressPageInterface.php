@@ -74,6 +74,13 @@ interface AddressPageInterface extends SymfonyPageInterface
      */
     public function specifyPassword($password);
 
+    /**
+     * @param string $itemName
+     *
+     * @return string
+     */
+    public function getItemSubtotal($itemName);
+
     public function nextStep();
 
     public function backToStore();
