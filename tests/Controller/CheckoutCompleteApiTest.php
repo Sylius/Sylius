@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class CheckoutPaymentApiTest extends JsonApiTestCase
+class CheckoutCompleteApiTest extends JsonApiTestCase
 {
     /**
      * @var array
@@ -30,9 +30,9 @@ class CheckoutPaymentApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_denies_order_payment_selection_for_non_authenticated_user()
+    public function it_denies_order_checkout_complete_for_non_authenticated_user()
     {
-        $this->client->request('PUT', '/api/checkouts/select-payment/1');
+        $this->client->request('PUT', '/api/checkouts/complete/1');
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'authentication/access_denied_response', Response::HTTP_UNAUTHORIZED);
@@ -41,11 +41,11 @@ class CheckoutPaymentApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_to_select_payment_for_unexisting_order()
+    public function it_does_not_allow_to_complete_unexisting_order()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
 
-        $this->client->request('PUT', '/api/checkouts/select-payment/1', [], [], static::$authorizedHeaderWithContentType);
+        $this->client->request('PUT', '/api/checkouts/complete/1', [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NOT_FOUND);
@@ -54,25 +54,26 @@ class CheckoutPaymentApiTest extends JsonApiTestCase
     /**
      * @test
      */
-    public function it_does_not_allow_to_select_payment_for_order_that_is_not_addressed_and_has_no_shipping_method_selected()
+    public function it_does_not_allow_to_complete_order_that_is_not_addressed_and_has_no_shipping_and_payment_method_selected()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $orders = $this->loadFixturesFromFile('resources/checkout.yml');
+        $checkoutData = $this->loadFixturesFromFile('resources/checkout.yml');
 
-        $orderId = $orders['order1']->getId();
+        $orderId = $checkoutData['order1']->getId();
         $this->addressOrder($orderId);
+        $this->selectOrderShippingMethod($orderId, $checkoutData['ups']->getId());
 
-        $url = sprintf('/api/checkouts/select-payment/%d', $orderId);
+        $url = sprintf('/api/checkouts/complete/%d', $orderId);
         $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
-        $this->assertResponse($response, 'checkout/payment_invalid_order_state', Response::HTTP_INTERNAL_SERVER_ERROR);
+        $this->assertResponse($response, 'checkout/complete_invalid_order_state', Response::HTTP_INTERNAL_SERVER_ERROR);
     }
 
     /**
      * @test
      */
-    public function it_does_not_allow_to_select_unexisting_payment_method()
+    public function it_allows_to_complete_order_that_is_addressed_and_has_shipping_and_payment_method_selected()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $checkoutData = $this->loadFixturesFromFile('resources/checkout.yml');
@@ -80,54 +81,12 @@ class CheckoutPaymentApiTest extends JsonApiTestCase
         $orderId = $checkoutData['order1']->getId();
         $this->addressOrder($orderId);
         $this->selectOrderShippingMethod($orderId, $checkoutData['ups']->getId());
+        $this->selectOrderPaymentMethod($orderId, $checkoutData['cash_on_delivery']->getId());
 
-        $data =
-<<<EOT
-        {
-            "payments": [
-                {
-                    "method": 0
-                }
-            ]
-        }
-EOT;
-
-        $url = sprintf('/api/checkouts/select-payment/%d', $orderId);
-        $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
+        $url = sprintf('/api/checkouts/complete/%d', $orderId);
+        $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
-
-        $this->assertResponse($response, 'checkout/payment_validation_failed', Response::HTTP_BAD_REQUEST);
-    }
-
-    /**
-     * @test
-     */
-    public function it_allows_to_select_payment_method_for_order()
-    {
-        $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $checkoutData = $this->loadFixturesFromFile('resources/checkout.yml');
-
-        $orderId = $checkoutData['order1']->getId();
-        $this->addressOrder($orderId);
-        $this->selectOrderShippingMethod($orderId, $checkoutData['ups']->getId());
-
-        $data =
-<<<EOT
-        {
-            "payments": [
-                {
-                    "method": {$checkoutData['cash_on_delivery']->getId()}
-                }
-            ]
-        }
-EOT;
-
-        $url = sprintf('/api/checkouts/select-payment/%d', $orderId);
-        $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
-
-        $response = $this->client->getResponse();
-
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
     }
 
@@ -184,6 +143,27 @@ EOT;
 EOT;
 
         $url = sprintf('/api/checkouts/select-shipping/%d', $orderId);
+        $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
+    }
+
+    /**
+     * @param int $orderId
+     * @param int $paymentMethodId
+     */
+    private function selectOrderPaymentMethod($orderId, $paymentMethodId)
+    {
+        $data =
+<<<EOT
+        {
+            "payments": [
+                {
+                    "method": {$paymentMethodId}
+                }
+            ]
+        }
+EOT;
+
+        $url = sprintf('/api/checkouts/select-payment/%d', $orderId);
         $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
     }
 }
