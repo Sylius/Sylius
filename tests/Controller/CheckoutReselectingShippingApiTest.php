@@ -11,22 +11,13 @@
 
 namespace Sylius\Tests\Controller;
 
-use Lakion\ApiTestCase\JsonApiTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class CheckoutReselectingShippingApiTest extends JsonApiTestCase
+class CheckoutReselectingShippingApiTestCase extends CheckoutApiTestCase
 {
-    /**
-     * @var array
-     */
-    private static $authorizedHeaderWithContentType = [
-        'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
-        'CONTENT_TYPE' => 'application/json',
-    ];
-
     /**
      * @test
      */
@@ -86,61 +77,5 @@ class CheckoutReselectingShippingApiTest extends JsonApiTestCase
 
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'checkout/reselect_shipping_response', Response::HTTP_OK);
-    }
-
-    /**
-     * @param int $orderId
-     */
-    private function addressOrder($orderId)
-    {
-        $this->loadFixturesFromFile('resources/countries.yml');
-        $customers = $this->loadFixturesFromFile('resources/customers.yml');
-
-        $data =
-            <<<EOT
-                    {
-            "shippingAddress": {
-                "firstName": "Hieronim",
-                "lastName": "Bosch",
-                "street": "Surrealism St.",
-                "countryCode": "NL",
-                "city": "’s-Hertogenbosch",
-                "postcode": "99-999"
-            },
-            "billingAddress": {
-                "firstName": "Vincent",
-                "lastName": "van Gogh",
-                "street": "Post-Impressionism St.",
-                "countryCode": "NL",
-                "city": "Groot Zundert",
-                "postcode": "88-888"
-            },
-            "differentBillingAddress": true
-        }
-EOT;
-
-        $url = sprintf('/api/checkouts/addressing/%d/%d', $orderId, $customers['customer_Oliver']->getId());
-        $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
-    }
-
-    /**
-     * @param int $orderId
-     * @param int $shippingMethodId
-     */
-    private function selectOrderShippingMethod($orderId, $shippingMethodId)
-    {
-        $data =
-            <<<EOT
-                    {
-            "shipments": [
-                {
-                    "method": {$shippingMethodId}
-                }
-            ]
-        }
-EOT;
-
-        $url = sprintf('/api/checkouts/select-shipping/%d', $orderId);
-        $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
     }
 }

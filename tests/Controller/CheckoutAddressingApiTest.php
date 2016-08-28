@@ -11,22 +11,13 @@
 
 namespace Sylius\Tests\Controller;
 
-use Lakion\ApiTestCase\JsonApiTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class CheckoutAddressingApiTest extends JsonApiTestCase
+class CheckoutAddressingApiTest extends CheckoutApiTestCase
 {
-    /**
-     * @var array
-     */
-    private static $authorizedHeaderWithContentType = [
-        'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
-        'CONTENT_TYPE' => 'application/json',
-    ];
-
     /**
      * @test
      */

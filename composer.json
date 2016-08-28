@@ -189,6 +189,11 @@
             "Sylius\\Component\\": "src/Sylius/Component/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Sylius\\Tests\\": "tests/"
+        }
+    },
     "config": {
         "bin-dir": "bin"
     },
