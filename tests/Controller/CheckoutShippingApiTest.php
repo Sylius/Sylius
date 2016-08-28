@@ -11,22 +11,13 @@
 
 namespace Sylius\Tests\Controller;
 
-use Lakion\ApiTestCase\JsonApiTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class CheckoutShippingApiTest extends JsonApiTestCase
+class CheckoutShippingApiTestCase extends CheckoutApiTestCase
 {
-    /**
-     * @var array
-     */
-    private static $authorizedHeaderWithContentType = [
-        'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
-        'CONTENT_TYPE' => 'application/json',
-    ];
-
     /**
      * @test
      */
@@ -144,40 +135,5 @@ EOT;
         $response = $this->client->getResponse();
 
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
-    }
-
-    /**
-     * @param int $orderId
-     */
-    private function addressOrder($orderId)
-    {
-        $this->loadFixturesFromFile('resources/countries.yml');
-        $customers = $this->loadFixturesFromFile('resources/customers.yml');
-
-        $data =
-<<<EOT
-        {
-            "shippingAddress": {
-                "firstName": "Hieronim",
-                "lastName": "Bosch",
-                "street": "Surrealism St.",
-                "countryCode": "NL",
-                "city": "’s-Hertogenbosch",
-                "postcode": "99-999"
-            },
-            "billingAddress": {
-                "firstName": "Vincent",
-                "lastName": "van Gogh",
-                "street": "Post-Impressionism St.",
-                "countryCode": "NL",
-                "city": "Groot Zundert",
-                "postcode": "88-888"
-            },
-            "differentBillingAddress": true
-        }
-EOT;
-
-        $url = sprintf('/api/checkouts/addressing/%d/%d', $orderId, $customers['customer_Oliver']->getId());
-        $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
     }
 }
