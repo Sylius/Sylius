@@ -57,9 +57,9 @@ class CheckoutShippingApiTest extends JsonApiTestCase
     public function it_does_not_allow_to_select_shipping_for_order_that_is_not_addressed()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $orders = $this->loadFixturesFromFile('resources/checkout.yml');
+        $checkoutData = $this->loadFixturesFromFile('resources/checkout.yml');
 
-        $url = sprintf('/api/checkouts/select-shipping/%d', $orders['order1']->getId());
+        $url = sprintf('/api/checkouts/select-shipping/%d', $checkoutData['order1']->getId());
         $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
@@ -72,9 +72,9 @@ class CheckoutShippingApiTest extends JsonApiTestCase
     public function it_does_not_allow_to_select_shipping_for_order_without_specifying_shipping_method()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $orders = $this->loadFixturesFromFile('resources/checkout.yml');
+        $checkoutData = $this->loadFixturesFromFile('resources/checkout.yml');
 
-        $orderId = $orders['order1']->getId();
+        $orderId = $checkoutData['order1']->getId();
         $this->addressOrder($orderId);
 
         $url = sprintf('/api/checkouts/select-shipping/%d', $orderId);
