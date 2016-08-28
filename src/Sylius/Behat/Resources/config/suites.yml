@@ -29,6 +29,7 @@ imports:
     - suites/ui/checkout/paying_for_order.yml
     - suites/ui/currency/currencies.yml
     - suites/ui/currency/managing_currencies.yml
+    - suites/ui/inventory/inventory.yml
     - suites/ui/locale/locales.yml
     - suites/ui/locale/managing_locales.yml
     - suites/ui/order/managing_orders.yml

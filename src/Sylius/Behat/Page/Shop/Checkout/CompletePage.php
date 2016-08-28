@@ -193,6 +193,16 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
         return null !== $productRowElement->find('css', sprintf('td:contains("%s")', $price));
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function hasProductOutOfStockValidationMessage(ProductInterface $product)
+    {
+        $message = sprintf('%s does not have sufficient stock.', $product->getName());
+
+        return $this->getElement('validation_errors')->getText() === $message;
+    }
+
     public function confirmOrder()
     {
         $this->getDocument()->pressButton('Place order');
@@ -234,6 +244,7 @@ class CompletePage extends SymfonyPage implements CompletePageInterface
             'shipping_step_label' => '.steps a:contains("Shipping")',
             'shipping_total' => '#shipping-total',
             'tax_total' => '#tax-total',
+            'validation_errors' => '.sylius-validation-error',
         ]);
     }
 
