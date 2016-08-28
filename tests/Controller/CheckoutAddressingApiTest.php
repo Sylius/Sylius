@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class CheckoutAddressingApiTest extends CheckoutApiTestCase
+final class CheckoutAddressingApiTest extends CheckoutApiTestCase
 {
     /**
      * @test

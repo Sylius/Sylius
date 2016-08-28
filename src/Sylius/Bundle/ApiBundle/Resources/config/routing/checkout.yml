@@ -60,7 +60,7 @@ sylius_api_checkout_select_shipping:
             form: sylius_checkout_select_shipping
             repository:
                 method: find
-                arguments: $orderId
+                arguments: [$orderId]
             state_machine:
                 graph: sylius_order_checkout
                 transition: select_shipping
@@ -87,7 +87,7 @@ sylius_api_checkout_select_payment:
             form: sylius_checkout_select_payment
             repository:
                 method: find
-                arguments: $orderId
+                arguments: [$orderId]
             state_machine:
                 graph: sylius_order_checkout
                 transition: select_payment
@@ -114,7 +114,7 @@ sylius_api_checkout_complete:
             form: sylius_checkout_complete
             repository:
                 method: find
-                arguments: $orderId
+                arguments: [$orderId]
             state_machine:
                 graph: sylius_order_checkout
                 transition: complete
