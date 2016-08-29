@@ -126,7 +126,7 @@ final class ProductContext implements Context
     /**
      * @Given the store has a product :productName
      * @Given the store has a :productName product
-     * @Given /^the store has a product "([^"]+)" priced at ("[^"]+")$/
+     * @Given /^the store(?:| also) has a product "([^"]+)" priced at ("[^"]+")$/
      */
     public function storeHasAProductPricedAt($productName, $price = 0)
     {
@@ -331,7 +331,8 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Given /^there (?:is|are) (\d+) item(?:s) of (product "([^"]+)") available in the inventory$/
+     * @Given /^there (?:is|are) (\d+) (?:item|unit)(?:s) of (product "([^"]+)") available in the inventory$/
+     * @When product :product quantity is changed to :quantity
      */
     public function thereIsQuantityOfProducts($quantity, ProductInterface $product)
     {
@@ -346,6 +347,30 @@ final class ProductContext implements Context
         $product->getFirstVariant()->setTracked(true);
 
         $this->setProductsQuantity($product, 0);
+    }
+
+    /**
+     * @When other customer has bought :quantity :product products by this time
+     */
+    public function otherCustomerHasBoughtProductsByThisTime($quantity, ProductInterface $product)
+    {
+        /** @var ProductVariantInterface $productVariant */
+        $productVariant = $this->defaultVariantResolver->getVariant($product);
+        $productQuantity = $productVariant->getOnHand() - $quantity;
+
+        $this->setProductsQuantity($product, $productQuantity);
+    }
+
+    /**
+     * @Given /^(this product) is tracked by the inventory$/
+     * @Given /^("[^"]+" product) is(?:| also) tracked by the inventory$/
+     */
+    public function thisProductIsTrackedByTheInventory(ProductInterface $product)
+    {
+        $variant = $this->defaultVariantResolver->getVariant($product);
+        $variant->setTracked(true);
+
+        $this->objectManager->flush();
     }
 
     /**

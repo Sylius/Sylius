@@ -140,6 +140,8 @@ sylius_shop_checkout_complete:
             redirect: sylius_shop_checkout_thank_you
             form:
                 type: sylius_checkout_complete
+                options:
+                    validation_groups: 'sylius_checkout_complete'
 
 sylius_shop_checkout_thank_you:
     path: /thank-you
