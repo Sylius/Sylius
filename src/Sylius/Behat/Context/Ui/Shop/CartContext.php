@@ -251,7 +251,7 @@ final class CartContext implements Context
     }
 
     /**
-     * @Given /^I add (this product) to the cart$/
+     * @Given /^I (?:add|added) (this product) to the cart$/
      * @Given I added product :product to the cart
      * @Given /^I (?:have|had) (product "[^"]+") in the cart$/
      * @When I add product :product to the cart
@@ -477,6 +477,7 @@ final class CartContext implements Context
         Assert::false(
             $this->summaryPage->hasProductOutOfStockValidationMessage($product),
             sprintf('I should see validation message for %s product', $product->getName())
+        );
     }
 
     /**
@@ -484,9 +485,10 @@ final class CartContext implements Context
      */
     public function myCartSTotalShouldBe($total)
     {
-        Assert::true(
-            $this->summaryPage->hasCartTotal($total),
-            sprintf('Cart total should have %s total, but it does not have.', $total)
+        Assert::same(
+            $total,
+            $this->summaryPage->getCartTotal(),
+            'Cart should have %s total, but it has %2$s.'
         );
     }
 }

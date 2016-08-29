@@ -215,9 +215,15 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     /**
      * {@inheritdoc}
      */
-    public function hasCartTotal($total)
+    public function getCartTotal()
     {
-        return false !== strpos($this->getElement('cart_total')->getText(), $total);
+        $cartTotalText = $this->getElement('cart_total')->getText();
+
+        if (strpos($cartTotalText, ',') !== false ) {
+            return strstr($cartTotalText, ',', true);
+        }
+
+        return $cartTotalText;
     }
 
     public function clearCart()

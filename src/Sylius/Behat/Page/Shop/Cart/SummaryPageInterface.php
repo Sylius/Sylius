@@ -132,11 +132,9 @@ interface SummaryPageInterface extends PageInterface
     public function getQuantity($productName);
 
     /**
-     * @param float $total
-     *
-     * @return bool
+     * @return string
      */
-    public function hasCartTotal($total);
+    public function getCartTotal();
 
     public function clearCart();
 

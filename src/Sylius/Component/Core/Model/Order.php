@@ -348,9 +348,7 @@ class Order extends Cart implements OrderInterface
      */
     public function removeShipments()
     {
-        foreach ($this->getShipments() as $shipment) {
-            $this->removeShipment($shipment);
-        }
+        $this->shipments->clear();
     }
 
     /**

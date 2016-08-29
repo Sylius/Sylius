@@ -7,11 +7,10 @@ Feature: Removing cart item from cart
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a product "T-shirt banana" priced at "$12.54"
-        And I add this product to the cart
+        And I added product "T-shirt banana" to the cart
 
     @ui
     Scenario: Removing cart item
-        Given I add this product to the cart
         When I see the summary of my cart
         And I remove product "T-shirt banana" from the cart
         Then my cart should be empty
@@ -20,17 +19,13 @@ Feature: Removing cart item from cart
     @ui
     Scenario: Removing cart item when the store has defined default shipping method
         Given the store has "UPS" shipping method with "$20.00" fee
-        And I add this product to the cart
-        When I see the summary of my cart
-        And I remove product "T-shirt banana" from the cart
+        When I remove product "T-shirt banana" from the cart
         Then my cart should be empty
         And my cart's total should be "$0.00"
 
     @ui
     Scenario: Checking cart's total after removing one item
-        Given I add this product to the cart
-        And the store has a product "T-shirt strawberry" priced at "$17.22"
+        Given the store has a product "T-shirt strawberry" priced at "$17.22"
         And I add this product to the cart
-        When I see the summary of my cart
-        And I remove product "T-shirt banana" from the cart
-        And my cart's total should be "$17.22"
+        When I remove product "T-shirt banana" from the cart
+        Then my cart's total should be "$17.22"

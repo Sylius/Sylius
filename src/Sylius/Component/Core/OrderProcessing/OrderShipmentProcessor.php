@@ -49,6 +49,12 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
      */
     public function process(OrderInterface $order)
     {
+        if ($order->isEmpty()) {
+            $order->removeShipments();
+
+            return;
+        }
+
         $shipment = $this->getOrderShipment($order);
 
         if (null === $shipment) {
@@ -69,12 +75,6 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
      */
     private function getOrderShipment(OrderInterface $order)
     {
-        if ($order->isEmpty()) {
-            $order->removeShipments();
-
-            return null;
-        }
-
         if ($order->hasShipments()) {
             return $order->getShipments()->first();
         }
