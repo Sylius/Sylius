@@ -20,6 +20,10 @@ UPGRADE
 * Added ``OrderSequence`` model to keep current order index
 * Added ``OrderNumberGenerator`` to generate number for new orders
 
+### Report and ReportBundle
+
+* Removed ``Report`` component and ``ReportBundle``
+
 ### Sequence and SequenceBundle
 
 * Removed ``Sequence`` component and ``SequenceBundle``
