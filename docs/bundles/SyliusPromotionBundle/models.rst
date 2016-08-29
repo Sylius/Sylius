@@ -1,7 +1,7 @@
 Models
 ======
 
-All the models of this bundle are defined in ``Sylius\Bundle\PromotionBundle\Model``.
+All the models of this bundle are defined in ``Sylius\Component\Promotion\Model``.
 
 Rule
 ----
@@ -33,7 +33,7 @@ A coupon is considered as valid if the method ``isValid()`` returns ``true``. Th
 PromotionSubjectInterface
 -------------------------
 
-A ``PromotionSubjectInterface`` is the object you want to apply the promotion on. For instance, in Sylius Standard, a ``Sylius\Bundle\CoreBundle\Model\Order`` can be subject to promotions.
+A ``PromotionSubjectInterface`` is the object you want to apply the promotion on. For instance, in Sylius Standard, a ``Sylius\Component\Core\Model\Order`` can be subject to promotions.
 
 By implementing ``PromotionSubjectInterface``, your object will have to define the following methods :
 - ``getPromotionSubjectItemTotal()`` should return the amount of your order
