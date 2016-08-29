@@ -14,9 +14,12 @@ namespace Sylius\Behat\Page\Shop\Checkout;
 use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Behat\Mink\Session;
 use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Component\Core\Model\AddressInterface;
+use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Symfony\Component\Intl\Intl;
+use Symfony\Component\Routing\RouterInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -24,6 +27,27 @@ use Webmozart\Assert\Assert;
  */
 class AddressPage extends SymfonyPage implements AddressPageInterface
 {
+    /**
+     * @var LocaleContextInterface
+     */
+    private $localeContext;
+
+    /**
+     * {@inheritdoc}
+     *
+     * @param LocaleContextInterface $localeContext
+     */
+    public function __construct(
+        Session $session,
+        array $parameters = [],
+        RouterInterface $router,
+        LocaleContextInterface $localeContext
+    ) {
+        parent::__construct($session, $parameters, $router);
+
+        $this->localeContext = $localeContext;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -236,7 +260,8 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
      */
     private function getCountryNameOrDefault($code)
     {
-        $countryName = null === $code ? 'Select' : Intl::getRegionBundle()->getCountryNames('en')[$code];
+        $displayLocale = $this->localeContext->getLocaleCode();
+        $countryName = null === $code ? 'Select' : Intl::getRegionBundle()->getCountryNames($displayLocale)[$code];
 
         return $countryName;
     }

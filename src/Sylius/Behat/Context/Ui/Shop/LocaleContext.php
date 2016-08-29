@@ -80,7 +80,7 @@ final class LocaleContext implements Context
     }
 
     /**
-     * @Then I should not be able to shop
+     * @Then I should not be able to shop without default locale
      */
     public function iShouldNotBeAbleToShop()
     {

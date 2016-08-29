@@ -969,7 +969,7 @@ final class CheckoutContext implements Context
     public function myOrderSLocaleShouldBe($localeName)
     {
         Assert::true(
-            $this->summaryPage->hasLocale($localeName),
+            $this->completePage->hasLocale($localeName),
             'Order locale code is improper.'
         );
     }
@@ -980,7 +980,7 @@ final class CheckoutContext implements Context
     public function myOrderSCurrencyShouldBe($currencyCode)
     {
         Assert::true(
-            $this->summaryPage->hasCurrency($currencyCode),
+            $this->completePage->hasCurrency($currencyCode),
             'Order currency code is improper.'
         );
     }
