@@ -67,6 +67,11 @@ class Customer implements CustomerInterface, GroupableInterface
      */
     protected $phoneNumber;
 
+    /**
+     * @var bool
+     */
+    protected $newsletterSubscription = false;
+
     public function __construct()
     {
         $this->groups = new ArrayCollection();
@@ -264,6 +269,22 @@ class Customer implements CustomerInterface, GroupableInterface
     public function setPhoneNumber($phoneNumber)
     {
         $this->phoneNumber = $phoneNumber;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isNewsletterSubscription()
+    {
+        return $this->newsletterSubscription;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setNewsletterSubscription($newsletterSubscription)
+    {
+        $this->newsletterSubscription = $newsletterSubscription;
     }
 
     public function __toString()

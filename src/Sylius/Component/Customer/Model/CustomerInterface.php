@@ -115,4 +115,14 @@ interface CustomerInterface extends
      * @param string $phoneNumber
      */
     public function setPhoneNumber($phoneNumber);
+
+    /**
+     * @return bool
+     */
+    public function isNewsletterSubscription();
+
+    /**
+     * @param bool $newsletterSubscription
+     */
+    public function setNewsletterSubscription($newsletterSubscription);
 }
