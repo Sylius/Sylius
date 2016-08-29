@@ -63,13 +63,13 @@ final class LocaleChangeHandler implements RequestBasedHandlerInterface
     {
         $localeCode = $request->get('code');
         if (null === $localeCode) {
-            throw new HandleException(self::class, 'request does not have the locale code');
+            throw new HandleException(self::class, 'Request does not have the locale code');
         }
 
         try {
             $this->localeStorage->set($this->channelContext->getChannel(), $localeCode);
         } catch (ChannelNotFoundException $exception) {
-            throw new HandleException(self::class, 'sylius cannot found the channel', $exception);
+            throw new HandleException(self::class, 'Sylius cannot found the channel', $exception);
         }
 
         $this->eventDispatcher->dispatch(SyliusLocaleEvents::CODE_CHANGED, new GenericEvent($request));

@@ -18,16 +18,16 @@ class HandleException extends \RuntimeException
 {
     /**
      * @param string $handlerName
-     * @param string $why
+     * @param string $message
      * @param \Exception|null $previousException
      */
-    public function __construct($handlerName, $why,\Exception $previousException = null)
+    public function __construct($handlerName, $message, \Exception $previousException = null)
     {
         parent::__construct(
             sprintf(
-                '%s was unable to handle this request, because %s',
+                '%s was unable to handle this request. %s',
                 $handlerName,
-                $why
+                $message
             ),
             0,
             $previousException

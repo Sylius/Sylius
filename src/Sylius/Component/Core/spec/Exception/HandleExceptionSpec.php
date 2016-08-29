@@ -41,7 +41,7 @@ final class HandleExceptionSpec extends ObjectBehavior
     {
         $this->getMessage()->shouldReturn(
             sprintf(
-                '%s was unable to handle this request, because request does not have locale code',
+                '%s was unable to handle this request. request does not have locale code',
                 LocaleChangeHandler::class
             )
         );
