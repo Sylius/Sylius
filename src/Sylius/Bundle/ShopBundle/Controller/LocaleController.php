@@ -11,8 +11,7 @@
 
 namespace Sylius\Bundle\ShopBundle\Controller;
 
-use Sylius\Component\Channel\Context\ChannelContextInterface;
-use Sylius\Component\Core\Locale\LocaleStorageInterface;
+use Sylius\Component\Core\Locale\Handler\RequestBasedHandlerInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
@@ -21,6 +20,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
+ * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class LocaleController
@@ -41,34 +41,26 @@ final class LocaleController
     private $localeProvider;
 
     /**
-     * @var ChannelContextInterface
+     * @var RequestBasedHandlerInterface
      */
-    private $channelContext;
-
-    /**
-     * @var LocaleStorageInterface
-     */
-    private $localeStorage;
+    private $localeChangeHandler;
 
     /**
      * @param EngineInterface $templatingEngine
      * @param LocaleContextInterface $localeContext
      * @param LocaleProviderInterface $localeProvider
-     * @param ChannelContextInterface $channelContext
-     * @param LocaleStorageInterface $localeStorage
+     * @param RequestBasedHandlerInterface $localeChangeHandler
      */
     public function __construct(
         EngineInterface $templatingEngine,
         LocaleContextInterface $localeContext,
         LocaleProviderInterface $localeProvider,
-        ChannelContextInterface $channelContext,
-        LocaleStorageInterface $localeStorage
+        RequestBasedHandlerInterface $localeChangeHandler
     ) {
         $this->templatingEngine = $templatingEngine;
         $this->localeContext = $localeContext;
         $this->localeProvider = $localeProvider;
-        $this->channelContext = $channelContext;
-        $this->localeStorage = $localeStorage;
+        $this->localeChangeHandler = $localeChangeHandler;
     }
 
     /**
@@ -84,13 +76,12 @@ final class LocaleController
 
     /**
      * @param Request $request
-     * @param string $code
      *
      * @return Response
      */
-    public function switchLocaleAction(Request $request, $code)
+    public function switchLocaleAction(Request $request)
     {
-        $this->localeStorage->set($this->channelContext->getChannel(), $code);
+        $this->localeChangeHandler->handle($request);
 
         return new RedirectResponse($request->headers->get('referer'));
     }
