@@ -49,8 +49,6 @@ class SyliusCartExtension extends AbstractResourceExtension implements PrependEx
             $loader->load($configFile);
         }
 
-        $container->setAlias('sylius.cart_resolver', $config['resolver']);
-
         $definition = $container->getDefinition('sylius.form.type.cart_item');
         $definition->addArgument(new Reference('sylius.form.data_mapper.order_item_quantity'));
     }
