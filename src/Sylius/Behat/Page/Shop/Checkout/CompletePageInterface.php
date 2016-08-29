@@ -114,6 +114,20 @@ interface CompletePageInterface
      */
     public function hasProductUnitPrice(ProductInterface $product, $price);
 
+    /**
+     * @param string $localeName
+     *
+     * @return bool
+     */
+    public function hasLocale($localeName);
+
+    /**
+     * @param string $currencyCode
+     *
+     * @return bool
+     */
+    public function hasCurrency($currencyCode);
+
     public function changeAddress();
 
     public function changeShippingMethod();

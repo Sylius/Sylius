@@ -35,6 +35,7 @@ final class LocaleContext implements Context
 
     /**
      * @When I switch to the :localeName locale
+     * @When I change my locale to :localeName
      */
     public function iSwitchTheLocaleToTheLocale($localeName)
     {

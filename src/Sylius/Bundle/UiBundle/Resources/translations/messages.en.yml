@@ -357,6 +357,7 @@ sylius:
         links: Links
         list_coupons: List coupons
         list_variants: List variants
+        locale: Locale
         locales: Locales
         lock: Lock
         locked: Locked
