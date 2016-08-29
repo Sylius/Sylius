@@ -14,17 +14,16 @@ namespace Sylius\Bundle\CoreBundle\Handler;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Exception\HandleException;
-use Sylius\Component\Core\Locale\Handler\RequestBasedHandlerInterface;
+use Sylius\Component\Core\Locale\Handler\LocaleChangeHandlerInterface;
 use Sylius\Component\Core\Locale\LocaleStorageInterface;
 use Sylius\Component\Core\SyliusLocaleEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-final class LocaleChangeHandler implements RequestBasedHandlerInterface
+final class LocaleChangeHandler implements LocaleChangeHandlerInterface
 {
     /**
      * @var LocaleStorageInterface
@@ -59,19 +58,14 @@ final class LocaleChangeHandler implements RequestBasedHandlerInterface
     /**
      * {@inheritdoc}
      */
-    public function handle(Request $request)
+    public function handle($code)
     {
-        $localeCode = $request->get('code');
-        if (null === $localeCode) {
-            throw new HandleException(self::class, 'Request does not have the locale code');
-        }
-
         try {
-            $this->localeStorage->set($this->channelContext->getChannel(), $localeCode);
+            $this->localeStorage->set($this->channelContext->getChannel(), $code);
         } catch (ChannelNotFoundException $exception) {
             throw new HandleException(self::class, 'Sylius cannot found the channel', $exception);
         }
 
-        $this->eventDispatcher->dispatch(SyliusLocaleEvents::CODE_CHANGED, new GenericEvent($request));
+        $this->eventDispatcher->dispatch(SyliusLocaleEvents::CODE_CHANGED, new GenericEvent($code));
     }
 }

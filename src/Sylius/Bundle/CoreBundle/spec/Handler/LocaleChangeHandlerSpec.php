@@ -17,13 +17,12 @@ use Sylius\Bundle\CoreBundle\Handler\LocaleChangeHandler;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Exception\HandleException;
-use Sylius\Component\Core\Locale\Handler\RequestBasedHandlerInterface;
+use Sylius\Component\Core\Locale\Handler\LocaleChangeHandlerInterface;
 use Sylius\Component\Core\Locale\LocaleStorageInterface;
 use Sylius\Component\Core\Model\Channel;
 use Sylius\Component\Core\SyliusLocaleEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @mixin LocaleChangeHandler
@@ -47,7 +46,7 @@ class LocaleChangeHandlerSpec extends ObjectBehavior
 
     function it_is_a_request_based_handler()
     {
-        $this->shouldImplement(RequestBasedHandlerInterface::class);
+        $this->shouldImplement(LocaleChangeHandlerInterface::class);
     }
 
     function it_handles_locale_change(
@@ -56,25 +55,11 @@ class LocaleChangeHandlerSpec extends ObjectBehavior
         EventDispatcherInterface $eventDispatcher,
         Channel $channel
     ) {
-        $request = new Request(['code' => 'en_GB']);
         $channelContext->getChannel()->willReturn($channel);
         $localeStorage->set($channel, 'en_GB')->shouldBeCalled();
-        $eventDispatcher->dispatch(SyliusLocaleEvents::CODE_CHANGED, new GenericEvent($request))->shouldBeCalled();
+        $eventDispatcher->dispatch(SyliusLocaleEvents::CODE_CHANGED, new GenericEvent('en_GB'))->shouldBeCalled();
 
-        $this->handle($request);
-    }
-
-    function it_throws_handle_exception_if_cannot_handle_request(
-        LocaleStorageInterface $localeStorage,
-        ChannelContextInterface $channelContext,
-        EventDispatcherInterface $eventDispatcher
-    ) {
-        $request = new Request();
-        $channelContext->getChannel()->shouldNotBeCalled();
-        $localeStorage->set(Argument::any(), Argument::any())->shouldNotBeCalled();
-        $eventDispatcher->dispatch(SyliusLocaleEvents::CODE_CHANGED, new GenericEvent($request))->shouldNotBeCalled();
-
-        $this->shouldThrow(HandleException::class)->during('handle', [$request]);
+        $this->handle('en_GB');
     }
 
     function it_throws_handle_exception_if_channel_was_not_found(
@@ -82,11 +67,10 @@ class LocaleChangeHandlerSpec extends ObjectBehavior
         ChannelContextInterface $channelContext,
         EventDispatcherInterface $eventDispatcher
     ) {
-        $request = new Request(['code' => 'en_GB']);
         $channelContext->getChannel()->willThrow(ChannelNotFoundException::class);
         $localeStorage->set(Argument::any(), Argument::any())->shouldNotBeCalled();
-        $eventDispatcher->dispatch(SyliusLocaleEvents::CODE_CHANGED, new GenericEvent($request))->shouldNotBeCalled();
+        $eventDispatcher->dispatch(SyliusLocaleEvents::CODE_CHANGED, new GenericEvent('en_GB'))->shouldNotBeCalled();
 
-        $this->shouldThrow(HandleException::class)->during('handle', [$request]);
+        $this->shouldThrow(HandleException::class)->during('handle', ['en_GB']);
     }
 }

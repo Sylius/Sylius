@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\ShopBundle\Controller;
 
-use Sylius\Component\Core\Locale\Handler\RequestBasedHandlerInterface;
+use Sylius\Component\Core\Locale\Handler\LocaleChangeHandlerInterface;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
@@ -41,7 +41,7 @@ final class LocaleController
     private $localeProvider;
 
     /**
-     * @var RequestBasedHandlerInterface
+     * @var LocaleChangeHandlerInterface
      */
     private $localeChangeHandler;
 
@@ -49,13 +49,13 @@ final class LocaleController
      * @param EngineInterface $templatingEngine
      * @param LocaleContextInterface $localeContext
      * @param LocaleProviderInterface $localeProvider
-     * @param RequestBasedHandlerInterface $localeChangeHandler
+     * @param LocaleChangeHandlerInterface $localeChangeHandler
      */
     public function __construct(
         EngineInterface $templatingEngine,
         LocaleContextInterface $localeContext,
         LocaleProviderInterface $localeProvider,
-        RequestBasedHandlerInterface $localeChangeHandler
+        LocaleChangeHandlerInterface $localeChangeHandler
     ) {
         $this->templatingEngine = $templatingEngine;
         $this->localeContext = $localeContext;
@@ -79,9 +79,9 @@ final class LocaleController
      *
      * @return Response
      */
-    public function switchLocaleAction(Request $request)
+    public function switchLocaleAction(Request $request, $code)
     {
-        $this->localeChangeHandler->handle($request);
+        $this->localeChangeHandler->handle($code);
 
         return new RedirectResponse($request->headers->get('referer'));
     }

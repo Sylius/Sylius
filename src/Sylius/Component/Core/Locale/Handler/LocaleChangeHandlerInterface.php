@@ -12,17 +12,16 @@
 namespace Sylius\Component\Core\Locale\Handler;
 
 use Sylius\Component\Core\Exception\HandleException;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-interface RequestBasedHandlerInterface
+interface LocaleChangeHandlerInterface
 {
     /**
-     * @param Request $request
+     * @param string $code
      *
      * @throws HandleException
      */
-    public function handle(Request $request);
+    public function handle($code);
 }
