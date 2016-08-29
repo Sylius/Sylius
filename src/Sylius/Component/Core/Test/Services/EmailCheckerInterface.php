@@ -25,6 +25,13 @@ interface EmailCheckerInterface
     public function hasRecipient($recipient);
 
     /**
+     * @param string $message
+     *
+     * @return bool
+     */
+    public function hasMessage($message);
+
+    /**
      * @return int
      */
     public function getMessagesCount();
