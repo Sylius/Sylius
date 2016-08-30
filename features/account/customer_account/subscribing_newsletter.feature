@@ -9,7 +9,7 @@ Feature: Subscribing to the newsletter
         And there is a customer "Francis Underwood" identified by an email "francis@underwood.com" and a password "whitehouse"
         And I am logged in as "francis@underwood.com"
 
-    @todo
+    @ui
     Scenario: Subscribing to the newsletter
         Given I want to modify my profile
         When I subscribe to the newsletter

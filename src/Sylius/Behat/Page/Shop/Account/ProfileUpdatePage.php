@@ -76,6 +76,22 @@ class ProfileUpdatePage extends SymfonyPage implements ProfileUpdatePageInterfac
     /**
      * {@inheritdoc}
      */
+    public function subscribeToTheNewsletter()
+    {
+        $this->getDocument()->checkField('Subscribe to the newsletter');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isNewsletterSubscriptionEnabled()
+    {
+        return $this->getDocument()->hasCheckedField('Subscribe to the newsletter');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
