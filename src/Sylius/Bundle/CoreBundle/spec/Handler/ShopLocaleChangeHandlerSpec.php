@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\CoreBundle\Handler;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\CoreBundle\Handler\LocaleChangeHandler;
+use Sylius\Bundle\CoreBundle\Handler\ShopLocaleChangeHandler;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Exception\HandleException;
@@ -25,11 +25,9 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
- * @mixin LocaleChangeHandler
- *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class LocaleChangeHandlerSpec extends ObjectBehavior
+final class ShopLocaleChangeHandlerSpec extends ObjectBehavior
 {
     function let(
         LocaleStorageInterface $localeStorage,
@@ -41,7 +39,7 @@ class LocaleChangeHandlerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(LocaleChangeHandler::class);
+        $this->shouldHaveType(ShopLocaleChangeHandler::class);
     }
 
     function it_is_a_request_based_handler()

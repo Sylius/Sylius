@@ -23,7 +23,7 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-final class LocaleChangeHandler implements LocaleChangeHandlerInterface
+final class ShopLocaleChangeHandler implements LocaleChangeHandlerInterface
 {
     /**
      * @var LocaleStorageInterface
