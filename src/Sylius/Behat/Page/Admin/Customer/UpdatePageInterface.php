@@ -60,4 +60,11 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
      * @return string
      */
     public function getPassword();
+
+    public function subscribeToTheNewsletter();
+
+    /**
+     * @return bool
+     */
+    public function isSubscribedToTheNewsletter();
 }

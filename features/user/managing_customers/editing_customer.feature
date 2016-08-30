@@ -28,7 +28,7 @@ Feature: Editing a customer
         And this customer should have an empty first name
         And this customer should have an empty last name
 
-    @todo
+    @ui
     Scenario: Making an existing customer subscribed to the newsletter
         Given the store has customer "Mike Ross" with email "ross@teammike.com"
         When I want to edit this customer
