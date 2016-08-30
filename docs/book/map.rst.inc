@@ -10,10 +10,12 @@
 * :doc:`/book/currencies`
 * :doc:`/book/countries`
 * :doc:`/book/zones`
+* :doc:`/book/addresses`
+* :doc:`/book/customer_and_shopuser`
+* :doc:`/book/adminuser`
 * :doc:`/book/products`
 * :doc:`/book/attributes`
 * :doc:`/book/taxons`
-* :doc:`/book/addresses`
 * :doc:`/book/inventory`
 * :doc:`/book/orders`
 * :doc:`/book/checkout`
@@ -22,8 +24,6 @@
 * :doc:`/book/taxation`
 * :doc:`/book/pricing`
 * :doc:`/book/promotions`
-* :doc:`/book/users_and_groups`
-* :doc:`/book/adminuser`
 * :doc:`/book/content`
 * :doc:`/book/emails`
 * :doc:`/book/settings`
