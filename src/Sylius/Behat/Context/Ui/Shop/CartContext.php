@@ -86,6 +86,14 @@ final class CartContext implements Context
     }
 
     /**
+     * @When I save my changes
+     */
+    public function iSaveMyChanges()
+    {
+        $this->summaryPage->updateCart();
+    }
+
+    /**
      * @Then my cart should be empty
      * @Then cart should be empty with no value
      */
@@ -447,6 +455,28 @@ final class CartContext implements Context
         Assert::same(
             $this->summaryPage->getItemTotal($productName),
             $productPrice
+        );
+    }
+
+    /**
+     * @Then /^I should be notified that (this product) cannot be updated$/
+     */
+    public function iShouldBeNotifiedThatThisProductDoesNotHaveSufficientStock(ProductInterface $product)
+    {
+        Assert::true(
+            $this->summaryPage->hasProductOutOfStockValidationMessage($product),
+            sprintf('I should see validation message for %s product', $product->getName())
+        );
+    }
+
+    /**
+     * @Then /^I should not be notified that (this product) cannot be updated$/
+     */
+    public function iShouldNotBeNotifiedThatThisProductCannotBeUpdated(ProductInterface $product)
+    {
+        Assert::false(
+            $this->summaryPage->hasProductOutOfStockValidationMessage($product),
+            sprintf('I should see validation message for %s product', $product->getName())
         );
     }
 }

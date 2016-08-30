@@ -13,6 +13,7 @@ namespace Sylius\Behat\Page\Shop\Cart;
 
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\SymfonyPage;
+use Sylius\Component\Core\Model\ProductInterface;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
@@ -180,6 +181,20 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     }
 
     /**
+     * {@inheritdoc]
+     */
+    public function hasProductOutOfStockValidationMessage(ProductInterface $product)
+    {
+        $message = sprintf('%s does not have sufficient stock.', $product->getName());
+
+        try {
+            return $this->getElement('validation_errors')->getText() === $message;
+        } catch (ElementNotFoundException $exception) {
+            return false;
+        }
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function isEmpty()
@@ -202,6 +217,11 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
         $this->getElement('clear_button')->click();
     }
 
+    public function updateCart()
+    {
+        $this->getElement('update_button')->click();
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -222,6 +242,8 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
             'save_button' => '#sylius-save',
             'shipping_total' => '#sylius-cart-shipping-total',
             'tax_total' => '#sylius-cart-tax-total',
+            'update_button' => '#sylius-cart-update',
+            'validation_errors' => '.sylius-validation-error',
         ]);
     }
 
