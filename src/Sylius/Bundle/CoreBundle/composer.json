@@ -60,7 +60,8 @@
         "symfony-cmf/routing-bundle": "~1.2",
         "swiftmailer/swiftmailer": "~5.0",
         "winzou/state-machine-bundle": "~0.2",
-        "sonata-project/intl-bundle": "^2.2"
+        "sonata-project/intl-bundle": "^2.2",
+        "simple-bus/symfony-bridge": "^4.1"
     },
     "require-dev": {
         "hwi/oauth-bundle": "~0.3",
