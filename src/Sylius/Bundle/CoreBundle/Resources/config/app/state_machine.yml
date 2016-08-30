@@ -122,7 +122,6 @@ winzou_state_machine:
                     do: ["@sylius.order_processing.order_processor", "process"]
                     args: ["object.getOrder()"]
 
-
     sylius_order:
         callbacks:
             after:
