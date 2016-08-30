@@ -47,3 +47,9 @@ Feature: Account registration
         Then I should be notified that new account has been successfully created
         And I should be logged in
         And my email should be "goodman@gmail.com"
+
+    @ui @email
+    Scenario: Receiving a welcoming email after registration
+        When I register with email "ghastly@bespoke.com" and password "suitsarelife"
+        Then I should be notified that new account has been successfully created
+        And a welcoming email should have been sent to "ghastly@bespoke.com"
