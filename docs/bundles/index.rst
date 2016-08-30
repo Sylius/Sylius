@@ -15,6 +15,7 @@ Symfony Bundles
     SyliusMailerBundle/index
     SyliusOmnipayBundle/index
     SyliusOrderBundle/index
+    SyliusPricingBundle/index
     SyliusProductBundle/index
     SyliusPromotionBundle/index
     SyliusRbacBundle/index
