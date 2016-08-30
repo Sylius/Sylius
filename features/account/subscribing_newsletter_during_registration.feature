@@ -7,7 +7,7 @@ Feature: Subscribing to the newsletter during registration
     Background:
         Given the store operates on a single channel in "United States"
 
-    @todo
+    @ui
     Scenario: Subscribing to the newsletter during registration
         Given I want to register a new account
         When I specify the first name as "Saul"
@@ -18,5 +18,4 @@ Feature: Subscribing to the newsletter during registration
         And I subscribe to the newsletter
         And I register this account
         Then I should be notified that new account has been successfully created
-        And I should be logged in
         And subscription to the newsletter should be enabled
