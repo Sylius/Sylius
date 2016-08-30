@@ -104,6 +104,9 @@ class Kernel extends HttpKernel
             new \Sylius\Bundle\FixturesBundle\SyliusFixturesBundle(),
             new \Sylius\Bundle\PayumBundle\SyliusPayumBundle(), // must be added after PayumBundle.
             new \Sylius\Bundle\ThemeBundle\SyliusThemeBundle(), // must be added after FrameworkBundle
+
+            new \SimpleBus\SymfonyBridge\SimpleBusCommandBusBundle(),
+            new \SimpleBus\SymfonyBridge\SimpleBusEventBusBundle()
         ];
 
         if (in_array($this->environment, ['dev', 'test', 'test_cached'], true)) {

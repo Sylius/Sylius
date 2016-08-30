@@ -11,8 +11,10 @@
 
 namespace Sylius\Bundle\ShopBundle\Controller;
 
+use SimpleBus\Message\Bus\MessageBus;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
-use Sylius\Component\Core\Locale\LocaleStorageInterface;
+use Sylius\Component\Core\Locale\Command\SwitchLocaleCommand;
+use Sylius\Component\Core\Locale\ValueObject\LocaleCode;
 use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
@@ -46,29 +48,29 @@ final class LocaleController
     private $channelContext;
 
     /**
-     * @var LocaleStorageInterface
+     * @var MessageBus
      */
-    private $localeStorage;
+    private $messageBus;
 
     /**
      * @param EngineInterface $templatingEngine
      * @param LocaleContextInterface $localeContext
      * @param LocaleProviderInterface $localeProvider
      * @param ChannelContextInterface $channelContext
-     * @param LocaleStorageInterface $localeStorage
+     * @param MessageBus $messageBus
      */
     public function __construct(
         EngineInterface $templatingEngine,
         LocaleContextInterface $localeContext,
         LocaleProviderInterface $localeProvider,
         ChannelContextInterface $channelContext,
-        LocaleStorageInterface $localeStorage
+        MessageBus $messageBus
     ) {
         $this->templatingEngine = $templatingEngine;
         $this->localeContext = $localeContext;
         $this->localeProvider = $localeProvider;
         $this->channelContext = $channelContext;
-        $this->localeStorage = $localeStorage;
+        $this->messageBus = $messageBus;
     }
 
     /**
@@ -90,7 +92,8 @@ final class LocaleController
      */
     public function switchLocaleAction(Request $request, $code)
     {
-        $this->localeStorage->set($this->channelContext->getChannel(), $code);
+        $command = new SwitchLocaleCommand(new LocaleCode($code), $this->channelContext->getChannel());
+        $this->messageBus->handle($command);
 
         return new RedirectResponse($request->headers->get('referer'));
     }

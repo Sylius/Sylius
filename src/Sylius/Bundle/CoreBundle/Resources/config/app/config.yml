@@ -139,3 +139,6 @@ twig:
     exception_controller: "FOS\\RestBundle\\Controller\\ExceptionController::showAction"
     globals:
         shopperContext: "@sylius.context.shopper"
+
+command_bus:
+    command_name_resolver_strategy: named_message
