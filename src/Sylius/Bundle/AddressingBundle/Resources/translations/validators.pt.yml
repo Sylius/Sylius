@@ -4,13 +4,57 @@
 sylius:
     address:
         city:
-            max_length: O campo cidade não deve ter mais de 255 caracteres.
-            min_length: O campo cidade deve conter pelo menos 2 caracteres.
+            max_length: A cidade não deve ter mais que 255 caracteres.
+            min_length: A cidade deve conter pelo menos 2 caracteres.
             not_blank: Por favor introduza a cidade.
         country:
             not_blank: Por favor selecione um país.
+            disabled: O país escolhido está desactivado. Por favor, escolha um diferente.
         first_name:
-            max_length: Primeiro nome não deve ter mais de 255 characters| Primeiro nome não deve ter mais de 255 caracteres.
-            min_length: O primeiro nome deve ter pelo menos 2 caracteres| O primeiro nome deve ter pelo menos 2 caracteres.
+            max_length: O primeiro nome não deve ter mais que 255 caracteres|O primeiro nome não deve ter mais que 255 caracteres.
+            min_length: O primeiro nome deve ter pelo menos 2 caracteres|O primeiro nome deve ter pelo menos 2 caracteres.
+            not_blank: Por favor introduza o primeiro nome.
+        last_name:
+            max_length: O último nome não deve ser maior que 255 caracteres|O último nome não deve ser maior que 255 caracteres.
+            min_length: O primeiro nome deve ter pelo menos 2 caracteres|O primeiro nome deve ter pelo menos 2 caracteres.
+            not_blank: Por favor insira o último nome.
         postcode:
+            max_length: O código postal não deve ter mais que 255 caracteres|O código postal não deve ter mais que 255 caracteres.
+            min_length: O código postal deve ter pelo menos 2 caracteres|O código postal deve ter pelo menos 2 caracteres.
             not_blank: Por favor introduza o código postal.
+        province:
+            valid: Por favor selecione a província adequada.
+        street:
+            max_length: A rua não deve ter mais que 255 caracteres|A rua não deve ter mais que 255 caracteres.
+            min_length: A morada deve ter pelo menos 2 caracteres|A morada deve ter pelo menos 2 caracteres.
+            not_blank: Por favor introduza a morada.
+        not_shippable: Este endereço de entrega não é válido.
+    country:
+        code:
+            not_blank: Por favor introduza o código ISO do país.
+            unique: O código ISO do país deve ser único.
+    province:
+        code:
+            min_length: O código da província deve ter pelo menos 5 caracteres|O código da província deve ter pelo menos 5 caracteres.
+            not_blank: Por favor introduza o código da província.
+            regex: O código de província deve ter o seguinte formato XX-XX (por exemplo, U.S.-FL).
+            unique: O código da província deve ser único.
+        name:
+            max_length: O nome da província não deve ter mais que 255 caracteres|O nome da província não deve ter mais que 255 caracteres.
+            min_length: O código da província deve ter pelo menos 5 caracteres|O código da província deve ter pelo menos 5 caracteres.
+            not_blank: Por favor introduza o nome de província.
+            unique: O nome da província deve ser único.
+    zone:
+        code:
+            not_blank: Por favor introduza o código de zona.
+            unique: O código de zona deve ser único.
+        members:
+            min_count: 'Por favor adicione pelo menos {{ limit }} membro(s) de zona.'
+        name:
+            max_length: O nome da zona não deve ter mais que 255 caracteres|O nome da zona não deve ter mais que 255 caracteres.
+            min_length: O nome da zona deve ter pelo menos 2 caracteres|O nome da zona deve ter pelo menos 2 caracteres.
+            not_blank: Por favor introduza o nome de zona.
+    zone_member:
+        code:
+            not_blank: Por favor escolha um membro de zona.
+        unique: Membro de zona escolhido já está nesta zona.

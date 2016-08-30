@@ -4,16 +4,56 @@
 sylius:
     form:
         action:
+            fixed_discount_configuration:
+                amount: Quantia
             percentage_discount_configuration:
                 percentage: Porcentagem
             shipping_discount_configuration:
                 percentage: Porcentagem
             type: Tipo
         rule:
+            taxonomy_configuration:
+                taxons: Táxons
+                exclude: Excluir
             contains_product_configuration:
                 variants: Produtos
+                exclude: Excluir
+            cart_quantity_configuration:
+                count: Quantidade
+                equal: Igualdade
+            item_total_configuration:
+                amount: Quantia
+            nth_order_configuration:
+                nth: N-ésimo
+            customer_loyalty_configuration:
+                time: Tempo
+                unit:
+                    days: Dias
+                    weeks: Semanas
+                    months: Meses
+                    years: Anos
+                    header: Unidade
+                after: Utilizador criado após este período
+            shipping_country_configuration:
+                country: País
             type: Tipo
+        coupon:
+            usage_limit: Limite de utilização
+            expires_at: Expira em
+        coupon_generate_instruction:
+            amount: Quantia
+            usage_limit: Limite de utilização
+            expires_at: Expira em
+            code_length: Comprimento do código
         promotion:
+            actions: Ações
             add_action: Adicionar ação
             add_rule: Adicionar regra
+            coupon_based: Baseada em cupão
+            exclusive: Exclusivo
             description: Descrição
+            ends_at: Termina em
+            name: Nome
+            rules: Regras
+            starts_at: Começa em
+            usage_limit: Limite de utilização

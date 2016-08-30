@@ -4,6 +4,39 @@
 sylius:
     credit_card:
         cardholder_name:
-            not_blank: Por favor, digite o nome do titular do cartão.
+            min_length: 'O nome do titular do cartão deve ter pelo menos {{ limit }} caracteres.'
+            not_blank: Por favor introduza o nome do titular do cartão.
         expiry_month:
-            min_range: 'Mês de expiração do cartão de crédito devem estar entre {{ min }} e {{ max }}.'
+            max_range: 'O mês de validade do cartão de crédito deve estar entre {{ min }} e {{ max }}.'
+            min_range: 'O mês de validade do cartão de crédito deve estar compreendido entre {{ min }} e {{ max }}.'
+            not_blank: Selecione o mês de validade.
+        number:
+            not_blank: Introduza o número do cartão.
+            luhn: O número de cartão de crédito inserido é inválido.
+        security_code:
+            not_blank: Por favor introduza o código de segurança.
+            max_length: 'O código de segurança (CVV) do cartão de crédito deve ter pelo menos {{ limit }} dígitos.'
+            min_length: 'O código de segurança (CVV) do cartão de crédito deve ter pelo menos {{ limit }} dígitos.'
+        expiry_year:
+            not_blank: Por favor selecione o ano de validade.
+    payment:
+        currency_code:
+            not_valid: O código de moeda introduzido é inválido.
+    payment_method:
+        gateway:
+            not_blank: Por favor selecione o gateway do método de pagamento.
+        name:
+            max_length: 'O nome do método de pagamento deve ter mais ou menos {{ limit }} caracteres.'
+            min_length: 'O nome do método de pagamento deve ter pelo menos {{ limit }} caracteres.'
+            not_blank: Por favor introduza o nome do método de pagamento.
+        fee_calculator_configuration:
+            amount:
+                greater_than_or_equal: 'A taxa não pode ser inferior a {{ compared_value }}.'
+                not_blank: Por favor, digite a quantidade de taxa.
+            percent:
+                max_range: 'A taxa de percentagem não pode ser maior que {{ limit }}.'
+                min_range: 'A taxa de percentagem não pode ser inferior a {{ limit }}.'
+                not_blank: Por favor introduza a percentagem de taxa.
+        code:
+            not_blank: Por favor introduza o código do método de pagamento.
+            unique: Já existe um método de pagamento com o código introduzido.

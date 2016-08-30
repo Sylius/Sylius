@@ -41,16 +41,19 @@ sylius:
         adding_new_email: Új email hozzáadása
         adding_new_locale: Új terület hozzáadása
         additional_information: Kiegészítő információ
+        address: Lakcím
         addressing: Címzés
         addressing_step: Cím beállítása
         adjustments: Kiigazítások
         administration: Adminisztráció
         administration_dashboard: Admin felület
         administration_panel_login: Adminisztrációs panel bejelentkezés
+        admin_users: Adminisztrátorok
         all: Mind
         all_your_addresses: Minden Ön által megadott cím
         amount: Összeg
         an_error_occurred: Hiba történt
+        api: API
         apply_coupon: Kupon használata
         are_your_sure_you_want_to_perform_this_action: Biztos vagy benne, hogy végrehajtod ezt a műveletet?
         association: Kapcsolatok
@@ -79,6 +82,7 @@ sylius:
         calculator: Számológép
         cancel: Mégse
         cancelled: Megszakítva
+        cart: Kosár
         cart_locked: Kosár lezárva
         cart_summary: Kosár tartalma
         categorization: Kategorizálás
@@ -293,6 +297,7 @@ sylius:
         extra_notes: További megjegyzések
         failed: Sikertelen
         faqs: GYIK
+        female: Nő
         filter: Szűrő
         filters: Szűrők
         first_name: Keresztnév
@@ -362,6 +367,7 @@ sylius:
         login_sylius_store: 'Bejelentkezés a <small>Sylius webáruházba</small>'
         logout: Kilépés
         main_taxon: Fő taxonómia
+        male: Férfi
         manage: Kezelés
         manage_adjustments: Korrekciók kezelése
         manage_attributes: Attribútumok kezelése
@@ -472,6 +478,7 @@ sylius:
         not_empty: Nem üres
         not_in: Nincs benne
         not_verified: Nincs megerősítve
+        notes: Jegyzetek
         notify_customer: Ügyfél értesítése
         number: Szám
         number_of_orders: Rendelések száma

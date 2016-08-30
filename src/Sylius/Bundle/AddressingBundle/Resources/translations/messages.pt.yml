@@ -18,8 +18,10 @@ sylius:
             name: Nome
             provinces: Distritos
             select: Seleccionar
+            enabled: Ativado
         province:
             name: Nome
+            abbreviation: Abreviatura
             select: Seleccionar
         zone:
             add_member: Adicionar membro
@@ -30,6 +32,8 @@ sylius:
                 country: País
                 province: Distrito
                 zone: Zona
+            scope: Âmbito
             select: Seleccionar
+            select_scope: Selecione o âmbito
         zone_member:
             select: Seleccionar

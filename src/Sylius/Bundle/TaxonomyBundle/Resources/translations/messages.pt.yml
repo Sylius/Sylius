@@ -6,3 +6,7 @@ sylius:
         taxon:
             description: Descrição
             name: Nome
+            parent: Pai
+            permalink: Ligação permanente
+        taxonomy:
+            name: Nome

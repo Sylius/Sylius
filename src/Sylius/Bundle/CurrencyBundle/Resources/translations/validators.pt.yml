@@ -4,4 +4,8 @@
 sylius:
     currency:
         code:
-            unique: Código da moeda deve ser único.
+            not_blank: Por favor escolha o código da moeda.
+            unique: O código da moeda deve ser único.
+            exact_length: O código da moeda deve ter 3 caracteres.
+        exchange_rate:
+            not_blank: Introduza a taxa de câmbio.
