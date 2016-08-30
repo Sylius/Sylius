@@ -20,4 +20,4 @@ Feature: Prevent buying more products, than available in a stock
     Scenario: Being able to add some product's items to the cart if the quantity is not greater than amount of items in stock
         When I add 4 products "T-shirt Mononoke" to the cart
         Then I should not be notified that this product does not have sufficient stock
-        And I should see my cart summary
+        And I should be on my cart summary page
