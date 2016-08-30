@@ -41,6 +41,7 @@ final class CustomerProfileTypeSpec extends ObjectBehavior
         $builder->add('birthday', 'birthday', Argument::type('array'))->shouldbeCalled()->willReturn($builder);
         $builder->add('gender', 'sylius_gender', Argument::type('array'))->shouldbeCalled()->willReturn($builder);
         $builder->add('phoneNumber', 'text', Argument::type('array'))->shouldbeCalled()->willReturn($builder);
+        $builder->add('subscribedToNewsletter', 'checkbox', Argument::type('array'))->shouldbeCalled()->willReturn($builder);
 
         $this->buildForm($builder);
     }
