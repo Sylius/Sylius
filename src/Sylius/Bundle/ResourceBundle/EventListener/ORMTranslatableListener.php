@@ -24,6 +24,7 @@ use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Sylius\Component\Resource\Metadata\RegistryInterface;
 use Sylius\Component\Resource\Model\TranslatableInterface;
 use Sylius\Component\Resource\Model\TranslationInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
@@ -38,28 +39,20 @@ class ORMTranslatableListener implements EventSubscriber
     private $resourceMetadataRegistry;
 
     /**
-     * @var LocaleContextInterface
+     * @var ContainerInterface
      */
-    private $localeContext;
-
-    /**
-     * @var LocaleProviderInterface
-     */
-    private $localeProvider;
+    private $container;
 
     /**
      * @param RegistryInterface $resourceMetadataRegistry
-     * @param LocaleContextInterface $localeContext
-     * @param LocaleProviderInterface $localeProvider
+     * @param ContainerInterface $container
      */
     public function __construct(
         RegistryInterface $resourceMetadataRegistry,
-        LocaleContextInterface $localeContext,
-        LocaleProviderInterface $localeProvider
+        ContainerInterface $container
     ) {
         $this->resourceMetadataRegistry = $resourceMetadataRegistry;
-        $this->localeContext = $localeContext;
-        $this->localeProvider = $localeProvider;
+        $this->container = $container;
     }
 
     /**
@@ -107,12 +100,18 @@ class ORMTranslatableListener implements EventSubscriber
             return;
         }
 
+        /** @var LocaleContextInterface $localeContext */
+        $localeContext = $this->container->get('sylius_resource.translation.locale_context');
+
+        /** @var LocaleProviderInterface $localeProvider */
+        $localeProvider = $this->container->get('sylius_resource.translation.locale_provider');
+
         try {
-            $entity->setCurrentLocale($this->localeContext->getLocaleCode());
+            $entity->setCurrentLocale($localeContext->getLocaleCode());
         } catch (LocaleNotFoundException $exception) {
-            $entity->setCurrentLocale($this->localeProvider->getDefaultLocaleCode());
+            $entity->setCurrentLocale($localeProvider->getDefaultLocaleCode());
         }
-        $entity->setFallbackLocale($this->localeProvider->getDefaultLocaleCode());
+        $entity->setFallbackLocale($localeProvider->getDefaultLocaleCode());
     }
 
     /**

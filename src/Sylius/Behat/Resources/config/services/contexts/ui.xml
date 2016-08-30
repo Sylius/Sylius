@@ -179,6 +179,11 @@
             <tag name="sylius.behat.context" />
         </service>
 
+        <service id="sylius.behat.context.ui.admin.managing_translatable_entities" class="Sylius\Behat\Context\Ui\Admin\ManagingTranslatableEntitiesContext" scope="scenario">
+            <argument type="service" id="sylius.behat.page.admin.taxon.create" />
+            <tag name="sylius.behat.context" />
+        </service>
+
         <service id="sylius.behat.context.ui.admin.managing_taxons" class="Sylius\Behat\Context\Ui\Admin\ManagingTaxonsContext" scope="scenario">
             <argument type="service" id="sylius.behat.page.admin.taxon.create" />
             <argument type="service" id="sylius.behat.page.admin.taxon.update" />

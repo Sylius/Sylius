@@ -182,7 +182,8 @@ sylius_promotion:
                 factory: Sylius\Component\Core\Factory\ActionFactory
 
 sylius_resource:
-    translation: true
+    translation:
+        locale_provider: sylius.locale_provider.admin
 
 sylius_review:
     resources:

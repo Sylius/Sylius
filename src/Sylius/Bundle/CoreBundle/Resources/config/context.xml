@@ -73,6 +73,11 @@
             <argument>%locale%</argument>
         </service>
 
+        <service id="sylius.locale_provider.admin" class="Sylius\Component\Locale\Provider\LocaleProvider" public="false">
+            <argument type="service" id="sylius.repository.locale" />
+            <argument>%locale%</argument>
+        </service>
+
         <service id="sylius.storage.locale" class="Sylius\Component\Core\Locale\LocaleStorage">
             <argument type="service" id="sylius.storage.session" />
         </service>
