@@ -6,6 +6,7 @@ default:
         ui_customer_registration:
             contexts_as_services:
                 - sylius.behat.context.hook.doctrine_orm
+                - sylius.behat.context.hook.email_spool
 
                 - sylius.behat.context.transform.shared_storage
                 - sylius.behat.context.transform.customer
@@ -16,6 +17,7 @@ default:
                 - sylius.behat.context.setup.shop_security
                 - sylius.behat.context.setup.user
 
+                - sylius.behat.context.ui.email
                 - sylius.behat.context.ui.shop.registration
             filters:
                 tags: "@customer_registration && @ui"

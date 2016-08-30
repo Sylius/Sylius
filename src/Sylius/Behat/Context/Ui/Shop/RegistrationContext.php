@@ -23,7 +23,6 @@ use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Behat\Service\SecurityServiceInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
-use Sylius\Component\Core\Test\Services\EmailCheckerInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -67,11 +66,6 @@ class RegistrationContext implements Context
     private $securityService;
 
     /**
-     * @var EmailCheckerInterface
-     */
-    private $emailChecker;
-
-    /**
      * @var CurrentPageResolverInterface
      */
     private $currentPageResolver;
@@ -89,7 +83,6 @@ class RegistrationContext implements Context
      * @param VerificationPageInterface $verificationPage
      * @param ProfileUpdatePageInterface $profileUpdatePage
      * @param SecurityServiceInterface $securityService
-     * @param EmailCheckerInterface $emailChecker
      * @param CurrentPageResolverInterface $currentPageResolver
      * @param NotificationCheckerInterface $notificationChecker
      */
@@ -101,7 +94,6 @@ class RegistrationContext implements Context
         VerificationPageInterface $verificationPage,
         ProfileUpdatePageInterface $profileUpdatePage,
         SecurityServiceInterface $securityService,
-        EmailCheckerInterface $emailChecker,
         CurrentPageResolverInterface $currentPageResolver,
         NotificationCheckerInterface $notificationChecker
     ) {
@@ -112,7 +104,6 @@ class RegistrationContext implements Context
         $this->verificationPage = $verificationPage;
         $this->profileUpdatePage = $profileUpdatePage;
         $this->securityService = $securityService;
-        $this->emailChecker = $emailChecker;
         $this->currentPageResolver = $currentPageResolver;
         $this->notificationChecker = $notificationChecker;
     }
@@ -379,64 +370,6 @@ class RegistrationContext implements Context
         $this->notificationChecker->checkNotification(
             'An email with the verification link has been sent to your email address.',
             NotificationType::success()
-        );
-    }
-
-    /**
-     * @Then it should be sent to :recipient
-     */
-    public function anEmailShouldBeSentTo($recipient)
-    {
-        $this->assertEmailHasRecipient($recipient);
-    }
-
-    /**
-     * @Then :count email(s) should be sent to :recipient
-     */
-    public function numberOfEmailsShouldBeSentTo($count, $recipient)
-    {
-        $this->assertEmailHasRecipient($recipient);
-
-        Assert::eq(
-            $this->emailChecker->getMessagesCount(),
-            $count,
-            sprintf(
-                '%d messages were sent, while there should be %d.',
-                $this->emailChecker->getMessagesCount(),
-                $count
-            )
-        );
-    }
-
-    /**
-     * @Then a welcoming email should have been sent to :recipient
-     */
-    public function aWelcomingEmailShouldHaveBeenSentTo($recipient)
-    {
-        $this->assertEmailHasRecipient($recipient);
-        $this->assertEmailContainsMessage('Welcome to our store');
-
-    }
-
-    /**
-     * @param string $recipient
-     */
-    private function assertEmailHasRecipient($recipient)
-    {
-        Assert::true(
-            $this->emailChecker->hasRecipient($recipient),
-            'An email should have been sent to %s.'
-        );
-    }
-
-    /**
-     * @param string $message
-     */
-    private function assertEmailContainsMessage($message)
-    {
-        Assert::true(
-            $this->emailChecker->hasMessage($message),
-            sprintf('Message "%s" was not found in any email.', $message)
         );
     }
 
