@@ -339,6 +339,7 @@
         </service>
 
         <service id="sylius.behat.context.ui.email" class="Sylius\Behat\Context\Ui\EmailContext" scope="scenario">
+            <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.email_checker" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>

@@ -12,6 +12,8 @@
 namespace Sylius\Behat\Context\Ui;
 
 use Behat\Behat\Context\Context;
+use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Test\Services\EmailCheckerInterface;
 use Webmozart\Assert\Assert;
 
@@ -21,15 +23,22 @@ use Webmozart\Assert\Assert;
 final class EmailContext implements Context
 {
     /**
+     * @var SharedStorageInterface
+     */
+    private $sharedStorage;
+
+    /**
      * @var EmailCheckerInterface
      */
     private $emailChecker;
 
     /**
+     * @param SharedStorageInterface $sharedStorage
      * @param EmailCheckerInterface $emailChecker
      */
-    public function __construct(EmailCheckerInterface $emailChecker)
+    public function __construct(SharedStorageInterface $sharedStorage, EmailCheckerInterface $emailChecker)
     {
+        $this->sharedStorage = $sharedStorage;
         $this->emailChecker = $emailChecker;
     }
 
@@ -68,6 +77,20 @@ final class EmailContext implements Context
         $this->assertEmailHasRecipient($recipient);
         $this->assertEmailContainsMessage('Welcome to our store');
 
+    }
+
+    /**
+     * @Then an email with shipment's details of order :order should be sent to :recipient
+     */
+    public function anEmailWithShipmentDetailsOfOrderShouldBeSentTo(OrderInterface $order, $recipient)
+    {
+        $this->assertEmailHasRecipient($recipient);
+
+        $this->assertEmailContainsMessage($order->getNumber());
+        $this->assertEmailContainsMessage($order->getLastShipment()->getMethod()->getName());
+
+        $tracking = $this->sharedStorage->get('tracking_code');
+        $this->assertEmailContainsMessage($tracking);
     }
 
     /**

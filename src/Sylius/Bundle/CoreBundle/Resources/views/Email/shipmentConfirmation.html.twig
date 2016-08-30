@@ -3,5 +3,7 @@
 {% endblock %}
 
 {% block body %}
-    {{ 'sylius.email.shipment_confirmation.content'|trans }}
+    {% autoescape %}
+        {{ 'sylius.email.shipment_confirmation.content'|trans({'%number%': order.number, '%tracking%': shipment.tracking, '%method%': shipment.method }) }}
+    {% endautoescape %}
 {% endblock %}
