@@ -51,5 +51,5 @@ interface ProfileUpdatePageInterface extends PageInterface
     /**
      * @return bool
      */
-    public function isNewsletterSubscriptionEnabled();
+    public function isSubscribedToTheNewsletter();
 }

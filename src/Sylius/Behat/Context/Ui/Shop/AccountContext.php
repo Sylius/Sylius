@@ -433,7 +433,7 @@ final class AccountContext implements Context
     public function subscriptionToTheNewsletterShouldBeEnabled()
     {
         Assert::true(
-            $this->profileUpdatePage->isNewsletterSubscriptionEnabled(),
+            $this->profileUpdatePage->isSubscribedToTheNewsletter(),
             'Subscription to the newsletter should be enabled'
         );
     }

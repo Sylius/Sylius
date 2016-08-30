@@ -119,10 +119,10 @@ interface CustomerInterface extends
     /**
      * @return bool
      */
-    public function isNewsletterSubscription();
+    public function isSubscribedToNewsletter();
 
     /**
-     * @param bool $newsletterSubscription
+     * @param bool $subscribedToNewsletter
      */
-    public function setNewsletterSubscription($newsletterSubscription);
+    public function setSubscribedToNewsletter($subscribedToNewsletter);
 }

@@ -70,7 +70,7 @@ class Customer implements CustomerInterface, GroupableInterface
     /**
      * @var bool
      */
-    protected $newsletterSubscription = false;
+    protected $subscribedToNewsletter = false;
 
     public function __construct()
     {
@@ -274,17 +274,17 @@ class Customer implements CustomerInterface, GroupableInterface
     /**
      * {@inheritdoc}
      */
-    public function isNewsletterSubscription()
+    public function isSubscribedToNewsletter()
     {
-        return $this->newsletterSubscription;
+        return $this->subscribedToNewsletter;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setNewsletterSubscription($newsletterSubscription)
+    public function setSubscribedToNewsletter($subscribedToNewsletter)
     {
-        $this->newsletterSubscription = $newsletterSubscription;
+        $this->subscribedToNewsletter = $subscribedToNewsletter;
     }
 
     public function __toString()

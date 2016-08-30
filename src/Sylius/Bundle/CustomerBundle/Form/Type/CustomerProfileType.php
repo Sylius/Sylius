@@ -46,9 +46,9 @@ class CustomerProfileType extends AbstractResourceType
                 'required' => false,
                 'label' => 'sylius.form.customer.phone_number',
             ])
-            ->add('newsletterSubscription', 'checkbox', [
+            ->add('subscribedToNewsletter', 'checkbox', [
                 'required' => false,
-                'label' => 'sylius.form.customer.newsletter_subscription',
+                'label' => 'sylius.form.customer.subscribed_to_newsletter',
             ])
         ;
     }
