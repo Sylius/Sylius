@@ -36,6 +36,15 @@
                     <div class="meta">
                         <span class="date">{{ 'sylius.ui.customer_since'|trans }} {{ customer.createdAt|date }}</span>
                     </div>
+                    <br />
+                    <div id="subscribed-to-newsletter">
+                        {% if customer.subscribedToNewsletter %}
+                            <i class="green checkmark icon"></i>
+                        {% else %}
+                            <i class="red remove icon"></i>
+                        {% endif %}
+                        {{ 'sylius.ui.subscribed_to_newsletter'|trans }}
+                    </div>
                 </div>
                 <div class="extra content">
                     <a href="mailto: {{ customer.email }}">

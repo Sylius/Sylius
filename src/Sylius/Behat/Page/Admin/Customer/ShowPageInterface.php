@@ -63,4 +63,9 @@ interface ShowPageInterface extends PageInterface
      * @return bool
      */
     public function hasAccount();
+
+    /**
+     * @return bool
+     */
+    public function isSubscribedToNewsletter();
 }
