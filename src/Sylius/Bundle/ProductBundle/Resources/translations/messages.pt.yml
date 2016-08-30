@@ -4,6 +4,18 @@
 sylius:
     form:
         product:
+            name: Nome
             description: Descrição
+            attributes: Atributos
+            options: Opções
+            meta_keywords: Palavras-chave meta
+            meta_description: Descrição meta
+            taxons: Táxons
         product_variant:
             available_on: Disponível em
+            available_until: Disponível até
+        association_type:
+            name: Nome
+        association:
+            type: Tipo de associação
+            product: Produto associado

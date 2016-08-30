@@ -3,5 +3,24 @@
 
 sylius:
     user:
+        email:
+            not_exist: Não existe nenhum utilizador com este endereço de e-mail.
         password:
             invalid: Palavra-passe atual incorreta.
+            request:
+                success: Enviámos-lhe um e-mail com instruções para redefinir a sua palavra-passe!
+            reset:
+                success: A sua palavra-passe foi redefinida com sucesso!
+            change:
+                success: A sua palavra-passe foi alterada com sucesso!
+        reset_password:
+            requested: Se o email especificado existir no sistema, receberá um e-mail com instruções para redefinir a sua palavra-passe.
+        verification:
+            error: O token de verificação é inválido.
+            notice:
+                verified: O seu endereço de e-mail já foi verificado.
+            success: O seu endereço de e-mail foi verificado com sucesso.
+            request:
+                success: Um e-mail com um link de verificação foi enviado para seu endereço de e-mail.
+    customer:
+        register: Obrigado por se registar. Por favor verifique o seu e-mail para verificar a sua conta.
