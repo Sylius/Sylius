@@ -449,15 +449,15 @@ class RegistrationContext implements Context
     }
 
     /**
-     * @Then subscription to the newsletter should be enabled
+     * @Then I should be subscribed to the newsletter
      */
-    public function subscriptionToTheNewsletterShouldBeEnabled()
+    public function iShouldBeSubscribedToTheNewsletter()
     {
         $this->profileUpdatePage->open();
 
         Assert::true(
             $this->profileUpdatePage->isSubscribedToTheNewsletter(),
-            'Subscription to the newsletter should be enabled'
+            'I should be subscribed to the newsletter, but I am not'
         );
     }
 

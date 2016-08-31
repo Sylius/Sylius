@@ -18,4 +18,4 @@ Feature: Subscribing to the newsletter during registration
         And I subscribe to the newsletter
         And I register this account
         Then I should be notified that new account has been successfully created
-        And subscription to the newsletter should be enabled
+        And I should be subscribed to the newsletter
