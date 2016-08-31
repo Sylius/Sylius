@@ -117,6 +117,7 @@ class Configuration implements ConfigurationInterface
                                 ->children()
                                     ->scalarNode('name')->defaultValue(DoctrineORMDriver::NAME)->end()
                                     ->arrayNode('options')
+                                        ->useAttributeAsKey('name')
                                         ->prototype('variable')->end()
                                         ->defaultValue([])
                                     ->end()
