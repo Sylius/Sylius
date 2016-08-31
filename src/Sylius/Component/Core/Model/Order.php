@@ -71,6 +71,11 @@ class Order extends Cart implements OrderInterface
     protected $exchangeRate = 1.0;
 
     /**
+     * @var string
+     */
+    protected $localeCode;
+
+    /**
      * @var BaseCouponInterface
      */
     protected $promotionCoupon;
@@ -423,6 +428,24 @@ class Order extends Cart implements OrderInterface
     public function setExchangeRate($exchangeRate)
     {
         $this->exchangeRate = (float) $exchangeRate;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLocaleCode()
+    {
+        return $this->localeCode;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setLocaleCode($localeCode)
+    {
+        Assert::string($localeCode);
+
+        $this->localeCode = $localeCode;
     }
 
     /**

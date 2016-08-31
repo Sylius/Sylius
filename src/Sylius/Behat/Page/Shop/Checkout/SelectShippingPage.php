@@ -98,7 +98,7 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
 
     public function nextStep()
     {
-        $this->getDocument()->pressButton('Next');
+        $this->getElement('next_step')->press();
     }
 
     public function changeAddress()
@@ -119,6 +119,7 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
         return array_merge(parent::getDefinedElements(), [
             'address' => '.steps a:contains("Address")',
             'checkout_subtotal' => '#checkout-subtotal',
+            'next_step' => '#next-step',
             'order_cannot_be_shipped_message' => '#sylius-order-cannot-be-shipped',
             'shipping_method' => '[name="sylius_checkout_select_shipping[shipments][0][method]"]',
             'shipping_method_option' => '.item:contains("%shipping_method%") input',
