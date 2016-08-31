@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Core\Inventory\Updater;
 
+use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Webmozart\Assert\Assert;
 
@@ -22,17 +23,20 @@ final class OnHandQuantityUpdater implements OnHandQuantityUpdaterInterface
     /**
      * {@inheritdoc}
      */
-    public function decrease($orderItems)
+    public function decrease(OrderInterface $order)
     {
+        $orderItems = $order->getItems();
         foreach ($orderItems as $orderItem) {
             Assert::greaterThanEq($orderItem->getQuantity(), 0, 'Quantity of order items cannot be negative number.');
 
             /** @var OrderItemInterface $orderItem*/
             $variant = $orderItem->getVariant();
 
-            Assert::greaterThanEq(($variant->getOnHand() - $orderItem->getQuantity()), 0, 'Quantity of variant items on hand cannot be negative number.');
-            
-            $variant->setOnHand($variant->getOnHand() - $orderItem->getQuantity());
+            if ($variant->isTracked()) {
+                Assert::greaterThanEq(($variant->getOnHand() - $orderItem->getQuantity()), 0, 'Quantity of variant items on hand cannot be negative number.');
+
+                $variant->setOnHand($variant->getOnHand() - $orderItem->getQuantity());
+            }
         }
     }
 }

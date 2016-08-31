@@ -11,8 +11,7 @@
 
 namespace Sylius\Component\Core\Inventory\Updater;
 
-use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Core\Model\OrderItemInterface;
+use Sylius\Component\Core\Model\OrderInterface;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
@@ -20,7 +19,7 @@ use Sylius\Component\Core\Model\OrderItemInterface;
 interface OnHandQuantityUpdaterInterface
 {
     /**
-     * @var Collection|OrderItemInterface[]
+     * @var OrderInterface $order
      */
-    public function decrease($orderItems);
+    public function decrease(OrderInterface $order);
 }
