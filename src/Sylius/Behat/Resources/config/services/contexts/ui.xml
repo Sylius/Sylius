@@ -322,15 +322,16 @@
         </service>
 
         <service id="sylius.behat.context.ui.shop.registration" class="Sylius\Behat\Context\Ui\Shop\RegistrationContext" scope="scenario">
-            <argument type="service" id="sylius.behat.current_page_resolver" />
+            <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.page.shop.account.dashboard" />
             <argument type="service" id="sylius.behat.page.shop.home" />
-            <argument type="service" id="sylius.behat.notification_checker" />
             <argument type="service" id="sylius.behat.page.shop.account.register" />
             <argument type="service" id="sylius.behat.page.shop.account.verify" />
+            <argument type="service" id="sylius.behat.page.shop.account.profile_update" />
             <argument type="service" id="sylius.behat.shop_security" />
             <argument type="service" id="sylius.behat.email_checker" container="symfony" />
-            <argument type="service" id="sylius.behat.shared_storage" />
+            <argument type="service" id="sylius.behat.current_page_resolver" />
+            <argument type="service" id="sylius.behat.notification_checker" />
             <tag name="sylius.behat.context" />
         </service>
 
