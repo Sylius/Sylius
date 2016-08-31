@@ -374,25 +374,19 @@ class RegistrationContext implements Context
     }
 
     /**
-     * @Then it should be sent to :email
+     * @Then it should be sent to :recipient
      */
-    public function verificationEmailShouldBeSentTo($email)
+    public function anEmailShouldBeSentTo($recipient)
     {
-        Assert::true(
-            $this->emailChecker->hasRecipient($email),
-            'The verification email should have been sent.'
-        );
+        $this->assertEmailHasRecipient($recipient);
     }
 
     /**
-     * @Then :count email(s) should be sent to :email
+     * @Then :count email(s) should be sent to :recipient
      */
-    public function numberOfEmailsShouldBeSentTo($count, $email)
+    public function numberOfEmailsShouldBeSentTo($count, $recipient)
     {
-        Assert::true(
-            $this->emailChecker->hasRecipient($email),
-            sprintf('At least 1 email should have been sent to %s.', $email)
-        );
+        $this->assertEmailHasRecipient($recipient);
 
         Assert::eq(
             $this->emailChecker->getMessagesCount(),
@@ -402,6 +396,38 @@ class RegistrationContext implements Context
                 $this->emailChecker->getMessagesCount(),
                 $count
             )
+        );
+    }
+
+    /**
+     * @Then a welcoming email should have been sent to :recipient
+     */
+    public function aWelcomingEmailShouldHaveBeenSentTo($recipient)
+    {
+        $this->assertEmailHasRecipient($recipient);
+        $this->assertEmailContainsMessage('Welcome to our store');
+
+    }
+
+    /**
+     * @param string $recipient
+     */
+    private function assertEmailHasRecipient($recipient)
+    {
+        Assert::true(
+            $this->emailChecker->hasRecipient($recipient),
+            'An email should have been sent to %s.'
+        );
+    }
+
+    /**
+     * @param string $message
+     */
+    private function assertEmailContainsMessage($message)
+    {
+        Assert::true(
+            $this->emailChecker->hasMessage($message),
+            sprintf('Message "%s" was not found in any email.', $message)
         );
     }
 
