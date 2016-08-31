@@ -15,6 +15,7 @@ default:
                 - sylius.behat.context.setup.shop_security
                 - sylius.behat.context.setup.user
 
+                - sylius.behat.context.ui.email
                 - sylius.behat.context.ui.shop.registration
             filters:
                 tags: "@email_verification && @ui"

@@ -105,6 +105,7 @@ final class ManagingOrdersContext implements Context
     public function specifyItsTrackingCodeAs($trackingCode)
     {
         $this->showPage->specifyTrackingCode($trackingCode);
+        $this->sharedStorage->set('tracking_code', $trackingCode);
     }
 
     /**
@@ -481,9 +482,9 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then I should be notified that the order's shipment has been successfully shipped
+     * @Then I should be notified that the order has been successfully shipped
      */
-    public function iShouldBeNotifiedThatTheOrderSShipmentHasBeenSuccessfullyShipped()
+    public function iShouldBeNotifiedThatTheOrderHasBeenSuccessfullyShipped()
     {
         $this->notificationChecker->checkNotification('Shipment has been successfully updated.', NotificationType::success());
     }

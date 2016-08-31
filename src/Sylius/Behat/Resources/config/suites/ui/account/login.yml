@@ -6,12 +6,14 @@ default:
         ui_customer_login:
             contexts_as_services:
                 - sylius.behat.context.hook.doctrine_orm
+                - sylius.behat.context.hook.email_spool
 
                 - sylius.behat.context.transform.user
 
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.user
 
+                - sylius.behat.context.ui.email
                 - sylius.behat.context.ui.shop.login
             filters:
                 tags: "@customer_login && @ui"
