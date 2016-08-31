@@ -29,7 +29,7 @@ Feature: Seeing customer's details
         Then I should see information about no existing account for this customer
 
     @ui
-    Scenario: Seeing information about subscribed to the newsletter
-        Given he subscribes to the newsletter
+    Scenario: Seeing information about subscription to the newsletter
+        Given the customer subscribes to the newsletter
         When I view details of the customer "f.baggins@shire.me"
-        Then I should see that this customer subscribes to the newsletter
+        Then I should see that this customer is subscribed to the newsletter

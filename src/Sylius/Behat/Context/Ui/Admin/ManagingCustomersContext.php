@@ -500,13 +500,13 @@ final class ManagingCustomersContext implements Context
     }
 
     /**
-     * @Then I should see that this customer subscribes to the newsletter
+     * @Then I should see that this customer is subscribed to the newsletter
      */
-    public function iShouldSeeThatThisCustomerSubscribesToTheNewsletter()
+    public function iShouldSeeThatThisCustomerIsSubscribedToTheNewsletter()
     {
         Assert::true(
             $this->showPage->isSubscribedToNewsletter(),
-            'There should be information that this customer subscribes to the newsletter.'
+            'There should be information that this customer is subscribed to the newsletter.'
         );
     }
 }
