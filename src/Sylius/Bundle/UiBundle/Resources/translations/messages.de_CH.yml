@@ -13,6 +13,7 @@ sylius:
         city: Stadt
         code: Code
         company: Firma
+        content: Inhalt
         coupon: Gutschein
         default_currency: Standardwährung
         email: E-Mail

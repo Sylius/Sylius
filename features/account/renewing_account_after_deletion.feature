@@ -5,7 +5,7 @@ Feature: Registering an account again after it has been deleted
     I want to be able to register again with the same e-mail
 
     Background:
-        Given the store operates on a single channel in "France"
+        Given the store operates on a single channel in "United States"
         And there was account of "ted@example.com" with password "pswd"
         But his account was deleted
 

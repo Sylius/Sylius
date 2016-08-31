@@ -7,12 +7,11 @@ sylius_api_product_variant_index:
     defaults:
         _controller: sylius.controller.product_variant:indexAction
         _sylius:
-            paginate:   $limit
-            sortable:   true
+            paginate: $limit
+            sortable: true
             filterable: true
             criteria:
                 object: $productId
-                master: false
 
 sylius_api_product_variant_create:
     path: /

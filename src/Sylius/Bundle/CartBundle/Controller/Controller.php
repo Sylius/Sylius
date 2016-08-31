@@ -13,9 +13,8 @@ namespace Sylius\Bundle\CartBundle\Controller;
 
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
+use Sylius\Component\Cart\Context\CartContextInterface;
 use Sylius\Component\Cart\Model\CartInterface;
-use Sylius\Component\Cart\Provider\CartProviderInterface;
-use Sylius\Component\Cart\Resolver\ItemResolverInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
@@ -60,14 +59,6 @@ abstract class Controller extends ResourceController
     protected function getContext()
     {
         return $this->container->get('sylius.context.cart');
-    }
-
-    /**
-     * @return ItemResolverInterface
-     */
-    protected function getResolver()
-    {
-        return $this->container->get('sylius.cart_resolver');
     }
 
     /**

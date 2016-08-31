@@ -13,9 +13,10 @@ namespace Sylius\Behat\Service;
 
 use Sylius\Behat\Service\Setter\CookieSetterInterface;
 use Sylius\Component\User\Model\UserInterface;
-use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -23,11 +24,6 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
  */
 final class SecurityService implements SecurityServiceInterface
 {
-    /**
-     * @var UserRepositoryInterface
-     */
-    private $userRepository;
-
     /**
      * @var SessionInterface
      */
@@ -44,40 +40,30 @@ final class SecurityService implements SecurityServiceInterface
     private $sessionTokenVariable;
 
     /**
-     * @param UserRepositoryInterface $userRepository
      * @param SessionInterface $session
      * @param CookieSetterInterface $cookieSetter
-     * @param string $contextKey
+     * @param string $firewallContextName
      */
-    public function __construct(
-        UserRepositoryInterface $userRepository,
-        SessionInterface $session,
-        CookieSetterInterface $cookieSetter,
-        $contextKey
-    ) {
-        $this->userRepository = $userRepository;
+    public function __construct(SessionInterface $session, CookieSetterInterface $cookieSetter, $firewallContextName)
+    {
         $this->session = $session;
         $this->cookieSetter = $cookieSetter;
-        $this->sessionTokenVariable = sprintf('_security_%s', $contextKey);
+        $this->sessionTokenVariable = sprintf('_security_%s', $firewallContextName);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function logIn($email)
+    public function logIn(UserInterface $user)
     {
-        /** @var UserInterface $user */
-        $user = $this->userRepository->findOneBy(['username' => $email]);
-        if (null === $user) {
-            throw new \InvalidArgumentException(sprintf('There is no user with email %s', $email));
-        }
-
-        $this->logUserIn($user);
+        $token = new UsernamePasswordToken($user, $user->getPassword(), 'randomstringbutnotnull', $user->getRoles());
+        $this->setToken($token);
     }
 
     public function logOut()
     {
-        $this->setSerializedToken(null);
+        $this->session->set($this->sessionTokenVariable, null);
+        $this->session->save();
 
         $this->cookieSetter->setCookie($this->session->getName(), $this->session->getId());
     }
@@ -85,58 +71,33 @@ final class SecurityService implements SecurityServiceInterface
     /**
      * {@inheritdoc}
      */
-    public function performActionAs(UserInterface $user, callable $action)
+    public function getCurrentToken()
     {
-        $previousToken = $this->getToken();
-        $this->logUserIn($user);
-        $action();
+        $serializedToken = $this->session->get($this->sessionTokenVariable);
 
-        if (null !== $previousToken) {
-            $this->restorePreviousSessionToken($previousToken);
-
-            return;
+        if (null === $serializedToken) {
+            throw new TokenNotFoundException();
         }
 
-        $this->logOut();
+        return unserialize($serializedToken);
     }
 
     /**
-     * @param UserInterface $user
+     * {@inheritdoc}
      */
-    private function logUserIn(UserInterface $user)
+    public function restoreToken(TokenInterface $token)
     {
-        $token = new UsernamePasswordToken($user, $user->getPassword(), 'randomstringbutnotnull', $user->getRoles());
+        $this->setToken($token);
+    }
+
+    /**
+     * @param TokenInterface $token
+     */
+    private function setToken(TokenInterface $token)
+    {
         $serializedToken = serialize($token);
-
-        $this->setSerializedToken($serializedToken);
-
-        $this->cookieSetter->setCookie($this->session->getName(), $this->session->getId());
-    }
-
-    /**
-     * @param string $token
-     */
-    private function restorePreviousSessionToken($token)
-    {
-        $this->setSerializedToken($token);
-
-        $this->cookieSetter->setCookie($this->session->getName(), $this->session->getId());
-    }
-
-    /**
-     * @param string $token
-     */
-    private function setSerializedToken($token)
-    {
-        $this->session->set($this->sessionTokenVariable, $token);
+        $this->session->set($this->sessionTokenVariable, $serializedToken);
         $this->session->save();
-    }
-
-    /**
-     * @return string
-     */
-    private function getToken()
-    {
-        return $this->session->get($this->sessionTokenVariable);
+        $this->cookieSetter->setCookie($this->session->getName(), $this->session->getId());
     }
 }

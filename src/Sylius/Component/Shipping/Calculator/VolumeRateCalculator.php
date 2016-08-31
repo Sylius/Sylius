@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Shipping\Calculator;
 
-use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
+use Sylius\Component\Shipping\Model\ShipmentInterface;
 
 /**
  * @author Antonio Peric <antonio@locastic.com>
@@ -21,7 +21,7 @@ class VolumeRateCalculator implements CalculatorInterface
     /**
      * {@inheritdoc}
      */
-    public function calculate(ShippingSubjectInterface $subject, array $configuration)
+    public function calculate(ShipmentInterface $subject, array $configuration)
     {
         return (int) round($configuration['amount'] * ($subject->getShippingVolume() / $configuration['division']));
     }

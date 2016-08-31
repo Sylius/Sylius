@@ -14,7 +14,7 @@ namespace spec\Sylius\Bundle\PaymentBundle\Form\Type;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Payment\Model\PaymentInterface;
-use Sylius\Component\Payment\Resolver\MethodsResolverInterface;
+use Sylius\Component\Payment\Resolver\PaymentMethodsResolverInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
@@ -26,7 +26,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 final class PaymentMethodChoiceTypeSpec extends ObjectBehavior
 {
-    function let(MethodsResolverInterface $compositeMethodsResolver, RepositoryInterface $paymentMethodRepository)
+    function let(PaymentMethodsResolverInterface $compositeMethodsResolver, RepositoryInterface $paymentMethodRepository)
     {
         $this->beConstructedWith($compositeMethodsResolver, $paymentMethodRepository);
     }

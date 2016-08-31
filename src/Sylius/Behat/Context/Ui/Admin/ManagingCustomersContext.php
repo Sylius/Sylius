@@ -487,4 +487,45 @@ final class ManagingCustomersContext implements Context
             'Customer billing address should be "%s", but it is not.'
         );
     }
+
+    /**
+     * @Then I should see information about no existing account for this customer
+     */
+    public function iShouldSeeInformationAboutNoExistingAccountForThisCustomer()
+    {
+        Assert::true(
+            $this->showPage->hasAccount(),
+            'There should be information about no account, but there is none.'
+        );
+    }
+
+    /**
+     * @Then I should see that this customer is subscribed to the newsletter
+     */
+    public function iShouldSeeThatThisCustomerIsSubscribedToTheNewsletter()
+    {
+        Assert::true(
+            $this->showPage->isSubscribedToNewsletter(),
+            'There should be information that this customer is subscribed to the newsletter.'
+        );
+    }
+
+    /**
+     * @When I make them subscribed to the newsletter
+     */
+    public function iMakeThemSubscribedToTheNewsletter()
+    {
+        $this->updatePage->subscribeToTheNewsletter();
+    }
+
+    /**
+     * @Then this customer should subscribe to the newsletter
+     */
+    public function thisCustomerShouldSubscribeToTheNewsletter()
+    {
+        Assert::true(
+            $this->updatePage->isSubscribedToTheNewsletter(),
+            'This customer should subscribe to the newsletter.'
+        );
+    }
 }

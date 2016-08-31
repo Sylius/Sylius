@@ -5,4 +5,8 @@ sylius:
     menu:
         shop:
             account:
+                header: Ваша учетная запись
                 dashboard: Приборная панель
+                personal_information: Персональные данные
+                change_password: Сменить пароль
+                order_history: История заказов

@@ -4,7 +4,7 @@
 imports:
     - suites/cli/installer.yml
 
-    - suites/domain/managing_orders.yml
+    - suites/domain/order/managing_orders.yml
     - suites/domain/product/managing_products.yml
     - suites/domain/product/managing_product_variants.yml
     - suites/domain/promotion/managing_promotions.yml
@@ -17,6 +17,7 @@ imports:
     - suites/ui/addressing/managing_countries.yml
     - suites/ui/addressing/managing_zones.yml
     - suites/ui/admin/dashboard.yml
+    - suites/ui/admin/login.yml
     - suites/ui/cart/shopping_cart.yml
     - suites/ui/cmf/managing_routes.yml
     - suites/ui/cmf/managing_static_contents.yml
@@ -28,9 +29,9 @@ imports:
     - suites/ui/checkout/paying_for_order.yml
     - suites/ui/currency/currencies.yml
     - suites/ui/currency/managing_currencies.yml
+    - suites/ui/inventory/inventory.yml
     - suites/ui/locale/locales.yml
     - suites/ui/locale/managing_locales.yml
-    - suites/ui/order/placing_orders.yml
     - suites/ui/order/managing_orders.yml
     - suites/ui/payment/managing_payment_methods.yml
     - suites/ui/product/managing_product_attributes.yml
@@ -48,5 +49,6 @@ imports:
     - suites/ui/taxation/managing_tax_categories.yml
     - suites/ui/taxation/managing_tax_rates.yml
     - suites/ui/taxonomy/managing_taxons.yml
+    - suites/ui/user/managing_administrators.yml
     - suites/ui/user/managing_customers.yml
     - suites/ui/user/managing_users.yml

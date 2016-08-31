@@ -25,7 +25,7 @@ final class UserSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\User\Model\User');
+        $this->shouldHaveType(User::class);
     }
 
     function it_implements_user_interface()
@@ -81,5 +81,14 @@ final class UserSpec extends ObjectBehavior
         $ttl = new \DateInterval('PT1H');
 
         $this->isPasswordRequestNonExpired($ttl)->shouldReturn(false);
+    }
+
+    function it_has_email_and_email_canonical()
+    {
+        $this->setEmail('admin@example.com');
+        $this->setEmailCanonical('user@example.com');
+
+        $this->getEmail()->shouldReturn('admin@example.com');
+        $this->getEmailCanonical()->shouldReturn('user@example.com');
     }
 }

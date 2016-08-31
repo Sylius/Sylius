@@ -58,4 +58,14 @@ interface ShowPageInterface extends PageInterface
      * @return string
      */
     public function getBillingAddress();
+
+    /**
+     * @return bool
+     */
+    public function hasAccount();
+
+    /**
+     * @return bool
+     */
+    public function isSubscribedToNewsletter();
 }

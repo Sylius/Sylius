@@ -30,4 +30,5 @@ sylius:
             description: คำอธิบาย
             enabled: เปิดใช้งานแล้ว?
             gateway: ช่องทางการชำระเงิน
+            instructions: คำแนะนำ
             name: ชื่อ

@@ -9,5 +9,6 @@ sylius:
             password:
                 label: Κωδικός πρόσβασης
             shipping_address: Διεύθυνση αποστολής
+            username: Όνομα χρήστη
         user_filter:
             query: Αναζήτηση

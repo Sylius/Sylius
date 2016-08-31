@@ -28,7 +28,6 @@ sylius:
         author: Forfatter
         availability: Tilgængelighed
         available_on: Tilgængelig
-        available_on_demand: Tilgængelig for forudbestilling
         back: Tilbage
         backorder: Restordre
         balance_due: Restbeløb

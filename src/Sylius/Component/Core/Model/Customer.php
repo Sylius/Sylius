@@ -41,7 +41,7 @@ class Customer extends BaseCustomer implements CustomerInterface, ProductReviewe
     protected $addresses;
 
     /**
-     * @var UserInterface
+     * @var ShopUserInterface
      */
     protected $user;
 
@@ -165,9 +165,9 @@ class Customer extends BaseCustomer implements CustomerInterface, ProductReviewe
     }
 
     /**
-     * @param UserInterface $user
+     * @param ShopUserInterface $user
      */
-    protected function assignCustomer(UserInterface $user = null)
+    protected function assignCustomer(ShopUserInterface $user = null)
     {
         if (null !== $user) {
             $user->setCustomer($this);

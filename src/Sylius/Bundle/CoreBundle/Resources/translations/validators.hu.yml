@@ -27,3 +27,9 @@ sylius:
     product_translation:
         short_description:
             max: 'Rövid leírás nem lehet hosszabb mint {{ limit }} karakterek.'
+    user:
+        email:
+            unique: Ez az e-mail cím már használatban van.
+        username:
+            unique: Ez a felhasználónév már használatban van.
+            not_blank: Kérjük, add meg a neved.

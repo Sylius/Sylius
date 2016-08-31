@@ -21,7 +21,7 @@ use Sylius\Component\Cart\Context\CartNotFoundException;
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\UserInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
@@ -48,7 +48,7 @@ class CartBlamerListenerSpec extends ObjectBehavior
         CartContextInterface $cartContext,
         CartInterface $cart,
         UserEvent $userEvent,
-        UserInterface $user
+        ShopUserInterface $user
     ) {
         $cartContext->getCart()->willReturn($cart);
         $userEvent->getUser()->willReturn($user);
@@ -60,7 +60,7 @@ class CartBlamerListenerSpec extends ObjectBehavior
         CartInterface $cart,
         InteractiveLoginEvent $interactiveLoginEvent,
         TokenInterface $token,
-        UserInterface $user
+        ShopUserInterface $user
     ) {
         $cartContext->getCart()->willReturn($cart);
         $interactiveLoginEvent->getAuthenticationToken()->willReturn($token);
@@ -73,7 +73,7 @@ class CartBlamerListenerSpec extends ObjectBehavior
         CartContextInterface $cartContext,
         OrderInterface $cart,
         UserEvent $userEvent,
-        UserInterface $user,
+        ShopUserInterface $user,
         CustomerInterface $customer
     ) {
         $cartContext->getCart()->willReturn($cart);
@@ -91,7 +91,7 @@ class CartBlamerListenerSpec extends ObjectBehavior
         OrderInterface $cart,
         InteractiveLoginEvent $interactiveLoginEvent,
         TokenInterface $token,
-        UserInterface $user,
+        ShopUserInterface $user,
         CustomerInterface $customer
     ) {
         $cartContext->getCart()->willReturn($cart);
@@ -120,7 +120,7 @@ class CartBlamerListenerSpec extends ObjectBehavior
     function it_does_nothing_if_there_is_no_existing_cart_on_implicit_login(
         CartContextInterface $cartContext,
         UserEvent $userEvent,
-        UserInterface $user
+        ShopUserInterface $user
     ) {
         $cartContext->getCart()->willThrow(CartNotFoundException::class);
         $userEvent->getUser()->willReturn($user);
@@ -131,7 +131,7 @@ class CartBlamerListenerSpec extends ObjectBehavior
         CartContextInterface $cartContext,
         InteractiveLoginEvent $interactiveLoginEvent,
         TokenInterface $token,
-        UserInterface $user
+        ShopUserInterface $user
     ) {
         $cartContext->getCart()->willThrow(CartNotFoundException::class);
         $interactiveLoginEvent->getAuthenticationToken()->willReturn($token);

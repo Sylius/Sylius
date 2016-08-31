@@ -19,7 +19,7 @@ Feature: Handling disabled locales
     Scenario: Failing to browse channel with disabled default locale
         Given the locale "English (United States)" is disabled as well
         When I try to browse that channel
-        Then I should not be able to shop
+        Then I should not be able to shop without default locale
 
     @ui
     Scenario: Falling back to the default locale if selected one is not available

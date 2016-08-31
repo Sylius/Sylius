@@ -109,7 +109,7 @@ final class AddressingContext implements Context
      * @return AddressInterface
      */
     private function createAddress(
-        $countryCode = 'FR',
+        $countryCode = 'US',
         $firstName = 'John',
         $lastName = 'Doe',
         $city = 'Ankh Morpork',

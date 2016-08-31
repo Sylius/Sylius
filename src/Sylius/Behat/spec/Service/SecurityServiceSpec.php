@@ -9,34 +9,35 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Behat;
+namespace spec\Sylius\Behat\Service;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Behat\Service\SecurityService;
 use Sylius\Behat\Service\SecurityServiceInterface;
 use Sylius\Behat\Service\Setter\CookieSetterInterface;
-use Sylius\Component\Core\Model\UserInterface;
-use Sylius\Component\User\Repository\UserRepositoryInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Core\Exception\TokenNotFoundException;
 
 /**
+ * @mixin SecurityService
+ *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  * @author Kamil Kokot <kamil.kokot@lakion.com>
  */
 final class SecurityServiceSpec extends ObjectBehavior
 {
     function let(
-        UserRepositoryInterface $userRepository,
         SessionInterface $session,
         CookieSetterInterface $cookieSetter
     ) {
-        $this->beConstructedWith($userRepository, $session, $cookieSetter, 'context_name');
+        $this->beConstructedWith($session, $cookieSetter, 'shop');
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Behat\Service\SecurityService');
+        $this->shouldHaveType(SecurityService::class);
     }
 
     function it_implements_security_service_interface()
@@ -45,41 +46,42 @@ final class SecurityServiceSpec extends ObjectBehavior
     }
 
     function it_logs_user_in(
-        UserRepositoryInterface $userRepository,
         SessionInterface $session,
         CookieSetterInterface $cookieSetter,
-        UserInterface $user
+        ShopUserInterface $shopUser
     ) {
-        $userRepository->findOneBy(['username' => 'sylius@example.com'])->willReturn($user);
-        $user->getRoles()->willReturn(['ROLE_USER']);
-        $user->getPassword()->willReturn('xyz');
-        $user->serialize()->willReturn('serialized_user');
+        $shopUser->getRoles()->willReturn(['ROLE_USER']);
+        $shopUser->getPassword()->willReturn('xyz');
+        $shopUser->serialize()->willReturn('serialized_user');
 
-        $session->set('_security_context_name', Argument::any())->shouldBeCalled();
+        $session->set('_security_shop', Argument::any())->shouldBeCalled();
         $session->save()->shouldBeCalled();
 
         $session->getName()->willReturn('MOCKEDSID');
         $session->getId()->willReturn('xyzc123');
         $cookieSetter->setCookie('MOCKEDSID', 'xyzc123')->shouldBeCalled();
 
-        $this->logIn('sylius@example.com');
+        $this->logIn($shopUser);
     }
 
-    function it_does_not_log_user_in_if_user_was_not_found(
-        UserRepositoryInterface $userRepository,
+    function it_logs_user_out(
         SessionInterface $session,
         CookieSetterInterface $cookieSetter
     ) {
-        $userRepository->findOneBy(['username' => 'sylius@example.com'])->willReturn(null);
+        $session->set('_security_shop', null)->shouldBeCalled();
+        $session->save()->shouldBeCalled();
+        $session->getName()->willReturn('MOCKEDSID');
+        $session->getId()->willReturn('xyzc123');
+        $cookieSetter->setCookie('MOCKEDSID', 'xyzc123')->shouldBeCalled();
 
-        $session->set(Argument::cetera())->shouldNotBeCalled();
-        $session->save()->shouldNotBeCalled();
+        $this->logOut();
+    }
 
-        $cookieSetter->setCookie(Argument::cetera())->shouldNotBeCalled();
+    function it_throws_token_not_found_exception(
+        SessionInterface $session
+    ) {
+        $session->get('_security_shop')->willReturn(null);
 
-        $this
-            ->shouldThrow(new \InvalidArgumentException(sprintf('There is no user with email sylius@example.com')))
-            ->during('logIn', ['sylius@example.com'])
-        ;
+        $this->shouldThrow(TokenNotFoundException::class)->during('getCurrentToken');
     }
 }

@@ -13,6 +13,7 @@ namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
 use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
@@ -41,11 +42,11 @@ final class PromotionContext implements Context
     public function getPromotionByName($promotionName)
     {
         $promotion = $this->promotionRepository->findOneBy(['name' => $promotionName]);
-        if (null === $promotion) {
-            throw new \InvalidArgumentException(
-                sprintf('Promotion with name "%s" does not exist in the promotion repository.', $promotionName)
-            );
-        }
+
+        Assert::notNull(
+            $promotion,
+            sprintf('Promotion with name "%s" does not exist', $promotionName)
+        );
 
         return $promotion;
     }

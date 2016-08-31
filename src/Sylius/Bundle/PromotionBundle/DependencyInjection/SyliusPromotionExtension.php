@@ -70,8 +70,8 @@ class SyliusPromotionExtension extends AbstractResourceExtension
         $decoratedCouponFactoryDefinition = new Definition($couponFactoryClass);
         $decoratedCouponFactoryDefinition
             ->addArgument($couponFactoryDefinition)
-            ->addArgument(new Reference('sylius.repository.promotion'))
         ;
+
         $container->setDefinition('sylius.factory.promotion_coupon', $decoratedCouponFactoryDefinition);
     }
 

@@ -37,11 +37,13 @@
             <argument type="service" id="sylius.repository.shipping_method" />
         </service>
 
-        <service id="sylius.fixture.example_factory.user" class="Sylius\Bundle\CoreBundle\Fixture\Factory\UserExampleFactory">
-            <argument type="service" id="sylius.factory.user" />
+        <service id="sylius.fixture.example_factory.shop_user" class="Sylius\Bundle\CoreBundle\Fixture\Factory\ShopUserExampleFactory">
+            <argument type="service" id="sylius.factory.shop_user" />
             <argument type="service" id="sylius.factory.customer" />
-            <argument type="service" id="sylius.repository.role" />
-            <argument type="service" id="sylius.repository.currency" />
+        </service>
+
+        <service id="sylius.fixture.example_factory.admin_user" class="Sylius\Bundle\CoreBundle\Fixture\Factory\AdminUserExampleFactory">
+            <argument type="service" id="sylius.factory.admin_user" />
         </service>
 
         <service id="sylius.fixture.example_factory.product_option" class="Sylius\Bundle\CoreBundle\Fixture\Factory\ProductOptionExampleFactory">
@@ -54,13 +56,6 @@
             <argument type="service" id="sylius.factory.product_attribute" />
             <argument type="service" id="sylius.repository.locale" />
             <argument>%sylius.attribute.attribute_types%</argument>
-        </service>
-
-        <service id="sylius.fixture.example_factory.product_archetype" class="Sylius\Bundle\CoreBundle\Fixture\Factory\ProductArchetypeExampleFactory">
-            <argument type="service" id="sylius.factory.product_archetype" />
-            <argument type="service" id="sylius.repository.product_option" />
-            <argument type="service" id="sylius.repository.product_attribute" />
-            <argument type="service" id="sylius.repository.locale" />
         </service>
 
         <service id="sylius.fixture.example_factory.tax_category" class="Sylius\Bundle\CoreBundle\Fixture\Factory\TaxCategoryExampleFactory">
@@ -88,7 +83,6 @@
             <argument type="service" id="sylius.factory.product_variant_image" />
             <argument type="service" id="sylius.image_uploader" />
             <argument type="service" id="sylius.repository.taxon" />
-            <argument type="service" id="sylius.repository.product_archetype" />
             <argument type="service" id="sylius.repository.product_attribute" />
             <argument type="service" id="sylius.repository.product_option" />
             <argument type="service" id="sylius.repository.channel" />

@@ -5,7 +5,7 @@ Feature: Adding a new coupon
     I want to add a new coupon
 
     Background:
-        Given the store operates on a single channel in "France"
+        Given the store operates on a single channel in "United States"
         And there is a promotion "Christmas sale"
         And it is coupon based promotion
         And I am logged in as an administrator

@@ -26,12 +26,6 @@
             <join-column name="category_id" referenced-column-name="id" nullable="true" />
         </many-to-one>
 
-        <one-to-many field="rules" target-entity="Sylius\Component\Shipping\Model\RuleInterface" mapped-by="method">
-            <cascade>
-                <cascade-all />
-            </cascade>
-        </one-to-many>
-
         <field name="categoryRequirement" column="category_requirement" type="integer" />
         <field name="calculator" column="calculator" type="string" />
         <field name="enabled" column="is_enabled" type="boolean" />

@@ -14,11 +14,11 @@ namespace Sylius\Component\Core\OrderProcessing;
 use SM\Factory\FactoryInterface;
 use SM\StateMachine\StateMachineInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Model\OrderShippingStates;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
 use Sylius\Component\Core\OrderPaymentStates;
 use Sylius\Component\Core\OrderPaymentTransitions;
+use Sylius\Component\Core\OrderShippingStates;
 use Sylius\Component\Core\OrderShippingTransitions;
 
 /**
@@ -84,7 +84,7 @@ class StateResolver implements StateResolverInterface
         if (OrderShippingStates::STATE_SHIPPED === $order->getShippingState()) {
             return;
         }
-        /** @var StateMachine $stateMachine */
+        /** @var StateMachineInterface $stateMachine */
         $stateMachine = $this->stateMachineFactory->get($order, OrderShippingTransitions::GRAPH);
 
         if ($this->allShipmentsInStateButOrderStateNotUpdated($order, ShipmentInterface::STATE_SHIPPED, OrderShippingStates::STATE_SHIPPED)) {

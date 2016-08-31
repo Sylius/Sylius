@@ -37,14 +37,6 @@ class SampleStockable implements StockableInterface
     /**
      * {@inheritdoc}
      */
-    public function isAvailableOnDemand()
-    {
-        return false;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getOnHold()
     {
         return 15;
@@ -70,5 +62,20 @@ class SampleStockable implements StockableInterface
      */
     public function setOnHand($onHand)
     {
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setTracked($tracked)
+    {
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isTracked()
+    {
+        return true;
     }
 }

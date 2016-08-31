@@ -18,15 +18,18 @@ The Book
     zones
     products
     attributes
+    taxons
     addresses
     inventory
     orders
+    checkout
     shipments
     payments
     taxation
     pricing
     promotions
     users_and_groups
+    adminuser
     content
     emails
     settings

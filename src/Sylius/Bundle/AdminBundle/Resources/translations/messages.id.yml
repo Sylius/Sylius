@@ -6,4 +6,5 @@ sylius:
         admin:
             main:
                 content:
+                    header: Isi
                     routes: Rute

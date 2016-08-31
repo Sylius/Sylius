@@ -13,9 +13,9 @@ namespace Sylius\Behat\Context\Setup;
 
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
+use Sylius\Bundle\CoreBundle\Fixture\Factory\ExampleFactoryInterface;
 use Sylius\Component\Addressing\Converter\CountryNameConverterInterface;
 use Sylius\Component\Addressing\Model\AddressInterface;
-use Sylius\Component\Core\Test\Factory\TestUserFactoryInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\User\Model\UserInterface;
@@ -38,7 +38,7 @@ final class UserContext implements Context
     private $userRepository;
 
     /**
-     * @var TestUserFactoryInterface
+     * @var ExampleFactoryInterface
      */
     private $userFactory;
 
@@ -60,7 +60,7 @@ final class UserContext implements Context
     /**
      * @param SharedStorageInterface $sharedStorage
      * @param UserRepositoryInterface $userRepository
-     * @param TestUserFactoryInterface $userFactory
+     * @param ExampleFactoryInterface $userFactory
      * @param FactoryInterface $addressFactory
      * @param ObjectManager $userManager
      * @param CountryNameConverterInterface $countryCodeConverter
@@ -68,7 +68,7 @@ final class UserContext implements Context
     public function __construct(
         SharedStorageInterface $sharedStorage,
         UserRepositoryInterface $userRepository,
-        TestUserFactoryInterface $userFactory,
+        ExampleFactoryInterface $userFactory,
         FactoryInterface $addressFactory,
         ObjectManager $userManager,
         CountryNameConverterInterface $countryCodeConverter
@@ -82,14 +82,14 @@ final class UserContext implements Context
     }
 
     /**
-     * @Given there is user :email identified by :password
+     * @Given there is a user :email identified by :password
      * @Given there was account of :email with password :password
      * @Given there is a user :email
      * @Given there is a :email user
      */
     public function thereIsUserIdentifiedBy($email, $password = 'sylius')
     {
-        $user = $this->userFactory->create($email, $password);
+        $user = $this->userFactory->create(['email' => $email, 'password' => $password]);
 
         $this->sharedStorage->set('user', $user);
 
@@ -101,7 +101,7 @@ final class UserContext implements Context
      */
     public function thereIsUserWithShippingCountry($email, $password, $country)
     {
-        $user = $this->userFactory->create($email, $password);
+        $user = $this->userFactory->create(['email' => $email, 'password' => $password]);
 
         $customer = $user->getCustomer();
         $customer->setShippingAddress($this->createAddress($customer->getFirstName(), $customer->getLastName(), $country));
@@ -124,6 +124,7 @@ final class UserContext implements Context
 
     /**
      * @Given the account of :email was deleted
+     * @Given my account :email was deleted
      */
     public function accountWasDeleted($email)
     {
@@ -142,18 +143,6 @@ final class UserContext implements Context
         $user = $this->sharedStorage->get('user');
 
         $this->userRepository->remove($user);
-    }
-
-    /**
-     * @Given there is an administrator identified by :email
-     */
-    public function thereIsAnAdministratorIdentifiedBy($email)
-    {
-        $administrator = $this->userFactory->createDefaultAdmin();
-        $administrator->setEmail($email);
-
-        $this->sharedStorage->set('administrator', $administrator);
-        $this->userRepository->add($administrator);
     }
 
     /**

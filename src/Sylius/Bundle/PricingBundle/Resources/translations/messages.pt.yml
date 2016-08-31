@@ -4,4 +4,12 @@
 sylius:
     form:
         priceable:
+            price: Preço
             calculator: Preços
+            configuration: Configuração
+        pricing:
+            volume_based:
+                label: Configuração de preços
+                min: Volume mínimo
+                max: Volume máximo
+                price: Preço

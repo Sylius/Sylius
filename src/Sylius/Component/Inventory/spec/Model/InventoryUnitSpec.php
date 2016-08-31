@@ -12,17 +12,20 @@
 namespace spec\Sylius\Component\Inventory\Model;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Inventory\Model\InventoryUnit;
 use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Inventory\Model\StockableInterface;
 
 /**
+ * @mixin InventoryUnit
+ *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 final class InventoryUnitSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Inventory\Model\InventoryUnit');
+        $this->shouldHaveType(InventoryUnit::class);
     }
 
     function it_implements_Sylius_inventory_unit_interface()
@@ -53,8 +56,8 @@ final class InventoryUnitSpec extends ObjectBehavior
 
     function its_state_is_mutable()
     {
-        $this->setInventoryState(InventoryUnitInterface::STATE_BACKORDERED);
-        $this->getInventoryState()->shouldReturn(InventoryUnitInterface::STATE_BACKORDERED);
+        $this->setInventoryState(InventoryUnitInterface::STATE_ONHOLD);
+        $this->getInventoryState()->shouldReturn(InventoryUnitInterface::STATE_ONHOLD);
     }
 
     function it_is_sold_if_its_state_says_so()
@@ -64,43 +67,11 @@ final class InventoryUnitSpec extends ObjectBehavior
         $this->shouldBeSold();
     }
 
-    function it_is_backordered_if_its_state_says_so()
-    {
-        $this->setInventoryState(InventoryUnitInterface::STATE_BACKORDERED);
-        $this->shouldBeBackordered();
-    }
-
     function it_returns_its_stockable_name(StockableInterface $stockable)
     {
         $stockable->getInventoryName()->willReturn('[IPHONE5] iPhone 5');
         $this->setStockable($stockable);
 
         $this->getInventoryName()->shouldReturn('[IPHONE5] iPhone 5');
-    }
-
-    function it_initializes_creation_date_by_default()
-    {
-        $this->getCreatedAt()->shouldHaveType('DateTime');
-    }
-
-    function its_creation_date_is_mutable()
-    {
-        $date = new \DateTime('last year');
-
-        $this->setCreatedAt($date);
-        $this->getCreatedAt()->shouldReturn($date);
-    }
-
-    function it_has_no_last_update_date_by_default()
-    {
-        $this->getUpdatedAt()->shouldReturn(null);
-    }
-
-    function its_last_update_date_is_mutable()
-    {
-        $date = new \DateTime('last year');
-
-        $this->setUpdatedAt($date);
-        $this->getUpdatedAt()->shouldReturn($date);
     }
 }

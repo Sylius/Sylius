@@ -2,7 +2,7 @@
     "page": 1,
     "limit": 10,
     "pages": 1,
-    "total": 6,
+    "total": 5,
     "_links": {
         "self": {
             "href": "\/api\/customers\/?page=1&limit=10"
@@ -60,15 +60,6 @@
                 "email": "Oliver@doe.com",
                 "first_name": "Oliver",
                 "last_name": "Doe"
-            },
-            {
-                "id": @integer@,
-                "user": {
-                    "id": @integer@,
-                    "username": "api@sylius.com",
-                    "enabled": true
-                },
-                "email": "api@sylius.com"
             }
         ]
     }

@@ -14,6 +14,7 @@ sylius:
             billing_address: Billing address
             different_billing_address: Use different address for billing?
             only_customer_registration: Create account?
+            subscribed_to_newsletter: Subscribe to the newsletter
     gender:
         unknown: Unknown
         male: Male

@@ -23,16 +23,10 @@ interface StockableInterface
 
     /**
      * Simply checks if there any stock available.
-     * It should also return true for items available on demand.
      *
      * @return bool
      */
     public function isInStock();
-
-    /**
-     * @return bool
-     */
-    public function isAvailableOnDemand();
 
     /**
      * @return int
@@ -53,4 +47,14 @@ interface StockableInterface
      * @param int $onHand
      */
     public function setOnHand($onHand);
+
+    /**
+     * @param bool $tracked
+     */
+    public function setTracked($tracked);
+
+    /**
+     * @return bool
+     */
+    public function isTracked();
 }

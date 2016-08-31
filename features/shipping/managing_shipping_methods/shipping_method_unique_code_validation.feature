@@ -5,8 +5,8 @@ Feature: Shipping method unique code validation
     I want to be prevented from adding two shipping methods with same code
 
     Background:
-        Given the store is available in "English (United States)"
-        And there is a zone "EU" containing all members of the European Union
+        Given the store operates on a single channel in "United States"
+        And the store is available in "English (United States)"
         And the store allows shipping with "UPS Ground" identified by "UPS"
         And I am logged in as an administrator
 
@@ -15,7 +15,7 @@ Feature: Shipping method unique code validation
         Given I want to create a new shipping method
         When I specify its code as "UPS"
         And I name it "FedEx Carrier" in "English (United States)"
-        And I define it for the "European Union" zone
+        And I define it for the "United States" zone
         And I choose "Flat rate per shipment" calculator
         And I specify its amount as 50
         And I try to add it

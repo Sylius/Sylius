@@ -2,6 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    channel:
+        default_currency:
+            not_blank: Proszę podać domyślną walutę kanału.
     checkout:
         shipping_method:
             not_blank: Proszę wybrać metodę dostawy.
@@ -27,3 +30,6 @@ sylius:
     product_translation:
         short_description:
             max: 'Krótki opis nie może być dłuższy niż {{ limit }} znaków.'
+    user:
+        email:
+            unique: Ten e-mail jest już używany.

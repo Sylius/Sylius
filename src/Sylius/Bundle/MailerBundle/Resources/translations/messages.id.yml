@@ -5,3 +5,4 @@ sylius:
     form:
         email:
             enabled: Diaktifkan
+            content: Isi

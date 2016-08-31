@@ -1,0 +1,84 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    imagine_block:
+        name:
+            not_blank: Introduza o nome do bloco imagine.
+        label:
+            not_blank: Introduza o rótulo do bloco imagine.
+        filter:
+            not_blank: Introduza o filtro do bloco imagine.
+        image:
+            not_blank: Escolha a imagem do bloco imagine.
+        start_date:
+            invalid_date: A data de início de publicação é inválida.
+        end_date:
+            invalid_date: A data de fim de publicação é inválida.
+    menu:
+        name:
+            not_blank: Introduza o nome do menu.
+        label:
+            not_blank: Introduza o rótulo do menu.
+        start_date:
+            invalid_date: A data de início de publicação é inválida.
+        end_date:
+            invalid_date: A data de fim de publicação é inválida.
+    menu_node:
+        name:
+            not_blank: Introduza o nome de nó do menu.
+        label:
+            not_blank: Introduza o rótulo de nó do menu.
+        start_date:
+            invalid_date: A data de início de publicação é inválida.
+        end_date:
+            invalid_date: A data de fim de publicação é inválida.
+    route:
+        name:
+            not_blank: Introduza o nome da rota.
+        content:
+            not_blank: Introdura o conteúdo da rota.
+        start_date:
+            invalid_date: A data de início de publicação é inválida.
+        end_date:
+            invalid_date: A data de fim de publicação é inválida.
+    slideshow_block:
+        name:
+            not_blank: Introduza o nome do slideshow.
+        title:
+            not_blank: Introduza o título do slideshow.
+        start_date:
+            invalid_date: A data de início de publicação é inválida.
+        end_date:
+            invalid_date: A data de fim de publicação é inválida.
+    simple_block:
+        name:
+            not_blank: Introduza o nome do bloco simples.
+        title:
+            not_blank: Introduza o título do bloco simples.
+        body:
+            not_blank: Introduza o corpo do bloco simples.
+        start_date:
+            invalid_date: A data de início de publicação é inválida.
+        end_date:
+            invalid_date: A data de fim de publicação é inválida.
+    string_block:
+        name:
+            not_blank: Introduza o nome do bloco simples.
+        body:
+            not_blank: Introduza o corpo do bloco simples.
+        start_date:
+            invalid_date: A data de início de publicação é inválida.
+        end_date:
+            invalid_date: A data de fim de publicação é inválida.
+    static_content:
+        name:
+            not_blank: Introduza o nome do conteúdo estático.
+        title:
+            not_blank: Introduza o título do conteúdo estático.
+        body:
+            not_blank: Introduza o corpo do conteúdo estático.
+        start_date:
+            invalid_date: A data de início de publicação é inválida.
+        end_date:
+            invalid_date: A data de fim de publicação é inválida.

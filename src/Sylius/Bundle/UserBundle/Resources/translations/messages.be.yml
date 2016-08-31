@@ -9,6 +9,7 @@ sylius:
             password:
                 label: Пароль
             shipping_address: Адрас дастаўкі
+            username: Юзернэйм
         user_filter:
             query: Пошук
         user_change_password:

@@ -60,22 +60,31 @@ sylius_fixtures:
                                     - bank_transfer
 
                 regular_user:
-                    name: user
+                    name: shop_user
                     options:
                         random: 20
+                        custom:
+                            -
+                                email: shop@example.com
+                                first_name: John
+                                last_name: Doe
+                                password: sylius
 
-                rbac: ~
                 admin_user:
-                    name: user
+                    name: admin_user
                     options:
                         custom:
                             -
                                 email: sylius@example.com
-                                first_name: John
-                                last_name: Doe
+                                username: "John Doe"
                                 password: sylius
                                 enabled: true
-                                admin: true
+                            -
+                                email: api@example.com
+                                username: "Luke Brushwood"
+                                password: sylius-api
+                                enabled: true
+                                api: true
 
                 tax_category:
                     options:

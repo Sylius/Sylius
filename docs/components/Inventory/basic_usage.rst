@@ -35,23 +35,12 @@ Example implementation:
 
         /**
          * Simply checks if there any stock available.
-         * It should also return true for items available on demand.
          *
          * @return Boolean
          */
         public function isInStock()
         {
             // TODO: Implement isInStock() method.
-        }
-
-        /**
-         * Is stockable available on demand?
-         *
-         * @return Boolean
-         */
-        public function isAvailableOnDemand()
-        {
-            // TODO: Implement isAvailableOnDemand() method.
         }
 
         /**
@@ -108,7 +97,6 @@ The **InventoryOperator** provides basic operations on your inventory.
 
     use Sylius\Component\Inventory\Operator\InventoryOperator;
     use Sylius\Component\Inventory\Checker\AvailabilityChecker;
-    use Sylius\Component\Inventory\Operator\BackordersHandler;
     use Sylius\Component\Resource\Repository\InMemoryRepository;
 
     $inMemoryRepository = new InMemoryRepository(); // Repository model.
@@ -117,8 +105,7 @@ The **InventoryOperator** provides basic operations on your inventory.
     // If you are not familiar with events, check the symfony Event Dispatcher.
 
     $availabilityChecker = new AvailabilityChecker(false);
-    $backordersHandler = new BackordersHandler($inventoryUnitRepository);
-    $inventoryOperator = new InventoryOperator($backordersHandler, $availabilityChecker, $eventDispatcher);
+    $inventoryOperator = new InventoryOperator($availabilityChecker, $eventDispatcher);
 
     $product->getOnHand(); // Output will be 0.
     $inventoryOperator->increase($product, 5);
@@ -134,15 +121,12 @@ The **InventoryOperator** provides basic operations on your inventory.
 Decrease
 ~~~~~~~~
 
-This specific case will be more complicated. It uses backordersHandler to :ref:`process-backorders`.
-
 .. code-block:: php
 
     <?php
 
     use Sylius\Component\Inventory\Operator\InventoryOperator;
     use Sylius\Component\Inventory\Checker\AvailabilityChecker;
-    use Sylius\Component\Inventory\Operator\BackordersHandler;
     use Doctrine\Common\Collections\ArrayCollection;
     use Sylius\Component\Inventory\Model\InventoryUnit;
     use Sylius\Component\Inventory\Model\InventoryUnitInterface;
@@ -153,8 +137,7 @@ This specific case will be more complicated. It uses backordersHandler to :ref:`
     // If you are not familiar with events. Check symfony event dispatcher.
 
     $availabilityChecker = new AvailabilityChecker(false);
-    $backordersHandler = new BackordersHandler($inventoryUnitRepository);
-    $inventoryOperator = new InventoryOperator($backordersHandler, $availabilityChecker, $eventDispatcher);
+    $inventoryOperator = new InventoryOperator($availabilityChecker, $eventDispatcher);
     $inventoryUnit1 = new InventoryUnit();
     $inventoryUnit2 = new InventoryUnit();
     $inventoryUnits = new ArrayCollection();
@@ -206,82 +189,6 @@ In some cases, you may want to have unlimited inventory, this operator will allo
 
 .. _Sylius API NoopInventoryOperator: http://api.sylius.org/Sylius/Component/Inventory/Operator/NoopInventoryOperator.html
 
-.. _component_inventory_operator_backorders-handler:
-
-BackordersHandler
------------------
-
-The **BackorderHandler** changes inventory unit state.
-
-.. _process-backorders:
-
-Process backorders
-~~~~~~~~~~~~~~~~~~
-
-This method will change the inventory unit state to ``backordered`` if the quantity of requested inventory units will be insufficient.
-
-.. code-block:: php
-
-    <?php
-
-    use Sylius\Component\Inventory\Operator\BackordersHandler;
-    use Doctrine\Common\Collections\ArrayCollection;
-    use Sylius\Component\Inventory\Model\InventoryUnit;
-    use Sylius\Component\Inventory\Model\InventoryUnitInterface;
-
-    $inventoryUnitRepository; // Repository model.
-    $product = new Product(); // Stockable model.
-
-    $backordersHandler = new BackordersHandler($inventoryUnitRepository);
-    $inventoryUnit1 = new InventoryUnit();
-    $inventoryUnit2 = new InventoryUnit();
-    $inventoryUnits = new ArrayCollection();
-
-
-    $product->getOnHand(); // Output will be 1.
-    $inventoryUnit1->setStockable($product);
-    $inventoryUnit1->setInventoryState(InventoryUnitInterface::STATE_SOLD);
-
-    $inventoryUnit2->setStockable($product);
-    $inventoryUnit2->setInventoryState(InventoryUnitInterface::STATE_CHECKOUT);
-
-    $inventoryUnits->add($inventoryUnit1);
-    $inventoryUnits->add($inventoryUnit2);
-    count($inventoryUnits); // Output will be 2.
-
-    $backordersHandler->processBackorders($inventoryUnits);
-
-    $inventoryUnit2->getInventoryState(); // Output will be 'backordered'
-
-Fill backorders
-~~~~~~~~~~~~~~~
-
-This method will change inventory unit state to ``sold``.
-
-.. code-block:: php
-
-    <?php
-
-    use Sylius\Component\Inventory\Operator\BackordersHandler;
-
-    $inventoryUnitRepository; // Repository model.
-    $product = new Product(); // Stockable model.
-
-    $backordersHandler = new BackordersHandler($inventoryUnitRepository);
-    $product->getOnHand(); // Output will be 6.
-
-    // Let's assume that we have 9 inventory units with a 'backordered' state.
-    // This method will find all inventory units for that specific stockable with 'backordered' state.
-    $backordersHandler->fillBackorders($product);
-    // Now 6 of them will have 'sold' state.
-
-    $product->getOnHand(); // Output will be 0.
-
-.. note::
-    For more detailed information go to `Sylius API BackordersHandler`_.
-
-.. _Sylius API BackordersHandler: http://api.sylius.org/Sylius/Component/Inventory/Operator/BackordersHandler.html
-
 .. _component_inventory_checker_availability-checker:
 
 AvailabilityChecker
@@ -298,55 +205,12 @@ Second parameter of the ``->isStockSufficient()`` method gives a possibility to 
     use Sylius\Component\Inventory\Checker\AvailabilityChecker;
 
     $product = new Product(); // Stockable model.
-    $product->isAvailableOnDemand(); // Output will be false.
     $product->getOnHand(); // Output will be 5
     $product->getOnHold(); // Output will be 4
 
-    $availabilityChecker = new AvailabilityChecker(false); // backorders = false;
+    $availabilityChecker = new AvailabilityChecker(false);
     $availabilityChecker->isStockAvailable($product); // Output will be true.
     $availabilityChecker->isStockSufficient($product, 5); // Output will be false.
-
-Backorders
-~~~~~~~~~~
-
-The backorder property generally indicates that the customer's demand for a product or service
-exceeds a stockable's capacity to supply it.
-
-.. code-block:: php
-
-    <?php
-
-    use Sylius\Component\Inventory\Checker\AvailabilityChecker;
-
-    $product = new Product(); // Stockable model.
-
-    $availabilityChecker = new AvailabilityChecker(true); // backorders = true;
-    $availabilityChecker->isStockAvailable($product); // Output will be true.
-    $availabilityChecker->isStockSufficient($product, 5); // Output will be true.
-
-Available On Demand
-~~~~~~~~~~~~~~~~~~~
-
-.. code-block:: php
-
-    <?php
-
-    use Sylius\Component\Inventory\Checker\AvailabilityChecker;
-
-    $product = new Product(); // Stockable model.
-    $product->isAvailableOnDemand(); // Output will be true.
-
-    $availabilityChecker = new AvailabilityChecker(false); // backorders = false;
-    $availabilityChecker->isStockAvailable($product); // Output will be true.
-    $availabilityChecker->isStockSufficient($product, 5); // Output will be true.
-
-.. hint::
-    In the above cases results of ``->getOnHand()`` and ``->getOnHold()`` will be irrelevant.
-
-.. note::
-    For more detailed information go to `Sylius API AvailabilityChecker`_.
-
-.. _Sylius API AvailabilityChecker: http://api.sylius.org/Sylius/Component/Inventory/Checker/AvailabilityChecker.html
 
 .. _component_inventory_factory_inventory-unit-factory:
 

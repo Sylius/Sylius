@@ -15,3 +15,12 @@ sylius:
                 success: Ihr Passwort wurde erfolgreich geändert!
         reset_password:
             requested: Wenn die Email, die Sie angegeben haben, im System gespeichert ist, haben wir Ihnen eine Anleitung geschickt, mit der Sie Ihr Passwort zurücksetzen können.
+        verification:
+            error: Der Überprüfungs-Token ist ungültig.
+            notice:
+                verified: Ihre E-Mail-Adresse ist bereits bestätigt.
+            success: Ihre E-Mail-Adresse wurde erfolgreich bestätigt.
+            request:
+                success: Ein Bestätigungslink wurde an Ihre E-Mail-Adresse geschickt.
+    customer:
+        register: Vielen Dank für Ihre Registrierung. Überprüfen Sie Ihre E-Mails und bestätigen Sie Ihren Account.

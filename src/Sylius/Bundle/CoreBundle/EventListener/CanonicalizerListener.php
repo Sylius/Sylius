@@ -14,7 +14,7 @@ namespace Sylius\Bundle\CoreBundle\EventListener;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Component\Core\Model\UserInterface;
+use Sylius\Component\User\Model\UserInterface;
 
 /**
  * User update listener.
@@ -47,6 +47,7 @@ class CanonicalizerListener
             $item->setEmailCanonical($this->canonicalizer->canonicalize($item->getEmail()));
         } elseif ($item instanceof UserInterface) {
             $item->setUsernameCanonical($this->canonicalizer->canonicalize($item->getUsername()));
+            $item->setEmailCanonical($this->canonicalizer->canonicalize($item->getEmail()));
         }
     }
 

@@ -13,7 +13,7 @@ namespace spec\Sylius\Component\Shipping\Calculator;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Shipping\Calculator\CalculatorInterface;
-use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
+use Sylius\Component\Shipping\Model\ShipmentInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -36,14 +36,14 @@ final class PerUnitRateCalculatorSpec extends ObjectBehavior
     }
 
     function it_should_calculate_the_total_with_the_per_unit_amount_configured_on_the_method(
-        ShippingSubjectInterface $subject
+        ShipmentInterface $subject
     ) {
         $subject->getShippingUnitCount()->willReturn(11);
 
         $this->calculate($subject, ['amount' => 200])->shouldReturn(2200);
     }
 
-    function its_calculated_value_should_be_an_integer(ShippingSubjectInterface $subject)
+    function its_calculated_value_should_be_an_integer(ShipmentInterface $subject)
     {
         $subject->getShippingUnitCount()->willReturn(6);
 

@@ -3,5 +3,11 @@
 
 sylius:
     form:
+        variant:
+            name: Nome
         option:
             name: Nome
+            values: Valores possíveis
+        option_value:
+            add_value: Adicionar valor
+            value: Valor

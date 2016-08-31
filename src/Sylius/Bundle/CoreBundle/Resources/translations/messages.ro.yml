@@ -93,7 +93,6 @@ sylius:
         user_filter:
             query: Căutare
         variant:
-            available_on_demand: Disponibil la comandă
             depth: Adâncime
             height: Înălţime
             images: Imagini

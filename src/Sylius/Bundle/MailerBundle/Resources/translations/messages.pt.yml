@@ -4,5 +4,10 @@
 sylius:
     form:
         email:
+            enabled: Ativado
             subject: Assunto
+            sender_name: Nome do remetente
+            sender_address: Endereço do remetente
             content: Conteúdo
+            template: Modelo
+            no_template: Usar modelo personalizado

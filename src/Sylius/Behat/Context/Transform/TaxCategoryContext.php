@@ -13,6 +13,7 @@ namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
 use Sylius\Component\Taxation\Repository\TaxCategoryRepositoryInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -40,9 +41,11 @@ final class TaxCategoryContext implements Context
     public function getTaxCategoryByName($taxCategoryName)
     {
         $taxCategory = $this->taxCategoryRepository->findOneByName($taxCategoryName);
-        if (null === $taxCategory) {
-            throw new \InvalidArgumentException('Tax category with name "'.$taxCategoryName.'" does not exist');
-        }
+
+        Assert::notNull(
+            $taxCategory,
+            sprintf('Tax category with name "%s" does not exist', $taxCategoryName)
+        );
 
         return $taxCategory;
     }

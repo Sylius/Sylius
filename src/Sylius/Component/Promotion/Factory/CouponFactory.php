@@ -12,7 +12,6 @@
 namespace Sylius\Component\Promotion\Factory;
 
 use Sylius\Component\Promotion\Model\PromotionInterface;
-use Sylius\Component\Promotion\Repository\PromotionRepositoryInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Webmozart\Assert\Assert;
 
@@ -27,18 +26,11 @@ class CouponFactory implements CouponFactoryInterface
     private $factory;
 
     /**
-     * @var PromotionRepositoryInterface
-     */
-    private $promotionRepository;
-
-    /**
      * @param FactoryInterface $factory
-     * @param PromotionRepositoryInterface $promotionRepository
      */
-    public function __construct(FactoryInterface $factory, PromotionRepositoryInterface $promotionRepository)
+    public function __construct(FactoryInterface $factory)
     {
         $this->factory = $factory;
-        $this->promotionRepository = $promotionRepository;
     }
 
     /**
@@ -52,14 +44,8 @@ class CouponFactory implements CouponFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createForPromotion($promotionId)
+    public function createForPromotion(PromotionInterface $promotion)
     {
-        /** @var PromotionInterface $promotion */
-        Assert::notNull(
-            $promotion = $this->promotionRepository->find($promotionId),
-            sprintf('Promotion with id %s does not exist.', $promotionId)
-        );
-
         Assert::true(
             $promotion->isCouponBased(),
             sprintf('Promotion with name %s is not coupon based.', $promotion->getName())

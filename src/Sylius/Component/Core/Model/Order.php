@@ -17,7 +17,7 @@ use Sylius\Component\Cart\Model\Cart;
 use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\OrderPaymentStates;
-use Sylius\Component\Inventory\Model\InventoryUnitInterface;
+use Sylius\Component\Core\OrderShippingStates;
 use Sylius\Component\Payment\Model\PaymentInterface as BasePaymentInterface;
 use Sylius\Component\Promotion\Model\CouponInterface as BaseCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface as BasePromotionInterface;
@@ -69,6 +69,11 @@ class Order extends Cart implements OrderInterface
      * @var float
      */
     protected $exchangeRate = 1.0;
+
+    /**
+     * @var string
+     */
+    protected $localeCode;
 
     /**
      * @var BaseCouponInterface
@@ -346,6 +351,14 @@ class Order extends Cart implements OrderInterface
     /**
      * {@inheritdoc}
      */
+    public function removeShipments()
+    {
+        $this->shipments->clear();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function hasShipment(ShipmentInterface $shipment)
     {
         return $this->shipments->contains($shipment);
@@ -420,6 +433,24 @@ class Order extends Cart implements OrderInterface
     /**
      * {@inheritdoc}
      */
+    public function getLocaleCode()
+    {
+        return $this->localeCode;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setLocaleCode($localeCode)
+    {
+        Assert::string($localeCode);
+
+        $this->localeCode = $localeCode;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getShippingState()
     {
         return $this->shippingState;
@@ -431,20 +462,6 @@ class Order extends Cart implements OrderInterface
     public function setShippingState($state)
     {
         $this->shippingState = $state;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isBackorder()
-    {
-        foreach ($this->getItemUnits() as $itemUnit) {
-            if (InventoryUnitInterface::STATE_BACKORDERED === $itemUnit->getInventoryState()) {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     /**

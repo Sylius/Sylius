@@ -12,8 +12,9 @@
 namespace spec\Sylius\Bundle\CoreBundle\Form\EventSubscriber;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\CoreBundle\Form\EventSubscriber\UserRegistrationFormSubscriber;
 use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Component\Core\Model\UserInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 use Symfony\Component\Form\FormEvent;
@@ -26,7 +27,7 @@ class UserRegistrationFormSubscriberSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Form\EventSubscriber\UserRegistrationFormSubscriber');
+        $this->shouldHaveType(UserRegistrationFormSubscriber::class);
     }
     
     function it_is_an_event_subscriber()
@@ -41,7 +42,7 @@ class UserRegistrationFormSubscriberSpec extends ObjectBehavior
 
     function it_throws_unexpected_type_excepotion_if_data_is_not_customer_type(
         FormEvent $event,
-        UserInterface $user
+        ShopUserInterface $user
     ){
         $event->getData()->willReturn($user);
 
@@ -51,7 +52,7 @@ class UserRegistrationFormSubscriberSpec extends ObjectBehavior
     function it_set_user_as_enabled_if_customer_has_user(
         FormEvent $event,
         CustomerInterface $customer,
-        UserInterface $user
+        ShopUserInterface $user
     ) {
         $event->getData()->willReturn($customer);
         $customer->getUser()->willReturn($user);

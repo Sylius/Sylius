@@ -12,6 +12,7 @@
 namespace Sylius\Bundle\UserBundle\Form\Type;
 
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
+use Sylius\Component\Resource\Metadata\MetadataInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -22,11 +23,34 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class UserType extends AbstractResourceType
 {
     /**
+     * @var MetadataInterface
+     */
+    private $metadata;
+
+    /**
+     * @param string $dataClass
+     * @param array $validationGroups
+     * @param MetadataInterface $metadata
+     */
+    public function __construct($dataClass, array $validationGroups = [], MetadataInterface $metadata)
+    {
+        parent::__construct($dataClass, $validationGroups);
+
+        $this->metadata = $metadata;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('username', 'text', [
+                'label' => 'sylius.form.user.username',
+            ])
+            ->add('email', 'email', [
+                'label' => 'sylius.form.user.email',
+            ])
             ->add('plainPassword', 'password', [
                 'label' => 'sylius.form.user.password.label',
             ])
@@ -61,6 +85,6 @@ class UserType extends AbstractResourceType
      */
     public function getName()
     {
-        return 'sylius_user';
+        return sprintf('%s_%s', $this->metadata->getApplicationName(), $this->metadata->getName());
     }
 }

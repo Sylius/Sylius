@@ -26,10 +26,10 @@ Feature: Editing a zone
 
     @ui @javascript
     Scenario: Removing a province from a zone
-        Given the store has a zone "United States of America" with code "USA"
+        Given the store has a zone "United States" with code "USA"
         And it has the "Alabama" province member
         And it also has the "Arizona" province member
-        And I want to modify the zone named "United States of America"
+        And I want to modify the zone named "United States"
         When I remove the "Arizona" province member
         And I save my changes
         Then I should be notified that it has been successfully edited

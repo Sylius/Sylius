@@ -52,7 +52,7 @@ As a result you will get the ``Sylius\Bundle\AddressingBundle\Form\Type\AddressT
 
     <?php
 
-    namespace Acme\Bundle\ShopBundle\Form\Type;
+    namespace AppBundle\Form\Type;
 
     use Sylius\Bundle\AddressingBundle\Form\Type\AddressType as BaseAddressType;
     use Symfony\Component\Form\FormBuilderInterface;

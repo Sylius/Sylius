@@ -5,17 +5,165 @@ sylius:
     form:
         action:
             add_product_configuration:
+                price: Preço unitário
                 quantity: Quantidade
                 variant: Variante
+            customer_group: Grupo de cliente
+        block:
+            body: Corpo
+            id: Nº
+            title: Título
+        cart:
+            coupon: Cupão
+        checkout:
+            addressing:
+                different_billing_address: Usar um endereço diferente para faturação?
+            payment_method: Método de pagamento
+            shipping_method: Método de envio
         promotion:
             channels: Canais
+        coupon:
+            per_customer_usage_limit: Limite de uso por cliente
+        group:
+            name: Nome
+            roles: Funções
         channel:
+            taxonomies: Taxonomias
+            locale_default: Localidade padrão
             locales: Linguagens
+            currency_default: Moeda padrão
+            currencies: Moedas
+            shipping_methods: Métodos de envio
+            payment_methods: Métodos de pagamento
+            tax_calculation_strategy: Estratégia de cálculo do imposto
+            tax_zone_default: Zona de imposto padrão
+            theme: Aparência
+            hostname: Nome do servidor
+        image:
+            file: Imagem
+        locale:
+            code: Código
+            enabled: Ativado
         order_filter:
+            created_at_from: Criado após
+            created_at_to: Criado antes
+            number: Número
+            total_from: De
+            total_to: Para
             payment_state: Situação do pagamento
+            channel: Todos os canais
+        page:
+            body: Corpo
+            id: Nº
+            title: Título
         product:
+            restricted_zone: Zona restrita
+            shipping_category: Categoria de transporte
+            short_description: Descrição breve
+            variant_selection_method: Método de seleção de variantes
+            main_taxon: Táxon principal
             channels: Canais
+            enabled: Ativado
+        product_filter:
+            name: Nome
+            code: Código
         product_variant:
             tax_category: Categoria de imposto
+        settings:
+            general:
+                currency: Moeda padrão
+                locale: Idioma
+                meta_description: Descrição meta
+                meta_keywords: Palavras-chave meta
+                title: Título da página
+                tracking_code:
+                    Tracking code (for example: Código do Google Analytics
+            taxation:
+                default_tax_zone: Zona de imposto padrão
+                default_tax_calculation_strategy: Estratégia de cálculo do imposto padrão
+            security:
+                enabled: Activado?
+        shipment_filter:
+            created_at_from: De
+            created_at_to: Para
+            number: Número da encomenda
+            shipping_address: Enviar em nome de
+            channel: Todos os canais
+        payment_filter:
+            created_at_from: De
+            created_at_to: Para
+            number: Número da encomenda
+            billing_address: Faturar para
+            channel: Todos os canais
+        shipping_method:
+            zone: Zona
+        taxon:
+            file: Selecionar imagem
+        taxonomy:
+            file: Selecionar imagem
+        user:
+            billing_address: Endereço de faturação
+            different_billing_address: Usar um endereço diferente para faturação?
+            enabled: Ativado
+            first_name: Nome próprio
+            groups: Grupos
+            roles: Funções
+            last_name: Apelido
+            password: Palavra-passe
+            shipping_address: Endereço de entrega
+        user_filter:
+            query: Pesquisar
+        variant:
+            depth: Profundidade
+            height: Altura
+            images: Imagens
+            on_hand: Disponibilidade
+            price: Preço
+            original_price: Preço original
+            sku: SKU
+            weight: Peso
+            width: Largura
+        attribute:
+            product_attribute_value:
+                attribute: Atributo
+                value: Valor
         guest:
             email: Endereço de email
+        product_association:
+            product: Produto associado
+            type: Tipo de associação
+        product_association_type:
+            name: Nome
+        promotion_rule:
+            contains_taxon:
+                taxon: Táxon
+                count: Quantidade
+            taxon:
+                taxons: Táxons
+            total_of_items_from_taxon:
+                taxon: Táxon
+                amount: Quantia
+    email:
+        order_confirmation:
+            name: Confirmação de encomenda
+        order_comment:
+            name: Comentário de encomenda
+        shipment_confirmation:
+            name: Confirmação de envio
+            content: 'A sua encomenda foi enviada. <br/> Obrigado pela sua preferência.'
+        user_confirmation:
+            name: Confirmação do utilizador
+            subject: Bem-vindo à nossa loja
+            content: 'Bem-vindo à nossa loja, %username%.<br/> <br/>Acabou de se registar.'
+        password_reset:
+            name: Redefinir palavra-passe
+            content: '<h3>Olá %username%</h3> Para redefinir a sua palavra-passe, por favor visite %url% <br/> <br/>Obrigado.'
+        verification:
+            name: Verificação de endereço de e-mail
+            content: 'Para verificar o seu endereço de e-mail, por favor visite %url%'
+    payum_gateway:
+        cash_on_delivery: Pagamento na entrega
+        offline: Offline
+        paypal_express_checkout: PayPal Express Checkout
+    shipping_method_resolver:
+        by_zones_and_channel: Por zonas e canal

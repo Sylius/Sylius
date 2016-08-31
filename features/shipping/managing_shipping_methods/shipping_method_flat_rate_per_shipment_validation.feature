@@ -5,9 +5,9 @@ Feature: Shipping method flat rate per shipment calculator validation
     I want to be prevented from adding it without specifying amount
 
     Background:
-        Given the store is available in "English (United States)"
-        And there is a zone "EU" containing all members of the European Union
-        Given I am logged in as an administrator
+        Given the store operates on a single channel in "United States"
+        And the store is available in "English (United States)"
+        And I am logged in as an administrator
 
     @ui @javascript
     Scenario: Trying to add a new shipping method with flat rate per shipment calculator without specifying its amount

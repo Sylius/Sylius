@@ -108,6 +108,8 @@ interface OrderInterface extends
      */
     public function removeShipment(ShipmentInterface $shipment);
 
+    public function removeShipments();
+
     /**
      * @param ShipmentInterface $shipment
      *
@@ -136,6 +138,16 @@ interface OrderInterface extends
     public function setExchangeRate($exchangeRate);
 
     /**
+     * @return string
+     */
+    public function getLocaleCode();
+
+    /**
+     * @param string
+     */
+    public function setLocaleCode($localeCode);
+
+    /**
      * @param BaseCouponInterface $coupon
      */
     public function setPromotionCoupon(BaseCouponInterface $coupon = null);
@@ -149,11 +161,6 @@ interface OrderInterface extends
      * @param string $state
      */
     public function setShippingState($state);
-
-    /**
-     * @return bool
-     */
-    public function isBackorder();
 
     /**
      * @return ShipmentInterface

@@ -8,10 +8,10 @@ sylius_api_order_index:
         _controller: sylius.controller.order:indexAction
         _sylius:
             repository:
-                method:    createFilterPaginator
+                method: createFilterPaginator
                 arguments: [$criteria, $sorting]
-            paginate:  $limit
-            sortable:  true
+            paginate: $limit
+            sortable: true
             sorting:
                 updatedAt: desc
 

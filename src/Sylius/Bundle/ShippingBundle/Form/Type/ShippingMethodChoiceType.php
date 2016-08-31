@@ -15,7 +15,7 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
 use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
-use Sylius\Component\Shipping\Resolver\MethodsResolverInterface;
+use Sylius\Component\Shipping\Resolver\ShippingMethodsResolverInterface;
 use Symfony\Bridge\Doctrine\Form\DataTransformer\CollectionToArrayTransformer;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
@@ -35,7 +35,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class ShippingMethodChoiceType extends AbstractType
 {
     /**
-     * @var MethodsResolverInterface
+     * @var ShippingMethodsResolverInterface
      */
     protected $shippingMethodsResolver;
 
@@ -50,12 +50,12 @@ class ShippingMethodChoiceType extends AbstractType
     protected $repository;
 
     /**
-     * @param MethodsResolverInterface $shippingMethodsResolver
+     * @param ShippingMethodsResolverInterface $shippingMethodsResolver
      * @param ServiceRegistryInterface $calculators
      * @param RepositoryInterface $repository
      */
     public function __construct(
-        MethodsResolverInterface $shippingMethodsResolver,
+        ShippingMethodsResolverInterface $shippingMethodsResolver,
         ServiceRegistryInterface $calculators,
         RepositoryInterface $repository
     ) {

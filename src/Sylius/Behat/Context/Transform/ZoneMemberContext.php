@@ -68,9 +68,8 @@ final class ZoneMemberContext implements Context
     public function getCountryTypeZoneMemberByName($name)
     {
         $countryCode = $this->countryNameConverter->convertToCode($name);
-        $countryTypeZoneMember = $this->getZoneMemberByCode($countryCode);
 
-        return $countryTypeZoneMember;
+        return $this->getZoneMemberByCode($countryCode);
     }
 
     /**
@@ -79,9 +78,8 @@ final class ZoneMemberContext implements Context
     public function getProvinceTypeZoneMemberByName($name)
     {
         $provinceCode = $this->getProvinceByName($name)->getCode();
-        $provinceTypeZoneMember = $this->getZoneMemberByCode($provinceCode);
 
-        return $provinceTypeZoneMember;
+        return $this->getZoneMemberByCode($provinceCode);
     }
 
     /**
@@ -90,9 +88,8 @@ final class ZoneMemberContext implements Context
     public function getZoneTypeZoneMemberByName($name)
     {
         $zoneCode = $this->getZoneByName($name)->getCode();
-        $zoneTypeZoneMember = $this->getZoneMemberByCode($zoneCode);
 
-        return $zoneTypeZoneMember;
+        return $this->getZoneMemberByCode($zoneCode);
     }
 
     /**

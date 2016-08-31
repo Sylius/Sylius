@@ -30,7 +30,6 @@ sylius:
         author: Forfatter
         availability: Tilgjengelighet
         available_on: Tilgjengelig
-        available_on_demand: Tilgjengelig på forespørsel
         back: Tilbake
         backorder: Restordre
         balance_due: Forfalt saldo

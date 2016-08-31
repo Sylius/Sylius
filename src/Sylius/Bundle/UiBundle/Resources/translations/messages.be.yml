@@ -29,7 +29,6 @@ sylius:
         author: Аўтар
         availability: Наяўнасць
         available_on: У наяўнасці з
-        available_on_demand: Па запросу
         back: Назад
         backorder: Замовіць тавар, якога няма на складзе
         balance_due: Баланс за

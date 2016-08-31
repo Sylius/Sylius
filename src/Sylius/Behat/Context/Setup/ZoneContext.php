@@ -31,15 +31,6 @@ use Symfony\Component\Intl\Intl;
 final class ZoneContext implements Context
 {
     /**
-     * @var array
-     */
-    private $euMembers = [
-        'BE', 'BG', 'CZ', 'DK', 'DE', 'EE', 'IE', 'GR', 'ES',
-        'FR', 'IT', 'CY', 'LV', 'LT', 'LU', 'HU', 'MT', 'NL',
-        'AT', 'PL', 'PT', 'RO', 'SI', 'SK', 'FI', 'SE', 'GB',
-    ];
-
-    /**
      * @var SharedStorageInterface
      */
     private $sharedStorage;
@@ -86,30 +77,14 @@ final class ZoneContext implements Context
     }
 
     /**
-     * @Given /^there is a zone "EU" containing all members of the European Union$/
-     */
-    public function thereIsAZoneEUContainingAllMembersOfEuropeanUnion()
-    {
-        $zone = $this->zoneFactory->createWithMembers($this->euMembers);
-        $zone->setType(ZoneInterface::TYPE_COUNTRY);
-        $zone->setCode('EU');
-        $zone->setName('European Union');
-
-        $this->zoneRepository->add($zone);
-        $this->sharedStorage->set('zone', $zone);
-    }
-
-    /**
      * @Given /^there is a zone "The Rest of the World" containing all other countries$/
      */
     public function thereIsAZoneTheRestOfTheWorldContainingAllOtherCountries()
     {
-        $restOfWorldCountries = array_diff(
-            array_keys(Intl::getRegionBundle()->getCountryNames('en')),
-            array_merge($this->euMembers, ['US'])
-        );
+        $restOfWorldCountries = Intl::getRegionBundle()->getCountryNames('en');
+        unset($restOfWorldCountries['US']);
 
-        $zone = $this->zoneFactory->createWithMembers($restOfWorldCountries);
+        $zone = $this->zoneFactory->createWithMembers(array_keys($restOfWorldCountries));
         $zone->setType(ZoneInterface::TYPE_COUNTRY);
         $zone->setCode('RoW');
         $zone->setName('The Rest of the World');

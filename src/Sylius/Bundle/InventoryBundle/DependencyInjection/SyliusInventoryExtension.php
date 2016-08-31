@@ -17,12 +17,10 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 
 /**
- * Inventory extension.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class SyliusInventoryExtension extends AbstractResourceExtension
+final class SyliusInventoryExtension extends AbstractResourceExtension
 {
     /**
      * {@inheritdoc}
@@ -34,30 +32,9 @@ class SyliusInventoryExtension extends AbstractResourceExtension
 
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
-        $configFiles = [
-            'twig.xml',
-            'templating.xml',
-            'services.xml',
-        ];
-
-        foreach ($configFiles as $configFile) {
-            $loader->load($configFile);
-        }
-
-        $container->setParameter('sylius.backorders', $config['backorders']);
+        $loader->load('services.xml');
 
         $container->setAlias('sylius.availability_checker', $config['checker']);
         $container->setAlias('sylius.inventory_operator', $config['operator']);
-
-        if (isset($config['events'])) {
-            $listenerDefinition = $container->getDefinition('sylius.listener.inventory');
-
-            foreach ($config['events'] as $event) {
-                $listenerDefinition->addTag(
-                    'kernel.event_listener',
-                    ['event' => $event, 'method' => 'onInventoryChange']
-                );
-            }
-        }
     }
 }

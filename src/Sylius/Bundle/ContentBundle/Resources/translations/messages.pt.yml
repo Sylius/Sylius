@@ -4,25 +4,103 @@
 sylius:
     form:
         action_block:
+            action_name: Nome da ação
             id: Id
+            publish_end_date: Data final de publicação
+            publish_start_date: Data de início de publicação
+            publishable: Publicado
         imagine_block:
             filter: Filtrar
+            image: Imagem
             internal_name: Nome interno
+            label: Rótulo
+            link_url: URL do link
+            parent: Pai
+            publish_end_date: Data final de publicação
+            publish_start_date: Data de início de publicação
+            publishable: Publicado
+            slideshow_small: Pequena apresentação de slides (lado)
+            slideshow_medium: Apresentação de slides média (conteúdo)
+            slideshow_large: Apresentação de slides grande (largura total)
+        menu:
+            childrens: Filhos
+            display: Exibir
+            display_children: Exibir filhos
+            label: Rótulo
+            name: Nome
+            parent: Pai
+            publish_end_date: Data final de publicação
+            publish_start_date: Data de início de publicação
+            publishable: Publicado
+            route: Rota
+            uri: URI
         menu_block:
+            body: Corpo
             id: Id
+            name: Nome
+            publish_end_date: Data final de publicação
+            publish_start_date: Data de início de publicação
+            publishable: Publicado
         menu_node_block:
             content: Conteúdo
+            display: Exibir
+            display_children: Exibir filhos
             internal_name: Nome interno
+            label: Rótulo
+            link_type: Tipo de link
+            publish_end_date: Data final de publicação
+            publish_start_date: Data de início de publicação
+            publishable: Publicado
+            route: Rota
+            uri: URI
         redirect_route:
             id: Id
+            name: Nome
+            route_name: Nome da rota
+            uri: URI
         reference_block:
+            body: Corpo
             id: Id
+            publish_end_date: Data final de publicação
+            publish_start_date: Data de início de publicação
+            publishable: Publicado
+            title: Título
         route:
             content: Conteúdo
+            name: Nome
+            parent: Pai
         simple_block:
+            body: Corpo
             internal_name: Nome interno
+            parent: Pai
+            publish_end_date: Data final de publicação
+            publish_start_date: Data de início de publicação
+            publishable: Publicado
+            title: Título
         slideshow_block:
+            add_slide: Adicionar slide
+            childrens: Filhos
             internal_name: Nome interno
+            parent: Pai
+            publish_end_date: Data final de publicação
+            publish_start_date: Data de início de publicação
+            publishable: Publicado
+            title: Título
         static_content:
+            body: Corpo
             id: Id
             internal_name: Nome interno
+            menu_nodes: Nós do menu
+            parent: Pai
+            publish_end_date: Data final de publicação
+            publish_start_date: Data de início de publicação
+            publishable: Publicado
+            routes: Rotas
+            title: Título
+        string_block:
+            body: Corpo
+            id: Nº
+            name: Nome
+            publish_end_date: Data final de publicação
+            publish_start_date: Data de início de publicação
+            publishable: Publicado

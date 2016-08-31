@@ -96,7 +96,6 @@ sylius:
         user_filter:
             query: Pretraga
         variant:
-            available_on_demand: Dostupno na zahtjev
             depth: Dubina
             height: Visina
             images: Slike

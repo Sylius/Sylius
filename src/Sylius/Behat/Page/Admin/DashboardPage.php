@@ -93,8 +93,7 @@ class DashboardPage extends SymfonyPage implements DashboardPageInterface
      */
     public function logOut()
     {
-        $this->getElement('dropdown')->press();
-        $this->getElement('logout')->press();
+        $this->getElement('logout')->click();
     }
 
     /**

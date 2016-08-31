@@ -5,7 +5,7 @@ Feature: Customer profile validation
     I want to be prevented from entering incorrect values
 
     Background:
-        Given the store operates on a single channel in "France"
+        Given the store operates on a single channel in "United States"
         And the store has customer "claire@underwood.com"
         And there is a customer "Francis Underwood" identified by an email "francis@underwood.com" and a password "whitehouse"
         And I am logged in as "francis@underwood.com"

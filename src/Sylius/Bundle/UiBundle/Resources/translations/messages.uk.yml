@@ -31,7 +31,6 @@ sylius:
         author: Автор
         availability: Доступність
         available_on: Доступно
-        available_on_demand: На вимогу
         back: Назад
         backorder: Звільняється
         balance_due: Сума до сплати
@@ -249,7 +248,7 @@ sylius:
         payments: Платежі
         pending: В очікуванні
         permissions: Дозволи
-        phone_number: Номер Телефону
+        phone_number: Номер телефону
         place_order: Розмістити замовлення
         placed_at: Розміщено
         postcode: Iндекс
@@ -259,7 +258,6 @@ sylius:
         pricing: Ціноутворення
         processing: В процесі
         product: Товар
-        product_archetypes: Прототипи продуктів
         products: Продукти
         products_categorized_as_name: 'Продукт категоризовано як "%name%"'
         products_categorized_under_taxon_taxon: 'Товари <small> категорії "%taxon%" </small>'

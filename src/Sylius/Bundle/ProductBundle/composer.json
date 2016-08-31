@@ -24,7 +24,6 @@
 
         "stof/doctrine-extensions-bundle": "~1.1",
         "sylius/product": "^1.0",
-        "sylius/archetype-bundle": "^1.0",
         "sylius/attribute-bundle": "^1.0",
         "sylius/association-bundle": "^1.0",
         "sylius/variation-bundle": "^1.0",

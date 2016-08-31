@@ -39,10 +39,10 @@ You're interacting with them like you usually do with own entities in your proje
         $item = $this->get('sylius.repository.cart')->createNew();
     }
 
-Provider and Resolver
----------------------
+Provider
+--------
 
-There are also 3 more services for you.
+There is also 1 more service for you.
 
 You use the provider to obtain the current user cart, if there is none, a new one is created and saved.
 The ``->setCart()`` method also allows you to replace the current cart.
@@ -62,20 +62,3 @@ This is useful, for example, when after completing an order you want to start wi
         $provider->setCart($customCart);
         $provider->abandonCart();
     }
-
-The resolver is used to create a new item based on the user request.
-
-.. code-block:: php
-
-    <?php
-
-    // ...
-    public function addItemAction(Request $request)
-    {
-        $resolver = $this->get('sylius.cart_resolver');
-        $item = $resolver->resolve($this->createNew(), $request);
-    }
-
-.. note::
-
-    A more advanced example of a resolver implementation is available `in Sylius Sandbox application on GitHub <https://github.com/Sylius/Sylius-Sandbox/blob/master/src/Sylius/Bundle/SandboxBundle/Resolver/ItemResolver.php>`_.

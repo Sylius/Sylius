@@ -14,7 +14,7 @@ namespace Sylius\Bundle\CoreBundle\EventListener;
 use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Bundle\UserBundle\UserEvents;
 use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Component\Core\Model\UserInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\User\Security\Generator\GeneratorInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -70,9 +70,9 @@ class UserRegistrationListener
     }
 
     /**
-     * @param UserInterface $user
+     * @param ShopUserInterface $user
      */
-    protected function handleUserVerificationToken(UserInterface $user)
+    protected function handleUserVerificationToken(ShopUserInterface $user)
     {
         $token = $this->tokenGenerator->generate();
         $user->setEmailVerificationToken($token);

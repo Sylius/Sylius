@@ -5,7 +5,7 @@ Feature: Verifying account's email address
     I want to be able to verify my email address
 
     Background:
-        Given the store operates on a single channel in "France"
+        Given the store operates on a single channel in "United States"
         And there is a "valkyrie@cain.com" user
         And this user is not verified
 

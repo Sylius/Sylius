@@ -87,7 +87,6 @@ sylius:
         user_filter:
             query: Cerca
         variant:
-            available_on_demand: Disponible sota demanda
             depth: Profunditat
             height: Alçada
             images: Imatges

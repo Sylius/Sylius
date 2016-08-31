@@ -13,7 +13,7 @@ namespace spec\Sylius\Bundle\CoreBundle\Form\EventSubscriber;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Component\Core\Model\UserInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
@@ -52,7 +52,7 @@ class CustomerRegistrationFormSubscriberSpec extends ObjectBehavior
         CustomerInterface $customer,
         RepositoryInterface $customerRepository,
         CustomerInterface $existingCustomer,
-        UserInterface $user
+        ShopUserInterface $user
     ) {
         $event->getForm()->willReturn($form);
         $form->getData()->willReturn($customer);
@@ -72,7 +72,7 @@ class CustomerRegistrationFormSubscriberSpec extends ObjectBehavior
     function it_throws_unexpected_type_exception_if_data_is_not_customer_type(
         FormEvent $event,
         FormInterface $form,
-        UserInterface $user
+        ShopUserInterface $user
     ) {
         $event->getForm()->willReturn($form);
         $form->getData()->willReturn($user);
@@ -87,7 +87,7 @@ class CustomerRegistrationFormSubscriberSpec extends ObjectBehavior
         CustomerInterface $customer,
         RepositoryInterface $customerRepository,
         CustomerInterface $existingCustomer,
-        UserInterface $user
+        ShopUserInterface $user
     ) {
         $event->getForm()->willReturn($form);
         $form->getData()->willReturn($customer);

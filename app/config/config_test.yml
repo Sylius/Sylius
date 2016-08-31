@@ -5,14 +5,13 @@ imports:
     - { resource: "config.yml" }
 
 parameters:
-    currency: EUR
+    currency: USD
     locale: en_US
 
     sylius.order.allow_guest_order: true
 
 framework:
     test: ~
-    default_locale: "en"
     session:
         storage_id: session.storage.mock_file
 
@@ -56,9 +55,6 @@ sylius_payment:
         test: Test
         stripe: Stripe
         paypal_express_checkout: Paypal Express Checkout
-
-sylius_rbac:
-    authorization_checker: sylius.authorization_checker.toggleable
 
 sylius_theme:
     sources:

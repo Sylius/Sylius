@@ -32,6 +32,7 @@ sylius:
         reference_block:
             id: Id
         route:
+            content: Sisältö
             parent: Vanhempi
         simple_block:
             internal_name: Sisäinen nimi

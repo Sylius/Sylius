@@ -37,7 +37,7 @@ class ShipmentController extends ResourceController
             $this
                 ->get('sm.factory')
                 ->get($shipment, ShipmentTransitions::GRAPH)
-                ->apply(ShipmentTransitions::SYLIUS_SHIP)
+                ->apply(ShipmentTransitions::TRANSITION_SHIP)
             ;
 
             $this->manager->flush();

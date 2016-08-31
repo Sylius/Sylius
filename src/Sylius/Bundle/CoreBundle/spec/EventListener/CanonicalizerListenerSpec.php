@@ -16,7 +16,7 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Component\Core\Model\UserInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -33,13 +33,16 @@ final class CanonicalizerListenerSpec extends ObjectBehavior
         $this->shouldHaveType('Sylius\Bundle\CoreBundle\EventListener\CanonicalizerListener');
     }
 
-    function it_canonicalize_user_username_on_pre_persist_doctrine_event($canonicalizer, LifecycleEventArgs $event, UserInterface $user)
+    function it_canonicalize_user_username_on_pre_persist_doctrine_event($canonicalizer, LifecycleEventArgs $event, ShopUserInterface $user)
     {
         $event->getEntity()->willReturn($user);
         $user->getUsername()->willReturn('testUser');
+        $user->getEmail()->willReturn('test@email.com');
 
         $user->setUsernameCanonical('testuser')->shouldBeCalled();
+        $user->setEmailCanonical('test@email.com')->shouldBeCalled();
         $canonicalizer->canonicalize('testUser')->willReturn('testuser')->shouldBeCalled();
+        $canonicalizer->canonicalize('test@email.com')->willReturn('test@email.com')->shouldBeCalled();
 
         $this->prePersist($event);
     }
@@ -55,13 +58,16 @@ final class CanonicalizerListenerSpec extends ObjectBehavior
         $this->prePersist($event);
     }
 
-    function it_canonicalize_user_username_on_pre_update_doctrine_event($canonicalizer, LifecycleEventArgs $event, UserInterface $user)
+    function it_canonicalize_user_username_on_pre_update_doctrine_event($canonicalizer, LifecycleEventArgs $event, ShopUserInterface $user)
     {
         $event->getEntity()->willReturn($user);
         $user->getUsername()->willReturn('testUser');
+        $user->getEmail()->willReturn('test@email.com');
 
         $user->setUsernameCanonical('testuser')->shouldBeCalled();
+        $user->setEmailCanonical('test@email.com')->shouldBeCalled();
         $canonicalizer->canonicalize('testUser')->willReturn('testuser')->shouldBeCalled();
+        $canonicalizer->canonicalize('test@email.com')->willReturn('test@email.com')->shouldBeCalled();
 
         $this->preUpdate($event);
     }

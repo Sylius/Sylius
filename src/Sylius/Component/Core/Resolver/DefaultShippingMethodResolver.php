@@ -42,6 +42,7 @@ class DefaultShippingMethodResolver implements DefaultShippingMethodResolverInte
      */
     public function getDefaultShippingMethod(ShipmentInterface $shipment)
     {
+        /** @var CoreShipmentInterface $shipment */
         Assert::isInstanceOf($shipment, CoreShipmentInterface::class);
 
         $shippingMethods = $this->shippingMethodRepository->findBy(['enabled' => true]);

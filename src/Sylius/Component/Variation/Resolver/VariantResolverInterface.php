@@ -12,11 +12,17 @@
 namespace Sylius\Component\Variation\Resolver;
 
 use Sylius\Component\Variation\Model\VariableInterface;
+use Sylius\Component\Variation\Model\VariantInterface;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
 interface VariantResolverInterface
 {
+    /**
+     * @param VariableInterface $subject
+     *
+     * @return VariantInterface
+     */
     public function getVariant(VariableInterface $subject);
 }

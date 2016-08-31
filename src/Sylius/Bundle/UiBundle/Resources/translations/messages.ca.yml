@@ -12,7 +12,6 @@ sylius:
         add_to_cart: Afegir a la cistella
         administration_dashboard: Quadre de comandament
         all_your_addresses: Totes les teves adreces
-        available_on_demand: Disponible sota demanda
         back: Enrera
         billing_address: Adreça de facturació
         body: Cos
@@ -49,6 +48,7 @@ sylius:
         lastname: Cognoms
         members: Membres
         message: Missatge
+        my_account: El meu compte
         name: Nom
         new: Nou
         next: Següent

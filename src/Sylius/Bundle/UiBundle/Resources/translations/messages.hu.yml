@@ -41,19 +41,20 @@ sylius:
         adding_new_email: Új email hozzáadása
         adding_new_locale: Új terület hozzáadása
         additional_information: Kiegészítő információ
+        address: Lakcím
         addressing: Címzés
         addressing_step: Cím beállítása
         adjustments: Kiigazítások
         administration: Adminisztráció
         administration_dashboard: Admin felület
         administration_panel_login: Adminisztrációs panel bejelentkezés
+        admin_users: Adminisztrátorok
         all: Mind
         all_your_addresses: Minden Ön által megadott cím
         amount: Összeg
         an_error_occurred: Hiba történt
+        api: API
         apply_coupon: Kupon használata
-        archetype: Őstípus
-        archetypes: Őstípusok
         are_your_sure_you_want_to_perform_this_action: Biztos vagy benne, hogy végrehajtod ezt a műveletet?
         association: Kapcsolatok
         association_types: Kapcsolódó típusok
@@ -64,7 +65,6 @@ sylius:
         availability: Elérhető
         available_for_channels: Minden csatornán elérhető
         available_on: A rendelkezésre álló
-        available_on_demand: Igény szerint rendelkezésre áll
         available_on_hand: Rendelkezésre álló
         available_until: Elérhető amíg
         average_order_value: Átlagos rendelési érték
@@ -79,10 +79,10 @@ sylius:
         body: Törzs
         browse_products: Termékek böngészése
         build: Létrehozás
-        building_product_from_archetype: Termék készítése őstípusból
         calculator: Számológép
         cancel: Mégse
         cancelled: Megszakítva
+        cart: Kosár
         cart_locked: Kosár lezárva
         cart_summary: Kosár tartalma
         categorization: Kategorizálás
@@ -115,10 +115,6 @@ sylius:
         confirmation: Megerősítés
         confirmation_title: Megerősítés
         confirmed: Megerősítve
-        contact_request_details: Kapcsolatfelvételi kérelem részletei
-        contact_request_show: Kapcsolatfelvételi kérelem
-        contact_requests: Kapcsolatfelvételi kérelmek
-        contact_topics: Kapcsolatfelvételi témák
         contact_us: Kapcsolat
         contain_variants: Változatokat tartalmaz
         contains: Tartalmaz
@@ -133,10 +129,7 @@ sylius:
         create_a_new_address: Új cím létrehozása
         create_a_new_customer_account: Új ügyfél létrehozása
         create_an_account: Fiók létrehozása
-        create_archetype: Őstípus létrehozása
         create_association_type: Kapcsolat létrehozása
-        create_contact_request: Kapcsolatfelvételi kérelem létrehozása
-        create_contact_topic: Kapcsolatfelvételi téma létrehozása
         create_country: Ország létrehozása
         create_currency: Pénznem létrehozása
         create_customer: Vevő létrehozása
@@ -249,11 +242,8 @@ sylius:
         edit_your_items_apply_coupon_or_proceed_to_the_checkout: Módosítsd a tételeid, használj fel kupont vagy haladj tovább a fizetéshez
         edit_your_personal_information: A személyes adatok szerkesztése
         edit_zone: Zóna módosítása
-        editing_archetype: Őstípus módosítása
         editing_attribute: Attribútum módosítása
         editing_channel: Csatorna módosítása
-        editing_contact_request: Kapcsolatfelvételi kérelem módosítása
-        editing_contact_topic: Kapcsolatfelvétel témájának módosítása
         editing_country: Ország szerkesztése
         editing_coupon: Kupon szerkesztése
         editing_currency: Pénznem módosítása
@@ -307,6 +297,7 @@ sylius:
         extra_notes: További megjegyzések
         failed: Sikertelen
         faqs: GYIK
+        female: Nő
         filter: Szűrő
         filters: Szűrők
         first_name: Keresztnév
@@ -376,6 +367,7 @@ sylius:
         login_sylius_store: 'Bejelentkezés a <small>Sylius webáruházba</small>'
         logout: Kilépés
         main_taxon: Fő taxonómia
+        male: Férfi
         manage: Kezelés
         manage_adjustments: Korrekciók kezelése
         manage_attributes: Attribútumok kezelése
@@ -424,15 +416,12 @@ sylius:
         modified: Módosítva
         move_down: Mozgatás lefelé
         move_up: Mozgatás Felfelé
-        my_account: Fiókom
+        my_account: Az Ön fiókja
         n_a: N/A
         name: Név
         new: Új
-        new_archetype: Új őstípus
         new_channel: Új csatorna
         new_comment_posted_on_order: Új hozzászólás a rendeléshez
-        new_contact_request: Új kapcsolatfelvételi kérelem
-        new_contact_topic: Új kapcsolatfelvételi téma
         new_country: Új ország
         new_coupon: Új kupon
         new_currency: Új pénznem
@@ -489,6 +478,7 @@ sylius:
         not_empty: Nem üres
         not_in: Nincs benne
         not_verified: Nincs megerősítve
+        notes: Jegyzetek
         notify_customer: Ügyfél értesítése
         number: Szám
         number_of_orders: Rendelések száma
@@ -546,7 +536,6 @@ sylius:
         process_your_orders: Megrendeléseid feldolgozása
         processing: Feldolgozás alatt
         product: Termék
-        product_archetypes: Termék alaptípusok
         product_association_index: Kapcsolatok
         product_association_type_index: Kapcsolódó típus
         product_association_types: Termék asszocciáló típusok
@@ -684,12 +673,9 @@ sylius:
         thank_you: Köszönjük!
         thank_you_for_your_order: Köszönjük a rendelését
         theme: Téma
-        there_are_no_archetypes_defined: Nincs őstípus meghatározva
         there_are_no_attributes_configured: Nincsenek attribútumok meghatározva
         there_are_no_blocks_to_display: Nincs megjeleníthető blokk
         there_are_no_channels_configured: Nincsenek csatornák beállíŧva
-        there_are_no_contact_requests_to_display: Nincs megjeleníthető kapcsolatfelvételi kérelem
-        there_are_no_contact_topics_to_display: Nincs megjeleníthető kapcsolatfelvételi téma
         there_are_no_countries_configured: Nincsenek konfigurált országok
         there_are_no_coupon_to_display: Nincsenek megjeleníthető kuponok
         there_are_no_currencies_to_display: Nincsenek megjeleníthető pénznemek

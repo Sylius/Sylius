@@ -114,6 +114,7 @@ sylius:
         members: Članovi
         method: metod
         modified: izmenjeno
+        my_account: Moj nalog
         name: Ime
         new_country: Nova zemlja
         new_order: Nova narudžbina

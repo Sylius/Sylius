@@ -12,6 +12,7 @@
 namespace Sylius\Behat\Page\Shop;
 
 use Behat\Mink\Element\NodeElement;
+use Behat\Mink\Exception\UnsupportedDriverActionException;
 use Sylius\Behat\Page\SymfonyPage;
 
 /**
@@ -67,6 +68,10 @@ class HomePage extends SymfonyPage implements HomePageInterface
      */
     public function switchCurrency($currencyCode)
     {
+        try {
+            $this->getElement('currency_selector')->click(); // Needed for javascript scenarios
+        } catch (UnsupportedDriverActionException $exception) {}
+
         $this->getElement('currency_selector')->clickLink($currencyCode);
     }
 

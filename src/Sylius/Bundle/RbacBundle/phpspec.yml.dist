@@ -1,5 +1,0 @@
-suites:
-    main:
-        namespace: Sylius\Bundle\RbacBundle
-        psr4_prefix: Sylius\Bundle\RbacBundle
-        src_path: .

@@ -16,8 +16,6 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Simple static content type.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class StaticContentType extends AbstractResourceType
@@ -49,14 +47,6 @@ class StaticContentType extends AbstractResourceType
                 'allow_delete' => true,
                 'by_reference' => false,
                 'label' => 'sylius.form.static_content.routes',
-                'cascade_validation' => true,
-             ])
-            ->add('menuNodes', 'collection', [
-                'type' => 'sylius_menu_node',
-                'allow_add' => true,
-                'allow_delete' => true,
-                'by_reference' => false,
-                'label' => 'sylius.form.static_content.menu_nodes',
                 'cascade_validation' => true,
              ])
             ->add('body', 'textarea', [

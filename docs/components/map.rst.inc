@@ -1,10 +1,8 @@
 * :doc:`/components/general/index`
 * :doc:`/components/Addressing/index`
-* :doc:`/components/Archetype/index`
 * :doc:`/components/Attribute/index`
 * :doc:`/components/Cart/index`
 * :doc:`/components/Channel/index`
-* :doc:`/components/Contact/index`
 * :doc:`/components/Currency/index`
 * :doc:`/components/Grid/index`
 * :doc:`/components/Inventory/index`
@@ -18,7 +16,6 @@
 * :doc:`/components/Promotion/index`
 * :doc:`/components/Rbac/index`
 * :doc:`/components/Registry/index`
-* :doc:`/components/Report/index`
 * :doc:`/components/Resource/index`
 * :doc:`/components/Shipping/index`
 * :doc:`/components/Storage/index`

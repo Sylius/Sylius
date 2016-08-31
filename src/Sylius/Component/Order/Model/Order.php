@@ -63,11 +63,6 @@ class Order implements OrderInterface
     protected $comments;
 
     /**
-     * @var Collection|IdentityInterface[]
-     */
-    protected $identities;
-
-    /**
      * @var int
      */
     protected $adjustmentsTotal = 0;
@@ -90,7 +85,6 @@ class Order implements OrderInterface
         $this->items = new ArrayCollection();
         $this->adjustments = new ArrayCollection();
         $this->comments = new ArrayCollection();
-        $this->identities = new ArrayCollection();
         $this->createdAt = new \DateTime();
     }
 
@@ -324,45 +318,6 @@ class Order implements OrderInterface
     public function isEmpty()
     {
         return $this->items->isEmpty();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function addIdentity(IdentityInterface $identity)
-    {
-        if (!$this->hasIdentity($identity)) {
-            $this->identities->add($identity);
-
-            $identity->setOrder($this);
-        }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function hasIdentity(IdentityInterface $identity)
-    {
-        return $this->identities->contains($identity);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getIdentities()
-    {
-        return $this->identities;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function removeIdentity(IdentityInterface $identity)
-    {
-        if ($this->hasIdentity($identity)) {
-            $identity->setOrder(null);
-            $this->identities->removeElement($identity);
-        }
     }
 
     /**

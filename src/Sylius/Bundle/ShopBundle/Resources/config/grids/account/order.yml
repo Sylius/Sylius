@@ -18,7 +18,7 @@ sylius_grid:
                     type: twig
                     label: sylius.ui.number
                     options:
-                        template: SyliusShopBundle:Account/Order/Field:number.html.twig
+                        template: SyliusShopBundle:Account/Order/Grid/Field:number.html.twig
                 completedAt:
                     type: datetime
                     label: sylius.ui.date
@@ -28,18 +28,18 @@ sylius_grid:
                     type: twig
                     label: sylius.ui.ship_to
                     options:
-                        template: SyliusShopBundle:Account/Order/Field:shippingAddress.html.twig
+                        template: SyliusShopBundle:Account/Order/Grid/Field:shippingAddress.html.twig
                 total:
                     type: twig
                     label: sylius.ui.total
                     path: .
                     options:
-                        template: SyliusShopBundle:Account/Order/Field:total.html.twig
+                        template: SyliusShopBundle:Account/Order/Grid/Field:total.html.twig
                 state:
                     type: twig
                     label: sylius.ui.state
                     options:
-                        template: SyliusShopBundle:Account/Order/Field:state.html.twig
+                        template: SyliusShopBundle:Account/Order/Grid/Field:state.html.twig
             actions:
                 item:
                     show:

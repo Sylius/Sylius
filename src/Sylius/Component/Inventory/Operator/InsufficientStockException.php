@@ -18,7 +18,7 @@ use Sylius\Component\Inventory\Model\StockableInterface;
  *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class InsufficientStockException extends \UnderflowException
+final class InsufficientStockException extends \UnderflowException
 {
     /**
      * @var StockableInterface
@@ -27,9 +27,10 @@ class InsufficientStockException extends \UnderflowException
 
     /**
      * @param StockableInterface $stockable
-     * @param int            $quantity
+     * @param int $quantity
+     * @param \Exception|null $previousException
      */
-    public function __construct(StockableInterface $stockable, $quantity)
+    public function __construct(StockableInterface $stockable, $quantity, \Exception $previousException = null)
     {
         $this->stockable = $stockable;
 
@@ -38,7 +39,7 @@ class InsufficientStockException extends \UnderflowException
             $stockable->getOnHand(),
             $stockable->getInventoryName(),
             $quantity
-        ));
+        ), 0, $previousException);
     }
 
     /**

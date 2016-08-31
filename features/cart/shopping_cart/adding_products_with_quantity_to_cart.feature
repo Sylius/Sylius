@@ -5,8 +5,8 @@ Feature: Adding a simple product of given quantity to the cart
     I want to be able to add a simple product with stated quantity to the cart
 
     Background:
-        Given the store operates on a single channel in "France"
-        And the store has a product "T-shirt banana" priced at "€12.54"
+        Given the store operates on a single channel in "United States"
+        And the store has a product "T-shirt banana" priced at "$12.54"
 
     @ui
     Scenario: Adding a product with stated quantity to the cart

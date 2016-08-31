@@ -12,28 +12,26 @@
 namespace Sylius\Bundle\CoreBundle\EventListener;
 
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\OrderProcessing\OrderRecalculatorInterface;
-use Sylius\Component\Core\OrderProcessing\OrderShipmentProcessorInterface;
-use Sylius\Component\Pricing\Calculator\DelegatingCalculatorInterface;
+use Sylius\Component\Core\OrderProcessing\OrderProcessorInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class OrderRecalculationListener
+final class OrderRecalculationListener
 {
     /**
-     * @var OrderRecalculatorInterface
+     * @var OrderProcessorInterface
      */
-    private $orderRecalculator;
+    private $orderProcessor;
 
     /**
-     * @param OrderRecalculatorInterface $orderRecalculator
+     * @param OrderProcessorInterface $orderProcessor
      */
-    public function __construct(OrderRecalculatorInterface $orderRecalculator)
+    public function __construct(OrderProcessorInterface $orderProcessor)
     {
-        $this->orderRecalculator = $orderRecalculator;
+        $this->orderProcessor = $orderProcessor;
     }
 
     /**
@@ -49,6 +47,6 @@ class OrderRecalculationListener
             throw new UnexpectedTypeException($order, OrderInterface::class);
         }
 
-        $this->orderRecalculator->recalculate($order);
+        $this->orderProcessor->process($order);
     }
 }

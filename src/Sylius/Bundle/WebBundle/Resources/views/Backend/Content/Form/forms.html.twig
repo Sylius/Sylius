@@ -1,7 +1,0 @@
-{% macro readonly(field, value, default_value) %}
-    {% if value == '' %}
-        {{ form_row(field, {'attr': {'class': 'input-lg', 'value': default_value|default(''), 'readonly': 'readonly'}}) }}
-    {% else %}
-        {{ form_row(field, {'label_attr': {'class': 'hidden'},'attr': {'class': 'hidden'}}) }}
-    {% endif %}
-{% endmacro %}

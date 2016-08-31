@@ -17,6 +17,7 @@ use Sylius\Component\Core\Pricing\Calculators;
 use Sylius\Component\Product\Model\Variant as BaseVariant;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
 use Sylius\Component\Variation\Model\VariantInterface as BaseVariantInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -61,7 +62,7 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * @var bool
      */
-    protected $availableOnDemand = true;
+    protected $tracked = false;
 
     /**
      * @var Collection|ProductVariantImageInterface[]
@@ -267,25 +268,27 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     /**
      * {@inheritdoc}
      */
+    public function setTracked($tracked)
+    {
+        Assert::boolean($tracked);
+
+        $this->tracked = $tracked;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isTracked()
+    {
+        return $this->tracked;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getInventoryName()
     {
         return $this->getProduct()->getName();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isAvailableOnDemand()
-    {
-        return $this->availableOnDemand;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setAvailableOnDemand($availableOnDemand)
-    {
-        $this->availableOnDemand = (bool) $availableOnDemand;
     }
 
     /**
