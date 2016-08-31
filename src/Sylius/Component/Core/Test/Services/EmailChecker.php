@@ -52,6 +52,21 @@ class EmailChecker implements EmailCheckerInterface
     /**
      * {@inheritdoc}
      */
+    public function hasMessage($message)
+    {
+        $messages = $this->getMessages($this->spoolDirectory);
+        foreach ($messages as $sentMessage) {
+            if (false !== strpos($sentMessage->getBody(), $message)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getMessagesCount()
     {
         return count($this->getMessages($this->spoolDirectory));

@@ -177,6 +177,18 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         $this->getElement('login_password')->setValue($password);
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getItemSubtotal($itemName)
+    {
+        $itemSlug = strtolower(str_replace('\"', '', str_replace(' ', '-', $itemName)));
+
+        $subtotalTable = $this->getElement('checkout_subtotal');
+
+        return $subtotalTable->find('css', sprintf('#item-%s-subtotal', $itemSlug))->getText();
+    }
+
     public function nextStep()
     {
         $this->getDocument()->pressButton('Next');
@@ -200,6 +212,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
             'billing_country_province' => '[name="sylius_checkout_address[billingAddress][provinceCode]"]',
             'billing_city' => '#sylius_checkout_address_billingAddress_city',
             'billing_postcode' => '#sylius_checkout_address_billingAddress_postcode',
+            'checkout_subtotal' => '#checkout-subtotal',
             'customer_email' => '#sylius_checkout_address_customer_email',
             'different_billing_address' => '#sylius_checkout_address_differentBillingAddress',
             'different_billing_address_label' => '#sylius_checkout_address_differentBillingAddress ~ label',

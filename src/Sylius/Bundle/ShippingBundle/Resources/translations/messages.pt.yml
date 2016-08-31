@@ -5,15 +5,30 @@ sylius:
     form:
         rule:
             unit_count_configuration:
+                count: Quantidade
                 equal: Igual a
+            type: Tipo de regra
         shipment:
             state: Estado
             states:
                 checkout: Finalizar compra
                 pending: Pendente
                 cancelled: Cancelado
+            tracking_code: Código de acompanhamento
+        shipping_calculator:
+            flat_rate_configuration:
+                amount: Quantia
+            per_unit_rate_configuration:
+                amount: Quantia
+            volume_rate_configuration:
+                label: Taxa com base no volume
+                amount: Quantia
         shipping_category:
             description: Descrição
+            name: Nome
         shipping_method:
             description: Descrição
+            enabled: Ativado
+            name: Nome
             tax_category: Categoria de imposto
+            translations: Traduções

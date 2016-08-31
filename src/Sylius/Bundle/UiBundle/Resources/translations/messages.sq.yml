@@ -47,8 +47,6 @@ sylius:
         all_your_addresses: Të gjitha adresat e tua
         amount: Shuma
         an_error_occurred: Ndodhi një gabim
-        archetype: Prototipi
-        archetypes: Prototipet
         are_your_sure_you_want_to_perform_this_action: Jeni i sigurte se deshironi te egzekutoni kete veprim?
         association: Lidhje
         association_types: Tipi i lidhjes
@@ -69,7 +67,6 @@ sylius:
         body: Përmbajtja e porosisë
         browse_products: Shfleto produktet
         build: Ndërto
-        building_product_from_archetype: Duke ndërtuar produktin nga prototipi
         calculator: Llogaritësi
         cancel: Fshi
         cancelled: E fshirë
@@ -98,10 +95,6 @@ sylius:
         confirmation: Konfirmo
         confirmation_title: Konfirmo
         confirmed: Konfirmuar
-        contact_request_details: Hollësi të kërkesës së kontaktit
-        contact_request_show: Kërkesë kontakti
-        contact_requests: Kërkesa kontakti
-        contact_topics: Kategoria e kontaktit
         contain_variants: Përmban variante
         contains: Përmban
         content: Përmbajtja
@@ -112,10 +105,7 @@ sylius:
         coupons: Kuponat
         create: Krijo
         create_a_new_address: Krijo një adresë të re
-        create_archetype: Krijo prototip
         create_association_type: Krijo tipin e lidhjes
-        create_contact_request: Krijo kërkesë kontakti
-        create_contact_topic: Krijo rubrikë kontakti
         create_country: Zgjidh vendin
         create_currency: Krijo llojin e monedhës
         create_customer: Krijo blerësin
@@ -215,11 +205,8 @@ sylius:
         edit_taxon: Modifiko kategorine
         edit_your_personal_information: Afisho informacionin tënd personal
         edit_zone: Modifiko zonen
-        editing_archetype: Duke afishuar prototipin
         editing_attribute: Duke afishuar atributin
         editing_channel: Afishimi i kanalit
-        editing_contact_request: Duke afishuar kërkesën e kontaktit
-        editing_contact_topic: Duke afishuar rubrikën e kontaktit
         editing_country: Duke afishuar vendin
         editing_coupon: Duke afishuar kuponin
         editing_currency: Duke afishuar llojin e monedhës
@@ -379,11 +366,8 @@ sylius:
         n_a: N/A
         name: Emri
         new: E re
-        new_archetype: Prototip i ri
         new_channel: Kanal i ri
         new_comment_posted_on_order: Koment i ri i postuar për porosinë
-        new_contact_request: Kërkesë e re kontakti
-        new_contact_topic: Rubrikë e re kontakti
         new_country: Vend i ri
         new_currency: Lloj i ri monedhe
         new_customer: Klient i ri
@@ -478,7 +462,6 @@ sylius:
         priority: Përparësia
         processing: Duke u procesuar
         product: Produkti
-        product_archetypes: Prototipet e produktit
         product_association_index: Lidhje
         product_association_type_index: Tipi i lidhjes
         product_association_types: Tipet e lidhjes se produktit
@@ -594,12 +577,9 @@ sylius:
         taxons: Kategoritë
         thank_you_for_your_order: Falmnderit për porosinë
         theme: Tema
-        there_are_no_archetypes_defined: Nuk ka asnjë prototip të përcaktuar
         there_are_no_attributes_configured: Nuk ka asnjë atribut të konfiguruar
         there_are_no_blocks_to_display: "Nuk ka asnjë bllok për t'u shfaqur"
         there_are_no_channels_configured: Nuk ka asnjë kanal të konfiguruar
-        there_are_no_contact_requests_to_display: "Nuk ka asnjë kërkesë kontakti për t'u shfaqur"
-        there_are_no_contact_topics_to_display: "Nuk ka asnjë rubrikë kontakti për t'u shfaqur"
         there_are_no_countries_configured: Nuk ka asnjë vend të konfiguruar
         there_are_no_coupon_to_display: "Nuk ka asnjë kupon për t'u shfaqur"
         there_are_no_currencies_to_display: "Nuk ka asnjë lloj monedhe për t'u shfaqur"

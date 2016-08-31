@@ -12,9 +12,5 @@ sylius:
             taxons: Катэгорыі
         product_variant:
             available_on: У наяўнасці з
-        product_archetype:
-            name: Імя
-            parent: "Бацькоўскі аб'ект"
-            options: Опцыі
         association_type:
             name: Імя

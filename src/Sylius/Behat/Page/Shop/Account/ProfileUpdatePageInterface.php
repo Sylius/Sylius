@@ -45,4 +45,11 @@ interface ProfileUpdatePageInterface extends PageInterface
      * @throws ElementNotFoundException
      */
     public function checkValidationMessageFor($element, $message);
+
+    public function subscribeToTheNewsletter();
+
+    /**
+     * @return bool
+     */
+    public function isSubscribedToTheNewsletter();
 }

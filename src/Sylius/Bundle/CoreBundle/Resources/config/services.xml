@@ -108,15 +108,13 @@
         <parameter key="sylius.payment_methods_resolver.channel_based.class">Sylius\Component\Core\Resolver\ChannelBasedPaymentMethodsResolver</parameter>
         <parameter key="sylius.shipping_methods_resolver.zones_and_channel_based.class">Sylius\Component\Core\Resolver\ZoneAndChannelBasedShippingMethodsResolver</parameter>
 
+        <parameter key="sylius.updater.order.exchange_rate.class">Sylius\Component\Core\Updater\OrderExchangeRateUpdater</parameter>
+        <parameter key="sylius.updater.order.exchange_rate_and_currency.class">Sylius\Component\Core\Updater\OrderExchangeRateAndCurrencyUpdater</parameter>
+
         <parameter key="sylius.context.customer.class">Sylius\Bundle\CoreBundle\Context\CustomerContext</parameter>
 
         <!-- Form subscriber -->
         <parameter key="sylius.form.event_subscriber.set_customer_type.class">Sylius\Bundle\CoreBundle\Form\EventSubscriber\SetCustomerFormSubscriber</parameter>
-
-        <!-- Data fetchers -->
-        <parameter key="sylius.form.type.data_fetcher.number_of_orders.class">Sylius\Bundle\CoreBundle\Form\Type\DataFetcher\NumberOfOrdersType</parameter>
-        <parameter key="sylius.form.type.data_fetcher.sales_total.class">Sylius\Bundle\CoreBundle\Form\Type\DataFetcher\SalesTotalType</parameter>
-        <parameter key="sylius.form.type.data_fetcher.user_registration.class">Sylius\Bundle\CoreBundle\Form\Type\DataFetcher\UserRegistrationType</parameter>
 
         <parameter key="sylius.authorization_checker.toggleable.class">Sylius\Bundle\CoreBundle\Authorization\ToggleableAuthorizationChecker</parameter>
         <parameter key="sylius.based_on_id_invoice_number_generator.class" >Sylius\Component\Core\Payment\IdBasedInvoiceNumberGenerator</parameter>
@@ -451,6 +449,14 @@
             <tag name="sylius.payment_method_resolver" type="channel_based" label="sylius.payment_methods_resolver.channel_based" priority="1" />
         </service>
 
+        <service id="sylius.updater.order.exchange_rate" class="%sylius.updater.order.exchange_rate.class%">
+            <argument type="service" id="sylius.repository.currency" />
+        </service>
+        <service id="sylius.updater.order.exchange_rate_and_currency" class="%sylius.updater.order.exchange_rate_and_currency.class%">
+            <argument type="service" id="sylius.context.currency" />
+            <argument type="service" id="sylius.repository.currency" />
+        </service>
+
         <!-- Customer context -->
         <service id="sylius.context.customer" class="%sylius.context.customer.class%">
             <argument type="service" id="security.token_storage" />
@@ -460,19 +466,6 @@
         <!-- Form event subscribers-->
         <service id="sylius.form.event_subscriber.set_customer" class="%sylius.form.event_subscriber.set_customer_type.class%">
             <argument type="service" id="sylius.repository.customer" />
-        </service>
-
-        <!-- Data fetchers -->
-        <service id="sylius.form.type.data_fetcher.user_registration" class="%sylius.form.type.data_fetcher.user_registration.class%">
-            <tag name="form.type" alias="sylius_data_fetcher_user_registration" />
-        </service>
-
-        <service id="sylius.form.type.data_fetcher.sales_total" class="%sylius.form.type.data_fetcher.sales_total.class%">
-            <tag name="form.type" alias="sylius_data_fetcher_sales_total" />
-        </service>
-
-        <service id="sylius.form.type.data_fetcher.number_of_orders" class="%sylius.form.type.data_fetcher.number_of_orders.class%">
-            <tag name="form.type" alias="sylius_data_fetcher_number_of_orders" />
         </service>
 
         <service id="sylius.validator.has_enabled_entity" class="%sylius.validator.has_enabled_entity.class%">

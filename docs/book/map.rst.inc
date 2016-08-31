@@ -23,6 +23,7 @@
 * :doc:`/book/pricing`
 * :doc:`/book/promotions`
 * :doc:`/book/users_and_groups`
+* :doc:`/book/adminuser`
 * :doc:`/book/content`
 * :doc:`/book/emails`
 * :doc:`/book/settings`

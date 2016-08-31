@@ -14,11 +14,6 @@ sylius:
         product_variant:
             available_on: พร้อมจำหน่ายเมื่อ
             available_until: สิ้นสุดการจำหน่าย
-        product_archetype:
-            name: ชื่อ
-            parent: หมวดแม่
-            attributes: คุณลักษณะ (Attribute)
-            options: ตัวเลือก
         association_type:
             name: ชื่อ
         association:

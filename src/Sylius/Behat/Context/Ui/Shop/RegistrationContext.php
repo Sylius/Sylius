@@ -14,6 +14,7 @@ namespace Sylius\Behat\Context\Ui\Shop;
 use Behat\Behat\Context\Context;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Shop\Account\DashboardPageInterface;
+use Sylius\Behat\Page\Shop\Account\ProfileUpdatePageInterface;
 use Sylius\Behat\Page\Shop\Account\VerificationPageInterface;
 use Sylius\Behat\Page\Shop\Account\RegisterPageInterface;
 use Sylius\Behat\Page\Shop\HomePageInterface;
@@ -31,9 +32,9 @@ use Webmozart\Assert\Assert;
 class RegistrationContext implements Context
 {
     /**
-     * @var CurrentPageResolverInterface
+     * @var SharedStorageInterface
      */
-    private $currentPageResolver;
+    private $sharedStorage;
 
     /**
      * @var DashboardPageInterface
@@ -46,11 +47,6 @@ class RegistrationContext implements Context
     private $homePage;
 
     /**
-     * @var NotificationCheckerInterface
-     */
-    private $notificationChecker;
-
-    /**
      * @var RegisterPageInterface
      */
     private $registerPage;
@@ -59,6 +55,11 @@ class RegistrationContext implements Context
      * @var VerificationPageInterface
      */
     private $verificationPage;
+
+    /**
+     * @var ProfileUpdatePageInterface
+     */
+    private $profileUpdatePage;
 
     /**
      * @var SecurityServiceInterface
@@ -71,41 +72,49 @@ class RegistrationContext implements Context
     private $emailChecker;
 
     /**
-     * @var SharedStorageInterface
+     * @var CurrentPageResolverInterface
      */
-    private $sharedStorage;
+    private $currentPageResolver;
 
     /**
-     * @param CurrentPageResolverInterface $currentPageResolver
+     * @var NotificationCheckerInterface
+     */
+    private $notificationChecker;
+
+    /**
+     * @param SharedStorageInterface $sharedStorage
      * @param DashboardPageInterface $dashboardPage
      * @param HomePageInterface $homePage
-     * @param NotificationCheckerInterface $notificationChecker
      * @param RegisterPageInterface $registerPage
      * @param VerificationPageInterface $verificationPage
+     * @param ProfileUpdatePageInterface $profileUpdatePage
      * @param SecurityServiceInterface $securityService
      * @param EmailCheckerInterface $emailChecker
-     * @param SharedStorageInterface $sharedStorage
+     * @param CurrentPageResolverInterface $currentPageResolver
+     * @param NotificationCheckerInterface $notificationChecker
      */
     public function __construct(
-        CurrentPageResolverInterface $currentPageResolver,
+        SharedStorageInterface $sharedStorage,
         DashboardPageInterface $dashboardPage,
         HomePageInterface $homePage,
-        NotificationCheckerInterface $notificationChecker,
         RegisterPageInterface $registerPage,
         VerificationPageInterface $verificationPage,
+        ProfileUpdatePageInterface $profileUpdatePage,
         SecurityServiceInterface $securityService,
         EmailCheckerInterface $emailChecker,
-        SharedStorageInterface $sharedStorage
+        CurrentPageResolverInterface $currentPageResolver,
+        NotificationCheckerInterface $notificationChecker
     ) {
-        $this->currentPageResolver = $currentPageResolver;
+        $this->sharedStorage = $sharedStorage;
         $this->dashboardPage = $dashboardPage;
         $this->homePage = $homePage;
-        $this->notificationChecker = $notificationChecker;
         $this->registerPage = $registerPage;
         $this->verificationPage = $verificationPage;
+        $this->profileUpdatePage = $profileUpdatePage;
         $this->securityService = $securityService;
         $this->emailChecker = $emailChecker;
-        $this->sharedStorage = $sharedStorage;
+        $this->currentPageResolver = $currentPageResolver;
+        $this->notificationChecker = $notificationChecker;
     }
 
     /**
@@ -374,25 +383,19 @@ class RegistrationContext implements Context
     }
 
     /**
-     * @Then it should be sent to :email
+     * @Then it should be sent to :recipient
      */
-    public function verificationEmailShouldBeSentTo($email)
+    public function anEmailShouldBeSentTo($recipient)
     {
-        Assert::true(
-            $this->emailChecker->hasRecipient($email),
-            'The verification email should have been sent.'
-        );
+        $this->assertEmailHasRecipient($recipient);
     }
 
     /**
-     * @Then :count email(s) should be sent to :email
+     * @Then :count email(s) should be sent to :recipient
      */
-    public function numberOfEmailsShouldBeSentTo($count, $email)
+    public function numberOfEmailsShouldBeSentTo($count, $recipient)
     {
-        Assert::true(
-            $this->emailChecker->hasRecipient($email),
-            sprintf('At least 1 email should have been sent to %s.', $email)
-        );
+        $this->assertEmailHasRecipient($recipient);
 
         Assert::eq(
             $this->emailChecker->getMessagesCount(),
@@ -402,6 +405,59 @@ class RegistrationContext implements Context
                 $this->emailChecker->getMessagesCount(),
                 $count
             )
+        );
+    }
+
+    /**
+     * @Then a welcoming email should have been sent to :recipient
+     */
+    public function aWelcomingEmailShouldHaveBeenSentTo($recipient)
+    {
+        $this->assertEmailHasRecipient($recipient);
+        $this->assertEmailContainsMessage('Welcome to our store');
+
+    }
+
+    /**
+     * @param string $recipient
+     */
+    private function assertEmailHasRecipient($recipient)
+    {
+        Assert::true(
+            $this->emailChecker->hasRecipient($recipient),
+            'An email should have been sent to %s.'
+        );
+    }
+
+    /**
+     * @param string $message
+     */
+    private function assertEmailContainsMessage($message)
+    {
+        Assert::true(
+            $this->emailChecker->hasMessage($message),
+            sprintf('Message "%s" was not found in any email.', $message)
+        );
+    }
+
+    /**
+     * @When I subscribe to the newsletter
+     */
+    public function iSubscribeToTheNewsletter()
+    {
+        $this->registerPage->subscribeToTheNewsletter();
+    }
+
+    /**
+     * @Then subscription to the newsletter should be enabled
+     */
+    public function subscriptionToTheNewsletterShouldBeEnabled()
+    {
+        $this->profileUpdatePage->open();
+
+        Assert::true(
+            $this->profileUpdatePage->isSubscribedToTheNewsletter(),
+            'Subscription to the newsletter should be enabled'
         );
     }
 

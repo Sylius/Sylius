@@ -29,6 +29,7 @@ The Book
     pricing
     promotions
     users_and_groups
+    adminuser
     content
     emails
     settings

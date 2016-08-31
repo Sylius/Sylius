@@ -10,11 +10,11 @@
         <div class="column">
             {% include '@SyliusAdmin/Customer/Show/_header.html.twig' %}
         </div>
-        {% if customer.user is not null and customer.user.id is not same as(app.user.id) %}
+        {% if customer.user is not null %}
         <div class="right aligned column" id="actions">
-            {{ buttons.delete(path('sylius_admin_user_delete', {'id': customer.user.id })) }}
+            {{ buttons.delete(path('sylius_admin_shop_user_delete', {'id': customer.user.id })) }}
         </div>
-        {% elseif customer.user is null %}
+        {% else %}
         <div class="right aligned column" id="no-account">
             <div class="ui teal large label">
                 {{ 'sylius.ui.no_account'|trans }}
@@ -35,6 +35,15 @@
                     </a>
                     <div class="meta">
                         <span class="date">{{ 'sylius.ui.customer_since'|trans }} {{ customer.createdAt|date }}</span>
+                    </div>
+                    <br />
+                    <div id="subscribed-to-newsletter">
+                        {% if customer.subscribedToNewsletter %}
+                            <i class="green checkmark icon"></i>
+                        {% else %}
+                            <i class="red remove icon"></i>
+                        {% endif %}
+                        {{ 'sylius.ui.subscribed_to_newsletter'|trans }}
                     </div>
                 </div>
                 <div class="extra content">

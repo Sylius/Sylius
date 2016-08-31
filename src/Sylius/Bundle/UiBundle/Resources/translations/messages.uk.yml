@@ -258,7 +258,6 @@ sylius:
         pricing: Ціноутворення
         processing: В процесі
         product: Товар
-        product_archetypes: Прототипи продуктів
         products: Продукти
         products_categorized_as_name: 'Продукт категоризовано як "%name%"'
         products_categorized_under_taxon_taxon: 'Товари <small> категорії "%taxon%" </small>'

@@ -100,8 +100,6 @@ sylius:
         confirmation: Bekräftelse
         confirmation_title: Bekräftelse
         confirmed: Bekräftad
-        contact_request_show: Kontaktförfrågan
-        contact_requests: Kontaktförfrågningar
         contact_us: Kontakta oss
         contains: Innehåller
         content: Innehåll

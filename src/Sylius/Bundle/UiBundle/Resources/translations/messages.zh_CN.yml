@@ -48,8 +48,6 @@ sylius:
         all_your_addresses: 您的所有地址
         amount: 金额
         an_error_occurred: 发生了一个错误。
-        archetype: 原型
-        archetypes: 原型
         are_your_sure_you_want_to_perform_this_action: 是否确实执行此操作？
         association: 关联
         association_types: 关联类型
@@ -72,7 +70,6 @@ sylius:
         body: 正文
         browse_products: 浏览产品
         build: 开发
-        building_product_from_archetype: 从原型创建产品
         calculator: 计算器
         cancel: '取消 '
         cancelled: 已取消.
@@ -104,10 +101,6 @@ sylius:
         confirmation: 确认
         confirmation_title: 确认
         confirmed: 已确认
-        contact_request_details: 联系人请求详细信息
-        contact_request_show: 联系请求
-        contact_requests: 联系人请求
-        contact_topics: 联系的主题
         contact_us: 联系我们
         contain_variants: 包含变种
         contains: 包含
@@ -120,10 +113,7 @@ sylius:
         coupons: 优惠券
         create: 创建
         create_a_new_address: 创建一个新的地址
-        create_archetype: 创建原型
         create_association_type: 创建关联类型
-        create_contact_request: 创建联系的请求
-        create_contact_topic: 创建联系人主题
         create_country: 创建国家
         create_currency: 创建货币
         create_customer: 创建客户
@@ -231,11 +221,8 @@ sylius:
         edit_taxon: 编辑分类
         edit_your_personal_information: 编辑您的个人信息。
         edit_zone: 编辑区域
-        editing_archetype: 编辑原型
         editing_attribute: 编辑属性
         editing_channel: 编辑频道
-        editing_contact_request: 编辑联系人的请求
-        editing_contact_topic: 编辑联系人主题
         editing_country: 编辑国家信息
         editing_coupon: 编辑优惠券
         editing_currency: 编辑货币
@@ -402,11 +389,8 @@ sylius:
         n_a: 未知
         name: 名称
         new: 新增
-        new_archetype: 新的原型
         new_channel: 新建通道
         new_comment_posted_on_order: 该订单的新评论
-        new_contact_request: 新的联系人请求
-        new_contact_topic: 联系人的新主题
         new_country: 新建国家
         new_coupon: 新建优惠券
         new_currency: 添加币种
@@ -509,7 +493,6 @@ sylius:
         process_your_orders: 处理您的订单
         processing: 处理中...
         product: 产品
-        product_archetypes: 产品原型
         product_association_index: 关联
         product_association_type_index: 关联类型
         product_association_types: 产品关联类型
@@ -634,12 +617,9 @@ sylius:
         terms_and_conditions: 服务条款
         thank_you_for_your_order: 感谢您的下单。
         theme: 主题
-        there_are_no_archetypes_defined: 没有定义任何原型
         there_are_no_attributes_configured: 没有配置任何属性
         there_are_no_blocks_to_display: 没有可以显示的板块
         there_are_no_channels_configured: 没有配置通道
-        there_are_no_contact_requests_to_display: 没有任何联系请求
-        there_are_no_contact_topics_to_display: 没有可显示的联系主题
         there_are_no_countries_configured: 没有配置任何国家
         there_are_no_coupon_to_display: 没有任何优惠券
         there_are_no_currencies_to_display: 没有任何货币

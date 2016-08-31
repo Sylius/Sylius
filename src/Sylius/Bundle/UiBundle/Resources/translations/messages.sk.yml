@@ -47,8 +47,6 @@ sylius:
         all_your_addresses: Všetky vaše adresy
         amount: Suma
         an_error_occurred: Vyskytla sa chyba
-        archetype: Prototyp
-        archetypes: Prototypy
         are_your_sure_you_want_to_perform_this_action: Ste si istý, že chcete vykonať túto akciu?
         association: Priradenia
         association_types: Typy priradenia
@@ -70,7 +68,6 @@ sylius:
         body: Obsah
         browse_products: Prezerať produkty
         build: Verzia
-        building_product_from_archetype: Vytvoriť produkt z prototypu
         calculator: Spôsob vypočtu
         cancel: Zrušiť
         cancelled: Zrušená
@@ -99,10 +96,6 @@ sylius:
         confirmation: Potvrdenie
         confirmation_title: Potvrdenie
         confirmed: Potvrdený
-        contact_request_details: Detail žiadosti
-        contact_request_show: Žiadosť
-        contact_requests: Žiadosti
-        contact_topics: Témy
         contain_variants: Obsahuje produktové varianty
         contains: Obsahuje
         content: Obsah
@@ -114,10 +107,7 @@ sylius:
         coupons: Kupóny
         create: Vytvoriť
         create_a_new_address: Vytvoriť novú adresu
-        create_archetype: Vytvoriť prototyp
         create_association_type: Vytvoriť typ priradenia
-        create_contact_request: Vytvoriť žiadosť
-        create_contact_topic: Vytvoriť tému
         create_country: Vytvoriť krajinu
         create_currency: Vytvoriť menu
         create_customer: Vytvoriť zákazníka
@@ -221,11 +211,8 @@ sylius:
         edit_taxon: Úpraviť kategóriu
         edit_your_personal_information: Upraviť osobné údaje
         edit_zone: Upraviť zónu
-        editing_archetype: Úprava prototypu
         editing_attribute: Úprava vlastnosti
         editing_channel: Úprava kanálu
-        editing_contact_request: Úprava žiadosti
-        editing_contact_topic: Úprava témy
         editing_country: Úprava krajiny
         editing_coupon: Upraviť kupón
         editing_currency: Úprava meny
@@ -386,11 +373,8 @@ sylius:
         n_a: Nie je k dispozícii
         name: Názov
         new: Nová
-        new_archetype: Nový prototyp
         new_channel: Nový kanál
         new_comment_posted_on_order: Nová poznámka k objednávke
-        new_contact_request: Nová žiadosť
-        new_contact_topic: Nová téma
         new_country: Nová krajina
         new_coupon: Nový kupón
         new_currency: Nová mena
@@ -489,7 +473,6 @@ sylius:
         process_your_orders: Spracovať vaše objednávky
         processing: Spracúvava sa
         product: Produkt
-        product_archetypes: Produktové prototypy
         product_association_index: Priradenia
         product_association_type_index: Typ priradenia
         product_association_types: Priradenie produktov
@@ -608,12 +591,9 @@ sylius:
         taxons: Kategórie
         thank_you_for_your_order: Ďakujeme za vašu objednávku
         theme: Téma
-        there_are_no_archetypes_defined: Nie sú žiadne prototypy
         there_are_no_attributes_configured: Nie sú nakonfigurované žiadne vlastnosti
         there_are_no_blocks_to_display: Neexistujú žiadne bloky na zobrazenie
         there_are_no_channels_configured: Nie sú nakonfigurované žiadne kanály
-        there_are_no_contact_requests_to_display: Nie sú žiadne žiadosti na zobrazenie
-        there_are_no_contact_topics_to_display: Nie sú žiadne témy na zobrazenie
         there_are_no_countries_configured: Neexistujú žiadne nakonfigurované krajiny
         there_are_no_coupon_to_display: Neexistujú žiadne kupóny na zobrazenie
         there_are_no_currencies_to_display: Nie sú definováne žiadne meny

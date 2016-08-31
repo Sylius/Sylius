@@ -96,6 +96,11 @@ class RegisterPage extends SymfonyPage implements RegisterPageInterface
         $this->getDocument()->fillField('Verification', $password);
     }
 
+    public function subscribeToTheNewsletter()
+    {
+        $this->getDocument()->checkField('Subscribe to the newsletter');
+    }
+
     /**
      * {@inheritdoc}
      */

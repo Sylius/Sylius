@@ -418,4 +418,23 @@ final class AccountContext implements Context
             sprintf('There should be a message: "%s".', $expectedMessage)
         );
     }
+
+    /**
+     * @When I subscribe to the newsletter
+     */
+    public function iSubscribeToTheNewsletter()
+    {
+        $this->profileUpdatePage->subscribeToTheNewsletter();
+    }
+
+    /**
+     * @Then subscription to the newsletter should be enabled
+     */
+    public function subscriptionToTheNewsletterShouldBeEnabled()
+    {
+        Assert::true(
+            $this->profileUpdatePage->isSubscribedToTheNewsletter(),
+            'Subscription to the newsletter should be enabled'
+        );
+    }
 }

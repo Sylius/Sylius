@@ -49,6 +49,12 @@ final class OrderShipmentProcessor implements OrderProcessorInterface
      */
     public function process(OrderInterface $order)
     {
+        if ($order->isEmpty()) {
+            $order->removeShipments();
+
+            return;
+        }
+
         $shipment = $this->getOrderShipment($order);
 
         if (null === $shipment) {

@@ -4,4 +4,7 @@
 sylius:
     email:
         code:
+            not_blank: Por favor introduza o código de e-mail.
             unique: Código de e-mail deve ser único.
+        subject:
+            not_blank: Introduza o assunto do e-mail.

@@ -661,6 +661,7 @@ sylius:
         street: Street
         string_blocks: 'String blocks'
         subject: Subject
+        subscribed_to_newsletter: Subscribe to the newsletter
         subtotal: Subtotal
         success: Success
         summary: Summary

@@ -12,6 +12,7 @@ sylius:
                     products: Produkty
                     taxons: Taksony
                 configuration:
+                    admin_users: Administratorzy
                     channels: Kanały
                     countries: Kraje
                     currencies: Waluty

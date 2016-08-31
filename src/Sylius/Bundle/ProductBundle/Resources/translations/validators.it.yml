@@ -17,11 +17,3 @@ sylius:
         sku:
             not_blank: Inserire la variante SKU.
             unique: La variante SKU deve essere univoca.
-    archetype:
-        name:
-            not_blank: Inserire il nome del modello.
-            min_length: 'Il nome del modello deve essere lungo almeno un carattere.|Il nome del modello deve essere lungo almeno {{ limit }} caratteri.'
-            max_length: 'Il nome del modello non deve superare 1 carattere di lunghezza.|Il nome del modello non deve superare i {{ limit }} caratteri di lunghezza.'
-        code:
-            unique: Archetipo con il codice dato esiste già.
-            not_blank: "Inserisci codice dell'archetipo."

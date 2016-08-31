@@ -43,6 +43,13 @@ interface SelectShippingPageInterface extends SymfonyPageInterface
      */
     public function hasShippingMethodFee($shippingMethodName, $fee);
 
+    /**
+     * @param string $itemName
+     *
+     * @return string
+     */
+    public function getItemSubtotal($itemName);
+
     public function nextStep();
 
     public function changeAddress();

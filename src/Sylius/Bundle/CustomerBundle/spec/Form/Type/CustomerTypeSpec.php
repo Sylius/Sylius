@@ -52,6 +52,7 @@ final class CustomerTypeSpec extends ObjectBehavior
         $builder->add('gender', 'sylius_gender', Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->add('phoneNumber', 'text', Argument::any())->shouldBeCalled()->willReturn($builder);
         $builder->add('groups', 'sylius_group_choice', Argument::any())->shouldBeCalled()->willReturn($builder);
+        $builder->add('subscribedToNewsletter', 'checkbox', Argument::type('array'))->shouldbeCalled()->willReturn($builder);
 
         $this->buildForm($builder, []);
     }

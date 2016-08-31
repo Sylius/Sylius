@@ -31,7 +31,6 @@ We recommend checking out :doc:`/components/general/index`, which will get you s
     Promotion/index
     Rbac/index
     Registry/index
-    Report/index
     Resource/index
     Shipping/index
     Storage/index

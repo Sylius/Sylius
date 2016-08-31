@@ -1,0 +1,9 @@
+# This file is part of the Sylius package.
+# (c) Paweł Jędrzejewski
+
+sylius:
+    inventory_unit:
+        backorder: Unidade de inventário reservada.
+        sell: Unidade de inventário entregue.
+        return: Unidade de inventário devolvida.
+        transition_fail: A ação não pode ser efetuada dado o estado atual da unidade

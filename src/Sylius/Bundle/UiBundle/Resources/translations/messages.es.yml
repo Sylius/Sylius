@@ -55,8 +55,6 @@ sylius:
         an_error_occurred: Se ha producido un error
         api: Api
         apply_coupon: Aplicar cupón
-        archetype: Prototipo
-        archetypes: Prototipos
         are_your_sure_you_want_to_perform_this_action: ¿Está seguro que quiere realizar esta acción?
         association: Asociación
         association_types: Tipos de asociación
@@ -82,7 +80,6 @@ sylius:
         body: Cuerpo
         browse_products: Ver los productos
         build: sylius.breadcrumb.build
-        building_product_from_archetype: Construir producto de prototipo
         calculator: Calculadora
         cancel: Cancelar
         cancelled: Cancelado/a
@@ -119,10 +116,6 @@ sylius:
         confirmation: Confirmación
         confirmation_title: Confirmación
         confirmed: Confirmado
-        contact_request_details: Detalles de la solicitud de contacto
-        contact_request_show: Solicitudes de contacto
-        contact_requests: Solicitud de contacto
-        contact_topics: Asuntos de contacto
         contact_us: Contacta con nosotros
         contain_variants: Contiene Variantes
         contains: Contiene
@@ -137,10 +130,7 @@ sylius:
         create_a_new_address: sylius.account.address.create
         create_a_new_customer_account: Crear una nueva cuenta de cliente
         create_an_account: Crear una cuenta
-        create_archetype: Crear prototipo
         create_association_type: Crear un tipo de asociación
-        create_contact_request: Crear solicitud de contacto
-        create_contact_topic: Crear asunto de contacto
         create_country: Nuevo país
         create_currency: Crear moneda
         create_customer: Crear cliente
@@ -253,11 +243,8 @@ sylius:
         edit_your_items_apply_coupon_or_proceed_to_the_checkout: Editar sus artículos, aplicar cupón o proceder con el pago
         edit_your_personal_information: Editar mi información personal
         edit_zone: Editar zona
-        editing_archetype: Editar prototipo
         editing_attribute: Editando atributo
         editing_channel: Editando canal
-        editing_contact_request: Editando solicitudes de contacto
-        editing_contact_topic: Editando asunto de contacto
         editing_country: Editar país
         editing_coupon: Editar cupón
         editing_currency: Editando moneda
@@ -437,11 +424,8 @@ sylius:
         name: Nombre
         new: Nuevo
         new_admin_user: Nuevo administrador
-        new_archetype: Nuevo prototipo
         new_channel: Nuevo canal
         new_comment_posted_on_order: Nuevo comentario publicado en el pedido
-        new_contact_request: Nueva solicitud de contacto
-        new_contact_topic: Nuevo asunto de contacto
         new_country: Nuevo país
         new_coupon: Nuevo cupón
         new_currency: Nueva moneda
@@ -559,7 +543,6 @@ sylius:
         process_your_orders: Tramitar tus pedidos
         processing: Procesando
         product: Producto
-        product_archetypes: Prototipos de producto
         product_association_index: Asociación
         product_association_type_index: Tipos de asociación
         product_association_types: Tipos de asociación de productos
@@ -698,12 +681,9 @@ sylius:
         thank_you: ¡Gracias!
         thank_you_for_your_order: Gracias por su pedido
         theme: Tema
-        there_are_no_archetypes_defined: No hay prototipos definidos
         there_are_no_attributes_configured: No hay atributos configurados
         there_are_no_blocks_to_display: No hay bloques para mostrar
         there_are_no_channels_configured: No hay ningún canal configurado
-        there_are_no_contact_requests_to_display: No hay solicitudes de contacto para mostrar
-        there_are_no_contact_topics_to_display: No hay asuntos de contacto para mostrar
         there_are_no_countries_configured: No hay países configurados
         there_are_no_coupon_to_display: No hay cupones
         there_are_no_currencies_to_display: No hay monedas para mostrar

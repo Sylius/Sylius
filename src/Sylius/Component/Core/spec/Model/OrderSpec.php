@@ -134,6 +134,16 @@ final class OrderSpec extends ObjectBehavior
         $this->shouldNotHaveShipment($shipment);
     }
 
+    function it_removes_shipments(ShipmentInterface $shipment)
+    {
+        $this->addShipment($shipment);
+        $this->hasShipment($shipment)->shouldReturn(true);
+
+        $this->removeShipments();
+
+        $this->hasShipment($shipment)->shouldReturn(false);
+    }
+
     function it_should_return_shipping_adjustments(
         AdjustmentInterface $shippingAdjustment,
         AdjustmentInterface $taxAdjustment

@@ -83,7 +83,19 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
         
         return false !== strpos($feeElement, $fee);
     }
-    
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getItemSubtotal($itemName)
+    {
+        $itemSlug = strtolower(str_replace('\"', '', str_replace(' ', '-', $itemName)));
+
+        $subtotalTable = $this->getElement('checkout_subtotal');
+
+        return $subtotalTable->find('css', sprintf('#item-%s-subtotal', $itemSlug))->getText();
+    }
+
     public function nextStep()
     {
         $this->getDocument()->pressButton('Next');
@@ -98,7 +110,7 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
     {
         $this->getElement('address')->click();
     }
-    
+
     /**
      * {@inheritdoc}
      */
@@ -106,6 +118,7 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
     {
         return array_merge(parent::getDefinedElements(), [
             'address' => '.steps a:contains("Address")',
+            'checkout_subtotal' => '#checkout-subtotal',
             'order_cannot_be_shipped_message' => '#sylius-order-cannot-be-shipped',
             'shipping_method' => '[name="sylius_checkout_select_shipping[shipments][0][method]"]',
             'shipping_method_option' => '.item:contains("%shipping_method%") input',
