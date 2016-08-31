@@ -89,6 +89,19 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
+    public function isSubscribedToNewsletter()
+    {
+        $subscribedToNewsletter = $this->getElement('subscribed_to_newsletter');
+        if ($subscribedToNewsletter->find('css', 'i.green')) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getRouteName()
     {
         return 'sylius_admin_customer_show';
@@ -107,6 +120,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'no_account' => '#no-account',
             'registration_date' => '#info .content .date',
             'shipping_address' => '#shippingAddress address',
+            'subscribed_to_newsletter' => '#subscribed-to-newsletter',
         ]);
     }
 }
