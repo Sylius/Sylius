@@ -212,6 +212,20 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
         return (int) $itemElement->find('css', 'input[type=number]')->getValue();
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getCartTotal()
+    {
+        $cartTotalText = $this->getElement('cart_total')->getText();
+
+        if (strpos($cartTotalText, ',') !== false ) {
+            return strstr($cartTotalText, ',', true);
+        }
+
+        return $cartTotalText;
+    }
+
     public function clearCart()
     {
         $this->getElement('clear_button')->click();
@@ -230,6 +244,7 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
         return array_merge(parent::getDefinedElements(), [
             'apply_coupon_button' => 'button:contains("Apply coupon")',
             'cart_items' => '#sylius-cart-items',
+            'cart_total' => '#sylius-cart-button',
             'clear_button' => '#sylius-cart-clear',
             'coupon_field' => '#sylius_cart_promotionCoupon',
             'grand_total' => '#sylius-cart-grand-total',
