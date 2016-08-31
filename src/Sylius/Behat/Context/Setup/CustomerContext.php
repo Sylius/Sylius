@@ -231,9 +231,9 @@ final class CustomerContext implements Context
     }
 
     /**
-     * @Given /^(the customer) subscribes to the newsletter$/
+     * @Given /^(the customer) subscribed to the newsletter$/
      */
-    public function theCustomerSubscribesToTheNewsletter(CustomerInterface $customer)
+    public function theCustomerSubscribedToTheNewsletter(CustomerInterface $customer)
     {
         $customer->setSubscribedToNewsletter(true);
 

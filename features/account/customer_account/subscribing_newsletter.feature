@@ -15,4 +15,4 @@ Feature: Subscribing to the newsletter
         When I subscribe to the newsletter
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And subscription to the newsletter should be enabled
+        And I should be subscribed to the newsletter
