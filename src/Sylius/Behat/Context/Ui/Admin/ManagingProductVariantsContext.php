@@ -147,7 +147,7 @@ final class ManagingProductVariantsContext implements Context
 
     /**
      * @When /^I (?:|want to )view all variants of (this product)$/
-     * @When /^I view all variants of the (product "([^"]+)")$/
+     * @When /^I view all variants of the (product "[^"]+")$/
      */
     public function iWantToViewAllVariantsOfThisProduct(ProductInterface $product)
     {

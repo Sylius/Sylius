@@ -43,7 +43,6 @@ final class ProductVariantContext implements Context
 
     /**
      * @Transform :variant
-     * @Transform /^in variant "["^]+"$/
      */
     public function getProductVariantByName($variantName)
     {

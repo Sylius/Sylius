@@ -7,7 +7,6 @@ Feature: Finalizing order payment
     Background:
         Given the store operates on a single channel in "United States"
         And the store has a product "Angel T-Shirt"
-        And there is 1 item of product "Angel T-Shirt" available in the inventory
         And the store ships everywhere for free
         And the store allows paying with "Cash on Delivery"
         And there is a customer "lucy@teamlucifer.com" that placed an order "#00000666"

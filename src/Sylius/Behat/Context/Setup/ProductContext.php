@@ -331,7 +331,7 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Given /^there (?:is|are) (\d+) (?:item|unit)(?:s) of (product "([^"]+)") available in the inventory$/
+     * @Given /^there (?:is|are) (\d+) (?:item|unit)(?:|s) of (product "([^"]+)") available in the inventory$/
      * @When product :product quantity is changed to :quantity
      */
     public function thereIsQuantityOfProducts($quantity, ProductInterface $product)
@@ -404,14 +404,14 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Given there are :quantity items of product :product in variant :variant available in the inventory
+     * @Given /^there are ([^"]+) items of ("[^"]+" variant of product "[^"]+") available in the inventory$/
      */
-    public function thereAreItemsOfProductInVariantAvailableInTheInventory($quantity, ProductInterface $product, ProductVariantInterface $variant)
+    public function thereAreItemsOfProductInVariantAvailableInTheInventory($quantity, ProductVariantInterface $productVariant)
     {
-        $indexOfVariant = $product->getVariants()->indexOf($variant);
-        $product->getVariants()->get($indexOfVariant)->setOnHand($quantity);
+        $productVariant->setTracked(true);
+        $productVariant->setOnHand($quantity);
 
-        $this->saveProduct($product);
+        $this->objectManager->flush();
     }
     
     /**

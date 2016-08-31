@@ -59,23 +59,13 @@ final class OnHandQuantityUpdaterSpec extends ObjectBehavior
         $productVariant1->getOnHand()->willReturn(10);
         $productVariant2->getOnHand()->willReturn(10);
 
+        $productVariant1->getName()->willReturn('Variant 1');
+        $productVariant2->getName()->willReturn('Variant 2');
+
         $productVariant1->setOnHand(5)->shouldBeCalled();
         $productVariant2->setOnHand(0)->shouldBeCalled();
 
         $this->decrease($order);
-    }
-
-    function it_throws_exception_when_quantity_is_lower_than_zero(
-        OrderInterface $order,
-        Collection $orderItems,
-        OrderItemInterface $orderItem
-    ) {
-        $order->getItems()->willReturn($orderItems);
-
-        $orderItems->getIterator()->willReturn(new \ArrayIterator([1 => $orderItem->getWrappedObject()]));
-        $orderItem->getQuantity()->willReturn(-1);
-
-        $this->shouldThrow(\InvalidArgumentException::class)->during('decrease', [$order]);
     }
 
     function it_throws_exception_when_recalculated_on_hand_quantity_is_lower_than_zero(
@@ -91,6 +81,7 @@ final class OnHandQuantityUpdaterSpec extends ObjectBehavior
         $orderItem->getVariant()->willReturn($productVariant);
         $productVariant->isTracked()->willReturn(true);
         $productVariant->getOnHand()->willReturn(4);
+        $productVariant->getName()->willReturn('Variant');
 
         $this->shouldThrow(\InvalidArgumentException::class)->during('decrease', [$order]);
     }
