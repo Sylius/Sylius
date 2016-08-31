@@ -28,27 +28,6 @@ use Webmozart\Assert\Assert;
 class AddressPage extends SymfonyPage implements AddressPageInterface
 {
     /**
-     * @var LocaleContextInterface
-     */
-    private $localeContext;
-
-    /**
-     * {@inheritdoc}
-     *
-     * @param LocaleContextInterface $localeContext
-     */
-    public function __construct(
-        Session $session,
-        array $parameters = [],
-        RouterInterface $router,
-        LocaleContextInterface $localeContext
-    ) {
-        parent::__construct($session, $parameters, $router);
-
-        $this->localeContext = $localeContext;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function getRouteName()
@@ -122,7 +101,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         $this->getElement('shipping_first_name')->setValue($shippingAddress->getFirstName());
         $this->getElement('shipping_last_name')->setValue($shippingAddress->getLastName());
         $this->getElement('shipping_street')->setValue($shippingAddress->getStreet());
-        $this->getElement('shipping_country')->selectOption($this->getCountryNameOrDefault($shippingAddress->getCountryCode()));
+        $this->getElement('shipping_country')->selectOption($shippingAddress->getCountryCode() ?: 'Select');
         $this->getElement('shipping_city')->setValue($shippingAddress->getCity());
         $this->getElement('shipping_postcode')->setValue($shippingAddress->getPostcode());
     }
@@ -144,7 +123,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         $this->getElement('billing_first_name')->setValue($billingAddress->getFirstName());
         $this->getElement('billing_last_name')->setValue($billingAddress->getLastName());
         $this->getElement('billing_street')->setValue($billingAddress->getStreet());
-        $this->getElement('billing_country')->selectOption($this->getCountryNameOrDefault($billingAddress->getCountryCode()));
+        $this->getElement('billing_country')->selectOption($billingAddress->getCountryCode() ?: 'Select');
         $this->getElement('billing_city')->setValue($billingAddress->getCity());
         $this->getElement('billing_postcode')->setValue($billingAddress->getPostcode());
     }
@@ -251,19 +230,6 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
             'login_password' => 'input[type=\'password\']',
             'login_button' => '#sylius-api-login-submit',
         ]);
-    }
-
-    /**
-     * @param string|null $code
-     * 
-     * @return string
-     */
-    private function getCountryNameOrDefault($code)
-    {
-        $displayLocale = $this->localeContext->getLocaleCode();
-        $countryName = null === $code ? 'Select' : Intl::getRegionBundle()->getCountryNames($displayLocale)[$code];
-
-        return $countryName;
     }
 
     /**

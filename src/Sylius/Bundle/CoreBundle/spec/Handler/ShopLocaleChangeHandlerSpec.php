@@ -42,7 +42,7 @@ final class ShopLocaleChangeHandlerSpec extends ObjectBehavior
         $this->shouldHaveType(ShopLocaleChangeHandler::class);
     }
 
-    function it_is_a_request_based_handler()
+    function it_implements_locale_change_handler_interface()
     {
         $this->shouldImplement(LocaleChangeHandlerInterface::class);
     }

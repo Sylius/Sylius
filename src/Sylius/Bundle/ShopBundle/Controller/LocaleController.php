@@ -18,6 +18,7 @@ use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -81,6 +82,13 @@ final class LocaleController
      */
     public function switchLocaleAction(Request $request, $code)
     {
+        if (!in_array($code, $this->localeProvider->getAvailableLocalesCodes())) {
+            throw new HttpException(
+                Response::HTTP_NOT_ACCEPTABLE,
+                sprintf('The locale code "%s" is invalid.', $code)
+            );
+        }
+
         $this->localeChangeHandler->handle($code);
 
         return new RedirectResponse($request->headers->get('referer'));

@@ -49,19 +49,7 @@ class CompositeLocaleChangeHandler implements LocaleChangeHandlerInterface
         }
 
         foreach ($this->handlers as $handler) {
-            try {
-                $handler->handle($code);
-            } catch (HandleException $exception) {
-                throw new HandleException(
-                    self::class,
-                    sprintf(
-                        'Something went wrong. "%s" throws exception with "%s" message',
-                        get_class($exception),
-                        $exception->getMessage()
-                    ),
-                    $exception
-                );
-            }
+            $handler->handle($code);
         }
     }
 }
