@@ -21,3 +21,6 @@ sylius:
     product_translation:
         short_description:
             max: 'Kurzbeschreibung darf nicht länger als {{ limit }} Zeichen sein.'
+    user:
+        email:
+            unique: Diese E-Mail-Adresse wird bereits verwendet.

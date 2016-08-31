@@ -12,7 +12,6 @@
 namespace Sylius\Bundle\UserBundle\Provider;
 
 use Sylius\Component\User\Canonicalizer\CanonicalizerInterface;
-use Sylius\Component\User\Model\UserInterface as SyliusUserInterface;
 use Sylius\Component\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
@@ -39,11 +38,13 @@ abstract class AbstractUserProvider implements UserProviderInterface
     protected $canonicalizer;
 
     /**
+     * @param string $supportedUserClass
      * @param UserRepositoryInterface $userRepository
      * @param CanonicalizerInterface  $canonicalizer
      */
-    public function __construct(UserRepositoryInterface $userRepository, CanonicalizerInterface $canonicalizer)
+    public function __construct($supportedUserClass, UserRepositoryInterface $userRepository, CanonicalizerInterface $canonicalizer)
     {
+        $this->supportedUserClass = $supportedUserClass;
         $this->userRepository = $userRepository;
         $this->canonicalizer = $canonicalizer;
     }
@@ -70,7 +71,7 @@ abstract class AbstractUserProvider implements UserProviderInterface
      */
     public function refreshUser(UserInterface $user)
     {
-        if (!$user instanceof SyliusUserInterface) {
+        if (!$this->supportsClass(get_class($user))) {
             throw new UnsupportedUserException(
                 sprintf('Instances of "%s" are not supported.', get_class($user))
             );

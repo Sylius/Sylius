@@ -24,7 +24,6 @@
 
         "knplabs/gaufrette": "0.2.*@dev",
         "sylius/addressing": "^1.0",
-        "sylius/archetype": "^1.0",
         "sylius/attribute": "^1.0",
         "sylius/cart": "^1.0",
         "sylius/channel": "^1.0",
@@ -49,7 +48,6 @@
         "sylius/variation": "^1.0",
         "sylius/association": "^1.0",
         "sylius/review": "^1.0",
-        "sylius/metadata": "^1.0",
         "webmozart/assert": "^1.0",
         "zendframework/zend-stdlib": "^2.0|^3.0"
     },

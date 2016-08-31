@@ -21,46 +21,9 @@ use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
 class ShippingMethodEligibilityChecker implements ShippingMethodEligibilityCheckerInterface
 {
     /**
-     * @var ServiceRegistryInterface
-     */
-    protected $registry;
-
-    /**
-     * @param ServiceRegistryInterface $registry
-     */
-    public function __construct(ServiceRegistryInterface $registry)
-    {
-        $this->registry = $registry;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function isEligible(ShippingSubjectInterface $subject, ShippingMethodInterface $method)
-    {
-        if (!$this->isCategoryEligible($subject, $method)) {
-            return false;
-        }
-
-        foreach ($method->getRules() as $rule) {
-            /** @var RuleCheckerInterface $checker */
-            $checker = $this->registry->get($rule->getType());
-
-            if (!$checker->isEligible($subject, $rule->getConfiguration())) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    /**
-     * @param ShippingSubjectInterface $subject
-     * @param ShippingMethodInterface  $method
-     *
-     * @return bool
-     */
-    public function isCategoryEligible(ShippingSubjectInterface $subject, ShippingMethodInterface $method)
     {
         if (!$category = $method->getCategory()) {
             return true;

@@ -37,7 +37,6 @@ sylius:
         administration_dashboard: Administravimo skydelis
         all_your_addresses: Visi jūsų adresai
         amount: Suma
-        archetype: Archetipas
         assortment: Asortimentas
         attributes: Atributai
         author: Autorius
@@ -51,7 +50,6 @@ sylius:
         body: Bloko turinys
         browse_products: Peržiūrėti produktus
         build: Sukurti
-        building_product_from_archetype: Produkto kūrimas iš archetipo
         calculator: Skaičiuoklė
         cancel: Atšaukti
         cancelled: Atšaukta
@@ -72,9 +70,6 @@ sylius:
         configuration: Konfigūracija
         confirmation: Patvirtinimas
         confirmation_title: Patvirtinimas
-        contact_request_show: Kontaktų užklausa
-        contact_requests: Kontaktų užklausos
-        contact_topics: Užklausų tipai
         contain_variants: Yra variantų
         content: Turinys
         countries: Šalys
@@ -85,7 +80,6 @@ sylius:
         coupons: Kuponai
         create: Sukurti
         create_a_new_address: Pridėti naują adresą
-        create_archetype: Sukurti archetipą
         create_country: Sukurti šalį
         create_currency: Sukurti valiutą
         create_group: Grupės kūrimas
@@ -151,7 +145,6 @@ sylius:
         edit_my_address: Redaguoti adresą
         edit_report: Redaguoti ataskaitą
         edit_your_personal_information: Redaguoti savo asmeninę informaciją
-        editing_archetype: Archetipo redagavimas
         editing_attribute: Atributo redagavimas
         editing_channel: Kanalo redagavimas
         editing_country: Šalies redagavimas
@@ -269,7 +262,6 @@ sylius:
         n_a: Nėra
         name: Pavadinimas
         new: Naujas
-        new_archetype: Naujas archetipas
         new_comment_posted_on_order: Užsakymas pakomentuotas
         new_country: Naujas šalis
         new_currency: Nauja valiuta
@@ -346,7 +338,6 @@ sylius:
         priority: Prioritetas
         processing: Apdorojamas
         product: Produktas
-        product_archetypes: Produkto archetipai
         product_attributes: Produkto atributai
         product_details_viewing_product_product: 'Produkto detalės <small>peržiūrimas produktas "<strong>%product%</strong>"</small>'
         product_options: Produkto parinktys

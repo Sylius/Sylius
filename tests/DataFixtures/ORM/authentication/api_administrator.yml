@@ -16,14 +16,10 @@ Sylius\Bundle\ApiBundle\Model\RefreshToken:
         user: @admin
         token: SampleRefreshTokenODllODY4ZTQyOThlNWIyMjA1ZDhmZjE1ZDYyMGMwOTUxOWM2NGFmNGRjNjQ2NDBhMDVlNGZjMmQ0YzgyNDM2Ng
 
-Sylius\Component\Core\Model\User:
+Sylius\Component\Core\Model\AdminUser:
     admin:
         plainPassword: sylius
         roles: [ROLE_API_ACCESS]
         enabled: true
-        customer: @customerAdmin
-
-Sylius\Component\Core\Model\Customer:
-    customerAdmin:
         email: api@sylius.com
-        emailCanonical: $email
+        username: sylius

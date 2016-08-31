@@ -35,7 +35,7 @@ final class ChannelContext implements Context
     /**
      * @var DefaultChannelFactoryInterface
      */
-    private $franceChannelFactory;
+    private $unitedStatesChannelFactory;
 
     /**
      * @var DefaultChannelFactoryInterface
@@ -59,7 +59,7 @@ final class ChannelContext implements Context
 
     /**
      * @param SharedStorageInterface $sharedStorage
-     * @param DefaultChannelFactoryInterface $franceChannelFactory
+     * @param DefaultChannelFactoryInterface $unitedStatesChannelFactory
      * @param DefaultChannelFactoryInterface $defaultChannelFactory
      * @param ChannelFactoryInterface $channelFactory
      * @param ChannelRepositoryInterface $channelRepository
@@ -67,14 +67,14 @@ final class ChannelContext implements Context
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
-        DefaultChannelFactoryInterface $franceChannelFactory,
+        DefaultChannelFactoryInterface $unitedStatesChannelFactory,
         DefaultChannelFactoryInterface $defaultChannelFactory,
         ChannelFactoryInterface $channelFactory,
         ChannelRepositoryInterface $channelRepository,
         ObjectManager $channelManager
     ) {
         $this->sharedStorage = $sharedStorage;
-        $this->franceChannelFactory = $franceChannelFactory;
+        $this->unitedStatesChannelFactory = $unitedStatesChannelFactory;
         $this->defaultChannelFactory = $defaultChannelFactory;
         $this->channelFactory = $channelFactory;
         $this->channelRepository = $channelRepository;
@@ -82,11 +82,11 @@ final class ChannelContext implements Context
     }
 
     /**
-     * @Given the store operates on a single channel in "France"
+     * @Given the store operates on a single channel in "United States"
      */
-    public function storeOperatesOnASingleChannelInFrance()
+    public function storeOperatesOnASingleChannelInUnitedStates()
     {
-        $defaultData = $this->franceChannelFactory->create();
+        $defaultData = $this->unitedStatesChannelFactory->create();
 
         $this->sharedStorage->setClipboard($defaultData);
         $this->sharedStorage->set('channel', $defaultData['channel']);

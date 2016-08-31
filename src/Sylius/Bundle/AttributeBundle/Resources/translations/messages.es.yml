@@ -15,11 +15,11 @@ sylius:
             checkbox: Casilla de verificación
             configuration: Configuración
             date: Fecha
-            datetime: Fecha y Hora
+            datetime: Fecha y hora
             integer: Número entero
             percent: Porcentaje
             text: Texto
-            textarea: Área de Texto
+            textarea: Área de texto
             title: Tipo de atributo
             validation: Validación
         attribute_type_configuration:

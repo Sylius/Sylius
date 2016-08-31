@@ -1,15 +1,13 @@
 Symfony Bundles
-================
+===============
 
 .. toctree::
     :hidden:
 
     general/index
     SyliusAddressingBundle/index
-    SyliusArchetypeBundle/index
     SyliusAttributeBundle/index
     SyliusCartBundle/index
-    SyliusContactBundle/index
     SyliusFixturesBundle/index
     SyliusFlowBundle/index
     SyliusGridBundle/index
@@ -17,10 +15,10 @@ Symfony Bundles
     SyliusMailerBundle/index
     SyliusOmnipayBundle/index
     SyliusOrderBundle/index
+    SyliusPricingBundle/index
     SyliusProductBundle/index
     SyliusPromotionBundle/index
     SyliusRbacBundle/index
-    SyliusReportBundle/index
     SyliusResourceBundle/index
     SyliusSettingsBundle/index
     SyliusShippingBundle/index

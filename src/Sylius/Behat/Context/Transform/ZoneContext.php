@@ -59,9 +59,10 @@ final class ZoneContext implements Context
     public function getRestOfTheWorldZone()
     {
         $zone = $this->zoneRepository->findOneBy(['code' => 'RoW']);
-        if (null === $zone) {
-            throw new \Exception('Rest of the world zone does not exist.');
-        }
+        Assert::notNull(
+            $zone,
+            'Rest of the world zone does not exist.'
+        );
 
         return $zone;
     }

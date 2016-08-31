@@ -5,7 +5,7 @@ Feature: Seeing a order item discount
     I want to see discounts of specific order item
 
     Background:
-        Given the store operates on a single channel in "France"
+        Given the store operates on a single channel in "United States"
         And the store has a product "Lannister Coat" priced at "$100.00"
         And there is a promotion "Christmas sale"
         And this promotion gives "10%" off on every product with minimum price at "$50.00"
@@ -16,7 +16,7 @@ Feature: Seeing a order item discount
     @ui
     Scenario: Seeing a discounted price on order item
         Given I had product "Lannister Coat" in the cart
-        And I specified the shipping address as "Ankh Morpork", "Frost Alley", "90210", "France" for "Jon Snow"
+        And I specified the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I proceed order with "Free" shipping method and "Offline" payment
         Then I should be on the checkout summary step
         And the "Lannister Coat" product should have unit price discounted by "$10"

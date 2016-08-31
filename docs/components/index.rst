@@ -15,11 +15,9 @@ We recommend checking out :doc:`/components/general/index`, which will get you s
 
     general/index
     Addressing/index
-    Archetype/index
     Attribute/index
     Cart/index
     Channel/index
-    Contact/index
     Currency/index
     Grid/index
     Inventory/index
@@ -33,7 +31,6 @@ We recommend checking out :doc:`/components/general/index`, which will get you s
     Promotion/index
     Rbac/index
     Registry/index
-    Report/index
     Resource/index
     Shipping/index
     Storage/index

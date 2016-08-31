@@ -14,11 +14,3 @@ sylius:
         sku:
             not_blank: Bitte geben Sie die Bestandseinheit der Variante an.
             unique: Die Bestandseinheit der Variante muss einzigartig sein.
-    archetype:
-        name:
-            not_blank: Bitte geben Sie den Namen der Vorlage ein.
-            min_length: 'Der Name der Vorlage muss mindestens 1 Zeichen lang sein.|Der Name der Vorlage muss mindestens {{ limit }} Zeichen lang sein.'
-            max_length: 'Der Name der Vorlage darf nicht länger als 1 Zeichen sein.|Der Name der Vorlage darf nicht länger als {{ limit }} Zeichen sein.'
-        code:
-            unique: Eine Vorlage mit diesem Kürzel existiert bereits.
-            not_blank: Bitte geben Sie ein Kürzel für die Vorlage ein.

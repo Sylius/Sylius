@@ -24,7 +24,7 @@ use Webmozart\Assert\Assert;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class LoginContext implements Context
+final class LoginContext implements Context
 {
     /**
      * @var HomePageInterface
@@ -47,11 +47,6 @@ class LoginContext implements Context
     private $currentPageResolver;
 
     /**
-     * @var EmailCheckerInterface
-     */
-    private $emailChecker;
-
-    /**
      * @var NotificationCheckerInterface
      */
     private $notificationChecker;
@@ -61,7 +56,6 @@ class LoginContext implements Context
      * @param LoginPageInterface $loginPage
      * @param ResetPasswordPageInterface $resetPasswordPage
      * @param CurrentPageResolverInterface $currentPageResolver
-     * @param EmailCheckerInterface $emailChecker
      * @param NotificationCheckerInterface $notificationChecker
      */
     public function __construct(
@@ -69,14 +63,12 @@ class LoginContext implements Context
         LoginPageInterface $loginPage,
         ResetPasswordPageInterface $resetPasswordPage,
         CurrentPageResolverInterface $currentPageResolver,
-        EmailCheckerInterface $emailChecker,
         NotificationCheckerInterface $notificationChecker
     ) {
         $this->homePage = $homePage;
         $this->loginPage = $loginPage;
         $this->resetPasswordPage = $resetPasswordPage;
         $this->currentPageResolver = $currentPageResolver;
-        $this->emailChecker = $emailChecker;
         $this->notificationChecker = $notificationChecker;
     }
 
@@ -188,17 +180,6 @@ class LoginContext implements Context
     public function iShouldBeNotifiedThatEmailWithResetInstructionWasSend()
     {
         $this->notificationChecker->checkNotification('If the email you have specified exists in our system, we have sent there an instruction on how to reset your password.', NotificationType::success());
-    }
-
-    /**
-     * @Then the email with reset token should be sent to :email
-     */
-    public function theEmailWithResetTokenShouldBeSentTo($email)
-    {
-        Assert::true(
-            $this->emailChecker->hasRecipient($email),
-            sprintf('Email should have been sent to %s.', $email)
-        );
     }
 
     /**

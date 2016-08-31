@@ -11,6 +11,7 @@ sylius:
                 confirmation: Verificação
             remember_me: Lembrar
             shipping_address: Endereço de entrega
+            username: Login
         user_filter:
             query: Pesquisar
         user_change_password:

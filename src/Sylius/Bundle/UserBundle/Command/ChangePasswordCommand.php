@@ -118,7 +118,7 @@ EOT
      */
     protected function getEntityManager()
     {
-        return $this->getContainer()->get('sylius.manager.user');
+        return $this->getContainer()->get('sylius.manager.shop_user');
     }
 
     /**
@@ -126,6 +126,6 @@ EOT
      */
     protected function getUserRepository()
     {
-        return $this->getContainer()->get('sylius.repository.user');
+        return $this->getContainer()->get('sylius.repository.shop_user');
     }
 }

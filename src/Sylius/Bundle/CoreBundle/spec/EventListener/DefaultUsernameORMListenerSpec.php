@@ -18,7 +18,7 @@ use Doctrine\ORM\UnitOfWork;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Core\Model\CustomerInterface;
-use Sylius\Component\Core\Model\UserInterface;
+use Sylius\Component\Core\Model\ShopUserInterface;
 
 final class DefaultUsernameORMListenerSpec extends ObjectBehavior
 {
@@ -32,7 +32,7 @@ final class DefaultUsernameORMListenerSpec extends ObjectBehavior
         EntityManager $entityManager,
         UnitOfWork $unitOfWork,
         CustomerInterface $customer,
-        UserInterface $user,
+        ShopUserInterface $user,
         ClassMetadata $userMetadata
     ) {
         $onFlushEventArgs->getEntityManager()->willReturn($entityManager);
@@ -61,7 +61,7 @@ final class DefaultUsernameORMListenerSpec extends ObjectBehavior
         EntityManager $entityManager,
         UnitOfWork $unitOfWork,
         CustomerInterface $customer,
-        UserInterface $user,
+        ShopUserInterface $user,
         ClassMetadata $userMetadata
     ) {
         $onFlushEventArgs->getEntityManager()->willReturn($entityManager);
@@ -90,7 +90,7 @@ final class DefaultUsernameORMListenerSpec extends ObjectBehavior
         EntityManager $entityManager,
         UnitOfWork $unitOfWork,
         CustomerInterface $customer,
-        UserInterface $user,
+        ShopUserInterface $user,
         ClassMetadata $userMetadata
     ) {
         $onFlushEventArgs->getEntityManager()->willReturn($entityManager);
@@ -119,7 +119,7 @@ final class DefaultUsernameORMListenerSpec extends ObjectBehavior
         EntityManager $entityManager,
         UnitOfWork $unitOfWork,
         CustomerInterface $customer,
-        UserInterface $user,
+        ShopUserInterface $user,
         ClassMetadata $userMetadata
     ) {
         $onFlushEventArgs->getEntityManager()->willReturn($entityManager);

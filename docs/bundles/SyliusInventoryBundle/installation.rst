@@ -58,7 +58,7 @@ We will create `Book` entity.
     // src/App/AppBundle/Entity/Book.php
     namespace App\AppBundle\Entity;
 
-    use Sylius\Bundle\InventoryBundle\Model\StockableInterface;
+    use Sylius\Component\Inventory\Model\StockableInterface;
     use Doctrine\ORM\Mapping as ORM;
 
     /**
@@ -148,8 +148,6 @@ We will create `Book` entity.
 .. note::
 
     This example shows the full power of `StockableInterface`.
-    The bundle also provides an `Stockable` entity which implements `StockableInterface` for you.
-    By extending the `Stockable` entity, the example above can be dramatically simplified.
 
 In order to track the books inventory our `Book` entity must implement `StockableInterface`.
 Note that we added ``->getSku()`` method which is alias to ``->getIsbn()``, this is the power of the interface,
@@ -165,7 +163,7 @@ The next step requires the creating of the `InventoryUnit` entity, let’s do th
     // src/App/AppBundle/Entity/InventoryUnit.php
     namespace App\AppBundle\Entity;
 
-    use Sylius\Bundle\InventoryBundle\Entity\InventoryUnit as BaseInventoryUnit;
+    use Sylius\Component\Inventory\Model\InventoryUnit as BaseInventoryUnit;
     use Doctrine\ORM\Mapping as ORM;
 
     /**
@@ -182,7 +180,7 @@ The next step requires the creating of the `InventoryUnit` entity, let’s do th
         protected $id;
     }
 
-Note that we are using base entity from Sylius bundle, which means inheriting some functionality inventory bundle provides.
+Note that we are using base model from Sylius component, which means inheriting some functionality inventory component provides.
 `InventoryUnit` holds the reference to stockable object, which is `Book` in our case.
 So, if we use the `InventoryOperator` to create inventory units, they will reference the given book entity.
 
@@ -195,21 +193,10 @@ Put this configuration inside your ``app/config/config.yml``.
 
     sylius_inventory:
         driver: doctrine/orm
-        classes:
+        resources:
             inventory_unit:
-                model: App\AppBundle\Entity\InventoryUnit
-            stockable:
-                model: App\AppBundle\Entity\Book
-
-Routing configuration
----------------------
-
-Import the routing configuration by adding the following to your `app/config/routing.yml``.
-
-.. code-block:: yaml
-
-    sylius_inventory:
-        resource: "@SyliusInventoryBundle/Resources/config/routing.yml"
+                classes:
+                    model: App\AppBundle\Entity\InventoryUnit
 
 
 Updating database schema
@@ -226,8 +213,3 @@ For "**doctrine/orm**" driver run the following command.
 .. warning::
 
     This should be done only in **dev** environment! We recommend using Doctrine migrations, to safely update your schema.
-
-Templates
----------
-
-The bundle provides some default `bootstrap <http://twitter.github.com/bootstrap/>`_ templates.

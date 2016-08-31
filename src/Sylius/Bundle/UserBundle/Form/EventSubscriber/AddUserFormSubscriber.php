@@ -23,6 +23,19 @@ use Webmozart\Assert\Assert;
 class AddUserFormSubscriber implements EventSubscriberInterface
 {
     /**
+     * @var string
+     */
+    private $userType;
+
+    /**
+     * @param string $userType
+     */
+    public function __construct($userType)
+    {
+        $this->userType = $userType;
+    }
+
+    /**
      * @return array
      */
     public static function getSubscribedEvents()
@@ -39,7 +52,7 @@ class AddUserFormSubscriber implements EventSubscriberInterface
     public function preSetData(FormEvent $event)
     {
         $form = $event->getForm();
-        $form->add('user', 'sylius_user');
+        $form->add('user', sprintf('sylius_%s_user', $this->userType));
     }
 
     /**

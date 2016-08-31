@@ -248,7 +248,7 @@ sylius:
         payments: Платежі
         pending: В очікуванні
         permissions: Дозволи
-        phone_number: Номер Телефону
+        phone_number: Номер телефону
         place_order: Розмістити замовлення
         placed_at: Розміщено
         postcode: Iндекс
@@ -258,7 +258,6 @@ sylius:
         pricing: Ціноутворення
         processing: В процесі
         product: Товар
-        product_archetypes: Прототипи продуктів
         products: Продукти
         products_categorized_as_name: 'Продукт категоризовано як "%name%"'
         products_categorized_under_taxon_taxon: 'Товари <small> категорії "%taxon%" </small>'

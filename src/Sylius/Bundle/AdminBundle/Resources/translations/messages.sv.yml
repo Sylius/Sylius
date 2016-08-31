@@ -12,6 +12,7 @@ sylius:
                     products: Produkter
                     taxons: Taxa
                 configuration:
+                    admin_users: Administratörer
                     channels: Kanaler
                     countries: Länder
                     currencies: Valutor

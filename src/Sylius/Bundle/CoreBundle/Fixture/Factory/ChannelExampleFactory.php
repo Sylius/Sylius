@@ -100,6 +100,7 @@ final class ChannelExampleFactory implements ExampleFactoryInterface
                 ->setDefault('shipping_methods', LazyOption::all($shippingMethodRepository))
                 ->setAllowedTypes('shipping_methods', 'array')
                 ->setNormalizer('shipping_methods', LazyOption::findBy($shippingMethodRepository, 'code'))
+                ->setDefault('theme_name', null)
         ;
     }
 
@@ -117,6 +118,7 @@ final class ChannelExampleFactory implements ExampleFactoryInterface
         $channel->setEnabled($options['enabled']);
         $channel->setColor($options['color']);
         $channel->setTaxCalculationStrategy($options['tax_calculation_strategy']);
+        $channel->setThemeName($options['theme_name']);
 
         $channel->setDefaultLocale($options['default_locale']);
         foreach ($options['locales'] as $locale) {

@@ -43,11 +43,6 @@ final class TshirtProductFixture extends AbstractFixture
     private $productOptionFixture;
 
     /**
-     * @var ProductArchetypeFixture
-     */
-    private $productArchetypeFixture;
-
-    /**
      * @var ProductFixture
      */
     private $productFixture;
@@ -67,7 +62,6 @@ final class TshirtProductFixture extends AbstractFixture
      * @param RepositoryInterface $taxonRepository
      * @param ProductAttributeFixture $productAttributeFixture
      * @param ProductOptionFixture $productOptionFixture
-     * @param ProductArchetypeFixture $productArchetypeFixture
      * @param ProductFixture $productFixture
      */
     public function __construct(
@@ -75,14 +69,12 @@ final class TshirtProductFixture extends AbstractFixture
         RepositoryInterface $taxonRepository,
         ProductAttributeFixture $productAttributeFixture,
         ProductOptionFixture $productOptionFixture,
-        ProductArchetypeFixture $productArchetypeFixture,
         ProductFixture $productFixture
     ) {
         $this->taxonFixture = $taxonFixture;
         $this->taxonRepository = $taxonRepository;
         $this->productAttributeFixture = $productAttributeFixture;
         $this->productOptionFixture = $productOptionFixture;
-        $this->productArchetypeFixture = $productArchetypeFixture;
         $this->productFixture = $productFixture;
 
         $this->faker = \Faker\Factory::create();
@@ -158,15 +150,6 @@ final class TshirtProductFixture extends AbstractFixture
             ],
         ]]);
 
-        $this->productArchetypeFixture->load(['custom' => [
-            [
-                'name' => 'T-Shirt',
-                'code' => 'TSHIRT',
-                'product_attributes' => ['TSHIRT-brand', 'TSHIRT-COLLECTION', 'TSHIRT-MATERIAL'],
-                'product_options' => ['TSHIRT-COLOR', 'TSHIRT-SIZE'],
-            ],
-        ]]);
-
         $products = [];
         for ($i = 0; $i < $options['amount']; ++$i) {
             $categoryTaxonCode = $this->faker->randomElement(['mens_t_shirts', 'womens_t_shirts']);
@@ -175,7 +158,6 @@ final class TshirtProductFixture extends AbstractFixture
                 'name' => sprintf('T-Shirt "%s"', $this->faker->word),
                 'code' => $this->faker->uuid,
                 'main_taxon' => $categoryTaxonCode,
-                'product_archetype' => 'TSHIRT',
                 'taxons' => [$categoryTaxonCode],
                 'product_attributes' => [
                     'TSHIRT-brand' => $this->faker->randomElement(['Nike', 'Adidas', 'JKM-476 Streetwear', 'Potato', 'Centipede Wear']),

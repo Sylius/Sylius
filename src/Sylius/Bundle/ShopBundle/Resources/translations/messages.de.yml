@@ -7,3 +7,6 @@ sylius:
             account:
                 header: Ihr Konto
                 dashboard: Dashboard
+                personal_information: Persönliche Informationen
+                change_password: Passwort ändern
+                order_history: Bestellverlauf

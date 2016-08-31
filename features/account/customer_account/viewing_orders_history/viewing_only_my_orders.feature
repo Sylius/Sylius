@@ -5,7 +5,7 @@ Feature: Viewing orders on my account page
     I want to be able to track my placed orders
 
     Background:
-        Given the store operates on a single channel in "France"
+        Given the store operates on a single channel in "United States"
         And the store has "Angel T-Shirt" and "Green Arrow" products
         And the store ships everywhere for free
         And the store allows paying with "Cash on Delivery"

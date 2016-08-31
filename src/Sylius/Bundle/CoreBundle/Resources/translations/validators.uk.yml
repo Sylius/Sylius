@@ -13,3 +13,6 @@ sylius:
         price:
             min: Ціна не має бути негативною.
             not_blank: Будь ласка, введіть ціну.
+    user:
+        email:
+            unique: Ця email вже використовується.

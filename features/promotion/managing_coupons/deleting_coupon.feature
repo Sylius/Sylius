@@ -5,7 +5,7 @@ Feature: Deleting a coupon
     I want to be able to delete a coupon from the registry
 
     Background:
-        Given the store operates on a single channel in "France"
+        Given the store operates on a single channel in "United States"
         And the store has promotion "Christmas sale" with coupon "SANTA2016"
         And I am logged in as an administrator
 

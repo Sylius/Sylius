@@ -11,6 +11,7 @@ sylius:
                 confirmation: تکرار کلمه عبور
             remember_me: مرا به خاطر بسپار
             shipping_address: آدرس تحویل سفارش
+            username: نام کاربری
         user_filter:
             query: جستجو
         user_change_password:

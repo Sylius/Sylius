@@ -47,8 +47,5 @@ class SyliusShippingExtension extends AbstractResourceExtension
         $shippingMethod->addArgument(new Reference('sylius.registry.shipping_calculator'));
         $shippingMethod->addArgument(new Reference('sylius.registry.shipping_rule_checker'));
         $shippingMethod->addArgument(new Reference('form.registry'));
-
-        $shippingMethod = $container->getDefinition('sylius.form.type.shipping_method_rule');
-        $shippingMethod->addArgument(new Reference('sylius.registry.shipping_rule_checker'));
     }
 }

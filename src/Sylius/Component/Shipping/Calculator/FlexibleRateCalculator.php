@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Shipping\Calculator;
 
-use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
+use Sylius\Component\Shipping\Model\ShipmentInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -21,7 +21,7 @@ class FlexibleRateCalculator implements CalculatorInterface
     /**
      * {@inheritdoc}
      */
-    public function calculate(ShippingSubjectInterface $subject, array $configuration)
+    public function calculate(ShipmentInterface $subject, array $configuration)
     {
         $firstUnitCost = $configuration['first_unit_cost'];
         $additionalUnitCost = $configuration['additional_unit_cost'];

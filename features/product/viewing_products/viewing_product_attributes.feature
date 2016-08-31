@@ -5,7 +5,7 @@ Feature: Viewing product's attributes
     I want to be able to see product's attributes
 
     Background:
-        Given the store operates on a single channel in "France"
+        Given the store operates on a single channel in "United States"
 
     @ui
     Scenario: Viewing a detailed page with product's text attribute

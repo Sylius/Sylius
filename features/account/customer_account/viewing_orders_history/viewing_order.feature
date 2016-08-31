@@ -5,8 +5,8 @@ Feature: Viewing details of an order
     I want to be able to view details of my placed order
 
     Background:
-        Given the store operates on a single channel in "France"
-        And the store has a product "Angel T-Shirt" priced at "€39.00"
+        Given the store operates on a single channel in "United States"
+        And the store has a product "Angel T-Shirt" priced at "$39.00"
         And the store ships everywhere for free
         And the store allows paying with "Cash on Delivery"
         And I am a logged in customer
@@ -22,4 +22,4 @@ Feature: Viewing details of an order
         And it should has number "#00000666"
         And I should see "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States" as shipping address
         And I should see "Mazikeen Lilim", "Pacific Coast Hwy", "90806", "Los Angeles", "United States" as billing address
-        And I should see "€39.00" as order's total
+        And I should see "$39.00" as order's total

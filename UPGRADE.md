@@ -3,18 +3,34 @@ UPGRADE
 
 ## From 0.19 to 1.0.0-alpha
 
+### Archetype and ArchetypeBundle
+
+* Removed ``Archetype`` component and ``ArchetypeBundle``
+
 ### ChannelBundle
 
 * Renamed configuration option `sylius_channel.fake_channel_support` to `sylius_channel.debug`
+
+### Contact and ContactBundle
+
+* Removed ``Contact`` component and ``ContactBundle``
 
 ### Order and OrderBundle
 
 * Added ``OrderSequence`` model to keep current order index
 * Added ``OrderNumberGenerator`` to generate number for new orders
 
+### Report and ReportBundle
+
+* Removed ``Report`` component and ``ReportBundle``
+
 ### Sequence and SequenceBundle
 
 * Removed ``Sequence`` component and ``SequenceBundle``
+
+### SearchBundle
+
+* Removed ``SearchBundle``
 
 ## From 0.18 to 0.19.x
 

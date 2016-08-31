@@ -17,7 +17,7 @@ use Sylius\Component\Cart\Model\Cart;
 use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\OrderPaymentStates;
-use Sylius\Component\Inventory\Model\InventoryUnitInterface;
+use Sylius\Component\Core\OrderShippingStates;
 use Sylius\Component\Payment\Model\PaymentInterface as BasePaymentInterface;
 use Sylius\Component\Promotion\Model\CouponInterface as BaseCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface as BasePromotionInterface;
@@ -341,6 +341,14 @@ class Order extends Cart implements OrderInterface
             $shipment->setOrder(null);
             $this->shipments->removeElement($shipment);
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeShipments()
+    {
+        $this->shipments->clear();
     }
 
     /**

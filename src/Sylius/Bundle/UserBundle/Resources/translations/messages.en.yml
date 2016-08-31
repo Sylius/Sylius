@@ -8,6 +8,7 @@ sylius:
                 confirmation: Verification
             remember_me: Remember me
             shipping_address: Shipping address
+            username: Username
         user_filter:
             query: Search
         user_change_password:

@@ -1,0 +1,9 @@
+{% if data.enabled %}
+    <span class="ui teal label">
+        {{ 'sylius.ui.yes'|trans }}
+    </span>
+{% else %}
+    <span class="ui red label">
+        {{ 'sylius.ui.no'|trans }}
+    </span>
+{%  endif %}

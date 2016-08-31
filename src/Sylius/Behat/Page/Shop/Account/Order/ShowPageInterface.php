@@ -71,4 +71,9 @@ interface ShowPageInterface extends SymfonyPageInterface
      * @return bool
      */
     public function isProductInTheList($name);
+
+    /**
+     * @return string
+     */
+    public function getItemPrice();
 }

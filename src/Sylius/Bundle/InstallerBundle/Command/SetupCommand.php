@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\InstallerBundle\Command;
 
+use Sylius\Component\Core\Model\AdminUserInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
@@ -72,17 +73,12 @@ EOT
     {
         $output->writeln('Create your administrator account.');
 
-        $userManager = $this->get('sylius.manager.user');
-        $userRepository = $this->get('sylius.repository.user');
-        $userFactory = $this->get('sylius.factory.user');
-        $customerFactory = $this->get('sylius.factory.customer');
+        $userManager = $this->get('sylius.manager.admin_user');
+        $userRepository = $this->get('sylius.repository.admin_user');
+        $userFactory = $this->get('sylius.factory.admin_user');
 
-        $rbacInitializer = $this->get('sylius.rbac.initializer');
-        $rbacInitializer->initialize();
-
+        /** @var AdminUserInterface $user */
         $user = $userFactory->createNew();
-        $customer = $customerFactory->createNew();
-        $user->setCustomer($customer);
 
         if ($input->getOption('no-interaction')) {
             $exists = null !== $userRepository->findOneByEmail('sylius@example.com');
@@ -91,14 +87,9 @@ EOT
                 return 0;
             }
 
-            $customer->setFirstname('Sylius');
-            $customer->setLastname('Admin');
             $user->setEmail('sylius@example.com');
             $user->setPlainPassword('sylius');
         } else {
-            $customer->setFirstname($this->ask($output, 'Your firstname:', [new NotBlank()]));
-            $customer->setLastname($this->ask($output, 'Lastname:', [new NotBlank()]));
-
             do {
                 $email = $this->ask($output, 'E-Mail:', [new NotBlank(), new Email()]);
                 $exists = null !== $userRepository->findOneByEmail($email);
@@ -113,7 +104,6 @@ EOT
         }
 
         $user->setEnabled(true);
-        $user->addAuthorizationRole($this->get('sylius.repository.role')->findOneBy(['code' => 'administrator']));
 
         $userManager->persist($user);
         $userManager->flush();

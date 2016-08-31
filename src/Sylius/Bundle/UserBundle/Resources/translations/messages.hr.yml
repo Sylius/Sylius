@@ -11,6 +11,7 @@ sylius:
                 confirmation: Verifikacija
             remember_me: Zapamti me
             shipping_address: Adresa za dostavu
+            username: Korisničko ime
         user_filter:
             query: Pretraga
         user_change_password:

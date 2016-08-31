@@ -5,7 +5,7 @@ Feature: Deleting a promotion
     I want to be able to delete a promotion from the registry
 
     Background:
-        Given the store operates on a single channel in "France"
+        Given the store operates on a single channel in "United States"
         And there is a promotion "Christmas sale"
         And I am logged in as an administrator
 

@@ -12,9 +12,5 @@ sylius:
             taxons: Taxons
         product_variant:
             available_on: Tilgængelig
-        product_archetype:
-            name: Navn
-            parent: Overordnede
-            options: Indstillinger
         association_type:
             name: Navn

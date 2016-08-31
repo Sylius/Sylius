@@ -19,7 +19,7 @@ use Symfony\Component\Security\Http\Authentication\DefaultAuthenticationFailureH
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class AuthenticationFailureHandler extends DefaultAuthenticationFailureHandler
+final class AuthenticationFailureHandler extends DefaultAuthenticationFailureHandler
 {
     /**
      * {@inheritdoc}

@@ -22,12 +22,14 @@ The Book
     addresses
     inventory
     orders
+    checkout
     shipments
     payments
     taxation
     pricing
     promotions
     users_and_groups
+    adminuser
     content
     emails
     settings

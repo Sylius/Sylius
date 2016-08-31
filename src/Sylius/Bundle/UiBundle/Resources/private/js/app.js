@@ -84,7 +84,7 @@
       on: 'hover'
     });
 
-    var email = $('#sylius_shop_checkout_addressing_customer_email');
+    var email = $('#sylius_checkout_address_customer_email');
     email.apiToggle({
       action: 'user check',
       dataType: 'json',

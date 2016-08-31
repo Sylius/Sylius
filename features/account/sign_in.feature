@@ -5,8 +5,8 @@ Feature: Sign in to the store
     I want to be able to log in to the store
 
     Background:
-        Given the store operates on a single channel in "France"
-        And there is user "ted@example.com" identified by "bear"
+        Given the store operates on a single channel in "United States"
+        And there is a user "ted@example.com" identified by "bear"
 
     @ui
     Scenario: Sign in with email and password

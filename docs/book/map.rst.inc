@@ -16,12 +16,14 @@
 * :doc:`/book/addresses`
 * :doc:`/book/inventory`
 * :doc:`/book/orders`
+* :doc:`/book/checkout`
 * :doc:`/book/shipments`
 * :doc:`/book/payments`
 * :doc:`/book/taxation`
 * :doc:`/book/pricing`
 * :doc:`/book/promotions`
 * :doc:`/book/users_and_groups`
+* :doc:`/book/adminuser`
 * :doc:`/book/content`
 * :doc:`/book/emails`
 * :doc:`/book/settings`

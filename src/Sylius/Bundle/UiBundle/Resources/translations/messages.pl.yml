@@ -13,6 +13,7 @@ sylius:
     ui:
         abandoned: Porzucony
         access_token: Token dostępowy
+        access_your_store_account_or_create_a_new_one: Zaloguj się na swoje konto lub stwórz nowe
         action: Akcja
         actions: Akcje
         add: Dodaj
@@ -41,10 +42,12 @@ sylius:
         adjustments: Dostosowanie
         administration: Administracja
         administration_dashboard: Panel administracyjny
+        administration_panel_login: Logowanie do panelu administracyjnego
+        admin_users: Administratorzy
+        all: Wszystko
         all_your_addresses: Wszystkie Twoje adresy
         amount: Kwota
         an_error_occurred: Wystąpił błąd
-        archetype: Szablon
         are_your_sure_you_want_to_perform_this_action: Czy na pewno chcesz wykonać tę akcję?
         association: Powiązanie
         association_types: Typy powiązań
@@ -101,10 +104,6 @@ sylius:
         confirmation: Potwierdzenie
         confirmation_title: Potwierdzenie
         confirmed: Potwierdzony
-        contact_request_details: Szczegóły prośby o kontakt
-        contact_request_show: Prośba o kontakt
-        contact_requests: Prośby o kontakt
-        contact_topics: Tematy
         contact_us: Skontaktuj się z nami
         contain_variants: Zawiera Warianty
         contains: Zawiera
@@ -119,8 +118,6 @@ sylius:
         create_a_new_address: Dodaj nowy adres
         create_a_new_customer_account: Utwórz nowe konto klienta
         create_an_account: Utwórz konto
-        create_archetype: Stwórz archetyp
-        create_contact_request: Utwórz prośbę o kontakt
         create_country: Dodaj kraj
         create_currency: Utwórz walutę
         create_group: Dodaj grupę
@@ -213,10 +210,8 @@ sylius:
         edit_taxon: Edytuj takson
         edit_your_personal_information: Edycja moich danych
         edit_zone: Edytuj strefę
-        editing_archetype: Edytowanie prototypu
         editing_attribute: Edytowanie atrybutu
         editing_channel: Edycja kanału
-        editing_contact_request: Edycja prośby o kontakt
         editing_country: Edycja kraju
         editing_coupon: Edytowanie kupony promocyjnego
         editing_currency: Edycja waluty
@@ -364,11 +359,8 @@ sylius:
         n_a: N/D
         name: Nazwa
         new: Nowy
-        new_archetype: Nowy prototyp
         new_channel: Nowy kanał
         new_comment_posted_on_order: Nowy komentarz do zamówienia
-        new_contact_request: Nowa prośba o kontakt
-        new_contact_topic: Nowy temat kontaktu
         new_country: Nowy kraj
         new_coupon: Nowy kupon
         new_currency: Nowa waluta
@@ -458,7 +450,6 @@ sylius:
         privacy_policy: Polityka Prywatności
         processing: Przetwarzany
         product: Produkt
-        product_archetypes: Szablony produktów
         product_association_index: Powiązanie
         product_association_type_index: Rodzaj powiązania
         product_association_types: Rodzaje produktów towarzyszących

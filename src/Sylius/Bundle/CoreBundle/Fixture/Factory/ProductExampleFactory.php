@@ -13,7 +13,6 @@ namespace Sylius\Bundle\CoreBundle\Fixture\Factory;
 
 use Sylius\Bundle\CoreBundle\Fixture\OptionsResolver\LazyOption;
 use Sylius\Component\Core\Formatter\StringInflector;
-use Sylius\Component\Core\Model\ArchetypeInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantImageInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
@@ -79,11 +78,10 @@ final class ProductExampleFactory implements ExampleFactoryInterface
      * @param FactoryInterface $productFactory
      * @param FactoryInterface $productVariantFactory
      * @param VariantGeneratorInterface $variantGenerator
-     * @param FactoryInterface $productAttibuteValueFactory
+     * @param FactoryInterface $productAttributeValueFactory
      * @param FactoryInterface $productVariantImageFactory
      * @param ImageUploaderInterface $imageUploader
      * @param RepositoryInterface $taxonRepository
-     * @param RepositoryInterface $productArchetypeRepository
      * @param RepositoryInterface $productAttributeRepository
      * @param RepositoryInterface $productOptionRepository
      * @param RepositoryInterface $channelRepository
@@ -93,11 +91,10 @@ final class ProductExampleFactory implements ExampleFactoryInterface
         FactoryInterface $productFactory,
         FactoryInterface $productVariantFactory,
         VariantGeneratorInterface $variantGenerator,
-        FactoryInterface $productAttibuteValueFactory,
+        FactoryInterface $productAttributeValueFactory,
         FactoryInterface $productVariantImageFactory,
         ImageUploaderInterface $imageUploader,
         RepositoryInterface $taxonRepository,
-        RepositoryInterface $productArchetypeRepository,
         RepositoryInterface $productAttributeRepository,
         RepositoryInterface $productOptionRepository,
         RepositoryInterface $channelRepository,
@@ -138,10 +135,6 @@ final class ProductExampleFactory implements ExampleFactoryInterface
                 ->setAllowedTypes('main_taxon', ['null', 'string', TaxonInterface::class])
                 ->setNormalizer('main_taxon', LazyOption::findOneBy($taxonRepository, 'code'))
 
-                ->setDefault('product_archetype', LazyOption::randomOne($productArchetypeRepository))
-                ->setAllowedTypes('product_archetype', ['null', 'string', ArchetypeInterface::class])
-                ->setNormalizer('product_archetype', LazyOption::findOneBy($productArchetypeRepository, 'code'))
-
                 ->setDefault('taxons', LazyOption::randomOnes($taxonRepository, 3))
                 ->setAllowedTypes('taxons', 'array')
                 ->setNormalizer('taxons', LazyOption::findBy($taxonRepository, 'code'))
@@ -152,19 +145,7 @@ final class ProductExampleFactory implements ExampleFactoryInterface
 
                 ->setDefault('product_attributes', [])
                 ->setAllowedTypes('product_attributes', 'array')
-                ->setNormalizer('product_attributes', function (Options $options, array $productAttributes) use ($productAttributeRepository, $productAttibuteValueFactory) {
-                    /** @var ArchetypeInterface $productArchetype */
-                    $productArchetype = $options['product_archetype'];
-
-                    /** @var AttributeInterface $productAttribute */
-                    foreach ($productArchetype->getAttributes() as $productAttribute) {
-                        if (array_key_exists($productAttribute->getCode(), $productAttributes)) {
-                            continue;
-                        }
-
-                        $productAttributes[$productAttribute->getCode()] = null;
-                    }
-
+                ->setNormalizer('product_attributes', function (Options $options, array $productAttributes) use ($productAttributeRepository, $productAttributeValueFactory) {
                     $productAttributesValues = [];
                     foreach ($productAttributes as $code => $value) {
                         $productAttribute = $productAttributeRepository->findOneBy(['code' => $code]);
@@ -172,7 +153,7 @@ final class ProductExampleFactory implements ExampleFactoryInterface
                         Assert::notNull($productAttribute);
 
                         /** @var AttributeValueInterface $productAttributeValue */
-                        $productAttributeValue = $productAttibuteValueFactory->createNew();
+                        $productAttributeValue = $productAttributeValueFactory->createNew();
                         $productAttributeValue->setAttribute($productAttribute);
                         $productAttributeValue->setValue($value ?: $this->getRandomValueForProductAttribute($productAttribute));
 
@@ -185,12 +166,6 @@ final class ProductExampleFactory implements ExampleFactoryInterface
                 ->setDefault('product_options', [])
                 ->setAllowedTypes('product_options', 'array')
                 ->setNormalizer('product_options', LazyOption::findBy($productOptionRepository, 'code'))
-                ->setNormalizer('product_options', function (Options $options, array $productOptions) {
-                    /** @var ArchetypeInterface $productArchetype */
-                    $productArchetype = $options['product_archetype'];
-
-                    return array_merge($productOptions, $productArchetype->getOptions()->toArray());
-                })
 
                 ->setDefault('images', [])
                 ->setAllowedTypes('images', 'array')
@@ -210,7 +185,6 @@ final class ProductExampleFactory implements ExampleFactoryInterface
         $product->setCode($options['code']);
         $product->setEnabled($options['enabled']);
         $product->setMainTaxon($options['main_taxon']);
-        $product->setArchetype($options['product_archetype']);
 
         $product->setCreatedAt($this->faker->dateTimeBetween('-1 week', 'now'));
 

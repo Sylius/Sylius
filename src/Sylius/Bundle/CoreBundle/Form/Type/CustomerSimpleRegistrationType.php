@@ -49,7 +49,7 @@ class CustomerSimpleRegistrationType extends AbstractResourceType
             ->add('email', 'email', [
                 'label' => 'sylius.form.customer.email',
             ])
-            ->add('user', 'sylius_user_registration', [
+            ->add('user', 'sylius_shop_user_registration', [
                 'label' => false,
             ])
             ->addEventSubscriber(new CustomerRegistrationFormSubscriber($this->customerRepository))

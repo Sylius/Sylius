@@ -5,7 +5,7 @@ Feature: Viewing a product details using permalink
     I want to be able to have access to product page by permalink
 
     Background:
-        Given the store operates on a single channel in "France"
+        Given the store operates on a single channel in "United States"
 
     @ui
     Scenario: Access to detailed product page using permalink

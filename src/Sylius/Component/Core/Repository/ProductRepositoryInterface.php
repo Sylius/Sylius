@@ -15,7 +15,6 @@ use Pagerfanta\PagerfantaInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\TaxonInterface;
-use Sylius\Component\Product\Model\ArchetypeInterface;
 use Sylius\Component\Product\Repository\ProductRepositoryInterface as BaseProductRepositoryInterface;
 
 /**
@@ -63,14 +62,6 @@ interface ProductRepositoryInterface extends BaseProductRepositoryInterface
      * @return ProductInterface[]
      */
     public function findLatestByChannel(ChannelInterface $channel, $count);
-
-    /**
-     * @param ArchetypeInterface $archetype
-     * @param array $criteria
-     *
-     * @return PagerfantaInterface
-     */
-    public function createByProductArchetypePaginator(ArchetypeInterface $archetype, array $criteria = []);
 
     /**
      * @param mixed $id

@@ -14,7 +14,7 @@ namespace Sylius\Component\Core;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class OrderCheckoutTransitions
+final class OrderCheckoutTransitions
 {
     const GRAPH = 'sylius_order_checkout';
 
@@ -25,4 +25,8 @@ class OrderCheckoutTransitions
     const TRANSITION_RESELECT_SHIPPING = 'reselect_shipping';
     const TRANSITION_SELECT_PAYMENT = 'select_payment';
     const TRANSITION_SELECT_SHIPPING = 'select_shipping';
+
+    private function __construct()
+    {
+    }
 }

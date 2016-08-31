@@ -9,6 +9,7 @@ sylius:
         back: Edellinen
         city: Kaupunki
         company: Yritys
+        content: Sisältö
         currency: Valuutta
         email: Sähköpostiosoite
         exchange_rate: Vaihtokurssi

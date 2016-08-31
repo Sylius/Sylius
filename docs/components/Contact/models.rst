@@ -1,9 +1,0 @@
-Models
-======
-
-ContactTopic
--------------
-
-ContactRequest
----------------
-

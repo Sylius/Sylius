@@ -7,13 +7,13 @@ Feature: Viewing products from a specific taxon and a channel
     Background:
         Given the store has currency "Euro"
         And the store operates on a channel named "Poland"
-        And the store operates on another channel named "France"
+        And the store operates on another channel named "United States"
         And the store classifies its products as "T-Shirts" and "Funny"
         And the store has a product "T-Shirt Banana" available in "Poland" channel
         And this product belongs to "T-Shirts"
         And there are 10 items of product "T-shirt banana" available in the inventory
         And this product belongs to "Funny"
-        And the store has a product "T-Shirt Batman" available in "France" channel
+        And the store has a product "T-Shirt Batman" available in "United States" channel
         And this product belongs to "T-Shirts"
         And there are 10 items of product "T-shirt Batman" available in the inventory
 
@@ -26,6 +26,6 @@ Feature: Viewing products from a specific taxon and a channel
 
     @ui @elasticsearch
     Scenario: Viewing information about empty list of products from a given taxon in selected channel
-        Given I am browsing channel "France"
+        Given I am browsing channel "United States"
         When I browse products from taxon "Funny"
         Then I should see empty list of products

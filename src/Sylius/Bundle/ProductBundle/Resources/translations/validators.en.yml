@@ -14,11 +14,3 @@ sylius:
         sku:
             not_blank: Please enter variant SKU.
             unique: Variant SKU must be unique.
-    archetype:
-        name:
-            not_blank: Please enter archetype name.
-            min_length: Archetype name must be at least 1 character long.|Archetype name must be at least {{ limit }} characters long.
-            max_length: Archetype name must not be longer than 1 character.|Archetype name must not be longer than {{ limit }} characters.
-        code:
-            unique: Archetype with given code already exists.
-            not_blank: Please enter archetype code.

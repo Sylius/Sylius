@@ -5,7 +5,7 @@ Feature: Adding a new promotion
     I want to add a new promotion
 
     Background:
-        Given the store operates on a single channel in "France"
+        Given the store operates on a single channel in "United States"
         And I am logged in as an administrator
 
     @ui
@@ -52,10 +52,10 @@ Feature: Adding a new promotion
         Given I want to create a new promotion
         When I specify its code as "FULL_METAL_PROMOTION"
         And I name it "Full metal promotion"
-        And I make it applicable for the "France" channel
+        And I make it applicable for the "United States" channel
         And I add it
         Then I should be notified that it has been successfully created
-        And the "Full metal promotion" promotion should be applicable for the "France" channel
+        And the "Full metal promotion" promotion should be applicable for the "United States" channel
 
     @ui
     Scenario: Adding a promotion with start and end date

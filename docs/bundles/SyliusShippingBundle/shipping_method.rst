@@ -18,8 +18,6 @@ The Shipping Method
 +---------------------+----------------------------------------------+
 | configuration       | Configuration for the calculator             |
 +---------------------+----------------------------------------------+
-| rules               | Collection of **ShippingRule**               |
-+---------------------+----------------------------------------------+
 | createdAt           | Date when the method was created             |
 +---------------------+----------------------------------------------+
 | updatedAt           | Date of the last shipping method update      |

@@ -9,7 +9,7 @@ Feature: Editing country
 
     @ui
     Scenario: Disabling country
-        Given the store has country "France"
+        Given the store has country "United States"
         And I want to edit this country
         When I disable it
         And I save my changes
@@ -18,7 +18,7 @@ Feature: Editing country
 
     @ui
     Scenario: Enabling country
-        Given the store has disabled country "France"
+        Given the store has disabled country "United States"
         And I want to edit this country
         When I enable it
         And I save my changes
@@ -27,6 +27,6 @@ Feature: Editing country
 
     @ui
     Scenario: Seeing disabled code field while editing country
-        Given the store has country "France"
+        Given the store has country "United States"
         When I want to edit this country
         Then the code field should be disabled

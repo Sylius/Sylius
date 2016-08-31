@@ -26,17 +26,7 @@ The simplest Symfony-based page looks like:
 
     class LoginPage extends SymfonyPage
     {
-        public function logIn($email, $password)
-        {
-            $document = $this->getDocument();
-
-            $document->fillField('Email', $email);
-            $document->fillField('Password', $password);
-
-            $document->pressButton('Login');
-        }
-
-        protected function getRouteName()
+        public function getRouteName()
         {
             return 'sylius_user_security_login';
         }

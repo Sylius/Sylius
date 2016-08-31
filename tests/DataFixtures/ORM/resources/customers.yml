@@ -1,4 +1,4 @@
-Sylius\Component\Core\Model\User:
+Sylius\Component\Core\Model\ShopUser:
     user_{Oliver, Roy, Thea}:
         plainPassword: <password()>
         roles: [ROLE_USER]

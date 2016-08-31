@@ -14,6 +14,7 @@ namespace Sylius\Behat\Context\Transform;
 use Behat\Behat\Context\Context;
 use Sylius\Component\Addressing\Converter\CountryNameConverterInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -51,9 +52,10 @@ final class CountryContext implements Context
         $countryCode = $this->countryNameConverter->convertToCode($countryName);
         $country = $this->countryRepository->findOneBy(['code' => $countryCode]);
 
-        if (null === $country) {
-            throw new \InvalidArgumentException(sprintf('Country with name %s does not exist', $countryName));
-        }
+        Assert::notNull(
+            $country,
+            sprintf('Country with name "%s" does not exist', $countryName)
+        );
 
         return $country;
     }

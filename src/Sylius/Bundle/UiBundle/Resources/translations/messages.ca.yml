@@ -48,6 +48,7 @@ sylius:
         lastname: Cognoms
         members: Membres
         message: Missatge
+        my_account: El meu compte
         name: Nom
         new: Nou
         next: Següent

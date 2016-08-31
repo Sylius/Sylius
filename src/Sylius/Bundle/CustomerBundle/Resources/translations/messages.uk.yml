@@ -11,7 +11,7 @@ sylius:
             groups: Групи
             last_name: Прізвище
             email: Email
-            phone_number: Номер Телефону
+            phone_number: Номер телефону
             billing_address: Платіжна адреса
             different_billing_address: Використовувати іншу платіжну адресу?
     gender:

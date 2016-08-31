@@ -5,7 +5,7 @@ Feature: Shipping an order
     I want to be able to ship a shipment
 
     Background:
-        Given the store operates on a single channel in "France"
+        Given the store operates on a single channel in "United States"
         And the store has a product "Angel T-Shirt"
         And the store ships everywhere for free
         And the store allows paying with "Cash on Delivery"
@@ -15,12 +15,13 @@ Feature: Shipping an order
         And the customer chose "Free" shipping method with "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @ui
+    @ui @email
     Scenario: Finalizing order's shipment
         Given I view the summary of the order "#00000666"
         When specify its tracking code as "#00044"
         And I ship this order
-        Then I should be notified that the order's shipment has been successfully shipped
+        Then I should be notified that the order has been successfully shipped
+        And an email with shipment's details of order "#00000666" should be sent to "lucy@teamlucifer.com"
         And it should have shipment in state shipped
 
     @ui

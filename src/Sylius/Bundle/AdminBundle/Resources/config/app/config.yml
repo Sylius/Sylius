@@ -1,4 +1,5 @@
 imports:
+    - { resource: "@SyliusAdminBundle/Resources/config/grids/administrator.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/channel.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/country.yml" }
     - { resource: "@SyliusAdminBundle/Resources/config/grids/currency.yml" }

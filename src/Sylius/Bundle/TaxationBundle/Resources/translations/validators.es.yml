@@ -16,7 +16,7 @@ sylius:
         amount:
             not_blank: Por favor introduzca la cantidad del impuesto.
         calculator:
-            not_blank: Por favor selecione la calculadora del impuesto.
+            not_blank: Por favor seleccione la calculadora de impuestos.
         zone:
             not_blank: Por favor seleccione la zona fiscal.
         code:

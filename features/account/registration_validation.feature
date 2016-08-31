@@ -5,11 +5,11 @@ Feature: Account registration
     I want to be prevented from creating an account without required fields
 
     Background:
-        Given the store operates on a single channel in "France"
+        Given the store operates on a single channel in "United States"
 
     @ui
     Scenario: Trying to register a new account with email that has been already used
-        Given there is user "goodman@gmail.com" identified by "heisenberg"
+        Given there is a user "goodman@gmail.com" identified by "heisenberg"
         And I want to register a new account
         When I specify the email as "goodman@gmail.com"
         And I try to register this account

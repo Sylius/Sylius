@@ -26,9 +26,9 @@ default:
                 - sylius.behat.context.setup.product_review
                 - sylius.behat.context.setup.shipping
 
+                - sylius.behat.context.domain.managing_products
                 - sylius.behat.context.domain.notification
                 - sylius.behat.context.domain.security
 
-                - sylius.behat.context.domain.product
             filters:
                 tags: "@managing_products && @domain"
