@@ -56,7 +56,7 @@ final class CartLocaleChangeHandler implements LocaleChangeHandlerInterface
             $this->cartManager->persist($cart);
             $this->cartManager->flush();
         } catch (CartNotFoundException $exception) {
-            throw new HandleException(self::class, 'Sylius was unable to found cart.', $exception);
+            throw new HandleException(self::class, 'Sylius was unable to find cart.', $exception);
         }
     }
 }
