@@ -108,6 +108,9 @@
         <parameter key="sylius.payment_methods_resolver.channel_based.class">Sylius\Component\Core\Resolver\ChannelBasedPaymentMethodsResolver</parameter>
         <parameter key="sylius.shipping_methods_resolver.zones_and_channel_based.class">Sylius\Component\Core\Resolver\ZoneAndChannelBasedShippingMethodsResolver</parameter>
 
+        <parameter key="sylius.updater.order.exchange_rate.class">Sylius\Component\Core\Updater\OrderExchangeRateUpdater</parameter>
+        <parameter key="sylius.updater.order.exchange_rate_and_currency.class">Sylius\Component\Core\Updater\OrderExchangeRateAndCurrencyUpdater</parameter>
+
         <parameter key="sylius.context.customer.class">Sylius\Bundle\CoreBundle\Context\CustomerContext</parameter>
 
         <!-- Form subscriber -->
@@ -444,6 +447,14 @@
         <service id="sylius.payment_methods_resolver.channel_based" class="%sylius.payment_methods_resolver.channel_based.class%">
             <argument type="service" id="sylius.repository.payment_method" />
             <tag name="sylius.payment_method_resolver" type="channel_based" label="sylius.payment_methods_resolver.channel_based" priority="1" />
+        </service>
+
+        <service id="sylius.updater.order.exchange_rate" class="%sylius.updater.order.exchange_rate.class%">
+            <argument type="service" id="sylius.repository.currency" />
+        </service>
+        <service id="sylius.updater.order.exchange_rate_and_currency" class="%sylius.updater.order.exchange_rate_and_currency.class%">
+            <argument type="service" id="sylius.context.currency" />
+            <argument type="service" id="sylius.repository.currency" />
         </service>
 
         <!-- Customer context -->

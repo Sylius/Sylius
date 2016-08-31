@@ -18,6 +18,8 @@ use Sylius\Behat\Page\Shop\Checkout\SelectShippingPageInterface;
 use Sylius\Behat\Page\Shop\Checkout\CompletePageInterface;
 use Sylius\Behat\Page\Shop\HomePageInterface;
 use Sylius\Behat\Page\Shop\Checkout\ThankYouPageInterface;
+use Sylius\Behat\Page\SymfonyPageInterface;
+use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
 use Sylius\Behat\Service\SharedSecurityServiceInterface;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Behat\Page\UnexpectedPageException;
@@ -88,6 +90,11 @@ final class CheckoutContext implements Context
     private $addressFactory;
 
     /**
+     * @var CurrentPageResolverInterface
+     */
+    private $currentPageResolver;
+
+    /**
      * @param SharedStorageInterface $sharedStorage
      * @param HomePageInterface $homePage
      * @param AddressPageInterface $addressPage
@@ -98,6 +105,7 @@ final class CheckoutContext implements Context
      * @param OrderRepositoryInterface $orderRepository
      * @param SharedSecurityServiceInterface $sharedSecurityService
      * @param FactoryInterface $addressFactory
+     * @param CurrentPageResolverInterface $currentPageResolver
      */
     public function __construct(
         SharedStorageInterface $sharedStorage,
@@ -109,7 +117,8 @@ final class CheckoutContext implements Context
         CompletePageInterface $completePage,
         OrderRepositoryInterface $orderRepository,
         SharedSecurityServiceInterface $sharedSecurityService,
-        FactoryInterface $addressFactory
+        FactoryInterface $addressFactory,
+        CurrentPageResolverInterface $currentPageResolver
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->homePage = $homePage;
@@ -121,6 +130,7 @@ final class CheckoutContext implements Context
         $this->orderRepository = $orderRepository;
         $this->sharedSecurityService = $sharedSecurityService;
         $this->addressFactory = $addressFactory;
+        $this->currentPageResolver = $currentPageResolver;
     }
 
     /**
@@ -232,6 +242,7 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Given I have selected :shippingMethod shipping method
      * @When I select :shippingMethod shipping method
      */
     public function iSelectShippingMethod($shippingMethod)
@@ -338,7 +349,7 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @When I go to the payment step
+     * @When I decide to change the payment method
      */
     public function iGoToThePaymentStep()
     {
@@ -916,6 +927,21 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Then the subtotal of :item item should be :price
+     */
+    public function theSubtotalOfItemShouldBe($item, $price)
+    {
+        $currentPage = $this->resolveCurrentStepPage();
+        $actualPrice = $currentPage->getItemSubtotal($item);
+
+        Assert::eq(
+            $actualPrice,
+            $price,
+            sprintf('The %s subtotal should be %s, but is %s', $item, $price, $actualPrice)
+        );
+    }
+
+    /**
      * @Then the :product product should have unit price :price
      */
     public function theProductShouldHaveUnitPrice(ProductInterface $product, $price)
@@ -969,5 +995,19 @@ final class CheckoutContext implements Context
             $this->addressPage->checkValidationMessageFor($element, $expectedMessage),
             sprintf('The %s should be required.', $element)
         );
+    }
+
+    /**
+     * @return SymfonyPageInterface
+     */
+    private function resolveCurrentStepPage()
+    {
+        $possiblePages = [
+            $this->addressPage,
+            $this->selectPaymentPage,
+            $this->selectShippingPage,
+        ];
+
+        return $this->currentPageResolver->getCurrentPageWithForm($possiblePages);
     }
 }

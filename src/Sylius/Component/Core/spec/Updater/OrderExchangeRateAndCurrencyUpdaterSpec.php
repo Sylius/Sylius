@@ -14,8 +14,8 @@ namespace spec\Sylius\Component\Core\OrderProcessing;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\OrderProcessing\OrderExchangeRateAndCurrencyUpdater;
-use Sylius\Component\Core\OrderProcessing\OrderExchngeRateAndCurrencyUpdaterInterface;
+use Sylius\Component\Core\Updater\OrderExchangeRateAndCurrencyUpdater;
+use Sylius\Component\Core\Updater\OrderUpdaterInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -39,7 +39,7 @@ final class OrderExchangeRateAndCurrencyUpdaterSpec extends ObjectBehavior
 
     function it_implements_order_exchange_rate_and_currency_updater_interface()
     {
-        $this->shouldImplement(OrderExchngeRateAndCurrencyUpdaterInterface::class);
+        $this->shouldImplement(OrderUpdaterInterface::class);
     }
 
     function it_updates_order_exchange_rate(

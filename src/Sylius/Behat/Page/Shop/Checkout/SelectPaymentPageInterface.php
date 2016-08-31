@@ -30,6 +30,13 @@ interface SelectPaymentPageInterface extends SymfonyPageInterface
      */
     public function hasPaymentMethod($paymentMethodName);
 
+    /**
+     * @param string $itemName
+     *
+     * @return string
+     */
+    public function getItemSubtotal($itemName);
+
     public function nextStep();
 
     public function changeShippingMethod();

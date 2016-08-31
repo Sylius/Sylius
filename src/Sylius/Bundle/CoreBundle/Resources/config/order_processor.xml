@@ -26,6 +26,13 @@
         <service id="sylius.order_processing.order_processor" class="Sylius\Component\Core\OrderProcessing\CompositeOrderProcessor">
             <call method="addProcessor">
                 <argument type="service">
+                    <service class="Sylius\Component\Core\OrderProcessing\OrderExchangeRateProcessor">
+                        <argument type="service" id="sylius.updater.order.exchange_rate" />
+                    </service>
+                </argument>
+            </call>
+            <call method="addProcessor">
+                <argument type="service">
                     <service class="Sylius\Component\Core\OrderProcessing\OrderShipmentProcessor">
                         <argument type="service" id="sylius.resolver.default_shipping_method" />
                         <argument type="service" id="sylius.factory.shipment" />
@@ -76,10 +83,6 @@
                     </service>
                 </argument>
             </call>
-        </service>
-        <service id="sylius.order_processing.order_exchange_rate_and_currency_updater" class="Sylius\Component\Core\OrderProcessing\OrderExchangeRateAndCurrencyUpdater">
-            <argument type="service" id="sylius.context.currency" />
-            <argument type="service" id="sylius.repository.currency" />
         </service>
 
     </services>
