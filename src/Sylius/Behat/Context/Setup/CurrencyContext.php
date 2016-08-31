@@ -17,7 +17,6 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Sylius\Behat\Service\SharedStorageInterface;
 use Sylius\Component\Core\Currency\CurrencyStorageInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
-use Sylius\Component\Currency\Converter\CurrencyNameConverterInterface;
 use Sylius\Component\Currency\Model\CurrencyInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -43,6 +42,11 @@ final class CurrencyContext implements Context
     private $currencyFactory;
 
     /**
+     * @var CurrencyStorageInterface
+     */
+    private $currencyStorage;
+
+    /**
      * @var ObjectManager
      */
     private $currencyManager;
@@ -56,6 +60,7 @@ final class CurrencyContext implements Context
      * @param SharedStorageInterface $sharedStorage
      * @param RepositoryInterface $currencyRepository
      * @param FactoryInterface $currencyFactory
+     * @param CurrencyStorageInterface $currencyStorage
      * @param ObjectManager $currencyManager
      * @param ObjectManager $channelManager
      */
@@ -63,12 +68,14 @@ final class CurrencyContext implements Context
         SharedStorageInterface $sharedStorage,
         RepositoryInterface $currencyRepository,
         FactoryInterface $currencyFactory,
+        CurrencyStorageInterface $currencyStorage,
         ObjectManager $currencyManager,
         ObjectManager $channelManager
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->currencyRepository = $currencyRepository;
         $this->currencyFactory = $currencyFactory;
+        $this->currencyStorage = $currencyStorage;
         $this->currencyManager = $currencyManager;
         $this->channelManager = $channelManager;
     }
@@ -158,6 +165,9 @@ final class CurrencyContext implements Context
         $channel->setDefaultCurrency($currency);
 
         $this->channelManager->flush();
+
+        $this->sharedStorage->set('currency', $currency);
+        $this->currencyStorage->set($channel, $currency->getCode());
     }
 
     /**

@@ -13,22 +13,22 @@ namespace Sylius\Bundle\CoreBundle\Handler;
 
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
+use Sylius\Component\Core\Currency\CurrencyStorageInterface;
+use Sylius\Component\Core\Currency\Handler\CurrencyChangeHandlerInterface;
 use Sylius\Component\Core\Exception\HandleException;
-use Sylius\Component\Core\Locale\Handler\LocaleChangeHandlerInterface;
-use Sylius\Component\Core\Locale\LocaleStorageInterface;
-use Sylius\Component\Core\SyliusLocaleEvents;
+use Sylius\Component\Core\SyliusCurrencyEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 /**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
+ * @author Jan Góralski <jan.goralski@lakion.com>
  */
-final class ShopLocaleChangeHandler implements LocaleChangeHandlerInterface
+final class ShopCurrencyChangeHandler implements CurrencyChangeHandlerInterface
 {
     /**
-     * @var LocaleStorageInterface
+     * @var CurrencyStorageInterface
      */
-    private $localeStorage;
+    private $currencyStorage;
 
     /**
      * @var ChannelContextInterface
@@ -41,16 +41,16 @@ final class ShopLocaleChangeHandler implements LocaleChangeHandlerInterface
     private $eventDispatcher;
 
     /**
-     * @param LocaleStorageInterface $localeStorage
+     * @param CurrencyStorageInterface $currencyStorage
      * @param ChannelContextInterface $channelContext
      * @param EventDispatcherInterface $eventDispatcher
      */
     public function __construct(
-        LocaleStorageInterface $localeStorage,
+        CurrencyStorageInterface $currencyStorage,
         ChannelContextInterface $channelContext,
         EventDispatcherInterface $eventDispatcher
     ) {
-        $this->localeStorage = $localeStorage;
+        $this->currencyStorage = $currencyStorage;
         $this->channelContext = $channelContext;
         $this->eventDispatcher = $eventDispatcher;
     }
@@ -61,11 +61,11 @@ final class ShopLocaleChangeHandler implements LocaleChangeHandlerInterface
     public function handle($code)
     {
         try {
-            $this->localeStorage->set($this->channelContext->getChannel(), $code);
+            $this->currencyStorage->set($this->channelContext->getChannel(), $code);
         } catch (ChannelNotFoundException $exception) {
             throw new HandleException(self::class, 'Sylius could not find the channel.', $exception);
         }
 
-        $this->eventDispatcher->dispatch(SyliusLocaleEvents::CODE_CHANGED, new GenericEvent($code));
+        $this->eventDispatcher->dispatch(SyliusCurrencyEvents::CODE_CHANGED, new GenericEvent($code));
     }
 }

@@ -14,6 +14,7 @@ namespace Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
+use Sylius\Component\Core\Currency\CurrencyStorageInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CouponInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
@@ -79,6 +80,11 @@ final class OrderContext implements Context
     private $currencyRepository;
 
     /**
+     * @var CurrencyStorageInterface
+     */
+    private $currencyStorage;
+
+    /**
      * @var FactoryInterface
      */
     private $customerFactory;
@@ -111,6 +117,7 @@ final class OrderContext implements Context
      * @param FactoryInterface $orderItemFactory
      * @param OrderItemQuantityModifierInterface $itemQuantityModifier
      * @param RepositoryInterface $currencyRepository
+     * @param CurrencyStorageInterface $currencyStorage
      * @param FactoryInterface $customerFactory
      * @param RepositoryInterface $customerRepository
      * @param ObjectManager $objectManager
@@ -125,6 +132,7 @@ final class OrderContext implements Context
         FactoryInterface $orderItemFactory,
         OrderItemQuantityModifierInterface $itemQuantityModifier,
         RepositoryInterface $currencyRepository,
+        CurrencyStorageInterface $currencyStorage,
         FactoryInterface $customerFactory,
         RepositoryInterface $customerRepository,
         ObjectManager $objectManager,
@@ -138,6 +146,7 @@ final class OrderContext implements Context
         $this->orderItemFactory = $orderItemFactory;
         $this->itemQuantityModifier = $itemQuantityModifier;
         $this->currencyRepository = $currencyRepository;
+        $this->currencyStorage = $currencyStorage;
         $this->customerFactory = $customerFactory;
         $this->customerRepository = $customerRepository;
         $this->objectManager = $objectManager;
@@ -237,6 +246,21 @@ final class OrderContext implements Context
 
         $this->applyTransitionOnOrderCheckout($order, OrderCheckoutTransitions::TRANSITION_SELECT_PAYMENT);
         $this->applyTransitionOnOrderCheckout($order, OrderCheckoutTransitions::TRANSITION_COMPLETE);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given the customer have chosen to order in the :currencyCode currency
+     * @Given I have chosen to order in the :currencyCode currency
+     */
+    public function theCustomerChoseTheCurrency($currencyCode)
+    {
+        $this->currencyStorage->set($this->sharedStorage->get('channel'), $currencyCode);
+
+        /** @var OrderInterface $order */
+        $order = $this->sharedStorage->get('order');
+        $order->setCurrencyCode($currencyCode);
 
         $this->objectManager->flush();
     }

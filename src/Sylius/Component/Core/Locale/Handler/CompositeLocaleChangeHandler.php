@@ -9,16 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Handler;
+namespace Sylius\Component\Core\Locale\Handler;
 
 use Sylius\Component\Core\Exception\HandleException;
-use Sylius\Component\Core\Locale\Handler\LocaleChangeHandlerInterface;
 use Zend\Stdlib\PriorityQueue;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class CompositeLocaleChangeHandler implements LocaleChangeHandlerInterface
+final class CompositeLocaleChangeHandler implements LocaleChangeHandlerInterface
 {
     /**
      * @var PriorityQueue|LocaleChangeHandlerInterface[]
@@ -45,7 +44,7 @@ class CompositeLocaleChangeHandler implements LocaleChangeHandlerInterface
     public function handle($code)
     {
         if ($this->handlers->isEmpty()) {
-            throw new HandleException(self::class, 'There is no defined handlers.');
+            throw new HandleException(self::class, 'There are no handlers defined.');
         }
 
         foreach ($this->handlers as $handler) {

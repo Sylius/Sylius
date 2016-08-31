@@ -9,15 +9,19 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Handler;
+namespace Sylius\Component\Core\Currency\Handler;
+
+use Sylius\Component\Core\Exception\HandleException;
 
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-interface CodeChangeHandlerInterface
+interface CurrencyChangeHandlerInterface
 {
     /**
      * @param string $code
+     *
+     * @throws HandleException
      */
     public function handle($code);
 }

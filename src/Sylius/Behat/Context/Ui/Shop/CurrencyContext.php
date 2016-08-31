@@ -58,15 +58,6 @@ final class CurrencyContext implements Context
     }
 
     /**
-     * @Given the customer chose :currencyCode currency
-     * @Given I chose :currencyCode currency
-     */
-    public function theCustomerChoseTheCurrency($currencyCode)
-    {
-        $this->currencyStorage->set($this->sharedStorage->get('channel'), $currencyCode);
-    }
-
-    /**
      * @Then I should (still) shop using the :currencyCode currency
      */
     public function iShouldShopUsingTheCurrency($currencyCode)

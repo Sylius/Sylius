@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\ShopBundle\Controller;
 
-use Sylius\Bundle\CoreBundle\Handler\CodeChangeHandlerInterface;
+use Sylius\Component\Core\Currency\Handler\CurrencyChangeHandlerInterface;
 use Sylius\Component\Currency\Context\CurrencyContextInterface;
 use Sylius\Component\Currency\Provider\CurrencyProviderInterface;
 use Symfony\Bundle\FrameworkBundle\Templating\EngineInterface;
@@ -41,26 +41,26 @@ final class CurrencyController
     private $currencyProvider;
 
     /**
-     * @var CodeChangeHandlerInterface
+     * @var CurrencyChangeHandlerInterface
      */
-    private $codeChangeHandler;
+    private $currencyChangeHandler;
 
     /**
      * @param EngineInterface $templatingEngine
      * @param CurrencyContextInterface $currencyContext
      * @param CurrencyProviderInterface $currencyProvider
-     * @param CodeChangeHandlerInterface $codeChangeHandler
+     * @param CurrencyChangeHandlerInterface $currencyChangeHandler
      */
     public function __construct(
         EngineInterface $templatingEngine,
         CurrencyContextInterface $currencyContext,
         CurrencyProviderInterface $currencyProvider,
-        CodeChangeHandlerInterface $codeChangeHandler
+        CurrencyChangeHandlerInterface $currencyChangeHandler
     ) {
         $this->templatingEngine = $templatingEngine;
         $this->currencyContext = $currencyContext;
         $this->currencyProvider = $currencyProvider;
-        $this->codeChangeHandler = $codeChangeHandler;
+        $this->currencyChangeHandler = $currencyChangeHandler;
     }
 
     /**
@@ -89,7 +89,7 @@ final class CurrencyController
             );
         }
 
-        $this->codeChangeHandler->handle($code);
+        $this->currencyChangeHandler->handle($code);
 
         return new RedirectResponse($request->headers->get('referer'));
     }

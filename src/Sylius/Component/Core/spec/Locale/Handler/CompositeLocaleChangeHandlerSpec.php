@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CoreBundle\Handler;
+namespace spec\Sylius\Component\Core\Locale\Handler;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CoreBundle\Handler\CompositeLocaleChangeHandler;
 use Sylius\Component\Core\Exception\HandleException;
+use Sylius\Component\Core\Locale\Handler\CompositeLocaleChangeHandler;
 use Sylius\Component\Core\Locale\Handler\LocaleChangeHandlerInterface;
 
 /**
@@ -21,7 +21,7 @@ use Sylius\Component\Core\Locale\Handler\LocaleChangeHandlerInterface;
  *
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class CompositeLocaleChangeHandlerSpec extends ObjectBehavior
+final class CompositeLocaleChangeHandlerSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
