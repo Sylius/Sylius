@@ -15,6 +15,7 @@ use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\ResourceTranslationsSubscr
 use Sylius\Component\Locale\Provider\LocaleProviderInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
