@@ -48,9 +48,9 @@ final class CheckoutAddressingApiTest extends CheckoutApiTestCase
     public function it_does_not_allow_to_address_order_for_unexisting_customer()
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
-        $orders = $this->loadFixturesFromFile('resources/checkout.yml');
+        $checkoutData = $this->loadFixturesFromFile('resources/checkout.yml');
 
-        $url = sprintf('/api/checkouts/addressing/%d/0', $orders['order1']->getId());
+        $url = sprintf('/api/checkouts/addressing/%d/0', $checkoutData['order1']->getId());
         $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType);
 
         $response = $this->client->getResponse();
@@ -64,7 +64,7 @@ final class CheckoutAddressingApiTest extends CheckoutApiTestCase
     {
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $customers = $this->loadFixturesFromFile('resources/customers.yml');
-        $orders = $this->loadFixturesFromFile('resources/checkout.yml');
+        $checkoutData = $this->loadFixturesFromFile('resources/checkout.yml');
 
         $data =
 <<<EOT
@@ -73,7 +73,7 @@ final class CheckoutAddressingApiTest extends CheckoutApiTestCase
         }
 EOT;
 
-        $url = sprintf('/api/checkouts/addressing/%d/%d', $orders['order1']->getId(), $customers['customer_Oliver']->getId());
+        $url = sprintf('/api/checkouts/addressing/%d/%d', $checkoutData['order1']->getId(), $customers['customer_Oliver']->getId());
         $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
@@ -88,7 +88,7 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/countries.yml');
         $customers = $this->loadFixturesFromFile('resources/customers.yml');
-        $orders = $this->loadFixturesFromFile('resources/checkout.yml');
+        $checkoutData = $this->loadFixturesFromFile('resources/checkout.yml');
 
         $data =
 <<<EOT
@@ -105,7 +105,7 @@ EOT;
         }
 EOT;
 
-        $url = sprintf('/api/checkouts/addressing/%d/%d', $orders['order1']->getId(), $customers['customer_Oliver']->getId());
+        $url = sprintf('/api/checkouts/addressing/%d/%d', $checkoutData['order1']->getId(), $customers['customer_Oliver']->getId());
         $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
@@ -120,7 +120,7 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/countries.yml');
         $customers = $this->loadFixturesFromFile('resources/customers.yml');
-        $orders = $this->loadFixturesFromFile('resources/checkout.yml');
+        $checkoutData = $this->loadFixturesFromFile('resources/checkout.yml');
 
         $data =
 <<<EOT
@@ -137,7 +137,7 @@ EOT;
         }
 EOT;
 
-        $url = sprintf('/api/checkouts/addressing/%d/%d', $orders['order1']->getId(), $customers['customer_Oliver']->getId());
+        $url = sprintf('/api/checkouts/addressing/%d/%d', $checkoutData['order1']->getId(), $customers['customer_Oliver']->getId());
         $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
@@ -152,7 +152,7 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/countries.yml');
         $customers = $this->loadFixturesFromFile('resources/customers.yml');
-        $orders = $this->loadFixturesFromFile('resources/checkout.yml');
+        $checkoutData = $this->loadFixturesFromFile('resources/checkout.yml');
 
         $data =
 <<<EOT
@@ -177,10 +177,15 @@ EOT;
         }
 EOT;
 
-        $url = sprintf('/api/checkouts/addressing/%d/%d', $orders['order1']->getId(), $customers['customer_Oliver']->getId());
+        $url = sprintf('/api/checkouts/addressing/%d/%d', $checkoutData['order1']->getId(), $customers['customer_Oliver']->getId());
         $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
+
+        $this->client->request('GET', sprintf('/api/checkouts/%d', $checkoutData['order1']->getId()), [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'checkout/addressed_order_response');
     }
 }

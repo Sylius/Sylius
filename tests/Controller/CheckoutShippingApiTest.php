@@ -122,7 +122,11 @@ EOT;
         $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
 
         $response = $this->client->getResponse();
-
         $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
+
+        $this->client->request('GET', sprintf('/api/checkouts/%d', $checkoutData['order1']->getId()), [], [], static::$authorizedHeaderWithAccept);
+
+        $response = $this->client->getResponse();
+        $this->assertResponse($response, 'checkout/shipping_selected_order_response');
     }
 }

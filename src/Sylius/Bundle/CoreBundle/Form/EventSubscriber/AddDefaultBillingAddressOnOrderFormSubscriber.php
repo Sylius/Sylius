@@ -52,8 +52,7 @@ class AddDefaultBillingAddressOnOrderFormSubscriber implements EventSubscriberIn
     private function shouldBillingAndShippingAddressBeTheSame(array $orderData)
     {
         return
-            (!isset($orderData['differentBillingAddress']) ||
-            false === $orderData['differentBillingAddress']) &&
+            (!isset($orderData['differentBillingAddress']) || false === $orderData['differentBillingAddress']) &&
             isset($orderData['shippingAddress'])
         ;
     }

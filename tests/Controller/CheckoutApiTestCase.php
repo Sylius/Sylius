@@ -27,6 +27,14 @@ class CheckoutApiTestCase extends JsonApiTestCase
     ];
 
     /**
+     * @var array
+     */
+    protected static $authorizedHeaderWithAccept = [
+        'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
+        'ACCEPT' => 'application/json',
+    ];
+
+    /**
      * @param int $orderId
      */
     protected function addressOrder($orderId)

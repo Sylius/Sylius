@@ -3,6 +3,7 @@ Sylius\Component\Core\Model\Order:
         channel: @channel
         currencyCode: "EUR"
         addItem: [@orderItem1]
+        localeCode: "en_US"
 
 Sylius\Component\Core\Model\OrderItem:
     orderItem1:
