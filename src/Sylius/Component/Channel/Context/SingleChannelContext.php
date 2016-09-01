@@ -11,6 +11,7 @@
 
 namespace Sylius\Component\Channel\Context;
 
+use Doctrine\DBAL\Exception\TableNotFoundException;
 use Sylius\Component\Channel\Repository\ChannelRepositoryInterface;
 
 /**
@@ -36,7 +37,11 @@ final class SingleChannelContext implements ChannelContextInterface
      */
     public function getChannel()
     {
-        $channels = $this->channelRepository->findAll();
+        try {
+            $channels = $this->channelRepository->findAll();
+        } catch (TableNotFoundException $dbalException) {
+            throw new ChannelNotFoundException();
+        }
 
         if (1 !== count($channels)) {
             throw new ChannelNotFoundException();
