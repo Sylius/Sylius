@@ -29,6 +29,7 @@ Feature: Remember where users actually have left checkout
         Given I have product "PHP T-Shirt" in the cart
         And I specified the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I have selected "Free" shipping method
+        And I complete the shipping step
         And I have left the checkout process
         When I want to get back to the remaining step
         And I select "offline" payment method

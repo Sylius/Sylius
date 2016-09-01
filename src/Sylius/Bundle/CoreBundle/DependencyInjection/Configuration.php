@@ -41,6 +41,7 @@ class Configuration implements ConfigurationInterface
 
         $this->addResourcesSection($rootNode);
         $this->addSitemapSection($rootNode);
+        $this->addCheckoutSection($rootNode);
 
         return $treeBuilder;
     }
@@ -101,6 +102,43 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('sitemap')
                     ->children()
                         ->scalarNode('template')->defaultValue('@SyliusCore/Sitemap/show.xml.twig')->end()
+                    ->end()
+                ->end()
+            ->end()
+        ;
+    }
+
+    /**
+     * @param ArrayNodeDefinition $node
+     */
+    private function addCheckoutSection(ArrayNodeDefinition $node)
+    {
+        $node
+            ->children()
+                ->arrayNode('checkout_resolver')
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->booleanNode('enabled')
+                            ->defaultTrue()
+                        ->end()
+                        ->scalarNode('pattern')
+                            ->defaultValue('/checkout/.*')
+                            ->validate()
+                            ->ifTrue(function ($pattern) { return !is_string($pattern); })
+                                ->thenInvalid('Invalid pattern "%s"')
+                            ->end()
+                        ->end()
+                        ->arrayNode('route_map')
+                            ->useAttributeAsKey('name')
+                            ->prototype('array')
+                                ->children()
+                                    ->scalarNode('route')
+                                        ->cannotBeEmpty()
+                                        ->isRequired()
+                                    ->end()
+                                ->end()
+                            ->end()
+                        ->end()
                     ->end()
                 ->end()
             ->end()
