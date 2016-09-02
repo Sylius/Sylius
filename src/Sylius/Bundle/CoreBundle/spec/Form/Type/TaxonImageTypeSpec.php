@@ -13,6 +13,8 @@ namespace spec\Sylius\Bundle\CoreBundle\Form\Type;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\CoreBundle\Form\Type\ImageType;
+use Sylius\Bundle\CoreBundle\Form\Type\TaxonImageType;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\TaxonomyBundle\Form\EventListener\BuildTaxonFormSubscriber;
 use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonType;
@@ -21,20 +23,20 @@ use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormTypeInterface;
 
 /**
- * @mixin TaxonType
+ * @mixin TaxonImageType
  *
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
-final class TaxonTypeSpec extends ObjectBehavior
+final class TaxonImageTypeSpec extends ObjectBehavior
 {
     function let()
     {
-        $this->beConstructedWith('Taxon', []);
+        $this->beConstructedWith('TaxonImage', []);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(TaxonType::class);
+        $this->shouldHaveType(TaxonImageType::class);
     }
 
     function it_should_be_a_form_type()
@@ -42,39 +44,30 @@ final class TaxonTypeSpec extends ObjectBehavior
         $this->shouldImplement(FormTypeInterface::class);
     }
 
-    function it_should_extend_Sylius_taxon_base_form_type()
+    function it_should_extend_Sylius_image_form_type()
     {
-        $this->shouldHaveType(TaxonType::class);
+        $this->shouldHaveType(ImageType::class);
     }
 
     function it_builds_form_with_proper_fields(FormBuilderInterface $builder, FormFactoryInterface $factory)
     {
         $builder->getFormFactory()->willReturn($factory);
 
-        $builder
-            ->addEventSubscriber(Argument::type(BuildTaxonFormSubscriber::class))
+        $builder->add('file', 'file', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
-        $builder
-            ->addEventSubscriber(Argument::type(AddCodeFormSubscriber::class))
-            ->shouldBeCalled()
-            ->willReturn($builder)
-        ;
-
-        $builder
-            ->add('translations', 'sylius_translations', Argument::any())
-            ->shouldBeCalled()
-            ->willReturn($builder)
-        ;
-
-        $builder
-            ->add('images', 'collection', Argument::any())
+        $builder->add('code', 'text', Argument::any())
             ->shouldBeCalled()
             ->willReturn($builder)
         ;
 
         $this->buildForm($builder, []);
+    }
+
+    function it_has_name()
+    {
+        $this->getName()->shouldReturn('sylius_taxon_image');
     }
 }

@@ -13,14 +13,21 @@ namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
+use Sylius\Bundle\CoreBundle\EventListener\ImageUploadListener;
 use Sylius\Component\Core\Model\ImageInterface;
 use Sylius\Component\Core\Model\ProductInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use Sylius\Component\Core\Model\Taxon;
+use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Core\Uploader\ImageUploaderInterface;
 use Sylius\Component\Variation\Resolver\VariantResolverInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
+/**
+ * @mixin ImageUploadListener
+ *
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
+ */
 final class ImageUploadListenerSpec extends ObjectBehavior
 {
     function let(ImageUploaderInterface $uploader, VariantResolverInterface $variantResolver)
@@ -79,17 +86,17 @@ final class ImageUploadListenerSpec extends ObjectBehavior
         $this->uploadProductImage($event);
     }
 
-    function it_uses_image_uploader_to_upload_taxon_image(
+    function it_uses_image_uploader_to_upload_taxon_images(
         GenericEvent $event,
-        Taxon $taxon,
-        ImageUploaderInterface $uploader,
-        ImageInterface $image
+        TaxonInterface $taxon,
+        ImageInterface $image,
+        ImageUploaderInterface $uploader
     ) {
         $event->getSubject()->willReturn($taxon);
-        $taxon->hasImage()->willReturn(true);
-        $taxon->getImage()->willReturn($image);
-        $uploader->upload($taxon->getImage())->shouldBeCalled();
+        $taxon->getImages()->willReturn([$image]);
+        $image->hasFile()->willReturn(true);
         $image->getPath()->willReturn('some_path');
+        $uploader->upload($image)->shouldBeCalled();
 
         $this->uploadTaxonImage($event);
     }
