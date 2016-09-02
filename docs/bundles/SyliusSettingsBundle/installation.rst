@@ -33,6 +33,7 @@ This bundle also uses `DoctrineCacheBundle`. Don't worry, everything was automat
     public function registerBundles()
     {
         $bundles = array(
+            new winzou\Bundle\StateMachineBundle\winzouStateMachineBundle(),
             new FOS\RestBundle\FOSRestBundle(),
             new JMS\SerializerBundle\JMSSerializerBundle($this),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
