@@ -9,10 +9,13 @@ sylius:
             remember_me: Eingeloggt bleiben
         option:
             name: Name
+        notes: Weitere Hinweise
     ui:
         abandoned: Abgebrochen
         about: Über
         access_token: Zugangs-Schlüssel
+        access_your_store_account_or_create_a_new_one: Bitte loggen Sie sich mit Ihrem Zugang ein oder erstellen Sie einen neuen
+        account_credentials: Zugangsdaten
         account_panel_outline: Dies ist dein persönlicher Bereich. Hier kannst du alle deine Bestellungen verfolgen, deine persönlichen Daten bearbeiten, sowie neue Adressen hinzufügen
         action: Aktion
         actions: Aktionen
@@ -39,16 +42,19 @@ sylius:
         adding_new_locale: Neue Gebietsschemata anlegen
         additional_information: Zusätzliche Informationen
         address: Anschrift
+        addressing: Adresse
         addressing_step: Lieferadresse
         adjustments: Änderungen
         administration: Administration
         administration_dashboard: Administration Dashboard
         administration_panel_login: Administrations-Bereich Anmeldung
+        admin_users: Administratoren
         all: Alle
         all_your_addresses: Alle Adressen
         amount: Anzahl
         an_error_occurred: Es ist ein Fehler aufgetreten
         api: API
+        apply_coupon: Gutscheincode einlösen
         are_your_sure_you_want_to_perform_this_action: Möchten Sie diese Aktion sicher durchführen?
         association: Verbindung
         association_types: Verbindungstypen
@@ -57,10 +63,16 @@ sylius:
         attributes: Attribute
         author: Autor
         availability: Verfügbarkeit
+        available_for_channels: Verfügbar in Kanälen
         available_on: Verfügbar ab
+        available_on_hand: Sofort verfügbar
         available_until: Verfügbar bis
+        average_order_value: Durchschnittliche Bestellsumme
+        awaiting_payment: Erwarte Zahlungseingang
         back: Zurück
+        back_to_store: Zurück zum Shop
         backorder: Lieferrückstand
+        backordered: Wird nachgeliefert
         balance_due: Zahlung fällig
         bill_to: Rechnung an
         billing_address: Rechnungsadresse
@@ -71,13 +83,21 @@ sylius:
         calculator: Rechner
         cancel: Abbrechen
         cancelled: Abgebrochen
+        cart: Warenkorb
         cart_locked: Warenkorb gesperrt
         cart_summary: Warenkorb-Übersicht
         categorization: Kategorisierung
         category: Kategorie
+        category_requirements: Kategorievoraussetzungen
+        change_address: Adresse ändern
+        change_password: Passwort ändern
+        change_payment_method: Zahlart ändern
+        change_shipping_method: Versandart ändern
         change_your_password: Passwort ändern
         channel: Promotionskanäle
         channels: Ausgabekanäle
+        charges_and_taxes: Steuern und Gebühren
+        checking_out_as: Bezahlen als
         checkout: Zur Kasse
         choose_file: Datei wählen
         city: Stadt
@@ -87,12 +107,16 @@ sylius:
         color: Farbe
         comment: Anmerkung
         company: Firma
+        complete: Fertig
         completed: Abgeschlossen
+        configurable_product: Konfigurierbares Produkt
         configuration: Einstellung
+        configure_channels_available_in_your_store: Verwalten Sie die Kanäle Ihres Shops
         confirm_your_action: Aktion bestätigen
         confirmation: Bestätigung
         confirmation_title: Bestätigung
         confirmed: Bestätigt
+        contact_us: Kontaktieren Sie uns
         contain_variants: Enthält Varianten
         contains: Enthält
         content: Inhalt
@@ -104,6 +128,8 @@ sylius:
         coupons: Gutscheine
         create: Erstellen
         create_a_new_address: Neue Adresse hinzufügen
+        create_a_new_customer_account: Erstellen Sie ein Kundenkonto
+        create_an_account: Accounterstellung
         create_association_type: Verbindungstyp anlegen
         create_country: Land erstellen
         create_currency: Währung erstellen
@@ -158,11 +184,15 @@ sylius:
         current_promotions: Aktuelle Aktionen
         current_stock: Auf Lager
         customer: Kunde
+        customer_can_login_to_the_store: Kunde darf sich im Shop anmelden
+        customer_care: Kundendienst
         customer_details: Kundendetails
         customer_id: Kunden-Nr
+        customer_login: Kundenlogin
         customer_not_notified: Kunde nicht benachrichtigt
         customer_notified: Kunde benachrichtigt
         customer_orders: Kundenbestellungen
+        customer_since: Kunde seit
         customers: Kunden
         customers_list_of_all_customers_in_store: 'Kunden<small>Liste aller Kunden</small>'
         customize_default_metadata: Standard-Metadaten anpassen
@@ -179,19 +209,39 @@ sylius:
         delete: Löschen
         delete_image: Bild löschen
         deleted: Gelöscht
+        delivery_and_shipping: 'Lieferung & Versand'
         description: Beschreibung
         details: Details
         disable: Deaktivieren
         disabled: Deaktiviert
+        discount: Nachlass
+        discounted_unit_price: Reduzierter Stückpreis
         edit: Bearbeiten
         edit_association_type: Verbindungstyp bearbeiten
+        edit_channel: Kanal bearbeiten
+        edit_country: Land bearbeiten
+        edit_coupon: Gutscheincode bearbeiten
+        edit_currency: Währung bearbeiten
+        edit_customer: Kunde bearbeiten
         edit_group: Gruppe bearbeiten
         edit_locale: Gebietsschema bearbeiten
         edit_my_address: Adresse bearbeiten
+        edit_payment_method: Zahlart bearbeiten
+        edit_product: Produkt bearbeiten
+        edit_product_attribute: Produkteingenschaft bearbeiten
+        edit_product_option: Produktoption bearbeiten
+        edit_product_variant: Produktvariante bearbeiten
+        edit_promotion: Aktion bearbeiten
+        edit_promotion_coupon: Aktionscode bearbeiten
         edit_report: Bericht editieren
+        edit_shipping_method: Versandart bearbeiten
+        edit_static_content: Statische Inhalte bearbeiten
         edit_tax_category: Steuerkategorien bearbeiten
         edit_tax_rate: Steuersatz bearbeiten
+        edit_taxon: Steuer bearbeiten
+        edit_your_items_apply_coupon_or_proceed_to_the_checkout: Bearbeiten Sie Ihre Artikel, geben Sie Ihren Gutscheincode ein und senden Sie Ihre Bestellung ab
         edit_your_personal_information: Persönliche Informationen bearbeiten
+        edit_zone: Zone bearbeiten
         editing_attribute: Attribute editieren
         editing_channel: Channel editieren
         editing_country: Land editieren
@@ -235,14 +285,21 @@ sylius:
         ends_at: Endet am
         ends_with: Endet mit
         enjoy_all_the_features_that_are_available_on_your_personal_space_to_view_track_and_manage_all_your_data: Dies ist dein persönlicher Bereich. Hier kannst du alle deine Bestellungen verfolgen, deine persönlichen Daten bearbeiten, sowie neue Adressen hinzufügen
+        enter_your_code: Gutscheincode eingeben
         equal: Gleich
         error: Fehler
         exchange_rate: Wechselkurs
         exclusive: Exklusiv
         existing_customer: Existierender Benutzer
+        expiration_and_usage_limits: Ablauf und maximale Anzahl
         expires_at: Verfällt am
+        extra_information: Zusätzliche Informationen
+        extra_notes: Weitere Hinweise
         failed: Fehlgeschlagen
+        faqs: FAQs
+        female: Weiblich
         filter: Filtern
+        filters: Filter
         first_name: Vorname
         forgot_password: Passwort vergessen
         fulfill: Zu erfüllen
@@ -253,6 +310,7 @@ sylius:
         generate_coupons: Generieren
         generate_variants: Generiere Varianten
         generating_coupons: Generiere Gutscheine
+        go: Los
         go_to_dashboard: Zum Dashboard
         grand_total: Gesamtbetrag
         groups: Gruppen
@@ -292,6 +350,7 @@ sylius:
         last_week_revenue: Einnahmen der letzten Woche
         lastname: Nachname
         latest_orders: Letzte Bestellungen
+        latest_products: Neueste Produkte
         links: Links
         list_coupons: Gutscheine
         locales: Gebietsschemata
@@ -306,6 +365,7 @@ sylius:
         manage: Verwaltung
         manage_adjustments: Verwalten von Anpassungen
         manage_attributes: Attribute verwalten
+        manage_categorization_of_your_products: Kategorieverwaltung für Ihre Produkte
         manage_channels: Kanäle verwalten
         manage_countries: Länder verwalten
         manage_customers: Kunden verwalten
@@ -324,6 +384,8 @@ sylius:
         manage_tax_rates: Verwalten
         manage_taxation_of_your_products: Besteuerung der Produkte verwalten
         manage_users: Benutzer verwalten
+        manage_variants: Varianten bearbeiten
+        manage_your_product_catalog: Verwalten Sie Ihre Produkte
         manage_zones: Gebiete verwalten
         marketing: Marketing
         members: Mitglieder
@@ -342,8 +404,10 @@ sylius:
         new_comment_posted_on_order: Neuer Kommentar zu einer Bestellung
         new_country: Neues Land
         new_currency: Neue Währung
+        new_customers: Neueste Kunden
         new_locale: Neue Lokalisierung
         new_order: Neue Bestellung
+        new_orders: Aktuelle Bestellungen
         new_password: Neues Passwort
         new_payment: Zahlungsmethode erstellen
         new_payment_method: Zahlart erstellen
@@ -428,6 +492,7 @@ sylius:
         price: Preis
         pricing: Preisgestaltung
         priority: Priorität
+        process_your_orders: Bearbeiten Sie Ihre Bestellungen
         processing: Wird verarbeitet
         product: Verkäuflich
         product_association_index: Verbindung
@@ -446,10 +511,12 @@ sylius:
         profile: Profil
         promotion_coupons: Gutscheine
         promotion_details: Aktion anzeigen
+        promotion_information: Aktionsinformationen
         promotion_total: Reklame gesamt
         promotions: Aktionen
         province: Bundesland
         provinces: Bundesländer
+        purchased_from: Gekauft von
         qty: Anzahl
         qty_max: Maximal Anzahl
         qty_min: Mindestanzahl
@@ -463,13 +530,17 @@ sylius:
         refunded: Rückerstattet
         register: Registrieren
         register_button: Registrieren
+        register_in_the_store: Im Shop registrieren
+        registered_customers: Registrierte Kunden
         registration_create_an_account_in_store: 'Anmeldung <small>Konto für Shop erstellen</small>'
         registration_date: Anmeldedatum
         release_inventory: Warenbestand freigeben
         remember_me: Eingeloggt bleiben
         remove_attribute: Attribute entfernen
+        repeat_new_password: Neues Passwort wiederholen
         report_details: Berichtdetails
         reports: Berichte
+        reserved: Reserviert
         reset: Zurücksetzen
         reset_button: Zurücksetzen
         reset_password: Passwort zurücksetzen
@@ -477,6 +548,7 @@ sylius:
         retail_price: Listenpreis
         return: Zurückschicken
         returned: Zurückgesandt
+        returns_policy: Rückgabebedingungen
         revert: Wiederherstellen
         review_details: Bewertungsdetails
         reviews: Rezensionen
@@ -490,16 +562,22 @@ sylius:
         scope: Umfang
         search: Suche
         security_settings: Sicherheitseinstellungen
+        select_taxon: Steuer wählen
+        set_a_new_password_for_your_account: Ein neues Passwort wählen
         set_as_default_billing_address: Als Standardrechnungsadresse setzen
         set_as_default_shipping_address: Als Standard-Lieferadresse setzen
         ship: Lieferung
+        ship_to: Versand an
+        shipment: Versand
         shipment_confirmation_name: Versandbestätigung
         shipment_details: Versandart Details
         shipment_mode: Versandart
         shipment_state: Versandstatus
         shipments: Lieferungen
         shipped: Versandt
+        shipping: Versandart
         shipping_address: Lieferadresse
+        shipping_and_payment_methods: Versand und Zahlarten
         shipping_categories: Versandgruppen
         shipping_category: Versandkategorie
         shipping_charges: Versandkosten
@@ -509,15 +587,18 @@ sylius:
         shipping_state: Versandstatus
         shipping_total: Versandkosten gesamt
         shop_by: Shop von
+        shop_by_brand: Nach Marken einkaufen
         show: Anzeigen
         show_all: Alle anzeigen
         show_deleted: Gelöschte anzeigen
         show_in_store: Im Shop anzeigen
         show_metadata: Metadaten anzeigen
         sign_in: Anmelden
+        sign_in_here: Hier anmelden
         sign_in_to_the_store_or_create_new_account: 'Anmelden <small> oder neuen Benutzer anlegen</small>'
         sign_out: Abmelden
         simple_blocks: Einfache Elemente
+        simple_product: Einfaches Produkt
         sku: Bestandseinheit
         slideshow: Slideshow
         slideshow_blocks: Slideshow Blöcke
@@ -525,14 +606,18 @@ sylius:
         starts_at: Beginnt am
         starts_with: Beginnt mit
         state: Versandstatus
+        static_contents: Statische Inhalte
         status: Status
         street: Straße
         string_blocks: Zeichenketten–Elemente
         subject: Betreff
+        subtotal: Zwischensumme
         success: Erfolgreich
         summary: Zusammenfassung
         support: Support
         sylius_logo: Sylius
+        tax: Steuer
+        tax_categories: Steuerkategorien
         tax_category: Steuerkategorie
         tax_rate_details: Steuersätze
         tax_rates: Steuersätze
@@ -540,7 +625,10 @@ sylius:
         taxation_categories: Steuergruppen
         taxation_settings: Gruppeneinstellungen
         taxes: Steuern
+        taxonomy: Systematik
         taxons: Gruppen
+        terms_and_conditions: 'Allgemeine Geschäfts- und Nutzungsbedingungen'
+        thank_you: Vielen Dank!
         thank_you_for_your_order: Danke für Ihre Bestellung
         theme: Template
         there_are_no_attributes_configured: Es wurden noch keine Attribute konfiguriert
@@ -590,15 +678,19 @@ sylius:
         total: Gesamt
         total_orders: Gesamtbestellungen
         total_qty: Stück Ges.
+        total_records: Gesamt
         total_registrations: Gesamteregistrierungen
+        tracking_code: Sendungsverfolgung
         tracking_number: Sendungsnummer
         translations: Übersetzungen
         type: Typ
         unavailable: Nicht verfügbar
         unit_price: Stückpreis
         unknown: Unbekannt
+        unlimited: Unbegrenzt
         unlock: Entsperren
         update: Aktualisieren
+        update_cart: Warenkorb aktualisieren
         update_product_association_type: Produktverbindungstyp aktualisieren
         updating_tax_rate: Steuersätze editieren
         usage_limit: Nutzungslimit
@@ -611,7 +703,10 @@ sylius:
         variant: Variante
         variant_selection_method: Variantenauswahlmethode
         variants: Varianten
+        verified: Überprüft
+        verify: Überprüfen
         view: Anzeigen
+        view_and_edit_cart: Warenkorb zeigen und bearbeiten
         view_more: Mehr anzeigen
         view_product_details: '%product% Details ansehen'
         void: Ungültig
@@ -624,10 +719,17 @@ sylius:
         you_are_customer_since: Kunde seit
         you_have_no_addresses_defined: Sie haben keine Adressen angelegt
         you_have_no_new_orders: Sie haben keine neuen Bestellungen
+        you_may_also_like: Was Sie vielleicht auch interessieren könnte
         your_cart_is_empty: Ihr Warenkorb ist leer
         your_last_5_orders: Ihre letzten 5 Bestellungen
         your_order_has_been_shipped: Ihre Bestellung wurde versandt
         your_products: Ihre Produkte
+        your_profile: Ihr Profil
+        your_shopping_cart: Ihr Warenkorb
+        your_store: Ihr Shop
         zone: Versandgebiet
+        zone_consisting_of_countries: Zur Zone gehörende Länder
+        zone_consisting_of_other_zones: Zur Zone gehörende andere Zonen
+        zone_consisting_of_provinces: Zur Zone gehörende Ortschaften
         zone_details: Gebietedetails
         zones: Versandgebiete

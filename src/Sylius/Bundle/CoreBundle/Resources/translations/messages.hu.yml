@@ -150,7 +150,6 @@ sylius:
             name: Rendelés megjegyzés
         shipment_confirmation:
             name: Szállítási mód megerősítése
-            content: 'Megrendelésedet elküldtük.<br/> A vásárlás sikeresen befejeződött.'
         user_confirmation:
             name: Felhasználói megerősítés
             subject: Üdvözöljük áruházunkban
