@@ -51,12 +51,10 @@ EOT
         $email = $input->getArgument('email');
         $password = $input->getArgument('password');
 
-        $securityRoles = ['ROLE_ADMINISTRATION_ACCESS'];
-
         $user = $this->createUser(
             $email,
             $password,
-            $securityRoles
+            ['ROLE_ADMINISTRATION_ACCESS']
         );
 
         $this->getEntityManager()->persist($user);
