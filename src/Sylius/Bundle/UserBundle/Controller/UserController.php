@@ -214,7 +214,7 @@ class UserController extends ResourceController
             }
 
             $this->addFlash('success', 'sylius.user.reset_password.requested');
-            $redirectRouteName = $request->attributes->get('_sylius[redirect]', 'sylius_user_security_login', true);
+            $redirectRouteName = $request->attributes->get('_sylius[redirect]', 'sylius_shop_login', true);
 
             return new RedirectResponse($this->container->get('router')->generate($redirectRouteName));
         }
@@ -318,7 +318,7 @@ class UserController extends ResourceController
             return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
         }
 
-        $redirectRouteName = $request->attributes->get('_sylius[redirect]', 'sylius_user_security_login', true);
+        $redirectRouteName = $request->attributes->get('_sylius[redirect]', 'sylius_shop_login', true);
 
         return new RedirectResponse($this->container->get('router')->generate($redirectRouteName));
     }
