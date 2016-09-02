@@ -1,5 +1,6 @@
 {% import 'SyliusUiBundle:Macro:pagination.html.twig' as pagination %}
 {% import 'SyliusUiBundle:Macro:messages.html.twig' as messages %}
+{% import 'SyliusUiBundle:Macro:sorting.html.twig' as sorting %}
 
 {% set definition = grid.definition %}
 {% set data = grid.data %}
@@ -11,9 +12,17 @@
         <thead>
         <tr>
             {% for field in definition.fields %}
-                <th{% if grid.isSortedBy(field.name) %} class="sorted {{ 'asc' == grid.getSortingOrder(field.name) ? 'ascending' : 'descending' }}"{% endif %}>
-                    {{ field.label|trans }}
-                </th>
+                {% if grid.isSortableBy(field.name) %}
+                    {% set sortingDirection = grid.getSortingOrder(field.name) %}
+
+                    {% if grid.isSortedBy(field.name) %}
+                        {{ sorting.sortedHeader(definition, field, app.request.attributes, sortingDirection) }}
+                    {% else %}
+                        {{ sorting.sortableHeader(definition, field, app.request.attributes, sortingDirection) }}
+                    {% endif %}
+                {% else %}
+                    <th>{{ field.label|trans }}</th>
+                {% endif %}
             {% endfor %}
             {% if definition.actionGroups.item is defined and definition.getActions('item')|length > 0 %}
                 <th></th>

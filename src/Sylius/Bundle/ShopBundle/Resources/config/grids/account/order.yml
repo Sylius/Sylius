@@ -12,7 +12,8 @@ sylius_grid:
                         method: createByCustomerQueryBuilder
                         arguments: [expr:service('sylius.context.customer').getCustomer()]
             sorting:
-                completedAt: desc
+                completedAt:
+                    path: completedAt
             fields:
                 number:
                     type: twig

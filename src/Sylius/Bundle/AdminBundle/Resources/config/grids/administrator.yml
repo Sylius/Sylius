@@ -6,7 +6,8 @@ sylius_grid:
                 options:
                     class: %sylius.model.admin_user.class%
             sorting:
-                createdAt: desc
+                created_at:
+                    path: createdAt
             fields:
                 username:
                     type: string
