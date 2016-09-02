@@ -18,7 +18,7 @@
 
     <mapped-superclass name="Sylius\Component\Core\Model\Taxon" table="sylius_taxon">
 
-        <one-to-many field="images" target-entity="Sylius\Component\Core\Model\TaxonImageInterface" mapped-by="taxon">
+        <one-to-many field="images" target-entity="Sylius\Component\Core\Model\TaxonImageInterface" mapped-by="taxon" orphan-removal="true">
             <cascade>
                 <cascade-all/>
             </cascade>
