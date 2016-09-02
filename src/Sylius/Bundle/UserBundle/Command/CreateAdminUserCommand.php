@@ -112,9 +112,7 @@ EOT
     {
         $canonicalizer = $this->getContainer()->get('sylius.user.canonicalizer');
 
-        /*
-         * @var AdminUserInterface
-         */
+        /** @var AdminUserInterface $user */
         $user = $this->getUserFactory()->createNew();
         $user->setUsername($email);
         $user->setEmail($email);
@@ -122,7 +120,7 @@ EOT
         $user->setEmailCanonical($canonicalizer->canonicalize($user->getEmail()));
         $user->setPlainPassword($password);
         $user->setRoles($securityRoles);
-        $user->setEnabled(true);
+        $user->enable();
         $this->getContainer()->get('sylius.user.password_updater')->updatePassword($user);
 
         return $user;
