@@ -50,6 +50,14 @@ class Taxon extends BaseTaxon implements TaxonInterface
     /**
      * {@inheritdoc}
      */
+    public function hasImage(TaxonImageInterface $image)
+    {
+        return $this->images->contains($image);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getImages()
     {
         return $this->images;
@@ -60,11 +68,12 @@ class Taxon extends BaseTaxon implements TaxonInterface
      */
     public function getImageByCode($code)
     {
-        foreach ($this->images as $image) {
-            if($image->getCode() === $code) {
+        foreach ($this->getImages() as $image) {
+            if ($code === $image->getCode()) {
                 return $image;
             }
         }
+
         return null;
     }
 
@@ -77,11 +86,14 @@ class Taxon extends BaseTaxon implements TaxonInterface
         $this->images->add($image);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function removeImage(TaxonImageInterface $image)
     {
-        if($this->images->contains($image)) {
+        if ($this->hasImage($image)) {
             $image->setTaxon(null);
-            $this->images->remove($image);
+            $this->images->removeElement($image);
         }
     }
 

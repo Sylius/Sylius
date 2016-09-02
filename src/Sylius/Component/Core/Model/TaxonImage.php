@@ -14,14 +14,30 @@ namespace Sylius\Component\Core\Model;
 class TaxonImage extends Image implements TaxonImageInterface
 {
     /**
+     * @var string
+     */
+    protected $code;
+
+    /**
      * @var ProductVariantInterface
      */
     protected $taxon;
 
     /**
-     * @var string
+     * {@inheritdoc}
      */
-    protected $code;
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+    }
 
     /**
      * {@inheritdoc}
@@ -38,22 +54,4 @@ class TaxonImage extends Image implements TaxonImageInterface
     {
         $this->taxon = $taxon;
     }
-
-    /**
-     * @return string
-     */
-    public function getCode()
-    {
-        return $this->code;
-    }
-
-    /**
-     * @param string $code
-     */
-    public function setCode($code)
-    {
-        $this->code = $code;
-    }
-
-
 }

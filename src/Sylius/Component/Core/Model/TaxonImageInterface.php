@@ -11,7 +11,9 @@
 
 namespace Sylius\Component\Core\Model;
 
-interface TaxonImageInterface extends ImageInterface
+use Sylius\Component\Resource\Model\CodeAwareInterface;
+
+interface TaxonImageInterface extends ImageInterface, CodeAwareInterface
 {
     /**
      * @return TaxonInterface

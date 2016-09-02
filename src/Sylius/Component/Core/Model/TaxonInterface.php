@@ -33,7 +33,14 @@ interface TaxonInterface extends VariableTaxonInterface
      * @return bool
      */
     public function hasImages();
-    
+
+    /**
+     * @param TaxonImageInterface $image
+     *
+     * @return bool
+     */
+    public function hasImage(TaxonImageInterface $image);
+
     /**
      * @return Collection|TaxonImageInterface[]
      */
