@@ -11,8 +11,9 @@
 
 namespace Sylius\Component\Core\OrderProcessing;
 
-use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Updater\OrderUpdaterInterface;
+use Sylius\Component\Order\Model\OrderInterface;
+use Sylius\Component\Order\Processor\OrderProcessorInterface;
 
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>

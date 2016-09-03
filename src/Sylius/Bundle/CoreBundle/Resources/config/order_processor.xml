@@ -23,7 +23,7 @@
             <argument type="service" id="sm.factory" />
         </service>
 
-        <service id="sylius.order_processing.order_processor" class="Sylius\Component\Core\OrderProcessing\CompositeOrderProcessor">
+        <service id="sylius.order_processing.order_processor" class="Sylius\Component\Order\Processor\CompositeOrderProcessor">
             <call method="addProcessor">
                 <argument type="service">
                     <service class="Sylius\Component\Core\OrderProcessing\OrderExchangeRateProcessor">
