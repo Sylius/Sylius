@@ -24,4 +24,10 @@ interface CartModifierInterface
      * @param CartItemInterface $cartItem
      */
     public function addToCart(CartInterface $cart, CartItemInterface $cartItem);
+
+    /**
+     * @param CartInterface $cart
+     * @param CartItemInterface $item
+     */
+    public function removeFromCart(CartInterface $cart, CartItemInterface $item);
 }

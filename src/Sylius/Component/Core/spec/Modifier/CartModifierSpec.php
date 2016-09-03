@@ -94,4 +94,15 @@ final class CartModifierSpec extends ObjectBehavior
 
         $this->addToCart($cart, $newItem);
     }
+
+    function it_removes_cart_item_from_cart(
+        OrderProcessorInterface $orderProcessor,
+        OrderInterface $cart,
+        CartItemInterface $cartItem
+    ) {
+        $cart->removeItem($cartItem)->shouldBeCalled();
+        $orderProcessor->process($cart)->shouldBeCalled();
+
+        $this->removeFromCart($cart, $cartItem);
+    }
 }

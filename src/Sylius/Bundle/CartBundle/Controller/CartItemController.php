@@ -118,7 +118,8 @@ class CartItemController extends Controller
         }
 
         $cart = $this->getCurrentCart();
-        $cart->removeItem($resource);
+
+        $this->getCartModifier()->removeFromCart($cart, $resource);
 
         $this->repository->remove($resource);
 

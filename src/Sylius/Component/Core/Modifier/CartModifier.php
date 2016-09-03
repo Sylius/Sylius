@@ -45,12 +45,22 @@ final class CartModifier implements CartModifierInterface
 
     /**
      * @param CartInterface $cart
-     * @param CartItemInterface $cartItem
+     * @param CartItemInterface $item
      */
-    public function addToCart(CartInterface $cart, CartItemInterface $cartItem)
+    public function addToCart(CartInterface $cart, CartItemInterface $item)
     {
-        $this->resolveCartItem($cart, $cartItem);
+        $this->resolveCartItem($cart, $item);
 
+        $this->orderProcessor->process($cart);
+    }
+
+    /**
+     * @param CartInterface $cart
+     * @param CartItemInterface $item
+     */
+    public function removeFromCart(CartInterface $cart, CartItemInterface $item)
+    {
+        $cart->removeItem($item);
         $this->orderProcessor->process($cart);
     }
 
