@@ -72,7 +72,6 @@
         <service id="sylius.form.type.cart" class="%sylius.form.type.cart.class%">
             <argument>%sylius.model.cart.class%</argument>
             <argument>%sylius.validation_groups.cart%</argument>
-            <argument type="service" id="sylius.factory.promotion_coupon" />
             <tag name="form.type" alias="sylius_cart" />
         </service>
         <service id="sylius.form.type.image" class="%sylius.form.type.image.class%">

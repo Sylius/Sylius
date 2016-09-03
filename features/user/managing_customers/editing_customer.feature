@@ -35,4 +35,4 @@ Feature: Editing a customer
         And I make them subscribed to the newsletter
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And this customer should subscribe to the newsletter
+        And this customer should be subscribed to the newsletter
