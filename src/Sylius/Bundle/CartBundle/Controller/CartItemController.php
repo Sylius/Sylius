@@ -14,9 +14,8 @@ namespace Sylius\Bundle\CartBundle\Controller;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\View\View;
 use Sylius\Component\Cart\CartActions;
-use Sylius\Component\Cart\Model\CartInterface;
-use Sylius\Component\Cart\Model\CartItemInterface;
 use Sylius\Component\Cart\SyliusCartEvents;
+use Sylius\Component\Core\Modifier\CartModifierInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -61,7 +60,7 @@ class CartItemController extends Controller
             }
 
             $cart = $this->getCurrentCart();
-            $this->resolveCartItem($cart, $newResource);
+            $this->getCartModifier()->addToCart($cart, $newResource);
 
             $this->getEventDispatcher()->dispatch(SyliusCartEvents::CART_CHANGE, new GenericEvent($cart));
 
@@ -141,28 +140,19 @@ class CartItemController extends Controller
     }
 
     /**
-     * @param CartInterface $cart
-     * @param CartItemInterface $item
-     */
-    private function resolveCartItem(CartInterface $cart, CartItemInterface $item)
-    {
-        foreach ($cart->getItems() as $existingItem) {
-            if ($item->equals($existingItem)) {
-                $this->getItemQuantityModifier()->modify($existingItem, $existingItem->getQuantity() + $item->getQuantity());
-
-                return;
-            }
-        }
-
-        $cart->addItem($item);
-    }
-
-    /**
      * @return OrderItemQuantityModifierInterface
      */
     private function getItemQuantityModifier()
     {
         return $this->get('sylius.order_item_quantity_modifier');
+    }
+
+    /**
+     * @return CartModifierInterface
+     */
+    private function getCartModifier()
+    {
+        return $this->get('sylius.cart.cart_modifier');
     }
 
     /**
