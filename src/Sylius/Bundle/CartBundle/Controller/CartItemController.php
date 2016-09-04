@@ -62,8 +62,6 @@ class CartItemController extends Controller
             $cart = $this->getCurrentCart();
             $this->getCartModifier()->addToCart($cart, $newResource);
 
-            $this->getEventDispatcher()->dispatch(SyliusCartEvents::CART_CHANGE, new GenericEvent($cart));
-
             $cartManager = $this->getCartManager();
             $cartManager->persist($cart);
             $cartManager->flush();
@@ -122,8 +120,6 @@ class CartItemController extends Controller
         $this->getCartModifier()->removeFromCart($cart, $resource);
 
         $this->repository->remove($resource);
-
-        $this->getEventDispatcher()->dispatch(SyliusCartEvents::CART_CHANGE, new GenericEvent($cart));
 
         $cartManager = $this->getCartManager();
         $cartManager->persist($cart);
