@@ -63,18 +63,17 @@ class CartItemController extends Controller
             $cart = $this->getCurrentCart();
             $this->resolveCartItem($cart, $newResource);
 
-            $this->eventDispatcher->dispatchPostEvent(ResourceActions::CREATE, $configuration, $newResource);
-
-            if (!$configuration->isHtmlRequest()) {
-                return $this->viewHandler->handle($configuration, View::create($newResource, Response::HTTP_CREATED));
-            }
-
             $this->getEventDispatcher()->dispatch(SyliusCartEvents::CART_CHANGE, new GenericEvent($cart));
 
             $cartManager = $this->getCartManager();
             $cartManager->persist($cart);
             $cartManager->flush();
 
+            $this->eventDispatcher->dispatchPostEvent(ResourceActions::CREATE, $configuration, $newResource);
+
+            if (!$configuration->isHtmlRequest()) {
+                return $this->viewHandler->handle($configuration, View::create($newResource, Response::HTTP_CREATED));
+            }
             $this->flashHelper->addSuccessFlash($configuration, ResourceActions::CREATE, $newResource);
 
             return $this->redirectHandler->redirectToResource($configuration, $newResource);
