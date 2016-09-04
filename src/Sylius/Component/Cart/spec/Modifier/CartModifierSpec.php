@@ -9,16 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Core\Modifier;
+namespace spec\Sylius\Component\Cart\Modifier;
 
 use Prophecy\Argument;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Cart\Model\CartItemInterface;
-use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Modifier\CartModifier;
-use Sylius\Component\Core\Modifier\CartModifierInterface;
-use Sylius\Component\Core\OrderProcessing\OrderProcessorInterface;
+use Sylius\Component\Cart\Modifier\CartModifier;
+use Sylius\Component\Cart\Modifier\CartModifierInterface;
+use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
+use Sylius\Component\Order\Processor\OrderProcessorInterface;
 
 /**
  * @mixin CartModifier
@@ -44,7 +44,7 @@ final class CartModifierSpec extends ObjectBehavior
 
     function it_adds_new_item_to_cart_if_it_is_empty(
         OrderProcessorInterface $orderProcessor,
-        OrderInterface $cart,
+        CartInterface $cart,
         CartItemInterface $cartItem
     ) {
         $cart->getItems()->willReturn([]);
@@ -58,7 +58,7 @@ final class CartModifierSpec extends ObjectBehavior
     function it_adds_new_item_to_cart_if_different_cart_item_is_in_a_cart(
         OrderProcessorInterface $orderProcessor,
         OrderItemQuantityModifierInterface $orderItemQuantityModifier,
-        OrderInterface $cart,
+        CartInterface $cart,
         CartItemInterface $newItem,
         CartItemInterface $existingItem
     ) {
@@ -66,7 +66,7 @@ final class CartModifierSpec extends ObjectBehavior
 
         $newItem->equals($existingItem)->willReturn(false);
 
-        $orderItemQuantityModifier->modify(Argument::type(OrderInterface::class), Argument::any())->shouldNotBeCalled();
+        $orderItemQuantityModifier->modify(Argument::type(CartInterface::class), Argument::any())->shouldNotBeCalled();
 
         $cart->addItem($newItem)->shouldBeCalled();
         $orderProcessor->process($cart)->shouldBeCalled();
@@ -77,7 +77,7 @@ final class CartModifierSpec extends ObjectBehavior
     function it_changes_quntity_of_item_if_same_cart_item_already_exists(
         OrderProcessorInterface $orderProcessor,
         OrderItemQuantityModifierInterface $orderItemQuantityModifier,
-        OrderInterface $cart,
+        CartInterface $cart,
         CartItemInterface $newItem,
         CartItemInterface $existingItem
     ) {
@@ -97,7 +97,7 @@ final class CartModifierSpec extends ObjectBehavior
 
     function it_removes_cart_item_from_cart(
         OrderProcessorInterface $orderProcessor,
-        OrderInterface $cart,
+        CartInterface $cart,
         CartItemInterface $cartItem
     ) {
         $cart->removeItem($cartItem)->shouldBeCalled();

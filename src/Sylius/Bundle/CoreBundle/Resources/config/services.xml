@@ -147,10 +147,6 @@
             <argument type="service" id="sylius.context.channel" />
             <argument type="service" id="sylius.variant_resolver.default" />
         </service>
-        <service id="sylius.cart.cart_modifier" class="Sylius\Component\Core\Modifier\CartModifier">
-            <argument type="service" id="sylius.order_processing.order_processor" />
-            <argument type="service" id="sylius.order_item_quantity_modifier" />
-        </service>
 
         <!-- checkout -->
         <service id="sylius.checkout_scenario" class="%sylius.checkout_scenario.class%">

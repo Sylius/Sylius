@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Core\Modifier;
+namespace Sylius\Component\Cart\Modifier;
 
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Cart\Model\CartItemInterface;
