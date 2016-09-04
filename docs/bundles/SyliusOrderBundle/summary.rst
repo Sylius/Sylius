@@ -48,7 +48,7 @@ Configuration reference
                     interface: Sylius\Component\Order\Model\IdentityInterface
                     factory:   Sylius\Component\Resource\Factory\Factory
             adjustment:
-                classes
+                classes:
                     model:      Sylius\Component\Order\Model\Adjustment
                     interface:  Sylius\Component\Order\Model\AdjustmentInterface
                     controller: Sylius\Bundle\OrderBundle\Controller\AdjustmentController
