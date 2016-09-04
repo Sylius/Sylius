@@ -18,7 +18,7 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
-use Sylius\Component\Core\OrderProcessing\OrderProcessorInterface;
+use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\Core\OrderProcessing\OrderTaxesProcessor;
 use Sylius\Component\Core\Provider\ZoneProviderInterface;
 use Sylius\Component\Core\Taxation\Exception\UnsupportedTaxCalculationStrategyException;

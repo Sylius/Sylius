@@ -18,7 +18,7 @@ use Sylius\Component\Cart\Context\CartContextInterface;
 use Sylius\Component\Cart\Context\CartNotFoundException;
 use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\OrderProcessing\OrderProcessorInterface;
+use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
 use Symfony\Component\EventDispatcher\Event;
 

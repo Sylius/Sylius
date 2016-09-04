@@ -59,5 +59,7 @@
         <service id="sylius.order_number_assigner" class="%sylius.order_number_assigner.class%">
             <argument type="service" id="sylius.sequential_order_number_generator" />
         </service>
+
+        <service id="sylius.order_processing.order_processor" class="Sylius\Component\Order\Processor\CompositeOrderProcessor" />
     </services>
 </container>

@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Core\OrderProcessing;
+namespace Sylius\Component\Order\Processor;
 
-use Sylius\Component\Core\Model\OrderInterface;
+use Sylius\Component\Order\Model\OrderInterface;
 use Zend\Stdlib\PriorityQueue;
 
 /**
