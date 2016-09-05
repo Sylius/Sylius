@@ -20,7 +20,6 @@ sylius_shop_checkout_address:
                 type: sylius_checkout_address
                 options:
                     customer: expr:service('sylius.context.customer').getCustomer()
-            flash: false
             repository:
                 method: find
                 arguments: [expr:service('sylius.context.cart').getCart()]
