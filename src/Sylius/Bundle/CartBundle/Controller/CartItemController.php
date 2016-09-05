@@ -63,18 +63,17 @@ class CartItemController extends Controller
             $cart = $this->getCurrentCart();
             $this->resolveCartItem($cart, $newResource);
 
-            $this->eventDispatcher->dispatchPostEvent(ResourceActions::CREATE, $configuration, $newResource);
-
-            if (!$configuration->isHtmlRequest()) {
-                return $this->viewHandler->handle($configuration, View::create($newResource, Response::HTTP_CREATED));
-            }
-
             $this->getEventDispatcher()->dispatch(SyliusCartEvents::CART_CHANGE, new GenericEvent($cart));
 
             $cartManager = $this->getCartManager();
             $cartManager->persist($cart);
             $cartManager->flush();
 
+            $this->eventDispatcher->dispatchPostEvent(ResourceActions::CREATE, $configuration, $newResource);
+
+            if (!$configuration->isHtmlRequest()) {
+                return $this->viewHandler->handle($configuration, View::create($newResource, Response::HTTP_CREATED));
+            }
             $this->flashHelper->addSuccessFlash($configuration, ResourceActions::CREATE, $newResource);
 
             return $this->redirectHandler->redirectToResource($configuration, $newResource);
@@ -121,18 +120,20 @@ class CartItemController extends Controller
 
         $cart = $this->getCurrentCart();
         $cart->removeItem($resource);
-        $this->repository->remove($resource);
-        $this->eventDispatcher->dispatchPostEvent(ResourceActions::DELETE, $configuration, $resource);
 
-        if (!$configuration->isHtmlRequest()) {
-            return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
-        }
+        $this->repository->remove($resource);
 
         $this->getEventDispatcher()->dispatch(SyliusCartEvents::CART_CHANGE, new GenericEvent($cart));
 
         $cartManager = $this->getCartManager();
         $cartManager->persist($cart);
         $cartManager->flush();
+
+        $this->eventDispatcher->dispatchPostEvent(ResourceActions::DELETE, $configuration, $resource);
+
+        if (!$configuration->isHtmlRequest()) {
+            return $this->viewHandler->handle($configuration, View::create(null, Response::HTTP_NO_CONTENT));
+        }
 
         $this->flashHelper->addSuccessFlash($configuration, ResourceActions::DELETE, $resource);
 
