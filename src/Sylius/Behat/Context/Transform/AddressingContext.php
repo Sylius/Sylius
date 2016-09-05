@@ -69,6 +69,7 @@ final class AddressingContext implements Context
 
     /**
      * @Transform /^do not specify any (shipping|billing) address$/
+     * @Transform /^do not modify address$/
      */
     public function createEmptyAddress()
     {
