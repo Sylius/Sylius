@@ -42,7 +42,7 @@ security:
             context: shop
             pattern: /.*
             form_login:
-                success_handler: sylius.authenticaiton.success_handler
+                success_handler: sylius.authentication.success_handler
                 failure_handler: sylius.authentication.failure_handler
                 provider: sylius_shop_user_provider
                 login_path: sylius_shop_login
