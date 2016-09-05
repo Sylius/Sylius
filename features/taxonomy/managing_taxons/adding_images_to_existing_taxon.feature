@@ -1,0 +1,28 @@
+@managing_taxons
+Feature: Adding images to an existing taxon
+    In order to change images of my categories
+    As an Administrator
+    I want to be able to add new images to a taxon
+
+    Background:
+        Given the store is available in "English (United States)"
+        And the store classifies its products as "T-Shirts"
+        And I am logged in as an administrator
+
+    @todo
+    Scenario: Adding a single image to an existing taxon
+        Given I want to modify the "T-Shirts" taxon
+        When I attach "t-shirts-banner.jpg" image with a code "banner"
+        And I save my changes
+        Then I should be notified that it has been successfully edited
+        And this taxon should have an image with code "banner"
+
+    @todo
+    Scenario: Adding multiple images to an existing taxon
+        Given I want to modify the "T-Shirts" taxon
+        When I attach "t-shirts-banner.jpg" image with a code "banner"
+        And I attach "t-shirts-thumbnail.jpg" image with a code "thumbnail"
+        And I save my changes
+        Then I should be notified that it has been successfully edited
+        And this taxon should have an image with code "banner"
+        And this taxon should have also an image with code "thumbnail"
