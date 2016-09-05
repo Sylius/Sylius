@@ -13,7 +13,7 @@ namespace spec\Sylius\Component\Core\Promotion\Action;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Core\Distributor\IntegerDistributorInterface;
+use Sylius\Component\Core\Distributor\ProportionalIntegerDistributorInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
@@ -34,15 +34,15 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 final class PercentageDiscountActionSpec extends ObjectBehavior
 {
     function let(
-        IntegerDistributorInterface $integerDistributor,
+        ProportionalIntegerDistributorInterface $distributor,
         UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
     ) {
-        $this->beConstructedWith($integerDistributor, $unitsPromotionAdjustmentsApplicator);
+        $this->beConstructedWith($distributor, $unitsPromotionAdjustmentsApplicator);
     }
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Promotion\Action\PercentageDiscountAction');
+        $this->shouldHaveType(PercentageDiscountAction::class);
     }
 
     function it_implements_promotion_action_interface()
@@ -55,20 +55,19 @@ final class PercentageDiscountActionSpec extends ObjectBehavior
         OrderItemInterface $firstItem,
         OrderItemInterface $secondItem,
         PromotionInterface $promotion,
-        IntegerDistributorInterface $integerDistributor,
+        ProportionalIntegerDistributorInterface $distributor,
         UnitsPromotionAdjustmentsApplicatorInterface $unitsPromotionAdjustmentsApplicator
     ) {
         $order->countItems()->willReturn(2);
+        $order->getItems()->willReturn([$firstItem, $secondItem]);
 
-        $order
-            ->getItems()
-            ->willReturn(new \ArrayIterator([$firstItem->getWrappedObject(), $secondItem->getWrappedObject()]))
-        ;
+        $firstItem->getTotal()->willReturn(200);
+        $secondItem->getTotal()->willReturn(800);
 
         $order->getPromotionSubjectTotal()->willReturn(10000);
 
-        $integerDistributor->distribute(-1000, 2)->willReturn([-500, -500]);
-        $unitsPromotionAdjustmentsApplicator->apply($order, $promotion, [-500, -500])->shouldBeCalled();
+        $distributor->distribute([200, 800], -1000)->willReturn([-200, -800]);
+        $unitsPromotionAdjustmentsApplicator->apply($order, $promotion, [-200, -800])->shouldBeCalled();
 
         $this->execute($order, ['percentage' => 0.1], $promotion);
     }
@@ -82,13 +81,13 @@ final class PercentageDiscountActionSpec extends ObjectBehavior
     }
 
     function it_does_nothing_if_adjustment_amount_would_be_0(
-        IntegerDistributorInterface $integerDistributor,
+        ProportionalIntegerDistributorInterface $distributor,
         OrderInterface $order,
         PromotionInterface $promotion
     ) {
         $order->countItems()->willReturn(0);
         $order->getPromotionSubjectTotal()->willReturn(0);
-        $integerDistributor->distribute(Argument::any())->shouldNotBeCalled();
+        $distributor->distribute(Argument::any())->shouldNotBeCalled();
 
         $this->execute($order, ['percentage' => 0.1], $promotion);
     }
@@ -125,13 +124,13 @@ final class PercentageDiscountActionSpec extends ObjectBehavior
         PromotionInterface $promotion
     ) {
         $order->countItems()->willReturn(1);
-        $order->getItems()->willReturn(new \ArrayIterator([$item->getWrappedObject()]));
+        $order->getItems()->willReturn([$item]);
 
-        $item->getUnits()->willReturn(new \ArrayIterator([$unit->getWrappedObject()]));
+        $item->getUnits()->willReturn([$unit]);
 
         $unit
             ->getAdjustments(AdjustmentInterface::ORDER_PROMOTION_ADJUSTMENT)
-            ->willReturn(new \ArrayIterator([$firstAdjustment->getWrappedObject(), $secondAdjustment->getWrappedObject()]))
+            ->willReturn([$firstAdjustment, $secondAdjustment])
         ;
 
         $promotion->getCode()->willReturn('PROMOTION');

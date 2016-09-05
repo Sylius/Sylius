@@ -25,3 +25,11 @@ Feature: Receiving percentage discount promotion on order
         Then my cart total should be "$90.00"
         And my cart shipping total should be "$10.00"
         And my discount should be "-$20.00"
+
+    @ui
+    Scenario: Receiving percentage discount is proportional to items values
+        Given the store has a product "Vintage Watch" priced at "$1000.00"
+        When I add product "PHP T-Shirt" to the cart
+        And I add product "Vintage Watch" to the cart
+        Then my cart total should be "$880.00"
+        And my discount should be "-$220.00"

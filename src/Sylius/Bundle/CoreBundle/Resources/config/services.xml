@@ -375,7 +375,7 @@
             <tag name="sylius.promotion_action" type="unit_fixed_discount" label="Item fixed discount" />
         </service>
         <service id="sylius.promotion_action.percentage_discount" class="%sylius.promotion_action.percentage_discount.class%">
-            <argument type="service" id="sylius.integer_distributor" />
+            <argument type="service" id="sylius.proportional_integer_distributor" />
             <argument type="service" id="sylius.promotion.units_promotion_adjustments_applicator" />
             <tag name="sylius.promotion_action" type="order_percentage_discount" label="Order percentage discount" />
         </service>
