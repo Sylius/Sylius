@@ -11,10 +11,12 @@
 
 namespace Sylius\Component\Core\OrderProcessing;
 
+use Sylius\Component\Core\Model\OrderInterface as CoreOrderInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Core\Model\PaymentInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\Payment\Factory\PaymentFactoryInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -40,6 +42,9 @@ final class OrderPaymentProcessor implements OrderProcessorInterface
      */
     public function process(OrderInterface $order)
     {
+        /** @var CoreOrderInterface $order */
+        Assert::isInstanceOf($order, CoreOrderInterface::class);
+
         if (OrderInterface::STATE_CANCELLED === $order->getState()) {
             return;
         }

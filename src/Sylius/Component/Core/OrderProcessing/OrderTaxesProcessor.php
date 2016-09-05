@@ -14,12 +14,14 @@ namespace Sylius\Component\Core\OrderProcessing;
 use Sylius\Component\Addressing\Matcher\ZoneMatcherInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\AdjustmentInterface;
+use Sylius\Component\Core\Model\OrderInterface as CoreOrderInterface;
 use Sylius\Component\Core\Provider\ZoneProviderInterface;
 use Sylius\Component\Core\Taxation\Exception\UnsupportedTaxCalculationStrategyException;
 use Sylius\Component\Core\Taxation\Strategy\TaxCalculationStrategyInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\Registry\PrioritizedServiceRegistryInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -63,6 +65,9 @@ final class OrderTaxesProcessor implements OrderProcessorInterface
      */
     public function process(OrderInterface $order)
     {
+        /** @var CoreOrderInterface $order */
+        Assert::isInstanceOf($order, CoreOrderInterface::class);
+
         $this->clearTaxes($order);
         if ($order->isEmpty()) {
             return;
@@ -86,11 +91,11 @@ final class OrderTaxesProcessor implements OrderProcessorInterface
     }
 
     /**
-     * @param OrderInterface $order
+     * @param CoreOrderInterface $order
      *
      * @return ZoneInterface|null
      */
-    private function getTaxZone(OrderInterface $order)
+    private function getTaxZone(CoreOrderInterface $order)
     {
         $shippingAddress = $order->getShippingAddress();
         $zone = null;
