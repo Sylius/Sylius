@@ -78,7 +78,7 @@ Firstly if the **Customer** is not yet set on the Order it will be assigned depe
 
 .. hint::
 
-    If you are do not understand how Users and Customers work in Sylius got to :doc:`Users Concept documentation </book/users_and_groups>`.
+    If you do not understand the Users and Customers concept in Sylius go to the :doc:`Users Concept documentation </book/customer_and_shopuser>`.
 
 The typical **Address** consists of: country, city, street and postcode - to assign it to an Order either create it manually or retrieve from the repository.
 
