@@ -49,6 +49,7 @@ Feature: Remember where users actually have left checkout
         And I have proceeded order with "Free" shipping method and "Offline" payment
         When I go back to addressing step of the checkout
         And I specify the shipping address as "Ankh Morpork", "Fire Alley", "90350", "United States" for "Jon Snow"
+        And I complete the addressing step
         Then I should be on the checkout shipping step
 
     @ui
@@ -59,6 +60,7 @@ Feature: Remember where users actually have left checkout
         And I complete the shipping step
         When I go back to addressing step of the checkout
         And I specify the shipping address as "Ankh Morpork", "Fire Alley", "90350", "United States" for "Jon Snow"
+        And I complete the addressing step
         Then I should be on the checkout shipping step
 
     @ui

@@ -30,23 +30,6 @@ sylius_shop_checkout_address:
                 route: sylius_shop_checkout_select_shipping
                 parameters: []
 
-sylius_shop_checkout_readdress:
-    path: /readdress
-    methods: [PUT]
-    defaults:
-        _controller: sylius.controller.order:applyStateMachineTransitionAction
-        _sylius:
-            flash: false
-            repository:
-                method: find
-                arguments: [expr:service('sylius.context.cart').getCart()]
-            state_machine:
-                graph: sylius_order_checkout
-                transition: readdress
-            redirect:
-                route: sylius_shop_checkout_address
-                parameters: []
-
 sylius_shop_checkout_select_shipping:
     path: /select-shipping
     methods: [GET, PUT]
@@ -67,23 +50,6 @@ sylius_shop_checkout_select_shipping:
                 route: sylius_shop_checkout_select_payment
                 parameters: []
 
-sylius_shop_checkout_reselect_shipping:
-    path: /reselect-shipping
-    methods: [PUT]
-    defaults:
-        _controller: sylius.controller.order:applyStateMachineTransitionAction
-        _sylius:
-            flash: false
-            repository:
-                method: find
-                arguments: [expr:service('sylius.context.cart').getCart()]
-            state_machine:
-                graph: sylius_order_checkout
-                transition: reselect_shipping
-            redirect:
-                route: sylius_shop_checkout_select_shipping
-                parameters: []
-
 sylius_shop_checkout_select_payment:
     path: /select-payment
     methods: [GET, PUT]
@@ -102,23 +68,6 @@ sylius_shop_checkout_select_payment:
                 transition: select_payment
             redirect:
                 route: sylius_shop_checkout_complete
-                parameters: []
-
-sylius_shop_checkout_reselect_payment:
-    path: /reselect-payment
-    methods: [PUT]
-    defaults:
-        _controller: sylius.controller.order:applyStateMachineTransitionAction
-        _sylius:
-            flash: false
-            repository:
-                method: find
-                arguments: [expr:service('sylius.context.cart').getCart()]
-            state_machine:
-                graph: sylius_order_checkout
-                transition: reselect_payment
-            redirect:
-                route: sylius_shop_checkout_select_payment
                 parameters: []
 
 sylius_shop_checkout_complete:
