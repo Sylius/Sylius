@@ -150,7 +150,6 @@ sylius:
             name: Commentaire sur la commande
         shipment_confirmation:
             name: "Confirmation d'expédition"
-            content: 'Votre commande a été envoyée. <br/> Merci pour cette transaction réussie.'
         user_confirmation:
             name: "Confirmation d'utilisateur"
             subject: Bienvenue dans notre boutique

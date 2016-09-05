@@ -149,7 +149,6 @@ sylius:
             name: Orderkommentar
         shipment_confirmation:
             name: Leveransbekräftelse
-            content: 'Din beställning har skickats.<br/>Tack för din beställning.'
         user_confirmation:
             name: Användarbekräftelse
             subject: Välkommen till vår butik

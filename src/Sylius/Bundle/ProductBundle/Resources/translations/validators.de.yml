@@ -6,6 +6,9 @@ sylius:
         sku:
             not_blank: Bitte geben Sie die Bestandseinheit an.
             unique: Die Bestandseinheit muss eindeutig sein.
+        code:
+            not_blank: Bitte geben Sie einen Produktcode ein.
+            unique: Der Produktcode muss eindeutig sein.
         name:
             not_blank: Bitte gib Sie einen Produktnamen an.
             min_length: 'Der Produktname muss mindestens 1 Zeichen lang sein.|Der Produktname muss mindestens {{ limit }} Zeichen lang sein.'
