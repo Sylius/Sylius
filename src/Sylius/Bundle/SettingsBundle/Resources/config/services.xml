@@ -68,7 +68,7 @@
         </service>
 
         <service id="sylius.settings.doctrine.transform_settings_listener" class="%sylius.settings.doctrine.parameter_transformer_listener.class%">
-            <argument type="service" id="service_container"/>
+            <argument type="service" id="sylius.registry.settings_schema"/>
             <tag name="doctrine.event_listener" event="onFlush"/>
             <tag name="doctrine.event_listener" event="postFlush"/>
             <tag name="doctrine.event_listener" event="postLoad"/>
