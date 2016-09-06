@@ -11,6 +11,8 @@
 
 namespace Sylius\Bundle\CoreBundle\DependencyInjection;
 
+use Sylius\Bundle\CoreBundle\Checkout\CheckoutResolver;
+use Sylius\Bundle\CoreBundle\Checkout\CheckoutStateUrlGenerator;
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
 use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\Config\FileLocator;
@@ -21,6 +23,7 @@ use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\DependencyInjection\Parameter;
 use Symfony\Component\DependencyInjection\Reference;
+use Symfony\Component\HttpFoundation\RequestMatcher;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -94,6 +97,8 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         $container
             ->getDefinition('sylius.listener.password_updater')
             ->setClass('Sylius\Bundle\CoreBundle\EventListener\PasswordUpdaterListener');
+
+        $this->configureCheckoutResolverIfNeeded($config['checkout_resolver'], $container);
     }
 
     /**
@@ -116,6 +121,40 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
 
         $container->setParameter('sylius.sitemap', $config['sitemap']);
         $container->setParameter('sylius.sitemap_template', $config['sitemap']['template']);
+    }
+
+    /**
+     * @param array $config
+     * @param ContainerBuilder $container
+     */
+    private function configureCheckoutResolverIfNeeded(array $config, ContainerBuilder $container)
+    {
+        if (!$config['enabled']) {
+
+            return;
+        }
+
+        $checkoutResolverDefinition = new Definition(
+            CheckoutResolver::class,
+            [
+                new Reference('sylius.context.cart'),
+                new Reference('sylius.router.checkout_state'),
+                new Definition(RequestMatcher::class, [$config['pattern']]),
+                new Reference('sm.factory'),
+            ]
+        );
+        $checkoutResolverDefinition->addTag('kernel.event_subscriber');
+
+        $checkoutStateUrlGeneratorDefinition = new Definition(
+            CheckoutStateUrlGenerator::class,
+            [
+                new Reference('router'),
+                $config['route_map'],
+            ]
+        );
+
+        $container->setDefinition('sylius.resolver.checkout', $checkoutResolverDefinition);
+        $container->setDefinition('sylius.router.checkout_state', $checkoutStateUrlGeneratorDefinition);
     }
 
     /**
