@@ -30,4 +30,5 @@ sylius:
             description: Beschreibung
             enabled: Aktiviert?
             gateway: Schnittstelle
+            instructions: Anweisungen
             name: Name

@@ -150,7 +150,6 @@ sylius:
             name: Order Opmerkingen
         shipment_confirmation:
             name: Bevestiging van de verzending
-            content: 'Je bestelling werd verstuurd.<br/>Bedankt voor een geslaagde transactie.'
         user_confirmation:
             name: Bevestiging van de gebruiker
             subject: Welkom in jouw winkel

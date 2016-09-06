@@ -2,9 +2,20 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    channel:
+        default_currency:
+            not_blank: Bitte wählen Sie die Standardwährung für diesen Kanal.
+        default_locale:
+            not_blank: Bitte wählen Sie die Standardsprache für diesen Kanal.
     checkout:
         shipping_method:
             not_blank: Bitte wählen Sie eine Versandart aus.
+    customer:
+        currency_code:
+            not_valid: Der eingegebene Währungscode ist ungültig.
+    order:
+        currency_code:
+            not_valid: Der eingegebene Währungscode ist ungültig.
     locale:
         code:
             not_blank: Bitte lokalen Code eingeben.
@@ -24,3 +35,6 @@ sylius:
     user:
         email:
             unique: Diese E-Mail-Adresse wird bereits verwendet.
+        username:
+            unique: Der Benutzername wird bereits verwendet.
+            not_blank: Bitte geben Sie Ihren Namen ein.

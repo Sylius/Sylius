@@ -19,6 +19,9 @@ sylius:
             min_length: 'Der CVV Kreditkartencode darf nur {{ limit }} Zeichen lang sein.'
         expiry_year:
             not_blank: Bitte wählen Sie das Ablaufjahr aus.
+    payment:
+        currency_code:
+            not_valid: Der eingegebene Währungscode ist ungültig.
     payment_method:
         gateway:
             not_blank: Bitte wählen Sie eine Zahlungsmethodeschnittstelle aus.

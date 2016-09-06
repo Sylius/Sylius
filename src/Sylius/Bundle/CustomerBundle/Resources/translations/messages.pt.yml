@@ -17,6 +17,7 @@ sylius:
             billing_address: Endereço de faturação
             different_billing_address: Usar um endereço diferente para faturação?
             only_customer_registration: Criar conta?
+            subscribed_to_newsletter: Subscrever a newsletter
     gender:
         unknown: Desconhecido
         male: Masculino

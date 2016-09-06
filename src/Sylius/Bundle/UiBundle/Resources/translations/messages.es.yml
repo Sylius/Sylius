@@ -360,6 +360,7 @@ sylius:
         links: Enlaces
         list_coupons: Listar cupones
         list_variants: Lista de variantes
+        locale: Idioma
         locales: Idiomas
         lock: Bloquear
         locked: Bloqueado
@@ -661,6 +662,7 @@ sylius:
         street: Calle
         string_blocks: Bloques de texto
         subject: Asunto
+        subscribed_to_newsletter: Suscribirse al boletín de noticias
         subtotal: Subtotal
         success: Operación realizada correctamente
         summary: Resumen
