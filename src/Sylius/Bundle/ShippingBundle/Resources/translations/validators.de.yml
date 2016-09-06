@@ -22,6 +22,8 @@ sylius:
         code:
             not_blank: Bitte geben Sie ein Kürzel für die Versandart an.
             unique: Eine Versandart mit diesem Kürzel existiert bereits.
+        zone:
+            not_blank: Bitte wählen Sie eine Zone für die Versandart.
     shipment:
         shipping_method:
             not_blank: Bitte wählen Sie eine Versandart aus.

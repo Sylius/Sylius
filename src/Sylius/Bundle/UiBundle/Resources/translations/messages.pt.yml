@@ -317,6 +317,7 @@ sylius:
         state: Estado
         street: Rua
         subject: Assunto
+        subscribed_to_newsletter: Subscrever a newsletter
         success: Sucesso
         summary: Sumário
         tax_category: Categoria de imposto
