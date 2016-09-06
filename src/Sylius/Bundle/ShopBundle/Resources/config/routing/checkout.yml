@@ -85,19 +85,11 @@ sylius_shop_checkout_complete:
             state_machine:
                 graph: sylius_order_checkout
                 transition: complete
-            redirect: sylius_shop_checkout_thank_you
+            redirect: sylius_shop_thank_you
             form:
                 type: sylius_checkout_complete
                 options:
                     validation_groups: 'sylius_checkout_complete'
-
-sylius_shop_checkout_thank_you:
-    path: /thank-you
-    methods: [GET]
-    defaults:
-        _controller: sylius.controller.order:thankYouAction
-        _sylius:
-            template: SyliusShopBundle:Checkout:thankYou.html.twig
 
 # Todo: Move this somewhere appropriate.
 sylius_shop_partial_provinces:

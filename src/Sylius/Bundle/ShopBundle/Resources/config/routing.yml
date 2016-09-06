@@ -6,6 +6,14 @@ sylius_shop_homepage:
     defaults:
         _controller: sylius.controller.shop.homepage:indexAction
 
+sylius_shop_thank_you:
+    path: /thank-you
+    methods: [GET]
+    defaults:
+        _controller: sylius.controller.order:thankYouAction
+        _sylius:
+            template: SyliusShopBundle:Checkout:thankYou.html.twig
+
 sylius_shop_security:
     resource: "@SyliusShopBundle/Resources/config/routing/security.yml"
 
