@@ -15,8 +15,6 @@ use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 /**
- * Applies promotion to given subject.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
 interface PromotionApplicatorInterface
@@ -25,7 +23,7 @@ interface PromotionApplicatorInterface
      * Apply all promotion actions to the given subject
      *
      * @param PromotionSubjectInterface $subject
-     * @param PromotionInterface        $promotion
+     * @param PromotionInterface $promotion
      */
     public function apply(PromotionSubjectInterface $subject, PromotionInterface $promotion);
 
@@ -33,7 +31,7 @@ interface PromotionApplicatorInterface
      * Revert all promotion actions to the given subject
      *
      * @param PromotionSubjectInterface $subject
-     * @param PromotionInterface        $promotion
+     * @param PromotionInterface $promotion
      */
     public function revert(PromotionSubjectInterface $subject, PromotionInterface $promotion);
 }
