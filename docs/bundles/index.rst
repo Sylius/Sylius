@@ -13,12 +13,10 @@ Symfony Bundles
     SyliusGridBundle/index
     SyliusInventoryBundle/index
     SyliusMailerBundle/index
-    SyliusOmnipayBundle/index
     SyliusOrderBundle/index
     SyliusPricingBundle/index
     SyliusProductBundle/index
     SyliusPromotionBundle/index
-    SyliusRbacBundle/index
     SyliusResourceBundle/index
     SyliusSettingsBundle/index
     SyliusShippingBundle/index

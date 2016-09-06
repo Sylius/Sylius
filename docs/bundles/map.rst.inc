@@ -7,12 +7,10 @@
 * :doc:`/bundles/SyliusGridBundle/index`
 * :doc:`/bundles/SyliusInventoryBundle/index`
 * :doc:`/bundles/SyliusMailerBundle/index`
-* :doc:`/bundles/SyliusOmnipayBundle/index`
 * :doc:`/bundles/SyliusOrderBundle/index`
 * :doc:`/bundles/SyliusPricingBundle/index`
 * :doc:`/bundles/SyliusProductBundle/index`
 * :doc:`/bundles/SyliusPromotionBundle/index`
-* :doc:`/bundles/SyliusRbacBundle/index`
 * :doc:`/bundles/SyliusResourceBundle/index`
 * :doc:`/bundles/SyliusSettingsBundle/index`
 * :doc:`/bundles/SyliusShippingBundle/index`
