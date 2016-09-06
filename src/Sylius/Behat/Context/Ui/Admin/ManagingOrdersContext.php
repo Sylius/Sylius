@@ -76,6 +76,7 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @Given I am browsing orders
      * @When I browse orders
      */
     public function iBrowseOrders()
@@ -114,6 +115,14 @@ final class ManagingOrdersContext implements Context
     public function iShipThisOrder(OrderInterface $order)
     {
         $this->showPage->shipOrder($order);
+    }
+
+    /**
+     * @When I switch the way orders are sorted by :fieldName
+     */
+    public function iSwitchSortingBy($fieldName)
+    {
+        $this->indexPage->sortBy($fieldName);
     }
 
     /**
@@ -572,6 +581,20 @@ final class ManagingOrdersContext implements Context
         Assert::true(
             $this->indexPage->isSingleResourceOnPage(['number' => $orderNumber]),
             sprintf('Cannot find order with "%s" number in the list.', $orderNumber)
+        );
+    }
+
+    /**
+     * @Then the first order should have number :number
+     */
+    public function theFirstOrderShouldHaveNumber($number)
+    {
+        $actualNumber = $this->indexPage->getColumnFields('Number')[0];
+
+        Assert::eq(
+            $actualNumber,
+            $number,
+            sprintf('Expected first order\'s number to be %s, but it is %s.', $number, $actualNumber)
         );
     }
 

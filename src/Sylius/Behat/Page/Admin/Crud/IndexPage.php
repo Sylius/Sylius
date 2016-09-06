@@ -71,6 +71,27 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     /**
      * {@inheritdoc}
      */
+    public function getColumnFields($columnName)
+    {
+        return $this->tableAccessor->getIndexedColumn($this->getElement('table'), $columnName);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function sortBy($fieldName)
+    {
+        $sortableHeaders = $this->tableAccessor->getSortableHeaders($this->getElement('table'));
+        if (!isset($sortableHeaders[$fieldName])) {
+            throw new \InvalidArgumentException(sprintf('Field %s cannot be sorted.', $fieldName));
+        }
+
+        $sortableHeaders[$fieldName]->find('css', 'a')->click();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function isSingleResourceWithSpecificElementOnPage(array $parameters, $element)
     {
         try {

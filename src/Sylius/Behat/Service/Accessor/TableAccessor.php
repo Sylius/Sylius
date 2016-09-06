@@ -49,9 +49,48 @@ final class TableAccessor implements TableAccessorInterface
     }
 
     /**
-     * @param NodeElement $table
-     *
-     * @return int
+     * {@inheritdoc}
+     */
+    public function getIndexedColumn(NodeElement $table, $columnName)
+    {
+        $columnIndex = $this->getColumnIndex($table, $columnName);
+
+        $rows = $table->findAll('css', 'tbody > tr');
+        if (empty($rows)) {
+            throw new \InvalidArgumentException('There are no rows!');
+        }
+
+        $indexedColumn = [];
+        /** @var NodeElement $row */
+        foreach ($rows as $row) {
+            $cells = $row->findAll('css', 'td');
+            $indexedColumn[] = $cells[$columnIndex]->getText();
+        }
+
+        return $indexedColumn;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getSortableHeaders(NodeElement $table)
+    {
+        $sortableHeaders = $table->findAll('css', 'th.sortable');
+        if (empty($sortableHeaders)) {
+            throw new \InvalidArgumentException('There are no sortable headers!');
+        }
+
+        $sortableArray = [];
+        /** @var NodeElement $sortable */
+        foreach ($sortableHeaders as $sortable) {
+            $sortableArray[strtolower($sortable->getText())] = $sortable;
+        }
+
+        return $sortableArray;
+    }
+
+    /**
+     * {@inheritdoc}
      */
     public function countTableBodyRows(NodeElement $table)
     {
