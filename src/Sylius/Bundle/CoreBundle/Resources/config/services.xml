@@ -331,7 +331,6 @@
         </service>
 
         <service id="sylius.promotion.eligibility_checker.coupons" class="%sylius.promotion.eligibility_checker.coupons.class%">
-            <argument type="service" id="event_dispatcher" />
             <argument type="service" id="sylius.repository.order" />
         </service>
 

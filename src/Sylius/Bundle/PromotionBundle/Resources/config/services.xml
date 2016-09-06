@@ -62,9 +62,7 @@
             <argument type="service" id="sylius.promotion_applicator" />
         </service>
 
-        <service id="sylius.promotion.eligibility_checker.coupons" class="%sylius.promotion.eligibility_checker.coupons.class%">
-            <argument type="service" id="event_dispatcher" />
-        </service>
+        <service id="sylius.promotion.eligibility_checker.coupons" class="%sylius.promotion.eligibility_checker.coupons.class%" />
         <service id="sylius.promotion.eligibility_checker.dates" class="%sylius.promotion.eligibility_checker.dates.class%" />
         <service id="sylius.promotion.eligibility_checker.usage_limit" class="%sylius.promotion.eligibility_checker.usage_limit.class%" />
         <service id="sylius.promotion.eligibility_checker.rules" class="%sylius.promotion.eligibility_checker.rules.class%">
