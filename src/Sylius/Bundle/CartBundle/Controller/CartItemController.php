@@ -14,8 +14,7 @@ namespace Sylius\Bundle\CartBundle\Controller;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\View\View;
 use Sylius\Component\Cart\CartActions;
-use Sylius\Component\Cart\Model\CartInterface;
-use Sylius\Component\Cart\Model\CartItemInterface;
+use Sylius\Component\Cart\Modifier\CartModifierInterface;
 use Sylius\Component\Cart\SyliusCartEvents;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Resource\ResourceActions;
@@ -61,9 +60,7 @@ class CartItemController extends Controller
             }
 
             $cart = $this->getCurrentCart();
-            $this->resolveCartItem($cart, $newResource);
-
-            $this->getEventDispatcher()->dispatch(SyliusCartEvents::CART_CHANGE, new GenericEvent($cart));
+            $this->getCartModifier()->addToCart($cart, $newResource);
 
             $cartManager = $this->getCartManager();
             $cartManager->persist($cart);
@@ -119,11 +116,10 @@ class CartItemController extends Controller
         }
 
         $cart = $this->getCurrentCart();
-        $cart->removeItem($resource);
+
+        $this->getCartModifier()->removeFromCart($cart, $resource);
 
         $this->repository->remove($resource);
-
-        $this->getEventDispatcher()->dispatch(SyliusCartEvents::CART_CHANGE, new GenericEvent($cart));
 
         $cartManager = $this->getCartManager();
         $cartManager->persist($cart);
@@ -141,28 +137,19 @@ class CartItemController extends Controller
     }
 
     /**
-     * @param CartInterface $cart
-     * @param CartItemInterface $item
-     */
-    private function resolveCartItem(CartInterface $cart, CartItemInterface $item)
-    {
-        foreach ($cart->getItems() as $existingItem) {
-            if ($item->equals($existingItem)) {
-                $this->getItemQuantityModifier()->modify($existingItem, $existingItem->getQuantity() + $item->getQuantity());
-
-                return;
-            }
-        }
-
-        $cart->addItem($item);
-    }
-
-    /**
      * @return OrderItemQuantityModifierInterface
      */
     private function getItemQuantityModifier()
     {
         return $this->get('sylius.order_item_quantity_modifier');
+    }
+
+    /**
+     * @return CartModifierInterface
+     */
+    private function getCartModifier()
+    {
+        return $this->get('sylius.cart.cart_modifier');
     }
 
     /**
