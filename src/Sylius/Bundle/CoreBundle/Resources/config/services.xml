@@ -66,17 +66,19 @@
 
         <parameter key="sylius.active_promotions_by_channel_provider.class">Sylius\Component\Core\Provider\ActivePromotionsByChannelProvider</parameter>
 
-        <parameter key="sylius.promotion_rule_checker.nth_order.class">Sylius\Component\Core\Promotion\Checker\NthOrderRuleChecker</parameter>
-        <parameter key="sylius.promotion_rule_checker.shipping_country.class">Sylius\Component\Core\Promotion\Checker\ShippingCountryRuleChecker</parameter>
-        <parameter key="sylius.promotion_rule_checker.taxon.class">Sylius\Component\Core\Promotion\Checker\TaxonRuleChecker</parameter>
-        <parameter key="sylius.promotion_rule_checker.contains_taxon.class">Sylius\Component\Core\Promotion\Checker\ContainsTaxonRuleChecker</parameter>
-        <parameter key="sylius.promotion_rule_checker.total_of_items_from_taxon.class">Sylius\Component\Core\Promotion\Checker\TotalOfItemsFromTaxonRuleChecker</parameter>
+        <parameter key="sylius.promotion_rule_checker.nth_order.class">Sylius\Component\Core\Promotion\Checker\Rule\NthOrderRuleChecker</parameter>
+        <parameter key="sylius.promotion_rule_checker.shipping_country.class">Sylius\Component\Core\Promotion\Checker\Rule\ShippingCountryRuleChecker</parameter>
+        <parameter key="sylius.promotion_rule_checker.taxon.class">Sylius\Component\Core\Promotion\Checker\Rule\TaxonRuleChecker</parameter>
+        <parameter key="sylius.promotion_rule_checker.contains_taxon.class">Sylius\Component\Core\Promotion\Checker\Rule\ContainsTaxonRuleChecker</parameter>
+        <parameter key="sylius.promotion_rule_checker.total_of_items_from_taxon.class">Sylius\Component\Core\Promotion\Checker\Rule\TotalOfItemsFromTaxonRuleChecker</parameter>
+
+        <parameter key="sylius.promotion.eligibility_checker.coupons.class">Sylius\Component\Core\Promotion\Checker\Eligibility\CouponsEligibilityChecker</parameter>
+
         <parameter key="sylius.promotion_action.fixed_discount.class">Sylius\Component\Core\Promotion\Action\FixedDiscountAction</parameter>
         <parameter key="sylius.promotion_action.unit_fixed_discount.class">Sylius\Component\Core\Promotion\Action\UnitFixedDiscountAction</parameter>
         <parameter key="sylius.promotion_action.percentage_discount.class">Sylius\Component\Core\Promotion\Action\PercentageDiscountAction</parameter>
         <parameter key="sylius.promotion_action.unit_percentage_discount.class">Sylius\Component\Core\Promotion\Action\UnitPercentageDiscountAction</parameter>
         <parameter key="sylius.promotion_action.shipping_discount.class">Sylius\Component\Core\Promotion\Action\ShippingDiscountAction</parameter>
-        <parameter key="sylius.promotion.eligibility_checker.coupons.class">Sylius\Component\Core\Promotion\Checker\CouponsEligibilityChecker</parameter>
 
         <parameter key="sylius.promotion_filter.taxon.class">Sylius\Component\Core\Promotion\Filter\TaxonFilter</parameter>
         <parameter key="sylius.promotion_filter.price_range.class">Sylius\Component\Core\Promotion\Filter\PriceRangeFilter</parameter>

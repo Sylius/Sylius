@@ -19,14 +19,14 @@
     <parameters>
         <parameter key="sylius.promotion_processor.class">Sylius\Component\Promotion\Processor\PromotionProcessor</parameter>
 
-        <parameter key="sylius.promotion_eligibility_checker.class">Sylius\Component\Promotion\Checker\PromotionEligibilityChecker</parameter>
-        <parameter key="sylius.promotion.eligibility_checker.coupons.class">Sylius\Component\Promotion\Checker\CouponsEligibilityChecker</parameter>
-        <parameter key="sylius.promotion.eligibility_checker.dates.class">Sylius\Component\Promotion\Checker\DatesEligibilityChecker</parameter>
-        <parameter key="sylius.promotion.eligibility_checker.rules.class">Sylius\Component\Promotion\Checker\RulesEligibilityChecker</parameter>
-        <parameter key="sylius.promotion.eligibility_checker.usage_limit.class">Sylius\Component\Promotion\Checker\UsageLimitEligibilityChecker</parameter>
+        <parameter key="sylius.promotion_eligibility_checker.class">Sylius\Component\Promotion\Checker\Eligibility\PromotionEligibilityChecker</parameter>
+        <parameter key="sylius.promotion.eligibility_checker.coupons.class">Sylius\Component\Promotion\Checker\Eligibility\CouponsEligibilityChecker</parameter>
+        <parameter key="sylius.promotion.eligibility_checker.dates.class">Sylius\Component\Promotion\Checker\Eligibility\DatesEligibilityChecker</parameter>
+        <parameter key="sylius.promotion.eligibility_checker.rules.class">Sylius\Component\Promotion\Checker\Eligibility\RulesEligibilityChecker</parameter>
+        <parameter key="sylius.promotion.eligibility_checker.usage_limit.class">Sylius\Component\Promotion\Checker\Eligibility\UsageLimitEligibilityChecker</parameter>
 
-        <parameter key="sylius.promotion_rule_checker.item_total.class">Sylius\Component\Promotion\Checker\ItemTotalRuleChecker</parameter>
-        <parameter key="sylius.promotion_rule_checker.cart_quantity.class">Sylius\Component\Promotion\Checker\CartQuantityRuleChecker</parameter>
+        <parameter key="sylius.promotion_rule_checker.item_total.class">Sylius\Component\Promotion\Checker\Rule\ItemTotalRuleChecker</parameter>
+        <parameter key="sylius.promotion_rule_checker.cart_quantity.class">Sylius\Component\Promotion\Checker\Rule\CartQuantityRuleChecker</parameter>
 
         <parameter key="sylius.promotion_applicator.class">Sylius\Component\Promotion\Action\PromotionApplicator</parameter>
 
@@ -87,7 +87,7 @@
         </service>
 
         <service id="sylius.registry.promotion_rule_checker" class="%sylius.registry.promotion_rule_checker.class%">
-            <argument>Sylius\Component\Promotion\Checker\RuleCheckerInterface</argument>
+            <argument>Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface</argument>
             <argument>rule checker</argument>
         </service>
         <service id="sylius.registry.promotion_action" class="%sylius.registry.promotion_action.class%">
