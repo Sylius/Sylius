@@ -18,17 +18,17 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-final class CouponsEligibilityChecker implements PromotionSubjectEligibilityCheckerInterface
+final class CouponsEligibilityChecker implements PromotionEligibilityCheckerInterface
 {
     /**
      * {@inheritdoc}
      */
-    public function isEligible(PromotionSubjectInterface $subject, PromotionInterface $promotion)
+    public function isEligible(PromotionSubjectInterface $promotionSubject, PromotionInterface $promotion)
     {
-        if (!$subject instanceof PromotionCouponAwareSubjectInterface || null === $subject->getPromotionCoupon()) {
+        if (!$promotionSubject instanceof PromotionCouponAwareSubjectInterface || null === $promotionSubject->getPromotionCoupon()) {
             return false;
         }
 
-        return $promotion === $subject->getPromotionCoupon()->getPromotion();
+        return $promotion === $promotionSubject->getPromotionCoupon()->getPromotion();
     }
 }

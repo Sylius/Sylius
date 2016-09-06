@@ -19,7 +19,7 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class PromotionEligibilityChecker implements PromotionSubjectEligibilityCheckerInterface
+class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterface
 {
     /**
      * @var PromotionEligibilityCheckerInterface
@@ -32,26 +32,26 @@ class PromotionEligibilityChecker implements PromotionSubjectEligibilityCheckerI
     protected $usageLimitEligibilityChecker;
 
     /**
-     * @var PromotionSubjectEligibilityCheckerInterface
+     * @var PromotionEligibilityCheckerInterface
      */
     protected $couponsEligibilityChecker;
 
     /**
-     * @var PromotionSubjectEligibilityCheckerInterface
+     * @var PromotionEligibilityCheckerInterface
      */
     protected $rulesEligibilityChecker;
 
     /**
      * @param PromotionEligibilityCheckerInterface $datesEligibilityChecker
      * @param PromotionEligibilityCheckerInterface $usageLimitEligibilityChecker
-     * @param PromotionSubjectEligibilityCheckerInterface $couponsEligibilityChecker
-     * @param PromotionSubjectEligibilityCheckerInterface $rulesEligibilityChecker
+     * @param PromotionEligibilityCheckerInterface $couponsEligibilityChecker
+     * @param PromotionEligibilityCheckerInterface $rulesEligibilityChecker
      */
     public function __construct(
         PromotionEligibilityCheckerInterface $datesEligibilityChecker,
         PromotionEligibilityCheckerInterface $usageLimitEligibilityChecker,
-        PromotionSubjectEligibilityCheckerInterface $couponsEligibilityChecker,
-        PromotionSubjectEligibilityCheckerInterface $rulesEligibilityChecker
+        PromotionEligibilityCheckerInterface $couponsEligibilityChecker,
+        PromotionEligibilityCheckerInterface $rulesEligibilityChecker
     ) {
         $this->datesEligibilityChecker = $datesEligibilityChecker;
         $this->usageLimitEligibilityChecker = $usageLimitEligibilityChecker;
@@ -62,17 +62,17 @@ class PromotionEligibilityChecker implements PromotionSubjectEligibilityCheckerI
     /**
      * {@inheritdoc}
      */
-    public function isEligible(PromotionSubjectInterface $subject, PromotionInterface $promotion)
+    public function isEligible(PromotionSubjectInterface $promotionSubject, PromotionInterface $promotion)
     {
-        if (!$this->datesEligibilityChecker->isEligible($promotion)) {
+        if (!$this->datesEligibilityChecker->isEligible($promotionSubject, $promotion)) {
             return false;
         }
 
-        if (!$this->usageLimitEligibilityChecker->isEligible($promotion)) {
+        if (!$this->usageLimitEligibilityChecker->isEligible($promotionSubject, $promotion)) {
             return false;
         }
 
-        $eligible = $this->rulesEligibilityChecker->isEligible($subject, $promotion);
+        $eligible = $this->rulesEligibilityChecker->isEligible($promotionSubject, $promotion);
         if (!$eligible) {
             return false;
         }
@@ -81,6 +81,6 @@ class PromotionEligibilityChecker implements PromotionSubjectEligibilityCheckerI
             return $eligible;
         }
 
-        return $this->couponsEligibilityChecker->isEligible($subject, $promotion);
+        return $this->couponsEligibilityChecker->isEligible($promotionSubject, $promotion);
     }
 }

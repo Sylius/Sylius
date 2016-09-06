@@ -12,6 +12,7 @@
 namespace Sylius\Component\Promotion\Checker;
 
 use Sylius\Component\Promotion\Model\PromotionInterface;
+use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -21,7 +22,7 @@ class DatesEligibilityChecker implements PromotionEligibilityCheckerInterface
     /**
      * {@inheritdoc}
      */
-    public function isEligible(PromotionInterface $promotion)
+    public function isEligible(PromotionSubjectInterface $promotionSubject, PromotionInterface $promotion)
     {
         $now = new \DateTime();
 

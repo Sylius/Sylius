@@ -14,6 +14,7 @@ namespace spec\Sylius\Component\Promotion\Checker;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Promotion\Checker\PromotionEligibilityCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
+use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -30,34 +31,42 @@ final class DatesEligibilityCheckerSpec extends ObjectBehavior
         $this->shouldImplement(PromotionEligibilityCheckerInterface::class);
     }
 
-    function it_returns_false_if_promotion_has_not_started_yet(PromotionInterface $promotion)
-    {
+    function it_returns_false_if_promotion_has_not_started_yet(
+        PromotionSubjectInterface $promotionSubject,
+        PromotionInterface $promotion
+    ) {
         $promotion->getStartsAt()->willReturn(new \DateTime('+3 days'));
 
-        $this->isEligible($promotion)->shouldReturn(false);
+        $this->isEligible($promotionSubject, $promotion)->shouldReturn(false);
     }
 
-    function it_returns_false_if_promotion_has_already_ended(PromotionInterface $promotion)
-    {
+    function it_returns_false_if_promotion_has_already_ended(
+        PromotionSubjectInterface $promotionSubject,
+        PromotionInterface $promotion
+    ) {
         $promotion->getStartsAt()->willReturn(new \DateTime('-5 days'));
         $promotion->getEndsAt()->willReturn(new \DateTime('-3 days'));
 
-        $this->isEligible($promotion)->shouldReturn(false);
+        $this->isEligible($promotionSubject, $promotion)->shouldReturn(false);
     }
 
-    function it_returns_true_if_promotion_is_currently_available(PromotionInterface $promotion)
-    {
+    function it_returns_true_if_promotion_is_currently_available(
+        PromotionSubjectInterface $promotionSubject,
+        PromotionInterface $promotion
+    ) {
         $promotion->getStartsAt()->willReturn(new \DateTime('-2 days'));
         $promotion->getEndsAt()->willReturn(new \DateTime('+2 days'));
 
-        $this->isEligible($promotion)->shouldReturn(true);
+        $this->isEligible($promotionSubject, $promotion)->shouldReturn(true);
     }
 
-    function it_returns_true_if_promotion_dates_are_not_specified(PromotionInterface $promotion)
-    {
+    function it_returns_true_if_promotion_dates_are_not_specified(
+        PromotionSubjectInterface $promotionSubject,
+        PromotionInterface $promotion
+    ) {
         $promotion->getStartsAt()->willReturn(null);
         $promotion->getEndsAt()->willReturn(null);
 
-        $this->isEligible($promotion)->shouldReturn(true);
+        $this->isEligible($promotionSubject, $promotion)->shouldReturn(true);
     }
 }

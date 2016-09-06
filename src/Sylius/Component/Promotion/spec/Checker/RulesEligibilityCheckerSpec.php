@@ -14,7 +14,7 @@ namespace spec\Sylius\Component\Promotion\Checker;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Promotion\Checker\CartQuantityRuleChecker;
 use Sylius\Component\Promotion\Checker\ItemTotalRuleChecker;
-use Sylius\Component\Promotion\Checker\PromotionSubjectEligibilityCheckerInterface;
+use Sylius\Component\Promotion\Checker\PromotionEligibilityCheckerInterface;
 use Sylius\Component\Promotion\Checker\RuleCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
@@ -38,7 +38,7 @@ final class RulesEligibilityCheckerSpec extends ObjectBehavior
 
     function it_implements_promotion_subject_eligibility_checker_interface()
     {
-        $this->shouldImplement(PromotionSubjectEligibilityCheckerInterface::class);
+        $this->shouldImplement(PromotionEligibilityCheckerInterface::class);
     }
 
     function it_recognizes_subject_as_eligible_if_promotion_has_no_rules(

@@ -19,7 +19,7 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class RulesEligibilityChecker implements PromotionSubjectEligibilityCheckerInterface
+class RulesEligibilityChecker implements PromotionEligibilityCheckerInterface
 {
     /**
      * @var ServiceRegistryInterface
@@ -37,14 +37,14 @@ class RulesEligibilityChecker implements PromotionSubjectEligibilityCheckerInter
     /**
      * {@inheritdoc}
      */
-    public function isEligible(PromotionSubjectInterface $subject, PromotionInterface $promotion)
+    public function isEligible(PromotionSubjectInterface $promotionSubject, PromotionInterface $promotion)
     {
         if (!$promotion->hasRules()) {
             return true;
         }
 
         foreach ($promotion->getRules() as $rule) {
-            if (!$this->isEligibleToRule($subject, $rule)) {
+            if (!$this->isEligibleToRule($promotionSubject, $rule)) {
                 return false;
             }
         }

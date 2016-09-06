@@ -18,7 +18,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\PromotionInterface;
 use Sylius\Component\Core\Promotion\Checker\CouponsEligibilityChecker;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
-use Sylius\Component\Promotion\Checker\PromotionSubjectEligibilityCheckerInterface;
+use Sylius\Component\Promotion\Checker\PromotionEligibilityCheckerInterface;
 
 /**
  * @mixin CouponsEligibilityChecker
@@ -39,7 +39,7 @@ final class CouponsEligibilityCheckerSpec extends ObjectBehavior
 
     function it_implements_coupons_eligibility_checker_interface()
     {
-        $this->shouldImplement(PromotionSubjectEligibilityCheckerInterface::class);
+        $this->shouldImplement(PromotionEligibilityCheckerInterface::class);
     }
 
     function it_dispatches_event_and_returns_true_if_subject_coupon_is_eligible_to_promotion_and_coupon_usage_limit_is_0(

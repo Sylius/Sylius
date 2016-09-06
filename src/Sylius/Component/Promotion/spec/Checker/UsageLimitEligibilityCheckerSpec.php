@@ -14,6 +14,7 @@ namespace spec\Sylius\Component\Promotion\Checker;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Promotion\Checker\PromotionEligibilityCheckerInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
+use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
@@ -30,26 +31,32 @@ final class UsageLimitEligibilityCheckerSpec extends ObjectBehavior
         $this->shouldImplement(PromotionEligibilityCheckerInterface::class);
     }
 
-    function it_returns_true_if_promotion_has_no_usage_limit(PromotionInterface $promotion)
-    {
+    function it_returns_true_if_promotion_has_no_usage_limit(
+        PromotionSubjectInterface $promotionSubject,
+        PromotionInterface $promotion
+    ) {
         $promotion->getUsageLimit()->willReturn(null);
 
-        $this->isEligible($promotion)->shouldReturn(true);
+        $this->isEligible($promotionSubject, $promotion)->shouldReturn(true);
     }
 
-    function it_returns_true_if_usage_limit_has_not_been_exceeded(PromotionInterface $promotion)
-    {
+    function it_returns_true_if_usage_limit_has_not_been_exceeded(
+        PromotionSubjectInterface $promotionSubject,
+        PromotionInterface $promotion
+    ) {
         $promotion->getUsageLimit()->willReturn(10);
         $promotion->getUsed()->willReturn(5);
 
-        $this->isEligible($promotion)->shouldReturn(true);
+        $this->isEligible($promotionSubject, $promotion)->shouldReturn(true);
     }
 
-    function it_returns_false_if_usage_limit_has_been_exceeded(PromotionInterface $promotion)
-    {
+    function it_returns_false_if_usage_limit_has_been_exceeded(
+        PromotionSubjectInterface $promotionSubject,
+        PromotionInterface $promotion
+    ) {
         $promotion->getUsageLimit()->willReturn(10);
         $promotion->getUsed()->willReturn(15);
 
-        $this->isEligible($promotion)->shouldReturn(false);
+        $this->isEligible($promotionSubject, $promotion)->shouldReturn(false);
     }
 }
