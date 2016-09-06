@@ -146,7 +146,8 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @When /^I want to view all variants of (this product)$/
+     * @When /^I (?:|want to )view all variants of (this product)$/
+     * @When /^I view all variants of the (product "[^"]+")$/
      */
     public function iWantToViewAllVariantsOfThisProduct(ProductInterface $product)
     {
@@ -262,6 +263,17 @@ final class ManagingProductVariantsContext implements Context
     public function iRemoveItsNameFromTranslation()
     {
         $this->updatePage->nameIt('');
+    }
+
+    /**
+     * @Then /^the variant "([^"]+)" should have (\d+) items on hand$/
+     */
+    public function thisVariantShouldHaveItemsOnHand($productVariantName, $quantity)
+    {
+        Assert::true(
+            $this->indexPage->isSingleResourceWithSpecificElementOnPage(['name' => $productVariantName], sprintf('td > div.ui.label:contains("%s")', $quantity)),
+            sprintf('The product variant %s should have %s items on hand, but it does not.',$productVariantName, $quantity)
+        );
     }
 
     /**

@@ -3,10 +3,11 @@
 
 default:
     suites:
-        ui_inventory:
+        ui_managing_inventory:
             contexts_as_services:
                 - sylius.behat.context.hook.doctrine_orm
 
+                - sylius.behat.context.setup.admin_security
                 - sylius.behat.context.setup.channel
                 - sylius.behat.context.setup.currency
                 - sylius.behat.context.setup.geographical
@@ -14,7 +15,6 @@ default:
                 - sylius.behat.context.setup.payment
                 - sylius.behat.context.setup.product
                 - sylius.behat.context.setup.shipping
-                - sylius.behat.context.setup.shop_security
                 - sylius.behat.context.setup.user
 
                 - sylius.behat.context.transform.addressing
@@ -27,10 +27,7 @@ default:
                 - sylius.behat.context.transform.shared_storage
                 - sylius.behat.context.transform.shipping_method
 
-                - sylius.behat.context.ui.checkout
-                - sylius.behat.context.ui.shop.cart
-                - sylius.behat.context.ui.shop.product
-                - sylius.behat.context.ui.user
+                - sylius.behat.context.ui.admin.managing_product_variants
 
             filters:
-                tags: "@inventory && @ui"
+                tags: "@managing_inventory && @ui"
