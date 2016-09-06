@@ -233,7 +233,5 @@ final class ProductContext implements Context
             $this->showPage->hasProductOutOfStockValidationMessage($product),
             sprintf('I should see validation message for %s product', $product->getName())
         );
-
-        sleep(5);
     }
 }
