@@ -280,11 +280,16 @@ final class OrderContext implements Context
     }
 
     /**
-     * @Given /^the customer bought (\d+) ("[^"]+" products)/
+     * @Given /^the customer bought (\d+) ("[^"]+" products)$/
+     * @Given the customer bought :quantity :product products in variant :variant
      */
-    public function theCustomerBoughtSeveralProducts($quantity, ProductInterface $product)
+    public function theCustomerBoughtSeveralProducts($quantity, ProductInterface $product, ProductVariantInterface $variant = null)
     {
-        $this->addProductVariantToOrder($this->variantResolver->getVariant($product), $product->getPrice(), $quantity);
+        if(null === $variant) {
+            $variant = $this->variantResolver->getVariant($product);
+        }
+        
+        $this->addProductVariantToOrder($variant, $product->getPrice(), $quantity);
 
         $this->objectManager->flush();
     }
