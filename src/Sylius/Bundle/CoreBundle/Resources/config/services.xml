@@ -94,12 +94,6 @@
         <parameter key="sylius.validator.customer_initializer.class">Sylius\Bundle\CoreBundle\Validator\Initializer\CustomerInitializer</parameter>
         <parameter key="sylius.user.validator.unique_registered_user.class">Sylius\Bundle\CoreBundle\Validator\Constraints\RegisteredUserValidator</parameter>
 
-        <parameter key="sylius.sql_logger.purger.purge_mode" type="constant">Doctrine\Common\DataFixtures\Purger\ORMPurger::PURGE_MODE_DELETE</parameter>
-        <parameter key="sylius.sql_logger.purger.class">Sylius\Bundle\CoreBundle\Purger\QueryLogger</parameter>
-
-        <parameter key="sylius.purger.orm_purger.doctrine.class">Doctrine\Common\DataFixtures\Purger\ORMPurger</parameter>
-        <parameter key="sylius.purger.orm_purger.class">Sylius\Bundle\CoreBundle\Purger\ORMPurger</parameter>
-
         <parameter key="sylius.provider.channel_based_default_zone_provider.class">Sylius\Bundle\CoreBundle\Provider\ChannelBasedDefaultTaxZoneProvider</parameter>
 
         <parameter key="sylius.integer_distributor.class">Sylius\Component\Core\Distributor\IntegerDistributor</parameter>
@@ -425,21 +419,6 @@
             <argument>%currency%</argument>
             <argument>%locale%</argument>
             <tag name="data_collector" template="SyliusCoreBundle:Collector:sylius.html.twig" id="sylius_core" priority="-512" />
-        </service>
-
-        <service id="sylius.sql_logger.purger" class="%sylius.sql_logger.purger.class%" public="false" />
-
-        <service id="sylius.purger.orm_purger.doctrine" class="%sylius.purger.orm_purger.doctrine.class%" public="false">
-            <argument type="service" id="doctrine.orm.entity_manager" />
-            <call method="setPurgeMode">
-                <argument>%sylius.sql_logger.purger.purge_mode%</argument>
-            </call>
-        </service>
-
-        <service id="sylius.purger.orm_purger" class="%sylius.purger.orm_purger.class%" decorates="sylius.purger.orm_purger.doctrine">
-            <argument type="service" id="sylius.purger.orm_purger.inner" />
-            <argument type="service" id="doctrine.orm.entity_manager" />
-            <argument type="service" id="sylius.sql_logger.purger" />
         </service>
 
         <service id="sylius.shipping_methods_resolver.zones_and_channel_based" class="%sylius.shipping_methods_resolver.zones_and_channel_based.class%">
