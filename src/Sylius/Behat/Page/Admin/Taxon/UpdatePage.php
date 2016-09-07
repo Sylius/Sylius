@@ -74,13 +74,43 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
      */
     public function isImageWithCodeDisplayed($code)
     {
-        $imageUrl = $this->getImageElementByCode($code)->find('css', 'img')->getAttribute('src');
+        $imageElement = $this->getImageElementByCode($code);
 
+        if (null === $imageElement) {
+            return false;
+        }
+
+        $imageUrl = $imageElement->find('css', 'img')->getAttribute('src');
         $this->getDriver()->visit($imageUrl);
         $pageText = $this->getDocument()->getText();
         $this->getDriver()->back();
 
         return false === stripos($pageText, '404 Not Found');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeImageWithCode($code)
+    {
+        $imageElement = $this->getImageElementByCode($code);
+        $imageElement->clickLink('Delete');
+    }
+
+    public function removeFirstImage()
+    {
+        $imageElement = $this->getFirstImageElement();
+        $imageElement->clickLink('Delete');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function countImages()
+    {
+        $imageElements = $this->getImageElements();
+
+        return count($imageElements);
     }
 
     /**
@@ -111,10 +141,29 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
      */
     private function getLastImageElement()
     {
-        $images = $this->getElement('images');
-        $items = $images->findAll('css', 'div[data-form-collection="item"]');
+        $imageElements = $this->getImageElements();
 
-        return end($items);
+        return end($imageElements);
+    }
+
+    /**
+     * @return NodeElement
+     */
+    private function getFirstImageElement()
+    {
+        $imageElements = $this->getImageElements();
+
+        return reset($imageElements);
+    }
+
+    /**
+     * @return NodeElement[]
+     */
+    private function getImageElements()
+    {
+        $images = $this->getElement('images');
+
+        return $images->findAll('css', 'div[data-form-collection="item"]');
     }
 
     /**
@@ -125,8 +174,12 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     private function getImageElementByCode($code)
     {
         $images = $this->getElement('images');
-        $item = $images->find('css', 'input[value="'.$code.'"]')->getParent()->getParent();
+        $inputCode = $images->find('css', 'input[value="'.$code.'"]');
 
-        return $item;
+        if (null === $inputCode) {
+            return null;
+        }
+
+        return $inputCode->getParent()->getParent()->getParent();
     }
 }

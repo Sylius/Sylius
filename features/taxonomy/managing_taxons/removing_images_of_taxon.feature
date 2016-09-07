@@ -9,7 +9,7 @@ Feature: Removing images of an existing taxon
         And the store classifies its products as "T-Shirts"
         And I am logged in as an administrator
 
-    @todo
+    @ui @javascript
     Scenario: Removing a single image of a taxon
         Given the "T-Shirts" taxon has an image "t-shirts.jpg" with a code "banner"
         And I want to modify the "T-Shirts" taxon
@@ -18,7 +18,7 @@ Feature: Removing images of an existing taxon
         Then I should be notified that it has been successfully edited
         And this taxon should not have images
 
-    @todo
+    @ui @javascript
     Scenario: Removing all images of a taxon
         Given the "T-Shirts" taxon has an image "t-shirts.jpg" with a code "banner"
         And the "T-Shirts" taxon has also an image "t-shirts.jpg" with a code "thumbnail"
@@ -29,7 +29,7 @@ Feature: Removing images of an existing taxon
         Then I should be notified that it has been successfully edited
         And this taxon should not have images
 
-    @todo
+    @ui @javascript
     Scenario: Removing only one image of a taxon
         Given the "T-Shirts" taxon has an image "t-shirts.jpg" with a code "banner"
         And the "T-Shirts" taxon has also an image "t-shirts.jpg" with a code "thumbnail"
@@ -40,12 +40,12 @@ Feature: Removing images of an existing taxon
         And this taxon should have an image with a code "thumbnail"
         But this taxon should not have an image with a code "banner"
 
-    @todo
+    @ui @javascript
     Scenario: Adding multiple images and removing a single image of a taxon
         Given I want to modify the "T-Shirts" taxon
         When I attach "t-shirts.jpg" image with a code "banner"
         And I attach "t-shirts.jpg" image with a code "thumbnail"
-        And I remove an image with a code "banner"
+        And I remove the first image
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this taxon should have an image with a code "thumbnail"
