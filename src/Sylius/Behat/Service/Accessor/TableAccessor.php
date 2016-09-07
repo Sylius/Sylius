@@ -3,6 +3,7 @@
 namespace Sylius\Behat\Service\Accessor;
 
 use Behat\Mink\Element\NodeElement;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Kamil Kokot <kamil.kokot@lakion.com>
@@ -56,18 +57,16 @@ final class TableAccessor implements TableAccessorInterface
         $columnIndex = $this->getColumnIndex($table, $columnName);
 
         $rows = $table->findAll('css', 'tbody > tr');
-        if (empty($rows)) {
-            throw new \InvalidArgumentException('There are no rows!');
-        }
+        Assert::notEmpty($rows, 'There are no rows!');
 
-        $indexedColumn = [];
+        $columnFields = [];
         /** @var NodeElement $row */
         foreach ($rows as $row) {
             $cells = $row->findAll('css', 'td');
-            $indexedColumn[] = $cells[$columnIndex]->getText();
+            $columnFields[] = $cells[$columnIndex]->getText();
         }
 
-        return $indexedColumn;
+        return $columnFields;
     }
 
     /**
@@ -76,9 +75,7 @@ final class TableAccessor implements TableAccessorInterface
     public function getSortableHeaders(NodeElement $table)
     {
         $sortableHeaders = $table->findAll('css', 'th.sortable');
-        if (empty($sortableHeaders)) {
-            throw new \InvalidArgumentException('There are no sortable headers!');
-        }
+        Assert::notEmpty($sortableHeaders, 'There are no sortable headers.');
 
         $sortableArray = [];
         /** @var NodeElement $sortable */
@@ -108,14 +105,11 @@ final class TableAccessor implements TableAccessorInterface
     private function findRowsWithFields(NodeElement $table, array $fields)
     {
         $rows = $table->findAll('css', 'tr');
-        $matchedRows = [];
-
-        if (!isset($rows[0])) {
-            throw new \InvalidArgumentException('There are no rows!');
-        }
+        Assert::notEmpty($rows, 'There are no rows!');
 
         $fields = $this->replaceColumnNamesWithColumnIds($table, $fields);
 
+        $matchedRows = [];
         /** @var NodeElement[] $rows */
         $rows = $table->findAll('css', 'tr');
         foreach ($rows as $row) {
@@ -185,10 +179,7 @@ final class TableAccessor implements TableAccessorInterface
     private function getColumnIndex(NodeElement $table, $columnName)
     {
         $rows = $table->findAll('css', 'tr');
-
-        if (!isset($rows[0])) {
-            throw new \InvalidArgumentException('There are no rows!');
-        }
+        Assert::notEmpty($rows, 'There are no rows!');
 
         /** @var NodeElement $firstRow */
         $firstRow = $rows[0];

@@ -1,0 +1,35 @@
+{% macro headers(grid, definition, requestAttributes) %}
+    {% import 'SyliusUiBundle:Macro:sorting.html.twig' as sorting %}
+
+    {% for field in definition.fields %}
+        {% if grid.isSortableBy(field.name) %}
+            {% set sortingDirection = grid.getSortingOrder(field.name) %}
+
+            {% if grid.isSortedBy(field.name) %}
+                {{ sorting.sortedHeader(definition, field, requestAttributes, sortingDirection) }}
+            {% else %}
+                {{ sorting.sortableHeader(definition, field, requestAttributes, sortingDirection) }}
+            {% endif %}
+        {% else %}
+            <th>{{ field.label|trans }}</th>
+        {% endif %}
+    {% endfor %}
+    {% if definition.actionGroups.item is defined and definition.getActions('item')|length > 0 %}
+        <th>{{ 'sylius.ui.actions'|trans }}</th>
+    {% endif %}
+{% endmacro %}
+
+{% macro row(grid, definition, row) %}
+    {% for field in definition.fields %}
+        <td>{{ sylius_grid_render_field(grid, field, row) }}</td>
+    {% endfor %}
+    {% if definition.actionGroups.item is defined and definition.getActions('item')|length > 0 %}
+        <td>
+            <div class="ui buttons">
+                {% for action in definition.getActions('item') %}
+                    {{ sylius_grid_render_action(grid, action, row) }}
+                {% endfor %}
+            </div>
+        </td>
+    {% endif %}
+{% endmacro %}

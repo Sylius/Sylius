@@ -16,6 +16,7 @@ use Behat\Mink\Session;
 use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Symfony\Component\Routing\RouterInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -82,9 +83,7 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
     public function sortBy($fieldName)
     {
         $sortableHeaders = $this->tableAccessor->getSortableHeaders($this->getElement('table'));
-        if (!isset($sortableHeaders[$fieldName])) {
-            throw new \InvalidArgumentException(sprintf('Field %s cannot be sorted.', $fieldName));
-        }
+        Assert::keyExists($sortableHeaders, $fieldName, sprintf('Column "%s" is not sortable.', $fieldName));
 
         $sortableHeaders[$fieldName]->find('css', 'a')->click();
     }
