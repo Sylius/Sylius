@@ -39,8 +39,6 @@ class CouponToCodeTransformer implements DataTransformerInterface
     protected $dispatcher;
 
     /**
-     * Constructor.
-     *
      * @param ObjectRepository         $couponRepository
      * @param EventDispatcherInterface $dispatcher
      */

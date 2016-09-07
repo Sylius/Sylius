@@ -57,9 +57,6 @@ class Payment implements PaymentInterface
      */
     protected $details = [];
 
-    /**
-     * Constructor.
-     */
     public function __construct()
     {
         $this->createdAt = new \DateTime();
