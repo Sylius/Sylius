@@ -37,41 +37,48 @@ final class CouponsEligibilityCheckerSpec extends ObjectBehavior
     }
 
     function it_dispatches_event_and_returns_true_if_subject_coupons_are_eligible_to_promotion(
-        CouponInterface $coupon,
+        CouponAwarePromotionSubjectInterface $subject,
         PromotionInterface $promotion,
-        CouponAwarePromotionSubjectInterface $subject
+        CouponInterface $coupon
     ) {
         $subject->getPromotionCoupon()->willReturn($coupon);
+        $promotion->isCouponBased()->willReturn(true);
+
         $coupon->getPromotion()->willReturn($promotion);
 
         $this->isEligible($subject, $promotion)->shouldReturn(true);
     }
 
     function it_returns_false_if_subject_coupons_are_not_eligible_to_promotion(
-        CouponInterface $coupon,
+        CouponAwarePromotionSubjectInterface $subject,
         PromotionInterface $promotion,
         PromotionInterface $otherPromotion,
-        CouponAwarePromotionSubjectInterface $subject
+        CouponInterface $coupon
     ) {
         $subject->getPromotionCoupon()->willReturn($coupon);
+        $promotion->isCouponBased()->willReturn(true);
+
         $coupon->getPromotion()->willReturn($otherPromotion);
 
         $this->isEligible($subject, $promotion)->shouldReturn(false);
     }
 
     function it_returns_false_if_subject_has_no_coupon(
-        PromotionInterface $promotion,
-        CouponAwarePromotionSubjectInterface $subject
+        CouponAwarePromotionSubjectInterface $subject,
+        PromotionInterface $promotion
     ) {
         $subject->getPromotionCoupon()->willReturn(null);
+        $promotion->isCouponBased()->willReturn(true);
 
         $this->isEligible($subject, $promotion)->shouldReturn(false);
     }
 
     function it_returns_false_if_subject_is_not_coupon_aware(
-        PromotionInterface $promotion,
-        PromotionSubjectInterface $subject
+        PromotionSubjectInterface $subject,
+        PromotionInterface $promotion
     ) {
+        $promotion->isCouponBased()->willReturn(true);
+
         $this->isEligible($subject, $promotion)->shouldReturn(false);
     }
 }

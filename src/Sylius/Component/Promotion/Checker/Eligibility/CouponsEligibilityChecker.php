@@ -25,7 +25,15 @@ final class CouponsEligibilityChecker implements PromotionEligibilityCheckerInte
      */
     public function isEligible(PromotionSubjectInterface $promotionSubject, PromotionInterface $promotion)
     {
-        if (!$promotionSubject instanceof CouponAwarePromotionSubjectInterface || null === $promotionSubject->getPromotionCoupon()) {
+        if (!$promotion->isCouponBased()) {
+            throw new UnsupportedPromotionException('Only coupon based promotions can be evaluated by this checker.');
+        }
+
+        if (!$promotionSubject instanceof CouponAwarePromotionSubjectInterface) {
+            return false;
+        }
+
+        if (null === $promotionSubject->getPromotionCoupon()) {
             return false;
         }
 

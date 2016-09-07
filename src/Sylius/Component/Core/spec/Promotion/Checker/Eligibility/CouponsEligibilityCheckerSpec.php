@@ -42,31 +42,33 @@ final class CouponsEligibilityCheckerSpec extends ObjectBehavior
         $this->shouldImplement(PromotionEligibilityCheckerInterface::class);
     }
 
-    function it_dispatches_event_and_returns_true_if_subject_coupon_is_eligible_to_promotion_and_coupon_usage_limit_is_0(
-        CouponInterface $coupon,
+    function it_returns_true_if_subject_coupon_is_eligible_to_promotion_and_coupon_usage_limit_is_0(
         OrderInterface $subject,
-        PromotionInterface $promotion
+        PromotionInterface $promotion,
+        CouponInterface $coupon
     ) {
         $subject->getPromotionCoupon()->willReturn($coupon);
-        $coupon->getPromotion()->willReturn($promotion);
+        $promotion->isCouponBased()->willReturn(true);
 
         $subject->getCustomer()->willReturn(null);
+        $coupon->getPromotion()->willReturn($promotion);
         $coupon->getPerCustomerUsageLimit()->willReturn(0);
 
         $this->isEligible($subject, $promotion)->shouldReturn(true);
     }
 
-    function it_dispatches_event_and_returns_true_if_subject_coupon_is_eligible_to_promotion_and_number_of_usages_is_lesser_than_coupon_usage_limit(
+    function it_returns_true_if_subject_coupon_is_eligible_to_promotion_and_number_of_usages_is_lesser_than_coupon_usage_limit(
         OrderRepositoryInterface $orderRepository,
-        CouponInterface $coupon,
-        CustomerInterface $customer,
         OrderInterface $subject,
-        PromotionInterface $promotion
+        PromotionInterface $promotion,
+        CouponInterface $coupon,
+        CustomerInterface $customer
     ) {
         $subject->getPromotionCoupon()->willReturn($coupon);
-        $coupon->getPromotion()->willReturn($promotion);
+        $promotion->isCouponBased()->willReturn(true);
 
         $subject->getCustomer()->willReturn($customer);
+        $coupon->getPromotion()->willReturn($promotion);
         $coupon->getPerCustomerUsageLimit()->willReturn(5);
 
         $orderRepository->countByCustomerAndCoupon($customer, $coupon)->willReturn(4);
@@ -74,17 +76,18 @@ final class CouponsEligibilityCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, $promotion)->shouldReturn(true);
     }
 
-    function it_dispatches_event_and_returns_true_if_subject_coupon_is_eligible_to_promotion_and_number_of_usages_is_equal_with_coupon_usage_limit(
+    function it_returns_true_if_subject_coupon_is_eligible_to_promotion_and_number_of_usages_is_equal_with_coupon_usage_limit(
         OrderRepositoryInterface $orderRepository,
-        CouponInterface $coupon,
-        CustomerInterface $customer,
         OrderInterface $subject,
-        PromotionInterface $promotion
+        PromotionInterface $promotion,
+        CouponInterface $coupon,
+        CustomerInterface $customer
     ) {
         $subject->getPromotionCoupon()->willReturn($coupon);
-        $coupon->getPromotion()->willReturn($promotion);
+        $promotion->isCouponBased()->willReturn(true);
 
         $subject->getCustomer()->willReturn($customer);
+        $coupon->getPromotion()->willReturn($promotion);
         $coupon->getPerCustomerUsageLimit()->willReturn(5);
 
         $orderRepository->countByCustomerAndCoupon($customer, $coupon)->willReturn(5);
@@ -92,31 +95,35 @@ final class CouponsEligibilityCheckerSpec extends ObjectBehavior
         $this->isEligible($subject, $promotion)->shouldReturn(true);
     }
 
-    function it_dispatches_event_and_returns_false_if_coupon_usage_limit_is_greater_than_0_but_subject_has_no_customer(
-        CouponInterface $coupon,
+    function it_returns_false_if_coupon_usage_limit_is_greater_than_0_but_subject_has_no_customer(
+        OrderRepositoryInterface $orderRepository,
         OrderInterface $subject,
-        PromotionInterface $promotion
+        PromotionInterface $promotion,
+        CouponInterface $coupon,
+        CustomerInterface $customer
     ) {
         $subject->getPromotionCoupon()->willReturn($coupon);
-        $coupon->getPromotion()->willReturn($promotion);
+        $promotion->isCouponBased()->willReturn(true);
 
         $subject->getCustomer()->willReturn(null);
+        $coupon->getPromotion()->willReturn($promotion);
         $coupon->getPerCustomerUsageLimit()->willReturn(10);
 
         $this->isEligible($subject, $promotion)->shouldReturn(false);
     }
 
-    function it_dispatches_event_and_returns_false_if_subject_coupon_is_eligible_to_promotion_and_number_of_usages_is_bigger_than_coupon_usage_limit(
+    function it_returns_false_if_subject_coupon_is_eligible_to_promotion_and_number_of_usages_is_bigger_than_coupon_usage_limit(
         OrderRepositoryInterface $orderRepository,
-        CouponInterface $coupon,
-        CustomerInterface $customer,
         OrderInterface $subject,
-        PromotionInterface $promotion
+        PromotionInterface $promotion,
+        CouponInterface $coupon,
+        CustomerInterface $customer
     ) {
         $subject->getPromotionCoupon()->willReturn($coupon);
-        $coupon->getPromotion()->willReturn($promotion);
+        $promotion->isCouponBased()->willReturn(true);
 
         $subject->getCustomer()->willReturn($customer);
+        $coupon->getPromotion()->willReturn($promotion);
         $coupon->getPerCustomerUsageLimit()->willReturn(5);
 
         $orderRepository->countByCustomerAndCoupon($customer, $coupon)->willReturn(6);

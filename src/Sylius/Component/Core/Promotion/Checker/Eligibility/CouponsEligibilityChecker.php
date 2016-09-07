@@ -15,6 +15,7 @@ use Sylius\Component\Core\Model\CouponInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 use Sylius\Component\Promotion\Checker\Eligibility\PromotionEligibilityCheckerInterface;
+use Sylius\Component\Promotion\Checker\Eligibility\UnsupportedPromotionException;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
@@ -41,6 +42,10 @@ final class CouponsEligibilityChecker implements PromotionEligibilityCheckerInte
      */
     public function isEligible(PromotionSubjectInterface $promotionSubject, PromotionInterface $promotion)
     {
+        if (!$promotion->isCouponBased()) {
+            throw new UnsupportedPromotionException('Only coupon based promotions can be evaluated by this checker.');
+        }
+
         if (!$promotionSubject instanceof OrderInterface) {
             return false;
         }
