@@ -119,7 +119,6 @@
         "sylius/customer": "self.version",
         "sylius/customer-bundle": "self.version",
         "sylius/fixtures-bundle": "self.version",
-        "sylius/flow-bundle": "self.version",
         "sylius/installer-bundle": "self.version",
         "sylius/inventory": "self.version",
         "sylius/inventory-bundle": "self.version",
