@@ -23,10 +23,6 @@
     </imports>
 
     <parameters>
-        <parameter key="sylius.settings_schema.general.class">Sylius\Bundle\CoreBundle\Settings\GeneralSettingsSchema</parameter>
-        <parameter key="sylius.settings_schema.taxation.class">Sylius\Bundle\CoreBundle\Settings\TaxationSettingsSchema</parameter>
-        <parameter key="sylius.settings_schema.security.class">Sylius\Bundle\CoreBundle\Settings\SecuritySettingsSchema</parameter>
-
         <parameter key="sylius.checkout_scenario.class">Sylius\Bundle\CoreBundle\Checkout\CheckoutProcessScenario</parameter>
         <parameter key="sylius.checkout_step.security.class">Sylius\Bundle\CoreBundle\Checkout\Step\SecurityStep</parameter>
         <parameter key="sylius.checkout_step.addressing.class">Sylius\Bundle\CoreBundle\Checkout\Step\AddressingStep</parameter>
@@ -108,15 +104,13 @@
         <parameter key="sylius.payment_methods_resolver.channel_based.class">Sylius\Component\Core\Resolver\ChannelBasedPaymentMethodsResolver</parameter>
         <parameter key="sylius.shipping_methods_resolver.zones_and_channel_based.class">Sylius\Component\Core\Resolver\ZoneAndChannelBasedShippingMethodsResolver</parameter>
 
+        <parameter key="sylius.updater.order.exchange_rate.class">Sylius\Component\Core\Updater\OrderExchangeRateUpdater</parameter>
+        <parameter key="sylius.updater.order.exchange_rate_and_currency.class">Sylius\Component\Core\Updater\OrderExchangeRateAndCurrencyUpdater</parameter>
+
         <parameter key="sylius.context.customer.class">Sylius\Bundle\CoreBundle\Context\CustomerContext</parameter>
 
         <!-- Form subscriber -->
         <parameter key="sylius.form.event_subscriber.set_customer_type.class">Sylius\Bundle\CoreBundle\Form\EventSubscriber\SetCustomerFormSubscriber</parameter>
-
-        <!-- Data fetchers -->
-        <parameter key="sylius.form.type.data_fetcher.number_of_orders.class">Sylius\Bundle\CoreBundle\Form\Type\DataFetcher\NumberOfOrdersType</parameter>
-        <parameter key="sylius.form.type.data_fetcher.sales_total.class">Sylius\Bundle\CoreBundle\Form\Type\DataFetcher\SalesTotalType</parameter>
-        <parameter key="sylius.form.type.data_fetcher.user_registration.class">Sylius\Bundle\CoreBundle\Form\Type\DataFetcher\UserRegistrationType</parameter>
 
         <parameter key="sylius.authorization_checker.toggleable.class">Sylius\Bundle\CoreBundle\Authorization\ToggleableAuthorizationChecker</parameter>
         <parameter key="sylius.based_on_id_invoice_number_generator.class" >Sylius\Component\Core\Payment\IdBasedInvoiceNumberGenerator</parameter>
@@ -125,20 +119,11 @@
         <parameter key="sylius.form.type.product_legacy.class">Sylius\Bundle\CoreBundle\Form\Type\LegacyProductType</parameter>
 
         <parameter key="sylius.generator.product_variant.class">Sylius\Bundle\CoreBundle\Generator\ProductVariantGenerator</parameter>
+
+        <parameter key="sylius.inventory.on_hand_quantity_updater.class">Sylius\Component\Core\Inventory\Updater\OnHandQuantityUpdater</parameter>
     </parameters>
 
     <services>
-        <!-- settings schemas -->
-        <service id="sylius.settings_schema.general" class="%sylius.settings_schema.general.class%">
-            <argument type="collection">
-                <argument key="locale">%locale%</argument>
-            </argument>
-            <tag name="sylius.settings_schema" alias="sylius_general" />
-        </service>
-        <service id="sylius.settings_schema.security" class="%sylius.settings_schema.security.class%">
-            <tag name="sylius.settings_schema" alias="sylius_security" />
-        </service>
-
         <!-- cart -->
         <service id="sylius.cart_item_resolver.default" class="%sylius.cart_item_resolver.default.class%">
             <argument type="service" id="sylius.context.cart" />
@@ -340,8 +325,9 @@
 
         <service id="sylius.image_uploader" class="%sylius.image_uploader.class%">
             <argument type="service">
-                <service class="Gaufrette\Filesystem" factory-service="knp_gaufrette.filesystem_map" factory-method="get">
+                <service class="Gaufrette\Filesystem">
                     <argument>%sylius.uploader.filesystem%</argument>
+                    <factory service="knp_gaufrette.filesystem_map" method="get" />
                 </service>
             </argument>
         </service>
@@ -377,7 +363,7 @@
             <tag name="sylius.promotion_action" type="unit_fixed_discount" label="Item fixed discount" />
         </service>
         <service id="sylius.promotion_action.percentage_discount" class="%sylius.promotion_action.percentage_discount.class%">
-            <argument type="service" id="sylius.integer_distributor" />
+            <argument type="service" id="sylius.proportional_integer_distributor" />
             <argument type="service" id="sylius.promotion.units_promotion_adjustments_applicator" />
             <tag name="sylius.promotion_action" type="order_percentage_discount" label="Order percentage discount" />
         </service>
@@ -451,6 +437,14 @@
             <tag name="sylius.payment_method_resolver" type="channel_based" label="sylius.payment_methods_resolver.channel_based" priority="1" />
         </service>
 
+        <service id="sylius.updater.order.exchange_rate" class="%sylius.updater.order.exchange_rate.class%">
+            <argument type="service" id="sylius.repository.currency" />
+        </service>
+        <service id="sylius.updater.order.exchange_rate_and_currency" class="%sylius.updater.order.exchange_rate_and_currency.class%">
+            <argument type="service" id="sylius.context.currency" />
+            <argument type="service" id="sylius.repository.currency" />
+        </service>
+
         <!-- Customer context -->
         <service id="sylius.context.customer" class="%sylius.context.customer.class%">
             <argument type="service" id="security.token_storage" />
@@ -460,19 +454,6 @@
         <!-- Form event subscribers-->
         <service id="sylius.form.event_subscriber.set_customer" class="%sylius.form.event_subscriber.set_customer_type.class%">
             <argument type="service" id="sylius.repository.customer" />
-        </service>
-
-        <!-- Data fetchers -->
-        <service id="sylius.form.type.data_fetcher.user_registration" class="%sylius.form.type.data_fetcher.user_registration.class%">
-            <tag name="form.type" alias="sylius_data_fetcher_user_registration" />
-        </service>
-
-        <service id="sylius.form.type.data_fetcher.sales_total" class="%sylius.form.type.data_fetcher.sales_total.class%">
-            <tag name="form.type" alias="sylius_data_fetcher_sales_total" />
-        </service>
-
-        <service id="sylius.form.type.data_fetcher.number_of_orders" class="%sylius.form.type.data_fetcher.number_of_orders.class%">
-            <tag name="form.type" alias="sylius_data_fetcher_number_of_orders" />
         </service>
 
         <service id="sylius.validator.has_enabled_entity" class="%sylius.validator.has_enabled_entity.class%">
@@ -492,6 +473,8 @@
             <argument type="service" id="sylius.custom_factory.cart_item.inner" />
             <argument type="service" id="sylius.variant_resolver.default" />
         </service>
+
+        <service id="sylius.inventory.on_hand_quantity_updater" class="%sylius.inventory.on_hand_quantity_updater.class%"/>
     </services>
 
 </container>

@@ -88,6 +88,19 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
         return $this->getElement('password');
     }
 
+    public function subscribeToTheNewsletter()
+    {
+        $this->getDocument()->checkField('Subscribe to the newsletter');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function isSubscribedToTheNewsletter()
+    {
+        return $this->getDocument()->hasCheckedField('Subscribe to the newsletter');
+    }
+
     /**
      * {@inheritdoc}
      */

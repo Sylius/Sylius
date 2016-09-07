@@ -134,6 +134,16 @@ final class OrderSpec extends ObjectBehavior
         $this->shouldNotHaveShipment($shipment);
     }
 
+    function it_removes_shipments(ShipmentInterface $shipment)
+    {
+        $this->addShipment($shipment);
+        $this->hasShipment($shipment)->shouldReturn(true);
+
+        $this->removeShipments();
+
+        $this->hasShipment($shipment)->shouldReturn(false);
+    }
+
     function it_should_return_shipping_adjustments(
         AdjustmentInterface $shippingAdjustment,
         AdjustmentInterface $taxAdjustment
@@ -248,6 +258,17 @@ final class OrderSpec extends ObjectBehavior
     {
         $this->setExchangeRate(1.25);
         $this->getExchangeRate()->shouldReturn(1.25);
+    }
+
+    function it_has_no_default_locale_code()
+    {
+        $this->getLocaleCode()->shouldReturn(null);
+    }
+
+    function its_locale_code_is_mutable()
+    {
+        $this->setLocaleCode('en');
+        $this->getLocaleCode()->shouldReturn('en');
     }
 
     function it_has_cart_shipping_state_by_default()

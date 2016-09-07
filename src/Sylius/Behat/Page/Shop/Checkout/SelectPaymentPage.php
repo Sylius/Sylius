@@ -58,9 +58,21 @@ class SelectPaymentPage extends SymfonyPage implements SelectPaymentPageInterfac
         return true;
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getItemSubtotal($itemName)
+    {
+        $itemSlug = strtolower(str_replace('\"', '', str_replace(' ', '-', $itemName)));
+
+        $subtotalTable = $this->getElement('checkout_subtotal');
+
+        return $subtotalTable->find('css', sprintf('#item-%s-subtotal', $itemSlug))->getText();
+    }
+
     public function nextStep()
     {
-        $this->getDocument()->pressButton('Next');
+        $this->getElement('next_step')->press();
     }
 
     public function changeShippingMethod()
@@ -85,7 +97,9 @@ class SelectPaymentPage extends SymfonyPage implements SelectPaymentPageInterfac
     {
         return array_merge(parent::getDefinedElements(), [
             'address_step_label' => '.steps a:contains("Address")',
+            'checkout_subtotal' => '#checkout-subtotal',
             'shipping_step_label' => '.steps a:contains("Shipping")',
+            'next_step' => '#next-step',
             'order_cannot_be_paid_message' => '#sylius-order-cannot-be-paid',
             'payment_method' => '[name="sylius_checkout_select_payment[payments][0][method]"]',
             'payment_method_option' => '.item:contains("%payment_method%") input',

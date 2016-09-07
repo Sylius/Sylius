@@ -2,6 +2,39 @@
 # (c) Paweł Jędrzejewski
 
 sylius:
+    channel:
+        default_currency:
+            not_blank: Por favor insira a moeda padrão do canal.
+        default_locale:
+            not_blank: Introduza a localidade padrão do canal.
+    checkout:
+        shipping_method:
+            not_blank: Selecione o método de envio.
     customer:
         currency_code:
-            not_valid: O código de moeda que você inseriu é inválido.
+            not_valid: O código de moeda introduzido é inválido.
+    order:
+        currency_code:
+            not_valid: O código de moeda inserido é inválido.
+    locale:
+        code:
+            not_blank: Introduza o código de localidade.
+            unique: Esta localidade já existe.
+    product_variant:
+        onHand:
+            min: 'A disponibilidade deve ser maior que {{ limit }}.'
+            not_blank: Introduza a disponibilidade.
+        price:
+            min: O preço não deve ser negativo.
+            not_blank: Introduza o preço.
+        original_price:
+            min: O preço original não deve ser negativo.
+    product_translation:
+        short_description:
+            max: 'A descrição curta não pode ter mais que {{ limit }} caracteres.'
+    user:
+        email:
+            unique: Este endereço de e-mail já está registado.
+        username:
+            unique: Este nome de utilizador já foi utilizado.
+            not_blank: Introduza o seu nome.

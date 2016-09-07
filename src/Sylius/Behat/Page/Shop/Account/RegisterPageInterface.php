@@ -57,4 +57,6 @@ interface RegisterPageInterface extends SymfonyPageInterface
      * @param string $password
      */
     public function verifyPassword($password);
+
+    public function subscribeToTheNewsletter();
 }

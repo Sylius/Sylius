@@ -14,9 +14,12 @@ namespace Sylius\Behat\Page\Shop\Checkout;
 use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
+use Behat\Mink\Session;
 use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Component\Core\Model\AddressInterface;
+use Sylius\Component\Locale\Context\LocaleContextInterface;
 use Symfony\Component\Intl\Intl;
+use Symfony\Component\Routing\RouterInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -98,7 +101,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         $this->getElement('shipping_first_name')->setValue($shippingAddress->getFirstName());
         $this->getElement('shipping_last_name')->setValue($shippingAddress->getLastName());
         $this->getElement('shipping_street')->setValue($shippingAddress->getStreet());
-        $this->getElement('shipping_country')->selectOption($this->getCountryNameOrDefault($shippingAddress->getCountryCode()));
+        $this->getElement('shipping_country')->selectOption($shippingAddress->getCountryCode() ?: 'Select');
         $this->getElement('shipping_city')->setValue($shippingAddress->getCity());
         $this->getElement('shipping_postcode')->setValue($shippingAddress->getPostcode());
     }
@@ -120,7 +123,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         $this->getElement('billing_first_name')->setValue($billingAddress->getFirstName());
         $this->getElement('billing_last_name')->setValue($billingAddress->getLastName());
         $this->getElement('billing_street')->setValue($billingAddress->getStreet());
-        $this->getElement('billing_country')->selectOption($this->getCountryNameOrDefault($billingAddress->getCountryCode()));
+        $this->getElement('billing_country')->selectOption($billingAddress->getCountryCode() ?: 'Select');
         $this->getElement('billing_city')->setValue($billingAddress->getCity());
         $this->getElement('billing_postcode')->setValue($billingAddress->getPostcode());
     }
@@ -177,9 +180,21 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         $this->getElement('login_password')->setValue($password);
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getItemSubtotal($itemName)
+    {
+        $itemSlug = strtolower(str_replace('\"', '', str_replace(' ', '-', $itemName)));
+
+        $subtotalTable = $this->getElement('checkout_subtotal');
+
+        return $subtotalTable->find('css', sprintf('#item-%s-subtotal', $itemSlug))->getText();
+    }
+
     public function nextStep()
     {
-        $this->getDocument()->pressButton('Next');
+        $this->getElement('next_step')->press();
     }
 
     public function backToStore()
@@ -200,6 +215,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
             'billing_country_province' => '[name="sylius_checkout_address[billingAddress][provinceCode]"]',
             'billing_city' => '#sylius_checkout_address_billingAddress_city',
             'billing_postcode' => '#sylius_checkout_address_billingAddress_postcode',
+            'checkout_subtotal' => '#checkout-subtotal',
             'customer_email' => '#sylius_checkout_address_customer_email',
             'different_billing_address' => '#sylius_checkout_address_differentBillingAddress',
             'different_billing_address_label' => '#sylius_checkout_address_differentBillingAddress ~ label',
@@ -210,21 +226,10 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
             'shipping_country_province' => '[name="sylius_checkout_address[shippingAddress][provinceCode]"]',
             'shipping_city' => '#sylius_checkout_address_shippingAddress_city',
             'shipping_postcode' => '#sylius_checkout_address_shippingAddress_postcode',
+            'next_step' => '#next-step',
             'login_password' => 'input[type=\'password\']',
             'login_button' => '#sylius-api-login-submit',
         ]);
-    }
-
-    /**
-     * @param string|null $code
-     * 
-     * @return string
-     */
-    private function getCountryNameOrDefault($code)
-    {
-        $countryName = null === $code ? 'Select' : Intl::getRegionBundle()->getCountryNames('en')[$code];
-
-        return $countryName;
     }
 
     /**

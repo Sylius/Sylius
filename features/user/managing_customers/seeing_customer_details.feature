@@ -27,3 +27,9 @@ Feature: Seeing customer's details
     Scenario: Seeing information about no existing account for a given customer
         When I view details of the customer "f.baggins@shire.me"
         Then I should see information about no existing account for this customer
+
+    @ui
+    Scenario: Seeing information about subscription to the newsletter
+        Given the customer subscribed to the newsletter
+        When I view details of the customer "f.baggins@shire.me"
+        Then I should see that this customer is subscribed to the newsletter

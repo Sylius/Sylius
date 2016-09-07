@@ -13,7 +13,7 @@ namespace spec\Sylius\Component\Shipping\Calculator;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Shipping\Calculator\CalculatorInterface;
-use Sylius\Component\Shipping\Model\ShippingSubjectInterface;
+use Sylius\Component\Shipping\Model\ShipmentInterface;
 
 /**
  * @author Alexandre Bacco <alexandre.bacco@gmail.com>
@@ -35,14 +35,14 @@ final class WeightRateCalculatorSpec extends ObjectBehavior
         $this->getType()->shouldReturn('weight_rate');
     }
 
-    function it_should_calculate_the_flat_rate_amount_configured_on_the_method(ShippingSubjectInterface $subject)
+    function it_should_calculate_the_flat_rate_amount_configured_on_the_method(ShipmentInterface $subject)
     {
         $subject->getShippingWeight()->willReturn(10);
 
         $this->calculate($subject, ['fixed' => 200, 'variable' => 500, 'division' => 1])->shouldReturn(200 + 500 * 10);
     }
 
-    function its_calculated_value_should_be_an_integer(ShippingSubjectInterface $subject)
+    function its_calculated_value_should_be_an_integer(ShipmentInterface $subject)
     {
         $subject->getShippingWeight()->willReturn(10);
 

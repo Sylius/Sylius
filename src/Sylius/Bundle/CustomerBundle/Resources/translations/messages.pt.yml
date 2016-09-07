@@ -3,8 +3,22 @@
 
 sylius:
     form:
+        group:
+            name: Nome
+            roles: Funções
         customer:
-            email: Endereço de email
-            phone_number: Número de Telefone
+            first_name: Nome próprio
+            groups: Grupos
+            last_name: Apelido
+            email: Endereço de e-mail
+            phone_number: Número de telefone
+            gender: Género
+            birthday: Data de nascimento
+            billing_address: Endereço de faturação
+            different_billing_address: Usar um endereço diferente para faturação?
+            only_customer_registration: Criar conta?
+            subscribed_to_newsletter: Subscrever a newsletter
     gender:
         unknown: Desconhecido
+        male: Masculino
+        female: Feminino

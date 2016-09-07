@@ -229,4 +229,14 @@ final class CustomerContext implements Context
         $this->sharedStorage->set('customer', $customer);
         $this->customerRepository->add($customer);
     }
+
+    /**
+     * @Given /^(the customer) subscribed to the newsletter$/
+     */
+    public function theCustomerSubscribedToTheNewsletter(CustomerInterface $customer)
+    {
+        $customer->setSubscribedToNewsletter(true);
+
+        $this->customerManager->flush();
+    }
 }

@@ -20,8 +20,6 @@ use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormView;
 
 /**
- * Priceable form extension.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class PriceableTypeExtension extends AbstractTypeExtension
@@ -34,22 +32,16 @@ class PriceableTypeExtension extends AbstractTypeExtension
     protected $extendedType;
 
     /**
-     * Calculator registry.
-     *
-     * @var ServiceRegistryInterface
+     * @var EventSubscriberInterface
      */
     protected $formSubscriber;
 
     /**
-     * Calculator registry.
-     *
      * @var ServiceRegistryInterface
      */
     protected $calculatorRegistry;
 
     /**
-     * Constructor.
-     *
      * @param string                   $extendedType
      * @param ServiceRegistryInterface $calculatorRegistry
      * @param EventSubscriberInterface $formSubscriber

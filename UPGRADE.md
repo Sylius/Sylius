@@ -3,6 +3,17 @@ UPGRADE
 
 ## From 0.19 to 1.0.0-alpha
 
+### WebBundle
+ 
+ * Removed ``WebBundle``. See ``ShopBundle`` for the website and ``AdminBundle`` for administration-related.
+ 
+  See https://github.com/Sylius/Sylius/pull/5535 and https://github.com/Sylius/Sylius/pull/5655
+
+### Removed Assetic
+
+ * Sylius is no longer using Assetic for assets management - see https://github.com/Sylius/Sylius/pull/5593
+ * Gulp and NPM are now responsible to compile the new UI
+
 ### Archetype and ArchetypeBundle
 
 * Removed ``Archetype`` component and ``ArchetypeBundle``
@@ -19,6 +30,10 @@ UPGRADE
 
 * Added ``OrderSequence`` model to keep current order index
 * Added ``OrderNumberGenerator`` to generate number for new orders
+
+### Report and ReportBundle
+
+* Removed ``Report`` component and ``ReportBundle``
 
 ### Sequence and SequenceBundle
 

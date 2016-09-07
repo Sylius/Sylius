@@ -43,7 +43,7 @@ winzou_state_machine:
                     args: ["object"]
                 sylius_update_exchange_rate:
                     on: ["select_payment"]
-                    do: ["@sylius.order_processing.order_exchange_rate_and_currency_updater", "update"]
+                    do: ["@sylius.updater.order.exchange_rate_and_currency", "update"]
                     args: ["object"]
                 sylius_create_order:
                     on: ["complete"]
@@ -107,6 +107,12 @@ winzou_state_machine:
             pay:
                 from: [awaiting_payment, partially_paid]
                 to: paid
+        callbacks:
+            after:
+                sylius_order_paid:
+                    on: ["pay"]
+                    do: ["@sylius.inventory.on_hand_quantity_updater", "decrease"]
+                    args: ["object"]
 
     sylius_payment:
         callbacks:

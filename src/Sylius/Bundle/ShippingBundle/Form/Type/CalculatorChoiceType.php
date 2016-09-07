@@ -22,15 +22,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class CalculatorChoiceType extends AbstractType
 {
     /**
-     * Calculators.
-     *
      * @var array
      */
     protected $calculators;
 
     /**
-     * Constructor.
-     *
      * @param array $calculators
      */
     public function __construct($calculators)

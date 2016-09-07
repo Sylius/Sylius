@@ -173,7 +173,7 @@ final class CurrencyContext implements Context
     }
 
     /**
-     * @Given /^the exchange rate for (currency "([^"]+)") was changed to ((\d+)\.(\d+))$/
+     * @Given /^the exchange rate for (currency "[^"]+") was changed to ((\d+)\.(\d+))$/
      */
     public function theExchangeRateForWasChangedTo(CurrencyInterface $currency, $exchangeRate)
     {

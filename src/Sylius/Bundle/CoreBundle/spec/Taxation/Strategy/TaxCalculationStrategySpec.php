@@ -12,9 +12,7 @@
 namespace spec\Sylius\Bundle\CoreBundle\Taxation\Strategy;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\Taxation\Strategy\TaxCalculationStrategy;
-use Sylius\Bundle\SettingsBundle\Model\SettingsInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -59,10 +57,9 @@ final class TaxCalculationStrategySpec extends ObjectBehavior
     function it_throws_an_exception_if_any_of_the_applicators_are_not_of_the_correct_type(
         OrderTaxesApplicatorInterface $applicatorOne,
         OrderTaxesApplicatorInterface $applicatorTwo,
-        \stdClass $applicatorThree,
-        SettingsInterface $settings
+        \stdClass $applicatorThree
     ) {
-        $this->beConstructedWith('order_items_based', [$applicatorOne, $applicatorTwo, $applicatorThree], $settings);
+        $this->beConstructedWith('order_items_based', [$applicatorOne, $applicatorTwo, $applicatorThree]);
 
         $this->shouldThrow(\InvalidArgumentException::class)->duringInstantiation();
     }

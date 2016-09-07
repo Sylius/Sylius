@@ -14,8 +14,6 @@ namespace Sylius\Bundle\ShippingBundle\DependencyInjection;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Bundle\ShippingBundle\Controller\ShipmentController;
-use Sylius\Bundle\ShippingBundle\Form\Type\RuleType;
 use Sylius\Bundle\ShippingBundle\Form\Type\ShipmentType;
 use Sylius\Bundle\ShippingBundle\Form\Type\ShippingCategoryType;
 use Sylius\Bundle\ShippingBundle\Form\Type\ShippingMethodChoiceType;
@@ -81,7 +79,7 @@ class Configuration implements ConfigurationInterface
                                     ->children()
                                         ->scalarNode('model')->defaultValue(Shipment::class)->cannotBeEmpty()->end()
                                         ->scalarNode('interface')->defaultValue(ShipmentInterface::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('controller')->defaultValue(ShipmentController::class)->cannotBeEmpty()->end()
+                                        ->scalarNode('controller')->defaultValue(ResourceController::class)->cannotBeEmpty()->end()
                                         ->scalarNode('repository')->cannotBeEmpty()->end()
                                         ->scalarNode('factory')->defaultValue(Factory::class)->end()
                                         ->arrayNode('form')

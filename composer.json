@@ -138,8 +138,6 @@
         "sylius/promotion": "self.version",
         "sylius/promotion-bundle": "self.version",
         "sylius/registry": "self.version",
-        "sylius/report": "self.version",
-        "sylius/report-bundle": "self.version",
         "sylius/resource": "self.version",
         "sylius/resource-bundle": "self.version",
         "sylius/search-bundle": "self.version",
@@ -189,6 +187,11 @@
             "Sylius\\Behat\\": "src/Sylius/Behat/",
             "Sylius\\Bundle\\": "src/Sylius/Bundle/",
             "Sylius\\Component\\": "src/Sylius/Component/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Sylius\\Tests\\": "tests/"
         }
     },
     "config": {

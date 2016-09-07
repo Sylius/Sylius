@@ -3,5 +3,7 @@
 
 sylius:
     promotion_coupon:
+        generate: Cupões promocionais criados com sucesso.
         eligible: O seu código promocional foi adicionado ao carrinho.
+        invalid: O cupão promocional não é válido.
         not_eligible: Seu carrinho não é elegível para este código de promoção.

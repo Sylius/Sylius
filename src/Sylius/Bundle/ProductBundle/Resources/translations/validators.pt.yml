@@ -4,4 +4,16 @@
 sylius:
     product:
         sku:
-            unique: SKU de produto deve ser único.
+            not_blank: Introduza o SKU do produto.
+            unique: O SKU do produto deve ser único.
+        code:
+            not_blank: Introduza o código do produto.
+            unique: O código do produto deve ser único.
+        name:
+            not_blank: Introduza o nome do produto.
+            min_length: 'O nome do produto deve ter pelo menos 1 caracter.|O nome do produto deve ter pelo menos {{ limit }} caracteres.'
+            max_length: 'O nome do produto não deve ter mais que 1 caracter.|O nome do produto não deve ter mais que {{ limit }} caracteres.'
+    variant:
+        sku:
+            not_blank: Por favor introduza a SKU variante.
+            unique: A SKU variante deve ser única.

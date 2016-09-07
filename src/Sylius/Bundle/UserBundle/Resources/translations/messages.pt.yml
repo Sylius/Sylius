@@ -4,5 +4,20 @@
 sylius:
     form:
         user:
-            email: Endereço de email
-            username: Login
+            email: Endereço de e-mail
+            enabled: Ativado
+            password:
+                label: Palavra-passe
+                confirmation: Verificação
+            remember_me: Lembrar-me
+            shipping_address: Endereço de entrega
+            username: Nome de utilizador
+        user_filter:
+            query: Pesquisar
+        user_change_password:
+            confirmation: Confirmação da palavra-passe
+            current: Palavra-passe atual
+            new: Nova Palavra-Passe
+        user_reset_password:
+            confirmation: Confirmação da palavra-passe
+            new: Nova Palavra-Passe

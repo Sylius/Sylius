@@ -73,7 +73,7 @@ AdjustmentInterface
 This interface should be implemented by model representing a single Adjustment.
 
 .. note::
-    This interface extends the :ref:`component_resource_model_timestampable-interface` and the :ref:`component_originator_model_origin-aware-interface`
+    This interface extends the :ref:`component_resource_model_timestampable-interface`.
 
     For more detailed information go to `Sylius API AdjustmentInterface`_.
 

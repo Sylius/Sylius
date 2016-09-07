@@ -7,9 +7,21 @@
     {% include '@SyliusShop/Checkout/_steps.html.twig' with {'active': 'complete'} %}
     <div class="ui padded segment">
         {{ form_start(form, {'action': path('sylius_shop_checkout_complete'), 'attr': {'class': 'ui loadable form', 'novalidate': 'novalidate'}}) }}
+            {{ form_errors(form) }}
             <input type="hidden" name="_method" value="PUT" />
 
             {% include 'SyliusShopBundle:Common/Order:_summary.html.twig' %}
+
+            <div class="ui two column stackable grid">
+                <div class="column">
+                    <h5 class="ui header">{{ 'sylius.ui.locale'|trans }}</h5>
+                    <div id="locale"><i class="{{ order.localeCode|slice(3, 2)|lower }} flag"></i> {{ order.localeCode|locale }}</div>
+                </div>
+                <div class="column">
+                    <h5 class="ui header">{{ 'sylius.ui.currency'|trans }}</h5>
+                    <div id="currency">{{ order.currencyCode }}</div>
+                </div>
+            </div>
 
             <div class="ui hidden divider"></div>
             {% include '@SyliusShop/Checkout/Complete/_form.html.twig' %}

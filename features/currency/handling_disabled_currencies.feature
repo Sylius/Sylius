@@ -19,7 +19,7 @@ Feature: Handling disabled currencies
     Scenario: Failing to browse channel with disabled default currency
         Given the currency "EUR" is disabled as well
         When I try to browse that channel
-        Then I should not be able to shop
+        Then I should not be able to shop without default currency
 
     @ui
     Scenario: Falling back to the default currency if selected one is not available

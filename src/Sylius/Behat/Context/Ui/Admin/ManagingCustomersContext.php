@@ -498,4 +498,34 @@ final class ManagingCustomersContext implements Context
             'There should be information about no account, but there is none.'
         );
     }
+
+    /**
+     * @Then I should see that this customer is subscribed to the newsletter
+     */
+    public function iShouldSeeThatThisCustomerIsSubscribedToTheNewsletter()
+    {
+        Assert::true(
+            $this->showPage->isSubscribedToNewsletter(),
+            'There should be information that this customer is subscribed to the newsletter.'
+        );
+    }
+
+    /**
+     * @When I make them subscribed to the newsletter
+     */
+    public function iMakeThemSubscribedToTheNewsletter()
+    {
+        $this->updatePage->subscribeToTheNewsletter();
+    }
+
+    /**
+     * @Then this customer should be subscribed to the newsletter
+     */
+    public function thisCustomerShouldBeSubscribedToTheNewsletter()
+    {
+        Assert::true(
+            $this->updatePage->isSubscribedToTheNewsletter(),
+            'This customer should subscribe to the newsletter.'
+        );
+    }
 }

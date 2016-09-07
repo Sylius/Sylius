@@ -36,6 +36,10 @@ class CustomerRegistrationType extends CustomerSimpleRegistrationType
                 'required' => false,
                 'label' => 'sylius.form.customer.phone_number',
             ])
+            ->add('subscribedToNewsletter', 'checkbox', [
+                'required' => false,
+                'label' => 'sylius.form.customer.subscribed_to_newsletter',
+            ])
         ;
     }
 

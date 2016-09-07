@@ -78,11 +78,20 @@ final class CartContext implements Context
     }
 
     /**
+     * @Given I am at the summary of my cart
      * @When I see the summary of my cart
      */
     public function iOpenCartSummaryPage()
     {
         $this->summaryPage->open();
+    }
+
+    /**
+     * @When I save my changes
+     */
+    public function iSaveMyChanges()
+    {
+        $this->summaryPage->updateCart();
     }
 
     /**
@@ -243,7 +252,7 @@ final class CartContext implements Context
     }
 
     /**
-     * @Given /^I add (this product) to the cart$/
+     * @Given /^I (?:add|added) (this product) to the cart$/
      * @Given I added product :product to the cart
      * @Given /^I (?:have|had) (product "[^"]+") in the cart$/
      * @When I add product :product to the cart
@@ -280,15 +289,15 @@ final class CartContext implements Context
     }
 
     /**
-     * @Given I added :variant variant of product :product to the cart
-     * @When I add :variant variant of product :product to the cart
-     * @When I have :variant variant of product :product in the cart
+     * @Given I added :variantName variant of product :product to the cart
+     * @When I add :variantName variant of product :product to the cart
+     * @When I have :variantName variant of product :product in the cart
      * @When /^I add "([^"]+)" variant of (this product) to the cart$/
      */
-    public function iAddProductToTheCartSelectingVariant($variant, ProductInterface $product)
+    public function iAddProductToTheCartSelectingVariant($variantName, ProductInterface $product)
     {
         $this->productShowPage->open(['slug' => $product->getSlug()]);
-        $this->productShowPage->addToCartWithVariant($variant);
+        $this->productShowPage->addToCartWithVariant($variantName);
 
         $this->sharedStorage->set('product', $product);
     }
@@ -303,10 +312,10 @@ final class CartContext implements Context
     }
 
     /**
-     * @Given I have :quantity products :product in the cart
-     * @When I add :quantity products :product to the cart
+     * @Given /^I have(?:| added) (\d+) (products "([^"]+)") (?:to|in) the cart$/
+     * @When /^I add(?:|ed) (\d+) (products "([^"]+)") to the cart$/
      */
-    public function iAddProductsToTheCart(ProductInterface $product, $quantity)
+    public function iAddProductsToTheCart($quantity, ProductInterface $product)
     {
         $this->productShowPage->open(['slug' => $product->getSlug()]);
         $this->productShowPage->addToCartWithQuantity($quantity);
@@ -447,6 +456,40 @@ final class CartContext implements Context
         Assert::same(
             $this->summaryPage->getItemTotal($productName),
             $productPrice
+        );
+    }
+
+    /**
+     * @Then /^I should be notified that (this product) cannot be updated$/
+     */
+    public function iShouldBeNotifiedThatThisProductDoesNotHaveSufficientStock(ProductInterface $product)
+    {
+        Assert::true(
+            $this->summaryPage->hasProductOutOfStockValidationMessage($product),
+            sprintf('I should see validation message for %s product', $product->getName())
+        );
+    }
+
+    /**
+     * @Then /^I should not be notified that (this product) cannot be updated$/
+     */
+    public function iShouldNotBeNotifiedThatThisProductCannotBeUpdated(ProductInterface $product)
+    {
+        Assert::false(
+            $this->summaryPage->hasProductOutOfStockValidationMessage($product),
+            sprintf('I should see validation message for %s product', $product->getName())
+        );
+    }
+
+    /**
+     * @Then my cart's total should be :total
+     */
+    public function myCartSTotalShouldBe($total)
+    {
+        Assert::same(
+            $total,
+            $this->summaryPage->getCartTotal(),
+            'Cart should have %s total, but it has %2$s.'
         );
     }
 }

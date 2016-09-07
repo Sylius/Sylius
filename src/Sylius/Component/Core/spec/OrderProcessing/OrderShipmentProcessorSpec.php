@@ -16,7 +16,7 @@ use PhpSpec\ObjectBehavior;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemUnitInterface;
 use Sylius\Component\Core\Model\ShipmentInterface;
-use Sylius\Component\Core\OrderProcessing\OrderProcessorInterface;
+use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\Core\OrderProcessing\OrderShipmentProcessor;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Shipping\Model\ShippingMethodInterface;
@@ -59,6 +59,7 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
 
         $shipmentFactory->createNew()->willReturn($shipment);
 
+        $order->isEmpty()->willReturn(false);
         $order->hasShipments()->willReturn(false);
         $order->getItemUnits()->willReturn([$itemUnit1, $itemUnit2]);
 
@@ -81,6 +82,7 @@ final class OrderShipmentProcessorSpec extends ObjectBehavior
     ) {
         $shipments->first()->willReturn($shipment);
 
+        $order->isEmpty()->willReturn(false);
         $order->hasShipments()->willReturn(true);
         $order->getItemUnits()->willReturn([$itemUnit, $itemUnitWithoutShipment]);
         $order->getShipments()->willReturn($shipments);

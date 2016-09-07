@@ -55,7 +55,7 @@
     </parameters>
 
     <services>
-        <service id="sylius.authenticaiton.success_handler" class="%sylius.authentication.success_handler.class%" parent="security.authentication.success_handler" public="false" />
+        <service id="sylius.authentication.success_handler" class="%sylius.authentication.success_handler.class%" parent="security.authentication.success_handler" public="false" />
         <service id="sylius.authentication.failure_handler" class="%sylius.authentication.failure_handler.class%" parent="security.authentication.failure_handler" public="false" />
 
         <!-- Controllers -->

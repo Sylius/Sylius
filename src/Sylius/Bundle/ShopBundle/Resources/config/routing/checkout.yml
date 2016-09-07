@@ -20,7 +20,6 @@ sylius_shop_checkout_address:
                 type: sylius_checkout_address
                 options:
                     customer: expr:service('sylius.context.customer').getCustomer()
-            flash: false
             repository:
                 method: find
                 arguments: [expr:service('sylius.context.cart').getCart()]
@@ -140,6 +139,8 @@ sylius_shop_checkout_complete:
             redirect: sylius_shop_checkout_thank_you
             form:
                 type: sylius_checkout_complete
+                options:
+                    validation_groups: 'sylius_checkout_complete'
 
 sylius_shop_checkout_thank_you:
     path: /thank-you

@@ -25,15 +25,11 @@ use Symfony\Component\Form\FormFactoryInterface;
 class BuildTaxonFormSubscriber implements EventSubscriberInterface
 {
     /**
-     * Form factory.
-     *
      * @var FormFactoryInterface
      */
     private $factory;
 
     /**
-     * Constructor.
-     *
      * @param FormFactoryInterface $factory
      */
     public function __construct(FormFactoryInterface $factory)

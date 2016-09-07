@@ -35,6 +35,7 @@ sylius:
             currencies: Währungen
             shipping_methods: Versandmethoden
             payment_methods: Zahlungsmethoden
+            tax_calculation_strategy: Steuerberechnungsgrundlage
             tax_zone_default: Standard Steuerzone
             theme: Template
             hostname: Server-Name
@@ -135,10 +136,12 @@ sylius:
             name: Name
         promotion_rule:
             contains_taxon:
+                taxon: Steuern
                 count: Anzahl
             taxon:
                 taxons: Gruppen
             total_of_items_from_taxon:
+                taxon: Steuern
                 amount: Anzahl
     email:
         order_confirmation:
@@ -150,11 +153,16 @@ sylius:
         user_confirmation:
             name: Bestätigung durch den Benutzer
             subject: Willkommen Sie in unserem Shop
+            content: 'Wilkommen in unserem Shop<br /><br />Sie haben sich erfolgreich registriert<br />Vielen Dank %username%.'
         password_reset:
             name: Passwort zurücksetzen
             content: '<h3>Hallo %username%</h3> Zum Zurücksetzen Ihres Passworts - besuchen Sie bitte %url% <br/> <br/> Grüße, das Team.'
         verification:
+            name: Email wiederholen
             content: 'Zum Bestätigen Ihrer E-Mail-Adresse - besuchen Sie bitte %url%'
     payum_gateway:
         cash_on_delivery: Nachnahme
+        offline: Offline
         paypal_express_checkout: PayPal Express
+    shipping_method_resolver:
+        by_zones_and_channel: Nach Zonen und Kanälen

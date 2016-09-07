@@ -108,6 +108,8 @@ interface OrderInterface extends
      */
     public function removeShipment(ShipmentInterface $shipment);
 
+    public function removeShipments();
+
     /**
      * @param ShipmentInterface $shipment
      *
@@ -134,6 +136,16 @@ interface OrderInterface extends
      * @param float $exchangeRate
      */
     public function setExchangeRate($exchangeRate);
+
+    /**
+     * @return string
+     */
+    public function getLocaleCode();
+
+    /**
+     * @param string
+     */
+    public function setLocaleCode($localeCode);
 
     /**
      * @param BaseCouponInterface $coupon

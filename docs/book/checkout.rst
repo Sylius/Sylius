@@ -78,7 +78,7 @@ Firstly if the **Customer** is not yet set on the Order it will be assigned depe
 
 .. hint::
 
-    If you are do not understand how Users and Customers work in Sylius got to :doc:`Users Concept documentation </book/users_and_groups>`.
+    If you do not understand the Users and Customers concept in Sylius go to the :doc:`Users Concept documentation </book/customer_and_shopuser>`.
 
 The typical **Address** consists of: country, city, street and postcode - to assign it to an Order either create it manually or retrieve from the repository.
 
@@ -210,7 +210,7 @@ and apply a proper transition and flush the order via the manager.
 
 **What happens during the transition?**
 
-The method ``process($order)`` of the `CompositeOrderProcessor <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Core/OrderProcessing/CompositeOrderProcessor.php>`_ is run and checks all the adjustments ont the order.
+The method ``process($order)`` of the `CompositeOrderProcessor <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Core/OrderProcessing/CompositeOrderProcessor.php>`_ is run and checks all the adjustments on the order.
 The method ``update($order)`` of the `OrderExchangeRateAndCurrencyUpdater <https://github.com/Sylius/Sylius/blob/master/src/Sylius/Component/Core/OrderProcessing/OrderExchangeRateAndCurrencyUpdater.php>`_ is run.
 Here this method is responsible for controlling the **exchangeRate** of the order's currency.
 

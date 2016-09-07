@@ -150,7 +150,6 @@ sylius:
             name: Uwagi dotyczące zamówienia
         shipment_confirmation:
             name: Potwierdzenie dostawy
-            content: 'Twoje zamówienie zostało wysłane. <br/> Dziękujemy za udane zakupy.'
         user_confirmation:
             name: Potwierdzenia przez użytkownika
             subject: Zapraszamy do naszego sklepu

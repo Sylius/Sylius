@@ -17,7 +17,7 @@ use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CouponInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
-use Sylius\Component\Core\OrderProcessing\OrderProcessorInterface;
+use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -280,11 +280,22 @@ final class OrderContext implements Context
     }
 
     /**
-     * @Given /^the customer bought (\d+) ("[^"]+" products)/
+     * @Given /^the customer bought (\d+) ("[^"]+" products)$/
      */
     public function theCustomerBoughtSeveralProducts($quantity, ProductInterface $product)
     {
-        $this->addProductVariantToOrder($this->variantResolver->getVariant($product), $product->getPrice(), $quantity);
+        $variant = $this->variantResolver->getVariant($product);
+        $this->addProductVariantToOrder($variant, $product->getPrice(), $quantity);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^the customer bought ([^"]+) items of ("[^"]+" variant of product "[^"]+")$/
+     */
+    public function theCustomerBoughtSeveralVariantsOfProduct($quantity, ProductVariantInterface $variant)
+    {
+        $this->addProductVariantToOrder($variant, $variant->getPrice(), $quantity);
 
         $this->objectManager->flush();
     }
@@ -463,6 +474,7 @@ final class OrderContext implements Context
      * @param string $number
      * @param ChannelInterface|null $channel
      * @param string|null $currencyCode
+     * @param string|null $localeCode
      *
      * @return OrderInterface
      */
@@ -470,7 +482,8 @@ final class OrderContext implements Context
         CustomerInterface $customer,
         $number = null,
         ChannelInterface $channel = null,
-        $currencyCode = null
+        $currencyCode = null,
+        $localeCode = null
     ) {
         $order = $this->orderFactory->createNew();
 
@@ -480,6 +493,7 @@ final class OrderContext implements Context
         }
         $order->setChannel((null !== $channel) ? $channel : $this->sharedStorage->get('channel'));
         $order->setCurrencyCode((null !== $currencyCode) ? $currencyCode : $this->sharedStorage->get('currency')->getCode());
+        $order->setLocaleCode((null !== $localeCode) ? $localeCode : $this->sharedStorage->get('locale')->getCode());
         $order->complete();
 
         return $order;
