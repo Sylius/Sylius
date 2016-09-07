@@ -619,4 +619,15 @@ final class ManagingOrdersContext implements Context
 
         Assert::eq($number, $actualNumberOfPayments);
     }
+
+    /**
+     * @Then I should see the order :orderNumber with total :total
+     */
+    public function iShouldSeeTheOrderWithTotal($orderNumber, $total)
+    {
+        Assert::true(
+            $this->indexPage->isSingleResourceOnPage(['Total' => $total]),
+            sprintf('The total of order "%s" is not "%s".', $orderNumber, $total)
+        );
+    }
 }

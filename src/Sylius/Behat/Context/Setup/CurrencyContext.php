@@ -216,7 +216,7 @@ final class CurrencyContext implements Context
         $currency = $this->currencyRepository->findOneBy(['code' => $currencyCode]);
         if (null === $currency) {
             /** @var CurrencyInterface $currency */
-            $currency = $this->createCurrency($currencyCode, mt_rand(0, 200) / 100);
+            $currency = $this->createCurrency($currencyCode);
 
             $this->currencyRepository->add($currency);
         }
