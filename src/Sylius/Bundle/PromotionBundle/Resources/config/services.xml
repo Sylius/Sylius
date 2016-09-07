@@ -19,7 +19,7 @@
     <parameters>
         <parameter key="sylius.promotion_processor.class">Sylius\Component\Promotion\Processor\PromotionProcessor</parameter>
 
-        <parameter key="sylius.promotion_eligibility_checker.class">Sylius\Component\Promotion\Checker\Eligibility\PromotionEligibilityChecker</parameter>
+        <parameter key="sylius.promotion_eligibility_checker.class">Sylius\Component\Promotion\Checker\Eligibility\CompositePromotionEligibilityChecker</parameter>
         <parameter key="sylius.promotion.eligibility_checker.coupons.class">Sylius\Component\Promotion\Checker\Eligibility\CouponsEligibilityChecker</parameter>
         <parameter key="sylius.promotion.eligibility_checker.dates.class">Sylius\Component\Promotion\Checker\Eligibility\DatesEligibilityChecker</parameter>
         <parameter key="sylius.promotion.eligibility_checker.rules.class">Sylius\Component\Promotion\Checker\Eligibility\RulesEligibilityChecker</parameter>
@@ -69,10 +69,12 @@
             <argument type="service" id="sylius.registry.promotion_rule_checker" />
         </service>
         <service id="sylius.promotion_eligibility_checker" class="%sylius.promotion_eligibility_checker.class%">
-            <argument type="service" id="sylius.promotion.eligibility_checker.dates" />
-            <argument type="service" id="sylius.promotion.eligibility_checker.usage_limit" />
-            <argument type="service" id="sylius.promotion.eligibility_checker.coupons" />
-            <argument type="service" id="sylius.promotion.eligibility_checker.rules" />
+            <argument type="collection">
+                <argument type="service" id="sylius.promotion.eligibility_checker.dates" />
+                <argument type="service" id="sylius.promotion.eligibility_checker.usage_limit" />
+                <argument type="service" id="sylius.promotion.eligibility_checker.coupons" />
+                <argument type="service" id="sylius.promotion.eligibility_checker.rules" />
+            </argument>
         </service>
 
         <service id="sylius.promotion_rule_checker.item_total" class="%sylius.promotion_rule_checker.item_total.class%">

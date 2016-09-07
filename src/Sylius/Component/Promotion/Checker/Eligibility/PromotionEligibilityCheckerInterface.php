@@ -24,6 +24,8 @@ interface PromotionEligibilityCheckerInterface
      * @param PromotionInterface $promotion
      *
      * @return bool
+     *
+     * @throws UnsupportedPromotionException
      */
     public function isEligible(PromotionSubjectInterface $promotionSubject, PromotionInterface $promotion);
 }

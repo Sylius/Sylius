@@ -165,10 +165,10 @@ and applies configured actions if rules are eligible.
 
     It implements the :ref:`component_promotion_processor_promotion-processor-interface`.
 
-PromotionEligibilityChecker
----------------------------
+CompositePromotionEligibilityChecker
+------------------------------------
 
-The Promotion component provides us with a delegating service - the **PromotionEligibilityChecker** that checks if the promotion rules are eligible for a given subject.
+The Promotion component provides us with a delegating service - the **CompositePromotionEligibilityChecker** that checks if the promotion rules are eligible for a given subject.
 Below you can see how it works:
 
 .. warning::
@@ -183,7 +183,7 @@ Below you can see how it works:
     use Sylius\Component\Promotion\Model\Promotion;
     use Sylius\Component\Promotion\Model\Rule;
     use Sylius\Component\Promotion\Model\Action;
-    use Sylius\Component\Promotion\Checker\PromotionEligibilityChecker;
+    use Sylius\Component\Promotion\Checker\CompositePromotionEligibilityChecker;
     use AppBundle\Entity\Ticket;
 
     $checkerRegistry = new ServiceRegistry('Sylius\Component\Promotion\Checker\RuleCheckerInterface');
@@ -196,7 +196,7 @@ Below you can see how it works:
      * @param ServiceRegistryInterface $registry
      * @param EventDispatcherInterface $dispatcher
      */
-    $checker = new PromotionEligibilityChecker($checkerRegistry, $dispatcher);
+    $checker = new CompositePromotionEligibilityChecker($checkerRegistry, $dispatcher);
 
     $itemCountChecker = new ItemCountRuleChecker();
     $checkerRegistry->register('item_count', $itemCountChecker);
