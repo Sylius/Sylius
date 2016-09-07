@@ -325,7 +325,6 @@ final class CartContext implements Context
 
     /**
      * @Then I should be on my cart summary page
-     * @Then I should see my cart summary
      */
     public function shouldBeOnMyCartSummaryPage()
     {

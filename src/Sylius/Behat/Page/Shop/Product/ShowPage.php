@@ -167,7 +167,7 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'out-of-stock' => '#sylius-product-out-of-stock',
             'product_price' => '#product-price',
             'selecting-variants' => "#sylius-product-selecting-variant",
-            'validation-errors' => '.sylius-validation-error',
+            'validation-errors' => '.sylius-validation-error'
         ]);
     }
 }

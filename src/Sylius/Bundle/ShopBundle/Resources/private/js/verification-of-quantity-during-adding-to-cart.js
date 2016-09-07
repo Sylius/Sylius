@@ -32,8 +32,7 @@
                     $('#sylius-product-adding-to-cart').on('submit', function(event) {
                         refresh(this, event);
                     });
-                }
-                else {
+                } else {
                     window.location.replace($.fn.api.settings.api.cart);
                 }
             }

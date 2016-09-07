@@ -986,7 +986,7 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Given /^I should not be notified that (this product) does not have sufficient stock$/
+     * @Then /^I should not be notified that (this product) does not have sufficient stock$/
      */
     public function iShouldNotBeNotifiedThatThisProductDoesNotHaveSufficientStock(ProductInterface $product)
     {
