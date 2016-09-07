@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Promotion\Checker\Eligibility;
 
-use Sylius\Component\Promotion\Model\PromotionCouponAwareSubjectInterface;
+use Sylius\Component\Promotion\Model\CouponAwarePromotionSubjectInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
@@ -25,7 +25,7 @@ final class CouponsEligibilityChecker implements PromotionEligibilityCheckerInte
      */
     public function isEligible(PromotionSubjectInterface $promotionSubject, PromotionInterface $promotion)
     {
-        if (!$promotionSubject instanceof PromotionCouponAwareSubjectInterface || null === $promotionSubject->getPromotionCoupon()) {
+        if (!$promotionSubject instanceof CouponAwarePromotionSubjectInterface || null === $promotionSubject->getPromotionCoupon()) {
             return false;
         }
 

@@ -14,7 +14,7 @@ namespace Sylius\Component\Promotion\Model;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-interface PromotionCouponAwareSubjectInterface extends PromotionSubjectInterface
+interface CouponAwarePromotionSubjectInterface extends PromotionSubjectInterface
 {
     /**
      * @return null|CouponInterface

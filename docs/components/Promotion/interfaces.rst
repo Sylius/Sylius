@@ -113,19 +113,19 @@ the ``PromotionCountableSubjectInterface``.
 
 .. _component_promotion_model_promotion-coupon-aware-subject-interface:
 
-PromotionCouponAwareSubjectInterface
+CouponAwarePromotionSubjectInterface
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To make the object able to get its associated coupon, the object class needs to implement
-the ``PromotionCouponAwareSubjectInterface``.
+the ``CouponAwarePromotionSubjectInterface``.
 
 .. note::
 
     This interface extends the :ref:`component_promotion_model_promotion-subject-interface`.
 
-    You will find more information about this interface in `Sylius API PromotionCouponAwareSubjectInterface`_.
+    You will find more information about this interface in `Sylius API CouponAwarePromotionSubjectInterface`_.
 
-.. _Sylius API PromotionCouponAwareSubjectInterface: http://api.sylius.org/Sylius/Component/Promotion/Model/PromotionCouponAwareSubjectInterface.html
+.. _Sylius API CouponAwarePromotionSubjectInterface: http://api.sylius.org/Sylius/Component/Promotion/Model/CouponAwarePromotionSubjectInterface.html
 
 .. _component_promotion_model_promotion-coupons-aware-subject-interface:
 
