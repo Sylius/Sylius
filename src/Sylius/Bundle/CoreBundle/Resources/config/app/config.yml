@@ -40,7 +40,6 @@ doctrine:
 
 doctrine_cache:
     providers:
-        sylius_settings: "%sylius.cache%"
         sylius_rbac: "%sylius.cache%"
 
 doctrine_phpcr:

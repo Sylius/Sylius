@@ -11,10 +11,8 @@
 
 namespace Sylius\Bundle\CoreBundle\Taxation\Strategy;
 
-use Sylius\Bundle\SettingsBundle\Model\SettingsInterface;
 use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\Taxation\Applicator\OrderTaxesApplicatorInterface;
 use Sylius\Component\Core\Taxation\Strategy\AbstractTaxCalculationStrategy;
 
 /**

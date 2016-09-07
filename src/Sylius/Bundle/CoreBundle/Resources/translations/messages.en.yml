@@ -67,19 +67,6 @@ sylius:
             code: Code
         product_variant:
             tax_category: Tax category
-        settings:
-            general:
-                currency: Default currency
-                locale: Language
-                meta_description: Meta description
-                meta_keywords: Meta keywords
-                title: Page title
-                tracking_code: Tracking code (for example: Google Analytics code)
-            taxation:
-                default_tax_zone: Default tax zone
-                default_tax_calculation_strategy: Default tax calculation strategy
-            security:
-                enabled: Enable?
         shipment_filter:
             created_at_from: From
             created_at_to: To
