@@ -23,10 +23,6 @@
     </imports>
 
     <parameters>
-        <parameter key="sylius.settings_schema.general.class">Sylius\Bundle\CoreBundle\Settings\GeneralSettingsSchema</parameter>
-        <parameter key="sylius.settings_schema.taxation.class">Sylius\Bundle\CoreBundle\Settings\TaxationSettingsSchema</parameter>
-        <parameter key="sylius.settings_schema.security.class">Sylius\Bundle\CoreBundle\Settings\SecuritySettingsSchema</parameter>
-
         <parameter key="sylius.checkout_scenario.class">Sylius\Bundle\CoreBundle\Checkout\CheckoutProcessScenario</parameter>
         <parameter key="sylius.checkout_step.security.class">Sylius\Bundle\CoreBundle\Checkout\Step\SecurityStep</parameter>
         <parameter key="sylius.checkout_step.addressing.class">Sylius\Bundle\CoreBundle\Checkout\Step\AddressingStep</parameter>
@@ -128,17 +124,6 @@
     </parameters>
 
     <services>
-        <!-- settings schemas -->
-        <service id="sylius.settings_schema.general" class="%sylius.settings_schema.general.class%">
-            <argument type="collection">
-                <argument key="locale">%locale%</argument>
-            </argument>
-            <tag name="sylius.settings_schema" alias="sylius_general" />
-        </service>
-        <service id="sylius.settings_schema.security" class="%sylius.settings_schema.security.class%">
-            <tag name="sylius.settings_schema" alias="sylius_security" />
-        </service>
-
         <!-- cart -->
         <service id="sylius.cart_item_resolver.default" class="%sylius.cart_item_resolver.default.class%">
             <argument type="service" id="sylius.context.cart" />
