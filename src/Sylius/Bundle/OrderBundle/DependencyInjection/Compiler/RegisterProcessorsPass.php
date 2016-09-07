@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\DependencyInjection\Compiler;
+namespace Sylius\Bundle\OrderBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -18,7 +18,7 @@ use Symfony\Component\DependencyInjection\Reference;
 /**
  * @author Gorka Laucirica <gorka.lauzirika@gmail.com>
  */
-class RegisterOrderProcessorsPass implements CompilerPassInterface
+final class RegisterProcessorsPass implements CompilerPassInterface
 {
     /**
      * {@inheritdoc}

@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Tests\DependencyInjection\Compiler;
+namespace Sylius\Bundle\OrderBundle\Tests\DependencyInjection\Compiler;
 
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\AbstractCompilerPassTestCase;
 use Matthias\SymfonyDependencyInjectionTest\PhpUnit\DefinitionHasMethodCallConstraint;
-use Sylius\Bundle\CoreBundle\DependencyInjection\Compiler\RegisterOrderProcessorsPass;
+use Sylius\Bundle\OrderBundle\DependencyInjection\Compiler\RegisterProcessorsPass;
 use Sylius\Component\Core\OrderProcessing\OrderAdjustmentsClearer;
 use Sylius\Component\Order\Processor\CompositeOrderProcessor;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -23,7 +23,7 @@ use Symfony\Component\DependencyInjection\Reference;
 /**
  * @author Gorka Laucirica <gorka.lauzirika@gmail.com>
  */
-class RegisterOrderProcessorPassTest extends AbstractCompilerPassTestCase
+final class RegisterProcessorPassTest extends AbstractCompilerPassTestCase
 {
     /**
      * @test
@@ -106,6 +106,6 @@ class RegisterOrderProcessorPassTest extends AbstractCompilerPassTestCase
      */
     protected function registerCompilerPass(ContainerBuilder $container)
     {
-        $container->addCompilerPass(new RegisterOrderProcessorsPass());
+        $container->addCompilerPass(new RegisterProcessorsPass());
     }
 }

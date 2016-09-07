@@ -33,6 +33,7 @@ class SyliusOrderExtension extends AbstractResourceExtension
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
         $configFiles = [
+            'processor.xml',
             'services.xml',
             'templating.xml',
             'twig.xml',
