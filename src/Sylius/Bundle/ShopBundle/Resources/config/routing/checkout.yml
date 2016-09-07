@@ -90,11 +90,3 @@ sylius_shop_checkout_complete:
                 type: sylius_checkout_complete
                 options:
                     validation_groups: 'sylius_checkout_complete'
-
-# Todo: Move this somewhere appropriate.
-sylius_shop_partial_provinces:
-    path: /provinces
-    defaults:
-        _controller: sylius.controller.province:choiceFormAction
-        _sylius:
-            template: SyliusShopBundle:Checkout:_provinces.html.twig

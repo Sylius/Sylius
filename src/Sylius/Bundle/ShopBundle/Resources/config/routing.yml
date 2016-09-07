@@ -23,6 +23,9 @@ sylius_shop_taxon:
 sylius_shop_product:
     resource: "@SyliusShopBundle/Resources/config/routing/product.yml"
 
+sylius_shop_provinces:
+    resource: "@SyliusShopBundle/Resources/config/routing/provinces.yml"
+
 sylius_shop_cart:
     resource: "@SyliusShopBundle/Resources/config/routing/cart.yml"
     prefix: /cart

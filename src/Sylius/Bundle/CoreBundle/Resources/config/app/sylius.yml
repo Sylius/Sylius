@@ -60,7 +60,7 @@ sylius_content:
 sylius_core:
     sitemap: ~
     checkout_resolver:
-        pattern: /checkout/.*
+        pattern: /checkout/.+
         route_map:
             cart:
                 route: sylius_shop_checkout_address
