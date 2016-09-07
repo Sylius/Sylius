@@ -152,6 +152,15 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Given I have proceeded selecting :shippingMethodName shipping method
+     */
+    public function iHaveProceededSelectingShippingMethod($shippingMethodName)
+    {
+        $this->iSelectShippingMethod($shippingMethodName);
+        $this->selectShippingPage->nextStep();
+    }
+
+    /**
      * @Given I am at the checkout addressing step
      * @When I go back to addressing step of the checkout
      */
@@ -172,9 +181,9 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @When /^I specify the shipping (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
+     * @When /^I specify the shipping (address as "[^"]+", "[^"]+", "[^"]+", "[^"]+" for "[^"]+")$/
      * @When /^I (do not specify any shipping address) information$/
-     * @When /^I (do not modify address)$/
+     * @When /^I change the shipping (address to "[^"]+", "[^"]+", "[^"]+", "[^"]+" for "[^"]+")$/
      */
     public function iSpecifyTheShippingAddressAs(AddressInterface $address)
     {
@@ -447,22 +456,6 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @When I do not modify shipping method
-     */
-    public function iDoNotModifyShippingMethod()
-    {
-        $this->selectShippingPage->selectShippingMethod(null);
-    }
-
-    /**
-     * @When I do not modify payment method
-     */
-    public function iDoNotModifyPaymentMethod()
-    {
-        $this->selectPaymentPage->selectPaymentMethod(null);
-    }
-
-    /**
      * @When /^I change shipping method to "([^"]*)"$/
      */
     public function iChangeShippingMethod($shippingMethodName)
@@ -498,7 +491,7 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Given I return to the checkout summary step
+     * @When I return to the checkout summary step
      */
     public function iReturnToTheCheckoutSummaryStep()
     {
@@ -718,6 +711,14 @@ final class CheckoutContext implements Context
     public function iSelectPaymentMethod($paymentMethodName)
     {
         $this->selectPaymentPage->selectPaymentMethod($paymentMethodName);
+    }
+
+    /**
+     * @When /^I do not modify anything$/
+     */
+    public function iDoNotModifyAnything()
+    {
+        // Intentionally left blank to fulfill context expectation
     }
 
     /**
