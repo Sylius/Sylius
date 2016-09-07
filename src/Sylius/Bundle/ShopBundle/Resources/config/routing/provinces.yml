@@ -4,6 +4,6 @@
 sylius_shop_province_choice:
     path: /province-choice
     defaults:
-        _controller: sylius.controller.province:choiceFormAction
+        _controller: sylius.controller.province:choiceOrTextFieldFormAction
         _sylius:
             template: SyliusShopBundle:Checkout:_provinces.html.twig

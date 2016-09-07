@@ -25,18 +25,18 @@ class AddressType extends AbstractResourceType
     /**
      * @var EventSubscriberInterface
      */
-    protected $eventListener;
+    protected $buildAddressFormSubscriber;
 
     /**
-     * @param string                   $dataClass
-     * @param string[]                 $validationGroups
-     * @param EventSubscriberInterface $eventListener
+     * @param string $dataClass
+     * @param string[] $validationGroups
+     * @param EventSubscriberInterface $buildAddressFormSubscriber
      */
-    public function __construct($dataClass, array $validationGroups, EventSubscriberInterface $eventListener)
+    public function __construct($dataClass, array $validationGroups, EventSubscriberInterface $buildAddressFormSubscriber)
     {
         parent::__construct($dataClass, $validationGroups);
 
-        $this->eventListener = $eventListener;
+        $this->buildAddressFormSubscriber = $buildAddressFormSubscriber;
     }
 
     /**
@@ -72,7 +72,7 @@ class AddressType extends AbstractResourceType
             ->add('postcode', 'text', [
                 'label' => 'sylius.form.address.postcode',
             ])
-            ->addEventSubscriber($this->eventListener)
+            ->addEventSubscriber($this->buildAddressFormSubscriber)
         ;
     }
 
