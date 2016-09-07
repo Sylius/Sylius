@@ -22,8 +22,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class PaymentGatewayChoiceType extends AbstractType
 {
     /**
-     * Choices.
-     *
      * @var array
      */
     protected $gateways;

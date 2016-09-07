@@ -16,15 +16,11 @@ use Sylius\Component\Pricing\Model\PriceableInterface;
 use Symfony\Component\Templating\Helper\Helper;
 
 /**
- * Sylius pricing templating helper.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class PricingHelper extends Helper
 {
     /**
-     * Price calculator.
-     *
      * @var DelegatingCalculatorInterface
      */
     protected $priceCalculator;
@@ -38,10 +34,8 @@ class PricingHelper extends Helper
     }
 
     /**
-     * Returns calculated price for given priceable.
-     *
      * @param PriceableInterface $priceable
-     * @param array              $context
+     * @param array $context
      *
      * @return int
      */

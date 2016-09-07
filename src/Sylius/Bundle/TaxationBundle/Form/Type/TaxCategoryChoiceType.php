@@ -22,8 +22,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 abstract class TaxCategoryChoiceType extends AbstractType
 {
     /**
-     * Tax category class name.
-     *
      * @var string
      */
     protected $className;

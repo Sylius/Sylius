@@ -19,8 +19,6 @@ use Symfony\Component\HttpKernel\HttpKernel;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
- * Sylius resource twig helper.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Saša Stamenković <umpirsky@gmail.com>
  * @author Arnaud Langlade <arn0d.dev@gmail.com>
@@ -54,9 +52,9 @@ class ResourceExtension extends \Twig_Extension
 
     /**
      * @param RouterInterface $router
-     * @param Parameters      $parameters
-     * @param string          $paginateTemplate
-     * @param string          $sortingTemplate
+     * @param Parameters $parameters
+     * @param string $paginateTemplate
+     * @param string $sortingTemplate
      */
     public function __construct(RouterInterface $router, Parameters $parameters, $paginateTemplate, $sortingTemplate)
     {
@@ -99,10 +97,10 @@ class ResourceExtension extends \Twig_Extension
 
     /**
      * @param \Twig_Environment $twig
-     * @param string            $property
-     * @param null|string       $label
-     * @param string            $order
-     * @param array             $options
+     * @param string $property
+     * @param null|string $label
+     * @param string $order
+     * @param array $options
      *
      * @return string
      */

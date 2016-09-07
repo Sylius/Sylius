@@ -16,8 +16,6 @@ use Sylius\Component\Cart\Model\CartInterface;
 use Symfony\Component\Form\FormView;
 
 /**
- * Sylius cart engine twig extension.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class CartExtension extends \Twig_Extension

@@ -25,8 +25,6 @@ use Symfony\Component\Form\FormFactoryInterface;
 class BuildTaxonFormSubscriber implements EventSubscriberInterface
 {
     /**
-     * Form factory.
-     *
      * @var FormFactoryInterface
      */
     private $factory;

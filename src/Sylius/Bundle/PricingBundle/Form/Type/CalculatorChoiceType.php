@@ -15,15 +15,11 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Price calculator calculator choice type.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class CalculatorChoiceType extends AbstractType
 {
     /**
-     * Calculators
-     *
      * @var array
      */
     protected $calculators;

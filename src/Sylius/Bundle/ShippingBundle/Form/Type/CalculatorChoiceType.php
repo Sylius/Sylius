@@ -22,8 +22,6 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class CalculatorChoiceType extends AbstractType
 {
     /**
-     * Calculators.
-     *
      * @var array
      */
     protected $calculators;
