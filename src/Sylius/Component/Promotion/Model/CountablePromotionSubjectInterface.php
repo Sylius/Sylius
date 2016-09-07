@@ -14,7 +14,7 @@ namespace Sylius\Component\Promotion\Model;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-interface PromotionCountableSubjectInterface extends PromotionSubjectInterface
+interface CountablePromotionSubjectInterface extends PromotionSubjectInterface
 {
     /**
      * @return int

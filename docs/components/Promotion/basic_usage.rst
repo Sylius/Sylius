@@ -15,17 +15,17 @@ for promotion application purposes.
 
     use Doctrine\Common\Collections\Collection;
     use Doctrine\Common\Collections\ArrayCollection;
-    use Sylius\Component\Promotion\Model\PromotionCountableSubjectInterface;
+    use Sylius\Component\Promotion\Model\CountablePromotionSubjectInterface;
     use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
     use Sylius\Component\Promotion\Model\PromotionInterface;
 
-    class Ticket implements PromotionCountableSubjectInterface
+    class Ticket implements CountablePromotionSubjectInterface
     {
         /**
          * @var int
          */
         private $quantity;
-    
+
         /**
          * @var Collection
          */

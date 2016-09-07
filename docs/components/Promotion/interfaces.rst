@@ -97,19 +97,19 @@ A **RuleInterface** has two defined types by default:
 
 .. _component_promotion_model_promotion-countable-subject-interface:
 
-PromotionCountableSubjectInterface
+CountablePromotionSubjectInterface
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To be able to count the object's promotion subjects, the object class needs to implement
-the ``PromotionCountableSubjectInterface``.
+the ``CountablePromotionSubjectInterface``.
 
 .. note::
 
     This interface extends the :ref:`component_promotion_model_promotion-subject-interface`.
 
-    You will find more information about this interface in `Sylius API PromotionCountableSubjectInterface`_.
+    You will find more information about this interface in `Sylius API CountablePromotionSubjectInterface`_.
 
-.. _Sylius API PromotionCountableSubjectInterface: http://api.sylius.org/Sylius/Component/Promotion/Model/PromotionCountableSubjectInterface.html
+.. _Sylius API CountablePromotionSubjectInterface: http://api.sylius.org/Sylius/Component/Promotion/Model/CountablePromotionSubjectInterface.html
 
 .. _component_promotion_model_promotion-coupon-aware-subject-interface:
 

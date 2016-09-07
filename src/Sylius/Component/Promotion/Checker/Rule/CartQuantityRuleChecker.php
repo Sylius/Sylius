@@ -11,7 +11,7 @@
 
 namespace Sylius\Component\Promotion\Checker\Rule;
 
-use Sylius\Component\Promotion\Model\PromotionCountableSubjectInterface;
+use Sylius\Component\Promotion\Model\CountablePromotionSubjectInterface;
 use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 
 /**
@@ -26,7 +26,7 @@ class CartQuantityRuleChecker implements RuleCheckerInterface
      */
     public function isEligible(PromotionSubjectInterface $subject, array $configuration)
     {
-        if (!$subject instanceof PromotionCountableSubjectInterface) {
+        if (!$subject instanceof CountablePromotionSubjectInterface) {
             return false;
         }
 

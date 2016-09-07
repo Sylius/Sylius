@@ -14,7 +14,7 @@ namespace spec\Sylius\Component\Promotion\Checker\Rule;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Promotion\Checker\Rule\CartQuantityRuleChecker;
 use Sylius\Component\Promotion\Checker\Rule\RuleCheckerInterface;
-use Sylius\Component\Promotion\Model\PromotionCountableSubjectInterface;
+use Sylius\Component\Promotion\Model\CountablePromotionSubjectInterface;
 
 /**
  * @mixin CartQuantityRuleChecker
@@ -33,7 +33,7 @@ final class CartQuantityRuleCheckerSpec extends ObjectBehavior
         $this->shouldImplement(RuleCheckerInterface::class);
     }
 
-    function it_should_recognize_empty_subject_as_not_eligible(PromotionCountableSubjectInterface $subject)
+    function it_should_recognize_empty_subject_as_not_eligible(CountablePromotionSubjectInterface $subject)
     {
         $subject->getPromotionSubjectCount()->shouldBeCalled()->willReturn(0);
 
@@ -41,7 +41,7 @@ final class CartQuantityRuleCheckerSpec extends ObjectBehavior
     }
 
     function it_should_recognize_subject_as_not_eligible_if_cart_quantity_is_less_then_configured(
-        PromotionCountableSubjectInterface $subject
+        CountablePromotionSubjectInterface $subject
     ) {
         $subject->getPromotionSubjectCount()->shouldBeCalled()->willReturn(7);
 
@@ -49,7 +49,7 @@ final class CartQuantityRuleCheckerSpec extends ObjectBehavior
     }
 
     function it_should_recognize_subject_as_eligible_if_cart_quantity_is_greater_then_configured(
-        PromotionCountableSubjectInterface $subject
+        CountablePromotionSubjectInterface $subject
     ) {
         $subject->getPromotionSubjectCount()->shouldBeCalled()->willReturn(12);
 
@@ -57,7 +57,7 @@ final class CartQuantityRuleCheckerSpec extends ObjectBehavior
     }
 
     function it_should_recognize_subject_as_eligible_if_cart_quantity_is_equal_with_configured(
-        PromotionCountableSubjectInterface $subject
+        CountablePromotionSubjectInterface $subject
     ) {
         $subject->getPromotionSubjectCount()->shouldBeCalled()->willReturn(10);
 
