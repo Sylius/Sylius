@@ -19,7 +19,7 @@ use Sylius\Component\Registry\ServiceRegistryInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class RulesEligibilityChecker implements PromotionEligibilityCheckerInterface
+final class RulesEligibilityChecker implements PromotionEligibilityCheckerInterface
 {
     /**
      * @var ServiceRegistryInterface

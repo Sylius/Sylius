@@ -16,7 +16,7 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class ItemTotalRuleChecker implements RuleCheckerInterface
+final class ItemTotalRuleChecker implements RuleCheckerInterface
 {
     const TYPE = 'item_total';
 

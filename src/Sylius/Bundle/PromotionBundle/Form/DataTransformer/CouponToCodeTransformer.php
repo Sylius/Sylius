@@ -20,26 +20,22 @@ use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
 /**
- * Coupon to code transformer.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class CouponToCodeTransformer implements DataTransformerInterface
+final class CouponToCodeTransformer implements DataTransformerInterface
 {
     /**
-     * Coupon repository.
-     *
      * @var ObjectRepository
      */
-    protected $couponRepository;
+    private $couponRepository;
 
     /**
      * @var EventDispatcherInterface
      */
-    protected $dispatcher;
+    private $dispatcher;
 
     /**
-     * @param ObjectRepository         $couponRepository
+     * @param ObjectRepository $couponRepository
      * @param EventDispatcherInterface $dispatcher
      */
     public function __construct(ObjectRepository $couponRepository, EventDispatcherInterface $dispatcher)

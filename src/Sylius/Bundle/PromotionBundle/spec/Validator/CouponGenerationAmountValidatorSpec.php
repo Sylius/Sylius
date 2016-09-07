@@ -35,7 +35,7 @@ final class CouponGenerationAmountValidatorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\PromotionBundle\Validator\CouponGenerationAmountValidator');
+        $this->shouldHaveType(CouponGenerationAmountValidator::class);
     }
 
     function it_is_constraint_validator()
@@ -45,10 +45,11 @@ final class CouponGenerationAmountValidatorSpec extends ObjectBehavior
 
     function it_adds_violation(
         ExecutionContextInterface $context,
-        CouponPossibleGenerationAmount $constraint,
         InstructionInterface $instruction,
         GenerationPolicyInterface $generationPolicy
     ) {
+        $constraint = new CouponPossibleGenerationAmount();
+
         $instruction->getAmount()->willReturn(17);
         $instruction->getCodeLength()->willReturn(1);
         $generationPolicy->isGenerationPossible($instruction)->willReturn(false);
@@ -60,15 +61,16 @@ final class CouponGenerationAmountValidatorSpec extends ObjectBehavior
 
     function it_not_adds_violation(
         ExecutionContextInterface $context,
-        CouponPossibleGenerationAmount $constraint,
         InstructionInterface $instruction,
         GenerationPolicyInterface $generationPolicy
     ) {
+        $constraint = new CouponPossibleGenerationAmount();
+
         $instruction->getAmount()->willReturn(5);
         $instruction->getCodeLength()->willReturn(1);
         $generationPolicy->isGenerationPossible($instruction)->willReturn(true);
         $generationPolicy->getPossibleGenerationAmount($instruction)->shouldNotBeCalled();
-        $context->addViolation($constraint->message)->shouldNotBeCalled();
+        $context->addViolation($constraint->message, Argument::any())->shouldNotBeCalled();
 
         $this->validate($instruction, $constraint);
     }

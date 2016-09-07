@@ -17,7 +17,7 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class UsageLimitEligibilityChecker implements PromotionEligibilityCheckerInterface
+final class UsageLimitEligibilityChecker implements PromotionEligibilityCheckerInterface
 {
     /**
      * {@inheritdoc}

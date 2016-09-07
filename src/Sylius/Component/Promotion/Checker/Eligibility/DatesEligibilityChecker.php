@@ -17,7 +17,7 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
 /**
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class DatesEligibilityChecker implements PromotionEligibilityCheckerInterface
+final class DatesEligibilityChecker implements PromotionEligibilityCheckerInterface
 {
     /**
      * {@inheritdoc}

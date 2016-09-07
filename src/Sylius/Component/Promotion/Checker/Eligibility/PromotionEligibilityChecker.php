@@ -19,7 +19,7 @@ use Sylius\Component\Promotion\Model\PromotionSubjectInterface;
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterface
+final class PromotionEligibilityChecker implements PromotionEligibilityCheckerInterface
 {
     /**
      * @var PromotionEligibilityCheckerInterface

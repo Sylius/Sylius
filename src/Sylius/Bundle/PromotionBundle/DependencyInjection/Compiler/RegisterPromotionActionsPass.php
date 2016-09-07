@@ -16,11 +16,9 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * Registers all promotion actions in registry service.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class RegisterPromotionActionsPass implements CompilerPassInterface
+final class RegisterPromotionActionsPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)
     {
