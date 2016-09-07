@@ -12,6 +12,7 @@
 namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Taxonomy\Model\Taxon as BaseTaxon;
 use Sylius\Component\Taxonomy\Model\TaxonTranslation;
@@ -26,7 +27,7 @@ class Taxon extends BaseTaxon implements TaxonInterface
     protected $products;
 
     /**
-     * @var ArrayCollection
+     * @var Collection|TaxonImageInterface[]
      */
     protected $images;
 
@@ -68,7 +69,7 @@ class Taxon extends BaseTaxon implements TaxonInterface
      */
     public function getImageByCode($code)
     {
-        foreach ($this->getImages() as $image) {
+        foreach ($this->images as $image) {
             if ($code === $image->getCode()) {
                 return $image;
             }

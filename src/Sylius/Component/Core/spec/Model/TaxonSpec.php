@@ -29,7 +29,7 @@ final class TaxonSpec extends ObjectBehavior
         $this->shouldHaveType(Taxon::class);
     }
 
-    function it_is_Sylius_taxon()
+    function it_is_a_taxon()
     {
         $this->shouldImplement(TaxonInterface::class);
     }
@@ -39,21 +39,21 @@ final class TaxonSpec extends ObjectBehavior
         $this->getImages()->shouldHaveType(Collection::class);
     }
 
-    function it_adds_image(TaxonImageInterface $image)
+    function it_adds_an_image(TaxonImageInterface $image)
     {
         $this->addImage($image);
         $this->hasImages()->shouldReturn(true);
         $this->hasImage($image)->shouldReturn(true);
     }
 
-    function it_removes_image(TaxonImageInterface $image)
+    function it_removes_an_image(TaxonImageInterface $image)
     {
         $this->addImage($image);
         $this->removeImage($image);
         $this->hasImage($image)->shouldReturn(false);
     }
 
-    function it_returns_image_by_code(TaxonImageInterface $image)
+    function it_returns_an_image_by_code(TaxonImageInterface $image)
     {
         $image->getCode()->willReturn('thumbnail');
         $image->setTaxon($this)->shouldBeCalled();

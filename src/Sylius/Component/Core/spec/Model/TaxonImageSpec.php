@@ -29,12 +29,12 @@ final class TaxonImageSpec extends ObjectBehavior
         $this->shouldHaveType(TaxonImage::class);
     }
 
-    function it_should_be_Sylius_image()
+    function it_extends_an_image()
     {
         $this->shouldHaveType(Image::class);
     }
 
-    function it_does_not_have_taxon_by_default()
+    function it_does_not_have_a_taxon_by_default()
     {
         $this->getTaxon()->shouldReturn(null);
     }
@@ -45,7 +45,7 @@ final class TaxonImageSpec extends ObjectBehavior
         $this->getTaxon()->shouldReturn($taxon);
     }
 
-    function it_does_not_have_code_by_default()
+    function it_does_not_have_a_code_by_default()
     {
         $this->getCode()->shouldReturn(null);
     }

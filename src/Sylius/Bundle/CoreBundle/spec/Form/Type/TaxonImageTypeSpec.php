@@ -39,12 +39,12 @@ final class TaxonImageTypeSpec extends ObjectBehavior
         $this->shouldHaveType(TaxonImageType::class);
     }
 
-    function it_should_be_a_form_type()
+    function it_is_a_form_type()
     {
         $this->shouldImplement(FormTypeInterface::class);
     }
 
-    function it_should_extend_Sylius_image_form_type()
+    function it_extends_image_form_type()
     {
         $this->shouldHaveType(ImageType::class);
     }

@@ -77,7 +77,6 @@ class ImageUploadListener
         $this->uploadTaxonImages($subject);
     }
 
-
     /**
      * @param TaxonInterface $taxon
      */

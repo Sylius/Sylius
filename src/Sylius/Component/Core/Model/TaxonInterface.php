@@ -48,6 +48,7 @@ interface TaxonInterface extends VariableTaxonInterface
 
     /**
      * @param $code
+     *
      * @return TaxonImageInterface|null;
      */
     public function getImageByCode($code);
@@ -61,5 +62,4 @@ interface TaxonInterface extends VariableTaxonInterface
      * @param TaxonImageInterface $image
      */
     public function addImage(TaxonImageInterface $image);
-
 }
