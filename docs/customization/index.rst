@@ -12,5 +12,6 @@ The Customization Guide
     menu
     template
     translation
+    state_machine
 
 .. include:: /customization/map.rst.inc
