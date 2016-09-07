@@ -560,6 +560,7 @@ sylius:
         promotion_configuration: Promotion configuration
         promotion_coupons: Coupons
         promotion_details: 'Promotion details'
+        promotion_discount: Promotion discount
         promotion_information: Promotion information
         promotion_total: 'Promotion total'
         promotions: Promotions
