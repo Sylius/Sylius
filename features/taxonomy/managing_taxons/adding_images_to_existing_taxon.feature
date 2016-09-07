@@ -9,20 +9,20 @@ Feature: Adding images to an existing taxon
         And the store classifies its products as "T-Shirts"
         And I am logged in as an administrator
 
-    @todo
+    @ui @javascript
     Scenario: Adding a single image to an existing taxon
         Given I want to modify the "T-Shirts" taxon
-        When I attach "t-shirts-banner.jpg" image with a code "banner"
+        When I attach "t-shirts.jpg" image with a code "banner"
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And this taxon should have an image with code "banner"
+        And this taxon should have an image with a code "banner"
 
-    @todo
+    @ui @javascript
     Scenario: Adding multiple images to an existing taxon
         Given I want to modify the "T-Shirts" taxon
-        When I attach "t-shirts-banner.jpg" image with a code "banner"
-        And I attach "t-shirts-thumbnail.jpg" image with a code "thumbnail"
+        When I attach "t-shirts.jpg" image with a code "banner"
+        And I attach "t-shirts.jpg" image with a code "thumbnail"
         And I save my changes
         Then I should be notified that it has been successfully edited
-        And this taxon should have an image with code "banner"
-        And this taxon should have also an image with code "thumbnail"
+        And this taxon should have an image with a code "banner"
+        And this taxon should have also an image with a code "thumbnail"

@@ -46,4 +46,17 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
      * @param string $languageCode
      */
     public function specifyPermalink($permalink, $languageCode);
+
+    /**
+     * @param string $code
+     * @param string $path
+     */
+    public function attachImageWithCode($code, $path);
+
+    /**
+     * @param string $code
+     *
+     * @return bool
+     */
+    public function isImageWithCodeDisplayed($code);
 }

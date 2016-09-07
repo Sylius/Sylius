@@ -301,4 +301,26 @@ final class ManagingTaxonsContext implements Context
             sprintf('Taxon %s does not exist or multiple taxons with this name exist.', $name)
         );
     }
+
+    /**
+     * @When I attach :path image with a code :code
+     */
+    public function iAttachImageWithACode($path, $code)
+    {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+
+        $currentPage->attachImageWithCode($code, $path);
+    }
+
+    /**
+     * @Then /^this taxon should have(?:| also) an image with a code "([^"]*)"$/
+     */
+    public function thisTaxonShouldHaveAnImageWithCode($code)
+    {
+        Assert::true(
+            $this->updatePage->isImageWithCodeDisplayed($code),
+            sprintf('Image with a code %s should have been displayed.', $code)
+        );
+    }
 }
