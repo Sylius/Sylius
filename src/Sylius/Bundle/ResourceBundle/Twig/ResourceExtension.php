@@ -53,8 +53,6 @@ class ResourceExtension extends \Twig_Extension
     private $router;
 
     /**
-     * Constructor.
-     *
      * @param RouterInterface $router
      * @param Parameters      $parameters
      * @param string          $paginateTemplate

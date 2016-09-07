@@ -30,8 +30,6 @@ class DelegatingCalculator implements DelegatingCalculatorInterface
     protected $registry;
 
     /**
-     * Constructor.
-     *
      * @param ServiceRegistryInterface $registry
      */
     public function __construct(ServiceRegistryInterface $registry)

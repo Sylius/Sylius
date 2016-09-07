@@ -34,8 +34,6 @@ class MoneyType extends AbstractType
     private $currencyCode;
 
     /**
-     * Constructor.
-     *
      * @param string $currencyCode
      */
     public function __construct($currencyCode)

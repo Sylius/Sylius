@@ -33,8 +33,6 @@ class ProductUniqueValidator extends ConstraintValidator
     protected $repository;
 
     /**
-     * Constructor.
-     *
      * @param ObjectRepository $repository
      */
     public function __construct(ObjectRepository $repository)

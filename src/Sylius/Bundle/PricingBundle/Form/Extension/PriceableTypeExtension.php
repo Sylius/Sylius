@@ -48,8 +48,6 @@ class PriceableTypeExtension extends AbstractTypeExtension
     protected $calculatorRegistry;
 
     /**
-     * Constructor.
-     *
      * @param string                   $extendedType
      * @param ServiceRegistryInterface $calculatorRegistry
      * @param EventSubscriberInterface $formSubscriber

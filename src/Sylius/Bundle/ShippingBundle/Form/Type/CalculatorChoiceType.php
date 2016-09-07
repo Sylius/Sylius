@@ -29,8 +29,6 @@ class CalculatorChoiceType extends AbstractType
     protected $calculators;
 
     /**
-     * Constructor.
-     *
      * @param array $calculators
      */
     public function __construct($calculators)

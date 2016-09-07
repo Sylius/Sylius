@@ -29,8 +29,6 @@ abstract class TaxCategoryChoiceType extends AbstractType
     protected $className;
 
     /**
-     * Constructor.
-     *
      * @param string $className
      */
     public function __construct($className)

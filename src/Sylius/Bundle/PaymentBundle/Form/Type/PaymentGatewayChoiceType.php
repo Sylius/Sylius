@@ -29,8 +29,6 @@ class PaymentGatewayChoiceType extends AbstractType
     protected $gateways;
 
     /**
-     * Constructor.
-     *
      * @param array $gateways
      */
     public function __construct(array $gateways)

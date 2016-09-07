@@ -30,8 +30,6 @@ class PricingHelper extends Helper
     protected $priceCalculator;
 
     /**
-     * Constructor.
-     *
      * @param DelegatingCalculatorInterface $priceCalculator
      */
     public function __construct(DelegatingCalculatorInterface $priceCalculator)

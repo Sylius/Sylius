@@ -28,8 +28,6 @@ class CartExtension extends \Twig_Extension
     private $helper;
 
     /**
-     * Constructor.
-     *
      * @param CartHelper $helper
      */
     public function __construct(CartHelper $helper)

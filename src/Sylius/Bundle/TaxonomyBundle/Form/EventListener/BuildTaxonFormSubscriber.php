@@ -32,8 +32,6 @@ class BuildTaxonFormSubscriber implements EventSubscriberInterface
     private $factory;
 
     /**
-     * Constructor.
-     *
      * @param FormFactoryInterface $factory
      */
     public function __construct(FormFactoryInterface $factory)
