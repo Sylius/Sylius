@@ -285,7 +285,7 @@ final class OrderContext implements Context
     public function theCustomerBoughtSeveralProducts($quantity, ProductInterface $product)
     {
         $variant = $this->variantResolver->getVariant($product);
-        $this->addProductVariantToOrder($variant, $product->getPrice(), $quantity);
+        $this->addProductVariantToOrder($variant, $variant->getPrice(), $quantity);
 
         $this->objectManager->flush();
     }

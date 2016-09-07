@@ -42,21 +42,6 @@ final class ProductVariantContext implements Context
     }
 
     /**
-     * @Transform :variant
-     */
-    public function getProductVariantByName($variantName)
-    {
-        $productVariant = $this->productVariantRepository->findOneBy(['name' => $variantName]);
-
-        Assert::Notnull(
-           $productVariant,
-           sprintf('Product variant with name "%s" does not exist', $variantName)
-        );
-
-        return $productVariant;
-    }
-
-    /**
      * @Transform /^"([^"]+)" variant of product "([^"]+)"$/
      */
     public function getProductVariantByNameAndProduct($variantName, $productName)
