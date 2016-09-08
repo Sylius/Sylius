@@ -66,27 +66,11 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
 
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
-        $configFiles = [
-            'services.xml',
-            'controller.xml',
-            'context.xml',
-            'checkout.xml',
-            'form.xml',
-            'handlers.xml',
-            'api_form.xml',
-            'templating.xml',
-            'email.xml',
-            'sitemap.xml',
-            'dashboard.xml',
-        ];
+        $loader->load('services.xml');
 
         $env = $container->getParameter('kernel.environment');
         if ('test' === $env || 'test_cached' === $env) {
-            $configFiles[] = 'test_services.xml';
-        }
-
-        foreach ($configFiles as $configFile) {
-            $loader->load($configFile);
+            $loader->load('test_services.xml');
         }
 
         $this->overwriteRuleFactory($container);
