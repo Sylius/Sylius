@@ -23,12 +23,9 @@
     </imports>
 
     <parameters>
-        <parameter key="sylius.checkout_scenario.class">Sylius\Bundle\CoreBundle\Checkout\CheckoutProcessScenario</parameter>
-        <parameter key="sylius.checkout_step.security.class">Sylius\Bundle\CoreBundle\Checkout\Step\SecurityStep</parameter>
-        <parameter key="sylius.checkout_step.addressing.class">Sylius\Bundle\CoreBundle\Checkout\Step\AddressingStep</parameter>
-        <parameter key="sylius.checkout_step.shipping.class">Sylius\Bundle\CoreBundle\Checkout\Step\ShippingStep</parameter>
-        <parameter key="sylius.checkout_step.payment.class">Sylius\Bundle\CoreBundle\Checkout\Step\PaymentStep</parameter>
-        <parameter key="sylius.checkout_step.finalize.class">Sylius\Bundle\CoreBundle\Checkout\Step\FinalizeStep</parameter>
+        <parameter key="sylius.settings_schema.general.class">Sylius\Bundle\CoreBundle\Settings\GeneralSettingsSchema</parameter>
+        <parameter key="sylius.settings_schema.taxation.class">Sylius\Bundle\CoreBundle\Settings\TaxationSettingsSchema</parameter>
+        <parameter key="sylius.settings_schema.security.class">Sylius\Bundle\CoreBundle\Settings\SecuritySettingsSchema</parameter>
 
         <parameter key="sylius.resolver.default_shipping_method.class">Sylius\Component\Core\Resolver\DefaultShippingMethodResolver</parameter>
 
@@ -127,43 +124,6 @@
             <argument type="service" id="sylius.price_calculator" />
             <argument type="service" id="sylius.context.channel" />
             <argument type="service" id="sylius.variant_resolver.default" />
-        </service>
-
-        <!-- checkout -->
-        <service id="sylius.checkout_scenario" class="%sylius.checkout_scenario.class%">
-            <argument type="service" id="sylius.context.cart" />
-            <tag name="sylius.process.scenario" alias="sylius_checkout" />
-        </service>
-
-        <service id="sylius.checkout_step.security" class="%sylius.checkout_step.security.class%">
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-            <tag name="sylius.process.step" alias="sylius_checkout_security" />
-        </service>
-        <service id="sylius.checkout_step.addressing" class="%sylius.checkout_step.addressing.class%">
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-            <tag name="sylius.process.step" alias="sylius_checkout_addressing" />
-        </service>
-        <service id="sylius.checkout_step.shipping" class="%sylius.checkout_step.shipping.class%">
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-            <tag name="sylius.process.step" alias="sylius_checkout_shipping" />
-        </service>
-        <service id="sylius.checkout_step.payment" class="%sylius.checkout_step.payment.class%">
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-            <tag name="sylius.process.step" alias="sylius_checkout_payment" />
-        </service>
-        <service id="sylius.checkout_step.finalize" class="%sylius.checkout_step.finalize.class%">
-            <call method="setContainer">
-                <argument type="service" id="service_container" />
-            </call>
-            <tag name="sylius.process.step" alias="sylius_checkout_finalize" />
         </service>
 
         <service id="sylius.provider.channel_based_default_zone_provider" class="%sylius.provider.channel_based_default_zone_provider.class%" />
