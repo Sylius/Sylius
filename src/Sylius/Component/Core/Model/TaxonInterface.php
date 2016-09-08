@@ -28,4 +28,38 @@ interface TaxonInterface extends VariableTaxonInterface
      * @param ProductInterface[] $products
      */
     public function setProducts($products);
+
+    /**
+     * @return bool
+     */
+    public function hasImages();
+
+    /**
+     * @param TaxonImageInterface $image
+     *
+     * @return bool
+     */
+    public function hasImage(TaxonImageInterface $image);
+
+    /**
+     * @return Collection|TaxonImageInterface[]
+     */
+    public function getImages();
+
+    /**
+     * @param $code
+     *
+     * @return TaxonImageInterface|null;
+     */
+    public function getImageByCode($code);
+
+    /**
+     * @param TaxonImageInterface $image
+     */
+    public function removeImage(TaxonImageInterface $image);
+
+    /**
+     * @param TaxonImageInterface $image
+     */
+    public function addImage(TaxonImageInterface $image);
 }

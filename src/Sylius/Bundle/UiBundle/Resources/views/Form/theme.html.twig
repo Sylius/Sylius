@@ -182,6 +182,20 @@
     </div>
 {% endblock %}
 
+{% block sylius_taxon_image_widget %}
+    <div class="ui upload box segment">
+        {{ form_row(form.code) }}
+        {% if form.vars.value.path|default(null) is null %}
+            <label for="{{ form.file.vars.id }}" class="ui icon labeled button"><i class="cloud upload icon"></i> {{ 'sylius.ui.choose_file'|trans }}</label>
+        {% else %}
+            <img class="ui small bordered image" src="{{ form.vars.value.path|imagine_filter('sylius_small') }}" alt="{{ form.vars.value.code }}" />
+        {% endif %}
+        <div class="ui hidden element">
+            {{ form_widget(form.file) }}
+        </div>
+    </div>
+{% endblock %}
+
 {% block sylius_translations_row -%}
     <h4 class="ui dividing header">{{ form_label(form) }}</h4>
     <div class="ui grid">

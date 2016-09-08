@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 
 <!--
 
@@ -16,15 +16,17 @@
                   xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
                                       http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <mapped-superclass name="Sylius\Component\Core\Model\Taxon" table="sylius_taxon">
+    <mapped-superclass name="Sylius\Component\Core\Model\TaxonImage" table="sylius_taxon_image">
 
-        <one-to-many field="images" target-entity="Sylius\Component\Core\Model\TaxonImageInterface" mapped-by="taxon" orphan-removal="true">
-            <cascade>
-                <cascade-all/>
-            </cascade>
-        </one-to-many>
+        <unique-constraints>
+            <unique-constraint columns="taxon_id,code" name="code_idx" />
+        </unique-constraints>
 
-       <many-to-many field="products" mapped-by="taxons" target-entity="Sylius\Component\Product\Model\ProductInterface"/>
+        <field name="code" column="code" type="string" unique="false" />
+
+        <many-to-one field="taxon" target-entity="Sylius\Component\Taxonomy\Model\TaxonInterface" inversed-by="images">
+            <join-column name="taxon_id" referenced-column-name="id" nullable="false" on-delete="CASCADE"/>
+        </many-to-one>
     </mapped-superclass>
 
 </doctrine-mapping>

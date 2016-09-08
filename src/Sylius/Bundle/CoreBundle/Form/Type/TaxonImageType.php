@@ -11,10 +11,12 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type;
 
-use Sylius\Bundle\TaxonomyBundle\Form\Type\TaxonType as BaseTaxonType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-class TaxonType extends BaseTaxonType
+/**
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
+ */
+class TaxonImageType extends ImageType
 {
     /**
      * {@inheritdoc}
@@ -24,13 +26,17 @@ class TaxonType extends BaseTaxonType
         parent::buildForm($builder, $options);
 
         $builder
-            ->add('images', 'collection', [
-                'type' => 'sylius_taxon_image',
-                'allow_add' => true,
-                'allow_delete' => true,
-                'by_reference' => false,
-                'label' => 'sylius.form.taxon.images',
+            ->add('code', 'text', [
+                'label' => 'sylius.form.taxon.code',
             ])
         ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return 'sylius_taxon_image';
     }
 }

@@ -70,4 +70,10 @@ interface CreatePageInterface extends BaseCreatePageInterface
      * @param string $languageCode
      */
     public function specifyPermalink($permalink, $languageCode);
+
+    /**
+     * @param string $code
+     * @param string $path
+     */
+    public function attachImageWithCode($code, $path);
 }

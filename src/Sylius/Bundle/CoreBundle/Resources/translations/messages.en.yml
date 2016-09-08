@@ -82,7 +82,9 @@ sylius:
         shipping_method:
             zone: Zone
         taxon:
+            code: Code
             file: Select image
+            images: Images
         taxonomy:
             file: Select image
         user:

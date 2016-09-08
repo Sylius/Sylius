@@ -11,25 +11,55 @@
 
 namespace spec\Sylius\Component\Core\Model;
 
+use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Core\Model\ImageInterface;
+use Sylius\Component\Core\Model\Taxon;
+use Sylius\Component\Core\Model\TaxonImageInterface;
 use Sylius\Component\Taxonomy\Model\TaxonInterface;
 
+/**
+ * @mixin Taxon
+ *
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
+ */
 final class TaxonSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Model\Taxon');
+        $this->shouldHaveType(Taxon::class);
     }
 
-    function it_is_Sylius_Taxon()
+    function it_is_a_taxon()
     {
         $this->shouldImplement(TaxonInterface::class);
-        $this->shouldImplement(ImageInterface::class);
     }
 
-    function it_should_not_path_defined_by_default()
+    function it_initializes_image_collection_by_default()
     {
-        $this->getPath()->shouldReturn(null);
+        $this->getImages()->shouldHaveType(Collection::class);
+    }
+
+    function it_adds_an_image(TaxonImageInterface $image)
+    {
+        $this->addImage($image);
+        $this->hasImages()->shouldReturn(true);
+        $this->hasImage($image)->shouldReturn(true);
+    }
+
+    function it_removes_an_image(TaxonImageInterface $image)
+    {
+        $this->addImage($image);
+        $this->removeImage($image);
+        $this->hasImage($image)->shouldReturn(false);
+    }
+
+    function it_returns_an_image_by_code(TaxonImageInterface $image)
+    {
+        $image->getCode()->willReturn('thumbnail');
+        $image->setTaxon($this)->shouldBeCalled();
+
+        $this->addImage($image);
+
+        $this->getImageByCode('thumbnail')->shouldReturn($image);
     }
 }

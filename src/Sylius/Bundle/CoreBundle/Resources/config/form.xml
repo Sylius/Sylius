@@ -18,6 +18,7 @@
 
     <parameters>
         <parameter key="sylius.form.type.image.class">Sylius\Bundle\CoreBundle\Form\Type\ImageType</parameter>
+        <parameter key="sylius.form.type.taxon_image.class">Sylius\Bundle\CoreBundle\Form\Type\TaxonImageType</parameter>
         <parameter key="sylius.form.type.list.class">Sylius\Bundle\CoreBundle\Form\Type\ListType</parameter>
         <parameter key="sylius.form.type.country.class">Sylius\Bundle\CoreBundle\Form\Type\CountryType</parameter>
         <parameter key="sylius.form.type.locale.class">Sylius\Bundle\CoreBundle\Form\Type\LocaleType</parameter>
@@ -78,6 +79,12 @@
             <argument>%sylius.model.product_variant_image.class%</argument>
             <tag name="form.type" alias="sylius_image" />
         </service>
+
+        <service id="sylius.form.type.taxon_image" class="%sylius.form.type.taxon_image.class%">
+            <argument>%sylius.model.taxon_image.class%</argument>
+            <tag name="form.type" alias="sylius_taxon_image" />
+        </service>
+
         <service id="sylius.form.type.list" class="%sylius.form.type.list.class%">
             <tag name="form.type" alias="list" />
         </service>
