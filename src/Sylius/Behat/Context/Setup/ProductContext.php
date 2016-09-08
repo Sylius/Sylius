@@ -426,6 +426,16 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Given /^the ("[^"]+" product variant) is tracked by the inventory$/
+     */
+    public function theProductVariantIsTrackedByTheInventory(ProductVariantInterface $productVariant)
+    {
+        $productVariant->setTracked(true);
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @param string $type
      * @param string $name
      * @param string $code

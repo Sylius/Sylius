@@ -1,8 +1,8 @@
 @managing_products
-Feature: Editing a product
-    In order to change product details
+Feature: Enable the inventory tracking
+    In order to enable inventory tracking
     As an Administrator
-    I want to be able to edit a product
+    I want to be able to disable or enable inventory tracking
 
     Background:
         Given the store is available in "English (United States)"

@@ -125,6 +125,22 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
+     * @When I disable its tracking
+     */
+    public function iDisableItsTracking()
+    {
+        $this->updatePage->disableTracking();
+    }
+
+    /**
+     * @When I enable its tracking
+     */
+    public function iEnableItsTracking()
+    {
+        $this->updatePage->enableTracking();
+    }
+
+    /**
      * @When /^I set its price to ("(?:€|£|\$)[^"]+")$/
      */
     public function iSetItsPriceTo($price)
@@ -213,12 +229,12 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
-     * @When I want to modify the :productVariant product variant
+     * @When /^I want to modify the ("[^"]+" product variant)$/
      * @When /^I want to modify (this product variant)$/
      */
     public function iWantToModifyAProduct(ProductVariantInterface $productVariant)
     {
-        $this->updatePage->open(['id' => $productVariant->getId()]);
+        $this->updatePage->open(['id' => $productVariant->getId(), 'productId' => $productVariant->getProduct()->getId()]);
     }
 
     /**
@@ -273,6 +289,32 @@ final class ManagingProductVariantsContext implements Context
         Assert::true(
             $this->indexPage->isSingleResourceWithSpecificElementOnPage(['name' => $productVariantName], sprintf('td > div.ui.label:contains("%s")', $quantity)),
             sprintf('The product variant %s should have %s items on hand, but it does not.',$productVariantName, $quantity)
+        );
+    }
+
+    /**
+     * @Then /^(this variant) should not be tracked$/
+     */
+    public function thisProductVariantShouldNotBeTracked(ProductVariantInterface $productVariant)
+    {
+        $this->iWantToModifyAProduct($productVariant);
+
+        Assert::false(
+            $this->updatePage->isTracked(),
+            'This variant should not be tracked, but it is.'
+        );
+    }
+
+    /**
+     * @Then /^(this variant) should be tracked$/
+     */
+    public function thisProductVariantShouldBeTracked(ProductVariantInterface $productVariant)
+    {
+        $this->iWantToModifyAProduct($productVariant);
+
+        Assert::true(
+            $this->updatePage->isTracked(),
+            'This variant should be tracked, but it is not.'
         );
     }
 
