@@ -53,6 +53,7 @@
         <parameter key="sylius.listener.user_auto_login.class">Sylius\Bundle\CoreBundle\EventListener\UserAutoLoginListener</parameter>
         <parameter key="sylius.listener.canonicalizer.class">Sylius\Bundle\CoreBundle\EventListener\CanonicalizerListener</parameter>
         <parameter key="sylius.listener.user_registration.class">Sylius\Bundle\CoreBundle\EventListener\UserRegistrationListener</parameter>
+        <parameter key="sylius.listener.password_updater.class">Sylius\Bundle\CoreBundle\EventListener\PasswordUpdaterListener</parameter>
 
         <parameter key="sylius.active_promotions_by_channel_provider.class">Sylius\Component\Core\Provider\ActivePromotionsByChannelProvider</parameter>
 

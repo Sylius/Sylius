@@ -90,10 +90,6 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         }
 
         $this->overwriteRuleFactory($container);
-
-        $container
-            ->getDefinition('sylius.listener.password_updater')
-            ->setClass('Sylius\Bundle\CoreBundle\EventListener\PasswordUpdaterListener');
     }
 
     /**
