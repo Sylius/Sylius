@@ -408,9 +408,13 @@
             <tag name="validator.constraint_validator" alias="registered_user_validator" />
         </service>
 
-        <service id="sylius.custom_factory.cart_item" class="Sylius\Component\Core\Factory\CartItemFactory" decorates="sylius.factory.cart_item">
-            <argument type="service" id="sylius.custom_factory.cart_item.inner" />
+        <service id="sylius_core.factory.cart_item" class="Sylius\Component\Core\Factory\CartItemFactory" decorates="sylius.factory.cart_item" public="false">
+            <argument type="service" id="sylius_core.factory.cart_item.inner" />
             <argument type="service" id="sylius.variant_resolver.default" />
+        </service>
+
+        <service id="sylius_core.factory.promotion_rule" class="Sylius\Component\Core\Factory\RuleFactory" decorates="sylius.factory.promotion_rule" public="false">
+            <argument type="service" id="sylius_core.factory.promotion_rule.inner" />
         </service>
 
         <service id="sylius.inventory.on_hand_quantity_updater" class="%sylius.inventory.on_hand_quantity_updater.class%"/>
