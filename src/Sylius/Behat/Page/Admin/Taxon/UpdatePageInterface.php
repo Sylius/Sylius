@@ -71,4 +71,10 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
      * @return int
      */
     public function countImages();
+
+    /**
+     * @param string $code
+     * @param string $path
+     */
+    public function changeImageWithCode($code, $path);
 }

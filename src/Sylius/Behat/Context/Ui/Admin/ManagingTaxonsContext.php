@@ -362,4 +362,12 @@ final class ManagingTaxonsContext implements Context
             'This taxon has %2$s, but it should not have.'
         );
     }
+
+    /**
+     * @When I change its image to :path for the code :code
+     */
+    public function iChangeItsImageToPathForTheCode($path, $code)
+    {
+        $this->updatePage->changeImageWithCode($code, $path);
+    }
 }
