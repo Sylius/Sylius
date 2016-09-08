@@ -112,17 +112,17 @@ final class MugProductFixture extends AbstractFixture
         ]]]);
 
         $this->productAttributeFixture->load(['custom' => [
-            ['name' => 'Mug material', 'code' => 'MUG-MATERIAL', 'type' => TextAttributeType::TYPE],
+            ['name' => 'Mug material', 'code' => 'mug_material', 'type' => TextAttributeType::TYPE],
         ]]);
 
         $this->productOptionFixture->load(['custom' => [
             [
                 'name' => 'Mug type',
-                'code' => 'MUG-TYPE',
+                'code' => 'mug_type',
                 'values' => [
-                    'MUG-TYPE-MEDIUM' => 'Medium mug',
-                    'MUG-TYPE-DOUBLE' => 'Double mug',
-                    'MUG-TYPE-MONSTER' => 'Monster mug',
+                    'mug_type_medium' => 'Medium mug',
+                    'mug_type_double' => 'Double mug',
+                    'mug_type_monster' => 'Monster mug',
                 ],
             ],
         ]]);
@@ -135,7 +135,7 @@ final class MugProductFixture extends AbstractFixture
                 'main_taxon' => 'mugs',
                 'taxons' => ['mugs'],
                 'product_attributes' => [
-                    'MUG-MATERIAL' => $this->faker->randomElement(['Invisible porcelain', 'Banana skin', 'Porcelain', 'Centipede']),
+                    'mug_material' => $this->faker->randomElement(['Invisible porcelain', 'Banana skin', 'Porcelain', 'Centipede']),
                 ],
                 'images' => [sprintf('%s/../Resources/fixtures/%s', __DIR__, 'mugs.jpg')],
             ];

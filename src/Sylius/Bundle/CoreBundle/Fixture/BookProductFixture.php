@@ -113,9 +113,9 @@ final class BookProductFixture extends AbstractFixture
         ]]]);
 
         $this->productAttributeFixture->load(['custom' => [
-            ['name' => 'Book author', 'code' => 'BOOK-AUTHOR', 'type' => TextAttributeType::TYPE],
-            ['name' => 'Book ISBN', 'code' => 'BOOK-ISBN', 'type' => TextAttributeType::TYPE],
-            ['name' => 'Book pages', 'code' => 'BOOK-PAGES', 'type' => IntegerAttributeType::TYPE],
+            ['name' => 'Book author', 'code' => 'book_author', 'type' => TextAttributeType::TYPE],
+            ['name' => 'Book ISBN', 'code' => 'book_isbn', 'type' => TextAttributeType::TYPE],
+            ['name' => 'Book pages', 'code' => 'book_pages', 'type' => IntegerAttributeType::TYPE],
         ]]);
 
         $products = [];
@@ -128,9 +128,9 @@ final class BookProductFixture extends AbstractFixture
                 'main_taxon' => 'books',
                 'taxons' => ['books'],
                 'product_attributes' => [
-                    'BOOK-AUTHOR' => $name,
-                    'BOOK-ISBN' => $this->faker->isbn13,
-                    'BOOK-PAGES' => $this->faker->numberBetween(42, 1024),
+                    'book_author' => $name,
+                    'book_isbn' => $this->faker->isbn13,
+                    'book_pages' => $this->faker->numberBetween(42, 1024),
                 ],
                 'images' => [sprintf('%s/../Resources/fixtures/%s', __DIR__, 'books.jpg')],
             ];
