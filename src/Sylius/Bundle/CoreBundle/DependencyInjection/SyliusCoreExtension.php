@@ -75,10 +75,6 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         $container->setParameter('sylius.sitemap_template', $config['sitemap']['template']);
 
         $this->overwriteRuleFactory($container);
-
-        $container
-            ->getDefinition('sylius.listener.password_updater')
-            ->setClass('Sylius\Bundle\CoreBundle\EventListener\PasswordUpdaterListener');
     }
 
     /**
