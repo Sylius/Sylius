@@ -82,10 +82,6 @@ final class SessionCartSubscriber implements EventSubscriberInterface
                 sprintf('%s.%s', $this->sessionKeyName, $cart->getChannel()->getCode()),
                 $cart->getId()
             );
-            $session->set(
-                sprintf('_order_%s_checkout_state', $cart->getIdentifier()),
-                $cart->getCheckoutState()
-            );
         }
     }
 
