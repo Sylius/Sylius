@@ -1,3 +1,4 @@
+{% if data.isTracked %}
 <div class="ui {{ data.onHand > 0 ? 'green' : 'red' }} icon label">
     <i class="cube icon"></i>
     {{ data.onHand }} {{ 'sylius.ui.available_on_hand'|trans }}
@@ -7,3 +8,9 @@
     </div>
     {% endif %}
 </div>
+{% else %}
+    <span class="ui red label">
+        <i class="remove icon"></i>
+        {{ 'sylius.ui.untraceable'|trans }}
+    </span>
+{% endif %}
