@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Cart\Repository;
+namespace Sylius\Component\Order\Repository;
 
-use Sylius\Component\Cart\Model\CartInterface;
+use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
 
 /**
@@ -21,12 +21,12 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 interface CartRepositoryInterface extends RepositoryInterface
 {
     /**
-     * @return null|CartInterface
+     * @return null|OrderInterface
      */
     public function findCartById($id);
 
     /**
-     * @return CartInterface[]
+     * @return OrderInterface[]
      */
     public function findExpiredCarts();
 }

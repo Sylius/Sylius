@@ -12,8 +12,8 @@
 namespace Sylius\Bundle\CartBundle\Templating\Helper;
 
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
-use Sylius\Component\Cart\Model\CartInterface;
-use Sylius\Component\Cart\Context\CartContextInterface;
+use Sylius\Component\Order\Model\OrderInterface;
+use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormView;
@@ -56,7 +56,7 @@ class CartHelper extends Helper
     }
 
     /**
-     * @return CartInterface|null
+     * @return OrderInterface|null
      */
     public function getCurrentCart()
     {

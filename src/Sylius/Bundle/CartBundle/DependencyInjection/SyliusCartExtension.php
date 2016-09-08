@@ -12,8 +12,8 @@
 namespace Sylius\Bundle\CartBundle\DependencyInjection;
 
 use Sylius\Bundle\ResourceBundle\DependencyInjection\Extension\AbstractResourceExtension;
-use Sylius\Component\Cart\Model\Cart;
-use Sylius\Component\Cart\Model\CartItem;
+use Sylius\Component\Order\Model\Cart;
+use Sylius\Component\Order\Model\OrderItem;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;

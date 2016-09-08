@@ -12,10 +12,10 @@
 namespace spec\Sylius\Bundle\CartBundle\Context;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Cart\Context\CartContextInterface;
-use Sylius\Component\Cart\Context\CartNotFoundException;
-use Sylius\Component\Cart\Model\CartInterface;
-use Sylius\Component\Cart\Repository\CartRepositoryInterface;
+use Sylius\Component\Order\Context\CartContextInterface;
+use Sylius\Component\Order\Context\CartNotFoundException;
+use Sylius\Component\Order\Model\OrderInterface;
+use Sylius\Component\Order\Repository\CartRepositoryInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
@@ -41,7 +41,7 @@ final class SessionBasedCartContextSpec extends ObjectBehavior
     function it_returns_cart_based_on_id_stored_in_session(
         SessionInterface $session,
         CartRepositoryInterface $cartRepository,
-        CartInterface $cart
+        OrderInterface $cart
     )  {
         $session->has('session_key_name')->willReturn(true);
         $session->get('session_key_name')->willReturn(12345);

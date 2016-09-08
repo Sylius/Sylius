@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\CartBundle\Twig;
 
 use Sylius\Bundle\CartBundle\Templating\Helper\CartHelper;
-use Sylius\Component\Cart\Model\CartInterface;
+use Sylius\Component\Order\Model\OrderInterface;
 use Symfony\Component\Form\FormView;
 
 /**
@@ -48,7 +48,7 @@ class CartExtension extends \Twig_Extension
     /**
      * Returns current cart.
      *
-     * @return null|CartInterface
+     * @return null|OrderInterface
      */
     public function getCurrentCart()
     {

@@ -13,22 +13,22 @@ namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Cart\Model\Cart;
 use Sylius\Component\Channel\Model\ChannelInterface as BaseChannelInterface;
 use Sylius\Component\Core\OrderCheckoutStates;
 use Sylius\Component\Core\OrderPaymentStates;
 use Sylius\Component\Core\OrderShippingStates;
+use Sylius\Component\Customer\Model\CustomerInterface as BaseCustomerInterface;
+use Sylius\Component\Order\Model\Order as BaseOrder;
 use Sylius\Component\Payment\Model\PaymentInterface as BasePaymentInterface;
 use Sylius\Component\Promotion\Model\CouponInterface as BaseCouponInterface;
 use Sylius\Component\Promotion\Model\PromotionInterface as BasePromotionInterface;
-use Sylius\Component\Customer\Model\CustomerInterface as BaseCustomerInterface;
 use Webmozart\Assert\Assert;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  * @author Michał Marcinkowski <michal.marcinkowski@lakion.com>
  */
-class Order extends Cart implements OrderInterface
+class Order extends BaseOrder implements OrderInterface
 {
     /**
      * @var BaseCustomerInterface

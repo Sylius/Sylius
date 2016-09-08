@@ -13,9 +13,9 @@ namespace Sylius\Bundle\CartBundle\Controller;
 
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\View\View;
-use Sylius\Component\Cart\CartActions;
-use Sylius\Component\Cart\Modifier\CartModifierInterface;
-use Sylius\Component\Cart\SyliusCartEvents;
+use Sylius\Component\Order\CartActions;
+use Sylius\Component\Order\Modifier\CartModifierInterface;
+use Sylius\Component\Order\SyliusCartEvents;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\EventDispatcher\GenericEvent;

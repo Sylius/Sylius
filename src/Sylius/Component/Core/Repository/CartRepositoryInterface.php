@@ -11,8 +11,8 @@
 
 namespace Sylius\Component\Core\Repository;
 
-use Sylius\Component\Cart\Model\CartInterface;
-use Sylius\Component\Cart\Repository\CartRepositoryInterface as BaseCartRepositoryInterface;
+use Sylius\Component\Order\Model\OrderInterface;
+use Sylius\Component\Order\Repository\CartRepositoryInterface as BaseCartRepositoryInterface;
 use Sylius\Component\Channel\Model\ChannelInterface;
 
 /**
@@ -24,7 +24,7 @@ interface CartRepositoryInterface extends BaseCartRepositoryInterface
      * @param string $id
      * @param ChannelInterface $channel
      * 
-     * @return null|CartInterface
+     * @return null|OrderInterface
      */
     public function findCartByIdAndChannel($id, ChannelInterface $channel);
 }

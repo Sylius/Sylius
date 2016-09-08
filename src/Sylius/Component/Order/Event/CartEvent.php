@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Cart\Event;
+namespace Sylius\Component\Order\Event;
 
-use Sylius\Component\Cart\Model\CartInterface;
+use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Resource\Event\ResourceEvent;
 
 /**
@@ -22,21 +22,21 @@ use Sylius\Component\Resource\Event\ResourceEvent;
 class CartEvent extends ResourceEvent
 {
     /**
-     * @var CartInterface
+     * @var OrderInterface
      */
     protected $cart;
 
     /**
-     * @param CartInterface $cart
+     * @param OrderInterface $cart
      */
-    public function __construct(CartInterface $cart)
+    public function __construct(OrderInterface $cart)
     {
         $this->subject = $cart;
         $this->cart = $cart;
     }
 
     /**
-     * @return CartInterface
+     * @return OrderInterface
      */
     public function getCart()
     {

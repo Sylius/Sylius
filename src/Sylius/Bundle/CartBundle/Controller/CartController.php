@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\CartBundle\Controller;
 
 use FOS\RestBundle\View\View;
-use Sylius\Component\Cart\SyliusCartEvents;
+use Sylius\Component\Order\SyliusCartEvents;
 use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\EventDispatcher\GenericEvent;
 use Symfony\Component\HttpFoundation\Request;

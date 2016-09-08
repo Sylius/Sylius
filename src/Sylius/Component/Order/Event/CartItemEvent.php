@@ -9,28 +9,26 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Cart\Event;
+namespace Sylius\Component\Order\Event;
 
-use Sylius\Component\Cart\Model\CartInterface;
-use Sylius\Component\Cart\Model\CartItemInterface;
+use Sylius\Component\Order\Model\OrderInterface;
+use Sylius\Component\Order\Model\OrderItemInterface;
 
 /**
- * Cart item event.
- *
  * @author Joseph Bielawski <stloyd@gmail.com>
  */
 class CartItemEvent extends CartEvent
 {
     /**
-     * @var CartItemInterface
+     * @var OrderItemInterface
      */
     private $item;
 
     /**
-     * @param CartInterface     $cart
-     * @param CartItemInterface $item
+     * @param OrderInterface $cart
+     * @param OrderItemInterface $item
      */
-    public function __construct(CartInterface $cart, CartItemInterface $item)
+    public function __construct(OrderInterface $cart, OrderItemInterface $item)
     {
         parent::__construct($cart);
 
@@ -39,7 +37,7 @@ class CartItemEvent extends CartEvent
     }
 
     /**
-     * @return CartItemInterface
+     * @return OrderItemInterface
      */
     public function getItem()
     {

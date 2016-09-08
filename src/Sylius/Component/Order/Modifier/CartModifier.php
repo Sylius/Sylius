@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Cart\Modifier;
+namespace Sylius\Component\Order\Modifier;
 
-use Sylius\Component\Cart\Model\CartInterface;
-use Sylius\Component\Cart\Model\CartItemInterface;
+use Sylius\Component\Order\Model\OrderInterface;
+use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 
@@ -44,10 +44,10 @@ final class CartModifier implements CartModifierInterface
     }
 
     /**
-     * @param CartInterface $cart
-     * @param CartItemInterface $item
+     * @param OrderInterface $cart
+     * @param OrderItemInterface $item
      */
-    public function addToCart(CartInterface $cart, CartItemInterface $item)
+    public function addToCart(OrderInterface $cart, OrderItemInterface $item)
     {
         $this->resolveCartItem($cart, $item);
 
@@ -55,20 +55,20 @@ final class CartModifier implements CartModifierInterface
     }
 
     /**
-     * @param CartInterface $cart
-     * @param CartItemInterface $item
+     * @param OrderInterface $cart
+     * @param OrderItemInterface $item
      */
-    public function removeFromCart(CartInterface $cart, CartItemInterface $item)
+    public function removeFromCart(OrderInterface $cart, OrderItemInterface $item)
     {
         $cart->removeItem($item);
         $this->orderProcessor->process($cart);
     }
 
     /**
-     * @param CartInterface $cart
-     * @param CartItemInterface $item
+     * @param OrderInterface $cart
+     * @param OrderItemInterface $item
      */
-    private function resolveCartItem(CartInterface $cart, CartItemInterface $item)
+    private function resolveCartItem(OrderInterface $cart, OrderItemInterface $item)
     {
         foreach ($cart->getItems() as $existingItem) {
             if ($item->equals($existingItem)) {

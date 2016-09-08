@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Cart\Context;
+namespace spec\Sylius\Component\Order\Context;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Cart\Context\CartContextInterface;
-use Sylius\Component\Cart\Context\CartNotFoundException;
-use Sylius\Component\Cart\Context\CompositeCartContext;
-use Sylius\Component\Cart\Model\CartInterface;
+use Sylius\Component\Order\Context\CartContextInterface;
+use Sylius\Component\Order\Context\CartNotFoundException;
+use Sylius\Component\Order\Context\CompositeCartContext;
+use Sylius\Component\Order\Model\OrderInterface;
 
 /**
  * @mixin CompositeCartContext
@@ -51,7 +51,7 @@ final class CompositeCartContextSpec extends ObjectBehavior
     function it_returns_cart_from_first_available_context(
         CartContextInterface $firstCartContext,
         CartContextInterface $secondCartContext,
-        CartInterface $cart
+        OrderInterface $cart
     ) {
         $firstCartContext->getCart()->willThrow(CartNotFoundException::class);
         $secondCartContext->getCart()->willReturn($cart);
@@ -65,7 +65,7 @@ final class CompositeCartContextSpec extends ObjectBehavior
     function its_cart_contexts_can_have_priority(
         CartContextInterface $firstCartContext,
         CartContextInterface $secondCartContext,
-        CartInterface $cart
+        OrderInterface $cart
     ) {
         $firstCartContext->getCart()->shouldNotBeCalled();
         $secondCartContext->getCart()->willReturn($cart);

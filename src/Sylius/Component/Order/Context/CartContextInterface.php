@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Cart\Context;
+namespace Sylius\Component\Order\Context;
 
-use Sylius\Component\Cart\Model\CartInterface;
+use Sylius\Component\Order\Model\OrderInterface;
 
 /**
  * Interface to be implemented by the service providing the currently used
@@ -22,7 +22,7 @@ use Sylius\Component\Cart\Model\CartInterface;
 interface CartContextInterface
 {
     /**
-     * @return CartInterface
+     * @return OrderInterface
      *
      * @throws CartNotFoundException
      */

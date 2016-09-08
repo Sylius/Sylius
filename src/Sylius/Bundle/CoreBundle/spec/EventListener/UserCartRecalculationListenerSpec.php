@@ -14,9 +14,8 @@ namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\EventListener\UserCartRecalculationListener;
-use Sylius\Component\Cart\Context\CartContextInterface;
-use Sylius\Component\Cart\Context\CartNotFoundException;
-use Sylius\Component\Cart\Model\CartInterface;
+use Sylius\Component\Order\Context\CartContextInterface;
+use Sylius\Component\Order\Context\CartNotFoundException;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\Resource\Exception\UnexpectedTypeException;
@@ -54,7 +53,7 @@ final class UserCartRecalculationListenerSpec extends ObjectBehavior
     function it_throws_exception_if_provided_cart_is_not_order(
         CartContextInterface $cartContext,
         OrderProcessorInterface $orderProcessor,
-        CartInterface $cart,
+        OrderInterface $cart,
         Event $event
     ) {
         $cartContext->getCart()->willReturn($cart);

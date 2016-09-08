@@ -11,9 +11,9 @@
 
 namespace Sylius\Bundle\CartBundle\Context;
 
-use Sylius\Component\Cart\Context\CartContextInterface;
-use Sylius\Component\Cart\Context\CartNotFoundException;
-use Sylius\Component\Cart\Repository\CartRepositoryInterface;
+use Sylius\Component\Order\Context\CartContextInterface;
+use Sylius\Component\Order\Context\CartNotFoundException;
+use Sylius\Component\Order\Repository\CartRepositoryInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**

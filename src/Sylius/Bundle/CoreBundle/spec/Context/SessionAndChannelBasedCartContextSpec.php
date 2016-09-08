@@ -13,9 +13,9 @@ namespace spec\Sylius\Bundle\CoreBundle\Context;
 
 use PhpSpec\ObjectBehavior;
 use Sylius\Bundle\CoreBundle\Context\SessionAndChannelBasedCartContext;
-use Sylius\Component\Cart\Context\CartContextInterface;
-use Sylius\Component\Cart\Context\CartNotFoundException;
-use Sylius\Component\Cart\Model\CartInterface;
+use Sylius\Component\Order\Context\CartContextInterface;
+use Sylius\Component\Order\Context\CartNotFoundException;
+use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Channel\Context\ChannelContextInterface;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Channel\Model\ChannelInterface;
@@ -47,7 +47,7 @@ final class SessionAndChannelBasedCartContextSpec extends ObjectBehavior
         CartRepositoryInterface $cartRepository,
         ChannelContextInterface $channelContext,
         ChannelInterface $channel,
-        CartInterface $cart
+        OrderInterface $cart
     ) {
 
         $channelContext->getChannel()->willReturn($channel);

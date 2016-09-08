@@ -12,8 +12,8 @@
 namespace spec\Sylius\Component\Core\Cart\Context;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Cart\Context\CartContextInterface;
-use Sylius\Component\Cart\Context\CartNotFoundException;
+use Sylius\Component\Order\Context\CartContextInterface;
+use Sylius\Component\Order\Context\CartNotFoundException;
 use Sylius\Component\Channel\Context\ChannelNotFoundException;
 use Sylius\Component\Core\Cart\Context\ShopBasedCartContext;
 use Sylius\Component\Core\Context\ShopperContextInterface;

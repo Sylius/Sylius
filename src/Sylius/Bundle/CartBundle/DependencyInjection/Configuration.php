@@ -11,15 +11,11 @@
 
 namespace Sylius\Bundle\CartBundle\DependencyInjection;
 
-use Sylius\Bundle\CartBundle\Controller\CartController;
 use Sylius\Bundle\CartBundle\Controller\CartItemController;
 use Sylius\Bundle\CartBundle\Form\Type\CartItemType;
-use Sylius\Bundle\CartBundle\Form\Type\CartType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;
-use Sylius\Component\Cart\Model\Cart;
-use Sylius\Component\Cart\Model\CartInterface;
-use Sylius\Component\Cart\Model\CartItem;
-use Sylius\Component\Cart\Model\CartItemInterface;
+use Sylius\Component\Order\Model\OrderItem;
+use Sylius\Component\Order\Model\OrderItemInterface;
 use Sylius\Component\Resource\Factory\Factory;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
@@ -67,37 +63,6 @@ class Configuration implements ConfigurationInterface
                     ->isRequired()
                     ->addDefaultsIfNotSet()
                     ->children()
-                        ->arrayNode('cart')
-                            ->addDefaultsIfNotSet()
-                            ->children()
-                                ->variableNode('options')->end()
-                                ->arrayNode('classes')
-                                    ->addDefaultsIfNotSet()
-                                    ->children()
-                                        ->scalarNode('model')->defaultValue(Cart::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('interface')->defaultValue(CartInterface::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('controller')->defaultValue(CartController::class)->cannotBeEmpty()->end()
-                                        ->scalarNode('repository')->cannotBeEmpty()->end()
-                                        ->scalarNode('factory')->defaultValue(Factory::class)->cannotBeEmpty()->end()
-                                        ->arrayNode('form')
-                                            ->addDefaultsIfNotSet()
-                                            ->children()
-                                                ->scalarNode('default')->defaultValue(CartType::class)->cannotBeEmpty()->end()
-                                            ->end()
-                                        ->end()
-                                    ->end()
-                                ->end()
-                                ->arrayNode('validation_groups')
-                                    ->addDefaultsIfNotSet()
-                                    ->children()
-                                        ->arrayNode('default')
-                                            ->prototype('scalar')->end()
-                                            ->defaultValue(['sylius'])
-                                        ->end()
-                                    ->end()
-                                ->end()
-                            ->end()
-                        ->end()
                         ->arrayNode('cart_item')
                             ->addDefaultsIfNotSet()
                             ->children()

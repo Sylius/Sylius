@@ -13,8 +13,8 @@ namespace Sylius\Bundle\CartBundle\Controller;
 
 use Sylius\Bundle\ResourceBundle\Controller\RequestConfiguration;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
-use Sylius\Component\Cart\Context\CartContextInterface;
-use Sylius\Component\Cart\Model\CartInterface;
+use Sylius\Component\Order\Context\CartContextInterface;
+use Sylius\Component\Order\Model\OrderInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
@@ -46,7 +46,7 @@ abstract class Controller extends ResourceController
     }
 
     /**
-     * @return CartInterface
+     * @return OrderInterface
      */
     protected function getCurrentCart()
     {

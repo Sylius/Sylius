@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Cart\Context;
+namespace Sylius\Component\Order\Context;
 
 use Zend\Stdlib\PriorityQueue;
 

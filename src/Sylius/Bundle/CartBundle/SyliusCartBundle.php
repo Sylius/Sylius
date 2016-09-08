@@ -54,6 +54,6 @@ class SyliusCartBundle extends AbstractResourceBundle
      */
     protected function getModelNamespace()
     {
-        return 'Sylius\Component\Cart\Model';
+        return 'Sylius\Component\Order\Model';
     }
 }

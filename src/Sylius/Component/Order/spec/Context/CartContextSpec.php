@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Cart\Context;
+namespace spec\Sylius\Component\Order\Context;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Cart\Context\CartContext;
-use Sylius\Component\Cart\Context\CartContextInterface;
-use Sylius\Component\Cart\Model\CartInterface;
+use Sylius\Component\Order\Context\CartContext;
+use Sylius\Component\Order\Context\CartContextInterface;
+use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
@@ -39,7 +39,7 @@ final class CartContextSpec extends ObjectBehavior
         $this->shouldImplement(CartContextInterface::class);
     }
 
-    function it_always_returns_a_new_cart(FactoryInterface $cartFactory, CartInterface $cart)
+    function it_always_returns_a_new_cart(FactoryInterface $cartFactory, OrderInterface $cart)
     {
         $cartFactory->createNew()->willReturn($cart);
 

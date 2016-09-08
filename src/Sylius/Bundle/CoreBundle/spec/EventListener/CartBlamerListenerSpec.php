@@ -16,9 +16,8 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\CoreBundle\EventListener\CartBlamerListener;
 use Sylius\Bundle\UserBundle\Event\UserEvent;
-use Sylius\Component\Cart\Context\CartContextInterface;
-use Sylius\Component\Cart\Context\CartNotFoundException;
-use Sylius\Component\Cart\Model\CartInterface;
+use Sylius\Component\Order\Context\CartContextInterface;
+use Sylius\Component\Order\Context\CartNotFoundException;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\ShopUserInterface;
@@ -46,7 +45,7 @@ class CartBlamerListenerSpec extends ObjectBehavior
 
     function it_throws_exception_when_cart_does_not_implement_core_order_interface_on_implicit_login(
         CartContextInterface $cartContext,
-        CartInterface $cart,
+        OrderInterface $cart,
         UserEvent $userEvent,
         ShopUserInterface $user
     ) {
@@ -57,7 +56,7 @@ class CartBlamerListenerSpec extends ObjectBehavior
 
     function it_throws_exception_when_cart_does_not_implement_core_order_interface_on_interactive_login(
         CartContextInterface $cartContext,
-        CartInterface $cart,
+        OrderInterface $cart,
         InteractiveLoginEvent $interactiveLoginEvent,
         TokenInterface $token,
         ShopUserInterface $user
