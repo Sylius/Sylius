@@ -23,67 +23,48 @@
             <argument type="service" id="sm.factory" />
         </service>
 
-        <service id="sylius.order_processing.order_processor" class="Sylius\Component\Order\Processor\CompositeOrderProcessor">
-            <call method="addProcessor">
-                <argument type="service">
-                    <service class="Sylius\Component\Core\OrderProcessing\OrderExchangeRateProcessor">
-                        <argument type="service" id="sylius.updater.order.exchange_rate" />
-                    </service>
-                </argument>
-            </call>
-            <call method="addProcessor">
-                <argument type="service">
-                    <service class="Sylius\Component\Core\OrderProcessing\OrderShipmentProcessor">
-                        <argument type="service" id="sylius.resolver.default_shipping_method" />
-                        <argument type="service" id="sylius.factory.shipment" />
-                    </service>
-                </argument>
-            </call>
-            <call method="addProcessor">
-                <argument type="service">
-                    <service class="Sylius\Component\Core\OrderProcessing\OrderPaymentProcessor">
-                        <argument type="service" id="sylius.factory.payment" />
-                        <argument type="service" id="sylius.repository.payment_method" />
-                    </service>
-                </argument>
-            </call>
-            <call method="addProcessor">
-                <argument type="service">
-                    <service class="Sylius\Component\Core\OrderProcessing\OrderAdjustmentsClearer" />
-                </argument>
-            </call>
-            <call method="addProcessor">
-                <argument type="service">
-                    <service class="Sylius\Component\Core\OrderProcessing\ShippingChargesProcessor">
-                        <argument type="service" id="sylius.factory.adjustment" />
-                        <argument type="service" id="sylius.shipping_calculator" />
-                    </service>
-                </argument>
-            </call>
-            <call method="addProcessor">
-                <argument type="service">
-                    <service class="Sylius\Component\Core\OrderProcessing\OrderPricesRecalculator">
-                        <argument type="service" id="sylius.price_calculator" />
-                    </service>
-                </argument>
-            </call>
-            <call method="addProcessor">
-                <argument type="service">
-                    <service class="Sylius\Component\Core\OrderProcessing\OrderPromotionProcessor">
-                        <argument type="service" id="sylius.promotion_processor" />
-                    </service>
-                </argument>
-            </call>
-            <call method="addProcessor">
-                <argument type="service">
-                    <service class="Sylius\Component\Core\OrderProcessing\OrderTaxesProcessor">
-                        <argument type="service" id="sylius.provider.channel_based_default_zone_provider" />
-                        <argument type="service" id="sylius.zone_matcher" />
-                        <argument type="service" id="sylius.registry.tax_calculation_strategy" />
-                    </service>
-                </argument>
-            </call>
+        <service id="sylius.order_processing.order_exchange_rate_processor" class="Sylius\Component\Core\OrderProcessing\OrderExchangeRateProcessor">
+            <argument type="service" id="sylius.updater.order.exchange_rate" />
+            <tag name="sylius.order_processor" />
         </service>
 
+        <service id="sylius.order_processing.order_shipment_processor" class="Sylius\Component\Core\OrderProcessing\OrderShipmentProcessor">
+            <argument type="service" id="sylius.resolver.default_shipping_method" />
+            <argument type="service" id="sylius.factory.shipment" />
+            <tag name="sylius.order_processor" />
+        </service>
+
+        <service id="sylius.order_processing.order_exchange_payment_processor" class="Sylius\Component\Core\OrderProcessing\OrderPaymentProcessor">
+            <argument type="service" id="sylius.factory.payment"/>
+            <argument type="service" id="sylius.repository.payment_method" />
+            <tag name="sylius.order_processor" />
+        </service>
+
+        <service id="sylius.order_processing.order_adjustments_clearer" class="Sylius\Component\Core\OrderProcessing\OrderAdjustmentsClearer">
+            <tag name="sylius.order_processor" />
+        </service>
+
+        <service id="sylius.order_processing.shipping_charges_processor" class="Sylius\Component\Core\OrderProcessing\ShippingChargesProcessor">
+            <argument type="service" id="sylius.factory.adjustment" />
+            <argument type="service" id="sylius.shipping_calculator" />
+            <tag name="sylius.order_processor" />
+        </service>
+
+        <service id="sylius.order_processing.order_prices_recalculator" class="Sylius\Component\Core\OrderProcessing\OrderPricesRecalculator">
+            <argument type="service" id="sylius.price_calculator" />
+            <tag name="sylius.order_processor" />
+        </service>
+
+        <service id="sylius.order_processing.order_promotion_processor" class="Sylius\Component\Core\OrderProcessing\OrderPromotionProcessor">
+            <argument type="service" id="sylius.promotion_processor" />
+            <tag name="sylius.order_processor" />
+        </service>
+
+        <service id="sylius.order_processing.order_taxes_processor" class="Sylius\Component\Core\OrderProcessing\OrderTaxesProcessor">
+            <argument type="service" id="sylius.provider.channel_based_default_zone_provider" />
+            <argument type="service" id="sylius.zone_matcher" />
+            <argument type="service" id="sylius.registry.tax_calculation_strategy" />
+            <tag name="sylius.order_processor" />
+        </service>
     </services>
 </container>
