@@ -10,23 +10,25 @@
  */
 
 namespace Sylius\Component\Addressing\Provider;
+use Sylius\Component\Addressing\Model\AddressInterface;
 
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
+ * @author Anna Walasek <anna.walasek@lakion.com>
  */
 interface ProvinceNamingProviderInterface
 {
     /**
-     * @param string $provinceCode
+     * @param AddressInterface $address
      *
-     * @return string
+     * @return string|null
      */
-    public function getName($provinceCode);
+    public function getName(AddressInterface $address);
 
     /**
-     * @param string $provinceCode
+     * @param AddressInterface $address
      *
-     * @return string
+     * @return string|null
      */
-    public function getAbbreviation($provinceCode);
+    public function getAbbreviation(AddressInterface $address);
 }

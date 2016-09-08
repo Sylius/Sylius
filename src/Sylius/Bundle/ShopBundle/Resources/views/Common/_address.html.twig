@@ -8,8 +8,9 @@
     {% endif %}
     {{ address.street }}<br/>
     {{ address.city }}<br/>
-    {% if address.provinceCode %}
-        {{ address.provinceCode|sylius_province_abbreviation }}<br/>
+    {{ address|sylius_province_name }}
+    {% if address|sylius_province_name is not null %}
+        <br/>
     {% endif %}
     <i class="{{ address.countryCode|lower }} flag"></i>
     {{ address.countryCode|sylius_country_name|upper }} {{ address.postcode }}

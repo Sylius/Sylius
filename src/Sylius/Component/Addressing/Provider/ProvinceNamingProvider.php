@@ -11,11 +11,13 @@
 
 namespace Sylius\Component\Addressing\Provider;
 
-use Sylius\Component\Addressing\Model\ProvinceInterface;
+use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Jan Góralski <jan.goralski@lakion.com>
+ * @author Anna Walasek <anna.walasek@lakion.com>
  */
 class ProvinceNamingProvider implements ProvinceNamingProviderInterface
 {
@@ -35,44 +37,42 @@ class ProvinceNamingProvider implements ProvinceNamingProviderInterface
     /**
      * {@inheritdoc}
      */
-    public function getName($provinceCode)
+    public function getName(AddressInterface $address)
     {
-        /** @var ProvinceInterface $province */
-        $province = $this->getProvince($provinceCode);
+        if ($address->getProvinceCode()) {
+            $province = $this->provinceRepository->findOneBy(['code' => $address->getProvinceCode()]);
 
-        return $province->getName();
+            Assert::notNull($province,sprintf('Province with code "%s" not found.', $address->getProvinceCode()));
+
+            return $province->getName();
+        }
+
+        if ($address->getProvinceName()) {
+
+            return $address->getProvinceName();
+        }
+
+        return null;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getAbbreviation($provinceCode)
+    public function getAbbreviation(AddressInterface $address)
     {
-        $province = $this->getProvince($provinceCode);
+        if ($address->getProvinceCode()) {
+            $province = $this->provinceRepository->findOneBy(['code' => $address->getProvinceCode()]);
 
-        if (null !== $provinceAbbreviation = $province->getAbbreviation()) {
-            return $provinceAbbreviation;
+            Assert::notNull($province,sprintf('Province with code "%s" not found.', $address->getProvinceCode()));
+
+            return $province->getAbbreviation() ?: $province->getName();
         }
 
-        return $provinceCode;
-    }
+        if ($address->getProvinceName()) {
 
-    /**
-     * @param string $code
-     *
-     * @throws \InvalidArgumentException
-     *
-     * @return ProvinceInterface
-     */
-    private function getProvince($code)
-    {
-        /** @var ProvinceInterface $province */
-        $province = $this->provinceRepository->findOneBy(['code' => $code]);
-
-        if (null === $province) {
-            throw new \InvalidArgumentException(sprintf('Province with code "%s" not found.', $code));
+            return $address->getProvinceName();
         }
 
-        return $province;
+        return null;
     }
 }

@@ -12,6 +12,7 @@
 namespace spec\Sylius\Bundle\AddressingBundle\Twig;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Addressing\Model\AddressInterface;
 use Sylius\Component\Addressing\Provider\ProvinceNamingProviderInterface;
 
 /**
@@ -34,18 +35,18 @@ final class ProvinceNamingExtensionSpec extends ObjectBehavior
         $this->shouldHaveType('Twig_Extension');
     }
 
-    function it_gets_province_name_by_its_code(ProvinceNamingProviderInterface $provinceNamingProvider)
+    function it_gets_province_name_by_its_code(ProvinceNamingProviderInterface $provinceNamingProvider, AddressInterface $address)
     {
-        $provinceNamingProvider->getName('IE-UL')->willReturn('Ulster');
+        $provinceNamingProvider->getName($address)->willReturn('Ulster');
 
-        $this->getProvinceName('IE-UL')->shouldReturn('Ulster');
+        $this->getProvinceName($address)->shouldReturn('Ulster');
     }
 
-    function it_gets_province_abbreviation_by_its_code(ProvinceNamingProviderInterface $provinceNamingProvider)
+    function it_gets_province_abbreviation_by_its_code(ProvinceNamingProviderInterface $provinceNamingProvider, AddressInterface $address)
     {
-        $provinceNamingProvider->getAbbreviation('IE-UL')->willReturn('ULS');
+        $provinceNamingProvider->getAbbreviation($address)->willReturn('ULS');
 
-        $this->getProvinceAbbreviation('IE-UL')->shouldReturn('ULS');
+        $this->getProvinceAbbreviation($address)->shouldReturn('ULS');
     }
 
     function it_has_name()
