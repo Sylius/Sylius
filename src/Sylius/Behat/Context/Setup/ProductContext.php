@@ -413,7 +413,18 @@ final class ProductContext implements Context
 
         $this->objectManager->flush();
     }
-    
+
+    /**
+     * @Given /^the ("[^"]+" product) is tracked by the inventory$/
+     */
+    public function theProductIsTrackedByTheInventory(ProductInterface $product)
+    {
+        $productVariant = $product->getFirstVariant();
+        $productVariant->setTracked(true);
+
+        $this->objectManager->flush();
+    }
+
     /**
      * @param string $type
      * @param string $name

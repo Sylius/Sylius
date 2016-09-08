@@ -178,6 +178,22 @@ final class ManagingProductsContext implements Context
     }
 
     /**
+     * @When I disable its tracking
+     */
+    public function iDisableItsTracking()
+    {
+        $this->updateSimpleProductPage->disableTracking();
+    }
+
+    /**
+     * @When I enable its tracking
+     */
+    public function iEnableItsTracking()
+    {
+        $this->updateSimpleProductPage->enableTracking();
+    }
+
+    /**
      * @When /^I set its price to ("(?:€|£|\$)[^"]+")$/
      */
     public function iSetItsPriceTo($price)
@@ -481,6 +497,32 @@ final class ManagingProductsContext implements Context
         Assert::true(
             $this->updateConfigurableProductPage->isMainTaxonChosen($taxonName),
             sprintf('The main taxon %s should be chosen, but it does not.', $taxonName)
+        );
+    }
+
+    /**
+     * @Then /^(this product) should not be tracked$/
+     */
+    public function thisProductShouldNotBeTracked(ProductInterface $product)
+    {
+        $this->iWantToModifyAProduct($product);
+
+        Assert::false(
+            $this->updateSimpleProductPage->isTracked(),
+            '"%s" should not be tracked, but it is.'
+        );
+    }
+
+    /**
+     * @Then /^(this product) should be tracked$/
+     */
+    public function thisProductShouldBeTracked(ProductInterface $product)
+    {
+        $this->iWantToModifyAProduct($product);
+
+        Assert::true(
+            $this->updateSimpleProductPage->isTracked(),
+            '"%s" should be tracked, but it is not.'
         );
     }
 

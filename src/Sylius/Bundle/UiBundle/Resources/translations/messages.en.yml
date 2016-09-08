@@ -7,6 +7,8 @@ sylius:
         option:
             name: Name
         notes: Extra notes
+        variant:
+            tracked: Tracked
     ui:
         abandoned: Abandoned
         about: About
