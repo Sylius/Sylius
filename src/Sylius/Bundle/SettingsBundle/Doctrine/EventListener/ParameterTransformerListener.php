@@ -18,7 +18,6 @@ use Sylius\Bundle\SettingsBundle\Model\SettingsInterface;
 use Sylius\Bundle\SettingsBundle\Schema\SchemaInterface;
 use Sylius\Bundle\SettingsBundle\Schema\SettingsBuilder;
 use Sylius\Bundle\SettingsBundle\Transformer\ParameterTransformerInterface;
-use Sylius\Component\Registry\ServiceRegistryInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -27,9 +26,9 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 final class ParameterTransformerListener
 {
     /**
-     * @var ServiceRegistryInterface
+     * @var ContainerInterface
      */
-    private $settingsSchemaRegistry;
+    private $container;
 
     /**
      * @var array
@@ -37,11 +36,12 @@ final class ParameterTransformerListener
     private $parametersMap = [];
 
     /**
-     * @param ServiceRegistryInterface $settingsSchemaRegistry
+     * @param ContainerInterface $container
      */
-    public function __construct(ServiceRegistryInterface $settingsSchemaRegistry)
+    public function __construct(ContainerInterface $container)
     {
-        $this->settingsSchemaRegistry = $settingsSchemaRegistry;
+        // Circular reference detected for service "doctrine.dbal.default_connection", path: "doctrine.dbal.default_connection".
+        $this->container = $container;
     }
 
     /**
@@ -92,7 +92,7 @@ final class ParameterTransformerListener
      * @param SettingsInterface $settings
      * @param EntityManager $entityManager
      */
-    private function transform(SettingsInterface $settings, EntityManager $entityManager)
+    protected function transform(SettingsInterface $settings, EntityManager $entityManager)
     {
         // store old parameters, so we can revert to it after flush
         $this->parametersMap[] = [
@@ -114,7 +114,7 @@ final class ParameterTransformerListener
     /**
      * @param SettingsInterface $settings
      */
-    private function reverseTransform(SettingsInterface $settings)
+    protected function reverseTransform(SettingsInterface $settings)
     {
         $transformers = $this->getTransformers($settings);
         foreach ($settings->getParameters() as $name => $value) {
@@ -129,10 +129,12 @@ final class ParameterTransformerListener
      *
      * @return ParameterTransformerInterface[]
      */
-    private function getTransformers(SettingsInterface $settings)
+    protected function getTransformers(SettingsInterface $settings)
     {
+        $registry = $this->container->get('sylius.registry.settings_schema');
+
         /** @var SchemaInterface $schema */
-        $schema = $this->settingsSchemaRegistry->get($settings->getSchemaAlias());
+        $schema = $registry->get($settings->getSchemaAlias());
 
         $settingsBuilder = new SettingsBuilder();
         $schema->buildSettings($settingsBuilder);
