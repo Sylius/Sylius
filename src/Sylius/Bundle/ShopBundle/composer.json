@@ -22,8 +22,8 @@
     "require": {
         "php": "^5.5.9|^7.0",
 
-        "sylius/ui-bundle": "^0.17.0",
-        "sylius/core-bundle": "^0.17.0",
+        "sylius/ui-bundle": "^1.0",
+        "sylius/core-bundle": "^1.0",
         "symfony/framework-bundle": "^2.8"
     },
     "require-dev": {
