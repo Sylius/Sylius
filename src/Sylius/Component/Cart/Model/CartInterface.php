@@ -14,18 +14,12 @@ namespace Sylius\Component\Cart\Model;
 use Sylius\Component\Order\Model\OrderInterface;
 
 /**
- * Cart model interface.
  * All driver cart entities or documents should implement this interface.
  *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 interface CartInterface extends OrderInterface
 {
-    /**
-     * @return string
-     */
-    public function getIdentifier();
-
     /**
      * @return \DateTime
      */
@@ -35,12 +29,6 @@ interface CartInterface extends OrderInterface
      * @param \DateTime|null $expiresAt
      */
     public function setExpiresAt(\DateTime $expiresAt = null);
-
-    /**
-     * Bumps the expiration time.
-     * Default is +3 hours.
-     */
-    public function incrementExpiresAt();
 
     /**
      * @return bool
