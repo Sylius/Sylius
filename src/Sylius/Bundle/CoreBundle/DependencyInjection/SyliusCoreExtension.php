@@ -89,6 +89,9 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
             $loader->load($configFile);
         }
 
+        $container->setParameter('sylius.sitemap', $config['sitemap']);
+        $container->setParameter('sylius.sitemap_template', $config['sitemap']['template']);
+
         $this->overwriteRuleFactory($container);
 
         $container
@@ -113,9 +116,6 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $this->prependHwiOauth($container, $loader);
-
-        $container->setParameter('sylius.sitemap', $config['sitemap']);
-        $container->setParameter('sylius.sitemap_template', $config['sitemap']['template']);
     }
 
     /**
