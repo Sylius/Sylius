@@ -11,7 +11,6 @@
 
 namespace Sylius\Behat\Page\Shop\Checkout;
 
-use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\SymfonyPage;
 
@@ -33,13 +32,6 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
      */
     public function selectShippingMethod($shippingMethod)
     {
-        $driver = $this->getDriver();
-        if ($driver instanceof Selenium2Driver) {
-            $this->getDriver()->executeScript(sprintf('$(\'.item:contains("%s") .ui.radio.checkbox\').checkbox(\'check\')', $shippingMethod));
-
-            return;
-        }
-
         $shippingMethodElement = $this->getElement('shipping_method');
         $shippingMethodValue = $this->getElement('shipping_method_option', ['%shipping_method%' => $shippingMethod])->getAttribute('value');
 
@@ -103,7 +95,7 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
 
     public function changeAddress()
     {
-        $this->getDocument()->pressButton('Change address');
+        $this->getDocument()->clickLink('Change address');
     }
 
     public function changeAddressByStepLabel()

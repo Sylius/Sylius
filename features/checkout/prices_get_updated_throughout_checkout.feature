@@ -27,7 +27,7 @@ Feature: Prices get updated when exchange rate changes during the whole checkout
         And I specified the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         Then the subtotal of "The Pug Mug" item should be "£50.00"
 
-    @ui @javascript
+    @ui
     Scenario: Prices get updated on readdressing
         Given I specified the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         When the exchange rate for currency "GBP" was changed to 3.00
@@ -42,7 +42,7 @@ Feature: Prices get updated when exchange rate changes during the whole checkout
         And I complete the shipping step
         Then the subtotal of "The Pug Mug" item should be "£20.00"
 
-    @ui @javascript
+    @ui
     Scenario: Prices get updated on re-selecting shipping step
         Given I specified the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I have selected "Pigeon Mail" shipping method
@@ -62,7 +62,7 @@ Feature: Prices get updated when exchange rate changes during the whole checkout
         Then the "The Pug Mug" product should have unit price "£20.00"
         And my order shipping should be "£10.00"
 
-    @ui @javascript
+    @ui
     Scenario: Prices get updated on re-selecting payment method step
         Given I specified the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
         And I proceed order with "Pigeon Mail" shipping method and "Offline" payment

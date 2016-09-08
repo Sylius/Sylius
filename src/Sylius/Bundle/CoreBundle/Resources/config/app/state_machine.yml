@@ -15,30 +15,21 @@ winzou_state_machine:
             completed: ~
         transitions:
             address:
-                from: [cart]
+                from: [cart, addressed, shipping_selected, payment_selected]
                 to: addressed
-            readdress:
-                from: [payment_selected, shipping_selected, addressed]
-                to: cart
             select_shipping:
-                from: [addressed]
+                from: [addressed, shipping_selected, payment_selected]
                 to: shipping_selected
-            reselect_shipping:
-                from: [payment_selected, shipping_selected]
-                to: addressed
             select_payment:
-                from: [shipping_selected]
+                from: [payment_selected, shipping_selected]
                 to: payment_selected
-            reselect_payment:
-                from: [payment_selected]
-                to: shipping_selected
             complete:
                 from: [payment_selected]
                 to: completed
         callbacks:
             after:
                 sylius_process_cart:
-                    on: ["address", "readdress", "select_shipping", "reselect_shipping", "select_payment", "reselect_payment"]
+                    on: ["address", "select_shipping", "select_payment"]
                     do: ["@sylius.order_processing.order_processor", "process"]
                     args: ["object"]
                 sylius_update_exchange_rate:

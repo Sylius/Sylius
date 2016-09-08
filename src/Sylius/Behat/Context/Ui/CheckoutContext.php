@@ -134,6 +134,15 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Given I was at the checkout summary step
+     */
+    public function iWasAtTheCheckoutSummaryStep()
+    {
+        $this->iSpecifiedTheShippingAddress($this->createDefaultAddress());
+        $this->iProceedOrderWithShippingMethodAndPayment('Free', 'Offline');
+    }
+
+    /**
      * @Given /^I proceed without selecting shipping address$/
      */
     public function iProceedWithoutSelectingShippingAddress()
@@ -143,7 +152,17 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Given I have proceeded selecting :shippingMethodName shipping method
+     */
+    public function iHaveProceededSelectingShippingMethod($shippingMethodName)
+    {
+        $this->iSelectShippingMethod($shippingMethodName);
+        $this->selectShippingPage->nextStep();
+    }
+
+    /**
      * @Given I am at the checkout addressing step
+     * @When I go back to addressing step of the checkout
      */
     public function iAmAtTheCheckoutAddressingStep()
     {
@@ -162,8 +181,9 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @When /^I specify the shipping (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
+     * @When /^I specify the shipping (address as "[^"]+", "[^"]+", "[^"]+", "[^"]+" for "[^"]+")$/
      * @When /^I (do not specify any shipping address) information$/
+     * @When /^I change the shipping (address to "[^"]+", "[^"]+", "[^"]+", "[^"]+" for "[^"]+")$/
      */
     public function iSpecifyTheShippingAddressAs(AddressInterface $address)
     {
@@ -419,6 +439,14 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @When I go back to shipping step of the checkout
+     */
+    public function iGoBackToShippingStepOfTheCheckout()
+    {
+        $this->selectShippingPage->open();
+    }
+
+    /**
      * @Given I have proceeded selecting :paymentMethodName payment method
      * @When /^I (?:proceed|proceeded) selecting "([^"]+)" payment method$/
      */
@@ -460,6 +488,14 @@ final class CheckoutContext implements Context
 
         $this->addressPage->specifyShippingAddress($shippingAddress);
         $this->addressPage->nextStep();
+    }
+
+    /**
+     * @When I return to the checkout summary step
+     */
+    public function iReturnToTheCheckoutSummaryStep()
+    {
+        $this->completePage->open();
     }
 
     /**
@@ -541,6 +577,17 @@ final class CheckoutContext implements Context
         Assert::true(
             $this->selectShippingPage->isOpen(),
             'Checkout shipping page should be opened, but it is not.'
+        );
+    }
+
+    /**
+     * @Then I should be on the checkout payment step
+     */
+    public function iShouldBeOnTheCheckoutPaymentStep()
+    {
+        Assert::true(
+            $this->selectPaymentPage->isOpen(),
+            'Checkout payment page should be opened, but it is not.'
         );
     }
 
@@ -643,6 +690,7 @@ final class CheckoutContext implements Context
 
     /**
      * @Given I am at the checkout payment step
+     * @When I go back to payment step of the checkout
      */
     public function iAmAtTheCheckoutPaymentStep()
     {
@@ -663,6 +711,14 @@ final class CheckoutContext implements Context
     public function iSelectPaymentMethod($paymentMethodName)
     {
         $this->selectPaymentPage->selectPaymentMethod($paymentMethodName);
+    }
+
+    /**
+     * @When /^I do not modify anything$/
+     */
+    public function iDoNotModifyAnything()
+    {
+        // Intentionally left blank to fulfill context expectation
     }
 
     /**
@@ -688,6 +744,7 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Given I have proceeded order with :shippingMethod shipping method and :paymentMethod payment
      * @When I proceed order with :shippingMethod shipping method and :paymentMethod payment
      */
     public function iProceedOrderWithShippingMethodAndPayment($shippingMethod, $paymentMethod)

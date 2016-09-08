@@ -57,7 +57,7 @@ final class AddressingContext implements Context
     /**
      * @Transform /^address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)"$/
      * @Transform /^address is "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)"$/
-     * @Transform /^address "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)"$/
+     * @Transform /^address to "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)"$/
      */
     public function createNewAddressWith($cityName, $street, $postcode, $countryName, $customerName)
     {
