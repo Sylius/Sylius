@@ -9,9 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CartBundle\Context;
+namespace spec\Sylius\Bundle\OrderBundle\Context;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\OrderBundle\Context\SessionBasedCartContext;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Context\CartNotFoundException;
 use Sylius\Component\Order\Model\OrderInterface;
@@ -30,7 +31,7 @@ final class SessionBasedCartContextSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CartBundle\Context\SessionBasedCartContext');
+        $this->shouldHaveType(SessionBasedCartContext::class);
     }
 
     function it_implements_cart_context_interface()

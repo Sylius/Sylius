@@ -45,23 +45,21 @@ class CartBlamerListenerSpec extends ObjectBehavior
 
     function it_throws_exception_when_cart_does_not_implement_core_order_interface_on_implicit_login(
         CartContextInterface $cartContext,
-        OrderInterface $cart,
         UserEvent $userEvent,
         ShopUserInterface $user
     ) {
-        $cartContext->getCart()->willReturn($cart);
+        $cartContext->getCart()->willReturn('cart');
         $userEvent->getUser()->willReturn($user);
         $this->shouldThrow(UnexpectedTypeException::class)->during('onImplicitLogin', [$userEvent]);
     }
 
     function it_throws_exception_when_cart_does_not_implement_core_order_interface_on_interactive_login(
         CartContextInterface $cartContext,
-        OrderInterface $cart,
         InteractiveLoginEvent $interactiveLoginEvent,
         TokenInterface $token,
         ShopUserInterface $user
     ) {
-        $cartContext->getCart()->willReturn($cart);
+        $cartContext->getCart()->willReturn('cart');
         $interactiveLoginEvent->getAuthenticationToken()->willReturn($token);
         $token->getUser()->willReturn($user);
         $this->shouldThrow(UnexpectedTypeException::class)->during('onInteractiveLogin', [$interactiveLoginEvent]);

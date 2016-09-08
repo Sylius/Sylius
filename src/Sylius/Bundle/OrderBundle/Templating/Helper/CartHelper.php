@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CartBundle\Templating\Helper;
+namespace Sylius\Bundle\OrderBundle\Templating\Helper;
 
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Order\Model\OrderInterface;
@@ -47,8 +47,12 @@ class CartHelper extends Helper
      * @param FormFactoryInterface $formFactory
      * @param OrderItemQuantityModifierInterface $orderItemQuantityModifier
      */
-    public function __construct(CartContextInterface $cartContext, FactoryInterface $cartItemFactory, FormFactoryInterface $formFactory, OrderItemQuantityModifierInterface $orderItemQuantityModifier)
-    {
+    public function __construct(
+        CartContextInterface $cartContext,
+        FactoryInterface $cartItemFactory,
+        FormFactoryInterface $formFactory,
+        OrderItemQuantityModifierInterface $orderItemQuantityModifier
+    ) {
         $this->cartContext = $cartContext;
         $this->cartItemFactory = $cartItemFactory;
         $this->formFactory = $formFactory;

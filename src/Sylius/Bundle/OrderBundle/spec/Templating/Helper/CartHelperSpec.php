@@ -9,9 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CartBundle\Templating\Helper;
+namespace spec\Sylius\Bundle\OrderBundle\Templating\Helper;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Bundle\OrderBundle\Templating\Helper\CartHelper;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Model\OrderItemInterface;
@@ -35,7 +36,7 @@ final class CartHelperSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CartBundle\Templating\Helper\CartHelper');
+        $this->shouldHaveType(CartHelper::class);
     }
 
     function it_is_a_twig_extension()

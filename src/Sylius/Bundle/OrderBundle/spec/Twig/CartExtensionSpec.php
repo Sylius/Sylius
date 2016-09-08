@@ -9,10 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\CartBundle\Twig;
+namespace spec\Sylius\Bundle\OrderBundle\Twig;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Bundle\CartBundle\Templating\Helper\CartHelper;
+use Sylius\Bundle\OrderBundle\Templating\Helper\CartHelper;
+use Sylius\Bundle\OrderBundle\Twig\CartExtension;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
@@ -26,11 +27,11 @@ final class CartExtensionSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CartBundle\Twig\CartExtension');
+        $this->shouldHaveType(CartExtension::class);
     }
 
     function it_is_a_twig_extension()
     {
-        $this->shouldHaveType('Twig_Extension');
+        $this->shouldHaveType(\Twig_Extension::class);
     }
 }

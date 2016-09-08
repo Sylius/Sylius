@@ -15,8 +15,6 @@ use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
- * Order form type.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class OrderType extends AbstractResourceType
@@ -33,6 +31,9 @@ class OrderType extends AbstractResourceType
                 'allow_delete' => true,
                 'by_reference' => false,
                 'label' => 'sylius.form.order.items',
+            ])
+            ->add('notes', 'text', [
+                'label' => 'sylius.ui.notes',
             ])
         ;
     }

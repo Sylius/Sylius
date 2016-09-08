@@ -44,6 +44,7 @@ class OrderItemType extends AbstractResourceType
     {
         $builder
             ->add('quantity', 'integer', [
+                'attr' => ['min' => 1],
                 'label' => 'sylius.form.order_item.quantity',
             ])
             ->add('unitPrice', 'sylius_money', [

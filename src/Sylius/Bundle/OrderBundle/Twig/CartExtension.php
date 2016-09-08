@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CartBundle\Twig;
+namespace Sylius\Bundle\OrderBundle\Twig;
 
-use Sylius\Bundle\CartBundle\Templating\Helper\CartHelper;
+use Sylius\Bundle\OrderBundle\Templating\Helper\CartHelper;
 use Sylius\Component\Order\Model\OrderInterface;
 use Symfony\Component\Form\FormView;
 
@@ -46,8 +46,6 @@ class CartExtension extends \Twig_Extension
     }
 
     /**
-     * Returns current cart.
-     *
      * @return null|OrderInterface
      */
     public function getCurrentCart()
@@ -56,8 +54,6 @@ class CartExtension extends \Twig_Extension
     }
 
     /**
-     * Check if a cart exists.
-     *
      * @return bool
      */
     public function hasCart()
@@ -66,8 +62,6 @@ class CartExtension extends \Twig_Extension
     }
 
     /**
-     * Returns cart item form view.
-     *
      * @param array $options
      *
      * @return FormView

@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CartBundle\Controller;
+namespace Sylius\Bundle\OrderBundle\Controller;
 
 use FOS\RestBundle\View\View;
 use Sylius\Component\Order\SyliusCartEvents;
