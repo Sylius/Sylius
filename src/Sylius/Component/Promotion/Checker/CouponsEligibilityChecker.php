@@ -46,8 +46,6 @@ class CouponsEligibilityChecker implements PromotionSubjectEligibilityCheckerInt
         }
 
         if (!$this->isCouponEligible($promotion, $subject)) {
-            $this->eventDispatcher->dispatch(SyliusPromotionEvents::COUPON_NOT_ELIGIBLE, new GenericEvent($promotion));
-
             return false;
         }
 
