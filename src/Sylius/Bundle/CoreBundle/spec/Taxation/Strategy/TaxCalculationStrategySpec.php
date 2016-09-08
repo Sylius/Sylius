@@ -17,7 +17,6 @@ use Sylius\Component\Addressing\Model\ZoneInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Taxation\Applicator\OrderTaxesApplicatorInterface;
-use Sylius\Component\Core\Taxation\Strategy\AbstractTaxCalculationStrategy;
 use Sylius\Component\Core\Taxation\Strategy\TaxCalculationStrategyInterface;
 
 /**
@@ -36,12 +35,7 @@ final class TaxCalculationStrategySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\CoreBundle\Taxation\Strategy\TaxCalculationStrategy');
-    }
-
-    function it_extends_abstract_tax_calculation_strategy()
-    {
-        $this->shouldHaveType(AbstractTaxCalculationStrategy::class);
+        $this->shouldHaveType(TaxCalculationStrategy::class);
     }
 
     function it_implements_a_tax_calculation_strategy_interface()
