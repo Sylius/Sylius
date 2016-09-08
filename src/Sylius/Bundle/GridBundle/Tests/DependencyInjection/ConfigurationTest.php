@@ -94,6 +94,118 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      */
+    public function it_requires_sorting_path_to_be_defined()
+    {
+        $this->assertConfigurationIsInvalid(
+            [
+                'grids' => [
+                    'sylius_admin_tax_category' => [
+                        'sorting' => [
+                            'code' => [
+                                'direction' => 'desc',
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function its_sorting_direction_can_be_only_ascending_or_descending()
+    {
+        $this->assertConfigurationIsValid(
+            [[
+                'grids' => [
+                    'sylius_admin_tax_category' => [
+                        'sorting' => [
+                            'code' => [
+                                'path' => 'code',
+                                'direction' => 'asc',
+                            ]
+                        ]
+                    ]
+                ]
+            ]],
+            'grids.*.sorting.*'
+        );
+
+        $this->assertConfigurationIsValid(
+            [[
+                'grids' => [
+                    'sylius_admin_tax_category' => [
+                        'sorting' => [
+                            'code' => [
+                                'path' => 'code',
+                                'direction' => 'desc',
+                            ]
+                        ]
+                    ]
+                ]
+            ]]
+        );
+
+        $this->assertConfigurationIsInvalid(
+            [
+                'grids' => [
+                    'sylius_admin_tax_category' => [
+                        'sorting' => [
+                            'code' => [
+                                'path' => 'code',
+                                'direction' => 'left',
+                            ]
+                        ]
+                    ]
+                ]
+            ]
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function it_does_not_require_sorting_direction_and_uses_descending_by_default()
+    {
+        $this->assertProcessedConfigurationEquals(
+            [[
+                'grids' => [
+                    'sylius_admin_tax_category' => [
+                        'sorting' => [
+                            'code' => [
+                                'path' => 'code'
+                            ]
+                        ]
+                    ]
+                ]
+            ]],
+            [
+                'grids' => [
+                    'sylius_admin_tax_category' => [
+                        'driver' => [
+                            'name' => Driver::NAME,
+                            'options' => [],
+                        ],
+                        'sorting' => [
+                            'code' => [
+                                'path' => 'code',
+                                'direction' => 'desc',
+                            ]
+                        ],
+                        'fields' => [],
+                        'filters' => [],
+                        'actions' => [],
+                    ]
+                ],
+                'drivers' => [ 'doctrine/orm' ]
+            ]
+        );
+    }
+
+    /**
+     * @test
+     */
     public function it_should_throw_an_exception_if_an_invalid_driver_is_enabled()
     {
         $this->assertConfigurationIsInvalid(

@@ -5,13 +5,13 @@
     "total": 3,
     "_links": {
         "self": {
-            "href": "\/api\/tax-categories\/?sorting%5Bname%5D=asc&page=1&limit=10"
+            "href": "\/api\/tax-categories\/?sorting%5Bname%5D%5Bpath%5D=name&sorting%5Bname%5D%5Bdirection%5D=asc&page=1&limit=10"
         },
         "first": {
-            "href": "\/api\/tax-categories\/?sorting%5Bname%5D=asc&page=1&limit=10"
+            "href": "\/api\/tax-categories\/?sorting%5Bname%5D%5Bpath%5D=name&sorting%5Bname%5D%5Bdirection%5D=asc&page=1&limit=10"
         },
         "last": {
-            "href": "\/api\/tax-categories\/?sorting%5Bname%5D=asc&page=1&limit=10"
+            "href": "\/api\/tax-categories\/?sorting%5Bname%5D%5Bpath%5D=name&sorting%5Bname%5D%5Bdirection%5D=asc&page=1&limit=10"
         }
     },
     "_embedded": {

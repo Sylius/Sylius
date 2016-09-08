@@ -29,7 +29,7 @@ final class SorterSpec extends ObjectBehavior
 {
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Grid\Sorting\Sorter');
+        $this->shouldHaveType(Sorter::class);
     }
 
     function it_implements_grid_data_source_sorter_interface()
@@ -45,7 +45,7 @@ final class SorterSpec extends ObjectBehavior
     ) {
         $parameters->has('sorting')->willReturn(false);
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
-        $grid->getSorting()->willReturn(['name' => 'desc']);
+        $grid->getSorting()->willReturn(['name' => ['path' => 'name' , 'direction' => 'desc']]);
 
         $expressionBuilder->addOrderBy('name', 'desc')->shouldBeCalled();
 
@@ -59,10 +59,10 @@ final class SorterSpec extends ObjectBehavior
         ExpressionBuilderInterface $expressionBuilder
     ) {
         $parameters->has('sorting')->willReturn(true);
-        $parameters->get('sorting')->willReturn(['name' => 'asc']);
+        $parameters->get('sorting')->willReturn(['name' => ['path' => 'name', 'direction' => 'asc']]);
 
         $dataSource->getExpressionBuilder()->willReturn($expressionBuilder);
-        $grid->getSorting()->willReturn(['name' => 'desc']);
+        $grid->getSorting()->willReturn(['name' => 'asc']);
 
         $expressionBuilder->addOrderBy('name', 'asc')->shouldBeCalled();
 

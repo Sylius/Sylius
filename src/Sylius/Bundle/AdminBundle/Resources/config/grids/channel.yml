@@ -6,7 +6,9 @@ sylius_grid:
                 options:
                     class: "%sylius.model.channel.class%"
             sorting:
-                name: asc
+                nameAndDescription:
+                    path: name
+                    direction: asc
             fields:
                 code:
                     type: twig

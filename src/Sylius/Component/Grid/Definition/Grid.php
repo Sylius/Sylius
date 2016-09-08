@@ -158,6 +158,8 @@ class Grid
 
     /**
      * @param string $name
+     *
+     * @return bool
      */
     public function hasField($name)
     {
@@ -210,6 +212,8 @@ class Grid
 
     /**
      * @param string $name
+     *
+     * @return bool
      */
     public function hasActionGroup($name)
     {
@@ -252,6 +256,8 @@ class Grid
 
     /**
      * @param string $name
+     *
+     * @return bool
      */
     public function hasFilter($name)
     {
