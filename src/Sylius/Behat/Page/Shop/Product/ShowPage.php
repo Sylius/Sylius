@@ -12,8 +12,7 @@
 namespace Sylius\Behat\Page\Shop\Product;
 
 use Sylius\Component\Product\Model\OptionInterface;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Routing\RouterInterface;
+use Sylius\Component\Product\Model\ProductInterface;
 use Sylius\Behat\Page\SymfonyPage;
 
 /**
@@ -102,6 +101,32 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
+    public function hasProductOutOfStockValidationMessage(ProductInterface $product)
+    {
+        $message = sprintf('%s does not have sufficient stock.', $product->getName());
+
+        if (!$this->hasElement('validation-errors')) {
+            return false;
+        }
+
+        return $this->getElement('validation-errors')->getText() === $message;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function waitForValidationErrors($timeout)
+    {
+        $errorsContainer = $this->getElement('selecting-variants');
+
+        $this->getDocument()->waitFor($timeout, function () use ($errorsContainer) {
+            return false !== $errorsContainer->has('css', '[class ~="sylius-validation-error"]');
+        });
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getPrice()
     {
         return $this->getElement('product_price')->getText();
@@ -140,7 +165,9 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
             'attributes' => '#sylius-product-attributes',
             'name' => '#sylius-product-name',
             'out-of-stock' => '#sylius-product-out-of-stock',
-            'product_price' => '#product-price'
+            'product_price' => '#product-price',
+            'selecting-variants' => "#sylius-product-selecting-variant",
+            'validation-errors' => '.sylius-validation-error'
         ]);
     }
 }

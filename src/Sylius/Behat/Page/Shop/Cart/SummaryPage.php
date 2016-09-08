@@ -239,6 +239,16 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     /**
      * {@inheritdoc}
      */
+    public function waitForRedirect($timeout)
+    {
+        $this->getDocument()->waitFor($timeout, function () {
+            return $this->isOpen();
+        });
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [

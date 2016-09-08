@@ -139,4 +139,9 @@ interface SummaryPageInterface extends PageInterface
     public function clearCart();
 
     public function updateCart();
+
+    /**
+     * @param int $timeout
+     */
+    public function waitForRedirect($timeout);
 }

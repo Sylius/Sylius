@@ -328,6 +328,8 @@ final class CartContext implements Context
      */
     public function shouldBeOnMyCartSummaryPage()
     {
+        $this->summaryPage->waitForRedirect(3);
+
         Assert::true(
             $this->summaryPage->isOpen(),
             'Cart summary page should be open, but it does not.'

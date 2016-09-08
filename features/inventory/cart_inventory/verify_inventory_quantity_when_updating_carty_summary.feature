@@ -1,4 +1,4 @@
-@inventory
+@cart_inventory
 Feature: Verifying inventory quantity on cart summary
     In order to not be able to add more items than available
     As a Customer
@@ -9,8 +9,6 @@ Feature: Verifying inventory quantity on cart summary
         And the store has a product "Iron Maiden T-Shirt" priced at "€12.54"
         And this product is tracked by the inventory
         And there are 5 items of product "Iron Maiden T-Shirt" available in the inventory
-        And the store ships everywhere for free
-        And the store allows paying offline
 
     @ui
     Scenario: Being unable to save a cart with product that is out of stock
