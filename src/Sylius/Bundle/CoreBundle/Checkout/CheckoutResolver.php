@@ -77,24 +77,25 @@ final class CheckoutResolver implements EventSubscriberInterface
 
         $request = $event->getRequest();
 
-        if ($this->requestMatcher->matches($request)) {
-            /** @var OrderInterface $order */
-            $order = $this->cartContext->getCart();
-            $stateMachine = $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH);
-
-            if ($stateMachine->can($this->getRequestedTransition($request))) {
-
-                return;
-            }
-
-            if (null !== $referer = $this->getReferer($request)) {
-                $event->setResponse(new RedirectResponse($referer));
-
-                return;
-            }
-
-            $event->setResponse(new RedirectResponse($this->urlGenerator->generate($order->getCheckoutState())));
+        if (!$this->requestMatcher->matches($request)) {
+            return;
         }
+
+        /** @var OrderInterface $order */
+        $order = $this->cartContext->getCart();
+        $stateMachine = $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH);
+
+        if ($stateMachine->can($this->getRequestedTransition($request))) {
+            return;
+        }
+
+        if (null !== $referer = $this->getReferer($request)) {
+            $event->setResponse(new RedirectResponse($referer));
+
+            return;
+        }
+
+        $event->setResponse(new RedirectResponse($this->urlGenerator->generate($order->getCheckoutState())));
     }
 
     /**
