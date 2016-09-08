@@ -71,8 +71,6 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
             $loader->load('test_services.xml');
         }
 
-        $this->overwriteRuleFactory($container);
-
         $container
             ->getDefinition('sylius.listener.password_updater')
             ->setClass('Sylius\Bundle\CoreBundle\EventListener\PasswordUpdaterListener');
@@ -98,18 +96,6 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
 
         $container->setParameter('sylius.sitemap', $config['sitemap']);
         $container->setParameter('sylius.sitemap_template', $config['sitemap']['template']);
-    }
-
-    /**
-     * @param ContainerBuilder $container
-     */
-    private function overwriteRuleFactory(ContainerBuilder $container)
-    {
-        $baseFactoryDefinition = new Definition(Factory::class, [new Parameter('sylius.model.promotion_rule.class')]);
-        $promotionRuleFactoryClass = $container->getParameter('sylius.factory.promotion_rule.class');
-        $decoratedPromotionRuleFactoryDefinition = new Definition($promotionRuleFactoryClass, [$baseFactoryDefinition]);
-
-        $container->setDefinition('sylius.factory.promotion_rule', $decoratedPromotionRuleFactoryDefinition);
     }
 
     /**
