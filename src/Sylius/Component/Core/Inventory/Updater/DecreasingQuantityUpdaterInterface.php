@@ -16,7 +16,7 @@ use Sylius\Component\Core\Model\OrderInterface;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-interface OnHandQuantityUpdaterInterface
+interface DecreasingQuantityUpdaterInterface
 {
     /**
      * @var OrderInterface $order

@@ -12,13 +12,12 @@
 namespace spec\Sylius\Component\Core\Inventory\Updater;
 
 use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Core\Inventory\Updater\DecreasingQuantityUpdaterInterface;
 use Sylius\Component\Core\Inventory\Updater\OnHandQuantityUpdater;
-use Sylius\Component\Core\Inventory\Updater\OnHandQuantityUpdaterInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Model\OrderItemInterface;
 use Sylius\Component\Core\Model\ProductVariantInterface;
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 /**
  * @mixin OnHandQuantityUpdater
@@ -34,7 +33,7 @@ final class OnHandQuantityUpdaterSpec extends ObjectBehavior
 
     function it_implements_inventory_updater_interface()
     {
-        $this->shouldImplement(OnHandQuantityUpdaterInterface::class);
+        $this->shouldImplement(DecreasingQuantityUpdaterInterface::class);
     }
 
     function it_decreases_quantity_of_product_variant_available_on_hand(

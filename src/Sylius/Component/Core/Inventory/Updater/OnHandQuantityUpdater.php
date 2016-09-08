@@ -19,7 +19,7 @@ use Webmozart\Assert\Assert;
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
  */
-final class OnHandQuantityUpdater implements OnHandQuantityUpdaterInterface
+final class OnHandQuantityUpdater implements DecreasingQuantityUpdaterInterface
 {
     /**
      * {@inheritdoc}

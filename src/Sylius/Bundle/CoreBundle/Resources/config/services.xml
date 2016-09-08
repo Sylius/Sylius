@@ -83,5 +83,14 @@
             <argument type="service" id="sylius.variant_resolver.default" />
         </service>
         <service id="sylius.inventory.on_hand_quantity_updater" class="Sylius\Component\Core\Inventory\Updater\OnHandQuantityUpdater"/>
+        <service id="sylius.inventory.on_hold_quantity_updater" class="Sylius\Component\Core\Inventory\Updater\OnHoldQuantityUpdater" />
+        <service id="sylius.handler.paid_order_inventory" class="Sylius\Component\Core\Inventory\Handler\PaidOrderInventoryHandler">
+            <call method="addDecreasingQuantityUpdater">
+                <argument type="service" id="sylius.inventory.on_hand_quantity_updater"/>
+            </call>
+            <call method="addDecreasingQuantityUpdater">
+                <argument type="service" id="sylius.inventory.on_hold_quantity_updater"/>
+            </call>
+        </service>
     </services>
 </container>
