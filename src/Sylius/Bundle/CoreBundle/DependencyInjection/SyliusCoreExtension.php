@@ -31,7 +31,7 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
     /**
      * @var array
      */
-    private $bundles = [
+    private static $bundles = [
         'sylius_addressing',
         'sylius_api',
         'sylius_attribute',
@@ -46,14 +46,12 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         'sylius_product',
         'sylius_promotion',
         'sylius_review',
-        'sylius_report',
         'sylius_shipping',
         'sylius_mailer',
         'sylius_taxation',
         'sylius_taxonomy',
         'sylius_user',
         'sylius_variation',
-        'sylius_rbac',
     ];
 
     /**
@@ -88,7 +86,7 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         $config = $this->processConfiguration(new Configuration(), $container->getExtensionConfig($this->getAlias()));
 
         foreach ($container->getExtensions() as $name => $extension) {
-            if (in_array($name, $this->bundles)) {
+            if (in_array($name, self::$bundles, true)) {
                 $container->prependExtensionConfig($name, ['driver' => $config['driver']]);
             }
         }
