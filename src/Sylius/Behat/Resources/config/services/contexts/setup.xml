@@ -187,7 +187,10 @@
         <service id="sylius.behat.context.setup.taxonomy" class="Sylius\Behat\Context\Setup\TaxonomyContext" scope="scenario">
             <argument type="service" id="sylius.repository.taxon" container="symfony" />
             <argument type="service" id="sylius.factory.taxon" container="symfony" />
+            <argument type="service" id="sylius.factory.taxon_image" container="symfony" />
             <argument type="service" id="doctrine.orm.entity_manager" container="symfony" />
+            <argument type="service" id="sylius.image_uploader" container="symfony" />
+            <argument>%mink.parameters%</argument>
             <tag name="sylius.behat.context" />
         </service>
 

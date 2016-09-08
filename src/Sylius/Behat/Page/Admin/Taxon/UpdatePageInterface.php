@@ -59,4 +59,16 @@ interface UpdatePageInterface extends BaseUpdatePageInterface
      * @return bool
      */
     public function isImageWithCodeDisplayed($code);
+
+    /**
+     * @param string $code
+     */
+    public function removeImageWithCode($code);
+
+    public function removeFirstImage();
+
+    /**
+     * @return int
+     */
+    public function countImages();
 }
