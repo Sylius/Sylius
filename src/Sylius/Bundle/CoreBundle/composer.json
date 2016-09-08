@@ -61,7 +61,6 @@
         "sonata-project/intl-bundle": "^2.2"
     },
     "require-dev": {
-        "hwi/oauth-bundle": "~0.3",
         "matthiasnoback/symfony-config-test": "^2.0",
         "matthiasnoback/symfony-dependency-injection-test": "^1.0",
         "phpspec/phpspec": "^3.0",
