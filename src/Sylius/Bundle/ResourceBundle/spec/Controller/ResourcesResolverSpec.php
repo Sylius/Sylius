@@ -37,7 +37,7 @@ final class ResourcesResolverSpec extends ObjectBehavior
         $this->shouldImplement(ResourcesResolverInterface::class);
     }
 
-    function it_gets_all_resources_if_not_paginated_and_there_is_no_limit(
+    function it_gets_all_resources_if_not_paginated_and_there_is_no_limit_and_is_not_filterable_and_is_not_sortable(
         RequestConfiguration $requestConfiguration,
         RepositoryInterface $repository,
         ResourceInterface $firstResource,
@@ -48,6 +48,8 @@ final class ResourcesResolverSpec extends ObjectBehavior
 
         $requestConfiguration->isPaginated()->willReturn(false);
         $requestConfiguration->isLimited()->willReturn(false);
+        $requestConfiguration->isFilterable()->willReturn(false);
+        $requestConfiguration->isSortable()->willReturn(false);
 
         $repository->findAll()->willReturn([$firstResource, $secondResource]);
 
