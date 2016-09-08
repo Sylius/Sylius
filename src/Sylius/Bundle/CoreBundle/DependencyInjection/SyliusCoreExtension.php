@@ -111,9 +111,6 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
 
         $container->prependExtensionConfig('sylius_theme', ['context' => 'sylius.theme.context.channel_based']);
 
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $this->prependHwiOauth($container, $loader);
-
         $container->setParameter('sylius.sitemap', $config['sitemap']);
         $container->setParameter('sylius.sitemap_template', $config['sitemap']['template']);
     }
@@ -128,18 +125,5 @@ final class SyliusCoreExtension extends AbstractResourceExtension implements Pre
         $decoratedPromotionRuleFactoryDefinition = new Definition($promotionRuleFactoryClass, [$baseFactoryDefinition]);
 
         $container->setDefinition('sylius.factory.promotion_rule', $decoratedPromotionRuleFactoryDefinition);
-    }
-
-    /**
-     * @param ContainerBuilder $container
-     * @param LoaderInterface $loader
-     */
-    private function prependHwiOauth(ContainerBuilder $container, LoaderInterface $loader)
-    {
-        if (!$container->hasExtension('hwi_oauth')) {
-            return;
-        }
-
-        $loader->load('integration/hwi_oauth.xml');
     }
 }
