@@ -17,9 +17,19 @@
                                http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <imports>
-        <import resource="fixtures.xml" />
-        <import resource="fixtures_factories.xml" />
-        <import resource="order_processor.xml" />
+        <import resource="services/api_form.xml" />
+        <import resource="services/checkout.xml" />
+        <import resource="services/context.xml" />
+        <import resource="services/controller.xml" />
+        <import resource="services/dashboard.xml" />
+        <import resource="services/email.xml" />
+        <import resource="services/fixtures.xml" />
+        <import resource="services/fixtures_factories.xml" />
+        <import resource="services/form.xml" />
+        <import resource="services/handlers.xml" />
+        <import resource="services/order_processor.xml" />
+        <import resource="services/sitemap.xml" />
+        <import resource="services/templating.xml" />
     </imports>
 
     <parameters>
