@@ -13,7 +13,7 @@ Feature: Adding a new taxon with images
         Given I want to create a new taxon
         When I specify its code as "t-shirts"
         And I name it "T-Shirts" in "English (United States)"
-        And I attach "t-shirts.jpg" image with a code "banner"
+        And I attach the "t-shirts.jpg" image with a code "banner"
         And I add it
         Then I should be notified that it has been successfully created
         And the "T-Shirts" taxon should appear in the registry
@@ -24,8 +24,8 @@ Feature: Adding a new taxon with images
         Given I want to create a new taxon
         When I specify its code as "t-shirts"
         And I name it "T-Shirts" in "English (United States)"
-        And I attach "t-shirts.jpg" image with a code "banner"
-        And I attach "t-shirts.jpg" image with a code "thumbnail"
+        And I attach the "t-shirts.jpg" image with a code "banner"
+        And I attach the "t-shirts.jpg" image with a code "thumbnail"
         And I add it
         Then I should be notified that it has been successfully created
         And the "T-Shirts" taxon should appear in the registry

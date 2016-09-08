@@ -12,7 +12,7 @@ Feature: Adding images to an existing taxon
     @ui @javascript
     Scenario: Adding a single image to an existing taxon
         Given I want to modify the "T-Shirts" taxon
-        When I attach "t-shirts.jpg" image with a code "banner"
+        When I attach the "t-shirts.jpg" image with a code "banner"
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this taxon should have an image with a code "banner"
@@ -20,8 +20,8 @@ Feature: Adding images to an existing taxon
     @ui @javascript
     Scenario: Adding multiple images to an existing taxon
         Given I want to modify the "T-Shirts" taxon
-        When I attach "t-shirts.jpg" image with a code "banner"
-        And I attach "t-shirts.jpg" image with a code "thumbnail"
+        When I attach the "t-shirts.jpg" image with a code "banner"
+        And I attach the "t-shirts.jpg" image with a code "thumbnail"
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this taxon should have an image with a code "banner"

@@ -303,7 +303,7 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
-     * @When I attach :path image with a code :code
+     * @When I attach the :path image with a code :code
      */
     public function iAttachImageWithACode($path, $code)
     {
