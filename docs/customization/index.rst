@@ -11,5 +11,6 @@ The Customization Guide
     validation
     menu
     template
+    translation
 
 .. include:: /customization/map.rst.inc

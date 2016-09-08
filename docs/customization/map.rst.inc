@@ -5,3 +5,4 @@
 * :doc:`/customization/validation`
 * :doc:`/customization/menu`
 * :doc:`/customization/template`
+* :doc:`/customization/translation`
