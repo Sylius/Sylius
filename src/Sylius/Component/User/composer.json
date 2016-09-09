@@ -30,7 +30,7 @@
     "require": {
         "php": "^5.6|^7.0",
 
-        "doctrine/orm": "^2.4.8,<2.5",
+        "doctrine/collections": "^1.1",
         "sylius/resource": "^1.0",
         "sylius/storage": "^1.0",
         "symfony/security": "^2.8",
