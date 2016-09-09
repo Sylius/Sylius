@@ -68,20 +68,6 @@ sylius:
             code: 代码
         product_variant:
             tax_category: 税类别
-        settings:
-            general:
-                currency: 默认货币：
-                locale: 语言
-                meta_description: META描述
-                meta_keywords: Meta关键字：
-                title: 页标题
-                tracking_code:
-                    Tracking code (for example: Google Analytics 代码
-            taxation:
-                default_tax_zone: 默认税区
-                default_tax_calculation_strategy: 默认税计算策略
-            security:
-                enabled: 启用？
         shipment_filter:
             created_at_from: 从
             created_at_to: 到
@@ -97,7 +83,9 @@ sylius:
         shipping_method:
             zone: 区域
         taxon:
+            code: 代码
             file: 选择图像
+            images: 图像
         taxonomy:
             file: 选择图像
         user:

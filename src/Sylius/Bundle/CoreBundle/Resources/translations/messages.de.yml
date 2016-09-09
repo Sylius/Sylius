@@ -69,20 +69,6 @@ sylius:
             code: Code
         product_variant:
             tax_category: Steuerkategorie
-        settings:
-            general:
-                currency: Standardwährung
-                locale: Sprache
-                meta_description: Metabeschreibung
-                meta_keywords: Metastichwörter
-                title: Seitentitel
-                tracking_code:
-                    Tracking code (for example: Google Analytics Tracking Code)
-            taxation:
-                default_tax_zone: Standard Steuerzone
-                default_tax_calculation_strategy: Standardstrategie zur Steuerberechnung
-            security:
-                enabled: Aktiv?
         shipment_filter:
             created_at_from: Von
             created_at_to: Bis
@@ -98,7 +84,9 @@ sylius:
         shipping_method:
             zone: Versandgebiet
         taxon:
+            code: Code
             file: Foto auswählen
+            images: Fotos
         taxonomy:
             file: Foto auswählen
         user:
@@ -139,7 +127,7 @@ sylius:
                 taxon: Steuern
                 count: Anzahl
             taxon:
-                taxons: Gruppen
+                taxons: Rang
             total_of_items_from_taxon:
                 taxon: Steuern
                 amount: Anzahl
@@ -150,6 +138,7 @@ sylius:
             name: Kommentar
         shipment_confirmation:
             name: Versandbestätigung
+            content: 'Deine Bestellung mit der Nummer %number% wurde mit der %method% gesendet. <br/> Du kannst die Position, deiner Bestellung mit dieser %tracking% Sendeverfolgungsnummer einsehen.<br/><br/>Danke für deine erfolgreiche Bezahlung.'
         user_confirmation:
             name: Bestätigung durch den Benutzer
             subject: Willkommen Sie in unserem Shop

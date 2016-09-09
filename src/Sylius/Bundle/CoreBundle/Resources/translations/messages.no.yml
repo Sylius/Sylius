@@ -56,15 +56,6 @@ sylius:
             code: Kode
         product_variant:
             tax_category: Skattekategori
-        settings:
-            general:
-                currency: Standard valuta
-                locale: Språk
-                meta_description: Metabeskrivelse
-                meta_keywords: Meta nøkkelord
-                title: Sidetittel
-            taxation:
-                default_tax_zone: Standard skattesone
         shipment_filter:
             created_at_from: Fra
             created_at_to: Til
@@ -77,7 +68,9 @@ sylius:
         shipping_method:
             zone: Sone
         taxon:
+            code: Kode
             file: Velg bilde
+            images: Bilder
         taxonomy:
             file: Velg bilde
         user:

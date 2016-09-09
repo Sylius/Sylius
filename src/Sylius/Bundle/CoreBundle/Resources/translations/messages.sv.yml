@@ -69,20 +69,6 @@ sylius:
             code: Kod
         product_variant:
             tax_category: Momskategori
-        settings:
-            general:
-                currency: Standardvaluta
-                locale: Språk
-                meta_description: Metabeskrivning
-                meta_keywords: Metasökord
-                title: Sidans titel
-                tracking_code:
-                    Tracking code (for example: Google Analytics-kod)
-            taxation:
-                default_tax_zone: Standardmomszon
-                default_tax_calculation_strategy: Standard skatteberäkningsstrategi
-            security:
-                enabled: Aktivera?
         shipment_filter:
             created_at_from: Från
             created_at_to: Till
@@ -97,7 +83,9 @@ sylius:
         shipping_method:
             zone: Zon
         taxon:
+            code: Kod
             file: Välj bild
+            images: Bilder
         taxonomy:
             file: Välj bild
         user:

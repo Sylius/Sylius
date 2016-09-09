@@ -69,20 +69,6 @@ sylius:
             code: Kód
         product_variant:
             tax_category: ÁFA-kategória
-        settings:
-            general:
-                currency: Alapértelmezett pénznem
-                locale: Nyelv
-                meta_description: Meta leírás
-                meta_keywords: Meta kulcsszavak
-                title: Oldal címe
-                tracking_code:
-                    Tracking code (for example: A Google Analytics kód)
-            taxation:
-                default_tax_zone: Alapértelmezett adósáv
-                default_tax_calculation_strategy: Alapértelmezett adó számítási stratégia
-            security:
-                enabled: Engedélyezve?
         shipment_filter:
             created_at_from: -tól
             created_at_to: -ig
@@ -98,7 +84,9 @@ sylius:
         shipping_method:
             zone: Zóna
         taxon:
+            code: Kód
             file: Kép kiválasztása
+            images: Képek
         taxonomy:
             file: Kép kiválasztása
         user:

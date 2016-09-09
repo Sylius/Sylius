@@ -69,20 +69,6 @@ sylius:
             code: Code
         product_variant:
             tax_category: Catégorie de taxe
-        settings:
-            general:
-                currency: Devise par défaut
-                locale: Langue
-                meta_description: Méta description
-                meta_keywords: Meta mots-clés
-                title: Titre de la page
-                tracking_code:
-                    Tracking code (for example: Clé Google Analytics
-            taxation:
-                default_tax_zone: Zone de taxe par défaut
-                default_tax_calculation_strategy: Stratégie de calcul de la taxe par défaut
-            security:
-                enabled: Activer ?
         shipment_filter:
             created_at_from: De
             created_at_to: À
@@ -98,7 +84,9 @@ sylius:
         shipping_method:
             zone: Zone
         taxon:
+            code: Code
             file: Sélectionnez une image
+            images: Images
         taxonomy:
             file: Sélectionnez une image
         user:

@@ -56,15 +56,6 @@ sylius:
             code: Cod
         product_variant:
             tax_category: Categoria de taxă
-        settings:
-            general:
-                currency: Moneda implicită
-                locale: Limba
-                meta_description: Meta descriere
-                meta_keywords: Meta cuvinte cheie
-                title: Titlul paginii
-            taxation:
-                default_tax_zone: Zona de taxă implicită
         shipment_filter:
             created_at_from: De la
             created_at_to: Până la
@@ -77,7 +68,9 @@ sylius:
         shipping_method:
             zone: Zonă
         taxon:
+            code: Cod
             file: Alege imagine
+            images: Imagini
         taxonomy:
             file: Alege imagine
         user:
