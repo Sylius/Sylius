@@ -30,6 +30,7 @@ The Book
     taxation
     pricing
     promotions
+    coupons
     content
     emails
     settings
