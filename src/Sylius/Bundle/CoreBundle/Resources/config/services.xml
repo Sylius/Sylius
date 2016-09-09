@@ -28,6 +28,7 @@
         <import resource="services/form.xml" />
         <import resource="services/handlers.xml" />
         <import resource="services/order_processor.xml" />
+        <import resource="services/promotion.xml" />
         <import resource="services/sitemap.xml" />
         <import resource="services/templating.xml" />
     </imports>
@@ -51,7 +52,6 @@
         <parameter key="sylius.listener.order_item_inventory.class">Sylius\Bundle\CoreBundle\EventListener\OrderItemInventoryListener</parameter>
         <parameter key="sylius.listener.order_state.class">Sylius\Bundle\CoreBundle\EventListener\OrderStateListener</parameter>
         <parameter key="sylius.listener.order_payment.class">Sylius\Bundle\CoreBundle\EventListener\OrderPaymentListener</parameter>
-        <parameter key="sylius.listener.order_promotion.class">Sylius\Bundle\CoreBundle\EventListener\OrderPromotionListener</parameter>
         <parameter key="sylius.listener.checkout_addressing.class">Sylius\Bundle\CoreBundle\EventListener\CheckoutAddressingListener</parameter>
         <parameter key="sylius.listener.insufficient_stock_exception.class">Sylius\Bundle\CoreBundle\EventListener\InsufficientStockExceptionListener</parameter>
         <parameter key="sylius.listener.image_upload.class">Sylius\Bundle\CoreBundle\EventListener\ImageUploadListener</parameter>
@@ -64,25 +64,6 @@
         <parameter key="sylius.listener.canonicalizer.class">Sylius\Bundle\CoreBundle\EventListener\CanonicalizerListener</parameter>
         <parameter key="sylius.listener.user_registration.class">Sylius\Bundle\CoreBundle\EventListener\UserRegistrationListener</parameter>
         <parameter key="sylius.listener.password_updater.class">Sylius\Bundle\CoreBundle\EventListener\PasswordUpdaterListener</parameter>
-
-        <parameter key="sylius.active_promotions_by_channel_provider.class">Sylius\Component\Core\Provider\ActivePromotionsByChannelProvider</parameter>
-
-        <parameter key="sylius.promotion_rule_checker.nth_order.class">Sylius\Component\Core\Promotion\Checker\NthOrderRuleChecker</parameter>
-        <parameter key="sylius.promotion_rule_checker.shipping_country.class">Sylius\Component\Core\Promotion\Checker\ShippingCountryRuleChecker</parameter>
-        <parameter key="sylius.promotion_rule_checker.taxon.class">Sylius\Component\Core\Promotion\Checker\TaxonRuleChecker</parameter>
-        <parameter key="sylius.promotion_rule_checker.contains_taxon.class">Sylius\Component\Core\Promotion\Checker\ContainsTaxonRuleChecker</parameter>
-        <parameter key="sylius.promotion_rule_checker.total_of_items_from_taxon.class">Sylius\Component\Core\Promotion\Checker\TotalOfItemsFromTaxonRuleChecker</parameter>
-        <parameter key="sylius.promotion_action.fixed_discount.class">Sylius\Component\Core\Promotion\Action\FixedDiscountAction</parameter>
-        <parameter key="sylius.promotion_action.unit_fixed_discount.class">Sylius\Component\Core\Promotion\Action\UnitFixedDiscountAction</parameter>
-        <parameter key="sylius.promotion_action.percentage_discount.class">Sylius\Component\Core\Promotion\Action\PercentageDiscountAction</parameter>
-        <parameter key="sylius.promotion_action.unit_percentage_discount.class">Sylius\Component\Core\Promotion\Action\UnitPercentageDiscountAction</parameter>
-        <parameter key="sylius.promotion_action.shipping_discount.class">Sylius\Component\Core\Promotion\Action\ShippingDiscountAction</parameter>
-        <parameter key="sylius.promotion.eligibility_checker.coupons.class">Sylius\Component\Core\Promotion\Checker\CouponsEligibilityChecker</parameter>
-
-        <parameter key="sylius.promotion_filter.taxon.class">Sylius\Component\Core\Promotion\Filter\TaxonFilter</parameter>
-        <parameter key="sylius.promotion_filter.price_range.class">Sylius\Component\Core\Promotion\Filter\PriceRangeFilter</parameter>
-
-        <parameter key="sylius.promotion.units_promotion_adjustments_applicator.class">Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicator</parameter>
 
         <parameter key="sylius.order.purger.class">Sylius\Bundle\CoreBundle\Purger\ExpiredOrdersPurger</parameter>
         <parameter key="sylius.image_uploader.class">Sylius\Component\Core\Uploader\ImageUploader</parameter>
@@ -205,13 +186,6 @@
         <service id="sylius.listener.order_payment" class="%sylius.listener.order_payment.class%">
             <tag name="kernel.event_listener" event="sylius.checkout.finalize.pre_complete" method="updateOrderPayment" />
         </service>
-        <service id="sylius.listener.order_promotion" class="%sylius.listener.order_promotion.class%">
-            <argument type="service" id="session" />
-            <argument type="service" id="translator" />
-            <tag name="kernel.event_listener" event="sylius.promotion.coupon_invalid" method="handleCouponPromotion" />
-            <tag name="kernel.event_listener" event="sylius.promotion.coupon_eligible" method="handleCouponPromotion" />
-            <tag name="kernel.event_listener" event="sylius.promotion.coupon_not_eligible" method="handleCouponPromotion" />
-        </service>
         <service id="sylius.listener.checkout_addressing" class="%sylius.listener.checkout_addressing.class%">
             <tag name="kernel.event_listener" event="sylius.checkout.addressing.pre_complete" method="setCustomerAddressing" />
         </service>
@@ -274,15 +248,6 @@
             <tag name="doctrine.event_listener" event="preUpdate" />
         </service>
 
-        <service id="sylius.active_promotions_by_channel_provider" class="%sylius.active_promotions_by_channel_provider.class%">
-            <argument type="service" id="sylius.repository.promotion" />
-        </service>
-        <service id="sylius.promotion_processor" class="%sylius.promotion_processor.class%">
-            <argument type="service" id="sylius.active_promotions_by_channel_provider" />
-            <argument type="service" id="sylius.promotion_eligibility_checker" />
-            <argument type="service" id="sylius.promotion_applicator" />
-        </service>
-
         <service id="sylius.image_uploader" class="%sylius.image_uploader.class%">
             <argument type="service">
                 <service class="Gaufrette\Filesystem">
@@ -290,65 +255,6 @@
                     <factory service="knp_gaufrette.filesystem_map" method="get" />
                 </service>
             </argument>
-        </service>
-
-        <service id="sylius.promotion_rule_checker.nth_order" class="%sylius.promotion_rule_checker.nth_order.class%">
-            <argument type="service" id="sylius.repository.order" />
-            <tag name="sylius.promotion_rule_checker" type="nth_order" label="Nth order" />
-        </service>
-        <service id="sylius.promotion_rule_checker.shipping_country" class="%sylius.promotion_rule_checker.shipping_country.class%">
-            <argument type="service" id="sylius.repository.country" />
-            <tag name="sylius.promotion_rule_checker" type="shipping_country" label="Shipping country" />
-        </service>
-        <service id="sylius.promotion_rule_checker.taxon" class="%sylius.promotion_rule_checker.taxon.class%">
-            <tag name="sylius.promotion_rule_checker" type="taxon" label="Taxon" />
-        </service>
-        <service id="sylius.promotion_rule_checker.contains_taxon" class="%sylius.promotion_rule_checker.contains_taxon.class%">
-            <argument type="service" id="sylius.repository.taxon" />
-            <tag name="sylius.promotion_rule_checker" type="contains_taxon" label="Contains number of items from taxon" />
-        </service>
-        <service id="sylius.promotion_rule_checker.total_of_items_from_taxon" class="%sylius.promotion_rule_checker.total_of_items_from_taxon.class%">
-            <argument type="service" id="sylius.repository.taxon" />
-            <tag name="sylius.promotion_rule_checker" type="total_of_items_from_taxon" label="Total price of items from taxon" />
-        </service>
-        <service id="sylius.promotion_action.fixed_discount" class="%sylius.promotion_action.fixed_discount.class%">
-            <argument type="service" id="sylius.proportional_integer_distributor" />
-            <argument type="service" id="sylius.promotion.units_promotion_adjustments_applicator" />
-            <tag name="sylius.promotion_action" type="order_fixed_discount" label="Order fixed discount" />
-        </service>
-        <service id="sylius.promotion_action.unit_fixed_discount" class="%sylius.promotion_action.unit_fixed_discount.class%">
-            <argument type="service" id="sylius.factory.adjustment" />
-            <argument type="service" id="sylius.promotion_filter.price_range" />
-            <argument type="service" id="sylius.promotion_filter.taxon" />
-            <tag name="sylius.promotion_action" type="unit_fixed_discount" label="Item fixed discount" />
-        </service>
-        <service id="sylius.promotion_action.percentage_discount" class="%sylius.promotion_action.percentage_discount.class%">
-            <argument type="service" id="sylius.proportional_integer_distributor" />
-            <argument type="service" id="sylius.promotion.units_promotion_adjustments_applicator" />
-            <tag name="sylius.promotion_action" type="order_percentage_discount" label="Order percentage discount" />
-        </service>
-        <service id="sylius.promotion_action.unit_percentage_discount" class="%sylius.promotion_action.unit_percentage_discount.class%">
-            <argument type="service" id="sylius.factory.adjustment" />
-            <argument type="service" id="sylius.promotion_filter.price_range" />
-            <argument type="service" id="sylius.promotion_filter.taxon" />
-            <tag name="sylius.promotion_action" type="unit_percentage_discount" label="Item percentage discount" />
-        </service>
-        <service id="sylius.promotion_action.shipping_discount" class="%sylius.promotion_action.shipping_discount.class%">
-            <argument type="service" id="sylius.factory.adjustment" />
-            <tag name="sylius.promotion_action" type="shipping_discount" label="Shipping percentage discount" />
-        </service>
-
-        <service id="sylius.promotion.eligibility_checker.coupons" class="%sylius.promotion.eligibility_checker.coupons.class%">
-            <argument type="service" id="event_dispatcher" />
-            <argument type="service" id="sylius.repository.order" />
-        </service>
-
-        <service id="sylius.promotion_filter.taxon" class="%sylius.promotion_filter.taxon.class%" />
-        <service id="sylius.promotion_filter.price_range" class="%sylius.promotion_filter.price_range.class%" />
-
-        <service id="sylius.promotion.units_promotion_adjustments_applicator" class="%sylius.promotion.units_promotion_adjustments_applicator.class%">
-            <argument type="service" id="sylius.factory.adjustment" />
-            <argument type="service" id="sylius.integer_distributor" />
         </service>
 
         <service id="sylius.price_calculator.channel_based" class="%sylius.price_calculator.channel_based.class%" lazy="true">
@@ -421,5 +327,4 @@
 
         <service id="sylius.inventory.on_hand_quantity_updater" class="%sylius.inventory.on_hand_quantity_updater.class%"/>
     </services>
-
 </container>

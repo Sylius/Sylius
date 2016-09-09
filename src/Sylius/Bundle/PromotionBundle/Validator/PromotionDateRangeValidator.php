@@ -11,6 +11,7 @@
 
 namespace Sylius\Bundle\PromotionBundle\Validator;
 
+use Sylius\Bundle\PromotionBundle\Validator\Constraints\PromotionDateRange;
 use Sylius\Component\Promotion\Model\PromotionInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
@@ -19,13 +20,10 @@ use Webmozart\Assert\Assert;
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-class PromotionDateRangeValidator extends ConstraintValidator
+final class PromotionDateRangeValidator extends ConstraintValidator
 {
     /**
      * {@inheritdoc}
-     *
-     * @param mixed $value
-     * @param Constraint $constraint
      */
     public function validate($value, Constraint $constraint)
     {
@@ -33,10 +31,11 @@ class PromotionDateRangeValidator extends ConstraintValidator
             return;
         }
 
-        Assert::isInstanceOf(
-            $value,
-            PromotionInterface::class
-        );
+        /** @var PromotionInterface $value */
+        Assert::isInstanceOf($value, PromotionInterface::class);
+
+        /** @var PromotionDateRange $constraint */
+        Assert::isInstanceOf($constraint, PromotionDateRange::class);
 
         if (null === $value->getStartsAt() || null === $value->getEndsAt()) {
             return;

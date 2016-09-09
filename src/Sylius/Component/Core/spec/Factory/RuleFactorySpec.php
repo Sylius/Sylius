@@ -12,17 +12,20 @@
 namespace spec\Sylius\Component\Core\Factory;
 
 use PhpSpec\ObjectBehavior;
+use Sylius\Component\Core\Factory\RuleFactory;
 use Sylius\Component\Core\Factory\RuleFactoryInterface;
-use Sylius\Component\Core\Promotion\Checker\ContainsTaxonRuleChecker;
-use Sylius\Component\Core\Promotion\Checker\NthOrderRuleChecker;
-use Sylius\Component\Core\Promotion\Checker\TaxonRuleChecker;
-use Sylius\Component\Core\Promotion\Checker\TotalOfItemsFromTaxonRuleChecker;
-use Sylius\Component\Promotion\Checker\CartQuantityRuleChecker;
-use Sylius\Component\Promotion\Checker\ItemTotalRuleChecker;
+use Sylius\Component\Core\Promotion\Checker\Rule\ContainsTaxonRuleChecker;
+use Sylius\Component\Core\Promotion\Checker\Rule\NthOrderRuleChecker;
+use Sylius\Component\Core\Promotion\Checker\Rule\TaxonRuleChecker;
+use Sylius\Component\Core\Promotion\Checker\Rule\TotalOfItemsFromTaxonRuleChecker;
+use Sylius\Component\Promotion\Checker\Rule\CartQuantityRuleChecker;
+use Sylius\Component\Promotion\Checker\Rule\ItemTotalRuleChecker;
 use Sylius\Component\Promotion\Model\RuleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 
 /**
+ * @mixin RuleFactory
+ *
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
 final class RuleFactorySpec extends ObjectBehavior
@@ -34,7 +37,7 @@ final class RuleFactorySpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Core\Factory\RuleFactory');
+        $this->shouldHaveType(RuleFactory::class);
     }
 
     function it_implements_rule_factory_interface()
@@ -42,14 +45,14 @@ final class RuleFactorySpec extends ObjectBehavior
         $this->shouldImplement(RuleFactoryInterface::class);
     }
 
-    function it_uses_decorated_factory_to_create_new_rule_object($decoratedFactory, RuleInterface $rule)
+    function it_uses_decorated_factory_to_create_new_rule_object(FactoryInterface $decoratedFactory, RuleInterface $rule)
     {
         $decoratedFactory->createNew()->willReturn($rule);
 
         $this->createNew()->shouldReturn($rule);
     }
 
-    function it_creates_cart_quantity_rule($decoratedFactory, RuleInterface $rule)
+    function it_creates_cart_quantity_rule(FactoryInterface $decoratedFactory, RuleInterface $rule)
     {
         $decoratedFactory->createNew()->willReturn($rule);
         $rule->setType(CartQuantityRuleChecker::TYPE)->shouldBeCalled();
@@ -58,7 +61,7 @@ final class RuleFactorySpec extends ObjectBehavior
         $this->createCartQuantity(5)->shouldReturn($rule);
     }
 
-    function it_creates_item_total_rule($decoratedFactory, RuleInterface $rule)
+    function it_creates_item_total_rule(FactoryInterface $decoratedFactory, RuleInterface $rule)
     {
         $decoratedFactory->createNew()->willReturn($rule);
         $rule->setType(ItemTotalRuleChecker::TYPE)->shouldBeCalled();
@@ -67,7 +70,7 @@ final class RuleFactorySpec extends ObjectBehavior
         $this->createItemTotal(1000)->shouldReturn($rule);
     }
 
-    function it_creates_taxon_rule($decoratedFactory, RuleInterface $rule)
+    function it_creates_taxon_rule(FactoryInterface $decoratedFactory, RuleInterface $rule)
     {
         $decoratedFactory->createNew()->willReturn($rule);
         $rule->setType(TaxonRuleChecker::TYPE)->shouldBeCalled();
@@ -76,7 +79,7 @@ final class RuleFactorySpec extends ObjectBehavior
         $this->createTaxon([1, 6])->shouldReturn($rule);
     }
 
-    function it_creates_total_of_items_from_taxon_rule($decoratedFactory, RuleInterface $rule)
+    function it_creates_total_of_items_from_taxon_rule(FactoryInterface $decoratedFactory, RuleInterface $rule)
     {
         $decoratedFactory->createNew()->willReturn($rule);
         $rule->setType(TotalOfItemsFromTaxonRuleChecker::TYPE)->shouldBeCalled();
@@ -85,7 +88,7 @@ final class RuleFactorySpec extends ObjectBehavior
         $this->createItemsFromTaxonTotal('spears', 1000)->shouldReturn($rule);
     }
 
-    function it_creates_a_contains_taxon_rule($decoratedFactory, RuleInterface $rule)
+    function it_creates_a_contains_taxon_rule(FactoryInterface $decoratedFactory, RuleInterface $rule)
     {
         $decoratedFactory->createNew()->willReturn($rule);
         $rule->setType(ContainsTaxonRuleChecker::TYPE)->shouldBeCalled();
@@ -94,7 +97,7 @@ final class RuleFactorySpec extends ObjectBehavior
         $this->createContainsTaxon('bows', 10)->shouldReturn($rule);
     }
 
-    function it_creates_a_nth_order_rule($decoratedFactory, RuleInterface $rule)
+    function it_creates_a_nth_order_rule(FactoryInterface $decoratedFactory, RuleInterface $rule)
     {
         $decoratedFactory->createNew()->willReturn($rule);
         $rule->setType(NthOrderRuleChecker::TYPE)->shouldBeCalled();

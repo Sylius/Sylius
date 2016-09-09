@@ -16,7 +16,7 @@ use Symfony\Component\Validator\Constraint;
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-class CouponPossibleGenerationAmount extends Constraint
+final class CouponPossibleGenerationAmount extends Constraint
 {
     /**
      * @var string
