@@ -37,7 +37,7 @@ final class ResourcesResolverSpec extends ObjectBehavior
         $this->shouldImplement(ResourcesResolverInterface::class);
     }
 
-    function it_gets_all_resources_if_not_paginated_and_there_is_no_limit_and_is_not_filterable_and_is_not_sortable(
+    function it_gets_all_resources_if_has_no_criteria(
         RequestConfiguration $requestConfiguration,
         RepositoryInterface $repository,
         ResourceInterface $firstResource,
