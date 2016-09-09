@@ -69,20 +69,6 @@ sylius:
             code: Code
         product_variant:
             tax_category: Belasting categorie
-        settings:
-            general:
-                currency: Standaard valuta
-                locale: Taal
-                meta_description: Meta omschrijving
-                meta_keywords: Meta sleutelwoorden
-                title: Pagina titel
-                tracking_code:
-                    Tracking code (for example: Tracking Code (bijvoorbeeld Google Analytics)
-            taxation:
-                default_tax_zone: Standaard belastingzone
-                default_tax_calculation_strategy: Standaard belasting berekeningsstrategie
-            security:
-                enabled: Inschakelen?
         shipment_filter:
             created_at_from: Van
             created_at_to: Tot
@@ -98,7 +84,9 @@ sylius:
         shipping_method:
             zone: Zone
         taxon:
+            code: Code
             file: Selecteer afbeelding
+            images: Afbeeldingen
         taxonomy:
             file: Selecteer afbeelding
         user:

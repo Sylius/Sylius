@@ -64,19 +64,6 @@ sylius:
             code: Kod
         product_variant:
             tax_category: Vergi kategorisi
-        settings:
-            general:
-                currency: Varsayılan para birimi
-                locale: Dil
-                meta_description: Meta açıklama
-                meta_keywords: Meta anahtar kelimeleri
-                title: Sayfa başlığı
-                tracking_code:
-                    Tracking code (for example: Google Analytics kodu)
-            taxation:
-                default_tax_zone: Varsayılan vergi bölgesi
-            security:
-                enabled: Etkinleştir?
         shipment_filter:
             created_at_from: Kaynak
             created_at_to: Hedef
@@ -92,7 +79,9 @@ sylius:
         shipping_method:
             zone: Bölge
         taxon:
+            code: Kod
             file: Resim seç
+            images: Resimleri
         taxonomy:
             file: Resim seç
         user:

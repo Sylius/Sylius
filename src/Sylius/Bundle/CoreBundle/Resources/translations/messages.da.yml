@@ -56,15 +56,6 @@ sylius:
             code: Kode
         product_variant:
             tax_category: Momskategori
-        settings:
-            general:
-                currency: Standard valuta
-                locale: Sprog
-                meta_description: Meta beskrivelse
-                meta_keywords: Meta søgeord
-                title: Sidetitel
-            taxation:
-                default_tax_zone: Standard moms zone
         shipment_filter:
             created_at_from: Fra
             created_at_to: Til
@@ -77,7 +68,9 @@ sylius:
         shipping_method:
             zone: Zone
         taxon:
+            code: Kode
             file: Vælg billede
+            images: Billeder
         taxonomy:
             file: Vælg billede
         user:

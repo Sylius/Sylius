@@ -234,6 +234,7 @@ sylius:
         edit_promotion: Aktion bearbeiten
         edit_promotion_coupon: Aktionscode bearbeiten
         edit_report: Bericht editieren
+        edit_route: Editiere die Strecke
         edit_shipping_method: Versandart bearbeiten
         edit_static_content: Statische Inhalte bearbeiten
         edit_tax_category: Steuerkategorien bearbeiten
@@ -303,6 +304,7 @@ sylius:
         first_name: Vorname
         forgot_password: Passwort vergessen
         fulfill: Zu erfüllen
+        fulfilled: Gegeben
         gateway: Schnittstelle
         general_info: Allgemeine Informationen
         general_settings: Allgemeine Einstellungen
@@ -316,12 +318,15 @@ sylius:
         groups: Gruppen
         guest: Gastbestellung
         guest_customer: Gast Kunde
+        have_an_account_already: Du hast bereits einen Acoount
+        hello: Hallo
         hello_name: 'Hallo <b>%name%</b>'
         hide_deleted: Gelöschte Elemente ausblenden
         home: Startseite
         hostname: Server-Name
         id: ID
         identifier: Kennung
+        if_you_have_an_account_sign_in_with_your_email_address: Wenn du bereits einen Account besitzt, melde dich bitte mit deiner E-Mail Adresse an.
         image: Foto
         images: Fotos
         imagine_blocks: Bild Blöcke
@@ -341,6 +346,7 @@ sylius:
         item: Produkt
         items: Artikel
         items_total: Gesamtanzahl
+        jump_to_page: Wechsel zur Seite
         label: Bezeichnung
         last_login: Letzter Login
         last_name: Nachname
@@ -353,6 +359,8 @@ sylius:
         latest_products: Neueste Produkte
         links: Links
         list_coupons: Gutscheine
+        list_variants: Auflistung der Varianten
+        locale: Gebiet
         locales: Gebietsschemata
         lock: Sperren
         locked: Gesperrt
@@ -362,32 +370,47 @@ sylius:
         login_sylius_store: 'Login <small>Sylius Webshop</small>'
         logout: Abmelden
         main_taxon: Haupt-Taxonomie
+        male: Männlich
         manage: Verwaltung
         manage_adjustments: Verwalten von Anpassungen
+        manage_admin_users: Administratoren verwalten
         manage_attributes: Attribute verwalten
+        manage_attributes_of_your_products: Verwaltung deiner Produkteigenschaften
         manage_categorization_of_your_products: Kategorieverwaltung für Ihre Produkte
         manage_channels: Kanäle verwalten
+        manage_configuration_options_of_your_products: Verwalte die Konfiguration deines Produktes
         manage_countries: Länder verwalten
+        manage_coupons: Gutscheine verwalten
+        manage_currencies_available_in_the_store: Verwalte die Währung in deinem Shhop
         manage_customers: Kunden verwalten
+        manage_discounts_and_promotional_campaigns: Verwaltung der Rabatte und Promotionen
         manage_emails: E-Mails verwalten
+        manage_geographical_zones: Länderverwaltung
+        manage_languages_available_in_the_store: Verwaltung der verschiedene Sprachen in dem Shop
         manage_metadata: Metadaten verwalten
         manage_options: Produktoptionen verwalten
         manage_orders: Bestellungsverwaltung
+        manage_payment_methods_available_to_your_customers: Verwaltung der Zahlungsmethoden deiner Kunden
         manage_payments: Zahlungen verwalten
         manage_products: Produkte verwalten
         manage_promotions: Aktionsverwaltung
         manage_reviews: Rezensionen verwalten
         manage_shipments: Verwalten
         manage_shipping_categories: Versandkategorie verwalten
+        manage_shipping_destinations: Verwaltung der Versendungs ziele
         manage_shipping_methods: Versandarten verwalten
+        manage_shipping_methods_for_your_store: Verwalte die Versendungsmöglichkeiten in deinem Shop
         manage_tax_categories: Steuerkategorie verwalten
         manage_tax_rates: Verwalten
         manage_taxation_of_your_products: Besteuerung der Produkte verwalten
         manage_users: Benutzer verwalten
         manage_variants: Varianten bearbeiten
+        manage_your_customers: Verwaltung deiner Kunden
+        manage_your_personal_information_and_preferences: Verwaltung deiner Persönlichen Informationen und Vorlieben
         manage_your_product_catalog: Verwalten Sie Ihre Produkte
         manage_zones: Gebiete verwalten
         marketing: Marketing
+        media: Medien
         members: Mitglieder
         menu_nodes: Menüpunkte
         menus: Menüpunkte
@@ -401,9 +424,13 @@ sylius:
         n_a: Nicht verfügbar
         name: Name
         new: Neu
+        new_admin_user: Neuer Administrator
+        new_channel: Neuer Kanal
         new_comment_posted_on_order: Neuer Kommentar zu einer Bestellung
         new_country: Neues Land
+        new_coupon: Neuer Gutschein
         new_currency: Neue Währung
+        new_customer: Neuer Kunde
         new_customers: Neueste Kunden
         new_locale: Neue Lokalisierung
         new_order: Neue Bestellung
@@ -417,10 +444,13 @@ sylius:
         new_product_option: Neue Produktoption
         new_product_variant: Neue Produktvariante
         new_promotion: Neue Aktion
+        new_promotion_coupon: Neuer Promotionscode
         new_review: Neue Rezension
         new_role: Neue Rolle
+        new_route: Neue Route
         new_shipping_category: Neue Versandkategorie
         new_shipping_method: Neue Versandart
+        new_static_content: Neue statische Inhalte
         new_tax_category: Neue Steuerkategorie
         new_tax_rate: Steuersatz erstellen
         new_taxon: Klassifizierung hinzufügen
@@ -429,25 +459,32 @@ sylius:
         newest_products: Neueste Produkte
         next: Nächstes Bild
         "no": false
+        no_account: Kein Konto
         no_association_types_to_display: Es sind keine Verbindungen definiert
         no_comment: Kein Kommentar
         no_default_billing_address: Keine Standard-Rechnungsadresse
         no_default_shipping_address: Keine Standard-Lieferadresse
         no_description: Keine Beschreibung
+        no_payment_methods_available: Zurzeit sind keine Zahlungsmethoden für deine Bestellung verfügbar
         no_pricing_configuration: Keine Preiskonfiguration vorhanden
         no_promotion: Keine Reklame
+        no_requirement: Nicht notwendig
         no_results: Keine Ergebnisse für diese Anfrage gefunden
         no_results_to_display: Es gibt keine Ergebnisse zum Anzeigen
         no_shipping_category: Keine Versandkategorie
         no_shipping_charges: Keine Versandkosten
+        no_shipping_methods_available: Es sind zurzeit keine Versandarten für Ihre Versandadresse verfügbar
         no_short_description: '<i>Keine Kurzbeschreibung</i>'
         no_sku: Keine Artikelpositionen verfügbar
         no_tax_category: Keine Steuerkategorie
         no_taxes: Keine Steuern
+        no_theme: Kein Theme
         not_available_in_your_country: In Ihrem Land nicht verfügbar
         not_contains: Enthält nicht
         not_empty: Nicht leer
         not_in: Nicht in
+        not_verified: Nicht verifiziert
+        notes: Notizen
         notify_customer: Kunde benachrichtigen
         number: Nummer
         number_of_orders: Anzahl der Bestellungen
@@ -460,9 +497,11 @@ sylius:
         order_comments: Kommentar
         order_confirmation_name: Bestellbestätigung
         order_details: Bestelldetails
+        order_history: Bestellungsverlauf
         order_item_product: Produkt
         order_state: Bestellstatus
         order_summary: Bestellungsübersicht
+        order_total: Gesamtbestellung
         order_value: Bestellwert
         ordered: Bestellt
         orders: Aufträge
@@ -471,19 +510,28 @@ sylius:
         overview_of_your_store: Überblick Ihres Shops
         page: Seite
         pages: Seiten
+        paid: Bezahlt
         parent: Übergeordnet
+        partially_paid: Teilweise bezahlt
+        partially_shipped: Teilweise versendet
         password: Passwort
         payment: Zahlung
         payment_details: Zahlungsdetails
         payment_method: Zahlungsweise
         payment_methods: Zahlungsmethoden
         payment_mode: Zahlungsweise
+        payment_ready_to_pay: Sie können jetzt Ihre Zahlung durchführen
         payment_state: Zahlungsstatus
         payments: Zahlungen
+        pay: Zahlen
+        pay_again: Klicke auf Bezahlen um es erneut zu versuchen
         pending: Ausstehend
+        per_customer_usage_limit: Verbrauchslimit pro Kunde
         permissions: Berechtigungen
+        personal_information: Persönliche Informationen
         phone_number: Telefonnummer
         place_order: Bestellung aufgeben
+        placed_an_order: Du hast erfolgreich eine Bestellung aufgegeben
         placed_at: Bestellt am
         postcode: PLZ
         powered_by: Powered by
@@ -492,6 +540,7 @@ sylius:
         price: Preis
         pricing: Preisgestaltung
         priority: Priorität
+        privacy_policy: Datenschutzbestimmungen
         process_your_orders: Bearbeiten Sie Ihre Bestellungen
         processing: Wird verarbeitet
         product: Verkäuflich
@@ -504,11 +553,13 @@ sylius:
         product_options: Produktoptionen
         product_review: Produkt-Bewertung
         product_reviews: Produkt-Bewertung
+        product_variants: Produktvarianten
         products: Produkte
         products_categorized_as_name: 'Produkte kategorisiert als "%name%"'
         products_categorized_under_taxon_taxon: 'Produkte <small>kategorisiert als "%taxon%</small>"'
         products_index_of_all_products_in_your_store: 'Produkte <small> Alle Produkte in Ihrem Shop</small>'
         profile: Profil
+        promotion_configuration: Promotionsverwaltung
         promotion_coupons: Gutscheine
         promotion_details: Aktion anzeigen
         promotion_information: Aktionsinformationen
@@ -611,6 +662,7 @@ sylius:
         street: Straße
         string_blocks: Zeichenketten–Elemente
         subject: Betreff
+        subscribed_to_newsletter: Newsletter abonnieren
         subtotal: Zwischensumme
         success: Erfolgreich
         summary: Zusammenfassung
@@ -693,6 +745,7 @@ sylius:
         update_cart: Warenkorb aktualisieren
         update_product_association_type: Produktverbindungstyp aktualisieren
         updating_tax_rate: Steuersätze editieren
+        usage: Belegt
         usage_limit: Nutzungslimit
         used: Aktion wird verwendet
         user_confirmation_name: Bestätigung durch den Benutzer

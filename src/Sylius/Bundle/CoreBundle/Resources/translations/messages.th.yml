@@ -69,20 +69,6 @@ sylius:
             code: รหัส
         product_variant:
             tax_category: ประเภทภาษี
-        settings:
-            general:
-                currency: สกุลเงินหลัก
-                locale: ภาษา
-                meta_description: Meta Description
-                meta_keywords: Meta Keywords
-                title: Page title
-                tracking_code:
-                    Tracking code (for example: รหัส Google Analytics
-            taxation:
-                default_tax_zone: เขตภาษีเริ่มต้น
-                default_tax_calculation_strategy: กลยุทธ์การคำนวณภาษีเริ่มต้น
-            security:
-                enabled: เปิดใช้งานแล้ว?
         shipment_filter:
             created_at_from: จาก
             created_at_to: ถึง
@@ -98,7 +84,9 @@ sylius:
         shipping_method:
             zone: โซน
         taxon:
+            code: รหัส
             file: เลือกรูปภาพ
+            images: ภาพ
         taxonomy:
             file: เลือกรูปภาพ
         user:

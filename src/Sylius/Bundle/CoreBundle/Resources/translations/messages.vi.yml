@@ -28,11 +28,10 @@ sylius:
         product_filter:
             name: Tên
             code: Mã
-        settings:
-            general:
-                locale: Ngôn ngữ
         taxon:
+            code: Mã
             file: Chọn ảnh
+            images: Hình ảnh
         taxonomy:
             file: Chọn ảnh
         user:
