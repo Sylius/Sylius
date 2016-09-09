@@ -114,6 +114,17 @@ class UpdatePage extends BaseUpdatePage implements UpdatePageInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function changeImageWithCode($code, $path)
+    {
+        $filesPath = $this->getParameter('files_path');
+
+        $imageForm = $this->getImageElementByCode($code);
+        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath.$path);
+    }
+
+    /**
      * @return NodeElement
      */
     protected function getCodeElement()

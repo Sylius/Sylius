@@ -303,7 +303,7 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
-     * @When I attach :path image with a code :code
+     * @When I attach the :path image with a code :code
      */
     public function iAttachImageWithACode($path, $code)
     {
@@ -361,5 +361,13 @@ final class ManagingTaxonsContext implements Context
             $this->updatePage->countImages(),
             'This taxon has %2$s, but it should not have.'
         );
+    }
+
+    /**
+     * @When I change the image with the :code code to :path
+     */
+    public function iChangeItsImageToPathForTheCode($path, $code)
+    {
+        $this->updatePage->changeImageWithCode($code, $path);
     }
 }

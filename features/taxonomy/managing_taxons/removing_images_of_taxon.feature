@@ -43,8 +43,8 @@ Feature: Removing images of an existing taxon
     @ui @javascript
     Scenario: Adding multiple images and removing a single image of a taxon
         Given I want to modify the "T-Shirts" taxon
-        When I attach "t-shirts.jpg" image with a code "banner"
-        And I attach "t-shirts.jpg" image with a code "thumbnail"
+        When I attach the "t-shirts.jpg" image with a code "banner"
+        And I attach the "t-shirts.jpg" image with a code "thumbnail"
         And I remove the first image
         And I save my changes
         Then I should be notified that it has been successfully edited
