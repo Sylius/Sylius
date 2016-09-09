@@ -15,3 +15,4 @@ It also includes a super flexible adjustments feature, which serves as a basis f
    builder
    services
    summary
+   processors
