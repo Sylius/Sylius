@@ -178,7 +178,7 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @When I disable its tracking
+     * @When I disable its inventory tracking
      */
     public function iDisableItsTracking()
     {
@@ -186,7 +186,7 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @When I enable its tracking
+     * @When I enable its inventory tracking
      */
     public function iEnableItsTracking()
     {
@@ -501,7 +501,7 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then /^(this product) should not be tracked$/
+     * @Then /^inventory of (this product) should not be tracked$/
      */
     public function thisProductShouldNotBeTracked(ProductInterface $product)
     {
@@ -514,7 +514,7 @@ final class ManagingProductsContext implements Context
     }
 
     /**
-     * @Then /^(this product) should be tracked$/
+     * @Then /^inventory of (this product) should be tracked$/
      */
     public function thisProductShouldBeTracked(ProductInterface $product)
     {

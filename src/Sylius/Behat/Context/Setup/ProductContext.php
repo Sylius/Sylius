@@ -419,7 +419,7 @@ final class ProductContext implements Context
      */
     public function theProductIsTrackedByTheInventory(ProductInterface $product)
     {
-        $productVariant = $product->getFirstVariant();
+        $productVariant = $this->defaultVariantResolver->getVariant($product);
         $productVariant->setTracked(true);
 
         $this->objectManager->flush();
