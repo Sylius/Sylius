@@ -58,4 +58,16 @@ final class ProductVariantContext implements Context
 
         return $productVariant;
     }
+
+    /**
+     * @Transform /^"([^"]+)" product variant$/
+     * @Transform /^"([^"]+)" variant$/
+     */
+    public function getProductVariantByName($name)
+    {
+        $productVariant = $this->productVariantRepository->findOneBy(['name' => $name]);
+        Assert::notNull($productVariant, sprintf('There is no product variant for "%s" name', $name));
+
+        return $productVariant;
+    }
 }

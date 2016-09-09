@@ -7,6 +7,8 @@ sylius:
         option:
             name: Name
         notes: Extra notes
+        variant:
+            tracked: Tracked
     ui:
         abandoned: Abandoned
         about: About
@@ -483,6 +485,7 @@ sylius:
         not_empty: Not empty
         not_in: Not in
         not_verified: Not verified
+        not_tracked: Not tracked
         notes: Notes
         notify_customer: 'Notify Customer'
         number: Number

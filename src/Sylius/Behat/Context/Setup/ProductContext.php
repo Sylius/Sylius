@@ -166,7 +166,7 @@ final class ProductContext implements Context
     }
 
     /**
-     * @Given /^the (product "[^"]+") has "([^"]+)" variant priced at ("[^"]+")$/
+     * @Given /^the (product "[^"]+") has(?:| a) "([^"]+)" variant priced at ("[^"]+")$/
      * @Given /^(this product) has "([^"]+)" variant priced at ("[^"]+")$/
      */
     public function theProductHasVariantPricedAt(ProductInterface $product, $productVariantName, $price)
@@ -413,7 +413,28 @@ final class ProductContext implements Context
 
         $this->objectManager->flush();
     }
-    
+
+    /**
+     * @Given /^the ("[^"]+" product) is tracked by the inventory$/
+     */
+    public function theProductIsTrackedByTheInventory(ProductInterface $product)
+    {
+        $productVariant = $this->defaultVariantResolver->getVariant($product);
+        $productVariant->setTracked(true);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^the ("[^"]+" product variant) is tracked by the inventory$/
+     */
+    public function theProductVariantIsTrackedByTheInventory(ProductVariantInterface $productVariant)
+    {
+        $productVariant->setTracked(true);
+
+        $this->objectManager->flush();
+    }
+
     /**
      * @param string $type
      * @param string $name
