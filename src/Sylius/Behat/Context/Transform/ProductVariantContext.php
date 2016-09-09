@@ -61,6 +61,7 @@ final class ProductVariantContext implements Context
 
     /**
      * @Transform /^"([^"]+)" product variant$/
+     * @Transform /^"([^"]+)" variant$/
      */
     public function getProductVariantByName($name)
     {

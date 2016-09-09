@@ -319,6 +319,28 @@ final class ManagingProductVariantsContext implements Context
     }
 
     /**
+     * @Then /^I should see that the ("([^"]+)" variant) is not tracked$/
+     */
+    public function iShouldSeeThatIsNotTracked(ProductVariantInterface $productVariant)
+    {
+        Assert::true(
+            $this->indexPage->isSingleResourceOnPage(['name' => $productVariant->getName(), 'inventory' => 'Not tracked']),
+            sprintf('This "%s" variant should have label not tracked, but it does not have', $productVariant->getName())
+        );
+    }
+
+    /**
+     * @Then /^I should see that the ("[^"]+" variant) has zero on hand quantity$/
+     */
+    public function iShouldSeeThatTheVariantHasZeroOnHandQuantity(ProductVariantInterface $productVariant)
+    {
+        Assert::true(
+            $this->indexPage->isSingleResourceOnPage(['name' => $productVariant->getName(), 'inventory' => '0 Available on hand']),
+            sprintf('This "%s" variant should have 0 on hand quantity, but it does not.', $productVariant->getName())
+        );
+    }
+
+    /**
      * @param string $element
      * @param $message
      */
