@@ -364,7 +364,7 @@ final class ManagingTaxonsContext implements Context
     }
 
     /**
-     * @When I change its image to :path for the code :code
+     * @When I change the image with the :code code to :path
      */
     public function iChangeItsImageToPathForTheCode($path, $code)
     {

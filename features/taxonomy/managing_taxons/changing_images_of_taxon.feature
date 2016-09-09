@@ -13,7 +13,7 @@ Feature: Changing images of an existing taxon
     @ui @javascript
     Scenario: Changing a single image of a taxon
         Given I want to modify the "T-Shirts" taxon
-        When I change its image to "t-shirts.jpg" for the code "banner"
+        When I change the image with the "banner" code to "t-shirts.jpg"
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this taxon should have an image with a code "banner"
