@@ -499,6 +499,14 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @When I want to complete checkout
+     */
+    public function iWantToCompleteCheckout()
+    {
+        $this->completePage->tryToOpen();
+    }
+
+    /**
      * @Given I have confirmed my order
      * @When I confirm my order
      */
@@ -1050,6 +1058,17 @@ final class CheckoutContext implements Context
         Assert::false(
             $this->completePage->hasProductOutOfStockValidationMessage($product),
             sprintf('I should see validation message for %s product', $product->getName())
+        );
+    }
+
+    /**
+     * @Then I should be on the checkout addressing step
+     */
+    public function iShouldBeOnTheCheckoutAddressingStep()
+    {
+        Assert::true(
+            $this->addressPage->isOpen(),
+            'Checkout addressing page should be opened, but it is not.'
         );
     }
 

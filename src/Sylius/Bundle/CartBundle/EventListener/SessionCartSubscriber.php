@@ -76,7 +76,9 @@ final class SessionCartSubscriber implements EventSubscriberInterface
         }
 
         if (null !== $cart && null !== $cart->getId() && null !== $cart->getChannel()) {
-            $request->getSession()->set(
+            $session = $request->getSession();
+
+            $session->set(
                 sprintf('%s.%s', $this->sessionKeyName, $cart->getChannel()->getCode()),
                 $cart->getId()
             );
