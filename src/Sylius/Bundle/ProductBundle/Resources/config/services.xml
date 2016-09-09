@@ -19,9 +19,6 @@
     <parameters>
         <parameter key="sylius.set_builder.cartesian.class">Sylius\Component\Variation\SetBuilder\CartesianSetBuilder</parameter>
 
-        <!-- Should be deleted after old backend deletion -->
-        <parameter key="sylius.form.type.product_legacy.class">Sylius\Bundle\ProductBundle\Form\Type\LegacyProductType</parameter>
-
         <parameter key="sylius.validator.product.unique.class">Sylius\Bundle\ProductBundle\Validator\ProductUniqueValidator</parameter>
 
         <parameter key="sylius.form.listener.product_variant_generator.class">Sylius\Bundle\ProductBundle\Form\EventSubscriber\GenerateProductVariantsSubscriber</parameter>
@@ -33,15 +30,6 @@
         <service id="sylius.validator.product.unique" class="%sylius.validator.product.unique.class%">
             <argument type="service" id="sylius.repository.product" />
             <tag name="validator.constraint_validator" alias="sylius.validator.product.unique" />
-        </service>
-
-        <!-- Should be deleted after old backend deletion -->
-        <service id="sylius.form.type.product_legacy" class="%sylius.form.type.product_legacy.class%">
-            <argument>%sylius.model.product.class%</argument>
-            <argument type="collection">
-                <argument>%sylius.validation_groups.product%</argument>
-            </argument>
-            <tag name="form.type" alias="sylius_product_legacy" />
         </service>
 
         <service id="sylius.form.listener.product_variant_generator" class="%sylius.form.listener.product_variant_generator.class%">

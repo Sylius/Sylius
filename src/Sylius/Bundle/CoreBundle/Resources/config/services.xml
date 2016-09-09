@@ -115,9 +115,6 @@
         <parameter key="sylius.authorization_checker.toggleable.class">Sylius\Bundle\CoreBundle\Authorization\ToggleableAuthorizationChecker</parameter>
         <parameter key="sylius.based_on_id_invoice_number_generator.class" >Sylius\Component\Core\Payment\IdBasedInvoiceNumberGenerator</parameter>
 
-        <!-- Should be deleted after old backend deletion -->
-        <parameter key="sylius.form.type.product_legacy.class">Sylius\Bundle\CoreBundle\Form\Type\LegacyProductType</parameter>
-
         <parameter key="sylius.generator.product_variant.class">Sylius\Bundle\CoreBundle\Generator\ProductVariantGenerator</parameter>
 
         <parameter key="sylius.inventory.on_hand_quantity_updater.class">Sylius\Component\Core\Inventory\Updater\OnHandQuantityUpdater</parameter>
