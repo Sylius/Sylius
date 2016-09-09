@@ -112,18 +112,18 @@ final class StickerProductFixture extends AbstractFixture
         ]]]);
 
         $this->productAttributeFixture->load(['custom' => [
-            ['name' => 'Sticker paper', 'code' => 'STICKER-PAPER', 'type' => TextAttributeType::TYPE],
-            ['name' => 'Sticker resolution', 'code' => 'STICKER-RESOLUTION', 'type' => TextAttributeType::TYPE],
+            ['name' => 'Sticker paper', 'code' => 'sticker_paper', 'type' => TextAttributeType::TYPE],
+            ['name' => 'Sticker resolution', 'code' => 'sticker_resolution', 'type' => TextAttributeType::TYPE],
         ]]);
 
         $this->productOptionFixture->load(['custom' => [
             [
-                'name' => 'Sticker SIZE',
-                'code' => 'STICKER-SIZE',
+                'name' => 'Sticker size',
+                'code' => 'sticker_size',
                 'values' => [
-                    'STICKER-SIZE-3' => '3"',
-                    'STICKER-SIZE-5' => '5"',
-                    'STICKER-SIZE-7' => '7"',
+                    'sticker_size-3' => '3"',
+                    'sticker_size_5' => '5"',
+                    'sticker_size_7' => '7"',
                 ],
             ],
         ]]);
@@ -136,8 +136,8 @@ final class StickerProductFixture extends AbstractFixture
                 'main_taxon' => 'stickers',
                 'taxons' => ['stickers'],
                 'product_attributes' => [
-                    'STICKER-PAPER' => sprintf('Paper from tree %s', $this->faker->randomElement(['Wung', 'Tanajno', 'Lemon-San', 'Me-Gusta'])),
-                    'STICKER-RESOLUTION' => $this->faker->randomElement(['JKM XD', '476DPI', 'FULL HD', '200DPI']),
+                    'sticker_paper' => sprintf('Paper from tree %s', $this->faker->randomElement(['Wung', 'Tanajno', 'Lemon-San', 'Me-Gusta'])),
+                    'sticker_resolution' => $this->faker->randomElement(['JKM XD', '476DPI', 'FULL HD', '200DPI']),
                 ],
                 'images' => [sprintf('%s/../Resources/fixtures/%s', __DIR__, 'stickers.jpg')],
             ];
