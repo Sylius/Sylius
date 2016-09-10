@@ -69,5 +69,15 @@
             <argument type="service" id="sylius.promotion_coupon_generator.percentage_policy" />
             <tag name="validator.constraint_validator" alias="sylius_coupon_generation_amount_validator" />
         </service>
+
+
+        <service id="sylius.form.type.promotion_action.filter" class="Sylius\Bundle\PromotionBundle\Form\Type\Filter\ActionFiltersType">
+            <tag name="form.type" alias="sylius_promotion_action_filter" />
+        </service>
+
+        <service id="sylius.form.type.promotion_action.filter.price_range" class="Sylius\Bundle\PromotionBundle\Form\Type\Filter\PriceRangeType">
+            <tag name="form.type" alias="sylius_promotion_action_filter_price_range" />
+        </service>
+
     </services>
 </container>
