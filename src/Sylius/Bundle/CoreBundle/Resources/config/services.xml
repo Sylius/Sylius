@@ -281,6 +281,7 @@
         <service id="sylius.shipping_methods_resolver.zones_and_channel_based" class="%sylius.shipping_methods_resolver.zones_and_channel_based.class%">
             <argument type="service" id="sylius.repository.shipping_method" />
             <argument type="service" id="sylius.zone_matcher" />
+            <argument type="service" id="sylius.shipping_eligibility_checker" />
             <tag name="sylius.shipping_method_resolver" type="zones_and_channel_based" label="sylius.shipping_methods_resolver.zones_and_channel_based" priority="1" />
         </service>
         <service id="sylius.payment_methods_resolver.channel_based" class="%sylius.payment_methods_resolver.channel_based.class%">
