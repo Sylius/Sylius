@@ -16,6 +16,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Range;
 use Symfony\Component\Validator\Constraints\Type;
+use Sylius\Bundle\PromotionBundle\Form\Type\Filter\ActionFiltersType;
 
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
@@ -42,6 +43,7 @@ class PercentageDiscountConfigurationType extends AbstractType
                     ]),
                 ],
             ])
+            ->add('filters', ActionFiltersType::class)
         ;
     }
 
