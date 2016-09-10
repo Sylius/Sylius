@@ -52,7 +52,7 @@ security:
                 use_forward: false
                 use_referer: true
             remember_me:
-                key: %secret%
+                secret: %secret%
                 name: APP_REMEMBER_ME
                 lifetime: 31536000
                 always_remember_me: true
