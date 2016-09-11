@@ -21,7 +21,7 @@ Feature: Shipping an order
         When specify its tracking code as "#00044"
         And I ship this order
         Then I should be notified that the order has been successfully shipped
-        And an email with shipment's details of order "#00000666" should be sent to "lucy@teamlucifer.com"
+        And an email with shipment's details of this order should be sent to "lucy@teamlucifer.com"
         And it should have shipment in state shipped
 
     @ui

@@ -81,7 +81,7 @@ final class EmailContext implements Context
     }
 
     /**
-     * @Then an email with shipment's details of order :order should be sent to :recipient
+     * @Then /^an email with shipment's details of (this order) should be sent to "([^"]+)"$/
      */
     public function anEmailWithShipmentDetailsOfOrderShouldBeSentTo(OrderInterface $order, $recipient)
     {
