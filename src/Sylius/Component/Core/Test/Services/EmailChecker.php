@@ -19,7 +19,7 @@ use Webmozart\Assert\Assert;
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  * @author Jan Góralski <jan.goralski@lakion.com>
  */
-class EmailChecker implements EmailCheckerInterface
+final class EmailChecker implements EmailCheckerInterface
 {
     /**
      * @var string
@@ -39,25 +39,31 @@ class EmailChecker implements EmailCheckerInterface
      */
     public function hasRecipient($recipient)
     {
+        $this->assertRecipientIsValid($recipient);
+
         $messages = $this->getMessages($this->spoolDirectory);
         foreach ($messages as $message) {
-            if (array_key_exists($recipient, $message->getTo())) {
-                return true;
+            if (!$this->isMessageTo($message, $recipient)) {
+                return false;
             }
         }
 
-        return false;
+        return true;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function hasMessage($message)
+    public function hasMessageTo($message, $recipient)
     {
+        $this->assertRecipientIsValid($recipient);
+
         $messages = $this->getMessages($this->spoolDirectory);
         foreach ($messages as $sentMessage) {
-            if (false !== strpos($sentMessage->getBody(), $message)) {
-                return true;
+            if ($this->isMessageTo($sentMessage, $recipient)) {
+                if (false !== strpos($sentMessage->getBody(), $message)) {
+                    return true;
+                }
             }
         }
 
@@ -67,9 +73,20 @@ class EmailChecker implements EmailCheckerInterface
     /**
      * {@inheritdoc}
      */
-    public function getMessagesCount()
+    public function countMessagesTo($recipient)
     {
-        return count($this->getMessages($this->spoolDirectory));
+        $this->assertRecipientIsValid($recipient);
+
+        $messagesCount = 0;
+
+        $messages = $this->getMessages($this->spoolDirectory);
+        foreach ($messages as $message) {
+            if ($this->isMessageTo($message, $recipient)) {
+                ++$messagesCount;
+            }
+        }
+
+        return $messagesCount;
     }
 
     /**
@@ -78,6 +95,33 @@ class EmailChecker implements EmailCheckerInterface
     public function getSpoolDirectory()
     {
         return $this->spoolDirectory;
+    }
+
+    /**
+     * @param \Swift_Message $message
+     * @param string $recipient
+     *
+     * @return bool
+     */
+    private function isMessageTo($message, $recipient)
+    {
+        return array_key_exists($recipient, $message->getTo());
+    }
+
+    /**
+     * @param string $recipient
+     *
+     * @throws /InvalidArgumentException
+     */
+    private function assertRecipientIsValid($recipient)
+    {
+        Assert::notEmpty($recipient, 'The recipient cannot be empty.');
+        Assert::string($recipient, sprintf('The recipient must be a string, %s given.', gettype($recipient)));
+        Assert::notEq(
+            false,
+            filter_var($recipient, FILTER_VALIDATE_EMAIL),
+            'Given recipient is not a valid email address.'
+        );
     }
 
     /**
