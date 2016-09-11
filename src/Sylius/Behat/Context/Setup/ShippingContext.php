@@ -80,7 +80,7 @@ final class ShippingContext implements Context
      */
     public function storeShipsEverythingForFree(ZoneInterface $zone = null)
     {
-        $this->createShippingMethod('Free', $zone);
+        $this->createShippingMethod('Free', null, $zone);
     }
 
     /**
@@ -89,7 +89,7 @@ final class ShippingContext implements Context
     public function theStoreShipsEverywhereForFree()
     {
         foreach ($this->zoneRepository->findAll() as $zone) {
-            $this->createShippingMethod('Free', $zone);
+            $this->createShippingMethod('Free', null, $zone);
         }
     }
 
