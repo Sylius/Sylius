@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Cart;
+namespace Sylius\Component\Order;
 
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>

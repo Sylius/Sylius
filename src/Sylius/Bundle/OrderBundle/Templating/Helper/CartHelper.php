@@ -29,7 +29,7 @@ class CartHelper extends Helper
     /**
      * @var FactoryInterface
      */
-    protected $cartItemFactory;
+    protected $orderItemFactory;
 
     /**
      * @var FormFactoryInterface
@@ -43,18 +43,18 @@ class CartHelper extends Helper
 
     /**
      * @param CartContextInterface $cartContext
-     * @param FactoryInterface $cartItemFactory
+     * @param FactoryInterface $orderItemFactory
      * @param FormFactoryInterface $formFactory
      * @param OrderItemQuantityModifierInterface $orderItemQuantityModifier
      */
     public function __construct(
         CartContextInterface $cartContext,
-        FactoryInterface $cartItemFactory,
+        FactoryInterface $orderItemFactory,
         FormFactoryInterface $formFactory,
         OrderItemQuantityModifierInterface $orderItemQuantityModifier
     ) {
         $this->cartContext = $cartContext;
-        $this->cartItemFactory = $cartItemFactory;
+        $this->orderItemFactory = $orderItemFactory;
         $this->formFactory = $formFactory;
         $this->orderItemQuantityModifier = $orderItemQuantityModifier;
     }
@@ -74,7 +74,7 @@ class CartHelper extends Helper
      */
     public function getItemFormView(array $options = [])
     {
-        $cartItem = $this->cartItemFactory->createNew();
+        $cartItem = $this->orderItemFactory->createNew();
         $this->orderItemQuantityModifier->modify($cartItem, 1);
 
         $form = $this->formFactory->create('sylius_cart_item', $cartItem, $options);

@@ -12,13 +12,14 @@
 namespace Sylius\Bundle\CoreBundle\Doctrine\ORM;
 
 use Doctrine\ORM\QueryBuilder;
-use Sylius\Bundle\CoreBundle\Doctrine\ORM\CartRepository;
+use Sylius\Bundle\OrderBundle\Doctrine\ORM\OrderRepository as BaseOrderRepository;
+use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CouponInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
 
-class OrderRepository extends CartRepository implements OrderRepositoryInterface
+class OrderRepository extends BaseOrderRepository implements OrderRepositoryInterface
 {
     /**
      * {@inheritdoc}
@@ -376,6 +377,23 @@ class OrderRepository extends CartRepository implements OrderRepositoryInterface
             ->getOneOrNullResult()
         ;
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findCartByIdAndChannel($id, ChannelInterface $channel)
+    {
+        return $this->createQueryBuilder('o')
+            ->where('o.id = :id')
+            ->andWhere('o.state = :state')
+            ->andWhere('o.channel = :channel')
+            ->setParameter('id', $id)
+            ->setParameter('state', OrderInterface::STATE_CART)
+            ->setParameter('channel', $channel)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+}
 
     /**
      * @param \DateTime $from

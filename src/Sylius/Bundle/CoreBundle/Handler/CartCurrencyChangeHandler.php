@@ -12,14 +12,14 @@
 namespace Sylius\Bundle\CoreBundle\Handler;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Sylius\Component\Cart\Context\CartContextInterface;
-use Sylius\Component\Cart\Context\CartNotFoundException;
-use Sylius\Component\Cart\Event\CartEvent;
-use Sylius\Component\Cart\SyliusCartEvents;
 use Sylius\Component\Core\Currency\Handler\CurrencyChangeHandlerInterface;
 use Sylius\Component\Core\Exception\HandleException;
 use Sylius\Component\Core\Model\OrderInterface;
 use Sylius\Component\Core\Updater\OrderUpdaterInterface;
+use Sylius\Component\Order\Context\CartContextInterface;
+use Sylius\Component\Order\Context\CartNotFoundException;
+use Sylius\Component\Order\Event\CartEvent;
+use Sylius\Component\Order\SyliusCartEvents;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 /**

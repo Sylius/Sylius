@@ -11,17 +11,14 @@
 
 namespace Sylius\Bundle\CoreBundle\Form\Type;
 
-use Sylius\Bundle\CartBundle\Form\Type\CartType as BaseCartType;
-use Sylius\Component\Resource\Factory\FactoryInterface;
+use Sylius\Bundle\OrderBundle\Form\Type\OrderType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormEvent;
-use Symfony\Component\Form\FormEvents;
 
 /**
  * @author Julien Janvier <j.janvier@gmail.com>
  * @author Mateusz Zalewski <mateusz.zalewski@lakion.com>
  */
-class CartType extends BaseCartType
+class CartType extends OrderType
 {
     /**
      * {@inheritdoc}

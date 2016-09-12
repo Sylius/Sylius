@@ -19,8 +19,6 @@ use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * Order item type.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class OrderItemType extends BaseOrderItemType
@@ -32,13 +30,21 @@ class OrderItemType extends BaseOrderItemType
     {
         parent::buildForm($builder, $options);
 
+        $builder->remove('unitPrice');
+
         $builder
             ->addEventListener(FormEvents::PRE_SUBMIT, function (FormEvent $event) use ($options) {
                 $data = $event->getData();
                 if (isset($data['variant'])) {
-                    $event->getForm()->add('variant', 'entity_hidden', [
-                        'data_class' => $options['variant_data_class'],
-                    ]);
+                    $form = $event->getForm();
+                    $form
+                        ->add('variant', 'entity_hidden', [
+                            'data_class' => $options['variant_data_class'],
+                        ])
+                        ->add('unitPrice', 'integer', [
+                            'data' => $data['variant']->getPrice()
+                        ])
+                    ;
                 }
             })
         ;

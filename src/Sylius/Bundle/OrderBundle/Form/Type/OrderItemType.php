@@ -45,10 +45,10 @@ class OrderItemType extends AbstractResourceType
         $builder
             ->add('quantity', 'integer', [
                 'attr' => ['min' => 1],
-                'label' => 'sylius.form.order_item.quantity',
+                'label' => 'sylius.ui.quantity',
             ])
             ->add('unitPrice', 'sylius_money', [
-                'label' => 'sylius.form.order_item.unit_price',
+                'label' => 'sylius.ui.unit_price',
             ])
             ->setDataMapper($this->orderItemQuantityDataMapper)
         ;

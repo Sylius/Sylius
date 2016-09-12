@@ -49,4 +49,9 @@ interface OrderRepositoryInterface extends RepositoryInterface
      * @return OrderInterface|null
      */
     public function findOneByNumber($orderNumber);
+
+    /**
+     * @return null|OrderInterface
+     */
+    public function findCartById($id);
 }

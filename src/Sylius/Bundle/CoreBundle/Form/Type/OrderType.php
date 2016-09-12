@@ -32,6 +32,11 @@ class OrderType extends BaseOrderType
         $builder
             ->add('shippingAddress', 'sylius_address')
             ->add('billingAddress', 'sylius_address')
+            ->add('promotionCoupon', 'sylius_promotion_coupon_to_code', [
+                'by_reference' => false,
+                'label' => 'sylius.form.cart.coupon',
+                'required' => false,
+            ])
         ;
     }
 }

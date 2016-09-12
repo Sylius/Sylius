@@ -25,18 +25,18 @@ You're interacting with them like you usually do with own entities in your proje
     {
         // ObjectManager which is capable of managing the Cart resource.
         // For *doctrine/orm* driver it will be EntityManager.
-        $this->get('sylius.manager.cart');
+        $this->get('sylius.manager.order');
 
         // ObjectRepository for the Cart resource, it extends the base EntityRepository.
         // You can use it like usual entity repository in project.
-        $this->get('sylius.repository.cart');
+        $this->get('sylius.repository.order');
 
         // Same pair for CartItem resource.
         $this->get('sylius.manager.cart_item');
         $this->get('sylius.repository.cart_item');
 
         // Those repositories have some handy default methods, for example...
-        $item = $this->get('sylius.repository.cart')->createNew();
+        $item = $this->get('sylius.repository.order')->createNew();
     }
 
 Provider

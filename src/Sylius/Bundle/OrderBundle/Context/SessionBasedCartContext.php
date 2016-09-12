@@ -13,7 +13,7 @@ namespace Sylius\Bundle\OrderBundle\Context;
 
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Context\CartNotFoundException;
-use Sylius\Component\Order\Repository\CartRepositoryInterface;
+use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
@@ -32,20 +32,20 @@ final class SessionBasedCartContext implements CartContextInterface
     private $sessionKeyName;
 
     /**
-     * @var CartRepositoryInterface
+     * @var OrderRepositoryInterface
      */
-    private $cartRepository;
+    private $orderRepository;
 
     /**
      * @param SessionInterface $session
      * @param string $sessionKeyName
-     * @param CartRepositoryInterface $cartRepository
+     * @param OrderRepositoryInterface $orderRepository
      */
-    public function __construct(SessionInterface $session, $sessionKeyName, CartRepositoryInterface $cartRepository)
+    public function __construct(SessionInterface $session, $sessionKeyName, OrderRepositoryInterface $orderRepository)
     {
         $this->session = $session;
         $this->sessionKeyName = $sessionKeyName;
-        $this->cartRepository = $cartRepository;
+        $this->orderRepository = $orderRepository;
     }
 
     /**
@@ -57,7 +57,7 @@ final class SessionBasedCartContext implements CartContextInterface
             throw new CartNotFoundException('Sylius was not able to find the cart in session');
         }
 
-        $cart = $this->cartRepository->findCartById($this->session->get($this->sessionKeyName));
+        $cart = $this->orderRepository->findCartById($this->session->get($this->sessionKeyName));
 
         if (null === $cart) {
             $this->session->remove($this->sessionKeyName);

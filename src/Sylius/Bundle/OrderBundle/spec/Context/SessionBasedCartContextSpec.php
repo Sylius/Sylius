@@ -16,7 +16,7 @@ use Sylius\Bundle\OrderBundle\Context\SessionBasedCartContext;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Context\CartNotFoundException;
 use Sylius\Component\Order\Model\OrderInterface;
-use Sylius\Component\Order\Repository\CartRepositoryInterface;
+use Sylius\Component\Order\Repository\OrderRepositoryInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
@@ -24,9 +24,9 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
  */
 final class SessionBasedCartContextSpec extends ObjectBehavior
 {
-    function let(SessionInterface $session, CartRepositoryInterface $cartRepository)
+    function let(SessionInterface $session, OrderRepositoryInterface $orderRepository)
     {
-        $this->beConstructedWith($session, 'session_key_name', $cartRepository);
+        $this->beConstructedWith($session, 'session_key_name', $orderRepository);
     }
 
     function it_is_initializable()
@@ -41,12 +41,12 @@ final class SessionBasedCartContextSpec extends ObjectBehavior
 
     function it_returns_cart_based_on_id_stored_in_session(
         SessionInterface $session,
-        CartRepositoryInterface $cartRepository,
+        OrderRepositoryInterface $orderRepository,
         OrderInterface $cart
     )  {
         $session->has('session_key_name')->willReturn(true);
         $session->get('session_key_name')->willReturn(12345);
-        $cartRepository->findCartById(12345)->willReturn($cart);
+        $orderRepository->findCartById(12345)->willReturn($cart);
 
         $this->getCart()->shouldReturn($cart);
     }
@@ -60,11 +60,11 @@ final class SessionBasedCartContextSpec extends ObjectBehavior
 
     function it_throws_cart_not_found_exception_and_removes_id_from_session_when_cart_is_not_found(
         SessionInterface $session,
-        CartRepositoryInterface $cartRepository
+        OrderRepositoryInterface $orderRepository
     ) {
         $session->has('session_key_name')->willReturn(true);
         $session->get('session_key_name')->willReturn(12345);
-        $cartRepository->findCartById(12345)->willReturn(null);
+        $orderRepository->findCartById(12345)->willReturn(null);
 
         $session->remove('session_key_name')->shouldBeCalled();
 

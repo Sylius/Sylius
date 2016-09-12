@@ -28,7 +28,7 @@
         </service>
         <service id="sylius.templating.helper.cart" class="%sylius.templating.helper.cart.class%" lazy="true">
             <argument type="service" id="sylius.context.cart" />
-            <argument type="service" id="sylius.factory.cart_item" />
+            <argument type="service" id="sylius.factory.order_item" />
             <argument type="service" id="form.factory" />
             <argument type="service" id="sylius.order_item_quantity_modifier" />
             <tag name="templating.helper" alias="sylius_cart" />
