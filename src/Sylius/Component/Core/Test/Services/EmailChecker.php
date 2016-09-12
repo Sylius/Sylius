@@ -43,12 +43,12 @@ final class EmailChecker implements EmailCheckerInterface
 
         $messages = $this->getMessages($this->spoolDirectory);
         foreach ($messages as $message) {
-            if (!$this->isMessageTo($message, $recipient)) {
-                return false;
+            if ($this->isMessageTo($message, $recipient)) {
+                return true;
             }
         }
 
-        return true;
+        return false;
     }
 
     /**
