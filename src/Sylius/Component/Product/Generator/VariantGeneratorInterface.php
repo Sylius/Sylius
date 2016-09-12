@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Variation\Generator;
+namespace Sylius\Component\Product\Generator;
 
-use Sylius\Component\Variation\Model\VariableInterface;
+use Sylius\Component\Product\Model\ProductInterface;
 
 /**
  * Interface for variant generating service.
@@ -26,7 +26,7 @@ interface VariantGeneratorInterface
     /**
      * Generate all possible variants if they don't exist currently.
      *
-     * @param VariableInterface $variable
+     * @param ProductInterface $variable
      */
-    public function generate(VariableInterface $variable);
+    public function generate(ProductInterface $variable);
 }

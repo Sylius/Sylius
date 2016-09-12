@@ -15,9 +15,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\VariationBundle\Validator\Constraint\VariantCombination;
-use Sylius\Component\Variation\Model\OptionValueInterface;
-use Sylius\Component\Variation\Model\VariableInterface;
-use Sylius\Component\Variation\Model\VariantInterface;
+use Sylius\Component\Product\Model\OptionValueInterface;
+use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\Product\Model\VariantInterface;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
@@ -40,13 +40,13 @@ final class VariantCombinationValidatorSpec extends ObjectBehavior
 
     function it_should_not_add_violation_if_variable_dont_have_options(
         VariantInterface $variant,
-        VariableInterface $variable
+        ProductInterface $variable
     ) {
         $constraint = new VariantCombination([
             'message' => 'Variant with given options already exists',
         ]);
 
-        $variant->getObject()->willReturn($variable);
+        $variant->getProduct()->willReturn($variable);
 
         $variable->hasVariants()->willReturn(false);
         $variable->hasOptions()->willReturn(true);
@@ -56,13 +56,13 @@ final class VariantCombinationValidatorSpec extends ObjectBehavior
 
     function it_should_not_add_violation_if_variable_dont_have_variants(
         VariantInterface $variant,
-        VariableInterface $variable
+        ProductInterface $variable
     ) {
         $constraint = new VariantCombination([
             'message' => 'Variant with given options already exists',
         ]);
 
-        $variant->getObject()->willReturn($variable);
+        $variant->getProduct()->willReturn($variable);
 
         $variable->hasVariants()->willReturn(true);
         $variable->hasOptions()->willReturn(false);
@@ -73,7 +73,7 @@ final class VariantCombinationValidatorSpec extends ObjectBehavior
     function it_should_add_violation_if_variant_with_given_same_options_already_exists(
         VariantInterface $variant,
         VariantInterface $existingVariant,
-        VariableInterface $variable,
+        ProductInterface $variable,
         OptionValueInterface $option,
         $context
     ) {
@@ -81,7 +81,7 @@ final class VariantCombinationValidatorSpec extends ObjectBehavior
             'message' => 'Variant with given options already exists',
         ]);
 
-        $variant->getObject()->willReturn($variable);
+        $variant->getProduct()->willReturn($variable);
 
         $variant->getOptions()->willReturn(new ArrayCollection([$option->getWrappedObject()]));
 

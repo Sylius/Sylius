@@ -13,15 +13,15 @@ namespace spec\Sylius\Bundle\VariationBundle\Form\DataTransformer;
 
 use Doctrine\Common\Collections\Collection;
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Variation\Model\OptionValueInterface;
-use Sylius\Component\Variation\Model\VariableInterface;
-use Sylius\Component\Variation\Model\VariantInterface;
+use Sylius\Component\Product\Model\OptionValueInterface;
+use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\Product\Model\VariantInterface;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
 final class VariantToCombinationTransformerSpec extends ObjectBehavior
 {
-    function let(VariableInterface $variable)
+    function let(ProductInterface $variable)
     {
         $this->beConstructedWith($variable);
     }
@@ -71,7 +71,7 @@ final class VariantToCombinationTransformerSpec extends ObjectBehavior
     }
 
     function it_should_reverse_transform_variable_without_variants_into_null(
-        VariableInterface $variable,
+        ProductInterface $variable,
         OptionValueInterface $optionValue
     ) {
         $variable->getVariants()->willReturn([]);
@@ -80,7 +80,7 @@ final class VariantToCombinationTransformerSpec extends ObjectBehavior
     }
 
     function it_should_reverse_transform_variable_with_variants_if_options_match(
-        VariableInterface $variable,
+        ProductInterface $variable,
         VariantInterface $variant,
         OptionValueInterface $optionValue
     ) {
@@ -92,7 +92,7 @@ final class VariantToCombinationTransformerSpec extends ObjectBehavior
     }
 
     function it_should_not_reverse_transform_variable_with_variants_if_options_not_match(
-        VariableInterface $variable,
+        ProductInterface $variable,
         VariantInterface $variant,
         OptionValueInterface $optionValue
     ) {
@@ -104,7 +104,7 @@ final class VariantToCombinationTransformerSpec extends ObjectBehavior
     }
 
     function it_should_not_reverse_transform_variable_with_variants_if_options_are_missing(
-        VariableInterface $variable,
+        ProductInterface $variable,
         VariantInterface $variant
     ) {
         $variable->getVariants()->willReturn([$variant]);

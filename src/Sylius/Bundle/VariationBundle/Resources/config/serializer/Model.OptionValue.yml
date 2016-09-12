@@ -1,4 +1,4 @@
-Sylius\Component\Variation\Model\OptionValue:
+Sylius\Component\Product\Model\OptionValue:
     exclusion_policy: ALL
     xml_root_name: option-value
     properties:

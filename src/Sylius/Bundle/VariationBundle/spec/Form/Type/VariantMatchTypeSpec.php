@@ -14,8 +14,8 @@ namespace spec\Sylius\Bundle\VariationBundle\Form\Type;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Bundle\VariationBundle\Form\DataTransformer\VariantToCombinationTransformer;
-use Sylius\Component\Variation\Model\OptionInterface;
-use Sylius\Component\Variation\Model\VariableInterface;
+use Sylius\Component\Product\Model\OptionInterface;
+use Sylius\Component\Product\Model\ProductInterface;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\Form\Test\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -37,7 +37,7 @@ final class VariantMatchTypeSpec extends ObjectBehavior
         $this->shouldImplement(FormTypeInterface::class);
     }
 
-    function it_builds_a_form(FormBuilderInterface $builder, VariableInterface $variable, OptionInterface $option)
+    function it_builds_a_form(FormBuilderInterface $builder, ProductInterface $variable, OptionInterface $option)
     {
         $variable->getOptions()->shouldBeCalled()->willReturn([$option]);
         $option->getName()->shouldBeCalled()->willReturn('option_name');
@@ -62,7 +62,7 @@ final class VariantMatchTypeSpec extends ObjectBehavior
             'variable',
         ])->shouldBeCalled()->willReturn($resolver);
 
-        $resolver->setAllowedTypes('variable', VariableInterface::class)->shouldBeCalled()->willReturn($resolver);
+        $resolver->setAllowedTypes('variable', ProductInterface::class)->shouldBeCalled()->willReturn($resolver);
 
         $this->configureOptions($resolver);
     }

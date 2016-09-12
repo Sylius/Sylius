@@ -64,7 +64,7 @@ UPGRADE
 
 ### Variation and VariationBundle
 
-* Removed concept of master variant (removed ``$master`` flag from ``Sylius\Component\Variation\Model\Variant``), all usages of **master** variant has been, for now, replaced with **first** variant;
+* Removed concept of master variant (removed ``$master`` flag from ``Sylius\Component\Product\Model\Variant``), all usages of **master** variant has been, for now, replaced with **first** variant;
 * Renamed `presentation` to `name` (`VariantInterface`, `OptionValueInterface`) 
 
 ### Payment

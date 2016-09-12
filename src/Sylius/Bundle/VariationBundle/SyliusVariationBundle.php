@@ -37,6 +37,6 @@ class SyliusVariationBundle extends AbstractResourceBundle
      */
     protected function getModelNamespace()
     {
-        return 'Sylius\Component\Variation\Model';
+        return 'Sylius\Component\Product\Model';
     }
 }

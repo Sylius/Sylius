@@ -9,15 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Variation\Resolver;
+namespace spec\Sylius\Component\Product\Resolver;
 
 use Doctrine\Common\Collections\Collection;
-use Sylius\Component\Variation\Model\VariableInterface;
-use Sylius\Component\Variation\Resolver\DefaultVariantResolver;
+use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\Product\Resolver\DefaultVariantResolver;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Variation\Model\VariantInterface;
-use Sylius\Component\Variation\Resolver\VariantResolverInterface;
+use Sylius\Component\Product\Model\VariantInterface;
+use Sylius\Component\Product\Resolver\VariantResolverInterface;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
@@ -35,7 +35,7 @@ final class DefaultVariantResolverSpec extends ObjectBehavior
     }
 
     function it_returns_first_variant(
-        VariableInterface $product,
+        ProductInterface $product,
         VariantInterface $variant,
         Collection $variants
     ) {
@@ -46,7 +46,7 @@ final class DefaultVariantResolverSpec extends ObjectBehavior
         $this->getVariant($product)->shouldReturn($variant);
     }
 
-    function it_returns_null_if_first_variant_is_not_definied(VariableInterface $product, Collection $variants)
+    function it_returns_null_if_first_variant_is_not_definied(ProductInterface $product, Collection $variants)
     {
         $product->getVariants()->willReturn($variants);
         $variants->isEmpty()->willReturn(true);

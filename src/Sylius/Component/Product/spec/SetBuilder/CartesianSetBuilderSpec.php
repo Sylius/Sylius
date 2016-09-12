@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Variation\SetBuilder;
+namespace spec\Sylius\Component\Product\SetBuilder;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Component\Variation\SetBuilder\SetBuilderInterface;
+use Sylius\Component\Product\SetBuilder\SetBuilderInterface;
 
 /**
  * @author Adam Elsodaney <adam.elso@gmail.com>

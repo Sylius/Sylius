@@ -11,8 +11,8 @@
 
 namespace Sylius\Bundle\VariationBundle\Validator;
 
-use Sylius\Component\Variation\Model\VariableInterface;
-use Sylius\Component\Variation\Model\VariantInterface;
+use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\Product\Model\VariantInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
@@ -31,7 +31,7 @@ class VariantCombinationValidator extends ConstraintValidator
             throw new UnexpectedTypeException($value, VariantInterface::class);
         }
 
-        $variable = $value->getObject();
+        $variable = $value->getProduct();
         if (!$variable->hasVariants() || !$variable->hasOptions()) {
             return;
         }
@@ -43,11 +43,11 @@ class VariantCombinationValidator extends ConstraintValidator
 
     /**
      * @param VariantInterface  $variant
-     * @param VariableInterface $variable
+     * @param ProductInterface $variable
      *
      * @return bool
      */
-    private function matches(VariantInterface $variant, VariableInterface $variable)
+    private function matches(VariantInterface $variant, ProductInterface $variable)
     {
         foreach ($variable->getVariants() as $existingVariant) {
             if ($variant === $existingVariant) {

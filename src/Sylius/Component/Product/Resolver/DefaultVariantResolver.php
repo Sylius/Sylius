@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Variation\Resolver;
+namespace Sylius\Component\Product\Resolver;
 
-use Sylius\Component\Variation\Model\VariableInterface;
+use Sylius\Component\Product\Model\ProductInterface;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
@@ -21,12 +21,12 @@ final class DefaultVariantResolver implements VariantResolverInterface
     /**
      * {@inheritdoc}
      */
-    public function getVariant(VariableInterface $subject)
+    public function getVariant(ProductInterface $subject)
     {
         if ($subject->getVariants()->isEmpty()) {
             return null;
         }
-        
+
         return $subject->getVariants()->first();
     }
 }

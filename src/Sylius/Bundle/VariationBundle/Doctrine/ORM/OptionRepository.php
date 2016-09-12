@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\VariationBundle\Doctrine\ORM;
 
 use Sylius\Bundle\ResourceBundle\Doctrine\ORM\EntityRepository;
-use Sylius\Component\Variation\Repository\OptionRepositoryInterface;
+use Sylius\Component\Product\Repository\OptionRepositoryInterface;
 
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>

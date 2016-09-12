@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Variation\Generator;
+namespace Sylius\Component\Product\Generator;
 
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Variation\Model\VariableInterface;
-use Sylius\Component\Variation\Model\VariantInterface;
-use Sylius\Component\Variation\SetBuilder\SetBuilderInterface;
+use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\Product\Model\VariantInterface;
+use Sylius\Component\Product\SetBuilder\SetBuilderInterface;
 
 /**
  * Variant generator service implementation.
@@ -55,7 +55,7 @@ class VariantGenerator implements VariantGeneratorInterface
     /**
      * {@inheritdoc}
      */
-    public function generate(VariableInterface $variable)
+    public function generate(ProductInterface $variable)
     {
         if (!$variable->hasOptions()) {
             throw new \InvalidArgumentException('Cannot generate variants for an object without options.');
@@ -80,16 +80,16 @@ class VariantGenerator implements VariantGeneratorInterface
     }
 
     /**
-     * @param VariableInterface $variable
+     * @param ProductInterface $variable
      * @param array $optionMap
      * @param mixed $permutation
      *
      * @return VariantInterface
      */
-    protected function createVariant(VariableInterface $variable, array $optionMap, $permutation)
+    protected function createVariant(ProductInterface $variable, array $optionMap, $permutation)
     {
         $variant = $this->variantFactory->createNew();
-        $variant->setObject($variable);
+        $variant->setProduct($variable);
 
         if (is_array($permutation)) {
             foreach ($permutation as $id) {

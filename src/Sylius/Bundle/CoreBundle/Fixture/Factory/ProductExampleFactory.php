@@ -23,7 +23,7 @@ use Sylius\Component\Product\Model\AttributeInterface;
 use Sylius\Component\Product\Model\AttributeValueInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Sylius\Component\Variation\Generator\VariantGeneratorInterface;
+use Sylius\Component\Product\Generator\VariantGeneratorInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\OptionsResolver\Options;
 use Symfony\Component\OptionsResolver\OptionsResolver;

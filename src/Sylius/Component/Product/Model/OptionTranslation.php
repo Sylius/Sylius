@@ -11,11 +11,44 @@
 
 namespace Sylius\Component\Product\Model;
 
-use Sylius\Component\Variation\Model\OptionTranslation as BaseOptionTranslation;
+use Sylius\Component\Resource\Model\AbstractTranslation;
 
 /**
  * @author Gonzalo Vilaseca <gvilaseca@reiss.co.uk>
  */
-class OptionTranslation extends BaseOptionTranslation implements OptionTranslationInterface
+class OptionTranslation extends AbstractTranslation implements OptionTranslationInterface
 {
+    /**
+     * @var mixed
+     */
+    protected $id;
+
+    /**
+     * @var string
+     */
+    protected $name;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
 }

@@ -18,7 +18,7 @@
                   xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping"
 >
 
-    <mapped-superclass name="Sylius\Component\Variation\Model\Variant" table="sylius_variant">
+    <mapped-superclass name="Sylius\Component\Product\Model\Variant" table="sylius_variant">
         <id name="id" column="id" type="integer">
             <generator strategy="AUTO" />
         </id>

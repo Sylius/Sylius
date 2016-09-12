@@ -11,11 +11,22 @@
 
 namespace Sylius\Component\Product\Model;
 
-use Sylius\Component\Variation\Model\OptionValueTranslationInterface as BaseOptionValueTranslationInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
 
 /**
  * @author Vincenzo Provenza <vincenzo.provenza89@gmail.com>
  */
-interface OptionValueTranslationInterface extends BaseOptionValueTranslationInterface
+interface OptionValueTranslationInterface extends ResourceInterface
 {
+    /**
+     * The name displayed to user.
+     *
+     * @return string
+     */
+    public function getValue();
+
+    /**
+     * @param string $value
+     */
+    public function setValue($value);
 }

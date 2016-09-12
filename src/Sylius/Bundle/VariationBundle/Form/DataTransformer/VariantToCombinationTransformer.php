@@ -11,9 +11,9 @@
 
 namespace Sylius\Bundle\VariationBundle\Form\DataTransformer;
 
-use Sylius\Component\Variation\Model\OptionValueInterface;
-use Sylius\Component\Variation\Model\VariableInterface;
-use Sylius\Component\Variation\Model\VariantInterface;
+use Sylius\Component\Product\Model\OptionValueInterface;
+use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\Product\Model\VariantInterface;
 use Symfony\Component\Form\DataTransformerInterface;
 use Symfony\Component\Form\Exception\UnexpectedTypeException;
 
@@ -27,14 +27,14 @@ class VariantToCombinationTransformer implements DataTransformerInterface
     /**
      * Currently matching variable.
      *
-     * @var VariableInterface
+     * @var ProductInterface
      */
     protected $variable;
 
     /**
-     * @param VariableInterface $variable
+     * @param ProductInterface $variable
      */
-    public function __construct(VariableInterface $variable)
+    public function __construct(ProductInterface $variable)
     {
         $this->variable = $variable;
     }

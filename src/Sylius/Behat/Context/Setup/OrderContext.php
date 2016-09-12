@@ -37,7 +37,7 @@ use Sylius\Component\Resource\Repository\RepositoryInterface;
 use Sylius\Component\Shipping\ShipmentTransitions;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Sylius\Component\User\Model\UserInterface;
-use Sylius\Component\Variation\Resolver\VariantResolverInterface;
+use Sylius\Component\Product\Resolver\VariantResolverInterface;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>

@@ -1,5 +1,0 @@
-suites:
-    main:
-        namespace: Sylius\Component\Variation
-        psr4_prefix: Sylius\Component\Variation
-        src_path: .

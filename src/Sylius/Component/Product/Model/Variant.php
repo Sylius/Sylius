@@ -11,14 +11,42 @@
 
 namespace Sylius\Component\Product\Model;
 
-use Sylius\Component\Variation\Model\Variant as BaseVariant;
-use Sylius\Component\Variation\Model\VariantInterface as BaseVariantInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\TimestampableTrait;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class Variant extends BaseVariant implements VariantInterface
+class Variant implements VariantInterface
 {
+    use TimestampableTrait;
+
+    /**
+     * @var mixed
+     */
+    protected $id;
+
+    /**
+     * @var string
+     */
+    protected $code;
+
+    /**
+     * @var string
+     */
+    protected $name;
+
+    /**
+     * @var ProductInterface
+     */
+    protected $product;
+
+    /**
+     * @var Collection|OptionValueInterface[]
+     */
+    protected $options;
+
     /**
      * @var \DateTime
      */
@@ -31,9 +59,94 @@ class Variant extends BaseVariant implements VariantInterface
 
     public function __construct()
     {
-        parent::__construct();
+        $this->options = new ArrayCollection();
 
+        $this->createdAt = new \DateTime();
         $this->availableOn = new \DateTime();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCode()
+    {
+        return $this->code;
+    }
+
+    /**
+     * @param string $code
+     */
+    public function setCode($code)
+    {
+        $this->code = $code;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOptions()
+    {
+        return $this->options;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setOptions(Collection $options)
+    {
+        $this->options = $options;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function addOption(OptionValueInterface $option)
+    {
+        if (!$this->hasOption($option)) {
+            $this->options->add($option);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function removeOption(OptionValueInterface $option)
+    {
+        if ($this->hasOption($option)) {
+            $this->options->removeElement($option);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasOption(OptionValueInterface $option)
+    {
+        return $this->options->contains($option);
     }
 
     /**
@@ -41,7 +154,7 @@ class Variant extends BaseVariant implements VariantInterface
      */
     public function getProduct()
     {
-        return parent::getObject();
+        return $this->product;
     }
 
     /**
@@ -49,7 +162,7 @@ class Variant extends BaseVariant implements VariantInterface
      */
     public function setProduct(ProductInterface $product = null)
     {
-        return parent::setObject($product);
+        $this->product = $product;
     }
 
     /**

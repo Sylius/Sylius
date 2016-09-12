@@ -12,12 +12,12 @@
 namespace spec\Sylius\Bundle\VariationBundle\Form\ChoiceList;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Variation\Model\VariableInterface;
-use Sylius\Component\Variation\Model\VariantInterface;
+use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\Product\Model\VariantInterface;
 
 final class VariantChoiceListSpec extends ObjectBehavior
 {
-    function let(VariableInterface $variable, VariantInterface $variant)
+    function let(ProductInterface $variable, VariantInterface $variant)
     {
         $variable->getVariants()->shouldBeCalled()->willReturn([$variant]);
 

@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\ProductBundle\Form\EventSubscriber;
 
 use Sylius\Component\Product\Model\ProductInterface;
-use Sylius\Component\Variation\Resolver\VariantResolverInterface;
+use Sylius\Component\Product\Resolver\VariantResolverInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
@@ -62,11 +62,11 @@ class ProductOptionFieldSubscriber implements EventSubscriberInterface
         $disableOptions = (null !== $this->variantResolver->getVariant($product)) && (false === $product->hasVariants());
 
         $form->add(
-            'options', 
+            'options',
             'sylius_product_option_choice', [
-                'required' => false, 
-                'disabled' => $disableOptions, 
-                'multiple' => true, 
+                'required' => false,
+                'disabled' => $disableOptions,
+                'multiple' => true,
                 'label' => 'sylius.form.product.options',
             ]
         );

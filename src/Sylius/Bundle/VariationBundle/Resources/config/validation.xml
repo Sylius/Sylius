@@ -16,7 +16,7 @@
                     xsi:schemaLocation="http://symfony.com/schema/dic/constraint-mapping
                                         http://symfony.com/schema/dic/services/constraint-mapping-1.0.xsd">
 
-    <class name="Sylius\Component\Variation\Model\Variant">
+    <class name="Sylius\Component\Product\Model\Variant">
         <property name="code">
             <constraint name="NotBlank">
                 <option name="message">sylius.option.code.not_blank</option>
@@ -28,7 +28,7 @@
         </constraint>
     </class>
 
-    <class name="Sylius\Component\Variation\Model\Option">
+    <class name="Sylius\Component\Product\Model\Option">
         <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
             <option name="fields">code</option>
             <option name="message">sylius.option.code.unique</option>
@@ -53,7 +53,7 @@
         </property>
     </class>
 
-    <class name="Sylius\Component\Variation\Model\OptionTranslation">
+    <class name="Sylius\Component\Product\Model\OptionTranslation">
         <property name="name">
             <constraint name="NotBlank">
                 <option name="message">sylius.option.name.not_blank</option>
@@ -69,7 +69,7 @@
         </property>
     </class>
 
-    <class name="Sylius\Component\Variation\Model\OptionValue">
+    <class name="Sylius\Component\Product\Model\OptionValue">
         <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
             <option name="fields">code</option>
             <option name="message">sylius.option_value.code.unique</option>
@@ -86,7 +86,7 @@
         </property>
     </class>
 
-    <class name="Sylius\Component\Variation\Model\OptionValueTranslation">
+    <class name="Sylius\Component\Product\Model\OptionValueTranslation">
         <property name="value">
             <constraint name="NotBlank">
                 <option name="message">sylius.option_value.value.not_blank</option>

@@ -11,11 +11,50 @@
 
 namespace Sylius\Component\Product\Model;
 
-use Sylius\Component\Variation\Model\OptionValueInterface as BaseOptionValueInterface;
+use Sylius\Component\Resource\Model\CodeAwareInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Component\Resource\Model\TranslatableInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface OptionValueInterface extends BaseOptionValueInterface
+interface OptionValueInterface extends ResourceInterface, CodeAwareInterface, TranslatableInterface
 {
+    /**
+     * @return OptionInterface
+     */
+    public function getOption();
+
+    /**
+     * @param OptionInterface $option
+     */
+    public function setOption(OptionInterface $option = null);
+
+    /**
+     * Get internal value.
+     *
+     * @return string
+     */
+    public function getValue();
+
+    /**
+     * Set internal value.
+     *
+     * @param string $value
+     */
+    public function setValue($value);
+
+    /**
+     * Proxy method to access the presentation of real option object.
+     *
+     * @return string The code of object
+     */
+    public function getOptionCode();
+
+    /**
+     * Proxy method to access the name of real option object.
+     *
+     * @return string The name of object
+     */
+    public function getName();
 }

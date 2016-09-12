@@ -66,7 +66,7 @@ class BuildVariantFormSubscriber implements EventSubscriberInterface
         }
 
         // Get related variable object.
-        $variable = $variant->getObject();
+        $variable = $variant->getProduct();
 
         // If the object has options, lets add this configuration field.
         if ($variable->hasOptions()) {

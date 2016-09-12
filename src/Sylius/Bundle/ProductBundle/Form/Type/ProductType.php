@@ -15,7 +15,7 @@ use Sylius\Bundle\ProductBundle\Form\EventSubscriber\ProductOptionFieldSubscribe
 use Sylius\Bundle\ProductBundle\Form\EventSubscriber\SimpleProductSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\EventSubscriber\AddCodeFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Component\Variation\Resolver\VariantResolverInterface;
+use Sylius\Component\Product\Resolver\VariantResolverInterface;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -40,7 +40,7 @@ class ProductType extends AbstractResourceType
 
         $this->variantResolver = $variantResolver;
     }
-    
+
     /**
      * {@inheritdoc}
      */

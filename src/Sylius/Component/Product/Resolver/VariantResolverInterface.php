@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Variation\Resolver;
+namespace Sylius\Component\Product\Resolver;
 
-use Sylius\Component\Variation\Model\VariableInterface;
-use Sylius\Component\Variation\Model\VariantInterface;
+use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\Product\Model\VariantInterface;
 
 /**
  * @author Anna Walasek <anna.walasek@lakion.com>
@@ -20,9 +20,9 @@ use Sylius\Component\Variation\Model\VariantInterface;
 interface VariantResolverInterface
 {
     /**
-     * @param VariableInterface $subject
+     * @param ProductInterface $subject
      *
      * @return VariantInterface
      */
-    public function getVariant(VariableInterface $subject);
+    public function getVariant(ProductInterface $subject);
 }

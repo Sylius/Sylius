@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Variation\Repository;
+namespace Sylius\Component\Product\Repository;
 
 use Sylius\Component\Resource\Repository\RepositoryInterface;
-use Sylius\Component\Variation\Model\OptionInterface;
+use Sylius\Component\Product\Model\OptionInterface;
 
 /**
  * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>

@@ -9,17 +9,17 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Component\Variation\Generator;
+namespace spec\Sylius\Component\Product\Generator;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Sylius\Component\Resource\Factory\FactoryInterface;
-use Sylius\Component\Variation\Generator\VariantGeneratorInterface;
-use Sylius\Component\Variation\Model\OptionInterface;
-use Sylius\Component\Variation\Model\OptionValue;
-use Sylius\Component\Variation\Model\VariableInterface;
-use Sylius\Component\Variation\Model\VariantInterface;
-use Sylius\Component\Variation\SetBuilder\SetBuilderInterface;
+use Sylius\Component\Product\Generator\VariantGeneratorInterface;
+use Sylius\Component\Product\Model\OptionInterface;
+use Sylius\Component\Product\Model\OptionValue;
+use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\Product\Model\VariantInterface;
+use Sylius\Component\Product\SetBuilder\SetBuilderInterface;
 
 /**
  * @author Adam Elsodaney <adam.elso@gmail.com>
@@ -33,7 +33,7 @@ final class VariantGeneratorSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Component\Variation\Generator\VariantGenerator');
+        $this->shouldHaveType('Sylius\Component\Product\Generator\VariantGenerator');
     }
 
     function it_is_a_Sylius_variant_generator()
@@ -41,7 +41,7 @@ final class VariantGeneratorSpec extends ObjectBehavior
         $this->shouldImplement(VariantGeneratorInterface::class);
     }
 
-    function it_cannot_generate_variants_for_an_object_without_options(VariableInterface $variable)
+    function it_cannot_generate_variants_for_an_object_without_options(ProductInterface $variable)
     {
         $variable->hasOptions()->willReturn(false);
 
@@ -55,7 +55,7 @@ final class VariantGeneratorSpec extends ObjectBehavior
         OptionValue $redColor,
         OptionValue $whiteColor,
         SetBuilderInterface $setBuilder,
-        VariableInterface $productVariable,
+        ProductInterface $productVariable,
         VariantInterface $permutationVariant
     ) {
         $productVariable->hasOptions()->willReturn(true);
@@ -76,8 +76,8 @@ final class VariantGeneratorSpec extends ObjectBehavior
         ]);
 
         $variantFactory->createNew()->willReturn($permutationVariant);
-        $permutationVariant->setObject($productVariable)->shouldBeCalled();
-        $permutationVariant->addOption(Argument::type('Sylius\Component\Variation\Model\OptionValue'))->shouldBeCalled();
+        $permutationVariant->setProduct($productVariable)->shouldBeCalled();
+        $permutationVariant->addOption(Argument::type('Sylius\Component\Product\Model\OptionValue'))->shouldBeCalled();
         $productVariable->addVariant($permutationVariant)->shouldBeCalled();
 
         $this->generate($productVariable);
@@ -94,7 +94,7 @@ final class VariantGeneratorSpec extends ObjectBehavior
         OptionValue $smallSize,
         OptionValue $whiteColor,
         SetBuilderInterface $setBuilder,
-        VariableInterface $productVariable,
+        ProductInterface $productVariable,
         VariantInterface $permutationVariant
     ) {
         $productVariable->hasOptions()->willReturn(true);
@@ -127,8 +127,8 @@ final class VariantGeneratorSpec extends ObjectBehavior
         ]);
 
         $variantFactory->createNew()->willReturn($permutationVariant);
-        $permutationVariant->setObject($productVariable)->shouldBeCalled();
-        $permutationVariant->addOption(Argument::type('Sylius\Component\Variation\Model\OptionValue'))->shouldBeCalled();
+        $permutationVariant->setProduct($productVariable)->shouldBeCalled();
+        $permutationVariant->addOption(Argument::type('Sylius\Component\Product\Model\OptionValue'))->shouldBeCalled();
         $productVariable->addVariant($permutationVariant)->shouldBeCalled();
 
         $this->generate($productVariable);

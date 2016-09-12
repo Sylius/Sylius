@@ -11,13 +11,56 @@
 
 namespace Sylius\Component\Product\Model;
 
-use Sylius\Component\Variation\Model\VariantInterface as BaseVariantInterface;
+use Doctrine\Common\Collections\Collection;
+use Sylius\Component\Resource\Model\CodeAwareInterface;
+use Sylius\Component\Resource\Model\ResourceInterface;
+use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-interface VariantInterface extends BaseVariantInterface
+interface VariantInterface extends TimestampableInterface, ResourceInterface, CodeAwareInterface
 {
+    /**
+     * This should be generated from option values
+     * when no other is set.
+     *
+     * @return string
+     */
+    public function getName();
+
+    /**
+     * @param string $name
+     */
+    public function setName($name);
+
+    /**
+     * @return Collection|OptionValueInterface[]
+     */
+    public function getOptions();
+
+    /**
+     * @param Collection $options
+     */
+    public function setOptions(Collection $options);
+
+    /**
+     * @param OptionValueInterface $option
+     */
+    public function addOption(OptionValueInterface $option);
+
+    /**
+     * @param OptionValueInterface $option
+     */
+    public function removeOption(OptionValueInterface $option);
+
+    /**
+     * @param OptionValueInterface $option
+     *
+     * @return bool
+     */
+    public function hasOption(OptionValueInterface $option);
+
     /**
      * @return ProductInterface
      */

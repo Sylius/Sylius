@@ -12,10 +12,10 @@
 namespace spec\Sylius\Bundle\VariationBundle\Form\EventListener;
 
 use PhpSpec\ObjectBehavior;
-use Sylius\Component\Variation\Model\OptionInterface;
-use Sylius\Component\Variation\Model\OptionValueInterface;
-use Sylius\Component\Variation\Model\VariableInterface;
-use Sylius\Component\Variation\Model\VariantInterface;
+use Sylius\Component\Product\Model\OptionInterface;
+use Sylius\Component\Product\Model\OptionValueInterface;
+use Sylius\Component\Product\Model\ProductInterface;
+use Sylius\Component\Product\Model\VariantInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Form\FormFactoryInterface;
@@ -45,7 +45,7 @@ final class BuildVariantFormSubscriberSpec extends ObjectBehavior
         FormEvent $event,
         FormInterface $form,
         FormInterface $optionsForm,
-        VariableInterface $variable,
+        ProductInterface $variable,
         VariantInterface $variant,
         OptionValueInterface $optionValue,
         OptionInterface $options
@@ -53,7 +53,7 @@ final class BuildVariantFormSubscriberSpec extends ObjectBehavior
         $event->getForm()->shouldBeCalled()->willReturn($form);
         $event->getData()->shouldBeCalled()->willReturn($variant);
 
-        $variant->getObject()->shouldBeCalled()->willReturn($variable);
+        $variant->getProduct()->shouldBeCalled()->willReturn($variable);
         $variant->getOptions()->shouldBeCalled()->willReturn([$optionValue]);
         $variable->getOptions()->shouldBeCalled()->willReturn([$options]);
         $variable->hasOptions()->shouldBeCalled()->willReturn(true);

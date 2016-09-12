@@ -12,7 +12,7 @@
 namespace Sylius\Behat\Context\Transform;
 
 use Behat\Behat\Context\Context;
-use Sylius\Component\Variation\Repository\OptionRepositoryInterface;
+use Sylius\Component\Product\Repository\OptionRepositoryInterface;
 use Webmozart\Assert\Assert;
 
 /**

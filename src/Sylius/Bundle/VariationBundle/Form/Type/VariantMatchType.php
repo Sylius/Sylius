@@ -13,7 +13,7 @@ namespace Sylius\Bundle\VariationBundle\Form\Type;
 
 use Gedmo\Sluggable\Util\Urlizer;
 use Sylius\Bundle\VariationBundle\Form\DataTransformer\VariantToCombinationTransformer;
-use Sylius\Component\Variation\Model\VariableInterface;
+use Sylius\Component\Product\Model\ProductInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -61,7 +61,7 @@ class VariantMatchType extends AbstractType
             ->setRequired([
                 'variable',
             ])
-            ->setAllowedTypes('variable', VariableInterface::class)
+            ->setAllowedTypes('variable', ProductInterface::class)
         ;
     }
 

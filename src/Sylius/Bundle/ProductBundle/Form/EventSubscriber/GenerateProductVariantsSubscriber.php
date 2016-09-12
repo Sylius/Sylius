@@ -12,7 +12,7 @@
 namespace Sylius\Bundle\ProductBundle\Form\EventSubscriber;
 
 use Sylius\Component\Product\Model\ProductInterface;
-use Sylius\Component\Variation\Generator\VariantGeneratorInterface;
+use Sylius\Component\Product\Generator\VariantGeneratorInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;

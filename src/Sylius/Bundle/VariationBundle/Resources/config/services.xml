@@ -22,9 +22,9 @@
         <parameter key="sylius.validator.variant.unique.class">Sylius\Bundle\VariationBundle\Validator\VariantUniqueValidator</parameter>
         <parameter key="sylius.validator.variant.combination.class">Sylius\Bundle\VariationBundle\Validator\VariantCombinationValidator</parameter>
 
-        <parameter key="sylius.generator.variant.class">Sylius\Component\Variation\Generator\VariantGenerator</parameter>
+        <parameter key="sylius.generator.variant.class">Sylius\Component\Product\Generator\VariantGenerator</parameter>
 
-        <parameter key="sylius.variant_resolver.default.class">Sylius\Component\Variation\Resolver\DefaultVariantResolver</parameter>
+        <parameter key="sylius.variant_resolver.default.class">Sylius\Component\Product\Resolver\DefaultVariantResolver</parameter>
     </parameters>
 
     <services>

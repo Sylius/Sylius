@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Variation\SetBuilder;
+namespace Sylius\Component\Product\SetBuilder;
 
 /**
  * Build a product set from one or more given sets.
