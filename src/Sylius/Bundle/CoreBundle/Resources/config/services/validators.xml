@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="sylius.validator.has_enabled_entity.class">Sylius\Bundle\CoreBundle\Validator\Constraints\HasEnabledEntityValidator</parameter>
+        <parameter key="sylius.validator.customer_initializer.class">Sylius\Bundle\CoreBundle\Validator\Initializer\CustomerInitializer</parameter>
+        <parameter key="sylius.user.validator.unique_registered_user.class">Sylius\Bundle\CoreBundle\Validator\Constraints\RegisteredUserValidator</parameter>
+    </parameters>
+
+    <services>
+        <service id="sylius.validator.has_enabled_entity" class="Sylius\Bundle\CoreBundle\Validator\Constraints\HasEnabledEntityValidator">
+            <argument type="service" id="doctrine" />
+            <tag name="validator.constraint_validator" alias="sylius_has_enabled_entity" />
+        </service>
+        <service id="sylius.validator.customer_initializer" class="Sylius\Bundle\CoreBundle\Validator\Initializer\CustomerInitializer">
+            <argument type="service" id="sylius.user.canonicalizer" />
+            <tag name="validator.initializer" />
+        </service>
+        <service id="sylius.validator.unique.registered_user" class="Sylius\Bundle\CoreBundle\Validator\Constraints\RegisteredUserValidator">
+            <argument type="service" id="sylius.repository.customer" />
+            <tag name="validator.constraint_validator" alias="registered_user_validator" />
+        </service>
+    </services>
+</container>
