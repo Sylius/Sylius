@@ -117,7 +117,7 @@ winzou_state_machine:
         callbacks:
             after:
                 sylius_order_confirmation_email:
-                    on: ["fulfill"]
+                    on: ["create"]
                     do: ["@sylius.email_manager.order", "sendConfirmationEmail"]
                     args: ["object"]
                 sylius_create_payment:
