@@ -77,6 +77,7 @@ final class LocaleController
 
     /**
      * @param Request $request
+     * @param string $code
      *
      * @return Response
      */

@@ -86,7 +86,6 @@
         <parameter key="sylius.shipping_methods_resolver.zones_and_channel_based.class">Sylius\Component\Core\Resolver\ZoneAndChannelBasedShippingMethodsResolver</parameter>
 
         <parameter key="sylius.updater.order.exchange_rate.class">Sylius\Component\Core\Updater\OrderExchangeRateUpdater</parameter>
-        <parameter key="sylius.updater.order.exchange_rate_and_currency.class">Sylius\Component\Core\Updater\OrderExchangeRateAndCurrencyUpdater</parameter>
 
         <parameter key="sylius.context.customer.class">Sylius\Bundle\CoreBundle\Context\CustomerContext</parameter>
 
@@ -213,7 +212,7 @@
 
         <service id="sylius.listener.order_recalculation" class="%sylius.listener.order_recalculation.class%">
             <argument type="service" id="sylius.order_processing.order_processor" />
-            <tag name="kernel.event_listener" event="sylius.cart_change" method="recalculateOrder"/>
+            <tag name="kernel.event_listener" event="sylius.cart_change" method="recalculateOrder" />
         </service>
         <service id="sylius.listener.user_cart_recalculation" class="%sylius.listener.user_cart_recalculation.class%">
             <argument type="service" id="sylius.context.cart" />
@@ -290,10 +289,6 @@
         </service>
 
         <service id="sylius.updater.order.exchange_rate" class="%sylius.updater.order.exchange_rate.class%">
-            <argument type="service" id="sylius.repository.currency" />
-        </service>
-        <service id="sylius.updater.order.exchange_rate_and_currency" class="%sylius.updater.order.exchange_rate_and_currency.class%">
-            <argument type="service" id="sylius.context.currency" />
             <argument type="service" id="sylius.repository.currency" />
         </service>
 

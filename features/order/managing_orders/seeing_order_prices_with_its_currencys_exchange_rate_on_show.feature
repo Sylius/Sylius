@@ -69,8 +69,8 @@ Feature: Seeing all prices calculated accordingly to it's currency's exchange ra
 
     @ui
     Scenario: All of a placed order's prices are in the currency's chosen by the customer and it's exchange rate
-        Given the customer chose "GBP" currency
-        And there is a customer "satin@teamlucifer.com" that placed an order "#00000666"
+        Given there is a customer "satin@teamlucifer.com" that placed an order "#00000666"
+        And the customer have chosen to order in the "GBP" currency
         And the customer bought a single "Angel T-Shirt"
         And the customer "No Face" addressed it to "Lucifer Morningstar", "Seaside Fwy" "90802" in the "British Virgin Islands"
         And for the billing address of "Mazikeen Lilim" in the "Pacific Coast Hwy", "90806" "Los Angeles", "British Virgin Islands"
@@ -91,8 +91,8 @@ Feature: Seeing all prices calculated accordingly to it's currency's exchange ra
 
     @ui
     Scenario: All of a placed order's prices are in the currency's chosen by the customer and it's exchange rate at the time of placing
-        Given the customer chose "GBP" currency
-        And there is a customer "satin@teamlucifer.com" that placed an order "#00000666"
+        Given there is a customer "satin@teamlucifer.com" that placed an order "#00000666"
+        And the customer have chosen to order in the "GBP" currency
         And the customer bought a single "Angel T-Shirt"
         And the customer "No Face" addressed it to "Lucifer Morningstar", "Seaside Fwy" "90802" in the "British Virgin Islands"
         And for the billing address of "Mazikeen Lilim" in the "Pacific Coast Hwy", "90806" "Los Angeles", "British Virgin Islands"

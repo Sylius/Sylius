@@ -32,10 +32,6 @@ winzou_state_machine:
                     on: ["address", "select_shipping", "select_payment"]
                     do: ["@sylius.order_processing.order_processor", "process"]
                     args: ["object"]
-                sylius_update_exchange_rate:
-                    on: ["select_payment"]
-                    do: ["@sylius.updater.order.exchange_rate_and_currency", "update"]
-                    args: ["object"]
                 sylius_create_order:
                     on: ["complete"]
                     do: ["@sm.callback.cascade_transition", "apply"]

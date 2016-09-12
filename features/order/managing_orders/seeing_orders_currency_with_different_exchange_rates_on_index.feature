@@ -31,8 +31,8 @@ Feature: Seeing orders' total in their currency and respective exchange rate
 
     @ui
     Scenario: Seeing an order placed in a currency and exchange rate other than the base
-        Given the customer chose "GBP" currency
-        And there is a customer "satin@teamlucifer.com" that placed an order "#00000666"
+        Given there is a customer "satin@teamlucifer.com" that placed an order "#00000666"
+        And the customer have chosen to order in the "GBP" currency
         And the customer bought a single "Angel T-Shirt"
         And the customer "No Face" addressed it to "Lucifer Morningstar", "Seaside Fwy" "90802" in the "United States"
         And for the billing address of "Mazikeen Lilim" in the "Pacific Coast Hwy", "90806" "Los Angeles", "United States"
@@ -43,7 +43,7 @@ Feature: Seeing orders' total in their currency and respective exchange rate
     @ui
     Scenario: Seeing an order with total based on exchange rate at the time of placing the order
         Given there is a customer "satin@teamlucifer.com" that placed an order "#00666000"
-        And the customer chose "GBP" currency
+        And the customer have chosen to order in the "GBP" currency
         And the customer bought a single "Angel T-Shirt"
         And the customer "No Face" addressed it to "Lucifer Morningstar", "Seaside Fwy" "90802" in the "United States"
         And for the billing address of "Mazikeen Lilim" in the "Pacific Coast Hwy", "90806" "Los Angeles", "United States"
