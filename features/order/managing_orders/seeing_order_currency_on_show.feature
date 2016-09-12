@@ -46,8 +46,8 @@ Feature: Seeing the currency an order has been placed in on it's details page
 
     @ui
     Scenario: All prices are in the currency of customer's chosing at the time of placing the order
-        Given the customer chose "GBP" currency
-        And there is a customer "satin@teamlucifer.com" that placed an order "#00000666"
+        Given there is a customer "satin@teamlucifer.com" that placed an order "#00000666"
+        And the customer have chosen to order in the "GBP" currency
         And the customer bought a single "Angel T-Shirt"
         And the customer "No Face" addressed it to "Lucifer Morningstar", "Seaside Fwy" "90802" in the "British Virgin Islands"
         And for the billing address of "Mazikeen Lilim" in the "Pacific Coast Hwy", "90806" "Los Angeles", "British Virgin Islands"
