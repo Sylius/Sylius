@@ -236,6 +236,7 @@ sylius:
         edit_promotion_coupon: Edit promotion coupon
         edit_report: 'Edit report'
         edit_route: 'Edit route'
+        edit_shipping_address: Edit shipping address
         edit_shipping_method: Edit shipping method
         edit_static_content: 'Edit static content'
         edit_tax_category: Edit tax category
