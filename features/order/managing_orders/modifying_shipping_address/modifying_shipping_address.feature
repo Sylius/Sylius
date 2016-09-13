@@ -1,11 +1,11 @@
-@managing_orders
+@modifying_shipping_address
 Feature: Modifying a customer shipping address after an order has been placed
     In order to ship an order to a correct place
     As an Administrator
     I want to be able to modify a customer's shipping address after an order has been placed
 
     Background:
-        Given the store operates on a single channel in "United States" named "Web"
+        Given the store operates on a single channel in the "United States" named "Web"
         And that channel uses the "USD" currency by default
         And the store ships everywhere for free
         And the store allows paying with "Cash on Delivery"
@@ -19,8 +19,13 @@ Feature: Modifying a customer shipping address after an order has been placed
     @todo
     Scenario: Modifying a customer's shipping address
         When I view the summary of the order "#00000001"
-        And I want to modify a customer's shipping address
-        And I specify their shipping address as "Los Angeles", "Seaside Fwy", "90802", "United States" for "Lucifer Morningstar"
+        And I want to modify a customer's shipping address of this order
+        And I specify the first name as "Lucifer"
+        And I specify the last name as "Morningstar"
+        And I specify the street as "Seaside Fwy"
+        And I choose "United States" as the country
+        And I specify the city as "Los Angeles"
+        And I specify the postcode as "90802"
         And I save my changes
         Then I should be notified that it has been successfully edited
         And this order should be shipped to "Lucifer Morningstar", "Seaside Fwy", "90802", "Los Angeles", "United States"
@@ -29,7 +34,7 @@ Feature: Modifying a customer shipping address after an order has been placed
     Scenario: Modifying a customer's shipping address when a product's price has been changed
         Given the product "Suit" changed its price to "$300.00"
         When I view the summary of the order "#00000001"
-        And I want to modify a customer's shipping address
+        And I want to modify a customer's shipping address of this order
         And I specify their shipping address as "Los Angeles", "Seaside Fwy", "90802", "United States" for "Lucifer Morningstar"
         And I save my changes
         Then I should be notified that it has been successfully edited
@@ -40,7 +45,7 @@ Feature: Modifying a customer shipping address after an order has been placed
     Scenario: Modifying a customer's shipping address when a channel has been disabled
         Given the channel "Web" has been disabled
         When I view the summary of the order "#00000001"
-        And I want to modify a customer's shipping address
+        And I want to modify a customer's shipping address of this order
         And I specify their shipping address as "Los Angeles", "Seaside Fwy", "90802", "United States" for "Lucifer Morningstar"
         And I save my changes
         Then I should be notified that it has been successfully edited
@@ -51,7 +56,7 @@ Feature: Modifying a customer shipping address after an order has been placed
     Scenario: Modifying a customer's shipping address when the currency has been disabled
         Given the currency "USD" has been disabled
         When I view the summary of the order "#00000001"
-        And I want to modify a customer's shipping address
+        And I want to modify a customer's shipping address of this order
         And I specify their shipping address as "Los Angeles", "Seaside Fwy", "90802", "United States" for "Lucifer Morningstar"
         And I save my changes
         Then I should be notified that it has been successfully edited
@@ -62,7 +67,7 @@ Feature: Modifying a customer shipping address after an order has been placed
     Scenario: Modifying a customer's shipping address when the product is out of stock
         Given the product "Suit" is out of stock
         When I view the summary of the order "#00000001"
-        And I want to modify a customer's shipping address
+        And I want to modify a customer's shipping address of this order
         And I specify their shipping address as "Los Angeles", "Seaside Fwy", "90802", "United States" for "Lucifer Morningstar"
         And I save my changes
         Then I should be notified that it has been successfully edited

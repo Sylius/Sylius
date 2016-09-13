@@ -1,13 +1,14 @@
-@managing_orders
+@modifying_shipping_address
 Feature: Modifying a customer's shipping address on an order with an applied promotion
     In order to ship an order to a correct place
     As an Administrator
     I want to be able to modify a customer's shipping address without changing an order's total
 
     Background:
-        Given the store operates on a single channel in "United States" named "Web"
+        Given the store operates on a single channel in the "United States" named "Web"
         And the store ships everywhere for free
         And the store allows paying with "Cash on Delivery"
+        And the store classifies its products as "Suits"
         And the store has a product "Suit" priced at "$400.00"
         And it belongs to "Suits"
         And there is a promotion "Holiday promotion"
@@ -22,7 +23,7 @@ Feature: Modifying a customer's shipping address on an order with an applied pro
     Scenario: Modifying a customer's shipping address when the applied promotion is no longer valid
         Given the promotion was disabled for the channel "Web"
         When I view the summary of the order "#00000001"
-        And I want to modify a customer's shipping address
+        And I want to modify a customer's shipping address of this order
         And I specify their shipping address as "Los Angeles", "Seaside Fwy", "90802", "United States" for "Lucifer Morningstar"
         And I save my changes
         Then I should be notified that it has been successfully edited
