@@ -11,41 +11,29 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="http://symfony.com/schema/dic/services
-                               http://symfony.com/schema/dic/services/services-1.0.xsd">
-
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <parameters>
         <parameter key="sylius.model.attribute.interface">Sylius\Component\Attribute\AttributeType\AttributeTypeInterface</parameter>
-
-        <parameter key="sylius.event_subscriber.attribute.load_metadata.class">Sylius\Bundle\AttributeBundle\EventListener\LoadMetadataSubscriber</parameter>
-
-        <parameter key="sylius.form.type.attribute_type_choice.class">Sylius\Bundle\AttributeBundle\Form\Type\AttributeTypeChoiceType</parameter>
-        <parameter key="sylius.registry.attribute_type.class">Sylius\Component\Registry\ServiceRegistry</parameter>
-
-        <parameter key="sylius.validator.valid_attribute_value.class">Sylius\Bundle\AttributeBundle\Validator\Constraints\ValidAttributeValueValidator</parameter>
     </parameters>
 
     <services>
-        <service id="sylius.event_subscriber.attribute.load_metadata" class="%sylius.event_subscriber.attribute.load_metadata.class%">
+        <service id="sylius.event_subscriber.attribute.load_metadata" class="Sylius\Bundle\AttributeBundle\EventListener\LoadMetadataSubscriber">
             <tag name="doctrine.event_subscriber" />
             <argument>%sylius.attribute.subjects%</argument>
         </service>
 
-        <service id="sylius.registry.attribute_type" class="%sylius.registry.attribute_type.class%">
+        <service id="sylius.registry.attribute_type" class="Sylius\Component\Registry\ServiceRegistry">
             <argument>%sylius.model.attribute.interface%</argument>
             <argument>attribute type</argument>
         </service>
-        <service id="sylius.form.type.attribute_type_choice" class="%sylius.form.type.attribute_type_choice.class%">
+        <service id="sylius.form.type.attribute_type_choice" class="Sylius\Bundle\AttributeBundle\Form\Type\AttributeTypeChoiceType">
             <argument>%sylius.attribute.attribute_types%</argument>
             <tag name="form.type" alias="sylius_attribute_type_choice" />
         </service>
 
-        <service id="sylius.validator.valid_attribute_value" class="%sylius.validator.valid_attribute_value.class%">
+        <service id="sylius.validator.valid_attribute_value" class="Sylius\Bundle\AttributeBundle\Validator\Constraints\ValidAttributeValueValidator">
             <argument type="service" id="sylius.registry.attribute_type" />
             <tag name="validator.constraint_validator" alias="sylius_valid_attribute_value_validator" />
         </service>
     </services>
-
 </container>
