@@ -6,6 +6,7 @@ default:
         ui_checkout:
             contexts_as_services:
                 - sylius.behat.context.hook.doctrine_orm
+                - sylius.behat.context.hook.email_spool
 
                 - sylius.behat.context.transform.addressing
                 - sylius.behat.context.transform.country
@@ -34,6 +35,7 @@ default:
                 - sylius.behat.context.setup.user
                 - sylius.behat.context.setup.zone
 
+                - sylius.behat.context.ui.email
                 - sylius.behat.context.ui.admin.managing_orders
                 - sylius.behat.context.ui.checkout
                 - sylius.behat.context.ui.shop.cart
