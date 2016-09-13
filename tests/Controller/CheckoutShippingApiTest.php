@@ -129,4 +129,65 @@ EOT;
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'checkout/shipping_selected_order_response');
     }
+
+    /**
+     * @test
+     */
+    public function it_allows_to_change_order_shipping_method_after_its_already_been_chosen()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $checkoutData = $this->loadFixturesFromFile('resources/checkout.yml');
+
+        $orderId = $checkoutData['order1']->getId();
+        $this->addressOrder($orderId);
+        $this->selectOrderShippingMethod($orderId, $checkoutData['ups']->getId());
+
+        $data =
+<<<EOT
+        {
+            "shipments": [
+                {
+                    "method": {$checkoutData['dhl']->getId()}
+                }
+            ]
+        }
+EOT;
+
+        $url = sprintf('/api/checkouts/select-shipping/%d', $orderId);
+        $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+        $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_to_change_order_shipping_method_after_selecting_payment_method()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $checkoutData = $this->loadFixturesFromFile('resources/checkout.yml');
+
+        $orderId = $checkoutData['order1']->getId();
+        $this->addressOrder($orderId);
+        $this->selectOrderShippingMethod($orderId, $checkoutData['ups']->getId());
+        $this->selectOrderPaymentMethod($orderId, $checkoutData['cash_on_delivery']->getId());
+
+        $data =
+<<<EOT
+        {
+            "shipments": [
+                {
+                    "method": {$checkoutData['dhl']->getId()}
+                }
+            ]
+        }
+EOT;
+
+        $url = sprintf('/api/checkouts/select-shipping/%d', $orderId);
+        $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+        $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
+    }
 }
