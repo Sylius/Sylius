@@ -14,7 +14,6 @@ namespace Sylius\Bundle\CoreBundle\Checkout;
 use SM\Factory\FactoryInterface;
 use Sylius\Component\Cart\Context\CartContextInterface;
 use Sylius\Component\Core\Model\OrderInterface;
-use Sylius\Component\Core\OrderCheckoutTransitions;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -71,6 +70,7 @@ final class CheckoutResolver implements EventSubscriberInterface
      */
     public function onKernelRequest(GetResponseEvent $event)
     {
+
         if (!$event->isMasterRequest()) {
             return;
         }
@@ -83,7 +83,7 @@ final class CheckoutResolver implements EventSubscriberInterface
 
         /** @var OrderInterface $order */
         $order = $this->cartContext->getCart();
-        $stateMachine = $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH);
+        $stateMachine = $this->stateMachineFactory->get($order, $this->getRequestedGraph($request));
 
         if ($stateMachine->can($this->getRequestedTransition($request))) {
             return;
@@ -116,6 +116,16 @@ final class CheckoutResolver implements EventSubscriberInterface
     private function getRequestedTransition(Request $request)
     {
         return $request->attributes->get('_sylius')['state_machine']['transition'];
+    }
+
+    /**
+     * @param Request $request
+     *
+     * @return string
+     */
+    private function getRequestedGraph(Request $request)
+    {
+        return $request->attributes->get('_sylius')['state_machine']['graph'];
     }
 
     /**
