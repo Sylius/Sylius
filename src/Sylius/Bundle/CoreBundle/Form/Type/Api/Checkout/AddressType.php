@@ -9,16 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Bundle\CoreBundle\Form\Type\Checkout;
+namespace Sylius\Bundle\CoreBundle\Form\Type\Api\Checkout;
 
 use Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddDefaultBillingAddressOnOrderFormSubscriber;
+use Sylius\Bundle\CoreBundle\Form\EventSubscriber\Api\SetCustomerFormSubscriber;
 use Sylius\Bundle\ResourceBundle\Form\Type\AbstractResourceType;
-use Sylius\Bundle\CoreBundle\Form\EventSubscriber\AddCustomerGuestTypeFormSubscriber;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
- * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
+ * @author Jan Góralski <jan.goralski@lakion.com>
  */
 class AddressType extends AbstractResourceType
 {
@@ -36,7 +36,7 @@ class AddressType extends AbstractResourceType
                 'label' => 'sylius.form.checkout.addressing.different_billing_address',
             ])
             ->addEventSubscriber(new AddDefaultBillingAddressOnOrderFormSubscriber())
-            ->addEventSubscriber(new AddCustomerGuestTypeFormSubscriber('customer'))
+            ->addEventSubscriber(new SetCustomerFormSubscriber('customer'))
         ;
     }
 
@@ -60,6 +60,6 @@ class AddressType extends AbstractResourceType
      */
     public function getName()
     {
-        return 'sylius_checkout_address';
+        return 'sylius_api_checkout_address';
     }
 }

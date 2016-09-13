@@ -75,16 +75,7 @@
           }
         }
       },
-      "differentBillingAddress": {},
-      "customer": {
-        "children": {
-          "email": {
-            "errors": [
-              "Please enter your email."
-            ]
-          }
-        }
-      }
+      "differentBillingAddress": {}
     }
   }
 }
