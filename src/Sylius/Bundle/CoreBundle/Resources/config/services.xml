@@ -33,36 +33,17 @@
         <import resource="services/validators.xml" />
     </imports>
 
-    <parameters>
-        <parameter key="sylius.resolver.default_shipping_method.class">Sylius\Component\Core\Resolver\DefaultShippingMethodResolver</parameter>
-        <parameter key="sylius.order.purger.class">Sylius\Bundle\CoreBundle\Purger\ExpiredOrdersPurger</parameter>
-        <parameter key="sylius.image_uploader.class">Sylius\Component\Core\Uploader\ImageUploader</parameter>
-        <parameter key="sylius.collector.core.class">Sylius\Bundle\CoreBundle\Collector\SyliusCollector</parameter>
-        <parameter key="sylius.provider.channel_based_default_zone_provider.class">Sylius\Bundle\CoreBundle\Provider\ChannelBasedDefaultTaxZoneProvider</parameter>
-        <parameter key="sylius.integer_distributor.class">Sylius\Component\Core\Distributor\IntegerDistributor</parameter>
-        <parameter key="sylius.proportional_integer_distributor.class">Sylius\Component\Core\Distributor\ProportionalIntegerDistributor</parameter>
-        <parameter key="sylius.payment_methods_resolver.channel_based.class">Sylius\Component\Core\Resolver\ChannelBasedPaymentMethodsResolver</parameter>
-        <parameter key="sylius.shipping_methods_resolver.zones_and_channel_based.class">Sylius\Component\Core\Resolver\ZoneAndChannelBasedShippingMethodsResolver</parameter>
-        <parameter key="sylius.updater.order.exchange_rate.class">Sylius\Component\Core\Updater\OrderExchangeRateUpdater</parameter>
-        <parameter key="sylius.context.customer.class">Sylius\Bundle\CoreBundle\Context\CustomerContext</parameter>
-        <parameter key="sylius.form.event_subscriber.set_customer_type.class">Sylius\Bundle\CoreBundle\Form\EventSubscriber\SetCustomerFormSubscriber</parameter>
-        <parameter key="sylius.authorization_checker.toggleable.class">Sylius\Bundle\CoreBundle\Authorization\ToggleableAuthorizationChecker</parameter>
-        <parameter key="sylius.based_on_id_invoice_number_generator.class" >Sylius\Component\Core\Payment\IdBasedInvoiceNumberGenerator</parameter>
-        <parameter key="sylius.generator.product_variant.class">Sylius\Bundle\CoreBundle\Generator\ProductVariantGenerator</parameter>
-        <parameter key="sylius.inventory.on_hand_quantity_updater.class">Sylius\Component\Core\Inventory\Updater\OnHandQuantityUpdater</parameter>
-    </parameters>
-
     <services>
-        <service id="sylius.provider.channel_based_default_zone_provider" class="%sylius.provider.channel_based_default_zone_provider.class%" />
-        <service id="sylius.integer_distributor" class="%sylius.integer_distributor.class%" />
-        <service id="sylius.proportional_integer_distributor" class="%sylius.proportional_integer_distributor.class%" />
-        <service id="sylius.invoice_number_generator" class="%sylius.based_on_id_invoice_number_generator.class%" />
-        <service id="sylius.order.purger" class="%sylius.order.purger.class%">
+        <service id="sylius.provider.channel_based_default_zone_provider" class="Sylius\Bundle\CoreBundle\Provider\ChannelBasedDefaultTaxZoneProvider" />
+        <service id="sylius.integer_distributor" class="Sylius\Component\Core\Distributor\IntegerDistributor" />
+        <service id="sylius.proportional_integer_distributor" class="Sylius\Component\Core\Distributor\ProportionalIntegerDistributor" />
+        <service id="sylius.invoice_number_generator" class="Sylius\Component\Core\Payment\IdBasedInvoiceNumberGenerator" />
+        <service id="sylius.order.purger" class="Sylius\Bundle\CoreBundle\Purger\ExpiredOrdersPurger">
             <argument type="service" id="sylius.manager.order" />
             <argument type="service" id="sylius.repository.order" />
             <argument type="service" id="sm.factory" />
         </service>
-        <service id="sylius.image_uploader" class="%sylius.image_uploader.class%">
+        <service id="sylius.image_uploader" class="Sylius\Component\Core\Uploader\ImageUploader">
             <argument type="service">
                 <service class="Gaufrette\Filesystem">
                     <argument>%sylius.uploader.filesystem%</argument>
@@ -70,37 +51,37 @@
                 </service>
             </argument>
         </service>
-        <service id="sylius.collector.core" class="%sylius.collector.core.class%" public="false">
+        <service id="sylius.collector.core" class="Sylius\Bundle\CoreBundle\Collector\SyliusCollector" public="false">
             <argument type="service" id="sylius.context.shopper" />
             <argument>%kernel.bundles%</argument>
             <argument>%currency%</argument>
             <argument>%locale%</argument>
             <tag name="data_collector" template="SyliusCoreBundle:Collector:sylius.html.twig" id="sylius_core" priority="-512" />
         </service>
-        <service id="sylius.shipping_methods_resolver.zones_and_channel_based" class="%sylius.shipping_methods_resolver.zones_and_channel_based.class%">
+        <service id="sylius.shipping_methods_resolver.zones_and_channel_based" class="Sylius\Component\Core\Resolver\ZoneAndChannelBasedShippingMethodsResolver">
             <argument type="service" id="sylius.repository.shipping_method" />
             <argument type="service" id="sylius.zone_matcher" />
             <argument type="service" id="sylius.shipping_eligibility_checker" />
             <tag name="sylius.shipping_method_resolver" type="zones_and_channel_based" label="sylius.shipping_methods_resolver.zones_and_channel_based" priority="1" />
         </service>
-        <service id="sylius.payment_methods_resolver.channel_based" class="%sylius.payment_methods_resolver.channel_based.class%">
+        <service id="sylius.payment_methods_resolver.channel_based" class="Sylius\Component\Core\Resolver\ChannelBasedPaymentMethodsResolver">
             <argument type="service" id="sylius.repository.payment_method" />
             <tag name="sylius.payment_method_resolver" type="channel_based" label="sylius.payment_methods_resolver.channel_based" priority="1" />
         </service>
-        <service id="sylius.updater.order.exchange_rate" class="%sylius.updater.order.exchange_rate.class%">
+        <service id="sylius.updater.order.exchange_rate" class="Sylius\Component\Core\Updater\OrderExchangeRateUpdater">
             <argument type="service" id="sylius.repository.currency" />
         </service>
-        <service id="sylius.context.customer" class="%sylius.context.customer.class%">
+        <service id="sylius.context.customer" class="Sylius\Bundle\CoreBundle\Context\CustomerContext">
             <argument type="service" id="security.token_storage" />
             <argument type="service" id="security.authorization_checker" />
         </service>
-        <service id="sylius.form.event_subscriber.set_customer" class="%sylius.form.event_subscriber.set_customer_type.class%">
+        <service id="sylius.form.event_subscriber.set_customer" class="Sylius\Bundle\CoreBundle\Form\EventSubscriber\SetCustomerFormSubscriber">
             <argument type="service" id="sylius.repository.customer" />
         </service>
         <service id="sylius.custom_factory.cart_item" class="Sylius\Component\Core\Factory\CartItemFactory" decorates="sylius.factory.cart_item">
             <argument type="service" id="sylius.custom_factory.cart_item.inner" />
             <argument type="service" id="sylius.variant_resolver.default" />
         </service>
-        <service id="sylius.inventory.on_hand_quantity_updater" class="%sylius.inventory.on_hand_quantity_updater.class%"/>
+        <service id="sylius.inventory.on_hand_quantity_updater" class="Sylius\Component\Core\Inventory\Updater\OnHandQuantityUpdater"/>
     </services>
 </container>
