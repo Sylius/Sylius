@@ -26,8 +26,8 @@ final class OnHoldQuantityUpdater implements IncreasingQuantityUpdaterInterface,
      */
     public function increase(OrderInterface $order)
     {
+        /** @var OrderItemInterface $orderItem */
         foreach ($order->getItems() as $orderItem) {
-            /** @var OrderItemInterface $orderItem */
             /** @var ProductVariantInterface $variant */
             $variant = $orderItem->getVariant();
 

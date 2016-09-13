@@ -27,9 +27,6 @@ final class PaidOrderInventoryHandler implements PaidOrderInventoryHandlerInterf
      */
     private $decreasingQuantityUpdaters;
 
-    /**
-     * PaidOrderInventoryHandler constructor.
-     */
     public function __construct()
     {
         $this->decreasingQuantityUpdaters = new PriorityQueue();

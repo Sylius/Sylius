@@ -95,6 +95,7 @@ final class ManagingOrdersContext implements Context
 
     /**
      * @When I view the summary of the order :order
+     * @When /^I view the summary of (this order made by "[^"]+")$/
      */
     public function iSeeTheOrder(OrderInterface $order)
     {
@@ -103,6 +104,7 @@ final class ManagingOrdersContext implements Context
 
     /**
      * @When /^I mark (this order) as a paid$/
+     * @When /^I mark (the order of "[^"]+") as a paid$/
      */
     public function iMarkThisOrderAsAPaid(OrderInterface $order)
     {

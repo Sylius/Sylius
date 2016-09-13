@@ -13,8 +13,8 @@ namespace Sylius\Behat\Context\Ui\Admin;
 
 use Behat\Behat\Context\Context;
 use Sylius\Behat\NotificationType;
-use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\ProductVariant\CreatePageInterface;
+use Sylius\Behat\Page\Admin\ProductVariant\IndexPageInterface;
 use Sylius\Behat\Page\Admin\ProductVariant\UpdatePageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\Resolver\CurrentPageResolverInterface;
@@ -337,6 +337,28 @@ final class ManagingProductVariantsContext implements Context
         Assert::true(
             $this->indexPage->isSingleResourceOnPage(['name' => $productVariant->getName(), 'inventory' => '0 Available on hand']),
             sprintf('This "%s" variant should have 0 on hand quantity, but it does not.', $productVariant->getName())
+        );
+    }
+
+    /**
+     * @Then /^I should know that (\d+) units of (this product) is hold$/
+     */
+    public function iShouldKnowThatUnitsOfThisProductIsHold($quantity, ProductInterface $product)
+    {
+        Assert::true(
+            $this->indexPage->hasOnHoldQuantity($product->getFirstVariant(), $quantity),
+            sprintf('This "%s" variant should has "%s" quantity, but it does not.', $product->getFirstVariant()->getName(), $quantity)
+        );
+    }
+
+    /**
+     * @Then /^I should not know about on hold quantity of (this product)$/
+     */
+    public function iShouldNotKnowAboutOnHoldQuantityOfThisProduct(ProductInterface $product)
+    {
+        Assert::false(
+            $this->indexPage->hasOnHoldQuantity($product->getFirstVariant(), 1),
+            sprintf('This "%s" variant should not have on hold quantity, but it does.', $product->getFirstVariant()->getName())
         );
     }
 
