@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace spec\Sylius\Bundle\ShopBundle\EventListener;
+namespace spec\Sylius\Bundle\CoreBundle\EventListener;
 
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Sylius\Bundle\ShopBundle\EventListener\CheckoutCompleteListener;
+use Sylius\Bundle\CoreBundle\EventListener\CheckoutCompleteListener;
 use Sylius\Component\Addressing\Model\CountryInterface;
 use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\EventDispatcher\GenericEvent;
@@ -33,7 +33,7 @@ final class CheckoutCompleteListenerSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType('Sylius\Bundle\ShopBundle\EventListener\CheckoutCompleteListener');
+        $this->shouldHaveType('Sylius\Bundle\CoreBundle\EventListener\CheckoutCompleteListener');
     }
 
     function it_sets_order_id_in_session(SessionInterface $session, OrderInterface $order, GenericEvent $event)

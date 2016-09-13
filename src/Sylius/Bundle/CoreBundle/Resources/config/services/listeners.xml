@@ -99,5 +99,9 @@
             <tag name="doctrine.event_listener" event="prePersist" />
             <tag name="doctrine.event_listener" event="preUpdate" />
         </service>
+        <service id="sylius.listener.checkout_complete" class="Sylius\Bundle\CoreBundle\EventListener\CheckoutCompleteListener">
+            <argument type="service" id="session"/>
+            <tag name="kernel.event_listener" event="sylius.order.post_summary" method="onCheckoutComplete" />
+        </service>
     </services>
 </container>
