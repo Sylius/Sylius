@@ -96,7 +96,11 @@ final class ThemeFilesystemLoader implements \Twig_LoaderInterface, \Twig_Exists
      */
     public function exists($name)
     {
-        return true;
+        try {
+            return stat($this->findTemplate($name)) !== false;
+        } catch (\Exception $exception) {
+            return false;
+        }
     }
 
     /**
