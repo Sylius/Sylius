@@ -436,6 +436,16 @@ final class ProductContext implements Context
     }
 
     /**
+     * @Given /^the (product "[^"]+") changed its price to ("[^"]+")$/
+     */
+    public function theProductChangedItsPriceTo(ProductInterface $product, $price)
+    {
+        $product->getFirstVariant()->setPrice($price);
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @param string $type
      * @param string $name
      * @param string $code

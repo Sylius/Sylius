@@ -60,3 +60,7 @@ sylius_admin_order_shipping_address_update:
             section: admin
             template: SyliusAdminBundle:Order:updateShippingAddress.html.twig
             permission: true
+            form:
+                type: sylius_order
+                options:
+                    validation_groups: sylius_shipping_address_update

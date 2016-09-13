@@ -77,6 +77,7 @@
             <argument type="service" id="sylius.behat.shared_storage" />
             <argument type="service" id="sylius.behat.page.admin.order.index" />
             <argument type="service" id="sylius.behat.page.admin.order.show" />
+            <argument type="service" id="sylius.behat.page.admin.order.update_shipping_address" />
             <argument type="service" id="sylius.behat.notification_checker" />
             <argument type="service" id="sylius.behat.shared_security" />
             <tag name="sylius.behat.context" />

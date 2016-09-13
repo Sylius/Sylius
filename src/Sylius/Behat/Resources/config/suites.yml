@@ -35,6 +35,7 @@ imports:
     - suites/ui/locale/locales.yml
     - suites/ui/locale/managing_locales.yml
     - suites/ui/order/managing_orders.yml
+    - suites/ui/order/modifying_shipping_address.yml
     - suites/ui/payment/managing_payment_methods.yml
     - suites/ui/product/managing_product_attributes.yml
     - suites/ui/product/managing_product_options.yml

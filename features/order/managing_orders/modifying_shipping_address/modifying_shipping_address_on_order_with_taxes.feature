@@ -17,7 +17,7 @@ Feature: Modifying a customer's shipping address on an order with taxes
         And the customer chose "Free" shipping method with "Offline" payment
         And I am logged in as an administrator
 
-    @todo
+    @ui
     Scenario: Modifying a customer's shipping address when the applied promotion is no longer valid
         Given the "VAT" tax rate is of 10%
         When I view the summary of the order "#00000001"

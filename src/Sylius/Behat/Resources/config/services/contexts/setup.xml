@@ -184,6 +184,7 @@
             <argument type="service" id="sylius.repository.tax_rate" container="symfony" />
             <argument type="service" id="sylius.repository.tax_category" container="symfony" />
             <argument type="service" id="sylius.repository.zone" container="symfony" />
+            <argument type="service" id="doctrine.orm.entity_manager" container="symfony" />
             <tag name="sylius.behat.context" />
         </service>
 
