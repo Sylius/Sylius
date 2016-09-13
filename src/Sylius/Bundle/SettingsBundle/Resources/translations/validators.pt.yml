@@ -10,3 +10,4 @@ sylius:
         name:
             max_length: O nome do parâmetro não deve ter mais que 255 caracteres|O nome do parâmetro não deve ter mais que 255 caracteres.
             min_length: O nome do parâmetro deve ter pelo menos 2 caracteres|O nome do parâmetro deve ter pelo menos 2 caracteres.
+            not_blank: Por favor introduza um nome para este parâmetro.

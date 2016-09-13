@@ -10,6 +10,8 @@ sylius:
         option:
             name: Nome
         notes: Notas extra
+        variant:
+            tracked: Acompanhado
     ui:
         abandoned: Abandonado
         about: Sobre
@@ -78,30 +80,66 @@ sylius:
         billing_address: Endereço de faturação
         blocks: Blocos
         body: Corpo
+        browse_products: Visualizar produtos
+        build: Versão
+        calculator: Calculadora
         cancel: Cancelar
         cancelled: Cancelado
+        cart: Carrinho
+        cart_locked: Carrinho fechado
+        cart_summary: Resumo do carrinho
         categorization: Categorização
+        category: Categoria
+        category_requirements: Requisitos de categoria
+        change_address: Alterar endereço
+        change_file: Alterar ficheiro
+        change_password: Alterar a palavra-passe
+        change_payment_method: Alterar o método de pagamento
+        change_shipping_method: Alterar o método de envio
+        change_your_password: Alterar a sua palavra-passe
+        channel: Canal
         channels: Canais
+        charges_and_taxes: Encargos e impostos
+        checking_out_as: Encomendar como
         checkout: Finalizar compra
         choose_file: Escolha um arquivo
         city: Cidade
         clear_cart: Esvaziar carrinho
+        clear_filters: Apagar filtros
         code: Código
         color: Cor
         comment: Comentário
         company: Empresa
+        complete: Concluído
         completed: Concluído
+        configurable_product: Produto configurável
+        configuration: Configuração
+        configure_channels_available_in_your_store: Configurar os canais disponíveis na sua loja
+        confirm_your_action: Confirme a ação
         confirmation: Confirmação da palavra-passe
         confirmation_title: Confirmação da palavra-passe
+        confirmed: Confirmado
+        contact_us: Contacte-nos
+        contain_variants: Contém variantes
+        contains: Contém
         content: Conteúdo
         countries: Países
         country: País
         country_details: Detalhes do país
         coupon: Cupão
         coupon_based: Baseada em cupão
+        coupons: Cupões
         create: Criar
         create_a_new_address: Criar nova morada
+        create_a_new_customer_account: Criar uma nova conta de cliente
+        create_an_account: Criar uma conta
+        create_association_type: Criar um tipo de associação
         create_country: Criar país
+        create_currency: Criar moeda
+        create_customer: Criar cliente
+        create_group: Criar grupo
+        create_imagine_block: Criar bloco imagine
+        create_locale: Criar a localidade
         create_new_coupon: Criar novo cupom
         create_order: Criar pedido
         create_payment: Criar pagamento
@@ -275,6 +313,7 @@ sylius:
         products: Produtos
         products_categorized_under_taxon_taxon: 'Produtos <small>Categorizado na táxon "%taxon%"</small>'
         products_index_of_all_products_in_your_store: 'Produtos <small>Lista de todos os produtos em sua loja</small>'
+        promotion_coupons: Cupões
         promotion_details: Detalhes da promoção
         promotion_total: Total de promoção
         promotions: Promoções
@@ -283,10 +322,12 @@ sylius:
         qty: Quantidade
         quantity: Quantidade
         rating: Avaliação
+        ready: Preparado
         refunded: Reembolsado
         remember_me: Lembrar-me
         reports: Relatórios
         retail_price: Preço de venda
+        returned: Devolvido
         reviews: Críticas
         roles: Funções
         routes: Rotas
@@ -301,6 +342,7 @@ sylius:
         shipment_details: Detalhes do envio
         shipment_state: Situação do envio
         shipments: Envios
+        shipped: Enviado
         shipping_address: Endereço de entrega
         shipping_categories: Categorias de envio
         shipping_category: Categoria de transporte
@@ -315,6 +357,7 @@ sylius:
         sku: SKU
         starts_at: Começa em
         state: Estado
+        status: Estado
         street: Rua
         subject: Assunto
         subscribed_to_newsletter: Subscrever a newsletter
