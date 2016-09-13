@@ -7,6 +7,7 @@ sylius:
             not_blank: Por favor insira a moeda padrão do canal.
         default_locale:
             not_blank: Introduza a localidade padrão do canal.
+            choice_not_in_locale: Por favor, selecione o padrão de um dos locais configurados.
     checkout:
         shipping_method:
             not_blank: Selecione o método de envio.
