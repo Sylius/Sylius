@@ -170,6 +170,14 @@ final class CheckoutContext implements Context
     }
 
     /**
+     * @Given I have tried to open checkout addressing page
+     */
+    public function iHaveTriedToOpenCheckoutAddressingPage()
+    {
+        $this->addressPage->tryToOpen();
+    }
+
+    /**
      * @Given /^(this user) bought this product$/
      */
     public function thisUserBought(ShopUserInterface $user)
