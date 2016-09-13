@@ -85,7 +85,10 @@ sylius_shop_checkout_complete:
             state_machine:
                 graph: sylius_order_checkout
                 transition: complete
-            redirect: sylius_shop_thank_you
+            redirect:
+                route: sylius_shop_thank_you
+                parameters:
+                    orderId: [expr:service('sylius.context.cart').getCart().getId()]
             form:
                 type: sylius_checkout_complete
                 options:
