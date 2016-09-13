@@ -128,7 +128,7 @@ class OrderController extends ResourceController
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
-        $orderId = $this->get('session')->get('sylius_order_id');
+        $orderId = $request->get('orderId');
         Assert::notNull($orderId);
         $order = $this->repository->findOneForPayment($orderId);
         Assert::notNull($order);
