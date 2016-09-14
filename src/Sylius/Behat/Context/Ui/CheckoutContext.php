@@ -40,19 +40,9 @@ use Webmozart\Assert\Assert;
 final class CheckoutContext implements Context
 {
     /**
-     * @var SharedStorageInterface
-     */
-    private $sharedStorage;
-
-    /**
      * @var HomePageInterface
      */
     private $homePage;
-
-    /**
-     * @var AddressPageInterface
-     */
-    private $addressPage;
 
     /**
      * @var SelectPaymentPageInterface
@@ -63,11 +53,6 @@ final class CheckoutContext implements Context
      * @var ThankYouPageInterface
      */
     private $thankYouPage;
-
-    /**
-     * @var SelectShippingPageInterface
-     */
-    private $selectShippingPage;
 
     /**
      * @var CompletePageInterface
@@ -143,15 +128,6 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Given I have proceeded selecting :shippingMethodName shipping method
-     */
-    public function iHaveProceededSelectingShippingMethod($shippingMethodName)
-    {
-        $this->iSelectShippingMethod($shippingMethodName);
-        $this->selectShippingPage->nextStep();
-    }
-
-    /**
      * @Given /^(this user) bought this product$/
      */
     public function thisUserBought(ShopUserInterface $user)
@@ -160,42 +136,6 @@ final class CheckoutContext implements Context
             $this->iProceedSelectingPaymentMethod();
             $this->iConfirmMyOrder();
         });
-    }
-
-    /**
-     * @Given I have selected :shippingMethod shipping method
-     * @When I select :shippingMethod shipping method
-     */
-    public function iSelectShippingMethod($shippingMethod)
-    {
-        $this->selectShippingPage->selectShippingMethod($shippingMethod);
-    }
-
-    /**
-     * @Then I should not be able to select :shippingMethod shipping method
-     */
-    public function iShouldNotBeAbleToSelectShippingMethod($shippingMethod)
-    {
-        Assert::false(
-            $this->selectShippingPage->hasShippingMethod($shippingMethod),
-            sprintf('Shipping method "%s" should not be available but it does.', $shippingMethod)
-        );
-    }
-
-    /**
-     * @When I complete the shipping step
-     */
-    public function iCompleteTheShippingStep()
-    {
-        $this->selectShippingPage->nextStep();
-    }
-
-    /**
-     * @When I decide to change my address
-     */
-    public function iDecideToChangeMyAddress()
-    {
-        $this->selectShippingPage->changeAddress();
     }
 
     /**
@@ -261,17 +201,6 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @When /^I proceed selecting ("[^"]+" as shipping country) with "([^"]+)" method$/
-     */
-    public function iProceedSelectingShippingCountryAndShippingMethod(CountryInterface $shippingCountry = null, $shippingMethodName)
-    {
-        $this->iProceedSelectingShippingCountry($shippingCountry);
-
-        $this->selectShippingPage->selectShippingMethod($shippingMethodName ?: 'Free');
-        $this->selectShippingPage->nextStep();
-    }
-
-    /**
      * @When /^I proceed selecting "([^"]+)" shipping method$/
      * @Given /^I chose "([^"]*)" shipping method$/
      */
@@ -308,30 +237,12 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @When I go back to shipping step of the checkout
-     */
-    public function iGoBackToShippingStepOfTheCheckout()
-    {
-        $this->selectShippingPage->open();
-    }
-
-    /**
      * @Given I have proceeded selecting :paymentMethodName payment method
      * @When /^I (?:proceed|proceeded) selecting "([^"]+)" payment method$/
      */
     public function iProceedSelectingPaymentMethod($paymentMethodName = 'Offline')
     {
         $this->iProceedSelectingShippingCountryAndPaymentMethod(null, $paymentMethodName);
-    }
-
-    /**
-     * @When /^I change shipping method to "([^"]*)"$/
-     */
-    public function iChangeShippingMethod($shippingMethodName)
-    {
-        $this->selectPaymentPage->changeShippingMethod();
-        $this->selectShippingPage->selectShippingMethod($shippingMethodName);
-        $this->selectShippingPage->nextStep();
     }
 
     /**
@@ -415,17 +326,6 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Then I should be on the checkout shipping step
-     */
-    public function iShouldBeOnTheCheckoutShippingStep()
-    {
-        Assert::true(
-            $this->selectShippingPage->isOpen(),
-            'Checkout shipping page should be opened, but it is not.'
-        );
-    }
-
-    /**
      * @Then I should be on the checkout payment step
      */
     public function iShouldBeOnTheCheckoutPaymentStep()
@@ -444,17 +344,6 @@ final class CheckoutContext implements Context
         Assert::true(
             $this->completePage->isOpen(),
             'Checkout summary page should be opened, but it is not.'
-        );
-    }
-
-    /**
-     * @Then I should be informed that my order cannot be shipped to this address
-     */
-    public function iShouldBeInformedThatMyOrderCannotBeShippedToThisAddress()
-    {
-        Assert::true(
-            $this->selectShippingPage->hasNoShippingMethodsMessage(),
-            'Shipping page should have no shipping methods message but it does not.'
         );
     }
 
@@ -668,19 +557,6 @@ final class CheckoutContext implements Context
         );
     }
 
-
-
-    /**
-     * @Then I should be redirected to the shipping step
-     */
-    public function iShouldBeRedirectedToTheShippingStep()
-    {
-        Assert::true(
-            $this->selectShippingPage->isOpen(),
-            'Checkout shipping step should be opened, but it is not.'
-        );
-    }
-
     /**
      * @Then I should be able to pay again
      */
@@ -731,17 +607,6 @@ final class CheckoutContext implements Context
         Assert::true(
             $this->completePage->isOpen(),
             'Checkout summary page should be opened, but it is not.'
-        );
-    }
-
-    /**
-     * @Given I should see shipping method :shippingMethodName with fee :fee
-     */
-    public function iShouldSeeShippingFee($shippingMethodName, $fee)
-    {
-        Assert::true(
-            $this->selectShippingPage->hasShippingMethodFee($shippingMethodName, $fee),
-            sprintf('The shipping fee should be %s, but it does not.', $fee)
         );
     }
 
