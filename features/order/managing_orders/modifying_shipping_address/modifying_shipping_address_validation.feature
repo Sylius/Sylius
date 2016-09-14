@@ -16,7 +16,7 @@ Feature: Modifying a customer's shipping address validation
         And the customer chose "Free" shipping method with "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @todo
+    @ui
     Scenario: Trying to modify a customer's shipping address without specifying a first name and a last name
         When I view the summary of the order "#00000001"
         And I want to modify a customer's shipping address of this order
@@ -26,12 +26,12 @@ Feature: Modifying a customer's shipping address validation
         And I specify the postcode as "90802"
         But I do not specify the first name
         And I do not specify the last name
-        And I save my changes
+        And I try to save my changes
         Then I should be notified that the first name is required
         And I should be notified that the last name is required
         And this order should still be shipped to "Mike Ross", "350 5th Ave", "10118", "New York", "United States"
 
-    @todo
+    @ui
     Scenario: Trying to modify a customer's shipping address without specifying a city and a street
         When I view the summary of the order "#00000001"
         And I want to modify a customer's shipping address of this order
@@ -41,7 +41,7 @@ Feature: Modifying a customer's shipping address validation
         And I specify the postcode as "90802"
         And I do not specify the street
         And I do not specify the city
-        And I save my changes
+        And I try to save my changes
         Then I should be notified that the street is required
         And I should be notified that the city is required
         And this order should still be shipped to "Mike Ross", "350 5th Ave", "10118", "New York", "United States"

@@ -90,4 +90,17 @@ class UpdateShippingAddressPage extends UpdatePage implements UpdateShippingAddr
         $this->specifyPostcode($postcode);
         $this->chooseCountry($country);
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getDefinedElements()
+    {
+        return array_merge(parent::getDefinedElements(), [
+            'city' => '#sylius_order_shippingAddress_city',
+            'first_name' => '#sylius_order_shippingAddress_firstName',
+            'last_name' => '#sylius_order_shippingAddress_lastName',
+            'street' => '#sylius_order_shippingAddress_street',
+        ]);
+    }
 }
