@@ -145,14 +145,6 @@ winzou_state_machine:
                     do: ["@sm.callback.cascade_transition", "apply"]
                     args: ["object", "event", "'cancel'", "'sylius_order_shipping'"]
 
-    sylius_inventory_unit:
-        callbacks:
-            after:
-                sylius_sync_shipping:
-                    excluded_to: [sold]
-                    do: ["@sm.callback.cascade_transition", "apply"]
-                    args: ["object", "event", "null", "'sylius_shipment_unit'"]
-
     sylius_shipment:
         callbacks:
             after:
