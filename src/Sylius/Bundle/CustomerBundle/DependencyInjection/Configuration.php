@@ -11,7 +11,7 @@
 
 namespace Sylius\Bundle\CustomerBundle\DependencyInjection;
 
-use Sylius\Bundle\CustomerBundle\Doctrine\ORM\CustomerRepository;
+use Sylius\Bundle\CoreBundle\Doctrine\ORM\CustomerRepository;
 use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Bundle\ResourceBundle\Form\Type\ResourceChoiceType;
 use Sylius\Bundle\ResourceBundle\SyliusResourceBundle;

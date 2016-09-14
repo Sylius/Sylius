@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Sylius\Component\Customer\Repository;
+namespace Sylius\Component\Core\Repository;
 
 use Sylius\Component\Core\Model\CustomerInterface;
 use Sylius\Component\Resource\Repository\RepositoryInterface;
@@ -23,4 +23,11 @@ interface CustomerRepositoryInterface extends RepositoryInterface
      * @return int
      */
     public function count();
+
+    /**
+     * @param int $count
+     *
+     * @return CustomerInterface[]
+     */
+    public function findLatest($count);
 }
