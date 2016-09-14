@@ -9,3 +9,5 @@ sylius:
             max_length: O título da avaliação não deve ter mais que 255 caracteres
         rating:
             not_blank: Deve verificar a classificação da avaliação.
+        author:
+            already_exists: Este endereço de e-mail já se encontra registado. Faça login ou redefina a sua palavra-passe.
