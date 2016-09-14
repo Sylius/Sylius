@@ -378,6 +378,17 @@ final class CartContext implements Context
     }
 
     /**
+     * @Then this item should have code :variantCode
+     */
+    public function thisItemShouldHaveCode($variantCode)
+    {
+        Assert::true(
+            $this->summaryPage->hasItemWithCode($variantCode),
+            sprintf('The product with code %s should appear on the list, but it does not.', $variantCode)
+        );
+    }
+
+    /**
      * @When I add :product with :productOption :productOptionValue to the cart
      */
     public function iAddThisProductWithToTheCart(ProductInterface $product, OptionInterface $productOption, $productOptionValue)

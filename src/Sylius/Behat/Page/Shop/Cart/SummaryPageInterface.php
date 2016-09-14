@@ -97,6 +97,13 @@ interface SummaryPageInterface extends PageInterface
     public function hasItemNamed($name);
 
     /**
+     * @param string $code
+     *
+     * @return bool
+     */
+    public function hasItemWithCode($code);
+
+    /**
      * @param string $variantName
      *
      * @return bool
