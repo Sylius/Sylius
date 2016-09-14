@@ -13,12 +13,6 @@
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="sylius.order_processing.inventory_handler" class="Sylius\Component\Core\OrderProcessing\InventoryHandler">
-            <argument type="service" id="sylius.inventory_operator" />
-            <argument type="service" id="sylius.factory.order_item_unit" />
-            <argument type="service" id="sm.factory" />
-        </service>
-
         <service id="sylius.order_processing.state_resolver" class="Sylius\Component\Core\OrderProcessing\StateResolver">
             <argument type="service" id="sm.factory" />
         </service>
