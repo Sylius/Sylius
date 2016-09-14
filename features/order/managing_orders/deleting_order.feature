@@ -14,10 +14,9 @@ Feature: Deleting an order
         And the customer chose "Free" shipping method to "United States" with "Cash on Delivery" payment
         And I am logged in as an administrator
 
-    @domain @ui
+    @domain
     Scenario: Deleted order should disappear from the registry
         When I delete the order "#00000022"
-        Then I should be notified that it has been successfully deleted
         And this order should not exist in the registry
 
     @domain

@@ -437,30 +437,6 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @When I delete the order :order
-     */
-    public function iDeleteOrder(OrderInterface $order)
-    {
-        $this->sharedStorage->set('order', $order);
-
-        $this->showPage->open(['id' => $order->getId()]);
-        $this->showPage->deleteOrder();
-    }
-
-    /**
-     * @Then /^(this order) should not exist in the registry$/
-     */
-    public function orderShouldNotExistInTheRegistry(OrderInterface $order)
-    {
-        $this->indexPage->open();
-
-        Assert::false(
-            $this->indexPage->isSingleResourceOnPage(['number' => $order->getNumber()]),
-            sprintf('Order with number %s exists but should not.', $order->getNumber())
-        );
-    }
-
-    /**
      * @Then I should be notified that the order's payment has been successfully completed
      */
     public function iShouldBeNotifiedThatTheOrderSPaymentHasBeenSuccessfullyCompleted()

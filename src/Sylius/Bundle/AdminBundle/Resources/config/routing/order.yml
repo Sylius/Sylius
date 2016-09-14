@@ -3,7 +3,7 @@ sylius_admin_order:
         alias: sylius.order
         section: admin
         templates: SyliusAdminBundle:Crud
-        except: ['create', 'update', 'show']
+        only: ['index']
         grid: sylius_admin_order
         permission: true
         vars:
