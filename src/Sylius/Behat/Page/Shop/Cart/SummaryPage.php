@@ -181,6 +181,14 @@ class SummaryPage extends SymfonyPage implements SummaryPageInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function hasItemWithCode($code)
+    {
+        return $this->hasItemWith($code, '.sylius-product-variant-code');
+    }
+
+    /**
      * {@inheritdoc]
      */
     public function hasProductOutOfStockValidationMessage(ProductInterface $product)
