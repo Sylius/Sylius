@@ -157,7 +157,7 @@ final class TaxationContext implements Context
     }
 
     /**
-     * @Given /^the ("[^"]+" tax rate) is of ([^"]+)%$/
+     * @Given /^the ("[^"]+" tax rate) has changed to ([^"]+)%$/
      */
     public function theTaxRateIsOfAmount(TaxRateInterface $taxRate, $amount)
     {

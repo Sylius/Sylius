@@ -13,10 +13,10 @@ Feature: Modifying a customer's shipping address of an order with a different cu
         And that channel allows to shop using the "GBP" currency with exchange rate 3.0
         And that channel uses the "USD" currency by default
         And the store allows paying with "Cash on Delivery"
-        And the store has "DHL" shipping method with "$20.00" fee within "EN" zone
+        And the store has "DHL" shipping method with "$20.00" fee within the "EN" zone
         And the store has a product "Suit" priced at "$400.00"
         And there is a customer "mike@ross.com" that placed an order "#00000001"
-        And the customer chose "GBP" currency
+        And the customer has chosen to order in the "GBP" currency
         And the customer bought a single "Suit"
         And the customer "Mike Ross" addressed it to "350 5th Ave", "10118" "New York" in the "United States" with identical billing address
         And the customer chose "DHL" shipping method with "Cash on Delivery" payment

@@ -455,7 +455,7 @@ final class PromotionContext implements Context
     }
 
     /**
-     * @Given /^the (coupon "[^"]+") was used$/
+     * @Given /^the (coupon "[^"]+") was used up to its usage limit$/
      */
     public function theCouponWasUsed(CouponInterface $coupon)
     {

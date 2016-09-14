@@ -79,10 +79,10 @@ class UpdateShippingAddressPage extends UpdatePage implements UpdateShippingAddr
      */
     public function specifyShippingAddress($city, $street, $postcode, $country, $firstAndLastName)
     {
-        $customerName = explode(' ', $firstAndLastName);
-        $this->specifyFirstName($customerName[0]);
-        if (1 < count($customerName)) {
-            $this->specifyLastName($customerName[1]);
+        $customerNames = explode(' ', $firstAndLastName);
+        $this->specifyFirstName($customerNames[0]);
+        if (1 < count($customerNames)) {
+            $this->specifyLastName($customerNames[1]);
         }
 
         $this->specifyStreet($street);

@@ -6,9 +6,9 @@ Feature: Modifying a customer's shipping address on an order with taxes
 
     Background:
         Given the store operates on a single channel in "United States"
-        And the store ships everything for free within "US" zone
+        And the store ships everything for free within the "US" zone
         And the store allows paying offline
-        And the store has "VAT" tax rate of 20% for "Suits" within "US" zone
+        And the store has "VAT" tax rate of 20% for "Suits" within the "US" zone
         And the store has a product "Suit" priced at "$400.00"
         And it belongs to "Suits" tax category
         And there is a customer "mike@ross.com" that placed an order "#00000001"
@@ -19,7 +19,7 @@ Feature: Modifying a customer's shipping address on an order with taxes
 
     @ui
     Scenario: Modifying a customer's shipping address when the applied promotion is no longer valid
-        Given the "VAT" tax rate is of 10%
+        Given the "VAT" tax rate has changed to 10%
         When I view the summary of the order "#00000001"
         And I want to modify a customer's shipping address of this order
         And I specify their shipping address as "Los Angeles", "Seaside Fwy", "90802", "United States" for "Lucifer Morningstar"

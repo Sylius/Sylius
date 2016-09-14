@@ -21,7 +21,7 @@ Feature: Modifying a customer's shipping address on an order with an applied cou
 
     @ui
     Scenario: Modifying a customer's shipping address when the applied coupon is no longer valid
-        Given the coupon "HOLIDAY" was used
+        Given the coupon "HOLIDAY" was used up to its usage limit
         When I view the summary of the order "#00000001"
         And I want to modify a customer's shipping address of this order
         And I specify their shipping address as "Los Angeles", "Seaside Fwy", "90802", "United States" for "Lucifer Morningstar"
