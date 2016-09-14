@@ -29,9 +29,14 @@ class AdminUser extends User implements AdminUserInterface
     protected $lastName;
 
     /**
-     * @var array
+     * {@inheritdoc}
      */
-    protected $roles = [AdminUserInterface::DEFAULT_ADMIN_ROLE];
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->roles = [AdminUserInterface::DEFAULT_ADMIN_ROLE];
+    }
 
     /**
      * @return string
