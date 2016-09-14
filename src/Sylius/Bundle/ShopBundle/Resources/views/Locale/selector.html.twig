@@ -4,7 +4,7 @@
         <i class="dropdown icon"></i>
         <div class="menu">
             {% for availableLocaleCode in availableLocalesCodes %}
-                {% if availableLocaleCode is not sameas(activeLocaleCode) %}
+                {% if availableLocaleCode is not same as(activeLocaleCode) %}
                     <a href="{{ path('sylius_shop_switch_locale', {'code': availableLocaleCode}) }}" class="item sylius-available-locale">
                         {{ availableLocaleCode|sylius_locale_name }}
                     </a>

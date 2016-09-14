@@ -4,7 +4,7 @@
         <i class="dropdown icon"></i>
         <div class="menu">
             {% for availableCurrencyCode in availableCurrenciesCodes %}
-                {% if availableCurrencyCode is not sameas(activeCurrencyCode) %}
+                {% if availableCurrencyCode is not same as(activeCurrencyCode) %}
                     <a href="{{ path('sylius_shop_switch_currency', {'code': availableCurrencyCode}) }}" class="item sylius-available-currency">
                         {{ availableCurrencyCode }}
                     </a>
