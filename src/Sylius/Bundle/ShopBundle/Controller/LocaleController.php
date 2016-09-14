@@ -92,6 +92,6 @@ final class LocaleController
 
         $this->localeChangeHandler->handle($code);
 
-        return new RedirectResponse($request->headers->get('referer'));
+        return new RedirectResponse($request->headers->get('referer', $request->getBaseUrl()));
     }
 }
