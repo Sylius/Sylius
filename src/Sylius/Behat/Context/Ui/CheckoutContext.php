@@ -45,11 +45,6 @@ final class CheckoutContext implements Context
     private $homePage;
 
     /**
-     * @var SelectPaymentPageInterface
-     */
-    private $selectPaymentPage;
-
-    /**
      * @var ThankYouPageInterface
      */
     private $thankYouPage;
@@ -139,14 +134,6 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @When I decide to change order shipping method
-     */
-    public function iDecideToChangeMyShippingMethod()
-    {
-        $this->selectPaymentPage->changeShippingMethod();
-    }
-
-    /**
      * @When I go to the addressing step
      */
     public function iGoToTheAddressingStep()
@@ -207,15 +194,6 @@ final class CheckoutContext implements Context
     public function iProceedSelectingShippingMethod($shippingMethodName)
     {
         $this->iProceedSelectingShippingCountryAndShippingMethod(null, $shippingMethodName);
-    }
-
-    /**
-     * @When /^I choose "([^"]*)" payment method$/
-     */
-    public function iChoosePaymentMethod($paymentMethodName)
-    {
-        $this->selectPaymentPage->selectPaymentMethod($paymentMethodName ?: 'Offline');
-        $this->selectPaymentPage->nextStep();
     }
 
     /**
@@ -326,17 +304,6 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Then I should be on the checkout payment step
-     */
-    public function iShouldBeOnTheCheckoutPaymentStep()
-    {
-        Assert::true(
-            $this->selectPaymentPage->isOpen(),
-            'Checkout payment page should be opened, but it is not.'
-        );
-    }
-
-    /**
      * @Then I should be on the checkout summary step
      */
     public function iShouldBeOnTheCheckoutSummaryStep()
@@ -381,58 +348,11 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @Given I am at the checkout payment step
-     * @When I go back to payment step of the checkout
-     */
-    public function iAmAtTheCheckoutPaymentStep()
-    {
-        $this->selectPaymentPage->open();
-    }
-
-    /**
-     * @When I complete the payment step
-     */
-    public function iCompleteThePaymentStep()
-    {
-        $this->selectPaymentPage->nextStep();
-    }
-
-    /**
-     * @When I select :paymentMethodName payment method
-     */
-    public function iSelectPaymentMethod($paymentMethodName)
-    {
-        $this->selectPaymentPage->selectPaymentMethod($paymentMethodName);
-    }
-
-    /**
      * @When /^I do not modify anything$/
      */
     public function iDoNotModifyAnything()
     {
         // Intentionally left blank to fulfill context expectation
-    }
-
-    /**
-     * @Then I should not be able to select :paymentMethodName payment method
-     */
-    public function iShouldNotBeAbleToSelectPaymentMethod($paymentMethodName)
-    {
-        Assert::false(
-            $this->selectPaymentPage->hasPaymentMethod($paymentMethodName),
-            sprintf('Payment method "%s" should not be available, but it does.', $paymentMethodName)
-        );
-    }
-
-    /**
-     * @Then I should be able to select :paymentMethodName payment method
-     */
-    public function iShouldBeAbleToSelectPaymentMethod($paymentMethodName)
-    {
-        Assert::true(
-            $this->selectPaymentPage->hasPaymentMethod($paymentMethodName),
-            sprintf('Payment method "%s" should be available, but it does not.', $paymentMethodName)
-        );
     }
 
     /**
@@ -580,17 +500,6 @@ final class CheckoutContext implements Context
     {
         $this->selectShippingPage->nextStep();
 
-        Assert::true(
-            $this->selectPaymentPage->isOpen(),
-            'Checkout payment step should be opened, but it is not.'
-        );
-    }
-
-    /**
-     * @Then I should be redirected to the payment step
-     */
-    public function iShouldBeRedirectedToThePaymentStep()
-    {
         Assert::true(
             $this->selectPaymentPage->isOpen(),
             'Checkout payment step should be opened, but it is not.'
