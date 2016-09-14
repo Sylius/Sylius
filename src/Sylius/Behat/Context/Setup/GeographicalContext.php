@@ -129,7 +129,7 @@ final class GeographicalContext implements Context
 
     /**
      * @Given /^(this country) has the "([^"]+)" province with "([^"]+)" code$/
-     * @Given /^(country "[^"]+") has the "([^"]+)" province with "([^"]+)" code$/
+     * @Given /^(?:|the )(country "[^"]+") has the "([^"]+)" province with "([^"]+)" code$/
      */
     public function theCountryHasProvinceWithCode(CountryInterface $country, $name, $code)
     {

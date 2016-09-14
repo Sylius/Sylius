@@ -45,7 +45,7 @@ interface AddressPageInterface extends SymfonyPageInterface
     /**
      * @param string $province
      */
-    public function specifyBillingAddressProvince($province);
+    public function selectBillingAddressProvince($province);
 
     /**
      * @param AddressInterface $shippingAddress
@@ -55,7 +55,7 @@ interface AddressPageInterface extends SymfonyPageInterface
     /**
      * @param string $province
      */
-    public function specifyShippingAddressProvince($province);
+    public function selectShippingAddressProvince($province);
 
     /**
      * @return bool
@@ -84,4 +84,24 @@ interface AddressPageInterface extends SymfonyPageInterface
     public function nextStep();
 
     public function backToStore();
+
+    /**
+     * @param string $provinceName
+     */
+    public function specifyBillingAddressProvince($provinceName);
+
+    /**
+     * @param string $provinceName
+     */
+    public function specifyShippingAddressProvince($provinceName);
+
+    /**
+     * @return bool
+     */
+    public function hasShippingAddressInput();
+
+    /**
+     * @return bool
+     */
+    public function hasBillingAddressInput();
 }

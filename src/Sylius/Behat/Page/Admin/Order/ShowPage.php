@@ -348,6 +348,26 @@ class ShowPage extends SymfonyPage implements ShowPageInterface
     /**
      * {@inheritdoc}
      */
+    public function hasShippingProvinceName($provinceName)
+    {
+        $shippingAddressText = $this->getElement('shipping_address')->getText();
+
+        return false !== stripos($shippingAddressText, $provinceName);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasBillingProvinceName($provinceName)
+    {
+        $billingAddressText = $this->getElement('billing_address')->getText();
+
+        return false !== stripos($billingAddressText, $provinceName);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function getRouteName()
     {
         return 'sylius_admin_order_show';

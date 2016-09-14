@@ -407,19 +407,6 @@ final class AccountContext implements Context
     }
 
     /**
-     * @param PageInterface $page
-     * @param string $element
-     * @param string $expectedMessage
-     */
-    private function assertFieldValidationMessage(PageInterface $page, $element, $expectedMessage)
-    {
-        Assert::true(
-            $page->checkValidationMessageFor($element, $expectedMessage),
-            sprintf('There should be a message: "%s".', $expectedMessage)
-        );
-    }
-
-    /**
      * @When I subscribe to the newsletter
      */
     public function iSubscribeToTheNewsletter()
@@ -435,6 +422,41 @@ final class AccountContext implements Context
         Assert::true(
             $this->profileUpdatePage->isSubscribedToTheNewsletter(),
             'I should be subscribed to the newsletter, but I am not'
+        );
+    }
+
+    /**
+     * @Then I should see :provinceName as province in the shipping address
+     */
+    public function iShouldSeeAsProvinceInTheShippingAddress($provinceName)
+    {
+        Assert::true(
+            $this->orderShowPage->hasShippingProvinceName($provinceName),
+            sprintf('Cannot find shipping address with province %s', $provinceName)
+        );
+    }
+
+    /**
+     * @Then I should see :provinceName as province in the billing address
+     */
+    public function iShouldSeeAsProvinceInTheBillingAddress($provinceName)
+    {
+        Assert::true(
+            $this->orderShowPage->hasBillingProvinceName($provinceName),
+            sprintf('Cannot find shipping address with province %s', $provinceName)
+        );
+    }
+
+    /**
+     * @param PageInterface $page
+     * @param string $element
+     * @param string $expectedMessage
+     */
+    private function assertFieldValidationMessage(PageInterface $page, $element, $expectedMessage)
+    {
+        Assert::true(
+            $page->checkValidationMessageFor($element, $expectedMessage),
+            sprintf('There should be a message: "%s".', $expectedMessage)
         );
     }
 }

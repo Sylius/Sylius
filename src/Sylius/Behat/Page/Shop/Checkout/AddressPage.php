@@ -104,12 +104,17 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         $this->getElement('shipping_country')->selectOption($shippingAddress->getCountryCode() ?: 'Select');
         $this->getElement('shipping_city')->setValue($shippingAddress->getCity());
         $this->getElement('shipping_postcode')->setValue($shippingAddress->getPostcode());
+
+        if ($shippingAddress->getProvinceName()) {
+            $this->waitForShippingProvinceInput();
+            $this->getElement('shipping_province')->setValue($shippingAddress->getProvinceName());
+        }
     }
 
     /**
      * {@inheritdoc}
      */
-    public function specifyShippingAddressProvince($province)
+    public function selectShippingAddressProvince($province)
     {
         $this->waitForShippingProvinceSelector();
         $this->getElement('shipping_country_province')->selectOption($province);
@@ -126,12 +131,17 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         $this->getElement('billing_country')->selectOption($billingAddress->getCountryCode() ?: 'Select');
         $this->getElement('billing_city')->setValue($billingAddress->getCity());
         $this->getElement('billing_postcode')->setValue($billingAddress->getPostcode());
+
+        if ($billingAddress->getProvinceName()) {
+            $this->waitForBillingProvinceInput();
+            $this->getElement('billing_province')->setValue($billingAddress->getProvinceName());
+        }
     }
 
     /**
      * {@inheritdoc}
      */
-    public function specifyBillingAddressProvince($province)
+    public function selectBillingAddressProvince($province)
     {
         $this->waitForBillingProvinceSelector();
         $this->getElement('billing_country_province')->selectOption($province);
@@ -205,16 +215,51 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
     /**
      * {@inheritdoc}
      */
+    public function specifyBillingAddressProvince($provinceName)
+    {
+        $this->waitForBillingProvinceInput();
+        $this->getElement('billing_province')->setValue($provinceName);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function specifyShippingAddressProvince($provinceName)
+    {
+        $this->waitForShippingProvinceInput();
+        $this->getElement('shipping_province')->setValue($provinceName);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasShippingAddressInput()
+    {
+        return $this->waitForShippingProvinceInput();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function hasBillingAddressInput()
+    {
+        return $this->waitForBillingProvinceInput();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
+            'billing_first_name' => '#sylius_checkout_address_billingAddress_firstName',
+            'billing_last_name' => '#sylius_checkout_address_billingAddress_lastName',
+            'billing_street' => '#sylius_checkout_address_billingAddress_street',
             'billing_city' => '#sylius_checkout_address_billingAddress_city',
             'billing_country' => '#sylius_checkout_address_billingAddress_countryCode',
             'billing_country_province' => '[name="sylius_checkout_address[billingAddress][provinceCode]"]',
-            'billing_first_name' => '#sylius_checkout_address_billingAddress_firstName',
-            'billing_last_name' => '#sylius_checkout_address_billingAddress_lastName',
             'billing_postcode' => '#sylius_checkout_address_billingAddress_postcode',
-            'billing_street' => '#sylius_checkout_address_billingAddress_street',
+            'billing_province' => '[name="sylius_checkout_address[billingAddress][provinceName]"]',
             'checkout_subtotal' => '#checkout-subtotal',
             'customer_email' => '#sylius_checkout_address_customer_email',
             'different_billing_address' => '#sylius_checkout_address_differentBillingAddress',
@@ -228,6 +273,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
             'shipping_first_name' => '#sylius_checkout_address_shippingAddress_firstName',
             'shipping_last_name' => '#sylius_checkout_address_shippingAddress_lastName',
             'shipping_postcode' => '#sylius_checkout_address_shippingAddress_postcode',
+            'shipping_province' => '[name="sylius_checkout_address[shippingAddress][provinceName]"]',
             'shipping_street' => '#sylius_checkout_address_shippingAddress_street',
         ]);
     }
@@ -259,6 +305,9 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         });
     }
 
+    /**
+     * @return bool
+     */
     private function waitForLoginAction()
     {
         $this->getDocument()->waitFor(5, function () {
@@ -266,6 +315,9 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         });
     }
 
+    /**
+     * @return bool
+     */
     private function waitForShippingProvinceSelector()
     {
         return $this->getDocument()->waitFor(5, function () {
@@ -273,10 +325,33 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         });
     }
 
+    /**
+     * @return bool
+     */
     private function waitForBillingProvinceSelector()
     {
         return $this->getDocument()->waitFor(5, function () {
             return $this->hasElement('billing_country_province');
+        });
+    }
+
+    /**
+     * @return bool
+     */
+    private function waitForShippingProvinceInput()
+    {
+        return $this->getDocument()->waitFor(5, function () {
+            return $this->hasElement('shipping_province');
+        });
+    }
+
+    /**
+     * @return bool
+     */
+    private function waitForBillingProvinceInput()
+    {
+        return $this->getDocument()->waitFor(10, function () {
+            return $this->hasElement('billing_province');
         });
     }
 }

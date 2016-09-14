@@ -214,6 +214,7 @@ final class CheckoutContext implements Context
 
     /**
      * @When /^I specify the shipping (address as "[^"]+", "[^"]+", "[^"]+", "[^"]+" for "[^"]+")$/
+     * @When /^I specify the shipping (address for "[^"]+" from "[^"]+", "[^"]+", "[^"]+", "[^"]+", "[^"]+")$/
      * @When /^I (do not specify any shipping address) information$/
      * @When /^I change the shipping (address to "[^"]+", "[^"]+", "[^"]+", "[^"]+" for "[^"]+")$/
      */
@@ -234,7 +235,7 @@ final class CheckoutContext implements Context
      */
     public function iSpecifyShippingCountryProvinceAs($province)
     {
-        $this->addressPage->specifyShippingAddressProvince($province);
+        $this->addressPage->selectShippingAddressProvince($province);
     }
 
     /**
@@ -242,11 +243,12 @@ final class CheckoutContext implements Context
      */
     public function iSpecifyBillingCountryProvinceAs($province)
     {
-        $this->addressPage->specifyBillingAddressProvince($province);
+        $this->addressPage->selectBillingAddressProvince($province);
     }
 
     /**
      * @When /^I specify the billing (address as "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)" for "([^"]+)")$/
+     * @When /^I specify the billing (address for "([^"]+)" from "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)")$/
      * @When /^I (do not specify any billing address) information$/
      */
     public function iSpecifyTheBillingAddressAs(AddressInterface $address)
@@ -746,11 +748,11 @@ final class CheckoutContext implements Context
     }
 
     /**
-     * @When I select :paymentMethodName payment method
+     * @When I select :name payment method
      */
-    public function iSelectPaymentMethod($paymentMethodName)
+    public function iSelectPaymentMethod($name)
     {
-        $this->selectPaymentPage->selectPaymentMethod($paymentMethodName);
+        $this->selectPaymentPage->selectPaymentMethod($name);
     }
 
     /**
@@ -1102,6 +1104,66 @@ final class CheckoutContext implements Context
         Assert::true(
             $this->addressPage->isOpen(),
             'Checkout addressing page should be opened, but it is not.'
+        );
+    }
+
+    /**
+     * @When I specify the province name manually as :provinceName for shipping address
+     */
+    public function iSpecifyTheProvinceNameManuallyAsForShippingAddress($provinceName)
+    {
+        $this->addressPage->specifyShippingAddressProvince($provinceName);
+    }
+
+    /**
+     * @When I specify the province name manually as :provinceName for billing address
+     */
+    public function iSpecifyTheProvinceNameManuallyAsForBillingAddress($provinceName)
+    {
+        $this->addressPage->specifyBillingAddressProvince($provinceName);
+    }
+
+    /**
+     * @Then I should not be able to specify province name manually for shipping address
+     */
+    public function iShouldNotBeAbleToSpecifyProvinceNameManuallyForShippingAddress()
+    {
+        Assert::false(
+            $this->addressPage->hasShippingAddressInput(),
+            'I should not be able to specify manually the province for shipping address, but I can.'
+        );
+    }
+
+    /**
+     * @Then I should not be able to specify province name manually for billing address
+     */
+    public function iShouldNotBeAbleToSpecifyProvinceNameManuallyForBillingAddress()
+    {
+        Assert::false(
+            $this->addressPage->hasBillingAddressInput(),
+            'I should not be able to specify manually the province for billing address, but I can.'
+        );
+    }
+
+    /**
+     * @Then I should see :provinceName in the shipping address
+     */
+    public function iShouldSeeInTheShippingAddress($provinceName)
+    {
+        Assert::true(
+            $this->completePage->hasShippingProvinceName($provinceName),
+            sprintf('Cannot find shipping address with province %s', $provinceName)
+        );
+    }
+
+    /**
+     * @Then I should see :provinceName in the billing address
+     */
+    public function iShouldSeeInTheBillingAddress($provinceName)
+    {
+        Assert::true(
+            $this->completePage->hasBillingProvinceName($provinceName),
+            sprintf('Cannot find billing address with province %s', $provinceName)
         );
     }
 

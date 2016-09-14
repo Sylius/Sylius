@@ -155,6 +155,7 @@ final class CustomerContext implements Context
 
     /**
      * @Given /^(his) shipping (address is "(?:[^"]+)", "(?:[^"]+)", "(?:[^"]+)", "(?:[^"]+)" for "(?:[^"]+)")$/
+     * @Given /^(his) shipping (address is "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)")$/
      */
     public function heHasShippingAddress(CustomerInterface $customer, AddressInterface $address)
     {
@@ -165,6 +166,7 @@ final class CustomerContext implements Context
 
     /**
      * @Given /^(his) billing (address is "(?:[^"]+)", "(?:[^"]+)", "(?:[^"]+)", "(?:[^"]+)" for "(?:[^"]+)")$/
+     * @Given /^(his) billing (address is "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)")$/
      */
     public function heHasBillingAddress(CustomerInterface $customer, AddressInterface $address)
     {

@@ -142,4 +142,18 @@ interface CompletePageInterface extends SymfonyPageInterface
     public function changePaymentMethod();
 
     public function confirmOrder();
+
+    /**
+     * @param string $provinceName
+     *
+     * @return bool
+     */
+    public function hasShippingProvinceName($provinceName);
+
+    /**
+     * @param string $provinceName
+     *
+     * @return bool
+     */
+    public function hasBillingProvinceName($provinceName);
 }

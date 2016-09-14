@@ -17,6 +17,7 @@ use Sylius\Behat\Page\Admin\Customer\CreatePageInterface;
 use Sylius\Behat\Page\Admin\Customer\ShowPageInterface;
 use Sylius\Behat\Page\Admin\Customer\UpdatePageInterface;
 use Sylius\Behat\Service\SharedStorageInterface;
+use Sylius\Component\Core\Model\Customer;
 use Sylius\Component\Customer\Model\CustomerInterface;
 use Webmozart\Assert\Assert;
 
@@ -526,6 +527,28 @@ final class ManagingCustomersContext implements Context
         Assert::true(
             $this->updatePage->isSubscribedToTheNewsletter(),
             'This customer should subscribe to the newsletter.'
+        );
+    }
+
+    /**
+     * @Then the province in the shipping address should be :provinceName
+     */
+    public function theProvinceInTheShippingAddressShouldBe($provinceName)
+    {
+        Assert::true(
+            $this->showPage->hasShippingProvinceName($provinceName),
+            sprintf('Cannot find shipping address with province %s', $provinceName)
+        );
+    }
+
+    /**
+     * @Then the province in the billing address should be :provinceName
+     */
+    public function theProvinceInTheShippingBillingShouldBe($provinceName)
+    {
+        Assert::true(
+            $this->showPage->hasBillingProvinceName($provinceName),
+            sprintf('Cannot find shipping address with province %s', $provinceName)
         );
     }
 }

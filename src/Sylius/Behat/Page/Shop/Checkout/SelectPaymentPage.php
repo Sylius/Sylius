@@ -11,6 +11,7 @@
 
 namespace Sylius\Behat\Page\Shop\Checkout;
 
+use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\SymfonyPage;
 
@@ -32,8 +33,16 @@ class SelectPaymentPage extends SymfonyPage implements SelectPaymentPageInterfac
      */
     public function selectPaymentMethod($paymentMethod)
     {
+        if ($this->getDriver() instanceof Selenium2Driver) {
+            $paymentMethodOption = $this->getElement('payment_method_select');
+            $paymentMethodOption->getParent()->click();
+
+            return;
+        }
+
         $paymentMethodElement = $this->getElement('payment_method');
-        $paymentMethodElement->selectOption($paymentMethodElement->getAttribute('value'));
+        $paymentMethodValue = $this->getElement('payment_method_option', ['%payment_method%' => $paymentMethod])->getAttribute('value');
+        $paymentMethodElement->selectOption($paymentMethodValue);
     }
 
     /**
@@ -94,6 +103,7 @@ class SelectPaymentPage extends SymfonyPage implements SelectPaymentPageInterfac
             'order_cannot_be_paid_message' => '#sylius-order-cannot-be-paid',
             'payment_method' => '[name="sylius_checkout_select_payment[payments][0][method]"]',
             'payment_method_option' => '.item:contains("%payment_method%") input',
+            'payment_method_select' => '#sylius_checkout_select_payment_payments_0_method_0',
             'shipping_step_label' => '.steps a:contains("Shipping")',
         ]);
     }

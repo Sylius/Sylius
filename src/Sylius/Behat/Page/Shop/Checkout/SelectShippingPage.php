@@ -11,6 +11,7 @@
 
 namespace Sylius\Behat\Page\Shop\Checkout;
 
+use Behat\Mink\Driver\Selenium2Driver;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Sylius\Behat\Page\SymfonyPage;
 
@@ -32,6 +33,13 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
      */
     public function selectShippingMethod($shippingMethod)
     {
+        if ($this->getDriver() instanceof Selenium2Driver) {
+            $shippingMethodOption = $this->getElement('shipping_method_select');
+            $shippingMethodOption->getParent()->click();
+
+            return;
+        }
+
         $shippingMethodElement = $this->getElement('shipping_method');
         $shippingMethodValue = $this->getElement('shipping_method_option', ['%shipping_method%' => $shippingMethod])->getAttribute('value');
 
@@ -116,6 +124,8 @@ class SelectShippingPage extends SymfonyPage implements SelectShippingPageInterf
             'shipping_method' => '[name="sylius_checkout_select_shipping[shipments][0][method]"]',
             'shipping_method_fee' => '.item:contains("%shipping_method%") .fee',
             'shipping_method_option' => '.item:contains("%shipping_method%") input',
+            'shipping_method_select' => '#sylius_checkout_select_shipping_shipments_0_method_0',
+
         ]);
     }
 }
