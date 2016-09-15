@@ -6,11 +6,11 @@ Feature: Seeing order item detailed data
 
     Background:
         Given the store operates on a single channel in "United States"
-        And the store has "VAT" tax rate of 10% for "T-Shirts" within "US" zone
+        And the store has "VAT" tax rate of 10% for "T-Shirts" within the "US" zone
         And the store classifies its products as "T-Shirts"
         And the store has a product "Iron Man T-Shirt" priced at "$39.00"
         And it belongs to "T-Shirts" tax category
-        And the store ships everything for free within "US" zone
+        And the store ships everything for free within the "US" zone
         And the store allows paying with "Cash on Delivery"
         And there is a promotion "#teamIronMan promotion"
         And it gives "$12.00" discount to every order with quantity at least 3

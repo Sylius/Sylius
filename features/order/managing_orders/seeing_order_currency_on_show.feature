@@ -11,9 +11,9 @@ Feature: Seeing the currency an order has been placed in on it's details page
         And the store operates on a channel named "Web"
         And that channel allows to shop using "USD" and "GBP" currencies
         And that channel uses the "USD" currency by default
-        And the store has "Low VAT" tax rate of 10% for "Lowered EN services" within "EN" zone
+        And the store has "Low VAT" tax rate of 10% for "Lowered EN services" within the "EN" zone
         And the store allows paying with "Cash on Delivery"
-        And the store has "DHL" shipping method with "$20.00" fee within "EN" zone
+        And the store has "DHL" shipping method with "$20.00" fee within the "EN" zone
         And the store has a product "Angel T-Shirt" priced at "$20.00"
         And it belongs to "Lowered EN services" tax category
         And there is a promotion "Order's Extravaganza"
@@ -47,7 +47,7 @@ Feature: Seeing the currency an order has been placed in on it's details page
     @ui
     Scenario: All prices are in the currency of customer's chosing at the time of placing the order
         Given there is a customer "satin@teamlucifer.com" that placed an order "#00000666"
-        And the customer have chosen to order in the "GBP" currency
+        And the customer has chosen to order in the "GBP" currency
         And the customer bought a single "Angel T-Shirt"
         And the customer "No Face" addressed it to "Lucifer Morningstar", "Seaside Fwy" "90802" in the "British Virgin Islands"
         And for the billing address of "Mazikeen Lilim" in the "Pacific Coast Hwy", "90806" "Los Angeles", "British Virgin Islands"
