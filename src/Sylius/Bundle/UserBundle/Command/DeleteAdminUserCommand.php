@@ -33,7 +33,7 @@ class DeleteAdminUserCommand extends ContainerAwareCommand
             ->setName('sylius:admin-user:delete')
             ->setDescription('Deletes an administrator account.')
             ->setDefinition([
-                new InputArgument('email', InputArgument::REQUIRED, 'Email'),
+                new InputArgument('identifier', InputArgument::REQUIRED, 'Identified (username or email)'),
             ])
             ->setHelp(<<<EOT
 The <info>%command.name%</info> command deletes an admin account.
@@ -47,16 +47,16 @@ EOT
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $email = $input->getArgument('email');
-        $manager = $this->getEntityManager();
+        $identifier = $input->getArgument('identifier');
 
         /** @var AdminUserInterface $user */
-        $user = $this->getUserRepository()->findOneByEmail($email);
+        $user = $this->getUserProvider()->loadUserByUsername($identifier);
 
         if (null === $user) {
-            throw new \InvalidArgumentException(sprintf('Could not find user identified by email "%s"', $email));
+            throw new \InvalidArgumentException(sprintf('Could not find user identified by identifier "%s"', $identifier));
         }
 
+        $manager = $this->getEntityManager();
         $manager->remove($user);
         $manager->flush();
     }
@@ -66,20 +66,20 @@ EOT
      */
     protected function interact(InputInterface $input, OutputInterface $output)
     {
-        if (!$input->getArgument('email')) {
-            $email = $this->getHelper('dialog')->askAndValidate(
+        if (!$input->getArgument('identifier')) {
+            $identifier = $this->getHelper('dialog')->askAndValidate(
                 $output,
-                'Please enter an email:',
+                'Please enter an identifier (email or username):',
                 function ($username) {
                     if (empty($username)) {
-                        throw new \Exception('Email can not be empty');
+                        throw new \Exception('Identifier can not be empty');
                     }
 
                     return $username;
                 }
             );
 
-            $input->setArgument('email', $email);
+            $input->setArgument('identifier', $identifier);
         }
     }
 
@@ -94,8 +94,8 @@ EOT
     /**
      * @return EntityRepository
      */
-    protected function getUserRepository()
+    protected function getUserProvider()
     {
-        return $this->getContainer()->get('sylius.repository.admin_user');
+        return $this->getContainer()->get('sylius.admin_user.provider.email_or_name_based');
     }
 }

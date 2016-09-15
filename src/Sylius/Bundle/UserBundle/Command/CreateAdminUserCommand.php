@@ -33,7 +33,7 @@ class CreateAdminUserCommand extends ContainerAwareCommand
             ->setName('sylius:admin-user:create')
             ->setDescription('Creates a new admin user account.')
             ->setDefinition([
-                new InputArgument('email', InputArgument::REQUIRED, 'Email'),
+                new InputArgument('identifier', InputArgument::REQUIRED, 'Identifier'),
                 new InputArgument('password', InputArgument::REQUIRED, 'Password'),
             ])
             ->setHelp(<<<EOT
@@ -48,19 +48,18 @@ EOT
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $email = $input->getArgument('email');
+        $identifier = $input->getArgument('identifier');
         $password = $input->getArgument('password');
 
         $user = $this->createUser(
-            $email,
-            $password,
-            ['ROLE_ADMINISTRATION_ACCESS']
+            $identifier,
+            $password
         );
 
         $this->getEntityManager()->persist($user);
         $this->getEntityManager()->flush();
 
-        $output->writeln(sprintf('Created user <comment>%s</comment>', $email));
+        $output->writeln(sprintf('Created user <comment>%s</comment>', $identifier));
     }
 
     /**
@@ -68,20 +67,20 @@ EOT
      */
     protected function interact(InputInterface $input, OutputInterface $output)
     {
-        if (!$input->getArgument('email')) {
-            $email = $this->getHelper('dialog')->askAndValidate(
+        if (!$input->getArgument('identifier')) {
+            $identifier = $this->getHelper('dialog')->askAndValidate(
                 $output,
-                'Please enter an email:',
+                'Please enter an identifier:',
                 function ($username) {
                     if (empty($username)) {
-                        throw new \Exception('Email can not be empty');
+                        throw new \Exception('Identifier can not be empty');
                     }
 
                     return $username;
                 }
             );
 
-            $input->setArgument('email', $email);
+            $input->setArgument('identifier', $identifier);
         }
 
         if (!$input->getArgument('password')) {
@@ -102,24 +101,23 @@ EOT
     }
 
     /**
-     * @param string $email
+     * @param string $identifier
      * @param string $password
      * @param array $securityRoles
      *
      * @return AdminUserInterface
      */
-    protected function createUser($email, $password, array $securityRoles = ['ROLE_ADMINISTRATION_ACCESS'])
+    protected function createUser($identifier, $password)
     {
         $canonicalizer = $this->getContainer()->get('sylius.user.canonicalizer');
 
         /** @var AdminUserInterface $user */
         $user = $this->getUserFactory()->createNew();
-        $user->setUsername($email);
-        $user->setEmail($email);
+        $user->setUsername($identifier);
+        $user->setEmail($identifier);
         $user->setUsernameCanonical($canonicalizer->canonicalize($user->getUsername()));
         $user->setEmailCanonical($canonicalizer->canonicalize($user->getEmail()));
         $user->setPlainPassword($password);
-        $user->setRoles($securityRoles);
         $user->enable();
         $this->getContainer()->get('sylius.user.password_updater')->updatePassword($user);
 
