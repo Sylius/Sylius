@@ -83,6 +83,10 @@ final class CheckoutResolver implements EventSubscriberInterface
 
         /** @var OrderInterface $order */
         $order = $this->cartContext->getCart();
+        if ($order->isEmpty()) {
+            $event->setResponse(new RedirectResponse($this->urlGenerator->generate('sylius_shop_cart_summary')));
+        }
+
         $stateMachine = $this->stateMachineFactory->get($order, OrderCheckoutTransitions::GRAPH);
 
         if ($stateMachine->can($this->getRequestedTransition($request))) {
@@ -95,7 +99,7 @@ final class CheckoutResolver implements EventSubscriberInterface
             return;
         }
 
-        $event->setResponse(new RedirectResponse($this->urlGenerator->generate($order->getCheckoutState())));
+        $event->setResponse(new RedirectResponse($this->urlGenerator->generateForOrderCheckoutState($order)));
     }
 
     /**

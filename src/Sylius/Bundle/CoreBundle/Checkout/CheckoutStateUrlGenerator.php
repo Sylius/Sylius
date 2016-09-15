@@ -11,15 +11,15 @@
 
 namespace Sylius\Bundle\CoreBundle\Checkout;
 
+use Sylius\Component\Core\Model\OrderInterface;
 use Symfony\Component\Routing\Exception\RouteNotFoundException;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RequestContext;
 use Symfony\Component\Routing\RouterInterface;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
  */
-final class CheckoutStateUrlGenerator implements UrlGeneratorInterface
+final class CheckoutStateUrlGenerator implements CheckoutStateUrlGeneratorInterface
 {
     /**
      * @var RouterInterface
@@ -44,13 +44,21 @@ final class CheckoutStateUrlGenerator implements UrlGeneratorInterface
     /**
      * {@inheritdoc}
      */
-    public function generate($name, $parameters = array(), $referenceType = self::ABSOLUTE_PATH)
+    public function generate($name, $parameters = [], $referenceType = self::ABSOLUTE_PATH)
     {
-        if (!isset($this->routeCollection[$name]['route'])) {
+        return $this->router->generate($name, $parameters, $referenceType);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function generateForOrderCheckoutState(OrderInterface $order, $parameters = [], $referenceType = self::ABSOLUTE_PATH)
+    {
+        if (!isset($this->routeCollection[$order->getCheckoutState()]['route'])) {
             throw new RouteNotFoundException();
         }
 
-        return $this->router->generate($this->routeCollection[$name]['route'], $parameters, $referenceType);
+        return $this->router->generate($this->routeCollection[$order->getCheckoutState()]['route'], $parameters, $referenceType);
     }
 
     /**

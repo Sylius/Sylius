@@ -324,7 +324,7 @@ final class CartContext implements Context
     }
 
     /**
-     * @Then I should be on my cart summary page
+     * @Then /^I should be(?: on| redirected to) my cart summary page$/
      */
     public function shouldBeOnMyCartSummaryPage()
     {
