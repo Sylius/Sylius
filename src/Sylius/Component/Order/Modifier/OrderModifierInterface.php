@@ -17,17 +17,17 @@ use Sylius\Component\Order\Model\OrderItemInterface;
 /**
  * @author Łukasz Chrusciel <lukasz.chrusciel@lakion.com>
  */
-interface CartModifierInterface
+interface OrderModifierInterface
 {
     /**
      * @param OrderInterface $cart
      * @param OrderItemInterface $cartItem
      */
-    public function addToCart(OrderInterface $cart, OrderItemInterface $cartItem);
+    public function addToOrder(OrderInterface $cart, OrderItemInterface $cartItem);
 
     /**
      * @param OrderInterface $cart
      * @param OrderItemInterface $item
      */
-    public function removeFromCart(OrderInterface $cart, OrderItemInterface $item);
+    public function removeFromOrder(OrderInterface $cart, OrderItemInterface $item);
 }

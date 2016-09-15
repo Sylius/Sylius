@@ -393,7 +393,7 @@ class OrderRepository extends BaseOrderRepository implements OrderRepositoryInte
             ->getQuery()
             ->getOneOrNullResult()
         ;
-}
+    }
 
     /**
      * @param \DateTime $from

@@ -19,7 +19,7 @@ use Sylius\Bundle\ResourceBundle\Controller\ResourceController;
 use Sylius\Component\Order\CartActions;
 use Sylius\Component\Order\Context\CartContextInterface;
 use Sylius\Component\Order\Model\OrderInterface;
-use Sylius\Component\Order\Modifier\CartModifierInterface;
+use Sylius\Component\Order\Modifier\OrderModifierInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Resource\ResourceActions;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -84,7 +84,7 @@ class OrderItemController extends ResourceController
             }
 
             $cart = $this->getCurrentCart();
-            $this->getCartModifier()->addToCart($cart, $newResource);
+            $this->getOrderModifier()->addToOrder($cart, $newResource);
 
             $cartManager = $this->getCartManager();
             $cartManager->persist($cart);
@@ -141,7 +141,7 @@ class OrderItemController extends ResourceController
 
         $cart = $this->getCurrentCart();
 
-        $this->getCartModifier()->removeFromCart($cart, $resource);
+        $this->getOrderModifier()->removeFromOrder($cart, $resource);
 
         $this->repository->remove($resource);
 
@@ -223,11 +223,11 @@ class OrderItemController extends ResourceController
     }
 
     /**
-     * @return CartModifierInterface
+     * @return OrderModifierInterface
      */
-    private function getCartModifier()
+    private function getOrderModifier()
     {
-        return $this->get('sylius.cart.cart_modifier');
+        return $this->get('sylius.cart.order_modifier');
     }
 
     /**

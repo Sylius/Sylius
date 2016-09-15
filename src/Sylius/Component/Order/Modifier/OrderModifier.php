@@ -19,7 +19,7 @@ use Sylius\Component\Order\Processor\OrderProcessorInterface;
 /**
  * @author Łukasz Chrusciel <lukasz.chrusciel@lakion.com>
  */
-final class CartModifier implements CartModifierInterface
+final class OrderModifier implements OrderModifierInterface
 {
     /**
      * @var OrderProcessorInterface
@@ -44,33 +44,33 @@ final class CartModifier implements CartModifierInterface
     }
 
     /**
-     * @param OrderInterface $cart
+     * @param OrderInterface $order
      * @param OrderItemInterface $item
      */
-    public function addToCart(OrderInterface $cart, OrderItemInterface $item)
+    public function addToOrder(OrderInterface $order, OrderItemInterface $item)
     {
-        $this->resolveCartItem($cart, $item);
+        $this->resolveOrderItem($order, $item);
 
-        $this->orderProcessor->process($cart);
+        $this->orderProcessor->process($order);
     }
 
     /**
-     * @param OrderInterface $cart
+     * @param OrderInterface $order
      * @param OrderItemInterface $item
      */
-    public function removeFromCart(OrderInterface $cart, OrderItemInterface $item)
+    public function removeFromOrder(OrderInterface $order, OrderItemInterface $item)
     {
-        $cart->removeItem($item);
-        $this->orderProcessor->process($cart);
+        $order->removeItem($item);
+        $this->orderProcessor->process($order);
     }
 
     /**
-     * @param OrderInterface $cart
+     * @param OrderInterface $order
      * @param OrderItemInterface $item
      */
-    private function resolveCartItem(OrderInterface $cart, OrderItemInterface $item)
+    private function resolveOrderItem(OrderInterface $order, OrderItemInterface $item)
     {
-        foreach ($cart->getItems() as $existingItem) {
+        foreach ($order->getItems() as $existingItem) {
             if ($item->equals($existingItem)) {
                 $this->orderItemQuantityModifier->modify($existingItem, $existingItem->getQuantity() + $item->getQuantity());
 
@@ -78,6 +78,6 @@ final class CartModifier implements CartModifierInterface
             }
         }
 
-        $cart->addItem($item);
+        $order->addItem($item);
     }
 }

@@ -149,7 +149,7 @@ interface OrderRepositoryInterface extends BaseOrderRepositoryInterface
      * @param string $id
      * @param ChannelInterface $channel
      *
-     * @return null|OrderInterface
+     * @return OrderInterface|null
      */
     public function findCartByIdAndChannel($id, ChannelInterface $channel);
 }

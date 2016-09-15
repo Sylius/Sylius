@@ -70,7 +70,7 @@
             <tag name="kernel.event_subscriber" />
         </service>
 
-        <service id="sylius.cart.cart_modifier" class="Sylius\Component\Order\Modifier\CartModifier">
+        <service id="sylius.cart.order_modifier" class="Sylius\Component\Order\Modifier\OrderModifier">
             <argument type="service" id="sylius.order_processing.order_processor" />
             <argument type="service" id="sylius.order_item_quantity_modifier" />
         </service>

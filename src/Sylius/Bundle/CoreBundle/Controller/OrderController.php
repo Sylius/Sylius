@@ -135,7 +135,7 @@ class OrderController extends ResourceController
     {
         $configuration = $this->requestConfigurationFactory->create($this->metadata, $request);
 
-        $orderId = $this->getSession()->get('sylius_order_id');
+        $orderId = $this->get('session')->get('sylius_order_id');
         Assert::notNull($orderId);
         $order = $this->repository->findOneForPayment($orderId);
         Assert::notNull($order);
@@ -320,14 +320,6 @@ class OrderController extends ResourceController
     private function getOrderStateResolver()
     {
         return $this->get('sylius.order_processing.state_resolver');
-    }
-
-    /**
-     * @return SessionInterface
-     */
-    private function getSession()
-    {
-        return $this->get('session');
     }
 
     /**

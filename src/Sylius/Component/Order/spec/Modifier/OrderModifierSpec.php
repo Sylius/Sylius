@@ -14,18 +14,18 @@ namespace spec\Sylius\Component\Order\Modifier;
 use Prophecy\Argument;
 use PhpSpec\ObjectBehavior;
 use Sylius\Component\Order\Model\OrderItemInterface;
-use Sylius\Component\Order\Modifier\CartModifier;
-use Sylius\Component\Order\Modifier\CartModifierInterface;
+use Sylius\Component\Order\Modifier\OrderModifier;
+use Sylius\Component\Order\Modifier\OrderModifierInterface;
 use Sylius\Component\Order\Model\OrderInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Order\Processor\OrderProcessorInterface;
 
 /**
- * @mixin CartModifier
+ * @mixin OrderModifier
  *
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
  */
-final class CartModifierSpec extends ObjectBehavior
+final class OrderModifierSpec extends ObjectBehavior
 {
     function let(OrderProcessorInterface $orderProcessor, OrderItemQuantityModifierInterface $orderItemQuantityModifier)
     {
@@ -34,75 +34,75 @@ final class CartModifierSpec extends ObjectBehavior
 
     function it_is_initializable()
     {
-        $this->shouldHaveType(CartModifier::class);
+        $this->shouldHaveType(OrderModifier::class);
     }
 
-    function it_implements_cart_modifier_interface()
+    function it_implements_order_modifier_interface()
     {
-        $this->shouldImplement(CartModifierInterface::class);
+        $this->shouldImplement(OrderModifierInterface::class);
     }
 
-    function it_adds_new_item_to_cart_if_it_is_empty(
-        OrderInterface $cart,
-        OrderItemInterface $cartItem,
+    function it_adds_new_item_to_order_if_it_is_empty(
+        OrderInterface $order,
+        OrderItemInterface $orderItem,
         OrderProcessorInterface $orderProcessor
     ) {
-        $cart->getItems()->willReturn([]);
+        $order->getItems()->willReturn([]);
 
-        $cart->addItem($cartItem)->shouldBeCalled();
-        $orderProcessor->process($cart)->shouldBeCalled();
+        $order->addItem($orderItem)->shouldBeCalled();
+        $orderProcessor->process($order)->shouldBeCalled();
 
-        $this->addToCart($cart, $cartItem);
+        $this->addToOrder($order, $orderItem);
     }
 
-    function it_adds_new_item_to_cart_if_different_cart_item_is_in_a_cart(
-        OrderInterface $cart,
+    function it_adds_new_item_to_order_if_different_order_item_is_in_a_order(
+        OrderInterface $order,
         OrderItemInterface $existingItem,
         OrderItemInterface $newItem,
         OrderItemQuantityModifierInterface $orderItemQuantityModifier,
         OrderProcessorInterface $orderProcessor
     ) {
-        $cart->getItems()->willReturn([$existingItem]);
+        $order->getItems()->willReturn([$existingItem]);
 
         $newItem->equals($existingItem)->willReturn(false);
 
         $orderItemQuantityModifier->modify(Argument::type(OrderInterface::class), Argument::any())->shouldNotBeCalled();
 
-        $cart->addItem($newItem)->shouldBeCalled();
-        $orderProcessor->process($cart)->shouldBeCalled();
+        $order->addItem($newItem)->shouldBeCalled();
+        $orderProcessor->process($order)->shouldBeCalled();
 
-        $this->addToCart($cart, $newItem);
+        $this->addToOrder($order, $newItem);
     }
 
-    function it_changes_quntity_of_item_if_same_cart_item_already_exists(
-        OrderInterface $cart,
+    function it_changes_quntity_of_item_if_same_order_item_already_exists(
+        OrderInterface $order,
         OrderItemInterface $existingItem,
         OrderItemInterface $newItem,
         OrderItemQuantityModifierInterface $orderItemQuantityModifier,
         OrderProcessorInterface $orderProcessor
     ) {
-        $cart->getItems()->willReturn([$existingItem]);
+        $order->getItems()->willReturn([$existingItem]);
 
         $newItem->equals($existingItem)->willReturn(true);
         $existingItem->getQuantity()->willReturn(2);
 
         $newItem->getQuantity()->willReturn(3);
 
-        $cart->addItem($existingItem)->shouldNotBeCalled();
+        $order->addItem($existingItem)->shouldNotBeCalled();
         $orderItemQuantityModifier->modify($existingItem, 5)->shouldBeCalled();
-        $orderProcessor->process($cart)->shouldBeCalled();
+        $orderProcessor->process($order)->shouldBeCalled();
 
-        $this->addToCart($cart, $newItem);
+        $this->addToOrder($order, $newItem);
     }
 
-    function it_removes_cart_item_from_cart(
-        OrderInterface $cart,
-        OrderItemInterface $cartItem,
+    function it_removes_order_item_from_order(
+        OrderInterface $order,
+        OrderItemInterface $orderItem,
         OrderProcessorInterface $orderProcessor
     ) {
-        $cart->removeItem($cartItem)->shouldBeCalled();
-        $orderProcessor->process($cart)->shouldBeCalled();
+        $order->removeItem($orderItem)->shouldBeCalled();
+        $orderProcessor->process($order)->shouldBeCalled();
 
-        $this->removeFromCart($cart, $cartItem);
+        $this->removeFromOrder($order, $orderItem);
     }
 }
