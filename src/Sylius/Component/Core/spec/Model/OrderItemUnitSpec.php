@@ -62,12 +62,6 @@ final class OrderItemUnitSpec extends ObjectBehavior
         $this->shouldHaveType(BaseOrderItemUnit::class);
     }
 
-    function its_inventory_state_is_mutable()
-    {
-        $this->setInventoryState('state');
-        $this->getInventoryState()->shouldReturn('state');
-    }
-
     function its_shipment_is_mutable(ShipmentInterface $shipment)
     {
         $this->setShipment($shipment);
@@ -93,23 +87,11 @@ final class OrderItemUnitSpec extends ObjectBehavior
         $this->getStockable()->shouldReturn($variant);
     }
 
-    function it_can_be_sold()
-    {
-        $this->setInventoryState(InventoryUnitInterface::STATE_SOLD);
-        $this->shouldBeSold();
-    }
-
     function its_shippable_is_order_item_variant(OrderItemInterface $orderItem, ProductVariantInterface $variant)
     {
         $orderItem->getVariant()->willReturn($variant);
 
         $this->getShippable()->shouldReturn($variant);
-    }
-
-    function its_shipping_state_is_mutable()
-    {
-        $this->setShippingState(ShipmentInterface::STATE_SHIPPED);
-        $this->getShippingState()->shouldReturn(ShipmentInterface::STATE_SHIPPED);
     }
 
     function it_returns_0_tax_total_when_there_are_no_tax_adjustments()

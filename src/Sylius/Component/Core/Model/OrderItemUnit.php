@@ -11,7 +11,6 @@
 
 namespace Sylius\Component\Core\Model;
 
-use Sylius\Component\Inventory\Model\InventoryUnitInterface;
 use Sylius\Component\Order\Model\OrderItemUnit as BaseOrderItemUnit;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Shipping\Model\ShipmentInterface as BaseShipmentInterface;
@@ -24,19 +23,9 @@ class OrderItemUnit extends BaseOrderItemUnit implements OrderItemUnitInterface
     use TimestampableTrait;
 
     /**
-     * @var string InventoryUnitInterface::STATE_*
-     */
-    protected $inventoryState = InventoryUnitInterface::STATE_CHECKOUT;
-
-    /**
-     * @var BaseShipmentInterface
+     * @var ShipmentInterface
      */
     protected $shipment;
-
-    /**
-     * @var string BaseShipmentInterface::STATE_*
-     */
-    protected $shippingState = BaseShipmentInterface::STATE_CART;
 
     /**
      * @param OrderItemInterface $orderItem
@@ -67,30 +56,6 @@ class OrderItemUnit extends BaseOrderItemUnit implements OrderItemUnitInterface
     /**
      * {@inheritdoc}
      */
-    public function getInventoryState()
-    {
-        return $this->inventoryState;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setInventoryState($state)
-    {
-        $this->inventoryState = $state;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isSold()
-    {
-        return InventoryUnitInterface::STATE_SOLD === $this->inventoryState;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getShipment()
     {
         return $this->shipment;
@@ -113,24 +78,6 @@ class OrderItemUnit extends BaseOrderItemUnit implements OrderItemUnitInterface
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function getShippingState()
-    {
-        return $this->shippingState;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setShippingState($state)
-    {
-        $this->shippingState = $state;
-    }
-
-    /**
-     * Returns sum of neutral and non neutral tax adjustments.
-     *
      * {@inheritdoc}
      */
     public function getTaxTotal()
