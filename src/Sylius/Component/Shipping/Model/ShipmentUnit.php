@@ -57,7 +57,7 @@ class ShipmentUnit implements ShipmentUnitInterface
     }
 
     /**
-     * {@inheritd
+     * {@inheritdoc}
      */
     public function getShipment()
     {
