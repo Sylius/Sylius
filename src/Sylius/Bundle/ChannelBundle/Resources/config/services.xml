@@ -12,40 +12,28 @@
 -->
 
 <container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
-    <parameters>
-        <parameter key="sylius.context.channel.composite.class">Sylius\Component\Channel\Context\CompositeChannelContext</parameter>
-
-        <parameter key="sylius.context.channel.request_based.class">Sylius\Component\Channel\Context\RequestBased\ChannelContext</parameter>
-        <parameter key="sylius.context.channel.single_channel.class">Sylius\Component\Channel\Context\SingleChannelContext</parameter>
-
-        <parameter key="sylius.context.channel.request_based.resolver.composite.class">Sylius\Component\Channel\Context\RequestBased\CompositeRequestResolver</parameter>
-        <parameter key="sylius.context.channel.request_based.resolver.hostname_based.class">Sylius\Component\Channel\Context\RequestBased\HostnameBasedRequestResolver</parameter>
-
-        <parameter key="sylius.collector.channel.class">Sylius\Bundle\ChannelBundle\Collector\ChannelCollector</parameter>
-    </parameters>
-
     <services>
-        <service id="sylius.context.channel.composite" class="%sylius.context.channel.composite.class%" public="false" />
+        <service id="sylius.context.channel.composite" class="Sylius\Component\Channel\Context\CompositeChannelContext" public="false" />
 
-        <service id="sylius.context.channel.request_based" class="%sylius.context.channel.request_based.class%" public="false">
+        <service id="sylius.context.channel.request_based" class="Sylius\Component\Channel\Context\RequestBased\ChannelContext" public="false">
             <argument type="service" id="sylius.context.channel.request_based.resolver" />
             <argument type="service" id="request_stack" />
             <tag name="sylius.context.channel" />
         </service>
 
-        <service id="sylius.context.channel.single_channel" class="%sylius.context.channel.single_channel.class%" public="false">
+        <service id="sylius.context.channel.single_channel" class="Sylius\Component\Channel\Context\SingleChannelContext" public="false">
             <argument type="service" id="sylius.repository.channel" />
             <tag name="sylius.context.channel" priority="-128"/>
         </service>
 
-        <service id="sylius.context.channel.request_based.resolver.composite" class="%sylius.context.channel.request_based.resolver.composite.class%" public="false"/>
+        <service id="sylius.context.channel.request_based.resolver.composite" class="Sylius\Component\Channel\Context\RequestBased\CompositeRequestResolver" public="false"/>
 
-        <service id="sylius.context.channel.request_based.resolver.hostname_based" class="%sylius.context.channel.request_based.resolver.hostname_based.class%" public="false">
+        <service id="sylius.context.channel.request_based.resolver.hostname_based" class="Sylius\Component\Channel\Context\RequestBased\HostnameBasedRequestResolver" public="false">
             <argument type="service" id="sylius.repository.channel" />
             <tag name="sylius.context.channel.request_based.resolver" />
         </service>
 
-        <service id="sylius.collector.channel" class="%sylius.collector.channel.class%" public="false">
+        <service id="sylius.collector.channel" class="Sylius\Bundle\ChannelBundle\Collector\ChannelCollector" public="false">
             <argument type="service" id="sylius.repository.channel" />
             <argument type="service" id="sylius.context.channel" />
             <argument>false</argument>
