@@ -70,7 +70,7 @@ final class CheckoutPaymentApiTest extends CheckoutApiTestCase
 
         $orderId = $checkoutData['order1']->getId();
         $this->addressOrder($orderId);
-        $this->selectOrderShippingMethod($orderId, $checkoutData['ups']->getId());
+        $this->selectOrderShippingMethod($orderId, $checkoutData['ups']->getCode());
 
         $data =
 <<<EOT
@@ -101,7 +101,7 @@ EOT;
 
         $orderId = $checkoutData['order1']->getId();
         $this->addressOrder($orderId);
-        $this->selectOrderShippingMethod($orderId, $checkoutData['ups']->getId());
+        $this->selectOrderShippingMethod($orderId, $checkoutData['ups']->getCode());
 
         $data =
 <<<EOT

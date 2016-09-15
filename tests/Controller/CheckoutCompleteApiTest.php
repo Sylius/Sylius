@@ -52,7 +52,7 @@ final class CheckoutCompleteApiTest extends CheckoutApiTestCase
 
         $orderId = $checkoutData['order1']->getId();
         $this->addressOrder($orderId);
-        $this->selectOrderShippingMethod($orderId, $checkoutData['ups']->getId());
+        $this->selectOrderShippingMethod($orderId, $checkoutData['ups']->getCode());
 
         $url = sprintf('/api/checkouts/complete/%d', $orderId);
         $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType);
@@ -71,7 +71,7 @@ final class CheckoutCompleteApiTest extends CheckoutApiTestCase
 
         $orderId = $checkoutData['order1']->getId();
         $this->addressOrder($orderId);
-        $this->selectOrderShippingMethod($orderId, $checkoutData['ups']->getId());
+        $this->selectOrderShippingMethod($orderId, $checkoutData['ups']->getCode());
         $this->selectOrderPaymentMethod($orderId, $checkoutData['cash_on_delivery']->getId());
 
         $url = sprintf('/api/checkouts/complete/%d', $orderId);

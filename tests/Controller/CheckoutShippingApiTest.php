@@ -112,7 +112,7 @@ EOT;
         {
             "shipments": [
                 {
-                    "method": {$checkoutData['ups']->getId()}
+                    "method": "{$checkoutData['ups']->getCode()}"
                 }
             ]
         }
