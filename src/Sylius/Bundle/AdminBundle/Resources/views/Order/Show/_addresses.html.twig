@@ -3,6 +3,12 @@
 </h4>
 <div class="ui attached segment" id="shipping-address">
     {% include '@SyliusAdmin/Common/_address.html.twig' with {'address': order.shippingAddress} %}
+
+    <div class="ui segment">
+        <a href="{{ path('sylius_admin_order_shipping_address_update', {'id': order.id}) }}" class="ui icon labeled tiny fluid button">
+            <i class="pencil icon"></i> {{ 'sylius.ui.edit'|trans }}
+        </a>
+    </div>
 </div>
 <h4 class="ui attached styled header">
     {{ 'sylius.ui.billing_address'|trans }}

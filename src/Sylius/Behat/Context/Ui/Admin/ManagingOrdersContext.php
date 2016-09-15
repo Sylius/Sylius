@@ -15,6 +15,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Order\ShowPageInterface;
+use Sylius\Behat\Page\Admin\Order\UpdateShippingAddressPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\SharedSecurityServiceInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -45,6 +46,11 @@ final class ManagingOrdersContext implements Context
     private $showPage;
 
     /**
+     * @var UpdateShippingAddressPageInterface
+     */
+    private $updateShippingAddressPage;
+
+    /**
      * @var NotificationCheckerInterface
      */
     private $notificationChecker;
@@ -58,6 +64,7 @@ final class ManagingOrdersContext implements Context
      * @param SharedStorageInterface $sharedStorage
      * @param IndexPageInterface $indexPage
      * @param ShowPageInterface $showPage
+     * @param UpdateShippingAddressPageInterface $updateShippingAddressPage
      * @param NotificationCheckerInterface $notificationChecker
      * @param SharedSecurityServiceInterface $sharedSecurityService
      */
@@ -65,12 +72,14 @@ final class ManagingOrdersContext implements Context
         SharedStorageInterface $sharedStorage,
         IndexPageInterface $indexPage,
         ShowPageInterface $showPage,
+        UpdateShippingAddressPageInterface $updateShippingAddressPage,
         NotificationCheckerInterface $notificationChecker,
         SharedSecurityServiceInterface $sharedSecurityService
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->indexPage = $indexPage;
         $this->showPage = $showPage;
+        $this->updateShippingAddressPage = $updateShippingAddressPage;
         $this->notificationChecker = $notificationChecker;
         $this->sharedSecurityService = $sharedSecurityService;
     }
@@ -149,6 +158,7 @@ final class ManagingOrdersContext implements Context
 
     /**
      * @Then it should be shipped to :customerName, :street, :postcode, :city, :countryName
+     * @Then this order should be shipped to :customerName, :street, :postcode, :city, :countryName
      */
     public function itShouldBeShippedTo($customerName, $street, $postcode, $city, $countryName)
     {
@@ -231,7 +241,7 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then the order's total should be :total
+     * @Then /^the order's total should(?:| still) be "([^"]+)"$/
      */
     public function theOrdersTotalShouldBe($total)
     {
@@ -291,7 +301,7 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then the order's tax total should be :taxTotal
+     * @Then /^the order's tax total should(?:| still) be "([^"]+)"$/
      */
     public function theOrdersTaxTotalShouldBe($taxTotal)
     {
@@ -316,7 +326,7 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then the order's promotion total should be :promotionTotal
+     * @Then /^the order's promotion total should(?:| still) be "([^"]+)"$/
      */
     public function theOrdersPromotionTotalShouldBe($promotionTotal)
     {
@@ -628,5 +638,77 @@ final class ManagingOrdersContext implements Context
             $this->indexPage->isSingleResourceOnPage(['Total' => $total]),
             sprintf('The total of order "%s" is not "%s".', $orderNumber, $total)
         );
+    }
+
+    /**
+     * @When /^I want to modify a customer's shipping address of (this order)$/
+     */
+    public function iWantToModifyACustomerSShippingAddress(OrderInterface $order)
+    {
+        $this->updateShippingAddressPage->open(['id' => $order->getId()]);
+    }
+
+    /**
+     * @When I specify the first name as :firstName
+     */
+    public function iSpecifyTheFirstNameAs($firstName)
+    {
+        $this->updateShippingAddressPage->specifyFirstName($firstName);
+    }
+
+    /**
+     * @When I specify the last name as :lastName
+     */
+    public function iSpecifyTheLastNameAs($lastName)
+    {
+        $this->updateShippingAddressPage->specifyLastName($lastName);
+    }
+
+    /**
+     * @When I specify the street as :street
+     */
+    public function iSpecifyTheStreetAs($street)
+    {
+        $this->updateShippingAddressPage->specifyStreet($street);
+    }
+
+    /**
+     * @When I specify the city as :city
+     */
+    public function iSpecifyTheCityAs($city)
+    {
+        $this->updateShippingAddressPage->specifyCity($city);
+    }
+
+    /**
+     * @When I specify the postcode as :postcode
+     */
+    public function iSpecifyThePostcodeAs($postcode)
+    {
+        $this->updateShippingAddressPage->specifyPostcode($postcode);
+    }
+
+    /**
+     * @When I choose :country as the country
+     */
+    public function iChooseCountryAs($country)
+    {
+        $this->updateShippingAddressPage->chooseCountry($country);
+    }
+
+    /**
+     * @When I save my changes
+     */
+    public function iSaveMyChanges()
+    {
+        $this->updateShippingAddressPage->saveChanges();
+    }
+
+    /**
+     * @When I specify their shipping address as :city, :street, :postcode, :country for :firstAndLastName
+     */
+    public function iSpecifyTheirShippingAddressAsFor($city, $street, $postcode, $country, $firstAndLastName)
+    {
+        $this->updateShippingAddressPage->specifyShippingAddress($city, $street, $postcode, $country, $firstAndLastName);
     }
 }

@@ -87,9 +87,9 @@ final class CartContext implements Context
     }
 
     /**
-     * @When I save my changes
+     * @When I update my cart
      */
-    public function iSaveMyChanges()
+    public function iUpdateMyCart()
     {
         $this->summaryPage->updateCart();
     }
