@@ -20,7 +20,7 @@
                     </div>
                     <div class="extra">
                         <div class="ui large right floated fee label">
-                            {{ shipping_method_choice.parent.vars.shipping_costs[shipping_method_choice.parent.vars.choices[loop.index0].value]|sylius_price }}
+                            {{ shipment_form.method.vars.shipping_costs[shipping_method_choice.vars.value]|sylius_price }}
                         </div>
                     </div>
                 </div>
