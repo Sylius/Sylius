@@ -19,7 +19,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class SyliusUiExtension extends Extension
+final class SyliusUiExtension extends Extension
 {
     /**
      * {@inheritdoc}
@@ -27,9 +27,6 @@ class SyliusUiExtension extends Extension
     public function load(array $config, ContainerBuilder $container)
     {
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
-        $loader->load('controller.xml');
-        $loader->load('menu.xml');
-        $loader->load('form.xml');
-        $loader->load('twig.xml');
+        $loader->load('services.xml');
     }
 }

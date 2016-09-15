@@ -9,16 +9,13 @@ Symfony Bundles
     SyliusAttributeBundle/index
     SyliusCartBundle/index
     SyliusFixturesBundle/index
-    SyliusFlowBundle/index
     SyliusGridBundle/index
     SyliusInventoryBundle/index
     SyliusMailerBundle/index
-    SyliusOmnipayBundle/index
     SyliusOrderBundle/index
     SyliusPricingBundle/index
     SyliusProductBundle/index
     SyliusPromotionBundle/index
-    SyliusRbacBundle/index
     SyliusResourceBundle/index
     SyliusSettingsBundle/index
     SyliusShippingBundle/index

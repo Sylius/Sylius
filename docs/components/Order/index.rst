@@ -11,3 +11,4 @@ E-Commerce PHP library for creating and managing sales orders.
    models
    interfaces
    state_machine
+   processors

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="sylius.active_promotions_by_channel_provider" class="Sylius\Component\Core\Provider\ActivePromotionsByChannelProvider">
+            <argument type="service" id="sylius.repository.promotion" />
+        </service>
+
+        <service id="sylius.promotion_rule_checker.nth_order" class="Sylius\Component\Core\Promotion\Checker\Rule\NthOrderRuleChecker">
+            <argument type="service" id="sylius.repository.order" />
+            <tag name="sylius.promotion_rule_checker" type="nth_order" label="Nth order" />
+        </service>
+        <service id="sylius.promotion_rule_checker.shipping_country" class="Sylius\Component\Core\Promotion\Checker\Rule\ShippingCountryRuleChecker">
+            <argument type="service" id="sylius.repository.country" />
+            <tag name="sylius.promotion_rule_checker" type="shipping_country" label="Shipping country" />
+        </service>
+        <service id="sylius.promotion_rule_checker.taxon" class="Sylius\Component\Core\Promotion\Checker\Rule\TaxonRuleChecker">
+            <tag name="sylius.promotion_rule_checker" type="taxon" label="Taxon" />
+        </service>
+        <service id="sylius.promotion_rule_checker.contains_taxon" class="Sylius\Component\Core\Promotion\Checker\Rule\ContainsTaxonRuleChecker">
+            <argument type="service" id="sylius.repository.taxon" />
+            <tag name="sylius.promotion_rule_checker" type="contains_taxon" label="Contains number of items from taxon" />
+        </service>
+        <service id="sylius.promotion_rule_checker.total_of_items_from_taxon" class="Sylius\Component\Core\Promotion\Checker\Rule\TotalOfItemsFromTaxonRuleChecker">
+            <argument type="service" id="sylius.repository.taxon" />
+            <tag name="sylius.promotion_rule_checker" type="total_of_items_from_taxon" label="Total price of items from taxon" />
+        </service>
+
+        <service id="sylius.promotion_action.fixed_discount" class="Sylius\Component\Core\Promotion\Action\FixedDiscountAction">
+            <argument type="service" id="sylius.proportional_integer_distributor" />
+            <argument type="service" id="sylius.promotion.units_promotion_adjustments_applicator" />
+            <tag name="sylius.promotion_action" type="order_fixed_discount" label="Order fixed discount" />
+        </service>
+        <service id="sylius.promotion_action.unit_fixed_discount" class="Sylius\Component\Core\Promotion\Action\UnitFixedDiscountAction">
+            <argument type="service" id="sylius.factory.adjustment" />
+            <argument type="service" id="sylius.promotion_filter.price_range" />
+            <argument type="service" id="sylius.promotion_filter.taxon" />
+            <tag name="sylius.promotion_action" type="unit_fixed_discount" label="Item fixed discount" />
+        </service>
+        <service id="sylius.promotion_action.percentage_discount" class="Sylius\Component\Core\Promotion\Action\PercentageDiscountAction">
+            <argument type="service" id="sylius.proportional_integer_distributor" />
+            <argument type="service" id="sylius.promotion.units_promotion_adjustments_applicator" />
+            <tag name="sylius.promotion_action" type="order_percentage_discount" label="Order percentage discount" />
+        </service>
+        <service id="sylius.promotion_action.unit_percentage_discount" class="Sylius\Component\Core\Promotion\Action\UnitPercentageDiscountAction">
+            <argument type="service" id="sylius.factory.adjustment" />
+            <argument type="service" id="sylius.promotion_filter.price_range" />
+            <argument type="service" id="sylius.promotion_filter.taxon" />
+            <tag name="sylius.promotion_action" type="unit_percentage_discount" label="Item percentage discount" />
+        </service>
+        <service id="sylius.promotion_action.shipping_discount" class="Sylius\Component\Core\Promotion\Action\ShippingDiscountAction">
+            <argument type="service" id="sylius.factory.adjustment" />
+            <tag name="sylius.promotion_action" type="shipping_discount" label="Shipping percentage discount" />
+        </service>
+
+        <service id="sylius.promotion.eligibility_checker.coupons" class="Sylius\Component\Core\Promotion\Checker\Eligibility\CouponsEligibilityChecker">
+            <argument type="service" id="sylius.repository.order" />
+        </service>
+
+        <service id="sylius.promotion_filter.taxon" class="Sylius\Component\Core\Promotion\Filter\TaxonFilter" />
+        <service id="sylius.promotion_filter.price_range" class="Sylius\Component\Core\Promotion\Filter\PriceRangeFilter" />
+
+        <service id="sylius.promotion.units_promotion_adjustments_applicator" class="Sylius\Component\Core\Promotion\Applicator\UnitsPromotionAdjustmentsApplicator">
+            <argument type="service" id="sylius.factory.adjustment" />
+            <argument type="service" id="sylius.integer_distributor" />
+        </service>
+    </services>
+</container>

@@ -15,6 +15,7 @@ use Behat\Behat\Context\Context;
 use Sylius\Behat\NotificationType;
 use Sylius\Behat\Page\Admin\Crud\IndexPageInterface;
 use Sylius\Behat\Page\Admin\Order\ShowPageInterface;
+use Sylius\Behat\Page\Admin\Order\UpdateShippingAddressPageInterface;
 use Sylius\Behat\Service\NotificationCheckerInterface;
 use Sylius\Behat\Service\SharedSecurityServiceInterface;
 use Sylius\Component\Core\Model\CustomerInterface;
@@ -45,6 +46,11 @@ final class ManagingOrdersContext implements Context
     private $showPage;
 
     /**
+     * @var UpdateShippingAddressPageInterface
+     */
+    private $updateShippingAddressPage;
+
+    /**
      * @var NotificationCheckerInterface
      */
     private $notificationChecker;
@@ -58,6 +64,7 @@ final class ManagingOrdersContext implements Context
      * @param SharedStorageInterface $sharedStorage
      * @param IndexPageInterface $indexPage
      * @param ShowPageInterface $showPage
+     * @param UpdateShippingAddressPageInterface $updateShippingAddressPage
      * @param NotificationCheckerInterface $notificationChecker
      * @param SharedSecurityServiceInterface $sharedSecurityService
      */
@@ -65,17 +72,20 @@ final class ManagingOrdersContext implements Context
         SharedStorageInterface $sharedStorage,
         IndexPageInterface $indexPage,
         ShowPageInterface $showPage,
+        UpdateShippingAddressPageInterface $updateShippingAddressPage,
         NotificationCheckerInterface $notificationChecker,
         SharedSecurityServiceInterface $sharedSecurityService
     ) {
         $this->sharedStorage = $sharedStorage;
         $this->indexPage = $indexPage;
         $this->showPage = $showPage;
+        $this->updateShippingAddressPage = $updateShippingAddressPage;
         $this->notificationChecker = $notificationChecker;
         $this->sharedSecurityService = $sharedSecurityService;
     }
 
     /**
+     * @Given I am browsing orders
      * @When I browse orders
      */
     public function iBrowseOrders()
@@ -117,6 +127,14 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @When I switch the way orders are sorted by :fieldName
+     */
+    public function iSwitchSortingBy($fieldName)
+    {
+        $this->indexPage->sortBy($fieldName);
+    }
+
+    /**
      * @Then I should see a single order from customer :customer
      */
     public function iShouldSeeASingleOrderFromCustomer(CustomerInterface $customer)
@@ -140,9 +158,15 @@ final class ManagingOrdersContext implements Context
 
     /**
      * @Then it should be shipped to :customerName, :street, :postcode, :city, :countryName
+     * @Then this order should be shipped to :customerName, :street, :postcode, :city, :countryName
+     * @Then /^(this order) should still be shipped to "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)"$/
      */
-    public function itShouldBeShippedTo($customerName, $street, $postcode, $city, $countryName)
+    public function itShouldBeShippedTo(OrderInterface $order = null, $customerName, $street, $postcode, $city, $countryName)
     {
+        if (null !== $order) {
+            $this->iSeeTheOrder($order);
+        }
+
         Assert::true(
             $this->showPage->hasShippingAddress($customerName, $street, $postcode, $city, $countryName),
             sprintf('Cannot find shipping address "%s, %s %s, %s".', $street, $postcode, $city, $countryName)
@@ -222,7 +246,7 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then the order's total should be :total
+     * @Then /^the order's total should(?:| still) be "([^"]+)"$/
      */
     public function theOrdersTotalShouldBe($total)
     {
@@ -282,7 +306,7 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then the order's tax total should be :taxTotal
+     * @Then /^the order's tax total should(?:| still) be "([^"]+)"$/
      */
     public function theOrdersTaxTotalShouldBe($taxTotal)
     {
@@ -307,7 +331,7 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
-     * @Then the order's promotion total should be :promotionTotal
+     * @Then /^the order's promotion total should(?:| still) be "([^"]+)"$/
      */
     public function theOrdersPromotionTotalShouldBe($promotionTotal)
     {
@@ -424,30 +448,6 @@ final class ManagingOrdersContext implements Context
             $itemTotalOnPage,
             $total,
             'Item total is %s, but should be %s.'
-        );
-    }
-
-    /**
-     * @When I delete the order :order
-     */
-    public function iDeleteOrder(OrderInterface $order)
-    {
-        $this->sharedStorage->set('order', $order);
-
-        $this->showPage->open(['id' => $order->getId()]);
-        $this->showPage->deleteOrder();
-    }
-
-    /**
-     * @Then /^(this order) should not exist in the registry$/
-     */
-    public function orderShouldNotExistInTheRegistry(OrderInterface $order)
-    {
-        $this->indexPage->open();
-
-        Assert::false(
-            $this->indexPage->isSingleResourceOnPage(['number' => $order->getNumber()]),
-            sprintf('Order with number %s exists but should not.', $order->getNumber())
         );
     }
 
@@ -576,6 +576,20 @@ final class ManagingOrdersContext implements Context
     }
 
     /**
+     * @Then the first order should have number :number
+     */
+    public function theFirstOrderShouldHaveNumber($number)
+    {
+        $actualNumber = $this->indexPage->getColumnFields('Number')[0];
+
+        Assert::eq(
+            $actualNumber,
+            $number,
+            sprintf('Expected first order\'s number to be %s, but it is %s.', $number, $actualNumber)
+        );
+    }
+
+    /**
      * @Then it should have shipment in state :shipmentState
      */
     public function itShouldHaveShipmentState($shipmentState)
@@ -618,5 +632,114 @@ final class ManagingOrdersContext implements Context
         $actualNumberOfPayments = $this->showPage->getPaymentsCount();
 
         Assert::eq($number, $actualNumberOfPayments);
+    }
+
+    /**
+     * @Then I should see the order :orderNumber with total :total
+     */
+    public function iShouldSeeTheOrderWithTotal($orderNumber, $total)
+    {
+        Assert::true(
+            $this->indexPage->isSingleResourceOnPage(['Total' => $total]),
+            sprintf('The total of order "%s" is not "%s".', $orderNumber, $total)
+        );
+    }
+
+    /**
+     * @When /^I want to modify a customer's shipping address of (this order)$/
+     */
+    public function iWantToModifyACustomerSShippingAddress(OrderInterface $order)
+    {
+        $this->updateShippingAddressPage->open(['id' => $order->getId()]);
+    }
+
+    /**
+     * @When I specify the first name as :firstName
+     * @When I do not specify the first name
+     */
+    public function iSpecifyTheFirstNameAs($firstName = null)
+    {
+        $this->updateShippingAddressPage->specifyFirstName($firstName);
+    }
+
+    /**
+     * @When I specify the last name as :lastName
+     * @When I do not specify the last name
+     */
+    public function iSpecifyTheLastNameAs($lastName = null)
+    {
+        $this->updateShippingAddressPage->specifyLastName($lastName);
+    }
+
+    /**
+     * @When I specify the street as :street
+     * @When I do not specify the street
+     */
+    public function iSpecifyTheStreetAs($street = null)
+    {
+        $this->updateShippingAddressPage->specifyStreet($street);
+    }
+
+    /**
+     * @When I specify the city as :city
+     * @When I do not specify the city
+     */
+    public function iSpecifyTheCityAs($city = null)
+    {
+        $this->updateShippingAddressPage->specifyCity($city);
+    }
+
+    /**
+     * @When I specify the postcode as :postcode
+     */
+    public function iSpecifyThePostcodeAs($postcode)
+    {
+        $this->updateShippingAddressPage->specifyPostcode($postcode);
+    }
+
+    /**
+     * @When I choose :country as the country
+     */
+    public function iChooseCountryAs($country)
+    {
+        $this->updateShippingAddressPage->chooseCountry($country);
+    }
+
+    /**
+     * @When I save my changes
+     * @When I try to save my changes
+     */
+    public function iSaveMyChanges()
+    {
+        $this->updateShippingAddressPage->saveChanges();
+    }
+
+    /**
+     * @When I specify their shipping address as :city, :street, :postcode, :country for :firstAndLastName
+     */
+    public function iSpecifyTheirShippingAddressAsFor($city, $street, $postcode, $country, $firstAndLastName)
+    {
+        $this->updateShippingAddressPage->specifyShippingAddress($city, $street, $postcode, $country, $firstAndLastName);
+    }
+
+    /**
+     * @Then /^I should be notified that the ([^"]+) is required$/
+     */
+    public function iShouldBeNotifiedThatIsRequired($element)
+    {
+        Assert::same(
+            $this->updateShippingAddressPage->getValidationMessage($this->getNormalizedElementName($element)),
+            sprintf('Please enter %s.', $element)
+        );
+    }
+
+    /**
+     * @param string $elementName
+     *
+     * @return string
+     */
+    private function getNormalizedElementName($elementName)
+    {
+        return str_replace(' ', '_', $elementName);
     }
 }

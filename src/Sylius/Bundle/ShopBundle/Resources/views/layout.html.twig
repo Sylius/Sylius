@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html>
+<html lang="{{ app.request.locale }}">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,15 +20,17 @@
 <body class="pushable">
 <div class="pusher">
     <div id="menu" class="ui large sticky inverted stackable menu">
-        {% render(controller('sylius.controller.shop.currency:renderSelectorAction')) %}
-        {% render(controller('sylius.controller.shop.locale:renderSelectorAction')) %}
+        {{ render(controller('sylius.controller.shop.currency:renderSelectorAction')) }}
+        {{ render(controller('sylius.controller.shop.locale:renderSelectorAction')) }}
         {% include '@SyliusShop/Homepage/Menu/_security.html.twig' %}
     </div>
 
     <div class="ui container">
-        {% include '@SyliusShop/Homepage/_header.html.twig' %}
+        <header>
+            {% include '@SyliusShop/Homepage/_header.html.twig' %}
 
-        {% render(url('sylius_shop_partial_taxon_index_by_code', {'code': 'category', 'template': '@SyliusShop/Taxon/_horizontalMenu.html.twig'})) %}
+            {{ render(url('sylius_shop_partial_taxon_index_by_code', {'code': 'category', 'template': '@SyliusShop/Taxon/_horizontalMenu.html.twig'})) }}
+        </header>
         {% include '@SyliusUi/_flashes.html.twig' %}
 
         {% block content %}

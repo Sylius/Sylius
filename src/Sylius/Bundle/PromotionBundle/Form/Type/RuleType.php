@@ -13,7 +13,7 @@ namespace Sylius\Bundle\PromotionBundle\Form\Type;
 
 use Sylius\Bundle\PromotionBundle\Form\EventListener\BuildRuleFormSubscriber;
 use Sylius\Bundle\PromotionBundle\Form\Type\Core\AbstractConfigurationType;
-use Sylius\Component\Promotion\Checker\ItemTotalRuleChecker;
+use Sylius\Component\Promotion\Checker\Rule\ItemTotalRuleChecker;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 

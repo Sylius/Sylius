@@ -16,6 +16,7 @@ use Behat\Mink\Session;
 use Sylius\Behat\Page\SymfonyPage;
 use Sylius\Behat\Service\Accessor\TableAccessorInterface;
 use Symfony\Component\Routing\RouterInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Arkadiusz Krakowiak <arkadiusz.krakowiak@lakion.com>
@@ -66,6 +67,25 @@ class IndexPage extends SymfonyPage implements IndexPageInterface
         } catch (ElementNotFoundException $exception) {
             return false;
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getColumnFields($columnName)
+    {
+        return $this->tableAccessor->getIndexedColumn($this->getElement('table'), $columnName);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function sortBy($fieldName)
+    {
+        $sortableHeaders = $this->tableAccessor->getSortableHeaders($this->getElement('table'));
+        Assert::keyExists($sortableHeaders, $fieldName, sprintf('Column "%s" is not sortable.', $fieldName));
+
+        $sortableHeaders[$fieldName]->find('css', 'a')->click();
     }
 
     /**

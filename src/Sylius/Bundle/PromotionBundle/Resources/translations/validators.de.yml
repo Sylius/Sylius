@@ -29,3 +29,8 @@ sylius:
             not_blank: Bitte geben Sie die Anzahl der zu generierenden Gutscheincodes ein.
         usage_limit:
             min: 'Das Nutzungslimit der erstellen Gutscheincodes muss mindestens {{ limit }} sein.'
+        code_length:
+            min: 'Der Gutscheincode muss mindestens {{ limit }} Zeichen lang sein.'
+            max: 'Der Gutscheincode darf nicht länger als {{ limit }} Zeichen lang sein.'
+            not_blank: Bitte geben Sie eine Gutscheincodelänge ein.
+        possible_generation_amount: 'Ungültige Gutscheincodelänge oder ungültiger Gutscheinbetrag. Es ist nicht möglich %expectedAmount% einzigartige Gutscheincodes mit einer Länge von %codeLength% Zeichen zu generieren. Es können maximal %possibleAmount% Gutscheincodes generiert werden.'

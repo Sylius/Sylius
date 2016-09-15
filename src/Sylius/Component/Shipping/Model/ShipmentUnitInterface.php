@@ -16,6 +16,7 @@ use Sylius\Component\Resource\Model\TimestampableInterface;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 interface ShipmentUnitInterface extends TimestampableInterface, ResourceInterface
 {
@@ -33,14 +34,4 @@ interface ShipmentUnitInterface extends TimestampableInterface, ResourceInterfac
      * @return ShippableInterface
      */
     public function getShippable();
-
-    /**
-     * @return string
-     */
-    public function getShippingState();
-
-    /**
-     * @param string $state
-     */
-    public function setShippingState($state);
 }

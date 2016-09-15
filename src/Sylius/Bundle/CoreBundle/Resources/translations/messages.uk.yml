@@ -59,15 +59,6 @@ sylius:
             code: Код
         product_variant:
             tax_category: Категорія податку
-        settings:
-            general:
-                currency: Валюта за замовчуванням
-                locale: Мова
-                meta_description: Мета-опис
-                meta_keywords: Мета ключові слова
-                title: Заголовок сторінки
-            taxation:
-                default_tax_zone: Податкова зона за замовчуванням
         shipment_filter:
             created_at_from: Від
             created_at_to: До
@@ -80,7 +71,9 @@ sylius:
         shipping_method:
             zone: Зона
         taxon:
+            code: Код
             file: Обрати зображення
+            images: Зображення
         taxonomy:
             file: Обрати зображення
         user:

@@ -22,29 +22,3 @@ winzou_state_machine:
             cancel:
                 from: [ready]
                 to: cancelled
-        callbacks:
-            after:
-                sylius_sync_units:
-                    do: ["@sm.callback.cascade_transition", "apply"]
-                    args: ["object.getUnits()", "event", "null", "'sylius_shipment_unit'"]
-
-    sylius_shipment_unit:
-        class: "%sylius.model.shipment_unit.class%"
-        property_path: shippingState
-        graph: sylius_shipment_unit
-        state_machine_class: "%sylius.state_machine.class%"
-        states:
-            cart: ~
-            ready: ~
-            shipped: ~
-            cancelled: ~
-        transitions:
-            create:
-                from: [cart]
-                to: ready
-            ship:
-                from: [ready]
-                to: shipped
-            cancel:
-                from: [ready]
-                to: cancelled

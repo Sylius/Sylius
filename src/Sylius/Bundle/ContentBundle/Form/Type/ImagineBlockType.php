@@ -38,8 +38,6 @@ class ImagineBlockType extends AbstractResourceType
     protected $filterConfiguration;
 
     /**
-     * ImagineBlockType constructor.
-     *
      * @param string $dataClass
      * @param array $validationGroups
      * @param FilterConfiguration $filterConfiguration

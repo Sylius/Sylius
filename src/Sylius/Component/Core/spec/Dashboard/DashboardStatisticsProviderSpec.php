@@ -17,7 +17,7 @@ use Sylius\Component\Core\Dashboard\DashboardStatistics;
 use Sylius\Component\Core\Dashboard\DashboardStatisticsProvider;
 use Sylius\Component\Core\Dashboard\DashboardStatisticsProviderInterface;
 use Sylius\Component\Core\Repository\OrderRepositoryInterface;
-use Sylius\Component\Customer\Repository\CustomerRepositoryInterface;
+use Sylius\Component\Core\Repository\CustomerRepositoryInterface;
 
 /**
  * @mixin DashboardStatisticsProvider

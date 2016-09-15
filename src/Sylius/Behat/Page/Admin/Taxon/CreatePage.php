@@ -109,10 +109,25 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
     /**
      * {@inheritdoc}
      */
+    public function attachImageWithCode($code, $path)
+    {
+        $filesPath = $this->getParameter('files_path');
+
+        $this->getDocument()->clickLink('Add');
+
+        $imageForm = $this->getLastImageElement();
+        $imageForm->fillField('Code', $code);
+        $imageForm->find('css', 'input[type="file"]')->attachFile($filesPath.$path);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getDefinedElements()
     {
         return array_merge(parent::getDefinedElements(), [
             'code' => '#sylius_taxon_code',
+            'images' => '#sylius_taxon_images',
             'name' => '#sylius_taxon_translations_en_US_name',
             'parent' => '#sylius_taxon_parent',
             'permalink' => '#sylius_taxon_translations_en_US_permalink',
@@ -132,5 +147,16 @@ class CreatePage extends BaseCreatePage implements CreatePageInterface
         Assert::notNull($tree);
 
         return $tree->findAll('css', '.item > .content > .header');
+    }
+
+    /**
+     * @return NodeElement
+     */
+    private function getLastImageElement()
+    {
+        $images = $this->getElement('images');
+        $items = $images->findAll('css', 'div[data-form-collection="item"]');
+
+        return end($items);
     }
 }

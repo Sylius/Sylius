@@ -89,7 +89,7 @@ EOT;
         $this->loadFixturesFromFile('authentication/api_administrator.yml');
         $this->loadFixturesFromFile('resources/tax_categories.yml');
 
-        $this->client->request('GET', '/api/tax-categories/', ['sorting' => ['name' => 'asc']], [], [
+        $this->client->request('GET', '/api/tax-categories/', ['sorting' => ['name' => ['path' => 'name', 'direction' => 'asc']]], [], [
             'HTTP_Authorization' => 'Bearer SampleTokenNjZkNjY2MDEwMTAzMDkxMGE0OTlhYzU3NzYyMTE0ZGQ3ODcyMDAwM2EwMDZjNDI5NDlhMDdlMQ',
         ]);
 

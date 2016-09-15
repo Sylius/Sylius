@@ -16,11 +16,9 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * Registers all rule checkers in registry service.
- *
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class RegisterRuleCheckersPass implements CompilerPassInterface
+final class RegisterRuleCheckersPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container)
     {

@@ -16,7 +16,6 @@ use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Core\Pricing\Calculators;
 use Sylius\Component\Product\Model\Variant as BaseVariant;
 use Sylius\Component\Taxation\Model\TaxCategoryInterface;
-use Sylius\Component\Variation\Model\VariantInterface as BaseVariantInterface;
 use Webmozart\Assert\Assert;
 
 /**
@@ -53,11 +52,6 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
      * @var int
      */
     protected $onHand = 0;
-
-    /**
-     * @var int
-     */
-    protected $sold = 0;
 
     /**
      * @var bool
@@ -247,22 +241,6 @@ class ProductVariant extends BaseVariant implements ProductVariantInterface
     public function setOnHand($onHand)
     {
         $this->onHand = (0 > $onHand) ? 0 : $onHand;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getSold()
-    {
-        return $this->sold;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setSold($sold)
-    {
-        $this->sold = (int) $sold;
     }
 
     /**

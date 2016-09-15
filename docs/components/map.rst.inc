@@ -9,12 +9,10 @@
 * :doc:`/components/Locale/index`
 * :doc:`/components/Mailer/index`
 * :doc:`/components/Order/index`
-* :doc:`/components/Originator/index`
 * :doc:`/components/Payment/index`
 * :doc:`/components/Pricing/index`
 * :doc:`/components/Product/index`
 * :doc:`/components/Promotion/index`
-* :doc:`/components/Rbac/index`
 * :doc:`/components/Registry/index`
 * :doc:`/components/Resource/index`
 * :doc:`/components/Shipping/index`

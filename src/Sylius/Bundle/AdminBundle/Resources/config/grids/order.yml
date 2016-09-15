@@ -8,7 +8,10 @@ sylius_grid:
                     repository:
                         method: createListQueryBuilder
             sorting:
-                completedAt: desc
+                number:
+                    path: number
+                date:
+                    path: createdAt
             fields:
                 channel:
                     type: twig

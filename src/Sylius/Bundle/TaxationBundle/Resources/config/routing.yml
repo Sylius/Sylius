@@ -2,9 +2,9 @@
 # (c) Paweł Jędrzejewski
 
 sylius_category:
-    resource: @SyliusTaxationBundle/Resources/config/routing/tax_category.yml
+    resource: "@SyliusTaxationBundle/Resources/config/routing/tax_category.yml"
     prefix: /tax-categories
 
 sylius_rate:
-    resource: @SyliusTaxationBundle/Resources/config/routing/tax_rate.yml
+    resource: "@SyliusTaxationBundle/Resources/config/routing/tax_rate.yml"
     prefix: /tax-rates

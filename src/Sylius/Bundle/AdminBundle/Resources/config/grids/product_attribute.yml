@@ -6,7 +6,9 @@ sylius_grid:
                 options:
                     class: "%sylius.model.product_attribute.class%"
             sorting:
-                code: asc
+                code:
+                    path: code
+                    direction: asc
             fields:
                 code:
                     type: string

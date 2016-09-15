@@ -36,7 +36,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class Configuration implements ConfigurationInterface
+final class Configuration implements ConfigurationInterface
 {
     /**
      * {@inheritdoc}

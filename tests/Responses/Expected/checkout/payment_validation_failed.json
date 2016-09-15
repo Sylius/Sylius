@@ -1,0 +1,25 @@
+{
+    "code": 400,
+    "message": "Validation Failed",
+    "errors": {
+        "children": {
+            "payments": {
+                "children": [
+                    {
+                        "children": {
+                            "method": {
+                                "errors": [
+                                    "This value is not valid."
+                                ],
+                                "children": [
+                                    {},
+                                    {}
+                                ]
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}

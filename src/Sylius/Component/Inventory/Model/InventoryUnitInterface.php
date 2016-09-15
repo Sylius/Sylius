@@ -13,17 +13,10 @@ namespace Sylius\Component\Inventory\Model;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 interface InventoryUnitInterface
 {
-    /**
-     * Default states.
-     */
-    const STATE_CHECKOUT = 'checkout';
-    const STATE_ONHOLD = 'onhold';
-    const STATE_SOLD = 'sold';
-    const STATE_RETURNED = 'returned';
-
     /**
      * @return StockableInterface
      */
@@ -33,19 +26,4 @@ interface InventoryUnitInterface
      * @return string
      */
     public function getInventoryName();
-
-    /**
-     * @return string
-     */
-    public function getInventoryState();
-
-    /**
-     * @param string $state
-     */
-    public function setInventoryState($state);
-
-    /**
-     * @return bool
-     */
-    public function isSold();
 }

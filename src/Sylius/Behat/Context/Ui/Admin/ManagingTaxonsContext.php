@@ -301,4 +301,73 @@ final class ManagingTaxonsContext implements Context
             sprintf('Taxon %s does not exist or multiple taxons with this name exist.', $name)
         );
     }
+
+    /**
+     * @When I attach the :path image with a code :code
+     */
+    public function iAttachImageWithACode($path, $code)
+    {
+        /** @var CreatePageInterface|UpdatePageInterface $currentPage */
+        $currentPage = $this->currentPageResolver->getCurrentPageWithForm([$this->createPage, $this->updatePage]);
+
+        $currentPage->attachImageWithCode($code, $path);
+    }
+
+    /**
+     * @Then /^this taxon should have(?:| also) an image with a code "([^"]*)"$/
+     */
+    public function thisTaxonShouldHaveAnImageWithCode($code)
+    {
+        Assert::true(
+            $this->updatePage->isImageWithCodeDisplayed($code),
+            sprintf('Image with a code %s should have been displayed.', $code)
+        );
+    }
+
+    /**
+     * @Then /^this taxon should not have(?:| also) an image with a code "([^"]*)"$/
+     */
+    public function thisTaxonShouldNotHaveAnImageWithCode($code)
+    {
+        Assert::false(
+            $this->updatePage->isImageWithCodeDisplayed($code),
+            sprintf('Image with a code %s should not have been displayed.', $code)
+        );
+    }
+
+    /**
+     * @When /^I remove(?:| also) an image with a code "([^"]*)"$/
+     */
+    public function iRemoveAnImageWithACode($code)
+    {
+        $this->updatePage->removeImageWithCode($code);
+    }
+
+    /**
+     * @When I remove the first image
+     */
+    public function iRemoveTheFirstImage()
+    {
+        $this->updatePage->removeFirstImage();
+    }
+
+    /**
+     * @Then this taxon should not have images
+     */
+    public function thisTaxonShouldNotHaveImages()
+    {
+        Assert::eq(
+            0,
+            $this->updatePage->countImages(),
+            'This taxon has %2$s, but it should not have.'
+        );
+    }
+
+    /**
+     * @When I change the image with the :code code to :path
+     */
+    public function iChangeItsImageToPathForTheCode($path, $code)
+    {
+        $this->updatePage->changeImageWithCode($code, $path);
+    }
 }

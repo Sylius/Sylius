@@ -64,19 +64,6 @@ sylius:
             code: Kód
         product_variant:
             tax_category: Typ daně
-        settings:
-            general:
-                currency: Výchozí měna
-                locale: Jazyk
-                meta_description: Meta popis
-                meta_keywords: Meta klíčová slova
-                title: Název stránky
-                tracking_code:
-                    Tracking code (for example: Kód Google Analytics)
-            taxation:
-                default_tax_zone: Výchozí sazba DPH
-            security:
-                enabled: Povolit?
         shipment_filter:
             created_at_from: Od
             created_at_to: Do
@@ -92,7 +79,9 @@ sylius:
         shipping_method:
             zone: Oblast
         taxon:
+            code: Kód
             file: Vybrat obrázek
+            images: Obrázky
         taxonomy:
             file: Vybrat obrázek
         user:

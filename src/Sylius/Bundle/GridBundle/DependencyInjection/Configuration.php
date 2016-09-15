@@ -64,7 +64,8 @@ class Configuration implements ConfigurationInterface
                     ->defaultValue(['doctrine/orm'])
                     ->prototype('scalar')->end()
                 ->end()
-            ->end();
+            ->end()
+        ;
     }
 
     /**
@@ -112,7 +113,13 @@ class Configuration implements ConfigurationInterface
                                 ->end()
                             ->end()
                             ->arrayNode('sorting')
-                                ->prototype('scalar')->end()
+                                ->useAttributeAsKey('name')
+                                ->prototype('array')
+                                    ->children()
+                                        ->scalarNode('path')->isRequired()->cannotBeEmpty()->end()
+                                        ->enumNode('direction')->values(['asc', 'desc'])->defaultValue('desc')->end()
+                                    ->end()
+                                ->end()
                             ->end()
                             ->arrayNode('fields')
                                 ->useAttributeAsKey('name')

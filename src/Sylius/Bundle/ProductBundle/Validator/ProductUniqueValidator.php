@@ -19,22 +19,16 @@ use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 /**
- * Unique product constraint validator.
- *
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
 class ProductUniqueValidator extends ConstraintValidator
 {
     /**
-     * Product manager.
-     *
      * @var ObjectRepository
      */
     protected $repository;
 
     /**
-     * Constructor.
-     *
      * @param ObjectRepository $repository
      */
     public function __construct(ObjectRepository $repository)

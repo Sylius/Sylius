@@ -36,14 +36,7 @@ class SyliusAddressingExtension extends AbstractResourceExtension
 
         $this->registerResources('sylius', $config['driver'], $config['resources'], $container);
 
-        $configFiles = [
-            'services.xml',
-            'twig.xml',
-        ];
-
-        foreach ($configFiles as $configFile) {
-            $loader->load($configFile);
-        }
+        $loader->load('services.xml');
 
         $container->setParameter('sylius.scope.zone', $config['scopes']);
 

@@ -31,10 +31,6 @@ class SyliusGridExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
         $loader->load('services.xml');
-        $loader->load('filters.xml');
-        $loader->load('field_types.xml');
-        $loader->load('templating.xml');
-        $loader->load('twig.xml');
 
         foreach (['filter', 'action'] as $templatesCollectionName) {
             $templates = isset($config['templates'][$templatesCollectionName]) ? $config['templates'][$templatesCollectionName] : [];

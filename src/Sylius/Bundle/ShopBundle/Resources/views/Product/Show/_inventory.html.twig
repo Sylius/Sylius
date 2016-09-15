@@ -1,5 +1,5 @@
 {% if product.simple and not sylius_inventory_is_available(product.firstVariant) %}
     {% include '@SyliusShop/Product/Show/_outOfStock.html.twig' %}
 {% else %}
-    {% render(url('sylius_shop_cart_item_add', {'template': '@SyliusShop/Product/Show/_addToCart.html.twig', 'productId': product.id})) %}
+    {{ render(url('sylius_shop_cart_item_add', {'template': '@SyliusShop/Product/Show/_addToCart.html.twig', 'productId': product.id})) }}
 {% endif %}

@@ -64,19 +64,6 @@ sylius:
             code: Kodas
         product_variant:
             tax_category: Mokesčių kategorija
-        settings:
-            general:
-                currency: Numatytoji valiuta
-                locale: Kalba
-                meta_description: Meta aprašymas
-                meta_keywords: Meta raktažodžiai
-                title: Puslapio antraštė
-                tracking_code:
-                    Tracking code (for example: Google Analytics kodas)
-            taxation:
-                default_tax_zone: Numatyta mokesčių zona
-            security:
-                enabled: Įgalinti?
         shipment_filter:
             created_at_from: Nuo
             created_at_to: Iki
@@ -92,7 +79,9 @@ sylius:
         shipping_method:
             zone: Zona
         taxon:
+            code: Kodas
             file: Pasirinkite paveikslėlį
+            images: Paveikslėliai
         taxonomy:
             file: Pasirinkite paveikslėlį
         user:

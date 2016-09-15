@@ -14,10 +14,11 @@ namespace Sylius\Behat\Context\Setup;
 use Behat\Behat\Context\Context;
 use Doctrine\Common\Persistence\ObjectManager;
 use SM\Factory\FactoryInterface as StateMachineFactoryInterface;
+use Sylius\Component\Core\Currency\CurrencyStorageInterface;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\CouponInterface;
 use Sylius\Component\Core\OrderCheckoutTransitions;
-use Sylius\Component\Core\OrderProcessing\OrderProcessorInterface;
+use Sylius\Component\Order\Processor\OrderProcessorInterface;
 use Sylius\Component\Order\Modifier\OrderItemQuantityModifierInterface;
 use Sylius\Component\Core\Model\AddressInterface;
 use Sylius\Component\Core\Model\OrderInterface;
@@ -74,6 +75,16 @@ final class OrderContext implements Context
     private $itemQuantityModifier;
 
     /**
+     * @var RepositoryInterface
+     */
+    private $currencyRepository;
+
+    /**
+     * @var CurrencyStorageInterface
+     */
+    private $currencyStorage;
+
+    /**
      * @var FactoryInterface
      */
     private $customerFactory;
@@ -105,6 +116,8 @@ final class OrderContext implements Context
      * @param OrderProcessorInterface $orderProcessor
      * @param FactoryInterface $orderItemFactory
      * @param OrderItemQuantityModifierInterface $itemQuantityModifier
+     * @param RepositoryInterface $currencyRepository
+     * @param CurrencyStorageInterface $currencyStorage
      * @param FactoryInterface $customerFactory
      * @param RepositoryInterface $customerRepository
      * @param ObjectManager $objectManager
@@ -118,6 +131,8 @@ final class OrderContext implements Context
         OrderProcessorInterface $orderProcessor,
         FactoryInterface $orderItemFactory,
         OrderItemQuantityModifierInterface $itemQuantityModifier,
+        RepositoryInterface $currencyRepository,
+        CurrencyStorageInterface $currencyStorage,
         FactoryInterface $customerFactory,
         RepositoryInterface $customerRepository,
         ObjectManager $objectManager,
@@ -130,6 +145,8 @@ final class OrderContext implements Context
         $this->orderProcessor = $orderProcessor;
         $this->orderItemFactory = $orderItemFactory;
         $this->itemQuantityModifier = $itemQuantityModifier;
+        $this->currencyRepository = $currencyRepository;
+        $this->currencyStorage = $currencyStorage;
         $this->customerFactory = $customerFactory;
         $this->customerRepository = $customerRepository;
         $this->objectManager = $objectManager;
@@ -234,6 +251,21 @@ final class OrderContext implements Context
     }
 
     /**
+     * @Given the customer has chosen to order in the :currencyCode currency
+     * @Given I have chosen to order in the :currencyCode currency
+     */
+    public function theCustomerChoseTheCurrency($currencyCode)
+    {
+        $this->currencyStorage->set($this->sharedStorage->get('channel'), $currencyCode);
+
+        /** @var OrderInterface $order */
+        $order = $this->sharedStorage->get('order');
+        $order->setCurrencyCode($currencyCode);
+
+        $this->objectManager->flush();
+    }
+
+    /**
      * @Given /^the customer chose ("[^"]+" shipping method) with ("[^"]+" payment)$/
      * @Given /^I chose ("[^"]+" shipping method) with ("[^"]+" payment)$/
      */
@@ -280,11 +312,22 @@ final class OrderContext implements Context
     }
 
     /**
-     * @Given /^the customer bought (\d+) ("[^"]+" products)/
+     * @Given /^the customer bought (\d+) ("[^"]+" products)$/
      */
     public function theCustomerBoughtSeveralProducts($quantity, ProductInterface $product)
     {
-        $this->addProductVariantToOrder($this->variantResolver->getVariant($product), $product->getPrice(), $quantity);
+        $variant = $this->variantResolver->getVariant($product);
+        $this->addProductVariantToOrder($variant, $variant->getPrice(), $quantity);
+
+        $this->objectManager->flush();
+    }
+
+    /**
+     * @Given /^the customer bought ([^"]+) items of ("[^"]+" variant of product "[^"]+")$/
+     */
+    public function theCustomerBoughtSeveralVariantsOfProduct($quantity, ProductVariantInterface $variant)
+    {
+        $this->addProductVariantToOrder($variant, $variant->getPrice(), $quantity);
 
         $this->objectManager->flush();
     }
@@ -483,6 +526,12 @@ final class OrderContext implements Context
         $order->setChannel((null !== $channel) ? $channel : $this->sharedStorage->get('channel'));
         $order->setCurrencyCode((null !== $currencyCode) ? $currencyCode : $this->sharedStorage->get('currency')->getCode());
         $order->setLocaleCode((null !== $localeCode) ? $localeCode : $this->sharedStorage->get('locale')->getCode());
+
+        $currencyCode = $currencyCode ? $currencyCode : $this->sharedStorage->get('currency')->getCode();
+        $currency = $this->currencyRepository->findOneBy(['code' => $currencyCode]);
+
+        $order->setCurrencyCode($currency->getCode());
+        $order->setExchangeRate($currency->getExchangeRate());
         $order->complete();
 
         return $order;

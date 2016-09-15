@@ -22,15 +22,11 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class PaymentGatewayChoiceType extends AbstractType
 {
     /**
-     * Choices.
-     *
      * @var array
      */
     protected $gateways;
 
     /**
-     * Constructor.
-     *
      * @param array $gateways
      */
     public function __construct(array $gateways)

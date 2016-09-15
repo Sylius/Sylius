@@ -20,11 +20,6 @@ doctrine:
         dbname: "%database_name%_test"
         driver_class: Sylius\Bundle\CoreBundle\Test\MySqlDriver
 
-doctrine_cache:
-    providers:
-        sylius_settings:
-            type: array
-
 monolog:
     handlers:
         main:

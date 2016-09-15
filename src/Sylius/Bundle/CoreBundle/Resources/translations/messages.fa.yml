@@ -68,20 +68,6 @@ sylius:
             code: نام انگلیسی
         product_variant:
             tax_category: نوع مالیات
-        settings:
-            general:
-                currency: واحد پولی پیش‌فرض
-                locale: زبان
-                meta_description: توضیحات سئو
-                meta_keywords: کلمات کلیدی
-                title: عنوان سایت
-                tracking_code:
-                    Tracking code (for example: کد گوگل آنالیتیک)
-            taxation:
-                default_tax_zone: منطقه مالیاتی پیش فرض
-                default_tax_calculation_strategy: استراتژی محاسبه مالیات پیش فرض
-            security:
-                enabled: فعال؟
         shipment_filter:
             created_at_from: از تاریخ
             created_at_to: تا تاریخ
@@ -97,7 +83,9 @@ sylius:
         shipping_method:
             zone: منطقه
         taxon:
+            code: نام انگلیسی
             file: انتخاب تصویر
+            images: عکس ها
         taxonomy:
             file: انتخاب تصویر
         user:

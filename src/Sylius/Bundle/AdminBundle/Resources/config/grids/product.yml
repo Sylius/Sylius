@@ -8,7 +8,9 @@ sylius_grid:
                     repository:
                         method: createListQueryBuilder
             sorting:
-                code: asc
+                code:
+                    path: code
+                    direction: asc
             fields:
                 image:
                     type: twig

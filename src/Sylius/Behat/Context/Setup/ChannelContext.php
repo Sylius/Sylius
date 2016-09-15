@@ -93,6 +93,17 @@ final class ChannelContext implements Context
     }
 
     /**
+     * @Given the store operates on a single channel in the "United States" named :channelIdentifier
+     */
+    public function storeOperatesOnASingleChannelInTheUnitedStatesNamed($channelIdentifier)
+    {
+        $defaultData = $this->unitedStatesChannelFactory->create($channelIdentifier, $channelIdentifier);
+
+        $this->sharedStorage->setClipboard($defaultData);
+        $this->sharedStorage->set('channel', $defaultData['channel']);
+    }
+
+    /**
      * @Given the store operates on a single channel
      */
     public function storeOperatesOnASingleChannel()
@@ -125,6 +136,7 @@ final class ChannelContext implements Context
 
     /**
      * @Given the channel :channel is disabled
+     * @Given the channel :channel has been disabled
      */
     public function theChannelIsDisabled(ChannelInterface $channel)
     {

@@ -40,7 +40,7 @@ final class ParameterTransformerListener
      */
     public function __construct(ContainerInterface $container)
     {
-        // FIXME: Do not inject the container!
+        // Circular reference detected for service "doctrine.dbal.default_connection", path: "doctrine.dbal.default_connection".
         $this->container = $container;
     }
 

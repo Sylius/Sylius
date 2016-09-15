@@ -36,7 +36,7 @@ final class CurrencyContext implements Context
      * @var SharedStorageInterface
      */
     private $sharedStorage;
-    
+
     /**
      * @param HomePageInterface $homePage
      */
@@ -55,15 +55,6 @@ final class CurrencyContext implements Context
     {
         $this->homePage->open();
         $this->homePage->switchCurrency($currencyCode);
-    }
-
-    /**
-     * @Given the customer chose :currencyCode currency
-     * @Given I chose :currencyCode currency
-     */
-    public function theCustomerChoseTheCurrency($currencyCode)
-    {
-        $this->currencyStorage->set($this->sharedStorage->get('channel'), $currencyCode);
     }
 
     /**

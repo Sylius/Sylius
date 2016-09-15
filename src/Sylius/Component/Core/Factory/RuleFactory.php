@@ -11,12 +11,12 @@
 
 namespace Sylius\Component\Core\Factory;
 
-use Sylius\Component\Core\Promotion\Checker\ContainsTaxonRuleChecker;
-use Sylius\Component\Core\Promotion\Checker\NthOrderRuleChecker;
-use Sylius\Component\Core\Promotion\Checker\TaxonRuleChecker;
-use Sylius\Component\Core\Promotion\Checker\TotalOfItemsFromTaxonRuleChecker;
-use Sylius\Component\Promotion\Checker\CartQuantityRuleChecker;
-use Sylius\Component\Promotion\Checker\ItemTotalRuleChecker;
+use Sylius\Component\Core\Promotion\Checker\Rule\ContainsTaxonRuleChecker;
+use Sylius\Component\Core\Promotion\Checker\Rule\NthOrderRuleChecker;
+use Sylius\Component\Core\Promotion\Checker\Rule\TaxonRuleChecker;
+use Sylius\Component\Core\Promotion\Checker\Rule\TotalOfItemsFromTaxonRuleChecker;
+use Sylius\Component\Promotion\Checker\Rule\CartQuantityRuleChecker;
+use Sylius\Component\Promotion\Checker\Rule\ItemTotalRuleChecker;
 use Sylius\Component\Promotion\Model\RuleInterface;
 use Sylius\Component\Resource\Factory\FactoryInterface;
 

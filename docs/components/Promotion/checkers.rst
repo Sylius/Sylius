@@ -13,7 +13,7 @@ You can use it when your subject implements the :ref:`component_promotion_model_
     <?php
 
     $itemCountChecker = new ItemCountRuleChecker();
-    // a Subject that implements the PromotionCountableSubjectInterface
+    // a Subject that implements the CountablePromotionSubjectInterface
     $subject->setQuantity(3);
 
     $configuration = array('count' => 2);

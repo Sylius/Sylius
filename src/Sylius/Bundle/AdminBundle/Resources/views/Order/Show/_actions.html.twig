@@ -1,6 +1,5 @@
 {% import '@SyliusUi/Macro/buttons.html.twig' as buttons %}
 
-{{ buttons.delete(path('sylius_admin_order_delete', {'id': order.id})) }}
 {% if sm_can(order, 'cancel', 'sylius_order') %}
     <form action="{{ path('sylius_admin_order_cancel', {'id': order.id} ) }}" method="post">
         <input type="hidden" name="_method" value="PUT">

@@ -6,7 +6,9 @@ sylius_grid:
                 options:
                     class: "%sylius.model.tax_category.class%"
             sorting:
-                name: asc
+                name:
+                    path: name
+                    direction: asc
             fields:
                 code:
                     type: string

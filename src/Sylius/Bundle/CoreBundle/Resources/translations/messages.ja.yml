@@ -28,15 +28,6 @@ sylius:
             name: 商品名
         product_variant:
             tax_category: 税区分
-        settings:
-            general:
-                currency: デフォルトの通貨
-                locale: 言語
-                meta_description: metaタグ(description)
-                meta_keywords: Metaタグ(keywords)
-                title: ページのタイトル
-            taxation:
-                default_tax_zone: デフォルトの課税地域
         shipment_filter:
             created_at_from: 合計金額(下限)
             created_at_to: 合計金額(上限)
@@ -47,6 +38,7 @@ sylius:
             zone: 対象の地域
         taxon:
             file: 画像を選択
+            images: 画像
         taxonomy:
             file: 画像を選択
         user:

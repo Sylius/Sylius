@@ -23,7 +23,7 @@ use Symfony\Component\DependencyInjection\Reference;
 /**
  * @author Saša Stamenković <umpirsky@gmail.com>
  */
-class SyliusPromotionExtension extends AbstractResourceExtension
+final class SyliusPromotionExtension extends AbstractResourceExtension
 {
     /**
      * {@inheritdoc}

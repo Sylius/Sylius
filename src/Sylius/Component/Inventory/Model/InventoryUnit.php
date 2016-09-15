@@ -13,6 +13,7 @@ namespace Sylius\Component\Inventory\Model;
 
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
+ * @author Grzegorz Sadowski <grzegorz.sadowski@lakion.com>
  */
 class InventoryUnit implements InventoryUnitInterface
 {
@@ -25,11 +26,6 @@ class InventoryUnit implements InventoryUnitInterface
      * @var StockableInterface
      */
     protected $stockable;
-
-    /**
-     * @var string
-     */
-    protected $inventoryState = InventoryUnitInterface::STATE_CHECKOUT;
 
     /**
      * {@inheritdoc}
@@ -61,29 +57,5 @@ class InventoryUnit implements InventoryUnitInterface
     public function getInventoryName()
     {
         return $this->stockable->getInventoryName();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getInventoryState()
-    {
-        return $this->inventoryState;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setInventoryState($state)
-    {
-        $this->inventoryState = $state;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isSold()
-    {
-        return InventoryUnitInterface::STATE_SOLD === $this->inventoryState;
     }
 }

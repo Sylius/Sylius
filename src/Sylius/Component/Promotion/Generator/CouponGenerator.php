@@ -22,27 +22,27 @@ use Webmozart\Assert\Assert;
 /**
  * @author Paweł Jędrzejewski <pawel@sylius.org>
  */
-class CouponGenerator implements CouponGeneratorInterface
+final class CouponGenerator implements CouponGeneratorInterface
 {
     /**
      * @var FactoryInterface
      */
-    protected $couponFactory;
+    private $couponFactory;
 
     /**
      * @var CouponRepositoryInterface
      */
-    protected $couponRepository;
+    private $couponRepository;
 
     /**
      * @var ObjectManager
      */
-    protected $objectManager;
+    private $objectManager;
 
     /**
      * @var GenerationPolicyInterface
      */
-    protected $generationPolicy;
+    private $generationPolicy;
 
     /**
      * @param FactoryInterface $couponFactory
@@ -94,7 +94,7 @@ class CouponGenerator implements CouponGeneratorInterface
      *
      * @return string
      */
-    protected function generateUniqueCode($codeLength, array $generatedCoupons)
+    private function generateUniqueCode($codeLength, array $generatedCoupons)
     {
         Assert::nullOrRange($codeLength, 1, 40, 'Invalid %d code length should be between %d and %d');
 
@@ -112,7 +112,7 @@ class CouponGenerator implements CouponGeneratorInterface
      *
      * @return bool
      */
-    protected function isUsedCode($code, array $generatedCoupons)
+    private function isUsedCode($code, array $generatedCoupons)
     {
         if (isset($generatedCoupons[$code])) {
             return true;

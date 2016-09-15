@@ -69,20 +69,6 @@ sylius:
             code: Código
         product_variant:
             tax_category: Categoria de imposto
-        settings:
-            general:
-                currency: Moeda padrão
-                locale: Idioma
-                meta_description: Descrição meta
-                meta_keywords: Palavras-chave meta
-                title: Título da página
-                tracking_code:
-                    Tracking code (for example: Código do Google Analytics
-            taxation:
-                default_tax_zone: Zona de imposto padrão
-                default_tax_calculation_strategy: Estratégia de cálculo do imposto padrão
-            security:
-                enabled: Activado?
         shipment_filter:
             created_at_from: De
             created_at_to: Para
@@ -98,7 +84,9 @@ sylius:
         shipping_method:
             zone: Zona
         taxon:
+            code: Código
             file: Selecionar imagem
+            images: Imagens
         taxonomy:
             file: Selecionar imagem
         user:
@@ -150,7 +138,7 @@ sylius:
             name: Comentário de encomenda
         shipment_confirmation:
             name: Confirmação de envio
-            content: 'A sua encomenda foi enviada. <br/> Obrigado pela sua preferência.'
+            content: 'A encomenda nº%number% foi enviada por %method%.<br />Pode verificar a sua localização com o código %tracking%.<br /><br />Obrigado pela preferência.'
         user_confirmation:
             name: Confirmação do utilizador
             subject: Bem-vindo à nossa loja

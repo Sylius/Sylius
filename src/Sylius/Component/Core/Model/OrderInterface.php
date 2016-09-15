@@ -16,8 +16,8 @@ use Sylius\Component\Cart\Model\CartInterface;
 use Sylius\Component\Channel\Model\ChannelAwareInterface;
 use Sylius\Component\Payment\Model\PaymentsSubjectInterface;
 use Sylius\Component\Promotion\Model\CouponInterface as BaseCouponInterface;
-use Sylius\Component\Promotion\Model\PromotionCountableSubjectInterface;
-use Sylius\Component\Promotion\Model\PromotionCouponAwareSubjectInterface;
+use Sylius\Component\Promotion\Model\CountablePromotionSubjectInterface;
+use Sylius\Component\Promotion\Model\CouponAwarePromotionSubjectInterface;
 use Sylius\Component\Customer\Model\CustomerAwareInterface;
 
 /**
@@ -26,8 +26,8 @@ use Sylius\Component\Customer\Model\CustomerAwareInterface;
 interface OrderInterface extends
     CartInterface,
     PaymentsSubjectInterface,
-    PromotionCountableSubjectInterface,
-    PromotionCouponAwareSubjectInterface,
+    CountablePromotionSubjectInterface,
+    CouponAwarePromotionSubjectInterface,
     CustomerAwareInterface,
     ChannelAwareInterface
 {

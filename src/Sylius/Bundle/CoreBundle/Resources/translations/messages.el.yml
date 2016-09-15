@@ -48,15 +48,6 @@ sylius:
             code: Κώδικος
         product_variant:
             tax_category: Φορολογική κατηγορία
-        settings:
-            general:
-                currency: Προεπιλεγμένο νόμισμα
-                locale: Γλώσσα
-                meta_description: Μετα-περιγραφή
-                meta_keywords: Μετα-λέξεις-κλειδιά
-                title: Τίτλος σελίδας
-            taxation:
-                default_tax_zone: Προεπιλεγμένη φορολογική ζώνη
         shipment_filter:
             created_at_from: Από
             created_at_to: Προς
@@ -69,7 +60,9 @@ sylius:
         shipping_method:
             zone: Ζώνη
         taxon:
+            code: Κώδικος
             file: Επιλέξτε εικόνα
+            images: Εικόνες
         taxonomy:
             file: Επιλέξτε εικόνα
         user:

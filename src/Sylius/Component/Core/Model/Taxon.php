@@ -12,28 +12,24 @@
 namespace Sylius\Component\Core\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Sylius\Component\Resource\Model\TimestampableTrait;
 use Sylius\Component\Taxonomy\Model\Taxon as BaseTaxon;
 use Sylius\Component\Taxonomy\Model\TaxonTranslation;
 
-class Taxon extends BaseTaxon implements ImageInterface, TaxonInterface
+class Taxon extends BaseTaxon implements TaxonInterface
 {
     use TimestampableTrait;
-
-    /**
-     * @var \SplFileInfo
-     */
-    protected $file;
-
-    /**
-     * @var string
-     */
-    protected $path;
 
     /**
      * @var ArrayCollection
      */
     protected $products;
+
+    /**
+     * @var Collection|TaxonImageInterface[]
+     */
+    protected $images;
 
     public function __construct()
     {
@@ -41,54 +37,65 @@ class Taxon extends BaseTaxon implements ImageInterface, TaxonInterface
 
         $this->createdAt = new \DateTime();
         $this->products = new ArrayCollection();
+        $this->images = new ArrayCollection();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function hasFile()
+    public function hasImages()
     {
-        return null !== $this->file;
+        return !$this->images->isEmpty();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getFile()
+    public function hasImage(TaxonImageInterface $image)
     {
-        return $this->file;
+        return $this->images->contains($image);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setFile(\SplFileInfo $file)
+    public function getImages()
     {
-        $this->file = $file;
+        return $this->images;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function hasPath()
+    public function getImageByCode($code)
     {
-        return null !== $this->path;
+        foreach ($this->images as $image) {
+            if ($code === $image->getCode()) {
+                return $image;
+            }
+        }
+
+        return null;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getPath()
+    public function addImage(TaxonImageInterface $image)
     {
-        return $this->path;
+        $image->setTaxon($this);
+        $this->images->add($image);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setPath($path)
+    public function removeImage(TaxonImageInterface $image)
     {
-        $this->path = $path;
+        if ($this->hasImage($image)) {
+            $image->setTaxon(null);
+            $this->images->removeElement($image);
+        }
     }
 
     /**

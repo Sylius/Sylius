@@ -14,6 +14,7 @@ namespace Sylius\Behat\Context\Transform;
 use Behat\Behat\Context\Context;
 use Sylius\Component\Core\Repository\ProductRepositoryInterface;
 use Sylius\Component\Core\Repository\ProductVariantRepositoryInterface;
+use Webmozart\Assert\Assert;
 
 /**
  * @author Łukasz Chruściel <lukasz.chrusciel@lakion.com>
@@ -54,6 +55,18 @@ final class ProductVariantContext implements Context
         if (null === $productVariant) {
             throw new \InvalidArgumentException(sprintf('Product variant with name "%s" of product "%s" does not exist', $variantName, $productName));
         }
+
+        return $productVariant;
+    }
+
+    /**
+     * @Transform /^"([^"]+)" product variant$/
+     * @Transform /^"([^"]+)" variant$/
+     */
+    public function getProductVariantByName($name)
+    {
+        $productVariant = $this->productVariantRepository->findOneBy(['name' => $name]);
+        Assert::notNull($productVariant, sprintf('There is no product variant for "%s" name', $name));
 
         return $productVariant;
     }

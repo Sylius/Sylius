@@ -3,7 +3,7 @@ sylius_admin_order:
         alias: sylius.order
         section: admin
         templates: SyliusAdminBundle:Crud
-        except: ['create', 'update', 'show']
+        only: ['index']
         grid: sylius_admin_order
         permission: true
         vars:
@@ -50,3 +50,17 @@ sylius_admin_order_payment_complete:
                 transition: complete
             redirect: referer
             permission: true
+
+sylius_admin_order_shipping_address_update:
+    path: /orders/{id}/shipping-address/edit
+    methods: [GET, PATCH]
+    defaults:
+        _controller: sylius.controller.order:updateAction
+        _sylius:
+            section: admin
+            template: SyliusAdminBundle:Order:updateShippingAddress.html.twig
+            permission: true
+            form:
+                type: sylius_order
+                options:
+                    validation_groups: sylius_shipping_address_update

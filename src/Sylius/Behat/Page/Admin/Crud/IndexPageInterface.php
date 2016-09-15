@@ -34,6 +34,18 @@ interface IndexPageInterface extends SymfonyPageInterface
     public function isSingleResourceWithSpecificElementOnPage(array $parameters, $element);
 
     /**
+     * @param string $columnName
+     *
+     * @return array
+     */
+    public function getColumnFields($columnName);
+
+    /**
+     * @param string $fieldName
+     */
+    public function sortBy($fieldName);
+
+    /**
      * @param array $parameters
      *
      * @return bool
