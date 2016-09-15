@@ -159,9 +159,14 @@ final class ManagingOrdersContext implements Context
     /**
      * @Then it should be shipped to :customerName, :street, :postcode, :city, :countryName
      * @Then this order should be shipped to :customerName, :street, :postcode, :city, :countryName
+     * @Then /^(this order) should still be shipped to "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)", "([^"]+)"$/
      */
-    public function itShouldBeShippedTo($customerName, $street, $postcode, $city, $countryName)
+    public function itShouldBeShippedTo(OrderInterface $order = null, $customerName, $street, $postcode, $city, $countryName)
     {
+        if (null !== $order) {
+            $this->iSeeTheOrder($order);
+        }
+
         Assert::true(
             $this->showPage->hasShippingAddress($customerName, $street, $postcode, $city, $countryName),
             sprintf('Cannot find shipping address "%s, %s %s, %s".', $street, $postcode, $city, $countryName)
@@ -650,32 +655,36 @@ final class ManagingOrdersContext implements Context
 
     /**
      * @When I specify the first name as :firstName
+     * @When I do not specify the first name
      */
-    public function iSpecifyTheFirstNameAs($firstName)
+    public function iSpecifyTheFirstNameAs($firstName = null)
     {
         $this->updateShippingAddressPage->specifyFirstName($firstName);
     }
 
     /**
      * @When I specify the last name as :lastName
+     * @When I do not specify the last name
      */
-    public function iSpecifyTheLastNameAs($lastName)
+    public function iSpecifyTheLastNameAs($lastName = null)
     {
         $this->updateShippingAddressPage->specifyLastName($lastName);
     }
 
     /**
      * @When I specify the street as :street
+     * @When I do not specify the street
      */
-    public function iSpecifyTheStreetAs($street)
+    public function iSpecifyTheStreetAs($street = null)
     {
         $this->updateShippingAddressPage->specifyStreet($street);
     }
 
     /**
      * @When I specify the city as :city
+     * @When I do not specify the city
      */
-    public function iSpecifyTheCityAs($city)
+    public function iSpecifyTheCityAs($city = null)
     {
         $this->updateShippingAddressPage->specifyCity($city);
     }
@@ -698,6 +707,7 @@ final class ManagingOrdersContext implements Context
 
     /**
      * @When I save my changes
+     * @When I try to save my changes
      */
     public function iSaveMyChanges()
     {
@@ -710,5 +720,26 @@ final class ManagingOrdersContext implements Context
     public function iSpecifyTheirShippingAddressAsFor($city, $street, $postcode, $country, $firstAndLastName)
     {
         $this->updateShippingAddressPage->specifyShippingAddress($city, $street, $postcode, $country, $firstAndLastName);
+    }
+
+    /**
+     * @Then /^I should be notified that the ([^"]+) is required$/
+     */
+    public function iShouldBeNotifiedThatIsRequired($element)
+    {
+        Assert::same(
+            $this->updateShippingAddressPage->getValidationMessage($this->getNormalizedElementName($element)),
+            sprintf('Please enter %s.', $element)
+        );
+    }
+
+    /**
+     * @param string $elementName
+     *
+     * @return string
+     */
+    private function getNormalizedElementName($elementName)
+    {
+        return str_replace(' ', '_', $elementName);
     }
 }
