@@ -34,9 +34,7 @@ class SyliusShopExtension extends Extension
         $config = $this->processConfiguration($this->getConfiguration($config, $container), $config);
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        $loader->load('controller.xml');
-        $loader->load('listeners.xml');
-        $loader->load('menu.xml');
+        $loader->load('services.xml');
 
         $this->configureCheckoutResolverIfNeeded($config['checkout_resolver'], $container);
     }

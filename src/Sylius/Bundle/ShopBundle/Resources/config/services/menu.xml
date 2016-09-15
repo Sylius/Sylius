@@ -11,21 +11,12 @@
 
 -->
 
-<container xmlns="http://symfony.com/schema/dic/services"
-           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-           xsi:schemaLocation="http://symfony.com/schema/dic/services
-                               http://symfony.com/schema/dic/services/services-1.0.xsd">
-
-    <parameters>
-        <parameter key="sylius.menu_builder.shop.account.class">Sylius\Bundle\ShopBundle\Menu\AccountMenuBuilder</parameter>
-    </parameters>
-
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <service id="sylius.menu_builder.shop.account" class="%sylius.menu_builder.shop.account.class%" parent="sylius.menu_builder" />
+        <service id="sylius.menu_builder.shop.account" class="Sylius\Bundle\ShopBundle\Menu\AccountMenuBuilder" parent="sylius.menu_builder" />
         <service id="sylius.menu.shop.account" class="Knp\Menu\MenuItem" factory-service="sylius.menu_builder.shop.account" factory-method="createMenu" scope="request">
             <argument type="service" id="request" />
             <tag name="knp_menu.menu" alias="sylius.shop.account" />
         </service>
     </services>
-
 </container>
