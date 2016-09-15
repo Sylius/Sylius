@@ -28,8 +28,8 @@ Sylius\Component\Core\Model\Channel:
         enabled: true
         taxCalculationStrategy: "order_items_based"
         currencies: [@currency]
-        shippingMethods: [@ups]
-        paymentMethods: [@cash_on_delivery]
+        shippingMethods: [@ups, @dhl]
+        paymentMethods: [@cash_on_delivery, @pay_by_check]
 
 Sylius\Component\Core\Model\Product:
     product1:
@@ -77,12 +77,23 @@ Sylius\Component\Core\Model\ShippingMethod:
         zone: @zone_eu
         currentLocale: en_US
         currentTranslation: @upsTranslation1
+    dhl:
+        code: DHL
+        enabled: true
+        calculator: 'flat_rate'
+        configuration:
+            amount: 20
+        zone: @zone_eu
 
 Sylius\Component\Shipping\Model\ShippingMethodTranslation:
     upsTranslation1:
         name: 'UPS'
         locale: 'en_US'
         translatable: @ups
+    dhlTranslation1:
+        name: 'DHL'
+        locale: 'en_US'
+        translatable: @dhl
 
 Sylius\Component\Payment\Model\PaymentMethod:
     cash_on_delivery:
@@ -91,12 +102,20 @@ Sylius\Component\Payment\Model\PaymentMethod:
         gateway: 'offline'
         currentLocale: en_US
         currentTranslation: @cash_on_delivery_translation1
+    pay_by_check:
+        code: pbc
+        enabled: true
+        gateway: 'offline'
 
 Sylius\Component\Payment\Model\PaymentMethodTranslation:
     cash_on_delivery_translation1:
         name: 'Cach on delivery'
         locale: 'en_US'
         translatable: @cash_on_delivery
+    pay_by_check_translation1:
+        name: 'Pay by check'
+        locale: 'en_US'
+        translatable: @pay_by_check
 
 Sylius\Component\Currency\Model\Currency:
     currency:

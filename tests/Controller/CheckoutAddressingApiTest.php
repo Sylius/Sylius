@@ -188,4 +188,165 @@ EOT;
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'checkout/addressed_order_response');
     }
+
+    /**
+     * @test
+     */
+    public function it_allows_to_change_order_address_after_the_order_has_already_been_addressed()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/countries.yml');
+        $customers = $this->loadFixturesFromFile('resources/customers.yml');
+        $checkoutData = $this->loadFixturesFromFile('resources/checkout.yml');
+
+        $data =
+<<<EOT
+        {
+            "shippingAddress": {
+                "firstName": "Vincent",
+                "lastName": "van Gogh",
+                "street": "Post-Impressionism St.",
+                "countryCode": "NL",
+                "city": "Groot Zundert",
+                "postcode": "88-888"
+            },
+            "differentBillingAddress": false
+        }
+EOT;
+
+        $orderId = $checkoutData['order1']->getId();
+
+        $url = sprintf('/api/checkouts/addressing/%d/%d', $orderId, $customers['customer_Oliver']->getId());
+        $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $newData =
+<<<EOT
+        {
+            "shippingAddress": {
+                "firstName": "Hieronim",
+                "lastName": "Bosch",
+                "street": "Surrealism St.",
+                "countryCode": "NL",
+                "city": "’s-Hertogenbosch",
+                "postcode": "99-999"
+            },
+            "differentBillingAddress": false
+        }
+EOT;
+
+        $url = sprintf('/api/checkouts/addressing/%d/%d', $checkoutData['order1']->getId(), $customers['customer_Oliver']->getId());
+        $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $newData);
+
+        $response = $this->client->getResponse();
+        $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_to_change_order_address_after_selecting_shipping_method()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/countries.yml');
+        $customers = $this->loadFixturesFromFile('resources/customers.yml');
+        $checkoutData = $this->loadFixturesFromFile('resources/checkout.yml');
+
+        $addressData =
+<<<EOT
+        {
+            "shippingAddress": {
+                "firstName": "Vincent",
+                "lastName": "van Gogh",
+                "street": "Post-Impressionism St.",
+                "countryCode": "NL",
+                "city": "Groot Zundert",
+                "postcode": "88-888"
+            },
+            "differentBillingAddress": false
+        }
+EOT;
+
+        $orderId = $checkoutData['order1']->getId();
+
+        $url = sprintf('/api/checkouts/addressing/%d/%d', $orderId, $customers['customer_Oliver']->getId());
+        $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $addressData);
+
+        $this->selectOrderShippingMethod($orderId, $checkoutData['ups']->getId());
+
+        $newAddressData =
+<<<EOT
+        {
+            "shippingAddress": {
+                "firstName": "Hieronim",
+                "lastName": "Bosch",
+                "street": "Surrealism St.",
+                "countryCode": "NL",
+                "city": "’s-Hertogenbosch",
+                "postcode": "99-999"
+            },
+            "differentBillingAddress": false
+        }
+EOT;
+
+        $url = sprintf('/api/checkouts/addressing/%d/%d', $checkoutData['order1']->getId(), $customers['customer_Oliver']->getId());
+        $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $newAddressData);
+
+        $response = $this->client->getResponse();
+        $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
+    }
+
+    /**
+     * @test
+     */
+    public function it_allows_to_change_order_address_after_selecting_payment_method()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $this->loadFixturesFromFile('resources/countries.yml');
+        $customers = $this->loadFixturesFromFile('resources/customers.yml');
+        $checkoutData = $this->loadFixturesFromFile('resources/checkout.yml');
+
+        $addressData =
+<<<EOT
+        {
+            "shippingAddress": {
+                "firstName": "Vincent",
+                "lastName": "van Gogh",
+                "street": "Post-Impressionism St.",
+                "countryCode": "NL",
+                "city": "Groot Zundert",
+                "postcode": "88-888"
+            },
+            "differentBillingAddress": false
+        }
+EOT;
+
+        $orderId = $checkoutData['order1']->getId();
+
+        $url = sprintf('/api/checkouts/addressing/%d/%d', $orderId, $customers['customer_Oliver']->getId());
+        $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $addressData);
+
+        $this->selectOrderShippingMethod($orderId, $checkoutData['ups']->getId());
+        $this->selectOrderPaymentMethod($orderId, $checkoutData['cash_on_delivery']->getId());
+
+        $newAddressData =
+<<<EOT
+        {
+            "shippingAddress": {
+                "firstName": "Hieronim",
+                "lastName": "Bosch",
+                "street": "Surrealism St.",
+                "countryCode": "NL",
+                "city": "’s-Hertogenbosch",
+                "postcode": "99-999"
+            },
+            "differentBillingAddress": false
+        }
+EOT;
+
+        $url = sprintf('/api/checkouts/addressing/%d/%d', $checkoutData['order1']->getId(), $customers['customer_Oliver']->getId());
+        $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $newAddressData);
+
+        $response = $this->client->getResponse();
+        $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
+    }
 }

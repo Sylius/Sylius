@@ -126,4 +126,36 @@ EOT;
         $response = $this->client->getResponse();
         $this->assertResponse($response, 'checkout/payment_selected_order_response');
     }
+
+    /**
+     * @test
+     */
+    public function it_allows_to_change_payment_method_after_its_already_been_chosen()
+    {
+        $this->loadFixturesFromFile('authentication/api_administrator.yml');
+        $checkoutData = $this->loadFixturesFromFile('resources/checkout.yml');
+
+        $orderId = $checkoutData['order1']->getId();
+        $this->addressOrder($orderId);
+        $this->selectOrderShippingMethod($orderId, $checkoutData['ups']->getCode());
+        $this->selectOrderPaymentMethod($orderId, $checkoutData['cash_on_delivery']->getId());
+
+        $data =
+<<<EOT
+        {
+            "payments": [
+                {
+                    "method": {$checkoutData['pay_by_check']->getId()}
+                }
+            ]
+        }
+EOT;
+
+        $url = sprintf('/api/checkouts/select-payment/%d', $orderId);
+        $this->client->request('PUT', $url, [], [], static::$authorizedHeaderWithContentType, $data);
+
+        $response = $this->client->getResponse();
+
+        $this->assertResponseCode($response, Response::HTTP_NO_CONTENT);
+    }
 }
