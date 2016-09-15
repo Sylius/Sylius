@@ -15,7 +15,7 @@ Feature: Seeing order shipping total on order summary page
     Scenario: Seeing the shipping total on order summary
         Given I have product "The Sorting Hat" in the cart
         When I specified the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And I proceed order with "UPS" shipping method and "Offline" payment
+        And I proceed with "UPS" shipping method and "Offline" payment
         Then I should be on the checkout summary step
         And my order shipping should be "$20.00"
 
@@ -25,6 +25,6 @@ Feature: Seeing order shipping total on order summary page
         And the promotion gives "50%" discount on shipping to every order
         And I have product "The Sorting Hat" in the cart
         When I specified the shipping address as "Ankh Morpork", "Frost Alley", "90210", "United States" for "Jon Snow"
-        And I proceed order with "UPS" shipping method and "Offline" payment
+        And I proceed with "UPS" shipping method and "Offline" payment
         Then I should be on the checkout summary step
         And my order shipping should be "$10.00"

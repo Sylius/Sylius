@@ -42,6 +42,7 @@ final class ProvinceNamingProviderSpec extends ObjectBehavior
         RepositoryInterface $provinceRepository,
         AddressInterface $address
     ) {
+        $address->getProvinceName()->willReturn(null);
         $address->getProvinceCode()->willReturn('ZZ-TOP');
         $provinceRepository->findOneBy(['code' => 'ZZ-TOP'])->willReturn(null);
 
@@ -55,15 +56,15 @@ final class ProvinceNamingProviderSpec extends ObjectBehavior
         AddressInterface $address
     ) {
         $address->getProvinceCode()->willReturn('IE-UL');
+        $address->getProvinceName()->willReturn(null);
         $provinceRepository->findOneBy(['code' => 'IE-UL'])->willReturn($province);
         $province->getName()->willReturn('Ulster');
 
         $this->getName($address)->shouldReturn('Ulster');
     }
 
-    function it_gets_province_name_form_address_if_address_do_not_has_province_code(AddressInterface $address)
+    function it_gets_province_name_form_address(AddressInterface $address)
     {
-        $address->getProvinceCode()->willReturn(null);
         $address->getProvinceName()->willReturn('Ulster');
 
         $this->getName($address)->shouldReturn('Ulster');
@@ -74,8 +75,8 @@ final class ProvinceNamingProviderSpec extends ObjectBehavior
         $address->getProvinceCode()->willReturn(null);
         $address->getProvinceName()->willReturn(null);
 
-        $this->getName($address)->shouldReturn(null);
-        $this->getAbbreviation($address)->shouldReturn(null);
+        $this->getName($address)->shouldReturn('');
+        $this->getAbbreviation($address)->shouldReturn('');
 
     }
 
@@ -84,6 +85,7 @@ final class ProvinceNamingProviderSpec extends ObjectBehavior
         ProvinceInterface $province,
         AddressInterface $address
     ) {
+        $address->getProvinceName()->willReturn(null);
         $address->getProvinceCode()->willReturn('IE-UL');
         $provinceRepository->findOneBy(['code' => 'IE-UL'])->willReturn($province);
         $province->getAbbreviation()->willReturn('ULS');
@@ -96,6 +98,7 @@ final class ProvinceNamingProviderSpec extends ObjectBehavior
         ProvinceInterface $province,
         AddressInterface $address
     ) {
+        $address->getProvinceName()->willReturn(null);
         $address->getProvinceCode()->willReturn('IE-UL');
         $provinceRepository->findOneBy(['code' => 'IE-UL'])->willReturn($province);
         $province->getAbbreviation()->willReturn(null);
@@ -104,9 +107,8 @@ final class ProvinceNamingProviderSpec extends ObjectBehavior
         $this->getAbbreviation($address)->shouldReturn('Ulster');
     }
 
-    function it_gets_province_name_form_address_if_its_abbreviation_is_not_set_and_province_not_exists_in_database(AddressInterface $address)
+    function it_gets_province_name_form_address_if_its_abbreviation_is_not_set(AddressInterface $address)
     {
-        $address->getProvinceCode()->willReturn(null);
         $address->getProvinceName()->willReturn('Ulster');
 
         $this->getAbbreviation($address)->shouldReturn('Ulster');

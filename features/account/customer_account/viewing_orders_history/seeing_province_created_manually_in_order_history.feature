@@ -5,14 +5,12 @@ Feature: Seeing province created manually in order history
     I want to be able to see province in the order history
 
     Background:
-        Given the store ships to "United Kingdom"
+        Given the store operates on a channel named "Web"
+        And the store operates in "United Kingdom"
         And the store has a zone "English" with code "EN"
         And this zone has the "United Kingdom" country member
-        And the store operates on a channel named "Web"
-        And that channel allows to shop using the "GBP" currency
-        And that channel uses the "GBP" currency by default
         And the store allows paying with "Cash on Delivery"
-        And the store has "DHL" shipping method with "$20.00" fee within "EN" zone
+        And the store has "DHL" shipping method with "$20.00" fee within the "EN" zone
         And the store has a product "Angel T-Shirt" priced at "$39.00"
         And I am a logged in customer
         And I placed an order "#00000666"

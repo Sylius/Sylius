@@ -5,14 +5,12 @@ Feature: Seeing province created manually on order summary page
     I want to be able to see province on the order summary page
 
     Background:
-        Given the store ships to "United Kingdom"
+        Given the store operates on a channel named "Web"
+        And the store operates in "United Kingdom"
         And the store has a zone "English" with code "EN"
         And this zone has the "United Kingdom" country member
-        And the store operates on a channel named "Web"
-        And that channel allows to shop using the "GBP" currency
-        And that channel uses the "GBP" currency by default
         And the store allows paying with "Cash on Delivery"
-        And the store has "DHL" shipping method with "$20.00" fee within "EN" zone
+        And the store has "DHL" shipping method with "$20.00" fee within the "EN" zone
         And the store has a product "Angel T-Shirt" priced at "$39.00"
         And there is a customer "lucy@teamlucifer.com" that placed an order "#00000666"
         And the customer bought a single "Angel T-Shirt"

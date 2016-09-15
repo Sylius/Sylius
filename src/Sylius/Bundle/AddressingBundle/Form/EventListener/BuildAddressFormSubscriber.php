@@ -157,10 +157,10 @@ class BuildAddressFormSubscriber implements EventSubscriberInterface
         return
             $this
                 ->formFactory
-                ->createNamed('provinceName', 'text', $provinceName, [
+                    ->createNamed('provinceName', 'text', $provinceName, [
                     'required' => false,
                     'auto_initialize' => false,
                 ])
-            ;
+        ;
     }
 }

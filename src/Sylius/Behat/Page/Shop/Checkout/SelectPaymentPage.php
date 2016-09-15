@@ -34,15 +34,13 @@ class SelectPaymentPage extends SymfonyPage implements SelectPaymentPageInterfac
     public function selectPaymentMethod($paymentMethod)
     {
         if ($this->getDriver() instanceof Selenium2Driver) {
-            $paymentMethodOption = $this->getElement('payment_method_select');
-            $paymentMethodOption->getParent()->click();
+            $this->getElement('payment_method_select', ['%payment_method%' => $paymentMethod])->click();
 
             return;
         }
 
-        $paymentMethodElement = $this->getElement('payment_method');
-        $paymentMethodValue = $this->getElement('payment_method_option', ['%payment_method%' => $paymentMethod])->getAttribute('value');
-        $paymentMethodElement->selectOption($paymentMethodValue);
+        $paymentMethodOptionElement = $this->getElement('payment_method_option', ['%payment_method%' => $paymentMethod]);
+        $paymentMethodOptionElement->selectOption($paymentMethodOptionElement->getAttribute('value'));
     }
 
     /**
@@ -101,9 +99,8 @@ class SelectPaymentPage extends SymfonyPage implements SelectPaymentPageInterfac
             'checkout_subtotal' => '#checkout-subtotal',
             'next_step' => '#next-step',
             'order_cannot_be_paid_message' => '#sylius-order-cannot-be-paid',
-            'payment_method' => '[name="sylius_checkout_select_payment[payments][0][method]"]',
             'payment_method_option' => '.item:contains("%payment_method%") input',
-            'payment_method_select' => '#sylius_checkout_select_payment_payments_0_method_0',
+            'payment_method_select' => '.item:contains("%payment_method%") > .field > .ui.radio.checkbox',
             'shipping_step_label' => '.steps a:contains("Shipping")',
         ]);
     }

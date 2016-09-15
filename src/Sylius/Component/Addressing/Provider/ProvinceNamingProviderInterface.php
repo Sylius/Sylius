@@ -21,14 +21,14 @@ interface ProvinceNamingProviderInterface
     /**
      * @param AddressInterface $address
      *
-     * @return string|null
+     * @return string
      */
     public function getName(AddressInterface $address);
 
     /**
      * @param AddressInterface $address
      *
-     * @return string|null
+     * @return string
      */
     public function getAbbreviation(AddressInterface $address);
 }

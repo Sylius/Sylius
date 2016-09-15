@@ -24,7 +24,7 @@
             <argument type="service" id="sylius.repository.zone" />
             <tag name="form.type" alias="sylius_zone_code_choice" />
         </service>
-        <service id="sylius.form.type.province_code_choice" class="%sylius.form.type.province_code_choice.class%">
+        <service id="sylius.form.type.province_code_choice" class="Sylius\Bundle\AddressingBundle\Form\Type\ProvinceCodeChoiceType">
             <argument type="service" id="sylius.repository.province" />
             <tag name="form.type" alias="sylius_province_code_choice" />
         </service>

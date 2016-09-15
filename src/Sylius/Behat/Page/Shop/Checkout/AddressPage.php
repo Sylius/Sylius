@@ -105,8 +105,8 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         $this->getElement('shipping_city')->setValue($shippingAddress->getCity());
         $this->getElement('shipping_postcode')->setValue($shippingAddress->getPostcode());
 
-        if ($shippingAddress->getProvinceName()) {
-            $this->waitForShippingProvinceInput();
+        if (null !== $shippingAddress->getProvinceName()) {
+            $this->waitForElement(5, 'shipping_province');
             $this->getElement('shipping_province')->setValue($shippingAddress->getProvinceName());
         }
     }
@@ -116,7 +116,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
      */
     public function selectShippingAddressProvince($province)
     {
-        $this->waitForShippingProvinceSelector();
+        $this->waitForElement(5, 'shipping_country_province');
         $this->getElement('shipping_country_province')->selectOption($province);
     }
 
@@ -132,8 +132,8 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
         $this->getElement('billing_city')->setValue($billingAddress->getCity());
         $this->getElement('billing_postcode')->setValue($billingAddress->getPostcode());
 
-        if ($billingAddress->getProvinceName()) {
-            $this->waitForBillingProvinceInput();
+        if (null !== $billingAddress->getProvinceName()) {
+            $this->waitForElement(5, 'billing_province');
             $this->getElement('billing_province')->setValue($billingAddress->getProvinceName());
         }
     }
@@ -143,7 +143,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
      */
     public function selectBillingAddressProvince($province)
     {
-        $this->waitForBillingProvinceSelector();
+        $this->waitForElement(5, 'billing_country_province');
         $this->getElement('billing_country_province')->selectOption($province);
     }
 
@@ -160,7 +160,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
      */
     public function canSignIn()
     {
-        return $this->isSignInActionAvailable();
+        return $this->waitForElement(5, 'login_button');
     }
 
     /**
@@ -168,7 +168,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
      */
     public function signIn()
     {
-        $this->isSignInActionAvailable();
+        $this->waitForElement(5, 'login_button');
         try {
             $this->getElement('login_button')->press();
         } catch (ElementNotFoundException $elementNotFoundException) {
@@ -217,7 +217,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
      */
     public function specifyBillingAddressProvince($provinceName)
     {
-        $this->waitForBillingProvinceInput();
+        $this->waitForElement(5, 'billing_province');
         $this->getElement('billing_province')->setValue($provinceName);
     }
 
@@ -226,7 +226,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
      */
     public function specifyShippingAddressProvince($provinceName)
     {
-        $this->waitForShippingProvinceInput();
+        $this->waitForElement(5, 'shipping_province');
         $this->getElement('shipping_province')->setValue($provinceName);
     }
 
@@ -235,7 +235,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
      */
     public function hasShippingAddressInput()
     {
-        return $this->waitForShippingProvinceInput();
+        return $this->waitForElement(5, 'shipping_province');
     }
 
     /**
@@ -243,7 +243,7 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
      */
     public function hasBillingAddressInput()
     {
-        return $this->waitForBillingProvinceInput();
+        return $this->waitForElement(5, 'billing_province');
     }
 
     /**
@@ -298,16 +298,6 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
     /**
      * @return bool
      */
-    private function isSignInActionAvailable()
-    {
-        return $this->getDocument()->waitFor(5, function () {
-            return $this->hasElement('login_button');
-        });
-    }
-
-    /**
-     * @return bool
-     */
     private function waitForLoginAction()
     {
         $this->getDocument()->waitFor(5, function () {
@@ -318,40 +308,10 @@ class AddressPage extends SymfonyPage implements AddressPageInterface
     /**
      * @return bool
      */
-    private function waitForShippingProvinceSelector()
+    private function waitForElement($timeout, $elementName)
     {
-        return $this->getDocument()->waitFor(5, function () {
-            return $this->hasElement('shipping_country_province');
-        });
-    }
-
-    /**
-     * @return bool
-     */
-    private function waitForBillingProvinceSelector()
-    {
-        return $this->getDocument()->waitFor(5, function () {
-            return $this->hasElement('billing_country_province');
-        });
-    }
-
-    /**
-     * @return bool
-     */
-    private function waitForShippingProvinceInput()
-    {
-        return $this->getDocument()->waitFor(5, function () {
-            return $this->hasElement('shipping_province');
-        });
-    }
-
-    /**
-     * @return bool
-     */
-    private function waitForBillingProvinceInput()
-    {
-        return $this->getDocument()->waitFor(10, function () {
-            return $this->hasElement('billing_province');
+        return $this->getDocument()->waitFor($timeout, function () use ($elementName){
+            return $this->hasElement($elementName);
         });
     }
 }

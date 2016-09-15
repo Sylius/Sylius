@@ -787,7 +787,7 @@ final class CheckoutContext implements Context
 
     /**
      * @Given I have proceeded order with :shippingMethod shipping method and :paymentMethod payment
-     * @When I proceed order with :shippingMethod shipping method and :paymentMethod payment
+     * @When I proceed with :shippingMethod shipping method and :paymentMethod payment
      */
     public function iProceedOrderWithShippingMethodAndPayment($shippingMethod, $paymentMethod)
     {

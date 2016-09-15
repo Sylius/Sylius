@@ -39,20 +39,18 @@ class ProvinceNamingProvider implements ProvinceNamingProviderInterface
      */
     public function getName(AddressInterface $address)
     {
-        if ($address->getProvinceCode()) {
-            $province = $this->provinceRepository->findOneBy(['code' => $address->getProvinceCode()]);
-
-            Assert::notNull($province,sprintf('Province with code "%s" not found.', $address->getProvinceCode()));
-
-            return $province->getName();
-        }
-
-        if ($address->getProvinceName()) {
-
+        if (null !== $address->getProvinceName()) {
             return $address->getProvinceName();
         }
 
-        return null;
+        if (null === $address->getProvinceCode()) {
+            return '';
+        }
+
+        $province = $this->provinceRepository->findOneBy(['code' => $address->getProvinceCode()]);
+        Assert::notNull($province,sprintf('Province with code "%s" not found.', $address->getProvinceCode()));
+
+        return $province->getName();
     }
 
     /**
@@ -60,19 +58,17 @@ class ProvinceNamingProvider implements ProvinceNamingProviderInterface
      */
     public function getAbbreviation(AddressInterface $address)
     {
-        if ($address->getProvinceCode()) {
-            $province = $this->provinceRepository->findOneBy(['code' => $address->getProvinceCode()]);
-
-            Assert::notNull($province,sprintf('Province with code "%s" not found.', $address->getProvinceCode()));
-
-            return $province->getAbbreviation() ?: $province->getName();
-        }
-
-        if ($address->getProvinceName()) {
-
+        if (null !== $address->getProvinceName()) {
             return $address->getProvinceName();
         }
 
-        return null;
+        if (null === $address->getProvinceCode()) {
+            return '';
+        }
+
+        $province = $this->provinceRepository->findOneBy(['code' => $address->getProvinceCode()]);
+        Assert::notNull($province,sprintf('Province with code "%s" not found.', $address->getProvinceCode()));
+
+        return $province->getAbbreviation() ?: $province->getName();
     }
 }

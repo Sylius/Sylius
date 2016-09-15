@@ -46,7 +46,7 @@ class ProvinceNamingExtension extends \Twig_Extension
     /**
      * @param AddressInterface $address
      *
-     * @return string|null
+     * @return string
      */
     public function getProvinceName(AddressInterface $address)
     {
@@ -56,7 +56,7 @@ class ProvinceNamingExtension extends \Twig_Extension
     /**
      * @param AddressInterface $address
      *
-     * @return string|null
+     * @return string
      */
     public function getProvinceAbbreviation(AddressInterface $address)
     {
